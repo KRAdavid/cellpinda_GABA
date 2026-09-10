@@ -4,6 +4,7 @@ import {
   buildMvpApprovalReport,
   buildTaskDecision,
   generateMvpPlan,
+  recordIndependentReview,
   runSandboxTask,
   runSandboxWave,
   verifySandboxTask,
@@ -17,6 +18,22 @@ assert.ok(plan.contract.focusAreas.includes('공개 근거 인덱스'));
 assert.equal(plan.contract.workstreams.length, 5);
 assert.equal(plan.contract.team.length, 10);
 assert.equal(plan.tasks.length, 6);
+
+const interactiveWave = runSandboxWave(plan.contract, plan.tasks, timestamps[2], {autoVerify: false});
+assert.deepEqual(interactiveWave.progressedTaskIds, ['G1']);
+assert.equal(interactiveWave.stoppedReason, 'verification_required');
+assert.equal(interactiveWave.tasks.find(task => task.id === 'G1')?.state, 'VERIFYING');
+const interactiveReview = recordIndependentReview(interactiveWave.tasks, 'G1', {
+  verifier: '품질감사관',
+  acceptedCriteria: [...plan.tasks[0].acceptance],
+  note: '수락 기준과 샌드박스 산출물의 연결을 모두 확인했습니다.',
+  decision: 'accept',
+}, timestamps[3]);
+assert.equal(interactiveReview.tasks.find(task => task.id === 'G1')?.verification?.mode, 'independent_review');
+const interactiveReport = buildMvpApprovalReport(plan.contract, interactiveReview.tasks, [...interactiveWave.events, ...interactiveReview.events], undefined, timestamps[4]);
+assert.equal(interactiveReport.verificationStatus, 'independent_review_recorded');
+assert.deepEqual(interactiveReport.independentlyVerifiedTasks, ['G1']);
+assert.equal(interactiveReport.reviewRecords.G1?.mode, 'human_independent_review');
 
 const wave = runSandboxWave(plan.contract, plan.tasks, timestamps[1]);
 assert.deepEqual(wave.progressedTaskIds, ['G1', 'E1', 'E2', 'C1', 'Q1']);
@@ -68,4 +85,5 @@ console.log(JSON.stringify({
   automatedWave: `${wave.progressedTaskIds.length} internal tasks -> P1 approval`,
   recommendation: report.recommendation,
   verificationStatus: report.verificationStatus,
+  interactiveReview: interactiveReport.verificationStatus,
 }));
