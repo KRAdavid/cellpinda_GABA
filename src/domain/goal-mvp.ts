@@ -8,6 +8,20 @@ export type MvpWorkstream = {
   deliverable: string;
 };
 
+export type MvpTeamMember = {
+  id: string;
+  role: string;
+  responsibility: string;
+  authority: string;
+  verifier: boolean;
+};
+
+export type MvpDecisionProtocol = {
+  cadence: string;
+  steps: string[];
+  record: string[];
+};
+
 export type MvpGoalContract = {
   schemaVersion: 1;
   goalId: string;
@@ -15,10 +29,14 @@ export type MvpGoalContract = {
   objective: string;
   status: 'ACTIVE';
   owner: string;
+  goalType: 'PUBLISH_RESEARCH_INDEX';
+  readiness: 'READY';
   successMetrics: string[];
   constraints: string[];
   stopConditions: string[];
   workstreams: MvpWorkstream[];
+  team: MvpTeamMember[];
+  decisionProtocol: MvpDecisionProtocol;
 };
 
 export type MvpTask = TaskNode & {
@@ -40,9 +58,14 @@ export type MvpApprovalReport = {
   generatedAt: string;
   goalId: string;
   goalTitle: string;
+  contractSnapshot: Pick<MvpGoalContract, 'goalId' | 'title' | 'successMetrics' | 'constraints' | 'stopConditions'>;
   recommendation: 'approve' | 'revise' | 'blocked';
   completedTasks: string[];
   pendingTasks: string[];
+  auditEvents: SandboxAuditEvent[];
+  taskEvidence: Record<string, string[]>;
+  taskAcceptance: Record<string, string[]>;
+  verificationStatus: 'sandbox_simulation_only';
   approval?: ApprovalRequest;
   sandboxOnly: true;
 };
@@ -52,12 +75,36 @@ export type MvpPlan = {
   tasks: MvpTask[];
 };
 
+export type SandboxRunResult = {
+  tasks: MvpTask[];
+  events: SandboxAuditEvent[];
+  approval?: ApprovalRequest;
+  approvalTaskId?: string;
+};
+
 const workstreams: MvpWorkstream[] = [
   {id: 'evidence', name: '근거·논문', lead: '연구·제품 근거', verifier: '독립 근거 검토', deliverable: '원문·조건·한계가 연결된 연구 레코드'},
   {id: 'consumer', name: '소비자 언어', lead: '마케팅·소비자심리', verifier: '표시·콘텐츠 검토', deliverable: '쉽게 읽는 요약과 적용 범위 문장'},
   {id: 'index', name: '인덱스·UX', lead: '스토리·UX·프런트', verifier: '접근성·QA', deliverable: '검색 가능한 공개 마스터 인덱스'},
   {id: 'ops', name: '운영·감사', lead: 'TF 리드·AI 비서실', verifier: '품질감사관', deliverable: '승인 보고·실행 로그·다음 작업'},
 ];
+
+const team: MvpTeamMember[] = [
+  {id: 'chief-of-staff', role: 'TF 리드·AI 비서실', responsibility: '목표 계약, 우선순위, 승인함, 다음 실행 결정', authority: '내부 계획·재배정', verifier: false},
+  {id: 'research', role: '연구·제품 근거', responsibility: '논문 조건·수치·원문·제품 적용 범위 정리', authority: '공개 출처 조회·초안 작성', verifier: false},
+  {id: 'consumer-psychology', role: '마케팅·소비자심리', responsibility: '소비자가 이해하고 체험을 고려할 문장 설계', authority: '소비자 문안 초안', verifier: false},
+  {id: 'product-quality', role: '제품·품질', responsibility: '1500 제품 정보와 연구 성분을 분리 대조', authority: '제품 자료 확인 요청', verifier: false},
+  {id: 'regulatory', role: '표시·규제 검토', responsibility: '치료·진단·효과 보장·권한 없는 후기 차단', authority: '공개 보류·수정 요구', verifier: false},
+  {id: 'data-analytics', role: '데이터·성과', responsibility: '인덱스 완성도·유입·공유·구매 클릭을 구분 측정', authority: '분모·근거 정의', verifier: false},
+  {id: 'story-ux', role: '스토리·UX·프런트', responsibility: '연구 탐색과 소비자 여정의 화면 구현', authority: '내부 화면 수정', verifier: false},
+  {id: 'quality-auditor', role: '품질감사관', responsibility: '독립적으로 출처·계산·권한·승인·완료 증거 재검증', authority: '완료 반려·재작업 요구', verifier: true},
+];
+
+const decisionProtocol: MvpDecisionProtocol = {
+  cadence: '업무 파동이 끝나거나 근거·권한·위험이 충돌할 때만 회의한다.',
+  steps: ['목표·성공 기준 확인', '사실·가정·미확인 정보 분리', '역할별 의견과 반대 검토 제출', '대안·위험·비용 비교', '실행안과 승인 필요 여부 결정', '결과 측정 후 재계획'],
+  record: ['결정사항', '판단 근거·출처', '반대 의견', '담당자·기한', '예상 결과·실제 결과', '다음 조치'],
+};
 
 function normalizeGoal(input: string): string {
   return input.normalize('NFKC').replace(/\s+/g, ' ').trim().slice(0, 160);
@@ -83,6 +130,8 @@ export function generateMvpPlan(input: string): MvpPlan {
     objective: `${title}를 승인된 공개 출처와 검토 이력으로 관리하고, 소비자가 이해할 수 있는 공개 인덱스로 배포한다.`,
     status: 'ACTIVE',
     owner: '대표·TF 리드',
+    goalType: 'PUBLISH_RESEARCH_INDEX',
+    readiness: 'READY',
     successMetrics: [
       '승인된 GABA 논문만 공개 인덱스에 포함한다.',
       '각 레코드에서 대상·조건·결과·한계·원문을 확인할 수 있다.',
@@ -100,6 +149,8 @@ export function generateMvpPlan(input: string): MvpPlan {
       '고위험 외부 작업에 책임자 승인이 없는 경우',
     ],
     workstreams,
+    team,
+    decisionProtocol,
   };
   const task = (partial: Omit<MvpTask, 'state' | 'evidence'> & {state?: TaskState; evidence?: string[]}): MvpTask => ({
     ...partial,
@@ -122,14 +173,14 @@ export function promoteReady(tasks: readonly MvpTask[]): MvpTask[] {
   return tasks.map(task => task.state === 'BACKLOG' && task.dependencies.every(id => done.has(id)) ? {...task, state: 'READY'} : {...task});
 }
 
-export function runSandboxTask(tasks: readonly MvpTask[], taskId: string, approvalToken?: string, now = new Date().toISOString()): {tasks: MvpTask[]; events: SandboxAuditEvent[]; approval?: ApprovalRequest} {
+export function runSandboxTask(tasks: readonly MvpTask[], taskId: string, approvalToken?: string, now = new Date().toISOString()): SandboxRunResult {
   const source = tasks.find(task => task.id === taskId);
   if (!source) throw new Error(`작업을 찾을 수 없습니다: ${taskId}`);
   const ready = promoteReady(tasks).find(task => task.id === taskId);
   if (!ready || ready.state !== 'READY') throw new Error('선행 작업을 먼저 완료해야 합니다.');
   if (requiresApproval(ready.risk ?? 'A_READ') && !canExecute(ready.risk ?? 'A_READ', approvalToken)) {
     return {
-      tasks: promoteReady(tasks),
+      tasks: promoteReady(tasks).map(task => task.id === taskId ? {...task, state: 'WAITING'} : task),
       events: [],
       approval: buildApprovalRequest({
         action: `${ready.title}을 샌드박스 승인 대기 상태로 전환`,
@@ -139,6 +190,7 @@ export function runSandboxTask(tasks: readonly MvpTask[], taskId: string, approv
         evidence: ready.evidence,
         expiresAt: new Date(Date.parse(now) + 24 * 60 * 60 * 1000).toISOString(),
       }),
+      approvalTaskId: taskId,
     };
   }
   const events: SandboxAuditEvent[] = [];
@@ -158,9 +210,20 @@ export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonl
     generatedAt: now,
     goalId: contract.goalId,
     goalTitle: contract.title,
+    contractSnapshot: {
+      goalId: contract.goalId,
+      title: contract.title,
+      successMetrics: [...contract.successMetrics],
+      constraints: [...contract.constraints],
+      stopConditions: [...contract.stopConditions],
+    },
     recommendation: approval ? 'blocked' : pendingTasks.length ? 'revise' : 'approve',
     completedTasks,
     pendingTasks,
+    auditEvents: [...events],
+    taskEvidence: Object.fromEntries(tasks.map(task => [task.id, [...task.evidence]])),
+    taskAcceptance: Object.fromEntries(tasks.map(task => [task.id, [...task.acceptance]])),
+    verificationStatus: 'sandbox_simulation_only',
     ...(approval ? {approval} : {}),
     sandboxOnly: true,
   };

@@ -50,6 +50,13 @@
       "target": "한 문장 목표에서 Goal Contract·TF·업무 그래프를 생성하고 샌드박스 결과·승인 보고를 만든다.",
       "status": "MET",
       "evidence": ["src/domain/goal-mvp.ts", "src/components/OperationsMvp.tsx", "docs/OPS_MVP.md"]
+    },
+    {
+      "id": "M7",
+      "name": "운영 MVP 재개·증거 경계",
+      "target": "목표·승인 대기·감사 로그를 새로고침 후 복원하고, 샌드박스 시뮬레이션을 실제 독립 검증과 구분해 보고한다.",
+      "status": "MET",
+      "evidence": ["src/components/OperationsMvp.tsx", "src/domain/goal-mvp.ts", "docs/OPS_MVP.md"]
     }
   ],
   "scope": {
@@ -125,7 +132,7 @@
       "lead": "TF 리드·AI 비서실",
       "verifier": "품질감사관",
       "status": "IN_PROGRESS",
-      "nextAction": "샌드박스 MVP를 서버 영속·인증·감사 로그 운영으로 연결"
+      "nextAction": "브라우저 재개 상태를 인증된 서버 영속·감사 로그 운영으로 연결"
     }
   ],
   "reportingPolicy": "예외와 마일스톤 중심으로 보고하며, 상태가 바뀌거나 대표 결정이 필요한 경우에만 즉시 알린다."

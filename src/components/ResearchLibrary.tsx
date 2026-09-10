@@ -125,7 +125,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <p className="research-library-summary">{claim.publicText}</p>
         {metadata.consumerSummary ? <p className="research-library-consumer-summary"><strong>쉽게 말하면</strong>{metadata.consumerSummary}</p> : null}
         {metadata.hopefulTakeaway ? <p className="research-library-hopeful"><strong>내 생활에 연결해 보기</strong>{metadata.hopefulTakeaway}</p> : null}
-        <a className="text-link research-try-link" href="#products">근거를 확인했다면, 가바 1500을 내 루틴으로 경험해 볼지 살펴보세요 →</a>
+        <a className="text-link research-try-link" href="#products">연구 조건과 한계를 확인했다면, 제품 구성·표시사항을 살펴보고 내 생활에 맞는지 판단해 보세요 →</a>
         <dl className="research-library-preview" aria-label="연구의 핵심 조건">
           {(['population', 'sampleSize', 'duration', 'searchThrough'] as const).map(key => metadata[key] ? <div key={key}>
             <dt>{facts.find(([field]) => field === key)![1]}</dt><dd>{metadata[key]}</dd>

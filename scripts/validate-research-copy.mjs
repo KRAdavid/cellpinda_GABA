@@ -5,7 +5,7 @@ const fail = message => { throw new Error(`Research consumer copy invalid: ${mes
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
 
-const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장/;
+const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장|직접\s*(먹어|경험)|가바\s*(경험|섭취를\s*시작)/;
 for (const claim of research) {
   const metadata = claim.metadata ?? {};
   for (const field of ['consumerSummary', 'hopefulTakeaway']) {

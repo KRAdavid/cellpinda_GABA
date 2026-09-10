@@ -129,6 +129,18 @@
       "evidence": ["src/domain/goal-mvp.ts", "src/components/OperationsMvp.tsx", "docs/OPS_MVP.md", "public/data/gaba-master-index.json"]
     },
     {
+      "id": "D4",
+      "stream": "D",
+      "title": "MVP 재개·검증 경계 강화",
+      "state": "DONE",
+      "priority": 1,
+      "lead": "TF 리드·AI 비서실",
+      "verifier": "품질감사관",
+      "dependencies": ["D3"],
+      "acceptance": ["새로고침 후 목표·승인 대기·감사 로그 복원", "승인 요청 작업은 WAITING으로 잠김", "보고서에 감사 이벤트·작업별 증거·샌드박스 시뮬레이션 상태 포함", "공개 인덱스 필수 필드·검토일·근거 해시 검증"],
+      "evidence": ["src/components/OperationsMvp.tsx", "src/domain/goal-mvp.ts", "scripts/sync-public-data.mjs", "docs/OPS_MVP.md"]
+    },
+    {
       "id": "E1",
       "stream": "E",
       "title": "실구매 전환 대사",
