@@ -63,7 +63,10 @@ pnpm run sync:data
 pnpm run build
 pnpm run goal:next
 pnpm run audit:orders
+pnpm run preflight:deploy
 ```
+
+`pnpm run preflight:deploy -- --strict`는 Cloudflare Worker 영구 배포에 필요한 설정·빌드 산출물·공개 export·필수 Secrets를 값 노출 없이 검사하고, 하나라도 없으면 실패한다. 일반 실행은 현재 상태를 `READY` 또는 `WAITING`으로 보고해 로컬·Pages 환경에서도 배포 준비도를 확인할 수 있다.
 
 ## GitHub Actions 배포
 

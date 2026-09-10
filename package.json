@@ -8,6 +8,7 @@
     "sync:data": "node scripts/sync-public-data.mjs",
     "audit:materials": "node scripts/audit-local-materials.mjs",
     "audit:orders": "node scripts/audit-local-orders.mjs",
+    "preflight:deploy": "node scripts/check-deploy-readiness.mjs",
     "validate:goal": "node scripts/validate-goal-contract.mjs",
     "validate:plan": "node scripts/goal-next.mjs --check",
     "validate:research-copy": "node scripts/validate-research-copy.mjs",
