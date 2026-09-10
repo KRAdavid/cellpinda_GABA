@@ -104,10 +104,10 @@
 ### 2026-09-11 정기 TF pulse 운영 전환
 
 - `scripts/validate-tf-pulse.mjs`가 ACTIVE Goal Contract, canonical 업무 그래프, B4 티저 게이트, 활성 작업의 담당·검증·다음 행동과 결정 모드를 배포 전에 검사한다.
-- [TF decision pulse workflow](../.github/workflows/tf-pulse.yml)는 6시간 주기와 수동 실행을 제공하며, run summary·14일 artifact·안전한 heartbeat에 회의 안건을 남긴다. heartbeat 커밋 뒤 deploy workflow를 명시적으로 호출해 공개 운영 큐의 pulse 시각과 상태 지문을 갱신한다. 최신 [pulse 실행 34513525751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34513525751)과 [연결된 배포 34513547183](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34513547183)이 계약 검증·heartbeat·Pages·라이브 smoke까지 성공했다.
+- [TF decision pulse workflow](../.github/workflows/tf-pulse.yml)는 6시간 주기와 수동 실행을 제공하며, run summary·14일 artifact·안전한 heartbeat에 회의 안건을 남긴다. heartbeat 커밋 뒤 deploy workflow를 명시적으로 호출해 공개 운영 큐의 pulse 시각과 상태 지문을 갱신한다. 최신 [pulse 구현·스키마 검사 실행 34515820278](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34515820278)이 계약 검증·공개 패킷 허용 키·Pages·라이브 smoke까지 성공했다.
 - 현재 canonical 큐는 DONE 8, VERIFYING 1, WAITING 4이며, B2·B3·B4·C2·E1은 독립 검토 또는 외부 입력 게이트를 유지한다. 자동 pulse는 이 상태를 완료로 승격하지 않는다.
 
-- TF 구현 기준점: `main` 커밋 `864a019`, [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA) 원격과 GitHub Pages에 반영됨.
+- TF 구현 기준점: [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA) `main`과 GitHub Pages에 반영된 현재 운영 코드·공개 packet.
 - 마케팅·심리: 날짜형7일기록과 친구비교 구현·실제브라우저 검증. 실제 소비자 이해도/구매의향 실험은 미실시.
 - UX·서버: 공유 HTML 메타데이터와 D1 승인/이벤트 동작 검증. 전용 GitHub 저장소와 영구 배포는 미연결.
 - 근거: 연구2건 상세 공개, 현행 뒷면 자료 부족 확인, GitHub 근거인덱스의 후속 연구3건 발견. 원문검증 전 공개추가 안함.
