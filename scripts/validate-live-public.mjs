@@ -33,13 +33,14 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
     assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');
     assert.equal(queue.tasks.length, 13, 'live operations queue must contain the current task graph');
-    assert.ok(queue.pulse && /^[a-f0-9]{64}$/.test(queue.pulse.snapshotHash), 'live operations queue must expose a valid pulse snapshot');
+    assert.ok(queue.pulse && /^[a-f0-9]{64}$/.test(queue.pulse.snapshotHash) && typeof queue.pulse.stateChanged === 'boolean', 'live operations queue must expose a valid pulse snapshot');
     assert.equal(queue.pulse.activeTasks, queue.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length, 'live pulse active count must match queue');
     assert.equal(queue.pulse.inputGates, queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length, 'live pulse input gate count must match queue');
     assert.equal(publicPulse.mode, 'public_tf_pulse', 'live public TF pulse packet must use the public schema');
     assert.equal(publicPulse.goalId, queue.goalId, 'live public TF pulse packet must use the active goal');
     assert.equal(publicPulse.generatedAt, queue.pulse.generatedAt, 'live public TF pulse packet timestamp must match the queue');
     assert.equal(publicPulse.snapshotHash, queue.pulse.snapshotHash, 'live public TF pulse packet hash must match the queue');
+    assert.equal(publicPulse.stateChanged, queue.pulse.stateChanged, 'live public TF pulse change marker must match the queue');
     assert.equal(publicAudit.mode, 'public_goal_audit', 'live public goal audit packet must use the public schema');
     assert.equal(publicAudit.goalId, queue.goalId, 'live public goal audit packet must use the active goal');
     assert.equal(publicAudit.status, queue.status, 'live public goal audit status must match the queue');
@@ -50,6 +51,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicAudit.milestones.masterIndex.researchRecords, master.records.length, 'live public audit research count must match master index');
     assert.equal(publicAudit.milestones.publicProduct.products, content.products.length, 'live public audit product count must match content');
     assert.equal(publicAudit.milestones.tfPulse.snapshotHash, publicPulse.snapshotHash, 'live public audit pulse hash must match the pulse');
+    assert.equal(publicAudit.milestones.tfPulse.stateChanged, publicPulse.stateChanged, 'live public audit pulse change marker must match the pulse');
     assert.ok(['IN_PROGRESS_WITH_GATES', 'COMPLETE'].includes(publicAudit.overallStatus), 'live public audit must expose a supported overall status');
     assert.equal(publicAudit.milestones.masterIndex.status, 'MET', 'live public audit must mark the master index milestone');
     assert.equal(publicAudit.milestones.publicProduct.status, 'MET', 'live public audit must mark the product milestone');

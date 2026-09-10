@@ -19,8 +19,11 @@ let pulseForQueue=pulse;
 if(existsSync(heartbeatPath)){
   let heartbeat;
   try{heartbeat=JSON.parse(readFileSync(heartbeatPath,'utf8'));}catch{throw new Error('TF pulse heartbeat is not valid JSON');}
-  if(heartbeat.schemaVersion!==1 || heartbeat.mode!=='automation_pulse_heartbeat' || heartbeat.goalId!==pulse.goalId || heartbeat.goalStatus!=='ACTIVE' || !/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt) || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash||'') || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage)) throw new Error('TF pulse heartbeat is malformed or role coverage is out of sync');
-  if(heartbeat.snapshotHash===pulse.snapshotHash) pulseForQueue={...pulse,generatedAt:heartbeat.generatedAt};
+  if(heartbeat.schemaVersion!==1 || heartbeat.mode!=='automation_pulse_heartbeat' || heartbeat.goalId!==pulse.goalId || heartbeat.goalStatus!=='ACTIVE' || !/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt) || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash||'') || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash||'')) || typeof heartbeat.stateChanged !== 'boolean' || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage)) throw new Error('TF pulse heartbeat is malformed or role coverage is out of sync');
+  if(heartbeat.stateChanged !== Boolean(heartbeat.previousSnapshotHash && heartbeat.previousSnapshotHash !== heartbeat.snapshotHash)) throw new Error('TF pulse heartbeat state change marker is inconsistent');
+  const hashChanged = heartbeat.snapshotHash !== pulse.snapshotHash;
+  pulseForQueue={...pulse,stateChanged:hashChanged || heartbeat.stateChanged,previousSnapshotHash:hashChanged ? heartbeat.snapshotHash : heartbeat.previousSnapshotHash};
+  if(!hashChanged) pulseForQueue={...pulseForQueue,generatedAt:heartbeat.generatedAt};
 }
 const smartStoreHost='smartstore.naver.com';
 const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerSummary','hopefulTakeaway'];
@@ -124,7 +127,7 @@ const operationsQueue={
   goalId:goalContract.goalId,
   status:goalContract.status,
   checkedAt:goalContract.checkedAt,
-  pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,requiresHumanDecision:pulseForQueue.requiresHumanDecision,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
+  pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,stateChanged:Boolean(pulseForQueue.stateChanged),requiresHumanDecision:pulseForQueue.requiresHumanDecision,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
   tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), requiredInputs:Array.isArray(requiredInputs) ? requiredInputs : [], ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
@@ -138,6 +141,7 @@ const publicPulse={
   goalStatus:pulseForQueue.goalStatus,
   generatedAt:pulseForQueue.generatedAt,
   snapshotHash:pulseForQueue.snapshotHash,
+  stateChanged:Boolean(pulseForQueue.stateChanged),
   requiresHumanDecision:pulseForQueue.requiresHumanDecision,
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   counts:pulseForQueue.counts,
@@ -162,7 +166,7 @@ const publicAudit={
   milestones:{
     masterIndex:{status:'MET',claims:claims.length,researchRecords:masterIndex.records.length},
     publicProduct:{status:'MET',products:products.length,smartStoreOnly:true,removed750:true},
-    tfPulse:{status:'MET',generatedAt:publicPulse.generatedAt,snapshotHash:publicPulse.snapshotHash,requiresHumanDecision:publicPulse.requiresHumanDecision},
+    tfPulse:{status:'MET',generatedAt:publicPulse.generatedAt,snapshotHash:publicPulse.snapshotHash,stateChanged:publicPulse.stateChanged,requiresHumanDecision:publicPulse.requiresHumanDecision},
   },
   gates:taskGraph.tasks
     .filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state))

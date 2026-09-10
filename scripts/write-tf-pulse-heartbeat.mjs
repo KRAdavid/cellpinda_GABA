@@ -25,6 +25,17 @@ if (!/^[a-f0-9]{64}$/.test(pulse.snapshotHash || '')) fail('pulse snapshot hash 
 if (!pulse.teaserGate || pulse.teaserGate.taskId !== 'B4') fail('teaser gate is missing');
 if (!Array.isArray(pulse.roleCoverage) || pulse.roleCoverage.length !== 6 || pulse.roleCoverage.some(role => !role || typeof role.id !== 'string' || typeof role.label !== 'string' || role.status !== 'present')) fail('TF role coverage is missing or malformed');
 
+let previousHeartbeat;
+try {
+  previousHeartbeat = JSON.parse(await readFile(destination, 'utf8'));
+} catch (error) {
+  if (error?.code !== 'ENOENT') throw error;
+}
+const previousSnapshotHash = typeof previousHeartbeat?.snapshotHash === 'string' && /^[a-f0-9]{64}$/.test(previousHeartbeat.snapshotHash)
+  ? previousHeartbeat.snapshotHash
+  : null;
+const stateChanged = Boolean(previousSnapshotHash && previousSnapshotHash !== pulse.snapshotHash);
+
 const safeGate = item => ({
   taskId: item.taskId,
   state: item.state,
@@ -40,6 +51,8 @@ const heartbeat = {
   goalStatus: pulse.goalStatus,
   generatedAt: pulse.generatedAt,
   snapshotHash: pulse.snapshotHash,
+  previousSnapshotHash,
+  stateChanged,
   requiresHumanDecision: Boolean(pulse.requiresHumanDecision),
   roleCoverage: pulse.roleCoverage.map(safeRole),
   counts: pulse.counts,
@@ -51,4 +64,4 @@ const heartbeat = {
 
 await mkdir(dirname(destination), {recursive: true});
 await writeFile(destination, `${JSON.stringify(heartbeat, null, 2)}\n`);
-console.log(JSON.stringify({destination, goalId: heartbeat.goalId, generatedAt: heartbeat.generatedAt, snapshotHash: heartbeat.snapshotHash, inputGates: heartbeat.inputGates.length}));
+console.log(JSON.stringify({destination, goalId: heartbeat.goalId, generatedAt: heartbeat.generatedAt, snapshotHash: heartbeat.snapshotHash, previousSnapshotHash, stateChanged, inputGates: heartbeat.inputGates.length}));

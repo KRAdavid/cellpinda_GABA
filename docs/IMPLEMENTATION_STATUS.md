@@ -12,6 +12,8 @@
 
 로컬 자료 회의 준비를 한 번에 재현하도록 `pnpm run audit:goal:local:json`을 추가했다. 지정 자료와 주문 폴더를 읽기 전용으로 재감사해 비공개 `tmp/local-goal-audit.json`에 활성 Goal Audit와 `local-material-inputs`·`local-order-inputs` 상태를 저장한다. 스캔 자체가 실패하면 종료 코드 1로 구분하며, 현재 실행은 완제품 입력 `MET`, 주문 입력 `WAITING`, 전체 판정 `IN_PROGRESS_WITH_GATES`이고 공개 export는 변경하지 않았다.
 
+TF heartbeat에 직전 상태 지문 비교를 추가해 `stateChanged`를 기록하고, 공개 운영 큐·목표 감사·운영 화면에 새 상태 변화와 반복 안건을 구분해 표시한다. 변화가 감지되어도 자동으로 외부 게시·구매·승인을 실행하지 않으며, 담당자와 독립 검증자의 회의 판단을 기다린다.
+
 ## 최신 업데이트 — 2026-09-11 TF pulse 재현과 신선도 표시
 
 운영 보드가 마지막 TF pulse 시각뿐 아니라 `방금 갱신`·`몇 분 전 갱신`·`업데이트 지연` 상태를 표시하도록 보강했다. 6시간 주기 pulse를 현재 코드에서 수동 재현한 [34530924367](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530924367)은 계약·역할·업무 그래프 검증과 안전 heartbeat 생성을 성공시켰고, heartbeat 커밋 [`97026c2`](https://github.com/KRAdavid/cellpinda_GABA/commit/97026c2) 이후 [단일 deploy·Pages·라이브 smoke 34530948751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530948751)도 성공했다. `[skip ci]`와 명시적 dispatch 경계가 유지되어 중복 배포는 발생하지 않았다.

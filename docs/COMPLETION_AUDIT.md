@@ -257,3 +257,7 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 ## 2026-09-11 로컬 감사 사이클 단축
 
 `scripts/run-local-audit-cycle.mjs`와 `pnpm run audit:goal:local:json`을 추가해 완제품 자료·주문 파일 감사와 전체 Goal Audit를 한 번에 실행하고, 결과를 개인정보·원문 행·로컬 경로가 없는 `tmp/local-goal-audit.json`에 저장한다. 현재 실행은 `local-material-inputs=MET`, `local-order-inputs=WAITING`, 전체 `IN_PROGRESS_WITH_GATES`이며 `public/data`는 변경하지 않았다. 이 자동화는 회의 패킷 생성을 줄여 주지만, 현행 표시 승인·실주문·취소·환불·후기 권한을 자동 완료로 승격하지 않는다.
+
+## 2026-09-11 TF pulse 상태 변화 추적
+
+`write-tf-pulse-heartbeat.mjs`가 직전 pulse의 상태 지문을 비교해 `stateChanged`를 기록하도록 보강했다. 이 값은 공개 operations queue·TF pulse·목표 감사·운영 화면에 같은 boolean으로 전달되어 새 상태 변화와 반복 안건을 구분한다. 현재 heartbeat는 변화 없음으로 검증됐고, 임시 직전 지문을 사용한 재현에서 변화 감지 경로도 통과했다. `validate:tf-pulse`·`validate:public`·production build가 모두 성공했으며, 자동 표시는 외부 승인·게시·구매를 수행하지 않는다.
