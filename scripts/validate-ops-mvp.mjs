@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
 import {
   buildContractDecision,
   buildMvpApprovalReport,
@@ -11,6 +12,7 @@ import {
 } from '../src/domain/goal-mvp.ts';
 
 const goal = '공개용 GABA 논문 기반 마스터 인덱스';
+const roleRegistry = JSON.parse(await readFile(new URL('../data/tf-role-registry.json', import.meta.url), 'utf8'));
 const timestamps = Array.from({length: 24}, (_, index) => `2026-09-10T10:${String(index).padStart(2, '0')}:00.000Z`);
 const plan = generateMvpPlan(goal);
 assert.equal(plan.contract.goalType, 'PUBLISH_RESEARCH_INDEX');
@@ -18,6 +20,12 @@ assert.ok(plan.contract.focusAreas.includes('공개 근거 인덱스'));
 assert.equal(plan.contract.workstreams.length, 5);
 assert.equal(plan.contract.team.length, 10);
 assert.equal(plan.tasks.length, 6);
+const generatedRoleCorpus = [
+  ...plan.contract.team.map(member => member.role),
+  ...plan.contract.workstreams.flatMap(stream => [stream.lead, stream.verifier]),
+].join(' · ');
+assert.equal(roleRegistry.status, 'ACTIVE');
+for (const role of roleRegistry.roles) assert.ok(role.match.some(term => generatedRoleCorpus.includes(term)), `generated MVP TF is missing ${role.label}`);
 
 const interactiveWave = runSandboxWave(plan.contract, plan.tasks, timestamps[2], {autoVerify: false});
 assert.deepEqual(interactiveWave.progressedTaskIds, ['G1']);
@@ -86,4 +94,5 @@ console.log(JSON.stringify({
   recommendation: report.recommendation,
   verificationStatus: report.verificationStatus,
   interactiveReview: interactiveReport.verificationStatus,
+  roleGroups: roleRegistry.roles.length,
 }));
