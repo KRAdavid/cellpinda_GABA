@@ -169,3 +169,7 @@ GitHub Pages처럼 Worker API가 없는 정적 호스트에서는 API 주소를 
 ## TF 입력 게이트 체크리스트 후속 증거
 
 canonical 그래프의 B2·B3·B4·C2·E1에 `requiredInputs`를 추가하고, `tf:pulse` 결정·`inputGates`·공개 `operations-queue.json`·운영 화면의 다음 TF 회의 안건에 같은 목록을 연결했다. 배포 전 검증은 입력 대기 작업의 체크리스트 누락을 거부하며, 공개 Pages Playwright 검증은 데스크톱·390px에서 체크리스트 8개 표시, 안건 패널, 가로 넘침 0, 콘솔·페이지 오류 0을 확인했다. 커밋 `3817497`의 [GitHub Actions 34511986493](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34511986493)은 Goal Contract·TF pulse·공개 export·Pages·라이브 smoke를 성공시켰다. 체크리스트는 준비 자료를 구체화하지만 실제 승인·권한·비밀값·주문 응답을 대신하지 않으므로 B2·B3·B4·C2·E1 상태는 계속 사람 입력 대기로 유지한다.
+
+## TF pulse heartbeat 자동 재배포 증거
+
+`tf-pulse.yml`에 안전한 heartbeat 저장과 명시적 Pages deploy dispatch를 연결했다. 수동 [TF decision pulse 34513525751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34513525751)이 pulse 검증·heartbeat 생성·저장·artifact 업로드를 성공시키고 커밋 `0064ff8`을 만들었으며, 이어진 [Pages 배포 34513547183](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34513547183)이 공개 export·Pages·라이브 smoke를 성공시켰다. 초기 dispatch 권한 오류는 커밋 `d5ab89e`에서 `actions:write`를 추가해 해결했다. heartbeat에는 pulse 시각·상태 지문·역할·필요 입력만 남기고 원문 경로·비밀값·사람 반대 의견은 저장하지 않는다.
