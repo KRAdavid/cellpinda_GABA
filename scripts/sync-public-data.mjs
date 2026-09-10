@@ -29,6 +29,11 @@ function publicMetadata(item){
   return Object.keys(metadata).length ? metadata : undefined;
 }
 
+function evidenceHash(item, metadata=publicMetadata(item), sources=publicSources(item)){
+  const stableEvidence={id:item.id,topic:item.topic,publicText:item.publicText,metadata,sources,limitations:item.limitations || []};
+  return createHash('sha256').update(JSON.stringify(stableEvidence)).digest('hex');
+}
+
 function isSmartStoreUrl(value){
   try{const url=new URL(value);return url.protocol==='https:' && url.hostname===smartStoreHost;}
   catch{return false;}
@@ -36,15 +41,21 @@ function isSmartStoreUrl(value){
 
 const claims=ledger.claims
   .filter(item=>item.status==='approved' && item.publicText && publicSources(item).length)
-  .map(item=>({
-    id:item.id,
-    topic:item.topic,
-    publicText:item.publicText,
-    status:item.status,
-    limitations:item.limitations || [],
-    ...(publicMetadata(item) ? {metadata:publicMetadata(item)} : {}),
-    sources:publicSources(item),
-  }));
+  .map(item=>{
+    const metadata=publicMetadata(item);
+    const sources=publicSources(item);
+    return {
+      id:item.id,
+      topic:item.topic,
+      publicText:item.publicText,
+      status:item.status,
+      reviewedAt:item.reviewedAt || ledger.checkedAt,
+      evidenceHash:evidenceHash(item,metadata,sources),
+      limitations:item.limitations || [],
+      ...(metadata ? {metadata} : {}),
+      sources,
+    };
+  });
 const approvedResearch=ledger.claims.filter(item=>item.status==='approved' && item.id.startsWith('research-'));
 for(const item of approvedResearch){
   const missing=requiredResearchFields.filter(field=>typeof item.metadata?.[field]!=='string' || !item.metadata[field].trim());
@@ -74,12 +85,13 @@ const masterIndex={
   selectionRule:'승인 상태·공개 HTTPS 원문·필수 연구 필드·소비자 문장 검증을 모두 통과한 research-* 레코드만 포함합니다.',
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
-  records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,limitations})=>{
-    const stableEvidence={id,topic,publicText,metadata,sources,limitations};
-    const evidenceHash=createHash('sha256').update(JSON.stringify(stableEvidence)).digest('hex');
-    return {id,topic,reviewedAt:ledger.checkedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,result:metadata.result,consumerSummary:metadata.consumerSummary,hopefulTakeaway:metadata.hopefulTakeaway,limitations:[...(metadata.limitations||[]),...(limitations||[])],productApplicability:metadata.productApplicability,sources,evidenceHash};
+  records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,limitations,reviewedAt,evidenceHash})=>{
+    return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,result:metadata.result,consumerSummary:metadata.consumerSummary,hopefulTakeaway:metadata.hopefulTakeaway,limitations:[...(metadata.limitations||[]),...(limitations||[])],productApplicability:metadata.productApplicability,sources,evidenceHash};
   }),
 };
+for(const record of masterIndex.records){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(record.reviewedAt) || !/^[a-f0-9]{64}$/.test(record.evidenceHash)) throw new Error(`Research ${record.id} is missing a valid review date or evidence hash`);
+}
 mkdirSync(dirname(target),{recursive:true});
 writeFileSync(target,JSON.stringify(output,null,2)+'\n');
 const masterTarget=resolve(root,'public/data/gaba-master-index.json');
