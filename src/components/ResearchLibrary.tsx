@@ -53,6 +53,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   const [linkStatus,setLinkStatus]=useState('');
   const [manualLink,setManualLink]=useState('');
   const [query, setQuery] = useState('');
+  const [topic, setTopic] = useState('');
   const [studyType, setStudyType] = useState('');
   const [requestedId, setRequestedId] = useState('');
   const studies = claims.filter(claim =>
@@ -60,10 +61,13 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     claim.publicText && claim.metadata?.result &&
     claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)),
   );
+  const topics = [...new Set(studies.map(claim => claim.topic).filter(Boolean))];
+  const activeTopic = topics.includes(topic) ? topic : '';
   const studyTypes = [...new Set(studies.map(claim => claim.metadata!.studyType).filter((value): value is string => Boolean(value)))];
   const activeType = studyTypes.includes(studyType) ? studyType : '';
   const terms = query.normalize('NFKC').toLocaleLowerCase('ko-KR').trim().split(/\s+/).filter(Boolean);
   const visibleStudies = studies.filter(claim => {
+    if (activeTopic && claim.topic !== activeTopic) return false;
     if (activeType && claim.metadata!.studyType !== activeType) return false;
     const searchable = [claim.topic, claim.publicText, ...Object.values(claim.metadata!).flat(), ...claim.sources.map(source => source.title)]
       .join(' ').normalize('NFKC').toLocaleLowerCase('ko-KR');
@@ -74,12 +78,12 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       let id: string;
       try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
       if (!claims.some(claim => claim.id === id && claim.status === 'approved' && id.startsWith('research-') && claim.publicText && claim.metadata?.result && claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)))) return;
-      setQuery(''); setStudyType(''); setRequestedId(id);
+      setQuery(''); setTopic(''); setStudyType(''); setRequestedId(id);
     };
     reveal();window.addEventListener('hashchange',reveal);return()=>window.removeEventListener('hashchange',reveal);
   },[claims]);
   useEffect(() => {
-    if (!requestedId || query || activeType) return;
+    if (!requestedId || query || activeTopic || activeType) return;
     const article = document.getElementById(requestedId);
     const details = article?.querySelector('details');
     if (details) {
@@ -103,8 +107,9 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     {studies.length > 0 ? <>
       <div className="research-library-controls" role="search" aria-label="승인된 연구 자료 찾기">
         <label htmlFor="research-search">연구 내용 검색<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="연구 질문, 대상, 기간 등" aria-describedby="research-search-help" /></label>
+        <label htmlFor="research-topic">연구 주제<select id="research-topic" value={activeTopic} onChange={event => setTopic(event.target.value)}><option value="">모든 주제</option>{topics.map(item => <option value={item} key={item}>{item}</option>)}</select></label>
         <label htmlFor="research-type">자료 유형<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 자료 유형</option>{studyTypes.map(type => <option value={type} key={type}>{type}</option>)}</select></label>
-        <button type="button" className="text-link" disabled={!query && !activeType} onClick={() => { setQuery(''); setStudyType(''); }}>검색·유형 초기화</button>
+        <button type="button" className="text-link" disabled={!query && !activeTopic && !activeType} onClick={() => { setQuery(''); setTopic(''); setStudyType(''); }}>검색·유형 초기화</button>
       </div>
       <p id="research-search-help" className="note">공개된 연구의 질문·대상·결과·출처를 찾습니다. 자료 유형은 원문에 기록된 연구 설계 기준입니다.</p>
       <p className="research-library-count" role="status" aria-live="polite">전체 {studies.length}건 중 {visibleStudies.length}건</p>
