@@ -21,7 +21,7 @@
       "name": "배포 화면 품질",
       "target": "데스크톱·390px 화면에서 제품 1500 카드, 이미지, 후기 원문 링크가 로드되고 가로 넘침이 없다.",
       "status": "MET",
-      "evidence": ["GitHub Actions 34456383105", "https://kradavid.github.io/cellpinda_GABA/?view=products#products"]
+      "evidence": ["GitHub Actions 34463999338", "https://kradavid.github.io/cellpinda_GABA/?view=products#products"]
     },
     {
       "id": "M3",

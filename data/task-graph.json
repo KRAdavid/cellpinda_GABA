@@ -76,7 +76,7 @@
       "verifier": "QA·감사",
       "dependencies": ["A1", "B1"],
       "acceptance": ["GitHub Pages HTTPS 공개", "main push 후 데이터 동기화·검증·Pages 배포"],
-      "evidence": ["https://kradavid.github.io/cellpinda_GABA/", "GitHub Actions 34456953056"]
+      "evidence": ["https://kradavid.github.io/cellpinda_GABA/", "GitHub Actions 34463999338"]
     },
     {
       "id": "C2",
@@ -138,7 +138,7 @@
       "verifier": "품질감사관",
       "dependencies": ["D3"],
       "acceptance": ["새로고침 후 목표·승인 대기·감사 로그 복원", "승인 요청 작업은 WAITING으로 잠김", "보고서에 감사 이벤트·작업별 증거·샌드박스 시뮬레이션 상태 포함", "목표 계약·실행·승인 대기·독립 검증의 TF 의사결정 기록 포함", "공개 인덱스 필수 필드·검토일·근거 해시 검증"],
-      "evidence": ["src/components/OperationsMvp.tsx", "src/domain/goal-mvp.ts", "worker/store.ts", "server/store.mjs", "scripts/sync-public-data.mjs", "docs/OPS_MVP.md", "https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34463179333"]
+      "evidence": ["src/components/OperationsMvp.tsx", "src/domain/goal-mvp.ts", "worker/store.ts", "server/store.mjs", "scripts/sync-public-data.mjs", "docs/OPS_MVP.md", "https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34463999338"]
     },
     {
       "id": "E1",

@@ -8,7 +8,7 @@
 - 공개 `gaba-master-index.json`은 연구 8건, 제품 1건(가바 1500), `750` 제품 0건을 포함한다. 제품·후기 CTA와 원문 목적지는 스마트스토어(`https://smartstore.naver.com/cellpinda`)로 통일했다. 연구 원장에 남은 과거 판매 페이지 URL은 출처 provenance이며 소비자 구매 목적지가 아니다.
 - TF 운영 MVP는 8개 역할과 독립 품질감사관을 생성하고, 목표 계약 회의 기록을 시작으로 실행·승인 대기·독립 검증별 의사결정(참여 역할·판단·반대 의견·증거·다음 조치)을 승인 보고서에 포함한다.
 - 로컬 Node/SQLite와 Worker/D1 모두 `/api/ops/runs/:runId` 저장 계약을 제공한다. revision·감사 snapshot·30일 만료·클라이언트 샌드박스 키로 재개를 지원하며, 정적 Pages에서는 API가 없을 때 브라우저 저장으로 폴백한다.
-- 로컬 전체 테스트 50개, 타입체크, production build, Worker dry-run, 격리 D1 후기 통합 검증과 GitHub Actions `34463179333`이 성공했다.
+- 로컬 전체 테스트 50개, 타입체크, production build, Worker dry-run, 격리 D1 후기 통합 검증과 GitHub Actions `34463999338`이 성공했다. 최신 커밋은 `6330f50`이다.
 - Cloudflare Worker 운영 배포는 저장소에 Cloudflare API/D1/운영 인증 비밀키가 없어 자동으로 건너뛰었다. 따라서 정적 공개 배포는 완료됐지만, 운영 D1·관리자 인증이 붙은 영구 Worker는 아직 대기 상태다.
 
 
