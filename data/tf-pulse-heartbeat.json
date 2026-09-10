@@ -3,7 +3,7 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-10T18:16:18.937Z",
+  "generatedAt": "2026-09-10T18:18:46.744Z",
   "snapshotHash": "7164ca63831344d8d0481562c0da5ec6b5829f33ced259ca56573bb92068a805",
   "requiresHumanDecision": true,
   "counts": {
