@@ -114,17 +114,18 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
 });
 
 test('Worker and Node expose only approved official review destination, never private quotes',async()=>{
-  const reviewedSeed={...seed,reviews:[{id:'shop-review-destination',status:'approved',originalPublic:true,publicText:'공식몰 후기 보기',sourceTitle:'공식몰',sourceUrl:'https://cellpinda.co.kr/product/detail.html?product_no=39',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL'},{id:'private-review',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null},{id:'unverified-review',status:'approved',publicText:'UNVERIFIED QUOTE',sourceUrl:'https://cellpinda.co.kr/'}]};
+  const reviewedSeed={...seed,reviews:[{id:'shop-review-destination',status:'approved',originalPublic:true,publicText:'공식몰 후기 보기',sourceTitle:'공식몰 750',sourceUrl:'https://cellpinda.co.kr/product/detail.html?product_no=39',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL'},{id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'공식몰 1500 후기 보기',sourceTitle:'공식몰 1500',sourceUrl:'https://cellpinda.co.kr/product/detail.html?product_no=27',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL 1500'},{id:'private-review',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null},{id:'unverified-review',status:'approved',publicText:'UNVERIFIED QUOTE',sourceUrl:'https://cellpinda.co.kr/'}]};
   const db=new MockD1();const cloud=createStore(db);const local=createNodeStore({dbPath:':memory:',seed:reviewedSeed});
   try{
     await cloud.initialize(reviewedSeed);
     for(const store of [cloud,local]){
-      const data=await store.publicContent();assert.equal(data.reviews.length,1);assert.equal(data.reviews[0].id,'shop-review-destination');assert.ok(!JSON.stringify(data).includes('PRIVATE'));assert.ok(!JSON.stringify(data).includes('UNVERIFIED'));
-      assert.equal(data.reviews[0].publicText,REVIEW_DESTINATION_TEXT);
+      const data=await store.publicContent();assert.equal(data.reviews.length,2);assert.deepEqual(data.reviews.map(review=>review.id),['shop-review-destination','shop-review-destination-1500']);assert.ok(!JSON.stringify(data).includes('PRIVATE'));assert.ok(!JSON.stringify(data).includes('UNVERIFIED'));
+      assert.ok(data.reviews.every(review=>review.publicText===REVIEW_DESTINATION_TEXT));
       await assert.rejects(async()=>store.update('shop-review-destination',{revision:1,status:'approved',publicText:'UNVERIFIED QUOTATION',reason:'Attempt bypass'}),/destination text is fixed/);
+      await assert.rejects(async()=>store.update('shop-review-destination-1500',{revision:1,status:'approved',publicText:'UNVERIFIED QUOTATION',reason:'Attempt bypass 1500'}),/destination text is fixed/);
       await assert.rejects(async()=>store.update('private-review',{revision:1,status:'approved',reason:'Without permissions'}),/quote rights/);
-      await store.update('shop-review-destination',{revision:1,status:'hold',reason:'Withdraw destination'});assert.equal((await store.publicContent()).reviews.length,0);
-      await store.update('shop-review-destination',{revision:2,status:'approved',publicText:REVIEW_DESTINATION_TEXT,reason:'Restore fixed destination'});assert.equal((await store.publicContent()).reviews[0].publicText,REVIEW_DESTINATION_TEXT);
+      await store.update('shop-review-destination',{revision:1,status:'hold',reason:'Withdraw destination'});assert.equal((await store.publicContent()).reviews.length,1);
+      await store.update('shop-review-destination',{revision:2,status:'approved',publicText:REVIEW_DESTINATION_TEXT,reason:'Restore fixed destination'});assert.equal((await store.publicContent()).reviews.length,2);
     }
   }finally{db.close();local.close();}
 });

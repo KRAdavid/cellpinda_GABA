@@ -31,8 +31,8 @@ function metadata(value:unknown) {
 }
 function decode(row:ContentRow):Content {return {...JSON.parse(row.data),id:row.id,kind:row.kind,revision:row.revision};}
 function reviewLink(value:Content) {
-  if(value.id!=='shop-review-destination' || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
-  try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && ['cellpinda.co.kr','www.cellpinda.co.kr'].includes(url.hostname) && (url.searchParams.get('product_no')==='39' || /\/39(?:\/|$)/.test(url.pathname));}catch{return false;}
+  if(!['shop-review-destination','shop-review-destination-1500'].includes(value.id) || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
+  try{const url=new URL(value.sourceUrl);const productNo=value.id==='shop-review-destination'?'39':'27';const pathMatch=url.pathname.endsWith(`/${productNo}/`)||url.pathname.endsWith(`/${productNo}`);return url.protocol==='https:' && ['cellpinda.co.kr','www.cellpinda.co.kr'].includes(url.hostname) && (url.searchParams.get('product_no')===productNo || pathMatch);}catch{return false;}
 }
 
 export function createStore(db:D1Database) {
@@ -93,10 +93,10 @@ export function createStore(db:D1Database) {
       if(row.revision!==patch.revision)throw failure('Revision conflict',409);
       const before:Content=JSON.parse(row.data);const after={...before};
       if(row.kind==='review' && before.reviewType==='quote')throw failure('Use the dedicated review workflow');
-      if(row.kind==='review' && before.id==='shop-review-destination' && typeof patch.publicText==='string' && patch.publicText.trim()!==REVIEW_DESTINATION_TEXT)throw failure('Review destination text is fixed; submit quotations through the review workflow');
+      if(row.kind==='review' && ['shop-review-destination','shop-review-destination-1500'].includes(before.id) && typeof patch.publicText==='string' && patch.publicText.trim()!==REVIEW_DESTINATION_TEXT)throw failure('Review destination text is fixed; submit quotations through the review workflow');
       const changed=typeof patch.publicText==='string' && patch.publicText.trim()!==before.publicText;
       if(typeof patch.publicText==='string')after.publicText=patch.publicText.trim();
-      if(row.kind==='review' && before.id==='shop-review-destination')after.publicText=REVIEW_DESTINATION_TEXT;
+      if(row.kind==='review' && ['shop-review-destination','shop-review-destination-1500'].includes(before.id))after.publicText=REVIEW_DESTINATION_TEXT;
       after.status=typeof patch.status==='string'?patch.status:(changed?'hold':before.status);
       if(after.status==='approved') {
         if(row.kind==='review' && !reviewLink(after))throw failure('Only the verified review destination may be approved; quote rights not established');

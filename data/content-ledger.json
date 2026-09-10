@@ -555,6 +555,19 @@
       ]
     },
     {
+      "id": "shop-review-destination-1500",
+      "status": "approved",
+      "publicText": "공식몰에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.",
+      "sourceTitle": "셀핀다 공식몰 1500mg 상품 후기",
+      "sourceUrl": "https://cellpinda.co.kr/product/셀핀다-고함량-발효가바-1500mg-×-30포/27/",
+      "reviewedAt": "2026-09-10",
+      "holdReason": null,
+      "originalPublic": true,
+      "limitations": [
+        "후기를 재인용하거나 수치로 집계하지 않고 원문 목적지로 연결합니다. 개인 경험은 제품 효과 입증이 아닙니다."
+      ]
+    },
+    {
       "id": "local-00",
       "status": "hold",
       "publicText": null,

@@ -13,7 +13,7 @@ const pick=(value,keys)=>Object.fromEntries(keys.filter(key=>value[key]!==undefi
 const claims=ledger.claims.filter(c=>c.status==='approved'&&c.publicText&&c.sources.some(s=>s.url?.startsWith('https://'))).map(c=>({...pick(c,['id','topic','publicText','status','limitations','metadata']),sources:c.sources.filter(s=>s.url?.startsWith('https://')).map(s=>pick(s,['title','url','page','locator']))}));
 const ids=new Set(claims.map(c=>c.id));
 const products=ledger.products.filter(p=>p.status==='approved'&&p.sourceIds?.every(id=>ids.has(id))).map(p=>pick(p,['id','name','amountMg','servings','totalG','officialUrl','status','availability','priceDisplay','sourceIds']));
-const reviews=ledger.reviews.filter(r=>r.id==='shop-review-destination'&&r.status==='approved').map(r=>pick(r,['id','status','publicText','sourceTitle','sourceUrl','originalPublic','limitations']));
+const reviews=ledger.reviews.filter(r=>['shop-review-destination','shop-review-destination-1500'].includes(r.id)&&r.status==='approved').map(r=>pick(r,['id','status','publicText','sourceTitle','sourceUrl','originalPublic','limitations']));
 mkdirSync(resolve(target,'data'));
 writeFileSync(resolve(target,'data/content-ledger.json'),JSON.stringify({schemaVersion:1,checkedAt:ledger.checkedAt,policy:{approvedMeaning:'Source-checked editorial text, not clinical or legal certification.',publicExport:'Public sources only. Internal reviews and customer quotations excluded.'},claims,products,reviews},null,2)+'\n');
 writeFileSync(resolve(target,'.env.example'),'ADMIN_TOKEN=\nMEMBER_ORIGIN=\n');

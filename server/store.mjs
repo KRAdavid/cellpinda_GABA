@@ -14,8 +14,8 @@ const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result',
 const SHARE_SCOPE_SQL=`WITH scoped AS (SELECT rowid AS seq,flow_id,name FROM events WHERE json_extract(properties,'$.path')=? AND flow_id IS NOT NULL), starts AS (SELECT flow_id,MIN(seq) AS first_seq FROM scoped WHERE name=? GROUP BY flow_id), steps AS (SELECT EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_requested') AS requested,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_link_copied') AS copied,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_image_downloaded') AS downloaded,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_cancelled') AS cancelled FROM starts s) SELECT COUNT(*) AS denominator,COALESCE(SUM(CASE WHEN requested OR copied OR downloaded THEN 1 ELSE 0 END),0) AS attemptFlows,COALESCE(SUM(requested),0) AS requestedFlows,COALESCE(SUM(copied),0) AS copiedFlows,COALESCE(SUM(downloaded),0) AS downloadedFlows,COALESCE(SUM(cancelled),0) AS cancelledFlows FROM steps`;
 const UNSCOPED_SHARE_SQL="SELECT COUNT(*) AS count FROM events WHERE name IN ('share_requested','share_link_copied','share_image_downloaded','share_cancelled') AND COALESCE(json_extract(properties,'$.path'),'') NOT IN ('/result','/share','/products')";
 function reviewLink(value) {
-  if(value.id!=='shop-review-destination' || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
-  try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && ['cellpinda.co.kr','www.cellpinda.co.kr'].includes(url.hostname) && (url.searchParams.get('product_no')==='39' || /\/39(?:\/|$)/.test(url.pathname));}catch{return false;}
+  if(!['shop-review-destination','shop-review-destination-1500'].includes(value.id) || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
+  try{const url=new URL(value.sourceUrl);const productNo=value.id==='shop-review-destination'?'39':'27';const pathMatch=url.pathname.endsWith(`/${productNo}/`)||url.pathname.endsWith(`/${productNo}`);return url.protocol==='https:' && ['cellpinda.co.kr','www.cellpinda.co.kr'].includes(url.hostname) && (url.searchParams.get('product_no')===productNo || pathMatch);}catch{return false;}
 }
 function publicMetadata(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
@@ -91,11 +91,11 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
         if (row.revision !== patch.revision) throw failure('Revision conflict',409);
         const before = JSON.parse(row.data);
         if(row.kind==='review' && before.reviewType==='quote')throw failure('Use the dedicated review workflow');
-        if(row.kind==='review' && before.id==='shop-review-destination' && patch.publicText!==undefined && patch.publicText.trim()!==REVIEW_DESTINATION_TEXT)throw failure('Review destination text is fixed; submit quotations through the review workflow');
+        if(row.kind==='review' && ['shop-review-destination','shop-review-destination-1500'].includes(before.id) && patch.publicText!==undefined && patch.publicText.trim()!==REVIEW_DESTINATION_TEXT)throw failure('Review destination text is fixed; submit quotations through the review workflow');
         const after = {...before};
         const changed = patch.publicText !== undefined && patch.publicText !== before.publicText;
         if (patch.publicText !== undefined) after.publicText = patch.publicText.trim();
-        if(row.kind==='review' && before.id==='shop-review-destination')after.publicText=REVIEW_DESTINATION_TEXT;
+        if(row.kind==='review' && ['shop-review-destination','shop-review-destination-1500'].includes(before.id))after.publicText=REVIEW_DESTINATION_TEXT;
         after.status = patch.status ?? (changed ? 'hold' : before.status);
         if (after.status === 'approved') {
           if(row.kind==='review' && !reviewLink(after))throw failure('Only the verified review destination may be approved; quote rights not established');
