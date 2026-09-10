@@ -31,6 +31,9 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
     assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');
     assert.equal(queue.tasks.length, 13, 'live operations queue must contain the current task graph');
+    assert.ok(queue.pulse && /^[a-f0-9]{64}$/.test(queue.pulse.snapshotHash), 'live operations queue must expose a valid pulse snapshot');
+    assert.equal(queue.pulse.activeTasks, queue.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length, 'live pulse active count must match queue');
+    assert.equal(queue.pulse.inputGates, queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length, 'live pulse input gate count must match queue');
     const queueIds = new Set(queue.tasks.map(task => task.id));
     assert.equal(queueIds.size, queue.tasks.length, 'live operations queue contains duplicate task ids');
     for (const task of queue.tasks) {
@@ -50,7 +53,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, queueTasks: queue.tasks.length, waitingTasks: waitingTasks.length, smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, queueTasks: queue.tasks.length, waitingTasks: waitingTasks.length, pulseHash: queue.pulse.snapshotHash.slice(0, 12), smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {

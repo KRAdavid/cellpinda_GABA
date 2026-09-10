@@ -1,4 +1,5 @@
 import {createHash} from 'node:crypto';
+import {spawnSync} from 'node:child_process';
 import {mkdirSync, readFileSync, writeFileSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 
@@ -8,6 +9,10 @@ const target=resolve(root,'public/data/content.json');
 const goalContract=JSON.parse(readFileSync(resolve(root,'data/goal-contract.json'),'utf8'));
 const taskGraph=JSON.parse(readFileSync(resolve(root,'data/task-graph.json'),'utf8'));
 const ledger=JSON.parse(readFileSync(source,'utf8'));
+const pulseRun=spawnSync(process.execPath,[resolve(root,'scripts/tf-pulse.mjs'),'--json'],{encoding:'utf8'});
+if(pulseRun.status!==0)throw new Error(`TF pulse generation failed: ${pulseRun.stderr?.trim() || 'unknown error'}`);
+let pulse;
+try{pulse=JSON.parse(pulseRun.stdout.trim());}catch{throw new Error('TF pulse generation did not return JSON');}
 const smartStoreHost='smartstore.naver.com';
 const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerSummary','hopefulTakeaway'];
 
@@ -110,6 +115,7 @@ const operationsQueue={
   goalId:goalContract.goalId,
   status:goalContract.status,
   checkedAt:goalContract.checkedAt,
+  pulse:{generatedAt:pulse.generatedAt,snapshotHash:pulse.snapshotHash,requiresHumanDecision:pulse.requiresHumanDecision,activeTasks:pulse.meetingAgenda.length,inputGates:pulse.inputGates.length},
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
   tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy}), ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
 };

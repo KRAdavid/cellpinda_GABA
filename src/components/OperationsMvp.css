@@ -34,6 +34,7 @@
 .ops-mvp-live-queue-grid p, .ops-mvp-live-queue-grid small { display: block; color: #607567; font-size: 12px; line-height: 1.55; }
 .ops-mvp-live-queue-grid small { margin-top: 12px; color: #7b6a47; }
 .ops-mvp-live-queue-grid small.ops-mvp-live-decision { color: #315f48; font-weight: 700; }
+.ops-mvp-live-pulse { margin: 8px 0 0; color: #607567; font-size: 11px; }
 .ops-mvp-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 36px; }
 .ops-mvp-section-heading h2 { margin: 0; font-size: clamp(32px, 4vw, 50px); }
 .ops-mvp-section-heading > p { max-width: 430px; margin: 0; }
