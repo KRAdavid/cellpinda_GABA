@@ -8,6 +8,15 @@ const defaultGoal = '공개용 GABA 논문 기반 마스터 인덱스';
 const stateLabels: Record<string, string> = {BACKLOG: '대기', READY: '실행 가능', RUNNING: '실행 중', VERIFYING: '검증 중', DONE: '완료', WAITING: '승인 대기', REWORK: '보완 필요', EXPIRED: '만료', RETRY: '재시도', FAILED: '실패', CANCELLED: '취소'};
 const riskLabels: Record<string, string> = {A_READ: '읽기', B_INTERNAL_WRITE: '내부 작성', C_LOW_RISK_INTERNAL: '내부 실행', D_EXTERNAL_REVERSIBLE: '외부 가역', E_EXTERNAL_COMMITMENT: '책임자 승인'};
 const formatTime = (value: string) => new Date(value).toLocaleString('ko-KR', {dateStyle: 'short', timeStyle: 'short'});
+function pulseFreshness(value: string) {
+  const timestamp = Date.parse(value);
+  if (!Number.isFinite(timestamp)) return '시간 확인 필요';
+  const age = Date.now() - timestamp;
+  if (age < 0) return '시간 확인 필요';
+  if (age > 8 * 60 * 60 * 1000) return '업데이트 지연';
+  if (age < 60 * 1000) return '방금 갱신';
+  return `${Math.floor(age / 60_000)}분 전 갱신`;
+}
 const storageKey = 'cellpinda:ops-mvp:v2';
 
 type StoredOpsState = {
@@ -267,7 +276,7 @@ export default function OperationsMvp() {
       <div className="ops-mvp-live-streams" aria-label="스트림별 현재 상태">{queue.workstreams.map(stream => <span key={stream.id}><strong>{stream.name}</strong><em>{stream.status}</em><small>{stream.nextAction}</small></span>)}</div>
       {queue.roleCoverage?.length ? <div className="ops-mvp-live-roles" aria-label="현재 TF 역할군"><div><span className="ops-mvp-eyebrow">현재 TF 역할군</span><p>이번 pulse가 그래프에서 확인한 교차 검토 책임입니다.</p></div><ul>{queue.roleCoverage.map(role => <li key={role.id}><strong>{role.label}</strong><span>{role.status === 'present' ? '참여 책임 확인' : role.status}</span></li>)}</ul></div> : null}
       <div className="ops-mvp-live-queue-grid">{attentionQueue.map(task => <article key={task.id}><div><span className="ops-mvp-task-id">{task.id}</span><span className="ops-mvp-state">{stateLabels[task.state] || task.state}</span></div><h3>{task.title}</h3><p>담당 {task.lead} · 독립 검증 {task.verifier}</p><small className="ops-mvp-live-decision">자동 판단 · {task.decision}</small><small>다음 조치 · {task.nextAction}</small>{task.blockedBy ? <small>대기 입력 · {task.blockedBy}</small> : null}{task.requiredInputs?.length ? <small className="ops-mvp-required-inputs">회의 확인 항목 · {task.requiredInputs.join(' · ')}</small> : null}</article>)}</div>
-      <p className="note">계약 확인일 {queue.checkedAt} · 완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 진행/대기 {attentionQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>{queue.pulse ? <p className="ops-mvp-live-pulse">마지막 TF pulse {formatTime(queue.pulse.generatedAt)} · 상태 지문 {queue.pulse.snapshotHash.slice(0, 12)}… · 사람 판단 {queue.pulse.requiresHumanDecision ? '필요' : '없음'} · 입력 게이트 {queue.pulse.inputGates}건</p> : null}{queue.pulse?.requiresHumanDecision ? <div className="ops-mvp-pulse-agenda" aria-labelledby="pulse-agenda-heading"><div><span className="ops-mvp-eyebrow" id="pulse-agenda-heading">다음 TF 회의 안건</span><p>자동 pulse가 멈춘 지점을 사람 회의에서 확인하고, 담당자와 독립 검증자가 다음 조치를 합의합니다.</p></div><ol>{attentionQueue.filter(task => ['VERIFYING', 'WAITING'].includes(task.state)).slice(0, 5).map(task => <li key={task.id}><div><strong>{task.id}</strong><span>{task.decision}</span></div><small>담당 · {task.lead} · 독립 검증 · {task.verifier} · 다음 · {task.nextAction}</small>{task.requiredInputs?.length ? <small>회의 확인 항목 · {task.requiredInputs.join(' · ')}</small> : null}</li>)}</ol></div> : null}
+      <p className="note">계약 확인일 {queue.checkedAt} · 완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 진행/대기 {attentionQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>{queue.pulse ? <p className="ops-mvp-live-pulse">마지막 TF pulse {formatTime(queue.pulse.generatedAt)} · {pulseFreshness(queue.pulse.generatedAt)} · 상태 지문 {queue.pulse.snapshotHash.slice(0, 12)}… · 사람 판단 {queue.pulse.requiresHumanDecision ? '필요' : '없음'} · 입력 게이트 {queue.pulse.inputGates}건</p> : null}{queue.pulse?.requiresHumanDecision ? <div className="ops-mvp-pulse-agenda" aria-labelledby="pulse-agenda-heading"><div><span className="ops-mvp-eyebrow" id="pulse-agenda-heading">다음 TF 회의 안건</span><p>자동 pulse가 멈춘 지점을 사람 회의에서 확인하고, 담당자와 독립 검증자가 다음 조치를 합의합니다.</p></div><ol>{attentionQueue.filter(task => ['VERIFYING', 'WAITING'].includes(task.state)).slice(0, 5).map(task => <li key={task.id}><div><strong>{task.id}</strong><span>{task.decision}</span></div><small>담당 · {task.lead} · 독립 검증 · {task.verifier} · 다음 · {task.nextAction}</small>{task.requiredInputs?.length ? <small>회의 확인 항목 · {task.requiredInputs.join(' · ')}</small> : null}</li>)}</ol></div> : null}
     </section> : null}
     {plan ? <>
       <section className="ops-mvp-contract wrap" aria-labelledby="contract-heading">
