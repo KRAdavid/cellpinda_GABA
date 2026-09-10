@@ -25,6 +25,8 @@ test('sandbox execution verifies a task and unlocks its dependent task', () => {
   assert.equal(verified.tasks.find(task => task.id === 'G1')?.state, 'DONE');
   assert.equal(verified.tasks.find(task => task.id === 'E1')?.state, 'READY');
   assert.equal(verified.events.length, 1);
+  assert.equal(verified.tasks.find(task => task.id === 'G1')?.verification?.verifier, '품질감사관');
+  assert.deepEqual(verified.tasks.find(task => task.id === 'G1')?.verification?.acceptedCriteria, plan.tasks.find(task => task.id === 'G1')?.acceptance);
 });
 
 test('external commitment produces an approval packet before execution', () => {
@@ -59,6 +61,8 @@ test('approval report distinguishes completed and pending work', () => {
   const report = buildMvpApprovalReport(plan.contract, verified.tasks, [...after.events, ...verified.events], undefined, '2026-09-10T10:00:00.000Z', [contractDecision, taskDecision]);
   assert.equal(report.sandboxOnly, true);
   assert.equal(report.verificationStatus, 'sandbox_simulation_only');
+  assert.equal(report.verificationRecords.G1?.mode, 'sandbox_simulation');
+  assert.equal(report.verificationRecords.G1?.verifier, '품질감사관');
   assert.equal(report.auditEvents.length, 3);
   assert.deepEqual(report.taskEvidence.G1, ['sandbox-output:G1:2026-09-10T10:00:00.000Z', 'independent-review:G1:2026-09-10T10:01:00.000Z']);
   assert.equal(report.contractSnapshot.goalId, plan.contract.goalId);

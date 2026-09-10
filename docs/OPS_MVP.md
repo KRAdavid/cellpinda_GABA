@@ -14,7 +14,7 @@
 6. TF 의사결정 기록에서 참여 역할·판단·반대 의견·다음 조치를 확인한다.
 7. 결과·감사 로그·승인 상태를 JSON으로 복사하거나 내려받는다.
 
-CI와 로컬 production build는 `pnpm run validate:ops`로 전체 샌드박스 여정을 재생한다. 이 검증은 5개 내부 작업의 독립 검증과 공개 배포 승인 작업의 `WAITING → READY → RUNNING → VERIFYING → DONE` 전이를 확인하며, 외부 게시·구매를 수행하지 않는다.
+CI와 로컬 production build는 `pnpm run validate:ops`로 전체 샌드박스 여정을 재생한다. 이 검증은 5개 내부 작업의 독립 검증과 공개 배포 승인 작업의 `WAITING → READY → RUNNING → VERIFYING → DONE` 전이를 확인하며, 각 완료 작업에 검증자·수락 기준·검증 당시 증거를 별도 기록한다. 외부 게시·구매를 수행하지 않는다.
 
 공개 데이터는 `pnpm run sync:data` 직후 `pnpm run validate:public`에서 다시 검사한다. 제품은 `gaba1500` 하나이고 스마트스토어 목적지만 허용하며, 750 재유입·비공개 필드 노출·마스터 인덱스와 content export의 provenance 불일치를 build 단계에서 차단한다.
 

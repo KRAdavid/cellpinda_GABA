@@ -42,6 +42,15 @@ export type MvpGoalContract = {
 export type MvpTask = TaskNode & {
   description: string;
   output: string;
+  verification?: SandboxVerificationRecord;
+};
+
+export type SandboxVerificationRecord = {
+  verifier: string;
+  acceptedCriteria: string[];
+  evidence: string[];
+  mode: 'sandbox_simulation';
+  recordedAt: string;
 };
 
 export type SandboxAuditEvent = {
@@ -80,6 +89,7 @@ export type MvpApprovalReport = {
   decisionRecords: MvpDecisionRecord[];
   taskEvidence: Record<string, string[]>;
   taskAcceptance: Record<string, string[]>;
+  verificationRecords: Record<string, SandboxVerificationRecord>;
   verificationStatus: 'sandbox_simulation_only';
   approval?: ApprovalRequest;
   sandboxOnly: true;
@@ -279,8 +289,15 @@ export function verifySandboxTask(tasks: readonly MvpTask[], taskId: string, now
   if (!source) throw new Error(`작업을 찾을 수 없습니다: ${taskId}`);
   if (source.state !== 'VERIFYING') throw new Error('샌드박스 산출물을 먼저 만든 뒤 독립 검증을 기록해야 합니다.');
   if (source.evidence.length === 0) throw new Error('검증할 증거가 없습니다.');
-  const events: SandboxAuditEvent[] = [{id: `${taskId}-DONE-1`, taskId, from: 'VERIFYING', to: 'DONE', note: '품질감사관이 수락 기준과 샌드박스 증거를 독립 검토한 것으로 기록했습니다.', createdAt: now}];
-  const next = promoteReady(tasks.map(task => task.id === taskId ? {...task, state: 'DONE' as const, evidence: [...task.evidence, `independent-review:${taskId}:${now}`]} : {...task}));
+  const events: SandboxAuditEvent[] = [{id: `${taskId}-DONE-1`, taskId, from: 'VERIFYING', to: 'DONE', note: `${source.verifier}가 수락 기준과 샌드박스 증거를 독립 검토한 것으로 기록했습니다.`, createdAt: now}];
+  const verification: SandboxVerificationRecord = {
+    verifier: source.verifier,
+    acceptedCriteria: [...source.acceptance],
+    evidence: [...source.evidence],
+    mode: 'sandbox_simulation',
+    recordedAt: now,
+  };
+  const next = promoteReady(tasks.map(task => task.id === taskId ? {...task, state: 'DONE' as const, evidence: [...task.evidence, `independent-review:${taskId}:${now}`], verification} : {...task}));
   return {tasks: next, events};
 }
 
@@ -306,6 +323,7 @@ export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonl
     decisionRecords: [...decisions],
     taskEvidence: Object.fromEntries(tasks.map(task => [task.id, [...task.evidence]])),
     taskAcceptance: Object.fromEntries(tasks.map(task => [task.id, [...task.acceptance]])),
+    verificationRecords: Object.fromEntries(tasks.flatMap(task => task.verification ? [[task.id, {...task.verification, acceptedCriteria: [...task.verification.acceptedCriteria], evidence: [...task.verification.evidence]}] as const] : [])),
     verificationStatus: 'sandbox_simulation_only',
     ...(approval ? {approval} : {}),
     sandboxOnly: true,
