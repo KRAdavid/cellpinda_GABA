@@ -62,6 +62,7 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 pnpm run sync:data
 pnpm run build
 pnpm run goal:next
+pnpm run tf:pulse
 pnpm run audit:orders
 pnpm run preflight:deploy
 ```

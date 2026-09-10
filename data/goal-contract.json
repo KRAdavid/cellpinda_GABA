@@ -63,7 +63,7 @@
       "name": "TF 의사결정 추적",
       "target": "목표 계약·실행·승인 대기·독립 검증 단계의 참여 역할·판단·반대 의견·증거·다음 조치를 승인 보고서와 저장 상태에 남긴다.",
       "status": "MET",
-      "evidence": ["src/domain/goal-mvp.ts", "src/components/OperationsMvp.tsx", "src/domain/ops-validation.ts", "server/server.test.mjs", "worker/worker.test.mjs", "docs/OPS_MVP.md"]
+      "evidence": ["src/domain/goal-mvp.ts", "src/components/OperationsMvp.tsx", "src/domain/ops-validation.ts", "scripts/tf-pulse.mjs", "server/server.test.mjs", "worker/worker.test.mjs", "docs/OPS_MVP.md"]
     }
   ],
   "scope": {
