@@ -33,6 +33,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Check frontend and Worker types
         run: pnpm run typecheck
+      - name: Validate consumer research copy
+        run: pnpm run validate:research-copy
       - name: Test application rules and API boundaries
         run: pnpm test
       - name: Build frontend

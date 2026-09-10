@@ -16,7 +16,7 @@ function publicSources(item){
 const publicMetadataKeys=[
   'studyType','population','sampleSize','dose','duration','comparison',
   'outcome','result','limitations','productApplicability','question',
-  'searchThrough','studyCount',
+  'searchThrough','studyCount','consumerSummary','hopefulTakeaway',
 ];
 
 function publicMetadata(item){

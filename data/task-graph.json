@@ -38,7 +38,7 @@
       "verifier": "표시·콘텐츠 검토",
       "dependencies": [],
       "acceptance": ["공개 제품 1개와 승인 후기 목적지 1개", "연구·제품·후기 적용 범위 분리"],
-      "evidence": ["data/content-ledger.json", "public/data/content.json", "pnpm run validate:goal"]
+      "evidence": ["data/content-ledger.json", "public/data/content.json", "scripts/validate-research-copy.mjs", "pnpm run validate:goal"]
     },
     {
       "id": "B2",

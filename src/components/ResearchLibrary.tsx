@@ -3,6 +3,8 @@ import './ResearchLibrary.css';
 
 export type ResearchMetadata = {
   question?: string;
+  consumerSummary?: string;
+  hopefulTakeaway?: string;
   studyType?: string;
   population?: string;
   sampleSize?: string;
@@ -102,7 +104,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   return <section id="research" className="section wrap research research-library" aria-labelledby="research-heading">
     <div className="section-head">
       <div><p className="chapter">연구를 쉽게 읽기</p><h2 id="research-heading">어떤 질문을 했고,<br />무엇을 발견했을까요?</h2></div>
-      <p>한 연구의 발견과 여러 연구의 흐름을 함께 읽습니다.<br />대상과 조건, 아직 알 수 없는 점까지 확인하세요.</p>
+      <p>연구의 핵심을 먼저 쉬운 말로 읽고, 원문에서 조건과 한계를 확인하세요.<br />근거를 바탕으로 내 생활에 가바를 더해볼지 천천히 판단할 수 있습니다.</p>
     </div>
     {studies.length > 0 ? <>
       <div className="research-library-controls" role="search" aria-label="승인된 연구 자료 찾기">
@@ -121,6 +123,9 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <p className="research-library-kind">{metadata.studyType || claim.topic}</p>
         <h3>{metadata.question || claim.topic}</h3>
         <p className="research-library-summary">{claim.publicText}</p>
+        {metadata.consumerSummary ? <p className="research-library-consumer-summary"><strong>쉽게 말하면</strong>{metadata.consumerSummary}</p> : null}
+        {metadata.hopefulTakeaway ? <p className="research-library-hopeful"><strong>내 생활에 연결해 보기</strong>{metadata.hopefulTakeaway}</p> : null}
+        <a className="text-link research-try-link" href="#products">근거를 확인했다면, 가바 1500을 내 루틴으로 경험해 볼지 살펴보세요 →</a>
         <dl className="research-library-preview" aria-label="연구의 핵심 조건">
           {(['population', 'sampleSize', 'duration', 'searchThrough'] as const).map(key => metadata[key] ? <div key={key}>
             <dt>{facts.find(([field]) => field === key)![1]}</dt><dd>{metadata[key]}</dd>

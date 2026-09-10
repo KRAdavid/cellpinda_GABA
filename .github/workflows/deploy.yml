@@ -34,6 +34,8 @@ jobs:
         run: pnpm run sync:data
       - name: Validate active Goal Contract
         run: pnpm run validate:goal
+      - name: Validate consumer research copy
+        run: pnpm run validate:research-copy
       - name: Typecheck
         run: pnpm run typecheck
       - name: Test rules and API boundaries
