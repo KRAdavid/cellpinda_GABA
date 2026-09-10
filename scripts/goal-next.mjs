@@ -28,6 +28,20 @@ for (const task of graph.tasks) {
     if (dependency === task.id) fail(`${task.id} cannot depend on itself`);
   }
 }
+const visiting = new Set();
+const visited = new Set();
+const visit = (id, chain = []) => {
+  if (visiting.has(id)) {
+    const cycleStart = chain.indexOf(id);
+    fail(`dependency cycle: ${[...chain.slice(cycleStart), id].join(' -> ')}`);
+  }
+  if (visited.has(id)) return;
+  visiting.add(id);
+  for (const dependency of byId.get(id).dependencies) visit(dependency, [...chain, id]);
+  visiting.delete(id);
+  visited.add(id);
+};
+for (const id of ids) visit(id);
 const ready = graph.tasks.filter(task => task.state === 'READY' && task.dependencies.every(id => byId.get(id).state === 'DONE')).sort((a, b) => a.priority - b.priority || a.id.localeCompare(b.id));
 const invalidReady = graph.tasks.filter(task => task.state === 'READY' && !task.dependencies.every(id => byId.get(id).state === 'DONE'));
 if (invalidReady.length) fail(`READY tasks have unfinished dependencies: ${invalidReady.map(task => task.id).join(', ')}`);
