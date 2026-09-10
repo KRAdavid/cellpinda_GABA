@@ -12,10 +12,10 @@ const allowedToken = (actual, expected) => {
   const received=Buffer.from(actual); const wanted=Buffer.from(expected);
   return received.length===wanted.length && timingSafeEqual(received,wanted);
 };
-async function readBody(req) {
+async function readBody(req,maxBytes=16384) {
   if (!req.headers['content-type']?.startsWith('application/json')) throw Object.assign(new Error('JSON content type required'),{status:415});
   let total=0; const chunks=[];
-  for await (const chunk of req) { total += chunk.length; if (total>16384) throw Object.assign(new Error('Body too large'),{status:413}); chunks.push(chunk); }
+  for await (const chunk of req) { total += chunk.length; if (total>maxBytes) throw Object.assign(new Error('Body too large'),{status:413}); chunks.push(chunk); }
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { throw Object.assign(new Error('Invalid JSON'),{status:400}); }
 }
 export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
@@ -47,6 +47,10 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
         if (req.method==='GET' && path==='/api/admin/content') return reply(200,{items:store.adminContent()});
         if (req.method==='GET' && path==='/api/admin/history') return reply(200,{items:store.history()});
         if (req.method==='GET' && path==='/api/admin/analytics') return reply(200,store.analytics());
+        if(req.method==='POST' && path==='/api/admin/reviews')return reply(201,store.createReview(await readBody(req,65536)));
+        const reviewMatch=path.match(/^\/api\/admin\/reviews\/(review-[a-f0-9-]+)(\/decision)?$/);
+        if(reviewMatch && req.method==='PATCH' && !reviewMatch[2])return reply(200,store.editReview(reviewMatch[1],await readBody(req,65536)));
+        if(reviewMatch && req.method==='POST' && reviewMatch[2])return reply(200,store.decideReview(reviewMatch[1],await readBody(req)));
         const match=path.match(/^\/api\/admin\/content\/([a-zA-Z0-9-]+)$/);
         if (req.method==='PATCH' && match) return reply(200,store.update(match[1],await readBody(req)));
       }

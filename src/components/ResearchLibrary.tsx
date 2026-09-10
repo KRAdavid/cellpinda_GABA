@@ -116,6 +116,11 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <p className="research-library-kind">{metadata.studyType || claim.topic}</p>
         <h3>{metadata.question || claim.topic}</h3>
         <p className="research-library-summary">{claim.publicText}</p>
+        <dl className="research-library-preview" aria-label="연구의 핵심 조건">
+          {(['population', 'sampleSize', 'duration', 'searchThrough'] as const).map(key => metadata[key] ? <div key={key}>
+            <dt>{facts.find(([field]) => field === key)![1]}</dt><dd>{metadata[key]}</dd>
+          </div> : null)}
+        </dl>
         <p className="research-library-scope">{metadata.productApplicability}</p>
         <details className="research-detail" onToggle={event => {
           if (event.currentTarget.open) onOpen?.(claim.id);

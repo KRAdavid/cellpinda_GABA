@@ -6,12 +6,12 @@ import { handleMembers } from './members.ts';
 declare global { interface Env { ADMIN_TOKEN: string } }
 
 const reply=(status:number,value:unknown)=>new Response(status===204?null:JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
-async function body(request:Request) {
+async function body(request:Request,maxBytes=16384) {
   if(!request.headers.get('content-type')?.startsWith('application/json'))throw failure('JSON content type required',415);
-  if(Number(request.headers.get('content-length'))>16384)throw failure('Body too large',413);
+  if(Number(request.headers.get('content-length'))>maxBytes)throw failure('Body too large',413);
   const reader=request.body?.getReader();if(!reader)throw failure('JSON body required');
   const parts:Uint8Array[]=[];let length=0;
-  try {while(true){const {done,value}=await reader.read();if(done)break;length+=value.byteLength;if(length>16384){await reader.cancel();throw failure('Body too large',413);}parts.push(value);}}finally{reader.releaseLock();}
+  try {while(true){const {done,value}=await reader.read();if(done)break;length+=value.byteLength;if(length>maxBytes){await reader.cancel();throw failure('Body too large',413);}parts.push(value);}}finally{reader.releaseLock();}
   const bytes=new Uint8Array(length);let offset=0;for(const part of parts){bytes.set(part,offset);offset+=part.length;}
   try{return JSON.parse(new TextDecoder().decode(bytes));}catch{throw failure('Invalid JSON');}
 }
@@ -44,6 +44,10 @@ export default {
       if(request.method==='GET' && url.pathname==='/api/admin/content')return reply(200,{items:await store.adminContent()});
       if(request.method==='GET' && url.pathname==='/api/admin/history')return reply(200,{items:await store.history()});
       if(request.method==='GET' && url.pathname==='/api/admin/analytics')return reply(200,await store.analytics());
+      if(request.method==='POST' && url.pathname==='/api/admin/reviews')return reply(201,await store.createReview(await body(request,65536)));
+      const reviewMatch=url.pathname.match(/^\/api\/admin\/reviews\/(review-[a-f0-9-]+)(\/decision)?$/);
+      if(reviewMatch && request.method==='PATCH' && !reviewMatch[2])return reply(200,await store.editReview(reviewMatch[1],await body(request,65536)));
+      if(reviewMatch && request.method==='POST' && reviewMatch[2])return reply(200,await store.decideReview(reviewMatch[1],await body(request)));
       const match=url.pathname.match(/^\/api\/admin\/content\/([a-zA-Z0-9-]+)$/);
       if(request.method==='PATCH' && match)return reply(200,await store.update(match[1],await body(request)));
       return reply(404,{error:'Not found'});

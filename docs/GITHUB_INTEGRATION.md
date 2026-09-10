@@ -45,3 +45,8 @@ GitHub CLI 인증 사용자 KRAdavid 확인 후 별도 비공개 저장소 https
 업로드 소스는 tmp/github-consumer-release의 독립 Git 이력이다. scripts/export-github.mjs가 승인된 공개 claim10개/product2개/review목적지1개만 추출하며, 내부 문서·보류 후기·원래 로컬 Git 이력·비밀 파일은 포함하지 않는다. 업로드 직전 50개 staged 파일에서 실제 운영자 키가 없음을 확인했다. 사본에서 의존성 설치, 테스트28개, production build 통과. 메인 작업 폴더의 원격에 추가해 전체 내부 이력을 실수로 push하지 않는다.
 
 이 저장소는 코드 검토용이며 자동배포는 연결하지 않았다. 후속 변경도 새 공개 소스 사본과 비교해 명시적으로 반영해야 한다. Cloudflare 임시 배포와 별개이며 영구 운영 완료가 아니다.
+
+
+## 후기 운영 소스 갱신
+
+PRIVATE 저장소 KRAdavid/cellpinda-rhythm, codex/consumer-site 원격 HEAD bc118f5e071a091f341c126f24ee855b84732a91 확인. main 로컬 이력을 push하지 않고, 공개 승인 claims10/products2/공식후기링크1만 포함한 새 export를 기존 release checkout에 반영했다. 소스 및 필터된 원장에서 검사34개와 양쪽 타입검사 통과. 실제 고객 후기·권한 원본·내부 문서·비밀키는 포함하지 않았다.

@@ -1,4 +1,5 @@
 import ledger from '../data/content-ledger.json' with { type: 'json' };
+import { reviewMutation, approvalMissing, publicReview, parseReviewDraft, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
 
 type RecordValue = Record<string, unknown>;
 type ContentRow = {id:string;kind:string;data:string;revision:number};
@@ -26,12 +27,29 @@ function metadata(value:unknown) {
 }
 function decode(row:ContentRow):Content {return {...JSON.parse(row.data),id:row.id,kind:row.kind,revision:row.revision};}
 function reviewLink(value:Content) {
-  if(value.id!=='shop-review-destination' || value.originalPublic!==true || !value.publicText || typeof value.sourceUrl!=='string')return false;
+  if(value.id!=='shop-review-destination' || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
   try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && ['cellpinda.co.kr','www.cellpinda.co.kr'].includes(url.hostname) && (url.searchParams.get('product_no')==='39' || /\/39(?:\/|$)/.test(url.pathname));}catch{return false;}
 }
 
 export function createStore(db:D1Database) {
   const all=async()=> (await db.prepare('SELECT * FROM content ORDER BY rowid').all<ContentRow>()).results.map(decode);
+  const mutateReview=async(id:string,request:unknown,kind:'edit'|'decision',products:string[])=>{
+    const input=reviewMutation(request,kind);
+    const row=await db.prepare('SELECT * FROM content WHERE id=?').bind(id).first<ContentRow>();
+    if(!row || row.kind!=='review')throw failure('Review not found',404);
+    const before:Content=JSON.parse(row.data);if(before.reviewType!=='quote')throw failure('Only submitted quote reviews use this workflow');
+    if(row.revision!==input.revision)throw failure('Revision conflict',409);
+    const after={...before};delete after.reviewConfirmation;
+    if(kind==='edit'){after.review=input.review!;after.publicText=input.review!.quote;after.status='hold';}
+    else {after.status=String(input.status);if(input.status==='approved'){const missing=approvalMissing(parseReviewDraft(after.review),input.confirmation!,products);if(missing.length)throw failure(`Review approval missing: ${missing.join(', ')}`);after.reviewConfirmation=input.confirmation;}}
+    const current=JSON.stringify(after);
+    const result=await db.batch([
+      db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) SELECT id,revision+1,?,data,?,? FROM content WHERE id=? AND revision=?').bind(input.reason,current,new Date().toISOString(),id,row.revision),
+      db.prepare('UPDATE content SET data=?,revision=revision+1 WHERE id=? AND revision=?').bind(current,id,row.revision),
+    ]);
+    if(result[1].meta.changes!==1)throw failure('Revision conflict',409);
+    return {...after,kind:'review',revision:row.revision+1};
+  };
   return {
     async initialize(seed: {claims?:Content[];products?:Content[];reviews?:Content[]}=ledger) {
       // Idempotent DDL enables a brand-new temporary D1 binding; no module request state.
@@ -54,7 +72,10 @@ export function createStore(db:D1Database) {
       const claims=items.filter(c=>c.kind==='claim' && c.status==='approved' && c.publicText && sources(c).length).map(c=>({id:c.id,topic:c.topic,publicText:c.publicText,status:c.status,sources:sources(c),limitations:c.limitations || [],revision:c.revision,...(metadata(c.metadata || c.structuredData)?{metadata:metadata(c.metadata || c.structuredData)}:{})}));
       const ids=new Set(claims.map(c=>c.id));
       const products=items.filter(p=>p.kind==='product' && p.status==='approved' && p.sourceIds?.length && p.sourceIds.every(id=>ids.has(id))).map(p=>Object.fromEntries(['id','name','amountMg','servings','totalG','officialUrl','availability','priceDisplay','sourceIds','revision','publicText'].filter(key=>p[key]!==undefined).map(key=>[key,p[key]])));
-      const reviews=items.filter(item=>item.kind==='review' && item.status==='approved' && reviewLink(item)).map(({id,status,publicText,sourceTitle,sourceUrl,limitations})=>({id,status,publicText,sourceTitle,sourceUrl,limitations}));
+      const reviews=items.filter(item=>item.kind==='review').flatMap<RecordValue>(item=>{
+        if(item.reviewType==='quote'){const quote=publicReview(item,products.map(p=>String(p.id)));return quote?[quote]:[];}
+        return item.status==='approved' && reviewLink(item)?[{id:item.id,status:item.status,publicText:REVIEW_DESTINATION_TEXT,sourceTitle:item.sourceTitle,sourceUrl:item.sourceUrl,limitations:item.limitations}]:[];
+      });
       return {claims,products,reviews};
     },
     async update(id:string,patch:unknown) {
@@ -67,8 +88,11 @@ export function createStore(db:D1Database) {
       if(!row)throw failure('Content not found',404);
       if(row.revision!==patch.revision)throw failure('Revision conflict',409);
       const before:Content=JSON.parse(row.data);const after={...before};
+      if(row.kind==='review' && before.reviewType==='quote')throw failure('Use the dedicated review workflow');
+      if(row.kind==='review' && before.id==='shop-review-destination' && typeof patch.publicText==='string' && patch.publicText.trim()!==REVIEW_DESTINATION_TEXT)throw failure('Review destination text is fixed; submit quotations through the review workflow');
       const changed=typeof patch.publicText==='string' && patch.publicText.trim()!==before.publicText;
       if(typeof patch.publicText==='string')after.publicText=patch.publicText.trim();
+      if(row.kind==='review' && before.id==='shop-review-destination')after.publicText=REVIEW_DESTINATION_TEXT;
       after.status=typeof patch.status==='string'?patch.status:(changed?'hold':before.status);
       if(after.status==='approved') {
         if(row.kind==='review' && !reviewLink(after))throw failure('Only the verified review destination may be approved; quote rights not established');
@@ -88,6 +112,14 @@ export function createStore(db:D1Database) {
       return {...after,kind:row.kind,revision};
     },
     async history(){return (await db.prepare('SELECT * FROM audit ORDER BY id DESC LIMIT 500').all<{previous:string|null;current:string}>()).results.map(r=>({...r,previous:r.previous?JSON.parse(r.previous):null,current:JSON.parse(r.current)}));},
+    async createReview(request:unknown){
+      const input=reviewMutation(request,'create'),id=`review-${crypto.randomUUID()}`;
+      const item={id,reviewType:'quote',status:'hold',review:input.review!,publicText:input.review!.quote};
+      await db.batch([db.prepare('INSERT INTO content(id,kind,data,revision) VALUES(?,?,?,1)').bind(id,'review',JSON.stringify(item)),db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,1,?,NULL,?,?)').bind(id,input.reason,JSON.stringify(item),new Date().toISOString())]);
+      return {...item,kind:'review',revision:1};
+    },
+    async editReview(id:string,request:unknown){return mutateReview(id,request,'edit',[]);},
+    async decideReview(id:string,request:unknown){return mutateReview(id,request,'decision',(await this.publicContent()).products.map(p=>String(p.id)));},
     async event(body:unknown) {
       if(!object(body) || Object.keys(body).some(key=>!['eventId','flowId','name','properties'].includes(key)) || typeof body.name!=='string' || !EVENTS.has(body.name) || !uuid(body.eventId))throw failure('Invalid event envelope');
       if(body.flowId!==undefined && !uuid(body.flowId))throw failure('Invalid anonymous flow UUID');

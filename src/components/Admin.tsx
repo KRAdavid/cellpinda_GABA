@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import ReviewEditor from './ReviewEditor';
+import type { QuoteReviewItem, ReviewDraft, ReviewConfirmation } from './ReviewEditor';
 
-type Item = { id: string; topic?: string; name?: string; publicText?: string; status: string; revision: number; sources?: { title: string; url: string | null; page?: number | null; locator?: string }[]; sourceTitle?: string; sourceUrl?: string | null; metadata?: Record<string, string | string[] | number | null>; limitations?: string[]; holdReason?: string | null; reviewedBy?: string; reviewedAt?: string };
+type Item = { id: string; topic?: string; name?: string; publicText?: string; status: string; revision: number; kind?: string; reviewType?: string; review?: ReviewDraft; reviewConfirmation?: ReviewConfirmation; sources?: { title: string; url: string | null; page?: number | null; locator?: string }[]; sourceTitle?: string; sourceUrl?: string | null; metadata?: Record<string, string | string[] | number | null>; limitations?: string[]; holdReason?: string | null; reviewedBy?: string; reviewedAt?: string };
 type Funnel = { id: string; from: string; to: string; denominator: number; numerator: number; rate: number | null; denominatorDefinition: string; numeratorDefinition: string };
 type Analytics = { counts: { name: string; count: number }[]; funnels?: Funnel[]; window?: { kind: string; from: string | null; to: string; ordering: string; flowScope: string }; coverage?: { eventsWithoutFlow: number; distinctFlows: number } };
 const eventLabels: Record<string, string> = { landing_view: '첫 화면 열람', rhythm_check_started: '리듬 체크 시작', rhythm_check_completed: '리듬 체크 완료', result_viewed: '결과 열람', gaba_story_viewed: 'GABA 이야기 열람', evidence_opened: '근거 상세 열기', review_opened: '후기 원문 이동', share_image_generated: '공유 이미지 생성', share_requested: '공유 요청', share_cancelled: '공유 취소', share_link_copied: '공유 링크 복사', share_image_downloaded: '공유 이미지 다운로드 요청', shared_link_landed: '공유 링크로 진입', product_comparison_viewed: '제품 비교 열람', purchase_outbound_clicked: '공식몰 구매 링크 이동' };
@@ -12,10 +14,16 @@ const formatDate = (value?: string | null) => value ? new Date(value).toLocaleSt
 export default function Admin() {
  const [token, setToken] = useState(''), [items, setItems] = useState<Item[]>([]), [selected, setSelected] = useState<Item | null>(null), [text, setText] = useState(''), [reason, setReason] = useState(''), [error, setError] = useState(''), [busy, setBusy] = useState(false), [history, setHistory] = useState<{ id: number; content_id: string; reason: string; created_at: string }[]>([]), [analytics, setAnalytics] = useState<Analytics>({ counts: [] }), [loaded, setLoaded] = useState(false);
  const isLocal = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
+ const [creatingReview, setCreatingReview] = useState(false), [reviewDirty, setReviewDirty] = useState(false), [reviewSelection, setReviewSelection] = useState(0);
+ function selectItem(item: Item | null, create = false) {
+  if (reviewDirty && !window.confirm('저장하지 않은 후기 수정이 있습니다. 이 수정을 버리고 다른 항목을 열까요?')) return;
+  setCreatingReview(create); setSelected(item); setText(item?.publicText || ''); setReason(''); setReviewDirty(false); setReviewSelection(value => value + 1);
+ }
+ async function reviewSaved(item: QuoteReviewItem) { setSelected(item); setCreatingReview(false); setReviewDirty(false); setReviewSelection(value => value + 1); await load(); }
  async function api(path: string, options: RequestInit = {}) {
   const response = await fetch('/api/admin/' + path, { ...options, headers: { 'Content-Type': 'application/json', 'x-admin-token': token } });
   const result = await response.json();
-  if (!response.ok) throw Error(result.error || '요청을 처리하지 못했습니다.');
+  if (!response.ok) throw Object.assign(new Error(result.error || '요청을 처리하지 못했습니다.'), { status: response.status });
   return result;
  }
  async function load() {
@@ -36,9 +44,10 @@ export default function Admin() {
   <main><h1>콘텐츠 검토실</h1><p>근거와 문구를 확인하고 공개 상태를 관리합니다.</p>
    {!loaded ? <form onSubmit={e => { e.preventDefault(); void load(); }} className="admin-login"><label>운영자 접근 키<input type="password" value={token} autoComplete="off" onChange={e => setToken(e.target.value)} required /></label><p>운영 담당자에게 전달받은 접근 키를 입력하세요.</p>{isLocal ? <p className="note">로컬 서버를 사용하는 경우 서버가 생성한 비밀 키 파일에서 접근 키를 확인할 수 있습니다.</p> : null}<button className="button" disabled={busy}>검토실 열기</button></form> : <>
     <div id="content" className="admin-grid">
-     <div className="admin-list">{items.map(item => <button key={item.id} className={selected?.id === item.id ? 'selected' : ''} onClick={() => { setSelected(item); setText(item.publicText || ''); setReason(''); }}><strong>{item.topic || item.name || item.id}</strong><span>{item.status === 'approved' ? '공개' : '보류'} · v{item.revision}</span><p>{item.publicText || '공개 문안 미확정'}</p></button>)}</div>
-     <section className="admin-edit">{selected ? <>
-      <h2>문구 상세</h2><label>공개 문구<textarea rows={6} value={text} onChange={e => setText(e.target.value)} /></label>
+     <div className="admin-list"><button type="button" className="button outline" disabled={busy} onClick={() => selectItem(null, true)}>새 인용 후기 등록</button>{items.map(item => <button key={item.id} className={selected?.id === item.id ? 'selected' : ''} onClick={() => selectItem(item)}><strong>{item.reviewType === 'quote' ? `인용 후기 · ${item.review?.authorLabel || '작성자 미확인'}` : item.topic || item.name || item.id}</strong><span>{item.status === 'approved' ? '공개' : '보류'} · v{item.revision}</span><p>{item.publicText || '공개 문안 미확정'}</p></button>)}</div>
+     <section className="admin-edit">{creatingReview || selected?.reviewType === 'quote' ? <ReviewEditor key={`${selected?.id || 'new'}:${reviewSelection}:${selected?.revision || 0}`} item={creatingReview ? null : selected as QuoteReviewItem} api={api} onSaved={reviewSaved} onDirtyChange={setReviewDirty} onRefresh={load} /> : selected ? <>
+      <h2>문구 상세</h2><label>공개 문구<textarea rows={6} value={text} readOnly={selected.id === 'shop-review-destination'} onChange={e => setText(e.target.value)} /></label>
+      {selected.id === 'shop-review-destination' ? <p className="note">공식몰 후기 원문으로 이동하는 고정 안내입니다. 문구는 수정하지 않고 공개·보류 상태만 관리합니다. 실제 인용 후기는 ‘새 인용 후기 등록’에서 원문과 게시 권한을 확인하여 등록하세요.</p> : null}
       <h3>근거 자료 · 읽기 전용</h3>
       {selected.sources?.map((source, index) => <div key={index}><p>{source.url ? <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a> : source.title}</p>{source.page || source.locator ? <p className="note">{source.page ? `${source.page}쪽 · ` : ''}{source.locator}</p> : null}</div>)}
       {selected.sourceTitle ? <p>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank" rel="noreferrer">{selected.sourceTitle} ↗</a> : selected.sourceTitle}</p> : null}

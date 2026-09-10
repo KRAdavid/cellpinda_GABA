@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import './ReviewExperience.css';
 
 export type PublicReview = {
@@ -7,6 +8,13 @@ export type PublicReview = {
   sourceTitle?: string;
   sourceUrl: string | null;
   limitations?: string[];
+  reviewType?: 'quote';
+  productId?: string;
+  authorLabel?: string;
+  authoredAt?: string;
+  usagePeriod?: string;
+  context?: string;
+  disclosure?: string;
 };
 
 type Props = { reviews: PublicReview[]; onOpen?: (productId: string) => void };
@@ -18,7 +26,7 @@ const readingQuestions = [
 ];
 
 function reviewDestination(review: PublicReview) {
-  // Only the audited destination record is a link. No consent-backed quote schema exists yet.
+  // The official destination remains available independently of quoted reviews.
   if (review.status !== 'approved' || review.id !== 'shop-review-destination' || !review.publicText || !review.sourceUrl) return null;
   try {
     const url = new URL(review.sourceUrl);
@@ -30,7 +38,19 @@ function reviewDestination(review: PublicReview) {
   } catch { return null; }
 }
 
+const productNames:Record<string,string>={gaba750:'가바 750',gaba1500:'가바 1500'};
+function quoteSource(review:PublicReview) {
+  if(review.status!=='approved'||review.reviewType!=='quote'||!review.productId||!productNames[review.productId])return null;
+  if(![review.publicText,review.authorLabel,review.authoredAt,review.context,review.disclosure,review.sourceTitle].every(value=>typeof value==='string'&&value.trim()))return null;
+  try {const url=new URL(review.sourceUrl??'');return url.protocol==='https:'&&!url.username&&!url.password?url.href:null;}catch{return null;}
+}
+
 export default function ReviewExperience({ reviews, onOpen }: Props) {
+  const [product,setProduct]=useState('');
+  const quotes=reviews.flatMap(review=>{const url=quoteSource(review);return url?[{review,url}]:[];});
+  const availableProducts=[...new Set(quotes.map(({review})=>review.productId!))];
+  const activeProduct=availableProducts.includes(product)?product:'';
+  const visibleQuotes=quotes.filter(({review})=>!activeProduct||review.productId===activeProduct);
   const destinations = reviews.flatMap(review => {
     const destination = reviewDestination(review);
     return destination ? [{ review, ...destination }] : [];
@@ -38,9 +58,21 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
   return <section id="reviews" className="section sage review-experience" aria-labelledby="review-heading">
     <div className="wrap">
       <div className="section-head">
-        <div><p className="chapter">사용 경험</p><h2 id="review-heading">먼저 선택한 사람들의<br />이야기도 들어보세요.</h2></div>
+        <div><p className="chapter">사용 경험</p><h2 id="review-heading">{quotes.length?<>먼저 선택한 사람들의<br/>사용 이야기를 읽어보세요.</>:<>가바 750 사용 경험을,<br />공식몰 원문에서.</>}</h2></div>
         <p>사용 경험은 구체적으로 살펴볼수록 도움이 됩니다.<br />제품 정보와 나란히 놓고, 내 선택을 확인해 보세요.</p>
       </div>
+      {quotes.length>0&&<div className="review-quotes">
+        <p>이 사이트에 소개한 후기입니다. 전체 구매자의 경험이나 만족도를 대표하지 않습니다.</p>
+        <div className="review-quote-controls"><label htmlFor="review-product">사용 제품<select id="review-product" value={activeProduct} onChange={event=>setProduct(event.target.value)}><option value="">모든 제품</option>{availableProducts.map(id=><option value={id} key={id}>{productNames[id]}</option>)}</select></label><p role="status">소개된 {quotes.length}건 중 {visibleQuotes.length}건</p></div>
+        <div className="review-quote-list">{visibleQuotes.map(({review,url})=><article className="review-quote-card" key={review.id}>
+          <div className="review-quote-byline"><h3>{productNames[review.productId!]}</h3><span>{review.authorLabel}</span></div>
+          <dl><div><dt>작성일</dt><dd><time dateTime={review.authoredAt}>{review.authoredAt}</time></dd></div><div><dt>사용 기간</dt><dd>{review.usagePeriod||'원문에서 확인되지 않음'}</dd></div></dl>
+          <p className="review-quote-disclosure"><strong>제품 제공·대가 관계</strong><br/>{review.disclosure}</p>
+          <p className="review-quote-context"><strong>이 경험의 맥락</strong><br/>{review.context}</p>
+          <p className="review-quote-label">원문 인용·발췌</p><blockquote>{review.publicText}</blockquote>
+          <div className="review-quote-links"><a href={url} target="_blank" rel="noopener noreferrer" onClick={()=>onOpen?.(review.productId!)}>{review.sourceTitle} 원문 ↗</a><a href={`#product-${review.productId}`}>사용 제품 구성 보기 →</a></div>
+        </article>)}</div>
+      </div>}
       <div className="review-experience-layout">
         <div className="review-experience-destination">
           <span className="review-experience-label">공식몰에 남겨진 경험</span>

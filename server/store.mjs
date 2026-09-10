@@ -1,6 +1,8 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
+import { randomUUID } from 'node:crypto';
+import { reviewMutation, approvalMissing, publicReview, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
 
 export const EVENT_NAMES = new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
 export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin']);
@@ -9,7 +11,7 @@ const failure = (message, status = 400) => Object.assign(new Error(message), { s
 const isUuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 const METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','result','limitations','productApplicability','question','searchThrough','studyCount']);
 function reviewLink(value) {
-  if(value.id!=='shop-review-destination' || value.originalPublic!==true || !value.publicText || typeof value.sourceUrl!=='string')return false;
+  if(value.id!=='shop-review-destination' || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
   try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && ['cellpinda.co.kr','www.cellpinda.co.kr'].includes(url.hostname) && (url.searchParams.get('product_no')==='39' || /\/39(?:\/|$)/.test(url.pathname));}catch{return false;}
 }
 function publicMetadata(value) {
@@ -46,6 +48,21 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
     } catch (error) { db.exec('ROLLBACK'); db.close(); throw error; }
   }
   const rows = () => db.prepare('SELECT * FROM content ORDER BY rowid').all().map(row => ({...JSON.parse(row.data),kind:row.kind,revision:row.revision}));
+  const mutateReview=(id,request,kind,products)=>{
+    const input=reviewMutation(request,kind);db.exec('BEGIN IMMEDIATE');
+    try{
+      const row=db.prepare('SELECT * FROM content WHERE id=?').get(id);
+      if(!row || row.kind!=='review')throw failure('Review not found',404);
+      const before=JSON.parse(row.data);if(before.reviewType!=='quote')throw failure('Only submitted quote reviews use this workflow',400);
+      if(row.revision!==input.revision)throw failure('Revision conflict',409);
+      const after={...before};delete after.reviewConfirmation;
+      if(kind==='edit'){after.review=input.review;after.publicText=input.review.quote;after.status='hold';}
+      else{after.status=input.status;if(input.status==='approved'){const missing=approvalMissing(after.review,input.confirmation,products);if(missing.length)throw failure(`Review approval missing: ${missing.join(', ')}`);after.reviewConfirmation=input.confirmation;}}
+      const revision=row.revision+1;
+      db.prepare('UPDATE content SET data=?,revision=? WHERE id=?').run(JSON.stringify(after),revision,id);
+      db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,?,?,?,?,?)').run(id,revision,input.reason,row.data,JSON.stringify(after),new Date().toISOString());db.exec('COMMIT');return {...after,kind:'review',revision};
+    }catch(error){db.exec('ROLLBACK');throw error;}
+  };
   return {
     close: () => db.close(),
     adminContent: rows,
@@ -54,7 +71,7 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       const claims = all.filter(c => c.kind === 'claim' && c.status === 'approved' && c.publicText && publicSources(c).length).map(c => ({id:c.id,topic:c.topic,publicText:c.publicText,status:c.status,sources:publicSources(c),limitations:c.limitations || [],revision:c.revision,...(publicMetadata(c.metadata || c.structuredData) ? {metadata:publicMetadata(c.metadata || c.structuredData)} : {})}));
       const approvedIds = new Set(claims.map(c => c.id));
       const products = all.filter(p => p.kind === 'product' && p.status === 'approved' && p.sourceIds?.length && p.sourceIds.every(id => approvedIds.has(id))).map(({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,publicText}) => ({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,...(publicText ? {publicText} : {})}));
-      const reviews=all.filter(item=>item.kind==='review' && item.status==='approved' && reviewLink(item)).map(({id,status,publicText,sourceTitle,sourceUrl,limitations})=>({id,status,publicText,sourceTitle,sourceUrl,limitations}));
+      const reviews=all.filter(item=>item.kind==='review').flatMap(item=>{if(item.reviewType==='quote'){const quote=publicReview(item,products.map(p=>p.id));return quote?[quote]:[];}return item.status==='approved' && reviewLink(item)?[{id:item.id,status:item.status,publicText:REVIEW_DESTINATION_TEXT,sourceTitle:item.sourceTitle,sourceUrl:item.sourceUrl,limitations:item.limitations}]:[];});
       return {claims,products,reviews};
     },
     update(id, patch) {
@@ -70,9 +87,12 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
         if (!row) throw failure('Content not found',404);
         if (row.revision !== patch.revision) throw failure('Revision conflict',409);
         const before = JSON.parse(row.data);
+        if(row.kind==='review' && before.reviewType==='quote')throw failure('Use the dedicated review workflow');
+        if(row.kind==='review' && before.id==='shop-review-destination' && patch.publicText!==undefined && patch.publicText.trim()!==REVIEW_DESTINATION_TEXT)throw failure('Review destination text is fixed; submit quotations through the review workflow');
         const after = {...before};
         const changed = patch.publicText !== undefined && patch.publicText !== before.publicText;
         if (patch.publicText !== undefined) after.publicText = patch.publicText.trim();
+        if(row.kind==='review' && before.id==='shop-review-destination')after.publicText=REVIEW_DESTINATION_TEXT;
         after.status = patch.status ?? (changed ? 'hold' : before.status);
         if (after.status === 'approved') {
           if(row.kind==='review' && !reviewLink(after))throw failure('Only the verified review destination may be approved; quote rights not established');
@@ -87,6 +107,13 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       } catch (error) { db.exec('ROLLBACK'); throw error; }
     },
     history: () => db.prepare('SELECT * FROM audit ORDER BY id DESC LIMIT 500').all().map(r => ({...r,previous:r.previous ? JSON.parse(r.previous) : null,current:JSON.parse(r.current)})),
+    createReview(request){
+      const input=reviewMutation(request,'create'),id=`review-${randomUUID()}`;
+      const item={id,reviewType:'quote',status:'hold',review:input.review,publicText:input.review.quote};db.exec('BEGIN IMMEDIATE');
+      try{db.prepare('INSERT INTO content(id,kind,data,revision) VALUES(?,?,?,1)').run(id,'review',JSON.stringify(item));db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,1,?,NULL,?,?)').run(id,input.reason,JSON.stringify(item),new Date().toISOString());db.exec('COMMIT');return {...item,kind:'review',revision:1};}catch(error){db.exec('ROLLBACK');throw error;}
+    },
+    editReview(id,request){return mutateReview(id,request,'edit',[]);},
+    decideReview(id,request){return mutateReview(id,request,'decision',this.publicContent().products.map(p=>p.id));},
     event(body) {
       if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).some(k => !['eventId','flowId','name','properties'].includes(k))) throw failure('Invalid event envelope');
       if (!EVENT_NAMES.has(body.name) || !isUuid(body.eventId)) throw failure('Invalid event name or UUID');

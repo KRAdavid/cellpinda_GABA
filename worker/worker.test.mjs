@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto';
 import worker from './index.ts';
 import { createStore } from './store.ts';
 import { createStore as createNodeStore } from '../server/store.mjs';
+import {parseReviewDraft,REVIEW_DESTINATION_TEXT} from '../src/domain/reviews.ts';
 
 class Statement {
   constructor(db,sql,args=[]){this.db=db;this.sql=sql;this.args=args;}
@@ -87,8 +88,53 @@ test('Worker and Node expose only approved official review destination, never pr
     await cloud.initialize(reviewedSeed);
     for(const store of [cloud,local]){
       const data=await store.publicContent();assert.equal(data.reviews.length,1);assert.equal(data.reviews[0].id,'shop-review-destination');assert.ok(!JSON.stringify(data).includes('PRIVATE'));assert.ok(!JSON.stringify(data).includes('UNVERIFIED'));
+      assert.equal(data.reviews[0].publicText,REVIEW_DESTINATION_TEXT);
+      await assert.rejects(async()=>store.update('shop-review-destination',{revision:1,status:'approved',publicText:'UNVERIFIED QUOTATION',reason:'Attempt bypass'}),/destination text is fixed/);
       await assert.rejects(async()=>store.update('private-review',{revision:1,status:'approved',reason:'Without permissions'}),/quote rights/);
       await store.update('shop-review-destination',{revision:1,status:'hold',reason:'Withdraw destination'});assert.equal((await store.publicContent()).reviews.length,0);
+      await store.update('shop-review-destination',{revision:2,status:'approved',publicText:REVIEW_DESTINATION_TEXT,reason:'Restore fixed destination'});assert.equal((await store.publicContent()).reviews[0].publicText,REVIEW_DESTINATION_TEXT);
     }
   }finally{db.close();local.close();}
+});
+
+test('Submitted quote workflow preserves revisions, resets confirmation, gates public output and blocks generic bypass',async()=>{
+  const db=new MockD1(),cloud=createStore(db),local=createNodeStore({dbPath:':memory:',seed});
+  const review=parseReviewDraft({productId:'gaba750',authorLabel:'가상 테스트 작성자',sourceTitle:'테스트 출처',sourceUrl:'https://example.com/review-fixture',authoredAt:'2020-01-01',usagePeriod:'테스트 기간',quote:'가상 테스트 전용 후기',context:'테스트 맥락',disclosure:'테스트 제공관계',rightsEvidence:'PRIVATE RIGHTS',rightsScope:'PRIVATE SCOPE'});
+  const confirmation={rightsConfirmed:true,contextConfirmed:true,disclosureConfirmed:true,publicationConfirmed:true,reviewer:'PRIVATE REVIEWER',reviewedAt:'2020-01-02',editorialNote:'PRIVATE NOTE'};
+  try{
+    await cloud.initialize(seed);
+    for(const store of [cloud,local]){
+      const created=await store.createReview({review,reason:'Create test fixture'});assert.equal(created.status,'hold');assert.equal(created.revision,1);
+      assert.equal((await store.publicContent()).reviews.some(r=>r.id===created.id),false);
+      await assert.rejects(async()=>store.update(created.id,{publicText:'bypass',status:'approved',revision:1,reason:'bypass'}),/dedicated review workflow/);
+      await assert.rejects(async()=>store.decideReview(created.id,{status:'approved',revision:1,reason:'Missing confirmation'}),/confirmation/);
+      const approved=await store.decideReview(created.id,{status:'approved',revision:1,reason:'Verified fixture',confirmation});assert.equal(approved.revision,2);
+      let output=(await store.publicContent()).reviews.find(r=>r.id===created.id);assert.equal(output.reviewType,'quote');assert.ok(!JSON.stringify(output).includes('PRIVATE'));assert.equal(output.publicText,review.quote);
+      await store.update('source',{revision:1,status:'hold',reason:'Product source withdrawn in test'});assert.equal((await store.publicContent()).reviews.some(r=>r.id===created.id),false);
+      await store.update('source',{revision:2,status:'approved',reason:'Product source restored in test'});assert.equal((await store.publicContent()).reviews.some(r=>r.id===created.id),true);
+      await assert.rejects(async()=>store.editReview(created.id,{review,revision:1,reason:'Stale'}),/Revision conflict/);
+      const edited=await store.editReview(created.id,{review:{...review,quote:'Revised test fixture'},revision:2,reason:'Changed quote'});assert.equal(edited.status,'hold');assert.equal(edited.reviewConfirmation,undefined);
+      await store.decideReview(created.id,{status:'approved',revision:3,reason:'Rechecked fixture',confirmation});
+      const held=await store.decideReview(created.id,{status:'hold',revision:4,reason:'Withdraw fixture'});assert.equal(held.reviewConfirmation,undefined);assert.equal((await store.publicContent()).reviews.some(r=>r.id===created.id),false);
+      assert.equal((await store.history()).filter(row=>row.content_id===created.id).length,5);
+      const expired=await store.createReview({review:{...review,rightsExpiresAt:'2020-01-03'},reason:'Expired fixture'});
+      await assert.rejects(async()=>store.decideReview(expired.id,{status:'approved',revision:1,reason:'Expired test',confirmation}),/rightsExpired/);
+    }
+    const item=await cloud.createReview({review,reason:'Concurrent fixture'});
+    const edits=await Promise.allSettled([cloud.editReview(item.id,{review,revision:1,reason:'Editor A'}),cloud.editReview(item.id,{review,revision:1,reason:'Editor B'})]);
+    assert.equal(edits.filter(e=>e.status==='fulfilled').length,1);assert.equal(edits.filter(e=>e.status==='rejected' && e.reason.status===409).length,1);
+    assert.equal((await cloud.history()).filter(row=>row.content_id===item.id).length,2);
+  }finally{db.close();local.close();}
+});
+
+test('Worker review endpoints need admin authentication and permit bounded Korean drafts above 16 KiB only on draft routes',async()=>{
+  const DB=new MockD1(),token='b'.repeat(64),env={DB,ADMIN_TOKEN:token,RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async()=>new Response('asset')}};
+  const payload={review:{quote:'가'.repeat(3000),context:'나'.repeat(2000),rightsEvidence:'다'.repeat(2000)},reason:'Large synthetic test draft'};
+  const request=(path,body,authorized=true)=>worker.fetch(new Request(`https://site.example${path}`,{method:'POST',headers:{'content-type':'application/json',...(authorized?{'x-admin-token':token}:{})},body:JSON.stringify(body)}),env);
+  try{
+    assert.equal((await request('/api/admin/reviews',payload,false)).status,401);
+    assert.equal((await request('/api/admin/reviews',payload)).status,201);
+    assert.equal((await request('/api/events',payload)).status,413);
+    assert.equal((await request('/api/admin/reviews',{...payload,padding:'x'.repeat(66000)})).status,413);
+  }finally{DB.close();}
 });
