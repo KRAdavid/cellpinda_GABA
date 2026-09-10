@@ -91,6 +91,7 @@ test('approval report distinguishes completed and pending work', () => {
   const taskDecision = buildTaskDecision(plan.contract, verified.tasks.find(task => task.id === 'G1')!, '2026-09-10T10:01:00.000Z');
   const report = buildMvpApprovalReport(plan.contract, verified.tasks, [...after.events, ...verified.events], undefined, '2026-09-10T10:00:00.000Z', [contractDecision, taskDecision]);
   assert.equal(report.sandboxOnly, true);
+  assert.equal(report.recommendation, 'revise');
   assert.equal(report.verificationStatus, 'sandbox_simulation_only');
   assert.equal(report.verificationRecords.G1?.mode, 'sandbox_simulation');
   assert.equal(report.verificationRecords.G1?.verifier, '품질감사관');

@@ -402,6 +402,16 @@ export function startMvpSession(input: string, now = new Date().toISOString()): 
 export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonly MvpTask[], events: readonly SandboxAuditEvent[], approval?: ApprovalRequest, now = new Date().toISOString(), decisions: readonly MvpDecisionRecord[] = []): MvpApprovalReport {
   const completedTasks = tasks.filter(task => task.state === 'DONE').map(task => task.id);
   const pendingTasks = tasks.filter(task => task.state !== 'DONE').map(task => task.id);
+  const hasSandboxOnlyVerification = tasks.some(task => task.verification?.mode === 'sandbox_simulation');
+  // A sandbox verification record proves that the state transition and its
+  // evidence bundle were exercised. It does not prove that the public result
+  // was independently checked in production, so a fully simulated run must
+  // remain a revision recommendation until real evidence is attached.
+  const recommendation = approval
+    ? 'blocked'
+    : pendingTasks.length || hasSandboxOnlyVerification
+      ? 'revise'
+      : 'approve';
   return {
     reportId: `REPORT-${contract.goalId}-${now.replace(/\D/g, '').slice(0, 14)}`,
     generatedAt: now,
@@ -415,7 +425,7 @@ export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonl
       constraints: [...contract.constraints],
       stopConditions: [...contract.stopConditions],
     },
-    recommendation: approval ? 'blocked' : pendingTasks.length ? 'revise' : 'approve',
+    recommendation,
     completedTasks,
     pendingTasks,
     auditEvents: [...events],

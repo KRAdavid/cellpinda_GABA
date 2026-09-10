@@ -44,7 +44,7 @@ events = [...events, ...final.events];
 decisions = [...decisions, buildTaskDecision(plan.contract, tasks.find(task => task.id === 'P1'), timestamps[clock++])];
 
 const report = buildMvpApprovalReport(plan.contract, tasks, events, undefined, timestamps[clock++], decisions);
-assert.equal(report.recommendation, 'approve');
+assert.equal(report.recommendation, 'revise');
 assert.deepEqual(report.completedTasks, ['G1', 'E1', 'E2', 'C1', 'Q1', 'P1']);
 assert.equal(report.pendingTasks.length, 0);
 assert.equal(report.sandboxOnly, true);
