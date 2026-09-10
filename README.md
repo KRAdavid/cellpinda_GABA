@@ -66,6 +66,7 @@ pnpm run build
 pnpm run goal:next
 pnpm run tf:pulse
 pnpm run validate:tf-pulse
+pnpm run audit:goal
 pnpm run audit:orders
 pnpm run preflight:deploy
 ```

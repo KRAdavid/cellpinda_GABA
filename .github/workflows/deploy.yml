@@ -44,6 +44,8 @@ jobs:
         run: pnpm run build
       - name: Check deployment readiness
         run: pnpm run preflight:deploy
+      - name: Audit active Goal Contract and gates
+        run: node scripts/audit-goal.mjs --json | tee goal-audit.json
       - name: Build GitHub Pages bundle
         env:
           VITE_BASE_PATH: /cellpinda_GABA/
@@ -61,6 +63,7 @@ jobs:
           path: |
             dist/
             worker-build/
+            goal-audit.json
           if-no-files-found: error
           retention-days: 7
       - name: Upload GitHub Pages artifact
