@@ -41,6 +41,16 @@ if (operationsQueue.goalId !== 'GL-2026-CELL-GABA-001' || operationsQueue.status
 if (!operationsQueue.pulse || !/^\d{4}-\d{2}-\d{2}T/.test(operationsQueue.pulse.generatedAt) || !/^[a-f0-9]{64}$/.test(operationsQueue.pulse.snapshotHash) || typeof operationsQueue.pulse.requiresHumanDecision !== 'boolean' || operationsQueue.pulse.activeTasks !== taskGraph.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length || operationsQueue.pulse.inputGates !== taskGraph.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length) fail('operations queue pulse summary is missing or out of sync');
 if (publicPulse.mode !== 'public_tf_pulse' || publicPulse.goalId !== operationsQueue.goalId || publicPulse.goalStatus !== operationsQueue.status || publicPulse.generatedAt !== operationsQueue.pulse.generatedAt || publicPulse.snapshotHash !== operationsQueue.pulse.snapshotHash || typeof publicPulse.requiresHumanDecision !== 'boolean' || !Array.isArray(publicPulse.meetingAgenda) || !Array.isArray(publicPulse.inputGates)) fail('public TF pulse packet is missing or out of sync');
 if (publicPulse.inputGates.length !== operationsQueue.pulse.inputGates || publicPulse.meetingAgenda.length !== operationsQueue.pulse.activeTasks) fail('public TF pulse packet counts do not match the operations queue');
+const requireExactKeys = (value, expected, label) => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) fail(`${label} must be an object`);
+  const actual = Object.keys(value).sort();
+  const allowed = [...expected].sort();
+  if (JSON.stringify(actual) !== JSON.stringify(allowed)) fail(`${label} contains an unexpected or missing field`);
+};
+for (const [index, gate] of publicPulse.inputGates.entries()) requireExactKeys(gate, ['taskId', 'state', 'chair', 'requiredInputs', 'nextAction'], `public pulse input gate ${index}`);
+for (const [index, agenda] of publicPulse.meetingAgenda.entries()) requireExactKeys(agenda, ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'requiredInputs', 'nextAction', 'mode'], `public pulse meeting agenda ${index}`);
+if (!publicPulse.counts || typeof publicPulse.counts !== 'object' || Object.values(publicPulse.counts).reduce((sum, count) => sum + count, 0) !== taskGraph.tasks.length) fail('public TF pulse state counts do not cover the task graph');
+for (const state of taskGraph.stateMachine) if (publicPulse.counts[state] !== taskGraph.tasks.filter(task => task.state === state).length) fail(`public TF pulse count is out of sync for ${state}`);
 if (!Array.isArray(operationsQueue.workstreams) || operationsQueue.workstreams.length !== 5) fail('operations queue must expose five active workstreams');
 if (!Array.isArray(operationsQueue.tasks) || operationsQueue.tasks.length !== taskGraph.tasks.length) fail('operations queue must expose the current task graph');
 const queueIds = new Set();

@@ -41,6 +41,14 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicPulse.snapshotHash, queue.pulse.snapshotHash, 'live public TF pulse packet hash must match the queue');
     assert.equal(publicPulse.meetingAgenda.length, queue.pulse.activeTasks, 'live public TF pulse agenda count must match the queue');
     assert.equal(publicPulse.inputGates.length, queue.pulse.inputGates, 'live public TF pulse gate count must match the queue');
+    const publicPulseKeys = {
+      inputGate: ['taskId', 'state', 'chair', 'requiredInputs', 'nextAction'],
+      meetingAgenda: ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'requiredInputs', 'nextAction', 'mode'],
+    };
+    for (const gate of publicPulse.inputGates) assert.deepEqual(Object.keys(gate).sort(), [...publicPulseKeys.inputGate].sort(), 'live public TF pulse input gate contains an unexpected field');
+    for (const agenda of publicPulse.meetingAgenda) assert.deepEqual(Object.keys(agenda).sort(), [...publicPulseKeys.meetingAgenda].sort(), 'live public TF pulse agenda contains an unexpected field');
+    assert.ok(publicPulse.counts && Object.values(publicPulse.counts).reduce((sum, count) => sum + count, 0) === queue.tasks.length, 'live public TF pulse counts must cover the queue');
+    for (const state of ['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED']) assert.equal(publicPulse.counts[state], queue.tasks.filter(task => task.state === state).length, `live public TF pulse count mismatch for ${state}`);
     const queueIds = new Set(queue.tasks.map(task => task.id));
     assert.equal(queueIds.size, queue.tasks.length, 'live operations queue contains duplicate task ids');
     for (const task of queue.tasks) {
