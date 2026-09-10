@@ -16,9 +16,9 @@ const taskById = new Map((graph.tasks || []).map(task => [task.id, task]));
 const checks = [];
 const check = (id, status, detail, evidence, blockers = []) => checks.push({id, status, detail, evidence, blockers});
 
-function command(script) {
-  const result = spawnSync(process.execPath, [resolve(root, script)], {encoding: 'utf8'});
-  return {ok: result.status === 0, error: result.stderr?.trim() || `${script} returned ${result.status}`};
+function command(script, args = []) {
+  const result = spawnSync(process.execPath, [resolve(root, script), ...args], {encoding: 'utf8'});
+  return {ok: result.status === 0, output: result.stdout?.trim() || '', error: result.stderr?.trim() || `${script} returned ${result.status}`};
 }
 
 function commandCheck(id, script, evidence) {
@@ -33,6 +33,11 @@ const researchOk = commandCheck('research-copy', 'scripts/validate-research-copy
 const publicOk = commandCheck('public-export', 'scripts/validate-public-export.mjs', ['scripts/validate-public-export.mjs']);
 const opsOk = commandCheck('sandbox-mvp', 'scripts/validate-ops-mvp.mjs', ['src/domain/goal-mvp.ts', 'src/components/OperationsMvp.tsx']);
 const pulseOk = commandCheck('tf-pulse', 'scripts/validate-tf-pulse.mjs', ['data/tf-role-registry.json', 'data/tf-pulse-heartbeat.json']);
+const preflightResult = command('scripts/check-deploy-readiness.mjs');
+let preflight;
+try { preflight = JSON.parse(preflightResult.output || ''); } catch { preflight = undefined; }
+const deploymentReady = preflightResult.ok && preflight?.ready === true;
+check('deployment-readiness', deploymentReady ? 'MET' : 'WAITING', deploymentReady ? '정적·Worker 배포 필수 설정과 산출물 준비됨' : '정적 Pages는 가능하지만 Worker 운영 준비 조건이 남아 있음', ['scripts/check-deploy-readiness.mjs', 'wrangler.jsonc'], deploymentReady ? [] : (preflight?.missingSecrets || ['배포 준비도 JSON 확인']));
 
 const roleCorpus = [
   ...(graph.tasks || []).flatMap(task => [task.lead, task.verifier]),
@@ -59,7 +64,7 @@ const requiredGates = [
 for (const [id, label] of requiredGates) {
   const task = taskById.get(id);
   const state = task?.state || 'MISSING';
-  const status = state === 'DONE' ? 'MET' : state === 'VERIFYING' ? 'VERIFYING' : state === 'WAITING' ? 'WAITING' : 'INVALID';
+  const status = id === 'C2' && state === 'DONE' && !deploymentReady ? 'INVALID' : state === 'DONE' ? 'MET' : state === 'VERIFYING' ? 'VERIFYING' : state === 'WAITING' ? 'WAITING' : 'INVALID';
   check(`gate-${id.toLowerCase()}`, status, `${label} · ${state}`, ['data/task-graph.json', ...(task?.evidence || [])], status === 'INVALID' ? [`${id} 상태가 허용된 운영 상태가 아님`] : (state === 'DONE' ? [] : (task?.requiredInputs || [])));
 }
 
