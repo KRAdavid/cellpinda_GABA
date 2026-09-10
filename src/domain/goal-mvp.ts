@@ -184,7 +184,9 @@ export function buildTaskDecision(contract: MvpGoalContract, task: MvpTask, now 
   const decision = task.state === 'WAITING'
     ? '책임자 승인 전까지 외부 약속 단계 실행을 멈춘다.'
     : task.state === 'DONE'
-      ? '독립 검증자가 수락 기준과 증거를 확인해 다음 작업을 연다.'
+    ? task.verification?.mode === 'sandbox_simulation'
+      ? '독립 검증 단계 시뮬레이션이 수락 기준과 증거 묶음을 기록해 다음 작업을 연다. 실제 운영 승인은 별도 검증이 필요하다.'
+      : '독립 검증자가 수락 기준과 증거를 확인해 다음 작업을 연다.'
       : task.state === 'VERIFYING'
         ? '샌드박스 산출물을 독립 검증 단계로 넘긴다.'
         : '내부 샌드박스에서 다음 작업을 진행한다.';
@@ -304,7 +306,7 @@ export function verifySandboxTask(tasks: readonly MvpTask[], taskId: string, now
   if (!source) throw new Error(`작업을 찾을 수 없습니다: ${taskId}`);
   if (source.state !== 'VERIFYING') throw new Error('샌드박스 산출물을 먼저 만든 뒤 독립 검증을 기록해야 합니다.');
   if (source.evidence.length === 0) throw new Error('검증할 증거가 없습니다.');
-  const events: SandboxAuditEvent[] = [{id: `${taskId}-DONE-1`, taskId, from: 'VERIFYING', to: 'DONE', note: `${source.verifier}가 수락 기준과 샌드박스 증거를 독립 검토한 것으로 기록했습니다.`, createdAt: now}];
+  const events: SandboxAuditEvent[] = [{id: `${taskId}-DONE-1`, taskId, from: 'VERIFYING', to: 'DONE', note: `${source.verifier}의 독립 검증 단계 시뮬레이션으로 수락 기준과 샌드박스 증거 묶음을 기록했습니다. 실제 운영 검증을 의미하지 않습니다.`, createdAt: now}];
   const verification: SandboxVerificationRecord = {
     verifier: source.verifier,
     acceptedCriteria: [...source.acceptance],

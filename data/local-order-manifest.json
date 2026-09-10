@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "goalId": "GL-2026-CELL-GABA-001",
+  "checkedAt": "2026-09-10",
+  "sourceRoots": ["D:\\다운로드"],
+  "filePatterns": [
+    "180.81.133.36_orders*.csv",
+    "cellpinda_order_*.xlsx",
+    "주문처리-전체.xlsx",
+    "주문내역-*.xlsx",
+    "주문_상품별_상세검색_*.xlsx",
+    "주문서_*.xlsx",
+    "주문 상품 배송*.xlsx",
+    "스마트스토어_전체주문발주발송관리_*.xlsx"
+  ],
+  "classification": {
+    "gaba1500": "상품명에 1500mg·1,500mg·가바 1500이 명시된 행",
+    "gaba750": "상품명에 750mg·가바 750이 명시된 행. 공개 제품·정산 집계에서 제외",
+    "other": "GABA 제품 식별이 되지 않는 행"
+  },
+  "privacy": {
+    "rawRowsStored": false,
+    "personalFieldsStored": false,
+    "allowedAggregates": ["file hash", "file format", "row count", "date range", "product class", "quantity", "coarse status availability", "field presence"],
+    "publicExport": "exclude"
+  },
+  "e1Gate": {
+    "required": ["seller account", "verified Smart Store channel product id for gaba1500", "paid test order response", "cancel test response", "refund test response"],
+    "historicalFilesAloneAreSufficient": false
+  }
+}

@@ -151,7 +151,7 @@
       "dependencies": ["C2"],
       "blockedBy": "판매자 계정·실제 1500 상품 식별자·주문·취소·환불 테스트 응답",
       "acceptance": ["판매처 주문과 유입을 SKU·기간·상태별 대사", "클릭과 실제 구매를 별도 지표로 보고"],
-      "evidence": ["docs/ORDER_INTEGRATION.md", "src/domain/smartstore-orders.ts", "src/domain/smartstore-orders.test.ts"]
+      "evidence": ["docs/ORDER_INTEGRATION.md", "src/domain/smartstore-orders.ts", "src/domain/smartstore-orders.test.ts", "data/local-order-manifest.json", "scripts/audit-local-orders.mjs", "로컬 주문 자료 자동 감사에서 과거 CSV의 1500 후보 행·상품번호를 확인했지만, 채널·주문상태·취소·환불 응답은 검증되지 않아 실제 대사로 승격하지 않음"]
     }
   ]
 }

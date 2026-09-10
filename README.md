@@ -54,10 +54,13 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 `data/content-ledger.json`이 승인된 콘텐츠의 단일 원장이다. `pnpm run sync:data`는 승인 상태이고 HTTPS 출처가 있는 연구 카드, 승인된 제품·후기만 `public/data/content.json`으로 내보낸다. 이 파일은 Git에 커밋하지 않고 `pnpm run build`와 GitHub Actions에서 매번 새로 생성한다. Worker API가 있는 환경은 `/api/content`를 우선 사용하고, 정적 호스팅에서는 같은 공개 JSON으로 자동 폴백한다.
 
+판매 자료는 별도 경계로 둔다. `data/local-order-manifest.json`을 기준으로 `pnpm run audit:orders`를 실행하면 지정한 로컬 주문 파일에서 개인정보를 제외한 상품군·수량·기간·필드 존재와 파일 해시를 `tmp/local-order-audit.json`에 기록한다. 이 감사 결과는 공개 export에 포함하지 않으며, 판매자 계정과 스마트스토어 API 응답을 확인하기 전까지 실제 매출·환불로 해석하지 않는다. 제품 포장 자료는 같은 방식으로 `pnpm run audit:materials`가 감사한다.
+
 ```sh
 pnpm run sync:data
 pnpm run build
 pnpm run goal:next
+pnpm run audit:orders
 ```
 
 ## GitHub Actions 배포

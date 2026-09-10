@@ -42,7 +42,7 @@
       "name": "실구매 성과",
       "target": "판매처 주문·취소·환불과 사이트 유입을 대사해 실제 구매 전환을 검증한다.",
       "status": "BLOCKED",
-      "evidence": ["docs/ORDER_INTEGRATION.md"]
+      "evidence": ["docs/ORDER_INTEGRATION.md", "data/local-order-manifest.json", "scripts/audit-local-orders.mjs"]
     },
     {
       "id": "M6",
