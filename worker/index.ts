@@ -1,6 +1,7 @@
 import { timingSafeEqual } from 'node:crypto';
 import { createStore, failure } from './store.ts';
 import { rewriteSocialHtml } from './social.ts';
+import { handleMembers } from './members.ts';
 
 declare global { interface Env { ADMIN_TOKEN: string } }
 
@@ -35,6 +36,7 @@ export default {
       if(!(await env.RATE_LIMITER.limit({key})).success)return new Response(JSON.stringify({error:'Too many requests'}),{status:429,headers:{'Content-Type':'application/json','Retry-After':'60','Cache-Control':'no-store'}});
       if(url.pathname.startsWith('/api/admin/') && !authorized(request.headers.get('x-admin-token'),env.ADMIN_TOKEN))return reply(401,{error:'Operator authentication required'});
       if(request.method==='OPTIONS')return reply(204,null);
+      if(url.pathname.startsWith('/api/member/'))return handleMembers(request,env,body);
       const store=createStore(env.DB);await store.initialize();
       if(request.method==='GET' && url.pathname==='/api/health')return reply(200,{ok:true,persistence:'cloudflare-d1',actualPurchaseIntegration:false});
       if(request.method==='GET' && url.pathname==='/api/content')return reply(200,await store.publicContent());

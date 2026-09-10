@@ -51,6 +51,7 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
         if (req.method==='PATCH' && match) return reply(200,store.update(match[1],await readBody(req)));
       }
       if (req.method==='GET' && path==='/api/health') return reply(200,{ok:true,persistence:'sqlite',actualPurchaseIntegration:false});
+      if (req.method==='GET' && path==='/api/member/status') return reply(200,{enabled:false,user:null,recoverySupported:false});
       if (req.method==='GET' && path==='/api/content') return reply(200,store.publicContent());
       if (req.method==='POST' && path==='/api/events') return reply(202,store.event(await readBody(req)));
       return reply(404,{error:'Not found'});

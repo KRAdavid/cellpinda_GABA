@@ -53,3 +53,8 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 `node node_modules/wrangler/bin/wrangler.js deploy --temporary --secrets-file .dev.vars`는 60분 임시 배포다. 현재 미리보기는 https://cellpinda-rhythm.marshy-shear.workers.dev 이며 만료 후 영구 주소로 사용할 수 없다. 정식 운영에는 사용자의 Cloudflare 계정으로 인수와 도메인 설정이 필요하다. QA 트래픽은 실제 소비자 성과가 아니다.
 
 검증: `node --test src/domain/rhythm.test.ts server/server.test.mjs worker/worker.test.mjs`, `node node_modules/typescript/bin/tsc -p worker/tsconfig.json`.
+
+
+## 회원 기록 개발 검증
+
+`http://localhost:8788/account`에서 패스키 기반 회원 기능을 시험할 수 있다. `.dev.vars`의 MEMBER_ORIGIN이 정확히 해당 origin일 때만 활성화된다. 공개 임시주소에서는 비활성이다. 서버와 브라우저는 SimpleWebAuthn14를 사용하며 패스키비밀키를 서버에 저장하지 않는다. 현재회원당7일기록한개이며 추가패스키/분실복구/과거이력은미구현이다. 정식운영origin과개인정보정책확정없이공개회원가입을열지않는다. 상세검증/열린항목은 docs/MEMBER_RELEASE_REVIEW.md를참고한다.
