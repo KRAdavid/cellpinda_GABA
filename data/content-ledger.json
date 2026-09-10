@@ -46,7 +46,7 @@
     {
       "id": "fermentation-listed",
       "topic": "발효",
-      "publicText": "셀핀다 공식몰은 제품을 발효 가바로 소개합니다.",
+      "publicText": "셀핀다는 제품을 발효 가바로 소개합니다.",
       "status": "approved",
       "sources": [
         {
@@ -720,9 +720,9 @@
     {
       "id": "shop-review-destination-1500",
       "status": "approved",
-      "publicText": "공식몰에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.",
-      "sourceTitle": "셀핀다 공식몰 1500mg 상품 후기",
-      "sourceUrl": "https://cellpinda.co.kr/product/셀핀다-고함량-발효가바-1500mg-×-30포/27/",
+      "publicText": "스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.",
+      "sourceTitle": "셀핀다 스마트스토어 가바 1500 상품 후기",
+      "sourceUrl": "https://smartstore.naver.com/cellpinda",
       "reviewedAt": "2026-09-10",
       "holdReason": null,
       "originalPublic": true,

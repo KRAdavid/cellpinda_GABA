@@ -115,8 +115,24 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
   }finally{DB.close();}
 });
 
-test('Worker and Node expose only the approved official 1500 review destination, never private quotes',async()=>{
-  const reviewedSeed={...seed,reviews:[{id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'공식몰 1500 후기 보기',sourceTitle:'공식몰 1500',sourceUrl:'https://cellpinda.co.kr/product/detail.html?product_no=27',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL 1500'},{id:'private-review',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null},{id:'unverified-review',status:'approved',publicText:'UNVERIFIED QUOTE',sourceUrl:'https://cellpinda.co.kr/'}]};
+test('Worker sandbox ops runs persist resumable state with a client key and isolate owners',async()=>{
+  const DB=new MockD1();const env={DB,ADMIN_TOKEN:'c'.repeat(64),RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async()=>new Response('asset')}};
+  const runId=randomUUID(),runKey=randomUUID();
+  const call=(options={})=>worker.fetch(new Request(`https://site.example/api/ops/runs/${runId}`,options),env);
+  const state={input:'공개용 GABA 논문 기반 마스터 인덱스',plan:{contract:{goalId:'GMVP-GABA-TEST'}},audit:[],approvalTaskId:''};
+  try {
+    const saved=await call({method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':runKey},body:JSON.stringify(state)});
+    assert.equal(saved.status,200);const savedBody=await saved.json();assert.equal(savedBody.serverPersisted,true);assert.equal(savedBody.revision,1);
+    const resumed=await call({headers:{'x-ops-run-key':runKey}});assert.equal(resumed.status,200);const resumedBody=await resumed.json();assert.deepEqual(resumedBody.state,state);assert.equal(resumedBody.auditCount,1);
+    const wrong=await call({headers:{'x-ops-run-key':randomUUID()}});assert.equal(wrong.status,404);
+    const rejected=await call({method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':randomUUID()},body:JSON.stringify(state)});assert.equal(rejected.status,403);
+    const deleted=await call({method:'DELETE',headers:{'x-ops-run-key':runKey}});assert.equal(deleted.status,200);
+    assert.equal((await call({headers:{'x-ops-run-key':runKey}})).status,404);
+  } finally { DB.close(); }
+});
+
+test('Worker and Node expose only the approved Smart Store 1500 review destination, never private quotes',async()=>{
+  const reviewedSeed={...seed,reviews:[{id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'스마트스토어 1500 후기 보기',sourceTitle:'스마트스토어 1500',sourceUrl:'https://smartstore.naver.com/cellpinda',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL 1500'},{id:'private-review',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null},{id:'unverified-review',status:'approved',publicText:'UNVERIFIED QUOTE',sourceUrl:'https://cellpinda.co.kr/'}]};
   const db=new MockD1();const cloud=createStore(db);const local=createNodeStore({dbPath:':memory:',seed:reviewedSeed});
   try{
     await cloud.initialize(reviewedSeed);

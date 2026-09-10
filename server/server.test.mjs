@@ -63,6 +63,20 @@ test('Rate limit rejects excess local requests',async()=>{
   } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
 
+test('Local API sandbox ops runs persist resumable state with a client key',async()=>{
+  const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));const {server}=createApi({dbPath:join(directory,'db.sqlite'),tokenPath:join(directory,'token'),seed});
+  try {
+    server.listen(0,'127.0.0.1');await once(server,'listening');const base=`http://127.0.0.1:${server.address().port}`;const runId=randomUUID(),runKey=randomUUID();
+    const state={input:'공개용 GABA 논문 기반 마스터 인덱스',plan:{contract:{goalId:'GMVP-GABA-TEST'}},audit:[],approvalTaskId:''};
+    let response=await fetch(`${base}/api/ops/runs/${runId}`,{method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':runKey},body:JSON.stringify(state)});assert.equal(response.status,200);let body=await response.json();assert.equal(body.revision,1);assert.equal(body.serverPersisted,true);
+    response=await fetch(`${base}/api/ops/runs/${runId}`,{headers:{'x-ops-run-key':runKey}});assert.equal(response.status,200);body=await response.json();assert.deepEqual(body.state,state);assert.equal(body.auditCount,1);
+    assert.equal((await fetch(`${base}/api/ops/runs/${runId}`,{headers:{'x-ops-run-key':randomUUID()}})).status,404);
+    assert.equal((await fetch(`${base}/api/ops/runs/${runId}`,{method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':randomUUID()},body:JSON.stringify(state)})).status,403);
+    assert.equal((await fetch(`${base}/api/ops/runs/${runId}`,{method:'DELETE',headers:{'x-ops-run-key':runKey}})).status,200);
+    assert.equal((await fetch(`${base}/api/ops/runs/${runId}`,{headers:{'x-ops-run-key':runKey}})).status,404);
+  } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
+});
+
 test('Purchase decision events preserve only approved question identifiers',()=>{
   const store=createStore({dbPath:':memory:',seed});
   try {

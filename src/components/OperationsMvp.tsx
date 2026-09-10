@@ -15,7 +15,15 @@ type StoredOpsState = {
   audit?: SandboxAuditEvent[];
   approval?: MvpApprovalReport['approval'];
   approvalTaskId?: string;
+  runId?: string;
+  runKey?: string;
 };
+
+type ServerOpsResponse = {state?: StoredOpsState; serverPersisted?: boolean};
+
+function clientUuid() {
+  return typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : '';
+}
 
 function loadStoredState(): StoredOpsState {
   if (typeof window === 'undefined') return {};
@@ -39,19 +47,64 @@ export default function OperationsMvp() {
   const [audit, setAudit] = useState<SandboxAuditEvent[]>(stored.audit || []);
   const [approval, setApproval] = useState<MvpApprovalReport['approval']>(stored.approval);
   const [approvalTaskId, setApprovalTaskId] = useState(stored.approvalTaskId || '');
+  const [runId, setRunId] = useState(stored.runId || clientUuid());
+  const [runKey, setRunKey] = useState(stored.runKey || clientUuid());
+  const [serverState, setServerState] = useState<'checking' | 'saved' | 'local'>('checking');
+  const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState('');
   const [copied, setCopied] = useState(false);
   const edges = useMemo(() => plan ? taskGraphEdges(plan.tasks) : [], [plan]);
   const report = useMemo(() => plan ? buildMvpApprovalReport(plan.contract, plan.tasks, audit, approval, new Date().toISOString()) : null, [plan, audit, approval]);
 
   useEffect(() => {
-    try { window.localStorage.setItem(storageKey, JSON.stringify({input, plan, audit, approval, approvalTaskId} satisfies StoredOpsState)); }
+    try { window.localStorage.setItem(storageKey, JSON.stringify({input, plan, audit, approval, approvalTaskId, runId, runKey} satisfies StoredOpsState)); }
     catch { /* private browsing or quota limits should not block the sandbox */ }
-  }, [input, plan, audit, approval, approvalTaskId]);
+  }, [input, plan, audit, approval, approvalTaskId, runId, runKey]);
+
+  useEffect(() => {
+    let active = true;
+    async function hydrateFromServer() {
+      if (!runId || !runKey) { if (active) { setServerState('local'); setHydrated(true); } return; }
+      try {
+        const response = await fetch(`/api/ops/runs/${runId}`, {headers: {'x-ops-run-key': runKey}});
+        if (!response.ok) { if (active) setServerState('local'); return; }
+        const payload = await response.json() as ServerOpsResponse;
+        const remote = payload.state;
+        if (active && remote && typeof remote === 'object') {
+          if (typeof remote.input === 'string') setInput(remote.input);
+          if (remote.plan !== undefined) setPlan(remote.plan || null);
+          if (Array.isArray(remote.audit)) setAudit(remote.audit);
+          if (remote.approval !== undefined) setApproval(remote.approval);
+          if (typeof remote.approvalTaskId === 'string') setApprovalTaskId(remote.approvalTaskId);
+          setServerState(payload.serverPersisted ? 'saved' : 'local');
+        }
+      } catch { if (active) setServerState('local'); }
+      finally { if (active) setHydrated(true); }
+    }
+    void hydrateFromServer();
+    return () => { active = false; };
+  }, [runId, runKey]);
+
+  useEffect(() => {
+    if (!hydrated || !runId || !runKey) return;
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => {
+      const state: StoredOpsState = {input, plan, audit, approval, approvalTaskId};
+      void fetch(`/api/ops/runs/${runId}`, {
+        method: 'PUT',
+        headers: {'content-type': 'application/json', 'x-ops-run-key': runKey},
+        body: JSON.stringify(state),
+        signal: controller.signal,
+      }).then(response => { if (!response.ok) throw new Error('server persistence unavailable'); setServerState('saved'); })
+        .catch(() => { if (!controller.signal.aborted) setServerState('local'); });
+    }, 350);
+    return () => { window.clearTimeout(timer); controller.abort(); };
+  }, [input, plan, audit, approval, approvalTaskId, hydrated, runId, runKey]);
 
   function createPlan(event: React.FormEvent) {
     event.preventDefault();
     try {
+      setRunId(clientUuid()); setRunKey(clientUuid());
       setPlan(generateMvpPlan(input)); setAudit([]); setApproval(undefined); setApprovalTaskId(''); setMessage('Goal Contract, TF, 업무 그래프를 생성했습니다.'); setCopied(false);
     } catch (error) { setMessage(error instanceof Error ? error.message : '목표를 생성하지 못했습니다.'); }
   }
@@ -88,7 +141,7 @@ export default function OperationsMvp() {
       <div className="ops-mvp-header-actions"><a className="button outline" href={`${base}#research`}>공개 연구 라이브러리 <ArrowRight size={17}/></a><a className="text-link" href={base}>사이트로 돌아가기</a></div>
     </header>
     <section className="ops-mvp-sandbox wrap" aria-labelledby="ops-mvp-heading">
-      <div className="ops-mvp-sandbox-label"><LockKeyhole size={18}/> 내부 샌드박스 · 외부 게시·구매·법적 약속을 실행하지 않음</div>
+      <div className="ops-mvp-sandbox-label"><LockKeyhole size={18}/> 내부 샌드박스 · 외부 게시·구매·법적 약속을 실행하지 않음 <span className="ops-mvp-persistence-status">· {serverState === 'saved' ? '서버 저장됨' : serverState === 'checking' ? '서버 상태 확인 중' : '브라우저 임시 저장'}</span></div>
       <form className="ops-mvp-goal" onSubmit={createPlan}>
         <label htmlFor="mvp-goal"><strong id="ops-mvp-heading">한 문장 목표 입력</strong><span>목표가 구체적일수록 검토·완료 조건이 명확해집니다.</span></label>
         <textarea id="mvp-goal" value={input} onChange={event => setInput(event.target.value)} rows={3} maxLength={160} />
@@ -116,7 +169,7 @@ export default function OperationsMvp() {
         <div className="ops-mvp-section-heading"><div><p className="chapter">04 / 결과·승인 보고</p><h2 id="report-heading">실행 결과를 보고서로 남깁니다.</h2></div><p>샌드박스 결과는 외부 실행 증거가 아닙니다. 실제 공개 전에는 책임자·표시·배포 검토가 필요합니다.</p></div>
         {approval ? <div className="ops-mvp-approval"><ShieldCheck size={22}/><div><strong>승인 요청이 생성되었습니다.</strong><p>{approval.action}</p><small>위험도: {riskLabels[approval.risk]} · 만료: {formatTime(approval.expiresAt)}</small></div><button className="button" type="button" onClick={() => execute(approvalTaskId, 'sandbox-approval')}>샌드박스 승인 후 실행</button></div> : null}
         <div className="ops-mvp-report-grid"><article><span className="ops-mvp-eyebrow">현재 판정</span><strong className={`ops-mvp-recommendation recommendation-${report?.recommendation}`}>{report?.recommendation === 'approve' ? '샌드박스 완료' : report?.recommendation === 'blocked' ? '승인 대기' : '추가 작업 필요'}</strong><p>완료 {report?.completedTasks.length ?? 0}건 · 대기 {report?.pendingTasks.length ?? 0}건</p><small>검증 상태 · 샌드박스 시뮬레이션만 기록됨</small></article><article><span className="ops-mvp-eyebrow">감사 로그</span>{audit.length ? <ol>{audit.slice(-6).map(item => <li key={item.id}><strong>{item.taskId}</strong> {stateLabels[item.to]} · {item.note}</li>)}</ol> : <p>아직 실행 로그가 없습니다. 위 그래프의 실행 가능 작업을 시작하세요.</p>}</article></div>
-        <div className="ops-mvp-report-actions"><button className="button outline" type="button" onClick={copyReport} disabled={!report}><Clipboard size={16}/> {copied ? '복사됨' : '승인 보고서 복사'}</button><button className="button outline" type="button" onClick={() => report && downloadJson(`${report.reportId}.json`, report)} disabled={!report}><Download size={16}/> JSON 다운로드</button><button className="text-link" type="button" onClick={() => { setPlan(null); setAudit([]); setApproval(undefined); setApprovalTaskId(''); setMessage('샌드박스를 초기화했습니다.'); }}><RotateCcw size={15}/> 새 목표로 시작</button></div>
+        <div className="ops-mvp-report-actions"><button className="button outline" type="button" onClick={copyReport} disabled={!report}><Clipboard size={16}/> {copied ? '복사됨' : '승인 보고서 복사'}</button><button className="button outline" type="button" onClick={() => report && downloadJson(`${report.reportId}.json`, report)} disabled={!report}><Download size={16}/> JSON 다운로드</button><button className="text-link" type="button" onClick={() => { setRunId(clientUuid()); setRunKey(clientUuid()); setPlan(null); setAudit([]); setApproval(undefined); setApprovalTaskId(''); setMessage('샌드박스를 초기화했습니다.'); }}><RotateCcw size={15}/> 새 목표로 시작</button></div>
       </section>
     </> : <section className="ops-mvp-empty wrap"><p className="chapter">MVP 시작점</p><h2>목표 한 문장으로<br />첫 업무를 열어보세요.</h2><p>기본 목표가 입력되어 있습니다. 생성 버튼을 누르면 계약·TF·그래프·승인 보고 흐름을 바로 실행할 수 있습니다.</p></section>}
   </main>;

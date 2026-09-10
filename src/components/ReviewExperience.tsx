@@ -26,17 +26,13 @@ const readingQuestions = [
 ];
 
 function reviewDestination(review: PublicReview) {
-  // The official destination remains available independently of quoted reviews.
+  // The Smart Store destination remains available independently of quoted reviews.
   if (review.status !== 'approved' || review.id !== 'shop-review-destination-1500' || !review.publicText || !review.sourceUrl) return null;
   try {
     const url = new URL(review.sourceUrl);
-    if (url.protocol !== 'https:' || !['cellpinda.co.kr', 'www.cellpinda.co.kr'].includes(url.hostname)) return null;
+    if (url.protocol !== 'https:' || url.hostname !== 'smartstore.naver.com' || !['/cellpinda', '/cellpinda/'].includes(url.pathname)) return null;
     const productId = 'gaba1500';
-    const productNo = '27';
-    const pathMatch = url.pathname.endsWith(`/${productNo}/`) || url.pathname.endsWith(`/${productNo}`);
-    if (url.searchParams.get('product_no') !== productNo && !pathMatch) return null;
-    url.hash = 'prdReview';
-    return { url: url.href, productId, label: '가바 1500 · 공식몰 후기 읽기' };
+    return { url: url.href, productId, label: '가바 1500 · 스마트스토어 후기 읽기' };
   } catch { return null; }
 }
 
@@ -60,7 +56,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
   return <section id="reviews" className="section sage review-experience" aria-labelledby="review-heading">
     <div className="wrap">
       <div className="section-head">
-        <div><p className="chapter">사용 경험</p><h2 id="review-heading">{quotes.length?<>먼저 선택한 사람들의<br/>사용 이야기를 읽어보세요.</>:destinations.length?<>제품별 사용 경험을,<br />공식몰 원문에서.</>:<>사용 경험을,<br />공식몰 원문에서.</>}</h2></div>
+        <div><p className="chapter">사용 경험</p><h2 id="review-heading">{quotes.length?<>먼저 선택한 사람들의<br/>사용 이야기를 읽어보세요.</>:destinations.length?<>제품별 사용 경험을,<br />스마트스토어 원문에서.</>:<>사용 경험을,<br />스마트스토어 원문에서.</>}</h2></div>
         <p>사용 경험은 구체적으로 살펴볼수록 도움이 됩니다.<br />제품 정보와 나란히 놓고, 내 선택을 확인해 보세요.</p>
       </div>
       {quotes.length>0&&<div className="review-quotes">
@@ -77,7 +73,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
       </div>}
       <div className="review-experience-layout">
         <div className="review-experience-destination">
-          <span className="review-experience-label">공식몰에 남겨진 경험</span>
+          <span className="review-experience-label">스마트스토어에 남겨진 경험</span>
           <h3>원문에서, 맥락까지.</h3>
           {destinations.length > 0 ? destinations.map(({ review, url, productId, label }) => <div key={review.id}>
             <p>{review.publicText}</p>

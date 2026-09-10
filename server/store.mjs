@@ -1,7 +1,7 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { reviewMutation, approvalMissing, publicReview, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
 
 export const EVENT_NAMES = new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
@@ -11,11 +11,13 @@ const failure = (message, status = 400) => Object.assign(new Error(message), { s
 const isUuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 const METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','result','limitations','productApplicability','question','searchThrough','studyCount']);
 const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result','/share','result_viewed'],['product_comparison','/products','product_comparison_viewed']];
+const OPS_MAX_BYTES=65536;
+const OPS_TTL_DAYS=30;
 const SHARE_SCOPE_SQL=`WITH scoped AS (SELECT rowid AS seq,flow_id,name FROM events WHERE json_extract(properties,'$.path')=? AND flow_id IS NOT NULL), starts AS (SELECT flow_id,MIN(seq) AS first_seq FROM scoped WHERE name=? GROUP BY flow_id), steps AS (SELECT EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_requested') AS requested,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_link_copied') AS copied,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_image_downloaded') AS downloaded,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_cancelled') AS cancelled FROM starts s) SELECT COUNT(*) AS denominator,COALESCE(SUM(CASE WHEN requested OR copied OR downloaded THEN 1 ELSE 0 END),0) AS attemptFlows,COALESCE(SUM(requested),0) AS requestedFlows,COALESCE(SUM(copied),0) AS copiedFlows,COALESCE(SUM(downloaded),0) AS downloadedFlows,COALESCE(SUM(cancelled),0) AS cancelledFlows FROM steps`;
 const UNSCOPED_SHARE_SQL="SELECT COUNT(*) AS count FROM events WHERE name IN ('share_requested','share_link_copied','share_image_downloaded','share_cancelled') AND COALESCE(json_extract(properties,'$.path'),'') NOT IN ('/result','/share','/products')";
 function reviewLink(value) {
   if(value.id!=='shop-review-destination-1500' || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
-  try{const url=new URL(value.sourceUrl);const productNo='27';const pathMatch=url.pathname.endsWith(`/${productNo}/`)||url.pathname.endsWith(`/${productNo}`);return url.protocol==='https:' && ['cellpinda.co.kr','www.cellpinda.co.kr'].includes(url.hostname) && (url.searchParams.get('product_no')===productNo || pathMatch);}catch{return false;}
+  try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && url.hostname==='smartstore.naver.com' && ['/cellpinda','/cellpinda/'].includes(url.pathname);}catch{return false;}
 }
 function publicMetadata(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
@@ -32,7 +34,7 @@ function publicMetadata(value) {
 export function createStore({ dbPath, seedPath, seed } = {}) {
   if (dbPath !== ':memory:') mkdirSync(dirname(dbPath), { recursive: true });
   const db = new DatabaseSync(dbPath);
-  db.exec('PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; CREATE TABLE IF NOT EXISTS content (id TEXT PRIMARY KEY, kind TEXT NOT NULL, data TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 1); CREATE TABLE IF NOT EXISTS audit (id INTEGER PRIMARY KEY AUTOINCREMENT, content_id TEXT NOT NULL, revision INTEGER NOT NULL, reason TEXT NOT NULL, previous TEXT, current TEXT NOT NULL, created_at TEXT NOT NULL); CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, name TEXT NOT NULL, properties TEXT NOT NULL, created_at TEXT NOT NULL); CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);');
+  db.exec('PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; CREATE TABLE IF NOT EXISTS content (id TEXT PRIMARY KEY, kind TEXT NOT NULL, data TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 1); CREATE TABLE IF NOT EXISTS audit (id INTEGER PRIMARY KEY AUTOINCREMENT, content_id TEXT NOT NULL, revision INTEGER NOT NULL, reason TEXT NOT NULL, previous TEXT, current TEXT NOT NULL, created_at TEXT NOT NULL); CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, name TEXT NOT NULL, properties TEXT NOT NULL, created_at TEXT NOT NULL); CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL); CREATE TABLE IF NOT EXISTS ops_runs (id TEXT PRIMARY KEY, owner_hash TEXT NOT NULL, data TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 1, created_at TEXT NOT NULL, updated_at TEXT NOT NULL, expires_at TEXT NOT NULL); CREATE INDEX IF NOT EXISTS ops_runs_owner_expires ON ops_runs(owner_hash,expires_at); CREATE TABLE IF NOT EXISTS ops_audit (id INTEGER PRIMARY KEY AUTOINCREMENT, run_id TEXT NOT NULL, revision INTEGER NOT NULL, action TEXT NOT NULL, data TEXT NOT NULL, created_at TEXT NOT NULL); CREATE INDEX IF NOT EXISTS ops_audit_run ON ops_audit(run_id,id);');
   if (!db.prepare('PRAGMA table_info(events)').all().some(column=>column.name==='flow_id')) db.exec('ALTER TABLE events ADD COLUMN flow_id TEXT');
   db.exec('CREATE INDEX IF NOT EXISTS events_flow_name ON events(flow_id,name);');
   { // Add newly verified source rows while preserving operator edits and their history.
@@ -51,6 +53,9 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
     } catch (error) { db.exec('ROLLBACK'); db.close(); throw error; }
   }
   const rows = () => db.prepare('SELECT * FROM content ORDER BY rowid').all().map(row => ({...JSON.parse(row.data),kind:row.kind,revision:row.revision}));
+  const validOpsKey = value => typeof value === 'string' && value.length >= 32 && value.length <= 128;
+  const hashOpsKey = value => createHash('sha256').update(value,'utf8').digest('hex');
+  const opsCredentials = (id,key) => { if (!isUuid(id) || !validOpsKey(key)) throw failure('Valid sandbox run credentials are required',401); return {id:id.toLowerCase(),ownerHash:hashOpsKey(key)}; };
   const mutateReview=(id,request,kind,products)=>{
     const input=reviewMutation(request,kind);db.exec('BEGIN IMMEDIATE');
     try{
@@ -76,6 +81,29 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       const products = all.filter(p => p.kind === 'product' && p.status === 'approved' && p.sourceIds?.length && p.sourceIds.every(id => approvedIds.has(id))).map(({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,publicText}) => ({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,...(publicText ? {publicText} : {})}));
       const reviews=all.filter(item=>item.kind==='review').flatMap(item=>{if(item.reviewType==='quote'){const quote=publicReview(item,products.map(p=>p.id));return quote?[quote]:[];}return item.status==='approved' && reviewLink(item)?[{id:item.id,status:item.status,publicText:REVIEW_DESTINATION_TEXT,sourceTitle:item.sourceTitle,sourceUrl:item.sourceUrl,limitations:item.limitations}]:[];});
       return {claims,products,reviews};
+    },
+    getOpsRun(id,key) {
+      const credentials=opsCredentials(id,key);const row=db.prepare('SELECT id,data,revision,created_at,updated_at,expires_at,(SELECT COUNT(*) FROM ops_audit WHERE run_id=ops_runs.id) AS audit_count FROM ops_runs WHERE id=? AND owner_hash=? AND expires_at>?').get(credentials.id,credentials.ownerHash,new Date().toISOString());
+      if(!row)throw failure('Sandbox run not found or expired',404);
+      return {runId:row.id,state:JSON.parse(row.data),revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,expiresAt:row.expires_at,serverPersisted:true,auditCount:row.audit_count};
+    },
+    putOpsRun(id,key,state) {
+      const credentials=opsCredentials(id,key);if(!state || typeof state !== 'object' || Array.isArray(state))throw failure('Sandbox state must be a JSON object');
+      const data=JSON.stringify(state);if(Buffer.byteLength(data,'utf8')>OPS_MAX_BYTES)throw failure('Sandbox state too large',413);
+      const now=new Date();const nowIso=now.toISOString();const expiresAt=new Date(now.getTime()+OPS_TTL_DAYS*24*60*60*1000).toISOString();
+      let existing=db.prepare('SELECT owner_hash,revision,created_at,expires_at FROM ops_runs WHERE id=?').get(credentials.id);
+      if(existing && existing.expires_at<=nowIso){db.exec('BEGIN IMMEDIATE');try{db.prepare('DELETE FROM ops_audit WHERE run_id=?').run(credentials.id);db.prepare('DELETE FROM ops_runs WHERE id=?').run(credentials.id);db.exec('COMMIT');existing=undefined;}catch(error){db.exec('ROLLBACK');throw error;}}
+      if(existing && existing.owner_hash!==credentials.ownerHash)throw failure('Sandbox run credential mismatch',403);
+      const revision=(existing?.revision ?? 0)+1;db.exec('BEGIN IMMEDIATE');
+      try {
+        if(existing){db.prepare('INSERT INTO ops_audit(run_id,revision,action,data,created_at) VALUES(?,?,?,?,?)').run(credentials.id,revision,'snapshot',data,nowIso);const result=db.prepare('UPDATE ops_runs SET data=?,revision=?,updated_at=?,expires_at=? WHERE id=? AND owner_hash=? AND revision=?').run(data,revision,nowIso,expiresAt,credentials.id,credentials.ownerHash,revision-1);if(result.changes!==1)throw failure('Sandbox run revision conflict',409);}
+        else {db.prepare('INSERT INTO ops_runs(id,owner_hash,data,revision,created_at,updated_at,expires_at) VALUES(?,?,?,?,?,?,?)').run(credentials.id,credentials.ownerHash,data,revision,nowIso,nowIso,expiresAt);db.prepare('INSERT INTO ops_audit(run_id,revision,action,data,created_at) VALUES(?,?,?,?,?)').run(credentials.id,revision,'created',data,nowIso);}
+        db.exec('COMMIT');
+      } catch(error){db.exec('ROLLBACK');throw error;}
+      return {runId:credentials.id,state,revision,createdAt:existing?.created_at ?? nowIso,updatedAt:nowIso,expiresAt,serverPersisted:true};
+    },
+    deleteOpsRun(id,key) {
+      const credentials=opsCredentials(id,key);const result=db.prepare('DELETE FROM ops_runs WHERE id=? AND owner_hash=?').run(credentials.id,credentials.ownerHash);if(result.changes!==1)throw failure('Sandbox run not found',404);db.prepare('DELETE FROM ops_audit WHERE run_id=?').run(credentials.id);return {deleted:true};
     },
     update(id, patch) {
       if (!patch || typeof patch !== 'object' || Array.isArray(patch)) throw failure('Invalid update');

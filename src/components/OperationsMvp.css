@@ -6,6 +6,7 @@
 .ops-mvp-header-actions .text-link { margin: 0; }
 .ops-mvp-sandbox { background: #18382b; color: #fff; padding: 34px 40px 40px; border-radius: 14px; }
 .ops-mvp-sandbox-label { display: inline-flex; align-items: center; gap: 8px; color: #b8dec7; font-size: 13px; margin-bottom: 28px; }
+.ops-mvp-persistence-status { color: #d8f0df; font-weight: 600; }
 .ops-mvp-goal { display: grid; grid-template-columns: 1fr 1.7fr auto; gap: 24px; align-items: end; }
 .ops-mvp-goal label { display: grid; gap: 8px; }
 .ops-mvp-goal label strong { font-size: 20px; }
