@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { reviewMutation, approvalMissing, publicReview, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
+import { opsStateIssue } from '../src/domain/ops-validation.ts';
 
 export const EVENT_NAMES = new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
 export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin']);
@@ -85,10 +86,12 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
     getOpsRun(id,key) {
       const credentials=opsCredentials(id,key);const row=db.prepare('SELECT id,data,revision,created_at,updated_at,expires_at,(SELECT COUNT(*) FROM ops_audit WHERE run_id=ops_runs.id) AS audit_count FROM ops_runs WHERE id=? AND owner_hash=? AND expires_at>?').get(credentials.id,credentials.ownerHash,new Date().toISOString());
       if(!row)throw failure('Sandbox run not found or expired',404);
-      return {runId:row.id,state:JSON.parse(row.data),revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,expiresAt:row.expires_at,serverPersisted:true,auditCount:row.audit_count};
+      const state=JSON.parse(row.data);const stateIssue=opsStateIssue(state);if(stateIssue)throw failure(`Sandbox state rejected by storage policy: ${stateIssue}`,500);
+      return {runId:row.id,state,revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,expiresAt:row.expires_at,serverPersisted:true,auditCount:row.audit_count};
     },
     putOpsRun(id,key,state) {
       const credentials=opsCredentials(id,key);if(!state || typeof state !== 'object' || Array.isArray(state))throw failure('Sandbox state must be a JSON object');
+      const stateIssue=opsStateIssue(state);if(stateIssue)throw failure(stateIssue);
       const data=JSON.stringify(state);if(Buffer.byteLength(data,'utf8')>OPS_MAX_BYTES)throw failure('Sandbox state too large',413);
       const now=new Date();const nowIso=now.toISOString();const expiresAt=new Date(now.getTime()+OPS_TTL_DAYS*24*60*60*1000).toISOString();
       let existing=db.prepare('SELECT owner_hash,revision,created_at,expires_at FROM ops_runs WHERE id=?').get(credentials.id);

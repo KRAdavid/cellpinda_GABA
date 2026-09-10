@@ -155,7 +155,7 @@ export default function OperationsMvp() {
       const result = verifySandboxTask(plan.tasks, taskId, now);
       const decidedTask = result.tasks.find(task => task.id === taskId);
       if (decidedTask) setDecisions(items => [...items, buildTaskDecision(plan.contract, decidedTask, now)]);
-      setPlan({...plan, tasks: result.tasks}); setAudit(items => [...items, ...result.events]); setMessage(`${taskId} 작업을 독립 검증 완료로 기록했습니다. 실제 외부 결과 검증은 운영 연결 후 별도 수행됩니다.`);
+      setPlan({...plan, tasks: result.tasks}); setAudit(items => [...items, ...result.events]); setMessage(`${taskId} 작업의 독립 검증 단계 시뮬레이션을 기록했습니다. 실제 외부 결과 검증은 운영 연결 후 별도 수행됩니다.`);
     } catch (error) { setMessage(error instanceof Error ? error.message : '독립 검증 기록에 실패했습니다.'); }
   }
 

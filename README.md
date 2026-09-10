@@ -56,6 +56,8 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 판매 자료는 별도 경계로 둔다. `data/local-order-manifest.json`을 기준으로 `pnpm run audit:orders`를 실행하면 지정한 로컬 주문 파일에서 개인정보를 제외한 상품군·수량·기간·필드 존재와 파일 해시를 `tmp/local-order-audit.json`에 기록한다. 이 감사 결과는 공개 export에 포함하지 않으며, 판매자 계정과 스마트스토어 API 응답을 확인하기 전까지 실제 매출·환불로 해석하지 않는다. 제품 포장 자료는 같은 방식으로 `pnpm run audit:materials`가 감사한다.
 
+운영 MVP의 재개 상태는 `src/domain/ops-validation.ts`의 공통 검증을 거쳐 Node API와 Cloudflare Worker에 저장된다. 업무 상태 전환·검증 증거·승인 연결을 확인하고 이메일·전화번호·비공개 경로·토큰 같은 필드는 거부한다. 샌드박스 상태 저장은 외부 게시나 실구매 완료를 의미하지 않는다.
+
 ```sh
 pnpm run sync:data
 pnpm run build

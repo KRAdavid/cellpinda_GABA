@@ -1,5 +1,6 @@
 import ledger from '../data/content-ledger.json' with { type: 'json' };
 import { reviewMutation, approvalMissing, publicReview, parseReviewDraft, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
+import { opsStateIssue } from '../src/domain/ops-validation.ts';
 
 type RecordValue = Record<string, unknown>;
 type ContentRow = {id:string;kind:string;data:string;revision:number};
@@ -83,11 +84,13 @@ export function createStore(db:D1Database) {
       const ownerHash=await hashOpsKey(key);
       const row=await db.prepare('SELECT id,data,revision,created_at,updated_at,expires_at,(SELECT COUNT(*) FROM ops_audit WHERE run_id=ops_runs.id) AS audit_count FROM ops_runs WHERE id=? AND owner_hash=? AND expires_at>?').bind(id.toLowerCase(),ownerHash,new Date().toISOString()).first<{id:string;data:string;revision:number;created_at:string;updated_at:string;expires_at:string;audit_count:number}>();
       if(!row)throw failure('Sandbox run not found or expired',404);
-      return {runId:row.id,state:JSON.parse(row.data),revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,expiresAt:row.expires_at,serverPersisted:true,auditCount:row.audit_count};
+      const state=JSON.parse(row.data);const stateIssue=opsStateIssue(state);if(stateIssue)throw failure(`Sandbox state rejected by storage policy: ${stateIssue}`,500);
+      return {runId:row.id,state,revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,expiresAt:row.expires_at,serverPersisted:true,auditCount:row.audit_count};
     },
     async putOpsRun(id: string, key: unknown, state: unknown) {
       if(!uuid(id) || !opsKey(key))throw failure('Valid sandbox run credentials are required',401);
       if(!object(state))throw failure('Sandbox state must be a JSON object');
+      const stateIssue=opsStateIssue(state);if(stateIssue)throw failure(stateIssue);
       const data=JSON.stringify(state);if(new TextEncoder().encode(data).byteLength>OPS_MAX_BYTES)throw failure('Sandbox state too large',413);
       const ownerHash=await hashOpsKey(key);const normalizedId=id.toLowerCase();const now=new Date().toISOString();const expiresAt=new Date(Date.now()+OPS_TTL_DAYS*24*60*60*1000).toISOString();
       const existing=await db.prepare('SELECT owner_hash,revision FROM ops_runs WHERE id=?').bind(normalizedId).first<{owner_hash:string;revision:number}>();
