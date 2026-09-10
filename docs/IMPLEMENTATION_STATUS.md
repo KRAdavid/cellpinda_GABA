@@ -8,6 +8,10 @@
 
 이 순서는 체험 의향을 유지하면서도 연구 결과가 특정 완제품의 효과를 직접 증명하는 것처럼 읽히지 않게 하는 화면 경계다. B2·B3·B4·C2·E1 외부 입력 게이트와 실제 Worker 운영 Secrets는 그대로 대기 상태다.
 
+## 최신 업데이트 — 2026-09-11 공개 제품 출처·이동 경로 Smart Store 통일
+
+제품 구성·발효 설명에 남아 있던 공개 출처 링크도 사용자가 지정한 스마트스토어로 통일했다. 제품 카드·구매 전 질문·후기 원문·발효 설명의 소비자 링크가 모두 `https://smartstore.naver.com/cellpinda`를 사용하며, 공개 export에 예전 공식몰 도메인이나 명칭이 다시 들어오면 `validate:public`과 라이브 smoke가 실패한다. 공식몰 자료는 내부 증거 문서와 이미지 출처 기록에만 남겨 제품 구매 목적지와 구분한다.
+
 ## 최신 업데이트 — 2026-09-11 공개 목표 감사 패킷
 
 공개 운영 큐에서 `목표 감사 JSON`을 바로 열 수 있게 하고, Goal Contract·6개 역할군·상태별 작업 수·완료 마일스톤·현재 `VERIFYING`·`WAITING` 게이트를 동일한 실행에서 생성하도록 연결했다. `validate:public`, `validate-live-public`, `preflight:deploy`가 감사 패킷의 목표 ID·상태·카운트·게이트·pulse 상태 지문 일치를 검사한다. 커밋 [`7302cef`](https://github.com/KRAdavid/cellpinda_GABA/commit/7302cef)와 생성 산출물 무시 정리 [`0421ef2`](https://github.com/KRAdavid/cellpinda_GABA/commit/0421ef2)의 [GitHub Actions 34532696449](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34532696449)는 verify·Pages·라이브 smoke를 성공시켰다.

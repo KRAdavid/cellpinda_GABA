@@ -28,6 +28,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
     assert.equal(content.products[0].officialUrl, 'https://smartstore.naver.com/cellpinda', 'live product must point to Smart Store');
+    assert.ok(!/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(JSON.stringify(content)), 'live public content contains a legacy official-mall destination');
     assert.ok(!JSON.stringify(content.products).includes('750'), 'live export contains removed 750 product');
     assert.equal(master.records.length, 8, 'live master index must contain eight research records');
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');

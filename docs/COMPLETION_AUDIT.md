@@ -267,3 +267,9 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 연구 카드의 제품 정보 링크를 연구 결과 요약 뒤에서 조건·비교·한계·완제품 적용 범위를 확인한 뒤로 이동했다. “연구와 제품 정보는 별개”라는 문구와 제품 표시사항 확인 안내를 유지해, 소비자에게 체험을 고려할 다음 단계를 제시하면서 연구 결과를 완제품 효과의 직접 증거로 읽는 흐름을 줄였다. 커밋 `21967d2`의 [GitHub Actions 34536865248](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34536865248)은 verify·Pages·라이브 smoke를 성공시켰다. 라이브는 page 200, 연구 8건, 주장 14건, 제품 1개, 운영 작업 13개, 대기 작업 4개, 감사 게이트 5개, Smart Store only, 750 제거, provenance 일치를 확인했다.
 
 이번 변경은 화면 순서와 소비자 언어를 보강한 것이며 B2 표시 승인, B3 후기 권한, B4 티저 공개 승인, C2 Worker 운영 연결, E1 실구매 대사를 완료로 승격하지 않는다.
+
+## 2026-09-11 공개 제품 출처·이동 경로 Smart Store 통일
+
+제품 구성·발효 설명의 공개 출처 두 건을 스마트스토어 제품 페이지로 바꾸고, `validate-public-export`·`validate-live-public`에 예전 공식몰 도메인·명칭 재유입 차단을 추가했다. 제품 카드·구매 전 질문·후기 원문·발효 설명은 같은 Smart Store 목적지를 사용하며, 공식몰 URL은 공개 export에서 제거하고 내부 이미지·증거 문서의 provenance로만 보존한다. 순차 `sync:data`·공개 export·연구 문구 검증과 66개 회귀 테스트가 통과한 뒤 라이브 Pages에서 제품 1개·750 제거·Smart Store only·provenance 일치를 재확인한다.
+
+이 변경은 소비자 이동 경로를 통일하지만 현행 표시사항 승인·후기 재게시 권한·실구매 대사·Worker 운영 연결을 완료시키지 않는다.

@@ -30,8 +30,8 @@
       "status": "approved",
       "sources": [
         {
-          "title": "셀핀다 공식몰 1500mg 상품",
-          "url": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-1500mg-×-30포/27/",
+          "title": "셀핀다 스마트스토어 가바 1500 상품",
+          "url": "https://smartstore.naver.com/cellpinda",
           "page": null,
           "locator": "상품명·기본 정보"
         }
@@ -50,8 +50,8 @@
       "status": "approved",
       "sources": [
         {
-          "title": "셀핀다 공식몰 1500mg 상품",
-          "url": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-1500mg-×-30포/27/",
+          "title": "셀핀다 스마트스토어 가바 1500 상품",
+          "url": "https://smartstore.naver.com/cellpinda",
           "page": null,
           "locator": "상품명·상품간략설명"
         }
