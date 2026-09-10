@@ -52,28 +52,64 @@ function isPublicUrl(value: string | null): value is string {
 export default function ResearchLibrary({ claims, onOpen }: Props) {
   const [linkStatus,setLinkStatus]=useState('');
   const [manualLink,setManualLink]=useState('');
+  const [query, setQuery] = useState('');
+  const [studyType, setStudyType] = useState('');
+  const [requestedId, setRequestedId] = useState('');
+  const studies = claims.filter(claim =>
+    claim.status === 'approved' && claim.id.startsWith('research-') &&
+    claim.publicText && claim.metadata?.result &&
+    claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)),
+  );
+  const studyTypes = [...new Set(studies.map(claim => claim.metadata!.studyType).filter((value): value is string => Boolean(value)))];
+  const activeType = studyTypes.includes(studyType) ? studyType : '';
+  const terms = query.normalize('NFKC').toLocaleLowerCase('ko-KR').trim().split(/\s+/).filter(Boolean);
+  const visibleStudies = studies.filter(claim => {
+    if (activeType && claim.metadata!.studyType !== activeType) return false;
+    const searchable = [claim.topic, claim.publicText, ...Object.values(claim.metadata!).flat(), ...claim.sources.map(source => source.title)]
+      .join(' ').normalize('NFKC').toLocaleLowerCase('ko-KR');
+    return terms.every(term => searchable.includes(term));
+  });
   useEffect(()=>{
-    const reveal=()=>{const id=window.location.hash.slice(1);if(!claims.some(c=>c.id===id&&c.status==='approved'&&id.startsWith('research-')))return;const article=document.getElementById(id);const details=article?.querySelector('details');if(details){details.open=true;article?.scrollIntoView({block:'start',behavior:'instant'})}};
+    const reveal=()=>{
+      let id: string;
+      try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+      if (!claims.some(claim => claim.id === id && claim.status === 'approved' && id.startsWith('research-') && claim.publicText && claim.metadata?.result && claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)))) return;
+      setQuery(''); setStudyType(''); setRequestedId(id);
+    };
     reveal();window.addEventListener('hashchange',reveal);return()=>window.removeEventListener('hashchange',reveal);
   },[claims]);
+  useEffect(() => {
+    if (!requestedId || query || activeType) return;
+    const article = document.getElementById(requestedId);
+    const details = article?.querySelector('details');
+    if (details) {
+      details.open = true;
+      article?.scrollIntoView({ block: 'start', behavior: 'instant' });
+      details.querySelector('summary')?.focus({ preventScroll: true });
+    }
+    setRequestedId('');
+  }, [requestedId, query, activeType, claims]);
   async function copyStudy(id:string){
     const url=new URL('/',window.location.origin);url.hash=id;
     try{await navigator.clipboard.writeText(url.href);setManualLink('');setLinkStatus('이 연구를 바로 여는 링크를 복사했어요.')}
     catch{setManualLink(url.href);setLinkStatus('아래 링크를 선택해 직접 복사해 주세요.')}
   }
 
-  const studies = claims.filter(claim =>
-    claim.status === 'approved' && claim.id.startsWith('research-') &&
-    claim.publicText && claim.metadata?.result &&
-    claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)),
-  );
-
   return <section id="research" className="section wrap research research-library" aria-labelledby="research-heading">
     <div className="section-head">
       <div><p className="chapter">연구를 쉽게 읽기</p><h2 id="research-heading">어떤 질문을 했고,<br />무엇을 발견했을까요?</h2></div>
       <p>한 연구의 발견과 여러 연구의 흐름을 함께 읽습니다.<br />대상과 조건, 아직 알 수 없는 점까지 확인하세요.</p>
     </div>
-    {studies.length === 0 ? <p className="note" role="status">현재 표시할 연구 자료가 없습니다. 자료가 준비되면 이곳에서 확인할 수 있습니다.</p> : studies.map(claim => {
+    {studies.length > 0 ? <>
+      <div className="research-library-controls" role="search" aria-label="승인된 연구 자료 찾기">
+        <label htmlFor="research-search">연구 내용 검색<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="연구 질문, 대상, 기간 등" aria-describedby="research-search-help" /></label>
+        <label htmlFor="research-type">자료 유형<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 자료 유형</option>{studyTypes.map(type => <option value={type} key={type}>{type}</option>)}</select></label>
+        <button type="button" className="text-link" disabled={!query && !activeType} onClick={() => { setQuery(''); setStudyType(''); }}>검색·유형 초기화</button>
+      </div>
+      <p id="research-search-help" className="note">공개된 연구의 질문·대상·결과·출처를 찾습니다. 자료 유형은 원문에 기록된 연구 설계 기준입니다.</p>
+      <p className="research-library-count" role="status" aria-live="polite">전체 {studies.length}건 중 {visibleStudies.length}건</p>
+    </> : null}
+    {studies.length === 0 ? <p className="note" role="status">현재 표시할 연구 자료가 없습니다. 자료가 준비되면 이곳에서 확인할 수 있습니다.</p> : visibleStudies.length === 0 ? <p className="research-library-empty">조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
       const metadata = claim.metadata!;
       const limitations = [...new Set([...(metadata.limitations ?? []), ...(claim.limitations ?? [])])];
       return <article id={claim.id} className="research-library-card" key={claim.id}>
