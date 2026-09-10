@@ -14,7 +14,7 @@
       "name": "공개 제품 범위",
       "target": "승인 공개 export에 gaba1500 제품 1개만 존재한다.",
       "status": "MET",
-      "evidence": ["data/content-ledger.json", "public/data/content.json"]
+      "evidence": ["data/content-ledger.json", "public/data/content.json", "scripts/validate-public-export.mjs"]
     },
     {
       "id": "M2",
