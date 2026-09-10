@@ -1,6 +1,8 @@
 node_modules/
 dist/
+worker-build/
 var/
+public/data/content.json
 tmp/
 *.tsbuildinfo
 .env*

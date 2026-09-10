@@ -17,9 +17,20 @@ const seenEvents=new Set<string>();
 let eventQueue=Promise.resolve();
 function trackOnce(name:string,properties:Record<string,string>={}){if(seenEvents.has(name))return;seenEvents.add(name);track(name,properties)}
 function track(name:string,properties:Record<string,string>={}){eventQueue=eventQueue.then(()=>fetch('/api/events',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eventId:crypto.randomUUID(),flowId,name:eventMap[name]||name,properties}),keepalive:true}).then(()=>{}).catch(()=>{}));}
+async function loadContent(signal:AbortSignal):Promise<Content>{
+ try{
+  const api=await fetch('/api/content',{signal});
+  if(api.ok)return api.json();
+ }catch(error){
+  if((error as Error).name==='AbortError')throw error;
+ }
+ const fallback=await fetch('/data/content.json',{signal});
+ if(!fallback.ok)throw Error('Content unavailable');
+ return fallback.json();
+}
 export default function App(){
  const [content,setContent]=useState<Content|null>(null),[error,setError]=useState(false),[menu,setMenu]=useState(false);
- useEffect(()=>{const c=new AbortController();fetch('/api/content',{signal:c.signal}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)});return()=>c.abort()},[]);
+ useEffect(()=>{const c=new AbortController();loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)});return()=>c.abort()},[]);
  useEffect(()=>{
  if(['/admin','/account'].includes(location.pathname))return;
   trackOnce('landing_view',{path:'/'});

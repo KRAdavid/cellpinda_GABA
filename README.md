@@ -22,6 +22,7 @@ API: http://127.0.0.1:4318/api/health
 ```sh
 node node_modules/typescript/bin/tsc --noEmit
 node --test src/domain/rhythm.test.ts server/server.test.mjs
+pnpm run sync:data
 node node_modules/vite/bin/vite.js build
 ```
 
@@ -33,7 +34,7 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 - 공식몰 후기 원문 탐색. 후기 재인용은 미완료.
 - 브라우저 로컬 7일 실천 체크. 회원 간 기기 동기화는 미구현.
 - 서버 영속 콘텐츠 수정·승인·감사 이력·이벤트 저장. 일부 설명 문구는 아직 코드에 있어 전체 콘텐츠 승인 범위로 확장해야 한다.
-- 실구매·7일 재방문·추천보상·회원기록·AI·공개 배포는 미완료. 로컬 실행이나 build 성공을 최종 완료로 간주하지 않는다.
+- 실구매·7일 재방문·추천보상·회원기록·AI는 운영 정책과 계정 연동이 필요한 후속 범위다. 공개 배포 번들은 GitHub Actions에서 검증한다.
 
 ## 문서
 
@@ -45,6 +46,21 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 공개 응답은 검토된 문안과 공개 URL만 포함한다. 원본 자료·토큰·DB·개인 후기 스크린샷은 공개 배포 대상이 아니다.
 
+
+## 로컬 데이터와 배포 데이터 동기화
+
+`data/content-ledger.json`이 승인된 콘텐츠의 단일 원장이다. `pnpm run sync:data`는 승인 상태이고 HTTPS 출처가 있는 연구 카드, 승인된 제품·후기만 `public/data/content.json`으로 내보낸다. 이 파일은 Git에 커밋하지 않고 `pnpm run build`와 GitHub Actions에서 매번 새로 생성한다. Worker API가 있는 환경은 `/api/content`를 우선 사용하고, 정적 호스팅에서는 같은 공개 JSON으로 자동 폴백한다.
+
+```sh
+pnpm run sync:data
+pnpm run build
+```
+
+## GitHub Actions 배포
+
+기본 배포 저장소는 [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA)이며 `main`에 push하면 `.github/workflows/deploy.yml`이 데이터 동기화 → 타입 검사 → 테스트 → 정적 번들 및 Worker dry-run을 수행한다. Cloudflare 계정 값을 저장소 Secrets에 넣으면 같은 workflow가 Worker·D1·assets까지 배포한다. 필요한 Secrets는 `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `ADMIN_TOKEN`, `MEMBER_ORIGIN`이다. Secrets가 없으면 검증만 실행하고 배포 단계는 명확히 건너뛴다.
+
+`CLOUDFLARE_D1_DATABASE_ID`는 운영 D1 데이터베이스를 가리켜야 하며, `ADMIN_TOKEN`과 `MEMBER_ORIGIN`은 저장소 파일이나 로그에 넣지 않는다. GitHub Pages 같은 정적 호스팅을 선택해도 승인 콘텐츠와 제품 링크는 `public/data/content.json`으로 동작한다.
 
 ## Cloudflare 중간 배포
 
