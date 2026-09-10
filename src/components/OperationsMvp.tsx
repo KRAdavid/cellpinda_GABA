@@ -177,8 +177,9 @@ export default function OperationsMvp() {
     </section>
     {queue ? <section className="ops-mvp-live-queue wrap" aria-labelledby="live-queue-heading">
       <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong></div></div>
+      <div className="ops-mvp-live-streams" aria-label="스트림별 현재 상태">{queue.workstreams.map(stream => <span key={stream.id}><strong>{stream.name}</strong><em>{stream.status}</em><small>{stream.nextAction}</small></span>)}</div>
       <div className="ops-mvp-live-queue-grid">{waitingQueue.map(task => <article key={task.id}><div><span className="ops-mvp-task-id">{task.id}</span><span className="ops-mvp-state">{stateLabels[task.state] || task.state}</span></div><h3>{task.title}</h3><p>담당 {task.lead} · 검증 {task.verifier}</p>{task.blockedBy ? <small>대기 입력 · {task.blockedBy}</small> : null}</article>)}</div>
-      <p className="note">완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 대기 {waitingQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>
+      <p className="note">계약 확인일 {queue.checkedAt} · 완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 대기 {waitingQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>
     </section> : null}
     {plan ? <>
       <section className="ops-mvp-contract wrap" aria-labelledby="contract-heading">
