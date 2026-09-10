@@ -116,6 +116,16 @@ export type SandboxWaveResult = SandboxRunResult & {
   stoppedReason: SandboxWaveStopReason;
 };
 
+export type MvpSessionStart = {
+  plan: MvpPlan;
+  audit: SandboxAuditEvent[];
+  approval?: ApprovalRequest;
+  approvalTaskId?: string;
+  decisions: MvpDecisionRecord[];
+  progressedTaskIds: string[];
+  stoppedReason: SandboxWaveStopReason;
+};
+
 const workstreams: MvpWorkstream[] = [
   {id: 'evidence', name: '근거·논문', lead: '연구·제품 근거', verifier: '독립 근거 검토', deliverable: '원문·조건·한계가 연결된 연구 레코드'},
   {id: 'consumer', name: '소비자 언어', lead: '마케팅·소비자심리', verifier: '표시·콘텐츠 검토', deliverable: '쉽게 읽는 요약과 적용 범위 문장'},
@@ -368,6 +378,25 @@ export function runSandboxWave(contract: MvpGoalContract, tasks: readonly MvpTas
       ? (current.every(task => task.state === 'DONE') ? 'completed' : 'no_ready_tasks')
       : 'no_ready_tasks';
   return {tasks: current, events, decisions, progressedTaskIds, stoppedReason, ...(approval ? {approval, approvalTaskId} : {})};
+}
+
+/**
+ * Starts a new goal session and immediately runs its safe internal wave.
+ * External commitments remain represented as an approval request and are
+ * never executed by this helper.
+ */
+export function startMvpSession(input: string, now = new Date().toISOString()): MvpSessionStart {
+  const plan = generateMvpPlan(input);
+  const wave = runSandboxWave(plan.contract, plan.tasks, now);
+  return {
+    plan: {...plan, tasks: wave.tasks},
+    audit: wave.events,
+    ...(wave.approval ? {approval: wave.approval} : {}),
+    ...(wave.approvalTaskId ? {approvalTaskId: wave.approvalTaskId} : {}),
+    decisions: [buildContractDecision(plan.contract, now), ...wave.decisions],
+    progressedTaskIds: wave.progressedTaskIds,
+    stoppedReason: wave.stoppedReason,
+  };
 }
 
 export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonly MvpTask[], events: readonly SandboxAuditEvent[], approval?: ApprovalRequest, now = new Date().toISOString(), decisions: readonly MvpDecisionRecord[] = []): MvpApprovalReport {

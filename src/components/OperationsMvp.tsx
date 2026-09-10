@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState} from 'react';
 import {ArrowRight, CheckCircle2, Clipboard, Download, LockKeyhole, Play, RotateCcw, ShieldCheck} from 'lucide-react';
-import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, generateMvpPlan, runSandboxTask, runSandboxWave, taskGraphEdges, verifySandboxTask, type MvpApprovalReport, type MvpDecisionRecord, type MvpPlan, type SandboxAuditEvent} from '../domain/goal-mvp';
+import {buildMvpApprovalReport, buildTaskDecision, runSandboxTask, runSandboxWave, startMvpSession, taskGraphEdges, verifySandboxTask, type MvpApprovalReport, type MvpDecisionRecord, type MvpPlan, type SandboxAuditEvent} from '../domain/goal-mvp';
 import './OperationsMvp.css';
 
 const defaultGoal = '공개용 GABA 논문 기반 마스터 인덱스';
@@ -131,9 +131,9 @@ export default function OperationsMvp() {
   function createPlan(event: React.FormEvent) {
     event.preventDefault();
     try {
-      const nextPlan = generateMvpPlan(input); const now = new Date().toISOString();
+      const session = startMvpSession(input);
       setRunId(clientUuid()); setRunKey(clientUuid());
-      setPlan(nextPlan); setAudit([]); setApproval(undefined); setApprovalTaskId(''); setDecisions([buildContractDecision(nextPlan.contract, now)]); setMessage('Goal Contract, TF, 업무 그래프와 첫 TF 의사결정 기록을 생성했습니다.'); setCopied(false);
+      setPlan(session.plan); setAudit(session.audit); setApproval(session.approval); setApprovalTaskId(session.approvalTaskId || ''); setDecisions(session.decisions); setMessage(`${session.progressedTaskIds.length}개 내부 업무를 자동 실행·검증하고 ${session.approvalTaskId || '다음 단계'}에서 책임자 승인 대기로 멈췄습니다.`); setCopied(false);
     } catch (error) { setMessage(error instanceof Error ? error.message : '목표를 생성하지 못했습니다.'); }
   }
 
