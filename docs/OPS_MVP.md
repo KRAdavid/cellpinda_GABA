@@ -20,7 +20,7 @@ canonical 업무 그래프의 현재 상태는 `pnpm run tf:pulse`로 다시 읽
 
 전체 목표의 현재 판정은 `pnpm run audit:goal`에서 확인한다. 이 명령은 계약·TF 레지스트리·업무 그래프·샌드박스·공개 인덱스 검증을 함께 실행하고, B2·B3·B4·C2·E1 같은 외부 게이트는 `VERIFYING`·`WAITING`으로 남겨 완료와 구분한다. `--json` 출력은 회의·CI가 읽을 수 있는 상태와 다음 입력만 포함한다.
 
-로컬 자료까지 같은 회의 패킷에 연결할 때는 지정 폴더가 있는 PC에서 `pnpm run audit:goal -- --local-inputs --json`을 실행한다. 이 옵션은 완제품 자료 스캔과 주문 파일 구조 감사를 추가해 `local-material-inputs`와 `local-order-inputs`로 표시한다. 완제품 후보가 발견되어도 B2 독립 검증을 자동 승인하지 않고, 역사 주문의 1500 수량이 있어도 상태·취소·환불·판매자 계정이 확인되지 않으면 E1을 `WAITING`으로 유지한다. 로컬 파일명·경로·개인 행은 공개 export와 CI artifact에 넣지 않는다.
+로컬 자료까지 같은 회의 패킷에 연결할 때는 지정 폴더가 있는 PC에서 `pnpm run audit:goal:local`을 실행한다. JSON이 필요하면 `pnpm run audit:goal -- --local-inputs --json`을 사용한다. 이 옵션은 완제품 자료 스캔과 주문 파일 구조 감사를 추가해 `local-material-inputs`와 `local-order-inputs`로 표시한다. 완제품 후보가 발견되어도 B2 독립 검증을 자동 승인하지 않고, 역사 주문의 1500 수량이 있어도 상태·취소·환불·판매자 계정이 확인되지 않으면 E1을 `WAITING`으로 유지한다. 로컬 파일명·경로·개인 행은 공개 export와 CI artifact에 넣지 않는다.
 
 배포 준비도도 같은 감사에 포함된다. Worker 운영 게이트가 그래프에서 실수로 `DONE`이 되더라도 Cloudflare 필수 Secrets와 산출물이 준비되지 않으면 감사가 오류로 판정하므로, 정적 Pages 공개와 영구 Worker 운영을 서로 바꾸어 기록할 수 없다.
 

@@ -164,5 +164,8 @@ if (jsonOutput) console.log(JSON.stringify(report));
 else {
   console.log(`Goal audit · ${report.goalId} · ${report.overallStatus}`);
   console.log(`core ${coreValid ? '통과' : '재검토 필요'} · 역할군 ${roleCoverage.filter(role => role.status === 'present').length}/6 · DONE ${taskCounts.DONE || 0}`);
+  if (includeLocalInputs) {
+    for (const item of checks.filter(checkItem => checkItem.id.startsWith('local-'))) console.log(`- [${item.status}] ${item.id}: ${item.detail}`);
+  }
   for (const item of report.nextActions) console.log(`- [${item.status}] ${item.id}: ${item.detail}${item.blockers.length ? ` · 다음: ${item.blockers.join(' · ')}` : ''}`);
 }

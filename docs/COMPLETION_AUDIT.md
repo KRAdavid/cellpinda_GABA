@@ -236,6 +236,6 @@ canonical 업무 그래프·TF pulse·공개 운영 큐·생성형 MVP의 모든
 
 ## 2026-09-11 로컬 입력과 전체 목표 감사 연결
 
-`pnpm run audit:goal -- --local-inputs --json` 옵션을 추가해 로컬 완제품·주문 감사 결과를 같은 Goal Audit 패킷에 연결했다. 지정 자료에서 완제품 관련 파일 7건(완제품 후보 5건, 벌크 원료 라벨 1건 제외)을 확인해 `local-material-inputs=MET`으로 기록했지만, B2 독립 표시 검증은 계속 `VERIFYING`이다. 주문 폴더는 1,086개 파일을 스캔했고 CSV 77개에서 GABA1500 121개 수량과 과거 GABA750 72개 수량을 식별했으나, 상태·취소·환불 필드가 없어 `local-order-inputs=WAITING`으로 남겼다. 750 자료는 내부 과거 분류에만 남고 공개 제품·매출 집계에는 포함하지 않는다.
+`pnpm run audit:goal:local`(JSON은 `pnpm run audit:goal -- --local-inputs --json`) 옵션을 추가해 로컬 완제품·주문 감사 결과를 같은 Goal Audit 패킷에 연결했다. 지정 자료에서 완제품 관련 파일 7건(완제품 후보 5건, 벌크 원료 라벨 1건 제외)을 확인해 `local-material-inputs=MET`으로 기록했지만, B2 독립 표시 검증은 계속 `VERIFYING`이다. 주문 폴더는 1,086개 파일을 스캔했고 CSV 77개에서 GABA1500 121개 수량과 과거 GABA750 72개 수량을 식별했으나, 상태·취소·환불 필드가 없어 `local-order-inputs=WAITING`으로 남겼다. 750 자료는 내부 과거 분류에만 남고 공개 제품·매출 집계에는 포함하지 않는다.
 
 이 옵션은 개인정보·원문 행·로컬 경로를 저장하거나 공개하지 않으며, CI 기본 감사와 공개 export는 외부 폴더 없이도 동일하게 재현된다. 로컬 자료의 발견이나 과거 수량은 표시 승인·실구매·환불 완료·외부 전문가 참여를 증명하지 않으므로 자동 승격하지 않는다.
