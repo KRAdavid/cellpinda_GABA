@@ -34,6 +34,12 @@ function loadStoredState(): StoredOpsState {
   } catch { return {}; }
 }
 
+function normalizeStoredPlan(plan: MvpPlan | null | undefined): MvpPlan | null {
+  if (!plan || !plan.contract || !Array.isArray(plan.tasks)) return null;
+  const focusAreas = Array.isArray(plan.contract.focusAreas) && plan.contract.focusAreas.length ? plan.contract.focusAreas : ['GABA 공개 인덱스'];
+  return {...plan, contract: {...plan.contract, focusAreas}, tasks: plan.tasks.map(task => ({...task, evidence: Array.isArray(task.evidence) ? task.evidence : [], dependencies: Array.isArray(task.dependencies) ? task.dependencies : [], acceptance: Array.isArray(task.acceptance) ? task.acceptance : []}))};
+}
+
 function downloadJson(filename: string, value: unknown) {
   const blob = new Blob([JSON.stringify(value, null, 2)], {type: 'application/json'});
   const url = URL.createObjectURL(blob);
@@ -44,7 +50,7 @@ function downloadJson(filename: string, value: unknown) {
 export default function OperationsMvp() {
   const [stored] = useState(loadStoredState);
   const [input, setInput] = useState(stored.input || defaultGoal);
-  const [plan, setPlan] = useState<MvpPlan | null>(stored.plan || null);
+  const [plan, setPlan] = useState<MvpPlan | null>(() => normalizeStoredPlan(stored.plan));
   const [audit, setAudit] = useState<SandboxAuditEvent[]>(stored.audit || []);
   const [approval, setApproval] = useState<MvpApprovalReport['approval']>(stored.approval);
   const [approvalTaskId, setApprovalTaskId] = useState(stored.approvalTaskId || '');
@@ -74,7 +80,7 @@ export default function OperationsMvp() {
         const remote = payload.state;
         if (active && remote && typeof remote === 'object') {
           if (typeof remote.input === 'string') setInput(remote.input);
-          if (remote.plan !== undefined) setPlan(remote.plan || null);
+          if (remote.plan !== undefined) setPlan(normalizeStoredPlan(remote.plan));
           if (Array.isArray(remote.audit)) setAudit(remote.audit);
           if (remote.approval !== undefined) setApproval(remote.approval);
           if (typeof remote.approvalTaskId === 'string') setApprovalTaskId(remote.approvalTaskId);
