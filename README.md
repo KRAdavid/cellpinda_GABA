@@ -76,6 +76,8 @@ pnpm run preflight:deploy
 
 `data/tf-role-registry.json`은 역할 책임의 단일 기준이다. pulse와 안전한 heartbeat는 이 레지스트리에서 확인한 6개 역할군을 ID·라벨·상태로만 기록하며, 실제 외부 전문가 자격이나 섭외를 의미하지 않는다. 역할군이 그래프·Goal Contract·heartbeat에서 어긋나면 배포 검증이 실패한다.
 
+`pnpm run tf:pulse:heartbeat`는 CI가 만든 임시 pulse 파일 없이도 최신 pulse를 생성해 안전한 heartbeat를 갱신한다. CI처럼 파일 경로를 직접 넘기면 지정한 파일만 읽는다.
+
 공개 운영 화면의 `회의 안건 JSON` 링크는 같은 pulse를 안전한 공개 패킷으로 제공한다. [공개 TF pulse](https://kradavid.github.io/cellpinda_GABA/data/tf-pulse.json)에는 원문 경로·개인정보·비밀값 없이 상태, 참여 역할, 필요한 입력과 다음 조치만 담긴다.
 
 `pnpm run preflight:deploy -- --strict`는 Cloudflare Worker 영구 배포에 필요한 설정·빌드 산출물·공개 export·필수 Secrets를 값 노출 없이 검사하고, 하나라도 없으면 실패한다. 일반 실행은 현재 상태를 `READY` 또는 `WAITING`으로 보고해 로컬·Pages 환경에서도 배포 준비도를 확인할 수 있다.

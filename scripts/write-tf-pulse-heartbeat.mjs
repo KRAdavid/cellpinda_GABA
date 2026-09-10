@@ -1,9 +1,22 @@
 import {readFile, writeFile, mkdir} from 'node:fs/promises';
+import {execFile} from 'node:child_process';
+import {promisify} from 'node:util';
 import {dirname, resolve} from 'node:path';
 
+const execFileAsync = promisify(execFile);
 const source = process.argv[2] || 'tf-pulse.json';
 const destination = resolve(process.cwd(), 'data/tf-pulse-heartbeat.json');
-const pulse = JSON.parse(await readFile(resolve(process.cwd(), source), 'utf8'));
+let pulse;
+try {
+  pulse = JSON.parse(await readFile(resolve(process.cwd(), source), 'utf8'));
+} catch (error) {
+  // A local operator should be able to reproduce the CI pulse without first
+  // creating the transient tf-pulse.json file. Explicit source paths still
+  // fail loudly so a typo cannot silently generate a different heartbeat.
+  if (process.argv[2] || error?.code !== 'ENOENT') throw error;
+  const generated = await execFileAsync(process.execPath, [resolve(process.cwd(), 'scripts/tf-pulse.mjs'), '--json'], {encoding: 'utf8'});
+  pulse = JSON.parse(generated.stdout.trim());
+}
 const fail = message => { throw new Error(`TF pulse heartbeat invalid: ${message}`); };
 
 if (pulse.mode !== 'automation_pulse' || pulse.goalStatus !== 'ACTIVE') fail('only an active automation pulse can be persisted');
