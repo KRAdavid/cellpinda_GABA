@@ -16,7 +16,7 @@ try {
   check('wrangler-runtime-name',typeof config.name==='string' && config.name.length>0,`name=${config.name ?? 'missing'}`);
 } catch (error) { check('wrangler-config',false,error instanceof Error ? error.message : 'invalid JSON'); }
 
-for(const file of ['dist/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/data/operations-queue.json']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
+for(const file of ['dist/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/data/operations-queue.json','dist/data/tf-pulse.json']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
 try {
   const content=readJson('public/data/content.json');
   const master=readJson('public/data/gaba-master-index.json');

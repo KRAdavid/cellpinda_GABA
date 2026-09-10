@@ -6,6 +6,7 @@ var/
 public/data/content.json
 public/data/gaba-master-index.json
 public/data/operations-queue.json
+public/data/tf-pulse.json
 tmp/
 *.tsbuildinfo
 .env*

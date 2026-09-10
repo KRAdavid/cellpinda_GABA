@@ -129,4 +129,19 @@ const operationsQueue={
 };
 const operationsTarget=resolve(root,'public/data/operations-queue.json');
 writeFileSync(operationsTarget,JSON.stringify(operationsQueue,null,2)+'\n');
-console.log(JSON.stringify({target,masterTarget,operationsTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));
+const publicPulse={
+  schemaVersion:1,
+  mode:'public_tf_pulse',
+  goalId:pulseForQueue.goalId,
+  goalStatus:pulseForQueue.goalStatus,
+  generatedAt:pulseForQueue.generatedAt,
+  snapshotHash:pulseForQueue.snapshotHash,
+  requiresHumanDecision:pulseForQueue.requiresHumanDecision,
+  counts:pulseForQueue.counts,
+  teaserGate:{status:pulseForQueue.teaserGate.status,taskId:pulseForQueue.teaserGate.taskId,taskState:pulseForQueue.teaserGate.taskState},
+  inputGates:pulseForQueue.inputGates.map(({taskId,state,chair,requiredInputs,nextAction})=>({taskId,state,chair,requiredInputs,nextAction})),
+  meetingAgenda:pulseForQueue.meetingAgenda.map(({taskId,state,chair,participants,question,decision,requiredInputs,nextAction,mode})=>({taskId,state,chair,participants,question,decision,requiredInputs,nextAction,mode})),
+};
+const pulseTarget=resolve(root,'public/data/tf-pulse.json');
+writeFileSync(pulseTarget,JSON.stringify(publicPulse,null,2)+'\n');
+console.log(JSON.stringify({target,masterTarget,operationsTarget,pulseTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));

@@ -15,13 +15,14 @@ const request = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, contentResponse, masterResponse, queueResponse] = await Promise.all([
+    const [page, contentResponse, masterResponse, queueResponse, pulseResponse] = await Promise.all([
       request('/?view=ops'),
       request('/data/content.json'),
       request('/data/gaba-master-index.json'),
       request('/data/operations-queue.json'),
+      request('/data/tf-pulse.json'),
     ]);
-    const [pageText, content, master, queue] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), queueResponse.json()]);
+    const [pageText, content, master, queue, publicPulse] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), queueResponse.json(), pulseResponse.json()]);
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
@@ -34,6 +35,12 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(queue.pulse && /^[a-f0-9]{64}$/.test(queue.pulse.snapshotHash), 'live operations queue must expose a valid pulse snapshot');
     assert.equal(queue.pulse.activeTasks, queue.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length, 'live pulse active count must match queue');
     assert.equal(queue.pulse.inputGates, queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length, 'live pulse input gate count must match queue');
+    assert.equal(publicPulse.mode, 'public_tf_pulse', 'live public TF pulse packet must use the public schema');
+    assert.equal(publicPulse.goalId, queue.goalId, 'live public TF pulse packet must use the active goal');
+    assert.equal(publicPulse.generatedAt, queue.pulse.generatedAt, 'live public TF pulse packet timestamp must match the queue');
+    assert.equal(publicPulse.snapshotHash, queue.pulse.snapshotHash, 'live public TF pulse packet hash must match the queue');
+    assert.equal(publicPulse.meetingAgenda.length, queue.pulse.activeTasks, 'live public TF pulse agenda count must match the queue');
+    assert.equal(publicPulse.inputGates.length, queue.pulse.inputGates, 'live public TF pulse gate count must match the queue');
     const queueIds = new Set(queue.tasks.map(task => task.id));
     assert.equal(queueIds.size, queue.tasks.length, 'live operations queue contains duplicate task ids');
     for (const task of queue.tasks) {
