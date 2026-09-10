@@ -75,6 +75,8 @@ pnpm run preflight:deploy
 
 `TF decision pulse` workflow는 6시간마다 canonical 업무 그래프의 실행·검증·입력 대기 안건을 읽어 run summary와 JSON artifact로 남긴다. 동시에 원문 경로·비밀값을 제외한 안전한 heartbeat를 `data/tf-pulse-heartbeat.json`에 저장하고 `[skip ci]` 커밋으로 `main`에 push한 뒤 `deploy.yml`을 한 번 수동 dispatch한다. GitHub `GITHUB_TOKEN` push가 후속 workflow를 자동 실행하지 않는 제약을 고려한 방식이며, `[skip ci]`가 push 기반 중복 실행도 차단한다. 상태를 자동 변경하지 않으므로 사람이 반대 의견과 승인 조건을 확인하면서도 TF 회의 안건이 멈추지 않고 갱신된다.
 
+`pnpm run validate:tf-pulse-workflow`는 이 heartbeat→dispatch 순서, 최소 권한, `[skip ci]` 중복 방지 조건을 build에서 고정한다.
+
 각 pulse에는 업무 그래프 상태 지문, 회의 안건, 외부 입력 게이트, 사람 판단 필요 여부가 포함되며 `pnpm run validate:tf-pulse`가 이 연결을 배포 전에 검증한다.
 
 `data/tf-role-registry.json`은 역할 책임의 단일 기준이다. pulse와 안전한 heartbeat는 이 레지스트리에서 확인한 6개 역할군을 ID·라벨·상태로만 기록하며, 실제 외부 전문가 자격이나 섭외를 의미하지 않는다. 역할군이 그래프·Goal Contract·heartbeat에서 어긋나면 배포 검증이 실패한다.

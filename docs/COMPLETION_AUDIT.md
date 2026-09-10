@@ -242,4 +242,4 @@ canonical 업무 그래프·TF pulse·공개 운영 큐·생성형 MVP의 모든
 
 ## 2026-09-11 pulse 중복 배포 경계 보강
 
-GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 실행하지 않는다는 점을 재현했다. 따라서 `TF decision pulse`는 `actions: write` 권한으로 `deploy.yml`을 한 번 명시적으로 dispatch하되, heartbeat 커밋에 `[skip ci]`를 붙여 push 기반 중복 실행을 차단하도록 정리했다. 기존 중복 실행은 concurrency에서 취소될 수 있었고, 새 경계는 heartbeat 1회와 배포 1회의 관계를 보존한다. 이 경로를 수정한 뒤 pulse 수동 재현과 배포 검증을 다시 실행한다.
+GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 실행하지 않는다는 점을 재현했다. 따라서 `TF decision pulse`는 `actions: write` 권한으로 `deploy.yml`을 한 번 명시적으로 dispatch하되, heartbeat 커밋에 `[skip ci]`를 붙여 push 기반 중복 실행을 차단하도록 정리했다. 기존 중복 실행은 concurrency에서 취소될 수 있었고, 새 경계는 heartbeat 1회와 배포 1회의 관계를 보존한다. `scripts/validate-tf-pulse-workflow.mjs`를 build에 연결해 이 순서·권한·중복 방지 조건이 되돌아가면 배포 검증이 실패하도록 고정했다. 수정된 workflow는 pulse 수동 실행 [34529573506](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34529573506)과 heartbeat 후 단일 배포 dispatch [34529597308](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34529597308)로 재현했으며, heartbeat 커밋 `865ea78` 이후 중복 push 배포가 발생하지 않았다.
