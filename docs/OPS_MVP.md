@@ -18,7 +18,7 @@
 
 canonical 업무 그래프의 현재 상태는 `pnpm run tf:pulse`로 다시 읽을 수 있다. 이 파동은 `VERIFYING`·`WAITING` 작업마다 실행 담당·독립 검증자·근거·다음 조치를 자동 제안하고, 대기 작업은 입력이 생기기 전까지 보류한다. 자동 pulse는 사람의 반대 의견을 발명하지 않으며, 출력에 `human-meeting-required`를 남겨 회의에서 보완하게 한다.
 
-같은 자동 판단의 공개 가능한 요약은 `operations-queue.json`의 각 작업 카드에도 `decision`, `decisionMode`, `nextAction`으로 함께 내보낸다. 공개 화면에서는 내부 증거 경로를 노출하지 않고, 현재 운영 상태와 다음 조치를 이해할 수 있는 수준만 보여 준다.
+같은 자동 판단의 공개 가능한 요약은 `operations-queue.json`의 각 작업 카드에도 `decision`, `decisionMode`, `nextAction`으로 함께 내보낸다. 공개 화면의 canonical 큐와 아래에서 새로 만드는 브라우저 샌드박스는 서로 다른 실행 컨텍스트로 표시하며, 내부 증거 경로를 노출하지 않고 현재 운영 상태와 다음 조치를 이해할 수 있는 수준만 보여 준다.
 
 CI와 로컬 production build는 `pnpm run validate:ops`로 전체 샌드박스 여정을 재생한다. 이 검증은 5개 내부 작업의 독립 검증과 공개 배포 승인 작업의 `WAITING → READY → RUNNING → VERIFYING → DONE` 전이를 확인하며, 각 완료 작업에 검증자·수락 기준·검증 당시 증거를 별도 기록한다. 외부 게시·구매를 수행하지 않는다.
 

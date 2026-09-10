@@ -19,6 +19,7 @@
 .ops-mvp-live-queue { padding-top: 54px; }
 .ops-mvp-live-queue-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 22px; }
 .ops-mvp-live-queue-head h2 { margin: 0; font-size: clamp(28px, 3vw, 40px); }
+.ops-mvp-live-queue-description { max-width: 620px; margin: 12px 0 0; color: #607567; font-size: 13px; line-height: 1.6; }
 .ops-mvp-live-queue-head > div:last-child { display: flex; align-items: center; gap: 12px; color: #158457; font-size: 12px; }
 .ops-mvp-live-queue-goal { color: #607567; }
 .ops-mvp-live-streams { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 16px; }

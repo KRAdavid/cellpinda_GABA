@@ -40,11 +40,13 @@ if (!Array.isArray(operationsQueue.workstreams) || operationsQueue.workstreams.l
 if (!Array.isArray(operationsQueue.tasks) || operationsQueue.tasks.length !== taskGraph.tasks.length) fail('operations queue must expose the current task graph');
 const queueIds = new Set();
 const graphIds = new Set(taskGraph.tasks.map(task => task.id));
+const expectedDecisionMode = state => state === 'VERIFYING' ? 'independent-review' : state === 'WAITING' || state === 'BACKLOG' ? 'input-gate' : state === 'READY' ? 'sandbox-execution' : state === 'RUNNING' ? 'execution-tracking' : 'state-preservation';
 for (const task of operationsQueue.tasks) {
   if (queueIds.has(task.id)) fail(`operations queue contains duplicate task ${task.id}`);
   queueIds.add(task.id);
   if (!task.id || !task.stream || !task.title || !task.state || !task.lead || !task.verifier || !task.decision || !task.decisionMode || !task.nextAction || !Array.isArray(task.dependencies)) fail(`operations queue task ${task.id ?? '(unknown)'} is incomplete`);
   if (!['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state)) fail(`operations queue task ${task.id} has an unsupported state`);
+  if (task.decisionMode !== expectedDecisionMode(task.state)) fail(`operations queue task ${task.id} has a decision mode that does not match ${task.state}`);
 }
 if (queueIds.size !== graphIds.size || [...graphIds].some(id => !queueIds.has(id))) fail('operations queue task ids do not match the current task graph');
 
