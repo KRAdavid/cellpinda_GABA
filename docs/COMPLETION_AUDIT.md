@@ -173,3 +173,9 @@ canonical 그래프의 B2·B3·B4·C2·E1에 `requiredInputs`를 추가하고, `
 ## TF pulse heartbeat 자동 재배포 증거
 
 `tf-pulse.yml`에 안전한 heartbeat 저장과 명시적 Pages deploy dispatch를 연결했다. 수동 [TF decision pulse 34513525751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34513525751)이 pulse 검증·heartbeat 생성·저장·artifact 업로드를 성공시키고 커밋 `0064ff8`을 만들었으며, 이어진 [Pages 배포 34513547183](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34513547183)이 공개 export·Pages·라이브 smoke를 성공시켰다. 초기 dispatch 권한 오류는 커밋 `d5ab89e`에서 `actions:write`를 추가해 해결했다. heartbeat에는 pulse 시각·상태 지문·역할·필요 입력만 남기고 원문 경로·비밀값·사람 반대 의견은 저장하지 않는다.
+
+## 공개 TF pulse 패킷 후속 증거
+
+`sync-public-data.mjs`가 안전한 `public/data/tf-pulse.json`을 생성하고 운영 화면에 `회의 안건 JSON` 링크를 노출한다. 패킷은 목표 상태·작업별 담당 역할·필요 입력·다음 조치·회의 안건만 포함하며, 내부 증거 원문·개인정보·비밀값은 포함하지 않는다. 공개 Pages 라이브 검증은 pulse endpoint HTTP 200, `public_tf_pulse` 모드, `회의 안건 JSON` 링크, `다음 TF 회의 안건` 패널을 확인했다. 1440px·390px Playwright 검증에서 가로 넘침 0, 콘솔 오류 0, 페이지 오류 0을 확인했다.
+
+최신 커밋 `ca612c2`의 [GitHub Actions 34514541733](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34514541733)은 Goal Contract·TF pulse·공개 export·Pages·라이브 smoke를 모두 성공시켰다. `pnpm run validate:live -- https://kradavid.github.io/cellpinda_GABA`는 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`를 확인했다. 공개 패킷은 소비자에게 안전한 운영 진행 상황을 보여 주지만, B2·B3·B4·C2·E1의 사람 승인·권한·비밀값·주문 응답을 자동으로 완료시키지 않는다.
