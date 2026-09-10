@@ -2,6 +2,12 @@
 
 목표 파일 전체를 읽고 구현을 시작했다. 기존 회의 문서 작성은 progress로 분류한다. 이번 작업도 실제 코드·원장·이미지·테스트를 만들었으므로 progress다. 전체 목표는 아직 완료되지 않았다.
 
+## 최신 업데이트 — 2026-09-11 TF pulse 재현과 신선도 표시
+
+운영 보드가 마지막 TF pulse 시각뿐 아니라 `방금 갱신`·`몇 분 전 갱신`·`업데이트 지연` 상태를 표시하도록 보강했다. 6시간 주기 pulse를 현재 코드에서 수동 재현한 [34530924367](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530924367)은 계약·역할·업무 그래프 검증과 안전 heartbeat 생성을 성공시켰고, heartbeat 커밋 [`97026c2`](https://github.com/KRAdavid/cellpinda_GABA/commit/97026c2) 이후 [단일 deploy·Pages·라이브 smoke 34530948751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530948751)도 성공했다. `[skip ci]`와 명시적 dispatch 경계가 유지되어 중복 배포는 발생하지 않았다.
+
+현재 라이브 export는 연구 8건·소비자 주장 14건·Smart Store `gaba1500` 1개·업무 13개이며, canonical 그래프는 DONE 8건·VERIFYING B2 1건·WAITING B3·B4·C2·E1 4건이다. Cloudflare 운영 Secrets, 후기 재게시 권한, 현행 표시 최종 승인, 실제 주문·취소·환불 응답이 도착하기 전에는 전체 목표를 완료로 승격하지 않는다. 역할 레지스트리는 역할 책임을 고정하는 장치이며 실제 전문가 자격·섭외를 증명하지 않는다.
+
 ## 2026-09-11 사람 회의 의견 입력과 배포 재검증
 
 운영 MVP의 TF 의사결정 로그에 사람이 직접 반대 의견·재검토 조건을 남기는 입력 폼을 추가했다. 자동 생성 안전 경계는 `guardrail`, 회의에서 작성한 기록은 `human-meeting`으로 분리하고 기록 시각을 저장한다. pulse의 `VERIFYING`·`WAITING` 작업은 `다음 TF 회의 안건` 패널에서 담당자·검증자·다음 조치와 함께 확인할 수 있다. 10자 미만 메모와 허용되지 않은 상태·시각은 공통 상태 검증에서 거부하며, 서버 저장·브라우저 `localStorage`·JSON 승인 보고서에 같은 구조로 보존된다. `pnpm test` 66개, 타입검사, production build와 로컬 API 연동 Playwright 데스크톱·모바일 검증이 통과했다.
