@@ -249,3 +249,7 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 공개 운영 큐 상단에 `목표 감사 JSON` 링크를 추가하고 `scripts/sync-public-data.mjs`가 Goal Contract·역할 커버리지·상태 카운트·논문/제품/TF pulse 마일스톤·현재 입력 게이트를 개인정보와 내부 경로 없이 생성하도록 보강했다. `validate-public-export`, `validate-live-public`, `check-deploy-readiness`가 이 패킷을 큐·pulse·canonical 그래프와 대조한다. 공개 패킷은 `IN_PROGRESS_WITH_GATES`, 게이트 5건, 연구 8건, Smart Store `gaba1500` 1건을 보고하며, 실제 외부 승인·전문가 자격·주문 완료를 완료로 승격하지 않는다.
 
 커밋 `7302cef`·`0421ef2`의 [GitHub Actions 34532696449](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34532696449)는 verify·Pages 게시·라이브 smoke를 모두 성공시켰다. 로컬 `pnpm run validate:live`도 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, auditGates 5, pulse 상태 지문 일치를 확인했다. Cloudflare Secrets 5개가 없어 Worker 단계는 구성 보고 후 건너뛰었고, C2·B2·B3·B4·E1은 계속 입력·승인 대기다.
+
+## 2026-09-11 공개 게이트 입력 일치 재검증
+
+강화한 라이브 smoke가 B2 `VERIFYING` 작업의 원본 `requiredInputs` 3개가 공개 operations queue에서 누락된 것을 발견했다. `sync-public-data.mjs`가 `VERIFYING`을 포함한 모든 작업에 입력 체크리스트를 보존하도록 수정했고, 라이브 검증은 각 게이트의 제목·상태·담당자·독립 검증자·입력·결정 모드·다음 조치를 queue와 `goal-audit.json` 사이에서 대조한다. 커밋 `cd065ca`의 [GitHub Actions 34533311676](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34533311676)은 verify·Pages·라이브 smoke를 성공시켰으며, B2 입력 3개·감사 게이트 5건·pulse 지문 일치를 확인했다. 이 검사는 자료 승인 자체를 대신하지 않으며 B2는 계속 `VERIFYING`이다.
