@@ -203,3 +203,11 @@ pulse 패킷 구현 커밋 `ca612c2`의 [GitHub Actions 34514541733](https://git
 공개 운영 큐가 `roleCoverage`를 함께 받아 현재 TF 역할군을 화면에 표시하도록 연결했다. 390px에서도 역할 칩이 줄바꿈되어 보이도록 반응형 스타일을 추가했으며, 큐와 공개 pulse의 역할 ID·상태가 다르면 export·라이브 검증이 실패한다. `pnpm test` 66건과 production build를 통과한 뒤 Pages 배포·라이브 smoke에서 역할군 6개와 5개 회의 안건을 다시 확인했다. 역할군 표시는 책임 구조의 가시성을 높이는 장치이며 실제 전문가 자격·섭외를 의미하지 않는다.
 
 생성형 MVP 검증에도 같은 레지스트리를 연결해 한 문장 목표로 만든 TF의 팀·스트림이 6개 필수 역할군을 포함하는지 확인한다. 역할 정의가 canonical pulse와 생성형 Goal Contract에서 갈라지면 `validate:ops`가 배포 전에 실패한다.
+
+## 2026-09-11 최신 배포·라이브 재감사
+
+커밋 `4def650`에서 생성형 MVP 검증(`validate:ops`)도 `data/tf-role-registry.json`의 6개 필수 역할군을 확인하도록 연결했다. `pnpm run validate:ops`, production build, 66개 회귀 테스트가 통과했으며 [GitHub Actions 34521776464](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34521776464)의 verify·Pages·라이브 smoke가 모두 성공했다. Worker 배포 job은 Cloudflare 운영 Secrets가 없는 상태를 그대로 보고하고 실제 배포 단계는 실행하지 않았다.
+
+배포된 [공개 사이트](https://kradavid.github.io/cellpinda_GABA/)와 [운영 MVP](https://kradavid.github.io/cellpinda_GABA/?view=ops)를 다시 확인해 page 200, 승인 연구 8건, 주장 14건, 제품 1종, 운영 큐 13개, `DONE=8`, `VERIFYING=1`, `WAITING=4`, Smart Store only, 750 제거, provenance 일치를 확인했다. 라이브 `tf-pulse.json`과 `operations-queue.json`은 마케팅·소비자심리, 연구·근거, 제품·표시, 스토리·UX·프런트, 데이터·판매처, QA·감사 6개 역할군을 같은 순서와 `present` 상태로 제공한다.
+
+이 재감사는 역할 책임 구조와 배포 재현성을 증명하지만 실제 외부 전문가 섭외, B2 표시 승인, B3 후기 재게시 권한, B4 티저 공개 승인, C2 Cloudflare 운영 연결, E1 실제 주문 대사를 완료한 증거가 아니다. 해당 입력이 들어오기 전까지 자동 pulse는 회의 안건·필요 입력만 갱신하고 공개·구매·법적 약속은 실행하지 않는다.
