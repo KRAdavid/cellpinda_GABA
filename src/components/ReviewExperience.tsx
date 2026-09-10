@@ -60,7 +60,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
   return <section id="reviews" className="section sage review-experience" aria-labelledby="review-heading">
     <div className="wrap">
       <div className="section-head">
-        <div><p className="chapter">사용 경험</p><h2 id="review-heading">{quotes.length?<>먼저 선택한 사람들의<br/>사용 이야기를 읽어보세요.</>:<>가바 750 사용 경험을,<br />공식몰 원문에서.</>}</h2></div>
+        <div><p className="chapter">사용 경험</p><h2 id="review-heading">{quotes.length?<>먼저 선택한 사람들의<br/>사용 이야기를 읽어보세요.</>:destinations.length?<>제품별 사용 경험을,<br />공식몰 원문에서.</>:<>사용 경험을,<br />공식몰 원문에서.</>}</h2></div>
         <p>사용 경험은 구체적으로 살펴볼수록 도움이 됩니다.<br />제품 정보와 나란히 놓고, 내 선택을 확인해 보세요.</p>
       </div>
       {quotes.length>0&&<div className="review-quotes">
