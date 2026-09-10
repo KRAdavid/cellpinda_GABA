@@ -1,4 +1,5 @@
 import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 
 const readJson = async relative => JSON.parse(await readFile(new URL(`../${relative}`, import.meta.url), 'utf8'));
 const contract = await readJson('data/goal-contract.json');
@@ -69,17 +70,33 @@ const decisions = activeTasks
   });
 
 const counts = Object.fromEntries(graph.stateMachine.map(state => [state, graph.tasks.filter(task => task.state === state).length]));
+const snapshotHash = createHash('sha256').update(JSON.stringify({
+  goalId: contract.goalId,
+  contractStatus: contract.status,
+  contractMetrics: contract.successMetrics,
+  graphCheckedAt: graph.checkedAt,
+  tasks: graph.tasks,
+  teaserStatus: teaser.status,
+  teaserTaskState: tasksById.get('B4')?.state ?? null,
+})).digest('hex');
+const inputGates = decisions
+  .filter(item => item.mode === 'input-gate')
+  .map(item => ({taskId: item.taskId, state: item.state, blockedBy: item.blockedBy, chair: item.chair, nextAction: item.nextAction}));
 const result = {
   schemaVersion: 1,
   mode: 'automation_pulse',
   generatedAt: new Date().toISOString(),
   goalId: contract.goalId,
   goalStatus: contract.status,
+  snapshotHash,
+  requiresHumanDecision: decisions.some(item => ['VERIFYING', 'WAITING'].includes(item.state)),
   teaserGate: {status: teaser.status, taskId: 'B4', taskState: tasksById.get('B4')?.state ?? null},
   counts,
   ready: decisions.filter(item => item.state === 'READY').map(item => item.taskId),
   verifying: decisions.filter(item => item.state === 'VERIFYING').map(item => item.taskId),
   waiting: decisions.filter(item => ['WAITING', 'BACKLOG'].includes(item.state)).map(item => item.taskId),
+  inputGates,
+  meetingAgenda: decisions.map(item => ({taskId: item.taskId, state: item.state, chair: item.chair, participants: item.participants, question: item.question, decision: item.decision, nextAction: item.nextAction, mode: item.mode})),
   decisions,
 };
 
