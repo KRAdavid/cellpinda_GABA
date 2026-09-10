@@ -43,6 +43,8 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 - `docs/CACOS_GOAL_CONTRACT.md`: 운영체제 설계서에 맞춘 현재 목표·성공 기준·다음 실행 파동
 - `data/goal-contract.json`: 공개 데이터와 분리된 기계 검증용 Goal Contract
 - `data/task-graph.json`: 목표에 연결된 작업·의존성·완료 증거·대기 조건
+- `data/tf-role-registry.json`: 마케팅·소비자심리부터 QA·감사까지 6개 교차 검토 역할의 책임·권한·매칭 기준
+- `data/tf-pulse-heartbeat.json`: 다음 실행에서도 재현하는 안전한 pulse 시각·상태 지문·역할·입력 게이트
 - `docs/IMPLEMENTATION_STATUS.md`: 최신 구현·검증·남은 작업
 - `data/content-ledger.json`: 내부 근거 원장. 전체 파일을 public으로 복사하지 않는다.
 - `docs/EVIDENCE_AUDIT.md`, `docs/ASSET_SOURCES.md`: 원문 검토·실제 제품 사진 출처
@@ -63,6 +65,7 @@ pnpm run sync:data
 pnpm run build
 pnpm run goal:next
 pnpm run tf:pulse
+pnpm run validate:tf-pulse
 pnpm run audit:orders
 pnpm run preflight:deploy
 ```
@@ -70,6 +73,8 @@ pnpm run preflight:deploy
 `TF decision pulse` workflow는 6시간마다 canonical 업무 그래프의 실행·검증·입력 대기 안건을 읽어 run summary와 JSON artifact로 남긴다. 동시에 원문 경로·비밀값을 제외한 안전한 heartbeat를 `data/tf-pulse-heartbeat.json`에 저장해 Pages 배포를 깨우므로 공개 운영 큐의 pulse 시각과 지문도 계속 갱신된다. 상태를 자동 변경하지 않으므로 사람이 반대 의견과 승인 조건을 확인하면서도 TF 회의 안건이 멈추지 않고 갱신된다.
 
 각 pulse에는 업무 그래프 상태 지문, 회의 안건, 외부 입력 게이트, 사람 판단 필요 여부가 포함되며 `pnpm run validate:tf-pulse`가 이 연결을 배포 전에 검증한다.
+
+`data/tf-role-registry.json`은 역할 책임의 단일 기준이다. pulse와 안전한 heartbeat는 이 레지스트리에서 확인한 6개 역할군을 ID·라벨·상태로만 기록하며, 실제 외부 전문가 자격이나 섭외를 의미하지 않는다. 역할군이 그래프·Goal Contract·heartbeat에서 어긋나면 배포 검증이 실패한다.
 
 공개 운영 화면의 `회의 안건 JSON` 링크는 같은 pulse를 안전한 공개 패킷으로 제공한다. [공개 TF pulse](https://kradavid.github.io/cellpinda_GABA/data/tf-pulse.json)에는 원문 경로·개인정보·비밀값 없이 상태, 참여 역할, 필요한 입력과 다음 조치만 담긴다.
 
