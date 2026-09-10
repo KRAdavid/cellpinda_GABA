@@ -29,6 +29,8 @@
 
 작은 계약 초안은 재개를 위해 허용하지만 작업이 포함된 상태는 담당자·검증자·수락 기준을 갖춰야 하며, 완료 작업은 `sandbox_simulation` 검증과 `independent-review` 증거를 함께 남겨야 한다. 이 검증은 외부 운영 결과를 만들어 주지 않으며, 서버 저장 데이터의 무결성과 개인정보 최소화를 보장하기 위한 경계다. Node·Worker 샌드박스 API 테스트에 위조 완료·위조 전환·비공개 필드 거부 회귀를 추가했다.
 
+커밋 `e0d9d00`의 GitHub Actions `34482666207`은 검증·Pages 배포·Worker 설정 점검·라이브 smoke를 모두 성공했다. Worker는 Cloudflare Secrets가 없어 실제 Worker 배포 단계는 건너뛰었고, 정적 공개 URL은 새 번들의 운영 문구와 공개 export를 확인했다. `pnpm run validate:live -- https://kradavid.github.io/cellpinda_GABA` 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 12, waitingTasks 3, smartStoreOnly true, removed750 true다.
+
 
 ## 최신 업데이트 — 소비자 설득 흐름 및 실제 서버
 
