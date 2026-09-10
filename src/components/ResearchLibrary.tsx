@@ -128,7 +128,6 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <p className="research-library-summary">{claim.publicText}</p>
         {metadata.consumerSummary ? <p className="research-library-consumer-summary"><strong>쉽게 말하면</strong>{metadata.consumerSummary}</p> : null}
         {metadata.hopefulTakeaway ? <p className="research-library-hopeful"><strong>내 생활에 연결해 보기</strong>{metadata.hopefulTakeaway}</p> : null}
-        <a className="text-link research-try-link" href="#products">연구와 제품 정보는 별개입니다. 제품 구성·표시사항을 따로 살펴보세요 →</a>
         <dl className="research-library-preview" aria-label="연구의 핵심 조건">
           {(['population', 'sampleSize', 'duration', 'searchThrough'] as const).map(key => metadata[key] ? <div key={key}>
             <dt>{facts.find(([field]) => field === key)![1]}</dt><dd>{metadata[key]}</dd>
@@ -152,6 +151,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
             <a key={`${source.url}-${source.title}`} href={source.url!} target="_blank" rel="noopener noreferrer">{source.title} <span aria-label="새 창">↗</span></a>,
           )}</div>
         </details>
+        <a className="text-link research-try-link" href="#products">연구와 제품 정보는 별개입니다. 위 조건과 적용 범위를 확인한 뒤 제품 구성·표시사항을 따로 살펴보세요 →</a>
         <button type="button" className="text-link research-copy" onClick={()=>copyStudy(claim.id)}>이 연구 링크 복사 ↗</button>
       </article>;
     })}
