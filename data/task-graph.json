@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "goalId": "GL-2026-CELL-GABA-001",
+  "updatedAt": "2026-09-10",
+  "stateMachine": ["BACKLOG", "READY", "RUNNING", "VERIFYING", "WAITING", "EXPIRED", "RETRY", "REWORK", "DONE", "FAILED", "CANCELLED"],
+  "tasks": [
+    {
+      "id": "A1",
+      "stream": "A",
+      "title": "소비자 여정 배포 QA",
+      "state": "DONE",
+      "priority": 1,
+      "lead": "마케팅·소비자심리·UX",
+      "verifier": "QA",
+      "dependencies": [],
+      "acceptance": ["데스크톱과 390px에서 제품·후기·구매 흐름 확인", "가로 넘침과 이미지 오류 없음"],
+      "evidence": ["GitHub Actions 34456953056", "https://kradavid.github.io/cellpinda_GABA/?view=products#products"]
+    },
+    {
+      "id": "A2",
+      "stream": "A",
+      "title": "소비자 사용성 점검 설계",
+      "state": "DONE",
+      "priority": 1,
+      "lead": "소비자심리·UX",
+      "verifier": "QA",
+      "dependencies": ["A1"],
+      "acceptance": ["390px·데스크톱 과제와 관찰 항목 작성", "이해·망설임·공유 이유를 제품 효능과 분리해 기록"],
+      "evidence": ["docs/USABILITY_TEST_PLAN.md"]
+    },
+    {
+      "id": "B1",
+      "stream": "B",
+      "title": "승인 원장과 공개 export 검증",
+      "state": "DONE",
+      "priority": 1,
+      "lead": "연구·제품 근거",
+      "verifier": "표시·콘텐츠 검토",
+      "dependencies": [],
+      "acceptance": ["공개 제품 1개와 승인 후기 목적지 1개", "연구·제품·후기 적용 범위 분리"],
+      "evidence": ["data/content-ledger.json", "public/data/content.json", "pnpm run validate:goal"]
+    },
+    {
+      "id": "B2",
+      "stream": "B",
+      "title": "1500 현행 표시사항 자료 보강",
+      "state": "WAITING",
+      "priority": 1,
+      "lead": "제품 책임자",
+      "verifier": "표시·콘텐츠 검토",
+      "dependencies": [],
+      "blockedBy": "현행 SKU·개정일·뒷면·옆면·낱포 자료",
+      "acceptance": ["섭취·보관·주의사항을 현행 포장 근거로 확인", "공개 가능 범위와 미확인 범위 분리"],
+      "evidence": ["docs/PRODUCT_EXPERIENCE_INPUTS.md"]
+    },
+    {
+      "id": "B3",
+      "stream": "B",
+      "title": "권한 있는 실제 후기 확보·검토",
+      "state": "WAITING",
+      "priority": 2,
+      "lead": "고객지원·운영",
+      "verifier": "근거·표시 검토",
+      "dependencies": [],
+      "blockedBy": "원문 URL·제품·사용기간·재게시 권한·제공관계",
+      "acceptance": ["권한과 맥락 확인 후 인용 가능 문안 생성", "철회·만료·개인정보 범위 기록"],
+      "evidence": ["docs/EVIDENCE_AUDIT.md", "src/components/ReviewEditor.tsx"]
+    },
+    {
+      "id": "C1",
+      "stream": "C",
+      "title": "정적 공개 배포",
+      "state": "DONE",
+      "priority": 1,
+      "lead": "프런트·배포",
+      "verifier": "QA·감사",
+      "dependencies": ["A1", "B1"],
+      "acceptance": ["GitHub Pages HTTPS 공개", "main push 후 데이터 동기화·검증·Pages 배포"],
+      "evidence": ["https://kradavid.github.io/cellpinda_GABA/", "GitHub Actions 34456953056"]
+    },
+    {
+      "id": "C2",
+      "stream": "C",
+      "title": "Cloudflare Worker·D1 운영 연결",
+      "state": "WAITING",
+      "priority": 3,
+      "lead": "서버·보안·배포",
+      "verifier": "QA·감사",
+      "dependencies": ["C1"],
+      "blockedBy": "Cloudflare API token·account ID·D1 ID·운영 토큰·정식 origin",
+      "risk": "E_EXTERNAL_COMMITMENT",
+      "acceptance": ["운영 D1에 승인 원장과 감사 로그 적용", "복구·롤백·비밀 회수 절차 검증"],
+      "evidence": ["docs/IMPLEMENTATION_STATUS.md", "docs/CACOS_GOAL_CONTRACT.md"]
+    },
+    {
+      "id": "D1",
+      "stream": "D",
+      "title": "Goal Contract 자동 검증",
+      "state": "DONE",
+      "priority": 1,
+      "lead": "TF 리드·AI 비서실",
+      "verifier": "품질감사관",
+      "dependencies": [],
+      "acceptance": ["목표·지표·중단조건·작업 흐름이 스키마 검증", "단종 제품 재유입 시 빌드 차단"],
+      "evidence": ["data/goal-contract.json", "scripts/validate-goal-contract.mjs"]
+    },
+    {
+      "id": "D2",
+      "stream": "D",
+      "title": "Goal·Task·Approval·Audit 최소 코어 설계",
+      "state": "DONE",
+      "priority": 2,
+      "lead": "TF 리드·AI 비서실",
+      "verifier": "품질감사관",
+      "dependencies": ["D1"],
+      "acceptance": ["가상 목표 1개가 계약→작업→검증→보고로 재현", "고위험 작업은 승인 없이는 실행 상태가 되지 않음"],
+      "evidence": ["data/task-graph.json", "src/domain/operations.ts", "src/domain/operations.test.ts"]
+    },
+    {
+      "id": "E1",
+      "stream": "E",
+      "title": "실구매 전환 대사",
+      "state": "BACKLOG",
+      "priority": 3,
+      "lead": "데이터·판매처 운영",
+      "verifier": "재무·QA",
+      "dependencies": ["C2"],
+      "blockedBy": "스마트스토어 주문·취소·환불 데이터 계약",
+      "acceptance": ["판매처 주문과 유입을 SKU·기간·상태별 대사", "클릭과 실제 구매를 별도 지표로 보고"],
+      "evidence": ["docs/ORDER_INTEGRATION.md"]
+    }
+  ]
+}
