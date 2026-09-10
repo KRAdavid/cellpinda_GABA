@@ -69,7 +69,7 @@ export default function OperationsMvp() {
   const [copied, setCopied] = useState(false);
   const edges = useMemo(() => plan ? taskGraphEdges(plan.tasks) : [], [plan]);
   const report = useMemo(() => plan ? buildMvpApprovalReport(plan.contract, plan.tasks, audit, approval, new Date().toISOString(), decisions) : null, [plan, audit, approval, decisions]);
-  const waitingQueue = useMemo(() => queue?.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG') ?? [], [queue]);
+  const attentionQueue = useMemo(() => queue?.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)) ?? [], [queue]);
 
   useEffect(() => {
     let active = true;
@@ -206,8 +206,8 @@ export default function OperationsMvp() {
     {queue ? <section className="ops-mvp-live-queue wrap" aria-labelledby="live-queue-heading">
       <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong><button className="text-link" type="button" onClick={() => setQueueRefresh(value => value + 1)}>새로고침 ↻</button></div></div>
       <div className="ops-mvp-live-streams" aria-label="스트림별 현재 상태">{queue.workstreams.map(stream => <span key={stream.id}><strong>{stream.name}</strong><em>{stream.status}</em><small>{stream.nextAction}</small></span>)}</div>
-      <div className="ops-mvp-live-queue-grid">{waitingQueue.map(task => <article key={task.id}><div><span className="ops-mvp-task-id">{task.id}</span><span className="ops-mvp-state">{stateLabels[task.state] || task.state}</span></div><h3>{task.title}</h3><p>담당 {task.lead} · 검증 {task.verifier}</p>{task.blockedBy ? <small>대기 입력 · {task.blockedBy}</small> : null}</article>)}</div>
-      <p className="note">계약 확인일 {queue.checkedAt} · 완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 대기 {waitingQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>
+      <div className="ops-mvp-live-queue-grid">{attentionQueue.map(task => <article key={task.id}><div><span className="ops-mvp-task-id">{task.id}</span><span className="ops-mvp-state">{stateLabels[task.state] || task.state}</span></div><h3>{task.title}</h3><p>담당 {task.lead} · 검증 {task.verifier}</p>{task.blockedBy ? <small>대기 입력 · {task.blockedBy}</small> : null}</article>)}</div>
+      <p className="note">계약 확인일 {queue.checkedAt} · 완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 진행/대기 {attentionQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>
     </section> : null}
     {plan ? <>
       <section className="ops-mvp-contract wrap" aria-labelledby="contract-heading">
