@@ -1,10 +1,10 @@
 # TF 자동 협업 파동
 
-`pnpm run tf:pulse`는 현재 `Goal Contract`와 canonical 업무 그래프를 읽어 다음 회의에서 검토할 작업별 결정 제안을 만든다. 실행 담당과 독립 검증자를 함께 참여시키고, 상태를 바꾸지 않은 채 증거·대기 입력·다음 행동을 정리한다.
+`pnpm run tf:pulse`는 현재 `Goal Contract`와 canonical 업무 그래프를 읽어 다음 회의에서 검토할 작업별 결정 제안을 만든다. 실행 담당과 독립 검증자를 함께 참여시키고, 상태를 바꾸지 않은 채 증거·대기 입력·다음 행동을 정리한다. `WAITING`·`BACKLOG` 작업은 그래프의 `requiredInputs` 체크리스트를 함께 내보내 회의에서 준비할 자료를 한눈에 확인한다.
 
 GitHub Actions의 `TF decision pulse` workflow가 6시간마다 같은 명령을 실행하고 JSON 결과를 run summary와 14일 보존 artifact로 남긴다. `workflow_dispatch`로 즉시 다시 실행할 수도 있다. 이 주기는 상태를 임의로 바꾸거나 외부 게시·구매를 실행하지 않고, 새 입력이 필요한 TF 회의 안건을 계속 갱신한다.
 
-`pnpm run validate:tf-pulse`는 pulse가 ACTIVE Goal Contract·canonical 그래프·B4 티저 게이트와 일치하는지, 모든 활성 작업에 담당자·검증자·다음 행동이 있는지, 자동화가 사람의 반대 의견을 만들어내지 않았는지를 배포 전에 확인한다. 각 pulse에는 그래프 상태 지문(`snapshotHash`), 회의 안건(`meetingAgenda`), 외부 입력 게이트(`inputGates`)와 사람 판단 필요 여부(`requiresHumanDecision`)가 함께 기록되어 이전 실행과의 차이를 추적할 수 있다.
+`pnpm run validate:tf-pulse`는 pulse가 ACTIVE Goal Contract·canonical 그래프·B4 티저 게이트와 일치하는지, 모든 활성 작업에 담당자·검증자·다음 행동이 있는지, 입력 대기 작업에 `requiredInputs`가 있는지, 자동화가 사람의 반대 의견을 만들어내지 않았는지를 배포 전에 확인한다. 각 pulse에는 그래프 상태 지문(`snapshotHash`), 회의 안건(`meetingAgenda`), 외부 입력 게이트(`inputGates`)와 사람 판단 필요 여부(`requiresHumanDecision`)가 함께 기록되어 이전 실행과의 차이를 추적할 수 있다.
 
 ```sh
 pnpm run tf:pulse

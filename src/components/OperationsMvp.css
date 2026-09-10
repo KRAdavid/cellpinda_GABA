@@ -43,6 +43,8 @@
 .ops-mvp-pulse-agenda li strong { color: #158457; white-space: nowrap; }
 .ops-mvp-pulse-agenda li span { color: #18382b; }
 .ops-mvp-pulse-agenda li small { display: block; margin-top: 3px; color: #607567; font-size: 11px; }
+.ops-mvp-pulse-agenda li small + small { color: #315f48; }
+.ops-mvp-required-inputs { color: #315f48; }
 .ops-mvp-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 36px; }
 .ops-mvp-section-heading h2 { margin: 0; font-size: clamp(32px, 4vw, 50px); }
 .ops-mvp-section-heading > p { max-width: 430px; margin: 0; }

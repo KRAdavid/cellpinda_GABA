@@ -41,6 +41,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.ok(task.decision && task.decisionMode && task.nextAction, `live operations queue is missing automatic decision metadata for ${task.id}`);
       const expectedMode = task.state === 'VERIFYING' ? 'independent-review' : task.state === 'WAITING' || task.state === 'BACKLOG' ? 'input-gate' : task.state === 'READY' ? 'sandbox-execution' : task.state === 'RUNNING' ? 'execution-tracking' : 'state-preservation';
       assert.equal(task.decisionMode, expectedMode, `live operations queue has a mismatched decision mode for ${task.id}`);
+      if (['WAITING', 'BACKLOG'].includes(task.state)) assert.ok(Array.isArray(task.requiredInputs) && task.requiredInputs.length > 0 && task.requiredInputs.every(input => typeof input === 'string' && input.trim().length >= 2), `live input gate is missing required inputs for ${task.id}`);
     }
     assert.ok(queue.tasks.some(task => task.id === 'B4' && task.state === 'WAITING' && task.decisionMode === 'input-gate'), 'live operations queue must keep teaser exposure behind approval');
     const waitingTasks = queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG');

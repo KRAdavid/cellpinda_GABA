@@ -16,6 +16,7 @@ for (const task of graph.tasks) {
   if (!task.id || tasksById.has(task.id)) fail(`duplicate task ${task.id ?? '(unknown)'}`);
   if (!allowed.has(task.state)) fail(`unsupported state ${task.state} for ${task.id}`);
   if (!task.lead || !task.verifier || !Array.isArray(task.evidence)) fail(`incomplete responsibility or evidence for ${task.id}`);
+  if (['WAITING', 'BACKLOG'].includes(task.state) && (!Array.isArray(task.requiredInputs) || task.requiredInputs.length === 0 || task.requiredInputs.some(input => typeof input !== 'string' || input.trim().length < 2))) fail(`input-gated task ${task.id} must list required inputs`);
   tasksById.set(task.id, task);
 }
 
@@ -64,6 +65,7 @@ const decisions = activeTasks
       dissentStatus: 'human-meeting-required',
       evidence: [...task.evidence],
       blockedBy: task.blockedBy ?? null,
+      requiredInputs: Array.isArray(task.requiredInputs) ? [...task.requiredInputs] : [],
       nextAction: action.nextAction,
       mode: action.mode,
     };
@@ -81,7 +83,7 @@ const snapshotHash = createHash('sha256').update(JSON.stringify({
 })).digest('hex');
 const inputGates = decisions
   .filter(item => item.mode === 'input-gate')
-  .map(item => ({taskId: item.taskId, state: item.state, blockedBy: item.blockedBy, chair: item.chair, nextAction: item.nextAction}));
+  .map(item => ({taskId: item.taskId, state: item.state, blockedBy: item.blockedBy, requiredInputs: item.requiredInputs, chair: item.chair, nextAction: item.nextAction}));
 const result = {
   schemaVersion: 1,
   mode: 'automation_pulse',
@@ -96,7 +98,7 @@ const result = {
   verifying: decisions.filter(item => item.state === 'VERIFYING').map(item => item.taskId),
   waiting: decisions.filter(item => ['WAITING', 'BACKLOG'].includes(item.state)).map(item => item.taskId),
   inputGates,
-  meetingAgenda: decisions.map(item => ({taskId: item.taskId, state: item.state, chair: item.chair, participants: item.participants, question: item.question, decision: item.decision, nextAction: item.nextAction, mode: item.mode})),
+  meetingAgenda: decisions.map(item => ({taskId: item.taskId, state: item.state, chair: item.chair, participants: item.participants, question: item.question, decision: item.decision, requiredInputs: item.requiredInputs, nextAction: item.nextAction, mode: item.mode})),
   decisions,
 };
 

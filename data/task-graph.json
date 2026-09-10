@@ -50,6 +50,11 @@
       "verifier": "표시·콘텐츠 검토",
       "dependencies": [],
       "blockedBy": null,
+      "requiredInputs": [
+        "최종 인쇄 승인본과 개정일",
+        "제품 분류 및 가바 1500 SKU 확인",
+        "섭취·보관·주의사항 표시 책임자 승인"
+      ],
       "acceptance": ["섭취·보관·주의사항을 현행 포장 근거로 확인", "공개 가능 범위와 미확인 범위 분리"],
       "evidence": ["docs/PRODUCT_EXPERIENCE_INPUTS.md", "docs/B2_MATERIAL_VERIFICATION_20260911.md", "로컬 1500 단상자·3개입·낱포 인쇄본을 시각 대조하고 SHA-256을 기록함. 표시·콘텐츠 검토자의 최종 인쇄 승인·제품 분류 대조 전까지 공개 문안은 갱신하지 않음", "원료 1kg·10kg 벌크 라벨 및 원료 로트 시험성적서는 완제품 표시 근거에서 제외"]
     },
@@ -63,6 +68,12 @@
       "verifier": "근거·표시 검토",
       "dependencies": [],
       "blockedBy": "원문 URL·제품·사용기간·재게시 권한·제공관계",
+      "requiredInputs": [
+        "후기 원문 URL 또는 원본 파일",
+        "제품명·사용기간·후기 작성 맥락",
+        "재게시 권한 및 제공·보상 관계",
+        "개인정보 비식별 확인"
+      ],
       "acceptance": ["권한과 맥락 확인 후 인용 가능 문안 생성", "철회·만료·개인정보 범위 기록"],
       "evidence": ["docs/EVIDENCE_AUDIT.md", "src/components/ReviewEditor.tsx", "가바후기.xlsx 읽기 전용 점검: 504행·24열, URL·재게시 권한·광고 관계 증빙 열 미확인"]
     },
@@ -76,6 +87,12 @@
       "verifier": "표시·콘텐츠 검토",
       "dependencies": [],
       "blockedBy": "로그인 없는 공개 영상·포스터·자막·대본·권리·표시사항·CTA 승인",
+      "requiredInputs": [
+        "로그인 없는 공개 영상 주소 또는 MP4/HLS",
+        "포스터·자막·대본·영상 길이",
+        "음악·출연·이미지 사용 권리",
+        "표시사항·CTA 책임자 승인"
+      ],
       "acceptance": ["공개 미디어 주소와 비로그인 재생 확인", "연구·제품 효능을 혼동하지 않는 편집·자막 검토", "영상 노출과 외부 게시를 분리한 측정 이벤트 확인"],
       "evidence": ["data/teaser-manifest.json", "docs/TEASER_VIDEO_EXPOSURE_REVIEW.md", "scripts/validate-teaser-exposure.mjs", "현재 내부 검토 URL은 인증이 필요해 공개 CTA에 연결하지 않음"]
     },
@@ -101,6 +118,12 @@
       "verifier": "QA·감사",
       "dependencies": ["C1"],
       "blockedBy": "Cloudflare API token·account ID·D1 ID·운영 토큰·정식 origin",
+      "requiredInputs": [
+        "Cloudflare API token",
+        "Cloudflare account ID와 D1 database ID",
+        "운영 ADMIN_TOKEN과 MEMBER_ORIGIN",
+        "복구·롤백·비밀 회수 확인"
+      ],
       "risk": "E_EXTERNAL_COMMITMENT",
       "acceptance": ["운영 D1에 승인 원장과 감사 로그 적용", "복구·롤백·비밀 회수 절차 검증"],
       "evidence": ["docs/IMPLEMENTATION_STATUS.md", "docs/CACOS_GOAL_CONTRACT.md"]
@@ -163,6 +186,12 @@
       "verifier": "재무·QA",
       "dependencies": ["C2"],
       "blockedBy": "판매자 계정·실제 1500 상품 식별자·주문·취소·환불 테스트 응답",
+      "requiredInputs": [
+        "판매자 계정 접근",
+        "실제 가바 1500 채널상품번호",
+        "주문·취소·환불 테스트 응답",
+        "클릭·구매 대사 기간과 상태 기준"
+      ],
       "acceptance": ["판매처 주문과 유입을 SKU·기간·상태별 대사", "클릭과 실제 구매를 별도 지표로 보고"],
       "evidence": ["docs/ORDER_INTEGRATION.md", "src/domain/smartstore-orders.ts", "src/domain/smartstore-orders.test.ts", "data/local-order-manifest.json", "scripts/audit-local-orders.mjs", "로컬 주문 자료 자동 감사에서 과거 CSV의 1500 후보 행·상품번호를 확인했지만, 채널·주문상태·취소·환불 응답은 검증되지 않아 실제 대사로 승격하지 않음"]
     }
