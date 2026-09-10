@@ -99,3 +99,13 @@ Worker는 제품 전용 title/description/canonical을 출력하고, 중복/잘�
 ## GitHub 자동 검증 후속 증거
 
 직전 공유분석 turn은 구현과검증·원격수정을 포함해 progress다. 이번에는 clean release 저장소에 자동검증workflow를 추가했고 GitHub실행34445658505 success를 확인했다. Node24.19.0/pnpm11.19.0 lockedinstall, 타입검사,37테스트,frontendbuild,Worker dry-run bundle 및7일artifact보관이실행됐다. artifact를다운로드해화면/Worker파일포함확인했다. targetHEAD54a949c5d324950c5e186aefb458feb9149dca63. 실제서비스배포·merge차단·운영DB복구검증을 의미하지 않으며 영구계정/도메인·실제주문·권한확인후기·AI키·재방문분석 등 전체 미완 범위는 유지한다.
+
+## 로컬 D1 후기 HTTP 통합 검증
+
+직전 연구 후보 turn은 원문 접근 증거와 공개 보류 결정을 EVIDENCE_AUDIT에 기록했으므로 progress다. 이번에는 `worker/reviews.integration.mjs`를 추가하고 Windows에서 실제 workerd·로컬 D1 HTTP 경로를 검증했다. 별도 임시 config·DB·키와 `--local`을 사용했으며 원격 DB 또는 기존 개발 DB에 쓰지 않았다. 모든 시험 인용은 TEST 가상 자료다.
+
+검사: 인증 없는 접근 거절, 교차 출처 거절, 초안 비공개, 확인 없는 승인 거절, 전용 후기 검토 우회 차단, 승인된 발췌 공개와 내부 권한 필드 제외, 제품 보류/복구와 후기 노출 연동, 기존 후기 목적지 문구 우회 차단, 같은 revision의 동시 수정에서 성공1/충돌1, 수정 후 보류·확인 초기화, 재승인 후 Worker 재시작에도 문구와 이력 유지, 공개 철회, 오래된 승인 요청 거절, 만료 권한 승인 거절, 이력5버전 연속성. 종료 시 프로세스와 임시 DB 정리도 최종 실행에서 통과했다.
+
+명령은 frontend build 후 `pnpm run test:worker-reviews`다. 기존 Node SQLite 대역 검사와 달리 실제 로컬 workerd/D1 바인딩을 통과한다. AI 교차 검토에서 제안한 제품 연동·목적지 우회 경로를 추가했다. 실제 Cloudflare 원격 D1, 물리 모바일, 다중 운영자 권한, 백업 복원, 실제 후기 권한과 전체 플랫폼 미완 범위는 여전히 별도다. 재시작 보존을 백업 복구로 계산하지 않는다.
+
+GitHub의 동일 검사는 Linux에서도 통과했다. [실행34446456828](https://github.com/KRAdavid/cellpinda-rhythm/actions/runs/34446456828), commit `9bcade4893d6c09c40d36799dfca4b8c36c06335`, verify job49초 success. 기존37검사·타입·빌드·Worker dry-run과 새 로컬 D1 통합 단계를 모두 통과했다. 초기 Windows 실행에서 남은 `tmp/reviews-d1-WqMmY8`의 추가 삭제 명령은 자동 승인 정책으로 거절돼 그대로 두었다. 운영 DB와 무관한 Git 제외 시험 폴더이며, 이후 최종 검사의 임시 디렉터리 정리는 통과했다.

@@ -10,7 +10,8 @@
     "server": "node server/index.mjs",
     "test": "node --test src/domain/rhythm.test.ts src/domain/challenge.test.ts src/domain/orders.test.ts src/domain/reviews.test.ts server/server.test.mjs worker/worker.test.mjs worker/social.test.mjs worker/members.test.mjs",
     "typecheck": "tsc -b && tsc -p worker/tsconfig.json",
-    "worker:dev": "wrangler dev --port 8788"
+    "worker:dev": "wrangler dev --port 8788",
+    "test:worker-reviews": "node worker/reviews.integration.mjs"
   },
   "dependencies": {
     "@simplewebauthn/browser": "^14.0.0",
