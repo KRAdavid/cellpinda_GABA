@@ -51,7 +51,7 @@
       "dependencies": [],
       "blockedBy": null,
       "acceptance": ["섭취·보관·주의사항을 현행 포장 근거로 확인", "공개 가능 범위와 미확인 범위 분리"],
-      "evidence": ["docs/PRODUCT_EXPERIENCE_INPUTS.md", "로컬 1500 단상자·3개입·낱포 인쇄본을 시각 대조하고 SHA-256을 기록함. 표시·콘텐츠 검토자의 최종 인쇄 승인·제품 분류 대조 전까지 공개 문안은 갱신하지 않음", "원료 1kg·10kg 벌크 라벨 및 원료 로트 시험성적서는 완제품 표시 근거에서 제외"]
+      "evidence": ["docs/PRODUCT_EXPERIENCE_INPUTS.md", "docs/B2_MATERIAL_VERIFICATION_20260911.md", "로컬 1500 단상자·3개입·낱포 인쇄본을 시각 대조하고 SHA-256을 기록함. 표시·콘텐츠 검토자의 최종 인쇄 승인·제품 분류 대조 전까지 공개 문안은 갱신하지 않음", "원료 1kg·10kg 벌크 라벨 및 원료 로트 시험성적서는 완제품 표시 근거에서 제외"]
     },
     {
       "id": "B3",
