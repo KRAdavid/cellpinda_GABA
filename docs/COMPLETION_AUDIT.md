@@ -253,3 +253,7 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 ## 2026-09-11 공개 게이트 입력 일치 재검증
 
 강화한 라이브 smoke가 B2 `VERIFYING` 작업의 원본 `requiredInputs` 3개가 공개 operations queue에서 누락된 것을 발견했다. `sync-public-data.mjs`가 `VERIFYING`을 포함한 모든 작업에 입력 체크리스트를 보존하도록 수정했고, 라이브 검증은 각 게이트의 제목·상태·담당자·독립 검증자·입력·결정 모드·다음 조치를 queue와 `goal-audit.json` 사이에서 대조한다. 커밋 `cd065ca`의 [GitHub Actions 34533311676](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34533311676)은 verify·Pages·라이브 smoke를 성공시켰으며, B2 입력 3개·감사 게이트 5건·pulse 지문 일치를 확인했다. 이 검사는 자료 승인 자체를 대신하지 않으며 B2는 계속 `VERIFYING`이다.
+
+## 2026-09-11 로컬 감사 사이클 단축
+
+`scripts/run-local-audit-cycle.mjs`와 `pnpm run audit:goal:local:json`을 추가해 완제품 자료·주문 파일 감사와 전체 Goal Audit를 한 번에 실행하고, 결과를 개인정보·원문 행·로컬 경로가 없는 `tmp/local-goal-audit.json`에 저장한다. 현재 실행은 `local-material-inputs=MET`, `local-order-inputs=WAITING`, 전체 `IN_PROGRESS_WITH_GATES`이며 `public/data`는 변경하지 않았다. 이 자동화는 회의 패킷 생성을 줄여 주지만, 현행 표시 승인·실주문·취소·환불·후기 권한을 자동 완료로 승격하지 않는다.
