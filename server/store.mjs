@@ -4,7 +4,7 @@ import { dirname } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { reviewMutation, approvalMissing, publicReview, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
 
-export const EVENT_NAMES = new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
+export const EVENT_NAMES = new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
 export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin']);
 const publicSources = (value) => (value.sources || []).filter(s => typeof s.url === 'string' && /^https:\/\//.test(s.url)).map(({title,url,page,locator}) => ({title,url,page,locator}));
 const failure = (message, status = 400) => Object.assign(new Error(message), { status });
@@ -127,6 +127,7 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       if (source.productId !== undefined) { if (!['gaba750','gaba1500'].includes(source.productId)) throw failure('Invalid product'); clean.productId=source.productId; }
       if (source.path !== undefined) { if (!EVENT_PATHS.has(source.path)) throw failure('Invalid path'); clean.path=source.path; }
       if (source.channel !== undefined) { if (!['native','clipboard','download','kakao','instagram','direct'].includes(source.channel)) throw failure('Invalid channel'); clean.channel=source.channel; }
+      if (source.questionId !== undefined) { if (!['amount','selection','label','reviews','evidence'].includes(source.questionId)) throw failure('Invalid question'); clean.questionId=source.questionId; }
       const result=db.prepare('INSERT OR IGNORE INTO events(id,name,properties,created_at,flow_id) VALUES(?,?,?,?,?)').run(body.eventId,body.name,JSON.stringify(clean),new Date().toISOString(),body.flowId?.toLowerCase() ?? null);
       return {accepted:true,duplicate:result.changes===0};
     },

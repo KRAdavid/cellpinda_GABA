@@ -4,7 +4,7 @@ import { reviewMutation, approvalMissing, publicReview, parseReviewDraft, REVIEW
 type RecordValue = Record<string, unknown>;
 type ContentRow = {id:string;kind:string;data:string;revision:number};
 type Content = RecordValue & {id:string;kind?:string;status?:string;revision?:number;publicText?:string|null;sourceIds?:string[];sources?:RecordValue[]};
-const EVENTS=new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
+const EVENTS=new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
 const PATHS=new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin']);
 const META=new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','result','limitations','productApplicability','question','searchThrough','studyCount']);
 const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result','/share','result_viewed'],['product_comparison','/products','product_comparison_viewed']];
@@ -132,6 +132,7 @@ export function createStore(db:D1Database) {
       if(properties.productId!==undefined){if(typeof properties.productId!=='string' || !['gaba750','gaba1500'].includes(properties.productId))throw failure('Invalid product');clean.productId=properties.productId;}
       if(properties.path!==undefined){if(typeof properties.path!=='string' || !PATHS.has(properties.path))throw failure('Invalid path');clean.path=properties.path;}
       if(properties.channel!==undefined){if(typeof properties.channel!=='string' || !['native','clipboard','download','kakao','instagram','direct'].includes(properties.channel))throw failure('Invalid channel');clean.channel=properties.channel;}
+      if(properties.questionId!==undefined){if(typeof properties.questionId!=='string' || !['amount','selection','label','reviews','evidence'].includes(properties.questionId))throw failure('Invalid question');clean.questionId=properties.questionId;}
       const result=await db.prepare('INSERT OR IGNORE INTO events(id,name,properties,created_at,flow_id) VALUES(?,?,?,?,?)').bind(body.eventId.toLowerCase(),body.name,JSON.stringify(clean),new Date().toISOString(),typeof body.flowId==='string'?body.flowId.toLowerCase():null).run();
       return {accepted:true,duplicate:result.meta.changes===0};
     },

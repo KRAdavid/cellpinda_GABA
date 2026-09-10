@@ -63,6 +63,15 @@ test('Rate limit rejects excess local requests',async()=>{
   } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
 
+test('Purchase decision events preserve only approved question identifiers',()=>{
+  const store=createStore({dbPath:':memory:',seed});
+  try {
+    store.event({eventId:randomUUID(),flowId:randomUUID(),name:'purchase_question_opened',properties:{questionId:'amount',email:'private@example.com'}});
+    assert.equal(store.analytics().counts.find(event=>event.name==='purchase_question_opened').count,1);
+    assert.throws(()=>store.event({eventId:randomUUID(),name:'purchase_question_opened',properties:{questionId:'private'}}),/Invalid question/);
+  } finally { store.close(); }
+});
+
 test('Anonymous flow funnels preserve denominators, ordering and duplicate protection',()=>{
   const store=createStore({dbPath:':memory:',seed});
   try {
