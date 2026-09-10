@@ -50,3 +50,13 @@ GitHub CLI 인증 사용자 KRAdavid 확인 후 별도 비공개 저장소 https
 ## 후기 운영 소스 갱신
 
 PRIVATE 저장소 KRAdavid/cellpinda-rhythm, codex/consumer-site 원격 HEAD bc118f5e071a091f341c126f24ee855b84732a91 확인. main 로컬 이력을 push하지 않고, 공개 승인 claims10/products2/공식후기링크1만 포함한 새 export를 기존 release checkout에 반영했다. 소스 및 필터된 원장에서 검사34개와 양쪽 타입검사 통과. 실제 고객 후기·권한 원본·내부 문서·비밀키는 포함하지 않았다.
+
+## 자동 검증 구성
+
+.github/workflows/verify.yml을 추가했다. codex/consumer-site push, pull_request, 수동 실행에서 Node24.19.0·pnpm11.19.0으로 lockfile 설치, frontend/Worker typecheck, 전체 테스트, frontend build, Worker dry-run bundle을 실행한다. build artifact는 dist와worker-build만 7일 보관하며 데이터베이스·운영키·내부문서는 포함하지 않는다. workflow 권한은 contents:read이고 checkout 인증정보를 후속 git설정에 남기지 않는다. 실제배포와 merge차단 규칙은 설정하지 않았다.
+
+사용한 공식Actions의 고정SHA는 GitHub원격 tag에서 확인했다: checkout v7.0.1, setup-node v7.0.0, upload-artifact v7.0.1. 공식입력규격은 https://github.com/actions/setup-node 와 https://github.com/actions/upload-artifact 에서 확인했다. export-github.mjs도 .github를 포함하도록 갱신했다.
+
+첫 실행: https://github.com/KRAdavid/cellpinda-rhythm/actions/runs/34445658505 , 대상 commit54a949c5d324950c5e186aefb458feb9149dca63. 최종 결과는 아래 후속 기록에서 확인한다.
+
+최종 결과: run34445658505 success, verify job41초. GitHub로그에서 tests37/pass37/fail0 확인. artifact10139554656(2,829,015bytes)를 내려받아 dist HTML/JS/CSS/제품사진과 worker-build index.js/source map이 포함된 것을 확인했다. 임시 검증 사본은 tmp/ci-build-34445658505 아래에 있다. 실제 서비스 배포는 수행하지 않았다.

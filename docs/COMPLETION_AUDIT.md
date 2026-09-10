@@ -95,3 +95,7 @@ Worker는 제품 전용 title/description/canonical을 출력하고, 중복/잘�
 경로 없는 과거공유는 추정하지 않고 별도원시건수로 표시한다. 새이벤트는 문항답변·유형값 없이 경로와채널만 추가했다. 자료미로딩 제품영역은열람에서제외했다. 기존 결과→설명퍼널은 내결과/받은결과를 합친 결과열람 지표로 유지한다.
 
 37개 자동검사, Node/D1 집계동일성·순서·중복·무flow·과거이벤트 검사, 양쪽typecheck/build 통과. 실제Node API메모리DB+브라우저에서 세경로각각view1/시도1/복사1을 검증했으며 이는 합성QA수치로 소비자전환성과가 아니다. 모의API UI검사에서0%/집계대기 구분과모바일overflow없음 확인. 실구매·7일재방문·송신자/수신자귀속은 여전히미지원이며 원래목표에서 제외하지 않는다.
+
+## GitHub 자동 검증 후속 증거
+
+직전 공유분석 turn은 구현과검증·원격수정을 포함해 progress다. 이번에는 clean release 저장소에 자동검증workflow를 추가했고 GitHub실행34445658505 success를 확인했다. Node24.19.0/pnpm11.19.0 lockedinstall, 타입검사,37테스트,frontendbuild,Worker dry-run bundle 및7일artifact보관이실행됐다. artifact를다운로드해화면/Worker파일포함확인했다. targetHEAD54a949c5d324950c5e186aefb458feb9149dca63. 실제서비스배포·merge차단·운영DB복구검증을 의미하지 않으며 영구계정/도메인·실제주문·권한확인후기·AI키·재방문분석 등 전체 미완 범위는 유지한다.

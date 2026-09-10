@@ -6,7 +6,7 @@ const root=process.cwd();
 const target=resolve(root,process.argv[2] || 'tmp/github-consumer-release');
 if(!relative(resolve(root,'tmp'),target) || relative(resolve(root,'tmp'),target).startsWith('..'+sep) || existsSync(target))throw Error('Choose a new directory inside workspace/tmp');
 mkdirSync(target,{recursive:true});
-const paths=['src','server','worker','public','.gitignore','index.html','package.json','pnpm-lock.yaml','pnpm-workspace.yaml','tsconfig.json','vite.config.ts','wrangler.jsonc'];
+const paths=['.github','src','server','worker','public','.gitignore','index.html','package.json','pnpm-lock.yaml','pnpm-workspace.yaml','tsconfig.json','vite.config.ts','wrangler.jsonc'];
 for(const path of paths)cpSync(resolve(root,path),resolve(target,path),{recursive:true});
 const ledger=JSON.parse(readFileSync(resolve(root,'data/content-ledger.json'),'utf8'));
 const pick=(value,keys)=>Object.fromEntries(keys.filter(key=>value[key]!==undefined).map(key=>[key,value[key]]));
