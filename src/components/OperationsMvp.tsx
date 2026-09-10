@@ -21,6 +21,9 @@ type StoredOpsState = {
 };
 
 type ServerOpsResponse = {state?: StoredOpsState; serverPersisted?: boolean};
+type QueueTask = {id: string; stream: string; title: string; state: string; lead: string; verifier: string; blockedBy?: string; dependencies: string[]};
+type QueueSnapshot = {schemaVersion: number; goalId: string; status: string; checkedAt: string; workstreams: {id: string; name: string; lead: string; verifier: string; status: string; nextAction: string}[]; tasks: QueueTask[]};
+const publicBase = import.meta.env.BASE_URL;
 
 function clientUuid() {
   return typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : '';
@@ -58,11 +61,19 @@ export default function OperationsMvp() {
   const [runId, setRunId] = useState(stored.runId || clientUuid());
   const [runKey, setRunKey] = useState(stored.runKey || clientUuid());
   const [serverState, setServerState] = useState<'checking' | 'saved' | 'local'>('checking');
+  const [queue, setQueue] = useState<QueueSnapshot | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState('');
   const [copied, setCopied] = useState(false);
   const edges = useMemo(() => plan ? taskGraphEdges(plan.tasks) : [], [plan]);
   const report = useMemo(() => plan ? buildMvpApprovalReport(plan.contract, plan.tasks, audit, approval, new Date().toISOString(), decisions) : null, [plan, audit, approval, decisions]);
+  const waitingQueue = useMemo(() => queue?.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG') ?? [], [queue]);
+
+  useEffect(() => {
+    let active = true;
+    fetch(`${publicBase}data/operations-queue.json`).then(response => response.ok ? response.json() as Promise<QueueSnapshot> : Promise.reject(new Error('operations queue unavailable'))).then(snapshot => { if (active) setQueue(snapshot); }).catch(() => { if (active) setQueue(null); });
+    return () => { active = false; };
+  }, []);
 
   useEffect(() => {
     try { window.localStorage.setItem(storageKey, JSON.stringify({input, plan, audit, approval, approvalTaskId, decisions, runId, runKey} satisfies StoredOpsState)); }
@@ -150,11 +161,10 @@ export default function OperationsMvp() {
     void navigator.clipboard?.writeText(JSON.stringify(report, null, 2)).then(() => { setCopied(true); setMessage('승인 보고서 JSON을 복사했습니다.'); }).catch(() => setMessage('복사 권한이 없어 다운로드를 이용해 주세요.'));
   }
 
-  const base = import.meta.env.BASE_URL;
   return <main className="ops-mvp">
     <header className="ops-mvp-header wrap">
       <div><p className="chapter">Cellpinda Operating MVP</p><h1>문서를 읽는 조직에서,<br />실제로 일하는 조직으로.</h1><p>한 문장 목표를 계약·TF·업무 그래프·검증 보고서로 바꾸는 공개용 GABA 논문 인덱스 운영 화면입니다.</p></div>
-      <div className="ops-mvp-header-actions"><a className="button outline" href={`${base}#research`}>공개 연구 라이브러리 <ArrowRight size={17}/></a><a className="text-link" href={base}>사이트로 돌아가기</a></div>
+      <div className="ops-mvp-header-actions"><a className="button outline" href={`${publicBase}#research`}>공개 연구 라이브러리 <ArrowRight size={17}/></a><a className="text-link" href={publicBase}>사이트로 돌아가기</a></div>
     </header>
     <section className="ops-mvp-sandbox wrap" aria-labelledby="ops-mvp-heading">
       <div className="ops-mvp-sandbox-label"><LockKeyhole size={18}/> 내부 샌드박스 · 외부 게시·구매·법적 약속을 실행하지 않음 <span className="ops-mvp-persistence-status">· {serverState === 'saved' ? '서버 저장됨' : serverState === 'checking' ? '서버 상태 확인 중' : '브라우저 임시 저장'}</span></div>
@@ -165,6 +175,11 @@ export default function OperationsMvp() {
       </form>
       {message ? <p className="ops-mvp-message" role="status">{message}</p> : null}
     </section>
+    {queue ? <section className="ops-mvp-live-queue wrap" aria-labelledby="live-queue-heading">
+      <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong></div></div>
+      <div className="ops-mvp-live-queue-grid">{waitingQueue.map(task => <article key={task.id}><div><span className="ops-mvp-task-id">{task.id}</span><span className="ops-mvp-state">{stateLabels[task.state] || task.state}</span></div><h3>{task.title}</h3><p>담당 {task.lead} · 검증 {task.verifier}</p>{task.blockedBy ? <small>대기 입력 · {task.blockedBy}</small> : null}</article>)}</div>
+      <p className="note">완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 대기 {waitingQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>
+    </section> : null}
     {plan ? <>
       <section className="ops-mvp-contract wrap" aria-labelledby="contract-heading">
         <div className="ops-mvp-section-heading"><div><p className="chapter">01 / Goal Contract</p><h2 id="contract-heading">목표를 실행 계약으로.</h2></div><div className="ops-mvp-contract-id"><span>{plan.contract.goalId}</span><strong>ACTIVE</strong></div></div>

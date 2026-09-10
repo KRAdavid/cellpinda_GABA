@@ -5,6 +5,8 @@ import {dirname, resolve} from 'node:path';
 const root=process.cwd();
 const source=resolve(root,'data/content-ledger.json');
 const target=resolve(root,'public/data/content.json');
+const goalContract=JSON.parse(readFileSync(resolve(root,'data/goal-contract.json'),'utf8'));
+const taskGraph=JSON.parse(readFileSync(resolve(root,'data/task-graph.json'),'utf8'));
 const ledger=JSON.parse(readFileSync(source,'utf8'));
 const smartStoreHost='smartstore.naver.com';
 const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerSummary','hopefulTakeaway'];
@@ -96,4 +98,14 @@ mkdirSync(dirname(target),{recursive:true});
 writeFileSync(target,JSON.stringify(output,null,2)+'\n');
 const masterTarget=resolve(root,'public/data/gaba-master-index.json');
 writeFileSync(masterTarget,JSON.stringify(masterIndex,null,2)+'\n');
-console.log(JSON.stringify({target,masterTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length}));
+const operationsQueue={
+  schemaVersion:1,
+  goalId:goalContract.goalId,
+  status:goalContract.status,
+  checkedAt:goalContract.checkedAt,
+  workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
+  tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
+};
+const operationsTarget=resolve(root,'public/data/operations-queue.json');
+writeFileSync(operationsTarget,JSON.stringify(operationsQueue,null,2)+'\n');
+console.log(JSON.stringify({target,masterTarget,operationsTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));

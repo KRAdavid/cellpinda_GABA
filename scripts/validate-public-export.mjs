@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 const readJson = async relative => JSON.parse(await readFile(new URL(`../${relative}`, import.meta.url), 'utf8'));
 const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
+const operationsQueue = await readJson('public/data/operations-queue.json');
 const fail = message => { throw new Error(`Public export invalid: ${message}`); };
 const isHttps = value => {
   try { return new URL(value).protocol === 'https:'; } catch { return false; }
@@ -15,7 +16,7 @@ const isSmartStore = value => {
   } catch { return false; }
 };
 
-if (content.schemaVersion !== 1 || master.schemaVersion !== 1) fail('unsupported schema');
+if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1) fail('unsupported schema');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');
@@ -31,6 +32,14 @@ const scanKeys = (value, path = '$') => {
 };
 scanKeys(content);
 scanKeys(master);
+scanKeys(operationsQueue);
+
+if (operationsQueue.goalId !== 'GL-2026-CELL-GABA-001' || operationsQueue.status !== 'ACTIVE') fail('operations queue is not tied to the active Goal Contract');
+if (!Array.isArray(operationsQueue.workstreams) || operationsQueue.workstreams.length !== 5) fail('operations queue must expose five active workstreams');
+if (!Array.isArray(operationsQueue.tasks) || operationsQueue.tasks.length !== 12) fail('operations queue must expose the current task graph');
+for (const task of operationsQueue.tasks) {
+  if (!task.id || !task.stream || !task.title || !task.state || !task.lead || !task.verifier || !Array.isArray(task.dependencies)) fail(`operations queue task ${task.id ?? '(unknown)'} is incomplete`);
+}
 
 const claimsById = new Map(content.claims.map(claim => [claim.id, claim]));
 for (const claim of content.claims) {

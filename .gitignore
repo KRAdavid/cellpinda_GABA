@@ -5,6 +5,7 @@ worker-build/
 var/
 public/data/content.json
 public/data/gaba-master-index.json
+public/data/operations-queue.json
 tmp/
 *.tsbuildinfo
 .env*
