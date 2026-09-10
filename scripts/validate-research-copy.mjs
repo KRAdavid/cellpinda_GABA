@@ -12,6 +12,8 @@ for (const claim of research) {
     const value = metadata[field];
     if (typeof value !== 'string' || value.trim().length < 30) fail(`${claim.id}.${field} must be a consumer-ready sentence`);
     if (unsafe.test(value)) fail(`${claim.id}.${field} contains an unsupported promise or medical expression`);
+    if (field === 'hopefulTakeaway' && !/(제품|가바\s*1500)/.test(value)) fail(`${claim.id}.hopefulTakeaway must connect to product discovery without making a promise`);
+    if (field === 'hopefulTakeaway' && !/(표시사항|루틴|살펴보|확인해|선택해)/.test(value)) fail(`${claim.id}.hopefulTakeaway must name a check or choice action`);
   }
 }
 
