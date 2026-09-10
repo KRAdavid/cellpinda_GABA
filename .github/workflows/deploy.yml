@@ -42,6 +42,8 @@ jobs:
         run: pnpm test
       - name: Build deployment bundle
         run: pnpm run build
+      - name: Check deployment readiness
+        run: pnpm run preflight:deploy
       - name: Build GitHub Pages bundle
         env:
           VITE_BASE_PATH: /cellpinda_GABA/
