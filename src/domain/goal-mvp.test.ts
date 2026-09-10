@@ -39,6 +39,16 @@ test('external commitment produces an approval packet before execution', () => {
   assert.equal(verified.tasks.find(task => task.id === 'P1')?.state, 'DONE');
 });
 
+test('approval request can resume the persisted WAITING task', () => {
+  const base = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const completed = base.tasks.map(task => task.id === 'P1' ? {...task, state: 'READY' as const} : {...task, state: 'DONE' as const});
+  const blocked = runSandboxTask(completed, 'P1', undefined, '2026-09-10T10:00:00.000Z');
+  const resumed = runSandboxTask(blocked.tasks, 'P1', 'sandbox-approval', '2026-09-10T10:02:00.000Z');
+  assert.equal(resumed.tasks.find(task => task.id === 'P1')?.state, 'VERIFYING');
+  assert.deepEqual(resumed.events.map(event => `${event.from}->${event.to}`), ['WAITING->READY', 'READY->RUNNING', 'RUNNING->VERIFYING']);
+  assert.match(resumed.events[0].note, /승인/);
+});
+
 test('approval report distinguishes completed and pending work', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
   const after = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');

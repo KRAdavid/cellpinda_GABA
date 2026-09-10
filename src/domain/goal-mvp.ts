@@ -239,11 +239,17 @@ export function promoteReady(tasks: readonly MvpTask[]): MvpTask[] {
 export function runSandboxTask(tasks: readonly MvpTask[], taskId: string, approvalToken?: string, now = new Date().toISOString()): SandboxRunResult {
   const source = tasks.find(task => task.id === taskId);
   if (!source) throw new Error(`작업을 찾을 수 없습니다: ${taskId}`);
-  const ready = promoteReady(tasks).find(task => task.id === taskId);
-  if (!ready || ready.state !== 'READY') throw new Error('선행 작업을 먼저 완료해야 합니다.');
+  const promoted = promoteReady(tasks);
+  const promotedTask = promoted.find(task => task.id === taskId);
+  const approvalResume = source.state === 'WAITING' && requiresApproval(source.risk ?? 'A_READ') && canExecute(source.risk ?? 'A_READ', approvalToken);
+  const ready = approvalResume ? source : promotedTask;
+  if (!ready || (!approvalResume && ready.state !== 'READY')) {
+    if (source.state === 'WAITING') throw new Error('책임자 승인 후 다시 실행해야 합니다.');
+    throw new Error('선행 작업을 먼저 완료해야 합니다.');
+  }
   if (requiresApproval(ready.risk ?? 'A_READ') && !canExecute(ready.risk ?? 'A_READ', approvalToken)) {
     return {
-      tasks: promoteReady(tasks).map(task => task.id === taskId ? {...task, state: 'WAITING'} : task),
+      tasks: promoted.map(task => task.id === taskId ? {...task, state: 'WAITING'} : task),
       events: [],
       approval: buildApprovalRequest({
         action: `${ready.title}을 샌드박스 승인 대기 상태로 전환`,
@@ -258,7 +264,8 @@ export function runSandboxTask(tasks: readonly MvpTask[], taskId: string, approv
   }
   const events: SandboxAuditEvent[] = [];
   const push = (from: TaskState, to: TaskState, note: string) => events.push({id: `${taskId}-${to}-${events.length + 1}`, taskId, from, to, note, createdAt: now});
-  push(ready.state, 'RUNNING', '샌드박스에서 작업을 시작했습니다.');
+  if (approvalResume) push('WAITING', 'READY', '책임자 승인을 확인해 작업을 다시 실행 가능 상태로 전환했습니다.');
+  push(approvalResume ? 'READY' : ready.state, 'RUNNING', '샌드박스에서 작업을 시작했습니다.');
   push('RUNNING', 'VERIFYING', '샌드박스 산출물을 만들었습니다. 품질감사관의 독립 검증을 기다립니다.');
   const next = tasks.map(task => task.id === taskId ? {...task, state: 'VERIFYING' as const, evidence: [...task.evidence, `sandbox-output:${taskId}:${now}`]} : {...task});
   return {tasks: next, events};
