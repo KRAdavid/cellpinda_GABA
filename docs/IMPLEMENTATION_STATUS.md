@@ -6,7 +6,7 @@
 
 운영 MVP의 TF 의사결정 로그에 사람이 직접 반대 의견·재검토 조건을 남기는 입력 폼을 추가했다. 자동 생성 안전 경계는 `guardrail`, 회의에서 작성한 기록은 `human-meeting`으로 분리하고 기록 시각을 저장한다. 10자 미만 메모와 허용되지 않은 상태·시각은 공통 상태 검증에서 거부하며, 서버 저장·브라우저 `localStorage`·JSON 승인 보고서에 같은 구조로 보존된다. `pnpm test` 66개, 타입검사, production build와 로컬 API 연동 Playwright 데스크톱·모바일 검증이 통과했다.
 
-커밋 `8ba9bef`의 [GitHub Actions 34509329395](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34509329395)은 verify·Pages·Worker 구성 점검·라이브 smoke를 모두 성공했다. 최신 공개 URL 검증은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 공개 `?view=ops`에서 Goal Contract 생성 후 G1 독립 검증 대기, 회의 의견 추가, 자동 경계·사람 기록 구분과 기록 시각 표시를 1440px·390px에서 재현했으며 콘솔 오류와 가로 넘침이 없었다. Cloudflare 운영 Secrets가 없는 환경에서는 Worker 실제 배포 대신 구성 점검만 성공하고 정적 Pages를 계속 제공한다.
+커밋 `7556533`의 [GitHub Actions 34509562569](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34509562569)은 verify·Pages·Worker 구성 점검·라이브 smoke를 모두 성공했다. 최신 공개 URL 검증은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 공개 `?view=ops`에서 Goal Contract 생성 후 G1 독립 검증 대기, 회의 의견 추가, 자동 경계·사람 기록 구분과 기록 시각 표시를 1440px·390px에서 재현했으며 콘솔 오류와 가로 넘침이 없었다. Cloudflare 운영 Secrets가 없는 환경에서는 Worker 실제 배포 대신 구성 점검만 성공하고 정적 Pages를 계속 제공한다.
 
 ## 2026-09-11 독립 검토 게이트와 상시 TF pulse
 
