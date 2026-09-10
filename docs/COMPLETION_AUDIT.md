@@ -2,6 +2,8 @@
 
 기준일 2026-09-11. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 [GitHub Actions 34496126744](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34496126744)와 2026-09-11 공개 URL 재검증을 기준으로 한다.
 
+커밋 `b5e70b4`에서 Node/SQLite와 Worker/D1의 초기화 시 canonical 스마트스토어 후기 목적지를 원장 해시 기준으로 동기화했다. 영구 DB에 남은 이전 목적지만 revision·audit과 함께 보정하며, 인용 후기와 운영자 수정본은 보존한다. 60개 회귀 테스트, 타입검사, production build, 로컬 Worker/D1 HTTP에서 content 200(후기 1건)과 샌드박스 PUT/GET/DELETE 200을 확인했다. 원격 Cloudflare D1·백업 복구는 여전히 외부 운영 조건이다.
+
 **판정: 전체 goal 미완료. 1차 9개 전체 완료도 아직 선언할 수 없다.** 체험·콘텐츠·공유·서버 기반은 구현·시험됐지만 실제 후기, 현행 제품 정보, 실제 구매 분석과 영구 운영에 간극이 있다. 회원 기능은 로컬 실제 브라우저 검증까지 진행됐고 공개 임시주소에서는 꺼져 있다. 준비 코드·연결 후보·테스트 더블을 운영 연동으로 계산하지 않았다.
 
 샌드박스 운영 보고서는 `sandbox_simulation_only`를 명시한다. 모의 검증만으로 모든 작업이 끝난 경우 추천을 `revise`로 유지하며, 실제 독립 검토·승인·게시와 구분한다.

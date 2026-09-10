@@ -1,4 +1,4 @@
-# 중간 구현 상태 — 2026-09-10
+# 중간 구현 상태 — 2026-09-11
 
 목표 파일 전체를 읽고 구현을 시작했다. 기존 회의 문서 작성은 progress로 분류한다. 이번 작업도 실제 코드·원장·이미지·테스트를 만들었으므로 progress다. 전체 목표는 아직 완료되지 않았다.
 
@@ -7,6 +7,12 @@
 커밋 `c5fc87c`에서 샌드박스 시뮬레이션만으로 운영 승인을 추천하지 않도록 보고서 판정을 보강했다. 모든 작업이 `sandbox_simulation` 검증으로 끝나면 추천은 `revise`로 남고, 운영 화면은 `샌드박스 완료 · 실제 검증 필요`를 표시한다. 로컬 `pnpm test` 59개·타입검사·production build가 통과했으며, [GitHub Actions 34495436902](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34495436902)의 verify·Pages·라이브 smoke가 성공했다.
 
 최신 공개 URL 재검증 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 12, waitingTasks 3, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 390px·1440px 네 화면의 가로 넘침·콘솔 오류·400 이상 응답은 없었다. 제품 자료 감사는 7개 파일(완제품 후보 5개)을 찾았고, 주문 자료 감사는 1,086개 파일을 읽어 1500 후보 114행·121개 수량을 집계했지만 상태·취소·환불 필드와 실판매자 응답이 없어 E1은 계속 `WAITING`이다.
+
+## 2026-09-11 영구 저장소 후기 목적지 자동 동기화
+
+커밋 `b5e70b4`에서 Node/SQLite와 Worker/D1 초기화 경계에 canonical 후기 목적지 동기화를 추가했다. 기존 DB에 남은 이전 채널 URL은 `shop-review-destination-1500` 레코드일 때만 현재 원장의 스마트스토어 목적지로 보정하고, 인용 후기(`reviewType: quote`)와 운영자 수정 이력은 덮어쓰지 않는다. 원장 내용의 해시를 마이그레이션 키에 포함해 이후 목적지 원장이 합법적으로 바뀌어도 다음 초기화에서 다시 동기화하며, 보정은 revision·audit 행으로 남긴다.
+
+회귀 테스트는 60개 전체 통과했다. 로컬 Worker/D1(`127.0.0.1:8788`) 실제 HTTP에서 `/api/content`는 claims 14·products 1·reviews 1을 반환하고 후기 목적지 호스트가 `smartstore.naver.com`임을 확인했으며, 샌드박스 상태 PUT/GET/DELETE는 모두 200이었다. 타입검사와 production build도 통과했다. 이 검증은 로컬 영속 경로의 동기화 증거이며, Cloudflare 원격 D1 배포·백업 복구를 완료했다는 뜻은 아니다.
 
 ## 2026-09-10 로컬 제품 자료 재점검
 
