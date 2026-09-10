@@ -12,8 +12,8 @@ const goal = '공개용 GABA 논문 기반 마스터 인덱스';
 const timestamps = Array.from({length: 24}, (_, index) => `2026-09-10T10:${String(index).padStart(2, '0')}:00.000Z`);
 const plan = generateMvpPlan(goal);
 assert.equal(plan.contract.goalType, 'PUBLISH_RESEARCH_INDEX');
-assert.equal(plan.contract.workstreams.length, 4);
-assert.equal(plan.contract.team.length, 8);
+assert.equal(plan.contract.workstreams.length, 5);
+assert.equal(plan.contract.team.length, 10);
 assert.equal(plan.tasks.length, 6);
 
 let tasks = plan.tasks;

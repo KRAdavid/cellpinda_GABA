@@ -5,9 +5,10 @@ import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, genera
 test('one sentence goal generates a contract, TF and dependency graph', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
   assert.match(plan.contract.goalId, /^GMVP-GABA-[0-9A-F]{8}$/);
-  assert.equal(plan.contract.workstreams.length, 4);
-  assert.equal(plan.contract.team.length, 8);
-  assert.equal(plan.contract.team.find(member => member.verifier)?.role, '품질감사관');
+  assert.equal(plan.contract.workstreams.length, 5);
+  assert.equal(plan.contract.team.length, 10);
+  assert.ok(plan.contract.team.some(member => member.verifier && member.role === '품질감사관'));
+  assert.ok(plan.contract.team.some(member => member.verifier && member.role === '재무·QA'));
   assert.equal(plan.contract.goalType, 'PUBLISH_RESEARCH_INDEX');
   assert.equal(plan.contract.readiness, 'READY');
   assert.deepEqual(plan.tasks[0].state, 'READY');
@@ -63,7 +64,7 @@ test('approval report distinguishes completed and pending work', () => {
   assert.equal(report.contractSnapshot.goalId, plan.contract.goalId);
   assert.deepEqual(report.taskAcceptance.G1, plan.tasks.find(task => task.id === 'G1')?.acceptance);
   assert.equal(report.decisionRecords.length, 2);
-  assert.equal(report.decisionRecords[0].participants.length, 8);
+  assert.equal(report.decisionRecords[0].participants.length, 10);
   assert.match(report.decisionRecords[1].decision, /독립 검증/);
   assert.ok(report.decisionRecords[0].dissent.length > 0);
   assert.ok(report.decisionRecords[1].evidence.includes('sandbox-output:G1:2026-09-10T10:00:00.000Z'));

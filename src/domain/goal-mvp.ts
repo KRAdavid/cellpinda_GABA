@@ -102,6 +102,7 @@ const workstreams: MvpWorkstream[] = [
   {id: 'consumer', name: '소비자 언어', lead: '마케팅·소비자심리', verifier: '표시·콘텐츠 검토', deliverable: '쉽게 읽는 요약과 적용 범위 문장'},
   {id: 'index', name: '인덱스·UX', lead: '스토리·UX·프런트', verifier: '접근성·QA', deliverable: '검색 가능한 공개 마스터 인덱스'},
   {id: 'ops', name: '운영·감사', lead: 'TF 리드·AI 비서실', verifier: '품질감사관', deliverable: '승인 보고·실행 로그·다음 작업'},
+  {id: 'commerce', name: '커머스·판매처 운영', lead: '데이터·판매처 운영', verifier: '재무·QA', deliverable: '스마트스토어 목적지·주문 대사 준비와 공개 전환 조건'},
 ];
 
 const team: MvpTeamMember[] = [
@@ -111,6 +112,8 @@ const team: MvpTeamMember[] = [
   {id: 'product-quality', role: '제품·품질', responsibility: '1500 제품 정보와 연구 성분을 분리 대조', authority: '제품 자료 확인 요청', verifier: false},
   {id: 'regulatory', role: '표시·규제 검토', responsibility: '치료·진단·효과 보장·권한 없는 후기 차단', authority: '공개 보류·수정 요구', verifier: false},
   {id: 'data-analytics', role: '데이터·성과', responsibility: '인덱스 완성도·유입·공유·구매 클릭을 구분 측정', authority: '분모·근거 정의', verifier: false},
+  {id: 'commerce-operations', role: '데이터·판매처 운영', responsibility: '스마트스토어 목적지·SKU·주문·취소·환불 흐름을 대사할 준비', authority: '판매처 연동 자료 확인 요청', verifier: false},
+  {id: 'finance-qa', role: '재무·QA', responsibility: '구매 클릭과 실제 주문·환불을 분리 검증', authority: '주문 대사 보류·재검증 요구', verifier: true},
   {id: 'story-ux', role: '스토리·UX·프런트', responsibility: '연구 탐색과 소비자 여정의 화면 구현', authority: '내부 화면 수정', verifier: false},
   {id: 'quality-auditor', role: '품질감사관', responsibility: '독립적으로 출처·계산·권한·승인·완료 증거 재검증', authority: '완료 반려·재작업 요구', verifier: true},
 ];
@@ -226,7 +229,7 @@ export function generateMvpPlan(input: string): MvpPlan {
     task({id: 'E2', title: '연구 레코드 표준화', description: '대상·표본·용량·기간·결과·한계를 같은 필드로 정리합니다.', output: '마스터 인덱스 레코드', priority: 1, dependencies: ['E1'], acceptance: ['필수 연구 필드 채움', '제품 적용 범위 분리'], lead: '연구·제품 근거', verifier: '독립 근거 검토', risk: 'B_INTERNAL_WRITE'}),
     task({id: 'C1', title: '소비자 언어·표시 검토', description: '원문을 먼저 읽지 않아도 핵심을 이해하도록 요약하고 과장을 점검합니다.', output: '소비자 요약 문안', priority: 2, dependencies: ['E2'], acceptance: ['쉽게 말하면 문장 작성', '효과 보장·치료·진단 표현 차단'], lead: '마케팅·소비자심리', verifier: '표시·콘텐츠 검토', risk: 'D_EXTERNAL_REVERSIBLE'}),
     task({id: 'Q1', title: '인덱스 화면 QA', description: '검색·필터·상세·원문 링크와 모바일 화면을 점검합니다.', output: 'QA 실행 기록', priority: 2, dependencies: ['C1'], acceptance: ['8개 연구 카드 노출', '390px 가로 넘침·콘솔 오류 없음'], lead: '스토리·UX·프런트', verifier: '접근성·QA', risk: 'C_LOW_RISK_INTERNAL'}),
-    task({id: 'P1', title: '공개 인덱스 배포 승인', description: '검증 증거를 묶어 공개 배포 여부를 책임자에게 보고합니다.', output: '승인 보고서', priority: 3, dependencies: ['Q1'], acceptance: ['완료 증거와 미완료 작업 표시', '책임자 승인 없이는 외부 배포하지 않음'], lead: 'TF 리드·AI 비서실', verifier: '품질감사관', risk: 'E_EXTERNAL_COMMITMENT'}),
+    task({id: 'P1', title: '공개 인덱스·판매처 전환 승인', description: '검증 증거를 묶어 공개 배포와 스마트스토어 전환 조건을 책임자에게 보고합니다.', output: '승인 보고서·판매처 전환 조건', priority: 3, dependencies: ['Q1'], acceptance: ['완료 증거와 미완료 작업 표시', '책임자 승인 없이는 외부 배포하지 않음'], lead: '데이터·판매처 운영', verifier: '재무·QA', risk: 'E_EXTERNAL_COMMITMENT'}),
   ];
   return {contract, tasks};
 }
