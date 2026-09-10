@@ -89,7 +89,7 @@ test('Local ops audit endpoint exposes a private safe summary and omits raw inpu
   const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));
   const localAuditPath=join(directory,'local-goal-audit.json');
   writeFileSync(localAuditPath,JSON.stringify({
-    generatedAt:'2026-09-11T00:00:00.000Z',goalId:'GL-2026-CELL-GABA-001',goalStatus:'ACTIVE',overallStatus:'IN_PROGRESS_WITH_GATES',coreValid:true,
+    generatedAt:'2026-09-11T00:00:00.000Z',goalId:'GL-2026-CELL-GABA-001',goalStatus:'ACTIVE',overallStatus:'IN_PROGRESS_WITH_GATES',coreValid:true,localStateChanged:true,localSnapshotHash:'local-hash',previousLocalSnapshotHash:'previous-local-hash',
     taskCounts:{DONE:8,VERIFYING:1,WAITING:4},pulseHealth:{generatedAt:'2026-09-11T00:00:00.000Z',snapshotHash:'hash',status:'fresh',ageMinutes:2},
     localInputAudit:{enabled:true,materials:{found:7,missing:0,finishedProductCandidates:5,b2Candidate:true,excludedBulkMaterial:1,latestSourceModifiedAt:'2026-07-08T01:20:11.865Z'},orders:{counters:{filesScanned:1086,csvFiles:77,xlsxFiles:100,xlsxEncrypted:457,xlsxUnparsed:552},gaba1500:{rows:114,quantity:121,firstDate:'2025-07-14',lastDate:'2025-12-26'},gaba750:{rows:64,quantity:72,firstDate:'2025-07-02',lastDate:'2025-12-24'},channelAssessment:'historical archive only',latestSourceModifiedAt:'2026-02-10T01:39:40.315Z'},interpretation:'private summary'},
     checks:[{id:'local-material-inputs',status:'MET',detail:'materials ok',blockers:[],evidence:['private/path']},{id:'local-order-inputs',status:'WAITING',detail:'orders wait',blockers:['private blocker'],evidence:['private/path']}],privatePath:'D:/secret',rawRows:[{email:'private@example.com'}]
@@ -98,7 +98,7 @@ test('Local ops audit endpoint exposes a private safe summary and omits raw inpu
   try {
     server.listen(0,'127.0.0.1');await once(server,'listening');const base=`http://127.0.0.1:${server.address().port}`;
     let response=await fetch(`${base}/api/ops/local-audit`);assert.equal(response.status,200);const body=await response.json();
-    assert.equal(body.mode,'private_local_audit');assert.equal(body.localInputAudit.materials.finishedProductCandidates,5);assert.equal(body.localInputAudit.orders.gaba1500.quantity,121);assert.equal(body.checks.length,2);assert.equal(body.privacyBoundary,'private_tmp_only');
+    assert.equal(body.mode,'private_local_audit');assert.equal(body.localStateChanged,true);assert.equal(body.localSnapshotHash,'local-hash');assert.equal(body.localInputAudit.materials.finishedProductCandidates,5);assert.equal(body.localInputAudit.orders.gaba1500.quantity,121);assert.equal(body.checks.length,2);assert.equal(body.privacyBoundary,'private_tmp_only');
     assert.equal(JSON.stringify(body).includes('D:/secret'),false);assert.equal(JSON.stringify(body).includes('private@example.com'),false);assert.equal(JSON.stringify(body).includes('private/path'),false);assert.equal(JSON.stringify(body).includes('rawRows'),false);
     rmSync(localAuditPath);response=await fetch(`${base}/api/ops/local-audit`);assert.equal(response.status,404);assert.equal((await response.json()).code,'LOCAL_AUDIT_MISSING');
   } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}

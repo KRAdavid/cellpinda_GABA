@@ -33,6 +33,9 @@ function localAuditSummary(report) {
     goalStatus: typeof report?.goalStatus === 'string' ? report.goalStatus : null,
     overallStatus: typeof report?.overallStatus === 'string' ? report.overallStatus : null,
     coreValid: report?.coreValid === true,
+    localStateChanged: report?.localStateChanged === true,
+    localSnapshotHash: typeof report?.localSnapshotHash === 'string' ? report.localSnapshotHash : null,
+    previousLocalSnapshotHash: typeof report?.previousLocalSnapshotHash === 'string' ? report.previousLocalSnapshotHash : null,
     taskCounts,
     pulseHealth: report?.pulseHealth && typeof report.pulseHealth === 'object' ? {
       generatedAt: typeof report.pulseHealth.generatedAt === 'string' ? report.pulseHealth.generatedAt : null,
