@@ -53,6 +53,7 @@ let pulse;
 try { pulse = JSON.parse(child.stdout.trim()); } catch { fail('tf-pulse did not emit JSON'); }
 
 if (pulse.mode !== 'automation_pulse' || pulse.goalId !== contract.goalId || pulse.goalStatus !== contract.status) fail('pulse identity does not match the active contract');
+if (!Array.isArray(pulse.roleCoverage) || pulse.roleCoverage.length !== requiredRoleGroups.length || pulse.roleCoverage.some(role => role.status !== 'present')) fail('pulse role coverage is missing or incomplete');
 if (!/^[a-f0-9]{64}$/.test(pulse.snapshotHash ?? '')) fail('pulse snapshot hash is missing or malformed');
 if (!pulse.counts || Object.values(pulse.counts).reduce((sum, count) => sum + count, 0) !== graph.tasks.length) fail('state counts do not cover the task graph');
 if (pulse.teaserGate?.taskId !== 'B4' || pulse.teaserGate.taskState !== tasks.get('B4')?.state) fail('teaser gate is out of sync with B4');

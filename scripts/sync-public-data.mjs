@@ -137,6 +137,7 @@ const publicPulse={
   generatedAt:pulseForQueue.generatedAt,
   snapshotHash:pulseForQueue.snapshotHash,
   requiresHumanDecision:pulseForQueue.requiresHumanDecision,
+  roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   counts:pulseForQueue.counts,
   teaserGate:{status:pulseForQueue.teaserGate.status,taskId:pulseForQueue.teaserGate.taskId,taskState:pulseForQueue.teaserGate.taskState},
   inputGates:pulseForQueue.inputGates.map(({taskId,state,chair,requiredInputs,nextAction})=>({taskId,state,chair,requiredInputs,nextAction})),

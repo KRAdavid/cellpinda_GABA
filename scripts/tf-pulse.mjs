@@ -20,6 +20,23 @@ for (const task of graph.tasks) {
   tasksById.set(task.id, task);
 }
 
+// Keep the cross-functional review roles visible in every pulse. These are
+// role labels and decision responsibilities, not claims that credentialed
+// external experts have been engaged.
+const roleCoverage = [
+  {id: 'consumer', label: '마케팅·소비자심리', pattern: /마케팅|소비자심리/},
+  {id: 'evidence', label: '연구·근거', pattern: /연구|근거/},
+  {id: 'product-review', label: '제품·표시', pattern: /제품|표시|규제/},
+  {id: 'story-ux', label: '스토리·UX·프런트', pattern: /스토리|UX|프런트/},
+  {id: 'commerce-data', label: '데이터·판매처', pattern: /데이터|판매처|커머스/},
+  {id: 'quality-audit', label: 'QA·감사', pattern: /QA|감사/},
+];
+const roleCorpus = [
+  ...graph.tasks.flatMap(task => [task.lead, task.verifier]),
+  ...contract.workstreams.flatMap(stream => [stream.lead, stream.verifier]),
+].join(' · ');
+for (const role of roleCoverage) if (!role.pattern.test(roleCorpus)) fail(`required TF role group is missing: ${role.label}`);
+
 const actionFor = task => {
   if (task.state === 'VERIFYING') return {
     decision: '검증 유지: 독립 검토자가 수락 기준과 증거를 대조하기 전에는 완료·공개 상태로 전환하지 않는다.',
@@ -93,6 +110,7 @@ const result = {
   snapshotHash,
   requiresHumanDecision: decisions.some(item => ['VERIFYING', 'WAITING'].includes(item.state)),
   teaserGate: {status: teaser.status, taskId: 'B4', taskState: tasksById.get('B4')?.state ?? null},
+  roleCoverage: roleCoverage.map(({id, label}) => ({id, label, status: 'present'})),
   counts,
   ready: decisions.filter(item => item.state === 'READY').map(item => item.taskId),
   verifying: decisions.filter(item => item.state === 'VERIFYING').map(item => item.taskId),

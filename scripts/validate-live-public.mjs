@@ -45,6 +45,9 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       inputGate: ['taskId', 'state', 'chair', 'requiredInputs', 'nextAction'],
       meetingAgenda: ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'requiredInputs', 'nextAction', 'mode'],
     };
+    assert.ok(Array.isArray(publicPulse.roleCoverage) && publicPulse.roleCoverage.length === 6, 'live public TF pulse role coverage is missing');
+    assert.deepEqual(publicPulse.roleCoverage.map(role => role.id), ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit'], 'live public TF pulse role coverage is out of order');
+    assert.ok(publicPulse.roleCoverage.every(role => role.status === 'present' && typeof role.label === 'string'), 'live public TF pulse role coverage is malformed');
     for (const gate of publicPulse.inputGates) assert.deepEqual(Object.keys(gate).sort(), [...publicPulseKeys.inputGate].sort(), 'live public TF pulse input gate contains an unexpected field');
     for (const agenda of publicPulse.meetingAgenda) assert.deepEqual(Object.keys(agenda).sort(), [...publicPulseKeys.meetingAgenda].sort(), 'live public TF pulse agenda contains an unexpected field');
     assert.ok(publicPulse.counts && Object.values(publicPulse.counts).reduce((sum, count) => sum + count, 0) === queue.tasks.length, 'live public TF pulse counts must cover the queue');
