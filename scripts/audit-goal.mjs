@@ -41,6 +41,18 @@ function latestTimestamp(values = []) {
   return valid.at(-1) || null;
 }
 
+function pulseFreshness(value, now = Date.now()) {
+  const timestamp = Date.parse(value || '');
+  if (!Number.isFinite(timestamp)) return {status: 'unknown', ageMinutes: null};
+  const ageMinutes = Math.max(0, Math.floor((now - timestamp) / 60_000));
+  return {status: ageMinutes > 8 * 60 ? 'stale' : 'fresh', ageMinutes};
+}
+
+const heartbeat = readOptionalJson('data/tf-pulse-heartbeat.json');
+const pulseHealth = heartbeat?.generatedAt
+  ? {generatedAt: heartbeat.generatedAt, snapshotHash: heartbeat.snapshotHash, ...pulseFreshness(heartbeat.generatedAt)}
+  : {generatedAt: null, snapshotHash: null, status: 'missing', ageMinutes: null};
+
 const contractOk = commandCheck('goal-contract', 'scripts/validate-goal-contract.mjs', ['data/goal-contract.json']);
 const planOk = commandCheck('task-graph', 'scripts/goal-next.mjs', ['data/task-graph.json']);
 const researchOk = commandCheck('research-copy', 'scripts/validate-research-copy.mjs', ['data/content-ledger.json', 'public/data/gaba-master-index.json']);
@@ -164,6 +176,7 @@ const report = {
   coreValid,
   roleCoverage,
   taskCounts,
+  pulseHealth,
   localInputAudit: localInputAudit || {enabled: false},
   checks,
   nextActions: unresolved.map(item => ({id: item.id, status: item.status, detail: item.detail, blockers: item.blockers})),
@@ -174,6 +187,7 @@ if (jsonOutput) console.log(JSON.stringify(report));
 else {
   console.log(`Goal audit · ${report.goalId} · ${report.overallStatus}`);
   console.log(`core ${coreValid ? '통과' : '재검토 필요'} · 역할군 ${roleCoverage.filter(role => role.status === 'present').length}/6 · DONE ${taskCounts.DONE || 0}`);
+  console.log(`pulse ${report.pulseHealth.status} · ${report.pulseHealth.generatedAt || 'heartbeat 없음'}${report.pulseHealth.ageMinutes === null ? '' : ` · ${report.pulseHealth.ageMinutes}분 경과`}`);
   if (includeLocalInputs) {
     for (const item of checks.filter(checkItem => checkItem.id.startsWith('local-'))) console.log(`- [${item.status}] ${item.id}: ${item.detail}`);
   }
