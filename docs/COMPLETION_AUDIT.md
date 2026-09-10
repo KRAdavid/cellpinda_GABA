@@ -159,3 +159,9 @@ GitHub의 동일 검사는 Linux에서도 통과했다. [실행34446456828](http
 GitHub Pages처럼 Worker API가 없는 정적 호스트에서는 API 주소를 미리 호출하지 않고 빌드된 콘텐츠·운영 큐와 브라우저 임시 저장을 사용한다. Worker 동일 출처 배포 또는 `VITE_API_ORIGIN` 지정 시 API를 사용한다. 최신 Pages UI에서 정적 폴백으로 제품·TF 큐·자동 파동을 검증하며, 정적 호스트의 예상 404/405 콘솔 잡음이 없는지 확인한다. 이 변경은 영구 Worker·D1 운영 연결을 완료한 것으로 계산하지 않는다.
 
 세부 화면 증거와 측정값은 [LIVE_UI_QA.md](LIVE_UI_QA.md)에 보관했다. 제품 1440px·390px, 운영 1440px에서 가로 넘침과 콘솔 오류가 모두 없었고, 운영 목표 생성 후 5개 내부 업무 자동 실행·P1 승인 대기·TF 의사결정 기록을 화면에서 확인했다.
+
+## 사람 회의 기록과 pulse 안건 후속 증거
+
+운영 MVP의 TF 의사결정 로그에 사람이 작업별 반대 의견·재검토 조건을 입력하는 폼을 연결했다. 자동 생성 안전 경계는 `guardrail`, 사람이 입력한 기록은 `human-meeting`으로 구분하고 `dissentRecordedAt`을 함께 저장한다. `ops-validation`은 허용된 상태·시각과 10자 이상 의견만 통과시키며, 서버·브라우저 저장과 JSON 승인 보고서가 같은 구조를 사용한다. canonical 운영 큐의 `VERIFYING`·`WAITING` 작업은 `다음 TF 회의 안건` 패널에서 담당자·검증자·다음 조치를 보여 준다.
+
+`pnpm test` 66개, 타입검사, production build, 로컬 API와 공개 Pages의 Playwright 데스크톱·모바일 검증이 통과했다. 공개 URL 검증은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`를 확인했다. 최신 [GitHub Actions 34510594986](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34510594986)은 verify·Pages·Worker 구성 점검·라이브 smoke를 성공시켰다. Worker 실제 배포 단계는 Cloudflare 운영 Secrets가 없어 실행되지 않았으며, 이 외부 입력 게이트와 B2·B3·B4·E1 검증은 완료로 계산하지 않는다.
