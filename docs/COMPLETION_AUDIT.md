@@ -223,3 +223,9 @@ canonical 업무 그래프·TF pulse·공개 운영 큐·생성형 MVP의 모든
 `tf:pulse:heartbeat`가 CI가 먼저 만든 `tf-pulse.json`에만 의존하던 경로를 보완했다. 인자를 생략하면 최신 `tf-pulse`를 내부적으로 생성해 안전한 `data/tf-pulse-heartbeat.json`으로 저장하고, 명시한 입력 경로가 없으면 오류를 그대로 반환한다. 로컬에서 인자 없는 명령을 직접 실행해 `GL-2026-CELL-GABA-001`, 입력 게이트 4개, 동일한 상태 지문과 6개 역할군이 기록되는 것을 확인했다. 공개 export·pulse·66개 회귀 테스트·타입 검사도 함께 통과했다.
 
 커밋 `8104133`의 [GitHub Actions 34525146466](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34525146466)은 검증·Pages·라이브 smoke를 성공시켰다. 라이브 확인값은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, Smart Store only, 750 제거, provenance 일치다. Worker 단계는 Cloudflare 운영 Secrets가 없어 건너뛰었으며, 이 변경도 B2·B3·B4·C2·E1의 사람 입력과 실제 운영 권한을 대신하지 않는다.
+
+## 2026-09-11 통합 목표 감사 자동화
+
+`scripts/audit-goal.mjs`와 `pnpm run audit:goal`을 추가해 Goal Contract, TF 역할 레지스트리, canonical 업무 그래프, 샌드박스 MVP, 공개 마스터 인덱스, 외부 입력 게이트를 한 번에 판정한다. 현재 로컬 결과는 `coreValid=true`, 역할군 `6/6`, `DONE=8`, 전체 `IN_PROGRESS_WITH_GATES`이며 B2는 `VERIFYING`, B3·B4·C2·E1과 티저 경계는 `WAITING`으로 남는다. 작업이 모두 충족될 때만 `COMPLETE`가 되도록 설계해 대기 입력을 완료로 오인하지 않는다.
+
+커밋 `0395d12`의 [GitHub Actions 34526316424](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34526316424)는 통합 감사 단계와 JSON artifact 업로드를 성공시켰고, 라이브 smoke도 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, Smart Store only, 750 제거, provenance 일치를 확인했다. 이 감사는 전체 목표의 현재 위치를 자동으로 보고하는 장치이며, 외부 승인·권한·Cloudflare Secrets·실주문 응답이 없는 상태를 완료로 승격하지 않는다.
