@@ -4,6 +4,7 @@ import {resolve} from 'node:path';
 
 const root = process.cwd();
 const jsonOutput = process.argv.includes('--json');
+const includeLocalInputs = process.argv.includes('--local-inputs');
 const readJson = relative => JSON.parse(readFileSync(resolve(root, relative), 'utf8'));
 const contract = readJson('data/goal-contract.json');
 const graph = readJson('data/task-graph.json');
@@ -27,6 +28,14 @@ function commandCheck(id, script, evidence) {
   return result.ok;
 }
 
+function readOptionalJson(relative) {
+  try {
+    return readJson(relative);
+  } catch {
+    return undefined;
+  }
+}
+
 const contractOk = commandCheck('goal-contract', 'scripts/validate-goal-contract.mjs', ['data/goal-contract.json']);
 const planOk = commandCheck('task-graph', 'scripts/goal-next.mjs', ['data/task-graph.json']);
 const researchOk = commandCheck('research-copy', 'scripts/validate-research-copy.mjs', ['data/content-ledger.json', 'public/data/gaba-master-index.json']);
@@ -38,6 +47,65 @@ let preflight;
 try { preflight = JSON.parse(preflightResult.output || ''); } catch { preflight = undefined; }
 const deploymentReady = preflightResult.ok && preflight?.ready === true;
 check('deployment-readiness', deploymentReady ? 'MET' : 'WAITING', deploymentReady ? '정적·Worker 배포 필수 설정과 산출물 준비됨' : '정적 Pages는 가능하지만 Worker 운영 준비 조건이 남아 있음', ['scripts/check-deploy-readiness.mjs', 'wrangler.jsonc'], deploymentReady ? [] : (preflight?.missingSecrets || ['배포 준비도 JSON 확인']));
+
+let localInputAudit;
+if (includeLocalInputs) {
+  const materialCommand = command('scripts/audit-local-materials.mjs');
+  const orderCommand = command('scripts/audit-local-orders.mjs');
+  const material = readOptionalJson('tmp/local-material-audit.json');
+  const orders = readOptionalJson('tmp/local-order-audit.json');
+  const materialSummary = material?.summary;
+  const orderSummary = orders
+    ? {
+        counters: orders.counters,
+        gaba1500: orders.aggregate?.gaba1500,
+        gaba750: orders.aggregate?.gaba750,
+        fieldPresence: orders.fieldPresenceFileCounts,
+        channelAssessment: orders.channelAssessment,
+      }
+    : undefined;
+  const materialOk = materialCommand.ok
+    && material?.goalId === contract.goalId
+    && materialSummary?.missing === 0
+    && Number(materialSummary?.finishedProductCandidates) > 0;
+  const orderOk = orderCommand.ok && orders?.goalId === contract.goalId && Boolean(orders?.aggregate);
+  check(
+    'local-material-inputs',
+    materialOk ? 'MET' : materialCommand.ok ? 'WAITING' : 'INVALID',
+    materialOk
+      ? `로컬 완제품 자료 입력 스캔 성공 · 후보 ${materialSummary.finishedProductCandidates}건 · B2 독립 승인은 별도`
+      : materialCommand.ok ? '로컬 완제품 자료 입력을 다시 확인해야 함' : '로컬 완제품 자료 감사 명령 실패',
+    ['data/local-material-manifest.json', 'scripts/audit-local-materials.mjs'],
+    materialOk ? [] : ['지정 자료 폴더·완제품 포장 파일·표시 자료 확인']
+  );
+  check(
+    'local-order-inputs',
+    orderOk ? 'WAITING' : 'INVALID',
+    orderOk
+      ? `로컬 주문 파일 ${orders.counters?.filesScanned ?? 0}개 스캔 · 1500 집계 ${orders.aggregate?.gaba1500?.quantity ?? 0}개 · 역사 자료만 확인되어 실구매로 승격하지 않음`
+      : '로컬 주문 자료 감사 명령 실패 또는 계약 ID 불일치',
+    ['data/local-order-manifest.json', 'scripts/audit-local-orders.mjs'],
+    orderOk ? ['판매자 계정·스마트스토어 상품 ID·실시간 주문·취소·환불 응답 확인'] : ['주문 입력 재감사']
+  );
+  localInputAudit = {
+    enabled: true,
+    materials: materialSummary ? {
+      found: materialSummary.found,
+      missing: materialSummary.missing,
+      finishedProductCandidates: materialSummary.finishedProductCandidates,
+      b2Candidate: materialSummary.b2Candidate,
+      excludedBulkMaterial: materialSummary.excludedBulkMaterial,
+    } : null,
+    orders: orderSummary ? {
+      counters: orderSummary.counters,
+      gaba1500: orderSummary.gaba1500,
+      gaba750: orderSummary.gaba750,
+      fieldPresence: orderSummary.fieldPresence,
+      channelAssessment: orderSummary.channelAssessment,
+    } : null,
+    interpretation: '로컬 자료는 입력 최신성·분류·대사 가능 여부를 보여 주며, 독립 승인·실구매·환불 완료를 증명하지 않는다.',
+  };
+}
 
 const roleCorpus = [
   ...(graph.tasks || []).flatMap(task => [task.lead, task.verifier]),
@@ -86,6 +154,7 @@ const report = {
   coreValid,
   roleCoverage,
   taskCounts,
+  localInputAudit: localInputAudit || {enabled: false},
   checks,
   nextActions: unresolved.map(item => ({id: item.id, status: item.status, detail: item.detail, blockers: item.blockers})),
   completionRule: '모든 core check와 외부 게이트가 MET일 때만 COMPLETE로 판정한다. 역할 정의는 실제 전문가 자격·섭외를 증명하지 않는다.',
