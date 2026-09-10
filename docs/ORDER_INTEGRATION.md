@@ -42,9 +42,9 @@
 
 ## 내부 주문 도메인 구현
 
-`src/domain/orders.ts`는 네이버 원문 payload를 직접 받지 않는 **내부 표준 모델**이다. `canonicalOrder`가 상품주문행·정수 KRW 누적 결제/환불액을 검증하고, `reconcileOrder`는 같은 주문의 중복 snapshot을 제거하며 오래된 observation을 무시한다. 부분환불은 누적 스냅샷을 교체하여 재전송 때 이중 차감하지 않는다. `observation`은 네이버 원본 변경 순번이 아니라 서버의 직렬화된 재조회 순번이다.
+`src/domain/orders.ts`는 네이버 원문 payload를 직접 받지 않는 **내부 표준 모델**이다. `src/domain/smartstore-orders.ts`는 개인정보 필터를 거친 상품주문 응답을 이 모델로 변환하는 경계이며, 설정으로 주입된 실제 채널상품 번호와 `gaba1500`만 허용한다. `canonicalOrder`가 상품주문행·정수 KRW 누적 결제/환불액을 검증하고, `reconcileOrder`는 같은 주문의 중복 snapshot을 제거하며 오래된 observation을 무시한다. 부분환불은 누적 스냅샷을 교체하여 재전송 때 이중 차감하지 않는다. `observation`은 네이버 원본 변경 순번이 아니라 서버의 직렬화된 재조회 순번이다.
 
-현재는 KRW만 지원한다. `paidKrw/refundedKrw`는 해당 행에 검증 배분한 금액이다. 원본 `refund_amount`를 무조건 그대로 대입하지 않는다. 금액 배분 어댑터·외부 상태코드 매핑·DB 원장·실제 주문 네트워크 호출은 아직 구현하지 않았다. canonical 모델의 타입 이름이나 입력만으로 발신 인증이 성립하지 않는다.
+현재는 KRW만 지원한다. `paidKrw/refundedKrw`는 해당 행에 검증 배분한 금액이다. 원본 금액을 무조건 그대로 대입하지 않는다. 네이버 상태를 내부 상태로 바꾸는 개인정보 필터·상품 매핑·부분환불 테스트는 구현했지만, 외부 인증·실제 네트워크 호출·운영 DB 원장은 아직 구현하지 않았다. canonical 모델의 타입 이름이나 입력만으로 발신 인증이 성립하지 않는다.
 
 ## 추천 정산: 지급 미활성
 

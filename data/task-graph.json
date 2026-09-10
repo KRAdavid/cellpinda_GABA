@@ -144,14 +144,14 @@
       "id": "E1",
       "stream": "E",
       "title": "실구매 전환 대사",
-      "state": "BACKLOG",
+      "state": "WAITING",
       "priority": 3,
       "lead": "데이터·판매처 운영",
       "verifier": "재무·QA",
       "dependencies": ["C2"],
-      "blockedBy": "스마트스토어 주문·취소·환불 데이터 계약",
+      "blockedBy": "판매자 계정·실제 1500 상품 식별자·주문·취소·환불 테스트 응답",
       "acceptance": ["판매처 주문과 유입을 SKU·기간·상태별 대사", "클릭과 실제 구매를 별도 지표로 보고"],
-      "evidence": ["docs/ORDER_INTEGRATION.md"]
+      "evidence": ["docs/ORDER_INTEGRATION.md", "src/domain/smartstore-orders.ts", "src/domain/smartstore-orders.test.ts"]
     }
   ]
 }
