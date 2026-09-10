@@ -1,6 +1,6 @@
 import {strict as assert} from 'node:assert';
 import test from 'node:test';
-import {buildMvpApprovalReport, generateMvpPlan, promoteReady, runSandboxTask, taskGraphEdges} from './goal-mvp.ts';
+import {buildMvpApprovalReport, generateMvpPlan, promoteReady, runSandboxTask, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
 
 test('one sentence goal generates a contract, TF and dependency graph', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
@@ -17,9 +17,13 @@ test('one sentence goal generates a contract, TF and dependency graph', () => {
 test('sandbox execution verifies a task and unlocks its dependent task', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
   const result = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
-  assert.equal(result.tasks.find(task => task.id === 'G1')?.state, 'DONE');
-  assert.equal(result.tasks.find(task => task.id === 'E1')?.state, 'READY');
-  assert.equal(result.events.length, 3);
+  assert.equal(result.tasks.find(task => task.id === 'G1')?.state, 'VERIFYING');
+  assert.equal(result.tasks.find(task => task.id === 'E1')?.state, 'BACKLOG');
+  assert.equal(result.events.length, 2);
+  const verified = verifySandboxTask(result.tasks, 'G1', '2026-09-10T10:01:00.000Z');
+  assert.equal(verified.tasks.find(task => task.id === 'G1')?.state, 'DONE');
+  assert.equal(verified.tasks.find(task => task.id === 'E1')?.state, 'READY');
+  assert.equal(verified.events.length, 1);
 });
 
 test('external commitment produces an approval packet before execution', () => {
@@ -30,17 +34,20 @@ test('external commitment produces an approval packet before execution', () => {
   assert.equal(blocked.approvalTaskId, 'P1');
   assert.equal(blocked.tasks.find(task => task.id === 'P1')?.state, 'WAITING');
   const approved = runSandboxTask(completed, 'P1', 'sandbox-approval', '2026-09-10T10:00:00.000Z');
-  assert.equal(approved.tasks.find(task => task.id === 'P1')?.state, 'DONE');
+  assert.equal(approved.tasks.find(task => task.id === 'P1')?.state, 'VERIFYING');
+  const verified = verifySandboxTask(approved.tasks, 'P1', '2026-09-10T10:01:00.000Z');
+  assert.equal(verified.tasks.find(task => task.id === 'P1')?.state, 'DONE');
 });
 
 test('approval report distinguishes completed and pending work', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
   const after = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
-  const report = buildMvpApprovalReport(plan.contract, after.tasks, after.events, undefined, '2026-09-10T10:00:00.000Z');
+  const verified = verifySandboxTask(after.tasks, 'G1', '2026-09-10T10:01:00.000Z');
+  const report = buildMvpApprovalReport(plan.contract, verified.tasks, [...after.events, ...verified.events], undefined, '2026-09-10T10:00:00.000Z');
   assert.equal(report.sandboxOnly, true);
   assert.equal(report.verificationStatus, 'sandbox_simulation_only');
   assert.equal(report.auditEvents.length, 3);
-  assert.deepEqual(report.taskEvidence.G1, ['sandbox:G1:2026-09-10T10:00:00.000Z']);
+  assert.deepEqual(report.taskEvidence.G1, ['sandbox-output:G1:2026-09-10T10:00:00.000Z', 'independent-review:G1:2026-09-10T10:01:00.000Z']);
   assert.equal(report.contractSnapshot.goalId, plan.contract.goalId);
   assert.deepEqual(report.taskAcceptance.G1, plan.tasks.find(task => task.id === 'G1')?.acceptance);
   assert.deepEqual(report.completedTasks, ['G1']);

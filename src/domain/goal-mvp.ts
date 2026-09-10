@@ -196,9 +196,18 @@ export function runSandboxTask(tasks: readonly MvpTask[], taskId: string, approv
   const events: SandboxAuditEvent[] = [];
   const push = (from: TaskState, to: TaskState, note: string) => events.push({id: `${taskId}-${to}-${events.length + 1}`, taskId, from, to, note, createdAt: now});
   push(ready.state, 'RUNNING', '샌드박스에서 작업을 시작했습니다.');
-  push('RUNNING', 'VERIFYING', '독립 검증자가 acceptance 조건을 확인합니다.');
-  push('VERIFYING', 'DONE', '검증 증거를 연결해 완료 처리했습니다.');
-  const next = promoteReady(tasks.map(task => task.id === taskId ? {...task, state: 'DONE', evidence: [...task.evidence, `sandbox:${taskId}:${now}`]} : {...task}));
+  push('RUNNING', 'VERIFYING', '샌드박스 산출물을 만들었습니다. 품질감사관의 독립 검증을 기다립니다.');
+  const next = tasks.map(task => task.id === taskId ? {...task, state: 'VERIFYING' as const, evidence: [...task.evidence, `sandbox-output:${taskId}:${now}`]} : {...task});
+  return {tasks: next, events};
+}
+
+export function verifySandboxTask(tasks: readonly MvpTask[], taskId: string, now = new Date().toISOString()): {tasks: MvpTask[]; events: SandboxAuditEvent[]} {
+  const source = tasks.find(task => task.id === taskId);
+  if (!source) throw new Error(`작업을 찾을 수 없습니다: ${taskId}`);
+  if (source.state !== 'VERIFYING') throw new Error('샌드박스 산출물을 먼저 만든 뒤 독립 검증을 기록해야 합니다.');
+  if (source.evidence.length === 0) throw new Error('검증할 증거가 없습니다.');
+  const events: SandboxAuditEvent[] = [{id: `${taskId}-DONE-1`, taskId, from: 'VERIFYING', to: 'DONE', note: '품질감사관이 수락 기준과 샌드박스 증거를 독립 검토한 것으로 기록했습니다.', createdAt: now}];
+  const next = promoteReady(tasks.map(task => task.id === taskId ? {...task, state: 'DONE' as const, evidence: [...task.evidence, `independent-review:${taskId}:${now}`]} : {...task}));
   return {tasks: next, events};
 }
 

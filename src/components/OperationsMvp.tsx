@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState} from 'react';
 import {ArrowRight, CheckCircle2, Clipboard, Download, LockKeyhole, Play, RotateCcw, ShieldCheck} from 'lucide-react';
-import {buildMvpApprovalReport, generateMvpPlan, runSandboxTask, taskGraphEdges, type MvpApprovalReport, type MvpPlan, type SandboxAuditEvent} from '../domain/goal-mvp';
+import {buildMvpApprovalReport, generateMvpPlan, runSandboxTask, taskGraphEdges, verifySandboxTask, type MvpApprovalReport, type MvpPlan, type SandboxAuditEvent} from '../domain/goal-mvp';
 import './OperationsMvp.css';
 
 const defaultGoal = '공개용 GABA 논문 기반 마스터 인덱스';
@@ -68,6 +68,14 @@ export default function OperationsMvp() {
     } catch (error) { setMessage(error instanceof Error ? error.message : '샌드박스 실행에 실패했습니다.'); }
   }
 
+  function verify(taskId: string) {
+    if (!plan) return;
+    try {
+      const result = verifySandboxTask(plan.tasks, taskId);
+      setPlan({...plan, tasks: result.tasks}); setAudit(items => [...items, ...result.events]); setMessage(`${taskId} 작업을 독립 검증 완료로 기록했습니다. 실제 외부 결과 검증은 운영 연결 후 별도 수행됩니다.`);
+    } catch (error) { setMessage(error instanceof Error ? error.message : '독립 검증 기록에 실패했습니다.'); }
+  }
+
   function copyReport() {
     if (!report) return;
     void navigator.clipboard?.writeText(JSON.stringify(report, null, 2)).then(() => { setCopied(true); setMessage('승인 보고서 JSON을 복사했습니다.'); }).catch(() => setMessage('복사 권한이 없어 다운로드를 이용해 주세요.'));
@@ -102,7 +110,7 @@ export default function OperationsMvp() {
       </section>
       <section className="ops-mvp-graph wrap" aria-labelledby="graph-heading">
         <div className="ops-mvp-section-heading"><div><p className="chapter">03 / 업무 그래프</p><h2 id="graph-heading">다음에 할 일이 보입니다.</h2></div><p>선행 작업이 완료된 작업만 실행 가능해집니다. 승인 없는 외부 약속은 샌드박스에서도 멈춥니다.</p></div>
-        <div className="ops-mvp-graph-layout"><div className="ops-mvp-tasks">{plan.tasks.map(task => <article className={`ops-mvp-task state-${task.state.toLowerCase()}`} key={task.id}><div className="ops-mvp-task-top"><div><span className="ops-mvp-task-id">{task.id}</span><h3>{task.title}</h3></div><span className="ops-mvp-state">{stateLabels[task.state] || task.state}</span></div><p>{task.description}</p><div className="ops-mvp-task-meta"><span>담당 {task.lead}</span><span>검증 {task.verifier}</span><span>위험도 {riskLabels[task.risk || 'A_READ']}</span></div>{task.dependencies.length ? <small>선행: {task.dependencies.join(' → ')}</small> : null}{task.state === 'READY' ? <button className="button outline ops-mvp-task-action" type="button" onClick={() => execute(task.id)}>샌드박스 실행 <Play size={15}/></button> : task.state === 'DONE' ? <span className="ops-mvp-done"><CheckCircle2 size={16}/> 증거 연결됨</span> : null}</article>)}</div><aside className="ops-mvp-graph-side"><h3>의존성 흐름</h3><div className="ops-mvp-flow">{edges.map((edge,index) => <span key={`${edge.from}-${edge.to}`}>{edge.from}<ArrowRight size={14}/>{edge.to}{index < edges.length - 1 ? <i/> : null}</span>)}</div><button className="text-link" type="button" onClick={() => { setPlan({...plan, tasks: plan.tasks.map(task => task.state === 'BACKLOG' && task.dependencies.every(id => plan.tasks.find(parent => parent.id === id)?.state === 'DONE') ? {...task, state: 'READY'} : task)}); setMessage('완료된 선행 작업을 기준으로 실행 가능 상태를 갱신했습니다.'); }}>실행 가능 상태 갱신 ↻</button></aside></div>
+        <div className="ops-mvp-graph-layout"><div className="ops-mvp-tasks">{plan.tasks.map(task => <article className={`ops-mvp-task state-${task.state.toLowerCase()}`} key={task.id}><div className="ops-mvp-task-top"><div><span className="ops-mvp-task-id">{task.id}</span><h3>{task.title}</h3></div><span className="ops-mvp-state">{stateLabels[task.state] || task.state}</span></div><p>{task.description}</p><div className="ops-mvp-task-meta"><span>담당 {task.lead}</span><span>검증 {task.verifier}</span><span>위험도 {riskLabels[task.risk || 'A_READ']}</span></div>{task.dependencies.length ? <small>선행: {task.dependencies.join(' → ')}</small> : null}{task.state === 'READY' ? <button className="button outline ops-mvp-task-action" type="button" onClick={() => execute(task.id)}>샌드박스 실행 <Play size={15}/></button> : task.state === 'VERIFYING' ? <button className="button outline ops-mvp-task-action" type="button" onClick={() => verify(task.id)}>독립 검증 기록 <ShieldCheck size={15}/></button> : task.state === 'DONE' ? <span className="ops-mvp-done"><CheckCircle2 size={16}/> 검증 증거 연결됨</span> : null}</article>)}</div><aside className="ops-mvp-graph-side"><h3>의존성 흐름</h3><div className="ops-mvp-flow">{edges.map((edge,index) => <span key={`${edge.from}-${edge.to}`}>{edge.from}<ArrowRight size={14}/>{edge.to}{index < edges.length - 1 ? <i/> : null}</span>)}</div><button className="text-link" type="button" onClick={() => { setPlan({...plan, tasks: plan.tasks.map(task => task.state === 'BACKLOG' && task.dependencies.every(id => plan.tasks.find(parent => parent.id === id)?.state === 'DONE') ? {...task, state: 'READY'} : task)}); setMessage('완료된 선행 작업을 기준으로 실행 가능 상태를 갱신했습니다.'); }}>실행 가능 상태 갱신 ↻</button></aside></div>
       </section>
       <section className="ops-mvp-report wrap" aria-labelledby="report-heading">
         <div className="ops-mvp-section-heading"><div><p className="chapter">04 / 결과·승인 보고</p><h2 id="report-heading">실행 결과를 보고서로 남깁니다.</h2></div><p>샌드박스 결과는 외부 실행 증거가 아닙니다. 실제 공개 전에는 책임자·표시·배포 검토가 필요합니다.</p></div>

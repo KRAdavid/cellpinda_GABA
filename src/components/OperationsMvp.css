@@ -51,12 +51,14 @@
 .ops-mvp-tasks { display: grid; gap: 12px; }
 .ops-mvp-task { background: #fff; border: 1px solid #d9e5dc; border-left: 4px solid #b8c9bd; border-radius: 8px; padding: 20px 22px; }
 .ops-mvp-task.state-ready { border-left-color: #158457; box-shadow: 0 9px 24px #18382b0f; }
+.ops-mvp-task.state-verifying { border-left-color: #9a6b19; background: #fffdf7; }
 .ops-mvp-task.state-done { border-left-color: #7fbd94; background: #fbfefb; }
 .ops-mvp-task-top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
 .ops-mvp-task-top h3 { display: inline; font-size: 19px; margin: 0; }
 .ops-mvp-task-id { color: #158457; font-weight: 800; margin-right: 10px; font-size: 12px; }
 .ops-mvp-state { white-space: nowrap; border-radius: 99px; padding: 6px 10px; background: #edf3ee; color: #52685c; font-size: 12px; }
 .state-ready .ops-mvp-state { background: #daf0e1; color: #17633d; }
+.state-verifying .ops-mvp-state { background: #fff0c9; color: #7d5816; }
 .state-done .ops-mvp-state { background: #e8f5e9; color: #2a7146; }
 .ops-mvp-task p { font-size: 14px; margin: 12px 0; }
 .ops-mvp-task-meta { display: flex; flex-wrap: wrap; gap: 10px 18px; color: #607567; font-size: 12px; }
