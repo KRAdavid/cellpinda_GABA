@@ -1,0 +1,266 @@
+import { useEffect, useRef, useState } from 'react';
+import { ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
+import { classifyRhythm, questions, resultTypes } from '../domain/rhythm';
+import type { RhythmId, RhythmResult, RhythmType } from '../domain/rhythm';
+import './rhythm.css';
+
+export interface RhythmExperienceProps {
+  onEvent: (name: string, properties?: Record<string, string>) => void;
+}
+
+function getSharedType(): RhythmType | null {
+  if (typeof window === 'undefined') return null;
+  const id = new URLSearchParams(window.location.search).get('rhythm');
+  return id && Object.prototype.hasOwnProperty.call(resultTypes, id)
+    ? resultTypes[id as RhythmId] : null;
+}
+
+function shareUrl(type: RhythmType): string {
+  const url = new URL('/', window.location.origin);
+  url.searchParams.set('rhythm', type.id);
+  url.hash = 'rhythm';
+  return url.toString();
+}
+
+/** Preserve words first; split characters only when a single word exceeds a line. */
+function drawParagraph(context: CanvasRenderingContext2D, text: string, y: number, size: number, lineHeight: number, color = '#18382b'): number {
+  context.font = `${size}px "Noto Sans KR", "Malgun Gothic", sans-serif`;
+  context.fillStyle = color;
+  let line = '';
+  for (const word of text.trim().split(/\s+/)) {
+    const candidate = line ? `${line} ${word}` : word;
+    if (context.measureText(candidate).width <= 872) {
+      line = candidate;
+      continue;
+    }
+    if (line) {
+      context.fillText(line, 104, y);
+      y += lineHeight;
+      line = '';
+    }
+    for (const char of word) {
+      if (line && context.measureText(line + char).width > 872) {
+        context.fillText(line, 104, y);
+        y += lineHeight;
+        line = '';
+      }
+      line += char;
+    }
+  }
+  if (line) context.fillText(line.trim(), 104, y);
+  return y + lineHeight;
+}
+
+function createCard(type: RhythmType): Promise<Blob | null> {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1350;
+  const context = canvas.getContext('2d');
+  if (!context) return Promise.resolve(null);
+  context.fillStyle = '#ffffff';
+  context.fillRect(0, 0, 1080, 1350);
+  context.fillStyle = '#e8f1e7';
+  context.fillRect(48, 48, 984, 1254);
+  drawParagraph(context, 'CELLPINDA · 하루 리듬 이야기', 134, 27, 42);
+  drawParagraph(context, '잠깐 멈춰, 나의 하루를 돌아봐요.', 258, 33, 52);
+  context.font = 'bold 72px "Malgun Gothic", sans-serif';
+  context.fillStyle = '#18382b';
+  context.fillText(type.name, 104, 385);
+  let y = drawParagraph(context, type.description, 470, 33, 54);
+  y = drawParagraph(context, '오늘의 작은 제안', y + 65, 26, 44, '#158457');
+  drawParagraph(context, type.suggestions[0] ?? '', y + 10, 36, 58);
+  // Identical decorative curves for every type; no measurement or axis implied.
+  context.lineCap = 'round';
+  for (let index = 0; index < 3; index++) {
+    const baseline = 942 + index * 15;
+    context.strokeStyle = ['#158457', '#7cb18e', '#bbd4bd'][index]!;
+    context.lineWidth = 3;
+    context.beginPath();
+    context.moveTo(104, baseline);
+    context.bezierCurveTo(240, baseline - 75, 302, baseline + 75, 452, baseline);
+    context.bezierCurveTo(602, baseline - 75, 740, baseline + 75, 976, baseline - 8);
+    context.stroke();
+  }
+  context.strokeStyle = '#b5c9b9';
+  context.lineWidth = 1;
+  context.beginPath();
+  context.moveTo(104, 1050);
+  context.lineTo(976, 1050);
+  context.stroke();
+  drawParagraph(context, '생활 패턴을 돌아보는 이야기입니다.', 1110, 25, 40);
+  drawParagraph(context, '의학적 진단이나 체내 GABA 측정이 아닙니다.', 1158, 25, 40);
+  return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+}
+
+export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
+  const [sharedType, setSharedType] = useState(getSharedType);
+  const [compareConsent, setCompareConsent] = useState(false);
+  const [friendType, setFriendType] = useState<RhythmType | null>(null);
+  const [started, setStarted] = useState(false);
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<(number | undefined)[]>(Array(5).fill(undefined));
+  const [result, setResult] = useState<RhythmResult | null>(null);
+  const [cardFile, setCardFile] = useState<File | null>(null);
+  const [message, setMessage] = useState('');
+  const [manualLink, setManualLink] = useState('');
+  const sharedTracked=useRef(false);
+  useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed');onEvent('result_viewed')}},[sharedType,onEvent]);
+  const answerStarted=useRef(false);
+  const resultViewed=useRef(false);
+  const questionRef = useRef<HTMLLegendElement>(null);
+  const resultRef = useRef<HTMLHeadingElement>(null);
+  const type = result?.type ?? sharedType;
+  const question = questions[step]!;
+
+  useEffect(() => {
+    if (started && !type) questionRef.current?.focus();
+    if (result) {resultRef.current?.focus();if(!resultViewed.current){resultViewed.current=true;onEvent('result_viewed')}}
+  }, [step, started, result, type]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setCardFile(null);
+    if (type) {
+      createCard(type).then(blob => {
+        if (!cancelled && blob) {setCardFile(new File([blob], 'cellpinda-rhythm.png', { type: 'image/png' }));onEvent('share_image_generated');}
+      }).catch(() => {
+        if (!cancelled) setMessage('이미지 준비가 어려워요. 링크 공유를 이용해 주세요.');
+      });
+    }
+    return () => { cancelled = true; };
+  }, [type]);
+
+  function start() {
+    if (sharedType) setFriendType(compareConsent ? sharedType : null);
+    setSharedType(null);
+    setResult(null);
+    setStarted(true);
+    setStep(0);
+    setAnswers(Array(5).fill(undefined));
+    setMessage('');
+    setManualLink('');
+    // Remove an incoming shared result when the visitor starts their own reflection.
+    if (window.location.search.includes('rhythm=')) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('rhythm');
+      window.history.replaceState(null, '', url);
+    }
+    answerStarted.current=false;
+    resultViewed.current=false;
+  }
+
+  function next() {
+    if (answers[step] === undefined) return;
+    if (step < questions.length - 1) setStep(current => current + 1);
+    else {
+      setResult(classifyRhythm(answers as number[]));
+      onEvent('rhythm_complete');
+
+    }
+  }
+
+  async function copyLink() {
+    if (!type) return;
+    const url = shareUrl(type);
+    try {
+      await navigator.clipboard.writeText(url);
+      setMessage('링크를 복사했어요. 이 링크에는 유형만 포함되고 문항별 답변은 포함되지 않아요.');
+      setManualLink('');
+      onEvent('share_copy');
+    } catch {
+      setManualLink(url);
+      setMessage('아래 링크를 선택해 직접 복사해 주세요.');
+    }
+  }
+
+  async function share() {
+    if (!type) return;
+    onEvent('share_request');
+    if (cardFile && navigator.share && navigator.canShare?.({ files: [cardFile] })) {
+      try {
+        await navigator.share({ files: [cardFile], title: '셀핀다 하루 리듬 이야기', text: '하루의 생활 패턴을 함께 돌아봐요.', url: shareUrl(type) });
+        setMessage('공유 창을 이용했어요. 실제 전달 여부는 확인하지 않아요.');
+        return;
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          setMessage('공유를 취소했어요.');
+          onEvent('share_cancelled');
+          return;
+        }
+      }
+    }
+    await copyLink();
+  }
+
+  function downloadCard() {
+    if (!cardFile) return;
+    const url = URL.createObjectURL(cardFile);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = cardFile.name;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    onEvent('card_download');
+    setMessage('PNG 카드 다운로드를 요청했어요.');
+  }
+
+  return (
+    <section className="rhythm-experience" id="rhythm" aria-labelledby="rhythm-heading">
+      <div className="rhythm-heading-row">
+        <div><p className="rhythm-eyebrow">01 / DISCOVER YOUR RHYTHM</p><h2 id="rhythm-heading">잠깐 멈춰,<br />나의 하루를 만나보세요.</h2></div>
+        <p className="rhythm-intro-copy">최근 7일을 떠올리며 다섯 가지 질문에 답해 보세요.<br />정답 없이, 지금의 생활 패턴을 돌아보는 시간입니다.</p>
+      </div>
+
+      {type ? (
+        <div className="rhythm-result-layout">
+          <article className="rhythm-result-card">
+            <p className="rhythm-eyebrow">{sharedType ? '공유받은 리듬 이야기' : '나의 하루 리듬 이야기'}</p>
+            <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
+            {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
+            <p className="rhythm-description">{type.description}</p>
+            <svg className="rhythm-card-wave" viewBox="0 0 500 70" aria-hidden="true" focusable="false"><path d="M0 31 C75 -12 110 74 190 31 S330 -12 500 31" /><path d="M0 43 C75 0 110 86 190 43 S330 0 500 43" /><path d="M0 55 C75 12 110 98 190 55 S330 12 500 55" /></svg>
+            <div className="rhythm-suggestions"><h4>오늘 해볼 작은 일</h4><ul>{type.suggestions.map(suggestion => <li key={suggestion}>{suggestion}</li>)}</ul></div>
+            <p className="rhythm-note">생활 패턴을 돌아보는 콘텐츠이며, 의학적 진단이나 체내 GABA 측정이 아닙니다.</p>
+          </article>
+          <div className="rhythm-result-actions">
+            <p className="rhythm-eyebrow">KEEP YOUR LITTLE MOMENT</p>
+            <h3>나를 돌아본 순간을<br />한 장에 담아요.</h3>
+            <p>카드와 공유 링크에는 생활 유형이 표시돼요. 문항별 답변은 담지 않습니다.</p>
+            <button type="button" className="rhythm-button" onClick={share}>리듬 이야기 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
+            <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>이미지 카드 저장 <Download size={18} aria-hidden="true" /></button>
+            {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
+            <button type="button" className="rhythm-text-button" onClick={start}>{sharedType ? '나도 1분 리듬 체크' : '다시 체크하기'} <ArrowRight size={18} aria-hidden="true" /></button>
+            <details className="rhythm-rules"><summary>유형은 어떻게 정해지나요?</summary><p>{result?.explanation ?? '1·4번의 합, 2·3번의 합, 5번의 두 배를 비교합니다. 모두 1 이하면 안정 리듬형이며, 그 외에는 가장 큰 값으로 정합니다. 동점이면 회복 부족형, 계속 작동형, 리듬 불균형형 순으로 표시합니다. 가중치와 동점 순서는 콘텐츠 편집 규칙이며 검증된 의학적 기준이 아닙니다.'}</p></details>
+            <a className="rhythm-text-button" href="#story">이제 GABA를 알아볼까요? <ArrowRight size={18} aria-hidden="true" /></a>
+          </div>
+        </div>
+      ) : started ? (
+        <div className="rhythm-question-layout">
+          <div className="rhythm-progress-area"><p className="rhythm-eyebrow">나의 하루 리듬 체크</p><p className="rhythm-step"><strong>{String(step + 1).padStart(2, '0')}</strong><span>/ 05</span></p><progress value={step + 1} max={5} aria-label={`전체 5문항 중 ${step + 1}번째 질문`} /><p className="rhythm-note">답변은 이 화면에서만 사용하며<br />서버에 전송하거나 저장하지 않아요.</p></div>
+          <div className="rhythm-question-content">
+            <fieldset key={question.id}><legend ref={questionRef} tabIndex={-1}>{question.prompt}</legend><div className="rhythm-options">{question.options.map(option => <label key={option.value} className={answers[step] === option.value ? 'selected' : ''}><input type="radio" name={question.id} value={option.value} checked={answers[step] === option.value} onChange={() => {if(!answerStarted.current){answerStarted.current=true;onEvent('rhythm_start')}setAnswers(current => current.map((answer, index) => index === step ? option.value : answer))}} /><span>{option.label}</span><span className="rhythm-option-mark" aria-hidden="true">{answers[step] === option.value ? '✓' : ''}</span></label>)}</div></fieldset>
+            <div className="rhythm-navigation"><button type="button" className="rhythm-text-button" onClick={() => setStep(current => current - 1)} disabled={step === 0}><ChevronLeft size={18} aria-hidden="true" /> 이전</button><button type="button" className="rhythm-button" disabled={answers[step] === undefined} onClick={next}>{step === 4 ? '내 리듬 만나기' : '다음 질문'} <ArrowRight size={18} aria-hidden="true" /></button></div>
+          </div>
+        </div>
+      ) : (
+        <div className="rhythm-start-panel"><div><h3>오늘의 나에게,<br />1분의 여백.</h3><p>생각을 마무리하는 시간, 쉬는 틈, 아침의 느낌.<br />작은 질문에서 나만의 생활 리듬을 발견해 보세요.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>1분 리듬 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />의학적 진단이나 체내 GABA 측정이 아닙니다.</p></div></div>
+      )}
+      {result && friendType ? (
+        <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
+          <div className="rhythm-comparison-heading"><div><p className="rhythm-eyebrow">함께 돌아보는 하루</p><h3 id="rhythm-comparison-heading">나와 친구, 각자의 쉬는 방식.</h3></div><button type="button" className="rhythm-text-button" onClick={() => { setFriendType(null); setCompareConsent(false); }}>비교 지우기</button></div>
+          <p>{result.type.id === friendType.id ? '같은 유형이 나왔어요. 같은 이름이어도 하루의 모습과 편안한 쉬는 방법은 서로 다를 수 있어요.' : '서로 다른 유형이 나왔어요. 누구의 상태가 더 좋다는 뜻이 아니라, 돌아볼 생활 습관이 서로 다르다는 이야기예요.'}</p>
+          <div className="rhythm-comparison-grid">
+            <article><p className="rhythm-eyebrow">내가 방금 돌아본 리듬</p><h4>{result.type.name}</h4><p>{result.type.suggestions[0]}</p></article>
+            <article><p className="rhythm-eyebrow">친구가 공유한 유형</p><h4>{friendType.name}</h4><p>{friendType.suggestions[0]}</p></article>
+          </div>
+          <p className="rhythm-comparison-prompt">“오늘 언제 잠깐 쉴 수 있었어?” 서로에게 물어보고, 각자 편안했던 시간을 나눠 보세요.</p>
+          <p className="rhythm-note">친구의 유형은 전달받은 링크에 담긴 내용이며, 실제 답변이나 신원은 확인하지 않아요. 비교 내용은 서버로 보내거나 공유 카드에 담지 않습니다.</p>
+        </section>
+      ) : null}
+      <p className="rhythm-status" role="status" aria-live="polite">{message}</p>
+      {manualLink ? <label className="rhythm-manual-link">공유 링크<input value={manualLink} readOnly onFocus={event => event.target.select()} /></label> : null}
+    </section>
+  );
+}

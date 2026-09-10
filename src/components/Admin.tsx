@@ -1,0 +1,68 @@
+import { useState } from 'react';
+
+type Item = { id: string; topic?: string; name?: string; publicText?: string; status: string; revision: number; sources?: { title: string; url: string | null; page?: number | null; locator?: string }[]; sourceTitle?: string; sourceUrl?: string | null; metadata?: Record<string, string | string[] | number | null>; limitations?: string[]; holdReason?: string | null; reviewedBy?: string; reviewedAt?: string };
+type Funnel = { id: string; from: string; to: string; denominator: number; numerator: number; rate: number | null; denominatorDefinition: string; numeratorDefinition: string };
+type Analytics = { counts: { name: string; count: number }[]; funnels?: Funnel[]; window?: { kind: string; from: string | null; to: string; ordering: string; flowScope: string }; coverage?: { eventsWithoutFlow: number; distinctFlows: number } };
+const eventLabels: Record<string, string> = { landing_view: '첫 화면 열람', rhythm_check_started: '리듬 체크 시작', rhythm_check_completed: '리듬 체크 완료', result_viewed: '결과 열람', gaba_story_viewed: 'GABA 이야기 열람', evidence_opened: '근거 상세 열기', review_opened: '후기 원문 이동', share_image_generated: '공유 이미지 생성', share_requested: '공유 요청', share_cancelled: '공유 취소', share_link_copied: '공유 링크 복사', share_image_downloaded: '공유 이미지 다운로드 요청', shared_link_landed: '공유 링크로 진입', product_comparison_viewed: '제품 비교 열람', purchase_outbound_clicked: '공식몰 구매 링크 이동' };
+const funnelLabels: Record<string, string> = { landing_to_check: '첫 화면 → 체크 시작', check_completion: '체크 시작 → 완료', result_to_story: '결과 → GABA 이야기', comparison_to_purchase_click: '제품 비교 → 공식몰 이동' };
+const metadataLabels: Record<string, string> = { question: '연구 질문', studyType: '연구 설계', population: '연구 대상', sampleSize: '표본 규모', studyCount: '포함 연구 수', searchThrough: '문헌 검색 범위', dose: '연구 용량·제형', duration: '연구 기간', comparison: '비교 조건', outcome: '평가 지표', result: '관찰 결과', limitations: '연구 한계', productApplicability: '셀핀다 완제품 적용 범위' };
+const eventLabel = (name: string) => eventLabels[name] || `기타 행동 (${name})`;
+const formatDate = (value?: string | null) => value ? new Date(value).toLocaleString('ko-KR') : '아직 수집되지 않음';
+
+export default function Admin() {
+ const [token, setToken] = useState(''), [items, setItems] = useState<Item[]>([]), [selected, setSelected] = useState<Item | null>(null), [text, setText] = useState(''), [reason, setReason] = useState(''), [error, setError] = useState(''), [busy, setBusy] = useState(false), [history, setHistory] = useState<{ id: number; content_id: string; reason: string; created_at: string }[]>([]), [analytics, setAnalytics] = useState<Analytics>({ counts: [] }), [loaded, setLoaded] = useState(false);
+ const isLocal = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
+ async function api(path: string, options: RequestInit = {}) {
+  const response = await fetch('/api/admin/' + path, { ...options, headers: { 'Content-Type': 'application/json', 'x-admin-token': token } });
+  const result = await response.json();
+  if (!response.ok) throw Error(result.error || '요청을 처리하지 못했습니다.');
+  return result;
+ }
+ async function load() {
+  setBusy(true); setError('');
+  try { const [c, h, a] = await Promise.all([api('content'), api('history'), api('analytics')]); setItems(c.items); setHistory(h.items); setAnalytics(a); setLoaded(true); }
+  catch (e) { setError(e instanceof Error ? e.message : '연결 실패'); }
+  finally { setBusy(false); }
+ }
+ async function save(status?: string) {
+  if (!selected) return;
+  setBusy(true); setError('');
+  try { const result = await api('content/' + encodeURIComponent(selected.id), { method: 'PATCH', body: JSON.stringify({ revision: selected.revision, reason, publicText: text, ...(status ? { status } : {}) }) }); setSelected(result); setText(result.publicText || ''); setReason(''); await load(); }
+  catch (e) { setError(e instanceof Error ? e.message : '저장 실패'); }
+  finally { setBusy(false); }
+ }
+ return <div className="admin">
+  <aside><a className="brand" href="/">Cellpinda.</a><a href="#content">콘텐츠 검토</a><a href="#history">승인 이력</a><a href="#analytics">행동 분석</a><a href="/">사이트 보기 ↗</a></aside>
+  <main><h1>콘텐츠 검토실</h1><p>근거와 문구를 확인하고 공개 상태를 관리합니다.</p>
+   {!loaded ? <form onSubmit={e => { e.preventDefault(); void load(); }} className="admin-login"><label>운영자 접근 키<input type="password" value={token} autoComplete="off" onChange={e => setToken(e.target.value)} required /></label><p>운영 담당자에게 전달받은 접근 키를 입력하세요.</p>{isLocal ? <p className="note">로컬 서버를 사용하는 경우 서버가 생성한 비밀 키 파일에서 접근 키를 확인할 수 있습니다.</p> : null}<button className="button" disabled={busy}>검토실 열기</button></form> : <>
+    <div id="content" className="admin-grid">
+     <div className="admin-list">{items.map(item => <button key={item.id} className={selected?.id === item.id ? 'selected' : ''} onClick={() => { setSelected(item); setText(item.publicText || ''); setReason(''); }}><strong>{item.topic || item.name || item.id}</strong><span>{item.status === 'approved' ? '공개' : '보류'} · v{item.revision}</span><p>{item.publicText || '공개 문안 미확정'}</p></button>)}</div>
+     <section className="admin-edit">{selected ? <>
+      <h2>문구 상세</h2><label>공개 문구<textarea rows={6} value={text} onChange={e => setText(e.target.value)} /></label>
+      <h3>근거 자료 · 읽기 전용</h3>
+      {selected.sources?.map((source, index) => <div key={index}><p>{source.url ? <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a> : source.title}</p>{source.page || source.locator ? <p className="note">{source.page ? `${source.page}쪽 · ` : ''}{source.locator}</p> : null}</div>)}
+      {selected.sourceTitle ? <p>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank" rel="noreferrer">{selected.sourceTitle} ↗</a> : selected.sourceTitle}</p> : null}
+      {!selected.sources?.length && !selected.sourceTitle ? <p className="note">등록된 근거 자료가 없습니다.</p> : null}
+      {selected.metadata ? <><h3>연구 상세 · 읽기 전용</h3><dl>{Object.entries(selected.metadata).map(([key, value]) => <div key={key} style={{ marginBottom: 16 }}><dt><strong>{metadataLabels[key] || key}</strong></dt><dd style={{ margin: '6px 0', lineHeight: 1.7 }}>{Array.isArray(value) ? <ul>{value.map((entry, i) => <li key={i}>{entry}</li>)}</ul> : value ?? '미확인'}</dd></div>)}</dl></> : null}
+      {selected.limitations?.length ? <><h3>표현·적용 한계</h3><ul>{selected.limitations.map((limitation, i) => <li key={i}>{limitation}</li>)}</ul></> : null}
+      {selected.holdReason ? <p className="note">보류 사유: {selected.holdReason}</p> : null}
+      {selected.reviewedAt || selected.reviewedBy ? <p className="note">자료 검토: {selected.reviewedBy || '미기재'} · {selected.reviewedAt || '검토일 미기재'}</p> : null}
+      <label>수정·검토 이유<textarea rows={3} value={reason} onChange={e => setReason(e.target.value)} /></label><p className="note">문구를 수정 저장하면 보류로 전환됩니다. 공개 승인은 근거와 표현 범위를 검토한 뒤 선택하세요. 근거 상세는 이 화면에서 변경하지 않습니다.</p>
+      <div className="actions"><button className="button outline" disabled={busy || !reason.trim() || !text.trim()} onClick={() => save()}>수정 저장</button><button className="button" disabled={busy || !reason.trim() || !text.trim()} onClick={() => save('approved')}>공개 승인</button><button className="button outline" disabled={busy || !reason.trim() || !text.trim()} onClick={() => save('hold')}>보류</button></div>
+     </> : <p>검토할 문구를 선택하세요.</p>}</section>
+    </div>
+    <section id="analytics" className="admin-panel"><h2>행동 분석</h2><button className="button outline" disabled={busy} onClick={() => void load()}>집계 새로고침</button>
+     <p>한 번 열린 페이지 안에서 이어진 행동을 익명 흐름으로 묶습니다. 사람 수나 재방문 세션 수가 아니며, 페이지를 새로 열면 다른 흐름이 됩니다.</p>
+     {analytics.window ? <p className="note">집계 기간: {formatDate(analytics.window.from)} ~ {formatDate(analytics.window.to)} · 수집된 전체 기간 · 서버가 받은 순서로 다음 행동을 판단합니다.</p> : null}
+     {analytics.coverage ? <p className="note">흐름 식별 가능: {analytics.coverage.distinctFlows.toLocaleString()}개 · 흐름 정보 없는 이벤트: {analytics.coverage.eventsWithoutFlow.toLocaleString()}건 (아래 전환율에서 제외, 원시 건수에는 포함)</p> : null}
+     <h3>단계별 전환</h3>
+     {analytics.funnels?.length ? analytics.funnels.map(funnel => <article key={funnel.id} style={{ padding: '20px 0', borderBottom: '1px solid #d9e5dc' }}><h4>{funnelLabels[funnel.id] || `${eventLabel(funnel.from)} → ${eventLabel(funnel.to)}`}</h4><p><strong>{funnel.denominator === 0 || funnel.rate === null ? '집계 대기' : `${(funnel.rate * 100).toLocaleString('ko-KR', { maximumFractionDigits: 1 })}%`}</strong> · {funnel.numerator.toLocaleString()} / {funnel.denominator.toLocaleString()}개 흐름</p><p className="note">분모: ‘{eventLabel(funnel.from)}’이 발생한 서로 다른 익명 흐름 수.<br />분자: 분모에 포함된 흐름 중, 그 뒤 ‘{eventLabel(funnel.to)}’이 서버에 도착한 흐름 수. 같은 흐름은 한 번만 셉니다.</p></article>) : <p>전환 집계를 준비 중입니다.</p>}
+     <h3>행동별 원시 발생 건수</h3><p className="note">이벤트가 발생한 횟수입니다. 같은 흐름의 반복 행동을 포함하며 위 전환율의 분모·분자와 다를 수 있습니다.</p>
+     {analytics.counts.length ? <div style={{ overflowX: 'auto' }}><table><thead><tr><th scope="col">행동</th><th scope="col">발생 건수</th></tr></thead><tbody>{analytics.counts.map(count => <tr key={count.name}><td>{eventLabel(count.name)}</td><td>{count.count.toLocaleString()}</td></tr>)}</tbody></table></div> : <p>수집된 이벤트가 없습니다.</p>}
+     <p className="note">실제 구매·7일 재방문은 아직 측정하지 않습니다. 구매 링크 이동을 구매 완료로 집계하지 않습니다. 공유 요청·복사는 전달 완료가 아니며, 공유 요청자와 링크 방문자를 연결한 전환율도 집계하지 않습니다.</p>
+    </section>
+    <section id="history" className="admin-panel"><h2>승인·수정 이력</h2>{history.map(entry => <div className="history-row" key={entry.id}><strong>{entry.content_id}</strong><span>{entry.reason}</span><small>{formatDate(entry.created_at)}</small></div>)}</section>
+   </>}{error ? <p role="alert" className="error">{error}</p> : null}
+  </main>
+ </div>;
+}

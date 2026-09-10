@@ -1,0 +1,22 @@
+.research-library-card { border-top: 1px solid #cad3ce; padding: 2rem 0; }
+.research-library-card h3 { font-size: clamp(1.25rem, 2.3vw, 1.8rem); line-height: 1.4; margin: .65rem 0 1rem; }
+.research-library-kind { font-size: .8rem; letter-spacing: .06em; color: #486356; }
+.research-library-summary { max-width: 76ch; line-height: 1.8; }
+.research-library-scope { padding: 1rem 1.25rem; border-left: 3px solid #537866; background: #f1f5f1; line-height: 1.65; font-size: .95rem; }
+.research-library details.research-detail { display: block; margin-top: 1.25rem; }
+.research-library .research-detail summary { cursor: pointer; padding: 1rem 0; font-weight: 600; }
+.research-library .research-detail summary:focus-visible { outline: 2px solid #355c49; outline-offset: 5px; }
+.research-library-detail { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 2.5rem; padding: 1rem 0; }
+.research-library-facts { margin: 0; }
+.research-library-facts > div { padding: .8rem 0; border-bottom: 1px solid #e0e6e1; }
+.research-library-facts dt { font-size: .85rem; color: #506256; margin-bottom: .35rem; }
+.research-library-facts dd { margin: 0; line-height: 1.65; }
+.research-library-findings h4, .research-library-sources h4 { font-size: 1rem; margin: .8rem 0; }
+.research-library-findings p, .research-library-findings li { line-height: 1.8; }
+.research-library-findings ul { padding-left: 1.3rem; }
+.research-library-findings li + li { margin-top: .65rem; }
+.research-library-sources { border-top: 1px solid #e0e6e1; padding-top: .75rem; }
+.research-library-sources a { display: block; padding: .55rem 0; text-decoration: underline; text-underline-offset: .2em; overflow-wrap: anywhere; }
+@media (max-width: 700px) { .research-library-detail { grid-template-columns: minmax(0,1fr); gap: 1rem; } .research-library-card { padding: 1.5rem 0; } }
+
+.research-library-card{scroll-margin-top:110px}.research-copy{margin-top:18px}.research-manual-link{display:block;width:100%;padding:12px;border:1px solid #cad3ce}

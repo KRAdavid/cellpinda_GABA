@@ -1,0 +1,688 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-10",
+  "policy": {
+    "approvedMeaning": "지정 publicText의 근거와 공개 출처 확인. 전문가 심의·법률 승인 의미 아님.",
+    "holdMeaning": "구체 근거·현재 제품 연결·사용권 중 미해결 항목 존재.",
+    "publicExport": "approved 항목의 publicText·공개 URL·limitations·검증한 metadata만 표시. 로컬 원문·내부 검토·개인정보 배포 금지."
+  },
+  "products": [
+    {
+      "id": "gaba750",
+      "name": "셀핀다 가바 750",
+      "amountMg": 750,
+      "servings": 30,
+      "totalG": 22.5,
+      "officialUrl": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-750mg-×-30포/39/",
+      "status": "approved",
+      "availability": "공식몰에서 재고 확인",
+      "priceDisplay": null,
+      "sourceIds": [
+        "product-750"
+      ]
+    },
+    {
+      "id": "gaba1500",
+      "name": "셀핀다 가바 1500",
+      "amountMg": 1500,
+      "servings": 30,
+      "totalG": 45,
+      "officialUrl": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-1500mg-×-30포/27/",
+      "status": "approved",
+      "availability": "공식몰에서 재고 확인",
+      "priceDisplay": null,
+      "sourceIds": [
+        "product-1500"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "product-750",
+      "topic": "제품 구성",
+      "publicText": "셀핀다 가바 750 mg × 30포 구성이 공식몰에 등록되어 있습니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "셀핀다 공식몰 750mg 상품",
+          "url": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-750mg-×-30포/39/",
+          "page": null,
+          "locator": "상품명·기본 정보"
+        }
+      ],
+      "limitations": [
+        "상품명 기준 구성 정보입니다. 재고와 최신 가격은 공식몰에서 확인하세요.",
+        "내용량을 특정 증상에 맞는 권장량으로 해석하지 않습니다."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "product-1500",
+      "topic": "제품 구성",
+      "publicText": "셀핀다 가바 1,500 mg × 30포 구성이 공식몰에 등록되어 있습니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "셀핀다 공식몰 1500mg 상품",
+          "url": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-1500mg-×-30포/27/",
+          "page": null,
+          "locator": "상품명·기본 정보"
+        }
+      ],
+      "limitations": [
+        "상품명 기준 구성 정보입니다. 재고와 최신 가격은 공식몰에서 확인하세요."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "fermentation-listed",
+      "topic": "발효",
+      "publicText": "셀핀다 공식몰은 제품을 발효 가바로 소개합니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "셀핀다 공식몰 1500mg 상품",
+          "url": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-1500mg-×-30포/27/",
+          "page": null,
+          "locator": "상품명·상품간략설명"
+        }
+      ],
+      "limitations": [
+        "판매자가 공개한 제품 설명입니다. 특정 균주와 현재 제조 로트의 추적 검증을 뜻하지 않습니다."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "opk-origin",
+      "topic": "균주 연구",
+      "publicText": "OPK-3는 김치에서 분리한 유산균으로, GABA 생산에 관한 특허 문헌에 등장합니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "등록특허 KR100631857B1",
+          "url": "https://patents.google.com/patent/KR100631857B1/ko",
+          "page": null,
+          "locator": "발명의 상세한 설명; 청구항 1"
+        }
+      ],
+      "limitations": [
+        "균주에 관한 기술 문헌입니다. 셀핀다 완제품의 인체 효과나 현행 독점권을 의미하지 않습니다."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "patent-production",
+      "topic": "제조 기술",
+      "publicText": "유산균에 L-글루탐산을 공급해 GABA를 생산하는 방법이 특허 문헌으로 공개되어 있습니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "등록특허 KR101740968B1",
+          "url": "https://patents.google.com/patent/KR101740968B1/ko",
+          "page": null,
+          "locator": "초록 및 발명의 상세한 설명"
+        },
+        {
+          "title": "2. 특허증 10-1740968.pdf",
+          "url": null,
+          "page": 1,
+          "locator": "발명의 명칭·등록일"
+        }
+      ],
+      "limitations": [
+        "기술의 공개·등록 이력에 대한 설명입니다. 현재 권리 유효성·독점권·완제품 효과를 주장하지 않습니다."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "patent-enzyme",
+      "topic": "제조 기술",
+      "publicText": "효소를 이용한 고순도 GABA 제조방법에 관한 특허 문헌이 있습니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "등록특허 KR100857215B1",
+          "url": "https://patents.google.com/patent/KR100857215B1/ko",
+          "page": null,
+          "locator": "발명의 명칭"
+        },
+        {
+          "title": "1. 특허증 10-0857215.pdf",
+          "url": null,
+          "page": 1,
+          "locator": "발명의 명칭·등록일"
+        }
+      ],
+      "limitations": [
+        "현재 판매 제품에 적용되는 공정 범위를 확정하는 자료는 아닙니다."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "opk-current-product",
+      "topic": "제품·균주 연결",
+      "publicText": null,
+      "status": "hold",
+      "sources": [
+        {
+          "title": "Cellpinda GABA Intro.pdf",
+          "url": null,
+          "page": 5,
+          "locator": "OPK-3 소개"
+        }
+      ],
+      "limitations": [
+        "소개자료에서 OPK-3 연결을 확인했으나 현재 생산 로트에 대한 추적 문서와 공개 자료 연결은 미확인입니다."
+      ],
+      "holdReason": "현행 제조 제품과 OPK-3 직접 연결 근거 보완",
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "international-deposit",
+      "topic": "국제 기탁",
+      "publicText": null,
+      "status": "hold",
+      "sources": [
+        {
+          "title": "등록특허 KR100631857B1",
+          "url": "https://patents.google.com/patent/KR100631857B1/ko",
+          "page": null,
+          "locator": "청구항 KFCC-11330"
+        }
+      ],
+      "limitations": [
+        "KFCC-11330 표기는 확인했습니다. 국제 기탁 기관·기탁일·수탁증명서 및 제품 연결은 확인하지 못했습니다."
+      ],
+      "holdReason": "기탁번호 존재만으로 국제 기탁·자체 소유 주장 불가",
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "product-classification",
+      "topic": "제품 분류",
+      "publicText": null,
+      "status": "hold",
+      "sources": [
+        {
+          "title": "품목제조보고_셀핀다가바(GABA)_2005044505519.pdf",
+          "url": null,
+          "page": 1,
+          "locator": "식품 유형·처리일"
+        },
+        {
+          "title": "품목제조보고_셀핀다가바(GABA)_2005044505519.pdf",
+          "url": null,
+          "page": 3,
+          "locator": "용도·포장단위"
+        }
+      ],
+      "limitations": [
+        "문서에는 합성향료, 착향, 0.75g·1.5g를 포함한 포장단위가 있습니다. 현재 완제품 라벨 대조 전입니다."
+      ],
+      "holdReason": "현행 완제품의 법적 분류 및 표시사항 대조 미완료",
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "blend-100",
+      "topic": "100% 표시",
+      "publicText": null,
+      "status": "hold",
+      "sources": [
+        {
+          "title": "품목제조보고_셀핀다가바(GABA)_2005044505519.pdf",
+          "url": null,
+          "page": 2,
+          "locator": "배합비율 가바 100%"
+        }
+      ],
+      "limitations": [
+        "배합비율 100%와 시험상 순도는 다른 지표입니다."
+      ],
+      "holdReason": "현행 완제품 표시 대응 및 문안 범위 확인 필요",
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "coa-994",
+      "topic": "시험 수치",
+      "publicText": null,
+      "status": "hold",
+      "sources": [
+        {
+          "title": "시험성적서 K558-251219 셀핀다가바 2005044505519.pdf",
+          "url": null,
+          "page": 1,
+          "locator": "함량 결과·로트·포장"
+        }
+      ],
+      "limitations": [
+        "2025-12-26 발행, K558-251219, 80kg 벌크 로트의 99.4% 결과입니다. 모든 완제품의 보장 수치가 아닙니다."
+      ],
+      "holdReason": "벌크 로트와 판매 완제품 연결·공개 범위 미확인",
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "amino-9984",
+      "topic": "정량 분석",
+      "publicText": null,
+      "status": "hold",
+      "sources": [
+        {
+          "title": "셀핀다 가바(GABA) 순도분석_아미노산분석기.pdf",
+          "url": null,
+          "page": 1,
+          "locator": "표준물질·전처리"
+        },
+        {
+          "title": "셀핀다 가바(GABA) 순도분석_아미노산분석기.pdf",
+          "url": null,
+          "page": 2,
+          "locator": "시료 결과·계산식"
+        }
+      ],
+      "limitations": [
+        "2026-03-25 제목 문서에 99.84%로 계산된 시판용 시료 결과가 있습니다. 시료 SKU·로트·반복측정·불확도·외부기관 여부는 확정하지 못했습니다."
+      ],
+      "holdReason": "시료 추적성과 공개 범위 미확인; 모든 제품 수치로 일반화 불가",
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "hplc-every-lot",
+      "topic": "HPLC 표준화",
+      "publicText": null,
+      "status": "hold",
+      "sources": [
+        {
+          "title": "셀핀다 가바(GABA) 순도분석_아미노산분석기.pdf",
+          "url": null,
+          "page": 1,
+          "locator": "아미노산 분석기 표기"
+        }
+      ],
+      "limitations": [
+        "확인 문서는 아미노산 분석기로 표기합니다. HPLC라는 명칭, 매 로트 전수검사, 표준화 공정은 별도 근거가 필요합니다."
+      ],
+      "holdReason": "분석 장비·검사 주기를 추정하지 않음",
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "haccp",
+      "topic": "제조 인증",
+      "publicText": null,
+      "status": "hold",
+      "sources": [
+        {
+          "title": "GABA 인증서.pdf",
+          "url": null,
+          "page": 1,
+          "locator": "적용업소 인증 범위·유효기간"
+        }
+      ],
+      "limitations": [
+        "문서상 적용업소 인증이며 기간은 2024-01-12~2027-01-11입니다. 완제품 효능 인증이 아닙니다."
+      ],
+      "holdReason": "현재 인증 상태·완제품 연결·원문 공개 범위 미확인",
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10"
+    },
+    {
+      "id": "gaba-definition",
+      "topic": "GABA 기본 이해",
+      "publicText": "GABA(감마아미노부티르산)는 뇌에서 신경 신호를 억제하는 데 관여하는 신경전달물질입니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "Physiology, GABA — NCBI Bookshelf / StatPearls",
+          "url": "https://www.ncbi.nlm.nih.gov/books/NBK513311/",
+          "page": null,
+          "locator": "Introduction; Cellular Level"
+        }
+      ],
+      "limitations": [
+        "생활 체크는 체내 GABA 수치를 측정하지 않습니다."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10",
+      "metadata": {
+        "studyType": "일반 생리학 설명",
+        "question": "GABA는 무엇인가요?",
+        "productApplicability": "체내 GABA의 역할에 대한 설명입니다. 제품 섭취가 뇌 GABA를 높이거나 같은 작용을 낸다는 뜻은 아닙니다."
+      }
+    },
+    {
+      "id": "research-byun-2018",
+      "topic": "GABA 성분 연구",
+      "publicText": "2018년 소규모 시험은 발효 쌀배아 유래 GABA와 위약을 비교해 잠드는 데 걸리는 시간을 조사했습니다. 수면 잠복기에서 차이가 보고됐지만, 모든 수면 지표의 개선이 확인된 것은 아닙니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "Byun et al. (2018), J Clin Neurol 14(3):291–295",
+          "url": "https://thejcn.com/DOIx.php?id=10.3988/jcn.2018.14.3.291",
+          "page": null,
+          "locator": "Methods; Results; Table 2 설명; Discussion"
+        }
+      ],
+      "limitations": [
+        "전후 평균 차이를 위약 대비 개선율로 표시하지 않습니다.",
+        "수면효율의 군 내 변화가 군 간 효과를 뜻하지 않습니다."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10",
+      "metadata": {
+        "question": "발효 쌀배아 유래 GABA를 먹은 뒤 잠드는 시간은 달라졌을까요?",
+        "studyType": "무작위·이중눈가림·위약대조 시험",
+        "population": "불면 증상을 호소한 성인",
+        "sampleSize": "40명: GABA 30명, 위약 10명",
+        "dose": "연구에서 GABA 300mg/일",
+        "duration": "4주",
+        "comparison": "발효 쌀배아 유래 GABA 함유 정제와 외형이 같은 위약",
+        "outcome": "수면다원검사로 측정한 수면 잠복기; 수면효율·설문",
+        "result": "GABA군 수면 잠복기 평균±표준편차: 13.4±15.7분 → 5.7±6.2분. 군×시간 상호작용 p=0.009. 설문은 군 간 유의한 상호작용이 없었습니다. 이상사례: GABA 3/30명, 위약 1/10명.",
+        "limitations": [
+          "단일기관·소표본이고 위약군이 작습니다. 시작 시 수면 특성 일부가 달랐습니다.",
+          "짧은 기간으로 장기 안전성을 확정하지 못합니다. 공급사 Natural Way가 연구를 지원했습니다."
+        ],
+        "productApplicability": "셀핀다 완제품 시험이 아닙니다. 연구 용량을 제품 권장량으로 사용하지 않습니다."
+      }
+    },
+    {
+      "id": "research-review-2020",
+      "topic": "연구를 함께 읽기",
+      "publicText": "2020년 체계적 문헌고찰은 경구 GABA와 스트레스·수면을 다룬 14개 연구를 검토했습니다. 저자들은 스트레스 근거를 제한적, 수면 근거를 매우 제한적으로 평가했습니다.",
+      "status": "approved",
+      "sources": [
+        {
+          "title": "Hepsomali et al. (2020), Frontiers in Neuroscience 14:923",
+          "url": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2020.00923/full",
+          "page": null,
+          "locator": "Abstract; Methods; Results; Limitations"
+        }
+      ],
+      "limitations": [
+        "체내 역할과 경구 섭취 효과는 별도로 확인해야 합니다."
+      ],
+      "holdReason": null,
+      "reviewedBy": "AI 근거·편집 검토",
+      "reviewedAt": "2026-09-10",
+      "metadata": {
+        "question": "여러 연구를 함께 보면 어느 정도까지 알 수 있을까요?",
+        "studyType": "체계적 문헌고찰",
+        "population": "사람을 대상으로 한 GABA 섭취 연구",
+        "sampleSize": "14개 연구; 단일 참가자 집단 아님",
+        "studyCount": "14",
+        "searchThrough": "2020년 2월 초까지 PubMed 검색",
+        "dose": "연구마다 용량·제형이 다름",
+        "duration": "1회 섭취부터 여러 주까지 연구별 상이",
+        "comparison": "대조군을 둔 자연식품 또는 발효 유래 GABA 섭취 연구",
+        "outcome": "스트레스·수면의 주관적 평가와 생리 지표",
+        "result": "스트레스에 제한적, 수면에 매우 제한적인 근거. 연구 간 결과가 일치하지 않았고 정량 메타분석은 수행하지 않았습니다.",
+        "limitations": [
+          "소표본·연구방법 차이·일부 불균형한 군 크기와 이해관계 가능성이 있습니다.",
+          "한 명이 자료를 추출했습니다. 저자 측 산업계 관계와 출판비 지원이 공개돼 있습니다.",
+          "2020년 2월 이후 연구를 포괄하는 최신 전수 검토가 아닙니다."
+        ],
+        "productApplicability": "성분 연구의 검토입니다. 셀핀다 완제품의 효과나 적정 섭취량을 확정하지 않습니다."
+      }
+    }
+  ],
+  "reviews": [
+    {
+      "id": "local-01",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_01.jpg",
+      "sourceUrl": null,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 감정 변화·반복 섭취·미성년자 맥락; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "originalPublic": false,
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-02",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_02.jpg",
+      "sourceUrl": null,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 비동의 섭취 및 감정 변화 맥락; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "originalPublic": false,
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-03",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_03.jpg",
+      "sourceUrl": null,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 민감 건강정보·미성년자 맥락; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "originalPublic": false,
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-10",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_10.jpg",
+      "sourceUrl": null,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 수면 관련 강한 변화 주장; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "originalPublic": false,
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "shop-750-general-20260329",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "공식몰 750mg 상품 후기 2026-03-29",
+      "sourceUrl": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-750mg-×-30포/39/",
+      "reviewedAt": "2026-09-10",
+      "holdReason": "일반 만족 표현을 확인했으나 재게시 사용권·보상관계 미확인. 원문 링크 제공은 가능.",
+      "originalPublic": true
+    },
+    {
+      "id": "shop-review-destination",
+      "status": "approved",
+      "publicText": "공식몰에서 구매자 후기와 다양한 사용 경험을 확인하세요.",
+      "sourceTitle": "셀핀다 공식몰 상품 후기",
+      "sourceUrl": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-750mg-×-30포/39/",
+      "reviewedAt": "2026-09-10",
+      "holdReason": null,
+      "originalPublic": true,
+      "limitations": [
+        "후기를 재인용하거나 수치로 집계하지 않고 원문 목적지로 연결합니다. 개인 경험은 제품 효과 입증이 아닙니다."
+      ]
+    },
+    {
+      "id": "local-00",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 맛·사용 경험과 건강 변화 혼재; 비동의 섭취 맥락; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-04",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_04.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 건강 변화·공동구매 재구매 문의; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-05",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_05.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 03번과 같은 내용의 중복 캡처; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": "local-03"
+    },
+    {
+      "id": "local-06",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_06.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 감정 변화·비동의 사용 맥락; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-07",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_07.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 건강 변화와 동물 사용 내용 혼재; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-08",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_08.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 치료 대체로 읽힐 수 있는 건강 변화; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-09",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_09.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 민감 건강정보 및 병용 맥락; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-11",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_11.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 수면·감정 변화 및 부적절한 비유; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-12",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_12.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 미성년자 수면 변화; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-13",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_13.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 혼합 경험·치료 대체 암시, 본문 잘림; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "review-screenshot",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-14",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_14.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 개별 후기가 아닌 효능 FAQ 자료; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "non-review",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-15",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_15.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 개별 후기가 아닌 연령·섭취 FAQ 자료; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "non-review",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-16",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_16.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 개별 후기가 아닌 섭취시간 FAQ 자료; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "non-review",
+      "duplicateOf": null
+    },
+    {
+      "id": "local-17",
+      "status": "hold",
+      "publicText": null,
+      "sourceTitle": "KakaoTalk_20220317_125944566_17.jpg",
+      "sourceUrl": null,
+      "originalPublic": false,
+      "reviewedAt": "2026-09-10",
+      "holdReason": "캡처 전체 시각 검토: 개별 후기가 아닌 광고 이미지; 원문 URL·작성일·대상 제품·재게시 사용권·경제적 관계 확인 부족",
+      "candidateType": "non-review",
+      "duplicateOf": null
+    }
+  ]
+}

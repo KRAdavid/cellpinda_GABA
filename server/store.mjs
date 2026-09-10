@@ -1,0 +1,112 @@
+import { DatabaseSync } from 'node:sqlite';
+import { mkdirSync, readFileSync } from 'node:fs';
+import { dirname } from 'node:path';
+
+export const EVENT_NAMES = new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
+export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin']);
+const publicSources = (value) => (value.sources || []).filter(s => typeof s.url === 'string' && /^https:\/\//.test(s.url)).map(({title,url,page,locator}) => ({title,url,page,locator}));
+const failure = (message, status = 400) => Object.assign(new Error(message), { status });
+const isUuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+const METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','result','limitations','productApplicability','question','searchThrough','studyCount']);
+function reviewLink(value) {
+  if(value.id!=='shop-review-destination' || value.originalPublic!==true || !value.publicText || typeof value.sourceUrl!=='string')return false;
+  try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && ['cellpinda.co.kr','www.cellpinda.co.kr'].includes(url.hostname) && (url.searchParams.get('product_no')==='39' || /\/39(?:\/|$)/.test(url.pathname));}catch{return false;}
+}
+function publicMetadata(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  const output={};
+  for (const [key,item] of Object.entries(value)) {
+    if (!METADATA_FIELDS.has(key)) continue;
+    if (typeof item === 'string' && item.length <= 3000) output[key]=item;
+    else if (typeof item === 'number' && Number.isFinite(item)) output[key]=item;
+    else if (Array.isArray(item) && item.length<=20 && item.every(text=>typeof text === 'string' && text.length<=1000)) output[key]=item;
+  }
+  return Object.keys(output).length ? output : undefined;
+}
+
+export function createStore({ dbPath, seedPath, seed } = {}) {
+  if (dbPath !== ':memory:') mkdirSync(dirname(dbPath), { recursive: true });
+  const db = new DatabaseSync(dbPath);
+  db.exec('PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; CREATE TABLE IF NOT EXISTS content (id TEXT PRIMARY KEY, kind TEXT NOT NULL, data TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 1); CREATE TABLE IF NOT EXISTS audit (id INTEGER PRIMARY KEY AUTOINCREMENT, content_id TEXT NOT NULL, revision INTEGER NOT NULL, reason TEXT NOT NULL, previous TEXT, current TEXT NOT NULL, created_at TEXT NOT NULL); CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, name TEXT NOT NULL, properties TEXT NOT NULL, created_at TEXT NOT NULL); CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);');
+  if (!db.prepare('PRAGMA table_info(events)').all().some(column=>column.name==='flow_id')) db.exec('ALTER TABLE events ADD COLUMN flow_id TEXT');
+  db.exec('CREATE INDEX IF NOT EXISTS events_flow_name ON events(flow_id,name);');
+  { // Add newly verified source rows while preserving operator edits and their history.
+    const initial = seed || JSON.parse(readFileSync(seedPath, 'utf8'));
+    db.exec('BEGIN IMMEDIATE');
+    try {
+      for (const [plural, kind] of [['claims','claim'],['products','product'],['reviews','review']]) {
+        for (const item of initial[plural] || []) {
+          const inserted=db.prepare('INSERT OR IGNORE INTO content(id,kind,data) VALUES(?,?,?)').run(item.id,kind,JSON.stringify(item));
+          if(!inserted.changes)continue;
+          db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,1,?,NULL,?,?)').run(item.id,'Initial source ledger import; AI editorial status, not expert certification',JSON.stringify(item),new Date().toISOString());
+        }
+      }
+      db.prepare('INSERT OR IGNORE INTO metadata(key,value) VALUES(?,?)').run('seeded','1');
+      db.exec('COMMIT');
+    } catch (error) { db.exec('ROLLBACK'); db.close(); throw error; }
+  }
+  const rows = () => db.prepare('SELECT * FROM content ORDER BY rowid').all().map(row => ({...JSON.parse(row.data),kind:row.kind,revision:row.revision}));
+  return {
+    close: () => db.close(),
+    adminContent: rows,
+    publicContent() {
+      const all = rows();
+      const claims = all.filter(c => c.kind === 'claim' && c.status === 'approved' && c.publicText && publicSources(c).length).map(c => ({id:c.id,topic:c.topic,publicText:c.publicText,status:c.status,sources:publicSources(c),limitations:c.limitations || [],revision:c.revision,...(publicMetadata(c.metadata || c.structuredData) ? {metadata:publicMetadata(c.metadata || c.structuredData)} : {})}));
+      const approvedIds = new Set(claims.map(c => c.id));
+      const products = all.filter(p => p.kind === 'product' && p.status === 'approved' && p.sourceIds?.length && p.sourceIds.every(id => approvedIds.has(id))).map(({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,publicText}) => ({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,...(publicText ? {publicText} : {})}));
+      const reviews=all.filter(item=>item.kind==='review' && item.status==='approved' && reviewLink(item)).map(({id,status,publicText,sourceTitle,sourceUrl,limitations})=>({id,status,publicText,sourceTitle,sourceUrl,limitations}));
+      return {claims,products,reviews};
+    },
+    update(id, patch) {
+      if (!patch || typeof patch !== 'object' || Array.isArray(patch)) throw failure('Invalid update');
+      if (Object.keys(patch).some(k => !['publicText','status','reason','revision'].includes(k))) throw failure('Unknown update field');
+      if (!Number.isInteger(patch.revision) || typeof patch.reason !== 'string' || !patch.reason.trim() || patch.reason.length > 1000) throw failure('Revision and reason are required');
+      if (patch.status !== undefined && !['approved','hold'].includes(patch.status)) throw failure('Invalid status');
+      if (patch.publicText !== undefined && (typeof patch.publicText !== 'string' || !patch.publicText.trim() || patch.publicText.length > 5000)) throw failure('Invalid publicText');
+      if (patch.status === undefined && patch.publicText === undefined) throw failure('No content change');
+      db.exec('BEGIN IMMEDIATE');
+      try {
+        const row = db.prepare('SELECT * FROM content WHERE id=?').get(id);
+        if (!row) throw failure('Content not found',404);
+        if (row.revision !== patch.revision) throw failure('Revision conflict',409);
+        const before = JSON.parse(row.data);
+        const after = {...before};
+        const changed = patch.publicText !== undefined && patch.publicText !== before.publicText;
+        if (patch.publicText !== undefined) after.publicText = patch.publicText.trim();
+        after.status = patch.status ?? (changed ? 'hold' : before.status);
+        if (after.status === 'approved') {
+          if(row.kind==='review' && !reviewLink(after))throw failure('Only the verified review destination may be approved; quote rights not established');
+          if (row.kind === 'claim' && (!after.publicText || !publicSources(after).length)) throw failure('Approval requires public text and public source');
+          if (row.kind === 'product' && (!after.sourceIds?.length || !after.sourceIds.every(sourceId => { const source = db.prepare('SELECT data,kind FROM content WHERE id=?').get(sourceId); if (!source || source.kind !== 'claim') return false; const value = JSON.parse(source.data); return value.status === 'approved' && publicSources(value).length > 0; }))) throw failure('Approval requires approved source claims');
+        }
+        const revision = row.revision + 1;
+        db.prepare('UPDATE content SET data=?,revision=? WHERE id=?').run(JSON.stringify(after),revision,id);
+        db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,?,?,?,?,?)').run(id,revision,patch.reason.trim(),row.data,JSON.stringify(after),new Date().toISOString());
+        db.exec('COMMIT');
+        return {...after,kind:row.kind,revision};
+      } catch (error) { db.exec('ROLLBACK'); throw error; }
+    },
+    history: () => db.prepare('SELECT * FROM audit ORDER BY id DESC LIMIT 500').all().map(r => ({...r,previous:r.previous ? JSON.parse(r.previous) : null,current:JSON.parse(r.current)})),
+    event(body) {
+      if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).some(k => !['eventId','flowId','name','properties'].includes(k))) throw failure('Invalid event envelope');
+      if (!EVENT_NAMES.has(body.name) || !isUuid(body.eventId)) throw failure('Invalid event name or UUID');
+      if (body.flowId !== undefined && !isUuid(body.flowId)) throw failure('Invalid anonymous flow UUID');
+      const source = body.properties ?? {};
+      if (!source || typeof source !== 'object' || Array.isArray(source)) throw failure('Invalid properties');
+      const clean = {};
+      if (source.productId !== undefined) { if (!['gaba750','gaba1500'].includes(source.productId)) throw failure('Invalid product'); clean.productId=source.productId; }
+      if (source.path !== undefined) { if (!EVENT_PATHS.has(source.path)) throw failure('Invalid path'); clean.path=source.path; }
+      if (source.channel !== undefined) { if (!['native','clipboard','download','kakao','instagram','direct'].includes(source.channel)) throw failure('Invalid channel'); clean.channel=source.channel; }
+      const result=db.prepare('INSERT OR IGNORE INTO events(id,name,properties,created_at,flow_id) VALUES(?,?,?,?,?)').run(body.eventId,body.name,JSON.stringify(clean),new Date().toISOString(),body.flowId?.toLowerCase() ?? null);
+      return {accepted:true,duplicate:result.changes===0};
+    },
+    analytics() {
+      const pairs=[['landing_to_check','landing_view','rhythm_check_started'],['check_completion','rhythm_check_started','rhythm_check_completed'],['result_to_story','result_viewed','gaba_story_viewed'],['comparison_to_purchase_click','product_comparison_viewed','purchase_outbound_clicked']];
+      const funnels=pairs.map(([id,from,to])=>{
+        const result=db.prepare('WITH starts AS (SELECT flow_id,MIN(rowid) AS first_row FROM events WHERE name=? AND flow_id IS NOT NULL GROUP BY flow_id) SELECT COUNT(*) AS denominator,COALESCE(SUM(CASE WHEN EXISTS(SELECT 1 FROM events e WHERE e.flow_id=starts.flow_id AND e.name=? AND e.rowid>starts.first_row) THEN 1 ELSE 0 END),0) AS numerator FROM starts').get(from,to);
+        return {id,from,to,...result,rate:result.denominator ? result.numerator/result.denominator : null,denominatorDefinition:'Distinct anonymous in-memory flows with the from event',numeratorDefinition:'Those denominator flows with a later received to event; each flow counted once'};
+      });
+      return {counts:db.prepare('SELECT name,COUNT(*) AS count FROM events GROUP BY name ORDER BY name').all(),byProduct:db.prepare("SELECT json_extract(properties,'$.productId') AS productId,name,COUNT(*) AS count FROM events WHERE json_extract(properties,'$.productId') IS NOT NULL GROUP BY productId,name").all(),funnels,window:{kind:'all_collected_events',from:db.prepare('SELECT MIN(created_at) AS value FROM events').get().value,to:new Date().toISOString(),ordering:'Server receipt order; no client timestamps',flowScope:'Browser in-memory page lifetime, not unique people or cross-reload sessions'},coverage:{eventsWithoutFlow:db.prepare('SELECT COUNT(*) AS count FROM events WHERE flow_id IS NULL').get().count,distinctFlows:db.prepare('SELECT COUNT(DISTINCT flow_id) AS count FROM events').get().count},actualPurchases:{supported:false,count:null,reason:'No verified order integration. Purchase clicks are not purchases.'},returningVisitors:{supported:false,rate:null,reason:'Seven-day return requires a future consented identity policy; no persistent visitor identifiers collected.'},sharing:{confirmedDeliverySupported:false,requestToLandingRate:{supported:false,rate:null,reason:'Sender requests and recipient arrivals are different flows; no matched referral attribution.'}},auditCount:db.prepare('SELECT COUNT(*) AS count FROM audit').get().count};
+    },
+  };
+}

@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS content (id TEXT PRIMARY KEY, kind TEXT NOT NULL, data TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 1);
+CREATE TABLE IF NOT EXISTS audit (id INTEGER PRIMARY KEY AUTOINCREMENT, content_id TEXT NOT NULL, revision INTEGER NOT NULL, reason TEXT NOT NULL, previous TEXT, current TEXT NOT NULL, created_at TEXT NOT NULL);
+CREATE UNIQUE INDEX IF NOT EXISTS audit_content_revision ON audit(content_id,revision);
+CREATE TABLE IF NOT EXISTS events (id TEXT PRIMARY KEY, name TEXT NOT NULL, properties TEXT NOT NULL, created_at TEXT NOT NULL, flow_id TEXT);
+CREATE INDEX IF NOT EXISTS events_flow_name ON events(flow_id,name);
+CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
