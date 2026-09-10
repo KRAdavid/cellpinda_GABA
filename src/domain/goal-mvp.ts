@@ -108,6 +108,14 @@ export type SandboxRunResult = {
   approvalTaskId?: string;
 };
 
+export type SandboxWaveStopReason = 'approval_required' | 'no_ready_tasks' | 'completed';
+
+export type SandboxWaveResult = SandboxRunResult & {
+  decisions: MvpDecisionRecord[];
+  progressedTaskIds: string[];
+  stoppedReason: SandboxWaveStopReason;
+};
+
 const workstreams: MvpWorkstream[] = [
   {id: 'evidence', name: '근거·논문', lead: '연구·제품 근거', verifier: '독립 근거 검토', deliverable: '원문·조건·한계가 연결된 연구 레코드'},
   {id: 'consumer', name: '소비자 언어', lead: '마케팅·소비자심리', verifier: '표시·콘텐츠 검토', deliverable: '쉽게 읽는 요약과 적용 범위 문장'},
@@ -316,6 +324,50 @@ export function verifySandboxTask(tasks: readonly MvpTask[], taskId: string, now
   };
   const next = promoteReady(tasks.map(task => task.id === taskId ? {...task, state: 'DONE' as const, evidence: [...task.evidence, `independent-review:${taskId}:${now}`], verification} : {...task}));
   return {tasks: next, events};
+}
+
+/**
+ * Runs the safe, internal part of the graph until it reaches an approval gate.
+ * Each task still gets its own execution, verification, audit events and TF
+ * decision records so a wave is resumable rather than a hidden bulk mutation.
+ */
+export function runSandboxWave(contract: MvpGoalContract, tasks: readonly MvpTask[], now = new Date().toISOString()): SandboxWaveResult {
+  let current = tasks.map(task => ({...task, evidence: [...task.evidence], acceptance: [...task.acceptance], dependencies: [...task.dependencies]}));
+  const events: SandboxAuditEvent[] = [];
+  const decisions: MvpDecisionRecord[] = [];
+  const progressedTaskIds: string[] = [];
+  let approval: ApprovalRequest | undefined;
+  let approvalTaskId: string | undefined;
+  const base = Date.parse(now);
+  const at = (offset: number) => Number.isFinite(base) ? new Date(base + offset).toISOString() : now;
+
+  for (let step = 0; step < tasks.length; step += 1) {
+    const candidate = readyTasks(current)[0];
+    if (!candidate) break;
+    const execution = runSandboxTask(current, candidate.id, undefined, at(step * 2_000));
+    current = execution.tasks;
+    const executionTask = current.find(task => task.id === candidate.id);
+    if (executionTask) decisions.push(buildTaskDecision(contract, executionTask, at(step * 2_000 + 500)));
+    if (execution.approval) {
+      approval = execution.approval;
+      approvalTaskId = execution.approvalTaskId;
+      break;
+    }
+    events.push(...execution.events);
+    const verification = verifySandboxTask(current, candidate.id, at(step * 2_000 + 1_000));
+    current = verification.tasks;
+    events.push(...verification.events);
+    const verifiedTask = current.find(task => task.id === candidate.id);
+    if (verifiedTask) decisions.push(buildTaskDecision(contract, verifiedTask, at(step * 2_000 + 1_500)));
+    progressedTaskIds.push(candidate.id);
+  }
+
+  const stoppedReason: SandboxWaveStopReason = approval
+    ? 'approval_required'
+    : readyTasks(current).length === 0
+      ? (current.every(task => task.state === 'DONE') ? 'completed' : 'no_ready_tasks')
+      : 'no_ready_tasks';
+  return {tasks: current, events, decisions, progressedTaskIds, stoppedReason, ...(approval ? {approval, approvalTaskId} : {})};
 }
 
 export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonly MvpTask[], events: readonly SandboxAuditEvent[], approval?: ApprovalRequest, now = new Date().toISOString(), decisions: readonly MvpDecisionRecord[] = []): MvpApprovalReport {

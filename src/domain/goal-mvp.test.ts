@@ -1,6 +1,6 @@
 import {strict as assert} from 'node:assert';
 import test from 'node:test';
-import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, generateMvpPlan, promoteReady, runSandboxTask, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
+import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, generateMvpPlan, promoteReady, runSandboxTask, runSandboxWave, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
 
 test('one sentence goal generates a contract, TF and dependency graph', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
@@ -36,6 +36,17 @@ test('sandbox execution verifies a task and unlocks its dependent task', () => {
   assert.equal(verified.events.length, 1);
   assert.equal(verified.tasks.find(task => task.id === 'G1')?.verification?.verifier, '품질감사관');
   assert.deepEqual(verified.tasks.find(task => task.id === 'G1')?.verification?.acceptedCriteria, plan.tasks.find(task => task.id === 'G1')?.acceptance);
+});
+
+test('sandbox wave advances internal work and stops at the approval boundary', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const wave = runSandboxWave(plan.contract, plan.tasks, '2026-09-10T10:00:00.000Z');
+  assert.deepEqual(wave.progressedTaskIds, ['G1', 'E1', 'E2', 'C1', 'Q1']);
+  assert.equal(wave.tasks.find(task => task.id === 'P1')?.state, 'WAITING');
+  assert.equal(wave.approvalTaskId, 'P1');
+  assert.equal(wave.stoppedReason, 'approval_required');
+  assert.ok(wave.decisions.some(record => record.state === 'WAITING'));
+  assert.equal(wave.events.filter(event => event.to === 'DONE').length, 5);
 });
 
 test('external commitment produces an approval packet before execution', () => {

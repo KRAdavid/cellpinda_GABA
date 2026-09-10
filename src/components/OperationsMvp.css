@@ -87,7 +87,8 @@
 .ops-mvp-flow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .ops-mvp-flow span { display: inline-flex; align-items: center; gap: 6px; color: #315f48; font-size: 13px; }
 .ops-mvp-flow i { width: 1px; height: 13px; background: #9fc4aa; margin-left: 17px; }
-.ops-mvp-graph-side .text-link { font-size: 12px; margin: 24px 0 0; }
+.ops-mvp-graph-side .button { width: 100%; font-size: 12px; padding: 10px 14px; gap: 8px; margin-top: 24px; }
+.ops-mvp-graph-side .text-link { font-size: 12px; margin: 14px 0 0; }
 .ops-mvp-report { border-top: 1px solid #d9e5dc; margin-top: 80px; }
 .ops-mvp-report-grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: 18px; }
 .ops-mvp-recommendation { display: block; font-size: 28px; margin: 14px 0 8px; }
