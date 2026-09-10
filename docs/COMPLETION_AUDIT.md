@@ -165,3 +165,7 @@ GitHub Pages처럼 Worker API가 없는 정적 호스트에서는 API 주소를 
 운영 MVP의 TF 의사결정 로그에 사람이 작업별 반대 의견·재검토 조건을 입력하는 폼을 연결했다. 자동 생성 안전 경계는 `guardrail`, 사람이 입력한 기록은 `human-meeting`으로 구분하고 `dissentRecordedAt`을 함께 저장한다. `ops-validation`은 허용된 상태·시각과 10자 이상 의견만 통과시키며, 서버·브라우저 저장과 JSON 승인 보고서가 같은 구조를 사용한다. canonical 운영 큐의 `VERIFYING`·`WAITING` 작업은 `다음 TF 회의 안건` 패널에서 담당자·검증자·다음 조치를 보여 준다.
 
 `pnpm test` 66개, 타입검사, production build, 로컬 API와 공개 Pages의 Playwright 데스크톱·모바일 검증이 통과했다. 공개 URL 검증은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`를 확인했다. 최신 커밋 `93e89b1`에 대한 [GitHub Actions 34510974167](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34510974167)은 verify·Pages·Worker 구성 점검·라이브 smoke를 성공시켰다. Worker 실제 배포 단계는 Cloudflare 운영 Secrets가 없어 실행되지 않았으며, 이 외부 입력 게이트와 B2·B3·B4·E1 검증은 완료로 계산하지 않는다.
+
+## TF 입력 게이트 체크리스트 후속 증거
+
+canonical 그래프의 B2·B3·B4·C2·E1에 `requiredInputs`를 추가하고, `tf:pulse` 결정·`inputGates`·공개 `operations-queue.json`·운영 화면의 다음 TF 회의 안건에 같은 목록을 연결했다. 배포 전 검증은 입력 대기 작업의 체크리스트 누락을 거부하며, 공개 Pages Playwright 검증은 데스크톱·390px에서 체크리스트 8개 표시, 안건 패널, 가로 넘침 0, 콘솔·페이지 오류 0을 확인했다. 커밋 `3817497`의 [GitHub Actions 34511986493](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34511986493)은 Goal Contract·TF pulse·공개 export·Pages·라이브 smoke를 성공시켰다. 체크리스트는 준비 자료를 구체화하지만 실제 승인·권한·비밀값·주문 응답을 대신하지 않으므로 B2·B3·B4·C2·E1 상태는 계속 사람 입력 대기로 유지한다.
