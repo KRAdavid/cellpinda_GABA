@@ -30,10 +30,11 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(master.records.length, 8, 'live master index must contain eight research records');
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
     assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');
-    assert.equal(queue.tasks.length, 12, 'live operations queue must contain the current task graph');
+    assert.equal(queue.tasks.length, 13, 'live operations queue must contain the current task graph');
     const queueIds = new Set(queue.tasks.map(task => task.id));
     assert.equal(queueIds.size, queue.tasks.length, 'live operations queue contains duplicate task ids');
     for (const task of queue.tasks) assert.ok(['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state), `live operations queue has an unsupported state for ${task.id}`);
+    assert.ok(queue.tasks.some(task => task.id === 'B4' && task.state === 'WAITING'), 'live operations queue must keep teaser exposure behind approval');
     const waitingTasks = queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG');
     const required = ['research-yoto-2012', 'research-yamatsu-2016', 'research-powers-2008', 'research-sakashita-2019'];
     for (const id of required) assert.ok(master.records.some(record => record.id === id), `live master index is missing ${id}`);

@@ -21,9 +21,10 @@ try {
   const content=readJson('public/data/content.json');
   const master=readJson('public/data/gaba-master-index.json');
   const queue=readJson('public/data/operations-queue.json');
+  const taskGraph=readJson('data/task-graph.json');
   check('public-product-scope',content.products?.length===1 && content.products[0]?.id==='gaba1500' && !JSON.stringify(content).includes('750'),'gaba1500 only');
   check('master-index',master.records?.length===8 && master.records.every(record=>record.id?.startsWith('research-')),'8 approved research records');
-  check('operations-queue',queue.tasks?.length===12 && queue.goalId==='GL-2026-CELL-GABA-001','12 tasks for active Goal Contract');
+  check('operations-queue',queue.tasks?.length===taskGraph.tasks?.length && queue.goalId==='GL-2026-CELL-GABA-001',`${taskGraph.tasks?.length ?? 0} tasks for active Goal Contract`);
 } catch (error) { check('public-export',false,error instanceof Error ? error.message : 'invalid public export'); }
 
 const missingSecrets=requiredSecrets.filter(name=>typeof process.env[name]!=='string' || !process.env[name].trim());

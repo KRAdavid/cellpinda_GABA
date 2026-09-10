@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "goalId": "GL-2026-CELL-GABA-001",
-  "updatedAt": "2026-09-10",
+  "updatedAt": "2026-09-11",
   "stateMachine": ["BACKLOG", "READY", "RUNNING", "VERIFYING", "WAITING", "EXPIRED", "RETRY", "REWORK", "DONE", "FAILED", "CANCELLED"],
   "tasks": [
     {
@@ -65,6 +65,19 @@
       "blockedBy": "원문 URL·제품·사용기간·재게시 권한·제공관계",
       "acceptance": ["권한과 맥락 확인 후 인용 가능 문안 생성", "철회·만료·개인정보 범위 기록"],
       "evidence": ["docs/EVIDENCE_AUDIT.md", "src/components/ReviewEditor.tsx", "가바후기.xlsx 읽기 전용 점검: 504행·24열, URL·재게시 권한·광고 관계 증빙 열 미확인"]
+    },
+    {
+      "id": "B4",
+      "stream": "B",
+      "title": "티저 영상 공개 노출 승인 게이트",
+      "state": "WAITING",
+      "priority": 2,
+      "lead": "스토리·UX·프런트",
+      "verifier": "표시·콘텐츠 검토",
+      "dependencies": [],
+      "blockedBy": "로그인 없는 공개 영상·포스터·자막·대본·권리·표시사항·CTA 승인",
+      "acceptance": ["공개 미디어 주소와 비로그인 재생 확인", "연구·제품 효능을 혼동하지 않는 편집·자막 검토", "영상 노출과 외부 게시를 분리한 측정 이벤트 확인"],
+      "evidence": ["data/teaser-manifest.json", "docs/TEASER_VIDEO_EXPOSURE_REVIEW.md", "scripts/validate-teaser-exposure.mjs", "현재 내부 검토 URL은 인증이 필요해 공개 CTA에 연결하지 않음"]
     },
     {
       "id": "C1",
