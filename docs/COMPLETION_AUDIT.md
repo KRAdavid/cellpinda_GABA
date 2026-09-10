@@ -261,3 +261,9 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 ## 2026-09-11 TF pulse 상태 변화 추적
 
 `write-tf-pulse-heartbeat.mjs`가 직전 pulse의 상태 지문을 비교해 `stateChanged`를 기록하도록 보강했다. 이 값은 공개 operations queue·TF pulse·목표 감사·운영 화면에 같은 boolean으로 전달되어 새 상태 변화와 반복 안건을 구분한다. 현재 heartbeat는 변화 없음으로 검증됐고, 임시 직전 지문을 사용한 재현에서 변화 감지 경로도 통과했다. `validate:tf-pulse`·`validate:public`·production build가 모두 성공했으며, 자동 표시는 외부 승인·게시·구매를 수행하지 않는다.
+
+## 2026-09-11 연구 카드 순서와 라이브 배포 재검증
+
+연구 카드의 제품 정보 링크를 연구 결과 요약 뒤에서 조건·비교·한계·완제품 적용 범위를 확인한 뒤로 이동했다. “연구와 제품 정보는 별개”라는 문구와 제품 표시사항 확인 안내를 유지해, 소비자에게 체험을 고려할 다음 단계를 제시하면서 연구 결과를 완제품 효과의 직접 증거로 읽는 흐름을 줄였다. 커밋 `21967d2`의 [GitHub Actions 34536865248](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34536865248)은 verify·Pages·라이브 smoke를 성공시켰다. 라이브는 page 200, 연구 8건, 주장 14건, 제품 1개, 운영 작업 13개, 대기 작업 4개, 감사 게이트 5개, Smart Store only, 750 제거, provenance 일치를 확인했다.
+
+이번 변경은 화면 순서와 소비자 언어를 보강한 것이며 B2 표시 승인, B3 후기 권한, B4 티저 공개 승인, C2 Worker 운영 연결, E1 실구매 대사를 완료로 승격하지 않는다.
