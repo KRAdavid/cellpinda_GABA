@@ -74,6 +74,12 @@
 
 영구 배포·도메인·DB 백업/복구·운영자 접근·키 순환·모니터링·롤백, 정식 origin의 물리 모바일/패스키/공유앱 여정을 검증해야 한다. 실제 판매자 주문 연결 없이 구매 분석·추천 정산을 완료할 수 없다. 위 미완 항목은 목표에서 제외한 것이 아니라 후속 작업으로 유지한다.
 
+## 정기 TF pulse 계약 검증 추가 증거
+
+2026-09-11 현재 `scripts/validate-tf-pulse.mjs`를 추가해 정기 pulse가 ACTIVE Goal Contract·canonical 업무 그래프·B4 티저 게이트와 일치하는지 배포 전에 검사한다. 활성 작업마다 담당 TF·독립 검증자·다음 행동이 존재하는지, 상태별 결정 모드가 맞는지, 자동화가 사람의 반대 의견을 만들어내지 않았는지도 함께 확인한다. `pnpm run build`에 이 검증을 포함했으며, 커밋 `20e2535`의 [GitHub Actions 34506398512](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34506398512)에서 Linux runner 검증·Pages·라이브 smoke가 성공했다.
+
+최신 [TF decision pulse 실행 34506555645](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34506555645)은 계약 검증·JSON 생성·Run Summary·14일 artifact 업로드를 모두 성공시켰다. 이 자동화는 작업 상태·콘텐츠 승인·외부 게시·구매를 변경하지 않고 회의 안건과 입력 대기를 갱신한다. 따라서 B2 독립 검토, B3 후기 권한, B4 티저 공개 자료, C2 Cloudflare 운영 설정, E1 실주문 대사는 여전히 외부 검증 게이트다.
+
 
 ## 이번 실행의 추가 증거
 
