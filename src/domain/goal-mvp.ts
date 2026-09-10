@@ -83,6 +83,8 @@ export type MvpDecisionRecord = {
   question: string;
   decision: string;
   dissent: string;
+  dissentStatus?: 'guardrail' | 'human-meeting';
+  dissentRecordedAt?: string;
   evidence: string[];
   nextAction: string;
   state: TaskState | 'CONTRACT';
@@ -211,6 +213,7 @@ export function buildContractDecision(contract: MvpGoalContract, now = new Date(
     question: '이 목표를 공개용 GABA 인덱스 운영 파동으로 전환할 수 있는가?',
     decision: '조건부 진행: 승인 원장·소비자 문장·독립 검증을 통과한 자료만 공개한다.',
     dissent: '연구 결과를 셀핀다 가바 완제품 효과나 실제 구매 성과로 확대 해석하지 않는다.',
+    dissentStatus: 'guardrail',
     evidence: ['Goal Contract', '공개 연구 마스터 인덱스 필수 필드 계약'],
     nextAction: 'G1 Goal Contract 생성·검증을 샌드박스에서 시작한다.',
     state: 'CONTRACT',
@@ -241,11 +244,32 @@ export function buildTaskDecision(contract: MvpGoalContract, task: MvpTask, now 
     question: `${task.title}을 다음 단계로 넘길 수 있는가?`,
     decision,
     dissent: task.risk === 'E_EXTERNAL_COMMITMENT' ? '외부 공개·구매·법적 약속은 책임자 승인 전 실행하지 않는다.' : '근거·제품 적용 범위·표시 한계를 확인하지 못하면 재작업으로 돌린다.',
+    dissentStatus: 'guardrail',
     evidence: [...task.evidence],
     nextAction,
     state: task.state,
     createdAt: now,
   };
+}
+
+/**
+ * Appends a human meeting note to the latest decision for a task. The
+ * generated safety guardrail remains in the earlier decision record, while
+ * this entry makes the human discussion explicit and auditable.
+ */
+export function recordHumanDissent(decisions: readonly MvpDecisionRecord[], taskId: string, dissent: string, now = new Date().toISOString()): MvpDecisionRecord[] {
+  const note = dissent.trim();
+  if (note.length < 10 || note.length > 2000) throw new Error('회의 반대 의견을 10자 이상 입력해 주세요.');
+  const source = [...decisions].reverse().find(item => item.taskId === taskId);
+  if (!source) throw new Error(`회의 기록을 남길 작업을 찾을 수 없습니다: ${taskId}`);
+  return [...decisions, {
+    ...source,
+    id: `${source.id}-human-${now.replace(/\D/g, '').slice(0, 14)}`,
+    dissent: note,
+    dissentStatus: 'human-meeting',
+    dissentRecordedAt: now,
+    createdAt: now,
+  }];
 }
 
 export function generateMvpPlan(input: string): MvpPlan {

@@ -1,6 +1,6 @@
 import {strict as assert} from 'node:assert';
 import test from 'node:test';
-import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, generateMvpPlan, promoteReady, recordIndependentReview, runSandboxTask, runSandboxWave, startMvpSession, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
+import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, generateMvpPlan, promoteReady, recordHumanDissent, recordIndependentReview, runSandboxTask, runSandboxWave, startMvpSession, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
 import {opsStateIssue} from './ops-validation.ts';
 
 test('one sentence goal generates a contract, TF and dependency graph', () => {
@@ -176,4 +176,18 @@ test('independent review is bound to the task verifier role', () => {
   assert.throws(() => recordIndependentReview(started.tasks, 'G1', {
     verifier: '마케팅·소비자심리', acceptedCriteria: [...plan.tasks[0].acceptance], note: '모든 기준을 확인했지만 지정된 검증 역할이 아닙니다.', decision: 'accept',
   }, '2026-09-10T10:01:00.000Z'), /지정된 독립 검증 역할/);
+});
+
+test('human meeting dissent is appended separately from the generated guardrail', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const generated = [
+    buildContractDecision(plan.contract, '2026-09-10T10:00:00.000Z'),
+    buildTaskDecision(plan.contract, plan.tasks[0], '2026-09-10T10:00:01.000Z'),
+  ];
+  const recorded = recordHumanDissent(generated, 'G1', '표시 승인 전 제품 분류 확인을 먼저 진행해야 합니다.', '2026-09-10T10:01:00.000Z');
+  assert.equal(recorded.length, 3);
+  assert.equal(recorded[1].dissentStatus, 'guardrail');
+  assert.equal(recorded[2].dissentStatus, 'human-meeting');
+  assert.equal(recorded[2].dissentRecordedAt, '2026-09-10T10:01:00.000Z');
+  assert.equal(opsStateIssue({plan: {contract: {goalId: plan.contract.goalId}, tasks: plan.tasks}, decisions: recorded}), null);
 });

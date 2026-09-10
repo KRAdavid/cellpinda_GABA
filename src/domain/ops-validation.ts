@@ -100,7 +100,7 @@ function validateDecisions(value: unknown): string | null {
   if (value === undefined) return null;
   if (!Array.isArray(value) || value.length > 500) return 'TF 의사결정 로그가 올바르지 않습니다.';
   for (const decision of value) {
-    if (!isObject(decision) || !text(decision.id, 180) || !text(decision.taskId, 80) || !text(decision.chair, 200) || !stringArray(decision.participants, 30, 300) || !text(decision.question, 1000) || !text(decision.decision, 2000) || typeof decision.dissent !== 'string' || decision.dissent.length > 2000 || !stringArray(decision.evidence, 50, 2000) || !text(decision.nextAction, 1000) || !(decision.state === 'CONTRACT' || taskStates.has(decision.state as TaskState)) || !text(decision.createdAt, 80) || Number.isNaN(Date.parse(decision.createdAt))) return 'TF 의사결정 기록 필드가 올바르지 않습니다.';
+    if (!isObject(decision) || !text(decision.id, 180) || !text(decision.taskId, 80) || !text(decision.chair, 200) || !stringArray(decision.participants, 30, 300) || !text(decision.question, 1000) || !text(decision.decision, 2000) || typeof decision.dissent !== 'string' || decision.dissent.length > 2000 || !stringArray(decision.evidence, 50, 2000) || !text(decision.nextAction, 1000) || !(decision.state === 'CONTRACT' || taskStates.has(decision.state as TaskState)) || !text(decision.createdAt, 80) || Number.isNaN(Date.parse(decision.createdAt)) || (decision.dissentStatus !== undefined && !['guardrail', 'human-meeting'].includes(String(decision.dissentStatus))) || (decision.dissentRecordedAt !== undefined && (!text(decision.dissentRecordedAt, 80) || Number.isNaN(Date.parse(decision.dissentRecordedAt)))) || (decision.dissentStatus === 'human-meeting' && decision.dissentRecordedAt === undefined)) return 'TF 의사결정 기록 필드가 올바르지 않습니다.';
   }
   return null;
 }
