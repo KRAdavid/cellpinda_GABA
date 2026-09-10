@@ -24,6 +24,8 @@ JSON 감사 출력의 `pulseHealth`는 저장된 heartbeat 시각·상태 지문
 
 로컬 자료까지 같은 회의 패킷에 연결할 때는 지정 폴더가 있는 PC에서 `pnpm run audit:goal:local`을 실행한다. JSON 패킷을 자동 저장하려면 `pnpm run audit:goal:local:json`을 사용한다. 이 명령은 완제품 자료 스캔과 주문 파일 구조 감사를 한 번에 실행해 비공개 `tmp/local-goal-audit.json`에 기록하며, 스캔 자체가 실패하면 종료 코드 1로 알려 준다. `local-material-inputs`와 `local-order-inputs`의 상태와 가장 최근 파일 수정 시각을 회의에서 바로 확인할 수 있다. 완제품 후보가 발견되어도 B2 독립 검증을 자동 승인하지 않고, 역사 주문의 1500 수량이 있어도 상태·취소·환불·판매자 계정이 확인되지 않으면 E1을 `WAITING`으로 유지한다. 로컬 파일명·경로·개인 행은 공개 export와 CI artifact에 넣지 않는다.
 
+자료가 자주 갱신되는 운영 PC에서는 `pnpm run audit:watch`를 실행해 매니페스트의 완제품·주문 폴더 변경을 감지한다. 변경 후 750ms debounce를 거쳐 로컬 감사 사이클을 다시 실행하며, 회의용 `tmp/local-goal-audit.json`만 바꾼다. watcher는 B2·E1을 자동 승인하지 않고 기존 입력 경계와 공개 export 비공개 원칙을 유지한다.
+
 배포 준비도도 같은 감사에 포함된다. Worker 운영 게이트가 그래프에서 실수로 `DONE`이 되더라도 Cloudflare 필수 Secrets와 산출물이 준비되지 않으면 감사가 오류로 판정하므로, 정적 Pages 공개와 영구 Worker 운영을 서로 바꾸어 기록할 수 없다.
 
 같은 자동 판단의 공개 가능한 요약은 `operations-queue.json`의 각 작업 카드에도 `decision`, `decisionMode`, `nextAction`으로 함께 내보낸다. 상세 회의 패킷은 공개 `data/tf-pulse.json`으로 제공하며, 상태·참여 역할·필요 입력·다음 조치만 포함한다. 공개 화면의 canonical 큐와 아래에서 새로 만드는 브라우저 샌드박스는 서로 다른 실행 컨텍스트로 표시하며, 내부 증거 경로를 노출하지 않고 현재 운영 상태와 다음 조치를 이해할 수 있는 수준만 보여 준다.

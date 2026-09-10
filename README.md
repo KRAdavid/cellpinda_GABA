@@ -60,6 +60,8 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 두 로컬 입력을 전체 목표 판정과 함께 확인하려면 로컬 PC에서 `pnpm run audit:goal:local`을 실행한다. 회의용 JSON을 자동 저장하려면 `pnpm run audit:goal:local:json`을 사용한다. 이 명령은 `audit-local-materials`와 `audit-local-orders`를 읽기 전용으로 다시 실행해 완제품 후보·제품군·주문 파일 구조·상태 필드 유무·가장 최근 파일 수정 시각을 비공개 `tmp/local-goal-audit.json`에 붙이며, 스캔 자체가 실패하면 종료 코드 1로 알려 준다. 자료 스캔 성공은 B2 표시 승인, 과거 주문 수량은 E1 실구매·환불 대사를 의미하지 않는다. 결과에는 개인정보·원문 행·로컬 경로를 넣지 않고 공개 export도 변경하지 않으며, CI 기본 감사는 외부 폴더가 없어도 재현되도록 옵션을 생략한다.
 
+자료 폴더에 파일이 추가되거나 수정될 때 회의용 패킷을 자동으로 다시 만들려면 `pnpm run audit:watch`를 실행한다. 이 watcher는 두 매니페스트의 폴더를 감시하고 750ms 동안 변경을 묶은 뒤 `tmp/local-goal-audit.json`만 갱신한다. 원문 행·개인정보·로컬 경로는 공개 export와 CI artifact로 이동하지 않으며, `Ctrl+C`로 감시를 종료할 수 있다. 감시할 폴더를 바꾸려면 `CELLPINDA_MATERIAL_ROOTS` 또는 `CELLPINDA_ORDER_ROOTS`에 세미콜론으로 구분한 경로를 지정한다.
+
 운영 MVP의 재개 상태는 `src/domain/ops-validation.ts`의 공통 검증을 거쳐 Node API와 Cloudflare Worker에 저장된다. 업무 상태 전환·검증 증거·승인 연결을 확인하고 이메일·전화번호·비공개 경로·토큰 같은 필드는 거부한다. 샌드박스 상태 저장은 외부 게시나 실구매 완료를 의미하지 않는다.
 
 ```sh
