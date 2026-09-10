@@ -62,6 +62,7 @@ export default function OperationsMvp() {
   const [runKey, setRunKey] = useState(stored.runKey || clientUuid());
   const [serverState, setServerState] = useState<'checking' | 'saved' | 'local'>('checking');
   const [queue, setQueue] = useState<QueueSnapshot | null>(null);
+  const [queueRefresh, setQueueRefresh] = useState(0);
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState('');
   const [copied, setCopied] = useState(false);
@@ -71,9 +72,11 @@ export default function OperationsMvp() {
 
   useEffect(() => {
     let active = true;
-    fetch(`${publicBase}data/operations-queue.json`).then(response => response.ok ? response.json() as Promise<QueueSnapshot> : Promise.reject(new Error('operations queue unavailable'))).then(snapshot => { if (active) setQueue(snapshot); }).catch(() => { if (active) setQueue(null); });
-    return () => { active = false; };
-  }, []);
+    const refresh = () => fetch(`${publicBase}data/operations-queue.json?refresh=${Date.now()}`).then(response => response.ok ? response.json() as Promise<QueueSnapshot> : Promise.reject(new Error('operations queue unavailable'))).then(snapshot => { if (active) setQueue(snapshot); }).catch(() => { if (active) setQueue(null); });
+    void refresh();
+    const timer = window.setInterval(refresh, 60_000);
+    return () => { active = false; window.clearInterval(timer); };
+  }, [queueRefresh]);
 
   useEffect(() => {
     try { window.localStorage.setItem(storageKey, JSON.stringify({input, plan, audit, approval, approvalTaskId, decisions, runId, runKey} satisfies StoredOpsState)); }
@@ -176,7 +179,7 @@ export default function OperationsMvp() {
       {message ? <p className="ops-mvp-message" role="status">{message}</p> : null}
     </section>
     {queue ? <section className="ops-mvp-live-queue wrap" aria-labelledby="live-queue-heading">
-      <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong></div></div>
+      <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong><button className="text-link" type="button" onClick={() => setQueueRefresh(value => value + 1)}>새로고침 ↻</button></div></div>
       <div className="ops-mvp-live-streams" aria-label="스트림별 현재 상태">{queue.workstreams.map(stream => <span key={stream.id}><strong>{stream.name}</strong><em>{stream.status}</em><small>{stream.nextAction}</small></span>)}</div>
       <div className="ops-mvp-live-queue-grid">{waitingQueue.map(task => <article key={task.id}><div><span className="ops-mvp-task-id">{task.id}</span><span className="ops-mvp-state">{stateLabels[task.state] || task.state}</span></div><h3>{task.title}</h3><p>담당 {task.lead} · 검증 {task.verifier}</p>{task.blockedBy ? <small>대기 입력 · {task.blockedBy}</small> : null}</article>)}</div>
       <p className="note">계약 확인일 {queue.checkedAt} · 완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 대기 {waitingQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>
