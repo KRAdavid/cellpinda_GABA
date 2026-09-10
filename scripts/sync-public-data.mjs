@@ -124,6 +124,7 @@ const operationsQueue={
   status:goalContract.status,
   checkedAt:goalContract.checkedAt,
   pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,requiresHumanDecision:pulseForQueue.requiresHumanDecision,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
+  roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
   tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
 };

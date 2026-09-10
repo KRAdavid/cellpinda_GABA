@@ -43,6 +43,7 @@ if (publicPulse.mode !== 'public_tf_pulse' || publicPulse.goalId !== operationsQ
 if (publicPulse.inputGates.length !== operationsQueue.pulse.inputGates || publicPulse.meetingAgenda.length !== operationsQueue.pulse.activeTasks) fail('public TF pulse packet counts do not match the operations queue');
 const requiredRoleIds = ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit'];
 if (!Array.isArray(publicPulse.roleCoverage) || publicPulse.roleCoverage.length !== requiredRoleIds.length || publicPulse.roleCoverage.some((role, index) => role.id !== requiredRoleIds[index] || role.status !== 'present' || typeof role.label !== 'string' || role.label.trim().length < 2)) fail('public TF pulse role coverage is missing or malformed');
+if (!Array.isArray(operationsQueue.roleCoverage) || JSON.stringify(operationsQueue.roleCoverage) !== JSON.stringify(publicPulse.roleCoverage)) fail('operations queue role coverage is missing or out of sync');
 const requireExactKeys = (value, expected, label) => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail(`${label} must be an object`);
   const actual = Object.keys(value).sort();
