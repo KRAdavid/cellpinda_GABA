@@ -6,6 +6,8 @@ import type { ChallengeRecord } from '../domain/challenge';
 import {apiEndpoint} from '../api-origin';
 import './MemberRecords.css';
 
+const siteRoot = import.meta.env.BASE_URL;
+
 type MemberStatus = { enabled: boolean; user: { id: string } | null; recoverySupported: boolean };
 type SavedRecord = { record: ChallengeRecord | null; revision: number };
 type ArchiveSummary = { id: string; startDate: string; completedDays: number; totalDays: number; createdAt: string; sourceRevision: number };
@@ -219,10 +221,10 @@ export default function MemberRecords() {
   }
 
   return <main className="member-records wrap">
-    <a className="member-back" href="/"><ArrowLeft size={17} aria-hidden="true" /> 셀핀다로 돌아가기</a>
+    <a className="member-back" href={siteRoot}><ArrowLeft size={17} aria-hidden="true" /> 셀핀다로 돌아가기</a>
     <p className="chapter">나의 기록 · 베타</p><h1>작은 실천을,<br />다시 꺼내 보는 곳.</h1>
     <p className="member-intro">날짜별 7일 실천과 메모를 모아 보세요. 건강 상태나 제품 효과를 평가하지 않습니다.</p>
-    {!status ? <p role="status">회원 공간을 확인하고 있어요.</p> : !status.enabled ? <section className="member-panel"><h2>지금은 브라우저 기록으로 만나요.</h2><p>이 임시 미리보기에서는 회원 가입과 서버 저장을 제공하지 않습니다. 7일 기록은 사용 중인 브라우저에서 시작하고 내려받을 수 있어요.</p><a className="button" href="/#lab">브라우저의 7일 기록 보기</a></section> : !status.user ? <section className="member-panel"><h2>패스키로 내 기록 열기</h2><p>이 회원 공간은 기능을 검증하는 베타입니다. 정식 서비스는 아직 열지 않았어요.</p><p className="note">패스키를 분실하면 계정을 복구하는 기능은 아직 없습니다. 보관할 기록은 파일로 내려받아 주세요.</p><button type="button" className="button" disabled={busy} onClick={() => authenticate('login')}><KeyRound size={18} aria-hidden="true" /> 패스키로 로그인</button><div className="member-signup"><label className="member-consent"><input type="checkbox" checked={signupConsent} onChange={event => setSignupConsent(event.target.checked)} /><span>회원 로그인에 필요한 패스키 등록정보를 저장하는 데 동의합니다. 패스키 분실 시 복구할 수 없음을 확인했어요.</span></label><button type="button" className="button outline" disabled={busy || !signupConsent} onClick={() => authenticate('signup')}>동의하고 패스키로 가입</button></div></section> : !recordReady ? <section className="member-panel"><p role="status">회원 저장공간의 기록을 확인하고 있어요.</p><button type="button" className="text-link" disabled={busy} onClick={() => void run(refreshRecord)}>서버 기록 다시 불러오기</button></section> : <>
+    {!status ? <p role="status">회원 공간을 확인하고 있어요.</p> : !status.enabled ? <section className="member-panel"><h2>지금은 브라우저 기록으로 만나요.</h2><p>이 임시 미리보기에서는 회원 가입과 서버 저장을 제공하지 않습니다. 7일 기록은 사용 중인 브라우저에서 시작하고 내려받을 수 있어요.</p><a className="button" href={`${siteRoot}#lab`}>브라우저의 7일 기록 보기</a></section> : !status.user ? <section className="member-panel"><h2>패스키로 내 기록 열기</h2><p>이 회원 공간은 기능을 검증하는 베타입니다. 정식 서비스는 아직 열지 않았어요.</p><p className="note">패스키를 분실하면 계정을 복구하는 기능은 아직 없습니다. 보관할 기록은 파일로 내려받아 주세요.</p><button type="button" className="button" disabled={busy} onClick={() => authenticate('login')}><KeyRound size={18} aria-hidden="true" /> 패스키로 로그인</button><div className="member-signup"><label className="member-consent"><input type="checkbox" checked={signupConsent} onChange={event => setSignupConsent(event.target.checked)} /><span>회원 로그인에 필요한 패스키 등록정보를 저장하는 데 동의합니다. 패스키 분실 시 복구할 수 없음을 확인했어요.</span></label><button type="button" className="button outline" disabled={busy || !signupConsent} onClick={() => authenticate('signup')}>동의하고 패스키로 가입</button></div></section> : !recordReady ? <section className="member-panel"><p role="status">회원 저장공간의 기록을 확인하고 있어요.</p><button type="button" className="text-link" disabled={busy} onClick={() => void run(refreshRecord)}>서버 기록 다시 불러오기</button></section> : <>
       <div className="member-session"><p>내 회원 공간에 로그인되어 있어요.</p><button className="text-link" type="button" disabled={busy} onClick={logout}><LogOut size={17} aria-hidden="true" /> 로그아웃</button></div>
       <section className="member-panel"><h2>내 7일 기록</h2><p>브라우저의 기록은 자동으로 가져오지 않아요. 직접 가져와 확인한 뒤 저장하세요.</p><label className="member-consent"><input type="checkbox" checked={storageConsent} onChange={event => setStorageConsent(event.target.checked)} /><span>날짜별 실천과 개인 메모를 회원 저장공간에 저장하는 데 동의합니다.<small>저장하면 로그인한 다른 브라우저에서도 볼 수 있어요. 메모에 공개하고 싶지 않은 내용이 있는지 먼저 확인하세요.</small></span></label>
         <div className="member-actions"><button type="button" className="button outline" disabled={busy || !storageConsent || conflict} onClick={importLocal}>브라우저 기록 가져오기</button>{!saved.record ? <button type="button" className="button outline" disabled={busy || !storageConsent || conflict} onClick={() => { setDraft(createChallenge(localCalendarDate())); setMessage('오늘부터 시작하는 기록을 준비했어요. 저장하면 회원 공간에 반영됩니다.'); }}>새 7일 기록 준비</button> : null}<button type="button" className="text-link" disabled={busy} onClick={() => void run(refreshRecord)}>서버 기록 다시 불러오기</button></div>
@@ -240,7 +242,7 @@ export default function MemberRecords() {
       {confirmDelete ? <section className="member-delete" aria-labelledby="member-delete-title"><h2 id="member-delete-title">{confirmDelete === 'account' ? '회원 공간과 저장 기록을 모두 지울까요?' : '서버에 저장한 7일 기록을 지울까요?'}</h2><p>삭제하면 되돌릴 수 없습니다. 브라우저 원본과 내려받은 파일은 별도로 남습니다.</p><div className="member-actions"><button type="button" className="button outline" disabled={busy} onClick={() => setConfirmDelete(null)}>취소하고 유지</button><button type="button" className="button" disabled={busy || conflict} onClick={remove}>확인하고 삭제</button></div></section> : null}
     </>}
     {error ? <p role="alert" className="member-error">{error}</p> : null}<p role="status" aria-live="polite" className="member-status">{message}</p>
-    <a className="member-back" href="/#lab">브라우저에 남긴 7일 기록 보기</a>
+    <a className="member-back" href={`${siteRoot}#lab`}>브라우저에 남긴 7일 기록 보기</a>
   </main>;
 }
 

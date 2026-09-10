@@ -13,6 +13,7 @@ const funnelLabels: Record<string, string> = { landing_to_check: '첫 화면 →
 const metadataLabels: Record<string, string> = { question: '연구 질문', studyType: '연구 설계', population: '연구 대상', sampleSize: '표본 규모', studyCount: '포함 연구 수', searchThrough: '문헌 검색 범위', dose: '연구 용량·제형', duration: '연구 기간', comparison: '비교 조건', outcome: '평가 지표', result: '관찰 결과', limitations: '연구 한계', productApplicability: '셀핀다 완제품 적용 범위' };
 const eventLabel = (name: string) => eventLabels[name] || `기타 행동 (${name})`;
 const formatDate = (value?: string | null) => value ? new Date(value).toLocaleString('ko-KR') : '아직 수집되지 않음';
+const siteRoot = import.meta.env.BASE_URL;
 
 export default function Admin() {
  const [token, setToken] = useState(''), [items, setItems] = useState<Item[]>([]), [selected, setSelected] = useState<Item | null>(null), [text, setText] = useState(''), [reason, setReason] = useState(''), [error, setError] = useState(''), [busy, setBusy] = useState(false), [history, setHistory] = useState<{ id: number; content_id: string; reason: string; created_at: string }[]>([]), [analytics, setAnalytics] = useState<Analytics>({ counts: [] }), [loaded, setLoaded] = useState(false);
@@ -45,7 +46,7 @@ export default function Admin() {
   finally { setBusy(false); }
  }
  return <div className="admin">
-  <aside><a className="brand" href="/">Cellpinda.</a><a href="#content">콘텐츠 검토</a><a href="#history">승인 이력</a><a href="#analytics">행동 분석</a><a href="/">사이트 보기 ↗</a></aside>
+  <aside><a className="brand" href={siteRoot}>Cellpinda.</a><a href="#content">콘텐츠 검토</a><a href="#history">승인 이력</a><a href="#analytics">행동 분석</a><a href={siteRoot}>사이트 보기 ↗</a></aside>
   <main><h1>콘텐츠 검토실</h1><p>근거와 문구를 확인하고 공개 상태를 관리합니다.</p>
    {!loaded ? <form onSubmit={e => { e.preventDefault(); void load(); }} className="admin-login"><label>운영자 접근 키<input type="password" value={token} autoComplete="off" onChange={e => setToken(e.target.value)} required /></label><p>운영 담당자에게 전달받은 접근 키를 입력하세요.</p>{isLocal ? <p className="note">로컬 서버를 사용하는 경우 서버가 생성한 비밀 키 파일에서 접근 키를 확인할 수 있습니다.</p> : null}<button className="button" disabled={busy}>검토실 열기</button></form> : <>
     <div id="content" className="admin-grid">

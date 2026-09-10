@@ -16,6 +16,11 @@ type Content={claims:Claim[];products:Product[];reviews:PublicReview[]};
 const eventMap:Record<string,string>={rhythm_start:'rhythm_check_started',rhythm_complete:'rhythm_check_completed',share_request:'share_requested',share_copy:'share_link_copied',card_download:'share_image_downloaded',purchase_click:'purchase_outbound_clicked',review_open:'review_opened',review_nav:'review_section_navigated',faq_open:'purchase_question_opened'};
 const siteRoot=import.meta.env.BASE_URL;
 const asset=(path:string)=>`${siteRoot}${path}`;
+function relativePath(path:string):string{
+ const base=siteRoot==='/'?'':siteRoot.replace(/\/$/,'');
+ const relative=base&&path.startsWith(base)?path.slice(base.length):path;
+ return relative||'/';
+}
 const flowId=crypto.randomUUID();
 const seenEvents=new Set<string>();
 let eventQueue=Promise.resolve();
@@ -41,24 +46,25 @@ async function loadContent(signal:AbortSignal):Promise<Content>{
 }
 export default function App(){
  const [content,setContent]=useState<Content|null>(null),[error,setError]=useState(false),[menu,setMenu]=useState(false);
- const operationsView = new URLSearchParams(location.search).get('view') === 'ops' || location.pathname.endsWith('/ops');
+ const currentPath=relativePath(location.pathname);
+ const operationsView = new URLSearchParams(location.search).get('view') === 'ops' || currentPath === '/ops';
  useEffect(()=>{const c=new AbortController();loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)});return()=>c.abort()},[]);
  useEffect(()=>{
- if(['/admin','/account'].includes(location.pathname) || operationsView)return;
+ if(['/admin','/account'].includes(currentPath) || operationsView)return;
   trackOnce('landing_view',{path:'/'});
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){trackOnce(entry.target.id==='story'?'gaba_story_viewed':'product_comparison_viewed',{path:entry.target.id==='story'?'/story':'/products'});observer.unobserve(entry.target)}},{threshold:0.25});
   for(const id of ['story','products']){const ready=id==='products'?Boolean(content?.products.length):Boolean(content?.claims.some(claim=>claim.id==='gaba-definition'&&claim.status==='approved'));const element=document.getElementById(id);if(ready&&element)observer.observe(element)}
   return()=>observer.disconnect();
- },[content,operationsView]);
+ },[content,operationsView,currentPath]);
  useEffect(()=>{
-  if(!content||location.pathname!=='/')return;
+ if(!content||currentPath!=='/')return;
   const url=new URL(location.href);
   const productView=url.searchParams.getAll('view').length===1&&url.searchParams.get('view')==='products'&&!url.searchParams.has('rhythm');
   if(productView){document.getElementById('products')?.scrollIntoView({block:'start',behavior:'instant'});trackOnce('shared_link_landed',{path:'/products',channel:'direct'});}
   else if(content.products.some(product=>url.hash===`#product-${product.id}`)){document.getElementById(url.hash.slice(1))?.scrollIntoView({block:'start',behavior:'instant'});}
- },[content]);
- if(location.pathname==='/account')return <Suspense fallback={<p className="loading">내 기록을 여는 중입니다.</p>}><MemberRecords/></Suspense>;
- if(location.pathname==='/admin')return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
+ },[content,currentPath]);
+ if(currentPath==='/account')return <Suspense fallback={<p className="loading">내 기록을 여는 중입니다.</p>}><MemberRecords/></Suspense>;
+ if(currentPath==='/admin')return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
  if(operationsView)return <OperationsMvp/>;
  return <><a className="skip" href="#main">본문으로 이동</a><header className="header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav aria-label="주 메뉴" className={menu?'open':''} onClick={()=>setMenu(false)}><a href="#story">GABA 이야기</a><a href="#fermentation">발효기술</a><a href="#products">제품 경험</a><a href="#reviews">후기 원문</a><a href="#research">연구 근거</a></nav><a href="#rhythm" className="button small">리듬 체크 <ArrowRight size={18}/></a><button className="menu-toggle" aria-label={menu?'메뉴 닫기':'메뉴 열기'} aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>
  <main id="main"><section className="hero"><img className="hero-photo" src={asset('assets/rhythm-window.png')} alt="초록 나무가 보이는 열린 창가와 물 한 잔"/><div className="hero-copy"><p className="chapter">셀핀다 가바 · 제품과 연구 이야기</p><h1>오늘, 내 뇌는<br/>쉴 틈이 있었을까?</h1><p className="hero-question">몸은 쉬고 있는데,<br className="mobile-break"/> 머리는 계속 일하고 있나요?</p><p className="muted">바쁜 하루 속, 나의 긴장과 휴식 습관을 돌아보세요.</p><div className="actions"><a className="button" href="#rhythm">1분 리듬 체크 <ArrowRight/></a><a className="button outline" href="#fermentation">발효가바 알아보기 <ArrowRight/></a></div>{content?.products.length ? <div className="hero-product"><img src={asset(`assets/product-${content.products[0].amountMg}.jpg`)} alt={`${content.products[0].name} 제품 포장`}/><div><strong>셀핀다 가바를 알아보세요.</strong><div className="hero-shortcuts"><a href="#products">제품 구성 보기 →</a><a href="#reviews">가바 1500 후기 원문 안내 →</a></div></div></div> : null}</div></section>
