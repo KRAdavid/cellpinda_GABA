@@ -8,6 +8,8 @@
 
 라이브 [목표 감사 패킷](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)은 `IN_PROGRESS_WITH_GATES`, 게이트 5건(B2 VERIFYING, B3·B4·C2·E1 WAITING), 논문 레코드 8건, Smart Store 1500 제품 1건을 보여 준다. 감사 패킷은 중간 검토용 요약이며 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않는다.
 
+운영 화면에도 같은 패킷을 `공개 목표 감사` 요약 카드로 표시해 모바일 회의에서 논문·제품·완료 작업 수와 게이트별 담당·독립 검증·다음 조치를 바로 확인할 수 있게 했다. 화면과 JSON은 하나의 fetch 결과를 사용하며, 패킷이 없거나 검증되지 않으면 운영 큐를 표시하지 않는다.
+
 ## 최신 업데이트 — 2026-09-11 TF pulse 재현과 신선도 표시
 
 운영 보드가 마지막 TF pulse 시각뿐 아니라 `방금 갱신`·`몇 분 전 갱신`·`업데이트 지연` 상태를 표시하도록 보강했다. 6시간 주기 pulse를 현재 코드에서 수동 재현한 [34530924367](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530924367)은 계약·역할·업무 그래프 검증과 안전 heartbeat 생성을 성공시켰고, heartbeat 커밋 [`97026c2`](https://github.com/KRAdavid/cellpinda_GABA/commit/97026c2) 이후 [단일 deploy·Pages·라이브 smoke 34530948751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530948751)도 성공했다. `[skip ci]`와 명시적 dispatch 경계가 유지되어 중복 배포는 발생하지 않았다.

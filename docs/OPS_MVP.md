@@ -32,6 +32,8 @@ JSON 감사 출력의 `pulseHealth`는 저장된 heartbeat 시각·상태 지문
 
 운영 큐 상단의 `목표 감사 JSON`은 같은 Goal Contract에서 생성한 공개 중간 검토 패킷이다. 6개 역할 커버리지, 상태별 작업 수, 논문 인덱스·1500 제품·TF pulse 마일스톤, `VERIFYING`·`WAITING`·`BACKLOG` 게이트와 필요한 입력을 한 번에 확인할 수 있다. `pnpm run validate:public`와 라이브 smoke가 큐·pulse·감사 패킷의 목표 ID·상태·카운트·게이트 일치를 함께 검사한다.
 
+같은 패킷을 운영 화면의 `공개 목표 감사` 요약 카드에서도 읽을 수 있다. 논문 레코드·소비자 주장·공개 제품·완료 작업 수와 게이트별 담당자·독립 검증자·다음 조치를 파일을 열지 않고 확인하며, 390px에서는 게이트를 한 열로 재배치한다. 화면은 공개 JSON과 함께 갱신되므로 회의 참가자가 사람 판단이 필요한 지점을 빠르게 찾을 수 있다.
+
 CI와 로컬 production build는 `pnpm run validate:ops`로 전체 샌드박스 여정을 재생한다. 이 검증은 5개 내부 작업의 독립 검증 단계 시뮬레이션과 공개 배포 승인 작업의 `WAITING → READY → RUNNING → VERIFYING → DONE` 전이를 확인하며, 각 샌드박스 완료 기록에 검증자·수락 기준·검증 당시 증거를 별도 기록한다. 실제 원문 검토·외부 게시·구매는 수행하지 않는다.
 
 공개 데이터는 `pnpm run sync:data` 직후 `pnpm run validate:public`에서 다시 검사한다. 제품은 `gaba1500` 하나이고 스마트스토어 목적지만 허용하며, 750 재유입·비공개 필드 노출·마스터 인덱스와 content export의 provenance 불일치를 build 단계에서 차단한다.
