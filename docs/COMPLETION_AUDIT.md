@@ -239,3 +239,7 @@ canonical 업무 그래프·TF pulse·공개 운영 큐·생성형 MVP의 모든
 `pnpm run audit:goal:local`(JSON은 `pnpm run audit:goal -- --local-inputs --json`) 옵션을 추가해 로컬 완제품·주문 감사 결과를 같은 Goal Audit 패킷에 연결했다. 지정 자료에서 완제품 관련 파일 7건(완제품 후보 5건, 벌크 원료 라벨 1건 제외)을 확인해 `local-material-inputs=MET`으로 기록했지만, B2 독립 표시 검증은 계속 `VERIFYING`이다. 주문 폴더는 1,086개 파일을 스캔했고 CSV 77개에서 GABA1500 121개 수량과 과거 GABA750 72개 수량을 식별했으나, 상태·취소·환불 필드가 없어 `local-order-inputs=WAITING`으로 남겼다. 750 자료는 내부 과거 분류에만 남고 공개 제품·매출 집계에는 포함하지 않는다.
 
 이 옵션은 개인정보·원문 행·로컬 경로를 저장하거나 공개하지 않으며, 가장 최근 파일 수정 시각만 회의용 메타데이터로 기록한다. CI 기본 감사와 공개 export는 외부 폴더 없이도 동일하게 재현된다. 로컬 자료의 발견이나 과거 수량은 표시 승인·실구매·환불 완료·외부 전문가 참여를 증명하지 않으므로 자동 승격하지 않는다.
+
+## 2026-09-11 pulse 중복 배포 제거
+
+예약 `TF decision pulse`가 heartbeat 커밋 뒤 `deploy.yml`을 별도로 수동 호출하던 경로를 제거했다. `main` push가 일반 배포를 이미 시작하므로 중복 호출은 동일 브랜치 concurrency에서 한 실행을 취소할 수 있었고, 이번 수정은 `actions: write` 권한도 함께 제거해 heartbeat push 한 번과 배포 workflow 한 번의 흐름으로 정리했다. 이후 자동 pulse가 생성한 heartbeat 커밋 `ce100571`의 [후속 workflow-dispatch 34528725780](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34528725780)이 verify·Pages·라이브 smoke를 성공했고, 라이브 공개 검증은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, Smart Store only, 750 제거, provenance 일치를 확인했다.

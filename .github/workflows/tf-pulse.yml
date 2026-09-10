@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  actions: write
 
 concurrency:
   group: tf-pulse
@@ -42,10 +41,7 @@ jobs:
           else
             git commit -m "chore: refresh TF pulse heartbeat"
             git push origin HEAD:main
-            gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main
           fi
-        env:
-          GH_TOKEN: ${{ github.token }}
       - name: Add pulse to run summary
         run: |
           {
