@@ -55,6 +55,8 @@ test('approval report distinguishes completed and pending work', () => {
   assert.equal(report.decisionRecords.length, 2);
   assert.equal(report.decisionRecords[0].participants.length, 8);
   assert.match(report.decisionRecords[1].decision, /독립 검증/);
+  assert.ok(report.decisionRecords[0].dissent.length > 0);
+  assert.ok(report.decisionRecords[1].evidence.includes('sandbox-output:G1:2026-09-10T10:00:00.000Z'));
   assert.deepEqual(report.completedTasks, ['G1']);
   assert.ok(report.pendingTasks.includes('P1'));
 });
