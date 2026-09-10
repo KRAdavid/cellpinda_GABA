@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: tf-pulse
@@ -39,9 +40,15 @@ jobs:
           if git diff --cached --quiet; then
             echo "Pulse heartbeat unchanged."
           else
-            git commit -m "chore: refresh TF pulse heartbeat"
+            # GITHUB_TOKEN pushes do not trigger another workflow. Keep the
+            # explicit dispatch below, while [skip ci] prevents a duplicate
+            # push-triggered deployment if repository policy changes later.
+            git commit -m "chore: refresh TF pulse heartbeat [skip ci]"
             git push origin HEAD:main
+            gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main
           fi
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: Add pulse to run summary
         run: |
           {

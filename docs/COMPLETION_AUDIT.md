@@ -240,6 +240,6 @@ canonical 업무 그래프·TF pulse·공개 운영 큐·생성형 MVP의 모든
 
 이 옵션은 개인정보·원문 행·로컬 경로를 저장하거나 공개하지 않으며, 가장 최근 파일 수정 시각만 회의용 메타데이터로 기록한다. CI 기본 감사와 공개 export는 외부 폴더 없이도 동일하게 재현된다. 로컬 자료의 발견이나 과거 수량은 표시 승인·실구매·환불 완료·외부 전문가 참여를 증명하지 않으므로 자동 승격하지 않는다.
 
-## 2026-09-11 pulse 중복 배포 제거
+## 2026-09-11 pulse 중복 배포 경계 보강
 
-예약 `TF decision pulse`가 heartbeat 커밋 뒤 `deploy.yml`을 별도로 수동 호출하던 경로를 제거했다. `main` push가 일반 배포를 이미 시작하므로 중복 호출은 동일 브랜치 concurrency에서 한 실행을 취소할 수 있었고, 이번 수정은 `actions: write` 권한도 함께 제거해 heartbeat push 한 번과 배포 workflow 한 번의 흐름으로 정리했다. 이후 자동 pulse가 생성한 heartbeat 커밋 `ce100571`의 [후속 workflow-dispatch 34528725780](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34528725780)이 verify·Pages·라이브 smoke를 성공했고, 라이브 공개 검증은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, Smart Store only, 750 제거, provenance 일치를 확인했다.
+GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 실행하지 않는다는 점을 재현했다. 따라서 `TF decision pulse`는 `actions: write` 권한으로 `deploy.yml`을 한 번 명시적으로 dispatch하되, heartbeat 커밋에 `[skip ci]`를 붙여 push 기반 중복 실행을 차단하도록 정리했다. 기존 중복 실행은 concurrency에서 취소될 수 있었고, 새 경계는 heartbeat 1회와 배포 1회의 관계를 보존한다. 이 경로를 수정한 뒤 pulse 수동 재현과 배포 검증을 다시 실행한다.
