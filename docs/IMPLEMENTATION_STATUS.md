@@ -31,6 +31,8 @@
 
 커밋 `e0d9d00`의 GitHub Actions `34482666207`은 검증·Pages 배포·Worker 설정 점검·라이브 smoke를 모두 성공했다. Worker는 Cloudflare Secrets가 없어 실제 Worker 배포 단계는 건너뛰었고, 정적 공개 URL은 새 번들의 운영 문구와 공개 export를 확인했다. `pnpm run validate:live -- https://kradavid.github.io/cellpinda_GABA` 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 12, waitingTasks 3, smartStoreOnly true, removed750 true다.
 
+커밋 `b352daf`에 `pnpm run preflight:deploy`를 추가했다. 이 명령은 Wrangler 설정, production 산출물, 공개 export(가바1500 1개·연구 8건·운영 작업 12건)와 Cloudflare 필수 Secrets의 존재 여부를 비밀값 없이 점검한다. 현재 로컬 실행은 구조·산출물·공개 범위는 통과하고 `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `ADMIN_TOKEN`, `MEMBER_ORIGIN`이 없어 `WAITING`이다. 가짜 값으로 strict 성공 경로도 확인했으며, 실제 비밀값을 저장하거나 출력하지 않았다. 후속 문서 커밋의 Actions `34483548463`도 검증·Pages·라이브 smoke에 성공했다.
+
 
 ## 최신 업데이트 — 소비자 설득 흐름 및 실제 서버
 
