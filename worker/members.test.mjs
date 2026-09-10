@@ -49,7 +49,7 @@ function client(env){
   const cookies=new Map();
   let memberId=null;
   return {cookies,async call(path,method='GET',body,extra={}){
-    const headers={origin:env.MEMBER_ORIGIN,'content-type':'application/json',cookie:[...cookies].map(([key,value])=>`${key}=${value}`).join('; '),...(memberId && ['challenge','account'].includes(path)?{'x-member-id':memberId}:{}),...extra};
+    const headers={origin:env.MEMBER_ORIGIN,'content-type':'application/json',cookie:[...cookies].map(([key,value])=>`${key}=${value}`).join('; '),...(memberId && (['challenge','account','archives'].includes(path) || path.startsWith('challenge/') || path.startsWith('archives/'))?{'x-member-id':memberId}:{}),...extra};
     const req=new Request(`${env.MEMBER_ORIGIN}/api/member/${path}`,{method,headers,...(body===undefined?{}:{body:JSON.stringify(body)})});
     const response=await handleMembers(req,env,r=>r.json());
     for(const value of response.headers.getSetCookie()){const [key,raw]=value.split(';')[0].split('=');if(raw)cookies.set(key,raw);else cookies.delete(key);}
@@ -112,5 +112,33 @@ test('Origin, expiry, user verification and invalid signatures fail without crea
     options=(await c.call('login/options','POST',{})).data.options;
     assert.equal((await c.call('login/verify','POST',{response:valid.auth.login(options,env.MEMBER_ORIGIN,valid.userHandle)})).status,200);
     DB.db.prepare('UPDATE member_sessions SET expires_at=0').run();assert.equal((await c.call('status')).data.user,null);assert.equal(DB.db.prepare('SELECT COUNT(*) AS n FROM member_sessions').get().n,0);
+  }finally{DB.db.close();}
+});
+
+test('Archives are private, explicitly consented, idempotent and atomic against newer edits',async()=>{
+  const DB=new MockD1(),env={DB,MEMBER_ORIGIN:'https://members.example'},a=client(env),b=client(env);
+  try{
+    const alice=await signup(a,env);await signup(b,env);
+    const record=createChallenge('2026-09-10');record.days[0].note='Private archived note';
+    await a.call('challenge','PUT',{record,revision:0,consent:true,policyVersion:'1'});
+    assert.equal((await a.call('challenge/archive','POST',{revision:1})).data.code,'consent_required');
+    const saved=await a.call('challenge/archive','POST',{revision:1,consent:true,policyVersion:'1'});assert.equal(saved.status,200);assert.equal(saved.data.record,null);assert.equal(saved.data.revision,2);
+    const repeated=await a.call('challenge/archive','POST',{revision:1,consent:true,policyVersion:'1'});assert.equal(repeated.data.duplicate,true);assert.equal(repeated.data.archiveId,saved.data.archiveId);
+    const list=await a.call('archives');assert.equal(list.data.items.length,1);assert.equal(list.data.items[0].completedDays,0);assert.ok(!JSON.stringify(list.data).includes('Private archived note'));
+    assert.equal((await b.call('archives')).data.items.length,0);assert.equal((await b.call(`archives/${saved.data.archiveId}`)).status,404);
+    assert.equal((await b.call(`archives/${saved.data.archiveId}`,'DELETE')).status,404);
+    assert.equal((await b.call('archives','GET',undefined,{'x-member-id':alice.userId})).data.code,'account_changed');
+    assert.equal((await a.call(`archives/${saved.data.archiveId}`)).data.record.days[0].note,'Private archived note');
+    await a.call('challenge','PUT',{record,revision:2,consent:true,policyVersion:'1'});
+    const originalBatch=DB.batch.bind(DB);let raced=false;
+    DB.batch=async statements=>{
+      if(!raced && statements.some(s=>s.sql.startsWith('INSERT INTO member_record_archives'))){raced=true;DB.db.prepare('UPDATE member_records SET revision=revision+1 WHERE member_id=?').run(alice.userId);}
+      return originalBatch(statements);
+    };
+    assert.equal((await a.call('challenge/archive','POST',{revision:3,consent:true,policyVersion:'1'})).data.code,'revision_conflict');
+    assert.equal((await a.call('archives')).data.items.length,1);assert.equal((await a.call('challenge')).data.revision,4);assert.ok((await a.call('challenge')).data.record);
+    const archivedAgain=await a.call('challenge/archive','POST',{revision:4,consent:true,policyVersion:'1'});assert.equal(archivedAgain.status,200);
+    assert.equal((await a.call(`archives/${saved.data.archiveId}`,'DELETE')).status,200);assert.equal((await a.call('archives')).data.items.length,1);
+    await a.call('account','DELETE');assert.equal(DB.db.prepare('SELECT COUNT(*) AS n FROM member_record_archives WHERE member_id=?').get(alice.userId).n,0);
   }finally{DB.db.close();}
 });

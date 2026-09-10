@@ -7,6 +7,9 @@ import './MemberRecords.css';
 
 type MemberStatus = { enabled: boolean; user: { id: string } | null; recoverySupported: boolean };
 type SavedRecord = { record: ChallengeRecord | null; revision: number };
+type ArchiveSummary = { id: string; startDate: string; completedDays: number; totalDays: number; createdAt: string; sourceRevision: number };
+type ArchiveDetail = { id: string; record: ChallengeRecord; createdAt: string; sourceRevision: number };
+type ArchiveList = { items: ArchiveSummary[]; limit: number; truncated: boolean };
 class MemberError extends Error {
   status: number;
   code?: string;
@@ -38,6 +41,11 @@ export default function MemberRecords() {
   const [conflict, setConflict] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState<'record' | 'account' | null>(null);
   const [today, setToday] = useState(localCalendarDate);
+  const [archives, setArchives] = useState<ArchiveList>({ items: [], limit: 100, truncated: false });
+  const [archiveDetail, setArchiveDetail] = useState<ArchiveDetail | null>(null);
+  const [archiveConsent, setArchiveConsent] = useState(false);
+  const [confirmArchive, setConfirmArchive] = useState(false);
+  const [deleteArchiveId, setDeleteArchiveId] = useState<string | null>(null);
   const dirty = JSON.stringify(draft) !== JSON.stringify(saved.record);
 
   useEffect(() => {
@@ -54,11 +62,22 @@ export default function MemberRecords() {
     window.addEventListener('focus', refreshDate);
     return () => { cancelled = true; window.removeEventListener('focus', refreshDate); };
   }, []);
+  useEffect(() => {
+    let cancelled = false;
+    const memberId = status?.user?.id;
+    setArchives({ items: [], limit: 100, truncated: false }); setArchiveDetail(null);
+    setArchiveConsent(false); setConfirmArchive(false); setDeleteArchiveId(null);
+    if (memberId && recordReady) request<ArchiveList>('archives', {}, memberId).then(value => {
+      if (!cancelled) setArchives(value);
+    }).catch(value => { if (!cancelled) showError(value); });
+    return () => { cancelled = true; };
+  }, [status?.user?.id, recordReady]);
 
   function showError(value: unknown) {
     if (value instanceof MemberError && value.code === 'account_changed') {
       setRecordReady(false); setSaved({ record: null, revision: 0 }); setDraft(null); setRecordOwner(null);
       setStorageConsent(false); setConfirmDelete(null); setConflict(false);
+      setArchives({ items: [], limit: 100, truncated: false }); setArchiveDetail(null); setArchiveConsent(false); setConfirmArchive(false); setDeleteArchiveId(null);
       setStatus(current => current ? { ...current, user: null } : current);
       setError('다른 탭에서 로그인한 회원이 바뀌었어요. 이전 기록을 숨겼습니다. 사용할 회원의 패스키로 다시 로그인해 주세요. 저장하지 않은 화면 수정은 반영되지 않았어요.');
     } else if (value instanceof MemberError && value.code === 'revision_conflict') {
@@ -144,10 +163,43 @@ export default function MemberRecords() {
   }
   function exportSaved() {
     if (!saved.record) return;
-    const url = URL.createObjectURL(new Blob([JSON.stringify(saved.record, null, 2)], { type: 'application/json;charset=utf-8' }));
-    const link = document.createElement('a'); link.href = url; link.download = `cellpinda-member-${saved.record.startDate}.json`;
-    document.body.appendChild(link); link.click(); link.remove(); window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    downloadRecord(saved.record, `cellpinda-member-${saved.record.startDate}.json`);
     setMessage('서버에 저장된 기록을 내려받았어요. 아직 저장하지 않은 수정은 포함되지 않습니다.');
+  }
+  function downloadRecord(record: ChallengeRecord, filename: string) {
+    const url = URL.createObjectURL(new Blob([JSON.stringify(record, null, 2)], { type: 'application/json;charset=utf-8' }));
+    const link = document.createElement('a'); link.href = url; link.download = filename;
+    document.body.appendChild(link); link.click(); link.remove(); window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  async function refreshArchives() {
+    setArchives(await request<ArchiveList>('archives', {}, status?.user?.id));
+  }
+  function archiveCurrent() {
+    if (!saved.record || dirty || !archiveConsent || conflict) return;
+    void run(async () => {
+      const response = await request<SavedRecord & { duplicate: boolean }>('challenge/archive', { method: 'POST', body: JSON.stringify({ revision: saved.revision, consent: true, policyVersion: '1' }) }, status?.user?.id);
+      const value = normalizeSaved(response);
+      setSaved(value); setDraft(value.record); setConfirmArchive(false); setArchiveConsent(false);
+      await refreshArchives();
+      setMessage(response.duplicate ? '이미 보관한 요청이에요. 과거 이력과 최신 현재 기록을 다시 확인했습니다.' : '저장된 기록을 과거 이력에 보관했어요. 현재 기록은 비웠으며 새 7일을 준비할 수 있습니다.');
+    });
+  }
+  function readArchive(id: string) {
+    void run(async () => {
+      const value = await request<ArchiveDetail>(`archives/${encodeURIComponent(id)}`, {}, status?.user?.id);
+      const record = parseChallenge(value.record);
+      if (!record) throw new Error('Invalid archived record');
+      setArchiveDetail({ ...value, record }); setDeleteArchiveId(null);
+    });
+  }
+  function deleteArchive() {
+    if (!deleteArchiveId) return;
+    void run(async () => {
+      await request(`archives/${encodeURIComponent(deleteArchiveId)}`, { method: 'DELETE', body: '{}' }, status?.user?.id);
+      if (archiveDetail?.id === deleteArchiveId) setArchiveDetail(null);
+      setDeleteArchiveId(null); await refreshArchives();
+      setMessage('선택한 과거 기록을 삭제했어요. 현재 7일 기록과 내려받은 파일은 그대로입니다.');
+    });
   }
   function logout() {
     void run(async () => { await request('logout', { method: 'POST', body: '{}' }, status?.user?.id); setStatus(current => current ? { ...current, user: null } : null); setSaved({ record: null, revision: 0 }); setDraft(null); setRecordOwner(null); setRecordReady(false); setStorageConsent(false); setConfirmDelete(null); setConflict(false); setMessage('로그아웃했어요.'); });
@@ -171,6 +223,12 @@ export default function MemberRecords() {
         {dirty ? <p className="member-unsaved">아직 저장하지 않은 변경이 있어요. 다시 불러오면 이 화면의 변경은 사라집니다.{saved.record ? ' 저장하면 기존 회원 기록을 현재 내용으로 바꿉니다.' : ''}</p> : null}
         {draft ? <><p className="member-date-range">{draft.startDate} ~ {draft.days[6]!.date}</p><ol className="member-days">{draft.days.map((day, index) => <li key={day.date}><div><span className="member-day-date">{day.date}{day.date > today ? ' · 예정' : ''}</span><label><input type="checkbox" checked={day.completed} disabled={busy || conflict || day.date > today} onChange={event => editDay(index, { completed: event.target.checked })} /><span>{challengeHabits[index]}</span></label></div><label className="member-note">{index + 1}일차 메모<textarea aria-label={`${index + 1}일차 메모`} maxLength={1000} rows={2} value={day.note} disabled={busy || conflict || day.date > today} onChange={event => editDay(index, { note: event.target.value })} /></label></li>)}</ol><button type="button" className="button" disabled={busy || !storageConsent || !dirty || conflict} onClick={save}>동의한 기록 저장</button></> : <p className="note">회원 공간에 저장한 기록이 없습니다.</p>}
         <div className="member-actions"><button type="button" className="text-link" disabled={busy || !saved.record} onClick={exportSaved}><Download size={17} aria-hidden="true" /> 서버 기록 내려받기</button><button type="button" className="text-link" disabled={busy || !saved.record || conflict} onClick={() => setConfirmDelete('record')}><Trash2 size={17} aria-hidden="true" /> 서버 기록 삭제</button></div>
+        {saved.record ? <div className="member-archive-current"><h3>이번 기록을 보관하고 다음 7일로</h3><label className="member-consent"><input type="checkbox" checked={archiveConsent} onChange={event => setArchiveConsent(event.target.checked)} /><span>현재 서버에 저장된 실천과 메모를 과거 이력에 보관하는 데 동의합니다.<small>보관하면 현재 기록은 비워집니다. 과거 이력은 직접 삭제하기 전까지 회원 공간에 남습니다.</small></span></label>{dirty ? <p className="member-unsaved">아직 저장하지 않은 변경이 있어 보관할 수 없어요. 먼저 저장하거나, 서버 기록을 다시 불러와 화면 수정을 취소해 주세요.</p> : null}<button type="button" className="button outline" disabled={busy || dirty || conflict || !archiveConsent} onClick={() => setConfirmArchive(true)}>현재 기록 보관하기</button></div> : null}
+        {confirmArchive ? <section className="member-delete" aria-labelledby="member-archive-confirm"><h3 id="member-archive-confirm">저장된 기록을 과거 이력에 보관할까요?</h3><p>모든 날짜를 완료하지 않아도 보관할 수 있어요. 현재 기록을 비우고, 같은 내용을 과거 이력에서 읽을 수 있게 합니다.</p><div className="member-actions"><button type="button" className="button outline" disabled={busy} onClick={() => setConfirmArchive(false)}>보관 취소</button><button type="button" className="button" disabled={busy || dirty || conflict || !archiveConsent} onClick={archiveCurrent}>확인하고 보관</button></div></section> : null}
+      </section>
+      <section className="member-panel" aria-labelledby="member-archives-heading"><h2 id="member-archives-heading">지난 7일의 기록들</h2><p>날짜별 실천과 메모를 다시 읽어보세요. 실천 표시 수는 건강이나 제품 효과를 나타내는 점수가 아닙니다.</p><button type="button" className="text-link" disabled={busy} onClick={() => void run(refreshArchives)}>과거 기록 새로고침</button>{archives.truncated ? <p className="note">최근 {archives.limit}개 기록을 표시합니다. 더 오래된 기록은 이 목록에 표시되지 않습니다.</p> : null}{archives.items.length ? <ul className="member-archive-list">{archives.items.map(item => <li key={item.id}><div><strong>{item.startDate} 시작</strong><p className="note">실천 표시 {item.completedDays}일 · 7일 기록<br />보관일 {new Date(item.createdAt).toLocaleDateString('ko-KR')}</p></div><div className="member-actions"><button type="button" className="text-link" disabled={busy} onClick={() => readArchive(item.id)}>기록 읽기</button><button type="button" className="text-link" disabled={busy} onClick={() => setDeleteArchiveId(item.id)}>이 기록 삭제</button></div></li>)}</ul> : <p className="note">보관한 과거 기록이 없습니다.</p>}
+        {archiveDetail ? <article className="member-archive-detail"><h3>{archiveDetail.record.startDate}의 7일 기록</h3><p className="note">보관한 시점의 기록입니다. 현재 7일 기록을 바꾸지 않고 읽습니다.</p><button type="button" className="text-link" onClick={() => { downloadRecord(archiveDetail.record, `cellpinda-archive-${archiveDetail.record.startDate}.json`); setMessage('과거 기록 다운로드를 요청했어요. 개인 메모가 포함되어 있습니다.'); }}><Download size={17} aria-hidden="true" /> 이 기록 내려받기</button><ol>{archiveDetail.record.days.map((day, index) => <li key={day.date}><p><strong>{day.date}</strong> · {day.completed ? '실천 표시 있음' : '실천 표시 없음'}</p><p>{challengeHabits[index]}</p><p className="member-archive-note">{day.note || '남긴 메모가 없습니다.'}</p></li>)}</ol><button type="button" className="text-link" onClick={() => setArchiveDetail(null)}>과거 기록 닫기</button></article> : null}
+        {deleteArchiveId ? <section className="member-delete" aria-labelledby="member-archive-delete"><h3 id="member-archive-delete">선택한 과거 기록을 삭제할까요?</h3><p>{archives.items.find(item => item.id === deleteArchiveId)?.startDate}에 시작한 기록과 메모를 삭제합니다. 삭제 후 되돌릴 수 없습니다.</p><div className="member-actions"><button type="button" className="button outline" disabled={busy} onClick={() => setDeleteArchiveId(null)}>과거 기록 삭제 취소</button><button type="button" className="button" disabled={busy} onClick={deleteArchive}>선택한 과거 기록 삭제</button></div></section> : null}
       </section>
       <section className="member-account-tools"><p className="note">패스키 분실 시 복구 기능은 아직 없습니다. 계정 삭제는 최근에 로그인한 상태에서만 가능합니다.</p><button type="button" className="text-link" disabled={busy} onClick={() => authenticate('login')}>패스키로 다시 로그인</button><button type="button" className="text-link" disabled={busy} onClick={() => setConfirmDelete('account')}>회원 공간 삭제</button></section>
       {confirmDelete ? <section className="member-delete" aria-labelledby="member-delete-title"><h2 id="member-delete-title">{confirmDelete === 'account' ? '회원 공간과 저장 기록을 모두 지울까요?' : '서버에 저장한 7일 기록을 지울까요?'}</h2><p>삭제하면 되돌릴 수 없습니다. 브라우저 원본과 내려받은 파일은 별도로 남습니다.</p><div className="member-actions"><button type="button" className="button outline" disabled={busy} onClick={() => setConfirmDelete(null)}>취소하고 유지</button><button type="button" className="button" disabled={busy || conflict} onClick={remove}>확인하고 삭제</button></div></section> : null}

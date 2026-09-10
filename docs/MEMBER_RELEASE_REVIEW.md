@@ -61,3 +61,7 @@
 공개 https://cellpinda-rhythm.marshy-shear.workers.dev/api/member/status 는 enabled:false,user:null (실측200). /account 는 noindex,nofollow,noarchive. MEMBER_ORIGIN은 .dev.vars의 localhost:8788로만일치하고 임시공개주소와는불일치다. 코드업로드는회원운영오픈을의미하지않는다.
 
 테스트환경은 Chromium CDP가상CTAP2인증장치와 localhost:8788의 실제Worker/D1·SimpleWebAuthn14이다. 물리기기/영구도메인테스트,추가패스키·키분실복구,전체기록이력,운영개인정보정책확정은미완이다. 로컬QA에이전실패테스트의더미계정이남을수있으며실제회원지표로해석하지않는다.
+
+## 회원 경계 최종 갱신
+
+다중 탭 계정 전환 항목은 backend의 `x-member-id`와 `session.member_id` 비교 및 frontend의 `account_changed` 상태 초기화로 수정된 것을 정적으로 확인했다. backend 담당은 두 실제 서명 계정의 B 세션+A 기대 ID에 대한 4개 보호 경로 거부와 기록 무변경 테스트 통과를 보고했다. IMPLEMENTATION_STATUS 최신 기록에서 공개 임시주소 enabled:false 실측도 확인했다. 정식 origin·물리기기·복구/보유기간 운영 게이트는 계속 미완료이며 전체 플랫폼 완료 판정은 COMPLETION_AUDIT.md를 따른다.

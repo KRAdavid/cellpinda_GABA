@@ -9,6 +9,8 @@ export const MEMBER_SCHEMA=[
   'CREATE INDEX IF NOT EXISTS member_sessions_expiry ON member_sessions(expires_at)',
   'CREATE TABLE IF NOT EXISTS member_auth_challenges (token_hash TEXT PRIMARY KEY, kind TEXT NOT NULL, challenge TEXT NOT NULL, member_id TEXT, user_handle TEXT, expires_at INTEGER NOT NULL, origin TEXT NOT NULL)',
   'CREATE TABLE IF NOT EXISTS member_records (member_id TEXT PRIMARY KEY REFERENCES members(id) ON DELETE CASCADE, record TEXT, revision INTEGER NOT NULL, consent_at INTEGER, policy_version TEXT)',
+  'CREATE TABLE IF NOT EXISTS member_record_archives (id TEXT PRIMARY KEY, member_id TEXT NOT NULL REFERENCES members(id) ON DELETE CASCADE, record TEXT NOT NULL, source_revision INTEGER NOT NULL, created_at INTEGER NOT NULL, consent_at INTEGER NOT NULL, policy_version TEXT NOT NULL, UNIQUE(member_id,source_revision))',
+  'CREATE INDEX IF NOT EXISTS member_archives_owner_created ON member_record_archives(member_id,created_at)',
 ];
 type AuthChallenge={token_hash:string;kind:string;challenge:string;member_id:string|null;user_handle:string|null;expires_at:number;origin:string};
 type Session={token_hash:string;member_id:string;authenticated_at:number;expires_at:number};
@@ -102,7 +104,7 @@ export async function handleMembers(request:Request,env:Env,readJson:(request:Re
     }
 
     if(!session)throw fail('Sign in required',401,'authentication_required');
-    if((path==='/api/member/challenge' && ['GET','PUT','DELETE'].includes(request.method)) || (path==='/api/member/account' && request.method==='DELETE')) {
+    if((path==='/api/member/challenge' && ['GET','PUT','DELETE'].includes(request.method)) || path==='/api/member/challenge/archive' || path==='/api/member/archives' || path.startsWith('/api/member/archives/') || (path==='/api/member/account' && request.method==='DELETE')) {
       const expectedMember=request.headers.get('x-member-id');
       if(!expectedMember)throw fail('Current member context is required',400,'member_context_required');
       if(expectedMember!==session.member_id)throw fail('The signed-in account changed; reload before continuing',409,'account_changed');
@@ -114,8 +116,41 @@ export async function handleMembers(request:Request,env:Env,readJson:(request:Re
     if(path==='/api/member/account' && request.method==='DELETE') {
       if(now-session.authenticated_at>300000)throw fail('Sign in again before deleting your account',403,'reauthentication_required');
       const pending=readCookie(request,cookieName(secure,'challenge'));
-      await db.batch(['member_records','member_sessions','member_credentials'].map(table=>db.prepare(`DELETE FROM ${table} WHERE member_id=?`).bind(session.member_id)).concat([db.prepare('DELETE FROM member_auth_challenges WHERE member_id=? OR token_hash=?').bind(session.member_id,pending?await digest(pending):''),db.prepare('DELETE FROM members WHERE id=?').bind(session.member_id)]));
+      await db.batch(['member_record_archives','member_records','member_sessions','member_credentials'].map(table=>db.prepare(`DELETE FROM ${table} WHERE member_id=?`).bind(session.member_id)).concat([db.prepare('DELETE FROM member_auth_challenges WHERE member_id=? OR token_hash=?').bind(session.member_id,pending?await digest(pending):''),db.prepare('DELETE FROM members WHERE id=?').bind(session.member_id)]));
       return json(200,{ok:true},[cookie(secure,'session','',0),cookie(secure,'challenge','',0)]);
+    }
+    if(path==='/api/member/challenge/archive' && request.method==='POST') {
+      const value=await readJson(request);if(!object(value) || !Number.isInteger(value.revision) || Number(value.revision)<1)throw fail('Revision required');
+      keys(value,['revision','consent','policyVersion']);consent(value);
+      const sourceRevision=Number(value.revision);
+      const duplicate=async()=> {
+        const archived=await db.prepare('SELECT id FROM member_record_archives WHERE member_id=? AND source_revision=?').bind(session.member_id,sourceRevision).first<{id:string}>();
+        if(!archived)return null;
+        const current=await db.prepare('SELECT record,revision FROM member_records WHERE member_id=?').bind(session.member_id).first<RecordRow>();
+        return json(200,{archiveId:archived.id,record:current?.record?JSON.parse(current.record):null,revision:current?.revision ?? 0,duplicate:true});
+      };
+      const prior=await duplicate();if(prior)return prior;
+      const id=crypto.randomUUID();
+      const result=await db.batch([
+        db.prepare('INSERT INTO member_record_archives(id,member_id,record,source_revision,created_at,consent_at,policy_version) SELECT ?,member_id,record,revision,?,?,? FROM member_records WHERE member_id=? AND revision=? AND record IS NOT NULL').bind(id,now,now,'1',session.member_id,sourceRevision),
+        db.prepare('UPDATE member_records SET record=NULL,revision=revision+1,consent_at=NULL,policy_version=NULL WHERE member_id=? AND revision=? AND EXISTS(SELECT 1 FROM member_record_archives WHERE id=?)').bind(session.member_id,sourceRevision,id),
+      ]);
+      if(result[0].meta.changes!==1 || result[1].meta.changes!==1){const repeated=await duplicate();if(repeated)return repeated;throw fail('Record changed or empty; reload before archiving',409,'revision_conflict');}
+      return json(200,{archiveId:id,record:null,revision:sourceRevision+1,duplicate:false});
+    }
+    if(path==='/api/member/archives' && request.method==='GET') {
+      const result=await db.prepare("SELECT id,source_revision,created_at,json_extract(record,'$.startDate') AS start_date,(SELECT COUNT(*) FROM json_each(member_record_archives.record,'$.days') WHERE json_extract(value,'$.completed')=1) AS completed_days FROM member_record_archives WHERE member_id=? ORDER BY created_at DESC,rowid DESC LIMIT 101").bind(session.member_id).all<{id:string;source_revision:number;created_at:number;start_date:string;completed_days:number}>();
+      return json(200,{items:result.results.slice(0,100).map(row=>({id:row.id,startDate:row.start_date,completedDays:row.completed_days,totalDays:7,createdAt:new Date(row.created_at).toISOString(),sourceRevision:row.source_revision})),limit:100,truncated:result.results.length>100});
+    }
+    const archiveMatch=path.match(/^\/api\/member\/archives\/([a-f0-9-]{36})$/);
+    if(archiveMatch && ['GET','DELETE'].includes(request.method)) {
+      if(request.method==='DELETE') {
+        const result=await db.prepare('DELETE FROM member_record_archives WHERE id=? AND member_id=?').bind(archiveMatch[1],session.member_id).run();
+        if(result.meta.changes!==1)throw fail('Archive not found',404,'not_found');return json(200,{ok:true});
+      }
+      const row=await db.prepare('SELECT id,record,source_revision,created_at FROM member_record_archives WHERE id=? AND member_id=?').bind(archiveMatch[1],session.member_id).first<{id:string;record:string;source_revision:number;created_at:number}>();
+      if(!row)throw fail('Archive not found',404,'not_found');
+      return json(200,{id:row.id,record:JSON.parse(row.record),createdAt:new Date(row.created_at).toISOString(),sourceRevision:row.source_revision});
     }
     if(path==='/api/member/challenge') {
       const current=await db.prepare('SELECT record,revision FROM member_records WHERE member_id=?').bind(session.member_id).first<RecordRow>();
