@@ -29,6 +29,23 @@ for (const task of graph.tasks) {
   tasks.set(task.id, task);
 }
 
+// Keep the cross-functional review roles requested for this goal. These are
+// role labels and decision responsibilities, not claims that credentialed
+// external experts have been engaged.
+const roleCorpus = [
+  ...graph.tasks.flatMap(task => [task.lead, task.verifier]),
+  ...contract.workstreams.flatMap(stream => [stream.lead, stream.verifier]),
+].join(' · ');
+const requiredRoleGroups = [
+  {id: 'consumer', label: '마케팅·소비자심리', pattern: /마케팅|소비자심리/},
+  {id: 'evidence', label: '연구·근거', pattern: /연구|근거/},
+  {id: 'product-review', label: '제품·표시', pattern: /제품|표시|규제/},
+  {id: 'story-ux', label: '스토리·UX·프런트', pattern: /스토리|UX|프런트/},
+  {id: 'commerce-data', label: '데이터·판매처', pattern: /데이터|판매처|커머스/},
+  {id: 'quality-audit', label: 'QA·감사', pattern: /QA|감사/},
+];
+for (const role of requiredRoleGroups) if (!role.pattern.test(roleCorpus)) fail(`required TF role group is missing: ${role.label}`);
+
 const pulsePath = fileURLToPath(new URL('./tf-pulse.mjs', import.meta.url));
 const child = spawnSync(process.execPath, [pulsePath, '--json'], {encoding: 'utf8'});
 if (child.status !== 0) fail(child.stderr.trim() || 'tf-pulse command failed');
@@ -81,6 +98,7 @@ console.log(JSON.stringify({
   goalId: contract.goalId,
   activeTasks: active.length,
   decisions: pulse.decisions.length,
+  roleCoverage: requiredRoleGroups.map(({id, label}) => ({id, label, status: 'present'})),
   counts: pulse.counts,
   teaserGate: pulse.teaserGate,
   status: 'ok',
