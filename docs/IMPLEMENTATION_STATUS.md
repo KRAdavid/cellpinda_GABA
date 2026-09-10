@@ -20,7 +20,11 @@
 
 커밋 `c5fc87c`에서 샌드박스 시뮬레이션만으로 운영 승인을 추천하지 않도록 보고서 판정을 보강했다. 모든 작업이 `sandbox_simulation` 검증으로 끝나면 추천은 `revise`로 남고, 운영 화면은 `샌드박스 완료 · 실제 검증 필요`를 표시한다. 로컬 `pnpm test` 60개·타입검사·production build가 통과했으며, 최신 [GitHub Actions 34499389071](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34499389071)의 verify·Pages·라이브 smoke가 성공했다.
 
-최신 공개 URL 재검증 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 티저 승인 게이트 B4가 업무 그래프와 공개 운영 큐에 연결되어 공개 영상 입력 전까지 `WAITING`으로 표시된다. 390px·1440px 네 화면의 가로 넘침·콘솔 오류·400 이상 응답은 없었다. 제품 자료 감사는 7개 파일(완제품 후보 5개)을 찾았고, 주문 자료 감사는 1,086개 파일을 읽어 1500 후보 114행·121개 수량을 집계했지만 상태·취소·환불 필드와 실판매자 응답이 없어 E1은 계속 `WAITING`이다.
+최신 공개 URL 재검증 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 티저 승인 게이트 B4가 업무 그래프와 공개 운영 큐에 연결되어 공개 미디어의 자막·권리·표시사항·CTA 입력 전까지 `WAITING`으로 표시된다. 390px·1440px 네 화면의 가로 넘침·콘솔 오류·400 이상 응답은 없었다. 제품 자료 감사는 7개 파일(완제품 후보 5개)을 찾았고, 주문 자료 감사는 1,086개 파일을 읽어 1500 후보 114행·121개 수량을 집계했지만 상태·취소·환불 필드와 실판매자 응답이 없어 E1은 계속 `WAITING`이다.
+
+## 2026-09-11 티저 URL 재접근 검토
+
+제공된 티저 URL을 비로그인으로 재요청한 결과 `200 OK`와 `발효가바 — 멈추지 않는 밤` 제목이 반환됐다. 페이지는 MP4/HLS가 아니라 `84 SEC · CINEMATIC DOCUMENTARY` 인터랙션을 제공하는 HTML/CSS/JS 애니메이션이며, 장면 PNG 5종도 `200 image/png`으로 로드된다. 전체 자막·대본 파일, 음원·이미지 권리, 표시사항·CTA 승인 증거는 확인되지 않았으므로 기술 접근성만 갱신하고 B4를 승인하지 않았다. 공개 화면·광고·SNS에 연결할 주소로 승격하려면 해당 입력과 독립 검토자 승인이 필요하다.
 
 ## 2026-09-11 영구 저장소 후기 목적지 자동 동기화
 

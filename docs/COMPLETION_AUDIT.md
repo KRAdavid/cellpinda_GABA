@@ -185,3 +185,7 @@ pulse 패킷 구현 커밋 `ca612c2`의 [GitHub Actions 34514541733](https://git
 공개 export와 라이브 smoke에 pulse 입력 게이트·회의 안건의 허용 키를 고정하고, 각 상태 집계가 현재 canonical 업무 그래프 전체를 덮는지 검증했다. 내부 `evidence`·`dissent`·경로·토큰이 공개 패킷으로 유입되면 배포 검증이 실패한다. 커밋 `c52807b`의 [GitHub Actions 34515606289](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34515606289)은 새 스키마 검사까지 포함해 Goal Contract·공개 export·Pages·라이브 smoke를 성공시켰고, 라이브 Playwright 1440px·390px 검증도 같은 허용 키와 상태 집계를 확인했다.
 
 같은 라이브 검증에서 소비자 공개 화면 `?view=products#products`의 1440px·390px 레이아웃도 확인했다. 두 화면 모두 스마트스토어 링크 4개, 연구·후기 흐름, 750 미노출, 가로 넘침 0, 콘솔·페이지 오류 0을 기록했다. 소비자 언어 요약은 연구 결과와 완제품 적용 범위를 분리한 상태로 유지된다.
+
+## 2026-09-11 티저 공개 접근성 재검토
+
+제공된 티저 URL을 비로그인으로 다시 요청해 `200 OK`, 제목 `발효가바 — 멈추지 않는 밤`, 84초 재생 인터랙션, 장면 PNG 5종의 `200 image/png` 응답을 확인했다. 페이지는 파일 영상이 아닌 HTML/CSS/JS 브라우저 애니메이션으로 분류되며, 전체 자막·대본·권리·표시사항·CTA 승인 증거는 아직 없다. 이에 따라 `data/teaser-manifest.json`의 `HOLD`와 B4 `WAITING`을 유지하고, 공개 CTA·광고·SNS에 자동 연결하지 않았다. 상세 결과는 [TEASER_VIDEO_EXPOSURE_REVIEW.md](TEASER_VIDEO_EXPOSURE_REVIEW.md)에 기록했다.
