@@ -22,13 +22,16 @@ if (result.status !== 0) {
   }
   mkdirSync(dirname(destination), {recursive: true});
   writeFileSync(destination, `${JSON.stringify(report, null, 2)}\n`);
-  const localChecks = report.checks.filter(item => item.id.startsWith('local-'));
+  const localChecks = Array.isArray(report.checks) ? report.checks.filter(item => item.id.startsWith('local-')) : [];
+  const localAuditFailed = localChecks.some(item => item.status === 'INVALID') || report.overallStatus === 'IN_PROGRESS_WITH_ERRORS';
   console.log(JSON.stringify({
     destination,
     goalId: report.goalId,
     overallStatus: report.overallStatus,
     localChecks: localChecks.map(item => ({id: item.id, status: item.status})),
+    auditFailed: localAuditFailed,
     privacyBoundary: 'private_tmp_only',
     publicExportChanged: false,
   }));
+  if (localAuditFailed) process.exitCode = 1;
 }

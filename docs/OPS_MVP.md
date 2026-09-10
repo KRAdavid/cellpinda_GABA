@@ -22,7 +22,7 @@ canonical 업무 그래프의 현재 상태는 `pnpm run tf:pulse`로 다시 읽
 
 JSON 감사 출력의 `pulseHealth`는 저장된 heartbeat 시각·상태 지문·경과 분을 포함한다. 8시간을 넘기면 `stale`로 표시해, 운영 보드의 `업데이트 지연`과 같은 기준으로 자동 주기의 지연을 확인한다.
 
-로컬 자료까지 같은 회의 패킷에 연결할 때는 지정 폴더가 있는 PC에서 `pnpm run audit:goal:local`을 실행한다. JSON 패킷을 자동 저장하려면 `pnpm run audit:goal:local:json`을 사용한다. 이 명령은 완제품 자료 스캔과 주문 파일 구조 감사를 한 번에 실행해 비공개 `tmp/local-goal-audit.json`에 기록한다. `local-material-inputs`와 `local-order-inputs`의 상태와 가장 최근 파일 수정 시각을 회의에서 바로 확인할 수 있다. 완제품 후보가 발견되어도 B2 독립 검증을 자동 승인하지 않고, 역사 주문의 1500 수량이 있어도 상태·취소·환불·판매자 계정이 확인되지 않으면 E1을 `WAITING`으로 유지한다. 로컬 파일명·경로·개인 행은 공개 export와 CI artifact에 넣지 않는다.
+로컬 자료까지 같은 회의 패킷에 연결할 때는 지정 폴더가 있는 PC에서 `pnpm run audit:goal:local`을 실행한다. JSON 패킷을 자동 저장하려면 `pnpm run audit:goal:local:json`을 사용한다. 이 명령은 완제품 자료 스캔과 주문 파일 구조 감사를 한 번에 실행해 비공개 `tmp/local-goal-audit.json`에 기록하며, 스캔 자체가 실패하면 종료 코드 1로 알려 준다. `local-material-inputs`와 `local-order-inputs`의 상태와 가장 최근 파일 수정 시각을 회의에서 바로 확인할 수 있다. 완제품 후보가 발견되어도 B2 독립 검증을 자동 승인하지 않고, 역사 주문의 1500 수량이 있어도 상태·취소·환불·판매자 계정이 확인되지 않으면 E1을 `WAITING`으로 유지한다. 로컬 파일명·경로·개인 행은 공개 export와 CI artifact에 넣지 않는다.
 
 배포 준비도도 같은 감사에 포함된다. Worker 운영 게이트가 그래프에서 실수로 `DONE`이 되더라도 Cloudflare 필수 Secrets와 산출물이 준비되지 않으면 감사가 오류로 판정하므로, 정적 Pages 공개와 영구 Worker 운영을 서로 바꾸어 기록할 수 없다.
 
