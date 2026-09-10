@@ -37,8 +37,12 @@ scanKeys(operationsQueue);
 if (operationsQueue.goalId !== 'GL-2026-CELL-GABA-001' || operationsQueue.status !== 'ACTIVE') fail('operations queue is not tied to the active Goal Contract');
 if (!Array.isArray(operationsQueue.workstreams) || operationsQueue.workstreams.length !== 5) fail('operations queue must expose five active workstreams');
 if (!Array.isArray(operationsQueue.tasks) || operationsQueue.tasks.length !== 12) fail('operations queue must expose the current task graph');
+const queueIds = new Set();
 for (const task of operationsQueue.tasks) {
+  if (queueIds.has(task.id)) fail(`operations queue contains duplicate task ${task.id}`);
+  queueIds.add(task.id);
   if (!task.id || !task.stream || !task.title || !task.state || !task.lead || !task.verifier || !Array.isArray(task.dependencies)) fail(`operations queue task ${task.id ?? '(unknown)'} is incomplete`);
+  if (!['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state)) fail(`operations queue task ${task.id} has an unsupported state`);
 }
 
 const claimsById = new Map(content.claims.map(claim => [claim.id, claim]));

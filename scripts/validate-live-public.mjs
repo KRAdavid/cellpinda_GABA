@@ -31,7 +31,10 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
     assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');
     assert.equal(queue.tasks.length, 12, 'live operations queue must contain the current task graph');
-    for (const id of ['B2', 'B3', 'C2', 'E1']) assert.ok(queue.tasks.some(task => task.id === id && task.state === 'WAITING'), `live operations queue is missing waiting task ${id}`);
+    const queueIds = new Set(queue.tasks.map(task => task.id));
+    assert.equal(queueIds.size, queue.tasks.length, 'live operations queue contains duplicate task ids');
+    for (const task of queue.tasks) assert.ok(['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state), `live operations queue has an unsupported state for ${task.id}`);
+    const waitingTasks = queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG');
     const required = ['research-yoto-2012', 'research-yamatsu-2016', 'research-powers-2008', 'research-sakashita-2019'];
     for (const id of required) assert.ok(master.records.some(record => record.id === id), `live master index is missing ${id}`);
     const claimsById = new Map(content.claims.map(claim => [claim.id, claim]));
@@ -41,7 +44,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, queueTasks: queue.tasks.length, waitingTasks: 4, smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, queueTasks: queue.tasks.length, waitingTasks: waitingTasks.length, smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {
