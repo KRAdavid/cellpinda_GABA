@@ -3,6 +3,7 @@ import { startAuthentication, startRegistration } from '@simplewebauthn/browser'
 import { ArrowLeft, Download, KeyRound, LogOut, Trash2 } from 'lucide-react';
 import { CHALLENGE_STORAGE_KEY, challengeHabits, createChallenge, localCalendarDate, parseChallenge, updateChallengeDay } from '../domain/challenge';
 import type { ChallengeRecord } from '../domain/challenge';
+import {apiEndpoint} from '../api-origin';
 import './MemberRecords.css';
 
 type MemberStatus = { enabled: boolean; user: { id: string } | null; recoverySupported: boolean };
@@ -16,7 +17,9 @@ class MemberError extends Error {
   constructor(message: string, status: number, code?: string) { super(message); this.status = status; this.code = code; }
 }
 async function request<T>(path: string, options: RequestInit = {}, memberId?: string): Promise<T> {
-  const response = await fetch(`/api/member/${path}`, { ...options, credentials: 'same-origin', headers: { 'Content-Type': 'application/json', ...(memberId ? { 'X-Member-ID': memberId } : {}) } });
+  const endpoint = apiEndpoint(`/api/member/${path}`);
+  if (!endpoint) throw new MemberError('회원 API를 사용할 수 없는 정적 호스트입니다.', 503, 'api_unavailable');
+  const response = await fetch(endpoint, { ...options, credentials: 'same-origin', headers: { 'Content-Type': 'application/json', ...(memberId ? { 'X-Member-ID': memberId } : {}) } });
   const body = await response.json();
   if (!response.ok) throw new MemberError(body.error || '요청을 처리하지 못했어요.', response.status, body.code);
   return body;
@@ -74,7 +77,10 @@ export default function MemberRecords() {
   }, [status?.user?.id, recordReady]);
 
   function showError(value: unknown) {
-    if (value instanceof MemberError && value.code === 'account_changed') {
+    if (value instanceof MemberError && value.code === 'api_unavailable') {
+      setStatus({ enabled: false, user: null, recoverySupported: false });
+      setRecordReady(false); setError('');
+    } else if (value instanceof MemberError && value.code === 'account_changed') {
       setRecordReady(false); setSaved({ record: null, revision: 0 }); setDraft(null); setRecordOwner(null);
       setStorageConsent(false); setConfirmDelete(null); setConflict(false);
       setArchives({ items: [], limit: 100, truncated: false }); setArchiveDetail(null); setArchiveConsent(false); setConfirmArchive(false); setDeleteArchiveId(null);

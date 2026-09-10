@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ReviewEditor from './ReviewEditor';
 import type { QuoteReviewItem, ReviewDraft, ReviewConfirmation } from './ReviewEditor';
+import {apiEndpoint} from '../api-origin';
 
 type Item = { id: string; topic?: string; name?: string; publicText?: string; status: string; revision: number; kind?: string; reviewType?: string; review?: ReviewDraft; reviewConfirmation?: ReviewConfirmation; sources?: { title: string; url: string | null; page?: number | null; locator?: string }[]; sourceTitle?: string; sourceUrl?: string | null; metadata?: Record<string, string | string[] | number | null>; limitations?: string[]; holdReason?: string | null; reviewedBy?: string; reviewedAt?: string };
 type Funnel = { id: string; from: string; to: string; denominator: number; numerator: number; rate: number | null; denominatorDefinition: string; numeratorDefinition: string };
@@ -23,7 +24,9 @@ export default function Admin() {
  }
  async function reviewSaved(item: QuoteReviewItem) { setSelected(item); setCreatingReview(false); setReviewDirty(false); setReviewSelection(value => value + 1); await load(); }
  async function api(path: string, options: RequestInit = {}) {
-  const response = await fetch('/api/admin/' + path, { ...options, headers: { 'Content-Type': 'application/json', 'x-admin-token': token } });
+  const endpoint = apiEndpoint('/api/admin/' + path);
+  if (!endpoint) throw new Error('콘텐츠 검토실은 Worker 운영 배포에서 사용할 수 있습니다.');
+  const response = await fetch(endpoint, { ...options, headers: { 'Content-Type': 'application/json', 'x-admin-token': token } });
   const result = await response.json();
   if (!response.ok) throw Object.assign(new Error(result.error || '요청을 처리하지 못했습니다.'), { status: response.status });
   return result;
