@@ -23,6 +23,8 @@ export type Claim = {
   id: string;
   topic: string;
   publicText: string | null;
+  reviewedAt?: string;
+  evidenceHash?: string;
   status?: string;
   sources: { title: string; url: string | null; locator?: string | null }[];
   limitations?: string[];
@@ -121,6 +123,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       const limitations = [...new Set([...(metadata.limitations ?? []), ...(claim.limitations ?? [])])];
       return <article id={claim.id} className="research-library-card" key={claim.id}>
         <p className="research-library-kind">{metadata.studyType || claim.topic}</p>
+        {(claim.reviewedAt || claim.evidenceHash) ? <p className="research-library-provenance">{claim.reviewedAt ? `검토일 ${claim.reviewedAt}` : null}{claim.reviewedAt && claim.evidenceHash ? ' · ' : null}{claim.evidenceHash ? <><span>근거 식별자 </span><code title={claim.evidenceHash}>{claim.evidenceHash.slice(0, 12)}…</code></> : null}</p> : null}
         <h3>{metadata.question || claim.topic}</h3>
         <p className="research-library-summary">{claim.publicText}</p>
         {metadata.consumerSummary ? <p className="research-library-consumer-summary"><strong>쉽게 말하면</strong>{metadata.consumerSummary}</p> : null}

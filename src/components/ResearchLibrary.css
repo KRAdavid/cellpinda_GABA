@@ -1,6 +1,8 @@
 .research-library-card { border-top: 1px solid #cad3ce; padding: 2rem 0; }
 .research-library-card h3 { font-size: clamp(1.25rem, 2.3vw, 1.8rem); line-height: 1.4; margin: .65rem 0 1rem; }
 .research-library-kind { font-size: .8rem; letter-spacing: .06em; color: #486356; }
+.research-library-provenance { margin: .45rem 0 0; color: #64756a; font-size: .75rem; letter-spacing: .02em; }
+.research-library-provenance code { font-size: .72rem; color: #315f48; }
 .research-library-summary { max-width: 76ch; line-height: 1.8; }
 .research-library-consumer-summary,
 .research-library-hopeful { max-width: 76ch; line-height: 1.8; margin: 1rem 0 0; }
