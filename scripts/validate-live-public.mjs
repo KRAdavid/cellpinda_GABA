@@ -5,6 +5,12 @@ const base = (process.env.PUBLIC_SITE_URL || cliBase).replace(/\/$/, '');
 if (!/^https:\/\//.test(base)) throw new Error('PUBLIC_SITE_URL must be an HTTPS URL');
 
 const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+const isSmartStore = value => {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && url.hostname === 'smartstore.naver.com' && ['/cellpinda', '/cellpinda/'].includes(url.pathname);
+  } catch { return false; }
+};
 const request = async path => {
   const separator = path.includes('?') ? '&' : '?';
   const response = await fetch(`${base}${path}${separator}release-smoke=1`);
@@ -29,6 +35,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
     assert.equal(content.products[0].officialUrl, 'https://smartstore.naver.com/cellpinda', 'live product must point to Smart Store');
     assert.ok(!/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(JSON.stringify(content)), 'live public content contains a legacy official-mall destination');
+    for (const claim of content.claims.filter(item => ['product-1500', 'fermentation-listed'].includes(item.id))) assert.ok(claim.sources?.every(source => isSmartStore(source.url)), `live product claim ${claim.id} must use the Smart Store source only`);
     assert.ok(!JSON.stringify(content.products).includes('750'), 'live export contains removed 750 product');
     assert.equal(master.records.length, 8, 'live master index must contain eight research records');
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
