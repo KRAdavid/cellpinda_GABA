@@ -148,13 +148,14 @@ const publicPulse={
 const pulseTarget=resolve(root,'public/data/tf-pulse.json');
 writeFileSync(pulseTarget,JSON.stringify(publicPulse,null,2)+'\n');
 const taskCounts=Object.fromEntries(taskGraph.stateMachine.map(state=>[state,taskGraph.tasks.filter(task=>task.state===state).length]));
+const hasUnfinishedTasks=taskGraph.tasks.some(task=>!['DONE','CANCELLED'].includes(task.state));
 const publicAudit={
   schemaVersion:1,
   mode:'public_goal_audit',
   goalId:goalContract.goalId,
   title:goalContract.title,
   status:goalContract.status,
-  overallStatus:taskGraph.tasks.some(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state)) || teaser.status!=='APPROVED' ? 'IN_PROGRESS_WITH_GATES' : 'COMPLETE',
+  overallStatus:hasUnfinishedTasks || teaser.status!=='APPROVED' ? 'IN_PROGRESS_WITH_GATES' : 'COMPLETE',
   checkedAt:goalContract.checkedAt,
   roleCoverage:publicPulse.roleCoverage,
   taskCounts,
