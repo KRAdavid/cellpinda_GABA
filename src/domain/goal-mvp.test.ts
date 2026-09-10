@@ -11,8 +11,17 @@ test('one sentence goal generates a contract, TF and dependency graph', () => {
   assert.ok(plan.contract.team.some(member => member.verifier && member.role === '재무·QA'));
   assert.equal(plan.contract.goalType, 'PUBLISH_RESEARCH_INDEX');
   assert.equal(plan.contract.readiness, 'READY');
+  assert.ok(plan.contract.focusAreas.includes('공개 근거 인덱스'));
   assert.deepEqual(plan.tasks[0].state, 'READY');
   assert.deepEqual(taskGraphEdges(plan.tasks).slice(0, 2), [{from: 'G1', to: 'E1'}, {from: 'E1', to: 'E2'}]);
+});
+
+test('goal focus areas follow the entered sentence', () => {
+  const plan = generateMvpPlan('운동 후 근육발달과 회복을 설명하는 GABA 제품 연구 인덱스');
+  assert.ok(plan.contract.focusAreas.includes('근육·운동'));
+  assert.ok(plan.contract.focusAreas.includes('제품·커머스'));
+  assert.ok(plan.contract.focusAreas.includes('공개 근거 인덱스'));
+  assert.notEqual(plan.contract.goalId, generateMvpPlan('수면과 스트레스 연구를 설명하는 GABA 인덱스').contract.goalId);
 });
 
 test('sandbox execution verifies a task and unlocks its dependent task', () => {

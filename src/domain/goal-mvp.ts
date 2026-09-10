@@ -27,6 +27,7 @@ export type MvpGoalContract = {
   goalId: string;
   title: string;
   objective: string;
+  focusAreas: string[];
   status: 'ACTIVE';
   owner: string;
   goalType: 'PUBLISH_RESEARCH_INDEX';
@@ -81,7 +82,7 @@ export type MvpApprovalReport = {
   generatedAt: string;
   goalId: string;
   goalTitle: string;
-  contractSnapshot: Pick<MvpGoalContract, 'goalId' | 'title' | 'successMetrics' | 'constraints' | 'stopConditions'>;
+  contractSnapshot: Pick<MvpGoalContract, 'goalId' | 'title' | 'focusAreas' | 'successMetrics' | 'constraints' | 'stopConditions'>;
   recommendation: 'approve' | 'revise' | 'blocked';
   completedTasks: string[];
   pendingTasks: string[];
@@ -136,6 +137,18 @@ const decisionProtocol: MvpDecisionProtocol = {
 
 function normalizeGoal(input: string): string {
   return input.normalize('NFKC').replace(/\s+/g, ' ').trim().slice(0, 160);
+}
+
+function inferFocusAreas(title: string): string[] {
+  const source = title.toLocaleLowerCase('ko-KR');
+  const focus: string[] = [];
+  if (/스트레스|긴장|휴식/.test(source)) focus.push('스트레스·휴식');
+  if (/수면|잠|숙면/.test(source)) focus.push('수면');
+  if (/성장호르몬|성장/.test(source)) focus.push('성장호르몬');
+  if (/근육|운동|회복/.test(source)) focus.push('근육·운동');
+  if (/제품|구매|판매|스마트스토어|후기/.test(source)) focus.push('제품·커머스');
+  if (/논문|연구|근거|인덱스|마스터/.test(source)) focus.push('공개 근거 인덱스');
+  return focus.length ? focus : ['GABA 공개 인덱스'];
 }
 
 function hashGoal(value: string): string {
@@ -199,11 +212,13 @@ export function generateMvpPlan(input: string): MvpPlan {
   const title = normalizeGoal(input);
   if (title.length < 8) throw new Error('목표를 8자 이상 한 문장으로 입력해 주세요.');
   const goalId = `GMVP-GABA-${hashGoal(title)}`;
+  const focusAreas = inferFocusAreas(title);
   const contract: MvpGoalContract = {
     schemaVersion: 1,
     goalId,
     title,
     objective: `${title}를 승인된 공개 출처와 검토 이력으로 관리하고, 소비자가 이해할 수 있는 공개 인덱스로 배포한다.`,
+    focusAreas,
     status: 'ACTIVE',
     owner: '대표·TF 리드',
     goalType: 'PUBLISH_RESEARCH_INDEX',
@@ -312,6 +327,7 @@ export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonl
     contractSnapshot: {
       goalId: contract.goalId,
       title: contract.title,
+      focusAreas: [...contract.focusAreas],
       successMetrics: [...contract.successMetrics],
       constraints: [...contract.constraints],
       stopConditions: [...contract.stopConditions],

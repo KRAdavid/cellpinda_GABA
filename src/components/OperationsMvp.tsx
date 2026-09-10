@@ -162,7 +162,7 @@ export default function OperationsMvp() {
     {plan ? <>
       <section className="ops-mvp-contract wrap" aria-labelledby="contract-heading">
         <div className="ops-mvp-section-heading"><div><p className="chapter">01 / Goal Contract</p><h2 id="contract-heading">목표를 실행 계약으로.</h2></div><div className="ops-mvp-contract-id"><span>{plan.contract.goalId}</span><strong>ACTIVE</strong></div></div>
-        <div className="ops-mvp-contract-grid"><article><span className="ops-mvp-eyebrow">목표</span><h3>{plan.contract.title}</h3><p>{plan.contract.objective}</p></article><article><span className="ops-mvp-eyebrow">성공 기준</span><ul>{plan.contract.successMetrics.map(item => <li key={item}>{item}</li>)}</ul></article><article><span className="ops-mvp-eyebrow">멈춤 조건</span><ul>{plan.contract.stopConditions.map(item => <li key={item}>{item}</li>)}</ul></article></div>
+        <div className="ops-mvp-contract-grid"><article><span className="ops-mvp-eyebrow">목표</span><h3>{plan.contract.title}</h3><p>{plan.contract.objective}</p><small>자동 선택된 초점 · {plan.contract.focusAreas.join(' · ')}</small></article><article><span className="ops-mvp-eyebrow">성공 기준</span><ul>{plan.contract.successMetrics.map(item => <li key={item}>{item}</li>)}</ul></article><article><span className="ops-mvp-eyebrow">멈춤 조건</span><ul>{plan.contract.stopConditions.map(item => <li key={item}>{item}</li>)}</ul></article></div>
       </section>
       <section className="ops-mvp-tf wrap" aria-labelledby="tf-heading">
         <div className="ops-mvp-section-heading"><div><p className="chapter">02 / TF</p><h2 id="tf-heading">목표에 맞는 팀을 붙입니다.</h2></div><p>제안자와 독립 검증자를 함께 지정해, 문구·근거·QA가 서로를 확인하도록 합니다.</p></div>
