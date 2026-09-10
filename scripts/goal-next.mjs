@@ -9,13 +9,18 @@ if (graph.goalId !== contract.goalId) fail('goalId does not match Goal Contract'
 if (!Array.isArray(graph.tasks) || graph.tasks.length === 0) fail('tasks are required');
 const ids = new Set();
 const byId = new Map();
+const contractStreams = new Set(contract.workstreams.map(stream => stream.id));
 for (const task of graph.tasks) {
   if (!task.id || ids.has(task.id)) fail(`duplicate or missing task id: ${task.id ?? '(unknown)'}`);
   ids.add(task.id); byId.set(task.id, task);
+  if (!contractStreams.has(task.stream)) fail(`${task.id} belongs to undeclared stream ${task.stream}`);
   if (!allowed.has(task.state)) fail(`${task.id} has unsupported state ${task.state}`);
   if (!task.title || !task.stream || !task.lead || !task.verifier || !Array.isArray(task.dependencies) || !Array.isArray(task.acceptance) || !Array.isArray(task.evidence)) fail(`${task.id} is missing a task contract field`);
   if (task.state === 'DONE' && task.evidence.length === 0) fail(`${task.id} is DONE without evidence`);
   if (task.risk === 'E_EXTERNAL_COMMITMENT' && !task.blockedBy) fail(`${task.id} needs an approval/block reason`);
+}
+for (const stream of contract.workstreams) {
+  if (!graph.tasks.some(task => task.stream === stream.id)) fail(`contract stream ${stream.id} has no graph task`);
 }
 for (const task of graph.tasks) {
   for (const dependency of task.dependencies) {

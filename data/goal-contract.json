@@ -140,6 +140,14 @@
       "verifier": "품질감사관",
       "status": "IN_PROGRESS",
       "nextAction": "브라우저 재개 상태를 인증된 서버 영속·감사 로그 운영으로 연결"
+    },
+    {
+      "id": "E",
+      "name": "커머스·판매처 운영",
+      "lead": "데이터·판매처 운영",
+      "verifier": "재무·QA",
+      "status": "WAITING",
+      "nextAction": "판매자 계정과 1500 상품 식별자를 확보해 주문·취소·환불 대사를 실행"
     }
   ],
   "reportingPolicy": "예외와 마일스톤 중심으로 보고하며, 상태가 바뀌거나 대표 결정이 필요한 경우에만 즉시 알린다."
