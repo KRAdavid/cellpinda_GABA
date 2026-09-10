@@ -42,6 +42,7 @@
 .ops-mvp-live-queue-grid small { margin-top: 12px; color: #7b6a47; }
 .ops-mvp-live-queue-grid small.ops-mvp-live-decision { color: #315f48; font-weight: 700; }
 .ops-mvp-live-pulse { margin: 8px 0 0; color: #607567; font-size: 11px; }
+.ops-mvp-live-loop, .ops-mvp-audit-loop { margin: 6px 0 0; color: #17633d; font-size: 11px; line-height: 1.55; }
 .ops-mvp-audit-snapshot { margin-top: 16px; padding: 18px; background: #f7fbf7; border: 1px solid #cfe2d3; border-radius: 9px; }
 .ops-mvp-local-audit { margin-top: 16px; padding: 18px; background: #fff; border: 1px dashed #9ac8aa; border-radius: 9px; }
 .ops-mvp-local-audit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 16px; }

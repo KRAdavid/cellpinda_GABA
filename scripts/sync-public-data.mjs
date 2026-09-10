@@ -19,11 +19,11 @@ let pulseForQueue=pulse;
 if(existsSync(heartbeatPath)){
   let heartbeat;
   try{heartbeat=JSON.parse(readFileSync(heartbeatPath,'utf8'));}catch{throw new Error('TF pulse heartbeat is not valid JSON');}
-  if(heartbeat.schemaVersion!==1 || heartbeat.mode!=='automation_pulse_heartbeat' || heartbeat.goalId!==pulse.goalId || heartbeat.goalStatus!=='ACTIVE' || !/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt) || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash||'') || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash||'')) || typeof heartbeat.stateChanged !== 'boolean' || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage)) throw new Error('TF pulse heartbeat is malformed or role coverage is out of sync');
+  if(heartbeat.schemaVersion!==1 || heartbeat.mode!=='automation_pulse_heartbeat' || heartbeat.goalId!==pulse.goalId || heartbeat.goalStatus!=='ACTIVE' || !/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt) || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash||'') || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash||'')) || typeof heartbeat.stateChanged !== 'boolean' || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage) || !heartbeat.continuation || heartbeat.continuation.mode !== pulse.continuation?.mode || heartbeat.continuation.cadenceHours !== pulse.continuation?.cadenceHours || heartbeat.continuation.nextAction !== pulse.continuation?.nextAction) throw new Error('TF pulse heartbeat is malformed or role coverage is out of sync');
   if(heartbeat.stateChanged !== Boolean(heartbeat.previousSnapshotHash && heartbeat.previousSnapshotHash !== heartbeat.snapshotHash)) throw new Error('TF pulse heartbeat state change marker is inconsistent');
   const hashChanged = heartbeat.snapshotHash !== pulse.snapshotHash;
   pulseForQueue={...pulse,stateChanged:hashChanged || heartbeat.stateChanged,previousSnapshotHash:hashChanged ? heartbeat.snapshotHash : heartbeat.previousSnapshotHash};
-  if(!hashChanged) pulseForQueue={...pulseForQueue,generatedAt:heartbeat.generatedAt};
+  if(!hashChanged) pulseForQueue={...pulseForQueue,generatedAt:heartbeat.generatedAt,continuation:heartbeat.continuation};
 }
 const smartStoreHost='smartstore.naver.com';
 const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerSummary','hopefulTakeaway'];
@@ -128,7 +128,7 @@ const operationsQueue={
   goalId:goalContract.goalId,
   status:goalContract.status,
   checkedAt:goalContract.checkedAt,
-  pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,stateChanged:Boolean(pulseForQueue.stateChanged),requiresHumanDecision:pulseForQueue.requiresHumanDecision,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
+  pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,stateChanged:Boolean(pulseForQueue.stateChanged),requiresHumanDecision:pulseForQueue.requiresHumanDecision,continuation:pulseForQueue.continuation,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
   tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), decisionOptions:pulseDecisionByTaskId.get(id)?.decisionOptions ?? [], requiredInputs:Array.isArray(requiredInputs) ? requiredInputs : [], ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
@@ -144,6 +144,7 @@ const publicPulse={
   snapshotHash:pulseForQueue.snapshotHash,
   stateChanged:Boolean(pulseForQueue.stateChanged),
   requiresHumanDecision:pulseForQueue.requiresHumanDecision,
+  continuation:pulseForQueue.continuation,
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   counts:pulseForQueue.counts,
   teaserGate:{status:pulseForQueue.teaserGate.status,taskId:pulseForQueue.teaserGate.taskId,taskState:pulseForQueue.teaserGate.taskState},
@@ -167,7 +168,7 @@ const publicAudit={
   milestones:{
     masterIndex:{status:'MET',claims:claims.length,researchRecords:masterIndex.records.length},
     publicProduct:{status:'MET',products:products.length,smartStoreOnly:true,removed750:true},
-    tfPulse:{status:'MET',generatedAt:publicPulse.generatedAt,snapshotHash:publicPulse.snapshotHash,stateChanged:publicPulse.stateChanged,requiresHumanDecision:publicPulse.requiresHumanDecision},
+    tfPulse:{status:'MET',generatedAt:publicPulse.generatedAt,snapshotHash:publicPulse.snapshotHash,stateChanged:publicPulse.stateChanged,requiresHumanDecision:publicPulse.requiresHumanDecision,continuation:publicPulse.continuation},
   },
   gates:taskGraph.tasks
     .filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state))

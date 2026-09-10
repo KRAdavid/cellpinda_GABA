@@ -44,6 +44,11 @@ const safeGate = item => ({
   nextAction: item.nextAction,
 });
 const safeRole = item => ({id: item.id, label: item.label, status: item.status});
+const continuationModes = new Set(['close', 'human-gate-monitor', 'continue-execution', 'reassess-next-cycle']);
+const safeContinuation = value => {
+  if (!value || !continuationModes.has(value.mode) || value.cadenceHours !== 6 || !/^\d{4}-\d{2}-\d{2}T/.test(value.nextReviewAt || '') || typeof value.nextAction !== 'string' || value.nextAction.trim().length < 10) fail('continuation loop metadata is missing or malformed');
+  return {mode: value.mode, cadenceHours: value.cadenceHours, nextReviewAt: value.nextReviewAt, nextAction: value.nextAction};
+};
 const heartbeat = {
   schemaVersion: 1,
   mode: 'automation_pulse_heartbeat',
@@ -54,6 +59,7 @@ const heartbeat = {
   previousSnapshotHash,
   stateChanged,
   requiresHumanDecision: Boolean(pulse.requiresHumanDecision),
+  continuation: safeContinuation(pulse.continuation),
   roleCoverage: pulse.roleCoverage.map(safeRole),
   counts: pulse.counts,
   verifying: Array.isArray(pulse.verifying) ? pulse.verifying : [],

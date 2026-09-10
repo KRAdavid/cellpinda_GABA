@@ -315,3 +315,7 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 공개 `tf-pulse.json` 회의 안건과 `goal-audit.json` 게이트에 선택지를 함께 export하고, `validate-public-export`·`validate-live-public`가 상태별 ID 순서, 기준 배열, 게이트와 pulse 간 일치를 검사한다. 운영 화면의 공개 목표 감사 카드도 게이트별 선택지를 표시한다. 선택지는 자동 상태 변경이 아니라 사람 회의의 판정 기록을 위한 구조이며, 외부 승인·후기 권한·실주문 대사를 대신하지 않는다.
 
 운영 화면은 선택지 라벨을 먼저 노출하고 `판정 기준 보기`에서 각 선택지의 확인 항목을 펼쳐 읽도록 구성했다. 따라서 회의 참가자는 전체 게이트를 빠르게 훑은 뒤 필요한 근거 기준만 확인할 수 있다.
+
+## 2026-09-11 Observe → Adapt → Close or Continue 루프
+
+설계서의 관찰·적응·종료/계속 요구를 pulse 데이터 계약으로 연결했다. 활성 작업이 없으면 `close`, 사람 입력 또는 독립 판정이 필요하면 `human-gate-monitor`, 실행 가능한 작업이 있으면 `continue-execution`, 그 밖에는 `reassess-next-cycle`을 계산하고 6시간 뒤 `nextReviewAt`과 `nextAction`을 기록한다. 이 값은 pulse 원본과 heartbeat에서 검증한 뒤 공개 큐·목표 감사·운영 화면에 같은 값으로 전달된다. 동일 상태에서 heartbeat가 유지되면 기존 재검토 시각을 보존해 자동 주기가 승인 대기 중에도 계속 관찰하도록 했으며, 사람 승인·외부 게시·구매를 자동 완료로 바꾸지는 않는다.

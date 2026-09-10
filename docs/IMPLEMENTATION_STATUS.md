@@ -34,6 +34,10 @@ TF heartbeat에 직전 상태 지문 비교를 추가해 `stateChanged`를 기�
 
 TF pulse가 활성 작업마다 상태에 맞는 두 가지 결정 경로와 최소 판정 기준을 생성하도록 보강했다. `VERIFYING`은 수락/DONE 또는 보완/REWORK, `WAITING`·`BACKLOG`는 보류 또는 입력 충족 후 READY, `READY`는 샌드박스 실행 또는 보류, `RUNNING`은 검증 전달 또는 재시도 검토, 나머지는 상태·증거 보존 또는 변화 시 재평가를 제시한다. 공개 pulse와 목표 감사 게이트에도 같은 선택지를 연결하고, export·라이브 검증이 필드·순서·기준·패킷 간 일치를 검사한다. 선택지는 회의 판단을 구조화하는 제안이며 자동 승인·외부 게시·구매를 실행하지 않는다.
 
+## 2026-09-11 Observe → Adapt → Continue 루프
+
+`tf-pulse`가 현재 상태에서 다음 운영 모드를 자동 계산하도록 보강했다. `human-gate-monitor`는 B2·B3·B4·C2·E1처럼 사람 입력이 필요한 게이트를 보존하면서 다음 pulse에서 변화와 새 증거를 다시 확인하고, `continue-execution`은 실행 가능한 작업을 다음 독립 검증으로 넘긴다. 활성 작업이 없으면 `close`, 그 외에는 `reassess-next-cycle`로 기록한다. 모든 모드는 6시간 뒤 재검토 시각과 다음 행동을 포함하며 heartbeat·공개 `tf-pulse.json`·`operations-queue.json`·`goal-audit.json`·운영 화면에서 같은 값으로 검증된다. `nextReviewAt`은 이전 heartbeat가 유지될 때 그 예약을 보존해 반복 실행으로 회의 시각이 임의로 밀리지 않게 했다.
+
 ## 2026-09-11 사람 회의 의견 입력과 배포 재검증
 
 운영 MVP의 TF 의사결정 로그에 사람이 직접 반대 의견·재검토 조건을 남기는 입력 폼을 추가했다. 자동 생성 안전 경계는 `guardrail`, 회의에서 작성한 기록은 `human-meeting`으로 분리하고 기록 시각을 저장한다. pulse의 `VERIFYING`·`WAITING` 작업은 `다음 TF 회의 안건` 패널에서 담당자·검증자·다음 조치와 함께 확인할 수 있다. 10자 미만 메모와 허용되지 않은 상태·시각은 공통 상태 검증에서 거부하며, 서버 저장·브라우저 `localStorage`·JSON 승인 보고서에 같은 구조로 보존된다. `pnpm test` 66개, 타입검사, production build와 로컬 API 연동 Playwright 데스크톱·모바일 검증이 통과했다.

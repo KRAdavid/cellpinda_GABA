@@ -99,6 +99,8 @@ pnpm run preflight:deploy
 
 `pnpm run preflight:deploy -- --strict`는 Cloudflare Worker 영구 배포에 필요한 설정·빌드 산출물·공개 export·필수 Secrets를 값 노출 없이 검사하고, 하나라도 없으면 실패한다. 일반 실행은 현재 상태를 `READY` 또는 `WAITING`으로 보고해 로컬·Pages 환경에서도 배포 준비도를 확인할 수 있다.
 
+각 pulse에는 `continuation`이 함께 기록된다. 현재 게이트가 사람 판단 대기인지, 실행을 계속할 수 있는지, 다음 주기에 재평가할지 또는 종료 조건을 확인할지와 6시간 뒤 재검토 시각·다음 행동을 pulse·heartbeat·공개 큐·목표 감사에 동일하게 남긴다. 승인 때문에 자동화가 멈추는 대신 다음 관찰 주기를 예약하되, 사람 승인·외부 게시·구매 상태를 자동으로 바꾸지는 않는다.
+
 ## GitHub Actions 배포
 
 기본 배포 저장소는 [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA)이며 `main`에 push하면 `.github/workflows/deploy.yml`이 데이터 동기화 → 타입 검사 → 테스트 → 정적 번들 및 Worker dry-run을 수행한다. Cloudflare 계정 값을 저장소 Secrets에 넣으면 같은 workflow가 Worker·D1·assets까지 배포한다. 필요한 Secrets는 `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `ADMIN_TOKEN`, `MEMBER_ORIGIN`이다. Secrets가 없으면 검증만 실행하고 배포 단계는 명확히 건너뛴다.

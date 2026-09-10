@@ -22,6 +22,12 @@ const validateDecisionOptions = (options, state, label) => {
     assert.ok(Array.isArray(option.criteria) && option.criteria.length >= 2 && option.criteria.every(criteria => typeof criteria === 'string' && criteria.trim().length >= 4), `${label} decision option criteria are incomplete`);
   }
 };
+const validateContinuation = (value, label) => {
+  assert.ok(value && ['close', 'human-gate-monitor', 'continue-execution', 'reassess-next-cycle'].includes(value.mode), `${label} continuation mode is invalid`);
+  assert.equal(value.cadenceHours, 6, `${label} continuation cadence must be six hours`);
+  assert.match(value.nextReviewAt || '', /^\d{4}-\d{2}-\d{2}T/, `${label} continuation review time is invalid`);
+  assert.ok(typeof value.nextAction === 'string' && value.nextAction.trim().length >= 10, `${label} continuation action is missing`);
+};
 const request = async path => {
   const separator = path.includes('?') ? '&' : '?';
   const response = await fetch(`${base}${path}${separator}release-smoke=1`);
@@ -53,6 +59,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');
     assert.equal(queue.tasks.length, 13, 'live operations queue must contain the current task graph');
     assert.ok(queue.pulse && /^[a-f0-9]{64}$/.test(queue.pulse.snapshotHash) && typeof queue.pulse.stateChanged === 'boolean', 'live operations queue must expose a valid pulse snapshot');
+    validateContinuation(queue.pulse.continuation, 'live operations queue pulse');
     assert.equal(queue.pulse.activeTasks, queue.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length, 'live pulse active count must match queue');
     assert.equal(queue.pulse.inputGates, queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length, 'live pulse input gate count must match queue');
     assert.equal(publicPulse.mode, 'public_tf_pulse', 'live public TF pulse packet must use the public schema');
@@ -60,6 +67,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicPulse.generatedAt, queue.pulse.generatedAt, 'live public TF pulse packet timestamp must match the queue');
     assert.equal(publicPulse.snapshotHash, queue.pulse.snapshotHash, 'live public TF pulse packet hash must match the queue');
     assert.equal(publicPulse.stateChanged, queue.pulse.stateChanged, 'live public TF pulse change marker must match the queue');
+    validateContinuation(publicPulse.continuation, 'live public pulse');
+    assert.deepEqual(publicPulse.continuation, queue.pulse.continuation, 'live public pulse continuation loop must match the queue');
     assert.equal(publicAudit.mode, 'public_goal_audit', 'live public goal audit packet must use the public schema');
     assert.equal(publicAudit.goalId, queue.goalId, 'live public goal audit packet must use the active goal');
     assert.equal(publicAudit.status, queue.status, 'live public goal audit status must match the queue');
@@ -71,6 +80,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicAudit.milestones.publicProduct.products, content.products.length, 'live public audit product count must match content');
     assert.equal(publicAudit.milestones.tfPulse.snapshotHash, publicPulse.snapshotHash, 'live public audit pulse hash must match the pulse');
     assert.equal(publicAudit.milestones.tfPulse.stateChanged, publicPulse.stateChanged, 'live public audit pulse change marker must match the pulse');
+    validateContinuation(publicAudit.milestones.tfPulse.continuation, 'live public audit pulse');
+    assert.deepEqual(publicAudit.milestones.tfPulse.continuation, publicPulse.continuation, 'live public audit continuation loop must match the pulse');
     assert.ok(['IN_PROGRESS_WITH_GATES', 'COMPLETE'].includes(publicAudit.overallStatus), 'live public audit must expose a supported overall status');
     assert.equal(publicAudit.milestones.masterIndex.status, 'MET', 'live public audit must mark the master index milestone');
     assert.equal(publicAudit.milestones.publicProduct.status, 'MET', 'live public audit must mark the product milestone');

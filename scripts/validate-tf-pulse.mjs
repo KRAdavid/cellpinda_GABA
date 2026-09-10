@@ -55,6 +55,12 @@ if (!Array.isArray(pulse.roleCoverage) || JSON.stringify(pulse.roleCoverage) !==
 if (!/^[a-f0-9]{64}$/.test(pulse.snapshotHash ?? '')) fail('pulse snapshot hash is missing or malformed');
 if (!pulse.counts || Object.values(pulse.counts).reduce((sum, count) => sum + count, 0) !== graph.tasks.length) fail('state counts do not cover the task graph');
 if (pulse.teaserGate?.taskId !== 'B4' || pulse.teaserGate.taskState !== tasks.get('B4')?.state) fail('teaser gate is out of sync with B4');
+const continuationModes = new Set(['close', 'human-gate-monitor', 'continue-execution', 'reassess-next-cycle']);
+const validateContinuation = (continuation, label) => {
+  if (!continuation || !continuationModes.has(continuation.mode) || continuation.cadenceHours !== 6 || !/^\d{4}-\d{2}-\d{2}T/.test(continuation.nextReviewAt ?? '') || typeof continuation.nextAction !== 'string' || continuation.nextAction.trim().length < 10) fail(`${label} continuation loop metadata is missing or malformed`);
+};
+const continuationComparable = continuation => ({mode: continuation.mode, cadenceHours: continuation.cadenceHours, nextAction: continuation.nextAction});
+validateContinuation(pulse.continuation, 'pulse');
 
 const expectedMode = state => {
   if (state === 'VERIFYING') return 'independent-review';
@@ -81,6 +87,14 @@ if (pulse.decisions.length !== active.length) fail('every active task must have 
 if (!Array.isArray(pulse.meetingAgenda) || pulse.meetingAgenda.length !== pulse.decisions.length) fail('meeting agenda does not cover all decisions');
 if (!Array.isArray(pulse.inputGates) || pulse.inputGates.length !== pulse.decisions.filter(item => item.mode === 'input-gate').length) fail('input gates do not cover input-gate decisions');
 if (pulse.requiresHumanDecision !== pulse.decisions.some(item => ['VERIFYING', 'WAITING'].includes(item.state))) fail('human decision flag is out of sync');
+const expectedContinuationMode = active.length === 0
+  ? 'close'
+  : pulse.requiresHumanDecision
+    ? 'human-gate-monitor'
+    : pulse.decisions.some(item => ['READY', 'RUNNING'].includes(item.state))
+      ? 'continue-execution'
+      : 'reassess-next-cycle';
+if (pulse.continuation.mode !== expectedContinuationMode) fail('continuation loop mode is out of sync with active decisions');
 for (const decision of pulse.decisions) {
   const task = tasks.get(decision.taskId);
   if (!task || ['DONE', 'CANCELLED'].includes(task.state)) fail(`decision references inactive task ${decision.taskId}`);
@@ -104,9 +118,10 @@ if (existsSync(heartbeatPath)) {
   try { heartbeat = JSON.parse(await readFile(heartbeatPath, 'utf8')); } catch { fail('TF pulse heartbeat is not valid JSON'); }
   if (heartbeat.schemaVersion !== 1 || heartbeat.mode !== 'automation_pulse_heartbeat' || heartbeat.goalId !== contract.goalId || heartbeat.goalStatus !== contract.status) fail('pulse heartbeat identity does not match the active contract');
   if (!/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt ?? '') || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash ?? '')) fail('pulse heartbeat timestamp or hash is malformed');
+  validateContinuation(heartbeat.continuation, 'heartbeat');
   if (!heartbeat.counts || typeof heartbeat.requiresHumanDecision !== 'boolean' || typeof heartbeat.stateChanged !== 'boolean' || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash ?? '')) || !Array.isArray(heartbeat.roleCoverage) || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage) || !Array.isArray(heartbeat.verifying) || !Array.isArray(heartbeat.waiting) || !Array.isArray(heartbeat.inputGates)) fail('pulse heartbeat summary is incomplete or role coverage is out of sync');
   if (heartbeat.stateChanged !== Boolean(heartbeat.previousSnapshotHash && heartbeat.previousSnapshotHash !== heartbeat.snapshotHash)) fail('pulse heartbeat state change marker is inconsistent');
-  if (heartbeat.snapshotHash !== pulse.snapshotHash || JSON.stringify(heartbeat.counts) !== JSON.stringify(pulse.counts) || heartbeat.requiresHumanDecision !== pulse.requiresHumanDecision || JSON.stringify(heartbeat.verifying) !== JSON.stringify(pulse.verifying) || JSON.stringify(heartbeat.waiting) !== JSON.stringify(pulse.waiting) || JSON.stringify(heartbeat.inputGates) !== JSON.stringify(pulse.inputGates.map(({taskId, state, chair, requiredInputs, nextAction}) => ({taskId, state, chair, requiredInputs, nextAction})))) fail('pulse heartbeat is not the current pulse snapshot');
+  if (heartbeat.snapshotHash !== pulse.snapshotHash || JSON.stringify(heartbeat.counts) !== JSON.stringify(pulse.counts) || heartbeat.requiresHumanDecision !== pulse.requiresHumanDecision || JSON.stringify(continuationComparable(heartbeat.continuation)) !== JSON.stringify(continuationComparable(pulse.continuation)) || JSON.stringify(heartbeat.verifying) !== JSON.stringify(pulse.verifying) || JSON.stringify(heartbeat.waiting) !== JSON.stringify(pulse.waiting) || JSON.stringify(heartbeat.inputGates) !== JSON.stringify(pulse.inputGates.map(({taskId, state, chair, requiredInputs, nextAction}) => ({taskId, state, chair, requiredInputs, nextAction})))) fail('pulse heartbeat is not the current pulse snapshot');
 }
 
 console.log(JSON.stringify({

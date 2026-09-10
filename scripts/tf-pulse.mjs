@@ -120,17 +120,30 @@ const snapshotHash = createHash('sha256').update(JSON.stringify({
   teaserStatus: teaser.status,
   teaserTaskState: tasksById.get('B4')?.state ?? null,
 })).digest('hex');
+const generatedAt = new Date().toISOString();
+const requiresHumanDecision = decisions.some(item => ['VERIFYING', 'WAITING'].includes(item.state));
+const continuation = {
+  mode: activeTasks.length === 0 ? 'close' : requiresHumanDecision ? 'human-gate-monitor' : decisions.some(item => ['READY', 'RUNNING'].includes(item.state)) ? 'continue-execution' : 'reassess-next-cycle',
+  cadenceHours: 6,
+  nextReviewAt: new Date(Date.parse(generatedAt) + 6 * 60 * 60 * 1000).toISOString(),
+  nextAction: activeTasks.length === 0
+    ? '성공 조건과 종료 증거를 확인해 목표를 닫는다.'
+    : requiresHumanDecision
+      ? '사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다.'
+      : '실행 가능한 작업을 다음 pulse에서 계속 진행하고 결과를 독립 검증으로 넘긴다.',
+};
 const inputGates = decisions
   .filter(item => item.mode === 'input-gate')
   .map(item => ({taskId: item.taskId, state: item.state, blockedBy: item.blockedBy, requiredInputs: item.requiredInputs, chair: item.chair, nextAction: item.nextAction}));
 const result = {
   schemaVersion: 1,
   mode: 'automation_pulse',
-  generatedAt: new Date().toISOString(),
+  generatedAt,
   goalId: contract.goalId,
   goalStatus: contract.status,
   snapshotHash,
-  requiresHumanDecision: decisions.some(item => ['VERIFYING', 'WAITING'].includes(item.state)),
+  requiresHumanDecision,
+  continuation,
   teaserGate: {status: teaser.status, taskId: 'B4', taskState: tasksById.get('B4')?.state ?? null},
   roleCoverage: roleCoverage.map(({id, label}) => ({id, label, status: 'present'})),
   counts,
