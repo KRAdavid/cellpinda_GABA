@@ -12,7 +12,7 @@ export function parseReviewDraft(value:unknown):ReviewDraft {
   if(!object(value) || Object.keys(value).some(key=>!Object.hasOwn(REVIEW_LIMITS,key)))throw fail('Invalid review draft fields');
   const result={} as ReviewDraft;
   for(const key of Object.keys(REVIEW_LIMITS) as (keyof ReviewDraft)[]){const text=value[key] ?? '';if(typeof text!=='string' || text.length>REVIEW_LIMITS[key])throw fail(`Invalid review field: ${key}`);result[key]=text.trim();}
-  if(!['','gaba750','gaba1500'].includes(result.productId))throw fail('Invalid review product');
+  if(!['','gaba1500'].includes(result.productId))throw fail('Invalid review product');
   if(result.sourceUrl && !publicUrl(result.sourceUrl))throw fail('Review source must be HTTPS without credentials');
   if(result.authoredAt && !calendar(result.authoredAt))throw fail('Invalid review authored date');
   if(result.rightsExpiresAt && !calendar(result.rightsExpiresAt))throw fail('Invalid review rights expiry');

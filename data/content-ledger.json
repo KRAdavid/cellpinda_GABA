@@ -8,20 +8,6 @@
   },
   "products": [
     {
-      "id": "gaba750",
-      "name": "셀핀다 가바 750",
-      "amountMg": 750,
-      "servings": 30,
-      "totalG": 22.5,
-      "officialUrl": "https://smartstore.naver.com/cellpinda",
-      "status": "approved",
-      "availability": "스마트스토어에서 재고 확인",
-      "priceDisplay": null,
-      "sourceIds": [
-        "product-750"
-      ]
-    },
-    {
       "id": "gaba1500",
       "name": "셀핀다 가바 1500",
       "amountMg": 1500,
@@ -37,27 +23,6 @@
     }
   ],
   "claims": [
-    {
-      "id": "product-750",
-      "topic": "제품 구성",
-      "publicText": "셀핀다 가바 750 mg × 30포 구성이 판매 제품으로 확인됩니다.",
-      "status": "approved",
-      "sources": [
-        {
-          "title": "셀핀다 공식몰 750mg 상품",
-          "url": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-750mg-×-30포/39/",
-          "page": null,
-          "locator": "상품명·기본 정보"
-        }
-      ],
-      "limitations": [
-        "상품명 기준 구성 정보입니다. 재고와 최신 가격은 스마트스토어에서 확인하세요.",
-        "내용량을 특정 증상에 맞는 권장량으로 해석하지 않습니다."
-      ],
-      "holdReason": null,
-      "reviewedBy": "AI 근거·편집 검토",
-      "reviewedAt": "2026-09-10"
-    },
     {
       "id": "product-1500",
       "topic": "제품 구성",
@@ -735,29 +700,6 @@
       "originalPublic": false,
       "candidateType": "review-screenshot",
       "duplicateOf": null
-    },
-    {
-      "id": "shop-750-general-20260329",
-      "status": "hold",
-      "publicText": null,
-      "sourceTitle": "공식몰 750mg 상품 후기 2026-03-29",
-      "sourceUrl": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-750mg-×-30포/39/",
-      "reviewedAt": "2026-09-10",
-      "holdReason": "일반 만족 표현을 확인했으나 재게시 사용권·보상관계 미확인. 원문 링크 제공은 가능.",
-      "originalPublic": true
-    },
-    {
-      "id": "shop-review-destination",
-      "status": "approved",
-      "publicText": "공식몰에서 구매자 후기와 다양한 사용 경험을 확인하세요.",
-      "sourceTitle": "셀핀다 공식몰 상품 후기",
-      "sourceUrl": "https://cellpinda.co.kr/product/셀핀다-고순도-발효-가바-100-750mg-×-30포/39/",
-      "reviewedAt": "2026-09-10",
-      "holdReason": null,
-      "originalPublic": true,
-      "limitations": [
-        "후기를 재인용하거나 수치로 집계하지 않고 원문 목적지로 연결합니다. 개인 경험은 제품 효과 입증이 아닙니다."
-      ]
     },
     {
       "id": "shop-review-destination-1500",

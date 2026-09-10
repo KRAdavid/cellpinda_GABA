@@ -2,16 +2,6 @@
 
 확인·확보일: 2026-09-10. 사용자 요청의 셀핀다 브랜드 홍보 사이트에 실제 상품을 정확하게 보여 주기 위한 자산이다. 생성형 패키지 이미지가 아니다. 공식몰 상품 HTML의 `og:image`와 `BigImage`가 같은 주소임을 확인한 뒤 해당 원본 JPEG를 저장했다. 내려받은 두 파일을 직접 열어 제품명·내용량·구성을 검토했다. 원본 수정·워터마크 제거·브랜드 표기 변경 없이 사용한다.
 
-## 750 제품
-
-- 파일: `public/assets/product-750.jpg`
-- 크기: 1024 × 1024px, 182,716 bytes.
-- 상품 페이지: https://cellpinda.co.kr/product/detail.html?product_no=39
-- 원본 이미지: https://ecimg.cafe24img.com/pg1934b28407397080/cellpindamall/web/product/big/20260908/8b1b799fe9c79fb5b0a7527815bedb29.jpg
-- HTML 대체 텍스트: 셀핀다 750mg × 30포 상품명.
-- 시각 확인: 보라색 750, 가바100%, 750mg×30포, 22,500mg 표기. 공식 상품 구성과 일치한다.
-- 권장 alt: `셀핀다 가바 750 제품 포장, 750mg × 30포`
-
 ## 1500 제품
 
 - 파일: `public/assets/product-1500.jpg`

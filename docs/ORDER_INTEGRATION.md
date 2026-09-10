@@ -4,11 +4,10 @@
 
 ## 플랫폼과 상품 식별
 
-공식몰 상품 페이지의 공개 HTML에서 `window.CAFE24`와 `cellpindamall.cafe24.com` 참조를 확인했다. Cafe24 플랫폼 사용의 직접적인 증거다. `cellpindamall`은 mall ID 후보이며 앱 설치·OAuth 응답으로 최종 확정해야 한다. 비슷한 이름의 과거 `gabamall`을 자동 채택하지 않는다. [공식몰 750 상품](https://cellpinda.co.kr/product/detail.html?product_no=39), [공식몰 1500 상품](https://cellpinda.co.kr/product/detail.html?product_no=27).
+공식몰 1500 상품 페이지의 공개 HTML에서 `window.CAFE24`와 `cellpindamall.cafe24.com` 참조를 확인했다. Cafe24 플랫폼 사용의 직접적인 증거다. `cellpindamall`은 mall ID 후보이며 앱 설치·OAuth 응답으로 최종 확정해야 한다. 비슷한 이름의 과거 `gabamall`을 자동 채택하지 않는다. [공식몰 1500 상품](https://cellpinda.co.kr/product/detail.html?product_no=27).
 
 | 사이트 제품 | 공개 상품번호 후보 | 확정할 API 키 |
 |---|---|---|
-| gaba750 | product_no=39 | mall_id + shop_no + product_no + variant_code |
 | gaba1500 | product_no=27 | mall_id + shop_no + product_no + variant_code |
 
 `product_no`는 상품 번호이며 SKU 옵션을 나타내는 `variant_code`, 주문행을 나타내는 `order_item_code`와 다르다. 주문행 조회 API에서 실제 값을 대조한다. 상품 4+1 구성이나 교환으로 생성된 다른 품목을 숫자·이름 유사성만으로 매핑하지 않는다. [Cafe24 주문 품목 조회](https://apidocs.cafe24.com/en/docs/admin/get-orders-by-order-id-items).
@@ -64,4 +63,4 @@
 
 ## 현재 구매 링크
 
-소비자 사이트의 제품 비교·구매 CTA는 `https://smartstore.naver.com/cellpinda`로 연결한다. 이 주소는 판매처 진입 주소이며 현재 750/1500 상품의 개별 URL, 판매 상태, 주문 API 권한을 확인했다는 뜻이 아니다. 스마트스토어 주문 연동을 진행할 때는 상품별 URL·SKU·주문/취소/환불 상태와 사이트 귀속 파라미터를 운영 계정에서 별도로 확정한다.
+소비자 사이트의 제품 비교·구매 CTA는 `https://smartstore.naver.com/cellpinda`로 연결한다. 이 주소는 판매처 진입 주소이며 현재 1500 상품의 개별 URL, 판매 상태, 주문 API 권한을 확인했다는 뜻이 아니다. 스마트스토어 주문 연동을 진행할 때는 상품별 URL·SKU·주문/취소/환불 상태와 사이트 귀속 파라미터를 운영 계정에서 별도로 확정한다.

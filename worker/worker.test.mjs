@@ -21,7 +21,7 @@ class MockD1 {
   async batch(statements){const work=this.queue.then(async()=>{this.db.exec('BEGIN IMMEDIATE');try{const result=[];for(const statement of statements)result.push(await statement.run());this.db.exec('COMMIT');return result;}catch(error){this.db.exec('ROLLBACK');throw error;}});this.queue=work.catch(()=>{});return work;}
   close(){this.db.close();}
 }
-const seed={claims:[{id:'source',status:'approved',publicText:'Public fact',sources:[{title:'Source',url:'https://example.com'}],metadata:{sampleSize:'40',productApplicability:'Not a product study',privatePath:'secret'}},{id:'held',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba750',status:'approved',sourceIds:['source'],name:'Product'}]};
+const seed={claims:[{id:'source',status:'approved',publicText:'Public fact',sources:[{title:'Source',url:'https://example.com'}],metadata:{sampleSize:'40',productApplicability:'Not a product study',privatePath:'secret'}},{id:'held',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba1500',status:'approved',sourceIds:['source'],name:'Product'}]};
 
 test('D1 approval transaction, seed preservation, public filtering and audit',async()=>{
   const db=new MockD1();const store=createStore(db);
@@ -53,12 +53,12 @@ test('D1 anonymous funnels, event deduplication and no health properties',async(
     const send=(flowId,name)=>store.event({eventId:randomUUID(),flowId,name});
     await send(a,'landing_view');await send(a,'rhythm_check_started');await send(a,'rhythm_check_completed');
     await send(b,'landing_view');await send(b,'rhythm_check_started');
-    const event={eventId:randomUUID(),flowId:a,name:'purchase_outbound_clicked',properties:{productId:'gaba750',answers:['private'],email:'private@example.com'}};
+    const event={eventId:randomUUID(),flowId:a,name:'purchase_outbound_clicked',properties:{productId:'gaba1500',answers:['private'],email:'private@example.com'}};
     await store.event(event);assert.equal((await store.event(event)).duplicate,true);
     await assert.rejects(store.event({...event,eventId:randomUUID(),name:'purchase_confirmed'}),/Invalid/);
     await assert.rejects(store.event({...event,eventId:randomUUID(),flowId:'private@example.com'}),/Invalid/);
     const stats=await store.analytics();assert.equal(stats.funnels[0].rate,1);assert.equal(stats.funnels[1].rate,.5);assert.equal(stats.funnels[2].rate,null);assert.equal(stats.actualPurchases.count,null);assert.equal(stats.returningVisitors.rate,null);
-    const stored=await db.prepare('SELECT properties FROM events WHERE id=?').bind(event.eventId).first();assert.deepEqual(JSON.parse(stored.properties),{productId:'gaba750'});
+    const stored=await db.prepare('SELECT properties FROM events WHERE id=?').bind(event.eventId).first();assert.deepEqual(JSON.parse(stored.properties),{productId:'gaba1500'});
   }finally{db.close();}
 });
 
@@ -115,26 +115,25 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
   }finally{DB.close();}
 });
 
-test('Worker and Node expose only approved official review destination, never private quotes',async()=>{
-  const reviewedSeed={...seed,reviews:[{id:'shop-review-destination',status:'approved',originalPublic:true,publicText:'공식몰 후기 보기',sourceTitle:'공식몰 750',sourceUrl:'https://cellpinda.co.kr/product/detail.html?product_no=39',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL'},{id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'공식몰 1500 후기 보기',sourceTitle:'공식몰 1500',sourceUrl:'https://cellpinda.co.kr/product/detail.html?product_no=27',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL 1500'},{id:'private-review',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null},{id:'unverified-review',status:'approved',publicText:'UNVERIFIED QUOTE',sourceUrl:'https://cellpinda.co.kr/'}]};
+test('Worker and Node expose only the approved official 1500 review destination, never private quotes',async()=>{
+  const reviewedSeed={...seed,reviews:[{id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'공식몰 1500 후기 보기',sourceTitle:'공식몰 1500',sourceUrl:'https://cellpinda.co.kr/product/detail.html?product_no=27',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL 1500'},{id:'private-review',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null},{id:'unverified-review',status:'approved',publicText:'UNVERIFIED QUOTE',sourceUrl:'https://cellpinda.co.kr/'}]};
   const db=new MockD1();const cloud=createStore(db);const local=createNodeStore({dbPath:':memory:',seed:reviewedSeed});
   try{
     await cloud.initialize(reviewedSeed);
     for(const store of [cloud,local]){
-      const data=await store.publicContent();assert.equal(data.reviews.length,2);assert.deepEqual(data.reviews.map(review=>review.id),['shop-review-destination','shop-review-destination-1500']);assert.ok(!JSON.stringify(data).includes('PRIVATE'));assert.ok(!JSON.stringify(data).includes('UNVERIFIED'));
+      const data=await store.publicContent();assert.equal(data.reviews.length,1);assert.deepEqual(data.reviews.map(review=>review.id),['shop-review-destination-1500']);assert.ok(!JSON.stringify(data).includes('PRIVATE'));assert.ok(!JSON.stringify(data).includes('UNVERIFIED'));
       assert.ok(data.reviews.every(review=>review.publicText===REVIEW_DESTINATION_TEXT));
-      await assert.rejects(async()=>store.update('shop-review-destination',{revision:1,status:'approved',publicText:'UNVERIFIED QUOTATION',reason:'Attempt bypass'}),/destination text is fixed/);
       await assert.rejects(async()=>store.update('shop-review-destination-1500',{revision:1,status:'approved',publicText:'UNVERIFIED QUOTATION',reason:'Attempt bypass 1500'}),/destination text is fixed/);
       await assert.rejects(async()=>store.update('private-review',{revision:1,status:'approved',reason:'Without permissions'}),/quote rights/);
-      await store.update('shop-review-destination',{revision:1,status:'hold',reason:'Withdraw destination'});assert.equal((await store.publicContent()).reviews.length,1);
-      await store.update('shop-review-destination',{revision:2,status:'approved',publicText:REVIEW_DESTINATION_TEXT,reason:'Restore fixed destination'});assert.equal((await store.publicContent()).reviews.length,2);
+      await store.update('shop-review-destination-1500',{revision:1,status:'hold',reason:'Withdraw destination'});assert.equal((await store.publicContent()).reviews.length,0);
+      await store.update('shop-review-destination-1500',{revision:2,status:'approved',publicText:REVIEW_DESTINATION_TEXT,reason:'Restore fixed destination'});assert.equal((await store.publicContent()).reviews.length,1);
     }
   }finally{db.close();local.close();}
 });
 
 test('Submitted quote workflow preserves revisions, resets confirmation, gates public output and blocks generic bypass',async()=>{
   const db=new MockD1(),cloud=createStore(db),local=createNodeStore({dbPath:':memory:',seed});
-  const review=parseReviewDraft({productId:'gaba750',authorLabel:'가상 테스트 작성자',sourceTitle:'테스트 출처',sourceUrl:'https://example.com/review-fixture',authoredAt:'2020-01-01',usagePeriod:'테스트 기간',quote:'가상 테스트 전용 후기',context:'테스트 맥락',disclosure:'테스트 제공관계',rightsEvidence:'PRIVATE RIGHTS',rightsScope:'PRIVATE SCOPE'});
+  const review=parseReviewDraft({productId:'gaba1500',authorLabel:'가상 테스트 작성자',sourceTitle:'테스트 출처',sourceUrl:'https://example.com/review-fixture',authoredAt:'2020-01-01',usagePeriod:'테스트 기간',quote:'가상 테스트 전용 후기',context:'테스트 맥락',disclosure:'테스트 제공관계',rightsEvidence:'PRIVATE RIGHTS',rightsScope:'PRIVATE SCOPE'});
   const confirmation={rightsConfirmed:true,contextConfirmed:true,disclosureConfirmed:true,publicationConfirmed:true,reviewer:'PRIVATE REVIEWER',reviewedAt:'2020-01-02',editorialNote:'PRIVATE NOTE'};
   try{
     await cloud.initialize(seed);

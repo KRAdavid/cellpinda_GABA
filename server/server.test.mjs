@@ -9,7 +9,7 @@ import { once } from 'node:events';
 import { createApi } from './index.mjs';
 import { createStore } from './store.mjs';
 
-const seed={claims:[{id:'source',status:'approved',publicText:'Verified text',sources:[{title:'Public',url:'https://example.com/source'},{title:'private.pdf',url:null}],holdReason:'PRIVATE'},{id:'hidden',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba750',status:'approved',sourceIds:['source'],name:'Product'}]};
+const seed={claims:[{id:'source',status:'approved',publicText:'Verified text',sources:[{title:'Public',url:'https://example.com/source'},{title:'private.pdf',url:null}],holdReason:'PRIVATE'},{id:'hidden',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba1500',status:'approved',sourceIds:['source'],name:'Product'}]};
 test('Persistent approval, privacy, events and authenticated local API',async()=>{
   const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));
   const options={dbPath:join(directory,'db.sqlite'),tokenPath:join(directory,'token'),seed};
@@ -35,7 +35,7 @@ test('Persistent approval, privacy, events and authenticated local API',async()=
     assert.equal((await patch({revision:1,reason:'Stale',status:'approved'})).status,409);
     assert.equal((await patch({revision:2,reason:'Reviewed',status:'approved'})).status,200);
     response=await fetch(`${base}/api/admin/content/hidden`,{method:'PATCH',headers:{'content-type':'application/json','x-admin-token':token},body:JSON.stringify({revision:1,reason:'No source',status:'approved'})});assert.equal(response.status,400);
-    const event={eventId:randomUUID(),name:'purchase_outbound_clicked',properties:{productId:'gaba750',path:'/products',answers:['private'],type:'private',email:'private@example.com'}};
+    const event={eventId:randomUUID(),name:'purchase_outbound_clicked',properties:{productId:'gaba1500',path:'/products',answers:['private'],type:'private',email:'private@example.com'}};
     const send=body=>fetch(`${base}/api/events`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
     assert.equal((await send(event)).status,202);assert.equal((await (await send(event)).json()).duplicate,true);
     assert.equal((await send({...event,eventId:randomUUID(),name:'purchase_confirmed'})).status,400);
@@ -47,7 +47,7 @@ test('Persistent approval, privacy, events and authenticated local API',async()=
     const analytics=await (await fetch(`${base}/api/admin/analytics`,{headers:{'x-admin-token':token}})).json();assert.equal(analytics.counts[0].count,1);assert.equal(analytics.actualPurchases.supported,false);assert.equal(analytics.actualPurchases.count,null);
     const history=await (await fetch(`${base}/api/admin/history`,{headers:{'x-admin-token':token}})).json();assert.ok(history.items.some(i=>i.reason==='Reviewed'));assert.ok(history.items.some(i=>i.reason==='Changed copy requires review'));
     const inspection=new DatabaseSync(options.dbPath,{readOnly:true});
-    try { const stored=inspection.prepare('SELECT properties FROM events').all(); assert.deepEqual(JSON.parse(stored[0].properties),{productId:'gaba750',path:'/products'}); } finally {inspection.close();}
+    try { const stored=inspection.prepare('SELECT properties FROM events').all(); assert.deepEqual(JSON.parse(stored[0].properties),{productId:'gaba1500',path:'/products'}); } finally {inspection.close();}
   } finally { if(running)await stop();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true}); }
 });
 

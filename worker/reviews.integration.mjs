@@ -54,14 +54,14 @@ async function request(path,{method='GET',body,authenticated=true,headers={}}={}
   return {status:response.status,data:await response.json()};
 }
 async function ok(path,options,status=200){const result=await request(path,options);assert.equal(result.status,status,JSON.stringify(result.data));return result.data;}
-const review={productId:'gaba750',authorLabel:'TEST 가상 작성자',sourceTitle:'TEST 원문',sourceUrl:'https://example.com/test-only-review',authoredAt:'2020-01-01',usagePeriod:'',quote:'TEST 가상 후기 — 실제 고객 경험 아님',context:'TEST 격리 환경',disclosure:'TEST 제공 관계',rightsEvidence:'PRIVATE TEST RIGHTS',rightsScope:'PRIVATE TEST SCOPE',rightsExpiresAt:''};
+const review={productId:'gaba1500',authorLabel:'TEST 가상 작성자',sourceTitle:'TEST 원문',sourceUrl:'https://example.com/test-only-review',authoredAt:'2020-01-01',usagePeriod:'',quote:'TEST 가상 후기 — 실제 고객 경험 아님',context:'TEST 격리 환경',disclosure:'TEST 제공 관계',rightsEvidence:'PRIVATE TEST RIGHTS',rightsScope:'PRIVATE TEST SCOPE',rightsExpiresAt:''};
 const confirmation={rightsConfirmed:true,contextConfirmed:true,disclosureConfirmed:true,publicationConfirmed:true,reviewer:'PRIVATE TEST REVIEWER',reviewedAt:'2020-01-02',editorialNote:'PRIVATE TEST NOTE'};
 
 try{
   await start();
   assert.equal((await request('/api/admin/content',{authenticated:false})).status,401);
   assert.equal((await request('/api/admin/reviews',{method:'POST',body:{review,reason:'TEST'},headers:{origin:'https://example.com'}})).status,403);
-  const initial=await ok('/api/content');assert.ok(initial.products.some(p=>p.id==='gaba750'));
+  const initial=await ok('/api/content');assert.ok(initial.products.some(p=>p.id==='gaba1500'));
   const item=await ok('/api/admin/reviews',{method:'POST',body:{review,reason:'TEST draft'}},201);
   const path=`/api/admin/reviews/${item.id}`;
   const findPublic=async()=> (await ok('/api/content')).reviews.find(r=>r.id===item.id);
@@ -70,14 +70,14 @@ try{
   assert.equal((await request(path+'/decision',{method:'POST',body:{status:'approved',revision:1,reason:'TEST missing confirmation'}})).status,400);
   await ok(path+'/decision',{method:'POST',body:{status:'approved',revision:1,reason:'TEST checked',confirmation}});
   const visible=await findPublic();assert.equal(visible.publicText,review.quote);assert.ok(!JSON.stringify(visible).includes('PRIVATE'));
-  const product=initial.products.find(p=>p.id==='gaba750');
-  await ok('/api/admin/content/gaba750',{method:'PATCH',body:{status:'hold',revision:product.revision,reason:'TEST product withdrawn'}});
+  const product=initial.products.find(p=>p.id==='gaba1500');
+  await ok('/api/admin/content/gaba1500',{method:'PATCH',body:{status:'hold',revision:product.revision,reason:'TEST product withdrawn'}});
   assert.equal(await findPublic(),undefined);
-  await ok('/api/admin/content/gaba750',{method:'PATCH',body:{status:'approved',revision:product.revision+1,reason:'TEST product restored'}});
+  await ok('/api/admin/content/gaba1500',{method:'PATCH',body:{status:'approved',revision:product.revision+1,reason:'TEST product restored'}});
   assert.equal((await findPublic()).publicText,review.quote);
-  const destination=(await ok('/api/admin/content')).items.find(i=>i.id==='shop-review-destination');
+  const destination=(await ok('/api/admin/content')).items.find(i=>i.id==='shop-review-destination-1500');
   assert.ok(destination);
-  assert.equal((await request('/api/admin/content/shop-review-destination',{method:'PATCH',body:{publicText:'TEST unreviewed quotation bypass',revision:destination.revision,reason:'TEST bypass'}})).status,400);
+  assert.equal((await request('/api/admin/content/shop-review-destination-1500',{method:'PATCH',body:{publicText:'TEST unreviewed quotation bypass',revision:destination.revision,reason:'TEST bypass'}})).status,400);
   assert.equal((await ok('/api/content')).reviews.find(r=>r.id===destination.id).publicText,initial.reviews.find(r=>r.id===destination.id).publicText);
   // The same revision may be committed once, even through concurrent HTTP requests.
   const race=await Promise.all(['A','B'].map(label=>request(path,{method:'PATCH',body:{review:{...review,quote:`TEST edit ${label}`},revision:2,reason:`TEST editor ${label}`}})));

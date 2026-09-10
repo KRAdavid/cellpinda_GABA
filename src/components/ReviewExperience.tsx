@@ -27,20 +27,20 @@ const readingQuestions = [
 
 function reviewDestination(review: PublicReview) {
   // The official destination remains available independently of quoted reviews.
-  if (review.status !== 'approved' || !['shop-review-destination','shop-review-destination-1500'].includes(review.id) || !review.publicText || !review.sourceUrl) return null;
+  if (review.status !== 'approved' || review.id !== 'shop-review-destination-1500' || !review.publicText || !review.sourceUrl) return null;
   try {
     const url = new URL(review.sourceUrl);
     if (url.protocol !== 'https:' || !['cellpinda.co.kr', 'www.cellpinda.co.kr'].includes(url.hostname)) return null;
-    const productId = review.id === 'shop-review-destination' ? 'gaba750' : 'gaba1500';
-    const productNo = productId === 'gaba750' ? '39' : '27';
+    const productId = 'gaba1500';
+    const productNo = '27';
     const pathMatch = url.pathname.endsWith(`/${productNo}/`) || url.pathname.endsWith(`/${productNo}`);
     if (url.searchParams.get('product_no') !== productNo && !pathMatch) return null;
     url.hash = 'prdReview';
-    return { url: url.href, productId, label: `${productId === 'gaba750' ? '가바 750' : '가바 1500'} · 공식몰 후기 읽기` };
+    return { url: url.href, productId, label: '가바 1500 · 공식몰 후기 읽기' };
   } catch { return null; }
 }
 
-const productNames:Record<string,string>={gaba750:'가바 750',gaba1500:'가바 1500'};
+const productNames:Record<string,string>={gaba1500:'가바 1500'};
 function quoteSource(review:PublicReview) {
   if(review.status!=='approved'||review.reviewType!=='quote'||!review.productId||!productNames[review.productId])return null;
   if(![review.publicText,review.authorLabel,review.authoredAt,review.context,review.disclosure,review.sourceTitle].every(value=>typeof value==='string'&&value.trim()))return null;

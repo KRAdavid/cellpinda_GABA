@@ -9,9 +9,7 @@ type Product = {
 type Track = (name: string, properties?: Record<string, string>) => void;
 
 export default function PurchaseQuestions({ products, onEvent }: { products: Product[]; onEvent?: Track }) {
-  const productById = new Map(products.map(product => [product.id, product]));
-  const product750 = productById.get('gaba750');
-  const product1500 = productById.get('gaba1500');
+  const productSummary = products.map(product => `${product.name}은 1포 ${product.amountMg.toLocaleString()} mg·${product.servings}포 구성`).join(', ');
   return <section className="purchase-faq" aria-labelledby="purchase-faq-heading">
     <div className="purchase-faq-heading">
       <p className="chapter">구매 전 확인</p>
@@ -20,8 +18,8 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
     </div>
     <div className="purchase-faq-list">
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'amount' }); }}>
-        <summary>750과 1500은 무엇이 다른가요?</summary>
-        <div><p>{product750?.name || '가바 750'}은 1포 750 mg·30포, {product1500?.name || '가바 1500'}은 1포 1,500 mg·30포 구성으로 상품명과 제품 이미지에서 확인됩니다.</p><p>내용량 차이를 특정 증상이나 사람에게 맞는 권장량으로 해석하지 않습니다.</p></div>
+        <summary>현재 판매 제품은 어떤 구성인가요?</summary>
+        <div><p>{productSummary ? `${productSummary}입니다.` : '현재 공개된 제품 구성 정보가 없습니다.'} 상품명과 제품 이미지에서 확인한 범위만 안내합니다.</p><p>내용량을 특정 증상이나 사람에게 맞는 권장량으로 해석하지 않습니다.</p></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'selection' }); }}>
         <summary>어떤 제품이 나에게 맞는지 알려주나요?</summary>
