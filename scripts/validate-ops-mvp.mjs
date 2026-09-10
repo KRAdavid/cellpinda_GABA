@@ -5,6 +5,7 @@ import {
   buildTaskDecision,
   generateMvpPlan,
   runSandboxTask,
+  runSandboxWave,
   verifySandboxTask,
 } from '../src/domain/goal-mvp.ts';
 
@@ -17,28 +18,17 @@ assert.equal(plan.contract.workstreams.length, 5);
 assert.equal(plan.contract.team.length, 10);
 assert.equal(plan.tasks.length, 6);
 
-let tasks = plan.tasks;
-let events = [];
-let decisions = [buildContractDecision(plan.contract, timestamps[0])];
-let clock = 1;
+const wave = runSandboxWave(plan.contract, plan.tasks, timestamps[1]);
+assert.deepEqual(wave.progressedTaskIds, ['G1', 'E1', 'E2', 'C1', 'Q1']);
+assert.equal(wave.approval?.risk, 'E_EXTERNAL_COMMITMENT');
+assert.equal(wave.approvalTaskId, 'P1');
+assert.equal(wave.stoppedReason, 'approval_required');
+assert.equal(wave.tasks.find(task => task.id === 'P1')?.state, 'WAITING');
 
-for (const taskId of ['G1', 'E1', 'E2', 'C1', 'Q1']) {
-  const execution = runSandboxTask(tasks, taskId, undefined, timestamps[clock++]);
-  assert.equal(execution.approval, undefined, `${taskId} unexpectedly requires approval`);
-  tasks = execution.tasks;
-  events = [...events, ...execution.events];
-  decisions = [...decisions, buildTaskDecision(plan.contract, tasks.find(task => task.id === taskId), timestamps[clock++])];
-  const verification = verifySandboxTask(tasks, taskId, timestamps[clock++]);
-  tasks = verification.tasks;
-  events = [...events, ...verification.events];
-  decisions = [...decisions, buildTaskDecision(plan.contract, tasks.find(task => task.id === taskId), timestamps[clock++])];
-}
-
-const approval = runSandboxTask(tasks, 'P1', undefined, timestamps[clock++]);
-assert.equal(approval.approval?.risk, 'E_EXTERNAL_COMMITMENT');
-assert.equal(approval.tasks.find(task => task.id === 'P1')?.state, 'WAITING');
-tasks = approval.tasks;
-decisions = [...decisions, buildTaskDecision(plan.contract, tasks.find(task => task.id === 'P1'), timestamps[clock++])];
+let tasks = wave.tasks;
+let events = wave.events;
+let decisions = [buildContractDecision(plan.contract, timestamps[0]), ...wave.decisions];
+let clock = 2;
 
 const resumed = runSandboxTask(tasks, 'P1', 'sandbox-approval', timestamps[clock++]);
 assert.equal(resumed.approval, undefined);
@@ -75,6 +65,7 @@ console.log(JSON.stringify({
   decisions: report.decisionRecords.length,
   auditEvents: report.auditEvents.length,
   approvalGate: 'WAITING->READY->RUNNING->VERIFYING',
+  automatedWave: `${wave.progressedTaskIds.length} internal tasks -> P1 approval`,
   recommendation: report.recommendation,
   verificationStatus: report.verificationStatus,
 }));
