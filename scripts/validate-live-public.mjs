@@ -15,14 +15,15 @@ const request = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, contentResponse, masterResponse, queueResponse, pulseResponse] = await Promise.all([
+    const [page, contentResponse, masterResponse, queueResponse, pulseResponse, auditResponse] = await Promise.all([
       request('/?view=ops'),
       request('/data/content.json'),
       request('/data/gaba-master-index.json'),
       request('/data/operations-queue.json'),
       request('/data/tf-pulse.json'),
+      request('/data/goal-audit.json'),
     ]);
-    const [pageText, content, master, queue, publicPulse] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), queueResponse.json(), pulseResponse.json()]);
+    const [pageText, content, master, queue, publicPulse, publicAudit] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json()]);
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
@@ -39,6 +40,18 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicPulse.goalId, queue.goalId, 'live public TF pulse packet must use the active goal');
     assert.equal(publicPulse.generatedAt, queue.pulse.generatedAt, 'live public TF pulse packet timestamp must match the queue');
     assert.equal(publicPulse.snapshotHash, queue.pulse.snapshotHash, 'live public TF pulse packet hash must match the queue');
+    assert.equal(publicAudit.mode, 'public_goal_audit', 'live public goal audit packet must use the public schema');
+    assert.equal(publicAudit.goalId, queue.goalId, 'live public goal audit packet must use the active goal');
+    assert.equal(publicAudit.status, queue.status, 'live public goal audit status must match the queue');
+    assert.equal(publicAudit.checkedAt, queue.checkedAt, 'live public goal audit timestamp must match the queue');
+    assert.deepEqual(publicAudit.roleCoverage, publicPulse.roleCoverage, 'live public goal audit role coverage must match the pulse');
+    assert.deepEqual(publicAudit.taskCounts, publicPulse.counts, 'live public goal audit counts must match the pulse');
+    assert.equal(publicAudit.milestones.masterIndex.claims, content.claims.length, 'live public audit claim count must match content');
+    assert.equal(publicAudit.milestones.masterIndex.researchRecords, master.records.length, 'live public audit research count must match master index');
+    assert.equal(publicAudit.milestones.publicProduct.products, content.products.length, 'live public audit product count must match content');
+    assert.equal(publicAudit.milestones.tfPulse.snapshotHash, publicPulse.snapshotHash, 'live public audit pulse hash must match the pulse');
+    assert.equal(publicAudit.teaserGate.taskId, 'B4', 'live public audit must expose the teaser gate');
+    assert.ok(Array.isArray(publicAudit.gates) && publicAudit.gates.length === queue.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state)).length, 'live public audit gate count must match the queue');
     assert.equal(publicPulse.meetingAgenda.length, queue.pulse.activeTasks, 'live public TF pulse agenda count must match the queue');
     assert.equal(publicPulse.inputGates.length, queue.pulse.inputGates, 'live public TF pulse gate count must match the queue');
     assert.ok(Array.isArray(queue.roleCoverage) && queue.roleCoverage.length === 6, 'live operations queue role coverage is missing');
@@ -75,7 +88,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, queueTasks: queue.tasks.length, waitingTasks: waitingTasks.length, pulseHash: queue.pulse.snapshotHash.slice(0, 12), smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, queueTasks: queue.tasks.length, waitingTasks: waitingTasks.length, auditGates: publicAudit.gates.length, pulseHash: queue.pulse.snapshotHash.slice(0, 12), smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {

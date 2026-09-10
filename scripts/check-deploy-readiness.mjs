@@ -16,15 +16,17 @@ try {
   check('wrangler-runtime-name',typeof config.name==='string' && config.name.length>0,`name=${config.name ?? 'missing'}`);
 } catch (error) { check('wrangler-config',false,error instanceof Error ? error.message : 'invalid JSON'); }
 
-for(const file of ['dist/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/data/operations-queue.json','dist/data/tf-pulse.json']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
+for(const file of ['dist/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/data/operations-queue.json','dist/data/tf-pulse.json','dist/data/goal-audit.json']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
 try {
   const content=readJson('public/data/content.json');
   const master=readJson('public/data/gaba-master-index.json');
   const queue=readJson('public/data/operations-queue.json');
+  const audit=readJson('public/data/goal-audit.json');
   const taskGraph=readJson('data/task-graph.json');
   check('public-product-scope',content.products?.length===1 && content.products[0]?.id==='gaba1500' && !JSON.stringify(content).includes('750'),'gaba1500 only');
   check('master-index',master.records?.length===8 && master.records.every(record=>record.id?.startsWith('research-')),'8 approved research records');
   check('operations-queue',queue.tasks?.length===taskGraph.tasks?.length && queue.goalId==='GL-2026-CELL-GABA-001',`${taskGraph.tasks?.length ?? 0} tasks for active Goal Contract`);
+  check('goal-audit',audit.mode==='public_goal_audit' && audit.goalId===queue.goalId && audit.gates?.length===queue.tasks.filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state)).length,'public audit packet tied to operations queue');
 } catch (error) { check('public-export',false,error instanceof Error ? error.message : 'invalid public export'); }
 
 const missingSecrets=requiredSecrets.filter(name=>typeof process.env[name]!=='string' || !process.env[name].trim());

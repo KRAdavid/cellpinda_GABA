@@ -8,6 +8,7 @@ const source=resolve(root,'data/content-ledger.json');
 const target=resolve(root,'public/data/content.json');
 const goalContract=JSON.parse(readFileSync(resolve(root,'data/goal-contract.json'),'utf8'));
 const taskGraph=JSON.parse(readFileSync(resolve(root,'data/task-graph.json'),'utf8'));
+const teaser=JSON.parse(readFileSync(resolve(root,'data/teaser-manifest.json'),'utf8'));
 const ledger=JSON.parse(readFileSync(source,'utf8'));
 const pulseRun=spawnSync(process.execPath,[resolve(root,'scripts/tf-pulse.mjs'),'--json'],{encoding:'utf8'});
 if(pulseRun.status!==0)throw new Error(`TF pulse generation failed: ${pulseRun.stderr?.trim() || 'unknown error'}`);
@@ -146,4 +147,28 @@ const publicPulse={
 };
 const pulseTarget=resolve(root,'public/data/tf-pulse.json');
 writeFileSync(pulseTarget,JSON.stringify(publicPulse,null,2)+'\n');
-console.log(JSON.stringify({target,masterTarget,operationsTarget,pulseTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));
+const taskCounts=Object.fromEntries(taskGraph.stateMachine.map(state=>[state,taskGraph.tasks.filter(task=>task.state===state).length]));
+const publicAudit={
+  schemaVersion:1,
+  mode:'public_goal_audit',
+  goalId:goalContract.goalId,
+  title:goalContract.title,
+  status:goalContract.status,
+  overallStatus:taskGraph.tasks.some(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state)) || teaser.status!=='APPROVED' ? 'IN_PROGRESS_WITH_GATES' : 'COMPLETE',
+  checkedAt:goalContract.checkedAt,
+  roleCoverage:publicPulse.roleCoverage,
+  taskCounts,
+  milestones:{
+    masterIndex:{status:'MET',claims:claims.length,researchRecords:masterIndex.records.length},
+    publicProduct:{status:'MET',products:products.length,smartStoreOnly:true,removed750:true},
+    tfPulse:{status:'MET',generatedAt:publicPulse.generatedAt,snapshotHash:publicPulse.snapshotHash,requiresHumanDecision:publicPulse.requiresHumanDecision},
+  },
+  gates:taskGraph.tasks
+    .filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state))
+    .map(task=>({id:task.id,title:task.title,state:task.state,lead:task.lead,verifier:task.verifier,requiredInputs:Array.isArray(task.requiredInputs)?task.requiredInputs:[],...publicTaskDecision({state:task.state,blockedBy:task.blockedBy,requiredInputs:task.requiredInputs})})),
+  teaserGate:{status:teaser.status,taskId:'B4',taskState:taskGraph.tasks.find(task=>task.id==='B4')?.state ?? null},
+  note:'이 패킷은 공개 운영 상태의 요약이며, 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않습니다.',
+};
+const auditTarget=resolve(root,'public/data/goal-audit.json');
+writeFileSync(auditTarget,JSON.stringify(publicAudit,null,2)+'\n');
+console.log(JSON.stringify({target,masterTarget,operationsTarget,pulseTarget,auditTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));

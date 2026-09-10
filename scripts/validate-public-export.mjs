@@ -6,8 +6,10 @@ const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
 const operationsQueue = await readJson('public/data/operations-queue.json');
 const publicPulse = await readJson('public/data/tf-pulse.json');
+const publicAudit = await readJson('public/data/goal-audit.json');
 const taskGraph = await readJson('data/task-graph.json');
 const roleRegistry = await readJson('data/tf-role-registry.json');
+const goalContract = await readJson('data/goal-contract.json');
 const fail = message => { throw new Error(`Public export invalid: ${message}`); };
 const isHttps = value => {
   try { return new URL(value).protocol === 'https:'; } catch { return false; }
@@ -19,7 +21,7 @@ const isSmartStore = value => {
   } catch { return false; }
 };
 
-if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1) fail('unsupported schema');
+if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1) fail('unsupported schema');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');
@@ -37,6 +39,7 @@ scanKeys(content);
 scanKeys(master);
 scanKeys(operationsQueue);
 scanKeys(publicPulse);
+scanKeys(publicAudit);
 
 if (operationsQueue.goalId !== 'GL-2026-CELL-GABA-001' || operationsQueue.status !== 'ACTIVE') fail('operations queue is not tied to the active Goal Contract');
 if (!operationsQueue.pulse || !/^\d{4}-\d{2}-\d{2}T/.test(operationsQueue.pulse.generatedAt) || !/^[a-f0-9]{64}$/.test(operationsQueue.pulse.snapshotHash) || typeof operationsQueue.pulse.requiresHumanDecision !== 'boolean' || operationsQueue.pulse.activeTasks !== taskGraph.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length || operationsQueue.pulse.inputGates !== taskGraph.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length) fail('operations queue pulse summary is missing or out of sync');
@@ -45,6 +48,9 @@ if (publicPulse.inputGates.length !== operationsQueue.pulse.inputGates || public
 const requiredRoleCoverage = roleRegistry.roles.map(({id, label}) => ({id, label, status: 'present'}));
 if (!Array.isArray(publicPulse.roleCoverage) || JSON.stringify(publicPulse.roleCoverage) !== JSON.stringify(requiredRoleCoverage)) fail('public TF pulse role coverage is missing or malformed');
 if (!Array.isArray(operationsQueue.roleCoverage) || JSON.stringify(operationsQueue.roleCoverage) !== JSON.stringify(publicPulse.roleCoverage)) fail('operations queue role coverage is missing or out of sync');
+if (publicAudit.mode !== 'public_goal_audit' || publicAudit.goalId !== goalContract.goalId || publicAudit.title !== goalContract.title || publicAudit.status !== goalContract.status || publicAudit.checkedAt !== goalContract.checkedAt) fail('public goal audit is not tied to the active Goal Contract');
+if (!['IN_PROGRESS_WITH_GATES', 'COMPLETE'].includes(publicAudit.overallStatus)) fail('public goal audit has an unsupported overall status');
+if (!Array.isArray(publicAudit.roleCoverage) || JSON.stringify(publicAudit.roleCoverage) !== JSON.stringify(requiredRoleCoverage)) fail('public goal audit role coverage is missing or malformed');
 const requireExactKeys = (value, expected, label) => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail(`${label} must be an object`);
   const actual = Object.keys(value).sort();
@@ -55,6 +61,19 @@ for (const [index, gate] of publicPulse.inputGates.entries()) requireExactKeys(g
 for (const [index, agenda] of publicPulse.meetingAgenda.entries()) requireExactKeys(agenda, ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'requiredInputs', 'nextAction', 'mode'], `public pulse meeting agenda ${index}`);
 if (!publicPulse.counts || typeof publicPulse.counts !== 'object' || Object.values(publicPulse.counts).reduce((sum, count) => sum + count, 0) !== taskGraph.tasks.length) fail('public TF pulse state counts do not cover the task graph');
 for (const state of taskGraph.stateMachine) if (publicPulse.counts[state] !== taskGraph.tasks.filter(task => task.state === state).length) fail(`public TF pulse count is out of sync for ${state}`);
+if (!publicAudit.taskCounts || typeof publicAudit.taskCounts !== 'object') fail('public goal audit task counts are missing');
+for (const state of taskGraph.stateMachine) if (publicAudit.taskCounts[state] !== taskGraph.tasks.filter(task => task.state === state).length) fail(`public goal audit count is out of sync for ${state}`);
+if (JSON.stringify(publicAudit.taskCounts) !== JSON.stringify(publicPulse.counts)) fail('public goal audit and TF pulse counts differ');
+if (!publicAudit.milestones || publicAudit.milestones.masterIndex?.status !== 'MET' || publicAudit.milestones.masterIndex.claims !== content.claims.length || publicAudit.milestones.masterIndex.researchRecords !== master.records.length || publicAudit.milestones.publicProduct?.status !== 'MET' || publicAudit.milestones.publicProduct.products !== content.products.length || publicAudit.milestones.publicProduct.smartStoreOnly !== true || publicAudit.milestones.publicProduct.removed750 !== true || publicAudit.milestones.tfPulse?.status !== 'MET' || publicAudit.milestones.tfPulse.generatedAt !== publicPulse.generatedAt || publicAudit.milestones.tfPulse.snapshotHash !== publicPulse.snapshotHash || publicAudit.milestones.tfPulse.requiresHumanDecision !== publicPulse.requiresHumanDecision) fail('public goal audit milestones are missing or out of sync');
+const publicGatedTasks = taskGraph.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state));
+if (!Array.isArray(publicAudit.gates) || publicAudit.gates.length !== publicGatedTasks.length) fail('public goal audit gates do not match the task graph');
+const expectedGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction'];
+for (const [index, gate] of publicAudit.gates.entries()) {
+  requireExactKeys(gate, expectedGateKeys, `public goal audit gate ${index}`);
+  const task = taskGraph.tasks.find(candidate => candidate.id === gate.id);
+  if (!task || task.title !== gate.title || task.state !== gate.state || task.lead !== gate.lead || task.verifier !== gate.verifier || JSON.stringify(task.requiredInputs || []) !== JSON.stringify(gate.requiredInputs) || !gate.decision || !gate.decisionMode || !gate.nextAction) fail(`public goal audit gate ${gate.id ?? '(unknown)'} is missing or out of sync`);
+}
+if (publicAudit.teaserGate?.taskId !== 'B4' || publicAudit.teaserGate.taskState !== taskGraph.tasks.find(task => task.id === 'B4')?.state || publicAudit.teaserGate.status !== 'HOLD') fail('public goal audit teaser gate is missing or out of sync');
 if (!Array.isArray(operationsQueue.workstreams) || operationsQueue.workstreams.length !== 5) fail('operations queue must expose five active workstreams');
 if (!Array.isArray(operationsQueue.tasks) || operationsQueue.tasks.length !== taskGraph.tasks.length) fail('operations queue must expose the current task graph');
 const queueIds = new Set();
