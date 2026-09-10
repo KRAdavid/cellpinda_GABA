@@ -109,3 +109,7 @@ Worker는 제품 전용 title/description/canonical을 출력하고, 중복/잘�
 명령은 frontend build 후 `pnpm run test:worker-reviews`다. 기존 Node SQLite 대역 검사와 달리 실제 로컬 workerd/D1 바인딩을 통과한다. AI 교차 검토에서 제안한 제품 연동·목적지 우회 경로를 추가했다. 실제 Cloudflare 원격 D1, 물리 모바일, 다중 운영자 권한, 백업 복원, 실제 후기 권한과 전체 플랫폼 미완 범위는 여전히 별도다. 재시작 보존을 백업 복구로 계산하지 않는다.
 
 GitHub의 동일 검사는 Linux에서도 통과했다. [실행34446456828](https://github.com/KRAdavid/cellpinda-rhythm/actions/runs/34446456828), commit `9bcade4893d6c09c40d36799dfca4b8c36c06335`, verify job49초 success. 기존37검사·타입·빌드·Worker dry-run과 새 로컬 D1 통합 단계를 모두 통과했다. 초기 Windows 실행에서 남은 `tmp/reviews-d1-WqMmY8`의 추가 삭제 명령은 자동 승인 정책으로 거절돼 그대로 두었다. 운영 DB와 무관한 Git 제외 시험 폴더이며, 이후 최종 검사의 임시 디렉터리 정리는 통과했다.
+
+## 제품 비교 실물 표시 보완
+
+제품 비교 화면을 데스크톱 첫 진입에서 확인하는 과정에서 두 번째 제품 카드의 지연 이미지가 빈 영역으로 남는 것을 발견했다. 750·1500 두 제품은 선택 비교의 핵심이므로 `src/App.tsx`에서 두 이미지의 지연 로딩을 제거하고 비동기 디코딩만 사용했다. 1440px·390px Playwright 화면에서 두 이미지 모두 `complete=true`, 실제 자연 크기 로드, 모바일 가로 넘침 없음, 콘솔 오류 없음으로 확인했다. 이는 제품 효능·표시사항을 추가 승인한 변경이 아니다.
