@@ -211,3 +211,9 @@ pulse 패킷 구현 커밋 `ca612c2`의 [GitHub Actions 34514541733](https://git
 배포된 [공개 사이트](https://kradavid.github.io/cellpinda_GABA/)와 [운영 MVP](https://kradavid.github.io/cellpinda_GABA/?view=ops)를 다시 확인해 page 200, 승인 연구 8건, 주장 14건, 제품 1종, 운영 큐 13개, `DONE=8`, `VERIFYING=1`, `WAITING=4`, Smart Store only, 750 제거, provenance 일치를 확인했다. 라이브 `tf-pulse.json`과 `operations-queue.json`은 마케팅·소비자심리, 연구·근거, 제품·표시, 스토리·UX·프런트, 데이터·판매처, QA·감사 6개 역할군을 같은 순서와 `present` 상태로 제공한다.
 
 이 재감사는 역할 책임 구조와 배포 재현성을 증명하지만 실제 외부 전문가 섭외, B2 표시 승인, B3 후기 재게시 권한, B4 티저 공개 승인, C2 Cloudflare 운영 연결, E1 실제 주문 대사를 완료한 증거가 아니다. 해당 입력이 들어오기 전까지 자동 pulse는 회의 안건·필요 입력만 갱신하고 공개·구매·법적 약속은 실행하지 않는다.
+
+## 2026-09-11 독립 검증자 분리 guard 재감사
+
+canonical 업무 그래프·TF pulse·공개 운영 큐·생성형 MVP의 모든 작업에서 실행 담당자와 검증자가 같은 문자열이 되지 않도록 guard를 추가했다. `goal:next`, `validate:tf-pulse`, `validate:ops`, 공개 export와 라이브 smoke가 각각 이 조건을 검사하므로 독립 검토 역할이 빠지거나 담당자와 합쳐지면 배포가 실패한다. 커밋 `753bc84`의 [GitHub Actions 34523718416](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34523718416)이 새 검증을 포함한 Goal Contract·연구 문구·테스트·Pages·라이브 smoke를 성공시켰다.
+
+현재 라이브 pulse는 역할군 6개, 회의 참여자 2명씩의 분리된 담당·검증 구조, `VERIFYING=B2`, `WAITING=B3·B4·C2·E1`을 유지한다. 로컬 자료·주문 재감사에서도 새 승인 입력은 발견되지 않았으므로 상태를 자동 승격하지 않았다. 이 guard는 역할 배정의 독립성을 확인하는 규칙이며 실제 외부 전문가 자격·섭외나 B2·B3·B4·C2·E1 완료를 의미하지 않는다.
