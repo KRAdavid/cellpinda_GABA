@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "goalId": "GL-2026-CELL-GABA-001",
+  "status": "HOLD",
+  "reviewedAt": "2026-09-10",
+  "internalReviewUrl": "https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site/",
+  "publicMediaUrl": null,
+  "placement": "선택형 보조 CTA · 리듬 체크 다음",
+  "requiredApprovals": [
+    "로그인 없는 공개 URL 또는 MP4/HLS 주소",
+    "포스터·전체 자막·대본·총 길이",
+    "제품 표시사항과 연구 장면별 출처 대조",
+    "음원·이미지·인터뷰 사용권",
+    "영상 종료 CTA와 캠페인 기간",
+    "표시·콘텐츠 검토자의 공개 승인"
+  ],
+  "events": [
+    "teaser_impression",
+    "teaser_play",
+    "teaser_progress_25",
+    "teaser_progress_50",
+    "teaser_progress_75",
+    "teaser_complete",
+    "teaser_caption_opened",
+    "teaser_cta_clicked",
+    "teaser_exit"
+  ]
+}
