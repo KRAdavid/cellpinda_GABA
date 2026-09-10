@@ -1,6 +1,7 @@
 import {readFile} from 'node:fs/promises';
 
 const ledger = JSON.parse(await readFile(new URL('../data/content-ledger.json', import.meta.url), 'utf8'));
+const researchLibrary = await readFile(new URL('../src/components/ResearchLibrary.tsx', import.meta.url), 'utf8');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
@@ -17,4 +18,9 @@ for (const claim of research) {
   }
 }
 
-console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerSummary', 'hopefulTakeaway'], status: 'ok'}));
+const detailBlock = researchLibrary.indexOf('<details className="research-detail"');
+const productLink = researchLibrary.indexOf('className="text-link research-try-link"');
+if (detailBlock < 0 || productLink < detailBlock) fail('product information link must follow research conditions and limitations');
+if (!researchLibrary.slice(productLink, productLink + 320).includes('조건과 적용 범위')) fail('product information link must ask readers to check research context first');
+
+console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerSummary', 'hopefulTakeaway'], flowGuard: 'research-context-before-product-link', status: 'ok'}));
