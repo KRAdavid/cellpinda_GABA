@@ -1,6 +1,6 @@
 # 운영 MVP — 공개용 GABA 논문 마스터 인덱스
 
-기준일: 2026-09-10
+기준일: 2026-09-11
 
 이 MVP는 한 문장 목표를 `Goal Contract → 목표별 TF → 업무 그래프 → 샌드박스 실행 → 결과·승인 보고`로 바꾼다. 공개 사이트의 실제 연구 데이터는 승인 원장 `data/content-ledger.json`에서 생성되며, 빌드 시 `public/data/gaba-master-index.json`으로 export한다.
 
