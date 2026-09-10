@@ -4,6 +4,7 @@ dist-pages/
 worker-build/
 var/
 public/data/content.json
+public/data/gaba-master-index.json
 tmp/
 *.tsbuildinfo
 .env*
