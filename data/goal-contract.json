@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "goalId": "GL-2026-CELL-GABA-001",
+  "title": "셀핀다가바 소비자 체험형 배포 사이트 운영",
+  "sourceDocument": "셀핀다_AI기업_운영체제_상세설계서_v1.0.docx",
+  "checkedAt": "2026-09-10",
+  "status": "ACTIVE",
+  "priority": "P1",
+  "owner": "대표·TF 리드",
+  "outcome": "소비자가 자신의 하루 리듬을 돌아보고 GABA와 발효 기술을 이해한 뒤, 현재 판매 제품인 셀핀다 가바 1500의 구성과 사용 경험을 확인하고 스마트스토어 구매 또는 결과 공유로 이어지는 공개 사이트를 운영한다.",
+  "successMetrics": [
+    {
+      "id": "M1",
+      "name": "공개 제품 범위",
+      "target": "승인 공개 export에 gaba1500 제품 1개만 존재한다.",
+      "status": "MET",
+      "evidence": ["data/content-ledger.json", "public/data/content.json"]
+    },
+    {
+      "id": "M2",
+      "name": "배포 화면 품질",
+      "target": "데스크톱·390px 화면에서 제품 1500 카드, 이미지, 후기 원문 링크가 로드되고 가로 넘침이 없다.",
+      "status": "MET",
+      "evidence": ["GitHub Actions 34456383105", "https://kradavid.github.io/cellpinda_GABA/?view=products#products"]
+    },
+    {
+      "id": "M3",
+      "name": "구매 연결",
+      "target": "제품 카드와 구매 전 질문의 확인 링크가 스마트스토어 판매처로 연결된다.",
+      "status": "MET",
+      "evidence": ["src/App.tsx", "src/components/PurchaseQuestions.tsx"]
+    },
+    {
+      "id": "M4",
+      "name": "근거와 후기 구분",
+      "target": "연구·제품 사실·공식몰 후기 목적지를 분리하고, 완제품 효능 보장이나 권한 없는 인용을 공개하지 않는다.",
+      "status": "PARTIAL",
+      "evidence": ["data/content-ledger.json", "docs/EVIDENCE_AUDIT.md", "src/components/ReviewExperience.tsx"]
+    },
+    {
+      "id": "M5",
+      "name": "실구매 성과",
+      "target": "판매처 주문·취소·환불과 사이트 유입을 대사해 실제 구매 전환을 검증한다.",
+      "status": "BLOCKED",
+      "evidence": ["docs/ORDER_INTEGRATION.md"]
+    }
+  ],
+  "scope": {
+    "in": [
+      "체험형 랜딩과 비진단 리듬 체크",
+      "GABA·발효·연구 근거와 한계 설명",
+      "셀핀다 가바 1500 제품 경험과 후기 원문 진입",
+      "스마트스토어 구매 연결과 결과 공유",
+      "승인 원장·배포 검증·감사 가능한 작업 기록"
+    ],
+    "out": [
+      "단종 제품 재노출",
+      "질환 진단·치료·개인별 용량 추천",
+      "권한 없는 실제 후기 인용",
+      "대표 승인 없는 법적 약속·지출·광고 집행",
+      "Cloudflare 운영 계정이 없는 상태에서의 실운영 Worker 배포"
+    ]
+  },
+  "constraints": [
+    "완제품과 원료 자료를 구분한다.",
+    "연구 결과를 셀핀다가바 완제품의 효과 보장으로 표현하지 않는다.",
+    "공개 콘텐츠는 승인 원장과 HTTPS 공개 출처를 통해서만 생성한다.",
+    "스마트스토어 링크 이동을 실제 구매로 집계하지 않는다.",
+    "개인정보·비밀키·내부 원문은 공개 번들에 포함하지 않는다."
+  ],
+  "assumptions": [
+    "현재 공개 제품은 승인된 셀핀다 가바 1500 1개로 운영한다.",
+    "스마트스토어 판매처 주소는 진입 링크이며 상품별 재고·주문 API 연동은 별도 확정이 필요하다.",
+    "실제 소비자 이해도와 전환 효과는 독립 사용성 조사와 주문 대사 후에만 판단한다."
+  ],
+  "stopConditions": [
+    "규제 또는 표시광고 검토를 통과하지 못한 문구의 외부 공개",
+    "승인되지 않은 제품·후기·근거의 공개 export 유입",
+    "권한·대상·비용이 확인되지 않은 외부 쓰기 행동",
+    "운영자의 중단 요청 또는 비밀정보 노출"
+  ],
+  "approvalPolicy": {
+    "A_READ": "자동 실행하고 로그를 남긴다.",
+    "B_INTERNAL_WRITE": "검증 후 자동 생성한다.",
+    "C_LOW_RISK_INTERNAL": "취소 가능한 범위에서 자동 실행한다.",
+    "D_EXTERNAL_REVERSIBLE": "승인된 문안·대상·정책 조건을 확인한 뒤 실행한다.",
+    "E_EXTERNAL_COMMITMENT": "대표 또는 위임자의 승인 없이는 실행하지 않는다.",
+    "F_LEGAL_IRREVERSIBLE": "인간 책임자가 직접 수행한다."
+  },
+  "workstreams": [
+    {
+      "id": "A",
+      "name": "소비자 여정",
+      "lead": "마케팅·소비자심리·UX",
+      "verifier": "QA",
+      "status": "RELEASED",
+      "nextAction": "실제 소비자 사용성 검증 설계"
+    },
+    {
+      "id": "B",
+      "name": "근거·표시 검토",
+      "lead": "연구·제품 근거",
+      "verifier": "표시·콘텐츠 검토",
+      "status": "IN_PROGRESS",
+      "nextAction": "1500 현행 표시사항과 권한 있는 후기 자료 보강"
+    },
+    {
+      "id": "C",
+      "name": "배포·데이터 운영",
+      "lead": "프런트·서버·배포",
+      "verifier": "QA·감사",
+      "status": "RELEASED",
+      "nextAction": "Cloudflare Secrets와 운영 D1을 확보하면 Worker 배포 재개"
+    },
+    {
+      "id": "D",
+      "name": "자율 운영 코어",
+      "lead": "TF 리드·AI 비서실",
+      "verifier": "품질감사관",
+      "status": "PLANNED",
+      "nextAction": "Goal·Task·Approval·Audit 최소 데이터 모델 설계"
+    }
+  ],
+  "reportingPolicy": "예외와 마일스톤 중심으로 보고하며, 상태가 바뀌거나 대표 결정이 필요한 경우에만 즉시 알린다."
+}

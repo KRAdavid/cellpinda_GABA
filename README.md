@@ -40,6 +40,8 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 - `docs/REQUIREMENTS.md`: 전체 목표 및 요구별 완료 증거
 - `docs/TF_BOARD.md`: 팀 책임·의사결정·백로그
+- `docs/CACOS_GOAL_CONTRACT.md`: 운영체제 설계서에 맞춘 현재 목표·성공 기준·다음 실행 파동
+- `data/goal-contract.json`: 공개 데이터와 분리된 기계 검증용 Goal Contract
 - `docs/IMPLEMENTATION_STATUS.md`: 최신 구현·검증·남은 작업
 - `data/content-ledger.json`: 내부 근거 원장. 전체 파일을 public으로 복사하지 않는다.
 - `docs/EVIDENCE_AUDIT.md`, `docs/ASSET_SOURCES.md`: 원문 검토·실제 제품 사진 출처

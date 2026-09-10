@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "sync:data": "node scripts/sync-public-data.mjs",
-    "build": "pnpm run sync:data && tsc -b && vite build",
+    "validate:goal": "node scripts/validate-goal-contract.mjs",
+    "build": "pnpm run validate:goal && pnpm run sync:data && tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "server": "node server/index.mjs",
     "test": "node --test src/domain/rhythm.test.ts src/domain/challenge.test.ts src/domain/orders.test.ts src/domain/reviews.test.ts server/server.test.mjs worker/worker.test.mjs worker/social.test.mjs worker/members.test.mjs",
