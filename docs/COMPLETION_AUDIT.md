@@ -243,3 +243,9 @@ canonical 업무 그래프·TF pulse·공개 운영 큐·생성형 MVP의 모든
 ## 2026-09-11 pulse 중복 배포 경계 보강
 
 GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 실행하지 않는다는 점을 재현했다. 따라서 `TF decision pulse`는 `actions: write` 권한으로 `deploy.yml`을 한 번 명시적으로 dispatch하되, heartbeat 커밋에 `[skip ci]`를 붙여 push 기반 중복 실행을 차단하도록 정리했다. 기존 중복 실행은 concurrency에서 취소될 수 있었고, 새 경계는 heartbeat 1회와 배포 1회의 관계를 보존한다. `scripts/validate-tf-pulse-workflow.mjs`를 build에 연결해 이 순서·권한·중복 방지 조건이 되돌아가면 배포 검증이 실패하도록 고정했다. 수정된 workflow는 pulse 수동 실행 [34529573506](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34529573506)과 heartbeat 후 단일 배포 dispatch [34529597308](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34529597308)로 재현했으며, heartbeat 커밋 `865ea78` 이후 중복 push 배포가 발생하지 않았다.
+
+## 2026-09-11 공개 목표 감사 패킷과 라이브 재검증
+
+공개 운영 큐 상단에 `목표 감사 JSON` 링크를 추가하고 `scripts/sync-public-data.mjs`가 Goal Contract·역할 커버리지·상태 카운트·논문/제품/TF pulse 마일스톤·현재 입력 게이트를 개인정보와 내부 경로 없이 생성하도록 보강했다. `validate-public-export`, `validate-live-public`, `check-deploy-readiness`가 이 패킷을 큐·pulse·canonical 그래프와 대조한다. 공개 패킷은 `IN_PROGRESS_WITH_GATES`, 게이트 5건, 연구 8건, Smart Store `gaba1500` 1건을 보고하며, 실제 외부 승인·전문가 자격·주문 완료를 완료로 승격하지 않는다.
+
+커밋 `7302cef`·`0421ef2`의 [GitHub Actions 34532696449](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34532696449)는 verify·Pages 게시·라이브 smoke를 모두 성공시켰다. 로컬 `pnpm run validate:live`도 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, auditGates 5, pulse 상태 지문 일치를 확인했다. Cloudflare Secrets 5개가 없어 Worker 단계는 구성 보고 후 건너뛰었고, C2·B2·B3·B4·E1은 계속 입력·승인 대기다.

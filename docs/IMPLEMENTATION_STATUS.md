@@ -2,6 +2,12 @@
 
 목표 파일 전체를 읽고 구현을 시작했다. 기존 회의 문서 작성은 progress로 분류한다. 이번 작업도 실제 코드·원장·이미지·테스트를 만들었으므로 progress다. 전체 목표는 아직 완료되지 않았다.
 
+## 최신 업데이트 — 2026-09-11 공개 목표 감사 패킷
+
+공개 운영 큐에서 `목표 감사 JSON`을 바로 열 수 있게 하고, Goal Contract·6개 역할군·상태별 작업 수·완료 마일스톤·현재 `VERIFYING`·`WAITING` 게이트를 동일한 실행에서 생성하도록 연결했다. `validate:public`, `validate-live-public`, `preflight:deploy`가 감사 패킷의 목표 ID·상태·카운트·게이트·pulse 상태 지문 일치를 검사한다. 커밋 [`7302cef`](https://github.com/KRAdavid/cellpinda_GABA/commit/7302cef)와 생성 산출물 무시 정리 [`0421ef2`](https://github.com/KRAdavid/cellpinda_GABA/commit/0421ef2)의 [GitHub Actions 34532696449](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34532696449)는 verify·Pages·라이브 smoke를 성공시켰다.
+
+라이브 [목표 감사 패킷](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)은 `IN_PROGRESS_WITH_GATES`, 게이트 5건(B2 VERIFYING, B3·B4·C2·E1 WAITING), 논문 레코드 8건, Smart Store 1500 제품 1건을 보여 준다. 감사 패킷은 중간 검토용 요약이며 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않는다.
+
 ## 최신 업데이트 — 2026-09-11 TF pulse 재현과 신선도 표시
 
 운영 보드가 마지막 TF pulse 시각뿐 아니라 `방금 갱신`·`몇 분 전 갱신`·`업데이트 지연` 상태를 표시하도록 보강했다. 6시간 주기 pulse를 현재 코드에서 수동 재현한 [34530924367](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530924367)은 계약·역할·업무 그래프 검증과 안전 heartbeat 생성을 성공시켰고, heartbeat 커밋 [`97026c2`](https://github.com/KRAdavid/cellpinda_GABA/commit/97026c2) 이후 [단일 deploy·Pages·라이브 smoke 34530948751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530948751)도 성공했다. `[skip ci]`와 명시적 dispatch 경계가 유지되어 중복 배포는 발생하지 않았다.
