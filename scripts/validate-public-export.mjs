@@ -43,7 +43,7 @@ const graphIds = new Set(taskGraph.tasks.map(task => task.id));
 for (const task of operationsQueue.tasks) {
   if (queueIds.has(task.id)) fail(`operations queue contains duplicate task ${task.id}`);
   queueIds.add(task.id);
-  if (!task.id || !task.stream || !task.title || !task.state || !task.lead || !task.verifier || !Array.isArray(task.dependencies)) fail(`operations queue task ${task.id ?? '(unknown)'} is incomplete`);
+  if (!task.id || !task.stream || !task.title || !task.state || !task.lead || !task.verifier || !task.decision || !task.decisionMode || !task.nextAction || !Array.isArray(task.dependencies)) fail(`operations queue task ${task.id ?? '(unknown)'} is incomplete`);
   if (!['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state)) fail(`operations queue task ${task.id} has an unsupported state`);
 }
 if (queueIds.size !== graphIds.size || [...graphIds].some(id => !queueIds.has(id))) fail('operations queue task ids do not match the current task graph');

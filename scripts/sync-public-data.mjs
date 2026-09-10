@@ -98,13 +98,20 @@ mkdirSync(dirname(target),{recursive:true});
 writeFileSync(target,JSON.stringify(output,null,2)+'\n');
 const masterTarget=resolve(root,'public/data/gaba-master-index.json');
 writeFileSync(masterTarget,JSON.stringify(masterIndex,null,2)+'\n');
+function publicTaskDecision(task){
+  if(task.state==='VERIFYING') return {decision:'독립 검증 유지',decisionMode:'independent-review',nextAction:'검증 증거와 수락 기준을 대조해 DONE 또는 REWORK로 판정'};
+  if(task.state==='WAITING' || task.state==='BACKLOG') return {decision:'외부 입력 또는 선행조건 대기 유지',decisionMode:'input-gate',nextAction:task.blockedBy ? '필요 입력을 확보한 뒤 담당 TF와 검증자가 재검토' : '선행조건과 담당 증거를 확인한 뒤 실행 가능 상태를 갱신'};
+  if(task.state==='READY') return {decision:'내부 샌드박스 실행 가능',decisionMode:'sandbox-execution',nextAction:'담당자가 샌드박스 실행 후 검증 증거를 연결'};
+  if(task.state==='RUNNING') return {decision:'실행 결과 증거 대기',decisionMode:'execution-tracking',nextAction:'실행 결과를 기록한 뒤 독립 검증으로 전달'};
+  return {decision:'현재 상태와 증거 보존',decisionMode:'state-preservation',nextAction:'상태를 바꿀 사건이 생길 때만 재평가'};
+}
 const operationsQueue={
   schemaVersion:1,
   goalId:goalContract.goalId,
   status:goalContract.status,
   checkedAt:goalContract.checkedAt,
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
-  tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
+  tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy}), ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
 };
 const operationsTarget=resolve(root,'public/data/operations-queue.json');
 writeFileSync(operationsTarget,JSON.stringify(operationsQueue,null,2)+'\n');
