@@ -5,6 +5,7 @@ import ResearchLibrary, {type Claim} from './components/ResearchLibrary';
 import ReviewExperience,{type PublicReview} from './components/ReviewExperience';
 import SevenDayChallenge from './components/SevenDayChallenge';
 import GabaStory from './components/GabaStory';
+import ProductShare from './components/ProductShare';
 const Admin = lazy(() => import('./components/Admin'));
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
 type Product={id:string;name:string;amountMg:number;servings:number;totalG:number;officialUrl:string};
@@ -25,6 +26,13 @@ export default function App(){
   for(const id of ['story','products']){const element=document.getElementById(id);if(element)observer.observe(element)}
   return()=>observer.disconnect();
  },[]);
+ useEffect(()=>{
+  if(!content||location.pathname!=='/')return;
+  const url=new URL(location.href);
+  const productView=url.searchParams.getAll('view').length===1&&url.searchParams.get('view')==='products'&&!url.searchParams.has('rhythm');
+  if(productView){document.getElementById('products')?.scrollIntoView({block:'start',behavior:'instant'});trackOnce('shared_link_landed',{path:'/products',channel:'direct'});}
+  else if(content.products.some(product=>url.hash===`#product-${product.id}`)){document.getElementById(url.hash.slice(1))?.scrollIntoView({block:'start',behavior:'instant'});}
+ },[content]);
  if(location.pathname==='/account')return <Suspense fallback={<p className="loading">내 기록을 여는 중입니다.</p>}><MemberRecords/></Suspense>;
  if(location.pathname==='/admin')return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
  return <><a className="skip" href="#main">본문으로 이동</a><header className="header"><a href="/" className="brand">Cellpinda<span className="brand-dot">.</span></a><nav aria-label="주 메뉴" className={menu?'open':''} onClick={()=>setMenu(false)}><a href="#story">GABA 이야기</a><a href="#fermentation">발효기술</a><a href="#products">제품 경험</a><a href="#reviews">후기 원문</a><a href="#research">연구 근거</a></nav><a href="#rhythm" className="button small">리듬 체크 <ArrowRight size={18}/></a><button className="menu-toggle" aria-label={menu?'메뉴 닫기':'메뉴 열기'} aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>
@@ -34,7 +42,7 @@ export default function App(){
  <GabaStory claims={content?.claims??[]}/>
  <ResearchLibrary claims={content?.claims??[]} onOpen={()=>track('evidence_opened',{path:'/research'})}/>
  <section id="fermentation" className="section sage"><div className="wrap"><div className="section-head"><div><p className="chapter">03 / 발효의 이야기</p><h2>한 포의 출처를<br/>따라가다.</h2></div><p>발효라는 설명에서 한 걸음 더.<br/>균주와 제조 기술의 공개 자료를 살펴봅니다.</p></div><div className="process">{['발효','분리·회수','정량분석','품질 확인'].map((t,i)=><div key={t}><span>0{i+1}</span><h3>{t}</h3></div>)}</div><p className="note">제조 자료를 읽는 네 가지 관점입니다. 현재 제품의 전체 공정을 보증하는 도식은 아닙니다.</p>{error?<p role="status">제품 자료를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.</p>:content?.claims.filter(c=>!c.id.startsWith('product-')&&!c.id.startsWith('research-')&&!c.id.startsWith('gaba-')).map(c=><details className="claim" key={c.id}><summary>{c.publicText}</summary><div><p>{(c.limitations??[]).join(' ')}</p>{c.sources.filter(s=>s.url).map(s=><a key={s.url} href={s.url!} target="_blank" rel="noreferrer">{s.title} ↗ </a>)}</div></details>)}</div></section>
- <section id="products" className="section wrap"><div className="section-head"><div><p className="chapter">04 / 제품 경험</p><h2>선택에 필요한 차이를,<br/>한눈에.</h2></div><p>1포의 내용량과 구성을 비교하세요.<br/>리듬 체크 결과로 제품이나 용량을 권하지 않습니다.</p></div><div className="products">{content?.products.map(p=><article id={`product-${p.id}`} className="product" key={p.id}><img src={`/assets/product-${p.amountMg}.jpg`} alt={`${p.name} 실제 제품 포장`} loading="lazy"/><div className="product-body"><h3>{p.name}</h3><dl><div><dt>1포 내용량</dt><dd>{p.amountMg.toLocaleString()} mg</dd></div><div><dt>구성</dt><dd>{p.servings}포</dd></div><div><dt>총 내용량</dt><dd>{p.totalG} g</dd></div></dl>{p.id==='gaba750' && <p><a className="text-link" href="#reviews">가바 750 후기 원문 안내 →</a></p>}<a className="button outline" href={p.officialUrl} target="_blank" rel="noreferrer" onClick={()=>track('purchase_click',{productId:p.id})}>공식몰에서 구성·재고 확인 <ArrowUpRight size={18}/></a></div></article>)}</div><p className="note">공식몰 상품명 기준 구성 · 확인일 2026.09.10. 가격·재고·섭취 방법·주의사항은 구매 시 제품 표시사항과 공식몰에서 확인하세요.</p></section>
+ <section id="products" className="section wrap"><div className="section-head"><div><p className="chapter">04 / 제품 경험</p><h2>선택에 필요한 차이를,<br/>한눈에.</h2></div><p>1포의 내용량과 구성을 비교하세요.<br/>리듬 체크 결과로 제품이나 용량을 권하지 않습니다.</p></div><div className="products">{content?.products.map(p=><article id={`product-${p.id}`} className="product" key={p.id}><img src={`/assets/product-${p.amountMg}.jpg`} alt={`${p.name} 실제 제품 포장`} loading="lazy"/><div className="product-body"><h3>{p.name}</h3><dl><div><dt>1포 내용량</dt><dd>{p.amountMg.toLocaleString()} mg</dd></div><div><dt>구성</dt><dd>{p.servings}포</dd></div><div><dt>총 내용량</dt><dd>{p.totalG} g</dd></div></dl>{p.id==='gaba750' && <p><a className="text-link" href="#reviews">가바 750 후기 원문 안내 →</a></p>}<a className="button outline" href={p.officialUrl} target="_blank" rel="noreferrer" onClick={()=>track('purchase_click',{productId:p.id})}>공식몰에서 구성·재고 확인 <ArrowUpRight size={18}/></a></div></article>)}</div><p className="note">공식몰 상품명 기준 구성 · 확인일 2026.09.10. 가격·재고·섭취 방법·주의사항은 구매 시 제품 표시사항과 공식몰에서 확인하세요.</p>{Boolean(content?.products.length)&&<ProductShare onEvent={track}/>}</section>
  <ReviewExperience reviews={content?.reviews??[]} onOpen={productId=>track('review_open',{productId})}/>
  <SevenDayChallenge/>
  <section className="closing"><div className="wrap between"><h2>오늘의 나를 돌아보는 시간.<br/>지금, 시작해 볼까요?</h2><a className="button light" href="#rhythm">1분 리듬 체크 <ArrowRight/></a></div></section></main><footer className="wrap footer"><a className="brand" href="/">Cellpinda.</a><p>하루 리듬을 돌아보고, 충분히 알고 선택하세요.</p><a href="https://cellpinda.co.kr" target="_blank" rel="noreferrer">공식몰 ↗</a><a href="/account">내 기록</a><a href="/admin">콘텐츠 검토실</a></footer></>;
