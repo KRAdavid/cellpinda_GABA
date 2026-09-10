@@ -83,6 +83,7 @@ export default function OperationsMvp() {
   const [serverState, setServerState] = useState<'checking' | 'saved' | 'local'>('checking');
   const [queue, setQueue] = useState<QueueSnapshot | null>(null);
   const [goalAudit, setGoalAudit] = useState<GoalAuditSnapshot | null>(null);
+  const [queueError, setQueueError] = useState('');
   const [queueRefresh, setQueueRefresh] = useState(0);
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState('');
@@ -104,8 +105,10 @@ export default function OperationsMvp() {
     ]).then(async ([queueResponse, auditResponse]) => {
       if (!queueResponse.ok || !auditResponse.ok) throw new Error('public operations snapshot unavailable');
       const [snapshot, audit] = await Promise.all([queueResponse.json() as Promise<QueueSnapshot>, auditResponse.json() as Promise<GoalAuditSnapshot>]);
-      if (active) { setQueue(snapshot); setGoalAudit(audit); }
-    }).catch(() => { if (active) { setQueue(null); setGoalAudit(null); } });
+      if (active) { setQueue(snapshot); setGoalAudit(audit); setQueueError(''); }
+    }).catch(() => {
+      if (active) setQueueError('공개 운영 스냅샷을 새로 읽지 못했습니다. 마지막으로 확인된 큐를 유지하고 다시 시도합니다.');
+    });
     void refresh();
     const timer = window.setInterval(refresh, 60_000);
     return () => { active = false; window.clearInterval(timer); };
@@ -281,8 +284,10 @@ export default function OperationsMvp() {
       </form>
       {message ? <p className="ops-mvp-message" role="status">{message}</p> : null}
     </section>
+    {!queue && queueError ? <p className="ops-mvp-live-error wrap" role="status">{queueError}</p> : null}
     {queue ? <section className="ops-mvp-live-queue wrap" aria-labelledby="live-queue-heading">
       <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2><p className="ops-mvp-live-queue-description">저장소의 canonical 업무 그래프입니다. 아래에서 생성하는 Goal Contract 샌드박스는 이 운영 큐를 대신하지 않고 별도 실행·검증을 재현합니다.</p></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong><button className="text-link" type="button" onClick={() => setQueueRefresh(value => value + 1)}>새로고침 ↻</button><a className="text-link" href={`${publicBase}data/tf-pulse.json`} target="_blank" rel="noreferrer">회의 안건 JSON ↗</a><a className="text-link" href={`${publicBase}data/goal-audit.json`} target="_blank" rel="noreferrer">목표 감사 JSON ↗</a></div></div>
+      {queueError ? <p className="ops-mvp-live-error" role="status">{queueError}</p> : null}
       <div className="ops-mvp-live-streams" aria-label="스트림별 현재 상태">{queue.workstreams.map(stream => <span key={stream.id}><strong>{stream.name}</strong><em>{stream.status}</em><small>{stream.nextAction}</small></span>)}</div>
       {queue.roleCoverage?.length ? <div className="ops-mvp-live-roles" aria-label="현재 TF 역할군"><div><span className="ops-mvp-eyebrow">현재 TF 역할군</span><p>이번 pulse가 그래프에서 확인한 교차 검토 책임입니다.</p></div><ul>{queue.roleCoverage.map(role => <li key={role.id}><strong>{role.label}</strong><span>{role.status === 'present' ? '참여 책임 확인' : role.status}</span></li>)}</ul></div> : null}
       <div className="ops-mvp-live-queue-grid" aria-label="업무별 현재 상태">{queue.tasks.map(task => <article key={task.id}><div><strong>{task.id}</strong><span>{stateLabels[task.state] || task.state}</span></div><h3>{task.title}</h3><p className="ops-mvp-live-decision">{task.decision}</p><small>담당 {task.lead} · 독립 검증 {task.verifier}</small>{task.requiredInputs?.length ? <small className="ops-mvp-required-inputs">필요 입력 · {task.requiredInputs.join(' · ')}</small> : null}{task.blockedBy ? <small>대기 이유 · {task.blockedBy}</small> : null}<small>다음 · {task.nextAction}</small></article>)}</div>

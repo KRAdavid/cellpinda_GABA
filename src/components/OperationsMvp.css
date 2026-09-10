@@ -16,6 +16,7 @@
 .ops-mvp-form-row { display: grid; gap: 10px; justify-items: end; }
 .ops-mvp-form-row small { color: #b8cec1; }
 .ops-mvp-message { width: min(1280px,calc(100% - 80px)); margin: 20px auto 0; color: #315f48; }
+.ops-mvp-live-error { margin: 14px 0 0; padding: 12px 14px; border: 1px solid #e3c27b; border-radius: 8px; background: #fff8e8; color: #76531f; font-size: 12px; line-height: 1.55; }
 .ops-mvp-live-queue { padding-top: 54px; }
 .ops-mvp-live-queue-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 22px; }
 .ops-mvp-live-queue-head h2 { margin: 0; font-size: clamp(28px, 3vw, 40px); }
