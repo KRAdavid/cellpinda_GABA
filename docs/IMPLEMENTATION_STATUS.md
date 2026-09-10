@@ -206,3 +206,7 @@ Worker는 제품 전용 title/description/canonical을 출력하고, 중복/잘�
 ## 2026-09-10 자동 협업 파동 시작 보강
 
 `startMvpSession`을 도메인 계약으로 추가해 목표 생성과 안전한 내부 파동 실행을 하나의 테스트 가능한 흐름으로 묶었다. `?view=ops`에서 목표를 생성하면 G1·E1·E2·C1·Q1을 우선순위대로 실행하고 독립 검증한 뒤, 외부 약속 작업 P1은 승인 요청과 `WAITING` 상태로 남긴다. 승인·게시·구매는 실행하지 않는다. 로컬 브라우저에서 목표 생성 직후 완료 5건·대기 1건, 새로고침 복원, 390px 가로 넘침 없음·HTTP/콘솔 오류 없음을 확인했다. 도메인 테스트는 59개로 늘었고, release HEAD `2e6a3fa`의 [GitHub 실행 34488512347](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34488512347)은 검증·Pages·라이브 smoke에 성공했다. Cloudflare Secrets가 없어 Worker 영구 배포는 계속 `WAITING`이며, 실제 주문·후기 권한·소비자 사용성 조사는 별도 입력이 필요하다.
+
+## 재개 저장 revision 보호
+
+여러 탭·새로고침에서 오래된 샌드박스 상태가 최신 승인 상태를 덮어쓰지 않도록 Node API·Cloudflare Worker·브라우저 저장 요청에 `X-Ops-Revision` 낙관적 충돌 검사를 연결했다. 서버는 기대 revision이 현재 값과 다르면 `409`로 거부하고 상태를 변경하지 않으며, 브라우저는 최신 상태를 확인하도록 안내한다. Node·Worker 회귀검사에서 오래된 revision 거부 후 최신 revision 저장을 확인했고, 실제 로컬 브라우저에서 최초 revision `0` 저장·새로고침 복원·완료 5건/검증대기 1건·성공 후 반복 PUT 없음·콘솔 오류 없음을 확인했다. release HEAD `21f7c75`의 [GitHub 실행 34490972163](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34490972163)은 타입검사·테스트·빌드·Pages·라이브 smoke에 성공했다. 이 보호는 영구 Worker 비밀값이 설정되기 전 로컬/Pages 운영 코어의 무결성을 검증한 것이며, 실제 Cloudflare D1 운영·다중 운영자 권한·외부 주문은 별도 대기다.
