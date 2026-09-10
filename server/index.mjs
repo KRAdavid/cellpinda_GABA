@@ -31,7 +31,7 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
       if (origin) {
         if (!development || !DEV_ORIGINS.has(origin)) return reply(403,{error:'Origin not allowed'});
         res.setHeader('Access-Control-Allow-Origin',origin); res.setHeader('Vary','Origin');
-        res.setHeader('Access-Control-Allow-Headers','Content-Type, X-Admin-Token, X-Ops-Run-Key'); res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers','Content-Type, X-Admin-Token, X-Ops-Run-Key, X-Ops-Revision'); res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE, OPTIONS');
       }
       const host=req.headers.host || '';
       if (!/^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(host)) return reply(403,{error:'Host not allowed'});
@@ -60,7 +60,7 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
       if (req.method==='POST' && path==='/api/events') return reply(202,store.event(await readBody(req)));
       const opsMatch=path.match(/^\/api\/ops\/runs\/([0-9a-f-]{36})$/i);
       if(opsMatch && req.method==='GET')return reply(200,store.getOpsRun(opsMatch[1],req.headers['x-ops-run-key']));
-      if(opsMatch && req.method==='PUT')return reply(200,store.putOpsRun(opsMatch[1],req.headers['x-ops-run-key'],await readBody(req,65536)));
+      if(opsMatch && req.method==='PUT')return reply(200,store.putOpsRun(opsMatch[1],req.headers['x-ops-run-key'],await readBody(req,65536),req.headers['x-ops-revision']===undefined?undefined:Number(req.headers['x-ops-revision'])));
       if(opsMatch && req.method==='DELETE')return reply(200,store.deleteOpsRun(opsMatch[1],req.headers['x-ops-run-key']));
       return reply(404,{error:'Not found'});
     } catch (error) { return reply(error.status || 500,{error:error.status ? error.message : 'Internal server error'}); }

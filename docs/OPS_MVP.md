@@ -28,6 +28,8 @@ Pages 배포 뒤에는 `validate-live-public.mjs`가 공개 URL을 재시도하�
 
 화면은 먼저 Worker·D1의 `/api/ops/runs/:runId`에 세션 스냅샷을 저장하고, API가 없는 GitHub Pages 정적 환경에서는 `localStorage`로 폴백한다. `runKey`는 브라우저가 생성하는 샌드박스 세션 키이며 운영자 인증 토큰이 아니다. 서버 스냅샷은 30일 후 만료되고, 모든 저장은 revision과 감사 행으로 남는다. 목표 생성 시 첫 TF 의사결정이 기록되고, 실행·승인 대기·승인 재개·독립 검증 단계마다 참여 역할·판단 근거·반대 의견·다음 조치가 누적된다. 따라서 이 기능은 재개 가능한 운영 MVP이며 법적·배포 승인 원장을 대체하지 않는다. JSON 보고서에는 계약 스냅샷, 작업별 수락 기준, 작업별 증거, 감사 이벤트와 TF 의사결정 기록이 포함된다.
 
+저장 요청은 현재 서버 revision을 `X-Ops-Revision` 헤더로 함께 보낸다. 다른 탭이나 오래된 화면이 같은 run을 덮으려 하면 서버가 `409`로 거부하고 화면은 자동 덮어쓰기를 멈춘다. 사용자는 새로고침으로 최신 승인·감사 상태를 확인한 뒤 다시 작업한다.
+
 서버 저장·복원 양쪽은 `src/domain/ops-validation.ts`의 공통 경계를 통과한다. 허용 필드·길이·업무 ID·의존성·상태 전환을 확인하고, `DONE`에는 `sandbox_simulation` 검증과 `independent-review` 증거를 요구한다. 승인 요청은 `WAITING` 작업과 연결되어야 하며, 이메일·전화번호·토큰·비공개 원문 경로·권리 증거 같은 값은 저장 전에 거부한다. 기존 브라우저 임시 상태를 서버로 보낼 때도 이 정책을 적용하므로, 화면에 임의 완료나 개인정보가 복원되는 경로를 차단한다.
 
 배포 전에는 `pnpm run preflight:deploy`로 Wrangler 설정, production 산출물, 공개 export 범위와 Cloudflare 필수 Secrets의 존재 여부를 한 번에 확인한다. 검증 workflow도 같은 일반 모드를 실행해 매 push마다 준비도를 기록하고, Secrets가 설정된 Worker 배포 job은 strict 모드로 다시 통과해야 한다. 결과는 비밀값을 출력하지 않고 `READY` 또는 `WAITING`과 누락된 이름만 표시하며, `--strict` 모드에서는 하나라도 준비되지 않으면 실패한다.

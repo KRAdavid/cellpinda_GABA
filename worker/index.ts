@@ -43,7 +43,7 @@ export default {
       if(request.method==='POST' && url.pathname==='/api/events')return reply(202,await store.event(await body(request)));
       const opsMatch=url.pathname.match(/^\/api\/ops\/runs\/([0-9a-f-]{36})$/i);
       if(opsMatch && request.method==='GET')return reply(200,await store.getOpsRun(opsMatch[1],request.headers.get('x-ops-run-key')));
-      if(opsMatch && request.method==='PUT')return reply(200,await store.putOpsRun(opsMatch[1],request.headers.get('x-ops-run-key'),await body(request,65536)));
+       if(opsMatch && request.method==='PUT')return reply(200,await store.putOpsRun(opsMatch[1],request.headers.get('x-ops-run-key'),await body(request,65536),request.headers.has('x-ops-revision') ? Number(request.headers.get('x-ops-revision')) : undefined));
       if(opsMatch && request.method==='DELETE')return reply(200,await store.deleteOpsRun(opsMatch[1],request.headers.get('x-ops-run-key')));
       if(request.method==='GET' && url.pathname==='/api/admin/content')return reply(200,{items:await store.adminContent()});
       if(request.method==='GET' && url.pathname==='/api/admin/history')return reply(200,{items:await store.history()});

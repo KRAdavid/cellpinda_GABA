@@ -20,7 +20,7 @@ type StoredOpsState = {
   runKey?: string;
 };
 
-type ServerOpsResponse = {state?: StoredOpsState; serverPersisted?: boolean};
+type ServerOpsResponse = {state?: StoredOpsState; serverPersisted?: boolean; revision?: number};
 type QueueTask = {id: string; stream: string; title: string; state: string; lead: string; verifier: string; blockedBy?: string; dependencies: string[]};
 type QueueSnapshot = {schemaVersion: number; goalId: string; status: string; checkedAt: string; workstreams: {id: string; name: string; lead: string; verifier: string; status: string; nextAction: string}[]; tasks: QueueTask[]};
 const publicBase = import.meta.env.BASE_URL;
@@ -61,6 +61,7 @@ export default function OperationsMvp() {
   const [decisions, setDecisions] = useState<MvpDecisionRecord[]>(stored.decisions || []);
   const [runId, setRunId] = useState(stored.runId || clientUuid());
   const [runKey, setRunKey] = useState(stored.runKey || clientUuid());
+  const [serverRevision, setServerRevision] = useState(0);
   const [serverState, setServerState] = useState<'checking' | 'saved' | 'local'>('checking');
   const [queue, setQueue] = useState<QueueSnapshot | null>(null);
   const [queueRefresh, setQueueRefresh] = useState(0);
@@ -103,6 +104,8 @@ export default function OperationsMvp() {
           if (remote.approval !== undefined) setApproval(remote.approval);
           if (typeof remote.approvalTaskId === 'string') setApprovalTaskId(remote.approvalTaskId);
           if (Array.isArray(remote.decisions)) setDecisions(remote.decisions);
+          const remoteRevision = payload.revision;
+          if (typeof remoteRevision === 'number' && Number.isInteger(remoteRevision) && remoteRevision >= 0) setServerRevision(remoteRevision);
           setServerState(payload.serverPersisted ? 'saved' : 'local');
         }
       } catch { if (active) setServerState('local'); }
@@ -119,10 +122,20 @@ export default function OperationsMvp() {
       const state: StoredOpsState = {input, plan, audit, approval, approvalTaskId, decisions};
       void fetch(`/api/ops/runs/${runId}`, {
         method: 'PUT',
-        headers: {'content-type': 'application/json', 'x-ops-run-key': runKey},
+        headers: {'content-type': 'application/json', 'x-ops-run-key': runKey, 'x-ops-revision': String(serverRevision)},
         body: JSON.stringify(state),
         signal: controller.signal,
-      }).then(response => { if (!response.ok) throw new Error('server persistence unavailable'); setServerState('saved'); })
+      }).then(async response => {
+        if (response.status === 409) {
+          setMessage('서버에 최신 샌드박스 상태가 있어 자동 덮어쓰기를 멈췄습니다. 새로고침으로 최신 상태를 확인하세요.');
+          throw new Error('server persistence conflict');
+        }
+        if (!response.ok) throw new Error('server persistence unavailable');
+        const payload = await response.json() as ServerOpsResponse;
+        const savedRevision = payload.revision;
+        if (typeof savedRevision === 'number' && Number.isInteger(savedRevision) && savedRevision >= 0) setServerRevision(savedRevision);
+        setServerState('saved');
+      })
         .catch(() => { if (!controller.signal.aborted) setServerState('local'); });
     }, 350);
     return () => { window.clearTimeout(timer); controller.abort(); };
@@ -132,7 +145,7 @@ export default function OperationsMvp() {
     event.preventDefault();
     try {
       const session = startMvpSession(input);
-      setRunId(clientUuid()); setRunKey(clientUuid());
+      setRunId(clientUuid()); setRunKey(clientUuid()); setServerRevision(0);
       setPlan(session.plan); setAudit(session.audit); setApproval(session.approval); setApprovalTaskId(session.approvalTaskId || ''); setDecisions(session.decisions); setMessage(`${session.progressedTaskIds.length}개 내부 업무를 자동 실행·검증하고 ${session.approvalTaskId || '다음 단계'}에서 책임자 승인 대기로 멈췄습니다.`); setCopied(false);
     } catch (error) { setMessage(error instanceof Error ? error.message : '목표를 생성하지 못했습니다.'); }
   }
@@ -229,7 +242,7 @@ export default function OperationsMvp() {
         <div className="ops-mvp-section-heading"><div><p className="chapter">04 / 결과·승인 보고</p><h2 id="report-heading">실행 결과를 보고서로 남깁니다.</h2></div><p>샌드박스 결과는 외부 실행 증거가 아닙니다. 실제 공개 전에는 책임자·표시·배포 검토가 필요합니다.</p></div>
         {approval ? <div className="ops-mvp-approval"><ShieldCheck size={22}/><div><strong>승인 요청이 생성되었습니다.</strong><p>{approval.action}</p><small>위험도: {riskLabels[approval.risk]} · 만료: {formatTime(approval.expiresAt)}</small></div><button className="button" type="button" onClick={() => execute(approvalTaskId, 'sandbox-approval')}>샌드박스 승인 후 실행</button></div> : null}
         <div className="ops-mvp-report-grid"><article><span className="ops-mvp-eyebrow">현재 판정</span><strong className={`ops-mvp-recommendation recommendation-${report?.recommendation}`}>{report?.recommendation === 'approve' ? '샌드박스 완료' : report?.recommendation === 'blocked' ? '승인 대기' : '추가 작업 필요'}</strong><p>완료 {report?.completedTasks.length ?? 0}건 · 대기 {report?.pendingTasks.length ?? 0}건</p><small>독립 검증 기록 {Object.keys(report?.verificationRecords ?? {}).length}건 · 샌드박스 시뮬레이션만 기록됨</small></article><article><span className="ops-mvp-eyebrow">감사 로그</span>{audit.length ? <ol>{audit.slice(-6).map(item => <li key={item.id}><strong>{item.taskId}</strong> {stateLabels[item.to]} · {item.note}</li>)}</ol> : <p>아직 실행 로그가 없습니다. 위 그래프의 실행 가능 작업을 시작하세요.</p>}<div className="ops-mvp-decision-log"><span className="ops-mvp-eyebrow">TF 의사결정 기록</span>{decisions.length ? <ol>{decisions.slice(-5).map(item => <li key={item.id}><strong>{item.taskId}</strong> {item.decision}<small>참여: {item.participants.join(' · ')} · 다음: {item.nextAction}</small><small>반대 의견: {item.dissent}</small><small>근거: {item.evidence.join(' · ')}</small></li>)}</ol> : <p>첫 목표 계약 회의 기록이 아직 없습니다.</p>}</div></article></div>
-        <div className="ops-mvp-report-actions"><button className="button outline" type="button" onClick={copyReport} disabled={!report}><Clipboard size={16}/> {copied ? '복사됨' : '승인 보고서 복사'}</button><button className="button outline" type="button" onClick={() => report && downloadJson(`${report.reportId}.json`, report)} disabled={!report}><Download size={16}/> JSON 다운로드</button><button className="text-link" type="button" onClick={() => { setRunId(clientUuid()); setRunKey(clientUuid()); setPlan(null); setAudit([]); setApproval(undefined); setApprovalTaskId(''); setDecisions([]); setMessage('샌드박스를 초기화했습니다.'); }}><RotateCcw size={15}/> 새 목표로 시작</button></div>
+      <div className="ops-mvp-report-actions"><button className="button outline" type="button" onClick={copyReport} disabled={!report}><Clipboard size={16}/> {copied ? '복사됨' : '승인 보고서 복사'}</button><button className="button outline" type="button" onClick={() => report && downloadJson(`${report.reportId}.json`, report)} disabled={!report}><Download size={16}/> JSON 다운로드</button><button className="text-link" type="button" onClick={() => { setRunId(clientUuid()); setRunKey(clientUuid()); setServerRevision(0); setPlan(null); setAudit([]); setApproval(undefined); setApprovalTaskId(''); setDecisions([]); setMessage('샌드박스를 초기화했습니다.'); }}><RotateCcw size={15}/> 새 목표로 시작</button></div>
       </section>
     </> : <section className="ops-mvp-empty wrap"><p className="chapter">MVP 시작점</p><h2>목표 한 문장으로<br />첫 업무를 열어보세요.</h2><p>기본 목표가 입력되어 있습니다. 생성 버튼을 누르면 계약·TF·그래프·승인 보고 흐름을 바로 실행할 수 있습니다.</p></section>}
   </main>;

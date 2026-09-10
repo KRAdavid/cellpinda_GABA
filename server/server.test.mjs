@@ -70,6 +70,10 @@ test('Local API sandbox ops runs persist resumable state with a client key',asyn
     const state={input:'공개용 GABA 논문 기반 마스터 인덱스',plan:{contract:{goalId:'GMVP-GABA-TEST'}},audit:[],approvalTaskId:''};
     let response=await fetch(`${base}/api/ops/runs/${runId}`,{method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':runKey},body:JSON.stringify(state)});assert.equal(response.status,200);let body=await response.json();assert.equal(body.revision,1);assert.equal(body.serverPersisted,true);
     response=await fetch(`${base}/api/ops/runs/${runId}`,{headers:{'x-ops-run-key':runKey}});assert.equal(response.status,200);body=await response.json();assert.deepEqual(body.state,state);assert.equal(body.auditCount,1);
+    const changed={...state,input:'변경된 샌드박스 목표'};
+    response=await fetch(`${base}/api/ops/runs/${runId}`,{method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':runKey,'x-ops-revision':'0'},body:JSON.stringify(changed)});assert.equal(response.status,409);
+    response=await fetch(`${base}/api/ops/runs/${runId}`,{headers:{'x-ops-run-key':runKey}});body=await response.json();assert.deepEqual(body.state,state);assert.equal(body.revision,1);
+    response=await fetch(`${base}/api/ops/runs/${runId}`,{method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':runKey,'x-ops-revision':'1'},body:JSON.stringify(changed)});assert.equal(response.status,200);body=await response.json();assert.equal(body.revision,2);
     const invalidState=async value=>fetch(`${base}/api/ops/runs/${randomUUID()}`,{method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':randomUUID()},body:JSON.stringify(value)});
     assert.equal((await invalidState({...state,privatePath:'D:/private'})).status,400);
     assert.equal((await invalidState({...state,plan:{contract:{goalId:'GMVP-GABA-TEST'},tasks:[{id:'G1',title:'계약',state:'DONE',priority:1,dependencies:[],acceptance:['기준'],evidence:['sandbox-output:G1:now'],lead:'TF',verifier:'감사관'}]} })).status,400);

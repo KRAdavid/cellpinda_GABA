@@ -124,6 +124,10 @@ test('Worker sandbox ops runs persist resumable state with a client key and isol
     const saved=await call({method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':runKey},body:JSON.stringify(state)});
     assert.equal(saved.status,200);const savedBody=await saved.json();assert.equal(savedBody.serverPersisted,true);assert.equal(savedBody.revision,1);
     const resumed=await call({headers:{'x-ops-run-key':runKey}});assert.equal(resumed.status,200);const resumedBody=await resumed.json();assert.deepEqual(resumedBody.state,state);assert.equal(resumedBody.auditCount,1);
+    const changed={...state,input:'변경된 샌드박스 목표'};
+    const stale=await call({method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':runKey,'x-ops-revision':'0'},body:JSON.stringify(changed)});assert.equal(stale.status,409);
+    const unchanged=await call({headers:{'x-ops-run-key':runKey}});const unchangedBody=await unchanged.json();assert.deepEqual(unchangedBody.state,state);assert.equal(unchangedBody.revision,1);
+    const current=await call({method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':runKey,'x-ops-revision':'1'},body:JSON.stringify(changed)});assert.equal(current.status,200);const currentBody=await current.json();assert.equal(currentBody.revision,2);
     const invalidState=async value=>worker.fetch(new Request(`https://site.example/api/ops/runs/${randomUUID()}`,{method:'PUT',headers:{'content-type':'application/json','x-ops-run-key':randomUUID()},body:JSON.stringify(value)}),env);
     assert.equal((await invalidState({...state,privatePath:'D:/private'})).status,400);
     assert.equal((await invalidState({...state,plan:{contract:{goalId:'GMVP-GABA-TEST'},tasks:[{id:'G1',title:'계약',state:'DONE',priority:1,dependencies:[],acceptance:['기준'],evidence:['sandbox-output:G1:now'],lead:'TF',verifier:'감사관'}]} })).status,400);

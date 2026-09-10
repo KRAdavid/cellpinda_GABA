@@ -87,14 +87,16 @@ export function createStore(db:D1Database) {
       const state=JSON.parse(row.data);const stateIssue=opsStateIssue(state);if(stateIssue)throw failure(`Sandbox state rejected by storage policy: ${stateIssue}`,500);
       return {runId:row.id,state,revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,expiresAt:row.expires_at,serverPersisted:true,auditCount:row.audit_count};
     },
-    async putOpsRun(id: string, key: unknown, state: unknown) {
+    async putOpsRun(id: string, key: unknown, state: unknown, expectedRevision?: number) {
       if(!uuid(id) || !opsKey(key))throw failure('Valid sandbox run credentials are required',401);
       if(!object(state))throw failure('Sandbox state must be a JSON object');
+      if(expectedRevision!==undefined && (!Number.isInteger(expectedRevision) || expectedRevision<0))throw failure('Sandbox run revision must be a non-negative integer');
       const stateIssue=opsStateIssue(state);if(stateIssue)throw failure(stateIssue);
       const data=JSON.stringify(state);if(new TextEncoder().encode(data).byteLength>OPS_MAX_BYTES)throw failure('Sandbox state too large',413);
       const ownerHash=await hashOpsKey(key);const normalizedId=id.toLowerCase();const now=new Date().toISOString();const expiresAt=new Date(Date.now()+OPS_TTL_DAYS*24*60*60*1000).toISOString();
       const existing=await db.prepare('SELECT owner_hash,revision FROM ops_runs WHERE id=?').bind(normalizedId).first<{owner_hash:string;revision:number}>();
       if(existing && existing.owner_hash!==ownerHash)throw failure('Sandbox run credential mismatch',403);
+      if(expectedRevision!==undefined && expectedRevision!==(existing?.revision ?? 0))throw failure('Sandbox run revision conflict',409);
       const revision=(existing?.revision ?? 0)+1;
       const statements=existing ? [
         db.prepare('INSERT INTO ops_audit(run_id,revision,action,data,created_at) VALUES(?,?,?,?,?)').bind(normalizedId,revision,'snapshot',data,now),

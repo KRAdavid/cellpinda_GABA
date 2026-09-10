@@ -89,14 +89,16 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       const state=JSON.parse(row.data);const stateIssue=opsStateIssue(state);if(stateIssue)throw failure(`Sandbox state rejected by storage policy: ${stateIssue}`,500);
       return {runId:row.id,state,revision:row.revision,createdAt:row.created_at,updatedAt:row.updated_at,expiresAt:row.expires_at,serverPersisted:true,auditCount:row.audit_count};
     },
-    putOpsRun(id,key,state) {
+    putOpsRun(id,key,state,expectedRevision) {
       const credentials=opsCredentials(id,key);if(!state || typeof state !== 'object' || Array.isArray(state))throw failure('Sandbox state must be a JSON object');
+      if(expectedRevision!==undefined && (!Number.isInteger(expectedRevision) || expectedRevision<0))throw failure('Sandbox run revision must be a non-negative integer');
       const stateIssue=opsStateIssue(state);if(stateIssue)throw failure(stateIssue);
       const data=JSON.stringify(state);if(Buffer.byteLength(data,'utf8')>OPS_MAX_BYTES)throw failure('Sandbox state too large',413);
       const now=new Date();const nowIso=now.toISOString();const expiresAt=new Date(now.getTime()+OPS_TTL_DAYS*24*60*60*1000).toISOString();
       let existing=db.prepare('SELECT owner_hash,revision,created_at,expires_at FROM ops_runs WHERE id=?').get(credentials.id);
       if(existing && existing.expires_at<=nowIso){db.exec('BEGIN IMMEDIATE');try{db.prepare('DELETE FROM ops_audit WHERE run_id=?').run(credentials.id);db.prepare('DELETE FROM ops_runs WHERE id=?').run(credentials.id);db.exec('COMMIT');existing=undefined;}catch(error){db.exec('ROLLBACK');throw error;}}
       if(existing && existing.owner_hash!==credentials.ownerHash)throw failure('Sandbox run credential mismatch',403);
+      if(expectedRevision!==undefined && expectedRevision!==(existing?.revision ?? 0))throw failure('Sandbox run revision conflict',409);
       const revision=(existing?.revision ?? 0)+1;db.exec('BEGIN IMMEDIATE');
       try {
         if(existing){db.prepare('INSERT INTO ops_audit(run_id,revision,action,data,created_at) VALUES(?,?,?,?,?)').run(credentials.id,revision,'snapshot',data,nowIso);const result=db.prepare('UPDATE ops_runs SET data=?,revision=?,updated_at=?,expires_at=? WHERE id=? AND owner_hash=? AND revision=?').run(data,revision,nowIso,expiresAt,credentials.id,credentials.ownerHash,revision-1);if(result.changes!==1)throw failure('Sandbox run revision conflict',409);}
