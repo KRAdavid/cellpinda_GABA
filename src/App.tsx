@@ -23,9 +23,9 @@ export default function App(){
  if(['/admin','/account'].includes(location.pathname))return;
   trackOnce('landing_view',{path:'/'});
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){trackOnce(entry.target.id==='story'?'gaba_story_viewed':'product_comparison_viewed',{path:entry.target.id==='story'?'/story':'/products'});observer.unobserve(entry.target)}},{threshold:0.25});
-  for(const id of ['story','products']){const element=document.getElementById(id);if(element)observer.observe(element)}
+  for(const id of ['story','products']){const ready=id==='products'?Boolean(content?.products.length):Boolean(content?.claims.some(claim=>claim.id==='gaba-definition'&&claim.status==='approved'));const element=document.getElementById(id);if(ready&&element)observer.observe(element)}
   return()=>observer.disconnect();
- },[]);
+ },[content]);
  useEffect(()=>{
   if(!content||location.pathname!=='/')return;
   const url=new URL(location.href);

@@ -4,7 +4,9 @@ import type { QuoteReviewItem, ReviewDraft, ReviewConfirmation } from './ReviewE
 
 type Item = { id: string; topic?: string; name?: string; publicText?: string; status: string; revision: number; kind?: string; reviewType?: string; review?: ReviewDraft; reviewConfirmation?: ReviewConfirmation; sources?: { title: string; url: string | null; page?: number | null; locator?: string }[]; sourceTitle?: string; sourceUrl?: string | null; metadata?: Record<string, string | string[] | number | null>; limitations?: string[]; holdReason?: string | null; reviewedBy?: string; reviewedAt?: string };
 type Funnel = { id: string; from: string; to: string; denominator: number; numerator: number; rate: number | null; denominatorDefinition: string; numeratorDefinition: string };
-type Analytics = { counts: { name: string; count: number }[]; funnels?: Funnel[]; window?: { kind: string; from: string | null; to: string; ordering: string; flowScope: string }; coverage?: { eventsWithoutFlow: number; distinctFlows: number } };
+type SharingScope = { id: 'own_result' | 'incoming_result' | 'product_comparison'; path: string; denominator: number; attemptFlows: number; attemptRate: number | null; requestedFlows: number; copiedFlows: number; downloadedFlows: number; cancelledFlows: number };
+type Analytics = { counts: { name: string; count: number }[]; funnels?: Funnel[]; window?: { kind: string; from: string | null; to: string; ordering: string; flowScope: string }; coverage?: { eventsWithoutFlow: number; distinctFlows: number }; sharingMetrics?: { scopes: SharingScope[]; unscopedShareEvents: number; confirmedDeliverySupported: false } };
+const sharingLabels: Record<SharingScope['id'], string> = { own_result: '내 리듬 결과', incoming_result: '공유받은 리듬 결과', product_comparison: '제품 비교' };
 const eventLabels: Record<string, string> = { landing_view: '첫 화면 열람', rhythm_check_started: '리듬 체크 시작', rhythm_check_completed: '리듬 체크 완료', result_viewed: '결과 열람', gaba_story_viewed: 'GABA 이야기 열람', evidence_opened: '근거 상세 열기', review_opened: '후기 원문 이동', share_image_generated: '공유 이미지 생성', share_requested: '공유 요청', share_cancelled: '공유 취소', share_link_copied: '공유 링크 복사', share_image_downloaded: '공유 이미지 다운로드 요청', shared_link_landed: '공유 링크로 진입', product_comparison_viewed: '제품 비교 열람', purchase_outbound_clicked: '공식몰 구매 링크 이동' };
 const funnelLabels: Record<string, string> = { landing_to_check: '첫 화면 → 체크 시작', check_completion: '체크 시작 → 완료', result_to_story: '결과 → GABA 이야기', comparison_to_purchase_click: '제품 비교 → 공식몰 이동' };
 const metadataLabels: Record<string, string> = { question: '연구 질문', studyType: '연구 설계', population: '연구 대상', sampleSize: '표본 규모', studyCount: '포함 연구 수', searchThrough: '문헌 검색 범위', dose: '연구 용량·제형', duration: '연구 기간', comparison: '비교 조건', outcome: '평가 지표', result: '관찰 결과', limitations: '연구 한계', productApplicability: '셀핀다 완제품 적용 범위' };
@@ -66,6 +68,23 @@ export default function Admin() {
      {analytics.coverage ? <p className="note">흐름 식별 가능: {analytics.coverage.distinctFlows.toLocaleString()}개 · 흐름 정보 없는 이벤트: {analytics.coverage.eventsWithoutFlow.toLocaleString()}건 (아래 전환율에서 제외, 원시 건수에는 포함)</p> : null}
      <h3>단계별 전환</h3>
      {analytics.funnels?.length ? analytics.funnels.map(funnel => <article key={funnel.id} style={{ padding: '20px 0', borderBottom: '1px solid #d9e5dc' }}><h4>{funnelLabels[funnel.id] || `${eventLabel(funnel.from)} → ${eventLabel(funnel.to)}`}</h4><p><strong>{funnel.denominator === 0 || funnel.rate === null ? '집계 대기' : `${(funnel.rate * 100).toLocaleString('ko-KR', { maximumFractionDigits: 1 })}%`}</strong> · {funnel.numerator.toLocaleString()} / {funnel.denominator.toLocaleString()}개 흐름</p><p className="note">분모: ‘{eventLabel(funnel.from)}’이 발생한 서로 다른 익명 흐름 수.<br />분자: 분모에 포함된 흐름 중, 그 뒤 ‘{eventLabel(funnel.to)}’이 서버에 도착한 흐름 수. 같은 흐름은 한 번만 셉니다.</p></article>) : <p>전환 집계를 준비 중입니다.</p>}
+     {analytics.sharingMetrics ? <section aria-labelledby="sharing-metrics-heading" style={{ margin: '32px 0', padding: '24px 0', borderTop: '1px solid #d9e5dc', borderBottom: '1px solid #d9e5dc' }}>
+      <h3 id="sharing-metrics-heading">화면별 공유 시도</h3>
+      <p className="note">공유 시도율은 해당 화면을 본 익명 페이지 흐름 중, 그 뒤 같은 화면에서 공유 요청·링크 복사·이미지 다운로드를 한 번 이상 시도한 흐름의 비율입니다. 반복 시도는 한 흐름으로 세며, 공유 창에서 취소한 요청도 시도에 포함합니다.</p>
+      <p className="note">실제 전달이나 구매를 확인한 비율이 아닙니다. 요청·복사·다운로드·취소에는 같은 흐름이 겹칠 수 있으므로 아래 세부 수치를 합산하지 않습니다.</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: 18 }}>{analytics.sharingMetrics.scopes.map(scope => <article key={scope.id} style={{ padding: 20, border: '1px solid #d9e5dc', borderRadius: 6 }}>
+        <h4 style={{ margin: '0 0 15px', fontSize: 17 }}>{sharingLabels[scope.id] || scope.id}</h4>
+        <p style={{ margin: '0 0 8px', fontSize: 26, color: '#18382b' }}><strong>{scope.denominator === 0 || scope.attemptRate === null ? '집계 대기' : `${(scope.attemptRate * 100).toLocaleString('ko-KR', { maximumFractionDigits: 1 })}%`}</strong></p>
+        <p className="note">공유 시도 {scope.attemptFlows.toLocaleString()} / 화면 열람 {scope.denominator.toLocaleString()}개 흐름</p>
+        <dl style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '10px 16px', margin: '18px 0 0', fontSize: 13 }}>
+          <dt>공유 요청</dt><dd style={{ margin: 0 }}>{scope.requestedFlows.toLocaleString()}개 흐름</dd>
+          <dt>링크 복사</dt><dd style={{ margin: 0 }}>{scope.copiedFlows.toLocaleString()}개 흐름</dd>
+          <dt>이미지 다운로드</dt><dd style={{ margin: 0 }}>{scope.downloadedFlows.toLocaleString()}개 흐름</dd>
+          <dt>공유 취소</dt><dd style={{ margin: 0 }}>{scope.cancelledFlows.toLocaleString()}개 흐름</dd>
+        </dl>
+      </article>)}</div>
+      <p className="note" style={{ marginTop: 18 }}>공유 화면을 구분할 정보가 없는 이전 이벤트 {analytics.sharingMetrics.unscopedShareEvents.toLocaleString()}건은 화면별 집계에서 제외했습니다. 전체 원시 발생 건수에는 포함될 수 있습니다.</p>
+     </section> : null}
      <h3>행동별 원시 발생 건수</h3><p className="note">이벤트가 발생한 횟수입니다. 같은 흐름의 반복 행동을 포함하며 위 전환율의 분모·분자와 다를 수 있습니다.</p>
      {analytics.counts.length ? <div style={{ overflowX: 'auto' }}><table><thead><tr><th scope="col">행동</th><th scope="col">발생 건수</th></tr></thead><tbody>{analytics.counts.map(count => <tr key={count.name}><td>{eventLabel(count.name)}</td><td>{count.count.toLocaleString()}</td></tr>)}</tbody></table></div> : <p>수집된 이벤트가 없습니다.</p>}
      <p className="note">실제 구매·7일 재방문은 아직 측정하지 않습니다. 구매 링크 이동을 구매 완료로 집계하지 않습니다. 공유 요청·복사는 전달 완료가 아니며, 공유 요청자와 링크 방문자를 연결한 전환율도 집계하지 않습니다.</p>

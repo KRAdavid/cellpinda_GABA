@@ -62,6 +62,38 @@ test('D1 anonymous funnels, event deduplication and no health properties',async(
   }finally{db.close();}
 });
 
+test('Node and D1 sharing scopes use ordered unique flows and preserve unscoped historical events',async()=>{
+  const db=new MockD1(),cloud=createStore(db),local=createNodeStore({dbPath:':memory:',seed});
+  const empty=(id,path)=>({id,path,denominator:0,attemptFlows:0,attemptRate:null,requestedFlows:0,copiedFlows:0,downloadedFlows:0,cancelledFlows:0});
+  const scopes=[empty('own_result','/result'),empty('incoming_result','/share'),empty('product_comparison','/products')];
+  try{
+    await cloud.initialize(seed);
+    for(const store of [cloud,local]){
+      assert.deepEqual((await store.analytics()).sharingMetrics,{scopes,unscopedShareEvents:0,confirmedDeliverySupported:false});
+      const [a,b,c,d,e]=Array.from({length:5},()=>randomUUID());
+      const send=async(flowId,name,path)=>{const event={eventId:randomUUID(),name,...(flowId?{flowId}:{}),properties:path?{path}:{}};await store.event(event);return event;};
+      await send(a,'result_viewed','/result');await send(a,'result_viewed','/result');
+      const duplicate=await send(a,'share_requested','/result');assert.equal((await store.event(duplicate)).duplicate,true);
+      await send(a,'share_requested','/result');await send(a,'share_link_copied','/result');await send(a,'share_cancelled','/result');
+      await send(a,'product_comparison_viewed','/products');await send(a,'share_requested','/products');
+      await send(b,'result_viewed','/share');
+      await send(c,'share_requested','/share');await send(c,'result_viewed','/share');
+      await send(c,'share_link_copied','/products');await send(c,'product_comparison_viewed','/products');
+      await send(d,'result_viewed','/share');await send(d,'share_image_downloaded','/share');await send(d,'share_image_downloaded','/share');await send(d,'share_cancelled','/share');
+      await send(e,'result_viewed','/result');await send(e,'share_cancelled','/result');
+      await send(null,'result_viewed','/result');await send(null,'share_requested','/result');
+      await send(null,'share_requested');await send(a,'share_cancelled','/');await send(a,'share_image_generated');
+      assert.deepEqual((await store.analytics()).sharingMetrics,{
+        scopes:[
+          {...scopes[0],denominator:2,attemptFlows:1,attemptRate:.5,requestedFlows:1,copiedFlows:1,cancelledFlows:2},
+          {...scopes[1],denominator:3,attemptFlows:1,attemptRate:1/3,downloadedFlows:1,cancelledFlows:1},
+          {...scopes[2],denominator:2,attemptFlows:1,attemptRate:.5,requestedFlows:1},
+        ],unscopedShareEvents:2,confirmedDeliverySupported:false,
+      });
+    }
+  }finally{db.close();local.close();}
+});
+
 test('Worker routes reject bad origin, auth, oversized bodies, rate limits and preserve API parity',async()=>{
   const DB=new MockD1();const token='a'.repeat(64);
   const env={DB,ADMIN_TOKEN:token,RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async()=>new Response('asset')}};

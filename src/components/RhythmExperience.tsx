@@ -104,7 +104,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const [message, setMessage] = useState('');
   const [manualLink, setManualLink] = useState('');
   const sharedTracked=useRef(false);
-  useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed');onEvent('result_viewed')}},[sharedType,onEvent]);
+  useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
   const answerStarted=useRef(false);
   const resultViewed=useRef(false);
   const questionRef = useRef<HTMLLegendElement>(null);
@@ -114,7 +114,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
 
   useEffect(() => {
     if (started && !type) questionRef.current?.focus();
-    if (result) {resultRef.current?.focus();if(!resultViewed.current){resultViewed.current=true;onEvent('result_viewed')}}
+    if (result) {resultRef.current?.focus();if(!resultViewed.current){resultViewed.current=true;onEvent('result_viewed',{path:'/result'})}}
   }, [step, started, result, type]);
 
   useEffect(() => {
@@ -122,7 +122,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     setCardFile(null);
     if (type) {
       createCard(type).then(blob => {
-        if (!cancelled && blob) {setCardFile(new File([blob], 'cellpinda-rhythm.png', { type: 'image/png' }));onEvent('share_image_generated');}
+        if (!cancelled && blob) {setCardFile(new File([blob], 'cellpinda-rhythm.png', { type: 'image/png' }));onEvent('share_image_generated',{path:result?'/result':'/share'});}
       }).catch(() => {
         if (!cancelled) setMessage('이미지 준비가 어려워요. 링크 공유를 이용해 주세요.');
       });
@@ -166,7 +166,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       await navigator.clipboard.writeText(url);
       setMessage('링크를 복사했어요. 이 링크에는 유형만 포함되고 문항별 답변은 포함되지 않아요.');
       setManualLink('');
-      onEvent('share_copy');
+      onEvent('share_copy',{path:result?'/result':'/share',channel:'clipboard'});
     } catch {
       setManualLink(url);
       setMessage('아래 링크를 선택해 직접 복사해 주세요.');
@@ -175,7 +175,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
 
   async function share() {
     if (!type) return;
-    onEvent('share_request');
+    onEvent('share_request',{path:result?'/result':'/share'});
     if (cardFile && navigator.share && navigator.canShare?.({ files: [cardFile] })) {
       try {
         await navigator.share({ files: [cardFile], title: '셀핀다 하루 리듬 이야기', text: '하루의 생활 패턴을 함께 돌아봐요.', url: shareUrl(type) });
@@ -184,7 +184,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       } catch (error) {
         if (error instanceof Error && error.name === 'AbortError') {
           setMessage('공유를 취소했어요.');
-          onEvent('share_cancelled');
+          onEvent('share_cancelled',{path:result?'/result':'/share',channel:'native'});
           return;
         }
       }
@@ -202,7 +202,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     anchor.click();
     anchor.remove();
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-    onEvent('card_download');
+    onEvent('card_download',{path:result?'/result':'/share',channel:'download'});
     setMessage('PNG 카드 다운로드를 요청했어요.');
   }
 
