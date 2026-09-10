@@ -273,3 +273,7 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 제품 구성·발효 설명의 공개 출처 두 건을 스마트스토어 제품 페이지로 바꾸고, `validate-public-export`·`validate-live-public`에 예전 공식몰 도메인·명칭 재유입 차단을 추가했다. 제품 카드·구매 전 질문·후기 원문·발효 설명은 같은 Smart Store 목적지를 사용하며, 공식몰 URL은 공개 export에서 제거하고 내부 이미지·증거 문서의 provenance로만 보존한다. 순차 `sync:data`·공개 export·연구 문구 검증과 66개 회귀 테스트가 통과한 뒤 라이브 Pages에서 제품 1개·750 제거·Smart Store only·provenance 일치를 재확인한다.
 
 이 변경은 소비자 이동 경로를 통일하지만 현행 표시사항 승인·후기 재게시 권한·실구매 대사·Worker 운영 연결을 완료시키지 않는다.
+
+## 2026-09-11 공개 중간 확인 진입 경로 보강
+
+소비자 사이트 푸터에 `TF 운영판` 링크를 추가해 공개 운영 큐·Goal Contract 샌드박스·목표 감사 패킷으로 바로 이동할 수 있게 했다. 큐는 개인정보 없는 역할·상태·필요 입력만 공개하며, 본문 소비자 흐름에는 운영 세부를 강제하지 않는다. 로컬 테스트·production build와 공개 export 검증을 통과한 뒤 Pages 라이브 smoke에서 링크 도달을 확인한다.
