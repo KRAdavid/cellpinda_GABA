@@ -202,3 +202,7 @@ Worker는 제품 전용 title/description/canonical을 출력하고, 중복/잘�
 ## GitHub 자동 검증 후속 증거
 
 직전 공유분석 turn은 구현과검증·원격수정을 포함해 progress다. 이번에는 clean release 저장소에 자동검증workflow를 추가했고 GitHub실행34445658505 success를 확인했다. Node24.19.0/pnpm11.19.0 lockedinstall, 타입검사,37테스트,frontendbuild,Worker dry-run bundle 및7일artifact보관이실행됐다. artifact를다운로드해화면/Worker파일포함확인했다. targetHEAD54a949c5d324950c5e186aefb458feb9149dca63. 실제서비스배포·merge차단·운영DB복구검증을 의미하지 않으며 영구계정/도메인·실제주문·권한확인후기·AI키·재방문분석 등 전체 미완 범위는 유지한다.
+
+## 2026-09-10 자동 협업 파동 시작 보강
+
+`startMvpSession`을 도메인 계약으로 추가해 목표 생성과 안전한 내부 파동 실행을 하나의 테스트 가능한 흐름으로 묶었다. `?view=ops`에서 목표를 생성하면 G1·E1·E2·C1·Q1을 우선순위대로 실행하고 독립 검증한 뒤, 외부 약속 작업 P1은 승인 요청과 `WAITING` 상태로 남긴다. 승인·게시·구매는 실행하지 않는다. 로컬 브라우저에서 목표 생성 직후 완료 5건·대기 1건, 새로고침 복원, 390px 가로 넘침 없음·HTTP/콘솔 오류 없음을 확인했다. 도메인 테스트는 59개로 늘었고, release HEAD `2e6a3fa`의 [GitHub 실행 34488512347](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34488512347)은 검증·Pages·라이브 smoke에 성공했다. Cloudflare Secrets가 없어 Worker 영구 배포는 계속 `WAITING`이며, 실제 주문·후기 권한·소비자 사용성 조사는 별도 입력이 필요하다.

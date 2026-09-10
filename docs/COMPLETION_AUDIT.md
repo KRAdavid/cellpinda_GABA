@@ -135,3 +135,7 @@ GitHub의 동일 검사는 Linux에서도 통과했다. [실행34446456828](http
 ## 운영 코어·배포 준비 최신 점검
 
 `src/domain/ops-validation.ts`를 Node API와 Worker의 운영 상태 저장·복원 양쪽에 연결했다. 업무 ID·의존성·상태 전환·완료 검증·승인 연결과 개인정보 최소화를 공통 검증하며, 임의 완료나 비공개 필드가 저장·복원되지 않도록 한다. `pnpm run preflight:deploy`는 Wrangler 설정·빌드 산출물·공개 export를 모두 확인했으며, 실제 Cloudflare Secrets 5개가 없어 strict 기준은 `WAITING`이다. 최신 GitHub Actions `34487336124`은 검증·Pages·라이브 smoke에 성공했다. 이 점검은 영구 Worker 운영 배포·실제 주문·후기 권한·소비자 사용성 검증을 완료했다는 의미가 아니다.
+
+## 자동 협업 파동 시작 보강
+
+`startMvpSession`을 도메인 계약으로 추가해 목표 생성과 안전한 내부 파동 실행을 하나의 테스트 가능한 흐름으로 묶었다. `?view=ops`에서 목표를 생성하면 G1·E1·E2·C1·Q1을 우선순위대로 실행하고 독립 검증한 뒤, 외부 약속 작업 P1은 승인 요청과 `WAITING` 상태로 남긴다. 승인·게시·구매는 실행하지 않는다. 로컬 브라우저에서 목표 생성 직후 완료 5건·대기 1건, 새로고침 복원, 390px 가로 넘침 없음·HTTP/콘솔 오류 없음을 확인했다. 도메인 테스트는 59개로 늘었고, release HEAD `2e6a3fa`의 [GitHub 실행 34488512347](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34488512347)은 검증·Pages·라이브 smoke에 성공했다. Cloudflare Secrets가 없어 Worker 영구 배포는 계속 `WAITING`이며, 실제 주문·후기 권한·소비자 사용성 조사는 별도 입력이 필요하다.
