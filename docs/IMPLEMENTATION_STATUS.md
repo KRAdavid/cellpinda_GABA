@@ -2,6 +2,12 @@
 
 목표 파일 전체를 읽고 구현을 시작했다. 기존 회의 문서 작성은 progress로 분류한다. 이번 작업도 실제 코드·원장·이미지·테스트를 만들었으므로 progress다. 전체 목표는 아직 완료되지 않았다.
 
+## 2026-09-11 샌드박스 판정 경계 및 공개 재검증
+
+커밋 `c5fc87c`에서 샌드박스 시뮬레이션만으로 운영 승인을 추천하지 않도록 보고서 판정을 보강했다. 모든 작업이 `sandbox_simulation` 검증으로 끝나면 추천은 `revise`로 남고, 운영 화면은 `샌드박스 완료 · 실제 검증 필요`를 표시한다. 로컬 `pnpm test` 59개·타입검사·production build가 통과했으며, [GitHub Actions 34495436902](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34495436902)의 verify·Pages·라이브 smoke가 성공했다.
+
+최신 공개 URL 재검증 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 12, waitingTasks 3, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 390px·1440px 네 화면의 가로 넘침·콘솔 오류·400 이상 응답은 없었다. 제품 자료 감사는 7개 파일(완제품 후보 5개)을 찾았고, 주문 자료 감사는 1,086개 파일을 읽어 1500 후보 114행·121개 수량을 집계했지만 상태·취소·환불 필드와 실판매자 응답이 없어 E1은 계속 `WAITING`이다.
+
 ## 2026-09-10 로컬 제품 자료 재점검
 
 1500 단상자·3개입·낱포 인쇄본과 제품 관련 영양성분검사성적서를 외부 자료 폴더에서 찾아 렌더링해 대조했다. 원료 1 kg·10 kg 벌크 라벨은 완제품 표시 근거에서 제외했다. `data/local-material-manifest.json`과 `pnpm run audit:materials`가 파일 존재·수정시각·SHA-256·완제품/벌크 분류를 읽기 전용으로 기록한다. 이 결과로 작업 그래프 B2는 `WAITING`에서 `VERIFYING`으로 이동했지만, 최종 인쇄 승인·제품 분류 확인 전에는 공개 문안을 바꾸지 않는다. B3 후기 권한, C2 Cloudflare 운영 비밀키, E1 주문 대사는 계속 대기한다.
@@ -20,7 +26,7 @@
 - 로컬 Node/SQLite와 Worker/D1 모두 `/api/ops/runs/:runId` 저장 계약을 제공한다. revision·감사 snapshot·30일 만료·클라이언트 샌드박스 키로 재개를 지원하며, 정적 Pages에서는 API가 없을 때 브라우저 저장으로 폴백한다.
 - 스마트스토어 주문 응답을 개인정보 필터 경계에서 내부 누적 결제·환불 원장으로 변환하는 샌드박스 어댑터와 5개 거부·환불 테스트를 추가했다. 실제 판매자 계정과 상품번호는 설정 입력으로 남겼다.
 - 제품 자료 재검토에서 2026년 1500 단상자·3개입·낱포 인쇄본과 제품 관련 시험성적서를 확인해 B2를 VERIFYING으로 이동했고, 1 kg·10 kg 벌크 라벨은 현행 1500 소비자 표시 근거에서 제외했다. 후기 스프레드시트 504행도 URL·재게시 권한·광고 관계 증빙이 없어 실제 문구를 공개하지 않고 스마트스토어 목적지만 연결한다.
-- 로컬 전체 테스트 57개와 통합 운영·공개 export·주제 커버리지·순환 의존성 게이트, 타입체크, production build, Worker dry-run, 격리 D1 후기 통합 검증 및 GitHub Actions `34478619512`가 성공했다. Pages 배포 뒤 공개 URL을 직접 읽는 `smoke-live`도 성공했다. 승인 요청 후 저장된 `WAITING` 작업을 다시 실행하는 상태 전이와 스트레스·수면·성장호르몬·근육발달 연구 축을 회귀 검증한다. 배포 검증 기준은 GitHub Actions `34478872729`이며 공개 `content.json`에도 연구별 검토일과 근거 해시를 함께 export한다.
+- 로컬 전체 테스트 59개와 통합 운영·공개 export·주제 커버리지·순환 의존성 게이트, 타입체크, production build, Worker dry-run, 격리 D1 후기 통합 검증 및 GitHub Actions `34495436902`가 성공했다. Pages 배포 뒤 공개 URL을 직접 읽는 `smoke-live`도 성공했다. 승인 요청 후 저장된 `WAITING` 작업을 다시 실행하는 상태 전이와 스트레스·수면·성장호르몬·근육발달 연구 축을 회귀 검증한다. 공개 `content.json`에도 연구별 검토일과 근거 해시를 함께 export한다.
 - Cloudflare Worker 운영 배포는 저장소에 Cloudflare API/D1/운영 인증 비밀키가 없어 자동으로 건너뛰었다. 따라서 정적 공개 배포는 완료됐지만, 운영 D1·관리자 인증이 붙은 영구 Worker는 아직 대기 상태다.
 
 ## 2026-09-10 운영 상태 저장 경계 강화
