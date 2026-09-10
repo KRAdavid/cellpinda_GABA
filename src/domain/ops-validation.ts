@@ -33,10 +33,17 @@ function walk(value: unknown, depth: number, nodes: {count: number}): string | n
 
 function validateVerification(value: unknown, taskId: string): string | null {
   if (!isObject(value)) return `${taskId} 완료 검증 기록이 없습니다.`;
-  if (value.mode !== 'sandbox_simulation') return `${taskId} 검증 모드는 sandbox_simulation이어야 합니다.`;
+  if (value.mode !== 'sandbox_simulation' && value.mode !== 'independent_review') return `${taskId} 검증 모드가 올바르지 않습니다.`;
   if (!text(value.verifier, 200) || !stringArray(value.acceptedCriteria, 30, 1000) || value.acceptedCriteria.length === 0) return `${taskId} 검증자·수락 기준이 올바르지 않습니다.`;
   if (!stringArray(value.evidence, 50, 2000) || value.evidence.length === 0) return `${taskId} 검증 증거가 없습니다.`;
+  if (value.reviewerNote !== undefined && !text(value.reviewerNote, 2000)) return `${taskId} 검증 메모가 올바르지 않습니다.`;
   if (!text(value.recordedAt, 80) || Number.isNaN(Date.parse(value.recordedAt))) return `${taskId} 검증 기록 시간이 올바르지 않습니다.`;
+  return null;
+}
+
+function validateReview(value: unknown, taskId: string): string | null {
+  if (!isObject(value)) return `${taskId} 독립 검토 기록이 올바르지 않습니다.`;
+  if (value.mode !== 'human_independent_review' || !text(value.verifier, 200) || !stringArray(value.acceptedCriteria, 30, 1000) || value.acceptedCriteria.length === 0 || !stringArray(value.evidence, 50, 2000) || value.evidence.length === 0 || !text(value.note, 2000) || value.note.length < 10 || !['accept', 'rework'].includes(String(value.decision)) || !text(value.recordedAt, 80) || Number.isNaN(Date.parse(value.recordedAt))) return `${taskId} 독립 검토 기록 필드가 올바르지 않습니다.`;
   return null;
 }
 
@@ -60,6 +67,12 @@ function validatePlan(value: unknown): string | null {
       const issue = validateVerification(task.verification, task.id); if (issue) return issue;
       if (!task.evidence.some((item: string) => item.startsWith(`independent-review:${task.id}:`))) return `${task.id} 독립 검증 증거가 없습니다.`;
     } else if (task.verification !== undefined) return `${task.id} 미완료 작업에는 검증 완료 기록을 둘 수 없습니다.`;
+    if (task.review !== undefined) {
+      const review = task.review;
+      const issue = validateReview(review, task.id); if (issue) return issue;
+      if (isObject(review) && review.decision === 'accept' && (task.state !== 'DONE' || !isObject(task.verification) || task.verification.mode !== 'independent_review')) return `${task.id} 승인된 독립 검토는 independent_review 완료 기록과 연결되어야 합니다.`;
+      if (isObject(review) && review.decision === 'rework' && (task.state !== 'REWORK' || task.verification !== undefined)) return `${task.id} 보완 요청 기록은 REWORK 상태에만 연결할 수 있습니다.`;
+    }
   }
   for (const task of value.tasks) for (const dependency of task.dependencies) if (!ids.has(dependency)) return `${task.id}가 존재하지 않는 선행 작업을 참조합니다.`;
   return null;

@@ -1,6 +1,7 @@
 import {strict as assert} from 'node:assert';
 import test from 'node:test';
-import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, generateMvpPlan, promoteReady, runSandboxTask, runSandboxWave, startMvpSession, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
+import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, generateMvpPlan, promoteReady, recordIndependentReview, runSandboxTask, runSandboxWave, startMvpSession, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
+import {opsStateIssue} from './ops-validation.ts';
 
 test('one sentence goal generates a contract, TF and dependency graph', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
@@ -111,4 +112,60 @@ test('approval report distinguishes completed and pending work', () => {
 test('readiness promotion never skips a dependency', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
   assert.deepEqual(promoteReady(plan.tasks).filter(task => task.state === 'READY').map(task => task.id), ['G1']);
+});
+
+test('human independent review records a decision and unlocks the next task', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
+  const reviewed = recordIndependentReview(started.tasks, 'G1', {
+    verifier: '품질감사관',
+    acceptedCriteria: [...plan.tasks[0].acceptance],
+    note: '수락 기준과 샌드박스 산출물의 연결을 모두 확인했습니다.',
+    decision: 'accept',
+  }, '2026-09-10T10:01:00.000Z');
+  const task = reviewed.tasks.find(item => item.id === 'G1');
+  assert.equal(task?.state, 'DONE');
+  assert.equal(task?.verification?.mode, 'independent_review');
+  assert.equal(task?.review?.mode, 'human_independent_review');
+  assert.equal(task?.review?.decision, 'accept');
+  assert.equal(reviewed.tasks.find(item => item.id === 'E1')?.state, 'READY');
+  assert.deepEqual(reviewed.events.map(event => `${event.from}->${event.to}`), ['VERIFYING->DONE']);
+  const report = buildMvpApprovalReport(plan.contract, reviewed.tasks, [...started.events, ...reviewed.events]);
+  assert.equal(report.verificationStatus, 'independent_review_recorded');
+  assert.deepEqual(report.independentlyVerifiedTasks, ['G1']);
+  assert.deepEqual(report.sandboxCompletedTasks, []);
+  assert.equal(report.reviewRecords.G1?.decision, 'accept');
+  assert.equal(opsStateIssue({plan: {contract: {goalId: plan.contract.goalId}, tasks: reviewed.tasks}, audit: reviewed.events}), null);
+});
+
+test('human independent review can return work to rework and rerun it', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
+  const rework = recordIndependentReview(started.tasks, 'G1', {
+    verifier: '품질감사관',
+    acceptedCriteria: [...plan.tasks[0].acceptance],
+    note: '산출물에 한 가지 보완 설명이 필요합니다.',
+    decision: 'rework',
+  }, '2026-09-10T10:01:00.000Z');
+  assert.equal(rework.tasks.find(item => item.id === 'G1')?.state, 'REWORK');
+  const rerun = runSandboxTask(rework.tasks, 'G1', undefined, '2026-09-10T10:02:00.000Z');
+  assert.equal(rerun.tasks.find(item => item.id === 'G1')?.state, 'VERIFYING');
+  assert.equal(rerun.tasks.find(item => item.id === 'G1')?.review, undefined);
+  assert.deepEqual(rerun.events.map(event => `${event.from}->${event.to}`), ['REWORK->RUNNING', 'RUNNING->VERIFYING']);
+});
+
+test('interactive wave stops at a human verification gate', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const wave = runSandboxWave(plan.contract, plan.tasks, '2026-09-10T10:00:00.000Z', {autoVerify: false});
+  assert.deepEqual(wave.progressedTaskIds, ['G1']);
+  assert.equal(wave.tasks.find(task => task.id === 'G1')?.state, 'VERIFYING');
+  assert.equal(wave.stoppedReason, 'verification_required');
+});
+
+test('independent review refuses incomplete criteria or short rationale', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
+  assert.throws(() => recordIndependentReview(started.tasks, 'G1', {
+    verifier: '품질감사관', acceptedCriteria: [plan.tasks[0].acceptance[0]], note: '짧음', decision: 'accept',
+  }, '2026-09-10T10:01:00.000Z'), /모든 수락 기준/);
 });

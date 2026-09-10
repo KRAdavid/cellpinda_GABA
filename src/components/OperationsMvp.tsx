@@ -1,11 +1,11 @@
 import {useEffect, useMemo, useState} from 'react';
 import {ArrowRight, CheckCircle2, Clipboard, Download, LockKeyhole, Play, RotateCcw, ShieldCheck} from 'lucide-react';
-import {buildMvpApprovalReport, buildTaskDecision, runSandboxTask, runSandboxWave, startMvpSession, taskGraphEdges, verifySandboxTask, type MvpApprovalReport, type MvpDecisionRecord, type MvpPlan, type SandboxAuditEvent} from '../domain/goal-mvp';
+import {buildMvpApprovalReport, buildTaskDecision, recordIndependentReview, runSandboxTask, runSandboxWave, startMvpSession, taskGraphEdges, type MvpApprovalReport, type MvpDecisionRecord, type MvpPlan, type SandboxAuditEvent} from '../domain/goal-mvp';
 import {apiEndpoint} from '../api-origin';
 import './OperationsMvp.css';
 
 const defaultGoal = '공개용 GABA 논문 기반 마스터 인덱스';
-const stateLabels: Record<string, string> = {BACKLOG: '대기', READY: '실행 가능', RUNNING: '실행 중', VERIFYING: '검증 중', DONE: '완료', WAITING: '승인 대기'};
+const stateLabels: Record<string, string> = {BACKLOG: '대기', READY: '실행 가능', RUNNING: '실행 중', VERIFYING: '검증 중', DONE: '완료', WAITING: '승인 대기', REWORK: '보완 필요', EXPIRED: '만료', RETRY: '재시도', FAILED: '실패', CANCELLED: '취소'};
 const riskLabels: Record<string, string> = {A_READ: '읽기', B_INTERNAL_WRITE: '내부 작성', C_LOW_RISK_INTERNAL: '내부 실행', D_EXTERNAL_REVERSIBLE: '외부 가역', E_EXTERNAL_COMMITMENT: '책임자 승인'};
 const formatTime = (value: string) => new Date(value).toLocaleString('ko-KR', {dateStyle: 'short', timeStyle: 'short'});
 const storageKey = 'cellpinda:ops-mvp:v2';
@@ -74,6 +74,9 @@ export default function OperationsMvp() {
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState('');
   const [copied, setCopied] = useState(false);
+  const [reviewTaskId, setReviewTaskId] = useState('');
+  const [reviewCriteria, setReviewCriteria] = useState<string[]>([]);
+  const [reviewNote, setReviewNote] = useState('');
   const edges = useMemo(() => plan ? taskGraphEdges(plan.tasks) : [], [plan]);
   const report = useMemo(() => plan ? buildMvpApprovalReport(plan.contract, plan.tasks, audit, approval, new Date().toISOString(), decisions) : null, [plan, audit, approval, decisions]);
   const attentionQueue = useMemo(() => queue?.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)) ?? [], [queue]);
@@ -153,9 +156,9 @@ export default function OperationsMvp() {
   function createPlan(event: React.FormEvent) {
     event.preventDefault();
     try {
-      const session = startMvpSession(input);
+      const session = startMvpSession(input, new Date().toISOString(), {autoVerify: false});
       setRunId(clientUuid()); setRunKey(clientUuid()); setServerRevision(0);
-      setPlan(session.plan); setAudit(session.audit); setApproval(session.approval); setApprovalTaskId(session.approvalTaskId || ''); setDecisions(session.decisions); setMessage(`${session.progressedTaskIds.length}개 내부 업무를 자동 실행·검증하고 ${session.approvalTaskId || '다음 단계'}에서 책임자 승인 대기로 멈췄습니다.`); setCopied(false);
+      setPlan(session.plan); setAudit(session.audit); setApproval(session.approval); setApprovalTaskId(session.approvalTaskId || ''); setDecisions(session.decisions); setReviewTaskId(''); setReviewCriteria([]); setReviewNote(''); setMessage(session.stoppedReason === 'verification_required' ? `${session.progressedTaskIds.length}개 업무를 실행했습니다. ${session.progressedTaskIds[0] || '첫 업무'}의 독립 검증자 판정을 기다립니다.` : `${session.progressedTaskIds.length}개 내부 업무를 자동 실행하고 ${session.approvalTaskId || '다음 단계'}에서 책임자 승인 대기로 멈췄습니다.`); setCopied(false);
     } catch (error) { setMessage(error instanceof Error ? error.message : '목표를 생성하지 못했습니다.'); }
   }
 
@@ -174,21 +177,31 @@ export default function OperationsMvp() {
     } catch (error) { setMessage(error instanceof Error ? error.message : '샌드박스 실행에 실패했습니다.'); }
   }
 
-  function verify(taskId: string) {
+  function openReview(taskId: string) {
+    const task = plan?.tasks.find(item => item.id === taskId);
+    if (!task) return;
+    setReviewTaskId(taskId);
+    setReviewCriteria([]);
+    setReviewNote('');
+  }
+
+  function review(taskId: string, decision: 'accept' | 'rework') {
     if (!plan) return;
     try {
+      const task = plan.tasks.find(item => item.id === taskId);
+      if (!task) return;
       const now = new Date().toISOString();
-      const result = verifySandboxTask(plan.tasks, taskId, now);
-      const decidedTask = result.tasks.find(task => task.id === taskId);
+      const result = recordIndependentReview(plan.tasks, taskId, {verifier: task.verifier, acceptedCriteria: reviewCriteria, note: reviewNote, decision}, now);
+      const decidedTask = result.tasks.find(item => item.id === taskId);
       if (decidedTask) setDecisions(items => [...items, buildTaskDecision(plan.contract, decidedTask, now)]);
-      setPlan({...plan, tasks: result.tasks}); setAudit(items => [...items, ...result.events]); setMessage(`${taskId} 작업의 독립 검증 단계 시뮬레이션을 기록했습니다. 실제 외부 결과 검증은 운영 연결 후 별도 수행됩니다.`);
-    } catch (error) { setMessage(error instanceof Error ? error.message : '독립 검증 기록에 실패했습니다.'); }
+      setPlan({...plan, tasks: result.tasks}); setAudit(items => [...items, ...result.events]); setReviewTaskId(''); setReviewCriteria([]); setReviewNote(''); setMessage(decision === 'accept' ? `${taskId} 독립 검토 판정을 기록했습니다. 다음 선행 작업을 열 수 있습니다.` : `${taskId} 보완 요청을 기록했습니다. 담당자가 수정한 뒤 다시 실행해야 합니다.`);
+    } catch (error) { setMessage(error instanceof Error ? error.message : '독립 검토 기록에 실패했습니다.'); }
   }
 
   function runAutonomousWave() {
     if (!plan) return;
     try {
-      const result = runSandboxWave(plan.contract, plan.tasks, new Date().toISOString());
+      const result = runSandboxWave(plan.contract, plan.tasks, new Date().toISOString(), {autoVerify: false});
       setPlan({...plan, tasks: result.tasks});
       setAudit(items => [...items, ...result.events]);
       setDecisions(items => [...items, ...result.decisions]);
@@ -198,10 +211,10 @@ export default function OperationsMvp() {
       const retainedApprovalTaskId = result.approvalTaskId ?? approvalTaskId;
       if (retainedApproval) {
         setApproval(retainedApproval); setApprovalTaskId(retainedApprovalTaskId || '');
-        setMessage(`${result.progressedTaskIds.length}개 내부 업무를 자동 실행·검증하고 ${retainedApprovalTaskId || '승인 단계'}에서 책임자 승인 대기로 멈췄습니다.`);
+        setMessage(`${result.progressedTaskIds.length}개 내부 업무를 자동 실행하고 ${retainedApprovalTaskId || '승인 단계'}에서 책임자 승인 대기로 멈췄습니다.`);
       } else {
         setApproval(undefined); setApprovalTaskId('');
-        setMessage(`${result.progressedTaskIds.length}개 업무를 자동 실행·검증했습니다. ${result.stoppedReason === 'completed' ? '모든 샌드박스 업무가 완료되었습니다.' : '새 실행 가능 업무가 생기면 다음 파동에서 이어갑니다.'}`);
+        setMessage(`${result.progressedTaskIds.length}개 업무를 자동 실행했습니다. ${result.stoppedReason === 'verification_required' ? '독립 검증자 판정을 입력하면 다음 업무를 엽니다.' : result.stoppedReason === 'completed' ? '모든 샌드박스 업무가 완료되었습니다.' : '새 실행 가능 업무가 생기면 다음 파동에서 이어갑니다.'}`);
       }
     } catch (error) { setMessage(error instanceof Error ? error.message : '자동 협업 파동 실행에 실패했습니다.'); }
   }
@@ -216,7 +229,9 @@ export default function OperationsMvp() {
     : report?.recommendation === 'blocked'
       ? '승인 대기'
       : report && report.completedTasks.length > 0
-        ? '샌드박스 확인 · 실제 검증 필요'
+        ? report.independentlyVerifiedTasks.length > 0
+          ? '독립 검토 기록 · 추가 확인 필요'
+          : '샌드박스 확인 · 실제 검증 필요'
         : '추가 작업 필요';
 
   return <main className="ops-mvp">
@@ -253,13 +268,13 @@ export default function OperationsMvp() {
       </section>
       <section className="ops-mvp-graph wrap" aria-labelledby="graph-heading">
         <div className="ops-mvp-section-heading"><div><p className="chapter">03 / 업무 그래프</p><h2 id="graph-heading">다음에 할 일이 보입니다.</h2></div><p>선행 작업이 완료된 작업만 실행 가능해집니다. 승인 없는 외부 약속은 샌드박스에서도 멈춥니다.</p></div>
-      <div className="ops-mvp-graph-layout"><div className="ops-mvp-tasks">{plan.tasks.map(task => <article className={`ops-mvp-task state-${task.state.toLowerCase()}`} key={task.id}><div className="ops-mvp-task-top"><div><span className="ops-mvp-task-id">{task.id}</span><h3>{task.title}</h3></div><span className="ops-mvp-state">{taskStateLabel(task)}</span></div><p>{task.description}</p><div className="ops-mvp-task-meta"><span>담당 {task.lead}</span><span>검증 {task.verifier}</span><span>위험도 {riskLabels[task.risk || 'A_READ']}</span></div>{task.dependencies.length ? <small>선행: {task.dependencies.join(' → ')}</small> : null}{task.state === 'READY' ? <button className="button outline ops-mvp-task-action" type="button" onClick={() => execute(task.id)}>샌드박스 실행 <Play size={15}/></button> : task.state === 'VERIFYING' ? <button className="button outline ops-mvp-task-action" type="button" onClick={() => verify(task.id)}>독립 검증 단계 시뮬레이션 <ShieldCheck size={15}/></button> : task.state === 'DONE' ? <span className="ops-mvp-done"><CheckCircle2 size={16}/> 샌드박스 확인 기록 · {task.verification?.verifier || task.verifier}</span> : null}</article>)}</div><aside className="ops-mvp-graph-side"><h3>의존성 흐름</h3><div className="ops-mvp-flow">{edges.map((edge,index) => <span key={`${edge.from}-${edge.to}`}>{edge.from}<ArrowRight size={14}/>{edge.to}{index < edges.length - 1 ? <i/> : null}</span>)}</div><button className="button outline" type="button" onClick={runAutonomousWave}>자동 협업 파동 실행 <Play size={15}/></button><button className="text-link" type="button" onClick={() => { setPlan({...plan, tasks: plan.tasks.map(task => task.state === 'BACKLOG' && task.dependencies.every(id => plan.tasks.find(parent => parent.id === id)?.state === 'DONE') ? {...task, state: 'READY'} : task)}); setMessage('완료된 선행 작업을 기준으로 실행 가능 상태를 갱신했습니다.'); }}>실행 가능 상태 갱신 ↻</button></aside></div>
+      <div className="ops-mvp-graph-layout"><div className="ops-mvp-tasks">{plan.tasks.map(task => <article className={`ops-mvp-task state-${task.state.toLowerCase()}`} key={task.id}><div className="ops-mvp-task-top"><div><span className="ops-mvp-task-id">{task.id}</span><h3>{task.title}</h3></div><span className="ops-mvp-state">{taskStateLabel(task)}</span></div><p>{task.description}</p><div className="ops-mvp-task-meta"><span>담당 {task.lead}</span><span>검증 {task.verifier}</span><span>위험도 {riskLabels[task.risk || 'A_READ']}</span></div>{task.dependencies.length ? <small>선행: {task.dependencies.join(' → ')}</small> : null}{task.state === 'READY' ? <button className="button outline ops-mvp-task-action" type="button" onClick={() => execute(task.id)}>샌드박스 실행 <Play size={15}/></button> : task.state === 'VERIFYING' ? <><button className="button outline ops-mvp-task-action" type="button" onClick={() => openReview(task.id)}>독립 검증 기록 입력 <ShieldCheck size={15}/></button>{reviewTaskId === task.id ? <form className="ops-mvp-review-form" onSubmit={event => { event.preventDefault(); review(task.id, 'accept'); }}><fieldset><legend>수락 기준 확인</legend>{task.acceptance.map(criterion => <label key={criterion}><input type="checkbox" checked={reviewCriteria.includes(criterion)} onChange={event => setReviewCriteria(current => event.target.checked ? [...current, criterion] : current.filter(item => item !== criterion))}/><span>{criterion}</span></label>)}</fieldset><label>검토 메모<textarea value={reviewNote} onChange={event => setReviewNote(event.target.value)} rows={3} placeholder="확인한 근거와 판단 이유를 적어 주세요." /></label><div className="ops-mvp-review-actions"><button className="button" type="submit" disabled={reviewCriteria.length !== task.acceptance.length || reviewNote.trim().length < 10}>독립 검증 승인 기록</button><button className="button outline" type="button" onClick={() => review(task.id, 'rework')} disabled={reviewCriteria.length !== task.acceptance.length || reviewNote.trim().length < 10}>보완 요청 기록</button><button className="text-link" type="button" onClick={() => setReviewTaskId('')}>닫기</button></div></form> : null}</> : task.state === 'REWORK' ? <button className="button outline ops-mvp-task-action" type="button" onClick={() => execute(task.id)}>보완 후 다시 실행 <Play size={15}/></button> : task.state === 'DONE' ? <span className="ops-mvp-done"><CheckCircle2 size={16}/> {task.verification?.mode === 'independent_review' ? '독립 검증 기록' : '샌드박스 확인 기록'} · {task.verification?.verifier || task.verifier}</span> : null}</article>)}</div><aside className="ops-mvp-graph-side"><h3>의존성 흐름</h3><div className="ops-mvp-flow">{edges.map((edge,index) => <span key={`${edge.from}-${edge.to}`}>{edge.from}<ArrowRight size={14}/>{edge.to}{index < edges.length - 1 ? <i/> : null}</span>)}</div><button className="button outline" type="button" onClick={runAutonomousWave}>자동 협업 파동 실행 <Play size={15}/></button><button className="text-link" type="button" onClick={() => { setPlan({...plan, tasks: plan.tasks.map(task => task.state === 'BACKLOG' && task.dependencies.every(id => plan.tasks.find(parent => parent.id === id)?.state === 'DONE') ? {...task, state: 'READY'} : task)}); setMessage('완료된 선행 작업을 기준으로 실행 가능 상태를 갱신했습니다.'); }}>실행 가능 상태 갱신 ↻</button></aside></div>
       </section>
       <section className="ops-mvp-report wrap" aria-labelledby="report-heading">
         <div className="ops-mvp-section-heading"><div><p className="chapter">04 / 결과·승인 보고</p><h2 id="report-heading">실행 결과를 보고서로 남깁니다.</h2></div><p>샌드박스 결과는 외부 실행 증거가 아닙니다. 실제 공개 전에는 책임자·표시·배포 검토가 필요합니다.</p></div>
         {approval ? <div className="ops-mvp-approval"><ShieldCheck size={22}/><div><strong>승인 요청이 생성되었습니다.</strong><p>{approval.action}</p><small>위험도: {riskLabels[approval.risk]} · 만료: {formatTime(approval.expiresAt)}</small></div><button className="button" type="button" onClick={() => execute(approvalTaskId, 'sandbox-approval')}>샌드박스 승인 후 실행</button></div> : null}
-        <div className="ops-mvp-report-grid"><article><span className="ops-mvp-eyebrow">현재 판정</span><strong className={`ops-mvp-recommendation recommendation-${report?.recommendation}`}>{reportLabel}</strong><p>샌드박스 확인 기록 {report?.completedTasks.length ?? 0}건 · 다음 작업 {report?.pendingTasks.length ?? 0}건</p><small>검증 기록 {Object.keys(report?.verificationRecords ?? {}).length}건 · 샌드박스 구조와 증거 묶음만 확인됨. 실제 운영 검증과 공개 승인은 별도입니다.</small></article><article><span className="ops-mvp-eyebrow">감사 로그</span>{audit.length ? <ol>{audit.slice(-6).map(item => <li key={item.id}><strong>{item.taskId}</strong> {stateLabels[item.to]} · {item.note}</li>)}</ol> : <p>아직 실행 로그가 없습니다. 위 그래프의 실행 가능 작업을 시작하세요.</p>}<div className="ops-mvp-decision-log"><span className="ops-mvp-eyebrow">TF 의사결정 기록</span>{decisions.length ? <ol>{decisions.slice(-5).map(item => <li key={item.id}><strong>{item.taskId}</strong> {item.decision}<small>참여: {item.participants.join(' · ')} · 다음: {item.nextAction}</small><small>반대 의견: {item.dissent}</small><small>근거: {item.evidence.join(' · ')}</small></li>)}</ol> : <p>첫 목표 계약 회의 기록이 아직 없습니다.</p>}</div></article></div>
-      <div className="ops-mvp-report-actions"><button className="button outline" type="button" onClick={copyReport} disabled={!report}><Clipboard size={16}/> {copied ? '복사됨' : '승인 보고서 복사'}</button><button className="button outline" type="button" onClick={() => report && downloadJson(`${report.reportId}.json`, report)} disabled={!report}><Download size={16}/> JSON 다운로드</button><button className="text-link" type="button" onClick={() => { setRunId(clientUuid()); setRunKey(clientUuid()); setServerRevision(0); setPlan(null); setAudit([]); setApproval(undefined); setApprovalTaskId(''); setDecisions([]); setMessage('샌드박스를 초기화했습니다.'); }}><RotateCcw size={15}/> 새 목표로 시작</button></div>
+        <div className="ops-mvp-report-grid"><article><span className="ops-mvp-eyebrow">현재 판정</span><strong className={`ops-mvp-recommendation recommendation-${report?.recommendation}`}>{reportLabel}</strong><p>샌드박스 확인 기록 {report?.completedTasks.length ?? 0}건 · 다음 작업 {report?.pendingTasks.length ?? 0}건</p><small>사람 독립 검토 {report?.independentlyVerifiedTasks.length ?? 0}건 · 자동 시뮬레이션 {report?.sandboxCompletedTasks.length ?? 0}건 · 상태 {report?.verificationStatus}</small><small>샌드박스 결과는 외부 운영 증거가 아닙니다. 공개 승인 전 실제 검토·표시·배포 확인이 필요합니다.</small></article><article><span className="ops-mvp-eyebrow">감사 로그</span>{audit.length ? <ol>{audit.slice(-6).map(item => <li key={item.id}><strong>{item.taskId}</strong> {stateLabels[item.to]} · {item.note}</li>)}</ol> : <p>아직 실행 로그가 없습니다. 위 그래프의 실행 가능 작업을 시작하세요.</p>}<div className="ops-mvp-decision-log"><span className="ops-mvp-eyebrow">TF 의사결정 기록</span>{decisions.length ? <ol>{decisions.slice(-5).map(item => <li key={item.id}><strong>{item.taskId}</strong> {item.decision}<small>참여: {item.participants.join(' · ')} · 다음: {item.nextAction}</small><small>반대 의견: {item.dissent}</small><small>근거: {item.evidence.join(' · ')}</small></li>)}</ol> : <p>첫 목표 계약 회의 기록이 아직 없습니다.</p>}</div></article></div>
+      <div className="ops-mvp-report-actions"><button className="button outline" type="button" onClick={copyReport} disabled={!report}><Clipboard size={16}/> {copied ? '복사됨' : '승인 보고서 복사'}</button><button className="button outline" type="button" onClick={() => report && downloadJson(`${report.reportId}.json`, report)} disabled={!report}><Download size={16}/> JSON 다운로드</button><button className="text-link" type="button" onClick={() => { setRunId(clientUuid()); setRunKey(clientUuid()); setServerRevision(0); setPlan(null); setAudit([]); setApproval(undefined); setApprovalTaskId(''); setDecisions([]); setReviewTaskId(''); setReviewCriteria([]); setReviewNote(''); setMessage('샌드박스를 초기화했습니다.'); }}><RotateCcw size={15}/> 새 목표로 시작</button></div>
       </section>
     </> : <section className="ops-mvp-empty wrap"><p className="chapter">MVP 시작점</p><h2>목표 한 문장으로<br />첫 업무를 열어보세요.</h2><p>기본 목표가 입력되어 있습니다. 생성 버튼을 누르면 계약·TF·그래프·승인 보고 흐름을 바로 실행할 수 있습니다.</p></section>}
   </main>;

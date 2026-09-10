@@ -84,6 +84,15 @@
 .ops-mvp-task > small { display: block; margin-top: 12px; color: #607567; }
 .ops-mvp-task-action { font-size: 12px; padding: 9px 14px; margin-top: 14px; }
 .ops-mvp-done { display: inline-flex; align-items: center; gap: 6px; color: #2a7146; font-size: 12px; margin-top: 12px; }
+.ops-mvp-review-form { display: grid; gap: 14px; margin-top: 16px; padding: 16px; background: #f4f8f4; border: 1px solid #c9ddcd; border-radius: 8px; }
+.ops-mvp-review-form fieldset { display: grid; gap: 9px; margin: 0; padding: 0; border: 0; }
+.ops-mvp-review-form legend, .ops-mvp-review-form > label { color: #315f48; font-size: 12px; font-weight: 700; }
+.ops-mvp-review-form fieldset label { display: flex; align-items: flex-start; gap: 8px; color: #405a49; font-size: 12px; line-height: 1.5; font-weight: 400; }
+.ops-mvp-review-form input[type='checkbox'] { margin-top: 2px; accent-color: #158457; }
+.ops-mvp-review-form textarea { display: block; width: 100%; margin-top: 7px; padding: 10px; border: 1px solid #a8c5af; border-radius: 5px; background: #fff; color: #18382b; line-height: 1.5; resize: vertical; box-sizing: border-box; }
+.ops-mvp-review-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.ops-mvp-review-actions .button { font-size: 12px; padding: 8px 11px; }
+.ops-mvp-review-actions .text-link { margin: 0; font-size: 12px; }
 .ops-mvp-graph-side { background: #eef6ef; border-radius: 10px; padding: 24px; height: max-content; }
 .ops-mvp-graph-side h3 { margin: 0 0 18px; font-size: 18px; }
 .ops-mvp-flow { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }

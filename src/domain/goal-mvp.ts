@@ -44,13 +44,25 @@ export type MvpTask = TaskNode & {
   description: string;
   output: string;
   verification?: SandboxVerificationRecord;
+  review?: IndependentReviewRecord;
 };
 
 export type SandboxVerificationRecord = {
   verifier: string;
   acceptedCriteria: string[];
   evidence: string[];
-  mode: 'sandbox_simulation';
+  mode: 'sandbox_simulation' | 'independent_review';
+  reviewerNote?: string;
+  recordedAt: string;
+};
+
+export type IndependentReviewRecord = {
+  verifier: string;
+  acceptedCriteria: string[];
+  evidence: string[];
+  note: string;
+  decision: 'accept' | 'rework';
+  mode: 'human_independent_review';
   recordedAt: string;
 };
 
@@ -91,7 +103,10 @@ export type MvpApprovalReport = {
   taskEvidence: Record<string, string[]>;
   taskAcceptance: Record<string, string[]>;
   verificationRecords: Record<string, SandboxVerificationRecord>;
-  verificationStatus: 'sandbox_simulation_only';
+  reviewRecords: Record<string, IndependentReviewRecord>;
+  sandboxCompletedTasks: string[];
+  independentlyVerifiedTasks: string[];
+  verificationStatus: 'sandbox_simulation_only' | 'independent_review_recorded' | 'mixed_verification';
   approval?: ApprovalRequest;
   sandboxOnly: true;
 };
@@ -108,7 +123,12 @@ export type SandboxRunResult = {
   approvalTaskId?: string;
 };
 
-export type SandboxWaveStopReason = 'approval_required' | 'no_ready_tasks' | 'completed';
+export type SandboxWaveStopReason = 'approval_required' | 'verification_required' | 'no_ready_tasks' | 'completed';
+
+export type SandboxWaveOptions = {
+  /** When false, pause at VERIFYING so a human reviewer can record a decision. */
+  autoVerify?: boolean;
+};
 
 export type SandboxWaveResult = SandboxRunResult & {
   decisions: MvpDecisionRecord[];
@@ -204,7 +224,7 @@ export function buildTaskDecision(contract: MvpGoalContract, task: MvpTask, now 
     : task.state === 'DONE'
     ? task.verification?.mode === 'sandbox_simulation'
       ? '독립 검증 단계 시뮬레이션이 수락 기준과 증거 묶음을 기록해 다음 작업을 연다. 실제 운영 승인은 별도 검증이 필요하다.'
-      : '독립 검증자가 수락 기준과 증거를 확인해 다음 작업을 연다.'
+      : '독립 검증자가 수락 기준과 증거를 확인해 다음 작업을 연다. 실제 외부 게시 승인은 별도다.'
       : task.state === 'VERIFYING'
         ? '샌드박스 산출물을 독립 검증 단계로 넘긴다.'
         : '내부 샌드박스에서 다음 작업을 진행한다.';
@@ -290,9 +310,11 @@ export function runSandboxTask(tasks: readonly MvpTask[], taskId: string, approv
   const promoted = promoteReady(tasks);
   const promotedTask = promoted.find(task => task.id === taskId);
   const approvalResume = source.state === 'WAITING' && requiresApproval(source.risk ?? 'A_READ') && canExecute(source.risk ?? 'A_READ', approvalToken);
-  const ready = approvalResume ? source : promotedTask;
-  if (!ready || (!approvalResume && ready.state !== 'READY')) {
+  const reworkResume = source.state === 'REWORK';
+  const ready = approvalResume || reworkResume ? source : promotedTask;
+  if (!ready || (!approvalResume && !reworkResume && ready.state !== 'READY')) {
     if (source.state === 'WAITING') throw new Error('책임자 승인 후 다시 실행해야 합니다.');
+    if (source.state === 'REWORK') throw new Error('보완 내용을 반영한 뒤 다시 실행해야 합니다.');
     throw new Error('선행 작업을 먼저 완료해야 합니다.');
   }
   if (requiresApproval(ready.risk ?? 'A_READ') && !canExecute(ready.risk ?? 'A_READ', approvalToken)) {
@@ -313,9 +335,9 @@ export function runSandboxTask(tasks: readonly MvpTask[], taskId: string, approv
   const events: SandboxAuditEvent[] = [];
   const push = (from: TaskState, to: TaskState, note: string) => events.push({id: `${taskId}-${to}-${events.length + 1}`, taskId, from, to, note, createdAt: now});
   if (approvalResume) push('WAITING', 'READY', '책임자 승인을 확인해 작업을 다시 실행 가능 상태로 전환했습니다.');
-  push(approvalResume ? 'READY' : ready.state, 'RUNNING', '샌드박스에서 작업을 시작했습니다.');
+  push(approvalResume ? 'READY' : ready.state, 'RUNNING', reworkResume ? '검토자의 보완 요청을 반영해 샌드박스 작업을 다시 시작했습니다.' : '샌드박스에서 작업을 시작했습니다.');
   push('RUNNING', 'VERIFYING', '샌드박스 산출물을 만들었습니다. 품질감사관의 독립 검증을 기다립니다.');
-  const next = tasks.map(task => task.id === taskId ? {...task, state: 'VERIFYING' as const, evidence: [...task.evidence, `sandbox-output:${taskId}:${now}`]} : {...task});
+  const next = tasks.map(task => task.id === taskId ? {...task, state: 'VERIFYING' as const, review: undefined, verification: undefined, evidence: [...task.evidence, `sandbox-output:${taskId}:${now}`]} : {...task});
   return {tasks: next, events};
 }
 
@@ -336,12 +358,61 @@ export function verifySandboxTask(tasks: readonly MvpTask[], taskId: string, now
   return {tasks: next, events};
 }
 
+export type IndependentReviewInput = {
+  verifier: string;
+  acceptedCriteria: string[];
+  note: string;
+  decision: 'accept' | 'rework';
+};
+
+/**
+ * Records a real reviewer decision against a sandbox output. The automated
+ * wave never calls this function; a person must confirm every acceptance
+ * criterion and provide a written rationale. Rejected work returns to REWORK.
+ */
+export function recordIndependentReview(tasks: readonly MvpTask[], taskId: string, input: IndependentReviewInput, now = new Date().toISOString()): {tasks: MvpTask[]; events: SandboxAuditEvent[]} {
+  const source = tasks.find(task => task.id === taskId);
+  if (!source) throw new Error(`작업을 찾을 수 없습니다: ${taskId}`);
+  if (source.state !== 'VERIFYING') throw new Error('샌드박스 산출물을 먼저 만들고 검토 대기 상태로 두어야 합니다.');
+  if (typeof input.verifier !== 'string' || input.verifier.trim().length < 2 || input.verifier.trim().length > 200) throw new Error('검증자 역할을 입력해 주세요.');
+  if (!Array.isArray(input.acceptedCriteria) || input.acceptedCriteria.length !== source.acceptance.length || source.acceptance.some(item => !input.acceptedCriteria.includes(item))) throw new Error('모든 수락 기준을 확인해야 합니다.');
+  if (typeof input.note !== 'string' || input.note.trim().length < 10 || input.note.length > 2000) throw new Error('검토 메모를 10자 이상 입력해 주세요.');
+  if (input.decision !== 'accept' && input.decision !== 'rework') throw new Error('검토 판정이 올바르지 않습니다.');
+  const review: IndependentReviewRecord = {
+    verifier: input.verifier.trim(),
+    acceptedCriteria: [...input.acceptedCriteria],
+    evidence: [...source.evidence],
+    note: input.note.trim(),
+    decision: input.decision,
+    mode: 'human_independent_review',
+    recordedAt: now,
+  };
+  const nextState = input.decision === 'accept' ? 'DONE' as const : 'REWORK' as const;
+  const event: SandboxAuditEvent = {
+    id: `${taskId}-${nextState}-human-${now.replace(/\D/g, '').slice(0, 14)}`,
+    taskId,
+    from: 'VERIFYING',
+    to: nextState,
+    note: input.decision === 'accept'
+      ? `${review.verifier}가 모든 수락 기준과 샌드박스 증거를 확인해 독립 검토를 승인했습니다. 실제 외부 게시 승인은 별도입니다.`
+      : `${review.verifier}가 보완을 요청했습니다: ${review.note}`,
+    createdAt: now,
+  };
+  const next = promoteReady(tasks.map(task => task.id === taskId
+    ? input.decision === 'accept'
+      ? {...task, state: nextState, review, verification: {verifier: review.verifier, acceptedCriteria: [...review.acceptedCriteria], evidence: [...review.evidence], mode: 'independent_review' as const, reviewerNote: review.note, recordedAt: now}, evidence: [...task.evidence, `independent-review:${taskId}:${now}`]}
+      : {...task, state: nextState, review, evidence: [...task.evidence, `review-rework:${taskId}:${now}`]}
+    : {...task}));
+  return {tasks: next, events: [event]};
+}
+
 /**
  * Runs the safe, internal part of the graph until it reaches an approval gate.
  * Each task still gets its own execution, verification, audit events and TF
  * decision records so a wave is resumable rather than a hidden bulk mutation.
  */
-export function runSandboxWave(contract: MvpGoalContract, tasks: readonly MvpTask[], now = new Date().toISOString()): SandboxWaveResult {
+export function runSandboxWave(contract: MvpGoalContract, tasks: readonly MvpTask[], now = new Date().toISOString(), options: SandboxWaveOptions = {}): SandboxWaveResult {
+  const autoVerify = options.autoVerify ?? true;
   let current = tasks.map(task => ({...task, evidence: [...task.evidence], acceptance: [...task.acceptance], dependencies: [...task.dependencies]}));
   const events: SandboxAuditEvent[] = [];
   const decisions: MvpDecisionRecord[] = [];
@@ -364,6 +435,10 @@ export function runSandboxWave(contract: MvpGoalContract, tasks: readonly MvpTas
       break;
     }
     events.push(...execution.events);
+    if (!autoVerify) {
+      progressedTaskIds.push(candidate.id);
+      break;
+    }
     const verification = verifySandboxTask(current, candidate.id, at(step * 2_000 + 1_000));
     current = verification.tasks;
     events.push(...verification.events);
@@ -374,6 +449,8 @@ export function runSandboxWave(contract: MvpGoalContract, tasks: readonly MvpTas
 
   const stoppedReason: SandboxWaveStopReason = approval
     ? 'approval_required'
+    : current.some(task => task.state === 'VERIFYING')
+      ? 'verification_required'
     : readyTasks(current).length === 0
       ? (current.every(task => task.state === 'DONE') ? 'completed' : 'no_ready_tasks')
       : 'no_ready_tasks';
@@ -385,9 +462,9 @@ export function runSandboxWave(contract: MvpGoalContract, tasks: readonly MvpTas
  * External commitments remain represented as an approval request and are
  * never executed by this helper.
  */
-export function startMvpSession(input: string, now = new Date().toISOString()): MvpSessionStart {
+export function startMvpSession(input: string, now = new Date().toISOString(), options: SandboxWaveOptions = {}): MvpSessionStart {
   const plan = generateMvpPlan(input);
-  const wave = runSandboxWave(plan.contract, plan.tasks, now);
+  const wave = runSandboxWave(plan.contract, plan.tasks, now, options);
   return {
     plan: {...plan, tasks: wave.tasks},
     audit: wave.events,
@@ -402,7 +479,9 @@ export function startMvpSession(input: string, now = new Date().toISOString()): 
 export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonly MvpTask[], events: readonly SandboxAuditEvent[], approval?: ApprovalRequest, now = new Date().toISOString(), decisions: readonly MvpDecisionRecord[] = []): MvpApprovalReport {
   const completedTasks = tasks.filter(task => task.state === 'DONE').map(task => task.id);
   const pendingTasks = tasks.filter(task => task.state !== 'DONE').map(task => task.id);
-  const hasSandboxOnlyVerification = tasks.some(task => task.verification?.mode === 'sandbox_simulation');
+  const sandboxCompletedTasks = tasks.filter(task => task.verification?.mode === 'sandbox_simulation').map(task => task.id);
+  const independentlyVerifiedTasks = tasks.filter(task => task.verification?.mode === 'independent_review').map(task => task.id);
+  const hasSandboxOnlyVerification = sandboxCompletedTasks.length > 0;
   // A sandbox verification record proves that the state transition and its
   // evidence bundle were exercised. It does not prove that the public result
   // was independently checked in production, so a fully simulated run must
@@ -412,6 +491,9 @@ export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonl
     : pendingTasks.length || hasSandboxOnlyVerification
       ? 'revise'
       : 'approve';
+  const verificationStatus = independentlyVerifiedTasks.length > 0
+    ? hasSandboxOnlyVerification ? 'mixed_verification' as const : 'independent_review_recorded' as const
+    : 'sandbox_simulation_only' as const;
   return {
     reportId: `REPORT-${contract.goalId}-${now.replace(/\D/g, '').slice(0, 14)}`,
     generatedAt: now,
@@ -433,7 +515,10 @@ export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonl
     taskEvidence: Object.fromEntries(tasks.map(task => [task.id, [...task.evidence]])),
     taskAcceptance: Object.fromEntries(tasks.map(task => [task.id, [...task.acceptance]])),
     verificationRecords: Object.fromEntries(tasks.flatMap(task => task.verification ? [[task.id, {...task.verification, acceptedCriteria: [...task.verification.acceptedCriteria], evidence: [...task.verification.evidence]}] as const] : [])),
-    verificationStatus: 'sandbox_simulation_only',
+    reviewRecords: Object.fromEntries(tasks.flatMap(task => task.review ? [[task.id, {...task.review, acceptedCriteria: [...task.review.acceptedCriteria], evidence: [...task.review.evidence]}] as const] : [])),
+    sandboxCompletedTasks,
+    independentlyVerifiedTasks,
+    verificationStatus,
     ...(approval ? {approval} : {}),
     sandboxOnly: true,
   };
