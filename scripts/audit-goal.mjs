@@ -90,7 +90,7 @@ if (includeLocalInputs) {
     'local-order-inputs',
     orderOk ? 'WAITING' : 'INVALID',
     orderOk
-      ? `로컬 주문 파일 ${orders.counters?.filesScanned ?? 0}개 스캔 · 1500 집계 ${orders.aggregate?.gaba1500?.quantity ?? 0}개 · 역사 자료만 확인되어 실구매로 승격하지 않음`
+      ? `로컬 주문 파일 ${orders.counters?.filesScanned ?? 0}개 스캔 · 1500 집계 ${orders.aggregate?.gaba1500?.quantity ?? 0}개 · 최근 수정 ${orderLatest || '확인 불가'} · 역사 자료만 확인되어 실구매로 승격하지 않음`
       : '로컬 주문 자료 감사 명령 실패 또는 계약 ID 불일치',
     ['data/local-order-manifest.json', 'scripts/audit-local-orders.mjs'],
     orderOk ? ['판매자 계정·스마트스토어 상품 ID·실시간 주문·취소·환불 응답 확인'] : ['주문 입력 재감사']
