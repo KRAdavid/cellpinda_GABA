@@ -36,10 +36,10 @@ jobs:
         run: pnpm run typecheck
       - name: Test rules and API boundaries
         run: pnpm test
-      - name: Verify review publishing with isolated local D1
-        run: pnpm run test:worker-reviews
       - name: Build deployment bundle
         run: pnpm run build
+      - name: Verify review publishing with isolated local D1
+        run: pnpm run test:worker-reviews
       - name: Bundle Worker without deploying
         run: pnpm exec wrangler deploy --dry-run --outdir worker-build
       - name: Upload build evidence
