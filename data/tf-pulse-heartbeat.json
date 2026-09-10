@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "mode": "automation_pulse_heartbeat",
+  "goalId": "GL-2026-CELL-GABA-001",
+  "goalStatus": "ACTIVE",
+  "generatedAt": "2026-09-10T18:09:46.757Z",
+  "snapshotHash": "7164ca63831344d8d0481562c0da5ec6b5829f33ced259ca56573bb92068a805",
+  "requiresHumanDecision": true,
+  "counts": {
+    "BACKLOG": 0,
+    "READY": 0,
+    "RUNNING": 0,
+    "VERIFYING": 1,
+    "WAITING": 4,
+    "EXPIRED": 0,
+    "RETRY": 0,
+    "REWORK": 0,
+    "DONE": 8,
+    "FAILED": 0,
+    "CANCELLED": 0
+  },
+  "verifying": [
+    "B2"
+  ],
+  "waiting": [
+    "B3",
+    "B4",
+    "C2",
+    "E1"
+  ],
+  "inputGates": [
+    {
+      "taskId": "B3",
+      "state": "WAITING",
+      "chair": "근거·표시 검토",
+      "requiredInputs": [
+        "후기 원문 URL 또는 원본 파일",
+        "제품명·사용기간·후기 작성 맥락",
+        "재게시 권한 및 제공·보상 관계",
+        "개인정보 비식별 확인"
+      ],
+      "nextAction": "필요 입력(원문 URL·제품·사용기간·재게시 권한·제공관계)을 확보한 뒤 담당자와 검증자가 함께 재검토한다."
+    },
+    {
+      "taskId": "B4",
+      "state": "WAITING",
+      "chair": "표시·콘텐츠 검토",
+      "requiredInputs": [
+        "로그인 없는 공개 영상 주소 또는 MP4/HLS",
+        "포스터·자막·대본·영상 길이",
+        "음악·출연·이미지 사용 권리",
+        "표시사항·CTA 책임자 승인"
+      ],
+      "nextAction": "필요 입력(로그인 없는 공개 영상·포스터·자막·대본·권리·표시사항·CTA 승인)을 확보한 뒤 담당자와 검증자가 함께 재검토한다."
+    },
+    {
+      "taskId": "C2",
+      "state": "WAITING",
+      "chair": "QA·감사",
+      "requiredInputs": [
+        "Cloudflare API token",
+        "Cloudflare account ID와 D1 database ID",
+        "운영 ADMIN_TOKEN과 MEMBER_ORIGIN",
+        "복구·롤백·비밀 회수 확인"
+      ],
+      "nextAction": "필요 입력(Cloudflare API token·account ID·D1 ID·운영 토큰·정식 origin)을 확보한 뒤 담당자와 검증자가 함께 재검토한다."
+    },
+    {
+      "taskId": "E1",
+      "state": "WAITING",
+      "chair": "재무·QA",
+      "requiredInputs": [
+        "판매자 계정 접근",
+        "실제 가바 1500 채널상품번호",
+        "주문·취소·환불 테스트 응답",
+        "클릭·구매 대사 기간과 상태 기준"
+      ],
+      "nextAction": "필요 입력(판매자 계정·실제 1500 상품 식별자·주문·취소·환불 테스트 응답)을 확보한 뒤 담당자와 검증자가 함께 재검토한다."
+    }
+  ],
+  "teaserGate": {
+    "status": "HOLD",
+    "taskId": "B4",
+    "taskState": "WAITING"
+  }
+}

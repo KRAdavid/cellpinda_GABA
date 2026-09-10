@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: tf-pulse
@@ -20,7 +20,7 @@ jobs:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: false
+          persist-credentials: true
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -30,6 +30,18 @@ jobs:
         run: node scripts/validate-tf-pulse.mjs
       - name: Generate TF decision pulse
         run: node scripts/tf-pulse.mjs --json > tf-pulse.json
+      - name: Persist safe pulse heartbeat
+        run: |
+          node scripts/write-tf-pulse-heartbeat.mjs tf-pulse.json
+          git config user.name "cellpinda-tf-pulse[bot]"
+          git config user.email "cellpinda-tf-pulse[bot]@users.noreply.github.com"
+          git add data/tf-pulse-heartbeat.json
+          if git diff --cached --quiet; then
+            echo "Pulse heartbeat unchanged."
+          else
+            git commit -m "chore: refresh TF pulse heartbeat"
+            git push origin HEAD:main
+          fi
       - name: Add pulse to run summary
         run: |
           {

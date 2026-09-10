@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-import {mkdirSync, readFileSync, writeFileSync} from 'node:fs';
+import {existsSync, mkdirSync, readFileSync, writeFileSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 
 const root=process.cwd();
@@ -13,6 +13,14 @@ const pulseRun=spawnSync(process.execPath,[resolve(root,'scripts/tf-pulse.mjs'),
 if(pulseRun.status!==0)throw new Error(`TF pulse generation failed: ${pulseRun.stderr?.trim() || 'unknown error'}`);
 let pulse;
 try{pulse=JSON.parse(pulseRun.stdout.trim());}catch{throw new Error('TF pulse generation did not return JSON');}
+const heartbeatPath=resolve(root,'data/tf-pulse-heartbeat.json');
+let pulseForQueue=pulse;
+if(existsSync(heartbeatPath)){
+  let heartbeat;
+  try{heartbeat=JSON.parse(readFileSync(heartbeatPath,'utf8'));}catch{throw new Error('TF pulse heartbeat is not valid JSON');}
+  if(heartbeat.schemaVersion!==1 || heartbeat.mode!=='automation_pulse_heartbeat' || heartbeat.goalId!==pulse.goalId || heartbeat.goalStatus!=='ACTIVE' || !/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt) || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash||'')) throw new Error('TF pulse heartbeat is malformed');
+  if(heartbeat.snapshotHash===pulse.snapshotHash) pulseForQueue={...pulse,generatedAt:heartbeat.generatedAt};
+}
 const smartStoreHost='smartstore.naver.com';
 const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerSummary','hopefulTakeaway'];
 
@@ -115,7 +123,7 @@ const operationsQueue={
   goalId:goalContract.goalId,
   status:goalContract.status,
   checkedAt:goalContract.checkedAt,
-  pulse:{generatedAt:pulse.generatedAt,snapshotHash:pulse.snapshotHash,requiresHumanDecision:pulse.requiresHumanDecision,activeTasks:pulse.meetingAgenda.length,inputGates:pulse.inputGates.length},
+  pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,requiresHumanDecision:pulseForQueue.requiresHumanDecision,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
   tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
 };

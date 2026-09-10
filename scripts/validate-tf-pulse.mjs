@@ -1,3 +1,4 @@
+import {existsSync} from 'node:fs';
 import {readFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
@@ -24,6 +25,7 @@ for (const task of graph.tasks) {
   if (!states.has(task.state)) fail(`unsupported state ${task.state} for ${task.id}`);
   if (typeof task.priority !== 'number' || !Number.isInteger(task.priority)) fail(`priority is missing for ${task.id}`);
   if (!task.lead || !task.verifier || !Array.isArray(task.evidence)) fail(`TF ownership or evidence is missing for ${task.id}`);
+  if (['WAITING', 'BACKLOG'].includes(task.state) && (!Array.isArray(task.requiredInputs) || task.requiredInputs.length === 0 || task.requiredInputs.some(input => typeof input !== 'string' || input.trim().length < 2))) fail(`input-gated task ${task.id} must list required inputs`);
   tasks.set(task.id, task);
 }
 
@@ -56,14 +58,24 @@ for (const decision of pulse.decisions) {
   if (decision.state !== task.state || decision.mode !== expectedMode(task.state)) fail(`decision mode/state mismatch for ${task.id}`);
   if (JSON.stringify(decision.participants) !== JSON.stringify([task.lead, task.verifier])) fail(`TF participants mismatch for ${task.id}`);
   if (decision.dissent !== null || decision.dissentStatus !== 'human-meeting-required') fail(`automated dissent was fabricated for ${task.id}`);
+  if (!Array.isArray(decision.requiredInputs) || JSON.stringify(decision.requiredInputs) !== JSON.stringify(Array.isArray(task.requiredInputs) ? task.requiredInputs : [])) fail(`required input checklist mismatch for ${task.id}`);
   if (typeof decision.nextAction !== 'string' || decision.nextAction.length < 10) fail(`next action missing for ${task.id}`);
   if (task.state === 'WAITING' && typeof task.blockedBy !== 'string') fail(`WAITING task ${task.id} has no input gate`);
 }
 for (const gate of pulse.inputGates) {
   const decision = pulse.decisions.find(item => item.taskId === gate.taskId);
-  if (!decision || decision.mode !== 'input-gate' || gate.blockedBy !== decision.blockedBy || gate.nextAction !== decision.nextAction) fail(`input gate is out of sync for ${gate.taskId}`);
+  if (!decision || decision.mode !== 'input-gate' || gate.blockedBy !== decision.blockedBy || gate.nextAction !== decision.nextAction || JSON.stringify(gate.requiredInputs) !== JSON.stringify(decision.requiredInputs)) fail(`input gate is out of sync for ${gate.taskId}`);
 }
 if (teaser.status === 'HOLD' && (pulse.teaserGate.taskState !== 'WAITING' || pulse.teaserGate.status !== 'HOLD')) fail('held teaser must remain a WAITING gate');
+
+const heartbeatPath = fileURLToPath(new URL('../data/tf-pulse-heartbeat.json', import.meta.url));
+if (existsSync(heartbeatPath)) {
+  let heartbeat;
+  try { heartbeat = JSON.parse(await readFile(heartbeatPath, 'utf8')); } catch { fail('TF pulse heartbeat is not valid JSON'); }
+  if (heartbeat.schemaVersion !== 1 || heartbeat.mode !== 'automation_pulse_heartbeat' || heartbeat.goalId !== contract.goalId || heartbeat.goalStatus !== contract.status) fail('pulse heartbeat identity does not match the active contract');
+  if (!/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt ?? '') || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash ?? '')) fail('pulse heartbeat timestamp or hash is malformed');
+  if (!heartbeat.counts || typeof heartbeat.requiresHumanDecision !== 'boolean' || !Array.isArray(heartbeat.verifying) || !Array.isArray(heartbeat.waiting) || !Array.isArray(heartbeat.inputGates)) fail('pulse heartbeat summary is incomplete');
+}
 
 console.log(JSON.stringify({
   goalId: contract.goalId,
