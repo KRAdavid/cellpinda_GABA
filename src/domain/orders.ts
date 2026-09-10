@@ -1,4 +1,4 @@
-/** Internal reconciliation model. This is NOT a Cafe24 webhook payload or authentication adapter. */
+/** Internal reconciliation model. This is NOT a Naver Commerce API payload or authentication adapter. */
 export type LineState = 'paid' | 'cancelled' | 'refund_pending' | 'refunded' | 'unknown';
 export interface CanonicalLine {
   itemCode: string;
