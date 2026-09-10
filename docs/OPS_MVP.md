@@ -28,7 +28,7 @@ Pages 배포 뒤에는 `validate-live-public.mjs`가 공개 URL을 재시도하�
 
 서버 저장·복원 양쪽은 `src/domain/ops-validation.ts`의 공통 경계를 통과한다. 허용 필드·길이·업무 ID·의존성·상태 전환을 확인하고, `DONE`에는 `sandbox_simulation` 검증과 `independent-review` 증거를 요구한다. 승인 요청은 `WAITING` 작업과 연결되어야 하며, 이메일·전화번호·토큰·비공개 원문 경로·권리 증거 같은 값은 저장 전에 거부한다. 기존 브라우저 임시 상태를 서버로 보낼 때도 이 정책을 적용하므로, 화면에 임의 완료나 개인정보가 복원되는 경로를 차단한다.
 
-배포 전에는 `pnpm run preflight:deploy`로 Wrangler 설정, production 산출물, 공개 export 범위와 Cloudflare 필수 Secrets의 존재 여부를 한 번에 확인한다. 검증 workflow도 같은 일반 모드를 실행해 매 push마다 준비도를 기록한다. 결과는 비밀값을 출력하지 않고 `READY` 또는 `WAITING`과 누락된 이름만 표시하며, `--strict` 모드에서는 하나라도 준비되지 않으면 실패한다.
+배포 전에는 `pnpm run preflight:deploy`로 Wrangler 설정, production 산출물, 공개 export 범위와 Cloudflare 필수 Secrets의 존재 여부를 한 번에 확인한다. 검증 workflow도 같은 일반 모드를 실행해 매 push마다 준비도를 기록하고, Secrets가 설정된 Worker 배포 job은 strict 모드로 다시 통과해야 한다. 결과는 비밀값을 출력하지 않고 `READY` 또는 `WAITING`과 누락된 이름만 표시하며, `--strict` 모드에서는 하나라도 준비되지 않으면 실패한다.
 
 ## GABA 목표 TF
 

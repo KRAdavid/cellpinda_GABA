@@ -140,6 +140,15 @@ jobs:
       - name: Sync approved public data and build
         if: env.DEPLOY_ENABLED == 'true'
         run: pnpm run build
+      - name: Strict deployment readiness gate
+        if: env.DEPLOY_ENABLED == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_D1_DATABASE_ID: ${{ secrets.CLOUDFLARE_D1_DATABASE_ID }}
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+          MEMBER_ORIGIN: ${{ secrets.MEMBER_ORIGIN }}
+        run: pnpm run preflight:deploy -- --strict
       - name: Create deployment Wrangler config
         if: env.DEPLOY_ENABLED == 'true'
         env:
