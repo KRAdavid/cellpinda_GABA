@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { randomUUID } from 'node:crypto';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import worker from './index.ts';
 import { createStore } from './store.ts';
 import { createStore as createNodeStore } from '../server/store.mjs';
@@ -153,6 +156,20 @@ test('Worker and Node expose only the approved Smart Store 1500 review destinati
       await store.update('shop-review-destination-1500',{revision:2,status:'approved',publicText:REVIEW_DESTINATION_TEXT,reason:'Restore fixed destination'});assert.equal((await store.publicContent()).reviews.length,1);
     }
   }finally{db.close();local.close();}
+});
+
+test('Persistent stores migrate an obsolete canonical review destination to Smart Store without touching quote reviews',async()=>{
+  const canonical={id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.',sourceTitle:'셀핀다 스마트스토어 가바 1500 상품 후기',sourceUrl:'https://smartstore.naver.com/cellpinda',reviewedAt:'2026-09-10',limitations:['구매자 후기는 개인 경험이며 의학적 효능을 보장하지 않습니다.']};
+  const stale={...canonical,publicText:'공식몰 1500 후기 보기',sourceTitle:'셀핀다 공식몰 가바 1500 상품 후기',sourceUrl:'https://cellpinda.co.kr/product/old'};
+  const staleSeed={...seed,reviews:[stale,{id:'private-review',reviewType:'quote',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null}]};
+  const currentSeed={...seed,reviews:[canonical,{id:'private-review',reviewType:'quote',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null}]};
+  const db=new MockD1();const cloud=createStore(db);const directory=mkdtempSync(join(tmpdir(),'cellpinda-review-migration-'));const dbPath=join(directory,'db.sqlite');
+  try {
+    await cloud.initialize(staleSeed);
+    await cloud.initialize(currentSeed);let output=await cloud.publicContent();assert.equal(output.reviews.length,1);assert.equal(output.reviews[0].sourceUrl,'https://smartstore.naver.com/cellpinda');
+    const first=createNodeStore({dbPath,seed:staleSeed});first.close();
+    const local=createNodeStore({dbPath,seed:currentSeed});output=local.publicContent();assert.equal(output.reviews.length,1);assert.equal(output.reviews[0].sourceUrl,'https://smartstore.naver.com/cellpinda');assert.equal(output.reviews[0].status,'approved');local.close();
+  } finally {db.close();rmSync(directory,{recursive:true,force:true});}
 });
 
 test('Submitted quote workflow preserves revisions, resets confirmation, gates public output and blocks generic bypass',async()=>{

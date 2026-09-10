@@ -14,10 +14,12 @@ const METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','d
 const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result','/share','result_viewed'],['product_comparison','/products','product_comparison_viewed']];
 const OPS_MAX_BYTES=65536;
 const OPS_TTL_DAYS=30;
+const REVIEW_DESTINATION_ID='shop-review-destination-1500';
+const REVIEW_DESTINATION_MIGRATION_PREFIX='migration:review-destination-smartstore:v1';
 const SHARE_SCOPE_SQL=`WITH scoped AS (SELECT rowid AS seq,flow_id,name FROM events WHERE json_extract(properties,'$.path')=? AND flow_id IS NOT NULL), starts AS (SELECT flow_id,MIN(seq) AS first_seq FROM scoped WHERE name=? GROUP BY flow_id), steps AS (SELECT EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_requested') AS requested,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_link_copied') AS copied,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_image_downloaded') AS downloaded,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_cancelled') AS cancelled FROM starts s) SELECT COUNT(*) AS denominator,COALESCE(SUM(CASE WHEN requested OR copied OR downloaded THEN 1 ELSE 0 END),0) AS attemptFlows,COALESCE(SUM(requested),0) AS requestedFlows,COALESCE(SUM(copied),0) AS copiedFlows,COALESCE(SUM(downloaded),0) AS downloadedFlows,COALESCE(SUM(cancelled),0) AS cancelledFlows FROM steps`;
 const UNSCOPED_SHARE_SQL="SELECT COUNT(*) AS count FROM events WHERE name IN ('share_requested','share_link_copied','share_image_downloaded','share_cancelled') AND COALESCE(json_extract(properties,'$.path'),'') NOT IN ('/result','/share','/products')";
 function reviewLink(value) {
-  if(value.id!=='shop-review-destination-1500' || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
+  if(value.id!==REVIEW_DESTINATION_ID || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
   try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && url.hostname==='smartstore.naver.com' && ['/cellpinda','/cellpinda/'].includes(url.pathname);}catch{return false;}
 }
 function publicMetadata(value) {
@@ -48,6 +50,28 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
           if(!inserted.changes)continue;
           db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,1,?,NULL,?,?)').run(item.id,'Initial source ledger import; AI editorial status, not expert certification',JSON.stringify(item),new Date().toISOString());
         }
+      }
+      // Reconcile the controlled Smart Store destination on existing databases.
+      // Submitted quote reviews keep their own editorial workflow and history.
+      const canonical=(initial.reviews || []).find(item=>item.id===REVIEW_DESTINATION_ID);
+      const canonicalHash=createHash('sha256').update(JSON.stringify(canonical || null),'utf8').digest('hex');
+      const migrationKey=`${REVIEW_DESTINATION_MIGRATION_PREFIX}:${canonicalHash}`;
+      const migration= db.prepare('SELECT value FROM metadata WHERE key=?').get(migrationKey);
+      if(!migration) {
+        const existing=db.prepare('SELECT * FROM content WHERE id=?').get(REVIEW_DESTINATION_ID);
+        if(canonical && existing?.kind==='review') {
+          const before=JSON.parse(existing.data);
+          if(before.reviewType!=='quote') {
+            const next={...before,...canonical,id:REVIEW_DESTINATION_ID};
+            const current=JSON.stringify(next);
+            if(current!==existing.data) {
+              const revision=existing.revision+1;
+              db.prepare('UPDATE content SET data=?,revision=? WHERE id=? AND revision=?').run(current,revision,REVIEW_DESTINATION_ID,existing.revision);
+              db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,?,?,?,?,?)').run(REVIEW_DESTINATION_ID,revision,'Canonical review destination seed sync; Smart Store URL, AI editorial review, not expert certification',existing.data,current,new Date().toISOString());
+            }
+          }
+        }
+        db.prepare('INSERT OR IGNORE INTO metadata(key,value) VALUES(?,?)').run(migrationKey,new Date().toISOString());
       }
       db.prepare('INSERT OR IGNORE INTO metadata(key,value) VALUES(?,?)').run('seeded','1');
       db.exec('COMMIT');
@@ -124,11 +148,11 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
         if (row.revision !== patch.revision) throw failure('Revision conflict',409);
         const before = JSON.parse(row.data);
         if(row.kind==='review' && before.reviewType==='quote')throw failure('Use the dedicated review workflow');
-        if(row.kind==='review' && before.id==='shop-review-destination-1500' && patch.publicText!==undefined && patch.publicText.trim()!==REVIEW_DESTINATION_TEXT)throw failure('Review destination text is fixed; submit quotations through the review workflow');
+        if(row.kind==='review' && before.id===REVIEW_DESTINATION_ID && patch.publicText!==undefined && patch.publicText.trim()!==REVIEW_DESTINATION_TEXT)throw failure('Review destination text is fixed; submit quotations through the review workflow');
         const after = {...before};
         const changed = patch.publicText !== undefined && patch.publicText !== before.publicText;
         if (patch.publicText !== undefined) after.publicText = patch.publicText.trim();
-        if(row.kind==='review' && before.id==='shop-review-destination-1500')after.publicText=REVIEW_DESTINATION_TEXT;
+        if(row.kind==='review' && before.id===REVIEW_DESTINATION_ID)after.publicText=REVIEW_DESTINATION_TEXT;
         after.status = patch.status ?? (changed ? 'hold' : before.status);
         if (after.status === 'approved') {
           if(row.kind==='review' && !reviewLink(after))throw failure('Only the verified review destination may be approved; quote rights not established');
