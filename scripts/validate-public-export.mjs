@@ -7,6 +7,7 @@ const master = await readJson('public/data/gaba-master-index.json');
 const operationsQueue = await readJson('public/data/operations-queue.json');
 const publicPulse = await readJson('public/data/tf-pulse.json');
 const taskGraph = await readJson('data/task-graph.json');
+const roleRegistry = await readJson('data/tf-role-registry.json');
 const fail = message => { throw new Error(`Public export invalid: ${message}`); };
 const isHttps = value => {
   try { return new URL(value).protocol === 'https:'; } catch { return false; }
@@ -41,8 +42,8 @@ if (operationsQueue.goalId !== 'GL-2026-CELL-GABA-001' || operationsQueue.status
 if (!operationsQueue.pulse || !/^\d{4}-\d{2}-\d{2}T/.test(operationsQueue.pulse.generatedAt) || !/^[a-f0-9]{64}$/.test(operationsQueue.pulse.snapshotHash) || typeof operationsQueue.pulse.requiresHumanDecision !== 'boolean' || operationsQueue.pulse.activeTasks !== taskGraph.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length || operationsQueue.pulse.inputGates !== taskGraph.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length) fail('operations queue pulse summary is missing or out of sync');
 if (publicPulse.mode !== 'public_tf_pulse' || publicPulse.goalId !== operationsQueue.goalId || publicPulse.goalStatus !== operationsQueue.status || publicPulse.generatedAt !== operationsQueue.pulse.generatedAt || publicPulse.snapshotHash !== operationsQueue.pulse.snapshotHash || typeof publicPulse.requiresHumanDecision !== 'boolean' || !Array.isArray(publicPulse.meetingAgenda) || !Array.isArray(publicPulse.inputGates)) fail('public TF pulse packet is missing or out of sync');
 if (publicPulse.inputGates.length !== operationsQueue.pulse.inputGates || publicPulse.meetingAgenda.length !== operationsQueue.pulse.activeTasks) fail('public TF pulse packet counts do not match the operations queue');
-const requiredRoleIds = ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit'];
-if (!Array.isArray(publicPulse.roleCoverage) || publicPulse.roleCoverage.length !== requiredRoleIds.length || publicPulse.roleCoverage.some((role, index) => role.id !== requiredRoleIds[index] || role.status !== 'present' || typeof role.label !== 'string' || role.label.trim().length < 2)) fail('public TF pulse role coverage is missing or malformed');
+const requiredRoleCoverage = roleRegistry.roles.map(({id, label}) => ({id, label, status: 'present'}));
+if (!Array.isArray(publicPulse.roleCoverage) || JSON.stringify(publicPulse.roleCoverage) !== JSON.stringify(requiredRoleCoverage)) fail('public TF pulse role coverage is missing or malformed');
 if (!Array.isArray(operationsQueue.roleCoverage) || JSON.stringify(operationsQueue.roleCoverage) !== JSON.stringify(publicPulse.roleCoverage)) fail('operations queue role coverage is missing or out of sync');
 const requireExactKeys = (value, expected, label) => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail(`${label} must be an object`);

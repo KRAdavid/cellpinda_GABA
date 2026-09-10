@@ -5,9 +5,11 @@ const readJson = async relative => JSON.parse(await readFile(new URL(`../${relat
 const contract = await readJson('data/goal-contract.json');
 const graph = await readJson('data/task-graph.json');
 const teaser = await readJson('data/teaser-manifest.json');
+const roleRegistry = await readJson('data/tf-role-registry.json');
 const fail = message => { throw new Error(`TF pulse invalid: ${message}`); };
 if (contract.status !== 'ACTIVE') fail('the pulse requires an ACTIVE Goal Contract');
 if (graph.goalId !== contract.goalId) fail('task graph is not tied to the Goal Contract');
+if (roleRegistry.goalId !== contract.goalId || roleRegistry.status !== contract.status || !Array.isArray(roleRegistry.roles) || roleRegistry.roles.length !== 6) fail('TF role registry is missing or not tied to the active Goal Contract');
 if (!Array.isArray(graph.tasks) || graph.tasks.length === 0) fail('task graph is empty');
 
 const allowed = new Set(graph.stateMachine);
@@ -23,19 +25,15 @@ for (const task of graph.tasks) {
 // Keep the cross-functional review roles visible in every pulse. These are
 // role labels and decision responsibilities, not claims that credentialed
 // external experts have been engaged.
-const roleCoverage = [
-  {id: 'consumer', label: '마케팅·소비자심리', pattern: /마케팅|소비자심리/},
-  {id: 'evidence', label: '연구·근거', pattern: /연구|근거/},
-  {id: 'product-review', label: '제품·표시', pattern: /제품|표시|규제/},
-  {id: 'story-ux', label: '스토리·UX·프런트', pattern: /스토리|UX|프런트/},
-  {id: 'commerce-data', label: '데이터·판매처', pattern: /데이터|판매처|커머스/},
-  {id: 'quality-audit', label: 'QA·감사', pattern: /QA|감사/},
-];
 const roleCorpus = [
   ...graph.tasks.flatMap(task => [task.lead, task.verifier]),
   ...contract.workstreams.flatMap(stream => [stream.lead, stream.verifier]),
 ].join(' · ');
-for (const role of roleCoverage) if (!role.pattern.test(roleCorpus)) fail(`required TF role group is missing: ${role.label}`);
+const roleCoverage = roleRegistry.roles.map(role => {
+  if (!role.id || !role.label || !Array.isArray(role.match) || role.match.length === 0) fail('TF role registry contains an incomplete role');
+  if (!role.match.some(term => typeof term === 'string' && term.length > 1 && roleCorpus.includes(term))) fail(`required TF role group is missing: ${role.label}`);
+  return {id: role.id, label: role.label, status: 'present'};
+});
 
 const actionFor = task => {
   if (task.state === 'VERIFYING') return {

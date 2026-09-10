@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "goalId": "GL-2026-CELL-GABA-001",
+  "status": "ACTIVE",
+  "purpose": "공개용 GABA 인덱스의 교차 검토 책임을 고정하는 역할 레지스트리. 역할 정의는 실제 외부 전문가 섭외·자격 확인을 뜻하지 않는다.",
+  "roles": [
+    {
+      "id": "consumer",
+      "label": "마케팅·소비자심리",
+      "match": ["마케팅", "소비자심리"],
+      "responsibility": "연구·제품 사실을 소비자가 이해하고 체험을 고려할 수 있는 언어로 설계",
+      "authority": "소비자 문안 초안·여정 가설 제안"
+    },
+    {
+      "id": "evidence",
+      "label": "연구·근거",
+      "match": ["연구", "근거"],
+      "responsibility": "논문 조건·수치·원문·한계·완제품 적용 범위 대조",
+      "authority": "공개 출처 조회·근거 초안 작성"
+    },
+    {
+      "id": "product-review",
+      "label": "제품·표시",
+      "match": ["제품", "표시", "규제"],
+      "responsibility": "완제품 표시사항과 연구 정보를 분리하고 공개 문구의 표현 범위 검토",
+      "authority": "공개 보류·수정 요구·표시 승인 요청"
+    },
+    {
+      "id": "story-ux",
+      "label": "스토리·UX·프런트",
+      "match": ["스토리", "UX", "프런트"],
+      "responsibility": "연구 탐색·체험·공유 동선과 운영 확인 화면 구현",
+      "authority": "내부 화면 수정·접근성 보완 제안"
+    },
+    {
+      "id": "commerce-data",
+      "label": "데이터·판매처",
+      "match": ["데이터", "판매처", "커머스"],
+      "responsibility": "Smart Store 목적지·SKU·주문·취소·환불 대사 준비",
+      "authority": "판매처 연동 자료 확인 요청·집계 정의 제안"
+    },
+    {
+      "id": "quality-audit",
+      "label": "QA·감사",
+      "match": ["QA", "감사"],
+      "responsibility": "출처·계산·권한·승인·완료 증거를 실행 담당과 독립적으로 재검증",
+      "authority": "완료 반려·재작업 요구·배포 검증 중단"
+    }
+  ]
+}

@@ -7,14 +7,16 @@ const root = new URL('../', import.meta.url);
 const readJson = async relative => JSON.parse(await readFile(new URL(relative, root), 'utf8'));
 const fail = message => { throw new Error(`TF pulse validation failed: ${message}`); };
 
-const [contract, graph, teaser] = await Promise.all([
+const [contract, graph, teaser, roleRegistry] = await Promise.all([
   readJson('data/goal-contract.json'),
   readJson('data/task-graph.json'),
   readJson('data/teaser-manifest.json'),
+  readJson('data/tf-role-registry.json'),
 ]);
 
 if (contract.status !== 'ACTIVE') fail('Goal Contract must be ACTIVE');
 if (graph.goalId !== contract.goalId) fail('task graph is not tied to the Goal Contract');
+if (roleRegistry.goalId !== contract.goalId || roleRegistry.status !== contract.status || !Array.isArray(roleRegistry.roles) || roleRegistry.roles.length !== 6) fail('TF role registry is missing or not tied to the active Goal Contract');
 if (!Array.isArray(graph.stateMachine) || graph.stateMachine.length === 0) fail('state machine is missing');
 if (!Array.isArray(graph.tasks) || graph.tasks.length === 0) fail('task graph is empty');
 
@@ -36,15 +38,11 @@ const roleCorpus = [
   ...graph.tasks.flatMap(task => [task.lead, task.verifier]),
   ...contract.workstreams.flatMap(stream => [stream.lead, stream.verifier]),
 ].join(' · ');
-const requiredRoleGroups = [
-  {id: 'consumer', label: '마케팅·소비자심리', pattern: /마케팅|소비자심리/},
-  {id: 'evidence', label: '연구·근거', pattern: /연구|근거/},
-  {id: 'product-review', label: '제품·표시', pattern: /제품|표시|규제/},
-  {id: 'story-ux', label: '스토리·UX·프런트', pattern: /스토리|UX|프런트/},
-  {id: 'commerce-data', label: '데이터·판매처', pattern: /데이터|판매처|커머스/},
-  {id: 'quality-audit', label: 'QA·감사', pattern: /QA|감사/},
-];
-for (const role of requiredRoleGroups) if (!role.pattern.test(roleCorpus)) fail(`required TF role group is missing: ${role.label}`);
+const requiredRoleGroups = roleRegistry.roles;
+for (const role of requiredRoleGroups) {
+  if (!role.id || !role.label || !Array.isArray(role.match) || role.match.length === 0) fail('TF role registry contains an incomplete role');
+  if (!role.match.some(term => typeof term === 'string' && term.length > 1 && roleCorpus.includes(term))) fail(`required TF role group is missing: ${role.label}`);
+}
 
 const pulsePath = fileURLToPath(new URL('./tf-pulse.mjs', import.meta.url));
 const child = spawnSync(process.execPath, [pulsePath, '--json'], {encoding: 'utf8'});
@@ -53,7 +51,7 @@ let pulse;
 try { pulse = JSON.parse(child.stdout.trim()); } catch { fail('tf-pulse did not emit JSON'); }
 
 if (pulse.mode !== 'automation_pulse' || pulse.goalId !== contract.goalId || pulse.goalStatus !== contract.status) fail('pulse identity does not match the active contract');
-if (!Array.isArray(pulse.roleCoverage) || pulse.roleCoverage.length !== requiredRoleGroups.length || pulse.roleCoverage.some(role => role.status !== 'present')) fail('pulse role coverage is missing or incomplete');
+if (!Array.isArray(pulse.roleCoverage) || JSON.stringify(pulse.roleCoverage) !== JSON.stringify(requiredRoleGroups.map(({id, label}) => ({id, label, status: 'present'})))) fail('pulse role coverage is missing or incomplete');
 if (!/^[a-f0-9]{64}$/.test(pulse.snapshotHash ?? '')) fail('pulse snapshot hash is missing or malformed');
 if (!pulse.counts || Object.values(pulse.counts).reduce((sum, count) => sum + count, 0) !== graph.tasks.length) fail('state counts do not cover the task graph');
 if (pulse.teaserGate?.taskId !== 'B4' || pulse.teaserGate.taskState !== tasks.get('B4')?.state) fail('teaser gate is out of sync with B4');
@@ -99,7 +97,7 @@ console.log(JSON.stringify({
   goalId: contract.goalId,
   activeTasks: active.length,
   decisions: pulse.decisions.length,
-  roleCoverage: requiredRoleGroups.map(({id, label}) => ({id, label, status: 'present'})),
+  roleCoverage: pulse.roleCoverage,
   counts: pulse.counts,
   teaserGate: pulse.teaserGate,
   status: 'ok',
