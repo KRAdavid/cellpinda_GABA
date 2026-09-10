@@ -168,7 +168,7 @@ export function buildTaskDecision(contract: MvpGoalContract, task: MvpTask, now 
       ? '승인자·위험·만료를 확인한 뒤 승인 또는 보류한다.'
       : '검증 증거를 연결하고 품질감사관의 판정을 기다린다.';
   return {
-    id: decisionId(task.id, now),
+    id: `${decisionId(task.id, now)}-${task.state}`,
     taskId: task.id,
     chair: contract.owner,
     participants: [task.lead, task.verifier],
