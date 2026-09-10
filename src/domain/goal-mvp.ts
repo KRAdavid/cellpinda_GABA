@@ -53,6 +53,20 @@ export type SandboxAuditEvent = {
   createdAt: string;
 };
 
+export type MvpDecisionRecord = {
+  id: string;
+  taskId: string;
+  chair: string;
+  participants: string[];
+  question: string;
+  decision: string;
+  dissent: string;
+  evidence: string[];
+  nextAction: string;
+  state: TaskState | 'CONTRACT';
+  createdAt: string;
+};
+
 export type MvpApprovalReport = {
   reportId: string;
   generatedAt: string;
@@ -63,6 +77,7 @@ export type MvpApprovalReport = {
   completedTasks: string[];
   pendingTasks: string[];
   auditEvents: SandboxAuditEvent[];
+  decisionRecords: MvpDecisionRecord[];
   taskEvidence: Record<string, string[]>;
   taskAcceptance: Record<string, string[]>;
   verificationStatus: 'sandbox_simulation_only';
@@ -117,6 +132,54 @@ function hashGoal(value: string): string {
     hash = Math.imul(hash, 16777619);
   }
   return (hash >>> 0).toString(16).padStart(8, '0').toUpperCase();
+}
+
+function decisionId(taskId: string, now: string) {
+  return `DEC-${taskId}-${now.replace(/\D/g, '').slice(0, 14)}`;
+}
+
+export function buildContractDecision(contract: MvpGoalContract, now = new Date().toISOString()): MvpDecisionRecord {
+  return {
+    id: decisionId('CONTRACT', now),
+    taskId: 'CONTRACT',
+    chair: contract.owner,
+    participants: contract.team.map(member => member.role),
+    question: '이 목표를 공개용 GABA 인덱스 운영 파동으로 전환할 수 있는가?',
+    decision: '조건부 진행: 승인 원장·소비자 문장·독립 검증을 통과한 자료만 공개한다.',
+    dissent: '연구 결과를 셀핀다 가바 완제품 효과나 실제 구매 성과로 확대 해석하지 않는다.',
+    evidence: ['Goal Contract', '공개 연구 마스터 인덱스 필수 필드 계약'],
+    nextAction: 'G1 Goal Contract 생성·검증을 샌드박스에서 시작한다.',
+    state: 'CONTRACT',
+    createdAt: now,
+  };
+}
+
+export function buildTaskDecision(contract: MvpGoalContract, task: MvpTask, now = new Date().toISOString()): MvpDecisionRecord {
+  const decision = task.state === 'WAITING'
+    ? '책임자 승인 전까지 외부 약속 단계 실행을 멈춘다.'
+    : task.state === 'DONE'
+      ? '독립 검증자가 수락 기준과 증거를 확인해 다음 작업을 연다.'
+      : task.state === 'VERIFYING'
+        ? '샌드박스 산출물을 독립 검증 단계로 넘긴다.'
+        : '내부 샌드박스에서 다음 작업을 진행한다.';
+  const nextAction = task.state === 'DONE'
+    ? '의존 작업의 실행 가능 상태를 갱신한다.'
+    : task.state === 'WAITING'
+      ? '승인자·위험·만료를 확인한 뒤 승인 또는 보류한다.'
+      : '검증 증거를 연결하고 품질감사관의 판정을 기다린다.';
+  return {
+    id: decisionId(task.id, now),
+    taskId: task.id,
+    chair: contract.owner,
+    participants: [task.lead, task.verifier],
+    question: `${task.title}을 다음 단계로 넘길 수 있는가?`,
+    decision,
+    dissent: task.risk === 'E_EXTERNAL_COMMITMENT' ? '외부 공개·구매·법적 약속은 책임자 승인 전 실행하지 않는다.' : '근거·제품 적용 범위·표시 한계를 확인하지 못하면 재작업으로 돌린다.',
+    evidence: [...task.evidence],
+    nextAction,
+    state: task.state,
+    createdAt: now,
+  };
 }
 
 export function generateMvpPlan(input: string): MvpPlan {
@@ -211,7 +274,7 @@ export function verifySandboxTask(tasks: readonly MvpTask[], taskId: string, now
   return {tasks: next, events};
 }
 
-export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonly MvpTask[], events: readonly SandboxAuditEvent[], approval?: ApprovalRequest, now = new Date().toISOString()): MvpApprovalReport {
+export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonly MvpTask[], events: readonly SandboxAuditEvent[], approval?: ApprovalRequest, now = new Date().toISOString(), decisions: readonly MvpDecisionRecord[] = []): MvpApprovalReport {
   const completedTasks = tasks.filter(task => task.state === 'DONE').map(task => task.id);
   const pendingTasks = tasks.filter(task => task.state !== 'DONE').map(task => task.id);
   return {
@@ -230,6 +293,7 @@ export function buildMvpApprovalReport(contract: MvpGoalContract, tasks: readonl
     completedTasks,
     pendingTasks,
     auditEvents: [...events],
+    decisionRecords: [...decisions],
     taskEvidence: Object.fromEntries(tasks.map(task => [task.id, [...task.evidence]])),
     taskAcceptance: Object.fromEntries(tasks.map(task => [task.id, [...task.acceptance]])),
     verificationStatus: 'sandbox_simulation_only',

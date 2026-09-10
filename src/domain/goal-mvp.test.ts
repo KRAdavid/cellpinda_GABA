@@ -1,6 +1,6 @@
 import {strict as assert} from 'node:assert';
 import test from 'node:test';
-import {buildMvpApprovalReport, generateMvpPlan, promoteReady, runSandboxTask, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
+import {buildContractDecision, buildMvpApprovalReport, buildTaskDecision, generateMvpPlan, promoteReady, runSandboxTask, taskGraphEdges, verifySandboxTask} from './goal-mvp.ts';
 
 test('one sentence goal generates a contract, TF and dependency graph', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
@@ -43,13 +43,18 @@ test('approval report distinguishes completed and pending work', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
   const after = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
   const verified = verifySandboxTask(after.tasks, 'G1', '2026-09-10T10:01:00.000Z');
-  const report = buildMvpApprovalReport(plan.contract, verified.tasks, [...after.events, ...verified.events], undefined, '2026-09-10T10:00:00.000Z');
+  const contractDecision = buildContractDecision(plan.contract, '2026-09-10T09:59:00.000Z');
+  const taskDecision = buildTaskDecision(plan.contract, verified.tasks.find(task => task.id === 'G1')!, '2026-09-10T10:01:00.000Z');
+  const report = buildMvpApprovalReport(plan.contract, verified.tasks, [...after.events, ...verified.events], undefined, '2026-09-10T10:00:00.000Z', [contractDecision, taskDecision]);
   assert.equal(report.sandboxOnly, true);
   assert.equal(report.verificationStatus, 'sandbox_simulation_only');
   assert.equal(report.auditEvents.length, 3);
   assert.deepEqual(report.taskEvidence.G1, ['sandbox-output:G1:2026-09-10T10:00:00.000Z', 'independent-review:G1:2026-09-10T10:01:00.000Z']);
   assert.equal(report.contractSnapshot.goalId, plan.contract.goalId);
   assert.deepEqual(report.taskAcceptance.G1, plan.tasks.find(task => task.id === 'G1')?.acceptance);
+  assert.equal(report.decisionRecords.length, 2);
+  assert.equal(report.decisionRecords[0].participants.length, 8);
+  assert.match(report.decisionRecords[1].decision, /독립 검증/);
   assert.deepEqual(report.completedTasks, ['G1']);
   assert.ok(report.pendingTasks.includes('P1'));
 });

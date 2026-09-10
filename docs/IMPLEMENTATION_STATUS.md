@@ -2,6 +2,15 @@
 
 목표 파일 전체를 읽고 구현을 시작했다. 기존 회의 문서 작성은 progress로 분류한다. 이번 작업도 실제 코드·원장·이미지·테스트를 만들었으므로 progress다. 전체 목표는 아직 완료되지 않았다.
 
+## 최신 현재 상태 — 2026-09-10 공개 배포와 살아있는 TF 운영 MVP
+
+- `main`의 GitHub Pages 배포가 성공했다. 공개 주소는 https://kradavid.github.io/cellpinda_GABA/ 이며 운영 MVP는 `?view=ops`에서 확인한다.
+- 공개 `gaba-master-index.json`은 연구 8건, 제품 1건(가바 1500), `750` 제품 0건을 포함한다. 제품·후기 CTA와 원문 목적지는 스마트스토어(`https://smartstore.naver.com/cellpinda`)로 통일했다. 연구 원장에 남은 과거 판매 페이지 URL은 출처 provenance이며 소비자 구매 목적지가 아니다.
+- TF 운영 MVP는 8개 역할과 독립 품질감사관을 생성하고, 목표 계약 회의 기록을 시작으로 실행·승인 대기·독립 검증별 의사결정(참여 역할·판단·반대 의견·증거·다음 조치)을 승인 보고서에 포함한다.
+- 로컬 Node/SQLite와 Worker/D1 모두 `/api/ops/runs/:runId` 저장 계약을 제공한다. revision·감사 snapshot·30일 만료·클라이언트 샌드박스 키로 재개를 지원하며, 정적 Pages에서는 API가 없을 때 브라우저 저장으로 폴백한다.
+- 로컬 전체 테스트 50개, 타입체크, production build, Worker dry-run, 격리 D1 후기 통합 검증과 GitHub Actions `34463179333`이 성공했다.
+- Cloudflare Worker 운영 배포는 저장소에 Cloudflare API/D1/운영 인증 비밀키가 없어 자동으로 건너뛰었다. 따라서 정적 공개 배포는 완료됐지만, 운영 D1·관리자 인증이 붙은 영구 Worker는 아직 대기 상태다.
+
 
 ## 최신 업데이트 — 소비자 설득 흐름 및 실제 서버
 
