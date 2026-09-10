@@ -38,6 +38,17 @@ for (const claim of content.claims) {
   if (!Array.isArray(claim.sources) || claim.sources.length === 0 || claim.sources.some(source => !isHttps(source.url))) fail(`claim ${claim.id} has a non-HTTPS source`);
 }
 
+const recordsById = new Map(master.records.map(record => [record.id, record]));
+const coverage = {
+  stress: ['research-yoto-2012'],
+  sleep: ['research-byun-2018', 'research-yamatsu-2016'],
+  growthHormone: ['research-powers-2008'],
+  muscleDevelopment: ['research-sakashita-2019'],
+};
+for (const [topic, ids] of Object.entries(coverage)) {
+  if (!ids.some(id => recordsById.has(id))) fail(`required ${topic} research is missing`);
+}
+
 if (content.products.length !== 1) fail(`expected one approved product, found ${content.products.length}`);
 const product = content.products[0];
 if (product.id !== 'gaba1500' || product.amountMg !== 1500 || product.servings !== 30 || !isSmartStore(product.officialUrl)) fail('the public product must be the Smart Store 1500 mapping');
@@ -55,6 +66,7 @@ console.log(JSON.stringify({
   masterRecords: master.records.length,
   products: content.products.length,
   reviews: content.reviews.length,
+  coverage,
   smartStoreOnly: true,
   removed750: true,
   provenance: 'matched',
