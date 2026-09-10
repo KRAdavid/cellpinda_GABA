@@ -301,3 +301,9 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 `pnpm run audit:watch`와 `scripts/watch-local-audit.mjs`를 추가해 완제품·주문 매니페스트의 지정 폴더를 감시하고 파일 변경 후 750ms debounce로 로컬 감사 사이클을 재실행하도록 했다. 초기 실행과 감시 시작을 실제 자료 폴더에서 확인했고, 임시 fixture의 `orders.csv`를 수정했을 때 `변경 감지` 두 번째 감사 사이클이 실행되는 것도 재현했다. 결과는 `tmp/local-goal-audit.json`에만 기록되며 공개 export는 바뀌지 않는다. 현재 감사 결과는 완제품 자료 `MET`, 주문 자료 `WAITING`을 유지한다.
 
 이 자동화는 새 자료를 빠르게 회의 패킷에 반영하지만 B2 표시 승인·E1 실구매 대사·후기 권한을 자동 완료로 승격하지 않는다. 로컬 경로·원문 행·개인정보는 CI와 공개 번들로 이동하지 않는다.
+
+## 2026-09-11 로컬 감사 중간 확인 API 연결
+
+로컬 Node API에 `GET /api/ops/local-audit`를 추가해 watcher가 만든 `tmp/local-goal-audit.json`을 비공개 요약으로 운영 화면에 연결했다. loopback 요청만 허용하고 완제품 후보·자료 누락·주문 파일 수·1500 과거 집계·로컬 판정만 투영하며, 원문 행·개인정보·경로·해시 같은 입력 세부는 응답에서 제거한다. 운영 화면은 이 요약을 60초마다 확인하고, 스냅샷이 없거나 갱신에 실패하면 마지막 요약을 보존하면서 watcher 실행을 안내한다. GitHub Pages는 `apiEndpoint`가 비어 요청 자체를 만들지 않는다.
+
+서버 테스트에서 실제 요약·누락 파일 응답과 비공개 필드 제거를 확인했고, `pnpm test` 67건과 production build를 통과했다. 이 연결은 로컬 입력을 회의에서 빠르게 확인하는 관찰성 보강이며 B2 표시 승인·E1 실구매 대사·B3 후기 권한·Cloudflare 운영 연결을 자동 완료하지 않는다.

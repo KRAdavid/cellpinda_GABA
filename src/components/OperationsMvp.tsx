@@ -7,6 +7,7 @@ import './OperationsMvp.css';
 const defaultGoal = '공개용 GABA 논문 기반 마스터 인덱스';
 const stateLabels: Record<string, string> = {BACKLOG: '대기', READY: '실행 가능', RUNNING: '실행 중', VERIFYING: '검증 중', DONE: '완료', WAITING: '승인 대기', REWORK: '보완 필요', EXPIRED: '만료', RETRY: '재시도', FAILED: '실패', CANCELLED: '취소'};
 const riskLabels: Record<string, string> = {A_READ: '읽기', B_INTERNAL_WRITE: '내부 작성', C_LOW_RISK_INTERNAL: '내부 실행', D_EXTERNAL_REVERSIBLE: '외부 가역', E_EXTERNAL_COMMITMENT: '책임자 승인'};
+const localAuditStatusLabels: Record<string, string> = {MET: '확인됨', WAITING: '입력 대기', INVALID: '재검토 필요'};
 const formatTime = (value: string) => new Date(value).toLocaleString('ko-KR', {dateStyle: 'short', timeStyle: 'short'});
 function pulseFreshness(value: string) {
   const timestamp = Date.parse(value);
@@ -36,7 +37,9 @@ type RoleCoverage = {id: string; label: string; status: string};
 type QueueSnapshot = {schemaVersion: number; goalId: string; status: string; checkedAt: string; pulse?: {generatedAt: string; snapshotHash: string; stateChanged: boolean; requiresHumanDecision: boolean; activeTasks: number; inputGates: number}; roleCoverage?: RoleCoverage[]; workstreams: {id: string; name: string; lead: string; verifier: string; status: string; nextAction: string}[]; tasks: QueueTask[]};
 type GoalAuditGate = {id: string; title: string; state: string; lead: string; verifier: string; requiredInputs: string[]; decision: string; decisionMode: string; nextAction: string};
 type GoalAuditSnapshot = {schemaVersion: number; mode: string; goalId: string; title: string; status: string; overallStatus: string; checkedAt: string; taskCounts: Record<string, number>; milestones: {masterIndex: {status: string; claims: number; researchRecords: number}; publicProduct: {status: string; products: number; smartStoreOnly: boolean; removed750: boolean}; tfPulse: {status: string; generatedAt: string; snapshotHash: string; stateChanged: boolean; requiresHumanDecision: boolean}}; gates: GoalAuditGate[]; teaserGate: {status: string; taskId: string; taskState: string | null}};
+type LocalAuditSnapshot = {schemaVersion: number; mode: string; generatedAt: string | null; goalId: string | null; goalStatus: string | null; overallStatus: string | null; coreValid: boolean; taskCounts: Record<string, number>; pulseHealth: {generatedAt: string | null; snapshotHash: string | null; status: string; ageMinutes: number | null}; localInputAudit: {enabled: boolean; materials: {found: number; missing: number; finishedProductCandidates: number; b2Candidate: boolean; excludedBulkMaterial: number; latestSourceModifiedAt: string | null} | null; orders: {counters: {filesScanned?: number; csvFiles?: number; csvParsed?: number; xlsxFiles?: number; xlsxEncrypted?: number; xlsxUnparsed?: number; unsupported?: number}; gaba1500: {rows: number; quantity: number; firstDate: string | null; lastDate: string | null} | null; gaba750: {rows: number; quantity: number; firstDate: string | null; lastDate: string | null} | null; channelAssessment: string | {smartstoreNamedFiles?: number; smartstoreNamedFilesParsed?: number; conclusion?: string | null} | null; latestSourceModifiedAt: string | null} | null; interpretation: string | null}; checks: {id: string; status: string; detail: string; blockers: string[]}[]; privacyBoundary: string};
 const publicBase = import.meta.env.BASE_URL;
+const localAuditEndpoint = import.meta.env.DEV ? apiEndpoint('/api/ops/local-audit') : null;
 
 function taskStateLabel(task: MvpPlan['tasks'][number]) {
   if (task.state === 'DONE' && task.verification?.mode === 'sandbox_simulation') return '샌드박스 완료';
@@ -85,6 +88,8 @@ export default function OperationsMvp() {
   const [goalAudit, setGoalAudit] = useState<GoalAuditSnapshot | null>(null);
   const [queueError, setQueueError] = useState('');
   const [queueLoadedAt, setQueueLoadedAt] = useState('');
+  const [localAudit, setLocalAudit] = useState<LocalAuditSnapshot | null>(null);
+  const [localAuditError, setLocalAuditError] = useState('');
   const [queueRefresh, setQueueRefresh] = useState(0);
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState('');
@@ -109,6 +114,24 @@ export default function OperationsMvp() {
       if (active) { setQueue(snapshot); setGoalAudit(audit); setQueueError(''); setQueueLoadedAt(new Date().toISOString()); }
     }).catch(() => {
       if (active) setQueueError('공개 운영 스냅샷을 새로 읽지 못했습니다. 마지막으로 확인된 큐를 유지하고 다시 시도합니다.');
+    });
+    void refresh();
+    const timer = window.setInterval(refresh, 60_000);
+    return () => { active = false; window.clearInterval(timer); };
+  }, [queueRefresh]);
+
+  useEffect(() => {
+    let active = true;
+    if (!localAuditEndpoint) return () => { active = false; };
+    const refresh = () => fetch(`${localAuditEndpoint}?refresh=${Date.now()}`).then(async response => {
+      if (response.status === 404) throw new Error('missing');
+      if (!response.ok) throw new Error('unavailable');
+      const snapshot = await response.json() as LocalAuditSnapshot;
+      if (snapshot.mode !== 'private_local_audit' || snapshot.goalId !== 'GL-2026-CELL-GABA-001') throw new Error('invalid');
+      if (active) { setLocalAudit(snapshot); setLocalAuditError(''); }
+    }).catch(error => {
+      if (!active) return;
+      setLocalAuditError(error instanceof Error && error.message === 'missing' ? '로컬 감사 스냅샷이 없습니다. 터미널에서 pnpm run audit:watch를 실행하면 750ms 감시 주기로 갱신됩니다.' : '로컬 감사 스냅샷을 읽지 못했습니다. 마지막으로 확인된 요약을 유지하고 다시 시도합니다.');
     });
     void refresh();
     const timer = window.setInterval(refresh, 60_000);
@@ -293,6 +316,7 @@ export default function OperationsMvp() {
       {queue.roleCoverage?.length ? <div className="ops-mvp-live-roles" aria-label="현재 TF 역할군"><div><span className="ops-mvp-eyebrow">현재 TF 역할군</span><p>이번 pulse가 그래프에서 확인한 교차 검토 책임입니다.</p></div><ul>{queue.roleCoverage.map(role => <li key={role.id}><strong>{role.label}</strong><span>{role.status === 'present' ? '참여 책임 확인' : role.status}</span></li>)}</ul></div> : null}
       <div className="ops-mvp-live-queue-grid" aria-label="업무별 현재 상태">{queue.tasks.map(task => <article key={task.id}><div><strong>{task.id}</strong><span>{stateLabels[task.state] || task.state}</span></div><h3>{task.title}</h3><p className="ops-mvp-live-decision">{task.decision}</p><small>담당 {task.lead} · 독립 검증 {task.verifier}</small>{task.requiredInputs?.length ? <small className="ops-mvp-required-inputs">필요 입력 · {task.requiredInputs.join(' · ')}</small> : null}{task.blockedBy ? <small>대기 이유 · {task.blockedBy}</small> : null}<small>다음 · {task.nextAction}</small></article>)}</div>
       {goalAudit ? <div className="ops-mvp-audit-snapshot" aria-labelledby="goal-audit-heading"><div className="ops-mvp-audit-head"><div><span className="ops-mvp-eyebrow" id="goal-audit-heading">공개 목표 감사</span><h3>{goalAudit.overallStatus === 'IN_PROGRESS_WITH_GATES' ? '게이트를 확인하며 계속 진행 중' : '모든 게이트가 닫혔습니다'}</h3></div><small>기준일 {goalAudit.checkedAt} · {goalAudit.milestones.tfPulse.stateChanged ? '새 pulse 변화 감지' : 'pulse 변화 없음'} · {goalAudit.gates.length}개 게이트</small></div><div className="ops-mvp-audit-metrics"><span><strong>{goalAudit.milestones.masterIndex.researchRecords}</strong><small>논문 레코드</small></span><span><strong>{goalAudit.milestones.masterIndex.claims}</strong><small>소비자 주장</small></span><span><strong>{goalAudit.milestones.publicProduct.products}</strong><small>공개 제품</small></span><span><strong>{goalAudit.taskCounts.DONE ?? 0}</strong><small>완료 작업</small></span></div><ol className="ops-mvp-audit-gates">{goalAudit.gates.map(gate => <li key={gate.id}><div><strong>{gate.id}</strong><span>{stateLabels[gate.state] || gate.state}</span></div><p>{gate.title}</p><small>담당 {gate.lead} · 독립 검증 {gate.verifier} · 다음 {gate.nextAction}</small>{gate.requiredInputs.length ? <small>필요 입력 · {gate.requiredInputs.join(' · ')}</small> : null}</li>)}</ol></div> : null}
+      {localAudit ? <div className="ops-mvp-local-audit" aria-labelledby="local-audit-heading"><div className="ops-mvp-audit-head"><div><span className="ops-mvp-eyebrow" id="local-audit-heading">비공개 로컬 입력 감사</span><h3>{localAudit.overallStatus === 'IN_PROGRESS_WITH_GATES' ? '로컬 자료를 읽고, 승인 게이트는 열어 둠' : '로컬 입력 감사 완료'}</h3></div><small>최근 감사 {localAudit.generatedAt ? formatTime(localAudit.generatedAt) : '시간 확인 필요'} · 감시 경계 {localAudit.privacyBoundary}</small></div><div className="ops-mvp-audit-metrics ops-mvp-local-metrics"><span><strong>{localAudit.localInputAudit.materials?.finishedProductCandidates ?? 0}</strong><small>완제품 후보</small></span><span><strong>{localAudit.localInputAudit.materials ? `${localAudit.localInputAudit.materials.found}/${localAudit.localInputAudit.materials.missing}` : '—'}</strong><small>자료 확인/누락</small></span><span><strong>{localAudit.localInputAudit.orders?.counters.filesScanned ?? 0}</strong><small>주문 파일 스캔</small></span><span><strong>{localAudit.localInputAudit.orders?.gaba1500?.quantity ?? 0}</strong><small>1500 과거 수량</small></span></div><div className="ops-mvp-local-audit-grid"><div><span className="ops-mvp-eyebrow">자동 판정</span><ul>{localAudit.checks.map(check => <li key={check.id}><strong>{check.id}</strong><span>{localAuditStatusLabels[check.status] || check.status}</span><small>{check.detail}</small>{check.blockers.length ? <small>다음 입력 · {check.blockers.join(' · ')}</small> : null}</li>)}</ul></div><div><span className="ops-mvp-eyebrow">회의에서 확인할 사실</span><p>완제품 후보 {localAudit.localInputAudit.materials?.finishedProductCandidates ?? 0}건은 B2 표시 검증의 입력으로만 연결됩니다. 주문 파일은 {localAudit.localInputAudit.orders?.counters.filesScanned ?? 0}개를 읽었고, 1500 과거 집계는 {localAudit.localInputAudit.orders?.gaba1500?.quantity ?? 0}개입니다.</p><p>파일 형식 · CSV {localAudit.localInputAudit.orders?.counters.csvParsed ?? localAudit.localInputAudit.orders?.counters.csvFiles ?? 0}개 · 암호화 XLSX {localAudit.localInputAudit.orders?.counters.xlsxEncrypted ?? 0}개 · 미해석 XLSX {localAudit.localInputAudit.orders?.counters.xlsxUnparsed ?? 0}개</p><p>1500 기록 기간 · {localAudit.localInputAudit.orders?.gaba1500?.firstDate ?? '확인 불가'} ~ {localAudit.localInputAudit.orders?.gaba1500?.lastDate ?? '확인 불가'} · 750 기록 {localAudit.localInputAudit.orders?.gaba750?.rows ?? 0}행은 공개 제품 목록에서 제거된 과거 보관 자료로만 남깁니다. 실구매·취소·환불 증거가 아니므로 E1을 자동 완료하지 않습니다.</p><small>{localAudit.localInputAudit.interpretation}</small></div></div>{localAuditError ? <p className="ops-mvp-live-error" role="status">{localAuditError}</p> : null}</div> : localAuditEndpoint && localAuditError ? <p className="ops-mvp-live-error" role="status">{localAuditError}</p> : null}
       <p className="note">계약 확인일 {queue.checkedAt} · 완료 {queue.tasks.filter(task => task.state === 'DONE').length}건 · 진행/대기 {attentionQueue.length}건. 대기 입력이 도착하면 담당 TF가 검토 후 다음 작업을 엽니다.</p>{queue.pulse ? <p className="ops-mvp-live-pulse">마지막 TF pulse {formatTime(queue.pulse.generatedAt)} · {pulseFreshness(queue.pulse.generatedAt)} · 상태 지문 {queue.pulse.snapshotHash.slice(0, 12)}… · {queue.pulse.stateChanged ? '새 상태 변화 감지' : '상태 변화 없음'} · 사람 판단 {queue.pulse.requiresHumanDecision ? '필요' : '없음'} · 입력 게이트 {queue.pulse.inputGates}건</p> : null}{queue.pulse?.requiresHumanDecision ? <div className="ops-mvp-pulse-agenda" aria-labelledby="pulse-agenda-heading"><div><span className="ops-mvp-eyebrow" id="pulse-agenda-heading">다음 TF 회의 안건</span><p>자동 pulse가 멈춘 지점을 사람 회의에서 확인하고, 담당자와 독립 검증자가 다음 조치를 합의합니다.</p></div><ol>{attentionQueue.filter(task => ['VERIFYING', 'WAITING'].includes(task.state)).slice(0, 5).map(task => <li key={task.id}><div><strong>{task.id}</strong><span>{task.decision}</span></div><small>담당 · {task.lead} · 독립 검증 · {task.verifier} · 다음 · {task.nextAction}</small>{task.requiredInputs?.length ? <small>회의 확인 항목 · {task.requiredInputs.join(' · ')}</small> : null}</li>)}</ol></div> : null}
     </section> : null}
     {plan ? <>

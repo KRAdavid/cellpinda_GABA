@@ -62,6 +62,8 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 자료 폴더에 파일이 추가되거나 수정될 때 회의용 패킷을 자동으로 다시 만들려면 `pnpm run audit:watch`를 실행한다. 이 watcher는 두 매니페스트의 폴더를 감시하고 750ms 동안 변경을 묶은 뒤 `tmp/local-goal-audit.json`만 갱신한다. 원문 행·개인정보·로컬 경로는 공개 export와 CI artifact로 이동하지 않으며, `Ctrl+C`로 감시를 종료할 수 있다. 감시할 폴더를 바꾸려면 `CELLPINDA_MATERIAL_ROOTS` 또는 `CELLPINDA_ORDER_ROOTS`에 세미콜론으로 구분한 경로를 지정한다.
 
+로컬 API와 Vite를 함께 실행하면 운영 화면이 `/api/ops/local-audit`에서 이 비공개 패킷의 안전한 요약을 60초마다 읽어 완제품 후보·누락·주문 파일 수·1500 과거 집계를 중간 확인 카드에 표시한다. 응답은 원문 행·개인정보·로컬 경로를 포함하지 않으며, 스냅샷이 없거나 갱신이 실패해도 마지막 요약을 유지한다. GitHub Pages처럼 API가 없는 정적 환경에서는 요청을 만들지 않고 공개 운영 큐만 사용한다.
+
 운영 MVP의 재개 상태는 `src/domain/ops-validation.ts`의 공통 검증을 거쳐 Node API와 Cloudflare Worker에 저장된다. 업무 상태 전환·검증 증거·승인 연결을 확인하고 이메일·전화번호·비공개 경로·토큰 같은 필드는 거부한다. 샌드박스 상태 저장은 외부 게시나 실구매 완료를 의미하지 않는다.
 
 ```sh

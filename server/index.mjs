@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createStore } from './store.mjs';
@@ -18,7 +18,80 @@ async function readBody(req,maxBytes=16384) {
   for await (const chunk of req) { total += chunk.length; if (total>maxBytes) throw Object.assign(new Error('Body too large'),{status:413}); chunks.push(chunk); }
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { throw Object.assign(new Error('Invalid JSON'),{status:400}); }
 }
-export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
+function localAuditSummary(report) {
+  const local = report?.localInputAudit;
+  const material = local?.materials;
+  const orders = local?.orders;
+  const taskCounts = report?.taskCounts && typeof report.taskCounts === 'object'
+    ? Object.fromEntries(Object.entries(report.taskCounts).filter(([key, value]) => typeof key === 'string' && Number.isInteger(value)).slice(0, 16))
+    : {};
+  return {
+    schemaVersion: 1,
+    mode: 'private_local_audit',
+    generatedAt: typeof report?.generatedAt === 'string' ? report.generatedAt : null,
+    goalId: typeof report?.goalId === 'string' ? report.goalId : null,
+    goalStatus: typeof report?.goalStatus === 'string' ? report.goalStatus : null,
+    overallStatus: typeof report?.overallStatus === 'string' ? report.overallStatus : null,
+    coreValid: report?.coreValid === true,
+    taskCounts,
+    pulseHealth: report?.pulseHealth && typeof report.pulseHealth === 'object' ? {
+      generatedAt: typeof report.pulseHealth.generatedAt === 'string' ? report.pulseHealth.generatedAt : null,
+      snapshotHash: typeof report.pulseHealth.snapshotHash === 'string' ? report.pulseHealth.snapshotHash : null,
+      status: typeof report.pulseHealth.status === 'string' ? report.pulseHealth.status : 'unknown',
+      ageMinutes: Number.isInteger(report.pulseHealth.ageMinutes) ? report.pulseHealth.ageMinutes : null,
+    } : {generatedAt: null, snapshotHash: null, status: 'missing', ageMinutes: null},
+    localInputAudit: {
+      enabled: local?.enabled === true,
+      materials: material && typeof material === 'object' ? {
+        found: Number.isInteger(material.found) ? material.found : 0,
+        missing: Number.isInteger(material.missing) ? material.missing : 0,
+        finishedProductCandidates: Number.isInteger(material.finishedProductCandidates) ? material.finishedProductCandidates : 0,
+        b2Candidate: material.b2Candidate === true,
+        excludedBulkMaterial: Number.isInteger(material.excludedBulkMaterial) ? material.excludedBulkMaterial : 0,
+        latestSourceModifiedAt: typeof material.latestSourceModifiedAt === 'string' ? material.latestSourceModifiedAt : null,
+      } : null,
+      orders: orders && typeof orders === 'object' ? {
+        counters: orders.counters && typeof orders.counters === 'object' ? {
+          filesScanned: Number.isInteger(orders.counters.filesScanned) ? orders.counters.filesScanned : 0,
+          csvFiles: Number.isInteger(orders.counters.csvFiles) ? orders.counters.csvFiles : (Number.isInteger(orders.counters.csvParsed) ? orders.counters.csvParsed : 0),
+          csvParsed: Number.isInteger(orders.counters.csvParsed) ? orders.counters.csvParsed : (Number.isInteger(orders.counters.csvFiles) ? orders.counters.csvFiles : 0),
+          xlsxFiles: Number.isInteger(orders.counters.xlsxFiles) ? orders.counters.xlsxFiles : 0,
+          xlsxEncrypted: Number.isInteger(orders.counters.xlsxEncrypted) ? orders.counters.xlsxEncrypted : 0,
+          xlsxUnparsed: Number.isInteger(orders.counters.xlsxUnparsed) ? orders.counters.xlsxUnparsed : 0,
+          unsupported: Number.isInteger(orders.counters.unsupported) ? orders.counters.unsupported : 0,
+        } : {},
+        gaba1500: orders.gaba1500 && typeof orders.gaba1500 === 'object' ? {
+          rows: Number.isInteger(orders.gaba1500.rows) ? orders.gaba1500.rows : 0,
+          quantity: Number.isInteger(orders.gaba1500.quantity) ? orders.gaba1500.quantity : 0,
+          firstDate: typeof (orders.gaba1500.firstDate ?? orders.gaba1500.dateMin) === 'string' ? (orders.gaba1500.firstDate ?? orders.gaba1500.dateMin) : null,
+          lastDate: typeof (orders.gaba1500.lastDate ?? orders.gaba1500.dateMax) === 'string' ? (orders.gaba1500.lastDate ?? orders.gaba1500.dateMax) : null,
+        } : null,
+        gaba750: orders.gaba750 && typeof orders.gaba750 === 'object' ? {
+          rows: Number.isInteger(orders.gaba750.rows) ? orders.gaba750.rows : 0,
+          quantity: Number.isInteger(orders.gaba750.quantity) ? orders.gaba750.quantity : 0,
+          firstDate: typeof (orders.gaba750.firstDate ?? orders.gaba750.dateMin) === 'string' ? (orders.gaba750.firstDate ?? orders.gaba750.dateMin) : null,
+          lastDate: typeof (orders.gaba750.lastDate ?? orders.gaba750.dateMax) === 'string' ? (orders.gaba750.lastDate ?? orders.gaba750.dateMax) : null,
+        } : null,
+        channelAssessment: orders.channelAssessment && typeof orders.channelAssessment === 'object' ? {
+          smartstoreNamedFiles: Number.isInteger(orders.channelAssessment.smartstoreNamedFiles) ? orders.channelAssessment.smartstoreNamedFiles : 0,
+          smartstoreNamedFilesParsed: Number.isInteger(orders.channelAssessment.smartstoreNamedFilesParsed) ? orders.channelAssessment.smartstoreNamedFilesParsed : 0,
+          conclusion: typeof orders.channelAssessment.conclusion === 'string' ? orders.channelAssessment.conclusion : null,
+        } : (typeof orders.channelAssessment === 'string' ? orders.channelAssessment : null),
+        latestSourceModifiedAt: typeof orders.latestSourceModifiedAt === 'string' ? orders.latestSourceModifiedAt : null,
+      } : null,
+      interpretation: typeof local?.interpretation === 'string' ? local.interpretation : null,
+    },
+    checks: Array.isArray(report?.checks) ? report.checks.filter(item => typeof item?.id === 'string' && item.id.startsWith('local-')).map(item => ({
+      id: item.id,
+      status: typeof item.status === 'string' ? item.status : 'UNKNOWN',
+      detail: typeof item.detail === 'string' ? item.detail : '',
+      blockers: Array.isArray(item.blockers) ? item.blockers.filter(value => typeof value === 'string').slice(0, 6) : [],
+    })) : [],
+    privacyBoundary: 'private_tmp_only',
+  };
+}
+
+export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),localAuditPath=resolve('tmp/local-goal-audit.json'),development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
   const store=createStore({dbPath,seedPath,seed});
   const token=randomBytes(32).toString('hex');
   mkdirSync(dirname(tokenPath),{recursive:true});
@@ -58,6 +131,17 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
       if (req.method==='GET' && path==='/api/member/status') return reply(200,{enabled:false,user:null,recoverySupported:false});
       if (req.method==='GET' && path==='/api/content') return reply(200,store.publicContent());
       if (req.method==='POST' && path==='/api/events') return reply(202,store.event(await readBody(req)));
+      if (req.method==='GET' && path==='/api/ops/local-audit') {
+        if (!LOOPBACK.has(address)) return reply(401,{error:'Local operator access required'});
+        try {
+          const report=JSON.parse(readFileSync(resolve(localAuditPath),'utf8'));
+          return reply(200,localAuditSummary(report));
+        } catch (error) {
+          if (error?.code==='ENOENT') return reply(404,{error:'Local audit snapshot unavailable',code:'LOCAL_AUDIT_MISSING'});
+          if (error instanceof SyntaxError) return reply(422,{error:'Local audit snapshot is invalid',code:'LOCAL_AUDIT_INVALID'});
+          throw error;
+        }
+      }
       const opsMatch=path.match(/^\/api\/ops\/runs\/([0-9a-f-]{36})$/i);
       if(opsMatch && req.method==='GET')return reply(200,store.getOpsRun(opsMatch[1],req.headers['x-ops-run-key']));
       if(opsMatch && req.method==='PUT')return reply(200,store.putOpsRun(opsMatch[1],req.headers['x-ops-run-key'],await readBody(req,65536),req.headers['x-ops-revision']===undefined?undefined:Number(req.headers['x-ops-revision'])));
