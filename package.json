@@ -11,6 +11,7 @@
     "validate:research-copy": "node scripts/validate-research-copy.mjs",
     "validate:public": "node scripts/validate-public-export.mjs",
     "validate:ops": "node scripts/validate-ops-mvp.mjs",
+    "validate:live": "node scripts/validate-live-public.mjs",
     "goal:next": "node scripts/goal-next.mjs",
     "build": "pnpm run validate:goal && pnpm run validate:plan && pnpm run validate:research-copy && pnpm run validate:ops && pnpm run sync:data && pnpm run validate:public && tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
