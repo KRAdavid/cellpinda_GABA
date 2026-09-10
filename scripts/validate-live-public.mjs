@@ -50,8 +50,31 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicAudit.milestones.masterIndex.researchRecords, master.records.length, 'live public audit research count must match master index');
     assert.equal(publicAudit.milestones.publicProduct.products, content.products.length, 'live public audit product count must match content');
     assert.equal(publicAudit.milestones.tfPulse.snapshotHash, publicPulse.snapshotHash, 'live public audit pulse hash must match the pulse');
+    assert.ok(['IN_PROGRESS_WITH_GATES', 'COMPLETE'].includes(publicAudit.overallStatus), 'live public audit must expose a supported overall status');
+    assert.equal(publicAudit.milestones.masterIndex.status, 'MET', 'live public audit must mark the master index milestone');
+    assert.equal(publicAudit.milestones.publicProduct.status, 'MET', 'live public audit must mark the product milestone');
+    assert.equal(publicAudit.milestones.publicProduct.smartStoreOnly, true, 'live public audit must keep Smart Store only');
+    assert.equal(publicAudit.milestones.publicProduct.removed750, true, 'live public audit must keep 750 removed');
+    assert.equal(publicAudit.milestones.tfPulse.status, 'MET', 'live public audit must mark the pulse milestone');
     assert.equal(publicAudit.teaserGate.taskId, 'B4', 'live public audit must expose the teaser gate');
-    assert.ok(Array.isArray(publicAudit.gates) && publicAudit.gates.length === queue.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state)).length, 'live public audit gate count must match the queue');
+    assert.equal(publicAudit.teaserGate.status, 'HOLD', 'live public audit must keep the teaser on hold');
+    assert.equal(publicAudit.teaserGate.taskState, queue.tasks.find(task => task.id === 'B4')?.state, 'live public audit teaser state must match the queue');
+    const auditGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction'];
+    const liveGatedTasks = queue.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state));
+    assert.ok(Array.isArray(publicAudit.gates) && publicAudit.gates.length === liveGatedTasks.length, 'live public audit gate count must match the queue');
+    for (const gate of publicAudit.gates) {
+      assert.deepEqual(Object.keys(gate).sort(), [...auditGateKeys].sort(), 'live public audit gate contains an unexpected field');
+      const queueTask = queue.tasks.find(task => task.id === gate.id);
+      assert.ok(queueTask, `live public audit gate is missing queue task ${gate.id}`);
+      assert.equal(gate.title, queueTask.title, `live public audit title mismatch for ${gate.id}`);
+      assert.equal(gate.state, queueTask.state, `live public audit state mismatch for ${gate.id}`);
+      assert.equal(gate.lead, queueTask.lead, `live public audit lead mismatch for ${gate.id}`);
+      assert.equal(gate.verifier, queueTask.verifier, `live public audit verifier mismatch for ${gate.id}`);
+      assert.deepEqual(gate.requiredInputs, queueTask.requiredInputs ?? [], `live public audit inputs mismatch for ${gate.id}`);
+      assert.equal(gate.decision, queueTask.decision, `live public audit decision mismatch for ${gate.id}`);
+      assert.equal(gate.decisionMode, queueTask.decisionMode, `live public audit decision mode mismatch for ${gate.id}`);
+      assert.equal(gate.nextAction, queueTask.nextAction, `live public audit next action mismatch for ${gate.id}`);
+    }
     assert.equal(publicPulse.meetingAgenda.length, queue.pulse.activeTasks, 'live public TF pulse agenda count must match the queue');
     assert.equal(publicPulse.inputGates.length, queue.pulse.inputGates, 'live public TF pulse gate count must match the queue');
     assert.ok(Array.isArray(queue.roleCoverage) && queue.roleCoverage.length === 6, 'live operations queue role coverage is missing');

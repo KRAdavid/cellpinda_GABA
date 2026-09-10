@@ -127,7 +127,7 @@ const operationsQueue={
   pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,requiresHumanDecision:pulseForQueue.requiresHumanDecision,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
-  tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
+  tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), requiredInputs:Array.isArray(requiredInputs) ? requiredInputs : [], ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
 };
 const operationsTarget=resolve(root,'public/data/operations-queue.json');
 writeFileSync(operationsTarget,JSON.stringify(operationsQueue,null,2)+'\n');
