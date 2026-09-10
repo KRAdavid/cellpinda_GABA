@@ -18,7 +18,7 @@ let pulseForQueue=pulse;
 if(existsSync(heartbeatPath)){
   let heartbeat;
   try{heartbeat=JSON.parse(readFileSync(heartbeatPath,'utf8'));}catch{throw new Error('TF pulse heartbeat is not valid JSON');}
-  if(heartbeat.schemaVersion!==1 || heartbeat.mode!=='automation_pulse_heartbeat' || heartbeat.goalId!==pulse.goalId || heartbeat.goalStatus!=='ACTIVE' || !/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt) || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash||'')) throw new Error('TF pulse heartbeat is malformed');
+  if(heartbeat.schemaVersion!==1 || heartbeat.mode!=='automation_pulse_heartbeat' || heartbeat.goalId!==pulse.goalId || heartbeat.goalStatus!=='ACTIVE' || !/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt) || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash||'') || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage)) throw new Error('TF pulse heartbeat is malformed or role coverage is out of sync');
   if(heartbeat.snapshotHash===pulse.snapshotHash) pulseForQueue={...pulse,generatedAt:heartbeat.generatedAt};
 }
 const smartStoreHost='smartstore.naver.com';
