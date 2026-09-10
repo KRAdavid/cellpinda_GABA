@@ -298,6 +298,6 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 
 ## 2026-09-11 로컬 자료 변경 감시 자동화
 
-`pnpm run audit:watch`와 `scripts/watch-local-audit.mjs`를 추가해 완제품·주문 매니페스트의 지정 폴더를 감시하고 파일 변경 후 750ms debounce로 로컬 감사 사이클을 재실행하도록 했다. 초기 실행과 감시 시작을 실제 자료 폴더에서 확인했고, 결과는 `tmp/local-goal-audit.json`에만 기록되며 공개 export는 바뀌지 않는다. 현재 감사 결과는 완제품 자료 `MET`, 주문 자료 `WAITING`을 유지한다.
+`pnpm run audit:watch`와 `scripts/watch-local-audit.mjs`를 추가해 완제품·주문 매니페스트의 지정 폴더를 감시하고 파일 변경 후 750ms debounce로 로컬 감사 사이클을 재실행하도록 했다. 초기 실행과 감시 시작을 실제 자료 폴더에서 확인했고, 임시 fixture의 `orders.csv`를 수정했을 때 `변경 감지` 두 번째 감사 사이클이 실행되는 것도 재현했다. 결과는 `tmp/local-goal-audit.json`에만 기록되며 공개 export는 바뀌지 않는다. 현재 감사 결과는 완제품 자료 `MET`, 주문 자료 `WAITING`을 유지한다.
 
 이 자동화는 새 자료를 빠르게 회의 패킷에 반영하지만 B2 표시 승인·E1 실구매 대사·후기 권한을 자동 완료로 승격하지 않는다. 로컬 경로·원문 행·개인정보는 CI와 공개 번들로 이동하지 않는다.
