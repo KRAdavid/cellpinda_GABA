@@ -44,14 +44,14 @@
       "id": "B2",
       "stream": "B",
       "title": "1500 현행 표시사항 자료 보강",
-      "state": "WAITING",
+      "state": "VERIFYING",
       "priority": 1,
       "lead": "제품 책임자",
       "verifier": "표시·콘텐츠 검토",
       "dependencies": [],
-      "blockedBy": "현행 SKU·개정일·뒷면·옆면·낱포 자료",
+      "blockedBy": null,
       "acceptance": ["섭취·보관·주의사항을 현행 포장 근거로 확인", "공개 가능 범위와 미확인 범위 분리"],
-      "evidence": ["docs/PRODUCT_EXPERIENCE_INPUTS.md", "시험성적서 K558-251219 셀핀다가바 2005044505519.pdf: 2025-12-19 제조 원료 로트 99.4%, 소비기한 2027-12-18 확인. 현행 소비자 포장 표시 근거로는 부적합"]
+      "evidence": ["docs/PRODUCT_EXPERIENCE_INPUTS.md", "로컬 1500 단상자·3개입·낱포 인쇄본을 시각 대조하고 SHA-256을 기록함. 표시·콘텐츠 검토자의 최종 인쇄 승인·제품 분류 대조 전까지 공개 문안은 갱신하지 않음", "원료 1kg·10kg 벌크 라벨 및 원료 로트 시험성적서는 완제품 표시 근거에서 제외"]
     },
     {
       "id": "B3",

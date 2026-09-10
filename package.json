@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "sync:data": "node scripts/sync-public-data.mjs",
+    "audit:materials": "node scripts/audit-local-materials.mjs",
     "validate:goal": "node scripts/validate-goal-contract.mjs",
     "validate:plan": "node scripts/goal-next.mjs --check",
     "validate:research-copy": "node scripts/validate-research-copy.mjs",

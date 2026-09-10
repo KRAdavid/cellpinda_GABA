@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "goalId": "GL-2026-CELL-GABA-001",
+  "checkedAt": "2026-09-10",
+  "sourceRoots": [
+    "D:\\셀핀다\\업무폴더_정성배\\바탕 화면\\자료",
+    "D:\\셀핀다\\업무폴더\\_정성배\\바탕 화면\\자료"
+  ],
+  "artifacts": [
+    {
+      "id": "package-box-1500-20260611",
+      "names": ["셀핀다 가바_GABA1500_단상자_홈쇼핑패키지_20260611.pdf"],
+      "classification": "finished_product_packaging",
+      "expectedSignals": ["1500", "45 g", "1.5 g×30포", "1일 1포", "섭취시 주의사항", "보관시 주의사항"],
+      "publicUse": "internal_only",
+      "requiredFor": ["B2"]
+    },
+    {
+      "id": "package-sample-1500-20260626",
+      "names": ["셀핀다_가바100(1500) 샘플(260626)-인쇄버전.pdf"],
+      "classification": "finished_product_packaging_sample",
+      "expectedSignals": ["1500", "45 g", "1.5 g×30포", "1일 1포", "소비기한"],
+      "publicUse": "internal_only",
+      "requiredFor": ["B2"]
+    },
+    {
+      "id": "package-set-1500-20260629",
+      "names": ["셀핀다_가바100(1500) 3개입 샘플(260629)-인쇄버전.pdf"],
+      "classification": "finished_product_packaging_sample",
+      "expectedSignals": ["1500", "135 g", "1.5 g×90포", "1일 1포"],
+      "publicUse": "internal_only",
+      "requiredFor": ["B2"]
+    },
+    {
+      "id": "stick-film-1500",
+      "names": ["CPD_pkg_GABA1500_film_홈쇼핑.pdf"],
+      "classification": "finished_product_single_stick_artwork",
+      "expectedSignals": ["GABA100%", "1,500mg", "Cellpinda"],
+      "publicUse": "internal_only",
+      "requiredFor": ["B2"]
+    },
+    {
+      "id": "nutrition-test-cellpinda-20260707",
+      "names": ["영양성분검사성적서-셀핀다가바.pdf"],
+      "classification": "finished_product_related_test",
+      "expectedSignals": ["셀핀다 가바", "2026. 06. 17", "GABA"],
+      "publicUse": "internal_only",
+      "requiredFor": ["B2"]
+    },
+    {
+      "id": "bulk-label-1-10kg",
+      "names": ["한글표시_셀핀다 가바_(주)오투바이오.pdf"],
+      "classification": "bulk_raw_material_label",
+      "expectedSignals": ["1 Kg, 10 kg", "식품제조용 원료"],
+      "publicUse": "exclude",
+      "requiredFor": []
+    },
+    {
+      "id": "manufacturing-report-cellpinda-20260619",
+      "names": ["품목제조보고서_셀핀다가바_오투바이오_20260619.pdf"],
+      "classification": "manufacturing_record",
+      "expectedSignals": ["셀핀다 가바", "기타가공품", "제조일로부터 24개월"],
+      "publicUse": "internal_only",
+      "requiredFor": ["B2"]
+    }
+  ]
+}

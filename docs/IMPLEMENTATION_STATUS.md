@@ -2,6 +2,10 @@
 
 목표 파일 전체를 읽고 구현을 시작했다. 기존 회의 문서 작성은 progress로 분류한다. 이번 작업도 실제 코드·원장·이미지·테스트를 만들었으므로 progress다. 전체 목표는 아직 완료되지 않았다.
 
+## 2026-09-10 로컬 제품 자료 재점검
+
+1500 단상자·3개입·낱포 인쇄본과 제품 관련 영양성분검사성적서를 외부 자료 폴더에서 찾아 렌더링해 대조했다. 원료 1 kg·10 kg 벌크 라벨은 완제품 표시 근거에서 제외했다. `data/local-material-manifest.json`과 `pnpm run audit:materials`가 파일 존재·수정시각·SHA-256·완제품/벌크 분류를 읽기 전용으로 기록한다. 이 결과로 작업 그래프 B2는 `WAITING`에서 `VERIFYING`으로 이동했지만, 최종 인쇄 승인·제품 분류 확인 전에는 공개 문안을 바꾸지 않는다. B3 후기 권한, C2 Cloudflare 운영 비밀키, E1 주문 대사는 계속 대기한다.
+
 ## 최신 현재 상태 — 2026-09-10 공개 배포와 살아있는 TF 운영 MVP
 
 - `main`의 GitHub Pages 배포가 성공했다. 공개 주소는 https://kradavid.github.io/cellpinda_GABA/ 이며 운영 MVP는 `?view=ops`에서 확인한다.

@@ -18,6 +18,8 @@ CI와 로컬 production build는 `pnpm run validate:ops`로 전체 샌드박스 
 
 공개 데이터는 `pnpm run sync:data` 직후 `pnpm run validate:public`에서 다시 검사한다. 제품은 `gaba1500` 하나이고 스마트스토어 목적지만 허용하며, 750 재유입·비공개 필드 노출·마스터 인덱스와 content export의 provenance 불일치를 build 단계에서 차단한다.
 
+제품 책임자와 표시 검토자는 `pnpm run audit:materials`로 지정 로컬 자료를 읽기 전용으로 재검색할 수 있다. 매니페스트는 1500 소비자 포장과 1 kg·10 kg 벌크 라벨을 구분하고, 결과는 `tmp/local-material-audit.json`에만 저장한다. 자료가 발견되어도 `VERIFYING` 작업을 사람이 승인하기 전에는 공개 원장·문구를 자동 변경하지 않는다.
+
 마스터 인덱스에는 사용자가 지정한 스트레스·수면·성장호르몬·근육발달 연구 축이 각각 하나 이상 포함되어야 한다. 해당 축의 승인 레코드가 사라지면 공개 build를 중단한다.
 
 Pages 배포 뒤에는 `validate-live-public.mjs`가 공개 URL을 재시도하며 페이지 응답, 1500 단일 제품, 스마트스토어 목적지, 750 제거, 네 연구 축, provenance와 5개 스트림·12개 작업 운영 큐의 현재 상태·중복·필수 필드 일치를 직접 확인한다. 대기 작업 수는 외부 입력이 도착하면 자연스럽게 줄어들 수 있다. `operations-queue.json`은 현재 Goal Contract의 담당·검증·대기 입력만 공개 화면에 제공하고 내부 증거·경로는 포함하지 않는다.
