@@ -189,3 +189,7 @@ pulse 패킷 구현 커밋 `ca612c2`의 [GitHub Actions 34514541733](https://git
 ## 2026-09-11 티저 공개 접근성 재검토
 
 제공된 티저 URL을 비로그인으로 다시 요청해 `200 OK`, 제목 `발효가바 — 멈추지 않는 밤`, 84초 재생 인터랙션, 장면 PNG 5종의 `200 image/png` 응답을 확인했다. 페이지는 파일 영상이 아닌 HTML/CSS/JS 브라우저 애니메이션으로 분류되며, 전체 자막·대본·권리·표시사항·CTA 승인 증거는 아직 없다. 이에 따라 `data/teaser-manifest.json`의 `HOLD`와 B4 `WAITING`을 유지하고, 공개 CTA·광고·SNS에 자동 연결하지 않았다. 상세 결과는 [TEASER_VIDEO_EXPOSURE_REVIEW.md](TEASER_VIDEO_EXPOSURE_REVIEW.md)에 기록했다.
+
+## 2026-09-11 연구 카드 체험 의향 문장 보강
+
+승인 연구 8건의 사실 요약·연구 한계·완제품 적용 범위는 유지하고, `hopefulTakeaway`만 소비자 행동 흐름에 맞춰 정리했다. 각 문장은 연구 조건과 한계를 먼저 확인한 뒤 셀핀다 가바 1500의 구성·표시사항을 살펴보고 내 루틴에 더해 볼지 선택하도록 안내한다. 특정 연구가 완제품 효과를 보장하거나 연구 용량을 섭취 지침으로 바꾸지 않으며, `pnpm run validate:research-copy`와 전체 build에서 금지 표현·필수 필드를 다시 검사한다.
