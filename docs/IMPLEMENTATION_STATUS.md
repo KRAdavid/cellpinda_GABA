@@ -2,6 +2,14 @@
 
 목표 파일 전체를 읽고 구현을 시작했다. 기존 회의 문서 작성은 progress로 분류한다. 이번 작업도 실제 코드·원장·이미지·테스트를 만들었으므로 progress다. 전체 목표는 아직 완료되지 않았다.
 
+## 2026-09-11 독립 검토 게이트와 상시 TF pulse
+
+운영 MVP 화면은 자동 파동을 `VERIFYING`에서 멈추고, 독립 검토자가 모든 수락 기준과 근거를 확인한 뒤 `accept` 또는 `rework`를 기록하도록 연결했다. 보고서는 샌드박스 시뮬레이션과 사람 독립 검토를 별도 집계하며, 검토 기록·감사 이벤트·다음 의존 작업을 함께 보존한다. Node/Worker 공통 상태 검증과 회귀 테스트 64개가 이 경계를 확인한다.
+
+`.github/workflows/tf-pulse.yml`은 6시간마다 Goal Contract·canonical 업무 그래프를 읽어 회의용 결정 제안을 생성하고, `scripts/validate-tf-pulse.mjs`가 계약·상태·담당자·검증자·다음 행동·B4 티저 게이트의 일치를 먼저 검사한다. 최신 [GitHub Actions 34506398512](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34506398512)은 배포 검증·Pages·라이브 smoke에 성공했고, [TF pulse 34506555645](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34506555645)은 계약 검증·JSON·14일 artifact 생성을 성공시켰다. 자동화는 사람의 반대 의견이나 외부 승인 결과를 만들지 않는다.
+
+현재 canonical 업무 그래프는 DONE 8건, VERIFYING B2 1건, WAITING B3·B4·C2·E1 4건이다. 라이브 공개 export는 연구 8건·소비자용 주장 14건·제품 1종이며, 스마트스토어 연결과 750 제품 제거를 다시 확인했다. 전체 목표는 실제 후기 권한·현행 표시 승인·Cloudflare 운영 설정·실주문 대사·소비자 사용성 검증 전까지 완료로 선언하지 않는다.
+
 ## 2026-09-11 샌드박스 판정 경계 및 공개 재검증
 
 커밋 `c5fc87c`에서 샌드박스 시뮬레이션만으로 운영 승인을 추천하지 않도록 보고서 판정을 보강했다. 모든 작업이 `sandbox_simulation` 검증으로 끝나면 추천은 `revise`로 남고, 운영 화면은 `샌드박스 완료 · 실제 검증 필요`를 표시한다. 로컬 `pnpm test` 60개·타입검사·production build가 통과했으며, 최신 [GitHub Actions 34499389071](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34499389071)의 verify·Pages·라이브 smoke가 성공했다.

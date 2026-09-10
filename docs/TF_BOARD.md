@@ -34,7 +34,7 @@
 4. PM은 구현 선택을 결정하고 제품 사실·공개 승인 권한이 필요한 항목만 지정 책임자에게 연결한다. 미확인 자료가 있어도 독립 작업은 계속한다.
 5. 구현 후 테스트·실제 화면·저장 결과를 첨부한다. 승인된 콘텐츠 버전과 배포 버전을 연결한다.
 6. 운영자에게 결정사항·실행 미리보기·남은 pending을 보여준다. 존재하지 않는 기능을 시연 완료로 보고하지 않는다.
-7. 반복 회의는 별도 스케줄러 설정 전에는 자동 실행 중이라고 주장하지 않는다. 현재 실행 내 협업과 미래의 상시 운영을 구분한다.
+7. 반복 회의 안건은 `.github/workflows/tf-pulse.yml`이 6시간마다 자동 생성하고 `workflow_dispatch`로 즉시 재실행한다. pulse는 상태를 임의 변경하지 않으며, 사람의 반대 의견·승인·외부 실행은 지정 책임자가 별도로 기록한다.
 
 작업 상태: `pending → ready → in_progress → review → verified → released`. `blocked`에는 막힌 의존성과 다음 행동을 기록한다. `verified`는 증거 첨부 후, `released`는 운영 URL 재검증 후만 사용한다.
 
@@ -101,7 +101,13 @@
 
 ## 현재 실행의 결정·인계
 
-- TF 구현 기준점: local Git d5b9abc, codex/cellpinda-consumer-site. 원격 push 없음.
+### 2026-09-11 정기 TF pulse 운영 전환
+
+- `scripts/validate-tf-pulse.mjs`가 ACTIVE Goal Contract, canonical 업무 그래프, B4 티저 게이트, 활성 작업의 담당·검증·다음 행동과 결정 모드를 배포 전에 검사한다.
+- [TF decision pulse workflow](../.github/workflows/tf-pulse.yml)는 6시간 주기와 수동 실행을 제공하며, run summary와 14일 artifact에 회의 안건을 남긴다. 최신 [실행 34506555645](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34506555645)은 계약 검증·JSON·artifact 업로드까지 성공했다.
+- 현재 canonical 큐는 DONE 8, VERIFYING 1, WAITING 4이며, B2·B3·B4·C2·E1은 독립 검토 또는 외부 입력 게이트를 유지한다. 자동 pulse는 이 상태를 완료로 승격하지 않는다.
+
+- TF 구현 기준점: `main` 커밋 `864a019`, [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA) 원격과 GitHub Pages에 반영됨.
 - 마케팅·심리: 날짜형7일기록과 친구비교 구현·실제브라우저 검증. 실제 소비자 이해도/구매의향 실험은 미실시.
 - UX·서버: 공유 HTML 메타데이터와 D1 승인/이벤트 동작 검증. 전용 GitHub 저장소와 영구 배포는 미연결.
 - 근거: 연구2건 상세 공개, 현행 뒷면 자료 부족 확인, GitHub 근거인덱스의 후속 연구3건 발견. 원문검증 전 공개추가 안함.
