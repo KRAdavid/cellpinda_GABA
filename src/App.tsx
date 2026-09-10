@@ -8,6 +8,7 @@ import GabaStory from './components/GabaStory';
 import ProductShare from './components/ProductShare';
 import PurchaseQuestions from './components/PurchaseQuestions';
 import OperationsMvp from './components/OperationsMvp';
+import {apiEndpoint} from './api-origin';
 const Admin = lazy(() => import('./components/Admin'));
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
 type Product={id:string;name:string;amountMg:number;servings:number;totalG:number;officialUrl:string};
@@ -19,13 +20,20 @@ const flowId=crypto.randomUUID();
 const seenEvents=new Set<string>();
 let eventQueue=Promise.resolve();
 function trackOnce(name:string,properties:Record<string,string>={}){if(seenEvents.has(name))return;seenEvents.add(name);track(name,properties)}
-function track(name:string,properties:Record<string,string>={}){eventQueue=eventQueue.then(()=>fetch('/api/events',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eventId:crypto.randomUUID(),flowId,name:eventMap[name]||name,properties}),keepalive:true}).then(()=>{}).catch(()=>{}));}
+function track(name:string,properties:Record<string,string>={}){
+ const endpoint=apiEndpoint('/api/events');
+ if(!endpoint)return;
+ eventQueue=eventQueue.then(()=>fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eventId:crypto.randomUUID(),flowId,name:eventMap[name]||name,properties}),keepalive:true}).then(()=>{}).catch(()=>{}));
+}
 async function loadContent(signal:AbortSignal):Promise<Content>{
- try{
-  const api=await fetch('/api/content',{signal});
-  if(api.ok)return api.json();
- }catch(error){
-  if((error as Error).name==='AbortError')throw error;
+ const endpoint=apiEndpoint('/api/content');
+ if(endpoint){
+  try{
+   const api=await fetch(endpoint,{signal});
+   if(api.ok)return api.json();
+  }catch(error){
+   if((error as Error).name==='AbortError')throw error;
+  }
  }
  const fallback=await fetch(`${import.meta.env.BASE_URL}data/content.json`,{signal});
  if(!fallback.ok)throw Error('Content unavailable');

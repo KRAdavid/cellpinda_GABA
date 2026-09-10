@@ -143,3 +143,7 @@ GitHub의 동일 검사는 Linux에서도 통과했다. [실행34446456828](http
 ## 재개 저장 revision 보호
 
 여러 탭·새로고침에서 오래된 샌드박스 상태가 최신 승인 상태를 덮어쓰지 않도록 Node API·Cloudflare Worker·브라우저 저장 요청에 `X-Ops-Revision` 낙관적 충돌 검사를 연결했다. 기대 revision이 현재 값과 다르면 서버가 `409`를 반환하고 상태를 그대로 보존한다. Node·Worker 회귀검사에서 오래된 revision 거부 후 최신 revision 저장을 확인했고, 실제 로컬 브라우저에서 최초 revision `0` 저장·새로고침 복원·완료 5건/검증대기 1건·성공 후 반복 PUT 없음·콘솔 오류 없음을 확인했다. release HEAD `21f7c75`의 [GitHub 실행 34490972163](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34490972163)은 타입검사·테스트·빌드·Pages·라이브 smoke에 성공했다. 이 검증은 영구 Worker 비밀값 설정, 실제 Cloudflare D1 운영, 다중 운영자 권한, 외부 주문 연동을 완료한 것으로 계산하지 않는다.
+
+## 정적 호스트 API 폴백
+
+GitHub Pages처럼 Worker API가 없는 정적 호스트에서는 API 주소를 미리 호출하지 않고 빌드된 콘텐츠·운영 큐와 브라우저 임시 저장을 사용한다. Worker 동일 출처 배포 또는 `VITE_API_ORIGIN` 지정 시 API를 사용한다. 최신 Pages UI에서 정적 폴백으로 제품·TF 큐·자동 파동을 검증하며, 정적 호스트의 예상 404/405 콘솔 잡음이 없는지 확인한다. 이 변경은 영구 Worker·D1 운영 연결을 완료한 것으로 계산하지 않는다.

@@ -1,6 +1,7 @@
 import {useEffect, useMemo, useState} from 'react';
 import {ArrowRight, CheckCircle2, Clipboard, Download, LockKeyhole, Play, RotateCcw, ShieldCheck} from 'lucide-react';
 import {buildMvpApprovalReport, buildTaskDecision, runSandboxTask, runSandboxWave, startMvpSession, taskGraphEdges, verifySandboxTask, type MvpApprovalReport, type MvpDecisionRecord, type MvpPlan, type SandboxAuditEvent} from '../domain/goal-mvp';
+import {apiEndpoint} from '../api-origin';
 import './OperationsMvp.css';
 
 const defaultGoal = '공개용 GABA 논문 기반 마스터 인덱스';
@@ -91,9 +92,10 @@ export default function OperationsMvp() {
       // A brand-new browser session has no server record yet. Skipping the
       // guaranteed 404 keeps the static Pages fallback quiet; the debounced
       // PUT below creates the record once a plan is generated.
-      if (!hasPersistedState || !runId || !runKey) { if (active) { setServerState('local'); setHydrated(true); } return; }
+      const endpoint = apiEndpoint(`/api/ops/runs/${runId}`);
+      if (!endpoint || !hasPersistedState || !runId || !runKey) { if (active) { setServerState('local'); setHydrated(true); } return; }
       try {
-        const response = await fetch(`/api/ops/runs/${runId}`, {headers: {'x-ops-run-key': runKey}});
+        const response = await fetch(endpoint, {headers: {'x-ops-run-key': runKey}});
         if (!response.ok) { if (active) setServerState('local'); return; }
         const payload = await response.json() as ServerOpsResponse;
         const remote = payload.state;
@@ -117,10 +119,12 @@ export default function OperationsMvp() {
 
   useEffect(() => {
     if (!hydrated || !runId || !runKey) return;
+    const endpoint = apiEndpoint(`/api/ops/runs/${runId}`);
+    if (!endpoint) { setServerState('local'); return; }
     const controller = new AbortController();
     const timer = window.setTimeout(() => {
       const state: StoredOpsState = {input, plan, audit, approval, approvalTaskId, decisions};
-      void fetch(`/api/ops/runs/${runId}`, {
+      void fetch(endpoint, {
         method: 'PUT',
         headers: {'content-type': 'application/json', 'x-ops-run-key': runKey, 'x-ops-revision': String(serverRevision)},
         body: JSON.stringify(state),
