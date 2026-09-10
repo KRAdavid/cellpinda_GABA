@@ -60,6 +60,8 @@ pnpm run build
 
 기본 배포 저장소는 [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA)이며 `main`에 push하면 `.github/workflows/deploy.yml`이 데이터 동기화 → 타입 검사 → 테스트 → 정적 번들 및 Worker dry-run을 수행한다. Cloudflare 계정 값을 저장소 Secrets에 넣으면 같은 workflow가 Worker·D1·assets까지 배포한다. 필요한 Secrets는 `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `ADMIN_TOKEN`, `MEMBER_ORIGIN`이다. Secrets가 없으면 검증만 실행하고 배포 단계는 명확히 건너뛴다.
 
+같은 workflow는 Worker Secrets 없이도 GitHub Pages 정적 사이트를 갱신한다: [https://kradavid.github.io/cellpinda_GABA/](https://kradavid.github.io/cellpinda_GABA/). 정적 사이트는 승인 콘텐츠 JSON과 스마트스토어 구매 링크를 사용하고, `/api/content`가 없는 환경에서는 자동으로 공개 JSON을 읽는다.
+
 `CLOUDFLARE_D1_DATABASE_ID`는 운영 D1 데이터베이스를 가리켜야 하며, `ADMIN_TOKEN`과 `MEMBER_ORIGIN`은 저장소 파일이나 로그에 넣지 않는다. GitHub Pages 같은 정적 호스팅을 선택해도 승인 콘텐츠와 제품 링크는 `public/data/content.json`으로 동작한다.
 
 ## Cloudflare 중간 배포
