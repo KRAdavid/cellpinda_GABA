@@ -87,6 +87,8 @@ pnpm run preflight:deploy
 
 각 pulse에는 업무 그래프 상태 지문, 회의 안건, 외부 입력 게이트, 사람 판단 필요 여부가 포함되며 `pnpm run validate:tf-pulse`가 이 연결을 배포 전에 검증한다.
 
+회의 안건은 작업 상태별 선택지와 판정 기준도 함께 제공한다. `VERIFYING`은 수락 또는 보완, `WAITING`은 보류 또는 필요한 입력을 채운 뒤 READY로 올리는 경로를 보여 주며, 자동화가 실제 상태를 바꾸지 않고 사람이 근거를 확인해 결정하도록 한다. 공개 `goal-audit.json`의 게이트에도 같은 선택지가 복제되고 export·라이브 검증에서 두 패킷의 일치를 확인한다.
+
 `data/tf-role-registry.json`은 역할 책임의 단일 기준이다. pulse와 안전한 heartbeat는 이 레지스트리에서 확인한 6개 역할군을 ID·라벨·상태로만 기록하며, 실제 외부 전문가 자격이나 섭외를 의미하지 않는다. 역할군이 그래프·Goal Contract·heartbeat에서 어긋나면 배포 검증이 실패한다.
 
 `pnpm run tf:pulse:heartbeat`는 CI가 만든 임시 pulse 파일 없이도 최신 pulse를 생성해 안전한 heartbeat를 갱신한다. CI처럼 파일 경로를 직접 넘기면 지정한 파일만 읽는다.

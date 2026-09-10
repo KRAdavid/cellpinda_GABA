@@ -58,8 +58,16 @@ const requireExactKeys = (value, expected, label) => {
   const allowed = [...expected].sort();
   if (JSON.stringify(actual) !== JSON.stringify(allowed)) fail(`${label} contains an unexpected or missing field`);
 };
+const expectedDecisionOptionIds = state => state === 'VERIFYING' ? ['accept', 'rework'] : state === 'WAITING' || state === 'BACKLOG' ? ['hold', 'promote'] : state === 'READY' ? ['sandbox', 'hold'] : state === 'RUNNING' ? ['verify', 'retry'] : ['preserve', 'reopen'];
+const validateDecisionOptions = (options, state, label) => {
+  if (!Array.isArray(options) || options.length !== 2 || JSON.stringify(options.map(option => option?.id)) !== JSON.stringify(expectedDecisionOptionIds(state))) fail(`${label} decision options are missing or out of order`);
+  for (const option of options) {
+    requireExactKeys(option, ['id', 'label', 'criteria'], `${label} decision option`);
+    if (typeof option.id !== 'string' || typeof option.label !== 'string' || !Array.isArray(option.criteria) || option.criteria.length < 2 || option.criteria.some(criteria => typeof criteria !== 'string' || criteria.trim().length < 4)) fail(`${label} decision option criteria are incomplete`);
+  }
+};
 for (const [index, gate] of publicPulse.inputGates.entries()) requireExactKeys(gate, ['taskId', 'state', 'chair', 'requiredInputs', 'nextAction'], `public pulse input gate ${index}`);
-for (const [index, agenda] of publicPulse.meetingAgenda.entries()) requireExactKeys(agenda, ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'requiredInputs', 'nextAction', 'mode'], `public pulse meeting agenda ${index}`);
+for (const [index, agenda] of publicPulse.meetingAgenda.entries()) { requireExactKeys(agenda, ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'], `public pulse meeting agenda ${index}`); validateDecisionOptions(agenda.decisionOptions, agenda.state, `public pulse meeting agenda ${agenda.taskId}`); }
 if (!publicPulse.counts || typeof publicPulse.counts !== 'object' || Object.values(publicPulse.counts).reduce((sum, count) => sum + count, 0) !== taskGraph.tasks.length) fail('public TF pulse state counts do not cover the task graph');
 for (const state of taskGraph.stateMachine) if (publicPulse.counts[state] !== taskGraph.tasks.filter(task => task.state === state).length) fail(`public TF pulse count is out of sync for ${state}`);
 if (!publicAudit.taskCounts || typeof publicAudit.taskCounts !== 'object') fail('public goal audit task counts are missing');
@@ -68,11 +76,13 @@ if (JSON.stringify(publicAudit.taskCounts) !== JSON.stringify(publicPulse.counts
 if (!publicAudit.milestones || publicAudit.milestones.masterIndex?.status !== 'MET' || publicAudit.milestones.masterIndex.claims !== content.claims.length || publicAudit.milestones.masterIndex.researchRecords !== master.records.length || publicAudit.milestones.publicProduct?.status !== 'MET' || publicAudit.milestones.publicProduct.products !== content.products.length || publicAudit.milestones.publicProduct.smartStoreOnly !== true || publicAudit.milestones.publicProduct.removed750 !== true || publicAudit.milestones.tfPulse?.status !== 'MET' || publicAudit.milestones.tfPulse.generatedAt !== publicPulse.generatedAt || publicAudit.milestones.tfPulse.snapshotHash !== publicPulse.snapshotHash || publicAudit.milestones.tfPulse.stateChanged !== publicPulse.stateChanged || typeof publicAudit.milestones.tfPulse.stateChanged !== 'boolean' || publicAudit.milestones.tfPulse.requiresHumanDecision !== publicPulse.requiresHumanDecision) fail('public goal audit milestones are missing or out of sync');
 const publicGatedTasks = taskGraph.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state));
 if (!Array.isArray(publicAudit.gates) || publicAudit.gates.length !== publicGatedTasks.length) fail('public goal audit gates do not match the task graph');
-const expectedGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction'];
+const expectedGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction', 'decisionOptions'];
 for (const [index, gate] of publicAudit.gates.entries()) {
   requireExactKeys(gate, expectedGateKeys, `public goal audit gate ${index}`);
   const task = taskGraph.tasks.find(candidate => candidate.id === gate.id);
-  if (!task || task.title !== gate.title || task.state !== gate.state || task.lead !== gate.lead || task.verifier !== gate.verifier || JSON.stringify(task.requiredInputs || []) !== JSON.stringify(gate.requiredInputs) || !gate.decision || !gate.decisionMode || !gate.nextAction) fail(`public goal audit gate ${gate.id ?? '(unknown)'} is missing or out of sync`);
+  const agenda = publicPulse.meetingAgenda.find(candidate => candidate.taskId === gate.id);
+  validateDecisionOptions(gate.decisionOptions, gate.state, `public goal audit gate ${gate.id}`);
+  if (!task || !agenda || task.title !== gate.title || task.state !== gate.state || task.lead !== gate.lead || task.verifier !== gate.verifier || JSON.stringify(task.requiredInputs || []) !== JSON.stringify(gate.requiredInputs) || !gate.decision || !gate.decisionMode || !gate.nextAction || JSON.stringify(gate.decisionOptions) !== JSON.stringify(agenda.decisionOptions)) fail(`public goal audit gate ${gate.id ?? '(unknown)'} is missing or out of sync`);
 }
 if (publicAudit.teaserGate?.taskId !== 'B4' || publicAudit.teaserGate.taskState !== taskGraph.tasks.find(task => task.id === 'B4')?.state || publicAudit.teaserGate.status !== 'HOLD') fail('public goal audit teaser gate is missing or out of sync');
 if (!Array.isArray(operationsQueue.workstreams) || operationsQueue.workstreams.length !== 5) fail('operations queue must expose five active workstreams');
@@ -86,6 +96,13 @@ for (const task of operationsQueue.tasks) {
   if (!task.id || !task.stream || !task.title || !task.state || !task.lead || !task.verifier || task.lead === task.verifier || !task.decision || !task.decisionMode || !task.nextAction || !Array.isArray(task.dependencies)) fail(`operations queue task ${task.id ?? '(unknown)'} is incomplete or non-independent`);
   if (!['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state)) fail(`operations queue task ${task.id} has an unsupported state`);
   if (task.decisionMode !== expectedDecisionMode(task.state)) fail(`operations queue task ${task.id} has a decision mode that does not match ${task.state}`);
+  if (['DONE', 'CANCELLED'].includes(task.state)) {
+    if (!Array.isArray(task.decisionOptions) || task.decisionOptions.length !== 0) fail(`operations queue task ${task.id} must not expose active decision options`);
+  } else {
+    validateDecisionOptions(task.decisionOptions, task.state, `operations queue task ${task.id}`);
+    const agenda = publicPulse.meetingAgenda.find(candidate => candidate.taskId === task.id);
+    if (!agenda || JSON.stringify(task.decisionOptions) !== JSON.stringify(agenda.decisionOptions)) fail(`operations queue task ${task.id} decision options are out of sync with the public pulse`);
+  }
   if (['WAITING', 'BACKLOG'].includes(task.state) && (!Array.isArray(task.requiredInputs) || task.requiredInputs.length === 0 || task.requiredInputs.some(input => typeof input !== 'string' || input.trim().length < 2))) fail(`operations queue input gate ${task.id} is missing required inputs`);
 }
 if (queueIds.size !== graphIds.size || [...graphIds].some(id => !queueIds.has(id))) fail('operations queue task ids do not match the current task graph');

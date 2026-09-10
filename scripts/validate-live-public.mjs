@@ -11,6 +11,17 @@ const isSmartStore = value => {
     return url.protocol === 'https:' && url.hostname === 'smartstore.naver.com' && ['/cellpinda', '/cellpinda/'].includes(url.pathname);
   } catch { return false; }
 };
+const expectedDecisionOptionIds = state => state === 'VERIFYING' ? ['accept', 'rework'] : state === 'WAITING' || state === 'BACKLOG' ? ['hold', 'promote'] : state === 'READY' ? ['sandbox', 'hold'] : state === 'RUNNING' ? ['verify', 'retry'] : ['preserve', 'reopen'];
+const validateDecisionOptions = (options, state, label) => {
+  assert.ok(Array.isArray(options) && options.length === 2, `${label} must expose two decision options`);
+  assert.deepEqual(options.map(option => option?.id), expectedDecisionOptionIds(state), `${label} decision option order is invalid`);
+  for (const option of options) {
+    assert.deepEqual(Object.keys(option).sort(), ['id', 'label', 'criteria'].sort(), `${label} decision option fields are invalid`);
+    assert.equal(typeof option.id, 'string', `${label} decision option id is invalid`);
+    assert.equal(typeof option.label, 'string', `${label} decision option label is invalid`);
+    assert.ok(Array.isArray(option.criteria) && option.criteria.length >= 2 && option.criteria.every(criteria => typeof criteria === 'string' && criteria.trim().length >= 4), `${label} decision option criteria are incomplete`);
+  }
+};
 const request = async path => {
   const separator = path.includes('?') ? '&' : '?';
   const response = await fetch(`${base}${path}${separator}release-smoke=1`);
@@ -69,7 +80,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicAudit.teaserGate.taskId, 'B4', 'live public audit must expose the teaser gate');
     assert.equal(publicAudit.teaserGate.status, 'HOLD', 'live public audit must keep the teaser on hold');
     assert.equal(publicAudit.teaserGate.taskState, queue.tasks.find(task => task.id === 'B4')?.state, 'live public audit teaser state must match the queue');
-    const auditGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction'];
+    const auditGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction', 'decisionOptions'];
     const liveGatedTasks = queue.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state));
     assert.ok(Array.isArray(publicAudit.gates) && publicAudit.gates.length === liveGatedTasks.length, 'live public audit gate count must match the queue');
     for (const gate of publicAudit.gates) {
@@ -84,6 +95,10 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(gate.decision, queueTask.decision, `live public audit decision mismatch for ${gate.id}`);
       assert.equal(gate.decisionMode, queueTask.decisionMode, `live public audit decision mode mismatch for ${gate.id}`);
       assert.equal(gate.nextAction, queueTask.nextAction, `live public audit next action mismatch for ${gate.id}`);
+      validateDecisionOptions(gate.decisionOptions, gate.state, `live public audit gate ${gate.id}`);
+      const agenda = publicPulse.meetingAgenda.find(candidate => candidate.taskId === gate.id);
+      assert.ok(agenda, `live public audit gate is missing pulse agenda ${gate.id}`);
+      assert.deepEqual(gate.decisionOptions, agenda.decisionOptions, `live public audit decision options mismatch for ${gate.id}`);
     }
     assert.equal(publicPulse.meetingAgenda.length, queue.pulse.activeTasks, 'live public TF pulse agenda count must match the queue');
     assert.equal(publicPulse.inputGates.length, queue.pulse.inputGates, 'live public TF pulse gate count must match the queue');
@@ -91,13 +106,13 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.deepEqual(queue.roleCoverage, publicPulse.roleCoverage, 'live operations queue role coverage must match the pulse');
     const publicPulseKeys = {
       inputGate: ['taskId', 'state', 'chair', 'requiredInputs', 'nextAction'],
-      meetingAgenda: ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'requiredInputs', 'nextAction', 'mode'],
+      meetingAgenda: ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'],
     };
     assert.ok(Array.isArray(publicPulse.roleCoverage) && publicPulse.roleCoverage.length === 6, 'live public TF pulse role coverage is missing');
     assert.deepEqual(publicPulse.roleCoverage.map(role => role.id), ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit'], 'live public TF pulse role coverage is out of order');
     assert.ok(publicPulse.roleCoverage.every(role => role.status === 'present' && typeof role.label === 'string'), 'live public TF pulse role coverage is malformed');
     for (const gate of publicPulse.inputGates) assert.deepEqual(Object.keys(gate).sort(), [...publicPulseKeys.inputGate].sort(), 'live public TF pulse input gate contains an unexpected field');
-    for (const agenda of publicPulse.meetingAgenda) assert.deepEqual(Object.keys(agenda).sort(), [...publicPulseKeys.meetingAgenda].sort(), 'live public TF pulse agenda contains an unexpected field');
+    for (const agenda of publicPulse.meetingAgenda) { assert.deepEqual(Object.keys(agenda).sort(), [...publicPulseKeys.meetingAgenda].sort(), 'live public TF pulse agenda contains an unexpected field'); validateDecisionOptions(agenda.decisionOptions, agenda.state, `live public TF pulse agenda ${agenda.taskId}`); }
     assert.ok(publicPulse.counts && Object.values(publicPulse.counts).reduce((sum, count) => sum + count, 0) === queue.tasks.length, 'live public TF pulse counts must cover the queue');
     for (const state of ['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED']) assert.equal(publicPulse.counts[state], queue.tasks.filter(task => task.state === state).length, `live public TF pulse count mismatch for ${state}`);
     const queueIds = new Set(queue.tasks.map(task => task.id));
@@ -108,6 +123,13 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.ok(task.decision && task.decisionMode && task.nextAction, `live operations queue is missing automatic decision metadata for ${task.id}`);
       const expectedMode = task.state === 'VERIFYING' ? 'independent-review' : task.state === 'WAITING' || task.state === 'BACKLOG' ? 'input-gate' : task.state === 'READY' ? 'sandbox-execution' : task.state === 'RUNNING' ? 'execution-tracking' : 'state-preservation';
       assert.equal(task.decisionMode, expectedMode, `live operations queue has a mismatched decision mode for ${task.id}`);
+      if (['DONE', 'CANCELLED'].includes(task.state)) assert.ok(Array.isArray(task.decisionOptions) && task.decisionOptions.length === 0, `live operations queue must not expose active decision options for ${task.id}`);
+      else {
+        validateDecisionOptions(task.decisionOptions, task.state, `live operations queue task ${task.id}`);
+        const agenda = publicPulse.meetingAgenda.find(candidate => candidate.taskId === task.id);
+        assert.ok(agenda, `live operations queue is missing pulse agenda for ${task.id}`);
+        assert.deepEqual(task.decisionOptions, agenda.decisionOptions, `live operations queue decision options mismatch for ${task.id}`);
+      }
       if (['WAITING', 'BACKLOG'].includes(task.state)) assert.ok(Array.isArray(task.requiredInputs) && task.requiredInputs.length > 0 && task.requiredInputs.every(input => typeof input === 'string' && input.trim().length >= 2), `live input gate is missing required inputs for ${task.id}`);
     }
     assert.ok(queue.tasks.some(task => task.id === 'B4' && task.state === 'WAITING' && task.decisionMode === 'input-gate'), 'live operations queue must keep teaser exposure behind approval');

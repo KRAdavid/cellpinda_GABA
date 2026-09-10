@@ -63,6 +63,29 @@ const actionFor = task => {
   };
 };
 
+const decisionOptionsFor = task => {
+  if (task.state === 'VERIFYING') return [
+    {id: 'accept', label: '수락 → DONE', criteria: ['수락 기준과 연결 증거를 모두 확인', '독립 검토 메모와 검토 시각 기록']},
+    {id: 'rework', label: '보완 → REWORK', criteria: ['누락·오류를 구체적으로 기록', '담당자와 재검토 조건 지정']},
+  ];
+  if (task.state === 'WAITING' || task.state === 'BACKLOG') return [
+    {id: 'hold', label: '보류 유지', criteria: ['필요 입력이 아직 확인되지 않음', '현재 담당자·검증자·다음 조치 보존']},
+    {id: 'promote', label: '입력 충족 후 READY', criteria: ['필요 입력을 모두 확인', '담당자와 독립 검증자가 재검토']},
+  ];
+  if (task.state === 'READY') return [
+    {id: 'sandbox', label: '샌드박스 실행', criteria: ['내부 실행 범위와 증거 위치 확인', '외부 약속을 만들지 않음']},
+    {id: 'hold', label: '실행 보류', criteria: ['실행 전 가정·의존성 재확인', '다음 pulse까지 상태 보존']},
+  ];
+  if (task.state === 'RUNNING') return [
+    {id: 'verify', label: '검증으로 전달', criteria: ['실행 결과와 실패 여부 기록', '독립 검증자에게 증거 전달']},
+    {id: 'retry', label: '재시도 검토', criteria: ['재시도 원인과 범위 기록', '중복 외부 실행이 없는지 확인']},
+  ];
+  return [
+    {id: 'preserve', label: '상태·증거 보존', criteria: ['상태를 바꿀 사건이 없음', '기존 증거와 감사 기록 유지']},
+    {id: 'reopen', label: '변화 발생 시 재평가', criteria: ['새 사건·입력·승인 기록', '담당자와 검증자 재지정 여부 확인']},
+  ];
+};
+
 const activeTasks = graph.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state));
 const decisions = activeTasks
   .sort((a, b) => a.priority - b.priority || a.id.localeCompare(b.id))
@@ -76,6 +99,7 @@ const decisions = activeTasks
       participants: [task.lead, task.verifier],
       question: `${task.title}의 다음 단계 진행 여부를 판단할 수 있는가?`,
       decision: action.decision,
+      decisionOptions: decisionOptionsFor(task),
       dissent: null,
       dissentStatus: 'human-meeting-required',
       evidence: [...task.evidence],
@@ -114,7 +138,7 @@ const result = {
   verifying: decisions.filter(item => item.state === 'VERIFYING').map(item => item.taskId),
   waiting: decisions.filter(item => ['WAITING', 'BACKLOG'].includes(item.state)).map(item => item.taskId),
   inputGates,
-  meetingAgenda: decisions.map(item => ({taskId: item.taskId, state: item.state, chair: item.chair, participants: item.participants, question: item.question, decision: item.decision, requiredInputs: item.requiredInputs, nextAction: item.nextAction, mode: item.mode})),
+  meetingAgenda: decisions.map(item => ({taskId: item.taskId, state: item.state, chair: item.chair, participants: item.participants, question: item.question, decision: item.decision, decisionOptions: item.decisionOptions, requiredInputs: item.requiredInputs, nextAction: item.nextAction, mode: item.mode})),
   decisions,
 };
 

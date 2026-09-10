@@ -307,3 +307,9 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 로컬 Node API에 `GET /api/ops/local-audit`를 추가해 watcher가 만든 `tmp/local-goal-audit.json`을 비공개 요약으로 운영 화면에 연결했다. loopback 요청만 허용하고 완제품 후보·자료 누락·주문 파일 수·1500 과거 집계·로컬 판정만 투영하며, 원문 행·개인정보·경로·해시 같은 입력 세부는 응답에서 제거한다. 운영 화면은 이 요약을 60초마다 확인하고, 스냅샷이 없거나 갱신에 실패하면 마지막 요약을 보존하면서 watcher 실행을 안내한다. GitHub Pages는 `apiEndpoint`가 비어 요청 자체를 만들지 않는다.
 
 서버 테스트에서 실제 요약·누락 파일 응답과 비공개 필드 제거를 확인했고, 로컬 감사 사이클을 연속 실행해 같은 입력에서는 `localStateChanged=false`가 유지되는 것도 확인했다. `pnpm test` 67건과 production build를 통과했다. 이 연결은 로컬 입력을 회의에서 빠르게 확인하는 관찰성 보강이며 B2 표시 승인·E1 실구매 대사·B3 후기 권한·Cloudflare 운영 연결을 자동 완료하지 않는다.
+
+## 2026-09-11 상태별 회의 선택지와 감사 패킷 일치
+
+`tf-pulse`가 활성 작업 상태에 따라 두 개의 결정 선택지와 각각의 판정 기준을 생성하도록 보강했다. `VERIFYING`은 수락→DONE 또는 보완→REWORK, `WAITING`·`BACKLOG`는 보류 유지 또는 입력 충족 후 READY를 제시해 담당자와 독립 검증자가 회의에서 다음 상태를 토론할 수 있게 한다. `READY`·`RUNNING`·완료 상태에도 샌드박스·검증 전달·증거 보존 경로를 같은 구조로 제공한다.
+
+공개 `tf-pulse.json` 회의 안건과 `goal-audit.json` 게이트에 선택지를 함께 export하고, `validate-public-export`·`validate-live-public`가 상태별 ID 순서, 기준 배열, 게이트와 pulse 간 일치를 검사한다. 운영 화면의 공개 목표 감사 카드도 게이트별 선택지를 표시한다. 선택지는 자동 상태 변경이 아니라 사람 회의의 판정 기록을 위한 구조이며, 외부 승인·후기 권한·실주문 대사를 대신하지 않는다.

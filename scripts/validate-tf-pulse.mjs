@@ -63,6 +63,19 @@ const expectedMode = state => {
   if (state === 'RUNNING') return 'execution-tracking';
   return 'state-preservation';
 };
+const expectedDecisionOptionIds = state => {
+  if (state === 'VERIFYING') return ['accept', 'rework'];
+  if (state === 'WAITING' || state === 'BACKLOG') return ['hold', 'promote'];
+  if (state === 'READY') return ['sandbox', 'hold'];
+  if (state === 'RUNNING') return ['verify', 'retry'];
+  return ['preserve', 'reopen'];
+};
+const validateDecisionOptions = (options, taskId, state) => {
+  if (!Array.isArray(options) || options.length !== 2 || JSON.stringify(options.map(option => option?.id)) !== JSON.stringify(expectedDecisionOptionIds(state))) fail(`decision options are missing or out of order for ${taskId}`);
+  for (const option of options) {
+    if (!option || typeof option.id !== 'string' || typeof option.label !== 'string' || !Array.isArray(option.criteria) || option.criteria.length < 2 || option.criteria.some(criteria => typeof criteria !== 'string' || criteria.trim().length < 4)) fail(`decision option criteria are incomplete for ${taskId}`);
+  }
+};
 const active = graph.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state));
 if (pulse.decisions.length !== active.length) fail('every active task must have exactly one decision proposal');
 if (!Array.isArray(pulse.meetingAgenda) || pulse.meetingAgenda.length !== pulse.decisions.length) fail('meeting agenda does not cover all decisions');
@@ -72,6 +85,7 @@ for (const decision of pulse.decisions) {
   const task = tasks.get(decision.taskId);
   if (!task || ['DONE', 'CANCELLED'].includes(task.state)) fail(`decision references inactive task ${decision.taskId}`);
   if (decision.state !== task.state || decision.mode !== expectedMode(task.state)) fail(`decision mode/state mismatch for ${task.id}`);
+  validateDecisionOptions(decision.decisionOptions, task.id, task.state);
   if (JSON.stringify(decision.participants) !== JSON.stringify([task.lead, task.verifier])) fail(`TF participants mismatch for ${task.id}`);
   if (decision.dissent !== null || decision.dissentStatus !== 'human-meeting-required') fail(`automated dissent was fabricated for ${task.id}`);
   if (!Array.isArray(decision.requiredInputs) || JSON.stringify(decision.requiredInputs) !== JSON.stringify(Array.isArray(task.requiredInputs) ? task.requiredInputs : [])) fail(`required input checklist mismatch for ${task.id}`);
