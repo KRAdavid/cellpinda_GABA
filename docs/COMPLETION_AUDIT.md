@@ -179,3 +179,7 @@ canonical 그래프의 B2·B3·B4·C2·E1에 `requiredInputs`를 추가하고, `
 `sync-public-data.mjs`가 안전한 `public/data/tf-pulse.json`을 생성하고 운영 화면에 `회의 안건 JSON` 링크를 노출한다. 패킷은 목표 상태·작업별 담당 역할·필요 입력·다음 조치·회의 안건만 포함하며, 내부 증거 원문·개인정보·비밀값은 포함하지 않는다. 공개 Pages 라이브 검증은 pulse endpoint HTTP 200, `public_tf_pulse` 모드, `회의 안건 JSON` 링크, `다음 TF 회의 안건` 패널을 확인했다. 1440px·390px Playwright 검증에서 가로 넘침 0, 콘솔 오류 0, 페이지 오류 0을 확인했다.
 
 pulse 패킷 구현 커밋 `ca612c2`의 [GitHub Actions 34514541733](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34514541733)과 문서 반영 커밋 `80647c9`의 [GitHub Actions 34514900764](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34514900764)은 Goal Contract·TF pulse·공개 export·Pages·라이브 smoke를 모두 성공시켰다. `pnpm run validate:live -- https://kradavid.github.io/cellpinda_GABA`는 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`를 확인했다. 공개 패킷은 소비자에게 안전한 운영 진행 상황을 보여 주지만, B2·B3·B4·C2·E1의 사람 승인·권한·비밀값·주문 응답을 자동으로 완료시키지 않는다.
+
+## 공개 pulse 스키마 경계 후속 증거
+
+공개 export와 라이브 smoke에 pulse 입력 게이트·회의 안건의 허용 키를 고정하고, 각 상태 집계가 현재 canonical 업무 그래프 전체를 덮는지 검증했다. 내부 `evidence`·`dissent`·경로·토큰이 공개 패킷으로 유입되면 배포 검증이 실패한다. 커밋 `c52807b`의 [GitHub Actions 34515606289](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34515606289)은 새 스키마 검사까지 포함해 Goal Contract·공개 export·Pages·라이브 smoke를 성공시켰고, 라이브 Playwright 1440px·390px 검증도 같은 허용 키와 상태 집계를 확인했다.
