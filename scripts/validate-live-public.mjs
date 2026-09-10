@@ -58,6 +58,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(queueIds.size, queue.tasks.length, 'live operations queue contains duplicate task ids');
     for (const task of queue.tasks) {
       assert.ok(['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state), `live operations queue has an unsupported state for ${task.id}`);
+      assert.ok(task.lead && task.verifier && task.lead !== task.verifier, `live operations queue must keep a distinct verifier for ${task.id}`);
       assert.ok(task.decision && task.decisionMode && task.nextAction, `live operations queue is missing automatic decision metadata for ${task.id}`);
       const expectedMode = task.state === 'VERIFYING' ? 'independent-review' : task.state === 'WAITING' || task.state === 'BACKLOG' ? 'input-gate' : task.state === 'READY' ? 'sandbox-execution' : task.state === 'RUNNING' ? 'execution-tracking' : 'state-preservation';
       assert.equal(task.decisionMode, expectedMode, `live operations queue has a mismatched decision mode for ${task.id}`);

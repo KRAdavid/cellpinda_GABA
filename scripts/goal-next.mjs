@@ -16,6 +16,7 @@ for (const task of graph.tasks) {
   if (!contractStreams.has(task.stream)) fail(`${task.id} belongs to undeclared stream ${task.stream}`);
   if (!allowed.has(task.state)) fail(`${task.id} has unsupported state ${task.state}`);
   if (!task.title || !task.stream || !task.lead || !task.verifier || !Array.isArray(task.dependencies) || !Array.isArray(task.acceptance) || !Array.isArray(task.evidence)) fail(`${task.id} is missing a task contract field`);
+  if (task.lead === task.verifier) fail(`${task.id} needs a distinct verifier for independent review`);
   if (task.state === 'DONE' && task.evidence.length === 0) fail(`${task.id} is DONE without evidence`);
   if (task.risk === 'E_EXTERNAL_COMMITMENT' && !task.blockedBy) fail(`${task.id} needs an approval/block reason`);
 }

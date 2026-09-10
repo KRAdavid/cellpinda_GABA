@@ -20,6 +20,8 @@ assert.ok(plan.contract.focusAreas.includes('공개 근거 인덱스'));
 assert.equal(plan.contract.workstreams.length, 5);
 assert.equal(plan.contract.team.length, 10);
 assert.equal(plan.tasks.length, 6);
+for (const task of plan.tasks) assert.notEqual(task.lead, task.verifier, `generated MVP task ${task.id} must have a distinct verifier`);
+for (const stream of plan.contract.workstreams) assert.notEqual(stream.lead, stream.verifier, `generated MVP stream ${stream.id} must have a distinct verifier`);
 const generatedRoleCorpus = [
   ...plan.contract.team.map(member => member.role),
   ...plan.contract.workstreams.flatMap(stream => [stream.lead, stream.verifier]),

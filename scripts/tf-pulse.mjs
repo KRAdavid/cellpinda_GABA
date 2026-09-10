@@ -17,7 +17,7 @@ const tasksById = new Map();
 for (const task of graph.tasks) {
   if (!task.id || tasksById.has(task.id)) fail(`duplicate task ${task.id ?? '(unknown)'}`);
   if (!allowed.has(task.state)) fail(`unsupported state ${task.state} for ${task.id}`);
-  if (!task.lead || !task.verifier || !Array.isArray(task.evidence)) fail(`incomplete responsibility or evidence for ${task.id}`);
+  if (!task.lead || !task.verifier || task.lead === task.verifier || !Array.isArray(task.evidence)) fail(`incomplete or non-independent responsibility for ${task.id}`);
   if (['WAITING', 'BACKLOG'].includes(task.state) && (!Array.isArray(task.requiredInputs) || task.requiredInputs.length === 0 || task.requiredInputs.some(input => typeof input !== 'string' || input.trim().length < 2))) fail(`input-gated task ${task.id} must list required inputs`);
   tasksById.set(task.id, task);
 }
