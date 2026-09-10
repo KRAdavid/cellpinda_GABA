@@ -29,7 +29,7 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'label' }); }}>
         <summary>섭취 방법과 주의사항은 어디서 확인하나요?</summary>
-        <div><p>현재 판매 제품의 섭취 방법·보관·주의사항은 구매 시 포장 표시사항과 공식몰에서 확인하세요. 이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다.</p>{products.map(product => <a className="text-link" key={product.id} href={product.officialUrl} target="_blank" rel="noopener noreferrer">{product.name} 공식몰 표시 확인 ↗</a>)}</div>
+      <div><p>현재 판매 제품의 섭취 방법·보관·주의사항은 구매 시 포장 표시사항과 스마트스토어에서 확인하세요. 이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다.</p>{products.map(product => <a className="text-link" key={product.id} href={product.officialUrl} target="_blank" rel="noopener noreferrer">{product.name} 스마트스토어 표시 확인 ↗</a>)}</div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'reviews' }); }}>
         <summary>다른 사람의 후기는 어떻게 읽어야 하나요?</summary>
