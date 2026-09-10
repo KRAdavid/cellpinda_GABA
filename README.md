@@ -67,6 +67,8 @@ pnpm run audit:orders
 pnpm run preflight:deploy
 ```
 
+`TF decision pulse` workflow는 6시간마다 canonical 업무 그래프의 실행·검증·입력 대기 안건을 읽어 run summary와 JSON artifact로 남긴다. 상태를 자동 변경하지 않으므로 사람이 반대 의견과 승인 조건을 확인하면서도 TF 회의 안건이 멈추지 않고 갱신된다.
+
 `pnpm run preflight:deploy -- --strict`는 Cloudflare Worker 영구 배포에 필요한 설정·빌드 산출물·공개 export·필수 Secrets를 값 노출 없이 검사하고, 하나라도 없으면 실패한다. 일반 실행은 현재 상태를 `READY` 또는 `WAITING`으로 보고해 로컬·Pages 환경에서도 배포 준비도를 확인할 수 있다.
 
 ## GitHub Actions 배포
