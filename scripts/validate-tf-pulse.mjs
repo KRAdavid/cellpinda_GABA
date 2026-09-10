@@ -91,6 +91,7 @@ if (existsSync(heartbeatPath)) {
   if (heartbeat.schemaVersion !== 1 || heartbeat.mode !== 'automation_pulse_heartbeat' || heartbeat.goalId !== contract.goalId || heartbeat.goalStatus !== contract.status) fail('pulse heartbeat identity does not match the active contract');
   if (!/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt ?? '') || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash ?? '')) fail('pulse heartbeat timestamp or hash is malformed');
   if (!heartbeat.counts || typeof heartbeat.requiresHumanDecision !== 'boolean' || !Array.isArray(heartbeat.roleCoverage) || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage) || !Array.isArray(heartbeat.verifying) || !Array.isArray(heartbeat.waiting) || !Array.isArray(heartbeat.inputGates)) fail('pulse heartbeat summary is incomplete or role coverage is out of sync');
+  if (heartbeat.snapshotHash !== pulse.snapshotHash || JSON.stringify(heartbeat.counts) !== JSON.stringify(pulse.counts) || heartbeat.requiresHumanDecision !== pulse.requiresHumanDecision || JSON.stringify(heartbeat.verifying) !== JSON.stringify(pulse.verifying) || JSON.stringify(heartbeat.waiting) !== JSON.stringify(pulse.waiting) || JSON.stringify(heartbeat.inputGates) !== JSON.stringify(pulse.inputGates.map(({taskId, state, chair, requiredInputs, nextAction}) => ({taskId, state, chair, requiredInputs, nextAction})))) fail('pulse heartbeat is not the current pulse snapshot');
 }
 
 console.log(JSON.stringify({

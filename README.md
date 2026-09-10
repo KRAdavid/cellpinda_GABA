@@ -79,6 +79,7 @@ pnpm run preflight:deploy
 
 공개 운영 보드(`?view=ops`)는 마지막 pulse 시각과 신선도 상태를 함께 표시해 6시간 주기 자동 협업이 지연됐는지 바로 확인할 수 있게 한다.
 `pnpm run audit:goal -- --json`의 `pulseHealth`에도 같은 신선도 판정과 상태 지문이 포함되어 회의·CI에서 화면과 같은 기준을 사용할 수 있다.
+`pnpm run validate:tf-pulse`는 heartbeat의 상태 지문·카운트·대기 목록이 현재 pulse와 같은 실행인지도 확인해 오래된 회의 안건이 공개 큐에 남지 않게 한다.
 
 각 pulse에는 업무 그래프 상태 지문, 회의 안건, 외부 입력 게이트, 사람 판단 필요 여부가 포함되며 `pnpm run validate:tf-pulse`가 이 연결을 배포 전에 검증한다.
 
