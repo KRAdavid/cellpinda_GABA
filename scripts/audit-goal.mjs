@@ -36,6 +36,11 @@ function readOptionalJson(relative) {
   }
 }
 
+function latestTimestamp(values = []) {
+  const valid = values.filter(value => typeof value === 'string' && !Number.isNaN(Date.parse(value))).sort();
+  return valid.at(-1) || null;
+}
+
 const contractOk = commandCheck('goal-contract', 'scripts/validate-goal-contract.mjs', ['data/goal-contract.json']);
 const planOk = commandCheck('task-graph', 'scripts/goal-next.mjs', ['data/task-graph.json']);
 const researchOk = commandCheck('research-copy', 'scripts/validate-research-copy.mjs', ['data/content-ledger.json', 'public/data/gaba-master-index.json']);
@@ -55,6 +60,8 @@ if (includeLocalInputs) {
   const material = readOptionalJson('tmp/local-material-audit.json');
   const orders = readOptionalJson('tmp/local-order-audit.json');
   const materialSummary = material?.summary;
+  const materialLatest = latestTimestamp((material?.artifacts || []).map(artifact => artifact.modifiedAt));
+  const orderLatest = latestTimestamp((orders?.files || []).map(file => file.modifiedAt));
   const orderSummary = orders
     ? {
         counters: orders.counters,
@@ -62,6 +69,7 @@ if (includeLocalInputs) {
         gaba750: orders.aggregate?.gaba750,
         fieldPresence: orders.fieldPresenceFileCounts,
         channelAssessment: orders.channelAssessment,
+        latestSourceModifiedAt: orderLatest,
       }
     : undefined;
   const materialOk = materialCommand.ok
@@ -73,7 +81,7 @@ if (includeLocalInputs) {
     'local-material-inputs',
     materialOk ? 'MET' : materialCommand.ok ? 'WAITING' : 'INVALID',
     materialOk
-      ? `로컬 완제품 자료 입력 스캔 성공 · 후보 ${materialSummary.finishedProductCandidates}건 · B2 독립 승인은 별도`
+      ? `로컬 완제품 자료 입력 스캔 성공 · 후보 ${materialSummary.finishedProductCandidates}건 · 최근 수정 ${materialLatest || '확인 불가'} · B2 독립 승인은 별도`
       : materialCommand.ok ? '로컬 완제품 자료 입력을 다시 확인해야 함' : '로컬 완제품 자료 감사 명령 실패',
     ['data/local-material-manifest.json', 'scripts/audit-local-materials.mjs'],
     materialOk ? [] : ['지정 자료 폴더·완제품 포장 파일·표시 자료 확인']
@@ -95,6 +103,7 @@ if (includeLocalInputs) {
       finishedProductCandidates: materialSummary.finishedProductCandidates,
       b2Candidate: materialSummary.b2Candidate,
       excludedBulkMaterial: materialSummary.excludedBulkMaterial,
+      latestSourceModifiedAt: materialLatest,
     } : null,
     orders: orderSummary ? {
       counters: orderSummary.counters,
@@ -102,6 +111,7 @@ if (includeLocalInputs) {
       gaba750: orderSummary.gaba750,
       fieldPresence: orderSummary.fieldPresence,
       channelAssessment: orderSummary.channelAssessment,
+      latestSourceModifiedAt: orderSummary.latestSourceModifiedAt,
     } : null,
     interpretation: '로컬 자료는 입력 최신성·분류·대사 가능 여부를 보여 주며, 독립 승인·실구매·환불 완료를 증명하지 않는다.',
   };
