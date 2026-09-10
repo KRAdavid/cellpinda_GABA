@@ -4,6 +4,8 @@
 
 GitHub Actions의 `TF decision pulse` workflow가 6시간마다 같은 명령을 실행하고 JSON 결과를 run summary와 14일 보존 artifact로 남긴다. `workflow_dispatch`로 즉시 다시 실행할 수도 있다. 이 주기는 상태를 임의로 바꾸거나 외부 게시·구매를 실행하지 않고, 새 입력이 필요한 TF 회의 안건을 계속 갱신한다.
 
+`pnpm run validate:tf-pulse`는 pulse가 ACTIVE Goal Contract·canonical 그래프·B4 티저 게이트와 일치하는지, 모든 활성 작업에 담당자·검증자·다음 행동이 있는지, 자동화가 사람의 반대 의견을 만들어내지 않았는지를 배포 전에 확인한다.
+
 ```sh
 pnpm run tf:pulse
 pnpm run tf:pulse -- --json

@@ -26,6 +26,8 @@ jobs:
         with:
           node-version: 24.19.0
           package-manager-cache: false
+      - name: Validate TF decision contract
+        run: node scripts/validate-tf-pulse.mjs
       - name: Generate TF decision pulse
         run: node scripts/tf-pulse.mjs --json > tf-pulse.json
       - name: Add pulse to run summary
