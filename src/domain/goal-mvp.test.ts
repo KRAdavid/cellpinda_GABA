@@ -167,5 +167,13 @@ test('independent review refuses incomplete criteria or short rationale', () => 
   const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
   assert.throws(() => recordIndependentReview(started.tasks, 'G1', {
     verifier: '품질감사관', acceptedCriteria: [plan.tasks[0].acceptance[0]], note: '짧음', decision: 'accept',
-  }, '2026-09-10T10:01:00.000Z'), /모든 수락 기준/);
+}, '2026-09-10T10:01:00.000Z'), /모든 수락 기준/);
+});
+
+test('independent review is bound to the task verifier role', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
+  assert.throws(() => recordIndependentReview(started.tasks, 'G1', {
+    verifier: '마케팅·소비자심리', acceptedCriteria: [...plan.tasks[0].acceptance], note: '모든 기준을 확인했지만 지정된 검증 역할이 아닙니다.', decision: 'accept',
+  }, '2026-09-10T10:01:00.000Z'), /지정된 독립 검증 역할/);
 });

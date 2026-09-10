@@ -375,6 +375,7 @@ export function recordIndependentReview(tasks: readonly MvpTask[], taskId: strin
   if (!source) throw new Error(`작업을 찾을 수 없습니다: ${taskId}`);
   if (source.state !== 'VERIFYING') throw new Error('샌드박스 산출물을 먼저 만들고 검토 대기 상태로 두어야 합니다.');
   if (typeof input.verifier !== 'string' || input.verifier.trim().length < 2 || input.verifier.trim().length > 200) throw new Error('검증자 역할을 입력해 주세요.');
+  if (input.verifier.trim() !== source.verifier) throw new Error(`지정된 독립 검증 역할(${source.verifier})만 이 작업을 검토할 수 있습니다.`);
   if (!Array.isArray(input.acceptedCriteria) || input.acceptedCriteria.length !== source.acceptance.length || source.acceptance.some(item => !input.acceptedCriteria.includes(item))) throw new Error('모든 수락 기준을 확인해야 합니다.');
   if (typeof input.note !== 'string' || input.note.trim().length < 10 || input.note.length > 2000) throw new Error('검토 메모를 10자 이상 입력해 주세요.');
   if (input.decision !== 'accept' && input.decision !== 'rework') throw new Error('검토 판정이 올바르지 않습니다.');

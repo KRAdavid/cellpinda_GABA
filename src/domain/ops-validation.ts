@@ -66,10 +66,12 @@ function validatePlan(value: unknown): string | null {
     if (task.state === 'DONE') {
       const issue = validateVerification(task.verification, task.id); if (issue) return issue;
       if (!task.evidence.some((item: string) => item.startsWith(`independent-review:${task.id}:`))) return `${task.id} 독립 검증 증거가 없습니다.`;
+      if (isObject(task.verification) && task.verification.mode === 'independent_review' && task.verification.verifier !== task.verifier) return `${task.id} 독립 검토 역할이 지정 검증자와 다릅니다.`;
     } else if (task.verification !== undefined) return `${task.id} 미완료 작업에는 검증 완료 기록을 둘 수 없습니다.`;
     if (task.review !== undefined) {
       const review = task.review;
       const issue = validateReview(review, task.id); if (issue) return issue;
+      if (isObject(review) && review.verifier !== task.verifier) return `${task.id} 독립 검토 역할이 지정 검증자와 다릅니다.`;
       if (isObject(review) && review.decision === 'accept' && (task.state !== 'DONE' || !isObject(task.verification) || task.verification.mode !== 'independent_review')) return `${task.id} 승인된 독립 검토는 independent_review 완료 기록과 연결되어야 합니다.`;
       if (isObject(review) && review.decision === 'rework' && (task.state !== 'REWORK' || task.verification !== undefined)) return `${task.id} 보완 요청 기록은 REWORK 상태에만 연결할 수 있습니다.`;
     }
