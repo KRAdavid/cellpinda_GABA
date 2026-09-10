@@ -59,6 +59,16 @@ const output={
   products,
   reviews,
 };
+const masterIndex={
+  schemaVersion:1,
+  goalId:'GMVP-GABA-PUBLIC-MASTER-INDEX',
+  title:'공개용 GABA 논문 기반 마스터 인덱스',
+  publicScope:'승인된 공개 HTTPS 출처가 있는 연구 요약입니다. 연구 결과는 셀핀다 가바 1500 완제품의 효과를 보장하지 않습니다.',
+  generatedAt:output.generatedAt,
+  records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,limitations})=>({id,topic,question:metadata?.question||topic,studyType:metadata?.studyType||null,population:metadata?.population||null,sampleSize:metadata?.sampleSize||null,dose:metadata?.dose||null,duration:metadata?.duration||null,comparison:metadata?.comparison||null,outcome:metadata?.outcome||null,result:metadata?.result||null,consumerSummary:metadata?.consumerSummary||null,hopefulTakeaway:metadata?.hopefulTakeaway||null,limitations:[...(metadata?.limitations||[]),...(limitations||[])],productApplicability:metadata?.productApplicability||null,sources})),
+};
 mkdirSync(dirname(target),{recursive:true});
 writeFileSync(target,JSON.stringify(output,null,2)+'\n');
-console.log(JSON.stringify({target,claims:claims.length,products:products.length,reviews:reviews.length}));
+const masterTarget=resolve(root,'public/data/gaba-master-index.json');
+writeFileSync(masterTarget,JSON.stringify(masterIndex,null,2)+'\n');
+console.log(JSON.stringify({target,masterTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length}));

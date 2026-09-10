@@ -43,6 +43,13 @@
       "target": "판매처 주문·취소·환불과 사이트 유입을 대사해 실제 구매 전환을 검증한다.",
       "status": "BLOCKED",
       "evidence": ["docs/ORDER_INTEGRATION.md"]
+    },
+    {
+      "id": "M6",
+      "name": "운영 MVP 실행성",
+      "target": "한 문장 목표에서 Goal Contract·TF·업무 그래프를 생성하고 샌드박스 결과·승인 보고를 만든다.",
+      "status": "MET",
+      "evidence": ["src/domain/goal-mvp.ts", "src/components/OperationsMvp.tsx", "docs/OPS_MVP.md"]
     }
   ],
   "scope": {
@@ -117,8 +124,8 @@
       "name": "자율 운영 코어",
       "lead": "TF 리드·AI 비서실",
       "verifier": "품질감사관",
-      "status": "PLANNED",
-      "nextAction": "Goal·Task·Approval·Audit 최소 데이터 모델 설계"
+      "status": "IN_PROGRESS",
+      "nextAction": "샌드박스 MVP를 서버 영속·인증·감사 로그 운영으로 연결"
     }
   ],
   "reportingPolicy": "예외와 마일스톤 중심으로 보고하며, 상태가 바뀌거나 대표 결정이 필요한 경우에만 즉시 알린다."
