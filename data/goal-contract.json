@@ -33,7 +33,7 @@
     {
       "id": "M4",
       "name": "근거와 후기 구분",
-      "target": "연구·제품 사실·공식몰 후기 목적지를 분리하고, 완제품 효능 보장이나 권한 없는 인용을 공개하지 않는다.",
+      "target": "연구·제품 사실·스마트스토어 후기 목적지를 분리하고, 완제품 효능 보장이나 권한 없는 인용을 공개하지 않는다.",
       "status": "PARTIAL",
       "evidence": ["data/content-ledger.json", "docs/EVIDENCE_AUDIT.md", "src/components/ReviewExperience.tsx"]
     },
