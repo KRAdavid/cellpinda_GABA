@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Download, Trash2 } from 'lucide-react';
 import { CHALLENGE_STORAGE_KEY, challengeHabits, createChallenge, localCalendarDate, parseChallenge, updateChallengeDay, challengeFinished, challengeStreak } from '../domain/challenge';
 import type { ChallengeRecord } from '../domain/challenge';
+import { preserveCampaign } from '../domain/share';
 import './SevenDayChallenge.css';
 
 type Props = { onEvent?: (name: string, properties?: Record<string, string>) => void };
@@ -106,8 +107,7 @@ export default function SevenDayChallenge({ onEvent }: Props) {
   function challengeLink() {
     const url = new URL(import.meta.env.BASE_URL, window.location.origin);
     url.searchParams.set('challenge', '7days');
-    const campaign = new URLSearchParams(window.location.search).get('campaign')?.trim() || '';
-    if (/^[A-Za-z0-9_-]{1,64}$/.test(campaign)) url.searchParams.set('campaign', campaign);
+    preserveCampaign(url, window.location.search);
     url.hash = 'lab';
     return url.href;
   }

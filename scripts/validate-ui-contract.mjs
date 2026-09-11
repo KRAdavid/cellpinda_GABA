@@ -10,6 +10,7 @@ const rhythm = await read('src/components/RhythmExperience.tsx');
 const rhythmStyles = await read('src/components/rhythm.css');
 const challenge = await read('src/components/SevenDayChallenge.tsx');
 const productShare = await read('src/components/ProductShare.tsx');
+const shareDomain = await read('src/domain/share.ts');
 const researchStyles = await read('src/components/ResearchLibrary.css');
 const reviewStyles = await read('src/components/ReviewExperience.css');
 const review = await read('src/components/ReviewExperience.tsx');
@@ -57,8 +58,9 @@ requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size
 requireMatch(researchStyles, /research-library-empty[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research empty-state copy must be at least 16px');
 requireMatch(reviewStyles, /review-quote-card p:not\(\.review-quote-label\)[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'review copy must be at least 16px on mobile');
 requireMatch(challenge, /challenge_start|challenge_day_complete|seven_day_complete/, 'challenge measurement events are missing');
-requireMatch(productShare, /URLSearchParams\(window\.location\.search\)[\s\S]*?\.get\('campaign'\)/, 'product share must preserve an approved campaign identifier');
-requireMatch(challenge, /URLSearchParams\(window\.location\.search\)[\s\S]*?\.get\('campaign'\)/, 'challenge share must preserve an approved campaign identifier');
+requireMatch(shareDomain, /approvedCampaign[\s\S]*?URLSearchParams\(currentSearch\)[\s\S]*?\.get\('campaign'\)/, 'shared campaign tokens must use the approved helper');
+requireMatch(productShare, /preserveCampaign\(url,window\.location\.search\)/, 'product share must preserve an approved campaign identifier');
+requireMatch(challenge, /preserveCampaign\(url, window\.location\.search\)/, 'challenge share must preserve an approved campaign identifier');
 for (const event of ['hero_check_start', 'rhythm_check_complete', 'result_share_click', 'result_share_success', 'friend_check_start', 'product_compare_view', 'review_source_click', 'purchase_cta_click', 'challenge_start', 'challenge_day_complete', 'seven_day_complete']) {
   requireMatch(app + rhythm + challenge, new RegExp(event), `required measurement event ${event} is missing`);
 }
