@@ -20,7 +20,7 @@ type Props = { reviews: PublicReview[]; onOpen?: (productId: string) => void };
 
 const readingQuestions = [
   { title: '왜 선택했을까요?', text: '제품을 고른 이유와 기대했던 점을 읽어 보세요. 나와 비슷한 상황인지도 함께 살펴보세요.' },
-  { title: '어떻게 사용했을까요?', text: '어떤 구성인지, 얼마나 사용했는지, 맛과 포장은 어땠는지 확인해 보세요. 빠진 정보는 추측하지 않아도 됩니다.' },
+  { title: '어떻게 사용했을까요?', text: '어떤 구성인지, 얼마나 사용했는지, 맛과 포장은 어땠는지 확인해 보세요. 원문에서 확인되는 정보부터 천천히 살펴보세요.' },
   { title: '다른 경험도 있을까요?', text: '좋았던 점과 아쉬웠던 점을 함께 읽어 보세요. 한 사람의 경험이 모두에게 같지는 않습니다.' },
 ];
 
@@ -64,7 +64,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
         <div className="review-quote-controls"><label htmlFor="review-product">사용 제품<select id="review-product" value={activeProduct} onChange={event=>setProduct(event.target.value)}><option value="">모든 제품</option>{availableProducts.map(id=><option value={id} key={id}>{productNames[id]}</option>)}</select></label><p role="status">소개된 {quotes.length}건 중 {visibleQuotes.length}건</p></div>
         <div className="review-quote-list">{visibleQuotes.map(({review,url})=><article className="review-quote-card" key={review.id}>
           <div className="review-quote-byline"><h3>{productNames[review.productId!]}</h3><span>{review.authorLabel}</span></div>
-          <dl><div><dt>작성일</dt><dd><time dateTime={review.authoredAt}>{review.authoredAt}</time></dd></div><div><dt>사용 기간</dt><dd>{review.usagePeriod||'원문에서 확인되지 않음'}</dd></div></dl>
+          <dl><div><dt>작성일</dt><dd><time dateTime={review.authoredAt}>{review.authoredAt}</time></dd></div><div><dt>사용 기간</dt><dd>{review.usagePeriod||'원문에서 확인해 보세요'}</dd></div></dl>
           <p className="review-quote-disclosure"><strong>제품 제공·대가 관계</strong><br/>{review.disclosure}</p>
           <p className="review-quote-context"><strong>이 경험의 맥락</strong><br/>{review.context}</p>
           <p className="review-quote-label">원문 인용·발췌</p><blockquote>{review.publicText}</blockquote>
