@@ -8,13 +8,19 @@
 | 제품 비교 · 390px | `셀핀다 가바 1500` 표시, `750` 미표시, 스마트스토어 링크 4개, `scrollWidth=clientWidth=390`, 콘솔 오류 0 |
 | 운영 MVP · 1440px | 현재 운영 큐 표시, `마케팅·소비자심리` TF 역할 표시, 목표 생성 후 내부 자동 파동 5건·승인 요청·TF 의사결정 기록 표시, `scrollWidth=clientWidth=1440`, 콘솔 오류 0 |
 | 회원 기록 · `?view=account` · 390px | HTTP 200, `지금은 브라우저 기록으로 만나요.` 표시, 패스키 로그인 UI 미표시, `scrollWidth=clientWidth=390`, 콘솔·오류 응답 0 |
-| 콘텐츠 검토실 · `?view=admin` · 1440px | HTTP 200, `콘텐츠 검토실`·운영자 접근 키 표시, `scrollWidth=clientWidth=1440`, 콘솔·오류 응답 0 |
+| 공개 호스트 · `?view=admin` · 1440px | HTTP 200, 소비자 랜딩으로 안전하게 폴백하며 `콘텐츠 검토실`·운영자 접근 키·TF 운영판을 표시하지 않음, `scrollWidth=clientWidth=1440`, 콘솔·오류 응답 0 |
 
 운영 화면은 정적 Pages에서 Worker API를 호출하지 않고 공개 JSON·브라우저 임시 저장 폴백을 사용한다. `?view=ops`에서 목표를 다시 생성해도 외부 게시·구매는 실행하지 않고 P1 승인 대기에서 멈춘다. 이는 합성 샌드박스 UI 검증이며 실제 소비자 사용성 조사나 영구 Worker·D1 운영 검증을 뜻하지 않는다.
 
 `/account`는 정적 호스트에서 회원 API 대신 브라우저 7일 기록 안내로 전환하고, `/admin`은 운영 Worker가 없다는 안내를 보여 준다. 두 화면 모두 Worker API가 연결된 호스트에서만 서버 기능을 요청한다.
 
-코드 기준 release HEAD는 `76e03ee`이며, 해당 변경의 [GitHub Actions 34633566090](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34633566090)에서 타입검사·테스트·빌드·Pages·라이브 smoke가 성공했다.
+로컬 운영 주소에서만 `?view=admin`이 콘텐츠 검토실을 렌더링하며, 공개 Pages에서는 소비자 랜딩으로 폴백한다. 코드 기준 release HEAD는 아래의 최신 배포 검증 항목에 기록한다.
+
+## 2026-09-12 티저 CTA 라이브 번들 회귀 확인
+
+공개 Pages 루트 HTML이 실제로 로드하는 module bundle을 직접 읽어 `발효가바 이야기 영상 보기` CTA가 배포됐고 이전의 `발효가바가 무엇인지 30초` 문구가 남아 있지 않은지 확인했다. 라이브 smoke는 HTTP 200, 연구 8건, 제품 1종, 공유 페이지 6개, `smartStoreOnly=true`, `removed750=true`, `teaserPreview=true`, `provenance=matched`를 반환했다.
+
+검증 커밋 `0f0d890`의 [GitHub Actions 34645650934](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34645650934)는 타입검사·전체 테스트·빌드·Pages 게시·라이브 smoke에 성공했다. 공개 경로에서는 내부 운영 화면이 계속 차단되고, 로컬 운영 주소에서만 검토실·TF 운영판을 사용할 수 있다.
 
 ## 2026-09-12 소비자 공유·구매 흐름 재검증
 
