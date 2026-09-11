@@ -106,7 +106,7 @@ const products=ledger.products
   .map(({id,name,amountMg,servings,totalG,officialUrl,status,availability,priceDisplay,sourceIds})=>({id,name,amountMg,servings,totalG,officialUrl,status,availability,priceDisplay,sourceIds}));
 const reviews=ledger.reviews
   .filter(item=>['shop-review-destination','shop-review-destination-1500'].includes(item.id) && item.status==='approved')
-  .map(({id,status,publicText,sourceTitle,sourceUrl,originalPublic,limitations})=>({id,status,publicText,sourceTitle,sourceUrl,originalPublic,limitations}));
+  .map(({id,status,publicText,sourceTitle,sourceUrl,originalPublic})=>({id,status,publicText,sourceTitle,sourceUrl,originalPublic}));
 
 const output={
   schemaVersion:1,
@@ -120,7 +120,7 @@ const masterIndex={
   schemaVersion:1,
   goalId:'GMVP-GABA-PUBLIC-MASTER-INDEX',
   title:'공개용 GABA 논문 기반 마스터 인덱스',
-  publicScope:'승인된 공개 HTTPS 출처가 있는 연구 요약입니다. 연구 결과는 셀핀다 가바 1500 완제품의 효과를 보장하지 않습니다.',
+  publicScope:'승인된 공개 HTTPS 출처가 있는 연구의 질문·조건·출처와 소비자 요약을 모아 둔 인덱스입니다. 연구와 제품 정보는 각자의 조건에 맞춰 차례로 살펴볼 수 있습니다.',
   selectionRule:'승인 상태·공개 HTTPS 원문·필수 연구 필드·소비자 문장 검증을 모두 통과한 research-* 레코드만 포함합니다.',
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
@@ -142,7 +142,7 @@ const teaserPreview={
   placement:teaser.placement,
   title:'발효가바 — 멈추지 않는 밤',
   description:'발효가바를 둘러싼 장면을 짧은 다큐 형식으로 살펴보는 선택형 티저입니다.',
-  note:'이 페이지 안에서 재생을 요청하며, 외부 페이지가 임베드되지 않을 때만 새 탭 대체 경로를 제공합니다. 영상은 연구 결과나 셀핀다 가바 1500 완제품의 효과를 보장하는 자료가 아닙니다.',
+  note:'이 페이지 안에서 재생하며, 외부 페이지가 임베드되지 않을 때만 새 탭 대체 경로를 제공합니다. 발효가바의 이야기와 휴식 장면을 본 뒤 연구 조건과 제품 표시사항을 차례로 확인해 보세요.',
   ...(teaser.status==='PREVIEW' && teaser.publicPreviewUrl ? {url:teaser.publicPreviewUrl} : {url:null}),
 };
 writeFileSync(teaserPreviewTarget,JSON.stringify(teaserPreview,null,2)+'\n');

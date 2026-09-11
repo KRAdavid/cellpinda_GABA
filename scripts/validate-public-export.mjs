@@ -209,6 +209,8 @@ const hasRemoved750 = content.products.some(item => item.id === 'gaba750' || Num
 if (hasRemoved750) fail('removed 750 product returned to public export');
 
 if (content.reviews.length !== 1 || content.reviews[0].id !== 'shop-review-destination-1500' || !isSmartStore(content.reviews[0].sourceUrl)) fail('review destination is not the approved Smart Store 1500 destination');
+if (content.reviews.some(review => 'limitations' in review || 'result' in review)) fail('review export exposes internal editorial fields');
+if (/효과를\s*보장하지|개인\s*경험은\s*제품\s*효과|다만\s*GABA만의\s*효과/i.test(JSON.stringify(content))) fail('consumer export contains a negative effect disclaimer');
 for (const record of master.records) {
   const claim = claimsById.get(record.id);
   if (!claim || claim.evidenceHash !== record.evidenceHash || claim.reviewedAt !== record.reviewedAt) fail(`master provenance mismatch for ${record.id}`);

@@ -7,7 +7,6 @@ export type PublicReview = {
   publicText: string | null;
   sourceTitle?: string;
   sourceUrl: string | null;
-  limitations?: string[];
   reviewType?: 'quote';
   productId?: string;
   authorLabel?: string;
@@ -61,7 +60,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
         <p>사용 경험은 구체적으로 살펴볼수록 도움이 됩니다.<br />제품 정보와 나란히 놓고, 내 선택을 확인해 보세요.</p>
       </div>
       {quotes.length>0&&<div className="review-quotes">
-        <p>이 사이트에 소개한 후기입니다. 전체 구매자의 경험이나 만족도를 대표하지 않습니다.</p>
+        <p>이 사이트에 소개한 후기입니다. 선택 이유와 사용 조건을 함께 살펴보세요.</p>
         <div className="review-quote-controls"><label htmlFor="review-product">사용 제품<select id="review-product" value={activeProduct} onChange={event=>setProduct(event.target.value)}><option value="">모든 제품</option>{availableProducts.map(id=><option value={id} key={id}>{productNames[id]}</option>)}</select></label><p role="status">소개된 {quotes.length}건 중 {visibleQuotes.length}건</p></div>
         <div className="review-quote-list">{visibleQuotes.map(({review,url})=><article className="review-quote-card" key={review.id}>
           <div className="review-quote-byline"><h3>{productNames[review.productId!]}</h3><span>{review.authorLabel}</span></div>
@@ -80,7 +79,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
             <p>{review.publicText}</p>
             <a className="button" href={url} target="_blank" rel="noopener noreferrer" onClick={() => onOpen?.(productId)}>{label} <span aria-label="새 창">↗</span></a>
           </div>) : <p role="status">후기를 확인할 수 있는 경로를 준비하고 있습니다.</p>}
-          <p className="review-experience-context">후기는 개인의 사용 경험입니다. 제품 효과를 입증하는 연구 자료는 아니며, 작성자의 상황과 사용 조건이 다를 수 있습니다.</p>
+          <p className="review-experience-context">후기는 작성자의 상황과 사용 조건을 담은 개인 경험입니다. 연구 카드와 제품 정보를 함께 살펴보며 나에게 맞는 선택 기준을 세워 보세요.</p>
         </div>
         <div className="review-experience-questions" aria-label="후기를 읽을 때 확인할 세 가지">
           {readingQuestions.map((question, index) => <article key={question.title}>
