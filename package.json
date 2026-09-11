@@ -26,6 +26,7 @@
     "tf:safe": "node scripts/run-safe-tf-actions.mjs",
     "validate:tf-safe": "node scripts/validate-safe-tf-run.mjs",
     "validate:live": "node scripts/validate-live-public.mjs",
+    "validate:live-public": "node scripts/validate-live-public.mjs https://kradavid.github.io/cellpinda_GABA",
     "generate:share-pages": "node scripts/generate-share-pages.mjs",
     "goal:next": "node scripts/goal-next.mjs",
     "tf:pulse": "node scripts/tf-pulse.mjs",
