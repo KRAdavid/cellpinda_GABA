@@ -16,6 +16,9 @@ const OPS_MAX_BYTES=65536;
 const OPS_TTL_DAYS=30;
 const REVIEW_DESTINATION_ID='shop-review-destination-1500';
 const REVIEW_DESTINATION_MIGRATION_PREFIX='migration:review-destination-smartstore:v1';
+const SOURCE_CLAIM_SYNC_REASON='Current source ledger reconciliation refreshed seed claim fields';
+const SOURCE_PRODUCT_SYNC_REASON='Current source ledger reconciliation refreshed controlled product fields';
+const SOURCE_RETIRE_REASON='Current source ledger reconciliation retired removed public content';
 const SHARE_SCOPE_SQL=`WITH scoped AS (SELECT rowid AS seq,flow_id,name FROM events WHERE json_extract(properties,'$.path')=? AND flow_id IS NOT NULL), starts AS (SELECT flow_id,MIN(seq) AS first_seq FROM scoped WHERE name=? GROUP BY flow_id), steps AS (SELECT EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_requested') AS requested,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_link_copied') AS copied,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_image_downloaded') AS downloaded,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_cancelled') AS cancelled FROM starts s) SELECT COUNT(*) AS denominator,COALESCE(SUM(CASE WHEN requested OR copied OR downloaded THEN 1 ELSE 0 END),0) AS attemptFlows,COALESCE(SUM(requested),0) AS requestedFlows,COALESCE(SUM(copied),0) AS copiedFlows,COALESCE(SUM(downloaded),0) AS downloadedFlows,COALESCE(SUM(cancelled),0) AS cancelledFlows FROM steps`;
 const UNSCOPED_SHARE_SQL="SELECT COUNT(*) AS count FROM events WHERE name IN ('share_requested','share_link_copied','share_image_downloaded','share_cancelled') AND COALESCE(json_extract(properties,'$.path'),'') NOT IN ('/result','/share','/products')";
 function reviewLink(value) {
@@ -64,7 +67,7 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       const legacyDestination = /cellpinda\.co\.kr|cellpindamall\.com|공식몰/;
       const controlledProductFields = ['name','amountMg','servings','totalG','officialUrl','availability','sourceIds'];
       for (const [kind, seedMap] of Object.entries(seedByKind)) {
-        for (const row of db.prepare('SELECT * FROM content WHERE kind=?').all(kind)) {
+        for (const row of db.prepare('SELECT content.*, (SELECT reason FROM audit WHERE audit.content_id=content.id ORDER BY audit.id DESC LIMIT 1) AS last_reason FROM content WHERE kind=?').all(kind)) {
           const before = JSON.parse(row.data);
           const canonical = seedMap.get(before.id);
           let after = null;
@@ -74,22 +77,25 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
             // their historical row remains available to local operators.
             if (before.status === 'approved') {
               after = {...before, status:'hold', holdReason: before.holdReason || '현재 공개 원장에서 제거된 항목'};
-              reason = 'Current source ledger reconciliation retired removed public content';
+              reason = SOURCE_RETIRE_REASON;
             }
           } else if (kind === 'product') {
-            after = {...before};
-            for (const field of controlledProductFields) {
-              if (canonical[field] !== undefined) after[field] = canonical[field];
+            const sourceRow = row.revision === 1 || row.last_reason === SOURCE_PRODUCT_SYNC_REASON || legacyDestination.test(JSON.stringify(before));
+            if (sourceRow) {
+              after = {...before};
+              for (const field of controlledProductFields) {
+                if (canonical[field] !== undefined) after[field] = canonical[field];
+              }
+              reason = SOURCE_PRODUCT_SYNC_REASON;
             }
-            reason = 'Current source ledger reconciliation refreshed controlled product fields';
-          } else if (kind === 'claim' && (row.revision === 1 || legacyDestination.test(JSON.stringify(before)) || discouragedConsumerCopy.test(JSON.stringify(before)))) {
+          } else if (kind === 'claim' && (row.revision === 1 || row.last_reason === SOURCE_CLAIM_SYNC_REASON || legacyDestination.test(JSON.stringify(before)) || discouragedConsumerCopy.test(JSON.stringify(before)))) {
             // Refresh unedited seed claims and rows whose public destination/copy
             // is known to be stale. Operator edits have a higher revision and
             // remain intact unless they contain a blocked legacy phrase. A hold
             // is preserved so reconciliation never silently approves content.
             after = {...before, ...canonical, id: before.id, status: before.status === 'hold' ? 'hold' : canonical.status};
-            reason = row.revision === 1
-              ? 'Current source ledger reconciliation refreshed seed claim fields'
+            reason = row.revision === 1 || row.last_reason === SOURCE_CLAIM_SYNC_REASON
+              ? SOURCE_CLAIM_SYNC_REASON
               : 'Current source ledger reconciliation refreshed stale public copy';
           }
           if (after) {

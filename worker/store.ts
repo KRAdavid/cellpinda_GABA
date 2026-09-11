@@ -4,6 +4,7 @@ import { opsStateIssue } from '../src/domain/ops-validation.ts';
 
 type RecordValue = Record<string, unknown>;
 type ContentRow = {id:string;kind:string;data:string;revision:number};
+type SeedRow = ContentRow & {last_reason:string|null};
 type Content = RecordValue & {id:string;kind?:string;status?:string;revision?:number;publicText?:string|null;sourceIds?:string[];sources?:RecordValue[]};
 const EVENTS=new Set(['landing_view','hero_check_start','rhythm_check_started','rhythm_check_completed','rhythm_check_complete','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_source_click','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','result_share_click','result_share_success','shared_link_landed','friend_check_start','product_comparison_viewed','product_compare_view','purchase_outbound_clicked','purchase_cta_click','challenge_start','challenge_day_complete','seven_day_complete']);
 const PATHS=new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin','/teaser','/challenge']);
@@ -13,6 +14,12 @@ const OPS_MAX_BYTES=65536;
 const OPS_TTL_DAYS=30;
 const REVIEW_DESTINATION_ID='shop-review-destination-1500';
 const REVIEW_DESTINATION_MIGRATION_PREFIX='migration:review-destination-smartstore:v1';
+const SOURCE_CLAIM_SYNC_REASON='Current source ledger reconciliation refreshed seed claim fields';
+const SOURCE_PRODUCT_SYNC_REASON='Current source ledger reconciliation refreshed controlled product fields';
+const SOURCE_RETIRE_REASON='Current source ledger reconciliation retired removed public content';
+const DISCOURAGED_CONSUMER_COPY=/뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|다만\s*GABA만의\s*효과|결과를\s*한\s*문장으로\s*묶기\s*어려/;
+const LEGACY_DESTINATION=/cellpinda\.co\.kr|cellpindamall\.com|공식몰/;
+const CONTROLLED_PRODUCT_FIELDS=['name','amountMg','servings','totalG','officialUrl','availability','sourceIds'] as const;
 const SHARE_SCOPE_SQL=`WITH scoped AS (SELECT rowid AS seq,flow_id,name FROM events WHERE json_extract(properties,'$.path')=? AND flow_id IS NOT NULL), starts AS (SELECT flow_id,MIN(seq) AS first_seq FROM scoped WHERE name=? GROUP BY flow_id), steps AS (SELECT EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_requested') AS requested,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_link_copied') AS copied,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_image_downloaded') AS downloaded,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_cancelled') AS cancelled FROM starts s) SELECT COUNT(*) AS denominator,COALESCE(SUM(CASE WHEN requested OR copied OR downloaded THEN 1 ELSE 0 END),0) AS attemptFlows,COALESCE(SUM(requested),0) AS requestedFlows,COALESCE(SUM(copied),0) AS copiedFlows,COALESCE(SUM(downloaded),0) AS downloadedFlows,COALESCE(SUM(cancelled),0) AS cancelledFlows FROM steps`;
 const UNSCOPED_SHARE_SQL="SELECT COUNT(*) AS count FROM events WHERE name IN ('share_requested','share_link_copied','share_image_downloaded','share_cancelled') AND COALESCE(json_extract(properties,'$.path'),'') NOT IN ('/result','/share','/products')";
 type ShareCounts={denominator:number;attemptFlows:number;requestedFlows:number;copiedFlows:number;downloadedFlows:number;cancelledFlows:number};
@@ -95,9 +102,47 @@ export function createStore(db:D1Database) {
         await db.batch(statements);
       }
       const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(seed))))).map(byte=>byte.toString(16).padStart(2,'0')).join('');
-      const marker=`seed:v2-reviews:${hash}`;
+      const marker=`seed:v3-ledger:${hash}`;
       if(await db.prepare('SELECT value FROM metadata WHERE key=?').bind(marker).first())return;
       const statements:D1PreparedStatement[]=[];const now=new Date().toISOString();
+      const seedByKind={
+        claim:new Map((seed.claims || []).map(item=>[item.id,item])),
+        product:new Map((seed.products || []).map(item=>[item.id,item])),
+      };
+      const existingRows=(await db.prepare('SELECT content.*, (SELECT reason FROM audit WHERE audit.content_id=content.id ORDER BY audit.id DESC LIMIT 1) AS last_reason FROM content WHERE kind IN (?,?)').bind('claim','product').all<SeedRow>()).results;
+      for(const row of existingRows){
+        const before=JSON.parse(row.data) as Content;
+        const canonical=seedByKind[row.kind as 'claim'|'product']?.get(before.id);
+        let after:Content|null=null;
+        let reason='';
+        if(!canonical){
+          if(before.status==='approved'){
+            after={...before,status:'hold',holdReason:before.holdReason || '현재 공개 원장에서 제거된 항목'};
+            reason=SOURCE_RETIRE_REASON;
+          }
+        } else if(row.kind==='product'){
+          const sourceRow=row.revision===1 || row.last_reason===SOURCE_PRODUCT_SYNC_REASON || LEGACY_DESTINATION.test(JSON.stringify(before));
+          if(sourceRow){
+            after={...before};
+            for(const field of CONTROLLED_PRODUCT_FIELDS){const value=canonical[field];if(value!==undefined)Object.assign(after,{[field]:value});}
+            reason=SOURCE_PRODUCT_SYNC_REASON;
+          }
+        } else {
+          const sourceRow=row.revision===1 || row.last_reason===SOURCE_CLAIM_SYNC_REASON || LEGACY_DESTINATION.test(JSON.stringify(before)) || DISCOURAGED_CONSUMER_COPY.test(JSON.stringify(before));
+          if(sourceRow){
+            after={...before,...canonical,id:before.id,status:before.status==='hold'?'hold':canonical.status};
+            reason=SOURCE_CLAIM_SYNC_REASON;
+          }
+        }
+        if(after){
+          const current=JSON.stringify(after);
+          if(current!==row.data){
+            const revision=row.revision+1;
+            statements.push(db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,?,?,?,?,?)').bind(row.id,revision,reason,row.data,current,now));
+            statements.push(db.prepare('UPDATE content SET data=?,revision=? WHERE id=? AND revision=?').bind(current,revision,row.id,row.revision));
+          }
+        }
+      }
       for(const [kind,items] of [['claim',seed.claims || []],['product',seed.products || []],['review',seed.reviews || []]] as const) for(const item of items) {
         // Audit before insert, only for previously absent IDs. Existing reviewed copies never overwritten.
         statements.push(db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) SELECT ?,1,?,NULL,?,? WHERE NOT EXISTS(SELECT 1 FROM content WHERE id=?)').bind(item.id,'Source ledger import; AI editorial review, not expert certification',JSON.stringify(item),now,item.id));

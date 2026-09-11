@@ -483,3 +483,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-12 TF heartbeat 최신화
 
 `pnpm run tf:pulse:heartbeat`로 활성 Goal Contract·업무 그래프를 다시 읽고 pulse 시각을 2026-09-11T19:03:18Z로 갱신했다. 지문이 같아 `stateChanged=false`를 유지했으며 검증 대기 1건·외부 입력 게이트 4건·DONE 8건을 다음 회의 큐에 보존했다. heartbeat는 외부 공개·구매·법적 약속을 실행하지 않고, B2·B3·B4·C2·E1을 사람 판단 전환점으로 유지한다.
+
+## 2026-09-12 반복 원장 동기화 검증
+
+첫 seed 동기화가 revision을 올린 이후에도 원장 변경을 반영할 수 있도록 Node SQLite와 Worker/D1이 마지막 audit 사유를 확인해 seed 동기화 행과 운영자 수정 행을 구분하도록 보강했다. 제거된 공개 행은 `hold`로 남기고, 운영자 수정본은 보존한다. Node 10개·Worker 11개 테스트에서 두 번의 원장 갱신과 운영자 문구 보존을 확인했다. 이 변경은 실제 제품 표시 승인·후기 권한·주문 대사를 대신하지 않는다.

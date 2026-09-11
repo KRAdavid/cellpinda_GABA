@@ -96,6 +96,10 @@ test('Local seed claims refresh consumer copy without overwriting reviewed edits
     {id:'gaba-definition',status:'approved',publicText:'GABA는 신경 신호의 강도를 조절하는 데 관여합니다.',sources:[{title:'GABA source',url:'https://example.com/gaba'}],metadata:{consumerSummary:'몸 안에서 신경 신호의 균형을 살펴보는 자료예요.'}},
     {id:'reviewed-claim',status:'approved',publicText:'새 원장 문구',sources:[{title:'Reviewed source',url:'https://example.com/reviewed'}]},
   ],products:[],reviews:[]};
+    const nextSeed={claims:[
+      {id:'gaba-definition',status:'approved',publicText:'GABA는 신경 신호가 지나치게 이어지지 않도록 강도를 조절하는 데 관여합니다.',sources:[{title:'GABA source',url:'https://example.com/gaba'}],metadata:{consumerSummary:'몸 안에서 신경 신호의 균형을 살펴보는 자료예요.'}},
+      {id:'reviewed-claim',status:'approved',publicText:'다음 원장 문구',sources:[{title:'Reviewed source',url:'https://example.com/reviewed'}]},
+    ],products:[],reviews:[]};
   let store;
   try {
     store=createStore({dbPath,seed:legacySeed});
@@ -107,6 +111,11 @@ test('Local seed claims refresh consumer copy without overwriting reviewed edits
     assert.deepEqual(claims.get('gaba-definition').metadata,currentSeed.claims[0].metadata);
     assert.equal(claims.get('reviewed-claim').publicText,'운영자가 검토한 문구 v2');
     assert.ok(store.history().some(item=>item.reason.includes('refreshed seed claim fields')));
+    store.close();
+    store=createStore({dbPath,seed:nextSeed});
+    const nextClaims=new Map(store.publicContent().claims.map(item=>[item.id,item]));
+    assert.equal(nextClaims.get('gaba-definition').publicText,nextSeed.claims[0].publicText);
+    assert.equal(nextClaims.get('reviewed-claim').publicText,'운영자가 검토한 문구 v2');
   } finally {store?.close();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
 
