@@ -124,12 +124,12 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     </div>
     {studies.length > 0 ? <>
       <div className="research-library-controls" role="search" aria-label="승인된 연구 자료 찾기">
-        <label htmlFor="research-search">연구 내용 검색<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="연구 질문, 대상, 기간 등" aria-describedby="research-search-help" /></label>
-        <label htmlFor="research-topic">연구 주제<select id="research-topic" value={activeTopic} onChange={event => setTopic(event.target.value)}><option value="">모든 주제</option>{topics.map(item => <option value={item} key={item}>{item}</option>)}</select></label>
-        <label htmlFor="research-type">자료 유형<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 자료 유형</option>{studyTypes.map(type => <option value={type} key={type}>{type}</option>)}</select></label>
-        <button type="button" className="text-link" disabled={!query && !activeTopic && !activeType} onClick={() => { setQuery(''); setTopic(''); setStudyType(''); }}>검색·유형 초기화</button>
+        <label htmlFor="research-search">궁금한 내용 찾기<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="스트레스·수면·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
+        <label htmlFor="research-topic">관심 주제<select id="research-topic" value={activeTopic} onChange={event => setTopic(event.target.value)}><option value="">모든 주제</option>{topics.map(item => <option value={item} key={item}>{item}</option>)}</select></label>
+        <label htmlFor="research-type">어떻게 살펴봤나요?<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 방식</option>{studyTypes.map(type => <option value={type} key={type}>{type}</option>)}</select></label>
+        <button type="button" className="text-link" disabled={!query && !activeTopic && !activeType} onClick={() => { setQuery(''); setTopic(''); setStudyType(''); }}>처음 상태로 돌아가기</button>
       </div>
-      <p id="research-search-help" className="note">공개된 연구의 질문·대상·기간·출처를 찾습니다. 자료 유형은 원문에 기록된 연구 설계 기준입니다.</p>
+      <p id="research-search-help" className="note">관심 있는 주제나 연구 이야기를 찾을 수 있어요. 카드에서 쉬운 설명을 먼저 확인해 보세요.</p>
       <p className="research-library-count" role="status" aria-live="polite">전체 {studies.length}건 중 {visibleStudies.length}건</p>
     </> : null}
     {visibleStudies.length === 0 ? <p className="research-library-empty">검색 조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
