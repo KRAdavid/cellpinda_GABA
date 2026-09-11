@@ -251,7 +251,10 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   function shareToKakao() {
     if (!type || !kakaoReady || !window.Kakao) return;
     const url = shareUrl(type, getShareReferralId());
-    const imageUrl = new URL(`${import.meta.env.BASE_URL}assets/social-card.png`, window.location.origin).toString();
+    // Keep the Kakao preview aligned with the result-specific OG image used by
+    // the static share page. A generic card makes every shared result look the
+    // same and weakens the friend-to-friend reflection loop.
+    const imageUrl = new URL(`${import.meta.env.BASE_URL}assets/social-rhythm-${type.id}.png`, window.location.origin).toString();
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'kakao'});
     window.Kakao.Share.sendDefault({
       objectType: 'feed',

@@ -32,6 +32,7 @@ requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\
 requireMatch(app, /<img[^>]+alt=\{/, 'product and hero images must expose alternative text');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
 requireMatch(rhythm, /share\/(?:\$\{type\.id\}|type\.id)/, 'result-specific share URL is missing');
+requireMatch(rhythm, /social-rhythm-\$\{type\.id\}\.png/, 'Kakao share must use a result-specific image');
 requireMatch(rhythmStyles, /rhythm-mobile-share-bar[\s\S]*?position:fixed/, 'mobile result share bar is missing');
 requireMatch(rhythmStyles, /rhythm-experience:has\(\.rhythm-mobile-share-bar\)[\s\S]*?padding-bottom/, 'mobile share bar content clearance is missing');
 requireMatch(rhythmStyles, /@media\(prefers-reduced-motion:reduce\)/, 'reduced-motion rule is missing');
