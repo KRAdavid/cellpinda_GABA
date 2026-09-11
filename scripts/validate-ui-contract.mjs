@@ -27,6 +27,8 @@ for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'review
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
 requireMatch(app, /<nav aria-label="주 메뉴"/, 'consumer navigation label is missing');
+requireMatch(app, /const isLocalHost = \['localhost', '127\.0\.0\.1', '\[::1\]'\]\.includes\(location\.hostname\)/, 'internal operations route must be local-host gated');
+requireMatch(app, /const operationsView = isLocalHost && \(requestedView === 'ops' \|\| currentPath === '\/ops'\)/, 'internal operations route must not render on public hosts');
 const nav = app.match(/<nav[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
 if (!/<a href="#products">제품 비교<\/a>/.test(nav)) fail('consumer navigation must expose the product comparison destination');

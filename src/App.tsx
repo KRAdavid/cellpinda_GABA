@@ -74,7 +74,11 @@ export default function App(){
  const [content,setContent]=useState<Content|null>(null),[error,setError]=useState(false),[loading,setLoading]=useState(true),[menu,setMenu]=useState(false),[retryKey,setRetryKey]=useState(0);
  const currentPath=relativePath(location.pathname);
  const requestedView = new URLSearchParams(location.search).get('view');
- const operationsView = requestedView === 'ops' || currentPath === '/ops';
+ // TF operations are an internal, local review surface. Keep the route useful
+ // for the operator's local workspace while preventing a public Pages URL from
+ // exposing the internal queue, gates, or meeting notes to consumers.
+ const isLocalHost = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+ const operationsView = isLocalHost && (requestedView === 'ops' || currentPath === '/ops');
  const accountView = requestedView === 'account' || currentPath === '/account';
  const adminView = requestedView === 'admin' || currentPath === '/admin';
  useEffect(()=>{const c=new AbortController();setLoading(true);setError(false);loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[retryKey]);
