@@ -10,7 +10,7 @@ import ProductShare from './components/ProductShare';
 import PurchaseQuestions from './components/PurchaseQuestions';
 import OperationsMvp from './components/OperationsMvp';
 import {apiEndpoint} from './api-origin';
-import {resultTypes, type RhythmId} from './domain/rhythm';
+import {resultTypes, rhythmIdFromUrl} from './domain/rhythm';
 const Admin = lazy(() => import('./components/Admin'));
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
 type Product={id:string;name:string;amountMg:number;servings:number;totalG:number;officialUrl:string;availability?:string;priceDisplay?:string|null};
@@ -79,14 +79,15 @@ export default function App(){
  const adminView = requestedView === 'admin' || currentPath === '/admin';
  useEffect(()=>{const c=new AbortController();setLoading(true);setError(false);loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[retryKey]);
  useEffect(()=>{
-  const value=new URLSearchParams(location.search).get('rhythm');
-  const type=value && Object.prototype.hasOwnProperty.call(resultTypes,value) ? resultTypes[value as RhythmId] : null;
+  const value=rhythmIdFromUrl(new URL(location.href));
+  const type=value ? resultTypes[value] : null;
   if(!type)return;
   const title=`공유받은 하루 리듬: ‘${type.name}’ | Cellpinda`;
   const description=`공유받은 ‘${type.name}’의 이야기를 살펴보세요. 링크를 연 사람의 결과가 아니며, 의학적 진단이나 체내 GABA 측정이 아닙니다.`;
   document.title=title;
   const update=(selector:string,attribute:'name'|'property',value:string)=>{const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}=\"${selector}\"]`);if(element)element.content=value;else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}};
-  update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:image','property',new URL(asset(`assets/social-rhythm-${type.id}.png`),window.location.origin).toString());
+  const image=new URL(asset(`assets/social-rhythm-${type.id}.png`),window.location.origin).toString();
+  update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:image','property',image);update('og:url','property',window.location.href);update('twitter:title','name',title);update('twitter:description','name',description);update('twitter:image','name',image);
  },[]);
  useEffect(()=>{
  if(adminView || accountView || operationsView)return;

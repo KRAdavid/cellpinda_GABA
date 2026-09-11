@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { classifyRhythm, questions, resultTypes } from './rhythm.ts';
+import { classifyRhythm, questions, resultTypes, rhythmIdFromUrl } from './rhythm.ts';
 
 test('all five questions provide four unique recovery choices', () => {
   assert.equal(questions.length, 5);
@@ -55,4 +55,11 @@ test('all 1024 complete responses are deterministic and preserve their inputs', 
     found.add(result.type.id);
   }
   assert.deepEqual([...found].sort(), Object.keys(resultTypes).sort());
+});
+
+test('shared result URLs resolve both static paths and query fallbacks safely', () => {
+  assert.equal(rhythmIdFromUrl(new URL('https://example.test/cellpinda_GABA/share/active/')), 'active');
+  assert.equal(rhythmIdFromUrl(new URL('https://example.test/cellpinda_GABA/?rhythm=sleep#rhythm')), 'sleep');
+  assert.equal(rhythmIdFromUrl(new URL('https://example.test/cellpinda_GABA/share/not-a-type/')), null);
+  assert.equal(rhythmIdFromUrl(new URL('https://example.test/cellpinda_GABA/?rhythm=active<script>')), null);
 });

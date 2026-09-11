@@ -38,6 +38,7 @@ const validateContinuation = (value, label) => {
   assert.ok(typeof value.nextAction === 'string' && value.nextAction.trim().length >= 10, `${label} continuation action is missing`);
 };
 const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
+const sharedResultIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
 const validateSafeExecution = (value, label) => {
   if (value === undefined) return;
   assert.deepEqual(Object.keys(value).sort(), ['mode', 'status', 'validatedAt', 'executionBoundary', 'preparation', 'checks', 'candidateTaskIds', 'humanGateTaskIds'].sort(), `${label} safe execution fields are invalid`);
@@ -76,6 +77,15 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       request('/data/tf-meeting-packet.json'),
     ]);
     const [pageText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
+    const sharePageResponses = await Promise.all(sharedResultIds.map(id => request(`/share/${id}/`)));
+    const sharePageTexts = await Promise.all(sharePageResponses.map(response => response.text()));
+    for (const [index, id] of sharedResultIds.entries()) {
+      const sharePage = sharePageTexts[index] || '';
+      assert.match(sharePage, new RegExp(`property="og:title" content="공유받은 하루 리듬:`), `share page ${id} is missing an Open Graph title`);
+      assert.ok(sharePage.includes(`social-rhythm-${id}.png`), `share page ${id} is missing its result image`);
+      assert.ok(sharePage.includes(`?rhythm=${id}`), `share page ${id} is missing the app handoff`);
+      assert.ok(!/제한적|결과가 일치하지|정량 메타분석|이상사례|유의하지 않음/i.test(sharePage), `share page ${id} contains blocked research copy`);
+    }
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
@@ -214,7 +224,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, teaserPreview: true, queueTasks: queue.tasks.length, waitingTasks: waitingTasks.length, auditGates: publicAudit.gates.length, pulseHash: queue.pulse.snapshotHash.slice(0, 12), smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: true, queueTasks: queue.tasks.length, waitingTasks: waitingTasks.length, auditGates: publicAudit.gates.length, pulseHash: queue.pulse.snapshotHash.slice(0, 12), smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {

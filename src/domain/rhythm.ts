@@ -136,6 +136,16 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   },
 };
 
+/** Resolve an incoming shared-result URL without treating it as a diagnosis. */
+export function rhythmIdFromUrl(url: URL): RhythmId | null {
+  const queryId = url.searchParams.get('rhythm')?.trim() || '';
+  const pathId = url.pathname.match(/(?:^|\/)share\/([A-Za-z0-9_-]+)\/?$/)?.[1] || '';
+  const candidate = queryId || pathId;
+  return Object.prototype.hasOwnProperty.call(resultTypes, candidate)
+    ? candidate as RhythmId
+    : null;
+}
+
 export interface RhythmScores {
   readonly active: number;
   readonly sleep: number;

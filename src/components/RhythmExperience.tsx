@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
-import { classifyRhythm, questions, resultTypes } from '../domain/rhythm';
+import { classifyRhythm, questions, resultTypes, rhythmIdFromUrl } from '../domain/rhythm';
 import type { AnswerValue, RhythmId, RhythmResult, RhythmType } from '../domain/rhythm';
 import './rhythm.css';
 
 type KakaoApi = { isInitialized: () => boolean; init: (key: string) => void; Share: { sendDefault: (payload: Record<string, unknown>) => void } };
 declare global { interface Window { Kakao?: KakaoApi } }
 const kakaoKey = typeof import.meta.env.VITE_KAKAO_JS_KEY === 'string' ? import.meta.env.VITE_KAKAO_JS_KEY.trim() : '';
+const campaignId = typeof window !== 'undefined'
+  ? (new URLSearchParams(window.location.search).get('campaign')?.trim() || '')
+  : '';
 
 export interface RhythmExperienceProps {
   onEvent: (name: string, properties?: Record<string, string>) => void;
@@ -14,15 +17,15 @@ export interface RhythmExperienceProps {
 
 function getSharedType(): RhythmType | null {
   if (typeof window === 'undefined') return null;
-  const id = new URLSearchParams(window.location.search).get('rhythm');
-  return id && Object.prototype.hasOwnProperty.call(resultTypes, id)
-    ? resultTypes[id as RhythmId] : null;
+  const id = rhythmIdFromUrl(new URL(window.location.href));
+  return id ? resultTypes[id] : null;
 }
 
 function shareUrl(type: RhythmType, referralId?: string): string {
-  const url = new URL(import.meta.env.BASE_URL, window.location.origin);
-  url.searchParams.set('rhythm', type.id);
+  const base = new URL(import.meta.env.BASE_URL, window.location.origin);
+  const url = new URL(`share/${type.id}/`, base);
   if (referralId && /^[A-Za-z0-9_-]{8,64}$/.test(referralId)) url.searchParams.set('ref', referralId);
+  if (campaignId && /^[A-Za-z0-9_-]{1,64}$/.test(campaignId)) url.searchParams.set('campaign', campaignId);
   url.hash = 'rhythm';
   return url.toString();
 }
