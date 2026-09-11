@@ -479,3 +479,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-12 로컬 seed claim 자동 재동기화
 
 기존 로컬 SQLite에 남아 있던 revision 1 seed claim이 최신 승인 원장의 소비자 문구를 놓치던 경로를 `f0db8cd`에서 수정했다. 서버가 시작될 때 미편집 seed 행은 현재 원장의 공개 문구·메타데이터를 반영하고, revision 2 이상 운영자 수정본과 `hold` 상태는 유지한다. 로컬 API에서 GABA 정의, Smart Store 상세 목적지, 공개 금칙 문구 여부를 대조해 `productCount=1`, 지정 URL 일치, `blocked=false`를 확인했다. 회귀 테스트 81개·production build·GitHub Actions 34635928779·Pages 라이브 smoke가 성공했으며, 이 동기화는 실제 제품 표시 승인·후기 권한·주문 대사를 대신하지 않는다.
+
+## 2026-09-12 TF heartbeat 최신화
+
+`pnpm run tf:pulse:heartbeat`로 활성 Goal Contract·업무 그래프를 다시 읽고 pulse 시각을 2026-09-11T19:03:18Z로 갱신했다. 지문이 같아 `stateChanged=false`를 유지했으며 검증 대기 1건·외부 입력 게이트 4건·DONE 8건을 다음 회의 큐에 보존했다. heartbeat는 외부 공개·구매·법적 약속을 실행하지 않고, B2·B3·B4·C2·E1을 사람 판단 전환점으로 유지한다.
