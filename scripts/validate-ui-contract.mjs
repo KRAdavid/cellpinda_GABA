@@ -100,6 +100,9 @@ for (const id of shareIds) {
   requireMatch(html, new RegExp(`canonical" href="https:\\/\\/kradavid\\.github\\.io\\/cellpinda_GABA\\/share\\/${id}\\/`), `share page ${id} canonical metadata is missing`);
   requireMatch(html, new RegExp(`rhythm=${id}`), `share page ${id} handoff is missing`);
   requireMatch(html, /og:image/, `share page ${id} Open Graph image is missing`);
+  requireMatch(html, /property="og:site_name" content="셀핀다 발효가바"/, `share page ${id} site name metadata is missing`);
+  requireMatch(html, /property="og:locale" content="ko_KR"/, `share page ${id} locale metadata is missing`);
+  requireMatch(html, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, `share page ${id} WebPage structured data is missing`);
 }
 
 console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 11, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true}));

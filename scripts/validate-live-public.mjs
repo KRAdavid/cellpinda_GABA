@@ -122,6 +122,9 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(canonicalHref(sharePage), `${base}/share/${id}/`, `share page ${id} canonical URL is invalid`);
       assert.equal(metaContent(sharePage, 'property', 'og:url'), `${base}/share/${id}/`, `share page ${id} Open Graph URL is invalid`);
       assert.equal(metaContent(sharePage, 'property', 'og:image'), `${base}/assets/social-rhythm-${id}.png`, `share page ${id} Open Graph image is invalid`);
+      assert.equal(metaContent(sharePage, 'property', 'og:site_name'), '셀핀다 발효가바', `share page ${id} Open Graph site name is invalid`);
+      assert.equal(metaContent(sharePage, 'property', 'og:locale'), 'ko_KR', `share page ${id} Open Graph locale is invalid`);
+      assert.match(sharePage, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"[\s\S]*<\/script>/, `share page ${id} WebPage structured data is invalid`);
       assert.equal(metaContent(sharePage, 'name', 'twitter:image'), `${base}/assets/social-rhythm-${id}.png`, `share page ${id} Twitter image is invalid`);
       assert.ok(sharePage.includes(`?rhythm=${id}`), `share page ${id} is missing the app handoff`);
       assert.ok(!/제한적|결과가 일치하지|정량 메타분석|이상사례|유의하지 않음/i.test(sharePage), `share page ${id} contains blocked research copy`);
