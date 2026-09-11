@@ -1,5 +1,5 @@
 import ledger from '../data/content-ledger.json' with { type: 'json' };
-import { reviewMutation, approvalMissing, publicReview, parseReviewDraft, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
+import { reviewMutation, approvalMissing, publicReview, parseReviewDraft, REVIEW_DESTINATION_TEXT, REVIEW_DESTINATION_URL } from '../src/domain/reviews.ts';
 import { opsStateIssue } from '../src/domain/ops-validation.ts';
 
 type RecordValue = Record<string, unknown>;
@@ -50,7 +50,7 @@ function metadata(value:unknown) {
 function decode(row:ContentRow):Content {return {...JSON.parse(row.data),id:row.id,kind:row.kind,revision:row.revision};}
 function reviewLink(value:Content) {
   if(value.id!==REVIEW_DESTINATION_ID || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
-  try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && url.hostname==='smartstore.naver.com' && url.pathname==='/cellpinda/products/4701017202';}catch{return false;}
+  try{return new URL(value.sourceUrl).href===REVIEW_DESTINATION_URL;}catch{return false;}
 }
 
 export function createStore(db:D1Database) {

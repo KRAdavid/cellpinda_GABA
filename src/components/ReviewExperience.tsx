@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import './ReviewExperience.css';
+import {REVIEW_DESTINATION_URL} from '../domain/reviews';
 
 export type PublicReview = {
   id: string;
@@ -31,7 +32,7 @@ function reviewDestination(review: PublicReview) {
   if (review.status !== 'approved' || review.id !== 'shop-review-destination-1500' || review.publicText !== approvedReviewCopy || !review.sourceUrl) return null;
   try {
     const url = new URL(review.sourceUrl);
-    if (url.protocol !== 'https:' || url.hostname !== 'smartstore.naver.com' || url.pathname !== '/cellpinda/products/4701017202') return null;
+    if (url.href !== REVIEW_DESTINATION_URL) return null;
     const productId = 'gaba1500';
     return { url: url.href, productId, label: '가바 1500 · 스마트스토어 후기 읽기' };
   } catch { return null; }

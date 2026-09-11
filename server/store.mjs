@@ -2,7 +2,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
-import { reviewMutation, approvalMissing, publicReview, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
+import { reviewMutation, approvalMissing, publicReview, REVIEW_DESTINATION_TEXT, REVIEW_DESTINATION_URL } from '../src/domain/reviews.ts';
 import { opsStateIssue } from '../src/domain/ops-validation.ts';
 
 export const EVENT_NAMES = new Set(['landing_view','hero_check_start','rhythm_check_started','rhythm_check_completed','rhythm_check_complete','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_source_click','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','result_share_click','result_share_success','shared_link_landed','friend_check_start','product_comparison_viewed','product_compare_view','purchase_outbound_clicked','purchase_cta_click','challenge_start','challenge_day_complete','seven_day_complete','teaser_impression','teaser_play']);
@@ -23,7 +23,7 @@ const SHARE_SCOPE_SQL=`WITH scoped AS (SELECT rowid AS seq,flow_id,name FROM eve
 const UNSCOPED_SHARE_SQL="SELECT COUNT(*) AS count FROM events WHERE name IN ('share_requested','share_link_copied','share_image_downloaded','share_cancelled') AND COALESCE(json_extract(properties,'$.path'),'') NOT IN ('/result','/share','/products')";
 function reviewLink(value) {
   if(value.id!==REVIEW_DESTINATION_ID || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
-  try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && url.hostname==='smartstore.naver.com' && url.pathname==='/cellpinda/products/4701017202';}catch{return false;}
+  try{return new URL(value.sourceUrl).href===REVIEW_DESTINATION_URL;}catch{return false;}
 }
 function publicMetadata(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;

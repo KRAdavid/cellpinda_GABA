@@ -1,5 +1,6 @@
 /** Review drafts are internal editorial records; only publicReview projects publishable fields. */
 export const REVIEW_DESTINATION_TEXT='스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.';
+export const REVIEW_DESTINATION_URL='https://smartstore.naver.com/cellpinda/products/4701017202';
 export const REVIEW_LIMITS={productId:20,authorLabel:100,sourceTitle:250,sourceUrl:2048,authoredAt:10,usagePeriod:300,quote:3000,context:2000,disclosure:1000,rightsEvidence:2000,rightsScope:1000,rightsExpiresAt:10} as const;
 export type ReviewDraft={ -readonly [K in keyof typeof REVIEW_LIMITS]:string };
 export type ReviewConfirmation={rightsConfirmed:boolean;contextConfirmed:boolean;disclosureConfirmed:boolean;publicationConfirmed:boolean;reviewer:string;reviewedAt:string;editorialNote:string};
