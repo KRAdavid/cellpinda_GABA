@@ -30,3 +30,5 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 | 모바일·오류 | 390×844에서 가로 오버플로 없음, 콘솔·페이지 오류 0 |
 
 동일 시점 `validate:live`도 HTTP 200, 연구 8건, 제품 1종, 공유 페이지 6개, `smartStoreOnly=true`, `removed750=true`, `teaserPreview=true`, `provenance=matched`를 반환했다. 이 기록은 공개 UI와 익명 공유 경계를 검증한 것이며 실제 주문·후기 권한·티저 최종 공개 승인을 대신하지 않는다.
+
+같은 배포본의 루트와 결과별 공유 HTML도 직접 확인했다. 루트 canonical·OG 제목이 셀핀다 페이지를 가리키고, `active`, `sleep`, `irregular`, `sensory`, `unrested`, `steady` 여섯 경로가 각각 자신의 canonical URL과 `social-rhythm-{id}.png` 이미지를 사용한다. 제목·설명에는 750 제품이나 내부 운영 문구가 없으며, 여섯 경로 모두 HTTP 200으로 응답했다.
