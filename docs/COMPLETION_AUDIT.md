@@ -584,3 +584,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-12 로컬 공개 export 후기 문장 가드
 
 `validate-public-export.mjs`도 정적 `index.html`에 승인된 후기 안내 문장이 포함되는지 확인하도록 보강했다. 따라서 개발·동기화 단계와 라이브 smoke 단계 모두 `스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.` 문장을 요구하고, 후기 목적지는 가바 1500 상세 URL과 일치해야 한다. 커밋 `4d55f85` 이후 공개 export·UI 계약·전체 테스트를 통과했고, 외부 후기 원문 권한 게이트는 계속 별도로 유지한다.
+
+## 2026-09-12 내부 safe TF 파동 재실행
+
+`pnpm run tf:safe -- --out tmp/tf-safe-run.json`으로 공개 패킷 동기화와 목표 계약·연구 문구·티저 경계·샌드박스 MVP·공개 export·TF pulse의 6개 읽기 검사를 재실행했다. `tmp/tf-pulse.json`을 원본 pulse로 지정해 `validate:tf-safe`를 통과했으며, snapshot hash `415f2b9d89e6`와 사람 게이트 B2·B3·B4·C2·E1을 보존했다. 실행 경계는 `B_INTERNAL_WRITE`, 외부 효과 없음이며 canonical 작업 그래프·승인 상태·공개 제품 데이터는 변경하지 않았다.
