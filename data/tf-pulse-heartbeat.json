@@ -3,7 +3,7 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-11T13:51:26.772Z",
+  "generatedAt": "2026-09-11T14:40:10.741Z",
   "snapshotHash": "bd2b0a88608af3e64d5dbed9d8b01b2ffb1380abb5dbb46495344ee61e85b6f7",
   "previousSnapshotHash": "bd2b0a88608af3e64d5dbed9d8b01b2ffb1380abb5dbb46495344ee61e85b6f7",
   "stateChanged": false,
@@ -11,7 +11,7 @@
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-11T19:51:26.772Z",
+    "nextReviewAt": "2026-09-11T20:40:10.741Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -194,7 +194,7 @@
   "safeExecution": {
     "mode": "safe_internal_tf_run",
     "status": "MET",
-    "validatedAt": "2026-09-11T13:51:39.484Z",
+    "validatedAt": "2026-09-11T14:40:11.699Z",
     "executionBoundary": {
       "state": "READY",
       "risk": "B_INTERNAL_WRITE",
