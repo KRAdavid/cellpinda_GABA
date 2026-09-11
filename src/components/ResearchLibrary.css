@@ -71,3 +71,20 @@
 .research-try-link{display:inline-flex;margin-top:1.35rem;font-size:.88rem;font-weight:650}
 .research-copy{display:inline-flex;margin:1.35rem 0 0 1.25rem;font-size:.82rem;color:#64786b}
 @media(max-width:700px){.research-reading-path{grid-template-columns:1fr}.research-reading-path>div{padding:14px 16px}.research-library-card{padding:2.5rem 0}.research-library-quick-facts{grid-template-columns:1fr;gap:8px}.research-library-quick-facts>div{padding:13px 14px}.research-library-detail{grid-template-columns:minmax(0,1fr);gap:1rem}.research-copy{margin-left:0;margin-top:1rem}}
+
+/* The first detail layer is a visual reading aid. Technical fields stay available one level deeper. */
+.research-library-detail{display:block;padding:4px 0 1rem}
+.research-story-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0 1.25rem}
+.research-story-card{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-content:start;min-height:126px;padding:16px;border:1px solid #e0e8e1;border-radius:8px;background:#fbfdfb}
+.research-story-card>span{grid-row:span 3;color:#158457;font-size:.7rem;letter-spacing:.08em;font-weight:650;padding-top:2px}
+.research-story-card h4{margin:0;font-size:.88rem;line-height:1.45;color:#18382b}
+.research-story-card p{margin:.5rem 0 0;grid-column:2;line-height:1.65;font-size:.88rem;color:#52685c}
+.research-story-card small{display:block;grid-column:2;margin-top:.5rem;color:#789183;font-size:.75rem;line-height:1.5}
+.research-library-detail>.research-library-boundary{margin:0 0 1.15rem;padding:13px 15px;border-left:3px solid #158457;background:#f5f8f5}
+.research-technical-detail{border-top:1px solid #e8eee9}
+.research-library .research-technical-detail summary{padding:13px 0;font-size:.82rem;font-weight:500;color:#64786b}
+.research-technical-detail-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem;padding:0 0 1rem}
+.research-technical-detail-body .research-library-overview{grid-column:1/-1}
+.research-technical-detail-body .research-library-facts{min-width:0}
+.research-technical-detail-body .research-library-findings{min-width:0}
+@media(max-width:700px){.research-story-grid{grid-template-columns:1fr}.research-story-card{min-height:0}.research-technical-detail-body{grid-template-columns:minmax(0,1fr);gap:1rem}.research-technical-detail-body .research-library-overview{grid-column:auto}}

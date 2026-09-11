@@ -153,17 +153,28 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <details className="research-detail" onToggle={event => {
           if (event.currentTarget.open) onOpen?.(claim.id);
         }}>
-          <summary>조건·수치·한계 자세히 보기</summary>
+          <summary>이 연구를 쉽게 보기</summary>
           <div className="research-library-detail">
-            <div className="research-library-overview"><h4>자료 설명</h4><p>{claim.publicText}</p></div>
-            <dl className="research-library-facts">{facts.map(([key, label]) => {
-              const value = metadata[key];
-              return typeof value === 'string' && value ? <div key={key}><dt>{label}</dt><dd>{value}</dd></div> : null;
-            })}</dl>
-            <div className="research-library-findings"><h4>무엇이 관찰됐나요?</h4><p>{metadata.result}</p>
-              <div className="research-library-boundary"><h4>제품과 연결해 읽기</h4><p>{metadata.productApplicability}</p></div>
-              {limitations.length > 0 && <><h4>함께 읽어야 할 한계</h4><ul>{limitations.map(item => <li key={item}>{item}</li>)}</ul></>}
+            <div className="research-story-grid" aria-label="이 연구를 네 가지 질문으로 보기">
+              <div className="research-story-card"><span>01</span><h4>누구를 살펴봤나요?</h4><p>{metadata.population || '연구 참여자 정보가 공개되지 않았어요.'}</p>{metadata.sampleSize ? <small>{metadata.sampleSize}</small> : null}</div>
+              <div className="research-story-card"><span>02</span><h4>어떻게 봤나요?</h4><p>{compactStudyType(metadata.studyType)}</p>{metadata.duration ? <small>{metadata.duration}</small> : null}</div>
+              <div className="research-story-card"><span>03</span><h4>무엇과 비교했나요?</h4><p>{metadata.comparison || '비교 조건이 공개되지 않았어요.'}</p></div>
+              <div className="research-story-card"><span>04</span><h4>어떤 변화가 보였나요?</h4><p>{metadata.consumerSummary || metadata.result}</p></div>
             </div>
+            <div className="research-library-boundary"><h4>제품 정보는 따로 비교해 보세요</h4><p>{metadata.productApplicability}</p></div>
+            <details className="research-technical-detail">
+              <summary>원문 수치와 전체 한계 보기</summary>
+              <div className="research-technical-detail-body">
+                <div className="research-library-overview"><h4>자료 설명</h4><p>{claim.publicText}</p></div>
+                <dl className="research-library-facts">{facts.map(([key, label]) => {
+                  const value = metadata[key];
+                  return typeof value === 'string' && value ? <div key={key}><dt>{label}</dt><dd>{value}</dd></div> : null;
+                })}</dl>
+                <div className="research-library-findings"><h4>원문 결과</h4><p>{metadata.result}</p>
+                  {limitations.length > 0 && <><h4>함께 읽어야 할 한계</h4><ul>{limitations.map(item => <li key={item}>{item}</li>)}</ul></>}
+                </div>
+              </div>
+            </details>
           </div>
           <div className="research-library-sources"><h4>직접 확인하는 원문</h4>{(claim.reviewedAt || claim.evidenceHash) ? <p className="research-library-provenance">{claim.reviewedAt ? `검토일 ${claim.reviewedAt}` : null}{claim.reviewedAt && claim.evidenceHash ? ' · ' : null}{claim.evidenceHash ? <><span>근거 식별자 </span><code title={claim.evidenceHash}>{claim.evidenceHash.slice(0, 12)}…</code></> : null}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
             <a key={`${source.url}-${source.title}`} href={source.url!} target="_blank" rel="noopener noreferrer">{source.title} <span aria-label="새 창">↗</span></a>,
