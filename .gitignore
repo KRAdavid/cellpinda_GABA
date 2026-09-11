@@ -8,6 +8,7 @@ public/data/gaba-master-index.json
 public/data/operations-queue.json
 public/data/tf-pulse.json
 public/data/goal-audit.json
+public/data/tf-meeting-packet.json
 tmp/
 *.tsbuildinfo
 .env*

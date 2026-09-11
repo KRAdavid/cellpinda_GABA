@@ -38,15 +38,16 @@ const request = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, contentResponse, masterResponse, queueResponse, pulseResponse, auditResponse] = await Promise.all([
+    const [page, contentResponse, masterResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse] = await Promise.all([
       request('/?view=ops'),
       request('/data/content.json'),
       request('/data/gaba-master-index.json'),
       request('/data/operations-queue.json'),
       request('/data/tf-pulse.json'),
       request('/data/goal-audit.json'),
+      request('/data/tf-meeting-packet.json'),
     ]);
-    const [pageText, content, master, queue, publicPulse, publicAudit] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json()]);
+    const [pageText, content, master, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
@@ -69,6 +70,16 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicPulse.stateChanged, queue.pulse.stateChanged, 'live public TF pulse change marker must match the queue');
     assert.deepEqual(publicPulse.meetingProtocol, queue.pulse.meetingProtocol, 'live public TF pulse meeting protocol must match the queue');
     assert.ok(publicPulse.meetingProtocol?.cadence && publicPulse.meetingProtocol?.quorum && Array.isArray(publicPulse.meetingProtocol?.record), 'live public TF pulse meeting protocol is missing');
+    assert.equal(meetingPacket.mode, 'public_tf_meeting_packet', 'live TF meeting packet must use the public schema');
+    assert.equal(meetingPacket.goalId, publicPulse.goalId, 'live TF meeting packet goal must match the pulse');
+    assert.equal(meetingPacket.generatedAt, publicPulse.generatedAt, 'live TF meeting packet timestamp must match the pulse');
+    assert.equal(meetingPacket.snapshotHash, publicPulse.snapshotHash, 'live TF meeting packet hash must match the pulse');
+    assert.deepEqual(meetingPacket.meetingProtocol, publicPulse.meetingProtocol, 'live TF meeting packet protocol must match the pulse');
+    assert.deepEqual(meetingPacket.roleCoverage, publicPulse.roleCoverage, 'live TF meeting packet role coverage must match the pulse');
+    assert.deepEqual(meetingPacket.continuation, publicPulse.continuation, 'live TF meeting packet continuation must match the pulse');
+    assert.deepEqual(meetingPacket.agenda, publicPulse.meetingAgenda, 'live TF meeting packet agenda must match the pulse');
+    assert.deepEqual(meetingPacket.inputGates, publicPulse.inputGates, 'live TF meeting packet input gates must match the pulse');
+    assert.deepEqual(meetingPacket.gates, publicAudit.gates, 'live TF meeting packet gates must match the audit');
     validateContinuation(publicPulse.continuation, 'live public pulse');
     assert.deepEqual(publicPulse.continuation, queue.pulse.continuation, 'live public pulse continuation loop must match the queue');
     assert.equal(publicAudit.mode, 'public_goal_audit', 'live public goal audit packet must use the public schema');

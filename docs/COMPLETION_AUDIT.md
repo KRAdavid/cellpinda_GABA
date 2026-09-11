@@ -343,3 +343,7 @@ MVP Goal Contract의 회의 프로토콜에 정족수 규칙을 추가했다. �
 ## 2026-09-11 공개 회의 패킷 정족수 동기화
 
 canonical Goal Contract의 `decisionProtocol`을 자동 TF pulse의 `meetingProtocol`으로 연결했다. 6시간 pulse가 회의 주기·정족수·필수 기록 항목을 함께 내보내고, heartbeat·공개 operations queue·공개 TF pulse가 같은 값을 검증한다. 운영판은 현재 큐 위에 이 규칙을 표시해 다음 회의에서 담당자·독립 검증자와 함께 어떤 수준의 합의와 기록이 필요한지 바로 확인할 수 있다. 정족수 변경은 pulse 상태 지문에 포함되어 반복 안건과 운영 규칙 변경을 구분한다. 이 동기화는 회의 구조를 투명하게 만드는 장치이며 실제 전문가 참석·외부 승인·주문 대사를 완료 처리하지 않는다.
+
+## 2026-09-11 공개 TF 회의 패킷 통합
+
+회의 주기·정족수·역할 커버리지·활성 안건·입력 게이트·목표 감사 요약을 `public/data/tf-meeting-packet.json` 하나로 묶었다. 운영판에서 이 패킷을 바로 열 수 있고, `validate-public-export`·`validate-live-public`·배포 readiness가 pulse·operations queue·goal audit과 동일한 `snapshotHash`와 안건을 요구한다. 공개 패킷에는 개인정보·비밀키·원문 경로가 포함되지 않는다. 새 패킷은 중간 회의 준비를 빠르게 하지만 외부 전문가 참석·승인·실구매를 자동 완료하지 않는다.

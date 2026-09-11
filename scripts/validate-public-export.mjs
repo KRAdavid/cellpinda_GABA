@@ -7,6 +7,7 @@ const master = await readJson('public/data/gaba-master-index.json');
 const operationsQueue = await readJson('public/data/operations-queue.json');
 const publicPulse = await readJson('public/data/tf-pulse.json');
 const publicAudit = await readJson('public/data/goal-audit.json');
+const meetingPacket = await readJson('public/data/tf-meeting-packet.json');
 const taskGraph = await readJson('data/task-graph.json');
 const roleRegistry = await readJson('data/tf-role-registry.json');
 const goalContract = await readJson('data/goal-contract.json');
@@ -21,7 +22,7 @@ const isSmartStore = value => {
   } catch { return false; }
 };
 
-if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1) fail('unsupported schema');
+if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');
@@ -40,6 +41,7 @@ scanKeys(master);
 scanKeys(operationsQueue);
 scanKeys(publicPulse);
 scanKeys(publicAudit);
+scanKeys(meetingPacket);
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(JSON.stringify(content))) fail('legacy official-mall destination leaked into public content');
 
 if (operationsQueue.goalId !== 'GL-2026-CELL-GABA-001' || operationsQueue.status !== 'ACTIVE') fail('operations queue is not tied to the active Goal Contract');
@@ -47,6 +49,7 @@ const expectedMeetingProtocol = {cadence: goalContract.decisionProtocol?.cadence
 if (!expectedMeetingProtocol.cadence || !expectedMeetingProtocol.quorum || !Array.isArray(expectedMeetingProtocol.record) || expectedMeetingProtocol.record.length === 0) fail('Goal Contract meeting protocol is missing');
 if (!operationsQueue.pulse || !/^\d{4}-\d{2}-\d{2}T/.test(operationsQueue.pulse.generatedAt) || !/^[a-f0-9]{64}$/.test(operationsQueue.pulse.snapshotHash) || typeof operationsQueue.pulse.stateChanged !== 'boolean' || typeof operationsQueue.pulse.requiresHumanDecision !== 'boolean' || JSON.stringify(operationsQueue.pulse.meetingProtocol) !== JSON.stringify(expectedMeetingProtocol) || operationsQueue.pulse.activeTasks !== taskGraph.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length || operationsQueue.pulse.inputGates !== taskGraph.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length) fail('operations queue pulse summary is missing or out of sync');
 if (publicPulse.mode !== 'public_tf_pulse' || publicPulse.goalId !== operationsQueue.goalId || publicPulse.goalStatus !== operationsQueue.status || publicPulse.generatedAt !== operationsQueue.pulse.generatedAt || publicPulse.snapshotHash !== operationsQueue.pulse.snapshotHash || publicPulse.stateChanged !== operationsQueue.pulse.stateChanged || typeof publicPulse.stateChanged !== 'boolean' || typeof publicPulse.requiresHumanDecision !== 'boolean' || JSON.stringify(publicPulse.meetingProtocol) !== JSON.stringify(expectedMeetingProtocol) || !Array.isArray(publicPulse.meetingAgenda) || !Array.isArray(publicPulse.inputGates)) fail('public TF pulse packet is missing or out of sync');
+if (meetingPacket.mode !== 'public_tf_meeting_packet' || meetingPacket.goalId !== publicPulse.goalId || meetingPacket.goalStatus !== publicPulse.goalStatus || meetingPacket.generatedAt !== publicPulse.generatedAt || meetingPacket.snapshotHash !== publicPulse.snapshotHash || JSON.stringify(meetingPacket.meetingProtocol) !== JSON.stringify(publicPulse.meetingProtocol) || JSON.stringify(meetingPacket.roleCoverage) !== JSON.stringify(publicPulse.roleCoverage) || JSON.stringify(meetingPacket.continuation) !== JSON.stringify(publicPulse.continuation) || JSON.stringify(meetingPacket.agenda) !== JSON.stringify(publicPulse.meetingAgenda) || JSON.stringify(meetingPacket.inputGates) !== JSON.stringify(publicPulse.inputGates) || JSON.stringify(meetingPacket.gates) !== JSON.stringify(publicAudit.gates)) fail('public TF meeting packet is missing or out of sync');
 if (publicPulse.inputGates.length !== operationsQueue.pulse.inputGates || publicPulse.meetingAgenda.length !== operationsQueue.pulse.activeTasks) fail('public TF pulse packet counts do not match the operations queue');
 const requiredRoleCoverage = roleRegistry.roles.map(({id, label}) => ({id, label, status: 'present'}));
 if (!Array.isArray(publicPulse.roleCoverage) || JSON.stringify(publicPulse.roleCoverage) !== JSON.stringify(requiredRoleCoverage)) fail('public TF pulse role coverage is missing or malformed');
@@ -73,6 +76,10 @@ const validateContinuation = (value, label) => {
 };
 for (const [index, gate] of publicPulse.inputGates.entries()) requireExactKeys(gate, ['taskId', 'state', 'chair', 'requiredInputs', 'nextAction'], `public pulse input gate ${index}`);
 for (const [index, agenda] of publicPulse.meetingAgenda.entries()) { requireExactKeys(agenda, ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'], `public pulse meeting agenda ${index}`); validateDecisionOptions(agenda.decisionOptions, agenda.state, `public pulse meeting agenda ${agenda.taskId}`); }
+requireExactKeys(meetingPacket, ['schemaVersion', 'mode', 'goalId', 'goalStatus', 'generatedAt', 'snapshotHash', 'meetingProtocol', 'roleCoverage', 'continuation', 'agenda', 'inputGates', 'gates', 'audit', 'note'], 'public TF meeting packet');
+requireExactKeys(meetingPacket.meetingProtocol, ['cadence', 'quorum', 'record'], 'public TF meeting protocol');
+if (typeof meetingPacket.meetingProtocol.cadence !== 'string' || typeof meetingPacket.meetingProtocol.quorum !== 'string' || !Array.isArray(meetingPacket.meetingProtocol.record) || meetingPacket.meetingProtocol.record.length === 0) fail('public TF meeting protocol is malformed');
+if (JSON.stringify(meetingPacket.audit) !== JSON.stringify({overallStatus: publicAudit.overallStatus, checkedAt: publicAudit.checkedAt, taskCounts: publicAudit.taskCounts, milestones: publicAudit.milestones, teaserGate: publicAudit.teaserGate})) fail('public TF meeting audit summary is out of sync');
 validateContinuation(operationsQueue.pulse.continuation, 'operations queue pulse');
 validateContinuation(publicPulse.continuation, 'public pulse');
 if (JSON.stringify(operationsQueue.pulse.continuation) !== JSON.stringify(publicPulse.continuation)) fail('operations queue and public pulse continuation loops differ');

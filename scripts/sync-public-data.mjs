@@ -179,4 +179,22 @@ const publicAudit={
 };
 const auditTarget=resolve(root,'public/data/goal-audit.json');
 writeFileSync(auditTarget,JSON.stringify(publicAudit,null,2)+'\n');
-console.log(JSON.stringify({target,masterTarget,operationsTarget,pulseTarget,auditTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));
+const meetingPacket={
+  schemaVersion:1,
+  mode:'public_tf_meeting_packet',
+  goalId:publicPulse.goalId,
+  goalStatus:publicPulse.goalStatus,
+  generatedAt:publicPulse.generatedAt,
+  snapshotHash:publicPulse.snapshotHash,
+  meetingProtocol:publicPulse.meetingProtocol,
+  roleCoverage:publicPulse.roleCoverage,
+  continuation:publicPulse.continuation,
+  agenda:publicPulse.meetingAgenda,
+  inputGates:publicPulse.inputGates,
+  gates:publicAudit.gates,
+  audit:{overallStatus:publicAudit.overallStatus,checkedAt:publicAudit.checkedAt,taskCounts:publicAudit.taskCounts,milestones:publicAudit.milestones,teaserGate:publicAudit.teaserGate},
+  note:'이 패킷은 공개 회의 준비용 요약이며, 실제 참석·전문가 자격·외부 승인·주문 완료를 증명하지 않습니다.',
+};
+const meetingPacketTarget=resolve(root,'public/data/tf-meeting-packet.json');
+writeFileSync(meetingPacketTarget,JSON.stringify(meetingPacket,null,2)+'\n');
+console.log(JSON.stringify({target,masterTarget,operationsTarget,pulseTarget,auditTarget,meetingPacketTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));

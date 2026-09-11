@@ -12,6 +12,8 @@ GitHub Actions의 `TF decision pulse` workflow가 6시간마다 같은 명령을
 
 Goal Contract의 `decisionProtocol`은 각 pulse의 `meetingProtocol`으로 복제된다. 운영 큐·공개 TF pulse·heartbeat가 같은 회의 주기, 정족수, 필수 기록 항목을 보여 주며, 정족수 규칙이 바뀌면 상태 지문도 달라져 다음 회의에서 변경을 확인할 수 있다. 이 패킷은 회의 운영을 재현하기 위한 공개 요약이며 실제 참석·자격·승인을 증명하지 않는다.
 
+`tf-meeting-packet.json`은 회의 준비에 필요한 단일 공개 패킷이다. 회의 규칙·역할 커버리지·활성 안건·입력 게이트·목표 감사 요약을 한 문서로 묶고, pulse·운영 큐·목표 감사와 동일한 `snapshotHash`를 사용한다. 원문·개인정보·토큰·실제 참석 기록은 포함하지 않는다.
+
 로컬에서 `pnpm run tf:pulse:heartbeat`를 직접 실행하면 별도 파일을 준비하지 않아도 최신 pulse를 내부적으로 생성해 `data/tf-pulse-heartbeat.json`에 저장한다. CI처럼 `tf-pulse.json` 경로를 인자로 주면 그 파일을 명시적으로 검증하며, 존재하지 않는 명시 경로는 조용히 대체하지 않는다.
 
 ```sh
