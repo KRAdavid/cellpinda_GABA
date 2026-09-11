@@ -38,6 +38,8 @@ TF pulse가 활성 작업마다 상태에 맞는 두 가지 결정 경로와 최
 
 `tf-pulse`가 현재 상태에서 다음 운영 모드를 자동 계산하도록 보강했다. `human-gate-monitor`는 B2·B3·B4·C2·E1처럼 사람 입력이 필요한 게이트를 보존하면서 다음 pulse에서 변화와 새 증거를 다시 확인하고, `continue-execution`은 실행 가능한 작업을 다음 독립 검증으로 넘긴다. 활성 작업이 없으면 `close`, 그 외에는 `reassess-next-cycle`로 기록한다. 모든 모드는 6시간 뒤 재검토 시각과 다음 행동을 포함하며 heartbeat·공개 `tf-pulse.json`·`operations-queue.json`·`goal-audit.json`·운영 화면에서 같은 값으로 검증된다. `nextReviewAt`은 이전 heartbeat가 유지될 때 그 예약을 보존해 반복 실행으로 회의 시각이 임의로 밀리지 않게 했다.
 
+수동 [TF decision pulse 34544753916](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34544753916)로 heartbeat 생성과 후속 [Pages 배포·라이브 smoke 34544768345](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34544768345)를 재현했다. 상태가 바뀌지 않은 회차에서도 `human-gate-monitor`, 6시간 cadence, `nextReviewAt`, 다음 행동이 공개 세 패킷에 동일하게 남았고, heartbeat push는 `[skip ci]`와 명시적 deploy dispatch 한 번으로 중복 배포 없이 처리됐다.
+
 ## 2026-09-11 사람 회의 의견 입력과 배포 재검증
 
 운영 MVP의 TF 의사결정 로그에 사람이 직접 반대 의견·재검토 조건을 남기는 입력 폼을 추가했다. 자동 생성 안전 경계는 `guardrail`, 회의에서 작성한 기록은 `human-meeting`으로 분리하고 기록 시각을 저장한다. pulse의 `VERIFYING`·`WAITING` 작업은 `다음 TF 회의 안건` 패널에서 담당자·검증자·다음 조치와 함께 확인할 수 있다. 10자 미만 메모와 허용되지 않은 상태·시각은 공통 상태 검증에서 거부하며, 서버 저장·브라우저 `localStorage`·JSON 승인 보고서에 같은 구조로 보존된다. `pnpm test` 66개, 타입검사, production build와 로컬 API 연동 Playwright 데스크톱·모바일 검증이 통과했다.

@@ -319,3 +319,5 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 ## 2026-09-11 Observe → Adapt → Close or Continue 루프
 
 설계서의 관찰·적응·종료/계속 요구를 pulse 데이터 계약으로 연결했다. 활성 작업이 없으면 `close`, 사람 입력 또는 독립 판정이 필요하면 `human-gate-monitor`, 실행 가능한 작업이 있으면 `continue-execution`, 그 밖에는 `reassess-next-cycle`을 계산하고 6시간 뒤 `nextReviewAt`과 `nextAction`을 기록한다. 이 값은 pulse 원본과 heartbeat에서 검증한 뒤 공개 큐·목표 감사·운영 화면에 같은 값으로 전달된다. 동일 상태에서 heartbeat가 유지되면 기존 재검토 시각을 보존해 자동 주기가 승인 대기 중에도 계속 관찰하도록 했으며, 사람 승인·외부 게시·구매를 자동 완료로 바꾸지는 않는다.
+
+수동 [TF decision pulse 34544753916](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34544753916)으로 이 경계를 재현했다. 계약 검증·pulse JSON 생성·안전 heartbeat 저장이 성공했고, heartbeat 커밋 뒤 [단일 Verify and deploy 34544768345](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34544768345)가 실행되어 Pages 게시와 라이브 smoke까지 성공했다. 원격 `main`은 heartbeat 갱신 커밋 `95d0b32`로 fast-forward 되었으며, 같은 상태에서 `human-gate-monitor`와 기존 재검토 시각이 공개 queue·pulse·audit에 일치한다. Cloudflare Secrets가 없는 상태에서 Worker job은 구성 보고만 수행하고 영구 Worker 배포는 건너뛴다.
