@@ -39,6 +39,13 @@ const validateContinuation = (value, label) => {
 };
 const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
 const sharedResultIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
+const metaContent = (html, attribute, value) => {
+  const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const forward = new RegExp(`<meta[^>]+${attribute}="${escaped}"[^>]+content="([^"]+)"`, 'i').exec(html);
+  const reverse = new RegExp(`<meta[^>]+content="([^"]+)"[^>]+${attribute}="${escaped}"`, 'i').exec(html);
+  return forward?.[1] ?? reverse?.[1] ?? '';
+};
+const canonicalHref = html => /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1] ?? '';
 const validateSafeExecution = (value, label) => {
   if (value === undefined) return;
   assert.deepEqual(Object.keys(value).sort(), ['mode', 'status', 'validatedAt', 'executionBoundary', 'preparation', 'checks', 'candidateTaskIds', 'humanGateTaskIds'].sort(), `${label} safe execution fields are invalid`);
@@ -81,10 +88,18 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const [pageText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
     const sharePageResponses = await Promise.all(sharedResultIds.map(id => request(`/share/${id}/`)));
     const sharePageTexts = await Promise.all(sharePageResponses.map(response => response.text()));
+    assert.equal(canonicalHref(pageText), `${base}/`, 'live root canonical URL is invalid');
+    assert.ok(metaContent(pageText, 'property', 'og:title'), 'live root is missing an Open Graph title');
+    assert.ok(metaContent(pageText, 'property', 'og:description'), 'live root is missing an Open Graph description');
+    assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';
-      assert.match(sharePage, new RegExp(`property="og:title" content="공유받은 하루 리듬:`), `share page ${id} is missing an Open Graph title`);
-      assert.ok(sharePage.includes(`social-rhythm-${id}.png`), `share page ${id} is missing its result image`);
+      assert.match(metaContent(sharePage, 'property', 'og:title'), /^공유받은 하루 리듬:/, `share page ${id} is missing an Open Graph title`);
+      assert.ok(metaContent(sharePage, 'property', 'og:description'), `share page ${id} is missing an Open Graph description`);
+      assert.equal(canonicalHref(sharePage), `${base}/share/${id}/`, `share page ${id} canonical URL is invalid`);
+      assert.equal(metaContent(sharePage, 'property', 'og:url'), `${base}/share/${id}/`, `share page ${id} Open Graph URL is invalid`);
+      assert.equal(metaContent(sharePage, 'property', 'og:image'), `${base}/assets/social-rhythm-${id}.png`, `share page ${id} Open Graph image is invalid`);
+      assert.equal(metaContent(sharePage, 'name', 'twitter:image'), `${base}/assets/social-rhythm-${id}.png`, `share page ${id} Twitter image is invalid`);
       assert.ok(sharePage.includes(`?rhythm=${id}`), `share page ${id} is missing the app handoff`);
       assert.ok(!/제한적|결과가 일치하지|정량 메타분석|이상사례|유의하지 않음/i.test(sharePage), `share page ${id} contains blocked research copy`);
     }
