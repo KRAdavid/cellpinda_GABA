@@ -17,14 +17,12 @@ const taskGraph = await readJson('data/task-graph.json');
 const roleRegistry = await readJson('data/tf-role-registry.json');
 const goalContract = await readJson('data/goal-contract.json');
 const fail = message => { throw new Error(`Public export invalid: ${message}`); };
+const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const isHttps = value => {
   try { return new URL(value).protocol === 'https:'; } catch { return false; }
 };
 const isSmartStore = value => {
-  try {
-    const url = new URL(value);
-    return url.protocol === 'https:' && url.hostname === 'smartstore.naver.com' && url.pathname === '/cellpinda/products/4701017202';
-  } catch { return false; }
+  try { return new URL(value).href === approvedSmartStoreUrl; } catch { return false; }
 };
 
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');

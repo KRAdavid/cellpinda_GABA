@@ -7,10 +7,7 @@ const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4
 
 const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
 const isSmartStore = value => {
-  try {
-    const url = new URL(value);
-    return url.protocol === 'https:' && url.hostname === 'smartstore.naver.com' && url.pathname === '/cellpinda/products/4701017202';
-  } catch { return false; }
+  try { return new URL(value).href === approvedSmartStoreUrl; } catch { return false; }
 };
 const expectedDecisionOptionIds = state => state === 'VERIFYING' ? ['accept', 'rework'] : state === 'WAITING' || state === 'BACKLOG' ? ['hold', 'promote'] : state === 'READY' ? ['sandbox', 'hold'] : state === 'RUNNING' ? ['verify', 'retry'] : ['preserve', 'reopen'];
 const approvalRiskClasses = new Set(['D_EXTERNAL_REVERSIBLE', 'E_EXTERNAL_COMMITMENT', 'F_LEGAL_IRREVERSIBLE']);
