@@ -3,6 +3,7 @@ import {readFile} from 'node:fs/promises';
 const ledger = JSON.parse(await readFile(new URL('../data/content-ledger.json', import.meta.url), 'utf8'));
 const researchLibrary = await readFile(new URL('../src/components/ResearchLibrary.tsx', import.meta.url), 'utf8');
 const reviewExperience = await readFile(new URL('../src/components/ReviewExperience.tsx', import.meta.url), 'utf8');
+const gabaStory = await readFile(new URL('../src/components/GabaStory.tsx', import.meta.url), 'utf8');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
@@ -29,5 +30,6 @@ if (!researchLibrary.slice(productLink, productLink + 220).includes('셀핀다 �
 if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must not render internal result or limitation fields');
 if (researchLibrary.includes('숫자와 출처 더 확인하기')) fail('consumer research UI must use the conditions-and-source label');
 if (/전체\s*구매자의\s*경험|제품\s*효과를\s*입증하는\s*연구\s*자료는\s*아니/.test(reviewExperience)) fail('consumer review UI must use context-first copy');
+if (/연구 카드를 준비하고 있어요|후기를 확인할 수 있는 경로를 준비하고 있습니다|GABA 기본 자료를 확인하고 있습니다/.test(`${researchLibrary}\n${reviewExperience}\n${gabaStory}`)) fail('consumer UI must not expose empty or preparation-state copy');
 
 console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability'], detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-section-product-link', status: 'ok'}));
