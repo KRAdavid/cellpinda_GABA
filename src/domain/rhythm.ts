@@ -87,7 +87,7 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
     suggestions: ['내일 할 일을 짧게 적고 오늘의 일을 마무리해 보세요.', '저녁에 화면과 알림을 잠시 내려놓는 시간을 정해 보세요.'],
     recoveryLevel: 'prioritize',
     recoveryHeading: '멈춤을 먼저 예약해 보세요',
-    recoveryDescription: '체내 GABA 수치나 부족 여부를 확인한 결과는 아니에요. 다만 긴장이 오래 이어졌다면, 몸과 생각이 안정될 수 있도록 짧은 휴식을 하루 일정에 먼저 넣어 보세요.',
+    recoveryDescription: '긴장이 오래 이어졌다면, GABA가 신경 신호의 균형 조절에 관여한다는 이야기를 참고하며 몸과 생각이 안정될 수 있도록 짧은 휴식을 하루 일정에 먼저 넣어 보세요.',
   },
   sleep: {
     id: 'sleep',
@@ -96,7 +96,7 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
     suggestions: ['잠들기 전 같은 순서로 조명·화면·호흡을 낮추는 루틴을 만들어 보세요.', '잠자리에서 해결할 일은 메모장에 맡기고 내일로 미뤄 보세요.'],
     recoveryLevel: 'prioritize',
     recoveryHeading: '잠으로 넘어가는 다리를 놓아 보세요',
-    recoveryDescription: '잠들기 어려운 날이 이어진다는 답변 신호를 살펴본 거예요. GABA가 뇌의 신경 신호를 억제하는 데 관여해 안정 상태와 관련된다는 설명을 읽고, 내 수면 루틴에 필요한 휴식을 찾아보세요.',
+    recoveryDescription: '잠자리에서 전환하는 흐름을 돌아본 결과예요. GABA가 신경 신호의 균형 조절에 관여해 안정과 관련된다는 설명을 읽고, 내 수면 루틴에 필요한 휴식을 찾아보세요.',
   },
   irregular: {
     id: 'irregular',
@@ -105,7 +105,7 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
     suggestions: ['일정표에 5분짜리 멈춤을 하나 넣고 알림을 설정해 보세요.', '휴식 시간에는 화면 대신 물·호흡·창밖 보기처럼 자극이 적은 행동을 골라 보세요.'],
     recoveryLevel: 'prioritize',
     recoveryHeading: '적극적인 휴식을 일정에 넣어 보세요',
-    recoveryDescription: '휴식이 저절로 생기기를 기다리기보다 짧고 반복 가능한 멈춤을 먼저 만들어 보세요. 이 체크는 GABA 결핍을 진단하지 않지만, 안정과 회복을 위한 행동을 시작할 신호가 될 수 있어요.',
+    recoveryDescription: '휴식이 저절로 생기기를 기다리기보다 짧고 반복 가능한 멈춤을 먼저 만들어 보세요. GABA가 안정과 관련된 물질이라는 이야기를 참고해 회복을 위한 행동을 시작해 보세요.',
   },
   sensory: {
     id: 'sensory',
@@ -119,11 +119,11 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   unrested: {
     id: 'unrested',
     name: '회복 우선형',
-    description: '답변에서는 잠을 잔 뒤에도 다시 움직일 여유가 적다고 느낀 모습이 두드러졌어요. 실제 회복 능력을 측정한 결과는 아니에요.',
+    description: '답변에서는 잠을 잔 뒤의 회복감을 돌아본 모습이 두드러졌어요. 생활 속 느낌을 바탕으로 한 리듬 이야기예요.',
     suggestions: ['쉬는 공간의 빛·소리·온도가 편안한지 살펴보세요.', '쉬었던 시간과 다음 날의 느낌을 짧게 기록해 나에게 맞는 조건을 찾아보세요.'],
     recoveryLevel: 'prioritize',
     recoveryHeading: '회복을 가장 먼저 돌볼 시간이에요',
-    recoveryDescription: '아침의 느낌이 무거운 날이 겹쳤다는 답변 신호예요. GABA가 안정에 관여하는 물질이라는 설명은 참고가 될 수 있지만, 결핍이나 질환을 판단하는 결과는 아니므로 수면·휴식 환경부터 적극적으로 살펴보세요.',
+    recoveryDescription: '아침의 회복감을 돌아본 결과예요. GABA가 안정에 관여하는 물질이라는 설명을 참고하며 수면·휴식 환경부터 적극적으로 살펴보세요.',
   },
   steady: {
     id: 'steady',

@@ -307,7 +307,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
           <p className="rhythm-recovery-kicker">PAUSE → RECOVERY</p>
           <h3>휴식은 멈추는 일이 아니라,<br />뇌가 다시 회복할 시간을 만드는 일입니다.</h3>
           <p>몸은 움직여도 머리가 먼저 지친 느낌이 들 수 있습니다. 지속적인 생각과 자극이 이어졌다면 신호를 억지로 밀어붙이기보다 잠깐 멈추고, 쉬고, 다시 회복하는 흐름을 만들어 보세요.</p>
-          <p className="rhythm-recovery-disclaimer">이 안내와 체크는 뇌의 과부하나 GABA 부족을 진단하지 않습니다. 지금 적극적인 휴식을 시작할 타이밍을 스스로 알아차리는 데 목적이 있어요.</p>
+          <p className="rhythm-recovery-disclaimer">이 안내와 체크는 생활 신호를 돌아보는 도구예요. 지금 적극적인 휴식을 시작할 타이밍을 스스로 알아차리는 데 목적이 있어요.</p>
         </div>
         <ul className="rhythm-load-signals" aria-label="뇌가 쉴 틈이 없을 때 느낄 수 있는 신호">
           <li><strong>생각 과다</strong><span>머릿속이 계속 이어져요</span></li>
@@ -360,7 +360,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
           </div>
         </div>
       ) : (
-        <div className="rhythm-start-panel"><div><h3>오늘의 나에게,<br />1분의 여백.</h3><p>생각을 마무리할 틈, 화면에서 벗어날 틈, 잠으로 넘어갈 틈.<br />휴식 후 다시 회복할 수 있도록 작은 질문부터 시작해 보세요.</p><p className="rhythm-gaba-intro">GABA는 뇌의 신경 신호를 억제하는 데 관여해 안정과 관련된 물질이에요. 이 체크는 GABA가 부족한지 진단하지 않고, 적극적인 휴식을 시작할 신호를 찾습니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>1분 리듬 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />의학적 진단이나 체내 GABA 측정이 아닙니다.</p></div></div>
+        <div className="rhythm-start-panel"><div><h3>오늘의 나에게,<br />1분의 여백.</h3><p>생각을 마무리할 틈, 화면에서 벗어날 틈, 잠으로 넘어갈 틈.<br />휴식 후 다시 회복할 수 있도록 작은 질문부터 시작해 보세요.</p><p className="rhythm-gaba-intro">GABA는 뇌의 신경 신호 균형 조절에 관여해 안정과 관련된 물질이에요. 이 체크는 내 생활 리듬을 돌아보며 적극적인 휴식을 시작할 신호를 찾습니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>1분 리듬 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />의학적 진단이나 체내 GABA 측정이 아닙니다.</p></div></div>
       )}
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
