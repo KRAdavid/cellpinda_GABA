@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 const readJson = async relative => JSON.parse(await readFile(new URL(`../${relative}`, import.meta.url), 'utf8'));
 const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
+const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const teaser = await readJson('data/teaser-manifest.json');
 const teaserPreview = await readJson('public/data/teaser-preview.json');
 const operationsQueue = await readJson('public/data/operations-queue.json');
@@ -25,6 +26,7 @@ const isSmartStore = value => {
 };
 
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
+if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 신경 신호의 균형 조절에 관여하는 물질입니다/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || !/gaba-master-index\.json/i.test(indexHtml) || !/smartstore\.naver\.com\/cellpinda/i.test(indexHtml)) fail('index.html must keep a readable static fallback with product, research, and Smart Store links');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');
