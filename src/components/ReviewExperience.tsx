@@ -81,7 +81,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
           </div>)}
           <p className="review-experience-context">후기는 작성자의 상황과 사용 조건을 담은 개인 경험입니다. 연구 카드와 제품 정보를 함께 살펴보며 나에게 맞는 선택 기준을 세워 보세요.</p>
         </div> : null}
-        {quotes.length > 0 ? <div className="review-experience-questions" aria-label="후기를 읽을 때 확인할 세 가지">
+        {(quotes.length > 0 || destinations.length > 0) ? <div className="review-experience-questions" aria-label={quotes.length > 0 ? '후기를 읽을 때 확인할 세 가지' : '스마트스토어 후기를 읽을 때 확인할 세 가지'}>
           {readingQuestions.map((question, index) => <article key={question.title}>
             <span className="review-experience-number" aria-hidden="true">0{index + 1}</span>
             <div><h3>{question.title}</h3><p>{question.text}</p></div>
