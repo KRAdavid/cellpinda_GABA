@@ -31,6 +31,8 @@ jobs:
         run: node scripts/validate-tf-pulse.mjs
       - name: Generate TF decision pulse
         run: node scripts/tf-pulse.mjs --json > tf-pulse.json
+      - name: Execute safe internal TF checks
+        run: node scripts/run-safe-tf-actions.mjs tf-pulse.json --out tf-safe-run.json > tf-safe-run-summary.json
       - name: Persist safe pulse heartbeat
         run: |
           node scripts/write-tf-pulse-heartbeat.mjs tf-pulse.json
@@ -56,12 +58,23 @@ jobs:
             echo
             echo '```json'
             cat tf-pulse.json
+          echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo
+            echo '## Safe internal TF run'
+            echo
+            echo '```json'
+            cat tf-safe-run-summary.json
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Upload pulse artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: tf-pulse-${{ github.run_id }}
-          path: tf-pulse.json
+          path: |
+            tf-pulse.json
+            tf-safe-run.json
+            tf-safe-run-summary.json
           if-no-files-found: error
           retention-days: 14
