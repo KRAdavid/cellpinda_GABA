@@ -99,6 +99,17 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     ]);
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
     const [pageText, robotsText, sitemapText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
+    const moduleSources = [...pageText.matchAll(/<script[^>]+type="module"[^>]+src="([^"]+)"/gi)].map(match => match[1]).filter(Boolean);
+    assert.ok(moduleSources.length > 0, 'live root must expose a module bundle for the consumer UI');
+    const moduleBundles = await Promise.all(moduleSources.map(async source => {
+      const url = new URL(source, `${base}/`);
+      const response = await fetch(`${url.href}${url.search ? '&' : '?'}release-smoke=1`);
+      if (!response.ok) throw new Error(`consumer bundle returned HTTP ${response.status}`);
+      return response.text();
+    }));
+    const consumerBundle = moduleBundles.join('\n');
+    assert.ok(consumerBundle.includes('발효가바 이야기 영상 보기'), 'live consumer bundle must contain the duration-neutral teaser CTA');
+    assert.ok(!consumerBundle.includes('발효가바가 무엇인지 30초'), 'live consumer bundle still contains the retired teaser duration promise');
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
     assert.match(robotsText, /Disallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops/, 'live robots.txt must keep internal paths out of discovery');
     const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
