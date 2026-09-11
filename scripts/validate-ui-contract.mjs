@@ -17,6 +17,7 @@ const review = await read('src/components/ReviewExperience.tsx');
 const teaser = await read('src/components/TeaserPreview.tsx');
 const research = await read('src/components/ResearchLibrary.tsx');
 const story = await read('src/components/GabaStory.tsx');
+const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
 const indexHtml = await read('index.html');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
 const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
@@ -27,6 +28,10 @@ for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'review
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
 requireMatch(app, /<nav aria-label="주 메뉴"/, 'consumer navigation label is missing');
+requireMatch(app, /analyticsConsentGranted/, 'analytics events must be consent-gated');
+requireMatch(app, /<AnalyticsConsent\/>/, 'analytics consent control is missing from the consumer footer');
+requireMatch(analyticsConsent, /이름·연락처·문항별 답변은 보내지 않습니다/, 'analytics consent copy must state its privacy boundary');
+requireMatch(analyticsConsent, /측정 허용|측정하지 않기/, 'analytics consent must provide explicit allow and deny choices');
 requireMatch(app, /const isLocalHost = \['localhost', '127\.0\.0\.1', '\[::1\]'\]\.includes\(location\.hostname\)/, 'internal operations route must be local-host gated');
 requireMatch(app, /const operationsView = isLocalHost && \(requestedView === 'ops' \|\| currentPath === '\/ops'\)/, 'internal operations route must not render on public hosts');
 const nav = app.match(/<nav[\s\S]*?<\/nav>/)?.[0] || '';

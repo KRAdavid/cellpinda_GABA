@@ -9,8 +9,10 @@ import TeaserPreview from './components/TeaserPreview';
 import ProductShare from './components/ProductShare';
 import PurchaseQuestions from './components/PurchaseQuestions';
 import OperationsMvp from './components/OperationsMvp';
+import AnalyticsConsent from './components/AnalyticsConsent';
 import {apiEndpoint} from './api-origin';
 import {resultTypes, rhythmIdFromUrl} from './domain/rhythm';
+import {analyticsConsentGranted} from './domain/analytics-consent';
 const Admin = lazy(() => import('./components/Admin'));
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
 type Product={id:string;name:string;amountMg:number;servings:number;totalG:number;officialUrl:string;availability?:string;priceDisplay?:string|null};
@@ -29,8 +31,9 @@ const campaignId=safeQueryValue('campaign');
 const referralId=(()=>{const value=safeQueryValue('ref');return value.length>=8?value:'';})();
 const seenEvents=new Set<string>();
 let eventQueue=Promise.resolve();
-function trackOnce(name:string,properties:Record<string,string>={}){if(seenEvents.has(name))return;seenEvents.add(name);track(name,properties)}
+function trackOnce(name:string,properties:Record<string,string>={}){if(seenEvents.has(name)||!analyticsConsentGranted())return;seenEvents.add(name);track(name,properties)}
 function track(name:string,properties:Record<string,string>={}){
+ if(!analyticsConsentGranted())return;
  const endpoint=apiEndpoint('/api/events');
  if(!endpoint)return;
  const enriched={...properties,...(campaignId?{campaignId}:{}),...(referralId?{referralId}:{})};
@@ -101,6 +104,11 @@ export default function App(){
   return()=>observer.disconnect();
  },[content,operationsView,currentPath,adminView,accountView]);
  useEffect(()=>{
+  const onConsent=()=>{if(!adminView && !accountView && !operationsView)trackOnce('landing_view',{path:'/'});};
+  window.addEventListener('cellpinda:analytics-consent-changed',onConsent);
+  return()=>window.removeEventListener('cellpinda:analytics-consent-changed',onConsent);
+ },[operationsView,adminView,accountView]);
+ useEffect(()=>{
  if(!content||currentPath!=='/')return;
   const url=new URL(location.href);
   const productView=url.searchParams.getAll('view').length===1&&url.searchParams.get('view')==='products'&&!url.searchParams.has('rhythm');
@@ -125,5 +133,5 @@ export default function App(){
  <ResearchLibrary claims={content.claims} onOpen={()=>track('evidence_opened',{path:'/research'})}/>
  </> : <ContentFallback loading={loading} onRetry={()=>setRetryKey(value=>value+1)}/>} 
  <SevenDayChallenge onEvent={track}/>
- <section className="closing"><div className="wrap between"><h2>오늘의 나를 돌아보는 시간.<br/>지금, 시작해 볼까요?</h2><a className="button light" href="#rhythm">1분 리듬 체크 <ArrowRight/></a></div></section></main><footer className="wrap footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>하루 리듬을 돌아보고, 충분히 알고 선택하세요.</p><a href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noreferrer">스마트스토어 ↗</a><a href={`${siteRoot}?view=account`}>내 기록</a></footer></>;
+ <section className="closing"><div className="wrap between"><h2>오늘의 나를 돌아보는 시간.<br/>지금, 시작해 볼까요?</h2><a className="button light" href="#rhythm">1분 리듬 체크 <ArrowRight/></a></div></section></main><footer className="wrap footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>하루 리듬을 돌아보고, 충분히 알고 선택하세요.</p><a href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noreferrer">스마트스토어 ↗</a><a href={`${siteRoot}?view=account`}>내 기록</a><AnalyticsConsent/></footer></>;
 }
