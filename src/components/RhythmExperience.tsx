@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
 import { classifyRhythm, questions, resultTypes } from '../domain/rhythm';
-import type { RhythmId, RhythmResult, RhythmType } from '../domain/rhythm';
+import type { AnswerValue, RhythmId, RhythmResult, RhythmType } from '../domain/rhythm';
 import './rhythm.css';
 
 export interface RhythmExperienceProps {
@@ -109,8 +109,13 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const resultViewed=useRef(false);
   const questionRef = useRef<HTMLLegendElement>(null);
   const resultRef = useRef<HTMLHeadingElement>(null);
+  const autoAdvanceTimer = useRef<number | null>(null);
   const type = result?.type ?? sharedType;
   const question = questions[step]!;
+
+  useEffect(() => () => {
+    if (autoAdvanceTimer.current !== null) window.clearTimeout(autoAdvanceTimer.current);
+  }, []);
 
   useEffect(() => {
     if (started && !type) questionRef.current?.focus();
@@ -131,6 +136,10 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   }, [type]);
 
   function start() {
+    if (autoAdvanceTimer.current !== null) {
+      window.clearTimeout(autoAdvanceTimer.current);
+      autoAdvanceTimer.current = null;
+    }
     if (sharedType) setFriendType(compareConsent ? sharedType : null);
     setSharedType(null);
     setResult(null);
@@ -149,14 +158,44 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     resultViewed.current=false;
   }
 
-  function next() {
-    if (answers[step] === undefined) return;
-    if (step < questions.length - 1) setStep(current => current + 1);
-    else {
-      setResult(classifyRhythm(answers as number[]));
-      onEvent('rhythm_complete');
-
+  function next(selectedValue?: AnswerValue) {
+    const answer = selectedValue ?? answers[step];
+    if (answer === undefined) return;
+    if (autoAdvanceTimer.current !== null) {
+      window.clearTimeout(autoAdvanceTimer.current);
+      autoAdvanceTimer.current = null;
     }
+    const completedAnswers = answers.map((current, index) => index === step ? answer : current);
+    if (step < questions.length - 1) {
+      setAnswers(completedAnswers);
+      setStep(current => current + 1);
+    }
+    else {
+      setAnswers(completedAnswers);
+      setResult(classifyRhythm(completedAnswers as number[]));
+      onEvent('rhythm_complete');
+    }
+  }
+
+  function chooseAnswer(value: AnswerValue) {
+    if (!answerStarted.current) {
+      answerStarted.current = true;
+      onEvent('rhythm_start');
+    }
+    setAnswers(current => current.map((answer, index) => index === step ? value : answer));
+    if (autoAdvanceTimer.current !== null) window.clearTimeout(autoAdvanceTimer.current);
+    autoAdvanceTimer.current = window.setTimeout(() => {
+      autoAdvanceTimer.current = null;
+      next(value);
+    }, 180);
+  }
+
+  function previous() {
+    if (autoAdvanceTimer.current !== null) {
+      window.clearTimeout(autoAdvanceTimer.current);
+      autoAdvanceTimer.current = null;
+    }
+    setStep(current => current - 1);
   }
 
   async function copyLink() {
@@ -246,8 +285,8 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
         <div className="rhythm-question-layout">
           <div className="rhythm-progress-area"><p className="rhythm-eyebrow">나의 하루 리듬 체크</p><p className="rhythm-step"><strong>{String(step + 1).padStart(2, '0')}</strong><span>/ 05</span></p><progress value={step + 1} max={5} aria-label={`전체 5문항 중 ${step + 1}번째 질문`} /><p className="rhythm-note">답변은 이 화면에서만 사용하며<br />서버에 전송하거나 저장하지 않아요.</p></div>
           <div className="rhythm-question-content">
-            <fieldset key={question.id}><legend ref={questionRef} tabIndex={-1}>{question.prompt}<small>{question.helper}</small></legend><div className="rhythm-options">{question.options.map(option => <label key={option.value} className={answers[step] === option.value ? 'selected' : ''}><input type="radio" name={question.id} value={option.value} checked={answers[step] === option.value} onChange={() => {if(!answerStarted.current){answerStarted.current=true;onEvent('rhythm_start')}setAnswers(current => current.map((answer, index) => index === step ? option.value : answer))}} /><span>{option.label}</span><span className="rhythm-option-mark" aria-hidden="true">{answers[step] === option.value ? '✓' : ''}</span></label>)}</div></fieldset>
-            <div className="rhythm-navigation"><button type="button" className="rhythm-text-button" onClick={() => setStep(current => current - 1)} disabled={step === 0}><ChevronLeft size={18} aria-hidden="true" /> 이전</button><button type="button" className="rhythm-button" disabled={answers[step] === undefined} onClick={next}>{step === 4 ? '내 리듬 만나기' : '다음 질문'} <ArrowRight size={18} aria-hidden="true" /></button></div>
+            <fieldset key={question.id}><legend ref={questionRef} tabIndex={-1}>{question.prompt}<small>{question.helper}</small></legend><div className="rhythm-options">{question.options.map(option => <label key={option.value} className={answers[step] === option.value ? 'selected' : ''}><input type="radio" name={question.id} value={option.value} checked={answers[step] === option.value} onChange={() => chooseAnswer(option.value)} /><span>{option.label}</span><span className="rhythm-option-mark" aria-hidden="true">{answers[step] === option.value ? '✓' : ''}</span></label>)}</div><p className="rhythm-auto-advance-note">답을 고르면 다음 질문으로 자동 이동해요.</p></fieldset>
+            <div className="rhythm-navigation"><button type="button" className="rhythm-text-button" onClick={previous} disabled={step === 0}><ChevronLeft size={18} aria-hidden="true" /> 이전</button><button type="button" className="rhythm-button" disabled={answers[step] === undefined} onClick={() => next()}>{step === 4 ? '내 리듬 만나기' : '다음 질문'} <ArrowRight size={18} aria-hidden="true" /></button></div>
           </div>
         </div>
       ) : (
