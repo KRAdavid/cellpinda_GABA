@@ -1,6 +1,6 @@
 # 전체 목표 완료 간극 점검
 
-기준일 2026-09-12. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 [GitHub Actions 34632823311](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34632823311)와 2026-09-12 공개 URL 재검증을 기준으로 한다.
+기준일 2026-09-12. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 [GitHub Actions 34633566090](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34633566090)와 2026-09-12 공개 URL 재검증을 기준으로 한다.
 
 커밋 `b5e70b4`에서 Node/SQLite와 Worker/D1의 초기화 시 canonical 스마트스토어 후기 목적지를 원장 해시 기준으로 동기화했다. 영구 DB에 남은 이전 목적지만 revision·audit과 함께 보정하며, 인용 후기와 운영자 수정본은 보존한다. 60개 회귀 테스트, 타입검사, production build, 로컬 Worker/D1 HTTP에서 content 200(후기 1건)과 샌드박스 PUT/GET/DELETE 200을 확인했다. `docs/B2_MATERIAL_VERIFICATION_20260911.md`에는 완제품 포장 자료와 원료 제외 경계를 묶었고, `goal:next`는 B2 검증 진행을 별도 표시한다. 원격 Cloudflare D1·백업 복구는 여전히 외부 운영 조건이다.
 
@@ -471,3 +471,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 라이브 공개 검증기가 제품의 스마트스토어 상세 URL뿐 아니라 승인된 후기 목적지의 ID와 `sourceUrl`도 함께 대조하도록 보강했다. `shop-review-destination-1500`이 `https://smartstore.naver.com/cellpinda/products/4701017202`와 어긋나거나 후기 수가 승인 export와 달라지면 smoke가 실패한다. 로컬 검증·80개 테스트·타입검사와 GitHub Actions `34632823311`의 Pages 게시·Worker 설정 점검·라이브 smoke가 모두 성공했다.
 
 이번 가드는 사용자가 요청한 “원문에서, 맥락까지” CTA가 다른 상품이나 스토어 홈으로 우회되지 않음을 배포 응답에서 직접 확인하는 검증이며, 실제 후기 원문 인용 권한을 새로 승인한 것은 아니다.
+
+## 2026-09-12 로컬 자료 경로 자동 탐색 보강
+
+로컬 완제품 감사 매니페스트에 사용자가 처음 지정한 `D:\셀핀다\업무폴더\_정성배\바탕 화면\자료\GABA\_Material`을 요청 경로로 보존하고, 현재 PC에서 실제 발견된 `D:\셀핀다\업무폴더_정성배\바탕 화면\자료\GABA_Material`을 함께 탐색하도록 했다. 감사는 같은 파일을 중복 계산하지 않으며, 자료가 없는 경로는 다른 루트의 후보 판정에 영향을 주지 않는다. 최신 로컬 사이클은 완제품 후보 5건·원료 벌크 자료 제외 1건·주문 입력 WAITING·공개 export 변경 없음으로 확인됐다. 이 변경은 자료 발견 경로만 보강하며 B2 표시 승인이나 공개 문구 갱신을 자동 수행하지 않는다.

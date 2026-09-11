@@ -14,7 +14,7 @@
 
 `/account`는 정적 호스트에서 회원 API 대신 브라우저 7일 기록 안내로 전환하고, `/admin`은 운영 Worker가 없다는 안내를 보여 준다. 두 화면 모두 Worker API가 연결된 호스트에서만 서버 기능을 요청한다.
 
-코드 기준 release HEAD는 `c97c91e`이며, 해당 변경의 [GitHub Actions 34632206455](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34632206455)에서 타입검사·테스트·빌드·Pages·라이브 smoke가 성공했다.
+코드 기준 release HEAD는 `76e03ee`이며, 해당 변경의 [GitHub Actions 34633566090](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34633566090)에서 타입검사·테스트·빌드·Pages·라이브 smoke가 성공했다.
 
 ## 2026-09-12 소비자 공유·구매 흐름 재검증
 
@@ -62,3 +62,7 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 ## 2026-09-12 스마트스토어 후기 목적지 라이브 회귀 확인
 
 라이브 공개 JSON에서 제품 `officialUrl`과 승인된 후기 목적지 `sourceUrl`이 모두 `https://smartstore.naver.com/cellpinda/products/4701017202`인지 확인했다. 후기 목적지 ID·개수까지 검증하는 smoke 보강 커밋 `18f866f`의 [GitHub Actions 34632823311](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34632823311)이 검증·Pages 게시·라이브 smoke를 통과했다.
+
+## 2026-09-12 로컬 자료 루트 자동 탐색 QA
+
+사용자 지정 요청 경로와 현재 PC에서 확인된 경로를 모두 매니페스트에 등록했다. `pnpm run audit:materials`와 `pnpm run audit:goal:local:json`을 다시 실행해 완제품 후보 5건·자료 7건·원료 자료 제외 1건을 확인했으며, 공개 export와 제품·후기 CTA는 변경되지 않았다.
