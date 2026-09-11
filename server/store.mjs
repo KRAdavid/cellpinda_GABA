@@ -85,7 +85,7 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
           } else if (legacyDestination.test(JSON.stringify(before)) || discouragedConsumerCopy.test(JSON.stringify(before))) {
             // Refresh only rows whose public destination/copy is known to be stale.
             // Preserve an operator hold instead of silently approving it.
-            after = {...before, ...canonical, id: before.id, status: before.status};
+            after = {...before, ...canonical, id: before.id, status: before.status === 'hold' ? 'hold' : canonical.status};
             reason = 'Current source ledger reconciliation refreshed stale public copy';
           }
           if (after) {
