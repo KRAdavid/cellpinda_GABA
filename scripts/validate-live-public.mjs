@@ -143,6 +143,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
     assert.ok(pageText.includes(approvedSmartStoreUrl), 'live static fallback must keep the approved Smart Store 1500 detail link');
     assert.ok(pageText.includes('스마트스토어에서 확인하기'), 'live static fallback must label the Smart Store destination for consumers');
+    assert.ok(pageText.includes('구매자 후기 원문 읽기'), 'live static fallback must expose the buyer review source label');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
     assert.equal(content.products[0].officialUrl, approvedSmartStoreUrl, 'live product must point to the Smart Store 1500 product');
