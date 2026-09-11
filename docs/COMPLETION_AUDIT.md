@@ -574,3 +574,9 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 후기 원문 목적지를 경로 일부가 아니라 승인된 전체 URL `https://smartstore.naver.com/cellpinda/products/4701017202`로 관리하도록 `REVIEW_DESTINATION_URL` 상수를 추가했다. 소비자 화면, Node API, Cloudflare Worker가 URL을 정규화한 뒤 이 값과 정확히 일치할 때만 목적지를 공개하며, 쿼리·해시가 붙은 변형 주소는 거부한다. 회귀 테스트를 추가하고 `validate:ui-contract`, `validate:public`, production build, 전체 84개 테스트와 GitHub Actions `34654975186`의 Pages·라이브 smoke를 통과했다.
 
 이 가드는 사용자가 지정한 스마트스토어 상품 상세 화면으로의 직결성을 보장한다. 스마트스토어 재고·가격, 후기 재게시 권한과 실제 구매 전환은 별도 운영 검증 항목이다.
+
+## 2026-09-12 정적 화면 후기 안내 일치
+
+자바스크립트를 사용할 수 없는 방문자도 후기 목적지를 오해하지 않도록 `index.html` 정적 fallback에 승인된 안내 문장 `스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.`를 추가했다. 구매자 후기 원문 링크와 제품 구매 링크는 동일한 가바 1500 스마트스토어 상세 주소로 유지된다. 커밋 `f025ef9`의 verify·Pages·라이브 smoke 워크플로 `34656072982`가 성공했고, 라이브 `content.json`·fallback HTML·공개 검증에서 문장·URL·750 제거를 다시 확인했다.
+
+이 보강은 접근성·정보 일관성을 위한 정적 안내이며, 후기 원문 재게시 권한이나 실제 구매 전환을 의미하지 않는다.
