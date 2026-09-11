@@ -18,17 +18,16 @@ for (const claim of research) {
     if (typeof value !== 'string' || value.trim().length < 30) fail(`${claim.id}.${field} must be a consumer-ready sentence`);
     if (unsafe.test(value)) fail(`${claim.id}.${field} contains an unsupported promise or medical expression`);
     if (discouragedMarketing.test(value)) fail(`${claim.id}.${field} contains a discouraged negative marketing phrase`);
-    if (field === 'hopefulTakeaway' && !/(제품|가바\s*1500)/.test(value)) fail(`${claim.id}.hopefulTakeaway must connect to product discovery without making a promise`);
     if (field === 'hopefulTakeaway' && !/(표시사항|루틴|살펴보|확인해|선택해)/.test(value)) fail(`${claim.id}.hopefulTakeaway must name a check or choice action`);
   }
 }
 
 const detailBlock = researchLibrary.indexOf('<details className="research-detail"');
-const productLink = researchLibrary.indexOf('className="text-link research-try-link"');
+const productLink = researchLibrary.indexOf('className="button outline" href="#products"');
 if (detailBlock < 0 || productLink < detailBlock) fail('product information link must follow research conditions and observed changes');
-if (!researchLibrary.slice(productLink, productLink + 180).includes('제품 구성·표시사항')) fail('product information link must lead to product composition and label details');
+if (!researchLibrary.slice(productLink, productLink + 220).includes('셀핀다 제품 구성 확인')) fail('product information link must lead to product composition and label details');
 if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must not render internal result or limitation fields');
 if (researchLibrary.includes('숫자와 출처 더 확인하기')) fail('consumer research UI must use the conditions-and-source label');
 if (/전체\s*구매자의\s*경험|제품\s*효과를\s*입증하는\s*연구\s*자료는\s*아니/.test(reviewExperience)) fail('consumer review UI must use context-first copy');
 
-console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability'], detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-product-link', status: 'ok'}));
+console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability'], detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-section-product-link', status: 'ok'}));

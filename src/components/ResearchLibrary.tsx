@@ -131,7 +131,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       <p id="research-search-help" className="note">공개된 연구의 질문·대상·조건·출처를 찾습니다. 자료 유형은 원문에 기록된 연구 설계 기준입니다.</p>
       <p className="research-library-count" role="status" aria-live="polite">전체 {studies.length}건 중 {visibleStudies.length}건</p>
     </> : null}
-    {studies.length === 0 ? <p className="note" role="status">연구 카드를 준비하고 있어요. 먼저 GABA 이야기와 제품 구성을 살펴보세요.</p> : visibleStudies.length === 0 ? <p className="research-library-empty">조건에 맞는 연구를 찾는 중이에요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
+    {studies.length === 0 ? <p className="note" role="status">연구 카드를 준비하고 있어요. 먼저 GABA 이야기와 제품 구성을 살펴보세요.</p> : visibleStudies.length === 0 ? <p className="research-library-empty">검색 조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
       const metadata = claim.metadata!;
       const quickFacts = [
         {label: '참여자', value: metadata.sampleSize, Icon: UsersRound},
@@ -166,7 +166,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
                   const value = metadata[key];
                   return typeof value === 'string' && value ? <div key={key}><dt>{label}</dt><dd>{value}</dd></div> : null;
                 })}</dl>
-                <div className="research-library-findings"><h4>이 연구가 주는 힌트</h4><p>{metadata.hopefulTakeaway || metadata.consumerSummary || '연구에서 살펴본 내용을 내 생활 리듬과 함께 천천히 비교해 보세요.'}</p></div>
+                <div className="research-library-findings"><h4>이 연구를 읽는 방법</h4><p>{metadata.hopefulTakeaway || metadata.consumerSummary || '연구에서 살펴본 내용을 내 생활 리듬과 함께 천천히 비교해 보세요.'}</p></div>
               </div>
             </details>
           </div>
@@ -175,10 +175,10 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
           )}</div>
         </details>
         {metadata.hopefulTakeaway ? <p className="research-library-hopeful"><strong>다음으로</strong>{metadata.hopefulTakeaway}</p> : null}
-        <a className="text-link research-try-link" href="#products">제품 구성·표시사항 보기 →</a>
         <button type="button" className="text-link research-copy" onClick={()=>copyStudy(claim.id)}>이 연구 링크 복사 ↗</button>
       </article>;
     })}
+    {visibleStudies.length > 0 ? <div className="research-library-next"><a className="button outline" href="#products">셀핀다 제품 구성 확인 →</a></div> : null}
     <p role="status" aria-live="polite">{linkStatus}</p>
     {manualLink?<label>연구 공유 링크<input className="research-manual-link" value={manualLink} readOnly onFocus={event=>event.target.select()}/></label>:null}
   </section>;
