@@ -115,7 +115,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   return <section id="research" className="section wrap research research-library" aria-labelledby="research-heading">
     <div className="section-head">
       <div><p className="chapter">연구를 쉽게 읽기</p><h2 id="research-heading">GABA는 어떤 질문으로<br />연구했을까요?</h2></div>
-      <p>핵심은 짧게, 조건은 펼쳐서.<br />연구 질문·조건·출처를 차례로 살펴보세요.</p>
+      <p>핵심은 짧게, 이야기는 펼쳐서.<br />연구 질문·관찰·출처를 차례로 살펴보세요.</p>
     </div>
     <div className="research-reading-path" aria-label="연구 읽는 순서">
       <div><span>01</span><strong>질문</strong><small>무엇을 궁금해했나요?</small></div>
@@ -129,7 +129,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <label htmlFor="research-type">자료 유형<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 자료 유형</option>{studyTypes.map(type => <option value={type} key={type}>{type}</option>)}</select></label>
         <button type="button" className="text-link" disabled={!query && !activeTopic && !activeType} onClick={() => { setQuery(''); setTopic(''); setStudyType(''); }}>검색·유형 초기화</button>
       </div>
-      <p id="research-search-help" className="note">공개된 연구의 질문·대상·조건·출처를 찾습니다. 자료 유형은 원문에 기록된 연구 설계 기준입니다.</p>
+      <p id="research-search-help" className="note">공개된 연구의 질문·대상·기간·출처를 찾습니다. 자료 유형은 원문에 기록된 연구 설계 기준입니다.</p>
       <p className="research-library-count" role="status" aria-live="polite">전체 {studies.length}건 중 {visibleStudies.length}건</p>
     </> : null}
     {visibleStudies.length === 0 ? <p className="research-library-empty">검색 조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
@@ -160,7 +160,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
             </div>
             <div className="research-library-boundary"><h4>셀핀다 제품은 이렇게 확인해요</h4><p>{metadata.productApplicability}</p></div>
             <details className="research-technical-detail">
-              <summary>연구 조건과 원문 확인하기</summary>
+              <summary>숫자와 출처 더 보기</summary>
               <div className="research-technical-detail-body">
                 <div className="research-library-overview"><h4>이 연구에서 본 내용</h4><p>{metadata.consumerSummary || claim.publicText}</p></div>
                 <dl className="research-library-facts">{facts.map(([key, label]) => {

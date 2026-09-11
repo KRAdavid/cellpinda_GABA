@@ -120,7 +120,7 @@ const masterIndex={
   schemaVersion:1,
   goalId:'GMVP-GABA-PUBLIC-MASTER-INDEX',
   title:'공개용 GABA 논문 기반 마스터 인덱스',
-  publicScope:'승인된 공개 HTTPS 출처가 있는 연구의 질문·조건·출처와 소비자 요약을 모아 둔 인덱스입니다. 연구와 제품 정보는 각자의 조건에 맞춰 차례로 살펴볼 수 있습니다.',
+  publicScope:'승인된 공개 HTTPS 출처가 있는 연구의 질문·대상·출처와 소비자 요약을 모아 둔 인덱스입니다. 연구와 제품 정보는 각자의 맥락에 맞춰 차례로 살펴볼 수 있습니다.',
   selectionRule:'승인 상태·공개 HTTPS 원문·필수 연구 필드·소비자 문장 검증을 모두 통과한 research-* 레코드만 포함합니다.',
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
