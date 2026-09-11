@@ -360,3 +360,9 @@ TF meeting packet에 `executionPolicy`를 추가해 READY·A/B/C 내부 위험�
 
 6시간 `TF decision pulse` workflow에 `run-safe-tf-actions.mjs`를 추가했다. CI에 없는 공개 패킷을 내부에서 재생성한 뒤 Goal Contract·연구 문구·티저 경계·샌드박스 MVP·공개 export·TF pulse의 읽기 전용 검사를 매회 실행하고, `safe_internal_tf_run` JSON을 run summary와 14일 artifact로 보존한다. 이 단계는 외부 API·게시·구매·승인·canonical 그래프 변경을 하지 않으며, 사람 게이트가 유지되는 동안 내부 검증을 계속하는 실행 증거다. workflow validator가 실행 순서·출력 파일·artifact를 검사한다.
 safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 ID·pulse 지문·게이트 목록·위험 등급·외부 효과 없음·검사 결과를 재검증하고 나서 heartbeat 저장으로 진행한다. 실행 기록과 검증 기록은 같은 artifact와 run summary에 남는다.
+
+## 2026-09-11 연구 적용 범위 선행 표시
+
+연구 카드의 소비자 흐름을 조정해 연구 결과와 완제품을 연결하는 문장보다 `이 연구가 말해 주는 범위`를 먼저 보여 주도록 했다. 그 다음에 `다음으로 확인해 볼 일`을 배치해 소비자가 연구 조건과 셀핀다 완제품 적용 한계를 읽은 뒤 제품 구성·표시사항을 스스로 살펴보게 한다. 희망적 문장은 유지하되 연구가 완제품 효능을 보장하는 것처럼 읽히지 않도록 순서와 레이블을 명확히 했다.
+
+커밋 `dcd7b69`의 [GitHub Actions 34553647190](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34553647190)은 검증·Pages 게시·라이브 smoke를 성공시켰고, 라이브 번들에서 새 레이블을 확인했다. 이 UX 보강은 연구 문구의 표시 순서를 개선하는 것이며 제품 표시 승인·후기 권한·실구매 대사·Worker 운영 연결을 대신하지 않는다.
