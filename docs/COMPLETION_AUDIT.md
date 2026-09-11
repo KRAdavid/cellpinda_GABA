@@ -1,8 +1,8 @@
 # 전체 목표 완료 간극 점검
 
-기준일 2026-09-12. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 [GitHub Actions 34633566090](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34633566090)와 2026-09-12 공개 URL 재검증을 기준으로 한다.
+기준일 2026-09-12. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 커밋 `f0db8cd`의 [GitHub Actions 34635928779](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34635928779)와 2026-09-12 공개 URL 재검증을 기준으로 한다.
 
-커밋 `b5e70b4`에서 Node/SQLite와 Worker/D1의 초기화 시 canonical 스마트스토어 후기 목적지를 원장 해시 기준으로 동기화했다. 영구 DB에 남은 이전 목적지만 revision·audit과 함께 보정하며, 인용 후기와 운영자 수정본은 보존한다. 60개 회귀 테스트, 타입검사, production build, 로컬 Worker/D1 HTTP에서 content 200(후기 1건)과 샌드박스 PUT/GET/DELETE 200을 확인했다. `docs/B2_MATERIAL_VERIFICATION_20260911.md`에는 완제품 포장 자료와 원료 제외 경계를 묶었고, `goal:next`는 B2 검증 진행을 별도 표시한다. 원격 Cloudflare D1·백업 복구는 여전히 외부 운영 조건이다.
+커밋 `b5e70b4`에서 Node/SQLite와 Worker/D1의 초기화 시 canonical 스마트스토어 후기 목적지를 원장 해시 기준으로 동기화했다. 이후 `f0db8cd`에서 revision 1 미편집 seed claim도 현재 원장의 소비자 문구·메타데이터로 재동기화하도록 보강했다. 영구 DB에 남은 이전 목적지와 미편집 seed만 revision·audit과 함께 보정하며, revision 2 이상 운영자 수정본과 `hold` 상태는 보존한다. 81개 회귀 테스트, 타입검사, production build, 로컬 Worker/D1 HTTP에서 content 200(후기 1건)과 샌드박스 PUT/GET/DELETE 200을 확인했다. `docs/B2_MATERIAL_VERIFICATION_20260911.md`에는 완제품 포장 자료와 원료 제외 경계를 묶었고, `goal:next`는 B2 검증 진행을 별도 표시한다. 원격 Cloudflare D1·백업 복구는 여전히 외부 운영 조건이다.
 
 **판정: 전체 goal 미완료. 1차 9개 전체 완료도 아직 선언할 수 없다.** 체험·콘텐츠·공유·서버 기반은 구현·시험됐지만 실제 후기, 현행 제품 정보, 실제 구매 분석과 영구 운영에 간극이 있다. 회원 기능은 로컬 실제 브라우저 검증까지 진행됐고 공개 임시주소에서는 꺼져 있다. 준비 코드·연결 후보·테스트 더블을 운영 연동으로 계산하지 않았다.
 
@@ -475,3 +475,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-12 로컬 자료 경로 자동 탐색 보강
 
 로컬 완제품 감사 매니페스트에 사용자가 처음 지정한 `D:\셀핀다\업무폴더\_정성배\바탕 화면\자료\GABA\_Material`을 요청 경로로 보존하고, 현재 PC에서 실제 발견된 `D:\셀핀다\업무폴더_정성배\바탕 화면\자료\GABA_Material`을 함께 탐색하도록 했다. 감사는 같은 파일을 중복 계산하지 않으며, 자료가 없는 경로는 다른 루트의 후보 판정에 영향을 주지 않는다. 최신 로컬 사이클은 완제품 후보 5건·원료 벌크 자료 제외 1건·주문 입력 WAITING·공개 export 변경 없음으로 확인됐다. 이 변경은 자료 발견 경로만 보강하며 B2 표시 승인이나 공개 문구 갱신을 자동 수행하지 않는다.
+
+## 2026-09-12 로컬 seed claim 자동 재동기화
+
+기존 로컬 SQLite에 남아 있던 revision 1 seed claim이 최신 승인 원장의 소비자 문구를 놓치던 경로를 `f0db8cd`에서 수정했다. 서버가 시작될 때 미편집 seed 행은 현재 원장의 공개 문구·메타데이터를 반영하고, revision 2 이상 운영자 수정본과 `hold` 상태는 유지한다. 로컬 API에서 GABA 정의, Smart Store 상세 목적지, 공개 금칙 문구 여부를 대조해 `productCount=1`, 지정 URL 일치, `blocked=false`를 확인했다. 회귀 테스트 81개·production build·GitHub Actions 34635928779·Pages 라이브 smoke가 성공했으며, 이 동기화는 실제 제품 표시 승인·후기 권한·주문 대사를 대신하지 않는다.
