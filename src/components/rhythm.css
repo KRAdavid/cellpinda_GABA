@@ -26,3 +26,5 @@
 .rhythm-load-signals strong{font-size:15px;font-weight:600;color:var(--rhythm-forest)}
 .rhythm-load-signals span{font-size:13px;line-height:1.65;color:#68806f}
 @media(max-width:760px){.rhythm-recovery-intro{grid-template-columns:1fr;gap:24px;margin-bottom:32px;padding:26px 22px}.rhythm-load-signals{gap:8px}.rhythm-load-signals li{padding:14px 15px;min-height:88px}}
+
+.rhythm-card-preview{width:min(100%,360px);border:1px solid #d9e5dc;border-radius:10px;display:block;margin:0 auto 20px;box-shadow:0 12px 32px rgba(24,56,43,.12)}

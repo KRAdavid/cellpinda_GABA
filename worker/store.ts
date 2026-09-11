@@ -5,8 +5,8 @@ import { opsStateIssue } from '../src/domain/ops-validation.ts';
 type RecordValue = Record<string, unknown>;
 type ContentRow = {id:string;kind:string;data:string;revision:number};
 type Content = RecordValue & {id:string;kind?:string;status?:string;revision?:number;publicText?:string|null;sourceIds?:string[];sources?:RecordValue[]};
-const EVENTS=new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
-const PATHS=new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin']);
+const EVENTS=new Set(['landing_view','hero_check_start','rhythm_check_started','rhythm_check_completed','rhythm_check_complete','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_source_click','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','result_share_click','result_share_success','shared_link_landed','friend_check_start','product_comparison_viewed','product_compare_view','purchase_outbound_clicked','purchase_cta_click','challenge_start','challenge_day_complete','seven_day_complete']);
+const PATHS=new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin','/teaser','/challenge']);
 const META=new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','result','limitations','productApplicability','question','searchThrough','studyCount']);
 const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result','/share','result_viewed'],['product_comparison','/products','product_comparison_viewed']];
 const OPS_MAX_BYTES=65536;
@@ -202,6 +202,8 @@ export function createStore(db:D1Database) {
       if(properties.path!==undefined){if(typeof properties.path!=='string' || !PATHS.has(properties.path))throw failure('Invalid path');clean.path=properties.path;}
       if(properties.channel!==undefined){if(typeof properties.channel!=='string' || !['native','clipboard','download','kakao','instagram','direct'].includes(properties.channel))throw failure('Invalid channel');clean.channel=properties.channel;}
       if(properties.questionId!==undefined){if(typeof properties.questionId!=='string' || !['amount','selection','label','reviews','evidence'].includes(properties.questionId))throw failure('Invalid question');clean.questionId=properties.questionId;}
+      if(properties.campaignId!==undefined){if(typeof properties.campaignId!=='string' || !/^[A-Za-z0-9_-]{1,64}$/.test(properties.campaignId))throw failure('Invalid campaign');clean.campaignId=properties.campaignId;}
+      if(properties.referralId!==undefined){if(typeof properties.referralId!=='string' || !/^[A-Za-z0-9_-]{8,64}$/.test(properties.referralId))throw failure('Invalid referral');clean.referralId=properties.referralId;}
       const result=await db.prepare('INSERT OR IGNORE INTO events(id,name,properties,created_at,flow_id) VALUES(?,?,?,?,?)').bind(body.eventId.toLowerCase(),body.name,JSON.stringify(clean),new Date().toISOString(),typeof body.flowId==='string'?body.flowId.toLowerCase():null).run();
       return {accepted:true,duplicate:result.meta.changes===0};
     },

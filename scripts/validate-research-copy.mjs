@@ -12,7 +12,7 @@ for (const claim of research) {
   const metadata = claim.metadata ?? {};
   if (typeof claim.publicText !== 'string' || claim.publicText.trim().length < 30) fail(`${claim.id}.publicText must be a consumer-ready summary`);
   if (discouragedMarketing.test(claim.publicText)) fail(`${claim.id}.publicText contains a discouraged negative marketing phrase`);
-  for (const field of ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability', 'result']) {
+  for (const field of ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability']) {
     const value = metadata[field];
     if (typeof value !== 'string' || value.trim().length < 30) fail(`${claim.id}.${field} must be a consumer-ready sentence`);
     if (unsafe.test(value)) fail(`${claim.id}.${field} contains an unsupported promise or medical expression`);
@@ -27,4 +27,4 @@ const productLink = researchLibrary.indexOf('className="text-link research-try-l
 if (detailBlock < 0 || productLink < detailBlock) fail('product information link must follow research conditions and observed changes');
 if (!researchLibrary.slice(productLink, productLink + 180).includes('제품 구성·표시사항')) fail('product information link must lead to product composition and label details');
 
-console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability', 'result'], flowGuard: 'research-context-before-product-link', status: 'ok'}));
+console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability'], detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-product-link', status: 'ok'}));

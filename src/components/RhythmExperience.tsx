@@ -15,9 +15,10 @@ function getSharedType(): RhythmType | null {
     ? resultTypes[id as RhythmId] : null;
 }
 
-function shareUrl(type: RhythmType): string {
+function shareUrl(type: RhythmType, referralId?: string): string {
   const url = new URL(import.meta.env.BASE_URL, window.location.origin);
   url.searchParams.set('rhythm', type.id);
+  if (referralId && /^[A-Za-z0-9_-]{8,64}$/.test(referralId)) url.searchParams.set('ref', referralId);
   url.hash = 'rhythm';
   return url.toString();
 }
@@ -103,7 +104,11 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const [cardFile, setCardFile] = useState<File | null>(null);
   const [message, setMessage] = useState('');
   const [manualLink, setManualLink] = useState('');
+  const [cardUrl, setCardUrl] = useState('');
   const sharedTracked=useRef(false);
+  const pointerSelecting=useRef(false);
+  const shareReferralRef=useRef('');
+  const getShareReferralId=()=>{if(!shareReferralRef.current){shareReferralRef.current=crypto.randomUUID().replaceAll('-','').slice(0,16)}return shareReferralRef.current};
   useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
   const answerStarted=useRef(false);
   const resultViewed=useRef(false);
@@ -135,12 +140,22 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     return () => { cancelled = true; };
   }, [type]);
 
+  useEffect(() => {
+    if (!cardFile) { setCardUrl(''); return; }
+    const url = URL.createObjectURL(cardFile);
+    setCardUrl(url);
+    return () => { URL.revokeObjectURL(url); setCardUrl(''); };
+  }, [cardFile]);
+
   function start() {
     if (autoAdvanceTimer.current !== null) {
       window.clearTimeout(autoAdvanceTimer.current);
       autoAdvanceTimer.current = null;
     }
-    if (sharedType) setFriendType(compareConsent ? sharedType : null);
+    if (sharedType) {
+      setFriendType(compareConsent ? sharedType : null);
+      onEvent('friend_check_start',{path:'/share'});
+    }
     setSharedType(null);
     setResult(null);
     setStarted(true);
@@ -174,17 +189,18 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       setAnswers(completedAnswers);
       setResult(classifyRhythm(completedAnswers as number[]));
       onEvent('rhythm_complete');
+      onEvent('rhythm_check_complete',{path:'/check'});
     }
   }
 
-  function chooseAnswer(value: AnswerValue) {
+  function chooseAnswer(value: AnswerValue, autoAdvance=true) {
     if (!answerStarted.current) {
       answerStarted.current = true;
       onEvent('rhythm_start');
     }
     setAnswers(current => current.map((answer, index) => index === step ? value : answer));
     if (autoAdvanceTimer.current !== null) window.clearTimeout(autoAdvanceTimer.current);
-    autoAdvanceTimer.current = window.setTimeout(() => {
+    if (autoAdvance) autoAdvanceTimer.current = window.setTimeout(() => {
       autoAdvanceTimer.current = null;
       next(value);
     }, 180);
@@ -200,12 +216,13 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
 
   async function copyLink() {
     if (!type) return;
-    const url = shareUrl(type);
+    const url = shareUrl(type,getShareReferralId());
     try {
       await navigator.clipboard.writeText(url);
       setMessage('링크를 복사했어요. 이 링크에는 유형만 포함되고 문항별 답변은 포함되지 않아요.');
       setManualLink('');
       onEvent('share_copy',{path:result?'/result':'/share',channel:'clipboard'});
+      onEvent('result_share_success',{path:result?'/result':'/share',channel:'clipboard'});
     } catch {
       setManualLink(url);
       setMessage('아래 링크를 선택해 직접 복사해 주세요.');
@@ -215,10 +232,12 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   async function share() {
     if (!type) return;
     onEvent('share_request',{path:result?'/result':'/share'});
+    onEvent('result_share_click',{path:result?'/result':'/share',channel:'native'});
     if (cardFile && navigator.share && navigator.canShare?.({ files: [cardFile] })) {
       try {
-        await navigator.share({ files: [cardFile], title: '셀핀다 하루 리듬 이야기', text: '하루의 생활 패턴을 함께 돌아봐요.', url: shareUrl(type) });
+        await navigator.share({ files: [cardFile], title: '셀핀다 하루 리듬 이야기', text: '하루의 생활 패턴을 함께 돌아봐요.', url: shareUrl(type,getShareReferralId()) });
         setMessage('공유 창을 이용했어요. 실제 전달 여부는 확인하지 않아요.');
+        onEvent('result_share_success',{path:result?'/result':'/share',channel:'native'});
         return;
       } catch (error) {
         if (error instanceof Error && error.name === 'AbortError') {
@@ -242,6 +261,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     anchor.remove();
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     onEvent('card_download',{path:result?'/result':'/share',channel:'download'});
+    onEvent('result_share_success',{path:result?'/result':'/share',channel:'download'});
     setMessage('PNG 카드 다운로드를 요청했어요.');
   }
 
@@ -288,6 +308,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <p className="rhythm-eyebrow">KEEP YOUR LITTLE MOMENT</p>
             <h3>나를 돌아본 순간을<br />한 장에 담아요.</h3>
             <p>카드와 공유 링크에는 생활 유형이 표시돼요. 문항별 답변은 담지 않습니다.</p>
+            {cardUrl && type ? <img className="rhythm-card-preview" src={cardUrl} alt={`${type.name} 결과 카드 미리보기`} /> : null}
             <button type="button" className="rhythm-button" onClick={share}>리듬 이야기 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
             <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>이미지 카드 저장 <Download size={18} aria-hidden="true" /></button>
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
@@ -300,7 +321,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
         <div className="rhythm-question-layout">
           <div className="rhythm-progress-area"><p className="rhythm-eyebrow">나의 하루 리듬 체크</p><p className="rhythm-step"><strong>{String(step + 1).padStart(2, '0')}</strong><span>/ 05</span></p><progress value={step + 1} max={5} aria-label={`전체 5문항 중 ${step + 1}번째 질문`} /><p className="rhythm-note">답변은 이 화면에서만 사용하며<br />서버에 전송하거나 저장하지 않아요.</p></div>
           <div className="rhythm-question-content">
-            <fieldset key={question.id}><legend ref={questionRef} tabIndex={-1}>{question.prompt}<small>{question.helper}</small></legend><div className="rhythm-options">{question.options.map(option => <label key={option.value} className={answers[step] === option.value ? 'selected' : ''}><input type="radio" name={question.id} value={option.value} checked={answers[step] === option.value} onChange={() => chooseAnswer(option.value)} /><span>{option.label}</span><span className="rhythm-option-mark" aria-hidden="true">{answers[step] === option.value ? '✓' : ''}</span></label>)}</div><p className="rhythm-auto-advance-note">답을 고르면 다음 질문으로 자동 이동해요.</p></fieldset>
+            <fieldset key={question.id}><legend ref={questionRef} tabIndex={-1}>{question.prompt}<small>{question.helper}</small></legend><div className="rhythm-options">{question.options.map(option => <label key={option.value} className={answers[step] === option.value ? 'selected' : ''} onPointerDown={()=>{pointerSelecting.current=true}} onKeyDown={()=>{pointerSelecting.current=false}}><input type="radio" name={question.id} value={option.value} checked={answers[step] === option.value} onChange={() => chooseAnswer(option.value,pointerSelecting.current)} /><span>{option.label}</span><span className="rhythm-option-mark" aria-hidden="true">{answers[step] === option.value ? '✓' : ''}</span></label>)}</div><p className="rhythm-auto-advance-note">터치로 고르면 다음 질문으로 자동 이동해요. 키보드는 다음 버튼으로 진행할 수 있어요.</p></fieldset>
             <div className="rhythm-navigation"><button type="button" className="rhythm-text-button" onClick={previous} disabled={step === 0}><ChevronLeft size={18} aria-hidden="true" /> 이전</button><button type="button" className="rhythm-button" disabled={answers[step] === undefined} onClick={() => next()}>{step === 4 ? '내 리듬 만나기' : '다음 질문'} <ArrowRight size={18} aria-hidden="true" /></button></div>
           </div>
         </div>

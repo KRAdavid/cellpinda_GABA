@@ -5,8 +5,8 @@ import { createHash, randomUUID } from 'node:crypto';
 import { reviewMutation, approvalMissing, publicReview, REVIEW_DESTINATION_TEXT } from '../src/domain/reviews.ts';
 import { opsStateIssue } from '../src/domain/ops-validation.ts';
 
-export const EVENT_NAMES = new Set(['landing_view','rhythm_check_started','rhythm_check_completed','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','shared_link_landed','product_comparison_viewed','purchase_outbound_clicked']);
-export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin']);
+export const EVENT_NAMES = new Set(['landing_view','hero_check_start','rhythm_check_started','rhythm_check_completed','rhythm_check_complete','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_source_click','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','result_share_click','result_share_success','shared_link_landed','friend_check_start','product_comparison_viewed','product_compare_view','purchase_outbound_clicked','purchase_cta_click','challenge_start','challenge_day_complete','seven_day_complete']);
+export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin','/teaser','/challenge']);
 const publicSources = (value) => (value.sources || []).filter(s => typeof s.url === 'string' && /^https:\/\//.test(s.url)).map(({title,url,page,locator}) => ({title,url,page,locator}));
 const failure = (message, status = 400) => Object.assign(new Error(message), { status });
 const isUuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
@@ -185,6 +185,8 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       if (source.path !== undefined) { if (!EVENT_PATHS.has(source.path)) throw failure('Invalid path'); clean.path=source.path; }
       if (source.channel !== undefined) { if (!['native','clipboard','download','kakao','instagram','direct'].includes(source.channel)) throw failure('Invalid channel'); clean.channel=source.channel; }
       if (source.questionId !== undefined) { if (!['amount','selection','label','reviews','evidence'].includes(source.questionId)) throw failure('Invalid question'); clean.questionId=source.questionId; }
+      if (source.campaignId !== undefined) { if (typeof source.campaignId !== 'string' || !/^[A-Za-z0-9_-]{1,64}$/.test(source.campaignId)) throw failure('Invalid campaign'); clean.campaignId=source.campaignId; }
+      if (source.referralId !== undefined) { if (typeof source.referralId !== 'string' || !/^[A-Za-z0-9_-]{8,64}$/.test(source.referralId)) throw failure('Invalid referral'); clean.referralId=source.referralId; }
       const result=db.prepare('INSERT OR IGNORE INTO events(id,name,properties,created_at,flow_id) VALUES(?,?,?,?,?)').run(body.eventId,body.name,JSON.stringify(clean),new Date().toISOString(),body.flowId?.toLowerCase() ?? null);
       return {accepted:true,duplicate:result.changes===0};
     },

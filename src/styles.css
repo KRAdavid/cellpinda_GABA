@@ -25,3 +25,5 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 @media(max-width:900px){.fermentation-questions{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.fermentation-questions{grid-template-columns:1fr;gap:10px;margin-bottom:28px}.fermentation-questions article{min-height:0;padding:18px}.fermentation-questions span{margin-bottom:16px}.fermentation-questions h3{font-size:18px}.fermentation-questions p{font-size:14px}.hero-product-meta{font-size:12px}}
 .hero-product-meta{display:block;margin-top:6px;color:#607567;font-size:13px}
+
+.link-context{width:min(1280px,calc(100% - 80px));margin:14px auto 0;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:#f7faf6;color:#52685c;font-size:13px;text-align:center}@media(max-width:680px){.link-context{width:calc(100% - 40px);margin-top:10px;font-size:12px}}

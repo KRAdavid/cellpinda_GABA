@@ -4,6 +4,8 @@ import { CHALLENGE_STORAGE_KEY, challengeHabits, createChallenge, localCalendarD
 import type { ChallengeRecord } from '../domain/challenge';
 import './SevenDayChallenge.css';
 
+type Props = { onEvent?: (name: string, properties?: Record<string, string>) => void };
+
 function readSaved() {
   try {
     const raw = localStorage.getItem(CHALLENGE_STORAGE_KEY);
@@ -12,7 +14,7 @@ function readSaved() {
   } catch { return { record: null, legacy: false, message: '이 브라우저의 저장 공간을 사용할 수 없어요. 기록은 새로고침 전까지만 유지됩니다.' }; }
 }
 
-export default function SevenDayChallenge() {
+export default function SevenDayChallenge({ onEvent }: Props) {
   const [initial] = useState(readSaved);
   const [record, setRecord] = useState<ChallengeRecord | null>(initial.record);
   const [today, setToday] = useState(localCalendarDate);
@@ -34,13 +36,19 @@ export default function SevenDayChallenge() {
   function start() {
     const date = localCalendarDate();
     setToday(date);
+    onEvent?.('challenge_start', { path: '/challenge' });
     persist(createChallenge(date));
   }
   function update(index: number, value: { completed?: boolean; note?: string }) {
     if (!record) return;
     const date = localCalendarDate();
     setToday(date);
-    try { persist(updateChallengeDay(record, index, value, date)); }
+    try {
+      const next = updateChallengeDay(record, index, value, date);
+      if (!record.days[index]?.completed && next.days[index]?.completed) onEvent?.('challenge_day_complete', { path: '/challenge' });
+      if (!challengeFinished(record, date) && challengeFinished(next, date)) onEvent?.('seven_day_complete', { path: '/challenge' });
+      persist(next);
+    }
     catch (error) { setMessage(error instanceof Error ? error.message : '기록을 확인해 주세요.'); }
   }
   function remove() {
