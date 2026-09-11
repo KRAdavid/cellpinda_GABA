@@ -4,11 +4,12 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createStore } from './store.mjs';
+import { adminAction, adminRoleAllows, adminRoleCapabilities, adminRoleForToken, adminRoleLabel } from '../src/domain/admin-auth.ts';
 
 const LOOPBACK = new Set(['127.0.0.1','::1','::ffff:127.0.0.1']);
 const DEV_ORIGINS=new Set(['http://localhost:5173','http://127.0.0.1:5173','http://localhost:4173','http://127.0.0.1:4173']);
 const allowedToken = (actual, expected) => {
-  if (typeof actual !== 'string') return false;
+  if (typeof actual !== 'string' || typeof expected !== 'string') return false;
   const received=Buffer.from(actual); const wanted=Buffer.from(expected);
   return received.length===wanted.length && timingSafeEqual(received,wanted);
 };
@@ -94,7 +95,7 @@ function localAuditSummary(report) {
   };
 }
 
-export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),localAuditPath=resolve('tmp/local-goal-audit.json'),development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
+export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),localAuditPath=resolve('tmp/local-goal-audit.json'),adminRoleTokens=process.env.ADMIN_ROLE_TOKENS,development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
   const store=createStore({dbPath,seedPath,seed});
   const token=randomBytes(32).toString('hex');
   mkdirSync(dirname(tokenPath),{recursive:true});
@@ -119,16 +120,20 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
       if (req.method==='OPTIONS') return reply(204,{});
       const path=new URL(req.url,'http://localhost').pathname;
       if (path.startsWith('/api/admin/')) {
-        if (!LOOPBACK.has(address) || !allowedToken(req.headers['x-admin-token'],token)) return reply(401,{error:'Local operator authentication required'});
+        if (!LOOPBACK.has(address)) return reply(401,{error:'Local operator authentication required'});
+        const role=adminRoleForToken(req.headers['x-admin-token'],token,adminRoleTokens,allowedToken);
+        if (!role) return reply(401,{error:'Local operator authentication required'});
+        const deny=(action) => { if (adminRoleAllows(role,action)) return false; reply(403,{error:`${adminRoleLabel(role)} 역할은 ${action} 작업을 수행할 수 없습니다.`,role,action}); return true; };
+        if (req.method==='GET' && path==='/api/admin/session') return reply(200,{role,roleLabel:adminRoleLabel(role),capabilities:adminRoleCapabilities(role)});
         if (req.method==='GET' && path==='/api/admin/content') return reply(200,{items:store.adminContent()});
         if (req.method==='GET' && path==='/api/admin/history') return reply(200,{items:store.history()});
         if (req.method==='GET' && path==='/api/admin/analytics') return reply(200,store.analytics());
-        if(req.method==='POST' && path==='/api/admin/reviews')return reply(201,store.createReview(await readBody(req,65536)));
+        if(req.method==='POST' && path==='/api/admin/reviews'){const payload=await readBody(req,65536);if(deny(adminAction(req.method,path,payload)))return;return reply(201,store.createReview(payload));}
         const reviewMatch=path.match(/^\/api\/admin\/reviews\/(review-[a-f0-9-]+)(\/decision)?$/);
-        if(reviewMatch && req.method==='PATCH' && !reviewMatch[2])return reply(200,store.editReview(reviewMatch[1],await readBody(req,65536)));
-        if(reviewMatch && req.method==='POST' && reviewMatch[2])return reply(200,store.decideReview(reviewMatch[1],await readBody(req)));
+        if(reviewMatch && req.method==='PATCH' && !reviewMatch[2]){const payload=await readBody(req,65536);if(deny(adminAction(req.method,path,payload)))return;return reply(200,store.editReview(reviewMatch[1],payload));}
+        if(reviewMatch && req.method==='POST' && reviewMatch[2]){const payload=await readBody(req);if(deny(adminAction(req.method,path,payload)))return;return reply(200,store.decideReview(reviewMatch[1],payload));}
         const match=path.match(/^\/api\/admin\/content\/([a-zA-Z0-9-]+)$/);
-        if (req.method==='PATCH' && match) return reply(200,store.update(match[1],await readBody(req)));
+        if (req.method==='PATCH' && match) {const payload=await readBody(req);if(deny(adminAction(req.method,path,payload)))return;return reply(200,store.update(match[1],payload));}
       }
       if (req.method==='GET' && path==='/api/health') return reply(200,{ok:true,persistence:'sqlite',actualPurchaseIntegration:false});
       if (req.method==='GET' && path==='/api/member/status') return reply(200,{enabled:false,user:null,recoverySupported:false});

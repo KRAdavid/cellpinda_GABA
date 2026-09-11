@@ -163,9 +163,11 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+          ADMIN_ROLE_TOKENS: ${{ secrets.ADMIN_ROLE_TOKENS }}
           MEMBER_ORIGIN: ${{ secrets.MEMBER_ORIGIN }}
         run: |
           printf '%s' "$ADMIN_TOKEN" | pnpm exec wrangler secret put ADMIN_TOKEN --config wrangler.deploy.jsonc
+          if [ -n "$ADMIN_ROLE_TOKENS" ]; then printf '%s' "$ADMIN_ROLE_TOKENS" | pnpm exec wrangler secret put ADMIN_ROLE_TOKENS --config wrangler.deploy.jsonc; fi
           printf '%s' "$MEMBER_ORIGIN" | pnpm exec wrangler secret put MEMBER_ORIGIN --config wrangler.deploy.jsonc
       - name: Deploy Worker, D1 and assets
         if: env.DEPLOY_ENABLED == 'true'

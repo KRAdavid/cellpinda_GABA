@@ -63,6 +63,30 @@ test('Rate limit rejects excess local requests',async()=>{
   } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
 
+test('Role-scoped admin credentials separate editing, review and approval actions',async()=>{
+  const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));
+  const roleTokens={editor:'e'.repeat(64),reviewer:'r'.repeat(64),approver:'p'.repeat(64)};
+  const options={dbPath:join(directory,'db.sqlite'),tokenPath:join(directory,'token'),seed,adminRoleTokens:roleTokens};
+  const api=createApi(options);let running=false;
+  const start=async()=>{api.server.listen(0,'127.0.0.1');await once(api.server,'listening');running=true;return `http://127.0.0.1:${api.server.address().port}`;};
+  const stop=async()=>{api.server.close();await once(api.server,'close');running=false;};
+  try {
+    const base=await start();
+    const call=(role,path,init={})=>fetch(`${base}/api/admin/${path}`,{...init,headers:{'content-type':'application/json','x-admin-token':roleTokens[role]}});
+    let response=await call('editor','session');assert.equal(response.status,200);let session=await response.json();assert.equal(session.role,'editor');assert.ok(session.capabilities.includes('edit'));assert.ok(!session.capabilities.includes('approve'));
+    response=await call('editor','content/source',{method:'PATCH',body:JSON.stringify({revision:1,reason:'Role edit',publicText:'Edited by editor'})});assert.equal(response.status,200);
+    response=await call('editor','content/source',{method:'PATCH',body:JSON.stringify({revision:2,reason:'Role cannot approve',status:'approved'})});assert.equal(response.status,403);
+    response=await call('reviewer','session');assert.equal((await response.json()).role,'reviewer');
+    response=await call('reviewer','content/source',{method:'PATCH',body:JSON.stringify({revision:2,reason:'Role review',status:'hold'})});assert.equal(response.status,200);
+    response=await call('reviewer','content/source',{method:'PATCH',body:JSON.stringify({revision:3,reason:'Role cannot approve',status:'approved'})});assert.equal(response.status,403);
+    response=await call('approver','session');assert.equal((await response.json()).role,'approver');
+    response=await call('approver','content/source',{method:'PATCH',body:JSON.stringify({revision:3,reason:'Role approve',status:'approved'})});assert.equal(response.status,200);
+    response=await call('approver','content/source',{method:'PATCH',body:JSON.stringify({revision:4,reason:'Approver cannot edit',publicText:'Blocked edit'})});assert.equal(response.status,403);
+    response=await fetch(`${base}/api/admin/session`,{headers:{'x-admin-token':'x'.repeat(64)}});assert.equal(response.status,401);
+    const legacy=readFileSync(options.tokenPath,'utf8');response=await fetch(`${base}/api/admin/session`,{headers:{'x-admin-token':legacy}});assert.equal(response.status,200);assert.equal((await response.json()).role,'operator');
+  } finally { if(running)await stop(); assert.equal(dirname(resolve(directory)),resolve(tmpdir())); assert.ok(basename(directory).startsWith('cellpinda-api-')); rmSync(directory,{recursive:true,force:true}); }
+});
+
 test('Local API sandbox ops runs persist resumable state with a client key',async()=>{
   const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));const {server}=createApi({dbPath:join(directory,'db.sqlite'),tokenPath:join(directory,'token'),seed});
   try {

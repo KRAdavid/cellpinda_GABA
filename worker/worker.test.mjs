@@ -118,6 +118,24 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
   }finally{DB.close();}
 });
 
+test('Worker role-scoped admin credentials separate editing, review and approval actions',async()=>{
+  const DB=new MockD1();const roleTokens={editor:'e'.repeat(64),reviewer:'r'.repeat(64),approver:'p'.repeat(64)};
+  const env={DB,ADMIN_TOKEN:'o'.repeat(64),ADMIN_ROLE_TOKENS:JSON.stringify(roleTokens),RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async()=>new Response('asset')}};
+  const call=(role,path,options={})=>worker.fetch(new Request(`https://site.example/api/admin/${path}`,{...options,headers:{'content-type':'application/json','x-admin-token':roleTokens[role]}}),env);
+  try {
+    let response=await call('editor','session');assert.equal(response.status,200);let session=await response.json();assert.equal(session.role,'editor');assert.ok(session.capabilities.includes('edit'));assert.ok(!session.capabilities.includes('approve'));
+    response=await call('editor','content/product-1500',{method:'PATCH',body:JSON.stringify({revision:1,reason:'Role edit',publicText:'Edited by editor'})});assert.equal(response.status,200);
+    response=await call('editor','content/product-1500',{method:'PATCH',body:JSON.stringify({revision:2,reason:'Role cannot approve',status:'approved'})});assert.equal(response.status,403);
+    response=await call('reviewer','content/product-1500',{method:'PATCH',body:JSON.stringify({revision:2,reason:'Role review',status:'hold'})});assert.equal(response.status,200);
+    response=await call('reviewer','content/product-1500',{method:'PATCH',body:JSON.stringify({revision:3,reason:'Role cannot approve',status:'approved'})});assert.equal(response.status,403);
+    response=await call('approver','session');assert.equal((await response.json()).role,'approver');
+    response=await call('approver','content/product-1500',{method:'PATCH',body:JSON.stringify({revision:3,reason:'Role approve',status:'approved'})});assert.equal(response.status,200);
+    response=await call('approver','content/product-1500',{method:'PATCH',body:JSON.stringify({revision:4,reason:'Approver cannot edit',publicText:'Blocked edit'})});assert.equal(response.status,403);
+    response=await worker.fetch(new Request('https://site.example/api/admin/session',{headers:{'x-admin-token':'x'.repeat(64)}}),env);assert.equal(response.status,401);
+    response=await worker.fetch(new Request('https://site.example/api/admin/session',{headers:{'x-admin-token':env.ADMIN_TOKEN}}),env);assert.equal(response.status,200);assert.equal((await response.json()).role,'operator');
+  } finally { DB.close(); }
+});
+
 test('Worker sandbox ops runs persist resumable state with a client key and isolate owners',async()=>{
   const DB=new MockD1();const env={DB,ADMIN_TOKEN:'c'.repeat(64),RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async()=>new Response('asset')}};
   const runId=randomUUID(),runKey=randomUUID();

@@ -4,6 +4,7 @@ import type { QuoteReviewItem, ReviewDraft, ReviewConfirmation } from './ReviewE
 import {apiEndpoint} from '../api-origin';
 
 type Item = { id: string; topic?: string; name?: string; publicText?: string; status: string; revision: number; kind?: string; reviewType?: string; review?: ReviewDraft; reviewConfirmation?: ReviewConfirmation; sources?: { title: string; url: string | null; page?: number | null; locator?: string }[]; sourceTitle?: string; sourceUrl?: string | null; metadata?: Record<string, string | string[] | number | null>; limitations?: string[]; holdReason?: string | null; reviewedBy?: string; reviewedAt?: string };
+type AdminSession = { role: 'operator' | 'editor' | 'reviewer' | 'approver'; roleLabel: string; capabilities: string[] };
 type Funnel = { id: string; from: string; to: string; denominator: number; numerator: number; rate: number | null; denominatorDefinition: string; numeratorDefinition: string };
 type SharingScope = { id: 'own_result' | 'incoming_result' | 'product_comparison'; path: string; denominator: number; attemptFlows: number; attemptRate: number | null; requestedFlows: number; copiedFlows: number; downloadedFlows: number; cancelledFlows: number };
 type Analytics = { counts: { name: string; count: number }[]; funnels?: Funnel[]; window?: { kind: string; from: string | null; to: string; ordering: string; flowScope: string }; coverage?: { eventsWithoutFlow: number; distinctFlows: number }; sharingMetrics?: { scopes: SharingScope[]; unscopedShareEvents: number; confirmedDeliverySupported: false } };
@@ -16,7 +17,7 @@ const formatDate = (value?: string | null) => value ? new Date(value).toLocaleSt
 const siteRoot = import.meta.env.BASE_URL;
 
 export default function Admin() {
- const [token, setToken] = useState(''), [items, setItems] = useState<Item[]>([]), [selected, setSelected] = useState<Item | null>(null), [text, setText] = useState(''), [reason, setReason] = useState(''), [error, setError] = useState(''), [busy, setBusy] = useState(false), [history, setHistory] = useState<{ id: number; content_id: string; reason: string; created_at: string }[]>([]), [analytics, setAnalytics] = useState<Analytics>({ counts: [] }), [loaded, setLoaded] = useState(false);
+ const [token, setToken] = useState(''), [items, setItems] = useState<Item[]>([]), [selected, setSelected] = useState<Item | null>(null), [text, setText] = useState(''), [reason, setReason] = useState(''), [error, setError] = useState(''), [busy, setBusy] = useState(false), [history, setHistory] = useState<{ id: number; content_id: string; reason: string; created_at: string }[]>([]), [analytics, setAnalytics] = useState<Analytics>({ counts: [] }), [session, setSession] = useState<AdminSession | null>(null), [loaded, setLoaded] = useState(false);
  const isLocal = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
  const [creatingReview, setCreatingReview] = useState(false), [reviewDirty, setReviewDirty] = useState(false), [reviewSelection, setReviewSelection] = useState(0);
  function selectItem(item: Item | null, create = false) {
@@ -34,7 +35,7 @@ export default function Admin() {
  }
  async function load() {
   setBusy(true); setError('');
-  try { const [c, h, a] = await Promise.all([api('content'), api('history'), api('analytics')]); setItems(c.items); setHistory(h.items); setAnalytics(a); setLoaded(true); }
+  try { const [s, c, h, a] = await Promise.all([api('session') as Promise<AdminSession>, api('content'), api('history'), api('analytics')]); setSession(s); setItems(c.items); setHistory(h.items); setAnalytics(a); setLoaded(true); }
   catch (e) { setError(e instanceof Error ? e.message : '연결 실패'); }
   finally { setBusy(false); }
  }
@@ -48,7 +49,8 @@ export default function Admin() {
  return <div className="admin">
   <aside><a className="brand" href={siteRoot}>Cellpinda.</a><a href="#content">콘텐츠 검토</a><a href="#history">승인 이력</a><a href="#analytics">행동 분석</a><a href={siteRoot}>사이트 보기 ↗</a></aside>
   <main><h1>콘텐츠 검토실</h1><p>근거와 문구를 확인하고 공개 상태를 관리합니다.</p>
-   {!loaded ? <form onSubmit={e => { e.preventDefault(); void load(); }} className="admin-login"><label>운영자 접근 키<input type="password" value={token} autoComplete="off" onChange={e => setToken(e.target.value)} required /></label><p>운영 담당자에게 전달받은 접근 키를 입력하세요.</p>{isLocal ? <p className="note">로컬 서버를 사용하는 경우 서버가 생성한 비밀 키 파일에서 접근 키를 확인할 수 있습니다.</p> : null}<button className="button" disabled={busy}>검토실 열기</button></form> : <>
+   {!loaded ? <form onSubmit={e => { e.preventDefault(); void load(); }} className="admin-login"><label>운영자 접근 키<input type="password" value={token} autoComplete="off" onChange={e => setToken(e.target.value)} required /></label><p>역할별 접근 키를 입력하면 편집·검토·승인 권한이 자동으로 적용됩니다.</p>{isLocal ? <p className="note">로컬 서버를 사용하는 경우 서버가 생성한 비밀 키 파일에서 접근 키를 확인할 수 있습니다.</p> : null}<button className="button" disabled={busy}>검토실 열기</button></form> : <>
+    {session ? <p className="admin-session" role="status"><strong>{session.roleLabel}</strong> · 현재 권한: {session.capabilities.map(capability => ({ read: '읽기', edit: '편집', review: '보류 검토', approve: '공개 승인' }[capability] || capability)).join(' · ')}</p> : null}
     <div id="content" className="admin-grid">
      <div className="admin-list"><button type="button" className="button outline" disabled={busy} onClick={() => selectItem(null, true)}>새 인용 후기 등록</button>{items.map(item => <button key={item.id} className={selected?.id === item.id ? 'selected' : ''} onClick={() => selectItem(item)}><strong>{item.reviewType === 'quote' ? `인용 후기 · ${item.review?.authorLabel || '작성자 미확인'}` : item.topic || item.name || item.id}</strong><span>{item.status === 'approved' ? '공개' : '보류'} · v{item.revision}</span><p>{item.publicText || '공개 문안 미확정'}</p></button>)}</div>
      <section className="admin-edit">{creatingReview || selected?.reviewType === 'quote' ? <ReviewEditor key={`${selected?.id || 'new'}:${reviewSelection}:${selected?.revision || 0}`} item={creatingReview ? null : selected as QuoteReviewItem} api={api} onSaved={reviewSaved} onDirtyChange={setReviewDirty} onRefresh={load} /> : selected ? <>
