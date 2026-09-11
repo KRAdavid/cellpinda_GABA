@@ -5,6 +5,8 @@ const readJson = async relative => JSON.parse(await readFile(new URL(`../${relat
 const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const robots = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8');
+const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 const teaser = await readJson('data/teaser-manifest.json');
 const teaserPreview = await readJson('public/data/teaser-preview.json');
 const operationsQueue = await readJson('public/data/operations-queue.json');
@@ -28,6 +30,10 @@ const isSmartStore = value => {
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
 if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 신경 신호의 균형 조절에 관여하는 물질입니다/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || !/gaba-master-index\.json/i.test(indexHtml) || !/smartstore\.naver\.com\/cellpinda\/products\/4701017202/i.test(indexHtml)) fail('index.html must keep a readable static fallback with the approved Smart Store 1500 product link');
 if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml) || !/<meta property="og:type" content="website"\s*\/>/i.test(indexHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml)) fail('index.html must expose canonical and Open Graph URL metadata');
+if (!/^User-agent: \*\nAllow: \/\nDisallow: \/admin\nDisallow: \/ops\n\nSitemap: https:\/\/kradavid\.github\.io\/cellpinda_GABA\/sitemap\.xml\s*$/m.test(robots)) fail('robots.txt must expose the public sitemap and keep internal paths out of discovery');
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+const expectedSitemapUrls = ['https://kradavid.github.io/cellpinda_GABA/', ...['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'].map(id => `https://kradavid.github.io/cellpinda_GABA/share/${id}/`)];
+if (!sitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?>') || !sitemap.includes('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"') || JSON.stringify(sitemapUrls) !== JSON.stringify(expectedSitemapUrls) || /\/admin|\/ops/.test(sitemap)) fail('sitemap.xml must contain only the public landing and share pages');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');

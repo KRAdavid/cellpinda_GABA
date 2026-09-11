@@ -80,9 +80,11 @@ const requestPublicRoute = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, faviconResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute] = await Promise.all([
+    const [page, faviconResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute] = await Promise.all([
       request('/?view=ops'),
       request('/favicon.svg'),
+      request('/robots.txt'),
+      request('/sitemap.xml'),
       request('/data/content.json'),
       request('/data/gaba-master-index.json'),
       request('/data/teaser-preview.json'),
@@ -96,7 +98,13 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       requestPublicRoute('/?view=ops'),
     ]);
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
-    const [pageText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
+    const [pageText, robotsText, sitemapText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
+    assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
+    assert.match(robotsText, /Disallow: \/admin\nDisallow: \/ops/, 'live robots.txt must keep internal paths out of discovery');
+    const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+    const expectedSitemapUrls = [`${base}/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
+    assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain the public landing and share pages only');
+    assert.ok(!sitemapText.includes('/admin') && !sitemapText.includes('/ops'), 'live sitemap must not list internal routes');
     for (const [label, route] of [['/admin', adminRoute], ['/ops', opsRoute], ['/?view=admin', adminQueryRoute], ['/?view=ops', opsQueryRoute]]) {
       assert.ok(!/콘텐츠 검토실|운영자 접근 키|TF 운영판|운영 큐|관리자 기능/i.test(route.text), `public route ${label} leaks an internal operations surface`);
     }
