@@ -1,5 +1,6 @@
 import {existsSync, readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
+import {parseAdminRoleTokens} from '../src/domain/admin-auth.ts';
 
 const root=process.cwd();
 const strict=process.argv.includes('--strict');
@@ -31,6 +32,13 @@ try {
 
 const missingSecrets=requiredSecrets.filter(name=>typeof process.env[name]!=='string' || !process.env[name].trim());
 check('cloudflare-secrets',missingSecrets.length===0,missingSecrets.length ? `missing=${missingSecrets.join(',')}` : 'all required secret names are present');
+if(process.env.ADMIN_ROLE_TOKENS?.trim()) {
+  const tokens=parseAdminRoleTokens(process.env.ADMIN_ROLE_TOKENS);
+  const roles=['editor','reviewer','approver'];
+  const values=roles.map(role=>tokens[role]);
+  const valid=values.every(value=>typeof value==='string') && new Set(values).size===values.length;
+  check('admin-role-tokens',valid,valid ? 'editor,reviewer,approver configured' : 'must contain three distinct role keys with credentials of at least 32 characters');
+}
 if(process.env.MEMBER_ORIGIN?.trim()) {
   try { const origin=new URL(process.env.MEMBER_ORIGIN); check('member-origin',origin.protocol==='https:' || ['localhost','127.0.0.1'].includes(origin.hostname),`protocol=${origin.protocol}, host=${origin.hostname}`); }
   catch { check('member-origin',false,'invalid URL'); }

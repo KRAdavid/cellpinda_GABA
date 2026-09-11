@@ -331,3 +331,7 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 관리자 API에 선택형 `ADMIN_ROLE_TOKENS` 정책을 연결해 편집자·검토자·승인자 토큰을 실제 권한으로 분리했다. 토큰으로 역할을 판별하고, 편집자는 초안·문구 편집, 검토자는 보류·재검토, 승인자는 공개 승인만 수행한다. 기존 `ADMIN_TOKEN`은 장애 대응용 운영자 권한으로 유지하며, `/api/admin/session`이 현재 역할과 권한을 운영 화면에 표시한다. Node 로컬 API에서 권한 없는 요청이 저장으로 이어지지 않는지 함께 회귀 검증했고 Worker와 동일한 정책을 적용했다. 역할별 토큰이 배포 Secret으로 설정되기 전까지는 기존 운영자 키 호환 모드이며, 외부 전문가 참여·Cloudflare Secrets 입력 자체는 여전히 사람 승인 게이트다.
 
 `pnpm test` 71개, `pnpm run typecheck`, `pnpm run build`, Worker dry-run bundle 검증을 통과했다. 이 변경은 실행 책임 분리를 코드 경계로 올린 것이며 B2 표시 승인·B3 후기 권한·B4 티저 권리·C2 실제 Secrets·E1 실주문 대사를 완료로 승격하지 않는다.
+
+## 2026-09-11 역할 Secret 사전 검증 보강
+
+`check-deploy-readiness.mjs`가 선택형 `ADMIN_ROLE_TOKENS`를 설정한 환경에서 편집자·검토자·승인자 세 키의 존재·길이·중복을 비밀값 없이 검사한다. 불완전한 역할 구성이면 strict 배포 전에 실패하고, 미설정 환경은 기존 `ADMIN_TOKEN` 호환 모드로 구분된다. 부분 구성과 세 역할 구성 모두를 실제 preflight 명령으로 확인했으며, 현재 운영 환경은 필수 Cloudflare Secret 5개가 없어 `WAITING`이다.
