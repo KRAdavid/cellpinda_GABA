@@ -2,8 +2,11 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 
 const root = process.cwd();
-const runSource = process.argv[2] || 'tf-safe-run.json';
-const pulseSource = process.argv[3] || 'tf-pulse.json';
+// pnpm forwards a standalone `--` separator to the child process. Ignore it
+// (and any future option flags) so the package script accepts normal paths.
+const positionalArgs = process.argv.slice(2).filter(value => value !== '--' && !value.startsWith('--'));
+const runSource = positionalArgs[0] || 'tf-safe-run.json';
+const pulseSource = positionalArgs[1] || 'tf-pulse.json';
 const readJson = async source => JSON.parse(await readFile(resolve(root, source), 'utf8'));
 const [run, pulse] = await Promise.all([readJson(runSource), readJson(pulseSource)]);
 const fail = message => { throw new Error(`Safe TF run validation failed: ${message}`); };
