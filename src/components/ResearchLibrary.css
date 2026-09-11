@@ -89,3 +89,4 @@
 .research-technical-detail-body .research-library-facts{min-width:0}
 .research-technical-detail-body .research-library-findings{min-width:0}
 @media(max-width:700px){.research-story-grid{grid-template-columns:1fr}.research-story-card{min-height:0}.research-technical-detail-body{grid-template-columns:minmax(0,1fr);gap:1rem}.research-technical-detail-body .research-library-overview{grid-column:auto}}
+@media(max-width:700px){.research-library-consumer-summary,.research-library-scope,.research-library-overview p,.research-library-boundary p,.research-story-card p,.research-library-findings p,.research-library-sources a{font-size:16px;line-height:1.75}}

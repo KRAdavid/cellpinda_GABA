@@ -8,6 +8,9 @@ const app = await read('src/App.tsx');
 const styles = await read('src/styles.css');
 const rhythm = await read('src/components/RhythmExperience.tsx');
 const rhythmStyles = await read('src/components/rhythm.css');
+const challenge = await read('src/components/SevenDayChallenge.tsx');
+const researchStyles = await read('src/components/ResearchLibrary.css');
+const reviewStyles = await read('src/components/ReviewExperience.css');
 const teaser = await read('src/components/TeaserPreview.tsx');
 const indexHtml = await read('index.html');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
@@ -34,6 +37,15 @@ requireMatch(rhythmStyles, /rhythm-experience:has\(\.rhythm-mobile-share-bar\)[\
 requireMatch(rhythmStyles, /@media\(prefers-reduced-motion:reduce\)/, 'reduced-motion rule is missing');
 requireMatch(styles, /@media\(max-width:680px\)/, 'mobile layout breakpoint is missing');
 requireMatch(styles, /@media\(prefers-reduced-motion:reduce\)/, 'global reduced-motion rule is missing');
+requireMatch(styles, /\.hero-question,[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'core consumer copy must be at least 16px on mobile');
+requireMatch(rhythm, /touch-action|autoAdvance/, 'rhythm touch interaction contract is missing');
+requireMatch(rhythmStyles, /font-size:\s*16px;\s*line-height:\s*1\.75/, 'rhythm copy must be at least 16px on mobile');
+requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');
+requireMatch(reviewStyles, /review-quote-card p:not\(\.review-quote-label\)[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'review copy must be at least 16px on mobile');
+requireMatch(challenge, /challenge_start|challenge_day_complete|seven_day_complete/, 'challenge measurement events are missing');
+for (const event of ['hero_check_start', 'rhythm_check_complete', 'result_share_click', 'result_share_success', 'friend_check_start', 'product_compare_view', 'review_source_click', 'purchase_cta_click', 'challenge_start', 'challenge_day_complete', 'seven_day_complete']) {
+  requireMatch(app + rhythm + challenge, new RegExp(event), `required measurement event ${event} is missing`);
+}
 requireMatch(teaser, /allow="autoplay; fullscreen; picture-in-picture"/, 'teaser autoplay permission is missing');
 requireMatch(teaser, /loading="eager"/, 'teaser must load eagerly when exposed');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
@@ -52,4 +64,4 @@ for (const id of shareIds) {
   requireMatch(html, /og:image/, `share page ${id} Open Graph image is missing`);
 }
 
-console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], sharePages: shareIds.length, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load'], seo: ['canonical', 'og-url']}));
+console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 11, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load'], seo: ['canonical', 'og-url']}));

@@ -15,3 +15,4 @@
 .review-experience-next p { margin:0; font-size:.95rem; }
 .review-experience-next a { font-size:.95rem; text-decoration:underline; text-underline-offset:.25em; }
 @media(max-width:700px) { .review-experience-layout { grid-template-columns:minmax(0,1fr); gap:2rem; } .review-experience-destination { padding:1.5rem; } .review-experience-next { flex-direction:column; } }
+@media(max-width:700px) { .review-quote-card p:not(.review-quote-label), .review-experience-destination .review-experience-context, .review-experience-next p { font-size:16px; line-height:1.75; } }
