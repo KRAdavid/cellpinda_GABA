@@ -82,11 +82,15 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
               if (canonical[field] !== undefined) after[field] = canonical[field];
             }
             reason = 'Current source ledger reconciliation refreshed controlled product fields';
-          } else if (legacyDestination.test(JSON.stringify(before)) || discouragedConsumerCopy.test(JSON.stringify(before))) {
-            // Refresh only rows whose public destination/copy is known to be stale.
-            // Preserve an operator hold instead of silently approving it.
+          } else if (kind === 'claim' && (row.revision === 1 || legacyDestination.test(JSON.stringify(before)) || discouragedConsumerCopy.test(JSON.stringify(before)))) {
+            // Refresh unedited seed claims and rows whose public destination/copy
+            // is known to be stale. Operator edits have a higher revision and
+            // remain intact unless they contain a blocked legacy phrase. A hold
+            // is preserved so reconciliation never silently approves content.
             after = {...before, ...canonical, id: before.id, status: before.status === 'hold' ? 'hold' : canonical.status};
-            reason = 'Current source ledger reconciliation refreshed stale public copy';
+            reason = row.revision === 1
+              ? 'Current source ledger reconciliation refreshed seed claim fields'
+              : 'Current source ledger reconciliation refreshed stale public copy';
           }
           if (after) {
             const current = JSON.stringify(after);
