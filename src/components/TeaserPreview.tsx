@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import './TeaserPreview.css';
 
 type TeaserPreviewData = {
@@ -24,6 +24,8 @@ function isHttps(value: string | null): value is string {
 export default function TeaserPreview({onEvent}: Props) {
   const [preview, setPreview] = useState<TeaserPreviewData | null>(null);
   const [frameLoaded, setFrameLoaded] = useState(false);
+  const impressionTracked = useRef(false);
+  const playTracked = useRef(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -41,7 +43,8 @@ export default function TeaserPreview({onEvent}: Props) {
     const section = document.getElementById('teaser');
     if (!section) return;
     const observer = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) {
+      if (!impressionTracked.current && entries.some(entry => entry.isIntersecting)) {
+        impressionTracked.current = true;
         onEvent?.('teaser_impression', {path: '/teaser'});
         observer.disconnect();
       }
@@ -71,7 +74,10 @@ export default function TeaserPreview({onEvent}: Props) {
             referrerPolicy="strict-origin-when-cross-origin"
             onLoad={() => {
               setFrameLoaded(true);
-              onEvent?.('teaser_play', {path: '/teaser'});
+              if (!playTracked.current) {
+                playTracked.current = true;
+                onEvent?.('teaser_play', {path: '/teaser'});
+              }
             }}
           />
           {!frameLoaded && <p className="teaser-loading" aria-live="polite">티저를 불러오는 중입니다…</p>}
