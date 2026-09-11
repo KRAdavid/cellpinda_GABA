@@ -127,13 +127,13 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <h3>{metadata.question || claim.topic}</h3>
         <p className="research-library-summary">{claim.publicText}</p>
         {metadata.consumerSummary ? <p className="research-library-consumer-summary"><strong>쉽게 말하면</strong>{metadata.consumerSummary}</p> : null}
-        {metadata.hopefulTakeaway ? <p className="research-library-hopeful"><strong>내 생활에 연결해 보기</strong>{metadata.hopefulTakeaway}</p> : null}
+        <p className="research-library-scope"><strong>이 연구가 말해 주는 범위</strong>{metadata.productApplicability}</p>
+        {metadata.hopefulTakeaway ? <p className="research-library-hopeful"><strong>다음으로 확인해 볼 일</strong>{metadata.hopefulTakeaway}</p> : null}
         <dl className="research-library-preview" aria-label="연구의 핵심 조건">
           {(['population', 'sampleSize', 'duration', 'searchThrough'] as const).map(key => metadata[key] ? <div key={key}>
             <dt>{facts.find(([field]) => field === key)![1]}</dt><dd>{metadata[key]}</dd>
           </div> : null)}
         </dl>
-        <p className="research-library-scope">{metadata.productApplicability}</p>
         <details className="research-detail" onToggle={event => {
           if (event.currentTarget.open) onOpen?.(claim.id);
         }}>
