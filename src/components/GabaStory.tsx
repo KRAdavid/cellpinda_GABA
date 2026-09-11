@@ -3,11 +3,16 @@ import type {Claim} from './ResearchLibrary';
 export default function GabaStory({claims}:{claims:Claim[]}) {
   const definition=claims.find(claim=>claim.id==='gaba-definition'&&claim.status==='approved'&&claim.publicText);
   const studies=claims.filter(claim=>claim.id.startsWith('research-')&&claim.status==='approved'&&claim.publicText&&claim.metadata?.productApplicability);
+  const highlights=[
+    {id:'research-yoto-2012',label:'스트레스 상황'},
+    {id:'research-byun-2018',label:'잠드는 시간'},
+    {id:'research-sakashita-2019',label:'운동과 근육'},
+  ];
   return <section id="story" className="section sage"><div className="wrap">
     <div className="section-head"><div><p className="chapter">01 / GABA 이야기</p><h2>GABA,<br/>신호의 균형을 이해하다.</h2></div><p>몸 안에서의 역할부터 먹는 GABA의 연구까지.<br/>서로 다른 질문을 하나씩 살펴봅니다.</p></div>
     <div className="story-steps">
       <article><span>1</span><div><h3>먼저, 이름을 알아볼까요?</h3>{definition?<p>{definition.publicText}</p>:<p role="status">GABA 기본 자료를 확인하고 있습니다.</p>}</div></article>
-      <article><span>2</span><div><h3>몸 안의 역할과 섭취 연구</h3><p>몸 안에서 어떤 일을 하는지와, 먹었을 때 무엇이 관찰됐는지는 나누어 살펴봅니다.</p><a className="text-link" href="#research">섭취 연구 살펴보기 →</a></div></article>
+      <article><span>2</span><div><h3>몸 안의 역할과 섭취 연구</h3><p>GABA는 뇌의 신경 신호를 억제하는 데 관여해 안정과 관련된 물질이에요. 쉽게 말해 신경이 계속 켜져 있지 않도록 강도를 낮추는 쪽에 관여합니다.</p><div className="story-research-summary"><div className="story-summary-grid"><div className="story-summary-card"><p className="story-summary-kicker">몸 안에서는</p><h4>안정 쪽으로 신호를 조절해요</h4><p>몸 안의 역할을 설명한 내용이며, 이 체크나 제품이 체내 GABA 수치를 측정한다는 뜻은 아닙니다.</p></div><div className="story-summary-card"><p className="story-summary-kicker">사람 대상 섭취 연구에서는</p><ul>{highlights.map(highlight=>{const claim=studies.find(item=>item.id===highlight.id);return claim?.metadata?.consumerSummary?<li key={highlight.id}><strong>{highlight.label}</strong><span>{claim.metadata.consumerSummary}</span></li>:null})}</ul></div></div><p className="story-summary-note">연구마다 사람·제품·섭취량·기간이 달라요. 관찰된 신호는 연구 조건 안에서의 결과이며 셀핀다 가바 1500 완제품의 효과나 권장량을 보장하지 않습니다.</p></div></div></article>
       <article><span>3</span><div><h3>내가 선택할 제품은?</h3><p>연구에 사용한 제품·용량·기간과 판매 제품의 표시사항을 각각 확인해 보세요.</p><a className="text-link" href="#products">셀핀다 제품 구성 보기 →</a></div></article>
     </div>
     {definition?.sources.filter(source=>source.url?.startsWith('https://')).map(source=><a className="text-link" key={source.url} href={source.url!} target="_blank" rel="noopener noreferrer">{source.title} 원문 ↗</a>)}
