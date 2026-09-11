@@ -6,6 +6,10 @@
 
 CI의 임시 safe-run 파일 없이 `pnpm run tf:pulse:heartbeat`를 실행할 때도, pulse 지문이 동일하면 직전 독립 검증 요약을 보존하도록 `scripts/write-tf-pulse-heartbeat.mjs`를 보강했다. 상태 지문이 바뀌거나 이전 요약이 없으면 `safeExecution`을 새로 만들지 않아 오래된 검증을 새 상태의 승인처럼 이월하지 않는다. 80개 회귀 테스트·production build·공개 export·Pages 라이브 smoke를 통과했으며, 외부 입력 게이트(B2·B3·B4·C2·E1)는 계속 사람 검토 상태다.
 
+## 최신 업데이트 — 2026-09-12 안전 TF·로컬 자료 재감사 사이클
+
+최신 pulse를 다시 생성한 뒤 내부 safe run 6개(`goal-contract`, `research-copy`, `teaser-boundary`, `sandbox-mvp`, `public-export`, `tf-pulse`)와 독립 검증을 모두 `MET`으로 기록했다. 로컬 자료·주문 감사도 같은 사이클에서 재실행해 `local-material-inputs=MET`, `local-order-inputs=WAITING`, 공개 export 변경 없음으로 확인했다. heartbeat 지문은 `bd2b0a88608a`로 유지되며, 새 외부 자료가 들어오기 전까지 B2·B3·B4·C2·E1을 사람 판단 게이트로 보존한다.
+
 ## 최신 업데이트 — 2026-09-12 로컬 원장 소비자 문구 재동기화
 
 기존 로컬 SQLite의 revision 1 seed claim이 최신 `data/content-ledger.json`의 소비자 문구를 반영하지 못하던 경로를 수정했다. 미편집 seed 행은 현재 원장의 공개 문구·메타데이터로 갱신하고, 운영자가 수정한 revision 2 이상 행과 `hold` 상태는 보존한다. 로컬 API 재시작 후 GABA 정의·Smart Store 상세 목적지·부정형 연구 문구를 정적 공개 export와 대조했으며, 새 회귀 테스트가 이 경계를 확인한다. 실제 표시·후기·주문 승인 게이트는 변경하지 않았다.
