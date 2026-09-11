@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /ops
+Disallow: /cellpinda_GABA/admin
+Disallow: /cellpinda_GABA/ops
 
 Sitemap: https://kradavid.github.io/cellpinda_GABA/sitemap.xml

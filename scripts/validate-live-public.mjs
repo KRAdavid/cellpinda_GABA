@@ -100,7 +100,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
     const [pageText, robotsText, sitemapText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
-    assert.match(robotsText, /Disallow: \/admin\nDisallow: \/ops/, 'live robots.txt must keep internal paths out of discovery');
+    assert.match(robotsText, /Disallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops/, 'live robots.txt must keep internal paths out of discovery');
     const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
     const expectedSitemapUrls = [`${base}/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
     assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain the public landing and share pages only');
