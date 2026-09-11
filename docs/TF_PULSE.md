@@ -24,6 +24,8 @@ Goal Contract의 `decisionProtocol`은 각 pulse의 `meetingProtocol`으로 복�
 
 로컬에서 `pnpm run tf:pulse:heartbeat`를 직접 실행하면 별도 파일을 준비하지 않아도 최신 pulse를 내부적으로 생성해 `data/tf-pulse-heartbeat.json`에 저장한다. CI처럼 `tf-pulse.json` 경로를 인자로 주면 그 파일을 명시적으로 검증하며, 존재하지 않는 명시 경로는 조용히 대체하지 않는다.
 
+로컬 실행에 CI의 임시 safe-run 파일이 없을 때도, pulse 지문이 바뀌지 않았다면 직전 독립 검증 요약을 그대로 보존한다. 상태 지문이 달라졌거나 이전 검증 요약이 없으면 `safeExecution`을 새로 만들지 않아, 오래된 증거가 새 상태를 승인한 것처럼 보이지 않게 한다.
+
 CI의 heartbeat 단계는 `tf-pulse.json tf-safe-run.json tf-safe-run-validation.json`을 함께 전달한다. 이 세 파일의 목표 ID·상태 지문·검사 결과가 맞을 때만 `safeExecution` 요약을 저장해, 회의 패킷이 실제로 독립 검증을 통과한 마지막 실행을 가리키게 한다.
 
 ```sh

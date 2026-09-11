@@ -31,6 +31,13 @@ if (!pulse.meetingProtocol || typeof pulse.meetingProtocol.cadence !== 'string' 
 if (!pulse.executionPolicy || JSON.stringify(Object.keys(pulse.executionPolicy).sort()) !== JSON.stringify(['approvalRiskClasses', 'autoRiskClasses', 'autoStates', 'humanReviewStates', 'note'].sort()) || !Array.isArray(pulse.executionPolicy.autoStates) || !Array.isArray(pulse.executionPolicy.autoRiskClasses) || !Array.isArray(pulse.executionPolicy.humanReviewStates) || !Array.isArray(pulse.executionPolicy.approvalRiskClasses) || typeof pulse.executionPolicy.note !== 'string') fail('execution policy is missing or malformed');
 if (Boolean(safeRunSource) !== Boolean(safeValidationSource)) fail('safe run and independent validation sources must be provided together');
 
+let previousHeartbeat;
+try {
+  previousHeartbeat = JSON.parse(await readFile(destination, 'utf8'));
+} catch (error) {
+  if (error?.code !== 'ENOENT') throw error;
+}
+
 let safeExecution;
 if (safeRunSource && safeValidationSource) {
   let safeRun;
@@ -59,16 +66,21 @@ if (safeRunSource && safeValidationSource) {
   };
 }
 
-let previousHeartbeat;
-try {
-  previousHeartbeat = JSON.parse(await readFile(destination, 'utf8'));
-} catch (error) {
-  if (error?.code !== 'ENOENT') throw error;
-}
 const previousSnapshotHash = typeof previousHeartbeat?.snapshotHash === 'string' && /^[a-f0-9]{64}$/.test(previousHeartbeat.snapshotHash)
   ? previousHeartbeat.snapshotHash
   : null;
 const stateChanged = Boolean(previousSnapshotHash && previousSnapshotHash !== pulse.snapshotHash);
+// A local operator may refresh the heartbeat without having the transient CI
+// safe-run files. Preserve the last independently validated summary only when
+// the pulse fingerprint is unchanged; never carry evidence across a state
+// change or manufacture a new validation record.
+const retainedSafeExecution = safeExecution ?? (
+  !stateChanged &&
+  previousHeartbeat?.safeExecution?.mode === 'safe_internal_tf_run' &&
+  previousHeartbeat.safeExecution.status === 'MET'
+    ? previousHeartbeat.safeExecution
+    : undefined
+);
 
 const safeGate = item => ({
   taskId: item.taskId,
@@ -103,7 +115,7 @@ const heartbeat = {
   waiting: Array.isArray(pulse.waiting) ? pulse.waiting : [],
   inputGates: Array.isArray(pulse.inputGates) ? pulse.inputGates.map(safeGate) : [],
   teaserGate: {status: pulse.teaserGate.status, taskId: pulse.teaserGate.taskId, taskState: pulse.teaserGate.taskState},
-  ...(safeExecution ? {safeExecution} : {}),
+  ...(retainedSafeExecution ? {safeExecution: retainedSafeExecution} : {}),
 };
 
 await mkdir(dirname(destination), {recursive: true});
