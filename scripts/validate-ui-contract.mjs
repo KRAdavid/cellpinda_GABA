@@ -22,6 +22,7 @@ const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css')
 const indexHtml = await read('index.html');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
 const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
+const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 
 for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research']) {
   requireMatch(app, new RegExp(`(?:id|href)=["']#?${id}["']`), `consumer section or link ${id} is missing`);
@@ -83,6 +84,11 @@ requireMatch(review, /가바 1500 · 스마트스토어 후기 읽기/, 'review 
 requireMatch(indexHtml, /rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root canonical metadata is missing');
 requireMatch(indexHtml, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root Open Graph URL is missing');
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(app + indexHtml)) fail('legacy official-mall destination leaked into consumer source');
+const consumerSource = app + indexHtml + review;
+const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver\.com\/[A-Za-z0-9_/?=&.%:-]+/g)].map(match => match[0]);
+if (!smartStoreLinks.length || smartStoreLinks.some(url => url !== approvedSmartStoreUrl)) {
+  fail(`every consumer Smart Store link must be the approved GABA 1500 detail (${approvedSmartStoreUrl})`);
+}
 
 const shareRoot = resolve(root, 'public/share');
 const shareIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
@@ -95,4 +101,4 @@ for (const id of shareIds) {
   requireMatch(html, /og:image/, `share page ${id} Open Graph image is missing`);
 }
 
-console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 11, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load'], seo: ['canonical', 'og-url']}));
+console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 11, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true}));
