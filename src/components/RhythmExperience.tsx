@@ -261,11 +261,12 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
 
   async function share() {
     if (!type) return;
+    const shareText = `나는 ‘${type.name}’이 나왔어요. 당신의 하루 리듬은 어떤가요? 1분이면 확인할 수 있어요.`;
     onEvent('share_request',{path:result?'/result':'/share'});
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'native'});
     if (cardFile && navigator.share && navigator.canShare?.({ files: [cardFile] })) {
       try {
-        await navigator.share({ files: [cardFile], title: '셀핀다 하루 리듬 이야기', text: '하루의 생활 패턴을 함께 돌아봐요.', url: shareUrl(type,getShareReferralId()) });
+        await navigator.share({ files: [cardFile], title: '셀핀다 하루 리듬 이야기', text: shareText, url: shareUrl(type,getShareReferralId()) });
         setMessage('공유 창을 이용했어요. 실제 전달 여부는 확인하지 않아요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'native'});
         return;
@@ -377,7 +378,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : null}
       <p className="rhythm-status" role="status" aria-live="polite">{message}</p>
       {manualLink ? <label className="rhythm-manual-link">공유 링크<input value={manualLink} readOnly onFocus={event => event.target.select()} /></label> : null}
-      {type && shareBarVisible ? <div className="rhythm-mobile-share-bar" aria-label="리듬 결과 공유"><button type="button" onClick={share}>공유</button><button type="button" onClick={() => void copyLink()}>링크 복사</button></div> : null}
+      {type && shareBarVisible ? <div className="rhythm-mobile-share-bar" aria-label="리듬 결과 공유">{kakaoReady ? <button type="button" onClick={shareToKakao}>카카오톡 공유</button> : <button type="button" onClick={share}>공유</button>}<button type="button" onClick={() => void copyLink()}>링크 복사</button></div> : null}
     </section>
   );
 }
