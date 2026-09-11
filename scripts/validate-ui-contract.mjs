@@ -24,6 +24,7 @@ requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missin
 requireMatch(app, /<nav aria-label="주 메뉴"/, 'consumer navigation label is missing');
 const nav = app.match(/<nav[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
+if (!/<a href="#products">제품 비교<\/a>/.test(nav)) fail('consumer navigation must expose the product comparison destination');
 for (const marker of ['오늘도 몸보다', '1분 리듬 체크 시작', 'GABA는 신경 신호', '스마트스토어']) {
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
