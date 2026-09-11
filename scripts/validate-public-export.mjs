@@ -218,7 +218,8 @@ for (const claim of content.claims.filter(item => ['product-1500', 'fermentation
 const hasRemoved750 = content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750'));
 if (hasRemoved750) fail('removed 750 product returned to public export');
 
-if (content.reviews.length !== 1 || content.reviews[0].id !== 'shop-review-destination-1500' || !isSmartStore(content.reviews[0].sourceUrl)) fail('review destination is not the approved Smart Store 1500 destination');
+const approvedReviewText = '스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.';
+if (content.reviews.length !== 1 || content.reviews[0].id !== 'shop-review-destination-1500' || !isSmartStore(content.reviews[0].sourceUrl) || content.reviews[0].publicText !== approvedReviewText) fail('review destination or consumer copy is not the approved Smart Store 1500 message');
 if (content.reviews.some(review => 'limitations' in review || 'result' in review)) fail('review export exposes internal editorial fields');
 if (/효과를\s*보장하지|개인\s*경험은\s*제품\s*효과|다만\s*GABA만의\s*효과|스트레스에\s*제한적|수면에\s*매우\s*제한적|결과가\s*일치하지|정량\s*메타분석|중증\s*수면질환|수면이\s*좋지\s*않|이상사례|유의하지\s*않/i.test(JSON.stringify(content))) fail('consumer export contains a negative effect disclaimer');
 for (const record of master.records) {

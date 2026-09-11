@@ -150,6 +150,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(content.reviews.length, 1, 'live export must contain the approved Smart Store review destination');
     assert.equal(content.reviews[0].id, 'shop-review-destination-1500', 'live review destination must be the approved GABA 1500 record');
     assert.equal(content.reviews[0].sourceUrl, approvedSmartStoreUrl, 'live review destination must point directly to the Smart Store 1500 product');
+    assert.equal(content.reviews[0].publicText, '스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.', 'live review destination must keep the approved consumer message');
     assert.equal(teaserPreview.status, 'PREVIEW', 'live teaser preview must be marked PREVIEW');
     assert.equal(teaserPreview.url, 'https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site/', 'live teaser preview must use the supplied HTTPS URL');
     assert.equal(teaserPreview.placement, '선택형 보조 CTA · 리듬 체크 다음', 'live teaser preview must keep the approved placement');
