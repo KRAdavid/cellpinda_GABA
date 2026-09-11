@@ -346,3 +346,7 @@ GitHub Pages처럼 Worker API가 없는 정적 호스트에서는 API 주소를 
 `generate:share-pages`를 빌드에 포함하고 라이브 검증에서 6개 공유 경로·결과 이미지·앱 전환·부정적 연구 문구 미포함을 확인한다. 공개 공유 미리보기는 생활 유형을 소개하는 기능이며 제품 효능이나 건강 상태를 판정하지 않는다.
 
 커밋 `46e2c51`의 [GitHub Actions 34590029891](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34590029891)은 검증·Pages 게시·라이브 smoke를 성공시켰다. 라이브 `validate:live`는 페이지 200, 공유 경로 6개, 연구 8건, 제품 1종, Smart Store only, 750 제거, 부정적 연구 문구 0건을 확인했다.
+
+## 2026-09-11 모바일 본문 가독성 계약 보강
+
+모바일 소비자 화면의 핵심 설명을 16px 이상으로 보정하고 장 번호·검토일 같은 메타 라벨은 별도 크기로 유지했다. 첫 화면 가치 제안, 공감·GABA·발효 설명, 제품 FAQ, 연구·후기·7일 챌린지·리듬 체크 본문을 포함한다. `validate-ui-contract.mjs`가 이 가독성 규칙과 11개 핵심 측정 이벤트를 `pnpm run build`에서 함께 확인한다. 로컬 검증과 GitHub Actions 34595981637, 라이브 smoke가 통과했으며, 독립 소비자 사용성 조사·제품 표시 승인·외부 운영 게이트는 계속 남아 있다.
