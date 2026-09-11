@@ -394,7 +394,7 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "후속 수면 연구에서도 위약과 차이가 있었을까요?",
+        "question": "다른 수면 연구에서는 잠드는 시간이 달라졌을까요?",
         "studyType": "무작위·이중눈가림·위약대조 시험",
         "population": "수면에 어려움을 겪는 성인",
         "sampleSize": "54명 배정: GABA 26명, 위약 28명; 50명 완료: 각 25명",
@@ -478,7 +478,7 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "정신적 과제 스트레스 상황에서 EEG와 기분 지표가 달라졌을까요?",
+        "question": "바쁜 과제 상황에서 뇌의 반응과 기분이 달라졌을까요?",
         "studyType": "무작위·단일눈가림·위약대조 교차시험",
         "population": "건강한 성인 63명(남 28명, 여 35명)",
         "sampleSize": "63명",
@@ -514,7 +514,7 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "GABA 섭취 후 잠드는 시간과 비REM 수면이 달라졌을까요?",
+        "question": "GABA 섭취 후 잠드는 시간과 깊은 수면이 달라졌을까요?",
         "studyType": "무작위·단일눈가림·위약대조 교차시험",
         "population": "수면에 불편을 느낀 일본 성인 10명",
         "sampleSize": "수면 EEG 10명; 혈중 GABA 별도 10명",
@@ -551,7 +551,7 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "GABA 섭취 후 휴식·운동 직후 성장호르몬 지표가 변했을까요?",
+        "question": "GABA를 먹고 쉬거나 운동한 뒤 성장호르몬 반응을 살펴봤을까요?",
         "studyType": "무작위·이중눈가림·위약대조 교차시험",
         "population": "18–30세 저항운동 경험 남성 11명",
         "sampleSize": "11명",
@@ -588,7 +588,7 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "GABA와 유청단백질을 운동과 함께 섭취했을 때 제지방량이 달라졌을까요?",
+        "question": "GABA와 단백질을 운동과 함께 먹었을 때 몸의 구성이 달라졌을까요?",
         "studyType": "무작위·이중눈가림·평행군 12주 운동시험",
         "population": "규칙적 운동을 하지 않던 건강한 일본 남성 26명(26–48세)",
         "sampleSize": "26명 배정; 최종 일부 분석 WP 10명, WP+GABA 11명",
@@ -624,7 +624,7 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "뇌의 기저 GABA+ 수치가 감각 학습 결과와 관련이 있을까요?",
+        "question": "뇌 속 GABA 신호와 감각 학습은 어떤 관계가 있을까요?",
         "studyType": "뇌 MRS 관찰·반복 촉각 자극 전후 연구",
         "population": "건강한 성인 18명",
         "sampleSize": "18명",
@@ -635,7 +635,7 @@
         "result": "자극한 손의 촉각 식별이 향상됐고, 해당 영역의 기저 GABA+가 학습 결과 변이의 거의 60%를 설명했습니다. 평균 GABA+ 농도의 일관된 증가·감소는 관찰되지 않았습니다.",
         "productApplicability": "뇌 GABA+와 학습의 관계를 살펴본 관찰 연구예요. 셀핀다 제품의 구성·표시사항은 별도로 함께 확인해 보세요.",
         "consumerScope": "뇌 GABA+와 학습의 연관을 본 관찰 연구예요. 제품 구성·표시사항을 함께 살펴보세요.",
-        "consumerSummary": "뇌의 GABA+ 기저치와 촉각 학습의 관계를 살펴본 관찰 연구예요.",
+        "consumerSummary": "뇌 속 GABA 신호와 촉각 학습의 관계를 살펴본 관찰 연구예요.",
         "hopefulTakeaway": "GABA가 몸에서 어떤 역할로 연구돼 왔는지 살펴본 뒤, 관심이 생겼다면 셀핀다 발효가바의 제품 구성과 표시사항을 확인해 보세요."
       }
     },
