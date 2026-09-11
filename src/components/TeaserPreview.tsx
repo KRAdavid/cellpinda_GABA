@@ -67,7 +67,6 @@ export default function TeaserPreview({onEvent}: Props) {
             title={preview.title}
             src={preview.url}
             allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
             loading="eager"
             referrerPolicy="strict-origin-when-cross-origin"
             onLoad={() => {
