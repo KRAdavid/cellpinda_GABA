@@ -1,9 +1,11 @@
 import {useEffect,useState} from 'react';
+import {Clock3, FlaskConical, UsersRound} from 'lucide-react';
 import './ResearchLibrary.css';
 
 export type ResearchMetadata = {
   question?: string;
   consumerSummary?: string;
+  consumerScope?: string;
   hopefulTakeaway?: string;
   studyType?: string;
   population?: string;
@@ -46,6 +48,15 @@ const facts: [keyof ResearchMetadata, string][] = [
   ['outcome', '무엇을 측정했나요?'],
   ['searchThrough', '문헌 검색 범위'],
 ];
+
+function compactStudyType(value?: string): string {
+  if (!value) return 'GABA 관련 연구';
+  if (/문헌고찰/.test(value)) return '여러 연구를 모아 검토';
+  if (/관찰|MRS/.test(value)) return '뇌의 상태를 관찰';
+  if (/운동/.test(value)) return '사람 대상 운동 연구';
+  if (/섭취|교차|위약|무작위/.test(value)) return '사람 대상 섭취 연구';
+  return value;
+}
 
 function isPublicUrl(value: string | null): value is string {
   if (!value) return false;
@@ -98,7 +109,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     setRequestedId('');
   }, [requestedId, query, activeType, claims]);
   async function copyStudy(id:string){
-    const url=new URL('/',window.location.origin);url.hash=id;
+    const url=new URL(import.meta.env.BASE_URL,window.location.origin);url.hash=id;
     try{await navigator.clipboard.writeText(url.href);setManualLink('');setLinkStatus('이 연구를 바로 여는 링크를 복사했어요.')}
     catch{setManualLink(url.href);setLinkStatus('아래 링크를 선택해 직접 복사해 주세요.')}
   }
@@ -106,7 +117,12 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   return <section id="research" className="section wrap research research-library" aria-labelledby="research-heading">
     <div className="section-head">
       <div><p className="chapter">연구를 쉽게 읽기</p><h2 id="research-heading">어떤 질문을 했고,<br />무엇을 발견했을까요?</h2></div>
-      <p>연구의 핵심을 먼저 쉬운 말로 읽고, 원문에서 조건과 한계를 확인하세요.<br />근거를 바탕으로 내 생활에 가바를 더해볼지 천천히 판단할 수 있습니다.</p>
+      <p>핵심은 짧게, 조건은 펼쳐서.<br />연구와 제품 정보를 나란히 비교해 보세요.</p>
+    </div>
+    <div className="research-reading-path" aria-label="연구 읽는 순서">
+      <div><span>01</span><strong>질문</strong><small>무엇을 궁금해했나요?</small></div>
+      <div><span>02</span><strong>관찰</strong><small>어떤 조건에서 무엇을 봤나요?</small></div>
+      <div><span>03</span><strong>선택</strong><small>내 기준으로 천천히 비교해요.</small></div>
     </div>
     {studies.length > 0 ? <>
       <div className="research-library-controls" role="search" aria-label="승인된 연구 자료 찾기">
@@ -121,37 +137,40 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     {studies.length === 0 ? <p className="note" role="status">현재 표시할 연구 자료가 없습니다. 자료가 준비되면 이곳에서 확인할 수 있습니다.</p> : visibleStudies.length === 0 ? <p className="research-library-empty">조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
       const metadata = claim.metadata!;
       const limitations = [...new Set([...(metadata.limitations ?? []), ...(claim.limitations ?? [])])];
+      const quickFacts = [
+        {label: '참여자', value: metadata.sampleSize, Icon: UsersRound},
+        {label: '기간', value: metadata.duration, Icon: Clock3},
+        {label: '비교', value: metadata.comparison, Icon: FlaskConical},
+      ].filter(item => item.value);
       return <article id={claim.id} className="research-library-card" key={claim.id}>
-        <p className="research-library-kind">{metadata.studyType || claim.topic}</p>
-        {(claim.reviewedAt || claim.evidenceHash) ? <p className="research-library-provenance">{claim.reviewedAt ? `검토일 ${claim.reviewedAt}` : null}{claim.reviewedAt && claim.evidenceHash ? ' · ' : null}{claim.evidenceHash ? <><span>근거 식별자 </span><code title={claim.evidenceHash}>{claim.evidenceHash.slice(0, 12)}…</code></> : null}</p> : null}
+        <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType)}</p>
         <h3>{metadata.question || claim.topic}</h3>
-        <p className="research-library-summary">{claim.publicText}</p>
-        {metadata.consumerSummary ? <p className="research-library-consumer-summary"><strong>쉽게 말하면</strong>{metadata.consumerSummary}</p> : null}
-        <p className="research-library-scope"><strong>이 연구가 말해 주는 범위</strong>{metadata.productApplicability}</p>
-        {metadata.hopefulTakeaway ? <p className="research-library-hopeful"><strong>다음으로 확인해 볼 일</strong>{metadata.hopefulTakeaway}</p> : null}
-        <dl className="research-library-preview" aria-label="연구의 핵심 조건">
-          {(['population', 'sampleSize', 'duration', 'searchThrough'] as const).map(key => metadata[key] ? <div key={key}>
-            <dt>{facts.find(([field]) => field === key)![1]}</dt><dd>{metadata[key]}</dd>
-          </div> : null)}
-        </dl>
+        {metadata.consumerSummary ? <p className="research-library-consumer-summary"><strong>한 문장으로</strong>{metadata.consumerSummary}</p> : null}
+        <div className="research-library-quick-facts" aria-label="연구 핵심 조건">
+          {quickFacts.map(({label, value, Icon}) => <div key={label}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span><strong>{label}</strong><small>{value}</small></span></div>)}
+        </div>
+        <p className="research-library-scope"><strong>연구의 범위</strong>{metadata.consumerScope || '이 자료의 연구 조건과 제품 정보는 따로 비교해 보세요.'}</p>
         <details className="research-detail" onToggle={event => {
           if (event.currentTarget.open) onOpen?.(claim.id);
         }}>
-          <summary>연구 조건·결과·한계 자세히 읽기</summary>
+          <summary>조건·수치·한계 자세히 보기</summary>
           <div className="research-library-detail">
+            <div className="research-library-overview"><h4>자료 설명</h4><p>{claim.publicText}</p></div>
             <dl className="research-library-facts">{facts.map(([key, label]) => {
               const value = metadata[key];
               return typeof value === 'string' && value ? <div key={key}><dt>{label}</dt><dd>{value}</dd></div> : null;
             })}</dl>
             <div className="research-library-findings"><h4>무엇이 관찰됐나요?</h4><p>{metadata.result}</p>
+              <div className="research-library-boundary"><h4>제품과 연결해 읽기</h4><p>{metadata.productApplicability}</p></div>
               {limitations.length > 0 && <><h4>함께 읽어야 할 한계</h4><ul>{limitations.map(item => <li key={item}>{item}</li>)}</ul></>}
             </div>
           </div>
-          <div className="research-library-sources"><h4>직접 확인하는 원문</h4>{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
+          <div className="research-library-sources"><h4>직접 확인하는 원문</h4>{(claim.reviewedAt || claim.evidenceHash) ? <p className="research-library-provenance">{claim.reviewedAt ? `검토일 ${claim.reviewedAt}` : null}{claim.reviewedAt && claim.evidenceHash ? ' · ' : null}{claim.evidenceHash ? <><span>근거 식별자 </span><code title={claim.evidenceHash}>{claim.evidenceHash.slice(0, 12)}…</code></> : null}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
             <a key={`${source.url}-${source.title}`} href={source.url!} target="_blank" rel="noopener noreferrer">{source.title} <span aria-label="새 창">↗</span></a>,
           )}</div>
         </details>
-        <a className="text-link research-try-link" href="#products">연구와 제품 정보는 별개입니다. 위 조건과 적용 범위를 확인한 뒤 제품 구성·표시사항을 따로 살펴보세요 →</a>
+        {metadata.hopefulTakeaway ? <p className="research-library-hopeful"><strong>다음으로</strong>{metadata.hopefulTakeaway}</p> : null}
+        <a className="text-link research-try-link" href="#products">제품 구성·표시사항 보기 →</a>
         <button type="button" className="text-link research-copy" onClick={()=>copyStudy(claim.id)}>이 연구 링크 복사 ↗</button>
       </article>;
     })}

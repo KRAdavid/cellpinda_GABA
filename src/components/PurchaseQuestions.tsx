@@ -14,16 +14,16 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
     <div className="purchase-faq-heading">
       <p className="chapter">구매 전 확인</p>
       <h3 id="purchase-faq-heading">제품을 알아본 뒤,<br />남은 질문을 확인하세요.</h3>
-      <p>확인된 제품 구성과 공식 확인 경로를 분리해 안내합니다. 이 페이지는 진단이나 섭취량 추천을 하지 않습니다.</p>
+      <p>제품 구성은 짧게, 구매 전 확인할 정보는 펼쳐서 안내해요.</p>
     </div>
     <div className="purchase-faq-list">
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'amount' }); }}>
         <summary>현재 판매 제품은 어떤 구성인가요?</summary>
-        <div><p>{productSummary ? `${productSummary}입니다.` : '현재 공개된 제품 구성 정보가 없습니다.'} 상품명과 제품 이미지에서 확인한 범위만 안내합니다.</p><p>내용량을 특정 증상이나 사람에게 맞는 권장량으로 해석하지 않습니다.</p></div>
+        <div><p>{productSummary ? `${productSummary}입니다.` : '현재 공개된 제품 구성 정보가 없습니다.'}</p><p>표시된 구성은 제품을 이해하기 위한 정보예요. 섭취 방법과 주의사항은 포장 표시를 확인하세요.</p></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'selection' }); }}>
         <summary>어떤 제품이 나에게 맞는지 알려주나요?</summary>
-        <div><p>리듬 체크 결과로 제품이나 용량을 추천하지 않습니다. 내용량, 포장 구성, 공식 표시사항과 자신의 생활 맥락을 확인한 뒤 선택하세요.</p><a className="text-link" href="#rhythm">리듬 체크는 생활 습관을 돌아보는 경험입니다 →</a></div>
+        <div><p>리듬 체크는 생활을 돌아보는 경험이에요. 내용량·포장 구성·표시사항을 확인하고 내 생활에 맞는지 스스로 선택해 보세요.</p><a className="text-link" href="#rhythm">나의 하루 리듬 다시 보기 →</a></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'label' }); }}>
         <summary>섭취 방법과 주의사항은 어디서 확인하나요?</summary>
@@ -31,11 +31,11 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'reviews' }); }}>
         <summary>다른 사람의 후기는 어떻게 읽어야 하나요?</summary>
-        <div><p>후기는 개인의 사용 경험이며 제품 효과를 입증하는 연구 자료가 아닙니다. 작성 시점, 제품 구성, 사용 기간과 제공·대가 관계를 원문에서 확인하세요.</p><a className="text-link" href="#reviews">제품별 후기 원문 보기 →</a></div>
+        <div><p>후기는 한 사람의 사용 경험이에요. 작성 시점·제품 구성·사용 기간·제공이나 대가 관계를 원문에서 함께 확인해 보세요.</p><a className="text-link" href="#reviews">제품별 후기 원문 보기 →</a></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'evidence' }); }}>
         <summary>연구 결과가 셀핀다가바의 효과를 보장하나요?</summary>
-        <div><p>보장하지 않습니다. 연구마다 대상·제형·용량·기간·비교 조건이 다르며, 각 자료에 셀핀다 완제품에 적용할 수 있는 범위와 한계를 함께 표시합니다.</p><a className="text-link" href="#research">연구 조건과 한계 읽기 →</a></div>
+        <div><p>연구와 제품은 서로 다른 질문을 다뤄요. 각 자료에서 대상·제형·용량·기간·비교 조건을 확인하고, 제품 정보는 표시사항과 나란히 비교해 보세요.</p><a className="text-link" href="#research">연구 조건·수치·한계 보기 →</a></div>
       </details>
     </div>
   </section>;

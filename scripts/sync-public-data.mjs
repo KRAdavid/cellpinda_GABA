@@ -47,7 +47,7 @@ if(existsSync(heartbeatPath)){
   if(!hashChanged) pulseForQueue={...pulseForQueue,generatedAt:heartbeat.generatedAt,continuation:heartbeat.continuation,...(heartbeat.safeExecution ? {safeExecution:heartbeat.safeExecution} : {})};
 }
 const smartStoreHost='smartstore.naver.com';
-const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerSummary','hopefulTakeaway'];
+const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerScope','consumerSummary','hopefulTakeaway'];
 
 function publicSources(item){
   return (item.sources || [])
@@ -58,7 +58,7 @@ function publicSources(item){
 const publicMetadataKeys=[
   'studyType','population','sampleSize','dose','duration','comparison',
   'outcome','result','limitations','productApplicability','question',
-  'searchThrough','studyCount','consumerSummary','hopefulTakeaway',
+  'searchThrough','studyCount','consumerScope','consumerSummary','hopefulTakeaway',
 ];
 
 function publicMetadata(item){
@@ -126,7 +126,7 @@ const masterIndex={
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
   records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,limitations,reviewedAt,evidenceHash})=>{
-    return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,result:metadata.result,consumerSummary:metadata.consumerSummary,hopefulTakeaway:metadata.hopefulTakeaway,limitations:[...(metadata.limitations||[]),...(limitations||[])],productApplicability:metadata.productApplicability,sources,evidenceHash};
+    return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,result:metadata.result,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,hopefulTakeaway:metadata.hopefulTakeaway,limitations:[...(metadata.limitations||[]),...(limitations||[])],productApplicability:metadata.productApplicability,sources,evidenceHash};
   }),
 };
 for(const record of masterIndex.records){

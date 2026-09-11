@@ -36,3 +36,38 @@
 .research-library-card{scroll-margin-top:110px}.research-copy{margin-top:18px}.research-manual-link{display:block;width:100%;padding:12px;border:1px solid #cad3ce}
 .research-library-controls{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr)) auto;gap:20px;align-items:end;margin:24px 0 12px}.research-library-controls label{display:grid;gap:9px;font-size:14px;font-weight:500;min-width:0}.research-library-controls input,.research-library-controls select{display:block;width:100%;min-height:48px;padding:12px 14px;border:1px solid #cad3ce;border-radius:4px;background:#fff;color:#18382b;font:inherit;min-width:0}.research-library-controls>.text-link{font-size:13px;min-height:48px}.research-library-count{font-size:13px;margin:24px 0 12px;color:#486356}.research-library-empty{padding:28px;border:1px solid #d9e5dc;border-radius:6px;font-size:15px}.research-library-controls select:focus-visible{outline:2px solid #355c49;outline-offset:4px}
 @media(max-width:700px){.research-library-controls{grid-template-columns:minmax(0,1fr);gap:16px}.research-library-controls>.text-link{justify-self:start;min-height:36px}.research-library-empty{padding:20px}}
+
+/* Consumer-first, Apple-like reading layer: one short takeaway, then progressive detail. */
+.research-reading-path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:0 0 18px;background:#dfe8e1;border:1px solid #dfe8e1;border-radius:10px;overflow:hidden}
+.research-reading-path>div{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;padding:18px 20px;background:#f8faf8}
+.research-reading-path span{grid-row:span 2;font-size:.72rem;letter-spacing:.08em;color:#789183}
+.research-reading-path strong{font-size:.96rem;font-weight:600;line-height:1.35;color:#18382b}
+.research-reading-path small{font-size:.78rem;line-height:1.55;color:#64786b}
+.research-library-card{padding:3.2rem 0}
+.research-library-kind{display:flex;align-items:center;gap:9px;margin:0;color:#486356;font-size:.78rem;letter-spacing:.06em}
+.research-library-kind-mark{width:8px;height:8px;border-radius:50%;background:#158457;box-shadow:0 0 0 5px #e8f1e7;flex:0 0 auto}
+.research-library-card h3{max-width:30ch;font-size:clamp(1.45rem,2.7vw,2.2rem);line-height:1.38;margin:.9rem 0 1.25rem}
+.research-library-consumer-summary{max-width:62ch;margin:0;line-height:1.85;font-size:1.05rem;color:#18382b}
+.research-library-consumer-summary strong{display:block;margin:0 0 .45rem;color:#158457;font-size:.74rem;letter-spacing:.1em;font-weight:650}
+.research-library-quick-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:1.7rem 0 1.25rem;max-width:900px}
+.research-library-quick-facts>div{display:flex;align-items:flex-start;gap:10px;min-width:0;padding:14px 15px;border:1px solid #e0e8e1;border-radius:7px;background:#fff}
+.research-library-quick-facts svg{color:#158457;flex:0 0 auto;margin-top:2px}
+.research-library-quick-facts span{display:grid;gap:4px;min-width:0}
+.research-library-quick-facts strong{font-size:.72rem;letter-spacing:.05em;color:#64786b;font-weight:600}
+.research-library-quick-facts small{font-size:.83rem;line-height:1.55;color:#18382b;overflow-wrap:anywhere}
+.research-library-scope{display:grid;gap:5px;max-width:900px;margin:1.25rem 0 0;padding:15px 18px;border:0;border-left:3px solid #158457;border-radius:0 6px 6px 0;background:#f5f8f5;line-height:1.7;font-size:.9rem;color:#315f48}
+.research-library-scope strong{margin:0;color:#18382b;font-size:.74rem;letter-spacing:.08em;font-weight:650}
+.research-library-card details.research-detail{max-width:900px;margin-top:1.1rem;border-top:1px solid #e0e8e1;border-bottom:1px solid #e0e8e1}
+.research-library .research-detail summary{padding:16px 0;font-size:.9rem;color:#315f48}
+.research-library-detail{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem;padding:4px 0 1rem}
+.research-library-overview{grid-column:1/-1;padding:0 0 1rem;border-bottom:1px solid #e0e8e1}
+.research-library-overview h4,.research-library-boundary h4{font-size:.82rem;letter-spacing:.05em;color:#486356;margin:.8rem 0 .45rem}
+.research-library-overview p,.research-library-boundary p{font-size:.9rem;line-height:1.8;color:#52685c;margin:0}
+.research-library-boundary{margin:1.1rem 0 1.35rem;padding:13px 15px;background:#f5f8f5;border-radius:6px}
+.research-library-findings .research-library-boundary h4{margin:0 0 .4rem}
+.research-library-provenance{font-size:.72rem;margin:.4rem 0 1rem;color:#64756a}
+.research-library-hopeful{max-width:900px;margin:1.25rem 0 0;padding:0;background:none;color:#52685c;font-size:.88rem;line-height:1.75}
+.research-library-hopeful strong{display:inline-block;margin-right:.55rem;color:#158457;font-size:.74rem;letter-spacing:.08em}
+.research-try-link{display:inline-flex;margin-top:1.35rem;font-size:.88rem;font-weight:650}
+.research-copy{display:inline-flex;margin:1.35rem 0 0 1.25rem;font-size:.82rem;color:#64786b}
+@media(max-width:700px){.research-reading-path{grid-template-columns:1fr}.research-reading-path>div{padding:14px 16px}.research-library-card{padding:2.5rem 0}.research-library-quick-facts{grid-template-columns:1fr;gap:8px}.research-library-quick-facts>div{padding:13px 14px}.research-library-detail{grid-template-columns:minmax(0,1fr);gap:1rem}.research-copy{margin-left:0;margin-top:1rem}}
