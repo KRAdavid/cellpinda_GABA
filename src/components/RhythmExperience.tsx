@@ -16,7 +16,7 @@ function getSharedType(): RhythmType | null {
 }
 
 function shareUrl(type: RhythmType): string {
-  const url = new URL('/', window.location.origin);
+  const url = new URL(import.meta.env.BASE_URL, window.location.origin);
   url.searchParams.set('rhythm', type.id);
   url.hash = 'rhythm';
   return url.toString();

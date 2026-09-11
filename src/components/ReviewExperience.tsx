@@ -53,6 +53,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
     const destination = reviewDestination(review);
     return destination ? [{ review, ...destination }] : [];
   });
+  if (!quotes.length && !destinations.length) return null;
   return <section id="reviews" className="section sage review-experience" aria-labelledby="review-heading">
     <div className="wrap">
       <div className="section-head">
