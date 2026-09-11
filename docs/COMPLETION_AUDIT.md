@@ -526,3 +526,9 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 외부 티저 검토본은 고정된 파일 영상이 아니라 브라우저 애니메이션으로 확인됐으므로, 히어로 CTA의 `30초` 표현을 `발효가바 이야기 영상 보기`로 바꿨다. 소비자에게 확인되지 않은 재생 시간을 약속하지 않도록 UI 계약에 duration-neutral 문구와 회귀 가드를 추가했고, 티저의 PREVIEW/HOLD 승인 경계는 그대로 유지했다.
 
 라이브 smoke에도 배포된 module bundle을 직접 읽어 새 CTA가 실제 배포 자산에 들어갔는지, 이전 시간 단정 문구가 남지 않았는지 확인하는 검사를 추가했다.
+
+## 2026-09-12 공개 운영 경계·문서 원장 재정렬
+
+공개 `?view=admin`과 `?view=ops`가 소비자 랜딩으로 안전하게 폴백하고, 콘텐츠 검토실·TF 운영판은 로컬 운영 주소에서만 열리는 현재 동작을 `LIVE_UI_QA.md`와 `README.md`에 반영했다. 공개 Pages의 실제 module bundle과 내부 경로 응답을 다시 확인해 티저 CTA, 스마트스토어 단일 목적지, 750 제거, 연구·공유·운영 패킷 일치를 검증했다.
+
+문서 보정 커밋 `29219b8`, `1840e6e`의 [GitHub Actions 34646084950](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34646084950), [34646611510](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34646611510)은 타입검사·전체 테스트·빌드·Pages 게시·라이브 smoke를 통과했다. 외부 후기 권한·티저 최종 승인·Cloudflare 운영 연결·실주문 대사는 기존 입력 게이트로 유지한다.
