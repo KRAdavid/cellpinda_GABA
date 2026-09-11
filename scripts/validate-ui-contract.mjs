@@ -77,6 +77,8 @@ for (const event of ['hero_check_start', 'rhythm_check_complete', 'result_share_
 }
 requireMatch(teaser, /allow="autoplay; fullscreen; picture-in-picture"/, 'teaser autoplay permission is missing');
 requireMatch(teaser, /loading="eager"/, 'teaser must load eagerly when exposed');
+requireMatch(app, /발효가바 이야기 영상 보기/, 'hero teaser CTA must use a duration-neutral consumer label');
+if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('hero teaser CTA must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
