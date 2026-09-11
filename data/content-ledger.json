@@ -496,7 +496,7 @@
     {
       "id": "research-yamatsu-2016",
       "topic": "수면",
-      "publicText": "2016년 연구는 수면이 좋지 않은 성인 10명이 GABA 100mg과 위약을 각각 1주씩 섭취하며 잠드는 시간과 비REM 수면을 비교한 자료입니다.",
+      "publicText": "2016년 연구는 수면에 불편을 느낀 일본 성인 10명이 GABA 100mg과 위약을 각각 1주씩 섭취하며 잠드는 시간과 비REM 수면을 비교한 자료입니다.",
       "status": "approved",
       "sources": [
         {
@@ -516,7 +516,7 @@
       "metadata": {
         "question": "GABA 섭취 후 잠드는 시간과 비REM 수면이 달라졌을까요?",
         "studyType": "무작위·단일눈가림·위약대조 교차시험",
-        "population": "수면의 질이 낮지만 중증 수면질환은 없는 일본 성인 10명(남 6명, 여 4명)",
+        "population": "수면에 불편을 느낀 일본 성인 10명",
         "sampleSize": "수면 EEG 10명; 혈중 GABA 별도 10명",
         "dose": "수면 연구 GABA 100mg/일; 흡수 연구 GABA 200mg 1회",
         "duration": "GABA와 위약 각 1주, 중간 세척 1주",
@@ -526,7 +526,8 @@
         "productApplicability": "특정 발효 GABA 원료와 수면 변화를 살펴본 연구예요. 셀핀다 제품의 구성·표시사항을 함께 비교해 보세요.",
         "consumerScope": "특정 발효 GABA 원료와 위약을 비교한 수면 연구예요. 제품 구성·표시사항을 함께 살펴보세요.",
         "consumerSummary": "잠드는 시간과 비REM 수면을 비교해 살펴본 소규모 연구예요.",
-        "hopefulTakeaway": "잠들기 전 나만의 휴식 루틴을 확인하고, 편안한 전환 시간을 만들어 보세요."
+        "hopefulTakeaway": "잠들기 전 나만의 휴식 루틴을 확인하고, 편안한 전환 시간을 만들어 보세요.",
+        "sourcePopulation": "수면의 질이 낮지만 중증 수면질환은 없는 일본 성인 10명(남 6명, 여 4명)"
       }
     },
     {
