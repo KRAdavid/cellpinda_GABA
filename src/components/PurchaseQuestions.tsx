@@ -34,8 +34,8 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
         <div><p>후기는 한 사람의 사용 경험이에요. 작성 시점·제품 구성·사용 기간·제공이나 대가 관계를 원문에서 함께 확인해 보세요.</p><a className="text-link" href="#reviews">제품별 후기 원문 보기 →</a></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'evidence' }); }}>
-        <summary>연구 결과가 셀핀다가바의 효과를 보장하나요?</summary>
-        <div><p>연구와 제품은 서로 다른 질문을 다뤄요. 각 자료에서 대상·제형·용량·기간·비교 조건을 확인하고, 제품 정보는 표시사항과 나란히 비교해 보세요.</p><a className="text-link" href="#research">연구 조건·수치·한계 보기 →</a></div>
+        <summary>연구 내용은 제품을 이해하는 데 어떻게 도움이 되나요?</summary>
+        <div><p>연구에서 살펴본 사람·섭취 조건·관찰 내용을 쉬운 말로 정리했어요. 제품 구성과 표시사항을 함께 보며 나에게 필요한 정보를 천천히 찾아보세요.</p><a className="text-link" href="#research">연구를 쉽게 읽어보기 →</a></div>
       </details>
     </div>
   </section>;
