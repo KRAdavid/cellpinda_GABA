@@ -1,6 +1,6 @@
 # 전체 목표 완료 간극 점검
 
-기준일 2026-09-11. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 [GitHub Actions 34500686452](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34500686452)와 2026-09-11 공개 URL 재검증을 기준으로 한다.
+기준일 2026-09-12. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 [GitHub Actions 34631318636](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34631318636)와 2026-09-12 공개 URL 재검증을 기준으로 한다.
 
 커밋 `b5e70b4`에서 Node/SQLite와 Worker/D1의 초기화 시 canonical 스마트스토어 후기 목적지를 원장 해시 기준으로 동기화했다. 영구 DB에 남은 이전 목적지만 revision·audit과 함께 보정하며, 인용 후기와 운영자 수정본은 보존한다. 60개 회귀 테스트, 타입검사, production build, 로컬 Worker/D1 HTTP에서 content 200(후기 1건)과 샌드박스 PUT/GET/DELETE 200을 확인했다. `docs/B2_MATERIAL_VERIFICATION_20260911.md`에는 완제품 포장 자료와 원료 제외 경계를 묶었고, `goal:next`는 B2 검증 진행을 별도 표시한다. 원격 Cloudflare D1·백업 복구는 여전히 외부 운영 조건이다.
 
@@ -457,3 +457,9 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 단일 제품 구성 공유와 7일 챌린지 초대 링크도 결과 공유와 같은 승인된 캠페인 식별자(`campaign`)를 선택적으로 보존하도록 수정했다. 허용 형식과 길이를 코드에서 제한하고, UI 계약 검증이 두 컴포넌트의 보존 규칙을 확인한다. 답변·개인정보·추천 보상은 링크에 넣지 않으며 기존 결과 공유의 `ref`·`campaign` 익명 경계를 변경하지 않는다.
 
 안전 TF 실행 기록은 외부 효과 없이 공개 데이터 동기화와 6개 읽기 검사를 `MET`으로 남겼다. 현재 core 검사는 통과하고 B2·B3·B4·C2·E1 외부 입력 게이트가 남아 있으므로 전체 목표는 `IN_PROGRESS_WITH_GATES`로 유지한다.
+
+## 2026-09-12 익명 사용성 측정 동의 및 최신 배포 재검증
+
+소비자 페이지에 선택형 익명 사용성 측정 안내를 추가했다. 동의하지 않거나 아직 선택하지 않은 상태에서는 이벤트를 전송하지 않고, 허용한 경우에도 화면 흐름만 기록하며 이름·연락처·문항별 답변은 수집하지 않는다. 브라우저 저장소 접근 자체가 차단되는 환경에서는 측정을 허용하지 않는 기본값을 유지한다. 이 변경은 목표 문서 14번의 동의 구조 요구를 구현한 것이며, 소비자 기능을 제한하지 않는다.
+
+`validate:ui-contract`, 타입검사, 전체 80개 회귀 테스트, production build와 TF pulse `34631290886`가 성공했다. heartbeat 커밋 `8a2f258` 이후 배포 `34631318636` 및 라이브 smoke가 성공했고, 공개 검증은 page 200·claims 14·masterRecords 8·products 1·sharePages 6·Smart Store only·750 제거·provenance 일치를 확인했다. 실제 후기 권한, 최종 표시 승인, 티저 최종 미디어·권리, Cloudflare 운영 Secrets, 실주문 대사는 여전히 외부 입력 게이트다.
