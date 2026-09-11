@@ -27,6 +27,7 @@ const isSmartStore = value => {
 
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
 if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 신경 신호의 균형 조절에 관여하는 물질입니다/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || !/gaba-master-index\.json/i.test(indexHtml) || !/smartstore\.naver\.com\/cellpinda/i.test(indexHtml)) fail('index.html must keep a readable static fallback with product, research, and Smart Store links');
+if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml) || !/<meta property="og:type" content="website"\s*\/>/i.test(indexHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml)) fail('index.html must expose canonical and Open Graph URL metadata');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');
