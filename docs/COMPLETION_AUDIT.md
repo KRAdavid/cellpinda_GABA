@@ -335,3 +335,7 @@ GitHub `GITHUB_TOKEN`으로 만든 heartbeat push는 후속 workflow를 자동 �
 ## 2026-09-11 역할 Secret 사전 검증 보강
 
 `check-deploy-readiness.mjs`가 선택형 `ADMIN_ROLE_TOKENS`를 설정한 환경에서 편집자·검토자·승인자 세 키의 존재·길이·중복을 비밀값 없이 검사한다. 불완전한 역할 구성이면 strict 배포 전에 실패하고, 미설정 환경은 기존 `ADMIN_TOKEN` 호환 모드로 구분된다. 부분 구성과 세 역할 구성 모두를 실제 preflight 명령으로 확인했으며, 현재 운영 환경은 필수 Cloudflare Secret 5개가 없어 `WAITING`이다.
+
+## 2026-09-11 TF 회의 정족수 계약 보강
+
+MVP Goal Contract의 회의 프로토콜에 정족수 규칙을 추가했다. 내부 작업은 실행 담당자와 독립 검증자의 2인 확인을 기본으로 하고, 공개·외부 약속은 해당 책임자와 TF 리드가 추가 확인한다. 운영 화면에 규칙을 표시하고 `validate:ops`와 도메인 테스트에서 독립 검증자 문구가 계약에 포함되는지 확인한다. 자동 pulse는 사람 정족수를 대신하지 않으며 B2·B3·B4·C2·E1의 외부 게이트 상태는 유지한다.

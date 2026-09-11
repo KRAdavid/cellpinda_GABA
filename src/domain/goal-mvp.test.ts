@@ -13,6 +13,7 @@ test('one sentence goal generates a contract, TF and dependency graph', () => {
   assert.equal(plan.contract.goalType, 'PUBLISH_RESEARCH_INDEX');
   assert.equal(plan.contract.readiness, 'READY');
   assert.ok(plan.contract.focusAreas.includes('공개 근거 인덱스'));
+  assert.match(plan.contract.decisionProtocol.quorum, /독립 검증자/);
   assert.deepEqual(plan.tasks[0].state, 'READY');
   assert.deepEqual(taskGraphEdges(plan.tasks).slice(0, 2), [{from: 'G1', to: 'E1'}, {from: 'E1', to: 'E2'}]);
 });

@@ -18,6 +18,7 @@ export type MvpTeamMember = {
 
 export type MvpDecisionProtocol = {
   cadence: string;
+  quorum: string;
   steps: string[];
   record: string[];
 };
@@ -171,6 +172,7 @@ const team: MvpTeamMember[] = [
 
 const decisionProtocol: MvpDecisionProtocol = {
   cadence: '업무 파동이 끝나거나 근거·권한·위험이 충돌할 때만 회의한다.',
+  quorum: '내부 작업은 실행 담당자와 독립 검증자가 함께 판단한다. 공개·외부 약속은 해당 책임자와 TF 리드가 추가로 확인한다.',
   steps: ['목표·성공 기준 확인', '사실·가정·미확인 정보 분리', '역할별 의견과 반대 검토 제출', '대안·위험·비용 비교', '실행안과 승인 필요 여부 결정', '결과 측정 후 재계획'],
   record: ['결정사항', '판단 근거·출처', '반대 의견', '담당자·기한', '예상 결과·실제 결과', '다음 조치'],
 };
