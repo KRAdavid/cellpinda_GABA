@@ -532,3 +532,9 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 공개 `?view=admin`과 `?view=ops`가 소비자 랜딩으로 안전하게 폴백하고, 콘텐츠 검토실·TF 운영판은 로컬 운영 주소에서만 열리는 현재 동작을 `LIVE_UI_QA.md`와 `README.md`에 반영했다. 공개 Pages의 실제 module bundle과 내부 경로 응답을 다시 확인해 티저 CTA, 스마트스토어 단일 목적지, 750 제거, 연구·공유·운영 패킷 일치를 검증했다.
 
 문서 보정 커밋 `29219b8`, `1840e6e`의 [GitHub Actions 34646084950](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34646084950), [34646611510](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34646611510)은 타입검사·전체 테스트·빌드·Pages 게시·라이브 smoke를 통과했다. 외부 후기 권한·티저 최종 승인·Cloudflare 운영 연결·실주문 대사는 기존 입력 게이트로 유지한다.
+
+## 2026-09-12 로컬 자료 자동 감시·운영 요약 연결 확인
+
+`pnpm run audit:watch`를 실제 실행해 자료 매니페스트의 로컬 루트를 감시하고, 초기 감사 후 파일 이벤트를 750ms 단위로 묶어 `tmp/local-goal-audit.json`을 갱신하는 것을 확인했다. 실행 중인 로컬 API의 `/api/ops/local-audit`도 HTTP 200으로 완제품 후보·주문 입력 대기·목표 상태의 비공개 요약을 반환했다. 원문 행·개인정보·로컬 경로는 응답과 공개 export에 포함되지 않는다.
+
+이번 확인은 로컬 자료가 운영 중간 확인 화면으로 자동 연결되는 경로를 증명하며, 제품 표시 최종 승인·실주문·환불 대사를 자동 완료한 것으로 해석하지 않는다.
