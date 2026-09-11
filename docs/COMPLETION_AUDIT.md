@@ -568,3 +568,9 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 사용자가 지정한 소비자 안내 문장 `스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.`를 공개 export와 라이브 smoke의 회귀 기준으로 고정했다. 후기 목적지는 계속 가바 1500 상세 페이지(`https://smartstore.naver.com/cellpinda/products/4701017202`)로 직접 연결되며, 문구가 임의로 바뀌거나 다른 상품 경로로 이동하면 `validate-public-export.mjs`와 `validate-live-public.mjs`가 실패한다. 이 검사는 문구·목적지 일관성만 확인하며 실제 후기 재게시 권한이나 구매 성과를 승인하지 않는다.
 
 운영 API가 다른 승인 문구를 반환하는 경우에도 소비자 화면이 임의 문구를 노출하지 않도록 `ReviewExperience`가 동일한 안내 문장을 확인한 뒤 목적지를 표시한다. 정적 export·API 런타임·UI 계약이 모두 같은 문장을 요구하며, 후기 원문 권한 게이트는 별도로 유지한다.
+
+## 2026-09-12 스마트스토어 상세 URL 전체 일치 가드
+
+후기 원문 목적지를 경로 일부가 아니라 승인된 전체 URL `https://smartstore.naver.com/cellpinda/products/4701017202`로 관리하도록 `REVIEW_DESTINATION_URL` 상수를 추가했다. 소비자 화면, Node API, Cloudflare Worker가 URL을 정규화한 뒤 이 값과 정확히 일치할 때만 목적지를 공개하며, 쿼리·해시가 붙은 변형 주소는 거부한다. 회귀 테스트를 추가하고 `validate:ui-contract`, `validate:public`, production build, 전체 84개 테스트와 GitHub Actions `34654975186`의 Pages·라이브 smoke를 통과했다.
+
+이 가드는 사용자가 지정한 스마트스토어 상품 상세 화면으로의 직결성을 보장한다. 스마트스토어 재고·가격, 후기 재게시 권한과 실제 구매 전환은 별도 운영 검증 항목이다.
