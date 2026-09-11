@@ -385,6 +385,12 @@ export function verifySandboxTask(tasks: readonly MvpTask[], taskId: string, now
 export type IndependentReviewInput = {
   verifier: string;
   acceptedCriteria: string[];
+  /**
+   * References the reviewer actually checked. The sandbox output references
+   * must be carried forward so a review cannot claim acceptance of an
+   * unrelated artifact.
+   */
+  evidenceReferences: string[];
   note: string;
   decision: 'accept' | 'rework';
 };
@@ -401,12 +407,15 @@ export function recordIndependentReview(tasks: readonly MvpTask[], taskId: strin
   if (typeof input.verifier !== 'string' || input.verifier.trim().length < 2 || input.verifier.trim().length > 200) throw new Error('검증자 역할을 입력해 주세요.');
   if (input.verifier.trim() !== source.verifier) throw new Error(`지정된 독립 검증 역할(${source.verifier})만 이 작업을 검토할 수 있습니다.`);
   if (!Array.isArray(input.acceptedCriteria) || input.acceptedCriteria.length !== source.acceptance.length || source.acceptance.some(item => !input.acceptedCriteria.includes(item))) throw new Error('모든 수락 기준을 확인해야 합니다.');
+  if (!Array.isArray(input.evidenceReferences) || input.evidenceReferences.length === 0 || input.evidenceReferences.length > 50 || input.evidenceReferences.some(item => typeof item !== 'string' || item.trim().length < 3 || item.length > 2000)) throw new Error('확인한 산출물·근거 참조를 하나 이상 입력해 주세요.');
+  const evidenceReferences = input.evidenceReferences.map(item => item.trim());
+  if (source.evidence.some(item => !evidenceReferences.includes(item))) throw new Error('샌드박스 산출물 지문을 모두 확인한 뒤 검토를 기록해야 합니다.');
   if (typeof input.note !== 'string' || input.note.trim().length < 10 || input.note.length > 2000) throw new Error('검토 메모를 10자 이상 입력해 주세요.');
   if (input.decision !== 'accept' && input.decision !== 'rework') throw new Error('검토 판정이 올바르지 않습니다.');
   const review: IndependentReviewRecord = {
     verifier: input.verifier.trim(),
     acceptedCriteria: [...input.acceptedCriteria],
-    evidence: [...source.evidence],
+    evidence: evidenceReferences,
     note: input.note.trim(),
     decision: input.decision,
     mode: 'human_independent_review',

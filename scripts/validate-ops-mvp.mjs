@@ -36,6 +36,7 @@ assert.equal(interactiveWave.tasks.find(task => task.id === 'G1')?.state, 'VERIF
 const interactiveReview = recordIndependentReview(interactiveWave.tasks, 'G1', {
   verifier: '품질감사관',
   acceptedCriteria: [...plan.tasks[0].acceptance],
+  evidenceReferences: [...interactiveWave.tasks.find(task => task.id === 'G1').evidence],
   note: '수락 기준과 샌드박스 산출물의 연결을 모두 확인했습니다.',
   decision: 'accept',
 }, timestamps[3]);

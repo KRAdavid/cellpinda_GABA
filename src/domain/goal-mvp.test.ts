@@ -120,6 +120,7 @@ test('human independent review records a decision and unlocks the next task', ()
   const reviewed = recordIndependentReview(started.tasks, 'G1', {
     verifier: '품질감사관',
     acceptedCriteria: [...plan.tasks[0].acceptance],
+    evidenceReferences: [...started.tasks.find(item => item.id === 'G1')!.evidence],
     note: '수락 기준과 샌드박스 산출물의 연결을 모두 확인했습니다.',
     decision: 'accept',
   }, '2026-09-10T10:01:00.000Z');
@@ -144,6 +145,7 @@ test('human independent review can return work to rework and rerun it', () => {
   const rework = recordIndependentReview(started.tasks, 'G1', {
     verifier: '품질감사관',
     acceptedCriteria: [...plan.tasks[0].acceptance],
+    evidenceReferences: [...started.tasks.find(item => item.id === 'G1')!.evidence],
     note: '산출물에 한 가지 보완 설명이 필요합니다.',
     decision: 'rework',
   }, '2026-09-10T10:01:00.000Z');
@@ -166,7 +168,7 @@ test('independent review refuses incomplete criteria or short rationale', () => 
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
   const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
   assert.throws(() => recordIndependentReview(started.tasks, 'G1', {
-    verifier: '품질감사관', acceptedCriteria: [plan.tasks[0].acceptance[0]], note: '짧음', decision: 'accept',
+    verifier: '품질감사관', acceptedCriteria: [plan.tasks[0].acceptance[0]], evidenceReferences: [...started.tasks.find(item => item.id === 'G1')!.evidence], note: '짧음', decision: 'accept',
 }, '2026-09-10T10:01:00.000Z'), /모든 수락 기준/);
 });
 
@@ -174,8 +176,35 @@ test('independent review is bound to the task verifier role', () => {
   const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
   const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
   assert.throws(() => recordIndependentReview(started.tasks, 'G1', {
-    verifier: '마케팅·소비자심리', acceptedCriteria: [...plan.tasks[0].acceptance], note: '모든 기준을 확인했지만 지정된 검증 역할이 아닙니다.', decision: 'accept',
+    verifier: '마케팅·소비자심리', acceptedCriteria: [...plan.tasks[0].acceptance], evidenceReferences: [...started.tasks.find(item => item.id === 'G1')!.evidence], note: '모든 기준을 확인했지만 지정된 검증 역할이 아닙니다.', decision: 'accept',
   }, '2026-09-10T10:01:00.000Z'), /지정된 독립 검증 역할/);
+});
+
+test('independent review requires the sandbox artifact references to be carried forward', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
+  assert.throws(() => recordIndependentReview(started.tasks, 'G1', {
+    verifier: '품질감사관',
+    acceptedCriteria: [...plan.tasks[0].acceptance],
+    evidenceReferences: ['외부 자료만 확인'],
+    note: '샌드박스 산출물을 확인하지 않고 승인할 수 없습니다.',
+    decision: 'accept',
+  }), /샌드박스 산출물 지문/);
+});
+
+test('persisted independent reviews cannot omit the sandbox artifact fingerprint', () => {
+  const plan = generateMvpPlan('공개용 GABA 논문 기반 마스터 인덱스');
+  const started = runSandboxTask(plan.tasks, 'G1', undefined, '2026-09-10T10:00:00.000Z');
+  const reviewed = recordIndependentReview(started.tasks, 'G1', {
+    verifier: '품질감사관',
+    acceptedCriteria: [...plan.tasks[0].acceptance],
+    evidenceReferences: [...started.tasks.find(item => item.id === 'G1')!.evidence],
+    note: '샌드박스 산출물 지문을 포함한 검토입니다.',
+    decision: 'accept',
+  });
+  const task = reviewed.tasks.find(item => item.id === 'G1')!;
+  const altered = {...task, review: {...task.review!, evidence: ['외부 자료만 확인']}};
+  assert.match(opsStateIssue({plan: {contract: {goalId: plan.contract.goalId}, tasks: [{...altered, dependencies: [...altered.dependencies], acceptance: [...altered.acceptance], evidence: [...altered.evidence]}]}})!, /샌드박스 산출물 지문/);
 });
 
 test('human meeting dissent is appended separately from the generated guardrail', () => {

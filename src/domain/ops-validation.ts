@@ -72,6 +72,11 @@ function validatePlan(value: unknown): string | null {
       const review = task.review;
       const issue = validateReview(review, task.id); if (issue) return issue;
       if (isObject(review) && review.verifier !== task.verifier) return `${task.id} 독립 검토 역할이 지정 검증자와 다릅니다.`;
+      if (isObject(review) && Array.isArray(review.evidence)) {
+        const reviewedEvidence = review.evidence.filter((item): item is string => typeof item === 'string');
+        const sandboxEvidence = task.evidence.filter((item: string) => item.startsWith(`sandbox-output:${task.id}:`));
+        if (sandboxEvidence.some((item: string) => !reviewedEvidence.includes(item))) return `${task.id} 독립 검토가 샌드박스 산출물 지문을 포함하지 않습니다.`;
+      }
       if (isObject(review) && review.decision === 'accept' && (task.state !== 'DONE' || !isObject(task.verification) || task.verification.mode !== 'independent_review')) return `${task.id} 승인된 독립 검토는 independent_review 완료 기록과 연결되어야 합니다.`;
       if (isObject(review) && review.decision === 'rework' && (task.state !== 'REWORK' || task.verification !== undefined)) return `${task.id} 보완 요청 기록은 REWORK 상태에만 연결할 수 있습니다.`;
     }
