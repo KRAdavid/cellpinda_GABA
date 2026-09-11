@@ -240,3 +240,13 @@ test('Legacy DB gains flow column without removing existing events, and metadata
     store.event({eventId:randomUUID(),flowId:randomUUID(),name:'landing_view'});assert.equal(store.analytics().counts[0].count,2);
   } finally {store?.close();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
+
+test('Teaser exposure events are accepted without collecting extra properties',()=>{
+  const store=createStore({dbPath:':memory:',seed});
+  try {
+    const flowId=randomUUID();
+    assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_impression',properties:{path:'/teaser',private:'ignored'}}),{accepted:true,duplicate:false});
+    assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_play',properties:{path:'/teaser'}}),{accepted:true,duplicate:false});
+    assert.deepEqual(store.analytics().counts.filter(item=>item.name.startsWith('teaser_')).map(item=>({name:item.name,count:item.count})),[{name:'teaser_impression',count:1},{name:'teaser_play',count:1}]);
+  } finally {store.close();}
+});

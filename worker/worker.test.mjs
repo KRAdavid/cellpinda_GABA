@@ -137,6 +137,8 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'text/plain'},body:'{}'})).status,415);
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'landing_view',properties:{path:'/'}})})).status,202);
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'purchase_question_opened',properties:{questionId:'amount',email:'private@example.com'}})})).status,202);
+    assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'teaser_impression',properties:{path:'/teaser'}})})).status,202);
+    assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'teaser_play',properties:{path:'/teaser'}})})).status,202);
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),name:'purchase_question_opened',properties:{questionId:'private'}})})).status,400);
     assert.equal(await (await call('/')).text(),'asset');
     env.RATE_LIMITER.limit=async()=>({success:false});assert.equal((await call('/api/health')).status,429);
