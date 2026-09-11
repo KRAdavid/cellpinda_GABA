@@ -32,11 +32,11 @@ for (const marker of ['오늘도 몸보다', '1분 리듬 체크 시작', 'GABA�
 }
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
 requireMatch(research, /핵심은 짧게, 이야기는 펼쳐서/, 'research section must lead with a consumer story');
-requireMatch(research, /숫자와 출처 더 보기/, 'research detail must use a consumer-friendly label');
+requireMatch(research, /더 자세한 이야기 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(indexHtml, /GABA 연구를 쉬운 말로 더 보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /쉬운 말과 도표로 정리/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /함량 확인/, 'fermentation flow must use a consumer-friendly label');
-if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하기|수치와 제품 적용 문장은 펼쳐서|연구 카드에서 조건 확인|정량분석/.test(app + research + story + indexHtml)) fail('researcher-oriented detail labels leaked into consumer source');
+if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하기|수치와 제품 적용 문장은 펼쳐서|연구 카드에서 조건 확인|숫자와 출처 더 보기|정량분석/.test(app + research + story + indexHtml)) fail('researcher-oriented detail labels leaked into consumer source');
 requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\s\S]*?\}, 180\)/, 'touch answers must auto-advance to the next question');
 requireMatch(app, /<img[^>]+alt=\{/, 'product and hero images must expose alternative text');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
