@@ -151,7 +151,7 @@ for (const gate of pulse.inputGates) {
   const decision = pulse.decisions.find(item => item.taskId === gate.taskId);
   if (!decision || decision.mode !== 'input-gate' || gate.blockedBy !== decision.blockedBy || gate.nextAction !== decision.nextAction || JSON.stringify(gate.requiredInputs) !== JSON.stringify(decision.requiredInputs) || JSON.stringify(gate.quorum) !== JSON.stringify(decision.quorum)) fail(`input gate is out of sync for ${gate.taskId}`);
 }
-if (teaser.status === 'HOLD' && (pulse.teaserGate.taskState !== 'WAITING' || pulse.teaserGate.status !== 'HOLD')) fail('held teaser must remain a WAITING gate');
+if (['HOLD', 'PREVIEW'].includes(teaser.status) && (pulse.teaserGate.taskState !== 'WAITING' || pulse.teaserGate.status !== 'HOLD')) fail(`${teaser.status} teaser must remain a WAITING gate`);
 
 const heartbeatPath = fileURLToPath(new URL('../data/tf-pulse-heartbeat.json', import.meta.url));
 if (existsSync(heartbeatPath)) {

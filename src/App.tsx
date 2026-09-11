@@ -5,6 +5,7 @@ import ResearchLibrary, {type Claim} from './components/ResearchLibrary';
 import ReviewExperience,{type PublicReview} from './components/ReviewExperience';
 import SevenDayChallenge from './components/SevenDayChallenge';
 import GabaStory from './components/GabaStory';
+import TeaserPreview from './components/TeaserPreview';
 import ProductShare from './components/ProductShare';
 import PurchaseQuestions from './components/PurchaseQuestions';
 import OperationsMvp from './components/OperationsMvp';
@@ -73,6 +74,7 @@ export default function App(){
  <main id="main"><section className="hero"><img className="hero-photo" src={asset('assets/rhythm-window.png')} alt="초록 나무가 보이는 열린 창가와 물 한 잔"/><div className="hero-copy"><p className="chapter">셀핀다 가바 · 제품과 연구 이야기</p><h1>오늘, 내 뇌는<br/>쉴 틈이 있었을까?</h1><p className="hero-question">몸은 쉬고 있는데,<br className="mobile-break"/> 머리는 계속 일하고 있나요?</p><p className="muted">바쁜 하루 속, 나의 긴장과 휴식 습관을 돌아보세요.</p><div className="actions"><a className="button" href="#rhythm">1분 리듬 체크 <ArrowRight/></a><a className="button outline" href="#fermentation">발효가바 알아보기 <ArrowRight/></a></div>{content?.products.length ? <div className="hero-product"><img src={asset(`assets/product-${content.products[0].amountMg}.jpg`)} alt={`${content.products[0].name} 제품 포장`}/><div><strong>셀핀다 가바를 알아보세요.</strong><div className="hero-shortcuts"><a href="#products">제품 구성 보기 →</a><a href="#reviews">가바 1500 후기 원문 안내 →</a></div></div></div> : null}</div></section>
  <section className="intro-strip wrap"><h2>나를 돌아보는 1분,<br/>작은 변화의 시작.</h2>{[['01','발견','나의 하루를 짧게 돌아봐요.'],['02','이해','GABA 이야기를 살펴봐요.'],['03','선택','제품을 충분히 알고 선택해요.']].map(([n,t,d])=><div className="step" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</section>
  <div className="wrap section"><RhythmExperience onEvent={track}/></div>
+ <TeaserPreview onEvent={track}/>
  <GabaStory claims={content?.claims??[]}/>
  <ResearchLibrary claims={content?.claims??[]} onOpen={()=>track('evidence_opened',{path:'/research'})}/>
  <section id="fermentation" className="section sage"><div className="wrap"><div className="section-head"><div><p className="chapter">03 / 발효의 이야기</p><h2>한 포의 출처를<br/>따라가다.</h2></div><p>발효라는 설명에서 한 걸음 더.<br/>균주와 제조 기술의 공개 자료를 살펴봅니다.</p></div><div className="process">{['발효','분리·회수','정량분석','품질 확인'].map((t,i)=><div key={t}><span>0{i+1}</span><h3>{t}</h3></div>)}</div><p className="note">제조 자료를 읽는 네 가지 관점입니다. 현재 제품의 전체 공정을 보증하는 도식은 아닙니다.</p>{error?<p role="status">제품 자료를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.</p>:content?.claims.filter(c=>!c.id.startsWith('product-')&&!c.id.startsWith('research-')&&!c.id.startsWith('gaba-')).map(c=><details className="claim" key={c.id}><summary>{c.publicText}</summary><div><p>{(c.limitations??[]).join(' ')}</p>{c.sources.filter(s=>s.url).map(s=><a key={s.url} href={s.url!} target="_blank" rel="noreferrer">{s.title} ↗ </a>)}</div></details>)}</div></section>

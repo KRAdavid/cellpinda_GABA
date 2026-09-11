@@ -172,7 +172,7 @@ const result = {
     quorum: contract.decisionProtocol.quorum,
     record: [...contract.decisionProtocol.record],
   },
-  teaserGate: {status: teaser.status, taskId: 'B4', taskState: tasksById.get('B4')?.state ?? null},
+  teaserGate: {status: teaser.status === 'APPROVED' ? 'APPROVED' : 'HOLD', taskId: 'B4', taskState: tasksById.get('B4')?.state ?? null},
   roleCoverage: roleCoverage.map(({id, label}) => ({id, label, status: 'present'})),
   counts,
   ready: decisions.filter(item => item.state === 'READY').map(item => item.taskId),

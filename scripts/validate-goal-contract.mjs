@@ -22,7 +22,7 @@ for (const stream of contract.workstreams) {
 if (graph.goalId !== contract.goalId || !Array.isArray(graph.tasks)) fail('task graph must be tied to the active Goal Contract');
 const teaserTask = graph.tasks.find(task => task.id === 'B4');
 if (!teaserTask) fail('task graph must keep the teaser approval gate visible');
-if (teaser.status === 'HOLD' && teaserTask.state !== 'WAITING') fail('HOLD teaser must remain WAITING in task graph');
+if (['HOLD', 'PREVIEW'].includes(teaser.status) && teaserTask.state !== 'WAITING') fail(`${teaser.status} teaser must remain WAITING in task graph`);
 if (teaser.status === 'APPROVED' && teaserTask.state === 'WAITING' && !teaser.approvedAt) fail('APPROVED teaser cannot remain an unexplained WAITING task');
 if (!Array.isArray(teaserTask.evidence) || !teaserTask.evidence.includes('data/teaser-manifest.json')) fail('teaser task must cite its approval manifest');
 const serialized = JSON.stringify(contract);

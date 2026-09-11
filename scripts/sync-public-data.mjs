@@ -136,6 +136,17 @@ mkdirSync(dirname(target),{recursive:true});
 writeFileSync(target,JSON.stringify(output,null,2)+'\n');
 const masterTarget=resolve(root,'public/data/gaba-master-index.json');
 writeFileSync(masterTarget,JSON.stringify(masterIndex,null,2)+'\n');
+const teaserPreviewTarget=resolve(root,'public/data/teaser-preview.json');
+const teaserPreview={
+  schemaVersion:1,
+  status:teaser.status,
+  placement:teaser.placement,
+  title:'발효가바 — 멈추지 않는 밤',
+  description:'발효가바를 둘러싼 장면을 짧은 다큐 형식으로 살펴보는 선택형 티저입니다.',
+  note:'외부 페이지에서 열립니다. 영상은 연구 결과나 셀핀다 가바 1500 완제품의 효과를 보장하는 자료가 아닙니다.',
+  ...(teaser.status==='PREVIEW' && teaser.publicPreviewUrl ? {url:teaser.publicPreviewUrl} : {url:null}),
+};
+writeFileSync(teaserPreviewTarget,JSON.stringify(teaserPreview,null,2)+'\n');
 function publicTaskDecision(task){
   if(task.state==='VERIFYING') return {decision:'독립 검증 유지',decisionMode:'independent-review',nextAction:'검증 증거와 수락 기준을 대조해 DONE 또는 REWORK로 판정'};
   if(task.state==='WAITING' || task.state==='BACKLOG') return {decision:'외부 입력 또는 선행조건 대기 유지',decisionMode:'input-gate',nextAction:task.blockedBy ? '필요 입력을 확보한 뒤 담당 TF와 검증자가 재검토' : '선행조건과 담당 증거를 확인한 뒤 실행 가능 상태를 갱신',requiredInputs:Array.isArray(task.requiredInputs) ? task.requiredInputs : []};
@@ -201,7 +212,7 @@ const publicAudit={
   gates:taskGraph.tasks
     .filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state))
     .map(task=>({id:task.id,title:task.title,state:task.state,lead:task.lead,verifier:task.verifier,requiredInputs:Array.isArray(task.requiredInputs)?task.requiredInputs:[],...publicTaskDecision({state:task.state,blockedBy:task.blockedBy,requiredInputs:task.requiredInputs}),decisionOptions:pulseDecisionByTaskId.get(task.id)?.decisionOptions ?? [],...(pulseDecisionByTaskId.get(task.id)?.quorum ? {quorum:pulseDecisionByTaskId.get(task.id).quorum} : {})})),
-  teaserGate:{status:teaser.status,taskId:'B4',taskState:taskGraph.tasks.find(task=>task.id==='B4')?.state ?? null},
+  teaserGate:{status:teaser.status==='APPROVED'?'APPROVED':'HOLD',taskId:'B4',taskState:taskGraph.tasks.find(task=>task.id==='B4')?.state ?? null},
   note:'이 패킷은 공개 운영 상태의 요약이며, 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않습니다.',
 };
 const auditTarget=resolve(root,'public/data/goal-audit.json');
@@ -225,4 +236,4 @@ const meetingPacket={
 };
 const meetingPacketTarget=resolve(root,'public/data/tf-meeting-packet.json');
 writeFileSync(meetingPacketTarget,JSON.stringify(meetingPacket,null,2)+'\n');
-console.log(JSON.stringify({target,masterTarget,operationsTarget,pulseTarget,auditTarget,meetingPacketTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));
+console.log(JSON.stringify({target,masterTarget,teaserPreviewTarget,operationsTarget,pulseTarget,auditTarget,meetingPacketTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));

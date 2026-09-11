@@ -4,6 +4,8 @@ import { readFile } from 'node:fs/promises';
 const readJson = async relative => JSON.parse(await readFile(new URL(`../${relative}`, import.meta.url), 'utf8'));
 const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
+const teaser = await readJson('data/teaser-manifest.json');
+const teaserPreview = await readJson('public/data/teaser-preview.json');
 const operationsQueue = await readJson('public/data/operations-queue.json');
 const publicPulse = await readJson('public/data/tf-pulse.json');
 const publicAudit = await readJson('public/data/goal-audit.json');
@@ -22,7 +24,7 @@ const isSmartStore = value => {
   } catch { return false; }
 };
 
-if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
+if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');
@@ -38,6 +40,7 @@ const scanKeys = (value, path = '$') => {
 };
 scanKeys(content);
 scanKeys(master);
+scanKeys(teaserPreview);
 scanKeys(operationsQueue);
 scanKeys(publicPulse);
 scanKeys(publicAudit);
@@ -58,6 +61,10 @@ if (!Array.isArray(operationsQueue.roleCoverage) || JSON.stringify(operationsQue
 if (publicAudit.mode !== 'public_goal_audit' || publicAudit.goalId !== goalContract.goalId || publicAudit.title !== goalContract.title || publicAudit.status !== goalContract.status || publicAudit.checkedAt !== goalContract.checkedAt) fail('public goal audit is not tied to the active Goal Contract');
 if (!['IN_PROGRESS_WITH_GATES', 'COMPLETE'].includes(publicAudit.overallStatus)) fail('public goal audit has an unsupported overall status');
 if (!Array.isArray(publicAudit.roleCoverage) || JSON.stringify(publicAudit.roleCoverage) !== JSON.stringify(requiredRoleCoverage)) fail('public goal audit role coverage is missing or malformed');
+const expectedTeaserGateStatus = teaser.status === 'APPROVED' ? 'APPROVED' : 'HOLD';
+if (!['HOLD', 'PREVIEW', 'APPROVED'].includes(teaser.status) || teaserPreview.status !== teaser.status || teaserPreview.placement !== teaser.placement || typeof teaserPreview.title !== 'string' || typeof teaserPreview.description !== 'string' || typeof teaserPreview.note !== 'string') fail('teaser preview export is missing or out of sync');
+if (teaser.status === 'PREVIEW' && (!isHttps(teaserPreview.url) || teaserPreview.url !== teaser.publicPreviewUrl)) fail('PREVIEW teaser export must expose the approved preview URL only');
+if (teaser.status !== 'PREVIEW' && teaserPreview.url !== null) fail('non-preview teaser export cannot expose a preview URL');
 const requireExactKeys = (value, expected, label) => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) fail(`${label} must be an object`);
   const actual = Object.keys(value).sort();
@@ -150,7 +157,7 @@ for (const [index, gate] of publicAudit.gates.entries()) {
   if (!task || !agenda || task.title !== gate.title || task.state !== gate.state || task.lead !== gate.lead || task.verifier !== gate.verifier || JSON.stringify(task.requiredInputs || []) !== JSON.stringify(gate.requiredInputs) || !gate.decision || !gate.decisionMode || !gate.nextAction || JSON.stringify(gate.decisionOptions) !== JSON.stringify(agenda.decisionOptions) || JSON.stringify(gate.quorum) !== JSON.stringify(agenda.quorum)) fail(`public goal audit gate ${gate.id ?? '(unknown)'} is missing or out of sync`);
   validateQuorum(gate.quorum, task, `public goal audit gate ${gate.id}`);
 }
-if (publicAudit.teaserGate?.taskId !== 'B4' || publicAudit.teaserGate.taskState !== taskGraph.tasks.find(task => task.id === 'B4')?.state || publicAudit.teaserGate.status !== 'HOLD') fail('public goal audit teaser gate is missing or out of sync');
+if (publicAudit.teaserGate?.taskId !== 'B4' || publicAudit.teaserGate.taskState !== taskGraph.tasks.find(task => task.id === 'B4')?.state || publicAudit.teaserGate.status !== expectedTeaserGateStatus) fail('public goal audit teaser gate is missing or out of sync');
 if (!Array.isArray(operationsQueue.workstreams) || operationsQueue.workstreams.length !== 5) fail('operations queue must expose five active workstreams');
 if (!Array.isArray(operationsQueue.tasks) || operationsQueue.tasks.length !== taskGraph.tasks.length) fail('operations queue must expose the current task graph');
 const queueIds = new Set();
@@ -211,6 +218,7 @@ console.log(JSON.stringify({
   masterRecords: master.records.length,
   products: content.products.length,
   reviews: content.reviews.length,
+  teaser: {status: teaser.status, gateStatus: expectedTeaserGateStatus, preview: Boolean(teaserPreview.url)},
   coverage,
   smartStoreOnly: true,
   removed750: true,

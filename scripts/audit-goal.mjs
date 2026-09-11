@@ -159,7 +159,7 @@ for (const [id, label] of requiredGates) {
 }
 
 const teaserTaskState = taskById.get('B4')?.state;
-const teaserConsistent = teaser.status === 'HOLD' ? teaserTaskState === 'WAITING' : teaser.status === 'APPROVED' ? teaserTaskState === 'DONE' : false;
+const teaserConsistent = ['HOLD', 'PREVIEW'].includes(teaser.status) ? teaserTaskState === 'WAITING' : teaser.status === 'APPROVED' ? teaserTaskState === 'DONE' : false;
 const teaserStatus = teaserConsistent ? (teaser.status === 'APPROVED' ? 'MET' : 'WAITING') : 'INVALID';
 check('teaser-boundary', teaserStatus, teaserConsistent ? `티저 ${teaser.status}가 업무 그래프 ${teaserTaskState}와 일치` : '티저 공개 경계가 일치하지 않음', ['data/teaser-manifest.json', 'data/task-graph.json', 'scripts/validate-teaser-exposure.mjs'], teaserConsistent && teaser.status !== 'APPROVED' ? (teaser.requiredApprovals || []) : (teaserConsistent ? [] : ['B4와 티저 매니페스트 상태 대조']));
 
