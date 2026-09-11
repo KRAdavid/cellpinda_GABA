@@ -110,6 +110,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const [manualLink, setManualLink] = useState('');
   const [cardUrl, setCardUrl] = useState('');
   const [kakaoReady, setKakaoReady] = useState(false);
+  const [shareBarVisible, setShareBarVisible] = useState(false);
   const sharedTracked=useRef(false);
   const pointerSelecting=useRef(false);
   const shareReferralRef=useRef('');
@@ -120,6 +121,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const resultViewed=useRef(false);
   const questionRef = useRef<HTMLLegendElement>(null);
   const resultRef = useRef<HTMLHeadingElement>(null);
+  const resultLayoutRef = useRef<HTMLDivElement>(null);
   const autoAdvanceTimer = useRef<number | null>(null);
   const type = result?.type ?? sharedType;
   const question = questions[step]!;
@@ -132,6 +134,14 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     if (started && !type) questionRef.current?.focus();
     if (result) {resultRef.current?.focus();if(!resultViewed.current){resultViewed.current=true;onEvent('result_viewed',{path:'/result'})}}
   }, [step, started, result, type]);
+
+  useEffect(() => {
+    const target = resultLayoutRef.current;
+    if (!target || !type) { setShareBarVisible(false); return; }
+    const observer = new IntersectionObserver(([entry]) => setShareBarVisible(Boolean(entry?.isIntersecting)), { threshold: 0.05 });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [type, result]);
 
   useEffect(() => {
     let cancelled = false;
@@ -289,14 +299,14 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     <section className="rhythm-experience" id="rhythm" aria-labelledby="rhythm-heading">
       <div className="rhythm-heading-row">
         <div><p className="rhythm-eyebrow">01 / DISCOVER YOUR RHYTHM</p><h2 id="rhythm-heading">잠깐 멈춰,<br />나의 하루를 만나보세요.</h2></div>
-        <p className="rhythm-intro-copy">몸은 움직이고 있어도, 머리는 하루 종일 켜져 있을 수 있어요.<br />생각이 멈추지 않고 집중이 흐려진다면, 뇌가 쉴 틈이 없었다는 신호일 수 있습니다.</p>
+        <p className="rhythm-intro-copy">몸은 움직이고 있어도, 머리는 하루 종일 켜져 있을 수 있어요.<br />생각이 멈추지 않고 집중이 흐려진다면, 최근의 휴식 습관을 돌아볼 신호일 수 있습니다.</p>
       </div>
 
       <div className="rhythm-recovery-intro" aria-label="휴식과 회복 안내">
         <div className="rhythm-recovery-intro-copy">
           <p className="rhythm-recovery-kicker">PAUSE → RECOVERY</p>
           <h3>휴식은 멈추는 일이 아니라,<br />뇌가 다시 회복할 시간을 만드는 일입니다.</h3>
-          <p>몸이 버티고 있다고 괜찮은 것은 아니에요. 지속적인 생각과 자극이 이어지면 몸보다 머리가 먼저 지칠 수 있습니다. 신호를 억지로 밀어붙이기보다 잠깐 멈추고, 쉬고, 다시 회복하는 흐름을 만들어 보세요.</p>
+          <p>몸은 움직여도 머리가 먼저 지친 느낌이 들 수 있습니다. 지속적인 생각과 자극이 이어졌다면 신호를 억지로 밀어붙이기보다 잠깐 멈추고, 쉬고, 다시 회복하는 흐름을 만들어 보세요.</p>
           <p className="rhythm-recovery-disclaimer">이 안내와 체크는 뇌의 과부하나 GABA 부족을 진단하지 않습니다. 지금 적극적인 휴식을 시작할 타이밍을 스스로 알아차리는 데 목적이 있어요.</p>
         </div>
         <ul className="rhythm-load-signals" aria-label="뇌가 쉴 틈이 없을 때 느낄 수 있는 신호">
@@ -319,22 +329,23 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
               <p className="rhythm-eyebrow">오늘의 회복 초점</p>
               <h4>{type.recoveryHeading}</h4>
               <p>{type.recoveryDescription}</p>
-              <a className="text-link" href="#story">GABA와 안정의 관계 알아보기 →</a>
+              <a className="text-link" href="#story">GABA 이야기 살펴보기 →</a>
             </div>
             <div className="rhythm-suggestions"><h4>오늘 해볼 작은 일</h4><ul>{type.suggestions.map(suggestion => <li key={suggestion}>{suggestion}</li>)}</ul></div>
             <p className="rhythm-note">생활 패턴을 돌아보는 콘텐츠이며, 의학적 진단이나 체내 GABA 측정이 아닙니다.</p>
           </article>
-          <div className="rhythm-result-actions">
+          <div className="rhythm-result-actions" ref={resultLayoutRef}>
             <p className="rhythm-eyebrow">KEEP YOUR LITTLE MOMENT</p>
             <h3>나를 돌아본 순간을<br />한 장에 담아요.</h3>
             <p>카드와 공유 링크에는 생활 유형이 표시돼요. 문항별 답변은 담지 않습니다.</p>
             {cardUrl && type ? <img className="rhythm-card-preview" src={cardUrl} alt={`${type.name} 결과 카드 미리보기`} /> : null}
-            <button type="button" className="rhythm-button" onClick={share}>리듬 이야기 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
+            {sharedType ? <button type="button" className="rhythm-button" onClick={start}>나도 1분 리듬 체크 <ArrowRight size={18} aria-hidden="true" /></button> : null}
+            <button type="button" className={`rhythm-button${sharedType ? ' secondary' : ''}`} onClick={share}>리듬 이야기 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
             {kakaoReady ? <button type="button" className="rhythm-button secondary" onClick={shareToKakao}>카카오톡으로 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
             <button type="button" className="rhythm-button secondary" onClick={() => void copyLink()}>링크만 복사 <ArrowUpRight size={18} aria-hidden="true" /></button>
             <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>이미지 카드 저장 <Download size={18} aria-hidden="true" /></button>
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
-            <button type="button" className="rhythm-text-button" onClick={start}>{sharedType ? '나도 1분 리듬 체크' : '다시 체크하기'} <ArrowRight size={18} aria-hidden="true" /></button>
+            {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <details className="rhythm-rules"><summary>유형은 어떻게 정해지나요?</summary><p>{result?.explanation ?? '긴장, 잠자리 전환, 멈춤의 공백, 자극 부담, 아침 회복감 다섯 신호를 같은 비중으로 비교합니다. 모두 0·1이면 안정 리듬형, 2·3이 있으면 가장 큰 신호를 오늘의 회복 초점으로 보여줍니다. 이 규칙은 생활을 돌아보기 위한 편집 기준이며 검증된 의학적 기준이 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#story">이제 GABA를 알아볼까요? <ArrowRight size={18} aria-hidden="true" /></a>
             <a className="rhythm-text-button" href="#products">제품 구성·표시사항 살펴보기 <ArrowRight size={18} aria-hidden="true" /></a>
@@ -365,7 +376,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : null}
       <p className="rhythm-status" role="status" aria-live="polite">{message}</p>
       {manualLink ? <label className="rhythm-manual-link">공유 링크<input value={manualLink} readOnly onFocus={event => event.target.select()} /></label> : null}
-      {type ? <div className="rhythm-mobile-share-bar" aria-label="리듬 결과 공유"><button type="button" onClick={share}>공유</button><button type="button" onClick={() => void copyLink()}>링크 복사</button></div> : null}
+      {type && shareBarVisible ? <div className="rhythm-mobile-share-bar" aria-label="리듬 결과 공유"><button type="button" onClick={share}>공유</button><button type="button" onClick={() => void copyLink()}>링크 복사</button></div> : null}
     </section>
   );
 }

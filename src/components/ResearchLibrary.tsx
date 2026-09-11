@@ -163,7 +163,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
             </div>
             <div className="research-library-boundary"><h4>셀핀다 제품은 이렇게 확인해요</h4><p>{metadata.productApplicability}</p></div>
             <details className="research-technical-detail">
-              <summary>연구 조건과 근거 자세히 보기</summary>
+              <summary>숫자와 출처 더 확인하기</summary>
               <div className="research-technical-detail-body">
                 <div className="research-library-overview"><h4>이 연구에서 본 내용</h4><p>{metadata.consumerSummary || claim.publicText}</p></div>
                 <dl className="research-library-facts">{facts.map(([key, label]) => {
