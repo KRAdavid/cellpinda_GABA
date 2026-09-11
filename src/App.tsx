@@ -83,7 +83,7 @@ export default function App(){
  const isLocalHost = ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
  const operationsView = isLocalHost && (requestedView === 'ops' || currentPath === '/ops');
  const accountView = requestedView === 'account' || currentPath === '/account';
- const adminView = requestedView === 'admin' || currentPath === '/admin';
+ const adminView = isLocalHost && (requestedView === 'admin' || currentPath === '/admin');
  useEffect(()=>{const c=new AbortController();setLoading(true);setError(false);loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[retryKey]);
  useEffect(()=>{
   const value=rhythmIdFromUrl(new URL(location.href));
