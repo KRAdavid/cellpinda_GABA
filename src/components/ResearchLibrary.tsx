@@ -136,7 +136,6 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     </> : null}
     {studies.length === 0 ? <p className="note" role="status">현재 표시할 연구 자료가 없습니다. 자료가 준비되면 이곳에서 확인할 수 있습니다.</p> : visibleStudies.length === 0 ? <p className="research-library-empty">조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
       const metadata = claim.metadata!;
-      const limitations = [...new Set([...(metadata.limitations ?? []), ...(claim.limitations ?? [])])];
       const quickFacts = [
         {label: '참여자', value: metadata.sampleSize, Icon: UsersRound},
         {label: '기간', value: metadata.duration, Icon: Clock3},
@@ -161,18 +160,16 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
               <div className="research-story-card"><span>03</span><h4>무엇과 비교했나요?</h4><p>{metadata.comparison || '비교 조건이 공개되지 않았어요.'}</p></div>
               <div className="research-story-card"><span>04</span><h4>어떤 변화가 보였나요?</h4><p>{metadata.consumerSummary || metadata.result}</p></div>
             </div>
-            <div className="research-library-boundary"><h4>제품 정보는 따로 비교해 보세요</h4><p>{metadata.productApplicability}</p></div>
+            <div className="research-library-boundary"><h4>셀핀다 제품은 이렇게 확인해요</h4><p>{metadata.productApplicability}</p></div>
             <details className="research-technical-detail">
-              <summary>원문 수치와 전체 한계 보기</summary>
+              <summary>연구 조건과 관찰 수치</summary>
               <div className="research-technical-detail-body">
-                <div className="research-library-overview"><h4>자료 설명</h4><p>{claim.publicText}</p></div>
+                <div className="research-library-overview"><h4>이 연구에서 본 내용</h4><p>{metadata.consumerSummary || claim.publicText}</p></div>
                 <dl className="research-library-facts">{facts.map(([key, label]) => {
                   const value = metadata[key];
                   return typeof value === 'string' && value ? <div key={key}><dt>{label}</dt><dd>{value}</dd></div> : null;
                 })}</dl>
-                <div className="research-library-findings"><h4>원문 결과</h4><p>{metadata.result}</p>
-                  {limitations.length > 0 && <><h4>함께 읽어야 할 한계</h4><ul>{limitations.map(item => <li key={item}>{item}</li>)}</ul></>}
-                </div>
+                <div className="research-library-findings"><h4>관찰된 변화</h4><p>{metadata.result}</p></div>
               </div>
             </details>
           </div>
