@@ -166,7 +166,9 @@ test('Legacy DB gains flow column without removing existing events, and metadata
     legacy.prepare('INSERT INTO events VALUES(?,?,?,?)').run(randomUUID(),'landing_view','{}','2026-01-01T00:00:00.000Z');legacy.close();
     store=createStore({dbPath,seed:{...seed,claims:[{...seed.claims[0],metadata:{studyType:'Randomized trial',limitations:['Small sample'],productApplicability:'Not this product',privatePath:'C:/secret',answers:['secret']}}]}});
     assert.equal(store.analytics().coverage.eventsWithoutFlow,1);assert.equal(store.analytics().counts[0].count,1);assert.equal(store.analytics().funnels[0].rate,null);
-    assert.deepEqual(store.publicContent().claims[0].metadata,{studyType:'Randomized trial',limitations:['Small sample'],productApplicability:'Not this product'});
+    const publicContent=store.publicContent();
+    assert.deepEqual(publicContent.claims[0].metadata,{studyType:'Randomized trial',productApplicability:'Not this product'});
+    assert.ok(!JSON.stringify(publicContent).includes('Small sample'));
     store.event({eventId:randomUUID(),flowId:randomUUID(),name:'landing_view'});assert.equal(store.analytics().counts[0].count,2);
   } finally {store?.close();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });

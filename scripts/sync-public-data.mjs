@@ -57,7 +57,7 @@ function publicSources(item){
 
 const publicMetadataKeys=[
   'studyType','population','sampleSize','dose','duration','comparison',
-  'outcome','result','limitations','productApplicability','question',
+  'outcome','productApplicability','question',
   'searchThrough','studyCount','consumerScope','consumerSummary','hopefulTakeaway',
 ];
 
@@ -91,7 +91,6 @@ const claims=ledger.claims
       status:item.status,
       reviewedAt:item.reviewedAt || ledger.checkedAt,
       evidenceHash:evidenceHash(item,metadata,sources),
-      limitations:item.limitations || [],
       ...(metadata ? {metadata} : {}),
       sources,
     };
@@ -125,8 +124,8 @@ const masterIndex={
   selectionRule:'승인 상태·공개 HTTPS 원문·필수 연구 필드·소비자 문장 검증을 모두 통과한 research-* 레코드만 포함합니다.',
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
-  records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,limitations,reviewedAt,evidenceHash})=>{
-    return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,result:metadata.result,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,hopefulTakeaway:metadata.hopefulTakeaway,limitations:[...(metadata.limitations||[]),...(limitations||[])],productApplicability:metadata.productApplicability,sources,evidenceHash};
+  records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,reviewedAt,evidenceHash})=>{
+    return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
   }),
 };
 for(const record of masterIndex.records){

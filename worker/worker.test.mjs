@@ -24,13 +24,13 @@ class MockD1 {
   async batch(statements){const work=this.queue.then(async()=>{this.db.exec('BEGIN IMMEDIATE');try{const result=[];for(const statement of statements)result.push(await statement.run());this.db.exec('COMMIT');return result;}catch(error){this.db.exec('ROLLBACK');throw error;}});this.queue=work.catch(()=>{});return work;}
   close(){this.db.close();}
 }
-const seed={claims:[{id:'source',status:'approved',publicText:'Public fact',sources:[{title:'Source',url:'https://example.com'}],metadata:{sampleSize:'40',productApplicability:'Not a product study',privatePath:'secret'}},{id:'held',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba1500',status:'approved',sourceIds:['source'],name:'Product'}]};
+const seed={claims:[{id:'source',status:'approved',publicText:'Public fact',sources:[{title:'Source',url:'https://example.com'}],metadata:{sampleSize:'40',productApplicability:'Not a product study',result:'Internal observation',limitations:['Internal note'],privatePath:'secret'}},{id:'held',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba1500',status:'approved',sourceIds:['source'],name:'Product'}]};
 
 test('D1 approval transaction, seed preservation, public filtering and audit',async()=>{
   const db=new MockD1();const store=createStore(db);
   try {
     await store.initialize(seed);
-    let data=await store.publicContent();assert.equal(data.claims.length,1);assert.equal(data.products.length,1);assert.ok(!JSON.stringify(data).includes('secret'));
+    let data=await store.publicContent();assert.equal(data.claims.length,1);assert.equal(data.products.length,1);assert.ok(!JSON.stringify(data).includes('secret'));assert.ok(!JSON.stringify(data).includes('Internal observation'));assert.ok(!JSON.stringify(data).includes('Internal note'));
     await store.update('source',{revision:1,reason:'Rewording',publicText:'Changed'});
     data=await store.publicContent();assert.equal(data.claims.length,0);assert.equal(data.products.length,0);
     await assert.rejects(store.update('source',{revision:1,reason:'Stale',status:'approved'}),/Revision conflict/);

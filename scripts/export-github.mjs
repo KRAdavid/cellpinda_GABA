@@ -10,7 +10,8 @@ const paths=['.github','src','server','worker','public','.gitignore','index.html
 for(const path of paths)cpSync(resolve(root,path),resolve(target,path),{recursive:true});
 const ledger=JSON.parse(readFileSync(resolve(root,'data/content-ledger.json'),'utf8'));
 const pick=(value,keys)=>Object.fromEntries(keys.filter(key=>value[key]!==undefined).map(key=>[key,value[key]]));
-const claims=ledger.claims.filter(c=>c.status==='approved'&&c.publicText&&c.sources.some(s=>s.url?.startsWith('https://'))).map(c=>({...pick(c,['id','topic','publicText','status','limitations','metadata']),sources:c.sources.filter(s=>s.url?.startsWith('https://')).map(s=>pick(s,['title','url','page','locator']))}));
+const consumerMetadataKeys=['studyType','population','sampleSize','dose','duration','comparison','outcome','productApplicability','question','searchThrough','studyCount','consumerScope','consumerSummary','hopefulTakeaway'];
+const claims=ledger.claims.filter(c=>c.status==='approved'&&c.publicText&&c.sources.some(s=>s.url?.startsWith('https://'))).map(c=>({...pick(c,['id','topic','publicText','status']),...(c.metadata ? {metadata:pick(c.metadata,consumerMetadataKeys)} : {}),sources:c.sources.filter(s=>s.url?.startsWith('https://')).map(s=>pick(s,['title','url','page','locator']))}));
 const ids=new Set(claims.map(c=>c.id));
 const products=ledger.products.filter(p=>p.status==='approved'&&p.sourceIds?.every(id=>ids.has(id))).map(p=>pick(p,['id','name','amountMg','servings','totalG','officialUrl','status','availability','priceDisplay','sourceIds']));
 const reviews=ledger.reviews.filter(r=>['shop-review-destination','shop-review-destination-1500'].includes(r.id)&&r.status==='approved').map(r=>pick(r,['id','status','publicText','sourceTitle','sourceUrl','originalPublic','limitations']));

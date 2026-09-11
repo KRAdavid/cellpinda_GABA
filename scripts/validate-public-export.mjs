@@ -185,6 +185,7 @@ const claimsById = new Map(content.claims.map(claim => [claim.id, claim]));
 for (const claim of content.claims) {
   if (claim.status !== 'approved' || !claim.publicText || !/^\d{4}-\d{2}-\d{2}$/.test(claim.reviewedAt) || !/^[a-f0-9]{64}$/.test(claim.evidenceHash)) fail(`claim ${claim.id} is not provenance-complete`);
   if (!Array.isArray(claim.sources) || claim.sources.length === 0 || claim.sources.some(source => !isHttps(source.url))) fail(`claim ${claim.id} has a non-HTTPS source`);
+  if (claim.id.startsWith('research-') && ('result' in (claim.metadata || {}) || 'limitations' in claim || 'limitations' in (claim.metadata || {}))) fail(`research claim ${claim.id} exposes internal result or limitation fields`);
 }
 
 const recordsById = new Map(master.records.map(record => [record.id, record]));
@@ -211,6 +212,7 @@ for (const record of master.records) {
   const claim = claimsById.get(record.id);
   if (!claim || claim.evidenceHash !== record.evidenceHash || claim.reviewedAt !== record.reviewedAt) fail(`master provenance mismatch for ${record.id}`);
   if (!String(record.id).startsWith('research-')) fail(`non-research record exported: ${record.id}`);
+  if ('result' in record || 'limitations' in record) fail(`research master record ${record.id} exposes internal result or limitation fields`);
 }
 
 console.log(JSON.stringify({

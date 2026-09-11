@@ -73,7 +73,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   const [requestedId, setRequestedId] = useState('');
   const studies = claims.filter(claim =>
     claim.status === 'approved' && claim.id.startsWith('research-') &&
-    claim.publicText && claim.metadata?.result &&
+    claim.publicText && claim.metadata?.consumerSummary &&
     claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)),
   );
   const topics = [...new Set(studies.map(claim => claim.topic).filter(Boolean))];
@@ -92,7 +92,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     const reveal=()=>{
       let id: string;
       try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
-      if (!claims.some(claim => claim.id === id && claim.status === 'approved' && id.startsWith('research-') && claim.publicText && claim.metadata?.result && claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)))) return;
+      if (!claims.some(claim => claim.id === id && claim.status === 'approved' && id.startsWith('research-') && claim.publicText && claim.metadata?.consumerSummary && claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)))) return;
       setQuery(''); setTopic(''); setStudyType(''); setRequestedId(id);
     };
     reveal();window.addEventListener('hashchange',reveal);return()=>window.removeEventListener('hashchange',reveal);
@@ -158,7 +158,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
               <div className="research-story-card"><span>01</span><h4>누구를 살펴봤나요?</h4><p>{metadata.population || '연구 참여자 정보가 공개되지 않았어요.'}</p>{metadata.sampleSize ? <small>{metadata.sampleSize}</small> : null}</div>
               <div className="research-story-card"><span>02</span><h4>어떻게 봤나요?</h4><p>{compactStudyType(metadata.studyType)}</p>{metadata.duration ? <small>{metadata.duration}</small> : null}</div>
               <div className="research-story-card"><span>03</span><h4>무엇과 비교했나요?</h4><p>{metadata.comparison || '비교 조건이 공개되지 않았어요.'}</p></div>
-              <div className="research-story-card"><span>04</span><h4>어떤 변화가 보였나요?</h4><p>{metadata.consumerSummary || metadata.result}</p></div>
+              <div className="research-story-card"><span>04</span><h4>어떤 내용을 살펴봤나요?</h4><p>{metadata.consumerSummary}</p></div>
             </div>
             <div className="research-library-boundary"><h4>셀핀다 제품은 이렇게 확인해요</h4><p>{metadata.productApplicability}</p></div>
             <details className="research-technical-detail">

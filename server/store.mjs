@@ -10,7 +10,7 @@ export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/res
 const publicSources = (value) => (value.sources || []).filter(s => typeof s.url === 'string' && /^https:\/\//.test(s.url)).map(({title,url,page,locator}) => ({title,url,page,locator}));
 const failure = (message, status = 400) => Object.assign(new Error(message), { status });
 const isUuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
-const METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','result','limitations','productApplicability','question','searchThrough','studyCount']);
+const PUBLIC_METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','productApplicability','question','searchThrough','studyCount','consumerScope','consumerSummary','hopefulTakeaway']);
 const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result','/share','result_viewed'],['product_comparison','/products','product_comparison_viewed']];
 const OPS_MAX_BYTES=65536;
 const OPS_TTL_DAYS=30;
@@ -26,7 +26,7 @@ function publicMetadata(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
   const output={};
   for (const [key,item] of Object.entries(value)) {
-    if (!METADATA_FIELDS.has(key)) continue;
+    if (!PUBLIC_METADATA_FIELDS.has(key)) continue;
     if (typeof item === 'string' && item.length <= 3000) output[key]=item;
     else if (typeof item === 'number' && Number.isFinite(item)) output[key]=item;
     else if (Array.isArray(item) && item.length<=20 && item.every(text=>typeof text === 'string' && text.length<=1000)) output[key]=item;
@@ -101,7 +101,7 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
     adminContent: rows,
     publicContent() {
       const all = rows();
-      const claims = all.filter(c => c.kind === 'claim' && c.status === 'approved' && c.publicText && publicSources(c).length).map(c => ({id:c.id,topic:c.topic,publicText:c.publicText,status:c.status,sources:publicSources(c),limitations:c.limitations || [],revision:c.revision,...(publicMetadata(c.metadata || c.structuredData) ? {metadata:publicMetadata(c.metadata || c.structuredData)} : {})}));
+      const claims = all.filter(c => c.kind === 'claim' && c.status === 'approved' && c.publicText && publicSources(c).length).map(c => ({id:c.id,topic:c.topic,publicText:c.publicText,status:c.status,sources:publicSources(c),revision:c.revision,...(publicMetadata(c.metadata || c.structuredData) ? {metadata:publicMetadata(c.metadata || c.structuredData)} : {})}));
       const approvedIds = new Set(claims.map(c => c.id));
       const products = all.filter(p => p.kind === 'product' && p.status === 'approved' && p.sourceIds?.length && p.sourceIds.every(id => approvedIds.has(id))).map(({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,publicText}) => ({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,...(publicText ? {publicText} : {})}));
       const reviews=all.filter(item=>item.kind==='review').flatMap(item=>{if(item.reviewType==='quote'){const quote=publicReview(item,products.map(p=>p.id));return quote?[quote]:[];}return item.status==='approved' && reviewLink(item)?[{id:item.id,status:item.status,publicText:REVIEW_DESTINATION_TEXT,sourceTitle:item.sourceTitle,sourceUrl:item.sourceUrl,limitations:item.limitations}]:[];});
