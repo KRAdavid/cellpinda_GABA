@@ -1,6 +1,6 @@
 import type {Claim} from './ResearchLibrary';
 
-export default function GabaStory({claims}:{claims:Claim[]}) {
+export default function GabaStory({claims, hasReviews = false}:{claims:Claim[]; hasReviews?: boolean}) {
   const definition=claims.find(claim=>claim.id==='gaba-definition'&&claim.status==='approved'&&claim.publicText);
   const studies=claims.filter(claim=>claim.id.startsWith('research-')&&claim.status==='approved'&&claim.publicText&&claim.metadata?.productApplicability);
   const highlights=[
@@ -19,7 +19,7 @@ export default function GabaStory({claims}:{claims:Claim[]}) {
     <div className="story-questions" style={{marginTop:48}}><h3>읽다가 떠오르는 질문</h3>
       <details className="claim"><summary>리듬 체크 결과는 어떻게 활용하나요?</summary><div><p>체크에서 긴장·잠·휴식 신호가 겹쳤다면 오늘은 적극적인 휴식 루틴을 시작해 보세요. GABA는 뇌의 신경 신호를 조절해 안정과 관련된 물질로 설명됩니다.</p><a className="text-link" href="#rhythm">회복 초점 다시 확인하기 →</a></div></details>
       <details className="claim"><summary>연구 결과를 셀핀다 제품 정보와 어떻게 비교하나요?</summary><div><p>먼저 연구에서 누구를 대상으로 무엇을 비교했는지 확인해 보세요. 각 연구 카드의 핵심 범위는 짧게, 수치와 제품 적용 문장은 펼쳐서 안내합니다.</p><a className="text-link" href="#research">연구 카드에서 조건 확인 →</a></div></details>
-      <details className="claim"><summary>제품을 선택하기 전에 무엇을 확인하면 좋을까요?</summary><div><p>1포 내용량과 구성, 실제 제품 표시사항을 확인하고, 다른 사람의 사용 경험은 원문 맥락과 함께 살펴보세요.</p><a className="text-link" href="#products">제품 구성 확인 →</a> · <a className="text-link" href="#reviews">사용 경험 →</a></div></details>
+      <details className="claim"><summary>제품을 선택하기 전에 무엇을 확인하면 좋을까요?</summary><div><p>1포 내용량과 구성, 실제 제품 표시사항을 확인하고, 다른 사람의 사용 경험은 원문 맥락과 함께 살펴보세요.</p><a className="text-link" href="#products">제품 구성 확인 →</a>{hasReviews ? <> · <a className="text-link" href="#reviews">사용 경험 →</a></> : null}</div></details>
     </div>
   </div></section>;
 }
