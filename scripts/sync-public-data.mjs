@@ -70,7 +70,7 @@ function publicMetadata(item){
 }
 
 function evidenceHash(item, metadata=publicMetadata(item), sources=publicSources(item)){
-  const stableEvidence={id:item.id,topic:item.topic,publicText:item.publicText,metadata,internalMetadata:item.metadata || item.structuredData || null,sources,limitations:item.limitations || []};
+  const stableEvidence={id:item.id,topic:item.topic,publicText:item.publicText,metadata,internalMetadata:{metadata:item.metadata ?? null,structuredData:item.structuredData ?? null},sources,limitations:item.limitations || []};
   return createHash('sha256').update(JSON.stringify(stableEvidence)).digest('hex');
 }
 
