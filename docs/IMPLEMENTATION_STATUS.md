@@ -421,3 +421,5 @@ Chrome 기반 Playwright 임시 실행기로 데스크톱 1440×1000과 모바�
 소비자가 연구 조건을 문장으로 해석하지 않아도 되도록 승인 연구 카드의 핵심 조건을 2×2 시각 타일로 정리했다. `참여 규모·기간·비교·살펴본 신호`를 아이콘과 짧은 값으로 먼저 보여 주고, 카드의 단계형 안내는 `한눈에 이해하기`, 추가 수치는 `숫자와 맥락을 더 보기`로 이름을 바꿨다. `연구의 범위`도 `이 자료에서 볼 장면`으로 바꿔 연구 결과를 제품 효능으로 읽게 하는 방어적 문장 없이, 연구에서 관찰한 장면과 제품 표시사항을 차례로 확인하도록 흐름을 맞췄다.
 
 `validate:research-copy`, `validate:ui-contract`, 전체 production build, 76개 회귀 테스트가 통과했다. 이 변경은 연구 정보를 소비자 언어와 도표로 배치한 것이며 연구 용량·완제품 효능·권장량을 새로 승인한 것이 아니다.
+
+같은 변경의 GitHub Actions `34624983973`에서 검증·Pages 게시·Worker 설정 점검·라이브 smoke가 모두 성공했다. 배포 후 `pnpm run validate:live -- https://kradavid.github.io/cellpinda_GABA`는 `page=200`, `claims=14`, `masterRecords=8`, `products=1`, `sharePages=6`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

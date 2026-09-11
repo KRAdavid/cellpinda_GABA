@@ -36,3 +36,5 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 ## 2026-09-12 연구 카드 한눈표 QA
 
 승인 연구 카드의 핵심 조건을 `참여 규모·기간·비교·살펴본 신호` 2×2 타일로 제공하고, 기본 펼침 라벨이 `한눈에 이해하기`, 추가 수치 라벨이 `숫자와 맥락을 더 보기`인지 정적 UI 계약으로 확인했다. 공개 연구 JSON의 부정형 마케팅 문구·내부 `result`·`limitations`·750 제품은 계속 0건이며, 제품 CTA는 지정한 가바 1500 스마트스토어 상세 URL을 유지한다.
+
+동일 변경 커밋의 [GitHub Actions 34624983973](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34624983973)는 검증·Pages 게시·라이브 smoke에 성공했다. 배포 후 `validate:live` 결과는 page 200, 연구 8건, 제품 1종, 공유 페이지 6개, Smart Store only, 750 제거, provenance 일치였다.
