@@ -13,6 +13,15 @@ export function readAnalyticsConsent(storage?: StorageLike | null): AnalyticsCon
   }
 }
 
+export function currentAnalyticsConsent(): AnalyticsConsent {
+  if (typeof window === 'undefined') return 'unknown';
+  try {
+    return readAnalyticsConsent(window.localStorage);
+  } catch {
+    return 'unknown';
+  }
+}
+
 export function analyticsConsentGranted(): boolean {
-  return typeof window !== 'undefined' && readAnalyticsConsent(window.localStorage) === 'granted';
+  return currentAnalyticsConsent() === 'granted';
 }

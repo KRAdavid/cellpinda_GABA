@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {ANALYTICS_CONSENT_KEY, readAnalyticsConsent, type AnalyticsConsent} from '../domain/analytics-consent';
+import {ANALYTICS_CONSENT_KEY, currentAnalyticsConsent, type AnalyticsConsent} from '../domain/analytics-consent';
 import './AnalyticsConsent.css';
 
 function saveConsent(value: Exclude<AnalyticsConsent, 'unknown'>) {
@@ -8,7 +8,7 @@ function saveConsent(value: Exclude<AnalyticsConsent, 'unknown'>) {
 }
 
 export default function AnalyticsConsent() {
-  const [consent, setConsent] = useState<AnalyticsConsent>(() => readAnalyticsConsent(typeof window === 'undefined' ? null : window.localStorage));
+  const [consent, setConsent] = useState<AnalyticsConsent>(currentAnalyticsConsent);
   const choose = (value: Exclude<AnalyticsConsent, 'unknown'>) => { saveConsent(value); setConsent(value); };
   return <aside className="analytics-consent" aria-label="익명 사용성 측정 안내">
     <div className="analytics-consent-copy"><span className="analytics-consent-label">선택형 익명 사용성 측정</span><p>체크 시작·완료, 공유·구매 링크 이동 같은 화면 흐름만 익명으로 살펴봅니다. 이름·연락처·문항별 답변은 보내지 않습니다.</p></div>
