@@ -7,6 +7,7 @@ test('All shared types use UI labels without answers or personal queries',()=>{
   for(const [type,info] of Object.entries(resultTypes)){
     const meta=socialMetadata(`${PUBLIC_ORIGIN}/?rhythm=${type}&email=private@example.com&answers=22222#private`);
     assert.ok(meta.title.includes(info.name));assert.ok(meta.title.startsWith('공유받은'));assert.ok(meta.description.includes('링크를 연 사람의 결과가 아니며'));assert.equal(meta.canonical,`${PUBLIC_ORIGIN}/?rhythm=${type}`);
+    assert.equal(meta.image,`${PUBLIC_ORIGIN}/assets/social-rhythm-${type}.png`);assert.ok(meta.imageAlt.includes(info.name));
     const tags=socialTags(meta);assert.ok(tags.includes('og:image'));assert.ok(tags.includes('twitter:card'));assert.ok(tags.includes('rel="canonical"'));
     assert.ok(!tags.includes('private'));assert.ok(!tags.includes('22222'));assert.ok(meta.description.includes('의학적 진단'));
   }

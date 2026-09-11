@@ -10,6 +10,7 @@ import ProductShare from './components/ProductShare';
 import PurchaseQuestions from './components/PurchaseQuestions';
 import OperationsMvp from './components/OperationsMvp';
 import {apiEndpoint} from './api-origin';
+import {resultTypes, type RhythmId} from './domain/rhythm';
 const Admin = lazy(() => import('./components/Admin'));
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
 type Product={id:string;name:string;amountMg:number;servings:number;totalG:number;officialUrl:string;availability?:string;priceDisplay?:string|null};
@@ -58,6 +59,16 @@ export default function App(){
  const adminView = requestedView === 'admin' || currentPath === '/admin';
  useEffect(()=>{const c=new AbortController();loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[]);
  useEffect(()=>{
+  const value=new URLSearchParams(location.search).get('rhythm');
+  const type=value && Object.prototype.hasOwnProperty.call(resultTypes,value) ? resultTypes[value as RhythmId] : null;
+  if(!type)return;
+  const title=`공유받은 하루 리듬: ‘${type.name}’ | Cellpinda`;
+  const description=`공유받은 ‘${type.name}’의 이야기를 살펴보세요. 링크를 연 사람의 결과가 아니며, 의학적 진단이나 체내 GABA 측정이 아닙니다.`;
+  document.title=title;
+  const update=(selector:string,attribute:'name'|'property',value:string)=>{const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}=\"${selector}\"]`);if(element)element.content=value;else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}};
+  update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:image','property',new URL(asset(`assets/social-rhythm-${type.id}.png`),window.location.origin).toString());
+ },[]);
+ useEffect(()=>{
  if(adminView || accountView || operationsView)return;
   trackOnce('landing_view',{path:'/'});
   const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){if(entry.target.id==='story'){trackOnce('gaba_story_viewed',{path:'/story'});}else{trackOnce('product_comparison_viewed',{path:'/products'});trackOnce('product_compare_view',{path:'/products'});}observer.unobserve(entry.target)}},{threshold:0.25});
@@ -78,6 +89,7 @@ export default function App(){
  return <><a className="skip" href="#main">본문으로 이동</a><header className="header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav aria-label="주 메뉴" className={menu?'open':''} onClick={()=>setMenu(false)}><a href="#rhythm">1분 체크</a><a href="#story">GABA란?</a><a href="#fermentation">왜 발효가바?</a><a href="#products">제품 비교</a><a href="#reviews">구매자 경험</a></nav><a href="#rhythm" className="button small" onClick={()=>track('hero_check_start',{path:'/header'})}>1분 체크 <ArrowRight size={18}/></a><button className="menu-toggle" aria-label={menu?'메뉴 닫기':'메뉴 열기'} aria-expanded={menu} onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>{linkContext}
  <main id="main"><section className="hero"><img className="hero-photo" src={asset('assets/rhythm-window.png')} alt="초록 나무가 보이는 열린 창가와 물 한 잔"/><div className="hero-copy"><p className="chapter">셀핀다 발효가바 · 나의 하루 리듬</p><h1>오늘도 몸보다<br/>머리가 먼저 지치지 않았나요?</h1><p className="hero-question">생각이 멈추지 않는 밤, 쉽게 예민해지는 하루.<br className="mobile-break"/> 1분 리듬 체크로 지금 나에게 필요한 휴식 신호를 확인해 보세요.</p><p className="muted">GABA는 신경 신호의 균형 조절에 관여하는 물질입니다.<br/>셀핀다는 발효기술로 만든 발효가바를 하루 한 포에 담았습니다.</p><div className="actions"><a className="button" href="#rhythm" onClick={()=>track('hero_check_start',{path:'/'})}>1분 리듬 체크 시작 <ArrowRight/></a><a className="button outline" href="#teaser">발효가바가 무엇인지 30초 만에 보기 <ArrowRight/></a></div>{content?.products.length ? <div className="hero-product"><img src={asset(`assets/product-${content.products[0].amountMg}.jpg`)} alt={`${content.products[0].name} 실제 제품 포장`}/><div><strong>김치 유래 유산균 발효기술로 만든 셀핀다 발효가바</strong><span className="hero-product-meta">{content.products[0].name} · {content.products[0].amountMg.toLocaleString()} mg × {content.products[0].servings}포</span><div className="hero-shortcuts"><a href="#products">제품 구성 보기 →</a><a href={content.products[0].officialUrl} target="_blank" rel="noreferrer">구매처 확인 →</a></div></div></div> : null}</div></section>
  <section className="intro-strip wrap"><h2>나를 돌아보는 1분,<br/>작은 변화의 시작.</h2>{[['01','발견','나의 하루를 짧게 돌아봐요.'],['02','이해','GABA 이야기를 살펴봐요.'],['03','선택','제품을 충분히 알고 선택해요.']].map(([n,t,d])=><div className="step" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</section>
+ <section className="section empathy" aria-labelledby="empathy-heading"><div className="wrap"><div className="section-head"><div><p className="chapter">잠깐, 나의 하루</p><h2 id="empathy-heading">이런 하루가<br/>반복되고 있나요?</h2></div><p>아래 문장 중 마음에 닿는 장면을 골라 보세요.<br/>바로 1분 리듬 체크로 이어집니다.</p></div><div className="empathy-cards">{[['누워도 생각이 계속 이어져요','잠자리에서도 오늘의 일이 쉽게 멈추지 않아요.'],['작은 자극에도 예민해져요','소리·화면·사람이 많은 뒤에 감각이 크게 느껴져요.'],['집중하려는데 흐름이 끊겨요','하던 일을 잠깐 멈추고 다시 시작하는 일이 잦아요.'],['쉬어도 충분히 쉰 느낌이 없어요','몸은 멈췄는데 머리는 계속 켜져 있는 것 같아요.']].map(([title,description],index)=><a className="empathy-card" href="#rhythm" key={title} onClick={()=>track('hero_check_start',{path:'/empathy',signal:`0${index+1}`})}><span>0{index+1}</span><h3>{title}</h3><p>{description}</p><strong>내 리듬 확인하기 <ArrowRight size={16}/></strong></a>)}</div></div></section>
  <div className="wrap section"><RhythmExperience onEvent={track}/></div>
  <TeaserPreview onEvent={track}/>
  {content ? <>

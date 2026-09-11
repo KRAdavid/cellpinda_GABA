@@ -18,6 +18,7 @@ try {
 } catch (error) { check('wrangler-config',false,error instanceof Error ? error.message : 'invalid JSON'); }
 
 for(const file of ['dist/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/data/operations-queue.json','dist/data/tf-pulse.json','dist/data/goal-audit.json','dist/data/tf-meeting-packet.json']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
+for(const type of ['active','sleep','irregular','sensory','unrested','steady']) check(`artifact:dist/assets/social-rhythm-${type}.png`,existsSync(resolve(root,`dist/assets/social-rhythm-${type}.png`)),'result-specific social preview present');
 try {
   const content=readJson('public/data/content.json');
   const master=readJson('public/data/gaba-master-index.json');

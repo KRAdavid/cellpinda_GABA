@@ -56,3 +56,14 @@ export function challengeFinished(record: ChallengeRecord, today: string): boole
   if (!isCalendarDate(today) || !parseChallenge(record)) throw new TypeError('기록과 날짜를 확인해 주세요.');
   return today >= addCalendarDays(record.startDate, 7);
 }
+
+/** Number of consecutive completed days ending on the latest available day. */
+export function challengeStreak(record: ChallengeRecord, today: string): number {
+  const valid = parseChallenge(record);
+  if (!valid || !isCalendarDate(today)) throw new TypeError('기록과 날짜를 확인해 주세요.');
+  const lastIndex = valid.days.reduce((latest, day, index) => day.date <= today ? index : latest, -1);
+  if (lastIndex < 0 || !valid.days[lastIndex]!.completed) return 0;
+  let streak = 0;
+  for (let index = lastIndex; index >= 0 && valid.days[index]!.completed; index -= 1) streak += 1;
+  return streak;
+}

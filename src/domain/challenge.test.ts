@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { addCalendarDays, challengeFinished, createChallenge, isCalendarDate, localCalendarDate, parseChallenge, updateChallengeDay } from './challenge.ts';
+import { addCalendarDays, challengeFinished, challengeStreak, createChallenge, isCalendarDate, localCalendarDate, parseChallenge, updateChallengeDay } from './challenge.ts';
 
 test('calendar arithmetic handles DST, leap days and year boundaries', () => {
   assert.equal(addCalendarDays('2026-03-07', 2), '2026-03-09');
@@ -38,6 +38,16 @@ test('the wrap-up begins after seven calendar days, not seven checkmarks', () =>
   assert.equal(challengeFinished(record, '2026-09-16'), false);
   assert.equal(challengeFinished(record, '2026-09-17'), true);
   assert.equal(challengeFinished(record, '2026-09-18'), true);
+});
+
+test('challenge streak counts only the consecutive completed days ending today', () => {
+  const record = createChallenge('2026-09-10');
+  const dayOne = updateChallengeDay(record, 0, { completed: true }, '2026-09-10');
+  const dayTwo = updateChallengeDay(dayOne, 1, { completed: true }, '2026-09-11');
+  assert.equal(challengeStreak(dayTwo, '2026-09-11'), 2);
+  assert.equal(challengeStreak(dayTwo, '2026-09-12'), 0);
+  const dayThree = updateChallengeDay(dayTwo, 2, { completed: true }, '2026-09-12');
+  assert.equal(challengeStreak(dayThree, '2026-09-12'), 3);
 });
 
 test('stored records validate fully and legacy arrays are not dated retroactively', () => {

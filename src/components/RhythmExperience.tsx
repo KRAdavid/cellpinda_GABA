@@ -4,6 +4,10 @@ import { classifyRhythm, questions, resultTypes } from '../domain/rhythm';
 import type { AnswerValue, RhythmId, RhythmResult, RhythmType } from '../domain/rhythm';
 import './rhythm.css';
 
+type KakaoApi = { isInitialized: () => boolean; init: (key: string) => void; Share: { sendDefault: (payload: Record<string, unknown>) => void } };
+declare global { interface Window { Kakao?: KakaoApi } }
+const kakaoKey = typeof import.meta.env.VITE_KAKAO_JS_KEY === 'string' ? import.meta.env.VITE_KAKAO_JS_KEY.trim() : '';
+
 export interface RhythmExperienceProps {
   onEvent: (name: string, properties?: Record<string, string>) => void;
 }
@@ -105,11 +109,13 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const [message, setMessage] = useState('');
   const [manualLink, setManualLink] = useState('');
   const [cardUrl, setCardUrl] = useState('');
+  const [kakaoReady, setKakaoReady] = useState(false);
   const sharedTracked=useRef(false);
   const pointerSelecting=useRef(false);
   const shareReferralRef=useRef('');
   const getShareReferralId=()=>{if(!shareReferralRef.current){shareReferralRef.current=crypto.randomUUID().replaceAll('-','').slice(0,16)}return shareReferralRef.current};
   useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
+  useEffect(()=>{if(!kakaoKey)return;const ready=()=>{if(!window.Kakao)return;try{if(!window.Kakao.isInitialized())window.Kakao.init(kakaoKey);setKakaoReady(true)}catch{setKakaoReady(false)}};if(window.Kakao){ready();return;}const script=document.createElement('script');script.src='https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';script.async=true;script.onload=ready;script.onerror=()=>setKakaoReady(false);document.head.appendChild(script);return()=>{script.onload=null;script.onerror=null}},[]);
   const answerStarted=useRef(false);
   const resultViewed=useRef(false);
   const questionRef = useRef<HTMLLegendElement>(null);
@@ -229,6 +235,20 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     }
   }
 
+  function shareToKakao() {
+    if (!type || !kakaoReady || !window.Kakao) return;
+    const url = shareUrl(type, getShareReferralId());
+    const imageUrl = new URL(`${import.meta.env.BASE_URL}assets/social-card.png`, window.location.origin).toString();
+    onEvent('result_share_click',{path:result?'/result':'/share',channel:'kakao'});
+    window.Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: { title: `셀핀다 하루 리듬 · ${type.name}`, description: type.description, imageUrl, link: { mobileWebUrl: url, webUrl: url } },
+      buttons: [{ title: '내 리듬도 1분 체크', link: { mobileWebUrl: url, webUrl: url } }],
+    });
+    onEvent('result_share_success',{path:result?'/result':'/share',channel:'kakao'});
+    setMessage('카카오톡 공유 창을 열었어요. 실제 전달 여부는 확인하지 않아요.');
+  }
+
   async function share() {
     if (!type) return;
     onEvent('share_request',{path:result?'/result':'/share'});
@@ -310,11 +330,14 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <p>카드와 공유 링크에는 생활 유형이 표시돼요. 문항별 답변은 담지 않습니다.</p>
             {cardUrl && type ? <img className="rhythm-card-preview" src={cardUrl} alt={`${type.name} 결과 카드 미리보기`} /> : null}
             <button type="button" className="rhythm-button" onClick={share}>리듬 이야기 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
+            {kakaoReady ? <button type="button" className="rhythm-button secondary" onClick={shareToKakao}>카카오톡으로 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
+            <button type="button" className="rhythm-button secondary" onClick={() => void copyLink()}>링크만 복사 <ArrowUpRight size={18} aria-hidden="true" /></button>
             <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>이미지 카드 저장 <Download size={18} aria-hidden="true" /></button>
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             <button type="button" className="rhythm-text-button" onClick={start}>{sharedType ? '나도 1분 리듬 체크' : '다시 체크하기'} <ArrowRight size={18} aria-hidden="true" /></button>
             <details className="rhythm-rules"><summary>유형은 어떻게 정해지나요?</summary><p>{result?.explanation ?? '긴장, 잠자리 전환, 멈춤의 공백, 자극 부담, 아침 회복감 다섯 신호를 같은 비중으로 비교합니다. 모두 0·1이면 안정 리듬형, 2·3이 있으면 가장 큰 신호를 오늘의 회복 초점으로 보여줍니다. 이 규칙은 생활을 돌아보기 위한 편집 기준이며 검증된 의학적 기준이 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#story">이제 GABA를 알아볼까요? <ArrowRight size={18} aria-hidden="true" /></a>
+            <a className="rhythm-text-button" href="#products">제품 구성·표시사항 살펴보기 <ArrowRight size={18} aria-hidden="true" /></a>
           </div>
         </div>
       ) : started ? (
@@ -342,6 +365,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : null}
       <p className="rhythm-status" role="status" aria-live="polite">{message}</p>
       {manualLink ? <label className="rhythm-manual-link">공유 링크<input value={manualLink} readOnly onFocus={event => event.target.select()} /></label> : null}
+      {type ? <div className="rhythm-mobile-share-bar" aria-label="리듬 결과 공유"><button type="button" onClick={share}>공유</button><button type="button" onClick={() => void copyLink()}>링크 복사</button></div> : null}
     </section>
   );
 }

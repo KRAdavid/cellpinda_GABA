@@ -49,6 +49,7 @@ jobs:
       - name: Build GitHub Pages bundle
         env:
           VITE_BASE_PATH: /cellpinda_GABA/
+          VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
         run: |
           pnpm exec vite build --base "$VITE_BASE_PATH" --outDir dist-pages
           cp dist-pages/index.html dist-pages/404.html
@@ -142,6 +143,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Sync approved public data and build
         if: env.DEPLOY_ENABLED == 'true'
+        env:
+          VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
         run: pnpm run build
       - name: Strict deployment readiness gate
         if: env.DEPLOY_ENABLED == 'true'
