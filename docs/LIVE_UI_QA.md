@@ -15,3 +15,18 @@
 `/account`는 정적 호스트에서 회원 API 대신 브라우저 7일 기록 안내로 전환하고, `/admin`은 운영 Worker가 없다는 안내를 보여 준다. 두 화면 모두 Worker API가 연결된 호스트에서만 서버 기능을 요청한다.
 
 코드 기준 release HEAD는 `3d78f23`이며, 해당 변경의 [GitHub Actions 34494224366](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34494224366)에서 타입검사·테스트·빌드·Pages·라이브 smoke가 성공했다.
+
+## 2026-09-12 소비자 공유·구매 흐름 재검증
+
+Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부터 공유까지의 실제 상호작용을 점검했다. 첫 화면은 GABA 설명·`1분 리듬 체크 시작`·`셀핀다 가바 1500`을 노출하고, `750`·내부 운영 메뉴·빈 자료 문구는 노출하지 않았다.
+
+| 흐름 | 확인 결과 |
+|---|---|
+| 1분 리듬 체크 | 다섯 문항이 `01 → 02 → 03 → 04 → 05`로 터치 선택 후 자동 진행되고 `안정 리듬형` 결과 카드 생성 |
+| 결과 공유 | `share/steady/` 유형별 URL과 익명 `ref` 생성, 링크 복사 성공 |
+| 구매·후기 | 제품·후기 CTA 모두 `https://smartstore.naver.com/cellpinda/products/4701017202`로 직접 연결 |
+| 캠페인 보존 | 제품 구성 공유·7일 챌린지 초대에 승인된 `campaign`만 유지하고 답변·개인정보 파라미터는 제외 |
+| 공유 유입 | `share/active/`가 `공유받은 리듬 이야기`와 `나도 1분 리듬 체크`를 표시하고 새 체크로 이어짐 |
+| 모바일·오류 | 390×844에서 가로 오버플로 없음, 콘솔·페이지 오류 0 |
+
+동일 시점 `validate:live`도 HTTP 200, 연구 8건, 제품 1종, 공유 페이지 6개, `smartStoreOnly=true`, `removed750=true`, `teaserPreview=true`, `provenance=matched`를 반환했다. 이 기록은 공개 UI와 익명 공유 경계를 검증한 것이며 실제 주문·후기 권한·티저 최종 공개 승인을 대신하지 않는다.
