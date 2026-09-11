@@ -501,3 +501,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-12 안전 TF·로컬 자료 재감사 사이클
 
 최신 pulse(`2026-09-11T19:35:16Z`, 상태 지문 `bd2b0a88608a`)를 기준으로 내부 safe run과 독립 검증을 다시 실행했다. 공개 패킷 동기화와 6개 읽기 검사는 모두 `MET`이며 외부 효과는 없다. `pnpm run audit:goal:local:json`은 완제품 자료 `MET`, 주문 자료 `WAITING`, 전체 `IN_PROGRESS_WITH_GATES`와 로컬 지문 `b2912ff816a8e`를 기록했고 `public/data`는 변경되지 않았다. 이 사이클은 최신성·분류를 재확인한 증거이며 B2 표시 승인, B3 후기 권한, B4 티저 권리, C2 운영 Secrets, E1 실구매 대사를 자동 완료하지 않는다.
+
+## 2026-09-12 공개 내부 경로 라이브 회귀 가드
+
+라이브 공개 검증기에 `/admin`, `/ops`, `?view=admin`, `?view=ops` 응답 본문 검사를 추가했다. Pages가 404 fallback을 반환하거나 소비자 셸을 반환하는 것은 허용하지만 내부 검토실·TF 운영판·관리자 기능 문구가 응답에 섞이면 배포를 실패시킨다. `validate-live-public.mjs`를 실제 공개 URL에 실행해 관리자 내부 문구 없음, Smart Store 직결, 750 제거, 연구·공유·운영 패킷 일치를 한 번에 확인했다. 이 가드는 공개 경로 노출을 막는 검증이며 로컬 운영자 인증·Cloudflare 운영 배포 승인을 대신하지 않는다.

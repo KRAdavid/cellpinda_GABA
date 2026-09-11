@@ -69,11 +69,17 @@ const request = async path => {
   if (!response.ok) throw new Error(`${path} returned HTTP ${response.status}`);
   return response;
 };
+const requestPublicRoute = async path => {
+  const separator = path.includes('?') ? '&' : '?';
+  const response = await fetch(`${base}${path}${separator}release-smoke=1`);
+  if (![200, 404].includes(response.status)) throw new Error(`${path} returned unexpected HTTP ${response.status}`);
+  return {status: response.status, text: await response.text()};
+};
 
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, faviconResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse] = await Promise.all([
+    const [page, faviconResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute] = await Promise.all([
       request('/?view=ops'),
       request('/favicon.svg'),
       request('/data/content.json'),
@@ -83,9 +89,16 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       request('/data/tf-pulse.json'),
       request('/data/goal-audit.json'),
       request('/data/tf-meeting-packet.json'),
+      requestPublicRoute('/admin'),
+      requestPublicRoute('/ops'),
+      requestPublicRoute('/?view=admin'),
+      requestPublicRoute('/?view=ops'),
     ]);
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
     const [pageText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
+    for (const [label, route] of [['/admin', adminRoute], ['/ops', opsRoute], ['/?view=admin', adminQueryRoute], ['/?view=ops', opsQueryRoute]]) {
+      assert.ok(!/콘텐츠 검토실|운영자 접근 키|TF 운영판|운영 큐|관리자 기능/i.test(route.text), `public route ${label} leaks an internal operations surface`);
+    }
     const sharePageResponses = await Promise.all(sharedResultIds.map(id => request(`/share/${id}/`)));
     const sharePageTexts = await Promise.all(sharePageResponses.map(response => response.text()));
     assert.equal(canonicalHref(pageText), `${base}/`, 'live root canonical URL is invalid');

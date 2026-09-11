@@ -2,6 +2,10 @@
 
 목표 파일 전체를 읽고 구현을 시작했다. 기존 회의 문서 작성은 progress로 분류한다. 이번 작업도 실제 코드·원장·이미지·테스트를 만들었으므로 progress다. 전체 목표는 아직 완료되지 않았다.
 
+## 최신 업데이트 — 2026-09-12 공개 경로 라이브 회귀 가드
+
+`validate-live-public.mjs`가 `/admin`, `/ops`, `?view=admin`, `?view=ops` 공개 경로의 실제 응답 본문도 확인하도록 보강했다. GitHub Pages의 정상 404 fallback 또는 소비자 셸 응답은 허용하되 `콘텐츠 검토실`, `운영자 접근 키`, `TF 운영판`, `운영 큐`, `관리자 기능` 같은 내부 문구가 응답에 포함되면 라이브 smoke를 실패시킨다. 최신 공개 검증은 관리자 내부 문구 없음, 스마트스토어 상세 목적지, 750 제거를 함께 확인했다.
+
 ## 최신 업데이트 — 2026-09-12 로컬 pulse 검증 증거 보존
 
 CI의 임시 safe-run 파일 없이 `pnpm run tf:pulse:heartbeat`를 실행할 때도, pulse 지문이 동일하면 직전 독립 검증 요약을 보존하도록 `scripts/write-tf-pulse-heartbeat.mjs`를 보강했다. 상태 지문이 바뀌거나 이전 요약이 없으면 `safeExecution`을 새로 만들지 않아 오래된 검증을 새 상태의 승인처럼 이월하지 않는다. 80개 회귀 테스트·production build·공개 export·Pages 라이브 smoke를 통과했으며, 외부 입력 게이트(B2·B3·B4·C2·E1)는 계속 사람 검토 상태다.
