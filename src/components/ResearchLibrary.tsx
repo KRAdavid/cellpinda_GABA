@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react';
-import {Clock3, FlaskConical, UsersRound} from 'lucide-react';
+import {Activity, Clock3, FlaskConical, UsersRound} from 'lucide-react';
 import './ResearchLibrary.css';
 
 export type ResearchMetadata = {
@@ -143,14 +143,17 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType)}</p>
         <h3>{metadata.question || claim.topic}</h3>
         {metadata.consumerSummary ? <p className="research-library-consumer-summary"><strong>한 문장으로</strong>{metadata.consumerSummary}</p> : null}
-        <div className="research-library-quick-facts" aria-label="연구 핵심 조건">
-          {quickFacts.map(({label, value, Icon}) => <div key={label}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span><strong>{label}</strong><small>{value}</small></span></div>)}
+        <div className="research-library-quick-facts" aria-label="연구를 한눈에 보는 도표">
+          {[
+            ...quickFacts.map(({label, value, Icon}) => ({label: label === '참여자' ? '참여 규모' : label, value, Icon})),
+            {label: '살펴본 신호', value: metadata.outcome, Icon: Activity},
+          ].filter(item => item.value).map(({label, value, Icon}) => <div key={label}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span><strong>{label}</strong><small>{value}</small></span></div>)}
         </div>
-        <p className="research-library-scope"><strong>연구의 범위</strong>{metadata.consumerScope || '이 자료의 연구 조건과 제품 정보는 따로 비교해 보세요.'}</p>
+        <p className="research-library-scope"><strong>이 자료에서 볼 장면</strong>{metadata.consumerScope || '이 자료에서 살펴본 장면과 제품 정보를 차례로 비교해 보세요.'}</p>
         <details className="research-detail" onToggle={event => {
           if (event.currentTarget.open) onOpen?.(claim.id);
         }}>
-          <summary>이 연구를 쉽게 보기</summary>
+          <summary>한눈에 이해하기</summary>
           <div className="research-library-detail">
             <div className="research-story-grid" aria-label="이 연구를 네 가지 질문으로 보기">
               <div className="research-story-card"><span>01</span><h4>누구를 살펴봤나요?</h4><p>{metadata.population || '연구 참여자 정보가 공개되지 않았어요.'}</p>{metadata.sampleSize ? <small>{metadata.sampleSize}</small> : null}</div>
@@ -158,9 +161,9 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
               <div className="research-story-card"><span>03</span><h4>무엇과 비교했나요?</h4><p>{metadata.comparison || '비교 조건이 공개되지 않았어요.'}</p></div>
               <div className="research-story-card"><span>04</span><h4>어떤 내용을 살펴봤나요?</h4><p>{metadata.consumerSummary}</p></div>
             </div>
-            <div className="research-library-boundary"><h4>셀핀다 제품은 이렇게 확인해요</h4><p>{metadata.productApplicability}</p></div>
+            <div className="research-library-boundary"><h4>제품을 볼 때는 이렇게 확인해요</h4><p>{metadata.productApplicability}</p></div>
             <details className="research-technical-detail">
-              <summary>더 자세한 이야기 보기</summary>
+              <summary>숫자와 맥락을 더 보기</summary>
               <div className="research-technical-detail-body">
                 <div className="research-library-overview"><h4>이 연구에서 본 내용</h4><p>{metadata.consumerSummary || claim.publicText}</p></div>
                 <dl className="research-library-facts">{facts.map(([key, label]) => {

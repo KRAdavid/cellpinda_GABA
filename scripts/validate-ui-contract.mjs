@@ -35,7 +35,7 @@ for (const marker of ['오늘도 몸보다', '1분 리듬 체크 시작', 'GABA�
 }
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
 requireMatch(research, /핵심은 짧게, 이야기는 펼쳐서/, 'research section must lead with a consumer story');
-requireMatch(research, /더 자세한 이야기 보기/, 'research detail must use a consumer-friendly label');
+requireMatch(research, /숫자와 맥락을 더 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요/, 'research empty state must guide the next consumer action');
 requireMatch(indexHtml, /GABA 연구를 쉬운 말로 더 보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /쉬운 말과 도표로 정리/, 'GABA story must explain research with a visual aid');

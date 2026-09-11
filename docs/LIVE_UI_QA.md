@@ -32,3 +32,7 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 동일 시점 `validate:live`도 HTTP 200, 연구 8건, 제품 1종, 공유 페이지 6개, `smartStoreOnly=true`, `removed750=true`, `teaserPreview=true`, `provenance=matched`를 반환했다. 이 기록은 공개 UI와 익명 공유 경계를 검증한 것이며 실제 주문·후기 권한·티저 최종 공개 승인을 대신하지 않는다.
 
 같은 배포본의 루트와 결과별 공유 HTML도 직접 확인했다. 루트 canonical·OG 제목이 셀핀다 페이지를 가리키고, `active`, `sleep`, `irregular`, `sensory`, `unrested`, `steady` 여섯 경로가 각각 자신의 canonical URL과 `social-rhythm-{id}.png` 이미지를 사용한다. 제목·설명에는 750 제품이나 내부 운영 문구가 없으며, 여섯 경로 모두 HTTP 200으로 응답했다.
+
+## 2026-09-12 연구 카드 한눈표 QA
+
+승인 연구 카드의 핵심 조건을 `참여 규모·기간·비교·살펴본 신호` 2×2 타일로 제공하고, 기본 펼침 라벨이 `한눈에 이해하기`, 추가 수치 라벨이 `숫자와 맥락을 더 보기`인지 정적 UI 계약으로 확인했다. 공개 연구 JSON의 부정형 마케팅 문구·내부 `result`·`limitations`·750 제품은 계속 0건이며, 제품 CTA는 지정한 가바 1500 스마트스토어 상세 URL을 유지한다.
