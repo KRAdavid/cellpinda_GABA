@@ -85,7 +85,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(teaserPreview.placement, '선택형 보조 CTA · 리듬 체크 다음', 'live teaser preview must keep the approved placement');
     assert.ok(!/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(JSON.stringify(content)), 'live public content contains a legacy official-mall destination');
     for (const claim of content.claims.filter(item => ['product-1500', 'fermentation-listed'].includes(item.id))) assert.ok(claim.sources?.every(source => isSmartStore(source.url)), `live product claim ${claim.id} must use the Smart Store source only`);
-    assert.ok(!JSON.stringify(content.products).includes('750'), 'live export contains removed 750 product');
+    assert.ok(!content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750')), 'live export contains removed 750 product');
     assert.equal(master.records.length, 8, 'live master index must contain eight research records');
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
     assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');

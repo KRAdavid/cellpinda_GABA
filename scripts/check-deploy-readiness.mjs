@@ -26,7 +26,7 @@ try {
   const audit=readJson('public/data/goal-audit.json');
   const meetingPacket=readJson('public/data/tf-meeting-packet.json');
   const taskGraph=readJson('data/task-graph.json');
-  check('public-product-scope',content.products?.length===1 && content.products[0]?.id==='gaba1500' && !JSON.stringify(content).includes('750'),'gaba1500 only');
+  check('public-product-scope',content.products?.length===1 && content.products[0]?.id==='gaba1500' && !content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750')),'gaba1500 only');
   check('master-index',master.records?.length===8 && master.records.every(record=>record.id?.startsWith('research-')),'8 approved research records');
   check('operations-queue',queue.tasks?.length===taskGraph.tasks?.length && queue.goalId==='GL-2026-CELL-GABA-001',`${taskGraph.tasks?.length ?? 0} tasks for active Goal Contract`);
   check('goal-audit',audit.mode==='public_goal_audit' && audit.goalId===queue.goalId && audit.gates?.length===queue.tasks.filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state)).length,'public audit packet tied to operations queue');

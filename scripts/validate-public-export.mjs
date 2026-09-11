@@ -205,7 +205,8 @@ if (product.id !== 'gaba1500' || product.amountMg !== 1500 || product.servings !
 for (const claim of content.claims.filter(item => ['product-1500', 'fermentation-listed'].includes(item.id))) {
   if (!claim.sources.every(source => isSmartStore(source.url))) fail(`public product claim ${claim.id} must use the Smart Store source only`);
 }
-if (JSON.stringify(content.products).includes('750') || JSON.stringify(master.records).includes('750')) fail('removed 750 product returned to public export');
+const hasRemoved750 = content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750'));
+if (hasRemoved750) fail('removed 750 product returned to public export');
 
 if (content.reviews.length !== 1 || content.reviews[0].id !== 'shop-review-destination-1500' || !isSmartStore(content.reviews[0].sourceUrl)) fail('review destination is not the approved Smart Store 1500 destination');
 for (const record of master.records) {

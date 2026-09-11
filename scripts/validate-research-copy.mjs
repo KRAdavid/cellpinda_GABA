@@ -26,5 +26,7 @@ const detailBlock = researchLibrary.indexOf('<details className="research-detail
 const productLink = researchLibrary.indexOf('className="text-link research-try-link"');
 if (detailBlock < 0 || productLink < detailBlock) fail('product information link must follow research conditions and observed changes');
 if (!researchLibrary.slice(productLink, productLink + 180).includes('제품 구성·표시사항')) fail('product information link must lead to product composition and label details');
+if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must not render internal result or limitation fields');
+if (researchLibrary.includes('숫자와 출처 더 확인하기')) fail('consumer research UI must use the conditions-and-source label');
 
 console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability'], detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-product-link', status: 'ok'}));
