@@ -3,7 +3,7 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-11T01:46:22.368Z",
+  "generatedAt": "2026-09-11T02:05:25.579Z",
   "snapshotHash": "0003f1e1b5c7234aea2d6d2ce404c1eb10fd700f2196c8b265895d87e10195c4",
   "previousSnapshotHash": "0003f1e1b5c7234aea2d6d2ce404c1eb10fd700f2196c8b265895d87e10195c4",
   "stateChanged": false,
@@ -11,7 +11,7 @@
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-11T07:46:22.368Z",
+    "nextReviewAt": "2026-09-11T08:05:25.579Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -190,5 +190,60 @@
     "status": "HOLD",
     "taskId": "B4",
     "taskState": "WAITING"
+  },
+  "safeExecution": {
+    "mode": "safe_internal_tf_run",
+    "status": "MET",
+    "validatedAt": "2026-09-11T02:05:26.105Z",
+    "executionBoundary": {
+      "state": "READY",
+      "risk": "B_INTERNAL_WRITE",
+      "externalEffects": false
+    },
+    "preparation": {
+      "id": "sync-public-data",
+      "risk": "B_INTERNAL_WRITE",
+      "status": "MET"
+    },
+    "checks": [
+      {
+        "id": "goal-contract",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "research-copy",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "teaser-boundary",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "sandbox-mvp",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "public-export",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "tf-pulse",
+        "risk": "A_READ",
+        "status": "MET"
+      }
+    ],
+    "candidateTaskIds": [],
+    "humanGateTaskIds": [
+      "B2",
+      "B3",
+      "B4",
+      "C2",
+      "E1"
+    ]
   }
 }
