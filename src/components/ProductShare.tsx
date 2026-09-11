@@ -3,7 +3,7 @@ import {useState} from 'react';
 type Props={onEvent?:(name:string,properties:Record<string,string>)=>void};
 export default function ProductShare({onEvent}:Props){
  const [busy,setBusy]=useState(false),[message,setMessage]=useState(''),[manual,setManual]=useState('');
- function link(){const url=new URL(import.meta.env.BASE_URL,window.location.origin);url.searchParams.set('view','products');url.hash='products';return url.href;}
+ function link(){const url=new URL(import.meta.env.BASE_URL,window.location.origin);url.searchParams.set('view','products');const campaign=new URLSearchParams(window.location.search).get('campaign')?.trim()||'';if(/^[A-Za-z0-9_-]{1,64}$/.test(campaign))url.searchParams.set('campaign',campaign);url.hash='products';return url.href;}
  async function copy(){
   const url=link();
    try{await navigator.clipboard.writeText(url);setManual('');setMessage('제품 구성 링크를 복사했어요. 함께 보고 싶은 사람에게 전달하세요.');onEvent?.('share_link_copied',{path:'/products',channel:'clipboard'});}

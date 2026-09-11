@@ -106,6 +106,8 @@ export default function SevenDayChallenge({ onEvent }: Props) {
   function challengeLink() {
     const url = new URL(import.meta.env.BASE_URL, window.location.origin);
     url.searchParams.set('challenge', '7days');
+    const campaign = new URLSearchParams(window.location.search).get('campaign')?.trim() || '';
+    if (/^[A-Za-z0-9_-]{1,64}$/.test(campaign)) url.searchParams.set('campaign', campaign);
     url.hash = 'lab';
     return url.href;
   }
