@@ -28,7 +28,7 @@
 
 ## 최신 업데이트 — 2026-09-11 공개 제품 출처·이동 경로 Smart Store 통일
 
-제품 구성·발효 설명에 남아 있던 공개 출처 링크도 사용자가 지정한 스마트스토어로 통일했다. 제품 카드·구매 전 질문·후기 원문·발효 설명의 소비자 링크가 모두 `https://smartstore.naver.com/cellpinda`를 사용하며, 공개 export에 예전 공식몰 도메인이나 명칭이 다시 들어오면 `validate:public`과 라이브 smoke가 실패한다. 공식몰 자료는 내부 증거 문서와 이미지 출처 기록에만 남겨 제품 구매 목적지와 구분한다.
+제품 구성·발효 설명에 남아 있던 공개 이동 경로도 사용자가 지정한 가바 1500 상세 페이지로 통일했다. 제품 카드·구매 전 질문·후기 원문·푸터의 소비자 링크는 모두 `https://smartstore.naver.com/cellpinda/products/4701017202`를 사용하며, 공개 export에 다른 구매 목적지가 다시 들어오면 `validate:public`과 라이브 smoke가 실패한다. 공식몰 자료는 내부 증거 문서와 이미지 출처 기록에만 남겨 제품 구매 목적지와 구분한다.
 
 ## 최신 업데이트 — 2026-09-11 공개 목표 감사 패킷
 
@@ -103,7 +103,7 @@ TF pulse가 활성 작업마다 상태에 맞는 두 가지 결정 경로와 최
 ## 최신 현재 상태 — 2026-09-10 공개 배포와 살아있는 TF 운영 MVP
 
 - `main`의 GitHub Pages 배포가 성공했다. 공개 주소는 https://kradavid.github.io/cellpinda_GABA/ 이며 운영 MVP는 `?view=ops`에서 확인한다.
-- 공개 `gaba-master-index.json`은 연구 8건, 제품 1건(가바 1500), `750` 제품 0건을 포함한다. 제품·후기 CTA와 원문 목적지는 스마트스토어(`https://smartstore.naver.com/cellpinda`)로 통일했다. 연구 원장에 남은 과거 판매 페이지 URL은 출처 provenance이며 소비자 구매 목적지가 아니다.
+- 공개 `gaba-master-index.json`은 연구 8건, 제품 1건(가바 1500), `750` 제품 0건을 포함한다. 제품·후기 CTA와 구매 목적지는 가바 1500 스마트스토어 상세 페이지(`https://smartstore.naver.com/cellpinda/products/4701017202`)로 통일했다. 연구 원장에 남은 과거 판매 페이지 URL은 출처 provenance이며 소비자 구매 목적지가 아니다.
 - TF 운영 MVP는 5개 스트림과 10개 역할(마케팅·소비자심리, 데이터·판매처 운영, 재무·QA, 독립 품질감사관 포함)을 생성하고, 목표 계약 회의 기록을 시작으로 실행·승인 대기·독립 검증별 의사결정(참여 역할·판단·반대 의견·증거·다음 조치)을 승인 보고서에 포함한다.
 - 로컬 Node/SQLite와 Worker/D1 모두 `/api/ops/runs/:runId` 저장 계약을 제공한다. revision·감사 snapshot·30일 만료·클라이언트 샌드박스 키로 재개를 지원하며, 정적 Pages에서는 API가 없을 때 브라우저 저장으로 폴백한다.
 
