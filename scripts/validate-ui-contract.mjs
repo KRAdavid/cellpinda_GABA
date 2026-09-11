@@ -12,6 +12,7 @@ const challenge = await read('src/components/SevenDayChallenge.tsx');
 const researchStyles = await read('src/components/ResearchLibrary.css');
 const reviewStyles = await read('src/components/ReviewExperience.css');
 const teaser = await read('src/components/TeaserPreview.tsx');
+const research = await read('src/components/ResearchLibrary.tsx');
 const indexHtml = await read('index.html');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
 const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
@@ -29,6 +30,10 @@ for (const marker of ['오늘도 몸보다', '1분 리듬 체크 시작', 'GABA�
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
+requireMatch(research, /핵심은 짧게, 이야기는 펼쳐서/, 'research section must lead with a consumer story');
+requireMatch(research, /숫자와 출처 더 보기/, 'research detail must use a consumer-friendly label');
+requireMatch(indexHtml, /GABA 연구를 쉬운 말로 더 보기/, 'no-script research fallback must use a consumer-friendly label');
+if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하기/.test(app + research + indexHtml)) fail('researcher-oriented detail labels leaked into consumer source');
 requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\s\S]*?\}, 180\)/, 'touch answers must auto-advance to the next question');
 requireMatch(app, /<img[^>]+alt=\{/, 'product and hero images must expose alternative text');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
