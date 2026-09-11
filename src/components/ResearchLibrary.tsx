@@ -132,7 +132,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       <p id="research-search-help" className="note">관심 있는 주제나 연구 이야기를 찾을 수 있어요. 카드에서 쉬운 설명을 먼저 확인해 보세요.</p>
       <p className="research-library-count" role="status" aria-live="polite">전체 {studies.length}건 중 {visibleStudies.length}건</p>
     </> : null}
-    {visibleStudies.length === 0 ? <p className="research-library-empty">검색 조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
+    {visibleStudies.length === 0 ? <p className="research-library-empty">다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요.</p> : visibleStudies.map(claim => {
       const metadata = claim.metadata!;
       const quickFacts = [
         {label: '참여자', value: metadata.sampleSize, Icon: UsersRound},
