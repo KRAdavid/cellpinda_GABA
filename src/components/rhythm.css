@@ -31,3 +31,4 @@
 
 .rhythm-mobile-share-bar{display:none}
 @media(max-width:760px){.rhythm-mobile-share-bar{position:fixed;left:14px;right:14px;bottom:14px;z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px;border:1px solid #cbdaca;border-radius:10px;background:rgba(255,255,255,.96);box-shadow:0 10px 28px rgba(24,56,43,.16);backdrop-filter:blur(12px)}.rhythm-mobile-share-bar button{min-height:44px;border:1px solid var(--rhythm-forest);border-radius:6px;background:var(--rhythm-forest);color:#fff;font:inherit;font-size:13px}.rhythm-mobile-share-bar button+button{background:#fff;color:var(--rhythm-forest)}.rhythm-experience:has(.rhythm-mobile-share-bar){padding-bottom:112px}}
+@media(prefers-reduced-motion:reduce){.rhythm-experience *, .rhythm-experience *::before, .rhythm-experience *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
