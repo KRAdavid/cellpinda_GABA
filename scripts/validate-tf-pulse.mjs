@@ -23,6 +23,16 @@ const validateMeetingProtocol = (protocol, label) => {
   if (!protocol || typeof protocol.cadence !== 'string' || protocol.cadence.trim().length < 10 || typeof protocol.quorum !== 'string' || protocol.quorum.trim().length < 10 || !Array.isArray(protocol.record) || protocol.record.length === 0 || protocol.record.some(item => typeof item !== 'string' || item.trim().length < 2)) fail(`${label} meeting protocol is missing or malformed`);
 };
 validateMeetingProtocol(contract.decisionProtocol, 'Goal Contract');
+const expectedExecutionPolicy = {
+  autoStates: ['READY'],
+  autoRiskClasses: ['A_READ', 'B_INTERNAL_WRITE', 'C_LOW_RISK_INTERNAL'],
+  humanReviewStates: ['VERIFYING', 'WAITING', 'BACKLOG', 'REWORK'],
+  approvalRiskClasses: ['D_EXTERNAL_REVERSIBLE', 'E_EXTERNAL_COMMITMENT', 'F_LEGAL_IRREVERSIBLE'],
+  note: '자동 파동은 내부 샌드박스 후보만 계속하고, 독립 검증·외부 행동·법적 약속은 사람 판단 전환점으로 보존한다.',
+};
+const validateExecutionPolicy = (policy, label) => {
+  if (!policy || JSON.stringify(Object.keys(policy).sort()) !== JSON.stringify(Object.keys(expectedExecutionPolicy).sort()) || JSON.stringify(policy) !== JSON.stringify(expectedExecutionPolicy)) fail(`${label} execution policy is missing or out of sync`);
+};
 
 const states = new Set(graph.stateMachine);
 const tasks = new Map();
@@ -57,6 +67,7 @@ try { pulse = JSON.parse(child.stdout.trim()); } catch { fail('tf-pulse did not 
 if (pulse.mode !== 'automation_pulse' || pulse.goalId !== contract.goalId || pulse.goalStatus !== contract.status) fail('pulse identity does not match the active contract');
 validateMeetingProtocol(pulse.meetingProtocol, 'pulse');
 if (JSON.stringify(pulse.meetingProtocol) !== JSON.stringify({cadence: contract.decisionProtocol.cadence, quorum: contract.decisionProtocol.quorum, record: contract.decisionProtocol.record})) fail('pulse meeting protocol is out of sync with the Goal Contract');
+validateExecutionPolicy(pulse.executionPolicy, 'pulse');
 if (!Array.isArray(pulse.roleCoverage) || JSON.stringify(pulse.roleCoverage) !== JSON.stringify(requiredRoleGroups.map(({id, label}) => ({id, label, status: 'present'})))) fail('pulse role coverage is missing or incomplete');
 if (!/^[a-f0-9]{64}$/.test(pulse.snapshotHash ?? '')) fail('pulse snapshot hash is missing or malformed');
 if (!pulse.counts || Object.values(pulse.counts).reduce((sum, count) => sum + count, 0) !== graph.tasks.length) fail('state counts do not cover the task graph');
@@ -126,7 +137,8 @@ if (existsSync(heartbeatPath)) {
   if (!/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt ?? '') || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash ?? '')) fail('pulse heartbeat timestamp or hash is malformed');
   validateContinuation(heartbeat.continuation, 'heartbeat');
   validateMeetingProtocol(heartbeat.meetingProtocol, 'heartbeat');
-  if (!heartbeat.counts || typeof heartbeat.requiresHumanDecision !== 'boolean' || typeof heartbeat.stateChanged !== 'boolean' || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash ?? '')) || !Array.isArray(heartbeat.roleCoverage) || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage) || JSON.stringify(heartbeat.meetingProtocol) !== JSON.stringify(pulse.meetingProtocol) || !Array.isArray(heartbeat.verifying) || !Array.isArray(heartbeat.waiting) || !Array.isArray(heartbeat.inputGates)) fail('pulse heartbeat summary is incomplete or role coverage is out of sync');
+  validateExecutionPolicy(heartbeat.executionPolicy, 'heartbeat');
+  if (!heartbeat.counts || typeof heartbeat.requiresHumanDecision !== 'boolean' || typeof heartbeat.stateChanged !== 'boolean' || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash ?? '')) || !Array.isArray(heartbeat.roleCoverage) || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage) || JSON.stringify(heartbeat.meetingProtocol) !== JSON.stringify(pulse.meetingProtocol) || JSON.stringify(heartbeat.executionPolicy) !== JSON.stringify(pulse.executionPolicy) || !Array.isArray(heartbeat.verifying) || !Array.isArray(heartbeat.waiting) || !Array.isArray(heartbeat.inputGates)) fail('pulse heartbeat summary is incomplete or role coverage is out of sync');
   if (heartbeat.stateChanged !== Boolean(heartbeat.previousSnapshotHash && heartbeat.previousSnapshotHash !== heartbeat.snapshotHash)) fail('pulse heartbeat state change marker is inconsistent');
   if (heartbeat.snapshotHash !== pulse.snapshotHash || JSON.stringify(heartbeat.counts) !== JSON.stringify(pulse.counts) || heartbeat.requiresHumanDecision !== pulse.requiresHumanDecision || JSON.stringify(continuationComparable(heartbeat.continuation)) !== JSON.stringify(continuationComparable(pulse.continuation)) || JSON.stringify(heartbeat.verifying) !== JSON.stringify(pulse.verifying) || JSON.stringify(heartbeat.waiting) !== JSON.stringify(pulse.waiting) || JSON.stringify(heartbeat.inputGates) !== JSON.stringify(pulse.inputGates.map(({taskId, state, chair, requiredInputs, nextAction}) => ({taskId, state, chair, requiredInputs, nextAction})))) fail('pulse heartbeat is not the current pulse snapshot');
 }

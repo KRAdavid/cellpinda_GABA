@@ -14,6 +14,8 @@ Goal Contract의 `decisionProtocol`은 각 pulse의 `meetingProtocol`으로 복�
 
 `tf-meeting-packet.json`은 회의 준비에 필요한 단일 공개 패킷이다. 회의 규칙·역할 커버리지·활성 안건·입력 게이트·목표 감사 요약을 한 문서로 묶고, pulse·운영 큐·목표 감사와 동일한 `snapshotHash`를 사용한다. 원문·개인정보·토큰·실제 참석 기록은 포함하지 않는다.
 
+패킷의 `executionPolicy`는 자동 계속 범위(`READY`와 A/B/C 내부 위험), 사람 검토 전환점(`VERIFYING`·`WAITING` 등), 승인 필요 위험(D/E/F)을 분리한다. 이는 “계속 실행”을 내부 샌드박스로 한정하고 외부 행동은 책임자 승인으로 넘기는 운영 경계다.
+
 로컬에서 `pnpm run tf:pulse:heartbeat`를 직접 실행하면 별도 파일을 준비하지 않아도 최신 pulse를 내부적으로 생성해 `data/tf-pulse-heartbeat.json`에 저장한다. CI처럼 `tf-pulse.json` 경로를 인자로 주면 그 파일을 명시적으로 검증하며, 존재하지 않는 명시 경로는 조용히 대체하지 않는다.
 
 ```sh

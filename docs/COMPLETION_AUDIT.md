@@ -347,3 +347,7 @@ canonical Goal Contract의 `decisionProtocol`을 자동 TF pulse의 `meetingProt
 ## 2026-09-11 공개 TF 회의 패킷 통합
 
 회의 주기·정족수·역할 커버리지·활성 안건·입력 게이트·목표 감사 요약을 `public/data/tf-meeting-packet.json` 하나로 묶었다. 운영판에서 이 패킷을 바로 열 수 있고, `validate-public-export`·`validate-live-public`·배포 readiness가 pulse·operations queue·goal audit과 동일한 `snapshotHash`와 안건을 요구한다. 공개 패킷에는 개인정보·비밀키·원문 경로가 포함되지 않는다. 새 패킷은 중간 회의 준비를 빠르게 하지만 외부 전문가 참석·승인·실구매를 자동 완료하지 않는다.
+
+## 2026-09-11 자동 실행 경계 공개
+
+TF meeting packet에 `executionPolicy`를 추가해 READY·A/B/C 내부 위험의 자동 계속 후보와 VERIFYING·WAITING·REWORK 및 D/E/F 외부·법적 위험의 사람 판단 전환점을 명시했다. pulse·heartbeat·운영 큐·공개 패킷이 같은 정책을 검증하고 운영판에서 회의 규칙과 함께 표시한다. 이 정책은 자동 협업의 범위를 명확히 하지만 외부 게시·구매·법적 약속을 자동 실행하지 않는다.

@@ -70,11 +70,14 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicPulse.stateChanged, queue.pulse.stateChanged, 'live public TF pulse change marker must match the queue');
     assert.deepEqual(publicPulse.meetingProtocol, queue.pulse.meetingProtocol, 'live public TF pulse meeting protocol must match the queue');
     assert.ok(publicPulse.meetingProtocol?.cadence && publicPulse.meetingProtocol?.quorum && Array.isArray(publicPulse.meetingProtocol?.record), 'live public TF pulse meeting protocol is missing');
+    assert.deepEqual(publicPulse.executionPolicy, queue.pulse.executionPolicy, 'live public TF pulse execution policy must match the queue');
+    assert.ok(publicPulse.executionPolicy?.autoStates?.includes('READY') && publicPulse.executionPolicy?.humanReviewStates?.includes('VERIFYING') && publicPulse.executionPolicy?.approvalRiskClasses?.includes('E_EXTERNAL_COMMITMENT'), 'live public TF pulse execution policy is incomplete');
     assert.equal(meetingPacket.mode, 'public_tf_meeting_packet', 'live TF meeting packet must use the public schema');
     assert.equal(meetingPacket.goalId, publicPulse.goalId, 'live TF meeting packet goal must match the pulse');
     assert.equal(meetingPacket.generatedAt, publicPulse.generatedAt, 'live TF meeting packet timestamp must match the pulse');
     assert.equal(meetingPacket.snapshotHash, publicPulse.snapshotHash, 'live TF meeting packet hash must match the pulse');
     assert.deepEqual(meetingPacket.meetingProtocol, publicPulse.meetingProtocol, 'live TF meeting packet protocol must match the pulse');
+    assert.deepEqual(meetingPacket.executionPolicy, publicPulse.executionPolicy, 'live TF meeting packet execution policy must match the pulse');
     assert.deepEqual(meetingPacket.roleCoverage, publicPulse.roleCoverage, 'live TF meeting packet role coverage must match the pulse');
     assert.deepEqual(meetingPacket.continuation, publicPulse.continuation, 'live TF meeting packet continuation must match the pulse');
     assert.deepEqual(meetingPacket.agenda, publicPulse.meetingAgenda, 'live TF meeting packet agenda must match the pulse');

@@ -25,6 +25,7 @@ if (!/^[a-f0-9]{64}$/.test(pulse.snapshotHash || '')) fail('pulse snapshot hash 
 if (!pulse.teaserGate || pulse.teaserGate.taskId !== 'B4') fail('teaser gate is missing');
 if (!Array.isArray(pulse.roleCoverage) || pulse.roleCoverage.length !== 6 || pulse.roleCoverage.some(role => !role || typeof role.id !== 'string' || typeof role.label !== 'string' || role.status !== 'present')) fail('TF role coverage is missing or malformed');
 if (!pulse.meetingProtocol || typeof pulse.meetingProtocol.cadence !== 'string' || typeof pulse.meetingProtocol.quorum !== 'string' || !Array.isArray(pulse.meetingProtocol.record) || pulse.meetingProtocol.record.length === 0) fail('meeting protocol is missing or malformed');
+if (!pulse.executionPolicy || JSON.stringify(Object.keys(pulse.executionPolicy).sort()) !== JSON.stringify(['approvalRiskClasses', 'autoRiskClasses', 'autoStates', 'humanReviewStates', 'note'].sort()) || !Array.isArray(pulse.executionPolicy.autoStates) || !Array.isArray(pulse.executionPolicy.autoRiskClasses) || !Array.isArray(pulse.executionPolicy.humanReviewStates) || !Array.isArray(pulse.executionPolicy.approvalRiskClasses) || typeof pulse.executionPolicy.note !== 'string') fail('execution policy is missing or malformed');
 
 let previousHeartbeat;
 try {
@@ -62,6 +63,7 @@ const heartbeat = {
   requiresHumanDecision: Boolean(pulse.requiresHumanDecision),
   continuation: safeContinuation(pulse.continuation),
   meetingProtocol: {cadence: pulse.meetingProtocol.cadence, quorum: pulse.meetingProtocol.quorum, record: [...pulse.meetingProtocol.record]},
+  executionPolicy: {autoStates: [...pulse.executionPolicy.autoStates], autoRiskClasses: [...pulse.executionPolicy.autoRiskClasses], humanReviewStates: [...pulse.executionPolicy.humanReviewStates], approvalRiskClasses: [...pulse.executionPolicy.approvalRiskClasses], note: pulse.executionPolicy.note},
   roleCoverage: pulse.roleCoverage.map(safeRole),
   counts: pulse.counts,
   verifying: Array.isArray(pulse.verifying) ? pulse.verifying : [],

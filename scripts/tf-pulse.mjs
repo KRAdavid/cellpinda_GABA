@@ -12,6 +12,14 @@ if (graph.goalId !== contract.goalId) fail('task graph is not tied to the Goal C
 if (roleRegistry.goalId !== contract.goalId || roleRegistry.status !== contract.status || !Array.isArray(roleRegistry.roles) || roleRegistry.roles.length !== 6) fail('TF role registry is missing or not tied to the active Goal Contract');
 if (!Array.isArray(graph.tasks) || graph.tasks.length === 0) fail('task graph is empty');
 if (!contract.decisionProtocol || typeof contract.decisionProtocol.cadence !== 'string' || contract.decisionProtocol.cadence.trim().length < 10 || typeof contract.decisionProtocol.quorum !== 'string' || contract.decisionProtocol.quorum.trim().length < 10 || !Array.isArray(contract.decisionProtocol.record) || contract.decisionProtocol.record.length === 0 || contract.decisionProtocol.record.some(item => typeof item !== 'string' || item.trim().length < 2)) fail('decision protocol is missing or malformed');
+const executionPolicy = {
+  autoStates: ['READY'],
+  autoRiskClasses: ['A_READ', 'B_INTERNAL_WRITE', 'C_LOW_RISK_INTERNAL'],
+  humanReviewStates: ['VERIFYING', 'WAITING', 'BACKLOG', 'REWORK'],
+  approvalRiskClasses: ['D_EXTERNAL_REVERSIBLE', 'E_EXTERNAL_COMMITMENT', 'F_LEGAL_IRREVERSIBLE'],
+  note: '자동 파동은 내부 샌드박스 후보만 계속하고, 독립 검증·외부 행동·법적 약속은 사람 판단 전환점으로 보존한다.',
+};
+const supportedRiskClasses = new Set([...executionPolicy.autoRiskClasses, ...executionPolicy.approvalRiskClasses]);
 
 const allowed = new Set(graph.stateMachine);
 const tasksById = new Map();
@@ -19,6 +27,7 @@ for (const task of graph.tasks) {
   if (!task.id || tasksById.has(task.id)) fail(`duplicate task ${task.id ?? '(unknown)'}`);
   if (!allowed.has(task.state)) fail(`unsupported state ${task.state} for ${task.id}`);
   if (!task.lead || !task.verifier || task.lead === task.verifier || !Array.isArray(task.evidence)) fail(`incomplete or non-independent responsibility for ${task.id}`);
+  if (task.risk && !supportedRiskClasses.has(task.risk)) fail(`unsupported risk class ${task.risk} for ${task.id}`);
   if (['WAITING', 'BACKLOG'].includes(task.state) && (!Array.isArray(task.requiredInputs) || task.requiredInputs.length === 0 || task.requiredInputs.some(input => typeof input !== 'string' || input.trim().length < 2))) fail(`input-gated task ${task.id} must list required inputs`);
   tasksById.set(task.id, task);
 }
@@ -117,6 +126,7 @@ const snapshotHash = createHash('sha256').update(JSON.stringify({
   contractStatus: contract.status,
   contractMetrics: contract.successMetrics,
   decisionProtocol: contract.decisionProtocol,
+  executionPolicy,
   graphCheckedAt: graph.checkedAt,
   tasks: graph.tasks,
   teaserStatus: teaser.status,
@@ -146,6 +156,7 @@ const result = {
   snapshotHash,
   requiresHumanDecision,
   continuation,
+  executionPolicy,
   meetingProtocol: {
     cadence: contract.decisionProtocol.cadence,
     quorum: contract.decisionProtocol.quorum,

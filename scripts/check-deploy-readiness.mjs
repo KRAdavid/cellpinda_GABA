@@ -29,7 +29,7 @@ try {
   check('master-index',master.records?.length===8 && master.records.every(record=>record.id?.startsWith('research-')),'8 approved research records');
   check('operations-queue',queue.tasks?.length===taskGraph.tasks?.length && queue.goalId==='GL-2026-CELL-GABA-001',`${taskGraph.tasks?.length ?? 0} tasks for active Goal Contract`);
   check('goal-audit',audit.mode==='public_goal_audit' && audit.goalId===queue.goalId && audit.gates?.length===queue.tasks.filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state)).length,'public audit packet tied to operations queue');
-  check('tf-meeting-packet',meetingPacket.mode==='public_tf_meeting_packet' && meetingPacket.goalId===queue.goalId && meetingPacket.snapshotHash===queue.pulse?.snapshotHash && meetingPacket.agenda?.length===queue.pulse?.activeTasks,'public TF meeting packet tied to current pulse');
+  check('tf-meeting-packet',meetingPacket.mode==='public_tf_meeting_packet' && meetingPacket.goalId===queue.goalId && meetingPacket.snapshotHash===queue.pulse?.snapshotHash && meetingPacket.agenda?.length===queue.pulse?.activeTasks && meetingPacket.executionPolicy?.autoStates?.includes('READY') && meetingPacket.executionPolicy?.humanReviewStates?.includes('VERIFYING'),'public TF meeting packet tied to current pulse and execution boundary');
 } catch (error) { check('public-export',false,error instanceof Error ? error.message : 'invalid public export'); }
 
 const missingSecrets=requiredSecrets.filter(name=>typeof process.env[name]!=='string' || !process.env[name].trim());

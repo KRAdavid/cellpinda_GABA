@@ -3,15 +3,15 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-11T00:54:14.624Z",
-  "snapshotHash": "8a1221cfe50d4c5ac88425d9d3e090d6c054228167031831f41859d8adab70f6",
-  "previousSnapshotHash": "4d56dc06a79df6f97a80cd32b7e878a0cebfefc7a56f41ba8c1f7c7bcd9ee9ca",
+  "generatedAt": "2026-09-11T01:11:44.890Z",
+  "snapshotHash": "0149808df5f7963bb66f0779eba7e6fa9cb57ef95fb94d54b82911f65d2d47f4",
+  "previousSnapshotHash": "8a1221cfe50d4c5ac88425d9d3e090d6c054228167031831f41859d8adab70f6",
   "stateChanged": true,
   "requiresHumanDecision": true,
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-11T06:54:14.624Z",
+    "nextReviewAt": "2026-09-11T07:11:44.890Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -23,6 +23,28 @@
       "반대 의견 또는 재검토 조건",
       "담당자·검증자·다음 조치"
     ]
+  },
+  "executionPolicy": {
+    "autoStates": [
+      "READY"
+    ],
+    "autoRiskClasses": [
+      "A_READ",
+      "B_INTERNAL_WRITE",
+      "C_LOW_RISK_INTERNAL"
+    ],
+    "humanReviewStates": [
+      "VERIFYING",
+      "WAITING",
+      "BACKLOG",
+      "REWORK"
+    ],
+    "approvalRiskClasses": [
+      "D_EXTERNAL_REVERSIBLE",
+      "E_EXTERNAL_COMMITMENT",
+      "F_LEGAL_IRREVERSIBLE"
+    ],
+    "note": "자동 파동은 내부 샌드박스 후보만 계속하고, 독립 검증·외부 행동·법적 약속은 사람 판단 전환점으로 보존한다."
   },
   "roleCoverage": [
     {
