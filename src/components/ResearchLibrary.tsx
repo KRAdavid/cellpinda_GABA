@@ -105,6 +105,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     }
     setRequestedId('');
   }, [requestedId, query, activeType, claims]);
+  if (studies.length === 0) return null;
   async function copyStudy(id:string){
     const url=new URL(import.meta.env.BASE_URL,window.location.origin);url.hash=id;
     try{await navigator.clipboard.writeText(url.href);setManualLink('');setLinkStatus('이 연구를 바로 여는 링크를 복사했어요.')}
@@ -131,7 +132,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       <p id="research-search-help" className="note">공개된 연구의 질문·대상·조건·출처를 찾습니다. 자료 유형은 원문에 기록된 연구 설계 기준입니다.</p>
       <p className="research-library-count" role="status" aria-live="polite">전체 {studies.length}건 중 {visibleStudies.length}건</p>
     </> : null}
-    {studies.length === 0 ? <p className="note" role="status">연구 카드를 준비하고 있어요. 먼저 GABA 이야기와 제품 구성을 살펴보세요.</p> : visibleStudies.length === 0 ? <p className="research-library-empty">검색 조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
+    {visibleStudies.length === 0 ? <p className="research-library-empty">검색 조건에 맞는 연구가 없어요. 검색어를 바꾸거나 검색·유형을 초기화해 주세요.</p> : visibleStudies.map(claim => {
       const metadata = claim.metadata!;
       const quickFacts = [
         {label: '참여자', value: metadata.sampleSize, Icon: UsersRound},

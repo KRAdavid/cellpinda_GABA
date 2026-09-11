@@ -72,15 +72,15 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
         </article>)}</div>
       </div>}
       <div className="review-experience-layout">
-        <div className="review-experience-destination">
+        {destinations.length > 0 ? <div className="review-experience-destination">
           <span className="review-experience-label">스마트스토어에 남겨진 경험</span>
           <h3>원문에서, 맥락까지.</h3>
-          {destinations.length > 0 ? destinations.map(({ review, url, productId, label }) => <div key={review.id}>
+          {destinations.map(({ review, url, productId, label }) => <div key={review.id}>
             <p>{review.publicText}</p>
             <a className="button" href={url} target="_blank" rel="noopener noreferrer" onClick={() => onOpen?.(productId)}>{label} <span aria-label="새 창">↗</span></a>
-          </div>) : <p role="status">후기를 확인할 수 있는 경로를 준비하고 있습니다.</p>}
+          </div>)}
           <p className="review-experience-context">후기는 작성자의 상황과 사용 조건을 담은 개인 경험입니다. 연구 카드와 제품 정보를 함께 살펴보며 나에게 맞는 선택 기준을 세워 보세요.</p>
-        </div>
+        </div> : null}
         <div className="review-experience-questions" aria-label="후기를 읽을 때 확인할 세 가지">
           {readingQuestions.map((question, index) => <article key={question.title}>
             <span className="review-experience-number" aria-hidden="true">0{index + 1}</span>
