@@ -3,15 +3,15 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-11T01:11:44.890Z",
-  "snapshotHash": "0149808df5f7963bb66f0779eba7e6fa9cb57ef95fb94d54b82911f65d2d47f4",
-  "previousSnapshotHash": "8a1221cfe50d4c5ac88425d9d3e090d6c054228167031831f41859d8adab70f6",
+  "generatedAt": "2026-09-11T01:24:38.248Z",
+  "snapshotHash": "0003f1e1b5c7234aea2d6d2ce404c1eb10fd700f2196c8b265895d87e10195c4",
+  "previousSnapshotHash": "0149808df5f7963bb66f0779eba7e6fa9cb57ef95fb94d54b82911f65d2d47f4",
   "stateChanged": true,
   "requiresHumanDecision": true,
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-11T07:11:44.890Z",
+    "nextReviewAt": "2026-09-11T07:24:38.248Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -105,6 +105,15 @@
       "taskId": "B3",
       "state": "WAITING",
       "chair": "근거·표시 검토",
+      "quorum": {
+        "minimum": 3,
+        "roles": [
+          "고객지원·운영",
+          "근거·표시 검토",
+          "TF 리드·AI 비서실"
+        ],
+        "rule": "책임자·독립 검증자·TF 리드 추가 확인"
+      },
       "requiredInputs": [
         "후기 원문 URL 또는 원본 파일",
         "제품명·사용기간·후기 작성 맥락",
@@ -117,6 +126,15 @@
       "taskId": "B4",
       "state": "WAITING",
       "chair": "표시·콘텐츠 검토",
+      "quorum": {
+        "minimum": 3,
+        "roles": [
+          "스토리·UX·프런트",
+          "표시·콘텐츠 검토",
+          "TF 리드·AI 비서실"
+        ],
+        "rule": "책임자·독립 검증자·TF 리드 추가 확인"
+      },
       "requiredInputs": [
         "로그인 없는 공개 영상 주소 또는 MP4/HLS",
         "포스터·자막·대본·영상 길이",
@@ -129,6 +147,15 @@
       "taskId": "C2",
       "state": "WAITING",
       "chair": "QA·감사",
+      "quorum": {
+        "minimum": 3,
+        "roles": [
+          "서버·보안·배포",
+          "QA·감사",
+          "TF 리드·AI 비서실"
+        ],
+        "rule": "책임자·독립 검증자·TF 리드 추가 확인"
+      },
       "requiredInputs": [
         "Cloudflare API token",
         "Cloudflare account ID와 D1 database ID",
@@ -141,6 +168,15 @@
       "taskId": "E1",
       "state": "WAITING",
       "chair": "재무·QA",
+      "quorum": {
+        "minimum": 3,
+        "roles": [
+          "데이터·판매처 운영",
+          "재무·QA",
+          "TF 리드·AI 비서실"
+        ],
+        "rule": "책임자·독립 검증자·TF 리드 추가 확인"
+      },
       "requiredInputs": [
         "판매자 계정 접근",
         "실제 가바 1500 채널상품번호",

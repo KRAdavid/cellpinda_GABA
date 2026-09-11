@@ -12,6 +12,8 @@ GitHub Actions의 `TF decision pulse` workflow가 6시간마다 같은 명령을
 
 Goal Contract의 `decisionProtocol`은 각 pulse의 `meetingProtocol`으로 복제된다. 운영 큐·공개 TF pulse·heartbeat가 같은 회의 주기, 정족수, 필수 기록 항목을 보여 주며, 정족수 규칙이 바뀌면 상태 지문도 달라져 다음 회의에서 변경을 확인할 수 있다. 이 패킷은 회의 운영을 재현하기 위한 공개 요약이며 실제 참석·자격·승인을 증명하지 않는다.
 
+각 `meetingAgenda`와 `inputGates`에는 작업별 `quorum`이 추가된다. 내부 위험 작업은 실행 담당자·독립 검증자 2인, 외부 약속 위험(D/E/F)은 여기에 TF 리드·AI 비서실을 더한 3인으로 고정한다. 검증기는 이 역할 배열과 위험도 매핑을 비교해 담당자만으로 승인된 것처럼 보이는 안건을 배포 전에 거부한다.
+
 `tf-meeting-packet.json`은 회의 준비에 필요한 단일 공개 패킷이다. 회의 규칙·역할 커버리지·활성 안건·입력 게이트·목표 감사 요약을 한 문서로 묶고, pulse·운영 큐·목표 감사와 동일한 `snapshotHash`를 사용한다. 원문·개인정보·토큰·실제 참석 기록은 포함하지 않는다.
 
 패킷의 `executionPolicy`는 자동 계속 범위(`READY`와 A/B/C 내부 위험), 사람 검토 전환점(`VERIFYING`·`WAITING` 등), 승인 필요 위험(D/E/F)을 분리한다. 이는 “계속 실행”을 내부 샌드박스로 한정하고 외부 행동은 책임자 승인으로 넘기는 운영 경계다.

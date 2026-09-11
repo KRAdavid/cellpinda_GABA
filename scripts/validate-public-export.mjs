@@ -65,6 +65,15 @@ const requireExactKeys = (value, expected, label) => {
   if (JSON.stringify(actual) !== JSON.stringify(allowed)) fail(`${label} contains an unexpected or missing field`);
 };
 const expectedDecisionOptionIds = state => state === 'VERIFYING' ? ['accept', 'rework'] : state === 'WAITING' || state === 'BACKLOG' ? ['hold', 'promote'] : state === 'READY' ? ['sandbox', 'hold'] : state === 'RUNNING' ? ['verify', 'retry'] : ['preserve', 'reopen'];
+const approvalRiskClasses = new Set(expectedExecutionPolicy.approvalRiskClasses);
+const expectedQuorum = task => approvalRiskClasses.has(task.risk)
+  ? {minimum: 3, roles: [task.lead, task.verifier, 'TF 리드·AI 비서실'], rule: '책임자·독립 검증자·TF 리드 추가 확인'}
+  : {minimum: 2, roles: [task.lead, task.verifier], rule: '실행 담당자·독립 검증자 확인'};
+const validateQuorum = (value, task, label) => {
+  requireExactKeys(value, ['minimum', 'roles', 'rule'], `${label} quorum`);
+  if (!Number.isInteger(value.minimum) || !Array.isArray(value.roles) || value.roles.length !== value.minimum || value.roles.some(role => typeof role !== 'string' || role.trim().length < 2) || typeof value.rule !== 'string' || value.rule.trim().length < 8) fail(`${label} quorum is malformed`);
+  if (JSON.stringify(value) !== JSON.stringify(expectedQuorum(task))) fail(`${label} quorum is out of sync`);
+};
 const validateDecisionOptions = (options, state, label) => {
   if (!Array.isArray(options) || options.length !== 2 || JSON.stringify(options.map(option => option?.id)) !== JSON.stringify(expectedDecisionOptionIds(state))) fail(`${label} decision options are missing or out of order`);
   for (const option of options) {
@@ -75,8 +84,19 @@ const validateDecisionOptions = (options, state, label) => {
 const validateContinuation = (value, label) => {
   if (!value || !['close', 'human-gate-monitor', 'continue-execution', 'reassess-next-cycle'].includes(value.mode) || value.cadenceHours !== 6 || !/^\d{4}-\d{2}-\d{2}T/.test(value.nextReviewAt || '') || typeof value.nextAction !== 'string' || value.nextAction.trim().length < 10) fail(`${label} continuation loop metadata is missing or malformed`);
 };
-for (const [index, gate] of publicPulse.inputGates.entries()) requireExactKeys(gate, ['taskId', 'state', 'chair', 'requiredInputs', 'nextAction'], `public pulse input gate ${index}`);
-for (const [index, agenda] of publicPulse.meetingAgenda.entries()) { requireExactKeys(agenda, ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'], `public pulse meeting agenda ${index}`); validateDecisionOptions(agenda.decisionOptions, agenda.state, `public pulse meeting agenda ${agenda.taskId}`); }
+for (const [index, gate] of publicPulse.inputGates.entries()) {
+  requireExactKeys(gate, ['taskId', 'state', 'chair', 'quorum', 'requiredInputs', 'nextAction'], `public pulse input gate ${index}`);
+  const task = taskGraph.tasks.find(candidate => candidate.id === gate.taskId);
+  if (!task) fail(`public pulse input gate ${gate.taskId} is not in the task graph`);
+  validateQuorum(gate.quorum, task, `public pulse input gate ${gate.taskId}`);
+}
+for (const [index, agenda] of publicPulse.meetingAgenda.entries()) {
+  requireExactKeys(agenda, ['taskId', 'state', 'chair', 'participants', 'quorum', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'], `public pulse meeting agenda ${index}`);
+  validateDecisionOptions(agenda.decisionOptions, agenda.state, `public pulse meeting agenda ${agenda.taskId}`);
+  const task = taskGraph.tasks.find(candidate => candidate.id === agenda.taskId);
+  if (!task) fail(`public pulse meeting agenda ${agenda.taskId} is not in the task graph`);
+  validateQuorum(agenda.quorum, task, `public pulse meeting agenda ${agenda.taskId}`);
+}
 requireExactKeys(meetingPacket, ['schemaVersion', 'mode', 'goalId', 'goalStatus', 'generatedAt', 'snapshotHash', 'meetingProtocol', 'executionPolicy', 'roleCoverage', 'continuation', 'agenda', 'inputGates', 'gates', 'audit', 'note'], 'public TF meeting packet');
 requireExactKeys(meetingPacket.meetingProtocol, ['cadence', 'quorum', 'record'], 'public TF meeting protocol');
 if (typeof meetingPacket.meetingProtocol.cadence !== 'string' || typeof meetingPacket.meetingProtocol.quorum !== 'string' || !Array.isArray(meetingPacket.meetingProtocol.record) || meetingPacket.meetingProtocol.record.length === 0) fail('public TF meeting protocol is malformed');
@@ -95,13 +115,14 @@ if (!publicAudit.milestones || publicAudit.milestones.masterIndex?.status !== 'M
 validateContinuation(publicAudit.milestones.tfPulse.continuation, 'public audit pulse');
 const publicGatedTasks = taskGraph.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state));
 if (!Array.isArray(publicAudit.gates) || publicAudit.gates.length !== publicGatedTasks.length) fail('public goal audit gates do not match the task graph');
-const expectedGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction', 'decisionOptions'];
+const expectedGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction', 'decisionOptions', 'quorum'];
 for (const [index, gate] of publicAudit.gates.entries()) {
   requireExactKeys(gate, expectedGateKeys, `public goal audit gate ${index}`);
   const task = taskGraph.tasks.find(candidate => candidate.id === gate.id);
   const agenda = publicPulse.meetingAgenda.find(candidate => candidate.taskId === gate.id);
   validateDecisionOptions(gate.decisionOptions, gate.state, `public goal audit gate ${gate.id}`);
-  if (!task || !agenda || task.title !== gate.title || task.state !== gate.state || task.lead !== gate.lead || task.verifier !== gate.verifier || JSON.stringify(task.requiredInputs || []) !== JSON.stringify(gate.requiredInputs) || !gate.decision || !gate.decisionMode || !gate.nextAction || JSON.stringify(gate.decisionOptions) !== JSON.stringify(agenda.decisionOptions)) fail(`public goal audit gate ${gate.id ?? '(unknown)'} is missing or out of sync`);
+  if (!task || !agenda || task.title !== gate.title || task.state !== gate.state || task.lead !== gate.lead || task.verifier !== gate.verifier || JSON.stringify(task.requiredInputs || []) !== JSON.stringify(gate.requiredInputs) || !gate.decision || !gate.decisionMode || !gate.nextAction || JSON.stringify(gate.decisionOptions) !== JSON.stringify(agenda.decisionOptions) || JSON.stringify(gate.quorum) !== JSON.stringify(agenda.quorum)) fail(`public goal audit gate ${gate.id ?? '(unknown)'} is missing or out of sync`);
+  validateQuorum(gate.quorum, task, `public goal audit gate ${gate.id}`);
 }
 if (publicAudit.teaserGate?.taskId !== 'B4' || publicAudit.teaserGate.taskState !== taskGraph.tasks.find(task => task.id === 'B4')?.state || publicAudit.teaserGate.status !== 'HOLD') fail('public goal audit teaser gate is missing or out of sync');
 if (!Array.isArray(operationsQueue.workstreams) || operationsQueue.workstreams.length !== 5) fail('operations queue must expose five active workstreams');
@@ -113,6 +134,7 @@ for (const task of operationsQueue.tasks) {
   if (queueIds.has(task.id)) fail(`operations queue contains duplicate task ${task.id}`);
   queueIds.add(task.id);
   if (!task.id || !task.stream || !task.title || !task.state || !task.lead || !task.verifier || task.lead === task.verifier || !task.decision || !task.decisionMode || !task.nextAction || !Array.isArray(task.dependencies)) fail(`operations queue task ${task.id ?? '(unknown)'} is incomplete or non-independent`);
+  validateQuorum(task.quorum, taskGraph.tasks.find(candidate => candidate.id === task.id), `operations queue task ${task.id}`);
   if (!['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state)) fail(`operations queue task ${task.id} has an unsupported state`);
   if (task.decisionMode !== expectedDecisionMode(task.state)) fail(`operations queue task ${task.id} has a decision mode that does not match ${task.state}`);
   if (['DONE', 'CANCELLED'].includes(task.state)) {

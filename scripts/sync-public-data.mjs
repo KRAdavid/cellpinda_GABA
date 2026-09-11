@@ -122,6 +122,10 @@ function publicTaskDecision(task){
   if(task.state==='RUNNING') return {decision:'실행 결과 증거 대기',decisionMode:'execution-tracking',nextAction:'실행 결과를 기록한 뒤 독립 검증으로 전달'};
   return {decision:'현재 상태와 증거 보존',decisionMode:'state-preservation',nextAction:'상태를 바꿀 사건이 생길 때만 재평가'};
 }
+const approvalRiskClasses=new Set(['D_EXTERNAL_REVERSIBLE','E_EXTERNAL_COMMITMENT','F_LEGAL_IRREVERSIBLE']);
+const decisionQuorumFor=task=>approvalRiskClasses.has(task.risk)
+  ? {minimum:3,roles:[task.lead,task.verifier,'TF 리드·AI 비서실'],rule:'책임자·독립 검증자·TF 리드 추가 확인'}
+  : {minimum:2,roles:[task.lead,task.verifier],rule:'실행 담당자·독립 검증자 확인'};
 const pulseDecisionByTaskId=new Map(pulseForQueue.decisions.map(item=>[item.taskId,item]));
 const operationsQueue={
   schemaVersion:1,
@@ -131,7 +135,7 @@ const operationsQueue={
   pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,stateChanged:Boolean(pulseForQueue.stateChanged),requiresHumanDecision:pulseForQueue.requiresHumanDecision,continuation:pulseForQueue.continuation,meetingProtocol:pulseForQueue.meetingProtocol,executionPolicy:pulseForQueue.executionPolicy,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
-  tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), decisionOptions:pulseDecisionByTaskId.get(id)?.decisionOptions ?? [], requiredInputs:Array.isArray(requiredInputs) ? requiredInputs : [], ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
+  tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), decisionOptions:pulseDecisionByTaskId.get(id)?.decisionOptions ?? [], quorum:decisionQuorumFor({lead,verifier,risk}), requiredInputs:Array.isArray(requiredInputs) ? requiredInputs : [], ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
 };
 const operationsTarget=resolve(root,'public/data/operations-queue.json');
 writeFileSync(operationsTarget,JSON.stringify(operationsQueue,null,2)+'\n');
@@ -150,8 +154,8 @@ const publicPulse={
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   counts:pulseForQueue.counts,
   teaserGate:{status:pulseForQueue.teaserGate.status,taskId:pulseForQueue.teaserGate.taskId,taskState:pulseForQueue.teaserGate.taskState},
-  inputGates:pulseForQueue.inputGates.map(({taskId,state,chair,requiredInputs,nextAction})=>({taskId,state,chair,requiredInputs,nextAction})),
-  meetingAgenda:pulseForQueue.meetingAgenda.map(({taskId,state,chair,participants,question,decision,decisionOptions,requiredInputs,nextAction,mode})=>({taskId,state,chair,participants,question,decision,decisionOptions,requiredInputs,nextAction,mode})),
+  inputGates:pulseForQueue.inputGates.map(({taskId,state,chair,quorum,requiredInputs,nextAction})=>({taskId,state,chair,quorum,requiredInputs,nextAction})),
+  meetingAgenda:pulseForQueue.meetingAgenda.map(({taskId,state,chair,participants,quorum,question,decision,decisionOptions,requiredInputs,nextAction,mode})=>({taskId,state,chair,participants,quorum,question,decision,decisionOptions,requiredInputs,nextAction,mode})),
 };
 const pulseTarget=resolve(root,'public/data/tf-pulse.json');
 writeFileSync(pulseTarget,JSON.stringify(publicPulse,null,2)+'\n');
@@ -174,7 +178,7 @@ const publicAudit={
   },
   gates:taskGraph.tasks
     .filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state))
-    .map(task=>({id:task.id,title:task.title,state:task.state,lead:task.lead,verifier:task.verifier,requiredInputs:Array.isArray(task.requiredInputs)?task.requiredInputs:[],...publicTaskDecision({state:task.state,blockedBy:task.blockedBy,requiredInputs:task.requiredInputs}),decisionOptions:pulseDecisionByTaskId.get(task.id)?.decisionOptions ?? []})),
+    .map(task=>({id:task.id,title:task.title,state:task.state,lead:task.lead,verifier:task.verifier,requiredInputs:Array.isArray(task.requiredInputs)?task.requiredInputs:[],...publicTaskDecision({state:task.state,blockedBy:task.blockedBy,requiredInputs:task.requiredInputs}),decisionOptions:pulseDecisionByTaskId.get(task.id)?.decisionOptions ?? [],...(pulseDecisionByTaskId.get(task.id)?.quorum ? {quorum:pulseDecisionByTaskId.get(task.id).quorum} : {})})),
   teaserGate:{status:teaser.status,taskId:'B4',taskState:taskGraph.tasks.find(task=>task.id==='B4')?.state ?? null},
   note:'이 패킷은 공개 운영 상태의 요약이며, 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않습니다.',
 };

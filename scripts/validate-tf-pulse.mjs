@@ -30,6 +30,13 @@ const expectedExecutionPolicy = {
   approvalRiskClasses: ['D_EXTERNAL_REVERSIBLE', 'E_EXTERNAL_COMMITMENT', 'F_LEGAL_IRREVERSIBLE'],
   note: '자동 파동은 내부 샌드박스 후보만 계속하고, 독립 검증·외부 행동·법적 약속은 사람 판단 전환점으로 보존한다.',
 };
+const approvalRiskClasses = new Set(expectedExecutionPolicy.approvalRiskClasses);
+const expectedQuorum = task => approvalRiskClasses.has(task.risk)
+  ? {minimum: 3, roles: [task.lead, task.verifier, 'TF 리드·AI 비서실'], rule: '책임자·독립 검증자·TF 리드 추가 확인'}
+  : {minimum: 2, roles: [task.lead, task.verifier], rule: '실행 담당자·독립 검증자 확인'};
+const validateQuorum = (value, taskId) => {
+  if (!value || JSON.stringify(Object.keys(value).sort()) !== JSON.stringify(['minimum', 'roles', 'rule'].sort()) || !Number.isInteger(value.minimum) || !Array.isArray(value.roles) || value.roles.length !== value.minimum || value.roles.some(role => typeof role !== 'string' || role.trim().length < 2) || typeof value.rule !== 'string' || value.rule.trim().length < 8) fail(`decision quorum is malformed for ${taskId}`);
+};
 const validateExecutionPolicy = (policy, label) => {
   if (!policy || JSON.stringify(Object.keys(policy).sort()) !== JSON.stringify(Object.keys(expectedExecutionPolicy).sort()) || JSON.stringify(policy) !== JSON.stringify(expectedExecutionPolicy)) fail(`${label} execution policy is missing or out of sync`);
 };
@@ -116,6 +123,8 @@ for (const decision of pulse.decisions) {
   const task = tasks.get(decision.taskId);
   if (!task || ['DONE', 'CANCELLED'].includes(task.state)) fail(`decision references inactive task ${decision.taskId}`);
   if (decision.state !== task.state || decision.mode !== expectedMode(task.state)) fail(`decision mode/state mismatch for ${task.id}`);
+  validateQuorum(decision.quorum, task.id);
+  if (JSON.stringify(decision.quorum) !== JSON.stringify(expectedQuorum(task))) fail(`decision quorum is out of sync for ${task.id}`);
   validateDecisionOptions(decision.decisionOptions, task.id, task.state);
   if (JSON.stringify(decision.participants) !== JSON.stringify([task.lead, task.verifier])) fail(`TF participants mismatch for ${task.id}`);
   if (decision.dissent !== null || decision.dissentStatus !== 'human-meeting-required') fail(`automated dissent was fabricated for ${task.id}`);
@@ -125,7 +134,7 @@ for (const decision of pulse.decisions) {
 }
 for (const gate of pulse.inputGates) {
   const decision = pulse.decisions.find(item => item.taskId === gate.taskId);
-  if (!decision || decision.mode !== 'input-gate' || gate.blockedBy !== decision.blockedBy || gate.nextAction !== decision.nextAction || JSON.stringify(gate.requiredInputs) !== JSON.stringify(decision.requiredInputs)) fail(`input gate is out of sync for ${gate.taskId}`);
+  if (!decision || decision.mode !== 'input-gate' || gate.blockedBy !== decision.blockedBy || gate.nextAction !== decision.nextAction || JSON.stringify(gate.requiredInputs) !== JSON.stringify(decision.requiredInputs) || JSON.stringify(gate.quorum) !== JSON.stringify(decision.quorum)) fail(`input gate is out of sync for ${gate.taskId}`);
 }
 if (teaser.status === 'HOLD' && (pulse.teaserGate.taskState !== 'WAITING' || pulse.teaserGate.status !== 'HOLD')) fail('held teaser must remain a WAITING gate');
 
@@ -140,7 +149,7 @@ if (existsSync(heartbeatPath)) {
   validateExecutionPolicy(heartbeat.executionPolicy, 'heartbeat');
   if (!heartbeat.counts || typeof heartbeat.requiresHumanDecision !== 'boolean' || typeof heartbeat.stateChanged !== 'boolean' || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash ?? '')) || !Array.isArray(heartbeat.roleCoverage) || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage) || JSON.stringify(heartbeat.meetingProtocol) !== JSON.stringify(pulse.meetingProtocol) || JSON.stringify(heartbeat.executionPolicy) !== JSON.stringify(pulse.executionPolicy) || !Array.isArray(heartbeat.verifying) || !Array.isArray(heartbeat.waiting) || !Array.isArray(heartbeat.inputGates)) fail('pulse heartbeat summary is incomplete or role coverage is out of sync');
   if (heartbeat.stateChanged !== Boolean(heartbeat.previousSnapshotHash && heartbeat.previousSnapshotHash !== heartbeat.snapshotHash)) fail('pulse heartbeat state change marker is inconsistent');
-  if (heartbeat.snapshotHash !== pulse.snapshotHash || JSON.stringify(heartbeat.counts) !== JSON.stringify(pulse.counts) || heartbeat.requiresHumanDecision !== pulse.requiresHumanDecision || JSON.stringify(continuationComparable(heartbeat.continuation)) !== JSON.stringify(continuationComparable(pulse.continuation)) || JSON.stringify(heartbeat.verifying) !== JSON.stringify(pulse.verifying) || JSON.stringify(heartbeat.waiting) !== JSON.stringify(pulse.waiting) || JSON.stringify(heartbeat.inputGates) !== JSON.stringify(pulse.inputGates.map(({taskId, state, chair, requiredInputs, nextAction}) => ({taskId, state, chair, requiredInputs, nextAction})))) fail('pulse heartbeat is not the current pulse snapshot');
+  if (heartbeat.snapshotHash !== pulse.snapshotHash || JSON.stringify(heartbeat.counts) !== JSON.stringify(pulse.counts) || heartbeat.requiresHumanDecision !== pulse.requiresHumanDecision || JSON.stringify(continuationComparable(heartbeat.continuation)) !== JSON.stringify(continuationComparable(pulse.continuation)) || JSON.stringify(heartbeat.verifying) !== JSON.stringify(pulse.verifying) || JSON.stringify(heartbeat.waiting) !== JSON.stringify(pulse.waiting) || JSON.stringify(heartbeat.inputGates) !== JSON.stringify(pulse.inputGates.map(({taskId, state, chair, quorum, requiredInputs, nextAction}) => ({taskId, state, chair, quorum, requiredInputs, nextAction})))) fail('pulse heartbeat is not the current pulse snapshot');
 }
 
 console.log(JSON.stringify({

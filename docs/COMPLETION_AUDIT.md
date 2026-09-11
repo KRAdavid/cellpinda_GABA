@@ -351,3 +351,7 @@ canonical Goal Contract의 `decisionProtocol`을 자동 TF pulse의 `meetingProt
 ## 2026-09-11 자동 실행 경계 공개
 
 TF meeting packet에 `executionPolicy`를 추가해 READY·A/B/C 내부 위험의 자동 계속 후보와 VERIFYING·WAITING·REWORK 및 D/E/F 외부·법적 위험의 사람 판단 전환점을 명시했다. pulse·heartbeat·운영 큐·공개 패킷이 같은 정책을 검증하고 운영판에서 회의 규칙과 함께 표시한다. 이 정책은 자동 협업의 범위를 명확히 하지만 외부 게시·구매·법적 약속을 자동 실행하지 않는다.
+
+## 2026-09-11 작업별 의사결정 정족수 연결
+
+작업 위험도에 따라 pulse가 `quorum`을 계산하도록 보강했다. 내부 작업은 실행 담당자·독립 검증자 2인, D/E/F 외부·법적 위험 작업은 TF 리드·AI 비서실을 더한 3인 확인을 요구한다. 이 값은 heartbeat·공개 operations queue·TF pulse·goal audit·회의 패킷에 동일하게 전달되고, 공개·라이브 검증기가 역할 배열과 위험도 매핑을 다시 계산해 불일치를 거부한다. 운영판은 업무 카드와 다음 TF 회의 안건에 정족수를 표시해 회의 전에 필요한 참여 수준을 확인할 수 있다. 이 연결은 역할 책임과 승인 기준을 구체화하지만 실제 회의 참석이나 외부 승인을 증명하지 않는다.

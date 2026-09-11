@@ -20,6 +20,15 @@ const executionPolicy = {
   note: '자동 파동은 내부 샌드박스 후보만 계속하고, 독립 검증·외부 행동·법적 약속은 사람 판단 전환점으로 보존한다.',
 };
 const supportedRiskClasses = new Set([...executionPolicy.autoRiskClasses, ...executionPolicy.approvalRiskClasses]);
+const approvalRiskClasses = new Set(executionPolicy.approvalRiskClasses);
+
+// Make the contract's quorum operational at the individual agenda item. The
+// base quorum is the executor plus an independent verifier; external or
+// commitment-risk work adds the TF lead as a third confirmation. This is a
+// role requirement, not a claim that a named person has already attended.
+const decisionQuorumFor = task => approvalRiskClasses.has(task.risk)
+  ? {minimum: 3, roles: [task.lead, task.verifier, 'TF 리드·AI 비서실'], rule: '책임자·독립 검증자·TF 리드 추가 확인'}
+  : {minimum: 2, roles: [task.lead, task.verifier], rule: '실행 담당자·독립 검증자 확인'};
 
 const allowed = new Set(graph.stateMachine);
 const tasksById = new Map();
@@ -109,6 +118,7 @@ const decisions = activeTasks
       participants: [task.lead, task.verifier],
       question: `${task.title}의 다음 단계 진행 여부를 판단할 수 있는가?`,
       decision: action.decision,
+      quorum: decisionQuorumFor(task),
       decisionOptions: decisionOptionsFor(task),
       dissent: null,
       dissentStatus: 'human-meeting-required',
@@ -146,7 +156,7 @@ const continuation = {
 };
 const inputGates = decisions
   .filter(item => item.mode === 'input-gate')
-  .map(item => ({taskId: item.taskId, state: item.state, blockedBy: item.blockedBy, requiredInputs: item.requiredInputs, chair: item.chair, nextAction: item.nextAction}));
+  .map(item => ({taskId: item.taskId, state: item.state, blockedBy: item.blockedBy, requiredInputs: item.requiredInputs, chair: item.chair, quorum: item.quorum, nextAction: item.nextAction}));
 const result = {
   schemaVersion: 1,
   mode: 'automation_pulse',
@@ -169,7 +179,7 @@ const result = {
   verifying: decisions.filter(item => item.state === 'VERIFYING').map(item => item.taskId),
   waiting: decisions.filter(item => ['WAITING', 'BACKLOG'].includes(item.state)).map(item => item.taskId),
   inputGates,
-  meetingAgenda: decisions.map(item => ({taskId: item.taskId, state: item.state, chair: item.chair, participants: item.participants, question: item.question, decision: item.decision, decisionOptions: item.decisionOptions, requiredInputs: item.requiredInputs, nextAction: item.nextAction, mode: item.mode})),
+  meetingAgenda: decisions.map(item => ({taskId: item.taskId, state: item.state, chair: item.chair, participants: item.participants, quorum: item.quorum, question: item.question, decision: item.decision, decisionOptions: item.decisionOptions, requiredInputs: item.requiredInputs, nextAction: item.nextAction, mode: item.mode})),
   decisions,
 };
 

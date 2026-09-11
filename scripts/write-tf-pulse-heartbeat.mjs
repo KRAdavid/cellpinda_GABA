@@ -42,6 +42,7 @@ const safeGate = item => ({
   taskId: item.taskId,
   state: item.state,
   chair: item.chair,
+  quorum: item.quorum,
   requiredInputs: Array.isArray(item.requiredInputs) ? item.requiredInputs : [],
   nextAction: item.nextAction,
 });

@@ -12,6 +12,15 @@ const isSmartStore = value => {
   } catch { return false; }
 };
 const expectedDecisionOptionIds = state => state === 'VERIFYING' ? ['accept', 'rework'] : state === 'WAITING' || state === 'BACKLOG' ? ['hold', 'promote'] : state === 'READY' ? ['sandbox', 'hold'] : state === 'RUNNING' ? ['verify', 'retry'] : ['preserve', 'reopen'];
+const approvalRiskClasses = new Set(['D_EXTERNAL_REVERSIBLE', 'E_EXTERNAL_COMMITMENT', 'F_LEGAL_IRREVERSIBLE']);
+const expectedQuorum = task => approvalRiskClasses.has(task.risk)
+  ? {minimum: 3, roles: [task.lead, task.verifier, 'TF 리드·AI 비서실'], rule: '책임자·독립 검증자·TF 리드 추가 확인'}
+  : {minimum: 2, roles: [task.lead, task.verifier], rule: '실행 담당자·독립 검증자 확인'};
+const validateQuorum = (value, task, label) => {
+  assert.deepEqual(Object.keys(value || {}).sort(), ['minimum', 'roles', 'rule'].sort(), `${label} quorum fields are invalid`);
+  assert.ok(Number.isInteger(value.minimum) && Array.isArray(value.roles) && value.roles.length === value.minimum && value.roles.every(role => typeof role === 'string' && role.trim().length >= 2) && typeof value.rule === 'string' && value.rule.trim().length >= 8, `${label} quorum is malformed`);
+  assert.deepEqual(value, expectedQuorum(task), `${label} quorum is out of sync`);
+};
 const validateDecisionOptions = (options, state, label) => {
   assert.ok(Array.isArray(options) && options.length === 2, `${label} must expose two decision options`);
   assert.deepEqual(options.map(option => option?.id), expectedDecisionOptionIds(state), `${label} decision option order is invalid`);
@@ -107,7 +116,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicAudit.teaserGate.taskId, 'B4', 'live public audit must expose the teaser gate');
     assert.equal(publicAudit.teaserGate.status, 'HOLD', 'live public audit must keep the teaser on hold');
     assert.equal(publicAudit.teaserGate.taskState, queue.tasks.find(task => task.id === 'B4')?.state, 'live public audit teaser state must match the queue');
-    const auditGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction', 'decisionOptions'];
+    const auditGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction', 'decisionOptions', 'quorum'];
     const liveGatedTasks = queue.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state));
     assert.ok(Array.isArray(publicAudit.gates) && publicAudit.gates.length === liveGatedTasks.length, 'live public audit gate count must match the queue');
     for (const gate of publicAudit.gates) {
@@ -126,20 +135,21 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       const agenda = publicPulse.meetingAgenda.find(candidate => candidate.taskId === gate.id);
       assert.ok(agenda, `live public audit gate is missing pulse agenda ${gate.id}`);
       assert.deepEqual(gate.decisionOptions, agenda.decisionOptions, `live public audit decision options mismatch for ${gate.id}`);
+      validateQuorum(gate.quorum, queueTask, `live public audit gate ${gate.id}`);
     }
     assert.equal(publicPulse.meetingAgenda.length, queue.pulse.activeTasks, 'live public TF pulse agenda count must match the queue');
     assert.equal(publicPulse.inputGates.length, queue.pulse.inputGates, 'live public TF pulse gate count must match the queue');
     assert.ok(Array.isArray(queue.roleCoverage) && queue.roleCoverage.length === 6, 'live operations queue role coverage is missing');
     assert.deepEqual(queue.roleCoverage, publicPulse.roleCoverage, 'live operations queue role coverage must match the pulse');
     const publicPulseKeys = {
-      inputGate: ['taskId', 'state', 'chair', 'requiredInputs', 'nextAction'],
-      meetingAgenda: ['taskId', 'state', 'chair', 'participants', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'],
+      inputGate: ['taskId', 'state', 'chair', 'quorum', 'requiredInputs', 'nextAction'],
+      meetingAgenda: ['taskId', 'state', 'chair', 'participants', 'quorum', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'],
     };
     assert.ok(Array.isArray(publicPulse.roleCoverage) && publicPulse.roleCoverage.length === 6, 'live public TF pulse role coverage is missing');
     assert.deepEqual(publicPulse.roleCoverage.map(role => role.id), ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit'], 'live public TF pulse role coverage is out of order');
     assert.ok(publicPulse.roleCoverage.every(role => role.status === 'present' && typeof role.label === 'string'), 'live public TF pulse role coverage is malformed');
     for (const gate of publicPulse.inputGates) assert.deepEqual(Object.keys(gate).sort(), [...publicPulseKeys.inputGate].sort(), 'live public TF pulse input gate contains an unexpected field');
-    for (const agenda of publicPulse.meetingAgenda) { assert.deepEqual(Object.keys(agenda).sort(), [...publicPulseKeys.meetingAgenda].sort(), 'live public TF pulse agenda contains an unexpected field'); validateDecisionOptions(agenda.decisionOptions, agenda.state, `live public TF pulse agenda ${agenda.taskId}`); }
+    for (const agenda of publicPulse.meetingAgenda) { assert.deepEqual(Object.keys(agenda).sort(), [...publicPulseKeys.meetingAgenda].sort(), 'live public TF pulse agenda contains an unexpected field'); validateDecisionOptions(agenda.decisionOptions, agenda.state, `live public TF pulse agenda ${agenda.taskId}`); const queueTask = queue.tasks.find(task => task.id === agenda.taskId); assert.ok(queueTask, `live public TF pulse agenda is missing queue task ${agenda.taskId}`); validateQuorum(agenda.quorum, queueTask, `live public TF pulse agenda ${agenda.taskId}`); }
     assert.ok(publicPulse.counts && Object.values(publicPulse.counts).reduce((sum, count) => sum + count, 0) === queue.tasks.length, 'live public TF pulse counts must cover the queue');
     for (const state of ['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED']) assert.equal(publicPulse.counts[state], queue.tasks.filter(task => task.state === state).length, `live public TF pulse count mismatch for ${state}`);
     const queueIds = new Set(queue.tasks.map(task => task.id));
@@ -148,6 +158,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.ok(['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state), `live operations queue has an unsupported state for ${task.id}`);
       assert.ok(task.lead && task.verifier && task.lead !== task.verifier, `live operations queue must keep a distinct verifier for ${task.id}`);
       assert.ok(task.decision && task.decisionMode && task.nextAction, `live operations queue is missing automatic decision metadata for ${task.id}`);
+      validateQuorum(task.quorum, task, `live operations queue task ${task.id}`);
       const expectedMode = task.state === 'VERIFYING' ? 'independent-review' : task.state === 'WAITING' || task.state === 'BACKLOG' ? 'input-gate' : task.state === 'READY' ? 'sandbox-execution' : task.state === 'RUNNING' ? 'execution-tracking' : 'state-preservation';
       assert.equal(task.decisionMode, expectedMode, `live operations queue has a mismatched decision mode for ${task.id}`);
       if (['DONE', 'CANCELLED'].includes(task.state)) assert.ok(Array.isArray(task.decisionOptions) && task.decisionOptions.length === 0, `live operations queue must not expose active decision options for ${task.id}`);
