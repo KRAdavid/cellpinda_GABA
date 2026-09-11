@@ -14,8 +14,6 @@ export type ResearchMetadata = {
   duration?: string;
   comparison?: string;
   outcome?: string;
-  result?: string;
-  limitations?: string[];
   productApplicability?: string;
   searchThrough?: string;
   studyCount?: string;
@@ -29,7 +27,6 @@ export type Claim = {
   evidenceHash?: string;
   status?: string;
   sources: { title: string; url: string | null; locator?: string | null }[];
-  limitations?: string[];
   metadata?: ResearchMetadata;
 };
 
