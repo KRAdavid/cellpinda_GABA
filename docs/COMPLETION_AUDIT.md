@@ -359,3 +359,4 @@ TF meeting packet에 `executionPolicy`를 추가해 READY·A/B/C 내부 위험�
 ## 2026-09-11 내부 검증 파동 실행 기록
 
 6시간 `TF decision pulse` workflow에 `run-safe-tf-actions.mjs`를 추가했다. CI에 없는 공개 패킷을 내부에서 재생성한 뒤 Goal Contract·연구 문구·티저 경계·샌드박스 MVP·공개 export·TF pulse의 읽기 전용 검사를 매회 실행하고, `safe_internal_tf_run` JSON을 run summary와 14일 artifact로 보존한다. 이 단계는 외부 API·게시·구매·승인·canonical 그래프 변경을 하지 않으며, 사람 게이트가 유지되는 동안 내부 검증을 계속하는 실행 증거다. workflow validator가 실행 순서·출력 파일·artifact를 검사한다.
+safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 ID·pulse 지문·게이트 목록·위험 등급·외부 효과 없음·검사 결과를 재검증하고 나서 heartbeat 저장으로 진행한다. 실행 기록과 검증 기록은 같은 artifact와 run summary에 남는다.
