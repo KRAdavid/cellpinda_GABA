@@ -9,6 +9,7 @@ type Product = {
 type Track = (name: string, properties?: Record<string, string>) => void;
 
 export default function PurchaseQuestions({ products, onEvent }: { products: Product[]; onEvent?: Track }) {
+  if (products.length === 0) return null;
   const productSummary = products.map(product => `${product.name}은 1포 ${product.amountMg.toLocaleString()} mg·${product.servings}포 구성`).join(', ');
   return <section className="purchase-faq" aria-labelledby="purchase-faq-heading">
     <div className="purchase-faq-heading">
@@ -19,7 +20,7 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
     <div className="purchase-faq-list">
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'amount' }); }}>
         <summary>현재 판매 제품은 어떤 구성인가요?</summary>
-        <div><p>{productSummary ? `${productSummary}입니다.` : '현재 공개된 제품 구성 정보가 없습니다.'}</p><p>표시된 구성은 제품을 이해하기 위한 정보예요. 섭취 방법과 주의사항은 포장 표시를 확인하세요.</p></div>
+        <div><p>{productSummary}입니다.</p><p>표시된 구성은 제품을 이해하기 위한 정보예요. 섭취 방법과 주의사항은 포장 표시를 확인하세요.</p></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'selection' }); }}>
         <summary>어떤 제품이 나에게 맞는지 알려주나요?</summary>
