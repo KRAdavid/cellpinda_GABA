@@ -62,7 +62,7 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 로컬 API를 `pnpm server`로 실행하면 API가 포트를 연 직후 자료 watcher도 자동으로 시작한다. watcher는 두 매니페스트의 폴더를 감시하고 750ms 동안 변경을 묶은 뒤 `tmp/local-goal-audit.json`만 갱신한다. 원문 행·개인정보·로컬 경로는 공개 export와 CI artifact로 이동하지 않으며, API를 종료하면 감시도 함께 정리된다. API 없이 감시만 실행할 때는 `pnpm run audit:watch`를 사용할 수 있고 `Ctrl+C`로 종료한다. 감시할 폴더를 바꾸려면 `CELLPINDA_MATERIAL_ROOTS` 또는 `CELLPINDA_ORDER_ROOTS`에 세미콜론으로 구분한 경로를 지정한다.
 
-로컬 API와 Vite를 함께 실행하면 운영 화면이 `/api/ops/local-audit`에서 이 비공개 패킷의 안전한 요약을 60초마다 읽어 완제품 후보·누락·주문 파일 수·1500 과거 집계를 중간 확인 카드에 표시한다. 감사 사이클은 이전 로컬 입력 지문을 비교한 `localStateChanged`도 기록해 새 자료와 반복 상태를 구분한다. 응답은 원문 행·개인정보·로컬 경로를 포함하지 않으며, 스냅샷이 없거나 갱신이 실패해도 마지막 요약을 유지한다. GitHub Pages처럼 API가 없는 정적 환경에서는 요청을 만들지 않고 공개 운영 큐만 사용한다.
+`pnpm dev` 한 번으로 Vite와 로컬 API가 함께 실행되며, API가 포트를 연 뒤 자료 watcher도 자동으로 시작한다. 운영 화면은 `/api/ops/local-audit`에서 이 비공개 패킷의 안전한 요약을 60초마다 읽어 완제품 후보·누락·주문 파일 수·1500 과거 집계를 중간 확인 카드에 표시한다. 감사 사이클은 이전 로컬 입력 지문을 비교한 `localStateChanged`도 기록해 새 자료와 반복 상태를 구분한다. 응답은 원문 행·개인정보·로컬 경로를 포함하지 않으며, 스냅샷이 없거나 갱신이 실패해도 마지막 요약을 유지한다. API 포트를 바꾸려면 `CELLPINDA_API_PORT`를 지정하고 Vite 인자는 `pnpm dev -- --port 5174`처럼 전달한다. GitHub Pages처럼 API가 없는 정적 환경에서는 요청을 만들지 않고 공개 운영 큐만 사용한다.
 
 운영 MVP의 재개 상태는 `src/domain/ops-validation.ts`의 공통 검증을 거쳐 Node API와 Cloudflare Worker에 저장된다. 업무 상태 전환·검증 증거·승인 연결을 확인하고 이메일·전화번호·비공개 경로·토큰 같은 필드는 거부한다. 샌드박스 상태 저장은 외부 게시나 실구매 완료를 의미하지 않는다.
 

@@ -542,3 +542,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-12 로컬 API 자동 감시 시작 연결
 
 `pnpm server`가 로컬 API 포트를 성공적으로 연 직후 `scripts/watch-local-audit.mjs`를 자식 프로세스로 시작하도록 연결했다. `CELLPINDA_API_PORT`로 충돌 없는 포트를 선택해 실행을 검증했으며, API 시작 로그 뒤에 초기 로컬 감사·감시 로그가 이어지고 종료 시 watcher가 함께 정리되는 것을 확인했다. API가 포트를 열지 못하면 watcher를 시작하지 않으므로 중복 실행 시 불필요한 감시 프로세스가 생기지 않는다. 감사 결과는 기존처럼 비공개 `tmp/local-goal-audit.json`에만 기록되고 공개 export는 변경하지 않는다.
+
+## 2026-09-12 단일 로컬 개발 명령 연결
+
+`pnpm dev`가 `scripts/dev.mjs`를 통해 Vite와 로컬 API를 함께 기동하도록 연결했다. API가 이미 4318 포트를 사용 중이면 해당 자식만 종료 경고를 남기고 Vite는 계속 실행하며, 별도 포트(`CELLPINDA_API_PORT`)를 지정하면 API와 자료 watcher를 새 포트에서 함께 검증할 수 있다. Ctrl+C·SIGTERM은 두 프로세스와 watcher를 정리하고, 개인정보·원문·로컬 감사 패킷은 계속 비공개 경계에 남는다.

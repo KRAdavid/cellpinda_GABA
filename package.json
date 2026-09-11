@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
+    "dev": "node scripts/dev.mjs",
     "sync:data": "node scripts/sync-public-data.mjs",
     "audit:materials": "node scripts/audit-local-materials.mjs",
     "audit:orders": "node scripts/audit-local-orders.mjs",
