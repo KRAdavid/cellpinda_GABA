@@ -14,7 +14,7 @@
 
 `/account`는 정적 호스트에서 회원 API 대신 브라우저 7일 기록 안내로 전환하고, `/admin`은 운영 Worker가 없다는 안내를 보여 준다. 두 화면 모두 Worker API가 연결된 호스트에서만 서버 기능을 요청한다.
 
-코드 기준 release HEAD는 `3d78f23`이며, 해당 변경의 [GitHub Actions 34494224366](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34494224366)에서 타입검사·테스트·빌드·Pages·라이브 smoke가 성공했다.
+코드 기준 release HEAD는 `c97c91e`이며, 해당 변경의 [GitHub Actions 34632206455](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34632206455)에서 타입검사·테스트·빌드·Pages·라이브 smoke가 성공했다.
 
 ## 2026-09-12 소비자 공유·구매 흐름 재검증
 
