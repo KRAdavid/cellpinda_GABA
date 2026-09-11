@@ -83,6 +83,7 @@ requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/prod
 requireMatch(review, /가바 1500 · 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
 requireMatch(indexHtml, /rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root canonical metadata is missing');
 requireMatch(indexHtml, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root Open Graph URL is missing');
+requireMatch(indexHtml, /application\/ld\+json[\s\S]*"@type":"WebSite"[\s\S]*"inLanguage":"ko-KR"/, 'root WebSite structured data is missing');
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(app + indexHtml)) fail('legacy official-mall destination leaked into consumer source');
 const consumerSource = app + indexHtml + review;
 const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver\.com\/[A-Za-z0-9_/?=&.%:-]+/g)].map(match => match[0]);

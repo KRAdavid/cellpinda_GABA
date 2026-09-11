@@ -114,6 +114,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(metaContent(pageText, 'property', 'og:title'), 'live root is missing an Open Graph title');
     assert.ok(metaContent(pageText, 'property', 'og:description'), 'live root is missing an Open Graph description');
     assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
+    assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';
       assert.match(metaContent(sharePage, 'property', 'og:title'), /^공유받은 하루 리듬:/, `share page ${id} is missing an Open Graph title`);
