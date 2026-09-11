@@ -12,7 +12,7 @@
 
 ## 플랫폼과 상품 식별
 
-현재 공개 구매 목적지는 `https://smartstore.naver.com/cellpinda`다. URL만으로 실제 상품번호·옵션·주문 API 권한을 확정하지 않는다. 네이버 커머스API 최신 문서의 상품 조회·주문 조회 계약을 기준으로 판매자 계정에서 값을 대조해야 한다. [커머스API 최신 문서](https://apicenter.commerce.naver.com/docs/commerce-api/current).
+현재 공개 구매 목적지는 가바 1500 상품 상세 페이지인 `https://smartstore.naver.com/cellpinda/products/4701017202`다. URL만으로 실제 상품번호·옵션·주문 API 권한을 확정하지 않는다. 네이버 커머스API 최신 문서의 상품 조회·주문 조회 계약을 기준으로 판매자 계정에서 값을 대조해야 한다. [커머스API 최신 문서](https://apicenter.commerce.naver.com/docs/commerce-api/current).
 
 | 사이트 제품 | 공개 식별자 | 확정할 값 |
 |---|---|---|
@@ -71,4 +71,4 @@
 
 ## 현재 구매 링크
 
-소비자 사이트의 제품 비교·구매 CTA는 `https://smartstore.naver.com/cellpinda`로 연결한다. 이 주소는 판매처 진입 주소이며 현재 1500 상품의 개별 URL, 판매 상태, 주문 API 권한을 확인했다는 뜻이 아니다. 스마트스토어 주문 연동을 진행할 때는 상품별 URL·SKU·주문/취소/환불 상태와 사이트 귀속 파라미터를 운영 계정에서 별도로 확정한다.
+소비자 사이트의 제품 비교·구매·후기 CTA는 `https://smartstore.naver.com/cellpinda/products/4701017202`로 연결한다. 이 주소는 가바 1500 상품 상세 페이지이며, 판매 상태와 주문 API 권한을 확인했다는 뜻은 아니다. 스마트스토어 주문 연동을 진행할 때는 상품별 URL·SKU·주문/취소/환불 상태와 사이트 귀속 파라미터를 운영 계정에서 별도로 확정한다.

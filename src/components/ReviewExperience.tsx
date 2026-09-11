@@ -29,7 +29,7 @@ function reviewDestination(review: PublicReview) {
   if (review.status !== 'approved' || review.id !== 'shop-review-destination-1500' || !review.publicText || !review.sourceUrl) return null;
   try {
     const url = new URL(review.sourceUrl);
-    if (url.protocol !== 'https:' || url.hostname !== 'smartstore.naver.com' || !['/cellpinda', '/cellpinda/'].includes(url.pathname)) return null;
+    if (url.protocol !== 'https:' || url.hostname !== 'smartstore.naver.com' || url.pathname !== '/cellpinda/products/4701017202') return null;
     const productId = 'gaba1500';
     return { url: url.href, productId, label: '스마트스토어에서 제품·후기 확인' };
   } catch { return null; }

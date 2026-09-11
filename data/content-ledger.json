@@ -13,7 +13,7 @@
       "amountMg": 1500,
       "servings": 30,
       "totalG": 45,
-      "officialUrl": "https://smartstore.naver.com/cellpinda",
+      "officialUrl": "https://smartstore.naver.com/cellpinda/products/4701017202",
       "status": "approved",
       "availability": "스마트스토어에서 재고 확인",
       "priceDisplay": null,
@@ -31,7 +31,7 @@
       "sources": [
         {
           "title": "셀핀다 스마트스토어 가바 1500 상품",
-          "url": "https://smartstore.naver.com/cellpinda",
+          "url": "https://smartstore.naver.com/cellpinda/products/4701017202",
           "page": null,
           "locator": "상품명·기본 정보"
         }
@@ -51,7 +51,7 @@
       "sources": [
         {
           "title": "셀핀다 스마트스토어 가바 1500 상품",
-          "url": "https://smartstore.naver.com/cellpinda",
+          "url": "https://smartstore.naver.com/cellpinda/products/4701017202",
           "page": null,
           "locator": "상품명·상품간략설명"
         }
@@ -733,7 +733,7 @@
       "status": "approved",
       "publicText": "스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.",
       "sourceTitle": "셀핀다 스마트스토어 가바 1500 상품 후기",
-      "sourceUrl": "https://smartstore.naver.com/cellpinda",
+      "sourceUrl": "https://smartstore.naver.com/cellpinda/products/4701017202",
       "reviewedAt": "2026-09-10",
       "holdReason": null,
       "originalPublic": true,

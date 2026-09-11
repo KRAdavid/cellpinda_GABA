@@ -8,7 +8,7 @@ const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, millise
 const isSmartStore = value => {
   try {
     const url = new URL(value);
-    return url.protocol === 'https:' && url.hostname === 'smartstore.naver.com' && ['/cellpinda', '/cellpinda/'].includes(url.pathname);
+    return url.protocol === 'https:' && url.hostname === 'smartstore.naver.com' && url.pathname === '/cellpinda/products/4701017202';
   } catch { return false; }
 };
 const expectedDecisionOptionIds = state => state === 'VERIFYING' ? ['accept', 'rework'] : state === 'WAITING' || state === 'BACKLOG' ? ['hold', 'promote'] : state === 'READY' ? ['sandbox', 'hold'] : state === 'RUNNING' ? ['verify', 'retry'] : ['preserve', 'reopen'];
@@ -91,7 +91,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
-    assert.equal(content.products[0].officialUrl, 'https://smartstore.naver.com/cellpinda', 'live product must point to Smart Store');
+    assert.equal(content.products[0].officialUrl, 'https://smartstore.naver.com/cellpinda/products/4701017202', 'live product must point to the Smart Store 1500 product');
     assert.equal(teaserPreview.status, 'PREVIEW', 'live teaser preview must be marked PREVIEW');
     assert.equal(teaserPreview.url, 'https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site/', 'live teaser preview must use the supplied HTTPS URL');
     assert.equal(teaserPreview.placement, '선택형 보조 CTA · 리듬 체크 다음', 'live teaser preview must keep the approved placement');

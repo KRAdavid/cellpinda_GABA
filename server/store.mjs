@@ -20,7 +20,7 @@ const SHARE_SCOPE_SQL=`WITH scoped AS (SELECT rowid AS seq,flow_id,name FROM eve
 const UNSCOPED_SHARE_SQL="SELECT COUNT(*) AS count FROM events WHERE name IN ('share_requested','share_link_copied','share_image_downloaded','share_cancelled') AND COALESCE(json_extract(properties,'$.path'),'') NOT IN ('/result','/share','/products')";
 function reviewLink(value) {
   if(value.id!==REVIEW_DESTINATION_ID || value.originalPublic!==true || typeof value.sourceUrl!=='string')return false;
-  try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && url.hostname==='smartstore.naver.com' && ['/cellpinda','/cellpinda/'].includes(url.pathname);}catch{return false;}
+  try{const url=new URL(value.sourceUrl);return url.protocol==='https:' && url.hostname==='smartstore.naver.com' && url.pathname==='/cellpinda/products/4701017202';}catch{return false;}
 }
 function publicMetadata(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;

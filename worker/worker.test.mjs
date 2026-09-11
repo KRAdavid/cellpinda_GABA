@@ -161,7 +161,7 @@ test('Worker sandbox ops runs persist resumable state with a client key and isol
 });
 
 test('Worker and Node expose only the approved Smart Store 1500 review destination, never private quotes',async()=>{
-  const reviewedSeed={...seed,reviews:[{id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'스마트스토어 1500 후기 보기',sourceTitle:'스마트스토어 1500',sourceUrl:'https://smartstore.naver.com/cellpinda',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL 1500'},{id:'private-review',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null},{id:'unverified-review',status:'approved',publicText:'UNVERIFIED QUOTE',sourceUrl:'https://cellpinda.co.kr/'}]};
+  const reviewedSeed={...seed,reviews:[{id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'스마트스토어 1500 후기 보기',sourceTitle:'스마트스토어 1500',sourceUrl:'https://smartstore.naver.com/cellpinda/products/4701017202',limitations:['개인 경험'],holdReason:'internal',original:'PRIVATE ORIGINAL 1500'},{id:'private-review',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null},{id:'unverified-review',status:'approved',publicText:'UNVERIFIED QUOTE',sourceUrl:'https://cellpinda.co.kr/'}]};
   const db=new MockD1();const cloud=createStore(db);const local=createNodeStore({dbPath:':memory:',seed:reviewedSeed});
   try{
     await cloud.initialize(reviewedSeed);
@@ -177,16 +177,16 @@ test('Worker and Node expose only the approved Smart Store 1500 review destinati
 });
 
 test('Persistent stores migrate an obsolete canonical review destination to Smart Store without touching quote reviews',async()=>{
-  const canonical={id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.',sourceTitle:'셀핀다 스마트스토어 가바 1500 상품 후기',sourceUrl:'https://smartstore.naver.com/cellpinda',reviewedAt:'2026-09-10',limitations:['구매자 후기는 개인 경험이며 의학적 효능을 보장하지 않습니다.']};
+  const canonical={id:'shop-review-destination-1500',status:'approved',originalPublic:true,publicText:'스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.',sourceTitle:'셀핀다 스마트스토어 가바 1500 상품 후기',sourceUrl:'https://smartstore.naver.com/cellpinda/products/4701017202',reviewedAt:'2026-09-10',limitations:['구매자 후기는 개인 경험이며 의학적 효능을 보장하지 않습니다.']};
   const stale={...canonical,publicText:'공식몰 1500 후기 보기',sourceTitle:'셀핀다 공식몰 가바 1500 상품 후기',sourceUrl:'https://cellpinda.co.kr/product/old'};
   const staleSeed={...seed,reviews:[stale,{id:'private-review',reviewType:'quote',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null}]};
   const currentSeed={...seed,reviews:[canonical,{id:'private-review',reviewType:'quote',status:'hold',publicText:'PRIVATE QUOTE',sourceUrl:null}]};
   const db=new MockD1();const cloud=createStore(db);const directory=mkdtempSync(join(tmpdir(),'cellpinda-review-migration-'));const dbPath=join(directory,'db.sqlite');
   try {
     await cloud.initialize(staleSeed);
-    await cloud.initialize(currentSeed);let output=await cloud.publicContent();assert.equal(output.reviews.length,1);assert.equal(output.reviews[0].sourceUrl,'https://smartstore.naver.com/cellpinda');
+    await cloud.initialize(currentSeed);let output=await cloud.publicContent();assert.equal(output.reviews.length,1);assert.equal(output.reviews[0].sourceUrl,'https://smartstore.naver.com/cellpinda/products/4701017202');
     const first=createNodeStore({dbPath,seed:staleSeed});first.close();
-    const local=createNodeStore({dbPath,seed:currentSeed});output=local.publicContent();assert.equal(output.reviews.length,1);assert.equal(output.reviews[0].sourceUrl,'https://smartstore.naver.com/cellpinda');assert.equal(output.reviews[0].status,'approved');local.close();
+    const local=createNodeStore({dbPath,seed:currentSeed});output=local.publicContent();assert.equal(output.reviews.length,1);assert.equal(output.reviews[0].sourceUrl,'https://smartstore.naver.com/cellpinda/products/4701017202');assert.equal(output.reviews[0].status,'approved');local.close();
   } finally {db.close();rmSync(directory,{recursive:true,force:true});}
 });
 
