@@ -340,8 +340,9 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <p>카드와 공유 링크에는 생활 유형이 표시돼요. 문항별 답변은 담지 않습니다.</p>
             {cardUrl && type ? <img className="rhythm-card-preview" src={cardUrl} alt={`${type.name} 결과 카드 미리보기`} /> : null}
             {sharedType ? <button type="button" className="rhythm-button" onClick={start}>나도 1분 리듬 체크 <ArrowRight size={18} aria-hidden="true" /></button> : null}
-            <button type="button" className={`rhythm-button${sharedType ? ' secondary' : ''}`} onClick={share}>리듬 이야기 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
-            {kakaoReady ? <button type="button" className="rhythm-button secondary" onClick={shareToKakao}>카카오톡으로 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
+            {!sharedType && kakaoReady ? <button type="button" className="rhythm-button" onClick={shareToKakao}>카카오톡으로 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
+            <button type="button" className={`rhythm-button${sharedType || kakaoReady ? ' secondary' : ''}`} onClick={share}>리듬 이야기 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
+            {sharedType && kakaoReady ? <button type="button" className="rhythm-button secondary" onClick={shareToKakao}>카카오톡으로 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
             <button type="button" className="rhythm-button secondary" onClick={() => void copyLink()}>링크만 복사 <ArrowUpRight size={18} aria-hidden="true" /></button>
             <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>이미지 카드 저장 <Download size={18} aria-hidden="true" /></button>
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
