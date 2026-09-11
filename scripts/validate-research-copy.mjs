@@ -9,10 +9,12 @@ const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles
   file,
   await readFile(new URL(`../src/components/${file}`, import.meta.url), 'utf8'),
 ])));
+const appSource = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
+const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const researchLibrary = consumerSources['ResearchLibrary.tsx'];
 const reviewExperience = consumerSources['ReviewExperience.tsx'];
 const gabaStory = consumerSources['GabaStory.tsx'];
-const consumerUi = Object.values(consumerSources).join('\n');
+const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml].join('\n');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
