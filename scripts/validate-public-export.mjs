@@ -18,6 +18,7 @@ const roleRegistry = await readJson('data/tf-role-registry.json');
 const goalContract = await readJson('data/goal-contract.json');
 const fail = message => { throw new Error(`Public export invalid: ${message}`); };
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
+const approvedReviewText = '스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.';
 const isHttps = value => {
   try { return new URL(value).protocol === 'https:'; } catch { return false; }
 };
@@ -26,7 +27,7 @@ const isSmartStore = value => {
 };
 
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
-if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 신경 신호의 균형 조절에 관여하는 물질입니다/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || !/gaba-master-index\.json/i.test(indexHtml) || !/smartstore\.naver\.com\/cellpinda\/products\/4701017202/i.test(indexHtml) || !/구매자 후기 원문 읽기/.test(indexHtml)) fail('index.html must keep a readable static fallback with the approved Smart Store product and review links');
+if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 신경 신호의 균형 조절에 관여하는 물질입니다/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || !/gaba-master-index\.json/i.test(indexHtml) || !/smartstore\.naver\.com\/cellpinda\/products\/4701017202/i.test(indexHtml) || !/구매자 후기 원문 읽기/.test(indexHtml) || !indexHtml.includes(approvedReviewText)) fail('index.html must keep a readable static fallback with the approved Smart Store product and review links');
 if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml) || !/<meta property="og:type" content="website"\s*\/>/i.test(indexHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml)) fail('index.html must expose canonical and Open Graph URL metadata');
 if (!/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/.test(indexHtml)) fail('index.html must expose safe WebSite structured data');
 if (!/^User-agent: \*\nAllow: \/\nDisallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops\n\nSitemap: https:\/\/kradavid\.github\.io\/cellpinda_GABA\/sitemap\.xml\s*$/m.test(robots)) fail('robots.txt must expose the public sitemap and keep internal paths out of discovery');
@@ -216,7 +217,6 @@ for (const claim of content.claims.filter(item => ['product-1500', 'fermentation
 const hasRemoved750 = content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750'));
 if (hasRemoved750) fail('removed 750 product returned to public export');
 
-const approvedReviewText = '스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.';
 if (content.reviews.length !== 1 || content.reviews[0].id !== 'shop-review-destination-1500' || !isSmartStore(content.reviews[0].sourceUrl) || content.reviews[0].publicText !== approvedReviewText) fail('review destination or consumer copy is not the approved Smart Store 1500 message');
 if (content.reviews.some(review => 'limitations' in review || 'result' in review)) fail('review export exposes internal editorial fields');
 if (/효과를\s*보장하지|개인\s*경험은\s*제품\s*효과|다만\s*GABA만의\s*효과|스트레스에\s*제한적|수면에\s*매우\s*제한적|결과가\s*일치하지|정량\s*메타분석|중증\s*수면질환|수면이\s*좋지\s*않|이상사례|유의하지\s*않/i.test(JSON.stringify(content))) fail('consumer export contains a negative effect disclaimer');
