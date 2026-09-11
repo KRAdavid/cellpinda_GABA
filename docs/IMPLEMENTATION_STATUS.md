@@ -423,3 +423,9 @@ Chrome 기반 Playwright 임시 실행기로 데스크톱 1440×1000과 모바�
 `validate:research-copy`, `validate:ui-contract`, 전체 production build, 76개 회귀 테스트가 통과했다. 이 변경은 연구 정보를 소비자 언어와 도표로 배치한 것이며 연구 용량·완제품 효능·권장량을 새로 승인한 것이 아니다.
 
 같은 변경의 GitHub Actions `34624983973`에서 검증·Pages 게시·Worker 설정 점검·라이브 smoke가 모두 성공했다. 배포 후 `pnpm run validate:live -- https://kradavid.github.io/cellpinda_GABA`는 `page=200`, `claims=14`, `masterRecords=8`, `products=1`, `sharePages=6`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+
+## 2026-09-12 로컬 원장 자동 동기화 보강
+
+로컬 API의 기존 SQLite가 새 원장을 단순히 누적만 하면서 750 제품·예전 공식몰 목적지·이전 부정형 연구 문구를 계속 공개할 수 있던 경로를 수정했다. 서버 시작 시 현재 `data/content-ledger.json`과 기존 행을 대조해 제거된 승인 제품·주장은 `hold`로 전환하고, 통제된 제품 필드와 오래된 소비자용 문구·출처만 현재 원장으로 갱신한다. 모든 자동 갱신은 감사 이력으로 남기며 운영자가 만든 보류 상태를 자동 승인하지 않는다.
+
+로컬 API 재시작 후 `/api/content`는 `gaba1500` 한 제품과 지정 스마트스토어 상세 URL만 반환하고, 750·공식몰·부정형 연구 문구를 반환하지 않았다. 이 동기화는 과거 로컬 자료를 삭제하지 않고 공개 projection만 현재 원장에 맞추는 장치다.

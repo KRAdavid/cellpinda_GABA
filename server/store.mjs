@@ -51,6 +51,53 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
           db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,1,?,NULL,?,?)').run(item.id,'Initial source ledger import; AI editorial status, not expert certification',JSON.stringify(item),new Date().toISOString());
         }
       }
+      // Reconcile rows from an older local database with the current source ledger.
+      // The original seed import intentionally preserved edits, but it also meant
+      // retired products and superseded consumer copy could remain publicly visible
+      // after a ledger change. Update only controlled seed fields and keep every
+      // change in the audit trail.
+      const seedByKind = {
+        claim: new Map((initial.claims || []).map(item => [item.id, item])),
+        product: new Map((initial.products || []).map(item => [item.id, item])),
+      };
+      const discouragedConsumerCopy = /뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|다만\s*GABA만의\s*효과|결과를\s*한\s*문장으로\s*묶기\s*어려/;
+      const legacyDestination = /cellpinda\.co\.kr|cellpindamall\.com|공식몰/;
+      const controlledProductFields = ['name','amountMg','servings','totalG','officialUrl','availability','priceDisplay','sourceIds'];
+      for (const [kind, seedMap] of Object.entries(seedByKind)) {
+        for (const row of db.prepare('SELECT * FROM content WHERE kind=?').all(kind)) {
+          const before = JSON.parse(row.data);
+          const canonical = seedMap.get(before.id);
+          let after = null;
+          let reason = '';
+          if (!canonical) {
+            // Claims/products removed from the current public ledger are retired;
+            // their historical row remains available to local operators.
+            if (before.status === 'approved') {
+              after = {...before, status:'hold', holdReason: before.holdReason || '현재 공개 원장에서 제거된 항목'};
+              reason = 'Current source ledger reconciliation retired removed public content';
+            }
+          } else if (kind === 'product') {
+            after = {...before};
+            for (const field of controlledProductFields) {
+              if (canonical[field] !== undefined) after[field] = canonical[field];
+            }
+            reason = 'Current source ledger reconciliation refreshed controlled product fields';
+          } else if (legacyDestination.test(JSON.stringify(before)) || discouragedConsumerCopy.test(JSON.stringify(before))) {
+            // Refresh only rows whose public destination/copy is known to be stale.
+            // Preserve an operator hold instead of silently approving it.
+            after = {...before, ...canonical, id: before.id, status: before.status};
+            reason = 'Current source ledger reconciliation refreshed stale public copy';
+          }
+          if (after) {
+            const current = JSON.stringify(after);
+            if (current !== row.data) {
+              const revision = row.revision + 1;
+              db.prepare('UPDATE content SET data=?,revision=? WHERE id=? AND revision=?').run(current,revision,row.id,row.revision);
+              db.prepare('INSERT INTO audit(content_id,revision,reason,previous,current,created_at) VALUES(?,?,?,?,?,?)').run(row.id,revision,reason,row.data,current,new Date().toISOString());
+            }
+          }
+        }
+      }
       // Reconcile the controlled Smart Store destination on existing databases.
       // Submitted quote reviews keep their own editorial workflow and history.
       const canonical=(initial.reviews || []).find(item=>item.id===REVIEW_DESTINATION_ID);
