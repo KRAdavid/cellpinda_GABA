@@ -2,7 +2,9 @@
   "schemaVersion": 1,
   "goalId": "GL-2026-CELL-GABA-001",
   "checkedAt": "2026-09-10",
+  "requestedSourceRoot": "D:\\셀핀다\\업무폴더\\_정성배\\바탕 화면\\자료\\GABA\\_Material",
   "sourceRoots": [
+    "D:\\셀핀다\\업무폴더\\_정성배\\바탕 화면\\자료\\GABA\\_Material",
     "D:\\셀핀다\\업무폴더_정성배\\바탕 화면\\자료\\GABA_Material",
     "D:\\셀핀다\\업무폴더_정성배\\바탕 화면\\자료",
     "D:\\셀핀다\\업무폴더\\_정성배\\바탕 화면\\자료"
