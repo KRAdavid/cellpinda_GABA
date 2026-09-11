@@ -463,3 +463,5 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 소비자 페이지에 선택형 익명 사용성 측정 안내를 추가했다. 동의하지 않거나 아직 선택하지 않은 상태에서는 이벤트를 전송하지 않고, 허용한 경우에도 화면 흐름만 기록하며 이름·연락처·문항별 답변은 수집하지 않는다. 브라우저 저장소 접근 자체가 차단되는 환경에서는 측정을 허용하지 않는 기본값을 유지한다. 이 변경은 목표 문서 14번의 동의 구조 요구를 구현한 것이며, 소비자 기능을 제한하지 않는다.
 
 `validate:ui-contract`, 타입검사, 전체 80개 회귀 테스트, production build와 TF pulse `34631290886`가 성공했다. heartbeat 커밋 `8a2f258` 이후 배포 `34631318636` 및 라이브 smoke가 성공했고, 공개 검증은 page 200·claims 14·masterRecords 8·products 1·sharePages 6·Smart Store only·750 제거·provenance 일치를 확인했다. 실제 후기 권한, 최종 표시 승인, 티저 최종 미디어·권리, Cloudflare 운영 Secrets, 실주문 대사는 여전히 외부 입력 게이트다.
+
+후속 레이아웃 보정 커밋 `b2eeb31`에서 동의 패널을 푸터 전체 폭의 독립 행으로 고정하고 UI 계약 검사를 추가했다. 로컬 계약 검사·타입검사·80개 테스트·production build와 배포 smoke를 다시 통과했다.
