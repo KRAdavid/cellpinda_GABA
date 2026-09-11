@@ -72,3 +72,7 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 ## 2026-09-12 로컬 자료 루트 자동 탐색 QA
 
 사용자 지정 요청 경로와 현재 PC에서 확인된 경로를 모두 매니페스트에 등록했다. `pnpm run audit:materials`와 `pnpm run audit:goal:local:json`을 다시 실행해 완제품 후보 5건·자료 7건·원료 자료 제외 1건을 확인했으며, 공개 export와 제품·후기 CTA는 변경되지 않았다.
+
+## 2026-09-12 실행 환경 재검증 범위
+
+이번 재검증 환경에는 실행 가능한 Chromium·Playwright 브라우저가 없어 화면 캡처·DOM·콘솔 상태를 새로 수집하지 못했다. 현재 근거로 삼은 항목은 `validate:ui-contract`, `validate:public`, `typecheck`, 전체 테스트, production build, GitHub Pages HTTP smoke와 공개 JSON 검사이며, 위의 과거 브라우저 기록은 당시 실행 환경에서 작성된 이력으로 구분한다. 실제 화면 사용성·가로폭·콘솔 오류의 최종 확인은 브라우저 QA 환경에서 다시 수행해야 한다.
