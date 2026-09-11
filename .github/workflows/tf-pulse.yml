@@ -32,7 +32,7 @@ jobs:
       - name: Generate TF decision pulse
         run: node scripts/tf-pulse.mjs --json > tf-pulse.json
       - name: Execute safe internal TF checks
-        run: node scripts/run-safe-tf-actions.mjs tf-pulse.json --out tf-safe-run.json > tf-safe-run-summary.json
+        run: node scripts/run-safe-tf-actions.mjs tf-pulse.json --out tf-safe-run.json | tee tf-safe-run-summary.json
       - name: Persist safe pulse heartbeat
         run: |
           node scripts/write-tf-pulse-heartbeat.mjs tf-pulse.json

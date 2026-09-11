@@ -24,9 +24,10 @@ const expectedAutoRiskClasses = ['A_READ', 'B_INTERNAL_WRITE', 'C_LOW_RISK_INTER
 if (pulse.mode !== 'automation_pulse' || pulse.goalStatus !== 'ACTIVE' || !pulse.goalId || !pulse.snapshotHash) fail('active automation pulse is required');
 if (!pulse.executionPolicy || JSON.stringify(pulse.executionPolicy.autoRiskClasses) !== JSON.stringify(expectedAutoRiskClasses) || JSON.stringify(pulse.executionPolicy.autoStates) !== JSON.stringify(['READY'])) fail('automatic execution boundary is missing or changed');
 
-// These commands are read-only checks against the local contract and the
-// already generated public packets. They never publish, purchase, call an
-// external API, or mutate the canonical task graph.
+// The generated public packets are ignored build artifacts in CI, so prepare
+// them locally first. This is an internal B-level write only; the subsequent
+// checks are read-only. Nothing is published, purchased, sent to an external
+// API, or written to the canonical task graph.
 const checks = [
   {id: 'goal-contract', script: 'scripts/validate-goal-contract.mjs'},
   {id: 'research-copy', script: 'scripts/validate-research-copy.mjs'},
@@ -35,7 +36,17 @@ const checks = [
   {id: 'public-export', script: 'scripts/validate-public-export.mjs'},
   {id: 'tf-pulse', script: 'scripts/validate-tf-pulse.mjs'},
 ];
-const scrub = value => String(value || '').replaceAll(root, '<workspace>').slice(-2400);
+const scrub = value => String(value || '')
+  .replaceAll(root, '<workspace>')
+  .replaceAll(root.replaceAll('\\', '\\\\'), '<workspace>')
+  .slice(-2400);
+const syncResult = spawnSync(process.execPath, [resolve(root, 'scripts/sync-public-data.mjs')], {encoding: 'utf8'});
+const preparation = {
+  id: 'sync-public-data',
+  risk: 'B_INTERNAL_WRITE',
+  status: syncResult.status === 0 ? 'MET' : 'FAILED',
+  detail: scrub(syncResult.status === 0 ? syncResult.stdout : syncResult.stderr || syncResult.stdout),
+};
 const executed = checks.map(check => {
   const result = spawnSync(process.execPath, [resolve(root, check.script)], {encoding: 'utf8'});
   return {
@@ -56,14 +67,15 @@ const result = {
   snapshotHash: pulse.snapshotHash,
   executionBoundary: {
     state: 'READY',
-    risk: 'A_READ',
+    risk: 'B_INTERNAL_WRITE',
     externalEffects: false,
-    note: '읽기 전용 내부 검증만 자동 실행하며, 외부 행동·승인·canonical 업무 그래프 상태 변경은 하지 않는다.',
+    note: '공개 패킷은 내부에서 재생성하고, 외부 행동·승인·canonical 업무 그래프 상태 변경은 하지 않는다.',
   },
   candidateTaskIds: Array.isArray(pulse.ready) ? [...pulse.ready] : [],
   humanGateTaskIds,
+  preparation,
   executed,
-  status: executed.every(item => item.status === 'MET') ? 'MET' : 'FAILED',
+  status: preparation.status === 'MET' && executed.every(item => item.status === 'MET') ? 'MET' : 'FAILED',
   nextAction: humanGateTaskIds.length
     ? '사람 정족수와 입력 게이트를 유지하고 다음 pulse에서 내부 검증을 반복한다.'
     : '실행 후보가 있으면 샌드박스 증거를 만든 뒤 독립 검증으로 전달한다.',
