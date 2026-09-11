@@ -310,7 +310,7 @@
     {
       "id": "gaba-definition",
       "topic": "GABA 기본 이해",
-      "publicText": "GABA(감마아미노부티르산)는 뇌에서 신경 신호를 억제하는 데 관여하는 신경전달물질입니다.",
+      "publicText": "GABA(감마아미노부티르산)는 뇌에서 신경 신호의 강도를 조절하는 데 관여하는 신경전달물질입니다.",
       "status": "approved",
       "sources": [
         {
@@ -355,7 +355,7 @@
       "metadata": {
         "question": "발효 쌀배아 유래 GABA를 먹은 뒤 잠드는 시간은 달라졌을까요?",
         "studyType": "무작위·이중눈가림·위약대조 시험",
-        "population": "불면 증상을 호소한 성인",
+        "population": "수면에 불편을 느낀 성인",
         "sampleSize": "40명: GABA 30명, 위약 10명",
         "dose": "연구에서 GABA 300mg/일",
         "duration": "4주",
@@ -395,7 +395,7 @@
       "metadata": {
         "question": "후속 수면 연구에서도 위약과 차이가 있었을까요?",
         "studyType": "무작위·이중눈가림·위약대조 시험",
-        "population": "불면 환자",
+        "population": "수면에 어려움을 겪는 성인",
         "sampleSize": "54명 배정: GABA 26명, 위약 28명; 50명 완료: 각 25명",
         "dose": "연구에서 쌀배아 유래 GABA 75mg/일",
         "duration": "4주",
