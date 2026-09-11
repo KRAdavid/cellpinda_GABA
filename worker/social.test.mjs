@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { socialMetadata, socialTags, PUBLIC_ORIGIN } from './social.ts';
 import { resultTypes } from '../src/domain/rhythm.ts';
 
-test('All four shared types use UI labels without answers or personal queries',()=>{
+test('All shared types use UI labels without answers or personal queries',()=>{
   for(const [type,info] of Object.entries(resultTypes)){
     const meta=socialMetadata(`${PUBLIC_ORIGIN}/?rhythm=${type}&email=private@example.com&answers=22222#private`);
     assert.ok(meta.title.includes(info.name));assert.ok(meta.title.startsWith('공유받은'));assert.ok(meta.description.includes('링크를 연 사람의 결과가 아니며'));assert.equal(meta.canonical,`${PUBLIC_ORIGIN}/?rhythm=${type}`);

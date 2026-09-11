@@ -3,7 +3,7 @@ import { resultTypes, type RhythmId } from '../src/domain/rhythm.ts';
 // Exact deployed origin only. Never trust Host, Forwarded or arbitrary *.workers.dev hosts.
 export const PUBLIC_ORIGIN='https://cellpinda-rhythm.marshy-shear.workers.dev';
 const TRUSTED_ORIGINS=new Set([PUBLIC_ORIGIN,...['localhost','127.0.0.1'].flatMap(host=>[8787,8788,5173,4173].map(port=>`http://${host}:${port}`))]);
-const RHYTHMS=new Set<string>(['active','irregular','unrested','steady']);
+const RHYTHMS=new Set<string>(Object.keys(resultTypes));
 const escape=(text:string)=>text.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll("'",'&#39;');
 
 export function socialMetadata(requestUrl:string) {

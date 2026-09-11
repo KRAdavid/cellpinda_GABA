@@ -12,7 +12,7 @@ export default function GabaStory({claims}:{claims:Claim[]}) {
     </div>
     {definition?.sources.filter(source=>source.url?.startsWith('https://')).map(source=><a className="text-link" key={source.url} href={source.url!} target="_blank" rel="noopener noreferrer">{source.title} 원문 ↗</a>)}
     <div className="story-questions" style={{marginTop:48}}><h3>읽다가 떠오르는 질문</h3>
-      <details className="claim"><summary>리듬 체크로 GABA가 필요한지 알 수 있나요?</summary><div><p>체크는 지난 하루의 생활 습관을 돌아보는 경험입니다. 체내 GABA 수치나 제품 필요성을 측정하지 않으며 결과로 제품·섭취량을 권하지 않습니다.</p><a className="text-link" href="#rhythm">체크 문항 살펴보기 →</a></div></details>
+      <details className="claim"><summary>리듬 체크로 GABA가 필요한지 알 수 있나요?</summary><div><p>체크는 체내 GABA 수치나 결핍, 제품 필요성을 측정하지 않아요. 다만 긴장·잠·휴식 신호가 겹쳤다면 적극적인 휴식을 먼저 시작해 보자는 뜻이에요. GABA는 뇌의 신경 신호를 억제하는 데 관여해 안정과 관련된 물질로 설명됩니다.</p><a className="text-link" href="#rhythm">회복 초점 다시 확인하기 →</a></div></details>
       <details className="claim"><summary>연구 결과를 셀핀다 제품의 효과로 읽어도 되나요?</summary><div><p>연구 대상 제품과 조건부터 확인해 주세요. 각 자료에 셀핀다 완제품 적용 범위를 함께 표시했습니다.</p>{studies.map(claim=><p key={claim.id}><a className="text-link" href={`#${claim.id}`}>{claim.topic} →</a><br/>{claim.metadata!.productApplicability}</p>)}</div></details>
       <details className="claim"><summary>제품을 선택하기 전에 무엇을 확인하면 좋을까요?</summary><div><p>1포 내용량과 구성, 실제 제품 표시사항을 확인하고, 다른 사람의 사용 경험은 원문 맥락과 함께 살펴보세요.</p><a className="text-link" href="#products">제품 비교 →</a> · <a className="text-link" href="#reviews">사용 경험 →</a></div></details>
     </div>
