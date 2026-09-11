@@ -81,7 +81,7 @@ pnpm run preflight:deploy
 
 `pnpm run validate:tf-pulse-workflow`는 이 heartbeat→dispatch 순서, 최소 권한, `[skip ci]` 중복 방지 조건을 build에서 고정한다.
 
-공개 운영 보드(`?view=ops`)는 마지막 pulse 시각과 신선도 상태를 함께 표시해 6시간 주기 자동 협업이 지연됐는지 바로 확인할 수 있게 한다. 소비자 사이트 푸터의 `TF 운영판` 링크에서도 이 중간 확인 화면으로 이동할 수 있다. 직전 상태 지문과 비교한 `stateChanged`도 표시해 새 안건과 반복 안건을 구분한다.
+로컬 운영 보드(`http://127.0.0.1:5173/?view=ops`)는 마지막 pulse 시각과 신선도 상태를 함께 표시해 6시간 주기 자동 협업이 지연됐는지 바로 확인할 수 있게 한다. 소비자 사이트에는 `TF 운영판` 링크를 노출하지 않으며, 운영자는 로컬 주소에서만 이 중간 확인 화면을 연다. 직전 상태 지문과 비교한 `stateChanged`도 표시해 새 안건과 반복 안건을 구분한다.
 `pnpm run audit:goal -- --json`의 `pulseHealth`에도 같은 신선도 판정과 상태 지문이 포함되어 회의·CI에서 화면과 같은 기준을 사용할 수 있다.
 `pnpm run validate:tf-pulse`는 heartbeat의 상태 지문·카운트·대기 목록이 현재 pulse와 같은 실행인지도 확인해 오래된 회의 안건이 공개 큐에 남지 않게 한다.
 
