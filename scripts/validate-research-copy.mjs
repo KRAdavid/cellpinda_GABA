@@ -12,6 +12,7 @@ const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles
 const appSource = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const researchLibrary = consumerSources['ResearchLibrary.tsx'];
+const purchaseQuestions = consumerSources['PurchaseQuestions.tsx'];
 const reviewExperience = consumerSources['ReviewExperience.tsx'];
 const gabaStory = consumerSources['GabaStory.tsx'];
 const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml].join('\n');
@@ -43,5 +44,6 @@ if (researchLibrary.includes('숫자와 출처 더 확인하기')) fail('consume
 if (/전체\s*구매자의\s*경험|제품\s*효과를\s*입증하는\s*연구\s*자료는\s*아니/.test(reviewExperience)) fail('consumer review UI must use context-first copy');
 if (discouragedMarketing.test(consumerUi)) fail('consumer UI contains a discouraged negative marketing phrase');
 if (/연구 카드를 준비하고 있어요|후기를 확인할 수 있는 경로를 준비하고 있습니다|GABA 기본 자료를 확인하고 있습니다|현재 공개된 제품 구성 정보가 없습니다/.test(consumerUi)) fail('consumer UI must not expose empty or preparation-state copy');
+if (/이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다/.test(purchaseQuestions) || !/최신 내용으로 확인해 보세요/.test(purchaseQuestions)) fail('purchase guidance must use clear, current-label language without defensive copy');
 
 console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability'], detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-section-product-link', status: 'ok'}));
