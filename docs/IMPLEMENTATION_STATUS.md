@@ -58,7 +58,7 @@ TF pulse가 활성 작업마다 상태에 맞는 두 가지 결정 경로와 최
 
 커밋 `c5fc87c`에서 샌드박스 시뮬레이션만으로 운영 승인을 추천하지 않도록 보고서 판정을 보강했다. 모든 작업이 `sandbox_simulation` 검증으로 끝나면 추천은 `revise`로 남고, 운영 화면은 `샌드박스 완료 · 실제 검증 필요`를 표시한다. 로컬 `pnpm test` 60개·타입검사·production build가 통과했으며, 최신 [GitHub Actions 34499389071](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34499389071)의 verify·Pages·라이브 smoke가 성공했다.
 
-최신 공개 URL 재검증 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 티저는 `PREVIEW` 상태로 리듬 체크 다음에 선택형 외부 링크를 노출하고, 최종 공개 승인 게이트 B4는 업무 그래프와 공개 운영 큐에서 `WAITING`으로 유지한다. 390px·1440px 네 화면의 가로 넘침·콘솔 오류·400 이상 응답은 없었다. 제품 자료 감사는 7개 파일(완제품 후보 5개)을 찾았고, 주문 자료 감사는 1,086개 파일을 읽어 1500 후보 114행·121개 수량을 집계했지만 상태·취소·환불 필드와 실판매자 응답이 없어 E1은 계속 `WAITING`이다.
+최신 공개 URL 재검증 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 티저는 `PREVIEW` 상태로 리듬 체크 다음에 페이지 안에서 즉시 재생되는 iframe을 노출하고, 임베드가 막힐 때만 외부 페이지 대체 링크를 제공한다. 최종 공개 승인 게이트 B4는 업무 그래프와 공개 운영 큐에서 `WAITING`으로 유지한다. 390px·1440px 네 화면의 가로 넘침·콘솔 오류·400 이상 응답은 없었다. 제품 자료 감사는 7개 파일(완제품 후보 5개)을 찾았고, 주문 자료 감사는 1,086개 파일을 읽어 1500 후보 114행·121개 수량을 집계했지만 상태·취소·환불 필드와 실판매자 응답이 없어 E1은 계속 `WAITING`이다.
 
 ## 2026-09-11 티저 URL 재접근 검토
 
