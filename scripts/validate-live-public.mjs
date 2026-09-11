@@ -66,8 +66,9 @@ const request = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse] = await Promise.all([
+    const [page, faviconResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse] = await Promise.all([
       request('/?view=ops'),
+      request('/favicon.svg'),
       request('/data/content.json'),
       request('/data/gaba-master-index.json'),
       request('/data/teaser-preview.json'),
@@ -76,6 +77,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       request('/data/goal-audit.json'),
       request('/data/tf-meeting-packet.json'),
     ]);
+    assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
     const [pageText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
     const sharePageResponses = await Promise.all(sharedResultIds.map(id => request(`/share/${id}/`)));
     const sharePageTexts = await Promise.all(sharePageResponses.map(response => response.text()));
