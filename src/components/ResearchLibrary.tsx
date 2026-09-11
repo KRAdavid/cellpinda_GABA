@@ -171,7 +171,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
               </div>
             </details>
           </div>
-          <div className="research-library-sources"><h4>직접 확인하는 원문</h4>{(claim.reviewedAt || claim.evidenceHash) ? <p className="research-library-provenance">{claim.reviewedAt ? `검토일 ${claim.reviewedAt}` : null}{claim.reviewedAt && claim.evidenceHash ? ' · ' : null}{claim.evidenceHash ? <><span>근거 식별자 </span><code title={claim.evidenceHash}>{claim.evidenceHash.slice(0, 12)}…</code></> : null}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
+          <div className="research-library-sources"><h4>더 궁금할 때 출처 보기</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료 확인일 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
             <a key={`${source.url}-${source.title}`} href={source.url!} target="_blank" rel="noopener noreferrer">{source.title} <span aria-label="새 창">↗</span></a>,
           )}</div>
         </details>
