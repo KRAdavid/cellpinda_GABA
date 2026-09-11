@@ -32,7 +32,7 @@ function reviewDestination(review: PublicReview) {
     const url = new URL(review.sourceUrl);
     if (url.protocol !== 'https:' || url.hostname !== 'smartstore.naver.com' || !['/cellpinda', '/cellpinda/'].includes(url.pathname)) return null;
     const productId = 'gaba1500';
-    return { url: url.href, productId, label: '가바 1500 · 스마트스토어 후기 읽기' };
+    return { url: url.href, productId, label: '스마트스토어에서 제품·후기 확인' };
   } catch { return null; }
 }
 
@@ -89,7 +89,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
           </article>)}
         </div>
       </div>
-      <div className="review-experience-next"><p>경험을 살펴봤다면, 내용량과 구성을 다시 확인하세요.</p><a href="#products">제품 비교로 돌아가기 <span aria-hidden="true">↗</span></a></div>
+      <div className="review-experience-next"><p>경험을 살펴봤다면, 내용량과 구성을 다시 확인하세요.</p><a href="#products">제품 구성으로 돌아가기 <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>;
 }

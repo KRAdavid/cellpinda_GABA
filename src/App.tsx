@@ -36,28 +36,45 @@ function track(name:string,properties:Record<string,string>={}){
  const enriched={...properties,...(campaignId?{campaignId}:{}),...(referralId?{referralId}:{})};
  eventQueue=eventQueue.then(()=>fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({eventId:crypto.randomUUID(),flowId,name:eventMap[name]||name,properties:enriched}),keepalive:true}).then(()=>{}).catch(()=>{}));
 }
+async function fetchContent(url:string, signal:AbortSignal, timeoutMs=8000):Promise<Response>{
+ const controller=new AbortController();
+ let timedOut=false;
+ const abortFromParent=()=>controller.abort();
+ signal.addEventListener('abort',abortFromParent,{once:true});
+ const timer=window.setTimeout(()=>{timedOut=true;controller.abort()},timeoutMs);
+ try{
+  return await fetch(url,{signal:controller.signal});
+ }catch(error){
+  if(signal.aborted)throw error;
+  if(timedOut)throw Error('Content request timed out');
+  throw error;
+ }finally{
+  window.clearTimeout(timer);
+  signal.removeEventListener('abort',abortFromParent);
+ }
+}
 async function loadContent(signal:AbortSignal):Promise<Content>{
  const endpoint=apiEndpoint('/api/content');
  if(endpoint){
   try{
-   const api=await fetch(endpoint,{signal});
+   const api=await fetchContent(endpoint,signal);
    if(api.ok)return api.json();
   }catch(error){
    if((error as Error).name==='AbortError')throw error;
   }
  }
- const fallback=await fetch(`${import.meta.env.BASE_URL}data/content.json`,{signal});
+ const fallback=await fetchContent(`${import.meta.env.BASE_URL}data/content.json`,signal);
  if(!fallback.ok)throw Error('Content unavailable');
  return fallback.json();
 }
 export default function App(){
- const [content,setContent]=useState<Content|null>(null),[error,setError]=useState(false),[loading,setLoading]=useState(true),[menu,setMenu]=useState(false);
+ const [content,setContent]=useState<Content|null>(null),[error,setError]=useState(false),[loading,setLoading]=useState(true),[menu,setMenu]=useState(false),[retryKey,setRetryKey]=useState(0);
  const currentPath=relativePath(location.pathname);
  const requestedView = new URLSearchParams(location.search).get('view');
  const operationsView = requestedView === 'ops' || currentPath === '/ops';
  const accountView = requestedView === 'account' || currentPath === '/account';
  const adminView = requestedView === 'admin' || currentPath === '/admin';
- useEffect(()=>{const c=new AbortController();loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[]);
+ useEffect(()=>{const c=new AbortController();setLoading(true);setError(false);loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[retryKey]);
  useEffect(()=>{
   const value=new URLSearchParams(location.search).get('rhythm');
   const type=value && Object.prototype.hasOwnProperty.call(resultTypes,value) ? resultTypes[value as RhythmId] : null;
@@ -95,10 +112,10 @@ export default function App(){
  {content ? <>
  <GabaStory claims={content.claims}/>
  <section id="fermentation" className="section sage"><div className="wrap"><div className="section-head"><div><p className="chapter">03 / 왜 발효가바?</p><h2>한 포의 출처를<br/>네 가지 질문으로.</h2></div><p>기술 용어보다 소비자가 확인할 차이를 먼저 살펴봅니다.<br/>자료로 확인되는 내용만 차례로 공개합니다.</p></div><div className="fermentation-questions">{[['무엇으로 만드나요?','셀핀다는 발효 가바 제품으로 소개됩니다.'],['어떻게 만드나요?','공개 특허 문헌에는 유산균에 L-글루탐산을 공급해 GABA를 생산하는 방법이 나옵니다.'],['어떻게 확인하나요?','발효 → 분리·회수 → 정량분석 → 품질확인의 흐름으로 자료를 살펴봅니다.'],['왜 셀핀다인가요?','확인된 제품 구성과 표시사항을 스마트스토어에서 비교해 보세요.']].map(([question,answer],index)=><article key={question}><span>0{index+1}</span><h3>{question}</h3><p>{answer}</p></article>)}</div><div className="process">{['발효','분리·회수','정량분석','품질 확인'].map((t,i)=><div key={t}><span>0{i+1}</span><h3>{t}</h3></div>)}</div>{content.claims.filter(c=>!c.id.startsWith('product-')&&!c.id.startsWith('research-')&&!c.id.startsWith('gaba-')&&c.publicText).map(c=><details className="claim" key={c.id}><summary>{c.publicText}</summary><div>{c.sources.filter(s=>s.url).map(s=><a key={s.url} href={s.url!} target="_blank" rel="noreferrer">공개 자료 확인 · {s.title} ↗ </a>)}</div></details>)}</div></section>
- <section id="products" className="section wrap"><div className="section-head"><div><p className="chapter">04 / 제품 비교</p><h2>선택에 필요한 차이를,<br/>한눈에.</h2></div><p>현재 판매 제품의 내용량과 구성을 확인하세요.<br/>리듬 체크 후 제품의 구성과 표시사항을 스스로 비교해 보세요.</p></div><div className="products">{content.products.map(p=><article id={`product-${p.id}`} className="product" key={p.id}><img src={asset(`assets/product-${p.amountMg}.jpg`)} alt={`${p.name} 실제 제품 포장`} decoding="async"/><div className="product-body"><h3>{p.name}</h3><dl><div><dt>1포 내용량</dt><dd>{p.amountMg.toLocaleString()} mg</dd></div><div><dt>구성</dt><dd>{p.servings}포</dd></div><div><dt>총 내용량</dt><dd>{p.totalG} g</dd></div><div><dt>가격</dt><dd>{p.priceDisplay || '스마트스토어에서 확인'}</dd></div><div><dt>맛·섭취·휴대</dt><dd>스마트스토어와 포장 표시사항 확인</dd></div></dl><div className="product-boundary"><p>구매 전에 확인할 것</p><ul><li><strong>구성</strong> {p.name} {p.amountMg.toLocaleString()} mg × {p.servings}포</li><li><strong>재고·가격</strong> {p.availability || '스마트스토어에서 확인'}</li><li><strong>섭취 방법</strong> 스마트스토어와 제품 표시사항 확인</li></ul></div><p><a className="text-link" href="#reviews" onClick={()=>{track('review_nav',{productId:p.id,path:'/products'});track('review_source_click',{productId:p.id,path:'/products'})}}>{p.name} 구매자 경험 보기 →</a></p><a className="button outline" href={p.officialUrl} target="_blank" rel="noreferrer" onClick={()=>{track('purchase_click',{productId:p.id,path:'/products'});track('purchase_cta_click',{productId:p.id,path:'/products'})}}>스마트스토어에서 구성·재고 확인 <ArrowUpRight size={18}/></a></div></article>)}</div><p className="note">상품 구성 기준 · 확인일 2026.09.10. 가격·재고·섭취 방법·주의사항은 구매 시 스마트스토어와 제품 표시사항에서 확인하세요.</p><PurchaseQuestions products={content.products} onEvent={track} />{content.products.length>1&&<ProductShare onEvent={track}/>}</section>
+ <section id="products" className="section wrap"><div className="section-head"><div><p className="chapter">04 / 제품 구성</p><h2>한 포에 담긴 구성을,<br/>한눈에.</h2></div><p>현재 판매 제품의 내용량과 구성을 확인하세요.<br/>리듬 체크 후 제품의 구성과 표시사항을 스스로 비교해 보세요.</p></div><div className="products">{content.products.map(p=><article id={`product-${p.id}`} className="product" key={p.id}><img src={asset(`assets/product-${p.amountMg}.jpg`)} alt={`${p.name} 실제 제품 포장`} decoding="async"/><div className="product-body"><h3>{p.name}</h3><dl><div><dt>1포 내용량</dt><dd>{p.amountMg.toLocaleString()} mg</dd></div><div><dt>구성</dt><dd>{p.servings}포</dd></div><div><dt>총 내용량</dt><dd>{p.totalG} g</dd></div><div><dt>가격</dt><dd>{p.priceDisplay || '스마트스토어에서 확인'}</dd></div><div><dt>맛·섭취·휴대</dt><dd>스마트스토어와 포장 표시사항 확인</dd></div></dl><div className="product-boundary"><p>구매 전에 확인할 것</p><ul><li><strong>구성</strong> {p.name} {p.amountMg.toLocaleString()} mg × {p.servings}포</li><li><strong>재고·가격</strong> {p.availability || '스마트스토어에서 확인'}</li><li><strong>섭취 방법</strong> 스마트스토어와 제품 표시사항 확인</li></ul></div><p><a className="text-link" href="#reviews" onClick={()=>{track('review_nav',{productId:p.id,path:'/products'});track('review_source_click',{productId:p.id,path:'/products'})}}>{p.name} 구매자 경험 보기 →</a></p><a className="button outline" href={p.officialUrl} target="_blank" rel="noreferrer" onClick={()=>{track('purchase_click',{productId:p.id,path:'/products'});track('purchase_cta_click',{productId:p.id,path:'/products'})}}>스마트스토어에서 구성·재고 확인 <ArrowUpRight size={18}/></a></div></article>)}</div><p className="note">상품 구성 기준 · 확인일 2026.09.10. 가격·재고·섭취 방법·주의사항은 구매 시 스마트스토어와 제품 표시사항에서 확인하세요.</p><PurchaseQuestions products={content.products} onEvent={track} />{content.products.length>1&&<ProductShare onEvent={track}/>}</section>
  <ReviewExperience reviews={content.reviews} onOpen={productId=>{track('review_open',{productId});track('review_source_click',{productId,path:'/reviews'})}}/>
  <ResearchLibrary claims={content.claims} onOpen={()=>track('evidence_opened',{path:'/research'})}/>
- </> : <section className="section wrap content-status" aria-live="polite"><p className="chapter">셀핀다 발효가바</p><h2>{loading?'정보를 준비하고 있어요.':'잠시 후 다시 확인해 주세요.'}</h2><p>{loading?'제품 구성과 연구 자료를 불러오는 중입니다.':'기본 리듬 체크는 바로 사용할 수 있어요. 제품 구성과 연구 자료는 스마트스토어에서 확인할 수 있습니다.'}</p>{error&&!loading?<a className="button outline" href="https://smartstore.naver.com/cellpinda" target="_blank" rel="noreferrer">스마트스토어에서 확인 ↗</a>:null}</section>}
+ </> : <section className="section wrap content-status" aria-live="polite"><p className="chapter">셀핀다 발효가바</p><h2>{loading?'정보를 준비하고 있어요.':'잠시 후 다시 확인해 주세요.'}</h2><p>{loading?'제품 구성과 연구 자료를 불러오는 중입니다.':'기본 리듬 체크는 바로 사용할 수 있어요. 제품 구성과 연구 자료는 스마트스토어에서 확인할 수 있습니다.'}</p>{error&&!loading?<div className="actions"><a className="button outline" href="https://smartstore.naver.com/cellpinda" target="_blank" rel="noreferrer">스마트스토어에서 확인 ↗</a><button type="button" className="button outline" onClick={()=>setRetryKey(value=>value+1)}>자료 다시 불러오기</button></div>:null}</section>}
  <SevenDayChallenge onEvent={track}/>
  <section className="closing"><div className="wrap between"><h2>오늘의 나를 돌아보는 시간.<br/>지금, 시작해 볼까요?</h2><a className="button light" href="#rhythm">1분 리듬 체크 <ArrowRight/></a></div></section></main><footer className="wrap footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>하루 리듬을 돌아보고, 충분히 알고 선택하세요.</p><a href="https://smartstore.naver.com/cellpinda" target="_blank" rel="noreferrer">스마트스토어 ↗</a><a href={`${siteRoot}?view=account`}>내 기록</a></footer></>;
 }
