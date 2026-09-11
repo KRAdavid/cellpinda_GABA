@@ -58,3 +58,7 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 개인정보 경계 문구(`이름·연락처·문항별 답변은 보내지 않습니다.`)와 동의 UI의 모바일 배치를 계약 검사로 고정했다. `validate:ui-contract`, `typecheck`, 전체 79개 테스트, production build가 통과했다.
 
 패널은 푸터 링크와 같은 행에 섞이지 않고 전체 폭의 별도 행으로 표시되며, 390px 화면에서도 가로 넘침 없이 배치된다.
+
+## 2026-09-12 스마트스토어 후기 목적지 라이브 회귀 확인
+
+라이브 공개 JSON에서 제품 `officialUrl`과 승인된 후기 목적지 `sourceUrl`이 모두 `https://smartstore.naver.com/cellpinda/products/4701017202`인지 확인했다. 후기 목적지 ID·개수까지 검증하는 smoke 보강 커밋 `18f866f`의 [GitHub Actions 34632823311](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34632823311)이 검증·Pages 게시·라이브 smoke를 통과했다.
