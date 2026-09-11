@@ -24,6 +24,7 @@ if (!pulse.goalId || !/^\d{4}-\d{2}-\d{2}T/.test(pulse.generatedAt)) fail('pulse
 if (!/^[a-f0-9]{64}$/.test(pulse.snapshotHash || '')) fail('pulse snapshot hash is malformed');
 if (!pulse.teaserGate || pulse.teaserGate.taskId !== 'B4') fail('teaser gate is missing');
 if (!Array.isArray(pulse.roleCoverage) || pulse.roleCoverage.length !== 6 || pulse.roleCoverage.some(role => !role || typeof role.id !== 'string' || typeof role.label !== 'string' || role.status !== 'present')) fail('TF role coverage is missing or malformed');
+if (!pulse.meetingProtocol || typeof pulse.meetingProtocol.cadence !== 'string' || typeof pulse.meetingProtocol.quorum !== 'string' || !Array.isArray(pulse.meetingProtocol.record) || pulse.meetingProtocol.record.length === 0) fail('meeting protocol is missing or malformed');
 
 let previousHeartbeat;
 try {
@@ -60,6 +61,7 @@ const heartbeat = {
   stateChanged,
   requiresHumanDecision: Boolean(pulse.requiresHumanDecision),
   continuation: safeContinuation(pulse.continuation),
+  meetingProtocol: {cadence: pulse.meetingProtocol.cadence, quorum: pulse.meetingProtocol.quorum, record: [...pulse.meetingProtocol.record]},
   roleCoverage: pulse.roleCoverage.map(safeRole),
   counts: pulse.counts,
   verifying: Array.isArray(pulse.verifying) ? pulse.verifying : [],

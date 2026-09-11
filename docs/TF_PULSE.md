@@ -10,6 +10,8 @@ GitHub Actions의 `TF decision pulse` workflow가 6시간마다 같은 명령을
 
 `pnpm run validate:tf-pulse`는 pulse가 ACTIVE Goal Contract·canonical 그래프·B4 티저 게이트와 일치하는지, 모든 활성 작업에 서로 다른 담당자·독립 검증자·다음 행동이 있는지, 입력 대기 작업에 `requiredInputs`가 있는지, 자동화가 사람의 반대 의견을 만들어내지 않았는지를 배포 전에 확인한다. 필수 역할의 책임·권한·매칭어는 `data/tf-role-registry.json`에서 읽고, 마케팅·소비자심리, 연구·근거, 제품·표시, 스토리·UX·프런트, 데이터·판매처, QA·감사 역할군이 그래프에 함께 남아 있는지 검사한다. 이는 역할 책임의 존재를 확인하는 규칙이며 실제 전문가 자격·섭외를 의미하지 않는다. 각 pulse에는 그래프 상태 지문(`snapshotHash`), 역할군 상태(`roleCoverage`), 회의 안건(`meetingAgenda`), 외부 입력 게이트(`inputGates`)와 사람 판단 필요 여부(`requiresHumanDecision`)가 함께 기록된다. 안전한 heartbeat에도 같은 역할 ID·라벨·상태를 보존해 다음 실행이 TF 구성을 재현하지 못한 경우 배포를 차단한다. heartbeat는 직전 상태 지문과 비교한 `stateChanged`도 기록해 새 결정과 반복 안건을 구분한다.
 
+Goal Contract의 `decisionProtocol`은 각 pulse의 `meetingProtocol`으로 복제된다. 운영 큐·공개 TF pulse·heartbeat가 같은 회의 주기, 정족수, 필수 기록 항목을 보여 주며, 정족수 규칙이 바뀌면 상태 지문도 달라져 다음 회의에서 변경을 확인할 수 있다. 이 패킷은 회의 운영을 재현하기 위한 공개 요약이며 실제 참석·자격·승인을 증명하지 않는다.
+
 로컬에서 `pnpm run tf:pulse:heartbeat`를 직접 실행하면 별도 파일을 준비하지 않아도 최신 pulse를 내부적으로 생성해 `data/tf-pulse-heartbeat.json`에 저장한다. CI처럼 `tf-pulse.json` 경로를 인자로 주면 그 파일을 명시적으로 검증하며, 존재하지 않는 명시 경로는 조용히 대체하지 않는다.
 
 ```sh

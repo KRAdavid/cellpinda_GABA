@@ -15,6 +15,7 @@ const metricIds = contract.successMetrics.map(metric => metric.id);
 if (new Set(metricIds).size !== metricIds.length) fail('success metric ids must be unique');
 if (!contract.successMetrics.some(metric => metric.id === 'M5' && metric.status === 'BLOCKED')) fail('real purchase attribution must stay blocked until order reconciliation exists');
 if (!Array.isArray(contract.workstreams) || contract.workstreams.length < 3) fail('workstreams must include the active operating areas');
+if (!contract.decisionProtocol || typeof contract.decisionProtocol.cadence !== 'string' || contract.decisionProtocol.cadence.trim().length < 10 || typeof contract.decisionProtocol.quorum !== 'string' || contract.decisionProtocol.quorum.trim().length < 10 || !Array.isArray(contract.decisionProtocol.record) || contract.decisionProtocol.record.length < 2 || contract.decisionProtocol.record.some(item => typeof item !== 'string' || item.trim().length < 2)) fail('decisionProtocol must define cadence, quorum and records');
 for (const stream of contract.workstreams) {
   if (!stream.id || !stream.name || !stream.lead || !stream.verifier || !stream.status || !stream.nextAction) fail(`incomplete workstream ${stream.id ?? '(unknown)'}`);
 }

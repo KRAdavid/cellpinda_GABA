@@ -3,16 +3,26 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-11T00:47:34.605Z",
-  "snapshotHash": "4d56dc06a79df6f97a80cd32b7e878a0cebfefc7a56f41ba8c1f7c7bcd9ee9ca",
+  "generatedAt": "2026-09-11T00:54:14.624Z",
+  "snapshotHash": "8a1221cfe50d4c5ac88425d9d3e090d6c054228167031831f41859d8adab70f6",
   "previousSnapshotHash": "4d56dc06a79df6f97a80cd32b7e878a0cebfefc7a56f41ba8c1f7c7bcd9ee9ca",
-  "stateChanged": false,
+  "stateChanged": true,
   "requiresHumanDecision": true,
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-11T06:47:34.605Z",
+    "nextReviewAt": "2026-09-11T06:54:14.624Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
+  },
+  "meetingProtocol": {
+    "cadence": "자동 pulse는 6시간마다 상태를 재평가하고, 사람이 필요한 안건은 다음 회의 큐에 유지한다.",
+    "quorum": "내부 작업은 실행 담당자와 독립 검증자가 함께 판단한다. 공개·외부 약속은 해당 책임자와 TF 리드가 추가로 확인한다.",
+    "record": [
+      "판정과 선택한 기준",
+      "확인한 근거·증거 지문",
+      "반대 의견 또는 재검토 조건",
+      "담당자·검증자·다음 조치"
+    ]
   },
   "roleCoverage": [
     {

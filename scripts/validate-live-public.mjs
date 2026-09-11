@@ -67,6 +67,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicPulse.generatedAt, queue.pulse.generatedAt, 'live public TF pulse packet timestamp must match the queue');
     assert.equal(publicPulse.snapshotHash, queue.pulse.snapshotHash, 'live public TF pulse packet hash must match the queue');
     assert.equal(publicPulse.stateChanged, queue.pulse.stateChanged, 'live public TF pulse change marker must match the queue');
+    assert.deepEqual(publicPulse.meetingProtocol, queue.pulse.meetingProtocol, 'live public TF pulse meeting protocol must match the queue');
+    assert.ok(publicPulse.meetingProtocol?.cadence && publicPulse.meetingProtocol?.quorum && Array.isArray(publicPulse.meetingProtocol?.record), 'live public TF pulse meeting protocol is missing');
     validateContinuation(publicPulse.continuation, 'live public pulse');
     assert.deepEqual(publicPulse.continuation, queue.pulse.continuation, 'live public pulse continuation loop must match the queue');
     assert.equal(publicAudit.mode, 'public_goal_audit', 'live public goal audit packet must use the public schema');

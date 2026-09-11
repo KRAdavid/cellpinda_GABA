@@ -11,6 +11,7 @@ if (contract.status !== 'ACTIVE') fail('the pulse requires an ACTIVE Goal Contra
 if (graph.goalId !== contract.goalId) fail('task graph is not tied to the Goal Contract');
 if (roleRegistry.goalId !== contract.goalId || roleRegistry.status !== contract.status || !Array.isArray(roleRegistry.roles) || roleRegistry.roles.length !== 6) fail('TF role registry is missing or not tied to the active Goal Contract');
 if (!Array.isArray(graph.tasks) || graph.tasks.length === 0) fail('task graph is empty');
+if (!contract.decisionProtocol || typeof contract.decisionProtocol.cadence !== 'string' || contract.decisionProtocol.cadence.trim().length < 10 || typeof contract.decisionProtocol.quorum !== 'string' || contract.decisionProtocol.quorum.trim().length < 10 || !Array.isArray(contract.decisionProtocol.record) || contract.decisionProtocol.record.length === 0 || contract.decisionProtocol.record.some(item => typeof item !== 'string' || item.trim().length < 2)) fail('decision protocol is missing or malformed');
 
 const allowed = new Set(graph.stateMachine);
 const tasksById = new Map();
@@ -115,6 +116,7 @@ const snapshotHash = createHash('sha256').update(JSON.stringify({
   goalId: contract.goalId,
   contractStatus: contract.status,
   contractMetrics: contract.successMetrics,
+  decisionProtocol: contract.decisionProtocol,
   graphCheckedAt: graph.checkedAt,
   tasks: graph.tasks,
   teaserStatus: teaser.status,
@@ -144,6 +146,11 @@ const result = {
   snapshotHash,
   requiresHumanDecision,
   continuation,
+  meetingProtocol: {
+    cadence: contract.decisionProtocol.cadence,
+    quorum: contract.decisionProtocol.quorum,
+    record: [...contract.decisionProtocol.record],
+  },
   teaserGate: {status: teaser.status, taskId: 'B4', taskState: tasksById.get('B4')?.state ?? null},
   roleCoverage: roleCoverage.map(({id, label}) => ({id, label, status: 'present'})),
   counts,
