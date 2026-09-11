@@ -1,4 +1,5 @@
 import { createServer } from 'node:http';
+import { spawn } from 'node:child_process';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
@@ -163,5 +164,19 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
 }
 if (process.argv[1] && resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
   const {server}=createApi();
-  server.listen(4318,'127.0.0.1',()=>process.stdout.write('Cellpinda local API: http://127.0.0.1:4318\nOperator credential is stored in var/operator-token; never publish this file.\n'));
+  const parsedPort = Number.parseInt(process.env.CELLPINDA_API_PORT || '4318', 10);
+  const port = Number.isInteger(parsedPort) && parsedPort > 0 && parsedPort < 65536 ? parsedPort : 4318;
+  let auditWatcher;
+  const startLocalAuditWatcher = () => {
+    auditWatcher = spawn(process.execPath, [resolve(process.cwd(), 'scripts/watch-local-audit.mjs')], {stdio: 'inherit'});
+    auditWatcher.on('error', error => process.stderr.write(`로컬 자료 자동 감시를 시작하지 못했습니다: ${error.message}\n`));
+  };
+  server.once('listening', () => {
+    process.stdout.write(`Cellpinda local API: http://127.0.0.1:${port}\nOperator credential is stored in var/operator-token; never publish this file.\n`);
+    startLocalAuditWatcher();
+  });
+  server.on('close', () => {
+    if (auditWatcher && !auditWatcher.killed) auditWatcher.kill('SIGTERM');
+  });
+  server.listen(port,'127.0.0.1');
 }

@@ -60,7 +60,7 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 두 로컬 입력을 전체 목표 판정과 함께 확인하려면 로컬 PC에서 `pnpm run audit:goal:local`을 실행한다. 회의용 JSON을 자동 저장하려면 `pnpm run audit:goal:local:json`을 사용한다. 이 명령은 `audit-local-materials`와 `audit-local-orders`를 읽기 전용으로 다시 실행해 완제품 후보·제품군·주문 파일 구조·상태 필드 유무·가장 최근 파일 수정 시각을 비공개 `tmp/local-goal-audit.json`에 붙이며, 스캔 자체가 실패하면 종료 코드 1로 알려 준다. 자료 스캔 성공은 B2 표시 승인, 과거 주문 수량은 E1 실구매·환불 대사를 의미하지 않는다. 결과에는 개인정보·원문 행·로컬 경로를 넣지 않고 공개 export도 변경하지 않으며, CI 기본 감사는 외부 폴더가 없어도 재현되도록 옵션을 생략한다.
 
-자료 폴더에 파일이 추가되거나 수정될 때 회의용 패킷을 자동으로 다시 만들려면 `pnpm run audit:watch`를 실행한다. 이 watcher는 두 매니페스트의 폴더를 감시하고 750ms 동안 변경을 묶은 뒤 `tmp/local-goal-audit.json`만 갱신한다. 원문 행·개인정보·로컬 경로는 공개 export와 CI artifact로 이동하지 않으며, `Ctrl+C`로 감시를 종료할 수 있다. 감시할 폴더를 바꾸려면 `CELLPINDA_MATERIAL_ROOTS` 또는 `CELLPINDA_ORDER_ROOTS`에 세미콜론으로 구분한 경로를 지정한다.
+로컬 API를 `pnpm server`로 실행하면 API가 포트를 연 직후 자료 watcher도 자동으로 시작한다. watcher는 두 매니페스트의 폴더를 감시하고 750ms 동안 변경을 묶은 뒤 `tmp/local-goal-audit.json`만 갱신한다. 원문 행·개인정보·로컬 경로는 공개 export와 CI artifact로 이동하지 않으며, API를 종료하면 감시도 함께 정리된다. API 없이 감시만 실행할 때는 `pnpm run audit:watch`를 사용할 수 있고 `Ctrl+C`로 종료한다. 감시할 폴더를 바꾸려면 `CELLPINDA_MATERIAL_ROOTS` 또는 `CELLPINDA_ORDER_ROOTS`에 세미콜론으로 구분한 경로를 지정한다.
 
 로컬 API와 Vite를 함께 실행하면 운영 화면이 `/api/ops/local-audit`에서 이 비공개 패킷의 안전한 요약을 60초마다 읽어 완제품 후보·누락·주문 파일 수·1500 과거 집계를 중간 확인 카드에 표시한다. 감사 사이클은 이전 로컬 입력 지문을 비교한 `localStateChanged`도 기록해 새 자료와 반복 상태를 구분한다. 응답은 원문 행·개인정보·로컬 경로를 포함하지 않으며, 스냅샷이 없거나 갱신이 실패해도 마지막 요약을 유지한다. GitHub Pages처럼 API가 없는 정적 환경에서는 요청을 만들지 않고 공개 운영 큐만 사용한다.
 

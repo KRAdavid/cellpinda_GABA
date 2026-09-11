@@ -538,3 +538,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 `pnpm run audit:watch`를 실제 실행해 자료 매니페스트의 로컬 루트를 감시하고, 초기 감사 후 파일 이벤트를 750ms 단위로 묶어 `tmp/local-goal-audit.json`을 갱신하는 것을 확인했다. 실행 중인 로컬 API의 `/api/ops/local-audit`도 HTTP 200으로 완제품 후보·주문 입력 대기·목표 상태의 비공개 요약을 반환했다. 원문 행·개인정보·로컬 경로는 응답과 공개 export에 포함되지 않는다.
 
 이번 확인은 로컬 자료가 운영 중간 확인 화면으로 자동 연결되는 경로를 증명하며, 제품 표시 최종 승인·실주문·환불 대사를 자동 완료한 것으로 해석하지 않는다.
+
+## 2026-09-12 로컬 API 자동 감시 시작 연결
+
+`pnpm server`가 로컬 API 포트를 성공적으로 연 직후 `scripts/watch-local-audit.mjs`를 자식 프로세스로 시작하도록 연결했다. `CELLPINDA_API_PORT`로 충돌 없는 포트를 선택해 실행을 검증했으며, API 시작 로그 뒤에 초기 로컬 감사·감시 로그가 이어지고 종료 시 watcher가 함께 정리되는 것을 확인했다. API가 포트를 열지 못하면 watcher를 시작하지 않으므로 중복 실행 시 불필요한 감시 프로세스가 생기지 않는다. 감사 결과는 기존처럼 비공개 `tmp/local-goal-audit.json`에만 기록되고 공개 export는 변경하지 않는다.
