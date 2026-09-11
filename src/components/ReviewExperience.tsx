@@ -24,9 +24,11 @@ const readingQuestions = [
   { title: '다른 경험도 있을까요?', text: '좋았던 점과 아쉬웠던 점을 함께 읽어 보세요. 한 사람의 경험이 모두에게 같지는 않습니다.' },
 ];
 
+const approvedReviewCopy = '스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.';
+
 function reviewDestination(review: PublicReview) {
   // The Smart Store destination remains available independently of quoted reviews.
-  if (review.status !== 'approved' || review.id !== 'shop-review-destination-1500' || !review.publicText || !review.sourceUrl) return null;
+  if (review.status !== 'approved' || review.id !== 'shop-review-destination-1500' || review.publicText !== approvedReviewCopy || !review.sourceUrl) return null;
   try {
     const url = new URL(review.sourceUrl);
     if (url.protocol !== 'https:' || url.hostname !== 'smartstore.naver.com' || url.pathname !== '/cellpinda/products/4701017202') return null;

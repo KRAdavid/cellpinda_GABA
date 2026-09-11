@@ -84,6 +84,7 @@ requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
 requireMatch(review, /가바 1500 · 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
+requireMatch(review, /스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요\./, 'review destination must keep the approved consumer message');
 requireMatch(app, /content\.reviews\?\.length \? <a href="#reviews"[\s\S]*?}>후기 읽기/, 'hero product card must expose the approved review destination');
 requireMatch(review, /quotes\.length > 0 \|\| destinations\.length > 0/, 'review reading guide must remain visible with an approved Smart Store destination');
 requireMatch(indexHtml, /rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root canonical metadata is missing');
