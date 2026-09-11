@@ -3,7 +3,7 @@
   "goalId": "GL-2026-CELL-GABA-001",
   "title": "셀핀다가바 소비자 체험형 배포 사이트 운영",
   "sourceDocument": "셀핀다_AI기업_운영체제_상세설계서_v1.0.docx",
-  "checkedAt": "2026-09-11",
+  "checkedAt": "2026-09-12",
   "status": "ACTIVE",
   "priority": "P1",
   "owner": "대표·TF 리드",
@@ -28,7 +28,7 @@
       "name": "구매 연결",
       "target": "제품 카드와 구매 전 질문의 확인 링크가 스마트스토어 판매처로 연결된다.",
       "status": "MET",
-      "evidence": ["src/App.tsx", "src/components/PurchaseQuestions.tsx"]
+      "evidence": ["src/App.tsx", "src/components/PurchaseQuestions.tsx", "scripts/validate-ui-contract.mjs", "scripts/validate-live-public.mjs", "https://smartstore.naver.com/cellpinda/products/4701017202"]
     },
     {
       "id": "M4",
