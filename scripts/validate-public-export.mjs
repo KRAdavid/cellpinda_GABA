@@ -84,6 +84,30 @@ const validateDecisionOptions = (options, state, label) => {
 const validateContinuation = (value, label) => {
   if (!value || !['close', 'human-gate-monitor', 'continue-execution', 'reassess-next-cycle'].includes(value.mode) || value.cadenceHours !== 6 || !/^\d{4}-\d{2}-\d{2}T/.test(value.nextReviewAt || '') || typeof value.nextAction !== 'string' || value.nextAction.trim().length < 10) fail(`${label} continuation loop metadata is missing or malformed`);
 };
+const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
+const validateSafeExecution = (value, label) => {
+  if (value === undefined) return;
+  requireExactKeys(value, ['mode', 'status', 'validatedAt', 'executionBoundary', 'preparation', 'checks', 'candidateTaskIds', 'humanGateTaskIds'], `${label} safe execution`);
+  if (value.mode !== 'safe_internal_tf_run' || value.status !== 'MET' || !/^\d{4}-\d{2}-\d{2}T/.test(value.validatedAt || '')) fail(`${label} safe execution identity is malformed`);
+  requireExactKeys(value.executionBoundary, ['state', 'risk', 'externalEffects'], `${label} safe execution boundary`);
+  if (value.executionBoundary.state !== 'READY' || value.executionBoundary.risk !== 'B_INTERNAL_WRITE' || value.executionBoundary.externalEffects !== false) fail(`${label} safe execution boundary is unsafe`);
+  requireExactKeys(value.preparation, ['id', 'risk', 'status'], `${label} safe execution preparation`);
+  if (value.preparation.id !== 'sync-public-data' || value.preparation.risk !== 'B_INTERNAL_WRITE' || value.preparation.status !== 'MET') fail(`${label} safe execution preparation is malformed`);
+  if (!Array.isArray(value.checks) || JSON.stringify(value.checks.map(item => item?.id)) !== JSON.stringify(expectedSafeChecks)) fail(`${label} safe execution checks are incomplete`);
+  for (const check of value.checks) {
+    requireExactKeys(check, ['id', 'risk', 'status'], `${label} safe execution check`);
+    if (check.risk !== 'A_READ' || check.status !== 'MET') fail(`${label} safe execution check is not read-only and successful`);
+  }
+  if (!Array.isArray(value.candidateTaskIds) || !Array.isArray(value.humanGateTaskIds)) fail(`${label} safe execution task lists are malformed`);
+};
+validateSafeExecution(operationsQueue.pulse?.safeExecution, 'operations queue pulse');
+validateSafeExecution(publicPulse.safeExecution, 'public pulse');
+if ((operationsQueue.pulse?.safeExecution === undefined) !== (publicPulse.safeExecution === undefined) || JSON.stringify(operationsQueue.pulse?.safeExecution) !== JSON.stringify(publicPulse.safeExecution)) fail('safe execution summary is out of sync between the operations queue and public pulse');
+if (publicPulse.safeExecution) {
+  const expectedHumanGates = publicPulse.meetingAgenda.filter(item => ['VERIFYING', 'WAITING', 'BACKLOG', 'REWORK'].includes(item.state)).map(item => item.taskId);
+  const expectedCandidates = publicPulse.meetingAgenda.filter(item => item.state === 'READY').map(item => item.taskId);
+  if (JSON.stringify(publicPulse.safeExecution.humanGateTaskIds) !== JSON.stringify(expectedHumanGates) || JSON.stringify(publicPulse.safeExecution.candidateTaskIds) !== JSON.stringify(expectedCandidates)) fail('public safe execution task lists are out of sync');
+}
 for (const [index, gate] of publicPulse.inputGates.entries()) {
   requireExactKeys(gate, ['taskId', 'state', 'chair', 'quorum', 'requiredInputs', 'nextAction'], `public pulse input gate ${index}`);
   const task = taskGraph.tasks.find(candidate => candidate.id === gate.taskId);
@@ -111,6 +135,8 @@ for (const state of taskGraph.stateMachine) if (publicPulse.counts[state] !== ta
 if (!publicAudit.taskCounts || typeof publicAudit.taskCounts !== 'object') fail('public goal audit task counts are missing');
 for (const state of taskGraph.stateMachine) if (publicAudit.taskCounts[state] !== taskGraph.tasks.filter(task => task.state === state).length) fail(`public goal audit count is out of sync for ${state}`);
 if (JSON.stringify(publicAudit.taskCounts) !== JSON.stringify(publicPulse.counts)) fail('public goal audit and TF pulse counts differ');
+validateSafeExecution(publicAudit.milestones?.tfPulse?.safeExecution, 'public audit pulse');
+if (JSON.stringify(publicAudit.milestones?.tfPulse?.safeExecution) !== JSON.stringify(publicPulse.safeExecution)) fail('public audit safe execution summary is out of sync');
 if (!publicAudit.milestones || publicAudit.milestones.masterIndex?.status !== 'MET' || publicAudit.milestones.masterIndex.claims !== content.claims.length || publicAudit.milestones.masterIndex.researchRecords !== master.records.length || publicAudit.milestones.publicProduct?.status !== 'MET' || publicAudit.milestones.publicProduct.products !== content.products.length || publicAudit.milestones.publicProduct.smartStoreOnly !== true || publicAudit.milestones.publicProduct.removed750 !== true || publicAudit.milestones.tfPulse?.status !== 'MET' || publicAudit.milestones.tfPulse.generatedAt !== publicPulse.generatedAt || publicAudit.milestones.tfPulse.snapshotHash !== publicPulse.snapshotHash || publicAudit.milestones.tfPulse.stateChanged !== publicPulse.stateChanged || typeof publicAudit.milestones.tfPulse.stateChanged !== 'boolean' || publicAudit.milestones.tfPulse.requiresHumanDecision !== publicPulse.requiresHumanDecision || JSON.stringify(publicAudit.milestones.tfPulse.continuation) !== JSON.stringify(publicPulse.continuation)) fail('public goal audit milestones are missing or out of sync');
 validateContinuation(publicAudit.milestones.tfPulse.continuation, 'public audit pulse');
 const publicGatedTasks = taskGraph.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state));

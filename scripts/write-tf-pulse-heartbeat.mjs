@@ -5,7 +5,10 @@ import {dirname, resolve} from 'node:path';
 
 const execFileAsync = promisify(execFile);
 const source = process.argv[2] || 'tf-pulse.json';
+const safeRunSource = process.argv[3] || null;
+const safeValidationSource = process.argv[4] || null;
 const destination = resolve(process.cwd(), 'data/tf-pulse-heartbeat.json');
+const readJson = async relative => JSON.parse(await readFile(resolve(process.cwd(), relative), 'utf8'));
 let pulse;
 try {
   pulse = JSON.parse(await readFile(resolve(process.cwd(), source), 'utf8'));
@@ -26,6 +29,35 @@ if (!pulse.teaserGate || pulse.teaserGate.taskId !== 'B4') fail('teaser gate is 
 if (!Array.isArray(pulse.roleCoverage) || pulse.roleCoverage.length !== 6 || pulse.roleCoverage.some(role => !role || typeof role.id !== 'string' || typeof role.label !== 'string' || role.status !== 'present')) fail('TF role coverage is missing or malformed');
 if (!pulse.meetingProtocol || typeof pulse.meetingProtocol.cadence !== 'string' || typeof pulse.meetingProtocol.quorum !== 'string' || !Array.isArray(pulse.meetingProtocol.record) || pulse.meetingProtocol.record.length === 0) fail('meeting protocol is missing or malformed');
 if (!pulse.executionPolicy || JSON.stringify(Object.keys(pulse.executionPolicy).sort()) !== JSON.stringify(['approvalRiskClasses', 'autoRiskClasses', 'autoStates', 'humanReviewStates', 'note'].sort()) || !Array.isArray(pulse.executionPolicy.autoStates) || !Array.isArray(pulse.executionPolicy.autoRiskClasses) || !Array.isArray(pulse.executionPolicy.humanReviewStates) || !Array.isArray(pulse.executionPolicy.approvalRiskClasses) || typeof pulse.executionPolicy.note !== 'string') fail('execution policy is missing or malformed');
+if (Boolean(safeRunSource) !== Boolean(safeValidationSource)) fail('safe run and independent validation sources must be provided together');
+
+let safeExecution;
+if (safeRunSource && safeValidationSource) {
+  let safeRun;
+  let safeValidation;
+  try {
+    [safeRun, safeValidation] = await Promise.all([readJson(safeRunSource), readJson(safeValidationSource)]);
+  } catch (error) {
+    throw new Error(`TF pulse safe run evidence could not be read: ${error.message}`);
+  }
+  if (safeRun.schemaVersion !== 1 || safeRun.mode !== 'safe_internal_tf_run' || safeRun.status !== 'MET') fail('safe run evidence is not a successful internal run');
+  if (safeRun.goalId !== pulse.goalId || safeRun.snapshotHash !== pulse.snapshotHash) fail('safe run evidence is tied to a different pulse');
+  if (!safeRun.executionBoundary || safeRun.executionBoundary.state !== 'READY' || safeRun.executionBoundary.risk !== 'B_INTERNAL_WRITE' || safeRun.executionBoundary.externalEffects !== false) fail('safe run evidence crosses the external-effects boundary');
+  if (!safeRun.preparation || safeRun.preparation.id !== 'sync-public-data' || safeRun.preparation.risk !== 'B_INTERNAL_WRITE' || safeRun.preparation.status !== 'MET') fail('safe run preparation is not a successful internal write');
+  const expectedChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
+  if (!Array.isArray(safeRun.executed) || safeRun.executed.length !== expectedChecks.length || JSON.stringify(safeRun.executed.map(item => item?.id)) !== JSON.stringify(expectedChecks) || safeRun.executed.some(item => item?.risk !== 'A_READ' || item?.status !== 'MET')) fail('safe run read-only checks are incomplete');
+  if (safeValidation.status !== 'ok' || !/^\d{4}-\d{2}-\d{2}T/.test(safeValidation.validatedAt || '') || safeValidation.goalId !== pulse.goalId || safeValidation.snapshotHash !== pulse.snapshotHash || JSON.stringify(safeValidation.checks) !== JSON.stringify(expectedChecks)) fail('independent safe run validation does not match the pulse');
+  safeExecution = {
+    mode: 'safe_internal_tf_run',
+    status: 'MET',
+    validatedAt: typeof safeValidation.validatedAt === 'string' ? safeValidation.validatedAt : pulse.generatedAt,
+    executionBoundary: {state: 'READY', risk: 'B_INTERNAL_WRITE', externalEffects: false},
+    preparation: {id: safeRun.preparation.id, risk: safeRun.preparation.risk, status: safeRun.preparation.status},
+    checks: safeRun.executed.map(({id, risk, status}) => ({id, risk, status})),
+    candidateTaskIds: Array.isArray(safeRun.candidateTaskIds) ? [...safeRun.candidateTaskIds] : [],
+    humanGateTaskIds: Array.isArray(safeRun.humanGateTaskIds) ? [...safeRun.humanGateTaskIds] : [],
+  };
+}
 
 let previousHeartbeat;
 try {
@@ -71,8 +103,9 @@ const heartbeat = {
   waiting: Array.isArray(pulse.waiting) ? pulse.waiting : [],
   inputGates: Array.isArray(pulse.inputGates) ? pulse.inputGates.map(safeGate) : [],
   teaserGate: {status: pulse.teaserGate.status, taskId: pulse.teaserGate.taskId, taskState: pulse.teaserGate.taskState},
+  ...(safeExecution ? {safeExecution} : {}),
 };
 
 await mkdir(dirname(destination), {recursive: true});
 await writeFile(destination, `${JSON.stringify(heartbeat, null, 2)}\n`);
-console.log(JSON.stringify({destination, goalId: heartbeat.goalId, generatedAt: heartbeat.generatedAt, snapshotHash: heartbeat.snapshotHash, previousSnapshotHash, stateChanged, inputGates: heartbeat.inputGates.length}));
+console.log(JSON.stringify({destination, goalId: heartbeat.goalId, generatedAt: heartbeat.generatedAt, snapshotHash: heartbeat.snapshotHash, previousSnapshotHash, stateChanged, inputGates: heartbeat.inputGates.length, safeExecution: heartbeat.safeExecution?.status || null}));

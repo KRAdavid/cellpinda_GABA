@@ -85,6 +85,21 @@ const validateContinuation = (continuation, label) => {
 };
 const continuationComparable = continuation => ({mode: continuation.mode, cadenceHours: continuation.cadenceHours, nextAction: continuation.nextAction});
 validateContinuation(pulse.continuation, 'pulse');
+const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
+const validateSafeExecution = (value, label) => {
+  if (value === undefined) return;
+  const exact = (object, keys, name) => {
+    if (!object || typeof object !== 'object' || Array.isArray(object) || JSON.stringify(Object.keys(object).sort()) !== JSON.stringify([...keys].sort())) fail(`${label} ${name} is malformed`);
+  };
+  exact(value, ['mode', 'status', 'validatedAt', 'executionBoundary', 'preparation', 'checks', 'candidateTaskIds', 'humanGateTaskIds'], 'summary');
+  if (value.mode !== 'safe_internal_tf_run' || value.status !== 'MET' || !/^\d{4}-\d{2}-\d{2}T/.test(value.validatedAt ?? '')) fail(`${label} identity is malformed`);
+  exact(value.executionBoundary, ['state', 'risk', 'externalEffects'], 'execution boundary');
+  if (value.executionBoundary.state !== 'READY' || value.executionBoundary.risk !== 'B_INTERNAL_WRITE' || value.executionBoundary.externalEffects !== false) fail(`${label} execution boundary is unsafe`);
+  exact(value.preparation, ['id', 'risk', 'status'], 'preparation');
+  if (value.preparation.id !== 'sync-public-data' || value.preparation.risk !== 'B_INTERNAL_WRITE' || value.preparation.status !== 'MET') fail(`${label} preparation is malformed`);
+  if (!Array.isArray(value.checks) || JSON.stringify(value.checks.map(item => item?.id)) !== JSON.stringify(expectedSafeChecks) || value.checks.some(item => JSON.stringify(Object.keys(item ?? {}).sort()) !== JSON.stringify(['id', 'risk', 'status'].sort()) || item.risk !== 'A_READ' || item.status !== 'MET')) fail(`${label} read-only checks are malformed`);
+  if (!Array.isArray(value.candidateTaskIds) || !Array.isArray(value.humanGateTaskIds)) fail(`${label} task lists are malformed`);
+};
 
 const expectedMode = state => {
   if (state === 'VERIFYING') return 'independent-review';
@@ -147,9 +162,15 @@ if (existsSync(heartbeatPath)) {
   validateContinuation(heartbeat.continuation, 'heartbeat');
   validateMeetingProtocol(heartbeat.meetingProtocol, 'heartbeat');
   validateExecutionPolicy(heartbeat.executionPolicy, 'heartbeat');
+  validateSafeExecution(heartbeat.safeExecution, 'heartbeat safe execution');
   if (!heartbeat.counts || typeof heartbeat.requiresHumanDecision !== 'boolean' || typeof heartbeat.stateChanged !== 'boolean' || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash ?? '')) || !Array.isArray(heartbeat.roleCoverage) || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage) || JSON.stringify(heartbeat.meetingProtocol) !== JSON.stringify(pulse.meetingProtocol) || JSON.stringify(heartbeat.executionPolicy) !== JSON.stringify(pulse.executionPolicy) || !Array.isArray(heartbeat.verifying) || !Array.isArray(heartbeat.waiting) || !Array.isArray(heartbeat.inputGates)) fail('pulse heartbeat summary is incomplete or role coverage is out of sync');
   if (heartbeat.stateChanged !== Boolean(heartbeat.previousSnapshotHash && heartbeat.previousSnapshotHash !== heartbeat.snapshotHash)) fail('pulse heartbeat state change marker is inconsistent');
   if (heartbeat.snapshotHash !== pulse.snapshotHash || JSON.stringify(heartbeat.counts) !== JSON.stringify(pulse.counts) || heartbeat.requiresHumanDecision !== pulse.requiresHumanDecision || JSON.stringify(continuationComparable(heartbeat.continuation)) !== JSON.stringify(continuationComparable(pulse.continuation)) || JSON.stringify(heartbeat.verifying) !== JSON.stringify(pulse.verifying) || JSON.stringify(heartbeat.waiting) !== JSON.stringify(pulse.waiting) || JSON.stringify(heartbeat.inputGates) !== JSON.stringify(pulse.inputGates.map(({taskId, state, chair, quorum, requiredInputs, nextAction}) => ({taskId, state, chair, quorum, requiredInputs, nextAction})))) fail('pulse heartbeat is not the current pulse snapshot');
+  if (heartbeat.safeExecution) {
+    const expectedHumanGates = pulse.decisions.filter(item => ['VERIFYING', 'WAITING', 'BACKLOG', 'REWORK'].includes(item.state)).map(item => item.taskId);
+    const expectedCandidates = Array.isArray(pulse.ready) ? pulse.ready : [];
+    if (JSON.stringify(heartbeat.safeExecution.humanGateTaskIds) !== JSON.stringify(expectedHumanGates) || JSON.stringify(heartbeat.safeExecution.candidateTaskIds) !== JSON.stringify(expectedCandidates)) fail('pulse heartbeat safe execution task lists are out of sync');
+  }
 }
 
 console.log(JSON.stringify({

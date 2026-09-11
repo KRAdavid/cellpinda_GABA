@@ -37,7 +37,7 @@ jobs:
         run: node scripts/validate-safe-tf-run.mjs tf-safe-run.json tf-pulse.json | tee tf-safe-run-validation.json
       - name: Persist safe pulse heartbeat
         run: |
-          node scripts/write-tf-pulse-heartbeat.mjs tf-pulse.json
+          node scripts/write-tf-pulse-heartbeat.mjs tf-pulse.json tf-safe-run.json tf-safe-run-validation.json
           git config user.name "cellpinda-tf-pulse[bot]"
           git config user.email "cellpinda-tf-pulse[bot]@users.noreply.github.com"
           git add data/tf-pulse-heartbeat.json

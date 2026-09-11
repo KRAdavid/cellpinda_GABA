@@ -16,14 +16,35 @@ let pulse;
 try{pulse=JSON.parse(pulseRun.stdout.trim());}catch{throw new Error('TF pulse generation did not return JSON');}
 const heartbeatPath=resolve(root,'data/tf-pulse-heartbeat.json');
 let pulseForQueue=pulse;
+const expectedSafeChecks=['goal-contract','research-copy','teaser-boundary','sandbox-mvp','public-export','tf-pulse'];
+const validateSafeExecution=value=>{
+  if(value===undefined)return;
+  const exact=(object,keys,label)=>{
+    if(!object || typeof object!=='object' || Array.isArray(object) || JSON.stringify(Object.keys(object).sort())!==JSON.stringify([...keys].sort()))throw new Error(`TF pulse safe execution ${label} is malformed`);
+  };
+  exact(value,['mode','status','validatedAt','executionBoundary','preparation','checks','candidateTaskIds','humanGateTaskIds'],'summary');
+  if(value.mode!=='safe_internal_tf_run' || value.status!=='MET' || !/^\d{4}-\d{2}-\d{2}T/.test(value.validatedAt||''))throw new Error('TF pulse safe execution identity is malformed');
+  exact(value.executionBoundary,['state','risk','externalEffects'],'execution boundary');
+  if(value.executionBoundary.state!=='READY' || value.executionBoundary.risk!=='B_INTERNAL_WRITE' || value.executionBoundary.externalEffects!==false)throw new Error('TF pulse safe execution crosses the external-effects boundary');
+  exact(value.preparation,['id','risk','status'],'preparation');
+  if(value.preparation.id!=='sync-public-data' || value.preparation.risk!=='B_INTERNAL_WRITE' || value.preparation.status!=='MET')throw new Error('TF pulse safe execution preparation is malformed');
+  if(!Array.isArray(value.checks) || JSON.stringify(value.checks.map(item=>item?.id))!==JSON.stringify(expectedSafeChecks) || value.checks.some(item=>JSON.stringify(Object.keys(item||{}).sort())!==JSON.stringify(['id','risk','status'].sort()) || item.risk!=='A_READ' || item.status!=='MET'))throw new Error('TF pulse safe execution checks are malformed');
+  if(!Array.isArray(value.candidateTaskIds) || !Array.isArray(value.humanGateTaskIds))throw new Error('TF pulse safe execution task lists are malformed');
+};
 if(existsSync(heartbeatPath)){
   let heartbeat;
   try{heartbeat=JSON.parse(readFileSync(heartbeatPath,'utf8'));}catch{throw new Error('TF pulse heartbeat is not valid JSON');}
+  validateSafeExecution(heartbeat.safeExecution);
   if(heartbeat.schemaVersion!==1 || heartbeat.mode!=='automation_pulse_heartbeat' || heartbeat.goalId!==pulse.goalId || heartbeat.goalStatus!=='ACTIVE' || !/^\d{4}-\d{2}-\d{2}T/.test(heartbeat.generatedAt) || !/^[a-f0-9]{64}$/.test(heartbeat.snapshotHash||'') || (heartbeat.previousSnapshotHash !== null && !/^[a-f0-9]{64}$/.test(heartbeat.previousSnapshotHash||'')) || typeof heartbeat.stateChanged !== 'boolean' || JSON.stringify(heartbeat.roleCoverage) !== JSON.stringify(pulse.roleCoverage) || JSON.stringify(heartbeat.meetingProtocol) !== JSON.stringify(pulse.meetingProtocol) || JSON.stringify(heartbeat.executionPolicy) !== JSON.stringify(pulse.executionPolicy) || !heartbeat.continuation || heartbeat.continuation.mode !== pulse.continuation?.mode || heartbeat.continuation.cadenceHours !== pulse.continuation?.cadenceHours || heartbeat.continuation.nextAction !== pulse.continuation?.nextAction) throw new Error('TF pulse heartbeat is malformed or role coverage is out of sync');
   if(heartbeat.stateChanged !== Boolean(heartbeat.previousSnapshotHash && heartbeat.previousSnapshotHash !== heartbeat.snapshotHash)) throw new Error('TF pulse heartbeat state change marker is inconsistent');
   const hashChanged = heartbeat.snapshotHash !== pulse.snapshotHash;
   pulseForQueue={...pulse,stateChanged:hashChanged || heartbeat.stateChanged,previousSnapshotHash:hashChanged ? heartbeat.snapshotHash : heartbeat.previousSnapshotHash};
-  if(!hashChanged) pulseForQueue={...pulseForQueue,generatedAt:heartbeat.generatedAt,continuation:heartbeat.continuation};
+  if(!hashChanged && heartbeat.safeExecution) {
+    const expectedHumanGates=pulse.decisions.filter(item=>['VERIFYING','WAITING','BACKLOG','REWORK'].includes(item.state)).map(item=>item.taskId);
+    const expectedCandidates=Array.isArray(pulse.ready) ? pulse.ready : [];
+    if(JSON.stringify(heartbeat.safeExecution.humanGateTaskIds)!==JSON.stringify(expectedHumanGates) || JSON.stringify(heartbeat.safeExecution.candidateTaskIds)!==JSON.stringify(expectedCandidates))throw new Error('TF pulse safe execution task lists are out of sync');
+  }
+  if(!hashChanged) pulseForQueue={...pulseForQueue,generatedAt:heartbeat.generatedAt,continuation:heartbeat.continuation,...(heartbeat.safeExecution ? {safeExecution:heartbeat.safeExecution} : {})};
 }
 const smartStoreHost='smartstore.naver.com';
 const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerSummary','hopefulTakeaway'];
@@ -132,7 +153,7 @@ const operationsQueue={
   goalId:goalContract.goalId,
   status:goalContract.status,
   checkedAt:goalContract.checkedAt,
-  pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,stateChanged:Boolean(pulseForQueue.stateChanged),requiresHumanDecision:pulseForQueue.requiresHumanDecision,continuation:pulseForQueue.continuation,meetingProtocol:pulseForQueue.meetingProtocol,executionPolicy:pulseForQueue.executionPolicy,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length},
+  pulse:{generatedAt:pulseForQueue.generatedAt,snapshotHash:pulseForQueue.snapshotHash,stateChanged:Boolean(pulseForQueue.stateChanged),requiresHumanDecision:pulseForQueue.requiresHumanDecision,continuation:pulseForQueue.continuation,meetingProtocol:pulseForQueue.meetingProtocol,executionPolicy:pulseForQueue.executionPolicy,activeTasks:pulseForQueue.meetingAgenda.length,inputGates:pulseForQueue.inputGates.length,...(pulseForQueue.safeExecution ? {safeExecution:pulseForQueue.safeExecution} : {})},
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
   tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), decisionOptions:pulseDecisionByTaskId.get(id)?.decisionOptions ?? [], quorum:decisionQuorumFor({lead,verifier,risk}), requiredInputs:Array.isArray(requiredInputs) ? requiredInputs : [], ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
@@ -151,6 +172,7 @@ const publicPulse={
   continuation:pulseForQueue.continuation,
   meetingProtocol:pulseForQueue.meetingProtocol,
   executionPolicy:pulseForQueue.executionPolicy,
+  ...(pulseForQueue.safeExecution ? {safeExecution:pulseForQueue.safeExecution} : {}),
   roleCoverage:pulseForQueue.roleCoverage.map(({id,label,status})=>({id,label,status})),
   counts:pulseForQueue.counts,
   teaserGate:{status:pulseForQueue.teaserGate.status,taskId:pulseForQueue.teaserGate.taskId,taskState:pulseForQueue.teaserGate.taskState},
@@ -174,7 +196,7 @@ const publicAudit={
   milestones:{
     masterIndex:{status:'MET',claims:claims.length,researchRecords:masterIndex.records.length},
     publicProduct:{status:'MET',products:products.length,smartStoreOnly:true,removed750:true},
-    tfPulse:{status:'MET',generatedAt:publicPulse.generatedAt,snapshotHash:publicPulse.snapshotHash,stateChanged:publicPulse.stateChanged,requiresHumanDecision:publicPulse.requiresHumanDecision,continuation:publicPulse.continuation},
+    tfPulse:{status:'MET',generatedAt:publicPulse.generatedAt,snapshotHash:publicPulse.snapshotHash,stateChanged:publicPulse.stateChanged,requiresHumanDecision:publicPulse.requiresHumanDecision,continuation:publicPulse.continuation,...(publicPulse.safeExecution ? {safeExecution:publicPulse.safeExecution} : {})},
   },
   gates:taskGraph.tasks
     .filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state))

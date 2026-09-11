@@ -12,6 +12,7 @@ requireText(/name: Execute safe internal TF checks/, '읽기 전용 safe interna
 requireText(/run: node scripts\/run-safe-tf-actions\.mjs tf-pulse\.json --out tf-safe-run\.json \| tee tf-safe-run-summary\.json/, 'safe internal TF 실행 명령이 없습니다.');
 requireText(/name: Independently validate safe TF run/, 'safe internal TF 독립 검증 단계가 없습니다.');
 requireText(/run: node scripts\/validate-safe-tf-run\.mjs tf-safe-run\.json tf-pulse\.json \| tee tf-safe-run-validation\.json/, 'safe internal TF 독립 검증 명령이 없습니다.');
+requireText(/run:\s*\|\s*node scripts\/write-tf-pulse-heartbeat\.mjs tf-pulse\.json tf-safe-run\.json tf-safe-run-validation\.json/, 'heartbeat에 독립 검증된 safe 실행을 전달하지 않습니다.');
 requireText(/contents:\s*write/, 'heartbeat 커밋에 필요한 contents: write 권한이 없습니다.');
 requireText(/actions:\s*write/, '명시적 deploy dispatch에 필요한 actions: write 권한이 없습니다.');
 requireText(/git commit -m ["']chore: refresh TF pulse heartbeat \[skip ci\]["']/, 'heartbeat 커밋에 [skip ci] 보호가 없습니다.');

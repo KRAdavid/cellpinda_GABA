@@ -6,6 +6,8 @@ GitHub Actions의 `TF decision pulse` workflow가 6시간마다 같은 명령을
 같은 workflow는 pulse 생성 직후 `run-safe-tf-actions.mjs`를 실행한다. 이 단계는 CI에 없는 공개 패킷을 내부에서 재생성한 뒤 Goal Contract·연구 문구·티저 경계·샌드박스 MVP·공개 export·TF pulse 검증 여섯 가지를 매회 재실행하고, 결과를 `safe_internal_tf_run` artifact와 run summary에 남긴다. 내부 산출물 생성은 `B_INTERNAL_WRITE`, 검증은 `A_READ`로 기록하며 외부 게시·구매·승인·canonical 업무 그래프 상태 변경은 하지 않는다. 사람 판단 게이트를 감시하는 동안 내부 품질 확인을 멈추지 않는다.
 이 결과는 `validate-safe-tf-run.mjs`가 별도로 확인한 뒤에만 heartbeat 저장으로 넘어간다. 검증기는 pulse 지문·목표 ID·사람 게이트 목록·검사 순서·위험 등급·외부 효과 없음·모든 `MET` 결과를 다시 대조하므로, 실행 스크립트의 자기 보고만으로 다음 배포가 진행되지 않는다.
 
+heartbeat 저장 단계는 독립 검증이 끝난 안전 실행 요약도 함께 보존한다. 요약에는 내부 작성 경계, 6개 읽기 검사, 실행 후보와 사람 게이트만 남기며 원문 경로·개인정보·검사 상세 로그는 공개하지 않는다. 운영 화면과 회의 패킷은 이 요약으로 마지막 내부 검증 상태를 확인한다.
+
 `pnpm run validate:tf-pulse-workflow`는 schedule·수동 실행·최소 권한·heartbeat 커밋·push·명시적 deploy dispatch 순서를 자동 검사한다. `pnpm run validate:tf-pulse`는 heartbeat의 상태 지문·카운트·대기 목록이 현재 pulse와 같은 실행인지도 확인한다. workflow를 수정할 때 `[skip ci]`를 빠뜨리거나 dispatch를 제거하면 build가 실패한다.
 
 화면의 `목표 감사 JSON`은 Goal Contract, 역할 커버리지, 상태 카운트, 완료 마일스톤과 현재 입력 게이트를 같은 실행에서 만든 공개 요약이다. [공개 목표 감사](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)는 중간 회의용 상태 패킷이며 실제 자격·외부 승인·주문 완료를 증명하지 않는다.
@@ -21,6 +23,8 @@ Goal Contract의 `decisionProtocol`은 각 pulse의 `meetingProtocol`으로 복�
 패킷의 `executionPolicy`는 자동 계속 범위(`READY`와 A/B/C 내부 위험), 사람 검토 전환점(`VERIFYING`·`WAITING` 등), 승인 필요 위험(D/E/F)을 분리한다. 이는 “계속 실행”을 내부 샌드박스로 한정하고 외부 행동은 책임자 승인으로 넘기는 운영 경계다.
 
 로컬에서 `pnpm run tf:pulse:heartbeat`를 직접 실행하면 별도 파일을 준비하지 않아도 최신 pulse를 내부적으로 생성해 `data/tf-pulse-heartbeat.json`에 저장한다. CI처럼 `tf-pulse.json` 경로를 인자로 주면 그 파일을 명시적으로 검증하며, 존재하지 않는 명시 경로는 조용히 대체하지 않는다.
+
+CI의 heartbeat 단계는 `tf-pulse.json tf-safe-run.json tf-safe-run-validation.json`을 함께 전달한다. 이 세 파일의 목표 ID·상태 지문·검사 결과가 맞을 때만 `safeExecution` 요약을 저장해, 회의 패킷이 실제로 독립 검증을 통과한 마지막 실행을 가리키게 한다.
 
 ```sh
 pnpm run tf:pulse

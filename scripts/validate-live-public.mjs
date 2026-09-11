@@ -37,6 +37,24 @@ const validateContinuation = (value, label) => {
   assert.match(value.nextReviewAt || '', /^\d{4}-\d{2}-\d{2}T/, `${label} continuation review time is invalid`);
   assert.ok(typeof value.nextAction === 'string' && value.nextAction.trim().length >= 10, `${label} continuation action is missing`);
 };
+const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
+const validateSafeExecution = (value, label) => {
+  if (value === undefined) return;
+  assert.deepEqual(Object.keys(value).sort(), ['mode', 'status', 'validatedAt', 'executionBoundary', 'preparation', 'checks', 'candidateTaskIds', 'humanGateTaskIds'].sort(), `${label} safe execution fields are invalid`);
+  assert.equal(value.mode, 'safe_internal_tf_run', `${label} safe execution mode is invalid`);
+  assert.equal(value.status, 'MET', `${label} safe execution status is invalid`);
+  assert.match(value.validatedAt || '', /^\d{4}-\d{2}-\d{2}T/, `${label} safe execution timestamp is invalid`);
+  assert.deepEqual(value.executionBoundary, {state: 'READY', risk: 'B_INTERNAL_WRITE', externalEffects: false}, `${label} safe execution boundary is unsafe`);
+  assert.deepEqual(value.preparation, {id: 'sync-public-data', risk: 'B_INTERNAL_WRITE', status: 'MET'}, `${label} safe execution preparation is invalid`);
+  assert.ok(Array.isArray(value.checks), `${label} safe execution checks are invalid`);
+  assert.deepEqual(value.checks.map(item => item?.id), expectedSafeChecks, `${label} safe execution checks are incomplete`);
+  for (const check of value.checks) {
+    assert.deepEqual(Object.keys(check).sort(), ['id', 'risk', 'status'].sort(), `${label} safe execution check fields are invalid`);
+    assert.equal(check.risk, 'A_READ', `${label} safe execution check risk is invalid`);
+    assert.equal(check.status, 'MET', `${label} safe execution check status is invalid`);
+  }
+  assert.ok(Array.isArray(value.candidateTaskIds) && Array.isArray(value.humanGateTaskIds), `${label} safe execution task lists are invalid`);
+};
 const request = async path => {
   const separator = path.includes('?') ? '&' : '?';
   const response = await fetch(`${base}${path}${separator}release-smoke=1`);
@@ -81,6 +99,15 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(publicPulse.meetingProtocol?.cadence && publicPulse.meetingProtocol?.quorum && Array.isArray(publicPulse.meetingProtocol?.record), 'live public TF pulse meeting protocol is missing');
     assert.deepEqual(publicPulse.executionPolicy, queue.pulse.executionPolicy, 'live public TF pulse execution policy must match the queue');
     assert.ok(publicPulse.executionPolicy?.autoStates?.includes('READY') && publicPulse.executionPolicy?.humanReviewStates?.includes('VERIFYING') && publicPulse.executionPolicy?.approvalRiskClasses?.includes('E_EXTERNAL_COMMITMENT'), 'live public TF pulse execution policy is incomplete');
+    validateSafeExecution(queue.pulse.safeExecution, 'live operations queue pulse');
+    validateSafeExecution(publicPulse.safeExecution, 'live public pulse');
+    assert.deepEqual(publicPulse.safeExecution, queue.pulse.safeExecution, 'live safe execution summary must match the queue');
+    if (publicPulse.safeExecution) {
+      const expectedHumanGates = publicPulse.meetingAgenda.filter(item => ['VERIFYING', 'WAITING', 'BACKLOG', 'REWORK'].includes(item.state)).map(item => item.taskId);
+      const expectedCandidates = publicPulse.meetingAgenda.filter(item => item.state === 'READY').map(item => item.taskId);
+      assert.deepEqual(publicPulse.safeExecution.humanGateTaskIds, expectedHumanGates, 'live safe execution human gates are out of sync');
+      assert.deepEqual(publicPulse.safeExecution.candidateTaskIds, expectedCandidates, 'live safe execution candidates are out of sync');
+    }
     assert.equal(meetingPacket.mode, 'public_tf_meeting_packet', 'live TF meeting packet must use the public schema');
     assert.equal(meetingPacket.goalId, publicPulse.goalId, 'live TF meeting packet goal must match the pulse');
     assert.equal(meetingPacket.generatedAt, publicPulse.generatedAt, 'live TF meeting packet timestamp must match the pulse');
@@ -113,6 +140,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(publicAudit.milestones.publicProduct.smartStoreOnly, true, 'live public audit must keep Smart Store only');
     assert.equal(publicAudit.milestones.publicProduct.removed750, true, 'live public audit must keep 750 removed');
     assert.equal(publicAudit.milestones.tfPulse.status, 'MET', 'live public audit must mark the pulse milestone');
+    validateSafeExecution(publicAudit.milestones.tfPulse.safeExecution, 'live public audit pulse');
+    assert.deepEqual(publicAudit.milestones.tfPulse.safeExecution, publicPulse.safeExecution, 'live public audit safe execution summary must match the pulse');
     assert.equal(publicAudit.teaserGate.taskId, 'B4', 'live public audit must expose the teaser gate');
     assert.equal(publicAudit.teaserGate.status, 'HOLD', 'live public audit must keep the teaser on hold');
     assert.equal(publicAudit.teaserGate.taskState, queue.tasks.find(task => task.id === 'B4')?.state, 'live public audit teaser state must match the queue');
