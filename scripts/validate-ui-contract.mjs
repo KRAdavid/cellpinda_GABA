@@ -44,7 +44,7 @@ requireMatch(app, /const adminView = isLocalHost && \(requestedView === 'admin' 
 const nav = app.match(/<nav[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
 if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
-for (const marker of ['일이 끝났는데도', '1분 리듬 체크 시작', 'GABA는 뇌에서', '스마트스토어']) {
+for (const marker of ['일이 끝나도', '1분 리듬 체크 시작', 'GABA는 뇌에서', '스마트스토어']) {
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');

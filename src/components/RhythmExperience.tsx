@@ -305,16 +305,16 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   return (
     <section className="rhythm-experience" id="rhythm" aria-labelledby="rhythm-heading">
       <div className="rhythm-heading-row">
-        <div><p className="rhythm-eyebrow">01 / DISCOVER YOUR RHYTHM</p><h2 id="rhythm-heading">잠깐 멈춰,<br />나의 하루를 만나보세요.</h2></div>
-        <p className="rhythm-intro-copy">몸은 움직이고 있어도, 머리는 하루 종일 바쁠 수 있어요.<br />생각이 많고 집중이 자주 끊긴다면, 최근 일주일을 잠깐 돌아보세요.</p>
+        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading">일이 끝나도 머리가<br />쉬지 않으신가요?</h2></div>
+        <p className="rhythm-intro-copy">잠자리에 누워도 잠이 안 오고, 쉬어도 아침에 피곤한가요?<br />아래 다섯 질문에 답하면 지금 뇌 피로가 쌓였는지 돌아볼 수 있어요.</p>
       </div>
 
       <div className="rhythm-recovery-intro" aria-label="휴식과 회복 안내">
         <div className="rhythm-recovery-intro-copy">
-          <p className="rhythm-recovery-kicker">PAUSE → RECOVERY</p>
-          <h3>휴식은 멈추는 일이 아니라,<br />뇌가 다시 쉴 시간을 만드는 일입니다.</h3>
-          <p>몸은 움직여도 머리가 먼저 지칠 수 있습니다. 생각과 자극이 계속됐다면 억지로 버티기보다 잠깐 멈추고, 쉬고, 다시 움직일 시간을 만들어 보세요.</p>
-          <p className="rhythm-recovery-disclaimer">이 안내와 체크는 최근 일주일의 생활을 돌아보는 도구예요. 지금 쉬어야 할 때를 스스로 알아차리는 데 목적이 있어요.</p>
+          <p className="rhythm-recovery-kicker">뇌 피로 점검</p>
+          <h3>계속 버티면 뇌 과부하가 쌓일 수 있어요.<br />지금 잠깐 멈추세요.</h3>
+          <p>일이 끝나도 생각이 멈추지 않고, 잠이 안 오고, 쉬어도 피곤하면 뇌가 쉴 틈이 부족하다는 신호일 수 있습니다. 더 버티기 전에 오늘 5분부터 비워 보세요.</p>
+          <p className="rhythm-recovery-disclaimer">이 체크는 병을 진단하는 검사가 아닙니다. 최근 일주일 동안 뇌가 쉬지 못한 장면을 찾아 적극적인 휴식을 시작하는 안내입니다.</p>
         </div>
         <ul className="rhythm-load-signals" aria-label="뇌가 쉴 틈이 없을 때 느낄 수 있는 신호">
           <li><strong>생각이 많음</strong><span>일이 끝나도 머리가 바빠요</span></li>
@@ -327,18 +327,18 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       {type ? (
         <div className="rhythm-result-layout">
           <article className="rhythm-result-card">
-            <p className="rhythm-eyebrow">{sharedType ? '공유받은 리듬 이야기' : '나의 하루 리듬 이야기'}</p>
+            <p className="rhythm-eyebrow">{sharedType ? '공유받은 오늘 상태' : '나의 오늘 상태 이야기'}</p>
             <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
             {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
             <p className="rhythm-description">{type.description}</p>
             <svg className="rhythm-card-wave" viewBox="0 0 500 70" aria-hidden="true" focusable="false"><path d="M0 31 C75 -12 110 74 190 31 S330 -12 500 31" /><path d="M0 43 C75 0 110 86 190 43 S330 0 500 43" /><path d="M0 55 C75 12 110 98 190 55 S330 12 500 55" /></svg>
             <div className={`rhythm-recovery-guide rhythm-recovery-${type.recoveryLevel}`}>
-            <p className="rhythm-eyebrow">오늘 먼저 해볼 일</p>
+            <p className="rhythm-eyebrow">뇌 피로를 줄이기 위해 먼저 할 일</p>
               <h4>{type.recoveryHeading}</h4>
               <p>{type.recoveryDescription}</p>
-              <a className="text-link" href="#story">GABA 이야기 살펴보기 →</a>
+            <a className="text-link" href="#story">GABA가 어떤 물질인지 확인하기 →</a>
             </div>
-            <div className="rhythm-suggestions"><h4>오늘 해볼 일</h4><ul>{type.suggestions.map(suggestion => <li key={suggestion}>{suggestion}</li>)}</ul></div>
+            <div className="rhythm-suggestions"><h4>오늘 바로 해볼 일</h4><ul>{type.suggestions.map(suggestion => <li key={suggestion}>{suggestion}</li>)}</ul></div>
             <p className="rhythm-note">최근 일주일의 생활을 돌아보는 안내이며, 건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p>
           </article>
           <div className="rhythm-result-actions" ref={resultLayoutRef}>
@@ -354,21 +354,21 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>이미지 카드 저장 <Download size={18} aria-hidden="true" /></button>
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
-            <details className="rhythm-rules"><summary>결과는 어떻게 정해지나요?</summary><p>{result?.explanation ?? '최근 일주일을 다섯 가지 생활 장면으로 나눠 봅니다. 0·1은 지금 습관을 이어가도 좋은 장면, 2·3은 쉬는 시간을 먼저 만들어 볼 장면으로 표시합니다. 가장 자주 불편했던 장면 하나를 오늘의 초점으로 보여줍니다. 건강 상태나 체내 GABA 수치를 알려주는 검사는 아닙니다.'}</p></details>
+            <details className="rhythm-rules"><summary>이 결과를 어떻게 읽으면 되나요?</summary><p>{result?.explanation ?? '최근 일주일을 다섯 가지 생활 장면으로 나눠 봅니다. 0·1은 지금 습관을 이어가도 좋은 장면, 2·3은 쉬는 시간을 먼저 만들어 볼 장면으로 표시합니다. 가장 자주 불편했던 장면 하나를 오늘의 초점으로 보여줍니다. 건강 상태나 체내 GABA 수치를 알려주는 검사는 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#story">이제 GABA를 알아볼까요? <ArrowRight size={18} aria-hidden="true" /></a>
             <a className="rhythm-text-button" href="#products">제품 구성·표시사항 살펴보기 <ArrowRight size={18} aria-hidden="true" /></a>
           </div>
         </div>
       ) : started ? (
         <div className="rhythm-question-layout">
-          <div className="rhythm-progress-area"><p className="rhythm-eyebrow">오늘 내 상태 체크</p><p className="rhythm-step"><strong>{String(step + 1).padStart(2, '0')}</strong><span>/ 05</span></p><progress value={step + 1} max={5} aria-label={`전체 5문항 중 ${step + 1}번째 질문`} /><p className="rhythm-note">답변은 이 화면에서만 사용하며<br />서버에 전송하거나 저장하지 않아요.</p></div>
+          <div className="rhythm-progress-area"><p className="rhythm-eyebrow">뇌 피로 1분 점검</p><p className="rhythm-step"><strong>{String(step + 1).padStart(2, '0')}</strong><span>/ 05</span></p><progress value={step + 1} max={5} aria-label={`전체 5문항 중 ${step + 1}번째 질문`} /><p className="rhythm-note">답변은 이 화면에서만 사용하며<br />서버에 전송하거나 저장하지 않아요.</p></div>
           <div className="rhythm-question-content">
             <fieldset key={question.id}><legend ref={questionRef} tabIndex={-1}>{question.prompt}<small>{question.helper}</small></legend><div className="rhythm-options">{question.options.map(option => <label key={option.value} className={answers[step] === option.value ? 'selected' : ''} onPointerDown={()=>{pointerSelecting.current=true}} onKeyDown={()=>{pointerSelecting.current=false}}><input type="radio" name={question.id} value={option.value} checked={answers[step] === option.value} onChange={() => chooseAnswer(option.value,pointerSelecting.current)} onClick={() => { if (answers[step] === option.value) chooseAnswer(option.value,pointerSelecting.current); }} /><span>{option.label}</span><span className="rhythm-option-mark" aria-hidden="true">{answers[step] === option.value ? '✓' : ''}</span></label>)}</div><p className="rhythm-auto-advance-note">터치로 고르면 다음 질문으로 자동 이동해요. 키보드는 다음 버튼으로 진행할 수 있어요.</p></fieldset>
             <div className="rhythm-navigation"><button type="button" className="rhythm-text-button" onClick={previous} disabled={step === 0}><ChevronLeft size={18} aria-hidden="true" /> 이전</button><button type="button" className="rhythm-button" disabled={answers[step] === undefined} onClick={() => next()}>{step === 4 ? '내 리듬 만나기' : '다음 질문'} <ArrowRight size={18} aria-hidden="true" /></button></div>
           </div>
         </div>
       ) : (
-        <div className="rhythm-start-panel"><div><h3>오늘 내 상태를,<br />1분이면 확인해요.</h3><p>일이 끝난 뒤에도 생각이 많았는지, 잠들기 어려웠는지, 쉬는 시간이 있었는지 차례로 답해 보세요.<br />잠깐 멈추고 다시 움직일 시간을 찾는 데 도움이 됩니다.</p><p className="rhythm-gaba-intro">GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질이에요. 이 체크는 최근 일주일의 생활을 돌아보고, 오늘 쉬어야 할 때를 찾는 안내입니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p></div></div>
+        <div className="rhythm-start-panel"><div><h3>뇌 피로가 쌓였는지,<br />1분이면 확인해요.</h3><p>퇴근 후에도 일이 생각나는지, 침대에서 뒤척이는지, 하루에 5분도 못 쉬는지 차례로 답해 보세요.<br />지금 쉬어야 할 장면을 바로 찾을 수 있습니다.</p><p className="rhythm-gaba-intro">GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질이에요. 이 체크는 최근 일주일의 생활을 돌아보고, 오늘 뇌를 쉬게 할 방법을 찾는 안내입니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>뇌 피로 1분 점검 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p></div></div>
       )}
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
