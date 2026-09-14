@@ -17,6 +17,8 @@ const review = await read('src/components/ReviewExperience.tsx');
 const teaser = await read('src/components/TeaserPreview.tsx');
 const research = await read('src/components/ResearchLibrary.tsx');
 const story = await read('src/components/GabaStory.tsx');
+const evidenceHighlights = await read('src/components/GabaEvidenceHighlights.tsx');
+const evidenceHighlightsStyles = await read('src/components/GabaEvidenceHighlights.css');
 const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
 const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css');
 const indexHtml = await read('index.html');
@@ -51,6 +53,13 @@ requireMatch(research, /숫자와 맥락을 더 보기/, 'research detail must u
 requireMatch(research, /다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요/, 'research empty state must guide the next consumer action');
 requireMatch(indexHtml, /GABA 연구를 쉬운 말로 더 보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /쉬운 말과 도표로 정리/, 'GABA story must explain research with a visual aid');
+requireMatch(app, /TeaserPreview[\s\S]*GabaEvidenceHighlights[\s\S]*GabaStory/, 'research highlights must follow the teaser and precede the GABA story');
+for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'gaba-definition', '셀핀다 제품의 권장량이나 완제품 효과']) {
+  requireMatch(evidenceHighlights, new RegExp(marker), `GABA evidence highlight marker ${marker} is missing`);
+}
+requireMatch(evidenceHighlights, /연구 카드에서 자세히 보기/, 'GABA evidence cards must provide a consumer next step');
+requireMatch(evidenceHighlightsStyles, /gaba-evidence-grid[\s\S]*grid-template-columns:repeat\(4/, 'GABA evidence highlights must use a visual card grid');
+requireMatch(evidenceHighlightsStyles, /@media\(max-width:680px\)[\s\S]*gaba-evidence-grid[\s\S]*grid-template-columns:1fr/, 'GABA evidence highlights must stack on mobile');
 requireMatch(app, /함량 확인/, 'fermentation flow must use a consumer-friendly label');
 if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하기|수치와 제품 적용 문장은 펼쳐서|연구 카드에서 조건 확인|숫자와 출처 더 보기|근거 식별자|정량분석/.test(app + research + story + indexHtml)) fail('researcher-oriented detail labels leaked into consumer source');
 requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\s\S]*?\}, 180\)/, 'touch answers must auto-advance to the next question');
