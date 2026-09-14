@@ -4,11 +4,15 @@ const cliBase = process.argv.slice(2).find(value => /^https:\/\//.test(value)) |
 const base = (process.env.PUBLIC_SITE_URL || cliBase).replace(/\/$/, '');
 if (!/^https:\/\//.test(base)) throw new Error('PUBLIC_SITE_URL must be an HTTPS URL');
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
+const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 const approvedReviewText = '스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.';
 
 const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
 const isSmartStore = value => {
   try { return new URL(value).href === approvedSmartStoreUrl; } catch { return false; }
+};
+const isSmartStoreReview = value => {
+  try { return new URL(value).href === approvedSmartStoreReviewUrl; } catch { return false; }
 };
 const expectedDecisionOptionIds = state => state === 'VERIFYING' ? ['accept', 'rework'] : state === 'WAITING' || state === 'BACKLOG' ? ['hold', 'promote'] : state === 'READY' ? ['sandbox', 'hold'] : state === 'RUNNING' ? ['verify', 'retry'] : ['preserve', 'reopen'];
 const approvalRiskClasses = new Set(['D_EXTERNAL_REVERSIBLE', 'E_EXTERNAL_COMMITMENT', 'F_LEGAL_IRREVERSIBLE']);
@@ -142,13 +146,14 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(pageText.includes(approvedSmartStoreUrl), 'live static fallback must keep the approved Smart Store 1500 detail link');
     assert.ok(pageText.includes('스마트스토어에서 확인하기'), 'live static fallback must label the Smart Store destination for consumers');
     assert.ok(pageText.includes('구매자 후기 원문 읽기'), 'live static fallback must expose the buyer review source label');
+    assert.ok(pageText.includes(approvedSmartStoreReviewUrl), 'live static fallback must deep-link to the Smart Store review dialog');
     assert.ok(pageText.includes(approvedReviewText), 'live static fallback must expose the approved consumer review guidance');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
     assert.equal(content.products[0].officialUrl, approvedSmartStoreUrl, 'live product must point to the Smart Store 1500 product');
     assert.equal(content.reviews.length, 1, 'live export must contain the approved Smart Store review destination');
     assert.equal(content.reviews[0].id, 'shop-review-destination-1500', 'live review destination must be the approved GABA 1500 record');
-    assert.equal(content.reviews[0].sourceUrl, approvedSmartStoreUrl, 'live review destination must point directly to the Smart Store 1500 product');
+    assert.ok(isSmartStoreReview(content.reviews[0].sourceUrl), 'live review destination must deep-link to the Smart Store 1500 review dialog');
     assert.equal(content.reviews[0].publicText, approvedReviewText, 'live review destination must keep the approved consumer message');
     assert.equal(teaserPreview.status, 'PREVIEW', 'live teaser preview must be marked PREVIEW');
     assert.equal(teaserPreview.url, 'https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site/', 'live teaser preview must use the supplied HTTPS URL');

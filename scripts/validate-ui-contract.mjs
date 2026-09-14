@@ -23,6 +23,7 @@ const indexHtml = await read('index.html');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
 const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
+const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 
 for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research']) {
   requireMatch(app, new RegExp(`(?:id|href)=["']#?${id}["']`), `consumer section or link ${id} is missing`);
@@ -85,6 +86,7 @@ requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favic
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
 requireMatch(review, /가바 1500 · 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
 requireMatch(review, /스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요\./, 'review destination must keep the approved consumer message');
+requireMatch(indexHtml, /href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>구매자 후기 원문 읽기/, 'static review CTA must deep-link to the Smart Store review dialog');
 requireMatch(app, /content\.reviews\?\.length \? <a href="#reviews"[\s\S]*?}>후기 읽기/, 'hero product card must expose the approved review destination');
 requireMatch(review, /quotes\.length > 0 \|\| destinations\.length > 0/, 'review reading guide must remain visible with an approved Smart Store destination');
 requireMatch(indexHtml, /rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root canonical metadata is missing');
@@ -92,9 +94,9 @@ requireMatch(indexHtml, /property="og:url" content="https:\/\/kradavid\.github\.
 requireMatch(indexHtml, /application\/ld\+json[\s\S]*"@type":"WebSite"[\s\S]*"inLanguage":"ko-KR"/, 'root WebSite structured data is missing');
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(app + indexHtml)) fail('legacy official-mall destination leaked into consumer source');
 const consumerSource = app + indexHtml + review;
-const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver\.com\/[A-Za-z0-9_/?=&.%:-]+/g)].map(match => match[0]);
-if (!smartStoreLinks.length || smartStoreLinks.some(url => url !== approvedSmartStoreUrl)) {
-  fail(`every consumer Smart Store link must be the approved GABA 1500 detail (${approvedSmartStoreUrl})`);
+const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver\.com\/[A-Za-z0-9_/?=&.%:#-]+/g)].map(match => match[0]);
+if (!smartStoreLinks.length || smartStoreLinks.some(url => ![approvedSmartStoreUrl, approvedSmartStoreReviewUrl].includes(url)) || !smartStoreLinks.includes(approvedSmartStoreUrl) || !smartStoreLinks.includes(approvedSmartStoreReviewUrl)) {
+  fail(`consumer Smart Store links must use the approved product detail or exact review dialog (${approvedSmartStoreUrl} / ${approvedSmartStoreReviewUrl})`);
 }
 
 const shareRoot = resolve(root, 'public/share');

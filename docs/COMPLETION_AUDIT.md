@@ -588,3 +588,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-12 내부 safe TF 파동 재실행
 
 `pnpm run tf:safe -- --out tmp/tf-safe-run.json`으로 공개 패킷 동기화와 목표 계약·연구 문구·티저 경계·샌드박스 MVP·공개 export·TF pulse의 6개 읽기 검사를 재실행했다. `tmp/tf-pulse.json`을 원본 pulse로 지정해 `validate:tf-safe`를 통과했으며, snapshot hash `415f2b9d89e6`와 사람 게이트 B2·B3·B4·C2·E1을 보존했다. 실행 경계는 `B_INTERNAL_WRITE`, 외부 효과 없음이며 canonical 작업 그래프·승인 상태·공개 제품 데이터는 변경하지 않았다.
+
+## 2026-09-14 스마트스토어 후기 리뷰창 직결
+
+가바 1500 구매 링크는 상품 상세 기본 주소를 유지하고, 후기 읽기 CTA와 공개 후기 목적지만 `https://smartstore.naver.com/cellpinda/products/4701017202#REVIEW_DIALOG`로 분리했다. 정적 fallback, React 후기 카드, Node API, Cloudflare Worker, 원장·공개 export가 모두 동일한 리뷰창 URL을 요구하며 다른 해시·쿼리 변형은 승인 대상에서 제외한다. 전체 테스트 84개와 타입검사·production build·공개 export·UI 계약·티저·운영·TF pulse 검증을 통과했다.

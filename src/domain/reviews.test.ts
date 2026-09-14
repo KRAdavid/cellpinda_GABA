@@ -1,9 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {parseReviewDraft,parseReviewConfirmation,approvalMissing,publicReview,reviewMutation,REVIEW_DESTINATION_URL} from './reviews.ts';
-test('Smart Store review destination is the exact approved product URL',()=>{
- assert.equal(REVIEW_DESTINATION_URL,'https://smartstore.naver.com/cellpinda/products/4701017202');
- assert.notEqual(new URL(`${REVIEW_DESTINATION_URL}?from=review`).href,REVIEW_DESTINATION_URL);
+import {parseReviewDraft,parseReviewConfirmation,approvalMissing,publicReview,reviewMutation,REVIEW_DESTINATION_URL,SMARTSTORE_PRODUCT_URL} from './reviews.ts';
+test('Smart Store review destination is the exact approved review dialog URL',()=>{
+ assert.equal(SMARTSTORE_PRODUCT_URL,'https://smartstore.naver.com/cellpinda/products/4701017202');
+ assert.equal(REVIEW_DESTINATION_URL,'https://smartstore.naver.com/cellpinda/products/4701017202#REVIEW_DIALOG');
+ assert.notEqual(new URL(SMARTSTORE_PRODUCT_URL).href,REVIEW_DESTINATION_URL);
+ assert.notEqual(new URL(`${SMARTSTORE_PRODUCT_URL}#reviews`).href,REVIEW_DESTINATION_URL);
+ assert.notEqual(new URL(`${SMARTSTORE_PRODUCT_URL}?from=review#REVIEW_DIALOG`).href,REVIEW_DESTINATION_URL);
 });
 const draft=parseReviewDraft({productId:'gaba1500',authorLabel:'가상 테스트 작성자',sourceTitle:'테스트 원문',sourceUrl:'https://example.com/test-review',authoredAt:'2026-09-10',quote:'오직 테스트용 가상 후기',context:'테스트 상황',disclosure:'테스트 제공 관계',rightsEvidence:'PRIVATE RIGHTS',rightsScope:'PRIVATE SCOPE'});
 const confirmation=parseReviewConfirmation({rightsConfirmed:true,contextConfirmed:true,disclosureConfirmed:true,publicationConfirmed:true,reviewer:'PRIVATE REVIEWER',reviewedAt:'2026-09-10',editorialNote:'PRIVATE NOTE'});

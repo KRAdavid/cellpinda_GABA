@@ -47,6 +47,7 @@ if(existsSync(heartbeatPath)){
   if(!hashChanged) pulseForQueue={...pulseForQueue,generatedAt:heartbeat.generatedAt,continuation:heartbeat.continuation,...(heartbeat.safeExecution ? {safeExecution:heartbeat.safeExecution} : {})};
 }
 const smartStoreHost='smartstore.naver.com';
+const approvedSmartStoreReviewUrl='https://smartstore.naver.com/cellpinda/products/4701017202#REVIEW_DIALOG';
 const requiredResearchFields=['question','studyType','population','sampleSize','dose','duration','comparison','outcome','result','productApplicability','consumerScope','consumerSummary','hopefulTakeaway'];
 
 function publicSources(item){
@@ -78,6 +79,10 @@ function isSmartStoreUrl(value){
   try{const url=new URL(value);return url.protocol==='https:' && url.hostname===smartStoreHost;}
   catch{return false;}
 }
+function isSmartStoreReviewUrl(value){
+  try{return new URL(value).href===approvedSmartStoreReviewUrl;}
+  catch{return false;}
+}
 
 const claims=ledger.claims
   .filter(item=>item.status==='approved' && item.publicText && publicSources(item).length)
@@ -105,7 +110,7 @@ const products=ledger.products
   .filter(item=>item.status==='approved' && item.sourceIds?.every(id=>approvedIds.has(id)) && isSmartStoreUrl(item.officialUrl))
   .map(({id,name,amountMg,servings,totalG,officialUrl,status,availability,priceDisplay,sourceIds})=>({id,name,amountMg,servings,totalG,officialUrl,status,availability,priceDisplay,sourceIds}));
 const reviews=ledger.reviews
-  .filter(item=>['shop-review-destination','shop-review-destination-1500'].includes(item.id) && item.status==='approved')
+  .filter(item=>['shop-review-destination','shop-review-destination-1500'].includes(item.id) && item.status==='approved' && isSmartStoreReviewUrl(item.sourceUrl))
   .map(({id,status,publicText,sourceTitle,sourceUrl,originalPublic})=>({id,status,publicText,sourceTitle,sourceUrl,originalPublic}));
 
 const output={
