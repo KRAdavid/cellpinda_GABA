@@ -1,5 +1,5 @@
 export const CHALLENGE_STORAGE_KEY = 'cellpinda.challenge.v2';
-export const challengeHabits = ['늦은 시간의 카페인 습관 돌아보기', '잠들기 전 화면을 잠시 내려놓기', '편안한 조명 찾기', '잠깐 멈추고 편하게 호흡하기', '기상 시간을 기록하기', '오늘의 휴식 시간을 돌아보기', '계속하고 싶은 작은 루틴 고르기'] as const;
+export const challengeHabits = ['오후 늦게 마신 커피 기록하기', '잠들기 전 화면 10분 끄기', '잠자리를 어둡고 편하게 만들기', '5분 멈추고 천천히 호흡하기', '아침에 일어난 시각 적기', '오늘 실제로 쉰 시간 적기', '계속하고 싶은 휴식 한 가지 고르기'] as const;
 export interface ChallengeDay { date: string; completed: boolean; note: string }
 export interface ChallengeRecord { version: 2; startDate: string; days: ChallengeDay[] }
 

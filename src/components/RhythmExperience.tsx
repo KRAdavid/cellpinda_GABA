@@ -69,13 +69,13 @@ function createCard(type: RhythmType): Promise<Blob | null> {
   context.fillRect(0, 0, 1080, 1350);
   context.fillStyle = '#e8f1e7';
   context.fillRect(48, 48, 984, 1254);
-  drawParagraph(context, 'CELLPINDA · 하루 리듬 이야기', 134, 27, 42);
-  drawParagraph(context, '잠깐 멈춰, 나의 하루를 돌아봐요.', 258, 33, 52);
+  drawParagraph(context, 'CELLPINDA · 오늘 내 상태', 134, 27, 42);
+  drawParagraph(context, '잠깐 멈춰, 오늘을 돌아봐요.', 258, 33, 52);
   context.font = 'bold 72px "Malgun Gothic", sans-serif';
   context.fillStyle = '#18382b';
   context.fillText(type.name, 104, 385);
   let y = drawParagraph(context, type.description, 470, 33, 54);
-  y = drawParagraph(context, '오늘의 작은 제안', y + 65, 26, 44, '#158457');
+  y = drawParagraph(context, '오늘 해볼 일', y + 65, 26, 44, '#158457');
   drawParagraph(context, type.suggestions[0] ?? '', y + 10, 36, 58);
   // Identical decorative curves for every type; no measurement or axis implied.
   context.lineCap = 'round';
@@ -95,7 +95,7 @@ function createCard(type: RhythmType): Promise<Blob | null> {
   context.moveTo(104, 1050);
   context.lineTo(976, 1050);
   context.stroke();
-  drawParagraph(context, '생활 패턴을 돌아보는 이야기입니다.', 1110, 25, 40);
+  drawParagraph(context, '최근 일주일을 돌아보는 안내입니다.', 1110, 25, 40);
   drawParagraph(context, '의학적 진단이나 체내 GABA 측정이 아닙니다.', 1158, 25, 40);
   return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
 }
@@ -306,21 +306,21 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     <section className="rhythm-experience" id="rhythm" aria-labelledby="rhythm-heading">
       <div className="rhythm-heading-row">
         <div><p className="rhythm-eyebrow">01 / DISCOVER YOUR RHYTHM</p><h2 id="rhythm-heading">잠깐 멈춰,<br />나의 하루를 만나보세요.</h2></div>
-        <p className="rhythm-intro-copy">몸은 움직이고 있어도, 머리는 하루 종일 켜져 있을 수 있어요.<br />생각이 멈추지 않고 집중이 흐려진다면, 최근의 휴식 습관을 돌아볼 신호일 수 있습니다.</p>
+        <p className="rhythm-intro-copy">몸은 움직이고 있어도, 머리는 하루 종일 바쁠 수 있어요.<br />생각이 많고 집중이 자주 끊긴다면, 최근 일주일을 잠깐 돌아보세요.</p>
       </div>
 
       <div className="rhythm-recovery-intro" aria-label="휴식과 회복 안내">
         <div className="rhythm-recovery-intro-copy">
           <p className="rhythm-recovery-kicker">PAUSE → RECOVERY</p>
-          <h3>휴식은 멈추는 일이 아니라,<br />뇌가 다시 회복할 시간을 만드는 일입니다.</h3>
-          <p>몸은 움직여도 머리가 먼저 지친 느낌이 들 수 있습니다. 지속적인 생각과 자극이 이어졌다면 신호를 억지로 밀어붙이기보다 잠깐 멈추고, 쉬고, 다시 회복하는 흐름을 만들어 보세요.</p>
-          <p className="rhythm-recovery-disclaimer">이 안내와 체크는 생활 신호를 돌아보는 도구예요. 지금 적극적인 휴식을 시작할 타이밍을 스스로 알아차리는 데 목적이 있어요.</p>
+          <h3>휴식은 멈추는 일이 아니라,<br />뇌가 다시 쉴 시간을 만드는 일입니다.</h3>
+          <p>몸은 움직여도 머리가 먼저 지칠 수 있습니다. 생각과 자극이 계속됐다면 억지로 버티기보다 잠깐 멈추고, 쉬고, 다시 움직일 시간을 만들어 보세요.</p>
+          <p className="rhythm-recovery-disclaimer">이 안내와 체크는 최근 일주일의 생활을 돌아보는 도구예요. 지금 쉬어야 할 때를 스스로 알아차리는 데 목적이 있어요.</p>
         </div>
         <ul className="rhythm-load-signals" aria-label="뇌가 쉴 틈이 없을 때 느낄 수 있는 신호">
-          <li><strong>생각 과다</strong><span>머릿속이 계속 이어져요</span></li>
-          <li><strong>집중 흔들림</strong><span>작은 일도 자주 끊겨요</span></li>
-          <li><strong>예민함</strong><span>평소보다 자극이 크게 느껴져요</span></li>
-          <li><strong>회복 지연</strong><span>쉬어도 개운하지 않을 수 있어요</span></li>
+          <li><strong>생각이 많음</strong><span>일이 끝나도 머리가 바빠요</span></li>
+          <li><strong>집중이 끊김</strong><span>하던 일을 자꾸 다시 시작해요</span></li>
+          <li><strong>주변이 신경 쓰임</strong><span>소리·빛·사람이 크게 느껴져요</span></li>
+          <li><strong>아침 피로</strong><span>쉬어도 개운하지 않아요</span></li>
         </ul>
       </div>
 
@@ -333,18 +333,18 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <p className="rhythm-description">{type.description}</p>
             <svg className="rhythm-card-wave" viewBox="0 0 500 70" aria-hidden="true" focusable="false"><path d="M0 31 C75 -12 110 74 190 31 S330 -12 500 31" /><path d="M0 43 C75 0 110 86 190 43 S330 0 500 43" /><path d="M0 55 C75 12 110 98 190 55 S330 12 500 55" /></svg>
             <div className={`rhythm-recovery-guide rhythm-recovery-${type.recoveryLevel}`}>
-              <p className="rhythm-eyebrow">오늘의 회복 초점</p>
+            <p className="rhythm-eyebrow">오늘 먼저 해볼 일</p>
               <h4>{type.recoveryHeading}</h4>
               <p>{type.recoveryDescription}</p>
               <a className="text-link" href="#story">GABA 이야기 살펴보기 →</a>
             </div>
-            <div className="rhythm-suggestions"><h4>오늘 해볼 작은 일</h4><ul>{type.suggestions.map(suggestion => <li key={suggestion}>{suggestion}</li>)}</ul></div>
-            <p className="rhythm-note">생활 패턴을 돌아보는 콘텐츠이며, 의학적 진단이나 체내 GABA 측정이 아닙니다.</p>
+            <div className="rhythm-suggestions"><h4>오늘 해볼 일</h4><ul>{type.suggestions.map(suggestion => <li key={suggestion}>{suggestion}</li>)}</ul></div>
+            <p className="rhythm-note">최근 일주일의 생활을 돌아보는 안내이며, 건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p>
           </article>
           <div className="rhythm-result-actions" ref={resultLayoutRef}>
             <p className="rhythm-eyebrow">KEEP YOUR LITTLE MOMENT</p>
-            <h3>나를 돌아본 순간을<br />한 장에 담아요.</h3>
-            <p>카드와 공유 링크에는 생활 유형이 표시돼요. 문항별 답변은 담지 않습니다.</p>
+            <h3>오늘 내 상태를<br />한 장에 담아요.</h3>
+            <p>카드와 공유 링크에는 결과 이름만 표시돼요. 문항별 답변은 담지 않습니다.</p>
             {cardUrl && type ? <img className="rhythm-card-preview" src={cardUrl} alt={`${type.name} 결과 카드 미리보기`} /> : null}
             {sharedType ? <button type="button" className="rhythm-button" onClick={start}>나도 1분 리듬 체크 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             {!sharedType && kakaoReady ? <button type="button" className="rhythm-button" onClick={shareToKakao}>카카오톡으로 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
@@ -354,21 +354,21 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>이미지 카드 저장 <Download size={18} aria-hidden="true" /></button>
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
-            <details className="rhythm-rules"><summary>유형은 어떻게 정해지나요?</summary><p>{result?.explanation ?? '긴장, 잠자리 전환, 멈춤의 공백, 자극 부담, 아침 회복감 다섯 신호를 같은 비중으로 비교합니다. 모두 0·1이면 안정 리듬형, 2·3이 있으면 가장 큰 신호를 오늘의 회복 초점으로 보여줍니다. 이 규칙은 생활을 돌아보기 위한 편집 기준이며 검증된 의학적 기준이 아닙니다.'}</p></details>
+            <details className="rhythm-rules"><summary>결과는 어떻게 정해지나요?</summary><p>{result?.explanation ?? '최근 일주일을 다섯 가지 생활 장면으로 나눠 봅니다. 0·1은 지금 습관을 이어가도 좋은 장면, 2·3은 쉬는 시간을 먼저 만들어 볼 장면으로 표시합니다. 가장 자주 불편했던 장면 하나를 오늘의 초점으로 보여줍니다. 건강 상태나 체내 GABA 수치를 알려주는 검사는 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#story">이제 GABA를 알아볼까요? <ArrowRight size={18} aria-hidden="true" /></a>
             <a className="rhythm-text-button" href="#products">제품 구성·표시사항 살펴보기 <ArrowRight size={18} aria-hidden="true" /></a>
           </div>
         </div>
       ) : started ? (
         <div className="rhythm-question-layout">
-          <div className="rhythm-progress-area"><p className="rhythm-eyebrow">나의 하루 리듬 체크</p><p className="rhythm-step"><strong>{String(step + 1).padStart(2, '0')}</strong><span>/ 05</span></p><progress value={step + 1} max={5} aria-label={`전체 5문항 중 ${step + 1}번째 질문`} /><p className="rhythm-note">답변은 이 화면에서만 사용하며<br />서버에 전송하거나 저장하지 않아요.</p></div>
+          <div className="rhythm-progress-area"><p className="rhythm-eyebrow">오늘 내 상태 체크</p><p className="rhythm-step"><strong>{String(step + 1).padStart(2, '0')}</strong><span>/ 05</span></p><progress value={step + 1} max={5} aria-label={`전체 5문항 중 ${step + 1}번째 질문`} /><p className="rhythm-note">답변은 이 화면에서만 사용하며<br />서버에 전송하거나 저장하지 않아요.</p></div>
           <div className="rhythm-question-content">
             <fieldset key={question.id}><legend ref={questionRef} tabIndex={-1}>{question.prompt}<small>{question.helper}</small></legend><div className="rhythm-options">{question.options.map(option => <label key={option.value} className={answers[step] === option.value ? 'selected' : ''} onPointerDown={()=>{pointerSelecting.current=true}} onKeyDown={()=>{pointerSelecting.current=false}}><input type="radio" name={question.id} value={option.value} checked={answers[step] === option.value} onChange={() => chooseAnswer(option.value,pointerSelecting.current)} onClick={() => { if (answers[step] === option.value) chooseAnswer(option.value,pointerSelecting.current); }} /><span>{option.label}</span><span className="rhythm-option-mark" aria-hidden="true">{answers[step] === option.value ? '✓' : ''}</span></label>)}</div><p className="rhythm-auto-advance-note">터치로 고르면 다음 질문으로 자동 이동해요. 키보드는 다음 버튼으로 진행할 수 있어요.</p></fieldset>
             <div className="rhythm-navigation"><button type="button" className="rhythm-text-button" onClick={previous} disabled={step === 0}><ChevronLeft size={18} aria-hidden="true" /> 이전</button><button type="button" className="rhythm-button" disabled={answers[step] === undefined} onClick={() => next()}>{step === 4 ? '내 리듬 만나기' : '다음 질문'} <ArrowRight size={18} aria-hidden="true" /></button></div>
           </div>
         </div>
       ) : (
-        <div className="rhythm-start-panel"><div><h3>오늘의 나에게,<br />1분의 여백.</h3><p>생각을 마무리할 틈, 화면에서 벗어날 틈, 잠으로 넘어갈 틈.<br />휴식 후 다시 회복할 수 있도록 작은 질문부터 시작해 보세요.</p><p className="rhythm-gaba-intro">GABA는 뇌의 신경 신호 균형 조절에 관여해 안정과 관련된 물질이에요. 이 체크는 내 생활 리듬을 돌아보며 적극적인 휴식을 시작할 신호를 찾습니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>1분 리듬 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />의학적 진단이나 체내 GABA 측정이 아닙니다.</p></div></div>
+        <div className="rhythm-start-panel"><div><h3>오늘 내 상태를,<br />1분이면 확인해요.</h3><p>일이 끝난 뒤에도 생각이 많았는지, 잠들기 어려웠는지, 쉬는 시간이 있었는지 차례로 답해 보세요.<br />잠깐 멈추고 다시 움직일 시간을 찾는 데 도움이 됩니다.</p><p className="rhythm-gaba-intro">GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질이에요. 이 체크는 최근 일주일의 생활을 돌아보고, 오늘 쉬어야 할 때를 찾는 안내입니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p></div></div>
       )}
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">

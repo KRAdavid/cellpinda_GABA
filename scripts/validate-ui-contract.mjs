@@ -43,18 +43,18 @@ requireMatch(app, /const operationsView = isLocalHost && \(requestedView === 'op
 requireMatch(app, /const adminView = isLocalHost && \(requestedView === 'admin' \|\| currentPath === '\/admin'\)/, 'admin review route must not render on public hosts');
 const nav = app.match(/<nav[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
-if (!/<a href="#products">제품 비교<\/a>/.test(nav)) fail('consumer navigation must expose the product comparison destination');
-for (const marker of ['오늘도 몸보다', '1분 리듬 체크 시작', 'GABA는 신경 신호', '스마트스토어']) {
+if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
+for (const marker of ['일이 끝났는데도', '1분 리듬 체크 시작', 'GABA는 뇌에서', '스마트스토어']) {
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
-requireMatch(research, /핵심은 짧게, 이야기는 펼쳐서/, 'research section must lead with a consumer story');
-requireMatch(research, /숫자와 맥락을 더 보기/, 'research detail must use a consumer-friendly label');
+requireMatch(research, /먼저 한 문장으로 읽어 보세요/, 'research section must lead with a consumer story');
+requireMatch(research, /연구 조건을 더 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요/, 'research empty state must guide the next consumer action');
 requireMatch(indexHtml, /GABA 연구를 쉬운 말로 더 보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /쉬운 말과 도표로 정리/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /TeaserPreview[\s\S]*GabaEvidenceHighlights[\s\S]*GabaStory/, 'research highlights must follow the teaser and precede the GABA story');
-for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'gaba-definition', '셀핀다 제품의 권장량이나 완제품 효과']) {
+for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'gaba-definition', '셀핀다 제품을 고를 때는 제품 표시를 따로 확인']) {
   requireMatch(evidenceHighlights, new RegExp(marker), `GABA evidence highlight marker ${marker} is missing`);
 }
 requireMatch(evidenceHighlights, /연구 카드에서 자세히 보기/, 'GABA evidence cards must provide a consumer next step');

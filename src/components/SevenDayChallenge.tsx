@@ -34,18 +34,18 @@ function createMilestoneCard(milestone: ChallengeMilestone, completed: number, s
   context.fillRect(0, 0, canvas.width, canvas.height);
   context.fillStyle = '#dcecdf';
   context.fillRect(48, 48, 984, 1254);
-  drawCardText(context, 'CELLPINDA · 7일 리듬 기록', 104, 140, 872, 42, '600 28px "Noto Sans KR", "Malgun Gothic", sans-serif', '#315f48');
+  drawCardText(context, 'CELLPINDA · 7일 휴식 기록', 104, 140, 872, 42, '600 28px "Noto Sans KR", "Malgun Gothic", sans-serif', '#315f48');
   drawCardText(context, `${String(milestone).padStart(2, '0')}일의 작은 멈춤`, 104, 290, 872, 76, '600 62px "Noto Sans KR", "Malgun Gothic", sans-serif', '#18382b');
-  drawCardText(context, '오늘의 생활 리듬을 잠깐 돌아봤어요.', 104, 430, 872, 48, '400 32px "Noto Sans KR", "Malgun Gothic", sans-serif', '#315f48');
+  drawCardText(context, '오늘 내가 쉰 시간을 잠깐 돌아봤어요.', 104, 430, 872, 48, '400 32px "Noto Sans KR", "Malgun Gothic", sans-serif', '#315f48');
   context.fillStyle = '#ffffff';
   context.fillRect(104, 540, 872, 270);
   context.fill();
   drawCardText(context, `실천을 남긴 날  ${completed}일`, 160, 635, 760, 54, '600 38px "Noto Sans KR", "Malgun Gothic", sans-serif', '#18382b');
-  drawCardText(context, `이어 온 흐름  ${streak}일`, 160, 710, 760, 54, '400 34px "Noto Sans KR", "Malgun Gothic", sans-serif', '#158457');
+  drawCardText(context, `이어 온 날  ${streak}일`, 160, 710, 760, 54, '400 34px "Noto Sans KR", "Malgun Gothic", sans-serif', '#158457');
   drawCardText(context, '숫자는 생활 기록을 보여주는 표시예요.', 160, 775, 760, 38, '400 24px "Noto Sans KR", "Malgun Gothic", sans-serif', '#64786b');
-  drawCardText(context, '나에게 맞는 휴식 한 가지를 골라, 내일도 이어가 볼까요?', 104, 950, 872, 52, '500 34px "Noto Sans KR", "Malgun Gothic", sans-serif', '#18382b');
-  drawCardText(context, '생활 실천을 돌아보는 나의 리듬 기록 카드예요.', 104, 1115, 872, 38, '400 24px "Noto Sans KR", "Malgun Gothic", sans-serif', '#64786b');
-  drawCardText(context, '셀핀다 · 나의 하루 리듬', 104, 1210, 872, 36, '500 22px "Noto Sans KR", "Malgun Gothic", sans-serif', '#158457');
+  drawCardText(context, '내가 편했던 휴식 한 가지를 골라, 내일도 이어가 볼까요?', 104, 950, 872, 52, '500 34px "Noto Sans KR", "Malgun Gothic", sans-serif', '#18382b');
+  drawCardText(context, '일주일 동안 실천한 휴식을 돌아보는 기록 카드예요.', 104, 1115, 872, 38, '400 24px "Noto Sans KR", "Malgun Gothic", sans-serif', '#64786b');
+  drawCardText(context, '셀핀다 · 오늘 내 상태', 104, 1210, 872, 36, '500 22px "Noto Sans KR", "Malgun Gothic", sans-serif', '#158457');
   return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
 }
 
@@ -125,7 +125,7 @@ export default function SevenDayChallenge({ onEvent }: Props) {
     const url = new URL(challengeLink());
     try {
       if (typeof navigator.share === 'function') {
-        await navigator.share({ title: '셀핀다 7일 리듬 챌린지', text: '제품 구매 없이 하루 한 가지 휴식을 함께 기록해요.', url: url.href });
+        await navigator.share({ title: '셀핀다 7일 휴식 기록', text: '제품 구매 없이 하루 한 가지 휴식을 함께 기록해요.', url: url.href });
         setMessage('친구 초대 공유 창을 열었어요.');
       } else {
         await navigator.clipboard.writeText(url.href);
@@ -199,10 +199,10 @@ export default function SevenDayChallenge({ onEvent }: Props) {
   }
 
   return <section id="lab" className="section wrap seven-day-challenge" aria-labelledby="challenge-heading">
-    <div className="section-head"><div><p className="chapter">리듬 연구소 · 7일의 기록</p><h2 id="challenge-heading">하루에 한 가지,<br />나에게 남기는 작은 실천.</h2></div><p>제품 구매와 관계없이 참여하세요.<br />실천과 메모는 이 브라우저에만 저장됩니다.</p></div>
+    <div className="section-head"><div><p className="chapter">7일 휴식 기록</p><h2 id="challenge-heading">하루 5분,<br />내가 정한 휴식 한 가지.</h2></div><p>제품을 구매하지 않아도 참여할 수 있어요.<br />기록과 메모는 이 브라우저에만 저장됩니다.</p></div>
     <p className="note">기기의 현지 날짜 기준입니다. 회원 계정·다른 기기와 동기화되지 않으며 서버에 보내지 않습니다. 건강 상태나 제품 효과를 평가하는 기록이 아닙니다.</p>
     {initial.legacy ? <p className="challenge-legacy">이전 체크 목록에는 날짜가 없어 이번 7일 기록에 합치지 않았어요. 새 기록은 시작한 날짜부터 남깁니다.</p> : null}
-    {!record ? <div className="challenge-start"><div><h3>오늘부터, 일곱 번의 작은 여백.</h3><p>시작일 {today} · 지난 날짜는 나중에 기록할 수 있어요.<br />미래 날짜의 실천은 그날이 오면 기록해 주세요.</p></div><button className="button" onClick={start}>오늘부터 7일 시작 <ArrowRight size={18} aria-hidden="true" /></button></div> : <>
+    {!record ? <div className="challenge-start"><div><h3>오늘부터 7일, 하루 한 번 쉬어 보기.</h3><p>시작일 {today} · 지난 날짜는 나중에 기록할 수 있어요.<br />미래 날짜의 실천은 그날이 오면 기록해 주세요.</p></div><button className="button" onClick={start}>오늘부터 7일 시작 <ArrowRight size={18} aria-hidden="true" /></button></div> : <>
       <div className="challenge-record-heading"><div><p>{record.startDate} ~ {record.days[6]!.date}</p><h3>{completed}일의 실천을 기록했어요.</h3><p className="note">연속 {streak}일 · 달성 점수가 아닌 완료 표시 수예요. 빠진 날도 편하게 남겨두세요.</p></div><div className="challenge-record-actions"><button className="text-link" onClick={download}><Download size={17} aria-hidden="true" /> 기록 다운로드</button><button className="text-link" onClick={invite}>친구 초대 ↗</button><button className="text-link" onClick={() => setConfirmDelete(true)}><Trash2 size={17} aria-hidden="true" /> 기록 삭제</button></div></div>
       <div className="challenge-daily-message" role="status" aria-live="polite"><strong>오늘의 짧은 메시지</strong><span>{todayDay ? todayDay.completed ? '오늘의 작은 멈춤을 남겼어요. 내일도 같은 시간에 이어가 볼까요?' : '오늘 한 가지 휴식을 골라 체크해 보세요. 완벽하게 하지 않아도 괜찮아요.' : finished ? '7일 기록이 끝났어요. 남겨 둔 메모를 천천히 돌아보세요.' : '오늘 기록을 준비하고 있어요. 시작한 날짜의 흐름을 따라가 보세요.'}</span></div>
       {inviteLink ? <label className="challenge-invite-link">챌린지 초대 링크<input value={inviteLink} readOnly onFocus={event => event.currentTarget.select()} /></label> : null}

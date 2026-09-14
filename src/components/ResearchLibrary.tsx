@@ -36,14 +36,14 @@ type Props = {
 };
 
 const facts: [keyof ResearchMetadata, string][] = [
-  ['population', '누구를 살펴봤나요?'],
-  ['studyType', '어떻게 조사했나요?'],
-  ['sampleSize', '연구 규모'],
-  ['duration', '관찰 기간'],
-  ['dose', '연구에서 사용한 양'],
+  ['population', '누가 참여했나요?'],
+  ['studyType', '어떻게 살펴봤나요?'],
+  ['sampleSize', '참여한 사람'],
+  ['duration', '살펴본 기간'],
+  ['dose', '연구에서 먹은 양'],
   ['comparison', '무엇과 비교했나요?'],
-  ['outcome', '무엇을 측정했나요?'],
-  ['searchThrough', '문헌 검색 범위'],
+  ['outcome', '무엇을 확인했나요?'],
+  ['searchThrough', '자료를 찾은 범위'],
 ];
 
 function compactStudyType(value?: string): string {
@@ -114,22 +114,22 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
 
   return <section id="research" className="section wrap research research-library" aria-labelledby="research-heading">
     <div className="section-head">
-      <div><p className="chapter">연구를 쉽게 읽기</p><h2 id="research-heading">GABA는 어떤 질문으로<br />연구했을까요?</h2></div>
-      <p>핵심은 짧게, 이야기는 펼쳐서.<br />연구 질문·관찰·출처를 차례로 살펴보세요.</p>
+      <div><p className="chapter">연구를 쉽게 읽기</p><h2 id="research-heading">GABA를 사람들은<br />어떻게 살펴봤을까요?</h2></div>
+      <p>먼저 한 문장으로 읽어 보세요.<br />궁금하면 참여자·먹은 양·기간·출처를 열어 보세요.</p>
     </div>
     <div className="research-reading-path" aria-label="연구 읽는 순서">
-      <div><span>01</span><strong>질문</strong><small>무엇을 궁금해했나요?</small></div>
-      <div><span>02</span><strong>관찰</strong><small>어떤 조건에서 무엇을 봤나요?</small></div>
-      <div><span>03</span><strong>선택</strong><small>내 기준으로 천천히 비교해요.</small></div>
+      <div><span>01</span><strong>궁금한 점</strong><small>무엇을 알고 싶었나요?</small></div>
+      <div><span>02</span><strong>살펴본 방법</strong><small>누구에게 무엇을 했나요?</small></div>
+      <div><span>03</span><strong>내가 확인할 점</strong><small>제품 표시와 따로 비교해요.</small></div>
     </div>
     {studies.length > 0 ? <>
       <div className="research-library-controls" role="search" aria-label="승인된 연구 자료 찾기">
         <label htmlFor="research-search">궁금한 내용 찾기<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="스트레스·수면·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
         <label htmlFor="research-topic">관심 주제<select id="research-topic" value={activeTopic} onChange={event => setTopic(event.target.value)}><option value="">모든 주제</option>{topics.map(item => <option value={item} key={item}>{item}</option>)}</select></label>
-        <label htmlFor="research-type">어떻게 살펴봤나요?<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 방식</option>{studyTypes.map(type => <option value={type} key={type}>{type}</option>)}</select></label>
+        <label htmlFor="research-type">살펴본 방법<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 방법</option>{studyTypes.map(type => <option value={type} key={type}>{type}</option>)}</select></label>
         <button type="button" className="text-link" disabled={!query && !activeTopic && !activeType} onClick={() => { setQuery(''); setTopic(''); setStudyType(''); }}>처음 상태로 돌아가기</button>
       </div>
-      <p id="research-search-help" className="note">관심 있는 주제나 연구 이야기를 찾을 수 있어요. 카드에서 쉬운 설명을 먼저 확인해 보세요.</p>
+      <p id="research-search-help" className="note">스트레스·수면·운동처럼 궁금한 말을 입력해 보세요. 카드에서 쉬운 설명을 먼저 확인할 수 있어요.</p>
       <p className="research-library-count" role="status" aria-live="polite">전체 {studies.length}건 중 {visibleStudies.length}건</p>
     </> : null}
     {visibleStudies.length === 0 ? <p className="research-library-empty">다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요.</p> : visibleStudies.map(claim => {
@@ -149,32 +149,32 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
             {label: '살펴본 신호', value: metadata.outcome, Icon: Activity},
           ].filter(item => item.value).map(({label, value, Icon}) => <div key={label}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span><strong>{label}</strong><small>{value}</small></span></div>)}
         </div>
-        <p className="research-library-scope"><strong>이 자료에서 볼 장면</strong>{metadata.consumerScope || '이 자료에서 살펴본 장면과 제품 정보를 차례로 비교해 보세요.'}</p>
+        <p className="research-library-scope"><strong>이 자료에서 본 장면</strong>{metadata.consumerScope || '이 자료에서 본 장면과 제품 정보를 차례로 확인해 보세요.'}</p>
         <details className="research-detail" onToggle={event => {
           if (event.currentTarget.open) onOpen?.(claim.id);
         }}>
-          <summary>한눈에 이해하기</summary>
+          <summary>연구를 더 자세히 보기</summary>
           <div className="research-library-detail">
             <div className="research-story-grid" aria-label="이 연구를 네 가지 질문으로 보기">
-              <div className="research-story-card"><span>01</span><h4>누구를 살펴봤나요?</h4><p>{metadata.population || '연구 참여자 정보가 공개되지 않았어요.'}</p>{metadata.sampleSize ? <small>{metadata.sampleSize}</small> : null}</div>
-              <div className="research-story-card"><span>02</span><h4>어떻게 봤나요?</h4><p>{compactStudyType(metadata.studyType)}</p>{metadata.duration ? <small>{metadata.duration}</small> : null}</div>
+              <div className="research-story-card"><span>01</span><h4>누가 참여했나요?</h4><p>{metadata.population || '참여한 사람 정보가 공개되지 않았어요.'}</p>{metadata.sampleSize ? <small>{metadata.sampleSize}</small> : null}</div>
+              <div className="research-story-card"><span>02</span><h4>어떻게 살펴봤나요?</h4><p>{compactStudyType(metadata.studyType)}</p>{metadata.duration ? <small>{metadata.duration}</small> : null}</div>
               <div className="research-story-card"><span>03</span><h4>무엇과 비교했나요?</h4><p>{metadata.comparison || '비교 조건이 공개되지 않았어요.'}</p></div>
-              <div className="research-story-card"><span>04</span><h4>어떤 내용을 살펴봤나요?</h4><p>{metadata.consumerSummary}</p></div>
+              <div className="research-story-card"><span>04</span><h4>무엇을 확인했나요?</h4><p>{metadata.consumerSummary}</p></div>
             </div>
-            <div className="research-library-boundary"><h4>제품을 볼 때는 이렇게 확인해요</h4><p>{metadata.productApplicability}</p></div>
+            <div className="research-library-boundary"><h4>제품 정보와 비교할 때</h4><p>{metadata.productApplicability}</p></div>
             <details className="research-technical-detail">
-              <summary>숫자와 맥락을 더 보기</summary>
+              <summary>연구 조건을 더 보기</summary>
               <div className="research-technical-detail-body">
-                <div className="research-library-overview"><h4>이 연구에서 본 내용</h4><p>{metadata.consumerSummary || claim.publicText}</p></div>
+                <div className="research-library-overview"><h4>이 연구에서 확인한 내용</h4><p>{metadata.consumerSummary || claim.publicText}</p></div>
                 <dl className="research-library-facts">{facts.map(([key, label]) => {
                   const value = metadata[key];
                   return typeof value === 'string' && value ? <div key={key}><dt>{label}</dt><dd>{value}</dd></div> : null;
                 })}</dl>
-                <div className="research-library-findings"><h4>이 연구를 읽는 방법</h4><p>{metadata.hopefulTakeaway || metadata.consumerSummary || '연구에서 살펴본 내용을 내 생활 리듬과 함께 천천히 비교해 보세요.'}</p></div>
+                <div className="research-library-findings"><h4>내 생활에 적용할 때</h4><p>{metadata.hopefulTakeaway || metadata.consumerSummary || '연구에서 본 내용을 내 생활과 함께 천천히 비교해 보세요.'}</p></div>
               </div>
             </details>
           </div>
-          <div className="research-library-sources"><h4>더 궁금할 때 출처 보기</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료 확인일 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
+          <div className="research-library-sources"><h4>원문 출처 보기</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료 확인일 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
             <a key={`${source.url}-${source.title}`} href={source.url!} target="_blank" rel="noopener noreferrer">{source.title} <span aria-label="새 창">↗</span></a>,
           )}</div>
         </details>
