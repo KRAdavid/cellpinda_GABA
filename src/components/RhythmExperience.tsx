@@ -426,6 +426,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <details className="rhythm-rules"><summary>이 결과를 어떻게 읽으면 되나요?</summary><p>{result?.explanation ?? '최근 일주일을 다섯 가지 생활 장면으로 나눠 봅니다. 0·1은 지금 습관을 이어가도 좋은 장면, 2·3은 쉬는 시간을 먼저 만들어 볼 장면으로 표시합니다. 가장 자주 불편했던 장면 하나를 오늘의 초점으로 보여줍니다. 건강 상태나 체내 GABA 수치를 알려주는 검사는 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#story">GABA가 어떤 물질인지 알아보기 <ArrowRight size={18} aria-hidden="true" /></a>
+            <a className="rhythm-text-button" href="#brain-load-evidence">뇌 피로와 건강 연구를 쉽게 보기 <ArrowRight size={18} aria-hidden="true" /></a>
             <a className="rhythm-text-button" href="#products">제품 구성·표시사항 살펴보기 <ArrowRight size={18} aria-hidden="true" /></a>
           </div>
         </div>

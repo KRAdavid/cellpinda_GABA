@@ -6,6 +6,7 @@ import ReviewExperience,{type PublicReview} from './components/ReviewExperience'
 import SevenDayChallenge from './components/SevenDayChallenge';
 import GabaStory from './components/GabaStory';
 import GabaEvidenceHighlights from './components/GabaEvidenceHighlights';
+import BrainLoadEvidence from './components/BrainLoadEvidence';
 import TeaserPreview from './components/TeaserPreview';
 import ProductShare from './components/ProductShare';
 import PurchaseQuestions from './components/PurchaseQuestions';
@@ -125,6 +126,7 @@ export default function App(){
  <section className="intro-strip wrap"><h2>나를 돌아보는 1분,<br/>오늘을 가볍게.</h2>{[['01','확인','오늘 내 상태를 짧게 확인해요.'],['02','이해','GABA가 어떤 물질인지 알아봐요.'],['03','선택','제품 표시를 확인하고 결정해요.']].map(([n,t,d])=><div className="step" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</section>
  <section className="section empathy" aria-labelledby="empathy-heading"><div className="wrap"><div className="section-head"><div><p className="chapter">잠깐, 오늘 내 상태</p><h2 id="empathy-heading">이런 날이<br/>자주 있나요?</h2></div><p>아래에서 가장 가까운 장면을 골라 주세요.<br/>1분 체크로 바로 이어집니다.</p></div><div className="empathy-cards">{[['일이 끝나도 계속 생각나나요?','퇴근하거나 집안일을 끝내도 할 일이 머릿속에서 떠나지 않습니다.'],['잠자리에 누워도 잠이 안 오나요?','불을 끄고 누워도 한참 뒤척이다 잠듭니다.'],['5분도 쉬지 못하고 하루를 보내나요?','일과 집안일 사이에 앉아서 쉬는 시간이 거의 없습니다.'],['쉬어도 아침에 피곤한가요?','잠을 자고 일어나도 몸과 머리가 무겁습니다.']].map(([title,description],index)=><a className="empathy-card" href="#rhythm" key={title} onClick={()=>track('hero_check_start',{path:'/empathy',signal:`0${index+1}`})}><span>0{index+1}</span><h3>{title}</h3><p>{description}</p><strong>지금 내 상태 확인하기 <ArrowRight size={16}/></strong></a>)}</div></div></section>
  <div className="wrap section"><RhythmExperience onEvent={track}/></div>
+  <BrainLoadEvidence />
   <TeaserPreview onEvent={track}/>
   {content ? <>
    <GabaEvidenceHighlights claims={content.claims} onOpen={claimId=>track('evidence_opened',{path:'/gaba-evidence',claimId})}/>
