@@ -35,10 +35,17 @@ const audit = parseJson(auditRun.output);
 const pulse = parseJson(pulseRun.output);
 const live = parseJson(liveRun.output);
 
+const now = new Date();
+const reportedAtKst = new Intl.DateTimeFormat('ko-KR', {
+  timeZone: 'Asia/Seoul',
+  dateStyle: 'short',
+  timeStyle: 'medium',
+}).format(now);
 const report = {
   schemaVersion: 1,
   mode: 'daily_status_report',
-  generatedAt: new Date().toISOString(),
+  generatedAt: now.toISOString(),
+  reportedAtKst,
   timezone: 'Asia/Seoul',
   base,
   goalId: audit?.goalId || pulse?.goalId || null,

@@ -73,7 +73,8 @@ jobs:
             const body = [
               `## ${title}`,
               '',
-              `- 보고 시각: ${report.generatedAt} (Asia/Seoul)`,
+              `- 보고 시각: ${report.reportedAtKst || report.generatedAt} (한국 시간)`,
+              `- 실행 시각(UTC): ${report.generatedAt}`,
               `- 목표: ${report.goalId || '확인 필요'}`,
               `- 목표 상태: **${report.overallStatus}**`,
               `- 핵심 검증: **${report.coreValid ? 'MET' : '확인 필요'}**`,
