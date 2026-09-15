@@ -96,6 +96,8 @@ pnpm run validate:live-public
 
 `pnpm run tf:pulse:heartbeat`는 CI가 만든 임시 pulse 파일 없이도 최신 pulse를 생성해 안전한 heartbeat를 갱신한다. CI처럼 파일 경로를 직접 넘기면 지정한 파일만 읽는다.
 
+`.github/workflows/daily-status-report.yml`은 매일 한국 시간 오전 10시(UTC 01:00)에 Goal Audit·TF Pulse·공개 사이트 라이브 검증을 다시 실행한다. 결과는 30일 보관 아티팩트와 하나의 누적 GitHub 이슈(`[자동 보고] 셀핀다 GABA 업무 진행상황`)에 갱신되며, 제품 표시·후기 권한·티저 공개·주문처럼 사람 승인이 필요한 상태는 자동으로 바꾸지 않는다. 수동 확인은 `workflow_dispatch`로 실행할 수 있다.
+
 공개 운영 화면의 `회의 안건 JSON` 링크는 같은 pulse를 안전한 공개 패킷으로 제공한다. [공개 TF pulse](https://kradavid.github.io/cellpinda_GABA/data/tf-pulse.json)에는 원문 경로·개인정보·비밀값 없이 상태, 참여 역할, 필요한 입력과 다음 조치만 담긴다.
 
 공개 운영 화면의 `목표 감사 JSON` 링크는 Goal Contract·6개 역할군·업무 상태 카운트·완료 마일스톤·현재 승인 게이트를 한 파일로 묶은 중간 검토 패킷이다. [공개 목표 감사](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)는 내부 경로와 개인정보를 제외하며, 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않는다.
