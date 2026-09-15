@@ -80,6 +80,8 @@ requireMatch(rhythm, /touch-action|autoAdvance/, 'rhythm touch interaction contr
 requireMatch(rhythmStyles, /font-size:\s*16px;\s*line-height:\s*1\.75/, 'rhythm copy must be at least 16px on mobile');
 requireMatch(rhythm, /rhythm-fatigue-alert|강한 뇌 피로 신호/, 'result must show an explicit fatigue signal');
 requireMatch(rhythm, /생활 신호 지수|loadScore|loadLevel/, 'result must show a transparent personal load index');
+requireMatch(rhythm, /rhythm-care-guide|몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담/, 'high fatigue results must include a clear care-seeking guide');
+requireMatch(rhythmStyles, /rhythm-care-guide[\s\S]*border-left/, 'care-seeking guide must be visually distinct');
 requireMatch(fatigueGame, /FATIGUE_GAME_ROUNDS|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
 requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');
