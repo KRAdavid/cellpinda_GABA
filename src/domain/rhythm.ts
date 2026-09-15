@@ -2,6 +2,7 @@
 export type AnswerValue = 0 | 1 | 2 | 3;
 export type RhythmId = 'active' | 'sleep' | 'irregular' | 'sensory' | 'unrested' | 'steady';
 export type RecoveryLevel = 'maintain' | 'prepare' | 'prioritize';
+export type LoadLevel = 'low' | 'watch' | 'high';
 
 export interface RhythmQuestion {
   readonly id: string;
@@ -158,6 +159,9 @@ export interface RhythmResult {
   readonly type: RhythmType;
   /** Internal editorial values, not GABA levels, severity, risk, or clinical scores. */
   readonly scores: RhythmScores;
+  /** Sum of the five self-reported signals; a personal reflection index only. */
+  readonly loadScore: number;
+  readonly loadLevel: LoadLevel;
   readonly explanation: string;
   readonly ruleVersion: '2.0';
 }
@@ -186,6 +190,8 @@ export function classifyRhythm(answers: readonly number[]): RhythmResult {
     unrested: answers[4]!,
   };
   const maximum = Math.max(...Object.values(scores));
+  const loadScore = answers.reduce((total, answer) => total + answer, 0);
+  const loadLevel: LoadLevel = maximum >= 3 || loadScore >= 10 ? 'high' : maximum <= 1 ? 'low' : 'watch';
   const id: RhythmId = maximum <= 1 ? 'steady'
     : scores.unrested === maximum ? 'unrested'
     : scores.sleep === maximum ? 'sleep'
@@ -195,6 +201,8 @@ export function classifyRhythm(answers: readonly number[]): RhythmResult {
   return {
     type: resultTypes[id],
     scores,
+    loadScore,
+    loadLevel,
     ruleVersion: '2.0',
     explanation: '최근 7일의 답변을 다섯 가지 생활 장면으로 나눠 봤어요. 0·1은 지금 습관을 이어가도 좋은 장면, 2·3은 쉬는 시간을 먼저 만들어 볼 장면으로 표시했어요. 가장 자주 불편했던 장면 하나를 오늘의 초점으로 보여줍니다. 이 결과는 생활을 돌아보기 위한 안내이며 건강 상태나 체내 GABA 수치를 알려주는 검사가 아니에요.',
   };

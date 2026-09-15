@@ -39,14 +39,13 @@ function inviteUrl(): string {
 }
 
 function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady'; label: string; heading: string; body: string } {
-  const highest = Math.max(...Object.values(result.scores));
-  if (result.type.id === 'steady') return {
+  if (result.loadLevel === 'low') return {
     tone: 'steady',
     label: '뇌 피로 신호가 적은 편',
     heading: '지금처럼 쉬는 흐름을 놓치지 마세요.',
     body: '최근 일주일의 답변에서는 뇌가 쉴 틈이 없다는 신호가 크게 보이지 않았어요. 바쁜 날에도 짧은 멈춤을 계속 남겨 두세요.',
   };
-  if (highest >= 3) return {
+  if (result.loadLevel === 'high') return {
     tone: 'high',
     label: '강한 뇌 피로 신호',
     heading: '지금은 뇌가 쉴 틈을 거의 못 찾고 있을 수 있어요.',
@@ -399,6 +398,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
             <p className="rhythm-description">{type.description}</p>
             {signal ? <div className={`rhythm-fatigue-alert rhythm-fatigue-alert-${signal.tone}`} role="status"><AlertTriangle size={23} aria-hidden="true" /><div><p className="rhythm-eyebrow">{signal.label}</p><h4>{signal.heading}</h4><p>{signal.body}</p></div></div> : null}
+            {result ? <div className={`rhythm-load-score rhythm-load-score-${result.loadLevel}`} aria-label={`최근 7일 생활 신호 지수 ${result.loadScore}점, 15점 만점`}><div><span>최근 7일 생활 신호 지수</span><strong>{result.loadScore}<small>/ 15</small></strong></div><progress value={result.loadScore} max={15} /><p>점수가 높을수록 쉬는 장면이 더 자주 필요했다는 뜻이에요. 의료 진단이나 뇌 기능 측정 점수가 아닙니다.</p></div> : null}
             <svg className="rhythm-card-wave" viewBox="0 0 500 70" aria-hidden="true" focusable="false"><path d="M0 31 C75 -12 110 74 190 31 S330 -12 500 31" /><path d="M0 43 C75 0 110 86 190 43 S330 0 500 43" /><path d="M0 55 C75 12 110 98 190 55 S330 12 500 55" /></svg>
             <div className={`rhythm-recovery-guide rhythm-recovery-${type.recoveryLevel}`}>
             <p className="rhythm-eyebrow">뇌 피로를 줄이기 위해 먼저 할 일</p>

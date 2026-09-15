@@ -79,6 +79,7 @@ requireMatch(styles, /\.hero-question,[\s\S]*?font-size:\s*16px;\s*line-height:\
 requireMatch(rhythm, /touch-action|autoAdvance/, 'rhythm touch interaction contract is missing');
 requireMatch(rhythmStyles, /font-size:\s*16px;\s*line-height:\s*1\.75/, 'rhythm copy must be at least 16px on mobile');
 requireMatch(rhythm, /rhythm-fatigue-alert|강한 뇌 피로 신호/, 'result must show an explicit fatigue signal');
+requireMatch(rhythm, /생활 신호 지수|loadScore|loadLevel/, 'result must show a transparent personal load index');
 requireMatch(fatigueGame, /FATIGUE_GAME_ROUNDS|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
 requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');

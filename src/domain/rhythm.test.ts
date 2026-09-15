@@ -23,6 +23,10 @@ test('representative responses reach every named type', () => {
 
 test('boundaries and tie priority follow the published editorial rule', () => {
   assert.equal(classifyRhythm([1, 1, 0, 0, 0]).type.id, 'steady');
+  assert.deepEqual({ score: classifyRhythm([1, 1, 0, 0, 0]).loadScore, level: classifyRhythm([1, 1, 0, 0, 0]).loadLevel }, { score: 2, level: 'low' });
+  assert.deepEqual({ score: classifyRhythm([2, 1, 1, 1, 1]).loadScore, level: classifyRhythm([2, 1, 1, 1, 1]).loadLevel }, { score: 6, level: 'watch' });
+  assert.deepEqual({ score: classifyRhythm([2, 2, 2, 2, 2]).loadScore, level: classifyRhythm([2, 2, 2, 2, 2]).loadLevel }, { score: 10, level: 'high' });
+  assert.deepEqual({ score: classifyRhythm([3, 0, 0, 0, 0]).loadScore, level: classifyRhythm([3, 0, 0, 0, 0]).loadLevel }, { score: 3, level: 'high' });
   assert.equal(classifyRhythm([1, 0, 0, 2, 0]).type.id, 'sensory');
   assert.equal(classifyRhythm([0, 0, 0, 0, 1]).type.id, 'steady');
   assert.equal(classifyRhythm([2, 2, 2, 2, 2]).type.id, 'unrested');
@@ -51,6 +55,8 @@ test('all 1024 complete responses are deterministic and preserve their inputs', 
     assert.deepEqual(classifyRhythm(answers), result);
     assert.deepEqual(answers, before);
     assert.ok(Object.values(result.scores).every(score => score >= 0 && score <= 3));
+    assert.ok(Number.isInteger(result.loadScore) && result.loadScore >= 0 && result.loadScore <= 15);
+    assert.ok(['low', 'watch', 'high'].includes(result.loadLevel));
     assert.equal(result.type, resultTypes[result.type.id]);
     found.add(result.type.id);
   }
