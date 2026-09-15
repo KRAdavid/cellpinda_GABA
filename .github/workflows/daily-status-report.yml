@@ -27,6 +27,8 @@ jobs:
         with:
           node-version: 24.19.0
           package-manager-cache: false
+      - name: Sync approved public data
+        run: node scripts/sync-public-data.mjs
       - name: Generate daily status report
         id: report
         continue-on-error: true

@@ -27,6 +27,7 @@ const parseJson = value => {
 };
 const scrub = value => String(value || '').replaceAll(root, '<workspace>').slice(-2400);
 
+const syncRun = run('scripts/sync-public-data.mjs');
 const auditRun = run('scripts/audit-goal.mjs', ['--json']);
 const pulseRun = run('scripts/tf-pulse.mjs', ['--json']);
 const liveRun = run('scripts/validate-live-public.mjs', [base]);
@@ -60,6 +61,7 @@ const report = {
     error: liveRun.ok ? null : scrub(liveRun.error || liveRun.output),
   },
   checks: {
+    publicDataSync: syncRun.ok ? 'MET' : 'FAILED',
     goalAudit: auditRun.ok ? 'MET' : 'FAILED',
     tfPulse: pulseRun.ok ? 'MET' : 'FAILED',
     livePublic: liveRun.ok ? 'MET' : 'FAILED',
@@ -73,4 +75,4 @@ const report = {
 if (outputPath) await writeFile(resolve(root, outputPath), `${JSON.stringify(report, null, 2)}\n`);
 console.log(JSON.stringify(report, null, 2));
 
-if (!auditRun.ok || !pulseRun.ok || !liveRun.ok) process.exitCode = 1;
+if (!syncRun.ok || !auditRun.ok || !pulseRun.ok || !liveRun.ok) process.exitCode = 1;

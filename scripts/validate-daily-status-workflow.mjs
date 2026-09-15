@@ -8,6 +8,7 @@ const requireText = (pattern, message) => { if (!pattern.test(source)) issues.pu
 
 requireText(/cron:\s*['"]0 1 \* \* \*['"]/, '한국 시간 오전 10시(UTC 01:00) 일정이 없습니다.');
 requireText(/workflow_dispatch:/, '수동 보고 실행 트리거가 없습니다.');
+requireText(/sync-public-data\.mjs/, '보고 전 승인 공개 데이터 동기화가 없습니다.');
 requireText(/generate-daily-status-report\.mjs/, '일일 상태 보고 생성 스크립트가 연결되지 않았습니다.');
 requireText(/daily-status\.json/, '일일 상태 보고 산출물이 보존되지 않습니다.');
 requireText(/actions\/upload-artifact@/, '일일 상태 보고 아티팩트 업로드가 없습니다.');
