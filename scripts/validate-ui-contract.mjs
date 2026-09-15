@@ -8,6 +8,8 @@ const app = await read('src/App.tsx');
 const styles = await read('src/styles.css');
 const rhythm = await read('src/components/RhythmExperience.tsx');
 const rhythmStyles = await read('src/components/rhythm.css');
+const fatigueGame = await read('src/components/FatigueGame.tsx');
+const fatigueGameStyles = await read('src/components/fatigue-game.css');
 const challenge = await read('src/components/SevenDayChallenge.tsx');
 const productShare = await read('src/components/ProductShare.tsx');
 const shareDomain = await read('src/domain/share.ts');
@@ -65,6 +67,7 @@ if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하�
 requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\s\S]*?\}, 180\)/, 'touch answers must auto-advance to the next question');
 requireMatch(app, /<img[^>]+alt=\{/, 'product and hero images must expose alternative text');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
+requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, 'result sharing must invite the recipient to run their own check');
 requireMatch(rhythm, /share\/(?:\$\{type\.id\}|type\.id)/, 'result-specific share URL is missing');
 requireMatch(rhythm, /social-rhythm-\$\{type\.id\}\.png/, 'Kakao share must use a result-specific image');
 requireMatch(rhythmStyles, /rhythm-mobile-share-bar[\s\S]*?position:fixed/, 'mobile result share bar is missing');
@@ -75,6 +78,9 @@ requireMatch(styles, /@media\(prefers-reduced-motion:reduce\)/, 'global reduced-
 requireMatch(styles, /\.hero-question,[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'core consumer copy must be at least 16px on mobile');
 requireMatch(rhythm, /touch-action|autoAdvance/, 'rhythm touch interaction contract is missing');
 requireMatch(rhythmStyles, /font-size:\s*16px;\s*line-height:\s*1\.75/, 'rhythm copy must be at least 16px on mobile');
+requireMatch(rhythm, /rhythm-fatigue-alert|강한 뇌 피로 신호/, 'result must show an explicit fatigue signal');
+requireMatch(fatigueGame, /FATIGUE_GAME_ROUNDS|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
+requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
 requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');
 requireMatch(researchStyles, /research-library-empty[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research empty-state copy must be at least 16px');
 requireMatch(reviewStyles, /review-quote-card p:not\(\.review-quote-label\)[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'review copy must be at least 16px on mobile');
@@ -82,8 +88,8 @@ requireMatch(challenge, /challenge_start|challenge_day_complete|seven_day_comple
 requireMatch(shareDomain, /approvedCampaign[\s\S]*?URLSearchParams\(currentSearch\)[\s\S]*?\.get\('campaign'\)/, 'shared campaign tokens must use the approved helper');
 requireMatch(productShare, /preserveCampaign\(url,window\.location\.search\)/, 'product share must preserve an approved campaign identifier');
 requireMatch(challenge, /preserveCampaign\(url, window\.location\.search\)/, 'challenge share must preserve an approved campaign identifier');
-for (const event of ['hero_check_start', 'rhythm_check_complete', 'result_share_click', 'result_share_success', 'friend_check_start', 'product_compare_view', 'review_source_click', 'purchase_cta_click', 'challenge_start', 'challenge_day_complete', 'seven_day_complete']) {
-  requireMatch(app + rhythm + challenge, new RegExp(event), `required measurement event ${event} is missing`);
+  for (const event of ['hero_check_start', 'rhythm_check_complete', 'result_share_click', 'result_share_success', 'friend_check_start', 'product_compare_view', 'review_source_click', 'purchase_cta_click', 'challenge_start', 'challenge_day_complete', 'seven_day_complete', 'fatigue_game_start', 'fatigue_game_rest_start', 'fatigue_game_complete']) {
+  requireMatch(app + rhythm + challenge + fatigueGame, new RegExp(event), `required measurement event ${event} is missing`);
 }
 requireMatch(teaser, /allow="autoplay; fullscreen; picture-in-picture"/, 'teaser autoplay permission is missing');
 requireMatch(teaser, /loading="eager"/, 'teaser must load eagerly when exposed');
@@ -122,4 +128,4 @@ for (const id of shareIds) {
   requireMatch(html, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, `share page ${id} WebPage structured data is missing`);
 }
 
-console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 11, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true}));
+  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['five-round-reaction', 'rest-before-after', 'non-diagnostic-copy'], resultShare: 'invite-first'}));

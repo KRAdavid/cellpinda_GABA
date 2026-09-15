@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
+import { AlertTriangle, ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
 import { classifyRhythm, questions, resultTypes, rhythmIdFromUrl } from '../domain/rhythm';
 import type { AnswerValue, RhythmId, RhythmResult, RhythmType } from '../domain/rhythm';
+import FatigueGame from './FatigueGame';
 import './rhythm.css';
 
 type KakaoApi = { isInitialized: () => boolean; init: (key: string) => void; Share: { sendDefault: (payload: Record<string, unknown>) => void } };
@@ -28,6 +29,35 @@ function shareUrl(type: RhythmType, referralId?: string): string {
   if (campaignId && /^[A-Za-z0-9_-]{1,64}$/.test(campaignId)) url.searchParams.set('campaign', campaignId);
   url.hash = 'rhythm';
   return url.toString();
+}
+
+function inviteUrl(): string {
+  const base = new URL(import.meta.env.BASE_URL, window.location.origin);
+  base.hash = 'rhythm';
+  if (campaignId && /^[A-Za-z0-9_-]{1,64}$/.test(campaignId)) base.searchParams.set('campaign', campaignId);
+  return base.toString();
+}
+
+function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady'; label: string; heading: string; body: string } {
+  const highest = Math.max(...Object.values(result.scores));
+  if (result.type.id === 'steady') return {
+    tone: 'steady',
+    label: '뇌 피로 신호가 적은 편',
+    heading: '지금처럼 쉬는 흐름을 놓치지 마세요.',
+    body: '최근 일주일의 답변에서는 뇌가 쉴 틈이 없다는 신호가 크게 보이지 않았어요. 바쁜 날에도 짧은 멈춤을 계속 남겨 두세요.',
+  };
+  if (highest >= 3) return {
+    tone: 'high',
+    label: '강한 뇌 피로 신호',
+    heading: '지금은 뇌가 쉴 틈을 거의 못 찾고 있을 수 있어요.',
+    body: '이 신호를 무시하고 계속 버티면 머리가 멍하고 집중이 끊기거나, 밤까지 일이 이어질 수 있어요. 오늘은 화면과 일을 끊고 10분이라도 먼저 쉬세요.',
+  };
+  return {
+    tone: 'watch',
+    label: '뇌 피로 주의 신호',
+    heading: '뇌가 쉬는 시간이 부족하다는 신호가 보여요.',
+    body: '지금 상태로 계속 밀어붙이면 집중과 잠에 부담이 될 수 있어요. 오늘 일정에 5분 멈춤을 먼저 넣고, 머리가 계속 바쁜지 다시 살펴보세요.',
+  };
 }
 
 /** Preserve words first; split characters only when a single word exceeds a line. */
@@ -127,6 +157,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const resultLayoutRef = useRef<HTMLDivElement>(null);
   const autoAdvanceTimer = useRef<number | null>(null);
   const type = result?.type ?? sharedType;
+  const signal = result ? fatigueSignal(result) : null;
   const question = questions[step]!;
 
   useEffect(() => () => {
@@ -248,6 +279,42 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     }
   }
 
+  async function copyInviteLink() {
+    const url = inviteUrl();
+    try {
+      await navigator.clipboard.writeText(url);
+      setMessage('내 결과 대신 1분 점검 초대 링크를 복사했어요. 받은 사람도 자기 상태를 직접 확인해요.');
+      setManualLink('');
+      onEvent('share_copy',{path:result?'/result':'/share',channel:'invite'});
+      onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
+    } catch {
+      setManualLink(url);
+      setMessage('초대 링크를 아래에서 선택해 직접 복사해 주세요.');
+    }
+  }
+
+  async function shareInvite() {
+    const url = inviteUrl();
+    const shareText = '나도 뇌 피로 1분 점검을 해봤어요. 당신도 1분이면 지금 상태를 확인할 수 있어요.';
+    onEvent('share_request',{path:result?'/result':'/share',kind:'invite'});
+    onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: '뇌 피로 1분 점검', text: shareText, url });
+        setMessage('1분 점검 초대 창을 열었어요. 상대방이 직접 점검하도록 보내 보세요.');
+        onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
+        return;
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          setMessage('초대 공유를 취소했어요.');
+          onEvent('share_cancelled',{path:result?'/result':'/share',channel:'invite'});
+          return;
+        }
+      }
+    }
+    await copyInviteLink();
+  }
+
   function shareToKakao() {
     if (!type || !kakaoReady || !window.Kakao) return;
     const url = shareUrl(type, getShareReferralId());
@@ -331,6 +398,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
             {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
             <p className="rhythm-description">{type.description}</p>
+            {signal ? <div className={`rhythm-fatigue-alert rhythm-fatigue-alert-${signal.tone}`} role="status"><AlertTriangle size={23} aria-hidden="true" /><div><p className="rhythm-eyebrow">{signal.label}</p><h4>{signal.heading}</h4><p>{signal.body}</p></div></div> : null}
             <svg className="rhythm-card-wave" viewBox="0 0 500 70" aria-hidden="true" focusable="false"><path d="M0 31 C75 -12 110 74 190 31 S330 -12 500 31" /><path d="M0 43 C75 0 110 86 190 43 S330 0 500 43" /><path d="M0 55 C75 12 110 98 190 55 S330 12 500 55" /></svg>
             <div className={`rhythm-recovery-guide rhythm-recovery-${type.recoveryLevel}`}>
             <p className="rhythm-eyebrow">뇌 피로를 줄이기 위해 먼저 할 일</p>
@@ -342,20 +410,21 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <p className="rhythm-note">최근 일주일의 생활을 돌아보는 안내이며, 건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p>
           </article>
           <div className="rhythm-result-actions" ref={resultLayoutRef}>
-            <p className="rhythm-eyebrow">KEEP YOUR LITTLE MOMENT</p>
-            <h3>오늘 내 상태를<br />한 장에 담아요.</h3>
-            <p>카드와 공유 링크에는 결과 이름만 표시돼요. 문항별 답변은 담지 않습니다.</p>
+            <p className="rhythm-eyebrow">같이 1분 점검하기</p>
+            <h3>내 결과를 보여주기보다<br />서로 직접 확인해 보세요.</h3>
+            <p>초대 링크에는 내 답변이나 유형이 담기지 않아요. 받은 사람도 자기 상태를 직접 점검하고, 필요한 휴식을 찾아볼 수 있어요.</p>
             {cardUrl && type ? <img className="rhythm-card-preview" src={cardUrl} alt={`${type.name} 결과 카드 미리보기`} /> : null}
             {sharedType ? <button type="button" className="rhythm-button" onClick={start}>나도 1분 리듬 체크 <ArrowRight size={18} aria-hidden="true" /></button> : null}
-            {!sharedType && kakaoReady ? <button type="button" className="rhythm-button" onClick={shareToKakao}>카카오톡으로 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
-            <button type="button" className={`rhythm-button${sharedType || kakaoReady ? ' secondary' : ''}`} onClick={share}>리듬 이야기 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
-            {sharedType && kakaoReady ? <button type="button" className="rhythm-button secondary" onClick={shareToKakao}>카카오톡으로 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
-            <button type="button" className="rhythm-button secondary" onClick={() => void copyLink()}>링크만 복사 <ArrowUpRight size={18} aria-hidden="true" /></button>
-            <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>이미지 카드 저장 <Download size={18} aria-hidden="true" /></button>
+            <button type="button" className="rhythm-button" onClick={() => void shareInvite()}>친구에게 “너도 해봐” 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button>
+            {!sharedType && kakaoReady ? <button type="button" className="rhythm-button secondary" onClick={shareToKakao}>내 결과 카드 카카오톡 공유 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
+            <button type="button" className="rhythm-button secondary" onClick={share}>내 결과 카드 공유 <ArrowUpRight size={18} aria-hidden="true" /></button>
+            <button type="button" className="rhythm-button secondary" onClick={() => void copyInviteLink()}>1분 점검 초대 링크 복사 <ArrowUpRight size={18} aria-hidden="true" /></button>
+            <button type="button" className="rhythm-button secondary" onClick={() => void copyLink()}>내 결과 링크 복사 <ArrowUpRight size={18} aria-hidden="true" /></button>
+            <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>내 결과 카드 저장 <Download size={18} aria-hidden="true" /></button>
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <details className="rhythm-rules"><summary>이 결과를 어떻게 읽으면 되나요?</summary><p>{result?.explanation ?? '최근 일주일을 다섯 가지 생활 장면으로 나눠 봅니다. 0·1은 지금 습관을 이어가도 좋은 장면, 2·3은 쉬는 시간을 먼저 만들어 볼 장면으로 표시합니다. 가장 자주 불편했던 장면 하나를 오늘의 초점으로 보여줍니다. 건강 상태나 체내 GABA 수치를 알려주는 검사는 아닙니다.'}</p></details>
-            <a className="rhythm-text-button" href="#story">이제 GABA를 알아볼까요? <ArrowRight size={18} aria-hidden="true" /></a>
+            <a className="rhythm-text-button" href="#story">GABA가 어떤 물질인지 알아보기 <ArrowRight size={18} aria-hidden="true" /></a>
             <a className="rhythm-text-button" href="#products">제품 구성·표시사항 살펴보기 <ArrowRight size={18} aria-hidden="true" /></a>
           </div>
         </div>
@@ -370,6 +439,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : (
         <div className="rhythm-start-panel"><div><h3>뇌 피로가 쌓였는지,<br />1분이면 확인해요.</h3><p>퇴근 후에도 일이 생각나는지, 침대에서 뒤척이는지, 하루에 5분도 못 쉬는지 차례로 답해 보세요.<br />지금 쉬어야 할 장면을 바로 찾을 수 있습니다.</p><p className="rhythm-gaba-intro">GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질이에요. 이 체크는 최근 일주일의 생활을 돌아보고, 오늘 뇌를 쉬게 할 방법을 찾는 안내입니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>뇌 피로 1분 점검 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p></div></div>
       )}
+      <FatigueGame onEvent={onEvent} />
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
           <div className="rhythm-comparison-heading"><div><p className="rhythm-eyebrow">함께 돌아보는 하루</p><h3 id="rhythm-comparison-heading">나와 친구, 각자의 쉬는 방식.</h3></div><button type="button" className="rhythm-text-button" onClick={() => { setFriendType(null); setCompareConsent(false); }}>비교 지우기</button></div>
@@ -384,7 +454,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : null}
       <p className="rhythm-status" role="status" aria-live="polite">{message}</p>
       {manualLink ? <label className="rhythm-manual-link">공유 링크<input value={manualLink} readOnly onFocus={event => event.target.select()} /></label> : null}
-      {type && shareBarVisible ? <div className="rhythm-mobile-share-bar" aria-label="리듬 결과 공유">{kakaoReady ? <button type="button" onClick={shareToKakao}>카카오톡 공유</button> : <button type="button" onClick={share}>공유</button>}<button type="button" onClick={() => void copyLink()}>링크 복사</button></div> : null}
+      {type && shareBarVisible ? <div className="rhythm-mobile-share-bar" aria-label="1분 점검 초대"><button type="button" onClick={() => void shareInvite()}>너도 1분 점검</button><button type="button" onClick={() => void copyInviteLink()}>초대 링크 복사</button></div> : null}
     </section>
   );
 }
