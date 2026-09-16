@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { compareFocusGames, compareReactionGames, FATIGUE_GAME_ROUNDS, FOCUS_GAME_STAGES, FOCUS_GAME_TRIALS_PER_STAGE, summarizeFocusGame, summarizeReactionGame, type FocusTrialRecord } from './fatigue-game.ts';
+import { compareFocusGames, compareReactionGames, FATIGUE_GAME_ROUNDS, FOCUS_GAME_RECOVERY_THRESHOLD_PCT, FOCUS_GAME_STAGES, FOCUS_GAME_TRIALS_PER_STAGE, needsFocusRecovery, summarizeFocusGame, summarizeReactionGame, type FocusTrialRecord } from './fatigue-game.ts';
 
 test('summarizes five rounds without turning misses into a zero', () => {
   const summary = summarizeReactionGame([300, null, 500, 400, null], 1);
@@ -48,6 +48,16 @@ test('compares the same person before and after the focus challenge', () => {
   assert.equal(comparison.accuracyDeltaPct, 42);
   assert.equal(comparison.brakeDeltaPct, 75);
   assert.equal(comparison.switchDeltaPct, 50);
+});
+
+test('opens recovery guidance at or below the published accuracy threshold', () => {
+  const strong = summarizeFocusGame(focusRecords(420));
+  const low = summarizeFocusGame(focusRecords(420, false, false));
+  assert.equal(strong.accuracyPct, 100);
+  assert.equal(low.accuracyPct, 58);
+  assert.equal(needsFocusRecovery(strong), false);
+  assert.equal(needsFocusRecovery(low), true);
+  assert.equal(FOCUS_GAME_RECOVERY_THRESHOLD_PCT, 70);
 });
 
 test('rejects malformed focus challenge records', () => {

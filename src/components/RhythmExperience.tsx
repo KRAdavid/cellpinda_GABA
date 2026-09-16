@@ -441,7 +441,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : (
         <div className="rhythm-start-panel"><div><h3>뇌 피로가 쌓였는지,<br />1분이면 확인해요.</h3><p>퇴근 후에도 일이 생각나는지, 침대에서 뒤척이는지, 하루에 5분도 못 쉬는지 차례로 답해 보세요.<br />지금 쉬어야 할 장면을 바로 찾을 수 있습니다.</p><p className="rhythm-gaba-intro">GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질이에요. 이 체크는 최근 일주일의 생활을 돌아보고, 오늘 뇌를 쉬게 할 방법을 찾는 안내입니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>뇌 피로 1분 점검 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p></div></div>
       )}
-      <FatigueGame onEvent={onEvent} />
+      <FatigueGame onEvent={onEvent} onInvite={shareInvite} />
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
           <div className="rhythm-comparison-heading"><div><p className="rhythm-eyebrow">함께 돌아보는 하루</p><h3 id="rhythm-comparison-heading">나와 친구, 각자의 쉬는 방식.</h3></div><button type="button" className="rhythm-text-button" onClick={() => { setFriendType(null); setCompareConsent(false); }}>비교 지우기</button></div>

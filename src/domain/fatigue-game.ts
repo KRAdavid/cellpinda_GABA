@@ -7,6 +7,8 @@ export const FATIGUE_GAME_ROUNDS = 5;
 
 /** Three short, research-inspired tasks used for a personal before/after run. */
 export const FOCUS_GAME_TRIALS_PER_STAGE = 4;
+/** Accuracy at or below this level opens an extra rest-and-retest prompt. */
+export const FOCUS_GAME_RECOVERY_THRESHOLD_PCT = 70;
 export const FOCUS_GAME_STAGES = ['speed', 'brake', 'switch'] as const;
 export type FocusGameStage = (typeof FOCUS_GAME_STAGES)[number];
 
@@ -34,6 +36,10 @@ export interface FocusGameSummary {
   readonly speed: FocusStageSummary;
   readonly brake: FocusStageSummary;
   readonly switch: FocusStageSummary;
+}
+
+export function needsFocusRecovery(summary: FocusGameSummary): boolean {
+  return summary.accuracyPct <= FOCUS_GAME_RECOVERY_THRESHOLD_PCT;
 }
 
 function summarizeFocusStage(records: readonly FocusTrialRecord[]): FocusStageSummary {
