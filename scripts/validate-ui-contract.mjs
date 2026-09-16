@@ -139,5 +139,13 @@ for (const id of shareIds) {
   requireMatch(html, /property="og:locale" content="ko_KR"/, `share page ${id} locale metadata is missing`);
   requireMatch(html, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, `share page ${id} WebPage structured data is missing`);
 }
+const focusPage = resolve(root, 'public/focus/index.html');
+if (!existsSync(focusPage)) fail('focus invite page is missing');
+const focusHtml = await readFile(focusPage, 'utf8');
+requireMatch(focusHtml, /canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//, 'focus invite canonical metadata is missing');
+requireMatch(focusHtml, /focus=1#rhythm|focus=1/, 'focus invite handoff is missing');
+requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 1분 집중 리듬 챌린지"/, 'focus invite Open Graph title is missing');
+requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/social-card\.png"/, 'focus invite Open Graph image is missing');
+requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 
   console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));

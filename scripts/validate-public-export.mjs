@@ -5,6 +5,7 @@ const readJson = async relative => JSON.parse(await readFile(new URL(`../${relat
 const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const focusHtml = await readFile(new URL('../public/focus/index.html', import.meta.url), 'utf8');
 const robots = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8');
 const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 const teaser = await readJson('data/teaser-manifest.json');
@@ -33,11 +34,12 @@ const isSmartStoreReview = value => {
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
 if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질입니다/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || !/gaba-master-index\.json/i.test(indexHtml) || !indexHtml.includes(approvedSmartStoreUrl) || !indexHtml.includes(approvedSmartStoreReviewUrl) || !/<a href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>구매자 후기 원문 읽기/.test(indexHtml) || !indexHtml.includes(approvedReviewText)) fail('index.html must keep a readable static fallback with the approved Smart Store product and review links');
 if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml) || !/<meta property="og:type" content="website"\s*\/>/i.test(indexHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml)) fail('index.html must expose canonical and Open Graph URL metadata');
+if (!/canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//.test(focusHtml) || !/property="og:title" content="“너도 해봐” 1분 집중 리듬 챌린지"/.test(focusHtml) || !/property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/social-card\.png"/.test(focusHtml) || !/focus=1#rhythm|focus=1/.test(focusHtml)) fail('focus invite page must expose a social preview and app handoff');
 if (!/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/.test(indexHtml)) fail('index.html must expose safe WebSite structured data');
 if (!/^User-agent: \*\nAllow: \/\nDisallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops\n\nSitemap: https:\/\/kradavid\.github\.io\/cellpinda_GABA\/sitemap\.xml\s*$/m.test(robots)) fail('robots.txt must expose the public sitemap and keep internal paths out of discovery');
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-const expectedSitemapUrls = ['https://kradavid.github.io/cellpinda_GABA/', ...['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'].map(id => `https://kradavid.github.io/cellpinda_GABA/share/${id}/`)];
-if (!sitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?>') || !sitemap.includes('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"') || JSON.stringify(sitemapUrls) !== JSON.stringify(expectedSitemapUrls) || /\/admin|\/ops/.test(sitemap)) fail('sitemap.xml must contain only the public landing and share pages');
+const expectedSitemapUrls = ['https://kradavid.github.io/cellpinda_GABA/', 'https://kradavid.github.io/cellpinda_GABA/focus/', ...['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'].map(id => `https://kradavid.github.io/cellpinda_GABA/share/${id}/`)];
+if (!sitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?>') || !sitemap.includes('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"') || JSON.stringify(sitemapUrls) !== JSON.stringify(expectedSitemapUrls) || /\/admin|\/ops/.test(sitemap)) fail('sitemap.xml must contain only the public landing, focus invite and share pages');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');

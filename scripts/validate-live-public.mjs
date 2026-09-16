@@ -82,8 +82,9 @@ const requestPublicRoute = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, faviconResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute] = await Promise.all([
+    const [page, focusPageResponse, faviconResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute] = await Promise.all([
       request('/?view=ops'),
+      request('/focus/'),
       request('/favicon.svg'),
       request('/robots.txt'),
       request('/sitemap.xml'),
@@ -100,7 +101,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       requestPublicRoute('/?view=ops'),
     ]);
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
-    const [pageText, robotsText, sitemapText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
+    const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
     const moduleSources = [...pageText.matchAll(/<script[^>]+type="module"[^>]+src="([^"]+)"/gi)].map(match => match[1]).filter(Boolean);
     assert.ok(moduleSources.length > 0, 'live root must expose a module bundle for the consumer UI');
     const moduleBundles = await Promise.all(moduleSources.map(async source => {
@@ -125,8 +126,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
     assert.match(robotsText, /Disallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops/, 'live robots.txt must keep internal paths out of discovery');
     const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-    const expectedSitemapUrls = [`${base}/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
-    assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain the public landing and share pages only');
+    const expectedSitemapUrls = [`${base}/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
+    assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain the public landing, focus invite and share pages only');
     assert.ok(!sitemapText.includes('/admin') && !sitemapText.includes('/ops'), 'live sitemap must not list internal routes');
     for (const [label, route] of [['/admin', adminRoute], ['/ops', opsRoute], ['/?view=admin', adminQueryRoute], ['/?view=ops', opsQueryRoute]]) {
       assert.ok(!/콘텐츠 검토실|운영자 접근 키|TF 운영판|운영 큐|관리자 기능/i.test(route.text), `public route ${label} leaks an internal operations surface`);
@@ -137,6 +138,11 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(metaContent(pageText, 'property', 'og:title'), 'live root is missing an Open Graph title');
     assert.ok(metaContent(pageText, 'property', 'og:description'), 'live root is missing an Open Graph description');
     assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
+    assert.equal(canonicalHref(focusPageText), `${base}/focus/`, 'live focus invite canonical URL is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:url'), `${base}/focus/`, 'live focus invite Open Graph URL is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live focus invite Open Graph image is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
+    assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#rhythm'), 'live focus invite must hand off to the auto-start game');
     assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';

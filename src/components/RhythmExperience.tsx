@@ -31,10 +31,12 @@ function shareUrl(type: RhythmType, referralId?: string): string {
   return url.toString();
 }
 
-function inviteUrl(kind: 'rhythm' | 'focus' = 'rhythm'): string {
-  const base = new URL(import.meta.env.BASE_URL, window.location.origin);
+function inviteUrl(kind: 'rhythm' | 'focus' = 'rhythm', referralId = ''): string {
+  const root = new URL(import.meta.env.BASE_URL, window.location.origin);
+  const base = kind === 'focus' ? new URL('focus/', root) : root;
   base.hash = 'rhythm';
   if (kind === 'focus') base.searchParams.set('focus', '1');
+  if (referralId && /^[A-Za-z0-9_-]{8,64}$/.test(referralId)) base.searchParams.set('ref', referralId);
   if (campaignId && /^[A-Za-z0-9_-]{1,64}$/.test(campaignId)) base.searchParams.set('campaign', campaignId);
   return base.toString();
 }
@@ -144,7 +146,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const [cardUrl, setCardUrl] = useState('');
   const [kakaoReady, setKakaoReady] = useState(false);
   const [shareBarVisible, setShareBarVisible] = useState(false);
-  const focusAutoStart = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('focus') === '1';
+  const focusAutoStart = typeof window !== 'undefined' && (new URLSearchParams(window.location.search).get('focus') === '1' || window.location.pathname.endsWith('/focus/'));
   const sharedTracked=useRef(false);
   const pointerSelecting=useRef(false);
   const shareReferralRef=useRef('');
@@ -281,7 +283,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   }
 
   async function copyInviteLink(kind: 'rhythm' | 'focus' = 'rhythm') {
-    const url = inviteUrl(kind);
+    const url = inviteUrl(kind, getShareReferralId());
     try {
       await navigator.clipboard.writeText(url);
       setMessage(kind === 'focus' ? '집중 리듬 챌린지 초대 링크를 복사했어요. 받은 사람도 자기 기록을 직접 확인해요.' : '내 결과 대신 1분 점검 초대 링크를 복사했어요. 받은 사람도 자기 상태를 직접 확인해요.');
@@ -295,15 +297,15 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   }
 
   async function shareInvite(kind: 'rhythm' | 'focus' = 'rhythm') {
-    const url = inviteUrl(kind);
+    const url = inviteUrl(kind, getShareReferralId());
     const shareText = kind === 'focus'
-      ? '방금 집중 리듬 챌린지를 해봤어요. 당신도 뇌 피로 1분 점검으로 지금 상태를 확인해 보세요.'
+      ? '요즘 머리가 예전 같지 않다면 이 1분 게임을 같이 해봐요. 내 기록은 서로 보이지 않고, 각자 직접 확인해요.'
       : '나도 뇌 피로 1분 점검을 해봤어요. 당신도 1분이면 지금 상태를 확인할 수 있어요.';
     onEvent('share_request',{path:result?'/result':'/share',kind:'invite'});
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
     if (navigator.share) {
       try {
-        await navigator.share({ title: kind === 'focus' ? '집중 리듬 챌린지 · 뇌 피로 1분 점검' : '뇌 피로 1분 점검', text: shareText, url });
+        await navigator.share({ title: kind === 'focus' ? '“너도 해봐” 1분 집중 리듬 챌린지' : '뇌 피로 1분 점검', text: shareText, url });
         setMessage('1분 점검 초대 창을 열었어요. 상대방이 직접 점검하도록 보내 보세요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
         return;
