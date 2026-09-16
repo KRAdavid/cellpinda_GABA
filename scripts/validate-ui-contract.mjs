@@ -93,6 +93,8 @@ for (const marker of ['집중 리듬 챌린지', 'Go/No-Go', '규칙 전환', '1
 requireMatch(rhythm, /focusAutoStart|focus-game/, 'focus challenge invite must deep-link to the game');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
 requireMatch(fatigueGameStyles, /fatigue-stage-preview[\s\S]*fatigue-trial-dots[\s\S]*fatigue-target-purple/, 'advanced focus game visual stages are missing');
+requireMatch(fatigueGame, /FocusJourneyVisual|fatigue-journey-visual/, 'focus game visual journey is missing');
+requireMatch(fatigueGameStyles, /fatigue-journey-visual[\s\S]*fatigue-journey-core[\s\S]*fatigue-journey-node/, 'focus game visual journey styling is missing');
 requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');
 requireMatch(researchStyles, /research-library-empty[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research empty-state copy must be at least 16px');
 requireMatch(reviewStyles, /review-quote-card p:not\(\.review-quote-label\)[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'review copy must be at least 16px on mobile');

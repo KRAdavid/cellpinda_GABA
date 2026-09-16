@@ -120,6 +120,20 @@ function stageMetric(label: string, before: { accuracyPct: number; averageMs: nu
   return { label, before: `${before.accuracyPct}% · ${metricText(before.averageMs)}`, after: `${after.accuracyPct}% · ${metricText(after.averageMs)}` };
 }
 
+function FocusJourneyVisual() {
+  return (
+    <div className="fatigue-journey-visual" role="img" aria-label="반응, 멈춤, 전환 세 단계를 거치는 1분 집중 리듬 챌린지">
+      <span className="fatigue-journey-ring fatigue-journey-ring-one" />
+      <span className="fatigue-journey-ring fatigue-journey-ring-two" />
+      <div className="fatigue-journey-core"><Brain size={28} aria-hidden="true" /><strong>1분</strong><span>집중 리듬</span></div>
+      <div className="fatigue-journey-node fatigue-journey-node-speed"><b>01</b><strong>반응</strong><small>빠르게 잡기</small></div>
+      <div className="fatigue-journey-node fatigue-journey-node-brake"><b>02</b><strong>멈춤</strong><small>한 박자 참기</small></div>
+      <div className="fatigue-journey-node fatigue-journey-node-switch"><b>03</b><strong>전환</strong><small>규칙 바꾸기</small></div>
+      <span className="fatigue-journey-dot fatigue-journey-dot-one" /><span className="fatigue-journey-dot fatigue-journey-dot-two" /><span className="fatigue-journey-dot fatigue-journey-dot-three" />
+    </div>
+  );
+}
+
 export default function FatigueGame({ onEvent, onInvite, startOnMount = false }: FatigueGameProps) {
   const [phase, setPhase] = useState<GamePhase>('idle');
   const [mode, setMode] = useState<GameMode>('baseline');
@@ -359,11 +373,11 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
 
       <div className={`fatigue-game-panel fatigue-game-phase-${phase}`}>
         {phase === 'idle' ? <div className="fatigue-game-intro">
-          <div><h3>반응·멈춤·전환을<br />한 번에 게임으로 확인해요.</h3><p>3가지 짧은 과제를 12번 수행합니다. 연구에서 쓰이는 과제 형태를 참고했지만, 결과는 쉬기 전후의 내 집중 리듬을 비교하는 개인 기록이에요.</p>
+          <div className="fatigue-game-intro-copy"><h3>반응·멈춤·전환을<br />한 번에 게임으로 확인해요.</h3><p>3가지 짧은 과제를 12번 수행합니다. 연구에서 쓰이는 과제 형태를 참고했지만, 결과는 쉬기 전후의 내 집중 리듬을 비교하는 개인 기록이에요.</p>
             <div className="fatigue-stage-preview" aria-label="게임 세 단계"><div><span>01</span><strong>반응</strong><small>신호를 잡기</small></div><div><span>02</span><strong>멈춤</strong><small>빨강을 참기</small></div><div><span>03</span><strong>전환</strong><small>규칙 바꾸기</small></div></div>
             <details className="fatigue-game-method"><summary>왜 이 세 가지인가요?</summary><p>반응 속도, Go/No-Go 억제, 과제 전환은 집중과 인지 조절을 살펴볼 때 자주 사용하는 과제 형태입니다. 화면 지연·기기·수면·주변 환경의 영향을 받으므로 표준화된 진단 점수로 해석하지 않습니다.</p><div><a href="https://pubmed.ncbi.nlm.nih.gov/17850833/" target="_blank" rel="noopener noreferrer">Go/No-Go 연구 예시 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/29517261/" target="_blank" rel="noopener noreferrer">과제 전환 리뷰 <ExternalLink size={14} aria-hidden="true" /></a></div></details>
           </div>
-          <div className="fatigue-game-intro-actions"><button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Brain size={18} aria-hidden="true" /> 게임 시작 <ArrowRight size={18} aria-hidden="true" /></button>{onInvite ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}><ArrowUpRight size={18} aria-hidden="true" /> 친구에게 “너도 해봐” 보내기</button> : null}</div>
+          <div className="fatigue-game-intro-side"><FocusJourneyVisual /><div className="fatigue-game-intro-actions"><button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Brain size={18} aria-hidden="true" /> 게임 시작 <ArrowRight size={18} aria-hidden="true" /></button>{onInvite ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}><ArrowUpRight size={18} aria-hidden="true" /> 친구에게 “너도 해봐” 보내기</button> : null}</div></div>
         </div> : null}
 
         {phase === 'running' ? <div className="fatigue-game-running">
