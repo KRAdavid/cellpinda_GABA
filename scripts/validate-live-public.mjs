@@ -111,7 +111,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }));
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 영상 보기'), 'live consumer bundle must contain the duration-neutral teaser CTA');
-    assert.ok(consumerBundle.includes('20초 반응 게임'), 'live consumer bundle must contain the reaction game entry');
+    assert.ok(consumerBundle.includes('집중 리듬 챌린지'), 'live consumer bundle must contain the advanced focus game');
+    assert.ok(consumerBundle.includes('반응·멈춤·전환') && consumerBundle.includes('12번'), 'live consumer bundle must expose the three-stage focus game');
     assert.ok(consumerBundle.includes('친구에게 “너도 해봐” 보내기'), 'live consumer bundle must make the result share an invitation to check');
     assert.ok(consumerBundle.includes('강한 뇌 피로 신호'), 'live consumer bundle must contain an explicit fatigue signal');
     assert.ok(consumerBundle.includes('생활 신호 지수'), 'live consumer bundle must contain the personal load index');

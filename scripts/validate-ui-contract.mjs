@@ -88,8 +88,10 @@ requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence sectio
 for (const marker of ['뇌 피로와 건강 근거', '61개 연구', '267개 연구', '21개 연구', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
-requireMatch(fatigueGame, /FATIGUE_GAME_ROUNDS|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
+requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
+for (const marker of ['집중 리듬 챌린지', 'Go/No-Go', '규칙 전환', '12번']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
+requireMatch(fatigueGameStyles, /fatigue-stage-preview[\s\S]*fatigue-trial-dots[\s\S]*fatigue-target-purple/, 'advanced focus game visual stages are missing');
 requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');
 requireMatch(researchStyles, /research-library-empty[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research empty-state copy must be at least 16px');
 requireMatch(reviewStyles, /review-quote-card p:not\(\.review-quote-label\)[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'review copy must be at least 16px on mobile');
@@ -137,4 +139,4 @@ for (const id of shareIds) {
   requireMatch(html, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, `share page ${id} WebPage structured data is missing`);
 }
 
-  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['five-round-reaction', 'rest-before-after', 'non-diagnostic-copy'], resultShare: 'invite-first'}));
+  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'non-diagnostic-copy'], resultShare: 'invite-first'}));

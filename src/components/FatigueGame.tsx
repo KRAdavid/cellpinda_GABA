@@ -1,129 +1,183 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, CheckCircle2, CircleAlert, RotateCcw, Timer } from 'lucide-react';
+import { ArrowRight, Brain, CheckCircle2, CircleAlert, ExternalLink, RotateCcw, Timer } from 'lucide-react';
 import {
-  compareReactionGames,
-  FATIGUE_GAME_ROUNDS,
-  summarizeReactionGame,
-  type ReactionGameSummary,
-  type ReactionTime,
+  compareFocusGames,
+  FOCUS_GAME_STAGES,
+  FOCUS_GAME_TRIALS_PER_STAGE,
+  summarizeFocusGame,
+  type FocusGameStage,
+  type FocusGameSummary,
+  type FocusTrialRecord,
 } from '../domain/fatigue-game';
 import './fatigue-game.css';
 
 type GamePhase = 'idle' | 'running' | 'baseline-complete' | 'rest' | 'complete';
 type GameMode = 'baseline' | 'after';
+type StimulusColor = 'green' | 'purple' | 'red';
+
+interface Trial {
+  stage: FocusGameStage;
+  stimulusColor: StimulusColor;
+  targetColor: StimulusColor;
+  shouldRespond: boolean;
+}
+
+interface RunPattern {
+  brakeStopIndex: number;
+  switchTargetColors: StimulusColor[];
+  switchShouldRespond: boolean[];
+}
 
 interface FatigueGameProps {
   onEvent: (name: string, properties?: Record<string, string>) => void;
 }
 
-function summaryText(summary: ReactionGameSummary): string {
-  const average = summary.averageMs === null ? '기록 없음' : `평균 ${summary.averageMs}ms`;
-  return `${average} · 놓친 신호 ${summary.misses}회`;
+const stageInfo: Record<FocusGameStage, { label: string; instruction: string; detail: string }> = {
+  speed: { label: '반응 속도', instruction: '색이 보이면 바로 눌러요', detail: '신호를 잡는 속도' },
+  brake: { label: '멈춤 억제', instruction: '초록은 누르고 빨강은 참아요', detail: '눌러야 할 때와 멈출 때' },
+  switch: { label: '규칙 전환', instruction: '위의 색과 같은 신호만 눌러요', detail: '바뀐 규칙에 적응하는 속도' },
+};
+
+function shuffled<T>(items: T[]): T[] {
+  return items.map(item => ({item, order: Math.random()})).sort((a, b) => a.order - b.order).map(({item}) => item);
 }
 
-function comparisonText(before: ReactionGameSummary, after: ReactionGameSummary): { heading: string; body: string; tone: 'faster' | 'slower' | 'similar' | 'unavailable' } {
-  const comparison = compareReactionGames(before, after);
-  if (comparison.direction === 'faster') return {
-    heading: '쉬고 나니 신호를 더 빨리 잡았어요.',
-    body: `평균 ${Math.abs(comparison.deltaMs ?? 0)}ms 빨라졌어요. 짧은 휴식 뒤 오늘의 집중감이 달라졌는지 스스로 확인한 기록입니다.`,
-    tone: 'faster',
-  };
-  if (comparison.direction === 'slower') return {
-    heading: '쉬고 다시 해도 반응이 느렸어요.',
-    body: `평균 ${Math.abs(comparison.deltaMs ?? 0)}ms 차이가 났어요. 오늘은 머리가 계속 일하고 있을 수 있으니 화면과 일을 끊고 더 쉬어 보세요.`,
-    tone: 'slower',
-  };
-  if (comparison.direction === 'similar') return {
-    heading: '두 번의 기록이 비슷해요.',
-    body: '짧은 게임 결과만으로 뇌 피로를 판단할 수는 없어요. 지금 느끼는 피곤함과 잠의 질도 함께 돌아보세요.',
-    tone: 'similar',
-  };
+function createRunPattern(): RunPattern {
   return {
-    heading: '두 번을 모두 기록하지 못했어요.',
-    body: '신호를 놓친 횟수가 많아 비교하기 어려워요. 조용한 곳에서 몸을 편하게 하고 다시 해보세요.',
-    tone: 'unavailable',
+    brakeStopIndex: Math.floor(Math.random() * FOCUS_GAME_TRIALS_PER_STAGE),
+    switchTargetColors: shuffled(['green', 'purple', 'green', 'purple'] as StimulusColor[]),
+    switchShouldRespond: shuffled([true, true, false, false]),
   };
+}
+
+function createTrial(stageIndex: number, trialIndex: number, pattern: RunPattern): Trial {
+  const stage = FOCUS_GAME_STAGES[stageIndex]!;
+  if (stage === 'speed') return { stage, stimulusColor: 'green', targetColor: 'green', shouldRespond: true };
+  if (stage === 'brake') {
+    const shouldRespond = trialIndex !== pattern.brakeStopIndex;
+    return { stage, stimulusColor: shouldRespond ? 'green' : 'red', targetColor: 'green', shouldRespond };
+  }
+  const targetColor = pattern.switchTargetColors[trialIndex]!;
+  const shouldRespond = pattern.switchShouldRespond[trialIndex]!;
+  return { stage, stimulusColor: shouldRespond ? targetColor : targetColor === 'green' ? 'purple' : 'green', targetColor, shouldRespond };
+}
+
+function metricText(value: number | null, suffix = 'ms'): string {
+  return value === null ? '기록 없음' : `${value}${suffix}`;
+}
+
+function summaryLine(summary: FocusGameSummary): string {
+  return `정확도 ${summary.accuracyPct}% · 반응 ${metricText(summary.speed.averageMs)}`;
+}
+
+function comparisonText(before: FocusGameSummary, after: FocusGameSummary): { heading: string; body: string; tone: 'improved' | 'declined' | 'mixed' | 'similar' | 'unavailable' } {
+  const comparison = compareFocusGames(before, after);
+  const speed = comparison.speedDeltaMs === null ? '반응 속도는 비교하기 어려워요.' : `반응 속도 ${Math.abs(comparison.speedDeltaMs)}ms ${comparison.speedDeltaMs < 0 ? '빨라졌어요' : comparison.speedDeltaMs > 0 ? '느려졌어요' : '같아요'}.`;
+  const accuracy = comparison.accuracyDeltaPct === null ? '' : `전체 정확도는 ${Math.abs(comparison.accuracyDeltaPct)}%p ${comparison.accuracyDeltaPct > 0 ? '올랐어요' : comparison.accuracyDeltaPct < 0 ? '내려갔어요' : '같아요'}.`;
+  if (comparison.direction === 'improved') return { heading: '쉬고 나니 집중 리듬이 더 안정적이에요.', body: `${speed} ${accuracy} 짧은 휴식 뒤 내 기록이 어떻게 달라졌는지 확인한 결과예요.`, tone: 'improved' };
+  if (comparison.direction === 'declined') return { heading: '휴식 후에도 머리가 아직 바쁜 기록이에요.', body: `${speed} ${accuracy} 오늘은 화면과 일을 끊고 조금 더 쉬어 보세요.`, tone: 'declined' };
+  if (comparison.direction === 'mixed') return { heading: '속도와 정확도가 서로 다르게 움직였어요.', body: `${speed} ${accuracy} 한 번의 기록보다 지금 느끼는 피로감과 잠의 질을 함께 살펴보세요.`, tone: 'mixed' };
+  if (comparison.direction === 'similar') return { heading: '두 번의 집중 리듬이 비슷해요.', body: `${speed} ${accuracy} 짧은 게임은 오늘의 개인 기록으로만 남겨 두세요.`, tone: 'similar' };
+  return { heading: '두 번의 기록을 비교하기 어려워요.', body: '신호를 놓친 횟수가 많았어요. 조용한 곳에서 몸을 편하게 하고 다시 해보세요.', tone: 'unavailable' };
+}
+
+function stageMetric(label: string, before: { accuracyPct: number; averageMs: number | null }, after: { accuracyPct: number; averageMs: number | null }) {
+  return { label, before: `${before.accuracyPct}% · ${metricText(before.averageMs)}`, after: `${after.accuracyPct}% · ${metricText(after.averageMs)}` };
 }
 
 export default function FatigueGame({ onEvent }: FatigueGameProps) {
   const [phase, setPhase] = useState<GamePhase>('idle');
   const [mode, setMode] = useState<GameMode>('baseline');
-  const [round, setRound] = useState(0);
-  const [targetVisible, setTargetVisible] = useState(false);
-  const [times, setTimes] = useState<ReactionTime[]>([]);
+  const [stageIndex, setStageIndex] = useState(0);
+  const [trialIndex, setTrialIndex] = useState(0);
+  const [trial, setTrial] = useState<Trial | null>(null);
+  const [stimulusVisible, setStimulusVisible] = useState(false);
+  const [records, setRecords] = useState<FocusTrialRecord[]>([]);
   const [falseStarts, setFalseStarts] = useState(0);
-  const [before, setBefore] = useState<ReactionGameSummary | null>(null);
-  const [after, setAfter] = useState<ReactionGameSummary | null>(null);
+  const [before, setBefore] = useState<FocusGameSummary | null>(null);
+  const [after, setAfter] = useState<FocusGameSummary | null>(null);
   const [status, setStatus] = useState('');
   const timerRef = useRef<number | null>(null);
-  const targetAtRef = useRef(0);
+  const stimulusAtRef = useRef(0);
+  const runPatternRef = useRef<RunPattern>(createRunPattern());
 
   useEffect(() => {
     if (phase !== 'running') return;
-    const delay = 750 + Math.floor(Math.random() * 850);
-    timerRef.current = window.setTimeout(() => {
-      if (targetVisible) {
-        setTargetVisible(false);
-        const nextTimes = [...times, null];
-        setTimes(nextTimes);
-        if (round >= FATIGUE_GAME_ROUNDS - 1) {
-          const summary = summarizeReactionGame(nextTimes, falseStarts);
-          if (mode === 'baseline') { setBefore(summary); setPhase('baseline-complete'); }
-          else { setAfter(summary); setPhase('complete'); }
-          onEvent('fatigue_game_complete', { mode, averageMs: String(summary.averageMs ?? ''), misses: String(summary.misses) });
-        } else {
-          setRound(current => current + 1);
-          setStatus('신호를 놓쳤어요. 다음 신호를 기다리세요.');
-        }
-        return;
-      }
-      targetAtRef.current = performance.now();
-      setTargetVisible(true);
-      setStatus('지금 눌러요');
-    }, targetVisible ? 1800 : delay);
+    if (!stimulusVisible) {
+      const delay = 650 + Math.floor(Math.random() * 750);
+      timerRef.current = window.setTimeout(() => {
+        const nextTrial = createTrial(stageIndex, trialIndex, runPatternRef.current);
+        setTrial(nextTrial);
+        stimulusAtRef.current = performance.now();
+        setStimulusVisible(true);
+        setStatus(nextTrial.shouldRespond ? '지금 눌러요' : nextTrial.stage === 'brake' ? '빨강이면 멈춰요' : '규칙을 보고 판단해요');
+      }, delay);
+    } else {
+      timerRef.current = window.setTimeout(() => finishTrial(false), 1450);
+    }
     return () => {
       if (timerRef.current !== null) window.clearTimeout(timerRef.current);
       timerRef.current = null;
     };
-  }, [falseStarts, mode, onEvent, phase, round, targetVisible, times]);
+  }, [phase, stimulusVisible, stageIndex, trialIndex, mode, trial]);
 
   useEffect(() => () => {
     if (timerRef.current !== null) window.clearTimeout(timerRef.current);
   }, []);
 
+  function finishTrial(responded: boolean) {
+    if (!trial) return;
+    const responseMs = responded ? Math.max(1, Math.round(performance.now() - stimulusAtRef.current)) : null;
+    const correct = trial.shouldRespond ? responded : !responded;
+    const record: FocusTrialRecord = { stage: trial.stage, shouldRespond: trial.shouldRespond, responded, responseMs, correct };
+    const nextRecords = [...records, record];
+    setRecords(nextRecords);
+    setStimulusVisible(false);
+    setTrial(null);
+    if (responded && !trial.shouldRespond) setStatus('멈춰야 할 신호였어요. 다음에는 한 박자 쉬어 보세요.');
+    else if (!responded && trial.shouldRespond) setStatus('신호를 놓쳤어요. 다음에는 조금 더 기다려 보세요.');
+    else setStatus('좋아요. 다음 신호를 준비하세요.');
+    if (trialIndex < FOCUS_GAME_TRIALS_PER_STAGE - 1) {
+      setTrialIndex(current => current + 1);
+      return;
+    }
+    if (stageIndex < FOCUS_GAME_STAGES.length - 1) {
+      setStageIndex(current => current + 1);
+      setTrialIndex(0);
+      setStatus(`${stageInfo[FOCUS_GAME_STAGES[stageIndex + 1]!].label} 단계로 넘어가요.`);
+      return;
+    }
+    const summary = summarizeFocusGame(nextRecords, falseStarts);
+    if (mode === 'baseline') setBefore(summary);
+    else setAfter(summary);
+    setPhase(mode === 'baseline' ? 'baseline-complete' : 'complete');
+    onEvent('fatigue_game_complete', { mode, averageMs: String(summary.speed.averageMs ?? ''), misses: String(summary.speed.total - summary.speed.correct) });
+  }
+
   function startRun(nextMode: GameMode) {
     if (timerRef.current !== null) window.clearTimeout(timerRef.current);
     setMode(nextMode);
-    setRound(0);
-    setTargetVisible(false);
-    setTimes([]);
+    runPatternRef.current = createRunPattern();
+    setStageIndex(0);
+    setTrialIndex(0);
+    setTrial(null);
+    setStimulusVisible(false);
+    setRecords([]);
     setFalseStarts(0);
-    setStatus('신호가 나타나면 눌러 주세요.');
+    setStatus('첫 번째 신호를 기다리세요.');
     setPhase('running');
     onEvent('fatigue_game_start', { mode: nextMode });
   }
 
-  function tapTarget() {
+  function tapStimulus() {
     if (phase !== 'running') return;
-    if (!targetVisible) {
+    if (!stimulusVisible) {
       setFalseStarts(current => current + 1);
-      setStatus('아직 신호가 없어요. 초록 신호가 뜬 뒤 눌러 주세요.');
+      setStatus('아직 신호가 없어요. 신호가 뜬 뒤 눌러 주세요.');
       onEvent('fatigue_game_false_start', { mode });
       return;
     }
-    const elapsed = Math.max(1, Math.round(performance.now() - targetAtRef.current));
-    const nextTimes = [...times, elapsed];
-    setTargetVisible(false);
-    setTimes(nextTimes);
-    if (round >= FATIGUE_GAME_ROUNDS - 1) {
-      const summary = summarizeReactionGame(nextTimes, falseStarts);
-      if (mode === 'baseline') { setBefore(summary); setPhase('baseline-complete'); }
-      else { setAfter(summary); setPhase('complete'); }
-      onEvent('fatigue_game_complete', { mode, averageMs: String(summary.averageMs ?? ''), misses: String(summary.misses) });
-      return;
-    }
-    setRound(current => current + 1);
-    setStatus('좋아요. 다음 신호를 기다리세요.');
+    finishTrial(true);
   }
 
   function beginRest() {
@@ -137,45 +191,64 @@ export default function FatigueGame({ onEvent }: FatigueGameProps) {
     setPhase('idle');
     setBefore(null);
     setAfter(null);
-    setTimes([]);
-    setTargetVisible(false);
+    setRecords([]);
+    setTrial(null);
+    setStimulusVisible(false);
     setStatus('');
   }
+
+  const currentStage = stageInfo[FOCUS_GAME_STAGES[stageIndex]!];
+  const switchRule = trial?.targetColor ?? runPatternRef.current.switchTargetColors[trialIndex] ?? 'green';
+  const comparison = before && after ? comparisonText(before, after) : null;
+  const metrics = before && after ? [
+    stageMetric('반응 속도', before.speed, after.speed),
+    stageMetric('멈춤 억제', before.brake, after.brake),
+    stageMetric('규칙 전환', before.switch, after.switch),
+  ] : [];
 
   return (
     <section className="fatigue-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
-        <div><p className="fatigue-game-kicker">02 / 직접 체감하기</p><h2 id="fatigue-game-heading">20초 반응 게임</h2></div>
-        <p>초록 신호가 뜨면 바로 눌러 주세요.<br />잠깐 쉰 뒤 다시 해보면 오늘의 차이를 직접 볼 수 있어요.</p>
+        <div><p className="fatigue-game-kicker">02 / 뇌 과부하 신호 게임</p><h2 id="fatigue-game-heading">집중 리듬 챌린지</h2></div>
+        <p>누를 때는 빠르게, 멈출 때는 정확하게.<br />규칙이 바뀌면 얼마나 빨리 따라가는지 확인해 보세요.</p>
       </div>
 
       <div className={`fatigue-game-panel fatigue-game-phase-${phase}`}>
         {phase === 'idle' ? <div className="fatigue-game-intro">
-          <div><h3>지금 머리가 얼마나 바쁜지<br />가볍게 확인해 보세요.</h3><p>5번의 신호를 잡는 간단한 게임이에요. 결과는 진단이 아니라, 쉬기 전과 후의 내 반응을 비교하는 개인 기록입니다.</p></div>
-          <button type="button" className="rhythm-button" onClick={() => startRun('baseline')}>게임 시작 <ArrowRight size={18} aria-hidden="true" /></button>
+          <div><h3>반응·멈춤·전환을<br />한 번에 게임으로 확인해요.</h3><p>3가지 짧은 과제를 12번 수행합니다. 연구에서 쓰이는 과제 형태를 참고했지만, 결과는 쉬기 전후의 내 집중 리듬을 비교하는 개인 기록이에요.</p>
+            <div className="fatigue-stage-preview" aria-label="게임 세 단계"><div><span>01</span><strong>반응</strong><small>신호를 잡기</small></div><div><span>02</span><strong>멈춤</strong><small>빨강을 참기</small></div><div><span>03</span><strong>전환</strong><small>규칙 바꾸기</small></div></div>
+            <details className="fatigue-game-method"><summary>왜 이 세 가지인가요?</summary><p>반응 속도, Go/No-Go 억제, 과제 전환은 집중과 인지 조절을 살펴볼 때 자주 사용하는 과제 형태입니다. 화면 지연·기기·수면·주변 환경의 영향을 받으므로 표준화된 진단 점수로 해석하지 않습니다.</p><div><a href="https://pubmed.ncbi.nlm.nih.gov/17850833/" target="_blank" rel="noopener noreferrer">Go/No-Go 연구 예시 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/29517261/" target="_blank" rel="noopener noreferrer">과제 전환 리뷰 <ExternalLink size={14} aria-hidden="true" /></a></div></details>
+          </div>
+          <button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Brain size={18} aria-hidden="true" /> 게임 시작 <ArrowRight size={18} aria-hidden="true" /></button>
         </div> : null}
 
         {phase === 'running' ? <div className="fatigue-game-running">
-          <div className="fatigue-game-meta"><span>ROUND {String(round + 1).padStart(2, '0')} / {String(FATIGUE_GAME_ROUNDS).padStart(2, '0')}</span><span><Timer size={15} aria-hidden="true" /> {mode === 'baseline' ? '쉬기 전' : '휴식 후'}</span></div>
-          <button type="button" className={`fatigue-target${targetVisible ? ' visible' : ''}`} onClick={tapTarget} aria-label={targetVisible ? '초록 신호 누르기' : '초록 신호를 기다리는 중'}>{targetVisible ? '●' : '·'}</button>
+          <div className="fatigue-game-meta"><span>STAGE {String(stageIndex + 1).padStart(2, '0')} / 03 · {currentStage.label}</span><span><Timer size={15} aria-hidden="true" /> {mode === 'baseline' ? '쉬기 전' : '휴식 후'}</span></div>
+          <div className="fatigue-stage-instruction"><strong>{currentStage.instruction}</strong><span>{currentStage.detail}</span></div>
+          {FOCUS_GAME_STAGES[stageIndex] === 'switch' ? <div className="fatigue-rule-display"><span>이번 규칙</span><strong className={`fatigue-rule-color fatigue-rule-color-${switchRule}`}>{switchRule === 'green' ? '초록' : '보라'}</strong><small>이 색 신호만 누르기</small></div> : null}
+          <div className="fatigue-trial-dots" aria-label={`현재 단계 ${trialIndex + 1}번째 신호`}>{Array.from({length: FOCUS_GAME_TRIALS_PER_STAGE}, (_, index) => <span key={index} className={index < trialIndex ? 'done' : index === trialIndex ? 'current' : ''} />)}</div>
+          <button type="button" className={`fatigue-target fatigue-target-${trial?.stimulusColor ?? 'waiting'}${stimulusVisible ? ' visible' : ''}`} onClick={tapStimulus} aria-label={stimulusVisible ? '현재 신호에 반응하기' : '신호를 기다리는 중'}>
+            {stimulusVisible ? trial?.stage === 'brake' && trial.stimulusColor === 'red' ? <span className="fatigue-target-stop">멈춤</span> : <span className="fatigue-target-dot" /> : <span className="fatigue-target-wait">·</span>}
+          </button>
           <p className="fatigue-game-status" aria-live="polite">{status}</p>
         </div> : null}
 
         {phase === 'baseline-complete' && before ? <div className="fatigue-game-summary">
-          <CheckCircle2 size={28} aria-hidden="true" /><div><p className="fatigue-game-kicker">쉬기 전 기록</p><h3>{summaryText(before)}</h3><p>이제 휴대폰 알림을 끄고, 물을 마시거나 창밖을 보며 <strong>5분 동안 화면에서 눈을 떼어 보세요.</strong></p><button type="button" className="rhythm-button" onClick={beginRest}>5분 휴식 시작 <ArrowRight size={18} aria-hidden="true" /></button></div>
+          <CheckCircle2 size={28} aria-hidden="true" /><div><p className="fatigue-game-kicker">쉬기 전 기록 완료</p><h3>{summaryLine(before)}</h3><div className="fatigue-mini-metrics"><span>반응 {metricText(before.speed.averageMs)}</span><span>멈춤 {before.brake.accuracyPct}%</span><span>전환 {before.switch.accuracyPct}%</span></div><p>이제 휴대폰 알림을 끄고 물을 마시거나 창밖을 보며 <strong>5분 동안 화면에서 눈을 떼어 보세요.</strong></p><button type="button" className="rhythm-button" onClick={beginRest}>5분 휴식 시작 <ArrowRight size={18} aria-hidden="true" /></button></div>
         </div> : null}
 
         {phase === 'rest' ? <div className="fatigue-game-rest">
-          <p className="fatigue-game-kicker">PAUSE</p><h3>지금 5분만 화면을 내려놓으세요.</h3><p>알림을 끄고, 물을 마시고, 창밖이나 먼 곳을 바라보세요. 뇌가 계속 일하는 시간을 잠깐 끊어 주는 것이 목적이에요.</p><ul><li>휴대폰 화면·알림 끄기</li><li>어깨와 턱에 힘 풀기</li><li>조용한 곳에서 천천히 숨 쉬기</li></ul><button type="button" className="rhythm-button" onClick={() => startRun('after')}>휴식했어요 · 다시 측정 <ArrowRight size={18} aria-hidden="true" /></button>
+          <p className="fatigue-game-kicker">PAUSE · RESET</p><h3>지금 5분만 화면을 내려놓으세요.</h3><p>알림을 끄고, 어깨와 턱의 힘을 풀고, 먼 곳을 바라보세요. 휴식 뒤 같은 게임을 다시 해 내 기록의 차이를 확인합니다.</p><ul><li>휴대폰 화면·알림 끄기</li><li>어깨와 턱에 힘 풀기</li><li>조용한 곳에서 천천히 숨 쉬기</li></ul><button type="button" className="rhythm-button" onClick={() => startRun('after')}>휴식했어요 · 다시 측정 <ArrowRight size={18} aria-hidden="true" /></button>
         </div> : null}
 
-        {phase === 'complete' && before && after ? <div className="fatigue-game-summary fatigue-game-complete">
-          <div className={`fatigue-comparison fatigue-comparison-${comparisonText(before, after).tone}`}><CircleAlert size={24} aria-hidden="true" /><div><p className="fatigue-game-kicker">쉬기 전 ↔ 휴식 후</p><h3>{comparisonText(before, after).heading}</h3><p>{comparisonText(before, after).body}</p></div></div>
-          <div className="fatigue-game-score-grid"><div><span>쉬기 전</span><strong>{summaryText(before)}</strong></div><div><span>휴식 후</span><strong>{summaryText(after)}</strong></div></div>
+        {phase === 'complete' && before && after && comparison ? <div className="fatigue-game-summary fatigue-game-complete">
+          <div className={`fatigue-comparison fatigue-comparison-${comparison.tone}`}><CircleAlert size={24} aria-hidden="true" /><div><p className="fatigue-game-kicker">쉬기 전 ↔ 휴식 후</p><h3>{comparison.heading}</h3><p>{comparison.body}</p></div></div>
+          <div className="fatigue-game-score-grid">{metrics.map(metric => <div key={metric.label}><span>{metric.label}</span><strong>전 {metric.before}</strong><strong>후 {metric.after}</strong></div>)}</div>
+          <p className="fatigue-game-viral-copy">내 기록은 어땠나요? 친구에게도 “너도 해봐”라고 보내 보세요.</p>
           <div className="fatigue-game-actions"><button type="button" className="rhythm-button" onClick={() => startRun('baseline')}>다시 비교하기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>
         </div> : null}
       </div>
-      <p className="fatigue-game-note">이 게임은 의학적 진단·뇌 기능 측정·체내 GABA 측정이 아닙니다. 화면 지연, 기기, 수면과 주변 환경에 따라 기록이 달라질 수 있어요.</p>
+      <p className="fatigue-game-note">이 게임은 의학적 진단·뇌 기능 측정·체내 GABA 측정이 아닙니다. 한 번의 결과보다 쉬기 전후의 개인 변화와 최근 생활 신호를 함께 살펴보세요.</p>
     </section>
   );
 }
