@@ -292,14 +292,16 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     }
   }
 
-  async function shareInvite() {
+  async function shareInvite(kind: 'rhythm' | 'focus' = 'rhythm') {
     const url = inviteUrl();
-    const shareText = '나도 뇌 피로 1분 점검을 해봤어요. 당신도 1분이면 지금 상태를 확인할 수 있어요.';
+    const shareText = kind === 'focus'
+      ? '방금 집중 리듬 챌린지를 해봤어요. 당신도 뇌 피로 1분 점검으로 지금 상태를 확인해 보세요.'
+      : '나도 뇌 피로 1분 점검을 해봤어요. 당신도 1분이면 지금 상태를 확인할 수 있어요.';
     onEvent('share_request',{path:result?'/result':'/share',kind:'invite'});
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
     if (navigator.share) {
       try {
-        await navigator.share({ title: '뇌 피로 1분 점검', text: shareText, url });
+        await navigator.share({ title: kind === 'focus' ? '집중 리듬 챌린지 · 뇌 피로 1분 점검' : '뇌 피로 1분 점검', text: shareText, url });
         setMessage('1분 점검 초대 창을 열었어요. 상대방이 직접 점검하도록 보내 보세요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
         return;
@@ -441,7 +443,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : (
         <div className="rhythm-start-panel"><div><h3>뇌 피로가 쌓였는지,<br />1분이면 확인해요.</h3><p>퇴근 후에도 일이 생각나는지, 침대에서 뒤척이는지, 하루에 5분도 못 쉬는지 차례로 답해 보세요.<br />지금 쉬어야 할 장면을 바로 찾을 수 있습니다.</p><p className="rhythm-gaba-intro">GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질이에요. 이 체크는 최근 일주일의 생활을 돌아보고, 오늘 뇌를 쉬게 할 방법을 찾는 안내입니다.</p></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>뇌 피로 1분 점검 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">로그인 없이 · 답변 저장 없이<br />건강 상태나 체내 GABA 수치를 확인하는 검사가 아닙니다.</p></div></div>
       )}
-      <FatigueGame onEvent={onEvent} onInvite={shareInvite} />
+      <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} />
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
           <div className="rhythm-comparison-heading"><div><p className="rhythm-eyebrow">함께 돌아보는 하루</p><h3 id="rhythm-comparison-heading">나와 친구, 각자의 쉬는 방식.</h3></div><button type="button" className="rhythm-text-button" onClick={() => { setFriendType(null); setCompareConsent(false); }}>비교 지우기</button></div>
