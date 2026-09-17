@@ -147,20 +147,23 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
   const [restReason, setRestReason] = useState<'baseline' | 'recovery'>('baseline');
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [audioPaused, setAudioPaused] = useState(false);
+  const audioPausedRef = useRef(false);
   const [audioMessage, setAudioMessage] = useState('');
+  const [restRemainingSeconds, setRestRemainingSeconds] = useState(5 * 60);
+  const [restComplete, setRestComplete] = useState(false);
   const [status, setStatus] = useState('');
   const timerRef = useRef<number | null>(null);
   const stimulusAtRef = useRef(0);
   const runPatternRef = useRef<RunPattern>(createRunPattern());
   const audioRef = useRef<RelaxationAudio | null>(null);
-  const audioStopTimerRef = useRef<number | null>(null);
+  const audioPromptTimersRef = useRef<number[]>([]);
+  const restClockIntervalRef = useRef<number | null>(null);
+  const restEndsAtRef = useRef<number | null>(null);
   const autoStartedRef = useRef(false);
 
   function stopRelaxationAudio() {
-    if (audioStopTimerRef.current !== null) {
-      window.clearTimeout(audioStopTimerRef.current);
-      audioStopTimerRef.current = null;
-    }
+    audioPromptTimersRef.current.forEach(timer => window.clearTimeout(timer));
+    audioPromptTimersRef.current = [];
     const audio = audioRef.current;
     if (audio) {
       audio.oscillators.forEach(oscillator => {
@@ -170,16 +173,17 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
       audioRef.current = null;
     }
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    audioPausedRef.current = false;
     setAudioPlaying(false);
     setAudioPaused(false);
   }
 
-  function speakRelaxationNarration() {
+  function speakRelaxationLine(text: string) {
     if (!('speechSynthesis' in window)) {
       setAudioMessage('이 브라우저는 음성 안내를 지원하지 않아요. 조용한 휴식만 이어가도 괜찮아요.');
       return;
     }
-    const narration = new SpeechSynthesisUtterance('지금 5분만 화면을 내려놓으세요. 어깨와 턱의 힘을 풀고, 천천히 숨을 쉬어 보세요. 먼 곳을 바라보며 머리가 잠깐 쉴 자리를 만들어 주세요.');
+    const narration = new SpeechSynthesisUtterance(text);
     narration.lang = 'ko-KR';
     narration.rate = 0.82;
     narration.pitch = 1;
@@ -188,10 +192,57 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     window.speechSynthesis.speak(narration);
   }
 
+  function speakRelaxationNarration() {
+    if (!('speechSynthesis' in window)) {
+      setAudioMessage('이 브라우저는 음성 안내를 지원하지 않아요. 조용한 휴식만 이어가도 괜찮아요.');
+      return;
+    }
+    speakRelaxationLine('휴대폰을 뒤집어 두고 편안히 앉아 보세요. 허리는 편하게 세우고 어깨 힘을 풉니다. 숨을 일부러 깊게 바꾸지 말고, 코끝이나 가슴 또는 배에서 느껴지는 숨의 감각을 따라가 보세요. 생각이 떠오르면 밀어내지 않아도 괜찮아요. 생각이 났다는 걸 알아차리고 다시 숨으로 돌아오면 됩니다.');
+    const checkpoints = [
+      { afterMs: 90_000, text: '숨을 바꾸려 하지 말고, 들어오고 나가는 감각을 가만히 살펴보세요.' },
+      { afterMs: 180_000, text: '생각이 떠올라도 괜찮습니다. 알아차린 뒤 숨이 느껴지는 곳으로 부드럽게 돌아옵니다.' },
+      { afterMs: 270_000, text: '마지막 30초입니다. 편안한 자세로 숨과 몸이 닿아 있는 감각을 살펴보세요.' },
+    ];
+    audioPromptTimersRef.current = checkpoints.map(({ afterMs, text }) => window.setTimeout(() => {
+      if (!audioPausedRef.current) speakRelaxationLine(text);
+    }, afterMs));
+  }
+
+  function stopRestClock() {
+    if (restClockIntervalRef.current !== null) {
+      window.clearInterval(restClockIntervalRef.current);
+      restClockIntervalRef.current = null;
+    }
+    restEndsAtRef.current = null;
+  }
+
+  function startRestClock() {
+    stopRestClock();
+    setRestComplete(false);
+    setRestRemainingSeconds(5 * 60);
+    restEndsAtRef.current = Date.now() + 5 * 60 * 1000;
+    restClockIntervalRef.current = window.setInterval(() => {
+      const remaining = Math.max(0, Math.ceil(((restEndsAtRef.current ?? Date.now()) - Date.now()) / 1000));
+      setRestRemainingSeconds(remaining);
+      if (remaining === 0) {
+        stopRestClock();
+        stopRelaxationAudio();
+        setRestComplete(true);
+        setAudioMessage('5분 휴식이 끝났어요. 준비되면 내 기록을 다시 확인해 보세요.');
+        onEvent('fatigue_game_rest_complete', { duration: '5m' });
+      }
+    }, 1000);
+  }
+
   function startRelaxationAudio() {
+    if (restComplete) {
+      setAudioMessage('5분 휴식이 끝났어요. 준비되면 내 기록을 다시 확인해 보세요.');
+      return;
+    }
     if (audioRef.current) {
       void audioRef.current.context.resume();
       if ('speechSynthesis' in window) window.speechSynthesis.resume();
+      audioPausedRef.current = false;
       setAudioPlaying(true);
       setAudioPaused(false);
       return;
@@ -203,10 +254,6 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     }
     audioRef.current = audio;
     void audio.context.resume().catch(() => setAudioMessage('소리를 시작하려면 아래 버튼을 한 번 더 눌러 주세요.'));
-    audioStopTimerRef.current = window.setTimeout(() => {
-      stopRelaxationAudio();
-      setAudioMessage('5분 리셋 사운드가 끝났어요. 준비되면 다시 측정해 보세요.');
-    }, 5 * 60 * 1000);
     setAudioPlaying(true);
     setAudioPaused(false);
     setAudioMessage('편안한 소리와 짧은 음성 안내를 재생하고 있어요.');
@@ -222,11 +269,13 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     if (audioPaused) {
       void audio.context.resume();
       if ('speechSynthesis' in window) window.speechSynthesis.resume();
+      audioPausedRef.current = false;
       setAudioPaused(false);
       setAudioMessage('소리를 다시 재생하고 있어요.');
     } else {
       void audio.context.suspend();
       if ('speechSynthesis' in window) window.speechSynthesis.pause();
+      audioPausedRef.current = true;
       setAudioPaused(true);
       setAudioMessage('소리를 잠시 멈췄어요.');
     }
@@ -264,6 +313,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
 
   useEffect(() => () => {
     if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+    stopRestClock();
     stopRelaxationAudio();
   }, []);
 
@@ -298,6 +348,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
 
   function startRun(nextMode: GameMode) {
     if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+    stopRestClock();
     stopRelaxationAudio();
     setMode(nextMode);
     runPatternRef.current = createRunPattern();
@@ -327,6 +378,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     setRestReason('baseline');
     setPhase('rest');
     setStatus('');
+    startRestClock();
     onEvent('fatigue_game_rest_start', { duration: '5m' });
     startRelaxationAudio();
   }
@@ -335,6 +387,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     setRestReason('recovery');
     setPhase('rest');
     setStatus('');
+    startRestClock();
     onEvent('fatigue_game_rest_start', { duration: '5m', reason: 'low_focus_score' });
     startRelaxationAudio();
   }
@@ -346,6 +399,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
 
   function reset() {
     if (timerRef.current !== null) window.clearTimeout(timerRef.current);
+    stopRestClock();
     stopRelaxationAudio();
     setPhase('idle');
     setBefore(null);
@@ -404,7 +458,31 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
         </div> : null}
 
         {phase === 'rest' ? <div className="fatigue-game-rest">
-          <p className="fatigue-game-kicker">PAUSE · RESET</p><h3>{restReason === 'recovery' ? '지금은 회복을 먼저 챙길 시간이에요.' : '지금 5분만 화면을 내려놓으세요.'}</h3><p>{restReason === 'recovery' ? '잠깐 멈추고 뇌가 숨을 고를 시간을 주세요. 5분 충전한 뒤 내 기록이 어떻게 달라지는지 다시 살펴봅니다.' : '알림을 끄고, 어깨와 턱의 힘을 풀고, 먼 곳을 바라보세요. 휴식 뒤 같은 게임을 다시 해 내 기록의 차이를 확인합니다.'}</p><ul><li>휴대폰 화면·알림 끄기</li><li>어깨와 턱에 힘 풀기</li><li>조용한 곳에서 천천히 숨 쉬기</li></ul><div className="fatigue-audio-panel" aria-label="휴식 소리 안내"><div><strong><Volume2 size={17} aria-hidden="true" /> 편안한 소리·명상 안내</strong><span>낮은 음량의 배경음과 짧은 음성 안내가 재생됩니다.</span></div><div className="fatigue-audio-actions">{audioPlaying ? <button type="button" className="fatigue-audio-button" onClick={toggleRelaxationPause}>{audioPaused ? <><Play size={15} aria-hidden="true" /> 소리 다시 재생</> : <><Pause size={15} aria-hidden="true" /> 소리 잠시 멈추기</>}</button> : <button type="button" className="fatigue-audio-button" onClick={startRelaxationAudio}><Volume2 size={15} aria-hidden="true" /> 편안한 소리 재생</button>}{audioPlaying ? <button type="button" className="fatigue-audio-mute" onClick={stopRelaxationAudio}><VolumeX size={15} aria-hidden="true" /> 끄기</button> : null}</div>{audioMessage ? <p role="status" aria-live="polite">{audioMessage}</p> : null}</div><button type="button" className="rhythm-button" onClick={() => startRun('after')}>휴식했어요 · 다시 측정 <ArrowRight size={18} aria-hidden="true" /></button>
+          <p className="fatigue-game-kicker">PAUSE · 5-MIN BREATH</p>
+          <h3>{restReason === 'recovery' ? '지금 5분, 화면을 내려놓고 숨을 살펴보세요.' : '지금 5분만 화면을 내려놓으세요.'}</h3>
+          <p>휴대폰을 뒤집어 두고 편안히 앉아 보세요. 숨을 억지로 조절하지 않고 느껴보고, 생각이 떠오르면 알아차린 뒤 다시 숨으로 돌아옵니다.</p>
+          <div className="fatigue-rest-clock" aria-label="5분 숨 관찰 타이머">
+            <div className="fatigue-rest-clock-readout" role="timer" aria-label={`${Math.floor(restRemainingSeconds / 60)}분 ${restRemainingSeconds % 60}초 남음`}>
+              <Timer size={20} aria-hidden="true" />
+              <strong>{Math.floor(restRemainingSeconds / 60)}:{String(restRemainingSeconds % 60).padStart(2, '0')}</strong>
+              <span>{restComplete ? '휴식 완료' : '화면을 내려놓고 편하게 이어가세요'}</span>
+            </div>
+            <progress max={5 * 60} value={5 * 60 - restRemainingSeconds} aria-label="5분 휴식 진행" />
+          </div>
+          <ol className="fatigue-breath-steps" aria-label="5분 숨 관찰 순서">
+            <li><span>01 · 자세</span><strong>어깨 힘을 툭 빼요</strong><small>허리는 편하게 세워 앉아요</small></li>
+            <li><span>02 · 숨</span><strong>숨의 감각을 느껴요</strong><small>코끝·가슴·배 중 편한 곳에 주의를 둬요</small></li>
+            <li><span>03 · 알아차림</span><strong>생각은 지나가게 둬요</strong><small>생각이 났다는 걸 알아차리면 돼요</small></li>
+            <li><span>04 · 돌아오기</span><strong>다시 숨으로 돌아와요</strong><small>숨이 드나드는 감각을 편하게 따라가요</small></li>
+          </ol>
+          <p className="fatigue-breath-note">깊게 쉬거나 숨을 세지 않아도 됩니다. 불편하면 눈을 뜨고 자세를 바꾸세요.</p>
+          <div className="fatigue-audio-panel" aria-label="5분 숨 관찰 음성 안내">
+            <div><strong><Volume2 size={17} aria-hidden="true" /> 5분 숨 관찰 안내</strong><span>시작·중간·마지막에 짧게 안내하고 나머지는 편안한 배경음이 이어집니다.</span></div>
+            <div className="fatigue-audio-actions">{audioPlaying ? <button type="button" className="fatigue-audio-button" onClick={toggleRelaxationPause}>{audioPaused ? <><Play size={15} aria-hidden="true" /> 소리 다시 재생</> : <><Pause size={15} aria-hidden="true" /> 소리 잠시 멈추기</>}</button> : <button type="button" className="fatigue-audio-button" onClick={startRelaxationAudio} disabled={restComplete}><Volume2 size={15} aria-hidden="true" /> 안내 다시 듣기</button>}{audioPlaying ? <button type="button" className="fatigue-audio-mute" onClick={stopRelaxationAudio}><VolumeX size={15} aria-hidden="true" /> 끄기</button> : null}</div>
+            {audioMessage ? <p role="status" aria-live="polite">{audioMessage}</p> : null}
+          </div>
+          <button type="button" className="rhythm-button" onClick={() => startRun('after')} disabled={!restComplete}>휴식했어요 · 다시 측정 <ArrowRight size={18} aria-hidden="true" /></button>
+          {!restComplete ? <div className="fatigue-rest-unlock-note"><p>5분이 지나면 쉬기 전 기록과 비교할 수 있어요.</p><button type="button" className="rhythm-text-button" onClick={() => startRun('after')}>휴식 건너뛰고 바로 다시 측정</button></div> : null}
         </div> : null}
 
         {phase === 'complete' && before && after && comparison ? <div className="fatigue-game-summary fatigue-game-complete">

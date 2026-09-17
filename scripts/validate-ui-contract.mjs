@@ -90,6 +90,7 @@ requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fa
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
 for (const marker of ['집중 리듬 챌린지', 'Go/No-Go', '규칙 전환', '12번', '5분 충전하고 다시 확인', '편안한 소리', 'speechSynthesis']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['숨의 감각을 느껴요', '생각은 지나가게 둬요', '다시 숨으로 돌아와요', '5분 숨 관찰 타이머', 'fatigue_game_rest_complete']) requireMatch(fatigueGame, new RegExp(marker), `guided five-minute breathing rest marker ${marker} is missing`);
 for (const marker of ['오늘은 신호를 차분히 잘 따라왔어요', '오늘은 신호를 놓친 순간이 있었어요', '5분 쉬고 다시 확인하기', '5분 쉬고 전후 비교하기', 'baseline-finished']) requireMatch(fatigueGame, new RegExp(marker), `score-based focus guidance marker ${marker} is missing`);
 requireMatch(rhythm, /focusAutoStart|focus-game/, 'focus challenge invite must deep-link to the game');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
@@ -103,7 +104,7 @@ requireMatch(challenge, /challenge_start|challenge_day_complete|seven_day_comple
 requireMatch(shareDomain, /approvedCampaign[\s\S]*?URLSearchParams\(currentSearch\)[\s\S]*?\.get\('campaign'\)/, 'shared campaign tokens must use the approved helper');
 requireMatch(productShare, /preserveCampaign\(url,window\.location\.search\)/, 'product share must preserve an approved campaign identifier');
 requireMatch(challenge, /preserveCampaign\(url, window\.location\.search\)/, 'challenge share must preserve an approved campaign identifier');
-  for (const event of ['hero_check_start', 'rhythm_check_complete', 'result_share_click', 'result_share_success', 'friend_check_start', 'product_compare_view', 'review_source_click', 'purchase_cta_click', 'challenge_start', 'challenge_day_complete', 'seven_day_complete', 'fatigue_game_start', 'fatigue_game_rest_start', 'fatigue_game_complete']) {
+  for (const event of ['hero_check_start', 'rhythm_check_complete', 'result_share_click', 'result_share_success', 'friend_check_start', 'product_compare_view', 'review_source_click', 'purchase_cta_click', 'challenge_start', 'challenge_day_complete', 'seven_day_complete', 'fatigue_game_start', 'fatigue_game_rest_start', 'fatigue_game_rest_complete', 'fatigue_game_complete']) {
   requireMatch(app + rhythm + challenge + fatigueGame, new RegExp(event), `required measurement event ${event} is missing`);
 }
 requireMatch(teaser, /allow="autoplay; fullscreen; picture-in-picture"/, 'teaser autoplay permission is missing');
@@ -151,4 +152,4 @@ requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 1분 �
 requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/social-card\.png"/, 'focus invite Open Graph image is missing');
 requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 
-  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));
+  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 15, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'share-bar-clearance'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));
