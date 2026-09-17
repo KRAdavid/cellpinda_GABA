@@ -3,15 +3,15 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-17T05:21:44.490Z",
+  "generatedAt": "2026-09-17T11:38:32.495Z",
   "snapshotHash": "e5a684072ce0da967cb018d1246c54597da97cc7e24f436f67b383506c6cf09b",
-  "previousSnapshotHash": "26d50c9e7e42fbf8dfa5f3ae4f81efb04e8201ebdf13bf741f02b15ee2f26205",
-  "stateChanged": true,
+  "previousSnapshotHash": "e5a684072ce0da967cb018d1246c54597da97cc7e24f436f67b383506c6cf09b",
+  "stateChanged": false,
   "requiresHumanDecision": true,
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-17T11:21:44.490Z",
+    "nextReviewAt": "2026-09-17T17:38:32.495Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -200,5 +200,60 @@
     "status": "HOLD",
     "taskId": "B4",
     "taskState": "WAITING"
+  },
+  "safeExecution": {
+    "mode": "safe_internal_tf_run",
+    "status": "MET",
+    "validatedAt": "2026-09-17T11:38:33.097Z",
+    "executionBoundary": {
+      "state": "READY",
+      "risk": "B_INTERNAL_WRITE",
+      "externalEffects": false
+    },
+    "preparation": {
+      "id": "sync-public-data",
+      "risk": "B_INTERNAL_WRITE",
+      "status": "MET"
+    },
+    "checks": [
+      {
+        "id": "goal-contract",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "research-copy",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "teaser-boundary",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "sandbox-mvp",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "public-export",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "tf-pulse",
+        "risk": "A_READ",
+        "status": "MET"
+      }
+    ],
+    "candidateTaskIds": [],
+    "humanGateTaskIds": [
+      "B2",
+      "B3",
+      "B4",
+      "C2",
+      "E1"
+    ]
   }
 }
