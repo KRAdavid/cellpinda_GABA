@@ -113,17 +113,16 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 보기'), 'live consumer bundle must contain the consumer-facing teaser CTA');
     assert.ok(consumerBundle.includes('뇌컨디션 확인 챌린지'), 'live consumer bundle must contain the advanced focus game');
-    assert.ok(consumerBundle.includes('반응·멈춤·전환') && consumerBundle.includes('24개'), 'live consumer bundle must expose the randomized 24-signal focus game');
-    assert.ok(consumerBundle.includes('5분 충전하고 다시 확인') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose low-score recovery guidance and breathing-stage singing bowl cues');
+    assert.ok(consumerBundle.includes('색과 모양, 순서는 할 때마다 달라집니다') && consumerBundle.includes('세 단계로 나와요'), 'live consumer bundle must explain the randomized, progressive focus game in plain language');
+    assert.ok(consumerBundle.includes('5분 쉬고 다시 해보기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose rest guidance and breathing-stage singing bowl cues');
     assert.ok(consumerBundle.includes('시작 준비') && consumerBundle.includes('첫 신호가 나타나면'), 'live consumer bundle must give users a ready countdown before the focus game starts');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
-    assert.ok(consumerBundle.includes('뇌 피로 테스트 공유'), 'live consumer bundle must expose the friend challenge share CTA');
+    assert.ok(consumerBundle.includes('친구에게 “너도 해봐” 보내기'), 'live consumer bundle must expose the friend challenge share CTA');
     assert.ok(consumerBundle.includes('친구에게 “너도 해봐” 보내기'), 'live consumer bundle must make the result share an invitation to check');
-    assert.ok(consumerBundle.includes('강한 뇌 피로 신호'), 'live consumer bundle must contain an explicit fatigue signal');
+    assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');
     assert.ok(consumerBundle.includes('지난 7일, 쉬고 싶었던 순간'), 'live consumer bundle must explain the personal answer score');
-    assert.ok(consumerBundle.includes('더 알아보기 · 뇌 피로와 건강'), 'live consumer bundle must include the secondary health evidence section');
+    assert.ok(consumerBundle.includes('뇌 피로와 건강 연구를 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');
     assert.ok(consumerBundle.includes('61개 연구') && consumerBundle.includes('267개 연구') && consumerBundle.includes('21개 연구'), 'live consumer bundle must include evidence scale markers');
-    assert.ok(consumerBundle.includes('몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담'), 'live consumer bundle must include a clear care-seeking guide');
     assert.ok(!consumerBundle.includes('발효가바가 무엇인지 30초'), 'live consumer bundle still contains the retired teaser duration promise');
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
     assert.match(robotsText, /Disallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops/, 'live robots.txt must keep internal paths out of discovery');
@@ -163,7 +162,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
     assert.ok(pageText.includes(approvedSmartStoreUrl), 'live static fallback must keep the approved Smart Store 1500 detail link');
-    assert.ok(pageText.includes('스마트스토어에서 확인하기'), 'live static fallback must label the Smart Store destination for consumers');
+    assert.ok(pageText.includes('스마트스토어에서 제품 보기'), 'live static fallback must label the Smart Store destination for consumers');
     assert.ok(pageText.includes('스마트스토어에서 후기 읽기'), 'live static fallback must expose the Smart Store review label');
     assert.ok(pageText.includes(approvedSmartStoreReviewUrl), 'live static fallback must deep-link to the Smart Store review dialog');
     assert.ok(pageText.includes(approvedReviewText), 'live static fallback must expose the approved consumer review guidance');
