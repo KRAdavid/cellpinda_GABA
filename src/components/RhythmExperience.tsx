@@ -62,6 +62,57 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
   };
 }
 
+function BrainLoadVisual({ result }: { result: RhythmResult }) {
+  const { loadScore: score, loadLevel } = result;
+  const ratio = score / 15;
+  const band = score >= 10 ? 'high' : score >= 5 ? 'watch' : 'low';
+  const description = loadLevel === 'high' && score < 5
+    ? '합계는 낮아도 한 장면에서 강한 휴식 신호가 있었어요.'
+    : score >= 10
+      ? '여러 장면에서 머리가 쉴 틈이 부족했다고 답했어요.'
+      : score >= 5
+        ? '몇 가지 장면에서 쉬는 신호가 겹쳤어요.'
+        : '답변에서 쉬는 신호가 적은 편이에요.';
+  const brainPath = 'M108 29c-8-12-24-13-34-4-13-4-27 5-27 19-14 5-18 21-8 31-5 14 5 28 19 29 7 12 23 14 34 5 8 8 19 8 27 0 10 9 25 6 30-6 14 1 25-12 21-26 11-10 8-27-5-34-1-14-15-23-28-18-7-7-19-7-29 4z';
+
+  return (
+    <div className={`rhythm-load-score rhythm-load-score-${band}`}>
+      <div className="rhythm-load-score-heading"><span>최근 7일 생활 신호</span><strong>{score}<small>/ 15</small></strong></div>
+      <div className="rhythm-load-visual">
+        <svg className="rhythm-load-brain" viewBox="0 0 210 125" role="img" aria-label={`생활 신호 ${score}점에 맞춰 채워진 뇌 일러스트`}>
+          <defs>
+            <linearGradient id="rhythm-brain-load-fill" x1="0" x2="1">
+              <stop offset="0%" stopColor="#45a875" />
+              <stop offset="54%" stopColor="#e0ae42" />
+              <stop offset="100%" stopColor="#d46c42" />
+            </linearGradient>
+            <clipPath id="rhythm-brain-load-clip"><path d={brainPath} /></clipPath>
+          </defs>
+          <circle className="rhythm-brain-halo" cx="104" cy="64" r="58" />
+          <path className="rhythm-brain-base" d={brainPath} />
+          <rect className="rhythm-brain-fill" x="34" y="18" width={140 * ratio} height="98" clipPath="url(#rhythm-brain-load-clip)" />
+          <path className="rhythm-brain-outline" d={brainPath} />
+          <path className="rhythm-brain-fold" d="M104 29c-5 10 5 15 0 24s5 14 0 23 5 15 0 23m-27-63c9-2 15 4 14 12m-22 1c8 0 12 6 10 13m-7 10c8-3 14 1 15 9m26-39c9-2 14 3 14 10m7 4c-8-1-13 4-12 11m13 8c-8-3-14 1-15 9" />
+          <g className="rhythm-brain-signals" aria-hidden="true">
+            <path d="M49 24 41 15m27-1-3-12m36 15V5m34 9 4-12m25 19 10-9M34 54 21 50m153 4 13-4M36 88l-11 7m142-7 11 7" opacity={ratio} />
+            {[0, 1, 2, 3, 4, 5].map((index) => <circle key={index} cx={62 + index * 16} cy={score >= 10 ? 38 + (index % 2) * 47 : 40 + (index % 2) * 42} r="2.2" opacity={Math.max(0, Math.min(1, (score - index * 2) / 3))} />)}
+          </g>
+        </svg>
+        <div className="rhythm-load-visual-copy">
+          <p className="rhythm-load-visual-kicker">점수가 높을수록</p>
+          <strong>{description}</strong>
+          <div className="rhythm-load-segments" aria-hidden="true">
+            {Array.from({ length: 15 }, (_, index) => <i key={index} className={index < score ? 'is-filled' : ''} />)}
+          </div>
+          <span>최근 일주일 동안 쉬는 시간이 필요했다고 답한 정도예요.</span>
+        </div>
+      </div>
+      <progress className="rhythm-load-progress-accessible" value={score} max={15} aria-label={`최근 7일 생활 신호 ${score}점, 15점 만점`} />
+      <p className="rhythm-load-footnote">그림은 답변 점수를 보여줘요. 뇌 기능을 측정하거나 진단한 결과는 아닙니다.</p>
+    </div>
+  );
+}
+
 /** Preserve words first; split characters only when a single word exceeds a line. */
 function drawParagraph(context: CanvasRenderingContext2D, text: string, y: number, size: number, lineHeight: number, color = '#18382b'): number {
   context.font = `${size}px "Noto Sans KR", "Malgun Gothic", sans-serif`;
@@ -402,9 +453,9 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <p className="rhythm-eyebrow">{sharedType ? '공유받은 오늘 상태' : '나의 오늘 상태 이야기'}</p>
             <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
             {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
+            {result ? <BrainLoadVisual result={result} /> : null}
             <p className="rhythm-description">{type.description}</p>
             {signal ? <div className={`rhythm-fatigue-alert rhythm-fatigue-alert-${signal.tone}`} role="status"><AlertTriangle size={23} aria-hidden="true" /><div><p className="rhythm-eyebrow">{signal.label}</p><h4>{signal.heading}</h4><p>{signal.body}</p></div></div> : null}
-            {result ? <div className={`rhythm-load-score rhythm-load-score-${result.loadLevel}`} aria-label={`최근 7일 생활 신호 지수 ${result.loadScore}점, 15점 만점`}><div><span>최근 7일 생활 신호 지수</span><strong>{result.loadScore}<small>/ 15</small></strong></div><progress value={result.loadScore} max={15} /><p>점수가 높을수록 쉬는 장면이 더 자주 필요했다는 뜻이에요. 의료 진단이나 뇌 기능 측정 점수가 아닙니다.</p></div> : null}
             {result?.loadLevel === 'high' ? <aside className="rhythm-care-guide" aria-label="전문가 상담 안내"><p className="rhythm-eyebrow">계속되면 확인이 필요해요</p><h4>피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.</h4><p>피로와 잠 문제의 원인은 생활 습관부터 건강 상태까지 다양할 수 있어요. 이 점검 결과만으로 원인을 판단하지 말고, 증상이 계속되면 의료진에게 현재 상황을 설명해 주세요.</p></aside> : null}
             <svg className="rhythm-card-wave" viewBox="0 0 500 70" aria-hidden="true" focusable="false"><path d="M0 31 C75 -12 110 74 190 31 S330 -12 500 31" /><path d="M0 43 C75 0 110 86 190 43 S330 0 500 43" /><path d="M0 55 C75 12 110 98 190 55 S330 12 500 55" /></svg>
             <div className={`rhythm-recovery-guide rhythm-recovery-${type.recoveryLevel}`}>
