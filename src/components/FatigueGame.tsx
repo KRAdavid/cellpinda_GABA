@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, Brain, CheckCircle2, CircleAlert, ExternalLink, Pause, Play, RotateCcw, Timer, Volume2, VolumeX } from 'lucide-react';
 import {
   compareFocusGames,
-  FOCUS_GAME_RECOVERY_THRESHOLD_PCT,
   FOCUS_GAME_STAGES,
   FOCUS_GAME_TRIALS_PER_STAGE,
   needsFocusRecovery,
@@ -13,7 +12,7 @@ import {
 } from '../domain/fatigue-game';
 import './fatigue-game.css';
 
-type GamePhase = 'idle' | 'running' | 'baseline-complete' | 'rest' | 'complete';
+type GamePhase = 'idle' | 'running' | 'baseline-complete' | 'baseline-finished' | 'rest' | 'complete';
 type GameMode = 'baseline' | 'after';
 type StimulusColor = 'green' | 'purple' | 'red';
 
@@ -340,6 +339,11 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     startRelaxationAudio();
   }
 
+  function finishBaseline() {
+    setPhase('baseline-finished');
+    setStatus('');
+  }
+
   function reset() {
     if (timerRef.current !== null) window.clearTimeout(timerRef.current);
     stopRelaxationAudio();
@@ -392,7 +396,11 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
         </div> : null}
 
         {phase === 'baseline-complete' && before ? <div className="fatigue-game-summary">
-          <CheckCircle2 size={28} aria-hidden="true" /><div><p className="fatigue-game-kicker">쉬기 전 기록 완료</p><h3>{summaryLine(before)}</h3><div className="fatigue-mini-metrics"><span>반응 {metricText(before.speed.averageMs)}</span><span>멈춤 {before.brake.accuracyPct}%</span><span>전환 {before.switch.accuracyPct}%</span></div><p>이제 휴대폰 알림을 끄고 물을 마시거나 창밖을 보며 <strong>5분 동안 화면에서 눈을 떼어 보세요.</strong></p><button type="button" className="rhythm-button" onClick={beginRest}>5분 휴식 시작 <ArrowRight size={18} aria-hidden="true" /></button></div>
+          <CheckCircle2 size={28} aria-hidden="true" /><div><p className="fatigue-game-kicker">쉬기 전 기록 완료</p><h3>{summaryLine(before)}</h3><div className="fatigue-mini-metrics"><span>반응 {metricText(before.speed.averageMs)}</span><span>멈춤 {before.brake.accuracyPct}%</span><span>전환 {before.switch.accuracyPct}%</span></div>{needsFocusRecovery(before) ? <><p className="fatigue-baseline-guidance fatigue-baseline-guidance-rest"><strong>오늘은 신호를 놓친 순간이 있었어요.</strong><br />주변 환경과 기기의 영향도 받을 수 있지만, 바로 이어가기보다 알림을 끄고 5분 쉬어 보세요. 쉬고 난 뒤 다시 확인하면 오늘 기록을 비교할 수 있어요.</p><button type="button" className="rhythm-button" onClick={beginRest}>5분 쉬고 다시 확인하기 <ArrowRight size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={finishBaseline}>오늘 기록만 보고 마치기</button></> : <><p className="fatigue-baseline-guidance fatigue-baseline-guidance-good"><strong>오늘은 신호를 차분히 잘 따라왔어요.</strong><br />정확도가 {before.accuracyPct}%로 잘 나왔습니다. 지금 기록으로 마쳐도 좋고, 원하면 5분 쉰 뒤 한 번 더 해 전후 기록을 비교할 수 있어요.</p><button type="button" className="rhythm-button" onClick={finishBaseline}>오늘 기록 마치기 <CheckCircle2 size={18} aria-hidden="true" /></button><button type="button" className="rhythm-button secondary" onClick={beginRest}>5분 쉬고 전후 비교하기 <ArrowRight size={18} aria-hidden="true" /></button></>}</div>
+        </div> : null}
+
+        {phase === 'baseline-finished' && before ? <div className="fatigue-game-summary fatigue-game-baseline-finished">
+          <CheckCircle2 size={28} aria-hidden="true" /><div><p className="fatigue-game-kicker">오늘의 집중 리듬 기록</p><h3>{needsFocusRecovery(before) ? '오늘 기록을 남겼어요.' : '오늘은 신호를 차분히 잘 따라왔어요.'}</h3><div className="fatigue-mini-metrics"><span>정확도 {before.accuracyPct}%</span><span>반응 {metricText(before.speed.averageMs)}</span><span>멈춤 {before.brake.accuracyPct}%</span><span>전환 {before.switch.accuracyPct}%</span></div><p>{needsFocusRecovery(before) ? '점수로 건강 상태를 단정할 수는 없어요. 오늘은 화면과 일을 잠깐 내려놓고 쉬어 보세요.' : '이 결과는 오늘 이 기기에서 진행한 개인 기록이에요. 기록을 남기고 여기서 마쳐도 괜찮습니다.'}</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}><ArrowUpRight size={18} aria-hidden="true" /> 친구에게 “너도 해봐” 보내기</button> : null}<button type="button" className="rhythm-button" onClick={() => startRun('baseline')}>다시 해보기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div></div>
         </div> : null}
 
         {phase === 'rest' ? <div className="fatigue-game-rest">

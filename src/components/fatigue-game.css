@@ -13,3 +13,6 @@
 @keyframes fatigue-journey-pulse{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(.96)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}}@keyframes fatigue-journey-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 @media(max-width:760px){.fatigue-game-intro-side{width:100%;margin-top:26px}.fatigue-journey-visual{min-height:220px;max-width:420px}.fatigue-game-intro-actions{max-width:none}}
 @media(prefers-reduced-motion:reduce){.fatigue-journey-ring,.fatigue-journey-dot{animation:none}}
+.fatigue-baseline-guidance{margin:4px 0 16px!important;padding:17px 18px;border-left:4px solid #158457;border-radius:5px;background:#f5fbf6;color:#365a45!important}.fatigue-baseline-guidance strong{display:inline-block;margin-bottom:5px;color:#18382b;font-size:16px}.fatigue-baseline-guidance-rest{border-left-color:#c58b2a;background:#fff9ed;color:#765d31!important}.fatigue-baseline-guidance-rest strong{color:#714f20}.fatigue-game-baseline-finished .fatigue-game-actions{margin-top:12px}
+.fatigue-game-summary>div>.rhythm-button+.rhythm-button{margin-top:9px}.fatigue-game-summary>div>.rhythm-text-button{margin:9px 0 0 12px}
+@media(max-width:760px){.fatigue-baseline-guidance{font-size:15px!important;line-height:1.75!important}.fatigue-baseline-guidance strong{font-size:16px}}
