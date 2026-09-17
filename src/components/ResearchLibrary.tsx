@@ -123,10 +123,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     catch{setManualLink(url.href);setLinkStatus('아래 링크를 선택해 직접 복사해 주세요.')}
   }
 
-  return <section id="research" className="section wrap research research-library" aria-labelledby="research-heading">
-    <div className="section-head">
-      <div><h2 id="research-heading">수면·스트레스·운동, 연구에서 본 변화</h2></div>
-    </div>
+  return <section id="research" className="section wrap research research-library" aria-label="연구 자료 찾아보기">
     <div className="research-reading-path" role="img" aria-label="궁금한 주제에서 연구 참여자와 측정 결과 순서로 살펴봅니다">
       <div><Search aria-hidden="true"/><strong>궁금한 점</strong></div><ArrowRight aria-hidden="true"/>
       <div><UsersRound aria-hidden="true"/><strong>참여한 사람</strong></div><ArrowRight aria-hidden="true"/>

@@ -58,7 +58,8 @@ for (const marker of ['일이 끝나도', '1분 리듬 체크 시작', 'GABA는 
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
-requireMatch(research, /수면·스트레스·운동, 연구에서 본 변화/, 'research section must use a direct consumer-facing topic heading');
+requireMatch(research, /id="research"[^>]*aria-label="연구 자료 찾아보기"/, 'research section must retain an accessible name when the duplicate visible heading is removed');
+if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');
 requireMatch(research, /research-reading-path[\s\S]*Search[\s\S]*UsersRound[\s\S]*Activity/, 'research reading path must show topic, participants and measured changes with icons');
 requireMatch(research, /연구 조건을 더 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요/, 'research empty state must guide the next consumer action');
