@@ -1,3 +1,5 @@
+import { REVIEW_DESTINATION_URL } from '../domain/reviews';
+
 type Product = {
   id: string;
   name: string;
@@ -32,7 +34,7 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'reviews' }); }}>
         <summary>다른 사람의 후기는 어떻게 읽어야 하나요?</summary>
-        <div><p>후기는 한 사람의 사용 경험이에요. 작성 시점·제품 구성·사용 기간·제공이나 대가 관계를 원문에서 함께 확인해 보세요.</p><a className="text-link" href="#reviews">구매자 후기 원문 보기 →</a></div>
+        <div><p>후기는 한 사람의 사용 경험이에요. 작성 시점·제품 구성·사용 기간·제공이나 대가 관계를 원문에서 함께 확인해 보세요.</p><a className="text-link" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('review_open',{productId:products[0]?.id ?? 'gaba1500',path:'/purchase-faq'})}>구매자 후기 원문 보기 →</a></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'evidence' }); }}>
         <summary>연구 내용은 제품을 이해하는 데 어떻게 도움이 되나요?</summary>

@@ -1,4 +1,5 @@
 import type {Claim} from './ResearchLibrary';
+import {REVIEW_DESTINATION_URL} from '../domain/reviews';
 
 export default function GabaStory({claims, hasReviews = false}:{claims:Claim[]; hasReviews?: boolean}) {
   const definition=claims.find(claim=>claim.id==='gaba-definition'&&claim.status==='approved'&&claim.publicText);
@@ -19,7 +20,7 @@ export default function GabaStory({claims, hasReviews = false}:{claims:Claim[]; 
     <div className="story-questions" style={{marginTop:48}}><h3>읽다가 떠오르는 질문</h3>
       <details className="claim"><summary>1분 체크 결과는 어떻게 활용하나요?</summary><div><p>잠들기 어렵거나 쉬는 시간이 부족했다면 오늘 5~10분을 먼저 비워 보세요. GABA는 뇌의 신경 신호를 조절하는 물질로 설명됩니다.</p><a className="text-link" href="#rhythm">오늘 해볼 일 다시 보기 →</a></div></details>
       <details className="claim"><summary>연구 내용과 제품 정보는 어떻게 비교하나요?</summary><div><p>먼저 연구에 참여한 사람, 먹은 양, 기간, 무엇을 확인했는지를 보세요. 각 연구 카드는 쉬운 말과 도표로 정리해 두었습니다. 그다음 셀핀다 제품의 내용량과 표시사항을 따로 확인하면 됩니다.</p><a className="text-link" href="#research">연구 카드에서 쉽게 보기 →</a></div></details>
-      <details className="claim"><summary>제품을 선택하기 전에 무엇을 확인하면 좋을까요?</summary><div><p>1포 내용량과 구성, 실제 제품 표시사항을 확인하고, 다른 사람의 사용 경험은 원문 맥락과 함께 살펴보세요.</p><a className="text-link" href="#products">제품 구성 확인 →</a>{hasReviews ? <> · <a className="text-link" href="#reviews">사용 경험 →</a></> : null}</div></details>
+      <details className="claim"><summary>제품을 선택하기 전에 무엇을 확인하면 좋을까요?</summary><div><p>1포 내용량과 구성, 실제 제품 표시사항을 확인하고, 다른 사람의 사용 경험은 원문 맥락과 함께 살펴보세요.</p><a className="text-link" href="#products">제품 구성 확인 →</a>{hasReviews ? <> · <a className="text-link" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer">스마트스토어 후기 읽기 ↗</a></> : null}</div></details>
     </div>
   </div></section>;
 }
