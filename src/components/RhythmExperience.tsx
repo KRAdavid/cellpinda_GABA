@@ -428,7 +428,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   return (
     <section className="rhythm-experience" id="rhythm" aria-labelledby="rhythm-heading">
       <div className="rhythm-heading-row">
-        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading">일이 끝나도 머리가<br />쉬지 않으신가요?</h2></div>
+        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading">일을 마쳤는데도<br />할 일이 계속 생각나시나요?</h2></div>
         <p className="rhythm-intro-copy">잠자리에 누워도 잠이 안 오고, 쉬어도 아침에 피곤한가요?<br />아래 다섯 질문에 답하면 지금 뇌 피로가 쌓였는지 돌아볼 수 있어요.</p>
       </div>
 

@@ -1,4 +1,4 @@
-import {Brain, HeartPulse, Moon, ShieldAlert, ExternalLink, type LucideIcon} from 'lucide-react';
+import {Brain, HeartPulse, Moon, Pause, ShieldAlert, ExternalLink, type LucideIcon} from 'lucide-react';
 import './BrainLoadEvidence.css';
 
 type EvidenceCard = {
@@ -67,6 +67,19 @@ const evidence: EvidenceCard[] = [
     sourceUrl: 'https://pubmed.ncbi.nlm.nih.gov/32108954/',
     Icon: Brain,
     tone: 'brain',
+  },
+  {
+    id: 'rest-breaks',
+    number: '05',
+    tag: '짧은 휴식',
+    title: '짧은 휴식 뒤 피로감은 낮고 활력감은 높아졌어요',
+    summary: '대학생 66명이 강의 중 휴식 방법을 비교했습니다. 움직임을 곁들인 휴식 뒤 피로가 줄고 활력이 높아졌고, 이완 휴식 뒤 피로 감소는 20분 후에도 관찰됐습니다.',
+    finding: '일을 잠깐 멈추고 몸을 움직이거나, 편안하게 호흡을 가다듬어 보세요.',
+    scale: '대학생 66명 · 강의 중 휴식 비교 · 휴식 후 20분까지',
+    source: 'Blasche et al. · Stress and Health · 2018',
+    sourceUrl: 'https://onlinelibrary.wiley.com/doi/full/10.1002/smi.2830',
+    Icon: Pause,
+    tone: 'rest',
   },
 ];
 

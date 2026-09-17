@@ -54,7 +54,7 @@ requireMatch(app, /const adminView = isLocalHost && \(requestedView === 'admin' 
 const nav = app.match(/<nav[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
 if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
-for (const marker of ['일이 끝나도', '1분 리듬 체크 시작', 'GABA는 뇌에서', '스마트스토어']) {
+for (const marker of ['일을 마쳤는데도', '할 일이 계속 생각나시나요', '1분 리듬 체크 시작', 'GABA는 뇌에서', '스마트스토어']) {
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
@@ -95,8 +95,8 @@ requireMatch(rhythm, /생활 신호 지수|loadScore|loadLevel/, 'result must sh
 requireMatch(rhythm, /rhythm-care-guide|몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담/, 'high fatigue results must include a clear care-seeking guide');
 requireMatch(rhythmStyles, /rhythm-care-guide[\s\S]*border-left/, 'care-seeking guide must be visually distinct');
 requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence section is missing from the public flow');
-for (const marker of ['더 알아보기 · 뇌 피로와 건강', '61개 연구', '267개 연구', '21개 연구', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
-requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue/, 'brain-load evidence must link to trusted public sources');
+for (const marker of ['더 알아보기 · 뇌 피로와 건강', '61개 연구', '267개 연구', '21개 연구', '짧은 휴식 뒤 피로감은 낮고 활력감은 높아졌어요', 'Blasche et al. · Stress and Health · 2018', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
+requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
 for (const marker of ['뇌컨디션 확인 챌린지', 'Go/No-Go', '규칙 전환', 'FOCUS_GAME_TOTAL_TRIALS', '매번 무작위로 달라집니다', '단계별 문항 수와 제한 시간은 같아', '5분 충전하고 다시 확인', '싱잉볼 소리', '시작 준비', 'ringSingingBowl']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
