@@ -57,6 +57,7 @@ if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigati
 for (const marker of ['일을 마쳤는데도', '할 일이 계속 생각나시나요', '1분 리듬 체크 시작', 'GABA는 뇌에서', '스마트스토어']) {
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
+if (/일이 끝나도 머리가 쉬지 않으신가요|일이 끝나도 머리가 바빠요/.test(`${app}\n${rhythm}`)) fail('consumer rest messaging must use direct everyday language');
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
 requireMatch(research, /id="research"[^>]*aria-label="연구 자료 찾아보기"/, 'research section must retain an accessible name when the duplicate visible heading is removed');
 if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');

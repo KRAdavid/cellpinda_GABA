@@ -436,11 +436,11 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
         <div className="rhythm-recovery-intro-copy">
           <p className="rhythm-recovery-kicker">뇌 피로 점검</p>
           <h3>계속 버티면 뇌 과부하가 쌓일 수 있어요.<br />지금 잠깐 멈추세요.</h3>
-          <p>일이 끝나도 생각이 멈추지 않고, 잠이 안 오고, 쉬어도 피곤하면 뇌가 쉴 틈이 부족하다는 신호일 수 있습니다. 더 버티기 전에 오늘 5분부터 비워 보세요.</p>
+          <p>일을 마친 뒤에도 할 일이 계속 떠오르거나, 잠들기 어렵고 쉬어도 피곤한 날이 있나요? 오늘은 더 버티기보다 5분 쉬어 보세요.</p>
           <p className="rhythm-recovery-disclaimer">이 체크는 병을 진단하는 검사가 아닙니다. 최근 일주일 동안 뇌가 쉬지 못한 장면을 찾아 적극적인 휴식을 시작하는 안내입니다.</p>
         </div>
         <ul className="rhythm-load-signals" aria-label="뇌가 쉴 틈이 없을 때 느낄 수 있는 신호">
-          <li><strong>생각이 많음</strong><span>일이 끝나도 머리가 바빠요</span></li>
+          <li><strong>생각이 많음</strong><span>일을 마친 뒤에도 할 일이 생각나요</span></li>
           <li><strong>집중이 끊김</strong><span>하던 일을 자꾸 다시 시작해요</span></li>
           <li><strong>주변이 신경 쓰임</strong><span>소리·빛·사람이 크게 느껴져요</span></li>
           <li><strong>아침 피로</strong><span>쉬어도 개운하지 않아요</span></li>

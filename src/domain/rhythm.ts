@@ -84,11 +84,11 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   active: {
     id: 'active',
     name: '머리가 계속 바쁜 날',
-    description: '일이 끝나도 생각이 멈추지 않은 날이 많았어요. 뇌 피로가 쌓였을 수 있습니다.',
+    description: '일을 마친 뒤에도 할 일이 계속 생각난 날이 많았어요. 뇌가 쉴 틈이 부족했을 수 있습니다.',
     suggestions: ['내일 할 일을 짧게 적고 오늘의 일을 마무리해 보세요.', '저녁에 화면과 알림을 잠시 내려놓는 시간을 정해 보세요.'],
     recoveryLevel: 'prioritize',
     recoveryHeading: '뇌 피로가 쌓였을 수 있어요. 오늘은 일을 멈추세요',
-    recoveryDescription: '일이 끝나도 머리가 계속 바쁘면 뇌가 쉴 틈을 잃을 수 있어요. 오늘 저녁 알림을 끄고 10분 아무것도 하지 마세요. GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질로 알려져 있어요.',
+    recoveryDescription: '일을 마친 뒤에도 할 일이 계속 생각나면 오늘 저녁 알림을 끄고 10분 쉬어 보세요. GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질로 알려져 있어요.',
   },
   sleep: {
     id: 'sleep',
