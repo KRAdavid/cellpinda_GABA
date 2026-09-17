@@ -22,6 +22,7 @@ const research = await read('src/components/ResearchLibrary.tsx');
 const story = await read('src/components/GabaStory.tsx');
 const evidenceHighlights = await read('src/components/GabaEvidenceHighlights.tsx');
 const evidenceHighlightsStyles = await read('src/components/GabaEvidenceHighlights.css');
+const studyInsightVisual = await read('src/components/StudyInsightVisual.tsx');
 const brainLoadEvidence = await read('src/components/BrainLoadEvidence.tsx');
 const brainLoadEvidenceStyles = await read('src/components/BrainLoadEvidence.css');
 const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
@@ -57,15 +58,18 @@ for (const marker of ['일이 끝나도', '1분 리듬 체크 시작', 'GABA는 
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
-requireMatch(research, /먼저 한 문장으로 읽어 보세요/, 'research section must lead with a consumer story');
+requireMatch(research, /숫자와 그림으로 보기/, 'research section must lead with a short visual-first consumer heading');
+requireMatch(research, /research-reading-path[\s\S]*Search[\s\S]*UsersRound[\s\S]*Activity/, 'research reading path must show topic, participants and measured changes with icons');
 requireMatch(research, /연구 조건을 더 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요/, 'research empty state must guide the next consumer action');
 requireMatch(indexHtml, /GABA 연구를 쉬운 말로 더 보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /쉬운 말과 도표로 정리/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*GabaEvidenceHighlights/, 'the GABA explanation must precede the teaser and its research highlights');
-for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'research-powers-2008', 'research-sakashita-2019', 'consumerFinding', 'consumerVisual', 'gaba-research-evening.png', '논문에 사용된 GABA와 연구 참여자에게서 나타난 변화']) {
+for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'research-powers-2008', 'research-sakashita-2019', 'consumerVisual', 'gaba-research-evening.png', '논문 속 GABA', '연구 참여자']) {
   requireMatch(evidenceHighlights, new RegExp(marker), `GABA evidence highlight marker ${marker} is missing`);
 }
+for (const marker of ['study-time-comparison', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
+if (/metadata\.consumerFinding|gaba-study-finding/.test(evidenceHighlights)) fail('GABA research cards must not repeat the graph result in a long paragraph');
 requireMatch(evidenceHighlights, /더 많은 연구의 질문과 조건 보기/, 'GABA evidence cards must provide a consumer next step');
 requireMatch(evidenceHighlightsStyles, /gaba-evidence-grid[\s\S]*grid-template-columns:repeat\(auto-fit/, 'GABA evidence highlights must use a responsive visual card grid');
 requireMatch(evidenceHighlightsStyles, /@media\(max-width:680px\)[\s\S]*gaba-evidence-grid[\s\S]*grid-template-columns:1fr/, 'GABA evidence highlights must stack on mobile');

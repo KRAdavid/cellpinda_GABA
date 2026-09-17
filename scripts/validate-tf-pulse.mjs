@@ -17,7 +17,7 @@ const [contract, graph, teaser, roleRegistry] = await Promise.all([
 if (contract.status !== 'ACTIVE') fail('Goal Contract must be ACTIVE');
 if (graph.goalId !== contract.goalId) fail('task graph is not tied to the Goal Contract');
 if (roleRegistry.goalId !== contract.goalId || roleRegistry.status !== contract.status || !Array.isArray(roleRegistry.roles) || roleRegistry.roles.length < 6) fail('TF role registry is missing or not tied to the active Goal Contract');
-const requiredRoleIds = ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit', 'experience-design'];
+const requiredRoleIds = ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit', 'experience-design', 'illustration-design'];
 if (requiredRoleIds.some(id => !roleRegistry.roles.some(role => role.id === id))) fail('TF role registry is missing a required cross-functional role');
 if (!Array.isArray(graph.stateMachine) || graph.stateMachine.length === 0) fail('state machine is missing');
 if (!Array.isArray(graph.tasks) || graph.tasks.length === 0) fail('task graph is empty');

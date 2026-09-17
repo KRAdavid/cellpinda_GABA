@@ -267,14 +267,14 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }
     assert.equal(publicPulse.meetingAgenda.length, queue.pulse.activeTasks, 'live public TF pulse agenda count must match the queue');
     assert.equal(publicPulse.inputGates.length, queue.pulse.inputGates, 'live public TF pulse gate count must match the queue');
-    assert.ok(Array.isArray(queue.roleCoverage) && queue.roleCoverage.length === 7, 'live operations queue role coverage is missing');
+    assert.ok(Array.isArray(queue.roleCoverage) && queue.roleCoverage.length === 8, 'live operations queue role coverage is missing');
     assert.deepEqual(queue.roleCoverage, publicPulse.roleCoverage, 'live operations queue role coverage must match the pulse');
     const publicPulseKeys = {
       inputGate: ['taskId', 'state', 'chair', 'quorum', 'requiredInputs', 'nextAction'],
       meetingAgenda: ['taskId', 'state', 'chair', 'participants', 'quorum', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'],
     };
-    assert.ok(Array.isArray(publicPulse.roleCoverage) && publicPulse.roleCoverage.length === 7, 'live public TF pulse role coverage is missing');
-    assert.deepEqual(publicPulse.roleCoverage.map(role => role.id), ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit', 'experience-design'], 'live public TF pulse role coverage is out of order');
+    assert.ok(Array.isArray(publicPulse.roleCoverage) && publicPulse.roleCoverage.length === 8, 'live public TF pulse role coverage is missing');
+    assert.deepEqual(publicPulse.roleCoverage.map(role => role.id), ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit', 'experience-design', 'illustration-design'], 'live public TF pulse role coverage is out of order');
     assert.ok(publicPulse.roleCoverage.every(role => role.status === 'present' && typeof role.label === 'string'), 'live public TF pulse role coverage is malformed');
     for (const gate of publicPulse.inputGates) assert.deepEqual(Object.keys(gate).sort(), [...publicPulseKeys.inputGate].sort(), 'live public TF pulse input gate contains an unexpected field');
     for (const agenda of publicPulse.meetingAgenda) { assert.deepEqual(Object.keys(agenda).sort(), [...publicPulseKeys.meetingAgenda].sort(), 'live public TF pulse agenda contains an unexpected field'); validateDecisionOptions(agenda.decisionOptions, agenda.state, `live public TF pulse agenda ${agenda.taskId}`); const queueTask = queue.tasks.find(task => task.id === agenda.taskId); assert.ok(queueTask, `live public TF pulse agenda is missing queue task ${agenda.taskId}`); validateQuorum(agenda.quorum, queueTask, `live public TF pulse agenda ${agenda.taskId}`); }

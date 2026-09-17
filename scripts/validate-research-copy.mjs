@@ -2,7 +2,7 @@ import {readFile} from 'node:fs/promises';
 
 const ledger = JSON.parse(await readFile(new URL('../data/content-ledger.json', import.meta.url), 'utf8'));
 const consumerSourceFiles = [
-  'ResearchLibrary.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'GabaEvidenceHighlights.tsx', 'RhythmExperience.tsx',
+  'ResearchLibrary.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'GabaEvidenceHighlights.tsx', 'StudyInsightVisual.tsx', 'RhythmExperience.tsx',
   'PurchaseQuestions.tsx', 'ProductShare.tsx', 'SevenDayChallenge.tsx', 'TeaserPreview.tsx',
 ];
 const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles.map(async file => [

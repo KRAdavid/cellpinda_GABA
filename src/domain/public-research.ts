@@ -28,8 +28,10 @@ export function projectConsumerVisual(value:unknown):ValueRecord|undefined{
     return metrics.some(item=>item===null)?undefined:{kind:value.kind,metrics,participantLabel:value.participantLabel};
   }
   if(value.kind==='study-journey'){
-    if(!exactShape(value,['kind','steps','participantLabel','comparisonLabel'])||!textList(value.steps,2,8)||!isText(value.participantLabel,180)||!isText(value.comparisonLabel,180))return undefined;
-    return {kind:value.kind,steps:value.steps,participantLabel:value.participantLabel,comparisonLabel:value.comparisonLabel};
+    if(!exactShape(value,['kind','steps','participantLabel','comparisonLabel'],['outcomes'])||!textList(value.steps,2,8)||!isText(value.participantLabel,180)||!isText(value.comparisonLabel,180))return undefined;
+    const outcomes=value.outcomes;
+    if(outcomes!==undefined&&(!Array.isArray(outcomes)||outcomes.length<1||outcomes.length>4||outcomes.some(item=>!isRecord(item)||!exactShape(item,['label','result'])||!isText(item.label,80)||!isText(item.result,160))))return undefined;
+    return {kind:value.kind,steps:value.steps,participantLabel:value.participantLabel,comparisonLabel:value.comparisonLabel,...(Array.isArray(outcomes)?{outcomes:outcomes.map(item=>({label:(item as ValueRecord).label,result:(item as ValueRecord).result}))}:{})};
   }
   if(value.kind==='observational-link'){
     if(!exactShape(value,['kind','leftLabel','rightLabel','participantLabel','studyLabel','boundaryLabel'])||!isText(value.leftLabel,160)||!isText(value.rightLabel,160)||!isText(value.participantLabel,180)||!isText(value.studyLabel,180)||!isText(value.boundaryLabel,120))return undefined;

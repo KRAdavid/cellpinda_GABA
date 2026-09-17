@@ -90,3 +90,47 @@
 .research-technical-detail-body .research-library-findings{min-width:0}
 @media(max-width:700px){.research-story-grid{grid-template-columns:1fr}.research-story-card{min-height:0}.research-technical-detail-body{grid-template-columns:minmax(0,1fr);gap:1rem}.research-technical-detail-body .research-library-overview{grid-column:auto}}
 @media(max-width:700px){.research-library-consumer-summary,.research-library-scope,.research-library-overview p,.research-library-boundary p,.research-story-card p,.research-library-findings p,.research-library-sources a{font-size:16px;line-height:1.75}}
+
+/* Keep the research index scannable; move methodology and longer explanations behind disclosure. */
+.research-library>.section-head{align-items:end}
+.research-library>.section-head h2{font-size:clamp(32px,4vw,48px);letter-spacing:-.055em}
+.research-library-head-note{display:flex;align-items:center;gap:8px;color:#64766a;font-size:13px}
+.research-library-head-note svg{color:#328153}
+.research-reading-path{display:flex;align-items:center;justify-content:flex-start;gap:17px;margin:0 0 22px;padding:0;border:0;border-radius:0;background:transparent;overflow:visible}
+.research-reading-path>div{display:flex;align-items:center;gap:8px;padding:7px 0;background:transparent}
+.research-reading-path>div>svg{width:19px;height:19px;color:#328153}
+.research-reading-path>div>strong{font-size:13px;font-weight:600;color:#263a2d;line-height:1.3}
+.research-reading-path>svg{width:15px;height:15px;color:#9aa79d}
+.research-library-count{color:#64766a;font-size:12px}
+.research-library-count>span{font-size:18px;font-weight:650;color:#247346;font-variant-numeric:tabular-nums}
+.research-library-card{padding:32px 0}
+.research-library-kind{gap:7px;font-size:11px}
+.research-library-card h3{margin:.55rem 0 .25rem;font-size:clamp(20px,2.5vw,28px);line-height:1.32;letter-spacing:-.04em}
+.research-library-card>.study-insight{max-width:580px;margin:10px 0 0;padding:12px 0 4px;border-top:1px solid #edf0ed}
+.research-library-quick-facts{grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:13px 0 8px;max-width:840px}
+.research-library-quick-facts>div{display:grid;grid-template-columns:auto 1fr;column-gap:8px;align-content:center;min-height:54px;padding:0;border:0;border-top:1px solid #e7ece7;border-radius:0;background:transparent}
+.research-library-quick-facts>div>svg{grid-row:span 2;align-self:center;color:#648071}
+.research-library-quick-facts>div>span{display:grid;gap:2px;min-width:0}
+.research-library-quick-facts strong{font-size:10px;color:#78847c}
+.research-library-quick-facts small{font-size:12px;line-height:1.45;color:#263a2d}
+.research-library .research-detail{max-width:840px;border-color:#e8ede8}
+.research-library .research-detail>summary{padding:11px 0;font-size:12px;color:#42634e}
+.research-story-grid{grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:0 14px;margin:4px 0 1rem}
+.research-story-card{grid-template-columns:auto 1fr;column-gap:8px;min-height:0;padding:13px 0;border:0;border-bottom:1px solid #e7ece7;border-radius:0;background:transparent}
+.research-story-card>svg{grid-row:span 2;width:19px;height:19px;color:#388355}
+.research-story-card h4{align-self:center;font-size:12px}
+.research-story-card p{margin:.3rem 0 0;font-size:13px;line-height:1.55}
+.research-library-detail>.research-library-boundary{padding:10px 12px;font-size:13px}
+.research-copy{align-items:center;gap:6px;margin:10px 0 0;font-size:12px}
+@media(max-width:700px){
+  .research-library>.section-head{align-items:flex-start;gap:7px}
+  .research-library>.section-head h2{font-size:30px}
+  .research-reading-path{justify-content:space-between;gap:7px;margin-bottom:15px}
+  .research-reading-path>div{gap:5px}
+  .research-reading-path>div>svg{width:17px;height:17px}
+  .research-reading-path>div>strong{font-size:11px}
+  .research-reading-path>svg{width:12px;height:12px}
+  .research-library-quick-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 12px}
+  .research-library-quick-facts>div{min-height:48px}
+  .research-story-grid{grid-template-columns:1fr}
+}

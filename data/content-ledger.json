@@ -522,6 +522,10 @@
         "consumerVisual": {
           "kind": "study-journey",
           "steps": ["GABA 100mg 1회", "30분 뒤", "정신 과제", "뇌파·활력 점수"],
+          "outcomes": [
+            {"label": "뇌파", "result": "감소 폭이 위약보다 작았어요"},
+            {"label": "활력 점수", "result": "하락 폭이 위약보다 작았어요"}
+          ],
           "participantLabel": "성인 63명",
           "comparisonLabel": "위약 조건과 비교"
         },

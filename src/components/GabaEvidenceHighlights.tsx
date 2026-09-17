@@ -1,93 +1,48 @@
-import {Activity, ArrowUpRight, Brain, Clock3, Dumbbell, Moon, ScanFace, UsersRound} from 'lucide-react';
-import type {Claim, ConsumerVisual} from './ResearchLibrary';
+import {ArrowRight, ArrowUpRight, Brain, Clock3, Dumbbell, Moon, Pill, ScanFace, UsersRound} from 'lucide-react';
+import type {Claim} from './ResearchLibrary';
+import StudyInsightVisual from './StudyInsightVisual';
 import './GabaEvidenceHighlights.css';
 
 type StudyCard = {id:string; title:string; topic:string; number:string};
-type Chapter = {id:string; number:string; title:string; description:string; icon:typeof Moon; studies:StudyCard[]};
+type Chapter = {id:string; number:string; title:string; icon:typeof Moon; studies:StudyCard[]};
 
 const chapters:Chapter[]=[
-  {id:'sleep',number:'01',title:'잠드는 시간과 수면',description:'잠드는 시간은 짧게, 수면 효율과 비REM 수면 시간은 길게 나타난 결과를 보여드려요.',icon:Moon,studies:[
-    {id:'research-yamatsu-2016',title:'잠드는 시간 5분 단축 · 비REM 수면 2.2% 증가',topic:'수면',number:'2016'},
-    {id:'research-byun-2018',title:'잠드는 시간 약 8분 단축 · 잠든 비율 상승',topic:'수면',number:'2018'},
-    {id:'research-yoon-2022',title:'GABA군 잠드는 시간 평균 약 4분 단축',topic:'수면',number:'2022'},
+  {id:'sleep',number:'01',title:'잠드는 시간 · 수면 지표',icon:Moon,studies:[
+    {id:'research-yamatsu-2016',title:'잠드는 시간 · 비REM 수면',topic:'수면',number:'2016'},
+    {id:'research-byun-2018',title:'잠드는 시간 · 잠든 비율',topic:'수면',number:'2018'},
+    {id:'research-yoon-2022',title:'잠드는 시간',topic:'수면',number:'2022'},
   ]},
-  {id:'mental-task',number:'02',title:'바쁜 과제 중 뇌파',description:'정신 과제 뒤 뇌파 감소 폭과 활력 점수 저하 폭이 위약보다 작게 나타났어요.',icon:Brain,studies:[
-    {id:'research-yoto-2012',title:'과제 뒤 뇌파 감소 폭·활력 저하 폭 감소',topic:'정신 과제',number:'2012'},
+  {id:'mental-task',number:'02',title:'정신 과제 중 뇌파 · 활력',icon:Brain,studies:[
+    {id:'research-yoto-2012',title:'과제 뒤 뇌파 · 활력 변화',topic:'정신 과제',number:'2012'},
   ]},
-  {id:'brain-observation',number:'03',title:'뇌 신호와 감각 학습',description:'뇌의 GABA+ 신호와 반복된 감각 과제 수행을 함께 관찰했어요.',icon:ScanFace,studies:[
-    {id:'research-heba-2016',title:'뇌 신호·촉각 학습 관찰',topic:'뇌 영상 관찰',number:'2016'},
+  {id:'brain-observation',number:'03',title:'뇌 신호 · 감각 학습',icon:ScanFace,studies:[
+    {id:'research-heba-2016',title:'촉각 학습 점수 · 뇌 신호',topic:'뇌 영상 관찰',number:'2016'},
   ]},
-  {id:'exercise',number:'04',title:'운동 중 호르몬·제지방량',description:'휴식 중 성장호르몬과 12주 운동 뒤 지방을 뺀 몸무게 등, 연구에서 증가한 수치를 보여드려요.',icon:Dumbbell,studies:[
-    {id:'research-powers-2008',title:'휴식 중 성장호르몬 최고치 약 4배',topic:'운동 · 단회 섭취',number:'2008'},
-    {id:'research-sakashita-2019',title:'단백질+GABA 운동 그룹, 지방 뺀 몸무게 증가',topic:'운동 · 12주',number:'2019'},
+  {id:'exercise',number:'04',title:'운동 연구에서 잰 두 지표',icon:Dumbbell,studies:[
+    {id:'research-powers-2008',title:'휴식 중 혈중 성장호르몬',topic:'단회 섭취',number:'2008'},
+    {id:'research-sakashita-2019',title:'12주 운동 후 제지방량',topic:'단백질 병용',number:'2019'},
   ]},
 ];
 
 const publicAsset=(path:string)=>`${import.meta.env.BASE_URL}${path}`;
 const publicSource=(claim:Claim)=>claim.sources.find(source=>source.url?.startsWith('https://'));
-const factsFor=(claim:Claim)=>[
-  ['참여',claim.metadata?.sampleSize],
-  ['섭취량',claim.metadata?.dose],
-  ['기간',claim.metadata?.duration],
-].filter((item):item is [string,string]=>Boolean(item[1]));
 
-function ResearchVisual({visual}:{visual:ConsumerVisual}){
-  if(visual.kind==='before-after'){
-    const max=Math.max(visual.scaleMax,visual.beforeValue,visual.afterValue);
-    return <figure className="gaba-visual gaba-visual--bars" aria-label={`${visual.seriesLabel}, ${visual.metric}: ${visual.beforeLabel} ${visual.beforeValue}${visual.unit}, ${visual.afterLabel} ${visual.afterValue}${visual.unit}`}>
-      <figcaption><Activity size={16} aria-hidden="true"/>{visual.metric}<span>{visual.seriesLabel}</span></figcaption>
-      {[{label:visual.beforeLabel,value:visual.beforeValue,spread:visual.beforeSd},{label:visual.afterLabel,value:visual.afterValue,spread:visual.afterSd}].map((point,index)=><div className={`gaba-bar-row${index===1?' is-after':''}`} key={point.label}>
-        <span>{point.label}</span><div className="gaba-bar-track"><i style={{width:`${Math.max(point.value/max*100,5)}%`}}/></div><strong>{point.value.toLocaleString('ko-KR')}{point.spread?`±${point.spread}`:''}{visual.unit}</strong>
-      </div>)}
-      <small className="gaba-chart-scale">막대 길이는 평균값에 비례해요. 표시값은 평균±표준편차입니다.</small>
-    </figure>;
-  }
-  if(visual.kind==='metric-pair')return <figure className="gaba-visual gaba-visual--pair" aria-label={`${visual.participantLabel}: ${visual.metrics.map(metric=>`${metric.label} ${metric.value}${metric.unit}`).join(', ')}`}>
-    <figcaption><Moon size={16} aria-hidden="true"/>연구에서 기록한 두 가지 변화</figcaption>
-    <div className="gaba-pair-grid">{visual.metrics.map(metric=><div className="gaba-pair-metric" key={metric.label}><span>{metric.label}</span><strong>{metric.value}<small>{metric.unit}</small></strong><em>{metric.comparison}</em></div>)}</div>
-    <small className="gaba-chart-scale">{visual.participantLabel}</small>
-  </figure>;
-  if(visual.kind==='study-journey')return <figure className="gaba-visual gaba-visual--journey" aria-label={`${visual.participantLabel}. ${visual.steps.join(' 다음 ')}`}>
-    <figcaption><Brain size={16} aria-hidden="true"/>{visual.participantLabel} · {visual.comparisonLabel}</figcaption>
-    <ol>{visual.steps.map((step,index)=><li key={step}><span>{String(index+1).padStart(2,'0')}</span><strong>{step}</strong></li>)}</ol>
-    <p>관찰 결과: 정신 과제에 따른 뇌파 변화와 기분 설문을 기록했어요.</p>
-  </figure>;
-  if(visual.kind==='observational-link')return <figure className="gaba-visual gaba-visual--link" aria-label={`${visual.participantLabel}, ${visual.studyLabel}: ${visual.leftLabel}와 ${visual.rightLabel}의 관계를 관찰`}>
-    <figcaption><ScanFace size={16} aria-hidden="true"/>{visual.participantLabel} · {visual.studyLabel}</figcaption>
-    <div className="gaba-link-diagram"><span>{visual.leftLabel}</span><i aria-hidden="true"/><span>{visual.rightLabel}</span></div>
-    <small className="gaba-chart-scale">{visual.boundaryLabel}</small>
-  </figure>;
-  if(visual.kind==='ratio'){
-    const max=Math.max(visual.observed,visual.baseline);
-    return <figure className="gaba-visual gaba-visual--ratio" aria-label={`${visual.metric}: ${visual.comparisonLabel}, 위약 기준 ${visual.baseline}${visual.unit}, GABA 조건 ${visual.observed}${visual.unit}`}>
-      <figcaption><Activity size={16} aria-hidden="true"/>{visual.metric}<span>{visual.comparisonLabel}</span></figcaption>
-      {[{label:'위약 조건',value:visual.baseline},{label:'GABA 조건',value:visual.observed}].map((point,index)=><div className={`gaba-bar-row${index===1?' is-after':''}`} key={point.label}>
-        <span>{point.label}</span><div className="gaba-bar-track"><i style={{width:`${point.value/max*100}%`}}/></div><strong>{point.value}{visual.unit}</strong>
-      </div>)}
-      <small className="gaba-chart-scale">{visual.participantLabel} · {visual.doseLabel}</small>
-    </figure>;
-  }
-  const max=Math.max(visual.scaleMax,...visual.groups.map(group=>group.value));
-  return <figure className="gaba-visual gaba-visual--groups" aria-label={`${visual.metric}: ${visual.groups.map(group=>`${group.label} ${group.value}${visual.unit}`).join(', ')}`}>
-    <figcaption><Dumbbell size={16} aria-hidden="true"/>{visual.metric}<span>{visual.participantLabel}</span></figcaption>
-    {visual.groups.map((group,index)=><div className={`gaba-bar-row${index===1?' is-after':''}`} key={group.label}>
-      <span>{group.label}</span><div className="gaba-bar-track"><i style={{width:`${Math.max(group.value/max*100,4)}%`}}/></div><strong>{group.value.toLocaleString('ko-KR')}{visual.unit}</strong>
-    </div>)}
-    <small className="gaba-chart-scale">막대는 연구에서 보고된 평균 변화예요. 개인의 변화를 예측하지 않습니다.</small>
-  </figure>;
-}
+const factsFor=(claim:Claim)=>[
+  {label:'참여',value:claim.metadata?.sampleSize,Icon:UsersRound},
+  {label:'섭취',value:claim.metadata?.dose,Icon:Pill},
+  {label:'기간',value:claim.metadata?.duration,Icon:Clock3},
+].filter((item):item is {label:string;value:string;Icon:typeof UsersRound}=>Boolean(item.value));
 
 function StudyResult({study,claim}:{study:StudyCard;claim:Claim}){
   const metadata=claim.metadata!;
   const source=publicSource(claim);
-  if(!metadata.consumerFinding||!metadata.consumerVisual)return null;
+  if(!metadata.consumerVisual)return null;
   return <article className="gaba-study-result" id={`finding-${study.id}`}>
     <div className="gaba-study-meta"><span>{study.topic}</span><time>{study.number}</time></div>
     <h4>{study.title}</h4>
-    <p className="gaba-study-finding">{metadata.consumerFinding}</p>
-    <ResearchVisual visual={metadata.consumerVisual}/>
-    <dl className="gaba-study-facts">{factsFor(claim).map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    {source?<a className="gaba-study-source" href={source.url!} target="_blank" rel="noopener noreferrer">{source.title}<ArrowUpRight size={15} aria-hidden="true"/></a>:null}
+    <StudyInsightVisual visual={metadata.consumerVisual}/>
+    <dl className="gaba-study-facts">{factsFor(claim).map(({label,value,Icon})=><div key={label} title={`${label}: ${value}`}><Icon size={17} strokeWidth={1.7} aria-hidden="true"/><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+    {source?<a className="gaba-study-source" href={source.url!} target="_blank" rel="noopener noreferrer" aria-label={`${source.title} 논문 원문 새 창으로 열기`}>논문 원문 <ArrowUpRight size={15} aria-hidden="true"/></a>:null}
   </article>;
 }
 
@@ -106,23 +61,24 @@ export default function GabaEvidenceHighlights({claims,onOpen}:Props){
       <div className="gaba-evidence-cover">
         <img src={publicAsset('assets/gaba-research-evening.png')} alt="저녁 창가에서 잠시 쉬며 하루를 돌아보는 40대 여성" loading="lazy"/>
         <div className="gaba-evidence-cover-copy">
-          <p className="chapter">GABA RESEARCH · 연구 결과 한눈에</p>
-          <h2 id="gaba-evidence-title">각 연구에서 좋아진 변화,<br/>숫자로 바로 보세요.</h2>
-          <p>잠드는 시간·뇌파·활력 점수·운동 지표가 어떻게 달라졌는지<br/>참여자와 연구 조건을 함께 보여드립니다.</p>
-          <div className="gaba-evidence-count"><strong>{count}</strong><span>개 연구 결과</span><span className="gaba-evidence-count-divider" aria-hidden="true"/><span>참여자 · 섭취량 · 기간 함께 표시</span></div>
+          <h2 id="gaba-evidence-title">사람 연구에서<br/>측정한 변화.</h2>
+          <div className="gaba-evidence-count"><strong>{count}</strong><span>개 연구</span><ArrowRight size={16} aria-hidden="true"/><strong>{available.length}</strong><span>가지 주제</span></div>
         </div>
       </div>
-      <div className="gaba-evidence-boundary"><span aria-hidden="true">i</span><p><strong>논문에 사용된 GABA와 연구 참여자에게서 나타난 변화를 소개합니다.</strong> 참여자·먹은 양·기간을 함께 보고, 셀핀다 제품 정보는 포장 표시에서 확인해 보세요.</p></div>
+      <div className="gaba-evidence-boundary" aria-label="연구와 제품 정보 구분">
+        <span><Pill size={18} aria-hidden="true"/><b>논문 속 GABA</b></span><ArrowRight size={18} aria-hidden="true"/><span><UsersRound size={18} aria-hidden="true"/><b>연구 참여자</b></span><i/>
+        <small>셀핀다 제품 정보는 포장 표시에서</small>
+      </div>
       <div className="gaba-evidence-chapters">
         {available.map(chapter=>{
           const Icon=chapter.icon;
           return <section className={`gaba-evidence-chapter gaba-evidence-chapter--${chapter.id}`} key={chapter.id} aria-labelledby={`gaba-chapter-${chapter.id}`}>
-            <header className="gaba-evidence-chapter-head"><span className="gaba-chapter-number">{chapter.number}</span><Icon size={24} strokeWidth={1.65} aria-hidden="true"/><div><h3 id={`gaba-chapter-${chapter.id}`}>{chapter.title}</h3><p>{chapter.description}</p></div></header>
+            <header className="gaba-evidence-chapter-head"><Icon size={26} strokeWidth={1.55} aria-hidden="true"/><h3 id={`gaba-chapter-${chapter.id}`}>{chapter.title}</h3></header>
             <div className="gaba-evidence-grid">{chapter.studies.map(study=>{
               const claim=byId.get(study.id);
               return claim?<StudyResult study={study} claim={claim} key={study.id}/>:null;
             })}</div>
-            {chapter.id==='exercise'?<p className="gaba-exercise-boundary"><Dumbbell size={17} aria-hidden="true"/><span><strong>운동 연구에서 측정한 지표:</strong> 혈중 성장호르몬과 전신 제지방량은 각각 따로 측정했습니다. 참여자·운동 방식·섭취 조건을 결과와 함께 확인하세요.</span></p>:null}
+            {chapter.id==='exercise'?<p className="gaba-exercise-boundary"><Dumbbell size={17} aria-hidden="true"/><span>성장호르몬과 제지방량은 <strong>서로 다른 연구에서 따로 측정</strong>했어요.</span></p>:null}
           </section>;
         })}
       </div>

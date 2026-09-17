@@ -165,6 +165,7 @@ const team: MvpTeamMember[] = [
   {id: 'regulatory', role: '표시·규제 검토', responsibility: '치료·진단·효과 보장·권한 없는 후기 차단', authority: '공개 보류·수정 요구', verifier: false},
   {id: 'data-analytics', role: '데이터·성과', responsibility: '인덱스 완성도·유입·공유·구매 클릭을 구분 측정', authority: '분모·근거 정의', verifier: false},
   {id: 'commerce-operations', role: '데이터·판매처 운영', responsibility: '스마트스토어 목적지·SKU·주문·취소·환불 흐름을 대사할 준비', authority: '판매처 연동 자료 확인 요청', verifier: false},
+  {id: 'illustration-visualization', role: '일러스트·정보시각화 디자이너', responsibility: '연구 수치·조건을 한눈에 이해하는 그림과 비교 도표로 구성', authority: '시각화 초안·접근성 설명 제안, 근거 해석은 독립 근거 역할에 이관', verifier: false},
   {id: 'finance-qa', role: '재무·QA', responsibility: '구매 클릭과 실제 주문·환불을 분리 검증', authority: '주문 대사 보류·재검증 요구', verifier: true},
   {id: 'story-ux', role: '스토리·UX·프런트', responsibility: '연구 탐색과 소비자 여정의 화면 구현', authority: '내부 화면 수정', verifier: false},
   {id: 'quality-auditor', role: '품질감사관', responsibility: '독립적으로 출처·계산·권한·승인·완료 증거 재검증', authority: '완료 반려·재작업 요구', verifier: true},
