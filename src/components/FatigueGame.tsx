@@ -229,7 +229,6 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
         stopRelaxationAudio();
         setRestComplete(true);
         setAudioMessage('5분 휴식이 끝났어요. 준비되면 내 기록을 다시 확인해 보세요.');
-        onEvent('fatigue_game_rest_complete', { duration: '5m' });
       }
     }, 1000);
   }
