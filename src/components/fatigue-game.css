@@ -39,3 +39,16 @@
 @media(max-width:760px){.fatigue-breath-guide{margin:20px 0 14px;border-radius:9px}.fatigue-breath-readout{min-height:84px;padding:15px 16px 9px}.fatigue-breath-readout span{font-size:12px}.fatigue-breath-readout strong{font-size:25px}.fatigue-breath-readout b{width:50px;height:50px;font-size:25px}.fatigue-breath-phases{grid-template-columns:repeat(2,minmax(0,1fr))}.fatigue-breath-phases li{grid-template-columns:1fr auto;gap:3px;padding:11px 12px}.fatigue-breath-phases li>span{display:none}.fatigue-breath-phases li strong{font-size:13px}.fatigue-breath-phases li small{font-size:12px}.fatigue-breath-svg-label{font-size:19px}.fatigue-game-rest .fatigue-breath-note{font-size:14px!important}}
 @media(max-width:380px){.fatigue-breath-readout{padding-right:12px;padding-left:12px}.fatigue-breath-readout strong{font-size:22px}.fatigue-breath-readout b{width:44px;height:44px;font-size:22px}.fatigue-breath-phases li{padding:10px 8px}.fatigue-breath-phases li strong{font-size:12px}}
 .fatigue-stage-preview small{font-size:12px}.fatigue-target-shape{display:block;width:42px;height:42px;background:#fff;box-shadow:0 0 0 8px rgba(255,255,255,.2),0 0 24px rgba(255,255,255,.35)}.fatigue-target-shape-diamond{width:34px;height:34px;border-radius:4px;transform:rotate(45deg)}.fatigue-target-shape-ring{border:7px solid #fff;border-radius:50%;background:transparent;box-shadow:0 0 0 8px rgba(255,255,255,.16),0 0 24px rgba(255,255,255,.3)}.fatigue-target-shape-triangle{width:0;height:0;border-right:24px solid transparent;border-bottom:42px solid #fff;border-left:24px solid transparent;background:transparent;filter:drop-shadow(0 0 9px rgba(255,255,255,.65));box-shadow:none}
+
+/* Keep the stage guidance and play area in the same place as the rules change. */
+.fatigue-game-running{display:grid;grid-template-rows:22px 78px 48px 28px 174px 48px;align-items:center}
+.fatigue-stage-instruction{grid-template-rows:30px 34px;align-content:center;justify-items:center;gap:2px;height:78px;margin:0;overflow:hidden}
+.fatigue-stage-instruction strong{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(16px,2.2vw,23px);line-height:1.3}
+.fatigue-stage-instruction span{display:-webkit-box;max-width:100%;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:13px;line-height:1.3}
+.fatigue-rule-slot{display:grid;place-items:center;height:48px}
+.fatigue-rule-display{margin:0 auto}
+.fatigue-rule-placeholder{display:block;width:1px;height:1px}
+.fatigue-trial-dots{margin:0}
+.fatigue-game-running .fatigue-target{margin:0 auto}
+.fatigue-game-running .fatigue-game-status{display:-webkit-box;align-self:center;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+@media(max-width:760px){.fatigue-game-running{grid-template-rows:22px 78px 48px 28px 148px 48px}.fatigue-stage-instruction strong{font-size:clamp(16px,4.8vw,20px)}}
