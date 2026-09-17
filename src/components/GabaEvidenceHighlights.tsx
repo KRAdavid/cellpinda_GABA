@@ -6,20 +6,20 @@ type StudyCard = {id:string; title:string; topic:string; number:string};
 type Chapter = {id:string; number:string; title:string; description:string; icon:typeof Moon; studies:StudyCard[]};
 
 const chapters:Chapter[]=[
-  {id:'sleep',number:'01',title:'잠드는 시간과 수면',description:'잠이 불편한 성인을 대상으로 잠드는 시간과 수면 단계를 살펴봤어요.',icon:Moon,studies:[
-    {id:'research-yamatsu-2016',title:'잠드는 시간·비REM 수면',topic:'수면',number:'2016'},
-    {id:'research-byun-2018',title:'잠들기까지 걸린 시간',topic:'수면',number:'2018'},
-    {id:'research-yoon-2022',title:'잠들기까지 걸린 시간',topic:'수면',number:'2022'},
+  {id:'sleep',number:'01',title:'잠드는 시간과 수면',description:'잠드는 시간은 짧게, 수면 효율과 비REM 수면 시간은 길게 나타난 결과를 보여드려요.',icon:Moon,studies:[
+    {id:'research-yamatsu-2016',title:'잠드는 시간 5분 단축 · 비REM 수면 2.2% 증가',topic:'수면',number:'2016'},
+    {id:'research-byun-2018',title:'잠드는 시간 약 8분 단축 · 잠든 비율 상승',topic:'수면',number:'2018'},
+    {id:'research-yoon-2022',title:'GABA군 잠드는 시간 평균 약 4분 단축',topic:'수면',number:'2022'},
   ]},
-  {id:'mental-task',number:'02',title:'바쁜 과제 중 뇌파',description:'정신 과제를 하는 동안 뇌파와 기분 설문을 확인한 연구예요.',icon:Brain,studies:[
-    {id:'research-yoto-2012',title:'과제 중 뇌파·기분 설문',topic:'정신 과제',number:'2012'},
+  {id:'mental-task',number:'02',title:'바쁜 과제 중 뇌파',description:'정신 과제 뒤 뇌파 감소 폭과 활력 점수 저하 폭이 위약보다 작게 나타났어요.',icon:Brain,studies:[
+    {id:'research-yoto-2012',title:'과제 뒤 뇌파 감소 폭·활력 저하 폭 감소',topic:'정신 과제',number:'2012'},
   ]},
   {id:'brain-observation',number:'03',title:'뇌 신호와 감각 학습',description:'뇌의 GABA+ 신호와 반복된 감각 과제 수행을 함께 관찰했어요.',icon:ScanFace,studies:[
     {id:'research-heba-2016',title:'뇌 신호·촉각 학습 관찰',topic:'뇌 영상 관찰',number:'2016'},
   ]},
-  {id:'exercise',number:'04',title:'운동 중 호르몬·제지방량',description:'혈중 호르몬과 운동에 따른 몸의 수치를 따로 살펴본 연구예요.',icon:Dumbbell,studies:[
-    {id:'research-powers-2008',title:'혈중 성장호르몬 수치',topic:'운동 · 단회 섭취',number:'2008'},
-    {id:'research-sakashita-2019',title:'제지방량 변화',topic:'운동 · 12주',number:'2019'},
+  {id:'exercise',number:'04',title:'운동 중 호르몬·제지방량',description:'휴식 중 성장호르몬과 12주 운동 뒤 지방을 뺀 몸무게 등, 연구에서 증가한 수치를 보여드려요.',icon:Dumbbell,studies:[
+    {id:'research-powers-2008',title:'휴식 중 성장호르몬 최고치 약 4배',topic:'운동 · 단회 섭취',number:'2008'},
+    {id:'research-sakashita-2019',title:'단백질+GABA 운동 그룹, 지방 뺀 몸무게 증가',topic:'운동 · 12주',number:'2019'},
   ]},
 ];
 
@@ -107,12 +107,12 @@ export default function GabaEvidenceHighlights({claims,onOpen}:Props){
         <img src={publicAsset('assets/gaba-research-evening.png')} alt="저녁 창가에서 잠시 쉬며 하루를 돌아보는 40대 여성" loading="lazy"/>
         <div className="gaba-evidence-cover-copy">
           <p className="chapter">GABA RESEARCH · 연구 결과 한눈에</p>
-          <h2 id="gaba-evidence-title">논문에서 관찰한<br/>변화를 바로 읽어보세요.</h2>
-          <p>수면·정신 과제·운동 연구에서 실제로 측정한 내용을<br/>생활에서 쓰는 말과 그림으로 정리했습니다.</p>
+          <h2 id="gaba-evidence-title">각 연구에서 좋아진 변화,<br/>숫자로 바로 보세요.</h2>
+          <p>잠드는 시간·뇌파·활력 점수·운동 지표가 어떻게 달라졌는지<br/>참여자와 연구 조건을 함께 보여드립니다.</p>
           <div className="gaba-evidence-count"><strong>{count}</strong><span>개 연구 결과</span><span className="gaba-evidence-count-divider" aria-hidden="true"/><span>참여자 · 섭취량 · 기간 함께 표시</span></div>
         </div>
       </div>
-      <div className="gaba-evidence-boundary"><span aria-hidden="true">i</span><p><strong>아래 수치는 각 논문에 참여한 사람에게서 나온 결과입니다.</strong> 연구마다 사용한 원료·양·기간이 다르며, 셀핀다 완제품의 시험 결과나 섭취 안내를 뜻하지 않습니다. 제품 정보는 포장 표시에서 확인해 주세요.</p></div>
+      <div className="gaba-evidence-boundary"><span aria-hidden="true">i</span><p><strong>논문에 사용된 GABA와 연구 참여자에게서 나타난 변화를 소개합니다.</strong> 참여자·먹은 양·기간을 함께 보고, 셀핀다 제품 정보는 포장 표시에서 확인해 보세요.</p></div>
       <div className="gaba-evidence-chapters">
         {available.map(chapter=>{
           const Icon=chapter.icon;
@@ -122,7 +122,7 @@ export default function GabaEvidenceHighlights({claims,onOpen}:Props){
               const claim=byId.get(study.id);
               return claim?<StudyResult study={study} claim={claim} key={study.id}/>:null;
             })}</div>
-            {chapter.id==='exercise'?<p className="gaba-exercise-boundary"><Dumbbell size={17} aria-hidden="true"/><span><strong>운동 연구 읽는 법:</strong> 혈중 호르몬 수치와 근육량은 서로 다른 측정 결과예요. 연구에 사용한 양은 제품의 섭취 안내가 아닙니다.</span></p>:null}
+            {chapter.id==='exercise'?<p className="gaba-exercise-boundary"><Dumbbell size={17} aria-hidden="true"/><span><strong>운동 연구에서 측정한 지표:</strong> 혈중 성장호르몬과 전신 제지방량은 각각 따로 측정했습니다. 참여자·운동 방식·섭취 조건을 결과와 함께 확인하세요.</span></p>:null}
           </section>;
         })}
       </div>

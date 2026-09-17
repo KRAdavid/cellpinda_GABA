@@ -63,7 +63,7 @@ requireMatch(research, /다른 주제나 방식을 골라 관련 연구 이야�
 requireMatch(indexHtml, /GABA 연구를 쉬운 말로 더 보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /쉬운 말과 도표로 정리/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*GabaEvidenceHighlights/, 'the GABA explanation must precede the teaser and its research highlights');
-for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'research-powers-2008', 'research-sakashita-2019', 'consumerFinding', 'consumerVisual', 'gaba-research-evening.png', '셀핀다 완제품의 시험 결과']) {
+for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'research-powers-2008', 'research-sakashita-2019', 'consumerFinding', 'consumerVisual', 'gaba-research-evening.png', '논문에 사용된 GABA와 연구 참여자에게서 나타난 변화']) {
   requireMatch(evidenceHighlights, new RegExp(marker), `GABA evidence highlight marker ${marker} is missing`);
 }
 requireMatch(evidenceHighlights, /더 많은 연구의 질문과 조건 보기/, 'GABA evidence cards must provide a consumer next step');
