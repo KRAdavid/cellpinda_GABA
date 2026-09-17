@@ -146,7 +146,7 @@
 .study-observation-map>div>span{color:#304539;font-size:11px;line-height:1.35}
 .study-observation-link{height:1px;border-top:1px dashed #96aa9a}
 .study-observation-link i{display:block;width:7px;height:7px;margin:-4px auto 0;border-radius:50%;background:#43835b}
-.study-insight--observation .study-insight-footnote{padding-left:1px}
+.study-insight--observation .study-insight-footnote{padding-left:1px;color:#43584a;font-size:12px;font-weight:500;line-height:1.55}
 .study-ratio-hero{display:flex;align-items:baseline;gap:10px}
 .study-ratio-hero>strong{color:#167b48;font-size:48px;line-height:1;letter-spacing:-.07em;font-variant-numeric:tabular-nums}
 .study-ratio-hero>strong small{margin-left:3px;font-size:17px;letter-spacing:0}

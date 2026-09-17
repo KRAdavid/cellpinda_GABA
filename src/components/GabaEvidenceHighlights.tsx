@@ -16,7 +16,7 @@ const chapters:Chapter[]=[
     {id:'research-yoto-2012',title:'생각을 많이 쓴 뒤에도 뇌파·활력 점수가 더 잘 유지됐어요',topic:'생각을 많이 쓴 과제',number:'2012'},
   ]},
   {id:'brain-observation',number:'03',title:'뇌 속 GABA와 손끝 연습',icon:ScanFace,studies:[
-    {id:'research-heba-2016',title:'뇌 신호와 손끝 연습 점수',topic:'손끝 연습',number:'2016'},
+    {id:'research-heba-2016',title:'45분 손끝 연습 뒤, 구분 점수가 평균 12% 올랐어요',topic:'손끝 연습',number:'2016'},
   ]},
   {id:'exercise',number:'04',title:'운동 뒤 몸에서 살펴본 변화',icon:Dumbbell,studies:[
     {id:'research-powers-2008',title:'운동 뒤 혈액에서 본 성장호르몬',topic:'운동',number:'2008'},
