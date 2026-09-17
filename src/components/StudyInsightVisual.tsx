@@ -47,18 +47,18 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
     {visual.outcomes?.length?<div className="study-journey-outcome">{visual.outcomes.map(item=><span key={item.label}><Waves size={16} aria-hidden="true"/><b>{item.label}</b><small>{item.result}</small></span>)}</div>:null}
   </figure>;
 
-  if(visual.kind==='observational-link')return <figure className="study-insight study-insight--observation" aria-label={`${visual.participantLabel}, ${visual.studyLabel}: ${visual.leftLabel}와 ${visual.rightLabel}의 관계를 관찰`}>
-    <figcaption><ScanFace size={18} aria-hidden="true"/>섭취가 아닌 관찰 연구 <span>{visual.participantLabel}</span></figcaption>
-    <div className="study-observation-map"><div><Brain size={31} strokeWidth={1.5} aria-hidden="true"/><span>뇌 GABA+ 신호</span></div><span className="study-observation-link" aria-hidden="true"><i/></span><div><Hand size={31} strokeWidth={1.5} aria-hidden="true"/><span>촉각 학습 점수</span></div></div>
-    <small className="study-insight-footnote">점수 향상 · {visual.boundaryLabel}</small>
+  if(visual.kind==='observational-link')return <figure className="study-insight study-insight--observation" aria-label={`${visual.participantLabel}. ${visual.leftLabel}와 ${visual.rightLabel}를 함께 살펴봤어요`}>
+    <figcaption><ScanFace size={18} aria-hidden="true"/>손끝 연습과 뇌 신호를 살펴봄 <span>{visual.participantLabel}</span></figcaption>
+    <div className="study-observation-map"><div><Brain size={31} strokeWidth={1.5} aria-hidden="true"/><span>{visual.leftLabel}</span></div><span className="study-observation-link" aria-hidden="true"><i/></span><div><Hand size={31} strokeWidth={1.5} aria-hidden="true"/><span>{visual.rightLabel}</span></div></div>
+    <small className="study-insight-footnote">반복 과제 뒤 구분 점수가 올랐어요 · {visual.boundaryLabel}</small>
   </figure>;
 
   if(visual.kind==='ratio'){
     const max=Math.max(visual.observed,visual.baseline);
-    return <figure className="study-insight study-insight--ratio" aria-label={`${visual.metric}: ${visual.comparisonLabel}, 위약 기준 ${visual.baseline}${visual.unit}, GABA 조건 ${visual.observed}${visual.unit}`}>
+    return <figure className="study-insight study-insight--ratio" aria-label={`${visual.metric}: ${visual.comparisonLabel}, 비교 음료를 먹은 경우 ${visual.baseline}${visual.unit}, GABA를 먹은 경우 ${visual.observed}${visual.unit}`}>
       <figcaption><Activity size={18} aria-hidden="true"/>{visual.metric}</figcaption>
       <div className="study-ratio-hero"><strong>약 {numberText(visual.observed/visual.baseline)}<small>배</small></strong><span>{visual.comparisonLabel}</span></div>
-      <div className="study-ratio-bars">{[{label:'위약',value:visual.baseline},{label:'GABA',value:visual.observed}].map((item,index)=><div key={item.label} className={index===1?'is-highlight':''}><span>{item.label}</span><i><b style={{width:`${Math.max(item.value/max*100,5)}%`}}/></i><strong>{numberText(item.value)}×</strong></div>)}</div>
+      <div className="study-ratio-bars">{[{label:'비교 음료',value:visual.baseline},{label:'GABA를 먹은 경우',value:visual.observed}].map((item,index)=><div key={item.label} className={index===1?'is-highlight':''}><span>{item.label}</span><i><b style={{width:`${Math.max(item.value/max*100,5)}%`}}/></i><strong>{numberText(item.value)}×</strong></div>)}</div>
       <small className="study-insight-footnote">{visual.participantLabel} · {visual.doseLabel}</small>
     </figure>;
   }
@@ -69,6 +69,6 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
     {visual.groups.map((group,index)=><div className={`study-group-row${index===1?' is-highlight':''}`} key={group.label}>
       <span>{group.label.replace('유청단백질','단백질')}</span><i><b style={{width:`${Math.max(group.value/max*100,5)}%`}}/></i><strong>{numberText(group.value)}<small>{visual.unit}</small></strong>
     </div>)}
-    <div className="study-insight-footer"><Trend direction="up" label="병용군 증가 폭이 더 컸어요"/><small>{visual.participantLabel}</small></div>
+    <div className="study-insight-footer"><Trend direction="up" label="두 가지를 함께 먹은 그룹에서 더 늘었어요"/><small>{visual.participantLabel}</small></div>
   </figure>;
 }

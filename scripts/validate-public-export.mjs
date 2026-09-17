@@ -21,7 +21,7 @@ const goalContract = await readJson('data/goal-contract.json');
 const fail = message => { throw new Error(`Public export invalid: ${message}`); };
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
-const approvedReviewText = '스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.';
+const approvedReviewText = '가바 1500 구매자 후기를 스마트스토어에서 읽어보세요.';
 const isHttps = value => {
   try { return new URL(value).protocol === 'https:'; } catch { return false; }
 };
@@ -33,7 +33,7 @@ const isSmartStoreReview = value => {
 };
 
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
-if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 뇌에서 신경세포 사이의 신호를 조절하는 물질입니다/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || !/gaba-master-index\.json/i.test(indexHtml) || !indexHtml.includes(approvedSmartStoreUrl) || !indexHtml.includes(approvedSmartStoreReviewUrl) || !/<a href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>구매자 후기 원문 읽기/.test(indexHtml) || !indexHtml.includes(approvedReviewText)) fail('index.html must keep a readable static fallback with the approved Smart Store product and review links');
+if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 뇌세포가 서로 신호를 주고받을 때 쓰이는 물질 가운데 하나예요/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || /gaba-master-index\.json/i.test(indexHtml) || !indexHtml.includes(approvedSmartStoreUrl) || !indexHtml.includes(approvedSmartStoreReviewUrl) || !/<a href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>스마트스토어에서 후기 읽기/.test(indexHtml) || !indexHtml.includes(approvedReviewText)) fail('index.html must keep a readable static fallback with the approved Smart Store product and review links');
 if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml) || !/<meta property="og:type" content="website"\s*\/>/i.test(indexHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml)) fail('index.html must expose canonical and Open Graph URL metadata');
 if (!/canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//.test(focusHtml) || !/property="og:title" content="“너도 해봐” 1분 뇌컨디션 확인 챌린지"/.test(focusHtml) || !/property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/social-card\.png"/.test(focusHtml) || !/focus=1#rhythm|focus=1/.test(focusHtml) || !focusHtml.includes('24개') || !focusHtml.includes('매번 달라지는 신호')) fail('focus invite page must expose the randomized challenge social preview and app handoff');
 if (!/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/.test(indexHtml)) fail('index.html must expose safe WebSite structured data');

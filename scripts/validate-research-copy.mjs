@@ -3,7 +3,8 @@ import {readFile} from 'node:fs/promises';
 const ledger = JSON.parse(await readFile(new URL('../data/content-ledger.json', import.meta.url), 'utf8'));
 const consumerSourceFiles = [
   'ResearchLibrary.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'GabaEvidenceHighlights.tsx', 'StudyInsightVisual.tsx', 'RhythmExperience.tsx',
-  'PurchaseQuestions.tsx', 'ProductShare.tsx', 'SevenDayChallenge.tsx', 'TeaserPreview.tsx',
+  'PurchaseQuestions.tsx', 'ProductShare.tsx', 'SevenDayChallenge.tsx', 'TeaserPreview.tsx', 'BrainLoadEvidence.tsx',
+  'FatigueGame.tsx', 'MemberRecords.tsx', 'AnalyticsConsent.tsx',
 ];
 const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles.map(async file => [
   file,
@@ -22,8 +23,12 @@ if (research.length === 0) fail('at least one approved research claim is require
 
 const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장|직접\s*(먹어|경험)|가바\s*(경험|섭취를\s*시작)/;
 const discouragedMarketing = /뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|결과를\s*한\s*문장으로\s*묶기\s*어려|중증\s*수면질환|수면이\s*좋지\s*않|이상사례|유의하지\s*않/;
+const technicalResearchTerms = /무작위.{0,5}|이중눈가림|단일눈가림|위약대조|교차시험|평행군|MRS|비REM|REM\s*수면|혈중|정량\s*메타분석|체계적\s*문헌고찰/i;
+const collectStrings = value => Array.isArray(value) ? value.flatMap(collectStrings) : value && typeof value === 'object' ? Object.values(value).flatMap(collectStrings) : typeof value === 'string' ? [value] : [];
 for (const claim of research) {
   const metadata = claim.metadata ?? {};
+  const readerCopy = [claim.topic, claim.publicText, metadata.question, metadata.population, metadata.sampleSize, metadata.dose, metadata.duration, metadata.comparison, metadata.outcome, metadata.consumerScope, metadata.consumerSummary, metadata.consumerFinding, metadata.hopefulTakeaway, metadata.productApplicability, ...collectStrings(metadata.consumerVisual)].filter(Boolean).join(' ');
+  if (technicalResearchTerms.test(readerCopy)) fail(claim.id + ' exposes a researcher-only term in consumer copy');
   if (typeof claim.publicText !== 'string' || claim.publicText.trim().length < 30) fail(`${claim.id}.publicText must be a consumer-ready summary`);
   if (discouragedMarketing.test(claim.publicText)) fail(`${claim.id}.publicText contains a discouraged negative marketing phrase`);
   for (const field of ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability']) {
@@ -50,6 +55,6 @@ if (/전체\s*구매자의\s*경험|제품\s*효과를\s*입증하는\s*연구\s
 if (/원문에서\s*확인되지\s*않음|빠진\s*정보는\s*추측하지\s*않아도\s*됩니다/.test(reviewExperience)) fail('consumer review UI must guide readers toward source context');
 if (discouragedMarketing.test(consumerUi)) fail('consumer UI contains a discouraged negative marketing phrase');
 if (/연구 카드를 준비하고 있어요|후기를 확인할 수 있는 경로를 준비하고 있습니다|GABA 기본 자료를 확인하고 있습니다|현재 공개된 제품 구성 정보가 없습니다/.test(consumerUi)) fail('consumer UI must not expose empty or preparation-state copy');
-if (/이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다/.test(purchaseQuestions) || !/최신 내용으로 확인해 보세요/.test(purchaseQuestions)) fail('purchase guidance must use clear, current-label language without defensive copy');
+if (/이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다/.test(purchaseQuestions) || !/먹는 방법·보관법·주의사항은 구매 전에 제품 포장과 스마트스토어에서 확인해 주세요/.test(purchaseQuestions)) fail('purchase guidance must point consumers to the current package and Smart Store details');
 
 console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'consumerFinding', 'hopefulTakeaway', 'productApplicability'], visuals: 'reviewed consumerVisual schemas; raw results stay internal', detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-section-product-link', status: 'ok'}));

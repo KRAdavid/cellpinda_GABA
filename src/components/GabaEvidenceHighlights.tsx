@@ -7,20 +7,20 @@ type StudyCard = {id:string; title:string; topic:string; number:string};
 type Chapter = {id:string; number:string; title:string; icon:typeof Moon; studies:StudyCard[]};
 
 const chapters:Chapter[]=[
-  {id:'sleep',number:'01',title:'잠드는 시간 · 수면 지표',icon:Moon,studies:[
-    {id:'research-yamatsu-2016',title:'잠드는 시간 · 비REM 수면',topic:'수면',number:'2016'},
+  {id:'sleep',number:'01',title:'잠드는 데 걸린 시간',icon:Moon,studies:[
+    {id:'research-yamatsu-2016',title:'잠드는 시간 · 잠든 모습',topic:'잠',number:'2016'},
     {id:'research-byun-2018',title:'잠드는 시간 · 잠든 비율',topic:'수면',number:'2018'},
     {id:'research-yoon-2022',title:'잠드는 시간',topic:'수면',number:'2022'},
   ]},
-  {id:'mental-task',number:'02',title:'정신 과제 중 뇌파 · 활력',icon:Brain,studies:[
-    {id:'research-yoto-2012',title:'과제 뒤 뇌파 · 활력 변화',topic:'정신 과제',number:'2012'},
+  {id:'mental-task',number:'02',title:'생각을 많이 쓴 뒤',icon:Brain,studies:[
+    {id:'research-yoto-2012',title:'과제 뒤 뇌파와 활력 변화',topic:'생각을 많이 쓴 과제',number:'2012'},
   ]},
-  {id:'brain-observation',number:'03',title:'뇌 신호 · 감각 학습',icon:ScanFace,studies:[
-    {id:'research-heba-2016',title:'촉각 학습 점수 · 뇌 신호',topic:'뇌 영상 관찰',number:'2016'},
+  {id:'brain-observation',number:'03',title:'뇌 속 GABA와 손끝 연습',icon:ScanFace,studies:[
+    {id:'research-heba-2016',title:'뇌 신호와 손끝 연습 점수',topic:'손끝 연습',number:'2016'},
   ]},
-  {id:'exercise',number:'04',title:'운동 연구에서 잰 두 지표',icon:Dumbbell,studies:[
-    {id:'research-powers-2008',title:'휴식 중 혈중 성장호르몬',topic:'단회 섭취',number:'2008'},
-    {id:'research-sakashita-2019',title:'12주 운동 후 제지방량',topic:'단백질 병용',number:'2019'},
+  {id:'exercise',number:'04',title:'운동 뒤 몸에서 살펴본 변화',icon:Dumbbell,studies:[
+    {id:'research-powers-2008',title:'운동 뒤 혈액에서 본 성장호르몬',topic:'운동',number:'2008'},
+    {id:'research-sakashita-2019',title:'12주 운동 뒤 몸무게 변화',topic:'운동',number:'2019'},
   ]},
 ];
 
@@ -28,8 +28,8 @@ const publicAsset=(path:string)=>`${import.meta.env.BASE_URL}${path}`;
 const publicSource=(claim:Claim)=>claim.sources.find(source=>source.url?.startsWith('https://'));
 
 const factsFor=(claim:Claim)=>[
-  {label:'참여',value:claim.metadata?.sampleSize,Icon:UsersRound},
-  {label:'섭취',value:claim.metadata?.dose,Icon:Pill},
+  {label:'참여한 사람',value:claim.metadata?.sampleSize,Icon:UsersRound},
+  {label:'연구에서 먹은 양',value:claim.metadata?.dose,Icon:Pill},
   {label:'기간',value:claim.metadata?.duration,Icon:Clock3},
 ].filter((item):item is {label:string;value:string;Icon:typeof UsersRound}=>Boolean(item.value));
 
@@ -59,13 +59,13 @@ export default function GabaEvidenceHighlights({claims,onOpen}:Props){
       <div className="gaba-evidence-cover">
         <img src={publicAsset('assets/gaba-research-evening.png')} alt="저녁 창가에서 잠시 쉬며 하루를 돌아보는 40대 여성" loading="lazy"/>
         <div className="gaba-evidence-cover-copy">
-          <h2 id="gaba-evidence-title">사람 연구에서<br/>측정한 변화.</h2>
+          <h2 id="gaba-evidence-title">GABA 사람 연구에서<br/>살펴본 내용.</h2>
           <div className="gaba-evidence-count"><strong>{count}</strong><span>개 연구</span><ArrowRight size={16} aria-hidden="true"/><strong>{available.length}</strong><span>가지 주제</span></div>
         </div>
       </div>
       <div className="gaba-evidence-boundary" aria-label="연구와 제품 정보 구분">
-        <span><Pill size={18} aria-hidden="true"/><b>GABA를 살펴본 연구</b></span><ArrowRight size={18} aria-hidden="true"/><span><UsersRound size={18} aria-hidden="true"/><b>참여한 사람</b></span><i/>
-        <small>셀핀다 제품 정보는 포장 표시에서</small>
+        <span><Pill size={18} aria-hidden="true"/><b>연구에 나온 GABA</b></span><ArrowRight size={18} aria-hidden="true"/><span><UsersRound size={18} aria-hidden="true"/><b>연구 참여자</b></span><i/>
+        <small>연구에 나온 내용과 셀핀다 제품 정보는 따로 확인해요 · 제품 포장 보기</small>
       </div>
       <div className="gaba-evidence-chapters">
         {available.map(chapter=>{
@@ -76,7 +76,7 @@ export default function GabaEvidenceHighlights({claims,onOpen}:Props){
               const claim=byId.get(study.id);
               return claim?<StudyResult study={study} claim={claim} key={study.id}/>:null;
             })}</div>
-            {chapter.id==='exercise'?<p className="gaba-exercise-boundary"><Dumbbell size={17} aria-hidden="true"/><span>성장호르몬과 제지방량은 <strong>서로 다른 연구에서 따로 측정</strong>했어요.</span></p>:null}
+            {chapter.id==='exercise'?<p className="gaba-exercise-boundary"><Dumbbell size={17} aria-hidden="true"/><span>성장호르몬과 몸무게는 <strong>각기 다른 연구에서 살펴봤어요.</strong></span></p>:null}
           </section>;
         })}
       </div>

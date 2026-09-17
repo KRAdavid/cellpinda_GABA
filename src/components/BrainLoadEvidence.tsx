@@ -21,9 +21,9 @@ const evidence: EvidenceCard[] = [
     number: '01',
     tag: '일상 기능',
     title: '피로하면 반응·집중·판단이 느려질 수 있어요',
-    summary: 'CDC/NIOSH는 피로가 반응 시간을 늦추고 주의·집중, 단기기억, 판단에 영향을 줄 수 있다고 안내합니다.',
-    finding: '운전·업무·가사처럼 실수가 안전과 연결되는 순간에는 먼저 쉬는 신호로 읽어 보세요.',
-    scale: '공공기관 안전·건강 근거',
+    summary: '피로하면 반응이 늦고, 집중·기억·판단이 어려워질 수 있다고 안전·건강 기관에서 안내해요.',
+    finding: '운전·일·집안일 중 실수가 잦거나 집중이 끊기면 하던 일을 멈추고 쉬어 보세요.',
+    scale: '안전·건강 기관 자료',
     source: 'CDC/NIOSH · Fatigue and Work',
     sourceUrl: 'https://www.cdc.gov/niosh/fatigue/about/index.html',
     Icon: ShieldAlert,
@@ -32,12 +32,12 @@ const evidence: EvidenceCard[] = [
   {
     id: 'sleep-cognition',
     number: '02',
-    tag: '수면·인지',
-    title: '짧은 수면은 다음 날 머리 쓰는 일을 어렵게 할 수 있어요',
-    summary: '61개 연구를 모은 메타분석에서 수면 제한 뒤 전반적인 인지 처리와 실행기능, 지속적 주의, 장기기억이 낮아지는 방향이 확인됐습니다.',
-    finding: '잠드는 데 오래 걸린 날이 반복되면 의지 문제로만 보지 말고 다음 날 회복 시간을 먼저 확보하세요.',
-    scale: '61개 연구 · 메타분석',
-    source: 'PubMed · The neurocognitive consequences of sleep restriction',
+    tag: '잠과 집중',
+    title: '잠이 부족하면 다음 날 집중하기 어려울 수 있어요',
+    summary: '잠을 줄인 실험 61개를 모아 보니, 다음 날 기억하고 집중하고 판단하기가 어려워지는 경우가 많았어요.',
+    finding: '잠들기 어렵거나 잠이 부족한 날이 이어지면, 다음 날 할 일 사이에 쉴 시간을 먼저 넣어 보세요.',
+    scale: '61개 연구 결과를 함께 살펴봄',
+    source: 'PubMed · 잠을 줄였을 때 기억과 집중에 생기는 변화',
     sourceUrl: 'https://pubmed.ncbi.nlm.nih.gov/28757454/',
     Icon: Moon,
     tone: 'sleep',
@@ -45,12 +45,12 @@ const evidence: EvidenceCard[] = [
   {
     id: 'stress-health',
     number: '03',
-    tag: '지속 스트레스',
-    title: '스트레스 부담이 오래 누적되면 몸의 조절 부담도 커질 수 있어요',
-    summary: '267개 연구를 검토한 체계적 문헌고찰에서 만성 스트레스의 누적 부담은 신체·정신 건강 결과가 더 나쁜 방향과 연관됐습니다.',
-    finding: '며칠 바쁜 것과 몇 달째 계속 긴장하는 것은 다릅니다. 반복되면 생활 조정과 전문가 상담을 함께 고려하세요.',
-    scale: '267개 원 연구 · 체계적 문헌고찰',
-    source: 'PubMed · Allostatic Load and Its Impact on Health',
+    tag: '오래 이어지는 스트레스',
+    title: '긴장이 오래 이어지면 몸과 마음을 함께 돌봐야 해요',
+    summary: '267개 연구를 모아 본 논문에서, 오래 이어진 스트레스와 몸·마음 건강 문제는 함께 나타나는 경우가 많았어요.',
+    finding: '긴장과 피로가 오래 이어져 잠이나 일상에 영향을 주면 생활을 조정하고 전문가와 상담해 보세요.',
+    scale: '267개 연구를 모아 살펴봄',
+    source: 'PubMed · 오래 쌓인 스트레스와 건강',
     sourceUrl: 'https://pubmed.ncbi.nlm.nih.gov/32799204/',
     Icon: HeartPulse,
     tone: 'health',
@@ -58,12 +58,12 @@ const evidence: EvidenceCard[] = [
   {
     id: 'mental-fatigue-brain',
     number: '04',
-    tag: '정신적 피로',
-    title: '정신적 피로가 쌓이면 뇌 활동 패턴이 달라질 수 있어요',
-    summary: '21개 연구를 묶은 체계적 문헌고찰·메타분석에서 정신적으로 지치는 과제 뒤 EEG 활동 변화가 반복해서 관찰됐습니다.',
-    finding: '짧은 반응 게임은 뇌를 촬영하는 검사가 아니라, 쉬기 전후 내 반응 변화를 살펴보는 참고 기록으로 활용하세요.',
-    scale: '21개 연구 · EEG 체계적 문헌고찰·메타분석',
-    source: 'PubMed · The influence of mental fatigue on brain activity',
+    tag: '머리를 많이 쓴 뒤',
+    title: '생각을 많이 쓴 뒤 뇌의 전기 신호가 달라졌어요',
+    summary: '21개 연구를 모아 보니, 머리를 많이 쓰는 과제 뒤 뇌파(뇌의 전기 신호)가 달라진 결과가 여러 번 나왔어요.',
+    finding: '이 짧은 게임은 뇌파를 재는 검사가 아니에요. 쉬기 전후의 내 기록을 살펴보는 놀이예요.',
+    scale: '21개 연구 결과를 함께 살펴봄',
+    source: 'PubMed · 머리를 많이 쓴 뒤 관찰된 뇌파 변화',
     sourceUrl: 'https://pubmed.ncbi.nlm.nih.gov/32108954/',
     Icon: Brain,
     tone: 'brain',
@@ -72,12 +72,12 @@ const evidence: EvidenceCard[] = [
     id: 'rest-breaks',
     number: '05',
     tag: '짧은 휴식',
-    title: '짧은 휴식 뒤 피로감은 낮고 활력감은 높아졌어요',
-    summary: '대학생 66명이 강의 중 휴식 방법을 비교했습니다. 움직임을 곁들인 휴식 뒤 피로가 줄고 활력이 높아졌고, 이완 휴식 뒤 피로 감소는 20분 후에도 관찰됐습니다.',
-    finding: '일을 잠깐 멈추고 몸을 움직이거나, 편안하게 호흡을 가다듬어 보세요.',
-    scale: '대학생 66명 · 강의 중 휴식 비교 · 휴식 후 20분까지',
-    source: 'Blasche et al. · Stress and Health · 2018',
-    sourceUrl: 'https://onlinelibrary.wiley.com/doi/full/10.1002/smi.2830',
+    title: '강의 중 짧게 쉰 학생들이 덜 피곤하고 기운이 났어요',
+    summary: '대학생 66명이 네 가지 쉬는 방법을 해봤어요. 가볍게 움직이거나 안내에 따라 편안히 쉰 뒤 20분 후, 덜 피곤하고 기운이 난다고 답했어요.',
+    finding: '일을 잠시 멈추고 가볍게 움직이거나 편안하게 호흡해 보세요. 이 연구는 대학생의 긴 강의 중 휴식을 살펴봤어요.',
+    scale: '대학생 66명 · 강의 중 휴식 비교',
+    source: 'PubMed Central · 대학 강의 중 휴식 방법 비교 · 2018',
+    sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC6585675/',
     Icon: Pause,
     tone: 'rest',
   },
@@ -89,16 +89,16 @@ export default function BrainLoadEvidence() {
       <div className="wrap">
         <div className="section-head brain-load-evidence-head">
           <div>
-            <p className="chapter">더 알아보기 · 뇌 피로와 건강</p>
-            <h2 id="brain-load-evidence-heading">계속 버티면,<br />몸과 일상에 어떤 신호가 생길까요?</h2>
+            <p className="chapter">잠·집중·휴식에 관한 연구</p>
+            <h2 id="brain-load-evidence-heading">피곤할 때,<br />집중과 휴식은 어떻게 달라질까요?</h2>
           </div>
-          <p>‘뇌 과부하’라는 표현을 질병명처럼 단정하지 않고,<br />정신적 부담·수면·스트레스 연구에서 반복된 신호를 쉽게 보여드립니다.</p>
+          <p>잠이 부족하거나 긴장이 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
         </div>
 
-        <div className="brain-load-reading-path" aria-label="근거 읽는 순서">
-          <div><span>01</span><strong>무엇이 달라지나요?</strong><small>집중·반응·잠을 먼저 봅니다.</small></div>
-          <div><span>02</span><strong>얼마나 확인했나요?</strong><small>연구 규모와 방법을 함께 봅니다.</small></div>
-          <div><span>03</span><strong>오늘 무엇을 하나요?</strong><small>휴식과 상담 신호로 연결합니다.</small></div>
+        <div className="brain-load-reading-path" aria-label="연구를 살펴보는 순서">
+          <div><span>01</span><strong>무엇이 달라지나요?</strong><small>집중·반응·잠을 먼저 봐요.</small></div>
+          <div><span>02</span><strong>누가 참여했나요?</strong><small>연구에 참여한 사람 수를 봐요.</small></div>
+          <div><span>03</span><strong>오늘 뭘 해볼까요?</strong><small>쉴 때를 찾아봐요.</small></div>
         </div>
 
         <div className="brain-load-evidence-grid">
@@ -111,13 +111,13 @@ export default function BrainLoadEvidence() {
               </div>
               <h3>{title}</h3>
               <p className="brain-load-evidence-summary">{summary}</p>
-              <div className="brain-load-evidence-scale"><strong>근거 규모</strong><span>{scale}</span></div>
+              <div className="brain-load-evidence-scale"><strong>연구 규모</strong><span>{scale}</span></div>
               <p className="brain-load-evidence-finding"><strong>내 생활에서</strong>{finding}</p>
-              <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="brain-load-evidence-source">{source} <ExternalLink size={15} aria-hidden="true" /></a>
+              <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="brain-load-evidence-source" aria-label={`${source} 연구 출처 보기`}>연구 출처 보기 <ExternalLink size={15} aria-hidden="true" /></a>
             </article>
           ))}
         </div>
-        <p className="brain-load-evidence-note">이 섹션은 뇌 피로와 건강을 이해하기 위한 일반 연구입니다. GABA 섭취 연구와 셀핀다 제품 정보는 아래 카드에서 별도로 확인하세요.</p>
+        <p className="brain-load-evidence-note">여기에는 잠·스트레스·휴식에 관한 연구를 모았어요. GABA 연구와 셀핀다 제품 정보는 각각 따로 확인할 수 있어요.</p>
       </div>
     </section>
   );

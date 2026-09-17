@@ -58,10 +58,10 @@ export default function TeaserPreview({onEvent}: Props) {
   return <section id="teaser" className="teaser-section" aria-labelledby="teaser-heading">
     <div className="wrap teaser-wrap">
       <div className="teaser-intro">
-        <p className="chapter">선택형 티저 · 발효가바 이야기</p>
-        <h2 id="teaser-heading">발효가바의 이야기를<br />짧은 다큐로 만나보세요.</h2>
+        <p className="chapter">발효가바 영상</p>
+        <h2 id="teaser-heading">발효가바는<br />어떻게 만들어질까요?</h2>
         <p>{preview.description}</p>
-        <p className="teaser-context">내 리듬을 돌아보며 발효가바의 이야기를 이 페이지 안에서 바로 이어서 볼 수 있습니다.</p>
+        <p className="teaser-context">영상에서 만드는 과정을 보고, 아래에서 사람 연구와 제품 구성을 이어서 살펴보세요.</p>
       </div>
       <div className="teaser-card teaser-card-player" aria-busy={!frameLoaded}>
         <div className="teaser-player">
@@ -83,10 +83,10 @@ export default function TeaserPreview({onEvent}: Props) {
           {!frameLoaded && <p className="teaser-loading" aria-live="polite">티저를 불러오는 중입니다…</p>}
         </div>
         <div className="teaser-card-copy">
-          <p className="teaser-label">페이지 안에서 바로 재생 · CINEMATIC DOCUMENTARY</p>
+          <p className="teaser-label">이 페이지에서 바로 재생</p>
           <h3>{preview.title}</h3>
-          <p>발효와 휴식에 관한 장면이 이 페이지 안에서 재생됩니다. 시청 후 연구 근거와 제품 표시사항을 이어서 확인해 보세요.</p>
-          <p className="teaser-fallback">재생이 어려우면 <a href={preview.url} target="_blank" rel="noopener noreferrer">외부 페이지에서 보기 ↗</a></p>
+          <p>발효와 휴식 이야기를 영상으로 만나보세요. 다 본 뒤에는 사람 연구와 제품 구성을 이어서 볼 수 있어요.</p>
+          <p className="teaser-fallback">영상이 재생되지 않으면 <a href={preview.url} target="_blank" rel="noopener noreferrer">새 창에서 보기 ↗</a></p>
         </div>
       </div>
       <p className="teaser-note">{preview.note}</p>

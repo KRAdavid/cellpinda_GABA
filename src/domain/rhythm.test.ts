@@ -13,12 +13,12 @@ test('all five questions provide four unique recovery choices', () => {
 });
 
 test('representative responses reach every named type', () => {
-  assert.equal(classifyRhythm([0, 0, 0, 0, 0]).type.name, '괜찮은 흐름을 이어가는 날');
-  assert.equal(classifyRhythm([3, 0, 0, 0, 0]).type.name, '머리가 계속 바쁜 날');
-  assert.equal(classifyRhythm([0, 3, 0, 0, 0]).type.name, '잠들기 어려운 날');
-  assert.equal(classifyRhythm([0, 0, 3, 0, 0]).type.name, '쉴 틈이 없는 날');
-  assert.equal(classifyRhythm([0, 0, 0, 3, 0]).type.name, '자극이 많은 날');
-  assert.equal(classifyRhythm([0, 0, 0, 0, 3]).type.name, '아침에도 개운하지 않은 날');
+  assert.equal(classifyRhythm([0, 0, 0, 0, 0]).type.name, '잠과 휴식이 괜찮았던 날');
+  assert.equal(classifyRhythm([3, 0, 0, 0, 0]).type.name, '퇴근 뒤에도 일이 생각나는 날');
+  assert.equal(classifyRhythm([0, 3, 0, 0, 0]).type.name, '누워도 잠이 오지 않았던 날');
+  assert.equal(classifyRhythm([0, 0, 3, 0, 0]).type.name, '하루에 쉴 틈이 부족했던 날');
+  assert.equal(classifyRhythm([0, 0, 0, 3, 0]).type.name, '사람과 화면에 지친 날');
+  assert.equal(classifyRhythm([0, 0, 0, 0, 3]).type.name, '아침에도 피곤했던 날');
 });
 
 test('boundaries and tie priority follow the published editorial rule', () => {

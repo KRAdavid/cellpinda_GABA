@@ -5,7 +5,7 @@ const base = (process.env.PUBLIC_SITE_URL || cliBase).replace(/\/$/, '');
 if (!/^https:\/\//.test(base)) throw new Error('PUBLIC_SITE_URL must be an HTTPS URL');
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
-const approvedReviewText = '스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.';
+const approvedReviewText = '가바 1500 구매자 후기를 스마트스토어에서 읽어보세요.';
 
 const sleep = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
 const isSmartStore = value => {
@@ -120,7 +120,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(consumerBundle.includes('뇌 피로 테스트 공유'), 'live consumer bundle must expose the friend challenge share CTA');
     assert.ok(consumerBundle.includes('친구에게 “너도 해봐” 보내기'), 'live consumer bundle must make the result share an invitation to check');
     assert.ok(consumerBundle.includes('강한 뇌 피로 신호'), 'live consumer bundle must contain an explicit fatigue signal');
-    assert.ok(consumerBundle.includes('생활 신호 지수'), 'live consumer bundle must contain the personal load index');
+    assert.ok(consumerBundle.includes('지난 7일, 쉬고 싶었던 순간'), 'live consumer bundle must explain the personal answer score');
     assert.ok(consumerBundle.includes('더 알아보기 · 뇌 피로와 건강'), 'live consumer bundle must include the secondary health evidence section');
     assert.ok(consumerBundle.includes('61개 연구') && consumerBundle.includes('267개 연구') && consumerBundle.includes('21개 연구'), 'live consumer bundle must include evidence scale markers');
     assert.ok(consumerBundle.includes('몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담'), 'live consumer bundle must include a clear care-seeking guide');
@@ -164,7 +164,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
     assert.ok(pageText.includes(approvedSmartStoreUrl), 'live static fallback must keep the approved Smart Store 1500 detail link');
     assert.ok(pageText.includes('스마트스토어에서 확인하기'), 'live static fallback must label the Smart Store destination for consumers');
-    assert.ok(pageText.includes('구매자 후기 원문 읽기'), 'live static fallback must expose the buyer review source label');
+    assert.ok(pageText.includes('스마트스토어에서 후기 읽기'), 'live static fallback must expose the Smart Store review label');
     assert.ok(pageText.includes(approvedSmartStoreReviewUrl), 'live static fallback must deep-link to the Smart Store review dialog');
     assert.ok(pageText.includes(approvedReviewText), 'live static fallback must expose the approved consumer review guidance');
     assert.equal(content.products.length, 1, 'live export must contain one product');

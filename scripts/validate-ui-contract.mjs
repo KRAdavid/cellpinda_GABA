@@ -39,14 +39,14 @@ for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'review
 const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', '<GabaEvidenceHighlights', '<section id="fermentation"', '<section id="products"', '<ReviewExperience', '<ResearchLibrary', '<BrainLoadEvidence'];
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA before research highlights, then lead through the product and reviews to secondary evidence');
-requireMatch(brainLoadEvidence, /더 알아보기 · 뇌 피로와 건강/, 'general brain-health evidence must be presented as secondary reading');
+requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
 requireMatch(app, /<nav aria-label="주 메뉴"/, 'consumer navigation label is missing');
 requireMatch(app, /analyticsConsentGranted/, 'analytics events must be consent-gated');
 requireMatch(app, /<AnalyticsConsent\/>/, 'analytics consent control is missing from the consumer footer');
-requireMatch(analyticsConsent, /이름·연락처·문항별 답변은 보내지 않습니다/, 'analytics consent copy must state its privacy boundary');
-requireMatch(analyticsConsent, /측정 허용|측정하지 않기/, 'analytics consent must provide explicit allow and deny choices');
+requireMatch(analyticsConsent, /이름·연락처·내 답변은 수집하지 않아요/, 'analytics consent copy must state its privacy boundary');
+requireMatch(analyticsConsent, /방문 통계 보내기|보내지 않기/, 'analytics consent must provide explicit allow and deny choices');
 requireMatch(analyticsConsentStyles, /\.footer \.analytics-consent\{[^}]*flex:0 0 100%/, 'analytics consent must occupy its own full-width footer row');
 requireMatch(app, /const isLocalHost = \['localhost', '127\.0\.0\.1', '\[::1\]'\]\.includes\(location\.hostname\)/, 'internal operations route must be local-host gated');
 requireMatch(app, /const operationsView = isLocalHost && \(requestedView === 'ops' \|\| currentPath === '\/ops'\)/, 'internal operations route must not render on public hosts');
@@ -54,20 +54,20 @@ requireMatch(app, /const adminView = isLocalHost && \(requestedView === 'admin' 
 const nav = app.match(/<nav[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
 if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
-for (const marker of ['일을 마쳤는데도', '할 일이 계속 생각나시나요', '1분 리듬 체크 시작', 'GABA는 뇌에서', '스마트스토어']) {
+for (const marker of ['퇴근했는데도', '일 생각이 계속 나나요', '잠과 휴식 1분 체크', 'GABA는 뇌세포 사이에서', '스마트스토어']) {
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 if (/일이 끝나도 머리가 쉬지 않으신가요|일이 끝나도 머리가 바빠요/.test(`${app}\n${rhythm}`)) fail('consumer rest messaging must use direct everyday language');
-requireMatch(app, /gaba-master-index\.json/, 'consumer research fallback link is missing');
-requireMatch(research, /id="research"[^>]*aria-label="연구 자료 찾아보기"/, 'research section must retain an accessible name when the duplicate visible heading is removed');
+if (/gaba-master-index\.json/.test(app + indexHtml)) fail('consumer pages must not send readers to a raw research data file');
+requireMatch(research, /id="research"[^>]*aria-label="연구를 쉬운 말로 보기"/, 'research section must retain an accessible consumer label');
 if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');
 requireMatch(research, /research-reading-path[\s\S]*Search[\s\S]*UsersRound[\s\S]*Activity/, 'research reading path must show topic, participants and measured changes with icons');
-requireMatch(research, /연구 조건을 더 보기/, 'research detail must use a consumer-friendly label');
-requireMatch(research, /다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요/, 'research empty state must guide the next consumer action');
-requireMatch(indexHtml, /연구 자료 더 살펴보기/, 'no-script research fallback must use a consumer-friendly label');
-requireMatch(story, /쉬운 말과 도표로 정리/, 'GABA story must explain research with a visual aid');
+requireMatch(research, /연구 내용 더 보기/, 'research detail must use a consumer-friendly label');
+requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
+requireMatch(indexHtml, /연구를 쉽게 보기/, 'no-script research fallback must use a consumer-friendly label');
+requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*GabaEvidenceHighlights/, 'the GABA explanation must precede the teaser and its research highlights');
-for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'research-powers-2008', 'research-sakashita-2019', 'consumerVisual', 'gaba-research-evening.png', 'GABA를 살펴본 연구', '참여한 사람']) {
+for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'research-powers-2008', 'research-sakashita-2019', 'consumerVisual', 'gaba-research-evening.png', 'GABA 사람 연구에서', '참여한 사람']) {
   requireMatch(evidenceHighlights, new RegExp(marker), `GABA evidence highlight marker ${marker} is missing`);
 }
 for (const marker of ['study-time-comparison', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
@@ -75,7 +75,7 @@ if (/metadata\.consumerFinding|gaba-study-finding/.test(evidenceHighlights)) fai
 requireMatch(evidenceHighlights, /다른 연구도 더 살펴보기/, 'GABA evidence cards must provide a consumer next step');
 requireMatch(evidenceHighlightsStyles, /gaba-evidence-grid[\s\S]*grid-template-columns:repeat\(auto-fit/, 'GABA evidence highlights must use a responsive visual card grid');
 requireMatch(evidenceHighlightsStyles, /@media\(max-width:680px\)[\s\S]*gaba-evidence-grid[\s\S]*grid-template-columns:1fr/, 'GABA evidence highlights must stack on mobile');
-requireMatch(app, /함량 확인/, 'fermentation flow must use a consumer-friendly label');
+requireMatch(app, /한 포에 든 양 확인/, 'fermentation flow must use a consumer-friendly label');
 if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하기|수치와 제품 적용 문장은 펼쳐서|연구 카드에서 조건 확인|숫자와 출처 더 보기|근거 식별자|정량분석/.test(app + research + story + indexHtml)) fail('researcher-oriented detail labels leaked into consumer source');
 requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\s\S]*?\}, 180\)/, 'touch answers must auto-advance to the next question');
 requireMatch(app, /<img[^>]+alt=\{/, 'product and hero images must expose alternative text');
@@ -91,16 +91,16 @@ requireMatch(styles, /@media\(prefers-reduced-motion:reduce\)/, 'global reduced-
 requireMatch(styles, /\.hero-question,[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'core consumer copy must be at least 16px on mobile');
 requireMatch(rhythm, /touch-action|autoAdvance/, 'rhythm touch interaction contract is missing');
 requireMatch(rhythmStyles, /font-size:\s*16px;\s*line-height:\s*1\.75/, 'rhythm copy must be at least 16px on mobile');
-requireMatch(rhythm, /rhythm-fatigue-alert|강한 뇌 피로 신호/, 'result must show an explicit fatigue signal');
-requireMatch(rhythm, /생활 신호 지수|loadScore|loadLevel/, 'result must show a transparent personal load index');
+requireMatch(rhythm, /rhythm-fatigue-alert|잠깐 쉬어 갈 때예요|쉬는 시간이 더 필요해 보여요/, 'result must show a clear rest signal');
+requireMatch(rhythm, /지난 7일, 쉬고 싶었던 순간|loadScore|loadLevel/, 'result must explain the personal answer score');
 requireMatch(rhythm, /rhythm-care-guide|몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담/, 'high fatigue results must include a clear care-seeking guide');
 requireMatch(rhythmStyles, /rhythm-care-guide[\s\S]*border-left/, 'care-seeking guide must be visually distinct');
 requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence section is missing from the public flow');
-for (const marker of ['더 알아보기 · 뇌 피로와 건강', '61개 연구', '267개 연구', '21개 연구', '짧은 휴식 뒤 피로감은 낮고 활력감은 높아졌어요', 'Blasche et al. · Stress and Health · 2018', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
+for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
-for (const marker of ['뇌컨디션 확인 챌린지', 'Go/No-Go', '규칙 전환', 'FOCUS_GAME_TOTAL_TRIALS', '매번 무작위로 달라집니다', '단계별 문항 수와 제한 시간은 같아', '5분 충전하고 다시 확인', '싱잉볼 소리', '시작 준비', 'ringSingingBowl']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['뇌컨디션 확인 챌린지', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '할 때마다 달라집니다', '문제 수와 시간은 같아', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
 for (const marker of ['게임 효과음', 'playGameCue(\'start\')', 'playGameCue(\'signal\')', 'playGameCue(\'stage\')', 'playGameCue(\'complete\')', 'playGameCue(\'false-start\')']) requireMatch(fatigueGame, new RegExp(marker.replace(/[()]/g, '\\$&')), `focus game sound cue ${marker} is missing`);
 requireMatch(fatigueGame, /playGameCue\(correct \? 'correct' : 'miss'\)/, 'focus game must sound its response judgment');
 requireMatch(fatigueGame, /toggleGameSound[\s\S]*aria-pressed=\{gameSoundEnabled\}/, 'focus game must expose an accessible sound toggle');
@@ -112,7 +112,7 @@ requireMatch(fatigueGame, /createFocusRunPattern\(Math\.random, runPatternRef\.c
 requireMatch(fatigueGame, /responseWindowMs/, 'each difficulty stage must use its calibrated response window');
 for (const marker of ['공이 올라가는 동안 · 4초', '공이 위에 머무는 동안 · 2초', '공이 내려가는 동안 · 6초', '공이 아래에 머무는 동안 · 2초', 'BreathLineGuide', 'prefers-reduced-motion', '자연스럽게 호흡하세요']) requireMatch(fatigueGame, new RegExp(marker), `animated 4-2-6-2 breathing rest marker ${marker} is missing`);
 requireMatch(fatigueGameStyles, /fatigue-breath-line[\s\S]*fatigue-breath-phases[\s\S]*is-active/, 'animated breathing guide must have responsive line and phase styles');
-for (const marker of ['오늘은 신호를 차분히 잘 따라왔어요', '오늘은 신호를 놓친 순간이 있었어요', '5분 쉬고 다시 확인하기', '5분 쉬고 전후 비교하기', 'baseline-finished']) requireMatch(fatigueGame, new RegExp(marker), `score-based focus guidance marker ${marker} is missing`);
+for (const marker of ['잘했어요! 신호를 잘 따라왔어요.', '이번엔 놓친 신호가 있었어요.', '5분 쉬고 다시 해보기', '5분 쉬고 기록 비교하기', 'baseline-finished']) requireMatch(fatigueGame, new RegExp(marker), `score-based focus guidance marker ${marker} is missing`);
 requireMatch(rhythm, /focusAutoStart|focus-game/, 'focus challenge invite must deep-link to the game');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
 requireMatch(fatigueGameStyles, /fatigue-stage-preview[\s\S]*fatigue-trial-dots[\s\S]*fatigue-target-purple/, 'advanced focus game visual stages are missing');
@@ -133,18 +133,18 @@ requireMatch(challenge, /preserveCampaign\(url, window\.location\.search\)/, 'ch
 requireMatch(teaser, /allow="autoplay; fullscreen; picture-in-picture"/, 'teaser autoplay permission is missing');
 requireMatch(teaser, /loading="eager"/, 'teaser must load eagerly when exposed');
 requireMatch(teaser, /src=\{preview\.url\}/, 'teaser iframe must use the approved preview URL directly');
-requireMatch(app, /발효가바 이야기 영상 보기/, 'hero teaser CTA must use a duration-neutral consumer label');
+requireMatch(app, /발효가바 이야기 보기/, 'hero teaser CTA must use a duration-neutral consumer label');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('hero teaser CTA must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
 requireMatch(review, /가바 1500 · 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
-requireMatch(review, /스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요\./, 'review destination must keep the approved consumer message');
-requireMatch(indexHtml, /href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>구매자 후기 원문 읽기/, 'static review CTA must deep-link to the Smart Store review dialog');
-requireMatch(app, /content\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>후기 읽기/, 'hero product card must deep-link to the approved Smart Store review dialog');
-requireMatch(app, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>\{p\.name\} 구매자 후기 보기/, 'product review CTA must deep-link to the approved Smart Store review dialog');
+requireMatch(review, /가바 1500 구매자 후기를 스마트스토어에서 읽어보세요\./, 'review destination must keep the approved consumer message');
+requireMatch(indexHtml, /href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>스마트스토어에서 후기 읽기/, 'static review CTA must deep-link to the Smart Store review dialog');
+requireMatch(app, /content\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>구매자 후기 읽기/, 'hero product card must deep-link to the approved Smart Store review dialog');
+requireMatch(app, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>\{p\.name\} 구매자 후기 읽기/, 'product review CTA must deep-link to the approved Smart Store review dialog');
 requireMatch(app, /content\?\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>구매자 후기/, 'header review link must open the approved Smart Store review dialog');
-requireMatch(purchaseQuestions, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>구매자 후기 원문 보기/, 'purchase FAQ review CTA must deep-link to the approved Smart Store review dialog');
+requireMatch(purchaseQuestions, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 구매자 후기 읽기/, 'purchase FAQ review CTA must deep-link to the approved Smart Store review dialog');
 requireMatch(story, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>스마트스토어 후기 읽기/, 'GABA story review link must open the approved Smart Store review dialog');
 requireMatch(review, /quotes\.length > 0 \|\| destinations\.length > 0/, 'review reading guide must remain visible with an approved Smart Store destination');
 requireMatch(indexHtml, /rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root canonical metadata is missing');

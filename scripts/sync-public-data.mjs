@@ -66,7 +66,7 @@ function publicMetadata(item){
   if(!item.metadata || typeof item.metadata!=='object')return undefined;
   const metadata=Object.fromEntries(publicMetadataKeys
     .filter(key=>Object.prototype.hasOwnProperty.call(item.metadata,key))
-    .map(key=>[key,item.metadata[key]]));
+    .map(key=>[key,key==='studyType' ? consumerStudyType(item.metadata[key]) : item.metadata[key]]));
   return Object.keys(metadata).length ? metadata : undefined;
 }
 
@@ -136,16 +136,23 @@ const masterIndex={
   schemaVersion:1,
   goalId:'GMVP-GABA-PUBLIC-MASTER-INDEX',
   title:'공개용 GABA 논문 기반 마스터 인덱스',
-  publicScope:'승인된 공개 HTTPS 출처가 있는 연구의 질문·대상·출처와 소비자 요약을 모아 둔 인덱스입니다. 연구와 제품 정보는 각자의 맥락에 맞춰 차례로 살펴볼 수 있습니다.',
-  selectionRule:'승인 상태·공개 HTTPS 원문·필수 연구 필드·소비자 문장 검증을 모두 통과한 research-* 레코드만 포함합니다.',
+  publicScope:'GABA와 관련된 사람 연구를 쉬운 말로 모았습니다. 연구에 참여한 사람, 살펴본 내용, 연구 출처를 확인할 수 있어요.',
+  selectionRule:'연구 출처와 주요 정보가 확인된 자료를 담았습니다. 연구에서 살펴본 GABA와 셀핀다 제품 정보는 구분해 보세요.',
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
   records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,reviewedAt,evidenceHash})=>{
-    return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
+    return {id,topic,reviewedAt,question:metadata.question,studyType:consumerStudyType(metadata.studyType),population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
   }),
 };
 for(const record of masterIndex.records){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(record.reviewedAt) || !/^[a-f0-9]{64}$/.test(record.evidenceHash)) throw new Error(`Research ${record.id} is missing a valid review date or evidence hash`);
+}
+function consumerStudyType(value=''){
+  if(/문헌고찰|메타분석|사람 연구 여러 편|여러 연구를 모아/.test(value)) return '사람 연구 여러 편을 모아 살펴봄';
+  if(/관찰|MRS|뇌 신호|손끝 연습/.test(value)) return '손끝 연습과 뇌 신호를 살펴봄';
+  if(/운동/.test(value)) return '사람이 참여한 운동 연구';
+  if(/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return 'GABA를 먹고 비교한 사람 연구';
+  return '사람 연구';
 }
 mkdirSync(dirname(target),{recursive:true});
 writeFileSync(target,JSON.stringify(output,null,2)+'\n');
@@ -156,9 +163,9 @@ const teaserPreview={
   schemaVersion:1,
   status:teaser.status,
   placement:teaser.placement,
-  title:'발효가바 — 멈추지 않는 밤',
-  description:'발효가바를 둘러싼 장면을 짧은 다큐 형식으로 살펴보는 선택형 티저입니다.',
-  note:'이 페이지 안에서 재생하며, 외부 페이지가 임베드되지 않을 때만 새 탭 대체 경로를 제공합니다. 발효가바의 이야기와 휴식 장면을 본 뒤 연구 조건과 제품 표시사항을 차례로 확인해 보세요.',
+  title:'발효가바 이야기',
+  description:'발효가바가 만들어지는 이야기를 짧은 영상으로 만나보세요.',
+  note:'영상은 이 페이지 안에서 재생돼요. 재생되지 않으면 새 창에서 볼 수 있어요. 다 본 뒤에는 사람 연구와 제품 구성을 이어서 확인해 보세요.',
   ...(teaser.status==='PREVIEW' && teaser.publicPreviewUrl ? {url:teaser.publicPreviewUrl} : {url:null}),
 };
 writeFileSync(teaserPreviewTarget,JSON.stringify(teaserPreview,null,2)+'\n');

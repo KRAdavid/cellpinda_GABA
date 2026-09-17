@@ -66,7 +66,7 @@
     {
       "id": "opk-origin",
       "topic": "균주 연구",
-      "publicText": "OPK-3는 김치에서 분리한 유산균으로, GABA 생산에 관한 특허 문헌에 등장합니다.",
+      "publicText": "OPK-3는 김치에서 얻은 유산균으로, GABA를 만드는 방법에 관한 특허 문서에 나옵니다.",
       "status": "approved",
       "sources": [
         {
@@ -86,7 +86,7 @@
     {
       "id": "patent-production",
       "topic": "제조 기술",
-      "publicText": "유산균에 L-글루탐산을 공급해 GABA를 생산하는 방법이 특허 문헌으로 공개되어 있습니다.",
+      "publicText": "유산균에 재료가 되는 성분을 더해 GABA를 만드는 방법이 특허 문서에 나와 있어요.",
       "status": "approved",
       "sources": [
         {
@@ -112,7 +112,7 @@
     {
       "id": "patent-enzyme",
       "topic": "제조 기술",
-      "publicText": "효소를 이용한 고순도 GABA 제조방법에 관한 특허 문헌이 있습니다.",
+      "publicText": "효소를 이용해 순도 높은 GABA를 만드는 방법이 특허 문서에 소개돼 있어요.",
       "status": "approved",
       "sources": [
         {
@@ -310,7 +310,7 @@
     {
       "id": "gaba-definition",
       "topic": "GABA 기본 이해",
-      "publicText": "GABA(감마아미노부티르산)는 뇌에서 신경 신호의 강도를 조절하는 데 관여하는 신경전달물질입니다.",
+      "publicText": "GABA는 뇌세포가 서로 신호를 주고받을 때 쓰이는 물질 가운데 하나예요.",
       "status": "approved",
       "sources": [
         {
@@ -334,8 +334,8 @@
     },
     {
       "id": "research-byun-2018",
-      "topic": "GABA 성분 연구",
-      "publicText": "2018년 연구에서 발효 쌀배아 GABA를 4주 먹은 그룹은 평균 잠드는 시간이 짧아지고 수면 효율이 높아졌습니다. 연구 결과와 참여 조건을 아래에 정리했습니다.",
+      "topic": "잠",
+      "publicText": "2018년 연구에서 발효 쌀배아 GABA 정제를 먹은 사람들은 4주 뒤 평균 잠드는 시간이 짧아지고, 침대에 누워 있던 시간 중 잠든 비율이 높아졌어요.",
       "status": "approved",
       "sources": [
         {
@@ -353,23 +353,23 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "발효 쌀배아 GABA를 4주 먹은 뒤 잠드는 시간과 수면 효율은 어떻게 달라졌나요?",
+        "question": "발효 쌀배아 GABA 정제를 4주 먹은 사람들은 잠드는 데 얼마나 걸렸나요?",
         "studyType": "무작위·이중눈가림·위약대조 시험",
         "population": "잠드는 데 어려움을 겪은 성인",
-        "sampleSize": "40명: GABA 30명, 위약 10명",
-        "dose": "연구에서 GABA 300mg/일",
+        "sampleSize": "성인 40명 (GABA 정제 30명, GABA 없는 정제 10명)",
+        "dose": "하루 한 번, GABA 300mg",
         "duration": "4주",
-        "comparison": "발효 쌀배아 유래 GABA 함유 정제와 외형이 같은 위약",
-        "outcome": "수면다원검사로 측정한 수면 잠복기; 수면효율·설문",
+        "comparison": "GABA 정제와 GABA가 들어 있지 않은 비슷한 정제를 비교했어요.",
+        "outcome": "기기로 기록한 잠드는 시간·잠든 시간의 비율과 수면 설문",
         "result": "GABA군 수면 잠복기 평균±표준편차: 13.4±15.7분 → 5.7±6.2분. 군×시간 상호작용 p=0.009. 설문은 군 간 유의한 상호작용이 없었습니다. 이상사례: GABA 3/30명, 위약 1/10명.",
         "limitations": [
           "단일기관·소표본이고 위약군이 작습니다. 시작 시 수면 특성 일부가 달랐습니다.",
           "짧은 기간으로 장기 안전성을 확정하지 못합니다. 공급사 Natural Way가 연구를 지원했습니다."
         ],
-        "productApplicability": "이 연구의 참여자·먹은 양·기간을 먼저 보고, 셀핀다 제품의 내용량과 표시를 따로 확인해 보세요.",
-        "consumerScope": "성인 40명이 참여했고, GABA 섭취군은 발효 쌀배아 GABA를 4주 먹었습니다. 평균 잠드는 시간과 수면 효율의 변화를 확인한 연구예요.",
-        "consumerSummary": "GABA 섭취군은 4주 뒤 평균 잠드는 시간이 약 8분 짧아지고, 밤에 누워 있던 시간 중 잠든 비율도 높아졌어요.",
-        "consumerFinding": "GABA 섭취군 30명은 평균 잠드는 시간이 13.4분에서 5.7분으로 줄었습니다. 밤에 누워 있던 시간 중 잠든 비율도 79.4%에서 86.1%로 높아졌습니다.",
+        "productApplicability": "이 연구는 발효 쌀배아 GABA 정제로 살펴봤어요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "consumerScope": "잠들기 어려움을 겪은 성인 40명이 참여했어요. 30명은 발효 쌀배아 GABA 정제를, 10명은 GABA가 들어 있지 않은 비슷한 정제를 4주 먹었어요.",
+        "consumerSummary": "GABA 정제를 먹은 30명은 4주 뒤 평균 잠드는 시간이 약 8분 짧아졌고, 침대에 누워 있던 시간 중 잠든 비율도 높아졌어요.",
+        "consumerFinding": "평균 잠드는 시간은 연구 시작 때 13분에서 4주 뒤 6분으로 줄었어요. 침대에 누워 있던 시간 중 잠든 비율은 79%에서 86%로 높아졌어요.",
         "consumerVisual": {
           "kind": "before-after",
           "metric": "잠들기까지 걸린 평균 시간",
@@ -380,17 +380,18 @@
           "afterLabel": "4주 뒤",
           "afterValue": 5.7,
           "afterSd": 6.2,
-          "seriesLabel": "GABA군 · 30명",
+          "seriesLabel": "GABA를 먹은 30명 평균",
           "scaleMax": 15
         },
-        "hopefulTakeaway": "잠들기 전 휴식 습관을 먼저 돌아보고, 관심이 생겼다면 셀핀다 가바 1500의 내용량과 제품 표시를 확인해 보세요.",
-        "sourcePopulation": "불면 증상을 호소한 성인"
+        "hopefulTakeaway": "잠과 휴식에 관심이 생겼다면, 연구에서 확인한 내용과 셀핀다 가바 1500의 한 포 함량·먹는 방법을 차례로 확인해 보세요.",
+        "sourcePopulation": "불면 증상을 호소한 성인",
+        "publicText": "2018년 연구에서 발효 쌀배아 GABA 정제를 먹은 사람들은 4주 뒤 평균 잠드는 시간이 짧아지고, 침대에 누워 있던 시간 중 잠든 비율이 높아졌어요."
       }
     },
     {
       "id": "research-yoon-2022",
-      "topic": "GABA 성분 연구",
-      "publicText": "2022년 연구에서 GABA 섭취군의 평균 잠드는 시간은 4주 뒤 9.0분에서 4.8분으로 짧아졌습니다. 참여자와 연구 조건을 함께 확인할 수 있습니다.",
+      "topic": "잠",
+      "publicText": "2022년 연구에서 쌀배아 GABA 정제를 먹은 사람들은 4주 뒤 평균 잠드는 시간이 짧아졌어요.",
       "status": "approved",
       "sources": [
         {
@@ -408,45 +409,46 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "쌀배아 GABA를 4주 먹은 그룹의 잠드는 시간은 어떻게 변했나요?",
+        "question": "쌀배아 GABA 정제를 4주 먹은 사람들은 잠드는 시간이 어떻게 달라졌나요?",
         "studyType": "무작위·이중눈가림·위약대조 시험",
-        "population": "수면에 어려움을 겪는 성인",
-        "sampleSize": "54명 배정: GABA 26명, 위약 28명; 50명 완료: 각 25명",
-        "dose": "연구에서 쌀배아 유래 GABA 75mg/일",
+        "population": "잠드는 데 어려움을 겪은 성인",
+        "sampleSize": "54명 시작, 50명 완료 (각 그룹 25명)",
+        "dose": "하루 한 번, 쌀배아 GABA 75mg",
         "duration": "4주",
-        "comparison": "GABA와 위약",
-        "outcome": "수면다원검사 수면 잠복기·수면효율; 수면 설문",
+        "comparison": "쌀배아 GABA 정제와 GABA가 들어 있지 않은 비슷한 정제를 비교했어요.",
+        "outcome": "기기로 기록한 잠드는 시간·잠든 시간의 비율과 수면 설문",
         "result": "GABA군 수면 잠복기 평균±표준편차: 9.0±12.6분 → 4.8±4.6분(군 내 p=0.0038). 위약 대비 변화는 유의하지 않았습니다. 수면효율은 양군 모두 유의한 전후 차이가 없었고, 불면·수면질 설문은 양군 모두 감소했습니다. 이상사례는 보고되지 않았습니다.",
         "limitations": [
           "완료자 50명의 4주 시험으로 장기 효과·안전성을 확정하지 못합니다.",
           "Natural Way가 연구비와 GABA를 제공했습니다.",
           "고용량과 직접 비교한 시험이 아닙니다."
         ],
-        "productApplicability": "이 연구의 참여자·먹은 양·기간을 먼저 보고, 셀핀다 제품의 내용량과 표시를 따로 확인해 보세요.",
-        "consumerScope": "성인 54명이 4주 동안 GABA 또는 위약을 섭취했습니다. GABA를 먹은 그룹에서 기록된 평균 잠드는 시간의 변화를 살펴보세요.",
-        "consumerSummary": "GABA 섭취군의 평균 잠드는 시간은 4주 후 약 4분 짧아졌어요.",
-        "consumerFinding": "GABA 섭취군 완료자 25명의 평균 잠드는 시간은 연구 시작 때 9.0분에서 4주 뒤 4.8분으로 줄었습니다.",
+        "productApplicability": "이 연구는 쌀배아 GABA 정제로 살펴봤어요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "consumerScope": "성인 54명이 두 그룹으로 나뉘어 GABA 정제나 GABA가 들어 있지 않은 비슷한 정제를 4주 먹었어요. 끝까지 참여한 사람은 각 그룹 25명이었어요.",
+        "consumerSummary": "GABA 정제를 먹은 그룹은 4주 뒤 평균 잠드는 시간이 약 4분 짧아졌어요.",
+        "consumerFinding": "끝까지 참여한 25명의 평균 잠드는 시간은 연구 시작 때 9분에서 4주 뒤 5분으로 줄었어요.",
         "consumerVisual": {
           "kind": "before-after",
           "metric": "잠들기까지 걸린 평균 시간",
           "unit": "분",
           "beforeLabel": "연구 시작",
-          "beforeValue": 9.0,
+          "beforeValue": 9,
           "beforeSd": 12.6,
           "afterLabel": "4주 뒤",
           "afterValue": 4.8,
           "afterSd": 4.6,
-          "seriesLabel": "GABA군 · 완료자 25명",
+          "seriesLabel": "GABA를 먹고 끝까지 참여한 25명 평균",
           "scaleMax": 12
         },
-        "hopefulTakeaway": "잠자리에 들기 전 화면과 조명을 먼저 줄여 보고, 관심이 생겼다면 셀핀다 가바 1500의 내용량과 제품 표시를 확인해 보세요.",
-        "sourcePopulation": "불면 환자"
+        "hopefulTakeaway": "잠들기 전 내 생활을 돌아보고, 관심이 생겼다면 셀핀다 가바 1500의 한 포 함량과 먹는 방법도 확인해 보세요.",
+        "sourcePopulation": "불면 환자",
+        "publicText": "2022년 연구에서 쌀배아 GABA 정제를 먹은 사람들은 4주 뒤 평균 잠드는 시간이 짧아졌어요."
       }
     },
     {
       "id": "research-review-2020",
-      "topic": "연구를 함께 읽기",
-      "publicText": "2020년 문헌고찰은 사람 대상 GABA 섭취 연구 14편을 모아 스트레스와 수면을 어떻게 확인했는지 비교한 자료입니다.",
+      "topic": "긴장·잠",
+      "publicText": "2020년에는 사람이 참여한 GABA 연구 14편을 모아, 긴장과 잠을 어떤 방법으로 살펴봤는지 정리했어요.",
       "status": "approved",
       "sources": [
         {
@@ -463,32 +465,33 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "GABA 연구 14편은 무엇을 확인했을까요?",
-        "studyType": "체계적 문헌고찰",
-        "population": "사람을 대상으로 한 GABA 섭취 연구",
-        "sampleSize": "14개 연구; 단일 참가자 집단 아님",
+        "question": "GABA 연구 14편에서는 긴장과 잠을 어떻게 살펴봤나요?",
+        "studyType": "사람 대상 연구를 모아 살펴본 문헌고찰",
+        "population": "사람이 참여해 GABA를 먹은 연구 14편",
+        "sampleSize": "14개 연구 (한 번의 실험이 아니에요)",
         "studyCount": "14",
-        "searchThrough": "2020년 2월 초까지 PubMed 검색",
-        "dose": "연구마다 용량·제형이 다름",
-        "duration": "1회 섭취부터 여러 주까지 연구별 상이",
-        "comparison": "대조군을 둔 자연식품 또는 발효 유래 GABA 섭취 연구",
-        "outcome": "스트레스·수면의 주관적 평가와 생리 지표",
+        "searchThrough": "연구 논문 검색 사이트에서 2020년 2월까지 찾아본 자료",
+        "dose": "연구마다 먹은 양과 형태가 달라요",
+        "duration": "한 번 먹은 연구부터 몇 주 먹은 연구까지 있어요",
+        "comparison": "각 연구에서 GABA를 먹지 않은 경우나 다른 음식을 먹은 경우와 비교했어요.",
+        "outcome": "긴장에 대한 느낌, 잠 기록과 몸에서 잰 수치",
         "result": "14개 연구에서 스트레스와 수면 관련 지표를 각각 살펴봤습니다. 연구마다 대상·제형·기간이 달라 각각의 관찰 결과를 함께 비교해 읽는 자료입니다. 저자들은 스트레스 관련 근거를 제한적으로, 수면 관련 근거를 매우 제한적으로 평가했습니다.",
         "limitations": [
           "소표본·연구방법 차이·일부 불균형한 군 크기와 이해관계 가능성이 있습니다.",
           "한 명이 자료를 추출했습니다. 저자 측 산업계 관계와 출판비 지원이 공개돼 있습니다.",
           "2020년 2월 이후 연구를 포괄하는 최신 전수 검토가 아닙니다."
         ],
-        "productApplicability": "여러 연구의 참여자·먹은 양·기간을 먼저 보고, 셀핀다 제품의 내용량과 표시를 따로 확인해 보세요.",
-        "consumerScope": "사람 대상 GABA 섭취 연구 14편을 모아 본 자료예요. 각 연구에서 무엇을 확인했는지와 제품 표시를 따로 살펴보세요.",
-        "consumerSummary": "14편의 연구에서 사람들이 GABA를 먹은 뒤 스트레스와 수면을 어떻게 기록했는지 정리한 자료예요.",
-        "hopefulTakeaway": "여러 연구의 방법을 한눈에 보고, 나에게 필요한 휴식 습관과 제품 표시를 따로 확인해 보세요."
+        "productApplicability": "사람 연구 14편에서 GABA와 긴장·잠을 어떤 방법으로 살펴봤는지 모은 자료예요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "consumerScope": "사람이 GABA를 먹은 연구 14편을 모아 살펴봤어요. 각 연구의 참여자와 무엇을 확인했는지 정리했어요.",
+        "consumerSummary": "GABA를 먹은 뒤 긴장과 잠을 어떤 방법으로 확인했는지 14편의 연구를 살펴봤어요.",
+        "hopefulTakeaway": "여러 사람 연구에서 무엇을 살펴봤는지 읽고, 셀핀다 가바 1500의 한 포 함량과 먹는 방법도 확인해 보세요.",
+        "publicText": "2020년에는 사람이 참여한 GABA 연구 14편을 모아, 긴장과 잠을 어떤 방법으로 살펴봤는지 정리했어요."
       }
     },
     {
       "id": "research-yoto-2012",
       "topic": "스트레스·기분",
-      "publicText": "2012년 성인 63명 연구에서 GABA 조건은 정신 과제 뒤 알파·베타 뇌파 감소와 활력 점수의 저하 폭이 위약보다 작게 나타났습니다.",
+      "publicText": "생각을 많이 쓰는 일을 한 뒤, GABA를 먹은 그룹은 뇌파와 기분 설문 점수가 비교 음료보다 덜 낮아졌어요.",
       "status": "approved",
       "sources": [
         {
@@ -506,36 +509,48 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "GABA 섭취 후 정신 과제에서 뇌파와 활력 점수는 어떻게 달라졌나요?",
+        "question": "GABA를 먹고 생각을 많이 쓴 뒤, 뇌파와 기분 설문 점수는 어땠나요?",
         "studyType": "무작위·단일눈가림·위약대조 교차시험",
-        "population": "건강한 성인 63명(남 28명, 여 35명)",
-        "sampleSize": "63명",
-        "dose": "GABA 100mg 1회 또는 dextrin 위약",
-        "duration": "서로 다른 2일의 실험; 섭취 30분 후 정신적 과제",
-        "comparison": "dextrin 위약",
-        "outcome": "EEG alpha·beta 대역과 POMS 활력 점수",
+        "population": "건강한 성인 63명 (남성 28명, 여성 35명)",
+        "sampleSize": "성인 63명",
+        "dose": "GABA 100mg 음료 한 번 또는 비교 음료 한 번",
+        "duration": "서로 다른 이틀에 한 번씩 마시고, 30분 뒤 과제",
+        "comparison": "GABA를 넣은 음료와 넣지 않은 비슷한 음료를 비교했어요.",
+        "outcome": "과제 전후 뇌파와 기분 설문 점수",
         "result": "GABA 섭취 조건에서 정신 과제 뒤 EEG alpha·beta 대역의 감소 폭이 위약보다 작았고, POMS 활력 점수도 위약보다 덜 낮아졌다고 보고했습니다.",
-        "productApplicability": "GABA를 먹은 뒤 바쁜 과제를 수행한 연구예요. 셀핀다 제품의 내용량과 표시를 따로 확인해 보세요.",
-        "consumerScope": "성인 63명이 GABA 또는 위약을 한 번 먹고 30분 뒤 정신 과제를 했습니다. 과제 후 뇌파와 기분 설문 점수를 함께 확인한 연구예요.",
-        "consumerSummary": "GABA 조건에서 과제 뒤 뇌파와 활력 점수가 위약보다 덜 낮아졌어요.",
-        "consumerFinding": "성인 63명에게 GABA 100mg 또는 위약을 먹이고 30분 뒤 정신 과제를 했습니다. GABA 조건에서는 과제 후 알파·베타 뇌파가 덜 낮아졌고, 기분 설문에서 활력 점수도 위약보다 덜 떨어졌습니다.",
+        "productApplicability": "GABA 100mg 음료를 마신 뒤 생각을 많이 써야 하는 과제를 한 연구예요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "consumerScope": "성인 63명이 GABA 음료나 비교 음료를 한 번 마신 뒤 30분 후 생각을 많이 써야 하는 과제를 했어요. 과제 전후 뇌파와 기분 설문을 살펴봤어요.",
+        "consumerSummary": "성인 63명이 생각을 많이 써야 하는 과제를 했어요. GABA 음료를 마신 그룹은 비교 음료 그룹보다 과제 뒤 뇌파와 기분 설문 점수가 덜 낮아졌어요.",
+        "consumerFinding": "성인 63명이 GABA 100mg 음료나 비교 음료를 한 번 마셨어요. 30분 뒤 생각을 많이 써야 하는 과제를 하고 뇌파와 기분 설문을 살펴봤어요. GABA 음료를 마신 그룹의 점수는 비교 음료보다 덜 낮아졌어요.",
         "consumerVisual": {
           "kind": "study-journey",
-          "steps": ["GABA 100mg 1회", "30분 뒤", "정신 과제", "뇌파·활력 점수"],
-          "outcomes": [
-            {"label": "뇌파", "result": "감소 폭이 위약보다 작았어요"},
-            {"label": "활력 점수", "result": "하락 폭이 위약보다 작았어요"}
+          "steps": [
+            "GABA 100mg 음료 한 번",
+            "30분 기다리기",
+            "생각을 많이 쓰는 과제",
+            "뇌파와 기분 설문"
           ],
-          "participantLabel": "성인 63명",
-          "comparisonLabel": "위약 조건과 비교"
+          "outcomes": [
+            {
+              "label": "뇌파",
+              "result": "과제 뒤 낮아진 폭이 비교 음료보다 작았어요"
+            },
+            {
+              "label": "기분 설문 점수",
+              "result": "과제 뒤 낮아진 폭이 비교 음료보다 작았어요"
+            }
+          ],
+          "participantLabel": "성인 63명 참여",
+          "comparisonLabel": "GABA가 없는 비교 음료와 살펴봄"
         },
-        "hopefulTakeaway": "바쁜 날에는 알림을 잠시 끄고 쉬는 시간을 먼저 정해 보세요. 관심이 생겼다면 셀핀다 가바 1500의 제품 표시를 확인해 보세요."
+        "hopefulTakeaway": "생각을 많이 쓴 날에는 잠깐 쉬어 보세요. GABA 연구가 궁금하다면 내용을 읽고 제품 포장에 적힌 한 포의 양과 먹는 법도 확인해 보세요.",
+        "publicText": "생각을 많이 쓰는 일을 한 뒤, GABA를 먹은 그룹은 뇌파와 기분 설문 점수가 비교 음료보다 덜 낮아졌어요."
       }
     },
     {
       "id": "research-yamatsu-2016",
-      "topic": "수면",
-      "publicText": "2016년 수면 시험에서 GABA 조건은 위약보다 평균 잠드는 시간이 5분 짧고 비REM 수면 시간이 2.2% 길게 나타났습니다.",
+      "topic": "잠",
+      "publicText": "2016년, 성인 10명이 GABA를 1주 먹은 연구에서 평균 잠드는 시간은 비교 정제를 먹은 주보다 5분 짧았어요. 잠든 뒤 눈이 빠르게 움직이지 않는 시간은 2.2% 길게 기록됐어요.",
       "status": "approved",
       "sources": [
         {
@@ -553,35 +568,46 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "GABA를 1주 먹은 뒤 잠드는 시간과 비REM 수면은 어떻게 달라졌나요?",
+        "question": "GABA를 1주 먹은 뒤 잠드는 시간과 잠든 모습은 어땠나요?",
         "studyType": "무작위·단일눈가림·위약대조 교차시험",
-        "population": "수면에 불편을 느낀 일본 성인 10명",
-        "sampleSize": "수면 EEG 10명; 혈중 GABA 별도 10명",
-        "dose": "수면 연구 GABA 100mg/일; 흡수 연구 GABA 200mg 1회",
-        "duration": "GABA와 위약 각 1주, 중간 세척 1주",
-        "comparison": "dextrin 위약",
-        "outcome": "EEG 수면 잠복기·비REM 수면, VAS·PSQI, 혈중 GABA",
+        "population": "잠드는 데 불편을 느낀 일본 성인 10명",
+        "sampleSize": "잠 검사 10명 · 별도 혈액 검사 10명",
+        "dose": "잠 연구: 하루 100mg · 별도 혈액 검사: 200mg 한 번",
+        "duration": "각 정제를 1주씩 먹고, 중간에 1주 쉬었어요",
+        "comparison": "GABA 정제를 먹은 주와 GABA가 없는 정제를 먹은 주",
+        "outcome": "잠드는 데 걸린 시간, 눈이 빠르게 움직이지 않는 수면 시간, 수면 설문",
         "result": "GABA 조건에서 수면 잠복기가 평균 5.0분 단축(p=0.020), 총 비REM 수면이 2.2% 증가(p=0.040)했습니다. 별도 흡수 연구에서는 혈중 GABA가 30분에 가장 높았습니다.",
-        "productApplicability": "GABA를 먹은 사람과 위약을 먹은 사람의 조건을 먼저 보고, 셀핀다 제품의 내용량과 표시를 따로 확인해 보세요.",
-        "consumerScope": "일본 성인 10명이 GABA와 위약을 각각 1주 먹고 잠드는 시간과 비REM 수면 시간을 측정했습니다. 두 조건에서 기록된 수치를 비교해 보세요.",
-        "consumerSummary": "GABA 조건에서 평균 잠드는 시간이 5분 짧고 비REM 수면 시간은 2.2% 늘었어요.",
-        "consumerFinding": "일본 성인 10명이 GABA와 위약을 각각 1주 먹은 교차시험에서, GABA 조건은 위약보다 평균 잠드는 시간이 5분 짧고 비REM 수면 시간은 2.2% 길었습니다.",
+        "productApplicability": "잠 연구에서 사용한 양은 하루 100mg이었어요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "consumerScope": "일본 성인 10명이 GABA 정제와 GABA가 들어 있지 않은 비교 정제를 각각 1주 먹고 잠을 살펴봤어요. 혈액 검사는 따로 진행했어요.",
+        "consumerSummary": "GABA를 먹은 주에는 평균 잠드는 시간이 5분 짧았고, 잠든 뒤 눈이 빠르게 움직이지 않는 시간은 2.2% 길게 기록됐어요.",
+        "consumerFinding": "일본 성인 10명이 GABA 정제와 비교 정제를 각각 1주 먹었어요. GABA를 먹은 주에는 평균 잠드는 시간이 5분 짧고, 잠든 뒤 눈이 빠르게 움직이지 않는 시간이 2.2% 길게 기록됐어요.",
         "consumerVisual": {
           "kind": "metric-pair",
           "metrics": [
-            {"label": "잠들기까지 시간", "value": "5.0", "unit": "분 짧게", "comparison": "GABA 조건과 위약 조건"},
-          {"label": "비REM 수면 시간", "value": "2.2", "unit": "% 늘게", "comparison": "GABA 조건과 위약 조건"}
+            {
+              "label": "잠드는 데 걸린 시간",
+              "value": "5.0",
+              "unit": "분 짧게",
+              "comparison": "GABA를 먹은 주와 비교 정제를 먹은 주"
+            },
+            {
+              "label": "눈이 빠르게 움직이지 않는 수면 시간",
+              "value": "2.2",
+              "unit": "% 늘게",
+              "comparison": "GABA를 먹은 주와 비교 정제를 먹은 주"
+            }
           ],
-          "participantLabel": "일본 성인 10명 · 각 조건 1주"
+          "participantLabel": "일본 성인 10명 · 각 정제를 1주씩 먹음"
         },
-        "hopefulTakeaway": "잠들기 전 조명과 화면을 줄이는 습관을 먼저 만들어 보세요. 관심이 생겼다면 셀핀다 가바 1500의 제품 표시를 확인해 보세요.",
-        "sourcePopulation": "수면의 질이 낮지만 중증 수면질환은 없는 일본 성인 10명(남 6명, 여 4명)"
+        "hopefulTakeaway": "잠들기 전 조명과 화면을 줄여 보세요. 연구가 궁금하다면 내용을 읽고 셀핀다 가바 1500의 제품 정보도 확인해 보세요.",
+        "sourcePopulation": "수면의 질이 낮지만 중증 수면질환은 없는 일본 성인 10명(남 6명, 여 4명)",
+        "publicText": "2016년, 성인 10명이 GABA를 1주 먹은 연구에서 평균 잠드는 시간은 비교 정제를 먹은 주보다 5분 짧았어요. 잠든 뒤 눈이 빠르게 움직이지 않는 시간은 2.2% 길게 기록됐어요."
       }
     },
     {
       "id": "research-powers-2008",
-      "topic": "성장호르몬·운동",
-      "publicText": "2008년 연구에서 휴식 조건의 GABA 섭취 후 혈중 성장호르몬 최고치는 위약보다 약 4배 높게 나타났습니다.",
+      "topic": "운동",
+      "publicText": "운동 경험이 있는 남성 11명 연구에서 쉬는 동안 GABA를 먹은 경우, 혈액 속 성장호르몬 최고치가 비교 음료보다 약 4배 높았어요.",
       "status": "approved",
       "sources": [
         {
@@ -599,36 +625,37 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "GABA 섭취 후 휴식과 운동 조건에서 성장호르몬 수치는 어떻게 달라졌나요?",
+        "question": "GABA를 먹고 쉰 뒤 혈액 속 성장호르몬 수치는 어땠나요?",
         "studyType": "무작위·이중눈가림·위약대조 교차시험",
-        "population": "18–30세 저항운동 경험 남성 11명",
-        "sampleSize": "11명",
-        "dose": "GABA 3g 또는 sucrose 위약 1회",
-        "duration": "섭취 전부터 90분까지 15분 간격 혈액 채취",
-        "comparison": "sucrose 위약 및 운동 조건",
-        "outcome": "면역반응성·면역기능성 성장호르몬(irGH·ifGH) 혈중 농도",
+        "population": "웨이트 운동을 해 온 18~30세 남성",
+        "sampleSize": "운동 경험이 있는 남성 11명",
+        "dose": "GABA 3g (3,000mg) 한 번 또는 비교 음료 한 번",
+        "duration": "먹기 전부터 90분 동안 혈액을 확인했어요.",
+        "comparison": "GABA 음료와 다른 음료를 마신 뒤, 쉬거나 운동했을 때를 살펴봤어요.",
+        "outcome": "혈액에서 확인한 성장호르몬 수치",
         "result": "휴식 조건에서 GABA의 성장호르몬 최고치가 위약보다 약 400%, AUC가 약 375% 높았습니다. 운동 조건에서는 섭취 30분 시점 irGH 약 200%, ifGH 약 175% 높은 반응이 보고됐습니다.",
-        "productApplicability": "GABA 섭취 후 혈중 호르몬 지표를 살펴본 운동 연구예요. 셀핀다 제품의 구성·표시사항과 연구 조건을 함께 확인해 보세요.",
-        "consumerScope": "운동 경험 남성 11명이 GABA 또는 위약을 한 번 먹고 휴식하거나 운동한 뒤 혈중 성장호르몬을 90분 동안 측정했습니다. 조건별 수치를 확인하세요.",
-        "consumerSummary": "휴식 조건에서 GABA 섭취 뒤 혈중 성장호르몬 최고치가 위약보다 약 4배 높았어요.",
-        "consumerFinding": "저항운동 경험 남성 11명의 교차시험에서 휴식 조건의 GABA 3g 섭취 후 혈중 성장호르몬 최고치가 위약보다 약 4배 높게 나타났습니다. 운동 조건에서도 섭취 후 성장호르몬 반응이 더 높았습니다.",
+        "productApplicability": "이 연구에서 살펴본 것은 쉬는 동안의 혈액 속 성장호르몬 수치예요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "consumerScope": "운동 경험이 있는 남성 11명이 GABA 음료나 비교 음료를 한 번 마시고 쉬거나 운동했어요. 이후 90분 동안 혈액 속 성장호르몬을 살펴봤어요.",
+        "consumerSummary": "운동 경험이 있는 남성 11명이 참여했어요. 쉬는 동안 GABA를 먹은 경우, 혈액 속 성장호르몬 최고치가 비교 음료보다 약 4배 높았어요.",
+        "consumerFinding": "남성 11명이 GABA 3g이나 비교 음료를 먹고 쉬거나 운동했어요. 쉴 때 GABA를 먹은 경우 혈액 속 성장호르몬 최고치가 비교 음료보다 약 4배 높았어요.",
         "consumerVisual": {
           "kind": "ratio",
-          "metric": "혈중 성장호르몬 최고치",
+          "metric": "혈액 속 성장호르몬 최고치",
           "unit": "배",
           "baseline": 1,
           "observed": 4,
-          "comparisonLabel": "휴식 조건 · 위약 대비",
-          "participantLabel": "운동 경험 남성 11명",
-          "doseLabel": "GABA 3g 1회 · 90분 관찰"
+          "comparisonLabel": "쉴 때 · 비교 음료보다",
+          "participantLabel": "운동 경험이 있는 남성 11명",
+          "doseLabel": "GABA 3,000mg 한 번 · 90분 동안 혈액 확인"
         },
-        "hopefulTakeaway": "운동 뒤에는 물과 식사를 챙기고 충분히 쉬어 보세요. 관심이 생겼다면 셀핀다 가바 1500의 내용량과 제품 표시를 확인해 보세요."
+        "hopefulTakeaway": "운동 뒤에는 식사와 휴식도 챙겨 보세요. 이 연구에서 살펴본 방법과 셀핀다 제품 한 포의 양, 먹는 방법을 차례로 확인해 보세요.",
+        "publicText": "운동 경험이 있는 남성 11명 연구에서 쉬는 동안 GABA를 먹은 경우, 혈액 속 성장호르몬 최고치가 비교 음료보다 약 4배 높았어요."
       }
     },
     {
       "id": "research-sakashita-2019",
-      "topic": "근육·운동",
-      "publicText": "12주 운동 연구에서 유청단백질과 GABA를 함께 섭취한 그룹은 단백질만 섭취한 그룹보다 전신 제지방량이 더 크게 증가했습니다.",
+      "topic": "운동·몸무게",
+      "publicText": "12주 운동 연구에서 단백질과 GABA를 함께 먹은 그룹은 단백질만 먹은 그룹보다 지방을 뺀 몸무게가 더 늘었어요.",
       "status": "approved",
       "sources": [
         {
@@ -647,38 +674,45 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "유청단백질과 GABA를 함께 먹으며 12주 운동한 그룹에서 제지방량은 어떻게 달라졌나요?",
+        "question": "단백질과 GABA를 먹으며 12주 운동한 사람들의 몸무게는 어떻게 달라졌나요?",
         "studyType": "무작위·이중눈가림·평행군 12주 운동시험",
-        "population": "규칙적 운동을 하지 않던 건강한 일본 남성 26명(26–48세)",
-        "sampleSize": "26명 배정; 최종 일부 분석 WP 10명, WP+GABA 11명",
-        "dose": "유청단백질 10g; 병용군은 GABA 100mg 추가",
-        "duration": "12주, 주 2회 저항운동; 운동 직후 또는 비운동일 취침 전 섭취",
-        "comparison": "유청단백질 10g 단독군",
-        "outcome": "DXA 전신 제지방량·팔·다리 제지방량, 안정시 성장호르몬",
+        "population": "평소 규칙적으로 운동하지 않던 26~48세 일본 남성",
+        "sampleSize": "26명 시작 · 몸무게 변화는 21명 자료로 살펴봄",
+        "dose": "단백질 10g · 한 그룹은 GABA 100mg 추가",
+        "duration": "12주 동안 주 2회 운동",
+        "comparison": "단백질만 먹은 그룹과 단백질·GABA를 함께 먹은 그룹",
+        "outcome": "체지방을 뺀 몸무게, 팔·다리 무게, 쉬는 동안 혈액 속 성장호르몬",
         "result": "전신 제지방량 변화는 WP 146±207g, WP+GABA 1,340±443g으로 보고됐으며, 논문 본문은 병용군의 증가가 단백질 단독군보다 컸다고 보고했습니다(p<0.05; 군×시간 상호작용 p=0.037). 팔·다리 제지방량은 군 간 차이가 없었습니다(p=0.58).",
-        "productApplicability": "GABA와 유청단백질을 함께 섭취한 운동 연구예요. 병용 조건과 셀핀다 제품의 구성·표시사항을 함께 비교해 보세요.",
-        "consumerScope": "남성 26명이 배정됐고, 주요 제지방량 결과는 21명의 자료로 비교했습니다. 12주 주 2회 운동과 유청단백질 10g, 병용군의 GABA 100mg 조건을 확인하세요.",
-        "consumerSummary": "단백질과 GABA를 함께 먹으며 운동한 그룹에서 지방을 뺀 몸무게가 더 크게 늘었어요.",
-        "consumerFinding": "12주 운동 후 지방을 뺀 몸무게(전신 제지방량)는 유청단백질과 GABA를 함께 먹은 그룹에서 평균 1.34kg, 단백질만 먹은 그룹에서 0.15kg 늘었습니다. 병용 그룹의 증가 폭이 더 컸습니다.",
+        "productApplicability": "이 연구는 단백질을 먹으며 12주간 운동한 사람들의 변화를 살펴봤어요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "consumerScope": "남성 26명이 참여했고, 몸무게 변화는 21명의 자료로 살펴봤어요. 12주 동안 주 2회 운동하며 단백질 10g을 먹었어요. 한 그룹은 GABA 100mg도 함께 먹었어요.",
+        "consumerSummary": "12주 뒤 지방을 뺀 몸무게는 단백질과 GABA를 함께 먹은 그룹에서 더 늘었어요.",
+        "consumerFinding": "12주 뒤 체지방을 뺀 몸무게는 단백질과 GABA를 함께 먹은 그룹에서 평균 1.34kg, 단백질만 먹은 그룹에서 0.15kg 늘었어요.",
         "consumerVisual": {
           "kind": "group-values",
-          "metric": "평균 제지방량 변화",
+          "metric": "지방을 뺀 몸무게 변화",
           "unit": "kg",
           "groups": [
-            {"label": "유청단백질", "value": 0.146},
-            {"label": "유청단백질 + GABA", "value": 1.34}
+            {
+              "label": "단백질만",
+              "value": 0.146
+            },
+            {
+              "label": "단백질 + GABA",
+              "value": 1.34
+            }
           ],
           "scaleMax": 1.5,
-          "participantLabel": "남성 21명 분석 · 12주 운동",
-          "comparisonNote": "12주 저항운동을 병행한 남성 연구에서 유청단백질 단독군과 GABA 병용군의 전신 제지방량 평균 변화를 비교했습니다."
+          "participantLabel": "남성 21명 자료 · 12주 운동",
+          "comparisonNote": "단백질만 먹은 경우와 GABA도 함께 먹은 경우를 비교했어요."
         },
-        "hopefulTakeaway": "운동과 식사를 함께 챙긴다면, 이 연구의 함께 먹은 조건과 셀핀다 가바 1500의 제품 표시를 차례로 확인해 보세요."
+        "hopefulTakeaway": "운동·단백질·GABA를 함께 살펴본 연구예요. 누가 참여했고 무엇을 먹었는지 본 뒤, 셀핀다 제품의 한 포에 든 양과 먹는 방법도 확인해 보세요.",
+        "publicText": "12주 운동 연구에서 단백질과 GABA를 함께 먹은 그룹은 단백질만 먹은 그룹보다 지방을 뺀 몸무게가 더 늘었어요."
       }
     },
     {
       "id": "research-heba-2016",
-      "topic": "학습·감각",
-      "publicText": "뇌 영상 연구에서 반복 촉각 훈련 뒤 감각 구분 점수가 향상됐고, 평소 뇌 GABA+ 신호와 학습 결과의 관련성도 관찰됐습니다.",
+      "topic": "뇌·손끝 연습",
+      "publicText": "손끝으로 두 점을 구분하는 연습 뒤 점수가 올랐고, 평소 뇌에서 잰 GABA 신호와 학습 점수 사이에도 관계가 관찰됐어요.",
       "status": "approved",
       "sources": [
         {
@@ -696,28 +730,29 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "반복 촉각 훈련 뒤 감각 구분 점수와 뇌 GABA+ 신호는 어떻게 달라졌나요?",
-        "studyType": "뇌 MRS 관찰·반복 촉각 자극 전후 연구",
+        "question": "손끝으로 두 점을 구분하는 연습 뒤 점수는 어떻게 달라졌나요?",
+        "studyType": "뇌 신호와 손끝 연습을 함께 살펴본 연구",
         "population": "건강한 성인 18명",
-        "sampleSize": "18명",
-        "dose": "경구 GABA 보충 없음",
-        "duration": "반복 촉각 자극 45분 및 전후 MRS·감각 역치 측정",
-        "comparison": "자극한 손과 통제 손",
-        "outcome": "sensorimotor GABA+ 기저치와 두 점 식별 촉각 역치 변화",
+        "sampleSize": "성인 18명",
+        "dose": "GABA를 먹지 않고 뇌 속 GABA 신호를 살펴봤어요.",
+        "duration": "손끝 연습 45분 · 연습 전후 검사",
+        "comparison": "연습한 손과 연습하지 않은 손의 점수를 비교했어요.",
+        "outcome": "뇌 속 GABA 신호와 손끝으로 두 점을 구분한 점수",
         "result": "자극한 손의 촉각 식별이 향상됐고, 해당 영역의 기저 GABA+가 학습 결과 변이의 거의 60%를 설명했습니다.",
-        "productApplicability": "뇌 GABA+와 학습의 관계를 살펴본 관찰 연구예요. 셀핀다 제품의 구성·표시사항은 별도로 함께 확인해 보세요.",
-        "consumerScope": "건강한 성인 18명이 반복 촉각 과제를 수행했고, 연구진은 뇌 GABA+ 신호와 감각 구분 학습 점수를 함께 살펴봤습니다.",
-        "consumerSummary": "반복 촉각 훈련 뒤 감각 구분 점수가 향상됐고, 뇌 GABA+ 신호도 학습 결과와 관련을 보였어요.",
-        "consumerFinding": "건강한 성인 18명이 반복 촉각 과제를 수행한 뒤 자극한 손의 감각 구분 점수는 향상됐습니다. 평소 뇌 GABA+ 신호도 사람마다 다른 학습 결과와 관련을 보였습니다.",
+        "productApplicability": "GABA를 먹어 보는 실험이 아니라, 손끝 연습과 뇌 속 GABA 신호를 함께 살펴본 연구예요. 셀핀다 제품에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "consumerScope": "건강한 성인 18명이 손끝으로 두 점을 구분하는 연습을 했어요. 뇌 속 GABA 신호와 점수를 함께 살펴봤어요. GABA를 먹는 연구는 아니었어요.",
+        "consumerSummary": "손끝으로 두 점을 구분하는 연습을 반복한 뒤 점수가 올랐어요. 뇌 속 GABA 신호와 손끝 연습 점수 사이에도 관계가 관찰됐어요.",
+        "consumerFinding": "성인 18명이 손끝으로 두 점을 구분하는 연습을 반복한 뒤 점수가 올랐어요. 뇌 속 GABA 신호와 손끝 연습 점수 사이에도 관계가 있었어요. GABA를 먹는 연구는 아니었어요.",
         "consumerVisual": {
           "kind": "observational-link",
-          "leftLabel": "뇌의 GABA+ 신호",
-          "rightLabel": "반복 촉각 학습 점수",
-          "participantLabel": "건강한 성인 18명",
-          "studyLabel": "뇌 영상·감각 과제 관찰",
-          "boundaryLabel": "뇌 영상으로 본 기저 신호와 학습 결과의 관련성"
+          "leftLabel": "뇌에서 잰 GABA 신호",
+          "rightLabel": "손끝으로 두 점을 구분한 점수",
+          "participantLabel": "성인 18명",
+          "studyLabel": "손끝 연습 뒤 점수 살펴봄",
+          "boundaryLabel": "뇌 GABA 신호와 학습 점수 사이의 관계"
         },
-        "hopefulTakeaway": "GABA가 몸속에서 어떤 역할로 연구돼 왔는지 확인한 뒤, 관심이 생겼다면 셀핀다 가바 1500의 제품 구성과 표시를 살펴보세요."
+        "hopefulTakeaway": "몸속 GABA를 살펴본 연구와 GABA를 먹는 연구는 달라요. 연구가 궁금하다면 내용을 읽고 셀핀다 제품 정보도 확인해 보세요.",
+        "publicText": "손끝으로 두 점을 구분하는 연습 뒤 점수가 올랐고, 평소 뇌에서 잰 GABA 신호와 학습 점수 사이에도 관계가 관찰됐어요."
       }
     },
     {
@@ -812,7 +847,7 @@
     {
       "id": "shop-review-destination-1500",
       "status": "approved",
-      "publicText": "스마트스토어에서 가바 1500 구매자 후기와 다양한 사용 경험을 확인하세요.",
+      "publicText": "가바 1500 구매자 후기를 스마트스토어에서 읽어보세요.",
       "sourceTitle": "셀핀다 스마트스토어 가바 1500 상품 후기",
       "sourceUrl": "https://smartstore.naver.com/cellpinda/products/4701017202#REVIEW_DIALOG",
       "reviewedAt": "2026-09-10",
