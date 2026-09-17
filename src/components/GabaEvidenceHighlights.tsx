@@ -13,7 +13,7 @@ const chapters:Chapter[]=[
     {id:'research-yoon-2022',title:'잠드는 시간',topic:'수면',number:'2022'},
   ]},
   {id:'mental-task',number:'02',title:'생각을 많이 쓴 뒤',icon:Brain,studies:[
-    {id:'research-yoto-2012',title:'과제 뒤 뇌파와 활력 변화',topic:'생각을 많이 쓴 과제',number:'2012'},
+    {id:'research-yoto-2012',title:'생각을 많이 쓴 뒤에도 뇌파·활력 점수가 더 잘 유지됐어요',topic:'생각을 많이 쓴 과제',number:'2012'},
   ]},
   {id:'brain-observation',number:'03',title:'뇌 속 GABA와 손끝 연습',icon:ScanFace,studies:[
     {id:'research-heba-2016',title:'뇌 신호와 손끝 연습 점수',topic:'손끝 연습',number:'2016'},
