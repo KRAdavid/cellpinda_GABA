@@ -184,7 +184,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(master.records.length, 8, 'live master index must contain eight research records');
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
     assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');
-    assert.equal(queue.tasks.length, 14, 'live operations queue must contain the current task graph');
+    assert.equal(queue.tasks.length, 15, 'live operations queue must contain the current task graph');
     assert.ok(queue.pulse && /^[a-f0-9]{64}$/.test(queue.pulse.snapshotHash) && typeof queue.pulse.stateChanged === 'boolean', 'live operations queue must expose a valid pulse snapshot');
     validateContinuation(queue.pulse.continuation, 'live operations queue pulse');
     assert.equal(queue.pulse.activeTasks, queue.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length, 'live pulse active count must match queue');
