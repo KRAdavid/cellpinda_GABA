@@ -94,8 +94,6 @@
 /* Keep the research index scannable; move methodology and longer explanations behind disclosure. */
 .research-library>.section-head{align-items:end}
 .research-library>.section-head h2{font-size:clamp(32px,4vw,48px);letter-spacing:-.055em}
-.research-library-head-note{display:flex;align-items:center;gap:8px;color:#64766a;font-size:13px}
-.research-library-head-note svg{color:#328153}
 .research-reading-path{display:flex;align-items:center;justify-content:flex-start;gap:17px;margin:0 0 22px;padding:0;border:0;border-radius:0;background:transparent;overflow:visible}
 .research-reading-path>div{display:flex;align-items:center;gap:8px;padding:7px 0;background:transparent}
 .research-reading-path>div>svg{width:19px;height:19px;color:#328153}

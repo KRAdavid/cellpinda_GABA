@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react';
-import {Activity, ArrowRight, BookOpen, Clock3, FlaskConical, Search, Share2, UsersRound} from 'lucide-react';
+import {Activity, ArrowRight, Clock3, FlaskConical, Search, Share2, UsersRound} from 'lucide-react';
 import StudyInsightVisual from './StudyInsightVisual';
 import './ResearchLibrary.css';
 
@@ -125,8 +125,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
 
   return <section id="research" className="section wrap research research-library" aria-labelledby="research-heading">
     <div className="section-head">
-      <div><p className="chapter">GABA 연구</p><h2 id="research-heading">숫자와 그림으로 보기</h2></div>
-      <p className="research-library-head-note" aria-hidden="true"><BookOpen size={18}/>연구에서 관찰한 변화</p>
+      <div><h2 id="research-heading">수면·스트레스·운동, 연구에서 본 변화</h2></div>
     </div>
     <div className="research-reading-path" role="img" aria-label="궁금한 주제에서 연구 참여자와 측정 결과 순서로 살펴봅니다">
       <div><Search aria-hidden="true"/><strong>궁금한 점</strong></div><ArrowRight aria-hidden="true"/>
@@ -181,7 +180,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
               </div>
             </details>
           </div>
-          <div className="research-library-sources"><h4>원문 출처 보기</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료 확인일 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
+          <div className="research-library-sources"><h4>자료 출처</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료 확인일 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
             <a key={`${source.url}-${source.title}`} href={source.url!} target="_blank" rel="noopener noreferrer">{source.title} <span aria-label="새 창">↗</span></a>,
           )}</div>
         </details>

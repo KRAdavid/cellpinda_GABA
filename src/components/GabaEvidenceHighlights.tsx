@@ -35,14 +35,12 @@ const factsFor=(claim:Claim)=>[
 
 function StudyResult({study,claim}:{study:StudyCard;claim:Claim}){
   const metadata=claim.metadata!;
-  const source=publicSource(claim);
   if(!metadata.consumerVisual)return null;
   return <article className="gaba-study-result" id={`finding-${study.id}`}>
     <div className="gaba-study-meta"><span>{study.topic}</span><time>{study.number}</time></div>
     <h4>{study.title}</h4>
     <StudyInsightVisual visual={metadata.consumerVisual}/>
     <dl className="gaba-study-facts">{factsFor(claim).map(({label,value,Icon})=><div key={label} title={`${label}: ${value}`}><Icon size={17} strokeWidth={1.7} aria-hidden="true"/><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    {source?<a className="gaba-study-source" href={source.url!} target="_blank" rel="noopener noreferrer" aria-label={`${source.title} 논문 원문 새 창으로 열기`}>논문 원문 <ArrowUpRight size={15} aria-hidden="true"/></a>:null}
   </article>;
 }
 
@@ -66,7 +64,7 @@ export default function GabaEvidenceHighlights({claims,onOpen}:Props){
         </div>
       </div>
       <div className="gaba-evidence-boundary" aria-label="연구와 제품 정보 구분">
-        <span><Pill size={18} aria-hidden="true"/><b>논문 속 GABA</b></span><ArrowRight size={18} aria-hidden="true"/><span><UsersRound size={18} aria-hidden="true"/><b>연구 참여자</b></span><i/>
+        <span><Pill size={18} aria-hidden="true"/><b>GABA를 살펴본 연구</b></span><ArrowRight size={18} aria-hidden="true"/><span><UsersRound size={18} aria-hidden="true"/><b>참여한 사람</b></span><i/>
         <small>셀핀다 제품 정보는 포장 표시에서</small>
       </div>
       <div className="gaba-evidence-chapters">
@@ -82,7 +80,7 @@ export default function GabaEvidenceHighlights({claims,onOpen}:Props){
           </section>;
         })}
       </div>
-      <a className="gaba-evidence-all" href="#research" onClick={()=>onOpen?.('research-library')}>더 많은 연구의 질문과 조건 보기 <ArrowUpRight size={17} aria-hidden="true"/></a>
+      <a className="gaba-evidence-all" href="#research" onClick={()=>onOpen?.('research-library')}>다른 연구도 더 살펴보기 <ArrowUpRight size={17} aria-hidden="true"/></a>
     </div>
   </section>;
 }
