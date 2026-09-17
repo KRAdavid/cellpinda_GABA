@@ -77,7 +77,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
 
   return (
     <div className={`rhythm-load-score rhythm-load-score-${band}`}>
-      <div className="rhythm-load-score-heading"><span>최근 7일 생활 신호</span><strong>{score}<small>/ 15</small></strong></div>
+      <div className="rhythm-load-score-heading"><span>최근 7일 생활 신호 지수</span><strong>{score}<small>/ 15</small></strong></div>
       <div className="rhythm-load-visual">
         <svg className="rhythm-load-brain" viewBox="0 0 210 125" role="img" aria-label={`생활 신호 ${score}점에 맞춰 채워진 뇌 일러스트`}>
           <defs>
