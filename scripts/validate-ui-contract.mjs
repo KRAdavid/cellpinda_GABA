@@ -94,7 +94,10 @@ for (const marker of ['더 알아보기 · 뇌 피로와 건강', '61개 연구'
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
-for (const marker of ['뇌컨디션 확인 챌린지', 'Go/No-Go', '규칙 전환', 'FOCUS_GAME_TOTAL_TRIALS', '매번 무작위로 달라집니다', '단계별 문항 수와 제한 시간은 같아', '5분 충전하고 다시 확인', '편안한 소리', 'speechSynthesis']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['뇌컨디션 확인 챌린지', 'Go/No-Go', '규칙 전환', 'FOCUS_GAME_TOTAL_TRIALS', '매번 무작위로 달라집니다', '단계별 문항 수와 제한 시간은 같아', '5분 충전하고 다시 확인', '싱잉볼 소리', '시작 준비', 'ringSingingBowl']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+if (/speechSynthesis|SpeechSynthesisUtterance/.test(fatigueGame)) fail('five-minute rest must not play spoken narration');
+requireMatch(fatigueGame, /setPhase\('countdown'\)[\s\S]*phase === 'countdown'[\s\S]*첫 신호가 나타나면/, 'focus game must give users a ready countdown before the first scored signal');
+requireMatch(fatigueGame, /lastBowlStageRef\.current === breathCue\.stage[\s\S]*ringSingingBowl/, 'a singing bowl cue must play once at each breathing-stage transition');
 requireMatch(fatigueGame, /createFocusRunPattern\(Math\.random, runPatternRef\.current\.signature\)/, 'before and after challenge runs must receive different randomized forms');
 requireMatch(fatigueGame, /responseWindowMs/, 'each difficulty stage must use its calibrated response window');
 for (const marker of ['공이 올라가는 동안 · 4초', '공이 위에 머무는 동안 · 2초', '공이 내려가는 동안 · 6초', '공이 아래에 머무는 동안 · 2초', 'BreathLineGuide', 'prefers-reduced-motion', '자연스럽게 호흡하세요']) requireMatch(fatigueGame, new RegExp(marker), `animated 4-2-6-2 breathing rest marker ${marker} is missing`);
