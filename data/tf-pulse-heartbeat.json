@@ -3,15 +3,15 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-16T21:15:53.306Z",
-  "snapshotHash": "415f2b9d89e63eddf6766a2e904c9b16c1dfc4a9d1e0eb590ade1702f8b5ab41",
-  "previousSnapshotHash": "415f2b9d89e63eddf6766a2e904c9b16c1dfc4a9d1e0eb590ade1702f8b5ab41",
-  "stateChanged": false,
+  "generatedAt": "2026-09-17T02:36:05.839Z",
+  "snapshotHash": "b959409fb7e0b3e825e74010fbff3e2829fc7a2ba121945d1661a155c435792e",
+  "previousSnapshotHash": "34ec509600a7f22a3e45c277ddc2b3efe3e4189b7e6d6cae7d65c0d862b76ec0",
+  "stateChanged": true,
   "requiresHumanDecision": true,
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-17T03:15:53.306Z",
+    "nextReviewAt": "2026-09-17T08:36:05.839Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -76,13 +76,18 @@
       "id": "quality-audit",
       "label": "QA·감사",
       "status": "present"
+    },
+    {
+      "id": "experience-design",
+      "label": "브랜드·전환 경험 설계",
+      "status": "present"
     }
   ],
   "counts": {
     "BACKLOG": 0,
     "READY": 0,
     "RUNNING": 0,
-    "VERIFYING": 1,
+    "VERIFYING": 2,
     "WAITING": 4,
     "EXPIRED": 0,
     "RETRY": 0,
@@ -92,6 +97,7 @@
     "CANCELLED": 0
   },
   "verifying": [
+    "A3",
     "B2"
   ],
   "waiting": [
@@ -190,60 +196,5 @@
     "status": "HOLD",
     "taskId": "B4",
     "taskState": "WAITING"
-  },
-  "safeExecution": {
-    "mode": "safe_internal_tf_run",
-    "status": "MET",
-    "validatedAt": "2026-09-16T21:15:53.664Z",
-    "executionBoundary": {
-      "state": "READY",
-      "risk": "B_INTERNAL_WRITE",
-      "externalEffects": false
-    },
-    "preparation": {
-      "id": "sync-public-data",
-      "risk": "B_INTERNAL_WRITE",
-      "status": "MET"
-    },
-    "checks": [
-      {
-        "id": "goal-contract",
-        "risk": "A_READ",
-        "status": "MET"
-      },
-      {
-        "id": "research-copy",
-        "risk": "A_READ",
-        "status": "MET"
-      },
-      {
-        "id": "teaser-boundary",
-        "risk": "A_READ",
-        "status": "MET"
-      },
-      {
-        "id": "sandbox-mvp",
-        "risk": "A_READ",
-        "status": "MET"
-      },
-      {
-        "id": "public-export",
-        "risk": "A_READ",
-        "status": "MET"
-      },
-      {
-        "id": "tf-pulse",
-        "risk": "A_READ",
-        "status": "MET"
-      }
-    ],
-    "candidateTaskIds": [],
-    "humanGateTaskIds": [
-      "B2",
-      "B3",
-      "B4",
-      "C2",
-      "E1"
-    ]
   }
 }

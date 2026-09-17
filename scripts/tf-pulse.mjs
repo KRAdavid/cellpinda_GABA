@@ -9,7 +9,9 @@ const roleRegistry = await readJson('data/tf-role-registry.json');
 const fail = message => { throw new Error(`TF pulse invalid: ${message}`); };
 if (contract.status !== 'ACTIVE') fail('the pulse requires an ACTIVE Goal Contract');
 if (graph.goalId !== contract.goalId) fail('task graph is not tied to the Goal Contract');
-if (roleRegistry.goalId !== contract.goalId || roleRegistry.status !== contract.status || !Array.isArray(roleRegistry.roles) || roleRegistry.roles.length !== 6) fail('TF role registry is missing or not tied to the active Goal Contract');
+if (roleRegistry.goalId !== contract.goalId || roleRegistry.status !== contract.status || !Array.isArray(roleRegistry.roles) || roleRegistry.roles.length < 6) fail('TF role registry is missing or not tied to the active Goal Contract');
+const requiredRoleIds = ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit', 'experience-design'];
+if (requiredRoleIds.some(id => !roleRegistry.roles.some(role => role.id === id))) fail('TF role registry is missing a required cross-functional role');
 if (!Array.isArray(graph.tasks) || graph.tasks.length === 0) fail('task graph is empty');
 if (!contract.decisionProtocol || typeof contract.decisionProtocol.cadence !== 'string' || contract.decisionProtocol.cadence.trim().length < 10 || typeof contract.decisionProtocol.quorum !== 'string' || contract.decisionProtocol.quorum.trim().length < 10 || !Array.isArray(contract.decisionProtocol.record) || contract.decisionProtocol.record.length === 0 || contract.decisionProtocol.record.some(item => typeof item !== 'string' || item.trim().length < 2)) fail('decision protocol is missing or malformed');
 const executionPolicy = {

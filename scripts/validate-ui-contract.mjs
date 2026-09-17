@@ -34,6 +34,10 @@ const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research']) {
   requireMatch(app, new RegExp(`(?:id|href)=["']#?${id}["']`), `consumer section or link ${id} is missing`);
 }
+const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', '<GabaEvidenceHighlights', '<section id="fermentation"', '<section id="products"', '<ReviewExperience', '<ResearchLibrary', '<BrainLoadEvidence'];
+const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
+if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA before research highlights, then lead through the product and reviews to secondary evidence');
+requireMatch(brainLoadEvidence, /더 알아보기 · 뇌 피로와 건강/, 'general brain-health evidence must be presented as secondary reading');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
 requireMatch(app, /<nav aria-label="주 메뉴"/, 'consumer navigation label is missing');
@@ -57,7 +61,7 @@ requireMatch(research, /연구 조건을 더 보기/, 'research detail must use 
 requireMatch(research, /다른 주제나 방식을 골라 관련 연구 이야기를 이어서 살펴보세요/, 'research empty state must guide the next consumer action');
 requireMatch(indexHtml, /GABA 연구를 쉬운 말로 더 보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /쉬운 말과 도표로 정리/, 'GABA story must explain research with a visual aid');
-requireMatch(app, /TeaserPreview[\s\S]*GabaEvidenceHighlights[\s\S]*GabaStory/, 'research highlights must follow the teaser and precede the GABA story');
+requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*GabaEvidenceHighlights/, 'the GABA explanation must precede the teaser and its research highlights');
 for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'gaba-definition', '셀핀다 제품을 고를 때는 제품 표시를 따로 확인']) {
   requireMatch(evidenceHighlights, new RegExp(marker), `GABA evidence highlight marker ${marker} is missing`);
 }
@@ -85,7 +89,7 @@ requireMatch(rhythm, /생활 신호 지수|loadScore|loadLevel/, 'result must sh
 requireMatch(rhythm, /rhythm-care-guide|몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담/, 'high fatigue results must include a clear care-seeking guide');
 requireMatch(rhythmStyles, /rhythm-care-guide[\s\S]*border-left/, 'care-seeking guide must be visually distinct');
 requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence section is missing from the public flow');
-for (const marker of ['뇌 피로와 건강 근거', '61개 연구', '267개 연구', '21개 연구', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
+for (const marker of ['더 알아보기 · 뇌 피로와 건강', '61개 연구', '267개 연구', '21개 연구', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');

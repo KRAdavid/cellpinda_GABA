@@ -76,7 +76,7 @@ export default function BrainLoadEvidence() {
       <div className="wrap">
         <div className="section-head brain-load-evidence-head">
           <div>
-            <p className="chapter">02 / 뇌 피로와 건강 근거</p>
+            <p className="chapter">더 알아보기 · 뇌 피로와 건강</p>
             <h2 id="brain-load-evidence-heading">계속 버티면,<br />몸과 일상에 어떤 신호가 생길까요?</h2>
           </div>
           <p>‘뇌 과부하’라는 표현을 질병명처럼 단정하지 않고,<br />정신적 부담·수면·스트레스 연구에서 반복된 신호를 쉽게 보여드립니다.</p>

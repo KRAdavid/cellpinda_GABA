@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "goalId": "GL-2026-CELL-GABA-001",
-  "updatedAt": "2026-09-11",
+  "updatedAt": "2026-09-17",
   "stateMachine": ["BACKLOG", "READY", "RUNNING", "VERIFYING", "WAITING", "EXPIRED", "RETRY", "REWORK", "DONE", "FAILED", "CANCELLED"],
   "tasks": [
     {
@@ -29,6 +29,31 @@
       "dependencies": ["A1"],
       "acceptance": ["390px·데스크톱 과제와 관찰 항목 작성", "이해·망설임·공유 이유를 제품 효능과 분리해 기록"],
       "evidence": ["docs/USABILITY_TEST_PLAN.md"]
+    },
+    {
+      "id": "A3",
+      "stream": "A",
+      "title": "브랜드 경험 역할 합류와 소비자 흐름 개선",
+      "state": "VERIFYING",
+      "priority": 1,
+      "lead": "브랜드·전환 경험 설계",
+      "verifier": "QA·감사",
+      "risk": "C_LOW_RISK_INTERNAL",
+      "dependencies": ["A1", "A2"],
+      "acceptance": [
+        "체크 다음에 GABA 쉬운 설명이 나오고, 영상·GABA 연구·제조·제품·후기·심화 자료가 소비자 여정 순으로 배치됨",
+        "기존 제품·연구·후기·스마트스토어 목적지와 측정 이벤트를 유지함",
+        "레이아웃 순서와 TF 역할 구성을 자동 검사하고 배포 사이트에서 최신 콘텐츠를 확인함"
+      ],
+      "evidence": [
+        "docs/TF_BRAND_EXPERIENCE_REVIEW_20260917.md",
+        "src/App.tsx",
+        "src/components/BrainLoadEvidence.tsx",
+        "scripts/validate-ui-contract.mjs",
+        "pnpm run build · production build passed",
+        "pnpm test · 96/96 passed",
+        "http://127.0.0.1:4173/ · preview HTTP 200"
+      ]
     },
     {
       "id": "B1",

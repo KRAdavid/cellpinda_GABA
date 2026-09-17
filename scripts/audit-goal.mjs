@@ -136,8 +136,8 @@ const roleCorpus = [
 const roleCoverage = Array.isArray(roles.roles)
   ? roles.roles.map(role => ({id: role.id, label: role.label, status: role.match?.some(term => roleCorpus.includes(term)) ? 'present' : 'missing'}))
   : [];
-const allRolesPresent = roles.goalId === contract.goalId && roles.status === contract.status && roleCoverage.length === 6 && roleCoverage.every(role => role.status === 'present');
-check('tf-role-registry', allRolesPresent ? 'MET' : 'INVALID', allRolesPresent ? '6개 교차 검토 역할군이 계약·그래프에 연결됨' : '역할 레지스트리와 계약·그래프가 일치하지 않음', ['data/tf-role-registry.json', 'scripts/validate-tf-pulse.mjs'], allRolesPresent ? [] : ['역할 ID·매칭어·Goal Contract 연결 확인']);
+const allRolesPresent = roles.goalId === contract.goalId && roles.status === contract.status && roleCoverage.length >= 6 && roleCoverage.every(role => role.status === 'present');
+check('tf-role-registry', allRolesPresent ? 'MET' : 'INVALID', allRolesPresent ? `${roleCoverage.length}개 교차 검토 역할군이 계약·그래프에 연결됨` : '역할 레지스트리와 계약·그래프가 일치하지 않음', ['data/tf-role-registry.json', 'scripts/validate-tf-pulse.mjs'], allRolesPresent ? [] : ['역할 ID·매칭어·Goal Contract 연결 확인']);
 
 const publicProductOk = content.products?.length === 1 && content.products[0]?.id === 'gaba1500' && !content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750'));
 const masterOk = master.records?.length === 8 && master.records.every(record => record.id?.startsWith('research-'));
@@ -186,7 +186,7 @@ const report = {
 if (jsonOutput) console.log(JSON.stringify(report));
 else {
   console.log(`Goal audit · ${report.goalId} · ${report.overallStatus}`);
-  console.log(`core ${coreValid ? '통과' : '재검토 필요'} · 역할군 ${roleCoverage.filter(role => role.status === 'present').length}/6 · DONE ${taskCounts.DONE || 0}`);
+  console.log(`core ${coreValid ? '통과' : '재검토 필요'} · 역할군 ${roleCoverage.filter(role => role.status === 'present').length}/${roleCoverage.length} · DONE ${taskCounts.DONE || 0}`);
   console.log(`pulse ${report.pulseHealth.status} · ${report.pulseHealth.generatedAt || 'heartbeat 없음'}${report.pulseHealth.ageMinutes === null ? '' : ` · ${report.pulseHealth.ageMinutes}분 경과`}`);
   if (includeLocalInputs) {
     for (const item of checks.filter(checkItem => checkItem.id.startsWith('local-'))) console.log(`- [${item.status}] ${item.id}: ${item.detail}`);
