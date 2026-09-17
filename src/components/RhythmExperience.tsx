@@ -337,7 +337,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     const url = inviteUrl(kind, getShareReferralId());
     try {
       await navigator.clipboard.writeText(url);
-      setMessage(kind === 'focus' ? '집중 리듬 챌린지 초대 링크를 복사했어요. 받은 사람도 자기 기록을 직접 확인해요.' : '내 결과 대신 1분 점검 초대 링크를 복사했어요. 받은 사람도 자기 상태를 직접 확인해요.');
+      setMessage(kind === 'focus' ? '뇌컨디션 확인 챌린지 초대 링크를 복사했어요. 받은 사람도 자기 기록을 직접 확인해요.' : '내 결과 대신 1분 점검 초대 링크를 복사했어요. 받은 사람도 자기 상태를 직접 확인해요.');
       setManualLink('');
       onEvent('share_copy',{path:result?'/result':'/share',channel:'invite'});
       onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
@@ -356,7 +356,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
     if (navigator.share) {
       try {
-        await navigator.share({ title: kind === 'focus' ? '“너도 해봐” 1분 집중 리듬 챌린지' : '뇌 피로 1분 점검', text: shareText, url });
+        await navigator.share({ title: kind === 'focus' ? '“너도 해봐” 1분 뇌컨디션 확인 챌린지' : '뇌 피로 1분 점검', text: shareText, url });
         setMessage('1분 점검 초대 창을 열었어요. 상대방이 직접 점검하도록 보내 보세요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
         return;

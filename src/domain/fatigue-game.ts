@@ -240,7 +240,7 @@ export function summarizeFocusGame(records: readonly FocusTrialRecord[], falseSt
         (record.responded && record.responseMs === null) || (!record.responded && record.responseMs !== null) ||
         record.correct !== (record.shouldRespond ? record.responded : !record.responded);
     }) || !Number.isInteger(falseStarts) || falseStarts < 0) {
-    throw new TypeError(`집중 리듬 챌린지는 ${expectedTrials}라운드 기록과 0 이상의 오작동 횟수가 필요합니다.`);
+    throw new TypeError(`뇌컨디션 확인 챌린지는 ${expectedTrials}라운드 기록과 0 이상의 오작동 횟수가 필요합니다.`);
   }
   const speed = summarizeFocusStage(records.slice(0, FOCUS_GAME_TRIALS_PER_STAGE));
   const brake = summarizeFocusStage(records.slice(FOCUS_GAME_TRIALS_PER_STAGE, FOCUS_GAME_TRIALS_PER_STAGE * 2));

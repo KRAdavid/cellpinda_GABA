@@ -112,7 +112,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }));
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 영상 보기'), 'live consumer bundle must contain the duration-neutral teaser CTA');
-    assert.ok(consumerBundle.includes('집중 리듬 챌린지'), 'live consumer bundle must contain the advanced focus game');
+    assert.ok(consumerBundle.includes('뇌컨디션 확인 챌린지'), 'live consumer bundle must contain the advanced focus game');
     assert.ok(consumerBundle.includes('반응·멈춤·전환') && consumerBundle.includes('24개'), 'live consumer bundle must expose the randomized 24-signal focus game');
     assert.ok(consumerBundle.includes('5분 충전하고 다시 확인') && consumerBundle.includes('편안한 소리'), 'live consumer bundle must expose low-score recovery guidance and relaxation audio');
     assert.ok(consumerBundle.includes('뇌 피로 테스트 공유'), 'live consumer bundle must expose the friend challenge share CTA');

@@ -119,7 +119,7 @@ function stageMetric(label: string, before: { accuracyPct: number; averageMs: nu
 
 function FocusJourneyVisual() {
   return (
-    <div className="fatigue-journey-visual" role="img" aria-label="반응, 멈춤, 전환 세 단계를 거치는 1분 집중 리듬 챌린지">
+    <div className="fatigue-journey-visual" role="img" aria-label="반응, 멈춤, 전환 세 단계를 거치는 1분 뇌컨디션 확인 챌린지">
       <span className="fatigue-journey-ring fatigue-journey-ring-one" />
       <span className="fatigue-journey-ring fatigue-journey-ring-two" />
       <div className="fatigue-journey-core"><Brain size={28} aria-hidden="true" /><strong>1분</strong><span>집중 리듬</span></div>
@@ -511,7 +511,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
   return (
     <section className="fatigue-game" id="focus-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
-        <div><p className="fatigue-game-kicker">02 / 나의 집중 리듬 챌린지</p><h2 id="fatigue-game-heading">집중 리듬 챌린지</h2></div>
+        <div><p className="fatigue-game-kicker">02 / 나의 뇌컨디션 확인 챌린지</p><h2 id="fatigue-game-heading">뇌컨디션 확인 챌린지</h2></div>
         <p>누를 때는 빠르게, 멈출 때는 정확하게.<br />규칙이 바뀌면 얼마나 빨리 따라가는지 확인해 보세요.</p>
       </div>
 
