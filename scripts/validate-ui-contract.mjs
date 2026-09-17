@@ -101,6 +101,10 @@ requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fa
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
 for (const marker of ['뇌컨디션 확인 챌린지', 'Go/No-Go', '규칙 전환', 'FOCUS_GAME_TOTAL_TRIALS', '매번 무작위로 달라집니다', '단계별 문항 수와 제한 시간은 같아', '5분 충전하고 다시 확인', '싱잉볼 소리', '시작 준비', 'ringSingingBowl']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['게임 효과음', 'playGameCue(\'start\')', 'playGameCue(\'signal\')', 'playGameCue(\'stage\')', 'playGameCue(\'complete\')', 'playGameCue(\'false-start\')']) requireMatch(fatigueGame, new RegExp(marker.replace(/[()]/g, '\\$&')), `focus game sound cue ${marker} is missing`);
+requireMatch(fatigueGame, /playGameCue\(correct \? 'correct' : 'miss'\)/, 'focus game must sound its response judgment');
+requireMatch(fatigueGame, /toggleGameSound[\s\S]*aria-pressed=\{gameSoundEnabled\}/, 'focus game must expose an accessible sound toggle');
+requireMatch(fatigueGameStyles, /\.fatigue-game-sound-toggle[\s\S]*\.fatigue-game-sound-icon/, 'focus game sound controls must be styled');
 if (/speechSynthesis|SpeechSynthesisUtterance/.test(fatigueGame)) fail('five-minute rest must not play spoken narration');
 requireMatch(fatigueGame, /setPhase\('countdown'\)[\s\S]*phase === 'countdown'[\s\S]*첫 신호가 나타나면/, 'focus game must give users a ready countdown before the first scored signal');
 requireMatch(fatigueGame, /lastBowlStageRef\.current === breathCue\.stage[\s\S]*ringSingingBowl/, 'a singing bowl cue must play once at each breathing-stage transition');

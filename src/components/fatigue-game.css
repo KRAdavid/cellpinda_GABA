@@ -53,3 +53,13 @@
 .fatigue-game-running .fatigue-target{margin:0 auto}
 .fatigue-game-running .fatigue-game-status{display:-webkit-box;align-self:center;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
 @media(max-width:760px){.fatigue-game-running{grid-template-rows:22px 78px 48px 28px 148px 48px}.fatigue-stage-instruction strong{font-size:clamp(16px,4.8vw,20px)}}
+
+.fatigue-game-sound-toggle{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:42px;padding:9px 14px;border:1px solid #b8d0bd;border-radius:4px;background:#f7fbf7;color:#24593f;font:inherit;font-size:14px;cursor:pointer}
+.fatigue-game-sound-toggle:hover{background:#eaf4eb}
+.fatigue-game-sound-note,.fatigue-game-sound-status{font-size:12px!important;line-height:1.6!important;text-align:center;color:#68806f!important}
+.fatigue-game-sound-icon{display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid #b8d0bd;border-radius:50%;background:#f7fbf7;color:#24593f;cursor:pointer}
+.fatigue-game-sound-icon:hover{background:#eaf4eb}
+.fatigue-game-running{grid-template-rows:38px 78px 48px 28px 174px 48px}
+.fatigue-game-meta span:last-child{min-height:36px}
+.fatigue-game-sound-toggle:focus-visible,.fatigue-game-sound-icon:focus-visible{outline:3px solid #158457;outline-offset:3px}
+@media(max-width:760px){.fatigue-game-running{grid-template-rows:40px 78px 48px 28px 148px 48px}.fatigue-game-sound-toggle{font-size:15px}}

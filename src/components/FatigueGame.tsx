@@ -49,6 +49,8 @@ interface RelaxationAudio {
   context: AudioContext;
 }
 
+type FocusSoundCue = 'start' | 'countdown' | 'go' | 'signal' | 'correct' | 'miss' | 'false-start' | 'stage' | 'complete';
+
 function createRelaxationAudio(): RelaxationAudio | null {
   const AudioContextCtor = window.AudioContext ?? (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
   if (!AudioContextCtor) return null;
@@ -90,6 +92,41 @@ function ringSingingBowl(context: AudioContext) {
 
   if (context.state === 'running') play();
   else void context.resume().then(play).catch(() => undefined);
+}
+
+function playFocusSoundCue(context: AudioContext, cue: FocusSoundCue) {
+  if (context.state !== 'running') return;
+  const patterns: Record<FocusSoundCue, { notes: readonly number[]; duration: number; spacing: number; level: number }> = {
+    start: { notes: [440, 587], duration: 0.12, spacing: 0.09, level: 0.035 },
+    countdown: { notes: [523], duration: 0.075, spacing: 0, level: 0.024 },
+    go: { notes: [587, 784], duration: 0.14, spacing: 0.08, level: 0.04 },
+    signal: { notes: [740], duration: 0.055, spacing: 0, level: 0.018 },
+    correct: { notes: [659, 880], duration: 0.095, spacing: 0.055, level: 0.027 },
+    miss: { notes: [330], duration: 0.12, spacing: 0, level: 0.02 },
+    'false-start': { notes: [294], duration: 0.1, spacing: 0, level: 0.018 },
+    stage: { notes: [523, 659, 784], duration: 0.1, spacing: 0.065, level: 0.03 },
+    complete: { notes: [523, 659, 784, 988], duration: 0.13, spacing: 0.075, level: 0.035 },
+  };
+  const pattern = patterns[cue];
+  const startedAt = context.currentTime + 0.012;
+  pattern.notes.forEach((frequency, index) => {
+    const noteAt = startedAt + pattern.spacing * index;
+    const oscillator = context.createOscillator();
+    const envelope = context.createGain();
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(frequency, noteAt);
+    envelope.gain.setValueAtTime(0.0001, noteAt);
+    envelope.gain.exponentialRampToValueAtTime(pattern.level, noteAt + 0.012);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, noteAt + pattern.duration);
+    oscillator.connect(envelope);
+    envelope.connect(context.destination);
+    oscillator.onended = () => {
+      oscillator.disconnect();
+      envelope.disconnect();
+    };
+    oscillator.start(noteAt);
+    oscillator.stop(noteAt + pattern.duration + 0.015);
+  });
 }
 
 const stageInfo: Record<FocusGameStage, { label: string; instruction: string; detail: string }> = {
@@ -247,6 +284,8 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
   const [restStartedAt, setRestStartedAt] = useState<number | null>(null);
   const [breathCue, setBreathCue] = useState<BreathCue>({ stage: 'inhale', seconds: 4 });
   const [status, setStatus] = useState('');
+  const [gameSoundEnabled, setGameSoundEnabled] = useState(true);
+  const [gameSoundStatus, setGameSoundStatus] = useState('');
   const timerRef = useRef<number | null>(null);
   const stimulusAtRef = useRef(0);
   const runPatternRef = useRef<RunPattern>(createFocusRunPattern());
@@ -255,6 +294,41 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
   const restClockIntervalRef = useRef<number | null>(null);
   const restEndsAtRef = useRef<number | null>(null);
   const autoStartedRef = useRef(false);
+  const countdownAudioRunRef = useRef(0);
+  const runSequenceRef = useRef(0);
+
+  function playGameCue(cue: FocusSoundCue) {
+    if (!gameSoundEnabled) return;
+    const audio = audioRef.current ?? createRelaxationAudio();
+    if (!audio) {
+      setGameSoundEnabled(false);
+      setGameSoundStatus('이 기기에서는 효과음을 재생할 수 없어 화면 신호로 계속 진행합니다.');
+      return;
+    }
+    audioRef.current = audio;
+    const play = () => {
+      if (gameSoundEnabled) playFocusSoundCue(audio.context, cue);
+    };
+    if (audio.context.state === 'running') play();
+    else void audio.context.resume().then(play).catch(() => undefined);
+  }
+
+  function toggleGameSound() {
+    if (gameSoundEnabled) {
+      setGameSoundEnabled(false);
+      setGameSoundStatus('게임 효과음을 껐어요.');
+      return;
+    }
+    const audio = audioRef.current ?? createRelaxationAudio();
+    if (!audio) {
+      setGameSoundStatus('이 기기에서는 효과음을 재생할 수 없어요.');
+      return;
+    }
+    audioRef.current = audio;
+    setGameSoundEnabled(true);
+    setGameSoundStatus('신호와 응답 순간에 효과음이 재생됩니다.');
+    void audio.context.resume().catch(() => setGameSoundStatus('효과음을 시작하지 못했어요. 다시 눌러 주세요.'));
+  }
 
   function stopRelaxationAudio() {
     const audio = audioRef.current;
@@ -337,12 +411,23 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
 
   useEffect(() => {
     if (phase !== 'countdown') return;
+    const runId = runSequenceRef.current;
+    if (countdownAudioRunRef.current !== runId) {
+      countdownAudioRunRef.current = runId;
+      playGameCue('countdown');
+    }
     const startedAt = performance.now();
+    let previousRemaining = 3;
     const timer = window.setInterval(() => {
       const remaining = Math.max(0, 3 - Math.floor((performance.now() - startedAt) / 1000));
       setReadyCountdown(remaining);
+      if (remaining !== previousRemaining) {
+        previousRemaining = remaining;
+        if (remaining > 0) playGameCue('countdown');
+      }
       if (remaining === 0) {
         window.clearInterval(timer);
+        playGameCue('go');
         setStatus('첫 번째 신호를 기다리세요.');
         setPhase('running');
       }
@@ -369,6 +454,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
         stimulusAtRef.current = performance.now();
         setStimulusVisible(true);
         setStatus(trialPrompt(nextTrial));
+        playGameCue('signal');
       }, nextTrial.foreperiodMs);
     } else {
       timerRef.current = window.setTimeout(() => finishTrial(false), trial?.responseWindowMs ?? 1_200);
@@ -389,6 +475,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     if (!trial) return;
     const responseMs = responded ? Math.max(1, Math.round(performance.now() - stimulusAtRef.current)) : null;
     const correct = trial.shouldRespond ? responded : !responded;
+    playGameCue(correct ? 'correct' : 'miss');
     const record: FocusTrialRecord = { stage: trial.stage, shouldRespond: trial.shouldRespond, responded, responseMs, correct };
     const nextRecords = [...records, record];
     setRecords(nextRecords);
@@ -402,6 +489,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
       return;
     }
     if (stageIndex < FOCUS_GAME_STAGES.length - 1) {
+      playGameCue('stage');
       setStageIndex(current => current + 1);
       setTrialIndex(0);
       setStatus(`${stageInfo[FOCUS_GAME_STAGES[stageIndex + 1]!].label} 단계로 넘어가요.`);
@@ -410,6 +498,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     const summary = summarizeFocusGame(nextRecords, falseStarts);
     if (mode === 'baseline') setBefore(summary);
     else setAfter(summary);
+    playGameCue('complete');
     setPhase(mode === 'baseline' ? 'baseline-complete' : 'complete');
     onEvent('fatigue_game_complete', { mode, averageMs: String(summary.speed.averageMs ?? ''), misses: String(summary.speed.total - summary.speed.correct) });
   }
@@ -418,6 +507,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     if (timerRef.current !== null) window.clearTimeout(timerRef.current);
     stopRestClock();
     stopRelaxationAudio();
+    runSequenceRef.current += 1;
     setMode(nextMode);
     runPatternRef.current = createFocusRunPattern(Math.random, runPatternRef.current.signature);
     setStageIndex(0);
@@ -429,6 +519,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     setReadyCountdown(3);
     setStatus('');
     setPhase('countdown');
+    playGameCue('start');
     onEvent('fatigue_game_start', { mode: nextMode });
   }
 
@@ -436,6 +527,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     if (phase !== 'running') return;
     if (!stimulusVisible) {
       setFalseStarts(current => current + 1);
+      playGameCue('false-start');
       setStatus('아직 신호가 없어요. 신호가 뜬 뒤 눌러 주세요.');
       onEvent('fatigue_game_false_start', { mode });
       return;
@@ -506,7 +598,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
             <div className="fatigue-stage-preview" aria-label="점점 어려워지는 게임 세 단계"><div><span>01</span><strong>반응</strong><small>색·모양 바뀜 · 8개</small></div><div><span>02</span><strong>멈춤</strong><small>빨강 3개는 참기</small></div><div><span>03</span><strong>전환</strong><small>색 기준 바꾸기 · 모양 무시</small></div></div>
             <details className="fatigue-game-method"><summary>왜 이 세 가지인가요?</summary><p>반응 속도, Go/No-Go 억제, 과제 전환은 집중과 인지 조절을 살펴볼 때 자주 사용하는 과제 형태입니다. 화면 지연·기기·수면·주변 환경의 영향을 받으므로 표준화된 진단 점수로 해석하지 않습니다.</p><div><a href="https://pubmed.ncbi.nlm.nih.gov/17850833/" target="_blank" rel="noopener noreferrer">Go/No-Go 연구 예시 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/29517261/" target="_blank" rel="noopener noreferrer">과제 전환 리뷰 <ExternalLink size={14} aria-hidden="true" /></a></div></details>
           </div>
-          <div className="fatigue-game-intro-side"><FocusJourneyVisual /><div className="fatigue-game-intro-actions"><button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Brain size={18} aria-hidden="true" /> 게임 시작 <ArrowRight size={18} aria-hidden="true" /></button>{onInvite ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}><ArrowUpRight size={18} aria-hidden="true" /> 친구에게 “너도 해봐” 보내기</button> : null}</div></div>
+          <div className="fatigue-game-intro-side"><FocusJourneyVisual /><div className="fatigue-game-intro-actions"><button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Brain size={18} aria-hidden="true" /> 게임 시작 <ArrowRight size={18} aria-hidden="true" /></button><button type="button" className="fatigue-game-sound-toggle" onClick={toggleGameSound} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />} 게임 효과음 {gameSoundEnabled ? '켜짐' : '꺼짐'}</button><p className="fatigue-game-sound-note">시작·신호·판정·단계 전환 때 짧은 소리가 납니다.</p>{gameSoundStatus ? <p className="fatigue-game-sound-status" role="status">{gameSoundStatus}</p> : null}{onInvite ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}><ArrowUpRight size={18} aria-hidden="true" /> 친구에게 “너도 해봐” 보내기</button> : null}</div></div>
         </div> : null}
 
         {phase === 'countdown' ? <div className="fatigue-game-countdown" role="status" aria-live="assertive" aria-atomic="true">
@@ -517,7 +609,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
         </div> : null}
 
         {phase === 'running' ? <div className="fatigue-game-running">
-          <div className="fatigue-game-meta"><span>STAGE {String(stageIndex + 1).padStart(2, '0')} / 03 · {currentStage.label}</span><span><Timer size={15} aria-hidden="true" /> {mode === 'baseline' ? '쉬기 전' : '휴식 후'}</span></div>
+          <div className="fatigue-game-meta"><span>STAGE {String(stageIndex + 1).padStart(2, '0')} / 03 · {currentStage.label}</span><span><Timer size={15} aria-hidden="true" /> {mode === 'baseline' ? '쉬기 전' : '휴식 후'}<button type="button" className="fatigue-game-sound-icon" onClick={toggleGameSound} aria-label={`게임 효과음 ${gameSoundEnabled ? '끄기' : '켜기'}`} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />}</button></span></div>
           <div className="fatigue-stage-instruction"><strong>{currentStage.instruction}</strong><span>{currentStage.detail}</span></div>
           <div className="fatigue-rule-slot">
             {FOCUS_GAME_STAGES[stageIndex] === 'switch' ? <div className="fatigue-rule-display"><span>이번 규칙</span><strong className={`fatigue-rule-color fatigue-rule-color-${switchRule}`}>{switchRule === 'green' ? '초록' : '보라'}</strong><small>이 색 신호만 누르기</small></div> : <span className="fatigue-rule-placeholder" aria-hidden="true" />}
