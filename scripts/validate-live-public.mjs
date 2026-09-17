@@ -119,7 +119,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(consumerBundle.includes('친구에게 “너도 해봐” 보내기'), 'live consumer bundle must make the result share an invitation to check');
     assert.ok(consumerBundle.includes('강한 뇌 피로 신호'), 'live consumer bundle must contain an explicit fatigue signal');
     assert.ok(consumerBundle.includes('생활 신호 지수'), 'live consumer bundle must contain the personal load index');
-    assert.ok(consumerBundle.includes('뇌 피로와 건강 근거'), 'live consumer bundle must include the health evidence section');
+    assert.ok(consumerBundle.includes('더 알아보기 · 뇌 피로와 건강'), 'live consumer bundle must include the secondary health evidence section');
     assert.ok(consumerBundle.includes('61개 연구') && consumerBundle.includes('267개 연구') && consumerBundle.includes('21개 연구'), 'live consumer bundle must include evidence scale markers');
     assert.ok(consumerBundle.includes('몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담'), 'live consumer bundle must include a clear care-seeking guide');
     assert.ok(!consumerBundle.includes('발효가바가 무엇인지 30초'), 'live consumer bundle still contains the retired teaser duration promise');
@@ -182,7 +182,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(master.records.length, 8, 'live master index must contain eight research records');
     assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
     assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');
-    assert.equal(queue.tasks.length, 13, 'live operations queue must contain the current task graph');
+    assert.equal(queue.tasks.length, 14, 'live operations queue must contain the current task graph');
     assert.ok(queue.pulse && /^[a-f0-9]{64}$/.test(queue.pulse.snapshotHash) && typeof queue.pulse.stateChanged === 'boolean', 'live operations queue must expose a valid pulse snapshot');
     validateContinuation(queue.pulse.continuation, 'live operations queue pulse');
     assert.equal(queue.pulse.activeTasks, queue.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length, 'live pulse active count must match queue');

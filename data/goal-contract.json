@@ -124,8 +124,8 @@
       "name": "소비자 여정",
       "lead": "브랜드·전환 경험 설계·마케팅·소비자심리·UX",
       "verifier": "QA",
-      "status": "IN_PROGRESS",
-      "nextAction": "A3 브랜드 경험 흐름 재배치·역할 구성 검증과 배포 완료 후 실제 소비자 사용성 점검 실행"
+      "status": "RELEASED",
+      "nextAction": "참가자 모집 후 390px·데스크톱에서 실제 소비자 이해도·망설임·공유 이유 사용성 점검 실행"
     },
     {
       "id": "B",

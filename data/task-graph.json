@@ -34,7 +34,7 @@
       "id": "A3",
       "stream": "A",
       "title": "브랜드 경험 역할 합류와 소비자 흐름 개선",
-      "state": "VERIFYING",
+      "state": "DONE",
       "priority": 1,
       "lead": "브랜드·전환 경험 설계",
       "verifier": "QA·감사",
@@ -52,7 +52,8 @@
         "scripts/validate-ui-contract.mjs",
         "pnpm run build · production build passed",
         "pnpm test · 96/96 passed",
-        "http://127.0.0.1:4173/ · preview HTTP 200"
+        "http://127.0.0.1:4173/ · preview HTTP 200",
+        "pnpm run validate:live-public · page 200, claims 14, queue 14, TF roles 7, Smart Store only, provenance matched"
       ]
     },
     {

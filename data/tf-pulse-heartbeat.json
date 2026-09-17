@@ -3,15 +3,15 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-17T02:36:05.839Z",
-  "snapshotHash": "b959409fb7e0b3e825e74010fbff3e2829fc7a2ba121945d1661a155c435792e",
-  "previousSnapshotHash": "34ec509600a7f22a3e45c277ddc2b3efe3e4189b7e6d6cae7d65c0d862b76ec0",
+  "generatedAt": "2026-09-17T02:43:15.571Z",
+  "snapshotHash": "26d50c9e7e42fbf8dfa5f3ae4f81efb04e8201ebdf13bf741f02b15ee2f26205",
+  "previousSnapshotHash": "b959409fb7e0b3e825e74010fbff3e2829fc7a2ba121945d1661a155c435792e",
   "stateChanged": true,
   "requiresHumanDecision": true,
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-17T08:36:05.839Z",
+    "nextReviewAt": "2026-09-17T08:43:15.571Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -87,17 +87,16 @@
     "BACKLOG": 0,
     "READY": 0,
     "RUNNING": 0,
-    "VERIFYING": 2,
+    "VERIFYING": 1,
     "WAITING": 4,
     "EXPIRED": 0,
     "RETRY": 0,
     "REWORK": 0,
-    "DONE": 8,
+    "DONE": 9,
     "FAILED": 0,
     "CANCELLED": 0
   },
   "verifying": [
-    "A3",
     "B2"
   ],
   "waiting": [
