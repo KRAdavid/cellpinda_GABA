@@ -1,5 +1,6 @@
 import {Activity, ArrowDown, ArrowRight, ArrowUp, Brain, Clock3, Dumbbell, Hand, Moon, Pill, ScanFace, Waves} from 'lucide-react';
 import type {ConsumerVisual} from './ResearchLibrary';
+import './StudyInsightVisual.css';
 
 const numberText=(value:number)=>value.toLocaleString('ko-KR',{maximumFractionDigits:2});
 
@@ -69,6 +70,6 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
     {visual.groups.map((group,index)=><div className={`study-group-row${index===1?' is-highlight':''}`} key={group.label}>
       <span>{group.label.replace('유청단백질','단백질')}</span><i><b style={{width:`${Math.max(group.value/max*100,5)}%`}}/></i><strong>{numberText(group.value)}<small>{visual.unit}</small></strong>
     </div>)}
-    <div className="study-insight-footer"><Trend direction="up" label="두 가지를 함께 먹은 그룹에서 더 늘었어요"/><small>{visual.participantLabel}</small></div>
+    <div className="study-insight-footer"><small>{visual.comparisonNote} · {visual.participantLabel}</small></div>
   </figure>;
 }

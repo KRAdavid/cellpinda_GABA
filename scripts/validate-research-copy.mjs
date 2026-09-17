@@ -2,7 +2,7 @@ import {readFile} from 'node:fs/promises';
 
 const ledger = JSON.parse(await readFile(new URL('../data/content-ledger.json', import.meta.url), 'utf8'));
 const consumerSourceFiles = [
-  'ResearchLibrary.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'GabaEvidenceHighlights.tsx', 'StudyInsightVisual.tsx', 'RhythmExperience.tsx',
+  'ResearchLibrary.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'StudyInsightVisual.tsx', 'RhythmExperience.tsx',
   'PurchaseQuestions.tsx', 'ProductShare.tsx', 'SevenDayChallenge.tsx', 'TeaserPreview.tsx', 'BrainLoadEvidence.tsx',
   'FatigueGame.tsx', 'MemberRecords.tsx', 'AnalyticsConsent.tsx',
 ];
@@ -21,9 +21,20 @@ const fail = message => { throw new Error(`Research consumer copy invalid: ${mes
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
 const yoto = research.find(claim => claim.id === 'research-yoto-2012');
-if (!yoto?.publicText?.includes('뇌파와 활력 점수를 더 잘 유지') || yoto.metadata?.consumerVisual?.outcomes?.some(item => !item.result.includes('더 잘 유지'))) fail('Yoto study must express the positive comparison as better-maintained brain-wave and vitality results');
+if (!yoto?.publicText?.includes('알파·베타 뇌파의 감소 폭') || yoto.publicText.includes('더 잘 유지') || yoto.metadata?.consumerVisual?.outcomes?.length !== 1) fail('Yoto study must state the measured EEG result without vague improvement wording');
 const heba = research.find(claim => claim.id === 'research-heba-2016');
-if (!heba?.publicText?.includes('평균 12%') || !heba.publicText.includes('뇌 속 GABA 수치가 높은 사람일수록') || !heba.metadata?.dose?.includes('GABA를 먹지 않고')) fail('Heba study must present the positive 12% tactile-learning result as an observational finding, not a GABA intake test');
+if (heba?.publicText?.includes('12%') || heba?.metadata?.consumerSummary?.includes('높게 측정') || !heba?.metadata?.consumerVisual?.boundaryLabel?.includes('관계') || !heba?.metadata?.dose?.includes('GABA를 먹지 않고')) fail('Heba study must not frame tactile practice as a GABA intake benefit');
+const yoon = research.find(claim => claim.id === 'research-yoon-2022');
+if (!yoon?.metadata?.consumerSummary?.includes('수면 기록') || yoon.metadata?.consumerVisual || /짧아졌|줄었|개선|높아졌/.test(yoon.publicText)) fail('Yoon study must not present within-group sleep changes as an improvement claim');
+const byun = research.find(claim => claim.id === 'research-byun-2018');
+if (!byun?.metadata?.consumerSummary?.includes('비교 정제') || byun.metadata?.consumerVisual || /13\.4|5\.7|짧아졌|줄었|높아졌|개선/.test(byun.publicText)) fail('Byun study must describe its measurements without presenting within-group change as a benefit');
+const powers = research.find(claim => claim.id === 'research-powers-2008');
+if (!powers?.metadata?.consumerSummary?.includes('성장호르몬 수치') || powers.metadata?.consumerVisual || /4배|높았/.test(powers.publicText)) fail('Powers study must present a hormone measurement without implying a health benefit');
+const sakashita = research.find(claim => claim.id === 'research-sakashita-2019');
+if (!sakashita?.publicText?.includes('1.34kg') || !sakashita.publicText.includes('0.15kg') || sakashita.publicText.includes('더 늘었어요')) fail('Sakashita study must show the measured group values instead of a vague improvement claim');
+if ((appSource.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(appSource)) fail('the detailed research library must be the only research-results section on the consumer page');
+if (/research-(?:yoto|byun|sakashita)-\d{4}|metadata\.consumerSummary/.test(gabaStory)) fail('the GABA introduction must point to the research list without repeating study results');
+if (!researchLibrary.includes('canonicalStudySources')) fail('research records must be deduplicated by all linked primary sources');
 
 const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장|직접\s*(먹어|경험)|가바\s*(경험|섭취를\s*시작)/;
 const discouragedMarketing = /뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|결과를\s*한\s*문장으로\s*묶기\s*어려|중증\s*수면질환|수면이\s*좋지\s*않|이상사례|유의하지\s*않/;
@@ -53,7 +64,7 @@ const detailBlock = researchLibrary.indexOf('<details className="research-detail
 const productLink = researchLibrary.indexOf('className="button outline" href="#products"');
 if (detailBlock < 0 || productLink < detailBlock) fail('product information link must follow research conditions and observed changes');
 if (!researchLibrary.slice(productLink, productLink + 220).includes('셀핀다 제품 구성 확인')) fail('product information link must lead to product composition and label details');
-if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations') || consumerSources['GabaEvidenceHighlights.tsx'].includes('metadata.result') || consumerSources['GabaEvidenceHighlights.tsx'].includes('metadata.limitations')) fail('consumer research UI must render only reviewed consumer findings, not internal result or limitation fields');
+if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must render only reviewed consumer findings, not internal result or limitation fields');
 if (researchLibrary.includes('숫자와 출처 더 확인하기')) fail('consumer research UI must use the conditions-and-source label');
 if (/전체\s*구매자의\s*경험|제품\s*효과를\s*입증하는\s*연구\s*자료는\s*아니/.test(reviewExperience)) fail('consumer review UI must use context-first copy');
 if (/원문에서\s*확인되지\s*않음|빠진\s*정보는\s*추측하지\s*않아도\s*됩니다/.test(reviewExperience)) fail('consumer review UI must guide readers toward source context');

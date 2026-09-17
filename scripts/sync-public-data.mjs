@@ -106,9 +106,8 @@ for(const item of approvedResearch){
   if(missing.length || publicSources(item).length===0) throw new Error(`Approved research ${item.id} is not export-ready: ${[...missing, ...(publicSources(item).length===0 ? ['public HTTPS source'] : [])].join(', ')}`);
 }
 const featuredResearchKinds=new Map([
-  ['research-byun-2018','before-after'],['research-yoon-2022','before-after'],
   ['research-yoto-2012','study-journey'],['research-yamatsu-2016','metric-pair'],
-  ['research-powers-2008','ratio'],['research-sakashita-2019','group-values'],
+  ['research-sakashita-2019','group-values'],
   ['research-heba-2016','observational-link'],
 ]);
 for(const [id,kind] of featuredResearchKinds){

@@ -212,9 +212,8 @@ const coverage = {
   muscleDevelopment: ['research-sakashita-2019'],
 };
 const featuredFindings = new Map([
-  ['research-byun-2018','before-after'],['research-yoon-2022','before-after'],
   ['research-yoto-2012','study-journey'],['research-yamatsu-2016','metric-pair'],
-  ['research-powers-2008','ratio'],['research-sakashita-2019','group-values'],
+  ['research-sakashita-2019','group-values'],
   ['research-heba-2016','observational-link'],
 ]);
 for (const [id, kind] of featuredFindings) {

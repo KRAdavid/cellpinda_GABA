@@ -46,17 +46,6 @@ type Props = {
   onOpen?: (claimId: string) => void;
 };
 
-const facts: [keyof ResearchMetadata, string][] = [
-  ['population', '누가 참여했나요?'],
-  ['studyType', '어떻게 살펴봤나요?'],
-  ['sampleSize', '참여한 사람 수'],
-  ['duration', '얼마나 오래 했나요?'],
-  ['dose', '연구에서 먹은 양'],
-  ['comparison', '무엇과 비교했나요?'],
-  ['outcome', '무엇을 살펴봤나요?'],
-  ['searchThrough', '어디서 연구를 찾았나요?'],
-];
-
 function compactStudyType(value?: string): string {
   if (!value) return 'GABA 관련 연구';
   if (/문헌고찰|여러 연구를 모아|사람 연구 여러 편/.test(value)) return '사람 연구 여러 편을 모아 살펴봄';
@@ -72,6 +61,24 @@ function isPublicUrl(value: string | null): value is string {
   catch { return false; }
 }
 
+function canonicalStudySources(claim: Claim): string[] {
+  const keys = claim.sources.filter(item => isPublicUrl(item.url)).flatMap(source => {
+    try {
+      const url = new URL(source.url!);
+      const doi = decodeURIComponent(`${url.pathname}${url.search}`).match(/10\.\d{4,9}\/[a-z0-9._;()/:+-]+/i)?.[0];
+      if (doi) return [`doi:${doi.replace(/[.,;]+$/, '').toLowerCase()}`];
+      const pmid = url.hostname.includes('pubmed') && url.pathname.match(/\/(\d+)\/?/)?.[1];
+      if (pmid) return [`pmid:${pmid}`];
+      const pmc = url.pathname.match(/\/(PMC\d+)\/?/i)?.[1];
+      if (pmc) return [`pmc:${pmc.toLowerCase()}`];
+      return [`${url.hostname.replace(/^www\./, '').toLowerCase()}${url.pathname.replace(/\/+$/, '').toLowerCase()}`];
+    } catch {
+      return [];
+    }
+  });
+  return keys.length ? [...new Set(keys)] : [claim.id];
+}
+
 export default function ResearchLibrary({ claims, onOpen }: Props) {
   const [linkStatus,setLinkStatus]=useState('');
   const [manualLink,setManualLink]=useState('');
@@ -79,11 +86,18 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   const [topic, setTopic] = useState('');
   const [studyType, setStudyType] = useState('');
   const [requestedId, setRequestedId] = useState('');
-  const studies = claims.filter(claim =>
+  const eligibleStudies = claims.filter(claim =>
     claim.status === 'approved' && claim.id.startsWith('research-') &&
     claim.publicText && claim.metadata?.consumerSummary &&
     claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)),
   );
+  const seenStudySources = new Set<string>();
+  const studies = eligibleStudies.filter(claim => {
+    const sourceKeys = canonicalStudySources(claim);
+    if (sourceKeys.some(key => seenStudySources.has(key))) return false;
+    sourceKeys.forEach(key => seenStudySources.add(key));
+    return true;
+  });
   const topics = [...new Set(studies.map(claim => claim.topic).filter(Boolean))];
   const activeTopic = topics.includes(topic) ? topic : '';
   const studyTypes = [...new Set(studies.map(claim => claim.metadata!.studyType).filter((value): value is string => Boolean(value)))];
@@ -124,6 +138,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   }
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
+    <div className="section-head research-library-head"><div><p className="chapter">사람 연구를 한곳에서</p><h2 id="research-title">궁금한 주제로<br/>연구를 찾아보세요.</h2></div><p>각 연구는 한 번만 소개해요.<br/>측정한 내용과 참여 조건을 함께 보여드립니다.</p></div>
     <div className="research-reading-path" role="img" aria-label="궁금한 점, 연구에 참여한 사람, 살펴본 변화를 차례로 보여줍니다">
       <div><Search aria-hidden="true"/><strong>궁금한 점</strong></div><ArrowRight aria-hidden="true"/>
       <div><UsersRound aria-hidden="true"/><strong>누가 참여했나요?</strong></div><ArrowRight aria-hidden="true"/>
@@ -161,22 +176,10 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
             <div className="research-story-grid" aria-label="연구 정보 그림 요약">
           <div className="research-story-card"><UsersRound size={21} aria-hidden="true"/><h4>누가 참여했나요?</h4><p>{metadata.population || metadata.sampleSize || '연구에 나온 참여자 정보'}</p></div>
               <div className="research-story-card"><FlaskConical size={21} aria-hidden="true"/><h4>무엇을 했나요?</h4><p>{compactStudyType(metadata.studyType)}{metadata.duration ? ` · ${metadata.duration}` : ''}</p></div>
-              <div className="research-story-card"><Activity size={21} aria-hidden="true"/><h4>무엇을 살펴봤나요?</h4><p>{metadata.consumerSummary}</p></div>
+              <div className="research-story-card"><Activity size={21} aria-hidden="true"/><h4>무엇을 살펴봤나요?</h4><p>{metadata.outcome || metadata.consumerScope || '연구에서 살펴본 항목'}</p></div>
               {metadata.comparison?<div className="research-story-card"><Clock3 size={21} aria-hidden="true"/><h4>무엇과 비교했나요?</h4><p>{metadata.comparison}</p></div>:null}
             </div>
             <div className="research-library-boundary"><h4>셀핀다 제품을 볼 때</h4><p>{metadata.productApplicability}</p></div>
-            <details className="research-technical-detail">
-            <summary>참여한 사람·먹은 양·기간 자세히 보기</summary>
-              <div className="research-technical-detail-body">
-                <div className="research-library-overview"><h4>이 연구에서 살펴본 내용</h4><p>{metadata.consumerSummary || claim.publicText}</p></div>
-                <dl className="research-library-facts">{facts.map(([key, label]) => {
-                  const value = metadata[key];
-                  const displayValue = key === 'studyType' && typeof value === 'string' ? compactStudyType(value) : value;
-                  return typeof displayValue === 'string' && displayValue ? <div key={key}><dt>{label}</dt><dd>{displayValue}</dd></div> : null;
-                })}</dl>
-                <div className="research-library-findings"><h4>내 생활에 적용해 볼 점</h4><p>{metadata.hopefulTakeaway || metadata.consumerSummary || '연구 내용을 읽고 내 생활도 돌아보세요.'}</p></div>
-              </div>
-            </details>
           </div>
           <div className="research-library-sources"><h4>자료 출처</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료를 확인한 날 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
             <a key={`${source.url}-${source.title}`} href={source.url!} target="_blank" rel="noopener noreferrer" aria-label={`${source.title} 연구 출처 보기`}>연구 출처 보기 <span aria-label="새 창">↗</span></a>,

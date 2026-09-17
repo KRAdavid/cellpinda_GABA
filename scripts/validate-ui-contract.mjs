@@ -20,8 +20,6 @@ const review = await read('src/components/ReviewExperience.tsx');
 const teaser = await read('src/components/TeaserPreview.tsx');
 const research = await read('src/components/ResearchLibrary.tsx');
 const story = await read('src/components/GabaStory.tsx');
-const evidenceHighlights = await read('src/components/GabaEvidenceHighlights.tsx');
-const evidenceHighlightsStyles = await read('src/components/GabaEvidenceHighlights.css');
 const studyInsightVisual = await read('src/components/StudyInsightVisual.tsx');
 const brainLoadEvidence = await read('src/components/BrainLoadEvidence.tsx');
 const brainLoadEvidenceStyles = await read('src/components/BrainLoadEvidence.css');
@@ -36,7 +34,7 @@ const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research']) {
   requireMatch(app, new RegExp(`(?:id|href)=["']#?${id}["']`), `consumer section or link ${id} is missing`);
 }
-const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', '<GabaEvidenceHighlights', '<section id="fermentation"', '<section id="products"', '<ReviewExperience', '<ResearchLibrary', '<BrainLoadEvidence'];
+const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', '<ResearchLibrary', '<section id="fermentation"', '<section id="products"', '<ReviewExperience', '<BrainLoadEvidence'];
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA before research highlights, then lead through the product and reviews to secondary evidence');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
@@ -66,15 +64,12 @@ requireMatch(research, /연구 내용 더 보기/, 'research detail must use a c
 requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
 requireMatch(indexHtml, /연구를 쉽게 보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
-requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*GabaEvidenceHighlights/, 'the GABA explanation must precede the teaser and its research highlights');
-for (const marker of ['id="gaba-evidence"', 'research-yamatsu-2016', 'research-yoto-2012', 'research-heba-2016', 'research-powers-2008', 'research-sakashita-2019', 'consumerVisual', 'gaba-research-evening.png', 'GABA 사람 연구에서', '참여한 사람']) {
-  requireMatch(evidenceHighlights, new RegExp(marker), `GABA evidence highlight marker ${marker} is missing`);
-}
+requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*ResearchLibrary/, 'the GABA explanation and teaser must lead to one detailed research list');
+requireMatch(research, /canonicalStudySources/, 'research list must suppress duplicate records of the same paper across all source links');
+requireMatch(research, /궁금한 주제로[\s\S]*연구를 찾아보세요/, 'research list must have a clear consumer heading');
+requireMatch(story, /사람 연구 한곳에서 보기/, 'GABA introduction must link to the single research list');
+if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(app + story)) fail('a study result must appear in only one detailed research section');
 for (const marker of ['study-time-comparison', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
-if (/metadata\.consumerFinding|gaba-study-finding/.test(evidenceHighlights)) fail('GABA research cards must not repeat the graph result in a long paragraph');
-requireMatch(evidenceHighlights, /다른 연구도 더 살펴보기/, 'GABA evidence cards must provide a consumer next step');
-requireMatch(evidenceHighlightsStyles, /gaba-evidence-grid[\s\S]*grid-template-columns:repeat\(auto-fit/, 'GABA evidence highlights must use a responsive visual card grid');
-requireMatch(evidenceHighlightsStyles, /@media\(max-width:680px\)[\s\S]*gaba-evidence-grid[\s\S]*grid-template-columns:1fr/, 'GABA evidence highlights must stack on mobile');
 requireMatch(app, /한 포에 든 양 확인/, 'fermentation flow must use a consumer-friendly label');
 if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하기|수치와 제품 적용 문장은 펼쳐서|연구 카드에서 조건 확인|숫자와 출처 더 보기|근거 식별자|정량분석/.test(app + research + story + indexHtml)) fail('researcher-oriented detail labels leaked into consumer source');
 requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\s\S]*?\}, 180\)/, 'touch answers must auto-advance to the next question');
