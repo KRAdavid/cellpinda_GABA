@@ -119,6 +119,7 @@
 .research-story-card h4{align-self:center;font-size:12px}
 .research-story-card p{margin:.3rem 0 0;font-size:13px;line-height:1.55}
 .research-library-detail>.research-library-boundary{padding:10px 12px;font-size:13px}
+.research-library-product-scope{margin:10px 0 0;padding:10px 12px;border-left:3px solid #78a989;background:#f5f8f5;color:#53695c;font-size:12px;line-height:1.7}
 .research-copy{align-items:center;gap:6px;margin:10px 0 0;font-size:12px}
 @media(max-width:700px){
   .research-library>.section-head{align-items:flex-start;gap:7px}

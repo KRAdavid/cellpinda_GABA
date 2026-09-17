@@ -92,7 +92,7 @@ export default function App(){
   const type=value ? resultTypes[value] : null;
   const focusInvite=new URLSearchParams(location.search).get('focus')==='1' || location.pathname.endsWith('/focus/');
   if(!type&&!focusInvite)return;
-  const title=focusInvite ? '“너도 해봐” 1분 뇌컨디션 확인 챌린지 | 셀핀다' : `공유받은 하루 리듬: ‘${type!.name}’ | Cellpinda`;
+  const title=focusInvite ? '“너도 해봐” 1분 집중 리듬 게임 | 셀핀다' : `공유받은 하루 리듬: ‘${type!.name}’ | Cellpinda`;
   const description=focusInvite ? '색 신호를 누르고 멈추는 1분 게임이에요. 문제 순서는 할 때마다 달라져요.' : `친구가 고른 ‘${type!.name}’ 장면을 공유했어요. 내 체크 결과는 아니에요.`;
   document.title=title;
   const update=(selector:string,attribute:'name'|'property',value:string)=>{const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}=\"${selector}\"]`);if(element)element.content=value;else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}};

@@ -24,6 +24,7 @@ export type ResearchMetadata = {
 
 export type ConsumerVisual =
   | {kind:'before-after'; metric:string; unit:string; beforeLabel:string; beforeValue:number; beforeSd?:number; afterLabel:string; afterValue:number; afterSd?:number; seriesLabel:string; comparisonLabel?:string; scaleMax:number}
+  | {kind:'paired-before-after'; metric:string; unit:string; beforeLabel:string; afterLabel:string; groups:{label:string; participants:number; beforeValue:number; beforeSd?:number; afterValue:number; afterSd?:number}[]; scaleMax:number; comparisonLabel:string}
   | {kind:'metric-pair'; metrics:{label:string; value:string; unit:string; comparison:string}[]; participantLabel:string}
   | {kind:'study-journey'; steps:string[]; participantLabel:string; comparisonLabel:string; outcomes?:{label:string;result:string}[]}
   | {kind:'observational-link'; leftLabel:string; rightLabel:string; participantLabel:string; studyLabel:string; boundaryLabel:string}
@@ -158,13 +159,14 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       const metadata = claim.metadata!;
       const quickFacts = [
         {label: '참여한 사람', value: metadata.sampleSize, Icon: UsersRound},
-        {label: '먹은 양', value: metadata.dose || compactStudyType(metadata.studyType), Icon: FlaskConical},
+        {label: metadata.dose ? '연구에서 먹은 양' : '살펴본 방법', value: metadata.dose || compactStudyType(metadata.studyType), Icon: FlaskConical},
         {label: '기간', value: metadata.duration, Icon: Clock3},
       ].filter(item => item.value);
       return <article id={claim.id} className="research-library-card" key={claim.id}>
         <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType)}</p>
         <h3>{metadata.question || claim.topic}</h3>
         {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : metadata.consumerSummary ? <p className="research-library-consumer-summary">{metadata.consumerSummary}</p> : null}
+        {metadata.consumerVisual?.kind === 'paired-before-after' && metadata.productApplicability ? <p className="research-library-product-scope">{metadata.productApplicability}</p> : null}
         <div className="research-library-quick-facts" aria-label="연구를 한눈에 보는 도표">
           {quickFacts.map(({label, value, Icon}) => <div key={label} title={`${label}: ${value}`}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span><strong>{label}</strong><small>{value}</small></span></div>)}
         </div>

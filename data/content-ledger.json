@@ -335,7 +335,7 @@
     {
       "id": "research-byun-2018",
       "topic": "잠",
-      "publicText": "GABA가 없는 비슷한 정제와 비교한 4주 연구에서, GABA군의 평균 잠드는 시간은 13.4분에서 5.7분으로 줄었어요.",
+      "publicText": "잠드는 데 어려움을 겪던 성인 40명이 하루 GABA 300mg 정제 또는 GABA가 없는 비교 정제를 4주 먹고, 잠드는 시간을 기록했어요.",
       "status": "approved",
       "sources": [
         {
@@ -366,27 +366,40 @@
           "단일기관·소표본이고 위약군이 작습니다. 시작 시 수면 특성 일부가 달랐습니다.",
           "짧은 기간으로 장기 안전성을 확정하지 못합니다. 공급사 Natural Way가 연구를 지원했습니다."
         ],
-        "productApplicability": "이 연구는 발효 쌀배아 GABA 정제로 살펴봤어요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
+        "productApplicability": "이번 연구에 쓰인 발효 쌀배아 GABA 정제와 셀핀다 가바 1500은 별도 제품이에요. 셀핀다 제품의 한 포 함량과 먹는 방법은 포장 안내에서 확인해 주세요.",
         "consumerScope": "잠들기 어려움을 겪은 성인 40명이 참여했어요. 30명은 발효 쌀배아 GABA 정제를, 10명은 GABA가 들어 있지 않은 비슷한 정제를 4주 먹었어요.",
-        "consumerSummary": "성인 40명이 하루 GABA 300mg 정제나 GABA가 없는 비슷한 정제를 4주 먹었어요. 잠드는 시간 변화를 두 그룹에서 살펴봤어요.",
-        "consumerFinding": "GABA군 30명의 평균 잠드는 시간은 13.4분에서 5.7분으로 줄었어요. GABA가 없는 정제 그룹과 시간에 따른 변화도 비교했어요.",
+        "consumerSummary": "잠드는 데 어려움을 겪던 성인 40명이 하루 GABA 300mg 정제나 GABA가 없는 비슷한 정제를 4주 먹었어요. 잠드는 시간을 두 그룹에서 살펴봤어요.",
+        "consumerFinding": "GABA 정제 그룹 30명의 평균 잠드는 시간은 13.4분에서 5.7분, 비교 정제 그룹 10명은 7.0분에서 15.2분이었어요. 두 그룹의 시간 변화를 비교한 결과가 보고됐어요.",
         "consumerVisual": {
-          "kind": "before-after",
+          "kind": "paired-before-after",
           "metric": "잠들기까지 걸린 평균 시간",
           "unit": "분",
           "beforeLabel": "연구 시작",
-          "beforeValue": 13.4,
-          "beforeSd": 15.7,
           "afterLabel": "4주 뒤",
-          "afterValue": 5.7,
-          "afterSd": 6.2,
-          "seriesLabel": "GABA 정제 30명",
-          "comparisonLabel": "GABA 없는 정제와 비교한 연구",
-          "scaleMax": 15
+          "groups": [
+            {
+              "label": "GABA 정제",
+              "participants": 30,
+              "beforeValue": 13.4,
+              "beforeSd": 15.7,
+              "afterValue": 5.7,
+              "afterSd": 6.2
+            },
+            {
+              "label": "GABA 없는 비교 정제",
+              "participants": 10,
+              "beforeValue": 7.0,
+              "beforeSd": 4.9,
+              "afterValue": 15.2,
+              "afterSd": 24.6
+            }
+          ],
+          "comparisonLabel": "하루 300mg · 4주",
+          "scaleMax": 20
         },
         "hopefulTakeaway": "잠과 휴식에 관심이 생겼다면, 연구에서 확인한 내용과 셀핀다 가바 1500의 한 포 함량·먹는 방법을 차례로 확인해 보세요.",
         "sourcePopulation": "불면 증상을 호소한 성인",
-        "publicText": "GABA가 없는 비슷한 정제와 비교한 4주 연구에서, GABA군의 평균 잠드는 시간은 13.4분에서 5.7분으로 줄었어요."
+        "publicText": "잠드는 데 어려움을 겪던 성인 40명이 하루 GABA 300mg 정제 또는 GABA가 없는 비교 정제를 4주 먹고, 잠드는 시간을 기록했어요."
       }
     },
     {

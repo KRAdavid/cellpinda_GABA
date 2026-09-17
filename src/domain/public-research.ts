@@ -20,6 +20,15 @@ export function projectConsumerVisual(value:unknown):ValueRecord|undefined{
     if(value.comparisonLabel!==undefined&&!isText(value.comparisonLabel,180))return undefined;
     return {...value};
   }
+  if(value.kind==='paired-before-after'){
+    if(!exactShape(value,['kind','metric','unit','beforeLabel','afterLabel','groups','scaleMax','comparisonLabel'])||!isText(value.metric,160)||!isText(value.unit,24)||!isText(value.beforeLabel,60)||!isText(value.afterLabel,60)||!Array.isArray(value.groups)||value.groups.length<2||value.groups.length>4||!isNumber(value.scaleMax,10_000)||value.scaleMax===0||!isText(value.comparisonLabel,240))return undefined;
+    const groups=value.groups.map(item=>{
+      if(!isRecord(item)||!exactShape(item,['label','participants','beforeValue','afterValue'],['beforeSd','afterSd'])||!isText(item.label,160)||!isNumber(item.participants,10_000)||item.participants<1||!isNumber(item.beforeValue,10_000)||!isNumber(item.afterValue,10_000))return null;
+      if(item.beforeSd!==undefined&&!isNumber(item.beforeSd,10_000)||item.afterSd!==undefined&&!isNumber(item.afterSd,10_000))return null;
+      return {...item};
+    });
+    return groups.some(item=>item===null)?undefined:{kind:value.kind,metric:value.metric,unit:value.unit,beforeLabel:value.beforeLabel,afterLabel:value.afterLabel,groups,scaleMax:value.scaleMax,comparisonLabel:value.comparisonLabel};
+  }
   if(value.kind==='metric-pair'){
     if(!exactShape(value,['kind','metrics','participantLabel'])||!isText(value.participantLabel,180)||!Array.isArray(value.metrics)||value.metrics.length<1||value.metrics.length>4)return undefined;
     const metrics=value.metrics.map(item=>{
