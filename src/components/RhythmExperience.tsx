@@ -72,7 +72,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
       ? '여러 장면에서 머리가 쉴 틈이 부족했다고 답했어요.'
       : score >= 5
         ? '몇 가지 장면에서 쉬는 신호가 겹쳤어요.'
-        : '답변에서 쉬는 신호가 적은 편이에요.';
+        : '축하합니다! 최근 7일 답변에서는 뇌 컨디션이 좋은 편이에요.';
   const brainPath = 'M108 29c-8-12-24-13-34-4-13-4-27 5-27 19-14 5-18 21-8 31-5 14 5 28 19 29 7 12 23 14 34 5 8 8 19 8 27 0 10 9 25 6 30-6 14 1 25-12 21-26 11-10 8-27-5-34-1-14-15-23-28-18-7-7-19-7-29 4z';
 
   return (
@@ -104,7 +104,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
           <div className="rhythm-load-segments" aria-hidden="true">
             {Array.from({ length: 15 }, (_, index) => <i key={index} className={index < score ? 'is-filled' : ''} />)}
           </div>
-          <span>최근 일주일 동안 쉬는 시간이 필요했다고 답한 정도예요.</span>
+          <span>최근 7일, 쉬어야겠다고 느낀 정도를 점수로 보여줘요.</span>
         </div>
       </div>
       <progress className="rhythm-load-progress-accessible" value={score} max={15} aria-label={`최근 7일 생활 신호 ${score}점, 15점 만점`} />
