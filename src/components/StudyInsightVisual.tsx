@@ -14,7 +14,7 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
     const difference=Math.abs(visual.beforeValue-visual.afterValue);
     const direction=visual.afterValue<visual.beforeValue?'down':'up';
     return <figure className="study-insight study-insight--before-after" aria-label={`${visual.seriesLabel}, ${visual.metric}: ${visual.beforeLabel} ${visual.beforeValue}${visual.unit}, ${visual.afterLabel} ${visual.afterValue}${visual.unit}`}>
-      <figcaption><Clock3 size={18} aria-hidden="true"/>{visual.metric}</figcaption>
+      <figcaption><Clock3 size={18} aria-hidden="true"/>{visual.metric}{visual.comparisonLabel?<span>{visual.comparisonLabel}</span>:null}</figcaption>
       <div className="study-time-comparison">
         <div><span>{visual.beforeLabel}</span><strong>{numberText(visual.beforeValue)}<small>{visual.unit}</small></strong></div>
         <ArrowRight className="study-time-arrow" size={22} aria-hidden="true"/>

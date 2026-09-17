@@ -15,8 +15,9 @@ function textList(value:unknown,min:number,max:number):value is string[]{
 export function projectConsumerVisual(value:unknown):ValueRecord|undefined{
   if(!isRecord(value)||typeof value.kind!=='string')return undefined;
   if(value.kind==='before-after'){
-    if(!exactShape(value,['kind','metric','unit','beforeLabel','beforeValue','afterLabel','afterValue','seriesLabel','scaleMax'],['beforeSd','afterSd'])||!isText(value.metric)||!isText(value.unit,24)||!isText(value.beforeLabel,60)||!isNumber(value.beforeValue,10_000)||!isText(value.afterLabel,60)||!isNumber(value.afterValue,10_000)||!isText(value.seriesLabel,180)||!isNumber(value.scaleMax,10_000)||value.scaleMax===0)return undefined;
+    if(!exactShape(value,['kind','metric','unit','beforeLabel','beforeValue','afterLabel','afterValue','seriesLabel','scaleMax'],['beforeSd','afterSd','comparisonLabel'])||!isText(value.metric)||!isText(value.unit,24)||!isText(value.beforeLabel,60)||!isNumber(value.beforeValue,10_000)||!isText(value.afterLabel,60)||!isNumber(value.afterValue,10_000)||!isText(value.seriesLabel,180)||!isNumber(value.scaleMax,10_000)||value.scaleMax===0)return undefined;
     if(value.beforeSd!==undefined&&!isNumber(value.beforeSd,10_000)||value.afterSd!==undefined&&!isNumber(value.afterSd,10_000))return undefined;
+    if(value.comparisonLabel!==undefined&&!isText(value.comparisonLabel,180))return undefined;
     return {...value};
   }
   if(value.kind==='metric-pair'){

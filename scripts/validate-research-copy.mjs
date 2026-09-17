@@ -27,7 +27,7 @@ if (heba?.publicText?.includes('12%') || heba?.metadata?.consumerSummary?.includ
 const yoon = research.find(claim => claim.id === 'research-yoon-2022');
 if (!yoon?.metadata?.consumerSummary?.includes('수면 기록') || yoon.metadata?.consumerVisual || /짧아졌|줄었|개선|높아졌/.test(yoon.publicText)) fail('Yoon study must not present within-group sleep changes as an improvement claim');
 const byun = research.find(claim => claim.id === 'research-byun-2018');
-if (!byun?.metadata?.consumerSummary?.includes('비교 정제') || byun.metadata?.consumerVisual || /13\.4|5\.7|짧아졌|줄었|높아졌|개선/.test(byun.publicText)) fail('Byun study must describe its measurements without presenting within-group change as a benefit');
+if (!byun?.publicText?.includes('GABA가 없는') || !byun.publicText.includes('13.4분에서 5.7분') || byun.metadata?.consumerVisual?.kind !== 'before-after' || !byun.metadata.consumerVisual.comparisonLabel?.includes('GABA 없는 정제') || !byun.metadata.consumerFinding?.includes('시간에 따른 변화')) fail('Byun study must name its GABA-free comparison when showing the sleep-latency result');
 const powers = research.find(claim => claim.id === 'research-powers-2008');
 if (!powers?.metadata?.consumerSummary?.includes('성장호르몬 수치') || powers.metadata?.consumerVisual || /4배|높았/.test(powers.publicText)) fail('Powers study must present a hormone measurement without implying a health benefit');
 const sakashita = research.find(claim => claim.id === 'research-sakashita-2019');

@@ -335,7 +335,7 @@
     {
       "id": "research-byun-2018",
       "topic": "잠",
-      "publicText": "발효 쌀배아 GABA 정제와 비교 정제를 4주 먹고, 잠드는 시간과 수면 기록을 살펴봤어요.",
+      "publicText": "GABA가 없는 비슷한 정제와 비교한 4주 연구에서, GABA군의 평균 잠드는 시간은 13.4분에서 5.7분으로 줄었어요.",
       "status": "approved",
       "sources": [
         {
@@ -353,7 +353,7 @@
       "reviewedBy": "AI 근거·편집 검토",
       "reviewedAt": "2026-09-10",
       "metadata": {
-        "question": "발효 쌀배아 GABA 정제를 4주 먹은 연구에서 무엇을 살펴봤나요?",
+        "question": "GABA 정제와 GABA 없는 정제, 잠드는 시간은 어떻게 달랐나요?",
         "studyType": "무작위·이중눈가림·위약대조 시험",
         "population": "잠드는 데 어려움을 겪은 성인",
         "sampleSize": "성인 40명 (GABA 정제 30명, GABA 없는 정제 10명)",
@@ -368,11 +368,25 @@
         ],
         "productApplicability": "이 연구는 발효 쌀배아 GABA 정제로 살펴봤어요. 셀핀다 제품의 한 포에 든 양과 먹는 방법은 제품 포장에서 확인해 보세요.",
         "consumerScope": "잠들기 어려움을 겪은 성인 40명이 참여했어요. 30명은 발효 쌀배아 GABA 정제를, 10명은 GABA가 들어 있지 않은 비슷한 정제를 4주 먹었어요.",
-        "consumerSummary": "성인 40명이 하루 GABA 300mg 정제 또는 비교 정제를 4주 먹었어요. 잠드는 시간과 수면 기록을 살펴봤어요.",
-        "consumerFinding": "이 연구는 잠드는 시간과 수면 기록을 살펴봤어요. 참여자는 성인 40명이고, 4주 동안 두 종류의 정제를 비교했어요.",
+        "consumerSummary": "성인 40명이 하루 GABA 300mg 정제나 GABA가 없는 비슷한 정제를 4주 먹었어요. 잠드는 시간 변화를 두 그룹에서 살펴봤어요.",
+        "consumerFinding": "GABA군 30명의 평균 잠드는 시간은 13.4분에서 5.7분으로 줄었어요. GABA가 없는 정제 그룹과 시간에 따른 변화도 비교했어요.",
+        "consumerVisual": {
+          "kind": "before-after",
+          "metric": "잠들기까지 걸린 평균 시간",
+          "unit": "분",
+          "beforeLabel": "연구 시작",
+          "beforeValue": 13.4,
+          "beforeSd": 15.7,
+          "afterLabel": "4주 뒤",
+          "afterValue": 5.7,
+          "afterSd": 6.2,
+          "seriesLabel": "GABA 정제 30명",
+          "comparisonLabel": "GABA 없는 정제와 비교한 연구",
+          "scaleMax": 15
+        },
         "hopefulTakeaway": "잠과 휴식에 관심이 생겼다면, 연구에서 확인한 내용과 셀핀다 가바 1500의 한 포 함량·먹는 방법을 차례로 확인해 보세요.",
         "sourcePopulation": "불면 증상을 호소한 성인",
-        "publicText": "발효 쌀배아 GABA 정제와 비교 정제를 4주 먹고, 잠드는 시간과 수면 기록을 살펴봤어요."
+        "publicText": "GABA가 없는 비슷한 정제와 비교한 4주 연구에서, GABA군의 평균 잠드는 시간은 13.4분에서 5.7분으로 줄었어요."
       }
     },
     {
