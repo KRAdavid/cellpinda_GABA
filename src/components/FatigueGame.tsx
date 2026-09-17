@@ -2,12 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight, Brain, CheckCircle2, CircleAlert, ExternalLink, Pause, Play, RotateCcw, Timer, Volume2, VolumeX } from 'lucide-react';
 import {
   compareFocusGames,
+  createFocusRunPattern,
   FOCUS_GAME_STAGES,
   FOCUS_GAME_TRIALS_PER_STAGE,
+  FOCUS_GAME_TOTAL_TRIALS,
   needsFocusRecovery,
   summarizeFocusGame,
+  type FocusRunPattern,
   type FocusGameStage,
   type FocusGameSummary,
+  type FocusStimulusColor,
+  type FocusStimulusShape,
+  type FocusTrialPlan,
   type FocusTrialRecord,
 } from '../domain/fatigue-game';
 import { BREATH_ACTIVE_SECONDS, BREATH_CYCLE_SECONDS, getBreathCue, type BreathCue, type BreathStage } from '../domain/breath-guide';
@@ -15,7 +21,15 @@ import './fatigue-game.css';
 
 type GamePhase = 'idle' | 'running' | 'baseline-complete' | 'baseline-finished' | 'rest' | 'complete';
 type GameMode = 'baseline' | 'after';
-type StimulusColor = 'green' | 'purple' | 'red';
+type Trial = FocusTrialPlan;
+type RunPattern = FocusRunPattern;
+
+const shapeLabels: Record<FocusStimulusShape, string> = {
+  circle: '동그라미',
+  diamond: '마름모',
+  ring: '테두리 원',
+  triangle: '세모',
+};
 
 const breathStageCopy: Record<BreathStage, { title: string; detail: string }> = {
   inhale: { title: '숨 들이쉬기', detail: '공이 올라가는 동안 · 4초' },
@@ -24,19 +38,6 @@ const breathStageCopy: Record<BreathStage, { title: string; detail: string }> = 
   'hold-bottom': { title: '다시 멈추기', detail: '공이 아래에 머무는 동안 · 2초' },
   finish: { title: '편한 호흡으로 마무리', detail: '숨을 세지 말고 자연스럽게 돌아오세요' },
 };
-
-interface Trial {
-  stage: FocusGameStage;
-  stimulusColor: StimulusColor;
-  targetColor: StimulusColor;
-  shouldRespond: boolean;
-}
-
-interface RunPattern {
-  brakeStopIndex: number;
-  switchTargetColors: StimulusColor[];
-  switchShouldRespond: boolean[];
-}
 
 interface FatigueGameProps {
   onEvent: (name: string, properties?: Record<string, string>) => void;
@@ -76,33 +77,21 @@ function createRelaxationAudio(): RelaxationAudio | null {
 }
 
 const stageInfo: Record<FocusGameStage, { label: string; instruction: string; detail: string }> = {
-  speed: { label: '반응 속도', instruction: '색이 보이면 바로 눌러요', detail: '신호를 잡는 속도' },
-  brake: { label: '멈춤 억제', instruction: '초록은 누르고 빨강은 참아요', detail: '눌러야 할 때와 멈출 때' },
-  switch: { label: '규칙 전환', instruction: '위의 색과 같은 신호만 눌러요', detail: '바뀐 규칙에 적응하는 속도' },
+  speed: { label: '반응 속도', instruction: '신호가 나타나면 바로 눌러요', detail: '색과 모양이 순서 없이 바뀝니다' },
+  brake: { label: '멈춤 신호', instruction: '초록은 누르고 빨강은 참아요', detail: '8개 중 3개는 눌러서는 안 되는 신호예요' },
+  switch: { label: '규칙 전환', instruction: '위 기준색과 같은 신호만 눌러요', detail: '모양은 무시하고, 바뀌는 색 규칙만 따라요' },
 };
 
-function shuffled<T>(items: T[]): T[] {
-  return items.map(item => ({item, order: Math.random()})).sort((a, b) => a.order - b.order).map(({item}) => item);
-}
-
-function createRunPattern(): RunPattern {
-  return {
-    brakeStopIndex: Math.floor(Math.random() * FOCUS_GAME_TRIALS_PER_STAGE),
-    switchTargetColors: shuffled(['green', 'purple', 'green', 'purple'] as StimulusColor[]),
-    switchShouldRespond: shuffled([true, true, false, false]),
-  };
+function trialPrompt(trial: Trial): string {
+  const color = (value: FocusStimulusColor) => value === 'green' ? '초록' : value === 'purple' ? '보라' : '빨강';
+  if (trial.stage === 'speed') return `${shapeLabels[trial.stimulusShape]} ${color(trial.stimulusColor)} 신호 · 바로 누르기`;
+  if (trial.stage === 'brake') return trial.shouldRespond ? '초록 신호 · 누르기' : '빨강 신호 · 누르지 않기';
+  return `기준 ${color(trial.targetColor)} · 신호 ${color(trial.stimulusColor)} · ${trial.shouldRespond ? '누르기' : '누르지 않기'}`;
 }
 
 function createTrial(stageIndex: number, trialIndex: number, pattern: RunPattern): Trial {
   const stage = FOCUS_GAME_STAGES[stageIndex]!;
-  if (stage === 'speed') return { stage, stimulusColor: 'green', targetColor: 'green', shouldRespond: true };
-  if (stage === 'brake') {
-    const shouldRespond = trialIndex !== pattern.brakeStopIndex;
-    return { stage, stimulusColor: shouldRespond ? 'green' : 'red', targetColor: 'green', shouldRespond };
-  }
-  const targetColor = pattern.switchTargetColors[trialIndex]!;
-  const shouldRespond = pattern.switchShouldRespond[trialIndex]!;
-  return { stage, stimulusColor: shouldRespond ? targetColor : targetColor === 'green' ? 'purple' : 'green', targetColor, shouldRespond };
+  return pattern.trials[stage][trialIndex]!;
 }
 
 function metricText(value: number | null, suffix = 'ms'): string {
@@ -245,7 +234,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
   const [status, setStatus] = useState('');
   const timerRef = useRef<number | null>(null);
   const stimulusAtRef = useRef(0);
-  const runPatternRef = useRef<RunPattern>(createRunPattern());
+  const runPatternRef = useRef<RunPattern>(createFocusRunPattern());
   const audioRef = useRef<RelaxationAudio | null>(null);
   const audioPromptTimersRef = useRef<number[]>([]);
   const restClockIntervalRef = useRef<number | null>(null);
@@ -390,16 +379,15 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
   useEffect(() => {
     if (phase !== 'running') return;
     if (!stimulusVisible) {
-      const delay = 650 + Math.floor(Math.random() * 750);
+      const nextTrial = createTrial(stageIndex, trialIndex, runPatternRef.current);
       timerRef.current = window.setTimeout(() => {
-        const nextTrial = createTrial(stageIndex, trialIndex, runPatternRef.current);
         setTrial(nextTrial);
         stimulusAtRef.current = performance.now();
         setStimulusVisible(true);
-        setStatus(nextTrial.shouldRespond ? '지금 눌러요' : nextTrial.stage === 'brake' ? '빨강이면 멈춰요' : '규칙을 보고 판단해요');
-      }, delay);
+        setStatus(trialPrompt(nextTrial));
+      }, nextTrial.foreperiodMs);
     } else {
-      timerRef.current = window.setTimeout(() => finishTrial(false), 1450);
+      timerRef.current = window.setTimeout(() => finishTrial(false), trial?.responseWindowMs ?? 1_200);
     }
     return () => {
       if (timerRef.current !== null) window.clearTimeout(timerRef.current);
@@ -447,7 +435,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
     stopRestClock();
     stopRelaxationAudio();
     setMode(nextMode);
-    runPatternRef.current = createRunPattern();
+    runPatternRef.current = createFocusRunPattern(Math.random, runPatternRef.current.signature);
     setStageIndex(0);
     setTrialIndex(0);
     setTrial(null);
@@ -511,7 +499,7 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
   }
 
   const currentStage = stageInfo[FOCUS_GAME_STAGES[stageIndex]!];
-  const switchRule = trial?.targetColor ?? runPatternRef.current.switchTargetColors[trialIndex] ?? 'green';
+  const switchRule = trial?.targetColor ?? runPatternRef.current.trials.switch[trialIndex]?.targetColor ?? 'green';
   const comparison = before && after ? comparisonText(before, after) : null;
   const recoveryNeeded = after ? needsFocusRecovery(after) : false;
   const metrics = before && after ? [
@@ -529,8 +517,8 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
 
       <div className={`fatigue-game-panel fatigue-game-phase-${phase}`}>
         {phase === 'idle' ? <div className="fatigue-game-intro">
-          <div className="fatigue-game-intro-copy"><h3>반응·멈춤·전환을<br />한 번에 게임으로 확인해요.</h3><p>3가지 짧은 과제를 12번 수행합니다. 연구에서 쓰이는 과제 형태를 참고했지만, 결과는 쉬기 전후의 내 집중 리듬을 비교하는 개인 기록이에요.</p>
-            <div className="fatigue-stage-preview" aria-label="게임 세 단계"><div><span>01</span><strong>반응</strong><small>신호를 잡기</small></div><div><span>02</span><strong>멈춤</strong><small>빨강을 참기</small></div><div><span>03</span><strong>전환</strong><small>규칙 바꾸기</small></div></div>
+          <div className="fatigue-game-intro-copy"><h3>반응·멈춤·전환을<br />한 번에 게임으로 확인해요.</h3><p>3단계, 신호 {FOCUS_GAME_TOTAL_TRIALS}개에 도전해요. 색·모양·규칙·신호 간격은 매번 무작위로 달라집니다. 쉬기 전과 후에는 다른 문제가 나오지만, 단계별 문항 수와 제한 시간은 같아 기록을 비교할 수 있어요.</p>
+            <div className="fatigue-stage-preview" aria-label="점점 어려워지는 게임 세 단계"><div><span>01</span><strong>반응</strong><small>색·모양 바뀜 · 8개</small></div><div><span>02</span><strong>멈춤</strong><small>빨강 3개는 참기</small></div><div><span>03</span><strong>전환</strong><small>색 기준 바꾸기 · 모양 무시</small></div></div>
             <details className="fatigue-game-method"><summary>왜 이 세 가지인가요?</summary><p>반응 속도, Go/No-Go 억제, 과제 전환은 집중과 인지 조절을 살펴볼 때 자주 사용하는 과제 형태입니다. 화면 지연·기기·수면·주변 환경의 영향을 받으므로 표준화된 진단 점수로 해석하지 않습니다.</p><div><a href="https://pubmed.ncbi.nlm.nih.gov/17850833/" target="_blank" rel="noopener noreferrer">Go/No-Go 연구 예시 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/29517261/" target="_blank" rel="noopener noreferrer">과제 전환 리뷰 <ExternalLink size={14} aria-hidden="true" /></a></div></details>
           </div>
           <div className="fatigue-game-intro-side"><FocusJourneyVisual /><div className="fatigue-game-intro-actions"><button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Brain size={18} aria-hidden="true" /> 게임 시작 <ArrowRight size={18} aria-hidden="true" /></button>{onInvite ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}><ArrowUpRight size={18} aria-hidden="true" /> 친구에게 “너도 해봐” 보내기</button> : null}</div></div>
@@ -541,8 +529,8 @@ export default function FatigueGame({ onEvent, onInvite, startOnMount = false }:
           <div className="fatigue-stage-instruction"><strong>{currentStage.instruction}</strong><span>{currentStage.detail}</span></div>
           {FOCUS_GAME_STAGES[stageIndex] === 'switch' ? <div className="fatigue-rule-display"><span>이번 규칙</span><strong className={`fatigue-rule-color fatigue-rule-color-${switchRule}`}>{switchRule === 'green' ? '초록' : '보라'}</strong><small>이 색 신호만 누르기</small></div> : null}
           <div className="fatigue-trial-dots" aria-label={`현재 단계 ${trialIndex + 1}번째 신호`}>{Array.from({length: FOCUS_GAME_TRIALS_PER_STAGE}, (_, index) => <span key={index} className={index < trialIndex ? 'done' : index === trialIndex ? 'current' : ''} />)}</div>
-          <button type="button" className={`fatigue-target fatigue-target-${trial?.stimulusColor ?? 'waiting'}${stimulusVisible ? ' visible' : ''}`} onClick={tapStimulus} aria-label={stimulusVisible ? '현재 신호에 반응하기' : '신호를 기다리는 중'}>
-            {stimulusVisible ? trial?.stage === 'brake' && trial.stimulusColor === 'red' ? <span className="fatigue-target-stop">멈춤</span> : <span className="fatigue-target-dot" /> : <span className="fatigue-target-wait">·</span>}
+          <button type="button" className={`fatigue-target fatigue-target-${trial?.stimulusColor ?? 'waiting'}${stimulusVisible ? ' visible' : ''}`} onClick={tapStimulus} aria-label={stimulusVisible && trial ? trialPrompt(trial) : '신호를 기다리는 중'}>
+            {stimulusVisible && trial ? trial.stage === 'speed' || trial.stage === 'switch' ? <span className={`fatigue-target-shape fatigue-target-shape-${trial.stimulusShape}`} aria-hidden="true" /> : trial.stage === 'brake' && !trial.shouldRespond ? <span className="fatigue-target-stop">멈춤</span> : <span className="fatigue-target-dot" /> : <span className="fatigue-target-wait">·</span>}
           </button>
           <p className="fatigue-game-status" aria-live="polite">{status}</p>
         </div> : null}

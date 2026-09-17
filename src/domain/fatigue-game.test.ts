@@ -1,6 +1,21 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { compareFocusGames, compareReactionGames, FATIGUE_GAME_ROUNDS, FOCUS_GAME_RECOVERY_THRESHOLD_PCT, FOCUS_GAME_STAGES, FOCUS_GAME_TRIALS_PER_STAGE, needsFocusRecovery, summarizeFocusGame, summarizeReactionGame, type FocusTrialRecord } from './fatigue-game.ts';
+import {
+  compareFocusGames,
+  compareReactionGames,
+  createFocusRunPattern,
+  FATIGUE_GAME_ROUNDS,
+  FOCUS_GAME_RECOVERY_THRESHOLD_PCT,
+  FOCUS_GAME_STAGES,
+  FOCUS_GAME_TOTAL_TRIALS,
+  FOCUS_GAME_TRIALS_PER_STAGE,
+  FOCUS_STIMULUS_SHAPES,
+  needsFocusRecovery,
+  summarizeFocusGame,
+  summarizeReactionGame,
+  type FocusGameStage,
+  type FocusTrialRecord,
+} from './fatigue-game.ts';
 
 test('summarizes five rounds without turning misses into a zero', () => {
   const summary = summarizeReactionGame([300, null, 500, 400, null], 1);
@@ -32,7 +47,7 @@ function focusRecords(speedMs = 420, brakeCorrect = true, switchCorrect = true):
 
 test('summarizes speed, inhibition and switching stages separately', () => {
   const summary = summarizeFocusGame(focusRecords(410));
-  assert.equal(summary.total, 12);
+  assert.equal(summary.total, FOCUS_GAME_TOTAL_TRIALS);
   assert.equal(summary.speed.averageMs, 410);
   assert.equal(summary.brake.accuracyPct, 100);
   assert.equal(summary.switch.accuracyPct, 100);
@@ -45,8 +60,8 @@ test('compares the same person before and after the focus challenge', () => {
   const comparison = compareFocusGames(before, after);
   assert.equal(comparison.direction, 'improved');
   assert.equal(comparison.speedDeltaMs, -90);
-  assert.equal(comparison.accuracyDeltaPct, 42);
-  assert.equal(comparison.brakeDeltaPct, 75);
+  assert.equal(comparison.accuracyDeltaPct, 46);
+  assert.equal(comparison.brakeDeltaPct, 87);
   assert.equal(comparison.switchDeltaPct, 50);
 });
 
@@ -54,16 +69,86 @@ test('opens recovery guidance at or below the published accuracy threshold', () 
   const strong = summarizeFocusGame(focusRecords(420));
   const low = summarizeFocusGame(focusRecords(420, false, false));
   assert.equal(strong.accuracyPct, 100);
-  assert.equal(low.accuracyPct, 58);
+  assert.equal(low.accuracyPct, 54);
   assert.equal(needsFocusRecovery(strong), false);
   assert.equal(needsFocusRecovery(low), true);
   assert.equal(FOCUS_GAME_RECOVERY_THRESHOLD_PCT, 70);
 });
 
 test('rejects malformed focus challenge records', () => {
-  assert.throws(() => summarizeFocusGame(focusRecords().slice(0, 11)), TypeError);
+  assert.throws(() => summarizeFocusGame(focusRecords().slice(0, FOCUS_GAME_TOTAL_TRIALS - 1)), TypeError);
   assert.throws(() => summarizeFocusGame(focusRecords().map((record, index) => index === 0 ? {...record, stage: 'switch'} : record)), TypeError);
   assert.throws(() => summarizeFocusGame(focusRecords().map((record, index) => index === 0 ? {...record, responded: true, responseMs: null} : record)), TypeError);
   assert.throws(() => summarizeFocusGame(focusRecords().map((record, index) => index === 0 ? {...record, responded: false, responseMs: 300} : record)), TypeError);
   assert.throws(() => summarizeFocusGame(focusRecords().map((record, index) => index === 0 ? {...record, correct: false} : record)), TypeError);
+});
+
+function count<T>(values: readonly T[], target: T): number {
+  return values.filter(value => value === target).length;
+}
+
+function assertNoLongRuns<T>(values: readonly T[]) {
+  for (let index = 2; index < values.length; index += 1) {
+    assert.ok(values[index] !== values[index - 1] || values[index] !== values[index - 2]);
+  }
+}
+
+function assertStageTiming(form: ReturnType<typeof createFocusRunPattern>, stage: FocusGameStage, minimum: number, maximum: number, responseWindowMs: number) {
+  for (const trial of form.trials[stage]) {
+    assert.ok(trial.foreperiodMs >= minimum && trial.foreperiodMs <= maximum);
+    assert.equal(trial.responseWindowMs, responseWindowMs);
+  }
+}
+
+test('builds a balanced, progressively harder randomized form with fixed comparison conditions', () => {
+  const form = createFocusRunPattern();
+  assert.equal(FOCUS_GAME_TOTAL_TRIALS, 24);
+  for (const stage of FOCUS_GAME_STAGES) assert.equal(form.trials[stage].length, 8);
+
+  const speed = form.trials.speed;
+  assert.equal(count(speed.map(trial => trial.stimulusColor), 'green'), 4);
+  assert.equal(count(speed.map(trial => trial.stimulusColor), 'purple'), 4);
+  for (const shape of FOCUS_STIMULUS_SHAPES) assert.equal(count(speed.map(trial => trial.stimulusShape), shape), 2);
+  assertNoLongRuns(speed.map(trial => trial.stimulusShape));
+  assertNoLongRuns(speed.map(trial => trial.stimulusColor));
+  assert.ok(speed.every(trial => trial.shouldRespond));
+
+  const brake = form.trials.brake;
+  assert.equal(brake.filter(trial => trial.shouldRespond).length, 5);
+  assert.equal(brake.filter(trial => !trial.shouldRespond).length, 3);
+  assert.ok(brake.every(trial => trial.stimulusColor === (trial.shouldRespond ? 'green' : 'red')));
+  assertNoLongRuns(brake.map(trial => trial.shouldRespond));
+
+  const switching = form.trials.switch;
+  const targets = switching.map(trial => trial.targetColor);
+  assert.equal(count(targets, 'green'), 4);
+  assert.equal(count(targets, 'purple'), 4);
+  assert.ok(targets.slice(1).filter((value, index) => value !== targets[index]).length >= 4);
+  assertNoLongRuns(targets);
+  assert.equal(switching.filter(trial => trial.shouldRespond).length, 5);
+  assert.equal(switching.filter(trial => !trial.shouldRespond).length, 3);
+  assert.ok(switching.every(trial => trial.shouldRespond === (trial.stimulusColor === trial.targetColor)));
+  assertNoLongRuns(switching.map(trial => trial.shouldRespond));
+  for (const shape of FOCUS_STIMULUS_SHAPES) assert.equal(count(switching.map(trial => trial.stimulusShape), shape), 2);
+
+  assertStageTiming(form, 'speed', 750, 1_550, 1_700);
+  assertStageTiming(form, 'brake', 650, 1_400, 1_450);
+  assertStageTiming(form, 'switch', 500, 1_200, 1_200);
+});
+
+test('changes question forms on repeat, including with a deterministic random source', () => {
+  const signatures = new Set(Array.from({ length: 12 }, () => createFocusRunPattern().signature));
+  assert.ok(signatures.size > 1, 'normal random runs should produce different forms');
+
+  const first = createFocusRunPattern(() => 0);
+  const second = createFocusRunPattern(() => 0, first.signature);
+  assert.notEqual(second.signature, first.signature);
+  assert.equal(count(second.trials.speed.map(trial => trial.stimulusColor), 'green'), 4);
+  assertNoLongRuns(second.trials.speed.map(trial => trial.stimulusShape));
+  assertNoLongRuns(second.trials.speed.map(trial => trial.stimulusColor));
+  assertNoLongRuns(second.trials.switch.map(trial => trial.targetColor));
+});
+
+test('rejects a random source outside the expected range', () => {
+  assert.throws(() => createFocusRunPattern(() => 1), RangeError);
 });

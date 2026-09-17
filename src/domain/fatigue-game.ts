@@ -5,12 +5,180 @@
  */
 export const FATIGUE_GAME_ROUNDS = 5;
 
-/** Three short, research-inspired tasks used for a personal before/after run. */
-export const FOCUS_GAME_TRIALS_PER_STAGE = 4;
+/** Three progressively harder tasks; each form keeps equal counts for fair personal comparisons. */
+export const FOCUS_GAME_STAGES = ['speed', 'brake', 'switch'] as const;
+export const FOCUS_GAME_TRIALS_PER_STAGE = 8;
+export const FOCUS_GAME_TOTAL_TRIALS = FOCUS_GAME_STAGES.length * FOCUS_GAME_TRIALS_PER_STAGE;
 /** Accuracy at or below this level opens an extra rest-and-retest prompt. */
 export const FOCUS_GAME_RECOVERY_THRESHOLD_PCT = 70;
-export const FOCUS_GAME_STAGES = ['speed', 'brake', 'switch'] as const;
 export type FocusGameStage = (typeof FOCUS_GAME_STAGES)[number];
+export const FOCUS_STIMULUS_SHAPES = ['circle', 'diamond', 'ring', 'triangle'] as const;
+export type FocusStimulusShape = (typeof FOCUS_STIMULUS_SHAPES)[number];
+export type FocusStimulusColor = 'green' | 'purple' | 'red';
+
+export interface FocusTrialPlan {
+  readonly stage: FocusGameStage;
+  readonly stimulusColor: FocusStimulusColor;
+  readonly targetColor: FocusStimulusColor;
+  readonly stimulusShape: FocusStimulusShape;
+  readonly shouldRespond: boolean;
+  readonly foreperiodMs: number;
+  readonly responseWindowMs: number;
+}
+
+export interface FocusRunPattern {
+  readonly trials: Readonly<Record<FocusGameStage, readonly FocusTrialPlan[]>>;
+  /** Stimulus order only; timing jitter does not count as a different form. */
+  readonly signature: string;
+}
+
+const stageTiming = {
+  speed: { foreperiod: [750, 1_550] as const, responseWindowMs: 1_700 },
+  brake: { foreperiod: [650, 1_400] as const, responseWindowMs: 1_450 },
+  switch: { foreperiod: [500, 1_200] as const, responseWindowMs: 1_200 },
+};
+
+function randomIndex(length: number, random: () => number): number {
+  const value = random();
+  if (!Number.isFinite(value) || value < 0 || value >= 1) throw new RangeError('random must return a number in [0, 1)');
+  return Math.floor(value * length);
+}
+
+function shuffle<T>(values: readonly T[], random: () => number): T[] {
+  const result = [...values];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const other = randomIndex(index + 1, random);
+    [result[index], result[other]] = [result[other]!, result[index]!];
+  }
+  return result;
+}
+
+function randomizedBalanced<T>(
+  values: readonly T[],
+  isValid: (sequence: readonly T[]) => boolean,
+  fallback: readonly T[],
+  random: () => number,
+): T[] {
+  for (let attempt = 0; attempt < 80; attempt += 1) {
+    const candidate = shuffle(values, random);
+    if (isValid(candidate)) return candidate;
+  }
+  return [...fallback];
+}
+
+function hasNoAdjacentStopSignals(sequence: readonly boolean[]): boolean {
+  return sequence.every((respond, index) => respond || index === 0 || sequence[index - 1]);
+}
+
+function hasAtMostTwoConsecutive<T>(sequence: readonly T[]): boolean {
+  return sequence.every((value, index) => index < 2 || value !== sequence[index - 1] || value !== sequence[index - 2]);
+}
+
+function ruleChanges(sequence: readonly FocusStimulusColor[]): number {
+  return sequence.slice(1).filter((color, index) => color !== sequence[index]).length;
+}
+
+function getFormSignature(trials: Readonly<Record<FocusGameStage, readonly FocusTrialPlan[]>>): string {
+  return FOCUS_GAME_STAGES.flatMap(stage => trials[stage].map(trial =>
+    [stage, trial.stimulusColor, trial.targetColor, trial.stimulusShape, trial.shouldRespond].join(':'))).join('|');
+}
+
+/**
+ * Build a balanced random form. Difficulty rises by stage, while stage quotas
+ * and response windows remain fixed so a person's before/after runs stay comparable.
+ */
+export function createFocusRunPattern(random: () => number = Math.random, previousSignature?: string): FocusRunPattern {
+  const speedShapes = randomizedBalanced(
+    [...FOCUS_STIMULUS_SHAPES, ...FOCUS_STIMULUS_SHAPES],
+    hasAtMostTwoConsecutive,
+    ['circle', 'diamond', 'ring', 'triangle', 'circle', 'diamond', 'ring', 'triangle'] as const,
+    random,
+  );
+  const speedColors = randomizedBalanced(
+    ['green', 'green', 'green', 'green', 'purple', 'purple', 'purple', 'purple'] as const,
+    hasAtMostTwoConsecutive,
+    ['green', 'purple', 'green', 'purple', 'purple', 'green', 'purple', 'green'] as const,
+    random,
+  );
+  const brakeResponses = randomizedBalanced(
+    [true, true, true, true, true, false, false, false],
+    sequence => hasNoAdjacentStopSignals(sequence) && hasAtMostTwoConsecutive(sequence),
+    [true, false, true, true, false, true, true, false],
+    random,
+  );
+  const switchTargets = randomizedBalanced(
+    ['green', 'green', 'green', 'green', 'purple', 'purple', 'purple', 'purple'] as const,
+    sequence => hasAtMostTwoConsecutive(sequence) && ruleChanges(sequence) >= 4,
+    ['green', 'purple', 'green', 'green', 'purple', 'purple', 'green', 'purple'] as const,
+    random,
+  );
+  const switchShapes = randomizedBalanced(
+    [...FOCUS_STIMULUS_SHAPES, ...FOCUS_STIMULUS_SHAPES],
+    hasAtMostTwoConsecutive,
+    ['circle', 'diamond', 'ring', 'triangle', 'circle', 'diamond', 'ring', 'triangle'] as const,
+    random,
+  );
+  const switchResponses = randomizedBalanced(
+    [true, true, true, true, true, false, false, false],
+    sequence => hasNoAdjacentStopSignals(sequence) && hasAtMostTwoConsecutive(sequence),
+    [true, false, true, true, false, true, false, true],
+    random,
+  );
+
+  const makePlan = (
+    stage: FocusGameStage,
+    stimulusColor: FocusStimulusColor,
+    targetColor: FocusStimulusColor,
+    stimulusShape: FocusStimulusShape,
+    shouldRespond: boolean,
+  ): FocusTrialPlan => {
+    const timing = stageTiming[stage];
+    const [minimum, maximum] = timing.foreperiod;
+    return {
+      stage,
+      stimulusColor,
+      targetColor,
+      stimulusShape,
+      shouldRespond,
+      foreperiodMs: minimum + randomIndex(maximum - minimum + 1, random),
+      responseWindowMs: timing.responseWindowMs,
+    };
+  };
+
+  const speed = speedShapes.map((shape, index) => makePlan('speed', speedColors[index]!, 'green', shape!, true));
+  const brake = brakeResponses.map(shouldRespond => makePlan(
+    'brake', shouldRespond ? 'green' : 'red', 'green', 'circle', shouldRespond,
+  ));
+  const switching = switchTargets.map((targetColor, index) => {
+    const shouldRespond = switchResponses[index]!;
+    const stimulusColor = shouldRespond ? targetColor : targetColor === 'green' ? 'purple' : 'green';
+    return makePlan('switch', stimulusColor, targetColor, switchShapes[index]!, shouldRespond);
+  });
+  const trials: Record<FocusGameStage, FocusTrialPlan[]> = { speed, brake, switch: switching };
+  let signature = getFormSignature(trials);
+
+  if (signature === previousSignature) {
+    let changed = false;
+    for (const field of ['stimulusShape', 'stimulusColor'] as const) {
+      const current = speed.map(trial => trial[field]);
+      for (let left = 0; left < current.length && !changed; left += 1) {
+        for (let right = left + 1; right < current.length && !changed; right += 1) {
+          if (current[left] === current[right]) continue;
+          const candidate = [...current];
+          [candidate[left], candidate[right]] = [candidate[right]!, candidate[left]!];
+          if (!hasAtMostTwoConsecutive(candidate)) continue;
+          speed[left] = { ...speed[left]!, [field]: candidate[left] };
+          speed[right] = { ...speed[right]!, [field]: candidate[right] };
+          signature = getFormSignature(trials);
+          changed = signature !== previousSignature;
+        }
+      }
+      if (changed) break;
+    }
+  }
+
+  return { trials, signature };
+}
 
 export interface FocusTrialRecord {
   readonly stage: FocusGameStage;
@@ -57,11 +225,11 @@ function summarizeFocusStage(records: readonly FocusTrialRecord[]): FocusStageSu
 }
 
 /**
- * Summarize a 12-trial focus challenge. The output describes one personal run;
+ * Summarize a focus challenge. The output describes one personal run;
  * it is not a validated cognitive, medical, or GABA measurement.
  */
 export function summarizeFocusGame(records: readonly FocusTrialRecord[], falseStarts = 0): FocusGameSummary {
-  const expectedTrials = FOCUS_GAME_STAGES.length * FOCUS_GAME_TRIALS_PER_STAGE;
+  const expectedTrials = FOCUS_GAME_TOTAL_TRIALS;
   if (!Array.isArray(records) || records.length !== expectedTrials ||
     records.some((record, index) => {
       const expectedStage = FOCUS_GAME_STAGES[Math.floor(index / FOCUS_GAME_TRIALS_PER_STAGE)];

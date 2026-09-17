@@ -113,7 +113,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 영상 보기'), 'live consumer bundle must contain the duration-neutral teaser CTA');
     assert.ok(consumerBundle.includes('집중 리듬 챌린지'), 'live consumer bundle must contain the advanced focus game');
-    assert.ok(consumerBundle.includes('반응·멈춤·전환') && consumerBundle.includes('12번'), 'live consumer bundle must expose the three-stage focus game');
+    assert.ok(consumerBundle.includes('반응·멈춤·전환') && consumerBundle.includes('24개'), 'live consumer bundle must expose the randomized 24-signal focus game');
     assert.ok(consumerBundle.includes('5분 충전하고 다시 확인') && consumerBundle.includes('편안한 소리'), 'live consumer bundle must expose low-score recovery guidance and relaxation audio');
     assert.ok(consumerBundle.includes('뇌 피로 테스트 공유'), 'live consumer bundle must expose the friend challenge share CTA');
     assert.ok(consumerBundle.includes('친구에게 “너도 해봐” 보내기'), 'live consumer bundle must make the result share an invitation to check');
@@ -143,6 +143,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live focus invite Open Graph image is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
     assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#rhythm'), 'live focus invite must hand off to the auto-start game');
+    assert.ok(focusPageText.includes('24개') && focusPageText.includes('매번 달라지는 신호'), 'live focus invite must describe randomized 24-signal challenge');
     assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';
