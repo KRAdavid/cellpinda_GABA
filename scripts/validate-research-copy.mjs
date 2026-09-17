@@ -2,7 +2,7 @@ import {readFile} from 'node:fs/promises';
 
 const ledger = JSON.parse(await readFile(new URL('../data/content-ledger.json', import.meta.url), 'utf8'));
 const consumerSourceFiles = [
-  'ResearchLibrary.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'RhythmExperience.tsx',
+  'ResearchLibrary.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'GabaEvidenceHighlights.tsx', 'RhythmExperience.tsx',
   'PurchaseQuestions.tsx', 'ProductShare.tsx', 'SevenDayChallenge.tsx', 'TeaserPreview.tsx',
 ];
 const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles.map(async file => [
@@ -33,13 +33,18 @@ for (const claim of research) {
     if (discouragedMarketing.test(value)) fail(`${claim.id}.${field} contains a discouraged negative marketing phrase`);
     if (field === 'hopefulTakeaway' && !/(표시사항|루틴|살펴보|확인해|선택해)/.test(value)) fail(`${claim.id}.hopefulTakeaway must name a check or choice action`);
   }
+  if (metadata.consumerFinding !== undefined) {
+    if (typeof metadata.consumerFinding !== 'string' || metadata.consumerFinding.trim().length < 30) fail(`${claim.id}.consumerFinding must state the observed result in consumer language`);
+    if (unsafe.test(metadata.consumerFinding)) fail(`${claim.id}.consumerFinding contains an unsupported promise or medical expression`);
+    if (discouragedMarketing.test(metadata.consumerFinding)) fail(`${claim.id}.consumerFinding contains a discouraged generalized negative phrase`);
+  }
 }
 
 const detailBlock = researchLibrary.indexOf('<details className="research-detail"');
 const productLink = researchLibrary.indexOf('className="button outline" href="#products"');
 if (detailBlock < 0 || productLink < detailBlock) fail('product information link must follow research conditions and observed changes');
 if (!researchLibrary.slice(productLink, productLink + 220).includes('셀핀다 제품 구성 확인')) fail('product information link must lead to product composition and label details');
-if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must not render internal result or limitation fields');
+if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations') || consumerSources['GabaEvidenceHighlights.tsx'].includes('metadata.result') || consumerSources['GabaEvidenceHighlights.tsx'].includes('metadata.limitations')) fail('consumer research UI must render only reviewed consumer findings, not internal result or limitation fields');
 if (researchLibrary.includes('숫자와 출처 더 확인하기')) fail('consumer research UI must use the conditions-and-source label');
 if (/전체\s*구매자의\s*경험|제품\s*효과를\s*입증하는\s*연구\s*자료는\s*아니/.test(reviewExperience)) fail('consumer review UI must use context-first copy');
 if (/원문에서\s*확인되지\s*않음|빠진\s*정보는\s*추측하지\s*않아도\s*됩니다/.test(reviewExperience)) fail('consumer review UI must guide readers toward source context');
@@ -47,4 +52,4 @@ if (discouragedMarketing.test(consumerUi)) fail('consumer UI contains a discoura
 if (/연구 카드를 준비하고 있어요|후기를 확인할 수 있는 경로를 준비하고 있습니다|GABA 기본 자료를 확인하고 있습니다|현재 공개된 제품 구성 정보가 없습니다/.test(consumerUi)) fail('consumer UI must not expose empty or preparation-state copy');
 if (/이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다/.test(purchaseQuestions) || !/최신 내용으로 확인해 보세요/.test(purchaseQuestions)) fail('purchase guidance must use clear, current-label language without defensive copy');
 
-console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability'], detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-section-product-link', status: 'ok'}));
+console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'consumerFinding', 'hopefulTakeaway', 'productApplicability'], visuals: 'reviewed consumerVisual schemas; raw results stay internal', detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-section-product-link', status: 'ok'}));

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { projectConsumerVisual } from '../src/domain/public-research.ts';
 
 const readJson = async relative => JSON.parse(await readFile(new URL(`../${relative}`, import.meta.url), 'utf8'));
 const content = await readJson('public/data/content.json');
@@ -210,6 +211,20 @@ const coverage = {
   growthHormone: ['research-powers-2008'],
   muscleDevelopment: ['research-sakashita-2019'],
 };
+const featuredFindings = new Map([
+  ['research-byun-2018','before-after'],['research-yoon-2022','before-after'],
+  ['research-yoto-2012','study-journey'],['research-yamatsu-2016','metric-pair'],
+  ['research-powers-2008','ratio'],['research-sakashita-2019','group-values'],
+  ['research-heba-2016','observational-link'],
+]);
+for (const [id, kind] of featuredFindings) {
+  const claim = claimsById.get(id);
+  if (!claim || typeof claim.metadata?.consumerFinding !== 'string' || claim.metadata.consumerFinding.trim().length < 30 || claim.metadata.consumerVisual?.kind !== kind) fail(`consumer-visible research finding or illustration is missing for ${id}`);
+  const projectedVisual = projectConsumerVisual(claim.metadata.consumerVisual);
+  try { assert.deepEqual(projectedVisual, claim.metadata.consumerVisual); }
+  catch { fail(`consumer visualization for ${id} does not match the approved public data shape`); }
+  if (/셀핀다.{0,15}(?:효과|개선)|(?:효과|개선).{0,15}셀핀다/.test(claim.metadata.consumerFinding)) fail(`research finding ${id} implies a Cellpinda product effect`);
+}
 for (const [topic, ids] of Object.entries(coverage)) {
   if (!ids.some(id => recordsById.has(id))) fail(`required ${topic} research is missing`);
 }

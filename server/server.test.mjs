@@ -232,10 +232,10 @@ test('Legacy DB gains flow column without removing existing events, and metadata
     const legacy=new DatabaseSync(dbPath);
     legacy.exec('CREATE TABLE events(id TEXT PRIMARY KEY,name TEXT NOT NULL,properties TEXT NOT NULL,created_at TEXT NOT NULL)');
     legacy.prepare('INSERT INTO events VALUES(?,?,?,?)').run(randomUUID(),'landing_view','{}','2026-01-01T00:00:00.000Z');legacy.close();
-    store=createStore({dbPath,seed:{...seed,claims:[{...seed.claims[0],metadata:{studyType:'Randomized trial',limitations:['Small sample'],productApplicability:'Not this product',privatePath:'C:/secret',answers:['secret']}}]}});
+    store=createStore({dbPath,seed:{...seed,claims:[{...seed.claims[0],metadata:{studyType:'Randomized trial',limitations:['Small sample'],productApplicability:'Not this product',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'},privatePath:'C:/secret',answers:['secret']}}]}});
     assert.equal(store.analytics().coverage.eventsWithoutFlow,1);assert.equal(store.analytics().counts[0].count,1);assert.equal(store.analytics().funnels[0].rate,null);
     const publicContent=store.publicContent();
-    assert.deepEqual(publicContent.claims[0].metadata,{studyType:'Randomized trial',productApplicability:'Not this product'});
+    assert.deepEqual(publicContent.claims[0].metadata,{studyType:'Randomized trial',productApplicability:'Not this product',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'}});
     assert.ok(!JSON.stringify(publicContent).includes('Small sample'));
     store.event({eventId:randomUUID(),flowId:randomUUID(),name:'landing_view'});assert.equal(store.analytics().counts[0].count,2);
   } finally {store?.close();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}

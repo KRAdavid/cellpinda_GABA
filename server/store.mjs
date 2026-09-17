@@ -4,13 +4,14 @@ import { dirname } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { reviewMutation, approvalMissing, publicReview, REVIEW_DESTINATION_TEXT, REVIEW_DESTINATION_URL } from '../src/domain/reviews.ts';
 import { opsStateIssue } from '../src/domain/ops-validation.ts';
+import { projectConsumerVisual } from '../src/domain/public-research.ts';
 
 export const EVENT_NAMES = new Set(['landing_view','hero_check_start','rhythm_check_started','rhythm_check_completed','rhythm_check_complete','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_source_click','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','result_share_click','result_share_success','shared_link_landed','friend_check_start','product_comparison_viewed','product_compare_view','purchase_outbound_clicked','purchase_cta_click','challenge_start','challenge_day_complete','seven_day_complete','teaser_impression','teaser_play','fatigue_game_start','fatigue_game_false_start','fatigue_game_rest_start','fatigue_game_complete']);
 export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin','/teaser','/challenge']);
 const publicSources = (value) => (value.sources || []).filter(s => typeof s.url === 'string' && /^https:\/\//.test(s.url)).map(({title,url,page,locator}) => ({title,url,page,locator}));
 const failure = (message, status = 400) => Object.assign(new Error(message), { status });
 const isUuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
-const PUBLIC_METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','productApplicability','question','searchThrough','studyCount','consumerScope','consumerSummary','hopefulTakeaway']);
+const PUBLIC_METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','productApplicability','question','searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerVisual','hopefulTakeaway']);
 const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result','/share','result_viewed'],['product_comparison','/products','product_comparison_viewed']];
 const OPS_MAX_BYTES=65536;
 const OPS_TTL_DAYS=30;
@@ -30,6 +31,11 @@ function publicMetadata(value) {
   const output={};
   for (const [key,item] of Object.entries(value)) {
     if (!PUBLIC_METADATA_FIELDS.has(key)) continue;
+    if(key==='consumerVisual') {
+      const visual=projectConsumerVisual(item);
+      if(visual)output[key]=visual;
+      continue;
+    }
     if (typeof item === 'string' && item.length <= 3000) output[key]=item;
     else if (typeof item === 'number' && Number.isFinite(item)) output[key]=item;
     else if (Array.isArray(item) && item.length<=20 && item.every(text=>typeof text === 'string' && text.length<=1000)) output[key]=item;

@@ -59,7 +59,7 @@ function publicSources(item){
 const publicMetadataKeys=[
   'studyType','population','sampleSize','dose','duration','comparison',
   'outcome','productApplicability','question',
-  'searchThrough','studyCount','consumerScope','consumerSummary','hopefulTakeaway',
+  'searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerVisual','hopefulTakeaway',
 ];
 
 function publicMetadata(item){
@@ -105,6 +105,17 @@ for(const item of approvedResearch){
   const missing=requiredResearchFields.filter(field=>typeof item.metadata?.[field]!=='string' || !item.metadata[field].trim());
   if(missing.length || publicSources(item).length===0) throw new Error(`Approved research ${item.id} is not export-ready: ${[...missing, ...(publicSources(item).length===0 ? ['public HTTPS source'] : [])].join(', ')}`);
 }
+const featuredResearchKinds=new Map([
+  ['research-byun-2018','before-after'],['research-yoon-2022','before-after'],
+  ['research-yoto-2012','study-journey'],['research-yamatsu-2016','metric-pair'],
+  ['research-powers-2008','ratio'],['research-sakashita-2019','group-values'],
+  ['research-heba-2016','observational-link'],
+]);
+for(const [id,kind] of featuredResearchKinds){
+  const item=approvedResearch.find(record=>record.id===id);
+  const visual=item?.metadata?.consumerVisual;
+  if(!item || typeof item.metadata?.consumerFinding!=='string' || item.metadata.consumerFinding.trim().length<30 || visual?.kind!==kind) throw new Error(`Featured research ${id} is missing its reviewed consumer finding or ${kind} visualization`);
+}
 const approvedIds=new Set(claims.map(item=>item.id));
 const products=ledger.products
   .filter(item=>item.status==='approved' && item.sourceIds?.every(id=>approvedIds.has(id)) && isSmartStoreUrl(item.officialUrl))
@@ -130,7 +141,7 @@ const masterIndex={
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
   records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,reviewedAt,evidenceHash})=>{
-    return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
+    return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
   }),
 };
 for(const record of masterIndex.records){

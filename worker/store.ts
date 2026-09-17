@@ -1,6 +1,7 @@
 import ledger from '../data/content-ledger.json' with { type: 'json' };
 import { reviewMutation, approvalMissing, publicReview, parseReviewDraft, REVIEW_DESTINATION_TEXT, REVIEW_DESTINATION_URL } from '../src/domain/reviews.ts';
 import { opsStateIssue } from '../src/domain/ops-validation.ts';
+import { projectConsumerVisual } from '../src/domain/public-research.ts';
 
 type RecordValue = Record<string, unknown>;
 type ContentRow = {id:string;kind:string;data:string;revision:number};
@@ -8,7 +9,7 @@ type SeedRow = ContentRow & {last_reason:string|null};
 type Content = RecordValue & {id:string;kind?:string;status?:string;revision?:number;publicText?:string|null;sourceIds?:string[];sources?:RecordValue[]};
   const EVENTS=new Set(['landing_view','hero_check_start','rhythm_check_started','rhythm_check_completed','rhythm_check_complete','result_viewed','gaba_story_viewed','evidence_opened','review_opened','review_source_click','review_section_navigated','purchase_question_opened','share_image_generated','share_requested','share_cancelled','share_link_copied','share_image_downloaded','result_share_click','result_share_success','shared_link_landed','friend_check_start','product_comparison_viewed','product_compare_view','purchase_outbound_clicked','purchase_cta_click','challenge_start','challenge_day_complete','seven_day_complete','teaser_impression','teaser_play','fatigue_game_start','fatigue_game_false_start','fatigue_game_rest_start','fatigue_game_complete']);
 const PATHS=new Set(['/','/story','/technology','/products','/research','/reviews','/check','/result','/share','/admin','/teaser','/challenge']);
-const PUBLIC_META=new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','productApplicability','question','searchThrough','studyCount','consumerScope','consumerSummary','hopefulTakeaway']);
+const PUBLIC_META=new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','productApplicability','question','searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerVisual','hopefulTakeaway']);
 const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result','/share','result_viewed'],['product_comparison','/products','product_comparison_viewed']];
 const OPS_MAX_BYTES=65536;
 const OPS_TTL_DAYS=30;
@@ -44,7 +45,15 @@ function sources(value:Content) {return (value.sources || []).filter(s=>typeof s
 function metadata(value:unknown) {
   if(!object(value))return undefined;
   const result:RecordValue={};
-  for(const [key,item] of Object.entries(value))if(PUBLIC_META.has(key) && ((typeof item==='string' && item.length<=3000)||(typeof item==='number' && Number.isFinite(item))))result[key]=item;
+  for(const [key,item] of Object.entries(value)){
+    if(!PUBLIC_META.has(key))continue;
+    if(key==='consumerVisual'){
+      const visual=projectConsumerVisual(item);
+      if(visual)result[key]=visual;
+      continue;
+    }
+    if((typeof item==='string' && item.length<=3000)||(typeof item==='number' && Number.isFinite(item)))result[key]=item;
+  }
   return Object.keys(result).length?result:undefined;
 }
 function decode(row:ContentRow):Content {return {...JSON.parse(row.data),id:row.id,kind:row.kind,revision:row.revision};}

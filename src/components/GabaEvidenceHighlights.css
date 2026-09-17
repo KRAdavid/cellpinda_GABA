@@ -1,28 +1,71 @@
-.gaba-evidence{background:#fbfdfb}
-.gaba-evidence-head{margin-bottom:38px}
-.gaba-evidence-head h2{font-size:44px}
-.gaba-evidence-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.gaba-evidence-card{display:flex;flex-direction:column;min-height:430px;padding:22px 20px 20px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 12px 28px rgba(24,56,43,.045);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-.gaba-evidence-card:hover{transform:translateY(-4px);border-color:#a9cbb3;box-shadow:0 16px 32px rgba(24,56,43,.09)}
-.gaba-evidence-card-top{display:flex;align-items:center;gap:10px;color:var(--green)}
-.gaba-evidence-card-top svg{margin-left:auto}
-.gaba-evidence-number{font-size:12px;letter-spacing:.1em;font-weight:700}
-.gaba-evidence-label{font-size:13px;font-weight:700}
-.gaba-evidence-badge{display:inline-flex;align-self:flex-start;margin-top:29px;padding:5px 9px;border-radius:999px;background:#eef7ef;color:#47725a;font-size:11px;line-height:1.3}
-.gaba-evidence-card h3{margin:14px 0 10px;font-size:20px;line-height:1.45;letter-spacing:-.045em}
-.gaba-evidence-summary{min-height:78px;margin:0;color:#52685c;font-size:14px;line-height:1.75}
-.gaba-evidence-facts{display:grid;gap:0;margin:18px 0 0;border-top:1px solid #e7efe8}
-.gaba-evidence-facts>div{display:grid;grid-template-columns:46px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px solid #e7efe8}
-.gaba-evidence-facts dt{color:#7a8c80;font-size:11px;line-height:1.55}
-.gaba-evidence-facts dd{margin:0;color:var(--ink);font-size:12px;line-height:1.55;overflow-wrap:anywhere}
-.gaba-evidence-source{min-height:38px;margin:13px 0 0;color:#839188;font-size:11px;line-height:1.5}
-.gaba-evidence-link{display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:15px;color:var(--green);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:4px}
-.gaba-evidence-note{margin:28px 0 0;color:#607567;font-size:13px;line-height:1.75}
-.gaba-evidence-all{margin-top:14px}
-.gaba-evidence-card--sleep .gaba-evidence-card-top{color:#517a9a}
-.gaba-evidence-card--stress .gaba-evidence-card-top{color:#b27645}
-.gaba-evidence-card--focus .gaba-evidence-card-top{color:#8a65a7}
-.gaba-evidence-card--stability .gaba-evidence-card-top{color:#3f8a63}
-@media(max-width:1050px){.gaba-evidence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gaba-evidence-card{min-height:390px}}
-@media(max-width:680px){.gaba-evidence-head h2{font-size:34px}.gaba-evidence-grid{grid-template-columns:1fr;gap:10px}.gaba-evidence-card{min-height:0;padding:20px}.gaba-evidence-badge{margin-top:22px}.gaba-evidence-summary{min-height:0;font-size:16px;line-height:1.75}.gaba-evidence-facts{margin-top:16px}.gaba-evidence-facts dd{font-size:13px}.gaba-evidence-source{min-height:0}.gaba-evidence-note{font-size:14px}}
-@media(prefers-reduced-motion:reduce){.gaba-evidence-card{transition:none}.gaba-evidence-card:hover{transform:none}}
+.gaba-evidence{padding:88px 0 96px;background:#f5f7f3;color:#192c24}
+.gaba-evidence .wrap{max-width:1240px}
+.gaba-evidence-cover{position:relative;isolation:isolate;min-height:390px;display:flex;align-items:center;overflow:hidden;border-radius:24px;background:#eee9dc}
+.gaba-evidence-cover:after{position:absolute;z-index:-1;inset:0;content:"";background:linear-gradient(90deg,rgba(249,248,239,.97) 0%,rgba(249,248,239,.92) 37%,rgba(249,248,239,.46) 61%,rgba(249,248,239,0) 82%)}
+.gaba-evidence-cover>img{position:absolute;z-index:-2;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 48%}
+.gaba-evidence-cover-copy{max-width:680px;padding:56px 58px}
+.gaba-evidence-cover-copy .chapter{margin-bottom:17px;color:#2d7451;font-size:12px;font-weight:700;letter-spacing:.15em}
+.gaba-evidence-cover-copy h2{margin:0 0 18px;color:#192c24;font-size:clamp(38px,4.7vw,62px);line-height:1.16;letter-spacing:-.06em}
+.gaba-evidence-cover-copy>p:not(.chapter){margin:0;color:#40584c;font-size:17px;line-height:1.75}
+.gaba-evidence-count{display:flex;align-items:center;gap:11px;margin-top:27px;color:#395448;font-size:13px}
+.gaba-evidence-count>strong{color:#148250;font-size:26px;line-height:1}
+.gaba-evidence-count-divider{width:1px;height:18px;margin:0 5px;background:#a9b5a9}
+.gaba-evidence-boundary{display:flex;gap:14px;align-items:flex-start;margin:24px 0 62px;padding:19px 22px;border:1px solid #d9e3d9;border-radius:14px;background:#fff}
+.gaba-evidence-boundary>span{flex:0 0 23px;width:23px;height:23px;border-radius:50%;background:#e7f3e9;color:#246f4a;font-size:14px;font-weight:700;line-height:23px;text-align:center}
+.gaba-evidence-boundary p{margin:0;color:#4a5e52;font-size:14px;line-height:1.75}
+.gaba-evidence-boundary strong{color:#203c2e}
+.gaba-evidence-chapters{display:grid;gap:54px}
+.gaba-evidence-chapter{padding-top:39px;border-top:1px solid #d9e2d9;scroll-margin-top:100px}
+.gaba-evidence-chapter-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;color:#2d7951}
+.gaba-chapter-number{display:grid;place-items:center;width:31px;height:31px;flex:none;border:1px solid #b7d0bd;border-radius:50%;font-size:12px;font-weight:700}
+.gaba-evidence-chapter-head>svg{margin-top:3px;flex:none}
+.gaba-evidence-chapter-head h3{margin:0 0 5px;color:#192c24;font-size:27px;line-height:1.35;letter-spacing:-.04em}
+.gaba-evidence-chapter-head p{margin:0;color:#637369;font-size:15px;line-height:1.65}
+.gaba-evidence-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:16px}
+.gaba-evidence-chapter--mental-task .gaba-evidence-grid,.gaba-evidence-chapter--brain-observation .gaba-evidence-grid{grid-template-columns:minmax(0,710px)}
+.gaba-evidence-chapter--exercise .gaba-evidence-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.gaba-study-result{display:flex;min-width:0;flex-direction:column;padding:24px 24px 20px;border:1px solid #e0e7df;border-radius:17px;background:#fff;box-shadow:0 10px 28px rgba(31,60,43,.045)}
+.gaba-study-meta{display:flex;justify-content:space-between;align-items:center;color:#648071;font-size:12px;font-weight:600}
+.gaba-study-meta span{padding:5px 9px;border-radius:99px;background:#eef4ee}
+.gaba-study-meta time{font-size:12px;letter-spacing:.04em}
+.gaba-study-result h4{margin:15px 0 8px;color:#1b3427;font-size:20px;line-height:1.45;letter-spacing:-.035em}
+.gaba-study-finding{margin:0;color:#344d40;font-size:15px;line-height:1.75}
+.gaba-visual{margin:19px 0 0;padding:16px;border-radius:12px;background:#f5f8f4}
+.gaba-visual figcaption{display:flex;align-items:center;gap:8px;margin:0 0 14px;color:#365a44;font-size:12px;font-weight:700;line-height:1.45}
+.gaba-visual figcaption svg{flex:none;color:#31835a}
+.gaba-visual figcaption span{margin-left:auto;color:#77867b;font-size:11px;font-weight:500;text-align:right}
+.gaba-bar-row{display:grid;grid-template-columns:minmax(74px,.9fr) minmax(70px,1.55fr) auto;align-items:center;gap:9px;margin-top:11px;color:#5d6d62;font-size:11px;line-height:1.35}
+.gaba-bar-row>strong{min-width:46px;color:#273e31;font-size:13px;font-variant-numeric:tabular-nums;text-align:right}
+.gaba-bar-track{height:9px;overflow:hidden;border-radius:99px;background:#e2e9e1}
+.gaba-bar-track>i{display:block;height:100%;min-width:4px;border-radius:inherit;background:#b0c5ad;transition:width .5s ease}
+.gaba-bar-row.is-after .gaba-bar-track>i{background:#37885a}
+.gaba-bar-row.is-after>strong{color:#176b3e}
+.gaba-chart-scale{display:block;margin-top:13px;color:#7a887e;font-size:11px;line-height:1.6}
+.gaba-pair-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gaba-pair-metric{min-width:0;padding:13px 12px;border:1px solid #e2eae1;border-radius:10px;background:white}
+.gaba-pair-metric>span,.gaba-pair-metric>em{display:block;color:#657568;font-size:11px;line-height:1.5;font-style:normal}
+.gaba-pair-metric>strong{display:block;margin:6px 0 4px;color:#176b3e;font-size:27px;line-height:1.1;font-variant-numeric:tabular-nums}
+.gaba-pair-metric>strong small{margin-left:4px;color:#457151;font-size:12px}
+.gaba-visual--journey ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;list-style:none;margin:0;padding:0}
+.gaba-visual--journey li{position:relative;display:grid;align-content:start;gap:8px;min-height:85px;padding:11px 8px;border-radius:9px;background:#fff;text-align:center}
+.gaba-visual--journey li:not(:last-child):after{position:absolute;top:27px;right:-8px;z-index:1;content:"›";color:#5c9a71;font-size:19px;font-weight:700}
+.gaba-visual--journey li span{color:#6c9278;font-size:10px;letter-spacing:.08em}
+.gaba-visual--journey li strong{color:#304a39;font-size:11px;line-height:1.45}
+.gaba-visual--journey>p{margin:12px 0 0;color:#47604f;font-size:12px;line-height:1.6}
+.gaba-link-diagram{display:grid;grid-template-columns:1fr 50px 1fr;align-items:center;gap:9px}
+.gaba-link-diagram>span{display:grid;place-items:center;min-height:65px;padding:10px;border:1px solid #dce7dc;border-radius:10px;background:#fff;color:#31513c;font-size:12px;line-height:1.5;text-align:center}
+.gaba-link-diagram>i{height:1px;background:repeating-linear-gradient(90deg,#8cad93 0 4px,transparent 4px 8px)}
+.gaba-link-diagram>i:after{display:block;width:7px;height:7px;margin:-3px 0 0 auto;border-top:1px solid #8cad93;border-right:1px solid #8cad93;content:"";transform:rotate(45deg)}
+.gaba-exercise-boundary{display:flex;gap:10px;align-items:flex-start;max-width:900px;margin:19px 0 0;padding:14px 16px;border-radius:11px;background:#eaf2eb;color:#4a6250;font-size:13px;line-height:1.7}
+.gaba-exercise-boundary svg{flex:none;margin-top:2px;color:#387f55}
+.gaba-exercise-boundary strong{color:#254733}
+.gaba-study-facts{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 13px;padding:0}
+.gaba-study-facts>div{display:flex;gap:5px;align-items:baseline;max-width:100%;padding:5px 8px;border-radius:7px;background:#f3f5f2}
+.gaba-study-facts dt{flex:none;color:#748078;font-size:10px}
+.gaba-study-facts dd{margin:0;color:#58665d;font-size:10px;line-height:1.45;overflow-wrap:anywhere}
+.gaba-study-source{display:flex;align-items:center;gap:5px;align-self:flex-start;margin-top:auto;padding-top:11px;color:#5f7666;font-size:10px;line-height:1.5;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.gaba-study-source svg{flex:none}
+.gaba-evidence-all{display:inline-flex;align-items:center;gap:7px;margin-top:38px;color:#276b45;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:900px){.gaba-evidence-cover{min-height:360px}.gaba-evidence-cover-copy{max-width:600px;padding:45px 36px}.gaba-evidence-chapter--exercise .gaba-evidence-grid{grid-template-columns:1fr 1fr}.gaba-study-result{padding:20px}}
+@media(max-width:680px){.gaba-evidence{padding:58px 0 68px}.gaba-evidence-cover{min-height:540px;align-items:flex-start;border-radius:17px}.gaba-evidence-cover>img{height:62%;top:auto;object-position:66% 45%}.gaba-evidence-cover:after{background:linear-gradient(180deg,rgba(249,248,239,.99) 0%,rgba(249,248,239,.96) 39%,rgba(249,248,239,.38) 67%,rgba(249,248,239,0) 100%)}.gaba-evidence-cover-copy{padding:30px 22px}.gaba-evidence-cover-copy .chapter{font-size:10px}.gaba-evidence-cover-copy h2{font-size:37px}.gaba-evidence-cover-copy>p:not(.chapter){font-size:15px}.gaba-evidence-count{flex-wrap:wrap;gap:8px;margin-top:20px;font-size:11px}.gaba-evidence-count>strong{font-size:23px}.gaba-evidence-count-divider{height:15px}.gaba-evidence-boundary{gap:10px;margin:16px 0 42px;padding:14px}.gaba-evidence-boundary p{font-size:13px;line-height:1.7}.gaba-evidence-chapters{gap:40px}.gaba-evidence-chapter{padding-top:27px}.gaba-evidence-chapter-head{gap:10px;margin-bottom:17px}.gaba-evidence-chapter-head h3{font-size:21px}.gaba-evidence-chapter-head p{font-size:13px}.gaba-evidence-chapter-head>svg{width:21px}.gaba-evidence-grid,.gaba-evidence-chapter--mental-task .gaba-evidence-grid,.gaba-evidence-chapter--brain-observation .gaba-evidence-grid,.gaba-evidence-chapter--exercise .gaba-evidence-grid{grid-template-columns:1fr;gap:11px}.gaba-study-result{padding:18px 16px 16px;border-radius:13px}.gaba-study-result h4{font-size:18px}.gaba-study-finding{font-size:14px;line-height:1.7}.gaba-visual{padding:13px;margin-top:15px}.gaba-visual--journey ol{gap:5px}.gaba-visual--journey li{min-height:83px;padding:9px 5px}.gaba-visual--journey li strong{font-size:10px}.gaba-bar-row{grid-template-columns:minmax(67px,.85fr) minmax(54px,1.35fr) auto;gap:7px;font-size:10px}.gaba-pair-metric{padding:11px 9px}.gaba-pair-metric>strong{font-size:24px}.gaba-link-diagram{grid-template-columns:1fr 28px 1fr;gap:7px}.gaba-link-diagram>span{font-size:11px}.gaba-study-facts{gap:5px}.gaba-study-facts>div{padding:5px 6px}.gaba-study-facts dt,.gaba-study-facts dd{font-size:10px}.gaba-study-source{font-size:10px}.gaba-exercise-boundary{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.gaba-bar-track>i{transition:none}}
