@@ -214,7 +214,13 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(!/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(JSON.stringify(content)), 'live public content contains a legacy official-mall destination');
     for (const claim of content.claims.filter(item => ['product-1500', 'fermentation-listed'].includes(item.id))) assert.ok(claim.sources?.every(source => isSmartStore(source.url)), `live product claim ${claim.id} must use the Smart Store source only`);
     assert.ok(!content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750')), 'live export contains removed 750 product');
-    assert.equal(master.records.length, 8, 'live master index must contain eight research records');
+    const publicResearchIds=new Set(content.claims.filter(claim=>claim.id?.startsWith('research-')).map(claim=>claim.id));
+    const masterResearchIds=new Set(master.records.map(record=>record.id));
+    assert.equal(master.records.length,publicResearchIds.size,'live master index and public research claims must have the same record count');
+    assert.equal(master.records.length,masterResearchIds.size,'live master index must not duplicate research records');
+    assert.ok([...masterResearchIds].every(id=>publicResearchIds.has(id)),'live master index must match the public research claim IDs');
+    assert.ok(!publicResearchIds.has('research-yoon-2022'),'live export must keep the unresolved Yoon study on hold');
+    assert.ok(!publicResearchIds.has('research-steenbergen-2015'),'live export must keep the retracted Steenbergen study on hold');
     for (const [path, snapshot] of internalSnapshots) {
       let parsed = false;
       if (snapshot.status === 200) {
