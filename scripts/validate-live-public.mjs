@@ -154,8 +154,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(!content.claims.some(claim => claim.id === 'research-sakashita-2019') && !master.records.some(record => record.id === 'research-sakashita-2019'), 'live public research must keep the study with unresolved statistical review out of the public master index');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
     assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('나랑 ‘뇌 컨디션 확인 챌린지’ 해볼래?') && consumerBundle.includes('초대에는 내 게임 기록이나 답변이 포함되지 않아요.'), 'live consumer bundle must invite a friend without transmitting the player result');
-    assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');
-    assert.ok(consumerBundle.includes('지난 7일 다섯 질문에 고른 답을 더한 숫자'), 'live consumer bundle must explain the personal answer score');
+    assert.ok(consumerBundle.includes('피로가 몇 주째 이어지거나 일상에 지장을 준다면') && consumerBundle.includes('불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.'), 'live consumer bundle must include the concise, expandable care-seeking guide');
+    assert.ok(consumerBundle.includes('뇌나 GABA를 잰 값이 아니에요.') && consumerBundle.includes('지난 7일 다섯 질문에 고른 답을 더한 기록이에요.'), 'live consumer bundle must explain the personal answer score without implying a health measurement');
     assert.ok(consumerBundle.includes('집중과 휴식 관련 연구 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');
     assert.ok(consumerBundle.includes('61개 연구') && consumerBundle.includes('267개 연구') && consumerBundle.includes('21개 연구'), 'live consumer bundle must include evidence scale markers');
     assert.ok(!consumerBundle.includes('발효가바가 무엇인지 30초'), 'live consumer bundle still contains the retired teaser duration promise');
