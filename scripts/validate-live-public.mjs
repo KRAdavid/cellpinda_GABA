@@ -125,7 +125,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(consumerBundle.includes('발효가바 이야기 보기'), 'live consumer bundle must contain the consumer-facing teaser CTA');
     assert.ok(consumerBundle.includes('1분 집중 신호 게임'), 'live consumer bundle must contain the consumer-facing focus game');
     assert.ok(consumerBundle.includes('매번 달라지는 신호') && consumerBundle.includes('초록은 누르고') && consumerBundle.includes('빨강은 누르지 않아요') && consumerBundle.includes('색 규칙 바꾸기') && consumerBundle.includes('색과 모양에 상관없이'), 'live consumer bundle must explain the three game stages in their actual order');
-    assert.ok(consumerBundle.includes('5분 쉬고 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
+    assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
     assert.ok(consumerBundle.includes('쉬지 않고 이어서 하기') && consumerBundle.includes('휴식이 기록 변화의 원인이라고 단정할 수는 없어요'), 'live consumer bundle must distinguish repeat records without claiming a rest effect');
     assert.ok(consumerBundle.includes('뇌 피로나 건강 상태를 진단하지 않습니다') && consumerBundle.includes('초록') && consumerBundle.includes('보라'), 'live consumer bundle must clarify the non-diagnostic game and show accessible color labels');
     assert.ok(!consumerBundle.includes('needsFocusRecovery') && !consumerBundle.includes('쉬고 난 뒤 게임 기록이 좋아졌어요'), 'live consumer bundle must not diagnose recovery from a score or claim a rest effect');
@@ -160,7 +160,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card.png`, 'live focus invite Open Graph image is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
     assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#focus-game'), 'live focus invite must hand off to the explained game without auto-start');
-    assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 게임 시작하기') && focusPageText.includes('초록은 누르고'), 'live focus invite must explain the randomized game before the user starts it');
+    assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 게임 시작하기') && focusPageText.includes('초록을 누르고 빨강은 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
     const focusGameCardResponse = await request('/assets/focus-game-card.png');
     assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
     assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
