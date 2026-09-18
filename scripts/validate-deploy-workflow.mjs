@@ -2,9 +2,14 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const workflow = await readFile(new URL('../.github/workflows/deploy.yml', import.meta.url), 'utf8');
+const siteQualityWorkflow = await readFile(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8');
 
 assert.match(workflow, /^  pull_request:\r?\n    branches: \[main\]$/m, 'PRs targeting main must run verification');
-assert.match(workflow, /^  verify:\r?\n/m, 'the verification job must exist');
+assert.match(workflow, /^  release-verify:\r?\n/m, 'the release verification job must exist');
+assert.match(siteQualityWorkflow, /^  site-quality-verify:\r?\n/m, 'the independent site quality job must exist');
+assert.doesNotMatch(siteQualityWorkflow, /^  release-verify:\r?\n/m, 'the site quality workflow must not duplicate the release check context');
+assert.doesNotMatch(workflow, /^  site-quality-verify:\r?\n/m, 'the release workflow must not duplicate the site quality check context');
+assert.ok(!/ubuntu-latest/.test(workflow + siteQualityWorkflow), 'release and site quality workflows must use a fixed Ubuntu runner image');
 
 const lines = workflow.split(/\r?\n/);
 for (const job of ['deploy-pages', 'smoke-live', 'deploy-worker']) {
@@ -16,7 +21,7 @@ for (const job of ['deploy-pages', 'smoke-live', 'deploy-worker']) {
   assert.match(jobBlock, /github\.ref == 'refs\/heads\/main'/, `${job} must only run for main`);
 }
 
-assert.match(workflow, /^    needs: verify$/m, 'publishing jobs must depend on verification');
+assert.match(workflow, /^    needs: release-verify$/m, 'publishing jobs must depend on release verification');
 assert.match(workflow, /DEPLOY_ENABLED:.*secrets\.CLOUDFLARE_API_TOKEN.*secrets\.CLOUDFLARE_ACCOUNT_ID.*secrets\.CLOUDFLARE_D1_DATABASE_ID.*secrets\.ADMIN_TOKEN.*secrets\.MEMBER_ORIGIN/, 'Worker deployment must stay gated on required secrets');
 assert.match(workflow, /^permissions:\r?\n  contents: read$/m, 'workflow-wide permissions must remain read-only');
 

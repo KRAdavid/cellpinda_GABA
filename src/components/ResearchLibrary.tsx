@@ -1,5 +1,5 @@
-import {useEffect,useState} from 'react';
-import {Activity, Clock3, FlaskConical, Info, Search, Share2, UsersRound} from 'lucide-react';
+import {useEffect,useRef,useState} from 'react';
+import {Activity, Brain, Clock3, Dumbbell, FlaskConical, Hand, Info, Moon, Search, Share2, UsersRound} from 'lucide-react';
 import StudyInsightVisual from './StudyInsightVisual';
 import './ResearchLibrary.css';
 
@@ -93,10 +93,11 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   const [studyType, setStudyType] = useState('');
   const [showMethodFilter, setShowMethodFilter] = useState(false);
   const [requestedId, setRequestedId] = useState('');
+  const browseRef = useRef<HTMLDetailsElement>(null);
   const preferredStudyOrder = new Map([
-    'research-byun-2018', 'research-yoto-2012', 'research-yamatsu-2016',
-    'research-sakashita-2019', 'research-powers-2008', 'research-heba-2016',
-    'research-review-2020',
+    'research-review-2020', 'research-byun-2018', 'research-yoto-2012',
+    'research-yamatsu-2016', 'research-sakashita-2019', 'research-powers-2008',
+    'research-heba-2016',
   ].map((id, index) => [id, index] as const));
   const eligibleStudies = claims.filter(claim =>
     claim.status === 'approved' && claim.id.startsWith('research-') &&
@@ -111,6 +112,13 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
     return true;
   }).sort((left,right)=>(preferredStudyOrder.get(left.id) ?? 99)-(preferredStudyOrder.get(right.id) ?? 99));
   const topics = [...new Set(studies.map(claim => claim.topic).filter(Boolean))];
+  const topicCards = [
+    {topic:'잠', label:'잠드는 시간', detail:'잠들기까지 걸린 시간과 수면 기록', Icon:Moon},
+    {topic:'긴장·잠', label:'긴장과 잠', detail:'사람 연구 14편을 모아 살펴본 자료', Icon:Activity},
+    {topic:'뇌파·과제', label:'생각을 많이 쓴 뒤', detail:'과제 뒤 뇌파와 활력 설문', Icon:Brain},
+    {topic:'뇌·손끝 연습', label:'손끝 감각과 뇌 신호', detail:'손끝 연습과 뇌 속 신호의 관계', Icon:Hand},
+    {topic:'운동', label:'운동 뒤 몸에서 잰 수치', detail:'운동 연구에서 확인한 수치', Icon:Dumbbell},
+  ].filter(card => topics.includes(card.topic));
   const activeTopic = topics.includes(topic) ? topic : '';
   const studyTypes = [...new Set(studies.map(claim => claim.metadata!.studyType).filter((value): value is string => Boolean(value)))];
   const activeType = studyTypes.includes(studyType) ? studyType : '';
@@ -155,6 +163,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   }
   function renderStudy(claim: Claim, featured = false) {
     const metadata = claim.metadata!;
+    const reviewOverview = claim.id === 'research-review-2020';
     const nonIngestionStudy = /GABA를 먹지 않고|GABA 섭취 없이/.test(metadata.dose || '');
     const resultVisualFirst = metadata.consumerVisual?.kind === 'paired-before-after';
     const findingFirst = Boolean(metadata.consumerFindingFirst && !metadata.consumerVisual && metadata.consumerFinding);
@@ -164,8 +173,9 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       ? metadata.consumerScope || metadata.consumerSummary || metadata.consumerFinding
       : metadata.consumerSummary || metadata.consumerFinding || metadata.consumerScope;
     return <article id={claim.id} className={`research-library-card${featured ? ` research-library-card-featured${resultVisualFirst ? ' research-library-card-featured--visual-first' : ''}` : ''}`} key={claim.id}>
-      <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType, metadata.dose)}</p>
-      <h3>{metadata.question || claim.topic}</h3>
+      <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{reviewOverview ? '2020년 · 사람 대상 GABA 연구 14편을 모은 자료' : compactStudyType(metadata.studyType, metadata.dose)}</p>
+      <h3>{reviewOverview ? '잠과 긴장 관련 연구를 한눈에 살펴봐요' : metadata.question || claim.topic}</h3>
+      {reviewOverview ? <div className="research-review-metrics" aria-label="연구 자료 한눈에 보기"><div><strong>14편</strong><span>사람 대상 GABA 섭취 연구</span></div><div><strong>2020.02</strong><span>논문을 찾아본 시점</span></div><div><strong>잠 · 긴장</strong><span>살펴본 주제</span></div></div> : null}
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{findingFirst ? '사람 연구에서 관찰된 변화' : '연구는 이렇게 진행됐어요'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}
       {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>논문에 적힌 연구비·저자 소속</strong>{metadata.consumerDisclosure}</span></p> : null}
@@ -193,9 +203,17 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   }
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
-    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>아래는 일반 GABA 연구예요. 셀핀다 가바 1500 시험은 아니며, 연구마다 먹은 양과 살펴본 항목이 달라요.</p></div></div>
+    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>일반 GABA 사람 연구를 쉬운 말과 그림으로 정리했어요. 셀핀다 가바 1500 제품을 시험한 결과는 아니며, 논문마다 참여자와 연구 조건이 달라요.</p></div></div>
+    <div className="research-topic-cards" role="group" aria-label="궁금한 주제 고르기">{topicCards.map(({topic:cardTopic,label,detail,Icon})=>{
+      const recordCount=cardTopic==='긴장·잠' ? '14편' : `${studies.filter(claim=>claim.topic===cardTopic).length}편`;
+      return <button type="button" className="research-topic-card" key={cardTopic} aria-pressed={activeTopic===cardTopic} onClick={()=>{
+        const nextTopic = activeTopic === cardTopic ? '' : cardTopic;
+        setQuery(''); setStudyType(''); setTopic(nextTopic);
+        if (browseRef.current) { browseRef.current.open=true; browseRef.current.scrollIntoView({block:'start',behavior:'smooth'}); }
+      }}><Icon size={20} strokeWidth={1.8} aria-hidden="true"/><span><strong>{label}</strong><small>{detail}</small></span><b>{recordCount}</b></button>;
+    })}</div>
     {featuredStudy ? renderStudy(featuredStudy, true) : null}
-    <details className="research-library-browse" id="research-library-browse">
+    <details className="research-library-browse" id="research-library-browse" ref={browseRef}>
       <summary><span><Search size={18} aria-hidden="true"/> 주제별로 다른 연구 찾기</span><small>{Math.max(0, visibleStudies.length - 1)}편 더 보기</small></summary>
       {studies.length > 0 ? <>
       <div className="research-library-controls" role="search" aria-label="연구를 주제별로 찾기">

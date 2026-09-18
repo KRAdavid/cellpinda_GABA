@@ -131,18 +131,18 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }));
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 보기'), 'live consumer bundle must contain the consumer-facing teaser CTA');
-    assert.ok(consumerBundle.includes('뇌 컨디션 확인 챌린지'), 'live consumer bundle must contain the current focus challenge name');
+    assert.ok(consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name');
     assert.ok(consumerBundle.includes('매번 신호 순서가 달라져요') && consumerBundle.includes('초록은 누르고, 빨강은 기다려요') && consumerBundle.includes('뜨면 누르기') && consumerBundle.includes('표시된 색 누르기'), 'live consumer bundle must show the three game rules in direct, visual language');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
     assert.ok(consumerBundle.includes('쉬지 않고 이어서 하기') && consumerBundle.includes('휴식이 기록 변화의 원인이라고 단정할 수는 없어요'), 'live consumer bundle must distinguish repeat records without claiming a rest effect');
-    assert.ok(consumerBundle.includes('색 신호 24개에 맞춰 누르거나 멈추는 1분 게임이에요. 오늘 게임 점수는 뇌 피로나 건강 상태를 재는 검사가 아니에요.') && consumerBundle.includes('초록') && consumerBundle.includes('보라'), 'live consumer bundle must clarify the non-diagnostic game and show accessible color labels');
+    assert.ok(consumerBundle.includes('초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요. 게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.') && consumerBundle.includes('초록') && consumerBundle.includes('보라'), 'live consumer bundle must clarify the non-diagnostic game and show accessible color labels');
     assert.ok(!consumerBundle.includes('needsFocusRecovery') && !consumerBundle.includes('쉬고 난 뒤 게임 기록이 좋아졌어요'), 'live consumer bundle must not diagnose recovery from a score or claim a rest effect');
     assert.ok(consumerBundle.includes('시작 준비') && consumerBundle.includes('첫 신호가 나타나면'), 'live consumer bundle must give users a ready countdown before the focus game starts');
     assert.ok(consumerBundle.includes('먼저 연습하기') && consumerBundle.includes('설명 없이 바로 시작') && consumerBundle.includes('연습 1 / 5') && consumerBundle.includes('연습 2 / 5') && consumerBundle.includes('연습 3 / 5') && consumerBundle.includes('연습 4 / 5') && consumerBundle.includes('연습 5 / 5') && consumerBundle.includes('연습 완료') && consumerBundle.includes('연습 기록은 점수에 들어가지 않아요'), 'live consumer bundle must teach all scored rules through a skippable no-score practice');
     const yamatsu = content.claims.find(claim => claim.id === 'research-yamatsu-2016');
     assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
     const review2020 = content.claims.find(claim => claim.id === 'research-review-2020');
-    assert.ok(review2020?.metadata?.consumerSummary?.includes('2020년') && review2020.metadata.consumerSummary.includes('14편') && review2020.metadata.consumerSummary.includes('대상과 섭취 조건') && review2020.metadata.consumerSummary.includes('측정 항목') && review2020.metadata.consumerContext?.includes('2020년 2월까지') && review2020.metadata.consumerFinding === undefined, 'live research review must show its scope and date range without discouraging efficacy copy');
+    assert.ok(review2020?.metadata?.consumerSummary?.includes('참여자') && review2020.metadata.consumerSummary.includes('먹은 양·기간') && review2020.metadata.consumerSummary.includes('살펴본 항목') && review2020.metadata.studyCount === '14' && review2020.metadata.consumerContext?.includes('2020년 2월까지') && review2020.metadata.consumerFinding === undefined, 'live research review must show its scope and date range without discouraging efficacy copy');
     assert.ok(!content.claims.some(claim => claim.id === 'research-yoon-2022'), 'live public research must exclude the Yoon study while the result discrepancy is unresolved');
     assert.ok(!content.claims.some(claim => claim.id === 'research-steenbergen-2015'), 'live public research must exclude the retracted action-selection paper');
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
@@ -153,7 +153,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(content.claims.find(claim => claim.id === 'research-yoto-2012')?.metadata?.consumerDisclosure?.includes('저자 9명 중 4명'), 'live Yoto study must show the published author affiliation disclosure');
     assert.ok(!content.claims.some(claim => claim.id === 'research-sakashita-2019') && !master.records.some(record => record.id === 'research-sakashita-2019'), 'live public research must keep the study with unresolved statistical review out of the public master index');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
-    assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('나랑 ‘뇌 컨디션 확인 챌린지’ 해볼래?') && consumerBundle.includes('초대에는 내 게임 기록이나 답변이 포함되지 않아요.'), 'live consumer bundle must invite a friend without transmitting the player result');
+    assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('나랑 ‘1분 색 신호 게임’ 해볼래?') && consumerBundle.includes('초대에는 내 게임 기록이나 답변이 포함되지 않아요.'), 'live consumer bundle must invite a friend without transmitting the player result');
     assert.ok(consumerBundle.includes('피로가 몇 주째 이어지거나 일상에 지장을 준다면') && consumerBundle.includes('불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.'), 'live consumer bundle must include the concise, expandable care-seeking guide');
     assert.ok(consumerBundle.includes('뇌나 GABA를 잰 값이 아니에요.') && consumerBundle.includes('지난 7일 다섯 질문에 고른 답을 더한 기록이에요.'), 'live consumer bundle must explain the personal answer score without implying a health measurement');
     assert.ok(consumerBundle.includes('집중과 휴식 관련 연구 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');
@@ -176,12 +176,12 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
     assert.equal(canonicalHref(focusPageText), `${base}/focus/`, 'live focus invite canonical URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:url'), `${base}/focus/`, 'live focus invite Open Graph URL is invalid');
-    assert.equal(metaContent(focusPageText, 'property', 'og:title'), '“너도 해봐” 뇌 컨디션 확인 챌린지', 'live focus invite Open Graph title is invalid');
-    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card-v4.png`, 'live focus invite Open Graph image is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:title'), '“너도 해봐” 1분 색 신호 게임', 'live focus invite Open Graph title is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card-v5.png`, 'live focus invite Open Graph image is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
     assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#focus-game'), 'live focus invite must hand off to the explained game without auto-start');
     assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 시작하기') && focusPageText.includes('초록은 누르고 빨강은 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
-    const focusGameCardResponse = await request('/assets/focus-game-card-v4.png');
+    const focusGameCardResponse = await request('/assets/focus-game-card-v5.png');
     assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
     assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
