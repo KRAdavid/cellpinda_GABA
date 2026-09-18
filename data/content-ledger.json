@@ -507,6 +507,12 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/22203366/",
           "page": null,
           "locator": "Abstract; Methods; Results; DOI 10.1007/s00726-011-1206-6"
+        },
+        {
+          "title": "저자 소속 확인 (Springer 출판사 페이지)",
+          "url": "https://link.springer.com/article/10.1007/s00726-011-1206-6",
+          "page": null,
+          "locator": "Author affiliations; DOI 10.1007/s00726-011-1206-6"
         }
       ],
       "limitations": [

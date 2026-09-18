@@ -700,11 +700,12 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         </div> : null}
 
         {phase === 'baseline-complete' && before && resultGuidance ? <div className="fatigue-game-summary">
-            <div className={`fatigue-score-ring fatigue-score-ring-${resultGuidance}`} role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>정답률</span></div>
+            <div className={`fatigue-score-ring fatigue-score-ring-${resultGuidance}`} role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>게임 정답률</span></div>
             <div>
             <p className="fatigue-game-kicker">오늘의 반응 기록</p>
             <h3>{resultGuidance === 'celebrate' ? '좋아요, 신호를 잘 따라왔어요.' : '신호를 조금 놓쳤어요.'}</h3>
             <p className="fatigue-game-result-score">{before.total}개 신호 중 {before.correct}개를 맞혔어요.</p>
+            <p className="fatigue-game-result-disclosure">이 점수는 오늘 게임의 정답 기록이에요. 뇌 피로를 진단하는 검사는 아니에요.</p>
             <p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${resultGuidance}`} role="status">
               {resultGuidance === 'celebrate'
                 ? '기록을 남기거나 친구에게도 챌린지를 보내 보세요.'

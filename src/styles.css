@@ -88,3 +88,5 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .intro-strip .step:focus-visible{outline:3px solid #8757b0;outline-offset:6px;border-radius:3px}
 @media(max-width:680px){.intro-strip .step{display:grid}.hero .actions{display:grid;grid-template-columns:minmax(0,1fr);max-width:360px}.hero .actions .button{width:100%;min-width:0;padding:14px 18px;gap:10px;font-size:14px}}
 @media(max-width:360px){.hero-copy{padding-inline:20px}}
+/* Make the buyer-review path visible before the product detail card. */
+.products-review-shortcut{display:inline-flex;align-items:center;margin-top:10px;color:var(--green);font-size:14px;font-weight:650;text-decoration:underline;text-underline-offset:4px}
