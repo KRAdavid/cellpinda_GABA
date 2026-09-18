@@ -55,9 +55,9 @@ if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims 
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');
 const publicResearchRecords = content.claims.filter(claim => String(claim.id).startsWith('research-'));
-if (publicResearchRecords.some(claim => ['research-yoon-2022', 'research-steenbergen-2015'].includes(claim.id))) fail('held or retracted studies must not appear in the public research export');
+if (publicResearchRecords.some(claim => ['research-yoon-2022', 'research-steenbergen-2015', 'research-sakashita-2019'].includes(claim.id))) fail('held, disputed, or retracted studies must not appear in the public research export');
 const relationshipDisclosures = publicResearchRecords.filter(claim => claim.metadata?.consumerDisclosure);
-if (relationshipDisclosures.length < 4 || relationshipDisclosures.some(claim => !master.records.find(record => record.id === claim.id)?.consumerDisclosure)) fail('public study relationship disclosures must be preserved in the master index');
+if (relationshipDisclosures.length < 3 || relationshipDisclosures.some(claim => !master.records.find(record => record.id === claim.id)?.consumerDisclosure)) fail('public study relationship disclosures must be preserved in the master index');
 if (!researchComponent.includes('preferredStudyOrder') || !researchComponent.includes("'research-byun-2018'") || !researchComponent.includes("'research-review-2020'") || !researchComponent.includes('const featuredStudy = visibleStudies[0]')) fail('a concrete visualized human study must appear before the research filters and overview');
 if (!researchComponent.includes('아래 자료는 일반 GABA 사람 연구예요. 셀핀다 제품을 시험한 결과는 아니에요.')) fail('the research list must clearly distinguish general GABA studies from Cellpinda finished-product evidence');
 
@@ -225,10 +225,9 @@ const coverage = {
   stress: ['research-review-2020'],
   sleep: ['research-byun-2018', 'research-yamatsu-2016'],
   growthHormone: ['research-powers-2008'],
-  muscleDevelopment: ['research-sakashita-2019'],
 };
 const stressSleepReview=claimsById.get('research-review-2020');
-if(!stressSleepReview?.metadata?.consumerFinding?.includes('긴장 관련 지표') || !stressSleepReview.metadata.consumerFinding.includes('수면은 결론을 내리기엔 자료가 적었어요')) fail('stress and sleep review assessment must stay visible in plain language');
+if(!stressSleepReview?.metadata?.consumerFinding?.includes('긴장과 잠') || !stressSleepReview.metadata.consumerFinding.includes('연구마다 다르게 보고됐어요') || !stressSleepReview.metadata.consumerFinding.includes('한 가지 수치로 합치지 않고')) fail('stress and sleep review scope and variable findings must stay visible in neutral plain language');
 const featuredFindings = new Map([
   ['research-byun-2018','paired-before-after'],['research-yoto-2012','study-journey'],['research-yamatsu-2016','metric-pair'],
   ['research-heba-2016','observational-link'],
@@ -242,9 +241,9 @@ for (const [id, kind] of featuredFindings) {
   if (/셀핀다.{0,15}(?:효과|개선)|(?:효과|개선).{0,15}셀핀다/.test(claim.metadata.consumerFinding)) fail(`research finding ${id} implies a Cellpinda product effect`);
 }
 const powers = claimsById.get('research-powers-2008');
-if (powers?.metadata?.consumerFindingFirst !== true || !powers.metadata.consumerFinding?.includes('두 검사에서 모두') || !powers.metadata.consumerFinding.includes('섭취 30분 뒤') || powers.metadata.consumerDetail) fail('Powers study must export its clear finding before secondary details');
+if (powers?.metadata?.consumerFindingFirst === true || !powers.metadata?.consumerSummary?.includes('남성 11명') || !powers.metadata.consumerSummary.includes('GABA 3g') || !powers.metadata.consumerSummary.includes('90분') || !powers.metadata.consumerFinding?.includes('성장호르몬 최고 수치') || !powers.metadata.consumerFinding.includes('근육 크기와 근력 변화는 측정하지 않았어요') || powers.metadata.consumerDetail) fail('Powers study must lead with its measurement design and keep the finding in context');
 const powersIndexRecord = recordsById.get('research-powers-2008');
-if (powersIndexRecord?.consumerFindingFirst !== true) fail('public GABA master index must preserve the reviewed Powers finding-first presentation');
+if (powersIndexRecord?.consumerFindingFirst === true) fail('public GABA master index must not lead the Powers record with a hormone outcome');
 for (const [topic, ids] of Object.entries(coverage)) {
   if (!ids.some(id => recordsById.has(id))) fail(`required ${topic} research is missing`);
 }

@@ -46,10 +46,10 @@
 .research-reading-path small{font-size:.78rem;line-height:1.55;color:#64786b}
 .research-library-card{padding:3.2rem 0}
 .research-library-kind{display:flex;align-items:center;gap:9px;margin:0;color:#486356;font-size:.78rem;letter-spacing:.06em}
-.research-library-kind-mark{width:8px;height:8px;border-radius:50%;background:#158457;box-shadow:0 0 0 5px #e8f1e7;flex:0 0 auto}
+.research-library-kind-mark{width:8px;height:8px;border-radius:50%;background:#14764e;box-shadow:0 0 0 5px #e8f1e7;flex:0 0 auto}
 .research-library-card h3{max-width:30ch;font-size:clamp(1.45rem,2.7vw,2.2rem);line-height:1.38;margin:.9rem 0 1.25rem}
 .research-library-consumer-summary{max-width:62ch;margin:0;line-height:1.85;font-size:1.05rem;color:#18382b}
-.research-library-consumer-summary strong{display:block;margin:0 0 .45rem;color:#158457;font-size:.74rem;letter-spacing:.1em;font-weight:650}
+.research-library-consumer-summary strong{display:block;margin:0 0 .45rem;color:#14764e;font-size:.74rem;letter-spacing:.1em;font-weight:650}
 .research-library-consumer-summary.research-library-consumer-finding{max-width:760px;margin:8px 0 16px;padding:18px 20px;border-left:4px solid #38a66b;border-radius:0 10px 10px 0;background:#f1f7f2;font-size:clamp(1rem,1.5vw,1.125rem);font-weight:550;line-height:1.75}
 .research-library-quick-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1.7rem 0 1.25rem;max-width:900px}
 .research-library-quick-facts>div{display:flex;align-items:flex-start;gap:10px;min-width:0;min-height:100px;padding:14px 15px;border:1px solid #e0e8e1;border-top:3px solid #9ac8aa;border-radius:7px;background:#fff}

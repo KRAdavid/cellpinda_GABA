@@ -1,5 +1,5 @@
 import {readFile} from 'node:fs/promises';
-import {existsSync} from 'node:fs';
+import {existsSync, readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 
 const root = process.cwd();
@@ -47,6 +47,8 @@ requireMatch(app, /GABA 사람 연구를 쉬운 말로 소개해요\. 셀핀다 
 if (!(researchRoute.indexOf('<ResearchLibrary') >= 0 && researchRoute.indexOf('<ResearchLibrary') < researchRoute.indexOf('research-route-product') && researchRoute.includes('셀핀다 가바 1500 구성 보기') && researchRoute.includes('#products'))) fail('research route must offer a separate product-configuration path after the research cards');
 requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서 관찰된 변화/, 'selected research findings must be visibly labeled before methods are opened');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
+requireMatch(app, /heroProduct\?<[\s\S]*?셀핀다 발효가바 \{heroProduct\.amountMg\.toLocaleString\('ko-KR'\)\}[\s\S]*?\{heroProduct\.servings\}포 구성 · \{heroProduct\.category\}/, 'the first screen must identify the verified product composition without making an efficacy claim');
+requireMatch(app, /if\(rhythmIdFromUrl\(url\)\)[\s\S]*?getElementById\('rhythm'\)\?\.scrollIntoView/, 'a shared rhythm query must scroll to the shared result after the page mounts');
 requireMatch(app, /const description='GABA를 섭취한 사람 연구를 쉬운 말과 그림으로 소개하고, 연구 조건과 셀핀다 제품 정보를 구분해 보여드립니다\.'/ , 'research route metadata must use plain language and separate general research from product information');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
@@ -178,7 +180,8 @@ requireMatch(challenge, /preserveCampaign\(url, window\.location\.search\)/, 'ch
   requireMatch(app + rhythm + challenge + fatigueGame, new RegExp(event), `required measurement event ${event} is missing`);
 }
 requireMatch(teaser, /allow="autoplay; fullscreen; picture-in-picture"/, 'teaser autoplay permission is missing');
-requireMatch(teaser, /loading="eager"/, 'teaser must load eagerly when exposed');
+requireMatch(teaser, /rootMargin: '560px 0px'/, 'teaser must wait until the reader approaches its section before loading the third-party frame');
+requireMatch(teaser, /frameRequested \? <iframe/, 'teaser frame must be absent until its visibility threshold is reached');
 requireMatch(teaser, /src=\{preview\.url\}/, 'teaser iframe must use the approved preview URL directly');
 requireMatch(app, /발효가바 이야기 보기/, 'hero teaser CTA must use a duration-neutral consumer label');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('hero teaser CTA must not promise an unverified duration');
@@ -205,12 +208,22 @@ if (!smartStoreLinks.length || smartStoreLinks.some(url => ![approvedSmartStoreU
 
 const shareRoot = resolve(root, 'public/share');
 const shareIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
+function pngDimensions(filePath) {
+  const image = readFileSync(filePath);
+  const signature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
+  if (image.length < 24 || !image.subarray(0, 8).equals(signature)) fail(`share image is not a PNG: ${filePath}`);
+  return {width: image.readUInt32BE(16), height: image.readUInt32BE(20)};
+}
 for (const id of shareIds) {
   const page = resolve(shareRoot, id, 'index.html');
   if (!existsSync(page)) fail(`share page ${id} is missing`);
   const html = await readFile(page, 'utf8');
   requireMatch(html, new RegExp(`canonical" href="https:\\/\\/kradavid\\.github\\.io\\/cellpinda_GABA\\/share\\/${id}\\/`), `share page ${id} canonical metadata is missing`);
   requireMatch(html, new RegExp(`rhythm=${id}`), `share page ${id} handoff is missing`);
+  const imageSize = pngDimensions(resolve(root, 'public', 'assets', `social-rhythm-${id}.png`));
+  requireMatch(html, new RegExp(`property="og:image:width" content="${imageSize.width}"`), `share page ${id} Open Graph image width must match the actual PNG`);
+  requireMatch(html, new RegExp(`property="og:image:height" content="${imageSize.height}"`), `share page ${id} Open Graph image height must match the actual PNG`);
+  if (html.includes(`rhythm=${id}#rhythm`)) fail(`share page ${id} must let the SPA handle result scrolling after mount`);
   requireMatch(html, /og:image/, `share page ${id} Open Graph image is missing`);
   requireMatch(html, /property="og:site_name" content="셀핀다 발효가바"/, `share page ${id} site name metadata is missing`);
   requireMatch(html, /property="og:locale" content="ko_KR"/, `share page ${id} locale metadata is missing`);
@@ -225,4 +238,8 @@ requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 뇌 �
 requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card-v4\.png"/, 'focus invite Open Graph image is missing');
 requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 
-  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'single-invite-action'], teaser: ['user-started-playback', 'eager-load', 'approved-preview-source', 'accurate-embed-event'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));
+  const researchAccent = researchStyles.match(/research-library-consumer-summary strong\{[^}]*color:#([0-9a-f]{6})/i)?.[1];
+  const linearChannel = channel => { const value = parseInt(channel, 16) / 255; return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4; };
+  const researchLuminance = researchAccent ? [0, 2, 4].reduce((sum, start, index) => sum + [0.2126, 0.7152, 0.0722][index] * linearChannel(researchAccent.slice(start, start + 2)), 0) : null;
+  if (researchLuminance === null || 1.05 / (researchLuminance + 0.05) < 4.5) fail('small green research labels must meet WCAG AA contrast on white');
+  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion', 'research-label-AA-contrast'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'single-invite-action'], teaser: ['user-started-playback', 'visibility-triggered-load', 'approved-preview-source', 'accurate-embed-event'], seo: ['canonical', 'og-url', 'social-image-dimensions'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));

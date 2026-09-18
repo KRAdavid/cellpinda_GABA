@@ -23,6 +23,7 @@ function isHttps(value: string | null): value is string {
 
 export default function TeaserPreview({onEvent}: Props) {
   const [preview, setPreview] = useState<TeaserPreviewData | null>(null);
+  const [frameRequested, setFrameRequested] = useState(false);
   const [frameLoaded, setFrameLoaded] = useState(false);
   const impressionTracked = useRef(false);
   const embedLoadTracked = useRef(false);
@@ -42,15 +43,22 @@ export default function TeaserPreview({onEvent}: Props) {
     if (!preview) return;
     const section = document.getElementById('teaser');
     if (!section) return;
-    const observer = new IntersectionObserver(entries => {
+    const preloadObserver = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        setFrameRequested(true);
+        preloadObserver.disconnect();
+      }
+    }, {rootMargin: '560px 0px', threshold: 0});
+    const impressionObserver = new IntersectionObserver(entries => {
       if (!impressionTracked.current && entries.some(entry => entry.isIntersecting)) {
         impressionTracked.current = true;
         onEvent?.('teaser_impression', {path: '/teaser'});
-        observer.disconnect();
+        impressionObserver.disconnect();
       }
     }, {threshold: 0.25});
-    observer.observe(section);
-    return () => observer.disconnect();
+    preloadObserver.observe(section);
+    impressionObserver.observe(section);
+    return () => { preloadObserver.disconnect(); impressionObserver.disconnect(); };
   }, [preview, onEvent]);
 
   if (!preview || !isHttps(preview.url)) return null;
@@ -63,11 +71,11 @@ export default function TeaserPreview({onEvent}: Props) {
         <p>{preview.description}</p>
         <p className="teaser-context">영상에서는 발효 이야기를, 연구와 제품 메뉴에서는 각각의 정보를 확인해 보세요.</p>
       </div>
-      <div className="teaser-card teaser-card-player" aria-busy={!frameLoaded}>
+      <div className="teaser-card teaser-card-player" aria-busy={frameRequested && !frameLoaded}>
         <div className="teaser-player">
-          <iframe
+          {frameRequested ? <iframe
             className="teaser-frame"
-            title={`${preview.title}. 시청하려면 영상 안의 재생 버튼을 눌러 주세요.`}
+            title={`${preview.title}. 이 화면 안의 재생 버튼으로 시청할 수 있어요.`}
             src={preview.url}
             allow="autoplay; fullscreen; picture-in-picture"
             loading="eager"
@@ -79,13 +87,13 @@ export default function TeaserPreview({onEvent}: Props) {
                 onEvent?.('teaser_embed_loaded', {path: '/teaser'});
               }
             }}
-          />
-          {!frameLoaded && <p className="teaser-loading" aria-live="polite">티저를 불러오는 중입니다…</p>}
+          /> : <p className="teaser-ready" aria-live="polite">이 화면 가까이 오면 바로 볼 수 있게 준비해요.</p>}
+          {frameRequested && !frameLoaded && <p className="teaser-loading" aria-live="polite">티저 화면을 불러오는 중입니다…</p>}
         </div>
         <div className="teaser-card-copy">
-          <p className="teaser-label">영상 안의 재생 버튼을 눌러 시작</p>
+          <p className="teaser-label">화면 안에서 바로 시청</p>
           <p className="teaser-card-title">{preview.title}</p>
-          <p>티저 페이지가 열렸어요. 영상 화면의 재생 버튼을 누르면 시청할 수 있습니다.</p>
+          <p>영상 화면의 재생 아이콘을 누르면 이 자리에서 시작돼요.</p>
           <p className="teaser-fallback">영상이 재생되지 않으면 <a href={preview.url} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('teaser_external_opened',{path:'/teaser'})}>새 창에서 보기 ↗</a></p>
         </div>
       </div>
