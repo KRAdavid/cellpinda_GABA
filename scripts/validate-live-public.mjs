@@ -141,16 +141,16 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const yamatsu = content.claims.find(claim => claim.id === 'research-yamatsu-2016');
     assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
     const review2020 = content.claims.find(claim => claim.id === 'research-review-2020');
-    assert.ok(review2020?.metadata?.consumerFinding?.includes('2020년 2월까지') && review2020.metadata.consumerFinding.includes('14편') && review2020.metadata.consumerFinding.includes('수면은 결론을 내리기엔 자료가 적었어요'), 'live research review must show its date range and assessment in plain language');
+    assert.ok(review2020?.metadata?.consumerSummary?.includes('2020년') && review2020.metadata.consumerSummary.includes('14편') && review2020.metadata.consumerContext?.includes('2020년 2월까지') && review2020.metadata.consumerFinding?.includes('긴장과 잠') && review2020.metadata.consumerFinding.includes('연구마다 다르게 보고됐어요') && review2020.metadata.consumerFinding.includes('한 가지 수치로 합치지 않고'), 'live research review must show its date range and variable results in neutral plain language');
     assert.ok(!content.claims.some(claim => claim.id === 'research-yoon-2022'), 'live public research must exclude the Yoon study while the result discrepancy is unresolved');
     assert.ok(!content.claims.some(claim => claim.id === 'research-steenbergen-2015'), 'live public research must exclude the retracted action-selection paper');
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
     assert.ok(byun2018?.metadata?.sampleSize?.includes('40명') && byun2018.metadata.sampleSize.includes('30명') && byun2018.metadata.sampleSize.includes('10명') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show the participant split and both groups');
     const powers2008 = content.claims.find(claim => claim.id === 'research-powers-2008');
-    assert.ok(powers2008?.metadata?.consumerFindingFirst === true && powers2008.metadata.consumerFinding?.includes('두 검사에서 모두') && powers2008.metadata.consumerFinding.includes('섭취 30분 뒤') && !powers2008.metadata.consumerDetail, 'live Powers study must lead with its clear consumer finding without repeating a second paragraph');
-    assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerDisclosure?.includes('Pharma Foods International'), 'live consumer research must show disclosed funding and author relationships');
+    assert.ok(powers2008?.metadata?.consumerFindingFirst !== true && powers2008.metadata?.consumerSummary?.includes('남성 11명') && powers2008.metadata.consumerSummary.includes('GABA 3g') && powers2008.metadata.consumerSummary.includes('90분') && powers2008.metadata.consumerFinding?.includes('성장호르몬 최고 수치') && powers2008.metadata.consumerFinding.includes('근육 크기와 근력 변화는 측정하지 않았어요') && !powers2008.metadata.consumerDetail, 'live Powers study must lead with its measurement design and keep the finding in context');
+    assert.ok(review2020?.metadata?.consumerDisclosure?.includes('게재 비용 지원') && review2020.metadata.consumerDisclosure.includes('산업계 관계'), 'live review must preserve its published funding and relationship disclosure');
     assert.ok(content.claims.find(claim => claim.id === 'research-yoto-2012')?.metadata?.consumerDisclosure?.includes('저자 9명 중 4명'), 'live Yoto study must show the published author affiliation disclosure');
-    assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerContext?.includes('그룹 간 효과는 확정적으로 해석하기 어려워요') && !content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerVisual, 'live Sakashita study must surface the source discrepancy and omit the disputed chart');
+    assert.ok(!content.claims.some(claim => claim.id === 'research-sakashita-2019') && !master.records.some(record => record.id === 'research-sakashita-2019'), 'live public research must keep the study with unresolved statistical review out of the public master index');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
     assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('나랑 ‘뇌 컨디션 확인 챌린지’ 해볼래?') && consumerBundle.includes('초대에는 내 게임 기록이나 답변이 포함되지 않아요.'), 'live consumer bundle must invite a friend without transmitting the player result');
     assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');
@@ -232,7 +232,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       }
       assert.equal(parsed, false, 'live public site must not expose internal operations snapshot ' + path);
     }
-    const required = ['research-yoto-2012', 'research-yamatsu-2016', 'research-powers-2008', 'research-sakashita-2019'];
+    const required = ['research-review-2020', 'research-yoto-2012', 'research-yamatsu-2016', 'research-powers-2008'];
     for (const id of required) assert.ok(master.records.some(record => record.id === id), 'live master index is missing ' + id);
     const claimsById = new Map(content.claims.map(claim => [claim.id, claim]));
     for (const record of master.records) {
