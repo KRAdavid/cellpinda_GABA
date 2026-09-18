@@ -67,3 +67,19 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .fatigue-game-comparison-note{padding:16px 18px;border-radius:12px;background:#f2f6f2;color:#455c4c;font-size:15px;line-height:1.75}
 .fatigue-game-comparison-note{margin:18px 0}
 @media(max-width:680px){.product{grid-template-columns:1fr}.product-visual{min-height:330px;padding:32px 24px}.product-visual>strong{font-size:72px}.product-portion-grid{grid-template-columns:repeat(6,14px);gap:9px;margin:24px 0 20px}.product-portion-grid i{width:14px;height:14px}.product-visual-facts{max-width:245px}.product-body{padding:24px}}
+/* Improve small-text contrast and keep the first mobile steps readable. */
+.chapter{color:#116f4a}
+.teaser-intro>.chapter{color:#a8e7bd}
+.step>span{color:#52675a}
+.process>div>span{color:#5b7162}
+.fatigue-game-note{color:#52675a}
+.brain-load-reading-path span,.brain-load-evidence-scale strong{color:#116f4a}
+.brain-load-reading-path small,.brain-load-evidence-note{color:#4f6356}
+@media(max-width:680px){
+.intro-strip{grid-template-columns:1fr;gap:0}
+.intro-strip h2{margin:0 0 12px}
+.step{display:grid;grid-template-columns:32px minmax(0,1fr);column-gap:12px;row-gap:2px;padding:14px 0;border-left:0;border-top:1px solid var(--line)}
+.step>span{grid-row:span 2}
+.step h3{margin:0;font-size:18px}
+.step p{grid-column:2;font-size:15px;line-height:1.6}
+}

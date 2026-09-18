@@ -13,6 +13,8 @@
       "amountMg": 1500,
       "servings": 30,
       "totalG": 45,
+      "category": "기타가공품",
+      "categorySource": "사용자가 2026-09-18 대화에서 확인한 제품 분류",
       "officialUrl": "https://smartstore.naver.com/cellpinda/products/4701017202",
       "status": "approved",
       "availability": "스마트스토어에서 재고 확인",

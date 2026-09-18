@@ -240,7 +240,7 @@ for (const [topic, ids] of Object.entries(coverage)) {
 
 if (content.products.length !== 1) fail(`expected one approved product, found ${content.products.length}`);
 const product = content.products[0];
-if (product.id !== 'gaba1500' || product.amountMg !== 1500 || product.servings !== 30 || !isSmartStore(product.officialUrl)) fail('the public product must be the Smart Store 1500 mapping');
+if (product.id !== 'gaba1500' || product.amountMg !== 1500 || product.servings !== 30 || product.category !== '기타가공품' || !isSmartStore(product.officialUrl)) fail('the public product must match the user-confirmed Smart Store 1500 product data');
 for (const claim of content.claims.filter(item => ['product-1500', 'fermentation-listed'].includes(item.id))) {
   if (!claim.sources.every(source => isSmartStore(source.url))) fail(`public product claim ${claim.id} must use the Smart Store source only`);
 }

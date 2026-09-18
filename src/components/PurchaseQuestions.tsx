@@ -38,7 +38,7 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'evidence' }); }}>
         <summary>연구 내용은 제품을 이해하는 데 어떻게 도움이 되나요?</summary>
-        <div><p>연구에 누가 참여했고, 무엇을 얼마나 먹었는지 쉬운 말로 정리했어요. 셀핀다 제품 포장에 적힌 내용도 함께 확인해 보세요.</p><a className="text-link" href="#research">연구 이야기 보기 →</a></div>
+        <div><p>연구에 누가 참여했고, 무엇을 얼마나 먹었는지 쉬운 말로 정리했어요. 셀핀다 제품 포장에 적힌 내용도 함께 확인해 보세요.</p><a className="text-link" href={`${import.meta.env.BASE_URL}research/`}>GABA 사람 연구 보기 →</a></div>
       </details>
     </div>
   </section>;

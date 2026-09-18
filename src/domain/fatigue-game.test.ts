@@ -3,6 +3,7 @@ import test from 'node:test';
 import {
   compareFocusGames,
   compareReactionGames,
+  createFocusGameInviteText,
   createFocusRunPattern,
   FATIGUE_GAME_ROUNDS,
   FOCUS_GAME_STAGES,
@@ -148,4 +149,10 @@ test('changes question forms on repeat, including with a deterministic random so
 
 test('rejects a random source outside the expected range', () => {
   assert.throws(() => createFocusRunPattern(() => 1), RangeError);
+});
+
+test('creates an honest, gameplay-only invite with a bounded personal result', () => {
+  assert.equal(createFocusGameInviteText(83.6), '내 1분 신호 게임 정답률은 84%였어. 건강 검사가 아닌 게임 기록이야. 너도 해볼래?');
+  assert.match(createFocusGameInviteText(120), /정답률은 100%/);
+  assert.match(createFocusGameInviteText(-3), /정답률은 0%/);
 });

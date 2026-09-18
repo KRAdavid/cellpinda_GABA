@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AlertTriangle, ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
 import { classifyRhythm, questions, resultTypes, rhythmIdFromUrl } from '../domain/rhythm';
+import { createFocusGameInviteText } from '../domain/fatigue-game';
 import type { AnswerValue, RhythmId, RhythmResult, RhythmType } from '../domain/rhythm';
 import FatigueGame from './FatigueGame';
 import './rhythm.css';
@@ -348,24 +349,25 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     }
   }
 
-  async function copyInviteLink(kind: 'rhythm' | 'focus' = 'rhythm') {
+  async function copyInviteLink(kind: 'rhythm' | 'focus' = 'rhythm', shareText?: string) {
     const url = inviteUrl(kind, getShareReferralId());
+    const copyText = kind === 'focus' && shareText ? `${shareText} ${url}` : url;
     try {
-      await navigator.clipboard.writeText(url);
-      setMessage(kind === 'focus' ? '1분 게임 초대 링크를 복사했어요. 친구도 직접 해볼 수 있어요.' : '내 답변이 담기지 않은 1분 체크 링크를 복사했어요.');
+      await navigator.clipboard.writeText(copyText);
+      setMessage(kind === 'focus' ? '게임 기록과 초대 링크를 복사했어요. 친구에게 보내 보세요.' : '내 답변이 담기지 않은 1분 체크 링크를 복사했어요.');
       setManualLink('');
       onEvent('share_copy',{path:result?'/result':'/share',channel:'invite'});
       onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
     } catch {
-      setManualLink(url);
-      setMessage('초대 링크를 아래에서 선택해 직접 복사해 주세요.');
+      setManualLink(copyText);
+      setMessage('아래 내용을 선택해 친구에게 보내 주세요.');
     }
   }
 
-  async function shareInvite(kind: 'rhythm' | 'focus' = 'rhythm') {
+  async function shareInvite(kind: 'rhythm' | 'focus' = 'rhythm', gameAccuracyPct?: number) {
     const url = inviteUrl(kind, getShareReferralId());
     const shareText = kind === 'focus'
-      ? '누르기·멈추기·색 바꾸기, 세 가지 규칙이 나오는 1분 신호 게임이야. 너도 해볼래?'
+      ? createFocusGameInviteText(gameAccuracyPct ?? 0)
       : '잠과 휴식에 관한 1분 체크를 해봤어요. 당신도 지난 일주일을 돌아봐요.';
     onEvent('share_request',{path:result?'/result':'/share',kind:'invite'});
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
@@ -383,7 +385,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
         }
       }
     }
-    await copyInviteLink(kind);
+    await copyInviteLink(kind, shareText);
   }
 
   function shareToKakao() {
@@ -500,7 +502,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : (
         <div className="rhythm-start-panel"><div><h3>다섯 가지만 확인해요.</h3><p>일을 마쳐도 생각이 이어졌는지, 잠들기까지 오래 걸렸는지 떠올려 보세요.</p><details className="rhythm-start-scenes"><summary>질문에 나오는 생활 장면</summary><ul><li>퇴근 뒤에도 일이 계속 생각남</li><li>침대에 누워 한참 뒤척임</li><li>하루 종일 쉴 틈이 없었음</li><li>아침에도 피로가 남아 있음</li></ul></details></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>지난 7일 1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">답변은 저장하지 않아요.</p></div></div>
       )}
-      <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} />
+      <FatigueGame onEvent={onEvent} onInvite={accuracyPct => shareInvite('focus', accuracyPct)} />
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
           <div className="rhythm-comparison-heading"><div><p className="rhythm-eyebrow">함께 돌아보는 하루</p><h3 id="rhythm-comparison-heading">나와 친구, 각자의 쉬는 방식.</h3></div><button type="button" className="rhythm-text-button" onClick={() => { setFriendType(null); setCompareConsent(false); }}>비교 지우기</button></div>
@@ -514,7 +516,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
         </section>
       ) : null}
       <p className="rhythm-status" role="status" aria-live="polite">{message}</p>
-      {manualLink ? <label className="rhythm-manual-link">공유 링크<input value={manualLink} readOnly onFocus={event => event.target.select()} /></label> : null}
+      {manualLink ? <label className="rhythm-manual-link">친구에게 보낼 내용<input value={manualLink} readOnly onFocus={event => event.target.select()} /></label> : null}
     </section>
   );
 }

@@ -15,3 +15,7 @@
   .research-route-intro>p:last-child{font-size:16px}
   .research-gateway{align-items:flex-start;flex-direction:column}
 }
+
+/* Keep the research scope simple and distinguish it from product information. */
+.research-route-intro>p:last-child{max-width:58ch;margin-bottom:0;font-size:16px;line-height:1.7;color:#43584a}
+.research-library>.section-head h2{margin-bottom:0}

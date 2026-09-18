@@ -200,6 +200,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(pageText.includes(approvedReviewText), 'live static fallback must expose the approved consumer review guidance');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
+    assert.equal(content.products[0].category, '기타가공품', 'live export must match the user-confirmed product type');
     assert.equal(content.products[0].officialUrl, approvedSmartStoreUrl, 'live product must point to the Smart Store 1500 product');
     assert.equal(content.reviews.length, 1, 'live export must contain the approved Smart Store review destination');
     assert.equal(content.reviews[0].id, 'shop-review-destination-1500', 'live review destination must be the approved GABA 1500 record');

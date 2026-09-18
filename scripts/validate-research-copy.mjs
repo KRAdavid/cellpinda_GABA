@@ -13,10 +13,11 @@ const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles
 const appSource = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const researchLibrary = consumerSources['ResearchLibrary.tsx'];
+const gameDomain = await readFile(new URL('../src/domain/fatigue-game.ts', import.meta.url), 'utf8');
 const purchaseQuestions = consumerSources['PurchaseQuestions.tsx'];
 const reviewExperience = consumerSources['ReviewExperience.tsx'];
 const gabaStory = consumerSources['GabaStory.tsx'];
-const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml].join('\n');
+const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml, gameDomain].join('\n');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
@@ -39,7 +40,7 @@ if (!sakashita?.publicText?.includes('1.34kg') || !sakashita.publicText.includes
 if ((appSource.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(appSource)) fail('the detailed research library must be the only research-results section on the consumer page');
 if (/research-(?:yoto|byun|sakashita)-\d{4}|metadata\.consumerSummary/.test(gabaStory)) fail('the GABA introduction must point to the research list without repeating study results');
 if (!researchLibrary.includes('canonicalStudySources')) fail('research records must be deduplicated by all linked primary sources');
-if (!consumerUi.includes('뇌 피로나 건강 상태를 재는 점수는 아니에요') || !researchLibrary.includes('누가 무엇을 먹고 무엇을 살펴봤는지 쉬운 말과 그림') || !researchLibrary.includes('GABA를 먹지 않고 뇌 신호를 살펴본 연구') || !researchLibrary.includes('연구에서 기록한 내용') || !researchLibrary.includes('metadata.productApplicability') || !researchLibrary.includes('metadata.consumerDisclosure') || !researchLibrary.includes('metadata.consumerDetail') || !researchLibrary.includes("new URL('research/',base)") || !researchLibrary.includes('논문 원문 보기') || !researchLibrary.includes('source.title')) fail('research route must explain study scope in consumer language, disclose research relationships, and distinguish game scores from health measures');
+if (!consumerUi.includes('뇌 피로나 건강 상태를 재는 점수는 아니에요') || !consumerUi.includes('건강 검사가 아닌 게임 기록이야') || !appSource.includes('여러 사람 연구를 소개해요. 연구에 쓴 방법과 제품은 셀핀다 가바 1500과 다를 수 있어요.') || !researchLibrary.includes('GABA를 먹지 않고 뇌 신호를 살펴본 연구') || !researchLibrary.includes('연구에서 기록한 내용') || !researchLibrary.includes('metadata.productApplicability') || !researchLibrary.includes('metadata.consumerDisclosure') || !researchLibrary.includes('metadata.consumerDetail') || !researchLibrary.includes("new URL('research/',base)") || !researchLibrary.includes('논문 원문 보기') || !researchLibrary.includes('source.title')) fail('research route must explain study scope in consumer language, disclose research relationships, and distinguish gameplay records from health measures');
 if (!consumerSources['StudyInsightVisual.tsx'].includes('beforeSd') || !consumerSources['StudyInsightVisual.tsx'].includes('± 뒤 숫자는 참여자별 기록의 퍼짐') || consumerSources['StudyInsightVisual.tsx'].includes('is-featured')) fail('paired study chart must show both groups with their reported spread and neutral visual emphasis');
 
 const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장|직접\s*(먹어|경험)|가바\s*(경험|섭취를\s*시작)/;

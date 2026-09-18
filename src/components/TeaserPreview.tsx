@@ -84,7 +84,7 @@ export default function TeaserPreview({onEvent}: Props) {
         </div>
         <div className="teaser-card-copy">
           <p className="teaser-label">영상 안의 재생 버튼을 눌러 시작</p>
-          <h3>{preview.title}</h3>
+          <p className="teaser-card-title">{preview.title}</p>
           <p>티저 페이지가 열렸어요. 영상 화면의 재생 버튼을 누르면 시청할 수 있습니다.</p>
           <p className="teaser-fallback">영상이 재생되지 않으면 <a href={preview.url} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('teaser_external_opened',{path:'/teaser'})}>새 창에서 보기 ↗</a></p>
         </div>

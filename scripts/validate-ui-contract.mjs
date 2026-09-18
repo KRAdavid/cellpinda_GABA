@@ -36,11 +36,11 @@ const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews']) {
   requireMatch(app, new RegExp(`(?:id|href)=["']#?${id}["']`), `consumer section or link ${id} is missing`);
 }
-const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', 'research-gateway', '<section id="fermentation"', '<section id="products"', '<ReviewExperience', '<BrainLoadEvidence'];
+const consumerFlow = ['<RhythmExperience', '<BrainLoadEvidence', '<GabaStory', '<TeaserPreview', 'research-gateway', '<section id="fermentation"', '<section id="products"', '<ReviewExperience'];
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
-requireMatch(app, /연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉽게 정리했어요/, 'research route must introduce the evidence in plain language');
+requireMatch(app, /여러 사람 연구를 소개해요\. 연구에 쓴 방법과 제품은 셀핀다 가바 1500과 다를 수 있어요\./, 'research route must explain the evidence scope in plain language');
 requireMatch(app, /description='연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉬운 말과 그림으로 소개합니다\.'/ , 'research route metadata must use plain language');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
@@ -85,7 +85,7 @@ requireMatch(researchRouteHtml, /GABA 사람 연구 읽기/, 'no-script research
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*research-gateway/, 'the GABA explanation and teaser must lead to a separate, easy-to-find research route');
 requireMatch(research, /canonicalStudySources/, 'research list must suppress duplicate records of the same paper across all source links');
-requireMatch(research, /궁금한 주제로[\s\S]*연구를 찾아보세요/, 'research list must have a clear consumer heading');
+requireMatch(research, /어떤 주제가 궁금하세요/, 'research list must have a clear consumer heading');
 requireMatch(story, /GABA 사람 연구 읽기/, 'GABA introduction must link to the separate research route');
 if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(app + story)) fail('a study result must appear in only one detailed research section');
 for (const marker of ['study-time-comparison', 'study-paired-groups', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
