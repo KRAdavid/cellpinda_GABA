@@ -114,7 +114,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const researchPageText = await researchPageResponse.text();
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
     assert.match(researchPageText, /property="og:title" content="GABA 사람 연구를 쉬운 말로"/, 'live research route must identify itself as an educational page');
-    assert.ok(researchPageText.includes('GABA 사람 연구를 쉬운 말로 소개해요. 셀핀다 제품 정보는 제품 페이지에서 확인해 보세요.'), 'live research page must use a simple consumer introduction and keep product information separate');
+    assert.ok(researchPageText.includes('먹는 GABA 연구와 뇌 속 GABA 관찰 연구를 쉬운 말로 소개해요. 셀핀다 가바 1500 시험과는 구분해 보여드려요.'), 'live research page must distinguish ingestion research, brain-observation research and the Cellpinda finished product');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
