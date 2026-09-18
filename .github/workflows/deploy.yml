@@ -65,7 +65,6 @@ jobs:
           path: |
             dist/
             worker-build/
-            goal-audit.json
           if-no-files-found: error
           retention-days: 7
       - name: Upload GitHub Pages artifact

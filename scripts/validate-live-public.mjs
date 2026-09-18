@@ -114,7 +114,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const researchPageText = await researchPageResponse.text();
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
     assert.match(researchPageText, /property="og:title" content="GABA 사람 연구를 쉬운 말로"/, 'live research route must identify itself as an educational page');
-    assert.ok(researchPageText.includes('GABA를 먹은 연구와 먹지 않고 뇌 신호를 살펴본 연구') && researchPageText.includes('셀핀다 완제품을 시험한 결과는 아닙니다'), 'live research page must explain intake versus observation and product scope before readers enter the data');
+    assert.ok(researchPageText.includes('사람을 대상으로 GABA를 살펴본 논문을 모았어요') && researchPageText.includes('제품 표시사항을 각각 확인해 보세요'), 'live research page must distinguish general study material from current product information before readers enter the data');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
@@ -141,11 +141,12 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const yamatsu = content.claims.find(claim => claim.id === 'research-yamatsu-2016');
     assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
     const review2020 = content.claims.find(claim => claim.id === 'research-review-2020');
-    assert.ok(review2020?.metadata?.consumerFinding?.includes('14편') && review2020.metadata.consumerFinding.includes('확인 방법') && review2020.metadata.consumerFinding.includes('한 가지로 확실히 말하기 어려웠어요'), 'live research review must explain its bounded conclusion in plain language');
+    assert.ok(review2020?.metadata?.consumerFinding?.includes('2020년 2월까지') && review2020.metadata.consumerFinding.includes('14편') && review2020.metadata.consumerFinding.includes('제품·양·기간·확인 방법'), 'live research review must give its date range and variation in study conditions in plain language');
     const yoon2022 = content.claims.find(claim => claim.id === 'research-yoon-2022');
     assert.ok(yoon2022?.metadata?.consumerFinding?.includes('9.0분에서 4.8분') && yoon2022.metadata.consumerFinding.includes('비교 정제'), 'live Yoon study must include its observed change and the comparison group');
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
-    assert.ok(byun2018?.metadata?.consumerContext?.includes('연구 시작') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show both groups and baseline context');
+    assert.ok(byun2018?.metadata?.consumerContext?.includes('30명') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show the participant split and both groups');
+    assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerDisclosure?.includes('Pharma Foods International'), 'live consumer research must show disclosed funding and author relationships');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
     assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('내 답변과 점수는 포함되지 않아요'), 'live consumer bundle must expose the clear friend game invitation and privacy note');
     assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');
@@ -170,11 +171,11 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
     assert.equal(canonicalHref(focusPageText), `${base}/focus/`, 'live focus invite canonical URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:url'), `${base}/focus/`, 'live focus invite Open Graph URL is invalid');
-    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card.png`, 'live focus invite Open Graph image is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card-v2.png`, 'live focus invite Open Graph image is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
     assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#focus-game'), 'live focus invite must hand off to the explained game without auto-start');
     assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 게임 시작하기') && focusPageText.includes('초록을 누르고 빨강은 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
-    const focusGameCardResponse = await request('/assets/focus-game-card.png');
+    const focusGameCardResponse = await request('/assets/focus-game-card-v2.png');
     assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
     assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {

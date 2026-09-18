@@ -697,6 +697,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
             <p className="fatigue-game-kicker">첫 번째 게임 · 24개 신호 완료</p>
             <h3>{resultGuidance === 'celebrate' ? '축하해요! 신호를 잘 따라왔어요.' : '잠깐 쉬고 다시 해봐도 좋아요.'}</h3>
             <p className="fatigue-game-result-score">{summaryLine(before)}</p>
+            <p className="fatigue-game-result-boundary">이 점수는 오늘 한 게임 기록이에요. 뇌 피로나 건강 상태를 재는 점수는 아니에요.</p>
             <p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${resultGuidance}`} role="status">
               {resultGuidance === 'celebrate'
                 ? '오늘의 게임 기록을 남기거나 친구에게도 보내 보세요.'

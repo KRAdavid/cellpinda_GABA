@@ -52,3 +52,4 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 @media(max-width:680px){.header>.button{display:none}.menu-toggle{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin-left:auto;border:0;border-radius:50%;background:#f1f6f1;color:var(--ink);padding:0}.hero h1{max-width:100%;font-size:clamp(34px,10vw,40px);overflow-wrap:anywhere}}
 
 @media(max-width:680px){h1,p{max-width:100%;overflow-wrap:anywhere}.hero-question{font-size:17px;line-height:1.65}.research-route-intro h1{font-size:clamp(31px,9vw,38px)}}
+.product-category{display:inline-block;margin-left:8px;padding:4px 9px;border:1px solid #ccdbcf;border-radius:99px;background:#f4f8f4;color:#385846;font-size:13px;font-weight:600;vertical-align:middle}

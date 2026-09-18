@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">셀핀다 1분 집중 신호 게임</title>
+  <title id="title">셀핀다 뇌 컨디션 확인 챌린지</title>
   <desc id="desc">초록 신호는 누르고 빨강 신호는 멈추는 짧은 게임</desc>
   <rect width="1200" height="630" fill="#f3f7f1"/>
   <circle cx="1015" cy="310" r="260" fill="#e9f2ea"/>
@@ -9,7 +9,7 @@
   <path d="M94 71v26m-13-13h26" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
   <text x="132" y="88" fill="#173c2f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="18" font-weight="700" letter-spacing="2">CELLPINDA</text>
   <text x="73" y="178" fill="#138253" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="19" font-weight="700" letter-spacing="1.4">친구가 보낸 1분 게임</text>
-  <text x="70" y="270" fill="#173c2f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="70" font-weight="750" letter-spacing="-4">집중 신호 게임</text>
+  <text x="70" y="270" fill="#173c2f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="58" font-weight="750" letter-spacing="-3">뇌 컨디션 확인 챌린지</text>
   <text x="74" y="330" fill="#53695c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="26">초록은 누르고, 빨강은 멈춰요.</text>
   <rect x="73" y="378" width="292" height="54" rx="27" fill="#173c2f"/>
   <text x="99" y="414" fill="#fff" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="19" font-weight="650">24개 신호 · 매번 다른 순서</text>

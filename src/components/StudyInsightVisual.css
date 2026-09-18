@@ -53,7 +53,6 @@
 .study-ratio-bars>div,.study-group-row{display:grid;grid-template-columns:minmax(75px,.8fr) minmax(55px,1.6fr) auto;align-items:center;gap:9px;color:#657369;font-size:10px}
 .study-ratio-bars i,.study-group-row>i{display:block;height:8px;overflow:hidden;border-radius:8px;background:#e8ede8}
 .study-ratio-bars i b,.study-group-row>i b{display:block;height:100%;border-radius:inherit;background:#a8bbb0}
-.study-ratio-bars .is-highlight i b,.study-group-row.is-highlight>i b{background:#388554}
 .study-ratio-bars strong,.study-group-row>strong{min-width:47px;color:#263a2d;font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
 .study-group-row{margin-top:12px}
 .study-group-row>strong small{margin-left:2px;font-size:10px;font-weight:500}

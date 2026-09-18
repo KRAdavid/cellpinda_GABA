@@ -8,6 +8,7 @@ export type ResearchMetadata = {
   consumerSummary?: string;
   consumerFinding?: string;
   consumerContext?: string;
+  consumerDisclosure?: string;
   consumerVisual?: ConsumerVisual;
   consumerScope?: string;
   hopefulTakeaway?: string;
@@ -100,7 +101,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
     if (sourceKeys.some(key => seenStudySources.has(key))) return false;
     sourceKeys.forEach(key => seenStudySources.add(key));
     return true;
-  });
+  }).sort((left,right)=>Number(right.id==='research-review-2020')-Number(left.id==='research-review-2020'));
   const topics = [...new Set(studies.map(claim => claim.topic).filter(Boolean))];
   const activeTopic = topics.includes(topic) ? topic : '';
   const studyTypes = [...new Set(studies.map(claim => claim.metadata!.studyType).filter((value): value is string => Boolean(value)))];
@@ -143,7 +144,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
     <div className="section-head research-library-head"><div><p className="chapter">사람 연구를 한곳에서</p><h2 id="research-title">궁금한 주제로<br/>연구를 찾아보세요.</h2></div><p>각 연구는 한 번만 소개해요.<br/>측정한 내용과 참여 조건을 함께 보여드립니다.</p></div>
-    <p className="research-library-evidence-note">연구마다 사용한 제품·양·기간이 달라요. 연구 조건을 카드에서 확인할 수 있습니다.</p>
+    <p className="research-library-evidence-note">연구마다 사용한 제품·양·참여한 사람·측정한 내용이 달라요. 먼저 여러 연구를 모아 본 자료를 보여드리고, 개별 연구 조건도 함께 확인할 수 있어요.</p>
     <div className="research-reading-path" role="img" aria-label="궁금한 점, 연구에 참여한 사람, 살펴본 변화를 차례로 보여줍니다">
       <div><Search aria-hidden="true"/><strong>궁금한 점</strong></div><ArrowRight aria-hidden="true"/>
       <div><UsersRound aria-hidden="true"/><strong>누가 참여했나요?</strong></div><ArrowRight aria-hidden="true"/>
@@ -172,11 +173,12 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       return <article id={claim.id} className="research-library-card" key={claim.id}>
         <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType, metadata.dose)}</p>
         <h3>{metadata.question || claim.topic}</h3>
-        {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : (metadata.consumerFinding || metadata.consumerSummary) ? <p className="research-library-consumer-summary"><strong>{metadata.consumerFinding ? '연구에서 기록한 내용' : '연구를 이렇게 살펴봤어요'}</strong>{metadata.consumerFinding || metadata.consumerSummary}</p> : null}
-        {metadata.consumerVisual && metadata.consumerContext ? <p className="research-library-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
-        <div className="research-library-quick-facts" aria-label="연구를 한눈에 보는 도표">
+        <div className="research-library-quick-facts" aria-label="연구 조건을 먼저 확인하세요">
           {quickFacts.map(({label, value, Icon}) => <div key={label} title={`${label}: ${value}`}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span><strong>{label}</strong><small>{value}</small></span></div>)}
         </div>
+        <p className="research-library-study-scope"><strong>연구에서 사용한 것</strong><span>{metadata.productApplicability}</span></p>
+        {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : (metadata.consumerFinding || metadata.consumerSummary) ? <p className="research-library-consumer-summary"><strong>{metadata.consumerFinding ? '연구에서 기록한 내용' : '연구를 이렇게 살펴봤어요'}</strong>{metadata.consumerFinding || metadata.consumerSummary}</p> : null}
+        {metadata.consumerVisual && metadata.consumerContext ? <p className="research-library-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
         <details className="research-detail" onToggle={event => {
           if (event.currentTarget.open) onOpen?.(claim.id);
         }}>
@@ -188,6 +190,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
               <div className="research-story-card"><FlaskConical size={21} aria-hidden="true"/><h4>연구에 쓴 제품과 양</h4><p>{metadata.productApplicability}</p></div>
               <div className="research-story-card"><Activity size={21} aria-hidden="true"/><h4>무엇을 살펴봤나요?</h4><p>{metadata.outcome || metadata.consumerScope || '연구에서 살펴본 항목'}</p></div>
               {metadata.comparison?<div className="research-story-card"><Clock3 size={21} aria-hidden="true"/><h4>무엇과 비교했나요?</h4><p>{metadata.comparison}</p></div>:null}
+              {metadata.consumerDisclosure?<div className="research-story-card research-story-card--disclosure"><Info size={21} aria-hidden="true"/><h4>연구비와 저자 관계</h4><p>{metadata.consumerDisclosure}</p></div>:null}
             </div>
           </div>
           <div className="research-library-sources"><h4>자료 출처</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료를 확인한 날 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>

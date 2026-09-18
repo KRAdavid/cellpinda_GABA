@@ -74,7 +74,7 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
     return <figure className="study-insight study-insight--ratio" aria-label={`${visual.metric}: ${visual.comparisonLabel}, 비교 음료를 먹은 경우 ${visual.baseline}${visual.unit}, GABA를 먹은 경우 ${visual.observed}${visual.unit}`}>
       <figcaption><Activity size={18} aria-hidden="true"/>{visual.metric}</figcaption>
       <div className="study-ratio-hero"><strong>약 {numberText(visual.observed/visual.baseline)}<small>배</small></strong><span>{visual.comparisonLabel}</span></div>
-      <div className="study-ratio-bars">{[{label:'비교 음료',value:visual.baseline},{label:'GABA를 먹은 경우',value:visual.observed}].map((item,index)=><div key={item.label} className={index===1?'is-highlight':''}><span>{item.label}</span><i><b style={{width:`${Math.max(item.value/max*100,5)}%`}}/></i><strong>{numberText(item.value)}×</strong></div>)}</div>
+      <div className="study-ratio-bars">{[{label:'비교 음료',value:visual.baseline},{label:'GABA를 먹은 경우',value:visual.observed}].map(item=><div key={item.label}><span>{item.label}</span><i><b style={{width:`${Math.max(item.value/max*100,5)}%`}}/></i><strong>{numberText(item.value)}×</strong></div>)}</div>
       <small className="study-insight-footnote">{visual.participantLabel} · {visual.doseLabel}</small>
     </figure>;
   }
@@ -82,7 +82,7 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
   const max=Math.max(visual.scaleMax,...visual.groups.map(group=>group.value));
   return <figure className="study-insight study-insight--groups" aria-label={`${visual.metric}: ${visual.groups.map(group=>`${group.label} ${group.value}${visual.unit}`).join(', ')}`}>
     <figcaption><Dumbbell size={18} aria-hidden="true"/>{visual.metric}</figcaption>
-    {visual.groups.map((group,index)=><div className={`study-group-row${index===1?' is-highlight':''}`} key={group.label}>
+    {visual.groups.map(group=><div className="study-group-row" key={group.label}>
       <span>{group.label.replace('유청단백질','단백질')}</span><i><b style={{width:`${Math.max(group.value/max*100,5)}%`}}/></i><strong>{numberText(group.value)}<small>{visual.unit}</small></strong>
     </div>)}
     <div className="study-insight-footer"><small>{visual.comparisonNote} · {visual.participantLabel}</small></div>

@@ -462,7 +462,6 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <p className="rhythm-eyebrow">오늘 먼저 해볼 휴식</p>
               <h4>{type.recoveryHeading}</h4>
               <p>{type.recoveryDescription}</p>
-            <a className="text-link" href="#story">GABA가 어떤 물질인지 확인하기 →</a>
             </div>
             <div className="rhythm-suggestions"><h4>오늘 바로 해볼 일</h4><ul>{type.suggestions.map(suggestion => <li key={suggestion}>{suggestion}</li>)}</ul></div>
             <p className="rhythm-note">내가 고른 답을 바탕으로 한 생활 안내예요. 건강 상태를 보여주는 검사는 아니에요.</p>
@@ -487,9 +486,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <details className="rhythm-rules"><summary>점수는 어떻게 나온 건가요?</summary><p>{result?.explanation ?? '지난 7일 동안 잠, 휴식, 아침 피로 등에 답한 내용을 모아 보여드려요. 점수는 내 답변을 정리한 것이며 건강 상태를 재거나 병을 진단하는 결과가 아닙니다.'}</p></details>
-            <a className="rhythm-text-button" href="#story">GABA가 어떤 물질인지 알아보기 <ArrowRight size={18} aria-hidden="true" /></a>
             <a className="rhythm-text-button" href="#brain-load-evidence">집중과 휴식 관련 연구 쉽게 보기 <ArrowRight size={18} aria-hidden="true" /></a>
-            <a className="rhythm-text-button" href="#products">제품 포장에 적힌 내용 보기 <ArrowRight size={18} aria-hidden="true" /></a>
           </div>
         </div>
       ) : started ? (
