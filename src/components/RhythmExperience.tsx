@@ -34,7 +34,7 @@ function shareUrl(type: RhythmType, referralId?: string): string {
 function inviteUrl(kind: 'rhythm' | 'focus' = 'rhythm', referralId = ''): string {
   const root = new URL(import.meta.env.BASE_URL, window.location.origin);
   const base = kind === 'focus' ? new URL('focus/', root) : root;
-  base.hash = 'rhythm';
+  base.hash = kind === 'focus' ? 'focus-game' : 'rhythm';
   if (kind === 'focus') base.searchParams.set('focus', '1');
   if (referralId && /^[A-Za-z0-9_-]{8,64}$/.test(referralId)) base.searchParams.set('ref', referralId);
   if (campaignId && /^[A-Za-z0-9_-]{1,64}$/.test(campaignId)) base.searchParams.set('campaign', campaignId);
@@ -216,12 +216,17 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const [manualLink, setManualLink] = useState('');
   const [cardUrl, setCardUrl] = useState('');
   const [kakaoReady, setKakaoReady] = useState(false);
-  const focusAutoStart = typeof window !== 'undefined' && (new URLSearchParams(window.location.search).get('focus') === '1' || window.location.pathname.endsWith('/focus/'));
+  const focusInviteArrival = typeof window !== 'undefined' && (new URLSearchParams(window.location.search).get('focus') === '1' || window.location.pathname.endsWith('/focus/'));
   const sharedTracked=useRef(false);
   const pointerSelecting=useRef(false);
   const shareReferralRef=useRef('');
   const getShareReferralId=()=>{if(!shareReferralRef.current){shareReferralRef.current=crypto.randomUUID().replaceAll('-','').slice(0,16)}return shareReferralRef.current};
   useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
+  useEffect(() => {
+    if (!focusInviteArrival) return;
+    const frame = window.requestAnimationFrame(() => document.getElementById('focus-game')?.scrollIntoView({ behavior: 'auto', block: 'start' }));
+    return () => window.cancelAnimationFrame(frame);
+  }, [focusInviteArrival]);
   useEffect(()=>{if(!kakaoKey)return;const ready=()=>{if(!window.Kakao)return;try{if(!window.Kakao.isInitialized())window.Kakao.init(kakaoKey);setKakaoReady(true)}catch{setKakaoReady(false)}};if(window.Kakao){ready();return;}const script=document.createElement('script');script.src='https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';script.async=true;script.onload=ready;script.onerror=()=>setKakaoReady(false);document.head.appendChild(script);return()=>{script.onload=null;script.onerror=null}},[]);
   const answerStarted=useRef(false);
   const resultViewed=useRef(false);
@@ -360,14 +365,14 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   async function shareInvite(kind: 'rhythm' | 'focus' = 'rhythm') {
     const url = inviteUrl(kind, getShareReferralId());
     const shareText = kind === 'focus'
-      ? '나 방금 해봤어. 1분이면 끝나. 너도 해볼래?'
+      ? '초록 신호는 누르고, 빨강은 멈추는 1분 게임이야. 너도 해볼래?'
       : '잠과 휴식에 관한 1분 체크를 해봤어요. 당신도 지난 일주일을 돌아봐요.';
     onEvent('share_request',{path:result?'/result':'/share',kind:'invite'});
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
     if (navigator.share) {
       try {
-        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 1분 게임' : '잠과 휴식 1분 체크', text: shareText, url });
-        setMessage('1분 체크 초대 창을 열었어요. 친구도 직접 해보도록 보내 보세요.');
+        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 1분 집중 신호 게임' : '잠과 휴식 1분 체크', text: shareText, url });
+        setMessage(kind === 'focus' ? '게임 초대를 보냈어요. 친구도 설명을 읽고 직접 시작할 수 있어요.' : '1분 체크 초대 창을 열었어요. 친구도 직접 해보도록 보내 보세요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
         return;
       } catch (error) {
@@ -483,7 +488,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <details className="rhythm-rules"><summary>점수는 어떻게 나온 건가요?</summary><p>{result?.explanation ?? '지난 7일 동안 잠, 휴식, 아침 피로 등에 답한 내용을 모아 보여드려요. 점수는 내 답변을 정리한 것이며 건강 상태를 재거나 병을 진단하는 결과가 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#story">GABA가 어떤 물질인지 알아보기 <ArrowRight size={18} aria-hidden="true" /></a>
-            <a className="rhythm-text-button" href="#brain-load-evidence">뇌 피로와 건강 연구를 쉽게 보기 <ArrowRight size={18} aria-hidden="true" /></a>
+            <a className="rhythm-text-button" href="#brain-load-evidence">집중과 휴식 관련 연구 쉽게 보기 <ArrowRight size={18} aria-hidden="true" /></a>
             <a className="rhythm-text-button" href="#products">제품 포장에 적힌 내용 보기 <ArrowRight size={18} aria-hidden="true" /></a>
           </div>
         </div>
@@ -498,7 +503,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : (
         <div className="rhythm-start-panel"><div><h3>다섯 가지만 확인해요.</h3><p>일을 마쳐도 생각이 이어졌는지, 잠들기까지 오래 걸렸는지 떠올려 보세요.</p><details className="rhythm-start-scenes"><summary>질문에 나오는 생활 장면</summary><ul><li>퇴근 뒤에도 일이 계속 생각남</li><li>침대에 누워 한참 뒤척임</li><li>하루 종일 쉴 틈이 없었음</li><li>아침에도 피로가 남아 있음</li></ul></details></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>지난 7일 1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">답변은 저장하지 않아요.</p></div></div>
       )}
-      <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} startOnMount={focusAutoStart} />
+      <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} />
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
           <div className="rhythm-comparison-heading"><div><p className="rhythm-eyebrow">함께 돌아보는 하루</p><h3 id="rhythm-comparison-heading">나와 친구, 각자의 쉬는 방식.</h3></div><button type="button" className="rhythm-text-button" onClick={() => { setFriendType(null); setCompareConsent(false); }}>비교 지우기</button></div>

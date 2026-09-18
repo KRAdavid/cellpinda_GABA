@@ -100,8 +100,9 @@ requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence sectio
 for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
-requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|휴식했어요 · 다시 측정/, 'reaction game and rest comparison flow are missing');
-for (const marker of ['뇌컨디션 확인 챌린지', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '할 때마다 달라집니다', '문제 수와 시간은 같아', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
+for (const marker of ['1분 집중 신호 게임', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '할 때마다 달라집니다', '24개 신호 완료', '5분 쉬고 한 번 더 하기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '건강 상태나 휴식 효과를 재는 검사가 아닙니다', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 1분 게임 보내기']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+if (/needsFocusRecovery|FOCUS_GAME_RECOVERY_THRESHOLD_PCT|쉬고 난 뒤 게임 기록이 좋아졌어요|휴식 후/.test(fatigueGame)) fail('focus game must not use a score threshold as a recovery diagnosis or mislabel a second run');
 for (const marker of ['게임 효과음', 'playGameCue(\'start\')', 'playGameCue(\'signal\')', 'playGameCue(\'stage\')', 'playGameCue(\'complete\')', 'playGameCue(\'false-start\')']) requireMatch(fatigueGame, new RegExp(marker.replace(/[()]/g, '\\$&')), `focus game sound cue ${marker} is missing`);
 requireMatch(fatigueGame, /playGameCue\(correct \? 'correct' : 'miss'\)/, 'focus game must sound its response judgment');
 requireMatch(fatigueGame, /toggleGameSound[\s\S]*aria-pressed=\{gameSoundEnabled\}/, 'focus game must expose an accessible sound toggle');
@@ -113,8 +114,9 @@ requireMatch(fatigueGame, /createFocusRunPattern\(Math\.random, runPatternRef\.c
 requireMatch(fatigueGame, /responseWindowMs/, 'each difficulty stage must use its calibrated response window');
 for (const marker of ['공이 올라가는 동안 · 4초', '공이 위에 머무는 동안 · 2초', '공이 내려가는 동안 · 6초', '공이 아래에 머무는 동안 · 2초', 'BreathLineGuide', 'prefers-reduced-motion', '자연스럽게 호흡하세요']) requireMatch(fatigueGame, new RegExp(marker), `animated 4-2-6-2 breathing rest marker ${marker} is missing`);
 requireMatch(fatigueGameStyles, /fatigue-breath-line[\s\S]*fatigue-breath-phases[\s\S]*is-active/, 'animated breathing guide must have responsive line and phase styles');
-for (const marker of ['잘했어요! 신호를 잘 따라왔어요.', '이번엔 놓친 신호가 있었어요.', '5분 쉬고 다시 해보기', '5분 쉬고 기록 비교하기', 'baseline-finished']) requireMatch(fatigueGame, new RegExp(marker), `score-based focus guidance marker ${marker} is missing`);
-requireMatch(rhythm, /focusAutoStart|focus-game/, 'focus challenge invite must deep-link to the game');
+for (const marker of ['첫 번째 게임 기록을 남겼어요.', '5분 쉰 뒤 다른 신호로 한 번 더 해볼 수 있어요.', '5분 쉰 뒤 두 번째 게임', '쉬지 않고 이어 한 두 번째 게임', 'baseline-finished']) requireMatch(fatigueGame, new RegExp(marker), `score-agnostic focus flow marker ${marker} is missing`);
+requireMatch(rhythm, /focusInviteArrival[\s\S]*getElementById\('focus-game'\)[\s\S]*scrollIntoView/, 'focus challenge invite must scroll to the game instructions');
+if (/startOnMount|focusAutoStart/.test(rhythm + fatigueGame)) fail('focus challenge must wait for the visitor to tap the start button');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
 requireMatch(fatigueGameStyles, /fatigue-stage-preview[\s\S]*fatigue-trial-dots[\s\S]*fatigue-target-purple/, 'advanced focus game visual stages are missing');
 requireMatch(fatigueGame, /fatigue-rule-slot[\s\S]*fatigue-rule-placeholder/, 'focus game must reserve the rule position in every stage');
@@ -175,9 +177,9 @@ const focusPage = resolve(root, 'public/focus/index.html');
 if (!existsSync(focusPage)) fail('focus invite page is missing');
 const focusHtml = await readFile(focusPage, 'utf8');
 requireMatch(focusHtml, /canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//, 'focus invite canonical metadata is missing');
-requireMatch(focusHtml, /focus=1#rhythm|focus=1/, 'focus invite handoff is missing');
-requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 1분 집중 리듬 게임"/, 'focus invite Open Graph title is missing');
-requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/social-card\.png"/, 'focus invite Open Graph image is missing');
+requireMatch(focusHtml, /focus=1#focus-game|focus=1/, 'focus invite handoff is missing');
+requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 1분 집중 신호 게임"/, 'focus invite Open Graph title is missing');
+requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card\.png"/, 'focus invite Open Graph image is missing');
 requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 
   console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'single-invite-action'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));

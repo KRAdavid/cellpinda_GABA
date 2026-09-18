@@ -10,7 +10,6 @@ export const FOCUS_GAME_STAGES = ['speed', 'brake', 'switch'] as const;
 export const FOCUS_GAME_TRIALS_PER_STAGE = 8;
 export const FOCUS_GAME_TOTAL_TRIALS = FOCUS_GAME_STAGES.length * FOCUS_GAME_TRIALS_PER_STAGE;
 /** Accuracy at or below this level opens an extra rest-and-retest prompt. */
-export const FOCUS_GAME_RECOVERY_THRESHOLD_PCT = 70;
 export type FocusGameStage = (typeof FOCUS_GAME_STAGES)[number];
 export const FOCUS_STIMULUS_SHAPES = ['circle', 'diamond', 'ring', 'triangle'] as const;
 export type FocusStimulusShape = (typeof FOCUS_STIMULUS_SHAPES)[number];
@@ -206,10 +205,6 @@ export interface FocusGameSummary {
   readonly switch: FocusStageSummary;
 }
 
-export function needsFocusRecovery(summary: FocusGameSummary): boolean {
-  return summary.accuracyPct <= FOCUS_GAME_RECOVERY_THRESHOLD_PCT;
-}
-
 function summarizeFocusStage(records: readonly FocusTrialRecord[]): FocusStageSummary {
   const responseTimes = records
     .map(record => record.responseMs)
@@ -240,7 +235,7 @@ export function summarizeFocusGame(records: readonly FocusTrialRecord[], falseSt
         (record.responded && record.responseMs === null) || (!record.responded && record.responseMs !== null) ||
         record.correct !== (record.shouldRespond ? record.responded : !record.responded);
     }) || !Number.isInteger(falseStarts) || falseStarts < 0) {
-    throw new TypeError(`뇌컨디션 확인 챌린지는 ${expectedTrials}라운드 기록과 0 이상의 오작동 횟수가 필요합니다.`);
+    throw new TypeError(`집중 신호 게임에는 ${expectedTrials}개 신호 기록과 0 이상의 잘못 누른 횟수가 필요합니다.`);
   }
   const speed = summarizeFocusStage(records.slice(0, FOCUS_GAME_TRIALS_PER_STAGE));
   const brake = summarizeFocusStage(records.slice(FOCUS_GAME_TRIALS_PER_STAGE, FOCUS_GAME_TRIALS_PER_STAGE * 2));

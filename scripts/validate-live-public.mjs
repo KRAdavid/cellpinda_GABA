@@ -112,16 +112,19 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }));
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 보기'), 'live consumer bundle must contain the consumer-facing teaser CTA');
-    assert.ok(consumerBundle.includes('뇌컨디션 확인 챌린지'), 'live consumer bundle must contain the advanced focus game');
+    assert.ok(consumerBundle.includes('1분 집중 신호 게임'), 'live consumer bundle must contain the consumer-facing focus game');
     assert.ok(consumerBundle.includes('색과 모양, 순서는 할 때마다 달라집니다') && consumerBundle.includes('세 단계로 나와요'), 'live consumer bundle must explain the randomized, progressive focus game in plain language');
-    assert.ok(consumerBundle.includes('5분 쉬고 다시 해보기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose rest guidance and breathing-stage singing bowl cues');
+    assert.ok(consumerBundle.includes('5분 쉬고 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
+    assert.ok(consumerBundle.includes('쉬지 않고 이어서 하기') && consumerBundle.includes('휴식이 기록 변화의 원인이라고 단정할 수는 없어요'), 'live consumer bundle must distinguish repeat records without claiming a rest effect');
+    assert.ok(consumerBundle.includes('건강 상태나 휴식 효과를 재는 검사가 아닙니다') && consumerBundle.includes('초록') && consumerBundle.includes('보라'), 'live consumer bundle must clarify the non-diagnostic game and show accessible color labels');
+    assert.ok(!consumerBundle.includes('needsFocusRecovery') && !consumerBundle.includes('쉬고 난 뒤 게임 기록이 좋아졌어요'), 'live consumer bundle must not diagnose recovery from a score or claim a rest effect');
     assert.ok(consumerBundle.includes('시작 준비') && consumerBundle.includes('첫 신호가 나타나면'), 'live consumer bundle must give users a ready countdown before the focus game starts');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
     assert.ok(consumerBundle.includes('친구도 1분 해보기'), 'live consumer bundle must expose the friend challenge share CTA');
     assert.ok(consumerBundle.includes('친구에게 1분 체크 보내기'), 'live consumer bundle must make the result share an invitation to check');
     assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');
     assert.ok(consumerBundle.includes('지난 7일 다섯 질문에 고른 답을 더한 숫자'), 'live consumer bundle must explain the personal answer score');
-    assert.ok(consumerBundle.includes('뇌 피로와 건강 연구를 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');
+    assert.ok(consumerBundle.includes('집중과 휴식 관련 연구 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');
     assert.ok(consumerBundle.includes('61개 연구') && consumerBundle.includes('267개 연구') && consumerBundle.includes('21개 연구'), 'live consumer bundle must include evidence scale markers');
     assert.ok(!consumerBundle.includes('발효가바가 무엇인지 30초'), 'live consumer bundle still contains the retired teaser duration promise');
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
@@ -141,10 +144,12 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
     assert.equal(canonicalHref(focusPageText), `${base}/focus/`, 'live focus invite canonical URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:url'), `${base}/focus/`, 'live focus invite Open Graph URL is invalid');
-    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live focus invite Open Graph image is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card.png`, 'live focus invite Open Graph image is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
-    assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#rhythm'), 'live focus invite must hand off to the auto-start game');
-    assert.ok(focusPageText.includes('24개') && focusPageText.includes('매번 달라지는 신호'), 'live focus invite must describe randomized 24-signal challenge');
+    assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#focus-game'), 'live focus invite must hand off to the explained game without auto-start');
+    assert.ok(focusPageText.includes('24개') && focusPageText.includes('게임 설명 보고 시작하기') && focusPageText.includes('초록 신호는 누르고'), 'live focus invite must explain the randomized game before the user starts it');
+    const focusGameCardResponse = await request('/assets/focus-game-card.png');
+    assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
     assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';

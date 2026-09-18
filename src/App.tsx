@@ -92,11 +92,11 @@ export default function App(){
   const type=value ? resultTypes[value] : null;
   const focusInvite=new URLSearchParams(location.search).get('focus')==='1' || location.pathname.endsWith('/focus/');
   if(!type&&!focusInvite)return;
-  const title=focusInvite ? '“너도 해봐” 1분 집중 리듬 게임 | 셀핀다' : `공유받은 하루 리듬: ‘${type!.name}’ | Cellpinda`;
-  const description=focusInvite ? '색 신호를 누르고 멈추는 1분 게임이에요. 문제 순서는 할 때마다 달라져요.' : `친구가 고른 ‘${type!.name}’ 장면을 공유했어요. 내 체크 결과는 아니에요.`;
+  const title=focusInvite ? '“너도 해봐” 1분 집중 신호 게임 | 셀핀다' : `공유받은 하루 리듬: ‘${type!.name}’ | Cellpinda`;
+  const description=focusInvite ? '매번 달라지는 24개 신호에 도전하는 짧은 게임이에요. 내 게임 기록만 확인할 수 있으며 건강 상태를 진단하지 않습니다.' : `친구가 고른 ‘${type!.name}’ 장면을 공유했어요. 내 체크 결과는 아니에요.`;
   document.title=title;
   const update=(selector:string,attribute:'name'|'property',value:string)=>{const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}=\"${selector}\"]`);if(element)element.content=value;else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}};
-  const image=new URL(asset(focusInvite ? 'assets/social-card.png' : `assets/social-rhythm-${type!.id}.png`),window.location.origin).toString();
+  const image=new URL(asset(focusInvite ? 'assets/focus-game-card.png' : `assets/social-rhythm-${type!.id}.png`),window.location.origin).toString();
   update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:image','property',image);update('og:url','property',window.location.href);update('twitter:title','name',title);update('twitter:description','name',description);update('twitter:image','name',image);
  },[]);
  useEffect(()=>{
