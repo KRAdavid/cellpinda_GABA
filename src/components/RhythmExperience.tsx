@@ -354,7 +354,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     const copyText = kind === 'focus' && shareText ? `${shareText} ${url}` : url;
     try {
       await navigator.clipboard.writeText(copyText);
-      setMessage(kind === 'focus' ? '게임 기록과 초대 링크를 복사했어요. 친구에게 보내 보세요.' : '내 답변이 담기지 않은 1분 체크 링크를 복사했어요.');
+      setMessage(kind === 'focus' ? '챌린지 초대 문구와 링크를 복사했어요. 친구에게 보내 보세요.' : '내 답변이 담기지 않은 1분 체크 링크를 복사했어요.');
       setManualLink('');
       onEvent('share_copy',{path:result?'/result':'/share',channel:'invite'});
       onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
@@ -364,16 +364,16 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     }
   }
 
-  async function shareInvite(kind: 'rhythm' | 'focus' = 'rhythm', gameAccuracyPct?: number) {
+  async function shareInvite(kind: 'rhythm' | 'focus' = 'rhythm') {
     const url = inviteUrl(kind, getShareReferralId());
     const shareText = kind === 'focus'
-      ? createFocusGameInviteText(gameAccuracyPct ?? 0)
+      ? createFocusGameInviteText()
       : '잠과 휴식에 관한 1분 체크를 해봤어요. 당신도 지난 일주일을 돌아봐요.';
     onEvent('share_request',{path:result?'/result':'/share',kind:'invite'});
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
     if (navigator.share) {
       try {
-        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 1분 신호 반응 게임' : '잠과 휴식 1분 체크', text: shareText, url });
+        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 뇌 컨디션 확인 챌린지' : '잠과 휴식 1분 체크', text: shareText, url });
         setMessage(kind === 'focus' ? '게임 초대를 보냈어요. 친구도 설명을 읽고 직접 시작할 수 있어요.' : '1분 체크 초대 창을 열었어요. 친구도 직접 해보도록 보내 보세요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
         return;
@@ -502,7 +502,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : (
         <div className="rhythm-start-panel"><div><h3>다섯 가지만 확인해요.</h3><p>일을 마쳐도 생각이 이어졌는지, 잠들기까지 오래 걸렸는지 떠올려 보세요.</p><details className="rhythm-start-scenes"><summary>질문에 나오는 생활 장면</summary><ul><li>퇴근 뒤에도 일이 계속 생각남</li><li>침대에 누워 한참 뒤척임</li><li>하루 종일 쉴 틈이 없었음</li><li>아침에도 피로가 남아 있음</li></ul></details></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>지난 7일 1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">답변은 저장하지 않아요.</p></div></div>
       )}
-      <FatigueGame onEvent={onEvent} onInvite={accuracyPct => shareInvite('focus', accuracyPct)} />
+      <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} />
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
           <div className="rhythm-comparison-heading"><div><p className="rhythm-eyebrow">함께 돌아보는 하루</p><h3 id="rhythm-comparison-heading">나와 친구, 각자의 쉬는 방식.</h3></div><button type="button" className="rhythm-text-button" onClick={() => { setFriendType(null); setCompareConsent(false); }}>비교 지우기</button></div>

@@ -17,9 +17,8 @@ export function getFocusGameResultGuidance(accuracyPct: number): FocusGameResult
   return accuracyPct <= FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT ? 'pause' : 'celebrate';
 }
 
-export function createFocusGameInviteText(accuracyPct: number): string {
-  const personalResult = Math.max(0, Math.min(100, Math.round(accuracyPct)));
-  return `내 1분 신호 게임 정답률은 ${personalResult}%였어. 건강 검사가 아닌 게임 기록이야. 너도 해볼래?`;
+export function createFocusGameInviteText(): string {
+  return '나랑 ‘뇌 컨디션 확인 챌린지’ 해볼래? 1분 동안 바뀌는 신호를 보고 누르거나 멈추는 게임이야.';
 }
 
 export type FocusGameStage = (typeof FOCUS_GAME_STAGES)[number];
