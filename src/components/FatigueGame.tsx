@@ -128,9 +128,9 @@ function playFocusSoundCue(context: AudioContext, cue: FocusSoundCue) {
 }
 
 const stageInfo: Record<FocusGameStage, { label: string; instruction: string; detail: string }> = {
-  speed: { label: '빠르게 누르기', instruction: '신호가 나타나면 바로 눌러요', detail: '색과 모양이 순서 없이 바뀝니다' },
-  brake: { label: '멈춤 신호 참기', instruction: '초록은 누르고 빨강은 참아요', detail: '8개 중 3개는 누르지 않는 신호예요' },
-  switch: { label: '색 규칙 바꾸기', instruction: '위 기준색과 같은 신호만 눌러요', detail: '모양은 무시하고, 바뀌는 색 규칙만 따라요' },
+  speed: { label: '빠르게 누르기', instruction: '색과 모양에 상관없이, 신호가 뜨면 눌러요', detail: '모든 신호에 한 번씩 눌러요' },
+  brake: { label: '누르기와 멈추기', instruction: '초록은 누르고, 빨강은 누르지 않아요', detail: '8개 중 3개는 누르지 않는 신호예요' },
+  switch: { label: '색 규칙 바꾸기', instruction: '위 기준색과 같은 신호만 눌러요', detail: '모양은 무시하고, 화면 위 색 규칙만 따라요' },
 };
 
 function trialPrompt(trial: Trial): string {
@@ -589,16 +589,17 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
     <section className="fatigue-game" id="focus-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
         <div><p className="fatigue-game-kicker">02 / 오늘의 게임 기록</p><h2 id="fatigue-game-heading">1분 집중 신호 게임</h2></div>
-        <p>초록은 누르고, 빨강은 기다려요.</p>
+        <p>신호가 3단계로 바뀌어요.</p>
       </div>
 
       <div className={`fatigue-game-panel fatigue-game-phase-${phase}`}>
         {phase === 'idle' ? <div className="fatigue-game-onboarding">
           <p className="fatigue-game-kicker">약 1분 · 신호 {FOCUS_GAME_TOTAL_TRIALS}개</p>
-          <h3>초록은 누르고,<br />빨강은 참아요.</h3>
+          <h3>세 가지 규칙을<br />차례로 따라가요.</h3>
           <div className="fatigue-game-rule-cards" aria-label="게임 규칙">
-            <div className="fatigue-game-rule-card"><span className="fatigue-rule-symbol fatigue-rule-symbol-press" aria-hidden="true">●</span><span><strong>초록</strong><small>한 번 누르기</small></span></div>
-            <div className="fatigue-game-rule-card"><span className="fatigue-rule-symbol fatigue-rule-symbol-stop" aria-hidden="true">Ⅱ</span><span><strong>빨강</strong><small>누르지 않기</small></span></div>
+            <div className="fatigue-game-rule-card"><span className="fatigue-rule-step">1</span><span><strong>초록은 누르고</strong><small>빨강은 누르지 않기</small></span></div>
+            <div className="fatigue-game-rule-card"><span className="fatigue-rule-step">2</span><span><strong>신호가 뜨면</strong><small>색과 모양 상관없이 누르기</small></span></div>
+            <div className="fatigue-game-rule-card"><span className="fatigue-rule-step">3</span><span><strong>위의 기준색과</strong><small>같은 신호만 누르기</small></span></div>
           </div>
           <div className="fatigue-game-onboarding-actions">
             <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 두 번 연습하기 <ArrowRight size={18} aria-hidden="true" /></button>
@@ -625,7 +626,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         {phase === 'practice-complete' ? <div className="fatigue-game-practice fatigue-game-practice-complete" aria-labelledby="fatigue-practice-complete-heading">
           <p className="fatigue-game-kicker">연습 완료</p>
           <h3 id="fatigue-practice-complete-heading" ref={practiceHeadingRef} tabIndex={-1}>규칙을 익혔어요.</h3>
-          <p>이제 매번 달라지는 신호 {FOCUS_GAME_TOTAL_TRIALS}개에 도전해 보세요.</p>
+          <p>첫 8개는 초록만 누르고, 다음에는 화면 규칙을 따라요. 매번 달라지는 신호 {FOCUS_GAME_TOTAL_TRIALS}개에 도전해요.</p>
           <button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Gamepad2 size={18} aria-hidden="true" /> 실전 시작 <ArrowRight size={18} aria-hidden="true" /></button>
           <button type="button" className="rhythm-text-button" onClick={beginPractice}>한 번 더 연습</button>
         </div> : null}

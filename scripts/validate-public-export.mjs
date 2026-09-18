@@ -7,6 +7,7 @@ const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const focusHtml = await readFile(new URL('../public/focus/index.html', import.meta.url), 'utf8');
+const productShareHtml = await readFile(new URL('../public/products/index.html', import.meta.url), 'utf8');
 const robots = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8');
 const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 const teaser = await readJson('data/teaser-manifest.json');
@@ -37,9 +38,10 @@ if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 뇌세포가 서로 신호�
 if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml) || !/<meta property="og:type" content="website"\s*\/>/i.test(indexHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml)) fail('index.html must expose canonical and Open Graph URL metadata');
 if (!/canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//.test(focusHtml) || !/property="og:title" content="“너도 해봐” 1분 집중 신호 게임"/.test(focusHtml) || !/property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card\.png"/.test(focusHtml) || !/focus=1#focus-game|focus=1/.test(focusHtml) || !focusHtml.includes('24개') || !focusHtml.includes('먼저 연습하고 게임 시작하기')) fail('focus invite page must expose the randomized, user-started game preview and app handoff');
 if (!/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/.test(indexHtml)) fail('index.html must expose safe WebSite structured data');
+if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/">/.test(productShareHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/">/.test(productShareHtml) || !/<meta property="og:title" content="셀핀다 가바 1,500 · 제품 구성 보기">/.test(productShareHtml) || !productShareHtml.includes('assets/product-1500.jpg') || !productShareHtml.includes('https://smartstore.naver.com/cellpinda/products/4701017202') || !productShareHtml.includes('../?view=products#products')) fail('product share page must expose product-specific metadata, preview image, and product/store destinations');
 if (!/^User-agent: \*\nAllow: \/\nDisallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops\n\nSitemap: https:\/\/kradavid\.github\.io\/cellpinda_GABA\/sitemap\.xml\s*$/m.test(robots)) fail('robots.txt must expose the public sitemap and keep internal paths out of discovery');
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-const expectedSitemapUrls = ['https://kradavid.github.io/cellpinda_GABA/', 'https://kradavid.github.io/cellpinda_GABA/focus/', ...['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'].map(id => `https://kradavid.github.io/cellpinda_GABA/share/${id}/`)];
+const expectedSitemapUrls = ['https://kradavid.github.io/cellpinda_GABA/', 'https://kradavid.github.io/cellpinda_GABA/products/', 'https://kradavid.github.io/cellpinda_GABA/focus/', ...['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'].map(id => `https://kradavid.github.io/cellpinda_GABA/share/${id}/`)];
 if (!sitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?>') || !sitemap.includes('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"') || JSON.stringify(sitemapUrls) !== JSON.stringify(expectedSitemapUrls) || /\/admin|\/ops/.test(sitemap)) fail('sitemap.xml must contain only the public landing, focus invite and share pages');
 if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims are required');
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
@@ -206,7 +208,7 @@ for (const claim of content.claims) {
 
 const recordsById = new Map(master.records.map(record => [record.id, record]));
 const coverage = {
-  stress: ['research-yoto-2012'],
+  stress: ['research-review-2020'],
   sleep: ['research-byun-2018', 'research-yamatsu-2016'],
   growthHormone: ['research-powers-2008'],
   muscleDevelopment: ['research-sakashita-2019'],

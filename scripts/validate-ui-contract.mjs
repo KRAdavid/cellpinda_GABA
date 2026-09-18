@@ -10,6 +10,7 @@ const styles = await read('src/styles.css');
 const rhythm = await read('src/components/RhythmExperience.tsx');
 const rhythmStyles = await read('src/components/rhythm.css');
 const fatigueGame = await read('src/components/FatigueGame.tsx');
+const fatigueGameDomain = await read('src/domain/fatigue-game.ts');
 const fatigueGameStyles = await read('src/components/fatigue-game.css');
 const challenge = await read('src/components/SevenDayChallenge.tsx');
 const productShare = await read('src/components/ProductShare.tsx');
@@ -67,7 +68,7 @@ requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain r
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*ResearchLibrary/, 'the GABA explanation and teaser must lead to one detailed research list');
 requireMatch(research, /canonicalStudySources/, 'research list must suppress duplicate records of the same paper across all source links');
 requireMatch(research, /궁금한 주제로[\s\S]*연구를 찾아보세요/, 'research list must have a clear consumer heading');
-requireMatch(story, /사람 연구 한곳에서 보기/, 'GABA introduction must link to the single research list');
+requireMatch(story, /사람 연구 살펴보기/, 'GABA introduction must link to the single research list');
 if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(app + story)) fail('a study result must appear in only one detailed research section');
 for (const marker of ['study-time-comparison', 'study-paired-groups', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
 requireMatch(app, /한 포에 든 양 확인/, 'fermentation flow must use a consumer-friendly label');
@@ -110,6 +111,8 @@ requireMatch(fatigueGameStyles, /\.fatigue-game-sound-toggle[\s\S]*\.fatigue-gam
 if (/speechSynthesis|SpeechSynthesisUtterance/.test(fatigueGame)) fail('five-minute rest must not play spoken narration');
 requireMatch(fatigueGame, /setPhase\('countdown'\)[\s\S]*phase === 'countdown'[\s\S]*첫 신호가 나타나면/, 'focus game must give users a ready countdown before the first scored signal');
 requireMatch(fatigueGame, /function beginPractice\(\)[\s\S]*setPhase\('practice-press'\)[\s\S]*fatigue_game_practice_start/, 'focus game must start a separate practice before scored play');
+requireMatch(fatigueGameDomain, /FOCUS_GAME_STAGES\s*=\s*\['brake',\s*'speed',\s*'switch'\]/, 'the first scored phase must match the green/red stop rule practiced before play');
+for (const marker of ['초록은 누르고', '빨강은 누르지 않기', '색과 모양 상관없이 누르기', '위의 기준색과', '첫 8개는 초록만 누르고']) requireMatch(fatigueGame, new RegExp(marker), `focus game must preview its three stages in actual order: ${marker}`);
 requireMatch(fatigueGame, /function finishPracticePress\(\)[\s\S]*setPhase\('practice-hold'\)/, 'focus game practice must teach the stop response after a tap');
 requireMatch(fatigueGame, /phase !== 'practice-hold'[\s\S]*setTimeout\([\s\S]*setPhase\('practice-complete'\)/, 'focus game must let users practice waiting without tapping');
 requireMatch(fatigueGame, /phase === 'practice-complete'[\s\S]*onClick=\{\(\) => startRun\('baseline'\)\}/, 'practice completion must lead to scored play');
@@ -133,6 +136,7 @@ requireMatch(reviewStyles, /review-quote-card p:not\(\.review-quote-label\)[\s\S
 requireMatch(challenge, /challenge_start|challenge_day_complete|seven_day_complete/, 'challenge measurement events are missing');
 requireMatch(shareDomain, /approvedCampaign[\s\S]*?URLSearchParams\(currentSearch\)[\s\S]*?\.get\('campaign'\)/, 'shared campaign tokens must use the approved helper');
 requireMatch(productShare, /preserveCampaign\(url,window\.location\.search\)/, 'product share must preserve an approved campaign identifier');
+requireMatch(productShare, /new URL\('products\/',base\)/, 'product shares must use a static product-specific metadata route');
 requireMatch(challenge, /preserveCampaign\(url, window\.location\.search\)/, 'challenge share must preserve an approved campaign identifier');
   for (const event of ['hero_check_start', 'rhythm_check_complete', 'result_share_click', 'result_share_success', 'friend_check_start', 'product_compare_view', 'review_source_click', 'purchase_cta_click', 'challenge_start', 'challenge_day_complete', 'seven_day_complete', 'fatigue_game_start', 'fatigue_game_rest_start', 'fatigue_game_complete']) {
   requireMatch(app + rhythm + challenge + fatigueGame, new RegExp(event), `required measurement event ${event} is missing`);

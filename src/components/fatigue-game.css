@@ -75,9 +75,10 @@
 .fatigue-game-onboarding{display:grid;justify-items:center;gap:20px;max-width:680px;margin:0 auto;text-align:center}
 .fatigue-game-onboarding>.fatigue-game-kicker{margin:0}
 .fatigue-game-onboarding h3{margin:0;color:#18382b;font-size:clamp(30px,5vw,46px);font-weight:550;letter-spacing:-.055em;line-height:1.22}
-.fatigue-game-rule-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(100%,500px)}
+.fatigue-game-rule-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:min(100%,680px)}
 .fatigue-game-rule-card{display:flex;align-items:center;justify-content:center;gap:12px;min-height:94px;padding:14px 18px;border:1px solid #d6e2d7;border-radius:12px;background:#fff;text-align:left}
 .fatigue-game-rule-card>span:last-child{display:grid;gap:3px}.fatigue-game-rule-card strong{color:#18382b;font-size:18px}.fatigue-game-rule-card small{color:#53695c;font-size:14px}
+.fatigue-rule-step{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;border-radius:50%;background:#e6f4eb;color:#17814f;font-size:18px;font-weight:750}
 .fatigue-rule-symbol{display:grid;place-items:center;width:50px;height:50px;flex:0 0 50px;border-radius:50%;font-size:23px;font-weight:750}
 .fatigue-rule-symbol-press{background:#e6f4eb;color:#17814f}.fatigue-rule-symbol-stop{background:#fff0ee;color:#c53f35}
 .fatigue-game-onboarding-actions{display:grid;justify-items:center;gap:9px;width:min(100%,360px)}
@@ -109,6 +110,6 @@
 .fatigue-trial-progress>span{color:#53695c;font-size:11px;font-variant-numeric:tabular-nums}
 .fatigue-trial-progress .fatigue-trial-dots{justify-content:flex-end;gap:clamp(4px,1vw,8px);margin:0}
 .fatigue-game-onboarding :focus-visible,.fatigue-game-practice :focus-visible{outline:3px solid #158457;outline-offset:4px}
-@media(max-width:760px){.fatigue-game-onboarding{gap:16px}.fatigue-game-rule-cards{gap:9px}.fatigue-game-rule-card{min-height:88px;gap:9px;padding:12px 9px}.fatigue-rule-symbol{width:42px;height:42px;flex-basis:42px}.fatigue-game-rule-card strong{font-size:16px}.fatigue-game-rule-card small{font-size:13px}.fatigue-game-practice{min-height:340px;gap:16px}.fatigue-practice-signal{width:148px;height:148px}}
-@media(max-width:390px){.fatigue-game-rule-cards{grid-template-columns:1fr;width:min(100%,320px)}.fatigue-game-rule-card{justify-content:flex-start;padding-left:22px}.fatigue-game-practice h3{font-size:25px}}
+@media(max-width:760px){.fatigue-game-onboarding{gap:16px}.fatigue-game-rule-cards{grid-template-columns:1fr;gap:8px;width:min(100%,440px)}.fatigue-game-rule-card{justify-content:flex-start;min-height:70px;gap:12px;padding:10px 14px}.fatigue-rule-step{width:32px;height:32px;flex-basis:32px}.fatigue-rule-symbol{width:42px;height:42px;flex-basis:42px}.fatigue-game-rule-card strong{font-size:16px}.fatigue-game-rule-card small{font-size:14px}.fatigue-game-practice{min-height:340px;gap:16px}.fatigue-practice-signal{width:148px;height:148px}}
+@media(max-width:390px){.fatigue-game-practice h3{font-size:25px}}
 @media(prefers-reduced-motion:reduce){.fatigue-practice-signal-press,.fatigue-practice-timer span{transition:none}}

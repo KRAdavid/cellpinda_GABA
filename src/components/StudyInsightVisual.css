@@ -60,3 +60,17 @@
 .study-group-row>strong small{margin-left:2px;font-size:10px;font-weight:500}
 .study-insight--groups .study-insight-footer{align-items:flex-start;flex-direction:column;gap:4px}
 @media(max-width:680px){.study-insight{margin-top:14px;padding-top:13px}.study-time-comparison strong{font-size:34px}.study-pair-metrics{gap:10px}.study-pair-metrics>div+div{padding-left:10px}.study-pair-metrics strong{font-size:23px}.study-ratio-hero>strong{font-size:42px}}
+
+/* Readable research figures for mobile and midlife audiences. */
+.study-insight figcaption{font-size:14px;color:#263a2d}
+.study-insight figcaption>span,.study-time-comparison>div>span,.study-ratio-hero>span{font-size:14px;color:#53675a}
+.study-time-comparison>div>span,.study-pair-metrics>div>span,.study-insight--journey li>strong,.study-journey-outcome>span:not(.study-trend),.study-observation-map>div>span{font-size:14px;color:#43584a}
+.study-insight-footer>small,.study-insight-footnote,.study-ratio-bars>div,.study-group-row,.study-ratio-bars>div>span,.study-group-row>span{font-size:14px;color:#43584a;line-height:1.55}
+.study-paired-measure,.study-paired-group h4,.study-paired-group h4 small{font-size:14px;color:#43584a}
+.study-paired-measure strong,.study-ratio-bars strong,.study-group-row>strong{font-size:14px}
+.study-journey-outcome>span:not(.study-trend) small{font-size:14px;line-height:1.5}
+.study-insight--journey ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.study-insight--journey li{min-height:72px;padding:10px 5px}
+.study-insight--journey li .study-journey-arrow{display:none}
+.study-paired-measure strong small,.study-group-row>strong small,.study-time-comparison strong small,.study-ratio-hero>strong small{font-size:14px}
+@media(max-width:420px){.study-time-comparison{grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:4px}.study-ratio-bars>div,.study-group-row{grid-template-columns:minmax(74px,.85fr) minmax(34px,1.2fr) auto;gap:6px}.study-paired-measure{grid-template-columns:72px minmax(28px,1fr) 57px;gap:5px}}

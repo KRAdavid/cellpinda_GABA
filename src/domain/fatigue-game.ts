@@ -5,8 +5,8 @@
  */
 export const FATIGUE_GAME_ROUNDS = 5;
 
-/** Three progressively harder tasks; each form keeps equal counts for fair personal comparisons. */
-export const FOCUS_GAME_STAGES = ['speed', 'brake', 'switch'] as const;
+/** Start with the practiced stop rule, then move to speed and rule switching. */
+export const FOCUS_GAME_STAGES = ['brake', 'speed', 'switch'] as const;
 export const FOCUS_GAME_TRIALS_PER_STAGE = 8;
 export const FOCUS_GAME_TOTAL_TRIALS = FOCUS_GAME_STAGES.length * FOCUS_GAME_TRIALS_PER_STAGE;
 /** Accuracy at or below this level opens an extra rest-and-retest prompt. */
@@ -237,9 +237,9 @@ export function summarizeFocusGame(records: readonly FocusTrialRecord[], falseSt
     }) || !Number.isInteger(falseStarts) || falseStarts < 0) {
     throw new TypeError(`집중 신호 게임에는 ${expectedTrials}개 신호 기록과 0 이상의 잘못 누른 횟수가 필요합니다.`);
   }
-  const speed = summarizeFocusStage(records.slice(0, FOCUS_GAME_TRIALS_PER_STAGE));
-  const brake = summarizeFocusStage(records.slice(FOCUS_GAME_TRIALS_PER_STAGE, FOCUS_GAME_TRIALS_PER_STAGE * 2));
-  const switching = summarizeFocusStage(records.slice(FOCUS_GAME_TRIALS_PER_STAGE * 2));
+  const speed = summarizeFocusStage(records.filter(record => record.stage === 'speed'));
+  const brake = summarizeFocusStage(records.filter(record => record.stage === 'brake'));
+  const switching = summarizeFocusStage(records.filter(record => record.stage === 'switch'));
   const correct = records.filter(record => record.correct).length;
   return {
     total: records.length,

@@ -133,3 +133,18 @@
   .research-library-quick-facts>div{min-height:48px}
   .research-story-grid{grid-template-columns:1fr}
 }
+
+/* Increase the chart labels and study context that were hard to read at a glance. */
+.research-library-evidence-note{max-width:78ch;margin:0 0 26px;padding:15px 18px;border-left:4px solid #43835b;border-radius:5px;background:#f0f5f0;color:#263a2d;font-size:16px;line-height:1.65}
+.research-library-kind{font-size:14px;color:#43584a}
+.research-library-quick-facts strong{font-size:14px;color:#53675a}
+.research-library-quick-facts small{font-size:14px;line-height:1.55}
+.research-library .research-detail>summary,.research-copy{font-size:14px}
+.research-library-product-scope{font-size:14px;color:#43584a;line-height:1.65}
+.research-story-card h4,.research-library-detail>.research-library-boundary{font-size:14px}
+.research-story-card p{font-size:14px;line-height:1.6}
+.research-library-provenance{font-size:14px;color:#53675a}
+.research-library-source{padding:8px 0;border-top:1px solid #e0e6e1}
+.research-library-source p{margin:0 0 4px;color:#263a2d;font-size:14px;line-height:1.55}
+.research-library-sources .research-library-source a{display:inline-flex;gap:4px;align-items:center;padding:4px 0;font-size:14px;font-weight:650}
+@media(max-width:700px){.research-reading-path>div>strong{font-size:14px}.research-reading-path{gap:10px}.research-library-quick-facts{grid-template-columns:minmax(0,1fr)}.research-library-quick-facts>div{min-height:60px}.research-library-evidence-note{font-size:15px}.research-library-source p{font-size:14px}}

@@ -21,7 +21,8 @@ const fail = message => { throw new Error(`Research consumer copy invalid: ${mes
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
 const yoto = research.find(claim => claim.id === 'research-yoto-2012');
-if (!yoto?.publicText?.includes('알파·베타 뇌파의 감소 폭') || yoto.publicText.includes('더 잘 유지') || yoto.metadata?.consumerVisual?.outcomes?.length !== 1) fail('Yoto study must state the measured EEG result without vague improvement wording');
+const yotoConsumerData = JSON.stringify({publicText:yoto?.publicText,metadata:yoto?.metadata});
+if (!yoto?.publicText?.includes('GABA 캡슐') || !yoto.metadata?.dose?.includes('덱스트린 캡슐') || !yoto.metadata?.consumerVisual?.steps?.[0]?.includes('캡슐') || /음료|마시/.test(yotoConsumerData) || yoto.topic !== '뇌파·과제') fail('Yoto consumer copy must match the capsule study and avoid suggesting a stress-relief outcome');
 const heba = research.find(claim => claim.id === 'research-heba-2016');
 if (heba?.publicText?.includes('12%') || heba?.metadata?.consumerSummary?.includes('높게 측정') || !heba?.metadata?.consumerVisual?.boundaryLabel?.includes('관계') || !heba?.metadata?.dose?.includes('GABA를 먹지 않고')) fail('Heba study must not frame tactile practice as a GABA intake benefit');
 const yoon = research.find(claim => claim.id === 'research-yoon-2022');
@@ -29,12 +30,14 @@ if (!yoon?.metadata?.consumerSummary?.includes('수면 기록') || yoon.metadata
 const byun = research.find(claim => claim.id === 'research-byun-2018');
 if (!byun?.publicText?.includes('잠드는 데 어려움') || !byun.publicText.includes('GABA가 없는') || !byun.publicText.includes('40명') || byun.metadata?.consumerVisual?.kind !== 'paired-before-after' || byun.metadata.consumerVisual.groups?.length !== 2 || byun.metadata.consumerVisual.groups[0]?.participants !== 30 || byun.metadata.consumerVisual.groups[1]?.participants !== 10 || byun.metadata.consumerVisual.groups[1]?.afterValue !== 15.2 || !byun.metadata.consumerFinding?.includes('7.0분에서 15.2분') || !byun.metadata.productApplicability?.includes('별도 제품')) fail('Byun study must accurately show its selected population, both groups and applicability');
 const powers = research.find(claim => claim.id === 'research-powers-2008');
-if (!powers?.metadata?.consumerSummary?.includes('성장호르몬 수치') || powers.metadata?.consumerVisual || /4배|높았/.test(powers.publicText)) fail('Powers study must present a hormone measurement without implying a health benefit');
+const powersConsumerData = JSON.stringify({publicText:powers?.publicText,metadata:powers?.metadata});
+if (!powers?.metadata?.consumerSummary?.includes('성장호르몬 수치') || !powers.metadata?.dose?.includes('750mg 캡슐 4개') || !powers.metadata?.consumerScope?.includes('설탕 캡슐') || /음료|마시/.test(powersConsumerData) || powers.metadata?.consumerVisual || /4배|높았/.test(powers.publicText)) fail('Powers study must state its capsule form and measured hormone endpoint without a muscle-growth claim');
 const sakashita = research.find(claim => claim.id === 'research-sakashita-2019');
 if (!sakashita?.publicText?.includes('1.34kg') || !sakashita.publicText.includes('0.15kg') || sakashita.publicText.includes('더 늘었어요')) fail('Sakashita study must show the measured group values instead of a vague improvement claim');
 if ((appSource.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(appSource)) fail('the detailed research library must be the only research-results section on the consumer page');
 if (/research-(?:yoto|byun|sakashita)-\d{4}|metadata\.consumerSummary/.test(gabaStory)) fail('the GABA introduction must point to the research list without repeating study results');
 if (!researchLibrary.includes('canonicalStudySources')) fail('research records must be deduplicated by all linked primary sources');
+if (!researchLibrary.includes('논문 속 GABA와 섭취량은 셀핀다 가바 1500과 달라요') || !researchLibrary.includes('논문 원문 보기') || !researchLibrary.includes('source.title')) fail('research cards must clearly separate study doses from product use and show source citations in plain sight');
 
 const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장|직접\s*(먹어|경험)|가바\s*(경험|섭취를\s*시작)/;
 const discouragedMarketing = /뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|결과를\s*한\s*문장으로\s*묶기\s*어려|중증\s*수면질환|수면이\s*좋지\s*않|이상사례|유의하지\s*않/;

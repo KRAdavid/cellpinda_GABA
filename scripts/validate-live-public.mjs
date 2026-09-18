@@ -102,6 +102,11 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     ]);
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
     const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
+    const productSharePageResponse = await request('/products/');
+    const productSharePageText = await productSharePageResponse.text();
+    assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
+    assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1,500 · 제품 구성 보기"/, 'live product share route must show a product-specific preview title');
+    assert.match(productSharePageText, /assets\/product-1500\.jpg/, 'live product share route must use the product package preview image');
     const moduleSources = [...pageText.matchAll(/<script[^>]+type="module"[^>]+src="([^"]+)"/gi)].map(match => match[1]).filter(Boolean);
     assert.ok(moduleSources.length > 0, 'live root must expose a module bundle for the consumer UI');
     const moduleBundles = await Promise.all(moduleSources.map(async source => {
@@ -113,7 +118,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 보기'), 'live consumer bundle must contain the consumer-facing teaser CTA');
     assert.ok(consumerBundle.includes('1분 집중 신호 게임'), 'live consumer bundle must contain the consumer-facing focus game');
-    assert.ok(consumerBundle.includes('매번 달라지는 신호') && consumerBundle.includes('초록은 누르고') && consumerBundle.includes('빨강은 기다려요') && consumerBundle.includes('색 규칙 바꾸기'), 'live consumer bundle must explain the changing signals and game rules in plain language');
+    assert.ok(consumerBundle.includes('매번 달라지는 신호') && consumerBundle.includes('초록은 누르고') && consumerBundle.includes('빨강은 누르지 않아요') && consumerBundle.includes('색 규칙 바꾸기') && consumerBundle.includes('색과 모양에 상관없이'), 'live consumer bundle must explain the three game stages in their actual order');
     assert.ok(consumerBundle.includes('5분 쉬고 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
     assert.ok(consumerBundle.includes('쉬지 않고 이어서 하기') && consumerBundle.includes('휴식이 기록 변화의 원인이라고 단정할 수는 없어요'), 'live consumer bundle must distinguish repeat records without claiming a rest effect');
     assert.ok(consumerBundle.includes('뇌 피로나 건강 상태를 진단하지 않습니다') && consumerBundle.includes('초록') && consumerBundle.includes('보라'), 'live consumer bundle must clarify the non-diagnostic game and show accessible color labels');
@@ -130,8 +135,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
     assert.match(robotsText, /Disallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops/, 'live robots.txt must keep internal paths out of discovery');
     const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-    const expectedSitemapUrls = [`${base}/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
-    assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain the public landing, focus invite and share pages only');
+    const expectedSitemapUrls = [`${base}/`, `${base}/products/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
+    assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain the public landing, product share, focus invite and share pages only');
     assert.ok(!sitemapText.includes('/admin') && !sitemapText.includes('/ops'), 'live sitemap must not list internal routes');
     for (const [label, route] of [['/admin', adminRoute], ['/ops', opsRoute], ['/?view=admin', adminQueryRoute], ['/?view=ops', opsQueryRoute]]) {
       assert.ok(!/콘텐츠 검토실|운영자 접근 키|TF 운영판|운영 큐|관리자 기능/i.test(route.text), `public route ${label} leaks an internal operations surface`);

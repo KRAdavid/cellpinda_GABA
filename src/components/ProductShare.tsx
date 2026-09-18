@@ -4,7 +4,7 @@ import {preserveCampaign} from '../domain/share';
 type Props={onEvent?:(name:string,properties:Record<string,string>)=>void};
 export default function ProductShare({onEvent}:Props){
  const [busy,setBusy]=useState(false),[message,setMessage]=useState(''),[manual,setManual]=useState('');
- function link(){const url=new URL(import.meta.env.BASE_URL,window.location.origin);url.searchParams.set('view','products');preserveCampaign(url,window.location.search);url.hash='products';return url.href;}
+ function link(){const base=new URL(import.meta.env.BASE_URL,window.location.origin);const url=new URL('products/',base);preserveCampaign(url,window.location.search);return url.href;}
  async function copy(){
   const url=link();
    try{await navigator.clipboard.writeText(url);setManual('');setMessage('제품 정보 링크를 복사했어요. 함께 확인할 사람에게 전달하세요.');onEvent?.('share_link_copied',{path:'/products',channel:'clipboard'});}

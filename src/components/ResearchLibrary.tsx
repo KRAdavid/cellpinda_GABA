@@ -140,6 +140,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
     <div className="section-head research-library-head"><div><p className="chapter">사람 연구를 한곳에서</p><h2 id="research-title">궁금한 주제로<br/>연구를 찾아보세요.</h2></div><p>각 연구는 한 번만 소개해요.<br/>측정한 내용과 참여 조건을 함께 보여드립니다.</p></div>
+    <p className="research-library-evidence-note">논문 속 GABA와 섭취량은 셀핀다 가바 1500과 달라요. 연구에 나온 양은 제품의 먹는 법이 아닙니다.</p>
     <div className="research-reading-path" role="img" aria-label="궁금한 점, 연구에 참여한 사람, 살펴본 변화를 차례로 보여줍니다">
       <div><Search aria-hidden="true"/><strong>궁금한 점</strong></div><ArrowRight aria-hidden="true"/>
       <div><UsersRound aria-hidden="true"/><strong>누가 참여했나요?</strong></div><ArrowRight aria-hidden="true"/>
@@ -184,7 +185,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
             <div className="research-library-boundary"><h4>셀핀다 제품을 볼 때</h4><p>{metadata.productApplicability}</p></div>
           </div>
           <div className="research-library-sources"><h4>자료 출처</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료를 확인한 날 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
-            <a key={`${source.url}-${source.title}`} href={source.url!} target="_blank" rel="noopener noreferrer" aria-label={`${source.title} 연구 출처 보기`}>연구 출처 보기 <span aria-label="새 창">↗</span></a>,
+            <div className="research-library-source" key={`${source.url}-${source.title}`}><p>{source.title}</p><a href={source.url!} target="_blank" rel="noopener noreferrer">논문 원문 보기 <span aria-label="새 창">↗</span></a></div>,
           )}</div>
         </details>
         <button type="button" className="text-link research-copy" aria-label="이 연구를 바로 여는 링크 복사" onClick={()=>copyStudy(claim.id)}><Share2 size={15} aria-hidden="true"/>이 연구 공유</button>

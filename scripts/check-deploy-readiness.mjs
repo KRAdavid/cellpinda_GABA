@@ -1,4 +1,4 @@
-import {existsSync, readFileSync} from 'node:fs';
+import {existsSync, readFileSync, statSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {parseAdminRoleTokens} from '../src/domain/admin-auth.ts';
 
@@ -17,7 +17,8 @@ try {
   check('wrangler-runtime-name',typeof config.name==='string' && config.name.length>0,`name=${config.name ?? 'missing'}`);
 } catch (error) { check('wrangler-config',false,error instanceof Error ? error.message : 'invalid JSON'); }
 
-for(const file of ['dist/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/data/operations-queue.json','dist/data/tf-pulse.json','dist/data/goal-audit.json','dist/data/tf-meeting-packet.json']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
+for(const file of ['dist/index.html','dist/products/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/data/operations-queue.json','dist/data/tf-pulse.json','dist/data/goal-audit.json','dist/data/tf-meeting-packet.json','dist/assets/rhythm-window.webp']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
+try { const bytes=statSync(resolve(root,'dist/assets/rhythm-window.webp')).size; check('hero-image-budget',bytes<=250_000,`${bytes} bytes (limit 250000)`); } catch { check('hero-image-budget',false,'optimized WebP hero image is missing'); }
 for(const type of ['active','sleep','irregular','sensory','unrested','steady']) check(`artifact:dist/assets/social-rhythm-${type}.png`,existsSync(resolve(root,`dist/assets/social-rhythm-${type}.png`)),'result-specific social preview present');
 try {
   const content=readJson('public/data/content.json');
