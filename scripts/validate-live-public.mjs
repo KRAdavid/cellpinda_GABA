@@ -118,8 +118,9 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
-    assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1,500 · 제품 구성 보기"/, 'live product share route must show a product-specific preview title');
+    assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1500 · 30포 구성 보기"/, 'live product share route must show the confirmed product name and package count');
     assert.match(productSharePageText, /assets\/product-composition-1500\.png/, 'live product share route must use the neutral product composition preview');
+    assert.ok(!/한 포 1,500 mg|전체 45 g/.test(productSharePageText), 'live product share route must omit unverified label amounts');
     const moduleSources = [...pageText.matchAll(/<script[^>]+type="module"[^>]+src="([^"]+)"/gi)].map(match => match[1]).filter(Boolean);
     assert.ok(moduleSources.length > 0, 'live root must expose a module bundle for the consumer UI');
     const moduleBundles = await Promise.all(moduleSources.map(async source => {
@@ -206,6 +207,9 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
     assert.equal(content.products[0].category, '기타가공품', 'live export must match the user-confirmed product type');
+    assert.equal(content.products[0].name, '셀핀다 가바 1500', 'live product must use the current confirmed product name');
+    assert.equal(content.products[0].servings, 30, 'live product must preserve the confirmed package count');
+    assert.ok(!('amountMg' in content.products[0]) && !('totalG' in content.products[0]), 'live export must not imply unverified per-packet GABA or net-content values');
     assert.equal(content.products[0].officialUrl, approvedSmartStoreUrl, 'live product must point to the Smart Store 1500 product');
     assert.equal(content.reviews.length, 1, 'live export must contain the approved Smart Store review destination');
     assert.equal(content.reviews[0].id, 'shop-review-destination-1500', 'live review destination must be the approved GABA 1500 record');
@@ -217,7 +221,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(!/제한적|매우 제한적|결과가 일치하지|정량 메타분석|다만 GABA만의 효과|이상사례|유의하지 않음/i.test(JSON.stringify({content, master})), 'live public research data contains blocked negative marketing copy');
     assert.ok(!/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(JSON.stringify(content)), 'live public content contains a legacy official-mall destination');
     for (const claim of content.claims.filter(item => ['product-1500', 'fermentation-listed'].includes(item.id))) assert.ok(claim.sources?.every(source => isSmartStore(source.url)), `live product claim ${claim.id} must use the Smart Store source only`);
-    assert.ok(!content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750')), 'live export contains removed 750 product');
+    assert.ok(!content.products.some(item => item.id === 'gaba750' || String(item.name || '').includes('750')), 'live export contains removed 750 product');
     const publicResearchIds=new Set(content.claims.filter(claim=>claim.id?.startsWith('research-')).map(claim=>claim.id));
     const masterResearchIds=new Set(master.records.map(record=>record.id));
     assert.equal(master.records.length,publicResearchIds.size,'live master index and public research claims must have the same record count');

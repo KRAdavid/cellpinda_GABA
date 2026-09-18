@@ -3,7 +3,6 @@ import { REVIEW_DESTINATION_URL } from '../domain/reviews';
 type Product = {
   id: string;
   name: string;
-  amountMg: number;
   servings: number;
   officialUrl: string;
 };
@@ -12,7 +11,7 @@ type Track = (name: string, properties?: Record<string, string>) => void;
 
 export default function PurchaseQuestions({ products, onEvent }: { products: Product[]; onEvent?: Track }) {
   if (products.length === 0) return null;
-  const productSummary = products.map(product => `${product.name}은 1포 ${product.amountMg.toLocaleString()} mg·${product.servings}포 구성`).join(', ');
+  const productSummary = products.map(product => `${product.name} · ${product.servings}포 구성`).join(', ');
   return <section className="purchase-faq" aria-labelledby="purchase-faq-heading">
     <div className="purchase-faq-heading">
       <p className="chapter">구매 전 확인</p>

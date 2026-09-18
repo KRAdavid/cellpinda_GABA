@@ -198,12 +198,12 @@ export default function SevenDayChallenge({ onEvent, isInvite = false }: Props) 
     onEvent?.('result_share_success', { path: '/challenge', channel: 'download', milestone: String(milestone ?? '') });
   }
 
-  return <section id="lab" className="section wrap seven-day-challenge" aria-labelledby="challenge-heading">
-    {isInvite ? <p className="challenge-invite" role="status">친구가 7일 휴식 기록을 공유했어요. 나도 오늘부터 시작해 보세요.</p> : null}
+  return <section id="lab" className={`section wrap seven-day-challenge${isInvite ? ' is-invite' : ''}`} aria-labelledby="challenge-heading">
+    {isInvite ? <p className="challenge-invite" role="status">친구가 7일 휴식 기록을 공유했어요.</p> : null}
     <div className="section-head"><div><p className="chapter">7일 휴식 기록</p><h2 id="challenge-heading">하루 5분,<br />내가 고른 휴식 한 가지.</h2></div><p>제품을 사지 않아도 할 수 있어요.<br />기록과 메모는 이 기기에만 남아요.</p></div>
-    <p className="note">휴대폰이나 컴퓨터의 날짜를 기준으로 이 기기에만 기록해요. 건강 검사가 아니라 내가 실천한 휴식 습관을 돌아보는 기록이에요.</p>
+    <p className="note">{isInvite ? '건강 검사가 아닌 휴식 기록이에요. 기록은 이 기기에만 남아요.' : '휴대폰이나 컴퓨터의 날짜를 기준으로 이 기기에만 기록해요. 건강 검사가 아니라 내가 실천한 휴식 습관을 돌아보는 기록이에요.'}</p>
     {initial.legacy ? <p className="challenge-legacy">날짜가 없는 예전 기록은 이번 기록에 넣지 않았어요. 새로 시작한 날부터 적어 주세요.</p> : null}
-    {!record ? <div className="challenge-start"><div><h3>오늘부터 7일, 하루 한 번 쉬어 보기.</h3><p>시작일 {today} · 지나간 날은 나중에 적을 수 있어요.<br />앞으로 남은 날은 날짜가 된 뒤 체크해 주세요.</p></div><button className="button" onClick={start}>오늘부터 7일 시작 <ArrowRight size={18} aria-hidden="true" /></button></div> : <>
+    {!record ? <div className="challenge-start"><div><h3>오늘부터 7일, 하루 한 번 쉬어 보기.</h3><p>{isInvite ? <>시작일 {today} · 지나간 날은 나중에 적어도 돼요.</> : <>시작일 {today} · 지나간 날은 나중에 적을 수 있어요.<br />앞으로 남은 날은 날짜가 된 뒤 체크해 주세요.</>}</p></div><button className="button" onClick={start}>오늘부터 7일 시작 <ArrowRight size={18} aria-hidden="true" /></button></div> : <>
       <div className="challenge-record-heading"><div><p>{record.startDate} ~ {record.days[6]!.date}</p><h3>{completed}일 쉬었다고 기록했어요.</h3><p className="note">연속 {streak}일 · 점수가 아니라 체크한 날의 수예요. 빠뜨린 날도 편하게 남겨두세요.</p></div><div className="challenge-record-actions"><button className="text-link" onClick={download}><Download size={17} aria-hidden="true" /> 기록 파일 저장</button><button className="text-link" onClick={invite}>친구에게 링크 보내기 ↗</button><button className="text-link" onClick={() => setConfirmDelete(true)}><Trash2 size={17} aria-hidden="true" /> 기록 삭제</button></div></div>
       <div className="challenge-daily-message" role="status" aria-live="polite"><strong>오늘의 짧은 메시지</strong><span>{todayDay ? todayDay.completed ? '오늘의 작은 멈춤을 남겼어요. 내일도 같은 시간에 이어가 볼까요?' : '오늘 한 가지 휴식을 골라 체크해 보세요. 완벽하게 하지 않아도 괜찮아요.' : finished ? '7일 기록이 끝났어요. 남겨 둔 메모를 천천히 돌아보세요.' : '오늘 기록을 준비하고 있어요. 시작한 날짜의 흐름을 따라가 보세요.'}</span></div>
       {inviteLink ? <label className="challenge-invite-link">친구에게 보낼 링크<input value={inviteLink} readOnly onFocus={event => event.currentTarget.select()} /></label> : null}

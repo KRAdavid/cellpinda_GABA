@@ -33,7 +33,7 @@ try {
   const taskGraph=readJson('data/task-graph.json');
   const approvedResearch=(ledger.claims || []).filter(item=>item.status==='approved' && item.id?.startsWith('research-'));
   const masterIds=new Set((master.records || []).map(record=>record.id));
-  check('public-product-scope',content.products?.length===1 && content.products[0]?.id==='gaba1500' && !content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750')),'gaba1500 only');
+  check('public-product-scope',content.products?.length===1 && content.products[0]?.id==='gaba1500' && !content.products.some(item => item.id === 'gaba750' || String(item.name || '').includes('750')),'gaba1500 only');
   check('master-index',master.records?.length===approvedResearch.length && master.records?.length===masterIds.size && master.records.every(record=>record.id?.startsWith('research-')) && approvedResearch.every(claim=>masterIds.has(claim.id)),`${approvedResearch.length} approved research records match the source ledger`);
   check('operations-queue',queue.tasks?.length===taskGraph.tasks?.length && queue.goalId==='GL-2026-CELL-GABA-001',`${taskGraph.tasks?.length ?? 0} tasks for active Goal Contract`);
   check('goal-audit',audit.mode==='public_goal_audit' && audit.goalId===queue.goalId && audit.gates?.length===queue.tasks.filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state)).length,'public audit packet tied to operations queue');

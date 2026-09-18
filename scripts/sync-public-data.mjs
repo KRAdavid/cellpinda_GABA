@@ -117,7 +117,7 @@ for(const [id,kind] of featuredResearchKinds){
 const approvedIds=new Set(claims.map(item=>item.id));
 const products=ledger.products
   .filter(item=>item.status==='approved' && item.sourceIds?.every(id=>approvedIds.has(id)) && isSmartStoreUrl(item.officialUrl))
-  .map(({id,name,amountMg,servings,totalG,category,officialUrl,status,availability,priceDisplay,sourceIds})=>({id,name,amountMg,servings,totalG,category,officialUrl,status,availability,priceDisplay,sourceIds}));
+  .map(({id,name,servings,category,officialUrl,status,availability,priceDisplay,sourceIds})=>({id,name,servings,category,officialUrl,status,availability,priceDisplay,sourceIds}));
 const reviews=ledger.reviews
   .filter(item=>['shop-review-destination','shop-review-destination-1500'].includes(item.id) && item.status==='approved' && isSmartStoreReviewUrl(item.sourceUrl))
   .map(({id,status,publicText,sourceTitle,sourceUrl,originalPublic})=>({id,status,publicText,sourceTitle,sourceUrl,originalPublic}));

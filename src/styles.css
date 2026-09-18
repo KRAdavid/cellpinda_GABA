@@ -87,6 +87,11 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .intro-strip .step:focus-visible{outline:3px solid #8757b0;outline-offset:6px;border-radius:3px}
 @media(max-width:680px){.intro-strip .step{display:grid}.hero .actions{display:grid;grid-template-columns:minmax(0,1fr);max-width:360px}.hero .actions .button{width:100%;min-width:0;padding:14px 18px;gap:10px;font-size:14px}}
 @media(max-width:360px){.hero-copy{padding-inline:20px}}
+
+.process{grid-template-columns:repeat(3,1fr)}
+.process-note{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:36px 0 -28px;font-size:14px;color:#315f48}
+.process-note>span{display:inline-flex;padding:6px 10px;border:1px solid #b6cdbd;border-radius:99px;background:#fff;color:#315f48;font-size:12px;font-weight:650}
+.process-note .text-link{font-weight:650;text-decoration:underline;text-underline-offset:3px}
 /* Make the buyer-review path visible before the product detail card. */
 .products-review-shortcut{display:inline-flex;align-items:center;margin-top:10px;color:var(--green);font-size:14px;font-weight:650;text-decoration:underline;text-underline-offset:4px}
 .hero-product{transition:border-color .18s,box-shadow .18s}
