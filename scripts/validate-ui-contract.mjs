@@ -40,20 +40,23 @@ const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', 'rese
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
-requireMatch(research, /사람 연구를 소개해요\. 연구마다 사용한 제품과 양이 달라요[\s\S]*제품의 먹는 방법은 포장/, 'research route must explain its scope once in consumer language');
+requireMatch(app, /GABA를 먹은 연구와 먹지 않고 뇌 신호를 살펴본 연구[\s\S]*셀핀다 완제품을 시험한 결과는 아닙니다/, 'research route must explain product scope before the evidence cards');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
 requireMatch(app, /<nav aria-label="주 메뉴"/, 'consumer navigation label is missing');
 requireMatch(app, /analyticsConsentGranted/, 'analytics events must be consent-gated');
-requireMatch(app, /<AnalyticsConsent\/>/, 'analytics consent control is missing from the consumer footer');
+requireMatch(app, /<AnalyticsConsent enabled=\{apiEndpoint\('\/api\/events'\) !== null\}\/>/, 'analytics consent controls must match the active event endpoint');
 requireMatch(analyticsConsent, /이름·연락처·내 답변은 수집하지 않아요/, 'analytics consent copy must state its privacy boundary');
 requireMatch(analyticsConsent, /방문 통계 보내기|보내지 않기/, 'analytics consent must provide explicit allow and deny choices');
+requireMatch(analyticsConsent, /현재 공개 사이트에서는 방문 통계를 전송하지 않습니다/, 'static public build must not imply that analytics are being sent');
 requireMatch(analyticsConsentStyles, /\.footer \.analytics-consent\{[^}]*flex:0 0 100%/, 'analytics consent must occupy its own full-width footer row');
 requireMatch(app, /const isLocalHost = \['localhost', '127\.0\.0\.1', '\[::1\]'\]\.includes\(location\.hostname\)/, 'internal operations route must be local-host gated');
-requireMatch(app, /const operationsView = isLocalHost && \(requestedView === 'ops' \|\| currentPath === '\/ops'\)/, 'internal operations route must not render on public hosts');
-requireMatch(app, /const adminView = isLocalHost && \(requestedView === 'admin' \|\| currentPath === '\/admin'\)/, 'admin review route must not render on public hosts');
+requireMatch(app, /const operationsView = import\.meta\.env\.DEV && isLocalHost && \(requestedView === 'ops' \|\| currentPath === '\/ops'\)/, 'internal operations route must render only in local development');
+requireMatch(app, /const adminView = import\.meta\.env\.DEV && isLocalHost && \(requestedView === 'admin' \|\| currentPath === '\/admin'\)/, 'admin review route must render only in local development');
+requireMatch(teaser, /teaser_embed_loaded/, 'teaser analytics must distinguish embed load from video playback');
+if (teaser.includes("onEvent?.('teaser_play'")) fail('teaser iframe load must not count as video playback');
 const nav = app.match(/<nav aria-label="주 메뉴"[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
 if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
@@ -197,4 +200,4 @@ requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 1분 �
 requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card\.png"/, 'focus invite Open Graph image is missing');
 requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 
-  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'single-invite-action'], teaser: ['autoplay-permission', 'eager-load', 'approved-preview-source'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));
+  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'single-invite-action'], teaser: ['user-started-playback', 'eager-load', 'approved-preview-source', 'accurate-embed-event'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));

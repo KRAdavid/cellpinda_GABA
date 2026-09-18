@@ -53,6 +53,7 @@ jobs:
         run: |
           pnpm exec vite build --base "$VITE_BASE_PATH" --outDir dist-pages
           cp dist-pages/index.html dist-pages/404.html
+          node scripts/check-public-artifacts.mjs dist-pages
       - name: Verify review publishing with isolated local D1
         run: pnpm run test:worker-reviews
       - name: Bundle Worker without deploying

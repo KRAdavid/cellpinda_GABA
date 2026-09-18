@@ -17,7 +17,10 @@ try {
   check('wrangler-runtime-name',typeof config.name==='string' && config.name.length>0,`name=${config.name ?? 'missing'}`);
 } catch (error) { check('wrangler-config',false,error instanceof Error ? error.message : 'invalid JSON'); }
 
-for(const file of ['dist/index.html','dist/products/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/data/operations-queue.json','dist/data/tf-pulse.json','dist/data/goal-audit.json','dist/data/tf-meeting-packet.json','dist/assets/rhythm-window.webp']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
+for(const file of ['dist/index.html','dist/products/index.html','dist/data/content.json','dist/data/gaba-master-index.json','dist/assets/rhythm-window.webp']) check(`artifact:${file}`,existsSync(resolve(root,file)),'present after production build');
+const privateSnapshots=['operations-queue.json','tf-pulse.json','goal-audit.json','tf-meeting-packet.json'];
+const leakedSnapshots=privateSnapshots.filter(file=>existsSync(resolve(root,'dist/data',file)));
+check('private-operations-snapshots-excluded',leakedSnapshots.length===0,leakedSnapshots.length ? `found=${leakedSnapshots.join(',')}` : `${privateSnapshots.length} internal files excluded from the public build`);
 try { const bytes=statSync(resolve(root,'dist/assets/rhythm-window.webp')).size; check('hero-image-budget',bytes<=250_000,`${bytes} bytes (limit 250000)`); } catch { check('hero-image-budget',false,'optimized WebP hero image is missing'); }
 for(const type of ['active','sleep','irregular','sensory','unrested','steady']) check(`artifact:dist/assets/social-rhythm-${type}.png`,existsSync(resolve(root,`dist/assets/social-rhythm-${type}.png`)),'result-specific social preview present');
 try {

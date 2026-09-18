@@ -47,10 +47,10 @@ type Props = {
   onOpen?: (claimId: string) => void;
 };
 
-function compactStudyType(value?: string): string {
+function compactStudyType(value?: string, dose?: string): string {
+  if (/GABA를 먹지 않고|GABA 섭취 없이/.test(dose || '') || /관찰|MRS|뇌 신호|손끝 연습/.test(value || '')) return 'GABA를 먹지 않고 뇌 신호를 살펴본 연구';
   if (!value) return 'GABA 관련 연구';
   if (/문헌고찰|여러 연구를 모아|사람 연구 여러 편/.test(value)) return '사람 연구 여러 편을 모아 살펴봄';
-  if (/관찰|MRS|뇌 신호|손끝 연습/.test(value)) return '손끝 연습과 뇌 신호를 살펴봄';
   if (/운동/.test(value)) return '사람이 참여한 운동 연구';
   if (/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return 'GABA를 먹고 비교한 사람 연구';
   return value;
@@ -141,7 +141,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
     <div className="section-head research-library-head"><div><p className="chapter">사람 연구를 한곳에서</p><h2 id="research-title">궁금한 주제로<br/>연구를 찾아보세요.</h2></div><p>각 연구는 한 번만 소개해요.<br/>측정한 내용과 참여 조건을 함께 보여드립니다.</p></div>
-    <p className="research-library-evidence-note">여기서는 GABA를 살펴본 사람 연구를 소개해요. 연구마다 사용한 제품과 양이 달라요. 셀핀다 제품의 먹는 방법은 포장에 적힌 안내를 확인해 주세요.</p>
+    <p className="research-library-evidence-note">연구마다 사용한 제품·양·기간이 달라요. 연구 조건을 카드에서 확인할 수 있습니다.</p>
     <div className="research-reading-path" role="img" aria-label="궁금한 점, 연구에 참여한 사람, 살펴본 변화를 차례로 보여줍니다">
       <div><Search aria-hidden="true"/><strong>궁금한 점</strong></div><ArrowRight aria-hidden="true"/>
       <div><UsersRound aria-hidden="true"/><strong>누가 참여했나요?</strong></div><ArrowRight aria-hidden="true"/>
@@ -165,7 +165,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         {label: '기간', value: metadata.duration, Icon: Clock3},
       ].filter(item => item.value);
       return <article id={claim.id} className="research-library-card" key={claim.id}>
-        <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType)}</p>
+        <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType, metadata.dose)}</p>
         <h3>{metadata.question || claim.topic}</h3>
         {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : metadata.consumerSummary ? <p className="research-library-consumer-summary">{metadata.consumerSummary}</p> : null}
         {!metadata.consumerVisual && metadata.consumerFinding ? <p className="research-library-finding"><strong>연구에서 기록한 내용</strong>{metadata.consumerFinding}</p> : null}

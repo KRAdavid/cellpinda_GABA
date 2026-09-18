@@ -91,23 +91,30 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       request('/data/content.json'),
       request('/data/gaba-master-index.json'),
       request('/data/teaser-preview.json'),
-      request('/data/operations-queue.json'),
-      request('/data/tf-pulse.json'),
-      request('/data/goal-audit.json'),
-      request('/data/tf-meeting-packet.json'),
+      requestPublicRoute('/data/operations-queue.json'),
+      requestPublicRoute('/data/tf-pulse.json'),
+      requestPublicRoute('/data/goal-audit.json'),
+      requestPublicRoute('/data/tf-meeting-packet.json'),
       requestPublicRoute('/admin'),
       requestPublicRoute('/ops'),
       requestPublicRoute('/?view=admin'),
       requestPublicRoute('/?view=ops'),
     ]);
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
-    const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
+    const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json()]);
+    const internalSnapshots = [
+      ['/data/operations-queue.json', queueResponse],
+      ['/data/tf-pulse.json', pulseResponse],
+      ['/data/goal-audit.json', auditResponse],
+      ['/data/tf-meeting-packet.json', meetingPacketResponse],
+    ];
     const productSharePageResponse = await request('/products/');
     const productSharePageText = await productSharePageResponse.text();
     const researchPageResponse = await request('/research/');
     const researchPageText = await researchPageResponse.text();
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
     assert.match(researchPageText, /property="og:title" content="GABA 사람 연구를 쉬운 말로"/, 'live research route must identify itself as an educational page');
+    assert.ok(researchPageText.includes('GABA를 먹은 연구와 먹지 않고 뇌 신호를 살펴본 연구') && researchPageText.includes('셀핀다 완제품을 시험한 결과는 아닙니다'), 'live research page must explain intake versus observation and product scope before readers enter the data');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
@@ -199,126 +206,15 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     for (const claim of content.claims.filter(item => ['product-1500', 'fermentation-listed'].includes(item.id))) assert.ok(claim.sources?.every(source => isSmartStore(source.url)), `live product claim ${claim.id} must use the Smart Store source only`);
     assert.ok(!content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750')), 'live export contains removed 750 product');
     assert.equal(master.records.length, 8, 'live master index must contain eight research records');
-    assert.equal(queue.goalId, 'GL-2026-CELL-GABA-001', 'live operations queue must use the active Goal Contract');
-    assert.equal(queue.workstreams.length, 5, 'live operations queue must contain five workstreams');
-    assert.equal(queue.tasks.length, 15, 'live operations queue must contain the current task graph');
-    assert.ok(queue.pulse && /^[a-f0-9]{64}$/.test(queue.pulse.snapshotHash) && typeof queue.pulse.stateChanged === 'boolean', 'live operations queue must expose a valid pulse snapshot');
-    validateContinuation(queue.pulse.continuation, 'live operations queue pulse');
-    assert.equal(queue.pulse.activeTasks, queue.tasks.filter(task => !['DONE', 'CANCELLED'].includes(task.state)).length, 'live pulse active count must match queue');
-    assert.equal(queue.pulse.inputGates, queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG').length, 'live pulse input gate count must match queue');
-    assert.equal(publicPulse.mode, 'public_tf_pulse', 'live public TF pulse packet must use the public schema');
-    assert.equal(publicPulse.goalId, queue.goalId, 'live public TF pulse packet must use the active goal');
-    assert.equal(publicPulse.generatedAt, queue.pulse.generatedAt, 'live public TF pulse packet timestamp must match the queue');
-    assert.equal(publicPulse.snapshotHash, queue.pulse.snapshotHash, 'live public TF pulse packet hash must match the queue');
-    assert.equal(publicPulse.stateChanged, queue.pulse.stateChanged, 'live public TF pulse change marker must match the queue');
-    assert.deepEqual(publicPulse.meetingProtocol, queue.pulse.meetingProtocol, 'live public TF pulse meeting protocol must match the queue');
-    assert.ok(publicPulse.meetingProtocol?.cadence && publicPulse.meetingProtocol?.quorum && Array.isArray(publicPulse.meetingProtocol?.record), 'live public TF pulse meeting protocol is missing');
-    assert.deepEqual(publicPulse.executionPolicy, queue.pulse.executionPolicy, 'live public TF pulse execution policy must match the queue');
-    assert.ok(publicPulse.executionPolicy?.autoStates?.includes('READY') && publicPulse.executionPolicy?.humanReviewStates?.includes('VERIFYING') && publicPulse.executionPolicy?.approvalRiskClasses?.includes('E_EXTERNAL_COMMITMENT'), 'live public TF pulse execution policy is incomplete');
-    validateSafeExecution(queue.pulse.safeExecution, 'live operations queue pulse');
-    validateSafeExecution(publicPulse.safeExecution, 'live public pulse');
-    assert.deepEqual(publicPulse.safeExecution, queue.pulse.safeExecution, 'live safe execution summary must match the queue');
-    if (publicPulse.safeExecution) {
-      const expectedHumanGates = publicPulse.meetingAgenda.filter(item => ['VERIFYING', 'WAITING', 'BACKLOG', 'REWORK'].includes(item.state)).map(item => item.taskId);
-      const expectedCandidates = publicPulse.meetingAgenda.filter(item => item.state === 'READY').map(item => item.taskId);
-      assert.deepEqual(publicPulse.safeExecution.humanGateTaskIds, expectedHumanGates, 'live safe execution human gates are out of sync');
-      assert.deepEqual(publicPulse.safeExecution.candidateTaskIds, expectedCandidates, 'live safe execution candidates are out of sync');
-    }
-    assert.equal(meetingPacket.mode, 'public_tf_meeting_packet', 'live TF meeting packet must use the public schema');
-    assert.equal(meetingPacket.goalId, publicPulse.goalId, 'live TF meeting packet goal must match the pulse');
-    assert.equal(meetingPacket.generatedAt, publicPulse.generatedAt, 'live TF meeting packet timestamp must match the pulse');
-    assert.equal(meetingPacket.snapshotHash, publicPulse.snapshotHash, 'live TF meeting packet hash must match the pulse');
-    assert.deepEqual(meetingPacket.meetingProtocol, publicPulse.meetingProtocol, 'live TF meeting packet protocol must match the pulse');
-    assert.deepEqual(meetingPacket.executionPolicy, publicPulse.executionPolicy, 'live TF meeting packet execution policy must match the pulse');
-    assert.deepEqual(meetingPacket.roleCoverage, publicPulse.roleCoverage, 'live TF meeting packet role coverage must match the pulse');
-    assert.deepEqual(meetingPacket.continuation, publicPulse.continuation, 'live TF meeting packet continuation must match the pulse');
-    assert.deepEqual(meetingPacket.agenda, publicPulse.meetingAgenda, 'live TF meeting packet agenda must match the pulse');
-    assert.deepEqual(meetingPacket.inputGates, publicPulse.inputGates, 'live TF meeting packet input gates must match the pulse');
-    assert.deepEqual(meetingPacket.gates, publicAudit.gates, 'live TF meeting packet gates must match the audit');
-    validateContinuation(publicPulse.continuation, 'live public pulse');
-    assert.deepEqual(publicPulse.continuation, queue.pulse.continuation, 'live public pulse continuation loop must match the queue');
-    assert.equal(publicAudit.mode, 'public_goal_audit', 'live public goal audit packet must use the public schema');
-    assert.equal(publicAudit.goalId, queue.goalId, 'live public goal audit packet must use the active goal');
-    assert.equal(publicAudit.status, queue.status, 'live public goal audit status must match the queue');
-    assert.equal(publicAudit.checkedAt, queue.checkedAt, 'live public goal audit timestamp must match the queue');
-    assert.deepEqual(publicAudit.roleCoverage, publicPulse.roleCoverage, 'live public goal audit role coverage must match the pulse');
-    assert.deepEqual(publicAudit.taskCounts, publicPulse.counts, 'live public goal audit counts must match the pulse');
-    assert.equal(publicAudit.milestones.masterIndex.claims, content.claims.length, 'live public audit claim count must match content');
-    assert.equal(publicAudit.milestones.masterIndex.researchRecords, master.records.length, 'live public audit research count must match master index');
-    assert.equal(publicAudit.milestones.publicProduct.products, content.products.length, 'live public audit product count must match content');
-    assert.equal(publicAudit.milestones.tfPulse.snapshotHash, publicPulse.snapshotHash, 'live public audit pulse hash must match the pulse');
-    assert.equal(publicAudit.milestones.tfPulse.stateChanged, publicPulse.stateChanged, 'live public audit pulse change marker must match the pulse');
-    validateContinuation(publicAudit.milestones.tfPulse.continuation, 'live public audit pulse');
-    assert.deepEqual(publicAudit.milestones.tfPulse.continuation, publicPulse.continuation, 'live public audit continuation loop must match the pulse');
-    assert.ok(['IN_PROGRESS_WITH_GATES', 'COMPLETE'].includes(publicAudit.overallStatus), 'live public audit must expose a supported overall status');
-    assert.equal(publicAudit.milestones.masterIndex.status, 'MET', 'live public audit must mark the master index milestone');
-    assert.equal(publicAudit.milestones.publicProduct.status, 'MET', 'live public audit must mark the product milestone');
-    assert.equal(publicAudit.milestones.publicProduct.smartStoreOnly, true, 'live public audit must keep Smart Store only');
-    assert.equal(publicAudit.milestones.publicProduct.removed750, true, 'live public audit must keep 750 removed');
-    assert.equal(publicAudit.milestones.tfPulse.status, 'MET', 'live public audit must mark the pulse milestone');
-    validateSafeExecution(publicAudit.milestones.tfPulse.safeExecution, 'live public audit pulse');
-    assert.deepEqual(publicAudit.milestones.tfPulse.safeExecution, publicPulse.safeExecution, 'live public audit safe execution summary must match the pulse');
-    assert.equal(publicAudit.teaserGate.taskId, 'B4', 'live public audit must expose the teaser gate');
-    assert.equal(publicAudit.teaserGate.status, 'HOLD', 'live public audit must keep the teaser on hold');
-    assert.equal(publicAudit.teaserGate.taskState, queue.tasks.find(task => task.id === 'B4')?.state, 'live public audit teaser state must match the queue');
-    const auditGateKeys = ['id', 'title', 'state', 'lead', 'verifier', 'requiredInputs', 'decision', 'decisionMode', 'nextAction', 'decisionOptions', 'quorum'];
-    const liveGatedTasks = queue.tasks.filter(task => ['VERIFYING', 'WAITING', 'BACKLOG'].includes(task.state));
-    assert.ok(Array.isArray(publicAudit.gates) && publicAudit.gates.length === liveGatedTasks.length, 'live public audit gate count must match the queue');
-    for (const gate of publicAudit.gates) {
-      assert.deepEqual(Object.keys(gate).sort(), [...auditGateKeys].sort(), 'live public audit gate contains an unexpected field');
-      const queueTask = queue.tasks.find(task => task.id === gate.id);
-      assert.ok(queueTask, `live public audit gate is missing queue task ${gate.id}`);
-      assert.equal(gate.title, queueTask.title, `live public audit title mismatch for ${gate.id}`);
-      assert.equal(gate.state, queueTask.state, `live public audit state mismatch for ${gate.id}`);
-      assert.equal(gate.lead, queueTask.lead, `live public audit lead mismatch for ${gate.id}`);
-      assert.equal(gate.verifier, queueTask.verifier, `live public audit verifier mismatch for ${gate.id}`);
-      assert.deepEqual(gate.requiredInputs, queueTask.requiredInputs ?? [], `live public audit inputs mismatch for ${gate.id}`);
-      assert.equal(gate.decision, queueTask.decision, `live public audit decision mismatch for ${gate.id}`);
-      assert.equal(gate.decisionMode, queueTask.decisionMode, `live public audit decision mode mismatch for ${gate.id}`);
-      assert.equal(gate.nextAction, queueTask.nextAction, `live public audit next action mismatch for ${gate.id}`);
-      validateDecisionOptions(gate.decisionOptions, gate.state, `live public audit gate ${gate.id}`);
-      const agenda = publicPulse.meetingAgenda.find(candidate => candidate.taskId === gate.id);
-      assert.ok(agenda, `live public audit gate is missing pulse agenda ${gate.id}`);
-      assert.deepEqual(gate.decisionOptions, agenda.decisionOptions, `live public audit decision options mismatch for ${gate.id}`);
-      validateQuorum(gate.quorum, queueTask, `live public audit gate ${gate.id}`);
-    }
-    assert.equal(publicPulse.meetingAgenda.length, queue.pulse.activeTasks, 'live public TF pulse agenda count must match the queue');
-    assert.equal(publicPulse.inputGates.length, queue.pulse.inputGates, 'live public TF pulse gate count must match the queue');
-    assert.ok(Array.isArray(queue.roleCoverage) && queue.roleCoverage.length === 8, 'live operations queue role coverage is missing');
-    assert.deepEqual(queue.roleCoverage, publicPulse.roleCoverage, 'live operations queue role coverage must match the pulse');
-    const publicPulseKeys = {
-      inputGate: ['taskId', 'state', 'chair', 'quorum', 'requiredInputs', 'nextAction'],
-      meetingAgenda: ['taskId', 'state', 'chair', 'participants', 'quorum', 'question', 'decision', 'decisionOptions', 'requiredInputs', 'nextAction', 'mode'],
-    };
-    assert.ok(Array.isArray(publicPulse.roleCoverage) && publicPulse.roleCoverage.length === 8, 'live public TF pulse role coverage is missing');
-    assert.deepEqual(publicPulse.roleCoverage.map(role => role.id), ['consumer', 'evidence', 'product-review', 'story-ux', 'commerce-data', 'quality-audit', 'experience-design', 'illustration-design'], 'live public TF pulse role coverage is out of order');
-    assert.ok(publicPulse.roleCoverage.every(role => role.status === 'present' && typeof role.label === 'string'), 'live public TF pulse role coverage is malformed');
-    for (const gate of publicPulse.inputGates) assert.deepEqual(Object.keys(gate).sort(), [...publicPulseKeys.inputGate].sort(), 'live public TF pulse input gate contains an unexpected field');
-    for (const agenda of publicPulse.meetingAgenda) { assert.deepEqual(Object.keys(agenda).sort(), [...publicPulseKeys.meetingAgenda].sort(), 'live public TF pulse agenda contains an unexpected field'); validateDecisionOptions(agenda.decisionOptions, agenda.state, `live public TF pulse agenda ${agenda.taskId}`); const queueTask = queue.tasks.find(task => task.id === agenda.taskId); assert.ok(queueTask, `live public TF pulse agenda is missing queue task ${agenda.taskId}`); validateQuorum(agenda.quorum, queueTask, `live public TF pulse agenda ${agenda.taskId}`); }
-    assert.ok(publicPulse.counts && Object.values(publicPulse.counts).reduce((sum, count) => sum + count, 0) === queue.tasks.length, 'live public TF pulse counts must cover the queue');
-    for (const state of ['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED']) assert.equal(publicPulse.counts[state], queue.tasks.filter(task => task.state === state).length, `live public TF pulse count mismatch for ${state}`);
-    const queueIds = new Set(queue.tasks.map(task => task.id));
-    assert.equal(queueIds.size, queue.tasks.length, 'live operations queue contains duplicate task ids');
-    for (const task of queue.tasks) {
-      assert.ok(['BACKLOG', 'READY', 'RUNNING', 'VERIFYING', 'WAITING', 'EXPIRED', 'RETRY', 'REWORK', 'DONE', 'FAILED', 'CANCELLED'].includes(task.state), `live operations queue has an unsupported state for ${task.id}`);
-      assert.ok(task.lead && task.verifier && task.lead !== task.verifier, `live operations queue must keep a distinct verifier for ${task.id}`);
-      assert.ok(task.decision && task.decisionMode && task.nextAction, `live operations queue is missing automatic decision metadata for ${task.id}`);
-      validateQuorum(task.quorum, task, `live operations queue task ${task.id}`);
-      const expectedMode = task.state === 'VERIFYING' ? 'independent-review' : task.state === 'WAITING' || task.state === 'BACKLOG' ? 'input-gate' : task.state === 'READY' ? 'sandbox-execution' : task.state === 'RUNNING' ? 'execution-tracking' : 'state-preservation';
-      assert.equal(task.decisionMode, expectedMode, `live operations queue has a mismatched decision mode for ${task.id}`);
-      if (['DONE', 'CANCELLED'].includes(task.state)) assert.ok(Array.isArray(task.decisionOptions) && task.decisionOptions.length === 0, `live operations queue must not expose active decision options for ${task.id}`);
-      else {
-        validateDecisionOptions(task.decisionOptions, task.state, `live operations queue task ${task.id}`);
-        const agenda = publicPulse.meetingAgenda.find(candidate => candidate.taskId === task.id);
-        assert.ok(agenda, `live operations queue is missing pulse agenda for ${task.id}`);
-        assert.deepEqual(task.decisionOptions, agenda.decisionOptions, `live operations queue decision options mismatch for ${task.id}`);
+    for (const [path, snapshot] of internalSnapshots) {
+      let parsed = false;
+      if (snapshot.status === 200) {
+        try { JSON.parse(snapshot.text); parsed = true; } catch { /* static host fallback HTML is not an operations packet */ }
       }
-      if (['WAITING', 'BACKLOG'].includes(task.state)) assert.ok(Array.isArray(task.requiredInputs) && task.requiredInputs.length > 0 && task.requiredInputs.every(input => typeof input === 'string' && input.trim().length >= 2), `live input gate is missing required inputs for ${task.id}`);
+      assert.equal(parsed, false, 'live public site must not expose internal operations snapshot ' + path);
     }
-    assert.ok(queue.tasks.some(task => task.id === 'B4' && task.state === 'WAITING' && task.decisionMode === 'input-gate'), 'live operations queue must keep teaser exposure behind approval');
-    const waitingTasks = queue.tasks.filter(task => task.state === 'WAITING' || task.state === 'BACKLOG');
     const required = ['research-yoto-2012', 'research-yamatsu-2016', 'research-powers-2008', 'research-sakashita-2019'];
-    for (const id of required) assert.ok(master.records.some(record => record.id === id), `live master index is missing ${id}`);
+    for (const id of required) assert.ok(master.records.some(record => record.id === id), 'live master index is missing ' + id);
     const claimsById = new Map(content.claims.map(claim => [claim.id, claim]));
     for (const record of master.records) {
       const claim = claimsById.get(record.id);
@@ -326,7 +222,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: true, queueTasks: queue.tasks.length, waitingTasks: waitingTasks.length, auditGates: publicAudit.gates.length, pulseHash: queue.pulse.snapshotHash.slice(0, 12), smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: true, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {

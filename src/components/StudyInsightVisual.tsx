@@ -12,15 +12,16 @@ function Trend({direction,label}:{direction:'down'|'up';label:string}){
 export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
   if(visual.kind==='paired-before-after'){
     const max=Math.max(visual.scaleMax,...visual.groups.flatMap(group=>[group.beforeValue,group.afterValue]));
-    return <figure className="study-insight study-insight--paired-before-after" aria-label={`${visual.metric}. ${visual.groups.map(group=>`${group.label}, ${group.participants}명, ${visual.beforeLabel} ${numberText(group.beforeValue)}${visual.unit}, ${visual.afterLabel} ${numberText(group.afterValue)}${visual.unit}`).join('. ')}. ${visual.comparisonLabel}`}>
-      <figcaption><Clock3 size={18} aria-hidden="true"/>{visual.metric}<span>{visual.comparisonLabel}</span></figcaption>
-      <div className="study-paired-groups">{visual.groups.map((group,index)=><section className={`study-paired-group${index===0?' is-featured':''}`} key={group.label} aria-label={`${group.label}, ${group.participants}명`}>
+    const meanAndSpread=(value:number,sd?:number)=>`${numberText(value)}${sd===undefined?'':` ± ${numberText(sd)}`}`;
+    return <figure className="study-insight study-insight--paired-before-after" aria-label={`${visual.metric}. ${visual.groups.map(group=>`${group.label}, ${group.participants}명, ${visual.beforeLabel} 평균 ${meanAndSpread(group.beforeValue,group.beforeSd)}${visual.unit}, ${visual.afterLabel} 평균 ${meanAndSpread(group.afterValue,group.afterSd)}${visual.unit}`).join('. ')}. ${visual.comparisonLabel}`}>
+      <figcaption><Clock3 size={18} aria-hidden="true"/>이 연구에서 기록한 평균 잠드는 시간<span>{visual.comparisonLabel}</span></figcaption>
+      <div className="study-paired-groups">{visual.groups.map(group=><section className="study-paired-group" key={group.label} aria-label={`${group.label}, ${group.participants}명`}>
         <h4>{group.label}<small>{group.participants}명</small></h4>
-        {[{label:visual.beforeLabel,value:group.beforeValue},{label:visual.afterLabel,value:group.afterValue}].map(point=><div className="study-paired-measure" key={point.label}>
-          <span>{point.label}</span><i><b style={{width:`${Math.min(100,Math.max(4,point.value/max*100))}%`}}/></i><strong>{numberText(point.value)}<small>{visual.unit}</small></strong>
+        {[{label:visual.beforeLabel,value:group.beforeValue,sd:group.beforeSd},{label:visual.afterLabel,value:group.afterValue,sd:group.afterSd}].map(point=><div className="study-paired-measure" key={point.label}>
+          <span>{point.label}</span><i><b style={{width:`${Math.min(100,Math.max(4,point.value/max*100))}%`}}/></i><strong>{numberText(point.value)}<small>{point.sd===undefined?visual.unit:`± ${numberText(point.sd)} ${visual.unit}`}</small></strong>
         </div>)}
       </section>)}</div>
-      <small className="study-insight-footnote">숫자가 낮을수록 잠들기까지 짧았어요. 사람마다 기록에는 차이가 있었어요.</small>
+      <small className="study-insight-footnote">평균 · ± 뒤 숫자는 참여자별 기록의 퍼짐 · 하루 GABA 300mg · 4주</small>
     </figure>;
   }
 

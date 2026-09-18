@@ -164,7 +164,7 @@ const teaserPreview={
   placement:teaser.placement,
   title:'발효가바 이야기',
   description:'발효가바가 만들어지는 이야기를 짧은 영상으로 만나보세요.',
-  note:'영상은 이 페이지 안에서 재생돼요. 재생되지 않으면 새 창에서 볼 수 있어요. 다 본 뒤에는 사람 연구와 제품 구성을 이어서 확인해 보세요.',
+   note:'영상 화면의 재생 버튼을 눌러 시청할 수 있어요. 이 페이지는 셀핀다 완제품의 시험 영상이 아니라 발효가바 소개 영상입니다.',
   ...(teaser.status==='PREVIEW' && teaser.publicPreviewUrl ? {url:teaser.publicPreviewUrl} : {url:null}),
 };
 writeFileSync(teaserPreviewTarget,JSON.stringify(teaserPreview,null,2)+'\n');

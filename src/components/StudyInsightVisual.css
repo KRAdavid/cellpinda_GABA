@@ -17,12 +17,11 @@
 .study-paired-group{display:grid;gap:8px;padding:11px 12px;border:1px solid #e4e9e4;border-radius:7px;background:#fff}
 .study-paired-group h4{display:flex;align-items:center;gap:8px;margin:0 0 1px;color:#435449;font-size:13px;font-weight:650}
 .study-paired-group h4 small{margin-left:auto;color:#657369;font-size:12px;font-weight:500}
-.study-paired-measure{display:grid;grid-template-columns:64px minmax(36px,1fr) 62px;align-items:center;gap:8px;color:#657369;font-size:12px}
+.study-paired-measure{display:grid;grid-template-columns:70px minmax(36px,1fr) 76px;align-items:center;gap:8px;color:#657369;font-size:12px}
 .study-paired-measure i{display:block;height:8px;overflow:hidden;border-radius:8px;background:#edf1ed}
 .study-paired-measure i b{display:block;height:100%;border-radius:inherit;background:#a5b4a8}
-.study-paired-group.is-featured .study-paired-measure i b{background:#43865b}
 .study-paired-measure strong{color:#263a2d;font-size:13px;text-align:right;font-variant-numeric:tabular-nums}
-.study-paired-measure strong small{margin-left:2px;font-size:11px;font-weight:500}
+.study-paired-measure strong small{display:block;margin:2px 0 0;font-size:12px;font-weight:500}
 .study-insight--paired-before-after .study-insight-footnote{font-size:12px}
 .study-pair-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .study-pair-metrics>div{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 8px;min-width:0}
@@ -73,4 +72,4 @@
 .study-insight--journey li{min-height:72px;padding:10px 5px}
 .study-insight--journey li .study-journey-arrow{display:none}
 .study-paired-measure strong small,.study-group-row>strong small,.study-time-comparison strong small,.study-ratio-hero>strong small{font-size:14px}
-@media(max-width:420px){.study-time-comparison{grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:4px}.study-ratio-bars>div,.study-group-row{grid-template-columns:minmax(74px,.85fr) minmax(34px,1.2fr) auto;gap:6px}.study-paired-measure{grid-template-columns:72px minmax(28px,1fr) 57px;gap:5px}}
+@media(max-width:420px){.study-time-comparison{grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:4px}.study-ratio-bars>div,.study-group-row{grid-template-columns:minmax(74px,.85fr) minmax(34px,1.2fr) auto;gap:6px}.study-paired-measure{grid-template-columns:72px minmax(28px,1fr) 76px;gap:5px}}

@@ -25,7 +25,7 @@ export default function TeaserPreview({onEvent}: Props) {
   const [preview, setPreview] = useState<TeaserPreviewData | null>(null);
   const [frameLoaded, setFrameLoaded] = useState(false);
   const impressionTracked = useRef(false);
-  const playTracked = useRef(false);
+  const embedLoadTracked = useRef(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -61,32 +61,32 @@ export default function TeaserPreview({onEvent}: Props) {
         <p className="chapter">발효가바 영상</p>
         <h2 id="teaser-heading">발효가바는<br />어떻게 만들어질까요?</h2>
         <p>{preview.description}</p>
-        <p className="teaser-context">영상에서 만드는 과정을 보고, 아래에서 사람 연구와 제품 구성을 이어서 살펴보세요.</p>
+        <p className="teaser-context">영상 화면의 재생 버튼을 누르면 발효 이야기가 시작돼요. 아래에서 사람 연구와 제품 구성을 이어서 살펴보세요.</p>
       </div>
       <div className="teaser-card teaser-card-player" aria-busy={!frameLoaded}>
         <div className="teaser-player">
           <iframe
             className="teaser-frame"
-            title={preview.title}
+            title={`${preview.title}. 시청하려면 영상 안의 재생 버튼을 눌러 주세요.`}
             src={preview.url}
             allow="autoplay; fullscreen; picture-in-picture"
             loading="eager"
             referrerPolicy="strict-origin-when-cross-origin"
             onLoad={() => {
               setFrameLoaded(true);
-              if (!playTracked.current) {
-                playTracked.current = true;
-                onEvent?.('teaser_play', {path: '/teaser'});
+              if (!embedLoadTracked.current) {
+                embedLoadTracked.current = true;
+                onEvent?.('teaser_embed_loaded', {path: '/teaser'});
               }
             }}
           />
           {!frameLoaded && <p className="teaser-loading" aria-live="polite">티저를 불러오는 중입니다…</p>}
         </div>
         <div className="teaser-card-copy">
-          <p className="teaser-label">이 페이지에서 바로 재생</p>
+          <p className="teaser-label">영상 안의 재생 버튼을 눌러 시작</p>
           <h3>{preview.title}</h3>
-          <p>발효와 휴식 이야기를 영상으로 만나보세요. 다 본 뒤에는 사람 연구와 제품 구성을 이어서 볼 수 있어요.</p>
-          <p className="teaser-fallback">영상이 재생되지 않으면 <a href={preview.url} target="_blank" rel="noopener noreferrer">새 창에서 보기 ↗</a></p>
+          <p>티저 페이지가 열렸어요. 영상 화면의 재생 버튼을 누르면 시청할 수 있습니다.</p>
+          <p className="teaser-fallback">영상이 재생되지 않으면 <a href={preview.url} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('teaser_external_opened',{path:'/teaser'})}>새 창에서 보기 ↗</a></p>
         </div>
       </div>
       <p className="teaser-note">{preview.note}</p>

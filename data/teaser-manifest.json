@@ -17,13 +17,7 @@
   ],
   "events": [
     "teaser_impression",
-    "teaser_play",
-    "teaser_progress_25",
-    "teaser_progress_50",
-    "teaser_progress_75",
-    "teaser_complete",
-    "teaser_caption_opened",
-    "teaser_cta_clicked",
-    "teaser_exit"
+    "teaser_embed_loaded",
+    "teaser_external_opened"
   ]
 }

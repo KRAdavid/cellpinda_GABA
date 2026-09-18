@@ -9,7 +9,9 @@ if (manifest.goalId !== 'GL-2026-CELL-GABA-001') fail('teaser is not tied to the
 if (!['HOLD', 'PREVIEW', 'APPROVED'].includes(manifest.status)) fail('status must be HOLD, PREVIEW or APPROVED');
 if (!/^https:\/\//.test(manifest.internalReviewUrl)) fail('internal review URL must be recorded as HTTPS');
 if (!Array.isArray(manifest.requiredApprovals) || manifest.requiredApprovals.length < 5) fail('approval checklist is incomplete');
-if (!Array.isArray(manifest.events) || manifest.events.length < 5) fail('measurement events are incomplete');
+if (JSON.stringify(manifest.events) !== JSON.stringify(['teaser_impression', 'teaser_embed_loaded', 'teaser_external_opened'])) fail('teaser events must describe only observable actions available to the parent page');
+const teaserComponent = await readFile(resolve(root, 'src/components/TeaserPreview.tsx'), 'utf8');
+if (!teaserComponent.includes("onEvent?.('teaser_embed_loaded'") || !teaserComponent.includes("onEvent?.('teaser_external_opened'") || teaserComponent.includes("onEvent?.('teaser_play'")) fail('teaser playback metrics must not confuse iframe loading with actual video playback');
 
 if (manifest.status === 'HOLD') {
   if (manifest.publicMediaUrl !== null) fail('a HOLD teaser cannot expose a public media URL');
