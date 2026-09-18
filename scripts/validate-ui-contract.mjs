@@ -26,6 +26,7 @@ const brainLoadEvidence = await read('src/components/BrainLoadEvidence.tsx');
 const brainLoadEvidenceStyles = await read('src/components/BrainLoadEvidence.css');
 const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
 const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css');
+const sevenDayChallenge = await read('src/components/SevenDayChallenge.tsx');
 const indexHtml = await read('index.html');
 const researchRouteHtml = await read('public/research/index.html');
 const notFoundHtml = await read('public/404.html');
@@ -53,7 +54,8 @@ requireMatch(app, /heroProduct\?<[\s\S]*?셀핀다 발효가바 \{heroProduct\.a
 requireMatch(app, /heroProduct\?<a className="hero-product" href="#products" aria-label=/, 'the first-screen product summary must link to product configuration');
 requireMatch(app, /if\(rhythmIdFromUrl\(url\)\)[\s\S]*?getElementById\('rhythm'\)\?\.scrollIntoView/, 'a shared rhythm query must scroll to the shared result after the page mounts');
 requireMatch(app, /if\(challengeInvite\)\{[\s\S]*?const scrollToChallenge=\(\)=>\{[\s\S]*?getElementById\('lab'\)[\s\S]*?target\.scrollIntoView[\s\S]*?window\.scrollBy\(\{top:target\.getBoundingClientRect\(\)\.top-96,behavior:'instant'\}\)[\s\S]*?setInterval\(\(\)=>\{[\s\S]*?getBoundingClientRect\(\)\.top[\s\S]*?align\(\)[\s\S]*?trackOnce\('shared_link_landed',\{path:'\/challenge'/, 'a seven-day challenge invite must stay aligned while page content settles');
-requireMatch(app, /const linkContext=challengeInvite\?[\s\S]*?친구가 7일 휴식 기록을 공유했어요/, 'a challenge invite must explain why the visitor arrived');
+requireMatch(app, /<SevenDayChallenge onEvent=\{track\} isInvite=\{challengeInvite\}\/>/, 'a challenge invite must reach the seven-day challenge section');
+requireMatch(sevenDayChallenge, /isInvite \? <p className="challenge-invite" role="status">친구가 7일 휴식 기록을 공유했어요\. 나도 오늘부터 시작해 보세요\.<\/p>/, 'challenge invite context must remain visible beside its destination');
 requireMatch(app, /const description='GABA를 섭취한 사람 연구를 쉬운 말과 그림으로 소개하고, 연구 조건과 셀핀다 제품 정보를 구분해 보여드립니다\.'/ , 'research route metadata must use plain language and separate general research from product information');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
