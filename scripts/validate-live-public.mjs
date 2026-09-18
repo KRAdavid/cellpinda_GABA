@@ -141,7 +141,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const yamatsu = content.claims.find(claim => claim.id === 'research-yamatsu-2016');
     assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
     const review2020 = content.claims.find(claim => claim.id === 'research-review-2020');
-    assert.ok(review2020?.metadata?.consumerFinding?.includes('14편') && review2020.metadata.consumerFinding.includes('한 가지 결론'), 'live research review must explain its bounded conclusion in plain language');
+    assert.ok(review2020?.metadata?.consumerFinding?.includes('14편') && review2020.metadata.consumerFinding.includes('확인 방법') && review2020.metadata.consumerFinding.includes('한 가지로 확실히 말하기 어려웠어요'), 'live research review must explain its bounded conclusion in plain language');
     const yoon2022 = content.claims.find(claim => claim.id === 'research-yoon-2022');
     assert.ok(yoon2022?.metadata?.consumerFinding?.includes('9.0분에서 4.8분') && yoon2022.metadata.consumerFinding.includes('비교 정제'), 'live Yoon study must include its observed change and the comparison group');
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
