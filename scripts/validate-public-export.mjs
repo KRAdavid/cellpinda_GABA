@@ -59,7 +59,7 @@ if (publicResearchRecords.some(claim => ['research-yoon-2022', 'research-steenbe
 const relationshipDisclosures = publicResearchRecords.filter(claim => claim.metadata?.consumerDisclosure);
 if (relationshipDisclosures.length < 3 || relationshipDisclosures.some(claim => !master.records.find(record => record.id === claim.id)?.consumerDisclosure)) fail('public study relationship disclosures must be preserved in the master index');
 if (!researchComponent.includes('preferredStudyOrder') || !researchComponent.includes("'research-byun-2018'") || !researchComponent.includes("'research-review-2020'") || !researchComponent.includes('const featuredStudy = visibleStudies[0]')) fail('a concrete visualized human study must appear before the research filters and overview');
-if (!researchComponent.includes('일반 GABA 사람 연구예요. 셀핀다 제품의 구성과 섭취 안내는 포장에서 확인해 주세요.')) fail('the research list must clearly distinguish general GABA studies from Cellpinda product information');
+if (!researchComponent.includes('셀핀다 가바 1500 시험은 아니며, 연구마다 먹은 양과 살펴본 항목이 달라요.') || !researchHtml.includes('먹는 GABA 연구와 뇌 속 GABA 관찰 연구') || !researchHtml.includes('셀핀다 가바 1500 시험과는 구분해 보여드려요.')) fail('the research list must clearly distinguish general GABA studies, brain-GABA observation, and Cellpinda product information');
 
 const forbiddenKeys = /^(original|rightsEvidence|rightsScope|privatePath|customer|email|phone|answers|token|operatorToken|adminToken)$/i;
 const scanKeys = (value, path = '$') => {

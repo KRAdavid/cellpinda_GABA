@@ -255,3 +255,23 @@
   .research-library-card-featured>.study-insight{margin-top:7px;padding-top:8px}
   .research-library-disclosure{margin-top:8px;font-size:13px;line-height:1.5}
 }
+
+/* Center the research reading column and balance the featured study on wide screens. */
+.research-route-main{width:min(1120px,100%);margin-inline:auto}
+.research-library-card-featured{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(24px,4vw,48px);align-items:start}
+.research-library-card-featured>.research-library-kind,
+.research-library-card-featured>h3,
+.research-library-card-featured>.research-library-disclosure,
+.research-library-card-featured>.research-detail,
+.research-library-card-featured>.research-copy{grid-column:1/-1}
+.research-library-card-featured>.research-library-consumer-summary{grid-column:1;align-self:center;margin:0}
+.research-library-card-featured>.study-insight{grid-column:2;width:100%;max-width:none;margin:0;padding-top:0}
+.research-library-browse{max-width:840px;margin-inline:auto}
+@media(max-width:900px){
+  .research-library-card-featured{display:block}
+  .research-library-card-featured>.research-library-consumer-summary{margin:0}
+  .research-library-card-featured>.study-insight{max-width:580px;margin:10px auto 0;padding-top:8px}
+  .research-library-browse{max-width:none}
+}
+.research-library-card-featured--visual-first>.study-insight{grid-column:1/-1;width:100%;max-width:760px;margin:8px auto 0}
+@media(max-width:900px){.research-library-card-featured--visual-first>.study-insight{max-width:580px;margin:10px auto 0}}

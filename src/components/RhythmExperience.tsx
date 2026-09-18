@@ -230,8 +230,9 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
 
   useEffect(() => {
     if (started && !type) questionRef.current?.focus();
+    if (sharedType && !result) resultRef.current?.focus({ preventScroll: true });
     if (result) {resultRef.current?.focus();if(!resultViewed.current){resultViewed.current=true;onEvent('result_viewed',{path:'/result'})}}
-  }, [step, started, result, type]);
+  }, [step, started, result, type, sharedType]);
 
   useEffect(() => {
     let cancelled = false;

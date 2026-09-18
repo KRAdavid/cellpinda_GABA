@@ -163,7 +163,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       : metadata.consumerVisual
       ? metadata.consumerScope || metadata.consumerSummary || metadata.consumerFinding
       : metadata.consumerSummary || metadata.consumerFinding || metadata.consumerScope;
-    return <article id={claim.id} className={`research-library-card${featured ? ' research-library-card-featured' : ''}`} key={claim.id}>
+    return <article id={claim.id} className={`research-library-card${featured ? ` research-library-card-featured${resultVisualFirst ? ' research-library-card-featured--visual-first' : ''}` : ''}`} key={claim.id}>
       <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType, metadata.dose)}</p>
       <h3>{metadata.question || claim.topic}</h3>
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{findingFirst ? '사람 연구에서 관찰된 변화' : '연구는 이렇게 진행됐어요'}</strong>{takeaway}</p> : null}
@@ -193,7 +193,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   }
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
-    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>일반 GABA 사람 연구예요. 셀핀다 제품의 구성과 섭취 안내는 포장에서 확인해 주세요.</p></div></div>
+    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>아래는 일반 GABA 연구예요. 셀핀다 가바 1500 시험은 아니며, 연구마다 먹은 양과 살펴본 항목이 달라요.</p></div></div>
     {featuredStudy ? renderStudy(featuredStudy, true) : null}
     <details className="research-library-browse" id="research-library-browse">
       <summary><span><Search size={18} aria-hidden="true"/> 주제별로 다른 연구 찾기</span><small>{Math.max(0, visibleStudies.length - 1)}편 더 보기</small></summary>
