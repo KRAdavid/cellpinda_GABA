@@ -6,6 +6,35 @@ import { adminAction, adminRoleAllows, adminRoleCapabilities, adminRoleForToken,
 
 declare global { interface Env { ADMIN_TOKEN: string; ADMIN_ROLE_TOKENS?: string } }
 
+const SECURITY_HEADERS:Record<string,string>={
+  'Content-Security-Policy':[
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'none'",
+    "form-action 'self' https://smartstore.naver.com",
+    "script-src 'self' https://t1.kakaocdn.net",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob: https://t1.kakaocdn.net https://t1.daumcdn.net",
+    "connect-src 'self' https://t1.kakaocdn.net https://kapi.kakao.com https://kauth.kakao.com",
+    "frame-src https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site https://www.youtube.com https://www.youtube-nocookie.com",
+    "media-src 'self' blob:",
+    "font-src 'self' data:",
+    'upgrade-insecure-requests',
+  ].join('; '),
+  'Permissions-Policy':'camera=(), geolocation=(), microphone=(), payment=(), usb=()',
+  'Referrer-Policy':'strict-origin-when-cross-origin',
+  'X-Content-Type-Options':'nosniff',
+  'X-Frame-Options':'DENY',
+};
+
+function withSecurityHeaders(response:Response,secureTransport:boolean):Response {
+  const headers=new Headers(response.headers);
+  for(const [name,value] of Object.entries(SECURITY_HEADERS))headers.set(name,value);
+  if(secureTransport)headers.set('Strict-Transport-Security','max-age=31536000; includeSubDomains');
+  return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
+}
+
 const reply=(status:number,value:unknown)=>new Response(status===204?null:JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 async function body(request:Request,maxBytes=16384) {
   if(!request.headers.get('content-type')?.startsWith('application/json'))throw failure('JSON content type required',415);
@@ -23,6 +52,7 @@ function authorized(actual:string|null|undefined,expected:unknown) {
 }
 export default {
   async fetch(request:Request,env:Env):Promise<Response> {
+    const response=await (async():Promise<Response>=>{
     try {
       const url=new URL(request.url);
       if(!url.pathname.startsWith('/api/'))return rewriteSocialHtml(request,await env.ASSETS.fetch(request));
@@ -63,5 +93,7 @@ export default {
       if(request.method==='PATCH' && match){const payload=await body(request);const blocked=deny(adminAction(request.method,url.pathname,payload));if(blocked)return blocked;return reply(200,await store.update(match[1],payload));}
       return reply(404,{error:'Not found'});
     }catch(error){const known=error instanceof Error && 'status' in error && typeof error.status==='number';return reply(known?error.status as number:500,{error:known?error.message:'Internal server error'});}
+    })();
+    return withSecurityHeaders(response,new URL(request.url).protocol==='https:');
   },
 };

@@ -114,7 +114,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const researchPageText = await researchPageResponse.text();
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
     assert.match(researchPageText, /property="og:title" content="GABA 사람 연구를 쉬운 말로"/, 'live research route must identify itself as an educational page');
-    assert.ok(researchPageText.includes('연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉽게 정리했어요'), 'live research page must distinguish general study material from current product information before readers enter the data');
+    assert.ok(researchPageText.includes('GABA 사람 연구를 쉬운 말로 소개해요. 셀핀다 제품 정보는 제품 페이지에서 확인해 보세요.'), 'live research page must use a simple consumer introduction and keep product information separate');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
@@ -141,12 +141,14 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const yamatsu = content.claims.find(claim => claim.id === 'research-yamatsu-2016');
     assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
     const review2020 = content.claims.find(claim => claim.id === 'research-review-2020');
-    assert.ok(review2020?.metadata?.consumerFinding?.includes('2020년 2월까지') && review2020.metadata.consumerFinding.includes('14편') && review2020.metadata.consumerFinding.includes('제품·양·기간·확인 방법'), 'live research review must give its date range and variation in study conditions in plain language');
+    assert.ok(review2020?.metadata?.consumerFinding?.includes('2020년 2월까지') && review2020.metadata.consumerFinding.includes('14편') && review2020.metadata.consumerFinding.includes('수면은 결론을 내리기엔 자료가 적었어요'), 'live research review must show its date range and assessment in plain language');
     assert.ok(!content.claims.some(claim => claim.id === 'research-yoon-2022'), 'live public research must exclude the Yoon study while the result discrepancy is unresolved');
     assert.ok(!content.claims.some(claim => claim.id === 'research-steenbergen-2015'), 'live public research must exclude the retracted action-selection paper');
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
     assert.ok(byun2018?.metadata?.consumerContext?.includes('30명') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show the participant split and both groups');
     assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerDisclosure?.includes('Pharma Foods International'), 'live consumer research must show disclosed funding and author relationships');
+    assert.ok(content.claims.find(claim => claim.id === 'research-yoto-2012')?.metadata?.consumerDisclosure?.includes('저자 9명 중 4명'), 'live Yoto study must show the published author affiliation disclosure');
+    assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerContext?.includes('그룹 간 효과는 확정적으로 해석하기 어려워요') && !content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerVisual, 'live Sakashita study must surface the source discrepancy and omit the disputed chart');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
     assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('나랑 ‘뇌 컨디션 확인 챌린지’ 해볼래?') && consumerBundle.includes('초대에는 내 게임 기록이나 답변이 포함되지 않아요.'), 'live consumer bundle must invite a friend without transmitting the player result');
     assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');

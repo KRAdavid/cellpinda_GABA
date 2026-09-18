@@ -16,6 +16,7 @@ const robots = await readFile(new URL('../public/robots.txt', import.meta.url), 
 const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 const teaser = await readJson('data/teaser-manifest.json');
 const teaserPreview = await readJson('public/data/teaser-preview.json');
+const wranglerConfig = await readJson('wrangler.jsonc');
 const operationsQueue = await readJson('public/data/operations-queue.json');
 const publicPulse = await readJson('public/data/tf-pulse.json');
 const publicAudit = await readJson('public/data/goal-audit.json');
@@ -38,6 +39,7 @@ const isSmartStoreReview = value => {
 };
 
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
+if (wranglerConfig.assets?.run_worker_first !== true) fail('all static Worker assets must pass through the security-header middleware');
 if (!/<noscript[\s>]/i.test(indexHtml) || !/GABA는 뇌세포가 서로 신호를 주고받을 때 쓰이는 물질 가운데 하나예요/.test(indexHtml) || !/가바 1,500\s*mg\s*[×x]\s*30포/i.test(indexHtml) || /gaba-master-index\.json/i.test(indexHtml) || !indexHtml.includes(approvedSmartStoreUrl) || !indexHtml.includes(approvedSmartStoreReviewUrl) || !/<a href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>스마트스토어에서 후기 읽기/.test(indexHtml) || !indexHtml.includes(approvedReviewText)) fail('index.html must keep a readable static fallback with the approved Smart Store product and review links');
 if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml) || !/<meta property="og:type" content="website"\s*\/>/i.test(indexHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"\s*\/>/i.test(indexHtml)) fail('index.html must expose canonical and Open Graph URL metadata');
 if (!/canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//.test(focusHtml) || !/property="og:title" content="“너도 해봐” 뇌 컨디션 확인 챌린지"/.test(focusHtml) || !/property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card-v4\.png"/.test(focusHtml) || !/focus=1#focus-game|focus=1/.test(focusHtml) || !focusHtml.includes('24개') || !focusHtml.includes('먼저 연습하고 시작하기') || !focusCardSvg.includes('뇌 컨디션 확인 챌린지')) fail('focus invite page must expose its direct challenge title and updated randomized, user-started game preview');
@@ -225,9 +227,10 @@ const coverage = {
   growthHormone: ['research-powers-2008'],
   muscleDevelopment: ['research-sakashita-2019'],
 };
+const stressSleepReview=claimsById.get('research-review-2020');
+if(!stressSleepReview?.metadata?.consumerFinding?.includes('긴장 관련 지표') || !stressSleepReview.metadata.consumerFinding.includes('수면은 결론을 내리기엔 자료가 적었어요')) fail('stress and sleep review assessment must stay visible in plain language');
 const featuredFindings = new Map([
   ['research-byun-2018','paired-before-after'],['research-yoto-2012','study-journey'],['research-yamatsu-2016','metric-pair'],
-  ['research-sakashita-2019','group-values'],
   ['research-heba-2016','observational-link'],
 ]);
 for (const [id, kind] of featuredFindings) {
@@ -253,7 +256,6 @@ if (hasRemoved750) fail('removed 750 product returned to public export');
 
 if (content.reviews.length !== 1 || content.reviews[0].id !== 'shop-review-destination-1500' || !isSmartStoreReview(content.reviews[0].sourceUrl) || content.reviews[0].publicText !== approvedReviewText) fail('review destination or consumer copy is not the approved Smart Store 1500 review dialog message');
 if (content.reviews.some(review => 'limitations' in review || 'result' in review)) fail('review export exposes internal editorial fields');
-if (/효과를\s*보장하지|개인\s*경험은\s*제품\s*효과|다만\s*GABA만의\s*효과|스트레스에\s*제한적|수면에\s*매우\s*제한적|결과가\s*일치하지|정량\s*메타분석|중증\s*수면질환|수면이\s*좋지\s*않|이상사례|유의하지\s*않/i.test(JSON.stringify(content))) fail('consumer export contains a negative effect disclaimer');
 for (const record of master.records) {
   const claim = claimsById.get(record.id);
   if (!claim || claim.evidenceHash !== record.evidenceHash || claim.reviewedAt !== record.reviewedAt) fail(`master provenance mismatch for ${record.id}`);

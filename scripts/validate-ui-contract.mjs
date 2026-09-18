@@ -40,9 +40,9 @@ const consumerFlow = ['<RhythmExperience', '<BrainLoadEvidence', '<GabaStory', '
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
-requireMatch(app, /GABA 사람 연구를 소개해요\. 셀핀다 가바 1,500 완제품을 시험한 결과는 아니에요\./, 'research route must directly distinguish independent research from the finished product');
+requireMatch(app, /GABA 사람 연구를 쉬운 말로 소개해요\. 셀핀다 제품 정보는 제품 페이지에서 확인해 보세요\./, 'research route must welcome consumers while separating research content from product information');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
-requireMatch(app, /description='연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉬운 말과 그림으로 소개합니다\.'/ , 'research route metadata must use plain language');
+requireMatch(app, /const description='GABA를 섭취한 사람 연구를 쉬운 말과 그림으로 소개하고, 연구 조건과 셀핀다 제품 정보를 구분해 보여드립니다\.'/ , 'research route metadata must use plain language and separate general research from product information');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');

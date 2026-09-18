@@ -118,11 +118,13 @@ jobs:
     steps:
       - name: Report deployment configuration
         run: |
+          echo "## Cloudflare Worker/API" >> "$GITHUB_STEP_SUMMARY"
           if [ "$DEPLOY_ENABLED" != "true" ]; then
+            echo "**NOT DEPLOYED.** The static GitHub Pages site may publish, but the Cloudflare Worker API and D1 are not part of that release until the required secrets are configured." | tee -a "$GITHUB_STEP_SUMMARY"
             echo "Cloudflare deployment skipped: repository secrets are not configured."
             echo "Set CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_DATABASE_ID, ADMIN_TOKEN and MEMBER_ORIGIN to enable automatic deploys."
           else
-            echo "Cloudflare deployment secrets are configured."
+            echo "Secrets are configured; Worker deployment and live API checks must both pass." | tee -a "$GITHUB_STEP_SUMMARY"
           fi
       - name: Check out source
         if: env.DEPLOY_ENABLED == 'true'
@@ -177,3 +179,8 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: pnpm exec wrangler deploy --config wrangler.deploy.jsonc
+      - name: Verify deployed Worker API and security headers
+        if: env.DEPLOY_ENABLED == 'true'
+        env:
+          WORKER_URL: ${{ vars.CLOUDFLARE_WORKER_URL || 'https://cellpinda-rhythm.marshy-shear.workers.dev' }}
+        run: node scripts/validate-worker-live.mjs

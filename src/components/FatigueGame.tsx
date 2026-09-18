@@ -614,6 +614,11 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         {phase === 'idle' ? <div className="fatigue-game-onboarding">
           <p className="fatigue-game-kicker">매번 신호 순서가 달라져요</p>
           <h3>세 가지만 기억하세요.</h3>
+          <div className="fatigue-game-onboarding-actions">
+            <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 연습하기 <ArrowRight size={18} aria-hidden="true" /></button>
+            <button type="button" className="fatigue-game-sound-toggle" onClick={toggleGameSound} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />} 효과음 {gameSoundEnabled ? '켜짐' : '꺼짐'}</button>
+            <button type="button" className="rhythm-text-button fatigue-game-skip-practice" onClick={() => startRun('baseline')}>설명 없이 바로 시작</button>
+          </div>
           <div className="fatigue-game-rule-cards" aria-label="게임 규칙">
             {FOCUS_GAME_STAGES.map(stage => <div className={`fatigue-game-rule-card fatigue-game-rule-card-${stage}`} key={stage}>
               <span className={`fatigue-stage-illustration fatigue-stage-illustration-${stage}`} aria-hidden="true">
@@ -625,11 +630,6 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
             </div>)}
           </div>
           <p className="fatigue-game-practice-hint">시작 전 연습으로 익힐 수 있어요. 연습 기록은 점수에 들어가지 않습니다.</p>
-          <div className="fatigue-game-onboarding-actions">
-            <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 연습하기 <ArrowRight size={18} aria-hidden="true" /></button>
-            <button type="button" className="fatigue-game-sound-toggle" onClick={toggleGameSound} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />} 효과음 {gameSoundEnabled ? '켜짐' : '꺼짐'}</button>
-            <button type="button" className="rhythm-text-button fatigue-game-skip-practice" onClick={() => startRun('baseline')}>설명 없이 바로 시작</button>
-          </div>
           <details className="fatigue-game-method"><summary>게임을 만든 기준과 참고한 연구</summary><p>멈춤 신호와 규칙 바꾸기 과제를 참고했어요. 이 게임 자체는 건강 검사가 아니에요.</p><div><a href="https://pubmed.ncbi.nlm.nih.gov/17850833/" target="_blank" rel="noopener noreferrer">멈춤 신호를 살펴본 연구 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/29517261/" target="_blank" rel="noopener noreferrer">규칙 바꾸기를 살펴본 연구 <ExternalLink size={14} aria-hidden="true" /></a></div></details>
         </div> : null}
 

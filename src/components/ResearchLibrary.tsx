@@ -167,7 +167,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       <p className="research-library-study-scope"><strong>연구에서 사용한 것</strong><span>{metadata.productApplicability}</span></p>
       <p className="research-library-product-boundary"><Info size={17} aria-hidden="true" /><span><strong>셀핀다 제품 연구는 아니에요.</strong><small>이 연구는 셀핀다 가바 1,500을 시험하지 않았어요.</small></span></p>
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : (metadata.consumerFinding || metadata.consumerSummary) ? <p className="research-library-consumer-summary"><strong>{metadata.consumerFinding ? '연구에서 기록한 내용' : '연구를 이렇게 살펴봤어요'}</strong>{metadata.consumerFinding || metadata.consumerSummary}</p> : null}
-      {metadata.consumerVisual && metadata.consumerContext ? <p className="research-library-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
+      {metadata.consumerContext ? <p className="research-library-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
       {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>연구 관계</strong>{metadata.consumerDisclosure}</span></p> : null}
       <details className="research-detail" onToggle={event => {
         if (event.currentTarget.open) onOpen?.(claim.id);

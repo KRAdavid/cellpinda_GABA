@@ -24,13 +24,13 @@ class MockD1 {
   async batch(statements){const work=this.queue.then(async()=>{this.db.exec('BEGIN IMMEDIATE');try{const result=[];for(const statement of statements)result.push(await statement.run());this.db.exec('COMMIT');return result;}catch(error){this.db.exec('ROLLBACK');throw error;}});this.queue=work.catch(()=>{});return work;}
   close(){this.db.close();}
 }
-const seed={claims:[{id:'source',status:'approved',publicText:'Public fact',sources:[{title:'Source',url:'https://example.com'}],metadata:{sampleSize:'40',productApplicability:'Not a product study',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'},result:'Internal observation',limitations:['Internal note'],privatePath:'secret'}},{id:'held',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba1500',status:'approved',sourceIds:['source'],name:'Product'}]};
+const seed={claims:[{id:'source',status:'approved',publicText:'Public fact',sources:[{title:'Source',url:'https://example.com'}],metadata:{sampleSize:'40',productApplicability:'Not a product study',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerDetail:'An expanded result detail.',consumerContext:'The paper reports the research context.',consumerDisclosure:'The article reports an author relationship.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'},result:'Internal observation',limitations:['Internal note'],privatePath:'secret'}},{id:'held',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba1500',status:'approved',sourceIds:['source'],name:'Product'}]};
 
 test('D1 approval transaction, seed preservation, public filtering and audit',async()=>{
   const db=new MockD1();const store=createStore(db);
   try {
     await store.initialize(seed);
-    let data=await store.publicContent();assert.equal(data.claims.length,1);assert.equal(data.products.length,1);assert.ok(!JSON.stringify(data).includes('secret'));assert.ok(!JSON.stringify(data).includes('Internal observation'));assert.ok(!JSON.stringify(data).includes('Internal note'));assert.equal(data.claims[0].metadata.consumerFinding,'Study participants recorded a measured change over four weeks.');assert.equal(data.claims[0].metadata.consumerVisual.kind,'ratio');
+    let data=await store.publicContent();assert.equal(data.claims.length,1);assert.equal(data.products.length,1);assert.ok(!JSON.stringify(data).includes('secret'));assert.ok(!JSON.stringify(data).includes('Internal observation'));assert.ok(!JSON.stringify(data).includes('Internal note'));assert.equal(data.claims[0].metadata.consumerFinding,'Study participants recorded a measured change over four weeks.');assert.equal(data.claims[0].metadata.consumerVisual.kind,'ratio');assert.equal(data.claims[0].metadata.consumerDetail,'An expanded result detail.');assert.equal(data.claims[0].metadata.consumerContext,'The paper reports the research context.');assert.equal(data.claims[0].metadata.consumerDisclosure,'The article reports an author relationship.');
     await store.update('source',{revision:1,reason:'Rewording',publicText:'Changed'});
     data=await store.publicContent();assert.equal(data.claims.length,0);assert.equal(data.products.length,0);
     await assert.rejects(store.update('source',{revision:1,reason:'Stale',status:'approved'}),/Revision conflict/);
@@ -143,6 +143,29 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
     assert.equal(await (await call('/')).text(),'asset');
     env.RATE_LIMITER.limit=async()=>({success:false});assert.equal((await call('/api/health')).status,429);
     assert.equal((await worker.fetch(new Request('http://public.example/api/health'),env)).status,400);
+  }finally{DB.close();}
+});
+
+test('Worker applies the same release security headers to API and static asset responses',async()=>{
+  const DB=new MockD1();
+  const env={DB,ADMIN_TOKEN:'a'.repeat(64),RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async()=>new Response('asset',{headers:{'content-type':'text/css'}})} };
+  try{
+    const api=await worker.fetch(new Request('https://site.example/api/health'),env);
+    const asset=await worker.fetch(new Request('https://site.example/assets/site.css'),env);
+    for(const response of [api,asset]){
+      assert.equal(response.headers.get('x-content-type-options'),'nosniff');
+      assert.equal(response.headers.get('x-frame-options'),'DENY');
+      assert.equal(response.headers.get('referrer-policy'),'strict-origin-when-cross-origin');
+      assert.equal(response.headers.get('permissions-policy'),'camera=(), geolocation=(), microphone=(), payment=(), usb=()');
+      assert.equal(response.headers.get('strict-transport-security'),'max-age=31536000; includeSubDomains');
+      const csp=response.headers.get('content-security-policy')||'';
+      assert.match(csp,/default-src 'self'/);
+      assert.match(csp,/frame-ancestors 'none'/);
+      assert.match(csp,/script-src 'self' https:\/\/t1\.kakaocdn\.net/);
+      assert.match(csp,/fermented-gaba-documentary-20260903\.dubaissday\.chatgpt\.site/);
+    }
+    assert.equal(api.status,200);
+    assert.equal(asset.status,200);
   }finally{DB.close();}
 });
 

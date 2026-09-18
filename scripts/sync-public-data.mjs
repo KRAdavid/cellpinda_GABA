@@ -107,7 +107,6 @@ for(const item of approvedResearch){
 }
 const featuredResearchKinds=new Map([
   ['research-byun-2018','paired-before-after'],['research-yoto-2012','study-journey'],['research-yamatsu-2016','metric-pair'],
-  ['research-sakashita-2019','group-values'],
   ['research-heba-2016','observational-link'],
 ]);
 for(const [id,kind] of featuredResearchKinds){
