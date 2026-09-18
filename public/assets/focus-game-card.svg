@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">셀핀다 뇌 컨디션 확인 챌린지</title>
+  <title id="title">셀핀다 1분 색 신호 게임</title>
   <desc id="desc">1분 동안 바뀌는 신호를 보고 누르거나 멈추는 게임 안내</desc>
   <rect width="1200" height="630" fill="#f3f7f1"/>
   <circle cx="1070" cy="322" r="302" fill="#e9f2ea"/>
@@ -7,10 +7,10 @@
   <rect x="72" y="62" width="44" height="44" rx="14" fill="#117b4e"/>
   <path d="M94 71v26m-13-13h26" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
   <text x="132" y="88" fill="#173c2f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="18" font-weight="700" letter-spacing="2">CELLPINDA</text>
-  <text x="73" y="177" fill="#138253" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="19" font-weight="700" letter-spacing="1.2">친구가 보낸 1분 챌린지</text>
-  <text x="70" y="267" fill="#173c2f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="52" font-weight="750" letter-spacing="-2.5">뇌 컨디션 확인</text>
-  <text x="70" y="330" fill="#173c2f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="52" font-weight="750" letter-spacing="-2.5">챌린지</text>
-  <text x="74" y="389" fill="#53695c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="23">보고, 누르고, 멈추는 짧은 반응 게임</text>
+  <text x="73" y="177" fill="#138253" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="19" font-weight="700" letter-spacing="1.2">친구가 보낸 1분 게임</text>
+  <text x="70" y="267" fill="#173c2f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="52" font-weight="750" letter-spacing="-2.5">1분 색 신호</text>
+  <text x="70" y="330" fill="#173c2f" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="52" font-weight="750" letter-spacing="-2.5">게임</text>
+  <text x="74" y="389" fill="#53695c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="23">초록은 누르고, 빨강은 기다려요</text>
   <rect x="73" y="427" width="315" height="52" rx="26" fill="#173c2f"/>
   <text x="101" y="461" fill="#fff" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="18" font-weight="650">24개 신호 · 매번 다른 순서</text>
   <g transform="translate(650 106)">
@@ -40,6 +40,6 @@
     <text x="189" y="81" fill="#53695c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="17">같은 색을 찾아요</text>
     <text x="449" y="68" fill="#138253" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="14" font-weight="700" text-anchor="end">03</text>
   </g>
-  <text x="74" y="567" fill="#53695c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="16">건강 검사가 아닌 짧은 반응 게임입니다.</text>
+  <text x="74" y="567" fill="#53695c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="16">점수는 건강 상태가 아닌 게임 기록입니다.</text>
   <text x="74" y="595" fill="#87988c" font-family="Arial, 'Malgun Gothic', sans-serif" font-size="13">CELLPINDA · MORNING 7</text>
 </svg>

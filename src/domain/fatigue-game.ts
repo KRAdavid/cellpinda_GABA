@@ -10,7 +10,7 @@ export const FOCUS_GAME_STAGES = ['brake', 'speed', 'switch'] as const;
 export const FOCUS_GAME_TRIALS_PER_STAGE = 8;
 export const FOCUS_GAME_TOTAL_TRIALS = FOCUS_GAME_STAGES.length * FOCUS_GAME_TRIALS_PER_STAGE;
 export function createFocusGameInviteText(): string {
-  return '나랑 ‘뇌 컨디션 확인 챌린지’ 해볼래? 1분 동안 바뀌는 신호를 보고 누르거나 멈추는 게임이야.';
+  return '나랑 ‘1분 색 신호 게임’ 해볼래? 초록 신호는 누르고 빨강 신호는 기다리는 게임이야.';
 }
 
 export type FocusGameStage = (typeof FOCUS_GAME_STAGES)[number];
