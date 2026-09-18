@@ -6,6 +6,7 @@ import {relative, resolve} from 'node:path';
 const outputDirectory = resolve(process.cwd(), process.argv[2] || 'dist');
 const requiredFiles = [
   'index.html',
+  '404.html',
   'products/index.html',
   'data/content.json',
   'data/gaba-master-index.json',

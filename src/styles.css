@@ -89,3 +89,22 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 @media(max-width:360px){.hero-copy{padding-inline:20px}}
 /* Make the buyer-review path visible before the product detail card. */
 .products-review-shortcut{display:inline-flex;align-items:center;margin-top:10px;color:var(--green);font-size:14px;font-weight:650;text-decoration:underline;text-underline-offset:4px}
+.hero-product{transition:border-color .18s,box-shadow .18s}
+.hero-product:hover{border-color:var(--green);box-shadow:0 4px 18px #18382b12}
+.hero-product-arrow{flex:none;margin-left:6px;color:var(--green)}
+
+/* Keep navigation and the first screen readable between phone and desktop widths. */
+@media (min-width:681px) and (max-width:900px){
+  .header{height:76px;padding:0 24px;gap:16px}
+  .header nav{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;gap:16px;background:white;padding:22px 24px;box-shadow:0 12px 18px #18382b10}
+  .header nav.open{display:flex}
+  .menu-toggle{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;background:none;color:var(--ink);padding:3px}
+  .hero{min-height:640px}
+  .hero-photo{width:58%;object-position:68% center}
+  .hero-copy{width:100%;margin:0;padding:64px 44% 64px 32px;background:linear-gradient(90deg,#fff 0%,#fff 55%,rgba(255,255,255,.94) 63%,rgba(255,255,255,0) 100%)}
+  .hero h1{max-width:520px;font-size:clamp(42px,5vw,48px);line-height:1.2;margin-bottom:24px}
+  .hero-question{max-width:420px;font-size:19px;line-height:1.6}
+  .hero .actions{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;max-width:390px;margin-top:24px}
+  .hero .actions .button{width:100%;min-width:0;justify-content:space-between;padding:14px 18px;gap:10px;font-size:14px}
+  .hero .actions .button svg{width:16px;flex:none}
+}

@@ -28,6 +28,8 @@ const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
 const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css');
 const indexHtml = await read('index.html');
 const researchRouteHtml = await read('public/research/index.html');
+const notFoundHtml = await read('public/404.html');
+const deployWorkflow = await read('.github/workflows/deploy.yml');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
 const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
 const researchRouteStart = app.indexOf('if(researchView)return');
@@ -48,7 +50,10 @@ if (!(researchRoute.indexOf('<ResearchLibrary') >= 0 && researchRoute.indexOf('<
 requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서 관찰된 변화/, 'selected research findings must be visibly labeled before methods are opened');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
 requireMatch(app, /heroProduct\?<[\s\S]*?셀핀다 발효가바 \{heroProduct\.amountMg\.toLocaleString\('ko-KR'\)\}[\s\S]*?\{heroProduct\.servings\}포 구성 · \{heroProduct\.category\}/, 'the first screen must identify the verified product composition without making an efficacy claim');
+requireMatch(app, /heroProduct\?<a className="hero-product" href="#products" aria-label=/, 'the first-screen product summary must link to product configuration');
 requireMatch(app, /if\(rhythmIdFromUrl\(url\)\)[\s\S]*?getElementById\('rhythm'\)\?\.scrollIntoView/, 'a shared rhythm query must scroll to the shared result after the page mounts');
+requireMatch(app, /if\(challengeInvite\)\{[\s\S]*?const scrollToChallenge=\(\)=>\{[\s\S]*?getElementById\('lab'\)[\s\S]*?target\.scrollIntoView[\s\S]*?window\.scrollBy\(\{top:target\.getBoundingClientRect\(\)\.top-96,behavior:'instant'\}\)[\s\S]*?setInterval\(\(\)=>\{[\s\S]*?getBoundingClientRect\(\)\.top[\s\S]*?align\(\)[\s\S]*?trackOnce\('shared_link_landed',\{path:'\/challenge'/, 'a seven-day challenge invite must stay aligned while page content settles');
+requireMatch(app, /const linkContext=challengeInvite\?[\s\S]*?친구가 7일 휴식 기록을 공유했어요/, 'a challenge invite must explain why the visitor arrived');
 requireMatch(app, /const description='GABA를 섭취한 사람 연구를 쉬운 말과 그림으로 소개하고, 연구 조건과 셀핀다 제품 정보를 구분해 보여드립니다\.'/ , 'research route metadata must use plain language and separate general research from product information');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
@@ -75,6 +80,8 @@ if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigati
 if (/className="section empathy"/.test(app)) fail('the landing flow must not repeat four prompts that all lead to the same check');
 requireMatch(app, /className="mobile-break"/, 'mobile hero headline must wrap intentionally instead of clipping');
 requireMatch(styles, /@media\(max-width:680px\)\{\.header>\.button\{display:none\}\.menu-toggle\{display:flex;[^}]*width:44px;height:44px/, 'mobile header must keep its menu toggle inside the viewport');
+requireMatch(styles, /@media \(min-width:681px\) and \(max-width:900px\)[\s\S]*?\.header nav\{display:none[\s\S]*?\.menu-toggle\{display:flex/, 'tablet navigation must collapse before menu labels wrap');
+requireMatch(styles, /@media \(min-width:681px\) and \(max-width:900px\)[\s\S]*?\.hero-copy\{[^}]*background:linear-gradient/, 'tablet hero text must keep a readable background over the photo');
 requireMatch(research, /research-method-filter[\s\S]*연구 방법[\s\S]*더보기/, 'research method filter must stay behind an optional consumer-friendly control');
 requireMatch(researchStyles, /research-library-card-featured \.research-library-quick-facts\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'the first mobile research result must keep its core study facts compact and readable');
 requireMatch(fatigueGame, /화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요/, 'five-minute breathing must explain both visual-follow and screen-free audio options');
@@ -199,6 +206,10 @@ requireMatch(review, /quotes\.length > 0 \|\| destinations\.length > 0/, 'review
 requireMatch(indexHtml, /rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root canonical metadata is missing');
 requireMatch(indexHtml, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root Open Graph URL is missing');
 requireMatch(indexHtml, /application\/ld\+json[\s\S]*"@type":"WebSite"[\s\S]*"inLanguage":"ko-KR"/, 'root WebSite structured data is missing');
+requireMatch(notFoundHtml, /<title>페이지를 찾을 수 없어요 \| 셀핀다<\/title>[\s\S]*페이지를<br\s*\/>찾을 수 없어요\./, 'static not-found page must explain the dead end in consumer language');
+requireMatch(notFoundHtml, /href="\/cellpinda_GABA\/"[\s\S]*href="\/cellpinda_GABA\/#rhythm"/, 'not-found page must offer a working home and one-minute-check path');
+if (/<link rel="canonical"|property="og:(?:url|title|image)"/i.test(notFoundHtml)) fail('not-found page must not reuse home-page canonical or social metadata');
+if (/cp\s+dist-pages\/index\.html\s+dist-pages\/404\.html/.test(deployWorkflow)) fail('Pages deployment must keep the dedicated 404 document instead of copying the homepage');
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(app + indexHtml)) fail('legacy official-mall destination leaked into consumer source');
 const consumerSource = app + indexHtml + review;
 const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver\.com\/[A-Za-z0-9_/?=&.%:#-]+/g)].map(match => match[0]);
@@ -242,4 +253,4 @@ requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"in
   const linearChannel = channel => { const value = parseInt(channel, 16) / 255; return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4; };
   const researchLuminance = researchAccent ? [0, 2, 4].reduce((sum, start, index) => sum + [0.2126, 0.7152, 0.0722][index] * linearChannel(researchAccent.slice(start, start + 2)), 0) : null;
   if (researchLuminance === null || 1.05 / (researchLuminance + 0.05) < 4.5) fail('small green research labels must meet WCAG AA contrast on white');
-  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion', 'research-label-AA-contrast'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'single-invite-action'], teaser: ['user-started-playback', 'visibility-triggered-load', 'approved-preview-source', 'accurate-embed-event'], seo: ['canonical', 'og-url', 'social-image-dimensions'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));
+  console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion', 'research-label-AA-contrast'], responsive: ['mobile', 'tablet-navigation', 'tablet-hero-contrast'], sharing: ['rhythm-result', 'seven-day-challenge-destination', 'invite-first'], teaser: ['user-started-playback', 'visibility-triggered-load', 'approved-preview-source', 'accurate-embed-event'], seo: ['canonical', 'og-url', 'social-image-dimensions'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));

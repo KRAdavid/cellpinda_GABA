@@ -31,6 +31,7 @@ function relativePath(path:string):string{
 const flowId=crypto.randomUUID();
 const safeQueryValue=(name:string,maxLength=64)=>{const value=new URLSearchParams(window.location.search).get(name)?.trim()||'';return /^[A-Za-z0-9_-]+$/.test(value)&&value.length>=1&&value.length<=maxLength?value:'';};
 const campaignId=safeQueryValue('campaign');
+const challengeInvite=safeQueryValue('challenge')==='7days';
 const referralId=(()=>{const value=safeQueryValue('ref');return value.length>=8?value:'';})();
 const seenEvents=new Set<string>();
 let eventQueue=Promise.resolve();
@@ -135,6 +136,42 @@ export default function App(){
    const firstFrame=window.requestAnimationFrame(()=>{secondFrame=window.requestAnimationFrame(()=>document.getElementById('rhythm')?.scrollIntoView({block:'start',behavior:'auto'}));});
    return()=>{window.cancelAnimationFrame(firstFrame);if(secondFrame)window.cancelAnimationFrame(secondFrame);};
   }
+  if(challengeInvite){
+   let secondFrame=0;
+   let alignmentInterval=0;
+   const stopAlignment=()=>{
+    if(alignmentInterval)window.clearInterval(alignmentInterval);
+    alignmentInterval=0;
+    window.removeEventListener('wheel',stopAlignment);
+    window.removeEventListener('touchstart',stopAlignment);
+    window.removeEventListener('pointerdown',stopAlignment);
+    window.removeEventListener('keydown',onKeyDown);
+   };
+   const onKeyDown=(event:KeyboardEvent)=>{if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key))stopAlignment();};
+   const scrollToChallenge=()=>{
+    const target=document.getElementById('lab');
+    if(!target)return;
+    const align=()=>{
+     target.scrollIntoView({block:'start',behavior:'instant'});
+     window.scrollBy({top:target.getBoundingClientRect().top-96,behavior:'instant'});
+    };
+    align();
+    const startedAt=performance.now();
+    window.addEventListener('wheel',stopAlignment,{passive:true});
+    window.addEventListener('touchstart',stopAlignment,{passive:true});
+    window.addEventListener('pointerdown',stopAlignment,{passive:true});
+    window.addEventListener('keydown',onKeyDown);
+    alignmentInterval=window.setInterval(()=>{
+     if(!target.isConnected||performance.now()-startedAt>2500){stopAlignment();return;}
+     const top=target.getBoundingClientRect().top;
+     if(top>=88&&top<=104){stopAlignment();return;}
+     align();
+    },120);
+   };
+   const firstFrame=window.requestAnimationFrame(()=>{secondFrame=window.requestAnimationFrame(scrollToChallenge);});
+   trackOnce('shared_link_landed',{path:'/challenge',channel:'direct'});
+   return()=>{window.cancelAnimationFrame(firstFrame);if(secondFrame)window.cancelAnimationFrame(secondFrame);stopAlignment();};
+  }
   const productView=url.searchParams.getAll('view').length===1&&url.searchParams.get('view')==='products'&&!url.searchParams.has('rhythm');
   if(productView){document.getElementById('products')?.scrollIntoView({block:'start',behavior:'instant'});trackOnce('shared_link_landed',{path:'/products',channel:'direct'});}
   else if(content.products.some(product=>url.hash===`#product-${product.id}`)){document.getElementById(url.hash.slice(1))?.scrollIntoView({block:'start',behavior:'instant'});}
@@ -143,9 +180,9 @@ export default function App(){
  if(adminView)return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
  if(operationsView)return <OperationsMvp/>;
   if(researchView)return <><a className="skip" href="#main">본문으로 이동</a><header className="header research-route-header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav aria-label="연구 메뉴"><a href={siteRoot}>메인으로 돌아가기</a></nav></header><main id="main" className="research-route-main">{content?<><section className="research-route-intro wrap"><p className="chapter">GABA 사람 연구</p><h1>사람 연구 내용을<br/>그림과 쉬운 말로 살펴봐요.</h1><p>GABA 사람 연구를 쉬운 말로 소개해요. 셀핀다 제품 정보는 제품 페이지에서 확인해 보세요.</p></section><ResearchLibrary claims={content.claims} onOpen={()=>track('evidence_opened',{path:'/research'})}/><section className="section wrap research-route-product" aria-labelledby="research-route-product-heading"><div><p className="chapter">제품 구성</p><h2 id="research-route-product-heading">연구 내용과 제품 구성은<br/>따로 확인해 보세요.</h2><p>셀핀다 가바 1500의 한 포 기준 양과 상자 구성을 확인할 수 있어요.</p></div><a className="button outline" href={`${siteRoot}#products`}>셀핀다 가바 1500 구성 보기 <ArrowRight size={18}/></a></section></>:<section className="section wrap content-status"><p className="chapter">GABA 사람 연구</p><h1>{loading?'연구 내용을 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h1><p>{loading?'사람 연구를 쉽게 정리한 내용을 불러오는 중입니다.':'연구 자료를 불러오지 못했습니다. 다시 시도해 주세요.'}</p>{!loading?<button type="button" className="button outline" onClick={()=>setRetryKey(value=>value+1)}>다시 불러오기</button>:null}</section>}</main><footer className="wrap footer research-route-footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>GABA 사람 연구 안내</p><a href={siteRoot}>메인으로 돌아가기</a></footer></>;
- const linkContext=referralId?<aside className="link-context" aria-live="polite">공유된 리듬 링크로 방문했어요. 내 하루도 1분이면 확인할 수 있어요.</aside>:campaignId?<aside className="link-context" aria-live="polite">캠페인 링크로 방문했어요. 원하는 흐름부터 살펴보세요.</aside>:null;
+ const linkContext=challengeInvite?<aside className="link-context" aria-live="polite">친구가 7일 휴식 기록을 공유했어요. 오늘부터 나의 기록을 시작해 보세요.</aside>:referralId?<aside className="link-context" aria-live="polite">공유된 리듬 링크로 방문했어요. 내 하루도 1분이면 확인할 수 있어요.</aside>:campaignId?<aside className="link-context" aria-live="polite">캠페인 링크로 방문했어요. 원하는 흐름부터 살펴보세요.</aside>:null;
    return <><a className="skip" href="#main">본문으로 이동</a><header className="header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav id="primary-navigation" ref={menuNavRef} aria-label="주 메뉴" className={menu?'open':''} onClick={()=>closeMenu()} onKeyDown={event=>{if(event.key==='Escape')closeMenu(true)}}><a href="#rhythm">잠과 휴식 체크</a><a href="#story">GABA는?</a><a href={`${siteRoot}research/`}>GABA 연구 읽기</a><a href="#fermentation">발효가바는?</a><a href="#products">제품 구성</a>{content?.reviews?.length ? <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={()=>track('review_open',{productId:'gaba1500',path:'/header'})}>가바 1500 구매자 후기 ↗</a> : null}</nav><a href="#rhythm" className="button small" onClick={()=>track('hero_check_start',{path:'/header'})}>1분 체크 <ArrowRight size={18}/></a><button ref={menuToggleRef} className="menu-toggle" aria-label={menu?'메뉴 닫기':'메뉴 열기'} aria-expanded={menu} aria-controls="primary-navigation" onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>{linkContext}
- <main id="main"><section className="hero"><img className="hero-photo" src={asset('assets/rhythm-window.webp')} width={1536} height={1024} fetchPriority="high" decoding="async" alt="초록 나무가 보이는 열린 창가와 물 한 잔"/><div className="hero-copy"><p className="chapter">나의 하루 리듬 체크</p><h1>퇴근했는데도<br/>일 생각이<br className="mobile-break"/> 계속 나나요?</h1><p className="hero-question">지난 7일, 잠들기 어렵거나<br className="mobile-break"/> 아침에도 피곤한 날이 있었나요?</p><div className="actions"><a className="button" href="#rhythm" onClick={()=>track('hero_check_start',{path:'/'})}>잠과 휴식 1분 체크 <ArrowRight/></a><a className="button outline" href="#teaser">발효가바 이야기 보기 <ArrowRight/></a></div>{heroProduct?<div className="hero-product"><img src={asset(`assets/product-composition-${heroProduct.amountMg}.svg`)} width="66" height="66" alt=""/><span><strong>셀핀다 발효가바 {heroProduct.amountMg.toLocaleString('ko-KR')}</strong><span className="hero-product-meta">{heroProduct.servings}포 구성 · {heroProduct.category}</span></span></div>:null}<a className="hero-game-link" href="#focus-game" onClick={()=>track('focus_game_start',{path:'/hero'})}>뇌 컨디션 확인 챌린지 해보기 <ArrowRight size={16}/></a></div></section>
+  <main id="main"><section className="hero"><img className="hero-photo" src={asset('assets/rhythm-window.webp')} width={1536} height={1024} fetchPriority="high" decoding="async" alt="초록 나무가 보이는 열린 창가와 물 한 잔"/><div className="hero-copy"><p className="chapter">나의 하루 리듬 체크</p><h1>퇴근했는데도<br/>일 생각이<br className="mobile-break"/> 계속 나나요?</h1><p className="hero-question">지난 7일, 잠들기 어렵거나<br className="mobile-break"/> 아침에도 피곤한 날이 있었나요?</p><div className="actions"><a className="button" href="#rhythm" onClick={()=>track('hero_check_start',{path:'/'})}>잠과 휴식 1분 체크 <ArrowRight/></a><a className="button outline" href="#teaser">발효가바 이야기 보기 <ArrowRight/></a></div>{heroProduct?<a className="hero-product" href="#products" aria-label={`셀핀다 발효가바 ${heroProduct.amountMg.toLocaleString('ko-KR')} 제품 구성 보기`}><img src={asset(`assets/product-composition-${heroProduct.amountMg}.svg`)} width="66" height="66" alt=""/><span><strong>셀핀다 발효가바 {heroProduct.amountMg.toLocaleString('ko-KR')}</strong><span className="hero-product-meta">{heroProduct.servings}포 구성 · {heroProduct.category}</span></span><ArrowRight className="hero-product-arrow" size={17} aria-hidden="true"/></a>:null}<a className="hero-game-link" href="#focus-game" onClick={()=>track('focus_game_start',{path:'/hero'})}>뇌 컨디션 확인 챌린지 해보기 <ArrowRight size={16}/></a></div></section>
  <section className="intro-strip wrap"><h2>내 하루를 돌아보는 1분,<br/>오늘 쉴 시간을 찾아요.</h2>{[['01','돌아보기','지난 7일, 잠과 휴식은 어땠나요?','#rhythm'],['02','알아보기','GABA가 무엇인지 쉬운 말로 봐요.','#story'],['03','제품 확인','한 포의 양과 먹는 법을 확인해요.','#products']].map(([n,t,d,href])=><a className="step" href={href} key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></a>)}</section>
   <div className="wrap section"><RhythmExperience onEvent={track}/></div>
   {content ? <>
