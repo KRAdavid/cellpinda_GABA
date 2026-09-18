@@ -83,3 +83,8 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .step h3{margin:0;font-size:18px}
 .step p{grid-column:2;font-size:15px;line-height:1.6}
 }
+.intro-strip .step{display:block;color:inherit;text-decoration:none;transition:background-color .2s,border-color .2s}
+.intro-strip .step:hover h3{text-decoration:underline;text-underline-offset:4px}
+.intro-strip .step:focus-visible{outline:3px solid #8757b0;outline-offset:6px;border-radius:3px}
+@media(max-width:680px){.intro-strip .step{display:grid}.hero .actions{display:grid;grid-template-columns:minmax(0,1fr);max-width:360px}.hero .actions .button{width:100%;min-width:0;padding:14px 18px;gap:10px;font-size:14px}}
+@media(max-width:360px){.hero-copy{padding-inline:20px}}

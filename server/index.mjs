@@ -136,7 +136,7 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
         const match=path.match(/^\/api\/admin\/content\/([a-zA-Z0-9-]+)$/);
         if (req.method==='PATCH' && match) {const payload=await readBody(req);if(deny(adminAction(req.method,path,payload)))return;return reply(200,store.update(match[1],payload));}
       }
-      if (req.method==='GET' && path==='/api/health') return reply(200,{ok:true,persistence:'sqlite',actualPurchaseIntegration:false});
+      if (req.method==='GET' && path==='/api/health') return reply(200,{ok:true,persistence:'sqlite',actualPurchaseIntegration:false,sourceRevision:store.sourceRevision()});
       if (req.method==='GET' && path==='/api/member/status') return reply(200,{enabled:false,user:null,recoverySupported:false});
       if (req.method==='GET' && path==='/api/content') return reply(200,store.publicContent());
       if (req.method==='POST' && path==='/api/events') return reply(202,store.event(await readBody(req)));

@@ -711,13 +711,13 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
                 : '화면에서 눈을 떼고 5분 쉬었다가 다시 해보세요.'}
             </p>
             <details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details>
-            <button type="button" className="rhythm-button" onClick={resultGuidance === 'pause' ? beginRest : finishBaseline}>
+            {resultGuidance === 'celebrate' && onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : <button type="button" className="rhythm-button" onClick={resultGuidance === 'pause' ? beginRest : finishBaseline}>
               {resultGuidance === 'pause' ? '5분 쉬고 다시 해보기' : '오늘 기록 마치기'} {resultGuidance === 'pause' ? <ArrowRight size={18} aria-hidden="true" /> : <CheckCircle2 size={18} aria-hidden="true" />}
-            </button>
+            </button>}
             {resultGuidance === 'pause'
               ? <button type="button" className="rhythm-button secondary" onClick={finishBaseline}>오늘 기록 마치기</button>
               : onInvite
-                ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button>
+                ? <button type="button" className="rhythm-button secondary" onClick={finishBaseline}>오늘 기록 마치기 <CheckCircle2 size={18} aria-hidden="true" /></button>
                 : <button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>한 번 더 해보기 <RotateCcw size={18} aria-hidden="true" /></button>}
             {resultGuidance === 'pause' && onInvite ? <button type="button" className="rhythm-text-button fatigue-game-share-invite" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={16} aria-hidden="true" /></button> : null}
             {onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 답변이 포함되지 않아요.</p> : null}

@@ -167,6 +167,7 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
   };
   return {
     close: () => db.close(),
+    sourceRevision() { syncSourceSeed(); return lastSeedHash ?? null; },
     adminContent() { syncSourceSeed(); return rows(); },
     publicContent() {
       syncSourceSeed();
