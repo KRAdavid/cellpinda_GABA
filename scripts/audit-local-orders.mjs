@@ -4,11 +4,13 @@ import { readdir, readFile, stat, writeFile, mkdir } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 
 const root = process.cwd();
-const manifest = JSON.parse(await readFile(resolve(root, 'data/local-order-manifest.json'), 'utf8'));
+const privateManifest = resolve(root, process.env.CELLPINDA_ORDER_MANIFEST || 'var/private-audit/local-order-manifest.json');
+const manifestPath = existsSync(privateManifest) ? privateManifest : resolve(root, 'data/local-order-manifest.json');
+const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
 const strict = process.argv.includes('--strict');
 const configuredRoots = process.env.CELLPINDA_ORDER_ROOTS
   ? process.env.CELLPINDA_ORDER_ROOTS.split(';').map(value => value.trim()).filter(Boolean)
-  : manifest.sourceRoots;
+  : (manifest.sourceRoots || []);
 const roots = configuredRoots.map(value => resolve(value));
 const patterns = manifest.filePatterns.map(pattern => new RegExp(`^${pattern
   .replace(/[.+^${}()|[\]\\]/g, '\\$&')
@@ -149,7 +151,8 @@ for (const path of files.sort()) {
     counters.unsupported += 1;
     record.parseStatus = 'unsupported_container';
   }
-  fileRecords.push(record);
+  const { name: _name, path: _path, channelClue: _channelClue, ...safeRecord } = record;
+  fileRecords.push({ recordId: `file-${String(fileRecords.length + 1).padStart(3, '0')}`, ...safeRecord });
 }
 
 const output = resolve(root, 'tmp/local-order-audit.json');
@@ -158,7 +161,6 @@ const result = {
   schemaVersion: 1,
   goalId: manifest.goalId,
   generatedAt: new Date().toISOString(),
-  sourceRoots: roots,
   privacy: manifest.privacy,
   counters,
   aggregate,

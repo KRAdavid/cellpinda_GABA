@@ -26,9 +26,11 @@ if (!yoto?.publicText?.includes('GABA 캡슐') || !yoto.metadata?.dose?.includes
 const heba = research.find(claim => claim.id === 'research-heba-2016');
 if (heba?.publicText?.includes('12%') || heba?.metadata?.consumerSummary?.includes('높게 측정') || !heba?.metadata?.consumerVisual?.boundaryLabel?.includes('관계') || !heba?.metadata?.dose?.includes('GABA를 먹지 않고')) fail('Heba study must not frame tactile practice as a GABA intake benefit');
 const yoon = research.find(claim => claim.id === 'research-yoon-2022');
-if (!yoon?.metadata?.consumerSummary?.includes('수면 기록') || yoon.metadata?.consumerVisual || /짧아졌|줄었|개선|높아졌/.test(yoon.publicText)) fail('Yoon study must not present within-group sleep changes as an improvement claim');
+if (!yoon?.metadata?.consumerSummary?.includes('수면 기록') || yoon.metadata?.consumerVisual || /짧아졌|줄었|개선|높아졌/.test(yoon.publicText) || !yoon.metadata?.consumerFinding?.includes('9.0분에서 4.8분') || !yoon.metadata.consumerFinding.includes('비교 정제') || !yoon.metadata.consumerFinding.includes('결론낼 수는 없었어요')) fail('Yoon study must show the measured change and its comparison with the placebo in plain language');
 const byun = research.find(claim => claim.id === 'research-byun-2018');
-if (!byun?.publicText?.includes('잠드는 데 어려움') || !byun.publicText.includes('GABA가 없는') || !byun.publicText.includes('40명') || byun.metadata?.consumerVisual?.kind !== 'paired-before-after' || byun.metadata.consumerVisual.groups?.length !== 2 || byun.metadata.consumerVisual.groups[0]?.participants !== 30 || byun.metadata.consumerVisual.groups[1]?.participants !== 10 || byun.metadata.consumerVisual.groups[1]?.afterValue !== 15.2 || !byun.metadata.consumerFinding?.includes('7.0분에서 15.2분') || !byun.metadata.productApplicability?.includes('별도 제품')) fail('Byun study must accurately show its selected population, both groups and applicability');
+if (!byun?.publicText?.includes('잠드는 데 어려움') || !byun.publicText.includes('GABA가 없는') || !byun.publicText.includes('40명') || byun.metadata?.consumerVisual?.kind !== 'paired-before-after' || byun.metadata.consumerVisual.groups?.length !== 2 || byun.metadata.consumerVisual.groups[0]?.participants !== 30 || byun.metadata.consumerVisual.groups[1]?.participants !== 10 || byun.metadata.consumerVisual.groups[1]?.afterValue !== 15.2 || !byun.metadata.consumerFinding?.includes('13.4분') || !byun.metadata.consumerContext?.includes('연구 시작') || !byun.metadata.productApplicability?.includes('별도 제품')) fail('Byun study must accurately show its selected population, both groups and applicability');
+const review = research.find(claim => claim.id === 'research-review-2020');
+if (!review?.metadata?.consumerFinding?.includes('14편') || !review.metadata.consumerFinding.includes('확인 방법') || !review.metadata.consumerFinding.includes('어려웠어요')) fail('2020 review must explain varied conditions and a bounded conclusion in plain language');
 const powers = research.find(claim => claim.id === 'research-powers-2008');
 const powersConsumerData = JSON.stringify({publicText:powers?.publicText,metadata:powers?.metadata});
 if (!powers?.metadata?.consumerSummary?.includes('성장호르몬 수치') || !powers.metadata?.dose?.includes('750mg 캡슐 4개') || !powers.metadata?.consumerScope?.includes('설탕 캡슐') || /음료|마시/.test(powersConsumerData) || powers.metadata?.consumerVisual || /4배|높았/.test(powers.publicText)) fail('Powers study must state its capsule form and measured hormone endpoint without a muscle-growth claim');
@@ -41,12 +43,12 @@ if (!consumerUi.includes('셀핀다 완제품을 시험한 결과는 아닙니�
 if (!consumerSources['StudyInsightVisual.tsx'].includes('beforeSd') || !consumerSources['StudyInsightVisual.tsx'].includes('± 뒤 숫자는 참여자별 기록의 퍼짐') || consumerSources['StudyInsightVisual.tsx'].includes('is-featured')) fail('paired study chart must show both groups with their reported spread and neutral visual emphasis');
 
 const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장|직접\s*(먹어|경험)|가바\s*(경험|섭취를\s*시작)/;
-const discouragedMarketing = /뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|결과를\s*한\s*문장으로\s*묶기\s*어려|중증\s*수면질환|수면이\s*좋지\s*않|이상사례|유의하지\s*않/;
+const discouragedMarketing = /효과가\s*확실|효과\s*보장|반드시\s*개선|누구나\s*효과|치료에\s*도움/;
 const technicalResearchTerms = /무작위.{0,5}|이중눈가림|단일눈가림|위약대조|교차시험|평행군|MRS|비REM|REM\s*수면|혈중|정량\s*메타분석|체계적\s*문헌고찰/i;
 const collectStrings = value => Array.isArray(value) ? value.flatMap(collectStrings) : value && typeof value === 'object' ? Object.values(value).flatMap(collectStrings) : typeof value === 'string' ? [value] : [];
 for (const claim of research) {
   const metadata = claim.metadata ?? {};
-  const readerCopy = [claim.topic, claim.publicText, metadata.question, metadata.population, metadata.sampleSize, metadata.dose, metadata.duration, metadata.comparison, metadata.outcome, metadata.consumerScope, metadata.consumerSummary, metadata.consumerFinding, metadata.hopefulTakeaway, metadata.productApplicability, ...collectStrings(metadata.consumerVisual)].filter(Boolean).join(' ');
+  const readerCopy = [claim.topic, claim.publicText, metadata.question, metadata.population, metadata.sampleSize, metadata.dose, metadata.duration, metadata.comparison, metadata.outcome, metadata.consumerScope, metadata.consumerSummary, metadata.consumerFinding, metadata.consumerContext, metadata.hopefulTakeaway, metadata.productApplicability, ...collectStrings(metadata.consumerVisual)].filter(Boolean).join(' ');
   if (technicalResearchTerms.test(readerCopy)) fail(claim.id + ' exposes a researcher-only term in consumer copy');
   if (typeof claim.publicText !== 'string' || claim.publicText.trim().length < 30) fail(`${claim.id}.publicText must be a consumer-ready summary`);
   if (discouragedMarketing.test(claim.publicText)) fail(`${claim.id}.publicText contains a discouraged negative marketing phrase`);
@@ -62,10 +64,12 @@ for (const claim of research) {
     if (unsafe.test(metadata.consumerFinding)) fail(`${claim.id}.consumerFinding contains an unsupported promise or medical expression`);
     if (discouragedMarketing.test(metadata.consumerFinding)) fail(`${claim.id}.consumerFinding contains a discouraged generalized negative phrase`);
   }
+  if (metadata.consumerContext !== undefined && (typeof metadata.consumerContext !== 'string' || metadata.consumerContext.trim().length < 25 || unsafe.test(metadata.consumerContext))) fail(`${claim.id}.consumerContext must provide plain-language context without a product promise`);
 }
 
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(researchLibrary)) fail('research reading route must remain separate from product-purchase links');
-if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must render only reviewed consumer findings, not internal result or limitation fields');
+if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must not expose raw internal analysis fields');
+if (!researchLibrary.includes('metadata.consumerFinding || metadata.consumerSummary')) fail('research cards must show one concise consumer explanation instead of duplicated method and finding copy');
 if (researchLibrary.includes('숫자와 출처 더 확인하기')) fail('consumer research UI must use the conditions-and-source label');
 if (/전체\s*구매자의\s*경험|제품\s*효과를\s*입증하는\s*연구\s*자료는\s*아니/.test(reviewExperience)) fail('consumer review UI must use context-first copy');
 if (/원문에서\s*확인되지\s*않음|빠진\s*정보는\s*추측하지\s*않아도\s*됩니다/.test(reviewExperience)) fail('consumer review UI must guide readers toward source context');

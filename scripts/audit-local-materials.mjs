@@ -4,11 +4,13 @@ import {existsSync} from 'node:fs';
 import {basename, dirname, resolve} from 'node:path';
 
 const root=process.cwd();
-const manifest=JSON.parse(await readFile(resolve(root,'data/local-material-manifest.json'),'utf8'));
+const privateManifest=resolve(root,process.env.CELLPINDA_MATERIAL_MANIFEST || 'var/private-audit/local-material-manifest.json');
+const manifestPath=existsSync(privateManifest) ? privateManifest : resolve(root,'data/local-material-manifest.json');
+const manifest=JSON.parse(await readFile(manifestPath,'utf8'));
 const strict=process.argv.includes('--strict');
 const configured=process.env.CELLPINDA_MATERIAL_ROOTS
   ? process.env.CELLPINDA_MATERIAL_ROOTS.split(';').map(value=>value.trim()).filter(Boolean)
-  : manifest.sourceRoots;
+  : (manifest.sourceRoots || []);
 const roots=configured.map(value=>resolve(value));
 const wanted=new Set(manifest.artifacts.flatMap(artifact=>artifact.names));
 const files=new Map();
@@ -27,7 +29,7 @@ const artifacts=[];
 for(const artifact of manifest.artifacts){
   const matches=artifact.names.map(name=>files.get(name)).filter(Boolean);
   if(!matches.length){
-    artifacts.push({id:artifact.id,classification:artifact.classification,status:'missing',names:artifact.names,publicUse:artifact.publicUse,requiredFor:artifact.requiredFor});
+    artifacts.push({id:artifact.id,classification:artifact.classification,status:'missing',publicUse:artifact.publicUse,requiredFor:artifact.requiredFor});
     continue;
   }
   const file=matches[0];
@@ -37,7 +39,6 @@ for(const artifact of manifest.artifacts){
     id:artifact.id,
     classification:artifact.classification,
     status:'found',
-    path:file,
     size:metadata.size,
     modifiedAt:metadata.mtime.toISOString(),
     sha256:createHash('sha256').update(bytes).digest('hex'),
@@ -53,7 +54,6 @@ const result={
   schemaVersion:1,
   goalId:manifest.goalId,
   generatedAt:new Date().toISOString(),
-  sourceRoots:roots,
   artifacts,
   summary:{
     found:artifacts.filter(artifact=>artifact.status==='found').length,

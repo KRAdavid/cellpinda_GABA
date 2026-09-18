@@ -45,7 +45,10 @@ if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(re
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
-requireMatch(app, /<nav aria-label="주 메뉴"/, 'consumer navigation label is missing');
+requireMatch(app, /<nav id="primary-navigation"[^>]*aria-label="주 메뉴"/, 'consumer navigation label is missing');
+requireMatch(app, /id="primary-navigation" ref=\{menuNavRef\}[\s\S]*onKeyDown=\{event=>\{if\(event\.key==='Escape'\)closeMenu\(true\)\}\}/, 'mobile navigation must support Escape and return focus to its toggle');
+requireMatch(app, /if\(menu\)requestAnimationFrame\(\(\)=>menuNavRef\.current\?\.querySelector<HTMLAnchorElement>\('a\[href\]'\)\?\.focus\(\)\)/, 'opening the mobile menu must move focus to the first navigation link');
+requireMatch(app, /aria-controls="primary-navigation"/, 'the mobile menu toggle must identify its controlled navigation');
 requireMatch(app, /analyticsConsentGranted/, 'analytics events must be consent-gated');
 requireMatch(app, /<AnalyticsConsent enabled=\{apiEndpoint\('\/api\/events'\) !== null\}\/>/, 'analytics consent controls must match the active event endpoint');
 requireMatch(analyticsConsent, /이름·연락처·내 답변은 수집하지 않아요/, 'analytics consent copy must state its privacy boundary');
@@ -57,10 +60,17 @@ requireMatch(app, /const operationsView = import\.meta\.env\.DEV && isLocalHost 
 requireMatch(app, /const adminView = import\.meta\.env\.DEV && isLocalHost && \(requestedView === 'admin' \|\| currentPath === '\/admin'\)/, 'admin review route must render only in local development');
 requireMatch(teaser, /teaser_embed_loaded/, 'teaser analytics must distinguish embed load from video playback');
 if (teaser.includes("onEvent?.('teaser_play'")) fail('teaser iframe load must not count as video playback');
-const nav = app.match(/<nav aria-label="주 메뉴"[\s\S]*?<\/nav>/)?.[0] || '';
+const nav = app.match(/<nav id="primary-navigation"[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
 if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
-for (const marker of ['퇴근했는데도', '일 생각이 계속 나나요', '잠과 휴식 1분 체크', 'GABA는 뇌세포 사이에서', '스마트스토어']) {
+if (/className="section empathy"/.test(app)) fail('the landing flow must not repeat four prompts that all lead to the same check');
+requireMatch(app, /className="mobile-break"/, 'mobile hero headline must wrap intentionally instead of clipping');
+requireMatch(styles, /@media\(max-width:680px\)\{\.header>\.button\{display:none\}\.menu-toggle\{display:flex;[^}]*width:44px;height:44px/, 'mobile header must keep its menu toggle inside the viewport');
+requireMatch(research, /research-method-filter[\s\S]*연구 방법[\s\S]*더보기/, 'research method filter must stay behind an optional consumer-friendly control');
+requireMatch(researchStyles, /@media\(max-width:700px\)\{\.research-reading-path\{display:grid;grid-template-columns:1fr/, 'mobile research reading steps must stack instead of squeezing into narrow columns');
+requireMatch(fatigueGame, /화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요/, 'five-minute breathing must explain both visual-follow and screen-free audio options');
+if (/휴대폰을 뒤집어 두고 공의 움직임을 따라/.test(fatigueGame)) fail('breathing guidance must not ask readers to look at an animation while turning the phone over');
+for (const marker of ['퇴근했는데도', '계속 나나요', '잠과 휴식 1분 체크', 'GABA는 뇌세포 사이에서', '스마트스토어']) {
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 if (/일이 끝나도 머리가 쉬지 않으신가요|일이 끝나도 머리가 바빠요/.test(`${app}\n${rhythm}`)) fail('consumer rest messaging must use direct everyday language');
@@ -110,7 +120,7 @@ for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 �
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
-for (const marker of ['1분 집중 신호 게임', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 달라지는 신호', '24개 신호 완료', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '뇌 피로나 건강 상태를 진단하지 않습니다', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 1분 게임 보내기', '세 가지 규칙 연습하기', '다음 규칙 연습하기', '연습 마치기', '잠깐 쉬고 다시 해봐도 좋아요.', '축하해요! 신호를 잘 따라왔어요.', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['뇌 컨디션 확인 챌린지', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 달라지는 신호', '24개 신호 완료', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '뇌 피로나 건강 상태를 진단하지 않습니다', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '세 가지 규칙 연습하기', '다음 규칙 연습하기', '연습 마치기', '잠깐 쉬고 다시 해봐도 좋아요.', '축하해요! 신호를 잘 따라왔어요.', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
 if (/needsFocusRecovery|FOCUS_GAME_RECOVERY_THRESHOLD_PCT|쉬고 난 뒤 게임 기록이 좋아졌어요|휴식 후/.test(fatigueGame)) fail('focus game must not use a score threshold as a recovery diagnosis or mislabel a second run');
 for (const marker of ['게임 효과음', 'playGameCue(\'start\')', 'playGameCue(\'signal\')', 'playGameCue(\'stage\')', 'playGameCue(\'complete\')', 'playGameCue(\'false-start\')']) requireMatch(fatigueGame, new RegExp(marker.replace(/[()]/g, '\\$&')), `focus game sound cue ${marker} is missing`);
 requireMatch(fatigueGame, /playGameCue\(correct \? 'correct' : 'miss'\)/, 'focus game must sound its response judgment');
@@ -196,7 +206,7 @@ if (!existsSync(focusPage)) fail('focus invite page is missing');
 const focusHtml = await readFile(focusPage, 'utf8');
 requireMatch(focusHtml, /canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//, 'focus invite canonical metadata is missing');
 requireMatch(focusHtml, /focus=1#focus-game|focus=1/, 'focus invite handoff is missing');
-requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 1분 집중 신호 게임"/, 'focus invite Open Graph title is missing');
+requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 뇌 컨디션 확인 챌린지"/, 'focus invite Open Graph title is missing');
 requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card\.png"/, 'focus invite Open Graph image is missing');
 requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 

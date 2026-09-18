@@ -1,5 +1,5 @@
 import {useEffect,useState} from 'react';
-import {Activity, ArrowRight, Clock3, FlaskConical, Search, Share2, UsersRound} from 'lucide-react';
+import {Activity, ArrowRight, Clock3, FlaskConical, Info, Search, Share2, UsersRound} from 'lucide-react';
 import StudyInsightVisual from './StudyInsightVisual';
 import './ResearchLibrary.css';
 
@@ -7,6 +7,7 @@ export type ResearchMetadata = {
   question?: string;
   consumerSummary?: string;
   consumerFinding?: string;
+  consumerContext?: string;
   consumerVisual?: ConsumerVisual;
   consumerScope?: string;
   hopefulTakeaway?: string;
@@ -86,6 +87,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('');
   const [studyType, setStudyType] = useState('');
+  const [showMethodFilter, setShowMethodFilter] = useState(false);
   const [requestedId, setRequestedId] = useState('');
   const eligibleStudies = claims.filter(claim =>
     claim.status === 'approved' && claim.id.startsWith('research-') &&
@@ -151,7 +153,10 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       <div className="research-library-controls" role="search" aria-label="연구를 주제별로 찾기">
         <label htmlFor="research-search">궁금한 내용 찾기<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="스트레스·수면·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
         <label htmlFor="research-topic">주제 고르기<select id="research-topic" value={activeTopic} onChange={event => setTopic(event.target.value)}><option value="">모든 주제</option>{topics.map(item => <option value={item} key={item}>{item}</option>)}</select></label>
-        <label htmlFor="research-type">어떻게 살펴봤나요?<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 연구</option>{studyTypes.map(type => <option value={type} key={type}>{compactStudyType(type)}</option>)}</select></label>
+        <details className="research-method-filter" open={showMethodFilter || Boolean(activeType)} onToggle={event => setShowMethodFilter(event.currentTarget.open)}>
+          <summary>연구 방법 {activeType ? '선택됨' : '더보기'}</summary>
+          <label htmlFor="research-type">어떻게 살펴봤나요?<select id="research-type" value={activeType} onChange={event => setStudyType(event.target.value)}><option value="">모든 연구</option>{studyTypes.map(type => <option value={type} key={type}>{compactStudyType(type)}</option>)}</select></label>
+        </details>
         <button type="button" className="text-link" disabled={!query && !activeTopic && !activeType} onClick={() => { setQuery(''); setTopic(''); setStudyType(''); }}>검색 지우기</button>
       </div>
       <p id="research-search-help" className="sr-only">수면, 뇌파, 운동과 같은 주제를 입력하면 관련 연구를 찾습니다.</p>
@@ -167,8 +172,8 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       return <article id={claim.id} className="research-library-card" key={claim.id}>
         <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType, metadata.dose)}</p>
         <h3>{metadata.question || claim.topic}</h3>
-        {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : metadata.consumerSummary ? <p className="research-library-consumer-summary">{metadata.consumerSummary}</p> : null}
-        {!metadata.consumerVisual && metadata.consumerFinding ? <p className="research-library-finding"><strong>연구에서 기록한 내용</strong>{metadata.consumerFinding}</p> : null}
+        {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : (metadata.consumerFinding || metadata.consumerSummary) ? <p className="research-library-consumer-summary"><strong>{metadata.consumerFinding ? '연구에서 기록한 내용' : '연구를 이렇게 살펴봤어요'}</strong>{metadata.consumerFinding || metadata.consumerSummary}</p> : null}
+        {metadata.consumerVisual && metadata.consumerContext ? <p className="research-library-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
         <div className="research-library-quick-facts" aria-label="연구를 한눈에 보는 도표">
           {quickFacts.map(({label, value, Icon}) => <div key={label} title={`${label}: ${value}`}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span><strong>{label}</strong><small>{value}</small></span></div>)}
         </div>

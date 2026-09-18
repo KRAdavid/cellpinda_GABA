@@ -607,7 +607,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   return (
     <section className="fatigue-game" id="focus-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
-        <div><p className="fatigue-game-kicker">02 / 오늘의 게임 기록</p><h2 id="fatigue-game-heading">1분 집중 신호 게임</h2></div>
+        <div><p className="fatigue-game-kicker">02 / 오늘의 게임 기록</p><h2 id="fatigue-game-heading">뇌 컨디션 확인 챌린지</h2></div>
         <p>신호가 3단계로 바뀌어요.</p>
       </div>
 
@@ -709,19 +709,19 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
             {resultGuidance === 'pause'
               ? <button type="button" className="rhythm-button secondary" onClick={finishBaseline}>오늘 기록 마치기</button>
               : onInvite
-                ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button>
+                ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button>
                 : <button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>한 번 더 해보기 <RotateCcw size={18} aria-hidden="true" /></button>}
           </div>
         </div> : null}
 
         {phase === 'baseline-finished' && before ? <div className="fatigue-game-summary fatigue-game-baseline-finished">
-          <CheckCircle2 size={28} aria-hidden="true" /><div><p className="fatigue-game-kicker">오늘의 게임 기록</p><h3>첫 번째 게임 기록을 남겼어요.</h3><details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>맞힌 비율 {before.accuracyPct}%</span><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details><p>오늘 이 기기에서 해 본 짧은 게임 기록이에요. 화면과 주변 상황에 따라 달라질 수 있고, 건강 상태를 알려주는 점수는 아닙니다.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>다시 해보기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">문자나 카카오톡으로 보낼 수 있어요. 내 답변과 점수는 포함되지 않아요.</p> : null}</div>
+          <CheckCircle2 size={28} aria-hidden="true" /><div><p className="fatigue-game-kicker">오늘의 게임 기록</p><h3>첫 번째 게임 기록을 남겼어요.</h3><details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>맞힌 비율 {before.accuracyPct}%</span><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details><p>오늘 이 기기에서 해 본 짧은 게임 기록이에요. 화면과 주변 상황에 따라 달라질 수 있고, 건강 상태를 알려주는 점수는 아닙니다.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>다시 해보기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">문자나 카카오톡으로 보낼 수 있어요. 내 답변과 점수는 포함되지 않아요.</p> : null}</div>
         </div> : null}
 
         {phase === 'rest' ? <div className="fatigue-game-rest">
           <p className="fatigue-game-kicker">PAUSE · 5-MIN BREATH</p>
-          <h3>지금 5분만 화면을 내려놓으세요.</h3>
-          <p>휴대폰을 뒤집어 두고 공의 움직임을 따라 해보세요. 올라갈 때 들이쉬고, 내려갈 때 내쉽니다.</p>
+          <h3>화면에서 잠깐 눈을 떼고, 호흡을 천천히 해보세요.</h3>
+          <p>화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 선이 올라갈 때 들이쉬고, 내려갈 때 내쉬세요.</p>
           <BreathLineGuide startedAt={restStartedAt} cue={breathCue} />
           <p className="fatigue-breath-note">들이쉬기 4초 · 멈추기 2초 · 내쉬기 6초 · 다시 멈추기 2초를 반복합니다. 숨을 참기 불편하거나 어지럽고 답답하면 멈춤을 건너뛰고 자연스럽게 호흡하세요.</p>
           <div className="fatigue-rest-clock" aria-label="5분 호흡 안내 타이머">
@@ -744,7 +744,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         {phase === 'complete' && before && after && comparison ? <div className="fatigue-game-summary fatigue-game-complete">
           <div className={`fatigue-comparison fatigue-comparison-${comparison.tone}`}><ArrowRight size={24} aria-hidden="true" /><div><p className="fatigue-game-kicker">{mode === 'after' ? '5분 쉰 뒤 두 번째 게임' : '쉬지 않고 이어 한 두 번째 게임'}</p><h3>{comparison.heading}</h3></div></div>
           <details className="fatigue-game-result-details"><summary>두 게임 기록 자세히 보기</summary><p>{comparison.body}</p><div className="fatigue-game-score-grid">{metrics.map(metric => <div key={metric.label}><span>{metric.label}</span><strong>첫 번째 {metric.before}</strong><strong>두 번째 {metric.after}</strong></div>)}</div></details>
-          <p className="fatigue-game-viral-copy">친구도 해볼 수 있게 이 1분 게임을 보내 보세요.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>처음부터 다시 하기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">문자나 카카오톡으로 보낼 수 있어요. 내 답변과 점수는 포함되지 않아요.</p> : null}
+          <p className="fatigue-game-viral-copy">친구도 해볼 수 있게 이 챌린지를 보내 보세요.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>처음부터 다시 하기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">문자나 카카오톡으로 보낼 수 있어요. 내 답변과 점수는 포함되지 않아요.</p> : null}
         </div> : null}
       </div>
       <p className="fatigue-game-note">짧은 반응 게임의 개인 기록입니다. 뇌 피로도나 건강 상태를 진단하지 않으며, 화면·기기·주변 상황에 따라 달라질 수 있어요.</p>

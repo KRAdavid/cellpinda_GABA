@@ -130,7 +130,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }));
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 보기'), 'live consumer bundle must contain the consumer-facing teaser CTA');
-    assert.ok(consumerBundle.includes('1분 집중 신호 게임'), 'live consumer bundle must contain the consumer-facing focus game');
+    assert.ok(consumerBundle.includes('뇌 컨디션 확인 챌린지'), 'live consumer bundle must contain the consumer-facing focus game');
     assert.ok(consumerBundle.includes('매번 달라지는 신호') && consumerBundle.includes('초록은 누르고') && consumerBundle.includes('빨강은 누르지 않아요') && consumerBundle.includes('색 규칙 바꾸기') && consumerBundle.includes('색과 모양에 상관없이'), 'live consumer bundle must explain the three game stages in their actual order');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
     assert.ok(consumerBundle.includes('쉬지 않고 이어서 하기') && consumerBundle.includes('휴식이 기록 변화의 원인이라고 단정할 수는 없어요'), 'live consumer bundle must distinguish repeat records without claiming a rest effect');
@@ -140,8 +140,14 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(consumerBundle.includes('세 가지 규칙 연습하기') && consumerBundle.includes('연습 없이 바로 시작') && consumerBundle.includes('연습 1 / 5') && consumerBundle.includes('연습 2 / 5') && consumerBundle.includes('연습 3 / 5') && consumerBundle.includes('연습 4 / 5') && consumerBundle.includes('연습 5 / 5') && consumerBundle.includes('연습 완료') && consumerBundle.includes('연습 기록은 점수에 들어가지 않아요'), 'live consumer bundle must teach all scored rules through a skippable no-score practice');
     const yamatsu = content.claims.find(claim => claim.id === 'research-yamatsu-2016');
     assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
+    const review2020 = content.claims.find(claim => claim.id === 'research-review-2020');
+    assert.ok(review2020?.metadata?.consumerFinding?.includes('14편') && review2020.metadata.consumerFinding.includes('한 가지 결론'), 'live research review must explain its bounded conclusion in plain language');
+    const yoon2022 = content.claims.find(claim => claim.id === 'research-yoon-2022');
+    assert.ok(yoon2022?.metadata?.consumerFinding?.includes('9.0분에서 4.8분') && yoon2022.metadata.consumerFinding.includes('비교 정제'), 'live Yoon study must include its observed change and the comparison group');
+    const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
+    assert.ok(byun2018?.metadata?.consumerContext?.includes('연구 시작') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show both groups and baseline context');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
-    assert.ok(consumerBundle.includes('친구에게 1분 게임 보내기') && consumerBundle.includes('내 답변과 점수는 포함되지 않아요'), 'live consumer bundle must expose the clear friend game invitation and privacy note');
+    assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('내 답변과 점수는 포함되지 않아요'), 'live consumer bundle must expose the clear friend game invitation and privacy note');
     assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');
     assert.ok(consumerBundle.includes('지난 7일 다섯 질문에 고른 답을 더한 숫자'), 'live consumer bundle must explain the personal answer score');
     assert.ok(consumerBundle.includes('집중과 휴식 관련 연구 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');

@@ -4,10 +4,14 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 
 const root = process.cwd();
-const readManifest = async name => JSON.parse(await readFile(resolve(root, `data/${name}`), 'utf8'));
+const readManifest = async (name, environmentName) => {
+  const privatePath = resolve(root, process.env[environmentName] || `var/private-audit/${name}`);
+  const path = existsSync(privatePath) ? privatePath : resolve(root, `data/${name}`);
+  return JSON.parse(await readFile(path, 'utf8'));
+};
 const [materialManifest, orderManifest] = await Promise.all([
-  readManifest('local-material-manifest.json'),
-  readManifest('local-order-manifest.json'),
+  readManifest('local-material-manifest.json', 'CELLPINDA_MATERIAL_MANIFEST'),
+  readManifest('local-order-manifest.json', 'CELLPINDA_ORDER_MANIFEST'),
 ]);
 
 const configuredRoots = (environmentName, fallback) => process.env[environmentName]
@@ -19,7 +23,7 @@ const roots = [...new Set([
 ].map(value => resolve(value)))];
 const existingRoots = roots.filter(directory => existsSync(directory));
 if (!existingRoots.length) {
-  throw new Error('감시할 로컬 자료 폴더가 없습니다. CELLPINDA_MATERIAL_ROOTS 또는 CELLPINDA_ORDER_ROOTS를 확인하세요.');
+    throw new Error('감시할 로컬 자료 폴더가 없습니다. 비공개 감사 설정 또는 CELLPINDA_*_ROOTS 환경 변수를 확인하세요.');
 }
 
 let running = false;
@@ -36,7 +40,7 @@ function runAudit(reason) {
   return new Promise(resolveRun => {
     const child = spawn(process.execPath, [resolve(root, 'scripts/run-local-audit-cycle.mjs')], {stdio: 'inherit'});
     child.on('error', error => {
-      console.error(`로컬 감사 실행 실패: ${error.message}`);
+      console.error('로컬 감사 실행에 실패했습니다. 비공개 설정과 로컬 자료 접근 권한을 확인하세요.');
       running = false;
       resolveRun();
     });
@@ -65,22 +69,22 @@ const watchers = existingRoots.map(directory => {
   let watcher;
   try {
     watcher = watch(directory, {recursive: true}, (_event, filename) => {
-      if (filename) scheduleAudit(`변경 감지: ${String(filename)}`);
+      if (filename) scheduleAudit('local-file-change');
     });
   } catch (error) {
-    console.warn(`하위 폴더 감시를 사용할 수 없어 상위 폴더만 감시합니다: ${directory}`);
+    console.warn('하위 폴더 감시를 사용할 수 없어 지정한 폴더만 감시합니다.');
     watcher = watch(directory, (_event, filename) => {
-      if (filename) scheduleAudit(`변경 감지: ${String(filename)}`);
+      if (filename) scheduleAudit('local-file-change');
     });
-    if (error instanceof Error) console.warn(error.message);
+    if (error instanceof Error) console.warn('운영체제에서 하위 폴더 감시를 지원하지 않아 상위 폴더만 감시합니다.');
   }
-  watcher.on('error', error => console.error(`감시 오류(${directory}): ${error.message}`));
+  watcher.on('error', () => console.error('로컬 폴더 감시에 실패했습니다. 폴더 접근 권한을 확인하세요.'));
   return watcher;
 });
 
 console.log(JSON.stringify({
   event: 'local-audit-watching',
-  roots: existingRoots,
+  watchedFolders: existingRoots.length,
   interval: 'filesystem-events+750ms-debounce',
   destination: resolve(root, 'tmp/local-goal-audit.json'),
   publicExportChanged: false,
