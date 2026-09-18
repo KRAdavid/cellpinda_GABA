@@ -180,7 +180,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card-v5.png`, 'live focus invite Open Graph image is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
     assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#focus-game'), 'live focus invite must hand off to the explained game without auto-start');
-    assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 시작하기') && focusPageText.includes('초록은 누르고 빨강은 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
+    assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 시작하기') && focusPageText.includes('초록 신호는 누르고 빨강 신호는 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
     const focusGameCardResponse = await request('/assets/focus-game-card-v5.png');
     assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
     assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
