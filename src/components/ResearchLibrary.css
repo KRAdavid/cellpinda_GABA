@@ -218,6 +218,11 @@
 .research-library-browse[open]>summary{border-bottom:1px solid #edf0ed}
 .research-library-browse .research-library-controls{margin-top:16px}
 .research-library-browse .research-library-count{margin-top:12px}
+.research-library-detail-context,.research-library-detail-finding{display:flex;align-items:flex-start;gap:9px;max-width:840px;margin:0 0 14px;color:#43584a;font-size:14px;line-height:1.7}
+.research-library-detail-context>svg{flex:0 0 auto;margin-top:3px;color:#648071}
+.research-library-detail-context>span{min-width:0}
+.research-library-detail-finding{display:grid;gap:4px;padding:12px 14px;border-left:3px solid #9ab9a2;background:#f7f9f7}
+.research-library-detail-finding>strong{color:#315f48;font-size:13px}
 @media(max-width:700px){
   .research-library-head{margin-bottom:6px}
   .research-library-head>div>p{font-size:14px}
@@ -227,4 +232,5 @@
   .research-library-browse{margin-top:18px}
   .research-library-browse>summary{min-height:54px}
   .research-library-browse>summary>span{font-size:15px}
+  .research-library-detail-context,.research-library-detail-finding{font-size:16px;line-height:1.75}
 }

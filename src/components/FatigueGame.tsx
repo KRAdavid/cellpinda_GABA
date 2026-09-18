@@ -3,7 +3,6 @@ import { ArrowRight, ArrowUpRight, CheckCircle2, ExternalLink, Gamepad2, RotateC
 import {
   compareFocusGames,
   createFocusRunPattern,
-  getFocusGameResultGuidance,
   FOCUS_GAME_STAGES,
   FOCUS_GAME_TRIALS_PER_STAGE,
   FOCUS_GAME_TOTAL_TRIALS,
@@ -595,7 +594,6 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   const currentSignalNumber = stageIndex * FOCUS_GAME_TRIALS_PER_STAGE + trialIndex + 1;
   const switchRule = trial?.targetColor ?? runPatternRef.current.trials.switch[trialIndex]?.targetColor ?? 'green';
   const comparison = before && after ? comparisonText(before, after, mode === 'after') : null;
-  const resultGuidance = before ? getFocusGameResultGuidance(before.accuracyPct) : null;
   const metrics = before && after ? [
     { label: '전체 맞힌 비율', before: `${before.accuracyPct}%`, after: `${after.accuracyPct}%` },
     { label: '평균 누르는 시간', before: metricText(before.speed.averageMs), after: metricText(after.speed.averageMs) },
@@ -699,28 +697,20 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <p className="fatigue-game-status" aria-live="polite">{status}</p>
         </div> : null}
 
-        {phase === 'baseline-complete' && before && resultGuidance ? <div className="fatigue-game-summary">
-            <div className={`fatigue-score-ring fatigue-score-ring-${resultGuidance}`} role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>게임 정답률</span></div>
+        {phase === 'baseline-complete' && before ? <div className="fatigue-game-summary">
+            <div className="fatigue-score-ring" role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>게임 정답률</span></div>
             <div>
             <p className="fatigue-game-kicker">오늘의 반응 기록</p>
-            <h3>{resultGuidance === 'celebrate' ? '좋아요, 신호를 잘 따라왔어요.' : '신호를 조금 놓쳤어요.'}</h3>
+            <h3>오늘 게임을 마쳤어요.</h3>
             <p className="fatigue-game-result-score">{before.total}개 신호 중 {before.correct}개를 맞혔어요.</p>
             <p className="fatigue-game-result-disclosure">이 점수는 오늘 게임의 정답 기록이에요. 뇌 피로를 진단하는 검사는 아니에요.</p>
-            <p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${resultGuidance}`} role="status">
-              {resultGuidance === 'celebrate'
-                ? '기록을 남기거나 친구에게도 챌린지를 보내 보세요.'
-                : '화면에서 눈을 떼고 5분 쉬었다가 다시 해보세요.'}
-            </p>
+            <p className="fatigue-game-result-guidance" role="status">원하면 5분 쉬었다가 다른 신호로 한 번 더 해보세요. 친구에게 보내 함께 해봐도 좋아요.</p>
             <details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details>
-            {resultGuidance === 'celebrate' && onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : <button type="button" className="rhythm-button" onClick={resultGuidance === 'pause' ? beginRest : finishBaseline}>
-              {resultGuidance === 'pause' ? '5분 쉬고 다시 해보기' : '오늘 기록 마치기'} {resultGuidance === 'pause' ? <ArrowRight size={18} aria-hidden="true" /> : <CheckCircle2 size={18} aria-hidden="true" />}
-            </button>}
-            {resultGuidance === 'pause'
-              ? <button type="button" className="rhythm-button secondary" onClick={finishBaseline}>오늘 기록 마치기</button>
-              : onInvite
-                ? <button type="button" className="rhythm-button secondary" onClick={finishBaseline}>오늘 기록 마치기 <CheckCircle2 size={18} aria-hidden="true" /></button>
-                : <button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>한 번 더 해보기 <RotateCcw size={18} aria-hidden="true" /></button>}
-            {resultGuidance === 'pause' && onInvite ? <button type="button" className="rhythm-text-button fatigue-game-share-invite" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={16} aria-hidden="true" /></button> : null}
+            <div className="fatigue-game-actions">
+              {onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
+              <button type="button" className={`rhythm-button${onInvite ? ' secondary' : ''}`} onClick={beginRest}>5분 쉬고 다시 해보기 <ArrowRight size={18} aria-hidden="true" /></button>
+              <button type="button" className="rhythm-button secondary" onClick={finishBaseline}>오늘 기록 마치기 <CheckCircle2 size={18} aria-hidden="true" /></button>
+            </div>
             {onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 답변이 포함되지 않아요.</p> : null}
           </div>
         </div> : null}

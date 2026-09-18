@@ -43,11 +43,11 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
     <figcaption><Moon size={18} aria-hidden="true"/>잠과 관련해 기록한 변화 <span>{visual.metrics[0]?.comparison}</span></figcaption>
     <div className="study-pair-metrics">{visual.metrics.map((metric,index)=>{
       const down=/짧|감소/.test(metric.unit);
-      const label=metric.unit.replace(/\s*(짧게|늘게|증가|감소)/,'').trim();
+      const label=metric.unit.replace(/\s*(짧게|늘게|증가|감소|높게|낮게)/,'').trim();
       return <div key={metric.label}>
         <span>{metric.label}</span>
         <strong>{metric.value}<small>{label}</small></strong>
-        <Trend direction={down?'down':'up'} label={down?'짧게':'길게'}/>
+        <Trend direction={down?'down':'up'} label={metric.trendLabel || (down?'비교 조건보다 짧게':'비교 조건보다 길게')}/>
       </div>;
     })}</div>
     <small className="study-insight-footnote">{visual.participantLabel}</small>

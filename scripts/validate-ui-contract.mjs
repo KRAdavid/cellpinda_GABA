@@ -81,7 +81,7 @@ requireMatch(research, /id="research"[^>]*aria-label="연구를 쉬운 말로 �
 if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');
 requireMatch(research, /const featuredStudy = visibleStudies\[0\][\s\S]*renderStudy\(featuredStudy, true\)/, 'a concrete research result must appear before search and filters');
 requireMatch(research, /research-library-head[\s\S]*아래 자료는 일반 GABA 사람 연구예요\. 셀핀다 제품을 시험한 결과는 아니에요/, 'research list must state product scope once in a visible consumer-friendly introduction');
-requireMatch(research, /연구 내용 더 보기/, 'research detail must use a consumer-friendly label');
+requireMatch(research, /누가 참여했고, 어떻게 살펴봤나요\?/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
 requireMatch(researchRouteHtml, /GABA 사람 연구 읽기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
@@ -124,7 +124,7 @@ for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 �
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
-for (const marker of ['뇌 컨디션 확인 챌린지', '규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 신호 순서가 달라져요', '오늘의 반응 기록', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '이건 건강 검사가 아닌 짧은 반응 게임이에요.', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '먼저 연습하기', '다음 규칙 연습하기', '연습 마치기', '신호를 조금 놓쳤어요.', '좋아요, 신호를 잘 따라왔어요.', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['뇌 컨디션 확인 챌린지', '규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 신호 순서가 달라져요', '오늘의 반응 기록', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '이건 건강 검사가 아닌 짧은 반응 게임이에요.', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '먼저 연습하기', '다음 규칙 연습하기', '연습 마치기', '오늘 게임을 마쳤어요.', '친구에게 1분 게임 보내기', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
 if (/needsFocusRecovery|FOCUS_GAME_RECOVERY_THRESHOLD_PCT|쉬고 난 뒤 게임 기록이 좋아졌어요|휴식 후/.test(fatigueGame)) fail('focus game must not use a score threshold as a recovery diagnosis or mislabel a second run');
 for (const marker of ['게임 효과음', 'playGameCue(\'start\')', 'playGameCue(\'signal\')', 'playGameCue(\'stage\')', 'playGameCue(\'complete\')', 'playGameCue(\'false-start\')']) requireMatch(fatigueGame, new RegExp(marker.replace(/[()]/g, '\\$&')), `focus game sound cue ${marker} is missing`);
 requireMatch(fatigueGame, /playGameCue\(correct \? 'correct' : 'miss'\)/, 'focus game must sound its response judgment');
@@ -148,7 +148,8 @@ requireMatch(fatigueGame, /createFocusRunPattern\(Math\.random, runPatternRef\.c
 requireMatch(fatigueGame, /responseWindowMs/, 'each difficulty stage must use its calibrated response window');
 for (const marker of ['공이 올라가는 동안 · 4초', '공이 위에 머무는 동안 · 2초', '공이 내려가는 동안 · 6초', '공이 아래에 머무는 동안 · 2초', 'BreathLineGuide', 'prefers-reduced-motion', '자연스럽게 호흡하세요']) requireMatch(fatigueGame, new RegExp(marker), `animated 4-2-6-2 breathing rest marker ${marker} is missing`);
 requireMatch(fatigueGameStyles, /fatigue-breath-line[\s\S]*fatigue-breath-phases[\s\S]*is-active/, 'animated breathing guide must have responsive line and phase styles');
-for (const marker of ['기록을 남겼어요.', '좋아요, 신호를 잘 따라왔어요.', '신호를 조금 놓쳤어요.', '화면에서 눈을 떼고 5분 쉬었다가 다시 해보세요.', 'getFocusGameResultGuidance', '5분 쉰 뒤 두 번째 게임', '쉬지 않고 이어 한 두 번째 게임', 'baseline-finished', 'fatigue-score-ring']) requireMatch(fatigueGame, new RegExp(marker), `score-based focus result marker ${marker} is missing`);
+for (const marker of ['기록을 남겼어요.', '오늘 게임을 마쳤어요.', '원하면 5분 쉬었다가 다른 신호로 한 번 더 해보세요.', '5분 쉬고 다시 해보기', '친구에게 1분 게임 보내기', '5분 쉰 뒤 두 번째 게임', '쉬지 않고 이어 한 두 번째 게임', 'baseline-finished', 'fatigue-score-ring']) requireMatch(fatigueGame, new RegExp(marker), `score-neutral focus result marker ${marker} is missing`);
+if (/getFocusGameResultGuidance|FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT|신호를 조금 놓쳤어요\.|좋아요, 신호를 잘 따라왔어요\./.test(fatigueGame + fatigueGameDomain)) fail('focus game results must not infer a state or split calls to action by score');
 requireMatch(fatigueGame, /fatigue-game-comparison-note[\s\S]*comparison\.body[\s\S]*<details className="fatigue-game-result-details"/, 'game comparison context must remain visible outside the collapsed score details');
 requireMatch(fatigueGame, /fatigue-game-result-score[\s\S]*fatigue-game-result-disclosure[\s\S]*뇌 피로를 진단하는 검사는 아니에요/, 'the game result must explain beside the score that it is not a brain-fatigue diagnosis');
 requireMatch(rhythm, /focusInviteArrival[\s\S]*getElementById\('focus-game'\)[\s\S]*scrollIntoView/, 'focus challenge invite must scroll to the game instructions');

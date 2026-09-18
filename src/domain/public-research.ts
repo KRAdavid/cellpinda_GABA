@@ -32,8 +32,8 @@ export function projectConsumerVisual(value:unknown):ValueRecord|undefined{
   if(value.kind==='metric-pair'){
     if(!exactShape(value,['kind','metrics','participantLabel'])||!isText(value.participantLabel,180)||!Array.isArray(value.metrics)||value.metrics.length<1||value.metrics.length>4)return undefined;
     const metrics=value.metrics.map(item=>{
-      if(!isRecord(item)||!exactShape(item,['label','value','unit','comparison'])||!isText(item.label,120)||!isText(item.value,40)||!isText(item.unit,40)||!isText(item.comparison,180))return null;
-      return {label:item.label,value:item.value,unit:item.unit,comparison:item.comparison};
+      if(!isRecord(item)||!exactShape(item,['label','value','unit','comparison'],['trendLabel'])||!isText(item.label,120)||!isText(item.value,40)||!isText(item.unit,40)||!isText(item.comparison,180)||item.trendLabel!==undefined&&!isText(item.trendLabel,100))return null;
+      return {label:item.label,value:item.value,unit:item.unit,comparison:item.comparison,...(typeof item.trendLabel==='string'?{trendLabel:item.trendLabel}:{})};
     });
     return metrics.some(item=>item===null)?undefined:{kind:value.kind,metrics,participantLabel:value.participantLabel};
   }

@@ -9,9 +9,7 @@ import {
   FOCUS_GAME_STAGES,
   FOCUS_GAME_TOTAL_TRIALS,
   FOCUS_GAME_TRIALS_PER_STAGE,
-  FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT,
   FOCUS_STIMULUS_SHAPES,
-  getFocusGameResultGuidance,
   summarizeFocusGame,
   summarizeReactionGame,
   type FocusGameStage,
@@ -64,12 +62,6 @@ test('compares the same person before and after the focus challenge', () => {
   assert.equal(comparison.accuracyDeltaPct, 46);
   assert.equal(comparison.brakeDeltaPct, 87);
   assert.equal(comparison.switchDeltaPct, 50);
-});
-
-test('offers a game-only pause suggestion at or below the game threshold', () => {
-  assert.equal(getFocusGameResultGuidance(FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT - 1), 'pause');
-  assert.equal(getFocusGameResultGuidance(FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT), 'pause');
-  assert.equal(getFocusGameResultGuidance(FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT + 1), 'celebrate');
 });
 
 test('rejects malformed focus challenge records', () => {
