@@ -615,7 +615,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
     <section className="fatigue-game" id="focus-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
         <div><p className="fatigue-game-kicker">02 / 약 1분 · 24개 신호</p><h2 id="fatigue-game-heading" tabIndex={-1}>뇌 컨디션 확인 챌린지</h2></div>
-        <p>색 신호에 맞춰 누르거나 멈추는 1분 게임이에요. 점수로 뇌 피로나 건강 상태를 판단하지 않아요.</p>
+        <p>색 신호 24개에 맞춰 누르거나 멈추는 1분 게임이에요. 오늘 게임 점수는 뇌 피로나 건강 상태를 재는 검사가 아니에요.</p>
       </div>
 
       <div className={`fatigue-game-panel fatigue-game-phase-${phase}`}>

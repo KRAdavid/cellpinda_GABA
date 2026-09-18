@@ -76,9 +76,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const ratio = score / 15;
   const band = score >= 10 ? 'high' : score >= 5 ? 'watch' : 'low';
   const frequentAnswers = Object.values(result.scores).filter(value => value >= 2).length;
-  const description = frequentAnswers === 0
-    ? '자주 쉬지 못했다고 답한 문항은 없어요.'
-    : `${frequentAnswers}개 문항에서 자주 또는 거의 매일 그랬어요.`;
+  const description = `${frequentAnswers}개 질문에서 자주 또는 거의 매일 쉬지 못했다고 답했어요.`;
   const brainPath = 'M108 29c-8-12-24-13-34-4-13-4-27 5-27 19-14 5-18 21-8 31-5 14 5 28 19 29 7 12 23 14 34 5 8 8 19 8 27 0 10 9 25 6 30-6 14 1 25-12 21-26 11-10 8-27-5-34-1-14-15-23-28-18-7-7-19-7-29 4z';
 
   return (
@@ -105,12 +103,12 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
           </g>
         </svg>
         <div className="rhythm-load-visual-copy">
-          <p className="rhythm-load-visual-kicker">숫자가 높을수록</p>
-          <strong>{description}</strong>
+          <p className="rhythm-load-visual-kicker">점수 읽는 법</p>
+          <strong>점수가 높을수록 자주 쉬지 못했다고 답한 질문이 많아요.</strong>
           <div className="rhythm-load-segments" aria-hidden="true">
             {Array.from({ length: 15 }, (_, index) => <i key={index} className={index < score ? 'is-filled' : ''} />)}
           </div>
-        <span>점수가 높을수록 자주 쉬지 못했다고 답한 거예요.</span>
+        <span>{description}</span>
         </div>
       </div>
       <progress className="rhythm-load-progress-accessible" value={score} max={15} aria-label={`지난 7일 답변 점수 ${score}점, 15점 만점`} />
@@ -443,9 +441,6 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <p className="rhythm-eyebrow">{sharedType ? '친구가 돌아본 생활 장면' : '지난 7일, 내가 돌아본 장면'}</p>
             <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
             {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
-            {result ? <BrainLoadVisual result={result} /> : null}
-            {signal ? <div className={`rhythm-fatigue-alert rhythm-fatigue-alert-${signal.tone}`} role="status"><AlertTriangle size={23} aria-hidden="true" /><div><p className="rhythm-eyebrow">{signal.label}</p><h4>{signal.heading}</h4><p>{signal.body}</p></div></div> : null}
-            {result?.loadLevel === 'high' ? <details className="rhythm-care-guide"><summary>피로가 몇 주째 이어지거나 일상에 지장을 준다면</summary><p>이 점검은 건강 검사가 아니에요. 피로와 잠 문제는 원인이 다양할 수 있으니, 불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.</p></details> : null}
             <div className="rhythm-result-primary-actions">
               <p>{sharedType ? '나도 직접 해보기' : '친구도 직접 해보도록 보내기'}</p>
               {sharedType
@@ -453,6 +448,9 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
                 : <button type="button" className="rhythm-button" onClick={() => void shareInvite()}>친구에게 1분 체크 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button>}
               {!sharedType ? <small>내 답변과 점수는 전송되지 않아요.</small> : null}
             </div>
+            {result ? <BrainLoadVisual result={result} /> : null}
+            {signal ? <div className={`rhythm-fatigue-alert rhythm-fatigue-alert-${signal.tone}`} role="status"><AlertTriangle size={23} aria-hidden="true" /><div><p className="rhythm-eyebrow">{signal.label}</p><h4>{signal.heading}</h4><p>{signal.body}</p></div></div> : null}
+            {result?.loadLevel === 'high' ? <details className="rhythm-care-guide"><summary>피로가 몇 주째 이어지거나 일상에 지장을 준다면</summary><p>이 점검은 건강 검사가 아니에요. 피로와 잠 문제는 원인이 다양할 수 있으니, 불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.</p></details> : null}
           </article>
           <div className="rhythm-result-actions">
             <details className="rhythm-more-share">

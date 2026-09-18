@@ -48,6 +48,7 @@ export type Claim = {
 
 type Props = {
   claims: Claim[];
+  sectionTitle?: string;
   onOpen?: (claimId: string) => void;
 };
 
@@ -84,7 +85,7 @@ function canonicalStudySources(claim: Claim): string[] {
   return keys.length ? [...new Set(keys)] : [claim.id];
 }
 
-export default function ResearchLibrary({ claims, onOpen }: Props) {
+export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 한눈에', onOpen }: Props) {
   const [linkStatus,setLinkStatus]=useState('');
   const [manualLink,setManualLink]=useState('');
   const [query, setQuery] = useState('');
@@ -192,13 +193,13 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   }
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
-    <div className="section-head research-library-head"><div><h2 id="research-title">수면 연구 한눈에</h2><p>일반 GABA 정제 연구예요. 셀핀다 제품의 구성과 먹는 법은 포장에서 확인해 주세요.</p></div></div>
+    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>일반 GABA 사람 연구예요. 셀핀다 제품의 구성과 섭취 안내는 포장에서 확인해 주세요.</p></div></div>
     {featuredStudy ? renderStudy(featuredStudy, true) : null}
     <details className="research-library-browse" id="research-library-browse">
       <summary><span><Search size={18} aria-hidden="true"/> 주제별로 다른 연구 찾기</span><small>{Math.max(0, visibleStudies.length - 1)}편 더 보기</small></summary>
       {studies.length > 0 ? <>
       <div className="research-library-controls" role="search" aria-label="연구를 주제별로 찾기">
-        <label htmlFor="research-search">궁금한 내용 찾기<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="스트레스·수면·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
+        <label htmlFor="research-search">궁금한 내용 찾기<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="잠·긴장·뇌파·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
         <label htmlFor="research-topic">주제 고르기<select id="research-topic" value={activeTopic} onChange={event => setTopic(event.target.value)}><option value="">모든 주제</option>{topics.map(item => <option value={item} key={item}>{item}</option>)}</select></label>
         <details className="research-method-filter" open={showMethodFilter || Boolean(activeType)} onToggle={event => setShowMethodFilter(event.currentTarget.open)}>
           <summary>연구 방법 {activeType ? '선택됨' : '더보기'}</summary>
