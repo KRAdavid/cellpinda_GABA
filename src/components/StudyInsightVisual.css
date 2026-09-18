@@ -10,7 +10,7 @@
 .study-time-comparison .study-time-comparison-after strong{color:#1c804b}
 .study-time-arrow{color:#a4aea6}
 .study-insight-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:13px}
-.study-trend{display:inline-flex;align-items:center;gap:3px;color:#267b49;font-size:12px;font-weight:650;line-height:1.35;white-space:nowrap}
+.study-trend{display:inline-flex;align-items:center;gap:3px;color:#1f6840;font-size:14px;font-weight:650;line-height:1.4;white-space:nowrap}
 .study-trend--up svg,.study-trend--down svg{color:#188951}
 .study-insight-footer>small,.study-insight-footnote{color:#78847b;font-size:10px;line-height:1.5}
 .study-paired-groups{display:grid;gap:12px}

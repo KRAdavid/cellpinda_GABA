@@ -9,7 +9,14 @@ export const FATIGUE_GAME_ROUNDS = 5;
 export const FOCUS_GAME_STAGES = ['brake', 'speed', 'switch'] as const;
 export const FOCUS_GAME_TRIALS_PER_STAGE = 8;
 export const FOCUS_GAME_TOTAL_TRIALS = FOCUS_GAME_STAGES.length * FOCUS_GAME_TRIALS_PER_STAGE;
-/** Accuracy at or below this level opens an extra rest-and-retest prompt. */
+/** A game-only prompt threshold; it is not a health or fatigue cutoff. */
+export const FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT = 70;
+export type FocusGameResultGuidance = 'celebrate' | 'pause';
+
+export function getFocusGameResultGuidance(accuracyPct: number): FocusGameResultGuidance {
+  return accuracyPct <= FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT ? 'pause' : 'celebrate';
+}
+
 export type FocusGameStage = (typeof FOCUS_GAME_STAGES)[number];
 export const FOCUS_STIMULUS_SHAPES = ['circle', 'diamond', 'ring', 'triangle'] as const;
 export type FocusStimulusShape = (typeof FOCUS_STIMULUS_SHAPES)[number];

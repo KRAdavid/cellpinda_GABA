@@ -27,17 +27,21 @@ const brainLoadEvidenceStyles = await read('src/components/BrainLoadEvidence.css
 const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
 const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css');
 const indexHtml = await read('index.html');
+const researchRouteHtml = await read('public/research/index.html');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
 const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 
-for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research']) {
+for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews']) {
   requireMatch(app, new RegExp(`(?:id|href)=["']#?${id}["']`), `consumer section or link ${id} is missing`);
 }
-const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', '<ResearchLibrary', '<section id="fermentation"', '<section id="products"', '<ReviewExperience', '<BrainLoadEvidence'];
+const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', 'research-gateway', '<section id="fermentation"', '<section id="products"', '<ReviewExperience', '<BrainLoadEvidence'];
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
-if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA before research highlights, then lead through the product and reviews to secondary evidence');
+if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
+requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
+requireMatch(research, /사람 연구를 소개해요\. 연구마다 사용한 제품과 양이 달라요[\s\S]*제품의 먹는 방법은 포장/, 'research route must explain its scope once in consumer language');
+if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
@@ -50,7 +54,7 @@ requireMatch(analyticsConsentStyles, /\.footer \.analytics-consent\{[^}]*flex:0 
 requireMatch(app, /const isLocalHost = \['localhost', '127\.0\.0\.1', '\[::1\]'\]\.includes\(location\.hostname\)/, 'internal operations route must be local-host gated');
 requireMatch(app, /const operationsView = isLocalHost && \(requestedView === 'ops' \|\| currentPath === '\/ops'\)/, 'internal operations route must not render on public hosts');
 requireMatch(app, /const adminView = isLocalHost && \(requestedView === 'admin' \|\| currentPath === '\/admin'\)/, 'admin review route must not render on public hosts');
-const nav = app.match(/<nav[\s\S]*?<\/nav>/)?.[0] || '';
+const nav = app.match(/<nav aria-label="주 메뉴"[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
 if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
 for (const marker of ['퇴근했는데도', '일 생각이 계속 나나요', '잠과 휴식 1분 체크', 'GABA는 뇌세포 사이에서', '스마트스토어']) {
@@ -63,12 +67,12 @@ if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail
 requireMatch(research, /research-reading-path[\s\S]*Search[\s\S]*UsersRound[\s\S]*Activity/, 'research reading path must show topic, participants and measured changes with icons');
 requireMatch(research, /연구 내용 더 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
-requireMatch(indexHtml, /연구를 쉽게 보기/, 'no-script research fallback must use a consumer-friendly label');
+requireMatch(researchRouteHtml, /GABA 사람 연구 읽기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
-requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*ResearchLibrary/, 'the GABA explanation and teaser must lead to one detailed research list');
+requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*research-gateway/, 'the GABA explanation and teaser must lead to a separate, easy-to-find research route');
 requireMatch(research, /canonicalStudySources/, 'research list must suppress duplicate records of the same paper across all source links');
 requireMatch(research, /궁금한 주제로[\s\S]*연구를 찾아보세요/, 'research list must have a clear consumer heading');
-requireMatch(story, /사람 연구 살펴보기/, 'GABA introduction must link to the single research list');
+requireMatch(story, /GABA 사람 연구 읽기/, 'GABA introduction must link to the separate research route');
 if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(app + story)) fail('a study result must appear in only one detailed research section');
 for (const marker of ['study-time-comparison', 'study-paired-groups', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
 requireMatch(app, /한 포에 든 양 확인/, 'fermentation flow must use a consumer-friendly label');
@@ -98,11 +102,12 @@ requireMatch(rhythm, /지난 7일, 쉬고 싶었던 순간|loadScore|loadLevel/,
 requireMatch(rhythm, /rhythm-care-guide|몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담/, 'high fatigue results must include a clear care-seeking guide');
 requireMatch(rhythmStyles, /rhythm-care-guide[\s\S]*border-left/, 'care-seeking guide must be visually distinct');
 requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence section is missing from the public flow');
+requireMatch(app, /className="hero-game-link" href="#focus-game"/, 'the shareable game must be discoverable from the first screen');
 for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
-for (const marker of ['1분 집중 신호 게임', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 달라지는 신호', '24개 신호 완료', '5분 쉬고 한 번 더 하기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '뇌 피로나 건강 상태를 진단하지 않습니다', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 1분 게임 보내기', '먼저 두 번 연습하기', '연습 1 / 2', '연습 2 / 2', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['1분 집중 신호 게임', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 달라지는 신호', '24개 신호 완료', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '뇌 피로나 건강 상태를 진단하지 않습니다', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 1분 게임 보내기', '세 가지 규칙 연습하기', '다음 규칙 연습하기', '연습 마치기', '잠깐 쉬고 다시 해봐도 좋아요.', '축하해요! 신호를 잘 따라왔어요.', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
 if (/needsFocusRecovery|FOCUS_GAME_RECOVERY_THRESHOLD_PCT|쉬고 난 뒤 게임 기록이 좋아졌어요|휴식 후/.test(fatigueGame)) fail('focus game must not use a score threshold as a recovery diagnosis or mislabel a second run');
 for (const marker of ['게임 효과음', 'playGameCue(\'start\')', 'playGameCue(\'signal\')', 'playGameCue(\'stage\')', 'playGameCue(\'complete\')', 'playGameCue(\'false-start\')']) requireMatch(fatigueGame, new RegExp(marker.replace(/[()]/g, '\\$&')), `focus game sound cue ${marker} is missing`);
 requireMatch(fatigueGame, /playGameCue\(correct \? 'correct' : 'miss'\)/, 'focus game must sound its response judgment');
@@ -111,10 +116,13 @@ requireMatch(fatigueGameStyles, /\.fatigue-game-sound-toggle[\s\S]*\.fatigue-gam
 if (/speechSynthesis|SpeechSynthesisUtterance/.test(fatigueGame)) fail('five-minute rest must not play spoken narration');
 requireMatch(fatigueGame, /setPhase\('countdown'\)[\s\S]*phase === 'countdown'[\s\S]*첫 신호가 나타나면/, 'focus game must give users a ready countdown before the first scored signal');
 requireMatch(fatigueGame, /function beginPractice\(\)[\s\S]*setPhase\('practice-press'\)[\s\S]*fatigue_game_practice_start/, 'focus game must start a separate practice before scored play');
-requireMatch(fatigueGameDomain, /FOCUS_GAME_STAGES\s*=\s*\['brake',\s*'speed',\s*'switch'\]/, 'the first scored phase must match the green/red stop rule practiced before play');
-for (const marker of ['초록은 누르고', '빨강은 누르지 않기', '색과 모양 상관없이 누르기', '위의 기준색과', '첫 8개는 초록만 누르고']) requireMatch(fatigueGame, new RegExp(marker), `focus game must preview its three stages in actual order: ${marker}`);
+requireMatch(fatigueGameDomain, /FOCUS_GAME_STAGES\s*=\s*\['brake',\s*'speed',\s*'switch'\]/, 'the scored phase order must match the stop rule practiced before play');
+requireMatch(fatigueGame, /FOCUS_GAME_STAGES\.map\(\(stage, index\)[\s\S]*stageInfo\[stage\]\.instruction[\s\S]*stageInfo\[stage\]\.detail/, 'onboarding rule cards must be generated from the actual scored stage order');
+for (const marker of ['초록은 누르고', '빨강은 누르지 않아요', '색과 모양에 상관없이', '같은 신호만 눌러요', '실전에서는 24개 신호가 나와요']) requireMatch(fatigueGame, new RegExp(marker), `focus game must explain its actual stages: ${marker}`);
 requireMatch(fatigueGame, /function finishPracticePress\(\)[\s\S]*setPhase\('practice-hold'\)/, 'focus game practice must teach the stop response after a tap');
-requireMatch(fatigueGame, /phase !== 'practice-hold'[\s\S]*setTimeout\([\s\S]*setPhase\('practice-complete'\)/, 'focus game must let users practice waiting without tapping');
+requireMatch(fatigueGame, /phase !== 'practice-hold' && phase !== 'practice-switch-hold'[\s\S]*setTimeout\([\s\S]*practice-complete/, 'focus game must let users practice both stop rules without tapping');
+requireMatch(fatigueGame, /function finishPracticeSpeed\(\)[\s\S]*setPhase\('practice-switch-match'\)/, 'focus game must practice the all-signals stage before color matching');
+requireMatch(fatigueGame, /function finishPracticeSwitchMatch\(\)[\s\S]*setPhase\('practice-switch-hold'\)/, 'focus game must practice matching and non-matching switch signals');
 requireMatch(fatigueGame, /phase === 'practice-complete'[\s\S]*onClick=\{\(\) => startRun\('baseline'\)\}/, 'practice completion must lead to scored play');
 requireMatch(fatigueGame, /연습 없이 바로 시작/, 'focus game must let returning users skip the practice');
 requireMatch(fatigueGame, /aria-valuenow=\{3 - practiceCountdown\}/, 'practice wait must show clear visible progress');
@@ -123,7 +131,7 @@ requireMatch(fatigueGame, /createFocusRunPattern\(Math\.random, runPatternRef\.c
 requireMatch(fatigueGame, /responseWindowMs/, 'each difficulty stage must use its calibrated response window');
 for (const marker of ['공이 올라가는 동안 · 4초', '공이 위에 머무는 동안 · 2초', '공이 내려가는 동안 · 6초', '공이 아래에 머무는 동안 · 2초', 'BreathLineGuide', 'prefers-reduced-motion', '자연스럽게 호흡하세요']) requireMatch(fatigueGame, new RegExp(marker), `animated 4-2-6-2 breathing rest marker ${marker} is missing`);
 requireMatch(fatigueGameStyles, /fatigue-breath-line[\s\S]*fatigue-breath-phases[\s\S]*is-active/, 'animated breathing guide must have responsive line and phase styles');
-for (const marker of ['첫 번째 게임 기록을 남겼어요.', '5분 쉰 뒤 다른 신호로 한 번 더 해볼 수 있어요.', '5분 쉰 뒤 두 번째 게임', '쉬지 않고 이어 한 두 번째 게임', 'baseline-finished']) requireMatch(fatigueGame, new RegExp(marker), `score-agnostic focus flow marker ${marker} is missing`);
+for (const marker of ['첫 번째 게임 기록을 남겼어요.', '축하해요! 신호를 잘 따라왔어요.', '잠깐 쉬고 다시 해봐도 좋아요.', '화면에서 눈을 떼고 5분 쉬었다가 다른 신호로 다시 해볼 수 있어요.', 'getFocusGameResultGuidance', '5분 쉰 뒤 두 번째 게임', '쉬지 않고 이어 한 두 번째 게임', 'baseline-finished']) requireMatch(fatigueGame, new RegExp(marker), `score-based focus result marker ${marker} is missing`);
 requireMatch(rhythm, /focusInviteArrival[\s\S]*getElementById\('focus-game'\)[\s\S]*scrollIntoView/, 'focus challenge invite must scroll to the game instructions');
 if (/startOnMount|focusAutoStart/.test(rhythm + fatigueGame)) fail('focus challenge must wait for the visitor to tap the start button');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
@@ -152,9 +160,8 @@ requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/prod
 requireMatch(review, /가바 1500 · 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
 requireMatch(review, /가바 1500 구매자 후기를 스마트스토어에서 읽어보세요\./, 'review destination must keep the approved consumer message');
 requireMatch(indexHtml, /href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>스마트스토어에서 후기 읽기/, 'static review CTA must deep-link to the Smart Store review dialog');
-requireMatch(app, /content\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>구매자 후기 읽기/, 'hero product card must deep-link to the approved Smart Store review dialog');
 requireMatch(app, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>\{p\.name\} 구매자 후기 읽기/, 'product review CTA must deep-link to the approved Smart Store review dialog');
-requireMatch(app, /content\?\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>구매자 후기/, 'header review link must open the approved Smart Store review dialog');
+requireMatch(app, /content\?\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 구매자 후기/, 'header review link must open the approved Smart Store review dialog');
 requireMatch(purchaseQuestions, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 구매자 후기 읽기/, 'purchase FAQ review CTA must deep-link to the approved Smart Store review dialog');
 requireMatch(story, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>스마트스토어 후기 읽기/, 'GABA story review link must open the approved Smart Store review dialog');
 requireMatch(review, /quotes\.length > 0 \|\| destinations\.length > 0/, 'review reading guide must remain visible with an approved Smart Store destination');

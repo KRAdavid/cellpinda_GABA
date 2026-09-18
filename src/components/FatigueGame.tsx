@@ -3,11 +3,13 @@ import { ArrowRight, ArrowUpRight, CheckCircle2, ExternalLink, Gamepad2, RotateC
 import {
   compareFocusGames,
   createFocusRunPattern,
+  getFocusGameResultGuidance,
   FOCUS_GAME_STAGES,
   FOCUS_GAME_TRIALS_PER_STAGE,
   FOCUS_GAME_TOTAL_TRIALS,
   summarizeFocusGame,
   type FocusRunPattern,
+  type FocusGameComparisonDirection,
   type FocusGameStage,
   type FocusGameSummary,
   type FocusStimulusColor,
@@ -18,7 +20,7 @@ import {
 import { BREATH_ACTIVE_SECONDS, BREATH_CYCLE_SECONDS, getBreathCue, type BreathCue, type BreathStage } from '../domain/breath-guide';
 import './fatigue-game.css';
 
-type GamePhase = 'idle' | 'practice-press' | 'practice-hold' | 'practice-complete' | 'countdown' | 'running' | 'baseline-complete' | 'baseline-finished' | 'rest' | 'complete';
+type GamePhase = 'idle' | 'practice-press' | 'practice-hold' | 'practice-speed' | 'practice-switch-match' | 'practice-switch-hold' | 'practice-complete' | 'countdown' | 'running' | 'baseline-complete' | 'baseline-finished' | 'rest' | 'complete';
 type GameMode = 'baseline' | 'after' | 'repeat';
 type Trial = FocusTrialPlan;
 type RunPattern = FocusRunPattern;
@@ -155,7 +157,7 @@ function summaryLine(summary: FocusGameSummary): string {
   return `맞힌 비율 ${summary.accuracyPct}% · 평균 누르는 시간 ${metricText(summary.speed.averageMs)}`;
 }
 
-function comparisonText(before: FocusGameSummary, second: FocusGameSummary, rested: boolean): { heading: string; body: string; tone: 'similar' | 'unavailable' } {
+function comparisonText(before: FocusGameSummary, second: FocusGameSummary, rested: boolean): { heading: string; body: string; tone: FocusGameComparisonDirection } {
   const comparison = compareFocusGames(before, second);
   const speed = comparison.speedDeltaMs === null ? '누르는 시간은 비교하기 어려워요.' : `평균 누르는 시간은 ${Math.abs(comparison.speedDeltaMs / 1000).toFixed(2)}초 ${comparison.speedDeltaMs < 0 ? '짧았어요' : comparison.speedDeltaMs > 0 ? '길었어요' : '같았어요'}.`;
   const accuracy = comparison.accuracyDeltaPct === null ? '' : `맞힌 비율은 ${Math.abs(comparison.accuracyDeltaPct)}%포인트 ${comparison.accuracyDeltaPct > 0 ? '높았어요' : comparison.accuracyDeltaPct < 0 ? '낮았어요' : '같았어요'}.`;
@@ -167,7 +169,7 @@ function comparisonText(before: FocusGameSummary, second: FocusGameSummary, rest
   if (comparison.direction === 'unavailable') heading = '두 게임 기록을 비교하기 어려워요.';
   const context = rested ? '5분 쉰 뒤 두 번째로 한 게임' : '쉬지 않고 이어서 한 두 번째 게임';
   const body = `${speed} ${accuracy} ${context}의 기록을 나란히 보여드려요. 문제 순서와 익숙함, 기기·주변 상황도 영향을 줄 수 있어 휴식이 기록 변화의 원인이라고 단정할 수는 없어요.`;
-  return { heading, body, tone: comparison.direction === 'unavailable' ? 'unavailable' : 'similar' };
+  return { heading, body, tone: comparison.direction };
 }
 
 function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: BreathCue }) {
@@ -289,19 +291,15 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   }, [phase]);
 
   useEffect(() => {
-    if (phase !== 'practice-hold') return;
+    if (phase !== 'practice-hold' && phase !== 'practice-switch-hold') return;
     setPracticeCountdown(3);
-    const interval = window.setInterval(() => setPracticeCountdown(value => Math.max(0, value - 1)), 1_000);
-    const timeout = window.setTimeout(() => {
-      window.clearInterval(interval);
-      setStatus('연습 완료. 이제 실제 신호에 도전해 보세요.');
-      playGameCue('correct');
-      setPhase('practice-complete');
-    }, 3_000);
-    return () => {
-      window.clearInterval(interval);
-      window.clearTimeout(timeout);
-    };
+    let remaining = 3;
+    const interval = window.setInterval(() => {
+      remaining -= 1;
+      setPracticeCountdown(Math.max(0, remaining));
+      if (remaining <= 0) window.clearInterval(interval);
+    }, 1_000);
+    return () => window.clearInterval(interval);
   }, [phase]);
 
   function playGameCue(cue: FocusSoundCue) {
@@ -527,9 +525,29 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
     onEvent('fatigue_game_practice_start');
   }
 
+  function continuePractice() {
+    if (phase !== 'practice-hold' && phase !== 'practice-switch-hold') return;
+    const nextPhase = phase === 'practice-hold' ? 'practice-speed' : 'practice-complete';
+    setStatus(nextPhase === 'practice-complete' ? '세 가지 규칙 연습을 마쳤어요.' : '좋아요. 다음 규칙을 연습해 볼게요.');
+    playGameCue('correct');
+    setPhase(nextPhase);
+  }
+
   function finishPracticePress() {
     setStatus('좋아요. 첫 규칙을 잘했어요.');
     setPhase('practice-hold');
+    playGameCue('correct');
+  }
+
+  function finishPracticeSpeed() {
+    setStatus('좋아요. 다음에는 위의 기준색을 따라가요.');
+    setPhase('practice-switch-match');
+    playGameCue('correct');
+  }
+
+  function finishPracticeSwitchMatch() {
+    setStatus('맞았어요. 기준색과 같은 신호예요.');
+    setPhase('practice-switch-hold');
     playGameCue('correct');
   }
 
@@ -578,6 +596,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   const currentSignalNumber = stageIndex * FOCUS_GAME_TRIALS_PER_STAGE + trialIndex + 1;
   const switchRule = trial?.targetColor ?? runPatternRef.current.trials.switch[trialIndex]?.targetColor ?? 'green';
   const comparison = before && after ? comparisonText(before, after, mode === 'after') : null;
+  const resultGuidance = before ? getFocusGameResultGuidance(before.accuracyPct) : null;
   const metrics = before && after ? [
     { label: '전체 맞힌 비율', before: `${before.accuracyPct}%`, after: `${after.accuracyPct}%` },
     { label: '평균 누르는 시간', before: metricText(before.speed.averageMs), after: metricText(after.speed.averageMs) },
@@ -594,15 +613,13 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
 
       <div className={`fatigue-game-panel fatigue-game-phase-${phase}`}>
         {phase === 'idle' ? <div className="fatigue-game-onboarding">
-          <p className="fatigue-game-kicker">약 1분 · 신호 {FOCUS_GAME_TOTAL_TRIALS}개</p>
+          <p className="fatigue-game-kicker">약 1분 · 매번 달라지는 신호 {FOCUS_GAME_TOTAL_TRIALS}개 · 연습은 점수에 포함되지 않아요</p>
           <h3>세 가지 규칙을<br />차례로 따라가요.</h3>
           <div className="fatigue-game-rule-cards" aria-label="게임 규칙">
-            <div className="fatigue-game-rule-card"><span className="fatigue-rule-step">1</span><span><strong>초록은 누르고</strong><small>빨강은 누르지 않기</small></span></div>
-            <div className="fatigue-game-rule-card"><span className="fatigue-rule-step">2</span><span><strong>신호가 뜨면</strong><small>색과 모양 상관없이 누르기</small></span></div>
-            <div className="fatigue-game-rule-card"><span className="fatigue-rule-step">3</span><span><strong>위의 기준색과</strong><small>같은 신호만 누르기</small></span></div>
+            {FOCUS_GAME_STAGES.map((stage, index) => <div className="fatigue-game-rule-card" key={stage}><span className="fatigue-rule-step">{index + 1}</span><span><strong>{stageInfo[stage].instruction}</strong><small>{stageInfo[stage].detail}</small></span></div>)}
           </div>
           <div className="fatigue-game-onboarding-actions">
-            <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 두 번 연습하기 <ArrowRight size={18} aria-hidden="true" /></button>
+            <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 세 가지 규칙 연습하기 <ArrowRight size={18} aria-hidden="true" /></button>
             <button type="button" className="fatigue-game-sound-toggle" onClick={toggleGameSound} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />} 효과음 {gameSoundEnabled ? '켜짐' : '꺼짐'}</button>
             <button type="button" className="rhythm-text-button fatigue-game-skip-practice" onClick={() => startRun('baseline')}>연습 없이 바로 시작</button>
           </div>
@@ -610,25 +627,49 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         </div> : null}
 
         {phase === 'practice-press' ? <div className="fatigue-game-practice" aria-labelledby="fatigue-practice-press-heading">
-          <p className="fatigue-game-kicker">연습 1 / 2</p>
+          <p className="fatigue-game-kicker">연습 1 / 5 · 초록 신호</p>
           <h3 id="fatigue-practice-press-heading" ref={practiceHeadingRef} tabIndex={-1}>초록 신호를 눌러 보세요.</h3>
           <button type="button" className="fatigue-practice-signal fatigue-practice-signal-press" onClick={finishPracticePress} aria-label="초록 신호, 눌러 보기"><span aria-hidden="true">●</span><strong>초록</strong><small>눌러 보기</small></button>
         </div> : null}
 
-        {phase === 'practice-hold' ? <div className="fatigue-game-practice" aria-labelledby="fatigue-practice-hold-heading" aria-live="polite">
-          <p className="fatigue-game-kicker">연습 2 / 2</p>
+        {phase === 'practice-hold' ? <div className="fatigue-game-practice" aria-labelledby="fatigue-practice-hold-heading">
+          <p className="fatigue-game-kicker">연습 2 / 5 · 빨강 신호</p>
           <h3 id="fatigue-practice-hold-heading" ref={practiceHeadingRef} tabIndex={-1}>빨강 신호는 누르지 말고 기다려요.</h3>
           <p className="fatigue-practice-feedback" role="status">{status}</p>
           <div className="fatigue-practice-signal fatigue-practice-signal-stop" role="img" aria-label="빨강 신호, 누르지 않고 기다리기"><span aria-hidden="true">Ⅱ</span><strong>빨강</strong><small>손을 떼고 기다리기</small></div>
           <div className="fatigue-practice-timer" role="progressbar" aria-label="연습 신호 표시 시간" aria-valuemin={0} aria-valuemax={3} aria-valuenow={3 - practiceCountdown}><span style={{ transform: `scaleX(${(3 - practiceCountdown) / 3})` }} /></div>
+          <button type="button" className="rhythm-button secondary fatigue-practice-continue" onClick={continuePractice}>다음 규칙 연습하기 <ArrowRight size={18} aria-hidden="true" /></button>
+        </div> : null}
+
+        {phase === 'practice-speed' ? <div className="fatigue-game-practice" aria-labelledby="fatigue-practice-speed-heading">
+          <p className="fatigue-game-kicker">연습 3 / 5 · 모든 신호 누르기</p>
+          <h3 id="fatigue-practice-speed-heading" ref={practiceHeadingRef} tabIndex={-1}>색과 모양을 보지 말고, 신호를 눌러요.</h3>
+          <button type="button" className="fatigue-practice-signal fatigue-practice-signal-press fatigue-practice-signal-purple" onClick={finishPracticeSpeed} aria-label="보라색 신호, 눌러 보기"><span aria-hidden="true">◆</span><strong>보라 신호</strong><small>눌러 보기</small></button>
+        </div> : null}
+
+        {phase === 'practice-switch-match' ? <div className="fatigue-game-practice" aria-labelledby="fatigue-practice-switch-match-heading">
+          <p className="fatigue-game-kicker">연습 4 / 5 · 같은 색 찾기</p>
+          <h3 id="fatigue-practice-switch-match-heading" ref={practiceHeadingRef} tabIndex={-1}>위의 기준색과 같은 신호를 눌러요.</h3>
+          <div className="fatigue-practice-rule"><span>이번 기준색</span><strong>초록</strong></div>
+          <button type="button" className="fatigue-practice-signal fatigue-practice-signal-press" onClick={finishPracticeSwitchMatch} aria-label="기준색 초록, 초록 신호, 눌러 보기"><span aria-hidden="true">●</span><strong>초록 신호</strong><small>눌러 보기</small></button>
+        </div> : null}
+
+        {phase === 'practice-switch-hold' ? <div className="fatigue-game-practice" aria-labelledby="fatigue-practice-switch-hold-heading">
+          <p className="fatigue-game-kicker">연습 5 / 5 · 다른 색 기다리기</p>
+          <h3 id="fatigue-practice-switch-hold-heading" ref={practiceHeadingRef} tabIndex={-1}>기준색과 다른 신호는 누르지 말고 기다려요.</h3>
+          <div className="fatigue-practice-rule"><span>이번 기준색</span><strong>초록</strong></div>
+          <p className="fatigue-practice-feedback" role="status">{status}</p>
+          <div className="fatigue-practice-signal fatigue-practice-signal-stop fatigue-practice-signal-purple" role="img" aria-label="기준색은 초록, 신호는 보라색이므로 누르지 않고 기다리기"><span aria-hidden="true">Ⅱ</span><strong>보라 신호</strong><small>손을 떼고 기다리기</small></div>
+          <div className="fatigue-practice-timer" role="progressbar" aria-label="다른 색 신호 연습 시간" aria-valuemin={0} aria-valuemax={3} aria-valuenow={3 - practiceCountdown}><span style={{ transform: `scaleX(${(3 - practiceCountdown) / 3})` }} /></div>
+          <button type="button" className="rhythm-button secondary fatigue-practice-continue" onClick={continuePractice}>연습 마치기 <ArrowRight size={18} aria-hidden="true" /></button>
         </div> : null}
 
         {phase === 'practice-complete' ? <div className="fatigue-game-practice fatigue-game-practice-complete" aria-labelledby="fatigue-practice-complete-heading">
           <p className="fatigue-game-kicker">연습 완료</p>
-          <h3 id="fatigue-practice-complete-heading" ref={practiceHeadingRef} tabIndex={-1}>규칙을 익혔어요.</h3>
-          <p>첫 8개는 초록만 누르고, 다음에는 화면 규칙을 따라요. 매번 달라지는 신호 {FOCUS_GAME_TOTAL_TRIALS}개에 도전해요.</p>
-          <button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Gamepad2 size={18} aria-hidden="true" /> 실전 시작 <ArrowRight size={18} aria-hidden="true" /></button>
-          <button type="button" className="rhythm-text-button" onClick={beginPractice}>한 번 더 연습</button>
+          <h3 id="fatigue-practice-complete-heading" ref={practiceHeadingRef} tabIndex={-1}>세 가지 규칙을 모두 연습했어요.</h3>
+          <p>실전에서는 24개 신호가 나와요. 규칙은 연습한 순서대로 바뀌고, 연습 기록은 점수에 들어가지 않아요.</p>
+          <button type="button" className="rhythm-button" onClick={() => startRun('baseline')}><Gamepad2 size={18} aria-hidden="true" /> 24개 신호 시작 <ArrowRight size={18} aria-hidden="true" /></button>
+          <button type="button" className="rhythm-text-button" onClick={beginPractice}>연습 다시 하기</button>
         </div> : null}
 
         {phase === 'countdown' ? <div className="fatigue-game-countdown" role="status" aria-live="assertive" aria-atomic="true">
@@ -651,8 +692,26 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <p className="fatigue-game-status" aria-live="polite">{status}</p>
         </div> : null}
 
-        {phase === 'baseline-complete' && before ? <div className="fatigue-game-summary">
-          <CheckCircle2 size={28} aria-hidden="true" /><div><p className="fatigue-game-kicker">첫 번째 게임 · 24개 신호 완료</p><h3>{summaryLine(before)}</h3><details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details><p className="fatigue-baseline-guidance">이건 첫 번째 게임 기록이에요. 원하면 여기서 마치거나 5분 쉰 뒤 다른 신호로 한 번 더 해볼 수 있어요.</p><button type="button" className="rhythm-button" onClick={finishBaseline}>오늘 기록 마치기 <CheckCircle2 size={18} aria-hidden="true" /></button><button type="button" className="rhythm-button secondary" onClick={beginRest}>5분 쉬고 한 번 더 하기 <ArrowRight size={18} aria-hidden="true" /></button></div>
+        {phase === 'baseline-complete' && before && resultGuidance ? <div className="fatigue-game-summary">
+          <CheckCircle2 size={28} aria-hidden="true" /><div>
+            <p className="fatigue-game-kicker">첫 번째 게임 · 24개 신호 완료</p>
+            <h3>{resultGuidance === 'celebrate' ? '축하해요! 신호를 잘 따라왔어요.' : '잠깐 쉬고 다시 해봐도 좋아요.'}</h3>
+            <p className="fatigue-game-result-score">{summaryLine(before)}</p>
+            <p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${resultGuidance}`} role="status">
+              {resultGuidance === 'celebrate'
+                ? '오늘의 게임 기록을 남기거나 친구에게도 보내 보세요.'
+                : '화면에서 눈을 떼고 5분 쉬었다가 다른 신호로 다시 해볼 수 있어요.'}
+            </p>
+            <details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details>
+            <button type="button" className="rhythm-button" onClick={resultGuidance === 'pause' ? beginRest : finishBaseline}>
+              {resultGuidance === 'pause' ? '5분 쉬고 다시 해보기' : '오늘 기록 마치기'} {resultGuidance === 'pause' ? <ArrowRight size={18} aria-hidden="true" /> : <CheckCircle2 size={18} aria-hidden="true" />}
+            </button>
+            {resultGuidance === 'pause'
+              ? <button type="button" className="rhythm-button secondary" onClick={finishBaseline}>오늘 기록 마치기</button>
+              : onInvite
+                ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button>
+                : <button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>한 번 더 해보기 <RotateCcw size={18} aria-hidden="true" /></button>}
+          </div>
         </div> : null}
 
         {phase === 'baseline-finished' && before ? <div className="fatigue-game-summary fatigue-game-baseline-finished">

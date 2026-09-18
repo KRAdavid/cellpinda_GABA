@@ -104,6 +104,12 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview, queue, publicPulse, publicAudit, meetingPacket] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), queueResponse.json(), pulseResponse.json(), auditResponse.json(), meetingPacketResponse.json()]);
     const productSharePageResponse = await request('/products/');
     const productSharePageText = await productSharePageResponse.text();
+    const researchPageResponse = await request('/research/');
+    const researchPageText = await researchPageResponse.text();
+    assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
+    assert.match(researchPageText, /property="og:title" content="GABA 사람 연구를 쉬운 말로"/, 'live research route must identify itself as an educational page');
+    assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
+    assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
     assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1,500 · 제품 구성 보기"/, 'live product share route must show a product-specific preview title');
     assert.match(productSharePageText, /assets\/product-1500\.jpg/, 'live product share route must use the product package preview image');
@@ -124,7 +130,9 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(consumerBundle.includes('뇌 피로나 건강 상태를 진단하지 않습니다') && consumerBundle.includes('초록') && consumerBundle.includes('보라'), 'live consumer bundle must clarify the non-diagnostic game and show accessible color labels');
     assert.ok(!consumerBundle.includes('needsFocusRecovery') && !consumerBundle.includes('쉬고 난 뒤 게임 기록이 좋아졌어요'), 'live consumer bundle must not diagnose recovery from a score or claim a rest effect');
     assert.ok(consumerBundle.includes('시작 준비') && consumerBundle.includes('첫 신호가 나타나면'), 'live consumer bundle must give users a ready countdown before the focus game starts');
-    assert.ok(consumerBundle.includes('먼저 두 번 연습하기') && consumerBundle.includes('연습 없이 바로 시작') && consumerBundle.includes('연습 1 / 2') && consumerBundle.includes('연습 2 / 2') && consumerBundle.includes('연습 완료'), 'live consumer bundle must teach the two rules through a skippable no-score practice');
+    assert.ok(consumerBundle.includes('세 가지 규칙 연습하기') && consumerBundle.includes('연습 없이 바로 시작') && consumerBundle.includes('연습 1 / 5') && consumerBundle.includes('연습 2 / 5') && consumerBundle.includes('연습 3 / 5') && consumerBundle.includes('연습 4 / 5') && consumerBundle.includes('연습 5 / 5') && consumerBundle.includes('연습 완료') && consumerBundle.includes('연습 기록은 점수에 들어가지 않아요'), 'live consumer bundle must teach all scored rules through a skippable no-score practice');
+    const yamatsu = content.claims.find(claim => claim.id === 'research-yamatsu-2016');
+    assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
     assert.ok(consumerBundle.includes('친구에게 1분 게임 보내기') && consumerBundle.includes('내 답변과 점수는 포함되지 않아요'), 'live consumer bundle must expose the clear friend game invitation and privacy note');
     assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');
@@ -135,8 +143,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
     assert.match(robotsText, /Disallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops/, 'live robots.txt must keep internal paths out of discovery');
     const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-    const expectedSitemapUrls = [`${base}/`, `${base}/products/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
-    assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain the public landing, product share, focus invite and share pages only');
+    const expectedSitemapUrls = [`${base}/`, `${base}/products/`, `${base}/research/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
+    assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain public landing, product, independent research, focus invite and share pages only');
     assert.ok(!sitemapText.includes('/admin') && !sitemapText.includes('/ops'), 'live sitemap must not list internal routes');
     for (const [label, route] of [['/admin', adminRoute], ['/ops', opsRoute], ['/?view=admin', adminQueryRoute], ['/?view=ops', opsQueryRoute]]) {
       assert.ok(!/콘텐츠 검토실|운영자 접근 키|TF 운영판|운영 큐|관리자 기능/i.test(route.text), `public route ${label} leaks an internal operations surface`);

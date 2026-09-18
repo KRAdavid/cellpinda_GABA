@@ -365,7 +365,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   async function shareInvite(kind: 'rhythm' | 'focus' = 'rhythm') {
     const url = inviteUrl(kind, getShareReferralId());
     const shareText = kind === 'focus'
-      ? '초록 신호는 누르고, 빨강은 멈추는 1분 게임이야. 너도 해볼래?'
+      ? '누르기·멈추기·색 바꾸기, 세 가지 규칙이 나오는 1분 신호 게임이야. 너도 해볼래?'
       : '잠과 휴식에 관한 1분 체크를 해봤어요. 당신도 지난 일주일을 돌아봐요.';
     onEvent('share_request',{path:result?'/result':'/share',kind:'invite'});
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});

@@ -8,7 +8,9 @@ import {
   FOCUS_GAME_STAGES,
   FOCUS_GAME_TOTAL_TRIALS,
   FOCUS_GAME_TRIALS_PER_STAGE,
+  FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT,
   FOCUS_STIMULUS_SHAPES,
+  getFocusGameResultGuidance,
   summarizeFocusGame,
   summarizeReactionGame,
   type FocusGameStage,
@@ -63,6 +65,12 @@ test('compares the same person before and after the focus challenge', () => {
   assert.equal(comparison.switchDeltaPct, 50);
 });
 
+test('offers a game-only pause suggestion at or below the game threshold', () => {
+  assert.equal(getFocusGameResultGuidance(FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT - 1), 'pause');
+  assert.equal(getFocusGameResultGuidance(FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT), 'pause');
+  assert.equal(getFocusGameResultGuidance(FOCUS_GAME_REST_SUGGESTION_ACCURACY_PCT + 1), 'celebrate');
+});
+
 test('rejects malformed focus challenge records', () => {
   assert.throws(() => summarizeFocusGame(focusRecords().slice(0, FOCUS_GAME_TOTAL_TRIALS - 1)), TypeError);
   assert.throws(() => summarizeFocusGame(focusRecords().map((record, index) => index === 0 ? {...record, stage: 'switch'} : record)), TypeError);
@@ -89,6 +97,7 @@ function assertStageTiming(form: ReturnType<typeof createFocusRunPattern>, stage
 }
 
 test('builds a balanced, progressively harder randomized form with fixed comparison conditions', () => {
+  assert.deepEqual(FOCUS_GAME_STAGES, ['brake', 'speed', 'switch']);
   const form = createFocusRunPattern();
   assert.equal(FOCUS_GAME_TOTAL_TRIALS, 24);
   for (const stage of FOCUS_GAME_STAGES) assert.equal(form.trials[stage].length, 8);

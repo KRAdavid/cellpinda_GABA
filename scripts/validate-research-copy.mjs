@@ -37,7 +37,7 @@ if (!sakashita?.publicText?.includes('1.34kg') || !sakashita.publicText.includes
 if ((appSource.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(appSource)) fail('the detailed research library must be the only research-results section on the consumer page');
 if (/research-(?:yoto|byun|sakashita)-\d{4}|metadata\.consumerSummary/.test(gabaStory)) fail('the GABA introduction must point to the research list without repeating study results');
 if (!researchLibrary.includes('canonicalStudySources')) fail('research records must be deduplicated by all linked primary sources');
-if (!researchLibrary.includes('논문 속 GABA와 섭취량은 셀핀다 가바 1500과 달라요') || !researchLibrary.includes('논문 원문 보기') || !researchLibrary.includes('source.title')) fail('research cards must clearly separate study doses from product use and show source citations in plain sight');
+if (!researchLibrary.includes('사람 연구를 소개해요') || !researchLibrary.includes('연구마다 사용한 제품과 양이 달라요') || !researchLibrary.includes('제품의 먹는 방법은 포장') || !researchLibrary.includes('연구에서 기록한 내용') || !researchLibrary.includes('metadata.productApplicability') || !researchLibrary.includes("new URL('research/',base)") || !researchLibrary.includes('논문 원문 보기') || !researchLibrary.includes('source.title')) fail('research route must explain scope and study context in consumer language, show findings and provide shareable study links');
 
 const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장|직접\s*(먹어|경험)|가바\s*(경험|섭취를\s*시작)/;
 const discouragedMarketing = /뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|결과를\s*한\s*문장으로\s*묶기\s*어려|중증\s*수면질환|수면이\s*좋지\s*않|이상사례|유의하지\s*않/;
@@ -63,10 +63,7 @@ for (const claim of research) {
   }
 }
 
-const detailBlock = researchLibrary.indexOf('<details className="research-detail"');
-const productLink = researchLibrary.indexOf('className="button outline" href="#products"');
-if (detailBlock < 0 || productLink < detailBlock) fail('product information link must follow research conditions and observed changes');
-if (!researchLibrary.slice(productLink, productLink + 220).includes('셀핀다 제품 구성 확인')) fail('product information link must lead to product composition and label details');
+if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(researchLibrary)) fail('research reading route must remain separate from product-purchase links');
 if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must render only reviewed consumer findings, not internal result or limitation fields');
 if (researchLibrary.includes('숫자와 출처 더 확인하기')) fail('consumer research UI must use the conditions-and-source label');
 if (/전체\s*구매자의\s*경험|제품\s*효과를\s*입증하는\s*연구\s*자료는\s*아니/.test(reviewExperience)) fail('consumer review UI must use context-first copy');
@@ -75,4 +72,4 @@ if (discouragedMarketing.test(consumerUi)) fail('consumer UI contains a discoura
 if (/연구 카드를 준비하고 있어요|후기를 확인할 수 있는 경로를 준비하고 있습니다|GABA 기본 자료를 확인하고 있습니다|현재 공개된 제품 구성 정보가 없습니다/.test(consumerUi)) fail('consumer UI must not expose empty or preparation-state copy');
 if (/이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다/.test(purchaseQuestions) || !/먹는 방법·보관법·주의사항은 구매 전에 제품 포장과 스마트스토어에서 확인해 주세요/.test(purchaseQuestions)) fail('purchase guidance must point consumers to the current package and Smart Store details');
 
-console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'consumerFinding', 'hopefulTakeaway', 'productApplicability'], visuals: 'reviewed consumerVisual schemas; raw results stay internal', detailFields: ['result', 'limitations'], flowGuard: 'research-context-before-section-product-link', status: 'ok'}));
+console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'consumerFinding', 'hopefulTakeaway', 'productApplicability'], visuals: 'reviewed consumerVisual schemas; raw results stay internal', detailFields: ['result', 'limitations'], flowGuard: 'independent-research-route-without-purchase-link', status: 'ok'}));

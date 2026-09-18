@@ -133,14 +133,15 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   }, [requestedId, query, activeType, claims]);
   if (studies.length === 0) return null;
   async function copyStudy(id:string){
-    const url=new URL(import.meta.env.BASE_URL,window.location.origin);url.hash=id;
+    const base=new URL(import.meta.env.BASE_URL,window.location.origin);
+    const url=new URL('research/',base);url.hash=id;
     try{await navigator.clipboard.writeText(url.href);setManualLink('');setLinkStatus('이 연구를 바로 여는 링크를 복사했어요.')}
     catch{setManualLink(url.href);setLinkStatus('아래 링크를 선택해 직접 복사해 주세요.')}
   }
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
     <div className="section-head research-library-head"><div><p className="chapter">사람 연구를 한곳에서</p><h2 id="research-title">궁금한 주제로<br/>연구를 찾아보세요.</h2></div><p>각 연구는 한 번만 소개해요.<br/>측정한 내용과 참여 조건을 함께 보여드립니다.</p></div>
-    <p className="research-library-evidence-note">논문 속 GABA와 섭취량은 셀핀다 가바 1500과 달라요. 연구에 나온 양은 제품의 먹는 법이 아닙니다.</p>
+    <p className="research-library-evidence-note">여기서는 GABA를 살펴본 사람 연구를 소개해요. 연구마다 사용한 제품과 양이 달라요. 셀핀다 제품의 먹는 방법은 포장에 적힌 안내를 확인해 주세요.</p>
     <div className="research-reading-path" role="img" aria-label="궁금한 점, 연구에 참여한 사람, 살펴본 변화를 차례로 보여줍니다">
       <div><Search aria-hidden="true"/><strong>궁금한 점</strong></div><ArrowRight aria-hidden="true"/>
       <div><UsersRound aria-hidden="true"/><strong>누가 참여했나요?</strong></div><ArrowRight aria-hidden="true"/>
@@ -167,7 +168,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType)}</p>
         <h3>{metadata.question || claim.topic}</h3>
         {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : metadata.consumerSummary ? <p className="research-library-consumer-summary">{metadata.consumerSummary}</p> : null}
-        {metadata.consumerVisual?.kind === 'paired-before-after' && metadata.productApplicability ? <p className="research-library-product-scope">{metadata.productApplicability}</p> : null}
+        {!metadata.consumerVisual && metadata.consumerFinding ? <p className="research-library-finding"><strong>연구에서 기록한 내용</strong>{metadata.consumerFinding}</p> : null}
         <div className="research-library-quick-facts" aria-label="연구를 한눈에 보는 도표">
           {quickFacts.map(({label, value, Icon}) => <div key={label} title={`${label}: ${value}`}><Icon size={17} strokeWidth={1.7} aria-hidden="true" /><span><strong>{label}</strong><small>{value}</small></span></div>)}
         </div>
@@ -177,12 +178,12 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
           <summary>연구 내용 더 보기</summary>
           <div className="research-library-detail">
             <div className="research-story-grid" aria-label="연구 정보 그림 요약">
-          <div className="research-story-card"><UsersRound size={21} aria-hidden="true"/><h4>누가 참여했나요?</h4><p>{metadata.population || metadata.sampleSize || '연구에 나온 참여자 정보'}</p></div>
+              <div className="research-story-card"><UsersRound size={21} aria-hidden="true"/><h4>누가 참여했나요?</h4><p>{metadata.population || metadata.sampleSize || '연구에 나온 참여자 정보'}</p></div>
               <div className="research-story-card"><FlaskConical size={21} aria-hidden="true"/><h4>무엇을 했나요?</h4><p>{compactStudyType(metadata.studyType)}{metadata.duration ? ` · ${metadata.duration}` : ''}</p></div>
+              <div className="research-story-card"><FlaskConical size={21} aria-hidden="true"/><h4>연구에 쓴 제품과 양</h4><p>{metadata.productApplicability}</p></div>
               <div className="research-story-card"><Activity size={21} aria-hidden="true"/><h4>무엇을 살펴봤나요?</h4><p>{metadata.outcome || metadata.consumerScope || '연구에서 살펴본 항목'}</p></div>
               {metadata.comparison?<div className="research-story-card"><Clock3 size={21} aria-hidden="true"/><h4>무엇과 비교했나요?</h4><p>{metadata.comparison}</p></div>:null}
             </div>
-            <div className="research-library-boundary"><h4>셀핀다 제품을 볼 때</h4><p>{metadata.productApplicability}</p></div>
           </div>
           <div className="research-library-sources"><h4>자료 출처</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료를 확인한 날 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>
             <div className="research-library-source" key={`${source.url}-${source.title}`}><p>{source.title}</p><a href={source.url!} target="_blank" rel="noopener noreferrer">논문 원문 보기 <span aria-label="새 창">↗</span></a></div>,
@@ -191,7 +192,6 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
         <button type="button" className="text-link research-copy" aria-label="이 연구를 바로 여는 링크 복사" onClick={()=>copyStudy(claim.id)}><Share2 size={15} aria-hidden="true"/>이 연구 공유</button>
       </article>;
     })}
-    {visibleStudies.length > 0 ? <div className="research-library-next"><a className="button outline" href="#products">셀핀다 제품 구성 확인 →</a></div> : null}
     <p role="status" aria-live="polite">{linkStatus}</p>
     {manualLink?<label>연구 공유 링크<input className="research-manual-link" value={manualLink} readOnly onFocus={event=>event.target.select()}/></label>:null}
   </section>;
