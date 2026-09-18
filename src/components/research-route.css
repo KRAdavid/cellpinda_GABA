@@ -6,7 +6,13 @@
 .research-gateway{display:flex;align-items:center;justify-content:space-between;gap:28px;border-top:1px solid #dfe8e1;border-bottom:1px solid #dfe8e1}
 .research-gateway h2{margin:10px 0;font-size:clamp(28px,4vw,42px);line-height:1.28;letter-spacing:-.04em}
 .research-gateway p:not(.chapter){max-width:48ch;color:#53675a;line-height:1.7}
+.research-gateway-actions{display:grid;justify-items:start;gap:12px;flex:0 0 auto}
+.research-gateway-product-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:#176b47;font-size:15px;font-weight:600;text-underline-offset:4px}
 .research-route-footer{padding-top:28px;padding-bottom:28px}
+.research-route-product{display:flex;align-items:center;justify-content:space-between;gap:28px;padding-top:44px;padding-bottom:44px;border-top:1px solid #dfe8e1}
+.research-route-product h2{margin:10px 0;font-size:clamp(26px,4vw,38px);line-height:1.3;letter-spacing:-.04em}
+.research-route-product p:not(.chapter){max-width:48ch;color:#53675a;line-height:1.7}
+.research-route-product>.button{flex:0 0 auto}
 @media(max-width:680px){
   .research-route-header{height:72px;padding:0 20px}
   .research-route-header nav{display:flex!important;position:static;gap:0;padding:0;background:transparent;box-shadow:none}
@@ -14,6 +20,10 @@
   .research-route-intro h1{font-size:40px}
   .research-route-intro>p:last-child{font-size:16px}
   .research-gateway{align-items:flex-start;flex-direction:column}
+  .research-gateway-actions{width:100%}
+  .research-gateway-actions>.button{width:100%;justify-content:center}
+  .research-route-product{align-items:flex-start;flex-direction:column;padding-top:32px;padding-bottom:32px}
+  .research-route-product>.button{width:100%;justify-content:center}
 }
 
 /* Keep the research scope simple and distinguish it from product information. */

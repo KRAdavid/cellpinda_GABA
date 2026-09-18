@@ -146,6 +146,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(!content.claims.some(claim => claim.id === 'research-steenbergen-2015'), 'live public research must exclude the retracted action-selection paper');
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
     assert.ok(byun2018?.metadata?.consumerContext?.includes('30명') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show the participant split and both groups');
+    const powers2008 = content.claims.find(claim => claim.id === 'research-powers-2008');
+    assert.ok(powers2008?.metadata?.consumerFindingFirst === true && powers2008.metadata.consumerFinding?.includes('두 검사에서 모두') && powers2008.metadata.consumerFinding.includes('섭취 30분 뒤') && !powers2008.metadata.consumerDetail, 'live Powers study must lead with its clear consumer finding without repeating a second paragraph');
     assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerDisclosure?.includes('Pharma Foods International'), 'live consumer research must show disclosed funding and author relationships');
     assert.ok(content.claims.find(claim => claim.id === 'research-yoto-2012')?.metadata?.consumerDisclosure?.includes('저자 9명 중 4명'), 'live Yoto study must show the published author affiliation disclosure');
     assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerContext?.includes('그룹 간 효과는 확정적으로 해석하기 어려워요') && !content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerVisual, 'live Sakashita study must surface the source discrepancy and omit the disputed chart');

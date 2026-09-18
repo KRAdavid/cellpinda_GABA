@@ -241,6 +241,10 @@ for (const [id, kind] of featuredFindings) {
   catch { fail(`consumer visualization for ${id} does not match the approved public data shape`); }
   if (/셀핀다.{0,15}(?:효과|개선)|(?:효과|개선).{0,15}셀핀다/.test(claim.metadata.consumerFinding)) fail(`research finding ${id} implies a Cellpinda product effect`);
 }
+const powers = claimsById.get('research-powers-2008');
+if (powers?.metadata?.consumerFindingFirst !== true || !powers.metadata.consumerFinding?.includes('두 검사에서 모두') || !powers.metadata.consumerFinding.includes('섭취 30분 뒤') || powers.metadata.consumerDetail) fail('Powers study must export its clear finding before secondary details');
+const powersIndexRecord = recordsById.get('research-powers-2008');
+if (powersIndexRecord?.consumerFindingFirst !== true) fail('public GABA master index must preserve the reviewed Powers finding-first presentation');
 for (const [topic, ids] of Object.entries(coverage)) {
   if (!ids.some(id => recordsById.has(id))) fail(`required ${topic} research is missing`);
 }

@@ -128,7 +128,7 @@ test('Running local API refreshes changed source ledger and publishes reviewed e
   ],products:[],reviews:[]};
   const latest={claims:[
     {id:'study-hold',status:'hold',holdReason:'통계 검토가 끝날 때까지 공개 보류',publicText:'새 원장 문구',sources:[{title:'Study',url:'https://example.com/study'}]},
-    {id:'visual-study',status:'approved',publicText:'사람 연구 요약',sources:[{title:'Study',url:'https://example.com/visual'}],metadata:{consumerSummary:'연구에서 살펴본 수치를 그림으로 확인해요.',consumerContext:'성인 참가자가 정해진 조건에서 참여했어요.',consumerDisclosure:'연구비 지원 내용을 논문에 공개했어요.',consumerDetail:'실제 연구 조건을 쉬운 말로 설명해요.',consumerVisual:{kind:'metric-pair',participantLabel:'성인 40명',metrics:[{label:'측정 항목',value:'4주',unit:'기간',comparison:'정해진 연구 조건'}]}}},
+    {id:'visual-study',status:'approved',publicText:'사람 연구 요약',sources:[{title:'Study',url:'https://example.com/visual'}],metadata:{consumerSummary:'연구에서 살펴본 수치를 그림으로 확인해요.',consumerContext:'성인 참가자가 정해진 조건에서 참여했어요.',consumerDisclosure:'연구비 지원 내용을 논문에 공개했어요.',consumerDetail:'실제 연구 조건을 쉬운 말로 설명해요.',consumerFindingFirst:true,consumerVisual:{kind:'metric-pair',participantLabel:'성인 40명',metrics:[{label:'측정 항목',value:'4주',unit:'기간',comparison:'정해진 연구 조건'}]}}},
     {id:'reviewed-copy',status:'approved',publicText:'원장 문구 변경',sources:[{title:'Study',url:'https://example.com/reviewed'}]},
     {id:'new-study',status:'approved',publicText:'새로 추가된 공개 연구',sources:[{title:'Study',url:'https://example.com/new'}]},
   ],products:[],reviews:[]};
@@ -146,6 +146,7 @@ test('Running local API refreshes changed source ledger and publishes reviewed e
     assert.equal(claims.get('visual-study').metadata.consumerContext,'성인 참가자가 정해진 조건에서 참여했어요.');
     assert.equal(claims.get('visual-study').metadata.consumerDisclosure,'연구비 지원 내용을 논문에 공개했어요.');
     assert.equal(claims.get('visual-study').metadata.consumerDetail,'실제 연구 조건을 쉬운 말로 설명해요.');
+    assert.equal(claims.get('visual-study').metadata.consumerFindingFirst,true);
     assert.equal(claims.get('reviewed-copy').publicText,'운영자가 직접 검토한 문구');
     assert.equal(claims.get('new-study').publicText,'새로 추가된 공개 연구');
     assert.equal(store.adminContent().find(item=>item.id==='study-hold').status,'hold');

@@ -605,7 +605,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
     <section className="fatigue-game" id="focus-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
         <div><p className="fatigue-game-kicker">02 / 약 1분 · 24개 신호</p><h2 id="fatigue-game-heading">뇌 컨디션 확인 챌린지</h2></div>
-        <p>보고, 누르고, 멈추는 짧은 반응 게임이에요.</p>
+        <p>색 신호에 맞춰 누르거나 멈추는 1분 게임이에요. 점수로 뇌 피로나 건강 상태를 판단하지 않아요.</p>
       </div>
 
       <div className={`fatigue-game-panel fatigue-game-phase-${phase}`}>
@@ -703,7 +703,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
             <p className="fatigue-game-kicker">오늘의 반응 기록</p>
             <h3>오늘 게임을 마쳤어요.</h3>
             <p className="fatigue-game-result-score">{before.total}개 신호 중 {before.correct}개를 맞혔어요.</p>
-            <p className="fatigue-game-result-disclosure">이 점수는 오늘 게임의 정답 기록이에요. 뇌 피로를 진단하는 검사는 아니에요.</p>
+            <p className="fatigue-game-result-disclosure">오늘 게임에서 맞힌 비율이에요. 뇌 피로나 건강 상태를 측정한 값은 아니에요.</p>
             <p className="fatigue-game-result-guidance" role="status">원하면 5분 쉬었다가 다른 신호로 한 번 더 해보세요. 친구에게 보내 함께 해봐도 좋아요.</p>
             <details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details>
             <div className="fatigue-game-actions">
@@ -749,7 +749,6 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <p className="fatigue-game-viral-copy">친구도 직접 해보도록 챌린지를 보내 보세요.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>처음부터 다시 하기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 잠·휴식 답변이 포함되지 않아요.</p> : null}
         </div> : null}
       </div>
-      <p className="fatigue-game-note">이건 건강 검사가 아닌 짧은 반응 게임이에요.</p>
     </section>
   );
 }

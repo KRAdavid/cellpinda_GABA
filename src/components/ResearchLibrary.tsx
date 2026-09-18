@@ -12,6 +12,7 @@ export type ResearchMetadata = {
   consumerDisclosure?: string;
   consumerVisual?: ConsumerVisual;
   consumerScope?: string;
+  consumerFindingFirst?: boolean;
   hopefulTakeaway?: string;
   studyType?: string;
   population?: string;
@@ -153,13 +154,16 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   }
   function renderStudy(claim: Claim, featured = false) {
     const metadata = claim.metadata!;
-    const takeaway = metadata.consumerVisual
+    const findingFirst = Boolean(metadata.consumerFindingFirst && !metadata.consumerVisual && metadata.consumerFinding);
+    const takeaway = findingFirst
+      ? metadata.consumerFinding
+      : metadata.consumerVisual
       ? metadata.consumerScope || metadata.consumerSummary || metadata.consumerFinding
       : metadata.consumerSummary || metadata.consumerFinding || metadata.consumerScope;
     return <article id={claim.id} className={`research-library-card${featured ? ' research-library-card-featured' : ''}`} key={claim.id}>
       <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType, metadata.dose)}</p>
       <h3>{metadata.question || claim.topic}</h3>
-      {takeaway ? <p className="research-library-consumer-summary"><strong>연구는 이렇게 진행됐어요</strong>{takeaway}</p> : null}
+      {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{findingFirst ? '사람 연구에서 관찰된 변화' : '연구는 이렇게 진행됐어요'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}
       <details className="research-detail" onToggle={event => {
         if (event.currentTarget.open) onOpen?.(claim.id);

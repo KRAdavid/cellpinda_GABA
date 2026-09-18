@@ -59,8 +59,8 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
   return <section id="reviews" className="section sage review-experience" aria-labelledby="review-heading">
     <div className="wrap">
       <div className="section-head">
-        <div><p className="chapter">구매자 후기</p><h2 id="review-heading">{quotes.length?<>먼저 구매한 사람들의<br/>후기를 읽어보세요.</>:destinations.length?<>가바 1500 구매자<br />후기를 확인해 보세요.</>:<>구매자 후기를<br />확인해 보세요.</>}</h2></div>
-        <p>언제 썼는지, 얼마나 사용했는지 함께 살펴보세요.<br />제품 구성도 나란히 확인할 수 있어요.</p>
+        <div><p className="chapter">구매자 후기</p><h2 id="review-heading">{quotes.length?<>먼저 구매한 사람들의<br/>후기를 읽어보세요.</>:destinations.length?<>스마트스토어에서<br />가바 1500 후기를 읽어보세요.</>:<>구매자 후기를<br />확인해 보세요.</>}</h2></div>
+        <p>{quotes.length ? <>언제 썼는지, 얼마나 사용했는지 함께 살펴보세요.<br />제품 구성도 나란히 확인할 수 있어요.</> : <>실제 구매자 후기는 스마트스토어에서 확인할 수 있어요.<br />작성일과 사용 기간도 함께 살펴보세요.</>}</p>
       </div>
       {quotes.length>0&&<div className="review-quotes">
         <p>이 사이트에 소개한 구매자 후기예요. 구매한 이유와 사용 기간을 함께 살펴보세요.</p>
@@ -77,12 +77,12 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
       <div className={`review-experience-layout${quotes.length ? '' : ' review-experience-layout-destination-only'}`}>
         {destinations.length > 0 ? <div className="review-experience-destination">
           <span className="review-experience-label">스마트스토어 구매자 후기</span>
-          <h3>후기를 읽고, 사용 기간도 확인하세요.</h3>
+          <h3>구매자가 남긴 후기를 읽어보세요.</h3>
           {destinations.map(({ review, url, productId, label }) => <div key={review.id}>
             <p>{review.publicText}</p>
             <a className="button" href={url} target="_blank" rel="noopener noreferrer" onClick={() => onOpen?.(productId)}>{label} <span aria-label="새 창">↗</span></a>
           </div>)}
-          <p className="review-experience-context">후기는 한 사람의 경험이에요. 작성 날짜와 사용 기간, 제품 구성도 함께 확인해 보세요.</p>
+          <p className="review-experience-context">스마트스토어에 올라온 구매자 경험이에요. 작성일과 사용 기간, 제품 구성을 함께 살펴보세요.</p>
         </div> : null}
         {(quotes.length > 0 || destinations.length > 0) ? <div className="review-experience-questions" aria-label={quotes.length > 0 ? '후기를 읽을 때 확인할 세 가지' : '스마트스토어 후기를 읽을 때 확인할 세 가지'}>
           {readingQuestions.map((question, index) => <article key={question.title}>

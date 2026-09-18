@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "validate:repo-privacy": "node scripts/validate-repo-privacy.mjs",
+    "audit:history-privacy": "node scripts/audit-history-privacy.mjs",
     "dev": "node scripts/dev.mjs",
     "sync:data": "node scripts/sync-public-data.mjs",
     "audit:materials": "node scripts/audit-local-materials.mjs",

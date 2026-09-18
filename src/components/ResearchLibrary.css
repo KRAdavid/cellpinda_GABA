@@ -50,6 +50,7 @@
 .research-library-card h3{max-width:30ch;font-size:clamp(1.45rem,2.7vw,2.2rem);line-height:1.38;margin:.9rem 0 1.25rem}
 .research-library-consumer-summary{max-width:62ch;margin:0;line-height:1.85;font-size:1.05rem;color:#18382b}
 .research-library-consumer-summary strong{display:block;margin:0 0 .45rem;color:#158457;font-size:.74rem;letter-spacing:.1em;font-weight:650}
+.research-library-consumer-summary.research-library-consumer-finding{max-width:760px;margin:8px 0 16px;padding:18px 20px;border-left:4px solid #38a66b;border-radius:0 10px 10px 0;background:#f1f7f2;font-size:clamp(1rem,1.5vw,1.125rem);font-weight:550;line-height:1.75}
 .research-library-quick-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:1.7rem 0 1.25rem;max-width:900px}
 .research-library-quick-facts>div{display:flex;align-items:flex-start;gap:10px;min-width:0;min-height:100px;padding:14px 15px;border:1px solid #e0e8e1;border-top:3px solid #9ac8aa;border-radius:7px;background:#fff}
 .research-library-quick-facts svg{color:#158457;flex:0 0 auto;margin-top:2px}
