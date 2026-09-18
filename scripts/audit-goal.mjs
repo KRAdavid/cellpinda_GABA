@@ -140,8 +140,9 @@ const allRolesPresent = roles.goalId === contract.goalId && roles.status === con
 check('tf-role-registry', allRolesPresent ? 'MET' : 'INVALID', allRolesPresent ? `${roleCoverage.length}개 교차 검토 역할군이 계약·그래프에 연결됨` : '역할 레지스트리와 계약·그래프가 일치하지 않음', ['data/tf-role-registry.json', 'scripts/validate-tf-pulse.mjs'], allRolesPresent ? [] : ['역할 ID·매칭어·Goal Contract 연결 확인']);
 
 const publicProductOk = content.products?.length === 1 && content.products[0]?.id === 'gaba1500' && !content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750'));
-const masterOk = master.records?.length === 8 && master.records.every(record => record.id?.startsWith('research-'));
-check('public-master-index', publicProductOk && masterOk ? 'MET' : 'INVALID', publicProductOk && masterOk ? '승인 연구 8건과 gaba1500 단일 제품 export 확인' : '공개 export 범위가 계약과 다름', ['public/data/content.json', 'public/data/gaba-master-index.json', 'scripts/sync-public-data.mjs'], publicProductOk && masterOk ? [] : ['공개 export 재생성·검증']);
+const approvedResearchCount = content.claims?.filter(claim => claim.id?.startsWith('research-')).length ?? 0;
+const masterOk = approvedResearchCount > 0 && master.records?.length === approvedResearchCount && master.records.every(record => record.id?.startsWith('research-'));
+check('public-master-index', publicProductOk && masterOk ? 'MET' : 'INVALID', publicProductOk && masterOk ? `승인 연구 ${approvedResearchCount}건과 gaba1500 단일 제품 export 확인` : '공개 export 범위가 계약과 다름', ['public/data/content.json', 'public/data/gaba-master-index.json', 'scripts/sync-public-data.mjs'], publicProductOk && masterOk ? [] : ['공개 export 재생성·검증']);
 
 const taskCounts = Object.fromEntries((graph.stateMachine || []).map(state => [state, (graph.tasks || []).filter(task => task.state === state).length]));
 const requiredGates = [

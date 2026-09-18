@@ -142,8 +142,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
     const review2020 = content.claims.find(claim => claim.id === 'research-review-2020');
     assert.ok(review2020?.metadata?.consumerFinding?.includes('2020년 2월까지') && review2020.metadata.consumerFinding.includes('14편') && review2020.metadata.consumerFinding.includes('제품·양·기간·확인 방법'), 'live research review must give its date range and variation in study conditions in plain language');
-    const yoon2022 = content.claims.find(claim => claim.id === 'research-yoon-2022');
-    assert.ok(yoon2022?.metadata?.consumerSummary?.includes('54명이 연구를 시작해 50명이 4주를 마쳤어요') && yoon2022.metadata.consumerSummary.includes('수면 기록') && !yoon2022.metadata.consumerFinding, 'live Yoon study must present its study scope without an unsupported efficacy takeaway');
+    assert.ok(!content.claims.some(claim => claim.id === 'research-yoon-2022'), 'live public research must exclude the Yoon study while the result discrepancy is unresolved');
+    assert.ok(!content.claims.some(claim => claim.id === 'research-steenbergen-2015'), 'live public research must exclude the retracted action-selection paper');
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
     assert.ok(byun2018?.metadata?.consumerContext?.includes('30명') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show the participant split and both groups');
     assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerDisclosure?.includes('Pharma Foods International'), 'live consumer research must show disclosed funding and author relationships');

@@ -53,9 +53,11 @@ if (!Array.isArray(content.claims) || content.claims.length === 0) fail('claims 
 if (!Array.isArray(master.records) || master.records.length === 0) fail('master records are required');
 if (master.records.length !== content.claims.filter(claim => String(claim.id).startsWith('research-')).length) fail('research and master counts differ');
 const publicResearchRecords = content.claims.filter(claim => String(claim.id).startsWith('research-'));
+if (publicResearchRecords.some(claim => ['research-yoon-2022', 'research-steenbergen-2015'].includes(claim.id))) fail('held or retracted studies must not appear in the public research export');
 const relationshipDisclosures = publicResearchRecords.filter(claim => claim.metadata?.consumerDisclosure);
 if (relationshipDisclosures.length < 4 || relationshipDisclosures.some(claim => !master.records.find(record => record.id === claim.id)?.consumerDisclosure)) fail('public study relationship disclosures must be preserved in the master index');
-if (!researchComponent.includes("right.id==='research-review-2020'")) fail('research overview must be shown before individual study examples');
+if (!researchComponent.includes('preferredStudyOrder') || !researchComponent.includes("'research-byun-2018'") || !researchComponent.includes("'research-review-2020'") || !researchComponent.includes('const featuredStudy = visibleStudies[0]')) fail('a concrete visualized human study must appear before the research filters and overview');
+if (!researchComponent.includes('이 연구는 셀핀다 가바 1,500을 시험하지 않았어요.') || !researchComponent.includes('research-library-product-boundary')) fail('each study card must state beside the result that it did not test Cellpinda’s finished product');
 
 const forbiddenKeys = /^(original|rightsEvidence|rightsScope|privatePath|customer|email|phone|answers|token|operatorToken|adminToken)$/i;
 const scanKeys = (value, path = '$') => {

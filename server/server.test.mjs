@@ -119,6 +119,40 @@ test('Local seed claims refresh consumer copy without overwriting reviewed edits
   } finally {store?.close();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
 
+test('Running local API refreshes changed source ledger and publishes reviewed evidence visuals',()=>{
+  const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));const dbPath=join(directory,'db.sqlite');const seedPath=join(directory,'content.json');
+  const initial={claims:[
+    {id:'study-hold',status:'approved',publicText:'기존 공개 문구',sources:[{title:'Study',url:'https://example.com/study'}]},
+    {id:'visual-study',status:'approved',publicText:'수면 연구 요약',sources:[{title:'Study',url:'https://example.com/visual'}],metadata:{consumerSummary:'연구에서 살펴본 내용을 소개해요.'}},
+    {id:'reviewed-copy',status:'approved',publicText:'원장 문구',sources:[{title:'Study',url:'https://example.com/reviewed'}]},
+  ],products:[],reviews:[]};
+  const latest={claims:[
+    {id:'study-hold',status:'hold',holdReason:'통계 검토가 끝날 때까지 공개 보류',publicText:'새 원장 문구',sources:[{title:'Study',url:'https://example.com/study'}]},
+    {id:'visual-study',status:'approved',publicText:'사람 연구 요약',sources:[{title:'Study',url:'https://example.com/visual'}],metadata:{consumerSummary:'연구에서 살펴본 수치를 그림으로 확인해요.',consumerContext:'성인 참가자가 정해진 조건에서 참여했어요.',consumerDisclosure:'연구비 지원 내용을 논문에 공개했어요.',consumerDetail:'실제 연구 조건을 쉬운 말로 설명해요.',consumerVisual:{kind:'metric-pair',participantLabel:'성인 40명',metrics:[{label:'측정 항목',value:'4주',unit:'기간',comparison:'정해진 연구 조건'}]}}},
+    {id:'reviewed-copy',status:'approved',publicText:'원장 문구 변경',sources:[{title:'Study',url:'https://example.com/reviewed'}]},
+    {id:'new-study',status:'approved',publicText:'새로 추가된 공개 연구',sources:[{title:'Study',url:'https://example.com/new'}]},
+  ],products:[],reviews:[]};
+  let store;
+  try {
+    writeFileSync(seedPath,JSON.stringify(initial),'utf8');
+    store=createStore({dbPath,seedPath});
+    store.update('reviewed-copy',{revision:1,reason:'Operator reviewed copy',publicText:'운영자가 직접 검토한 문구',status:'approved'});
+    writeFileSync(seedPath,JSON.stringify(latest),'utf8');
+    const content=store.publicContent();
+    const claims=new Map(content.claims.map(item=>[item.id,item]));
+    assert.equal(claims.has('study-hold'),false);
+    assert.equal(claims.get('visual-study').publicText,'사람 연구 요약');
+    assert.deepEqual(claims.get('visual-study').metadata.consumerVisual,{kind:'metric-pair',participantLabel:'성인 40명',metrics:[{label:'측정 항목',value:'4주',unit:'기간',comparison:'정해진 연구 조건'}]});
+    assert.equal(claims.get('visual-study').metadata.consumerContext,'성인 참가자가 정해진 조건에서 참여했어요.');
+    assert.equal(claims.get('visual-study').metadata.consumerDisclosure,'연구비 지원 내용을 논문에 공개했어요.');
+    assert.equal(claims.get('visual-study').metadata.consumerDetail,'실제 연구 조건을 쉬운 말로 설명해요.');
+    assert.equal(claims.get('reviewed-copy').publicText,'운영자가 직접 검토한 문구');
+    assert.equal(claims.get('new-study').publicText,'새로 추가된 공개 연구');
+    assert.equal(store.adminContent().find(item=>item.id==='study-hold').status,'hold');
+    assert.ok(store.history().some(item=>item.reason.includes('source ledger safety hold')));
+  } finally {store?.close();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
+});
+
 test('Rate limit rejects excess local requests',async()=>{
   const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));
   const {server}=createApi({dbPath:join(directory,'db.sqlite'),tokenPath:join(directory,'token'),seed,rateLimit:2});

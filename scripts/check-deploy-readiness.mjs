@@ -26,12 +26,15 @@ for(const type of ['active','sleep','irregular','sensory','unrested','steady']) 
 try {
   const content=readJson('public/data/content.json');
   const master=readJson('public/data/gaba-master-index.json');
+  const ledger=readJson('data/content-ledger.json');
   const queue=readJson('public/data/operations-queue.json');
   const audit=readJson('public/data/goal-audit.json');
   const meetingPacket=readJson('public/data/tf-meeting-packet.json');
   const taskGraph=readJson('data/task-graph.json');
+  const approvedResearch=(ledger.claims || []).filter(item=>item.status==='approved' && item.id?.startsWith('research-'));
+  const masterIds=new Set((master.records || []).map(record=>record.id));
   check('public-product-scope',content.products?.length===1 && content.products[0]?.id==='gaba1500' && !content.products.some(item => item.id === 'gaba750' || Number(item.amountMg) === 750 || String(item.name || '').includes('750')),'gaba1500 only');
-  check('master-index',master.records?.length===8 && master.records.every(record=>record.id?.startsWith('research-')),'8 approved research records');
+  check('master-index',master.records?.length===approvedResearch.length && master.records?.length===masterIds.size && master.records.every(record=>record.id?.startsWith('research-')) && approvedResearch.every(claim=>masterIds.has(claim.id)),`${approvedResearch.length} approved research records match the source ledger`);
   check('operations-queue',queue.tasks?.length===taskGraph.tasks?.length && queue.goalId==='GL-2026-CELL-GABA-001',`${taskGraph.tasks?.length ?? 0} tasks for active Goal Contract`);
   check('goal-audit',audit.mode==='public_goal_audit' && audit.goalId===queue.goalId && audit.gates?.length===queue.tasks.filter(task=>['VERIFYING','WAITING','BACKLOG'].includes(task.state)).length,'public audit packet tied to operations queue');
   check('tf-meeting-packet',meetingPacket.mode==='public_tf_meeting_packet' && meetingPacket.goalId===queue.goalId && meetingPacket.snapshotHash===queue.pulse?.snapshotHash && meetingPacket.agenda?.length===queue.pulse?.activeTasks && meetingPacket.executionPolicy?.autoStates?.includes('READY') && meetingPacket.executionPolicy?.humanReviewStates?.includes('VERIFYING'),'public TF meeting packet tied to current pulse and execution boundary');

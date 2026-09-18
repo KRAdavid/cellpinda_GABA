@@ -40,7 +40,7 @@ const consumerFlow = ['<RhythmExperience', '<BrainLoadEvidence', '<GabaStory', '
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
-requireMatch(app, /여러 사람 연구를 소개해요\. 연구에 쓴 방법과 제품은 셀핀다 가바 1500과 다를 수 있어요\./, 'research route must explain the evidence scope in plain language');
+requireMatch(app, /GABA 사람 연구를 소개해요\. 셀핀다 가바 1,500 완제품을 시험한 결과는 아니에요\./, 'research route must directly distinguish independent research from the finished product');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
 requireMatch(app, /description='연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉬운 말과 그림으로 소개합니다\.'/ , 'research route metadata must use plain language');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
@@ -69,7 +69,7 @@ if (/className="section empathy"/.test(app)) fail('the landing flow must not rep
 requireMatch(app, /className="mobile-break"/, 'mobile hero headline must wrap intentionally instead of clipping');
 requireMatch(styles, /@media\(max-width:680px\)\{\.header>\.button\{display:none\}\.menu-toggle\{display:flex;[^}]*width:44px;height:44px/, 'mobile header must keep its menu toggle inside the viewport');
 requireMatch(research, /research-method-filter[\s\S]*연구 방법[\s\S]*더보기/, 'research method filter must stay behind an optional consumer-friendly control');
-requireMatch(researchStyles, /@media\(max-width:700px\)\{\.research-reading-path\{display:grid;grid-template-columns:1fr/, 'mobile research reading steps must stack instead of squeezing into narrow columns');
+requireMatch(researchStyles, /research-library-card-featured \.research-library-quick-facts\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'the first mobile research result must keep its core study facts compact and readable');
 requireMatch(fatigueGame, /화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요/, 'five-minute breathing must explain both visual-follow and screen-free audio options');
 if (/휴대폰을 뒤집어 두고 공의 움직임을 따라/.test(fatigueGame)) fail('breathing guidance must not ask readers to look at an animation while turning the phone over');
 for (const marker of ['퇴근했는데도', '계속 나나요', '잠과 휴식 1분 체크', 'GABA는 뇌세포 사이에서', '스마트스토어']) {
@@ -79,14 +79,15 @@ if (/일이 끝나도 머리가 쉬지 않으신가요|일이 끝나도 머리�
 if (/gaba-master-index\.json/.test(app + indexHtml)) fail('consumer pages must not send readers to a raw research data file');
 requireMatch(research, /id="research"[^>]*aria-label="연구를 쉬운 말로 보기"/, 'research section must retain an accessible consumer label');
 if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');
-requireMatch(research, /research-reading-path[\s\S]*Search[\s\S]*UsersRound[\s\S]*Activity/, 'research reading path must show topic, participants and measured changes with icons');
+requireMatch(research, /const featuredStudy = visibleStudies\[0\][\s\S]*renderStudy\(featuredStudy, true\)/, 'a concrete research result must appear before search and filters');
+requireMatch(research, /research-library-product-boundary[\s\S]*이 연구는 셀핀다 가바 1,500을 시험하지 않았어요/, 'research cards must keep product scope beside the study result');
 requireMatch(research, /연구 내용 더 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
 requireMatch(researchRouteHtml, /GABA 사람 연구 읽기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*research-gateway/, 'the GABA explanation and teaser must lead to a separate, easy-to-find research route');
 requireMatch(research, /canonicalStudySources/, 'research list must suppress duplicate records of the same paper across all source links');
-requireMatch(research, /어떤 주제가 궁금하세요/, 'research list must have a clear consumer heading');
+requireMatch(research, /사람 연구 한 편 먼저 보기/, 'research list must have a direct consumer heading');
 requireMatch(story, /GABA 사람 연구 읽기/, 'GABA introduction must link to the separate research route');
 if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(app + story)) fail('a study result must appear in only one detailed research section');
 for (const marker of ['study-time-comparison', 'study-paired-groups', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
