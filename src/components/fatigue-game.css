@@ -71,3 +71,44 @@
 .fatigue-target-visual-group{display:grid;justify-items:center;gap:10px}
 .fatigue-target-label{color:#fff;font-size:16px;font-weight:750;letter-spacing:-.035em;line-height:1}
 @media(max-width:760px){.fatigue-target-label{font-size:15px}}
+
+.fatigue-game-onboarding{display:grid;justify-items:center;gap:20px;max-width:680px;margin:0 auto;text-align:center}
+.fatigue-game-onboarding>.fatigue-game-kicker{margin:0}
+.fatigue-game-onboarding h3{margin:0;color:#18382b;font-size:clamp(30px,5vw,46px);font-weight:550;letter-spacing:-.055em;line-height:1.22}
+.fatigue-game-rule-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(100%,500px)}
+.fatigue-game-rule-card{display:flex;align-items:center;justify-content:center;gap:12px;min-height:94px;padding:14px 18px;border:1px solid #d6e2d7;border-radius:12px;background:#fff;text-align:left}
+.fatigue-game-rule-card>span:last-child{display:grid;gap:3px}.fatigue-game-rule-card strong{color:#18382b;font-size:18px}.fatigue-game-rule-card small{color:#53695c;font-size:14px}
+.fatigue-rule-symbol{display:grid;place-items:center;width:50px;height:50px;flex:0 0 50px;border-radius:50%;font-size:23px;font-weight:750}
+.fatigue-rule-symbol-press{background:#e6f4eb;color:#17814f}.fatigue-rule-symbol-stop{background:#fff0ee;color:#c53f35}
+.fatigue-game-onboarding-actions{display:grid;justify-items:center;gap:9px;width:min(100%,360px)}
+.fatigue-game-onboarding-actions>.rhythm-button,.fatigue-game-practice-complete>.rhythm-button{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:56px;margin:0;border-radius:9px;font-size:16px}
+.fatigue-game-onboarding-actions>.fatigue-game-sound-toggle{width:auto;min-height:44px;padding:7px 12px;border:0;background:transparent;color:#53695c;font-size:14px}
+.fatigue-game-onboarding-actions>.fatigue-game-sound-toggle:hover{background:#eaf2e9}
+.fatigue-game-skip-practice{min-height:42px;color:#53695c;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.fatigue-game-method{width:min(100%,620px);margin-top:2px;border-top:1px solid #d9e5dc;text-align:left}
+.fatigue-game-method>summary{min-height:44px;padding:13px 0 5px;color:#53695c;font-size:14px;font-weight:600;cursor:pointer}
+.fatigue-game-method>p{max-width:none;margin:8px 0 12px;color:#53695c;font-size:14px;line-height:1.75}
+.fatigue-game-method>div{display:flex;flex-wrap:wrap;gap:8px 18px;padding-bottom:6px}
+.fatigue-game-method a{display:inline-flex;align-items:center;gap:4px;color:#2e6d47;font-size:13px;text-underline-offset:3px}
+.fatigue-game-result-details{margin:12px 0 16px;border-top:1px solid #d9e5dc;border-bottom:1px solid #d9e5dc;text-align:left}
+.fatigue-game-result-details>summary{min-height:44px;padding:12px 0;color:#315842;font-size:14px;font-weight:600;cursor:pointer}
+.fatigue-game-result-details>p{max-width:760px;margin:2px 0 12px;color:#53695c;font-size:14px;line-height:1.7}
+.fatigue-game-result-details .fatigue-game-score-grid{margin:4px 0 14px}
+.fatigue-game-practice{display:grid;justify-items:center;gap:18px;min-height:350px;align-content:center;text-align:center}
+.fatigue-game-practice>.fatigue-game-kicker{margin:0}.fatigue-game-practice h3{max-width:660px;margin:0;color:#18382b;font-size:clamp(25px,4vw,36px);font-weight:550;letter-spacing:-.045em;line-height:1.35}
+.fatigue-practice-signal{display:grid;justify-items:center;align-content:center;gap:5px;width:164px;height:164px;border:0;border-radius:50%;color:#fff;box-shadow:0 10px 30px rgba(25,55,39,.16)}
+.fatigue-practice-signal-press{background:#16894f;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+.fatigue-practice-signal-press:hover{transform:scale(1.04);box-shadow:0 14px 36px rgba(25,55,39,.22)}
+.fatigue-practice-signal>span{font-size:32px;line-height:1}.fatigue-practice-signal>strong{font-size:20px}.fatigue-practice-signal>small{font-size:14px;opacity:.92}
+.fatigue-practice-signal-stop{background:#bd4338}.fatigue-practice-timer{width:min(100%,260px);height:5px;overflow:hidden;border-radius:99px;background:#e0e7e0}.fatigue-practice-timer span{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left center;background:#bd4338;transition:transform 3s linear}
+.fatigue-game-practice>p:not(.fatigue-game-kicker){max-width:500px;margin:0;color:#53695c;font-size:16px;line-height:1.7}
+.fatigue-game-practice>.fatigue-practice-feedback{font-weight:650;color:#2e6d47!important}
+.fatigue-game-practice-complete>.rhythm-button{margin-top:4px}.fatigue-game-practice-complete>.rhythm-text-button{min-height:42px;color:#53695c;text-decoration:underline;text-underline-offset:3px}
+.fatigue-game-practice h3:focus{outline:none}
+.fatigue-trial-progress{display:grid;grid-template-columns:56px minmax(0,1fr);align-items:center;gap:8px;height:28px;text-align:left}
+.fatigue-trial-progress>span{color:#53695c;font-size:11px;font-variant-numeric:tabular-nums}
+.fatigue-trial-progress .fatigue-trial-dots{justify-content:flex-end;gap:clamp(4px,1vw,8px);margin:0}
+.fatigue-game-onboarding :focus-visible,.fatigue-game-practice :focus-visible{outline:3px solid #158457;outline-offset:4px}
+@media(max-width:760px){.fatigue-game-onboarding{gap:16px}.fatigue-game-rule-cards{gap:9px}.fatigue-game-rule-card{min-height:88px;gap:9px;padding:12px 9px}.fatigue-rule-symbol{width:42px;height:42px;flex-basis:42px}.fatigue-game-rule-card strong{font-size:16px}.fatigue-game-rule-card small{font-size:13px}.fatigue-game-practice{min-height:340px;gap:16px}.fatigue-practice-signal{width:148px;height:148px}}
+@media(max-width:390px){.fatigue-game-rule-cards{grid-template-columns:1fr;width:min(100%,320px)}.fatigue-game-rule-card{justify-content:flex-start;padding-left:22px}.fatigue-game-practice h3{font-size:25px}}
+@media(prefers-reduced-motion:reduce){.fatigue-practice-signal-press,.fatigue-practice-timer span{transition:none}}

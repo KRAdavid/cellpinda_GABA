@@ -101,7 +101,7 @@ for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 �
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
-for (const marker of ['1분 집중 신호 게임', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '할 때마다 달라집니다', '24개 신호 완료', '5분 쉬고 한 번 더 하기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '건강 상태나 휴식 효과를 재는 검사가 아닙니다', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 1분 게임 보내기']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['1분 집중 신호 게임', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 달라지는 신호', '24개 신호 완료', '5분 쉬고 한 번 더 하기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '뇌 피로나 건강 상태를 진단하지 않습니다', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 1분 게임 보내기', '먼저 두 번 연습하기', '연습 1 / 2', '연습 2 / 2', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
 if (/needsFocusRecovery|FOCUS_GAME_RECOVERY_THRESHOLD_PCT|쉬고 난 뒤 게임 기록이 좋아졌어요|휴식 후/.test(fatigueGame)) fail('focus game must not use a score threshold as a recovery diagnosis or mislabel a second run');
 for (const marker of ['게임 효과음', 'playGameCue(\'start\')', 'playGameCue(\'signal\')', 'playGameCue(\'stage\')', 'playGameCue(\'complete\')', 'playGameCue(\'false-start\')']) requireMatch(fatigueGame, new RegExp(marker.replace(/[()]/g, '\\$&')), `focus game sound cue ${marker} is missing`);
 requireMatch(fatigueGame, /playGameCue\(correct \? 'correct' : 'miss'\)/, 'focus game must sound its response judgment');
@@ -109,6 +109,12 @@ requireMatch(fatigueGame, /toggleGameSound[\s\S]*aria-pressed=\{gameSoundEnabled
 requireMatch(fatigueGameStyles, /\.fatigue-game-sound-toggle[\s\S]*\.fatigue-game-sound-icon/, 'focus game sound controls must be styled');
 if (/speechSynthesis|SpeechSynthesisUtterance/.test(fatigueGame)) fail('five-minute rest must not play spoken narration');
 requireMatch(fatigueGame, /setPhase\('countdown'\)[\s\S]*phase === 'countdown'[\s\S]*첫 신호가 나타나면/, 'focus game must give users a ready countdown before the first scored signal');
+requireMatch(fatigueGame, /function beginPractice\(\)[\s\S]*setPhase\('practice-press'\)[\s\S]*fatigue_game_practice_start/, 'focus game must start a separate practice before scored play');
+requireMatch(fatigueGame, /function finishPracticePress\(\)[\s\S]*setPhase\('practice-hold'\)/, 'focus game practice must teach the stop response after a tap');
+requireMatch(fatigueGame, /phase !== 'practice-hold'[\s\S]*setTimeout\([\s\S]*setPhase\('practice-complete'\)/, 'focus game must let users practice waiting without tapping');
+requireMatch(fatigueGame, /phase === 'practice-complete'[\s\S]*onClick=\{\(\) => startRun\('baseline'\)\}/, 'practice completion must lead to scored play');
+requireMatch(fatigueGame, /연습 없이 바로 시작/, 'focus game must let returning users skip the practice');
+requireMatch(fatigueGame, /aria-valuenow=\{3 - practiceCountdown\}/, 'practice wait must show clear visible progress');
 requireMatch(fatigueGame, /lastBowlStageRef\.current === breathCue\.stage[\s\S]*ringSingingBowl/, 'a singing bowl cue must play once at each breathing-stage transition');
 requireMatch(fatigueGame, /createFocusRunPattern\(Math\.random, runPatternRef\.current\.signature\)/, 'before and after challenge runs must receive different randomized forms');
 requireMatch(fatigueGame, /responseWindowMs/, 'each difficulty stage must use its calibrated response window');
@@ -118,11 +124,9 @@ for (const marker of ['첫 번째 게임 기록을 남겼어요.', '5분 쉰 뒤
 requireMatch(rhythm, /focusInviteArrival[\s\S]*getElementById\('focus-game'\)[\s\S]*scrollIntoView/, 'focus challenge invite must scroll to the game instructions');
 if (/startOnMount|focusAutoStart/.test(rhythm + fatigueGame)) fail('focus challenge must wait for the visitor to tap the start button');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
-requireMatch(fatigueGameStyles, /fatigue-stage-preview[\s\S]*fatigue-trial-dots[\s\S]*fatigue-target-purple/, 'advanced focus game visual stages are missing');
+requireMatch(fatigueGameStyles, /fatigue-game-rule-cards[\s\S]*fatigue-game-practice[\s\S]*fatigue-practice-signal-stop/, 'focus game must use direct rule and practice visuals');
 requireMatch(fatigueGame, /fatigue-rule-slot[\s\S]*fatigue-rule-placeholder/, 'focus game must reserve the rule position in every stage');
 requireMatch(fatigueGameStyles, /\.fatigue-game-running\{display:grid;grid-template-rows:[^}]+\}[\s\S]*\.fatigue-stage-instruction\{[^}]*height:78px[\s\S]*\.fatigue-rule-slot\{[^}]*height:48px/, 'focus stage instructions and play area must keep stable vertical positions');
-requireMatch(fatigueGame, /FocusJourneyVisual|fatigue-journey-visual/, 'focus game visual journey is missing');
-requireMatch(fatigueGameStyles, /fatigue-journey-visual[\s\S]*fatigue-journey-core[\s\S]*fatigue-journey-node/, 'focus game visual journey styling is missing');
 requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');
 requireMatch(researchStyles, /research-library-empty[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research empty-state copy must be at least 16px');
 requireMatch(reviewStyles, /review-quote-card p:not\(\.review-quote-label\)[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'review copy must be at least 16px on mobile');
