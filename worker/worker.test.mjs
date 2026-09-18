@@ -58,14 +58,14 @@ test('D1 ledger reconciliation repeats source sync while preserving reviewed edi
   const currentSeed={claims:[
     {id:'auto-claim',status:'approved',publicText:'현재 공개 문구',sources:[{title:'Source',url:'https://example.com'}]},
     {id:'reviewed-claim',status:'approved',publicText:'현재 원장 문구',sources:[{title:'Reviewed',url:'https://example.com/reviewed'}]},
-  ],products:[{id:'gaba1500',status:'approved',sourceIds:['auto-claim'],name:'현재 제품',officialUrl:'https://smartstore.naver.com/cellpinda/products/4701017202'}],reviews:[]};
+  ],products:[{id:'gaba1500',status:'approved',sourceIds:['auto-claim'],name:'현재 제품',category:'기타가공품',officialUrl:'https://smartstore.naver.com/cellpinda/products/4701017202'}],reviews:[]};
   const nextSeed={claims:[
     {id:'auto-claim',status:'approved',publicText:'다음 공개 문구',sources:[{title:'Source',url:'https://example.com'}]},
     {id:'reviewed-claim',status:'approved',publicText:'다음 원장 문구',sources:[{title:'Reviewed',url:'https://example.com/reviewed'}]},
   ],products:[{id:'gaba1500',status:'approved',sourceIds:['auto-claim'],name:'다음 제품',officialUrl:'https://smartstore.naver.com/cellpinda/products/4701017202'}],reviews:[]};
   try{
     await store.initialize(oldSeed);await store.initialize(currentSeed);
-    let data=await store.publicContent();assert.equal(data.claims.find(item=>item.id==='auto-claim').publicText,'현재 공개 문구');assert.equal(data.products[0].name,'현재 제품');
+    let data=await store.publicContent();assert.equal(data.claims.find(item=>item.id==='auto-claim').publicText,'현재 공개 문구');assert.equal(data.products[0].name,'현재 제품');assert.equal(data.products[0].category,'기타가공품');
     await store.update('reviewed-claim',{revision:2,reason:'Independent review edit',publicText:'운영자 검토 문구',status:'approved'});
     await store.initialize(nextSeed);data=await store.publicContent();
     assert.equal(data.claims.find(item=>item.id==='auto-claim').publicText,'다음 공개 문구');

@@ -71,7 +71,7 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       };
       const discouragedConsumerCopy = /뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|다만\s*GABA만의\s*효과|결과를\s*한\s*문장으로\s*묶기\s*어려/;
       const legacyDestination = /cellpinda\.co\.kr|cellpindamall\.com|공식몰/;
-      const controlledProductFields = ['name','amountMg','servings','totalG','officialUrl','availability','sourceIds'];
+      const controlledProductFields = ['name','amountMg','servings','totalG','category','officialUrl','availability','sourceIds'];
       for (const [kind, seedMap] of Object.entries(seedByKind)) {
         for (const row of db.prepare('SELECT content.*, (SELECT reason FROM audit WHERE audit.content_id=content.id ORDER BY audit.id DESC LIMIT 1) AS last_reason FROM content WHERE kind=?').all(kind)) {
           const before = JSON.parse(row.data);
@@ -166,7 +166,7 @@ export function createStore({ dbPath, seedPath, seed } = {}) {
       const all = rows();
       const claims = all.filter(c => c.kind === 'claim' && c.status === 'approved' && c.publicText && publicSources(c).length).map(c => ({id:c.id,topic:c.topic,publicText:c.publicText,status:c.status,sources:publicSources(c),revision:c.revision,...(publicMetadata(c.metadata || c.structuredData) ? {metadata:publicMetadata(c.metadata || c.structuredData)} : {})}));
       const approvedIds = new Set(claims.map(c => c.id));
-      const products = all.filter(p => p.kind === 'product' && p.status === 'approved' && p.sourceIds?.length && p.sourceIds.every(id => approvedIds.has(id))).map(({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,publicText}) => ({id,name,amountMg,servings,totalG,officialUrl,availability,priceDisplay,sourceIds,revision,...(publicText ? {publicText} : {})}));
+      const products = all.filter(p => p.kind === 'product' && p.status === 'approved' && p.sourceIds?.length && p.sourceIds.every(id => approvedIds.has(id))).map(({id,name,amountMg,servings,totalG,category,officialUrl,availability,priceDisplay,sourceIds,revision,publicText}) => ({id,name,amountMg,servings,totalG,category,officialUrl,availability,priceDisplay,sourceIds,revision,...(publicText ? {publicText} : {})}));
       const reviews=all.filter(item=>item.kind==='review').flatMap(item=>{if(item.reviewType==='quote'){const quote=publicReview(item,products.map(p=>p.id));return quote?[quote]:[];}return item.status==='approved' && reviewLink(item)?[{id:item.id,status:item.status,publicText:REVIEW_DESTINATION_TEXT,sourceTitle:item.sourceTitle,sourceUrl:item.sourceUrl,limitations:item.limitations}]:[];});
       return {claims,products,reviews};
     },

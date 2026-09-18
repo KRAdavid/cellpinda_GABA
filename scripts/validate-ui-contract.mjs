@@ -41,6 +41,7 @@ const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
 requireMatch(app, /여러 사람 연구를 소개해요\. 연구에 쓴 방법과 제품은 셀핀다 가바 1500과 다를 수 있어요\./, 'research route must explain the evidence scope in plain language');
+requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
 requireMatch(app, /description='연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉬운 말과 그림으로 소개합니다\.'/ , 'research route metadata must use plain language');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');

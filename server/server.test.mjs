@@ -69,14 +69,14 @@ test('Existing local content reconciles retired products and stale public copy',
       {id:'product-1500',status:'approved',publicText:'셀핀다 가바 1,500 mg × 30포 구성이 판매 제품으로 확인됩니다.',sources:[{title:'Smart Store',url:'https://smartstore.naver.com/cellpinda/products/4701017202'}]},
       {id:'research-review-2020',status:'approved',publicText:'2020년 체계적 문헌고찰은 경구 GABA와 스트레스·수면을 다룬 14개 연구를 모아, 연구별 질문과 조건을 비교했습니다.',sources:[{title:'Review',url:'https://example.com/review'}],metadata:{consumerSummary:'14개 연구에서 스트레스와 수면 관련 지표를 살펴본 자료예요.'}},
     ],
-    products:[{id:'gaba1500',name:'셀핀다 가바 1500',amountMg:1500,servings:30,totalG:45,officialUrl:'https://smartstore.naver.com/cellpinda/products/4701017202',availability:'스마트스토어에서 재고 확인',priceDisplay:null,status:'approved',sourceIds:['product-1500']}],
+    products:[{id:'gaba1500',name:'셀핀다 가바 1500',amountMg:1500,servings:30,totalG:45,category:'기타가공품',officialUrl:'https://smartstore.naver.com/cellpinda/products/4701017202',availability:'스마트스토어에서 재고 확인',priceDisplay:null,status:'approved',sourceIds:['product-1500']}],
     reviews:[],
   };
   let store=createStore({dbPath,seed:legacySeed});store.close();
   try {
     store=createStore({dbPath,seed:currentSeed});
     const publicContent=store.publicContent();
-    assert.deepEqual(publicContent.products.map(item=>({id:item.id,url:item.officialUrl})),[{id:'gaba1500',url:'https://smartstore.naver.com/cellpinda/products/4701017202'}]);
+    assert.deepEqual(publicContent.products.map(item=>({id:item.id,category:item.category,url:item.officialUrl})),[{id:'gaba1500',category:'기타가공품',url:'https://smartstore.naver.com/cellpinda/products/4701017202'}]);
     assert.equal(JSON.stringify(publicContent).includes('750'),false);
     assert.equal(JSON.stringify(publicContent).includes('제한적'),false);
     const retired=store.adminContent().find(item=>item.id==='gaba750');
