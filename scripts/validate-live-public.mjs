@@ -148,7 +148,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(byun2018?.metadata?.consumerContext?.includes('30명') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show the participant split and both groups');
     assert.ok(content.claims.find(claim => claim.id === 'research-sakashita-2019')?.metadata?.consumerDisclosure?.includes('Pharma Foods International'), 'live consumer research must show disclosed funding and author relationships');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
-    assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('내 답변과 점수는 포함되지 않아요'), 'live consumer bundle must expose the clear friend game invitation and privacy note');
+    assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('내 1분 신호 게임 정답률은') && consumerBundle.includes('잠·휴식 체크 답변은 보내지 않으며'), 'live consumer bundle must expose the gameplay-only invitation and privacy note');
     assert.ok(consumerBundle.includes('피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.'), 'live consumer bundle must include the care-seeking guide');
     assert.ok(consumerBundle.includes('지난 7일 다섯 질문에 고른 답을 더한 숫자'), 'live consumer bundle must explain the personal answer score');
     assert.ok(consumerBundle.includes('집중과 휴식 관련 연구 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');
