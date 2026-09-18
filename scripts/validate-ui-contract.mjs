@@ -47,7 +47,7 @@ const consumerFlow = ['<RhythmExperience', '<BrainLoadEvidence', '<GabaStory', '
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
-requireMatch(app, /잠·긴장·뇌파·운동 등 사람 연구에서 무엇을 살펴봤는지 쉬운 말로 정리했어요\./, 'research route must state its consumer-readable topics');
+requireMatch(app, /사람이 GABA를 먹은 연구와 뇌 속 신호를 살펴본 연구를 나눠 소개해요\. 셀핀다 가바 1500 제품 정보는 연구와 따로 보여드려요\./, 'research route must distinguish general human studies from Cellpinda product information in consumer language');
 requireMatch(researchStyles, /\.research-route-main\{width:min\(1120px,100%\);margin-inline:auto\}[\s\S]*?\.research-library-card-featured\{display:grid;grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/, 'wide research pages must center the reading column and balance the featured study with its visual');
 if (!(researchRoute.indexOf('<ResearchLibrary') >= 0 && researchRoute.indexOf('<ResearchLibrary') < researchRoute.indexOf('research-route-product') && researchRoute.includes('셀핀다 가바 1500 구성 보기') && researchRoute.includes('#products'))) fail('research route must offer a separate product-configuration path after the research cards');
 requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서 관찰된 변화/, 'selected research findings must be visibly labeled before methods are opened');
@@ -62,7 +62,7 @@ requireMatch(app, /<SevenDayChallenge onEvent=\{track\} isInvite=\{challengeInvi
 requireMatch(challenge, /isInvite \? <p className="challenge-invite" role="status">친구가 7일 휴식 챌린지에 초대했어요\. 개인 기록은 공유되지 않았어요\.<\/p>/, 'challenge invite context must remain visible and protect the visitor’s private record');
 requireMatch(challenge, /isInvite \? '건강 검사가 아닌 휴식 기록이에요\. 기록은 이 기기에만 남아요\.'/ , 'a challenge invite must keep its non-diagnostic and local-storage boundary visible');
 requireMatch(challengeStyles, /\.seven-day-challenge\.is-invite \.challenge-start\{margin-top:14px;padding:18px 16px\}[\s\S]*?\.seven-day-challenge\.is-invite \.challenge-start \.button\{margin-top:12px;min-height:48px\}/, 'mobile challenge invitations must compact enough to keep their start action in view');
-requireMatch(app, /const description='잠·긴장·뇌파·운동 등 사람 연구에서 무엇을 살펴봤는지 쉬운 말로 정리했어요\.'/ , 'research route metadata must use plain language and separate general research from product information');
+requireMatch(app, /const description='사람이 GABA를 먹은 연구와 뇌 속 신호를 살펴본 연구를 나눠 소개해요\. 셀핀다 가바 1500 제품 정보는 연구와 따로 보여드려요\.'/ , 'research route metadata must use plain language and separate general research from product information');
 requireMatch(app, /hero-game-link[^>]*href="#focus-game"[\s\S]*?1분 색 신호 게임 해보기/, 'the home game link must use the same name as the game it opens');
 requireMatch(app, /if\(challengeInvite\)[\s\S]*?\['Tab','ArrowDown'/, 'keyboard navigation must stop automatic invite alignment');
 requireMatch(challenge, /isInvite\) return;[\s\S]*?inviteHeadingRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'seven-day invitation must move focus to its challenge heading');
@@ -107,7 +107,7 @@ if (/gaba-master-index\.json/.test(app + indexHtml)) fail('consumer pages must n
 requireMatch(research, /id="research"[^>]*aria-label="연구를 쉬운 말로 보기"/, 'research section must retain an accessible consumer label');
 if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');
 requireMatch(research, /const featuredStudy = visibleStudies\[0\][\s\S]*renderStudy\(featuredStudy, true\)/, 'a concrete research result must appear before search and filters');
-requireMatch(research, /research-library-head[\s\S]*셀핀다 가바 1500 제품을 시험한 결과는 아니며, 논문마다 참여자와 연구 조건이 달라요\./, 'research list must clearly separate general GABA studies from the finished product');
+requireMatch(research, /research-library-head[\s\S]*사람이 GABA를 먹은 연구와 뇌 속 신호를 살펴본 연구를 나눠 소개해요\. 셀핀다 가바 1500 제품 정보는 연구와 따로 보여드려요\./, 'research list must clearly separate general GABA studies from Cellpinda product information');
 requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.header\.research-route-header nav\{display:flex!important;position:static[\s\S]*?\.study-paired-group\{grid-template-columns:minmax\(96px/, 'mobile research route must keep its return link in the header and make the paired results compact enough to scan');
 requireMatch(styles, /\.study-paired-group\{grid-template-columns:minmax\(0,1fr\)[\s\S]*?\.study-paired-group h4,\.study-paired-trajectory,\.study-paired-spread\{grid-column:1\/-1\}/, 'mobile study groups must keep labels, values and detail links readable across the full card width');
 requireMatch(research, /연구 내용을 더 자세히 보기/, 'research detail must use a consumer-friendly label');
