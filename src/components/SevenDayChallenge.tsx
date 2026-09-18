@@ -199,7 +199,7 @@ export default function SevenDayChallenge({ onEvent, isInvite = false }: Props) 
   }
 
   return <section id="lab" className={`section wrap seven-day-challenge${isInvite ? ' is-invite' : ''}`} aria-labelledby="challenge-heading">
-    {isInvite ? <p className="challenge-invite" role="status">친구가 7일 휴식 기록을 공유했어요.</p> : null}
+    {isInvite ? <p className="challenge-invite" role="status">친구가 7일 휴식 챌린지에 초대했어요. 개인 기록은 공유되지 않았어요.</p> : null}
     <div className="section-head"><div><p className="chapter">7일 휴식 기록</p><h2 id="challenge-heading">하루 5분,<br />내가 고른 휴식 한 가지.</h2></div><p>제품을 사지 않아도 할 수 있어요.<br />기록과 메모는 이 기기에만 남아요.</p></div>
     <p className="note">{isInvite ? '건강 검사가 아닌 휴식 기록이에요. 기록은 이 기기에만 남아요.' : '휴대폰이나 컴퓨터의 날짜를 기준으로 이 기기에만 기록해요. 건강 검사가 아니라 내가 실천한 휴식 습관을 돌아보는 기록이에요.'}</p>
     {initial.legacy ? <p className="challenge-legacy">날짜가 없는 예전 기록은 이번 기록에 넣지 않았어요. 새로 시작한 날부터 적어 주세요.</p> : null}

@@ -282,6 +282,16 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   const countdownAudioRunRef = useRef(0);
   const runSequenceRef = useRef(0);
   const practiceHeadingRef = useRef<HTMLHeadingElement>(null);
+  const restHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (phase !== 'rest') return;
+    const frame = window.requestAnimationFrame(() => {
+      restHeadingRef.current?.scrollIntoView({ block: 'start', behavior: 'auto' });
+      restHeadingRef.current?.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [phase]);
 
   useEffect(() => {
     if (!phase.startsWith('practice-')) return;
@@ -604,7 +614,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   return (
     <section className="fatigue-game" id="focus-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
-        <div><p className="fatigue-game-kicker">02 / 약 1분 · 24개 신호</p><h2 id="fatigue-game-heading">뇌 컨디션 확인 챌린지</h2></div>
+        <div><p className="fatigue-game-kicker">02 / 약 1분 · 24개 신호</p><h2 id="fatigue-game-heading" tabIndex={-1}>뇌 컨디션 확인 챌린지</h2></div>
         <p>색 신호에 맞춰 누르거나 멈추는 1분 게임이에요. 점수로 뇌 피로나 건강 상태를 판단하지 않아요.</p>
       </div>
 
@@ -721,7 +731,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
 
         {phase === 'rest' ? <div className="fatigue-game-rest">
           <p className="fatigue-game-kicker">PAUSE · 5-MIN BREATH</p>
-          <h3>화면에서 잠깐 눈을 떼고, 호흡을 천천히 해보세요.</h3>
+          <h3 ref={restHeadingRef} tabIndex={-1}>화면에서 잠깐 눈을 떼고, 호흡을 천천히 해보세요.</h3>
           <p>화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 선이 올라갈 때 들이쉬고, 내려갈 때 내쉬세요.</p>
           <BreathLineGuide startedAt={restStartedAt} cue={breathCue} />
           <p className="fatigue-breath-note">들이쉬기 4초 · 멈추기 2초 · 내쉬기 6초 · 다시 멈추기 2초를 반복합니다. 숨을 참기 불편하거나 어지럽고 답답하면 멈춤을 건너뛰고 자연스럽게 호흡하세요.</p>

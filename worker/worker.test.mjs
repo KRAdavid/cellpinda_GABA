@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -54,22 +54,31 @@ test('D1 ledger reconciliation repeats source sync while preserving reviewed edi
   const oldSeed={claims:[
     {id:'auto-claim',status:'approved',publicText:'이전 공개 문구',sources:[{title:'Source',url:'https://example.com'}]},
     {id:'reviewed-claim',status:'approved',publicText:'검토 전 문구',sources:[{title:'Reviewed',url:'https://example.com/reviewed'}]},
+    {id:'stale-copy',status:'approved',publicText:'이전 자동 동기화 문구',sources:[{title:'Stale',url:'https://example.com/stale'}]},
   ],products:[{id:'gaba1500',status:'approved',sourceIds:['auto-claim'],name:'이전 제품',officialUrl:'https://smartstore.naver.com/cellpinda/products/4701017202'}],reviews:[]};
   const currentSeed={claims:[
     {id:'auto-claim',status:'approved',publicText:'현재 공개 문구',sources:[{title:'Source',url:'https://example.com'}]},
     {id:'reviewed-claim',status:'approved',publicText:'현재 원장 문구',sources:[{title:'Reviewed',url:'https://example.com/reviewed'}]},
+    {id:'stale-copy',status:'approved',publicText:'현재 자동 동기화 문구',sources:[{title:'Stale',url:'https://example.com/stale'}]},
   ],products:[{id:'gaba1500',status:'approved',sourceIds:['auto-claim'],name:'현재 제품',category:'기타가공품',officialUrl:'https://smartstore.naver.com/cellpinda/products/4701017202'}],reviews:[]};
   const nextSeed={claims:[
     {id:'auto-claim',status:'approved',publicText:'다음 공개 문구',sources:[{title:'Source',url:'https://example.com'}]},
     {id:'reviewed-claim',status:'approved',publicText:'다음 원장 문구',sources:[{title:'Reviewed',url:'https://example.com/reviewed'}]},
+    {id:'stale-copy',status:'approved',publicText:'다음 자동 동기화 문구',sources:[{title:'Stale',url:'https://example.com/stale'}]},
   ],products:[{id:'gaba1500',status:'approved',sourceIds:['auto-claim'],name:'다음 제품',officialUrl:'https://smartstore.naver.com/cellpinda/products/4701017202'}],reviews:[]};
   try{
-    await store.initialize(oldSeed);await store.initialize(currentSeed);
+    await store.initialize(oldSeed);
+    await store.update('stale-copy',{revision:1,reason:'Current source ledger reconciliation refreshed stale public copy',publicText:'이전 자동 동기화 문구 v2',status:'approved'});
+    const legacyMarker=createHash('sha256').update(JSON.stringify(currentSeed),'utf8').digest('hex');
+    await db.prepare('INSERT INTO metadata(key,value) VALUES(?,?)').bind(`seed:v3-ledger:${legacyMarker}`,'legacy marker').run();
+    await store.initialize(currentSeed);
     let data=await store.publicContent();assert.equal(data.claims.find(item=>item.id==='auto-claim').publicText,'현재 공개 문구');assert.equal(data.products[0].name,'현재 제품');assert.equal(data.products[0].category,'기타가공품');
+    assert.equal(data.claims.find(item=>item.id==='stale-copy').publicText,'현재 자동 동기화 문구');
     await store.update('reviewed-claim',{revision:2,reason:'Independent review edit',publicText:'운영자 검토 문구',status:'approved'});
     await store.initialize(nextSeed);data=await store.publicContent();
     assert.equal(data.claims.find(item=>item.id==='auto-claim').publicText,'다음 공개 문구');
     assert.equal(data.claims.find(item=>item.id==='reviewed-claim').publicText,'운영자 검토 문구');
+    assert.equal(data.claims.find(item=>item.id==='stale-copy').publicText,'다음 자동 동기화 문구');
     assert.equal(data.products[0].name,'다음 제품');
     assert.ok((await store.history()).some(item=>item.reason==='Current source ledger reconciliation refreshed seed claim fields'));
   }finally{db.close();}

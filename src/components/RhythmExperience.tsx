@@ -45,35 +45,29 @@ function inviteUrl(kind: 'rhythm' | 'focus' = 'rhythm', referralId = ''): string
 function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady'; label: string; heading: string; body: string } {
   if (result.loadLevel === 'low') return {
     tone: 'steady',
-    label: '최근 답변은 편안한 편이에요',
-    heading: '축하해요! 지금 잘 맞는 휴식 습관을 이어가세요.',
-    body: '지난 7일 답변에서는 잠과 쉬는 시간이 비교적 괜찮았어요. 바쁜 날에도 짧게 쉴 시간을 남겨 보세요.',
+    label: '지난 7일 답변',
+    heading: '축하합니다. 잠과 휴식 리듬이 잘 유지됐어요.',
+    body: '지금 잘 맞는 쉬는 습관을 이어가세요.',
   };
   if (result.loadLevel === 'high') {
     if (result.loadScore < 10) return {
       tone: 'watch',
-      label: '한 가지 상황에서 거의 매일 그랬다고 답했어요',
-      heading: '그 상황이 반복된다면, 5분 쉬는 시간을 먼저 잡아보세요.',
-      body: '전체 답변 점수와 별도로, 한 문항에서 가장 높은 빈도를 골랐어요. 다음 일정 전에 화면을 내려놓고 잠깐 쉬어 보세요.',
+      label: '자주 쉬지 못했다고 답한 순간이 있어요',
+      heading: '지금 5분, 화면에서 눈을 떼고 쉬어 보세요.',
+      body: '휴대폰을 내려놓고 물을 마시거나 창밖을 바라보세요.',
     };
-    const frequentAnswers = Object.values(result.scores).filter(score => score >= 2).length;
     return {
-    tone: 'high',
-    label: frequentAnswers > 1 ? '여러 상황에서 쉴 틈이 부족했다고 답했어요' : '한 가지 상황에서 거의 매일 그랬다고 답했어요',
-    heading: '오늘은 남은 일을 적고 10분 쉬어 보세요.',
-    body: frequentAnswers > 1
-      ? `${frequentAnswers}가지 질문에서 자주 또는 거의 매일 그랬다고 답했어요. 알림을 끄고 조용한 곳에서 잠깐 쉬어 보세요.`
-      : '한 가지 질문에서 거의 매일 그랬다고 답했어요. 남은 일은 메모하고, 알림을 끈 뒤 조용한 곳에서 잠깐 쉬어 보세요.',
+      tone: 'high',
+      label: '여러 답변에서 머리가 쉴 틈이 부족했던 날이 보여요',
+      heading: '지금 10분, 화면과 알림에서 떨어져 쉬어 보세요.',
+      body: '해야 할 일은 메모하고 알림을 꺼 보세요.',
     };
   }
-  const frequentAnswers = Object.values(result.scores).filter(score => score >= 2).length;
   return {
     tone: 'watch',
-    label: frequentAnswers > 1 ? '여러 상황에서 자주 그랬다고 답했어요' : '한 가지 상황에서 자주 그랬다고 답했어요',
-    heading: '오늘 일정에 5분 쉬는 시간을 먼저 넣어 보세요.',
-    body: frequentAnswers > 1
-      ? `${frequentAnswers}가지 질문에서 자주 그랬다고 답했어요. 다음 일정 전에 5분을 비우고 물을 마시거나 창밖을 바라보세요.`
-      : '한 가지 질문에서 자주 그랬다고 답했어요. 다음 일정 전에 5분을 비우고 물을 마시거나 창밖을 바라보세요.',
+    label: '자주 쉬지 못했다고 답한 순간이 있어요',
+    heading: '오늘 일정에 5분 쉬는 시간을 지금 넣어 보세요.',
+    body: '휴대폰을 내려놓고 물을 마시거나 창밖을 바라보세요.',
   };
 }
 
@@ -82,18 +76,9 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const ratio = score / 15;
   const band = score >= 10 ? 'high' : score >= 5 ? 'watch' : 'low';
   const frequentAnswers = Object.values(result.scores).filter(value => value >= 2).length;
-  const hasAlmostDailyAnswer = Object.values(result.scores).some(value => value === 3);
-  const description = score >= 10
-    ? frequentAnswers > 1
-      ? `${frequentAnswers}가지 상황에서 자주 또는 거의 매일 그랬다고 답했어요.`
-      : '한 가지 상황에서 거의 매일 그랬다고 답했어요.'
-    : score >= 5
-      ? frequentAnswers > 1
-        ? `${frequentAnswers}가지 상황에서 자주 그랬다고 답했어요.`
-        : '한 가지 상황에서 자주 그랬다고 답했어요.'
-      : hasAlmostDailyAnswer
-        ? '전체 점수는 낮지만, 한 가지 질문에는 거의 매일로 답했어요.'
-        : '축하해요! 지난 7일 답변에서는 잠과 쉬는 시간이 비교적 괜찮았어요.';
+  const description = frequentAnswers === 0
+    ? '자주 쉬지 못했다고 답한 문항은 없어요.'
+    : `${frequentAnswers}개 문항에서 자주 또는 거의 매일 그랬어요.`;
   const brainPath = 'M108 29c-8-12-24-13-34-4-13-4-27 5-27 19-14 5-18 21-8 31-5 14 5 28 19 29 7 12 23 14 34 5 8 8 19 8 27 0 10 9 25 6 30-6 14 1 25-12 21-26 11-10 8-27-5-34-1-14-15-23-28-18-7-7-19-7-29 4z';
 
   return (
@@ -129,7 +114,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
         </div>
       </div>
       <progress className="rhythm-load-progress-accessible" value={score} max={15} aria-label={`지난 7일 답변 점수 ${score}점, 15점 만점`} />
-      <p className="rhythm-load-footnote">뇌나 GABA를 잰 값이 아니라, 지난 7일 다섯 질문에 고른 답을 더한 숫자예요.</p>
+      <p className="rhythm-load-footnote">뇌나 GABA를 잰 값이 아니에요. 지난 7일 다섯 질문에 고른 답을 더한 기록이에요.</p>
     </div>
   );
 }
@@ -225,7 +210,10 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
   useEffect(() => {
     if (!focusInviteArrival) return;
-    const frame = window.requestAnimationFrame(() => document.getElementById('focus-game')?.scrollIntoView({ behavior: 'auto', block: 'start' }));
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById('focus-game')?.scrollIntoView({ behavior: 'auto', block: 'start' });
+      document.getElementById('fatigue-game-heading')?.focus({ preventScroll: true });
+    });
     return () => window.cancelAnimationFrame(frame);
   }, [focusInviteArrival]);
   useEffect(()=>{if(!kakaoKey)return;const ready=()=>{if(!window.Kakao)return;try{if(!window.Kakao.isInitialized())window.Kakao.init(kakaoKey);setKakaoReady(true)}catch{setKakaoReady(false)}};if(window.Kakao){ready();return;}const script=document.createElement('script');script.src='https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';script.async=true;script.onload=ready;script.onerror=()=>setKakaoReady(false);document.head.appendChild(script);return()=>{script.onload=null;script.onerror=null}},[]);
@@ -456,26 +444,17 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
             {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
             {result ? <BrainLoadVisual result={result} /> : null}
-            <p className="rhythm-description">{type.description}</p>
             {signal ? <div className={`rhythm-fatigue-alert rhythm-fatigue-alert-${signal.tone}`} role="status"><AlertTriangle size={23} aria-hidden="true" /><div><p className="rhythm-eyebrow">{signal.label}</p><h4>{signal.heading}</h4><p>{signal.body}</p></div></div> : null}
-            {result?.loadLevel === 'high' ? <aside className="rhythm-care-guide" aria-label="전문가 상담 안내"><p className="rhythm-eyebrow">계속되면 확인이 필요해요</p><h4>피로와 집중 저하가 몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담해 보세요.</h4><p>피로와 잠 문제의 원인은 생활 습관부터 건강 상태까지 다양할 수 있어요. 이 점검 결과만으로 원인을 판단하지 말고, 증상이 계속되면 의료진에게 현재 상황을 설명해 주세요.</p></aside> : null}
-            <svg className="rhythm-card-wave" viewBox="0 0 500 70" aria-hidden="true" focusable="false"><path d="M0 31 C75 -12 110 74 190 31 S330 -12 500 31" /><path d="M0 43 C75 0 110 86 190 43 S330 0 500 43" /><path d="M0 55 C75 12 110 98 190 55 S330 12 500 55" /></svg>
-            <div className={`rhythm-recovery-guide rhythm-recovery-${type.recoveryLevel}`}>
-            <p className="rhythm-eyebrow">오늘 먼저 해볼 휴식</p>
-              <h4>{type.recoveryHeading}</h4>
-              <p>{type.recoveryDescription}</p>
+            {result?.loadLevel === 'high' ? <details className="rhythm-care-guide"><summary>피로가 몇 주째 이어지거나 일상에 지장을 준다면</summary><p>이 점검은 건강 검사가 아니에요. 피로와 잠 문제는 원인이 다양할 수 있으니, 불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.</p></details> : null}
+            <div className="rhythm-result-primary-actions">
+              <p>{sharedType ? '나도 직접 해보기' : '친구도 직접 해보도록 보내기'}</p>
+              {sharedType
+                ? <button type="button" className="rhythm-button" onClick={start}>나도 1분 체크 해보기 <ArrowRight size={18} aria-hidden="true" /></button>
+                : <button type="button" className="rhythm-button" onClick={() => void shareInvite()}>친구에게 1분 체크 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button>}
+              {!sharedType ? <small>내 답변과 점수는 전송되지 않아요.</small> : null}
             </div>
-            <div className="rhythm-suggestions"><h4>오늘 바로 해볼 일</h4><ul>{type.suggestions.map(suggestion => <li key={suggestion}>{suggestion}</li>)}</ul></div>
-            <p className="rhythm-note">내가 고른 답을 바탕으로 한 생활 안내예요. 건강 상태를 보여주는 검사는 아니에요.</p>
           </article>
           <div className="rhythm-result-actions">
-            <p className="rhythm-eyebrow">친구도 해보도록 보내기</p>
-            <h3>친구도 직접 해보도록<br />1분 체크를 보내 보세요.</h3>
-            <p>초대 링크에는 내 답변이 들어가지 않아요. 친구도 자기 지난 일주일을 돌아보고, 오늘 쉴 방법을 찾아볼 수 있어요.</p>
-            {sharedType
-              ? <button type="button" className="rhythm-button" onClick={start}>나도 1분 체크 해보기 <ArrowRight size={18} aria-hidden="true" /></button>
-              : <button type="button" className="rhythm-button" onClick={() => void shareInvite()}>친구에게 1분 체크 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button>}
-            {!sharedType ? <p className="rhythm-share-privacy">내 답변과 점수는 전송되지 않아요.</p> : null}
             <details className="rhythm-more-share">
               <summary>결과 카드 공유·저장 등 다른 방법</summary>
               {cardUrl && type ? <img className="rhythm-card-preview" src={cardUrl} alt={`${type.name} 결과 카드 미리보기`} /> : null}

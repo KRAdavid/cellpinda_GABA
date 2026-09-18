@@ -91,31 +91,38 @@ test('Local seed claims refresh consumer copy without overwriting reviewed edits
   const legacySeed={claims:[
     {id:'gaba-definition',status:'approved',publicText:'GABA는 뇌에서 신호를 억제하는 물질입니다.',sources:[{title:'GABA source',url:'https://example.com/gaba'}]},
     {id:'reviewed-claim',status:'approved',publicText:'운영자가 검토한 문구',sources:[{title:'Reviewed source',url:'https://example.com/reviewed'}]},
+    {id:'stale-copy',status:'approved',publicText:'이전 자동 동기화 문구',sources:[{title:'Stale source',url:'https://example.com/stale'}]},
   ],products:[],reviews:[]};
   const currentSeed={claims:[
     {id:'gaba-definition',status:'approved',publicText:'GABA는 신경 신호의 강도를 조절하는 데 관여합니다.',sources:[{title:'GABA source',url:'https://example.com/gaba'}],metadata:{consumerSummary:'몸 안에서 신경 신호의 균형을 살펴보는 자료예요.'}},
     {id:'reviewed-claim',status:'approved',publicText:'새 원장 문구',sources:[{title:'Reviewed source',url:'https://example.com/reviewed'}]},
+    {id:'stale-copy',status:'approved',publicText:'현재 원장의 소비자 문구',sources:[{title:'Stale source',url:'https://example.com/stale'}],metadata:{consumerSummary:'현재 원장의 그림 설명'}},
   ],products:[],reviews:[]};
-    const nextSeed={claims:[
-      {id:'gaba-definition',status:'approved',publicText:'GABA는 신경 신호가 지나치게 이어지지 않도록 강도를 조절하는 데 관여합니다.',sources:[{title:'GABA source',url:'https://example.com/gaba'}],metadata:{consumerSummary:'몸 안에서 신경 신호의 균형을 살펴보는 자료예요.'}},
-      {id:'reviewed-claim',status:'approved',publicText:'다음 원장 문구',sources:[{title:'Reviewed source',url:'https://example.com/reviewed'}]},
-    ],products:[],reviews:[]};
+  const nextSeed={claims:[
+    {id:'gaba-definition',status:'approved',publicText:'GABA는 신경 신호가 지나치게 이어지지 않도록 강도를 조절하는 데 관여합니다.',sources:[{title:'GABA source',url:'https://example.com/gaba'}],metadata:{consumerSummary:'몸 안에서 신경 신호의 균형을 살펴보는 자료예요.'}},
+    {id:'reviewed-claim',status:'approved',publicText:'다음 원장 문구',sources:[{title:'Reviewed source',url:'https://example.com/reviewed'}]},
+    {id:'stale-copy',status:'approved',publicText:'다음 원장의 소비자 문구',sources:[{title:'Stale source',url:'https://example.com/stale'}],metadata:{consumerSummary:'다음 원장의 그림 설명'}},
+  ],products:[],reviews:[]};
   let store;
   try {
     store=createStore({dbPath,seed:legacySeed});
     store.update('reviewed-claim',{revision:1,reason:'Reviewed copy',publicText:'운영자가 검토한 문구 v2',status:'approved'});
+    store.update('stale-copy',{revision:1,reason:'Current source ledger reconciliation refreshed stale public copy',publicText:'이전 자동 동기화 문구 v2',status:'approved'});
     store.close();
     store=createStore({dbPath,seed:currentSeed});
     const claims=new Map(store.publicContent().claims.map(item=>[item.id,item]));
     assert.equal(claims.get('gaba-definition').publicText,currentSeed.claims[0].publicText);
     assert.deepEqual(claims.get('gaba-definition').metadata,currentSeed.claims[0].metadata);
     assert.equal(claims.get('reviewed-claim').publicText,'운영자가 검토한 문구 v2');
+    assert.equal(claims.get('stale-copy').publicText,'현재 원장의 소비자 문구');
+    assert.deepEqual(claims.get('stale-copy').metadata,currentSeed.claims[2].metadata);
     assert.ok(store.history().some(item=>item.reason.includes('refreshed seed claim fields')));
     store.close();
     store=createStore({dbPath,seed:nextSeed});
     const nextClaims=new Map(store.publicContent().claims.map(item=>[item.id,item]));
     assert.equal(nextClaims.get('gaba-definition').publicText,nextSeed.claims[0].publicText);
     assert.equal(nextClaims.get('reviewed-claim').publicText,'운영자가 검토한 문구 v2');
+    assert.equal(nextClaims.get('stale-copy').publicText,'다음 원장의 소비자 문구');
   } finally {store?.close();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
 

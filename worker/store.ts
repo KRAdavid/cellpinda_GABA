@@ -16,6 +16,7 @@ const OPS_TTL_DAYS=30;
 const REVIEW_DESTINATION_ID='shop-review-destination-1500';
 const REVIEW_DESTINATION_MIGRATION_PREFIX='migration:review-destination-smartstore:v1';
 const SOURCE_CLAIM_SYNC_REASON='Current source ledger reconciliation refreshed seed claim fields';
+const SOURCE_STALE_COPY_SYNC_REASON='Current source ledger reconciliation refreshed stale public copy';
 const SOURCE_PRODUCT_SYNC_REASON='Current source ledger reconciliation refreshed controlled product fields';
 const SOURCE_RETIRE_REASON='Current source ledger reconciliation retired removed public content';
 const DISCOURAGED_CONSUMER_COPY=/뚜렷한\s*차이는\s*확인되지|유의한\s*차이는\s*확인되지|개선이\s*확인된\s*것은\s*아닙니다|제한적(?:인)?\s*근거|매우\s*제한적|연구\s*간\s*결과가\s*일치하지|정량\s*메타분석.*수행하지|다만\s*GABA만의\s*효과|결과를\s*한\s*문장으로\s*묶기\s*어려/;
@@ -115,7 +116,7 @@ export function createStore(db:D1Database) {
         await db.batch(statements);
       }
       const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(seed))))).map(byte=>byte.toString(16).padStart(2,'0')).join('');
-      const marker=`seed:v3-ledger:${hash}`;
+      const marker=`seed:v4-ledger:${hash}`;
       if(await db.prepare('SELECT value FROM metadata WHERE key=?').bind(marker).first())return;
       const statements:D1PreparedStatement[]=[];const now=new Date().toISOString();
       const seedByKind={
@@ -141,7 +142,7 @@ export function createStore(db:D1Database) {
             reason=SOURCE_PRODUCT_SYNC_REASON;
           }
         } else {
-          const sourceRow=row.revision===1 || row.last_reason===SOURCE_CLAIM_SYNC_REASON || LEGACY_DESTINATION.test(JSON.stringify(before)) || DISCOURAGED_CONSUMER_COPY.test(JSON.stringify(before));
+          const sourceRow=row.revision===1 || row.last_reason===SOURCE_CLAIM_SYNC_REASON || row.last_reason===SOURCE_STALE_COPY_SYNC_REASON || LEGACY_DESTINATION.test(JSON.stringify(before)) || DISCOURAGED_CONSUMER_COPY.test(JSON.stringify(before));
           if(sourceRow){
             after={...before,...canonical,id:before.id,status:before.status==='hold'?'hold':canonical.status};
             reason=SOURCE_CLAIM_SYNC_REASON;

@@ -18,6 +18,7 @@ const OPS_TTL_DAYS=30;
 const REVIEW_DESTINATION_ID='shop-review-destination-1500';
 const REVIEW_DESTINATION_MIGRATION_PREFIX='migration:review-destination-smartstore:v1';
 const SOURCE_CLAIM_SYNC_REASON='Current source ledger reconciliation refreshed seed claim fields';
+const SOURCE_STALE_COPY_SYNC_REASON='Current source ledger reconciliation refreshed stale public copy';
 const SOURCE_PRODUCT_SYNC_REASON='Current source ledger reconciliation refreshed controlled product fields';
 const SOURCE_RETIRE_REASON='Current source ledger reconciliation retired removed public content';
 const SHARE_SCOPE_SQL=`WITH scoped AS (SELECT rowid AS seq,flow_id,name FROM events WHERE json_extract(properties,'$.path')=? AND flow_id IS NOT NULL), starts AS (SELECT flow_id,MIN(seq) AS first_seq FROM scoped WHERE name=? GROUP BY flow_id), steps AS (SELECT EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_requested') AS requested,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_link_copied') AS copied,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_image_downloaded') AS downloaded,EXISTS(SELECT 1 FROM scoped e WHERE e.flow_id=s.flow_id AND e.seq>s.first_seq AND e.name='share_cancelled') AS cancelled FROM starts s) SELECT COUNT(*) AS denominator,COALESCE(SUM(CASE WHEN requested OR copied OR downloaded THEN 1 ELSE 0 END),0) AS attemptFlows,COALESCE(SUM(requested),0) AS requestedFlows,COALESCE(SUM(copied),0) AS copiedFlows,COALESCE(SUM(downloaded),0) AS downloadedFlows,COALESCE(SUM(cancelled),0) AS cancelledFlows FROM steps`;
@@ -89,7 +90,7 @@ function reconcileSeed(db, initial) {
             }
             reason = SOURCE_PRODUCT_SYNC_REASON;
           }
-        } else if (kind === 'claim' && (row.revision === 1 || row.last_reason === SOURCE_CLAIM_SYNC_REASON || legacyDestination.test(JSON.stringify(before)) || discouragedConsumerCopy.test(JSON.stringify(before)))) {
+        } else if (kind === 'claim' && (row.revision === 1 || row.last_reason === SOURCE_CLAIM_SYNC_REASON || row.last_reason === SOURCE_STALE_COPY_SYNC_REASON || legacyDestination.test(JSON.stringify(before)) || discouragedConsumerCopy.test(JSON.stringify(before)))) {
           after = {...before, ...canonical, id: before.id, status: before.status === 'hold' ? 'hold' : canonical.status};
           reason = row.revision === 1 || row.last_reason === SOURCE_CLAIM_SYNC_REASON
             ? SOURCE_CLAIM_SYNC_REASON

@@ -155,8 +155,9 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   function renderStudy(claim: Claim, featured = false) {
     const metadata = claim.metadata!;
     const nonIngestionStudy = /GABA를 먹지 않고|GABA 섭취 없이/.test(metadata.dose || '');
+    const resultVisualFirst = metadata.consumerVisual?.kind === 'paired-before-after';
     const findingFirst = Boolean(metadata.consumerFindingFirst && !metadata.consumerVisual && metadata.consumerFinding);
-    const takeaway = findingFirst
+    const takeaway = resultVisualFirst ? '' : findingFirst
       ? metadata.consumerFinding
       : metadata.consumerVisual
       ? metadata.consumerScope || metadata.consumerSummary || metadata.consumerFinding
@@ -166,14 +167,14 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       <h3>{metadata.question || claim.topic}</h3>
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{findingFirst ? '사람 연구에서 관찰된 변화' : '연구는 이렇게 진행됐어요'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}
+      {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>논문에 적힌 연구비·저자 소속</strong>{metadata.consumerDisclosure}</span></p> : null}
       <details className="research-detail" onToggle={event => {
         if (event.currentTarget.open) onOpen?.(claim.id);
       }}>
-        <summary>누가 참여했고, 어떻게 살펴봤나요?</summary>
+        <summary>연구 내용을 더 자세히 보기</summary>
         <div className="research-library-detail">
           <p className="research-library-study-scope"><strong>연구에서 사용한 것</strong><span>{metadata.productApplicability}</span></p>
           {metadata.consumerContext ? <p className="research-library-detail-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
-          {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>연구 관계</strong>{metadata.consumerDisclosure}</span></p> : null}
           {metadata.consumerDetail ? <p className="research-library-detail-finding"><strong>측정 결과</strong>{metadata.consumerDetail}</p> : !metadata.consumerVisual && metadata.consumerFinding && metadata.consumerFinding !== takeaway ? <p className="research-library-detail-finding"><strong>연구에서 기록한 결과</strong>{metadata.consumerFinding}</p> : null}
           <div className="research-story-grid" aria-label="연구 정보 그림 요약">
             <div className="research-story-card"><UsersRound size={21} aria-hidden="true"/><h4>누가 참여했나요?</h4><p>{metadata.population || metadata.sampleSize || '연구에 나온 참여자 정보'}</p></div>
@@ -191,7 +192,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   }
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
-    <div className="section-head research-library-head"><div><h2 id="research-title">사람 연구 한 편 먼저 보기</h2><p>아래 자료는 일반 GABA 사람 연구예요. 셀핀다 제품을 시험한 결과는 아니에요.</p></div></div>
+    <div className="section-head research-library-head"><div><h2 id="research-title">수면 연구 한눈에</h2><p>일반 GABA 정제 연구예요. 셀핀다 제품의 구성과 먹는 법은 포장에서 확인해 주세요.</p></div></div>
     {featuredStudy ? renderStudy(featuredStudy, true) : null}
     <details className="research-library-browse" id="research-library-browse">
       <summary><span><Search size={18} aria-hidden="true"/> 주제별로 다른 연구 찾기</span><small>{Math.max(0, visibleStudies.length - 1)}편 더 보기</small></summary>

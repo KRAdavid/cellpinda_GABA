@@ -30,7 +30,7 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
           </ul>
         </details>
       </section>)}</div>
-      <small className="study-insight-footnote">각 그룹의 평균을 같은 기준으로 비교했어요. 이 연구에서 사용한 양은 제품 권장량을 뜻하지 않아요.</small>
+      <small className="study-insight-footnote">연구에 참여한 사람들의 평균 기록이에요. 제품에 적힌 먹는 법은 포장에서 확인해 주세요.</small>
     </figure>;
   }
 

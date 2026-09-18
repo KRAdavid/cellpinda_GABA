@@ -47,7 +47,7 @@ const consumerFlow = ['<RhythmExperience', '<BrainLoadEvidence', '<GabaStory', '
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
-requireMatch(app, /GABA 사람 연구를 쉬운 말로 소개해요\. 셀핀다 제품 정보는 제품 페이지에서 확인해 보세요\./, 'research route must welcome consumers while separating research content from product information');
+requireMatch(app, /수면·스트레스 연구를 그림으로 봐요\./, 'research route must welcome consumers with a clear visual promise');
 if (!(researchRoute.indexOf('<ResearchLibrary') >= 0 && researchRoute.indexOf('<ResearchLibrary') < researchRoute.indexOf('research-route-product') && researchRoute.includes('셀핀다 가바 1500 구성 보기') && researchRoute.includes('#products'))) fail('research route must offer a separate product-configuration path after the research cards');
 requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서 관찰된 변화/, 'selected research findings must be visibly labeled before methods are opened');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
@@ -58,7 +58,7 @@ requireMatch(app, /heroProduct\?<a className="hero-product" href="#products" ari
 requireMatch(app, /if\(rhythmIdFromUrl\(url\)\)[\s\S]*?getElementById\('rhythm'\)\?\.scrollIntoView/, 'a shared rhythm query must scroll to the shared result after the page mounts');
 requireMatch(app, /if\(challengeInvite\)\{[\s\S]*?const scrollToChallenge=\(\)=>\{[\s\S]*?getElementById\('lab'\)[\s\S]*?target\.scrollIntoView[\s\S]*?window\.scrollBy\(\{top:target\.getBoundingClientRect\(\)\.top-96,behavior:'instant'\}\)[\s\S]*?setInterval\(\(\)=>\{[\s\S]*?getBoundingClientRect\(\)\.top[\s\S]*?align\(\)[\s\S]*?trackOnce\('shared_link_landed',\{path:'\/challenge'/, 'a seven-day challenge invite must stay aligned while page content settles');
 requireMatch(app, /<SevenDayChallenge onEvent=\{track\} isInvite=\{challengeInvite\}\/>/, 'a challenge invite must reach the seven-day challenge section');
-requireMatch(challenge, /isInvite \? <p className="challenge-invite" role="status">친구가 7일 휴식 기록을 공유했어요\.<\/p>/, 'challenge invite context must remain visible beside its destination');
+requireMatch(challenge, /isInvite \? <p className="challenge-invite" role="status">친구가 7일 휴식 챌린지에 초대했어요\. 개인 기록은 공유되지 않았어요\.<\/p>/, 'challenge invite context must remain visible and protect the visitor’s private record');
 requireMatch(challenge, /isInvite \? '건강 검사가 아닌 휴식 기록이에요\. 기록은 이 기기에만 남아요\.'/ , 'a challenge invite must keep its non-diagnostic and local-storage boundary visible');
 requireMatch(challengeStyles, /\.seven-day-challenge\.is-invite \.challenge-start\{margin-top:14px;padding:18px 16px\}[\s\S]*?\.seven-day-challenge\.is-invite \.challenge-start \.button\{margin-top:12px;min-height:48px\}/, 'mobile challenge invitations must compact enough to keep their start action in view');
 requireMatch(app, /const description='GABA를 섭취한 사람 연구를 쉬운 말과 그림으로 소개하고, 연구 조건과 셀핀다 제품 정보를 구분해 보여드립니다\.'/ , 'research route metadata must use plain language and separate general research from product information');
@@ -101,14 +101,16 @@ if (/gaba-master-index\.json/.test(app + indexHtml)) fail('consumer pages must n
 requireMatch(research, /id="research"[^>]*aria-label="연구를 쉬운 말로 보기"/, 'research section must retain an accessible consumer label');
 if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');
 requireMatch(research, /const featuredStudy = visibleStudies\[0\][\s\S]*renderStudy\(featuredStudy, true\)/, 'a concrete research result must appear before search and filters');
-requireMatch(research, /research-library-head[\s\S]*아래 자료는 일반 GABA 사람 연구예요\. 셀핀다 제품을 시험한 결과는 아니에요/, 'research list must state product scope once in a visible consumer-friendly introduction');
-requireMatch(research, /누가 참여했고, 어떻게 살펴봤나요\?/, 'research detail must use a consumer-friendly label');
+requireMatch(research, /research-library-head[\s\S]*일반 GABA 정제 연구예요\. 셀핀다 제품의 구성과 먹는 법은 포장에서 확인해 주세요\./, 'research list must state product scope once in a visible consumer-friendly introduction');
+requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.header\.research-route-header nav\{display:flex!important;position:static[\s\S]*?\.study-paired-group\{grid-template-columns:minmax\(96px/, 'mobile research route must keep its return link in the header and make the paired results compact enough to scan');
+requireMatch(styles, /\.study-paired-group\{grid-template-columns:minmax\(0,1fr\)[\s\S]*?\.study-paired-group h4,\.study-paired-trajectory,\.study-paired-spread\{grid-column:1\/-1\}/, 'mobile study groups must keep labels, values and detail links readable across the full card width');
+requireMatch(research, /연구 내용을 더 자세히 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
 requireMatch(researchRouteHtml, /GABA 사람 연구 읽기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*research-gateway/, 'the GABA explanation and teaser must lead to a separate, easy-to-find research route');
 requireMatch(research, /canonicalStudySources/, 'research list must suppress duplicate records of the same paper across all source links');
-requireMatch(research, /사람 연구 한 편 먼저 보기/, 'research list must have a direct consumer heading');
+requireMatch(research, /수면 연구 한눈에/, 'research list must have a direct consumer heading');
 requireMatch(story, /GABA 사람 연구 읽기/, 'GABA introduction must link to the separate research route');
 if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(app + story)) fail('a study result must appear in only one detailed research section');
 for (const marker of ['study-time-comparison', 'study-paired-groups', 'study-paired-trajectory', 'study-paired-spread', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
@@ -120,7 +122,9 @@ requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\
 if (/rhythm-recovery-intro|rhythm-load-signals/.test(rhythm)) fail('the 1-minute check must not repeat its intro before the start button');
 requireMatch(rhythm, /rhythm-start-scenes[\s\S]*?질문에 나오는 생활 장면/, 'optional everyday examples must stay secondary to the check CTA');
 requireMatch(rhythm, /const band = score >= 10 \? 'high' : score >= 5 \? 'watch' : 'low'/, 'brain illustration intensity must follow the total score');
-requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?한 가지 상황에서 거의 매일/, 'a single frequent response must be explained separately from the total brain-load illustration');
+requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?자주 쉬지 못했다고 답한 순간이 있어요/, 'frequent responses must lead to a clear, non-diagnostic rest suggestion');
+requireMatch(rhythm, /rhythm-result-primary-actions[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요/, 'the result must offer a privacy-preserving check invitation beside the result');
+requireMatch(app, /products-intro-actions[\s\S]*?product\.officialUrl[\s\S]*?스마트스토어에서 가격·재고 보기[\s\S]*?REVIEW_DESTINATION_URL/, 'product and buyer-review links must appear beside the product introduction');
 requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must expose alternative text');
 requireMatch(app, /className="product-visual" role="img" aria-label=\{/, 'product composition diagram must expose an accessible text alternative');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
@@ -209,7 +213,7 @@ requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/prod
 requireMatch(review, /가바 1500 · 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
 requireMatch(review, /가바 1500 구매자 후기를 스마트스토어에서 읽어보세요\./, 'review destination must keep the approved consumer message');
 requireMatch(indexHtml, /href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>스마트스토어에서 후기 읽기/, 'static review CTA must deep-link to the Smart Store review dialog');
-requireMatch(app, /id="products"[\s\S]*?href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>구매자 후기 먼저 보기/, 'product-section review shortcut must deep-link to the approved Smart Store review dialog');
+requireMatch(app, /id="products"[\s\S]*?href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 후기 바로 보기/, 'product-section review shortcut must deep-link to the approved Smart Store review dialog');
 requireMatch(app, /content\?\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 구매자 후기/, 'header review link must open the approved Smart Store review dialog');
 requireMatch(purchaseQuestions, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 구매자 후기 읽기/, 'purchase FAQ review CTA must deep-link to the approved Smart Store review dialog');
 requireMatch(story, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>스마트스토어 후기 읽기/, 'GABA story review link must open the approved Smart Store review dialog');
