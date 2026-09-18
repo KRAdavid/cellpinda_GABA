@@ -23,6 +23,7 @@ const teaser = await read('src/components/TeaserPreview.tsx');
 const research = await read('src/components/ResearchLibrary.tsx');
 const story = await read('src/components/GabaStory.tsx');
 const studyInsightVisual = await read('src/components/StudyInsightVisual.tsx');
+const studyInsightStyles = await read('src/components/StudyInsightVisual.css');
 const brainLoadEvidence = await read('src/components/BrainLoadEvidence.tsx');
 const brainLoadEvidenceStyles = await read('src/components/BrainLoadEvidence.css');
 const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
@@ -110,7 +111,9 @@ requireMatch(research, /canonicalStudySources/, 'research list must suppress dup
 requireMatch(research, /사람 연구 한 편 먼저 보기/, 'research list must have a direct consumer heading');
 requireMatch(story, /GABA 사람 연구 읽기/, 'GABA introduction must link to the separate research route');
 if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(app + story)) fail('a study result must appear in only one detailed research section');
-for (const marker of ['study-time-comparison', 'study-paired-groups', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
+for (const marker of ['study-time-comparison', 'study-paired-groups', 'study-paired-trajectory', 'study-paired-spread', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
+requireMatch(studyInsightVisual, /잠들기까지 걸린 평균 시간[\s\S]*연구 조건[\s\S]*visual\.beforeLabel[\s\S]*visual\.afterLabel[\s\S]*참여자별 기록 차이 보기/, 'sleep chart must make the metric, research conditions and before-to-after comparison easy to scan');
+requireMatch(researchStyles, /research-library-kind--non-ingestion[\s\S]*?font-size:14px[\s\S]*?color:#263a2d/, 'non-ingestion GABA studies must have a readable, explicit label');
 requireMatch(app, /특허 문서의 예시[\s\S]*?유산균과 재료 성분으로 GABA를 만드는 방법[\s\S]*?특허 문서 보기/, 'fermentation visual must distinguish a general patent example from the current product process');
 if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하기|수치와 제품 적용 문장은 펼쳐서|연구 카드에서 조건 확인|숫자와 출처 더 보기|근거 식별자|정량분석/.test(app + research + story + indexHtml)) fail('researcher-oriented detail labels leaked into consumer source');
 requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\s\S]*?\}, 180\)/, 'touch answers must auto-advance to the next question');
@@ -261,4 +264,9 @@ requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"in
   const linearChannel = channel => { const value = parseInt(channel, 16) / 255; return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4; };
   const researchLuminance = researchAccent ? [0, 2, 4].reduce((sum, start, index) => sum + [0.2126, 0.7152, 0.0722][index] * linearChannel(researchAccent.slice(start, start + 2)), 0) : null;
   if (researchLuminance === null || 1.05 / (researchLuminance + 0.05) < 4.5) fail('small green research labels must meet WCAG AA contrast on white');
+  const pairedFootnoteRule = [...studyInsightStyles.matchAll(/\.study-insight--paired-before-after \.study-insight-footnote\{([^}]*)\}/gi)].at(-1)?.[1] ?? '';
+  const pairedFootnoteColor = pairedFootnoteRule.match(/color:#([0-9a-f]{6})/i)?.[1];
+  const pairedFootnoteSize = pairedFootnoteRule.match(/font-size:(\d+)px/i)?.[1];
+  const pairedLuminance = pairedFootnoteColor ? [0, 2, 4].reduce((sum, start, index) => sum + [0.2126, 0.7152, 0.0722][index] * linearChannel(pairedFootnoteColor.slice(start, start + 2)), 0) : null;
+  if (pairedLuminance === null || 1.05 / (pairedLuminance + 0.05) < 4.5 || Number(pairedFootnoteSize) < 14) fail('research chart guidance must be at least 14px and meet WCAG AA contrast on white');
   console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion', 'research-label-AA-contrast'], responsive: ['mobile', 'tablet-navigation', 'tablet-hero-contrast'], sharing: ['rhythm-result', 'seven-day-challenge-destination', 'invite-first'], teaser: ['user-started-playback', 'visibility-triggered-load', 'approved-preview-source', 'accurate-embed-event'], seo: ['canonical', 'og-url', 'social-image-dimensions'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));

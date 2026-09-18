@@ -11,17 +11,26 @@ function Trend({direction,label}:{direction:'down'|'up';label:string}){
 
 export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
   if(visual.kind==='paired-before-after'){
-    const max=Math.max(visual.scaleMax,...visual.groups.flatMap(group=>[group.beforeValue,group.afterValue]));
     const meanAndSpread=(value:number,sd?:number)=>`${numberText(value)}${sd===undefined?'':` ± ${numberText(sd)}`}`;
     return <figure className="study-insight study-insight--paired-before-after" aria-label={`${visual.metric}. ${visual.groups.map(group=>`${group.label}, ${group.participants}명, ${visual.beforeLabel} 평균 ${meanAndSpread(group.beforeValue,group.beforeSd)}${visual.unit}, ${visual.afterLabel} 평균 ${meanAndSpread(group.afterValue,group.afterSd)}${visual.unit}`).join('. ')}. ${visual.comparisonLabel}`}>
-      <figcaption><Clock3 size={18} aria-hidden="true"/>이 연구에서 기록한 평균 잠드는 시간<span>{visual.comparisonLabel}</span></figcaption>
+      <figcaption><Clock3 size={18} aria-hidden="true"/>잠들기까지 걸린 평균 시간<span>연구 조건 · {visual.comparisonLabel}</span></figcaption>
       <div className="study-paired-groups">{visual.groups.map(group=><section className="study-paired-group" key={group.label} aria-label={`${group.label}, ${group.participants}명`}>
         <h4>{group.label}<small>{group.participants}명</small></h4>
-        {[{label:visual.beforeLabel,value:group.beforeValue,sd:group.beforeSd},{label:visual.afterLabel,value:group.afterValue,sd:group.afterSd}].map(point=><div className="study-paired-measure" key={point.label}>
-          <span>{point.label}</span><i><b style={{width:`${Math.min(100,Math.max(4,point.value/max*100))}%`}}/></i><strong>{numberText(point.value)}<small>{point.sd===undefined?visual.unit:`± ${numberText(point.sd)} ${visual.unit}`}</small></strong>
-        </div>)}
+        <div className="study-paired-trajectory">
+          <div><span>{visual.beforeLabel}</span><strong>{numberText(group.beforeValue)}<small>{visual.unit}</small></strong></div>
+          <ArrowRight size={19} aria-hidden="true"/>
+          <div><span>{visual.afterLabel}</span><strong>{numberText(group.afterValue)}<small>{visual.unit}</small></strong></div>
+        </div>
+        <details className="study-paired-spread">
+          <summary>참여자별 기록 차이 보기</summary>
+          <p>± 뒤 숫자는 사람마다 기록이 얼마나 달랐는지 보여줘요.</p>
+          <ul>
+            <li>{visual.beforeLabel} {meanAndSpread(group.beforeValue,group.beforeSd)} {visual.unit}</li>
+            <li>{visual.afterLabel} {meanAndSpread(group.afterValue,group.afterSd)} {visual.unit}</li>
+          </ul>
+        </details>
       </section>)}</div>
-      <small className="study-insight-footnote">평균 · ± 뒤 숫자는 참여자별 기록의 퍼짐 · 하루 GABA 300mg · 4주</small>
+      <small className="study-insight-footnote">각 그룹의 평균을 같은 기준으로 비교했어요. 이 연구에서 사용한 양은 제품 권장량을 뜻하지 않아요.</small>
     </figure>;
   }
 

@@ -66,7 +66,7 @@ function publicMetadata(item){
   if(!item.metadata || typeof item.metadata!=='object')return undefined;
   const metadata=Object.fromEntries(publicMetadataKeys
     .filter(key=>Object.prototype.hasOwnProperty.call(item.metadata,key))
-    .map(key=>[key,key==='studyType' ? consumerStudyType(item.metadata[key]) : item.metadata[key]]));
+    .map(key=>[key,key==='studyType' ? consumerStudyType(item.metadata[key],item.metadata.dose) : item.metadata[key]]));
   return Object.keys(metadata).length ? metadata : undefined;
 }
 
@@ -139,15 +139,15 @@ const masterIndex={
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
   records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,reviewedAt,evidenceHash})=>{
-    return {id,topic,reviewedAt,question:metadata.question,studyType:consumerStudyType(metadata.studyType),population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerFindingFirst:metadata.consumerFindingFirst,consumerDetail:metadata.consumerDetail,consumerContext:metadata.consumerContext,consumerDisclosure:metadata.consumerDisclosure,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
+    return {id,topic,reviewedAt,question:metadata.question,studyType:consumerStudyType(metadata.studyType,metadata.dose),population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerFindingFirst:metadata.consumerFindingFirst,consumerDetail:metadata.consumerDetail,consumerContext:metadata.consumerContext,consumerDisclosure:metadata.consumerDisclosure,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
   }),
 };
 for(const record of masterIndex.records){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(record.reviewedAt) || !/^[a-f0-9]{64}$/.test(record.evidenceHash)) throw new Error(`Research ${record.id} is missing a valid review date or evidence hash`);
 }
-function consumerStudyType(value=''){
+function consumerStudyType(value='',dose=''){
   if(/문헌고찰|메타분석|사람 연구 여러 편|여러 연구를 모아/.test(value)) return '사람 연구 여러 편을 모아 살펴봄';
-  if(/관찰|MRS|뇌 신호|손끝 연습/.test(value)) return '손끝 연습과 뇌 신호를 살펴봄';
+  if(/GABA를 먹지 않고|GABA 섭취 없이/.test(dose) || /관찰|MRS|뇌 신호|손끝 연습/.test(value)) return 'GABA를 먹지 않은 연구 · 뇌 속 신호 관찰';
   if(/운동/.test(value)) return '사람이 참여한 운동 연구';
   if(/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return 'GABA를 먹고 비교한 사람 연구';
   return '사람 연구';

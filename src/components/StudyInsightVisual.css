@@ -57,6 +57,18 @@
 .study-group-row{margin-top:12px}
 .study-group-row>strong small{margin-left:2px;font-size:10px;font-weight:500}
 .study-insight--groups .study-insight-footer{align-items:flex-start;flex-direction:column;gap:4px}
+.study-paired-trajectory{display:grid;grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);align-items:center;gap:10px;padding:4px 0 8px}
+.study-paired-trajectory>div{display:grid;gap:5px;min-width:0}
+.study-paired-trajectory>div>span{color:#43584a;font-size:14px;line-height:1.45}
+.study-paired-trajectory>div>strong{color:#18382b;font-size:clamp(25px,4vw,34px);line-height:1;letter-spacing:-.045em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.study-paired-trajectory>div>strong small{margin-left:4px;font-size:14px;font-weight:550;letter-spacing:0}
+.study-paired-trajectory>svg{color:#43584a}
+.study-paired-spread{margin-top:7px;border-top:1px solid #e4e9e4;padding-top:7px}
+.study-paired-spread>summary{color:#315f48;font-size:14px;line-height:1.5;cursor:pointer}
+.study-paired-spread>p,.study-paired-spread>ul{margin:7px 0 0;color:#43584a;font-size:14px;line-height:1.6}
+.study-paired-spread>ul{padding-left:20px}
+.study-insight--paired-before-after .study-insight-footnote{color:#43584a;font-size:14px;line-height:1.65}
+@media(max-width:420px){.study-paired-trajectory{grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);gap:5px}.study-paired-trajectory>div>strong{font-size:27px}}
 @media(max-width:680px){.study-insight{margin-top:14px;padding-top:13px}.study-time-comparison strong{font-size:34px}.study-pair-metrics{gap:10px}.study-pair-metrics>div+div{padding-left:10px}.study-pair-metrics strong{font-size:23px}.study-ratio-hero>strong{font-size:42px}}
 
 /* Readable research figures for mobile and midlife audiences. */

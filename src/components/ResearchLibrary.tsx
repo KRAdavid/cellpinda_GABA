@@ -52,7 +52,7 @@ type Props = {
 };
 
 function compactStudyType(value?: string, dose?: string): string {
-  if (/GABA를 먹지 않고|GABA 섭취 없이/.test(dose || '') || /관찰|MRS|뇌 신호|손끝 연습/.test(value || '')) return 'GABA를 먹지 않고 뇌 신호를 살펴본 연구';
+  if (/GABA를 먹지 않고|GABA 섭취 없이/.test(dose || '') || /관찰|MRS|뇌 신호|손끝 연습/.test(value || '')) return 'GABA를 먹지 않은 연구 · 뇌 속 신호 관찰';
   if (!value) return 'GABA 관련 연구';
   if (/문헌고찰|여러 연구를 모아|사람 연구 여러 편/.test(value)) return '사람 연구 여러 편을 모아 살펴봄';
   if (/운동/.test(value)) return '사람이 참여한 운동 연구';
@@ -154,6 +154,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
   }
   function renderStudy(claim: Claim, featured = false) {
     const metadata = claim.metadata!;
+    const nonIngestionStudy = /GABA를 먹지 않고|GABA 섭취 없이/.test(metadata.dose || '');
     const findingFirst = Boolean(metadata.consumerFindingFirst && !metadata.consumerVisual && metadata.consumerFinding);
     const takeaway = findingFirst
       ? metadata.consumerFinding
@@ -161,7 +162,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
       ? metadata.consumerScope || metadata.consumerSummary || metadata.consumerFinding
       : metadata.consumerSummary || metadata.consumerFinding || metadata.consumerScope;
     return <article id={claim.id} className={`research-library-card${featured ? ' research-library-card-featured' : ''}`} key={claim.id}>
-      <p className="research-library-kind"><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType, metadata.dose)}</p>
+      <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{compactStudyType(metadata.studyType, metadata.dose)}</p>
       <h3>{metadata.question || claim.topic}</h3>
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{findingFirst ? '사람 연구에서 관찰된 변화' : '연구는 이렇게 진행됐어요'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}

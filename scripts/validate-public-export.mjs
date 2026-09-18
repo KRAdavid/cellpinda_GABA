@@ -221,6 +221,8 @@ for (const claim of content.claims) {
 }
 
 const recordsById = new Map(master.records.map(record => [record.id, record]));
+const hebaRecord=recordsById.get('research-heba-2016');
+if(!hebaRecord || !hebaRecord.studyType?.includes('GABA를 먹지 않은 연구') || !hebaRecord.dose?.includes('GABA를 먹지 않고')) fail('non-ingestion GABA studies must be labeled before they appear in the consumer research index');
 const coverage = {
   stress: ['research-review-2020'],
   sleep: ['research-byun-2018', 'research-yamatsu-2016'],
