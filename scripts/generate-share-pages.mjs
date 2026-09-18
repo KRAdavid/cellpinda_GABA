@@ -55,7 +55,7 @@ fs.mkdirSync(siteProductsRoot, { recursive: true });
 const productTitle = `셀핀다 가바 ${Number(product.amountMg).toLocaleString('ko-KR')} · 제품 구성 보기`;
 const productDescription = `한 포에 든 양과 상자 구성을 확인해 보세요. 가격과 판매 정보는 스마트스토어에서 볼 수 있어요.`;
 const productCanonical = `${siteRoot}/products/`;
-const productImage = `${siteRoot}/assets/product-${product.amountMg}.jpg`;
+const productImage = `${siteRoot}/assets/product-composition-${product.amountMg}.png`;
 const productStoreUrl = product.officialUrl;
 const productDestination = '../?view=products#products';
 const productSchema = JSON.stringify({
@@ -71,13 +71,13 @@ const productShareHtml = `<!doctype html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(productTitle)}</title><meta name="description" content="${escapeHtml(productDescription)}">
 <link rel="canonical" href="${productCanonical}"><meta name="robots" content="index,follow">
-<meta property="og:type" content="product"><meta property="og:site_name" content="셀핀다 발효가바"><meta property="og:locale" content="ko_KR"><meta property="og:url" content="${productCanonical}"><meta property="og:title" content="${escapeHtml(productTitle)}"><meta property="og:description" content="${escapeHtml(productDescription)}"><meta property="og:image" content="${productImage}"><meta property="og:image:alt" content="셀핀다 가바 ${Number(product.amountMg).toLocaleString('ko-KR')} 제품 포장">
+<meta property="og:type" content="product"><meta property="og:site_name" content="셀핀다 발효가바"><meta property="og:locale" content="ko_KR"><meta property="og:url" content="${productCanonical}"><meta property="og:title" content="${escapeHtml(productTitle)}"><meta property="og:description" content="${escapeHtml(productDescription)}"><meta property="og:image" content="${productImage}"><meta property="og:image:alt" content="한 포 ${Number(product.amountMg).toLocaleString('ko-KR')} mg, ${product.servings}포, 전체 ${product.totalG} g 구성 안내">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(productTitle)}"><meta name="twitter:description" content="${escapeHtml(productDescription)}"><meta name="twitter:image" content="${productImage}">
 <script type="application/ld+json">${productSchema}</script><link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <meta http-equiv="refresh" content="0;url=${productDestination}"></head><body>
 <main style="max-width:720px;margin:0 auto;padding:40px 24px;font-family:Arial,'Malgun Gothic',sans-serif;line-height:1.7;color:#18382b">
 <p>셀핀다 발효가바 · 제품 구성</p><h1>${escapeHtml(productTitle)}</h1>
-<img src="../assets/product-${product.amountMg}.jpg" alt="셀핀다 가바 ${Number(product.amountMg).toLocaleString('ko-KR')} 제품 포장" style="display:block;width:min(100%,360px);height:auto;margin:24px auto">
+<img src="../assets/product-composition-${product.amountMg}.svg" alt="한 포 ${Number(product.amountMg).toLocaleString('ko-KR')} mg, ${product.servings}포, 전체 ${product.totalG} g 구성 안내" style="display:block;width:min(100%,560px);height:auto;margin:24px auto">
 <p>한 포에 든 양과 상자 구성을 확인해 보세요. 가격과 판매 정보는 스마트스토어에서 확인할 수 있습니다.</p>
 <p><a href="${productDestination}" style="color:#158457;font-weight:700">사이트에서 제품 구성 보기 →</a></p>
 <p><a href="${escapeHtml(productStoreUrl)}" style="color:#158457;font-weight:700">스마트스토어에서 판매 정보 보기 ↗</a></p>

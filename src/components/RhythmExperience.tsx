@@ -371,7 +371,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
     if (navigator.share) {
       try {
-        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 뇌 컨디션 확인 챌린지' : '잠과 휴식 1분 체크', text: shareText, url });
+        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 1분 신호 반응 게임' : '잠과 휴식 1분 체크', text: shareText, url });
         setMessage(kind === 'focus' ? '게임 초대를 보냈어요. 친구도 설명을 읽고 직접 시작할 수 있어요.' : '1분 체크 초대 창을 열었어요. 친구도 직접 해보도록 보내 보세요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
         return;

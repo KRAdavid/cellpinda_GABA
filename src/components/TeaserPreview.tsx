@@ -61,7 +61,7 @@ export default function TeaserPreview({onEvent}: Props) {
         <p className="chapter">발효가바 영상</p>
         <h2 id="teaser-heading">발효가바는<br />어떻게 만들어질까요?</h2>
         <p>{preview.description}</p>
-        <p className="teaser-context">영상 화면의 재생 버튼을 누르면 발효 이야기가 시작돼요. 아래에서 사람 연구와 제품 구성을 이어서 살펴보세요.</p>
+        <p className="teaser-context">영상에서는 발효 이야기를, 연구와 제품 메뉴에서는 각각의 정보를 확인해 보세요.</p>
       </div>
       <div className="teaser-card teaser-card-player" aria-busy={!frameLoaded}>
         <div className="teaser-player">

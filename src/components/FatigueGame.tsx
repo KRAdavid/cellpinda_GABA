@@ -162,10 +162,7 @@ function comparisonText(before: FocusGameSummary, second: FocusGameSummary, rest
   const speed = comparison.speedDeltaMs === null ? '누르는 시간은 비교하기 어려워요.' : `평균 누르는 시간은 ${Math.abs(comparison.speedDeltaMs / 1000).toFixed(2)}초 ${comparison.speedDeltaMs < 0 ? '짧았어요' : comparison.speedDeltaMs > 0 ? '길었어요' : '같았어요'}.`;
   const accuracy = comparison.accuracyDeltaPct === null ? '' : `맞힌 비율은 ${Math.abs(comparison.accuracyDeltaPct)}%포인트 ${comparison.accuracyDeltaPct > 0 ? '높았어요' : comparison.accuracyDeltaPct < 0 ? '낮았어요' : '같았어요'}.`;
   let heading = '두 게임 기록이 비슷해요.';
-  if (comparison.accuracyDeltaPct !== null && comparison.accuracyDeltaPct > 0) heading = `두 번째 게임에서 맞힌 비율이 ${comparison.accuracyDeltaPct}%포인트 높았어요.`;
-  else if (comparison.accuracyDeltaPct !== null && comparison.accuracyDeltaPct < 0) heading = `두 번째 게임에서 맞힌 비율이 ${Math.abs(comparison.accuracyDeltaPct)}%포인트 낮았어요.`;
-  else if (comparison.speedDeltaMs !== null && comparison.speedDeltaMs < 0) heading = '두 번째 게임에서 신호를 누른 시간이 짧았어요.';
-  else if (comparison.speedDeltaMs !== null && comparison.speedDeltaMs > 0) heading = '두 번째 게임에서 신호를 누른 시간이 길었어요.';
+  if (comparison.direction !== 'similar' && comparison.direction !== 'unavailable') heading = '두 게임 기록이 달라요.';
   if (comparison.direction === 'unavailable') heading = '두 게임 기록을 비교하기 어려워요.';
   const context = rested ? '5분 쉰 뒤 두 번째로 한 게임' : '쉬지 않고 이어서 한 두 번째 게임';
   const body = `${speed} ${accuracy} ${context}의 기록을 나란히 보여드려요. 문제 순서와 익숙함, 기기·주변 상황도 영향을 줄 수 있어 휴식이 기록 변화의 원인이라고 단정할 수는 없어요.`;
@@ -607,7 +604,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   return (
     <section className="fatigue-game" id="focus-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
-        <div><p className="fatigue-game-kicker">02 / 오늘의 게임 기록</p><h2 id="fatigue-game-heading">뇌 컨디션 확인 챌린지</h2></div>
+        <div><p className="fatigue-game-kicker">02 / 오늘의 게임 기록</p><h2 id="fatigue-game-heading">1분 신호 반응 게임</h2></div>
         <p>신호가 3단계로 바뀌어요.</p>
       </div>
 
@@ -744,7 +741,8 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
 
         {phase === 'complete' && before && after && comparison ? <div className="fatigue-game-summary fatigue-game-complete">
           <div className={`fatigue-comparison fatigue-comparison-${comparison.tone}`}><ArrowRight size={24} aria-hidden="true" /><div><p className="fatigue-game-kicker">{mode === 'after' ? '5분 쉰 뒤 두 번째 게임' : '쉬지 않고 이어 한 두 번째 게임'}</p><h3>{comparison.heading}</h3></div></div>
-          <details className="fatigue-game-result-details"><summary>두 게임 기록 자세히 보기</summary><p>{comparison.body}</p><div className="fatigue-game-score-grid">{metrics.map(metric => <div key={metric.label}><span>{metric.label}</span><strong>첫 번째 {metric.before}</strong><strong>두 번째 {metric.after}</strong></div>)}</div></details>
+          <p className="fatigue-game-comparison-note">{comparison.body}</p>
+          <details className="fatigue-game-result-details"><summary>두 게임 기록 자세히 보기</summary><div className="fatigue-game-score-grid">{metrics.map(metric => <div key={metric.label}><span>{metric.label}</span><strong>첫 번째 {metric.before}</strong><strong>두 번째 {metric.after}</strong></div>)}</div></details>
           <p className="fatigue-game-viral-copy">친구도 해볼 수 있게 이 챌린지를 보내 보세요.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>처음부터 다시 하기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">문자나 카카오톡으로 보낼 수 있어요. 내 답변과 점수는 포함되지 않아요.</p> : null}
         </div> : null}
       </div>

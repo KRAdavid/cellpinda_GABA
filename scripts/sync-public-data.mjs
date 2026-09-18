@@ -59,7 +59,7 @@ function publicSources(item){
 const publicMetadataKeys=[
   'studyType','population','sampleSize','dose','duration','comparison',
   'outcome','productApplicability','question',
-  'searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerContext','consumerDisclosure','consumerVisual','hopefulTakeaway',
+  'searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerDetail','consumerContext','consumerDisclosure','consumerVisual','hopefulTakeaway',
 ];
 
 function publicMetadata(item){
@@ -140,7 +140,7 @@ const masterIndex={
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
   records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,reviewedAt,evidenceHash})=>{
-    return {id,topic,reviewedAt,question:metadata.question,studyType:consumerStudyType(metadata.studyType),population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerContext:metadata.consumerContext,consumerDisclosure:metadata.consumerDisclosure,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
+    return {id,topic,reviewedAt,question:metadata.question,studyType:consumerStudyType(metadata.studyType),population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerDetail:metadata.consumerDetail,consumerContext:metadata.consumerContext,consumerDisclosure:metadata.consumerDisclosure,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
   }),
 };
 for(const record of masterIndex.records){

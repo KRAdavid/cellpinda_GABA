@@ -114,12 +114,12 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const researchPageText = await researchPageResponse.text();
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
     assert.match(researchPageText, /property="og:title" content="GABA 사람 연구를 쉬운 말로"/, 'live research route must identify itself as an educational page');
-    assert.ok(researchPageText.includes('사람을 대상으로 GABA를 살펴본 논문을 모았어요') && researchPageText.includes('제품 표시사항을 각각 확인해 보세요'), 'live research page must distinguish general study material from current product information before readers enter the data');
+    assert.ok(researchPageText.includes('연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉽게 정리했어요'), 'live research page must distinguish general study material from current product information before readers enter the data');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
     assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1,500 · 제품 구성 보기"/, 'live product share route must show a product-specific preview title');
-    assert.match(productSharePageText, /assets\/product-1500\.jpg/, 'live product share route must use the product package preview image');
+    assert.match(productSharePageText, /assets\/product-composition-1500\.png/, 'live product share route must use the neutral product composition preview');
     const moduleSources = [...pageText.matchAll(/<script[^>]+type="module"[^>]+src="([^"]+)"/gi)].map(match => match[1]).filter(Boolean);
     assert.ok(moduleSources.length > 0, 'live root must expose a module bundle for the consumer UI');
     const moduleBundles = await Promise.all(moduleSources.map(async source => {
@@ -130,7 +130,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }));
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 이야기 보기'), 'live consumer bundle must contain the consumer-facing teaser CTA');
-    assert.ok(consumerBundle.includes('뇌 컨디션 확인 챌린지'), 'live consumer bundle must contain the consumer-facing focus game');
+    assert.ok(consumerBundle.includes('1분 신호 반응 게임'), 'live consumer bundle must contain the consumer-facing focus game');
     assert.ok(consumerBundle.includes('매번 달라지는 신호') && consumerBundle.includes('초록은 누르고') && consumerBundle.includes('빨강은 누르지 않아요') && consumerBundle.includes('색 규칙 바꾸기') && consumerBundle.includes('색과 모양에 상관없이'), 'live consumer bundle must explain the three game stages in their actual order');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
     assert.ok(consumerBundle.includes('쉬지 않고 이어서 하기') && consumerBundle.includes('휴식이 기록 변화의 원인이라고 단정할 수는 없어요'), 'live consumer bundle must distinguish repeat records without claiming a rest effect');
@@ -171,11 +171,11 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
     assert.equal(canonicalHref(focusPageText), `${base}/focus/`, 'live focus invite canonical URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:url'), `${base}/focus/`, 'live focus invite Open Graph URL is invalid');
-    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card-v2.png`, 'live focus invite Open Graph image is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card-v3.png`, 'live focus invite Open Graph image is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
     assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#focus-game'), 'live focus invite must hand off to the explained game without auto-start');
     assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 게임 시작하기') && focusPageText.includes('초록을 누르고 빨강은 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
-    const focusGameCardResponse = await request('/assets/focus-game-card-v2.png');
+    const focusGameCardResponse = await request('/assets/focus-game-card-v3.png');
     assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
     assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {

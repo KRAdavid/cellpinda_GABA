@@ -7,6 +7,7 @@ export type ResearchMetadata = {
   question?: string;
   consumerSummary?: string;
   consumerFinding?: string;
+  consumerDetail?: string;
   consumerContext?: string;
   consumerDisclosure?: string;
   consumerVisual?: ConsumerVisual;
@@ -144,7 +145,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
     <div className="section-head research-library-head"><div><p className="chapter">사람 연구를 한곳에서</p><h2 id="research-title">궁금한 주제로<br/>연구를 찾아보세요.</h2></div><p>각 연구는 한 번만 소개해요.<br/>측정한 내용과 참여 조건을 함께 보여드립니다.</p></div>
-    <p className="research-library-evidence-note">연구마다 사용한 제품·양·참여한 사람·측정한 내용이 달라요. 먼저 여러 연구를 모아 본 자료를 보여드리고, 개별 연구 조건도 함께 확인할 수 있어요.</p>
+    <p className="research-library-evidence-note">연구에서 누가 무엇을 먹고 무엇을 살펴봤는지 쉬운 말과 그림으로 보여드려요.</p>
     <div className="research-reading-path" role="img" aria-label="궁금한 점, 연구에 참여한 사람, 살펴본 변화를 차례로 보여줍니다">
       <div><Search aria-hidden="true"/><strong>궁금한 점</strong></div><ArrowRight aria-hidden="true"/>
       <div><UsersRound aria-hidden="true"/><strong>누가 참여했나요?</strong></div><ArrowRight aria-hidden="true"/>
@@ -191,6 +192,7 @@ export default function ResearchLibrary({ claims, onOpen }: Props) {
               <div className="research-story-card"><Activity size={21} aria-hidden="true"/><h4>무엇을 살펴봤나요?</h4><p>{metadata.outcome || metadata.consumerScope || '연구에서 살펴본 항목'}</p></div>
               {metadata.comparison?<div className="research-story-card"><Clock3 size={21} aria-hidden="true"/><h4>무엇과 비교했나요?</h4><p>{metadata.comparison}</p></div>:null}
               {metadata.consumerDisclosure?<div className="research-story-card research-story-card--disclosure"><Info size={21} aria-hidden="true"/><h4>연구비와 저자 관계</h4><p>{metadata.consumerDisclosure}</p></div>:null}
+              {metadata.consumerDetail?<div className="research-story-card research-story-card--detail"><Activity size={21} aria-hidden="true"/><h4>연구에서 본 수치</h4><p>{metadata.consumerDetail}</p></div>:null}
             </div>
           </div>
           <div className="research-library-sources"><h4>자료 출처</h4>{claim.reviewedAt ? <p className="research-library-provenance">자료를 확인한 날 {claim.reviewedAt}</p> : null}{claim.sources.filter(source => isPublicUrl(source.url)).map(source =>

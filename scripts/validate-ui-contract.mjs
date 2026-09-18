@@ -40,8 +40,8 @@ const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', 'rese
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
-requireMatch(app, /사람을 대상으로 GABA를 살펴본 논문을 모았어요[\s\S]*제품 표시사항을 각각 확인해 보세요/, 'research route must distinguish general study materials from current product information before the evidence cards');
-requireMatch(app, /description='사람 GABA 연구에서 누가 무엇을 살펴봤는지 쉬운 말과 그림으로 소개합니다[\s\S]*제품 표시사항을 각각 확인해 보세요\.'/ , 'research route metadata must use plain language and keep product details separate');
+requireMatch(app, /연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉽게 정리했어요/, 'research route must introduce the evidence in plain language');
+requireMatch(app, /description='연구에서 누가 어떤 GABA를 먹고 무엇을 살펴봤는지 쉬운 말과 그림으로 소개합니다\.'/ , 'research route metadata must use plain language');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
@@ -96,7 +96,8 @@ if (/rhythm-recovery-intro|rhythm-load-signals/.test(rhythm)) fail('the 1-minute
 requireMatch(rhythm, /rhythm-start-scenes[\s\S]*?질문에 나오는 생활 장면/, 'optional everyday examples must stay secondary to the check CTA');
 requireMatch(rhythm, /const band = score >= 10 \? 'high' : score >= 5 \? 'watch' : 'low'/, 'brain illustration intensity must follow the total score');
 requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?한 가지 상황에서 거의 매일/, 'a single frequent response must be explained separately from the total brain-load illustration');
-requireMatch(app, /<img[^>]+alt=\{/, 'product and hero images must expose alternative text');
+requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must expose alternative text');
+requireMatch(app, /className="product-visual" role="img" aria-label=\{/, 'product composition diagram must expose an accessible text alternative');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
 requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, 'result sharing must invite the recipient to run their own check');
 requireMatch(rhythm, /rhythm-more-share[\s\S]*?결과 카드 공유·저장 등 다른 방법/, 'secondary result-share methods must be grouped below the primary invitation');
@@ -121,7 +122,7 @@ for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 �
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
-for (const marker of ['뇌 컨디션 확인 챌린지', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 달라지는 신호', '24개 신호 완료', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '뇌 피로나 건강 상태를 진단하지 않습니다', '뇌 피로나 건강 상태를 재는 점수는 아니에요', 'fatigue-game-result-boundary', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '세 가지 규칙 연습하기', '다음 규칙 연습하기', '연습 마치기', '잠깐 쉬고 다시 해봐도 좋아요.', '축하해요! 신호를 잘 따라왔어요.', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['1분 신호 반응 게임', '색 규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 달라지는 신호', '24개 신호 완료', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '뇌 피로나 건강 상태를 진단하지 않습니다', '뇌 피로나 건강 상태를 재는 점수는 아니에요', 'fatigue-game-result-boundary', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '세 가지 규칙 연습하기', '다음 규칙 연습하기', '연습 마치기', '잠깐 쉬고 다시 해봐도 좋아요.', '축하해요! 신호를 잘 따라왔어요.', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
 if (/needsFocusRecovery|FOCUS_GAME_RECOVERY_THRESHOLD_PCT|쉬고 난 뒤 게임 기록이 좋아졌어요|휴식 후/.test(fatigueGame)) fail('focus game must not use a score threshold as a recovery diagnosis or mislabel a second run');
 for (const marker of ['게임 효과음', 'playGameCue(\'start\')', 'playGameCue(\'signal\')', 'playGameCue(\'stage\')', 'playGameCue(\'complete\')', 'playGameCue(\'false-start\')']) requireMatch(fatigueGame, new RegExp(marker.replace(/[()]/g, '\\$&')), `focus game sound cue ${marker} is missing`);
 requireMatch(fatigueGame, /playGameCue\(correct \? 'correct' : 'miss'\)/, 'focus game must sound its response judgment');
@@ -146,6 +147,7 @@ requireMatch(fatigueGame, /responseWindowMs/, 'each difficulty stage must use it
 for (const marker of ['공이 올라가는 동안 · 4초', '공이 위에 머무는 동안 · 2초', '공이 내려가는 동안 · 6초', '공이 아래에 머무는 동안 · 2초', 'BreathLineGuide', 'prefers-reduced-motion', '자연스럽게 호흡하세요']) requireMatch(fatigueGame, new RegExp(marker), `animated 4-2-6-2 breathing rest marker ${marker} is missing`);
 requireMatch(fatigueGameStyles, /fatigue-breath-line[\s\S]*fatigue-breath-phases[\s\S]*is-active/, 'animated breathing guide must have responsive line and phase styles');
 for (const marker of ['첫 번째 게임 기록을 남겼어요.', '축하해요! 신호를 잘 따라왔어요.', '잠깐 쉬고 다시 해봐도 좋아요.', '화면에서 눈을 떼고 5분 쉬었다가 다른 신호로 다시 해볼 수 있어요.', 'getFocusGameResultGuidance', '5분 쉰 뒤 두 번째 게임', '쉬지 않고 이어 한 두 번째 게임', 'baseline-finished']) requireMatch(fatigueGame, new RegExp(marker), `score-based focus result marker ${marker} is missing`);
+requireMatch(fatigueGame, /fatigue-game-comparison-note[\s\S]*comparison\.body[\s\S]*<details className="fatigue-game-result-details"/, 'game comparison context must remain visible outside the collapsed score details');
 requireMatch(rhythm, /focusInviteArrival[\s\S]*getElementById\('focus-game'\)[\s\S]*scrollIntoView/, 'focus challenge invite must scroll to the game instructions');
 if (/startOnMount|focusAutoStart/.test(rhythm + fatigueGame)) fail('focus challenge must wait for the visitor to tap the start button');
 requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game target state styling is missing');
@@ -207,8 +209,8 @@ if (!existsSync(focusPage)) fail('focus invite page is missing');
 const focusHtml = await readFile(focusPage, 'utf8');
 requireMatch(focusHtml, /canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//, 'focus invite canonical metadata is missing');
 requireMatch(focusHtml, /focus=1#focus-game|focus=1/, 'focus invite handoff is missing');
-requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 뇌 컨디션 확인 챌린지"/, 'focus invite Open Graph title is missing');
-requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card-v2\.png"/, 'focus invite Open Graph image is missing');
+requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 1분 신호 반응 게임"/, 'focus invite Open Graph title is missing');
+requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card-v3\.png"/, 'focus invite Open Graph image is missing');
 requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 
   console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion'], mobile: ['responsive-breakpoint', 'readable-body-copy', 'single-invite-action'], teaser: ['user-started-playback', 'eager-load', 'approved-preview-source', 'accurate-embed-event'], seo: ['canonical', 'og-url'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));
