@@ -59,7 +59,7 @@ if (publicResearchRecords.some(claim => ['research-yoon-2022', 'research-steenbe
 const relationshipDisclosures = publicResearchRecords.filter(claim => claim.metadata?.consumerDisclosure);
 if (relationshipDisclosures.length < 3 || relationshipDisclosures.some(claim => !master.records.find(record => record.id === claim.id)?.consumerDisclosure)) fail('public study relationship disclosures must be preserved in the master index');
 if (!researchComponent.includes('preferredStudyOrder') || !researchComponent.includes("'research-review-2020'") || !researchComponent.includes("'research-byun-2018'") || !researchComponent.includes('const featuredStudy = visibleStudies[0]')) fail('a concrete visualized human study must appear before the research filters and overview');
-if (!researchComponent.includes('셀핀다 가바 1500 제품을 시험한 결과는 아니며, 논문마다 참여자와 연구 조건이 달라요.') || !researchHtml.includes('잠·긴장·뇌파·운동 등 사람 연구에서 무엇을 살펴봤는지 쉽게 정리했어요.') || !researchHtml.includes('셀핀다 가바 1500 제품 시험 결과는 아니에요.')) fail('the research list must clearly distinguish general GABA studies, brain-GABA observation, and Cellpinda product information');
+if (!researchComponent.includes('사람이 GABA를 먹은 연구와 뇌 속 신호를 살펴본 연구를 나눠 소개해요. 셀핀다 가바 1500 제품 정보는 연구와 따로 보여드려요.') || !researchHtml.includes('사람이 GABA를 먹은 연구와 뇌 속 신호를 살펴본 연구를 나눠 소개해요.') || !researchHtml.includes('셀핀다 가바 1500 제품 정보는 연구와 따로 보여드려요.')) fail('the research list must clearly distinguish human ingestion research, brain-signal observation and Cellpinda product information');
 
 const forbiddenKeys = /^(original|rightsEvidence|rightsScope|privatePath|customer|email|phone|answers|token|operatorToken|adminToken)$/i;
 const scanKeys = (value, path = '$') => {

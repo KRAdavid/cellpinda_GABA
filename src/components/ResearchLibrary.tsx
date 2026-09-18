@@ -203,7 +203,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   }
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
-    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>일반 GABA 사람 연구를 쉬운 말과 그림으로 정리했어요. 셀핀다 가바 1500 제품을 시험한 결과는 아니며, 논문마다 참여자와 연구 조건이 달라요.</p></div></div>
+    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>사람이 GABA를 먹은 연구와 뇌 속 신호를 살펴본 연구를 나눠 소개해요. 셀핀다 가바 1500 제품 정보는 연구와 따로 보여드려요.</p></div></div>
     <div className="research-topic-cards" role="group" aria-label="궁금한 주제 고르기">{topicCards.map(({topic:cardTopic,label,detail,Icon})=>{
       const recordCount=cardTopic==='긴장·잠' ? '14편' : `${studies.filter(claim=>claim.topic===cardTopic).length}편`;
       return <button type="button" className="research-topic-card" key={cardTopic} aria-pressed={activeTopic===cardTopic} onClick={()=>{
