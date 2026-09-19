@@ -26,6 +26,7 @@ assert.match(workflow, /DEPLOY_ENABLED:.*secrets\.CLOUDFLARE_API_TOKEN.*secrets\
 assert.match(workflow, /worker-readiness:[\s\S]*outputs:[\s\S]*enabled: \$\{\{ steps\.gate\.outputs\.enabled \}\}/, 'Worker readiness must be an explicit pre-deployment gate');
 assert.match(workflow, /needs: \[release-verify, worker-readiness\][\s\S]*needs\.worker-readiness\.outputs\.enabled == 'true'/, 'Worker deployment must run only after the readiness gate opens');
 assert.match(workflow, /HOLD — Worker\/D1 deployment was not run\./, 'missing Worker secrets must be visible as a hold rather than a green skipped deployment step');
+assert.doesNotMatch(workflow, /CLOUDFLARE_WORKER_URL \|\|/, 'Worker live verification must not fall back to an unverified temporary origin');
 assert.match(workflow, /^permissions:\r?\n  contents: read$/m, 'workflow-wide permissions must remain read-only');
 
 const actionRefs = [...workflow.matchAll(/^\s+uses:\s+(\S+)(?:\s+#.*)?$/gm)].map((match) => match[1]);
