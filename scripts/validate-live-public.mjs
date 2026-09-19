@@ -174,7 +174,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && researchPageText.includes('손끝 감각: GABA를 먹지 않고 뇌 속 GABA 신호와 손끝 연습을 살펴본 연구예요.') && !researchPageText.includes('일반 GABA 섭취 연구') && !researchPageText.includes('GABA를 먹지 않은 관찰 연구'), 'live research fallback must keep the consumer-first topic guide and plain-language non-ingestion study boundary');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.ok(researchPageText.includes('가바 1500 제품 구성 보기') && researchPageText.includes('view=products'), 'live research page must offer a neutral product-information handoff');
-    assert.ok(researchPageText.includes('운동 경험이 있는 남성이 GABA를 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬을 살펴본 연구를 정리했어요.') && !researchPageText.includes('GABA와 단백질을 함께 사용한 연구'), 'live research fallback must match the approved Powers study scope');
+    assert.ok(researchPageText.includes('연구 사용량 GABA 3g을 한 번 먹고 혈액 속 성장호르몬을 본 연구예요. 셀핀다 가바 1500과는 별도 연구예요.') && !researchPageText.includes('GABA와 단백질을 함께 사용한 연구'), 'live research fallback must match the approved Powers study scope and separate its research amount from the product');
     assert.equal(canonicalHref(productSharePageText), `${base}/products/`, 'live product share route must expose a product-specific canonical URL');
     assert.equal(metaContent(productSharePageText, 'property', 'og:url'), `${base}/products/`, 'live product share route must expose a product-specific Open Graph URL');
     assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1500 · 30포 구성 보기"/, 'live product share route must show the confirmed product name and package count');
