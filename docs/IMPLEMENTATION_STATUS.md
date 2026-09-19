@@ -10,6 +10,8 @@
 
 기본 Pages 주소가 아닌 공개 origin을 라이브 검증할 때 `PUBLIC_RUNTIME_MODE`를 생략하면 실패하도록 보완했다. Worker 주소를 정적 사이트로 잘못 검증하는 운영 실수를 차단하며, 기본 Pages 검증과 명시적 Worker 검증은 각각 계속 허용된다. 공개 콘텐츠가 아닌 거버넌스 변경까지 포함한 최신 main 배포 run `35445159229`에서 검증을 통과했다.
 
+CODEOWNERS와 네 개 GitHub Actions 워크플로의 권한 계약을 `validate:governance`로 빌드 단계에 연결했다. 저장소 책임자 지정과 `contents`·`issues`·`pull-requests`·`statuses` 권한의 허용 목록이 바뀌면 배포 검증이 실패한다. 이 가드는 거버넌스 설정을 강화하지만 실제 CODEOWNER 승인이나 Pages 환경 승인자를 대신하지 않는다.
+
 Worker 콘텐츠 API가 설정된 운영 모드에서는 API 오류를 정적 JSON으로 조용히 대체하지 않도록 보완했다. 장애 시 화면의 오류·재시도 경계가 유지되고, API가 없는 GitHub Pages 정적 모드에서만 승인된 정적 콘텐츠를 사용한다. 이 변경은 배포 run `35444036261`에서 UI 계약·타입검사·테스트·정적 산출물 검사를 통과했다.
 
 연구 인덱스 보완 커밋 `27ebd61`은 소비자용 연구 설계 라벨을 `content.json`과 마스터 인덱스 사이에서 동일하게 유지하고, 출처 DOI의 `/full`·`/abstract`·`/pdf` 변형을 같은 논문으로 정규화한다. 공개 export 검증기가 두 데이터의 설계 라벨 parity를 자동 검사하며, 이번 배포 run `35443431186`에서 통과했다.
