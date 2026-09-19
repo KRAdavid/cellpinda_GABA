@@ -1,5 +1,15 @@
 # 중간 구현 상태 — 2026-09-11
 
+## 최신 공개 후보 감리 — 2026-09-20 `cf4d7de`
+
+소비자 화면에서 일반 건강 연구와 GABA 섭취 연구가 같은 자료처럼 읽히지 않도록 경계 문구를 명시했다. `GABA 섭취 연구와 별도로, 잠·스트레스·집중을 이해하는 일반 건강 연구예요. 제품 정보는 따로 보여드려요.`를 BrainLoadEvidence에 고정하고 UI 계약으로 재유입을 차단한다. 제품 표기량과 연구용량은 `제품 표기 섭취량과 달라요`로 통일한다.
+
+스토리·티저·연구·후기·구매 전 안내·7일 챌린지의 지연 로딩 구간에 섹션별 스켈레톤과 보조기술용 상태 문구를 연결해 네트워크가 늦어도 빈 공간이 보이지 않게 했다. 티저가 보내는 `teaser_embed_loaded`·`teaser_external_opened` 이벤트는 Node SQLite와 Worker/D1 허용 목록 및 회귀 테스트에 연결했고, 실제 재생을 의미하지 않는 `teaser_play`는 프런트에서 사용하지 않는다.
+
+후보 `cf4d7de`는 107개 테스트, 타입검사, 연구 카피·UI·티저·공개 export 검증, production build, 10개 정적 route 및 65개 manifest 파일 검사를 통과했다. 최신 빌드 초기 JavaScript는 299.93KB( gzip 91.99KB ), CSS는 86.79KB( gzip 16.58KB )다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/)의 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다.
+
+현재 공개 Pages 루트는 HTTP 200이지만 후보 SHA를 포함하지 않고 `/release-manifest.json`은 HTTP 404다. 따라서 후보가 공개 배포됐다고 판정하지 않는다. B2 제품 표시, B3 후기 권한, B4 티저 공개 승인, C2 Worker/D1 설정, E1 실구매 대사는 기존 사람 판단 게이트로 유지한다.
+
 ## 현재 배포 기준 — 2026-09-19 20:33 KST
 
 현재 공개 Pages 콘텐츠 기준은 `main` 커밋 `ea1cc42`이며, 해당 커밋의 GitHub Actions `35445159229`는 당시 검증 기준으로 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공했다. 현재 후보 검증기를 같은 공개 주소에 다시 적용한 결과, 라이브 번들에 최신 `뇌컨디션 확인 챌린지` 명칭이 없어 12회 재시도 후 실패했다. 따라서 공개본은 후보보다 뒤처진 상태이며, 후보 PR 병합 전까지 배포 완료로 판정하지 않는다. 현재 공개 실행 모드는 정적 Pages이며 Worker/D1 배포는 필수 비밀값과 공개 origin이 준비될 때까지 의도적으로 실행하지 않는다.
@@ -146,7 +156,7 @@ CI의 임시 safe-run 파일 없이 `pnpm run tf:pulse:heartbeat`를 실행할 �
 
 ## 최신 업데이트 — 2026-09-12 티저 노출 이벤트 수집 경계 보강
 
-티저 컴포넌트가 보내는 `teaser_impression`·`teaser_play` 이벤트가 Node SQLite와 Worker/D1의 허용 목록에서 빠져 있던 경로를 수정했다. 이제 티저 화면 노출과 재생 영역 로드가 익명 흐름·경로만 남기고 운영 분석에 기록되며, 허용되지 않은 개인정보 필드는 기존과 같이 버린다. Node·Worker 회귀 테스트와 전체 83개 테스트, 타입검사·production build를 통과했다. 영상 공개 승인 상태와 티저 PREVIEW/HOLD 게이트는 변경하지 않았다.
+티저 컴포넌트가 보내는 `teaser_impression`·`teaser_embed_loaded`·`teaser_external_opened` 이벤트가 Node SQLite와 Worker/D1 허용 목록에 남도록 연결했다. 이제 티저 노출·삽입 로드·새 창 이동은 익명 흐름·경로만 남기고 운영 분석에 기록되며, 허용되지 않은 개인정보 필드는 기존과 같이 버린다. 실제 재생을 의미하는 `teaser_play`는 프런트에서 사용하지 않는다. Node·Worker 회귀 테스트와 현재 107개 테스트, 타입검사·production build를 통과했다. 영상 공개 승인 상태와 티저 PREVIEW/HOLD 게이트는 변경하지 않았다.
 
 티저 컴포넌트에는 노출 관찰자와 iframe 로드 콜백의 1회 기록 보호도 추가했다. 콘텐츠 재렌더링이나 외부 프레임 재로드가 생겨도 같은 페이지 흐름에서 노출·로드 지표가 중복되지 않는다.
 
