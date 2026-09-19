@@ -6,6 +6,12 @@
 
 이 문서의 아래 항목은 각 감리 시점의 증거를 보존한다. 현재 출시 판정은 `IN_PROGRESS_WITH_GATES`이며 B2·B3·B4·C2·E1은 사람 입력과 외부 승인이 도착하기 전까지 완료로 승격하지 않는다.
 
+## 릴리스 후보 통합 감리 — 2026-09-19
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 후보 `b2b2e42`에 소비자용 챌린지 명칭, 연구 출처 변형 정규화, 오디오 자동재생 차단 안내를 통합했다. 필수 검사 [release-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448469245)와 [site-quality-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448469265)는 통과했다.
+
+후보 기준 `pnpm test` 107개·타입검사·빌드·공개 export 검증이 통과했고, 로컬 API 연결 preview의 390px·1440px 화면에서 홈·연구·제품·공유·챌린지 경로를 확인했다. 가로 넘침과 콘솔 오류는 없었다. 후보는 main 병합 전이므로 Pages 배포 및 라이브 smoke는 실행하지 않았으며, 외부 게이트 B2·B3·B4·C2·E1과 티저 `HOLD`는 변경하지 않았다.
+
 ## 최신 판정 보정 — 2026-09-19
 
 비기본 공개 origin의 라이브 검증은 runtime mode를 명시해야 통과하도록 보완했다. 이 검사는 Worker 주소가 정적 Pages처럼 잘못 판정되는 오류를 막고, 기본 Pages 주소의 정적 검증은 기존처럼 유지한다. 배포 run `35444540241`에서 확인했다.

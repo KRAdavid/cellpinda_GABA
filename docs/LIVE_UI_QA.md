@@ -1,5 +1,20 @@
 # 공개 Pages UI 검증 기록
 
+## 릴리스 후보 통합 화면 검증 — 2026-09-19
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 후보 `b2b2e42`를 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
+
+| 점검 항목 | 결과 |
+|---|---|
+| 모바일 가로 폭 | 모든 경로 `scrollWidth=390`, 가로 넘침 없음 |
+| 데스크톱 가로 폭 | 모든 경로 `scrollWidth=1425`, 세로 스크롤바를 제외한 넘침 없음 |
+| 연구 경로 | `사람을 대상으로 한 GABA 연구를 쉽게 보기 \| 셀핀다`, 주제 카드와 연구 카드 표시 |
+| 제품 경로 | `셀핀다 가바 1500 · 30포 구성 보기`, Smart Store CTA 표시 |
+| 챌린지 경로 | `너도 해봐 · 뇌컨디션 확인 챌린지 \| 셀핀다`, 연습 시작·규칙 카드 표시 |
+| 오류 | 확인한 경로 모두 콘솔 오류 0건 |
+
+이 기록은 후보 브랜치의 실제 화면 검증이며, main 공개 Pages 배포 완료를 의미하지 않는다.
+
 ## 최신 배포 상태 — 2026-09-19 (main `22dd63e`)
 
 최신 main 배포 run `35444540241`은 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 공개 연구 인덱스는 6건, claim은 12개, 제품은 1개이며 티저는 `HOLD`로 외부 미디어 URL을 노출하지 않는다. 라이브 검증은 `teaserPreview: {status: "HOLD", publicUrl: false}`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다. 연구 카드의 상세·출처 안내는 소비자 언어 라벨로 배포됐고 제품 직접 진입 메타데이터도 제품 전용으로 정렬됐다. 연구 인덱스의 content/master 설계 라벨 parity와 DOI 경로 중복 정규화, Worker API 장애 시 정적 fallback 차단, 비기본 origin runtime mode 필수 검증도 같은 배포에서 확인했다.

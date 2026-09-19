@@ -6,6 +6,14 @@
 
 현재 목표 판정은 `IN_PROGRESS_WITH_GATES`다. B2 제품 표시, B3 실제 후기 권한, B4 티저 공개 승인, C2 Worker/D1 운영 설정, E1 실구매 대사는 외부 입력 또는 사람 승인이 필요한 게이트로 남아 있다. 아래의 날짜가 지난 기록은 당시 검증 결과를 보존한 이력이며, 현재 상태는 이 요약과 라이브 smoke 결과를 우선한다.
 
+## 릴리스 후보 통합 검증 — 2026-09-19
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 후보 커밋 `b2b2e42`에 게임 이름 통일, 연구 출처 변형 중복 제거, 브라우저 오디오 차단 안내를 통합했다. `release-verify` [35448469245](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448469245)와 `site-quality-verify` [35448469265](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448469265)는 모두 통과했다.
+
+후보 브랜치의 `pnpm test` 107개, 타입검사, production build, 공개 export 검증을 통과했다. 로컬 production preview에 API를 연결해 Chromium CDP로 390px·1440px의 홈·연구·제품·공유·뇌컨디션 확인 챌린지를 확인했으며 가로 넘침 0건·콘솔 오류 0건이었다. 연구 페이지는 소비자용 제목과 주제 카드, 제품 경로는 `셀핀다 가바 1500 · 30포 구성 보기`, 챌린지 경로는 `너도 해봐 · 뇌컨디션 확인 챌린지`를 사용한다.
+
+이 후보는 아직 main에 병합되지 않았으므로 공개 Pages에는 적용되지 않았다. CODEOWNER 독립 승인 후에만 Pages 배포 검증을 실행한다. B2·B3·B4·C2·E1 외부 게이트와 티저 `HOLD` 상태는 그대로 유지한다.
+
 ## 최신 공개 검증 — 2026-09-19
 
 기본 Pages 주소가 아닌 공개 origin을 라이브 검증할 때 `PUBLIC_RUNTIME_MODE`를 생략하면 실패하도록 보완했다. Worker 주소를 정적 사이트로 잘못 검증하는 운영 실수를 차단하며, 기본 Pages 검증과 명시적 Worker 검증은 각각 계속 허용된다. 배포 run `35444540241`에서 검증을 통과했다.
