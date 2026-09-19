@@ -62,6 +62,10 @@ const metaContent = (html, attribute, value) => {
   return forward?.[1] ?? reverse?.[1] ?? '';
 };
 const canonicalHref = html => /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1] ?? '';
+const jsonLd = html => {
+  const raw = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1] || '';
+  try { return JSON.parse(raw); } catch { return null; }
+};
 const validatePublicMetadata = (html, path, expectedCanonical) => {
   assert.match(html, /<html[^>]+lang="ko"/i, `${path} must declare Korean language`);
   assert.match(html, /<meta[^>]+name="viewport"[^>]+content="width=device-width/i, `${path} must expose a responsive viewport`);
@@ -251,6 +255,12 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(productSharePageText, 'property', 'og:image:type'), 'image/png', 'live product Open Graph image type is invalid');
     assert.equal(metaContent(productSharePageText, 'property', 'og:image:width'), '1200', 'live product Open Graph image width is invalid');
     assert.equal(metaContent(productSharePageText, 'property', 'og:image:height'), '630', 'live product Open Graph image height is invalid');
+    const productSchema = jsonLd(productSharePageText);
+    const productSchemaNode = Array.isArray(productSchema?.['@graph']) ? productSchema['@graph'].find(node => node?.['@type'] === 'Product') : null;
+    assert.ok(productSchema?.['@context'] === 'https://schema.org' && productSchemaNode?.name === '셀핀다 가바 1500' && productSchemaNode.category === '기타가공품', 'live product page Product structured data is missing or unsafe');
+    assert.equal(productSchemaNode.image, `${base}/assets/product-composition-1500.png`, 'live product Product image is invalid');
+    assert.equal(productSchemaNode.sameAs, approvedSmartStoreUrl, 'live product Product destination is invalid');
+    assert.ok(!productSchemaNode.offers && !productSchemaNode.aggregateRating && !productSchemaNode.review, 'live product Product structured data must not invent price, rating or review claims');
     assert.equal(canonicalHref(focusPageText), `${base}/focus/`, 'live focus invite canonical URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:url'), `${base}/focus/`, 'live focus invite Open Graph URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:title'), '“너도 해봐” 1분 색 신호 게임', 'live focus invite Open Graph title is invalid');

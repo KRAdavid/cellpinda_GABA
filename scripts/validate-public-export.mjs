@@ -29,6 +29,11 @@ const fail = message => { throw new Error(`Public export invalid: ${message}`); 
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 const approvedReviewText = '가바 1500 구매자 후기를 스마트스토어에서 읽어보세요.';
+const productSchemaText = productShareHtml.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1] || '';
+let productSchema = null;
+try { productSchema = JSON.parse(productSchemaText); } catch { /* fail with the scoped message below */ }
+const productSchemaNodes = Array.isArray(productSchema?.['@graph']) ? productSchema['@graph'] : [];
+const productSchemaNode = productSchemaNodes.find(node => node?.['@type'] === 'Product');
 const isHttps = value => {
   try { return new URL(value).protocol === 'https:'; } catch { return false; }
 };
@@ -52,6 +57,7 @@ if (!/canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/research\
 if ((researchHtml.match(/사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./g) ?? []).length < 4 || researchHtml.includes('잠·긴장·생각 과제에서 관찰한 내용을 그림으로 소개합니다. 셀핀다 완제품 연구와는 다른 자료입니다.')) fail('research static metadata and visible fallback must use the same product boundary copy');
 if (!/<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/.test(indexHtml)) fail('index.html must expose safe WebSite structured data');
 if (!/<link rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/">/.test(productShareHtml) || !/<meta property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/">/.test(productShareHtml) || !/<meta property="og:title" content="셀핀다 가바 1500 · 30포 구성 보기">/.test(productShareHtml) || !/<meta property="og:image:type" content="image\/png">/.test(productShareHtml) || !/<meta property="og:image:width" content="1200">/.test(productShareHtml) || !/<meta property="og:image:height" content="630">/.test(productShareHtml) || !productShareHtml.includes('assets/product-composition-1500.png') || !productShareHtml.includes('https://smartstore.naver.com/cellpinda/products/4701017202') || !productShareHtml.includes('../?view=products#products') || /한 포 1,500 mg|전체 45 g/.test(productShareHtml)) fail('product share page must use approved package facts, a correctly sized social image, and preserve product/store destinations');
+if (productSchema?.['@context'] !== 'https://schema.org' || !productSchemaNode || productSchemaNode.name !== '셀핀다 가바 1500' || productSchemaNode.category !== '기타가공품' || productSchemaNode.image !== 'https://kradavid.github.io/cellpinda_GABA/assets/product-composition-1500.png' || productSchemaNode.sameAs !== approvedSmartStoreUrl || productSchemaNode.offers || productSchemaNode.aggregateRating || productSchemaNode.review) fail('product share page must expose safe Product structured data without unverified price, rating or review claims');
 if (!/^User-agent: \*\nAllow: \/\nDisallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops\n\nSitemap: https:\/\/kradavid\.github\.io\/cellpinda_GABA\/sitemap\.xml\s*$/m.test(robots)) fail('robots.txt must expose the public sitemap and keep internal paths out of discovery');
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
 const expectedSitemapUrls = ['https://kradavid.github.io/cellpinda_GABA/', 'https://kradavid.github.io/cellpinda_GABA/products/', 'https://kradavid.github.io/cellpinda_GABA/research/', 'https://kradavid.github.io/cellpinda_GABA/focus/', ...['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'].map(id => `https://kradavid.github.io/cellpinda_GABA/share/${id}/`)];

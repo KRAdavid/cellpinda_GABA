@@ -74,12 +74,28 @@ const productStoreUrl = product.officialUrl;
 const productDestination = '../?view=products#products';
 const productSchema = JSON.stringify({
   '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: productTitle,
-  url: productCanonical,
-  description: productDescription,
-  inLanguage: 'ko-KR',
-  isPartOf: { '@type': 'WebSite', url: `${siteRoot}/` },
+  '@graph': [
+    {
+      '@type': 'WebPage',
+      name: productTitle,
+      url: productCanonical,
+      description: productDescription,
+      inLanguage: 'ko-KR',
+      isPartOf: { '@type': 'WebSite', url: `${siteRoot}/` },
+      about: { '@id': `${productCanonical}#product` },
+    },
+    {
+      '@type': 'Product',
+      '@id': `${productCanonical}#product`,
+      name: '셀핀다 가바 1500',
+      category: product.category,
+      brand: { '@type': 'Brand', name: '셀핀다' },
+      image: productImage,
+      url: productCanonical,
+      sameAs: productStoreUrl,
+      description: productDescription,
+    },
+  ],
 }).replace(/</g, '\\u003c');
 const productShareHtml = `<!doctype html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
