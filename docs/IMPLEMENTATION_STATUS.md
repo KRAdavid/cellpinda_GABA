@@ -1,5 +1,9 @@
 # 중간 구현 상태 — 2026-09-11
 
+## 최신 공개 검증 — 2026-09-19
+
+최신 main `e8260c2`는 GitHub Pages 배포 검증 run `35428012816`을 통과했다. 라이브 smoke는 페이지 200, 연구 6건, 공개 claim 12개, 제품 1개, 공유 페이지 6개, 스마트스토어 목적지, 750 제거, provenance 일치를 확인했다. Yoto 연구 요약과 시각화는 연구 조건을 유지한 소비자 문장으로 동기화됐다. 티저는 승인 전 `HOLD`이며 공개 미디어 URL·iframe을 노출하지 않는다. Worker/D1, 최종 제품 표시·SKU, 후기 재게시 권한, 주문·환불 대사와 티저 자막·권리·CTA는 사람 입력 게이트로 남아 있다. 브라우저 플러그인과 프로젝트 Playwright가 현재 환경에 없어 이번 회귀는 정적 HTTP·라이브 smoke와 production build로 확인했다.
+
 ## 최신 업데이트 — 2026-09-19 보호된 main을 지키는 TF heartbeat PR
 
 6시간 주기 `TF decision pulse`의 heartbeat 저장 경로를 보호된 `main` 직접 push에서 자동화 PR 방식으로 전환했다. 안전 실행과 독립 검증을 통과한 heartbeat만 `automation/tf-pulse-heartbeat` 브랜치에 올리고, 열린 PR이 있으면 갱신하며 없으면 새 PR을 만든다. GitHub 토큰으로 만든 PR의 자동 검사 생략·승인 대기를 보완하기 위해 heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 trusted pulse job이 직접 실행하고, 실제 성공 결과를 heartbeat 커밋의 `release-verify`·`site-quality-verify` 필수 상태로 기록한다. 필수 상태와 사람의 merge가 끝난 뒤에만 `main` 배포가 실행되므로 브랜치 보호를 우회하지 않는다. `validate:tf-pulse-workflow`가 PR 권한·브랜치·후보 검증 순서·상태 기록·직접 push 금지를 회귀 검사한다.

@@ -1,5 +1,9 @@
 # 공개 Pages UI 검증 기록
 
+## 최신 배포 상태 — 2026-09-19
+
+최신 배포는 정적 HTTP smoke와 production build를 통과했다. 현재 공개 연구 인덱스는 6건, claim은 12개, 제품은 1개이며 티저는 `HOLD`로 외부 미디어 URL을 노출하지 않는다. 라이브 검증 결과의 티저 필드는 `status`와 `publicUrl` 여부를 함께 기록한다. 이 환경에는 Browser 플러그인과 프로젝트 Playwright가 없어 이번 회귀에서는 브라우저 화면 캡처 대신 정적 export·HTTP 응답·공개 JSON 계약을 확인했다.
+
 검증일: 2026-09-10. 대상: `https://kradavid.github.io/cellpinda_GABA/`. Chromium headless 브라우저에서 최신 Pages를 직접 열어 확인했다. HTTP smoke만으로는 확인할 수 없는 화면 텍스트·상태·가로폭·콘솔 오류를 별도로 점검했다.
 
 | 화면·폭 | 확인 결과 |
