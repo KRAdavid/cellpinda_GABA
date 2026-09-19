@@ -149,6 +149,9 @@ requireMatch(rhythm, /const description = `5개 질문 중 \$\{frequentAnswers\}
 if (/products-intro-actions|products-intro-buy|products-review-shortcut/.test(app)) fail('product price and review shortcuts must not be repeated in the product intro beside their destination cards');
 requireMatch(app, /id="products"[\s\S]*?가격·재고 확인하기[\s\S]*?id="reviews"|<ReviewExperience/, 'product purchase information must appear on the product card, with reviews in their own section');
 requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must expose alternative text');
+requireMatch(app, /<ArrowRight(?:\s+size=\{18\})?\s+aria-hidden="true"\s*\/>/, 'decorative ArrowRight icons must be hidden from assistive technology');
+requireMatch(app, /<ArrowUpRight\s+size=\{18\}\s+aria-hidden="true"\s*\/>/, 'decorative ArrowUpRight icons must be hidden from assistive technology');
+requireMatch(app, /menu\?<X\s+aria-hidden="true"\s*\/>:<Menu\s+aria-hidden="true"\s*\/>/, 'decorative menu icons must be hidden from assistive technology');
 requireMatch(app, /className="product-visual" role="img" aria-label=\{/, 'product composition diagram must expose an accessible text alternative');
 requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.product-portion-grid\{grid-template-columns:repeat\(10,12px\);gap:6px[\s\S]*?\.product-body \.product-cta\{order:2/, 'mobile product composition must stay compact so the primary purchase CTA enters the first product viewport');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
@@ -343,4 +346,6 @@ requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"in
   const pairedFootnoteSize = pairedFootnoteRule.match(/font-size:(\d+)px/i)?.[1];
   const pairedLuminance = pairedFootnoteColor ? [0, 2, 4].reduce((sum, start, index) => sum + [0.2126, 0.7152, 0.0722][index] * linearChannel(pairedFootnoteColor.slice(start, start + 2)), 0) : null;
   if (pairedLuminance === null || 1.05 / (pairedLuminance + 0.05) < 4.5 || Number(pairedFootnoteSize) < 14) fail('research chart guidance must be at least 14px and meet WCAG AA contrast on white');
+  requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-details>summary small\{[^}]*color:#52685c/, 'brain-load evidence disclosure text must keep the reviewed contrast color');
+  requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlight-result strong\{[^}]*color:#176b47/, 'GABA research result labels must keep the reviewed contrast color');
   console.log(JSON.stringify({status: 'ok', sections: ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews', 'research'], events: 14, accessibility: ['skip-link', 'landmarks', 'alt-text', 'reduced-motion', 'research-label-AA-contrast'], responsive: ['mobile', 'tablet-navigation', 'tablet-hero-contrast'], sharing: ['rhythm-result', 'seven-day-challenge-destination', 'invite-first'], teaser: ['autoplay-permission', 'visibility-triggered-load', 'approved-preview-source', 'accurate-embed-event', 'autoplay-fallback-copy'], seo: ['canonical', 'og-url', 'social-image-dimensions'], smartStoreLinks: smartStoreLinks.length, smartStoreOnly: true, fatigueGame: ['three-stage-focus', 'rest-before-after', 'five-minute-breath-guide', 'recovery-audio-share', 'non-diagnostic-copy'], resultShare: 'invite-first'}));
