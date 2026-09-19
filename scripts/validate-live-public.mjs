@@ -219,6 +219,15 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(metaContent(pageText, 'property', 'og:title'), 'live root is missing an Open Graph title');
     assert.ok(metaContent(pageText, 'property', 'og:description'), 'live root is missing an Open Graph description');
     assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
+    assert.equal(metaContent(pageText, 'property', 'og:image:type'), 'image/png', 'live root Open Graph image type is invalid');
+    assert.equal(metaContent(pageText, 'property', 'og:image:width'), '1200', 'live root Open Graph image width is invalid');
+    assert.equal(metaContent(pageText, 'property', 'og:image:height'), '630', 'live root Open Graph image height is invalid');
+    assert.equal(metaContent(researchPageText, 'property', 'og:image:type'), 'image/png', 'live research Open Graph image type is invalid');
+    assert.equal(metaContent(researchPageText, 'property', 'og:image:width'), '1200', 'live research Open Graph image width is invalid');
+    assert.equal(metaContent(researchPageText, 'property', 'og:image:height'), '630', 'live research Open Graph image height is invalid');
+    assert.equal(metaContent(productSharePageText, 'property', 'og:image:type'), 'image/png', 'live product Open Graph image type is invalid');
+    assert.equal(metaContent(productSharePageText, 'property', 'og:image:width'), '1200', 'live product Open Graph image width is invalid');
+    assert.equal(metaContent(productSharePageText, 'property', 'og:image:height'), '630', 'live product Open Graph image height is invalid');
     assert.equal(canonicalHref(focusPageText), `${base}/focus/`, 'live focus invite canonical URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:url'), `${base}/focus/`, 'live focus invite Open Graph URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:title'), '“너도 해봐” 1분 색 신호 게임', 'live focus invite Open Graph title is invalid');
