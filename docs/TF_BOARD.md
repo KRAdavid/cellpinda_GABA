@@ -106,7 +106,7 @@
 
 - `scripts/validate-tf-pulse.mjs`가 ACTIVE Goal Contract, canonical 업무 그래프, B4 티저 게이트, 활성 작업의 담당·검증·다음 행동과 결정 모드를 배포 전에 검사한다.
 - `data/tf-role-registry.json`이 필수 7개 역할의 책임·권한·매칭어를 단일 기준으로 보관한다. 브랜드·전환 경험 설계 역할은 웹디자인, 모바일 전환, 콘텐츠 시각화, 정보구조, 접근성, 식품 광고 표현 위험 검토를 맡아 소비자 여정을 함께 감리한다. 역할명 검사는 실제 외부 전문가의 자격 확인·섭외나 소비자 조사를 대신하지 않는다.
-- [TF decision pulse workflow](../.github/workflows/tf-pulse.yml)는 6시간 주기와 수동 실행을 제공하며, run summary·14일 artifact·안전한 heartbeat에 회의 안건을 남긴다. heartbeat 커밋 뒤 deploy workflow를 명시적으로 호출해 공개 운영 큐의 pulse 시각과 상태 지문을 갱신한다. 최신 [pulse 구현·스키마 검사 실행 34515820278](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34515820278)이 계약 검증·공개 패킷 허용 키·Pages·라이브 smoke까지 성공했다.
+- [TF decision pulse workflow](../.github/workflows/tf-pulse.yml)는 6시간 주기와 수동 실행을 제공하며, run summary·14일 artifact·안전한 heartbeat에 회의 안건을 남긴다. heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 직접 통과시킨 뒤 `release-verify`·`site-quality-verify` 커밋 상태를 기록하고, 보호된 PR merge 후 main 배포가 공개 운영 큐의 pulse 시각과 상태 지문을 갱신한다. 최신 [TF pulse 35423425620](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35423425620)과 [연결된 Pages 배포 35423528261](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35423528261)이 이 경계를 성공시켰다.
 - 현재 canonical 큐는 DONE 8, VERIFYING 1, WAITING 4이며, B2·B3·B4·C2·E1은 독립 검토 또는 외부 입력 게이트를 유지한다. 자동 pulse는 이 상태를 완료로 승격하지 않는다.
 
 - TF 구현 기준점: [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA) `main`과 GitHub Pages에 반영된 현재 운영 코드·공개 packet.
