@@ -255,9 +255,9 @@ requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hol
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
-requireMatch(indexHtml, /<strong>긴장·잠<\/strong> 긴장과 잠을 살펴본 사람 연구[\s\S]*<strong>수면<\/strong> 잠드는 시간과 수면 기록을 살펴본 연구/, 'no-script research summary must use the current consumer topics and sleep wording');
+requireMatch(indexHtml, /<strong>긴장·잠<\/strong> 성인 63명이 GABA 100mg을 한 번 먹고 긴장과 잠을 살펴본 연구예요\. 제품 권장량과 별개예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 연구 사용량 하루 100mg을 먹고 잠드는 시간과 수면 기록을 살펴본 연구예요\. 제품 권장량과 별개예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
 if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');
-requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 캡슐을 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬 수치를 살펴봤어요\./, 'no-script research summary must match the approved Powers study scope');
+requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 3g을 한 번 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬 수치를 살펴봤어요\. 셀핀다 가바 1500과는 별도 연구예요\./, 'no-script research summary must match the approved Powers study scope and product boundary');
 if (/운동 뒤 혈액 속 호르몬과 몸무게 변화/.test(indexHtml)) fail('no-script research summary must not expose the held body-composition study');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');

@@ -11,6 +11,7 @@ const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const runtimeMode = process.env.PUBLIC_RUNTIME_MODE || (base === normalizePublicSiteUrl() ? 'static' : '');
 if (!runtimeMode) throw new Error('PUBLIC_RUNTIME_MODE is required when validating a non-default public origin');
 if (!['static', 'worker'].includes(runtimeMode)) throw new Error('PUBLIC_RUNTIME_MODE must be static or worker');
+const expectedReleaseSha = process.env.EXPECTED_RELEASE_SHA || '';
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 const approvedReviewText = '가바 1500 구매자 후기를 스마트스토어에서 읽어보세요.';
@@ -50,6 +51,7 @@ const validateContinuation = (value, label) => {
 };
 const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
 const sharedResultIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
+const expectedReleaseRoutes = ['/', '/products/', '/research/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
 const sharedResultLabels = Object.fromEntries(Object.entries(JSON.parse(readFileSync(resolve('data/rhythm-share-labels.json'), 'utf8'))).map(([id, value]) => [id, value.label]));
 const metaContent = (html, attribute, value) => {
   const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -119,7 +121,7 @@ const requestRuntimeRoute = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, focusPageResponse, faviconResponse, heroImageResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute, healthRoute, contentApiRoute] = await Promise.all([
+    const [page, focusPageResponse, faviconResponse, heroImageResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute, healthRoute, contentApiRoute, releaseManifestResponse] = await Promise.all([
       request('/?view=ops'),
       request('/focus/'),
       request('/favicon.svg'),
@@ -139,6 +141,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       requestPublicRoute('/?view=ops'),
       requestRuntimeRoute('/api/health'),
       requestRuntimeRoute('/api/content'),
+      request('/release-manifest.json'),
     ]);
     if (runtimeMode === 'static') {
       assert.ok([404, 405].includes(healthRoute.status), `STATIC_ONLY /api/health must not expose a live API (HTTP ${healthRoute.status})`);
@@ -151,7 +154,19 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(heroImageResponse.headers.get('content-type') || '', /^image\/webp/i, 'live hero image must be served as WebP');
     const heroImageBytes = await heroImageResponse.arrayBuffer();
     assert.ok(heroImageBytes.byteLength >= 10_000, 'live hero image must contain the published visual asset');
-    const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json()]);
+    const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview, releaseManifest] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), releaseManifestResponse.json()]);
+    assert.equal(releaseManifest.schemaVersion, 1, 'live release manifest schema is invalid');
+    assert.match(releaseManifest.candidateSha || '', /^[a-f0-9]{40}$/, 'live release manifest candidate SHA is invalid');
+    if (expectedReleaseSha) assert.equal(releaseManifest.candidateSha, expectedReleaseSha, 'live release manifest does not match the deployed candidate SHA');
+    assert.equal(releaseManifest.publicSiteUrl, base, 'live release manifest public origin is out of sync');
+    assert.equal(releaseManifest.runtimeMode, runtimeMode, 'live release manifest runtime mode is out of sync');
+    assert.deepEqual(releaseManifest.routePaths, expectedReleaseRoutes, 'live release manifest route set is invalid');
+    assert.equal(releaseManifest.counts.claims, content.claims.length, 'live release manifest claim count is out of sync');
+    assert.equal(releaseManifest.counts.research, master.records.length, 'live release manifest research count is out of sync');
+    assert.equal(releaseManifest.counts.products, content.products.length, 'live release manifest product count is out of sync');
+    assert.equal(releaseManifest.counts.reviews, content.reviews.length, 'live release manifest review count is out of sync');
+    assert.equal(releaseManifest.teaser.status, teaserPreview.status, 'live release manifest teaser state is out of sync');
+    assert.ok(releaseManifest.checks?.smartStoreOnly && releaseManifest.checks?.reviewDestination && releaseManifest.checks?.researchIndex && releaseManifest.checks?.teaserBoundary && releaseManifest.checks?.challengeCopy && releaseManifest.checks?.productBoundary, 'live release manifest checks are incomplete');
     validatePublicMetadata(pageText, '/', `${base}/`);
     assert.ok(pageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live root fallback must distinguish general GABA research from Cellpinda product research');
     validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);

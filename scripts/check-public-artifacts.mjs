@@ -10,6 +10,7 @@ const requiredFiles = [
   'products/index.html',
   'data/content.json',
   'data/gaba-master-index.json',
+  'release-manifest.json',
   'assets/rhythm-window.webp',
 ];
 for (const file of requiredFiles) assert.ok(existsSync(resolve(outputDirectory, file)), `public artifact is missing ${file}`);
