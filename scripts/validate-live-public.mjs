@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict';
-import {normalizePublicSiteUrl} from './public-origin.mjs';
+import {normalizePublicSiteUrl, publicSitePath} from './public-origin.mjs';
 
 const cliBase = process.argv.slice(2).find(value => /^https:\/\//.test(value)) || '';
 const base = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL || cliBase);
+const publicPath = publicSitePath(base);
+const routePath = segment => `${publicPath}/${segment}`;
+const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const runtimeMode = process.env.PUBLIC_RUNTIME_MODE || 'static';
 if (!['static', 'worker'].includes(runtimeMode)) throw new Error('PUBLIC_RUNTIME_MODE must be static or worker');
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
@@ -142,7 +145,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.ok(researchPageText.includes('운동 경험이 있는 남성이 GABA를 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬을 살펴본 연구를 정리했어요.') && !researchPageText.includes('GABA와 단백질을 함께 사용한 연구'), 'live research fallback must match the approved Powers study scope');
-    assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
+    assert.equal(canonicalHref(productSharePageText), `${base}/products/`, 'live product share route must expose a product-specific canonical URL');
+    assert.equal(metaContent(productSharePageText, 'property', 'og:url'), `${base}/products/`, 'live product share route must expose a product-specific Open Graph URL');
     assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1500 · 30포 구성 보기"/, 'live product share route must show the confirmed product name and package count');
     assert.match(productSharePageText, /assets\/product-composition-1500\.png/, 'live product share route must use the neutral product composition preview');
     assert.ok(!/한 포 1,500 mg|전체 45 g/.test(productSharePageText), 'live product share route must omit unverified label amounts');
@@ -185,7 +189,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(consumerBundle.includes('61개 연구') && consumerBundle.includes('267개 연구') && consumerBundle.includes('21개 연구'), 'live consumer bundle must include evidence scale markers');
     assert.ok(!consumerBundle.includes('발효가바가 무엇인지 30초'), 'live consumer bundle still contains the retired teaser duration promise');
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
-    assert.match(robotsText, /Disallow: \/cellpinda_GABA\/admin\nDisallow: \/cellpinda_GABA\/ops/, 'live robots.txt must keep internal paths out of discovery');
+    assert.match(robotsText, new RegExp(`Disallow: ${escapeRegExp(routePath('admin'))}\\nDisallow: ${escapeRegExp(routePath('ops'))}`), 'live robots.txt must keep internal paths out of discovery');
     const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
     const expectedSitemapUrls = [`${base}/`, `${base}/products/`, `${base}/research/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
     assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain public landing, product, independent research, focus invite and share pages only');
@@ -208,7 +212,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 시작하기') && focusPageText.includes('초록 신호는 누르고 빨강 신호는 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
     const focusGameCardResponse = await request('/assets/focus-game-card-v5.png');
     assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
-    assert.match(pageText, /<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"https:\/\/kradavid\.github\.io\/cellpinda_GABA\/"[^<]*"inLanguage":"ko-KR"\}<\/script>/, 'live root WebSite structured data is invalid');
+    assert.match(pageText, new RegExp(`<script type="application\\/ld\\+json">\\{"@context":"https:\\/\\/schema\\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"${escapeRegExp(`${base}/`)}"[^<]*"inLanguage":"ko-KR"\\}<\\/script>`), 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';
       assert.match(metaContent(sharePage, 'property', 'og:title'), /^공유받은 하루 리듬:/, `share page ${id} is missing an Open Graph title`);

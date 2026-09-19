@@ -23,6 +23,7 @@ for (const job of ['deploy-pages', 'smoke-live', 'worker-readiness', 'deploy-wor
 
 assert.match(workflow, /^    needs: release-verify$/m, 'publishing jobs must depend on release verification');
 assert.match(workflow, /rewrite-public-origin\.mjs dist-pages/, 'Pages artifacts must apply the selected public origin');
+assert.match(workflow, /rewrite-public-origin\.mjs dist-pages[\s\S]*check-public-artifacts\.mjs dist-pages/, 'Pages origin rewrite must be checked before publishing');
 assert.match(workflow, /DEPLOY_ENABLED:.*secrets\.CLOUDFLARE_API_TOKEN.*secrets\.CLOUDFLARE_ACCOUNT_ID.*secrets\.CLOUDFLARE_D1_DATABASE_ID.*secrets\.ADMIN_TOKEN.*secrets\.MEMBER_ORIGIN/, 'Worker deployment must stay gated on required secrets');
 assert.match(workflow, /worker-readiness:[\s\S]*outputs:[\s\S]*enabled: \$\{\{ steps\.gate\.outputs\.enabled \}\}/, 'Worker readiness must be an explicit pre-deployment gate');
 assert.match(workflow, /needs: \[release-verify, worker-readiness\][\s\S]*needs\.worker-readiness\.outputs\.enabled == 'true'/, 'Worker deployment must run only after the readiness gate opens');

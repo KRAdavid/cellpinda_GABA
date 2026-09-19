@@ -717,8 +717,8 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
             <p className="fatigue-game-result-guidance" role="status">원하면 5분 쉬었다가 다른 신호로 한 번 더 해보세요. 친구에게 보내 함께 해봐도 좋아요.</p>
             <details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details>
             <div className="fatigue-game-actions">
-              {onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
-              <button type="button" className={`rhythm-button${onInvite ? ' secondary' : ''}`} onClick={beginRest}>5분 쉬고 다시 해보기 <ArrowRight size={18} aria-hidden="true" /></button>
+              {onInvite ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
+              <button type="button" className="rhythm-button" onClick={beginRest}>5분 쉬고 다시 해보기 <ArrowRight size={18} aria-hidden="true" /></button>
               <button type="button" className="rhythm-button secondary" onClick={finishBaseline}>오늘 기록 마치기 <CheckCircle2 size={18} aria-hidden="true" /></button>
             </div>
             {onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 답변이 포함되지 않아요.</p> : null}
