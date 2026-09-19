@@ -237,6 +237,7 @@ requireMatch(teaser, /frameRequested \? <iframe/, 'teaser frame must be absent u
 requireMatch(teaser, /src=\{preview\.url!?\}/, 'teaser iframe must use the approved preview URL directly');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
+requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
 requireMatch(indexHtml, /<strong>긴장·잠<\/strong> 긴장과 잠을 살펴본 사람 연구[\s\S]*<strong>수면<\/strong> 잠드는 시간과 수면 기록을 살펴본 연구/, 'no-script research summary must use the current consumer topics and sleep wording');
 if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');
 requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 캡슐을 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬 수치를 살펴봤어요\./, 'no-script research summary must match the approved Powers study scope');

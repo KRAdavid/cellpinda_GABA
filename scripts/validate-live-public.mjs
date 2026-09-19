@@ -158,6 +158,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(heroImageBytes.byteLength >= 10_000, 'live hero image must contain the published visual asset');
     const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json()]);
     validatePublicMetadata(pageText, '/', `${base}/`);
+    assert.ok(pageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live root fallback must distinguish general GABA research from Cellpinda product research');
     validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);
     const internalSnapshots = [
       ['/data/operations-queue.json', queueResponse],
