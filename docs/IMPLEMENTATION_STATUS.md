@@ -6,7 +6,13 @@
 
 현재 목표 판정은 `IN_PROGRESS_WITH_GATES`다. B2 제품 표시, B3 실제 후기 권한, B4 티저 공개 승인, C2 Worker/D1 운영 설정, E1 실구매 대사는 외부 입력 또는 사람 승인이 필요한 게이트로 남아 있다. 아래의 날짜가 지난 기록은 당시 검증 결과를 보존한 이력이며, 현재 상태는 이 요약과 라이브 smoke 결과를 우선한다.
 
-## 최신 후보 보정 — 2026-09-20 후보 `486b748`
+## 최신 후보 보정 — 2026-09-20 후보 `57a8bc5`
+
+배포 후보에 `release-manifest.json`을 생성해 후보 커밋 SHA, 공개 route, 제품·연구·후기 수, SmartStore 목적지, 750 제거, 티저 `HOLD`, 챌린지·제품 경계 문구와 모든 정적 asset hash를 함께 기록한다. Pages와 Worker 빌드는 각각 `static`·`worker` 모드를 manifest에 남기고, 라이브 smoke는 공개 manifest의 SHA와 route·콘텐츠 수·핵심 marker를 후보와 대조한다. 이 값이 다르면 배포 완료로 판정하지 않는다. 정적 연구 fallback과 자바스크립트가 꺼진 첫 화면에도 연구 사용량과 제품 권장량의 구분을 표시하고 UI 계약으로 고정했다.
+
+후보 `57a8bc5`는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build, release manifest 및 정적 산출물 검사를 통과했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전이라 계속 `BLOCKED / REVIEW_REQUIRED`이며, 공개 Pages에는 아직 후보가 반영되지 않았다.
+
+## 이전 후보 보정 — 2026-09-20 후보 `486b748`
 
 연구 하이라이트의 소비자 문장을 다시 감리해 수면 카드의 `눈동자 움직임이 적은 수면 단계의 시간`, 연구 목록의 `사람이 GABA를 먹고 비교한 연구`, 주제 카드의 생활 언어를 적용했다. 수면·뇌파 카드에는 `연구 사용량`과 `제품 권장량과 별개`를 함께 표시하고, 정적 연구 페이지의 운동 연구에도 `GABA 3g`이 셀핀다 제품 권장량이 아니라는 구분을 넣었다. 이 표현이 다시 연구자식 라벨이나 제품 권장량처럼 보이지 않도록 연구 카피·UI·공개 export·라이브 smoke 회귀 조건을 갱신했다.
 
