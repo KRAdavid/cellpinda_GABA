@@ -47,26 +47,26 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
   if (result.loadLevel === 'low') return {
     tone: 'steady',
     label: '지난 7일 답변',
-    heading: '축하합니다. 지난 7일, 쉬는 시간을 잘 챙겨 오셨어요.',
-    body: '지금 잘 맞는 쉬는 습관을 이어가세요.',
+    heading: '축하합니다. 뇌 컨디션이 좋은 상태를 유지하고 있습니다.',
+    body: '최근 답변처럼 잠깐씩 쉬는 흐름을 계속 이어가세요.',
   };
   if (result.loadLevel === 'high') {
     if (result.loadScore < 10) return {
       tone: 'watch',
-      label: '자주 쉬지 못했다고 답한 순간이 있어요',
+      label: '최근 7일, 힘들었다고 답한 날이 있어요',
       heading: '지금 5분, 화면에서 눈을 떼고 쉬어 보세요.',
       body: '휴대폰을 내려놓고 물을 마시거나 창밖을 바라보세요.',
     };
     return {
       tone: 'high',
-      label: '여러 답변에서 머리가 쉴 틈이 부족했던 날이 보여요',
+      label: '최근 7일, 머리가 쉴 틈이 없었던 날이 여러 번 있었어요',
       heading: '지금 10분, 화면과 알림에서 떨어져 쉬어 보세요.',
       body: '해야 할 일은 메모하고 알림을 꺼 보세요.',
     };
   }
   return {
     tone: 'watch',
-    label: '자주 쉬지 못했다고 답한 순간이 있어요',
+    label: '최근 7일, 힘들었다고 답한 날이 있어요',
     heading: '오늘 일정에 5분 쉬는 시간을 지금 넣어 보세요.',
     body: '휴대폰을 내려놓고 물을 마시거나 창밖을 바라보세요.',
   };
@@ -77,7 +77,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const band = score >= 10 ? 'high' : score >= 5 ? 'watch' : 'low';
   const answerEntries = Object.entries(result.scores);
   const frequentAnswers = answerEntries.filter(([, value]) => value >= 2).length;
-  const description = `${frequentAnswers}개 질문에서 자주 또는 거의 매일 쉬지 못했다고 답했어요.`;
+  const description = `5개 질문 중 ${frequentAnswers}개에서 힘들었다고 답했어요.`;
 
   return (
     <div className={`rhythm-load-score rhythm-load-score-${band}`}>
@@ -85,7 +85,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
       <div className="rhythm-load-visual">
         <div className="rhythm-load-visual-copy">
           <p className="rhythm-load-visual-kicker">5개 질문 중</p>
-          <strong>자주 쉬지 못했다고 답한 질문</strong>
+          <strong>힘들었다고 답한 질문</strong>
           <div className="rhythm-load-answer-row">
             <div className="rhythm-load-answer-dots" role="img" aria-label={description}>
               {answerEntries.map(([questionId, value]) => <i key={questionId} className={value >= 2 ? 'is-filled' : ''} />)}
@@ -192,11 +192,51 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
   useEffect(() => {
     if (!focusInviteArrival) return;
-    const frame = window.requestAnimationFrame(() => {
-      document.getElementById('focus-game')?.scrollIntoView({ behavior: 'auto', block: 'start' });
-      document.getElementById('fatigue-game-heading')?.focus({ preventScroll: true });
-    });
-    return () => window.cancelAnimationFrame(frame);
+    let frame = 0;
+    let alignmentInterval = 0;
+    let stopped = false;
+    const stopAlignment = () => {
+      stopped = true;
+      if (alignmentInterval) window.clearInterval(alignmentInterval);
+      alignmentInterval = 0;
+      window.removeEventListener('wheel', stopAlignment);
+      window.removeEventListener('touchstart', stopAlignment);
+      window.removeEventListener('pointerdown', stopAlignment);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (['Tab', 'ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) stopAlignment();
+    };
+    const align = () => {
+      const target = document.getElementById('focus-game');
+      if (!target || stopped) return;
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+      const headerOffset = window.matchMedia('(max-width: 680px)').matches ? 72 : 88;
+      const correction = target.getBoundingClientRect().top - headerOffset;
+      if (Math.abs(correction) > 1) window.scrollBy({ top: correction, behavior: 'auto' });
+    };
+    const settle = () => {
+      const startedAt = performance.now();
+      const attempt = () => {
+        if (stopped) return;
+        align();
+        if (performance.now() - startedAt >= 2400) {
+          stopAlignment();
+          document.getElementById('fatigue-game-heading')?.focus({ preventScroll: true });
+        }
+      };
+      attempt();
+      alignmentInterval = window.setInterval(attempt, 120);
+      window.addEventListener('wheel', stopAlignment, { passive: true });
+      window.addEventListener('touchstart', stopAlignment, { passive: true });
+      window.addEventListener('pointerdown', stopAlignment, { passive: true });
+      window.addEventListener('keydown', onKeyDown);
+    };
+    frame = window.requestAnimationFrame(() => window.requestAnimationFrame(settle));
+    return () => {
+      window.cancelAnimationFrame(frame);
+      stopAlignment();
+    };
   }, [focusInviteArrival]);
   useEffect(()=>{if(!kakaoKey)return;const ready=()=>{if(!window.Kakao)return;try{if(!window.Kakao.isInitialized())window.Kakao.init(kakaoKey);setKakaoReady(true)}catch{setKakaoReady(false)}};if(window.Kakao){ready();return;}const script=document.createElement('script');script.src='https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';script.async=true;script.onload=ready;script.onerror=()=>setKakaoReady(false);document.head.appendChild(script);return()=>{script.onload=null;script.onerror=null}},[]);
   const answerStarted=useRef(false);
@@ -344,7 +384,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
     if (navigator.share) {
       try {
-        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 1분 색 신호 게임' : '잠과 휴식 1분 체크', text: shareText, url });
+        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 뇌컨디션 확인 챌린지' : '잠과 휴식 1분 체크', text: shareText, url });
         setMessage(kind === 'focus' ? '게임 초대를 보냈어요. 친구도 설명을 읽고 직접 시작할 수 있어요.' : '1분 체크 초대 창을 열었어요. 친구도 직접 해보도록 보내 보세요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
         return;

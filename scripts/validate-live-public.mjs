@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
 import {normalizePublicSiteUrl, publicSitePath} from './public-origin.mjs';
 
 const cliBase = process.argv.slice(2).find(value => /^https:\/\//.test(value)) || '';
@@ -9,6 +11,7 @@ const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const runtimeMode = process.env.PUBLIC_RUNTIME_MODE || (base === normalizePublicSiteUrl() ? 'static' : '');
 if (!runtimeMode) throw new Error('PUBLIC_RUNTIME_MODE is required when validating a non-default public origin');
 if (!['static', 'worker'].includes(runtimeMode)) throw new Error('PUBLIC_RUNTIME_MODE must be static or worker');
+const expectedReleaseSha = process.env.EXPECTED_RELEASE_SHA || '';
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 const approvedReviewText = '가바 1500 구매자 후기를 스마트스토어에서 읽어보세요.';
@@ -48,14 +51,8 @@ const validateContinuation = (value, label) => {
 };
 const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
 const sharedResultIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
-const sharedResultLabels = {
-  active: '계속 작동형',
-  sleep: '잠자리 전환형',
-  irregular: '휴식 공백형',
-  sensory: '자극 과부하형',
-  unrested: '회복 우선형',
-  steady: '안정 리듬형',
-};
+const expectedReleaseRoutes = ['/', '/products/', '/research/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
+const sharedResultLabels = Object.fromEntries(Object.entries(JSON.parse(readFileSync(resolve('data/rhythm-share-labels.json'), 'utf8'))).map(([id, value]) => [id, value.label]));
 const metaContent = (html, attribute, value) => {
   const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const forward = new RegExp(`<meta[^>]+${attribute}="${escaped}"[^>]+content="([^"]+)"`, 'i').exec(html);
@@ -124,7 +121,7 @@ const requestRuntimeRoute = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, focusPageResponse, faviconResponse, heroImageResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute, healthRoute, contentApiRoute] = await Promise.all([
+    const [page, focusPageResponse, faviconResponse, heroImageResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute, healthRoute, contentApiRoute, releaseManifestResponse] = await Promise.all([
       request('/?view=ops'),
       request('/focus/'),
       request('/favicon.svg'),
@@ -144,6 +141,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       requestPublicRoute('/?view=ops'),
       requestRuntimeRoute('/api/health'),
       requestRuntimeRoute('/api/content'),
+      request('/release-manifest.json'),
     ]);
     if (runtimeMode === 'static') {
       assert.ok([404, 405].includes(healthRoute.status), `STATIC_ONLY /api/health must not expose a live API (HTTP ${healthRoute.status})`);
@@ -156,8 +154,21 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(heroImageResponse.headers.get('content-type') || '', /^image\/webp/i, 'live hero image must be served as WebP');
     const heroImageBytes = await heroImageResponse.arrayBuffer();
     assert.ok(heroImageBytes.byteLength >= 10_000, 'live hero image must contain the published visual asset');
-    const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json()]);
+    const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview, releaseManifest] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), releaseManifestResponse.json()]);
+    assert.equal(releaseManifest.schemaVersion, 1, 'live release manifest schema is invalid');
+    assert.match(releaseManifest.candidateSha || '', /^[a-f0-9]{40}$/, 'live release manifest candidate SHA is invalid');
+    if (expectedReleaseSha) assert.equal(releaseManifest.candidateSha, expectedReleaseSha, 'live release manifest does not match the deployed candidate SHA');
+    assert.equal(releaseManifest.publicSiteUrl, base, 'live release manifest public origin is out of sync');
+    assert.equal(releaseManifest.runtimeMode, runtimeMode, 'live release manifest runtime mode is out of sync');
+    assert.deepEqual(releaseManifest.routePaths, expectedReleaseRoutes, 'live release manifest route set is invalid');
+    assert.equal(releaseManifest.counts.claims, content.claims.length, 'live release manifest claim count is out of sync');
+    assert.equal(releaseManifest.counts.research, master.records.length, 'live release manifest research count is out of sync');
+    assert.equal(releaseManifest.counts.products, content.products.length, 'live release manifest product count is out of sync');
+    assert.equal(releaseManifest.counts.reviews, content.reviews.length, 'live release manifest review count is out of sync');
+    assert.equal(releaseManifest.teaser.status, teaserPreview.status, 'live release manifest teaser state is out of sync');
+    assert.ok(releaseManifest.checks?.smartStoreOnly && releaseManifest.checks?.reviewDestination && releaseManifest.checks?.researchIndex && releaseManifest.checks?.teaserBoundary && releaseManifest.checks?.challengeCopy && releaseManifest.checks?.productBoundary, 'live release manifest checks are incomplete');
     validatePublicMetadata(pageText, '/', `${base}/`);
+    assert.ok(pageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live root fallback must distinguish general GABA research from Cellpinda product research');
     validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);
     const internalSnapshots = [
       ['/data/operations-queue.json', queueResponse],
@@ -175,10 +186,10 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(researchPageText, /property="og:title" content="사람을 대상으로 한 GABA 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
     assert.ok(researchPageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live research page must distinguish general GABA research from Cellpinda product research');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
-    assert.ok(researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && researchPageText.includes('손끝 감각: GABA를 먹지 않은 관찰 연구'), 'live research fallback must keep the consumer-first topic guide and non-ingestion study boundary');
+    assert.ok(researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && researchPageText.includes('손끝 감각: GABA를 먹지 않고 뇌 속 GABA 신호와 손끝 연습을 살펴본 연구예요.') && !researchPageText.includes('일반 GABA 섭취 연구') && !researchPageText.includes('GABA를 먹지 않은 관찰 연구'), 'live research fallback must keep the consumer-first topic guide and plain-language non-ingestion study boundary');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.ok(researchPageText.includes('가바 1500 제품 구성 보기') && researchPageText.includes('view=products'), 'live research page must offer a neutral product-information handoff');
-    assert.ok(researchPageText.includes('운동 경험이 있는 남성이 GABA를 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬을 살펴본 연구를 정리했어요.') && !researchPageText.includes('GABA와 단백질을 함께 사용한 연구'), 'live research fallback must match the approved Powers study scope');
+    assert.ok(researchPageText.includes('연구 사용량 GABA 3g을 한 번 먹고 혈액 속 성장호르몬을 본 연구예요. 셀핀다 가바 1500과는 별도 연구예요.') && !researchPageText.includes('GABA와 단백질을 함께 사용한 연구'), 'live research fallback must match the approved Powers study scope and separate its research amount from the product');
     assert.equal(canonicalHref(productSharePageText), `${base}/products/`, 'live product share route must expose a product-specific canonical URL');
     assert.equal(metaContent(productSharePageText, 'property', 'og:url'), `${base}/products/`, 'live product share route must expose a product-specific Open Graph URL');
     assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1500 · 30포 구성 보기"/, 'live product share route must show the confirmed product name and package count');
@@ -200,14 +211,16 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.ok(consumerBundle.includes('화면에 들어오면 자동 시작') && consumerBundle.includes('이 화면에 들어오면 영상이 자동으로 시작돼요') && consumerBundle.includes('자동 시작이 막히면'), 'live consumer bundle must explain teaser autoplay and its user-controlled fallback');
     }
     assert.ok(!consumerBundle.includes('운영 큐') && !consumerBundle.includes('운영판을 여는 중입니다.'), 'live consumer bundle must keep the internal operations UI in its lazy route chunk');
-    assert.ok(consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name');
+    assert.ok(consumerBundle.includes('뇌컨디션 확인 챌린지') && consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name and its simple game description');
+    assert.ok(consumerBundle.includes('잠드는 시간이 비교 캡슐을 먹은 주보다 평균 5분 짧게 기록됐어요.') && consumerBundle.includes('과제 뒤 뇌파와 활력 점수가 비교 캡슐을 먹었을 때보다 덜 떨어졌어요.') && consumerBundle.includes('연구에서 관찰된 내용') && consumerBundle.includes('연구 사용량: 하루 100mg') && consumerBundle.includes('연구 사용량: 100mg 1회') && consumerBundle.includes('제품 권장량과 별개'), 'live consumer bundle must preserve plain-language research highlights and separate research amounts from product servings');
+    assert.ok(consumerBundle.includes('브라우저가 자동 소리를 막았어요.') && consumerBundle.includes('화면 신호로 계속 진행합니다.'), 'live consumer bundle must explain blocked game audio without stopping the visual game');
     assert.ok(consumerBundle.includes('매번 신호 순서가 달라져요') && consumerBundle.includes('초록은 누르고, 빨강은 기다려요') && consumerBundle.includes('뜨면 누르기') && consumerBundle.includes('표시된 색 누르기'), 'live consumer bundle must show the three game rules in direct, visual language');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
     assert.ok(consumerBundle.includes('쉬지 않고 이어서 하기') && consumerBundle.includes('휴식이 기록 변화의 원인이라고 단정할 수는 없어요'), 'live consumer bundle must distinguish repeat records without claiming a rest effect');
     assert.ok(consumerBundle.includes('초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요. 게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.') && consumerBundle.includes('초록') && consumerBundle.includes('보라'), 'live consumer bundle must clarify the non-diagnostic game and show accessible color labels');
     assert.ok(!consumerBundle.includes('needsFocusRecovery') && !consumerBundle.includes('쉬고 난 뒤 게임 기록이 좋아졌어요'), 'live consumer bundle must not diagnose recovery from a score or claim a rest effect');
     assert.ok(consumerBundle.includes('시작 준비') && consumerBundle.includes('첫 신호가 나타나면'), 'live consumer bundle must give users a ready countdown before the focus game starts');
-    assert.ok(consumerBundle.includes('먼저 연습하기') && consumerBundle.includes('설명 없이 바로 시작') && consumerBundle.includes('연습 1 / 5') && consumerBundle.includes('연습 2 / 5') && consumerBundle.includes('연습 3 / 5') && consumerBundle.includes('연습 4 / 5') && consumerBundle.includes('연습 5 / 5') && consumerBundle.includes('연습 완료') && consumerBundle.includes('연습 기록은 점수에 들어가지 않아요'), 'live consumer bundle must teach all scored rules through a skippable no-score practice');
+    assert.ok(consumerBundle.includes('먼저 연습하고 시작하기') && consumerBundle.includes('연습을 건너뛰고 바로 시작') && consumerBundle.includes('연습 1 / 5') && consumerBundle.includes('연습 2 / 5') && consumerBundle.includes('연습 3 / 5') && consumerBundle.includes('연습 4 / 5') && consumerBundle.includes('연습 5 / 5') && consumerBundle.includes('연습 완료') && consumerBundle.includes('연습 기록은 점수에 들어가지 않아요'), 'live consumer bundle must teach all scored rules through a skippable no-score practice');
     const yamatsu = content.claims.find(claim => claim.id === 'research-yamatsu-2016');
     assert.ok(yamatsu && JSON.stringify(yamatsu).includes('캡슐') && !JSON.stringify(yamatsu).includes('정제'), 'live Yamatsu study must accurately describe capsule forms');
     const review2020 = content.claims.find(claim => claim.id === 'research-review-2020');
@@ -217,14 +230,14 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
     assert.ok(byun2018?.metadata?.sampleSize?.includes('40명') && byun2018.metadata.sampleSize.includes('30명') && byun2018.metadata.sampleSize.includes('10명') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show the participant split and both groups');
     const powers2008 = content.claims.find(claim => claim.id === 'research-powers-2008');
-    assert.ok(powers2008?.metadata?.consumerFindingFirst !== true && powers2008.metadata?.consumerSummary?.includes('남성 11명') && powers2008.metadata.consumerSummary.includes('GABA 3g') && powers2008.metadata.consumerSummary.includes('90분') && powers2008.metadata.consumerFinding?.includes('성장호르몬 최고 수치') && powers2008.metadata.consumerFinding.includes('근육 크기와 근력 변화는 측정하지 않았어요') && powers2008.metadata.consumerDisclosure?.includes('PubMed 초록에는') && powers2008.metadata.consumerDisclosureStatus === 'not_reported_in_pubmed_abstract' && !powers2008.metadata.consumerDetail, 'live Powers study must lead with its measurement design and keep the finding in context');
+    assert.ok(powers2008?.metadata?.consumerFindingFirst !== true && powers2008.metadata?.consumerSummary?.includes('남성 11명') && powers2008.metadata.consumerSummary.includes('GABA 3g') && powers2008.metadata.consumerSummary.includes('90분') && powers2008.metadata.consumerFinding?.includes('성장호르몬 최고 수치') && powers2008.metadata.consumerFinding.includes('운동 뒤 혈액 속 변화를 살펴본 자료') && !/750mg 캡슐|750\s*제품|근육 크기와 근력 변화는 측정하지 않았어요/.test(JSON.stringify(powers2008.metadata)) && powers2008.metadata.consumerDetail?.includes('약 4배') && powers2008.metadata.consumerDisclosure?.includes('PubMed 초록에는') && powers2008.metadata.consumerDisclosureStatus === 'not_reported_in_pubmed_abstract', 'live Powers study must lead with its measurement design, avoid removed SKU wording, and keep the numeric finding in context');
     const yoto2012 = content.claims.find(claim => claim.id === 'research-yoto-2012');
     assert.ok(yoto2012?.metadata?.consumerFinding?.startsWith('이 연구에서는') && yoto2012.metadata.consumerFinding.includes('뇌파와 활력 설문 점수의 감소 폭') && yoto2012.metadata.consumerFinding.includes('비교 조건보다 작게 기록됐어요') && !/안정적으로 유지|뇌 활력 개선|개선됐/.test(yoto2012.metadata.consumerFinding) && yoto2012.metadata.consumerVisual?.outcomes?.some(item => item.label === '활력 설문 점수' && item.result.includes('감소 폭이 작게 기록됐어요')), 'live Yoto copy must name the study context and describe the observed decrease range against the comparison condition without implying a general stabilizing or improvement effect');
     assert.ok(review2020?.metadata?.consumerDisclosure?.includes('게재 비용 지원') && review2020.metadata.consumerDisclosure.includes('산업계 관계'), 'live review must preserve its published funding and relationship disclosure');
     assert.ok(content.claims.find(claim => claim.id === 'research-yoto-2012')?.metadata?.consumerDisclosure?.includes('저자 9명 중 4명'), 'live Yoto study must show the published author affiliation disclosure');
     assert.ok(!content.claims.some(claim => claim.id === 'research-sakashita-2019') && !master.records.some(record => record.id === 'research-sakashita-2019'), 'live public research must keep the study with unresolved statistical review out of the public master index');
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
-    assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('나랑 ‘1분 색 신호 게임’ 해볼래?') && consumerBundle.includes('초대에는 내 게임 기록이나 답변이 포함되지 않아요.'), 'live consumer bundle must invite a friend without transmitting the player result');
+    assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('나랑 ‘뇌컨디션 확인 챌린지’ 해볼래?') && consumerBundle.includes('초대에는 내 게임 기록이나 답변이 포함되지 않아요.'), 'live consumer bundle must invite a friend without transmitting the player result');
     assert.ok(consumerBundle.includes('피로가 몇 주째 이어지거나 일상에 지장을 준다면') && consumerBundle.includes('불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.'), 'live consumer bundle must include the concise, expandable care-seeking guide');
     assert.ok(consumerBundle.includes('건강 상태를 검사한 결과가 아니라, 다섯 질문에 고른 답을 정리한 기록이에요.'), 'live consumer bundle must explain the personal answer score without implying a health measurement');
     assert.ok(consumerBundle.includes('집중과 휴식 관련 연구 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');
@@ -264,7 +277,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(!productSchemaNode.offers && !productSchemaNode.aggregateRating && !productSchemaNode.review, 'live product Product structured data must not invent price, rating or review claims');
     assert.equal(canonicalHref(focusPageText), `${base}/focus/`, 'live focus invite canonical URL is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:url'), `${base}/focus/`, 'live focus invite Open Graph URL is invalid');
-    assert.equal(metaContent(focusPageText, 'property', 'og:title'), '“너도 해봐” 1분 색 신호 게임', 'live focus invite Open Graph title is invalid');
+    assert.equal(metaContent(focusPageText, 'property', 'og:title'), '“너도 해봐” 뇌컨디션 확인 챌린지', 'live focus invite Open Graph title is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:image'), `${base}/assets/focus-game-card-v5.png`, 'live focus invite Open Graph image is invalid');
     assert.equal(metaContent(focusPageText, 'property', 'og:site_name'), '셀핀다 발효가바', 'live focus invite Open Graph site name is invalid');
     assert.ok(focusPageText.includes('focus=1') && focusPageText.includes('#focus-game'), 'live focus invite must hand off to the explained game without auto-start');

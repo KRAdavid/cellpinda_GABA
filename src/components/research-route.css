@@ -29,3 +29,8 @@
 /* Keep the research scope simple and distinguish it from product information. */
 .research-route-intro>p:last-child{max-width:58ch;margin-bottom:0;font-size:16px;line-height:1.7;color:#43584a}
 .research-library>.section-head h2{margin-bottom:0}
+
+/* Keep the research introduction inside the phone gutter at 390px and below. */
+@media(max-width:700px){
+  .research-route-intro>p:last-child{max-width:100%;overflow-wrap:anywhere;word-break:keep-all}
+}

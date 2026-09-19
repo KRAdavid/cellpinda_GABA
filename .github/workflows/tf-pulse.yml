@@ -61,8 +61,22 @@ jobs:
               pr_url="${existing_pr#*$'\t'}"
               echo "Updated existing TF heartbeat PR: $pr_url"
             else
-              pr_url="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$heartbeat_branch" --title "chore: refresh TF pulse heartbeat" --body "Automated safe TF pulse heartbeat update. Required checks and protected-main review remain in force; no external publication, purchase, or approval is performed by this workflow.")"
-              echo "Created TF heartbeat PR: $pr_url"
+              # Some repositories allow branch pushes from the automation token
+              # but disallow that token from creating pull requests. Keep the
+              # safe heartbeat and run its candidate checks in that case; the
+              # run summary must make the manual PR gate explicit.
+              pr_create_status=0
+              set +e
+              pr_url="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$heartbeat_branch" --title "chore: refresh TF pulse heartbeat" --body "Automated safe TF pulse heartbeat update. Required checks and protected-main review remain in force; no external publication, purchase, or approval is performed by this workflow." 2>&1)"
+              pr_create_status=$?
+              set -e
+              if [ "$pr_create_status" -ne 0 ]; then
+                echo "::warning::The heartbeat branch was pushed, but repository policy blocked automatic PR creation. A human must open the protected-main PR before the heartbeat can publish."
+                echo "$pr_url"
+                pr_url=""
+              else
+                echo "Created TF heartbeat PR: $pr_url"
+              fi
             fi
 
             # GITHUB_TOKEN-created PRs may not emit a second pull_request run,
@@ -89,8 +103,14 @@ jobs:
             {
               echo
               echo "## Heartbeat review"
-              echo "The safe heartbeat was published through a protected-main PR."
-              echo "PR: $pr_url"
+              if [ -n "$pr_url" ]; then
+                echo "The safe heartbeat was published through a protected-main PR."
+                echo "PR: $pr_url"
+              else
+                echo "The safe heartbeat branch was pushed, but automatic PR creation was blocked by repository policy."
+                echo "A human must open the protected-main PR before the heartbeat can publish."
+                echo "Branch: $heartbeat_branch"
+              fi
               echo "Verification: candidate typecheck, tests, build and Worker dry-run passed on $heartbeat_sha."
               echo "The public packet changes only after the required checks and human merge pass."
             } >> "$GITHUB_STEP_SUMMARY"

@@ -75,7 +75,7 @@ export default function TeaserPreview({onEvent}: Props) {
         <p>{preview.description}</p>
         <p className="teaser-context">{isOnHold ? '공개가 확정되면 이 자리에서 바로 볼 수 있어요. 연구와 제품 정보는 아래에서 먼저 확인해 보세요.' : '영상에서는 발효 이야기를, 연구와 제품 메뉴에서는 각각의 정보를 확인해 보세요.'}</p>
       </div>
-      <div className="teaser-card teaser-card-player" aria-busy={frameRequested && !frameLoaded}>
+      <div className={`teaser-card teaser-card-player${isOnHold ? ' teaser-card--hold' : ''}`} aria-busy={frameRequested && !frameLoaded}>
         <div className="teaser-player">
           {isOnHold ? <div className="teaser-hold" role="status" aria-live="polite">
             <span className="teaser-hold-icon" aria-hidden="true">✦</span>

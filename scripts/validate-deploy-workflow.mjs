@@ -24,6 +24,9 @@ for (const job of ['deploy-pages', 'smoke-live', 'worker-readiness', 'deploy-wor
 assert.match(workflow, /^    needs: release-verify$/m, 'publishing jobs must depend on release verification');
 assert.match(workflow, /rewrite-public-origin\.mjs dist-pages/, 'Pages artifacts must apply the selected public origin');
 assert.match(workflow, /rewrite-public-origin\.mjs dist-pages[\s\S]*check-public-artifacts\.mjs dist-pages/, 'Pages origin rewrite must be checked before publishing');
+assert.match(workflow, /check-public-artifacts\.mjs dist-pages[\s\S]*validate:static-bundle -- dist-pages/, 'Pages artifacts must validate every public route before publishing');
+assert.match(workflow, /RELEASE_SHA: \$\{\{ github\.sha \}\}[\s\S]*RELEASE_RUNTIME_MODE: static[\s\S]*generate:release-manifest -- dist-pages[\s\S]*validate:release-manifest -- dist-pages/, 'Pages artifacts must carry and validate a candidate release manifest');
+assert.match(workflow, /PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*RELEASE_SHA: \$\{\{ github\.sha \}\}[\s\S]*RELEASE_RUNTIME_MODE: worker[\s\S]*run: pnpm run build/, 'Worker artifacts must carry a worker-mode candidate release manifest');
 assert.match(workflow, /DEPLOY_ENABLED:.*secrets\.CLOUDFLARE_API_TOKEN.*secrets\.CLOUDFLARE_ACCOUNT_ID.*secrets\.CLOUDFLARE_D1_DATABASE_ID.*secrets\.ADMIN_TOKEN.*secrets\.MEMBER_ORIGIN/, 'Worker deployment must stay gated on required secrets');
 assert.match(workflow, /worker-readiness:[\s\S]*outputs:[\s\S]*enabled: \$\{\{ steps\.gate\.outputs\.enabled \}\}/, 'Worker readiness must be an explicit pre-deployment gate');
 assert.match(workflow, /needs: \[release-verify, worker-readiness\][\s\S]*needs\.worker-readiness\.outputs\.enabled == 'true'/, 'Worker deployment must run only after the readiness gate opens');
@@ -38,6 +41,7 @@ assert.match(workflow, /release-status:[\s\S]*validate-release-status\.mjs relea
 assert.match(workflow, /PAGES_PUBLIC_SITE_URL: https:\/\/kradavid\.github\.io\/cellpinda_GABA[\s\S]*WORKER_PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}/, 'live smoke must keep Pages and Worker public origins explicit');
 assert.match(workflow, /PUBLIC_SITE_URL="\$WORKER_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=worker/, 'full-release smoke must verify the Worker public origin');
 assert.match(workflow, /PUBLIC_SITE_URL="\$PAGES_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=static/, 'static-only smoke must verify the Pages public origin');
+assert.match(workflow, /EXPECTED_RELEASE_SHA: \$\{\{ github\.sha \}\}[\s\S]*validate-live-public\.mjs/, 'live smoke must compare the published release manifest with the candidate SHA');
 assert.match(workflow, /Create deployment Wrangler config[\s\S]*PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*config\.vars=\{\.\.\.\(config\.vars\|\|\{\}\),PUBLIC_SITE_URL:process\.env\.PUBLIC_SITE_URL\}/, 'Worker deploy config must inject the selected public origin');
 assert.match(workflow, /Strict deployment readiness gate[\s\S]*PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*pnpm run preflight:deploy -- --strict/, 'strict Worker readiness must validate the same public origin used for deployment');
 assert.match(workflow, /elif \[ "\$WORKER_ENABLED" = "true" \] && \[ "\$WORKER_RESULT" != "success" \][\s\S]*mode="RELEASE_FAILED"/, 'a failed Worker deployment must not be relabeled as static-only');

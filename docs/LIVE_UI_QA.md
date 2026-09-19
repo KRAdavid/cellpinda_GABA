@@ -1,8 +1,38 @@
 # 공개 Pages UI 검증 기록
 
-## 최신 배포 상태 — 2026-09-19 (main `22dd63e`)
+## 연구 카드 반복 노출 보정 — 2026-09-20 후보 `1be912c`
 
-최신 main 배포 run `35444540241`은 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 공개 연구 인덱스는 6건, claim은 12개, 제품은 1개이며 티저는 `HOLD`로 외부 미디어 URL을 노출하지 않는다. 라이브 검증은 `teaserPreview: {status: "HOLD", publicUrl: false}`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다. 연구 카드의 상세·출처 안내는 소비자 언어 라벨로 배포됐고 제품 직접 진입 메타데이터도 제품 전용으로 정렬됐다. 연구 인덱스의 content/master 설계 라벨 parity와 DOI 경로 중복 정규화, Worker API 장애 시 정적 fallback 차단, 비기본 origin runtime mode 필수 검증도 같은 배포에서 확인했다.
+후보 브랜치의 연구 카드를 다시 감리해 대표 카드에는 `오늘 연결해 보기`를 기본 화면에 한 번만 노출하고, 나머지 카드는 상세를 열었을 때 다음 행동을 보여 주도록 보정했다. 승인된 6개 연구의 다음 행동 문구는 잠·긴장·생각 과제·운동·손끝 자극 주제에 맞게 서로 다르게 작성했으며, `validate:research-copy`가 같은 문구의 재사용을 실패시키도록 고정했다. 연구 소개 상단에서는 완제품 경계 문구를 반복하지 않고 연구 목록 안내 박스 한 곳에서만 설명한다.
+
+이번 후보는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, production build와 공개 산출물 검사를 통과했다. 이 기록은 후보 코드 검증이며, Code Owner 승인·main 병합·Pages 라이브 smoke가 끝나기 전에는 공개 배포 완료를 의미하지 않는다.
+
+## 릴리스 후보 통합 화면 검증 — 2026-09-19
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 후보 `0b1f477`를 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
+
+| 점검 항목 | 결과 |
+|---|---|
+| 모바일 가로 폭 | 모든 경로 `scrollWidth=390`, 가로 넘침 없음 |
+| 데스크톱 가로 폭 | 모든 경로 `scrollWidth=1425`, 세로 스크롤바를 제외한 넘침 없음 |
+| 연구 경로 | `사람을 대상으로 한 GABA 연구를 쉽게 보기 \| 셀핀다`, 주제 카드와 연구 카드 표시 |
+| 제품 경로 | `셀핀다 가바 1500 · 30포 구성 보기`, Smart Store CTA 표시 |
+| 챌린지 경로 | `너도 해봐 · 뇌컨디션 확인 챌린지 \| 셀핀다`, 연습 시작·규칙 카드 표시 |
+| 오디오 차단 fallback | 자동 재생을 거부하는 가상 `AudioContext`에서 차단 안내와 화면 신호 진행 문구가 게임 카드 안에 표시되고 레이아웃 이동 없음 |
+| 오류 | 확인한 경로 모두 콘솔 오류 0건 |
+
+이 기록은 후보 브랜치의 실제 화면 검증이며, main 공개 Pages 배포 완료를 의미하지 않는다.
+
+### 결과 화면 상태 보정 확인 — 2026-09-20
+
+후보 `0b1f477`의 게임 결과 화면에서 정답률 구간별 안내가 표시되는지 확인했다. 높은 기록은 안정적인 반응 흐름, 중간 기록은 5분 후 재점검, 낮은 기록은 화면을 내려놓고 5분 쉬는 안내를 사용하며, 모든 상태에 비진단 문구가 함께 표시된다. 결과 링과 기록 종료 화면도 같은 상태 색상을 사용한다. 필수 후보 검증은 [release-verify 35451268609](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35451268609) 및 [site-quality-verify 35451268655](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35451268655)에서 통과했다.
+
+## 최신 배포 상태 — 2026-09-19 (main `ea1cc42`)
+
+최신 main 배포 run `35445159229`은 당시 검증 기준으로 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 후보 검증기를 공개 주소에 다시 적용하면 라이브 번들이 최신 `뇌컨디션 확인 챌린지` 명칭을 포함하지 않아 실패한다. 공개 연구 인덱스·제품·Smart Store 목적지·티저 `HOLD` 상태는 유지되지만, 후보 PR 병합 전까지 이 공개본을 최신 후보 배포로 간주하지 않는다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다.
+
+### 공개본과 후보 계약의 불일치 — 2026-09-19
+
+`pnpm run validate:live-public`를 `https://kradavid.github.io/cellpinda_GABA`에 실행한 결과 `live consumer bundle must contain the current focus challenge name and its simple game description` 오류로 종료했다. 이는 라이브 Pages가 이전 `1분 색 신호 게임` 문구를 제공하고 후보가 `뇌컨디션 확인 챌린지`로 갱신됐기 때문이다. 이 실패는 후보의 품질 결함이 아니라 **후보가 아직 main에 병합되지 않았다는 배포 차단 신호**이며, 병합 후 Pages 게시와 live smoke를 다시 실행해야 한다.
 
 ### 제품 직접 진입 메타데이터 확인 — 2026-09-19
 
@@ -104,3 +134,9 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 ## 2026-09-12 실행 환경 재검증 범위
 
 이번 재검증 환경에는 실행 가능한 Chromium·Playwright 브라우저가 없어 화면 캡처·DOM·콘솔 상태를 새로 수집하지 못했다. 현재 근거로 삼은 항목은 `validate:ui-contract`, `validate:public`, `typecheck`, 전체 테스트, production build, GitHub Pages HTTP smoke와 공개 JSON 검사이며, 위의 과거 브라우저 기록은 당시 실행 환경에서 작성된 이력으로 구분한다. 실제 화면 사용성·가로폭·콘솔 오류의 최종 확인은 브라우저 QA 환경에서 다시 수행해야 한다.
+
+## 2026-09-20 소비자 결과명·연구 카드 재감리
+
+공유 결과에 남아 있던 `계속 작동형`, `잠자리 전환형` 같은 내부 분류명을 실제 생활 장면으로 바꿨다. 공유 HTML·Worker 메타데이터·여섯 개 미리보기 PNG를 같은 매니페스트에서 다시 생성해, `퇴근 뒤에도 생각이 남는 날`, `누워도 잠이 안 오는 날`처럼 링크를 받은 사람도 바로 이해할 수 있게 맞췄다. 점수 시각화는 수면·아침 피로를 포함한 다섯 답변을 특정 휴식 문항으로 오해하지 않도록 `힘들었다고 답한 질문`으로 정리했다.
+
+연구 카드의 방법 중심 제목은 `이 연구에서 본 내용`으로 바꿨고, Powers 연구는 참여자·조건 요약과 관찰된 수치 결과를 별도 문단으로 나눴다. 숫자는 해당 연구의 조건 안에서만 읽히며 셀핀다 완제품 효능이나 권장량으로 확장되지 않는다. `validate:research-copy`, `validate:ui-contract`, 전체 테스트와 production build에서 이 구조를 다시 확인한다.

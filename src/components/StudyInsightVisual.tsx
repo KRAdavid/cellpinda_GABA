@@ -73,7 +73,7 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
   </figure>;
 
   if(visual.kind==='observational-link')return <figure className="study-insight study-insight--observation" aria-label={`${visual.participantLabel}. ${visual.leftLabel}와 ${visual.rightLabel}를 함께 살펴봤어요`}>
-    <figcaption><ScanFace size={18} aria-hidden="true"/>손끝 연습과 뇌 신호를 살펴봄 <span>{visual.participantLabel}</span></figcaption>
+    <figcaption><ScanFace size={18} aria-hidden="true"/>뇌 속 GABA 신호와 손끝 연습 <span>{visual.participantLabel}</span></figcaption>
     <div className="study-observation-map"><div><Brain size={31} strokeWidth={1.5} aria-hidden="true"/><span>{visual.leftLabel}</span></div><span className="study-observation-link" aria-hidden="true"><i/></span><div><Hand size={31} strokeWidth={1.5} aria-hidden="true"/><span>{visual.rightLabel}</span></div></div>
     <small className="study-insight-footnote">{visual.studyLabel} · {visual.boundaryLabel}</small>
   </figure>;
