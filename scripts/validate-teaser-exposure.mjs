@@ -12,6 +12,12 @@ if (!Array.isArray(manifest.requiredApprovals) || manifest.requiredApprovals.len
 if (JSON.stringify(manifest.events) !== JSON.stringify(['teaser_impression', 'teaser_embed_loaded', 'teaser_external_opened'])) fail('teaser events must describe only observable actions available to the parent page');
 const teaserComponent = await readFile(resolve(root, 'src/components/TeaserPreview.tsx'), 'utf8');
 if (!teaserComponent.includes("onEvent?.('teaser_embed_loaded'") || !teaserComponent.includes("onEvent?.('teaser_external_opened'") || teaserComponent.includes("onEvent?.('teaser_play'")) fail('teaser playback metrics must not confuse iframe loading with actual video playback');
+const serverStore = await readFile(resolve(root, 'server/store.mjs'), 'utf8');
+const workerStore = await readFile(resolve(root, 'worker/store.ts'), 'utf8');
+for (const event of manifest.events) {
+  if (!serverStore.includes(`'${event}'`)) fail(`Node event allowlist is missing ${event}`);
+  if (!workerStore.includes(`'${event}'`)) fail(`Worker event allowlist is missing ${event}`);
+}
 
 if (manifest.status === 'HOLD') {
   if (manifest.publicMediaUrl !== null) fail('a HOLD teaser cannot expose a public media URL');
