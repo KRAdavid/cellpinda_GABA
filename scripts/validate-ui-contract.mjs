@@ -80,6 +80,7 @@ requireMatch(challenge, /id="challenge-heading" ref=\{inviteHeadingRef\} tabInde
 requireMatch(rhythm, /if \(sharedType && !result\) resultRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'shared rhythm arrival must focus the shared result heading');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
+requireMatch(brainLoadEvidence, /GABA 섭취 연구와 별도로, 잠·스트레스·집중을 이해하는 일반 건강 연구예요\. 제품 정보는 따로 보여드려요\./, 'secondary health evidence must be clearly separated from GABA ingestion research');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
 requireMatch(app, /<nav id="primary-navigation"[^>]*aria-label="주 메뉴"/, 'consumer navigation label is missing');

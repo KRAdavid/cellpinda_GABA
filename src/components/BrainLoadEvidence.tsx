@@ -91,7 +91,7 @@ export default function BrainLoadEvidence() {
           <div>
             <p className="chapter">잠·집중·휴식에 관한 연구</p>
             <h2 id="brain-load-evidence-heading">피곤할 때,<br />집중과 휴식은 어떻게 달라질까요?</h2>
-            <p className="brain-load-evidence-boundary">잠·스트레스·집중을 이해하는 연구예요. 제품 정보는 따로 보여드려요.</p>
+            <p className="brain-load-evidence-boundary">GABA 섭취 연구와 별도로, 잠·스트레스·집중을 이해하는 일반 건강 연구예요. 제품 정보는 따로 보여드려요.</p>
           </div>
           <p>잠이 부족하거나 스트레스가 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
         </div>
