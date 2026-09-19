@@ -232,6 +232,10 @@ requireMatch(fatigueGameStyles, /fatigue-target[\s\S]*\.visible/, 'reaction game
 requireMatch(fatigueGameStyles, /fatigue-game-rule-cards[\s\S]*fatigue-game-practice[\s\S]*fatigue-practice-signal-stop/, 'focus game must use direct rule and practice visuals');
 requireMatch(fatigueGame, /fatigue-rule-slot[\s\S]*fatigue-rule-placeholder/, 'focus game must reserve the rule position in every stage');
 requireMatch(fatigueGameStyles, /\.fatigue-game-running\{display:grid;grid-template-rows:[^}]+\}[\s\S]*\.fatigue-stage-instruction\{[^}]*height:78px[\s\S]*\.fatigue-rule-slot\{[^}]*height:48px/, 'focus stage instructions and play area must keep stable vertical positions');
+requireMatch(fatigueGame, /function FatigueGameNextSteps/, 'completed focus results must define a compact next-step navigation');
+requireMatch(fatigueGame, /fatigue-game-next-steps[\s\S]*GABA 이야기[\s\S]*가바 1500 구성[\s\S]*구매자 후기/, 'completed focus results must offer GABA context, product details, and an approved review label');
+requireMatch(fatigueGame, /href=\{REVIEW_DESTINATION_URL\}/, 'completed focus results must link to the approved review destination');
+requireMatch(fatigueGame, /phase === 'complete'[\s\S]*FatigueGameNextSteps/, 'the post-comparison result must expose next-step links without hiding them in the game controls');
 requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');
 requireMatch(researchStyles, /research-library-empty[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research empty-state copy must be at least 16px');
 requireMatch(reviewStyles, /review-quote-card p:not\(\.review-quote-label\)[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'review copy must be at least 16px on mobile');

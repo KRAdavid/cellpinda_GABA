@@ -187,4 +187,12 @@
 /* Larger informational labels for mobile reading comfort. */
 .fatigue-game-kicker,.fatigue-game-meta,.fatigue-game-note,.fatigue-breath-note,.fatigue-stage-preview span,.fatigue-stage-preview small,.fatigue-game-method,.fatigue-game-method p,.fatigue-stage-instruction span{font-size:14px!important;line-height:1.6}
 .fatigue-game-result-disclosure{margin:8px 0 0!important;padding:9px 12px;border-left:3px solid #b7c9bc;border-radius:0 6px 6px 0;background:#f5f8f5;color:#435b4c!important;font-size:14px!important;line-height:1.6!important}
+.fatigue-game-next-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:24px 0 0;border-top:1px solid #d9e5dc;border-bottom:1px solid #d9e5dc;background:#d9e5dc;text-align:left}
+.fatigue-game-next-steps a{display:grid;gap:4px;min-width:0;padding:14px 16px;background:#fbfdfb;color:#18382b;text-decoration:none;transition:background .18s ease}
+.fatigue-game-next-steps a:hover{background:#f0f7f1}
+.fatigue-game-next-steps a:focus-visible{outline:3px solid #158457;outline-offset:-3px}
+.fatigue-game-next-steps span{color:#6a8a74;font-size:11px;letter-spacing:.08em}
+.fatigue-game-next-steps strong{font-size:15px;font-weight:650;line-height:1.35}
+.fatigue-game-next-steps small{color:#53695c;font-size:12px;line-height:1.45}
+@media(max-width:760px){.fatigue-game-next-steps{grid-template-columns:1fr}.fatigue-game-next-steps a{grid-template-columns:30px 1fr;column-gap:8px;align-items:baseline;padding:12px 14px}.fatigue-game-next-steps a span{grid-row:span 2}.fatigue-game-next-steps strong,.fatigue-game-next-steps small{grid-column:2}}
 @media(max-width:760px){.fatigue-game-actions .secondary{order:initial}}

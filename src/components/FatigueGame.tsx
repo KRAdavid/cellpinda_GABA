@@ -17,6 +17,7 @@ import {
   type FocusTrialRecord,
 } from '../domain/fatigue-game';
 import { BREATH_ACTIVE_SECONDS, BREATH_CYCLE_SECONDS, getBreathCue, type BreathCue, type BreathStage } from '../domain/breath-guide';
+import { REVIEW_DESTINATION_URL } from '../domain/reviews';
 import './fatigue-game.css';
 
 type GamePhase = 'idle' | 'practice-press' | 'practice-hold' | 'practice-speed' | 'practice-switch-match' | 'practice-switch-hold' | 'practice-complete' | 'countdown' | 'running' | 'baseline-complete' | 'baseline-finished' | 'rest' | 'complete';
@@ -196,6 +197,22 @@ function baselineResultCopy(summary: FocusGameSummary): {
     heading: '지금은 화면을 내려놓고 5분 쉬어 보세요.',
     body: '오늘 머리가 과하게 바빴던 날일 수 있어요. 알림을 끄고 물을 마신 뒤 다시 해보세요.',
   };
+}
+
+function FatigueGameNextSteps({ onEvent }: { onEvent: FatigueGameProps['onEvent'] }) {
+  return (
+    <nav className="fatigue-game-next-steps" aria-label="게임 뒤에 살펴볼 내용">
+      <a href="#story" onClick={() => onEvent('research_highlight_opened', { path: '/focus', source: 'game_result' })}>
+        <span>01</span><strong>GABA 이야기</strong><small>몸속에서 하는 일</small>
+      </a>
+      <a href="#products" onClick={() => onEvent('product_compare_view', { path: '/focus', source: 'game_result' })}>
+        <span>02</span><strong>가바 1500 구성</strong><small>한 상자에 무엇이 들었나</small>
+      </a>
+      <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={() => onEvent('review_source_click', { productId: 'gaba1500', path: '/focus', source: 'game_result' })}>
+        <span>03</span><strong>구매자 후기</strong><small>스마트스토어에서 읽기 ↗</small>
+      </a>
+    </nav>
+  );
 }
 
 function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: BreathCue }) {
@@ -798,6 +815,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <p className="fatigue-game-comparison-note">{comparison.body}</p>
           <details className="fatigue-game-result-details"><summary>두 게임 기록 자세히 보기</summary><div className="fatigue-game-score-grid">{metrics.map(metric => <div key={metric.label}><span>{metric.label}</span><strong>첫 번째 {metric.before}</strong><strong>두 번째 {metric.after}</strong></div>)}</div></details>
           <p className="fatigue-game-viral-copy">친구도 직접 해보도록 챌린지를 보내 보세요.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>처음부터 다시 하기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 잠·휴식 답변이 포함되지 않아요.</p> : null}
+          <FatigueGameNextSteps onEvent={onEvent} />
         </div> : null}
       </div>
     </section>
