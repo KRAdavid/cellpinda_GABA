@@ -100,10 +100,11 @@ const requestRuntimeRoute = async path => {
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, focusPageResponse, faviconResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute, healthRoute, contentApiRoute] = await Promise.all([
+    const [page, focusPageResponse, faviconResponse, heroImageResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute, healthRoute, contentApiRoute] = await Promise.all([
       request('/?view=ops'),
       request('/focus/'),
       request('/favicon.svg'),
+      request('/assets/rhythm-window.webp'),
       request('/robots.txt'),
       request('/sitemap.xml'),
       request('/data/content.json'),
@@ -128,6 +129,9 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(contentApiRoute.status, 200, 'WORKER runtime /api/content must be available');
     }
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
+    assert.match(heroImageResponse.headers.get('content-type') || '', /^image\/webp/i, 'live hero image must be served as WebP');
+    const heroImageBytes = await heroImageResponse.arrayBuffer();
+    assert.ok(heroImageBytes.byteLength >= 10_000, 'live hero image must contain the published visual asset');
     const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json()]);
     const internalSnapshots = [
       ['/data/operations-queue.json', queueResponse],
@@ -278,7 +282,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, runtimeMode: runtimeMode.toUpperCase(), attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: true, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, runtimeMode: runtimeMode.toUpperCase(), attempt, page: 200, heroImage: 'webp-ready', claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: true, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {
