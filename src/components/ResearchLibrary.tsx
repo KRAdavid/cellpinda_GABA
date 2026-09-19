@@ -92,7 +92,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   const topics = [...new Set(studies.map(claim => claim.topic).filter(Boolean))];
   const topicCards = [
     {topic:'잠', label:'잠', detail:'잠드는 시간과 수면을 본 연구', Icon:Moon},
-    {topic:'긴장·잠', label:'긴장과 잠', detail:'긴장과 잠을 본 연구', Icon:Activity},
+    {topic:'긴장·잠', label:'스트레스와 잠', detail:'스트레스와 잠을 본 연구', Icon:Activity},
     {topic:'뇌파·과제', label:'생각을 많이 쓴 뒤', detail:'머리를 많이 쓴 뒤 뇌 신호', Icon:Brain},
     {topic:'운동', label:'운동 뒤', detail:'운동 뒤 혈액 속 변화', Icon:Dumbbell},
   ].filter(card => topics.includes(card.topic));
@@ -199,7 +199,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       <summary><span><Search size={18} aria-hidden="true"/> 주제별로 다른 연구 찾기</span><small>{Math.max(0, visibleStudies.length - 1)}편 더 보기</small></summary>
       {studies.length > 0 ? <>
       <div className="research-library-controls" role="search" aria-label="연구를 주제별로 찾기">
-        <label htmlFor="research-search">궁금한 내용 찾기<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="잠·긴장·뇌파·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
+        <label htmlFor="research-search">궁금한 내용 찾기<input id="research-search" type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="잠·스트레스·뇌파·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
         <label htmlFor="research-topic">주제 고르기<select id="research-topic" value={activeTopic} onChange={event => setTopic(event.target.value)}><option value="">모든 주제</option>{topics.map(item => <option value={item} key={item}>{item}</option>)}</select></label>
         <details className="research-method-filter" open={showMethodFilter || Boolean(activeType)} onToggle={event => setShowMethodFilter(event.currentTarget.open)}>
           <summary>연구 방법 {activeType ? '선택됨' : '더보기'}</summary>
@@ -207,7 +207,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
         </details>
         <button type="button" className="text-link" disabled={!query && !activeTopic && !activeType} onClick={() => { setQuery(''); setTopic(''); setStudyType(''); }}>검색 지우기</button>
       </div>
-      <p id="research-search-help" className="sr-only">수면, 뇌파, 운동과 같은 주제를 입력하면 관련 연구를 찾습니다.</p>
+      <p id="research-search-help" className="sr-only">잠, 스트레스, 뇌파, 운동과 같은 주제를 입력하면 관련 연구를 찾습니다.</p>
       <p className="research-library-count" role="status" aria-live="polite">연구 <span>{visibleStudies.length}</span>건 / 전체 {studies.length}건</p>
       {visibleStudies.length === 0 ? <p className="research-library-empty">찾는 연구가 없어요. 다른 주제를 골라 보세요.</p> : remainingStudies.map(claim => renderStudy(claim))}
       </> : null}
