@@ -236,6 +236,10 @@ for (const claim of content.claims) {
 }
 
 const recordsById = new Map(master.records.map(record => [record.id, record]));
+for (const [id, record] of recordsById) {
+  const claim = claimsById.get(id);
+  if (claim?.metadata?.studyType !== record.studyType) fail(`research study type mismatch between content and master index for ${id}`);
+}
 const hebaRecord=recordsById.get('research-heba-2016');
 if(!hebaRecord || !/^GABA를 먹지 않은(?: 관찰)? 연구/.test(hebaRecord.studyType || '') || !hebaRecord.dose?.includes('GABA를 먹지 않고')) fail('non-ingestion GABA studies must be labeled before they appear in the consumer research index');
 const coverage = {
