@@ -21,6 +21,9 @@ requireText(/git switch --create \"\$heartbeat_branch\"/, 'heartbeat PR 브랜�
 requireText(/git push --force origin \"HEAD:refs\/heads\/\$\{heartbeat_branch\}\"/, 'heartbeat PR 브랜치 push 단계가 없습니다.');
 requireText(/gh pr list --repo \"\$GITHUB_REPOSITORY\" --state open --base main --head \"\$heartbeat_branch\" --json number,url --jq 'if length > 0 then/, '기존 heartbeat PR 재사용 검사가 없습니다.');
 requireText(/gh pr create --repo \"\$GITHUB_REPOSITORY\" --base main --head \"\$heartbeat_branch\"/, 'heartbeat PR 생성 단계가 없습니다.');
+requireText(/pr_create_status=0[\s\S]*?set \+e[\s\S]*?pr_create_status=\$\?[\s\S]*?set -e/, 'PR 생성 권한이 없는 저장소에서도 heartbeat 검증을 계속하는 fallback이 없습니다.');
+requireText(/repository policy blocked automatic PR creation/, '자동 PR 생성 차단 시 수동 승인 대기 상태를 알리는 경고가 없습니다.');
+requireText(/A human must open the protected-main PR before the heartbeat can publish/, '자동 PR 생성 차단 시 보호된 main 수동 게이트가 summary에 기록되지 않습니다.');
 requireText(/pnpm run typecheck/, 'heartbeat 후보 typecheck가 없습니다.');
 requireText(/pnpm test/, 'heartbeat 후보 회귀 테스트가 없습니다.');
 requireText(/pnpm run build/, 'heartbeat 후보 production build가 없습니다.');
