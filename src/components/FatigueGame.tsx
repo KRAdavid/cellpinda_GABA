@@ -272,6 +272,8 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   const [status, setStatus] = useState('');
   const [gameSoundEnabled, setGameSoundEnabled] = useState(true);
   const [gameSoundStatus, setGameSoundStatus] = useState('');
+  const gameSoundEnabledRef = useRef(true);
+  const bowlSoundEnabledRef = useRef(true);
   const timerRef = useRef<number | null>(null);
   const stimulusAtRef = useRef(0);
   const runPatternRef = useRef<RunPattern>(createFocusRunPattern());
@@ -311,7 +313,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   }, [phase]);
 
   function playGameCue(cue: FocusSoundCue) {
-    if (!gameSoundEnabled) return;
+    if (!gameSoundEnabledRef.current) return;
     const audio = audioRef.current ?? createRelaxationAudio();
     if (!audio) {
       setGameSoundEnabled(false);
@@ -320,14 +322,15 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
     }
     audioRef.current = audio;
     const play = () => {
-      if (gameSoundEnabled) playFocusSoundCue(audio.context, cue);
+      if (gameSoundEnabledRef.current) playFocusSoundCue(audio.context, cue);
     };
     if (audio.context.state === 'running') play();
     else void audio.context.resume().then(play).catch(() => undefined);
   }
 
   function toggleGameSound() {
-    if (gameSoundEnabled) {
+    if (gameSoundEnabledRef.current) {
+      gameSoundEnabledRef.current = false;
       setGameSoundEnabled(false);
       setGameSoundStatus('게임 효과음을 껐어요.');
       return;
@@ -338,6 +341,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
       return;
     }
     audioRef.current = audio;
+    gameSoundEnabledRef.current = true;
     setGameSoundEnabled(true);
     setGameSoundStatus('신호와 응답 순간에 효과음이 재생됩니다.');
     void audio.context.resume().catch(() => setGameSoundStatus('효과음을 시작하지 못했어요. 다시 눌러 주세요.'));
@@ -383,7 +387,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   }
 
   function startSingingBowlAudio() {
-    if (!bowlSoundEnabled) return;
+    if (!bowlSoundEnabledRef.current) return;
     const audio = audioRef.current ?? createRelaxationAudio();
     if (!audio) {
       setBowlSoundEnabled(false);
@@ -396,7 +400,8 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   }
 
   function toggleSingingBowlAudio() {
-    if (bowlSoundEnabled) {
+    if (bowlSoundEnabledRef.current) {
+      bowlSoundEnabledRef.current = false;
       setBowlSoundEnabled(false);
       setAudioMessage('싱잉볼 소리를 껐어요.');
       return;
@@ -407,6 +412,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
       return;
     }
     audioRef.current = audio;
+    bowlSoundEnabledRef.current = true;
     setBowlSoundEnabled(true);
     setAudioMessage('호흡 단계가 바뀔 때마다 싱잉볼이 짧게 울려요.');
     void audio.context.resume().catch(() => setAudioMessage('소리를 재생하지 못했어요.'));
@@ -445,7 +451,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
     }
     if (breathCue.stage === 'finish' || lastBowlStageRef.current === breathCue.stage) return;
     lastBowlStageRef.current = breathCue.stage;
-    if (bowlSoundEnabled && audioRef.current) ringSingingBowl(audioRef.current.context);
+    if (bowlSoundEnabledRef.current && audioRef.current) ringSingingBowl(audioRef.current.context);
   }, [phase, breathCue.stage, bowlSoundEnabled]);
 
   useEffect(() => {
