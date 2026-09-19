@@ -144,3 +144,10 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - 라이브 `pnpm run validate:live-public`는 HTTP 200, 주장 12개, 연구 인덱스 6건, 제품 1개, 공유 페이지 6개, SmartStore 전용 링크, 750 제품 제거, 원장 출처 일치를 확인했다. 실제 공개 JS 번들에서도 결과 전환 CTA, `5분 쉬고 다시 해보기`, 친구 초대 문구가 확인됐다.
 - Pages 공개본의 canonical·Open Graph·sitemap·robots 경로는 `https://kradavid.github.io/cellpinda_GABA` 기준으로 일치한다. Worker origin으로 빌드하는 경우에는 origin 치환기가 `/admin`, `/ops` 차단 경로와 제품·WebSite 메타데이터까지 Worker 경로 기준으로 바꾸고 live 검증도 같은 기준을 사용한다.
 - 외부 게이트는 이전과 같다. Worker/D1 연결에 필요한 Cloudflare 설정값, 티저의 공개 파일·자막·권리·표시 승인, 실제 후기 재게시 권한, 최신 포장·SKU 대조, 실제 주문·취소·환불 대사, 외부 40~50대 사용성 조사는 코드 검증으로 대체하지 않는다.
+
+### 2026-09-19 접근성·소리 동작 재감리
+
+- 390px·768px·1440px에서 연구·리듬 체크·게임 화면을 다시 확인했다. 연구 정보 보기·연구 공유·메인 이동 링크의 터치 영역은 모바일·태블릿에서 최소 44px로 맞췄고, 가로 넘침은 없었다.
+- 보조 문구의 명도 대비를 `#53695c`로 통일해 흰 배경에서 약 5.93:1 수준으로 높였다. 자동 대비 점검 미달 항목은 0건이었다.
+- 게임·호흡 안내의 효과음 토글은 지연 타이머와 단계 전환에서도 현재 설정을 읽도록 보정했다. 소리를 끈 뒤 이미 예약된 신호가 다시 울리지 않으며, 화면 안내는 계속 진행된다.
+- `pnpm run build`, `pnpm run typecheck`, `pnpm test`(103개), `validate:ui-contract`를 통과했고, 최신 Pages 배포 [35419085201](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35419085201)와 `validate:live-public`(HTTP 200·주장 12개·연구 6건·제품 1개·공유 페이지 6개·SmartStore 전용·750 제거·원장 출처 일치)를 확인했다.
