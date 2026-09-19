@@ -8,7 +8,7 @@
 
 ## 릴리스 후보 통합 감리 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 `515b660`에 소비자용 챌린지 명칭, 연구 출처 변형 정규화, 오디오 자동재생 차단 안내와 통합 감리 기록을 반영했다. 필수 검사 [release-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35449364786)와 [site-quality-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35449364795)는 통과했다.
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 후보 `1b5196f`에 소비자용 챌린지 명칭, 연구 출처 변형 정규화, 오디오 자동재생 차단 안내, 정적 fallback 연구 경계를 반영했다. 필수 검사는 후보 push 후 다시 실행한다.
 
 후보 기준 `pnpm test` 107개·타입검사·빌드·공개 export 검증이 통과했고, 로컬 API 연결 preview의 390px·1440px 화면에서 홈·연구·제품·공유·챌린지 경로를 확인했다. 가로 넘침과 콘솔 오류는 없었다. 자동 재생을 거부하는 가상 오디오 컨텍스트에서도 차단 안내와 화면 신호 진행 문구가 카드 내부에 표시되는 것을 캡처로 확인했다. 후보는 main 병합 전이므로 Pages 배포 및 라이브 smoke는 실행하지 않았으며, 외부 게이트 B2·B3·B4·C2·E1과 티저 `HOLD`는 변경하지 않았다.
 

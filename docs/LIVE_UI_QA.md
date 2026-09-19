@@ -2,7 +2,7 @@
 
 ## 릴리스 후보 통합 화면 검증 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 최신 후보 `515b660`을 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 후보 `1b5196f`를 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
 
 | 점검 항목 | 결과 |
 |---|---|
