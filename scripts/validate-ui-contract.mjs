@@ -176,6 +176,7 @@ requireMatch(app, /<GabaResearchHighlights claims=\{content\.claims\}[^>]*\/>/, 
 requireMatch(app, /url\.hash==='#brain-load-evidence'[\s\S]*getElementById\('brain-load-evidence'\)[\s\S]*scrollIntoView/, 'brain-load evidence hash links must align after async content loads');
 requireMatch(gabaResearchHighlights, /사람 대상 일반 GABA 연구예요\.[\s\S]*셀핀다 완제품을 시험한 결과와는 구분/, 'post-teaser research highlights must keep a clear general-research and product boundary');
 for (const marker of ['잠드는 시간과 수면 기록', '과제 뒤 뇌파와 활력 점수', '휴식·운동 뒤 혈액 속 변화', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
+for (const marker of ['잠드는 시간이 비교 캡슐을 먹은 주보다 평균 5분 짧게 기록됐어요.', '과제 뒤 뇌파와 활력 점수가 비교 캡슐을 먹었을 때보다 덜 떨어졌어요.', '연구에서 관찰된 내용']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight consumer wording ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
 for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
