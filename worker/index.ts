@@ -4,7 +4,7 @@ import { rewriteSocialHtml } from './social.ts';
 import { handleMembers } from './members.ts';
 import { adminAction, adminRoleAllows, adminRoleCapabilities, adminRoleForToken, adminRoleLabel } from '../src/domain/admin-auth.ts';
 
-declare global { interface Env { ADMIN_TOKEN: string; ADMIN_ROLE_TOKENS?: string } }
+declare global { interface Env { ADMIN_TOKEN: string; ADMIN_ROLE_TOKENS?: string; PUBLIC_SITE_URL?: string } }
 
 const SECURITY_HEADERS:Record<string,string>={
   'Content-Security-Policy':[
@@ -63,7 +63,7 @@ export default {
     const response=await (async():Promise<Response>=>{
     try {
       const url=new URL(request.url);
-      if(!url.pathname.startsWith('/api/'))return rewriteSocialHtml(request,await env.ASSETS.fetch(request));
+      if(!url.pathname.startsWith('/api/'))return rewriteSocialHtml(request,await env.ASSETS.fetch(request),env.PUBLIC_SITE_URL);
       const local=['localhost','127.0.0.1','[::1]'].includes(url.hostname);
       if(url.protocol!=='https:' && !local)return reply(400,{error:'HTTPS required'});
       const origin=request.headers.get('origin');if(origin && origin!==url.origin)return reply(403,{error:'Origin not allowed'});

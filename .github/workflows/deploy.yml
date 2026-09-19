@@ -57,8 +57,10 @@ jobs:
         env:
           VITE_BASE_PATH: /cellpinda_GABA/
           VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
+          PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
         run: |
           pnpm exec vite build --base "$VITE_BASE_PATH" --outDir dist-pages
+          node scripts/rewrite-public-origin.mjs dist-pages
           node scripts/check-public-artifacts.mjs dist-pages
       - name: Verify review publishing with isolated local D1
         run: pnpm run test:worker-reviews
@@ -95,8 +97,8 @@ jobs:
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
 
   smoke-live:
-    needs: deploy-pages
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: [deploy-pages, worker-readiness, deploy-worker]
+    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.deploy-pages.result == 'success' && (needs.worker-readiness.outputs.enabled != 'true' || needs.deploy-worker.result == 'success')
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -111,9 +113,16 @@ jobs:
           package-manager-cache: false
       - name: Verify live public export
         env:
-          PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
-          PUBLIC_RUNTIME_MODE: static
-        run: node scripts/validate-live-public.mjs
+          PAGES_PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
+          WORKER_PUBLIC_SITE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
+          WORKER_ENABLED: ${{ needs.worker-readiness.outputs.enabled }}
+          WORKER_RESULT: ${{ needs.deploy-worker.result }}
+        run: |
+          if [ "$WORKER_ENABLED" = "true" ] && [ "$WORKER_RESULT" = "success" ]; then
+            PUBLIC_SITE_URL="$WORKER_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=worker node scripts/validate-live-public.mjs
+          else
+            PUBLIC_SITE_URL="$PAGES_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=static node scripts/validate-live-public.mjs
+          fi
 
   worker-readiness:
     needs: release-verify
@@ -181,6 +190,7 @@ jobs:
         if: env.DEPLOY_ENABLED == 'true'
         env:
           VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
+          PUBLIC_SITE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
         run: pnpm run build
       - name: Strict deployment readiness gate
         if: env.DEPLOY_ENABLED == 'true'
@@ -196,7 +206,8 @@ jobs:
         env:
           ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           DATABASE_ID: ${{ secrets.CLOUDFLARE_D1_DATABASE_ID }}
-        run: node -e "const fs=require('node:fs');const config=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));config.account_id=process.env.ACCOUNT_ID;config.d1_databases[0].database_id=process.env.DATABASE_ID;fs.writeFileSync('wrangler.deploy.jsonc',JSON.stringify(config,null,2));"
+          PUBLIC_SITE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
+        run: node -e "const fs=require('node:fs');const config=JSON.parse(fs.readFileSync('wrangler.jsonc','utf8'));config.account_id=process.env.ACCOUNT_ID;config.d1_databases[0].database_id=process.env.DATABASE_ID;config.vars={...(config.vars||{}),PUBLIC_SITE_URL:process.env.PUBLIC_SITE_URL};fs.writeFileSync('wrangler.deploy.jsonc',JSON.stringify(config,null,2));"
       - name: Upload runtime secrets
         if: env.DEPLOY_ENABLED == 'true'
         env:
@@ -243,6 +254,8 @@ jobs:
           WORKER_ENABLED: ${{ needs.worker-readiness.outputs.enabled }}
         run: |
           if [ "$PAGES_RESULT" != "success" ] || [ "$SMOKE_RESULT" != "success" ]; then
+            mode="RELEASE_FAILED"
+          elif [ "$WORKER_ENABLED" = "true" ] && [ "$WORKER_RESULT" != "success" ]; then
             mode="RELEASE_FAILED"
           elif [ "$WORKER_ENABLED" = "true" ] && [ "$WORKER_RESULT" = "success" ]; then
             mode="FULL_RELEASE"

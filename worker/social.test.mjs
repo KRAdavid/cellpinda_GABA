@@ -6,8 +6,8 @@ import { resultTypes } from '../src/domain/rhythm.ts';
 test('All shared types use UI labels without answers or personal queries',()=>{
   for(const [type,info] of Object.entries(resultTypes)){
     const meta=socialMetadata(`${PUBLIC_ORIGIN}/?rhythm=${type}&email=private@example.com&answers=22222#private`);
-    assert.ok(meta.title.includes(info.name));assert.ok(meta.title.startsWith('공유받은'));assert.ok(meta.description.includes('링크를 연 사람의 결과가 아니며'));assert.equal(meta.canonical,`${PUBLIC_ORIGIN}/?rhythm=${type}`);
-    assert.equal(meta.image,`${PUBLIC_ORIGIN}/assets/social-rhythm-${type}.png`);assert.ok(meta.imageAlt.includes(info.name));
+    assert.ok(meta.title.includes(info.shareLabel));assert.ok(meta.title.includes(info.name));assert.ok(meta.title.startsWith('공유받은'));assert.ok(meta.description.includes('링크를 연 사람의 결과가 아니며'));assert.equal(meta.canonical,`${PUBLIC_ORIGIN}/?rhythm=${type}`);
+    assert.equal(meta.image,`${PUBLIC_ORIGIN}/assets/social-rhythm-${type}.png`);assert.ok(meta.imageAlt.includes(info.shareLabel));assert.ok(meta.imageAlt.includes(info.name));
     const tags=socialTags(meta);assert.ok(tags.includes('og:image'));assert.ok(tags.includes('twitter:card'));assert.ok(tags.includes('rel="canonical"'));
     assert.ok(!tags.includes('private'));assert.ok(!tags.includes('22222'));assert.ok(meta.description.includes('의학적 진단'));
   }
@@ -36,4 +36,16 @@ test('Duplicate or ambiguous product view parameters fall back to generic metada
     const meta=socialMetadata(`${PUBLIC_ORIGIN}/?${query}`);assert.equal(meta.view,null);assert.equal(meta.type,null);assert.equal(meta.canonical,`${PUBLIC_ORIGIN}/`);
   }
   for(const path of ['/admin','/account']){const meta=socialMetadata(`${PUBLIC_ORIGIN}${path}?view=products`);assert.equal(meta.view,null);assert.equal(meta.robots,'noindex, nofollow, noarchive');}
+});
+test('Configured public origin drives Worker canonical and Open Graph URLs',()=>{
+  const configured='https://public.cellpinda.example';
+  const meta=socialMetadata(`${configured}/?rhythm=active&email=private@example.com`,configured);
+  assert.equal(meta.canonical,`${configured}/?rhythm=active`);
+  assert.equal(meta.image,`${configured}/assets/social-rhythm-active.png`);
+  const tags=socialTags(meta);
+  assert.ok(tags.includes(`og:url\" content=\"${configured}/?rhythm=active`));
+  assert.ok(tags.includes(`og:image\" content=\"${configured}/assets/social-rhythm-active.png`));
+  assert.ok(!tags.includes('private@example.com'));
+  const invalid=socialMetadata(`${configured}/?rhythm=active`,'http://insecure.example');
+  assert.equal(invalid.canonical,`${PUBLIC_ORIGIN}/?rhythm=active`);
 });
