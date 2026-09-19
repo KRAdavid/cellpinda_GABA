@@ -75,7 +75,7 @@ export default function TeaserPreview({onEvent}: Props) {
         <div className="teaser-player">
           {frameRequested ? <iframe
             className="teaser-frame"
-            title={`${preview.title}. 이 화면 안의 재생 버튼으로 시청할 수 있어요.`}
+            title={`${preview.title}. 화면에 들어오면 자동 재생을 시도하고, 소리는 화면 안에서 조절할 수 있어요.`}
             src={preview.url}
             allow="autoplay; fullscreen; picture-in-picture"
             loading="eager"
@@ -91,10 +91,10 @@ export default function TeaserPreview({onEvent}: Props) {
           {frameRequested && !frameLoaded && <p className="teaser-loading" aria-live="polite">티저 화면을 불러오는 중입니다…</p>}
         </div>
         <div className="teaser-card-copy">
-          <p className="teaser-label">화면 안에서 바로 시청</p>
+          <p className="teaser-label">화면에 들어오면 자동 시작</p>
           <p className="teaser-card-title">{preview.title}</p>
-          <p>영상 화면의 재생 아이콘을 누르면 이 자리에서 시작돼요.</p>
-          <p className="teaser-fallback">영상이 재생되지 않으면 <a href={preview.url} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('teaser_external_opened',{path:'/teaser'})}>새 창에서 보기 ↗</a></p>
+          <p>이 화면에 들어오면 영상이 자동으로 시작돼요. 소리는 영상 안에서 켜고 끌 수 있어요.</p>
+          <p className="teaser-fallback">자동 시작이 막히면 화면 안의 재생 버튼을 눌러 주세요. 계속 어려우면 <a href={preview.url} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('teaser_external_opened',{path:'/teaser'})}>새 창에서 보기 ↗</a></p>
         </div>
       </div>
       <p className="teaser-note">{preview.note}</p>
