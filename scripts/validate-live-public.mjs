@@ -44,6 +44,14 @@ const validateContinuation = (value, label) => {
 };
 const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
 const sharedResultIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
+const sharedResultLabels = {
+  active: '계속 작동형',
+  sleep: '잠자리 전환형',
+  irregular: '휴식 공백형',
+  sensory: '자극 과부하형',
+  unrested: '회복 우선형',
+  steady: '안정 리듬형',
+};
 const metaContent = (html, attribute, value) => {
   const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const forward = new RegExp(`<meta[^>]+${attribute}="${escaped}"[^>]+content="([^"]+)"`, 'i').exec(html);
@@ -204,6 +212,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';
       assert.match(metaContent(sharePage, 'property', 'og:title'), /^공유받은 하루 리듬:/, `share page ${id} is missing an Open Graph title`);
+      assert.match(metaContent(sharePage, 'property', 'og:title'), new RegExp(`^공유받은 하루 리듬: ‘${sharedResultLabels[id]} ·`), `share page ${id} must connect its image label to consumer wording`);
       assert.ok(metaContent(sharePage, 'property', 'og:description'), `share page ${id} is missing an Open Graph description`);
       assert.equal(canonicalHref(sharePage), `${base}/share/${id}/`, `share page ${id} canonical URL is invalid`);
       assert.equal(metaContent(sharePage, 'property', 'og:url'), `${base}/share/${id}/`, `share page ${id} Open Graph URL is invalid`);

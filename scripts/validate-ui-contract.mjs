@@ -249,6 +249,14 @@ if (!smartStoreLinks.length || smartStoreLinks.some(url => ![approvedSmartStoreU
 
 const shareRoot = resolve(root, 'public/share');
 const shareIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
+const shareLabels = {
+  active: '계속 작동형',
+  sleep: '잠자리 전환형',
+  irregular: '휴식 공백형',
+  sensory: '자극 과부하형',
+  unrested: '회복 우선형',
+  steady: '안정 리듬형',
+};
 function pngDimensions(filePath) {
   const image = readFileSync(filePath);
   const signature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
@@ -268,6 +276,7 @@ for (const id of shareIds) {
   requireMatch(html, /og:image/, `share page ${id} Open Graph image is missing`);
   requireMatch(html, /property="og:site_name" content="셀핀다 발효가바"/, `share page ${id} site name metadata is missing`);
   requireMatch(html, /property="og:locale" content="ko_KR"/, `share page ${id} locale metadata is missing`);
+  requireMatch(html, new RegExp(`공유받은 하루 리듬: ‘${shareLabels[id]} ·`), `share page ${id} must connect its image label to consumer wording`);
   requireMatch(html, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, `share page ${id} WebPage structured data is missing`);
 }
 const focusPage = resolve(root, 'public/focus/index.html');
