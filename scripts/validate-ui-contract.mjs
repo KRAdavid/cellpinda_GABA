@@ -110,6 +110,7 @@ requireMatch(research, /id="research"[^>]*aria-label="연구를 쉬운 말로 �
 if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');
 requireMatch(research, /const featuredStudy = visibleStudies\[0\][\s\S]*renderStudy\(featuredStudy, true\)/, 'a concrete research result must appear before search and filters');
 requireMatch(research, /research-library-head[\s\S]*각 카드에서 사람 연구의 결과와 조건을 함께 볼 수 있어요\./, 'research list must explain that each card shows both the result and its conditions');
+requireMatch(research, /research-library-evidence-note[\s\S]*일반 GABA·휴식 연구[\s\S]*셀핀다 완제품 연구와는 다른 자료입니다\./, 'research list must put the general-research and product boundary before the first card');
 requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.header\.research-route-header nav\{display:flex!important;position:static[\s\S]*?\.study-paired-group\{grid-template-columns:minmax\(96px/, 'mobile research route must keep its return link in the header and make the paired results compact enough to scan');
 requireMatch(styles, /\.study-paired-group\{grid-template-columns:minmax\(0,1fr\)[\s\S]*?\.study-paired-group h4,\.study-paired-trajectory,\.study-paired-spread\{grid-column:1\/-1\}/, 'mobile study groups must keep labels, values and detail links readable across the full card width');
 requireMatch(research, /연구 내용을 더 자세히 보기/, 'research detail must use a consumer-friendly label');

@@ -149,6 +149,24 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
   .study-insight--paired-before-after .study-insight-footnote{margin-top:7px;font-size:12px;line-height:1.4}
 }
 
+/* Keep the primary mobile menu reachable at the narrowest supported width. */
+@media(max-width:680px){
+  .header{overflow:visible}
+  .header>.brand{min-width:0;flex:1 1 auto}
+  .header>.menu-toggle{display:flex!important;flex:0 0 44px;visibility:visible;position:relative;z-index:2}
+  .header nav{min-width:0;overflow-wrap:anywhere}
+  .header.research-route-header nav{flex:0 0 auto;min-width:0;overflow-wrap:anywhere}
+}
+
+/* Prevent paired research values and comparison labels from leaving a 390px viewport. */
+@media(max-width:420px){
+  .study-paired-trajectory{grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);gap:5px}
+  .study-paired-trajectory>div{min-width:0}
+  .study-paired-trajectory>div>span{overflow-wrap:anywhere}
+  .study-paired-trajectory>div>strong{white-space:normal;font-size:23px}
+  .study-insight--paired-before-after figcaption>span{min-width:0;overflow-wrap:anywhere}
+}
+
 @media(max-width:680px){
   .study-insight--paired-before-after figcaption{flex-wrap:wrap;row-gap:3px}
   .study-insight--paired-before-after figcaption>span{flex-basis:100%;margin-left:26px;text-align:left}
