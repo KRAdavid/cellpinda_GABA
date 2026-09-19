@@ -42,6 +42,12 @@ try {
 
 const missingSecrets=requiredSecrets.filter(name=>typeof process.env[name]!=='string' || !process.env[name].trim());
 check('cloudflare-secrets',missingSecrets.length===0,missingSecrets.length ? `missing=${missingSecrets.join(',')}` : 'all required secret names are present');
+const configuredPublicOrigin=process.env.PUBLIC_SITE_URL?.trim() || '';
+let publicOriginValid=false;
+if(configuredPublicOrigin) {
+  try { const origin=new URL(configuredPublicOrigin); publicOriginValid=origin.protocol==='https:' && !origin.username && !origin.password && !origin.search && !origin.hash; } catch { publicOriginValid=false; }
+}
+check('worker-public-origin',!strict || publicOriginValid,publicOriginValid ? 'PUBLIC_SITE_URL is a clean HTTPS origin' : strict ? 'strict Worker deployment requires PUBLIC_SITE_URL as a clean HTTPS origin' : 'not supplied in general readiness mode');
 if(process.env.ADMIN_ROLE_TOKENS?.trim()) {
   const tokens=parseAdminRoleTokens(process.env.ADMIN_ROLE_TOKENS);
   const roles=['editor','reviewer','approver'];
