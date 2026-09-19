@@ -2,7 +2,7 @@
 
 ## 릴리스 후보 통합 화면 검증 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 후보 `0813c49`를 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 후보 `0b1f477`를 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
 
 | 점검 항목 | 결과 |
 |---|---|
@@ -15,6 +15,10 @@ PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 후보 `0813c49`를
 | 오류 | 확인한 경로 모두 콘솔 오류 0건 |
 
 이 기록은 후보 브랜치의 실제 화면 검증이며, main 공개 Pages 배포 완료를 의미하지 않는다.
+
+### 결과 화면 상태 보정 확인 — 2026-09-20
+
+후보 `0b1f477`의 게임 결과 화면에서 정답률 구간별 안내가 표시되는지 확인했다. 높은 기록은 안정적인 반응 흐름, 중간 기록은 5분 후 재점검, 낮은 기록은 화면을 내려놓고 5분 쉬는 안내를 사용하며, 모든 상태에 비진단 문구가 함께 표시된다. 결과 링과 기록 종료 화면도 같은 상태 색상을 사용한다. 필수 후보 검증은 [release-verify 35451268609](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35451268609) 및 [site-quality-verify 35451268655](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35451268655)에서 통과했다.
 
 ## 최신 배포 상태 — 2026-09-19 (main `ea1cc42`)
 
