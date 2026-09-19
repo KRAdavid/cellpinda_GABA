@@ -162,6 +162,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 영상') && consumerBundle.includes('발효가바는'), 'live consumer bundle must contain the embedded fermentation teaser section');
     assert.ok(consumerBundle.includes('화면에 들어오면 자동 시작') && consumerBundle.includes('이 화면에 들어오면 영상이 자동으로 시작돼요') && consumerBundle.includes('자동 시작이 막히면'), 'live consumer bundle must explain teaser autoplay and its user-controlled fallback');
+    assert.ok(!consumerBundle.includes('운영 큐') && !consumerBundle.includes('운영판을 여는 중입니다.'), 'live consumer bundle must keep the internal operations UI in its lazy route chunk');
     assert.ok(consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name');
     assert.ok(consumerBundle.includes('매번 신호 순서가 달라져요') && consumerBundle.includes('초록은 누르고, 빨강은 기다려요') && consumerBundle.includes('뜨면 누르기') && consumerBundle.includes('표시된 색 누르기'), 'live consumer bundle must show the three game rules in direct, visual language');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
