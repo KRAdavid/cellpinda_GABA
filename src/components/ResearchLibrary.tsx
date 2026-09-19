@@ -162,7 +162,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       <details className="research-detail" onToggle={event => {
         if (event.currentTarget.open) onOpen?.(claim.id);
       }}>
-        <summary>누가·어떻게·무엇을 봤는지 보기</summary>
+        <summary>이 연구, 어떻게 했나요?</summary>
         <div className="research-library-detail">
           <p className="research-library-study-scope"><strong>연구에서 사용한 것</strong><span>{metadata.productApplicability}</span></p>
           {metadata.consumerContext ? <p className="research-library-detail-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}

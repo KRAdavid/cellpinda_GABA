@@ -91,7 +91,7 @@ export default function BrainLoadEvidence() {
           <div>
             <p className="chapter">잠·집중·휴식에 관한 연구</p>
             <h2 id="brain-load-evidence-heading">피곤할 때,<br />집중과 휴식은 어떻게 달라질까요?</h2>
-            <p className="brain-load-evidence-boundary">뇌 피로를 이해하기 위한 일반 연구 · GABA 섭취 연구와 별도</p>
+            <p className="brain-load-evidence-boundary">잠·스트레스·집중을 이해하는 연구예요. 제품 정보는 따로 보여드려요.</p>
           </div>
           <p>잠이 부족하거나 긴장이 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
         </div>
@@ -103,7 +103,7 @@ export default function BrainLoadEvidence() {
         </div>
 
         <details className="brain-load-evidence-details">
-          <summary><span>뇌 피로 연구 카드 5편 더 보기</span><small>잠·집중·스트레스·휴식</small></summary>
+          <summary><span>관련 연구 5편 더 보기</span><small>잠·집중·스트레스·휴식</small></summary>
           <div className="brain-load-evidence-grid">
             {evidence.map(({id, number, tag, title, summary, finding, scale, source, sourceUrl, Icon, tone}) => (
               <article className={`brain-load-evidence-card brain-load-evidence-card--${tone}`} key={id}>
