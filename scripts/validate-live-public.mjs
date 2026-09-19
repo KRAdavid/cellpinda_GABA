@@ -113,8 +113,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const researchPageResponse = await request('/research/');
     const researchPageText = await researchPageResponse.text();
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
-    assert.match(researchPageText, /property="og:title" content="GABA 사람 연구를 쉬운 말로"/, 'live research route must identify itself as an educational page');
-    assert.ok(researchPageText.includes('사람이 GABA를 먹은 연구와 뇌 속 신호를 살펴본 연구를 나눠 소개해요. 셀핀다 가바 1500 제품 정보는 연구와 따로 보여드려요.'), 'live research page must distinguish ingestion research, brain-observation research and Cellpinda product information');
+    assert.match(researchPageText, /property="og:title" content="일반 GABA 사람 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
+    assert.ok(researchPageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live research page must distinguish general GABA research from Cellpinda product research');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.match(productSharePageText, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/products\/"/, 'live product share route must expose a product-specific Open Graph URL');
@@ -130,7 +130,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       return response.text();
     }));
     const consumerBundle = moduleBundles.join('\n');
-    assert.ok(consumerBundle.includes('발효가바 이야기 보기'), 'live consumer bundle must contain the consumer-facing teaser CTA');
+    assert.ok(consumerBundle.includes('발효가바 영상') && consumerBundle.includes('발효가바는'), 'live consumer bundle must contain the embedded fermentation teaser section');
     assert.ok(consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name');
     assert.ok(consumerBundle.includes('매번 신호 순서가 달라져요') && consumerBundle.includes('초록은 누르고, 빨강은 기다려요') && consumerBundle.includes('뜨면 누르기') && consumerBundle.includes('표시된 색 누르기'), 'live consumer bundle must show the three game rules in direct, visual language');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
@@ -155,7 +155,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(!consumerBundle.includes('SpeechSynthesisUtterance') && !consumerBundle.includes('짧은 음성 안내'), 'live consumer bundle must not contain spoken rest narration');
     assert.ok(consumerBundle.includes('친구에게 챌린지 보내기') && consumerBundle.includes('나랑 ‘1분 색 신호 게임’ 해볼래?') && consumerBundle.includes('초대에는 내 게임 기록이나 답변이 포함되지 않아요.'), 'live consumer bundle must invite a friend without transmitting the player result');
     assert.ok(consumerBundle.includes('피로가 몇 주째 이어지거나 일상에 지장을 준다면') && consumerBundle.includes('불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.'), 'live consumer bundle must include the concise, expandable care-seeking guide');
-    assert.ok(consumerBundle.includes('뇌나 GABA를 잰 값이 아니에요.') && consumerBundle.includes('지난 7일 다섯 질문에 고른 답을 더한 기록이에요.'), 'live consumer bundle must explain the personal answer score without implying a health measurement');
+    assert.ok(consumerBundle.includes('건강 상태를 검사한 결과가 아니라, 다섯 질문에 고른 답을 정리한 기록이에요.'), 'live consumer bundle must explain the personal answer score without implying a health measurement');
     assert.ok(consumerBundle.includes('집중과 휴식 관련 연구 쉽게 보기'), 'live consumer bundle must include the secondary health evidence section');
     assert.ok(consumerBundle.includes('61개 연구') && consumerBundle.includes('267개 연구') && consumerBundle.includes('21개 연구'), 'live consumer bundle must include evidence scale markers');
     assert.ok(!consumerBundle.includes('발효가바가 무엇인지 30초'), 'live consumer bundle still contains the retired teaser duration promise');
