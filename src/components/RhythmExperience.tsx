@@ -77,7 +77,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const band = score >= 10 ? 'high' : score >= 5 ? 'watch' : 'low';
   const answerEntries = Object.entries(result.scores);
   const frequentAnswers = answerEntries.filter(([, value]) => value >= 2).length;
-  const description = `${frequentAnswers}개 질문에서 자주 또는 거의 매일 쉬지 못했다고 답했어요.`;
+  const description = `5개 질문 중 ${frequentAnswers}개에서 힘들었다고 답했어요.`;
 
   return (
     <div className={`rhythm-load-score rhythm-load-score-${band}`}>
@@ -85,7 +85,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
       <div className="rhythm-load-visual">
         <div className="rhythm-load-visual-copy">
           <p className="rhythm-load-visual-kicker">5개 질문 중</p>
-          <strong>자주 쉬지 못했다고 답한 질문</strong>
+          <strong>힘들었다고 답한 질문</strong>
           <div className="rhythm-load-answer-row">
             <div className="rhythm-load-answer-dots" role="img" aria-label={description}>
               {answerEntries.map(([questionId, value]) => <i key={questionId} className={value >= 2 ? 'is-filled' : ''} />)}

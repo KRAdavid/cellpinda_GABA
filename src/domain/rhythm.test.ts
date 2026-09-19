@@ -13,12 +13,12 @@ test('all five questions provide four unique recovery choices', () => {
 });
 
 test('representative responses reach every named type', () => {
-  assert.equal(classifyRhythm([0, 0, 0, 0, 0]).type.name, '잠과 휴식이 괜찮았던 날');
-  assert.equal(classifyRhythm([3, 0, 0, 0, 0]).type.name, '퇴근 뒤에도 일이 생각나는 날');
-  assert.equal(classifyRhythm([0, 3, 0, 0, 0]).type.name, '누워도 잠이 오지 않았던 날');
-  assert.equal(classifyRhythm([0, 0, 3, 0, 0]).type.name, '하루에 쉴 틈이 부족했던 날');
-  assert.equal(classifyRhythm([0, 0, 0, 3, 0]).type.name, '사람과 화면에 지친 날');
-  assert.equal(classifyRhythm([0, 0, 0, 0, 3]).type.name, '아침에도 피곤했던 날');
+  assert.equal(classifyRhythm([0, 0, 0, 0, 0]).type.name, '잠과 휴식이 비교적 편안한 날');
+  assert.equal(classifyRhythm([3, 0, 0, 0, 0]).type.name, '일을 끝내도 머리가 계속 돌아가는 날');
+  assert.equal(classifyRhythm([0, 3, 0, 0, 0]).type.name, '누워도 잠으로 넘어가기 어려운 날');
+  assert.equal(classifyRhythm([0, 0, 3, 0, 0]).type.name, '쉬는 시간 없이 하루가 지나간 날');
+  assert.equal(classifyRhythm([0, 0, 0, 3, 0]).type.name, '사람과 화면 뒤에 멍하고 예민한 날');
+  assert.equal(classifyRhythm([0, 0, 0, 0, 3]).type.name, '자고 일어나도 피로가 남는 날');
 });
 
 test('boundaries and tie priority follow the published editorial rule', () => {

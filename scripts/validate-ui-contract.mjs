@@ -142,7 +142,7 @@ requireMatch(rhythm, /rhythm-start-scenes[\s\S]*?질문에 나오는 생활 장�
 requireMatch(rhythm, /rhythm-load-answer-dots[\s\S]*value >= 2 \? 'is-filled' : ''/, 'the result must visualize frequent self-reported rest gaps by question, not as a measured brain image');
 requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?자주 쉬지 못했다고 답한 순간이 있어요/, 'frequent responses must lead to a clear, non-diagnostic rest suggestion');
 requireMatch(rhythm, /<h3 ref=\{resultRef\}[\s\S]*?rhythm-result-primary-actions[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?<BrainLoadVisual/, 'the privacy-preserving invitation must appear below the result name before the score visualization');
-requireMatch(rhythm, /const description = `\$\{frequentAnswers\}개 질문에서 자주 또는 거의 매일 쉬지 못했다고 답했어요\.`[\s\S]*?다섯 질문에 고른 답을 정리한 기록이에요\./, 'the answer visualization must clearly describe its self-report basis');
+requireMatch(rhythm, /const description = `5개 질문 중 \$\{frequentAnswers\}개에서 힘들었다고 답했어요\.`[\s\S]*?다섯 질문에 고른 답을 정리한 기록이에요\./, 'the answer visualization must clearly describe its self-report basis');
 if (/products-intro-actions|products-intro-buy|products-review-shortcut/.test(app)) fail('product price and review shortcuts must not be repeated in the product intro beside their destination cards');
 requireMatch(app, /id="products"[\s\S]*?가격·재고 확인하기[\s\S]*?id="reviews"|<ReviewExperience/, 'product purchase information must appear on the product card, with reviews in their own section');
 requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must expose alternative text');
