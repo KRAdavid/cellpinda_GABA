@@ -173,7 +173,7 @@ if (/내 생활에서/.test(brainLoadEvidence)) fail('brain-load evidence must l
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
-for (const marker of ['1분 색 신호 게임', '규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 신호 순서가 달라져요', '오늘의 반응 기록', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요.', '게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.', '오늘 게임에서 맞힌 비율이에요. 뇌 피로나 건강 상태를 측정한 값은 아니에요.', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '먼저 연습하기', '다음 규칙 연습하기', '연습 마치기', '오늘 게임을 마쳤어요.', '친구에게 1분 게임 보내기', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['뇌컨디션 확인 챌린지', '1분 색 신호 게임', '규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 신호 순서가 달라져요', '오늘의 반응 기록', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요.', '게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.', '오늘 게임에서 맞힌 비율이에요. 뇌 피로나 건강 상태를 측정한 값은 아니에요.', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '먼저 연습하기', '다음 규칙 연습하기', '연습 마치기', '오늘 게임을 마쳤어요.', '친구에게 1분 게임 보내기', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker), `advanced focus game marker ${marker} is missing`);
 requireMatch(fatigueGame, /fatigue-game-heading[\s\S]*초록 신호는 누르고 빨강 신호는 기다려요\.[\s\S]*게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요\.[\s\S]*phase === 'idle'/, 'the game action and non-diagnostic scope must be visible before the player starts');
 requireMatch(research, /research-topic-cards[\s\S]*aria-pressed=\{activeTopic===cardTopic\}[\s\S]*setTopic\(nextTopic\)/, 'research topics must be visible, keyboard-operable filters');
 requireMatch(research, /research-topic-card[\s\S]*aria-label=\{`\$\{label\} · \$\{detail\} · \$\{recordCount\}`\}/, 'research topic cards must expose their topic, description and study count to assistive technology');
@@ -313,7 +313,7 @@ if (!existsSync(focusPage)) fail('focus invite page is missing');
 const focusHtml = await readFile(focusPage, 'utf8');
 requireMatch(focusHtml, /canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//, 'focus invite canonical metadata is missing');
 requireMatch(focusHtml, /focus=1#focus-game|focus=1/, 'focus invite handoff is missing');
-requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 1분 색 신호 게임"/, 'focus invite Open Graph title is missing');
+requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 뇌컨디션 확인 챌린지"/, 'focus invite Open Graph title is missing');
 requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card-v5\.png"/, 'focus invite Open Graph image is missing');
 requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 
