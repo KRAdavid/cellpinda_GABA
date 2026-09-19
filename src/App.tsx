@@ -172,7 +172,53 @@ export default function App(){
    return()=>{window.cancelAnimationFrame(firstFrame);if(secondFrame)window.cancelAnimationFrame(secondFrame);stopAlignment();};
   }
   const productView=url.searchParams.getAll('view').length===1&&url.searchParams.get('view')==='products'&&!url.searchParams.has('rhythm');
-  if(productView){document.getElementById('products')?.scrollIntoView({block:'start',behavior:'instant'});trackOnce('shared_link_landed',{path:'/products',channel:'direct'});}
+  if(productView){
+   const target=document.getElementById('products');
+   if(!target)return;
+   let alignmentInterval=0;
+   let stopped=false;
+   const stopAlignment=()=>{
+    if(stopped)return;
+    stopped=true;
+    if(alignmentInterval)window.clearInterval(alignmentInterval);
+    alignmentInterval=0;
+    window.removeEventListener('wheel',stopAlignment);
+    window.removeEventListener('touchstart',stopAlignment);
+    window.removeEventListener('pointerdown',stopAlignment);
+    window.removeEventListener('keydown',onKeyDown);
+   };
+   const onKeyDown=(event:KeyboardEvent)=>{if(['Tab','ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(event.key))stopAlignment();};
+   const align=()=>{
+    if(stopped||!target.isConnected)return;
+    target.scrollIntoView({block:'start',behavior:'instant'});
+    window.scrollBy({top:target.getBoundingClientRect().top-96,behavior:'instant'});
+   };
+   const settle=async()=>{
+    align();
+    try{await document.fonts?.ready;}catch{}
+    const images=[...document.images].filter(image=>!image.complete);
+    await Promise.all(images.map(image=>new Promise<void>(resolve=>{
+     const done=()=>{image.removeEventListener('load',done);image.removeEventListener('error',done);resolve();};
+     image.addEventListener('load',done,{once:true});image.addEventListener('error',done,{once:true});
+    })));
+    await Promise.all([...document.images].map(image=>image.decode().catch(()=>undefined)));
+    align();
+   };
+   const firstFrame=window.requestAnimationFrame(()=>window.requestAnimationFrame(()=>void settle()));
+   const startedAt=performance.now();
+   window.addEventListener('wheel',stopAlignment,{passive:true});
+   window.addEventListener('touchstart',stopAlignment,{passive:true});
+   window.addEventListener('pointerdown',stopAlignment,{passive:true});
+   window.addEventListener('keydown',onKeyDown);
+   alignmentInterval=window.setInterval(()=>{
+    if(!target.isConnected||performance.now()-startedAt>3000){stopAlignment();return;}
+    const top=target.getBoundingClientRect().top;
+    if(top>=88&&top<=104){stopAlignment();return;}
+    align();
+   },120);
+   trackOnce('shared_link_landed',{path:'/products',channel:'direct'});
+   return()=>{window.cancelAnimationFrame(firstFrame);stopAlignment();};
+  }
   else if(content.products.some(product=>url.hash===`#product-${product.id}`)){document.getElementById(url.hash.slice(1))?.scrollIntoView({block:'start',behavior:'instant'});}
  },[content,currentPath]);
  if(accountView)return <Suspense fallback={<p className="loading">내 기록을 여는 중입니다.</p>}><MemberRecords/></Suspense>;
