@@ -6,11 +6,11 @@
 
 현재 목표 판정은 `IN_PROGRESS_WITH_GATES`다. B2 제품 표시, B3 실제 후기 권한, B4 티저 공개 승인, C2 Worker/D1 운영 설정, E1 실구매 대사는 외부 입력 또는 사람 승인이 필요한 게이트로 남아 있다. 아래의 날짜가 지난 기록은 당시 검증 결과를 보존한 이력이며, 현재 상태는 이 요약과 라이브 smoke 결과를 우선한다.
 
-## 최신 후보 보정 — 2026-09-20 후보 `c0a85b0`
+## 최신 후보 보정 — 2026-09-20 후보 `29bf93e`
 
 연구 하이라이트의 소비자 문장을 다시 감리해 수면 카드에 무엇이 5분 짧아졌는지 명시하고, 뇌파 카드의 `덜 낮아졌어요`를 `덜 떨어졌어요`로 바꿨다. 결과 라벨도 `연구에서 관찰된 내용`으로 통일했다. 이 문구가 연구자식 표현으로 되돌아가지 않도록 `validate:ui-contract`에 세 문장을 회귀 조건으로 추가했다.
 
-후보 `c0a85b0`는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build와 정적 산출물 검사를 통과했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `BLOCKED / REVIEW_REQUIRED`다. 현재 main은 `ea1cc42`이며 공개 Pages에는 후보가 반영되지 않았다.
+후보 `29bf93e`는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build와 정적 산출물 검사를 통과했다. 라이브 smoke도 후보의 소비자 연구 카드 문구까지 확인하도록 보강했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `BLOCKED / REVIEW_REQUIRED`다. 현재 main은 `ea1cc42`이며 공개 Pages에는 후보가 반영되지 않았다.
 
 현재 후보를 공개 주소에 대조한 `pnpm run validate:live-public`는 12회 후 기존 Pages 번들의 연구 경계 문구 불일치로 실패했다. `pnpm run preflight:deploy`는 정적 산출물과 공개 범위는 확인했지만 Cloudflare·운영용 Secrets 5개가 없어 `WAITING`이다. 티저는 공개 URL·미디어·자막·권리·CTA 승인이 없어 `HOLD`를 유지한다.
 
