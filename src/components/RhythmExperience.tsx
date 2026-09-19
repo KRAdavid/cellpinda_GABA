@@ -47,8 +47,8 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
   if (result.loadLevel === 'low') return {
     tone: 'steady',
     label: '지난 7일 답변',
-    heading: '축하합니다. 지난 7일, 쉬는 시간을 잘 챙겨 오셨어요.',
-    body: '지금 잘 맞는 쉬는 습관을 이어가세요.',
+    heading: '축하합니다. 뇌 컨디션이 좋은 상태를 유지하고 있습니다.',
+    body: '최근 답변처럼 잠깐씩 쉬는 흐름을 계속 이어가세요.',
   };
   if (result.loadLevel === 'high') {
     if (result.loadScore < 10) return {
@@ -59,7 +59,7 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
     };
     return {
       tone: 'high',
-      label: '최근 7일, 머리가 쉴 틈이 부족했던 날이 여러 번 있었어요',
+      label: '최근 7일, 머리가 쉴 틈이 없었던 날이 여러 번 있었어요',
       heading: '지금 10분, 화면과 알림에서 떨어져 쉬어 보세요.',
       body: '해야 할 일은 메모하고 알림을 꺼 보세요.',
     };
