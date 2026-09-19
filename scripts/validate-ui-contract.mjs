@@ -56,6 +56,8 @@ if (!(researchRoute.indexOf('<ResearchLibrary') >= 0 && !researchRoute.includes(
 requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서 관찰된 변화/, 'selected research findings must be visibly labeled before methods are opened');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
 requireMatch(hero, /잠과 휴식 1분 체크/, 'the first screen must have one clear action to start the check');
+requireMatch(hero, /className="hero-photo"[^>]*fetchPriority="high"[^>]*loading="eager"[^>]*decoding="sync"/, 'the first-screen visual must be decoded eagerly for a stable public first impression');
+requireMatch(styles, /\.hero-photo\{z-index:0;display:block\}[\s\S]*?\.hero-copy\{z-index:1\}/, 'the first-screen image and copy layers must remain explicitly ordered');
 requireMatch(app, /특허 문서의 기술 예시[\s\S]*?특허 문서에 GABA를 만드는 방법[\s\S]*?특허 문서 보기/, 'fermentation visual must be labeled as a patent example and link to its source');
 if (/발효하기|걸러내기|한 포에 든 양 확인|품질 살피기|p\.amountMg|p\.totalG/.test(app)) fail('consumer product page must not present an unverified production flow or per-packet active amount');
 if (/hero-game-link|스마트스토어|상품 정보·가격 보기|className="hero-product"/.test(hero)) fail('the first screen must not compete with the check CTA using game or purchase links');
