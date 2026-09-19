@@ -2,7 +2,7 @@
 
 ## 최신 공개 검증 — 2026-09-19
 
-최신 main `e8260c2`는 GitHub Pages 배포 검증 run `35428012816`을 통과했다. 라이브 smoke는 페이지 200, 연구 6건, 공개 claim 12개, 제품 1개, 공유 페이지 6개, 스마트스토어 목적지, 750 제거, provenance 일치를 확인했다. Yoto 연구 요약과 시각화는 연구 조건을 유지한 소비자 문장으로 동기화됐다. 티저는 승인 전 `HOLD`이며 공개 미디어 URL·iframe을 노출하지 않는다. Worker/D1, 최종 제품 표시·SKU, 후기 재게시 권한, 주문·환불 대사와 티저 자막·권리·CTA는 사람 입력 게이트로 남아 있다. 브라우저 플러그인과 프로젝트 Playwright가 현재 환경에 없어 이번 회귀는 정적 HTTP·라이브 smoke와 production build로 확인했다.
+최신 main `3fe4c8a`는 GitHub Actions 배포 검증 run `35429644511`을 통과했다. Pages 게시·라이브 smoke·release status 기록까지 완료했으며, 라이브 smoke는 페이지 200, 연구 6건, 공개 claim 12개, 제품 1개, 공유 페이지 6개, 스마트스토어 목적지, 750 제거, provenance 일치를 확인했다. Yoto 연구 요약과 시각화는 연구 조건을 유지한 소비자 문장으로 동기화됐다. 티저는 승인 전 `HOLD`이며 공개 미디어 URL·iframe을 노출하지 않는다. Worker/D1, 최종 제품 표시·SKU, 후기 재게시 권한, 주문·환불 대사와 티저 자막·권리·CTA는 사람 입력 게이트로 남아 있다. Chromium headless CDP로 로컬 production preview의 홈·제품·연구·게임 경로를 1440px·390px에서 재감리했고 가로 넘침과 콘솔 오류가 없음을 확인했다. 이 화면 검증은 실제 기기별 사용성 조사나 외부 전문가 인증을 대신하지 않는다.
 
 ## 최신 업데이트 — 2026-09-19 보호된 main을 지키는 TF heartbeat PR
 
