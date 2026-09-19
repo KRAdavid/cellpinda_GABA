@@ -51,6 +51,9 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 
 @media(max-width:680px){h1,p{max-width:100%;overflow-wrap:anywhere}.hero-question{font-size:17px;line-height:1.65}.research-route-intro h1{font-size:clamp(31px,9vw,38px)}}
 .product-category{display:inline-block;margin-left:8px;padding:4px 9px;border:1px solid #ccdbcf;border-radius:99px;background:#f4f8f4;color:#385846;font-size:13px;font-weight:600;vertical-align:middle}
+.product-body{display:flex;flex-direction:column}
+.product-body .product-cta{order:3}
+.product-body dl{order:2}
 .products{grid-template-columns:minmax(0,1fr)}
 .product{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);max-width:1120px;margin-inline:auto;background:#fff}
 .product-visual{min-height:100%;padding:clamp(28px,4vw,54px);display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#fff 0,#f5f8f5 68%,#edf3ed 100%);color:var(--ink);text-align:center}
@@ -65,7 +68,7 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .product-visual-facts strong{font-size:17px;color:var(--ink)}
 .fatigue-game-comparison-note{padding:16px 18px;border-radius:12px;background:#f2f6f2;color:#455c4c;font-size:15px;line-height:1.75}
 .fatigue-game-comparison-note{margin:18px 0}
-@media(max-width:680px){.product{grid-template-columns:1fr}.product-visual{min-height:330px;padding:32px 24px}.product-visual>strong{font-size:72px}.product-portion-grid{grid-template-columns:repeat(6,14px);gap:9px;margin:24px 0 20px}.product-portion-grid i{width:14px;height:14px}.product-visual-facts{max-width:245px}.product-body{padding:24px}}
+@media(max-width:680px){.product{grid-template-columns:1fr}.product-visual{min-height:330px;padding:32px 24px}.product-visual>strong{font-size:72px}.product-portion-grid{grid-template-columns:repeat(6,14px);gap:9px;margin:24px 0 20px}.product-portion-grid i{width:14px;height:14px}.product-visual-facts{max-width:245px}.product-body{padding:24px}.product-body .product-cta{order:2;margin:0 0 12px}.product-body dl{order:3}}
 /* Improve small-text contrast and keep the first mobile steps readable. */
 .chapter{color:#116f4a}
 .teaser-intro>.chapter{color:#a8e7bd}
