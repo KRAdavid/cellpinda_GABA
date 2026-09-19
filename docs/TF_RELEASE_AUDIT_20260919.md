@@ -10,6 +10,12 @@
 
 일일 상태 보고, TF decision pulse, 배포 검증, 소비자 사이트 검증 workflow가 모두 활성 상태임을 확인했다. `main` 보호 규칙은 필수 승인 1명·CODEOWNER 검토·strict required checks(`release-verify`, `site-quality-verify`)를 적용하고, Actions 기본 권한은 `read`, workflow의 PR 자동 승인은 비활성화되어 있다. 후보 PR #97은 아직 독립 검토가 없어 `OPEN / BLOCKED / REVIEW_REQUIRED`이며, 자동 감시는 이 상태에서 병합·배포를 실행하지 않는다.
 
+## 소비자 결과 화면 보정 — 2026-09-20
+
+뇌컨디션 확인 챌린지의 첫 결과가 점수와 상관없이 같은 휴식 안내를 보여 주던 흐름을 보정했다. 게임 정답률을 건강 수치로 해석하지 않는 문구는 유지하면서, 기록 구간에 따라 `축하해요. 오늘 게임에서는 반응이 안정적이었어요.`, `오늘은 반응이 조금 흔들렸어요.`, `지금은 화면을 내려놓고 5분 쉬어 보세요.` 중 하나를 보여 준다. 낮은 기록에는 알림을 끄고 물을 마신 뒤 다시 해보는 다음 행동을, 높은 기록에는 현재 쉬는 리듬을 이어가는 행동을 함께 제시한다. 색상 링과 안내 패널도 같은 상태를 사용해 결과를 한눈에 읽게 했다.
+
+이 보정은 개인의 게임 기록에 대한 행동 안내이며 뇌 피로·집중력·건강 상태를 진단하거나 셀핀다 완제품 효능을 의미하지 않는다. UI 계약과 전체 테스트에서 세 결과 문구·상태별 시각 구분·기존 비진단 문구를 다시 검사한다.
+
 ## 릴리스 후보 통합 감리 — 2026-09-19
 
 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 후보 `0813c49`에 소비자용 챌린지 명칭, 연구 출처 변형 정규화, 오디오 자동재생 차단 안내, 정적 fallback 연구 경계를 반영했다. 필수 검사 [release-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35450370554)와 [site-quality-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35450370556)는 통과했다.
