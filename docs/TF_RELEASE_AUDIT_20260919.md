@@ -2,13 +2,13 @@
 
 ## 최신 판정 보정 — 2026-09-19
 
-최신 main `3fe4c8a`와 배포 검증 run `35429644511`을 기준으로 공개 산출물을 다시 대조했다. 라이브 정적 사이트는 연구 6건·공개 claim 12개·제품 1개·공유 페이지 6개를 유지하고, 제품·후기 목적지는 승인된 스마트스토어 상세/후기 경로만 사용한다. 티저는 `HOLD`이며 공개 URL은 없다. 문서와 라이브 검증 출력은 이 상태를 `teaserPreview: {status: "HOLD", publicUrl: false}`로 동일하게 표시한다. 외부 링크 새 창 보안 속성은 main에서 `noopener noreferrer`로 통일했고 UI 계약 검증기가 누락을 자동 차단한다. 따라서 현재 배포는 공개 가능한 정적 콘텐츠 단계이며, 티저·Worker/D1·포장/표시·후기 권한·주문 대사는 외부 승인 전까지 완료로 판정하지 않는다.
+최신 main `71d9d12`와 배포 검증 run `35431236921`을 기준으로 공개 산출물을 다시 대조했다. 라이브 정적 사이트는 연구 6건·공개 claim 12개·제품 1개·공유 페이지 6개를 유지하고, 제품·후기 목적지는 승인된 스마트스토어 상세/후기 경로만 사용한다. 티저는 `HOLD`이며 공개 URL은 없다. 문서와 라이브 검증 출력은 이 상태를 `teaserPreview: {status: "HOLD", publicUrl: false}`로 동일하게 표시한다. 외부 링크 새 창 보안 속성은 main에서 `noopener noreferrer`로 통일했고 UI 계약 검증기가 누락을 자동 차단한다. 연구 카드의 상세·출처·지원 관계 라벨은 소비자 언어로 정리하고 공개 CDP에서 확인했다. 따라서 현재 배포는 공개 가능한 정적 콘텐츠 단계이며, 티저·Worker/D1·포장/표시·후기 권한·주문 대사는 외부 승인 전까지 완료로 판정하지 않는다.
 
 ## 검토 범위
 
 현재 공개 저장소와 GitHub Pages, 공개 콘텐츠 JSON, 광고·근거 문구, 제품·후기 경로, 게임 시작과 결과, 정적 배포 및 Worker 배포 조건을 점검했다. 검토자는 소비자 마케팅·여정, 연구 문구·근거, 출시·기술 감리 역할로 나눴다. 이는 AI 역할 기반 교차 검토이며 외부 자격 전문가의 회의나 소비자 조사·법률 승인으로 간주하지 않는다.
 
-기준 소스는 최초 감리 시점 `3dd3aaa`였고, 현재 release HEAD `3fe4c8a`까지 수정 후 전체 검증을 다시 수행했다. 최신 공개 Pages는 정적 사이트로 작동하지만, 이 사이트에 API·데이터베이스까지 연결된 운영 플랫폼은 아니다.
+기준 소스는 최초 감리 시점 `3dd3aaa`였고, 현재 release HEAD `71d9d12`까지 수정 후 전체 검증을 다시 수행했다. 최신 공개 Pages는 정적 사이트로 작동하지만, 이 사이트에 API·데이터베이스까지 연결된 운영 플랫폼은 아니다.
 
 ## 토론 결과와 수정 결정
 
@@ -181,3 +181,10 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - 로컬 Wrangler Worker를 실제로 요청해 기존 `single-page-application` 설정이 `/ops`, `/admin`, 존재하지 않는 경로를 모두 200 앱 셸로 돌려주는 SEO·404 문제를 재현했다. Worker 전환을 위해 `not_found_handling`을 `404-page`로 바꾸고, `/account`만 루트 앱 셸을 재사용하도록 경계를 명시했다. Worker runtime 메타데이터 재작성은 루트·계정·관리자 셸에만 적용해 `/products/`, `/research/`, `/focus/`, `/share/{id}/`의 빌드된 canonical·OG를 보존한다.
 - Worker live 검증을 API·보안 헤더만 확인하던 범위에서 확장해 404, 계정 비색인, robots/sitemap origin, 제품·연구·focus·공유 canonical/OG, 루트·데이터·해시 번들 cache-control까지 검사한다. `wrangler.jsonc`에는 query string을 로그에서 가리는 10% head sampling 관측성을 추가하고, 공개 export 검사가 이 설정과 404 정책을 계속 강제한다.
 - 로컬 검증 결과: `pnpm test` 104개 통과, `pnpm run build`, `pnpm run typecheck`, `pnpm run validate:public`, `pnpm run validate:deploy-workflow`, Wrangler `deploy --dry-run` 통과. 실제 Cloudflare Worker의 보안 헤더·D1·캐시·SEO smoke는 비밀값과 운영 origin이 제공된 뒤 배포 job에서 수행해야 한다.
+
+### 2026-09-19 연구 카드 소비자 언어 재감리
+
+- 연구 카드의 상세 열기 문구를 `누가·어떻게·무엇을 봤는지 보기`로, 출처 영역을 `출처와 연구 배경`으로, 연구 지원 관계를 `연구를 지원한 곳·연구자 소속`으로 정리했다. 기존의 조건·수치·한계를 한꺼번에 읽으라는 표현 대신 카드의 그림 요약과 참여자·방법·측정 항목을 순서대로 확인하도록 안내한다.
+- 모바일 390px·공개 연구 경로에서 세 라벨을 Chromium CDP로 직접 확인했고, 공개 페이지 제목·연결 상태·콘솔 오류를 함께 점검했다. 연구 상세를 열어도 제품 구매 CTA는 나타나지 않는다.
+- PR [#52](https://github.com/KRAdavid/cellpinda_GABA/pull/52)와 배포 run [35431236921](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35431236921)이 병합·배포됐다. `pnpm test` 104개, 연구 카피·UI 계약·타입검사·전체 빌드·라이브 공개 검증이 통과했다.
+- 이 변경은 연구 내용을 소비자 언어로 읽는 흐름을 개선한 것이며, 제품 효능·권장량·티저 공개 승인이나 외부 40~50대 사용성 조사를 대신하지 않는다. 기존 B2·B3·B4·C2·E1 외부 게이트는 계속 열린 상태다.
