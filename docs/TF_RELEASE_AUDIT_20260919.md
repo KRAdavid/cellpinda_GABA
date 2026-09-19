@@ -126,3 +126,13 @@ GitHub Pages 정적 사이트는 공개 가능하지만 전체 제품 운영 플
 - Yamatsu 2016 연구의 지표를 원문 초록과 맞췄다. 원문은 전체 비REM 수면 시간을 설명하며, 기존 화면의 ‘수면 단계 비율’ 표기는 지표 이름이 맞지 않았다. 소비자 화면은 ‘눈이 빠르게 움직이지 않는 수면 시간’으로 바꾸고 2.2%를 길게 기록한 것으로 표기했다. [Springer Nature 원문](https://link.springer.com/article/10.1007/s10068-016-0076-9)
 - 주제 카드의 설명을 '잠 기록 연구', '긴장·잠 연구', '과제 뒤 뇌파', '혈액 수치'처럼 짧은 일상 표현으로 다듬었다. 체크 점수·게임 점수는 의료 측정값이 아닌 자기 응답/게임 기록이라는 경계를 유지한다.
 - 아직 완료되지 않은 외부 확인은 별도 게이트로 유지한다: 실제 40~50대 사용자 테스트, 티저 권리·자막 확인, 스마트스토어 현행 표시와 최종 포장 대조, 표시광고 전문 검토.
+
+### 2026-09-19 최신 배포 원본·공유 메타데이터 재검증
+
+PR #19 병합 커밋 `bfd6e8a61f48b67a8623d9874299ae255d80cf1f`를 기준으로 Pages 공개본과 저장소를 다시 대조했다. 공유 결과 제목·설명·대체 텍스트에는 소비자용 분류명과 생활 장면이 함께 표시되며, `share/{type}` 정적 페이지와 SPA·Worker 메타데이터가 같은 규칙을 사용한다. Powers 2008 연구의 캡슐 표기는 `이 연구에서 사용한 750mg 캡슐 4개`로 정리해 삭제된 750 제품과 연구 용량을 구분했다.
+
+Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap·robots 주소를 생성하고, Worker가 활성화될 때는 운영 origin을 배포 설정에서 주입하도록 정렬했다. Worker 배포 실패를 정적 배포로 오인하지 않도록 release 상태 판정과 live smoke 대상도 분리했다.
+
+`pnpm run build`, `pnpm test`(103개), 공개 export·연구 카피·UI·티저·배포 workflow 검증을 통과했다. GitHub Actions 배포 실행 [35417341017](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35417341017)은 Pages 게시와 static live smoke를 성공시켰고, `pnpm run validate:live-public`는 HTTP 200·주장 12개·연구 6건·제품 1개·공유 페이지 6개·SmartStore 전용 링크·750 제거·원장 출처 일치를 확인했다.
+
+현재 공개 런타임은 GitHub Pages `STATIC_ONLY`다. Cloudflare Worker/D1 비밀값·정식 origin, 최종 포장·SKU 확인, 티저의 공개 파일·자막·권리·CTA 승인, 실제 후기 재게시 권한, 실제 주문·취소·환불 대사는 외부 입력 게이트로 남아 있다. 이번 기록은 코드·정적 공개본 검증을 갱신한 것이며 외부 승인이나 실제 소비자 조사를 완료했다는 뜻은 아니다.
