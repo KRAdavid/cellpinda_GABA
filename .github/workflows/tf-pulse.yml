@@ -53,8 +53,7 @@ jobs:
             git commit -m "chore: refresh TF pulse heartbeat"
             git push --force origin "HEAD:refs/heads/${heartbeat_branch}"
 
-            head_ref="${GITHUB_REPOSITORY_OWNER}:${heartbeat_branch}"
-            existing_pr="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --base main --head "$head_ref" --json number,url --jq 'if length > 0 then .[0] | "\(.number)\t\(.url)" else empty end')"
+            existing_pr="$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --base main --head "$heartbeat_branch" --json number,url --jq 'if length > 0 then .[0] | "\(.number)\t\(.url)" else empty end')"
             if [ -n "$existing_pr" ]; then
               pr_url="${existing_pr#*$'\t'}"
               echo "Updated existing TF heartbeat PR: $pr_url"

@@ -20,7 +20,7 @@ requireText(/statuses:\s*write/, 'heartbeat 커밋 상태 기록에 필요한 st
 requireText(/heartbeat_branch=\"automation\/tf-pulse-heartbeat\"/, '보호된 main에 반영할 고정 heartbeat PR 브랜치가 없습니다.');
 requireText(/git switch --create \"\$heartbeat_branch\"/, 'heartbeat PR 브랜치 전환 단계가 없습니다.');
 requireText(/git push --force origin \"HEAD:refs\/heads\/\$\{heartbeat_branch\}\"/, 'heartbeat PR 브랜치 push 단계가 없습니다.');
-requireText(/gh pr list --repo \"\$GITHUB_REPOSITORY\" --state open --base main --head \"\$head_ref\" --json number,url --jq 'if length > 0 then/, '기존 heartbeat PR 재사용 검사가 없습니다.');
+requireText(/gh pr list --repo \"\$GITHUB_REPOSITORY\" --state open --base main --head \"\$heartbeat_branch\" --json number,url --jq 'if length > 0 then/, '기존 heartbeat PR 재사용 검사가 없습니다.');
 requireText(/gh pr create --repo \"\$GITHUB_REPOSITORY\" --base main --head \"\$heartbeat_branch\"/, 'heartbeat PR 생성 단계가 없습니다.');
 requireText(/gh workflow run deploy\.yml --repo \"\$GITHUB_REPOSITORY\" --ref \"\$heartbeat_branch\"/, 'heartbeat release-verify dispatch 단계가 없습니다.');
 requireText(/gh workflow run verify\.yml --repo \"\$GITHUB_REPOSITORY\" --ref \"\$heartbeat_branch\"/, 'heartbeat site-quality dispatch 단계가 없습니다.');
