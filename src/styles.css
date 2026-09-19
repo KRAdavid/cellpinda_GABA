@@ -160,7 +160,9 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 
 /* Prevent paired research values and comparison labels from leaving a 390px viewport. */
 @media(max-width:420px){
-  .research-route-main,.research-route-main .wrap,.research-library,.research-library-evidence-note,.research-library-card,.research-library-card-featured,.research-library-card-featured>.study-insight,.study-insight{width:100%;min-width:0;max-width:100%}
+  .research-route-main{width:100%;min-width:0}
+  .research-route-main .wrap{width:calc(100% - 40px);min-width:0;max-width:100%}
+  .research-library,.research-library-evidence-note,.research-library-card,.research-library-card-featured,.research-library-card-featured>.study-insight,.study-insight{width:auto;min-width:0;max-width:100%}
   .research-library-card-featured,.research-library-card-featured>*{min-width:0}
   .research-library-card-featured{overflow:hidden}
   .study-paired-trajectory{grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr);gap:5px}
