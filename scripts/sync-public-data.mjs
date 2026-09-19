@@ -158,14 +158,14 @@ const masterTarget=resolve(root,'public/data/gaba-master-index.json');
 writeFileSync(masterTarget,JSON.stringify(masterIndex,null,2)+'\n');
 const teaserPreviewTarget=resolve(root,'public/data/teaser-preview.json');
 const teaserNote=teaser.status==='HOLD'
-  ? '영상은 공개 승인 후 이 자리에서 재생돼요. 자막·권리·제품 표시를 확인한 뒤 공개합니다.'
+  ? '발효가바 이야기를 담은 영상은 공개 준비가 끝나면 이 자리에서 재생돼요.'
   : '브라우저 설정에 따라 재생 버튼이 필요할 수 있어요. 이 페이지는 셀핀다 완제품의 시험 영상이 아니라 발효가바 소개 영상입니다.';
 const teaserPreview={
   schemaVersion:1,
   status:teaser.status,
   placement:teaser.placement,
   title:'발효가바 이야기',
-  description:'발효가바가 만들어지는 이야기를 짧은 영상으로 만나보세요.',
+  description:teaser.status==='HOLD' ? '발효가바 이야기를 담은 영상을 공개 준비 중이에요.' : '발효가바가 만들어지는 이야기를 짧은 영상으로 만나보세요.',
   note:teaserNote,
   ...(teaser.status==='PREVIEW' && teaser.publicPreviewUrl ? {url:teaser.publicPreviewUrl} : {url:null}),
 };

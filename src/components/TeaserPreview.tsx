@@ -73,14 +73,14 @@ export default function TeaserPreview({onEvent}: Props) {
         <p className="chapter">발효가바 영상</p>
         <h2 id="teaser-heading">발효가바는<br />어떻게 만들어질까요?</h2>
         <p>{preview.description}</p>
-        <p className="teaser-context">영상에서는 발효 이야기를, 연구와 제품 메뉴에서는 각각의 정보를 확인해 보세요.</p>
+        <p className="teaser-context">{isOnHold ? '공개가 확정되면 이 자리에서 바로 볼 수 있어요. 연구와 제품 정보는 아래에서 먼저 확인해 보세요.' : '영상에서는 발효 이야기를, 연구와 제품 메뉴에서는 각각의 정보를 확인해 보세요.'}</p>
       </div>
       <div className="teaser-card teaser-card-player" aria-busy={frameRequested && !frameLoaded}>
         <div className="teaser-player">
           {isOnHold ? <div className="teaser-hold" role="status" aria-live="polite">
             <span className="teaser-hold-icon" aria-hidden="true">✦</span>
             <strong>영상 공개 준비 중이에요</strong>
-            <span>자막·권리·제품 표시를 확인한 뒤 이 자리에서 바로 보여드릴게요.</span>
+            <span>공개가 확정되면 이 자리에서 바로 만나보세요.</span>
           </div> : frameRequested ? <iframe
             className="teaser-frame"
             title={`${preview.title}. 화면에 들어오면 자동 재생을 시도하고, 소리는 화면 안에서 조절할 수 있어요.`}

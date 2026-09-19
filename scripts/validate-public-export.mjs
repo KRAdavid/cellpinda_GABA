@@ -100,7 +100,7 @@ if (!['IN_PROGRESS_WITH_GATES', 'COMPLETE'].includes(publicAudit.overallStatus))
 if (!Array.isArray(publicAudit.roleCoverage) || JSON.stringify(publicAudit.roleCoverage) !== JSON.stringify(requiredRoleCoverage)) fail('public goal audit role coverage is missing or malformed');
 const expectedTeaserGateStatus = teaser.status === 'APPROVED' ? 'APPROVED' : 'HOLD';
 if (!['HOLD', 'PREVIEW', 'APPROVED'].includes(teaser.status) || teaserPreview.status !== teaser.status || teaserPreview.placement !== teaser.placement || typeof teaserPreview.title !== 'string' || typeof teaserPreview.description !== 'string' || typeof teaserPreview.note !== 'string') fail('teaser preview export is malformed');
-if (teaser.status === 'HOLD' && (!teaserPreview.note.includes('공개 승인') || !teaserPreview.note.includes('자막') || !teaserPreview.note.includes('권리') || !teaserPreview.note.includes('제품 표시'))) fail('HOLD teaser export must explain its approval boundary');
+if (teaser.status === 'HOLD' && (!teaserPreview.note.includes('공개 준비') || !teaserPreview.note.includes('이 자리에서 재생'))) fail('HOLD teaser export must explain its public-ready state');
 if (teaser.status !== 'HOLD' && (!teaserPreview.note.includes('브라우저 설정') || !teaserPreview.note.includes('재생 버튼') || !teaserPreview.note.includes('완제품의 시험 영상'))) fail('public teaser export must explain browser fallback and product boundary');
 if (teaser.status === 'PREVIEW' && (!isHttps(teaserPreview.url) || teaserPreview.url !== teaser.publicPreviewUrl)) fail('PREVIEW teaser export must expose the approved preview URL only');
 if (teaser.status !== 'PREVIEW' && teaserPreview.url !== null) fail('non-preview teaser export cannot expose a preview URL');
