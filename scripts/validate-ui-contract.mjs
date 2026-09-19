@@ -213,7 +213,7 @@ requireMatch(fatigueGame, /phase !== 'practice-hold' && phase !== 'practice-swit
 requireMatch(fatigueGame, /function finishPracticeSpeed\(\)[\s\S]*setPhase\('practice-switch-match'\)/, 'focus game must practice the all-signals stage before color matching');
 requireMatch(fatigueGame, /function finishPracticeSwitchMatch\(\)[\s\S]*setPhase\('practice-switch-hold'\)/, 'focus game must practice matching and non-matching switch signals');
 requireMatch(fatigueGame, /phase === 'practice-complete'[\s\S]*onClick=\{\(\) => startRun\('baseline'\)\}/, 'practice completion must lead to scored play');
-requireMatch(fatigueGame, /설명 없이 바로 시작/, 'focus game must let returning users skip the practice');
+requireMatch(fatigueGame, /연습을 건너뛰고 바로 시작/, 'focus game must let returning users skip the practice');
 requireMatch(fatigueGame, /aria-valuenow=\{3 - practiceCountdown\}/, 'practice wait must show clear visible progress');
 requireMatch(fatigueGame, /lastBowlStageRef\.current === breathCue\.stage[\s\S]*ringSingingBowl/, 'a singing bowl cue must play once at each breathing-stage transition');
 requireMatch(fatigueGame, /createFocusRunPattern\(Math\.random, runPatternRef\.current\.signature\)/, 'before and after challenge runs must receive different randomized forms');
