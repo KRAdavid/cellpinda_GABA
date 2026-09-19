@@ -15,7 +15,7 @@ requireText(/run: node scripts\/validate-safe-tf-run\.mjs tf-safe-run\.json tf-p
 requireText(/run:\s*\|\s*node scripts\/write-tf-pulse-heartbeat\.mjs tf-pulse\.json tf-safe-run\.json tf-safe-run-validation\.json/, 'heartbeat에 독립 검증된 safe 실행을 전달하지 않습니다.');
 requireText(/contents:\s*write/, 'heartbeat 커밋에 필요한 contents: write 권한이 없습니다.');
 requireText(/pull-requests:\s*write/, 'heartbeat PR 생성에 필요한 pull-requests: write 권한이 없습니다.');
-requireText(/actions:\s*read/, 'heartbeat 검증 workflow 조회에 필요한 actions: read 권한이 없습니다.');
+requireText(/actions:\s*write/, 'heartbeat 검증 workflow dispatch에 필요한 actions: write 권한이 없습니다.');
 requireText(/statuses:\s*write/, 'heartbeat 커밋 상태 기록에 필요한 statuses: write 권한이 없습니다.');
 requireText(/heartbeat_branch=\"automation\/tf-pulse-heartbeat\"/, '보호된 main에 반영할 고정 heartbeat PR 브랜치가 없습니다.');
 requireText(/git switch --create \"\$heartbeat_branch\"/, 'heartbeat PR 브랜치 전환 단계가 없습니다.');
@@ -30,7 +30,6 @@ requireText(/gh api --method POST \"repos\/\$GITHUB_REPOSITORY\/statuses\/\$hear
 requireText(/GH_TOKEN:\s*\$\{\{ github\.token \}\}/, 'gh CLI에 GITHUB_TOKEN 연결이 없습니다.');
 requireText(/tf-safe-run\.json/, 'safe internal TF 결과 artifact가 없습니다.');
 requireText(/tf-safe-run-validation\.json/, 'safe internal TF 독립 검증 결과 artifact가 없습니다.');
-if (/actions:\s*write/.test(source)) issues.push('보호된 main PR 흐름에서는 불필요한 actions: write 권한을 제거해야 합니다.');
 if (/git push origin HEAD:main/.test(source)) issues.push('보호된 main에 heartbeat를 직접 push하면 안 됩니다.');
 
 const commitIndex = source.indexOf('git commit -m "chore: refresh TF pulse heartbeat"');
