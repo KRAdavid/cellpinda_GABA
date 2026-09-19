@@ -198,3 +198,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - 메인 화면의 순서를 `01 / GABA 이야기 → 티저 영상 → 03 / 발효가바는?`로 확인한 결과, 티저에 단계 번호가 없어 이야기 흐름이 끊겨 보였다.
 - 티저의 장 번호를 `02 / 발효가바 영상`으로 표시해 쉬운 GABA 설명 다음에 영상을 보고, 이어서 발효 과정과 제품 정보를 확인하는 순서를 한눈에 읽게 했다. 티저 공개 상태·자동 재생·외부 승인 경계는 그대로 유지했다.
 - `validate:ui-contract`, `validate:public`, `validate:research-copy`, `typecheck`, `pnpm test`(104개), 전체 `build`를 다시 통과했다.
+
+### 2026-09-19 연구 주제 카드 접근성 보정
+
+- 모바일 Chromium 감리에서 주제 카드의 제목·설명·건수가 보조기술에서 붙어 읽힐 수 있는 점을 확인했다.
+- 각 카드에 `주제 · 설명 · 연구 수` 순서의 명시적 접근성 라벨을 추가해 시각 정보와 음성 안내가 같은 구조로 전달되도록 했다. 연구 문구·필터 동작·제품 경계는 변경하지 않았다.
+- `validate:ui-contract`, `validate:research-copy`, `validate:public`, `typecheck`, `pnpm test`(104개), 전체 `build`를 통과했다.
