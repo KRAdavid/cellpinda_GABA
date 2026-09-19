@@ -99,6 +99,7 @@ export default function App(){
  const operationsView = import.meta.env.DEV && isLocalHost && (requestedView === 'ops' || currentPath === '/ops');
  const accountView = requestedView === 'account' || currentPath === '/account';
  const researchView = requestedView === 'research' || currentPath === '/research/';
+ const isProductView = requestedView === 'products' || currentPath === '/products/';
  const adminView = import.meta.env.DEV && isLocalHost && (requestedView === 'admin' || currentPath === '/admin');
  useEffect(()=>{const c=new AbortController();setLoading(true);setError(false);loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[retryKey]);
  useEffect(()=>{
@@ -123,6 +124,29 @@ export default function App(){
   const canonical=document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if(canonical)canonical.href=new URL(`${siteRoot}research/`,window.location.origin).toString();
  },[researchView]);
+ useEffect(()=>{
+  if(!isProductView || researchView || accountView || adminView || operationsView)return;
+  const title='셀핀다 가바 1500 · 30포 구성 보기';
+  const description='셀핀다 가바 1500 · 30포 구성. 낱포 표시는 제품 포장에서, 가격과 재고는 스마트스토어에서 확인해 보세요.';
+  const productUrl=new URL(`${siteRoot}products/`,window.location.origin).toString();
+  document.title=title;
+  const update=(selector:string,attribute:'name'|'property',value:string)=>{
+   const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${selector}"]`);
+   if(element)element.content=value;
+   else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}
+  };
+  update('description','name',description);
+  update('og:title','property',title);
+  update('og:description','property',description);
+  update('og:url','property',productUrl);
+  update('og:image','property',new URL(asset('assets/product-composition-1500.png'),window.location.origin).toString());
+  update('og:image:alt','property','셀핀다 가바 1500, 30포 한 상자 구성 안내');
+  update('twitter:title','name',title);
+  update('twitter:description','name',description);
+  update('twitter:image','name',new URL(asset('assets/product-composition-1500.png'),window.location.origin).toString());
+  const canonical=document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if(canonical)canonical.href=productUrl;
+ },[isProductView,researchView,accountView,adminView,operationsView]);
  useEffect(()=>{
  if(adminView || accountView || operationsView)return;
   trackOnce('landing_view',{path:'/'});
