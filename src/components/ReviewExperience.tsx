@@ -72,7 +72,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
       <div className={`review-experience-layout${quotes.length ? '' : ' review-experience-layout-destination-only'}`}>
         {destinations.length > 0 ? <div className="review-experience-destination">
           <span className="review-experience-label">스마트스토어 후기</span>
-          <h3>구매자 후기 바로 보기</h3>
+          <h3>스마트스토어 후기 원문 보기</h3>
           {destinations.map(({ review, url, productId, label }) => <div key={review.id}>
             <a className="button" href={url} target="_blank" rel="noopener noreferrer" onClick={() => onOpen?.(productId)}>{label} <span aria-label="새 창">↗</span></a>
           </div>)}
