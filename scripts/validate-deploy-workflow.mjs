@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 
 const workflow = await readFile(new URL('../.github/workflows/deploy.yml', import.meta.url), 'utf8');
 const siteQualityWorkflow = await readFile(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8');
+const liveValidator = await readFile(new URL('./validate-live-public.mjs', import.meta.url), 'utf8');
 
 assert.match(workflow, /^  pull_request:\r?\n    branches: \[main\]$/m, 'PRs targeting main must run verification');
 assert.match(workflow, /^  release-verify:\r?\n/m, 'the release verification job must exist');
@@ -42,6 +43,8 @@ assert.match(workflow, /PAGES_PUBLIC_SITE_URL: https:\/\/kradavid\.github\.io\/c
 assert.match(workflow, /PUBLIC_SITE_URL="\$WORKER_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=worker/, 'full-release smoke must verify the Worker public origin');
 assert.match(workflow, /PUBLIC_SITE_URL="\$PAGES_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=static/, 'static-only smoke must verify the Pages public origin');
 assert.match(workflow, /EXPECTED_RELEASE_SHA: \$\{\{ github\.sha \}\}[\s\S]*validate-live-public\.mjs/, 'live smoke must compare the published release manifest with the candidate SHA');
+assert.match(liveValidator, /validateLiveBundleHashes/, 'live smoke must validate every manifest file hash against the published bytes');
+assert.match(liveValidator, /bundleHashCount/, 'live smoke output must report the bundle hash coverage');
 assert.match(workflow, /Create deployment Wrangler config[\s\S]*PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*config\.vars=\{\.\.\.\(config\.vars\|\|\{\}\),PUBLIC_SITE_URL:process\.env\.PUBLIC_SITE_URL\}/, 'Worker deploy config must inject the selected public origin');
 assert.match(workflow, /Strict deployment readiness gate[\s\S]*PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*pnpm run preflight:deploy -- --strict/, 'strict Worker readiness must validate the same public origin used for deployment');
 assert.match(workflow, /elif \[ "\$WORKER_ENABLED" = "true" \] && \[ "\$WORKER_RESULT" != "success" \][\s\S]*mode="RELEASE_FAILED"/, 'a failed Worker deployment must not be relabeled as static-only');

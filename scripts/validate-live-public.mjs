@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {normalizePublicSiteUrl, publicSitePath} from './public-origin.mjs';
@@ -117,6 +118,23 @@ const requestRuntimeRoute = async path => {
   const response = await fetch(`${base}${path}${separator}release-smoke=1`);
   return {status: response.status, type: response.headers.get('content-type') || ''};
 };
+const validateLiveBundleHashes = async manifest => {
+  const entries = Object.entries(manifest?.fileHashes || {});
+  assert.ok(entries.length > 0, 'live release manifest must include public file hashes');
+  const safePath = /^\/?[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*$/;
+  for (const [relativePath, expectedHash] of entries) {
+    assert.match(relativePath, safePath, `live release manifest contains an unsafe file path: ${relativePath}`);
+    assert.match(expectedHash || '', /^[a-f0-9]{64}$/, `live release manifest contains an invalid hash for ${relativePath}`);
+  }
+  const mismatches = [];
+  await Promise.all(entries.map(async ([relativePath, expectedHash]) => {
+    const response = await request(`/${relativePath}`);
+    const actualHash = createHash('sha256').update(Buffer.from(await response.arrayBuffer())).digest('hex');
+    if (actualHash !== expectedHash) mismatches.push(`${relativePath} expected ${expectedHash} got ${actualHash}`);
+  }));
+  assert.deepEqual(mismatches, [], `live public bundle hash drift detected: ${mismatches.join('; ')}`);
+  return entries.length;
+};
 
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
@@ -167,6 +185,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(releaseManifest.counts.reviews, content.reviews.length, 'live release manifest review count is out of sync');
     assert.equal(releaseManifest.teaser.status, teaserPreview.status, 'live release manifest teaser state is out of sync');
     assert.ok(releaseManifest.checks?.smartStoreOnly && releaseManifest.checks?.reviewDestination && releaseManifest.checks?.researchIndex && releaseManifest.checks?.teaserBoundary && releaseManifest.checks?.challengeCopy && releaseManifest.checks?.productBoundary, 'live release manifest checks are incomplete');
+    const bundleHashCount = await validateLiveBundleHashes(releaseManifest);
     validatePublicMetadata(pageText, '/', `${base}/`);
     assert.ok(pageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live root fallback must distinguish general GABA research from Cellpinda product research');
     validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);
@@ -349,7 +368,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, runtimeMode: runtimeMode.toUpperCase(), attempt, page: 200, heroImage: 'webp-ready', claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: {status: teaserPreview.status, publicUrl: Boolean(teaserPreview.url)}, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, runtimeMode: runtimeMode.toUpperCase(), attempt, page: 200, heroImage: 'webp-ready', bundleHashes: bundleHashCount, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: {status: teaserPreview.status, publicUrl: Boolean(teaserPreview.url)}, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {
