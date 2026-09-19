@@ -250,6 +250,8 @@ for (const [id, kind] of featuredFindings) {
   catch { fail(`consumer visualization for ${id} does not match the approved public data shape`); }
   if (/셀핀다.{0,15}(?:효과|개선)|(?:효과|개선).{0,15}셀핀다/.test(claim.metadata.consumerFinding)) fail(`research finding ${id} implies a Cellpinda product effect`);
 }
+const yoto = claimsById.get('research-yoto-2012');
+if (!yoto?.metadata?.consumerFinding?.includes('뇌파와 활력 설문 점수의 감소 폭') || !yoto.metadata.consumerFinding.includes('비교 조건보다 작게 기록됐어요') || /안정적으로 유지|뇌 활력 개선|개선됐/.test(yoto.metadata.consumerFinding) || !yoto.metadata.consumerVisual?.outcomes?.some(item => item.label === '활력 설문 점수' && item.result.includes('감소 폭이 작게 기록됐어요'))) fail('public Yoto copy must describe the observed decrease range against the comparison condition without implying a general stabilizing or improvement effect');
 const powers = claimsById.get('research-powers-2008');
 if (powers?.metadata?.consumerFindingFirst === true || !powers.metadata?.consumerSummary?.includes('남성 11명') || !powers.metadata.consumerSummary.includes('GABA 3g') || !powers.metadata.consumerSummary.includes('90분') || !powers.metadata.consumerFinding?.includes('성장호르몬 최고 수치') || !powers.metadata.consumerFinding.includes('근육 크기와 근력 변화는 측정하지 않았어요') || powers.metadata.consumerDetail) fail('Powers study must lead with its measurement design and keep the finding in context');
 const powersIndexRecord = recordsById.get('research-powers-2008');
