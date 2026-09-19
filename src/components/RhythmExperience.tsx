@@ -46,7 +46,7 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
   if (result.loadLevel === 'low') return {
     tone: 'steady',
     label: '지난 7일 답변',
-    heading: '축하합니다. 잠과 휴식 리듬이 잘 유지됐어요.',
+    heading: '축하합니다. 지난 7일, 쉬는 시간을 잘 챙겨 오셨어요.',
     body: '지금 잘 맞는 쉬는 습관을 이어가세요.',
   };
   if (result.loadLevel === 'high') {
@@ -73,46 +73,29 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
 
 function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const { loadScore: score } = result;
-  const ratio = score / 15;
   const band = score >= 10 ? 'high' : score >= 5 ? 'watch' : 'low';
-  const frequentAnswers = Object.values(result.scores).filter(value => value >= 2).length;
+  const answerEntries = Object.entries(result.scores);
+  const frequentAnswers = answerEntries.filter(([, value]) => value >= 2).length;
   const description = `${frequentAnswers}개 질문에서 자주 또는 거의 매일 쉬지 못했다고 답했어요.`;
-  const brainPath = 'M108 29c-8-12-24-13-34-4-13-4-27 5-27 19-14 5-18 21-8 31-5 14 5 28 19 29 7 12 23 14 34 5 8 8 19 8 27 0 10 9 25 6 30-6 14 1 25-12 21-26 11-10 8-27-5-34-1-14-15-23-28-18-7-7-19-7-29 4z';
 
   return (
     <div className={`rhythm-load-score rhythm-load-score-${band}`}>
-      <div className="rhythm-load-score-heading"><span>지난 7일, 쉬고 싶었던 순간</span><strong>{score}<small>/ 15</small></strong></div>
+      <div className="rhythm-load-score-heading"><span>지난 7일 답변 기록</span><strong>{score}<small>/ 15</small></strong></div>
       <div className="rhythm-load-visual">
-        <svg className="rhythm-load-brain" viewBox="0 0 210 125" role="img" aria-label={`내 답변 점수 ${score}점에 맞춰 채워진 뇌 그림`}>
-          <defs>
-            <linearGradient id="rhythm-brain-load-fill" x1="0" x2="1">
-              <stop offset="0%" stopColor="#45a875" />
-              <stop offset="54%" stopColor="#e0ae42" />
-              <stop offset="100%" stopColor="#d46c42" />
-            </linearGradient>
-            <clipPath id="rhythm-brain-load-clip"><path d={brainPath} /></clipPath>
-          </defs>
-          <circle className="rhythm-brain-halo" cx="104" cy="64" r="58" />
-          <path className="rhythm-brain-base" d={brainPath} />
-          <rect className="rhythm-brain-fill" x="34" y="18" width={140 * ratio} height="98" clipPath="url(#rhythm-brain-load-clip)" />
-          <path className="rhythm-brain-outline" d={brainPath} />
-          <path className="rhythm-brain-fold" d="M104 29c-5 10 5 15 0 24s5 14 0 23 5 15 0 23m-27-63c9-2 15 4 14 12m-22 1c8 0 12 6 10 13m-7 10c8-3 14 1 15 9m26-39c9-2 14 3 14 10m7 4c-8-1-13 4-12 11m13 8c-8-3-14 1-15 9" />
-          <g className="rhythm-brain-signals" aria-hidden="true">
-            <path d="M49 24 41 15m27-1-3-12m36 15V5m34 9 4-12m25 19 10-9M34 54 21 50m153 4 13-4M36 88l-11 7m142-7 11 7" opacity={ratio} />
-            {[0, 1, 2, 3, 4, 5].map((index) => <circle key={index} cx={62 + index * 16} cy={score >= 10 ? 38 + (index % 2) * 47 : 40 + (index % 2) * 42} r="2.2" opacity={Math.max(0, Math.min(1, (score - index * 2) / 3))} />)}
-          </g>
-        </svg>
         <div className="rhythm-load-visual-copy">
-          <p className="rhythm-load-visual-kicker">점수 읽는 법</p>
-          <strong>점수가 높을수록 자주 쉬지 못했다고 답한 질문이 많아요.</strong>
-          <div className="rhythm-load-segments" aria-hidden="true">
-            {Array.from({ length: 15 }, (_, index) => <i key={index} className={index < score ? 'is-filled' : ''} />)}
+          <p className="rhythm-load-visual-kicker">5개 질문 중</p>
+          <strong>자주 쉬지 못했다고 답한 질문</strong>
+          <div className="rhythm-load-answer-row">
+            <div className="rhythm-load-answer-dots" role="img" aria-label={description}>
+              {answerEntries.map(([questionId, value]) => <i key={questionId} className={value >= 2 ? 'is-filled' : ''} />)}
+            </div>
+            <span className="rhythm-load-answer-count">{frequentAnswers}<small> / {answerEntries.length}개</small></span>
           </div>
-        <span>{description}</span>
+          <span>각 점은 질문 하나를 나타내요.</span>
         </div>
       </div>
       <progress className="rhythm-load-progress-accessible" value={score} max={15} aria-label={`지난 7일 답변 점수 ${score}점, 15점 만점`} />
-      <p className="rhythm-load-footnote">뇌나 GABA를 잰 값이 아니에요. 지난 7일 다섯 질문에 고른 답을 더한 기록이에요.</p>
+      <p className="rhythm-load-footnote">건강 상태를 검사한 결과가 아니라, 다섯 질문에 고른 답을 정리한 기록이에요.</p>
     </div>
   );
 }
