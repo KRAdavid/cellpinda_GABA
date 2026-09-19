@@ -6,6 +6,10 @@
 
 후보는 `OPEN / MERGEABLE / REVIEW_REQUIRED` 상태이며, PR이 `main`에 병합되기 전까지 공개 Pages는 이전 `main` 번들을 유지한다. 공개 배포를 완료로 판정하지 않도록 다음 게이트를 별도로 유지한다: B2 제품 표시 최종 승인(`VERIFYING`), B3 후기 재게시 권한(`WAITING`), B4 티저 자막·권리·CTA(`WAITING`), C2 Cloudflare Worker/D1 운영 시크릿(`WAITING`), E1 실제 주문·취소·환불 대사(`WAITING`). 티저 공개 상태는 계속 `HOLD`다.
 
+### 후보 정적 번들 독립 확인
+
+Pages 배포와 분리된 로컬 정적 서버에서 같은 `/cellpinda_GABA/` 경로를 재현해 10개 공개 route를 모두 HTTP 200으로 확인했다. `release-manifest.json`은 연구 6건·제품 1건·후기 목적지 1건, 티저 `HOLD`, SmartStore 전용·후기 목적지·연구 인덱스·챌린지 문구·제품 범위 검사를 모두 유지했다. 이 검사는 후보 번들의 경로·매니페스트·공개 JSON을 확인한 것이며 `main` Pages의 실제 갱신이나 Worker 운영 승인을 의미하지 않는다.
+
 ## 현재 배포 검증 결과
 
 현재 공개 Pages 콘텐츠 기준은 `main` 커밋 `ea1cc42`이며 GitHub Actions `35445159229`가 당시 검증 기준으로 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공시켰다. 그러나 최신 후보 검증기를 공개 주소에 다시 실행한 결과 라이브 번들이 `뇌컨디션 확인 챌린지` 명칭을 포함하지 않아 12회 재시도 후 실패했다. 공개 사이트는 정적 Pages 모드로 운영되고, Worker/D1 job은 비밀값·공개 origin 게이트가 충족되지 않아 실행하지 않았다. 후보 PR 병합 전까지 공개본을 최신 후보 배포로 판정하지 않는다.
