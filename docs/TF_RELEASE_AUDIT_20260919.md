@@ -223,3 +223,10 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 
 - 일반 뇌 피로·휴식 연구 카드의 `내 생활에서` 표지가 연구 결과가 방문자에게 그대로 적용되는 것처럼 읽힐 수 있어 `오늘 해볼 일`로 바꿨다. 카드 상단의 `뇌 피로를 이해하기 위한 일반 연구 · GABA 섭취 연구와 별도` 경계와 각 연구 출처는 유지한다.
 - `validate:ui-contract`에서 새 표지와 이전 표현의 재유입을 함께 검사한다. 이 보정은 개인 건강 상태나 셀핀다 완제품 효과를 판정하지 않는다.
+
+### 2026-09-19 소비자 연구 경로 제목·운영 heartbeat 재감리
+
+- 연구 페이지의 `일반 GABA 사람 연구` 표현을 `사람을 대상으로 한 GABA 연구`로 바꿨다. 연구 route 제목, Open Graph·Twitter·JSON-LD, 정적 fallback, GABA 소개와 구매 전 질문 링크를 같은 소비자 언어로 맞췄다.
+- PR #69의 `release-verify`와 `site-quality-verify`를 통과하고 main `c647865`로 병합했다. 배포 run [35437840293](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35437840293)은 Pages 게시와 라이브 smoke를 성공시켰다.
+- 라이브 `validate:live-public`는 HTTP 200, 주장 12개, 공개 연구 6건, 제품 1개, 공유 페이지 6개, SmartStore 전용 링크, 750 제품 제거, 원장 출처 일치를 확인했다. 연구 route의 title·OG title·canonical도 공개 주소와 일치한다.
+- TF heartbeat는 상태 해시가 그대로인 것을 확인한 뒤 `2026-09-19T10:39:19.458Z`로 갱신했다. 역할군 8/8, DONE 10, VERIFYING 1, WAITING 4를 유지했으며, 외부 승인 게이트를 자동으로 통과시키지 않았다.
