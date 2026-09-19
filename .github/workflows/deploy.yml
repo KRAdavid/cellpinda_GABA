@@ -200,6 +200,7 @@ jobs:
           CLOUDFLARE_D1_DATABASE_ID: ${{ secrets.CLOUDFLARE_D1_DATABASE_ID }}
           ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
           MEMBER_ORIGIN: ${{ secrets.MEMBER_ORIGIN }}
+          PUBLIC_SITE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
         run: pnpm run preflight:deploy -- --strict
       - name: Create deployment Wrangler config
         if: env.DEPLOY_ENABLED == 'true'
