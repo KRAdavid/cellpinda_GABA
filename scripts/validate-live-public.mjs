@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 const cliBase = process.argv.slice(2).find(value => /^https:\/\//.test(value)) || '';
 const base = (process.env.PUBLIC_SITE_URL || cliBase).replace(/\/$/, '');
 if (!/^https:\/\//.test(base)) throw new Error('PUBLIC_SITE_URL must be an HTTPS URL');
+const runtimeMode = process.env.PUBLIC_RUNTIME_MODE || 'static';
+if (!['static', 'worker'].includes(runtimeMode)) throw new Error('PUBLIC_RUNTIME_MODE must be static or worker');
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 const approvedReviewText = '가바 1500 구매자 후기를 스마트스토어에서 읽어보세요.';
@@ -78,11 +80,16 @@ const requestPublicRoute = async path => {
   if (![200, 404].includes(response.status)) throw new Error(`${path} returned unexpected HTTP ${response.status}`);
   return {status: response.status, text: await response.text()};
 };
+const requestRuntimeRoute = async path => {
+  const separator = path.includes('?') ? '&' : '?';
+  const response = await fetch(`${base}${path}${separator}release-smoke=1`);
+  return {status: response.status, type: response.headers.get('content-type') || ''};
+};
 
 let lastError;
 for (let attempt = 1; attempt <= 12; attempt += 1) {
   try {
-    const [page, focusPageResponse, faviconResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute] = await Promise.all([
+    const [page, focusPageResponse, faviconResponse, robotsResponse, sitemapResponse, contentResponse, masterResponse, teaserPreviewResponse, queueResponse, pulseResponse, auditResponse, meetingPacketResponse, adminRoute, opsRoute, adminQueryRoute, opsQueryRoute, healthRoute, contentApiRoute] = await Promise.all([
       request('/?view=ops'),
       request('/focus/'),
       request('/favicon.svg'),
@@ -99,7 +106,16 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       requestPublicRoute('/ops'),
       requestPublicRoute('/?view=admin'),
       requestPublicRoute('/?view=ops'),
+      requestRuntimeRoute('/api/health'),
+      requestRuntimeRoute('/api/content'),
     ]);
+    if (runtimeMode === 'static') {
+      assert.ok([404, 405].includes(healthRoute.status), `STATIC_ONLY /api/health must not expose a live API (HTTP ${healthRoute.status})`);
+      assert.ok([404, 405].includes(contentApiRoute.status), `STATIC_ONLY /api/content must not expose a live API (HTTP ${contentApiRoute.status})`);
+    } else {
+      assert.equal(healthRoute.status, 200, 'WORKER runtime /api/health must be available');
+      assert.equal(contentApiRoute.status, 200, 'WORKER runtime /api/content must be available');
+    }
     assert.match(faviconResponse.headers.get('content-type') || '', /image\/svg\+xml/i, 'live favicon must be served as SVG');
     const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json()]);
     const internalSnapshots = [
@@ -246,7 +262,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: true, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, runtimeMode: runtimeMode.toUpperCase(), attempt, page: 200, claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: true, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {

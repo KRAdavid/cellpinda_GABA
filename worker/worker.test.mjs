@@ -175,6 +175,25 @@ test('Worker applies the same release security headers to API and static asset r
     }
     assert.equal(api.status,200);
     assert.equal(asset.status,200);
+    assert.equal(api.headers.get('cache-control'),'no-store');
+    assert.equal(asset.headers.get('cache-control'),'public, max-age=86400, must-revalidate');
+  }finally{DB.close();}
+});
+
+test('Worker applies content-aware cache policy to public assets and data',async()=>{
+  const DB=new MockD1();
+  const env={DB,ADMIN_TOKEN:'a'.repeat(64),RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async request=>{
+    const pathname=new URL(request.url).pathname;
+    const type=pathname.endsWith('.json')?'application/json':pathname.endsWith('.js')?'application/javascript':'text/html';
+    return new Response('asset',{headers:{'content-type':type}});
+  }}};
+  try{
+    const data=await worker.fetch(new Request('https://site.example/data/content.json'),env);
+    const hashed=await worker.fetch(new Request('https://site.example/assets/index-Ab12Cd34.js'),env);
+    const page=await worker.fetch(new Request('https://site.example/'),env);
+    assert.equal(data.headers.get('cache-control'),'public, max-age=300, must-revalidate');
+    assert.equal(hashed.headers.get('cache-control'),'public, max-age=31536000, immutable');
+    assert.equal(page.headers.get('cache-control'),'no-store');
   }finally{DB.close();}
 });
 
