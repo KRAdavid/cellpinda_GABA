@@ -2,13 +2,13 @@
 
 `pnpm run tf:pulse`는 현재 `Goal Contract`와 canonical 업무 그래프를 읽어 다음 회의에서 검토할 작업별 결정 제안을 만든다. 실행 담당과 독립 검증자를 함께 참여시키고, 상태를 바꾸지 않은 채 증거·대기 입력·다음 행동을 정리한다. `WAITING`·`BACKLOG` 작업은 그래프의 `requiredInputs` 체크리스트를 함께 내보내 회의에서 준비할 자료를 한눈에 확인한다.
 
-GitHub Actions의 `TF decision pulse` workflow가 6시간마다 같은 명령을 실행하고 JSON 결과를 run summary와 14일 보존 artifact로 남긴다. 안전한 요약 heartbeat는 `data/tf-pulse-heartbeat.json`에 저장되며, `[skip ci]`가 붙은 heartbeat 커밋을 `main`에 push한 뒤 `deploy.yml`을 한 번 명시적으로 dispatch한다. GitHub `GITHUB_TOKEN`으로 만든 push는 후속 workflow를 자동 실행하지 않으므로 명시적 dispatch가 필요하고, `[skip ci]`는 push 기반 중복 실행을 차단한다. 공개 운영 큐는 마지막 pulse 시각·상태 지문을 계속 보여 준다. heartbeat에는 역할·상태·필요 입력만 포함하며 원문 경로와 비밀값은 저장하지 않는다. `workflow_dispatch`로 즉시 다시 실행할 수도 있다. 이 주기는 상태를 임의로 바꾸거나 외부 게시·구매를 실행하지 않고, 새 입력이 필요한 TF 회의 안건을 계속 갱신한다.
+GitHub Actions의 `TF decision pulse` workflow가 6시간마다 같은 명령을 실행하고 JSON 결과를 run summary와 14일 보존 artifact로 남긴다. 안전한 요약 heartbeat는 `data/tf-pulse-heartbeat.json`에 만들어지며, 보호된 `main`에 직접 push하지 않고 `automation/tf-pulse-heartbeat` 브랜치의 PR로 갱신한다. 열린 heartbeat PR이 있으면 같은 PR을 업데이트하고, 없으면 새 PR을 만든다. 필수 검사와 사람의 merge를 통과해 `main`에 들어온 뒤에만 일반 `deploy.yml`이 Pages 배포를 실행한다. 공개 운영 큐는 마지막 pulse 시각·상태 지문을 계속 보여 준다. heartbeat에는 역할·상태·필요 입력만 포함하며 원문 경로와 비밀값은 저장하지 않는다. `workflow_dispatch`로 즉시 다시 실행할 수도 있다. 이 주기는 상태를 임의로 바꾸거나 외부 게시·구매를 실행하지 않고, 새 입력이 필요한 TF 회의 안건을 계속 갱신한다.
 같은 workflow는 pulse 생성 직후 `run-safe-tf-actions.mjs`를 실행한다. 이 단계는 CI에 없는 공개 패킷을 내부에서 재생성한 뒤 Goal Contract·연구 문구·티저 경계·샌드박스 MVP·공개 export·TF pulse 검증 여섯 가지를 매회 재실행하고, 결과를 `safe_internal_tf_run` artifact와 run summary에 남긴다. 내부 산출물 생성은 `B_INTERNAL_WRITE`, 검증은 `A_READ`로 기록하며 외부 게시·구매·승인·canonical 업무 그래프 상태 변경은 하지 않는다. 사람 판단 게이트를 감시하는 동안 내부 품질 확인을 멈추지 않는다.
 이 결과는 `validate-safe-tf-run.mjs`가 별도로 확인한 뒤에만 heartbeat 저장으로 넘어간다. 검증기는 pulse 지문·목표 ID·사람 게이트 목록·검사 순서·위험 등급·외부 효과 없음·모든 `MET` 결과를 다시 대조하므로, 실행 스크립트의 자기 보고만으로 다음 배포가 진행되지 않는다.
 
 heartbeat 저장 단계는 독립 검증이 끝난 안전 실행 요약도 함께 보존한다. 요약에는 내부 작성 경계, 6개 읽기 검사, 실행 후보와 사람 게이트만 남기며 원문 경로·개인정보·검사 상세 로그는 공개하지 않는다. 운영 화면과 회의 패킷은 이 요약으로 마지막 내부 검증 상태를 확인한다.
 
-`pnpm run validate:tf-pulse-workflow`는 schedule·수동 실행·최소 권한·heartbeat 커밋·push·명시적 deploy dispatch 순서를 자동 검사한다. `pnpm run validate:tf-pulse`는 heartbeat의 상태 지문·카운트·대기 목록이 현재 pulse와 같은 실행인지도 확인한다. workflow를 수정할 때 `[skip ci]`를 빠뜨리거나 dispatch를 제거하면 build가 실패한다.
+`pnpm run validate:tf-pulse-workflow`는 schedule·수동 실행·최소 권한·heartbeat 커밋·자동화 브랜치 push·기존 PR 검사·PR 생성을 자동 검사한다. `pnpm run validate:tf-pulse`는 heartbeat의 상태 지문·카운트·대기 목록이 현재 pulse와 같은 실행인지도 확인한다. workflow에서 보호된 `main` 직접 push나 PR 생성 단계를 제거하면 build가 실패한다.
 
 화면의 `목표 감사 JSON`은 Goal Contract, 역할 커버리지, 상태 카운트, 완료 마일스톤과 현재 입력 게이트를 같은 실행에서 만든 공개 요약이다. [공개 목표 감사](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)는 중간 회의용 상태 패킷이며 실제 자격·외부 승인·주문 완료를 증명하지 않는다.
 
