@@ -12,7 +12,7 @@ assert.doesNotMatch(workflow, /^  site-quality-verify:\r?\n/m, 'the release work
 assert.ok(!/ubuntu-latest/.test(workflow + siteQualityWorkflow), 'release and site quality workflows must use a fixed Ubuntu runner image');
 
 const lines = workflow.split(/\r?\n/);
-for (const job of ['deploy-pages', 'smoke-live', 'deploy-worker']) {
+for (const job of ['deploy-pages', 'smoke-live', 'worker-readiness', 'deploy-worker']) {
   const start = lines.findIndex(line => line === `  ${job}:`);
   const end = lines.findIndex((line, index) => index > start && /^  [\w-]+:$/.test(line));
   const jobBlock = start >= 0 ? lines.slice(start + 1, end < 0 ? lines.length : end).join('\n') : '';
@@ -23,6 +23,10 @@ for (const job of ['deploy-pages', 'smoke-live', 'deploy-worker']) {
 
 assert.match(workflow, /^    needs: release-verify$/m, 'publishing jobs must depend on release verification');
 assert.match(workflow, /DEPLOY_ENABLED:.*secrets\.CLOUDFLARE_API_TOKEN.*secrets\.CLOUDFLARE_ACCOUNT_ID.*secrets\.CLOUDFLARE_D1_DATABASE_ID.*secrets\.ADMIN_TOKEN.*secrets\.MEMBER_ORIGIN/, 'Worker deployment must stay gated on required secrets');
+assert.match(workflow, /worker-readiness:[\s\S]*outputs:[\s\S]*enabled: \$\{\{ steps\.gate\.outputs\.enabled \}\}/, 'Worker readiness must be an explicit pre-deployment gate');
+assert.match(workflow, /needs: \[release-verify, worker-readiness\][\s\S]*needs\.worker-readiness\.outputs\.enabled == 'true'/, 'Worker deployment must run only after the readiness gate opens');
+assert.match(workflow, /HOLD — Worker\/D1 deployment was not run\./, 'missing Worker secrets must be visible as a hold rather than a green skipped deployment step');
+assert.doesNotMatch(workflow, /CLOUDFLARE_WORKER_URL \|\|/, 'Worker live verification must not fall back to an unverified temporary origin');
 assert.match(workflow, /^permissions:\r?\n  contents: read$/m, 'workflow-wide permissions must remain read-only');
 
 const actionRefs = [...workflow.matchAll(/^\s+uses:\s+(\S+)(?:\s+#.*)?$/gm)].map((match) => match[1]);

@@ -1,4 +1,6 @@
-const base = new URL(process.env.WORKER_URL || 'https://cellpinda-rhythm.marshy-shear.workers.dev');
+const workerUrl = process.env.WORKER_URL?.trim();
+if (!workerUrl) throw new Error('WORKER_URL is required; configure the deployed Worker origin before running the live API check');
+const base = new URL(workerUrl);
 if (base.protocol !== 'https:' || base.username || base.password || base.pathname !== '/') {
   throw new Error('WORKER_URL must be an HTTPS origin without credentials or a path');
 }

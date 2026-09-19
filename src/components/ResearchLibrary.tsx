@@ -53,7 +53,7 @@ type Props = {
 };
 
 function compactStudyType(value?: string, dose?: string): string {
-  if (/GABA를 먹지 않고|GABA 섭취 없이/.test(dose || '') || /관찰|MRS|뇌 신호|손끝 연습/.test(value || '')) return 'GABA를 먹지 않은 연구 · 손끝 연습과 뇌 신호';
+  if (/GABA를 먹지 않고|GABA 섭취 없이/.test(dose || '') || /관찰|MRS|뇌 신호|손끝 연습/.test(value || '')) return 'GABA를 먹지 않은 관찰 연구 · 셀핀다 제품 시험 아님';
   if (!value) return 'GABA 관련 연구';
   if (/문헌고찰|여러 연구를 모아|사람 연구 여러 편/.test(value)) return '사람 연구 여러 편을 모아 정리한 자료 · 셀핀다 제품 시험 아님';
   if (/운동/.test(value)) return '사람이 참여한 운동 연구';
