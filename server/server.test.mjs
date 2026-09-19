@@ -288,8 +288,10 @@ test('Teaser exposure events are accepted without collecting extra properties',(
   try {
     const flowId=randomUUID();
     assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_impression',properties:{path:'/teaser',private:'ignored'}}),{accepted:true,duplicate:false});
+    assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_embed_loaded',properties:{path:'/teaser'}}),{accepted:true,duplicate:false});
+    assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_external_opened',properties:{path:'/teaser'}}),{accepted:true,duplicate:false});
     assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_play',properties:{path:'/teaser'}}),{accepted:true,duplicate:false});
     assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'fatigue_game_practice_start',properties:{mode:'practice'}}),{accepted:true,duplicate:false});
-    assert.deepEqual(store.analytics().counts.filter(item=>item.name.startsWith('teaser_') || item.name==='fatigue_game_practice_start').map(item=>({name:item.name,count:item.count})),[{name:'fatigue_game_practice_start',count:1},{name:'teaser_impression',count:1},{name:'teaser_play',count:1}]);
+    assert.deepEqual(store.analytics().counts.filter(item=>item.name.startsWith('teaser_') || item.name==='fatigue_game_practice_start').map(item=>({name:item.name,count:item.count})),[{name:'fatigue_game_practice_start',count:1},{name:'teaser_embed_loaded',count:1},{name:'teaser_external_opened',count:1},{name:'teaser_impression',count:1},{name:'teaser_play',count:1}]);
   } finally {store.close();}
 });
