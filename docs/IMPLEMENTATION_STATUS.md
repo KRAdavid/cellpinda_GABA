@@ -6,11 +6,11 @@
 
 현재 목표 판정은 `IN_PROGRESS_WITH_GATES`다. B2 제품 표시, B3 실제 후기 권한, B4 티저 공개 승인, C2 Worker/D1 운영 설정, E1 실구매 대사는 외부 입력 또는 사람 승인이 필요한 게이트로 남아 있다. 아래의 날짜가 지난 기록은 당시 검증 결과를 보존한 이력이며, 현재 상태는 이 요약과 라이브 smoke 결과를 우선한다.
 
-## 최신 후보 보정 — 2026-09-20 후보 `57a8bc5`
+## 최신 후보 보정 — 2026-09-20 release manifest 기준
 
 배포 후보에 `release-manifest.json`을 생성해 후보 커밋 SHA, 공개 route, 제품·연구·후기 수, SmartStore 목적지, 750 제거, 티저 `HOLD`, 챌린지·제품 경계 문구와 모든 정적 asset hash를 함께 기록한다. Pages와 Worker 빌드는 각각 `static`·`worker` 모드를 manifest에 남기고, 라이브 smoke는 공개 manifest의 SHA와 route·콘텐츠 수·핵심 marker를 후보와 대조한다. 이 값이 다르면 배포 완료로 판정하지 않는다. 정적 연구 fallback과 자바스크립트가 꺼진 첫 화면에도 연구 사용량과 제품 권장량의 구분을 표시하고 UI 계약으로 고정했다.
 
-후보 `57a8bc5`는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build, release manifest 및 정적 산출물 검사를 통과했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전이라 계속 `BLOCKED / REVIEW_REQUIRED`이며, 공개 Pages에는 아직 후보가 반영되지 않았다.
+후보 빌드는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build, release manifest 및 정적 산출물 검사를 통과했다. 배포 후보 SHA는 문서에 중복 기록하지 않고 산출물의 `release-manifest.json`과 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) HEAD를 기준으로 확인한다. PR은 Code Owner 승인 전이라 계속 `BLOCKED / REVIEW_REQUIRED`이며, 공개 Pages에는 아직 후보가 반영되지 않았다.
 
 ## 이전 후보 보정 — 2026-09-20 후보 `486b748`
 
