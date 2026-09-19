@@ -34,7 +34,7 @@ function withSecurityHeaders(response:Response,secureTransport:boolean,pathname:
   if(secureTransport)headers.set('Strict-Transport-Security','max-age=31536000; includeSubDomains');
   const cacheControl=headers.get('Cache-Control') || '';
   if(!/no-store/i.test(cacheControl)) {
-    const contentType=headers.get('Content-Type') || '';
+    const contentType=(headers.get('Content-Type') || '').toLowerCase();
     if(contentType.includes('text/html')) headers.set('Cache-Control','max-age=0, must-revalidate');
     else if(pathname.startsWith('/data/') && contentType.includes('json')) headers.set('Cache-Control','public, max-age=300, must-revalidate');
     else if(pathname.startsWith('/assets/') && /-[a-z0-9]{8,}\.(?:js|css|woff2)$/i.test(pathname)) headers.set('Cache-Control','public, max-age=31536000, immutable');
