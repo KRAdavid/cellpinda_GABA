@@ -2,7 +2,7 @@
 
 ## 최신 업데이트 — 2026-09-19 보호된 main을 지키는 TF heartbeat PR
 
-6시간 주기 `TF decision pulse`의 heartbeat 저장 경로를 보호된 `main` 직접 push에서 자동화 PR 방식으로 전환했다. 안전 실행과 독립 검증을 통과한 heartbeat만 `automation/tf-pulse-heartbeat` 브랜치에 올리고, 열린 PR이 있으면 갱신하며 없으면 새 PR을 만든다. GitHub 토큰으로 만든 PR의 자동 검사 생략을 보완하기 위해 두 검증 workflow를 같은 브랜치에 명시적으로 실행하고, 실제 성공 결과를 heartbeat 커밋의 `release-verify`·`site-quality-verify` 필수 상태로 기록한다. 필수 상태와 사람의 merge가 끝난 뒤에만 `main` 배포가 실행되므로 브랜치 보호를 우회하지 않는다. `validate:tf-pulse-workflow`가 PR 권한·브랜치·검증 순서·상태 기록·직접 push 금지를 회귀 검사한다.
+6시간 주기 `TF decision pulse`의 heartbeat 저장 경로를 보호된 `main` 직접 push에서 자동화 PR 방식으로 전환했다. 안전 실행과 독립 검증을 통과한 heartbeat만 `automation/tf-pulse-heartbeat` 브랜치에 올리고, 열린 PR이 있으면 갱신하며 없으면 새 PR을 만든다. GitHub 토큰으로 만든 PR의 자동 검사 생략·승인 대기를 보완하기 위해 heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 trusted pulse job이 직접 실행하고, 실제 성공 결과를 heartbeat 커밋의 `release-verify`·`site-quality-verify` 필수 상태로 기록한다. 필수 상태와 사람의 merge가 끝난 뒤에만 `main` 배포가 실행되므로 브랜치 보호를 우회하지 않는다. `validate:tf-pulse-workflow`가 PR 권한·브랜치·후보 검증 순서·상태 기록·직접 push 금지를 회귀 검사한다.
 
 ## 최신 업데이트 — 2026-09-19 티저 자동재생 안내 정합성 보강
 

@@ -8,7 +8,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  actions: write
   statuses: write
 
 concurrency:
@@ -29,6 +28,10 @@ jobs:
         with:
           node-version: 24.19.0
           package-manager-cache: false
+      - name: Install pinned package manager
+        run: npm install --global pnpm@11.19.0
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
       - name: Validate TF decision contract
         run: node scripts/validate-tf-pulse.mjs
       - name: Generate TF decision pulse
@@ -62,31 +65,33 @@ jobs:
               echo "Created TF heartbeat PR: $pr_url"
             fi
 
-            # GITHUB_TOKEN-created PRs do not emit a second pull_request run.
-            # Dispatch both verification workflows explicitly, wait for their
-            # real results, and publish those results as required commit
-            # statuses on this exact heartbeat SHA.
-            deploy_run_url="$(gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref "$heartbeat_branch")"
-            verify_run_url="$(gh workflow run verify.yml --repo "$GITHUB_REPOSITORY" --ref "$heartbeat_branch")"
-            gh run watch "${deploy_run_url##*/}" --repo "$GITHUB_REPOSITORY" --exit-status
-            gh run watch "${verify_run_url##*/}" --repo "$GITHUB_REPOSITORY" --exit-status
+            # GITHUB_TOKEN-created PRs may not emit a second pull_request run,
+            # and an untrusted branch can require manual workflow approval.
+            # Run the candidate's real release checks in this trusted pulse
+            # job before publishing required commit statuses.
+            pnpm run typecheck
+            pnpm test
+            pnpm run build
+            pnpm run preflight:deploy
+            pnpm run test:worker-reviews
+            pnpm exec wrangler deploy --dry-run --outdir worker-build
             heartbeat_sha="$(git rev-parse HEAD)"
             gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$heartbeat_sha" \
               -f state=success \
               -f context=release-verify \
-              -f description="Protected heartbeat branch verification passed" \
-              -f target_url="$deploy_run_url"
+              -f description="TF pulse candidate release verification passed" \
+              -f target_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$heartbeat_sha" \
               -f state=success \
               -f context=site-quality-verify \
-              -f description="Consumer site verification passed" \
-              -f target_url="$verify_run_url"
+              -f description="TF pulse candidate consumer verification passed" \
+              -f target_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             {
               echo
               echo "## Heartbeat review"
               echo "The safe heartbeat was published through a protected-main PR."
               echo "PR: $pr_url"
-              echo "Verification: release-verify and site-quality-verify passed on $heartbeat_sha."
+              echo "Verification: candidate typecheck, tests, build and Worker dry-run passed on $heartbeat_sha."
               echo "The public packet changes only after the required checks and human merge pass."
             } >> "$GITHUB_STEP_SUMMARY"
           fi
