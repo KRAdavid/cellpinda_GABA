@@ -6,7 +6,7 @@
 
 ### Worker 운영 origin 검증 결정
 
-strict Worker 배포 readiness에 `PUBLIC_SITE_URL` 검사를 추가했다. workflow가 주입하는 `CLOUDFLARE_WORKER_URL`과 preflight가 확인하는 origin이 다르면 배포를 중지하며, HTTPS·자격증명·query·hash가 없는 origin만 통과한다. 이는 소비자 콘텐츠를 바꾸는 작업이 아니라 canonical·Open Graph·회원 기능의 운영 주소를 하나로 고정하는 출시 안전장치다. 현재 release HEAD는 `1e9710d`이고, Cloudflare Secrets와 Worker origin이 준비되기 전에는 Pages 정적 배포를 유지한다.
+strict Worker 배포 readiness에 `PUBLIC_SITE_URL` 검사를 추가했다. workflow가 주입하는 `CLOUDFLARE_WORKER_URL`과 preflight가 확인하는 origin이 다르면 배포를 중지하며, HTTPS·자격증명·query·hash가 없는 origin만 통과한다. 이는 소비자 콘텐츠를 바꾸는 작업이 아니라 canonical·Open Graph·회원 기능의 운영 주소를 하나로 고정하는 출시 안전장치다. origin 검증 구현은 `1e9710d`, 이 결정의 배포 기록은 `34b8696`이며, Cloudflare Secrets와 Worker origin이 준비되기 전에는 Pages 정적 배포를 유지한다.
 
 ### B2 표시사항 재감사 — 2026-09-19
 
@@ -16,7 +16,7 @@ strict Worker 배포 readiness에 `PUBLIC_SITE_URL` 검사를 추가했다. work
 
 현재 공개 저장소와 GitHub Pages, 공개 콘텐츠 JSON, 광고·근거 문구, 제품·후기 경로, 게임 시작과 결과, 정적 배포 및 Worker 배포 조건을 점검했다. 검토자는 소비자 마케팅·여정, 연구 문구·근거, 출시·기술 감리 역할로 나눴다. 이는 AI 역할 기반 교차 검토이며 외부 자격 전문가의 회의나 소비자 조사·법률 승인으로 간주하지 않는다.
 
-기준 소스는 최초 감리 시점 `3dd3aaa`였고, 공개 콘텐츠 기준 `7f95e9f`까지 수정 후 전체 검증을 다시 수행했다. 감사 문서 갱신 이후의 release HEAD는 `1e9710d`이며, 공개 콘텐츠 산출물은 동일하다. 최신 공개 Pages는 정적 사이트로 작동하지만, 이 사이트에 API·데이터베이스까지 연결된 운영 플랫폼은 아니다.
+기준 소스는 최초 감리 시점 `3dd3aaa`였고, 공개 콘텐츠 기준 `7f95e9f`까지 수정 후 전체 검증을 다시 수행했다. strict origin 검증 구현은 `1e9710d`, 감사 기록 반영 커밋은 `34b8696`이며, 두 커밋 사이 공개 콘텐츠 산출물은 동일하다. 최신 공개 Pages는 정적 사이트로 작동하지만, 이 사이트에 API·데이터베이스까지 연결된 운영 플랫폼은 아니다.
 
 ## 토론 결과와 수정 결정
 
