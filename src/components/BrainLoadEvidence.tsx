@@ -33,8 +33,8 @@ const evidence: EvidenceCard[] = [
     id: 'sleep-cognition',
     number: '02',
     tag: '잠과 집중',
-    title: '잠이 부족하면 다음 날 집중하기 어려울 수 있어요',
-    summary: '잠을 줄인 실험 61개를 모아 보니, 다음 날 기억하고 집중하고 판단하기가 어려워지는 경우가 많았어요.',
+    title: '잠을 줄인 뒤 집중·기억·판단이 어려워질 수 있어요',
+    summary: '잠을 줄인 실험 61개를 모아 보니, 기억하고 집중하고 판단하는 일이 어려워지는 경우가 많았어요.',
     finding: '잠들기 어렵거나 잠이 부족한 날이 이어지면, 다음 날 할 일 사이에 쉴 시간을 먼저 넣어 보세요.',
     scale: '61개 연구 결과를 함께 살펴봄',
     source: 'PubMed · 잠을 줄였을 때 기억과 집중에 생기는 변화',
@@ -46,7 +46,7 @@ const evidence: EvidenceCard[] = [
     id: 'stress-health',
     number: '03',
     tag: '오래 이어지는 스트레스',
-    title: '긴장이 오래 이어지면 몸과 마음을 함께 돌봐야 해요',
+    title: '스트레스 부담이 오래 쌓이면 몸과 마음 건강을 함께 살펴야 해요',
     summary: '267개 연구를 모아 본 논문에서, 오래 이어진 스트레스와 몸·마음 건강 문제는 함께 나타나는 경우가 많았어요.',
     finding: '긴장과 피로가 오래 이어져 잠이나 일상에 영향을 주면 생활을 조정하고 전문가와 상담해 보세요.',
     scale: '267개 연구를 모아 살펴봄',
@@ -91,6 +91,7 @@ export default function BrainLoadEvidence() {
           <div>
             <p className="chapter">잠·집중·휴식에 관한 연구</p>
             <h2 id="brain-load-evidence-heading">피곤할 때,<br />집중과 휴식은 어떻게 달라질까요?</h2>
+            <p className="brain-load-evidence-boundary">뇌 피로를 이해하기 위한 일반 연구 · GABA 섭취 연구와 별도</p>
           </div>
           <p>잠이 부족하거나 긴장이 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
         </div>

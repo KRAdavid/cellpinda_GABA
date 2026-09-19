@@ -54,8 +54,8 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
   return <section id="reviews" className="section sage review-experience" aria-labelledby="review-heading">
     <div className="wrap">
       <div className="section-head">
-        <div><p className="chapter">구매자 후기</p><h2 id="review-heading">{quotes.length?<>먼저 구매한 사람들의<br/>후기를 읽어보세요.</>:destinations.length?<>가바 1500<br />실제 구매 후기</>:<>구매자 후기를<br />확인해 보세요.</>}</h2></div>
-        <p>{quotes.length ? <>작성일과 사용 기간을 함께 확인해 보세요.<br />제품 구성도 나란히 볼 수 있어요.</> : <>스마트스토어에서 작성일과 사용 기간,<br />맛과 포장에 관한 이야기를 살펴보세요.</>}</p>
+        <div><p className="chapter">구매자 후기</p><h2 id="review-heading">{quotes.length?<>먼저 구매한 사람들의<br/>후기를 읽어보세요.</>:destinations.length?<>가바 1500<br />스마트스토어 후기</>:<>구매자 후기를<br />확인해 보세요.</>}</h2></div>
+        <p>{quotes.length ? <>작성일과 사용 기간을 함께 확인해 보세요.<br />제품 구성도 나란히 볼 수 있어요.</> : <>스마트스토어에서 작성일·사용 기간·<br />제품 경험을 확인해 보세요.</>}</p>
       </div>
       {quotes.length>0&&<div className="review-quotes">
         <p>이 사이트에 소개한 구매자 후기예요. 구매한 이유와 사용 기간을 함께 살펴보세요.</p>

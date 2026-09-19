@@ -209,6 +209,7 @@
 .research-library-disclosure{display:flex;align-items:flex-start;gap:8px;max-width:840px;margin:12px 0 0;color:#53675a;font-size:14px;line-height:1.55}
 .research-library-disclosure>svg{flex:0 0 auto;margin-top:2px;color:#647d6b}
 .research-library-kind--non-ingestion{width:max-content;max-width:100%;padding:6px 10px;border:1px solid #cbd8ce;border-radius:999px;background:#f1f5f1;font-size:14px;line-height:1.45;letter-spacing:0;color:#263a2d}
+.research-library-kind--general{width:max-content;max-width:100%;padding:6px 10px;border:1px solid #cbd8ce;border-radius:999px;background:#f7faf7;font-size:14px;line-height:1.45;letter-spacing:0;color:#263a2d;overflow-wrap:anywhere}
 .research-library-kind--non-ingestion .research-library-kind-mark{background:#536b5b;box-shadow:0 0 0 4px #e1e9e2}
 .research-library-disclosure>span{display:grid;gap:2px}
 .research-library-disclosure strong{font-size:13px;color:#43584a}
@@ -269,6 +270,7 @@
   .research-library-card-featured h3{margin:.35rem 0 .2rem;font-size:20px;line-height:1.28}
   .research-library-card-featured>.study-insight{margin-top:7px;padding-top:8px}
   .research-library-disclosure{margin-top:8px;font-size:13px;line-height:1.5}
+  .research-library-kind--general,.research-library-kind--non-ingestion{white-space:normal}
 }
 
 /* Center the research reading column and balance the featured study on wide screens. */
