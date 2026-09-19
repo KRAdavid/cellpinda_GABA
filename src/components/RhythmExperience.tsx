@@ -454,7 +454,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             <div className="rhythm-result-commerce" aria-label="제품과 구매자 후기 확인">
               <p className="rhythm-eyebrow">더 알아보기</p>
               <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>
-              <a className="rhythm-text-button" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={() => onEvent('review_open', { productId: 'gaba1500', path: '/result' })}>구매자 후기 읽기 <ArrowUpRight size={18} aria-hidden="true" /></a>
+              <a className="rhythm-text-button" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 후기 읽기 · 새 창" onClick={() => onEvent('review_open', { productId: 'gaba1500', path: '/result' })}>가바 1500 스마트스토어 후기 읽기 <ArrowUpRight size={18} aria-hidden="true" /></a>
             </div>
           </div>
         </div>

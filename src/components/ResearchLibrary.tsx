@@ -10,6 +10,7 @@ export type ResearchMetadata = {
   consumerDetail?: string;
   consumerContext?: string;
   consumerDisclosure?: string;
+  consumerDisclosureStatus?: string;
   consumerVisual?: ConsumerVisual;
   consumerScope?: string;
   consumerFindingFirst?: boolean;
@@ -178,7 +179,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       <h3>{reviewOverview ? '사람 연구 14편의 범위 살펴보기' : metadata.question || claim.topic}</h3>
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{reviewOverview ? '자료에서 다룬 내용' : findingFirst ? '사람 연구에서 관찰된 변화' : '연구는 이렇게 진행됐어요'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}
-      {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>논문에 적힌 연구비·저자 소속</strong>{metadata.consumerDisclosure}</span></p> : null}
+      {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>{metadata.consumerDisclosureStatus === 'not_reported_in_pubmed_abstract' ? '연구비·저자 소속 확인 상태' : '논문에 적힌 연구비·저자 소속'}</strong>{metadata.consumerDisclosure}</span></p> : null}
       <details className="research-detail" onToggle={event => {
         if (event.currentTarget.open) onOpen?.(claim.id);
       }}>

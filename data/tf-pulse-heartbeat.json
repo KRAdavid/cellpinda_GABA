@@ -3,15 +3,15 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-19T05:14:50.031Z",
-  "snapshotHash": "e5a684072ce0da967cb018d1246c54597da97cc7e24f436f67b383506c6cf09b",
-  "previousSnapshotHash": "e5a684072ce0da967cb018d1246c54597da97cc7e24f436f67b383506c6cf09b",
+  "generatedAt": "2026-09-19T06:21:10.640Z",
+  "snapshotHash": "f2484eb7e7f5be6644c9ac91d69a09a363c657efb7e032d4f1c3b18c5cafc4a7",
+  "previousSnapshotHash": "f2484eb7e7f5be6644c9ac91d69a09a363c657efb7e032d4f1c3b18c5cafc4a7",
   "stateChanged": false,
   "requiresHumanDecision": true,
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-19T11:14:50.031Z",
+    "nextReviewAt": "2026-09-19T12:21:10.640Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -204,7 +204,7 @@
   "safeExecution": {
     "mode": "safe_internal_tf_run",
     "status": "MET",
-    "validatedAt": "2026-09-19T05:14:50.619Z",
+    "validatedAt": "2026-09-19T06:21:11.843Z",
     "executionBoundary": {
       "state": "READY",
       "risk": "B_INTERNAL_WRITE",

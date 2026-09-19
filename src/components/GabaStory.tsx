@@ -14,7 +14,7 @@ export default function GabaStory({claims, hasReviews = false}:{claims:Claim[]; 
     <div className="story-questions" style={{marginTop:48}}><h3>읽다가 떠오르는 질문</h3>
       <details className="claim"><summary>1분 체크 결과는 어떻게 보면 되나요?</summary><div><p>최근 일주일의 잠과 휴식에 대한 내 답변을 보여드려요. 오늘 쉴 시간이 필요하다면 5분부터 시작해 보세요.</p><a className="text-link" href="#rhythm">오늘 해볼 휴식 보기 →</a></div></details>
       <details className="claim"><summary>제품의 먹는 법과 주의사항은 어디서 확인하나요?</summary><div><p>제품 포장과 스마트스토어 상품 페이지에 적힌 표시사항을 확인해 주세요.</p><a className="text-link" href="#products">제품 구성 확인 →</a></div></details>
-      <details className="claim"><summary>제품을 고르기 전에 무엇을 보면 좋을까요?</summary><div><p>한 포에 든 양과 포장 구성, 먹는 방법을 확인해 보세요. 다른 사람의 후기는 작성 시점과 사용 기간도 함께 살펴보세요.</p><a className="text-link" href="#products">제품 구성 확인 →</a>{hasReviews ? <> · <a className="text-link" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer">스마트스토어 후기 읽기 ↗</a></> : null}</div></details>
+      <details className="claim"><summary>제품을 고르기 전에 무엇을 보면 좋을까요?</summary><div><p>한 포에 든 양과 포장 구성, 먹는 방법을 확인해 보세요. 다른 사람의 후기는 작성 시점과 사용 기간도 함께 살펴보세요.</p><a className="text-link" href="#products">제품 구성 확인 →</a>{hasReviews ? <> · <a className="text-link" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 후기 읽기 · 새 창">가바 1500 스마트스토어 후기 읽기 ↗</a></> : null}</div></details>
     </div>
   </div></section>;
 }
