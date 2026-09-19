@@ -125,7 +125,7 @@ requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보
 requireMatch(researchRouteHtml, /사람 연구 살펴보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*<section id="fermentation"/, 'the GABA explanation and teaser must flow directly into the fermentation story without a duplicate research gateway');
-requireMatch(research, /canonicalStudySources/, 'research list must suppress duplicate records of the same paper across all source links');
+requireMatch(research, /canonicalStudySourceKeys/, 'research list must suppress duplicate records of the same paper across all source links');
 requireMatch(research, /GABA 연구 한눈에/, 'research list must have a direct consumer heading');
 requireMatch(story, /사람 대상 GABA 연구 읽기/, 'GABA introduction must link to the separate research route');
 if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(app + story)) fail('a study result must appear in only one detailed research section');

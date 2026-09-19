@@ -1,6 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {Activity, Brain, Clock3, Dumbbell, FlaskConical, Info, Moon, Search, Share2, UsersRound} from 'lucide-react';
 import StudyInsightVisual from './StudyInsightVisual';
+import {canonicalStudySourceKeys, isPublicUrl} from '../domain/research-sources';
 import './ResearchLibrary.css';
 
 export type ResearchMetadata = {
@@ -62,34 +63,6 @@ function compactStudyType(value?: string, dose?: string): string {
   return value;
 }
 
-function isPublicUrl(value: string | null): value is string {
-  if (!value) return false;
-  try { return ['https:', 'http:'].includes(new URL(value).protocol); }
-  catch { return false; }
-}
-
-function canonicalStudySources(claim: Claim): string[] {
-  const keys = claim.sources.filter(item => isPublicUrl(item.url)).flatMap(source => {
-    try {
-      const url = new URL(source.url!);
-      const doi = decodeURIComponent(`${url.pathname}${url.search}`).match(/10\.\d{4,9}\/[a-z0-9._;()/:+-]+/i)?.[0]
-        ?.replace(/[?#].*$/, '')
-        ?.replace(/\/(?:full|abstract|pdf)\/?$/i, '')
-        ?.replace(/[.,;]+$/, '')
-        ?.toLowerCase();
-      if (doi) return [`doi:${doi}`];
-      const pmid = url.hostname.includes('pubmed') && url.pathname.match(/\/(\d+)\/?/)?.[1];
-      if (pmid) return [`pmid:${pmid}`];
-      const pmc = url.pathname.match(/\/(PMC\d+)\/?/i)?.[1];
-      if (pmc) return [`pmc:${pmc.toLowerCase()}`];
-      return [`${url.hostname.replace(/^www\./, '').toLowerCase()}${url.pathname.replace(/\/+$/, '').toLowerCase()}`];
-    } catch {
-      return [];
-    }
-  });
-  return keys.length ? [...new Set(keys)] : [claim.id];
-}
-
 export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 한눈에', onOpen }: Props) {
   const [linkStatus,setLinkStatus]=useState('');
   const [manualLink,setManualLink]=useState('');
@@ -110,7 +83,8 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   );
   const seenStudySources = new Set<string>();
   const studies = eligibleStudies.filter(claim => {
-    const sourceKeys = canonicalStudySources(claim);
+    const sourceKeys = canonicalStudySourceKeys(claim.sources);
+    if (!sourceKeys.length) sourceKeys.push(claim.id);
     if (sourceKeys.some(key => seenStudySources.has(key))) return false;
     sourceKeys.forEach(key => seenStudySources.add(key));
     return true;
