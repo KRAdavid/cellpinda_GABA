@@ -58,7 +58,7 @@ jobs:
           VITE_BASE_PATH: /cellpinda_GABA/
           VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
           PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
-          RELEASE_SHA: ${{ github.sha }}
+          RELEASE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           RELEASE_RUNTIME_MODE: static
         run: |
           pnpm exec vite build --base "$VITE_BASE_PATH" --outDir dist-pages
@@ -197,7 +197,7 @@ jobs:
         env:
           VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
           PUBLIC_SITE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
-          RELEASE_SHA: ${{ github.sha }}
+          RELEASE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           RELEASE_RUNTIME_MODE: worker
         run: pnpm run build
       - name: Strict deployment readiness gate
