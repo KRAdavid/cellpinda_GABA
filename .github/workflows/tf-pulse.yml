@@ -8,6 +8,8 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  actions: read
+  statuses: write
 
 concurrency:
   group: tf-pulse
@@ -60,11 +62,32 @@ jobs:
               pr_url="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$heartbeat_branch" --title "chore: refresh TF pulse heartbeat" --body "Automated safe TF pulse heartbeat update. Required checks and protected-main review remain in force; no external publication, purchase, or approval is performed by this workflow.")"
               echo "Created TF heartbeat PR: $pr_url"
             fi
+
+            # GITHUB_TOKEN-created PRs do not emit a second pull_request run.
+            # Dispatch both verification workflows explicitly, wait for their
+            # real results, and publish those results as required commit
+            # statuses on this exact heartbeat SHA.
+            deploy_run_url="$(gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref "$heartbeat_branch")"
+            verify_run_url="$(gh workflow run verify.yml --repo "$GITHUB_REPOSITORY" --ref "$heartbeat_branch")"
+            gh run watch "${deploy_run_url##*/}" --repo "$GITHUB_REPOSITORY" --exit-status
+            gh run watch "${verify_run_url##*/}" --repo "$GITHUB_REPOSITORY" --exit-status
+            heartbeat_sha="$(git rev-parse HEAD)"
+            gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$heartbeat_sha" \
+              -f state=success \
+              -f context=release-verify \
+              -f description="Protected heartbeat branch verification passed" \
+              -f target_url="$deploy_run_url"
+            gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$heartbeat_sha" \
+              -f state=success \
+              -f context=site-quality-verify \
+              -f description="Consumer site verification passed" \
+              -f target_url="$verify_run_url"
             {
               echo
               echo "## Heartbeat review"
               echo "The safe heartbeat was published through a protected-main PR."
               echo "PR: $pr_url"
+              echo "Verification: release-verify and site-quality-verify passed on $heartbeat_sha."
               echo "The public packet changes only after the required checks and human merge pass."
             } >> "$GITHUB_STEP_SUMMARY"
           fi
