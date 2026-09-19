@@ -6,7 +6,7 @@
 
 ### 최신 업데이트 — 2026-09-19 Worker 공개 origin 이중 검증
 
-Worker를 운영 origin으로 전환할 때 canonical·Open Graph·회원 origin이 서로 다른 주소를 가리키지 않도록, strict 배포 readiness가 `PUBLIC_SITE_URL`을 깨끗한 HTTPS origin으로 다시 확인하도록 보강했다. 배포 workflow는 실제 사용할 `CLOUDFLARE_WORKER_URL`을 같은 검사에 주입하고, workflow 계약 검사가 두 경로의 일치를 차단한다. 현재 release HEAD는 `1e9710d`이며, 공개 Pages 콘텐츠는 변경하지 않고 정적 배포와 Worker 전환을 별도 판정한다.
+Worker를 운영 origin으로 전환할 때 canonical·Open Graph·회원 origin이 서로 다른 주소를 가리키지 않도록, strict 배포 readiness가 `PUBLIC_SITE_URL`을 깨끗한 HTTPS origin으로 다시 확인하도록 보강했다. 배포 workflow는 실제 사용할 `CLOUDFLARE_WORKER_URL`을 같은 검사에 주입하고, workflow 계약 검사가 두 경로의 일치를 차단한다. origin 검증 구현은 `1e9710d`, 이 결정의 배포 기록은 `34b8696`에 남아 있으며, 공개 Pages 콘텐츠는 변경하지 않고 정적 배포와 Worker 전환을 별도 판정한다.
 
 ### 최신 업데이트 — 2026-09-19 공개 이미지 대체텍스트 회귀 가드
 
