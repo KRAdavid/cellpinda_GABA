@@ -28,10 +28,18 @@ const SECURITY_HEADERS:Record<string,string>={
   'X-Frame-Options':'DENY',
 };
 
-function withSecurityHeaders(response:Response,secureTransport:boolean):Response {
+function withSecurityHeaders(response:Response,secureTransport:boolean,pathname:string):Response {
   const headers=new Headers(response.headers);
   for(const [name,value] of Object.entries(SECURITY_HEADERS))headers.set(name,value);
   if(secureTransport)headers.set('Strict-Transport-Security','max-age=31536000; includeSubDomains');
+  const cacheControl=headers.get('Cache-Control') || '';
+  if(!/no-store/i.test(cacheControl)) {
+    const contentType=headers.get('Content-Type') || '';
+    if(contentType.includes('text/html')) headers.set('Cache-Control','max-age=0, must-revalidate');
+    else if(pathname.startsWith('/data/') && contentType.includes('json')) headers.set('Cache-Control','public, max-age=300, must-revalidate');
+    else if(pathname.startsWith('/assets/') && /-[a-z0-9]{8,}\.(?:js|css|woff2)$/i.test(pathname)) headers.set('Cache-Control','public, max-age=31536000, immutable');
+    else if(pathname.startsWith('/assets/')) headers.set('Cache-Control','public, max-age=86400, must-revalidate');
+  }
   return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
 }
 
@@ -94,6 +102,7 @@ export default {
       return reply(404,{error:'Not found'});
     }catch(error){const known=error instanceof Error && 'status' in error && typeof error.status==='number';return reply(known?error.status as number:500,{error:known?error.message:'Internal server error'});}
     })();
-    return withSecurityHeaders(response,new URL(request.url).protocol==='https:');
+    const requestUrl=new URL(request.url);
+    return withSecurityHeaders(response,requestUrl.protocol==='https:',requestUrl.pathname);
   },
 };
