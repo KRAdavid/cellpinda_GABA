@@ -78,6 +78,8 @@ for (const claim of research) {
   if (metadata.consumerContext !== undefined && (typeof metadata.consumerContext !== 'string' || metadata.consumerContext.trim().length < 25 || unsafe.test(metadata.consumerContext))) fail(`${claim.id}.consumerContext must provide plain-language context without a product promise`);
   if (metadata.consumerDisclosure !== undefined && (typeof metadata.consumerDisclosure !== 'string' || metadata.consumerDisclosure.trim().length < 20 || unsafe.test(metadata.consumerDisclosure))) fail(`${claim.id}.consumerDisclosure must plainly disclose research funding or author relationships`);
 }
+const takeaways = research.map(claim => claim.metadata?.hopefulTakeaway).filter(Boolean);
+if (new Set(takeaways).size !== takeaways.length) fail('approved research cards must use distinct next-step copy so the same marketing sentence is not repeated');
 
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(researchLibrary)) fail('research reading route must remain separate from product-purchase links');
 if (researchLibrary.includes('metadata.result') || researchLibrary.includes('metadata.limitations')) fail('consumer research UI must not expose raw internal analysis fields');
