@@ -62,6 +62,25 @@ const metaContent = (html, attribute, value) => {
   return forward?.[1] ?? reverse?.[1] ?? '';
 };
 const canonicalHref = html => /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1] ?? '';
+const validatePublicMetadata = (html, path, expectedCanonical) => {
+  assert.match(html, /<html[^>]+lang="ko"/i, `${path} must declare Korean language`);
+  assert.match(html, /<meta[^>]+name="viewport"[^>]+content="width=device-width/i, `${path} must expose a responsive viewport`);
+  assert.equal(canonicalHref(html), expectedCanonical, `${path} canonical URL is invalid`);
+  assert.match(html, /<title>[^<]*\S[^<]*<\/title>/i, `${path} title is missing`);
+  assert.ok(metaContent(html, 'name', 'description').trim().length >= 20, `${path} description is missing or too short`);
+  assert.ok(metaContent(html, 'property', 'og:title'), `${path} Open Graph title is missing`);
+  assert.ok(metaContent(html, 'property', 'og:description'), `${path} Open Graph description is missing`);
+  const socialImage = metaContent(html, 'property', 'og:image');
+  assert.match(socialImage, /^https:\/\/[^/]+\/[^\s]+\/assets\/.+\.(?:png|webp|svg)$/i, `${path} Open Graph image is invalid`);
+  assert.ok(metaContent(html, 'property', 'og:image:alt').trim().length >= 12, `${path} Open Graph image alt text is missing`);
+  assert.equal(metaContent(html, 'property', 'og:image:width'), '1200', `${path} Open Graph image width is invalid`);
+  assert.equal(metaContent(html, 'property', 'og:image:height'), '630', `${path} Open Graph image height is invalid`);
+  assert.equal(metaContent(html, 'name', 'twitter:card'), 'summary_large_image', `${path} Twitter card is invalid`);
+  assert.ok(metaContent(html, 'name', 'twitter:title'), `${path} Twitter title is missing`);
+  assert.ok(metaContent(html, 'name', 'twitter:description'), `${path} Twitter description is missing`);
+  assert.equal(metaContent(html, 'name', 'twitter:image'), socialImage, `${path} Twitter image must match its Open Graph image`);
+  assert.match(html, /<script[^>]+type="application\/ld\+json">[\s\S]*"inLanguage":"ko-KR"[\s\S]*<\/script>/i, `${path} structured data must declare Korean language`);
+};
 const validateSafeExecution = (value, label) => {
   if (value === undefined) return;
   assert.deepEqual(Object.keys(value).sort(), ['mode', 'status', 'validatedAt', 'executionBoundary', 'preparation', 'checks', 'candidateTaskIds', 'humanGateTaskIds'].sort(), `${label} safe execution fields are invalid`);
@@ -133,6 +152,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const heroImageBytes = await heroImageResponse.arrayBuffer();
     assert.ok(heroImageBytes.byteLength >= 10_000, 'live hero image must contain the published visual asset');
     const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json()]);
+    validatePublicMetadata(pageText, '/', `${base}/`);
+    validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);
     const internalSnapshots = [
       ['/data/operations-queue.json', queueResponse],
       ['/data/tf-pulse.json', pulseResponse],
@@ -143,6 +164,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const productSharePageText = await productSharePageResponse.text();
     const researchPageResponse = await request('/research/');
     const researchPageText = await researchPageResponse.text();
+    validatePublicMetadata(productSharePageText, '/products/', `${base}/products/`);
+    validatePublicMetadata(researchPageText, '/research/', `${base}/research/`);
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
     assert.match(researchPageText, /property="og:title" content="사람을 대상으로 한 GABA 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
     assert.ok(researchPageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live research page must distinguish general GABA research from Cellpinda product research');
@@ -240,6 +263,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(pageText, new RegExp(`<script type="application\\/ld\\+json">\\{"@context":"https:\\/\\/schema\\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"${escapeRegExp(`${base}/`)}"[^<]*"inLanguage":"ko-KR"\\}<\\/script>`), 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';
+      validatePublicMetadata(sharePage, `/share/${id}/`, `${base}/share/${id}/`);
       assert.match(metaContent(sharePage, 'property', 'og:title'), /^공유받은 하루 리듬:/, `share page ${id} is missing an Open Graph title`);
       assert.match(metaContent(sharePage, 'property', 'og:title'), new RegExp(`^공유받은 하루 리듬: ‘${sharedResultLabels[id]} ·`), `share page ${id} must connect its image label to consumer wording`);
       assert.ok(metaContent(sharePage, 'property', 'og:description'), `share page ${id} is missing an Open Graph description`);
