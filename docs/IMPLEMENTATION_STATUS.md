@@ -1,12 +1,12 @@
 # 중간 구현 상태 — 2026-09-11
 
-## 최신 공개 후보 감리 — 2026-09-20 `cf4d7de`
+## 최신 공개 후보 감리 — 2026-09-20
 
-소비자 화면에서 일반 건강 연구와 GABA 섭취 연구가 같은 자료처럼 읽히지 않도록 경계 문구를 명시했다. `GABA 섭취 연구와 별도로, 잠·스트레스·집중을 이해하는 일반 건강 연구예요. 제품 정보는 따로 보여드려요.`를 BrainLoadEvidence에 고정하고 UI 계약으로 재유입을 차단한다. 제품 표기량과 연구용량은 `제품 표기 섭취량과 달라요`로 통일한다.
+소비자 화면에서 일반 건강 연구와 GABA 섭취 연구가 같은 자료처럼 읽히지 않도록 경계 문구를 명시했다. `GABA 섭취 연구와 별도로, 잠·스트레스·집중을 이해하는 일반 건강 연구예요. 제품 정보는 따로 보여드려요.`를 BrainLoadEvidence에 고정하고 UI 계약으로 재유입을 차단한다. 연구 하이라이트 제목은 `GABA를 먹은 사람 연구에서 무엇이 기록됐을까요?`, 일반 건강 연구 제목은 `잠이 부족하면 집중·기억·판단이 흔들릴 수 있어요.`로 바꿔 40~50대 소비자가 질문과 의미를 바로 이해하게 했다. 제품 표기량과 연구용량은 `제품 표기 섭취량과 달라요`로 통일한다.
 
 스토리·티저·연구·후기·구매 전 안내·7일 챌린지의 지연 로딩 구간에 섹션별 스켈레톤과 보조기술용 상태 문구를 연결해 네트워크가 늦어도 빈 공간이 보이지 않게 했다. 티저가 보내는 `teaser_embed_loaded`·`teaser_external_opened` 이벤트는 Node SQLite와 Worker/D1 허용 목록 및 회귀 테스트에 연결했고, 실제 재생을 의미하지 않는 `teaser_play`는 프런트에서 사용하지 않는다.
 
-후보 `cf4d7de`는 107개 테스트, 타입검사, 연구 카피·UI·티저·공개 export 검증, production build, 10개 정적 route 및 65개 manifest 파일 검사를 통과했다. 최신 빌드 초기 JavaScript는 299.93KB( gzip 91.99KB ), CSS는 86.79KB( gzip 16.58KB )다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/)의 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다.
+현재 PR HEAD 후보는 107개 테스트, 타입검사, 연구 카피·UI·티저·공개 export 검증, production build, 10개 정적 route 및 65개 manifest 파일 검사를 통과했다. 최신 빌드 초기 JavaScript는 299.93KB( gzip 91.99KB ), CSS는 86.79KB( gzip 16.58KB )다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/)의 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 후보 SHA는 PR HEAD와 생성된 `release-manifest.json`에서 확인한다.
 
 현재 공개 Pages 루트는 HTTP 200이지만 후보 SHA를 포함하지 않고 `/release-manifest.json`은 HTTP 404다. 따라서 후보가 공개 배포됐다고 판정하지 않는다. B2 제품 표시, B3 후기 권한, B4 티저 공개 승인, C2 Worker/D1 설정, E1 실구매 대사는 기존 사람 판단 게이트로 유지한다.
 
