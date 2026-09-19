@@ -22,19 +22,56 @@ const securityHeaders = response => {
   }
 };
 
-const request = async path => {
+const fetchRoute = async path => {
   const response = await fetch(new URL(path, base), {headers:{'cache-control':'no-cache'},signal:AbortSignal.timeout(12000)});
-  if (!response.ok) throw new Error(`${path} returned HTTP ${response.status}`);
   securityHeaders(response);
   return response;
 };
+const request = async path => {
+  const response = await fetchRoute(path);
+  if (!response.ok) throw new Error(`${path} returned HTTP ${response.status}`);
+  return response;
+};
+const cacheContains = (response, ...parts) => {
+  const cacheControl=(response.headers.get('cache-control') || '').toLowerCase();
+  for (const part of parts) if (!cacheControl.includes(part)) throw new Error(`${response.url} has an incomplete cache policy: ${cacheControl || '[missing]'}`);
+};
+const canonicalHref = html => /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1] || '';
+const metaContent = (html, property) => {
+  const escaped=property.replace(/[.*+?^${}()|[\\]\\]/g,'\\\\$&');
+  return new RegExp(`<meta[^>]+property="${escaped}"[^>]+content="([^"]+)"`,'i').exec(html)?.[1] || '';
+};
+const sharedResultIds = ['active','sleep','irregular','sensory','unrested','steady'];
 
-const [pageResponse, healthResponse, contentResponse] = await Promise.all([
-  request('/'), request('/api/health'), request('/api/content'),
+const [pageResponse, healthResponse, contentResponse, robotsResponse, sitemapResponse, productResponse, researchResponse, focusResponse, accountResponse, missingResponse] = await Promise.all([
+  request('/'), request('/api/health'), request('/api/content'), request('/robots.txt'), request('/sitemap.xml'),
+  request('/products/'), request('/research/'), request('/focus/'), request('/account'), fetchRoute('/release-audit-missing-route'),
 ]);
-const [page, health, content] = await Promise.all([
-  pageResponse.text(), healthResponse.json(), contentResponse.json(),
+if (missingResponse.status !== 404) throw new Error(`/release-audit-missing-route returned HTTP ${missingResponse.status}; Worker unknown paths must remain 404`);
+const [page, health, content, robots, sitemap, productPage, researchPage, focusPage, accountPage] = await Promise.all([
+  pageResponse.text(), healthResponse.json(), contentResponse.json(), robotsResponse.text(), sitemapResponse.text(),
+  productResponse.text(), researchResponse.text(), focusResponse.text(), accountResponse.text(),
 ]);
+if (pageResponse.headers.get('cache-control') !== 'no-store') throw new Error('Worker root shell must be no-store because runtime metadata is rewritten');
+if (accountResponse.headers.get('cache-control') !== 'no-store') throw new Error('Worker account shell must be no-store because it is a private runtime view');
+cacheContains(contentResponse,'public','max-age=300','must-revalidate');
+if (/no-store/i.test(robotsResponse.headers.get('cache-control') || '') || /no-store/i.test(sitemapResponse.headers.get('cache-control') || '')) throw new Error('Worker robots/sitemap must remain cacheable public documents');
+if (!robots.includes(`Sitemap: ${base.origin}/sitemap.xml`) || !sitemap.includes(`<loc>${base.origin}/</loc>`)) throw new Error('Worker robots/sitemap must use the configured public origin');
+if (canonicalHref(page)!==`${base.origin}/` || !metaContent(page,'og:url')) throw new Error('Worker root canonical/Open Graph metadata is invalid');
+if (canonicalHref(account)!==`${base.origin}/` || !/noindex, nofollow, noarchive/.test(account)) throw new Error('Worker account shell must be private and non-indexable');
+if (canonicalHref(productPage)!==`${base.origin}/products/` || metaContent(productPage,'og:url')!==`${base.origin}/products/`) throw new Error('Worker product route must preserve its product canonical/Open Graph URL');
+if (canonicalHref(researchPage)!==`${base.origin}/research/` || metaContent(researchPage,'og:url')!==`${base.origin}/research/`) throw new Error('Worker research route must preserve its research canonical/Open Graph URL');
+if (canonicalHref(focusPage)!==`${base.origin}/focus/` || metaContent(focusPage,'og:url')!==`${base.origin}/focus/`) throw new Error('Worker focus route must preserve its invite canonical/Open Graph URL');
+const sitemapUrls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
+const expectedSitemap=[`${base.origin}/`,`${base.origin}/products/`,`${base.origin}/research/`,`${base.origin}/focus/`,...sharedResultIds.map(id=>`${base.origin}/share/${id}/`)];
+if (JSON.stringify(sitemapUrls)!==JSON.stringify(expectedSitemap)) throw new Error('Worker sitemap route set is not the public route set');
+const moduleSources=[...page.matchAll(/<script[^>]+type="module"[^>]+src="([^"]+)"/gi)].map(match=>match[1]).filter(Boolean);
+if (!moduleSources.length) throw new Error('Worker root shell did not expose a module bundle');
+for (const source of moduleSources) cacheContains(await request(new URL(source,base).pathname),'public','max-age=31536000','immutable');
+const sharePages=await Promise.all(sharedResultIds.map(async id=>({id,html:await (await request(`/share/${id}/`)).text()})));
+for (const {id,html} of sharePages) {
+  if (canonicalHref(html)!==`${base.origin}/share/${id}/` || metaContent(html,'og:url')!==`${base.origin}/share/${id}/`) throw new Error(`Worker share route ${id} lost its canonical/Open Graph URL`);
+}
 if (!page.includes('<div id="root"></div>')) throw new Error('Worker static root is not the Cellpinda app shell');
 if (health.ok !== true || health.persistence !== 'cloudflare-d1') throw new Error('Worker health does not confirm Cloudflare D1 persistence');
 if (content.products?.length !== 1 || content.products[0]?.id !== 'gaba1500') throw new Error('Worker public API does not expose the approved 1500 product');
@@ -45,4 +82,4 @@ if (content.claims.some(claim => claim.id === 'research-sakashita-2019')) throw 
 const powers = content.claims.find(claim => claim.id === 'research-powers-2008');
 if (!powers?.metadata?.consumerSummary?.includes('남성 11명') || !powers.metadata.consumerFinding?.includes('근육 크기와 근력 변화는 측정하지 않았어요')) throw new Error('Worker public API must preserve the Powers design and scope before its finding');
 
-console.log(JSON.stringify({origin:base.origin,staticPage:'ok',health:'cloudflare-d1',research:research.length,products:content.products.length,securityHeaders:'ok',heldResearchExcluded:true,status:'ok'}));
+console.log(JSON.stringify({origin:base.origin,staticPage:'ok',health:'cloudflare-d1',research:research.length,products:content.products.length,publicRoutes:{product:true,research:true,focus:true,shares:sharePages.length,notFound:404},cachePolicy:'ok',securityHeaders:'ok',heldResearchExcluded:true,status:'ok'}));

@@ -158,3 +158,11 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - Worker 자산 경로는 `/account`에서 루트 앱 셸을 제공하고, 존재하지 않는 경로는 전용 404 응답을 유지하도록 정리했다. 404 문서에는 홈의 소셜 메타데이터를 덧씌우지 않는다.
 - Worker 관측 설정은 10% 샘플링과 쿼리 문자열 비식별화를 사용하도록 명시했다. 공개 export 검증이 이 계약과 `404-page` 자산 정책을 검사한다.
 - `pnpm run typecheck`, Worker·소셜 테스트 20개, `pnpm run validate:public`, `pnpm run validate:deploy-workflow`를 통과했다. 정적 Pages 공개본은 계속 정상이며 Worker/D1 연결은 Cloudflare 설정값 입력 전까지 `STATIC_ONLY`로 유지한다.
+
+### 2026-09-19 `68bc120` 운영·보안·Worker 전환 재감리
+
+- 최신 main `68bc120`의 배포 실행 [35419297333](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35419297333)은 `release-verify`, Pages 게시, 정적 live smoke, `release-status`가 모두 성공했다. Worker readiness는 외부 Cloudflare 설정값이 없어 비활성화됐고, 릴리스 결과는 `STATIC_ONLY`다.
+- 라이브 Pages는 루트·제품·연구·focus 초대·6개 공유 경로·robots·sitemap에서 HTTP 200, 존재하지 않는 경로에서 HTTP 404를 반환했다. 루트 canonical·OG와 `robots.txt`의 sitemap, 제품 SmartStore 후기 링크, 공개 연구 원장 6건은 현재 Pages origin과 일치한다. 라이브 응답은 GitHub Pages 한계상 HSTS만 확인되고 CSP·X-Content-Type-Options·Referrer-Policy·Permissions-Policy는 제공되지 않는다.
+- 로컬 Wrangler Worker를 실제로 요청해 기존 `single-page-application` 설정이 `/ops`, `/admin`, 존재하지 않는 경로를 모두 200 앱 셸로 돌려주는 SEO·404 문제를 재현했다. Worker 전환을 위해 `not_found_handling`을 `404-page`로 바꾸고, `/account`만 루트 앱 셸을 재사용하도록 경계를 명시했다. Worker runtime 메타데이터 재작성은 루트·계정·관리자 셸에만 적용해 `/products/`, `/research/`, `/focus/`, `/share/{id}/`의 빌드된 canonical·OG를 보존한다.
+- Worker live 검증을 API·보안 헤더만 확인하던 범위에서 확장해 404, 계정 비색인, robots/sitemap origin, 제품·연구·focus·공유 canonical/OG, 루트·데이터·해시 번들 cache-control까지 검사한다. `wrangler.jsonc`에는 query string을 로그에서 가리는 10% head sampling 관측성을 추가하고, 공개 export 검사가 이 설정과 404 정책을 계속 강제한다.
+- 로컬 검증 결과: `pnpm test` 104개 통과, `pnpm run build`, `pnpm run typecheck`, `pnpm run validate:public`, `pnpm run validate:deploy-workflow`, Wrangler `deploy --dry-run` 통과. 실제 Cloudflare Worker의 보안 헤더·D1·캐시·SEO smoke는 비밀값과 운영 origin이 제공된 뒤 배포 job에서 수행해야 한다.
