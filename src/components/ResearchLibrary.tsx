@@ -72,8 +72,12 @@ function canonicalStudySources(claim: Claim): string[] {
   const keys = claim.sources.filter(item => isPublicUrl(item.url)).flatMap(source => {
     try {
       const url = new URL(source.url!);
-      const doi = decodeURIComponent(`${url.pathname}${url.search}`).match(/10\.\d{4,9}\/[a-z0-9._;()/:+-]+/i)?.[0];
-      if (doi) return [`doi:${doi.replace(/[.,;]+$/, '').toLowerCase()}`];
+      const doi = decodeURIComponent(`${url.pathname}${url.search}`).match(/10\.\d{4,9}\/[a-z0-9._;()/:+-]+/i)?.[0]
+        ?.replace(/[?#].*$/, '')
+        ?.replace(/\/(?:full|abstract|pdf)\/?$/i, '')
+        ?.replace(/[.,;]+$/, '')
+        ?.toLowerCase();
+      if (doi) return [`doi:${doi}`];
       const pmid = url.hostname.includes('pubmed') && url.pathname.match(/\/(\d+)\/?/)?.[1];
       if (pmid) return [`pmid:${pmid}`];
       const pmc = url.pathname.match(/\/(PMC\d+)\/?/i)?.[1];
