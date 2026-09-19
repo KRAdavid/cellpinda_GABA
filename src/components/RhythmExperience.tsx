@@ -95,7 +95,7 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
           <span>각 점은 질문 하나를 나타내요.</span>
         </div>
       </div>
-      <progress className="rhythm-load-progress-accessible" value={score} max={15} aria-label={`지난 7일 답변 점수 ${score}점, 15점 만점`} />
+      <progress className="rhythm-load-progress-accessible" value={score} max={15} aria-label={`지난 7일 다섯 질문에 답한 기록 ${score}점, 15점 만점`} />
       <p className="rhythm-load-footnote">건강 상태를 검사한 결과가 아니라, 다섯 질문에 고른 답을 정리한 기록이에요.</p>
     </div>
   );
