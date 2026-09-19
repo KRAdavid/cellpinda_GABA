@@ -2,7 +2,7 @@
 
 ## 현재 릴리스 후보 기준 — 2026-09-20
 
-현재 검토 기준은 후보 커밋 `ba85ca9d10b16c095cd108bde60b481cc73c8d87`와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. `release-verify`와 `site-quality-verify`가 모두 통과했으며, 320px·390px·768px·1440px에서 홈·연구·제품·공유 챌린지 경로의 가로 넘침과 CTA 잘림이 없음을 Chrome CDP로 확인했다. 공유 챌린지의 `먼저 연습하고 시작하기` CTA는 연습 화면의 `초록 신호를 눌러 보세요.` 안내로 정상 전환된다.
+현재 검토 기준은 후보 브랜치와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. 최신 후보 검증에서 `release-verify`와 `site-quality-verify`가 모두 통과했으며, 320px·390px·768px·1440px에서 홈·연구·제품·공유 챌린지 경로의 가로 넘침과 CTA 잘림이 없음을 Chrome CDP로 확인했다. 공유 챌린지의 `먼저 연습하고 시작하기` CTA는 연습 화면의 `초록 신호를 눌러 보세요.` 안내로 정상 전환된다.
 
 후보는 `OPEN / MERGEABLE / REVIEW_REQUIRED` 상태이며, PR이 `main`에 병합되기 전까지 공개 Pages는 이전 `main` 번들을 유지한다. 공개 배포를 완료로 판정하지 않도록 다음 게이트를 별도로 유지한다: B2 제품 표시 최종 승인(`VERIFYING`), B3 후기 재게시 권한(`WAITING`), B4 티저 자막·권리·CTA(`WAITING`), C2 Cloudflare Worker/D1 운영 시크릿(`WAITING`), E1 실제 주문·취소·환불 대사(`WAITING`). 티저 공개 상태는 계속 `HOLD`다.
 
