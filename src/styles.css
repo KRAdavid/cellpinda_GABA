@@ -185,3 +185,7 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
   .study-paired-spread{margin-top:1px}
   .study-paired-spread>summary{font-size:13px}
 }
+
+/* Keep the first visual layer deterministic while the hero image decodes. */
+.hero-photo{z-index:0;display:block}
+.hero-copy{z-index:1}
