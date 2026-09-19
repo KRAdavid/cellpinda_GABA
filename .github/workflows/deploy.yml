@@ -217,3 +217,40 @@ jobs:
         env:
           WORKER_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
         run: node scripts/validate-worker-live.mjs
+
+  release-status:
+    needs: [deploy-pages, smoke-live, worker-readiness, deploy-worker]
+    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Publish release mode
+        env:
+          PAGES_RESULT: ${{ needs.deploy-pages.result }}
+          SMOKE_RESULT: ${{ needs.smoke-live.result }}
+          WORKER_RESULT: ${{ needs.deploy-worker.result }}
+          WORKER_ENABLED: ${{ needs.worker-readiness.outputs.enabled }}
+        run: |
+          if [ "$PAGES_RESULT" != "success" ] || [ "$SMOKE_RESULT" != "success" ]; then
+            mode="RELEASE_FAILED"
+          elif [ "$WORKER_ENABLED" = "true" ] && [ "$WORKER_RESULT" = "success" ]; then
+            mode="FULL_RELEASE"
+          else
+            mode="STATIC_ONLY"
+          fi
+
+          {
+            echo "## Release mode"
+            echo "**$mode**"
+            echo "- GitHub Pages: $PAGES_RESULT"
+            echo "- Public smoke check: $SMOKE_RESULT"
+            echo "- Worker/D1 readiness: ${WORKER_ENABLED:-false}"
+            echo "- Worker/D1 deployment: $WORKER_RESULT"
+            if [ "$mode" = "STATIC_ONLY" ]; then
+              echo "- Worker/D1 remains HOLD; this run publishes the static public site only."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$mode" = "RELEASE_FAILED" ]; then
+            exit 1
+          fi
