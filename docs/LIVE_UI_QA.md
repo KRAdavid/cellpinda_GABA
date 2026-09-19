@@ -1,8 +1,8 @@
 # 공개 Pages UI 검증 기록
 
-## 최신 배포 상태 — 2026-09-19 (main `c9f4f8c`)
+## 최신 배포 상태 — 2026-09-19 (main `22dd63e`)
 
-최신 main 배포 run `35444036261`은 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 공개 연구 인덱스는 6건, claim은 12개, 제품은 1개이며 티저는 `HOLD`로 외부 미디어 URL을 노출하지 않는다. 라이브 검증은 `teaserPreview: {status: "HOLD", publicUrl: false}`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다. 연구 카드의 상세·출처 안내는 소비자 언어 라벨로 배포됐고 제품 직접 진입 메타데이터도 제품 전용으로 정렬됐다. 연구 인덱스의 content/master 설계 라벨 parity와 DOI 경로 중복 정규화, Worker API 장애 시 정적 fallback 차단도 같은 배포에서 검증됐다.
+최신 main 배포 run `35444540241`은 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 공개 연구 인덱스는 6건, claim은 12개, 제품은 1개이며 티저는 `HOLD`로 외부 미디어 URL을 노출하지 않는다. 라이브 검증은 `teaserPreview: {status: "HOLD", publicUrl: false}`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다. 연구 카드의 상세·출처 안내는 소비자 언어 라벨로 배포됐고 제품 직접 진입 메타데이터도 제품 전용으로 정렬됐다. 연구 인덱스의 content/master 설계 라벨 parity와 DOI 경로 중복 정규화, Worker API 장애 시 정적 fallback 차단, 비기본 origin runtime mode 필수 검증도 같은 배포에서 확인했다.
 
 ### 제품 직접 진입 메타데이터 확인 — 2026-09-19
 
