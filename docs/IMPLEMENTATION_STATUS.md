@@ -8,9 +8,9 @@
 
 ## 릴리스 후보 통합 검증 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 후보 커밋 `b2b2e42`에 게임 이름 통일, 연구 출처 변형 중복 제거, 브라우저 오디오 차단 안내를 통합했다. `release-verify` [35448469245](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448469245)와 `site-quality-verify` [35448469265](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448469265)는 모두 통과했다.
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 커밋 `eb34bf1`에 게임 이름 통일, 연구 출처 변형 중복 제거, 브라우저 오디오 차단 안내와 통합 감리 기록을 반영했다. 최신 `release-verify` [35448932465](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448932465)와 `site-quality-verify` [35448932486](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448932486)는 모두 통과했다.
 
-후보 브랜치의 `pnpm test` 107개, 타입검사, production build, 공개 export 검증을 통과했다. 로컬 production preview에 API를 연결해 Chromium CDP로 390px·1440px의 홈·연구·제품·공유·뇌컨디션 확인 챌린지를 확인했으며 가로 넘침 0건·콘솔 오류 0건이었다. 연구 페이지는 소비자용 제목과 주제 카드, 제품 경로는 `셀핀다 가바 1500 · 30포 구성 보기`, 챌린지 경로는 `너도 해봐 · 뇌컨디션 확인 챌린지`를 사용한다.
+후보 브랜치의 `pnpm test` 107개, 타입검사, production build, 공개 export 검증을 통과했다. 로컬 production preview에 API를 연결해 Chromium CDP로 390px·1440px의 홈·연구·제품·공유·뇌컨디션 확인 챌린지를 확인했으며 가로 넘침 0건·콘솔 오류 0건이었다. 연구 페이지는 소비자용 제목과 주제 카드, 제품 경로는 `셀핀다 가바 1500 · 30포 구성 보기`, 챌린지 경로는 `너도 해봐 · 뇌컨디션 확인 챌린지`를 사용한다. 자동 재생이 차단된 브라우저에서도 `브라우저가 자동 소리를 막았어요… 화면 신호로 계속 진행합니다.` 안내가 게임 카드 안에서 겹침 없이 표시되는 것을 별도 CDP 재현으로 확인했다.
 
 이 후보는 아직 main에 병합되지 않았으므로 공개 Pages에는 적용되지 않았다. CODEOWNER 독립 승인 후에만 Pages 배포 검증을 실행한다. B2·B3·B4·C2·E1 외부 게이트와 티저 `HOLD` 상태는 그대로 유지한다.
 

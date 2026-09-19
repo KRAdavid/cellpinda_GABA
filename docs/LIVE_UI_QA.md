@@ -2,7 +2,7 @@
 
 ## 릴리스 후보 통합 화면 검증 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 후보 `b2b2e42`를 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 최신 후보 `eb34bf1`을 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
 
 | 점검 항목 | 결과 |
 |---|---|
@@ -11,6 +11,7 @@ PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 후보 `b2b2e42`를
 | 연구 경로 | `사람을 대상으로 한 GABA 연구를 쉽게 보기 \| 셀핀다`, 주제 카드와 연구 카드 표시 |
 | 제품 경로 | `셀핀다 가바 1500 · 30포 구성 보기`, Smart Store CTA 표시 |
 | 챌린지 경로 | `너도 해봐 · 뇌컨디션 확인 챌린지 \| 셀핀다`, 연습 시작·규칙 카드 표시 |
+| 오디오 차단 fallback | 자동 재생을 거부하는 가상 `AudioContext`에서 차단 안내와 화면 신호 진행 문구가 게임 카드 안에 표시되고 레이아웃 이동 없음 |
 | 오류 | 확인한 경로 모두 콘솔 오류 0건 |
 
 이 기록은 후보 브랜치의 실제 화면 검증이며, main 공개 Pages 배포 완료를 의미하지 않는다.
