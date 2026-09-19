@@ -7,7 +7,7 @@ export default function GabaStory({claims, hasReviews = false}:{claims:Claim[]; 
     <div className="section-head"><div><p className="chapter">01 / GABA 이야기</p><h2>GABA는<br/>뇌세포끼리 신호를 주고받을 때 쓰여요.</h2></div><p>몸속에서 하는 일과 사람 연구에서 살펴본 내용을<br/>그림과 쉬운 말로 확인해 보세요.</p></div>
     <div className="story-steps">
       <article><span>1</span><div><h3>GABA가 뭔가요?</h3>{definition?<p>{definition.publicText}</p>:<p>GABA는 뇌세포 사이에서 신호를 주고받는 과정에 관여하는 물질이에요.</p>}</div></article>
-      <article><span>2</span><div><h3>GABA 연구를 더 알아보고 싶나요?</h3><p>사람 연구에서 누가 참여했고 무엇을 살펴봤는지 쉬운 말과 그림으로 확인해 보세요.</p><a className="text-link" href={`${import.meta.env.BASE_URL}research/`}>GABA 사람 연구 읽기 →</a></div></article>
+      <article><span>2</span><div><h3>GABA 연구를 더 알아보고 싶나요?</h3><p>사람 연구에서 누가 참여했고 무엇을 살펴봤는지 쉬운 말과 그림으로 확인해 보세요.</p><a className="text-link" href={`${import.meta.env.BASE_URL}research/`}>사람 대상 GABA 연구 읽기 →</a></div></article>
       <article><span>3</span><div><h3>제품 포장 확인하기</h3><p>제품 한 포에 든 양, 포장 구성, 먹는 방법은 제품 포장에 적혀 있어요.</p><a className="text-link" href="#products">제품 구성 확인하기 →</a></div></article>
     </div>
     {definition?.sources.filter(source=>source.url?.startsWith('https://')).map(source=><a className="text-link" key={source.url} href={source.url!} target="_blank" rel="noopener noreferrer" aria-label={`${source.title} 연구 출처 보기`}>연구 출처 보기 ↗</a>)}

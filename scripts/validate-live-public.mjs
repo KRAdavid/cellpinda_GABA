@@ -144,7 +144,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const researchPageResponse = await request('/research/');
     const researchPageText = await researchPageResponse.text();
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
-    assert.match(researchPageText, /property="og:title" content="일반 GABA 사람 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
+    assert.match(researchPageText, /property="og:title" content="사람을 대상으로 한 GABA 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
     assert.ok(researchPageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live research page must distinguish general GABA research from Cellpinda product research');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && researchPageText.includes('손끝 감각: GABA를 먹지 않은 관찰 연구'), 'live research fallback must keep the consumer-first topic guide and non-ingestion study boundary');
