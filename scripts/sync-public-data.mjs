@@ -147,7 +147,7 @@ for(const record of masterIndex.records){
 }
 function consumerStudyType(value='',dose=''){
   if(/문헌고찰|메타분석|사람 연구 여러 편|여러 연구를 모아/.test(value)) return '사람 연구 여러 편을 모아 살펴봄';
-  if(/GABA를 먹지 않고|GABA 섭취 없이/.test(dose) || /관찰|MRS|뇌 신호|손끝 연습/.test(value)) return 'GABA를 먹지 않은 관찰 연구 · 셀핀다 제품 시험 아님';
+  if(/GABA를 먹지 않고|GABA 섭취 없이/.test(dose) || /관찰|MRS|뇌 신호|손끝 연습/.test(value)) return 'GABA를 먹지 않은 관찰 연구';
   if(/운동/.test(value)) return '사람이 참여한 운동 연구';
   if(/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return 'GABA를 먹고 비교한 사람 연구';
   return '사람 연구';
