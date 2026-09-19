@@ -156,6 +156,7 @@ requireMatch(app, /menu\?<X\s+aria-hidden="true"\s*\/>:<Menu\s+aria-hidden="true
 requireMatch(app, /className="product-visual" role="img" aria-label=\{/, 'product composition diagram must expose an accessible text alternative');
 requireMatch(app, /function ExperienceLoading\([\s\S]*?aria-busy="true"[\s\S]*?experience-loading-grid/, 'async content must show a visual loading state without leaving the first screen blank');
 requireMatch(styles, /\.sr-only\{position:absolute!important[\s\S]*?\.experience-loading-grid\{display:grid/, 'screen-reader-only content and visual loading state must have shared styles');
+if (/<Suspense fallback=\{null\}><(?:GabaStory|TeaserPreview|GabaResearchHighlights|BrainLoadEvidence|PurchaseQuestions|ReviewExperience|SevenDayChallenge)/.test(app)) fail('below-fold consumer sections must keep a visible loading state while their lazy bundles arrive');
 requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.product-portion-grid\{grid-template-columns:repeat\(10,12px\);gap:6px[\s\S]*?\.product-body \.product-cta\{order:2/, 'mobile product composition must stay compact so the primary purchase CTA enters the first product viewport');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
 requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, 'result sharing must invite the recipient to run their own check');
