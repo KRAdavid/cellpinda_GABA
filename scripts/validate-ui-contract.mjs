@@ -140,7 +140,7 @@ requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\
 if (/rhythm-recovery-intro|rhythm-load-signals/.test(rhythm)) fail('the 1-minute check must not repeat its intro before the start button');
 requireMatch(rhythm, /rhythm-start-scenes[\s\S]*?질문에 나오는 생활 장면/, 'optional everyday examples must stay secondary to the check CTA');
 requireMatch(rhythm, /rhythm-load-answer-dots[\s\S]*value >= 2 \? 'is-filled' : ''/, 'the result must visualize frequent self-reported rest gaps by question, not as a measured brain image');
-requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?자주 쉬지 못했다고 답한 순간이 있어요/, 'frequent responses must lead to a clear, non-diagnostic rest suggestion');
+requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?최근 7일, 힘들었다고 답한 순간이 있어요/, 'higher response load must lead to a clear, non-diagnostic rest suggestion');
 requireMatch(rhythm, /<h3 ref=\{resultRef\}[\s\S]*?rhythm-result-primary-actions[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?<BrainLoadVisual/, 'the privacy-preserving invitation must appear below the result name before the score visualization');
 requireMatch(rhythm, /const description = `5개 질문 중 \$\{frequentAnswers\}개에서 힘들었다고 답했어요\.`[\s\S]*?다섯 질문에 고른 답을 정리한 기록이에요\./, 'the answer visualization must clearly describe its self-report basis');
 if (/products-intro-actions|products-intro-buy|products-review-shortcut/.test(app)) fail('product price and review shortcuts must not be repeated in the product intro beside their destination cards');
