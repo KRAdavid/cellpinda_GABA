@@ -66,6 +66,7 @@ jobs:
           pnpm run generate:release-manifest -- dist-pages
           pnpm run validate:release-manifest -- dist-pages
           node scripts/check-public-artifacts.mjs dist-pages
+          pnpm run validate:static-bundle -- dist-pages
       - name: Verify review publishing with isolated local D1
         run: pnpm run test:worker-reviews
       - name: Bundle Worker without deploying

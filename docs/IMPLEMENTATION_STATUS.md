@@ -593,3 +593,7 @@ GitHub Pages와 같은 `/cellpinda_GABA/` 경로로 정적 빌드를 렌더링�
 ## 2026-09-20 반응형 최종 후보 감리
 
 최종 후보 production preview를 Chrome CDP로 320px·390px·768px·1440px에서 다시 확인했다. 홈·연구·제품·공유 챌린지 경로 모두 문서 가로 넘침이 없었고, 모바일 CTA `먼저 연습하고 시작하기`가 화면 밖으로 잘리지 않았다. 공유 챌린지 경로에서도 같은 CTA를 누르면 연습 화면의 `초록 신호를 눌러 보세요.` 안내로 전환된다. 이 결과는 현재 후보 번들의 반응형·핵심 전환 경로를 확인한 기록이며, 실제 기기·브라우저 조합과 외부 소비자 조사를 대신하지 않는다.
+
+## 2026-09-20 정적 배포 route gate 및 후기 fallback 보강
+
+Pages 업로드 직전에 모든 공개 route의 실제 `index.html` 존재 여부, 한국어 문서 언어, viewport, canonical, 내부 운영 문구 누출을 검사하는 `validate:static-bundle` 단계를 추가했다. 홈·제품·연구·focus·6개 공유 경로 총 10개를 production과 Pages 번들에서 각각 확인하며, Worker 모드 번들도 같은 정적 자산 검사를 통과해야 한다. 제품 정적 fallback에는 사용자가 지정한 스마트스토어 후기 직행 링크도 추가해 JavaScript가 꺼진 환경에서도 후기까지 바로 이동할 수 있게 했다. 정적 매니페스트·공개 artifact·workflow 계약·전체 107개 테스트와 static/worker build 검증을 다시 통과했다.

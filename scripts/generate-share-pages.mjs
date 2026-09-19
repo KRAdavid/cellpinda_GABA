@@ -65,6 +65,7 @@ const productDescription = `셀핀다 가바 1500 · ${product.servings}포 구�
 const productCanonical = `${siteRoot}/products/`;
 const productImage = `${siteRoot}/assets/product-composition-1500.png`;
 const productStoreUrl = product.officialUrl;
+const productReviewUrl = `${productStoreUrl}#REVIEW_DIALOG`;
 const productDestination = '../?view=products#products';
 const productSchema = JSON.stringify({
   '@context': 'https://schema.org',
@@ -105,6 +106,7 @@ const productShareHtml = `<!doctype html>
 <p>셀핀다 가바 1500 · ${product.servings}포 구성입니다. 낱포 표시는 제품 포장에서, 가격과 재고는 스마트스토어에서 확인해 주세요.</p>
 <p><a href="${productDestination}" style="color:#158457;font-weight:700">사이트에서 제품 구성 보기 →</a></p>
 <p><a href="${escapeHtml(productStoreUrl)}" style="color:#158457;font-weight:700">스마트스토어에서 판매 정보 보기 ↗</a></p>
+<p><a href="${escapeHtml(productReviewUrl)}" style="color:#158457;font-weight:700">스마트스토어에서 후기 읽기 ↗</a></p>
 </main><script>(function(){const target=new URL('../',location.href);target.searchParams.set('view','products');for(const key of ['ref','campaign']){const value=new URLSearchParams(location.search).get(key)||'';if(/^[A-Za-z0-9_-]{1,64}$/.test(value))target.searchParams.set(key,value);}target.hash='products';location.replace(target.toString());})()</script>
 </body></html>
 `;
