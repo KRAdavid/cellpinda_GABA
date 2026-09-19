@@ -56,7 +56,7 @@ if (!(researchRoute.indexOf('<ResearchLibrary') >= 0 && !researchRoute.includes(
 requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서 관찰된 변화/, 'selected research findings must be visibly labeled before methods are opened');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
 requireMatch(hero, /잠과 휴식 1분 체크/, 'the first screen must have one clear action to start the check');
-requireMatch(app, /특허 문서의 예시[\s\S]*?유산균과 재료 성분으로 GABA를 만드는 방법[\s\S]*?특허 문서 보기/, 'fermentation visual must be labeled as a patent example and link to its source');
+requireMatch(app, /특허 문서의 기술 예시[\s\S]*?특허 문서에 GABA를 만드는 방법[\s\S]*?특허 문서 보기/, 'fermentation visual must be labeled as a patent example and link to its source');
 if (/발효하기|걸러내기|한 포에 든 양 확인|품질 살피기|p\.amountMg|p\.totalG/.test(app)) fail('consumer product page must not present an unverified production flow or per-packet active amount');
 if (/hero-game-link|스마트스토어|상품 정보·가격 보기|className="hero-product"/.test(hero)) fail('the first screen must not compete with the check CTA using game or purchase links');
 requireMatch(app, /if\(rhythmIdFromUrl\(url\)\)[\s\S]*?getElementById\('rhythm'\)\?\.scrollIntoView/, 'a shared rhythm query must scroll to the shared result after the page mounts');
@@ -124,7 +124,7 @@ if ((app.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighli
 for (const marker of ['study-time-comparison', 'study-paired-groups', 'study-paired-trajectory', 'study-paired-spread', 'study-pair-metrics', 'study-journey-outcome', 'study-observation-map', 'study-ratio-hero', 'study-group-row']) requireMatch(studyInsightVisual, new RegExp(marker), `illustrated research comparison ${marker} is missing`);
 requireMatch(studyInsightVisual, /잠들기까지 걸린 평균 시간[\s\S]*연구 조건[\s\S]*visual\.beforeLabel[\s\S]*visual\.afterLabel[\s\S]*참여자별 기록 차이 보기/, 'sleep chart must make the metric, research conditions and before-to-after comparison easy to scan');
 requireMatch(researchStyles, /research-library-kind--non-ingestion[\s\S]*?font-size:14px[\s\S]*?color:#263a2d/, 'non-ingestion GABA studies must have a readable, explicit label');
-requireMatch(app, /특허 문서의 예시[\s\S]*?유산균과 재료 성분으로 GABA를 만드는 방법[\s\S]*?특허 문서 보기/, 'fermentation visual must distinguish a general patent example from the current product process');
+requireMatch(app, /특허 문서의 기술 예시[\s\S]*?특허 문서에 GABA를 만드는 방법[\s\S]*?특허 문서 보기/, 'fermentation visual must distinguish a general patent example from the current product process');
 if (/조건·수치·한계 자세히 보기|연구 조건과 원문 확인하기|수치와 제품 적용 문장은 펼쳐서|연구 카드에서 조건 확인|숫자와 출처 더 보기|근거 식별자|정량분석/.test(app + research + story + indexHtml)) fail('researcher-oriented detail labels leaked into consumer source');
 requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\s\S]*?\}, 180\)/, 'touch answers must auto-advance to the next question');
 if (/rhythm-recovery-intro|rhythm-load-signals/.test(rhythm)) fail('the 1-minute check must not repeat its intro before the start button');

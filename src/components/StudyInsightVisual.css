@@ -84,3 +84,5 @@
 .study-insight--journey li .study-journey-arrow{display:none}
 .study-paired-measure strong small,.study-group-row>strong small,.study-time-comparison strong small,.study-ratio-hero>strong small{font-size:14px}
 @media(max-width:420px){.study-time-comparison{grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:4px}.study-ratio-bars>div,.study-group-row{grid-template-columns:minmax(74px,.85fr) minmax(34px,1.2fr) auto;gap:6px}.study-paired-measure{grid-template-columns:72px minmax(28px,1fr) 76px;gap:5px}}
+@media(max-width:420px){.study-pair-metrics{grid-template-columns:minmax(0,1fr);gap:12px}.study-pair-metrics>div+div{padding-top:12px;padding-left:0;border-top:1px solid #e6ebe6;border-left:0}}
+@media(max-width:420px){.study-pair-metrics{grid-template-columns:minmax(0,1fr);gap:12px}.study-pair-metrics>div+div{padding-top:12px;padding-left:0;border-top:1px solid #e6ebe6;border-left:0}}

@@ -114,7 +114,7 @@
     {
       "id": "patent-enzyme",
       "topic": "제조 기술",
-      "publicText": "효소를 이용해 순도 높은 GABA를 만드는 방법이 특허 문서에 소개돼 있어요.",
+      "publicText": "특허 문서에 GABA를 만드는 방법이 소개돼 있어요.",
       "status": "approved",
       "sources": [
         {
@@ -371,7 +371,7 @@
         "productApplicability": "발효 쌀배아 GABA 정제 하루 300mg을 사용했어요. 셀핀다 가바 1500과는 별도 제품이에요.",
         "consumerScope": "수면 불편을 호소한 성인을 대상으로 GABA 정제와 GABA가 없는 비교 정제를 살펴봤어요.",
         "consumerSummary": "수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제나 GABA가 없는 비슷한 정제를 4주 먹었어요. 잠드는 시간을 두 그룹에서 살펴봤어요.",
-        "consumerFinding": "GABA 정제 그룹은 시작 때 평균 13.4분, 비교 정제 그룹은 7.0분이었어요. 4주 뒤에는 각각 5.7분과 15.2분으로 기록됐고, 비교 그룹은 10명으로 더 적었어요.",
+        "consumerFinding": "GABA 정제 그룹은 시작 때 평균 13.4분, 비교 정제 그룹은 7.0분이었어요. 4주 뒤에는 각각 5.7분과 15.2분으로 기록됐어요. 두 그룹의 참여자 수가 달라 숫자 변화는 연구 조건과 함께 살펴봐야 해요.",
         "consumerVisual": {
           "kind": "paired-before-after",
           "metric": "잠들기까지 걸린 평균 시간",
@@ -594,7 +594,7 @@
         "productApplicability": "잠 연구는 하루 100mg 캡슐을 1주 먹었어요. 별도 혈액 검사는 200mg을 한 번 먹고 진행했어요.",
         "consumerScope": "수면 설문에서 잠의 질이 낮게 나온 사람들을 대상으로 GABA 캡슐과 비교 캡슐을 살펴봤어요.",
         "consumerSummary": "GABA 캡슐을 먹은 주에는 비교 캡슐을 먹은 주보다 평균 잠드는 시간이 5분 짧았어요. 눈이 빠르게 움직이지 않는 수면 시간은 2.2% 길게 기록됐어요.",
-        "consumerFinding": "일본 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 먹었어요. 평균 잠드는 시간은 GABA 조건에서 5분 짧았고, 눈이 빠르게 움직이지 않는 수면 시간은 2.2% 길게 기록됐어요.",
+        "consumerFinding": "일본 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 먹었어요. 비교 캡슐을 먹은 주보다 평균 잠드는 시간이 5분 짧았고, 눈이 빠르게 움직이지 않는 수면 시간은 2.2% 길게 기록됐어요.",
         "consumerDisclosure": "논문에 표시된 저자 5명 모두 Pharma Foods International 소속이에요.",
         "consumerVisual": {
           "kind": "metric-pair",

@@ -55,9 +55,9 @@ type Props = {
 function compactStudyType(value?: string, dose?: string): string {
   if (/GABA를 먹지 않고|GABA 섭취 없이/.test(dose || '') || /관찰|MRS|뇌 신호|손끝 연습/.test(value || '')) return 'GABA를 먹지 않은 연구 · 손끝 연습과 뇌 신호';
   if (!value) return 'GABA 관련 연구';
-  if (/문헌고찰|여러 연구를 모아|사람 연구 여러 편/.test(value)) return '사람 연구 여러 편을 모아 살펴봄';
+  if (/문헌고찰|여러 연구를 모아|사람 연구 여러 편/.test(value)) return '사람 연구 여러 편을 모아 정리한 자료 · 셀핀다 제품 시험 아님';
   if (/운동/.test(value)) return '사람이 참여한 운동 연구';
-  if (/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return 'GABA를 먹고 비교한 사람 연구';
+  if (/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return '일반 GABA 섭취 연구 · 셀핀다 제품 시험 아님';
   return value;
 }
 
@@ -163,6 +163,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
     const metadata = claim.metadata!;
     const reviewOverview = claim.id === 'research-review-2020';
     const nonIngestionStudy = /GABA를 먹지 않고|GABA 섭취 없이/.test(metadata.dose || '');
+    const generalResearch = reviewOverview || !nonIngestionStudy;
     const resultVisualFirst = metadata.consumerVisual?.kind === 'paired-before-after';
     const findingFirst = Boolean(metadata.consumerFindingFirst && !metadata.consumerVisual && metadata.consumerFinding);
     const takeaway = reviewOverview
@@ -173,7 +174,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       ? metadata.consumerScope || metadata.consumerSummary || metadata.consumerFinding
       : metadata.consumerSummary || metadata.consumerFinding || metadata.consumerScope;
     return <article id={claim.id} className={`research-library-card${featured ? ` research-library-card-featured${resultVisualFirst ? ' research-library-card-featured--visual-first' : ''}` : ''}`} key={claim.id}>
-      <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{reviewOverview ? '여러 연구를 모아 본 자료 · 2020년 2월까지' : compactStudyType(metadata.studyType, metadata.dose)}</p>
+      <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}${generalResearch ? ' research-library-kind--general' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{reviewOverview ? '사람 연구 여러 편을 모아 정리한 자료 · 셀핀다 제품 시험 아님 · 2020년 2월까지' : compactStudyType(metadata.studyType, metadata.dose)}</p>
       <h3>{reviewOverview ? '사람 연구 14편의 범위 살펴보기' : metadata.question || claim.topic}</h3>
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{reviewOverview ? '자료에서 다룬 내용' : findingFirst ? '사람 연구에서 관찰된 변화' : '연구는 이렇게 진행됐어요'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}
