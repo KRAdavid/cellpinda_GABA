@@ -263,6 +263,16 @@ const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver
 if (!smartStoreLinks.length || smartStoreLinks.some(url => ![approvedSmartStoreUrl, approvedSmartStoreReviewUrl].includes(url)) || !smartStoreLinks.includes(approvedSmartStoreUrl) || !smartStoreLinks.includes(approvedSmartStoreReviewUrl)) {
   fail(`consumer Smart Store links must use the approved product detail or exact review dialog (${approvedSmartStoreUrl} / ${approvedSmartStoreReviewUrl})`);
 }
+const consumerImageTags = [...consumerSource.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
+if (consumerImageTags.some(tag => !/\balt\s*=\s*['"][^'"]*['"]/i.test(tag))) {
+  fail('consumer images must provide an explicit alt attribute');
+}
+const staticImagePages = ['public/products/index.html'];
+for (const relative of staticImagePages) {
+  const html = await read(relative);
+  const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
+  if (imageTags.some(tag => !/\balt\s*=\s*['"][^'"]*['"]/i.test(tag))) fail(`${relative} images must provide an explicit alt attribute`);
+}
 
 const shareRoot = resolve(root, 'public/share');
 const shareIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
