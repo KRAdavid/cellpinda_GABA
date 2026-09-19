@@ -7,6 +7,8 @@ const outputDirectory = resolve(process.cwd(), process.argv[2] || 'dist');
 const target = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL || undefined);
 const defaultPath = publicSitePath(DEFAULT_PUBLIC_SITE_URL);
 const targetPath = publicSitePath(target);
+const defaultPathPrefix = `${defaultPath}/`;
+const targetPathPrefix = targetPath ? `${targetPath}/` : '/';
 const textExtensions = /\.(?:html|css|js|json|txt|xml|svg|webmanifest)$/i;
 let files = 0;
 let changed = 0;
@@ -23,6 +25,9 @@ async function walk(directory) {
     const before = await readFile(path, 'utf8');
     const after = before
       .replaceAll(DEFAULT_PUBLIC_SITE_URL, target)
+      // Keep path-only links in the dedicated 404 document aligned when the
+      // same build is deployed below a Worker root or a custom Pages prefix.
+      .replaceAll(defaultPathPrefix, targetPathPrefix)
       .replaceAll(`Disallow: ${defaultPath}/admin`, `Disallow: ${targetPath || ''}/admin`)
       .replaceAll(`Disallow: ${defaultPath}/ops`, `Disallow: ${targetPath || ''}/ops`);
     if (after !== before) {

@@ -2,7 +2,7 @@ import {readFile} from 'node:fs/promises';
 
 const ledger = JSON.parse(await readFile(new URL('../data/content-ledger.json', import.meta.url), 'utf8'));
 const consumerSourceFiles = [
-  'ResearchLibrary.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'StudyInsightVisual.tsx', 'RhythmExperience.tsx',
+  'ResearchLibrary.tsx', 'GabaResearchHighlights.tsx', 'ReviewExperience.tsx', 'GabaStory.tsx', 'StudyInsightVisual.tsx', 'RhythmExperience.tsx',
   'PurchaseQuestions.tsx', 'ProductShare.tsx', 'SevenDayChallenge.tsx', 'TeaserPreview.tsx', 'BrainLoadEvidence.tsx',
   'FatigueGame.tsx', 'MemberRecords.tsx', 'AnalyticsConsent.tsx',
 ];
@@ -13,6 +13,7 @@ const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles
 const appSource = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const researchLibrary = consumerSources['ResearchLibrary.tsx'];
+const gabaResearchHighlights = consumerSources['GabaResearchHighlights.tsx'];
 const gameDomain = await readFile(new URL('../src/domain/fatigue-game.ts', import.meta.url), 'utf8');
 const purchaseQuestions = consumerSources['PurchaseQuestions.tsx'];
 const reviewExperience = consumerSources['ReviewExperience.tsx'];
@@ -45,6 +46,7 @@ const powers = research.find(claim => claim.id === 'research-powers-2008');
 const powersConsumerData = JSON.stringify({publicText:powers?.publicText,metadata:powers?.metadata});
 if (!powers?.metadata?.consumerSummary?.includes('남성 11명') || !powers.metadata.consumerSummary.includes('GABA 3g') || !powers.metadata.consumerSummary.includes('90분') || !powers.metadata?.dose?.includes('GABA 3g') || /750mg 캡슐|750\s*제품/.test(powers.metadata?.dose || '') || !powers.metadata?.consumerScope?.includes('설탕 캡슐') || powers.metadata?.consumerFindingFirst === true || !powers.metadata?.consumerFinding?.includes('성장호르몬 최고 수치') || !powers.metadata.consumerFinding.includes('운동 뒤 혈액 속 변화를 살펴본 자료') || /AUC|곡선|합산|약 4배|400%|누적값|근육 크기와 근력 변화는 측정하지 않았어요/.test(powers.metadata.consumerFinding) || /음료|마시|근육이 커|근력이 좋아/.test(powersConsumerData) || powers.metadata?.consumerVisual) fail('Powers study must lead with its 11-person, single-dose, 90-minute measurement design, avoid removed SKU wording, and keep the outcome in context');
 if (powers?.metadata?.consumerDisclosureStatus !== 'not_reported_in_pubmed_abstract' || powers.metadata?.fullTextDisclosureCheck !== 'required' || !powers.metadata?.consumerDisclosure?.includes('PubMed 초록에는') || !powers.metadata.consumerDisclosure.includes('원문 확인 전까지')) fail('Powers study must show a plain-language disclosure status until the full text is reviewed');
+if (!powers?.metadata?.consumerHighlight?.includes('운동 없이 쉰 조건')) fail('Powers public highlight must distinguish the resting condition from an exercise day');
 const sakashita = ledger.claims.find(claim => claim.id === 'research-sakashita-2019');
 if (sakashita?.status !== 'hold' || sakashita.publicText !== null || !sakashita.holdReason?.includes('독립 통계 검토자') || research.some(claim => claim.id === 'research-sakashita-2019')) fail('Sakashita results must stay out of public copy until independent statistical review');
 if ((appSource.match(/<ResearchLibrary\b/g) ?? []).length !== 1 || /GabaEvidenceHighlights/.test(appSource)) fail('the detailed research library must be the only research-results section on the consumer page');
@@ -54,6 +56,8 @@ if (!researchLibrary.includes('research-topic-cards') || researchLibrary.include
 if (powers?.metadata?.consumerFindingFirst && !researchLibrary.includes('사람 연구에서 관찰된 변화')) fail('the Powers finding must be visible before opening its methods');
 if (!consumerUi.includes('게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.') || !consumerUi.includes('뇌 피로나 건강 상태를 측정한 값은 아니에요.') || !consumerUi.includes('나랑 ‘뇌컨디션 확인 챌린지’ 해볼래?') || !appSource.includes('셀핀다 완제품 연구와는 다른 자료입니다.') || !researchLibrary.includes('GABA를 먹지 않고 살펴본 연구') || !researchLibrary.includes('사람 연구 여러 편을 모아 정리') || !researchLibrary.includes('사람이 GABA를 먹고 비교한 연구') || !researchLibrary.includes('이 연구에서 본 내용') || !researchLibrary.includes('metadata.consumerScope || metadata.consumerSummary') || !researchLibrary.includes('metadata.productApplicability') || !researchLibrary.includes('자료에서 다룬 내용') || !researchLibrary.includes('metadata.consumerDisclosure') || !researchLibrary.includes('research-library-disclosure') || !researchLibrary.includes('metadata.consumerDetail') || !researchLibrary.includes('metadata.consumerContext ?') || !researchLibrary.includes('이 연구, 어떻게 했나요?') || !researchLibrary.includes('출처와 연구 배경') || !researchLibrary.includes('preferredStudyOrder') || !researchLibrary.includes('research-library-browse') || !researchLibrary.includes('if (browse) browse.open = true') || !researchLibrary.includes("new URL('research/',base)") || !researchLibrary.includes('논문 원문 보기') || !researchLibrary.includes('논문 정보 보기') || !researchLibrary.includes('source.title')) fail('research route must show plain-language findings, study relationships and context while preserving product boundaries and deep links');
 if (researchLibrary.includes('일반 GABA 섭취 연구') || researchLibrary.includes('GABA를 먹지 않은 관찰 연구')) fail('research route must not expose the previous researcher-facing study labels');
+if (!gabaResearchHighlights.includes('claim.metadata?.consumerSummary') || !gabaResearchHighlights.includes('claim.metadata?.consumerHighlight')) fail('homepage research highlights must read their consumer summary and result from the reviewed public ledger');
+if (/쉬는 날 GABA|효능|개선됐|안정적으로 유지|도움이 됐/.test(gabaResearchHighlights)) fail('homepage research highlights must keep observed study records separate from product-effect language');
 if (!consumerSources['StudyInsightVisual.tsx'].includes('beforeSd') || !consumerSources['StudyInsightVisual.tsx'].includes('study-paired-trajectory') || !consumerSources['StudyInsightVisual.tsx'].includes('study-paired-spread') || !consumerSources['StudyInsightVisual.tsx'].includes('± 뒤 숫자는 사람마다 기록이 얼마나 달랐는지 보여줘요') || consumerSources['StudyInsightVisual.tsx'].includes('is-featured')) fail('paired study comparison must show both groups and preserve the reported spread behind a plain-language disclosure');
 
 const unsafe = /치료|완치|진단|결핍|예방|효과\s*보장|권장량|먹으면\s*개선|개선.*보장|직접\s*(먹어|경험)|가바\s*(경험|섭취를\s*시작)/;
@@ -62,7 +66,7 @@ const technicalResearchTerms = /무작위.{0,5}|이중눈가림|단일눈가림|
 const collectStrings = value => Array.isArray(value) ? value.flatMap(collectStrings) : value && typeof value === 'object' ? Object.values(value).flatMap(collectStrings) : typeof value === 'string' ? [value] : [];
 for (const claim of research) {
   const metadata = claim.metadata ?? {};
-  const readerCopy = [claim.topic, claim.publicText, metadata.question, metadata.population, metadata.sampleSize, metadata.dose, metadata.duration, metadata.comparison, metadata.outcome, metadata.consumerScope, metadata.consumerSummary, metadata.consumerFinding, metadata.consumerDetail, metadata.consumerContext, metadata.consumerDisclosure, metadata.hopefulTakeaway, metadata.productApplicability, ...collectStrings(metadata.consumerVisual)].filter(Boolean).join(' ');
+  const readerCopy = [claim.topic, claim.publicText, metadata.question, metadata.population, metadata.sampleSize, metadata.dose, metadata.duration, metadata.comparison, metadata.outcome, metadata.consumerScope, metadata.consumerSummary, metadata.consumerFinding, metadata.consumerHighlight, metadata.consumerDetail, metadata.consumerContext, metadata.consumerDisclosure, metadata.hopefulTakeaway, metadata.productApplicability, ...collectStrings(metadata.consumerVisual)].filter(Boolean).join(' ');
   if (technicalResearchTerms.test(readerCopy)) fail(claim.id + ' exposes a researcher-only term in consumer copy');
   if (/제품 권장량과 별개|제품 권장량/.test(readerCopy)) fail(`${claim.id} uses a stale product-serving boundary phrase`);
   if (typeof claim.publicText !== 'string' || claim.publicText.trim().length < 30) fail(`${claim.id}.publicText must be a consumer-ready summary`);
@@ -78,6 +82,10 @@ for (const claim of research) {
     if (typeof metadata.consumerFinding !== 'string' || metadata.consumerFinding.trim().length < 30) fail(`${claim.id}.consumerFinding must state the observed result in consumer language`);
     if (unsafe.test(metadata.consumerFinding)) fail(`${claim.id}.consumerFinding contains an unsupported promise or medical expression`);
     if (discouragedMarketing.test(metadata.consumerFinding)) fail(`${claim.id}.consumerFinding contains a discouraged generalized negative phrase`);
+  }
+  if (metadata.consumerHighlight !== undefined) {
+    if (typeof metadata.consumerHighlight !== 'string' || metadata.consumerHighlight.trim().length < 30) fail(`${claim.id}.consumerHighlight must be a consumer-ready observed-result sentence`);
+    if (unsafe.test(metadata.consumerHighlight) || discouragedMarketing.test(metadata.consumerHighlight)) fail(`${claim.id}.consumerHighlight contains a product promise or discouraged marketing phrase`);
   }
   if (metadata.consumerDetail !== undefined && (typeof metadata.consumerDetail !== 'string' || metadata.consumerDetail.trim().length < 35 || unsafe.test(metadata.consumerDetail))) fail(`${claim.id}.consumerDetail must give the selected research detail without a product promise`);
   if (metadata.consumerContext !== undefined && (typeof metadata.consumerContext !== 'string' || metadata.consumerContext.trim().length < 25 || unsafe.test(metadata.consumerContext))) fail(`${claim.id}.consumerContext must provide plain-language context without a product promise`);
@@ -102,4 +110,4 @@ if (/운동 뒤 혈액 속 호르몬과 몸무게 변화/.test(indexHtml)) fail(
 if (/연구마다 다르게 보고됐어요|근거가 매우 제한적|근거가 제한적/.test(consumerUi)) fail('consumer UI must not expose discouraging review conclusions');
 if (/이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다/.test(purchaseQuestions) || !/먹는 방법·보관법·주의사항은 구매 전에 제품 포장과 스마트스토어에서 확인해 주세요/.test(purchaseQuestions)) fail('purchase guidance must point consumers to the current package and Smart Store details');
 
-console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'consumerFinding', 'consumerDetail', 'hopefulTakeaway', 'productApplicability'], visuals: 'reviewed consumerVisual schemas; raw results stay internal', detailFields: ['result', 'limitations'], flowGuard: 'independent-research-route-with-neutral-product-handoff', status: 'ok'}));
+console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'consumerFinding', 'consumerHighlight', 'consumerDetail', 'hopefulTakeaway', 'productApplicability'], visuals: 'reviewed consumerVisual schemas; raw results stay internal', detailFields: ['result', 'limitations'], flowGuard: 'independent-research-route-with-neutral-product-handoff', status: 'ok'}));

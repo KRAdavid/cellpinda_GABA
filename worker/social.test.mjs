@@ -27,9 +27,10 @@ test('Admin is excluded from indexing and shared classifications',()=>{
 test('Product comparison sharing has its own safe metadata without price or personal data',()=>{
   const meta=socialMetadata(`${PUBLIC_ORIGIN}/?view=products&email=PRIVATE&answers=22222#products`);
   assert.equal(meta.view,'products');assert.equal(meta.type,null);assert.equal(meta.title,'셀핀다 가바 제품 구성 비교 | Cellpinda');
-  assert.equal(meta.description,'1포 내용량과 구성을 확인하고 스마트스토어에서 구매 조건을 살펴보세요.');assert.equal(meta.canonical,`${PUBLIC_ORIGIN}/?view=products`);
-  assert.ok(!socialTags(meta).includes('PRIVATE'));assert.ok(!socialTags(meta).includes('22222'));assert.ok(!socialTags(meta).includes('#products'));
-  assert.equal(socialMetadata('https://hostile.example/?view=products').canonical,`${PUBLIC_ORIGIN}/?view=products`);
+  assert.equal(meta.description,'1포 내용량과 구성을 확인하고 스마트스토어에서 구매 조건을 살펴보세요.');assert.equal(meta.canonical,`${PUBLIC_ORIGIN}/products/`);
+  assert.equal(meta.image,`${PUBLIC_ORIGIN}/assets/product-composition-1500.png`);assert.equal(meta.imageAlt,'셀핀다 가바 1500, 30포 한 상자 구성 안내');
+  assert.ok(!socialTags(meta).includes('PRIVATE'));assert.ok(!socialTags(meta).includes('22222'));assert.ok(!socialTags(meta).includes('#products'));assert.ok(socialTags(meta).includes('og:image:type'));assert.ok(socialTags(meta).includes('property="og:type" content="product"'));
+  assert.equal(socialMetadata('https://hostile.example/?view=products').canonical,`${PUBLIC_ORIGIN}/products/`);
 });
 test('Duplicate or ambiguous product view parameters fall back to generic metadata',()=>{
   for(const query of ['view=products&view=products','view=unknown','view=products&rhythm=active','view=products&rhythm=','view=unknown&rhythm=steady']){

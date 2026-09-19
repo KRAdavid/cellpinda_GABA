@@ -374,6 +374,7 @@
         "consumerScope": "수면 불편을 호소한 성인을 대상으로 GABA 정제와 GABA가 없는 비교 정제를 살펴봤어요.",
         "consumerSummary": "수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제나 GABA가 없는 비슷한 정제를 4주 먹었어요. 잠드는 시간을 두 그룹에서 살펴봤어요.",
         "consumerFinding": "GABA 정제 그룹은 시작 때 평균 13.4분, 비교 정제 그룹은 7.0분이었어요. 4주 뒤에는 각각 5.7분과 15.2분으로 기록됐어요. 두 그룹의 참여자 수가 달라 숫자 변화는 연구 조건과 함께 살펴봐야 해요.",
+        "consumerHighlight": "4주 뒤 잠드는 시간은 GABA 정제 그룹 평균 5.7분, 비교 정제 그룹 평균 15.2분으로 기록됐어요.",
         "consumerVisual": {
           "kind": "paired-before-after",
           "metric": "잠들기까지 걸린 평균 시간",
@@ -537,6 +538,7 @@
         "consumerScope": "건강한 성인 63명이 서로 다른 날 GABA 캡슐과 비교용 캡슐을 먹고, 생각을 많이 쓰는 과제를 했어요. 과제 전후 뇌파와 활력 설문을 살펴봤어요.",
         "consumerSummary": "건강한 성인 63명이 GABA 100mg 캡슐 또는 덱스트린 캡슐을 먹고 과제를 했어요. 과제 뒤 알파·베타 뇌파의 감소 폭은 GABA 조건에서 비교 조건보다 작았어요.",
         "consumerFinding": "이 연구에서는 건강한 성인 63명이 GABA 100mg 캡슐 또는 덱스트린 캡슐을 한 번 먹고 30분 뒤 과제를 했어요. 과제 뒤 뇌파와 활력 설문 점수의 감소 폭이 비교 조건보다 작게 기록됐어요.",
+        "consumerHighlight": "과제 뒤 뇌파와 활력 점수의 감소 폭이 비교 캡슐을 먹었을 때보다 작게 기록됐어요.",
         "consumerVisual": {
           "kind": "study-journey",
           "steps": [
@@ -597,6 +599,7 @@
         "consumerScope": "수면 설문에서 잠의 질이 낮게 나온 사람들을 대상으로 GABA 캡슐과 비교 캡슐을 살펴봤어요.",
         "consumerSummary": "10명 연구에서 GABA 캡슐을 먹은 주에는 비교 캡슐을 먹은 주보다 평균 잠드는 시간이 5분 짧았어요. 수면 기록에서 눈동자 움직임이 적은 수면 단계의 시간은 2.2% 길게 기록됐어요.",
         "consumerFinding": "일본 성인 10명 연구에서 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 먹었어요. 비교 캡슐을 먹은 주보다 평균 잠드는 시간이 5분 짧았고, 수면 기록에서 눈동자 움직임이 적은 수면 단계의 시간이 2.2% 길게 기록됐어요.",
+        "consumerHighlight": "비교 캡슐을 먹은 주보다 평균 잠드는 시간이 5분 짧게 기록됐어요.",
         "consumerDisclosure": "논문에 표시된 저자 5명 모두 Pharma Foods International 소속이에요.",
         "consumerVisual": {
           "kind": "metric-pair",
@@ -654,9 +657,10 @@
         "result": "휴식 조건에서 GABA의 성장호르몬 최고치가 위약보다 약 400%, AUC가 약 375% 높았습니다. 운동 조건에서는 섭취 30분 시점 irGH 약 200%, ifGH 약 175% 높은 반응이 보고됐습니다.",
         "productApplicability": "이 연구에서는 GABA 3g을 한 번 먹고 90분 동안 혈액 속 성장호르몬을 살펴봤어요. 셀핀다 가바 1500과는 별도 연구예요.",
         "consumerScope": "18~30세 운동 경험 남성 11명이 GABA 3g 또는 설탕 캡슐 4개를 물과 함께 먹었어요. 쉰 경우와 운동한 경우로 나눠 90분 동안 혈액 속 성장호르몬을 살펴봤어요.",
-        "consumerSummary": "운동 경험이 있는 남성 11명이 GABA 3g 또는 설탕 캡슐을 한 번 먹고, 쉰 날과 운동한 날에 90분 동안 혈액 속 성장호르몬을 살펴봤어요.",
-        "consumerFinding": "휴식 조건에서는 혈액 속 성장호르몬 최고 수치가 위약보다 높게 기록됐어요. 이번 연구는 운동 뒤 혈액 속 변화를 살펴본 자료예요.",
-        "consumerDetail": "이 연구의 휴식 조건에서 GABA를 먹은 그룹의 성장호르몬 최고 수치는 설탕 캡슐 그룹보다 약 4배 높게 기록됐어요. 운동 조건에서는 섭취 30분 뒤 혈액 수치도 따로 비교했어요.",
+        "consumerSummary": "운동 경험이 있는 남성 11명이 GABA 3g 또는 설탕 캡슐을 한 번 먹고, 운동 없이 쉰 조건과 운동 조건에서 90분 동안 혈액 속 성장호르몬을 살펴봤어요.",
+        "consumerFinding": "운동 없이 쉰 조건에서는 GABA를 먹은 뒤 혈액 속 성장호르몬 최고 수치가 비교 캡슐보다 높게 기록됐어요. 이번 연구는 운동 뒤 혈액 속 변화를 살펴본 자료예요.",
+        "consumerHighlight": "운동 없이 쉰 조건에서 혈액 속 성장호르몬 최고 수치가 비교 캡슐보다 높게 기록됐어요.",
+        "consumerDetail": "이 연구에서 운동 없이 쉰 조건에서는 GABA를 먹은 그룹의 성장호르몬 최고 수치가 설탕 캡슐 그룹보다 약 4배 높게 기록됐어요. 운동 조건에서도 섭취 30분 뒤 혈액 수치를 따로 비교했어요.",
         "consumerDisclosure": "PubMed 초록에는 연구비·저자 소속 정보가 따로 적혀 있지 않아, 원문 확인 전까지 이 부분은 확인 중으로 표시해요.",
         "consumerDisclosureStatus": "not_reported_in_pubmed_abstract",
         "fullTextDisclosureCheck": "required",
@@ -739,6 +743,7 @@
         "consumerScope": "성인 18명이 한 손에 45분 손끝 자극을 받고, 다른 손은 비교 대상으로 두었어요. 뇌 속 GABA 수치와 자극 전후 두 점 구분 점수를 살펴봤어요.",
         "consumerSummary": "성인 18명이 손끝 자극 전후 두 점 구분 점수를 측정했어요. 시작 전 뇌 속 GABA+ 수치와 점수 변화의 관계도 살펴봤어요.",
         "consumerFinding": "성인 18명을 대상으로 45분 손끝 자극을 했어요. 연구진은 자극 전후 점수와 시작 전 뇌 속 GABA+ 수치의 관계를 살펴봤어요.",
+        "consumerHighlight": "손끝 자극 전후 점수와 시작 전 뇌 속 GABA+ 수치의 관계를 함께 기록했어요.",
         "consumerVisual": {
           "kind": "observational-link",
           "leftLabel": "뇌 속 GABA 수치",

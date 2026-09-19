@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
-import {Activity, Brain, Clock3, Dumbbell, FlaskConical, Info, Moon, Search, Share2, UsersRound} from 'lucide-react';
+import {Activity, Brain, Clock3, Dumbbell, FlaskConical, Hand, Info, Moon, Search, Share2, UsersRound} from 'lucide-react';
 import StudyInsightVisual from './StudyInsightVisual';
 import {canonicalStudySourceKeys, isPublicUrl} from '../domain/research-sources';
 import './ResearchLibrary.css';
@@ -8,6 +8,8 @@ export type ResearchMetadata = {
   question?: string;
   consumerSummary?: string;
   consumerFinding?: string;
+  /** Short, reviewed result line used by the homepage research highlights. */
+  consumerHighlight?: string;
   consumerDetail?: string;
   consumerContext?: string;
   consumerDisclosure?: string;
@@ -95,6 +97,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
     {topic:'스트레스·잠', label:'스트레스와 잠', detail:'스트레스와 잠을 본 연구', Icon:Activity},
     {topic:'뇌파·과제', label:'생각을 많이 쓴 뒤', detail:'머리를 많이 쓴 뒤 뇌 신호', Icon:Brain},
     {topic:'운동', label:'운동 뒤', detail:'운동 뒤 혈액 속 변화', Icon:Dumbbell},
+    {topic:'뇌·손끝 연습', label:'손끝 감각', detail:'손끝 자극과 뇌 신호', Icon:Hand},
   ].filter(card => topics.includes(card.topic));
   const activeTopic = topics.includes(topic) ? topic : '';
   const studyTypes = [...new Set(studies.map(claim => claim.metadata!.studyType).filter((value): value is string => Boolean(value)))];
