@@ -1,8 +1,12 @@
 # 공개 Pages UI 검증 기록
 
-## 최신 배포 상태 — 2026-09-19 (main `71d9d12`)
+## 최신 배포 상태 — 2026-09-19 (main `78434f8`)
 
-최신 main 배포 run `35431236921`은 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 공개 연구 인덱스는 6건, claim은 12개, 제품은 1개이며 티저는 `HOLD`로 외부 미디어 URL을 노출하지 않는다. 라이브 검증은 `teaserPreview: {status: "HOLD", publicUrl: false}`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다. 연구 카드의 상세·출처 안내는 소비자 언어 라벨로 배포됐다.
+최신 main 배포 run `35442323770`은 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 공개 연구 인덱스는 6건, claim은 12개, 제품은 1개이며 티저는 `HOLD`로 외부 미디어 URL을 노출하지 않는다. 라이브 검증은 `teaserPreview: {status: "HOLD", publicUrl: false}`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다. 연구 카드의 상세·출처 안내는 소비자 언어 라벨로 배포됐고 제품 직접 진입 메타데이터도 제품 전용으로 정렬됐다.
+
+### 제품 직접 진입 메타데이터 확인 — 2026-09-19
+
+라이브 `?view=products#products`를 Chromium CDP로 열어 제품 전용 제목 `셀핀다 가바 1500 · 30포 구성 보기`, 제품 설명, 구성 대표 이미지, `/products/` canonical과 제품 카드의 30포·기타가공품·스마트스토어 가격·재고 CTA를 확인했다. 홈 화면 제목이 제품 링크 공유에 남는 문제를 보완한 결과다.
 
 ### 최신 소비자 라벨 확인 — 2026-09-19
 
