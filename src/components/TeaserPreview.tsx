@@ -70,7 +70,7 @@ export default function TeaserPreview({onEvent}: Props) {
   return <section id="teaser" className="teaser-section" aria-labelledby="teaser-heading">
     <div className="wrap teaser-wrap">
       <div className="teaser-intro">
-        <p className="chapter">발효가바 영상</p>
+        <p className="chapter">02 / 발효가바 영상</p>
         <h2 id="teaser-heading">발효가바는<br />어떻게 만들어질까요?</h2>
         <p>{preview.description}</p>
         <p className="teaser-context">{isOnHold ? '공개가 확정되면 이 자리에서 바로 볼 수 있어요. 연구와 제품 정보는 아래에서 먼저 확인해 보세요.' : '영상에서는 발효 이야기를, 연구와 제품 메뉴에서는 각각의 정보를 확인해 보세요.'}</p>

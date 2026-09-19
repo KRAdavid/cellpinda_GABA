@@ -192,3 +192,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - 모바일 390px·공개 연구 경로에서 세 라벨을 Chromium CDP로 직접 확인했고, 공개 페이지 제목·연결 상태·콘솔 오류를 함께 점검했다. 연구 상세를 열어도 제품 구매 CTA는 나타나지 않는다.
 - PR [#52](https://github.com/KRAdavid/cellpinda_GABA/pull/52)와 배포 run [35431236921](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35431236921)이 병합·배포됐다. `pnpm test` 104개, 연구 카피·UI 계약·타입검사·전체 빌드·라이브 공개 검증이 통과했다.
 - 이 변경은 연구 내용을 소비자 언어로 읽는 흐름을 개선한 것이며, 제품 효능·권장량·티저 공개 승인이나 외부 40~50대 사용성 조사를 대신하지 않는다. 기존 B2·B3·B4·C2·E1 외부 게이트는 계속 열린 상태다.
+
+### 2026-09-19 화면 흐름 번호 보정
+
+- 메인 화면의 순서를 `01 / GABA 이야기 → 티저 영상 → 03 / 발효가바는?`로 확인한 결과, 티저에 단계 번호가 없어 이야기 흐름이 끊겨 보였다.
+- 티저의 장 번호를 `02 / 발효가바 영상`으로 표시해 쉬운 GABA 설명 다음에 영상을 보고, 이어서 발효 과정과 제품 정보를 확인하는 순서를 한눈에 읽게 했다. 티저 공개 상태·자동 재생·외부 승인 경계는 그대로 유지했다.
+- `validate:ui-contract`, `validate:public`, `validate:research-copy`, `typecheck`, `pnpm test`(104개), 전체 `build`를 다시 통과했다.
