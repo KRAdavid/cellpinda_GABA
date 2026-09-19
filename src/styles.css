@@ -8,6 +8,12 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .story-research-summary{margin-top:24px}.story-summary-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:14px}.story-summary-card{padding:22px;background:#fff;border-radius:6px}.story-summary-kicker{font-size:12px!important;letter-spacing:.08em;color:var(--green)!important;margin:0 0 10px!important}.story-summary-card h4{font-size:20px;line-height:1.45;font-weight:600;letter-spacing:-.03em;margin:0 0 10px}.story-summary-card>p:not(.story-summary-kicker){font-size:14px;line-height:1.8;margin:0}.story-summary-card ul{list-style:none;padding:0;margin:0;display:grid;gap:13px}.story-summary-card li{display:grid;gap:3px;font-size:14px;line-height:1.75}.story-summary-card li strong{color:var(--ink);font-weight:600}.story-summary-card li span{color:#52685c}.story-summary-note{margin:16px 0 0!important;font-size:13px!important;line-height:1.8!important;color:#607567!important}
 @media(max-width:680px){.story-summary-grid{grid-template-columns:1fr;gap:10px}.story-summary-card{padding:18px}}
 
+/* Keep standalone links and disclosure controls comfortable to tap for older users and keyboard users. */
+.text-link,.products-review-shortcut,.header nav a,.claim summary{min-height:44px;display:inline-flex;align-items:center}
+.header nav a{padding-block:8px}
+.claim summary{width:100%}
+@media(max-width:680px){.header nav a{padding-block:10px}.text-link,.products-review-shortcut{padding-block:9px}}
+
 .hero-product{display:flex;gap:16px;align-items:center;margin-top:28px;padding:14px 18px;background:#ffffffed;border:1px solid var(--line);border-radius:12px;width:fit-content;max-width:100%}.hero-product img{width:66px;height:66px;object-fit:contain}.hero-product strong{font-size:15px}.hero-shortcuts{display:flex;gap:12px 20px;flex-wrap:wrap;margin-top:10px;font-size:13px}.hero-shortcuts a{text-decoration:underline;text-underline-offset:4px}.header nav{gap:24px}@media(max-width:1050px) and (min-width:681px){.header{gap:16px;padding:0 20px}.header nav{gap:14px;font-size:13px}.header>.button{padding:10px 14px}}@media(max-width:680px){.hero-product{padding:12px;gap:10px}.hero-product img{width:48px;height:60px}.hero-shortcuts{gap:12px;font-size:12px}.hero-copy{padding-bottom:130px}}
 
 .product-share{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;background:#f1f6f1;border-radius:12px;padding:28px;margin-top:36px}.product-share h3{margin-bottom:10px}.product-share p{font-size:14px;margin-bottom:0}.product-share .text-link{margin:16px 0 0 18px}.product-share label{display:grid;gap:8px;margin-top:16px;font-size:13px}.product-share input{min-width:0;width:100%;padding:12px;border:1px solid #cad3ce}.product-share [role=status]:empty{display:none}.product-share [role=status]{margin-top:16px}@media(max-width:700px){.product-share{grid-template-columns:minmax(0,1fr);padding:22px}.product-share .button{font-size:14px;padding:14px 18px}}
@@ -192,3 +198,8 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 /* Keep the first visual layer deterministic while the hero image decodes. */
 .hero-photo{z-index:0;display:block}
 .hero-copy{z-index:1}
+
+/* Standalone controls should remain easy to tap and keyboard-focus at every breakpoint. */
+.purchase-faq-list summary,.rhythm-rules summary,.brain-load-evidence-details>summary,.research-library .research-detail>summary,.research-library-browse>summary{min-height:44px;display:flex;align-items:center}
+.hero-shortcuts a,.fatigue-game-method a,.brain-load-evidence-source,.research-library-sources .research-library-source a{display:inline-flex;align-items:center;min-height:44px;padding-block:9px}
+.header nav a{min-height:44px;display:inline-flex;align-items:center}

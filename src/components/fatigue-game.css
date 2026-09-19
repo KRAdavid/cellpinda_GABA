@@ -88,7 +88,7 @@
 .fatigue-game-onboarding-actions>.rhythm-button,.fatigue-game-practice-complete>.rhythm-button{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:56px;margin:0;border-radius:9px;font-size:16px}
 .fatigue-game-onboarding-actions>.fatigue-game-sound-toggle{width:auto;min-height:44px;padding:7px 12px;border:0;background:transparent;color:#53695c;font-size:14px}
 .fatigue-game-onboarding-actions>.fatigue-game-sound-toggle:hover{background:#eaf2e9}
-.fatigue-game-skip-practice{min-height:42px;color:#53695c;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.fatigue-game-skip-practice{min-height:44px;padding-block:9px;color:#53695c;font-size:14px;text-decoration:underline;text-underline-offset:3px}
 .fatigue-game-method{width:min(100%,620px);margin-top:2px;border-top:1px solid #d9e5dc;text-align:left}
 .fatigue-game-method>summary{min-height:44px;padding:13px 0 5px;color:#53695c;font-size:14px;font-weight:600;cursor:pointer}
 .fatigue-game-method>p{max-width:none;margin:8px 0 12px;color:#53695c;font-size:14px;line-height:1.75}
