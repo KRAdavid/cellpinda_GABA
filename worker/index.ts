@@ -63,7 +63,14 @@ export default {
     const response=await (async():Promise<Response>=>{
     try {
       const url=new URL(request.url);
-      if(!url.pathname.startsWith('/api/'))return rewriteSocialHtml(request,await env.ASSETS.fetch(request),env.PUBLIC_SITE_URL);
+      if(!url.pathname.startsWith('/api/')) {
+        // `/account` is a client-side member surface with no separate HTML
+        // artifact. Serve the root shell while preserving the original URL so
+        // the client can select the account view. All other unknown paths are
+        // handled by the assets 404-page policy in wrangler.jsonc.
+        const assetRequest=url.pathname==='/account' ? new Request(new URL('/',request.url),request) : request;
+        return rewriteSocialHtml(request,await env.ASSETS.fetch(assetRequest),env.PUBLIC_SITE_URL);
+      }
       const local=['localhost','127.0.0.1','[::1]'].includes(url.hostname);
       if(url.protocol!=='https:' && !local)return reply(400,{error:'HTTPS required'});
       const origin=request.headers.get('origin');if(origin && origin!==url.origin)return reply(403,{error:'Origin not allowed'});

@@ -38,7 +38,13 @@ export function socialTags(meta:ReturnType<typeof socialMetadata>) {
 }
 
 export function rewriteSocialHtml(request:Request,response:Response,configuredOrigin?:string):Response {
-  if(!response.headers.get('content-type')?.includes('text/html'))return response;
+  // Static route documents are built with PUBLIC_SITE_URL and already carry
+  // route-specific canonical/OG metadata. Only root query views and private
+  // account/admin shells need runtime rewriting. Keep 404 documents untouched
+  // so an unknown URL cannot acquire a misleading indexable home-page card.
+  const pathname=new URL(request.url).pathname.replace(/\/+$/,'') || '/';
+  const runtimeMetaPath=pathname==='/' || pathname==='/account' || pathname.startsWith('/account/') || pathname==='/admin' || pathname.startsWith('/admin/');
+  if(response.status!==200 || !runtimeMetaPath || !response.headers.get('content-type')?.includes('text/html'))return response;
   const meta=socialMetadata(request.url,configuredOrigin);
   const headers=new Headers(response.headers);
   headers.set('Cache-Control','no-store');
