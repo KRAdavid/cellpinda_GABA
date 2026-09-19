@@ -204,3 +204,4 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - 모바일 Chromium 감리에서 주제 카드의 제목·설명·건수가 보조기술에서 붙어 읽힐 수 있는 점을 확인했다.
 - 각 카드에 `주제 · 설명 · 연구 수` 순서의 명시적 접근성 라벨을 추가해 시각 정보와 음성 안내가 같은 구조로 전달되도록 했다. 연구 문구·필터 동작·제품 경계는 변경하지 않았다.
 - `validate:ui-contract`, `validate:research-copy`, `validate:public`, `typecheck`, `pnpm test`(104개), 전체 `build`를 통과했다.
+- 같은 라벨이 다시 빠지지 않도록 `validate:ui-contract`에 주제·설명·연구 수 조합을 확인하는 회귀 검사를 추가했다.
