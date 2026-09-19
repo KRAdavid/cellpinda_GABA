@@ -143,6 +143,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(researchPageText, /property="og:title" content="일반 GABA 사람 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
     assert.ok(researchPageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live research page must distinguish general GABA research from Cellpinda product research');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
+    assert.ok(researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && researchPageText.includes('손끝 감각: GABA를 먹지 않은 관찰 연구'), 'live research fallback must keep the consumer-first topic guide and non-ingestion study boundary');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.ok(researchPageText.includes('운동 경험이 있는 남성이 GABA를 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬을 살펴본 연구를 정리했어요.') && !researchPageText.includes('GABA와 단백질을 함께 사용한 연구'), 'live research fallback must match the approved Powers study scope');
     assert.equal(canonicalHref(productSharePageText), `${base}/products/`, 'live product share route must expose a product-specific canonical URL');
