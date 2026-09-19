@@ -1,3 +1,5 @@
+import shareLabels from '../../data/rhythm-share-labels.json' with { type: 'json' };
+
 /** A reflection on five self-reported recovery signals; never a medical assessment. */
 export type AnswerValue = 0 | 1 | 2 | 3;
 export type RhythmId = 'active' | 'sleep' | 'irregular' | 'sensory' | 'unrested' | 'steady';
@@ -85,8 +87,8 @@ export interface RhythmType {
 export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   active: {
     id: 'active',
-    shareLabel: '계속 작동형',
-    name: '퇴근 뒤에도 일이 생각나는 날',
+    shareLabel: shareLabels.active.label,
+    name: shareLabels.active.name,
     description: '일이나 집안일을 끝낸 뒤에도 해야 할 일이 계속 떠올랐다고 답했어요.',
     suggestions: ['남은 일은 메모하고, 오늘 할 일은 여기까지라고 정해 보세요.', '저녁에는 알림을 끄고 10분만 화면에서 떨어져 있어 보세요.'],
     recoveryLevel: 'prioritize',
@@ -95,8 +97,8 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   },
   sleep: {
     id: 'sleep',
-    shareLabel: '잠자리 전환형',
-    name: '누워도 잠이 오지 않았던 날',
+    shareLabel: shareLabels.sleep.label,
+    name: shareLabels.sleep.name,
     description: '침대에 누운 뒤 잠들기까지 오래 걸린 날이 많았다고 답했어요.',
     suggestions: ['잠들기 전 조명을 낮추고 휴대폰을 손이 닿지 않는 곳에 두세요.', '내일 할 일은 메모해 두고, 오늘은 여기까지라고 정해 보세요.'],
     recoveryLevel: 'prioritize',
@@ -105,8 +107,8 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   },
   irregular: {
     id: 'irregular',
-    shareLabel: '휴식 공백형',
-    name: '하루에 쉴 틈이 부족했던 날',
+    shareLabel: shareLabels.irregular.label,
+    name: shareLabels.irregular.name,
     description: '일과 집안일 사이에 잠깐 앉아 쉴 시간도 부족했다고 답했어요.',
     suggestions: ['다음 일정 전에 5분을 비워 두세요.', '쉴 때는 휴대폰 대신 물을 마시거나 창밖을 바라보세요.'],
     recoveryLevel: 'prioritize',
@@ -115,8 +117,8 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   },
   sensory: {
     id: 'sensory',
-    shareLabel: '자극 과부하형',
-    name: '사람과 화면에 지친 날',
+    shareLabel: shareLabels.sensory.label,
+    name: shareLabels.sensory.name,
     description: '사람이 많거나 화면을 오래 본 뒤 짜증 나거나 멍했던 때가 있었다고 답했어요.',
     suggestions: ['화면과 알림을 끄고 조용한 곳에서 10분 쉬어 보세요.', '사람 많은 곳을 다녀온 뒤에는 다음 일을 시작하기 전에 물을 마시며 잠깐 쉬세요.'],
     recoveryLevel: 'prepare',
@@ -125,8 +127,8 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   },
   unrested: {
     id: 'unrested',
-    shareLabel: '회복 우선형',
-    name: '아침에도 피곤했던 날',
+    shareLabel: shareLabels.unrested.label,
+    name: shareLabels.unrested.name,
     description: '잠에서 깬 뒤에도 피곤함이 남은 날이 많았다고 답했어요.',
     suggestions: ['잠자는 방의 빛과 소음을 살펴보세요.', '잠든 시간과 아침에 일어난 뒤 느낌을 간단히 적어 보세요.'],
     recoveryLevel: 'prioritize',
@@ -135,8 +137,8 @@ export const resultTypes: Readonly<Record<RhythmId, RhythmType>> = {
   },
   steady: {
     id: 'steady',
-    shareLabel: '안정 리듬형',
-    name: '잠과 휴식이 괜찮았던 날',
+    shareLabel: shareLabels.steady.label,
+    name: shareLabels.steady.name,
     description: '최근 일주일은 잠들고 쉬는 일이 비교적 괜찮았다고 답했어요. 잘 맞는 습관을 이어가 보세요.',
     suggestions: ['지금 편안하게 이어 가는 습관을 하나 적어 보세요.', '바쁜 날에도 지킬 수 있는 짧은 휴식 시간을 남겨 두세요.'],
     recoveryLevel: 'maintain',

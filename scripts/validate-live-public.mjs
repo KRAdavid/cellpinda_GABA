@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
 import {normalizePublicSiteUrl, publicSitePath} from './public-origin.mjs';
 
 const cliBase = process.argv.slice(2).find(value => /^https:\/\//.test(value)) || '';
@@ -48,14 +50,7 @@ const validateContinuation = (value, label) => {
 };
 const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
 const sharedResultIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
-const sharedResultLabels = {
-  active: '계속 작동형',
-  sleep: '잠자리 전환형',
-  irregular: '휴식 공백형',
-  sensory: '자극 과부하형',
-  unrested: '회복 우선형',
-  steady: '안정 리듬형',
-};
+const sharedResultLabels = Object.fromEntries(Object.entries(JSON.parse(readFileSync(resolve('data/rhythm-share-labels.json'), 'utf8'))).map(([id, value]) => [id, value.label]));
 const metaContent = (html, attribute, value) => {
   const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const forward = new RegExp(`<meta[^>]+${attribute}="${escaped}"[^>]+content="([^"]+)"`, 'i').exec(html);

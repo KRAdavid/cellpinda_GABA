@@ -3,6 +3,7 @@ import {existsSync, readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 
 const root = process.cwd();
+const rhythmShareLabels = JSON.parse(readFileSync(resolve(root, 'data/rhythm-share-labels.json'), 'utf8'));
 const read = relative => readFile(resolve(root, relative), 'utf8');
 const app = await read('src/App.tsx');
 const purchaseQuestions = await read('src/components/PurchaseQuestions.tsx');
@@ -283,14 +284,7 @@ for (const relative of staticImagePages) {
 
 const shareRoot = resolve(root, 'public/share');
 const shareIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
-const shareLabels = {
-  active: '계속 작동형',
-  sleep: '잠자리 전환형',
-  irregular: '휴식 공백형',
-  sensory: '자극 과부하형',
-  unrested: '회복 우선형',
-  steady: '안정 리듬형',
-};
+const shareLabels = Object.fromEntries(Object.entries(rhythmShareLabels).map(([id, value]) => [id, value.label]));
 function pngDimensions(filePath) {
   const image = readFileSync(filePath);
   const signature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);

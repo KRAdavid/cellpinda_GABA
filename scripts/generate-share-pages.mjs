@@ -1,14 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const shareTypes = [
-  ['active', '계속 작동형', '퇴근 뒤에도 일이 생각나는 날'],
-  ['sleep', '잠자리 전환형', '누워도 잠이 오지 않았던 날'],
-  ['irregular', '휴식 공백형', '하루에 쉴 틈이 부족했던 날'],
-  ['sensory', '자극 과부하형', '사람과 화면에 지친 날'],
-  ['unrested', '회복 우선형', '아침에도 피곤했던 날'],
-  ['steady', '안정 리듬형', '잠과 휴식이 괜찮았던 날'],
-];
+const shareLabels = JSON.parse(fs.readFileSync(path.resolve('data/rhythm-share-labels.json'), 'utf8'));
+const shareTypes = Object.entries(shareLabels).map(([id, value]) => [id, value.label, value.name]);
 const shareRoot = path.resolve('public/share');
 const siteRoot = 'https://kradavid.github.io/cellpinda_GABA';
 
