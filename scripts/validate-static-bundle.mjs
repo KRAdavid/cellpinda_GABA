@@ -34,6 +34,7 @@ for (const route of expectedRoutes) {
   assert.match(html, /<html[^>]+lang="ko"/i, `${route} route must declare Korean language`);
   assert.match(html, /<meta[^>]+name="viewport"[^>]+content="width=device-width/i, `${route} route must expose a responsive viewport`);
   assert.ok(titleOf(html), `${route} route title is missing`);
+  assert.match(html, /<h1(?:\s[^>]*)?>[^<]+<\/h1>/i, `${route} route must expose a visible page heading`);
   const expectedCanonical = `${manifest.publicSiteUrl}${route === '/' ? '/' : route}`;
   assert.equal(canonicalOf(html), expectedCanonical, `${route} route canonical is out of sync`);
   assert.match(html, /<meta[^>]+property="og:image:type"[^>]+content="image\/png"/i, `${route} route must declare the social image type`);

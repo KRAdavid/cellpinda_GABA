@@ -48,7 +48,7 @@ for (const [id, label, name] of shareTypes) {
 <link rel="canonical" href="${canonical}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="셀핀다 발효가바"><meta property="og:locale" content="ko_KR"><meta property="og:url" content="${canonical}"><meta property="og:title" content="${safeTitle}"><meta property="og:description" content="${safeDescription}"><meta property="og:image" content="${image}"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="${safeLabel} · ${safeName} 하루 리듬 공유 카드"><meta property="og:image:width" content="${imageWidth}"><meta property="og:image:height" content="${imageHeight}"><script type="application/ld+json">${structuredData}</script>
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${safeTitle}"><meta name="twitter:description" content="${safeDescription}"><meta name="twitter:image" content="${image}"><meta name="twitter:image:alt" content="${safeLabel} · ${safeName} 하루 리듬 공유 카드">
-<meta http-equiv="refresh" content="0;url=${destination}"></head><body><main><p>공유받은 하루 리듬 이야기를 여는 중입니다.</p><p><a href="${destination}">리듬 이야기 열기</a></p></main><script>
+<meta http-equiv="refresh" content="0;url=${destination}"></head><body><main><h1>${safeTitle}</h1><p>공유받은 하루 리듬 이야기를 여는 중입니다.</p><p><a href="${destination}">리듬 이야기 열기</a></p></main><script>
 (function(){const target=new URL('../../',location.href);target.searchParams.set('rhythm','${id}');for(const key of ['ref','campaign']){const value=new URLSearchParams(location.search).get(key)||'';if(/^[A-Za-z0-9_-]{1,64}$/.test(value))target.searchParams.set(key,value);}location.replace(target.toString());})();
 </script></body></html>
 `;
