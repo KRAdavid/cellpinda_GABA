@@ -43,7 +43,7 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 - `docs/CACOS_GOAL_CONTRACT.md`: 운영체제 설계서에 맞춘 현재 목표·성공 기준·다음 실행 파동
 - `data/goal-contract.json`: 공개 데이터와 분리된 기계 검증용 Goal Contract
 - `data/task-graph.json`: 목표에 연결된 작업·의존성·완료 증거·대기 조건
-- `data/tf-role-registry.json`: 마케팅·소비자심리부터 QA·감사까지 6개 교차 검토 역할의 책임·권한·매칭 기준
+- `data/tf-role-registry.json`: 마케팅·소비자심리부터 일러스트·정보시각화와 QA·감사까지 8개 교차 검토 역할의 책임·권한·매칭 기준
 - `data/tf-pulse-heartbeat.json`: 다음 실행에서도 재현하는 안전한 pulse 시각·상태 지문·역할·입력 게이트
 - `docs/IMPLEMENTATION_STATUS.md`: 최신 구현·검증·남은 작업
 - `data/content-ledger.json`: 내부 근거 원장. 전체 파일을 public으로 복사하지 않는다.
@@ -94,7 +94,7 @@ pnpm run validate:live-public
 
 회의 안건은 작업 상태별 선택지와 판정 기준도 함께 제공한다. `VERIFYING`은 수락 또는 보완, `WAITING`은 보류 또는 필요한 입력을 채운 뒤 READY로 올리는 경로를 보여 주며, 자동화가 실제 상태를 바꾸지 않고 사람이 근거를 확인해 결정하도록 한다. 공개 `goal-audit.json`의 게이트에도 같은 선택지가 복제되고 export·라이브 검증에서 두 패킷의 일치를 확인한다.
 
-`data/tf-role-registry.json`은 역할 책임의 단일 기준이다. pulse와 안전한 heartbeat는 이 레지스트리에서 확인한 6개 역할군을 ID·라벨·상태로만 기록하며, 실제 외부 전문가 자격이나 섭외를 의미하지 않는다. 역할군이 그래프·Goal Contract·heartbeat에서 어긋나면 배포 검증이 실패한다.
+`data/tf-role-registry.json`은 역할 책임의 단일 기준이다. pulse와 안전한 heartbeat는 이 레지스트리에서 확인한 8개 역할군을 ID·라벨·상태로만 기록하며, 실제 외부 전문가 자격이나 섭외를 의미하지 않는다. 역할군이 그래프·Goal Contract·heartbeat에서 어긋나면 배포 검증이 실패한다.
 
 `pnpm run tf:pulse:heartbeat`는 CI가 만든 임시 pulse 파일 없이도 최신 pulse를 생성해 안전한 heartbeat를 갱신한다. CI처럼 파일 경로를 직접 넘기면 지정한 파일만 읽는다.
 
@@ -102,7 +102,7 @@ pnpm run validate:live-public
 
 공개 운영 화면의 `회의 안건 JSON` 링크는 같은 pulse를 안전한 공개 패킷으로 제공한다. [공개 TF pulse](https://kradavid.github.io/cellpinda_GABA/data/tf-pulse.json)에는 원문 경로·개인정보·비밀값 없이 상태, 참여 역할, 필요한 입력과 다음 조치만 담긴다.
 
-공개 운영 화면의 `목표 감사 JSON` 링크는 Goal Contract·6개 역할군·업무 상태 카운트·완료 마일스톤·현재 승인 게이트를 한 파일로 묶은 중간 검토 패킷이다. [공개 목표 감사](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)는 내부 경로와 개인정보를 제외하며, 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않는다.
+공개 운영 화면의 `목표 감사 JSON` 링크는 Goal Contract·8개 역할군·업무 상태 카운트·완료 마일스톤·현재 승인 게이트를 한 파일로 묶은 중간 검토 패킷이다. [공개 목표 감사](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)는 내부 경로와 개인정보를 제외하며, 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않는다.
 
 `pnpm run preflight:deploy -- --strict`는 Cloudflare Worker 영구 배포에 필요한 설정·빌드 산출물·공개 export·필수 Secrets를 값 노출 없이 검사하고, 하나라도 없으면 실패한다. 일반 실행은 현재 상태를 `READY` 또는 `WAITING`으로 보고해 로컬·Pages 환경에서도 배포 준비도를 확인할 수 있다.
 
