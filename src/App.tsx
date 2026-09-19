@@ -98,8 +98,8 @@ export default function App(){
   const type=value ? resultTypes[value] : null;
   const focusInvite=new URLSearchParams(location.search).get('focus')==='1' || location.pathname.endsWith('/focus/');
   if(!type&&!focusInvite)return;
-   const title=focusInvite ? '너도 해봐 · 1분 색 신호 게임 | 셀핀다' : `공유받은 하루 리듬: ‘${type!.name}’ | Cellpinda`;
-   const description=focusInvite ? '초록 신호는 누르고 빨강 신호는 기다리는 게임이에요. 24개 신호 순서는 매번 달라져요. 점수는 건강 상태가 아닌 게임 기록이에요.' : `친구가 고른 ‘${type!.name}’ 장면을 공유했어요. 내 체크 결과는 아니에요.`;
+   const title=focusInvite ? '너도 해봐 · 1분 색 신호 게임 | 셀핀다' : `공유받은 하루 리듬: ‘${type!.shareLabel} · ${type!.name}’ | Cellpinda`;
+   const description=focusInvite ? '초록 신호는 누르고 빨강 신호는 기다리는 게임이에요. 24개 신호 순서는 매번 달라져요. 점수는 건강 상태가 아닌 게임 기록이에요.' : `친구가 고른 ‘${type!.shareLabel} · ${type!.name}’ 장면을 공유했어요. 내 체크 결과는 아니에요.`;
   document.title=title;
   const update=(selector:string,attribute:'name'|'property',value:string)=>{const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}=\"${selector}\"]`);if(element)element.content=value;else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}};
    const image=new URL(asset(focusInvite ? 'assets/focus-game-card-v5.png' : `assets/social-rhythm-${type!.id}.png`),window.location.origin).toString();

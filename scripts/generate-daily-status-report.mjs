@@ -1,12 +1,13 @@
 import {writeFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 import {resolve} from 'node:path';
+import {normalizePublicSiteUrl} from './public-origin.mjs';
 
 const root = process.cwd();
 const args = process.argv.slice(2);
 const outputIndex = args.indexOf('--out');
 const outputPath = outputIndex >= 0 ? args[outputIndex + 1] : null;
-const base = process.env.PUBLIC_SITE_URL || 'https://kradavid.github.io/cellpinda_GABA';
+const base = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL || undefined);
 
 const run = (script, scriptArgs = []) => {
   const result = spawnSync(process.execPath, [resolve(root, script), ...scriptArgs], {

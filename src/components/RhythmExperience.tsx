@@ -368,7 +368,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'kakao'});
     window.Kakao.Share.sendDefault({
       objectType: 'feed',
-      content: { title: `셀핀다 하루 리듬 · ${type.name}`, description: type.description, imageUrl, link: { mobileWebUrl: url, webUrl: url } },
+      content: { title: `셀핀다 하루 리듬 · ${type.shareLabel} · ${type.name}`, description: type.description, imageUrl, link: { mobileWebUrl: url, webUrl: url } },
       buttons: [{ title: '내 리듬도 1분 체크', link: { mobileWebUrl: url, webUrl: url } }],
     });
     onEvent('result_share_success',{path:result?'/result':'/share',channel:'kakao'});
@@ -377,7 +377,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
 
   async function share() {
     if (!type) return;
-    const shareText = `나는 ‘${type.name}’ 답이 나왔어요. 당신도 지난 7일의 잠과 휴식을 1분 동안 돌아봐요.`;
+    const shareText = `나는 ‘${type.shareLabel} · ${type.name}’ 답이 나왔어요. 당신도 지난 7일의 잠과 휴식을 1분 동안 돌아봐요.`;
     onEvent('share_request',{path:result?'/result':'/share'});
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'native'});
     if (cardFile && navigator.share && navigator.canShare?.({ files: [cardFile] })) {

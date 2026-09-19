@@ -10,7 +10,9 @@ assert.ok(['success', 'failure', 'cancelled', 'skipped'].includes(value.pages), 
 assert.ok(['success', 'failure', 'cancelled', 'skipped'].includes(value.smoke), 'smoke result is invalid');
 assert.ok(['success', 'failure', 'cancelled', 'skipped'].includes(value.workerDeployment), 'Worker result is invalid');
 assert.equal(typeof value.workerReadiness, 'boolean', 'Worker readiness must be boolean');
-if (value.mode === 'RELEASE_FAILED') assert.ok(value.pages !== 'success' || value.smoke !== 'success', 'failed release must have a failed static check');
+if (value.mode === 'RELEASE_FAILED') {
+  assert.ok(value.pages !== 'success' || value.smoke !== 'success' || value.workerDeployment !== 'success', 'failed release must have a failed publish or Worker check');
+}
 if (value.mode === 'STATIC_ONLY') assert.equal(value.workerReadiness, false, 'static-only release must keep Worker readiness closed');
 if (value.mode === 'FULL_RELEASE') { assert.equal(value.pages, 'success'); assert.equal(value.smoke, 'success'); assert.equal(value.workerReadiness, true); assert.equal(value.workerDeployment, 'success'); }
 console.log(JSON.stringify({status:'ok', mode:value.mode, pages:value.pages, smoke:value.smoke, workerReadiness:value.workerReadiness, workerDeployment:value.workerDeployment}));

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
+import {normalizePublicSiteUrl} from './public-origin.mjs';
 
 const cliBase = process.argv.slice(2).find(value => /^https:\/\//.test(value)) || '';
-const base = (process.env.PUBLIC_SITE_URL || cliBase).replace(/\/$/, '');
-if (!/^https:\/\//.test(base)) throw new Error('PUBLIC_SITE_URL must be an HTTPS URL');
+const base = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL || cliBase);
 const runtimeMode = process.env.PUBLIC_RUNTIME_MODE || 'static';
 if (!['static', 'worker'].includes(runtimeMode)) throw new Error('PUBLIC_RUNTIME_MODE must be static or worker');
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
