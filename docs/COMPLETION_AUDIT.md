@@ -592,3 +592,7 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-14 스마트스토어 후기 리뷰창 직결
 
 가바 1500 구매 링크는 상품 상세 기본 주소를 유지하고, 후기 읽기 CTA와 공개 후기 목적지만 `https://smartstore.naver.com/cellpinda/products/4701017202#REVIEW_DIALOG`로 분리했다. 정적 fallback, React 후기 카드, Node API, Cloudflare Worker, 원장·공개 export가 모두 동일한 리뷰창 URL을 요구하며 다른 해시·쿼리 변형은 승인 대상에서 제외한다. 전체 테스트 84개와 타입검사·production build·공개 export·UI 계약·티저·운영·TF pulse 검증을 통과했다.
+
+## 2026-09-19 첫 화면 이미지 안정화
+
+공개 첫 화면의 창가 사진을 `loading="eager"`·`decoding="sync"`로 우선 처리하고, 사진 레이어와 문구 레이어의 `z-index`를 명시했다. 느린 네트워크나 첫 렌더 타이밍에서도 텍스트만 먼저 보이는 순간을 줄여 사진·핵심 문구·1분 체크 CTA가 함께 나타나도록 보완했다. `validate-ui-contract`에 우선 로드와 레이어 순서 회귀 가드를 추가했으며 타입검사·전체 104개 테스트·production build·Pages 배포·라이브 공개 검증을 통과했다. 이 변경은 기존 연구·제품·후기 문구와 외부 승인 게이트를 변경하지 않는다.
