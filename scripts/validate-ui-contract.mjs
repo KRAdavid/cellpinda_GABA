@@ -118,7 +118,7 @@ requireMatch(research, /research-library-head[\s\S]*각 카드에서 사람 연�
 requireMatch(research, /research-library-evidence-note[\s\S]*일반 GABA·휴식 연구[\s\S]*셀핀다 완제품 연구와는 다른 자료입니다\./, 'research list must put the general-research and product boundary before the first card');
 requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.header\.research-route-header nav\{display:flex!important;position:static[\s\S]*?\.study-paired-group\{grid-template-columns:minmax\(96px/, 'mobile research route must keep its return link in the header and make the paired results compact enough to scan');
 requireMatch(styles, /\.study-paired-group\{grid-template-columns:minmax\(0,1fr\)[\s\S]*?\.study-paired-group h4,\.study-paired-trajectory,\.study-paired-spread\{grid-column:1\/-1\}/, 'mobile study groups must keep labels, values and detail links readable across the full card width');
-requireMatch(research, /연구 내용을 더 자세히 보기/, 'research detail must use a consumer-friendly label');
+requireMatch(research, /누가·어떻게·무엇을 봤는지 보기/, 'research detail must use a consumer-friendly label');
 requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
 requireMatch(researchRouteHtml, /사람 연구 살펴보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
