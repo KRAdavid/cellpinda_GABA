@@ -55,11 +55,11 @@ type Props = {
 };
 
 function compactStudyType(value?: string, dose?: string): string {
-  if (/GABA를 먹지 않고|GABA 섭취 없이/.test(dose || '') || /관찰|MRS|뇌 신호|손끝 연습/.test(value || '')) return 'GABA를 먹지 않은 관찰 연구';
+  if (/GABA를 먹지 않고|GABA 섭취 없이/.test(dose || '') || /관찰|MRS|뇌 신호|손끝 연습/.test(value || '')) return 'GABA를 먹지 않고 살펴본 연구';
   if (!value) return 'GABA 관련 연구';
   if (/문헌고찰|여러 연구를 모아|사람 연구 여러 편/.test(value)) return '사람 연구 여러 편을 모아 정리';
   if (/운동/.test(value)) return '사람이 참여한 운동 연구';
-  if (/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return '일반 GABA 섭취 연구';
+  if (/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return '사람이 GABA를 먹고 비교한 연구';
   return value;
 }
 
@@ -91,10 +91,10 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   }).sort((left,right)=>(preferredStudyOrder.get(left.id) ?? 99)-(preferredStudyOrder.get(right.id) ?? 99));
   const topics = [...new Set(studies.map(claim => claim.topic).filter(Boolean))];
   const topicCards = [
-    {topic:'잠', label:'잠', detail:'잠 기록 연구', Icon:Moon},
-    {topic:'긴장·잠', label:'긴장과 잠', detail:'긴장·잠 연구', Icon:Activity},
-    {topic:'뇌파·과제', label:'생각을 많이 쓴 뒤', detail:'과제 뒤 뇌파', Icon:Brain},
-    {topic:'운동', label:'운동 뒤', detail:'혈액 수치', Icon:Dumbbell},
+    {topic:'잠', label:'잠', detail:'잠드는 시간과 수면을 본 연구', Icon:Moon},
+    {topic:'긴장·잠', label:'긴장과 잠', detail:'긴장과 잠을 본 연구', Icon:Activity},
+    {topic:'뇌파·과제', label:'생각을 많이 쓴 뒤', detail:'머리를 많이 쓴 뒤 뇌 신호', Icon:Brain},
+    {topic:'운동', label:'운동 뒤', detail:'운동 뒤 혈액 속 변화', Icon:Dumbbell},
   ].filter(card => topics.includes(card.topic));
   const activeTopic = topics.includes(topic) ? topic : '';
   const studyTypes = [...new Set(studies.map(claim => claim.metadata!.studyType).filter((value): value is string => Boolean(value)))];

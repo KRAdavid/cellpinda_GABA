@@ -171,7 +171,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(researchPageText, /property="og:title" content="사람을 대상으로 한 GABA 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
     assert.ok(researchPageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live research page must distinguish general GABA research from Cellpinda product research');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
-    assert.ok(researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && researchPageText.includes('손끝 감각: GABA를 먹지 않은 관찰 연구'), 'live research fallback must keep the consumer-first topic guide and non-ingestion study boundary');
+    assert.ok(researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && researchPageText.includes('손끝 감각: GABA를 먹지 않고 뇌 속 GABA 신호와 손끝 연습을 살펴본 연구예요.') && !researchPageText.includes('일반 GABA 섭취 연구') && !researchPageText.includes('GABA를 먹지 않은 관찰 연구'), 'live research fallback must keep the consumer-first topic guide and plain-language non-ingestion study boundary');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.ok(researchPageText.includes('가바 1500 제품 구성 보기') && researchPageText.includes('view=products'), 'live research page must offer a neutral product-information handoff');
     assert.ok(researchPageText.includes('운동 경험이 있는 남성이 GABA를 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬을 살펴본 연구를 정리했어요.') && !researchPageText.includes('GABA와 단백질을 함께 사용한 연구'), 'live research fallback must match the approved Powers study scope');
@@ -197,7 +197,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }
     assert.ok(!consumerBundle.includes('운영 큐') && !consumerBundle.includes('운영판을 여는 중입니다.'), 'live consumer bundle must keep the internal operations UI in its lazy route chunk');
     assert.ok(consumerBundle.includes('뇌컨디션 확인 챌린지') && consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name and its simple game description');
-    assert.ok(consumerBundle.includes('잠드는 시간이 비교 캡슐을 먹은 주보다 평균 5분 짧게 기록됐어요.') && consumerBundle.includes('과제 뒤 뇌파와 활력 점수가 비교 캡슐을 먹었을 때보다 덜 떨어졌어요.') && consumerBundle.includes('연구에서 관찰된 내용'), 'live consumer bundle must preserve the plain-language research highlight copy');
+    assert.ok(consumerBundle.includes('잠드는 시간이 비교 캡슐을 먹은 주보다 평균 5분 짧게 기록됐어요.') && consumerBundle.includes('과제 뒤 뇌파와 활력 점수가 비교 캡슐을 먹었을 때보다 덜 떨어졌어요.') && consumerBundle.includes('연구에서 관찰된 내용') && consumerBundle.includes('연구 사용량: 하루 100mg') && consumerBundle.includes('연구 사용량: 100mg 1회') && consumerBundle.includes('제품 권장량과 별개'), 'live consumer bundle must preserve plain-language research highlights and separate research amounts from product servings');
     assert.ok(consumerBundle.includes('브라우저가 자동 소리를 막았어요.') && consumerBundle.includes('화면 신호로 계속 진행합니다.'), 'live consumer bundle must explain blocked game audio without stopping the visual game');
     assert.ok(consumerBundle.includes('매번 신호 순서가 달라져요') && consumerBundle.includes('초록은 누르고, 빨강은 기다려요') && consumerBundle.includes('뜨면 누르기') && consumerBundle.includes('표시된 색 누르기'), 'live consumer bundle must show the three game rules in direct, visual language');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');

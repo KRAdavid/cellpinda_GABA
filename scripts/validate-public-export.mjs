@@ -71,7 +71,7 @@ const relationshipDisclosures = publicResearchRecords.filter(claim => claim.meta
 if (relationshipDisclosures.length < 3 || relationshipDisclosures.some(claim => !master.records.find(record => record.id === claim.id)?.consumerDisclosure)) fail('public study relationship disclosures must be preserved in the master index');
 if (!researchComponent.includes('preferredStudyOrder') || !researchComponent.includes("'research-yamatsu-2016', 'research-byun-2018'") || !researchComponent.includes("'research-review-2020'") || !researchComponent.includes('const featuredStudy = visibleStudies[0]')) fail('a specific visualized human study must appear first and the review overview must follow separately');
 if (!researchHtml.includes('사람을 대상으로 한 GABA 연구') || !researchHtml.includes('셀핀다 완제품 연구와는 다른 자료입니다.')) fail('the research list must clearly identify human GABA research and distinguish it from Cellpinda product research');
-if (!researchHtml.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') || !researchHtml.includes('손끝 감각: GABA를 먹지 않은 관찰 연구')) fail('research static fallback must use consumer-first topic guidance and include the non-ingestion study boundary');
+if (!researchHtml.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') || !researchHtml.includes('손끝 감각: GABA를 먹지 않고 뇌 속 GABA 신호와 손끝 연습을 살펴본 연구예요.') || researchHtml.includes('일반 GABA 섭취 연구') || researchHtml.includes('GABA를 먹지 않은 관찰 연구')) fail('research static fallback must use consumer-first topic guidance and include the plain-language non-ingestion study boundary');
 if (!researchHtml.includes('운동 경험이 있는 남성이 GABA를 먹고 쉰 경우와 운동한 경우, 혈액 속 성장호르몬을 살펴본 연구를 정리했어요.') || researchHtml.includes('GABA와 단백질을 함께 사용한 연구')) fail('research static fallback must match the approved Powers study scope and must not imply an unapproved protein co-use study');
 
 const forbiddenKeys = /^(original|rightsEvidence|rightsScope|privatePath|customer|email|phone|answers|token|operatorToken|adminToken)$/i;
@@ -241,7 +241,7 @@ for (const [id, record] of recordsById) {
   if (claim?.metadata?.studyType !== record.studyType) fail(`research study type mismatch between content and master index for ${id}`);
 }
 const hebaRecord=recordsById.get('research-heba-2016');
-if(!hebaRecord || !/^GABA를 먹지 않은(?: 관찰)? 연구/.test(hebaRecord.studyType || '') || !hebaRecord.dose?.includes('GABA를 먹지 않고')) fail('non-ingestion GABA studies must be labeled before they appear in the consumer research index');
+if(!hebaRecord || !/^GABA를 먹지 않고 살펴본 연구/.test(hebaRecord.studyType || '') || !hebaRecord.dose?.includes('GABA를 먹지 않고')) fail('non-ingestion GABA studies must be labeled before they appear in the consumer research index');
 const coverage = {
   stress: ['research-review-2020'],
   sleep: ['research-byun-2018', 'research-yamatsu-2016'],
