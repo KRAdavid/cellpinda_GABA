@@ -4,8 +4,11 @@
  * GitHub Pages serves the built site below a repository base path and does
  * not expose the Worker API. In that case callers should use their static
  * data/localStorage fallback directly. A Worker deployment uses `/` and can
- * keep the API on the same origin; a separate API origin can be supplied via
- * VITE_API_ORIGIN when the public site and Worker are hosted separately.
+ * keep the API on the same origin. A separate API origin can be supplied via
+ * VITE_API_ORIGIN when the public site and Worker are hosted separately; in
+ * that mode the Worker must have the same frontend origin configured as its
+ * explicit MEMBER_ORIGIN so authenticated browser requests pass its origin
+ * and CORS gate.
  */
 export function apiEndpoint(path: string): string | null {
   const configuredOrigin = typeof import.meta.env.VITE_API_ORIGIN === 'string'

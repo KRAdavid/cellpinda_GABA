@@ -4,7 +4,7 @@ import { rewriteSocialHtml } from './social.ts';
 import { handleMembers } from './members.ts';
 import { adminAction, adminRoleAllows, adminRoleCapabilities, adminRoleForToken, adminRoleLabel } from '../src/domain/admin-auth.ts';
 
-declare global { interface Env { ADMIN_TOKEN: string; ADMIN_ROLE_TOKENS?: string; PUBLIC_SITE_URL?: string } }
+declare global { interface Env { ADMIN_TOKEN: string; ADMIN_ROLE_TOKENS?: string; PUBLIC_SITE_URL?: string; MEMBER_ORIGIN?: string } }
 
 const SECURITY_HEADERS:Record<string,string>={
   'Content-Security-Policy':[
@@ -37,13 +37,17 @@ function withSecurityHeaders(response:Response,secureTransport:boolean,pathname:
     const contentType=(headers.get('Content-Type') || '').toLowerCase();
     if(contentType.includes('text/html')) headers.set('Cache-Control','max-age=0, must-revalidate');
     else if(pathname.startsWith('/data/') && contentType.includes('json')) headers.set('Cache-Control','public, max-age=300, must-revalidate');
-    else if(pathname.startsWith('/assets/') && /-[a-z0-9]{8,}\.(?:js|css|woff2)$/i.test(pathname)) headers.set('Cache-Control','public, max-age=31536000, immutable');
+    // Vite's content hashes may include uppercase characters and underscores
+    // (for example `index-DQsaX8_M.js`). Treat only these fingerprinted
+    // script/style/font assets as immutable; unhashed assets keep the shorter
+    // revalidation policy below.
+    else if(pathname.startsWith('/assets/') && /-[a-z0-9_-]{8,}\.(?:js|css|woff2)$/i.test(pathname)) headers.set('Cache-Control','public, max-age=31536000, immutable');
     else if(pathname.startsWith('/assets/')) headers.set('Cache-Control','public, max-age=86400, must-revalidate');
   }
   return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
 }
 
-const reply=(status:number,value:unknown)=>new Response(status===204?null:JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
+const reply=(status:number,value:unknown,cacheControl='no-store')=>new Response(status===204?null:JSON.stringify(value),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':cacheControl,'X-Content-Type-Options':'nosniff'}});
 async function body(request:Request,maxBytes=16384) {
   if(!request.headers.get('content-type')?.startsWith('application/json'))throw failure('JSON content type required',415);
   if(Number(request.headers.get('content-length'))>maxBytes)throw failure('Body too large',413);
@@ -73,8 +77,17 @@ export default {
       }
       const local=['localhost','127.0.0.1','[::1]'].includes(url.hostname);
       if(url.protocol!=='https:' && !local)return reply(400,{error:'HTTPS required'});
-      const origin=request.headers.get('origin');if(origin && origin!==url.origin)return reply(403,{error:'Origin not allowed'});
-      if(request.headers.get('sec-fetch-site')==='cross-site')return reply(403,{error:'Cross-site request not allowed'});
+      const origin=request.headers.get('origin');
+      // Same-origin requests are the default. When the frontend is hosted on
+      // a separate static origin, MEMBER_ORIGIN is the explicit WebAuthn/API
+      // origin configured for this deployment and is the only additional
+      // origin that may call the Worker.
+      const memberOrigin=env.MEMBER_ORIGIN?.trim() || '';
+      if(origin && origin!==url.origin && origin!==memberOrigin)return reply(403,{error:'Origin not allowed'});
+      // A separately hosted frontend is an explicit deployment choice. Allow
+      // its browser requests when both Origin and MEMBER_ORIGIN agree, while
+      // keeping unsolicited cross-site requests blocked by default.
+      if(request.headers.get('sec-fetch-site')==='cross-site' && origin!==memberOrigin)return reply(403,{error:'Cross-site request not allowed'});
       if(!env.RATE_LIMITER)return reply(503,{error:'Rate limiter unavailable'});
       // Salt with a time bucket so request keys cannot become persistent visitor identifiers.
       const keyBytes=new TextEncoder().encode(`${Math.floor(Date.now()/60000)}:${request.headers.get('cf-connecting-ip') || 'unknown'}`);
@@ -89,7 +102,7 @@ export default {
       if(url.pathname.startsWith('/api/member/'))return handleMembers(request,env,body);
       const store=createStore(env.DB);await store.initialize();
       if(request.method==='GET' && url.pathname==='/api/health')return reply(200,{ok:true,persistence:'cloudflare-d1',actualPurchaseIntegration:false});
-      if(request.method==='GET' && url.pathname==='/api/content')return reply(200,await store.publicContent());
+      if(request.method==='GET' && url.pathname==='/api/content')return reply(200,await store.publicContent(),'public, max-age=300, must-revalidate');
       if(request.method==='POST' && url.pathname==='/api/events')return reply(202,await store.event(await body(request)));
       const opsMatch=url.pathname.match(/^\/api\/ops\/runs\/([0-9a-f-]{36})$/i);
       if(opsMatch && request.method==='GET')return reply(200,await store.getOpsRun(opsMatch[1],request.headers.get('x-ops-run-key')));
@@ -110,6 +123,17 @@ export default {
     }catch(error){const known=error instanceof Error && 'status' in error && typeof error.status==='number';return reply(known?error.status as number:500,{error:known?error.message:'Internal server error'});}
     })();
     const requestUrl=new URL(request.url);
-    return withSecurityHeaders(response,requestUrl.protocol==='https:',requestUrl.pathname);
+    const secured=withSecurityHeaders(response,requestUrl.protocol==='https:',requestUrl.pathname);
+    const origin=request.headers.get('origin');
+    const memberOrigin=env.MEMBER_ORIGIN?.trim() || '';
+    if(!origin || (origin!==requestUrl.origin && origin!==memberOrigin))return secured;
+    const headers=new Headers(secured.headers);
+    headers.set('Access-Control-Allow-Origin',origin);
+    headers.set('Access-Control-Allow-Credentials','true');
+    headers.set('Access-Control-Allow-Headers','Content-Type, X-Admin-Token, X-Ops-Run-Key, X-Ops-Revision');
+    headers.set('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE, OPTIONS');
+    const vary=headers.get('Vary');
+    headers.set('Vary',vary ? `${vary}, Origin` : 'Origin');
+    return new Response(secured.body,{status:secured.status,statusText:secured.statusText,headers});
   },
 };

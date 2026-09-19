@@ -138,6 +138,16 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
   const call=(path,options={})=>worker.fetch(new Request(`https://site.example${path}`,options),env);
   try {
     assert.equal((await call('/api/content',{headers:{origin:'https://evil.example'}})).status,403);
+    const publicContent=await call('/api/content');
+    assert.equal(publicContent.status,200);
+    assert.equal(publicContent.headers.get('cache-control'),'public, max-age=300, must-revalidate');
+    const corsEnv={...env,MEMBER_ORIGIN:'https://app.example'};
+    const corsResponse=await worker.fetch(new Request('https://site.example/api/health',{headers:{origin:'https://app.example','sec-fetch-site':'cross-site'}}),corsEnv);
+    assert.equal(corsResponse.status,200);
+    assert.equal(corsResponse.headers.get('access-control-allow-origin'),'https://app.example');
+    assert.equal(corsResponse.headers.get('access-control-allow-credentials'),'true');
+    assert.match(corsResponse.headers.get('vary') || '',/Origin/);
+    assert.equal((await worker.fetch(new Request('https://site.example/api/health',{headers:{origin:'https://evil.example'}}),corsEnv)).status,403);
     assert.equal((await call('/api/admin/content')).status,401);
     assert.equal((await call('/api/health',{headers:{origin:'https://site.example'}})).status,200);
     assert.equal((await call('/api/admin/content',{headers:{'x-admin-token':token}})).status,200);
@@ -207,7 +217,7 @@ test('Worker applies content-aware cache policy to public assets and data',async
   }}};
   try{
     const data=await worker.fetch(new Request('https://site.example/data/content.json'),env);
-    const hashed=await worker.fetch(new Request('https://site.example/assets/index-Ab12Cd34.js'),env);
+    const hashed=await worker.fetch(new Request('https://site.example/assets/index-DQsaX8_M.js'),env);
     const page=await worker.fetch(new Request('https://site.example/'),env);
     assert.equal(data.headers.get('cache-control'),'public, max-age=300, must-revalidate');
     assert.equal(hashed.headers.get('cache-control'),'public, max-age=31536000, immutable');

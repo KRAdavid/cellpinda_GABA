@@ -45,7 +45,7 @@ check('cloudflare-secrets',missingSecrets.length===0,missingSecrets.length ? `mi
 const configuredPublicOrigin=process.env.PUBLIC_SITE_URL?.trim() || '';
 let publicOriginValid=false;
 if(configuredPublicOrigin) {
-  try { const origin=new URL(configuredPublicOrigin); publicOriginValid=origin.protocol==='https:' && !origin.username && !origin.password && !origin.search && !origin.hash; } catch { publicOriginValid=false; }
+  try { const origin=new URL(configuredPublicOrigin); publicOriginValid=origin.protocol==='https:' && !origin.username && !origin.password && !origin.search && !origin.hash && origin.pathname==='/'; } catch { publicOriginValid=false; }
 }
 check('worker-public-origin',!strict || publicOriginValid,publicOriginValid ? 'PUBLIC_SITE_URL is a clean HTTPS origin' : strict ? 'strict Worker deployment requires PUBLIC_SITE_URL as a clean HTTPS origin' : 'not supplied in general readiness mode');
 if(process.env.ADMIN_ROLE_TOKENS?.trim()) {
@@ -56,7 +56,7 @@ if(process.env.ADMIN_ROLE_TOKENS?.trim()) {
   check('admin-role-tokens',valid,valid ? 'editor,reviewer,approver configured' : 'must contain three distinct role keys with credentials of at least 32 characters');
 }
 if(process.env.MEMBER_ORIGIN?.trim()) {
-  try { const origin=new URL(process.env.MEMBER_ORIGIN); check('member-origin',origin.protocol==='https:' || ['localhost','127.0.0.1'].includes(origin.hostname),`protocol=${origin.protocol}, host=${origin.hostname}`); }
+  try { const origin=new URL(process.env.MEMBER_ORIGIN); const valid=(origin.protocol==='https:' || ['localhost','127.0.0.1'].includes(origin.hostname)) && !origin.username && !origin.password && !origin.search && !origin.hash && origin.pathname==='/'; check('member-origin',valid,valid ? `protocol=${origin.protocol}, host=${origin.hostname}` : 'must be a clean HTTPS origin without path, credentials, query, or hash'); }
   catch { check('member-origin',false,'invalid URL'); }
 }
 

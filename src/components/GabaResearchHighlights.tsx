@@ -16,21 +16,21 @@ const highlightOrder: Highlight[] = [
     id: 'research-yamatsu-2016',
     label: '잠',
     title: '잠드는 시간과 수면 기록',
-    facts: ['성인 10명', '연구용 양: 하루 100mg', '기간: 각 1주', '제품 표기 섭취량과 달라요'],
+    facts: ['성인 10명', '연구에서 먹은 양: 하루 100mg', '기간: 각 1주', '셀핀다 제품에 적힌 양과는 다른 연구예요'],
     Icon: Moon,
   },
   {
     id: 'research-yoto-2012',
     label: '생각을 많이 쓴 뒤',
     title: '과제 뒤 뇌파와 활력 점수',
-    facts: ['성인 63명', '연구용 양: 100mg 1회', '30분 뒤 과제', '제품 표기 섭취량과 달라요'],
+    facts: ['성인 63명', '연구에서 먹은 양: 100mg 1회', '30분 뒤 과제', '셀핀다 제품에 적힌 양과는 다른 연구예요'],
     Icon: Activity,
   },
   {
     id: 'research-powers-2008',
-    label: '운동 뒤',
-    title: '휴식·운동 뒤 혈액 속 변화',
-    facts: ['남성 11명', '연구용 양: 3g 1회', '제품 표기 섭취량과 달라요'],
+    label: '쉬었을 때·운동했을 때',
+    title: '쉬었을 때와 운동했을 때의 혈액 속 변화',
+    facts: ['남성 11명', '연구에서 먹은 양: 3g 1회', '셀핀다 제품에 적힌 양과는 다른 연구예요'],
     Icon: Dumbbell,
   },
 ];
@@ -52,7 +52,7 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
           <p className="chapter">사람 연구 한눈에</p>
           <h2 id="gaba-research-highlights-heading">GABA를 먹은 사람 연구에서<br />무엇이 기록됐을까요?</h2>
         </div>
-        <p>잠·머리를 많이 쓴 뒤·운동 뒤,<br />일반 GABA 연구에서 관찰한 내용을 쉽게 정리했어요.</p>
+        <p>잠·머리를 많이 쓴 뒤·쉬었을 때와 운동했을 때,<br />일반 GABA 연구에서 관찰한 내용을 쉽게 정리했어요.</p>
       </div>
       <p className="gaba-research-highlights-boundary"><span aria-hidden="true">i</span> 사람 대상 일반 GABA 연구예요. 셀핀다 완제품을 시험한 결과와는 구분해서 봐 주세요.</p>
       <div className="gaba-research-highlights-grid">
