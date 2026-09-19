@@ -1,5 +1,11 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
+## 현재 릴리스 후보 기준 — 2026-09-20
+
+현재 검토 기준은 후보 커밋 `ba85ca9d10b16c095cd108bde60b481cc73c8d87`와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. `release-verify`와 `site-quality-verify`가 모두 통과했으며, 320px·390px·768px·1440px에서 홈·연구·제품·공유 챌린지 경로의 가로 넘침과 CTA 잘림이 없음을 Chrome CDP로 확인했다. 공유 챌린지의 `먼저 연습하고 시작하기` CTA는 연습 화면의 `초록 신호를 눌러 보세요.` 안내로 정상 전환된다.
+
+후보는 `OPEN / MERGEABLE / REVIEW_REQUIRED` 상태이며, PR이 `main`에 병합되기 전까지 공개 Pages는 이전 `main` 번들을 유지한다. 공개 배포를 완료로 판정하지 않도록 다음 게이트를 별도로 유지한다: B2 제품 표시 최종 승인(`VERIFYING`), B3 후기 재게시 권한(`WAITING`), B4 티저 자막·권리·CTA(`WAITING`), C2 Cloudflare Worker/D1 운영 시크릿(`WAITING`), E1 실제 주문·취소·환불 대사(`WAITING`). 티저 공개 상태는 계속 `HOLD`다.
+
 ## 현재 배포 검증 결과
 
 현재 공개 Pages 콘텐츠 기준은 `main` 커밋 `ea1cc42`이며 GitHub Actions `35445159229`가 당시 검증 기준으로 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공시켰다. 그러나 최신 후보 검증기를 공개 주소에 다시 실행한 결과 라이브 번들이 `뇌컨디션 확인 챌린지` 명칭을 포함하지 않아 12회 재시도 후 실패했다. 공개 사이트는 정적 Pages 모드로 운영되고, Worker/D1 job은 비밀값·공개 origin 게이트가 충족되지 않아 실행하지 않았다. 후보 PR 병합 전까지 공개본을 최신 후보 배포로 판정하지 않는다.
