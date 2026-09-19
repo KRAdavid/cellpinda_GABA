@@ -30,9 +30,11 @@ UI 계약도 이 두 색상 토큰과 CTA 아이콘의 `aria-hidden`을 직접 �
 
 게임을 바로 시작하는 보조 선택지를 `설명 없이 바로 시작`에서 `연습을 건너뛰고 바로 시작`으로 바꿨다. 사용자가 연습을 생략할 수 있다는 기능과, 시작 전 연습이 권장된다는 흐름을 한 문장으로 이해할 수 있게 한 보정이다. UI 계약·라이브 번들 검증 문구도 같은 표현으로 동기화했으며, 390px Chrome CDP에서 새 문구·가로 넘침 0건·뇌컨디션 챌린지 제목을 확인했다.
 
-## 현재 후보 검증 — 2026-09-20 20:45 KST
+## 현재 후보 검증 — 2026-09-20 06:16 KST
 
 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 HEAD에서 `release-verify`와 `site-quality-verify`가 모두 성공했다. PR은 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 Code Owner 승인 전이다. 후보 SHA는 이 문서에 복제하지 않고 PR HEAD와 `release-manifest.json`으로 확인한다. PR 이벤트에서는 Pages 게시·Worker 배포·라이브 smoke가 의도적으로 건너뛰므로, 현재 공개 Pages는 후보와 동기화됐다고 판정하지 않는다.
+
+결과 화면의 연구·제품 안내 다음에 `다음으로 해볼 일 → 뇌컨디션 확인 챌린지 해보기`를 배치해 리듬 체크 완료 뒤 게임으로 바로 이어지는 경로를 만들었다. PR 검증용 정적·Worker manifest는 PR 이벤트에서 병합용 임시 커밋이 아니라 PR HEAD SHA를 기록하고, main 배포에서는 main SHA를 기록하도록 workflow 계약과 검증기를 맞췄다. 로컬 후보는 타입검사, 107개 테스트, production build, 공개 export, 정적 route, 연구 문구·UI·배포 workflow 검증을 다시 통과했다.
 
 ## 이전 후보 보정 — 2026-09-20 후보 `486b748`
 
