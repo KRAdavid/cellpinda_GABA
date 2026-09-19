@@ -142,6 +142,8 @@ requireMatch(app, /className="product-visual" role="img" aria-label=\{/, 'produc
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
 requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, 'result sharing must invite the recipient to run their own check');
 requireMatch(rhythm, /rhythm-more-share[\s\S]*?결과 카드 공유·저장 등 다른 방법/, 'secondary result-share methods must be grouped below the primary invitation');
+requireMatch(rhythm, /rhythm-result-commerce[\s\S]*?가바 1500 제품 구성 보기[\s\S]*?구매자 후기 읽기/, 'completed rhythm results must offer the product and approved review destinations together');
+requireMatch(fatigueGame, /fatigue-game-actions[\s\S]*?친구에게 1분 게임 보내기[\s\S]*?5분 쉬고 다시 해보기/, 'fatigue game results must prioritize the rest-and-retry action while keeping the invite secondary');
 requireMatch(rhythm, /내 답변과 점수는 전송되지 않아요/, 'the primary invitation must explain what is not shared');
 if (/rhythm-mobile-share-bar/.test(rhythm + rhythmStyles)) fail('mobile should not show a second competing share bar');
 requireMatch(rhythm, /share\/(?:\$\{type\.id\}|type\.id)/, 'result-specific share URL is missing');

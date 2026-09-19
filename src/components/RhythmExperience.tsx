@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AlertTriangle, ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
 import { classifyRhythm, questions, resultTypes, rhythmIdFromUrl } from '../domain/rhythm';
 import { createFocusGameInviteText } from '../domain/fatigue-game';
+import { REVIEW_DESTINATION_URL } from '../domain/reviews';
 import type { AnswerValue, RhythmId, RhythmResult, RhythmType } from '../domain/rhythm';
 import FatigueGame from './FatigueGame';
 import './rhythm.css';
@@ -450,6 +451,11 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <details className="rhythm-rules"><summary>점수는 어떻게 나온 건가요?</summary><p>{result?.explanation ?? '지난 7일 동안 잠, 휴식, 아침 피로 등에 답한 내용을 모아 보여드려요. 점수는 내 답변을 정리한 것이며 건강 상태를 재거나 병을 진단하는 결과가 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#brain-load-evidence">집중과 휴식 관련 연구 쉽게 보기 <ArrowRight size={18} aria-hidden="true" /></a>
+            <div className="rhythm-result-commerce" aria-label="제품과 구매자 후기 확인">
+              <p className="rhythm-eyebrow">더 알아보기</p>
+              <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>
+              <a className="rhythm-text-button" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={() => onEvent('review_open', { productId: 'gaba1500', path: '/result' })}>구매자 후기 읽기 <ArrowUpRight size={18} aria-hidden="true" /></a>
+            </div>
           </div>
         </div>
       ) : started ? (

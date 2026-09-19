@@ -15,3 +15,7 @@ export function normalizePublicSiteUrl(value = DEFAULT_PUBLIC_SITE_URL) {
   parsed.pathname = parsed.pathname.replace(/\/+$/, '') || '/';
   return parsed.href.replace(/\/$/, '');
 }
+
+export function publicSitePath(value = DEFAULT_PUBLIC_SITE_URL) {
+  return new URL(normalizePublicSiteUrl(value)).pathname.replace(/\/+$/, '');
+}
