@@ -99,7 +99,7 @@ if (publicAudit.mode !== 'public_goal_audit' || publicAudit.goalId !== goalContr
 if (!['IN_PROGRESS_WITH_GATES', 'COMPLETE'].includes(publicAudit.overallStatus)) fail('public goal audit has an unsupported overall status');
 if (!Array.isArray(publicAudit.roleCoverage) || JSON.stringify(publicAudit.roleCoverage) !== JSON.stringify(requiredRoleCoverage)) fail('public goal audit role coverage is missing or malformed');
 const expectedTeaserGateStatus = teaser.status === 'APPROVED' ? 'APPROVED' : 'HOLD';
-if (!['HOLD', 'PREVIEW', 'APPROVED'].includes(teaser.status) || teaserPreview.status !== teaser.status || teaserPreview.placement !== teaser.placement || typeof teaserPreview.title !== 'string' || typeof teaserPreview.description !== 'string' || typeof teaserPreview.note !== 'string') fail('teaser preview export is missing or out of sync');
+if (!['HOLD', 'PREVIEW', 'APPROVED'].includes(teaser.status) || teaserPreview.status !== teaser.status || teaserPreview.placement !== teaser.placement || typeof teaserPreview.title !== 'string' || typeof teaserPreview.description !== 'string' || typeof teaserPreview.note !== 'string' || !teaserPreview.note.includes('자동 시작을 시도') || !teaserPreview.note.includes('자동 시작이 막히면') || !teaserPreview.note.includes('소리는 영상 안에서 조절')) fail('teaser preview export must describe autoplay, sound control and the browser fallback');
 if (teaser.status === 'PREVIEW' && (!isHttps(teaserPreview.url) || teaserPreview.url !== teaser.publicPreviewUrl)) fail('PREVIEW teaser export must expose the approved preview URL only');
 if (teaser.status !== 'PREVIEW' && teaserPreview.url !== null) fail('non-preview teaser export cannot expose a preview URL');
 const requireExactKeys = (value, expected, label) => {
