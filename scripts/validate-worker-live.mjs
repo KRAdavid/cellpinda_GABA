@@ -88,6 +88,6 @@ if (research.length !== 6) throw new Error(`Worker public API returned ${researc
 if (!content.claims.find(claim => claim.id === 'research-yoto-2012')?.metadata?.consumerDisclosure) throw new Error('Worker public API dropped the Yoto author relationship disclosure');
 if (content.claims.some(claim => claim.id === 'research-sakashita-2019')) throw new Error('Worker public API exposed the study held for independent statistical review');
 const powers = content.claims.find(claim => claim.id === 'research-powers-2008');
-if (!powers?.metadata?.consumerSummary?.includes('남성 11명') || !powers.metadata.consumerFinding?.includes('근육 크기와 근력 변화는 측정하지 않았어요')) throw new Error('Worker public API must preserve the Powers design and scope before its finding');
+if (!powers?.metadata?.consumerSummary?.includes('남성 11명') || !powers.metadata.consumerFinding?.includes('운동 뒤 혈액 속 변화를 살펴본 자료') || /750mg 캡슐|750\s*제품|근육 크기와 근력 변화는 측정하지 않았어요/.test(JSON.stringify(powers.metadata))) throw new Error('Worker public API must preserve the Powers design and scope without removed SKU wording');
 
 console.log(JSON.stringify({origin:base.origin,staticPage:'ok',health:'cloudflare-d1',research:research.length,products:content.products.length,publicRoutes:{product:true,research:true,focus:true,shares:sharePages.length,notFound:404},cachePolicy:'ok',securityHeaders:'ok',heldResearchExcluded:true,status:'ok'}));
