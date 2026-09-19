@@ -21,6 +21,8 @@ const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexH
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
+const publicResearchCopy = JSON.stringify(research);
+if (/(긴장·잠|긴장과 잠|긴장에 대한|긴장이 오래)/.test(`${consumerUi}\n${publicResearchCopy}`)) fail('consumer research copy must use the everyday word 스트레스 instead of 긴장');
 const yoto = research.find(claim => claim.id === 'research-yoto-2012');
 const yotoConsumerData = JSON.stringify({publicText:yoto?.publicText,metadata:yoto?.metadata});
 if (!yoto?.publicText?.includes('GABA 캡슐') || !yoto.metadata?.dose?.includes('덱스트린 캡슐') || !yoto.metadata?.consumerVisual?.steps?.[0]?.includes('캡슐') || !yoto.metadata?.consumerScope?.includes('건강한 성인') || /100mg|30분/.test(yoto.metadata.consumerScope) || /음료|마시/.test(yotoConsumerData) || yoto.topic !== '뇌파·과제') fail('Yoto consumer copy must match the capsule study, keep repeated details in its visual, and avoid suggesting a stress-relief outcome');

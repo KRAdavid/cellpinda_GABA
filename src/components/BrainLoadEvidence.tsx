@@ -48,7 +48,7 @@ const evidence: EvidenceCard[] = [
     tag: '오래 이어지는 스트레스',
     title: '스트레스 부담이 오래 쌓이면 몸과 마음 건강을 함께 살펴야 해요',
     summary: '267개 연구에서 몸에 쌓인 부담과 건강 결과의 관계를 살펴봤어요.',
-    finding: '긴장과 피로가 오래 이어져 잠이나 일상에 영향을 주면 생활을 조정하고 전문가와 상담해 보세요.',
+    finding: '스트레스와 피로가 오래 이어져 잠이나 일상에 영향을 주면 생활을 조정하고 전문가와 상담해 보세요.',
     scale: '267개 연구를 모아 살펴봄',
     source: 'PubMed · 오래 쌓인 스트레스와 건강',
     sourceUrl: 'https://pubmed.ncbi.nlm.nih.gov/32799204/',
@@ -93,7 +93,7 @@ export default function BrainLoadEvidence() {
             <h2 id="brain-load-evidence-heading">피곤할 때,<br />집중과 휴식은 어떻게 달라질까요?</h2>
             <p className="brain-load-evidence-boundary">잠·스트레스·집중을 이해하는 연구예요. 제품 정보는 따로 보여드려요.</p>
           </div>
-          <p>잠이 부족하거나 긴장이 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
+          <p>잠이 부족하거나 스트레스가 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
         </div>
 
         <div className="brain-load-reading-path" aria-label="연구를 살펴보는 순서">
