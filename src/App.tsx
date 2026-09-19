@@ -77,6 +77,7 @@ async function loadContent(signal:AbortSignal):Promise<Content>{
   }catch(error){
    if((error as Error).name==='AbortError')throw error;
   }
+  throw Error('Content API unavailable');
  }
  const fallback=await fetchContent(`${import.meta.env.BASE_URL}data/content.json`,signal);
  if(!fallback.ok)throw Error('Content unavailable');

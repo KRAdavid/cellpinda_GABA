@@ -84,6 +84,7 @@ requireMatch(app, /if\(menu\)requestAnimationFrame\(\(\)=>menuNavRef\.current\?\
 requireMatch(app, /aria-controls="primary-navigation"/, 'the mobile menu toggle must identify its controlled navigation');
 requireMatch(app, /analyticsConsentGranted/, 'analytics events must be consent-gated');
 requireMatch(app, /<AnalyticsConsent enabled=\{apiEndpoint\('\/api\/events'\) !== null\}\/>/, 'analytics consent controls must match the active event endpoint');
+requireMatch(app, /if\(endpoint\)\{[\s\S]*?if\(api\.ok\)return api\.json\(\);[\s\S]*?throw Error\('Content API unavailable'\);[\s\S]*?\}\s*const fallback=await fetchContent/, 'Worker content failures must not silently fall back to stale static content');
 requireMatch(analyticsConsent, /이름·연락처·내 답변은 수집하지 않아요/, 'analytics consent copy must state its privacy boundary');
 requireMatch(analyticsConsent, /방문 통계 보내기|보내지 않기/, 'analytics consent must provide explicit allow and deny choices');
 requireMatch(analyticsConsent, /현재 공개 사이트에서는 방문 통계를 전송하지 않습니다/, 'static public build must not imply that analytics are being sent');
