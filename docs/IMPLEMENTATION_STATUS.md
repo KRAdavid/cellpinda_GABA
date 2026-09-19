@@ -12,6 +12,10 @@
 
 후보 빌드는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build, release manifest 및 정적 산출물 검사를 통과했다. 배포 후보 SHA는 문서에 중복 기록하지 않고 산출물의 `release-manifest.json`과 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) HEAD를 기준으로 확인한다. PR은 Code Owner 승인 전이라 계속 `BLOCKED / REVIEW_REQUIRED`이며, 공개 Pages에는 아직 후보가 반영되지 않았다.
 
+## 렌더링 감리 — 2026-09-20 production preview
+
+Browser 플러그인과 Playwright가 연결되지 않아 로컬 Chrome CDP fallback으로 production preview를 확인했다. 390px 모바일과 764px 데스크톱 viewport에서 제목·첫 CTA·뇌컨디션 확인 챌린지·연구 흐름이 표시되고 가로 넘침은 0건이었다. 모바일에서 `먼저 연습하기`를 누르면 `초록 신호를 눌러 보세요.` 화면으로 전환되고 키보드 포커스가 연습 안내에 이동했다. 사용자 제스처 전 Web Audio 차단 경고 1건은 브라우저 정책에 따른 정상 경고이며, 화면에는 효과음 차단 안내를 제공한다. 이 검증은 실제 기기·브라우저 조합 전체를 대신하지 않으며, Pages 배포 후 동일 흐름을 live smoke에서 다시 확인한다.
+
 ## 이전 후보 보정 — 2026-09-20 후보 `486b748`
 
 연구 하이라이트의 소비자 문장을 다시 감리해 수면 카드의 `눈동자 움직임이 적은 수면 단계의 시간`, 연구 목록의 `사람이 GABA를 먹고 비교한 연구`, 주제 카드의 생활 언어를 적용했다. 수면·뇌파 카드에는 `연구 사용량`과 `제품 권장량과 별개`를 함께 표시하고, 정적 연구 페이지의 운동 연구에도 `GABA 3g`이 셀핀다 제품 권장량이 아니라는 구분을 넣었다. 이 표현이 다시 연구자식 라벨이나 제품 권장량처럼 보이지 않도록 연구 카피·UI·공개 export·라이브 smoke 회귀 조건을 갱신했다.
