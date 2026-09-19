@@ -325,7 +325,11 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
       if (gameSoundEnabledRef.current) playFocusSoundCue(audio.context, cue);
     };
     if (audio.context.state === 'running') play();
-    else void audio.context.resume().then(play).catch(() => undefined);
+    else void audio.context.resume().then(play).catch(() => {
+      if (gameSoundEnabledRef.current) {
+        setGameSoundStatus('브라우저가 자동 소리를 막았어요. 효과음 버튼을 한 번 눌러 켜 주세요. 화면 신호로 계속 진행합니다.');
+      }
+    });
   }
 
   function toggleGameSound() {
@@ -631,6 +635,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <div className="fatigue-game-onboarding-actions">
             <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 연습하기 <ArrowRight size={18} aria-hidden="true" /></button>
             <button type="button" className="fatigue-game-sound-toggle" onClick={toggleGameSound} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />} 효과음 {gameSoundEnabled ? '켜짐' : '꺼짐'}</button>
+            {gameSoundStatus ? <p className="fatigue-game-sound-status" role="status" aria-live="polite">{gameSoundStatus}</p> : null}
             <button type="button" className="rhythm-text-button fatigue-game-skip-practice" onClick={() => startRun('baseline')}>설명 없이 바로 시작</button>
           </div>
           <div className="fatigue-game-rule-cards" aria-label="게임 규칙">
@@ -702,6 +707,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
 
         {phase === 'running' ? <div className="fatigue-game-running">
           <div className="fatigue-game-meta"><span>{stageIndex + 1} / 3 · {currentStage.label}</span><span><Timer size={15} aria-hidden="true" /> {mode === 'baseline' ? '첫 번째 게임' : mode === 'after' ? '5분 쉰 뒤 · 두 번째' : '이어 하는 두 번째'}<button type="button" className="fatigue-game-sound-icon" onClick={toggleGameSound} aria-label={`게임 효과음 ${gameSoundEnabled ? '끄기' : '켜기'}`} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />}</button></span></div>
+          {gameSoundStatus ? <p className="fatigue-game-sound-status fatigue-game-sound-status-running" role="status" aria-live="polite">{gameSoundStatus}</p> : null}
           <div className="fatigue-stage-instruction"><strong>{currentStage.instruction}</strong><span>{currentStage.detail}</span></div>
           <div className="fatigue-rule-slot">
             {FOCUS_GAME_STAGES[stageIndex] === 'switch' ? <div className="fatigue-rule-display"><span>이번 규칙</span><strong className={`fatigue-rule-color fatigue-rule-color-${switchRule}`}>{switchRule === 'green' ? '초록' : '보라'}</strong><small>이 색 신호만 누르기</small></div> : <span className="fatigue-rule-placeholder" aria-hidden="true" />}
