@@ -2,13 +2,13 @@
 
 ## 현재 배포 검증 결과
 
-현재 공개 Pages 콘텐츠 기준은 커밋 `22dd63e`이며 GitHub Actions `35444540241`가 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공시켰다. 공개 사이트는 정적 Pages 모드로 운영되고, Worker/D1 job은 비밀값·공개 origin 게이트가 충족되지 않아 실행하지 않았다. 라이브 결과는 연구 6건·공개 주장 12개·제품 1개·공유 페이지 6개, 스마트스토어 단일 목적지, 750 제거, provenance 일치, 내부 운영 스냅샷 제외, 안전한 제품 구조화 데이터다. 제품 직접 진입 화면도 제품 전용 제목·설명·대표 이미지·canonical을 사용한다. 티저는 `HOLD`이며 공개 URL을 노출하지 않는다.
+현재 공개 Pages 콘텐츠 기준은 `main` 커밋 `ea1cc42`이며 GitHub Actions `35445159229`가 당시 검증 기준으로 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공시켰다. 그러나 최신 후보 검증기를 공개 주소에 다시 실행한 결과 라이브 번들이 `뇌컨디션 확인 챌린지` 명칭을 포함하지 않아 12회 재시도 후 실패했다. 공개 사이트는 정적 Pages 모드로 운영되고, Worker/D1 job은 비밀값·공개 origin 게이트가 충족되지 않아 실행하지 않았다. 후보 PR 병합 전까지 공개본을 최신 후보 배포로 판정하지 않는다.
 
 이 문서의 아래 항목은 각 감리 시점의 증거를 보존한다. 현재 출시 판정은 `IN_PROGRESS_WITH_GATES`이며 B2·B3·B4·C2·E1은 사람 입력과 외부 승인이 도착하기 전까지 완료로 승격하지 않는다.
 
 ## 릴리스 후보 통합 감리 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 `eb34bf1`에 소비자용 챌린지 명칭, 연구 출처 변형 정규화, 오디오 자동재생 차단 안내와 통합 감리 기록을 반영했다. 필수 검사 [release-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448932465)와 [site-quality-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448932486)는 통과했다.
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 `515b660`에 소비자용 챌린지 명칭, 연구 출처 변형 정규화, 오디오 자동재생 차단 안내와 통합 감리 기록을 반영했다. 필수 검사 [release-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35449364786)와 [site-quality-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35449364795)는 통과했다.
 
 후보 기준 `pnpm test` 107개·타입검사·빌드·공개 export 검증이 통과했고, 로컬 API 연결 preview의 390px·1440px 화면에서 홈·연구·제품·공유·챌린지 경로를 확인했다. 가로 넘침과 콘솔 오류는 없었다. 자동 재생을 거부하는 가상 오디오 컨텍스트에서도 차단 안내와 화면 신호 진행 문구가 카드 내부에 표시되는 것을 캡처로 확인했다. 후보는 main 병합 전이므로 Pages 배포 및 라이브 smoke는 실행하지 않았으며, 외부 게이트 B2·B3·B4·C2·E1과 티저 `HOLD`는 변경하지 않았다.
 

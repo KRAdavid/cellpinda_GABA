@@ -2,13 +2,13 @@
 
 ## 현재 배포 기준 — 2026-09-19 20:33 KST
 
-현재 공개 Pages 콘텐츠 기준은 커밋 `22dd63e`이며, GitHub Actions `35444540241`의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 라이브 smoke는 페이지 200, 연구 6건, 공개 주장 12개, 제품 1개, 공유 페이지 6개, 스마트스토어 단일 목적지, 750 제품 제거, provenance 일치, 제품 구조화 데이터 안전 경계를 확인했다. 제품 직접 진입 쿼리도 제품 전용 제목·설명·대표 이미지·canonical로 정렬됐다. 현재 공개 실행 모드는 정적 Pages이며 Worker/D1 배포는 필수 비밀값과 공개 origin이 준비될 때까지 의도적으로 실행하지 않는다.
+현재 공개 Pages 콘텐츠 기준은 `main` 커밋 `ea1cc42`이며, 해당 커밋의 GitHub Actions `35445159229`는 당시 검증 기준으로 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공했다. 현재 후보 검증기를 같은 공개 주소에 다시 적용한 결과, 라이브 번들에 최신 `뇌컨디션 확인 챌린지` 명칭이 없어 12회 재시도 후 실패했다. 따라서 공개본은 후보보다 뒤처진 상태이며, 후보 PR 병합 전까지 배포 완료로 판정하지 않는다. 현재 공개 실행 모드는 정적 Pages이며 Worker/D1 배포는 필수 비밀값과 공개 origin이 준비될 때까지 의도적으로 실행하지 않는다.
 
 현재 목표 판정은 `IN_PROGRESS_WITH_GATES`다. B2 제품 표시, B3 실제 후기 권한, B4 티저 공개 승인, C2 Worker/D1 운영 설정, E1 실구매 대사는 외부 입력 또는 사람 승인이 필요한 게이트로 남아 있다. 아래의 날짜가 지난 기록은 당시 검증 결과를 보존한 이력이며, 현재 상태는 이 요약과 라이브 smoke 결과를 우선한다.
 
 ## 릴리스 후보 통합 검증 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 커밋 `eb34bf1`에 게임 이름 통일, 연구 출처 변형 중복 제거, 브라우저 오디오 차단 안내와 통합 감리 기록을 반영했다. 최신 `release-verify` [35448932465](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448932465)와 `site-quality-verify` [35448932486](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35448932486)는 모두 통과했다.
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 커밋 `515b660`에 게임 이름 통일, 연구 출처 변형 중복 제거, 브라우저 오디오 차단 안내와 통합 감리 기록을 반영했다. 최신 `release-verify` [35449364786](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35449364786)와 `site-quality-verify` [35449364795](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35449364795)는 모두 통과했다.
 
 후보 브랜치의 `pnpm test` 107개, 타입검사, production build, 공개 export 검증을 통과했다. 로컬 production preview에 API를 연결해 Chromium CDP로 390px·1440px의 홈·연구·제품·공유·뇌컨디션 확인 챌린지를 확인했으며 가로 넘침 0건·콘솔 오류 0건이었다. 연구 페이지는 소비자용 제목과 주제 카드, 제품 경로는 `셀핀다 가바 1500 · 30포 구성 보기`, 챌린지 경로는 `너도 해봐 · 뇌컨디션 확인 챌린지`를 사용한다. 자동 재생이 차단된 브라우저에서도 `브라우저가 자동 소리를 막았어요… 화면 신호로 계속 진행합니다.` 안내가 게임 카드 안에서 겹침 없이 표시되는 것을 별도 CDP 재현으로 확인했다.
 

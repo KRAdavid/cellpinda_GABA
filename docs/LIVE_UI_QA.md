@@ -2,7 +2,7 @@
 
 ## 릴리스 후보 통합 화면 검증 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 최신 후보 `eb34bf1`을 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 최신 후보 `515b660`을 로컬 API 연결 production preview에서 Chromium CDP로 확인했다. 모바일 390×844와 데스크톱 1440×900에서 홈·연구·제품·공유·뇌컨디션 확인 챌린지 경로를 열었다.
 
 | 점검 항목 | 결과 |
 |---|---|
@@ -16,9 +16,13 @@ PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 최신 후보 `eb34
 
 이 기록은 후보 브랜치의 실제 화면 검증이며, main 공개 Pages 배포 완료를 의미하지 않는다.
 
-## 최신 배포 상태 — 2026-09-19 (main `22dd63e`)
+## 최신 배포 상태 — 2026-09-19 (main `ea1cc42`)
 
-최신 main 배포 run `35444540241`은 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 공개 연구 인덱스는 6건, claim은 12개, 제품은 1개이며 티저는 `HOLD`로 외부 미디어 URL을 노출하지 않는다. 라이브 검증은 `teaserPreview: {status: "HOLD", publicUrl: false}`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다. 연구 카드의 상세·출처 안내는 소비자 언어 라벨로 배포됐고 제품 직접 진입 메타데이터도 제품 전용으로 정렬됐다. 연구 인덱스의 content/master 설계 라벨 parity와 DOI 경로 중복 정규화, Worker API 장애 시 정적 fallback 차단, 비기본 origin runtime mode 필수 검증도 같은 배포에서 확인했다.
+최신 main 배포 run `35445159229`은 당시 검증 기준으로 release verify, Pages 게시, 라이브 smoke, release status 기록을 모두 통과했다. 현재 후보 검증기를 공개 주소에 다시 적용하면 라이브 번들이 최신 `뇌컨디션 확인 챌린지` 명칭을 포함하지 않아 실패한다. 공개 연구 인덱스·제품·Smart Store 목적지·티저 `HOLD` 상태는 유지되지만, 후보 PR 병합 전까지 이 공개본을 최신 후보 배포로 간주하지 않는다. `Worker/D1`은 정적 배포 모드의 운영 게이트에 따라 실행하지 않았다.
+
+### 공개본과 후보 계약의 불일치 — 2026-09-19
+
+`pnpm run validate:live-public`를 `https://kradavid.github.io/cellpinda_GABA`에 실행한 결과 `live consumer bundle must contain the current focus challenge name and its simple game description` 오류로 종료했다. 이는 라이브 Pages가 이전 `1분 색 신호 게임` 문구를 제공하고 후보가 `뇌컨디션 확인 챌린지`로 갱신됐기 때문이다. 이 실패는 후보의 품질 결함이 아니라 **후보가 아직 main에 병합되지 않았다는 배포 차단 신호**이며, 병합 후 Pages 게시와 live smoke를 다시 실행해야 한다.
 
 ### 제품 직접 진입 메타데이터 확인 — 2026-09-19
 
