@@ -60,8 +60,8 @@ export default function Admin() {
       <h2>문구 상세</h2><label>공개 문구<textarea rows={6} value={text} readOnly={selected.id.startsWith('shop-review-destination')} onChange={e => setText(e.target.value)} /></label>
       {selected.id.startsWith('shop-review-destination') ? <p className="note">스마트스토어 후기 원문으로 이동하는 고정 안내입니다. 문구는 수정하지 않고 공개·보류 상태만 관리합니다. 실제 인용 후기는 ‘새 인용 후기 등록’에서 원문과 게시 권한을 확인하여 등록하세요.</p> : null}
       <h3>근거 자료 · 읽기 전용</h3>
-      {selected.sources?.map((source, index) => <div key={index}><p>{source.url ? <a href={source.url} target="_blank" rel="noreferrer">{source.title} ↗</a> : source.title}</p>{source.page || source.locator ? <p className="note">{source.page ? `${source.page}쪽 · ` : ''}{source.locator}</p> : null}</div>)}
-      {selected.sourceTitle ? <p>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank" rel="noreferrer">{selected.sourceTitle} ↗</a> : selected.sourceTitle}</p> : null}
+      {selected.sources?.map((source, index) => <div key={index}><p>{source.url ? <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title} ↗</a> : source.title}</p>{source.page || source.locator ? <p className="note">{source.page ? `${source.page}쪽 · ` : ''}{source.locator}</p> : null}</div>)}
+      {selected.sourceTitle ? <p>{selected.sourceUrl ? <a href={selected.sourceUrl} target="_blank" rel="noopener noreferrer">{selected.sourceTitle} ↗</a> : selected.sourceTitle}</p> : null}
       {!selected.sources?.length && !selected.sourceTitle ? <p className="note">등록된 근거 자료가 없습니다.</p> : null}
       {selected.metadata ? <><h3>연구 상세 · 읽기 전용</h3><dl>{Object.entries(selected.metadata).map(([key, value]) => <div key={key} style={{ marginBottom: 16 }}><dt><strong>{metadataLabels[key] || key}</strong></dt><dd style={{ margin: '6px 0', lineHeight: 1.7 }}>{Array.isArray(value) ? <ul>{value.map((entry, i) => <li key={i}>{entry}</li>)}</ul> : value ?? '미확인'}</dd></div>)}</dl></> : null}
       {selected.limitations?.length ? <><h3>표현·적용 한계</h3><ul>{selected.limitations.map((limitation, i) => <li key={i}>{limitation}</li>)}</ul></> : null}
