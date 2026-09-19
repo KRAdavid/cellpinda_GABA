@@ -204,6 +204,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
     <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>각 카드에서 사람 연구의 결과와 조건을 함께 볼 수 있어요.</p></div></div>
+    <p className="research-library-evidence-note"><strong>먼저 확인해 주세요</strong>일반 GABA·휴식 연구를 소비자 언어로 정리한 내용이에요. 셀핀다 완제품 연구와는 다른 자료입니다.</p>
     <div className="research-topic-cards" role="group" aria-label="궁금한 주제 고르기">{topicCards.map(({topic:cardTopic,label,detail,Icon})=>{
       const recordCount=`${studies.filter(claim=>claim.topic===cardTopic).length}건`;
       return <button type="button" className="research-topic-card" key={cardTopic} aria-pressed={activeTopic===cardTopic} onClick={()=>{
