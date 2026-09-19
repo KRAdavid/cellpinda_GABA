@@ -192,11 +192,51 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
   useEffect(() => {
     if (!focusInviteArrival) return;
-    const frame = window.requestAnimationFrame(() => {
-      document.getElementById('focus-game')?.scrollIntoView({ behavior: 'auto', block: 'start' });
-      document.getElementById('fatigue-game-heading')?.focus({ preventScroll: true });
-    });
-    return () => window.cancelAnimationFrame(frame);
+    let frame = 0;
+    let alignmentInterval = 0;
+    let stopped = false;
+    const stopAlignment = () => {
+      stopped = true;
+      if (alignmentInterval) window.clearInterval(alignmentInterval);
+      alignmentInterval = 0;
+      window.removeEventListener('wheel', stopAlignment);
+      window.removeEventListener('touchstart', stopAlignment);
+      window.removeEventListener('pointerdown', stopAlignment);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (['Tab', 'ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) stopAlignment();
+    };
+    const align = () => {
+      const target = document.getElementById('focus-game');
+      if (!target || stopped) return;
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+      const headerOffset = window.matchMedia('(max-width: 680px)').matches ? 72 : 88;
+      const correction = target.getBoundingClientRect().top - headerOffset;
+      if (Math.abs(correction) > 1) window.scrollBy({ top: correction, behavior: 'auto' });
+    };
+    const settle = () => {
+      const startedAt = performance.now();
+      const attempt = () => {
+        if (stopped) return;
+        align();
+        if (performance.now() - startedAt >= 2400) {
+          stopAlignment();
+          document.getElementById('fatigue-game-heading')?.focus({ preventScroll: true });
+        }
+      };
+      attempt();
+      alignmentInterval = window.setInterval(attempt, 120);
+      window.addEventListener('wheel', stopAlignment, { passive: true });
+      window.addEventListener('touchstart', stopAlignment, { passive: true });
+      window.addEventListener('pointerdown', stopAlignment, { passive: true });
+      window.addEventListener('keydown', onKeyDown);
+    };
+    frame = window.requestAnimationFrame(() => window.requestAnimationFrame(settle));
+    return () => {
+      window.cancelAnimationFrame(frame);
+      stopAlignment();
+    };
   }, [focusInviteArrival]);
   useEffect(()=>{if(!kakaoKey)return;const ready=()=>{if(!window.Kakao)return;try{if(!window.Kakao.isInitialized())window.Kakao.init(kakaoKey);setKakaoReady(true)}catch{setKakaoReady(false)}};if(window.Kakao){ready();return;}const script=document.createElement('script');script.src='https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';script.async=true;script.onload=ready;script.onerror=()=>setKakaoReady(false);document.head.appendChild(script);return()=>{script.onload=null;script.onerror=null}},[]);
   const answerStarted=useRef(false);
