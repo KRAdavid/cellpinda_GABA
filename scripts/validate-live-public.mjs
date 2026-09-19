@@ -201,6 +201,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }
     assert.ok(!consumerBundle.includes('운영 큐') && !consumerBundle.includes('운영판을 여는 중입니다.'), 'live consumer bundle must keep the internal operations UI in its lazy route chunk');
     assert.ok(consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name');
+    assert.ok(consumerBundle.includes('브라우저가 자동 소리를 막았어요.') && consumerBundle.includes('화면 신호로 계속 진행합니다.'), 'live consumer bundle must explain blocked game audio without stopping the visual game');
     assert.ok(consumerBundle.includes('매번 신호 순서가 달라져요') && consumerBundle.includes('초록은 누르고, 빨강은 기다려요') && consumerBundle.includes('뜨면 누르기') && consumerBundle.includes('표시된 색 누르기'), 'live consumer bundle must show the three game rules in direct, visual language');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
     assert.ok(consumerBundle.includes('쉬지 않고 이어서 하기') && consumerBundle.includes('휴식이 기록 변화의 원인이라고 단정할 수는 없어요'), 'live consumer bundle must distinguish repeat records without claiming a rest effect');
