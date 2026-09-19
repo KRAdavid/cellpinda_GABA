@@ -155,6 +155,21 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
   }finally{DB.close();}
 });
 
+test('Worker serves the member account shell from the root artifact and preserves asset 404 responses',async()=>{
+  const DB=new MockD1();const requested=[];
+  const env={DB,ADMIN_TOKEN:'a'.repeat(64),RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async request=>{
+    requested.push(new URL(request.url).pathname);
+    return new Response(new URL(request.url).pathname==='/'?'asset':'missing',{status:new URL(request.url).pathname==='/'?200:404});
+  }}};
+  try{
+    const account=await worker.fetch(new Request('https://site.example/account'),env);
+    assert.equal(account.status,200);
+    assert.equal(requested[0],'/');
+    const missing=await worker.fetch(new Request('https://site.example/unknown-release-route'),env);
+    assert.equal(missing.status,404);
+  }finally{DB.close();}
+});
+
 test('Worker applies the same release security headers to API and static asset responses',async()=>{
   const DB=new MockD1();
   const env={DB,ADMIN_TOKEN:'a'.repeat(64),RATE_LIMITER:{limit:async()=>({success:true})},ASSETS:{fetch:async()=>new Response('asset',{headers:{'content-type':'text/css'}})} };

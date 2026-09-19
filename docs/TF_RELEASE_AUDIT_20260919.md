@@ -151,3 +151,10 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - 보조 문구의 명도 대비를 `#53695c`로 통일해 흰 배경에서 약 5.93:1 수준으로 높였다. 자동 대비 점검 미달 항목은 0건이었다.
 - 게임·호흡 안내의 효과음 토글은 지연 타이머와 단계 전환에서도 현재 설정을 읽도록 보정했다. 소리를 끈 뒤 이미 예약된 신호가 다시 울리지 않으며, 화면 안내는 계속 진행된다.
 - `pnpm run build`, `pnpm run typecheck`, `pnpm test`(103개), `validate:ui-contract`를 통과했고, 최신 Pages 배포 [35419085201](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35419085201)와 `validate:live-public`(HTTP 200·주장 12개·연구 6건·제품 1개·공유 페이지 6개·SmartStore 전용·750 제거·원장 출처 일치)를 확인했다.
+
+### 2026-09-19 공개 라벨·Worker 경계 보강
+
+- 뇌 피로 점수의 보조기술 안내를 `지난 7일 다섯 질문에 답한 기록`으로 바꿔 건강 점수로 오해하지 않게 했다. 제품 구성 카드와 정적 제품 페이지의 이미지 대체 텍스트에는 `기타가공품 식품 유형`을 함께 표시했다.
+- Worker 자산 경로는 `/account`에서 루트 앱 셸을 제공하고, 존재하지 않는 경로는 전용 404 응답을 유지하도록 정리했다. 404 문서에는 홈의 소셜 메타데이터를 덧씌우지 않는다.
+- Worker 관측 설정은 10% 샘플링과 쿼리 문자열 비식별화를 사용하도록 명시했다. 공개 export 검증이 이 계약과 `404-page` 자산 정책을 검사한다.
+- `pnpm run typecheck`, Worker·소셜 테스트 20개, `pnpm run validate:public`, `pnpm run validate:deploy-workflow`를 통과했다. 정적 Pages 공개본은 계속 정상이며 Worker/D1 연결은 Cloudflare 설정값 입력 전까지 `STATIC_ONLY`로 유지한다.
