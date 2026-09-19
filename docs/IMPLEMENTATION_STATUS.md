@@ -12,9 +12,9 @@
 
 현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 필수 검사 2개가 통과했지만 Code Owner 독립 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 공개 Pages는 이전 `main`을 가리키며 후보와 동기화되지 않았다. 병합 전에는 공개 배포로 판정하지 않으며, 병합 뒤 release manifest의 후보 SHA와 파일 해시를 실제 Pages·Worker 응답에 대조하는 라이브 smoke가 실행된다.
 
-## 최신 성능 보정 — 2026-09-20 `3c12982`
+## 최신 성능 보정 — 2026-09-20 `3d01dbd`
 
-연구 전용 화면은 초기 홈 번들에서 분리해 연구 경로에 진입할 때만 지연 로드하도록 바꿨다. production build 기준 초기 JavaScript는 370KB에서 348KB, 초기 CSS는 143KB에서 107KB로 줄었고, 연구 경로는 지연 로드 뒤 카드 6건과 연구 문구를 정상 표시했다. 타입검사·107개 테스트·UI 계약·production build·필수 PR 검사를 통과했다.
+연구 화면뿐 아니라 제품·후기·챌린지·스토리·티저·공유 등 첫 화면 아래의 비핵심 섹션도 지연 로드하도록 분리했다. 연구 전용 CSS 역시 연구 경로에서만 불러온다. production build 기준 초기 JavaScript는 370KB에서 299.25KB( gzip 91.75KB ), 초기 CSS는 약 143KB에서 84.12KB( gzip 16.09KB )로 줄었다. 각 지연 로드 영역에는 로딩 경계를 두어 첫 화면이 빈 상태로 남지 않게 했다. 연구 경로 진입 후 카드 6건과 소비자 문구가 정상 표시되고, 390px 모바일 화면 가로 넘침이 0건임을 Chrome CDP로 확인했다. 타입검사·107개 테스트·UI 계약·production build·필수 PR 검사를 통과했다.
 
 ## 최신 후보 보정 — 2026-09-20 release manifest 기준
 
