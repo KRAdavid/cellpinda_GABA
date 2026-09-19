@@ -1,5 +1,6 @@
 const workerUrl = process.env.WORKER_URL?.trim();
 if (!workerUrl) throw new Error('WORKER_URL is required; configure the deployed Worker origin before running the live API check');
+const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const base = new URL(workerUrl);
 if (base.protocol !== 'https:' || base.username || base.password || base.pathname !== '/') {
   throw new Error('WORKER_URL must be an HTTPS origin without credentials or a path');
@@ -37,6 +38,10 @@ const cacheContains = (response, ...parts) => {
   for (const part of parts) if (!cacheControl.includes(part)) throw new Error(`${response.url} has an incomplete cache policy: ${cacheControl || '[missing]'}`);
 };
 const canonicalHref = html => /<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i.exec(html)?.[1] || '';
+const jsonLd = html => {
+  const raw = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i)?.[1] || '';
+  try { return JSON.parse(raw); } catch { return null; }
+};
 const metaContent = (html, property) => {
   const escaped=property.replace(/[.*+?^${}()|[\\]\\]/g,'\\\\$&');
   return new RegExp(`<meta[^>]+property="${escaped}"[^>]+content="([^"]+)"`,'i').exec(html)?.[1] || '';
@@ -60,6 +65,9 @@ if (!robots.includes(`Sitemap: ${base.origin}/sitemap.xml`) || !sitemap.includes
 if (canonicalHref(page)!==`${base.origin}/` || !metaContent(page,'og:url')) throw new Error('Worker root canonical/Open Graph metadata is invalid');
 if (canonicalHref(account)!==`${base.origin}/` || !/noindex, nofollow, noarchive/.test(account)) throw new Error('Worker account shell must be private and non-indexable');
 if (canonicalHref(productPage)!==`${base.origin}/products/` || metaContent(productPage,'og:url')!==`${base.origin}/products/`) throw new Error('Worker product route must preserve its product canonical/Open Graph URL');
+const productSchema = jsonLd(productPage);
+const productSchemaNode = Array.isArray(productSchema?.['@graph']) ? productSchema['@graph'].find(node => node?.['@type'] === 'Product') : null;
+if (productSchema?.['@context'] !== 'https://schema.org' || productSchemaNode?.name !== '셀핀다 가바 1500' || productSchemaNode.category !== '기타가공품' || productSchemaNode.image !== `${base.origin}/assets/product-composition-1500.png` || productSchemaNode.sameAs !== approvedSmartStoreUrl || productSchemaNode.offers || productSchemaNode.aggregateRating || productSchemaNode.review) throw new Error('Worker product route has missing or unsafe Product structured data');
 if (canonicalHref(researchPage)!==`${base.origin}/research/` || metaContent(researchPage,'og:url')!==`${base.origin}/research/`) throw new Error('Worker research route must preserve its research canonical/Open Graph URL');
 if (canonicalHref(focusPage)!==`${base.origin}/focus/` || metaContent(focusPage,'og:url')!==`${base.origin}/focus/`) throw new Error('Worker focus route must preserve its invite canonical/Open Graph URL');
 const sitemapUrls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
