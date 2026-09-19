@@ -10,7 +10,6 @@ import BrainLoadEvidence from './components/BrainLoadEvidence';
 import TeaserPreview from './components/TeaserPreview';
 import ProductShare from './components/ProductShare';
 import PurchaseQuestions from './components/PurchaseQuestions';
-import OperationsMvp from './components/OperationsMvp';
 import AnalyticsConsent from './components/AnalyticsConsent';
 import {apiEndpoint} from './api-origin';
 import {resultTypes, rhythmIdFromUrl} from './domain/rhythm';
@@ -18,6 +17,7 @@ import {analyticsConsentGranted} from './domain/analytics-consent';
 import {REVIEW_DESTINATION_URL} from './domain/reviews';
 const Admin = lazy(() => import('./components/Admin'));
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
+const OperationsMvp=lazy(()=>import('./components/OperationsMvp'));
 type Product={id:string;name:string;servings:number;category:string;officialUrl:string;availability?:string;priceDisplay?:string|null};
 type Content={claims:Claim[];products:Product[];reviews:PublicReview[]};
 const eventMap:Record<string,string>={rhythm_start:'rhythm_check_started',rhythm_complete:'rhythm_check_completed',share_request:'share_requested',share_copy:'share_link_copied',card_download:'share_image_downloaded',purchase_click:'purchase_outbound_clicked',review_open:'review_opened',review_nav:'review_section_navigated',faq_open:'purchase_question_opened'};
@@ -223,7 +223,7 @@ export default function App(){
  },[content,currentPath]);
  if(accountView)return <Suspense fallback={<p className="loading">내 기록을 여는 중입니다.</p>}><MemberRecords/></Suspense>;
  if(adminView)return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
- if(operationsView)return <OperationsMvp/>;
+ if(operationsView)return <Suspense fallback={<p className="loading">운영판을 여는 중입니다.</p>}><OperationsMvp/></Suspense>;
  if(researchView)return <><a className="skip" href="#main">본문으로 이동</a><header className="header research-route-header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav aria-label="연구 메뉴"><a href={siteRoot}>메인으로</a></nav></header><main id="main" className="research-route-main">{content?<><section className="research-route-intro wrap"><p className="chapter">일반 GABA 사람 연구</p><h1>연구에서 무엇을 봤을까요?</h1><p>잠·긴장·생각 과제에서 관찰한 내용을 그림으로 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.</p></section><ResearchLibrary claims={content.claims} sectionTitle="주제별로 한눈에 보기" onOpen={()=>track('evidence_opened',{path:'/research'})}/></>:<section className="section wrap content-status"><p className="chapter">GABA 사람 연구</p><h1>{loading?'연구 내용을 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h1><p>{loading?'사람 연구를 쉽게 정리한 내용을 불러오는 중입니다.':'연구 자료를 불러오지 못했습니다. 다시 시도해 주세요.'}</p>{!loading?<button type="button" className="button outline" onClick={()=>setRetryKey(value=>value+1)}>다시 불러오기</button>:null}</section>}</main><footer className="wrap footer research-route-footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>GABA 사람 연구 안내</p><a href={siteRoot}>메인으로</a></footer></>;
  const linkContext=referralId?<aside className="link-context" aria-live="polite">공유된 리듬 링크로 방문했어요. 내 하루도 1분이면 확인할 수 있어요.</aside>:campaignId?<aside className="link-context" aria-live="polite">캠페인 링크로 방문했어요. 원하는 흐름부터 살펴보세요.</aside>:null;
    return <><a className="skip" href="#main">본문으로 이동</a><header className="header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav id="primary-navigation" ref={menuNavRef} aria-label="주 메뉴" className={menu?'open':''} onClick={()=>closeMenu()} onKeyDown={event=>{if(event.key==='Escape')closeMenu(true)}}><a href="#rhythm">잠과 휴식 체크</a><a href="#story">GABA는?</a><a href={`${siteRoot}research/`}>GABA 연구 읽기</a><a href="#fermentation">발효가바는?</a><a href="#products">제품 구성</a>{content?.reviews?.length ? <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={()=>track('review_open',{productId:'gaba1500',path:'/header'})}>가바 1500 구매자 후기 ↗</a> : null}</nav><a href="#rhythm" className="button small" onClick={()=>track('hero_check_start',{path:'/header'})}>1분 체크 <ArrowRight size={18}/></a><button ref={menuToggleRef} className="menu-toggle" aria-label={menu?'메뉴 닫기':'메뉴 열기'} aria-expanded={menu} aria-controls="primary-navigation" onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>{linkContext}
