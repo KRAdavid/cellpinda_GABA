@@ -251,6 +251,9 @@ if (/<link rel="canonical"|property="og:(?:url|title|image)"/i.test(notFoundHtml
 if (/cp\s+dist-pages\/index\.html\s+dist-pages\/404\.html/.test(deployWorkflow)) fail('Pages deployment must keep the dedicated 404 document instead of copying the homepage');
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(app + indexHtml)) fail('legacy official-mall destination leaked into consumer source');
 const consumerSource = app + indexHtml + review;
+const consumerAnchorTags = [...consumerSource.matchAll(/<a\b[^>]*>/g)].map(match => match[0]);
+const unsafeNewWindowLinks = consumerAnchorTags.filter(tag => /\btarget="_blank"/.test(tag) && !/\brel="[^"]*\bnoopener\b[^"]*"/.test(tag));
+if (unsafeNewWindowLinks.length) fail(`consumer links opening a new window must include rel="noopener noreferrer" (${unsafeNewWindowLinks.length} found)`);
 const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver\.com\/[A-Za-z0-9_/?=&.%:#-]+/g)].map(match => match[0]);
 if (!smartStoreLinks.length || smartStoreLinks.some(url => ![approvedSmartStoreUrl, approvedSmartStoreReviewUrl].includes(url)) || !smartStoreLinks.includes(approvedSmartStoreUrl) || !smartStoreLinks.includes(approvedSmartStoreReviewUrl)) {
   fail(`consumer Smart Store links must use the approved product detail or exact review dialog (${approvedSmartStoreUrl} / ${approvedSmartStoreReviewUrl})`);
