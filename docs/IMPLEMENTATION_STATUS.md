@@ -32,7 +32,7 @@ UI 계약도 이 두 색상 토큰과 CTA 아이콘의 `aria-hidden`을 직접 �
 
 ## 현재 후보 검증 — 2026-09-20 20:45 KST
 
-후보 HEAD `1efa7e84fe05a6a9cfc815c7c546f82643e49db8`에서 `release-verify`와 `site-quality-verify`가 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 Code Owner 승인 전이다. PR 이벤트에서는 Pages 게시·Worker 배포·라이브 smoke가 의도적으로 건너뛰므로, 현재 공개 Pages는 후보와 동기화됐다고 판정하지 않는다.
+후보 HEAD `077f32f0637c679edd28c984e79c96e67166a1e7`에서 `release-verify`와 `site-quality-verify`가 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 Code Owner 승인 전이다. PR 이벤트에서는 Pages 게시·Worker 배포·라이브 smoke가 의도적으로 건너뛰므로, 현재 공개 Pages는 후보와 동기화됐다고 판정하지 않는다.
 
 ## 이전 후보 보정 — 2026-09-20 후보 `486b748`
 
