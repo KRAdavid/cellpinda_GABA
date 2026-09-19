@@ -6,7 +6,8 @@ const base = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL || cliBase || un
 const publicPath = publicSitePath(base);
 const routePath = segment => `${publicPath}/${segment}`;
 const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const runtimeMode = process.env.PUBLIC_RUNTIME_MODE || 'static';
+const runtimeMode = process.env.PUBLIC_RUNTIME_MODE || (base === normalizePublicSiteUrl() ? 'static' : '');
+if (!runtimeMode) throw new Error('PUBLIC_RUNTIME_MODE is required when validating a non-default public origin');
 if (!['static', 'worker'].includes(runtimeMode)) throw new Error('PUBLIC_RUNTIME_MODE must be static or worker');
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
