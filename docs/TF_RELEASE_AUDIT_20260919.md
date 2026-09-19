@@ -2,11 +2,13 @@
 
 ## 현재 배포 검증 결과
 
-현재 공개 Pages 콘텐츠 기준은 커밋 `27ebd61`이며 GitHub Actions `35443431186`가 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공시켰다. 공개 사이트는 정적 Pages 모드로 운영되고, Worker/D1 job은 비밀값·공개 origin 게이트가 충족되지 않아 실행하지 않았다. 라이브 결과는 연구 6건·공개 주장 12개·제품 1개·공유 페이지 6개, 스마트스토어 단일 목적지, 750 제거, provenance 일치, 내부 운영 스냅샷 제외, 안전한 제품 구조화 데이터다. 제품 직접 진입 화면도 제품 전용 제목·설명·대표 이미지·canonical을 사용한다. 티저는 `HOLD`이며 공개 URL을 노출하지 않는다.
+현재 공개 Pages 콘텐츠 기준은 커밋 `c9f4f8c`이며 GitHub Actions `35444036261`가 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공시켰다. 공개 사이트는 정적 Pages 모드로 운영되고, Worker/D1 job은 비밀값·공개 origin 게이트가 충족되지 않아 실행하지 않았다. 라이브 결과는 연구 6건·공개 주장 12개·제품 1개·공유 페이지 6개, 스마트스토어 단일 목적지, 750 제거, provenance 일치, 내부 운영 스냅샷 제외, 안전한 제품 구조화 데이터다. 제품 직접 진입 화면도 제품 전용 제목·설명·대표 이미지·canonical을 사용한다. 티저는 `HOLD`이며 공개 URL을 노출하지 않는다.
 
 이 문서의 아래 항목은 각 감리 시점의 증거를 보존한다. 현재 출시 판정은 `IN_PROGRESS_WITH_GATES`이며 B2·B3·B4·C2·E1은 사람 입력과 외부 승인이 도착하기 전까지 완료로 승격하지 않는다.
 
 ## 최신 판정 보정 — 2026-09-19
+
+Worker 모드의 콘텐츠 API 장애는 정적 fallback으로 숨기지 않고 오류·재시도 화면으로 노출하도록 보완했다. 정적 Pages 모드의 승인 JSON fallback은 유지하며, 운영 API가 정상일 때만 동적 콘텐츠를 사용한다. 이 경계는 UI 계약과 배포 검증 run `35444036261`에서 확인했다.
 
 연구 마스터 인덱스는 소비자용 연구 설계 라벨을 공개 claim과 동일하게 유지하도록 보정했다. DOI publisher 경로의 `/full`·`/abstract`·`/pdf` 변형은 동일 논문 키로 정규화하며, export 검증기가 content/master parity를 차단한다. 배포 run `35443431186`에서 이 회귀 검사를 통과했다.
 
