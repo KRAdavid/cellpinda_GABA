@@ -68,7 +68,7 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .product-visual-facts strong{font-size:17px;color:var(--ink)}
 .fatigue-game-comparison-note{padding:16px 18px;border-radius:12px;background:#f2f6f2;color:#455c4c;font-size:15px;line-height:1.75}
 .fatigue-game-comparison-note{margin:18px 0}
-@media(max-width:680px){.product{grid-template-columns:1fr}.product-visual{min-height:330px;padding:32px 24px}.product-visual>strong{font-size:72px}.product-portion-grid{grid-template-columns:repeat(6,14px);gap:9px;margin:24px 0 20px}.product-portion-grid i{width:14px;height:14px}.product-visual-facts{max-width:245px}.product-body{padding:24px}.product-body .product-cta{order:2;margin:0 0 12px}.product-body dl{order:3}}
+@media(max-width:680px){.product{grid-template-columns:1fr}.product-visual{min-height:260px;padding:26px 20px}.product-visual>strong{font-size:64px}.product-portion-grid{grid-template-columns:repeat(6,14px);gap:9px;margin:18px 0 16px}.product-portion-grid i{width:14px;height:14px}.product-visual-facts{max-width:245px}.product-body{padding:24px}.product-body .product-cta{order:2;margin:0 0 12px}.product-body dl{order:3}}
 /* Improve small-text contrast and keep the first mobile steps readable. */
 .chapter{color:#116f4a}
 .teaser-intro>.chapter{color:#a8e7bd}

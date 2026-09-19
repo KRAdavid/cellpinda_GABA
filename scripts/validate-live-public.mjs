@@ -288,7 +288,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.equal(record.evidenceHash, claim.evidenceHash, `live provenance mismatch for ${record.id}`);
     assert.equal(record.reviewedAt, claim.reviewedAt, `live review date mismatch for ${record.id}`);
     }
-    console.log(JSON.stringify({base, runtimeMode: runtimeMode.toUpperCase(), attempt, page: 200, heroImage: 'webp-ready', claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: true, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
+    console.log(JSON.stringify({base, runtimeMode: runtimeMode.toUpperCase(), attempt, page: 200, heroImage: 'webp-ready', claims: content.claims.length, masterRecords: master.records.length, products: content.products.length, sharePages: sharedResultIds.length, teaserPreview: {status: teaserPreview.status, publicUrl: Boolean(teaserPreview.url)}, internalOpsSnapshots: 'excluded', smartStoreOnly: true, removed750: true, provenance: 'matched'}));
     lastError = undefined;
     break;
   } catch (error) {

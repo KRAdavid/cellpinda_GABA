@@ -1,5 +1,9 @@
 # 운영 MVP — 공개용 GABA 논문 마스터 인덱스
 
+## 최신 운영 상태 — 2026-09-19
+
+공개 Pages는 정적 배포본으로 정상 동작하고, 최신 라이브 검증은 페이지 200·연구 6건·제품 1개·공유 페이지 6개·스마트스토어 목적지·750 제거·provenance 일치를 확인했다. 티저 B4는 `HOLD/WAITING`이다. 승인된 공개 미디어 주소가 생기기 전에는 외부 영상 iframe·재생 URL을 노출하지 않으며, 제품·후기·주문·Worker/D1 연결은 각각의 사람 입력 게이트를 유지한다. 라이브 smoke 출력도 티저를 `status`와 `publicUrl` 여부로 보고해 `HOLD`와 공개 재생을 혼동하지 않는다.
+
 기준일: 2026-09-11
 
 이 MVP는 한 문장 목표를 `Goal Contract → 목표별 TF → 업무 그래프 → 샌드박스 실행 → 결과·승인 보고`로 바꾼다. 공개 사이트의 실제 연구 데이터는 승인 원장 `data/content-ledger.json`에서 생성되며, 빌드 시 `public/data/gaba-master-index.json`으로 export한다.
@@ -58,7 +62,7 @@ CI와 로컬 production build는 `pnpm run validate:ops`로 전체 샌드박스 
 
 공개 데이터는 `pnpm run sync:data` 직후 `pnpm run validate:public`에서 다시 검사한다. 제품은 `gaba1500` 하나이고 스마트스토어 목적지만 허용하며, 750 재유입·비공개 필드 노출·마스터 인덱스와 content export의 provenance 불일치를 build 단계에서 차단한다.
 
-티저는 `data/teaser-manifest.json`의 상태를 따른다. 현재 검토 URL은 비로그인 HTTP 200으로 열리는 84초 HTML 애니메이션이지만, MP4/HLS·전체 자막/대본·포스터·권리·표시사항·CTA가 확인되지 않아 최종 공개 미디어 주소로 승격하지 않았다. 사용자의 요청으로 `PREVIEW` 티저를 리듬 체크 다음에 페이지 안에서 즉시 재생하고, 임베드가 막힐 때만 대체 링크를 제공한다. `pnpm run validate:teaser`는 지정된 공개 preview export 외에 검토 URL이 섞이지 않았는지 빌드에서 차단한다. 필요한 승인 자료가 모두 모이기 전까지 자동 협업 파동과 B4 게이트는 `HOLD/WAITING`으로 유지한다.
+티저는 `data/teaser-manifest.json`의 상태를 따른다. 현재 상태는 `HOLD`이며 승인된 공개 영상 주소·미디어 파일이 없으므로 외부 iframe·재생 링크를 만들지 않는다. 이전에 접근한 HTML 애니메이션은 내부 검토 자료로만 보존하고, 전체 자막/대본·포스터·권리·표시사항·CTA와 비로그인 재생을 확인한 뒤에만 `PREVIEW` 또는 `APPROVED`로 승격한다. `pnpm run validate:teaser`는 지정된 공개 preview export 외에 검토 URL이 섞이지 않았는지 빌드에서 차단한다. 필요한 승인 자료가 모두 모이기 전까지 자동 협업 파동과 B4 게이트는 `HOLD/WAITING`으로 유지한다.
 
 제품 책임자와 표시 검토자는 `pnpm run audit:materials`로 지정 로컬 자료를 읽기 전용으로 재검색할 수 있다. 매니페스트는 1500 소비자 포장과 1 kg·10 kg 벌크 라벨을 구분하고, 결과는 `tmp/local-material-audit.json`에만 저장한다. 자료가 발견되어도 `VERIFYING` 작업을 사람이 승인하기 전에는 공개 원장·문구를 자동 변경하지 않는다.
 
