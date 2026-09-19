@@ -5,6 +5,7 @@ import { projectConsumerVisual } from '../src/domain/public-research.ts';
 const readJson = async relative => JSON.parse(await readFile(new URL(`../${relative}`, import.meta.url), 'utf8'));
 const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
+if (/제품 권장량과 별개|제품 권장량/.test(JSON.stringify({content, master}))) fail('public research export must use the approved product-serving boundary phrase');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const focusHtml = await readFile(new URL('../public/focus/index.html', import.meta.url), 'utf8');
 const focusCardSvg = await readFile(new URL('../public/assets/focus-game-card.svg', import.meta.url), 'utf8');

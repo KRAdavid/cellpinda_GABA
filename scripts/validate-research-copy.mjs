@@ -23,6 +23,7 @@ const research = ledger.claims.filter(claim => claim.status === 'approved' && cl
 if (research.length === 0) fail('at least one approved research claim is required');
 const publicResearchCopy = JSON.stringify(research);
 if (/(긴장·잠|긴장과 잠|긴장에 대한|긴장이 오래)/.test(`${consumerUi}\n${publicResearchCopy}`)) fail('consumer research copy must use the everyday word 스트레스 instead of 긴장');
+if (/제품 권장량과 별개|제품 권장량/.test(`${consumerUi}\n${publicResearchCopy}`)) fail('consumer research copy must use the approved product boundary phrase 제품 표기 섭취량과 달라요');
 const yoto = research.find(claim => claim.id === 'research-yoto-2012');
 const yotoConsumerData = JSON.stringify({publicText:yoto?.publicText,metadata:yoto?.metadata});
 if (!yoto?.publicText?.includes('GABA 캡슐') || !yoto.metadata?.dose?.includes('덱스트린 캡슐') || !yoto.metadata?.consumerVisual?.steps?.[0]?.includes('캡슐') || !yoto.metadata?.consumerScope?.includes('건강한 성인') || /100mg|30분/.test(yoto.metadata.consumerScope) || /음료|마시/.test(yotoConsumerData) || yoto.topic !== '뇌파·과제') fail('Yoto consumer copy must match the capsule study, keep repeated details in its visual, and avoid suggesting a stress-relief outcome');
@@ -63,6 +64,7 @@ for (const claim of research) {
   const metadata = claim.metadata ?? {};
   const readerCopy = [claim.topic, claim.publicText, metadata.question, metadata.population, metadata.sampleSize, metadata.dose, metadata.duration, metadata.comparison, metadata.outcome, metadata.consumerScope, metadata.consumerSummary, metadata.consumerFinding, metadata.consumerDetail, metadata.consumerContext, metadata.consumerDisclosure, metadata.hopefulTakeaway, metadata.productApplicability, ...collectStrings(metadata.consumerVisual)].filter(Boolean).join(' ');
   if (technicalResearchTerms.test(readerCopy)) fail(claim.id + ' exposes a researcher-only term in consumer copy');
+  if (/제품 권장량과 별개|제품 권장량/.test(readerCopy)) fail(`${claim.id} uses a stale product-serving boundary phrase`);
   if (typeof claim.publicText !== 'string' || claim.publicText.trim().length < 30) fail(`${claim.id}.publicText must be a consumer-ready summary`);
   if (discouragedMarketing.test(claim.publicText)) fail(`${claim.id}.publicText contains a discouraged negative marketing phrase`);
   for (const field of ['consumerScope', 'consumerSummary', 'hopefulTakeaway', 'productApplicability']) {
