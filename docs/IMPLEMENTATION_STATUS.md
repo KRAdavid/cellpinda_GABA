@@ -6,6 +6,12 @@
 
 현재 목표 판정은 `IN_PROGRESS_WITH_GATES`다. B2 제품 표시, B3 실제 후기 권한, B4 티저 공개 승인, C2 Worker/D1 운영 설정, E1 실구매 대사는 외부 입력 또는 사람 승인이 필요한 게이트로 남아 있다. 아래의 날짜가 지난 기록은 당시 검증 결과를 보존한 이력이며, 현재 상태는 이 요약과 라이브 smoke 결과를 우선한다.
 
+## 최신 후보 보정 — 2026-09-20 `d41b866`
+
+후보의 소비자·모바일 감리를 마무리하면서 메뉴 링크, 연구 상세 접기, 제품·후기 바로가기, 게임 연습 건너뛰기와 연구 출처 링크의 터치 영역을 최소 44px로 맞췄다. 키보드 사용 시에도 같은 요소가 포커스 가능한 높이를 유지하도록 공개 화면 공통 스타일과 챌린지 스타일을 함께 보정했다. 변경 후 `pnpm test` 107/107, 타입검사, production build, `release-verify`, `site-quality-verify`를 다시 통과했다.
+
+현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 필수 검사 2개가 통과했지만 Code Owner 독립 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 공개 Pages는 이전 `main`을 가리키며 후보와 동기화되지 않았다. 병합 전에는 공개 배포로 판정하지 않으며, 병합 뒤 release manifest의 후보 SHA와 파일 해시를 실제 Pages·Worker 응답에 대조하는 라이브 smoke가 실행된다.
+
 ## 최신 후보 보정 — 2026-09-20 release manifest 기준
 
 배포 후보에 `release-manifest.json`을 생성해 후보 커밋 SHA, 공개 route, 제품·연구·후기 수, SmartStore 목적지, 750 제거, 티저 `HOLD`, 챌린지·제품 경계 문구와 모든 정적 asset hash를 함께 기록한다. Pages와 Worker 빌드는 각각 `static`·`worker` 모드를 manifest에 남기고, 라이브 smoke는 공개 manifest의 SHA와 route·콘텐츠 수·핵심 marker를 후보와 대조한다. 이 값이 다르면 배포 완료로 판정하지 않는다. 정적 연구 fallback과 자바스크립트가 꺼진 첫 화면에도 연구 사용량과 제품 권장량의 구분을 표시하고 UI 계약으로 고정했다.
