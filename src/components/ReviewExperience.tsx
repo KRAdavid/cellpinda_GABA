@@ -29,7 +29,7 @@ function reviewDestination(review: PublicReview) {
     const url = new URL(review.sourceUrl);
     if (url.href !== REVIEW_DESTINATION_URL) return null;
     const productId = 'gaba1500';
-    return { url: url.href, productId, label: '가바 1500 · 스마트스토어 후기 읽기' };
+    return { url: url.href, productId, label: '가바 1500 스마트스토어 후기 읽기' };
   } catch { return null; }
 }
 
@@ -74,7 +74,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
           <span className="review-experience-label">스마트스토어 후기</span>
           <h3>스마트스토어 후기 원문 보기</h3>
           {destinations.map(({ review, url, productId, label }) => <div key={review.id}>
-            <a className="button" href={url} target="_blank" rel="noopener noreferrer" onClick={() => onOpen?.(productId)}>{label} <span aria-label="새 창">↗</span></a>
+            <a className="button" href={url} target="_blank" rel="noopener noreferrer" aria-label={`${label} · 새 창`} onClick={() => onOpen?.(productId)}>{label} <span aria-hidden="true">↗</span></a>
           </div>)}
         </div> : null}
         {(quotes.length > 0 || destinations.length > 0) ? <div className="review-experience-cues" aria-label="후기에서 함께 살펴볼 정보">

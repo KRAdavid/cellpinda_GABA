@@ -165,7 +165,11 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }));
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 영상') && consumerBundle.includes('발효가바는'), 'live consumer bundle must contain the embedded fermentation teaser section');
-    assert.ok(consumerBundle.includes('화면에 들어오면 자동 시작') && consumerBundle.includes('이 화면에 들어오면 영상이 자동으로 시작돼요') && consumerBundle.includes('자동 시작이 막히면'), 'live consumer bundle must explain teaser autoplay and its user-controlled fallback');
+    if (teaserPreview.status === 'HOLD') {
+      assert.ok(consumerBundle.includes('영상 공개 준비 중이에요') && consumerBundle.includes('자막·권리·제품 표시를 확인한 뒤'), 'live consumer bundle must show the approved teaser hold state');
+    } else {
+      assert.ok(consumerBundle.includes('화면에 들어오면 자동 시작') && consumerBundle.includes('이 화면에 들어오면 영상이 자동으로 시작돼요') && consumerBundle.includes('자동 시작이 막히면'), 'live consumer bundle must explain teaser autoplay and its user-controlled fallback');
+    }
     assert.ok(!consumerBundle.includes('운영 큐') && !consumerBundle.includes('운영판을 여는 중입니다.'), 'live consumer bundle must keep the internal operations UI in its lazy route chunk');
     assert.ok(consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name');
     assert.ok(consumerBundle.includes('매번 신호 순서가 달라져요') && consumerBundle.includes('초록은 누르고, 빨강은 기다려요') && consumerBundle.includes('뜨면 누르기') && consumerBundle.includes('표시된 색 누르기'), 'live consumer bundle must show the three game rules in direct, visual language');
@@ -184,7 +188,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const byun2018 = content.claims.find(claim => claim.id === 'research-byun-2018');
     assert.ok(byun2018?.metadata?.sampleSize?.includes('40명') && byun2018.metadata.sampleSize.includes('30명') && byun2018.metadata.sampleSize.includes('10명') && byun2018.metadata.consumerVisual?.groups?.length === 2, 'live Byun study must show the participant split and both groups');
     const powers2008 = content.claims.find(claim => claim.id === 'research-powers-2008');
-    assert.ok(powers2008?.metadata?.consumerFindingFirst !== true && powers2008.metadata?.consumerSummary?.includes('남성 11명') && powers2008.metadata.consumerSummary.includes('GABA 3g') && powers2008.metadata.consumerSummary.includes('90분') && powers2008.metadata.consumerFinding?.includes('성장호르몬 최고 수치') && powers2008.metadata.consumerFinding.includes('근육 크기와 근력 변화는 측정하지 않았어요') && !powers2008.metadata.consumerDetail, 'live Powers study must lead with its measurement design and keep the finding in context');
+    assert.ok(powers2008?.metadata?.consumerFindingFirst !== true && powers2008.metadata?.consumerSummary?.includes('남성 11명') && powers2008.metadata.consumerSummary.includes('GABA 3g') && powers2008.metadata.consumerSummary.includes('90분') && powers2008.metadata.consumerFinding?.includes('성장호르몬 최고 수치') && powers2008.metadata.consumerFinding.includes('근육 크기와 근력 변화는 측정하지 않았어요') && powers2008.metadata.consumerDisclosure?.includes('PubMed 초록에는') && powers2008.metadata.consumerDisclosureStatus === 'not_reported_in_pubmed_abstract' && !powers2008.metadata.consumerDetail, 'live Powers study must lead with its measurement design and keep the finding in context');
     assert.ok(review2020?.metadata?.consumerDisclosure?.includes('게재 비용 지원') && review2020.metadata.consumerDisclosure.includes('산업계 관계'), 'live review must preserve its published funding and relationship disclosure');
     assert.ok(content.claims.find(claim => claim.id === 'research-yoto-2012')?.metadata?.consumerDisclosure?.includes('저자 9명 중 4명'), 'live Yoto study must show the published author affiliation disclosure');
     assert.ok(!content.claims.some(claim => claim.id === 'research-sakashita-2019') && !master.records.some(record => record.id === 'research-sakashita-2019'), 'live public research must keep the study with unresolved statistical review out of the public master index');
@@ -252,8 +256,9 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(content.reviews[0].id, 'shop-review-destination-1500', 'live review destination must be the approved GABA 1500 record');
     assert.ok(isSmartStoreReview(content.reviews[0].sourceUrl), 'live review destination must deep-link to the Smart Store 1500 review dialog');
     assert.equal(content.reviews[0].publicText, approvedReviewText, 'live review destination must keep the approved consumer message');
-    assert.equal(teaserPreview.status, 'PREVIEW', 'live teaser preview must be marked PREVIEW');
-    assert.equal(teaserPreview.url, 'https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site/', 'live teaser preview must use the supplied HTTPS URL');
+    assert.ok(['HOLD', 'PREVIEW', 'APPROVED'].includes(teaserPreview.status), 'live teaser preview must expose a supported approval state');
+    if (teaserPreview.status === 'HOLD') assert.equal(teaserPreview.url, null, 'live teaser HOLD state must not expose an external preview URL');
+    if (teaserPreview.status === 'PREVIEW') assert.equal(teaserPreview.url, 'https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site/', 'live teaser preview must use the supplied HTTPS URL');
     assert.equal(teaserPreview.placement, '선택형 보조 CTA · 리듬 체크 다음', 'live teaser preview must keep the approved placement');
     assert.ok(!/제한적|매우 제한적|결과가 일치하지|정량 메타분석|다만 GABA만의 효과|이상사례|유의하지 않음/i.test(JSON.stringify({content, master})), 'live public research data contains blocked negative marketing copy');
     assert.ok(!/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(JSON.stringify(content)), 'live public content contains a legacy official-mall destination');

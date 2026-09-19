@@ -33,7 +33,7 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'reviews' }); }}>
         <summary>다른 사람의 후기는 어떻게 읽어야 하나요?</summary>
-        <div><p>후기는 한 사람의 경험이에요. 작성 날짜와 사용 기간, 제품을 무료로 받았거나 보상을 받았는지도 함께 살펴보세요.</p><a className="text-link" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('review_open',{productId:products[0]?.id ?? 'gaba1500',path:'/purchase-faq'})}>가바 1500 구매자 후기 읽기 →</a></div>
+        <div><p>후기는 한 사람의 경험이에요. 작성 날짜와 사용 기간, 제품을 무료로 받았거나 보상을 받았는지도 함께 살펴보세요.</p><a className="text-link" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 후기 읽기 · 새 창" onClick={()=>onEvent?.('review_open',{productId:products[0]?.id ?? 'gaba1500',path:'/purchase-faq'})}>가바 1500 스마트스토어 후기 읽기 ↗</a></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'evidence' }); }}>
         <summary>연구 내용은 제품을 이해하는 데 어떻게 도움이 되나요?</summary>
