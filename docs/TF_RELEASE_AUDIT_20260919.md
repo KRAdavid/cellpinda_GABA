@@ -136,3 +136,11 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 `pnpm run build`, `pnpm test`(103개), 공개 export·연구 카피·UI·티저·배포 workflow 검증을 통과했다. GitHub Actions 배포 실행 [35417341017](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35417341017)은 Pages 게시와 static live smoke를 성공시켰고, `pnpm run validate:live-public`는 HTTP 200·주장 12개·연구 6건·제품 1개·공유 페이지 6개·SmartStore 전용 링크·750 제거·원장 출처 일치를 확인했다.
 
 현재 공개 런타임은 GitHub Pages `STATIC_ONLY`다. Cloudflare Worker/D1 비밀값·정식 origin, 최종 포장·SKU 확인, 티저의 공개 파일·자막·권리·CTA 승인, 실제 후기 재게시 권한, 실제 주문·취소·환불 대사는 외부 입력 게이트로 남아 있다. 이번 기록은 코드·정적 공개본 검증을 갱신한 것이며 외부 승인이나 실제 소비자 조사를 완료했다는 뜻은 아니다.
+
+### 2026-09-19 최신 main `54a9778` 릴리스 재감리
+
+- 결과 화면의 첫 전환 동선을 확인했다. 리듬 결과에는 `가바 1500 제품 구성 보기`와 지정된 `구매자 후기 읽기` 링크가 함께 노출되고, 1분 게임 결과에서는 `5분 쉬고 다시 해보기`가 친구 초대보다 주요 버튼으로 표시된다. 두 변경은 `scripts/validate-ui-contract.mjs`의 UI 계약으로 검사한다.
+- GitHub Actions [35418185673](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35418185673)은 `54a9778`에서 `release-verify`, Pages 배포, 정적 live smoke, release-status를 모두 성공시켰다. Worker 배포 job은 필수 Cloudflare 설정값과 `CLOUDFLARE_WORKER_URL`이 없어 건너뛰었고, release mode는 `STATIC_ONLY`로 기록됐다.
+- 라이브 `pnpm run validate:live-public`는 HTTP 200, 주장 12개, 연구 인덱스 6건, 제품 1개, 공유 페이지 6개, SmartStore 전용 링크, 750 제품 제거, 원장 출처 일치를 확인했다. 실제 공개 JS 번들에서도 결과 전환 CTA, `5분 쉬고 다시 해보기`, 친구 초대 문구가 확인됐다.
+- Pages 공개본의 canonical·Open Graph·sitemap·robots 경로는 `https://kradavid.github.io/cellpinda_GABA` 기준으로 일치한다. Worker origin으로 빌드하는 경우에는 origin 치환기가 `/admin`, `/ops` 차단 경로와 제품·WebSite 메타데이터까지 Worker 경로 기준으로 바꾸고 live 검증도 같은 기준을 사용한다.
+- 외부 게이트는 이전과 같다. Worker/D1 연결에 필요한 Cloudflare 설정값, 티저의 공개 파일·자막·권리·표시 승인, 실제 후기 재게시 권한, 최신 포장·SKU 대조, 실제 주문·취소·환불 대사, 외부 40~50대 사용성 조사는 코드 검증으로 대체하지 않는다.
