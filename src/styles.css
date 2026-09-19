@@ -203,3 +203,19 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .purchase-faq-list summary,.rhythm-rules summary,.brain-load-evidence-details>summary,.research-library .research-detail>summary,.research-library-browse>summary{min-height:44px;display:flex;align-items:center}
 .hero-shortcuts a,.fatigue-game-method a,.brain-load-evidence-source,.research-library-sources .research-library-source a{display:inline-flex;align-items:center;min-height:44px;padding-block:9px}
 .header nav a{min-height:44px;display:inline-flex;align-items:center}
+
+/* Keep async route transitions calm and visual while their content arrives. */
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.experience-loading{min-height:360px;display:grid;align-content:center;gap:34px}
+.experience-loading-heading{display:flex;align-items:center;gap:18px}
+.experience-loading-heading .chapter{margin-bottom:8px}
+.experience-loading-heading h2{font-size:clamp(28px,4vw,44px);margin:0;color:var(--ink)}
+.experience-loading-orb{width:54px;height:54px;display:block;border-radius:50%;background:radial-gradient(circle at 35% 35%,#b4e7c9 0 14%,#4cad77 35%,#14764e 72%);box-shadow:0 0 0 12px #eef7f0,0 14px 30px rgba(20,118,78,.16);animation:experience-loading-pulse 1.8s ease-in-out infinite}
+.experience-loading-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.experience-loading-grid span{height:118px;border-radius:18px;background:linear-gradient(100deg,#eef4ef 20%,#f9fcf9 42%,#eef4ef 64%);background-size:220% 100%;animation:experience-loading-shimmer 1.8s ease-in-out infinite}
+.experience-loading-grid span:nth-child(2){animation-delay:.18s}.experience-loading-grid span:nth-child(3){animation-delay:.36s}
+.experience-loading-research{min-height:420px}
+@keyframes experience-loading-pulse{0%,100%{transform:scale(.94);opacity:.75}50%{transform:scale(1);opacity:1}}
+@keyframes experience-loading-shimmer{0%{background-position:120% 0}100%{background-position:-120% 0}}
+@media(prefers-reduced-motion:reduce){.experience-loading-orb,.experience-loading-grid span{animation:none}}
+@media(max-width:700px){.experience-loading{min-height:300px;gap:24px}.experience-loading-heading h2{font-size:30px}.experience-loading-orb{width:42px;height:42px}.experience-loading-grid{grid-template-columns:1fr}.experience-loading-grid span{height:72px}}
