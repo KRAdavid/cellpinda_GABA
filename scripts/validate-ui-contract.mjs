@@ -166,7 +166,8 @@ requireMatch(rhythm, /rhythm-care-guide|몇 주째 이어지거나 일상에 지
 requireMatch(rhythmStyles, /rhythm-care-guide[\s\S]*border-left/, 'care-seeking guide must be visually distinct');
 requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence section is missing from the public flow');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
-for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '내 생활에서']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
+for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
+if (/내 생활에서/.test(brainLoadEvidence)) fail('brain-load evidence must label its practical suggestion without implying that a general study finding directly describes the visitor');
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');

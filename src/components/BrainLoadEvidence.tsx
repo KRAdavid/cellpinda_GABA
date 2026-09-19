@@ -113,7 +113,7 @@ export default function BrainLoadEvidence() {
               <h3>{title}</h3>
               <p className="brain-load-evidence-summary">{summary}</p>
               <div className="brain-load-evidence-scale"><strong>연구 규모</strong><span>{scale}</span></div>
-              <p className="brain-load-evidence-finding"><strong>내 생활에서</strong>{finding}</p>
+              <p className="brain-load-evidence-finding"><strong>오늘 해볼 일</strong>{finding}</p>
               <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="brain-load-evidence-source" aria-label={`${source} 연구 출처 보기`}>연구 출처 보기 <ExternalLink size={15} aria-hidden="true" /></a>
             </article>
           ))}
