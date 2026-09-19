@@ -53,20 +53,20 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
   if (result.loadLevel === 'high') {
     if (result.loadScore < 10) return {
       tone: 'watch',
-      label: '최근 7일, 힘들었다고 답한 순간이 있어요',
+      label: '최근 7일, 힘들었다고 답한 날이 있어요',
       heading: '지금 5분, 화면에서 눈을 떼고 쉬어 보세요.',
       body: '휴대폰을 내려놓고 물을 마시거나 창밖을 바라보세요.',
     };
     return {
       tone: 'high',
-      label: '여러 답변에서 머리가 쉴 틈이 부족했던 날이 보여요',
+      label: '최근 7일, 머리가 쉴 틈이 부족했던 날이 여러 번 있었어요',
       heading: '지금 10분, 화면과 알림에서 떨어져 쉬어 보세요.',
       body: '해야 할 일은 메모하고 알림을 꺼 보세요.',
     };
   }
   return {
     tone: 'watch',
-    label: '최근 7일, 힘들었다고 답한 순간이 있어요',
+    label: '최근 7일, 힘들었다고 답한 날이 있어요',
     heading: '오늘 일정에 5분 쉬는 시간을 지금 넣어 보세요.',
     body: '휴대폰을 내려놓고 물을 마시거나 창밖을 바라보세요.',
   };

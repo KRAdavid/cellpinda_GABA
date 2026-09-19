@@ -6,6 +6,7 @@ import './components/research-route.css';
 import ReviewExperience,{type PublicReview} from './components/ReviewExperience';
 import SevenDayChallenge from './components/SevenDayChallenge';
 import GabaStory from './components/GabaStory';
+import GabaResearchHighlights from './components/GabaResearchHighlights';
 import BrainLoadEvidence from './components/BrainLoadEvidence';
 import TeaserPreview from './components/TeaserPreview';
 import ProductShare from './components/ProductShare';
@@ -264,9 +265,10 @@ export default function App(){
 
   <div className="wrap section"><RhythmExperience onEvent={track}/></div>
   {content ? <>
-   <BrainLoadEvidence />
    <GabaStory claims={content.claims} hasReviews={content.reviews.length > 0}/>
    <TeaserPreview onEvent={track}/>
+   <GabaResearchHighlights claims={content.claims}/>
+   <BrainLoadEvidence />
  <section id="fermentation" className="section sage"><div className="wrap"><div className="section-head"><div><p className="chapter">03 / 발효가바는?</p><h2>발효가바를<br/>쉽게 알아보세요.</h2></div><p>발효가 무엇인지, 제품 정보를 어디서 볼 수 있는지<br/>쉬운 말로 안내합니다.</p></div><div className="fermentation-questions">{[['무엇으로 만들었나요?','셀핀다 스마트스토어 상품은 발효가바로 소개돼 있어요. 원재료와 함량은 제품 표시사항에서 확인해 주세요.'],['발효 기술이 뭔가요?','특허 문서에 GABA를 만드는 방법이 소개돼 있어요. 셀핀다 제품의 실제 제조공정은 제품 자료에서 따로 확인해 주세요.'],['제품 정보는 어디서 보나요?','한 포에 든 양과 제품 구성은 제품 포장과 스마트스토어에서 확인할 수 있어요.'],['먹는 법은 어디에 있나요?','제품 포장에 적힌 먹는 방법과 주의사항을 확인해 주세요.']].map(([question,answer],index)=><article key={question}><span>0{index+1}</span><h3>{question}</h3><p>{answer}</p></article>)}</div><p className="process-note"><span>특허 문서의 기술 예시</span>특허 문서에 GABA를 만드는 방법이 소개돼 있어요. 셀핀다 제품의 실제 공정·순도 확인 자료와는 별도예요. <a className="text-link" href="https://patents.google.com/patent/KR101740968B1/ko" target="_blank" rel="noopener noreferrer">특허 문서 보기 ↗</a></p><div className="process">{['유산균 + 재료 성분','발효','GABA 생성'].map((t,i)=><div key={t}><span>0{i+1}</span><h3>{t}</h3></div>)}</div>{content.claims.filter(c=>!c.id.startsWith('product-')&&!c.id.startsWith('research-')&&!c.id.startsWith('gaba-')&&c.publicText).map(c=><details className="claim" key={c.id}><summary>{c.publicText}</summary><div>{c.sources.filter(s=>s.url).map(s=><a key={s.url} href={s.url!} target="_blank" rel="noopener noreferrer" aria-label={`${s.title} 문서 보기`}>{evidenceLinkLabel(s.url!)}</a>)}</div></details>)}</div></section>
  <section id="products" className="section wrap"><div className="section-head"><div><p className="chapter">04 / 제품 구성</p><h2>가바 1500 한 상자에는<br/>무엇이 들어 있나요?</h2></div></div><div className="products">{content.products.map(p=><article id={`product-${p.id}`} className="product" key={p.id}><div className="product-visual" role="img" aria-label={`${p.name}, ${p.servings}포 한 상자 구성, ${p.category} 식품 유형`}><span className="product-visual-kicker">한 상자 구성</span><strong>{p.servings}<small>포</small></strong><span className="product-visual-subtitle">한 상자에 든 포 수</span><div className="product-portion-grid" aria-hidden="true">{Array.from({length:p.servings},(_,index)=><i key={index}/>)}</div><div className="product-visual-facts"><span><strong>{p.category}</strong> 식품 유형</span></div></div><div className="product-body"><h3>{p.name} <small className="product-category">{p.category}</small></h3><a className="button outline product-cta" href={p.officialUrl} target="_blank" rel="noopener noreferrer" onClick={()=>{track('purchase_click',{productId:p.id,path:'/products'});track('purchase_cta_click',{productId:p.id,path:'/products'})}}>가격·재고 확인하기 <ArrowUpRight size={18}/></a><dl><div><dt>가격·재고</dt><dd>{p.availability || '스마트스토어에서 확인'}</dd></div><div><dt>먹는 법·보관</dt><dd>제품 포장에서 확인</dd></div></dl></div></article>)}</div><PurchaseQuestions products={content.products} onEvent={track} />{content.products.length>0&&<ProductShare onEvent={track}/>}</section>
  <ReviewExperience reviews={content.reviews} onOpen={productId=>{track('review_open',{productId});track('review_source_click',{productId,path:'/reviews'})}}/>

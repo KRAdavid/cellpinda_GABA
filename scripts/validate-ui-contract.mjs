@@ -27,6 +27,8 @@ const studyInsightVisual = await read('src/components/StudyInsightVisual.tsx');
 const studyInsightStyles = await read('src/components/StudyInsightVisual.css');
 const brainLoadEvidence = await read('src/components/BrainLoadEvidence.tsx');
 const brainLoadEvidenceStyles = await read('src/components/BrainLoadEvidence.css');
+const gabaResearchHighlights = await read('src/components/GabaResearchHighlights.tsx');
+const gabaResearchHighlightsStyles = await read('src/components/GabaResearchHighlights.css');
 const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
 const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css');
 const indexHtml = await read('index.html');
@@ -47,7 +49,7 @@ const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 for (const id of ['main', 'rhythm', 'story', 'fermentation', 'products', 'reviews']) {
   requireMatch(app, new RegExp(`(?:id|href)=["']#?${id}["']`), `consumer section or link ${id} is missing`);
 }
-const consumerFlow = ['<RhythmExperience', '<BrainLoadEvidence', '<GabaStory', '<TeaserPreview', '<section id="fermentation"', '<section id="products"', '<ReviewExperience'];
+const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', '<GabaResearchHighlights', '<BrainLoadEvidence', '<section id="fermentation"', '<section id="products"', '<ReviewExperience'];
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
@@ -140,7 +142,7 @@ requireMatch(rhythm, /(?:window\.)?setTimeout\(\(\) => \{[\s\S]*?next\(value\)[\
 if (/rhythm-recovery-intro|rhythm-load-signals/.test(rhythm)) fail('the 1-minute check must not repeat its intro before the start button');
 requireMatch(rhythm, /rhythm-start-scenes[\s\S]*?질문에 나오는 생활 장면/, 'optional everyday examples must stay secondary to the check CTA');
 requireMatch(rhythm, /rhythm-load-answer-dots[\s\S]*value >= 2 \? 'is-filled' : ''/, 'the result must visualize frequent self-reported rest gaps by question, not as a measured brain image');
-requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?최근 7일, 힘들었다고 답한 순간이 있어요/, 'higher response load must lead to a clear, non-diagnostic rest suggestion');
+requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?최근 7일, 힘들었다고 답한 날이 있어요/, 'higher response load must lead to a clear, non-diagnostic rest suggestion');
 requireMatch(rhythm, /<h3 ref=\{resultRef\}[\s\S]*?rhythm-result-primary-actions[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?<BrainLoadVisual/, 'the privacy-preserving invitation must appear below the result name before the score visualization');
 requireMatch(rhythm, /const description = `5개 질문 중 \$\{frequentAnswers\}개에서 힘들었다고 답했어요\.`[\s\S]*?다섯 질문에 고른 답을 정리한 기록이에요\./, 'the answer visualization must clearly describe its self-report basis');
 if (/products-intro-actions|products-intro-buy|products-review-shortcut/.test(app)) fail('product price and review shortcuts must not be repeated in the product intro beside their destination cards');
@@ -169,6 +171,10 @@ requireMatch(rhythm, /지난 7일, 쉬고 싶었던 순간|loadScore|loadLevel/,
 requireMatch(rhythm, /rhythm-care-guide|몇 주째 이어지거나 일상에 지장을 주면 전문가와 상담/, 'high fatigue results must include a clear care-seeking guide');
 requireMatch(rhythmStyles, /rhythm-care-guide[\s\S]*border-left/, 'care-seeking guide must be visually distinct');
 requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence section is missing from the public flow');
+requireMatch(app, /<GabaResearchHighlights claims=\{content\.claims\}\/>/, 'post-teaser GABA research highlights are missing from the public flow');
+requireMatch(gabaResearchHighlights, /사람 대상 일반 GABA 연구예요\.[\s\S]*셀핀다 완제품을 시험한 결과와는 구분/, 'post-teaser research highlights must keep a clear general-research and product boundary');
+for (const marker of ['잠드는 시간과 수면 기록', '과제 뒤 뇌파와 활력 점수', '휴식·운동 뒤 혈액 속 변화', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
+requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
 for (const marker of ['집중과 휴식은 어떻게 달라질까요?', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 if (/내 생활에서/.test(brainLoadEvidence)) fail('brain-load evidence must label its practical suggestion without implying that a general study finding directly describes the visitor');
