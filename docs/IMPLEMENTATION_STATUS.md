@@ -2,7 +2,7 @@
 
 ## 현재 배포 기준 — 2026-09-19 20:33 KST
 
-현재 `main` 배포 기준은 커밋 `536d23f`이며, GitHub Actions `35440330768`의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 라이브 smoke는 페이지 200, 연구 6건, 공개 주장 12개, 제품 1개, 공유 페이지 6개, 스마트스토어 단일 목적지, 750 제품 제거, provenance 일치를 확인했다. 현재 공개 실행 모드는 정적 Pages이며 Worker/D1 배포는 필수 비밀값과 공개 origin이 준비될 때까지 의도적으로 실행하지 않는다.
+현재 공개 Pages 콘텐츠 기준은 커밋 `2e1c870`이며, GitHub Actions `35441074034`의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 라이브 smoke는 페이지 200, 연구 6건, 공개 주장 12개, 제품 1개, 공유 페이지 6개, 스마트스토어 단일 목적지, 750 제품 제거, provenance 일치, 제품 구조화 데이터 안전 경계를 확인했다. 현재 공개 실행 모드는 정적 Pages이며 Worker/D1 배포는 필수 비밀값과 공개 origin이 준비될 때까지 의도적으로 실행하지 않는다.
 
 현재 목표 판정은 `IN_PROGRESS_WITH_GATES`다. B2 제품 표시, B3 실제 후기 권한, B4 티저 공개 승인, C2 Worker/D1 운영 설정, E1 실구매 대사는 외부 입력 또는 사람 승인이 필요한 게이트로 남아 있다. 아래의 날짜가 지난 기록은 당시 검증 결과를 보존한 이력이며, 현재 상태는 이 요약과 라이브 smoke 결과를 우선한다.
 

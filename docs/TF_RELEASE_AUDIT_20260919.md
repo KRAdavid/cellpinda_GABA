@@ -2,7 +2,7 @@
 
 ## 현재 배포 검증 결과
 
-현재 `main`은 커밋 `536d23f`이며 GitHub Actions `35440330768`이 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공시켰다. 공개 사이트는 정적 Pages 모드로 운영되고, Worker/D1 job은 비밀값·공개 origin 게이트가 충족되지 않아 실행하지 않았다. 라이브 결과는 연구 6건·공개 주장 12개·제품 1개·공유 페이지 6개, 스마트스토어 단일 목적지, 750 제거, provenance 일치, 내부 운영 스냅샷 제외다. 티저는 `HOLD`이며 공개 URL을 노출하지 않는다.
+현재 공개 Pages 콘텐츠 기준은 커밋 `2e1c870`이며 GitHub Actions `35441074034`가 `release-verify`·Pages 게시·라이브 smoke·release status를 모두 성공시켰다. 공개 사이트는 정적 Pages 모드로 운영되고, Worker/D1 job은 비밀값·공개 origin 게이트가 충족되지 않아 실행하지 않았다. 라이브 결과는 연구 6건·공개 주장 12개·제품 1개·공유 페이지 6개, 스마트스토어 단일 목적지, 750 제거, provenance 일치, 내부 운영 스냅샷 제외, 안전한 제품 구조화 데이터다. 티저는 `HOLD`이며 공개 URL을 노출하지 않는다.
 
 이 문서의 아래 항목은 각 감리 시점의 증거를 보존한다. 현재 출시 판정은 `IN_PROGRESS_WITH_GATES`이며 B2·B3·B4·C2·E1은 사람 입력과 외부 승인이 도착하기 전까지 완료로 승격하지 않는다.
 
