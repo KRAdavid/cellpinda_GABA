@@ -143,6 +143,7 @@ if (/products-intro-actions|products-intro-buy|products-review-shortcut/.test(ap
 requireMatch(app, /id="products"[\s\S]*?가격·재고 확인하기[\s\S]*?id="reviews"|<ReviewExperience/, 'product purchase information must appear on the product card, with reviews in their own section');
 requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must expose alternative text');
 requireMatch(app, /className="product-visual" role="img" aria-label=\{/, 'product composition diagram must expose an accessible text alternative');
+requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.product-portion-grid\{grid-template-columns:repeat\(10,12px\);gap:6px[\s\S]*?\.product-body \.product-cta\{order:2/, 'mobile product composition must stay compact so the primary purchase CTA enters the first product viewport');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
 requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, 'result sharing must invite the recipient to run their own check');
 requireMatch(rhythm, /rhythm-more-share[\s\S]*?결과 카드 공유·저장 등 다른 방법/, 'secondary result-share methods must be grouped below the primary invitation');
