@@ -6,6 +6,10 @@
 
 이 문서의 아래 항목은 각 감리 시점의 증거를 보존한다. 현재 출시 판정은 `IN_PROGRESS_WITH_GATES`이며 B2·B3·B4·C2·E1은 사람 입력과 외부 승인이 도착하기 전까지 완료로 승격하지 않는다.
 
+## 후속 자동 감시 점검 — 2026-09-20
+
+일일 상태 보고, TF decision pulse, 배포 검증, 소비자 사이트 검증 workflow가 모두 활성 상태임을 확인했다. `main` 보호 규칙은 필수 승인 1명·CODEOWNER 검토·strict required checks(`release-verify`, `site-quality-verify`)를 적용하고, Actions 기본 권한은 `read`, workflow의 PR 자동 승인은 비활성화되어 있다. 후보 PR #97은 아직 독립 검토가 없어 `OPEN / BLOCKED / REVIEW_REQUIRED`이며, 자동 감시는 이 상태에서 병합·배포를 실행하지 않는다.
+
 ## 릴리스 후보 통합 감리 — 2026-09-19
 
 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 후보 `0813c49`에 소비자용 챌린지 명칭, 연구 출처 변형 정규화, 오디오 자동재생 차단 안내, 정적 fallback 연구 경계를 반영했다. 필수 검사 [release-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35450370554)와 [site-quality-verify](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35450370556)는 통과했다.
