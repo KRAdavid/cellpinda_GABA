@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {normalizePublicSiteUrl, publicSitePath} from './public-origin.mjs';
 
 const cliBase = process.argv.slice(2).find(value => /^https:\/\//.test(value)) || '';
-const base = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL || cliBase);
+const base = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL || cliBase || undefined);
 const publicPath = publicSitePath(base);
 const routePath = segment => `${publicPath}/${segment}`;
 const escapeRegExp = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -204,6 +204,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(!consumerBundle.includes('발효가바가 무엇인지 30초'), 'live consumer bundle still contains the retired teaser duration promise');
     assert.ok(robotsText.includes(`Sitemap: ${base}/sitemap.xml`), 'live robots.txt must point to the current public sitemap');
     assert.match(robotsText, new RegExp(`Disallow: ${escapeRegExp(routePath('admin'))}\\nDisallow: ${escapeRegExp(routePath('ops'))}`), 'live robots.txt must keep internal paths out of discovery');
+    assert.match(adminRoute.text, /<meta[^>]+name="robots"[^>]+content="noindex, nofollow"/i, 'live 404 page must keep missing and internal routes out of search indexes');
+    assert.ok(!/<link[^>]+rel="canonical"|<meta[^>]+property="og:(?:url|title|image)"/i.test(adminRoute.text), 'live 404 page must not reuse public canonical or social metadata');
     const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
     const expectedSitemapUrls = [`${base}/`, `${base}/products/`, `${base}/research/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
     assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain public landing, product, independent research, focus invite and share pages only');
