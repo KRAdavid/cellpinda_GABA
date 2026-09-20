@@ -644,3 +644,11 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-20 운영 큐 장애 중 공개본 상태 감시 유지
 
 운영 웹 큐가 로드되어야만 보이던 공개 릴리스 매니페스트 상태 카드를 큐 섹션과 분리했다. 이제 운영 큐가 실패해도 공개 Pages의 `release-manifest.json` 존재 여부와 최종 확인 시각을 확인할 수 있다. 데스크톱·모바일 브라우저에서 카드 노출·폭 초과 없음·콘솔 오류 없음을 확인했고, 운영 큐 요청을 실패시켜도 카드가 남는 것을 검증했다. 공개 Pages가 이전 배포본인 경우에는 이 카드가 ‘공개본 매니페스트가 없음’을 어떻게 확인했는지 명시하며, PR 승인·main 배포 게이트는 그대로 유지한다.
+
+## 2026-09-20 후보 릴리스 공개 전 판정
+
+현재 후보 HEAD는 `ad2d0e9d59653cbab07e69605f3dd0286d84e60a`이며 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 `OPEN · BLOCKED · REVIEW_REQUIRED` 상태다. `release-verify`와 `site-quality-verify`는 성공했고, Pages용 정적 산출물은 10개 경로·연구 6건·제품 1개·후기 목적지 1개·티저 `HOLD`를 기록한다. Pages base 경로 자산 검사, 390px 화면 가로 넘침·콘솔 오류·이미지 대체 텍스트·중복 ID 검사를 후보 산출물에서 확인했다.
+
+실제 공개 주소의 루트는 HTTP 200이지만 `https://kradavid.github.io/cellpinda_GABA/release-manifest.json`은 HTTP 404다. 따라서 공개 주소는 후보와 아직 동기화되지 않았으며 공개 배포 완료로 판정하지 않는다. Code Owner 승인과 main 병합 뒤 Pages 게시·release manifest 지문·핵심 경로 live smoke를 다시 확인해야 한다.
+
+남은 외부 판정 항목은 최종 제품 표시·SKU·섭취·보관·주의사항 승인(B2), 후기 원문·재게시 권한·개인정보 비식별 확인(B3), 티저 파일·자막·대본·권리·CTA 승인(B4), Cloudflare Worker/D1 운영 비밀값과 복구 확인(C2), 실제 주문·취소·환불 대사(E1)다. 이 문서는 코드·정적 후보 품질을 기록하며 외부 승인이나 실제 소비자 조사를 대신하지 않는다.
