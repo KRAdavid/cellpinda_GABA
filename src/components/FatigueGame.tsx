@@ -788,9 +788,9 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         </div> : null}
 
         {phase === 'rest' ? <div className="fatigue-game-rest">
-          <p className="fatigue-game-kicker">PAUSE · 5-MIN BREATH</p>
-          <h3 ref={restHeadingRef} tabIndex={-1}>화면에서 잠깐 눈을 떼고, 호흡을 천천히 해보세요.</h3>
-          <p>화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 선이 올라갈 때 들이쉬고, 내려갈 때 내쉬세요.</p>
+          <p className="fatigue-game-kicker">5분 휴식 · 호흡 안내</p>
+          <h3 ref={restHeadingRef} tabIndex={-1}>5분만 화면을 내려놓고 쉬어 보세요.</h3>
+          <p>화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 처음에 호흡 순서를 익힌 뒤에는 화면을 내려놓고 소리만 들어도 좋아요. 선이 올라갈 때 들이쉬고 내려갈 때 내쉬세요.</p>
           <BreathLineGuide startedAt={restStartedAt} cue={breathCue} />
           <p className="fatigue-breath-note">들이쉬기 4초 · 멈추기 2초 · 내쉬기 6초 · 다시 멈추기 2초를 반복합니다. 숨을 참기 불편하거나 어지럽고 답답하면 멈춤을 건너뛰고 자연스럽게 호흡하세요.</p>
           <div className="fatigue-rest-clock" aria-label="5분 호흡 안내 타이머">

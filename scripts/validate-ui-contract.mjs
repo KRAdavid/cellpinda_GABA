@@ -122,7 +122,7 @@ requireMatch(research, /id="research"[^>]*aria-label="연구를 쉬운 말로 �
 if (/수면·스트레스·운동, 연구에서 본 변화/.test(research)) fail('research library must not repeat the previous consumer-facing research heading');
 requireMatch(research, /const featuredStudy = visibleStudies\[0\][\s\S]*renderStudy\(featuredStudy, true\)/, 'a concrete research result must appear before search and filters');
 requireMatch(research, /research-library-head[\s\S]*각 카드에서 사람 연구의 결과와 조건을 함께 볼 수 있어요\./, 'research list must explain that each card shows both the result and its conditions');
-requireMatch(research, /research-library-evidence-note[\s\S]*일반 GABA·휴식 연구[\s\S]*셀핀다 완제품 연구와는 다른 자료입니다\./, 'research list must put the general-research and product boundary before the first card');
+requireMatch(research, /research-library-evidence-note[\s\S]*일반 GABA와 휴식에 관한 사람 연구[\s\S]*셀핀다 제품 정보는 제품 카드에서 따로 확인할 수 있어요\./, 'research list must put the general-research and product boundary before the first card');
 requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.header\.research-route-header nav\{display:flex!important;position:static[\s\S]*?\.study-paired-group\{grid-template-columns:minmax\(96px/, 'mobile research route must keep its return link in the header and make the paired results compact enough to scan');
 requireMatch(styles, /\.study-paired-group\{grid-template-columns:minmax\(0,1fr\)[\s\S]*?\.study-paired-group h4,\.study-paired-trajectory,\.study-paired-spread\{grid-column:1\/-1\}/, 'mobile study groups must keep labels, values and detail links readable across the full card width');
 requireMatch(research, /이 연구, 어떻게 했나요\?/, 'research detail must use a consumer-friendly label');
@@ -182,12 +182,12 @@ requireMatch(rhythmStyles, /rhythm-care-guide[\s\S]*border-left/, 'care-seeking 
 requireMatch(app, /<BrainLoadEvidence\s*\/>/, 'brain-load health evidence section is missing from the public flow');
 requireMatch(app, /<GabaResearchHighlights claims=\{content\.claims\}[^>]*\/>/, 'post-teaser GABA research highlights are missing from the public flow');
 requireMatch(app, /url\.hash==='#brain-load-evidence'[\s\S]*getElementById\('brain-load-evidence'\)[\s\S]*scrollIntoView/, 'brain-load evidence hash links must align after async content loads');
-requireMatch(gabaResearchHighlights, /사람 대상 일반 GABA 연구예요\.[\s\S]*셀핀다 완제품을 시험한 결과와는 구분/, 'post-teaser research highlights must keep a clear general-research and product boundary');
+requireMatch(gabaResearchHighlights, /일반 GABA를 살펴본 사람 연구를 쉬운 말로 정리했어요\.[\s\S]*셀핀다 제품의 표시사항은 제품 카드에서 확인할 수 있어요\./, 'post-teaser research highlights must keep a clear general-research and product boundary');
 requireMatch(gabaResearchHighlights, /GABA를 먹은 사람 연구에서[\s\S]*무엇이 기록됐을까요\?/, 'post-teaser GABA research heading must state the consumer question directly');
 for (const marker of ['잠드는 시간과 수면 기록', '과제 뒤 뇌파와 활력 점수', '쉬었을 때와 운동했을 때의 혈액 속 변화', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight/, 'post-teaser research highlights must read the reviewed consumer copy from the public claim data');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
-for (const marker of ['연구에서 먹은 양: 하루 100mg', '연구에서 먹은 양: 100mg 1회', '연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
+for (const marker of ['논문에서 사용한 양: 하루 100mg', '논문에서 사용한 양: 100mg 1회', '논문에서 사용한 양: 3g 1회']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
 for (const marker of ['잠이 부족하면', '집중·기억·판단이 흔들릴 수 있어요.', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);

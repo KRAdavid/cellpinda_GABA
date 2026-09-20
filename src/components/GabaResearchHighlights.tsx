@@ -16,21 +16,21 @@ const highlightOrder: Highlight[] = [
     id: 'research-yamatsu-2016',
     label: '잠',
     title: '잠드는 시간과 수면 기록',
-    facts: ['성인 10명', '연구에서 먹은 양: 하루 100mg', '기간: 각 1주'],
+    facts: ['성인 10명', '논문에서 사용한 양: 하루 100mg', '기간: 각 1주'],
     Icon: Moon,
   },
   {
     id: 'research-yoto-2012',
     label: '생각을 많이 쓴 뒤',
     title: '과제 뒤 뇌파와 활력 점수',
-    facts: ['성인 63명', '연구에서 먹은 양: 100mg 1회', '30분 뒤 과제'],
+    facts: ['성인 63명', '논문에서 사용한 양: 100mg 1회', '30분 뒤 과제'],
     Icon: Activity,
   },
   {
     id: 'research-powers-2008',
     label: '쉬었을 때·운동했을 때',
     title: '쉬었을 때와 운동했을 때의 혈액 속 변화',
-    facts: ['남성 11명', '연구에서 먹은 양: 3g 1회', '쉬었을 때·운동했을 때 비교'],
+    facts: ['남성 11명', '논문에서 사용한 양: 3g 1회', '쉬었을 때·운동했을 때 비교'],
     Icon: Dumbbell,
   },
 ];
@@ -54,7 +54,7 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
         </div>
         <p>잠·머리를 많이 쓴 뒤·쉬었을 때와 운동했을 때,<br />일반 GABA 연구에서 관찰한 내용을 쉽게 정리했어요.</p>
       </div>
-      <p className="gaba-research-highlights-boundary"><span aria-hidden="true">i</span> 사람 대상 일반 GABA 연구예요. 연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요. 셀핀다 완제품을 시험한 결과와는 구분해서 봐 주세요.</p>
+      <p className="gaba-research-highlights-boundary"><span aria-hidden="true">i</span> 일반 GABA를 살펴본 사람 연구를 쉬운 말로 정리했어요. 아래 숫자는 각 논문에서 사용한 조건이며, 셀핀다 제품의 표시사항은 제품 카드에서 확인할 수 있어요.</p>
       <div className="gaba-research-highlights-grid">
         {highlights.map(({id, label, title, facts, Icon}) => {
           const claim = available.get(id)!;

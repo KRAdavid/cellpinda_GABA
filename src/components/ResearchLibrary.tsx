@@ -167,7 +167,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       }}>
         <summary>이 연구, 어떻게 했나요?</summary>
         <div className="research-library-detail">
-          <p className="research-library-study-scope"><strong>연구에서 사용한 것</strong><span>{metadata.productApplicability}</span></p>
+          <p className="research-library-study-scope"><strong>논문에서 사용한 것</strong><span>{metadata.productApplicability}</span></p>
           {metadata.consumerContext ? <p className="research-library-detail-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
           {metadata.consumerDetail ? <p className="research-library-detail-finding"><strong>측정 결과</strong>{metadata.consumerDetail}</p> : !metadata.consumerVisual && metadata.consumerFinding && metadata.consumerFinding !== takeaway ? <p className="research-library-detail-finding"><strong>연구에서 기록한 결과</strong>{metadata.consumerFinding}</p> : null}
           <div className="research-story-grid" aria-label="연구 정보 그림 요약">
@@ -188,7 +188,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
     <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>각 카드에서 사람 연구의 결과와 조건을 함께 볼 수 있어요.</p></div></div>
-    <p className="research-library-evidence-note"><strong>먼저 확인해 주세요</strong>일반 GABA·휴식 연구를 소비자 언어로 정리한 내용이에요. 셀핀다 완제품 연구와는 다른 자료입니다.</p>
+    <p className="research-library-evidence-note"><strong>먼저 확인해 주세요</strong>일반 GABA와 휴식에 관한 사람 연구를 쉬운 말로 정리했어요. 카드 안에서 논문 조건을 확인하고, 셀핀다 제품 정보는 제품 카드에서 따로 확인할 수 있어요.</p>
     <div className="research-topic-cards" role="group" aria-label="궁금한 주제 고르기">{topicCards.map(({topic:cardTopic,label,detail,Icon})=>{
       const recordCount=`${studies.filter(claim=>claim.topic===cardTopic).length}건`;
       return <button type="button" className="research-topic-card" key={cardTopic} aria-label={`${label} · ${detail} · ${recordCount}`} aria-pressed={activeTopic===cardTopic} onClick={()=>{
