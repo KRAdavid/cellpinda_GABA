@@ -688,3 +688,8 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 배포 워크플로에는 실제 Pages 게시본인 `dist-pages/`를 일반 릴리스 증거 아티팩트에도 보관하도록 추가했다. `release-verify`와 `site-quality-verify`([35497232116](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35497232116), [35497232189](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35497232189))가 성공했고, 로컬 production build는 10개 route·65개 파일·성능 예산을 통과했다.
 
 공개 Pages는 여전히 이전 main 산출물을 제공해 `/release-manifest.json`이 HTTP 404다. Code Owner 승인·main 병합·Pages 게시·라이브 smoke 전에는 공개 배포 완료로 판정하지 않는다. B2 제품 표시, B3 후기 권한, B4 티저 권리, C2 Worker/D1 비밀값, E1 실주문 대사는 사람 입력 게이트로 유지한다.
+## 2026-09-20 Pages 게시 fail-closed 감리
+
+후보 배포 워크플로의 실제 상태 전이를 대조한 결과, `deploy-pages`가 `release-verify`만 기다리고 `worker-readiness`를 의존하지 않아 readiness 작업이 실패하거나 취소되어도 정적 Pages 게시가 먼저 진행될 수 있었다. 이후 `release-status`가 `RELEASE_FAILED`로 남더라도 공개본은 이미 갱신될 수 있는 게시 순서 결함이었다.
+
+`deploy-pages`가 `release-verify`와 `worker-readiness`를 모두 `needs`로 갖고, 두 작업이 모두 `success`인 경우에만 실행하도록 보강했다. 비밀값이 없는 정상 정적 경로는 readiness가 `success`와 `enabled=false`를 반환하므로 계속 게시되며, readiness 오류·취소·검증 실패는 Pages 게시 전에 멈춘다. `pnpm run validate:deploy-workflow`로 회귀 규칙을 통과시켰고, 실제 Pages 공개본은 후보와 분리된 상태에서 변경하지 않았다.

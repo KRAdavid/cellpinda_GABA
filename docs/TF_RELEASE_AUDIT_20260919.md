@@ -349,3 +349,6 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - 후보 HEAD `150f498`에서 브랜드 정체성, 리듬 체크 질문, 스마트스토어 가격·재고 CTA를 소비자가 바로 이해할 수 있는 문장으로 보정했다. UI 계약·타입검사·연구 카피·공개 export·107개 테스트·production build를 통과했다.
 - Pages 게시본 `dist-pages/`를 `dist/` 및 `worker-build/`와 함께 릴리스 증거 아티팩트로 보관하도록 배포 워크플로를 보강했다. `release-verify`·`site-quality-verify`는 성공했다.
 - 공개 Pages 루트는 HTTP 200이지만 후보 `release-manifest.json`은 아직 404다. PR 승인·main 병합 뒤 Pages 게시와 live smoke를 다시 실행해야 한다. B2·B3·B4·C2·E1 게이트는 사람 입력 대기로 유지한다.
+## 2026-09-20 Pages 게시 순서 fail-closed 보강
+
+후보 워크플로에서 `deploy-pages`가 `release-verify`만 의존해 Worker readiness 오류가 발생해도 정적 게시가 선행될 수 있는 경로를 확인했다. `deploy-pages`를 `release-verify`·`worker-readiness`에 연결하고 두 결과가 `success`일 때만 실행하도록 수정했다. 필요한 Cloudflare 비밀값이 없는 정상 운영은 readiness 성공·`enabled=false`로 `STATIC_ONLY` 게시를 유지하고, readiness 작업 자체가 실패·취소되면 공개 게시를 차단한다. 검증 규칙과 현재 공개 Pages(매니페스트 404)는 별도로 확인했으며 외부 승인·비밀값·실제 배포는 우회하지 않았다.
