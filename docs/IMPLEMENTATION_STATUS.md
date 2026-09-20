@@ -1,5 +1,9 @@
 # 중간 구현 상태 — 2026-09-11
 
+## TF heartbeat 자동 갱신 — 2026-09-20 코드 후보 `bb079b0`
+
+자동 pulse heartbeat를 다시 생성했다. `generatedAt=2026-09-20T01:19:20.951Z`, `snapshotHash=40aa99629ff6b3a4643dc0c0aeb9c8ec753d1fb0aff40fcba0f9215cd1c2732b`, `stateChanged=false`, `safeExecution=MET`, 입력 게이트 4건이다. 역할군 8/8·활성 작업 5건·검증 1건·대기 4건을 유지했으며, 외부 승인·게시·구매 상태를 자동으로 변경하지 않았다.
+
 ## Worker 공개 origin·회원 origin 분리 검증 보강 — 2026-09-20 코드 후보 `487c9f5`
 
 Worker 배포 후 라이브 검증이 `MEMBER_ORIGIN`을 실제로 사용하도록 연결했다. HTTPS 루트 origin 형식, CORS preflight의 허용 메서드·헤더·credentials, 허용 origin 응답, 임의 origin 차단 응답을 함께 확인하며, 설정되지 않은 정적 Pages 모드에서는 이 검사를 생략한다. 배포 워크플로 계약, 107개 회귀 테스트, 타입검사, Wrangler dry-run, 후보 GitHub 검증을 통과했다. 실제 Worker 검증은 Cloudflare 운영 비밀값이 설정된 뒤 실행한다.
