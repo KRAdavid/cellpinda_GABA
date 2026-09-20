@@ -1,5 +1,11 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
+## 2026-09-21 연구 흐름 중복 보정 — 후보 작업 중
+
+GABA 이야기의 2번 단계를 다음 연구 하이라이트의 수면·인지·운동 주제 나열에서 분리했다. 이제 `연구 결과는 어떻게 읽나요?`에서 참여자와 비교 조건을 먼저 확인하도록 안내하고, `연구 카드에서 확인하기` 앵커로 바로 이동한다. 하이라이트 섹션에 고정 앵커를 추가해 모바일에서도 반복 설명 없이 한 번의 이동으로 연구 카드를 볼 수 있게 했다.
+
+`validate:ui-contract`, 110개 테스트, 타입검사, production build와 390px 브라우저에서 앵커 이동·가로 넘침·콘솔 오류 0건을 확인했다. 연구 내용·제품 효능·제품 권장량은 변경하지 않았고, 이는 소비자 흐름을 정리한 후보 보정이다.
+
 ## 2026-09-21 운영 스냅샷 공개 경계 보정 — 후보 작업 중
 
 `operations-queue.json`, `tf-pulse.json`, `goal-audit.json`, `tf-meeting-packet.json`을 `public/data`에서 제거하고 `tmp/operations`와 루프백 `/api/ops/snapshot`으로 이동했다. 정적 bundle·public export·readiness·live smoke가 운영 JSON의 공개 경로 노출을 차단하며, 운영 MVP는 개발 환경에서만 최신 패킷을 읽는다. 이 변경은 내부 운영 정보의 공개 노출을 줄이지만 Code Owner 승인, main 병합, Pages 배포와 외부 게이트 B2·B3·B4·C2·E1을 대신하지 않는다.

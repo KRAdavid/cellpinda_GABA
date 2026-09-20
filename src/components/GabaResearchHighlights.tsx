@@ -48,7 +48,7 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
   const highlights = highlightOrder.filter(item => available.has(item.id));
   if (!highlights.length) return null;
 
-  return <section className="section gaba-research-highlights" aria-labelledby="gaba-research-highlights-heading">
+  return <section id="gaba-research-highlights" className="section gaba-research-highlights" aria-labelledby="gaba-research-highlights-heading">
     <div className="wrap">
       <div className="section-head gaba-research-highlights-head">
         <div>
