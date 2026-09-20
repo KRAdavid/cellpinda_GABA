@@ -11,7 +11,7 @@ export const EVENT_PATHS = new Set(['/','/story','/technology','/products','/res
 const publicSources = (value) => (value.sources || []).filter(s => typeof s.url === 'string' && /^https:\/\//.test(s.url)).map(({title,url,page,locator}) => ({title,url,page,locator}));
 const failure = (message, status = 400) => Object.assign(new Error(message), { status });
 const isUuid = value => typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
-const PUBLIC_METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','productApplicability','question','searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerFindingFirst','consumerVisual','consumerDetail','consumerContext','consumerDisclosure','hopefulTakeaway']);
+const PUBLIC_METADATA_FIELDS = new Set(['studyType','population','sampleSize','dose','duration','comparison','outcome','productApplicability','question','searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerHighlight','consumerFindingFirst','consumerVisual','consumerDetail','consumerContext','consumerDisclosure','hopefulTakeaway']);
 const SHARE_SCOPES=[['own_result','/result','result_viewed'],['incoming_result','/share','result_viewed'],['product_comparison','/products','product_comparison_viewed']];
 const OPS_MAX_BYTES=65536;
 const OPS_TTL_DAYS=30;
