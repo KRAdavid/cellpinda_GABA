@@ -723,3 +723,6 @@ Worker 운영이 활성화된 경우 `deploy-worker`가 실패해도 Pages가 �
 ## 2026-09-20 소형 모바일 연구 주제 카드 보정
 
 390px 이하 화면에서 연구 주제 카드가 두 열로 눌려 제목과 설명이 짧게 끊기던 문제를 확인했다. 후보 `312281e`에서 소형 화면은 주제 카드를 한 열로 전환하고 제목·설명·연구 건수를 읽기 쉽게 배치했다. production build의 10개 route·65개 파일·성능 예산과 `validate:research-copy`, `validate:ui-contract`를 다시 통과시켰다.
+## 2026-09-20 로컬 TF safe-run·독립 검증 연결 보강
+
+`pnpm run tf:safe`는 원시 실행 결과를 표준 출력으로만 내보내고, `validate:tf-safe`는 별도 pulse·safe-run 파일을 요구한다. 로컬에서 이전 pulse 파일을 잘못 대입하면 실행 지문이 달라져 검증이 실패할 수 있어 `pnpm run tf:safe:local` 래퍼를 추가했다. 래퍼는 같은 pulse를 `tmp/`에 저장한 뒤 safe-run과 독립 검증을 순서대로 실행하고, 세 산출물을 개인정보·공개 경로 없이 보존한다. CI의 명시적 `tf-pulse.json → tf-safe-run.json → tf-safe-run-validation.json` 계약과 사람 게이트는 변경하지 않았다.

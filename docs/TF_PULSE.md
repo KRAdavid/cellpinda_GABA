@@ -35,6 +35,8 @@ pnpm run tf:pulse
 pnpm run tf:pulse -- --json
 ```
 
+로컬에서 safe 실행과 독립 검증을 한 번에 재현하려면 `pnpm run tf:safe:local`을 사용한다. 이 명령은 같은 pulse를 `tmp/tf-pulse.json`에 고정하고 `tmp/tf-safe-run.json`과 `tmp/tf-safe-run-validation.json`을 만든 뒤 검증한다. `pnpm run tf:safe`는 결과를 표준 출력으로만 보여 주는 원시 실행 명령이므로, 별도 검증 파일이 필요할 때는 이 로컬 래퍼를 사용한다. `tmp/` 산출물에는 공개 경로·개인정보·비밀값을 저장하지 않는다.
+
 `VERIFYING` 작업은 독립 검증이 끝날 때까지 완료·공개로 전환하지 않는다. `WAITING`과 `BACKLOG` 작업은 대기 입력이나 선행조건이 없으면 자동 실행하지 않는다. `READY` 작업은 내부 샌드박스 실행을 제안하지만 외부 게시·구매·법적 약속을 만들지 않는다. 티저 B4가 `HOLD`이면 pulse가 반드시 `WAITING` 결정을 유지한다.
 
 출력의 `dissent: null`과 `dissentStatus: human-meeting-required`는 자동화가 실제 사람의 반대 의견을 만들어내지 않았다는 뜻이다. 대표 또는 지정 책임자가 회의에서 반대 의견·결정자·재검토 조건을 보완해야 하며, 이 명령의 결과만으로 콘텐츠 승인이나 운영 배포를 완료 처리하지 않는다.
