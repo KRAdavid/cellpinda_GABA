@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AlertTriangle, ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
+import { AlertTriangle, ArrowRight, ArrowUpRight, Brain, CheckCircle2, ChevronLeft, Download, PauseCircle } from 'lucide-react';
 import { classifyRhythm, questions, resultTypes, rhythmIdFromUrl } from '../domain/rhythm';
 import { createFocusGameInviteText } from '../domain/fatigue-game';
 import { REVIEW_DESTINATION_URL } from '../domain/reviews';
@@ -78,11 +78,22 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const answerEntries = Object.entries(result.scores);
   const frequentAnswers = answerEntries.filter(([, value]) => value >= 2).length;
   const description = `5개 질문 중 ${frequentAnswers}개에서 힘들었다고 답했어요.`;
+  const visualCopy = band === 'high'
+    ? { label: '머리에 할 일이 몰려 있어요', detail: '오늘은 화면과 알림에서 잠깐 떨어져 주세요.', Icon: AlertTriangle }
+    : band === 'watch'
+      ? { label: '잠깐 쉬어갈 때예요', detail: '다음 일정 전에 짧은 휴식을 넣어 보세요.', Icon: PauseCircle }
+      : { label: '지금은 여유가 있어요', detail: '지금의 쉬는 흐름을 그대로 이어가세요.', Icon: CheckCircle2 };
+  const StateIcon = visualCopy.Icon;
 
   return (
     <div className={`rhythm-load-score rhythm-load-score-${band}`}>
       <div className="rhythm-load-score-heading"><span>지난 7일 답변 기록</span><strong>{score}<small>/ 15</small></strong></div>
       <div className="rhythm-load-visual">
+        <div className="rhythm-load-state" role="img" aria-label={`오늘 내 상태: ${visualCopy.label}`}>
+          <div className="rhythm-load-brain" aria-hidden="true"><Brain size={30} strokeWidth={1.7} /><span className="rhythm-load-brain-pulse" /></div>
+          <div className="rhythm-load-state-copy"><strong>{visualCopy.label}</strong><span>{visualCopy.detail}</span></div>
+          <StateIcon className="rhythm-load-state-icon" size={22} strokeWidth={1.8} aria-hidden="true" />
+        </div>
         <div className="rhythm-load-visual-copy">
           <p className="rhythm-load-visual-kicker">5개 질문 중</p>
           <strong>힘들었다고 답한 질문</strong>
