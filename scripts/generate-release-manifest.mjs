@@ -51,7 +51,7 @@ const checks = {
   researchIndex: research.length === 6 && research.every(record => typeof record.evidenceHash === 'string' && /^[a-f0-9]{64}$/.test(record.evidenceHash)),
   teaserBoundary: teaser.status === 'HOLD' && teaser.url === null,
   challengeCopy: textBundle.includes('뇌컨디션 확인 챌린지') && textBundle.includes('5분 쉬고 다시 해보기') && textBundle.includes('싱잉볼 소리'),
-  productBoundary: textBundle.includes('셀핀다 완제품 연구와는 다른 자료입니다.') && textBundle.includes('셀핀다 제품에 적힌 양과는 다른 연구예요'),
+  productBoundary: textBundle.includes('셀핀다 완제품 연구와는 다른 자료입니다.') && textBundle.includes('연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요.'),
 };
 for (const [key, value] of Object.entries(checks)) if (!value) throw new Error(`release manifest check failed: ${key}`);
 

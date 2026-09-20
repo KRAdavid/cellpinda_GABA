@@ -187,7 +187,7 @@ requireMatch(gabaResearchHighlights, /GABA를 먹은 사람 연구에서[\s\S]*�
 for (const marker of ['잠드는 시간과 수면 기록', '과제 뒤 뇌파와 활력 점수', '쉬었을 때와 운동했을 때의 혈액 속 변화', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight/, 'post-teaser research highlights must read the reviewed consumer copy from the public claim data');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
-for (const marker of ['연구에서 먹은 양: 하루 100mg', '연구에서 먹은 양: 100mg 1회', '셀핀다 제품에 적힌 양과는 다른 연구예요']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
+for (const marker of ['연구에서 먹은 양: 하루 100mg', '연구에서 먹은 양: 100mg 1회', '연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
 for (const marker of ['잠이 부족하면', '집중·기억·판단이 흔들릴 수 있어요.', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
@@ -270,7 +270,7 @@ requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hol
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
-requireMatch(indexHtml, /<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg을 한 번 먹고 생각 과제 뒤 뇌파와 활력 점수를 살펴본 연구예요\. 셀핀다 제품에 적힌 양과는 다른 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 연구에서 먹은 양 하루 100mg을 먹고 잠드는 시간과 수면 기록을 살펴본 연구예요\. 셀핀다 제품에 적힌 양과는 다른 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
+requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg을 한 번 먹고 생각 과제 뒤 뇌파와 활력 점수를 살펴본 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 연구에서 먹은 양 하루 100mg을 먹고 잠드는 시간과 수면 기록을 살펴본 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
 requireMatch(indexHtml, /사람이 GABA를 먹은 연구 14편을 모아 참여자·먹은 양·기간을 정리한 자료예요\./, 'no-script research summary must include the approved research review record');
 requireMatch(indexHtml, /수면 불편<\/strong> 수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제와 비교 정제를 4주 먹고 잠드는 시간을 살펴본 연구예요\./, 'no-script research summary must include the approved four-week sleep study');
 if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');
