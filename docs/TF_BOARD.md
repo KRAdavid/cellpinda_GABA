@@ -105,9 +105,9 @@
 ### 2026-09-11 정기 TF pulse 운영 전환
 
 - `scripts/validate-tf-pulse.mjs`가 ACTIVE Goal Contract, canonical 업무 그래프, B4 티저 게이트, 활성 작업의 담당·검증·다음 행동과 결정 모드를 배포 전에 검사한다.
-- `data/tf-role-registry.json`이 필수 7개 역할의 책임·권한·매칭어를 단일 기준으로 보관한다. 브랜드·전환 경험 설계 역할은 웹디자인, 모바일 전환, 콘텐츠 시각화, 정보구조, 접근성, 식품 광고 표현 위험 검토를 맡아 소비자 여정을 함께 감리한다. 역할명 검사는 실제 외부 전문가의 자격 확인·섭외나 소비자 조사를 대신하지 않는다.
+- `data/tf-role-registry.json`이 필수 8개 역할의 책임·권한·매칭어를 단일 기준으로 보관한다. 브랜드·전환 경험 설계 역할은 웹디자인, 모바일 전환, 콘텐츠 시각화, 정보구조, 접근성, 식품 광고 표현 위험 검토를 맡고, 일러스트·정보시각화 디자이너 역할은 연구 수치와 조건을 소비자용 그림·비교 도표로 구현해 소비자 여정을 함께 감리한다. 역할명 검사는 실제 외부 전문가 자격 확인·섭외나 소비자 조사를 대신하지 않는다.
 - [TF decision pulse workflow](../.github/workflows/tf-pulse.yml)는 6시간 주기와 수동 실행을 제공하며, run summary·14일 artifact·안전한 heartbeat에 회의 안건을 남긴다. heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 검증 증거로 실행하지만, `release-verify`·`site-quality-verify` 보호 상태를 직접 기록하지 않는다. 완전한 `pull_request` 검사가 실행되지 않으면 보호 규칙이 계속 대기하며, 보호된 PR merge 후에만 main 배포가 공개 운영 큐의 pulse 시각과 상태 지문을 갱신한다. 최신 후보의 실제 CI 결과와 승인 상태는 PR에서 확인한다.
-- 현재 canonical 큐는 DONE 8, VERIFYING 1, WAITING 4이며, B2·B3·B4·C2·E1은 독립 검토 또는 외부 입력 게이트를 유지한다. 자동 pulse는 이 상태를 완료로 승격하지 않는다.
+- 현재 canonical 큐의 `DONE`·`VERIFYING`·`WAITING` 카운트는 최신 pulse와 목표 감사 패킷에서 확인하며, B2·B3·B4·C2·E1은 독립 검토 또는 외부 입력 게이트로 유지한다. 자동 pulse는 이 상태를 완료로 승격하지 않는다.
 
 - TF 구현 기준점: [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA) `main`과 GitHub Pages에 반영된 현재 운영 코드·공개 packet.
 - 마케팅·심리: 날짜형7일기록과 친구비교 구현·실제브라우저 검증. 실제 소비자 이해도/구매의향 실험은 미실시.

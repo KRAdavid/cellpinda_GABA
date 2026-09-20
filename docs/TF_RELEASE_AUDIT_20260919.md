@@ -435,3 +435,7 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 자동 감리에서 TF pulse가 후보 검증 뒤 `release-verify`·`site-quality-verify` 커밋 상태를 직접 녹색 처리할 수 있던 경로를 확인했다. 이는 전체 `deploy.yml`의 history privacy·Pages bundle·정적 성능·Worker 검사를 실행하지 않은 heartbeat PR도 보호 규칙을 통과시킬 수 있는 위험이었다.
 
 후보 워크플로에서 `statuses: write` 권한과 두 상태 API 호출을 제거했다. pulse의 후보 검사는 검증 증거로 유지하되, 완전한 `pull_request` 검사가 실행되지 않으면 필수 상태가 계속 pending인 fail-closed 경계로 바꿨다. `validate:tf-pulse-workflow`는 보호 상태 직접 기록과 권한 재유입을 회귀 검사한다. 이 변경은 외부 게시·승인·구매를 실행하지 않으며, PR의 Code Owner 승인과 main 병합 게이트는 그대로 유지한다.
+
+## 2026-09-20 운영 문서 수치 드리프트 차단
+
+최신 TF 레지스트리 8개 역할군과 canonical 업무 그래프 15개 작업을 기준으로 `docs/OPS_MVP.md`·`docs/TF_BOARD.md`의 역할·업무 수를 보정했다. `validate-ops-docs.mjs`를 production build에 연결해 오래된 7개·14개 표현과 일러스트 역할 누락을 회귀 검사한다. 이 검사는 문서와 공개 데이터의 책임 구조를 맞추며 외부 승인·배포 상태를 자동 변경하지 않는다.

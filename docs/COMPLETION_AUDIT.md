@@ -742,3 +742,7 @@ Worker 운영이 활성화된 경우 `deploy-worker`가 실패해도 Pages가 �
 ## 2026-09-20 자동 검증 상태의 fail-closed 보강
 
 TF pulse가 축약된 후보 검사만으로 보호된 `release-verify`·`site-quality-verify`를 직접 성공 처리하던 자동화 경로를 제거했다. 후보 typecheck·전체 테스트·build·readiness·Worker dry-run은 계속 증거로 남기지만, 실제 필수 상태는 완전한 `pull_request` 워크플로만 만들도록 경계를 분리했다. 검사가 생략되면 보호 규칙이 pending으로 남아 사람의 PR 재실행·검토 없이는 merge할 수 없다. 워크플로 정적 검증과 전체 사이트 회귀 검증을 다시 실행한 뒤 후보 PR의 새 CI 결과를 확인한다.
+
+## 2026-09-20 운영 문서와 TF 원장 수치 정합성 보강
+
+운영 문서 일부가 최신 `data/tf-role-registry.json`의 8개 역할군과 `data/task-graph.json`의 15개 작업을 7개·14개로 설명하던 드리프트를 확인했다. `docs/OPS_MVP.md`와 `docs/TF_BOARD.md`를 일러스트·정보시각화 역할까지 포함한 현재 책임 구조와 맞췄고, `scripts/validate-ops-docs.mjs`를 build에 연결해 역할 수·업무 수·공개 큐 범위가 다시 어긋나면 배포 검증이 실패하도록 했다.
