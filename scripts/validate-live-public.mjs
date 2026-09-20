@@ -68,6 +68,7 @@ const jsonLd = html => {
 const validatePublicMetadata = (html, path, expectedCanonical) => {
   assert.match(html, /<html[^>]+lang="ko"/i, `${path} must declare Korean language`);
   assert.match(html, /<meta[^>]+name="viewport"[^>]+content="width=device-width/i, `${path} must expose a responsive viewport`);
+  assert.ok(!/<meta[^>]+http-equiv="refresh"/i.test(html), `${path} must preserve its static fallback without an immediate meta refresh`);
   assert.equal(canonicalHref(html), expectedCanonical, `${path} canonical URL is invalid`);
   assert.match(html, /<title>[^<]*\S[^<]*<\/title>/i, `${path} title is missing`);
   assert.ok(metaContent(html, 'name', 'description').trim().length >= 20, `${path} description is missing or too short`);
