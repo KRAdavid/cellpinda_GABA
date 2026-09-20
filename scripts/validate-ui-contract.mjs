@@ -181,6 +181,8 @@ if (/rhythm-mobile-share-bar/.test(rhythm + rhythmStyles)) fail('mobile should n
 requireMatch(rhythm, /share\/(?:\$\{type\.id\}|type\.id)/, 'result-specific share URL is missing');
 requireMatch(rhythm, /social-rhythm-\$\{type\.id\}\.png/, 'Kakao share must use a result-specific image');
 requireMatch(rhythmStyles, /rhythm-more-share>summary[\s\S]*cursor:pointer/, 'secondary share options must be visibly expandable');
+requireMatch(rhythmStyles, /\.rhythm-text-button\{[^}]*min-height:44px/, 'result text links and controls must keep a reachable touch target');
+requireMatch(rhythmStyles, /\.rhythm-more-share>summary\{[^}]*min-height:44px/, 'secondary share disclosure must keep a reachable touch target');
 requireMatch(rhythmStyles, /@media\(prefers-reduced-motion:reduce\)/, 'reduced-motion rule is missing');
 requireMatch(styles, /@media\(max-width:680px\)/, 'mobile layout breakpoint is missing');
 requireMatch(styles, /@media\(prefers-reduced-motion:reduce\)/, 'global reduced-motion rule is missing');
