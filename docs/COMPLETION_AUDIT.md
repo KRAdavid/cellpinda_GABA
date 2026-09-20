@@ -6,6 +6,10 @@
 
 후보 `68bf1ec101130c48de8b0c5dd41b4e05bb9edf33`의 로컬 매니페스트 지문 일치, 전체 107개 회귀 테스트, 타입검사·UI 계약·production build, `release-verify`·`site-quality-verify` 성공을 확인했다. PR 이벤트에서는 Pages·Worker 게시와 라이브 smoke가 의도적으로 건너뛰며, 실제 공개본은 사람 리뷰와 main 반영 뒤 다시 `/release-manifest.json` 및 라이브 화면으로 확인한다.
 
+## 2026-09-20 TF pulse 자동 재평가 — 후보 `77d6de5`
+
+자동 heartbeat를 재실행해 운영 큐의 상태 지문과 외부 입력 게이트를 다시 대조했다. 지문은 변하지 않았고 `stateChanged=false`, `safeExecution=MET`, 사람 판단이 필요한 입력 게이트 4건을 유지했다. 다음 재검토 시각은 6시간 뒤로 예약했으며, 공개 제품·연구·후기 데이터와 외부 게시 상태는 자동으로 바꾸지 않았다.
+
 ## 최신 후보 지문·감리 결과 동기화 — 2026-09-20 현재 후보
 
 후보 HEAD와 `dist/release-manifest.json`의 `candidateSha`가 일치하는지 확인했다. 로컬 회귀 107개, 타입검사, 공개 export·UI·연구 카피·티저·정적 bundle 검증과 PR 필수 검사 2개는 모두 성공했다. PR은 Code Owner 승인 전 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 공개 Pages에는 아직 후보가 반영되지 않았다.
