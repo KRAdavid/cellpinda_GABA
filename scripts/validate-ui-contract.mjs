@@ -77,6 +77,7 @@ requireMatch(app, /const isProductView = requestedView === 'products' \|\| curre
 requireMatch(app, /if\(challengeInvite\)[\s\S]*?\['Tab','ArrowDown'/, 'keyboard navigation must stop automatic invite alignment');
 requireMatch(challenge, /isInvite\) return;[\s\S]*?inviteHeadingRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'seven-day invitation must move focus to its challenge heading');
 requireMatch(challenge, /id="challenge-heading" ref=\{inviteHeadingRef\} tabIndex=\{isInvite \? -1 : undefined\}/, 'challenge heading must accept programmatic focus when invited');
+if (/<button className=/.test(challenge)) fail('seven-day challenge action buttons must declare type=button');
 requireMatch(rhythm, /if \(sharedType && !result\) resultRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'shared rhythm arrival must focus the shared result heading');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
@@ -87,6 +88,7 @@ requireMatch(app, /<nav id="primary-navigation"[^>]*aria-label="주 메뉴"/, 'c
 requireMatch(app, /id="primary-navigation" ref=\{menuNavRef\}[\s\S]*onKeyDown=\{event=>\{if\(event\.key==='Escape'\)closeMenu\(true\)\}\}/, 'mobile navigation must support Escape and return focus to its toggle');
 requireMatch(app, /if\(menu\)requestAnimationFrame\(\(\)=>menuNavRef\.current\?\.querySelector<HTMLAnchorElement>\('a\[href\]'\)\?\.focus\(\)\)/, 'opening the mobile menu must move focus to the first navigation link');
 requireMatch(app, /aria-controls="primary-navigation"/, 'the mobile menu toggle must identify its controlled navigation');
+requireMatch(app, /<button type="button" ref=\{menuToggleRef\}/, 'the mobile menu toggle must never submit a surrounding form');
 requireMatch(app, /analyticsConsentGranted/, 'analytics events must be consent-gated');
 requireMatch(app, /<AnalyticsConsent enabled=\{apiEndpoint\('\/api\/events'\) !== null\}\/>/, 'analytics consent controls must match the active event endpoint');
 requireMatch(app, /if\(endpoint\)\{[\s\S]*?if\(api\.ok\)return api\.json\(\);[\s\S]*?throw Error\('Content API unavailable'\);[\s\S]*?\}\s*const fallback=await fetchContent/, 'Worker content failures must not silently fall back to stale static content');
