@@ -4,7 +4,7 @@
 
 Yoto 사람 연구 하이라이트의 제목을 소비자가 결과 방향을 바로 읽을 수 있도록 `활력 점수는 덜 떨어지고, 뇌파 변화 폭은 작았어요`로 정리했다. 카드 요약은 비교 캡슐과의 관찰 조건을 함께 남겨, 긍정적인 차이는 보여 주되 셀핀다 완제품의 효과로 확대하지 않는다. UI 계약과 라이브 소비자 번들 회귀 검사를 새 문구에 맞춰 고정했다.
 
-`pnpm test` 107개, `pnpm run build`, 공개 export·정적 bundle·release manifest·성능 예산 검증이 통과했다. 카피 보완 시점의 `dist/release-manifest.json`은 `f81491edd8524f1345df48eda127b444964343d4`와 일치했고, 문서 기록을 포함한 현재 후보는 `defd6005136b8c9276d4746c4601240d7bd9c7cb`다. 두 후보 모두 PR #97의 `release-verify`와 `site-quality-verify`를 성공시켰다.
+`pnpm test` 107개, `pnpm run build`, 공개 export·정적 bundle·release manifest·성능 예산 검증이 통과했다. 카피 보완 시점의 `dist/release-manifest.json`은 `f81491edd8524f1345df48eda127b444964343d4`와 일치했고, 이후 문서 커밋을 포함한 후보도 같은 SHA 일치 검사를 유지한다. PR #97의 `release-verify`와 `site-quality-verify`가 각 후보에서 성공했다.
 
 PR은 Code Owner 승인 전 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 공개 Pages의 `/release-manifest.json`은 아직 HTTP 404이므로 이번 카피 보완은 후보 품질 개선이며 공개 배포 완료를 의미하지 않는다.
 
