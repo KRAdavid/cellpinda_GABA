@@ -1,6 +1,14 @@
 # 전체 목표 완료 간극 점검
 
-기준일 2026-09-12. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 커밋 `f0db8cd`의 [GitHub Actions 34635928779](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34635928779)와 2026-09-12 공개 URL 재검증을 기준으로 한다.
+## 최신 완료 감사 — 2026-09-20 `5c4a6a8`
+
+현재 배포 후보는 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `5c4a6a8d3b335011cee794ad8fbd9879a1c10360`이다. `release-verify`와 `site-quality-verify`가 성공했고, 연구·제품·후기·챌린지·공개 export·배포 번들 검사를 통과했다. 이 검사는 후보의 품질을 증명하지만, Code Owner 승인이나 실제 공개 배포 완료를 의미하지 않는다.
+
+2026-09-20 완제품 자료 재대조에서 단상자·3개입 샘플·낱포 도면·시험성적서·품목제조보고서의 표시 신호를 확인했다. 최종 인쇄 승인본·현행 판매 SKU·로트별 적용은 확인되지 않았으므로 B2는 `VERIFYING`으로 유지하고, 공개 사이트는 제품명·30포·기타가공품·스마트스토어 연결만 노출한다. 참고용 시험 수치와 인쇄 샘플을 완제품 효능·보장 함량으로 확대하지 않았다. 상세 내역은 [B2 검증 패킷](B2_MATERIAL_VERIFICATION_20260911.md)에 있다.
+
+현재 목표 상태는 `IN_PROGRESS_WITH_GATES`다. B2 표시 승인, B3 후기 재게시 권한, B4 티저 공개 승인, C2 Worker·D1 운영 비밀값, E1 실주문 대사는 외부 확인이 필요하다. `preflight:deploy`는 정적 산출물·제품 범위·연구 마스터 인덱스를 통과했지만 Cloudflare 운영 비밀값 5개가 없어 `WAITING`이며, PR 이벤트에서는 Pages·Worker·라이브 smoke가 의도적으로 건너뛰었다. 공개 URL의 후보 SHA와 `/release-manifest.json`을 확인하기 전에는 배포 완료로 판정하지 않는다.
+
+아래 본문은 2026-09-12 당시의 독립 검토 기록을 보존한 것이다. 현재 판정은 위의 2026-09-20 최신 완료 감사와 현재 PR·라이브 검증 결과를 우선한다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다.
 
 커밋 `b5e70b4`에서 Node/SQLite와 Worker/D1의 초기화 시 canonical 스마트스토어 후기 목적지를 원장 해시 기준으로 동기화했다. 이후 `f0db8cd`에서 revision 1 미편집 seed claim도 현재 원장의 소비자 문구·메타데이터로 재동기화하도록 보강했다. 영구 DB에 남은 이전 목적지와 미편집 seed만 revision·audit과 함께 보정하며, revision 2 이상 운영자 수정본과 `hold` 상태는 보존한다. 81개 회귀 테스트, 타입검사, production build, 로컬 Worker/D1 HTTP에서 content 200(후기 1건)과 샌드박스 PUT/GET/DELETE 200을 확인했다. `docs/B2_MATERIAL_VERIFICATION_20260911.md`에는 완제품 포장 자료와 원료 제외 경계를 묶었고, `goal:next`는 B2 검증 진행을 별도 표시한다. 원격 Cloudflare D1·백업 복구는 여전히 외부 운영 조건이다.
 
