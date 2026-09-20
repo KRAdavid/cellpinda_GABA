@@ -42,7 +42,7 @@ const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fa
 const researchRouteStart = app.indexOf('if(researchView)return');
 const researchRouteEnd = app.indexOf('const linkContext');
 const researchRoute = app.slice(researchRouteStart, researchRouteEnd);
-const heroStart = app.indexOf('<section className="hero">');
+const heroStart = app.indexOf('<section className="hero"');
 const heroEnd = app.indexOf('<div className="wrap section"><RhythmExperience', heroStart);
 const hero = app.slice(heroStart, heroEnd);
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
@@ -113,7 +113,8 @@ if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes le
 if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
 if (/className="section empathy"/.test(app)) fail('the landing flow must not repeat four prompts that all lead to the same check');
 requireMatch(app, /className="mobile-break"/, 'mobile hero headline must wrap intentionally instead of clipping');
-requireMatch(app, /<h1 aria-label="퇴근했는데도 일 생각이 계속 나나요\?">/, 'hero headline must keep a space-preserving accessible name across visual line breaks');
+requireMatch(app, /<section className="hero" aria-labelledby="hero-heading">[\s\S]*<h1 id="hero-heading"/, 'hero landmark must be named by its visible headline');
+requireMatch(app, /<h1 id="hero-heading" aria-label="퇴근했는데도 일 생각이 계속 나나요\?">/, 'hero headline must keep a space-preserving accessible name across visual line breaks');
 requireMatch(styles, /@media\(max-width:680px\)\{\.header>\.button\{display:none\}\.menu-toggle\{display:flex;[^}]*width:44px;height:44px/, 'mobile header must keep its menu toggle inside the viewport');
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:900px\)[\s\S]*?\.header nav\{display:none[\s\S]*?\.menu-toggle\{display:flex/, 'tablet navigation must collapse before menu labels wrap');
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:900px\)[\s\S]*?\.hero-copy\{[^}]*background:linear-gradient/, 'tablet hero text must keep a readable background over the photo');
@@ -133,6 +134,7 @@ for (const marker of ['퇴근했는데도', '계속 나나요', '잠과 휴식 1
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
 requireMatch(app, /셀핀다 발효가바 · 나의 하루 리듬 체크/, 'the hero must identify the Cellpinda fermented GABA context before the first interaction');
+requireMatch(app, /<section className="closing" aria-labelledby="closing-heading">[\s\S]*<h2 id="closing-heading">/, 'closing CTA landmark must be named by its visible headline');
 requireMatch(rhythm, /지난 7일, 잠들기 어렵거나<br \/>쉬지 못한 날이 있었나요\?/, 'the rhythm heading must use a direct everyday situation for consumers');
 requireMatch(rhythm, /<h2 id="rhythm-heading" aria-label="지난 7일, 잠들기 어렵거나 쉬지 못한 날이 있었나요\?">/, 'rhythm heading must keep a space-preserving accessible name across visual line breaks');
 requireMatch(rhythm, /지난 7일을 다섯 가지로 돌아봐요\.[\s\S]*퇴근 뒤에도 일이 생각났는지, 침대에서 오래 뒤척였는지/, 'the rhythm start panel must explain the five-question reflection in everyday language');
