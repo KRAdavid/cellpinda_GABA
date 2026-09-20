@@ -467,7 +467,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   return (
     <section className="rhythm-experience" id="rhythm" aria-labelledby="rhythm-heading">
       <div className="rhythm-heading-row">
-        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading">지난 7일, 잠들기 어렵거나<br />쉬지 못한 날이 있었나요?</h2></div>
+        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading" aria-label="지난 7일, 잠들기 어렵거나 쉬지 못한 날이 있었나요?">지난 7일, 잠들기 어렵거나<br />쉬지 못한 날이 있었나요?</h2></div>
         <p className="rhythm-intro-copy">다섯 문항 · 답을 고르면 다음 질문으로 넘어가요.</p>
       </div>
 
