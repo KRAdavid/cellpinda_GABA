@@ -390,3 +390,11 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 후보 `b8044c6`에서 수동 TF pulse [35501672620](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35501672620)을 실행했다. 후보 실행에서는 `Persist safe pulse heartbeat`가 의도적으로 `skipped`되고, 비-main 후보 검증 단계의 타입검사·107개 회귀 테스트·production build·배포 readiness·Worker review 통합 테스트·Worker dry-run이 모두 성공했다.
 
 실행 전후 `automation/tf-pulse-heartbeat` 원격 SHA가 `08d47c760074933d9ed7f0ed6bdf26d7c496e625`로 동일했다. 따라서 후보 수동 검증이 main 예약용 heartbeat 브랜치나 보호된 PR 흐름을 변경하지 않는다. main 예약 실행에서만 heartbeat를 reviewable PR로 저장하는 경계는 유지한다.
+
+## 2026-09-20 최신 후보 릴리스 검증
+
+후보 HEAD `8f2c4c4`에 대해 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 [release-verify 35501765742](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35501765742)와 [site-quality-verify 35501765770](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35501765770)가 모두 성공했다. 후보는 타입검사·107개 회귀 테스트·production build·공개 export·정적 bundle·성능 예산·Worker dry-run과 접근성 fallback 검사를 통과했다.
+
+같은 시점의 `audit:goal`은 `coreValid=true`, 역할 8/8, DONE 10·VERIFYING 1·WAITING 4를 유지했고, 공개 마스터 인덱스·연구 카피·TF pulse·sandbox MVP는 `MET`이다. 제품 표시 승인, 후기 재게시 권한, 티저 공개 권리, Cloudflare 운영 시크릿, 실구매 대사는 사람 입력 게이트로 남아 있다.
+
+후보 검증 뒤 `automation/tf-pulse-heartbeat` 원격 SHA는 `08d47c760074933d9ed7f0ed6bdf26d7c496e625`로 변하지 않았다. 공개 Pages 루트는 HTTP 200이지만 후보 `release-manifest.json`은 아직 HTTP 404이므로, Code Owner 승인·main 병합·Pages 게시·live smoke 전에는 공개 배포 완료로 판정하지 않는다.
