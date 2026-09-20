@@ -487,7 +487,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
               <button type="button" className="rhythm-button secondary" onClick={() => void copyLink()}>내 유형 링크 복사 <ArrowUpRight size={18} aria-hidden="true" /></button>
               <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>내 결과 카드 저장 <Download size={18} aria-hidden="true" /></button>
             </details>
-            {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
+            {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" aria-label="공유받은 유형과 내 결과 비교하기" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <details className="rhythm-rules"><summary>점수는 어떻게 나온 건가요?</summary><p>{result?.explanation ?? '지난 7일 동안 잠, 휴식, 아침 피로 등에 답한 내용을 모아 보여드려요. 점수는 내 답변을 정리한 것이며 건강 상태를 재거나 병을 진단하는 결과가 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#brain-load-evidence">집중과 휴식 관련 연구 쉽게 보기 <ArrowRight size={18} aria-hidden="true" /></a>

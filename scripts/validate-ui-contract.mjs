@@ -217,6 +217,8 @@ requireMatch(fatigueGame, /gameSoundStatus[\s\S]*role="status"/, 'focus game mus
 requireMatch(fatigueGame, /브라우저가 자동 소리를 막았어요\./, 'focus game must explain the browser audio autoplay fallback');
 requireMatch(research, /research-topic-cards[\s\S]*aria-pressed=\{activeTopic===cardTopic\}[\s\S]*setTopic\(nextTopic\)/, 'research topics must be visible, keyboard-operable filters');
 requireMatch(research, /research-topic-card[\s\S]*aria-label=\{`\$\{label\} · \$\{detail\} · \$\{recordCount\}`\}/, 'research topic cards must expose their topic, description and study count to assistive technology');
+requireMatch(research, /id="research-search"[^>]*aria-label="연구 내용 검색"/, 'research search must expose an explicit accessible name');
+requireMatch(rhythm, /rhythm-compare-consent[\s\S]*type="checkbox"[^>]*aria-label="공유받은 유형과 내 결과 비교하기"/, 'shared rhythm comparison must expose an explicit accessible name');
 requireMatch(research, /preferredStudyOrder[\s\S]*'research-yamatsu-2016', 'research-byun-2018'[\s\S]*'research-review-2020'/, 'individual sleep findings must lead and the 14-paper review must remain a separate scope summary');
 if (research.includes('research-review-metrics')) fail('the 14-paper review must not be styled as an efficacy badge');
 requireMatch(review, /가바 1500 스마트스토어 후기 읽기[\s\S]*href=\{url\}/, 'the review section must link directly to the approved Smart Store review destination');
