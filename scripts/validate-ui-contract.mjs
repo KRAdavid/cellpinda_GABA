@@ -54,7 +54,7 @@ const consumerFlow = ['<RhythmExperience', '<GabaStory', '<TeaserPreview', '<Gab
 const consumerFlowPositions = consumerFlow.map(marker => app.indexOf(marker));
 if (consumerFlowPositions.some(position => position < 0) || consumerFlowPositions.some((position, index) => index > 0 && position <= consumerFlowPositions[index - 1])) fail('consumer flow must explain GABA, offer a separate research route, then lead through product information and reviews');
 requireMatch(app, /const researchView = requestedView === 'research' \|\| currentPath === '\/research\/'[\s\S]*if\(researchView\)return[\s\S]*<ResearchLibrary claims=\{content\.claims\}/, 'research route must render as a separate reading view');
-requireMatch(app, /잠·스트레스·생각 과제에서 관찰한 내용을 그림으로 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'research route must separate general GABA studies from Cellpinda product research in plain language');
+requireMatch(app, /잠·스트레스·머리를 많이 쓴 뒤 관찰한 내용을 그림으로 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'research route must separate general GABA studies from Cellpinda product research in plain language');
 requireMatch(researchStyles, /\.research-route-main\{width:min\(1120px,100%\);margin-inline:auto\}[\s\S]*?\.research-library-card-featured\{display:grid;grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/, 'wide research pages must center the reading column and balance the featured study with its visual');
 if (!(researchRoute.indexOf('<ResearchLibrary') >= 0 && researchRoute.includes('research-route-product') && researchRoute.includes('view=products#products') && !researchRoute.includes(approvedSmartStoreUrl) && !/스마트스토어/.test(researchRoute))) fail('the research route must end with a neutral product-information handoff without exposing a purchase link');
 requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서 관찰된 변화/, 'selected research findings must be visibly labeled before methods are opened');
@@ -73,7 +73,7 @@ requireMatch(app, /<SevenDayChallenge onEvent=\{track\} isInvite=\{challengeInvi
 requireMatch(challenge, /isInvite \? <p className="challenge-invite" role="status">친구가 7일 휴식 챌린지에 초대했어요\. 개인 기록은 공유되지 않았어요\.<\/p>/, 'challenge invite context must remain visible and protect the visitor’s private record');
 requireMatch(challenge, /isInvite \? '건강 검사가 아닌 휴식 기록이에요\. 기록은 이 기기에만 남아요\.'/ , 'a challenge invite must keep its non-diagnostic and local-storage boundary visible');
 requireMatch(challengeStyles, /\.seven-day-challenge\.is-invite \.challenge-start\{margin-top:14px;padding:18px 16px\}[\s\S]*?\.seven-day-challenge\.is-invite \.challenge-start \.button\{margin-top:12px;min-height:48px\}/, 'mobile challenge invitations must compact enough to keep their start action in view');
-requireMatch(app, /const description='잠·스트레스·생각 과제에서 관찰한 내용을 그림으로 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\.'/ , 'research route metadata must state its scope and product boundary in plain language');
+requireMatch(app, /const description='잠·스트레스·머리를 많이 쓴 뒤 관찰한 내용을 그림으로 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\.'/ , 'research route metadata must state its scope and product boundary in plain language');
 requireMatch(app, /const isProductView = requestedView === 'products' \|\| currentPath === '\/products\/'[\s\S]*const title='셀핀다 가바 1500 · 30포 구성 보기'[\s\S]*update\('og:image','property',new URL\(asset\('assets\/product-composition-1500\.png'\)/, 'direct product views must publish product-specific title, description and social image metadata');
 requireMatch(app, /if\(challengeInvite\)[\s\S]*?\['Tab','ArrowDown'/, 'keyboard navigation must stop automatic invite alignment');
 requireMatch(challenge, /isInvite\) return;[\s\S]*?inviteHeadingRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'seven-day invitation must move focus to its challenge heading');
@@ -204,7 +204,7 @@ requireMatch(gabaResearchHighlights, /GABA를 먹은 사람 연구에서[\s\S]*�
 for (const marker of ['잠드는 시간과 수면 기록', '과제 뒤 뇌파와 활력 점수', '쉬었을 때와 운동했을 때의 혈액 속 변화', '그림으로 한눈에 보기', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight[\s\S]*claim\.metadata\?\.consumerFinding[\s\S]*claim\.publicText/, 'post-teaser research highlights must read reviewed consumer copy and tolerate an older local API snapshot');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
-for (const marker of ['논문에서 사용한 양: 하루 100mg', '논문에서 사용한 양: 100mg 1회', '논문에서 사용한 양: 3g 1회']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
+for (const marker of ['연구 조건: 하루 100mg', '연구 조건: 100mg 한 번', '연구 조건: 3g 한 번']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
 for (const marker of ['잠이 부족하면', '집중·기억·판단이 흔들릴 수 있어요.', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
@@ -289,7 +289,7 @@ requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hol
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
-requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg을 한 번 먹고 생각 과제 뒤 뇌파와 활력 점수를 살펴본 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 하루 100mg을 먹은 주와 비교 캡슐을 먹은 주의 잠드는 시간과 수면 기록을 살펴본 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
+requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg을 한 번 먹고 뇌파와 활력 점수를 살펴본 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 하루 100mg을 먹은 주와 비교 캡슐을 먹은 주의 잠드는 시간과 수면 기록을 살펴본 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
 requireMatch(indexHtml, /사람이 GABA를 먹은 연구 14편을 모아 참여자·먹은 양·기간을 정리한 자료예요\./, 'no-script research summary must include the approved research review record');
 requireMatch(indexHtml, /수면 불편<\/strong> 수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제와 비교 정제를 4주 먹고 잠드는 시간을 살펴본 연구예요\./, 'no-script research summary must include the approved four-week sleep study');
 if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');

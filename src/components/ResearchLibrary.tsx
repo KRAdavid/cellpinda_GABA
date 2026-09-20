@@ -95,7 +95,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   const topicCards = [
     {topic:'잠', label:'잠', detail:'잠드는 시간과 수면을 본 연구', Icon:Moon},
     {topic:'스트레스·잠', label:'스트레스와 잠', detail:'스트레스와 잠을 본 연구', Icon:Activity},
-    {topic:'뇌파·과제', label:'생각을 많이 쓴 뒤', detail:'머리를 많이 쓴 뒤 뇌 신호', Icon:Brain},
+    {topic:'뇌파·과제', label:'머리를 많이 쓴 뒤', detail:'머리를 많이 쓴 뒤 뇌 신호', Icon:Brain},
     {topic:'운동', label:'쉬었을 때·운동했을 때', detail:'쉬었을 때와 운동했을 때 혈액 속 변화', Icon:Dumbbell},
     {topic:'뇌·손끝 연습', label:'손끝 감각', detail:'손끝 자극과 뇌 신호', Icon:Hand},
   ].filter(card => topics.includes(card.topic));
