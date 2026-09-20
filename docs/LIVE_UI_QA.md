@@ -1,5 +1,11 @@
 # 공개 Pages UI 검증 기록
 
+## 현재 후보 재검증 — 2026-09-20 `f1d2b52`
+
+후보 브랜치의 로컬 production preview를 Chrome CDP로 다시 확인했다. 390px에서 홈·제품·연구·뇌컨디션 경로의 `scrollWidth=375`, 콘솔 오류·경고 0건을 확인했고, 데스크톱 홈 화면에서는 첫 화면 CTA·제품/연구 메뉴·SmartStore 후기 진입이 잘리지 않았다. `pnpm run preflight:deploy`는 공개 산출물·6개 연구·가바1500 1개·15개 운영 작업·공개 감사 패킷을 통과했으며 Cloudflare 운영 비밀값 5개만 `WAITING`이다.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`와 `site-quality-verify`는 새 후보에서 성공했다. 공개 Pages는 여전히 이전 `main`을 제공해 루트는 HTTP 200이지만 `/release-manifest.json`은 HTTP 404이고 최신 챌린지 문구도 없다. 따라서 후보 품질과 공개 승격을 분리해 기록하며, Code Owner 승인·`main` 병합 뒤 Pages 게시와 `validate:live-public`을 다시 실행해야 한다.
+
 ## 후보 지문·검증 문서 동기화 — 2026-09-20 현재 후보
 
 최신 후보의 release manifest와 PR HEAD가 같은 지문을 가리키는지 확인했다. `pnpm test` 107개, 타입검사, 공개 export·UI·연구 카피·티저·정적 bundle 검증과 GitHub Actions 필수 검사 2개가 성공했다. 공개 Pages는 이전 main을 가리키므로 이 기록은 후보 품질 증거이며 공개 배포 완료 증거가 아니다.
