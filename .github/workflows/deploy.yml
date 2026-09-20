@@ -237,6 +237,7 @@ jobs:
         if: env.DEPLOY_ENABLED == 'true'
         env:
           WORKER_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
+          MEMBER_ORIGIN: ${{ secrets.MEMBER_ORIGIN }}
         run: node scripts/validate-worker-live.mjs
 
   release-status:

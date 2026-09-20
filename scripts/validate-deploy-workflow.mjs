@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 const workflow = await readFile(new URL('../.github/workflows/deploy.yml', import.meta.url), 'utf8');
 const siteQualityWorkflow = await readFile(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8');
 const liveValidator = await readFile(new URL('./validate-live-public.mjs', import.meta.url), 'utf8');
+const workerLiveValidator = await readFile(new URL('./validate-worker-live.mjs', import.meta.url), 'utf8');
 
 assert.match(workflow, /^  pull_request:\r?\n    branches: \[main\]$/m, 'PRs targeting main must run verification');
 assert.match(workflow, /^  release-verify:\r?\n/m, 'the release verification job must exist');
@@ -47,6 +48,8 @@ assert.match(liveValidator, /validateLiveBundleHashes/, 'live smoke must validat
 assert.match(liveValidator, /bundleHashCount/, 'live smoke output must report the bundle hash coverage');
 assert.match(workflow, /Create deployment Wrangler config[\s\S]*PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*config\.vars=\{\.\.\.\(config\.vars\|\|\{\}\),PUBLIC_SITE_URL:process\.env\.PUBLIC_SITE_URL\}/, 'Worker deploy config must inject the selected public origin');
 assert.match(workflow, /Strict deployment readiness gate[\s\S]*PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*pnpm run preflight:deploy -- --strict/, 'strict Worker readiness must validate the same public origin used for deployment');
+assert.match(workflow, /Verify deployed Worker API and security headers[\s\S]*WORKER_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*MEMBER_ORIGIN: \$\{\{ secrets\.MEMBER_ORIGIN \}\}[\s\S]*validate-worker-live\.mjs/, 'live Worker verification must pass the configured member origin');
+assert.match(workerLiveValidator, /verifyCors/, 'live Worker verification must exercise the configured CORS contract');
 assert.match(workflow, /elif \[ "\$WORKER_ENABLED" = "true" \] && \[ "\$WORKER_RESULT" != "success" \][\s\S]*mode="RELEASE_FAILED"/, 'a failed Worker deployment must not be relabeled as static-only');
 assert.doesNotMatch(workflow, /CLOUDFLARE_WORKER_URL \|\|/, 'Worker live verification must not fall back to an unverified temporary origin');
 assert.match(workflow, /^permissions:\r?\n  contents: read$/m, 'workflow-wide permissions must remain read-only');
