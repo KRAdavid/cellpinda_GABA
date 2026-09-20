@@ -358,3 +358,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 오래된 `main`에 남아 있던 TF pulse 예약 실행 로그([35490176992](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35490176992), [35467937914](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35467937914), [35453099267](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35453099267))에서 GitHub Actions의 PR 생성 권한 거부를 처리하지 않아 heartbeat 작업 전체가 실패하는 문제를 확인했다. 이 실패는 공개 콘텐츠나 제품 데이터의 오류가 아니라, 저장소 정책상 자동 PR을 만들 수 없는 경우의 예외 처리 누락이었다.
 
 후보 커밋 `86cbd21`은 `gh pr create` 실패를 경고로 기록하고 heartbeat 브랜치 갱신·안전한 내부 검증을 계속 수행하도록 보정했다. 자동 PR 생성 권한이 없어도 TF pulse가 중단되지 않고, 보호된 main 반영은 여전히 사람의 PR 생성과 Code Owner 검토를 요구한다. `pnpm run validate:tf-pulse-workflow`를 통과했으며, 후보 자동화 보정은 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이 main에 병합된 뒤 실제 예약 실행에서 다시 확인해야 한다.
+
+## 2026-09-20 정적 경로 접근성 fallback 보정
+
+공유 결과·제품 구성·뇌컨디션 초대 정적 경로에서 즉시 `meta refresh`를 제거했다. JavaScript가 가능한 방문자는 기존 목적지로 이동하고, JavaScript가 꺼져 있거나 검색·보조기술이 먼저 읽는 경우에는 페이지 제목·설명·명시적 링크가 남는다. `scripts/validate-static-bundle.mjs`에 모든 10개 공개 경로가 meta refresh를 다시 포함하지 않는지 회귀 검사를 추가했다.
+
+`validate:public`, `validate:static-bundle`, `validate:ui-contract`, `typecheck`, 전체 107개 테스트와 production build의 release manifest·성능 검사를 통과했다. 이는 공개 승인이나 main 배포를 의미하지 않으며 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 검토 후 Pages live smoke에서 다시 확인한다.
