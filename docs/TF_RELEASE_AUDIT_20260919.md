@@ -1,5 +1,13 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
+## 2026-09-20 readiness 작업 실패 은폐 방지 — 후보 작업 중
+
+CI/CD 분기 감리에서 `worker-readiness` 작업 자체의 실패·취소가 출력값 누락으로 바뀌어 정적 smoke와 `STATIC_ONLY` 성공으로 보일 수 있는 결함을 재현 가능한 조건식으로 확인했다. Cloudflare 시크릿이 없는 정상 `HOLD`와 작업 런타임 오류를 같은 결과로 기록하면 배포 감사가 불완전해진다.
+
+후보 배포 워크플로는 readiness 작업 결과가 `success`일 때만 `smoke-live`를 허용하고, 릴리스 상태 원장에 `workerReadinessResult`를 추가했다. readiness 작업이 성공하면서 `enabled=false`를 반환할 때만 기존 정적 전용 경로를 유지하며, 작업 실패·취소·비정상 skip은 `RELEASE_FAILED`로 기록한다. `validate:deploy-workflow`와 상태 패킷 검증을 통과했다. 외부 시크릿, 승인, Pages 병합과 Worker 배포는 그대로 게이트에 남겼다.
+
+후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 아직 Code Owner 승인 전이다. 현재 공개 Pages의 `release-manifest.json`은 HTTP 404이므로 라이브 공개본은 후보와 일치하지 않는다.
+
 ## 현재 릴리스 후보 기준 — 2026-09-20
 
 현재 검토 기준은 후보 브랜치와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. 최신 후보 검증에서 `release-verify`와 `site-quality-verify`가 모두 통과했으며, 320px·390px·768px·1440px에서 홈·연구·제품·공유 챌린지 경로의 가로 넘침과 CTA 잘림이 없음을 Chrome CDP로 확인했다. 공유 챌린지의 `먼저 연습하고 시작하기` CTA는 연습 화면의 `초록 신호를 눌러 보세요.` 안내로 정상 전환된다.

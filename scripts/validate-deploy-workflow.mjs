@@ -35,6 +35,7 @@ assert.match(workflow, /needs: \[release-verify, worker-readiness\][\s\S]*needs\
 assert.match(workflow, /HOLD — Worker\/D1 deployment was not run\./, 'missing Worker secrets must be visible as a hold rather than a green skipped deployment step');
 assert.match(workflow, /release-status:[\s\S]*needs: \[deploy-pages, smoke-live, worker-readiness, deploy-worker\]/, 'release mode must summarize both static and Worker deployment results');
 assert.match(workflow, /release-status:[\s\S]*if: always\(\) && github\.event_name != 'pull_request'/, 'release status must run even when the optional Worker deployment is skipped');
+assert.match(workflow, /smoke-live:[\s\S]*needs\.worker-readiness\.result == 'success'/, 'live smoke must fail closed when the Worker readiness job itself fails');
 assert.match(workflow, /mode="FULL_RELEASE"/, 'release status must identify a full Worker-backed release');
 assert.match(workflow, /mode="STATIC_ONLY"/, 'release status must identify a static-only release');
 assert.match(workflow, /Worker\/D1 remains HOLD; this run publishes the static public site only\./, 'static-only releases must expose the operational hold');
@@ -51,6 +52,8 @@ assert.match(workflow, /Create deployment Wrangler config[\s\S]*PUBLIC_SITE_URL:
 assert.match(workflow, /Strict deployment readiness gate[\s\S]*PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*pnpm run preflight:deploy -- --strict/, 'strict Worker readiness must validate the same public origin used for deployment');
 assert.match(workflow, /Verify deployed Worker API and security headers[\s\S]*WORKER_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}[\s\S]*MEMBER_ORIGIN: \$\{\{ secrets\.MEMBER_ORIGIN \}\}[\s\S]*validate-worker-live\.mjs/, 'live Worker verification must pass the configured member origin');
 assert.match(workerLiveValidator, /verifyCors/, 'live Worker verification must exercise the configured CORS contract');
+assert.match(workflow, /WORKER_READINESS_RESULT: \$\{\{ needs\.worker-readiness\.result \}\}/, 'release status must retain the Worker readiness job result');
+assert.match(workflow, /\[ "\$WORKER_READINESS_RESULT" != "success" \][\s\S]*mode="RELEASE_FAILED"/, 'a failed Worker readiness job must not be relabeled as static-only');
 assert.match(workflow, /elif \[ "\$WORKER_ENABLED" = "true" \] && \[ "\$WORKER_RESULT" != "success" \][\s\S]*mode="RELEASE_FAILED"/, 'a failed Worker deployment must not be relabeled as static-only');
 assert.doesNotMatch(workflow, /CLOUDFLARE_WORKER_URL \|\|/, 'Worker live verification must not fall back to an unverified temporary origin');
 assert.match(workflow, /^permissions:\r?\n  contents: read$/m, 'workflow-wide permissions must remain read-only');

@@ -105,7 +105,7 @@ jobs:
 
   smoke-live:
     needs: [deploy-pages, worker-readiness, deploy-worker]
-    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.deploy-pages.result == 'success' && (needs.worker-readiness.outputs.enabled != 'true' || needs.deploy-worker.result == 'success')
+    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.deploy-pages.result == 'success' && needs.worker-readiness.result == 'success' && (needs.worker-readiness.outputs.enabled != 'true' || needs.deploy-worker.result == 'success')
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -263,9 +263,10 @@ jobs:
           PAGES_RESULT: ${{ needs.deploy-pages.result }}
           SMOKE_RESULT: ${{ needs.smoke-live.result }}
           WORKER_RESULT: ${{ needs.deploy-worker.result }}
+          WORKER_READINESS_RESULT: ${{ needs.worker-readiness.result }}
           WORKER_ENABLED: ${{ needs.worker-readiness.outputs.enabled }}
         run: |
-          if [ "$PAGES_RESULT" != "success" ] || [ "$SMOKE_RESULT" != "success" ]; then
+          if [ "$PAGES_RESULT" != "success" ] || [ "$SMOKE_RESULT" != "success" ] || [ "$WORKER_READINESS_RESULT" != "success" ]; then
             mode="RELEASE_FAILED"
           elif [ "$WORKER_ENABLED" = "true" ] && [ "$WORKER_RESULT" != "success" ]; then
             mode="RELEASE_FAILED"
@@ -283,6 +284,7 @@ jobs:
             mode: process.env.RELEASE_MODE,
             pages: process.env.PAGES_RESULT,
             smoke: process.env.SMOKE_RESULT,
+            workerReadinessResult: process.env.WORKER_READINESS_RESULT,
             workerReadiness: process.env.WORKER_ENABLED === 'true',
             workerDeployment: process.env.WORKER_RESULT,
           };
@@ -296,7 +298,8 @@ jobs:
             echo "**$mode**"
             echo "- GitHub Pages: $PAGES_RESULT"
             echo "- Public smoke check: $SMOKE_RESULT"
-            echo "- Worker/D1 readiness: ${WORKER_ENABLED:-false}"
+            echo "- Worker/D1 readiness job: ${WORKER_READINESS_RESULT:-unknown}"
+            echo "- Worker/D1 readiness gate: ${WORKER_ENABLED:-false}"
             echo "- Worker/D1 deployment: $WORKER_RESULT"
             if [ "$mode" = "STATIC_ONLY" ]; then
               echo "- Worker/D1 remains HOLD; this run publishes the static public site only."

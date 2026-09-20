@@ -1,5 +1,13 @@
 # 전체 목표 완료 간극 점검
 
+## 2026-09-20 배포 게이트 실패 은폐 방지 — 후보 작업 중
+
+후보 브랜치의 배포 워크플로를 상태 전이별로 감리한 결과, `worker-readiness` 작업 자체가 실패하거나 취소되면 출력값이 비어도 `smoke-live`가 정적 Pages 검증으로 진행되고 `release-status`가 `STATIC_ONLY` 성공으로 기록할 수 있는 결함을 확인했다. 이는 Cloudflare 비밀값이 없어 정상적으로 `enabled=false`가 된 `HOLD`와 readiness 작업 오류를 구분하지 못하는 감사 추적 누락이었다.
+
+후보 워크플로는 이제 `worker-readiness.result == 'success'`일 때만 라이브 smoke를 실행한다. `release-status.json`에는 `workerReadinessResult`를 별도 기록하고, readiness 작업이 `failure`·`cancelled`·`skipped`이면 `RELEASE_FAILED`로 종료하도록 검증 규칙을 보강했다. 비밀값이 없는 정상 경로는 readiness 작업이 성공하고 `enabled=false`를 반환하므로 기존 `STATIC_ONLY` 운영이 유지된다. `pnpm run validate:deploy-workflow`와 정적 `STATIC_ONLY` 상태 패킷 검증을 통과했으며, 비밀값·Code Owner 승인·실제 배포는 변경하지 않았다.
+
+현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전이며, 공개 Pages 루트와 `data/content.json`은 HTTP 200이나 `/release-manifest.json`은 HTTP 404다. 따라서 이번 수정은 배포 전 게이트 신뢰성을 높인 후보 변경이며 공개 배포 완료를 의미하지 않는다.
+
 ## 2026-09-20 모바일 조작 영역 보정 — 후보 작업 중
 
 홈·연구·뇌컨디션 경로를 390px에서 다시 감리해 보조 링크와 동의 조작의 터치 영역을 보강했다. 브랜드·footer 이동·연구 복귀·출처 열기·챌린지 복귀·생활 장면 펼치기·검색 지우기·통계 동의 버튼에 44px 최소 조작 높이를 적용했고, 회귀를 막는 UI 계약을 추가했다. production build와 107개 테스트, CDP 모바일·데스크톱 경로 점검을 통과했으며 이 변경은 PR 후보에만 반영되어 공개 Pages 승격 전 검토가 필요하다.
