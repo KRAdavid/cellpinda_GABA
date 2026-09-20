@@ -52,6 +52,7 @@ for (const route of expectedRoutes) {
   assert.match(html, /<meta[^>]+property="og:image:type"[^>]+content="image\/png"/i, `${route} route must declare the social image type`);
   assert.match(html, /<meta[^>]+property="og:image:alt"[^>]+content="[^"]+"/i, `${route} route must describe the Open Graph image`);
   assert.match(html, /<meta[^>]+name="twitter:image:alt"[^>]+content="[^"]+"/i, `${route} route must describe the Twitter image`);
+  assert.ok(!/<meta[^>]+http-equiv="refresh"/i.test(html), `${route} route must preserve its static fallback without an immediate meta refresh`);
   assert.ok(!internalMarker.test(html), `${route} route leaks an internal operations marker`);
   checked.push({route, file: relative(outputDirectory, file).replaceAll('\\', '/'), bytes: info.size});
 }
