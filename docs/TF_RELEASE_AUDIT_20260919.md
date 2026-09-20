@@ -404,3 +404,5 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 사용자가 제공한 티저 URL을 비로그인 요청으로 다시 확인한 결과 `200 OK`와 HTML/CSS/JS 애니메이션, 로드 시 자동 시작 코드를 확인했다. 후보의 `data/teaser-manifest.json`을 `PREVIEW`로 전환하고, 리듬 체크 다음 위치에서 iframe을 화면 가까이 불러와 자동 시작하도록 `public/data/teaser-preview.json`에 URL을 연결했다. 임베드가 막히면 새 창 대체 링크를 제공하며, 브라우저 설정에 따라 재생 버튼이 필요할 수 있다는 문구를 유지한다.
 
 이 변경은 최종 광고 승인이나 제품 효능 주장을 의미하지 않는다. MP4/HLS 파일·전체 자막·대본·음원·이미지·출연 권리·표시사항·CTA 승인 증거가 없으므로 B4와 `teaser-boundary`는 `WAITING/HOLD`로 유지한다. `generate-release-manifest`, `validate-release-manifest`, `validate-static-bundle`은 `HOLD` 또는 검토된 HTTPS `PREVIEW`를 모두 검사하도록 보정했고, `pnpm run build`에서 10개 route·65개 파일·티저 경계·정적 fallback·성능 예산을 통과했다.
+
+후보 커밋 `d850beb`의 [release-verify 35502442874](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35502442874)와 [site-quality-verify 35502442897](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35502442897)가 모두 성공했다. PR 이벤트에서는 외부 게시와 live smoke가 의도적으로 실행되지 않았고, Code Owner 승인·main 병합 뒤에만 공개 Pages가 후보 지문과 동기화된다.
