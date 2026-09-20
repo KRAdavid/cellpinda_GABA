@@ -1,8 +1,8 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
-## 최신 릴리스 스냅샷 — 2026-09-20 · 후보 `9446102`
+## 최신 릴리스 스냅샷 — 2026-09-20 · 후보 `f01b430`
 
-현재 공개 전 기준은 후보 커밋 `9446102adce7ff4abf241da868e42226d22a9c09`와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. TF heartbeat를 재생성한 결과 공개 콘텐츠 지문은 `69994cdfed389afa93031b20e0ac06f9ff2a3089424de125ebfb1777c3a7a1aa`로 이전과 같고, 내부 안전 실행은 `MET`, 상태 변화는 없다.
+현재 공개 전 기준은 후보 커밋 `f01b430c14e51e11f3fa7ef6bc6d4619fcb6351b`와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. TF heartbeat를 재생성한 결과 공개 콘텐츠 지문은 `69994cdfed389afa93031b20e0ac06f9ff2a3089424de125ebfb1777c3a7a1aa`로 이전과 같고, 내부 안전 실행은 `MET`, 상태 변화는 없다.
 
 후보는 10개 공개 경로·65개 산출물·승인 연구 6건·제품 1개·스마트스토어 후기 목적지 1개·티저 `PREVIEW`를 유지한다. 최신 `release-verify`([35504341211](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35504341211))와 `site-quality-verify`([35504341213](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35504341213))는 성공했다. 로컬 검증 명령과 CI 경로를 일치시키고, 검토된 티저 URL과 릴리스 산출물의 정확한 일치를 게시 전에 검사하도록 보강했다. `release-status` 작업에는 고정 pnpm 설치 단계도 추가했다.
 
