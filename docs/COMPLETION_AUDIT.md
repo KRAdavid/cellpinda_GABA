@@ -1,8 +1,8 @@
 # 전체 목표 완료 간극 점검
 
-## 2026-09-20 최신 후보 공개 직전 상태 — `ee29f18`
+## 2026-09-20 최신 후보 공개 직전 상태 — `357529e`
 
-현재 추가 후보 `ee29f189fd888fa82c130d6cf2c9a3a002b46db4`에서 로컬 production build와 전체 107개 회귀 테스트, 타입검사, 공개 export·연구 카피·UI 계약·정적 bundle 검증을 다시 통과했다. GitHub Actions의 `release-verify`와 `site-quality-verify`도 성공했다.
+현재 추가 후보 `357529ec5386f7a01526c6682ecdeb523f01a65b`에서 로컬 production build와 전체 107개 회귀 테스트, 타입검사, 공개 export·연구 카피·UI 계약·정적 bundle 검증을 다시 통과했다. GitHub Actions의 `release-verify`와 `site-quality-verify`도 성공했다.
 
 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 현재 `OPEN / BLOCKED / REVIEW_REQUIRED`이며, PR 이벤트에서는 Pages·Worker·라이브 smoke가 의도된 `skipped`이다. 공개 Pages의 `/release-manifest.json`은 현재 HTTP 404이므로 `validate:live-public`는 ‘최신 후보 매니페스트 없음’으로 실패한다. 따라서 현재는 코드 품질 검증 완료와 공개 배포 완료를 분리하고, 사람 리뷰·main 병합 후 다시 Pages 배포와 매니페스트·라이브 smoke를 확인해야 한다.
 
