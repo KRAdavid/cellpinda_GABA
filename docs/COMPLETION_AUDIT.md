@@ -4,13 +4,13 @@
 
 배포 후 Worker 검증이 설정된 `MEMBER_ORIGIN`으로 preflight·허용 요청·차단 요청을 실제로 보내도록 강화했다. 공개 Pages와 회원 origin을 분리하는 운영 계약을 배포 워크플로 검사에 고정했으며, 107개 테스트·타입검사·Wrangler dry-run·`release-verify`·`site-quality-verify`를 통과했다. Cloudflare 비밀값이 없는 현재 후보에서는 Worker 라이브 검증과 배포를 실행하지 않는다.
 
-## 후보 SHA 및 공개 동기화 재확인 — 2026-09-20 `541e0fd`
+## 이전 후보의 공개 동기화 재확인 — 2026-09-20 `541e0fd` (historical)
 
-현재 PR 후보는 `541e0fd4c59ee96ec809a35b5a2f2cf7a6e09040`이다. 로컬 production build의 release manifest는 이 SHA와 정적 route 10개·파일 65개를 일치시켰고, `release-verify`와 `site-quality-verify`가 성공했다. 공개 Pages 루트는 HTTP 200이지만 `/release-manifest.json`이 404이며 최신 후보 문구가 없어, PR 승인·main 병합·Pages 라이브 smoke 전에는 공개 배포 완료로 판정하지 않는다.
+당시 PR 후보는 `541e0fd4c59ee96ec809a35b5a2f2cf7a6e09040`였다. 이 기록은 후보 SHA와 정적 route 10개·파일 65개가 일치했던 시점의 감사 자료다. 공개 Pages 루트는 HTTP 200이지만 `/release-manifest.json`이 404였고 최신 후보 문구가 없어, PR 승인·main 병합·Pages 라이브 smoke 전에는 공개 배포 완료로 판정하지 않았다.
 
-## 최신 완료 감사 — 2026-09-20 `5c4a6a8`
+## 이전 후보 완료 감사 기록 — 2026-09-20 `5c4a6a8` (historical)
 
-현재 배포 후보는 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `5c4a6a8d3b335011cee794ad8fbd9879a1c10360`이다. `release-verify`와 `site-quality-verify`가 성공했고, 연구·제품·후기·챌린지·공개 export·배포 번들 검사를 통과했다. 이 검사는 후보의 품질을 증명하지만, Code Owner 승인이나 실제 공개 배포 완료를 의미하지 않는다.
+당시 배포 후보는 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `5c4a6a8d3b335011cee794ad8fbd9879a1c10360`였다. `release-verify`와 `site-quality-verify`가 성공했고, 연구·제품·후기·챌린지·공개 export·배포 번들 검사를 통과했다. 이 기록은 당시 후보의 품질 증거이며 현재 공개 배포 완료를 의미하지 않는다.
 
 2026-09-20 완제품 자료 재대조에서 단상자·3개입 샘플·낱포 도면·시험성적서·품목제조보고서의 표시 신호를 확인했다. 최종 인쇄 승인본·현행 판매 SKU·로트별 적용은 확인되지 않았으므로 B2는 `VERIFYING`으로 유지하고, 공개 사이트는 제품명·30포·기타가공품·스마트스토어 연결만 노출한다. 참고용 시험 수치와 인쇄 샘플을 완제품 효능·보장 함량으로 확대하지 않았다. 상세 내역은 [B2 검증 패킷](B2_MATERIAL_VERIFICATION_20260911.md)에 있다.
 
