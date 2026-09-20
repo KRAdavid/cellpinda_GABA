@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const file = process.argv[2] || 'release-status.json';
+// pnpm forwards a standalone `--` separator to the child process. Ignore it
+// (and any future option flags) so the workflow's package-script invocation
+// validates the intended status packet instead of trying to open a file named
+// `--`.
+const file = process.argv.slice(2).find(value => value !== '--' && !value.startsWith('--')) || 'release-status.json';
 const value = JSON.parse(await readFile(file, 'utf8'));
 assert.deepEqual(Object.keys(value).sort(), ['checkedAt', 'mode', 'pages', 'smoke', 'workerDeployment', 'workerReadiness', 'workerReadinessResult'].sort(), 'release status fields are invalid');
 assert.match(value.checkedAt || '', /^\d{4}-\d{2}-\d{2}T/, 'release status timestamp is invalid');

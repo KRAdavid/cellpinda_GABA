@@ -726,3 +726,6 @@ Worker 운영이 활성화된 경우 `deploy-worker`가 실패해도 Pages가 �
 ## 2026-09-20 로컬 TF safe-run·독립 검증 연결 보강
 
 `pnpm run tf:safe`는 원시 실행 결과를 표준 출력으로만 내보내고, `validate:tf-safe`는 별도 pulse·safe-run 파일을 요구한다. 로컬에서 이전 pulse 파일을 잘못 대입하면 실행 지문이 달라져 검증이 실패할 수 있어 `pnpm run tf:safe:local` 래퍼를 추가했다. 래퍼는 같은 pulse를 `tmp/`에 저장한 뒤 safe-run과 독립 검증을 순서대로 실행하고, 세 산출물을 개인정보·공개 경로 없이 보존한다. CI의 명시적 `tf-pulse.json → tf-safe-run.json → tf-safe-run-validation.json` 계약과 사람 게이트는 변경하지 않았다.
+## 2026-09-20 release-status pnpm 구분자 회귀 보강
+
+배포 workflow의 `pnpm run validate:release-status -- release-status.json` 호출을 실제로 재현했을 때 검증기가 `--`를 파일명으로 열어 실패하는 결함을 확인했다. 검증기가 pnpm 구분자와 옵션을 건너뛰고 실제 상태 패킷 경로를 읽도록 수정했으며, 정적 전용 성공 경로와 readiness 실패를 정적 전용으로 속이는 경로를 회귀 테스트로 추가했다. 이 수정은 배포 상태 판정만 보강하며 제품·연구·외부 승인 게이트를 변경하지 않는다.
