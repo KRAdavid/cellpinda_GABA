@@ -364,3 +364,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 공유 결과·제품 구성·뇌컨디션 초대 정적 경로에서 즉시 `meta refresh`를 제거했다. JavaScript가 가능한 방문자는 기존 목적지로 이동하고, JavaScript가 꺼져 있거나 검색·보조기술이 먼저 읽는 경우에는 페이지 제목·설명·명시적 링크가 남는다. `scripts/validate-static-bundle.mjs`에 모든 10개 공개 경로가 meta refresh를 다시 포함하지 않는지 회귀 검사를 추가했다.
 
 `validate:public`, `validate:static-bundle`, `validate:ui-contract`, `typecheck`, 전체 107개 테스트와 production build의 release manifest·성능 검사를 통과했다. 이는 공개 승인이나 main 배포를 의미하지 않으며 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) 검토 후 Pages live smoke에서 다시 확인한다.
+
+## 2026-09-20 라이브 smoke fallback 회귀 가드
+
+정적 번들에서 확인한 접근성 fallback 기준을 라이브 공개 검증에도 연결했다. `validate-live-public.mjs`가 루트·제품·연구·챌린지 초대·공유 경로의 메타데이터를 검사할 때 즉시 `meta refresh`가 없는지도 확인한다. 배포 후 오래된 강제 이동 HTML이 남아 있으면 release smoke가 실패하도록 공개본과 후보본의 기준을 일치시켰다.
+
+후보 커밋 `ba50e89`에서 공개 export·정적 번들·타입검사·107개 테스트를 통과했고, PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 새 `release-verify`·`site-quality-verify`도 성공했다. 현재 공개 Pages의 매니페스트 404와 main 병합 대기 상태는 그대로다.
