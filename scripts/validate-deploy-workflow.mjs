@@ -23,8 +23,8 @@ for (const job of ['deploy-pages', 'smoke-live', 'worker-readiness', 'deploy-wor
   assert.match(jobBlock, /github\.ref == 'refs\/heads\/main'/, `${job} must only run for main`);
 }
 
-assert.match(workflow, /^  deploy-pages:\r?\n    needs: \[release-verify, worker-readiness\]$/m, 'Pages publishing must wait for release verification and a successful Worker readiness evaluation');
-assert.match(workflow, /deploy-pages:[\s\S]*if: always\(\) && github\.event_name != 'pull_request'[\s\S]*needs\.release-verify\.result == 'success'[\s\S]*needs\.worker-readiness\.result == 'success'/, 'Pages publishing must fail closed when release verification or Worker readiness fails');
+assert.match(workflow, /^  deploy-pages:\r?\n    needs: \[release-verify, worker-readiness, deploy-worker\]$/m, 'Pages publishing must wait for release verification, Worker readiness, and Worker deployment');
+assert.match(workflow, /deploy-pages:[\s\S]*if: always\(\) && github\.event_name != 'pull_request'[\s\S]*needs\.release-verify\.result == 'success'[\s\S]*needs\.worker-readiness\.result == 'success'[\s\S]*needs\.worker-readiness\.outputs\.enabled != 'true' \|\| needs\.deploy-worker\.result == 'success'/, 'Pages publishing must fail closed when verification, readiness, or an enabled Worker deployment fails');
 assert.match(workflow, /rewrite-public-origin\.mjs dist-pages/, 'Pages artifacts must apply the selected public origin');
 assert.match(workflow, /rewrite-public-origin\.mjs dist-pages[\s\S]*check-public-artifacts\.mjs dist-pages/, 'Pages origin rewrite must be checked before publishing');
 assert.match(workflow, /check-public-artifacts\.mjs dist-pages[\s\S]*validate:static-bundle -- dist-pages/, 'Pages artifacts must validate every public route before publishing');

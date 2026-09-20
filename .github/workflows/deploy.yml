@@ -88,8 +88,8 @@ jobs:
           path: dist-pages
 
   deploy-pages:
-    needs: [release-verify, worker-readiness]
-    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.release-verify.result == 'success' && needs.worker-readiness.result == 'success'
+    needs: [release-verify, worker-readiness, deploy-worker]
+    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.release-verify.result == 'success' && needs.worker-readiness.result == 'success' && (needs.worker-readiness.outputs.enabled != 'true' || needs.deploy-worker.result == 'success')
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
