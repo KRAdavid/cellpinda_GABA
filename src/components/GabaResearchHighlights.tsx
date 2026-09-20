@@ -71,7 +71,7 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
           <p className="gaba-research-highlight-summary">{summary}</p>
           <div className="gaba-research-highlight-result"><strong>연구에서 관찰된 내용</strong><span>{result}</span></div>
           <ul className="gaba-research-highlight-facts" aria-label="연구 조건">{facts.map(fact => <li key={fact}>{fact}</li>)}</ul>
-          <a className="text-link" href={`${import.meta.env.BASE_URL}research/#${id}`} onClick={() => onEvent?.('research_highlight_opened', {researchId: id, path: '/research-highlights'})}>이 연구 자세히 보기 <span aria-hidden="true">↗</span></a>
+          <a className="text-link" href={`${import.meta.env.BASE_URL}research/#${id}`} onClick={() => onEvent?.('research_highlight_opened', {researchId: id, path: '/research-highlights'})}>그림으로 한눈에 보기 <span aria-hidden="true">↗</span></a>
         </article>;
         })}
       </div>

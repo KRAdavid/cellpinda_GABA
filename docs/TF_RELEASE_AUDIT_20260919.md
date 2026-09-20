@@ -323,3 +323,7 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 새 후보 커밋의 [release-verify 35495678201](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35495678201)과 [site-quality-verify 35495678226](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35495678226)은 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`이고, PR 이벤트에서는 Pages·Worker·live smoke가 의도적으로 실행되지 않는다.
 
 공개 Pages 루트는 HTTP 200이지만 후보의 `/release-manifest.json`은 아직 공개 주소에서 HTTP 404이므로 main 병합·Pages 게시·live smoke 전에는 배포 완료로 판정하지 않는다. 제품 표시 최종 승인(B2), 후기 재게시 권한(B3), 티저 권리·자막·CTA(B4), Cloudflare 운영 시크릿(C2), 실제 주문·취소·환불 대사(E1)도 사람 입력 게이트로 유지한다.
+
+## 2026-09-20 연구 하이라이트 CTA 소비자 문구 보정
+
+홈의 연구 하이라이트 카드에서 연구자 중심으로 읽힐 수 있던 `이 연구 자세히 보기`를 `그림으로 한눈에 보기`로 바꿨다. 링크 목적지는 동일한 연구 카드의 시각 요약·쉬운 설명으로 유지하고, `validate:ui-contract`에 새 문구 회귀 검사를 추가했다. `validate:ui-contract`, 타입검사, 전체 107개 테스트가 통과했으며 연구 결과·제품 적용 범위·스마트스토어 목적지는 변경하지 않았다.

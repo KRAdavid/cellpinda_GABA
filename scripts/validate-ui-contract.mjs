@@ -198,7 +198,7 @@ requireMatch(app, /<GabaResearchHighlights claims=\{content\.claims\}[^>]*\/>/, 
 requireMatch(app, /url\.hash==='#brain-load-evidence'[\s\S]*getElementById\('brain-load-evidence'\)[\s\S]*scrollIntoView/, 'brain-load evidence hash links must align after async content loads');
 requireMatch(gabaResearchHighlights, /일반 GABA를 살펴본 사람 연구를 쉬운 말로 정리했어요\.[\s\S]*셀핀다 제품의 표시사항은 제품 카드에서 확인할 수 있어요\./, 'post-teaser research highlights must keep a clear general-research and product boundary');
 requireMatch(gabaResearchHighlights, /GABA를 먹은 사람 연구에서[\s\S]*무엇이 기록됐을까요\?/, 'post-teaser GABA research heading must state the consumer question directly');
-for (const marker of ['잠드는 시간과 수면 기록', '과제 뒤 뇌파와 활력 점수', '쉬었을 때와 운동했을 때의 혈액 속 변화', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
+for (const marker of ['잠드는 시간과 수면 기록', '과제 뒤 뇌파와 활력 점수', '쉬었을 때와 운동했을 때의 혈액 속 변화', '그림으로 한눈에 보기', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight[\s\S]*claim\.metadata\?\.consumerFinding[\s\S]*claim\.publicText/, 'post-teaser research highlights must read reviewed consumer copy and tolerate an older local API snapshot');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
 for (const marker of ['논문에서 사용한 양: 하루 100mg', '논문에서 사용한 양: 100mg 1회', '논문에서 사용한 양: 3g 1회']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
