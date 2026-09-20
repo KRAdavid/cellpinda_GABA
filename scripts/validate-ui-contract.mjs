@@ -31,6 +31,7 @@ const gabaResearchHighlights = await read('src/components/GabaResearchHighlights
 const gabaResearchHighlightsStyles = await read('src/components/GabaResearchHighlights.css');
 const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
 const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css');
+const admin = await read('src/components/Admin.tsx');
 const indexHtml = await read('index.html');
 const researchRouteHtml = await read('public/research/index.html');
 const notFoundHtml = await read('public/404.html');
@@ -78,6 +79,7 @@ requireMatch(app, /if\(challengeInvite\)[\s\S]*?\['Tab','ArrowDown'/, 'keyboard 
 requireMatch(challenge, /isInvite\) return;[\s\S]*?inviteHeadingRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'seven-day invitation must move focus to its challenge heading');
 requireMatch(challenge, /id="challenge-heading" ref=\{inviteHeadingRef\} tabIndex=\{isInvite \? -1 : undefined\}/, 'challenge heading must accept programmatic focus when invited');
 if (/<button className=/.test(challenge)) fail('seven-day challenge action buttons must declare type=button');
+if (/<button className=/.test(admin)) fail('admin action buttons must declare an explicit type');
 requireMatch(rhythm, /if \(sharedType && !result\) resultRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'shared rhythm arrival must focus the shared result heading');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
 requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
