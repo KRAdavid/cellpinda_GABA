@@ -4,37 +4,33 @@
 
 ## 현재 실행
 
-Node 24 기준. 의존성은 pnpm lockfile로 관리한다.
+Node 24 기준. 의존성은 pnpm lockfile로 관리한다. 팀 검토는 Vite와 로컬 API·자료 watcher를 함께 여는 표준 명령으로 시작한다.
 
 ```sh
 pnpm install
-node server/index.mjs
-# 별도 터미널
-node node_modules/vite/bin/vite.js --host 127.0.0.1
+pnpm dev
 ```
 
 사이트: http://127.0.0.1:5173/
-검토실: http://127.0.0.1:5173/admin
-API: http://127.0.0.1:4318/api/health
+검토실: http://127.0.0.1:5173/admin (로컬 개발 모드 전용)
+운영판: http://127.0.0.1:5173/?view=ops (로컬 개발 모드 전용)
 
-운영자 토큰은 서버 시작 시 `var/operator-token`에 생성된다. 토큰을 로그·Git·공개 사이트에 포함하지 않는다. SQLite는 `var/site.sqlite`. 이 인증은 로컬 운영자 모델이며 공개 서버용 인증이 아니다.
+프로덕션 후보를 확인할 때는 먼저 번들을 만들고 API가 포함된 미리보기를 실행한다.
 
 ```sh
-node node_modules/typescript/bin/tsc --noEmit
-node --test src/domain/rhythm.test.ts server/server.test.mjs
-pnpm run sync:data
-node node_modules/vite/bin/vite.js build
+pnpm run build
+pnpm run preview
 ```
 
-pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들 빌드는 성공했다. 의존성 재설치 환경의 재현성은 배포 전에 다시 확인한다.
+`pnpm exec vite`를 직접 실행한 개발 서버도 API 응답이 앱 HTML이면 승인된 공개 JSON으로 복귀하지만, API 기반 운영·이벤트 기능은 확인할 수 없다. 공개 Worker 운영에서는 API 장애를 정적 데이터로 숨기지 않는다. 운영자 토큰·SQLite·관리자 화면은 로컬 검토용이며 공개 사이트로 배포하지 않는다.
 
 ## 구현 상태
 
 - 홈, 비진단 리듬 체크 5문항·4단계·6유형, 결과 PNG·공유 링크, GABA 안정·회복 안내, 사람 연구 요약, 발효 설명, 제품 구성 도식·구매 연결.
 - 스마트스토어 후기 원문 탐색. 후기 재인용은 권한 확인 전까지 보류한다.
 - 브라우저 로컬 7일 실천 체크. 회원 간 기기 동기화는 미구현.
-- 서버 영속 콘텐츠 수정·승인·감사 이력·이벤트 저장. 일부 설명 문구는 아직 코드에 있어 전체 콘텐츠 승인 범위로 확장해야 한다.
-- 실구매·7일 재방문·추천보상·회원기록·AI는 운영 정책과 계정 연동이 필요한 후속 범위다. 공개 배포 번들은 GitHub Actions에서 검증한다.
+- 서버 영속 콘텐츠 수정·승인·감사 이력·이벤트 저장. 소비자용 연구·제품·후기 카피는 승인 원장에서 공개 JSON으로 내보내고, fallback 문구도 공개 검증 계약으로 감시한다.
+- 7일 재방문·추천보상·회원기록·AI와 실제 주문 대사는 운영 정책·계정·판매자 데이터가 필요한 별도 게이트다. 공개 정적 배포 번들은 GitHub Actions에서 검증하며, Worker/D1은 운영 Secrets가 준비될 때만 게시한다.
 
 ## 문서
 
@@ -71,13 +67,10 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 운영 MVP의 재개 상태는 `src/domain/ops-validation.ts`의 공통 검증을 거쳐 Node API와 Cloudflare Worker에 저장된다. 업무 상태 전환·검증 증거·승인 연결을 확인하고 이메일·전화번호·비공개 경로·토큰 같은 필드는 거부한다. 샌드박스 상태 저장은 외부 게시나 실구매 완료를 의미하지 않는다.
 
 ```sh
-pnpm run sync:data
+pnpm run typecheck
+pnpm test
 pnpm run build
-pnpm run goal:next
-pnpm run tf:pulse
-pnpm run validate:tf-pulse
 pnpm run audit:goal
-pnpm run audit:orders
 pnpm run preflight:deploy
 pnpm run validate:live-public
 ```
