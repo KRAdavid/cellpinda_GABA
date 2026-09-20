@@ -22,6 +22,9 @@ const reportSource = readFileSync(resolve(process.cwd(), 'scripts/generate-daily
 if (!/\.replace\(\/\\s\+\/g,\s*['"] ['"]\)/.test(reportSource)) {
   issues.push('일일 보고 오류가 여러 줄 스택 트레이스로 남아 읽기 어렵습니다.');
 }
+if (!/normalized\.match\(\/\\bError:/.test(reportSource) || !/\.slice\(0, 1200\)/.test(reportSource)) {
+  issues.push('일일 보고 오류에서 핵심 Error 메시지만 추출하지 않습니다.');
+}
 if (/확인 필요\}\s*개/.test(source) || /확인 필요개/.test(source)) {
   issues.push('제품 수가 없는 경우에도 확인 필요 뒤에 개가 붙습니다.');
 }

@@ -26,11 +26,15 @@ const run = (script, scriptArgs = []) => {
 const parseJson = value => {
   try { return JSON.parse(value); } catch { return null; }
 };
-const scrub = value => String(value || '')
-  .replaceAll(root, '<workspace>')
-  .replace(/\s+/g, ' ')
-  .trim()
-  .slice(-2400);
+const scrub = value => {
+  const normalized = String(value || '')
+    .replaceAll(root, '<workspace>')
+    .replaceAll(`file://${root}`, '<workspace>')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const error = normalized.match(/\bError:\s*(.*?)(?=\s+at\s+(?:file:\/\/)?<workspace>\/|$)/i);
+  return (error ? `Error: ${error[1]}` : normalized.slice(-1200)).slice(0, 1200);
+};
 
 const syncRun = run('scripts/sync-public-data.mjs');
 const auditRun = run('scripts/audit-goal.mjs', ['--json']);
