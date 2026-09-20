@@ -8,7 +8,10 @@ import { createStore } from './store.mjs';
 import { adminAction, adminRoleAllows, adminRoleCapabilities, adminRoleForToken, adminRoleLabel } from '../src/domain/admin-auth.ts';
 
 const LOOPBACK = new Set(['127.0.0.1','::1','::ffff:127.0.0.1']);
-const DEV_ORIGINS=new Set(['http://localhost:5173','http://127.0.0.1:5173','http://localhost:4173','http://127.0.0.1:4173']);
+// Vite may use an alternate local port when another preview is already
+// running. Keep the development CORS boundary loopback-only while allowing
+// those safe port changes; production still rejects every cross-origin call.
+const DEV_ORIGIN=/^http:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d{1,5})?$/;
 const allowedToken = (actual, expected) => {
   if (typeof actual !== 'string' || typeof expected !== 'string') return false;
   const received=Buffer.from(actual); const wanted=Buffer.from(expected);
@@ -107,7 +110,7 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
     try {
       const origin=req.headers.origin;
       if (origin) {
-        if (!development || !DEV_ORIGINS.has(origin)) return reply(403,{error:'Origin not allowed'});
+        if (!development || !DEV_ORIGIN.test(origin)) return reply(403,{error:'Origin not allowed'});
         res.setHeader('Access-Control-Allow-Origin',origin); res.setHeader('Vary','Origin');
         res.setHeader('Access-Control-Allow-Headers','Content-Type, X-Admin-Token, X-Ops-Run-Key, X-Ops-Revision'); res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE, OPTIONS');
       }

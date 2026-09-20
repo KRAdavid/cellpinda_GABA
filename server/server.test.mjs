@@ -25,10 +25,10 @@ test('Persistent approval, privacy, events and authenticated local API',async()=
     assert.equal((await fetch(`${base}/api/admin/content`)).status,401);
     assert.equal((await patch({revision:1,reason:'edit',publicText:'Changed'},'wrong')).status,401);
     assert.equal((await fetch(`${base}/api/content`,{headers:{origin:'https://evil.example'}})).status,403);
-    for(const origin of ['http://localhost:5173','http://127.0.0.1:5173','http://localhost:4173','http://127.0.0.1:4173']) {
+    for(const origin of ['http://localhost:5173','http://127.0.0.1:5173','http://localhost:4173','http://127.0.0.1:4173','http://127.0.0.1:4313','http://localhost:49201']) {
       const cors=await fetch(`${base}/api/content`,{headers:{origin}});assert.equal(cors.status,200);assert.equal(cors.headers.get('access-control-allow-origin'),origin);
     }
-    for(const origin of ['http://127.0.0.1:5174','https://localhost:5173','http://localhost:5173.evil.example']) assert.equal((await fetch(`${base}/api/content`,{headers:{origin}})).status,403);
+    for(const origin of ['https://localhost:5173','http://localhost:5173.evil.example','http://127.0.0.1.evil.example']) assert.equal((await fetch(`${base}/api/content`,{headers:{origin}})).status,403);
     assert.equal((await patch({revision:1,publicText:'Changed'})).status,400);
     response=await patch({revision:1,reason:'Changed copy requires review',publicText:'Changed'});assert.equal(response.status,200);assert.equal((await response.json()).status,'hold');
     data=await (await fetch(`${base}/api/content`)).json();assert.equal(data.claims.length,0);assert.equal(data.products.length,0);
