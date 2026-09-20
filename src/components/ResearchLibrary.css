@@ -279,6 +279,17 @@
   .research-library-kind--general,.research-library-kind--non-ingestion{white-space:normal}
 }
 
+/* The two-column topic grid becomes cramped on the 390px phones used by
+   many middle-aged visitors. Give each topic a full-width row so the title,
+   description and count can be read without wrapping every few characters. */
+@media(max-width:460px){
+  .research-topic-cards{grid-template-columns:minmax(0,1fr);gap:8px}
+  .research-topic-card{grid-template-columns:auto minmax(0,1fr) auto;align-items:center;min-height:70px;padding:12px 14px;gap:10px}
+  .research-topic-card>b{grid-column:auto;justify-self:auto;align-self:center;margin-top:0}
+  .research-topic-card strong{font-size:16px;line-height:1.35}
+  .research-topic-card small{font-size:15px;line-height:1.4}
+}
+
 /* Center the research reading column and balance the featured study on wide screens. */
 .research-route-main{width:min(1120px,100%);margin-inline:auto}
 .research-library-card-featured{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(24px,4vw,48px);align-items:start}
