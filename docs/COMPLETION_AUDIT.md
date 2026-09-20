@@ -664,3 +664,11 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-20 연구 하이라이트 CTA 소비자 문구 보정
 
 홈의 연구 하이라이트 카드에서 연구자 중심으로 읽힐 수 있던 `이 연구 자세히 보기`를 `그림으로 한눈에 보기`로 바꿨다. 링크 목적지는 동일한 연구 카드의 시각 요약·쉬운 설명으로 유지하고, `validate:ui-contract`에 새 문구 회귀 검사를 추가했다. `validate:ui-contract`, 타입검사, 전체 107개 테스트가 통과했으며 연구 결과·제품 적용 범위·스마트스토어 목적지는 변경하지 않았다.
+
+## 2026-09-20 후보 TF pulse 자동화 실실행 확인
+
+후보 브랜치 `9bd498b06891a2fb59d0d624c14ad4ecba8e14bd`에서 [TF decision pulse 실행 35496185505](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35496185505)을 수동 실행했다. TF 계약 확인, safe internal 실행, 독립 검증, heartbeat 생성, 타입검사·테스트·production build·배포 readiness·Worker review 통합 테스트·Worker dry-run이 성공했다.
+
+실행은 `success`로 종료됐고, 자동 PR 생성은 저장소 정책(GitHub Actions가 PR 생성 불가)으로 차단됐다. 대신 `automation/tf-pulse-heartbeat` 브랜치를 갱신하고, 보호된 main에 반영하려면 사람의 PR 생성·Code Owner 검토가 필요하다는 경고를 남겼다. 외부 게시·제품 승인·주문 처리는 수행하지 않았다.
+
+현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 최신 UI 보정 커밋 `9bd498b` 기준이며, 필수 `release-verify`·`site-quality-verify`는 성공했다. 공개 Pages의 `release-manifest.json`은 여전히 404이므로 main 병합 전 공개 배포 완료로 판정하지 않는다.
