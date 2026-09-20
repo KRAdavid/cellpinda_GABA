@@ -1,8 +1,13 @@
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { projectConsumerVisual } from '../src/domain/public-research.ts';
 
 const readJson = async relative => JSON.parse(await readFile(new URL(`../${relative}`, import.meta.url), 'utf8'));
+const fail = message => { throw new Error(`Public export invalid: ${message}`); };
+const privateSnapshotNames = ['operations-queue.json', 'tf-pulse.json', 'goal-audit.json', 'tf-meeting-packet.json'];
+const readPrivateSnapshot = async name => JSON.parse(await readFile(new URL(`../tmp/operations/${name}`, import.meta.url), 'utf8'));
+if (privateSnapshotNames.some(name => existsSync(new URL(`../public/data/${name}`, import.meta.url)))) fail('internal operations snapshots must stay out of public/data');
 const content = await readJson('public/data/content.json');
 const master = await readJson('public/data/gaba-master-index.json');
 if (/제품 권장량과 별개|제품 권장량/.test(JSON.stringify({content, master}))) fail('public research export must use the approved product-serving boundary phrase');
@@ -19,14 +24,13 @@ const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url)
 const teaser = await readJson('data/teaser-manifest.json');
 const teaserPreview = await readJson('public/data/teaser-preview.json');
 const wranglerConfig = await readJson('wrangler.jsonc');
-const operationsQueue = await readJson('public/data/operations-queue.json');
-const publicPulse = await readJson('public/data/tf-pulse.json');
-const publicAudit = await readJson('public/data/goal-audit.json');
-const meetingPacket = await readJson('public/data/tf-meeting-packet.json');
+const operationsQueue = await readPrivateSnapshot('operations-queue.json');
+const publicPulse = await readPrivateSnapshot('tf-pulse.json');
+const publicAudit = await readPrivateSnapshot('goal-audit.json');
+const meetingPacket = await readPrivateSnapshot('tf-meeting-packet.json');
 const taskGraph = await readJson('data/task-graph.json');
 const roleRegistry = await readJson('data/tf-role-registry.json');
 const goalContract = await readJson('data/goal-contract.json');
-const fail = message => { throw new Error(`Public export invalid: ${message}`); };
 const approvedSmartStoreUrl = 'https://smartstore.naver.com/cellpinda/products/4701017202';
 const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 const approvedReviewText = '가바 1500 구매자 후기를 스마트스토어에서 읽어보세요.';

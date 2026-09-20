@@ -1,5 +1,9 @@
 # 전체 목표 완료 간극 점검
 
+## 2026-09-21 운영 스냅샷 공개 경계 보정 — 후보 작업 중
+
+운영 화면이 사용하던 업무 큐·TF pulse·목표 감사·회의 패킷을 `public/data`에서 제거하고 `tmp/operations`에만 생성하도록 변경했다. 로컬 운영판은 루프백 `/api/ops/snapshot`에서 네 패킷을 읽고, production 번들과 GitHub Pages에는 운영 상태·담당 역할·대기 게이트를 내보내지 않는다. 공개 export·배포 readiness·정적 산출물 검사는 공개 `data/` 경로에 내부 스냅샷이 생기면 실패하도록 강화했고, 110개 테스트·타입검사·production build·390px 로컬 운영판 동작을 통과했다.
+
 ## 2026-09-21 공개 번들 내부 운영 청크 제거 — 후보 작업 중
 
 접근성·SEO 재감리에서 소비자 화면에는 실행되지 않지만 정적 산출물에 `Admin`·`OperationsMvp` lazy chunk가 포함되어 내부 운영 문구와 API 경로를 내려받을 수 있는 P2 노출을 확인했다. 두 화면은 로컬 개발 환경에서만 필요한 검토 표면이므로 production import를 제거하도록 보정했고, 정적 번들 검증기가 모든 JavaScript 자산에서 운영 마커와 `/api/admin`·`/api/ops` 경로를 검사하도록 강화했다. 재빌드 후 Admin·OperationsMvp 청크가 사라지고 10개 공개 경로·60개 manifest 파일·성능 예산이 통과했다.

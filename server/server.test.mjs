@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve, basename } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
@@ -235,6 +235,23 @@ test('Local ops audit endpoint exposes a private safe summary and omits raw inpu
     assert.equal(body.mode,'private_local_audit');assert.equal(body.localStateChanged,true);assert.equal(body.localSnapshotHash,'local-hash');assert.equal(body.localInputAudit.materials.finishedProductCandidates,5);assert.equal(body.localInputAudit.orders.gaba1500.quantity,121);assert.equal(body.checks.length,2);assert.equal(body.privacyBoundary,'private_tmp_only');
     assert.equal(JSON.stringify(body).includes('D:/secret'),false);assert.equal(JSON.stringify(body).includes('private@example.com'),false);assert.equal(JSON.stringify(body).includes('private/path'),false);assert.equal(JSON.stringify(body).includes('rawRows'),false);
     rmSync(localAuditPath);response=await fetch(`${base}/api/ops/local-audit`);assert.equal(response.status,404);assert.equal((await response.json()).code,'LOCAL_AUDIT_MISSING');
+  } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
+});
+
+test('Local operations snapshots stay behind the loopback API',async()=>{
+  const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));
+  const operationsDirectory=join(directory,'operations');
+  const snapshot={schemaVersion:1,mode:'private',goalId:'GL-2026-CELL-GABA-001'};
+  for (const name of ['operations-queue.json','tf-pulse.json','goal-audit.json','tf-meeting-packet.json']) {
+    mkdirSync(operationsDirectory,{recursive:true});
+    writeFileSync(join(operationsDirectory,name),JSON.stringify(snapshot));
+  }
+  const {server}=createApi({dbPath:join(directory,'db.sqlite'),tokenPath:join(directory,'token'),operationsDirectory,seed});
+  try {
+    server.listen(0,'127.0.0.1');await once(server,'listening');const base=`http://127.0.0.1:${server.address().port}`;
+    let response=await fetch(`${base}/api/ops/snapshot`);assert.equal(response.status,200);const body=await response.json();
+    assert.equal(body.mode,'private_local_operations_snapshot');assert.equal(body.queue.goalId,'GL-2026-CELL-GABA-001');assert.equal(body.meetingPacket.mode,'private');
+    response=await fetch(`${base}/api/ops/snapshot`,{headers:{origin:'https://evil.example'}});assert.equal(response.status,403);
   } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
 

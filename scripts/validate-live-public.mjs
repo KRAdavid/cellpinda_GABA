@@ -196,6 +196,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       ['/data/goal-audit.json', auditResponse],
       ['/data/tf-meeting-packet.json', meetingPacketResponse],
     ];
+    for (const [path, response] of internalSnapshots) assert.equal(response.status, 404, `${path} must stay private and return 404`);
     const productSharePageResponse = await request('/products/');
     const productSharePageText = await productSharePageResponse.text();
     const researchPageResponse = await request('/research/');

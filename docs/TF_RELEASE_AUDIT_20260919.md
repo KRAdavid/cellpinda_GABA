@@ -1,5 +1,9 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
+## 2026-09-21 운영 스냅샷 공개 경계 보정 — 후보 작업 중
+
+`operations-queue.json`, `tf-pulse.json`, `goal-audit.json`, `tf-meeting-packet.json`을 `public/data`에서 제거하고 `tmp/operations`와 루프백 `/api/ops/snapshot`으로 이동했다. 정적 bundle·public export·readiness·live smoke가 운영 JSON의 공개 경로 노출을 차단하며, 운영 MVP는 개발 환경에서만 최신 패킷을 읽는다. 이 변경은 내부 운영 정보의 공개 노출을 줄이지만 Code Owner 승인, main 병합, Pages 배포와 외부 게이트 B2·B3·B4·C2·E1을 대신하지 않는다.
+
 ## 2026-09-21 공개 청크 경계 보정 — 후보 작업 중
 
 소비자 정적 배포물에 로컬 전용 Admin·TF 운영 화면이 lazy chunk로 포함되던 P2 노출을 발견해 production import를 제거했다. `validate-ui-contract`는 두 화면이 개발 환경에서만 로드되는지 확인하고, `validate-static-bundle`은 모든 공개 JavaScript에서 내부 운영 마커와 admin/ops API 경로를 차단한다. 재빌드 결과 공개 경로 10개·manifest 파일 60개·성능 예산·전체 테스트 109개가 통과했다. 이 보정은 서버 인증과 외부 승인 게이트를 대체하지 않는다.

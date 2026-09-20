@@ -62,7 +62,7 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 로컬 API를 `pnpm server`로 실행하면 API가 포트를 연 직후 자료 watcher도 자동으로 시작한다. watcher는 두 매니페스트의 폴더를 감시하고 750ms 동안 변경을 묶은 뒤 `tmp/local-goal-audit.json`만 갱신한다. 원문 행·개인정보·로컬 경로는 공개 export와 CI artifact로 이동하지 않으며, API를 종료하면 감시도 함께 정리된다. API 없이 감시만 실행할 때는 `pnpm run audit:watch`를 사용할 수 있고 `Ctrl+C`로 종료한다. 감시할 폴더를 바꾸려면 `CELLPINDA_MATERIAL_ROOTS` 또는 `CELLPINDA_ORDER_ROOTS`에 세미콜론으로 구분한 경로를 지정한다.
 
-`pnpm dev` 한 번으로 Vite와 로컬 API가 함께 실행되며, API가 포트를 연 뒤 자료 watcher도 자동으로 시작한다. 운영 화면은 `/api/ops/local-audit`에서 이 비공개 패킷의 안전한 요약을 60초마다 읽어 완제품 후보·누락·주문 파일 수·1500 과거 집계를 중간 확인 카드에 표시한다. 감사 사이클은 이전 로컬 입력 지문을 비교한 `localStateChanged`도 기록해 새 자료와 반복 상태를 구분한다. 응답은 원문 행·개인정보·로컬 경로를 포함하지 않으며, 스냅샷이 없거나 갱신이 실패해도 마지막 요약을 유지한다. API 포트를 바꾸려면 `CELLPINDA_API_PORT`를 지정하고 Vite 인자는 `pnpm dev -- --port 5174`처럼 전달한다. GitHub Pages처럼 API가 없는 정적 환경에서는 요청을 만들지 않고 공개 운영 큐만 사용한다.
+`pnpm dev` 한 번으로 Vite와 로컬 API가 함께 실행되며, API가 포트를 연 뒤 자료 watcher도 자동으로 시작한다. 운영 화면은 `/api/ops/local-audit`와 `/api/ops/snapshot`에서 비공개 감사·업무 스냅샷을 60초마다 읽어 완제품 후보·누락·주문 파일 수·1500 과거 집계·현재 큐를 중간 확인 카드에 표시한다. 이 운영 스냅샷은 `tmp/operations`에만 저장하고 루프백 API에서만 제공한다. `public/data`와 정적 배포본에는 운영 큐·pulse·감사·회의 패킷을 만들지 않으며, 스냅샷이 없거나 갱신이 실패해도 마지막 요약을 유지한다. API 포트를 바꾸려면 `CELLPINDA_API_PORT`를 지정하고 Vite 인자는 `pnpm dev -- --port 5174`처럼 전달한다. GitHub Pages처럼 API가 없는 정적 환경에서는 내부 운영 화면이 열리지 않는다.
 
 프로덕션 빌드를 API와 함께 미리 보려면 `pnpm run build` 다음 `pnpm run preview`를 실행한다. 미리보기 명령은 로컬 API 상태를 확인해 없으면 함께 켜므로, API 프록시가 빠진 채 실행되어 콘텐츠 요청이 실패하는 일을 막는다. 다른 포트를 사용하려면 `pnpm run preview -- --port 4174`처럼 지정한다.
 
@@ -80,7 +80,7 @@ pnpm run preflight:deploy
 pnpm run validate:live-public
 ```
 
-`validate:live-public`는 현재 GitHub Pages 공개 주소를 대상으로 제품·후기 상세 링크, 750 제거, 연구·공유·티저·운영 패킷을 한 번에 확인한다. `PUBLIC_SITE_URL`과 URL 인자를 모두 생략하면 저장된 기본 공개 주소(`https://kradavid.github.io/cellpinda_GABA`)를 사용한다. 다른 공개 주소나 임시 배포를 점검할 때는 `pnpm run validate:live -- https://example.com`처럼 URL을 넘긴다.
+`validate:live-public`는 현재 GitHub Pages 공개 주소를 대상으로 제품·후기 상세 링크, 750 제거, 연구·공유·티저와 내부 운영 경로 비노출을 한 번에 확인한다. `PUBLIC_SITE_URL`과 URL 인자를 모두 생략하면 저장된 기본 공개 주소(`https://kradavid.github.io/cellpinda_GABA`)를 사용한다. 다른 공개 주소나 임시 배포를 점검할 때는 `pnpm run validate:live -- https://example.com`처럼 URL을 넘긴다.
 
 `TF decision pulse` workflow는 6시간마다 canonical 업무 그래프의 실행·검증·입력 대기 안건을 읽어 run summary와 JSON artifact로 남긴다. 동시에 원문 경로·비밀값을 제외한 안전한 heartbeat를 `data/tf-pulse-heartbeat.json`에 만들고, 보호된 `main`에 직접 쓰지 않고 고정된 자동화 브랜치의 PR로 갱신한다. 기존 heartbeat PR이 있으면 재사용하고 없으면 새로 만들며, PR 생성으로 자동 검사가 생략되거나 별도 workflow 승인이 필요한 GitHub 토큰 경계를 고려해 heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 검증 증거로 실행한다. 이 축약 pulse는 보호된 필수 상태를 직접 녹색 처리하지 않으며, 완전한 `pull_request` 검사가 실행되지 않으면 브랜치 보호가 계속 대기하도록 fail-closed로 동작한다. 필수 상태와 사람의 merge를 통과한 뒤 `main` push가 일반 배포를 실행한다. 따라서 보호 규칙을 우회하지 않으면서도 TF 회의 안건 생성은 멈추지 않고 계속된다.
 
@@ -92,7 +92,7 @@ pnpm run validate:live-public
 
 각 pulse에는 업무 그래프 상태 지문, 회의 안건, 외부 입력 게이트, 사람 판단 필요 여부가 포함되며 `pnpm run validate:tf-pulse`가 이 연결을 배포 전에 검증한다.
 
-회의 안건은 작업 상태별 선택지와 판정 기준도 함께 제공한다. `VERIFYING`은 수락 또는 보완, `WAITING`은 보류 또는 필요한 입력을 채운 뒤 READY로 올리는 경로를 보여 주며, 자동화가 실제 상태를 바꾸지 않고 사람이 근거를 확인해 결정하도록 한다. 공개 `goal-audit.json`의 게이트에도 같은 선택지가 복제되고 export·라이브 검증에서 두 패킷의 일치를 확인한다.
+회의 안건은 작업 상태별 선택지와 판정 기준도 함께 제공한다. `VERIFYING`은 수락 또는 보완, `WAITING`은 보류 또는 필요한 입력을 채운 뒤 READY로 올리는 경로를 보여 주며, 자동화가 실제 상태를 바꾸지 않고 사람이 근거를 확인해 결정하도록 한다. 이 선택지는 로컬 운영 스냅샷에만 남기고, 소비자용 정적 번들에는 포함하지 않는다.
 
 `data/tf-role-registry.json`은 역할 책임의 단일 기준이다. pulse와 안전한 heartbeat는 이 레지스트리에서 확인한 8개 역할군을 ID·라벨·상태로만 기록하며, 실제 외부 전문가 자격이나 섭외를 의미하지 않는다. 역할군이 그래프·Goal Contract·heartbeat에서 어긋나면 배포 검증이 실패한다.
 
@@ -100,9 +100,7 @@ pnpm run validate:live-public
 
 `.github/workflows/daily-status-report.yml`은 매일 한국 시간 오전 10시(UTC 01:00)에 Goal Audit·TF Pulse·공개 사이트 라이브 검증을 다시 실행한다. 결과는 30일 보관 아티팩트와 하나의 누적 GitHub 이슈(`[자동 보고] 셀핀다 GABA 업무 진행상황`)에 갱신되며, 제품 표시·후기 권한·티저 공개·주문처럼 사람 승인이 필요한 상태는 자동으로 바꾸지 않는다. 수동 확인은 `workflow_dispatch`로 실행할 수 있다.
 
-공개 운영 화면의 `회의 안건 JSON` 링크는 같은 pulse를 안전한 공개 패킷으로 제공한다. [공개 TF pulse](https://kradavid.github.io/cellpinda_GABA/data/tf-pulse.json)에는 원문 경로·개인정보·비밀값 없이 상태, 참여 역할, 필요한 입력과 다음 조치만 담긴다.
-
-공개 운영 화면의 `목표 감사 JSON` 링크는 Goal Contract·8개 역할군·업무 상태 카운트·완료 마일스톤·현재 승인 게이트를 한 파일로 묶은 중간 검토 패킷이다. [공개 목표 감사](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)는 내부 경로와 개인정보를 제외하며, 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않는다.
+회의 안건·목표 감사·업무 큐 JSON은 `tmp/operations`에만 생성되고 로컬 루프백 API에서만 읽힌다. 소비자용 Pages에는 운영 상태·담당 역할·대기 게이트를 노출하지 않으며, 배포 전 검증기는 관련 정적 경로가 404인지 확인한다.
 
 `pnpm run preflight:deploy -- --strict`는 Cloudflare Worker 영구 배포에 필요한 설정·빌드 산출물·공개 export·필수 Secrets를 값 노출 없이 검사하고, 하나라도 없으면 실패한다. 일반 실행은 현재 상태를 `READY` 또는 `WAITING`으로 보고해 로컬·Pages 환경에서도 배포 준비도를 확인할 수 있다.
 

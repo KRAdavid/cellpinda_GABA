@@ -21,15 +21,17 @@ for(const file of ['dist/index.html','dist/products/index.html','dist/data/conte
 const privateSnapshots=['operations-queue.json','tf-pulse.json','goal-audit.json','tf-meeting-packet.json'];
 const leakedSnapshots=privateSnapshots.filter(file=>existsSync(resolve(root,'dist/data',file)));
 check('private-operations-snapshots-excluded',leakedSnapshots.length===0,leakedSnapshots.length ? `found=${leakedSnapshots.join(',')}` : `${privateSnapshots.length} internal files excluded from the public build`);
+const sourceSnapshots=privateSnapshots.filter(file=>existsSync(resolve(root,'public/data',file)));
+check('private-operations-source-excluded',sourceSnapshots.length===0,sourceSnapshots.length ? `found=${sourceSnapshots.join(',')}` : `${privateSnapshots.length} internal files kept under tmp/operations only`);
 try { const bytes=statSync(resolve(root,'dist/assets/rhythm-window.webp')).size; check('hero-image-budget',bytes<=250_000,`${bytes} bytes (limit 250000)`); } catch { check('hero-image-budget',false,'optimized WebP hero image is missing'); }
 for(const type of ['active','sleep','irregular','sensory','unrested','steady']) check(`artifact:dist/assets/social-rhythm-${type}.png`,existsSync(resolve(root,`dist/assets/social-rhythm-${type}.png`)),'result-specific social preview present');
 try {
   const content=readJson('public/data/content.json');
   const master=readJson('public/data/gaba-master-index.json');
   const ledger=readJson('data/content-ledger.json');
-  const queue=readJson('public/data/operations-queue.json');
-  const audit=readJson('public/data/goal-audit.json');
-  const meetingPacket=readJson('public/data/tf-meeting-packet.json');
+  const queue=readJson('tmp/operations/operations-queue.json');
+  const audit=readJson('tmp/operations/goal-audit.json');
+  const meetingPacket=readJson('tmp/operations/tf-meeting-packet.json');
   const taskGraph=readJson('data/task-graph.json');
   const approvedResearch=(ledger.claims || []).filter(item=>item.status==='approved' && item.id?.startsWith('research-'));
   const masterIds=new Set((master.records || []).map(record=>record.id));

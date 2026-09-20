@@ -1,5 +1,9 @@
 # 중간 구현 상태 — 2026-09-11
 
+## 2026-09-21 운영 스냅샷 로컬 API 전환
+
+업무 큐·TF pulse·목표 감사·회의 패킷을 `tmp/operations`에만 생성하고 로컬 `/api/ops/snapshot`에서 제공하도록 바꿨다. `public/data`와 production 정적 번들에는 내부 운영 JSON이 생기지 않으며, public export·readiness·live smoke가 이 경계를 자동 검사한다. 390px 운영판에서 로컬 snapshot 연결과 가로 넘침 0을 재확인했다.
+
 ## 2026-09-21 공개 번들 운영 청크 경계 보정
 
 Admin·TF 운영판은 로컬 개발 검토 화면이므로 production 정적 번들에서 import하지 않도록 분리했다. 공개 JavaScript 자산에 내부 운영 문구·admin/ops API 경로가 다시 들어오면 `validate-static-bundle`이 실패하도록 계약을 추가했다. 재빌드 기준 공개 route 10개·manifest 파일 60개·성능 예산을 통과했고, 로컬 운영 화면은 개발 모드에서 계속 사용할 수 있다.

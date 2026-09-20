@@ -99,7 +99,7 @@ function localAuditSummary(report) {
   };
 }
 
-export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),localAuditPath=resolve('tmp/local-goal-audit.json'),adminRoleTokens=process.env.ADMIN_ROLE_TOKENS,development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
+export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),localAuditPath=resolve('tmp/local-goal-audit.json'),operationsDirectory=resolve('tmp/operations'),adminRoleTokens=process.env.ADMIN_ROLE_TOKENS,development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
   const store=createStore({dbPath,seedPath,seed});
   const token=randomBytes(32).toString('hex');
   mkdirSync(dirname(tokenPath),{recursive:true});
@@ -143,6 +143,17 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
       if (req.method==='GET' && path==='/api/member/status') return reply(200,{enabled:false,user:null,recoverySupported:false});
       if (req.method==='GET' && path==='/api/content') return reply(200,store.publicContent());
       if (req.method==='POST' && path==='/api/events') return reply(202,store.event(await readBody(req)));
+      if (req.method==='GET' && path==='/api/ops/snapshot') {
+        if (!LOOPBACK.has(address)) return reply(401,{error:'Local operator access required'});
+        const readSnapshot=(name)=>JSON.parse(readFileSync(resolve(operationsDirectory,name),'utf8'));
+        try {
+          return reply(200,{mode:'private_local_operations_snapshot',queue:readSnapshot('operations-queue.json'),pulse:readSnapshot('tf-pulse.json'),audit:readSnapshot('goal-audit.json'),meetingPacket:readSnapshot('tf-meeting-packet.json')});
+        } catch (error) {
+          if (error?.code==='ENOENT') return reply(404,{error:'Local operations snapshot unavailable',code:'LOCAL_OPERATIONS_SNAPSHOT_MISSING'});
+          if (error instanceof SyntaxError) return reply(422,{error:'Local operations snapshot is invalid',code:'LOCAL_OPERATIONS_SNAPSHOT_INVALID'});
+          throw error;
+        }
+      }
       if (req.method==='GET' && path==='/api/ops/local-audit') {
         if (!LOOPBACK.has(address)) return reply(401,{error:'Local operator access required'});
         try {

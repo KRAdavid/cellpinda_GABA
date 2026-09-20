@@ -49,6 +49,7 @@ type PublicReleaseManifest = {schemaVersion: number; candidateSha: string; gener
 type PublicReleaseStatus = {state: 'checking' | 'available' | 'missing' | 'invalid' | 'error'; checkedAt: string; manifest?: PublicReleaseManifest; detail?: string};
 const publicBase = import.meta.env.BASE_URL;
 const localAuditEndpoint = import.meta.env.DEV ? apiEndpoint('/api/ops/local-audit') : null;
+const localOperationsEndpoint = import.meta.env.DEV ? apiEndpoint('/api/ops/snapshot') : null;
 
 function taskStateLabel(task: MvpPlan['tasks'][number]) {
   if (task.state === 'DONE' && task.verification?.mode === 'sandbox_simulation') return '샌드박스 완료';
@@ -116,15 +117,16 @@ export default function OperationsMvp() {
 
   useEffect(() => {
     let active = true;
-    const refresh = () => Promise.all([
-      fetch(`${publicBase}data/operations-queue.json?refresh=${Date.now()}`),
-      fetch(`${publicBase}data/goal-audit.json?refresh=${Date.now()}`),
-    ]).then(async ([queueResponse, auditResponse]) => {
-      if (!queueResponse.ok || !auditResponse.ok) throw new Error('public operations snapshot unavailable');
-      const [snapshot, audit] = await Promise.all([queueResponse.json() as Promise<QueueSnapshot>, auditResponse.json() as Promise<GoalAuditSnapshot>]);
+    if (!localOperationsEndpoint) return () => { active = false; };
+    const refresh = () => fetch(`${localOperationsEndpoint}?refresh=${Date.now()}`, {cache: 'no-store'}).then(async response => {
+      if (!response.ok) throw new Error('local operations snapshot unavailable');
+      const payload = await response.json() as {queue?: QueueSnapshot; audit?: GoalAuditSnapshot};
+      if (!payload.queue || !payload.audit) throw new Error('local operations snapshot is incomplete');
+      const snapshot = payload.queue;
+      const audit = payload.audit;
       if (active) { setQueue(snapshot); setGoalAudit(audit); setQueueError(''); setQueueLoadedAt(new Date().toISOString()); }
     }).catch(() => {
-      if (active) setQueueError('공개 운영 스냅샷을 새로 읽지 못했습니다. 마지막으로 확인된 큐를 유지하고 다시 시도합니다.');
+      if (active) setQueueError('로컬 운영 스냅샷을 새로 읽지 못했습니다. 마지막으로 확인된 큐를 유지하고 다시 시도합니다.');
     });
     void refresh();
     const timer = window.setInterval(refresh, 60_000);
@@ -355,7 +357,7 @@ export default function OperationsMvp() {
     {!queue && queueError ? <p className="ops-mvp-live-error wrap" role="status">{queueError} 마지막 성공 읽기 시각은 확인할 수 없습니다.</p> : null}
     <section className="ops-mvp-release-health-wrap wrap" aria-label="공개 배포 감시">{releaseHealth}</section>
     {queue ? <section className="ops-mvp-live-queue wrap" aria-labelledby="live-queue-heading">
-      <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2><p className="ops-mvp-live-queue-description">저장소의 canonical 업무 그래프입니다. 아래에서 생성하는 Goal Contract 샌드박스는 이 운영 큐를 대신하지 않고 별도 실행·검증을 재현합니다.</p></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong><button className="text-link" type="button" onClick={() => setQueueRefresh(value => value + 1)}>새로고침 ↻</button><a className="text-link" href={`${publicBase}data/tf-meeting-packet.json`} target="_blank" rel="noopener noreferrer">회의 패킷 JSON ↗</a><a className="text-link" href={`${publicBase}data/tf-pulse.json`} target="_blank" rel="noopener noreferrer">회의 안건 JSON ↗</a><a className="text-link" href={`${publicBase}data/goal-audit.json`} target="_blank" rel="noopener noreferrer">목표 감사 JSON ↗</a></div></div>
+      <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2><p className="ops-mvp-live-queue-description">로컬 API가 읽은 canonical 업무 그래프입니다. 공개 사이트에는 운영 스냅샷을 내보내지 않으며, 이 화면에서만 최신 상태를 확인합니다.</p></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong><button className="text-link" type="button" onClick={() => setQueueRefresh(value => value + 1)}>새로고침 ↻</button></div></div>
       {queueError ? <p className="ops-mvp-live-error" role="status">{queueError}{queueLoadedAt ? ` 마지막 성공 읽기 · ${formatTime(queueLoadedAt)}` : ' 마지막 성공 읽기 시각은 확인할 수 없습니다.'}</p> : null}
       <div className="ops-mvp-live-streams" aria-label="스트림별 현재 상태">{queue.workstreams.map(stream => <span key={stream.id}><strong>{stream.name}</strong><em>{stream.status}</em><small>{stream.nextAction}</small></span>)}</div>
       {queue.pulse?.meetingProtocol ? <div className="ops-mvp-live-protocol" aria-label="TF 회의 운영 규칙"><div><span className="ops-mvp-eyebrow">이번 TF 회의 운영 규칙</span><p>자동 pulse가 안건을 만들고, 아래 정족수와 기록 규칙을 충족한 판단만 다음 상태로 연결합니다.</p></div><dl><div><dt>정족수</dt><dd>{queue.pulse.meetingProtocol.quorum}</dd></div><div><dt>회의 주기</dt><dd>{queue.pulse.meetingProtocol.cadence}</dd></div><div><dt>남길 기록</dt><dd>{queue.pulse.meetingProtocol.record.join(' · ')}</dd></div>{queue.pulse.executionPolicy ? <div><dt>자동 경계</dt><dd>계속 실행 후보 · {queue.pulse.executionPolicy.autoStates.join(' · ')} · {queue.pulse.executionPolicy.autoRiskClasses.join(' · ')}<br />사람 판단 · {queue.pulse.executionPolicy.humanReviewStates.join(' · ')}<br />승인 필요 · {queue.pulse.executionPolicy.approvalRiskClasses.join(' · ')}</dd></div> : null}</dl></div> : null}
