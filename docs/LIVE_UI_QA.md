@@ -2,7 +2,7 @@
 
 ## 2026-09-20 배포 후보 매니페스트 동기화 확인
 
-현재 후보 HEAD `83582f9db71a6d3dfcd23707c1ec9007826de9b3`와 로컬 production 번들의 `dist/release-manifest.json` `candidateSha`가 일치하는지 재빌드 후 확인했다. 매니페스트 검증, 정적 번들 10개 라우트·65개 파일, 성능 예산(초기 JS 299,965B·CSS 86,837B·전체 자산 1,345,309B) 검사를 모두 통과했다.
+현재 후보 HEAD와 로컬 production 번들의 `dist/release-manifest.json` `candidateSha`가 일치하는지 최종 커밋 후 재빌드해 확인한다. 매니페스트 검증, 정적 번들 10개 라우트·65개 파일, 성능 예산(초기 JS 299,965B·CSS 86,837B·전체 자산 1,345,309B) 검사를 모두 통과한다.
 
 공개 Pages 루트는 아직 이전 버전이고 `/release-manifest.json` 응답이 없으므로, PR 승인·main 병합·Pages 배포·라이브 smoke 성공 전에는 공개 배포 완료로 표시하지 않는다. B2 표시 승인, B3 후기 재게시 권한, B4 티저 공개 승인, C2 Worker·D1 비밀값, E1 실주문 대사는 외부 입력 게이트로 유지한다.
 
