@@ -23,7 +23,7 @@ const highlightOrder: Highlight[] = [
   {
     id: 'research-yoto-2012',
     label: '머리를 많이 쓴 뒤',
-    title: '과제 뒤 뇌파와 활력 점수',
+    title: '머리를 많이 쓴 뒤 뇌파와 활력 점수',
     summary: 'GABA 캡슐을 먹은 날과 비교 캡슐을 먹은 날, 머리를 많이 쓴 뒤 변화를 살펴봤어요.',
     facts: ['참여: 성인 63명', '연구 조건: 100mg 한 번', '살펴본 내용: 뇌파·활력 점수'],
     Icon: Activity,

@@ -66,7 +66,7 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
     <figcaption><Brain size={18} aria-hidden="true"/>{visual.participantLabel} <span>{visual.comparisonLabel}</span></figcaption>
     <ol>{visual.steps.map((step,index)=>{
       const Icon=index===0?Pill:index===1?Clock3:index===2?Activity:Waves;
-      const label=step.replace(/^GABA\s*/,'').replace(/\s*1회$/,'').replace('정신 과제','과제');
+      const label=step.replace(/^GABA\s*/,'').replace(/\s*1회$/,'').replace('생각을 많이 쓰는 과제','머리를 많이 쓴 뒤').replace('정신 과제','머리를 많이 쓴 뒤');
       return <li key={step}><Icon size={21} strokeWidth={1.8} aria-hidden="true"/><strong>{label}</strong>{index<visual.steps.length-1?<ArrowRight size={15} className="study-journey-arrow" aria-hidden="true"/>:null}</li>;
     })}</ol>
     {visual.outcomes?.length?<div className="study-journey-outcome">{visual.outcomes.map(item=><span key={item.label}><Waves size={16} aria-hidden="true"/><b>{item.label}</b><small>{item.result}</small></span>)}</div>:null}
