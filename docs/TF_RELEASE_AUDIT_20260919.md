@@ -1,10 +1,10 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
-## 최신 릴리스 스냅샷 — 2026-09-20 · 후보 `8c6dab3`
+## 최신 릴리스 스냅샷 — 2026-09-20 · 후보 `4308a53`
 
-현재 공개 전 기준은 후보 커밋 `8c6dab3f67651e5a9d3c558dcbde91a7ca0a328b`와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. TF heartbeat는 `2026-09-20T10:18:25`에 재생성됐고 공개 콘텐츠 지문은 `69994cdfed389afa93031b20e0ac06f9ff2a3089424de125ebfb1777c3a7a1aa`로 이전과 같으며, 내부 안전 실행은 `MET`, 상태 변화는 없다.
+현재 공개 전 기준은 후보 커밋 `4308a536957b82662eeccb25cc23956872f62513`와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. TF heartbeat는 `2026-09-20T10:18:25`에 재생성됐고 공개 콘텐츠 지문은 `69994cdfed389afa93031b20e0ac06f9ff2a3089424de125ebfb1777c3a7a1aa`로 이전과 같으며, 내부 안전 실행은 `MET`, 상태 변화는 없다. 모바일 결과 화면의 프로그램 포커스 테두리 결함을 수정한 후보다.
 
-후보는 10개 공개 경로·65개 산출물·승인 연구 6건·제품 1개·스마트스토어 후기 목적지 1개·티저 `PREVIEW`를 유지한다. 최신 `release-verify`([35504701661](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35504701661))와 `site-quality-verify`([35504701663](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35504701663))는 성공했다. 로컬 검증 명령과 CI 경로를 일치시키고, 검토된 티저 URL과 릴리스 산출물의 정확한 일치를 게시 전에 검사하도록 보강했다. `release-status` 작업에는 고정 pnpm 설치 단계도 추가했다.
+후보는 10개 공개 경로·65개 산출물·승인 연구 6건·제품 1개·스마트스토어 후기 목적지 1개·티저 `PREVIEW`를 유지한다. 최신 `release-verify`([35505624243](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35505624243))와 `site-quality-verify`([35505624269](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35505624269))는 성공했다. 로컬 검증 명령과 CI 경로를 일치시키고, 검토된 티저 URL과 릴리스 산출물의 정확한 일치를 게시 전에 검사하도록 보강했다. `release-status` 작업에는 고정 pnpm 설치 단계도 추가했다.
 
 PR은 여전히 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`이며, 공개 Pages의 `/release-manifest.json`은 아직 HTTP 404다. 따라서 후보 품질 검증 완료와 공개 배포 완료를 구분한다. B2 제품 표시, B3 후기 권한, B4 티저 권리·자막·CTA, C2 Cloudflare 운영 설정, E1 실주문 대사는 사람 입력 게이트로 유지한다.
 
