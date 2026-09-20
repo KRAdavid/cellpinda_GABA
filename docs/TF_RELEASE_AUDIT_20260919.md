@@ -384,3 +384,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 후보의 공개 소스 경로(`src`, `public/data`, 정적 공개 route, `index.html`)를 다시 스캔해 사용자에게 숨기기로 한 `매우 제한적`, `제한적 근거`, `뚜렷한 차이`, `다만 GABA만의 효과`, `공식몰`, `GABA 750`, `집중 리듬 챌린지`, `조건·수치·한계` 표현이 0건임을 확인했다. 내부 원장·검증기·감리 문서에 남은 같은 단어는 공개 projection을 차단하고 근거 범위를 감사하기 위한 내부 값이며, 소비자 번들에 포함되지 않는다.
 
 이번 스캔은 제품 효능·권장량을 추가하거나 연구 한계를 삭제하는 작업이 아니다. 공개 문장은 관찰된 연구 맥락과 쉬운 행동 안내로 유지하고, 제품 표시·후기 권한·티저 권리·운영 배포 승인은 기존 사람 게이트를 그대로 보존한다.
+
+## 2026-09-20 비-main TF pulse 브랜치 격리 검증
+
+후보 `b8044c6`에서 수동 TF pulse [35501672620](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35501672620)을 실행했다. 후보 실행에서는 `Persist safe pulse heartbeat`가 의도적으로 `skipped`되고, 비-main 후보 검증 단계의 타입검사·107개 회귀 테스트·production build·배포 readiness·Worker review 통합 테스트·Worker dry-run이 모두 성공했다.
+
+실행 전후 `automation/tf-pulse-heartbeat` 원격 SHA가 `08d47c760074933d9ed7f0ed6bdf26d7c496e625`로 동일했다. 따라서 후보 수동 검증이 main 예약용 heartbeat 브랜치나 보호된 PR 흐름을 변경하지 않는다. main 예약 실행에서만 heartbeat를 reviewable PR로 저장하는 경계는 유지한다.
