@@ -40,6 +40,7 @@ assert.match(workflow, /mode="STATIC_ONLY"/, 'release status must identify a sta
 assert.match(workflow, /Worker\/D1 remains HOLD; this run publishes the static public site only\./, 'static-only releases must expose the operational hold');
 assert.match(workflow, /release-status:[\s\S]*actions\/upload-artifact@[a-f0-9]{40}/, 'release status must be retained as an auditable artifact');
 assert.match(workflow, /release-status:[\s\S]*validate-release-status\.mjs release-status\.json/, 'release status artifact must be schema validated');
+assert.match(workflow, /name: cellpinda-gaba-\$\{\{ github\.sha \}\}[\s\S]*path:\s+\|[\s\S]*dist\/\s+[\s\S]*dist-pages\/\s+[\s\S]*worker-build\//, 'release evidence must retain the exact Pages bundle alongside the Worker and production bundles');
 assert.match(workflow, /PAGES_PUBLIC_SITE_URL: https:\/\/kradavid\.github\.io\/cellpinda_GABA[\s\S]*WORKER_PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}/, 'live smoke must keep Pages and Worker public origins explicit');
 assert.match(workflow, /PUBLIC_SITE_URL="\$WORKER_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=worker/, 'full-release smoke must verify the Worker public origin');
 assert.match(workflow, /PUBLIC_SITE_URL="\$PAGES_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=static/, 'static-only smoke must verify the Pages public origin');

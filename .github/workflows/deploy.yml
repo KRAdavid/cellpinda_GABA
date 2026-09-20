@@ -78,6 +78,7 @@ jobs:
           name: cellpinda-gaba-${{ github.sha }}
           path: |
             dist/
+            dist-pages/
             worker-build/
           if-no-files-found: error
           retention-days: 7
