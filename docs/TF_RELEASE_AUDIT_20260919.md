@@ -308,3 +308,10 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - `/cellpinda_GABA/` 기준 Pages 산출물을 별도로 빌드해 10개 route·65개 파일·연구 6건·제품 1개·후기 목적지 1개·티저 `HOLD`를 확인했다. `check-public-artifacts`, `validate:release-manifest`, `validate:static-bundle`, 성능 예산 검사가 모두 통과했다.
 - `pnpm run build`와 GitHub Actions [35494406407](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35494406407), [35494406410](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35494406410)의 `release-verify`, `site-quality-verify`가 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전까지 `OPEN · BLOCKED · REVIEW_REQUIRED`로 유지된다.
 - 후보와 공개 Pages의 분리를 다시 확인했다. 공개 `release-manifest.json`은 아직 HTTP 404로 후보와 동기화되지 않았으며, Code Owner 승인·main 병합·Pages 게시·live smoke가 끝나기 전에는 공개 배포 완료로 판정하지 않는다. Cloudflare 비밀값, 최종 제품 표시·후기 재게시 권한·티저 권리와 실제 주문 대사 게이트도 계속 사람 입력 대기다.
+
+### 2026-09-20 접근성 이름·Pages 화면 재감리
+
+- 후보 HEAD `2d0f1d91e0508f4e9eaf0dd847fb778bffa8bca0`에서 연구 검색창과 공유 결과 비교 체크박스에 명시적 접근성 이름을 추가했다. `validate:ui-contract`가 두 이름의 재유입을 확인하고, `typecheck`와 `pnpm test` 107개가 통과했다.
+- Pages 공개 경로를 모사한 로컬 정적 서버에서 390px 화면으로 홈·연구·제품·뇌컨디션·공유 경로를 직접 열었다. 데이터 로딩 실패 문구, 콘솔 오류, 가로 넘침은 없었고, 각 경로의 main·nav·footer·이미지 대체 텍스트·중복 ID를 확인했다. 연구 검색창과 공유 비교 체크박스는 브라우저가 즉시 읽을 수 있는 이름을 노출한다.
+- GitHub Actions [35495011749](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35495011749), [35495011716](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35495011716)의 `release-verify`, `site-quality-verify`가 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 여전히 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`다.
+- 로컬 `dist`는 Worker용 루트 번들이므로 API가 없으면 콘텐츠 연결 대기 화면을 보여준다. Pages용 `/cellpinda_GABA/` 번들은 정적 JSON fallback을 사용하며 이번 화면 검증은 Pages 경로 번들로 수행했다. 공개 Pages의 실제 동기화 여부는 main 병합 뒤 `release-manifest`와 live smoke로 다시 확인한다.
