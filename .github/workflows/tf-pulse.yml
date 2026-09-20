@@ -8,7 +8,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  statuses: write
 
 concurrency:
   group: tf-pulse
@@ -82,8 +81,10 @@ jobs:
 
             # GITHUB_TOKEN-created PRs may not emit a second pull_request run,
             # and an untrusted branch can require manual workflow approval.
-            # Run the candidate's real release checks in this trusted pulse
-            # job before publishing required commit statuses.
+            # Run the same candidate checks here for evidence, but never write
+            # protected release status contexts from this abbreviated job.
+            # If the real pull_request checks do not run, branch protection
+            # must remain pending until a human opens or reruns the PR checks.
             pnpm run typecheck
             pnpm test
             pnpm run build
@@ -91,16 +92,6 @@ jobs:
             pnpm run test:worker-reviews
             pnpm exec wrangler deploy --dry-run --outdir worker-build
             heartbeat_sha="$(git rev-parse HEAD)"
-            gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$heartbeat_sha" \
-              -f state=success \
-              -f context=release-verify \
-              -f description="TF pulse candidate release verification passed" \
-              -f target_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-            gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$heartbeat_sha" \
-              -f state=success \
-              -f context=site-quality-verify \
-              -f description="TF pulse candidate consumer verification passed" \
-              -f target_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             {
               echo
               echo "## Heartbeat review"
@@ -112,7 +103,8 @@ jobs:
                 echo "A human must open the protected-main PR before the heartbeat can publish."
                 echo "Branch: $heartbeat_branch"
               fi
-              echo "Verification: candidate typecheck, tests, build and Worker dry-run passed on $heartbeat_sha."
+              echo "Verification evidence: candidate typecheck, tests, build, readiness and Worker dry-run passed on $heartbeat_sha."
+              echo "Protected release-verify and site-quality-verify contexts are written only by their complete pull_request workflow; this pulse never marks them green."
               echo "The public packet changes only after the required checks and human merge pass."
             } >> "$GITHUB_STEP_SUMMARY"
           fi

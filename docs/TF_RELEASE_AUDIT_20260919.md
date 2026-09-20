@@ -430,3 +430,8 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 `run-safe-tf-actions.mjs`를 후보에서 실행해 공개 패킷 동기화와 goal contract·research copy·teaser boundary·sandbox MVP·public export·TF pulse 검사를 모두 `MET`으로 재현했다. 실행은 외부 게시·구매·승인·canonical 업무 그래프 변경 없이 종료됐고, 사람 입력 게이트 B2·B3·B4·C2·E1은 그대로 유지됐다.
 
 티저 주소는 비로그인 요청에서 23,646바이트 HTML, `발효가바 — 멈추지 않는 밤` 제목, 로드 이벤트와 `play()` 호출을 확인했다. 후보 `public/data/teaser-preview.json`의 iframe 주소와 실제 endpoint가 일치한다. 자동 재생이 브라우저 정책으로 차단될 때를 위한 화면 내 재생·새 창 fallback은 유지한다.
+## 2026-09-20 TF pulse 보호 상태 직접 기록 경로 제거
+
+자동 감리에서 TF pulse가 후보 검증 뒤 `release-verify`·`site-quality-verify` 커밋 상태를 직접 녹색 처리할 수 있던 경로를 확인했다. 이는 전체 `deploy.yml`의 history privacy·Pages bundle·정적 성능·Worker 검사를 실행하지 않은 heartbeat PR도 보호 규칙을 통과시킬 수 있는 위험이었다.
+
+후보 워크플로에서 `statuses: write` 권한과 두 상태 API 호출을 제거했다. pulse의 후보 검사는 검증 증거로 유지하되, 완전한 `pull_request` 검사가 실행되지 않으면 필수 상태가 계속 pending인 fail-closed 경계로 바꿨다. `validate:tf-pulse-workflow`는 보호 상태 직접 기록과 권한 재유입을 회귀 검사한다. 이 변경은 외부 게시·승인·구매를 실행하지 않으며, PR의 Code Owner 승인과 main 병합 게이트는 그대로 유지한다.

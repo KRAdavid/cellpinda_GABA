@@ -82,9 +82,9 @@ pnpm run validate:live-public
 
 `validate:live-public`는 현재 GitHub Pages 공개 주소를 대상으로 제품·후기 상세 링크, 750 제거, 연구·공유·티저·운영 패킷을 한 번에 확인한다. `PUBLIC_SITE_URL`과 URL 인자를 모두 생략하면 저장된 기본 공개 주소(`https://kradavid.github.io/cellpinda_GABA`)를 사용한다. 다른 공개 주소나 임시 배포를 점검할 때는 `pnpm run validate:live -- https://example.com`처럼 URL을 넘긴다.
 
-`TF decision pulse` workflow는 6시간마다 canonical 업무 그래프의 실행·검증·입력 대기 안건을 읽어 run summary와 JSON artifact로 남긴다. 동시에 원문 경로·비밀값을 제외한 안전한 heartbeat를 `data/tf-pulse-heartbeat.json`에 만들고, 보호된 `main`에 직접 쓰지 않고 고정된 자동화 브랜치의 PR로 갱신한다. 기존 heartbeat PR이 있으면 재사용하고 없으면 새로 만들며, PR 생성으로 자동 검사가 생략되거나 별도 workflow 승인이 필요한 GitHub 토큰 경계를 고려해 heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 직접 실행한 뒤 성공 결과를 같은 커밋의 필수 상태로 기록한다. 필수 상태와 사람의 merge를 통과한 뒤 `main` push가 일반 배포를 실행한다. 따라서 보호 규칙을 우회하지 않으면서도 TF 회의 안건 생성은 멈추지 않고 계속된다.
+`TF decision pulse` workflow는 6시간마다 canonical 업무 그래프의 실행·검증·입력 대기 안건을 읽어 run summary와 JSON artifact로 남긴다. 동시에 원문 경로·비밀값을 제외한 안전한 heartbeat를 `data/tf-pulse-heartbeat.json`에 만들고, 보호된 `main`에 직접 쓰지 않고 고정된 자동화 브랜치의 PR로 갱신한다. 기존 heartbeat PR이 있으면 재사용하고 없으면 새로 만들며, PR 생성으로 자동 검사가 생략되거나 별도 workflow 승인이 필요한 GitHub 토큰 경계를 고려해 heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 검증 증거로 실행한다. 이 축약 pulse는 보호된 필수 상태를 직접 녹색 처리하지 않으며, 완전한 `pull_request` 검사가 실행되지 않으면 브랜치 보호가 계속 대기하도록 fail-closed로 동작한다. 필수 상태와 사람의 merge를 통과한 뒤 `main` push가 일반 배포를 실행한다. 따라서 보호 규칙을 우회하지 않으면서도 TF 회의 안건 생성은 멈추지 않고 계속된다.
 
-`pnpm run validate:tf-pulse-workflow`는 이 heartbeat→자동화 PR→후보 검증→커밋 상태 순서, `contents`·`pull-requests`·`statuses` 권한, 보호된 `main` 직접 push 금지 조건을 build에서 고정한다.
+`pnpm run validate:tf-pulse-workflow`는 이 heartbeat→자동화 PR→후보 검증 순서, 최소 `contents`·`pull-requests` 권한, 보호된 `main` 직접 push 금지와 필수 상태 fail-closed 조건을 build에서 고정한다.
 
 로컬 운영 보드(`http://127.0.0.1:5173/?view=ops`)는 마지막 pulse 시각과 신선도 상태를 함께 표시해 6시간 주기 자동 협업이 지연됐는지 바로 확인할 수 있게 한다. 소비자 사이트에는 `TF 운영판` 링크를 노출하지 않으며, 운영자는 로컬 주소에서만 이 중간 확인 화면을 연다. 직전 상태 지문과 비교한 `stateChanged`도 표시해 새 안건과 반복 안건을 구분한다.
 `pnpm run audit:goal -- --json`의 `pulseHealth`에도 같은 신선도 판정과 상태 지문이 포함되어 회의·CI에서 화면과 같은 기준을 사용할 수 있다.

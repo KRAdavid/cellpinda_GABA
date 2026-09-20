@@ -739,3 +739,6 @@ Worker 운영이 활성화된 경우 `deploy-worker`가 실패해도 Pages가 �
 ## 2026-09-20 release-status pnpm 구분자 회귀 보강
 
 배포 workflow의 `pnpm run validate:release-status -- release-status.json` 호출을 실제로 재현했을 때 검증기가 `--`를 파일명으로 열어 실패하는 결함을 확인했다. 검증기가 pnpm 구분자와 옵션을 건너뛰고 실제 상태 패킷 경로를 읽도록 수정했으며, 정적 전용 성공 경로와 readiness 실패를 정적 전용으로 속이는 경로를 회귀 테스트로 추가했다. 이 수정은 배포 상태 판정만 보강하며 제품·연구·외부 승인 게이트를 변경하지 않는다.
+## 2026-09-20 자동 검증 상태의 fail-closed 보강
+
+TF pulse가 축약된 후보 검사만으로 보호된 `release-verify`·`site-quality-verify`를 직접 성공 처리하던 자동화 경로를 제거했다. 후보 typecheck·전체 테스트·build·readiness·Worker dry-run은 계속 증거로 남기지만, 실제 필수 상태는 완전한 `pull_request` 워크플로만 만들도록 경계를 분리했다. 검사가 생략되면 보호 규칙이 pending으로 남아 사람의 PR 재실행·검토 없이는 merge할 수 없다. 워크플로 정적 검증과 전체 사이트 회귀 검증을 다시 실행한 뒤 후보 PR의 새 CI 결과를 확인한다.
