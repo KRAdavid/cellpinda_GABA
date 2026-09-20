@@ -128,6 +128,9 @@ if (/휴대폰을 뒤집어 두고 공의 움직임을 따라/.test(fatigueGame)
 for (const marker of ['퇴근했는데도', '계속 나나요', '잠과 휴식 1분 체크', 'GABA는 뇌세포 사이에서', '스마트스토어']) {
   requireMatch(app, new RegExp(marker), `consumer value proposition marker ${marker} is missing`);
 }
+requireMatch(app, /셀핀다 발효가바 · 나의 하루 리듬 체크/, 'the hero must identify the Cellpinda fermented GABA context before the first interaction');
+requireMatch(rhythm, /지난 7일, 잠들기 어렵거나<br \/>쉬지 못한 날이 있었나요\?/, 'the rhythm heading must use a direct everyday situation for consumers');
+requireMatch(rhythm, /지난 7일을 다섯 가지로 돌아봐요\.[\s\S]*퇴근 뒤에도 일이 생각났는지, 침대에서 오래 뒤척였는지/, 'the rhythm start panel must explain the five-question reflection in everyday language');
 if (/일이 끝나도 머리가 쉬지 않으신가요|일이 끝나도 머리가 바빠요/.test(`${app}\n${rhythm}`)) fail('consumer rest messaging must use direct everyday language');
 if (/gaba-master-index\.json/.test(app + indexHtml)) fail('consumer pages must not send readers to a raw research data file');
 requireMatch(research, /id="research"[^>]*aria-label="연구를 쉬운 말로 보기"/, 'research section must retain an accessible consumer label');
@@ -161,7 +164,7 @@ requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?최근 7일, 힘들었다고
 requireMatch(rhythm, /<h3 ref=\{resultRef\}[\s\S]*?rhythm-result-primary-actions[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?<BrainLoadVisual/, 'the privacy-preserving invitation must appear below the result name before the score visualization');
 requireMatch(rhythm, /const description = `5개 질문 중 \$\{frequentAnswers\}개에서 힘들었다고 답했어요\.`[\s\S]*?다섯 질문에 고른 답을 정리한 기록이에요\./, 'the answer visualization must clearly describe its self-report basis');
 if (/products-intro-actions|products-intro-buy|products-review-shortcut/.test(app)) fail('product price and review shortcuts must not be repeated in the product intro beside their destination cards');
-requireMatch(app, /id="products"[\s\S]*?가격·재고 확인하기[\s\S]*?id="reviews"|<ReviewExperience/, 'product purchase information must appear on the product card, with reviews in their own section');
+requireMatch(app, /id="products"[\s\S]*?스마트스토어에서 가격·재고 확인하기[\s\S]*?id="reviews"|<ReviewExperience/, 'product purchase information must name the Smart Store destination on the product card, with reviews in their own section');
 requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must expose alternative text');
 requireMatch(app, /<ArrowRight(?:\s+size=\{18\})?\s+aria-hidden="true"\s*\/>/, 'decorative ArrowRight icons must be hidden from assistive technology');
 requireMatch(app, /<ArrowUpRight\s+size=\{18\}\s+aria-hidden="true"\s*\/>/, 'decorative ArrowUpRight icons must be hidden from assistive technology');

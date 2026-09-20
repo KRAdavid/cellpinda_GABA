@@ -456,8 +456,8 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   return (
     <section className="rhythm-experience" id="rhythm" aria-labelledby="rhythm-heading">
       <div className="rhythm-heading-row">
-        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading">지난 7일, 잠과 휴식은<br />어땠나요?</h2></div>
-        <p className="rhythm-intro-copy">다섯 문항 · 누르면 다음 질문으로 넘어가요.</p>
+        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading">지난 7일, 잠들기 어렵거나<br />쉬지 못한 날이 있었나요?</h2></div>
+        <p className="rhythm-intro-copy">다섯 문항 · 답을 고르면 다음 질문으로 넘어가요.</p>
       </div>
 
       {type ? (
@@ -512,7 +512,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
           </div>
         </div>
       ) : (
-        <div className="rhythm-start-panel"><div><h3>다섯 가지만 확인해요.</h3><p>일을 마쳐도 생각이 이어졌는지, 잠들기까지 오래 걸렸는지 떠올려 보세요.</p><details className="rhythm-start-scenes"><summary>질문에 나오는 생활 장면</summary><ul><li>퇴근 뒤에도 일이 계속 생각남</li><li>침대에 누워 한참 뒤척임</li><li>하루 종일 쉴 틈이 없었음</li><li>아침에도 피로가 남아 있음</li></ul></details></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>지난 7일 1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">답변은 저장하지 않아요.</p></div></div>
+        <div className="rhythm-start-panel"><div><h3>지난 7일을 다섯 가지로 돌아봐요.</h3><p>퇴근 뒤에도 일이 생각났는지, 침대에서 오래 뒤척였는지 떠올려 보세요.</p><details className="rhythm-start-scenes"><summary>질문에 나오는 생활 장면</summary><ul><li>퇴근 뒤에도 일이 계속 생각남</li><li>침대에 누워 한참 뒤척임</li><li>하루 종일 쉴 틈이 없었음</li><li>아침에도 피로가 남아 있음</li></ul></details></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>지난 7일 1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">답변은 저장하지 않아요.</p></div></div>
       )}
       <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} />
       {result && friendType ? (
