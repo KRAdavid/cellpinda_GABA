@@ -1,8 +1,8 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
-## 2026-09-21 최신 후보 동기화 — `7ba3c57`
+## 2026-09-21 최신 후보 동기화 — SHA는 release manifest 기준
 
-정적 번들 검증기가 내부 운영 청크의 파일명과 공개 JavaScript의 운영 마커·admin/ops API 경로를 함께 검사하도록 보강됐다. 현재 후보 빌드에는 `Admin`·`OperationsMvp` 청크가 없으며, 공개 경로 10개·manifest 파일 60개·연구 6건·제품 1개·후기 목적지 1개가 유지된다.
+정적 번들 검증기가 내부 운영 청크의 파일명과 공개 JavaScript의 운영 마커·admin/ops API 경로를 함께 검사하도록 보강됐다. 현재 후보 빌드에는 `Admin`·`OperationsMvp` 청크가 없으며, 공개 경로 10개·manifest 파일 60개·연구 6건·제품 1개·후기 목적지 1개가 유지된다. 후보 SHA는 매 빌드의 `dist/release-manifest.json`에서 확인한다.
 
 로컬 build·타입검사·공개 export·정적 bundle·성능 예산, PR 필수 검사 `release-verify`·`site-quality-verify`가 성공했다. Code Owner 승인·main 병합·Pages 라이브 매니페스트 확인과 B2·B3·B4·C2·E1 외부 게이트는 아직 남아 있다.
 

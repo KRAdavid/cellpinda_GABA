@@ -1,8 +1,8 @@
 # 전체 목표 완료 간극 점검
 
-## 2026-09-21 최신 후보 동기화 — `7ba3c57`
+## 2026-09-21 최신 후보 동기화 — SHA는 release manifest 기준
 
-정적 공개 번들에 로컬 전용 `Admin`·`OperationsMvp` 청크가 다시 포함되지 않도록 파일명 검사까지 추가했다. 공개 JavaScript에 내부 운영 마커나 `/api/admin`·`/api/ops` 경로가 들어가면 `validate-static-bundle`이 실패한다. 재빌드 결과 내부 운영 청크는 생성되지 않았고, 10개 공개 경로·60개 manifest 파일·연구 6건·제품 1개·후기 목적지 1개를 유지했다.
+정적 공개 번들에 로컬 전용 `Admin`·`OperationsMvp` 청크가 다시 포함되지 않도록 파일명 검사까지 추가했다. 공개 JavaScript에 내부 운영 마커나 `/api/admin`·`/api/ops` 경로가 들어가면 `validate-static-bundle`이 실패한다. 재빌드 결과 내부 운영 청크는 생성되지 않았고, 10개 공개 경로·60개 manifest 파일·연구 6건·제품 1개·후기 목적지 1개를 유지했다. 후보 SHA는 매 빌드의 `dist/release-manifest.json`에서 확인한다.
 
 `pnpm run build`, 타입검사, 공개 export, UI·연구 문구·정적 번들·성능 검증과 PR의 `release-verify`·`site-quality-verify`가 통과했다. PR은 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`이며, Pages의 `/release-manifest.json`은 아직 404다. 따라서 이번 기록은 후보 품질 증거이며 공개 배포 완료를 의미하지 않는다.
 
