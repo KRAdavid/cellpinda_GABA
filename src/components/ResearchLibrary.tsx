@@ -167,7 +167,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       }}>
         <summary>이 연구, 어떻게 했나요?</summary>
         <div className="research-library-detail">
-          <p className="research-library-study-scope"><strong>논문에서 사용한 것</strong><span>{metadata.productApplicability}</span></p>
+          <p className="research-library-study-scope"><strong>연구에서 살펴본 조건</strong><span>{metadata.productApplicability}</span></p>
           {metadata.consumerContext ? <p className="research-library-detail-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
           {metadata.consumerDetail ? <p className="research-library-detail-finding"><strong>측정 결과</strong>{metadata.consumerDetail}</p> : !metadata.consumerVisual && metadata.consumerFinding && metadata.consumerFinding !== takeaway ? <p className="research-library-detail-finding"><strong>연구에서 기록한 결과</strong>{metadata.consumerFinding}</p> : null}
           <div className="research-story-grid" aria-label="연구 정보 그림 요약">
