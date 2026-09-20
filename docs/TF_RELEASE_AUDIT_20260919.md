@@ -416,3 +416,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 티저 주소는 비로그인 요청에서 HTTP 200과 로드 시 자동 시작 코드를 확인했지만, 공개 Pages는 아직 이전 main 버전이다. `https://kradavid.github.io/cellpinda_GABA/release-manifest.json`이 계속 HTTP 404이므로 Code Owner 승인·main 병합·Pages 게시·live smoke 전에는 배포 완료로 판정하지 않는다.
 
 후보 커밋의 [release-verify 35502992264](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35502992264)와 [site-quality-verify 35502992346](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35502992346)가 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED` 상태다.
+
+## 2026-09-20 내부 TF pulse·티저 endpoint 재확인
+
+`run-safe-tf-actions.mjs`를 후보에서 실행해 공개 패킷 동기화와 goal contract·research copy·teaser boundary·sandbox MVP·public export·TF pulse 검사를 모두 `MET`으로 재현했다. 실행은 외부 게시·구매·승인·canonical 업무 그래프 변경 없이 종료됐고, 사람 입력 게이트 B2·B3·B4·C2·E1은 그대로 유지됐다.
+
+티저 주소는 비로그인 요청에서 23,646바이트 HTML, `발효가바 — 멈추지 않는 밤` 제목, 로드 이벤트와 `play()` 호출을 확인했다. 후보 `public/data/teaser-preview.json`의 iframe 주소와 실제 endpoint가 일치한다. 자동 재생이 브라우저 정책으로 차단될 때를 위한 화면 내 재생·새 창 fallback은 유지한다.
