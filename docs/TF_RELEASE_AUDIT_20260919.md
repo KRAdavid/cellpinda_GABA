@@ -1,5 +1,11 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
+## 현재 후보 지문 재확인 — 2026-09-20 · `6206556`
+
+문서·코드 후보를 다시 빌드해 전체 테스트 109/109, 타입검사, 공개 export, 정적 bundle, 성능 예산, 배포 workflow 계약을 통과시켰다. 현재 release manifest는 후보 SHA `8f7244e7f98c5e3e3b3c7e9c07cba1609ccd085f`, 10개 공개 경로, 64개 파일, 연구 6건·제품 1개·후기 1개·티저 `PREVIEW/HOLD`를 기록한다. 문서 보정 커밋 `6206556`은 공개 데이터나 제품·연구 문구를 변경하지 않았다.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 필수 검사 2개는 성공했지만 Code Owner 검토 전 `OPEN · BLOCKED · REVIEW_REQUIRED`다. 실제 Pages 루트·`content.json`은 HTTP 200이고 후보 `release-manifest.json`·`goal-audit.json`·`tf-pulse.json`은 아직 404다. 따라서 CI 통과는 후보 품질 증거로만 기록하고 공개 배포 완료로 승격하지 않는다. B2·B3·B4·C2·E1 외부 게이트는 기존 상태를 유지한다.
+
 ## 최신 릴리스 스냅샷 — 2026-09-20 · 후보 브랜치 HEAD
 
 현재 공개 전 기준은 후보 브랜치 HEAD와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. TF heartbeat는 `2026-09-20T13:13:59`에 재생성됐고 공개 콘텐츠 지문은 `69994cdfed389afa93031b20e0ac06f9ff2a3089424de125ebfb1777c3a7a1aa`로 이전과 같으며, 내부 안전 실행은 `MET`, 상태 변화는 없다. 후보에는 heartbeat 갱신과 이 감사 문서 정합성 보강이 포함되어 있으며, 검증 대상 커밋과 후보 매니페스트의 SHA는 각 CI 산출물에서 함께 확인한다.
