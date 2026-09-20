@@ -1,5 +1,9 @@
 # 중간 구현 상태 — 2026-09-21
 
+## 공유 링크 첫 화면 보정 — 후보 작업 중
+
+공유받은 하루 리듬 결과가 홈 히어로 아래에 묻히지 않도록 결과 카드로 자동 착지한다. 모바일·데스크톱 헤더 오프셋을 적용하고 사용자 조작 시 정렬을 중단한다. 공유가 아닌 일반 체크 흐름에는 적용하지 않는다.
+
 ## 최신 후보 기준 — SHA는 release manifest·PR HEAD로 확인
 
 현재 후보는 정적 공개 10개 경로, 연구 6건, 제품 1개, 후기 목적지 1개를 유지한다. `pnpm run build`에서 Goal Contract·연구 카피·UI 계약·공개 export·정적 bundle·성능 예산·배포 workflow 검사가 모두 통과했고, `dist/release-manifest.json`의 `candidateSha`는 PR HEAD와 일치한다. 공개 JavaScript에는 로컬 전용 Admin·OperationsMvp 청크와 내부 운영 마커·admin/ops API 경로가 없다.
