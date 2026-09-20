@@ -352,3 +352,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 ## 2026-09-20 Pages 게시 순서 fail-closed 보강
 
 후보 워크플로에서 `deploy-pages`가 `release-verify`만 의존해 Worker readiness 오류가 발생해도 정적 게시가 선행될 수 있는 경로를 확인했다. `deploy-pages`를 `release-verify`·`worker-readiness`에 연결하고 두 결과가 `success`일 때만 실행하도록 수정했다. 필요한 Cloudflare 비밀값이 없는 정상 운영은 readiness 성공·`enabled=false`로 `STATIC_ONLY` 게시를 유지하고, readiness 작업 자체가 실패·취소되면 공개 게시를 차단한다. 검증 규칙과 현재 공개 Pages(매니페스트 404)는 별도로 확인했으며 외부 승인·비밀값·실제 배포는 우회하지 않았다.
+
+## 2026-09-20 TF pulse 예약 실행 실패 원인과 후보 보정
+
+오래된 `main`에 남아 있던 TF pulse 예약 실행 로그([35490176992](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35490176992), [35467937914](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35467937914), [35453099267](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35453099267))에서 GitHub Actions의 PR 생성 권한 거부를 처리하지 않아 heartbeat 작업 전체가 실패하는 문제를 확인했다. 이 실패는 공개 콘텐츠나 제품 데이터의 오류가 아니라, 저장소 정책상 자동 PR을 만들 수 없는 경우의 예외 처리 누락이었다.
+
+후보 커밋 `86cbd21`은 `gh pr create` 실패를 경고로 기록하고 heartbeat 브랜치 갱신·안전한 내부 검증을 계속 수행하도록 보정했다. 자동 PR 생성 권한이 없어도 TF pulse가 중단되지 않고, 보호된 main 반영은 여전히 사람의 PR 생성과 Code Owner 검토를 요구한다. `pnpm run validate:tf-pulse-workflow`를 통과했으며, 후보 자동화 보정은 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이 main에 병합된 뒤 실제 예약 실행에서 다시 확인해야 한다.
