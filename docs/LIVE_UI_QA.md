@@ -1,5 +1,11 @@
 # 공개 Pages UI 검증 기록
 
+## 2026-09-20 공개 번들 문구 회귀 가드 — 후보 `743c997`
+
+공개 배포 번들의 HTML·JavaScript·JSON·CSS·SVG·텍스트 파일을 실제로 스캔해, 소비자 화면에 노출하지 않기로 한 연구 한계·부정 표현(`매우 제한적`, `뚜렷한 차이`, `효과를 확정`, `알 수 없습니다` 등)이 재유입되지 않는지 `validate:static-bundle`에서 확인하도록 보강했다. 현재 후보 production build에서 이 검사는 통과했고, 정적 route 10개·파일 65개·성능 예산도 함께 통과했다.
+
+후보 PR의 `release-verify`와 `site-quality-verify`는 성공했다. 공개 Pages는 아직 이전 main을 제공해 `/release-manifest.json`이 HTTP 404이므로, 이 기록은 후보 품질 검증이며 공개 배포 완료 기록이 아니다.
+
 ## 2026-09-20 배포 후보 매니페스트 동기화 확인
 
 현재 후보 HEAD와 로컬 production 번들의 `dist/release-manifest.json` `candidateSha`가 일치하는지 최종 커밋 후 재빌드해 확인한다. 매니페스트 검증, 정적 번들 10개 라우트·65개 파일, 성능 예산(초기 JS 299,965B·CSS 86,837B·전체 자산 1,345,309B) 검사를 모두 통과한다.
