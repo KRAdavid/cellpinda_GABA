@@ -1,6 +1,12 @@
 # 전체 목표 완료 간극 점검
 
-## 2026-09-20 운영판 공개본 상태 감시 보강 — 후보 `68bf1ec`
+## 2026-09-20 최신 후보 공개 직전 상태 — `ee29f18`
+
+현재 추가 후보 `ee29f189fd888fa82c130d6cf2c9a3a002b46db4`에서 로컬 production build와 전체 107개 회귀 테스트, 타입검사, 공개 export·연구 카피·UI 계약·정적 bundle 검증을 다시 통과했다. GitHub Actions의 `release-verify`와 `site-quality-verify`도 성공했다.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 현재 `OPEN / BLOCKED / REVIEW_REQUIRED`이며, PR 이벤트에서는 Pages·Worker·라이브 smoke가 의도된 `skipped`이다. 공개 Pages의 `/release-manifest.json`은 현재 HTTP 404이므로 `validate:live-public`는 ‘최신 후보 매니페스트 없음’으로 실패한다. 따라서 현재는 코드 품질 검증 완료와 공개 배포 완료를 분리하고, 사람 리뷰·main 병합 후 다시 Pages 배포와 매니페스트·라이브 smoke를 확인해야 한다.
+
+## 2026-09-20 운영판 공개본 상태 감시 보강 — 후보 `68bf1ec` (역사)
 
 로컬 운영판의 현재 운영 큐에 공개본 상태 카드를 추가했다. 첫 진입과 60초 주기로 `release-manifest.json`을 읽어 후보 SHA·생성 시각·런타임을 표시하고, 공개 Pages가 아직 이전 배포본이거나 매니페스트가 없을 때 소비자 화면에 노출하지 않고 운영자에게만 확인 대상을 알린다. 404와 개발 서버의 HTML fallback은 기술 오류 대신 “공개본 매니페스트가 없습니다”로 안내한다. 1280px·390px 화면에서 카드 표시, 가로 넘침 없음, 콘솔 오류·경고 없음을 확인했다.
 
