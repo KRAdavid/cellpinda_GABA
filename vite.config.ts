@@ -23,4 +23,16 @@ const omitPrivateOperationsSnapshots: Plugin = {
   },
 };
 
-export default defineConfig({base:process.env.VITE_BASE_PATH||'/',plugins:[react(),omitPrivateOperationsSnapshots],server:{port:5173,strictPort:true,proxy:localApiProxy},preview:{port:4173,proxy:localApiProxy}});
+export default defineConfig({
+  base: process.env.VITE_BASE_PATH || '/',
+  plugins: [react(), omitPrivateOperationsSnapshots],
+  server: {
+    port: 5173,
+    strictPort: true,
+    proxy: localApiProxy,
+    // Local audit runs and browser profiles are private runtime state. Do not
+    // let Vite/chokidar watch their locked SQLite/Cookie files.
+    watch: {ignored: ['**/tmp/**', '**/var/**']},
+  },
+  preview: {port: 4173, proxy: localApiProxy},
+});
