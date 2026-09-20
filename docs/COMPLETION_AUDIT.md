@@ -693,3 +693,9 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 후보 배포 워크플로의 실제 상태 전이를 대조한 결과, `deploy-pages`가 `release-verify`만 기다리고 `worker-readiness`를 의존하지 않아 readiness 작업이 실패하거나 취소되어도 정적 Pages 게시가 먼저 진행될 수 있었다. 이후 `release-status`가 `RELEASE_FAILED`로 남더라도 공개본은 이미 갱신될 수 있는 게시 순서 결함이었다.
 
 `deploy-pages`가 `release-verify`와 `worker-readiness`를 모두 `needs`로 갖고, 두 작업이 모두 `success`인 경우에만 실행하도록 보강했다. 비밀값이 없는 정상 정적 경로는 readiness가 `success`와 `enabled=false`를 반환하므로 계속 게시되며, readiness 오류·취소·검증 실패는 Pages 게시 전에 멈춘다. `pnpm run validate:deploy-workflow`로 회귀 규칙을 통과시켰고, 실제 Pages 공개본은 후보와 분리된 상태에서 변경하지 않았다.
+
+## 2026-09-20 Worker 활성 배포 순서 재감리
+
+Worker 운영이 활성화된 경우 `deploy-worker`가 실패해도 Pages가 먼저 게시될 수 있는 부분 배포 경로를 추가로 확인했다. `deploy-pages`가 `deploy-worker`까지 의존하고, readiness가 `enabled=true`일 때 Worker 결과가 `success`인 경우에만 Pages를 게시하도록 보강했다. Worker가 비활성화된 정적 전용 경로는 `enabled=false` 조건으로 계속 게시할 수 있다.
+
+후보 커밋 `c5f95d0`의 `validate:deploy-workflow`, production build, 65개 파일 release manifest, 10개 정적 route, 성능 예산 검증을 통과했고, PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`([35498593515](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35498593515))와 `site-quality-verify`([35498593522](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35498593522))도 성공했다. 공개 Pages는 main 병합 전까지 후보와 분리된 상태로 유지한다.
