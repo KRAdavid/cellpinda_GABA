@@ -1,5 +1,11 @@
 # 공개 Pages UI 검증 기록
 
+## 운영 pulse와 후보 동기화 — 2026-09-20 `aaa60ab`
+
+`tf:pulse:heartbeat`를 다시 실행해 `generatedAt=2026-09-20T02:03:34.280Z`를 기록했다. 공개 pulse·목표 감사·업무 큐·TF 회의 패킷을 다시 생성했을 때 같은 목표 ID와 상태 지문을 유지했고, 완료 10건·검증 1건·입력 대기 4건으로 표시됐다. `validate:public`은 연구 6건·공개 주장 12개·가바1500 제품 1개·후기 목적지 1개·750 제거·티저 `HOLD`를 확인했다.
+
+이 갱신은 내부 운영 상태를 최신화한 것이며 PR 승인·공개 Pages 게시·Cloudflare 운영 배포를 실행하지 않는다.
+
 ## 현재 후보 재검증 — 2026-09-20 `f1d2b52`
 
 후보 브랜치의 로컬 production preview를 Chrome CDP로 다시 확인했다. 390px에서 홈·제품·연구·뇌컨디션 경로의 `scrollWidth=375`, 콘솔 오류·경고 0건을 확인했고, 데스크톱 홈 화면에서는 첫 화면 CTA·제품/연구 메뉴·SmartStore 후기 진입이 잘리지 않았다. `pnpm run preflight:deploy`는 공개 산출물·6개 연구·가바1500 1개·15개 운영 작업·공개 감사 패킷을 통과했으며 Cloudflare 운영 비밀값 5개만 `WAITING`이다.
