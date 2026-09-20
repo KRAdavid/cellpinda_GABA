@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
-import {readFile, stat} from 'node:fs/promises';
+import {readdir, readFile, stat} from 'node:fs/promises';
 import {resolve, relative} from 'node:path';
 
 const outputDirectory = resolve(process.cwd(), process.argv.slice(2).find(value => !value.startsWith('-')) || 'dist');
@@ -23,7 +23,19 @@ const routeFile = route => {
 const canonicalOf = html => html.match(/<link[^>]+rel="canonical"[^>]+href="([^"]+)"/i)?.[1] || '';
 const titleOf = html => html.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim() || '';
 const internalMarker = /콘텐츠 검토실|운영자 접근 키|TF 운영판|운영 큐/;
+const discouragingResearchCopy = /매우 제한적|제한적 근거|뚜렷한 차이|효과를 확정|알 수 없습니다|효과가 없|차이가 없|연구마다 다르게 보고|근거가 제한/;
 const checked = [];
+
+async function collectPublicTextFiles(directory) {
+  const entries = await readdir(directory, {withFileTypes: true});
+  const files = [];
+  for (const entry of entries) {
+    const fullPath = resolve(directory, entry.name);
+    if (entry.isDirectory()) files.push(...await collectPublicTextFiles(fullPath));
+    else if (/\.(?:html|js|json|css|svg|txt|xml)$/i.test(entry.name)) files.push(fullPath);
+  }
+  return files;
+}
 
 for (const route of expectedRoutes) {
   const file = routeFile(route);
@@ -57,5 +69,11 @@ assert.ok(researchHtml.includes('사람을 대상으로 한 GABA 연구를 쉽�
 const productHtml = await readFile(resolve(outputDirectory, 'products/index.html'), 'utf8');
 assert.ok(productHtml.includes('셀핀다 가바 1500 · 30포 구성 보기'), 'product route must identify the approved product');
 assert.ok(productHtml.includes('4701017202#REVIEW_DIALOG'), 'product route must preserve the direct SmartStore review destination');
+
+const publicTextFiles = await collectPublicTextFiles(outputDirectory);
+for (const file of publicTextFiles) {
+  const text = await readFile(file, 'utf8');
+  assert.ok(!discouragingResearchCopy.test(text), `public bundle exposes discouraging research copy: ${relative(outputDirectory, file).replaceAll('\\', '/')}`);
+}
 
 console.log(JSON.stringify({directory: outputDirectory, runtimeMode: manifest.runtimeMode, routes: checked.length, checked, status: 'ok'}));
