@@ -140,7 +140,13 @@ export default function OperationsMvp() {
         return;
       }
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const manifest = await response.json() as Partial<PublicReleaseManifest>;
+      const raw = await response.text();
+      if (/^\s*</.test(raw)) {
+        if (active) setPublicRelease({state: 'missing', checkedAt, detail: '공개 경로에 릴리스 매니페스트가 아직 배포되지 않았습니다.'});
+        return;
+      }
+      let manifest: Partial<PublicReleaseManifest>;
+      try { manifest = JSON.parse(raw) as Partial<PublicReleaseManifest>; } catch { throw new Error('매니페스트 JSON을 읽지 못했습니다.'); }
       if (manifest.schemaVersion !== 1 || !/^[a-f0-9]{40}$/.test(manifest.candidateSha || '') || typeof manifest.generatedAt !== 'string' || typeof manifest.publicSiteUrl !== 'string' || typeof manifest.runtimeMode !== 'string') throw new Error('매니페스트 형식이 올바르지 않습니다.');
       if (active) setPublicRelease({state: 'available', checkedAt, manifest: manifest as PublicReleaseManifest});
     }).catch(error => {
