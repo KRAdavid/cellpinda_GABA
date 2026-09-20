@@ -45,6 +45,8 @@ type QueueSnapshot = {schemaVersion: number; goalId: string; status: string; che
 type GoalAuditGate = {id: string; title: string; state: string; lead: string; verifier: string; requiredInputs: string[]; decision: string; decisionMode: string; nextAction: string; decisionOptions: DecisionOption[]; quorum?: DecisionQuorum};
 type GoalAuditSnapshot = {schemaVersion: number; mode: string; goalId: string; title: string; status: string; overallStatus: string; checkedAt: string; taskCounts: Record<string, number>; milestones: {masterIndex: {status: string; claims: number; researchRecords: number}; publicProduct: {status: string; products: number; smartStoreOnly: boolean; removed750: boolean}; tfPulse: {status: string; generatedAt: string; snapshotHash: string; stateChanged: boolean; requiresHumanDecision: boolean; continuation?: ContinuationLoop}}; gates: GoalAuditGate[]; teaserGate: {status: string; taskId: string; taskState: string | null}};
 type LocalAuditSnapshot = {schemaVersion: number; mode: string; generatedAt: string | null; goalId: string | null; goalStatus: string | null; overallStatus: string | null; coreValid: boolean; localStateChanged: boolean; localSnapshotHash: string | null; previousLocalSnapshotHash: string | null; taskCounts: Record<string, number>; pulseHealth: {generatedAt: string | null; snapshotHash: string | null; status: string; ageMinutes: number | null}; localInputAudit: {enabled: boolean; materials: {found: number; missing: number; finishedProductCandidates: number; b2Candidate: boolean; excludedBulkMaterial: number; latestSourceModifiedAt: string | null} | null; orders: {counters: {filesScanned?: number; csvFiles?: number; csvParsed?: number; xlsxFiles?: number; xlsxEncrypted?: number; xlsxUnparsed?: number; unsupported?: number}; gaba1500: {rows: number; quantity: number; firstDate: string | null; lastDate: string | null} | null; gaba750: {rows: number; quantity: number; firstDate: string | null; lastDate: string | null} | null; channelAssessment: string | {smartstoreNamedFiles?: number; smartstoreNamedFilesParsed?: number; conclusion?: string | null} | null; latestSourceModifiedAt: string | null} | null; interpretation: string | null}; checks: {id: string; status: string; detail: string; blockers: string[]}[]; privacyBoundary: string};
+type PublicReleaseManifest = {schemaVersion: number; candidateSha: string; generatedAt: string; publicSiteUrl: string; runtimeMode: string};
+type PublicReleaseStatus = {state: 'checking' | 'available' | 'missing' | 'invalid' | 'error'; checkedAt: string; manifest?: PublicReleaseManifest; detail?: string};
 const publicBase = import.meta.env.BASE_URL;
 const localAuditEndpoint = import.meta.env.DEV ? apiEndpoint('/api/ops/local-audit') : null;
 
@@ -98,6 +100,7 @@ export default function OperationsMvp() {
   const [localAudit, setLocalAudit] = useState<LocalAuditSnapshot | null>(null);
   const [localAuditError, setLocalAuditError] = useState('');
   const [queueRefresh, setQueueRefresh] = useState(0);
+  const [publicRelease, setPublicRelease] = useState<PublicReleaseStatus>({state: 'checking', checkedAt: ''});
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState('');
   const [copied, setCopied] = useState(false);
@@ -122,6 +125,27 @@ export default function OperationsMvp() {
       if (active) { setQueue(snapshot); setGoalAudit(audit); setQueueError(''); setQueueLoadedAt(new Date().toISOString()); }
     }).catch(() => {
       if (active) setQueueError('공개 운영 스냅샷을 새로 읽지 못했습니다. 마지막으로 확인된 큐를 유지하고 다시 시도합니다.');
+    });
+    void refresh();
+    const timer = window.setInterval(refresh, 60_000);
+    return () => { active = false; window.clearInterval(timer); };
+  }, [queueRefresh]);
+
+  useEffect(() => {
+    let active = true;
+    const refresh = () => fetch(`${publicBase}release-manifest.json?refresh=${Date.now()}`, {cache: 'no-store'}).then(async response => {
+      const checkedAt = new Date().toISOString();
+      if (response.status === 404) {
+        if (active) setPublicRelease({state: 'missing', checkedAt, detail: '공개 Pages에서 릴리스 매니페스트를 찾지 못했습니다.'});
+        return;
+      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const manifest = await response.json() as Partial<PublicReleaseManifest>;
+      if (manifest.schemaVersion !== 1 || !/^[a-f0-9]{40}$/.test(manifest.candidateSha || '') || typeof manifest.generatedAt !== 'string' || typeof manifest.publicSiteUrl !== 'string' || typeof manifest.runtimeMode !== 'string') throw new Error('매니페스트 형식이 올바르지 않습니다.');
+      if (active) setPublicRelease({state: 'available', checkedAt, manifest: manifest as PublicReleaseManifest});
+    }).catch(error => {
+      if (!active) return;
+      setPublicRelease({state: 'error', checkedAt: new Date().toISOString(), detail: error instanceof Error ? error.message : '공개 매니페스트를 확인하지 못했습니다.'});
     });
     void refresh();
     const timer = window.setInterval(refresh, 60_000);
@@ -321,6 +345,9 @@ export default function OperationsMvp() {
     {!queue && queueError ? <p className="ops-mvp-live-error wrap" role="status">{queueError} 마지막 성공 읽기 시각은 확인할 수 없습니다.</p> : null}
     {queue ? <section className="ops-mvp-live-queue wrap" aria-labelledby="live-queue-heading">
       <div className="ops-mvp-live-queue-head"><div><p className="chapter">현재 운영 큐</p><h2 id="live-queue-heading">지금 누가 무엇을 기다리고 있나요?</h2><p className="ops-mvp-live-queue-description">저장소의 canonical 업무 그래프입니다. 아래에서 생성하는 Goal Contract 샌드박스는 이 운영 큐를 대신하지 않고 별도 실행·검증을 재현합니다.</p></div><div><span className="ops-mvp-live-queue-goal">{queue.goalId}</span><strong>{queue.status}</strong><button className="text-link" type="button" onClick={() => setQueueRefresh(value => value + 1)}>새로고침 ↻</button><a className="text-link" href={`${publicBase}data/tf-meeting-packet.json`} target="_blank" rel="noopener noreferrer">회의 패킷 JSON ↗</a><a className="text-link" href={`${publicBase}data/tf-pulse.json`} target="_blank" rel="noopener noreferrer">회의 안건 JSON ↗</a><a className="text-link" href={`${publicBase}data/goal-audit.json`} target="_blank" rel="noopener noreferrer">목표 감사 JSON ↗</a></div></div>
+      <div className={`ops-mvp-release-health ops-mvp-release-health--${publicRelease.state}`} aria-live="polite" aria-label="공개 배포 상태">
+        <div><span className="ops-mvp-eyebrow">공개본 자동 확인</span><strong>{publicRelease.state === 'available' ? '공개 릴리스 매니페스트 확인됨' : publicRelease.state === 'missing' ? '공개본 매니페스트가 없습니다' : publicRelease.state === 'checking' ? '공개본 상태를 확인하는 중입니다' : '공개본 매니페스트를 다시 확인해야 합니다'}</strong><p>{publicRelease.state === 'available' && publicRelease.manifest ? `후보 ${publicRelease.manifest.candidateSha.slice(0, 12)}… · ${formatTime(publicRelease.manifest.generatedAt)} · ${publicRelease.manifest.runtimeMode}` : publicRelease.state === 'missing' ? '공개 Pages가 이전 배포본일 수 있습니다. PR 승인·main 배포 뒤 이 상태가 바뀌는지 확인하세요.' : publicRelease.state === 'checking' ? '60초마다 공개 경로의 release-manifest.json을 다시 읽습니다.' : publicRelease.detail || '공개 경로의 릴리스 상태를 확인하세요.'}</p></div><small>{publicRelease.checkedAt ? `마지막 확인 ${formatTime(publicRelease.checkedAt)}` : '첫 확인 대기'}</small>
+      </div>
       {queueError ? <p className="ops-mvp-live-error" role="status">{queueError}{queueLoadedAt ? ` 마지막 성공 읽기 · ${formatTime(queueLoadedAt)}` : ' 마지막 성공 읽기 시각은 확인할 수 없습니다.'}</p> : null}
       <div className="ops-mvp-live-streams" aria-label="스트림별 현재 상태">{queue.workstreams.map(stream => <span key={stream.id}><strong>{stream.name}</strong><em>{stream.status}</em><small>{stream.nextAction}</small></span>)}</div>
       {queue.pulse?.meetingProtocol ? <div className="ops-mvp-live-protocol" aria-label="TF 회의 운영 규칙"><div><span className="ops-mvp-eyebrow">이번 TF 회의 운영 규칙</span><p>자동 pulse가 안건을 만들고, 아래 정족수와 기록 규칙을 충족한 판단만 다음 상태로 연결합니다.</p></div><dl><div><dt>정족수</dt><dd>{queue.pulse.meetingProtocol.quorum}</dd></div><div><dt>회의 주기</dt><dd>{queue.pulse.meetingProtocol.cadence}</dd></div><div><dt>남길 기록</dt><dd>{queue.pulse.meetingProtocol.record.join(' · ')}</dd></div>{queue.pulse.executionPolicy ? <div><dt>자동 경계</dt><dd>계속 실행 후보 · {queue.pulse.executionPolicy.autoStates.join(' · ')} · {queue.pulse.executionPolicy.autoRiskClasses.join(' · ')}<br />사람 판단 · {queue.pulse.executionPolicy.humanReviewStates.join(' · ')}<br />승인 필요 · {queue.pulse.executionPolicy.approvalRiskClasses.join(' · ')}</dd></div> : null}</dl></div> : null}
