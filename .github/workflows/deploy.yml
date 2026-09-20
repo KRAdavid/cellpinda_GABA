@@ -257,6 +257,8 @@ jobs:
         with:
           node-version: 24.19.0
           package-manager-cache: false
+      - name: Install pinned package manager
+        run: npm install --global pnpm@11.19.0
       - name: Publish release mode
         id: status
         env:
