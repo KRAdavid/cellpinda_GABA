@@ -66,7 +66,7 @@ pnpm 설치 시 esbuild 스크립트 승인 경고가 있었으나 현재 번들
 
 프로덕션 빌드를 API와 함께 미리 보려면 `pnpm run build` 다음 `pnpm run preview`를 실행한다. 미리보기 명령은 로컬 API 상태를 확인해 없으면 함께 켜므로, API 프록시가 빠진 채 실행되어 콘텐츠 요청이 실패하는 일을 막는다. 다른 포트를 사용하려면 `pnpm run preview -- --port 4174`처럼 지정한다.
 
-`pnpm exec vite` 또는 Vite를 직접 실행하는 방식은 사용하지 않는다. 이 방식은 로컬 API 프록시가 연결되지 않아 `/api/content`가 JSON 대신 앱 HTML을 반환하고 연구·제품 화면이 fallback으로 보일 수 있다. 팀 검토와 실제 데이터 연동은 반드시 `pnpm dev` 또는 `pnpm run preview`로 시작한다.
+`pnpm dev`와 `pnpm run preview`가 API·자료 watcher까지 포함한 표준 실행 방식이다. 개발 중 `pnpm exec vite`를 직접 실행해도 `/api/content`가 앱 HTML로 응답하는 경우 승인된 `public/data/content.json`으로 자동 복귀하지만, 이 방식에서는 API 기반 운영·이벤트 기능을 확인할 수 없다. 팀 검토와 실제 데이터 연동은 `pnpm dev` 또는 `pnpm run preview`로 시작한다.
 
 운영 MVP의 재개 상태는 `src/domain/ops-validation.ts`의 공통 검증을 거쳐 Node API와 Cloudflare Worker에 저장된다. 업무 상태 전환·검증 증거·승인 연결을 확인하고 이메일·전화번호·비공개 경로·토큰 같은 필드는 거부한다. 샌드박스 상태 저장은 외부 게시나 실구매 완료를 의미하지 않는다.
 

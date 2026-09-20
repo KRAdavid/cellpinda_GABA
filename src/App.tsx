@@ -78,19 +78,30 @@ async function fetchContent(url:string, signal:AbortSignal, timeoutMs=8000):Prom
  }
 }
 async function loadContent(signal:AbortSignal):Promise<Content>{
+ const loadStaticContent=async():Promise<Content>=>{
+  const fallback=await fetchContent(`${import.meta.env.BASE_URL}data/content.json`,signal);
+  if(!fallback.ok)throw Error('Content unavailable');
+  const contentType=fallback.headers.get('content-type')?.toLowerCase()||'';
+  if(!contentType.includes('json'))throw Error('Content response was not JSON');
+  return fallback.json();
+ };
  const endpoint=apiEndpoint('/api/content');
  if(endpoint){
   try{
    const api=await fetchContent(endpoint,signal);
-   if(api.ok)return api.json();
+   const contentType=api.headers.get('content-type')?.toLowerCase()||'';
+   if(api.ok&&contentType.includes('json'))return api.json();
+   // A directly started Vite server has no API proxy and serves the app shell
+   // for /api/content. In development only, use the same reviewed public
+   // export that static hosting serves. Production Worker failures remain
+   // visible instead of silently masking an unavailable runtime API.
+   if(import.meta.env.DEV&&api.ok&&contentType.includes('text/html'))return loadStaticContent();
   }catch(error){
    if((error as Error).name==='AbortError')throw error;
   }
   throw Error('Content API unavailable');
  }
- const fallback=await fetchContent(`${import.meta.env.BASE_URL}data/content.json`,signal);
- if(!fallback.ok)throw Error('Content unavailable');
- return fallback.json();
+ return loadStaticContent();
 }
 function ContentFallback({loading,onRetry}:{loading:boolean;onRetry:()=>void}){
  return <section className="section wrap content-status" aria-live="polite"><p className="chapter">셀핀다 발효가바</p><h2>{loading?'정보를 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h2><p>{loading?'제품과 연구 정보를 불러오는 중입니다.':'1분 체크는 바로 할 수 있어요. 아래에서 GABA와 제품 정보를 먼저 살펴보세요.'}</p>{!loading?<div className="actions"><a className="button outline" href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noopener noreferrer">스마트스토어 제품 보기 ↗</a><button type="button" className="button outline" onClick={onRetry}>다시 불러오기</button></div>:null}{!loading?<div className="content-status-grid"><article id="story"><p className="chapter">GABA는?</p><h3>뇌세포 사이에서 신호를 주고받는 데 쓰이는 물질</h3><p>GABA는 뇌세포 사이에서 신호를 주고받는 과정에 쓰이는 물질 중 하나예요.</p></article><article id="fermentation"><p className="chapter">발효가바는?</p><h3>발효가바를 쉽게 알아보기</h3><p>발효가바를 만드는 방법과 확인 자료를 쉽게 소개해요.</p></article><article id="products"><p className="chapter">제품 구성</p><h3>셀핀다 가바 1500 · 30포 구성</h3><p>낱포 표시와 먹는 방법은 제품 포장에서, 가격과 재고는 스마트스토어에서 확인해 보세요.</p><a className="text-link" href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noopener noreferrer">스마트스토어에서 제품 보기 ↗</a></article><article id="reviews"><p className="chapter">구매자 후기</p><h3>가바 1500 구매자 후기</h3><p>스마트스토어에서 구매한 사람들의 후기를 읽어보세요.</p></article><article id="research"><p className="chapter">연구 이야기</p><h3>사람 연구에서 무엇을 살펴봤나요?</h3><p>GABA와 잠·스트레스·운동에 관한 연구를 쉬운 말로 정리했어요.</p><ul><li><strong>스트레스가 쌓일 때</strong> 머리를 많이 쓴 뒤 뇌파와 기분</li><li><strong>잠</strong> 잠드는 시간과 수면 기록</li><li><strong>쉰 날·운동한 날</strong> 쉬었을 때와 운동했을 때 몸에서 살펴본 변화</li></ul></article></div>:null}</section>;
