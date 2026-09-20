@@ -12,7 +12,7 @@
 
 ## 공개 번들 성능 예산 — 2026-09-20 현재 후보
 
-초기 JavaScript 299,965B, 초기 CSS 86,837B, 전체 assets 1,345,309B, 최대 단일 파일 299,965B를 측정했다. 초기 JS 380KB·초기 CSS 110KB·전체 assets 1.6MB·단일 파일 380KB 예산을 모두 통과하며, 동일 검사는 정적 Pages용 `dist-pages`에도 배포 워크플로에서 실행된다. 성능 검증기는 `/assets/...` 경로를 실제 HTML 연결값으로 해석해 초기 번들을 0B로 잘못 보고하지 않는다.
+초기 JavaScript 299,965B, 초기 CSS 86,837B, 전체 assets 1,345,309B, 최대 단일 파일 299,965B를 측정했다. 초기 JS 380KB·초기 CSS 110KB·전체 assets 1.6MB·단일 파일 380KB 예산을 모두 통과하며, 동일 검사는 정적 Pages용 `dist-pages`에도 배포 워크플로에서 실행된다. Pages base path가 붙은 `/cellpinda_GABA/assets/...` URL도 `/assets/` 기준으로 매칭해 초기 번들을 0B로 잘못 보고하지 않는다.
 
 ## Worker 공개 origin·회원 origin 분리 검증 보강 — 2026-09-20 코드 후보 `487c9f5`
 

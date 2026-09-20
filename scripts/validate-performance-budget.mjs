@@ -29,7 +29,12 @@ const html = await readFile(rootHtmlPath, 'utf8');
 const assetFiles = await filesIn(assetsDirectory);
 const assetByPath = new Map(assetFiles.map(file => [`/${relative(outputDirectory, file).replaceAll('\\', '/')}`, file]));
 const initialUrls = [...html.matchAll(/(?:src|href)="([^"]*assets\/[^"?#]+)"/g)].map(match => match[1]);
-const initialFiles = [...new Set(initialUrls.map(url => assetByPath.get(new URL(url, 'https://release.invalid').pathname)).filter(Boolean))];
+const assetPathFromUrl = url => {
+  const marker = '/assets/';
+  const markerIndex = url.indexOf(marker);
+  return markerIndex >= 0 ? url.slice(markerIndex) : null;
+};
+const initialFiles = [...new Set(initialUrls.map(url => assetByPath.get(assetPathFromUrl(url))).filter(Boolean))];
 const bytes = async file => (await stat(file)).size;
 const sizeByExtension = async extension => (await Promise.all(assetFiles.filter(file => extname(file) === extension).map(bytes))).reduce((sum, value) => sum + value, 0);
 const initialJs = (await Promise.all(initialFiles.filter(file => extname(file) === '.js').map(bytes))).reduce((sum, value) => sum + value, 0);
