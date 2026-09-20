@@ -75,7 +75,7 @@ pnpm run preflight:deploy
 pnpm run validate:live-public
 ```
 
-`validate:live-public`는 현재 GitHub Pages 공개 주소를 대상으로 제품·후기 상세 링크, 750 제거, 연구·공유·티저와 내부 운영 경로 비노출을 한 번에 확인한다. `PUBLIC_SITE_URL`과 URL 인자를 모두 생략하면 저장된 기본 공개 주소(`https://kradavid.github.io/cellpinda_GABA`)를 사용한다. 다른 공개 주소나 임시 배포를 점검할 때는 `pnpm run validate:live -- https://example.com`처럼 URL을 넘긴다.
+`validate:live-public`는 현재 GitHub Pages 공개 주소를 대상으로 제품·후기 상세 링크, 750 제거, 연구·공유·티저와 내부 운영 경로 비노출을 한 번에 확인한다. `PUBLIC_SITE_URL`과 URL 인자를 모두 생략하면 저장된 기본 공개 주소(`https://kradavid.github.io/cellpinda_GABA`)를 사용한다. 다른 공개 주소나 임시 배포를 점검할 때는 `pnpm run validate:live-public -- https://example.com`처럼 URL을 넘긴다.
 
 `TF decision pulse` workflow는 6시간마다 canonical 업무 그래프의 실행·검증·입력 대기 안건을 읽어 run summary와 JSON artifact로 남긴다. 동시에 원문 경로·비밀값을 제외한 안전한 heartbeat를 `data/tf-pulse-heartbeat.json`에 만들고, 보호된 `main`에 직접 쓰지 않고 고정된 자동화 브랜치의 PR로 갱신한다. 기존 heartbeat PR이 있으면 재사용하고 없으면 새로 만들며, PR 생성으로 자동 검사가 생략되거나 별도 workflow 승인이 필요한 GitHub 토큰 경계를 고려해 heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 검증 증거로 실행한다. 이 축약 pulse는 보호된 필수 상태를 직접 녹색 처리하지 않으며, 완전한 `pull_request` 검사가 실행되지 않으면 브랜치 보호가 계속 대기하도록 fail-closed로 동작한다. 필수 상태와 사람의 merge를 통과한 뒤 `main` push가 일반 배포를 실행한다. 따라서 보호 규칙을 우회하지 않으면서도 TF 회의 안건 생성은 멈추지 않고 계속된다.
 
