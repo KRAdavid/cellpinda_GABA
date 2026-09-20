@@ -22,6 +22,7 @@
     "validate:performance": "node scripts/validate-performance-budget.mjs",
     "generate:release-manifest": "node scripts/generate-release-manifest.mjs",
     "validate:release-manifest": "node scripts/validate-release-manifest.mjs",
+    "validate:release-status": "node scripts/validate-release-status.mjs",
     "validate:ops": "node scripts/validate-ops-mvp.mjs",
     "validate:tf-pulse": "node scripts/validate-tf-pulse.mjs",
     "validate:tf-pulse-workflow": "node scripts/validate-tf-pulse-workflow.mjs",

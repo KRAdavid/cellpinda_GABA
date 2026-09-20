@@ -7,12 +7,15 @@ const outputDirectory = resolve(process.cwd(), process.argv.slice(2).find(value 
 const manifestPath = resolve(outputDirectory, 'release-manifest.json');
 assert.ok(existsSync(manifestPath), 'static bundle is missing release-manifest.json');
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+const reviewedTeaser = JSON.parse(await readFile(resolve(process.cwd(), 'data/teaser-manifest.json'), 'utf8'));
 const expectedRoutes = ['/', '/products/', '/research/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
 assert.deepEqual(manifest.routePaths, expectedRoutes, 'static bundle route manifest is out of sync');
 assert.ok(['static', 'worker'].includes(manifest.runtimeMode), 'deployment bundle runtime mode is invalid');
 assert.ok(['HOLD', 'PREVIEW'].includes(manifest.teaser?.status), 'static bundle must preserve a supported teaser preview state');
 if (manifest.teaser?.status === 'HOLD') assert.equal(manifest.teaser?.url, null, 'held teaser must not expose a public URL');
 if (manifest.teaser?.status === 'PREVIEW') assert.match(manifest.teaser?.url || '', /^https:\/\//, 'preview teaser must expose an HTTPS preview URL');
+assert.equal(manifest.teaser?.status, reviewedTeaser.status, 'static bundle teaser status must match the reviewed source');
+assert.equal(manifest.teaser?.url ?? null, reviewedTeaser.status === 'PREVIEW' ? reviewedTeaser.publicPreviewUrl : null, 'static bundle teaser URL must match the reviewed source exactly');
 assert.equal(manifest.counts.products, 1, 'static bundle must contain one public product');
 assert.equal(manifest.counts.research, 6, 'static bundle must contain six public research records');
 assert.equal(manifest.counts.reviews, 1, 'static bundle must contain one approved review destination');

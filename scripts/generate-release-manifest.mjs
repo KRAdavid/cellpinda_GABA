@@ -35,6 +35,7 @@ await collectFiles(outputDirectory);
 const content = JSON.parse(await readFile(resolve(outputDirectory, 'data/content.json'), 'utf8'));
 const master = JSON.parse(await readFile(resolve(outputDirectory, 'data/gaba-master-index.json'), 'utf8'));
 const teaser = JSON.parse(await readFile(resolve(outputDirectory, 'data/teaser-preview.json'), 'utf8'));
+const reviewedTeaser = JSON.parse(await readFile(resolve(process.cwd(), 'data/teaser-manifest.json'), 'utf8'));
 const products = Array.isArray(content.products) ? content.products : [];
 const reviews = Array.isArray(content.reviews) ? content.reviews : [];
 const research = Array.isArray(master.records) ? master.records : [];
@@ -43,13 +44,18 @@ const smartStoreReview = `${smartStoreProduct}#REVIEW_DIALOG`;
 const allText = Object.keys(fileHashes).filter(path => /\.(?:html|css|js|json|txt|xml|svg|webmanifest)$/i.test(path));
 let textBundle = '';
 for (const path of allText) textBundle += await readFile(resolve(outputDirectory, path), 'utf8');
+const teaserMatchesReviewedSource = reviewedTeaser.status === teaser.status && (
+  reviewedTeaser.status === 'PREVIEW'
+    ? teaser.url === reviewedTeaser.publicPreviewUrl
+    : teaser.url === null
+);
 
 const checks = {
   routeSet: routePaths.length === 10,
   smartStoreOnly: products.length === 1 && products[0]?.officialUrl === smartStoreProduct && !products.some(product => /750/.test(JSON.stringify(product))),
   reviewDestination: reviews.length === 1 && reviews[0]?.sourceUrl === smartStoreReview,
   researchIndex: research.length === 6 && research.every(record => typeof record.evidenceHash === 'string' && /^[a-f0-9]{64}$/.test(record.evidenceHash)),
-  teaserBoundary: (teaser.status === 'HOLD' && teaser.url === null) || (teaser.status === 'PREVIEW' && /^https:\/\//.test(teaser.url || '')),
+  teaserBoundary: teaserMatchesReviewedSource && ((teaser.status === 'HOLD' && teaser.url === null) || (teaser.status === 'PREVIEW' && /^https:\/\//.test(teaser.url || ''))),
   challengeCopy: textBundle.includes('뇌컨디션 확인 챌린지') && textBundle.includes('5분 쉬고 다시 해보기') && textBundle.includes('싱잉볼 소리'),
   productBoundary: textBundle.includes('셀핀다 완제품 연구와는 다른 자료입니다.') && textBundle.includes('연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요.'),
 };

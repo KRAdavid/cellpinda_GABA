@@ -290,7 +290,7 @@ jobs:
           };
           fs.writeFileSync('release-status.json', `${JSON.stringify(value, null, 2)}\n`);
           NODE
-          node scripts/validate-release-status.mjs release-status.json
+          pnpm run validate:release-status -- release-status.json
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
 
           {

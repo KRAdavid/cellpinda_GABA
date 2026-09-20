@@ -1,5 +1,13 @@
 # 공개 배포 전 TF 재감리 — 2026-09-19
 
+## 최신 릴리스 스냅샷 — 2026-09-20 · 후보 `3a4b0f8`
+
+현재 공개 전 기준은 후보 커밋 `3a4b0f8845fce418249bb32bcc300d4d12f3115d`와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. TF heartbeat를 재생성한 결과 공개 콘텐츠 지문은 `69994cdfed389afa93031b20e0ac06f9ff2a3089424de125ebfb1777c3a7a1aa`로 이전과 같고, 내부 안전 실행은 `MET`, 상태 변화는 없다.
+
+후보는 10개 공개 경로·65개 산출물·승인 연구 6건·제품 1개·스마트스토어 후기 목적지 1개·티저 `PREVIEW`를 유지한다. 최신 `release-verify`([35503824400](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35503824400))와 `site-quality-verify`([35503824263](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35503824263))는 성공했다. 로컬 검증 명령과 CI 경로를 일치시키고, 검토된 티저 URL과 릴리스 산출물의 정확한 일치를 게시 전에 검사하도록 보강했다.
+
+PR은 여전히 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`이며, 공개 Pages의 `/release-manifest.json`은 아직 HTTP 404다. 따라서 후보 품질 검증 완료와 공개 배포 완료를 구분한다. B2 제품 표시, B3 후기 권한, B4 티저 권리·자막·CTA, C2 Cloudflare 운영 설정, E1 실주문 대사는 사람 입력 게이트로 유지한다.
+
 ## 2026-09-20 readiness 작업 실패 은폐 방지 — 후보 작업 중
 
 CI/CD 분기 감리에서 `worker-readiness` 작업 자체의 실패·취소가 출력값 누락으로 바뀌어 정적 smoke와 `STATIC_ONLY` 성공으로 보일 수 있는 결함을 재현 가능한 조건식으로 확인했다. Cloudflare 시크릿이 없는 정상 `HOLD`와 작업 런타임 오류를 같은 결과로 기록하면 배포 감사가 불완전해진다.
