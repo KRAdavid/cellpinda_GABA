@@ -301,3 +301,10 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - 로컬 production preview를 Chromium CDP로 390px·1440px에서 재확인했다. 홈·연구·뇌컨디션 경로의 가로 넘침은 없었고(`scrollWidth` 375/1425), 콘솔 오류·경고 없이 각 페이지 제목과 챌린지 명칭을 확인했다. `pnpm test` 107개와 GitHub Actions `release-verify`·`site-quality-verify`도 성공했다.
 - 공개 Pages는 후보와 아직 동기화되지 않았다. `https://kradavid.github.io/cellpinda_GABA/release-manifest.json`이 HTTP 404이고 `validate:live-public`이 12회 재시도 후 실패했으므로, 현재 공개 주소는 이전 main 배포본으로 유지한다. Code Owner 승인과 main 병합 뒤 Pages 게시·live smoke·후보 지문 대조를 다시 수행해야 공개 배포 완료로 판정한다.
 - 같은 snapshot에서 안전한 내부 TF 실행을 재생성해 `goal-contract`, `research-copy`, `teaser-boundary`, `sandbox-mvp`, `public-export`, `tf-pulse` 6개 검사를 모두 `MET`으로 독립 검증했다(`validatedAt=2026-09-20T05:55:47.850Z`). 외부 게시·구매·승인 상태는 변경하지 않았고, B2는 `VERIFYING`, B3·B4·C2·E1은 계속 사람 입력 대기로 유지했다.
+
+### 2026-09-20 Pages 자산 경로·후보 릴리스 재검증
+
+- 후보 HEAD `d7e254edee7d4726dc3a57fa367eb888d78ef32b`에 모바일 연구·후기·공유 컨트롤의 최소 터치 영역 44px 보정을 포함하고, `scripts/validate-static-bundle.mjs`에 Pages 공개 경로와 루트 JS·CSS 자산 경로가 일치하는지 확인하는 회귀 검사를 추가했다. 이 검사는 `/cellpinda_GABA/` 하위에 배포할 때 `/assets/...` 루트 경로가 다시 생기는 문제를 배포 전에 중단한다.
+- `/cellpinda_GABA/` 기준 Pages 산출물을 별도로 빌드해 10개 route·65개 파일·연구 6건·제품 1개·후기 목적지 1개·티저 `HOLD`를 확인했다. `check-public-artifacts`, `validate:release-manifest`, `validate:static-bundle`, 성능 예산 검사가 모두 통과했다.
+- `pnpm run build`와 GitHub Actions [35494406407](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35494406407), [35494406410](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35494406410)의 `release-verify`, `site-quality-verify`가 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전까지 `OPEN · BLOCKED · REVIEW_REQUIRED`로 유지된다.
+- 후보와 공개 Pages의 분리를 다시 확인했다. 공개 `release-manifest.json`은 아직 HTTP 404로 후보와 동기화되지 않았으며, Code Owner 승인·main 병합·Pages 게시·live smoke가 끝나기 전에는 공개 배포 완료로 판정하지 않는다. Cloudflare 비밀값, 최종 제품 표시·후기 재게시 권한·티저 권리와 실제 주문 대사 게이트도 계속 사람 입력 대기다.
