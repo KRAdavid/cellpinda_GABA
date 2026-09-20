@@ -1,5 +1,11 @@
 # 전체 목표 완료 간극 점검
 
+## 2026-09-20 운영판 공개본 상태 감시 보강 — 후보 `68bf1ec`
+
+로컬 운영판의 현재 운영 큐에 공개본 상태 카드를 추가했다. 첫 진입과 60초 주기로 `release-manifest.json`을 읽어 후보 SHA·생성 시각·런타임을 표시하고, 공개 Pages가 아직 이전 배포본이거나 매니페스트가 없을 때 소비자 화면에 노출하지 않고 운영자에게만 확인 대상을 알린다. 404와 개발 서버의 HTML fallback은 기술 오류 대신 “공개본 매니페스트가 없습니다”로 안내한다. 1280px·390px 화면에서 카드 표시, 가로 넘침 없음, 콘솔 오류·경고 없음을 확인했다.
+
+후보 `68bf1ec101130c48de8b0c5dd41b4e05bb9edf33`의 로컬 매니페스트 지문 일치, 전체 107개 회귀 테스트, 타입검사·UI 계약·production build, `release-verify`·`site-quality-verify` 성공을 확인했다. PR 이벤트에서는 Pages·Worker 게시와 라이브 smoke가 의도적으로 건너뛰며, 실제 공개본은 사람 리뷰와 main 반영 뒤 다시 `/release-manifest.json` 및 라이브 화면으로 확인한다.
+
 ## 최신 후보 지문·감리 결과 동기화 — 2026-09-20 현재 후보
 
 후보 HEAD와 `dist/release-manifest.json`의 `candidateSha`가 일치하는지 확인했다. 로컬 회귀 107개, 타입검사, 공개 export·UI·연구 카피·티저·정적 bundle 검증과 PR 필수 검사 2개는 모두 성공했다. PR은 Code Owner 승인 전 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 공개 Pages에는 아직 후보가 반영되지 않았다.
