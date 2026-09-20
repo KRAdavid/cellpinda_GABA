@@ -26,7 +26,11 @@ const run = (script, scriptArgs = []) => {
 const parseJson = value => {
   try { return JSON.parse(value); } catch { return null; }
 };
-const scrub = value => String(value || '').replaceAll(root, '<workspace>').slice(-2400);
+const scrub = value => String(value || '')
+  .replaceAll(root, '<workspace>')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .slice(-2400);
 
 const syncRun = run('scripts/sync-public-data.mjs');
 const auditRun = run('scripts/audit-goal.mjs', ['--json']);
