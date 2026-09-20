@@ -1,5 +1,11 @@
 # 공개 Pages UI 검증 기록
 
+## 최신 후보 브라우저·공개 동기화 기준 — SHA는 release manifest·PR HEAD로 확인
+
+현재 후보의 로컬 production preview에서 홈·제품·연구·focus·공유 경로를 모바일·데스크톱으로 확인했고, 정적 bundle의 내부 운영 청크·운영 마커 노출이 없음을 검사했다. 10개 route, 연구 6건, 제품 1개, 후기 목적지 1개, 성능 예산과 PR 필수 검사가 통과했다.
+
+실제 Pages는 아직 이전 main 공개본이다. 루트와 `content.json`은 HTTP 200이지만 `/release-manifest.json`은 HTTP 404이며, Code Owner 승인·main 병합·Pages 게시·라이브 smoke 전에는 공개 배포 완료로 판정하지 않는다.
+
 ## 2026-09-21 운영 스냅샷 비공개 경계 재감리 — 후보 작업 중
 
 운영 큐·TF pulse·목표 감사·회의 패킷을 `public/data`에서 생성하지 않고 로컬 루프백 API로만 읽도록 바꿨다. 390px Chromium에서 `?view=ops`가 `private_local_operations_snapshot`을 정상 읽고 가로 넘침 0·콘솔/페이지 오류 0을 확인했다. 정적 Pages의 네 내부 JSON 경로는 404를 기대하도록 라이브 검증을 갱신했다.

@@ -1,4 +1,10 @@
-# 중간 구현 상태 — 2026-09-11
+# 중간 구현 상태 — 2026-09-21
+
+## 최신 후보 기준 — SHA는 release manifest·PR HEAD로 확인
+
+현재 후보는 정적 공개 10개 경로, 연구 6건, 제품 1개, 후기 목적지 1개를 유지한다. `pnpm run build`에서 Goal Contract·연구 카피·UI 계약·공개 export·정적 bundle·성능 예산·배포 workflow 검사가 모두 통과했고, `dist/release-manifest.json`의 `candidateSha`는 PR HEAD와 일치한다. 공개 JavaScript에는 로컬 전용 Admin·OperationsMvp 청크와 내부 운영 마커·admin/ops API 경로가 없다.
+
+PR 필수 검사 `release-verify`·`site-quality-verify`는 성공했지만 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`다. 공개 Pages 루트와 `content.json`은 응답하지만 `/release-manifest.json`은 아직 404이므로, 현재 기록은 후보 검증이며 공개 배포 완료가 아니다. B2 제품 표시, B3 후기 권한, B4 티저 공개 승인, C2 Worker·D1 운영, E1 실구매 대사는 사람 입력 게이트로 유지한다.
 
 ## 2026-09-21 운영 스냅샷 로컬 API 전환
 
