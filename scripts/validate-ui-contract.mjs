@@ -102,8 +102,9 @@ requireMatch(analyticsConsentStyles, /\.footer \.analytics-consent\{[^}]*flex:0 
 requireMatch(app, /const isLocalHost = \['localhost', '127\.0\.0\.1', '\[::1\]'\]\.includes\(location\.hostname\)/, 'internal operations route must be local-host gated');
 requireMatch(app, /const operationsView = import\.meta\.env\.DEV && isLocalHost && \(requestedView === 'ops' \|\| currentPath === '\/ops'\)/, 'internal operations route must render only in local development');
 requireMatch(app, /const adminView = import\.meta\.env\.DEV && isLocalHost && \(requestedView === 'admin' \|\| currentPath === '\/admin'\)/, 'admin review route must render only in local development');
-requireMatch(app, /const OperationsMvp=lazy\(\(\)=>import\('\.\/components\/OperationsMvp'\)\)/, 'internal operations UI must be lazy-loaded outside the consumer entry bundle');
-requireMatch(app, /if\(operationsView\)return <Suspense fallback=\{<p className="loading">운영판을 여는 중입니다\.<\/p>\}><OperationsMvp\/><\/Suspense>/, 'internal operations route must provide a visible loading state while its isolated bundle loads');
+requireMatch(app, /const Admin = import\.meta\.env\.DEV \? lazy\(\(\s*\)\s*=>\s*import\('\.\/components\/Admin'\)\) : null/, 'admin review UI must be development-only and isolated from the production bundle');
+requireMatch(app, /const OperationsMvp=import\.meta\.env\.DEV \? lazy\(\(\)=>import\('\.\/components\/OperationsMvp'\)\) : null/, 'internal operations UI must be development-only and isolated from the production bundle');
+requireMatch(app, /if\(operationsView && OperationsMvp\)return <Suspense fallback=\{<p className="loading">운영판을 여는 중입니다\.<\/p>\}><OperationsMvp\/><\/Suspense>/, 'internal operations route must provide a visible loading state while its isolated bundle loads');
 requireMatch(operations, /목표 계약 기준일 \{goalAudit\.checkedAt\}/, 'operations audit must distinguish the Goal Contract date from the latest TF pulse time');
 requireMatch(teaser, /teaser_embed_loaded/, 'teaser analytics must distinguish embed load from video playback');
 if (teaser.includes("onEvent?.('teaser_play'")) fail('teaser iframe load must not count as video playback');

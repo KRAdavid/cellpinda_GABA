@@ -1,5 +1,10 @@
 # 전체 목표 완료 간극 점검
 
+## 2026-09-21 공개 번들 내부 운영 청크 제거 — 후보 작업 중
+
+접근성·SEO 재감리에서 소비자 화면에는 실행되지 않지만 정적 산출물에 `Admin`·`OperationsMvp` lazy chunk가 포함되어 내부 운영 문구와 API 경로를 내려받을 수 있는 P2 노출을 확인했다. 두 화면은 로컬 개발 환경에서만 필요한 검토 표면이므로 production import를 제거하도록 보정했고, 정적 번들 검증기가 모든 JavaScript 자산에서 운영 마커와 `/api/admin`·`/api/ops` 경로를 검사하도록 강화했다. 재빌드 후 Admin·OperationsMvp 청크가 사라지고 10개 공개 경로·60개 manifest 파일·성능 예산이 통과했다.
+
+## 2026-09-20 현재 후보 재감리 — `8f7244e`
 ## 2026-09-20 현재 후보 재감리 — `8f7244e`
 
 현재 후보를 다시 빌드하고 전체 테스트 109개, 타입검사, 공개 export, 정적 번들, 성능 예산, 배포 workflow 계약, 운영 문서·TF pulse 검증을 모두 통과시켰다. production bundle은 10개 공개 경로·연구 6건·제품 1개·후기 목적지 1개·티저 `PREVIEW/HOLD`이며, release manifest의 candidate SHA는 현재 후보 `8f7244e7f98c5e3e3b3c7e9c07cba1609ccd085f`와 일치한다.

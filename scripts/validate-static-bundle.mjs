@@ -85,9 +85,11 @@ assert.ok(productHtml.includes('셀핀다 가바 1500 · 30포 구성 보기'), 
 assert.ok(productHtml.includes('4701017202#REVIEW_DIALOG'), 'product route must preserve the direct SmartStore review destination');
 
 const publicTextFiles = await collectPublicTextFiles(outputDirectory);
+const internalBundleMarker = /콘텐츠 검토실|운영자 접근 키|TF 운영판|운영 큐|\/api\/(?:admin|ops)\b/;
 for (const file of publicTextFiles) {
   const text = await readFile(file, 'utf8');
   assert.ok(!discouragingResearchCopy.test(text), `public bundle exposes discouraging research copy: ${relative(outputDirectory, file).replaceAll('\\', '/')}`);
+  if (/\.js$/i.test(file)) assert.ok(!internalBundleMarker.test(text), `public bundle exposes an internal-only JavaScript chunk: ${relative(outputDirectory, file).replaceAll('\\', '/')}`);
 }
 
 console.log(JSON.stringify({directory: outputDirectory, runtimeMode: manifest.runtimeMode, routes: checked.length, checked, status: 'ok'}));

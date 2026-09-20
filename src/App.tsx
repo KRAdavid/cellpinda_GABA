@@ -7,9 +7,12 @@ import {apiEndpoint} from './api-origin';
 import {resultTypes, rhythmIdFromUrl} from './domain/rhythm';
 import {analyticsConsentGranted} from './domain/analytics-consent';
 import {REVIEW_DESTINATION_URL} from './domain/reviews';
-const Admin = lazy(() => import('./components/Admin'));
+// Admin and TF operations are local-only review surfaces. Keep their route
+// chunks out of production/static bundles so a public visitor cannot download
+// internal labels or API paths even though the server still protects them.
+const Admin = import.meta.env.DEV ? lazy(() => import('./components/Admin')) : null;
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
-const OperationsMvp=lazy(()=>import('./components/OperationsMvp'));
+const OperationsMvp=import.meta.env.DEV ? lazy(()=>import('./components/OperationsMvp')) : null;
 const ResearchLibrary=lazy(()=>import('./components/ResearchLibrary'));
 // Keep the first route payload focused on the hero and one-minute check. The
 // long-form story, evidence, commerce, review and challenge sections load as
@@ -280,8 +283,8 @@ export default function App(){
   else if(content.products.some(product=>url.hash===`#product-${product.id}`)){document.getElementById(url.hash.slice(1))?.scrollIntoView({block:'start',behavior:'instant'});}
  },[content,currentPath]);
  if(accountView)return <Suspense fallback={<p className="loading">내 기록을 여는 중입니다.</p>}><MemberRecords/></Suspense>;
- if(adminView)return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
- if(operationsView)return <Suspense fallback={<p className="loading">운영판을 여는 중입니다.</p>}><OperationsMvp/></Suspense>;
+ if(adminView && Admin)return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
+ if(operationsView && OperationsMvp)return <Suspense fallback={<p className="loading">운영판을 여는 중입니다.</p>}><OperationsMvp/></Suspense>;
  if(researchView)return <><a className="skip" href="#main">본문으로 이동</a><header className="header research-route-header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav aria-label="연구 메뉴"><a href={siteRoot}>메인으로</a></nav></header><main id="main" className="research-route-main">{content?<><section className="research-route-intro wrap"><p className="chapter">사람을 대상으로 한 GABA 연구</p><h1>사람 연구 결과를 한눈에 보기</h1><p>잠·스트레스·머리를 많이 쓴 뒤 관찰한 내용을 그림과 쉬운 말로 정리했어요. 카드에서 결과와 연구 조건을 함께 확인해 보세요.</p></section><Suspense fallback={<ExperienceLoading research/>}><ResearchLibrary claims={content.claims} sectionTitle="주제별로 한눈에 보기" onOpen={()=>track('evidence_opened',{path:'/research'})}/></Suspense><section className="research-route-product wrap" aria-labelledby="research-route-product-heading"><div><p className="chapter">다음으로</p><h2 id="research-route-product-heading">가바 1500 한 상자 구성을 확인하세요.</h2><p>연구에서 본 일반 GABA 자료와 셀핀다 제품 정보는 따로 확인할 수 있어요.</p></div><a className="button" href={`${siteRoot}?view=products#products`} onClick={()=>track('product_compare_view',{path:'/research'})}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true"/></a></section></>:<section className="section wrap content-status"><p className="chapter">사람 대상 GABA 연구</p><h1>{loading?'연구 내용을 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h1><p>{loading?'사람 연구를 쉽게 정리한 내용을 불러오는 중입니다.':'연구 자료를 불러오지 못했습니다. 다시 시도해 주세요.'}</p>{!loading?<button type="button" className="button outline" onClick={()=>setRetryKey(value=>value+1)}>다시 불러오기</button>:null}</section>}</main><footer className="wrap footer research-route-footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>사람 대상 GABA 연구 안내</p><a href={siteRoot}>메인으로</a></footer></>;
  const linkContext=referralId?<aside className="link-context" aria-live="polite">공유된 리듬 링크로 방문했어요. 내 하루도 1분이면 확인할 수 있어요.</aside>:campaignId?<aside className="link-context" aria-live="polite">캠페인 링크로 방문했어요. 원하는 흐름부터 살펴보세요.</aside>:null;
  return <><a className="skip" href="#main">본문으로 이동</a><header className="header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav id="primary-navigation" ref={menuNavRef} aria-label="주 메뉴" className={menu?'open':''} onClick={()=>closeMenu()} onKeyDown={event=>{if(event.key==='Escape')closeMenu(true)}}><a href="#rhythm">잠과 휴식 체크</a><a href="#story">GABA는?</a><a href={`${siteRoot}research/`}>GABA 연구 읽기</a><a href="#fermentation">발효가바는?</a><a href="#products">제품 구성</a>{content?.reviews?.length ? <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 후기 읽기 · 새 창" onClick={()=>track('review_open',{productId:'gaba1500',path:'/header'})}>가바 1500 스마트스토어 후기 읽기 ↗</a> : null}</nav><a href="#rhythm" className="button small" onClick={()=>track('hero_check_start',{path:'/header'})}>1분 체크 <ArrowRight size={18} aria-hidden="true"/></a><button type="button" ref={menuToggleRef} className="menu-toggle" aria-label={menu?'메뉴 닫기':'메뉴 열기'} aria-expanded={menu} aria-controls="primary-navigation" onClick={()=>setMenu(!menu)}>{menu?<X aria-hidden="true"/>:<Menu aria-hidden="true"/>}</button></header>{linkContext}
