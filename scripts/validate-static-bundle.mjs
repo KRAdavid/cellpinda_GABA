@@ -86,10 +86,15 @@ assert.ok(productHtml.includes('4701017202#REVIEW_DIALOG'), 'product route must 
 
 const publicTextFiles = await collectPublicTextFiles(outputDirectory);
 const internalBundleMarker = /콘텐츠 검토실|운영자 접근 키|TF 운영판|운영 큐|\/api\/(?:admin|ops)\b/;
+const internalChunkName = /(?:^|\/)(?:Admin|OperationsMvp)-[^/]+\.js$/;
 for (const file of publicTextFiles) {
   const text = await readFile(file, 'utf8');
   assert.ok(!discouragingResearchCopy.test(text), `public bundle exposes discouraging research copy: ${relative(outputDirectory, file).replaceAll('\\', '/')}`);
-  if (/\.js$/i.test(file)) assert.ok(!internalBundleMarker.test(text), `public bundle exposes an internal-only JavaScript chunk: ${relative(outputDirectory, file).replaceAll('\\', '/')}`);
+  if (/\.js$/i.test(file)) {
+    const relativeFile = relative(outputDirectory, file).replaceAll('\\', '/');
+    assert.ok(!internalChunkName.test(relativeFile), `public bundle emits an internal-only JavaScript chunk: ${relativeFile}`);
+    assert.ok(!internalBundleMarker.test(text), `public bundle exposes an internal-only JavaScript chunk: ${relativeFile}`);
+  }
 }
 
 console.log(JSON.stringify({directory: outputDirectory, runtimeMode: manifest.runtimeMode, routes: checked.length, checked, status: 'ok'}));
