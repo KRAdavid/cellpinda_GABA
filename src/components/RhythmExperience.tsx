@@ -202,6 +202,51 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const getShareReferralId=()=>{if(!shareReferralRef.current){shareReferralRef.current=crypto.randomUUID().replaceAll('-','').slice(0,16)}return shareReferralRef.current};
   useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
   useEffect(() => {
+    if (!sharedType || result) return;
+    let frame = 0;
+    let alignmentInterval = 0;
+    let stopped = false;
+    const stopAlignment = () => {
+      stopped = true;
+      if (alignmentInterval) window.clearInterval(alignmentInterval);
+      alignmentInterval = 0;
+      window.removeEventListener('wheel', stopAlignment);
+      window.removeEventListener('touchstart', stopAlignment);
+      window.removeEventListener('pointerdown', stopAlignment);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (['Tab', 'ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) stopAlignment();
+    };
+    const align = () => {
+      const target = document.getElementById('rhythm-result');
+      if (!target || stopped) return;
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+      const headerOffset = window.matchMedia('(max-width: 680px)').matches ? 72 : 88;
+      const correction = target.getBoundingClientRect().top - headerOffset;
+      if (Math.abs(correction) > 1) window.scrollBy({ top: correction, behavior: 'auto' });
+    };
+    const settle = () => {
+      const startedAt = performance.now();
+      const attempt = () => {
+        if (stopped) return;
+        align();
+        if (performance.now() - startedAt >= 2400) stopAlignment();
+      };
+      attempt();
+      alignmentInterval = window.setInterval(attempt, 120);
+      window.addEventListener('wheel', stopAlignment, { passive: true });
+      window.addEventListener('touchstart', stopAlignment, { passive: true });
+      window.addEventListener('pointerdown', stopAlignment, { passive: true });
+      window.addEventListener('keydown', onKeyDown);
+    };
+    frame = window.requestAnimationFrame(() => window.requestAnimationFrame(settle));
+    return () => {
+      window.cancelAnimationFrame(frame);
+      stopAlignment();
+    };
+  }, [sharedType, result]);
+  useEffect(() => {
     if (!focusInviteArrival) return;
     let frame = 0;
     let alignmentInterval = 0;
@@ -473,7 +518,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
 
       {type ? (
         <div className="rhythm-result-layout">
-          <article className="rhythm-result-card">
+          <article className="rhythm-result-card" id="rhythm-result">
             <p className="rhythm-eyebrow">{sharedType ? '친구가 돌아본 생활 장면' : '지난 7일, 내가 돌아본 장면'}</p>
             <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
             {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
