@@ -13,6 +13,8 @@ requireText(/run: node scripts\/run-safe-tf-actions\.mjs tf-pulse\.json --out tf
 requireText(/name: Independently validate safe TF run/, 'safe internal TF 독립 검증 단계가 없습니다.');
 requireText(/run: node scripts\/validate-safe-tf-run\.mjs tf-safe-run\.json tf-pulse\.json \| tee tf-safe-run-validation\.json/, 'safe internal TF 독립 검증 명령이 없습니다.');
 requireText(/run:\s*\|\s*node scripts\/write-tf-pulse-heartbeat\.mjs tf-pulse\.json tf-safe-run\.json tf-safe-run-validation\.json/, 'heartbeat에 독립 검증된 safe 실행을 전달하지 않습니다.');
+requireText(/name: Persist safe pulse heartbeat\s+if: github\.ref == 'refs\/heads\/main'/, 'heartbeat 저장은 main에서만 실행되어야 합니다.');
+requireText(/name: Verify non-main pulse candidate\s+if: github\.ref != 'refs\/heads\/main'/, '비-main 수동 pulse 후보 검증 단계가 없습니다.');
 requireText(/contents:\s*write/, 'heartbeat 커밋에 필요한 contents: write 권한이 없습니다.');
 requireText(/pull-requests:\s*write/, 'heartbeat PR 생성에 필요한 pull-requests: write 권한이 없습니다.');
 requireText(/statuses:\s*write/, 'heartbeat 커밋 상태 기록에 필요한 statuses: write 권한이 없습니다.');

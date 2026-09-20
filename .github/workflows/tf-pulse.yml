@@ -41,6 +41,7 @@ jobs:
       - name: Independently validate safe TF run
         run: node scripts/validate-safe-tf-run.mjs tf-safe-run.json tf-pulse.json | tee tf-safe-run-validation.json
       - name: Persist safe pulse heartbeat
+        if: github.ref == 'refs/heads/main'
         run: |
           node scripts/write-tf-pulse-heartbeat.mjs tf-pulse.json tf-safe-run.json tf-safe-run-validation.json
           git config user.name "cellpinda-tf-pulse[bot]"
@@ -117,6 +118,17 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ github.token }}
+      - name: Verify non-main pulse candidate
+        if: github.ref != 'refs/heads/main'
+        run: |
+          # Manual candidate runs still exercise the same release checks, but
+          # never mutate the main heartbeat branch or create a review PR.
+          pnpm run typecheck
+          pnpm test
+          pnpm run build
+          pnpm run preflight:deploy
+          pnpm run test:worker-reviews
+          pnpm exec wrangler deploy --dry-run --outdir worker-build
       - name: Add pulse to run summary
         run: |
           {
