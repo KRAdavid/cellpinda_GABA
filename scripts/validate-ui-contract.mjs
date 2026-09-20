@@ -32,6 +32,7 @@ const gabaResearchHighlightsStyles = await read('src/components/GabaResearchHigh
 const analyticsConsent = await read('src/components/AnalyticsConsent.tsx');
 const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css');
 const admin = await read('src/components/Admin.tsx');
+const operations = await read('src/components/OperationsMvp.tsx');
 const indexHtml = await read('index.html');
 const researchRouteHtml = await read('public/research/index.html');
 const notFoundHtml = await read('public/404.html');
@@ -103,6 +104,7 @@ requireMatch(app, /const operationsView = import\.meta\.env\.DEV && isLocalHost 
 requireMatch(app, /const adminView = import\.meta\.env\.DEV && isLocalHost && \(requestedView === 'admin' \|\| currentPath === '\/admin'\)/, 'admin review route must render only in local development');
 requireMatch(app, /const OperationsMvp=lazy\(\(\)=>import\('\.\/components\/OperationsMvp'\)\)/, 'internal operations UI must be lazy-loaded outside the consumer entry bundle');
 requireMatch(app, /if\(operationsView\)return <Suspense fallback=\{<p className="loading">운영판을 여는 중입니다\.<\/p>\}><OperationsMvp\/><\/Suspense>/, 'internal operations route must provide a visible loading state while its isolated bundle loads');
+requireMatch(operations, /목표 계약 기준일 \{goalAudit\.checkedAt\}/, 'operations audit must distinguish the Goal Contract date from the latest TF pulse time');
 requireMatch(teaser, /teaser_embed_loaded/, 'teaser analytics must distinguish embed load from video playback');
 if (teaser.includes("onEvent?.('teaser_play'")) fail('teaser iframe load must not count as video playback');
 const nav = app.match(/<nav id="primary-navigation"[\s\S]*?<\/nav>/)?.[0] || '';
