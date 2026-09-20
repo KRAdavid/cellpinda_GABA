@@ -1,5 +1,9 @@
 # 전체 목표 완료 간극 점검
 
+## 후보 SHA 및 공개 동기화 재확인 — 2026-09-20 `541e0fd`
+
+현재 PR 후보는 `541e0fd4c59ee96ec809a35b5a2f2cf7a6e09040`이다. 로컬 production build의 release manifest는 이 SHA와 정적 route 10개·파일 65개를 일치시켰고, `release-verify`와 `site-quality-verify`가 성공했다. 공개 Pages 루트는 HTTP 200이지만 `/release-manifest.json`이 404이며 최신 후보 문구가 없어, PR 승인·main 병합·Pages 라이브 smoke 전에는 공개 배포 완료로 판정하지 않는다.
+
 ## 최신 완료 감사 — 2026-09-20 `5c4a6a8`
 
 현재 배포 후보는 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `5c4a6a8d3b335011cee794ad8fbd9879a1c10360`이다. `release-verify`와 `site-quality-verify`가 성공했고, 연구·제품·후기·챌린지·공개 export·배포 번들 검사를 통과했다. 이 검사는 후보의 품질을 증명하지만, Code Owner 승인이나 실제 공개 배포 완료를 의미하지 않는다.

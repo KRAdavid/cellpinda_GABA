@@ -1,10 +1,10 @@
 # 공개 Pages UI 검증 기록
 
-## 최신 후보 런타임 재검증 — 2026-09-20 `c93095b`
+## 최신 후보 런타임 재검증 — 2026-09-20 `541e0fd`
 
 현재 후보의 production preview(`http://127.0.0.1:4399/`)를 Chrome CDP로 390px viewport에서 다시 확인했다. 홈·제품(`?view=products#products`)·연구(`/research/`)·뇌컨디션(`/`의 focus 진입) 경로를 순서대로 열었고, 네 경로 모두 콘솔 오류·경고 0건, 가로 넘침 0건(`scrollWidth=375`)을 확인했다. 제품 경로는 제품 섹션으로 이동했고, 연구 경로는 연구 카드 6건을 표시했으며, focus 경로는 챌린지 영역으로 이동했다.
 
-최신 로컬 production build의 `release-manifest.json`은 후보 SHA `c93095b43af69c29552f7f4a7773140d09de7997`, 정적 route 10개, 파일 65개를 기록한다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 자동 검증은 통과했지만, PR 이벤트에서는 Pages 게시와 라이브 smoke가 건너뛰어졌으므로 이 기록은 공개 배포 완료 증거가 아니다.
+최신 로컬 production build의 `release-manifest.json`은 후보 SHA `541e0fd4c59ee96ec809a35b5a2f2cf7a6e09040`, 정적 route 10개, 파일 65개를 기록한다. 이번 커밋은 후보 검증·공개 동기화 상태를 문서에 고정한 변경이며, PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 자동 검증은 통과했지만 PR 이벤트에서는 Pages 게시와 라이브 smoke가 건너뛰어졌다. 따라서 이 기록은 후보 품질 증거이지 공개 배포 완료 증거가 아니다.
 
 ## 연구 카드 반복 노출 보정 — 2026-09-20 후보 `1be912c`
 
