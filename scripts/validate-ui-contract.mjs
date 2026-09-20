@@ -148,6 +148,9 @@ requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보
 requireMatch(research, /topic:'뇌·손끝 연습'[\s\S]*손끝 감각/, 'research topic filters must include the approved non-ingestion hand-sensation study');
 requireMatch(researchRouteHtml, /사람 연구 살펴보기/, 'no-script research fallback must use a consumer-friendly label');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
+requireMatch(story, /<section id="story" className="section sage" aria-labelledby="story-heading"[\s\S]*<h2 id="story-heading">/, 'GABA story must expose its visible heading as the section label');
+requireMatch(app, /<section id="fermentation" className="section sage" aria-labelledby="fermentation-heading"[\s\S]*<h2 id="fermentation-heading">/, 'fermentation section must expose its visible heading as the section label');
+requireMatch(app, /<section id="products" className="section wrap" aria-labelledby="products-heading"[\s\S]*<h2 id="products-heading">/, 'product section must expose its visible heading as the section label');
 requireMatch(app, /GabaStory[\s\S]*TeaserPreview[\s\S]*<section id="fermentation"/, 'the GABA explanation and teaser must flow directly into the fermentation story without a duplicate research gateway');
 requireMatch(research, /canonicalStudySourceKeys/, 'research list must suppress duplicate records of the same paper across all source links');
 requireMatch(research, /GABA 연구 한눈에/, 'research list must have a direct consumer heading');
