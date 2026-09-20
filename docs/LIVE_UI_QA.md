@@ -1,5 +1,11 @@
 # 공개 Pages UI 검증 기록
 
+## 2026-09-20 현재 후보 공개 전 재감리 — `8f7244e`
+
+현재 후보 production build의 10개 공개 경로를 다시 생성하고, 정적 bundle·성능 예산·공개 데이터·배포 workflow 계약을 확인했다. 전체 테스트 109개가 통과했고 release manifest는 후보 SHA `8f7244e7f98c5e3e3b3c7e9c07cba1609ccd085f`, 64개 manifest 파일, 연구 6건·제품 1개·후기 1개를 기록한다.
+
+실제 Pages 루트와 공개 `content.json`은 HTTP 200이지만 후보 확인용 `release-manifest.json`, `goal-audit.json`, `tf-pulse.json`은 아직 HTTP 404다. 따라서 이 기록은 후보 산출물과 로컬 브라우저 품질을 증명하며, Code Owner 승인·main 병합·Pages 게시·live smoke 전의 공개 배포 완료를 의미하지 않는다.
+
 ## 2026-09-20 운영판 대체 로컬 포트 영속성 감리 — 후보 작업 중
 
 Vite를 기본 포트가 아닌 `4313`으로 실행해 Goal Contract 생성과 자동 협업 파동을 실제로 수행했다. 로컬 API는 loopback 개발 origin을 안전하게 허용하도록 보정한 뒤 403 없이 샌드박스 상태를 서버에 저장했고, 390px에서 가로 넘침도 없었다. 기존에는 대체 개발 포트가 CORS 목록 밖이라 브라우저 임시 저장으로만 남는 회귀가 있었다.

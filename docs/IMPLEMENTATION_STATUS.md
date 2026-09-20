@@ -1,5 +1,11 @@
 # 중간 구현 상태 — 2026-09-11
 
+## 2026-09-20 현재 후보 검증 지문 — `8f7244e`
+
+현재 후보는 전체 테스트 109/109, 타입검사, production build, 공개 export, 정적 bundle, 성능 예산, 배포 workflow 계약을 통과했다. 정적 배포 산출물은 10개 공개 경로와 release manifest 64개 파일을 포함하며, 공개 제품은 가바 1500 단일 제품·스마트스토어 후기 목적지 1개로 제한된다. 티저는 `PREVIEW/HOLD` 경계를 유지한다.
+
+실제 공개 주소와 후보 산출물은 아직 분리되어 있다. Pages 루트·`content.json`은 응답하지만 후보 `release-manifest.json`은 공개 주소에서 확인되지 않는다. PR 검토와 main 병합 후에만 Pages 게시·release SHA·핵심 경로 live smoke를 다시 판정한다. B2·B3·B4·C2·E1은 사람 입력 게이트로 유지한다.
+
 ## TF heartbeat 자동 갱신 — 2026-09-20 현재 후보
 
 자동 pulse heartbeat를 다시 생성했다. `generatedAt=2026-09-20T01:19:20.951Z`, `snapshotHash=40aa99629ff6b3a4643dc0c0aeb9c8ec753d1fb0aff40fcba0f9215cd1c2732b`, `stateChanged=false`, `safeExecution=MET`, 입력 게이트 4건이다. 역할군 8/8·활성 작업 5건·검증 1건·대기 4건을 유지했으며, 외부 승인·게시·구매 상태를 자동으로 변경하지 않았다.

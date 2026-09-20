@@ -1,5 +1,13 @@
 # 전체 목표 완료 간극 점검
 
+## 2026-09-20 현재 후보 재감리 — `8f7244e`
+
+현재 후보를 다시 빌드하고 전체 테스트 109개, 타입검사, 공개 export, 정적 번들, 성능 예산, 배포 workflow 계약, 운영 문서·TF pulse 검증을 모두 통과시켰다. production bundle은 10개 공개 경로·연구 6건·제품 1개·후기 목적지 1개·티저 `PREVIEW/HOLD`이며, release manifest의 candidate SHA는 현재 후보 `8f7244e7f98c5e3e3b3c7e9c07cba1609ccd085f`와 일치한다.
+
+Goal audit는 `ACTIVE · IN_PROGRESS_WITH_GATES`로 유지한다. 8개 역할군은 모두 연결되어 있고 작업은 DONE 10·VERIFYING 1·WAITING 4이며, 핵심 자동 검사는 모두 `MET`이다. 제품 표시(B2), 후기 권한(B3), 티저 공개 승인(B4), Cloudflare 운영(C2), 실주문 대사(E1)은 외부 입력이 없으므로 자동으로 승격하지 않는다.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`·`site-quality-verify`는 성공했지만 Code Owner 검토 전 `OPEN · BLOCKED · REVIEW_REQUIRED`다. 실제 Pages 루트와 `content.json`은 HTTP 200이지만 `release-manifest.json`·`goal-audit.json`·`tf-pulse.json`은 아직 404이므로, 후보 품질을 공개 배포 완료로 표시하지 않는다.
+
 ## 2026-09-20 운영판 로컬 API CORS·영속성 보정 — 후보 작업 중
 
 대체 Vite 포트에서도 운영판 샌드박스가 실제로 서버에 저장되는지 확인하는 과정에서 개발 CORS 허용 목록이 5173·4173으로 고정된 결함을 발견했다. 개발 환경에서만 `localhost`·`127.0.0.1`·`[::1]`의 임의 포트를 허용하도록 정규식을 보정하고, 외부·HTTPS·유사 호스트는 계속 차단하도록 테스트를 갱신했다. 4313 포트에서 Goal Contract 생성·자동 협업 파동·서버 저장·390px 레이아웃을 재검증했다.
