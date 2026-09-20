@@ -62,7 +62,7 @@ CI와 로컬 production build는 `pnpm run validate:ops`로 전체 샌드박스 
 
 공개 데이터는 `pnpm run sync:data` 직후 `pnpm run validate:public`에서 다시 검사한다. 제품은 `gaba1500` 하나이고 스마트스토어 목적지만 허용하며, 750 재유입·비공개 필드 노출·마스터 인덱스와 content export의 provenance 불일치를 build 단계에서 차단한다.
 
-티저는 `data/teaser-manifest.json`의 상태를 따른다. 현재 상태는 `HOLD`이며 승인된 공개 영상 주소·미디어 파일이 없으므로 외부 iframe·재생 링크를 만들지 않는다. 이전에 접근한 HTML 애니메이션은 내부 검토 자료로만 보존하고, 전체 자막/대본·포스터·권리·표시사항·CTA와 비로그인 재생을 확인한 뒤에만 `PREVIEW` 또는 `APPROVED`로 승격한다. `pnpm run validate:teaser`는 지정된 공개 preview export 외에 검토 URL이 섞이지 않았는지 빌드에서 차단한다. 필요한 승인 자료가 모두 모이기 전까지 자동 협업 파동과 B4 게이트는 `HOLD/WAITING`으로 유지한다.
+티저는 `data/teaser-manifest.json`의 상태를 따른다. 현재 상태는 `PREVIEW`이며 비로그인으로 확인된 HTML 애니메이션을 홈 iframe에서 선택적으로 자동 시작한다. 전체 자막/대본·포스터·권리·표시사항·CTA와 최종 공개 승인이 확인되기 전까지 `APPROVED`로 승격하지 않는다. 임베드가 막히면 새 창 대체 링크를 제공한다. `pnpm run validate:teaser`는 지정된 공개 preview export 외에 검토 URL이 섞이지 않았는지 빌드에서 차단한다. 필요한 승인 자료가 모두 모이기 전까지 자동 협업 파동과 B4 게이트는 `PREVIEW/WAITING`으로 유지한다.
 
 제품 책임자와 표시 검토자는 `pnpm run audit:materials`로 지정 로컬 자료를 읽기 전용으로 재검색할 수 있다. 매니페스트는 1500 소비자 포장과 1 kg·10 kg 벌크 라벨을 구분하고, 결과는 `tmp/local-material-audit.json`에만 저장한다. 자료가 발견되어도 `VERIFYING` 작업을 사람이 승인하기 전에는 공개 원장·문구를 자동 변경하지 않는다.
 

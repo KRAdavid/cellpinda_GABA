@@ -49,7 +49,7 @@ const checks = {
   smartStoreOnly: products.length === 1 && products[0]?.officialUrl === smartStoreProduct && !products.some(product => /750/.test(JSON.stringify(product))),
   reviewDestination: reviews.length === 1 && reviews[0]?.sourceUrl === smartStoreReview,
   researchIndex: research.length === 6 && research.every(record => typeof record.evidenceHash === 'string' && /^[a-f0-9]{64}$/.test(record.evidenceHash)),
-  teaserBoundary: teaser.status === 'HOLD' && teaser.url === null,
+  teaserBoundary: (teaser.status === 'HOLD' && teaser.url === null) || (teaser.status === 'PREVIEW' && /^https:\/\//.test(teaser.url || '')),
   challengeCopy: textBundle.includes('뇌컨디션 확인 챌린지') && textBundle.includes('5분 쉬고 다시 해보기') && textBundle.includes('싱잉볼 소리'),
   productBoundary: textBundle.includes('셀핀다 완제품 연구와는 다른 자료입니다.') && textBundle.includes('연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요.'),
 };

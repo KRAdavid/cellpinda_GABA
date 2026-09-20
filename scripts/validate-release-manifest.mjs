@@ -20,8 +20,9 @@ assert.equal(manifest.counts.products, 1, 'release manifest must contain one pub
 assert.equal(manifest.counts.research, 6, 'release manifest must contain six public research records');
 assert.equal(manifest.counts.reviews, 1, 'release manifest must contain one approved review destination');
 assert.deepEqual(Object.keys(manifest.teaser).sort(), ['status', 'url'].sort(), 'release manifest teaser fields are invalid');
-assert.equal(manifest.teaser.status, 'HOLD', 'release manifest teaser must preserve the current hold state');
-assert.equal(manifest.teaser.url, null, 'a held teaser cannot expose a public URL');
+assert.ok(['HOLD', 'PREVIEW'].includes(manifest.teaser.status), 'release manifest teaser must preserve a supported preview state');
+if (manifest.teaser.status === 'HOLD') assert.equal(manifest.teaser.url, null, 'a held teaser cannot expose a public URL');
+if (manifest.teaser.status === 'PREVIEW') assert.match(manifest.teaser.url || '', /^https:\/\//, 'a preview teaser must expose an HTTPS preview URL');
 for (const [key, value] of Object.entries(manifest.checks)) assert.equal(value, true, `release manifest check ${key} is not true`);
 
 const actualHashes = {};

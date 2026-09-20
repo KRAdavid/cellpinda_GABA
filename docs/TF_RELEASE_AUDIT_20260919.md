@@ -398,3 +398,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 같은 시점의 `audit:goal`은 `coreValid=true`, 역할 8/8, DONE 10·VERIFYING 1·WAITING 4를 유지했고, 공개 마스터 인덱스·연구 카피·TF pulse·sandbox MVP는 `MET`이다. 제품 표시 승인, 후기 재게시 권한, 티저 공개 권리, Cloudflare 운영 시크릿, 실구매 대사는 사람 입력 게이트로 남아 있다.
 
 후보 검증 뒤 `automation/tf-pulse-heartbeat` 원격 SHA는 `08d47c760074933d9ed7f0ed6bdf26d7c496e625`로 변하지 않았다. 공개 Pages 루트는 HTTP 200이지만 후보 `release-manifest.json`은 아직 HTTP 404이므로, Code Owner 승인·main 병합·Pages 게시·live smoke 전에는 공개 배포 완료로 판정하지 않는다.
+
+## 2026-09-20 티저 PREVIEW 연결과 릴리스 경계 보정
+
+사용자가 제공한 티저 URL을 비로그인 요청으로 다시 확인한 결과 `200 OK`와 HTML/CSS/JS 애니메이션, 로드 시 자동 시작 코드를 확인했다. 후보의 `data/teaser-manifest.json`을 `PREVIEW`로 전환하고, 리듬 체크 다음 위치에서 iframe을 화면 가까이 불러와 자동 시작하도록 `public/data/teaser-preview.json`에 URL을 연결했다. 임베드가 막히면 새 창 대체 링크를 제공하며, 브라우저 설정에 따라 재생 버튼이 필요할 수 있다는 문구를 유지한다.
+
+이 변경은 최종 광고 승인이나 제품 효능 주장을 의미하지 않는다. MP4/HLS 파일·전체 자막·대본·음원·이미지·출연 권리·표시사항·CTA 승인 증거가 없으므로 B4와 `teaser-boundary`는 `WAITING/HOLD`로 유지한다. `generate-release-manifest`, `validate-release-manifest`, `validate-static-bundle`은 `HOLD` 또는 검토된 HTTPS `PREVIEW`를 모두 검사하도록 보정했고, `pnpm run build`에서 10개 route·65개 파일·티저 경계·정적 fallback·성능 예산을 통과했다.
