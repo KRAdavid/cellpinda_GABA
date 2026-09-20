@@ -680,3 +680,11 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 실행은 `success`로 종료됐고, 자동 PR 생성은 저장소 정책(GitHub Actions가 PR 생성 불가)으로 차단됐다. 대신 `automation/tf-pulse-heartbeat` 브랜치를 갱신하고, 보호된 main에 반영하려면 사람의 PR 생성·Code Owner 검토가 필요하다는 경고를 남겼다. 외부 게시·제품 승인·주문 처리는 수행하지 않았다.
 
 현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 최신 UI 보정 커밋 `9bd498b` 기준이며, 필수 `release-verify`·`site-quality-verify`는 성공했다. 공개 Pages의 `release-manifest.json`은 여전히 404이므로 main 병합 전 공개 배포 완료로 판정하지 않는다.
+
+## 2026-09-20 후보 문구·배포 증거 재감리
+
+후보 HEAD `150f498`에서 첫 화면에 `셀핀다 발효가바 · 나의 하루 리듬 체크`를 표시하고, 리듬 체크 문장을 `지난 7일, 잠들기 어렵거나 쉬지 못한 날이 있었나요?`로 바꿨다. 제품 CTA도 `스마트스토어에서 가격·재고 확인하기`로 목적지를 명시했으며 UI 계약 회귀 검사를 함께 갱신했다.
+
+배포 워크플로에는 실제 Pages 게시본인 `dist-pages/`를 일반 릴리스 증거 아티팩트에도 보관하도록 추가했다. `release-verify`와 `site-quality-verify`([35497232116](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35497232116), [35497232189](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35497232189))가 성공했고, 로컬 production build는 10개 route·65개 파일·성능 예산을 통과했다.
+
+공개 Pages는 여전히 이전 main 산출물을 제공해 `/release-manifest.json`이 HTTP 404다. Code Owner 승인·main 병합·Pages 게시·라이브 smoke 전에는 공개 배포 완료로 판정하지 않는다. B2 제품 표시, B3 후기 권한, B4 티저 권리, C2 Worker/D1 비밀값, E1 실주문 대사는 사람 입력 게이트로 유지한다.

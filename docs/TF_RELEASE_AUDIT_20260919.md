@@ -343,3 +343,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 실행은 `success`로 종료됐고, 자동 PR 생성은 저장소 정책(GitHub Actions가 PR 생성 불가)으로 차단됐다. 대신 `automation/tf-pulse-heartbeat` 브랜치를 갱신하고, 보호된 main에 반영하려면 사람의 PR 생성·Code Owner 검토가 필요하다는 경고를 남겼다. 외부 게시·제품 승인·주문 처리는 수행하지 않았다.
 
 현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 최신 UI 보정 커밋 `9bd498b` 기준이며, 필수 `release-verify`·`site-quality-verify`는 성공했다. 공개 Pages의 `release-manifest.json`은 여전히 404이므로 main 병합 전 공개 배포 완료로 판정하지 않는다.
+
+### 2026-09-20 후보 문구·배포 증거 재감리
+
+- 후보 HEAD `150f498`에서 브랜드 정체성, 리듬 체크 질문, 스마트스토어 가격·재고 CTA를 소비자가 바로 이해할 수 있는 문장으로 보정했다. UI 계약·타입검사·연구 카피·공개 export·107개 테스트·production build를 통과했다.
+- Pages 게시본 `dist-pages/`를 `dist/` 및 `worker-build/`와 함께 릴리스 증거 아티팩트로 보관하도록 배포 워크플로를 보강했다. `release-verify`·`site-quality-verify`는 성공했다.
+- 공개 Pages 루트는 HTTP 200이지만 후보 `release-manifest.json`은 아직 404다. PR 승인·main 병합 뒤 Pages 게시와 live smoke를 다시 실행해야 한다. B2·B3·B4·C2·E1 게이트는 사람 입력 대기로 유지한다.
