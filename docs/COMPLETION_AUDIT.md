@@ -652,3 +652,11 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 실제 공개 주소의 루트는 HTTP 200이지만 `https://kradavid.github.io/cellpinda_GABA/release-manifest.json`은 HTTP 404다. 따라서 공개 주소는 후보와 아직 동기화되지 않았으며 공개 배포 완료로 판정하지 않는다. Code Owner 승인과 main 병합 뒤 Pages 게시·release manifest 지문·핵심 경로 live smoke를 다시 확인해야 한다.
 
 남은 외부 판정 항목은 최종 제품 표시·SKU·섭취·보관·주의사항 승인(B2), 후기 원문·재게시 권한·개인정보 비식별 확인(B3), 티저 파일·자막·대본·권리·CTA 승인(B4), Cloudflare Worker/D1 운영 비밀값과 복구 확인(C2), 실제 주문·취소·환불 대사(E1)다. 이 문서는 코드·정적 후보 품질을 기록하며 외부 승인이나 실제 소비자 조사를 대신하지 않는다.
+
+## 2026-09-20 TF pulse 재생성·후보 CI 재검증
+
+후보 HEAD `01992e51d4475648c97abbedce4cd1023d9038e6`에서 TF pulse heartbeat를 재생성했다. snapshot hash `40aa99629ff6b3a4643dc0c0aeb9c8ec753d1fb0aff40fcba0f9215cd1c2732b`는 이전과 같아 공개 콘텐츠·제품·연구 범위에 변화가 없음을 확인했고, `safeExecution: MET`, 역할 8/8, DONE 10·VERIFYING 1·WAITING 4 및 사람 입력 게이트를 유지했다.
+
+새 후보 커밋의 [release-verify 35495678201](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35495678201)과 [site-quality-verify 35495678226](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35495678226)은 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`이고, PR 이벤트에서는 Pages·Worker·live smoke가 의도적으로 실행되지 않는다.
+
+공개 Pages 루트는 HTTP 200이지만 후보의 `/release-manifest.json`은 아직 공개 주소에서 HTTP 404이므로 main 병합·Pages 게시·live smoke 전에는 배포 완료로 판정하지 않는다. 제품 표시 최종 승인(B2), 후기 재게시 권한(B3), 티저 권리·자막·CTA(B4), Cloudflare 운영 시크릿(C2), 실제 주문·취소·환불 대사(E1)도 사람 입력 게이트로 유지한다.
