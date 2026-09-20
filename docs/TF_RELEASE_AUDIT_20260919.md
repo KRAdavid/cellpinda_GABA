@@ -294,3 +294,9 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 - PR #69의 `release-verify`와 `site-quality-verify`를 통과하고 main `c647865`로 병합했다. 배포 run [35437840293](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35437840293)은 Pages 게시와 라이브 smoke를 성공시켰다.
 - 라이브 `validate:live-public`는 HTTP 200, 주장 12개, 공개 연구 6건, 제품 1개, 공유 페이지 6개, SmartStore 전용 링크, 750 제품 제거, 원장 출처 일치를 확인했다. 연구 route의 title·OG title·canonical도 공개 주소와 일치한다.
 - TF heartbeat는 상태 해시가 그대로인 것을 확인한 뒤 `2026-09-19T10:39:19.458Z`로 갱신했다. 역할군 8/8, DONE 10, VERIFYING 1, WAITING 4를 유지했으며, 외부 승인 게이트를 자동으로 통과시키지 않았다.
+
+### 2026-09-20 최신 후보 산출물·공개본 분리 재확인
+
+- 후보 HEAD `d6bb11848908d72f7845238e4a3eccc636052399` 기준으로 production build를 다시 실행했다. release manifest는 후보 지문과 일치하고, 10개 정적 route·65개 파일·연구 6건·제품 1개·후기 목적지 1개·티저 `HOLD`를 기록했다. 공개 export·Smart Store only·750 제거·성능 예산도 통과했다.
+- 로컬 production preview를 Chromium CDP로 390px·1440px에서 재확인했다. 홈·연구·뇌컨디션 경로의 가로 넘침은 없었고(`scrollWidth` 375/1425), 콘솔 오류·경고 없이 각 페이지 제목과 챌린지 명칭을 확인했다. `pnpm test` 107개와 GitHub Actions `release-verify`·`site-quality-verify`도 성공했다.
+- 공개 Pages는 후보와 아직 동기화되지 않았다. `https://kradavid.github.io/cellpinda_GABA/release-manifest.json`이 HTTP 404이고 `validate:live-public`이 12회 재시도 후 실패했으므로, 현재 공개 주소는 이전 main 배포본으로 유지한다. Code Owner 승인과 main 병합 뒤 Pages 게시·live smoke·후보 지문 대조를 다시 수행해야 공개 배포 완료로 판정한다.
