@@ -409,8 +409,10 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 
 ## 2026-09-20 최종 후보 내부 검증 재실행
 
-후보 HEAD `3a7e5d0`에서 `audit:goal`을 다시 실행해 `coreValid=true`, 역할 8/8, DONE 10·VERIFYING 1·WAITING 4를 확인했다. 연구 카피·공개 export·티저 경계·TF pulse·sandbox MVP는 모두 `MET`이며, 제품 표시 승인·후기 재게시 권한·티저 공개 권리·Cloudflare 운영 시크릿·실구매 대사는 사람 입력 게이트로 유지된다.
+후보 HEAD `f2c36cd`에서 `audit:goal`을 다시 실행해 `coreValid=true`, 역할 8/8, DONE 10·VERIFYING 1·WAITING 4를 확인했다. 연구 카피·공개 export·티저 경계·TF pulse·sandbox MVP는 모두 `MET`이며, 제품 표시 승인·후기 재게시 권한·티저 공개 권리·Cloudflare 운영 시크릿·실구매 대사는 사람 입력 게이트로 유지된다.
 
 `pnpm test` 107개, 타입검사, production build, `validate:public`, `validate:static-bundle`, `validate:release-manifest`, 정적 경로 성능 예산을 재실행해 모두 통과했다. 산출물은 10개 공개 route·65개 지문 파일·연구 6건·제품 1개·스마트스토어 후기 목적지 1개이며, 티저는 검토된 HTTPS `PREVIEW` 상태로 리듬 체크 다음에 연결된다.
 
 티저 주소는 비로그인 요청에서 HTTP 200과 로드 시 자동 시작 코드를 확인했지만, 공개 Pages는 아직 이전 main 버전이다. `https://kradavid.github.io/cellpinda_GABA/release-manifest.json`이 계속 HTTP 404이므로 Code Owner 승인·main 병합·Pages 게시·live smoke 전에는 배포 완료로 판정하지 않는다.
+
+후보 커밋의 [release-verify 35502992264](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35502992264)와 [site-quality-verify 35502992346](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35502992346)가 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED` 상태다.
