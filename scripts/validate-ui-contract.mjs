@@ -111,6 +111,14 @@ requireMatch(styles, /@media \(min-width:681px\) and \(max-width:900px\)[\s\S]*?
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:900px\)[\s\S]*?\.hero-copy\{[^}]*background:linear-gradient/, 'tablet hero text must keep a readable background over the photo');
 requireMatch(research, /research-method-filter[\s\S]*연구 방법[\s\S]*더보기/, 'research method filter must stay behind an optional consumer-friendly control');
 requireMatch(researchStyles, /research-library-card-featured \.research-library-quick-facts\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'the first mobile research result must keep its core study facts compact and readable');
+requireMatch(styles, /\.brand\{display:inline-flex;align-items:center;min-height:44px/, 'brand links must keep a reachable touch target');
+requireMatch(styles, /\.footer>a:not\(\.brand\)\{[^}]*min-height:44px/, 'footer links must keep a reachable touch target');
+requireMatch(rhythmStyles, /\.rhythm-start-scenes>summary\{[^}]*min-height:44px/, 'the everyday examples disclosure must keep a reachable touch target');
+requireMatch(analyticsConsentStyles, /\.analytics-consent button\{[^}]*min-height:44px/, 'analytics consent actions must keep a reachable touch target');
+requireMatch(researchStyles, /\.research-route-header nav a\{display:inline-flex;align-items:center;min-height:44px\}/, 'research return navigation must keep a reachable touch target');
+requireMatch(styles, /\.evidence-source-link\{display:inline-flex;align-items:center;min-height:44px/, 'evidence source links must keep a reachable touch target');
+requireMatch(challengeStyles, /\.challenge-rhythm-link\{[^}]*min-height:44px/, 'the return-to-rhythm link must keep a reachable touch target');
+requireMatch(researchStyles, /\.research-library-controls>\.text-link\{justify-self:start;min-height:44px\}/, 'research clear-search action must keep a reachable touch target');
 requireMatch(fatigueGame, /화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요/, 'five-minute breathing must explain both visual-follow and screen-free audio options');
 if (/휴대폰을 뒤집어 두고 공의 움직임을 따라/.test(fatigueGame)) fail('breathing guidance must not ask readers to look at an animation while turning the phone over');
 for (const marker of ['퇴근했는데도', '계속 나나요', '잠과 휴식 1분 체크', 'GABA는 뇌세포 사이에서', '스마트스토어']) {

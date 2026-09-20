@@ -25,7 +25,7 @@
 .rhythm-recovery-prepare{border-left-color:#6f9a7b}
 .rhythm-auto-advance-note{margin:18px 0 0;font-size:12px;line-height:1.7;color:#53695c}
 .rhythm-start-scenes{margin-top:16px;color:#53695c;font-size:13px;line-height:1.75}
-.rhythm-start-scenes>summary{display:inline-flex;align-items:center;min-height:38px;color:var(--rhythm-forest);font-weight:600;cursor:pointer}
+.rhythm-start-scenes>summary{display:inline-flex;align-items:center;min-height:44px;color:var(--rhythm-forest);font-weight:600;cursor:pointer}
 .rhythm-start-scenes>ul{display:grid;gap:5px;margin:8px 0 0;padding-left:19px}
 
 .rhythm-card-preview{width:min(100%,360px);border:1px solid #d9e5dc;border-radius:10px;display:block;margin:0 auto 20px;box-shadow:0 12px 32px rgba(24,56,43,.12)}
