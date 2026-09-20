@@ -10,6 +10,10 @@
 
 배포 전 의존성 감사에서 고위험 이상 알려진 취약점이 없음을 확인했다(`pnpm audit --prod --audit-level=high`). `wrangler deploy --dry-run`은 정적 파일 78개와 약 860KiB 업로드 패킷을 읽고 D1·Rate Limiter·Assets 바인딩을 확인했으며, 실제 배포는 실행하지 않았다. Cloudflare 비밀값과 Code Owner 승인이 준비되기 전까지 공개 게시 상태는 변경하지 않는다.
 
+## 공개 번들 성능 예산 — 2026-09-20 현재 후보
+
+초기 JavaScript 299,965B, 초기 CSS 86,837B, 전체 assets 1,345,309B, 최대 단일 파일 299,965B를 측정했다. 초기 JS 380KB·초기 CSS 110KB·전체 assets 1.6MB·단일 파일 380KB 예산을 모두 통과하며, 동일 검사는 정적 Pages용 `dist-pages`에도 배포 워크플로에서 실행된다. 성능 검증기는 `/assets/...` 경로를 실제 HTML 연결값으로 해석해 초기 번들을 0B로 잘못 보고하지 않는다.
+
 ## Worker 공개 origin·회원 origin 분리 검증 보강 — 2026-09-20 코드 후보 `487c9f5`
 
 Worker 배포 후 라이브 검증이 `MEMBER_ORIGIN`을 실제로 사용하도록 연결했다. HTTPS 루트 origin 형식, CORS preflight의 허용 메서드·헤더·credentials, 허용 origin 응답, 임의 origin 차단 응답을 함께 확인하며, 설정되지 않은 정적 Pages 모드에서는 이 검사를 생략한다. 배포 워크플로 계약, 107개 회귀 테스트, 타입검사, Wrangler dry-run, 후보 GitHub 검증을 통과했다. 실제 Worker 검증은 Cloudflare 운영 비밀값이 설정된 뒤 실행한다.
