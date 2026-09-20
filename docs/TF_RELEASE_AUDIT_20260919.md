@@ -377,4 +377,10 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 
 저장소 정책상 GitHub Actions 토큰의 PR 생성은 거부됐지만, 후보 워크플로는 이 오류를 전체 실패로 전파하지 않고 경고와 `Heartbeat review` 요약으로 남겼다. `automation/tf-pulse-heartbeat` 브랜치는 갱신됐으며, 보호된 main 반영은 사람의 PR 생성·Code Owner 검토·필수 검사 통과 뒤에만 가능하다. 외부 게시·제품 승인·주문 처리는 수행하지 않았다.
 
-이 실실행으로 후보의 자동 운영 경계는 검증됐지만, 현재 공개 Pages의 `release-manifest.json` 404와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `REVIEW_REQUIRED` 상태는 변하지 않았다.
+이 실제 실행으로 후보의 자동 운영 경계는 검증됐지만, 현재 공개 Pages의 `release-manifest.json` 404와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `REVIEW_REQUIRED` 상태는 변하지 않았다.
+
+## 2026-09-20 공개 문구 경계 재스캔
+
+후보의 공개 소스 경로(`src`, `public/data`, 정적 공개 route, `index.html`)를 다시 스캔해 사용자에게 숨기기로 한 `매우 제한적`, `제한적 근거`, `뚜렷한 차이`, `다만 GABA만의 효과`, `공식몰`, `GABA 750`, `집중 리듬 챌린지`, `조건·수치·한계` 표현이 0건임을 확인했다. 내부 원장·검증기·감리 문서에 남은 같은 단어는 공개 projection을 차단하고 근거 범위를 감사하기 위한 내부 값이며, 소비자 번들에 포함되지 않는다.
+
+이번 스캔은 제품 효능·권장량을 추가하거나 연구 한계를 삭제하는 작업이 아니다. 공개 문장은 관찰된 연구 맥락과 쉬운 행동 안내로 유지하고, 제품 표시·후기 권한·티저 권리·운영 배포 승인은 기존 사람 게이트를 그대로 보존한다.
