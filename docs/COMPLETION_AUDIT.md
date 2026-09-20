@@ -1,5 +1,13 @@
 # 전체 목표 완료 간극 점검
 
+## 2026-09-20 연구 결과 방향 카피 보완 — 후보 `f81491e`
+
+Yoto 사람 연구 하이라이트의 제목을 소비자가 결과 방향을 바로 읽을 수 있도록 `활력 점수는 덜 떨어지고, 뇌파 변화 폭은 작았어요`로 정리했다. 카드 요약은 비교 캡슐과의 관찰 조건을 함께 남겨, 긍정적인 차이는 보여 주되 셀핀다 완제품의 효과로 확대하지 않는다. UI 계약과 라이브 소비자 번들 회귀 검사를 새 문구에 맞춰 고정했다.
+
+`pnpm test` 107개, `pnpm run build`, 공개 export·정적 bundle·release manifest·성능 예산 검증이 통과했다. 현재 `dist/release-manifest.json`의 `candidateSha`는 `f81491edd8524f1345df48eda127b444964343d4`와 일치하며, PR #97의 `release-verify`와 `site-quality-verify`도 성공했다.
+
+PR은 Code Owner 승인 전 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 공개 Pages의 `/release-manifest.json`은 아직 HTTP 404이므로 이번 카피 보완은 후보 품질 개선이며 공개 배포 완료를 의미하지 않는다.
+
 ## 2026-09-20 배포 게이트 실패 은폐 방지 — 후보 작업 중
 
 후보 브랜치의 배포 워크플로를 상태 전이별로 감리한 결과, `worker-readiness` 작업 자체가 실패하거나 취소되면 출력값이 비어도 `smoke-live`가 정적 Pages 검증으로 진행되고 `release-status`가 `STATIC_ONLY` 성공으로 기록할 수 있는 결함을 확인했다. 이는 Cloudflare 비밀값이 없어 정상적으로 `enabled=false`가 된 `HOLD`와 readiness 작업 오류를 구분하지 못하는 감사 추적 누락이었다.
