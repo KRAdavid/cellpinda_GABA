@@ -370,3 +370,11 @@ Pages 빌드는 `PUBLIC_SITE_URL`을 기준으로 canonical·Open Graph·sitemap
 정적 번들에서 확인한 접근성 fallback 기준을 라이브 공개 검증에도 연결했다. `validate-live-public.mjs`가 루트·제품·연구·챌린지 초대·공유 경로의 메타데이터를 검사할 때 즉시 `meta refresh`가 없는지도 확인한다. 배포 후 오래된 강제 이동 HTML이 남아 있으면 release smoke가 실패하도록 공개본과 후보본의 기준을 일치시켰다.
 
 후보 커밋 `ba50e89`에서 공개 export·정적 번들·타입검사·107개 테스트를 통과했고, PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 새 `release-verify`·`site-quality-verify`도 성공했다. 현재 공개 Pages의 매니페스트 404와 main 병합 대기 상태는 그대로다.
+
+## 2026-09-20 후보 TF pulse 권한 fallback 실제 실행
+
+후보 브랜치에서 TF decision pulse를 수동 실행해 계약 확인, safe internal TF 실행, 독립 검증, heartbeat 생성, 후보 타입검사·회귀 테스트·production build·배포 readiness·Worker review 통합 테스트·Worker dry-run을 모두 통과시켰다. 실행 [35500834288](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35500834288)은 `success`로 종료됐다.
+
+저장소 정책상 GitHub Actions 토큰의 PR 생성은 거부됐지만, 후보 워크플로는 이 오류를 전체 실패로 전파하지 않고 경고와 `Heartbeat review` 요약으로 남겼다. `automation/tf-pulse-heartbeat` 브랜치는 갱신됐으며, 보호된 main 반영은 사람의 PR 생성·Code Owner 검토·필수 검사 통과 뒤에만 가능하다. 외부 게시·제품 승인·주문 처리는 수행하지 않았다.
+
+이 실실행으로 후보의 자동 운영 경계는 검증됐지만, 현재 공개 Pages의 `release-manifest.json` 404와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `REVIEW_REQUIRED` 상태는 변하지 않았다.
