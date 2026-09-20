@@ -2,7 +2,7 @@
 
 ## 최신 릴리스 스냅샷 — 2026-09-20 · 후보 브랜치 HEAD
 
-현재 공개 전 기준은 후보 브랜치 HEAD와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. TF heartbeat는 `2026-09-20T13:13:59`에 재생성됐고 공개 콘텐츠 지문은 `69994cdfed389afa93031b20e0ac06f9ff2a3089424de125ebfb1777c3a7a1aa`로 이전과 같으며, 내부 안전 실행은 `MET`, 상태 변화는 없다. 후보 HEAD는 heartbeat 갱신 커밋 `301c27b`이며, 검증 대상 커밋과 후보 매니페스트의 SHA는 각 CI 산출물에서 함께 확인한다.
+현재 공개 전 기준은 후보 브랜치 HEAD와 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)이다. TF heartbeat는 `2026-09-20T13:13:59`에 재생성됐고 공개 콘텐츠 지문은 `69994cdfed389afa93031b20e0ac06f9ff2a3089424de125ebfb1777c3a7a1aa`로 이전과 같으며, 내부 안전 실행은 `MET`, 상태 변화는 없다. 후보에는 heartbeat 갱신과 이 감사 문서 정합성 보강이 포함되어 있으며, 검증 대상 커밋과 후보 매니페스트의 SHA는 각 CI 산출물에서 함께 확인한다.
 
 후보는 10개 공개 경로·65개 산출물·승인 연구 6건·제품 1개·스마트스토어 후기 목적지 1개·티저 `PREVIEW`를 유지한다. PR의 [필수 검사 상태](https://github.com/KRAdavid/cellpinda_GABA/pull/97/checks)에서 `release-verify`와 `site-quality-verify`가 성공한 것을 확인한다. 연구 카드의 방어적으로 읽히는 문구를 `연구에서 살펴본 조건`으로 통일하고 제품 구성 확인 경로를 자연스럽게 연결했다. 로컬 검증 명령과 CI 경로를 일치시키고, 검토된 티저 URL과 릴리스 산출물의 정확한 일치를 게시 전에 검사하도록 보강했다. `release-status` 작업에는 고정 pnpm 설치 단계도 추가했다.
 
