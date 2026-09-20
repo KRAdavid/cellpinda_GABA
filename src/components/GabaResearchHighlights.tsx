@@ -1,12 +1,12 @@
 import {Activity, Dumbbell, Moon, type LucideIcon} from 'lucide-react';
 import type {Claim} from './ResearchLibrary';
-import {isPublicUrl} from '../domain/research-sources';
 import './GabaResearchHighlights.css';
 
 type Highlight = {
   id: string;
   label: string;
   title: string;
+  summary: string;
   facts: string[];
   Icon: LucideIcon;
 };
@@ -16,28 +16,31 @@ const highlightOrder: Highlight[] = [
     id: 'research-yamatsu-2016',
     label: '잠',
     title: '잠드는 시간과 수면 기록',
-    facts: ['성인 10명', '논문에서 사용한 양: 하루 100mg', '기간: 각 1주'],
+    summary: 'GABA 캡슐을 먹은 주와 비교 캡슐을 먹은 주의 잠 기록을 비교했어요.',
+    facts: ['참여: 성인 10명', '조건: 논문에서 사용한 양: 하루 100mg', '살펴본 내용: 잠드는 시간·수면 기록'],
     Icon: Moon,
   },
   {
     id: 'research-yoto-2012',
     label: '생각을 많이 쓴 뒤',
     title: '과제 뒤 뇌파와 활력 점수',
-    facts: ['성인 63명', '논문에서 사용한 양: 100mg 1회', '30분 뒤 과제'],
+    summary: 'GABA 캡슐을 먹은 날과 비교 캡슐을 먹은 날, 생각 과제 뒤 변화를 살펴봤어요.',
+    facts: ['참여: 성인 63명', '조건: 논문에서 사용한 양: 100mg 1회', '살펴본 내용: 과제 뒤 뇌파·활력 점수'],
     Icon: Activity,
   },
   {
     id: 'research-powers-2008',
     label: '쉬었을 때·운동했을 때',
     title: '쉬었을 때와 운동했을 때의 혈액 속 변화',
-    facts: ['남성 11명', '논문에서 사용한 양: 3g 1회', '쉬었을 때·운동했을 때 비교'],
+    summary: 'GABA 또는 비교 캡슐을 먹고 쉬었을 때와 운동했을 때 혈액 속 변화를 비교했어요.',
+    facts: ['참여: 운동 경험 남성 11명', '조건: 논문에서 사용한 양: 3g 1회', '비교: 쉬었을 때·운동했을 때'],
     Icon: Dumbbell,
   },
 ];
 
 function isEligible(claim: Claim, id: string): boolean {
   return claim.id === id && claim.status === 'approved' && Boolean(claim.metadata?.consumerSummary) &&
-    Boolean(claim.metadata?.productApplicability) && claim.sources.some(source => isPublicUrl(source.url));
+    Boolean(claim.metadata?.productApplicability);
 }
 
 export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim[]; onEvent?: (name: string, properties?: Record<string, string>) => void}) {
@@ -56,10 +59,11 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
       </div>
       <p className="gaba-research-highlights-boundary"><span aria-hidden="true">i</span> 일반 GABA를 살펴본 사람 연구를 쉬운 말로 정리했어요. 아래 숫자는 각 논문에서 사용한 조건이며, 셀핀다 제품의 표시사항은 제품 카드에서 확인할 수 있어요.</p>
       <div className="gaba-research-highlights-grid">
-        {highlights.map(({id, label, title, facts, Icon}) => {
+        {highlights.map(({id, label, title, summary, facts, Icon}) => {
           const claim = available.get(id)!;
-          const summary = claim.metadata?.consumerSummary;
-          const result = claim.metadata?.consumerHighlight;
+          // Older local API snapshots may not have the dedicated highlight field yet.
+          // Keep the reviewed finding/consumer summary visible until the next sync.
+          const result = claim.metadata?.consumerHighlight ?? claim.metadata?.consumerFinding ?? claim.publicText;
           if (!summary || !result) return null;
           return <article className="gaba-research-highlight-card" key={id}>
           <div className="gaba-research-highlight-top"><span className="gaba-research-highlight-icon"><Icon size={21} strokeWidth={1.8} aria-hidden="true" /></span><span>{label}</span></div>
