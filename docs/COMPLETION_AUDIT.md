@@ -1,5 +1,9 @@
 # 전체 목표 완료 간극 점검
 
+## 최신 후보 지문·감리 결과 동기화 — 2026-09-20 코드 후보 `d9a069c`
+
+후보 HEAD와 `dist/release-manifest.json`의 `candidateSha`를 `d9a069cb30c63f001255ebd013448598e256aa44`로 맞췄다. 로컬 회귀 107개, 타입검사, 공개 export·UI·연구 카피·티저·정적 bundle 검증과 PR 필수 검사 2개는 모두 성공했다. PR은 Code Owner 승인 전 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 공개 Pages에는 아직 후보가 반영되지 않았다.
+
 ## Worker CORS 라이브 검증 보강 — 2026-09-20 코드 후보 `487c9f5`
 
 배포 후 Worker 검증이 설정된 `MEMBER_ORIGIN`으로 preflight·허용 요청·차단 요청을 실제로 보내도록 강화했다. 공개 Pages와 회원 origin을 분리하는 운영 계약을 배포 워크플로 검사에 고정했으며, 107개 테스트·타입검사·Wrangler dry-run·`release-verify`·`site-quality-verify`를 통과했다. Cloudflare 비밀값이 없는 현재 후보에서는 Worker 라이브 검증과 배포를 실행하지 않는다.

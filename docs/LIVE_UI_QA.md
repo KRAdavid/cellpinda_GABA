@@ -1,5 +1,9 @@
 # 공개 Pages UI 검증 기록
 
+## 후보 지문·검증 문서 동기화 — 2026-09-20 코드 후보 `d9a069c`
+
+최신 후보 `d9a069cb30c63f001255ebd013448598e256aa44`의 release manifest, PR HEAD, 구현 상태 문서가 같은 지문을 가리키도록 맞췄다. `pnpm test` 107개, 타입검사, 공개 export·UI·연구 카피·티저·정적 bundle 검증과 GitHub Actions 필수 검사 2개가 성공했다. 공개 Pages는 이전 main을 가리키므로 이 기록은 후보 품질 증거이며 공개 배포 완료 증거가 아니다.
+
 ## 최신 후보 런타임 재검증 — 2026-09-20 코드 후보 `487c9f5`
 
 현재 후보의 production preview(`http://127.0.0.1:4399/`)를 Chrome CDP로 390px viewport에서 다시 확인했다. 홈·제품(`?view=products#products`)·연구(`/research/`)·뇌컨디션(`/`의 focus 진입) 경로를 순서대로 열었고, 네 경로 모두 콘솔 오류·경고 0건, 가로 넘침 0건(`scrollWidth=375`)을 확인했다. 제품 경로는 제품 섹션으로 이동했고, 연구 경로는 연구 카드 6건을 표시했으며, focus 경로는 챌린지 영역으로 이동했다.
