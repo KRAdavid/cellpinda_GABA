@@ -360,10 +360,13 @@ for (const id of shareIds) {
   const html = await readFile(page, 'utf8');
   requireMatch(html, new RegExp(`canonical" href="https:\\/\\/kradavid\\.github\\.io\\/cellpinda_GABA\\/share\\/${id}\\/`), `share page ${id} canonical metadata is missing`);
   requireMatch(html, new RegExp(`rhythm=${id}`), `share page ${id} handoff is missing`);
+  requireMatch(html, new RegExp(`href="\\.\\.\\/\\.\\.\\/\\?rhythm=${id}"`), `share page ${id} no-script handoff must preserve the result type`);
+  requireMatch(html, new RegExp(`target\\.searchParams\\.set\\('rhythm','${id}'\\)`), `share page ${id} script handoff must preserve the result type`);
+  requireMatch(html, /location\.replace\(target\.toString\(\)\)/, `share page ${id} must hand off through the SPA without a stale intermediate page`);
+  if (html.includes(`rhythm=${id}#rhythm`)) fail(`share page ${id} must not hard-code the rhythm section hash before the result card mounts`);
   const imageSize = pngDimensions(resolve(root, 'public', 'assets', `social-rhythm-${id}.png`));
   requireMatch(html, new RegExp(`property="og:image:width" content="${imageSize.width}"`), `share page ${id} Open Graph image width must match the actual PNG`);
   requireMatch(html, new RegExp(`property="og:image:height" content="${imageSize.height}"`), `share page ${id} Open Graph image height must match the actual PNG`);
-  if (html.includes(`rhythm=${id}#rhythm`)) fail(`share page ${id} must let the SPA handle result scrolling after mount`);
   requireMatch(html, /og:image/, `share page ${id} Open Graph image is missing`);
   requireMatch(html, /property="og:site_name" content="셀핀다 발효가바"/, `share page ${id} site name metadata is missing`);
   requireMatch(html, /property="og:locale" content="ko_KR"/, `share page ${id} locale metadata is missing`);
