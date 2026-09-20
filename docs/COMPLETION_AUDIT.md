@@ -1,5 +1,9 @@
 # 전체 목표 완료 간극 점검
 
+## Worker CORS 라이브 검증 보강 — 2026-09-20 코드 후보 `487c9f5`
+
+배포 후 Worker 검증이 설정된 `MEMBER_ORIGIN`으로 preflight·허용 요청·차단 요청을 실제로 보내도록 강화했다. 공개 Pages와 회원 origin을 분리하는 운영 계약을 배포 워크플로 검사에 고정했으며, 107개 테스트·타입검사·Wrangler dry-run·`release-verify`·`site-quality-verify`를 통과했다. Cloudflare 비밀값이 없는 현재 후보에서는 Worker 라이브 검증과 배포를 실행하지 않는다.
+
 ## 후보 SHA 및 공개 동기화 재확인 — 2026-09-20 `541e0fd`
 
 현재 PR 후보는 `541e0fd4c59ee96ec809a35b5a2f2cf7a6e09040`이다. 로컬 production build의 release manifest는 이 SHA와 정적 route 10개·파일 65개를 일치시켰고, `release-verify`와 `site-quality-verify`가 성공했다. 공개 Pages 루트는 HTTP 200이지만 `/release-manifest.json`이 404이며 최신 후보 문구가 없어, PR 승인·main 병합·Pages 라이브 smoke 전에는 공개 배포 완료로 판정하지 않는다.
