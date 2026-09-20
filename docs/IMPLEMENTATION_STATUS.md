@@ -1,10 +1,10 @@
 # 중간 구현 상태 — 2026-09-11
 
-## TF heartbeat 자동 갱신 — 2026-09-20 코드 후보 `d9a069c`
+## TF heartbeat 자동 갱신 — 2026-09-20 현재 후보
 
 자동 pulse heartbeat를 다시 생성했다. `generatedAt=2026-09-20T01:19:20.951Z`, `snapshotHash=40aa99629ff6b3a4643dc0c0aeb9c8ec753d1fb0aff40fcba0f9215cd1c2732b`, `stateChanged=false`, `safeExecution=MET`, 입력 게이트 4건이다. 역할군 8/8·활성 작업 5건·검증 1건·대기 4건을 유지했으며, 외부 승인·게시·구매 상태를 자동으로 변경하지 않았다.
 
-후보 문서의 최신 커밋 지문과 `dist/release-manifest.json`의 `candidateSha`가 `d9a069cb30c63f001255ebd013448598e256aa44`로 일치하는지 다시 확인했다. 이 동기화는 문서 최신성만 보정하며, PR 승인·main 병합·공개 Pages 게시 상태를 변경하지 않는다.
+후보 문서의 최신 커밋 지문과 `dist/release-manifest.json`의 `candidateSha`가 PR HEAD와 일치하는지 다시 확인했다. 지문은 산출물과 PR을 단일 원천으로 사용하며, 문서에 복제하지 않는다. 이 동기화는 문서 최신성만 보정하며, PR 승인·main 병합·공개 Pages 게시 상태를 변경하지 않는다.
 
 ## Worker 공개 origin·회원 origin 분리 검증 보강 — 2026-09-20 코드 후보 `487c9f5`
 
