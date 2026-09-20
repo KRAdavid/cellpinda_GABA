@@ -64,6 +64,15 @@ assert.ok(!/<link[^>]+rel="canonical"|<meta[^>]+property="og:(?:url|title|image)
 
 const rootHtml = await readFile(resolve(outputDirectory, 'index.html'), 'utf8');
 assert.ok(rootHtml.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요.'), 'root fallback must preserve the research/product boundary');
+if (outputDirectory.endsWith('dist-pages')) {
+  const publicPath = new URL(manifest.publicSiteUrl).pathname.replace(/\/$/, '');
+  const assetPrefix = publicPath ? `${publicPath}/` : '/';
+  const rootAssetUrls = [...rootHtml.matchAll(/<script[^>]+src="([^"]+)"|<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/gi)]
+    .map(match => match[1] || match[2]);
+  for (const assetUrl of rootAssetUrls) {
+    assert.ok(assetUrl.startsWith(assetPrefix), `root asset path must stay below the public base path: ${assetUrl}`);
+  }
+}
 const researchHtml = await readFile(resolve(outputDirectory, 'research/index.html'), 'utf8');
 assert.ok(researchHtml.includes('사람을 대상으로 한 GABA 연구를 쉽게 보기'), 'research route must identify its educational purpose');
 const productHtml = await readFile(resolve(outputDirectory, 'products/index.html'), 'utf8');
