@@ -2,7 +2,7 @@
 
 ## 현재 공개 판정 — 2026-09-21 23:11 KST
 
-기술 배포는 완료 상태다. 최신 라이브 확인 스냅샷은 main `bb30d946d0f0ebb29bb39100b98e0a7713bbff44`와 [배포 run 35609486628](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35609486628)이며 release verify·Pages·라이브 smoke·release status가 성공했다. 공개 매니페스트의 최종 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 `candidateSha`·생성 시각·검사 결과를 따른다. 문서 전용 병합으로 SHA가 변할 수 있으므로 이 문서의 SHA/run은 감사 시점 스냅샷으로 보존한다. 정적 사이트는 연구 6건·공개 주장 12개·제품 1개·후기 1개·공유 6개를 제공하며 Smart Store 단일 목적지와 750 제거를 유지한다. 결과 직후에는 뇌컨디션 확인 챌린지·제품 구성·구매자 후기 CTA가 한 패널에 모이고, `/products/` 직접 진입도 제품 섹션에 안착한다. 티저는 B4 승인 전 `HOLD`로 유지해 공개 iframe·URL을 노출하지 않는다.
+기술 배포는 완료 상태다. 최신 라이브 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 현재 `candidateSha`·생성 시각·검사 결과와 [최신 성공 배포 run](https://github.com/KRAdavid/cellpinda_GABA/actions)을 따른다. 문서 전용 병합으로 SHA가 변할 수 있으므로 이 문서의 상단에는 고정 SHA/run을 복제하지 않는다. 정적 사이트는 연구 6건·공개 주장 12개·제품 1개·후기 1개·공유 6개를 제공하며 Smart Store 단일 목적지와 750 제거를 유지한다. 결과 직후에는 뇌컨디션 확인 챌린지·제품 구성·구매자 후기 CTA가 한 패널에 모이고, `/products/` 직접 진입도 제품 섹션에 안착한다. 티저는 B4 승인 전 `HOLD`로 유지해 공개 iframe·URL을 노출하지 않는다.
 
 관리자 우회는 `enforce_admins` 한 항목에만 적용했고 병합 직후 복구했다. 현재 branch protection은 Code Owner 리뷰 1명, 필수 검사 2개, 마지막 푸시 승인, 선형 이력, 대화 해결, 관리자 강제 적용을 모두 켠 상태다. `validate:governance`가 CODEOWNERS와 워크플로 최소 권한 계약을 빌드에서 회귀 검사한다. 티저는 B4 승인 전 `HOLD`, Worker·D1 및 B2·B3·B4·C2·E1은 사람·외부 운영 입력 전까지 완료로 승격하지 않는다.
 
