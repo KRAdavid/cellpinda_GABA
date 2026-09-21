@@ -241,11 +241,11 @@ for (const marker of ['잠드는 시간과 수면 기록', '머리를 많이 쓴
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight[\s\S]*claim\.metadata\?\.consumerFinding[\s\S]*claim\.publicText/, 'post-teaser research highlights must read reviewed consumer copy and tolerate an older local API snapshot');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
 requireMatch(gabaResearchHighlights, /gaba-research-highlight-boundary-badge[\s\S]*일반 GABA 연구 · 셀핀다 완제품 시험 아님/, 'homepage research highlights must repeat the product-study boundary on each card');
-requireMatch(gabaResearchHighlights, /research-powers-2008[\s\S]*혈액 속 수치를 섭취 후 90분 동안 관찰한 결과[\s\S]*성장·근육 효과를 확인한 연구는 아니며/, 'the growth-hormone highlight must keep its measurement scope beside the result');
+requireMatch(gabaResearchHighlights, /research-powers-2008[\s\S]*GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요\.[\s\S]*성장이나 근육 발달 효과를 확인한 연구는 아니며/, 'the growth-hormone highlight must keep its measurement scope beside the result');
 for (const marker of ['연구 조건: 하루 100mg', '연구 조건: 100mg 한 번', '연구 조건: 3g 한 번']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
 requireMatch(research, /research-library-study-boundary[\s\S]*일반 GABA 연구 · 셀핀다 완제품 시험 아님/, 'research cards must show a compact product-study boundary badge');
-requireMatch(research, /claim\.id === 'research-powers-2008'[\s\S]*research-library-scope[\s\S]*섭취 후 90분 동안 혈액 속 수치를 살펴본 자료예요\.[\s\S]*연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요\./, 'growth-hormone scope must be visible before the detail disclosure');
+requireMatch(research, /claim\.id === 'research-powers-2008'[\s\S]*research-library-scope[\s\S]*GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요\.[\s\S]*성장이나 근육 발달 효과를 확인한 연구는 아니며[\s\S]*연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요\./, 'growth-hormone scope must be visible before the detail disclosure');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
 for (const marker of ['잠이 부족하면', '집중·기억·판단이 흔들릴 수 있어요.', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 if (/내 생활에서/.test(brainLoadEvidence)) fail('brain-load evidence must label its practical suggestion without implying that a general study finding directly describes the visitor');
@@ -336,7 +336,7 @@ requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 
 requireMatch(indexHtml, /사람이 GABA를 먹은 연구 14편을 모아 참여자·먹은 양·기간을 정리한 자료예요\./, 'no-script research summary must include the approved research review record');
 requireMatch(indexHtml, /수면 불편<\/strong> 수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제와 GABA가 없는 비교 정제를 4주 먹고 잠드는 시간을 살펴본 연구예요\./, 'no-script research summary must include the approved four-week sleep study');
 if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');
-requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 3g을 한 번 먹고, 운동 없이 쉰 조건과 운동 조건에서 90분 동안 혈액 속 수치를 살펴봤어요\. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 3g은 셀핀다 제품 섭취량의 근거가 아닙니다\./, 'no-script research summary must match the approved Powers study scope and product boundary');
+requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 3g을 한 번 먹고, 운동 없이 쉰 조건과 운동 조건에서 90분 동안 혈액 속 수치를 살펴봤어요\. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요\./, 'no-script research summary must match the approved Powers study scope and product boundary');
 if (/운동 뒤 혈액 속 호르몬과 몸무게 변화/.test(indexHtml)) fail('no-script research summary must not expose the held body-composition study');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
