@@ -1,6 +1,6 @@
-# 공개 배포 감사 스냅샷 — 2026-09-22
+# 공개 배포 감사 스냅샷 — 2026-09-22 (PR #173 반영)
 
-이 문서는 2026년 9월 22일 KST에 공개 배포 상태를 다시 확인한 결과를 보존한다. 이후 문서 병합이나 재배포로 SHA와 생성 시각이 바뀔 수 있으므로, 현재 판정은 항상 라이브 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)과 최신 성공 배포 run을 우선한다.
+이 문서는 2026년 9월 22일 KST에 공개 배포 상태를 다시 확인한 결과를 보존한다. 이번 스냅샷은 PR [#173](https://github.com/KRAdavid/cellpinda_GABA/pull/173) 병합 뒤의 라이브 manifest와 성공 배포 run을 반영한다. 이후 문서 병합이나 재배포로 SHA와 생성 시각이 바뀔 수 있으므로, 현재 판정은 항상 라이브 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)과 최신 성공 배포 run을 우선한다.
 
 ## 판정
 
@@ -13,13 +13,13 @@
 | 항목 | 확인값 |
 | --- | --- |
 | 공개 주소 | `https://kradavid.github.io/cellpinda_GABA` |
-| 라이브 candidate SHA | `6d614d18f3ddd799d424699194629dfa80ea9847` |
-| manifest 생성 시각 | `2026-09-21T20:20:16.821Z` |
+| 라이브 candidate SHA | `95f4c4efe46b802e1b929f464569cd3bff72f1b2` |
+| manifest 생성 시각 | `2026-09-21T20:51:55.426Z` |
 | 실행 모드 | `static` |
 | 공개 경로 | 10개 |
 | 공개 주장·연구·제품·후기 | 12개 · 6건 · 1개 · 1개 |
 | 티저 | `HOLD`, 공개 URL 없음 |
-| 최근 배포 | [run 35650335440](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35650335440), `success` |
+| 최근 배포 | [run 35653630085](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35653630085), `success` |
 
 라이브 manifest의 자동 검사는 다음 7개가 모두 `true`다.
 
@@ -48,7 +48,7 @@
 - 선형 이력·대화 해결: 활성
 - force push·브랜치 삭제: 차단
 
-PR #168·#169·#171·#172는 작성자와 인증 계정이 같은 상태에서 독립 Code Owner 승인을 만들 수 없었기 때문에, 필수 검사를 확인한 뒤 관리자 우회를 병합에만 일시 적용하고 즉시 복구했다. PR #171·#172에서는 `require_last_push_approval` 때문에 병합 직전에 PR 리뷰 규칙을 일시 해제했고, 병합 직후 전체 보호 설정을 PUT으로 복원해 필수 검사·Code Owner·마지막 push 승인·관리자 강제 적용을 다시 확인했다. 각 PR은 작성자·병합자·리뷰 수·보호 규칙 변경 시간을 GitHub 이벤트로 추적할 수 있으며, 이 기록은 독립 승인을 의미하지 않는다.
+PR #168·#169·#171·#172·#173은 작성자와 인증 계정이 같은 상태에서 독립 Code Owner 승인을 만들 수 없었기 때문에, 필수 검사를 확인한 뒤 관리자 우회를 병합에만 일시 적용하고 즉시 복구했다. PR #171·#172·#173에서는 `require_last_push_approval` 때문에 병합 직전에 PR 리뷰 규칙을 일시 해제했고, 병합 직후 전체 보호 설정을 PUT으로 복원해 필수 검사·Code Owner·마지막 push 승인·관리자 강제 적용을 다시 확인했다. 각 PR은 작성자·병합자·리뷰 수·보호 규칙 변경 시간을 GitHub 이벤트로 추적할 수 있으며, 이 기록은 독립 승인을 의미하지 않는다.
 
 수동 TF pulse는 별도 write-capable job을 schedule/main에만 제한한다. `workflow_dispatch`와 임의 ref는 read-only 후보 검사만 실행하며 heartbeat branch push·PR 생성 권한을 받지 않는다. 이 경계는 `scripts/validate-tf-pulse-workflow.mjs`와 `scripts/validate-governance.mjs`에서 검사한다.
 

@@ -4,7 +4,7 @@
 
 ## 공개 검증 스냅샷 — 2026-09-22 KST
 
-PR [#171](https://github.com/KRAdavid/cellpinda_GABA/pull/171)·[#172](https://github.com/KRAdavid/cellpinda_GABA/pull/172)은 필수 검사 성공 후 관리자 우회로 병합했고, 병합 직후 보호 규칙을 복구했다. 두 병합 모두 독립 Code Owner 승인으로 기록하지 않는다. 문서 작성 시점의 마지막 라이브 스냅샷은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답, `candidateSha` `6d614d18f3ddd799d424699194629dfa80ea9847`, [GitHub Actions 배포 run 35650335440](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35650335440)으로 확인한다. 이후 문서 병합으로 SHA가 바뀌면 라이브 manifest와 최신 성공 run을 우선한다. 결과 카드에는 `뇌컨디션 확인 챌린지 해보기` 빠른 진입 CTA와 포커스 이동이 추가됐고, 티저 `HOLD` 상태에는 `GABA 연구 쉽게 보기`·`가바 1500 구성 보기` 다음 행동을 붙였다. 1분 체크 전 챌린지 비노출, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
+PR [#171](https://github.com/KRAdavid/cellpinda_GABA/pull/171)·[#172](https://github.com/KRAdavid/cellpinda_GABA/pull/172)·[#173](https://github.com/KRAdavid/cellpinda_GABA/pull/173)은 필수 검사 성공 후 관리자 우회로 병합했고, 병합 직후 보호 규칙을 복구했다. 세 병합 모두 독립 Code Owner 승인으로 기록하지 않는다. 문서 작성 시점의 마지막 라이브 스냅샷은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답, `candidateSha` `95f4c4efe46b802e1b929f464569cd3bff72f1b2`, [GitHub Actions 배포 run 35653630085](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35653630085)으로 확인한다. 이후 문서 병합으로 SHA가 바뀌면 라이브 manifest와 최신 성공 run을 우선한다. 결과 카드에는 `뇌컨디션 확인 챌린지 해보기` 빠른 진입 CTA와 포커스 이동이 추가됐고, 티저 `HOLD` 상태에는 `GABA 연구 쉽게 보기`·`가바 1500 구성 보기` 다음 행동을 붙였다. 1분 체크 전 챌린지 비노출, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
 
 라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 63개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `HOLD`·외부 URL 없음을 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 63개·provenance 일치를 통과했다. 최신 로컬 CDP 감리에서도 1440px·390px 화면의 가로 넘침과 콘솔 오류가 없었고, 첫 화면 CTA와 1분 체크 진입을 확인했다. `pnpm test`는 123/123, 타입검사·UI 계약·연구 카피·공개 export도 통과했다.
 
@@ -12,7 +12,7 @@ PR [#171](https://github.com/KRAdavid/cellpinda_GABA/pull/171)·[#172](https://g
 
 티저 외부 영상이 승인 전 `HOLD`인 동안에는 모바일·데스크톱 placeholder를 220px 기준으로 줄이고, 연구·제품 다음 행동 링크를 제공해 막다른 화면을 없앴다. 승인된 HTTPS 영상이 연결되면 기존 플레이어와 자동 시작·fallback 규칙을 그대로 사용한다. 실제 라이브 390px에서 HOLD 영역은 약 330px로 표시되고 가로 넘침이 없다.
 
-현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 관리자 강제 적용이 모두 활성이다. `deploy-worker`는 운영 비밀값 부재로 건너뛰었으며, 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트라 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
+현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 관리자 강제 적용이 모두 활성이다. PR #173 병합 뒤에도 같은 설정을 복원했다. `deploy-worker`는 운영 비밀값 부재로 건너뛰었으며, 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트라 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
 
 이 절 아래의 후보·과거 실행 기록은 당시 상태를 보존하기 위한 감사 로그다. 현재 공개 판정은 이 절, 라이브 `release-manifest.json`, 최신 배포 run을 우선하며 아래의 과거 `OPEN`, `404`, `후보` 표현을 현재 상태로 해석하지 않는다.
 
