@@ -4,9 +4,9 @@
 
 연구 카드의 Yoto 문구를 `머리를 많이 쓴 뒤 뇌파·활력 점수의 감소 폭을 비교했어요`, Powers 문구를 `쉰 날·운동한 날 혈액 속 성장호르몬을 비교했어요`로 정리했다. 일반 GABA 연구의 관찰 범위와 셀핀다 완제품 정보를 분리하는 문구는 유지했고, 소비자 리엘의 비교 대상·측정 항목을 풀어 썼다. 연구 제목에 `일반 GABA 연구`를 고정하고 첫 카드에 `다음 카드 →` 안내를 추가했으며, 마지막 카드 CTA를 제품 구성으로 연결했다. 무스크립트 안내·연구 라이브러리·공개 smoke 계약을 같은 문장 기준으로 동기화했다. B4 승인 전 외부 티저는 `HOLD` 상태로 iframe과 공개 URL을 제거했다.
 
-PR #125·#126·#127·#128·#129·#130·#132·#134·#135·#136·#137·#138의 필수 검사(`release-verify`, `site-quality-verify`)가 통과한 뒤 관리자 병합을 진행했고, 보호 규칙은 병합 직후 복구했다. 최신 main 커밋은 `534ebf46c88925ec3d4fcae47de5a66849c1bd2d`, 배포 실행은 [35596577839](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35596577839)이며 `release-verify`·Pages 게시·라이브 smoke·`release-status`가 모두 성공했다. Worker/D1은 비밀값 미설정으로 이번 공개본에서 계속 `skipped`다. 1분 체크 전 챌린지를 숨기는 흐름, 일반 GABA 연구 경계, 소비자용 비교 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 제품 섹션 안착을 라이브에서 재검증했다.
+PR #125·#126·#127·#128·#129·#130·#132·#134·#135·#136·#137·#138·#139의 필수 검사(`release-verify`, `site-quality-verify`)가 통과한 뒤 관리자 병합을 진행했고, 보호 규칙은 병합 직후 복구했다. 최신 main 커밋은 `8c548eca7cab5eb5be781e31999de52323b9e7fc`, 배포 실행은 [35597134765](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35597134765)이며 `release-verify`·Pages 게시·라이브 smoke·`release-status`가 모두 성공했다. Worker/D1은 비밀값 미설정으로 이번 공개본에서 계속 `skipped`다. 1분 체크 전 챌린지를 숨기는 흐름, 일반 GABA 연구 경계, 소비자용 비교 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 제품 섹션 안착을 라이브에서 재검증했다.
 
-공개 `release-manifest.json`은 HTTP 200이며 candidate SHA `212bc4c072caff816f44485237e92fffb818441b`, 정적 모드·10개 경로·연구 6건·제품 1개·후기 목적지 1개·Smart Store only·750 제거·티저 `HOLD`·외부 URL 없음을 확인했다. `pnpm run validate:live-public`도 페이지 200·bundle hash 65개·공개 데이터 provenance 일치를 통과했다. 제품 섹션 이동 CTA는 `가바 1500 제품 구성 보기`로 통일해 목적지와 문구를 일치시켰다. 현재 main에는 열린 PR이 없고 보호 규칙은 Code Owner 승인 1명·필수 검사 2개·관리자 적용·선형 이력·대화 해결·강제 푸시·삭제 차단 상태다.
+공개 `release-manifest.json`은 HTTP 200이며 candidate SHA `8c548eca7cab5eb5be781e31999de52323b9e7fc`, 정적 모드·10개 경로·연구 6건·제품 1개·후기 목적지 1개·Smart Store only·750 제거·티저 `HOLD`·외부 URL 없음을 확인했다. `pnpm run validate:live-public`도 페이지 200·bundle hash 65개·공개 데이터 provenance 일치를 통과했다. 제품 섹션 이동 CTA는 `가바 1500 제품 구성 보기`로 통일해 목적지와 문구를 일치시켰다. 현재 main에는 열린 PR이 없고 보호 규칙은 Code Owner 승인 1명·필수 검사 2개·관리자 적용·선형 이력·대화 해결·강제 푸시·삭제 차단 상태다.
 
 ## 2026-09-21 최신 라이브와 시각형 리엘 감리
 
