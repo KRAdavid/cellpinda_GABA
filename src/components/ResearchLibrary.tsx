@@ -168,7 +168,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       <h3>{reviewOverview ? '사람 연구 14편의 범위 살펴보기' : metadata.question || claim.topic}</h3>
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{reviewOverview ? '자료에서 다룬 내용' : findingFirst ? '사람 연구에서 관찰된 변화' : '이 연구에서 본 내용'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}
-      {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>{metadata.consumerDisclosureStatus === 'not_reported_in_pubmed_abstract' ? '연구 지원·연구자 소속 확인 상태' : '연구를 지원한 곳·연구자 소속'}</strong>{metadata.consumerDisclosure}</span></p> : null}
+      {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>연구비·연구자 정보</strong>{metadata.consumerDisclosure}</span></p> : null}
       {featured && metadata.hopefulTakeaway ? <div className="research-library-next-step research-library-next-step--featured"><span className="research-library-next-step-mark" aria-hidden="true">+</span><div><h4>오늘 연결해 보기</h4><p>{metadata.hopefulTakeaway}</p></div></div> : null}
       {claim.id === 'research-powers-2008' ? <p className="research-library-scope" role="note"><strong>이 연구가 보여주는 범위</strong>GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요.</p> : null}
       <details className="research-detail" onToggle={event => {
