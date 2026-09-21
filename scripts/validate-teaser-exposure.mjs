@@ -33,6 +33,16 @@ if (manifest.status === 'HOLD') {
   try { publicUrl = new URL(manifest.publicMediaUrl); } catch { fail('APPROVED teaser needs a public HTTPS media URL'); }
   if (publicUrl.protocol !== 'https:') fail('APPROVED teaser media URL must use HTTPS');
   if (!manifest.approvedAt || !manifest.approvedBy) fail('APPROVED teaser needs reviewer and approval date');
+  if (!Array.isArray(manifest.approvalEvidence) || manifest.approvalEvidence.length !== manifest.requiredApprovals.length) fail('APPROVED teaser needs one evidence record for every approval item');
+  const evidenceItems = new Set();
+  for (const evidence of manifest.approvalEvidence) {
+    if (!evidence || typeof evidence.item !== 'string' || !manifest.requiredApprovals.includes(evidence.item) || evidenceItems.has(evidence.item)) fail('APPROVED teaser approval evidence items must be unique and drawn from the checklist');
+    if (typeof evidence.reviewer !== 'string' || evidence.reviewer.trim().length < 2) fail('APPROVED teaser approval evidence needs a reviewer');
+    if (!/^\d{4}-\d{2}-\d{2}T/.test(evidence.approvedAt) || Number.isNaN(Date.parse(evidence.approvedAt))) fail('APPROVED teaser approval evidence needs a valid approval timestamp');
+    if (!/^[a-f0-9]{64}$/.test(evidence.evidenceHash || '')) fail('APPROVED teaser approval evidence needs a SHA-256 evidence hash');
+    if (typeof evidence.scope !== 'string' || evidence.scope.trim().length < 4) fail('APPROVED teaser approval evidence needs an approval scope');
+    evidenceItems.add(evidence.item);
+  }
 }
 
 const internalUrl = manifest.internalReviewUrl;
