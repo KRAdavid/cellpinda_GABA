@@ -38,7 +38,7 @@ function buildSlides(): ReelSlide[] {
       id: 'research',
       eyebrow: '일반 GABA 연구',
       title: '일반 GABA 연구에서 뇌파·활력과 잠의 변화를 살펴봤어요.',
-      body: '머리를 많이 쓴 뒤 뇌파·활력 점수가 더 유지되거나, 잠드는 시간이 짧게 기록된 사례가 있어요.',
+      body: '머리를 많이 쓴 뒤 뇌파·활력 점수의 감소 폭, 잠드는 시간을 비교·기록한 연구가 있어요.',
       kind: 'research',
       icon: BookOpen,
       link: {href: '#gaba-research-highlights', label: '연구 내용을 쉽게 보기'},
