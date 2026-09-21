@@ -61,7 +61,8 @@ requireMatch(researchStyles, /\.research-route-main\{width:min\(1120px,100%\);ma
 if (!(researchRoute.indexOf('<ResearchLibrary') >= 0 && researchRoute.includes('research-route-product') && researchRoute.includes('view=products#products') && !researchRoute.includes(approvedSmartStoreUrl) && !/스마트스토어/.test(researchRoute))) fail('the research route must end with a neutral product-information handoff without exposing a purchase link');
 requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서 관찰된 변화/, 'selected research findings must be visibly labeled before methods are opened');
 requireMatch(research, /research-library-next-step[\s\S]*metadata\.hopefulTakeaway/, 'research cards must show the approved consumer next step after the study facts');
-requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
+requireMatch(app, /<small className="product-category" aria-label=\{p\.category\}>제품 유형 · \{productCategoryDisplay\(p\.category\)\}<\/small>/, 'the product category shown to consumers must use synchronized product data with a plain-language label');
+requireMatch(app, /판매처에 표시된 유형<\/strong><small>\{productCategoryDisplay\(p\.category\)\}<\/small>/, 'the product visual must explain the source-qualified type in consumer language');
 requireMatch(hero, /잠과 휴식 1분 체크/, 'the first screen must have one clear action to start the check');
 requireMatch(hero, /<a className="button" href="#rhythm"[\s\S]*?잠과 휴식 1분 체크/, 'the first screen check CTA must remain the single primary action');
 requireMatch(hero, /<a className="hero-secondary-link" href="#consumer-reel"[\s\S]*?GABA 한 장씩 보기/, 'the first screen GABA story CTA must remain a secondary link');
@@ -330,7 +331,7 @@ requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 
 requireMatch(indexHtml, /사람이 GABA를 먹은 연구 14편을 모아 참여자·먹은 양·기간을 정리한 자료예요\./, 'no-script research summary must include the approved research review record');
 requireMatch(indexHtml, /수면 불편<\/strong> 수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제와 GABA가 없는 비교 정제를 4주 먹고 잠드는 시간을 살펴본 연구예요\./, 'no-script research summary must include the approved four-week sleep study');
 if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');
-requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 3g을 한 번 먹고 운동 없이 쉰 조건과 운동 조건에서 혈액 속 성장호르몬 수치를 살펴봤어요\. 셀핀다 가바 1500 제품 정보와는 따로 확인해 주세요\./, 'no-script research summary must match the approved Powers study scope and product boundary');
+requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 3g을 한 번 먹고, 운동 없이 쉰 조건과 운동 조건에서 90분 동안 혈액 속 수치를 살펴봤어요\. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 3g은 셀핀다 제품 섭취량의 근거가 아닙니다\./, 'no-script research summary must match the approved Powers study scope and product boundary');
 if (/운동 뒤 혈액 속 호르몬과 몸무게 변화/.test(indexHtml)) fail('no-script research summary must not expose the held body-composition study');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
