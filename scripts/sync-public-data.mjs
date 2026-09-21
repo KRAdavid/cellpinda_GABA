@@ -123,9 +123,12 @@ for(const [id,kind] of featuredResearchKinds){
   if(!item || typeof item.metadata?.consumerFinding!=='string' || item.metadata.consumerFinding.trim().length<30 || visual?.kind!==kind) throw new Error(`Featured research ${id} is missing its reviewed consumer finding or ${kind} visualization`);
 }
 const approvedIds=new Set(claims.map(item=>item.id));
+const publicProductCategory=item=>item.categoryApprovalStatus==='approved'
+  ? item.category
+  : `판매처 표기 기준 · ${item.category}`;
 const products=ledger.products
   .filter(item=>item.status==='approved' && item.sourceIds?.every(id=>approvedIds.has(id)) && isSmartStoreUrl(item.officialUrl))
-  .map(({id,name,servings,category,officialUrl,status,availability,priceDisplay,sourceIds})=>({id,name,servings,category,officialUrl,status,availability,priceDisplay,sourceIds}));
+  .map(item=>({id:item.id,name:item.name,servings:item.servings,category:publicProductCategory(item),officialUrl:item.officialUrl,status:item.status,availability:item.availability,priceDisplay:item.priceDisplay,sourceIds:item.sourceIds}));
 const reviews=ledger.reviews
   .filter(item=>['shop-review-destination','shop-review-destination-1500'].includes(item.id) && item.status==='approved' && isSmartStoreReviewUrl(item.sourceUrl))
   .map(({id,status,publicText,sourceTitle,sourceUrl,originalPublic})=>({id,status,publicText,sourceTitle,sourceUrl,originalPublic}));
