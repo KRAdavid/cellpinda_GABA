@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   issues: write
 
 concurrency:
@@ -63,6 +64,16 @@ jobs:
             const fs = require('fs');
             const report = JSON.parse(fs.readFileSync(process.env.REPORT_PATH, 'utf8'));
             const title = '[자동 보고] 셀핀다 GABA 업무 진행상황';
+            const { data: pulseRuns } = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'tf-pulse.yml',
+              per_page: 5,
+            });
+            const latestPulseRun = pulseRuns.workflow_runs?.[0] || null;
+            const pulseRunStatus = latestPulseRun
+              ? `${latestPulseRun.status}/${latestPulseRun.conclusion || 'pending'} · ${latestPulseRun.event} · ${String(latestPulseRun.head_sha || '').slice(0, 12)}`
+              : '실행 기록 없음';
             const counts = report.taskCounts || {};
             const gates = (report.nextActions || []).map(item => {
               const blockers = Array.isArray(item.blockers) && item.blockers.length
@@ -105,6 +116,7 @@ jobs:
               `- 배포 식별자: candidate ${candidateSha} · manifest 생성 ${releaseGeneratedAt}`,
               `- 공개 번들: hash ${bundleHashes} · 750 제거 ${report.live?.removed750 === true ? '확인' : '확인 필요'} · Smart Store 전용 ${report.live?.smartStoreOnly === true ? '확인' : '확인 필요'}`,
               `- 티저: **${teaserStatus}** · ${teaserUrl}`,
+              `- TF 자동 pulse: **${pulseRunStatus}** · ${latestPulseRun?.html_url || '실행 기록 없음'}`,
               '',
               ...liveError,
               '### 다음 확인 항목',
