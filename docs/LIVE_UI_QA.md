@@ -2,7 +2,7 @@
 
 ## 최신 라이브 확정 감리 — 2026-09-21 14:39 KST
 
-PR #107 병합 커밋 `7aea99dc76b353acd4a16f9f6be76c974fb1636b`가 Pages에 게시된 뒤 [35567297107](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35567297107)의 release verify·라이브 smoke·release status가 성공했다. 현재 `/release-manifest.json`은 HTTP 200이며 candidate SHA·정적 모드·10개 공개 경로·62개 파일 hash·연구 6건·제품 1개·후기 목적지 1개가 라이브와 일치한다. Smart Store 단일 목적지, 750 제품 제거, 내부 운영 JSON 제외, 티저 `PREVIEW` 경계와 공유 결과 단일 착지·티저 로딩 대체 경로를 재확인했다.
+PR #109 병합 커밋 `8dc09e22b0a4d458e95a36946462ecd5d12a39d5`가 Pages에 게시된 뒤 [35568559599](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35568559599)의 release verify·라이브 smoke·release status가 성공했다. 현재 `/release-manifest.json`은 HTTP 200이며 candidate SHA·정적 모드·10개 공개 경로·62개 파일 hash·연구 6건·제품 1개·후기 목적지 1개가 라이브와 일치한다. Smart Store 단일 목적지, 750 제품 제거, 내부 운영 JSON 제외, 티저 `PREVIEW` 경계와 공유 결과 단일 착지·티저 로딩 fallback 단일 노출을 재확인했다.
 
 Chromium CDP 감리에서 홈·연구·제품·공유·뇌컨디션 챌린지를 390px·1440px로 확인했다. 가로 overflow 0, 콘솔 오류 0, 메뉴·CTA·연구·제품·후기 링크·키보드 포커스·landmark/대체텍스트·대비 계약을 확인했다. 연구 카드 제목을 `쉰 날·운동한 날 몸의 변화`로 줄였고 작은 연구 라벨 대비를 `#116f4a`로 보정했다. 이 기록은 실제 기기 전체 조합 시험이나 B2·B3·B4·C2·E1 사람 승인 게이트를 대신하지 않는다.
 
