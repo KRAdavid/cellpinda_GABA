@@ -155,6 +155,13 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       : metadata.consumerVisual
       ? metadata.consumerScope || metadata.consumerSummary || metadata.consumerFinding
       : metadata.consumerSummary || metadata.consumerFinding || metadata.consumerScope;
+    // The Powers card already shows the full product-boundary note before the
+    // disclosure panel. Keep the panel focused on the study condition so the
+    // same warning is not repeated twice in the consumer flow. The reviewed
+    // productApplicability field remains intact in the public data ledger.
+    const detailScope = claim.id === 'research-powers-2008'
+      ? 'GABA 3g을 한 번 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 조건입니다.'
+      : metadata.productApplicability;
     return <article id={claim.id} className={`research-library-card${featured ? ` research-library-card-featured${resultVisualFirst ? ' research-library-card-featured--visual-first' : ''}` : ''}`} key={claim.id}>
       <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}${generalResearch ? ' research-library-kind--general' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{reviewOverview ? '사람 연구 여러 편을 모아 정리 · 2020년 2월까지' : compactStudyType(metadata.studyType, metadata.dose)}</p>
       <p className="research-library-study-boundary">일반 GABA 연구 · 셀핀다 완제품 시험 아님</p>
@@ -169,7 +176,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       }}>
         <summary>이 연구, 어떻게 했나요?</summary>
         <div className="research-library-detail">
-          <p className="research-library-study-scope"><strong>연구에서 살펴본 조건</strong><span>{metadata.productApplicability}</span></p>
+          <p className="research-library-study-scope"><strong>연구에서 살펴본 조건</strong><span>{detailScope}</span></p>
           {metadata.consumerContext ? <p className="research-library-detail-context"><Info size={17} aria-hidden="true"/><span>{metadata.consumerContext}</span></p> : null}
           {metadata.consumerDetail ? <p className="research-library-detail-finding"><strong>측정 결과</strong>{metadata.consumerDetail}</p> : !metadata.consumerVisual && metadata.consumerFinding && metadata.consumerFinding !== takeaway ? <p className="research-library-detail-finding"><strong>연구에서 기록한 결과</strong>{metadata.consumerFinding}</p> : null}
           <div className="research-story-grid" aria-label="연구 정보 그림 요약">
