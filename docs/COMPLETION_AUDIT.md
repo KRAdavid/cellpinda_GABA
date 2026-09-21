@@ -2,7 +2,7 @@
 
 ## 현재 확정 공개 상태 — 2026-09-21 · 라이브 기준
 
-이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 현재 공개 판정은 이 절을 기준으로 한다. 마지막 애플리케이션 변경 커밋은 `955c8e7f6963fe3a76923f6e0bfd22c6095fad5f`이며, [배포 run 35565103216](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35565103216)의 재실행 `release-verify`, Pages 게시, 라이브 smoke, release status가 성공했다. 당시 공개 `release-manifest.json`은 HTTP 200으로 같은 SHA를 가리켰다. 문서 전용 후속 커밋은 애플리케이션 내용 검증을 바꾸지 않는다.
+이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 현재 공개 판정은 이 절을 기준으로 한다. 최신 애플리케이션 변경 커밋은 `7aea99dc76b353acd4a16f9f6be76c974fb1636b`이며, [배포 run 35567297107](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35567297107)의 `release-verify`, Pages 게시, 라이브 smoke, release status가 성공했다. 공개 `release-manifest.json`은 HTTP 200으로 같은 SHA를 가리킨다. 이번 변경은 공유 결과의 이중 자동 스크롤을 제거하고 티저 지연 로딩 중 새 창 대체 경로를 추가했다.
 
 라이브 검증에서 정적 모드·공개 경로 10개·hash 파일 62개·승인 연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·공유 경로 6개를 확인했다. 구매·후기 목적지는 지정된 Smart Store 한 곳으로 고정했고 750 제품과 내부 운영 스냅샷은 공개본에서 제외했다. 모바일 연구 카드 줄바꿈과 뇌 근거 라벨 대비 P2를 보정했다. 티저는 `PREVIEW` 상태로 경계가 표시되며, 최종 공개 권리·콘텐츠 승인은 아직 B4 `WAITING`이다.
 

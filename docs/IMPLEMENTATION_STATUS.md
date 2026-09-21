@@ -2,7 +2,7 @@
 
 ## 현재 확정 공개 상태 — 2026-09-21 14:39 KST
 
-관리자 병합으로 PR #103·#104를 main에 반영한 뒤, 보호 규칙을 즉시 복구했다. 마지막 애플리케이션 변경은 `955c8e7f6963fe3a76923f6e0bfd22c6095fad5f`이며 배포 run [35565103216](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35565103216)의 재실행 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 당시 공개 `release-manifest.json`은 같은 SHA를 가리켰고 HTTP 200이었다. 이후 문서 전용 커밋이 생겨도 이 애플리케이션 검증을 기준으로 삼는다.
+관리자 병합으로 PR #107을 main에 반영한 뒤, 보호 규칙을 즉시 복구했다. 마지막 애플리케이션 변경은 `7aea99dc76b353acd4a16f9f6be76c974fb1636b`이며 배포 run [35567297107](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35567297107)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 `release-manifest.json`은 같은 SHA를 가리키고 HTTP 200이다. 공유 결과 단일 착지와 티저 지연 로딩 대체 경로를 포함한 상태를 현재 애플리케이션 기준으로 삼는다.
 
 라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 62개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `PREVIEW`를 확인한다. 390px·1440px 실제 화면 감리에서 가로 넘침·콘솔 오류·주요 접근성 누락은 확인되지 않았다. 연구 카드 모바일 줄바꿈과 뇌 근거 라벨 대비 P2도 보정했다.
 
