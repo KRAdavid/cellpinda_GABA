@@ -92,7 +92,7 @@ cacheContains(contentResponse,'public','max-age=300','must-revalidate');
 if (/no-store/i.test(robotsResponse.headers.get('cache-control') || '') || /no-store/i.test(sitemapResponse.headers.get('cache-control') || '')) throw new Error('Worker robots/sitemap must remain cacheable public documents');
 if (!robots.includes(`Sitemap: ${base.origin}/sitemap.xml`) || !sitemap.includes(`<loc>${base.origin}/</loc>`)) throw new Error('Worker robots/sitemap must use the configured public origin');
 if (canonicalHref(page)!==`${base.origin}/` || !metaContent(page,'og:url')) throw new Error('Worker root canonical/Open Graph metadata is invalid');
-if (canonicalHref(account)!==`${base.origin}/` || !/noindex, nofollow, noarchive/.test(account)) throw new Error('Worker account shell must be private and non-indexable');
+if (canonicalHref(account)!==`${base.origin}/account` || !/noindex, nofollow, noarchive/.test(account)) throw new Error('Worker account shell must be private and non-indexable');
 if (canonicalHref(productPage)!==`${base.origin}/products/` || metaContent(productPage,'og:url')!==`${base.origin}/products/`) throw new Error('Worker product route must preserve its product canonical/Open Graph URL');
 const productSchema = jsonLd(productPage);
 const productSchemaNode = Array.isArray(productSchema?.['@graph']) ? productSchema['@graph'].find(node => node?.['@type'] === 'Product') : null;

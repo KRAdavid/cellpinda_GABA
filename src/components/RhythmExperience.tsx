@@ -538,18 +538,21 @@ export default function RhythmExperience({ onEvent, onResultChange }: RhythmExpe
           <div className="rhythm-result-actions">
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" aria-label="공유받은 유형과 내 결과 비교하기" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
+            <div className="rhythm-result-next-step" aria-label="오늘 해볼 행동">
+              <p className="rhythm-eyebrow">오늘 해볼 행동</p>
+              <div className="rhythm-result-challenge" aria-label="뇌컨디션 확인 챌린지">
+                <p className="rhythm-eyebrow">내 상태를 더 확인해 보세요</p>
+                <a className="rhythm-button" href="#focus-game">뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
+                <small>1분 색 신호 게임으로 내 반응 기록을 남겨 보세요.</small>
+              </div>
+              <div className="rhythm-result-commerce" aria-label="제품과 구매자 후기 확인">
+                <p className="rhythm-eyebrow">제품과 구매자 후기를 확인하세요</p>
+                <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>
+                <a className="rhythm-text-button" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 구매자 후기 읽기 · 새 창" onClick={() => onEvent('review_open', { productId: 'gaba1500', path: '/result' })}>스마트스토어 구매자 후기 읽기 <ArrowUpRight size={18} aria-hidden="true" /></a>
+              </div>
+            </div>
             <details className="rhythm-rules"><summary>점수는 어떻게 나온 건가요?</summary><p>{result?.explanation ?? '지난 7일 동안 잠, 휴식, 아침 피로 등에 답한 내용을 모아 보여드려요. 점수는 내 답변을 정리한 것이며 건강 상태를 재거나 병을 진단하는 결과가 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#brain-load-evidence">집중과 휴식 관련 연구 쉽게 보기 <ArrowRight size={18} aria-hidden="true" /></a>
-            <div className="rhythm-result-challenge" aria-label="다음으로 해볼 일">
-              <p className="rhythm-eyebrow">먼저, 내 상태를 더 확인해 보세요</p>
-              <a className="rhythm-button" href="#focus-game">뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
-              <small>1분 색 신호 게임으로 내 반응 기록을 남겨 보세요.</small>
-            </div>
-            <div className="rhythm-result-commerce" aria-label="제품과 구매자 후기 확인">
-              <p className="rhythm-eyebrow">제품과 구매자 후기를 확인하세요</p>
-              <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>
-              <a className="rhythm-text-button" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 구매자 후기 읽기 · 새 창" onClick={() => onEvent('review_open', { productId: 'gaba1500', path: '/result' })}>스마트스토어 구매자 후기 읽기 <ArrowUpRight size={18} aria-hidden="true" /></a>
-            </div>
             {!sharedType ? <div className="rhythm-result-invite" aria-label="친구에게 1분 체크 보내기">
               <p className="rhythm-eyebrow">친구와 함께 해보기</p>
               <p className="rhythm-result-invite-copy">친구에게도 1분 체크를 보내 보세요.</p>

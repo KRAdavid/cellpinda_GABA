@@ -343,6 +343,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   const runSequenceRef = useRef(0);
   const practiceHeadingRef = useRef<HTMLHeadingElement>(null);
   const restHeadingRef = useRef<HTMLHeadingElement>(null);
+  const summaryHeadingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (phase !== 'rest') return;
@@ -356,6 +357,15 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   useEffect(() => {
     if (!phase.startsWith('practice-')) return;
     practiceHeadingRef.current?.focus({ preventScroll: true });
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== 'baseline-complete' && phase !== 'baseline-finished' && phase !== 'complete') return;
+    const frame = window.requestAnimationFrame(() => {
+      summaryHeadingRef.current?.scrollIntoView({ block: 'start', behavior: 'auto' });
+      summaryHeadingRef.current?.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, [phase]);
 
   useEffect(() => {
@@ -784,7 +794,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
             <div className={`fatigue-score-ring fatigue-score-ring-${baselineCopy.tone}`} role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>게임 정답률</span></div>
             <div>
             <p className="fatigue-game-kicker">{baselineCopy.kicker} · 오늘의 반응 기록</p>
-            <h3>{baselineCopy.heading}</h3>
+            <h3 ref={summaryHeadingRef} tabIndex={-1}>{baselineCopy.heading}</h3>
             <p className="fatigue-game-result-score">{before.total}개 신호 중 {before.correct}개를 맞혔어요.</p>
             <p className="fatigue-game-result-disclosure">오늘 게임에서 맞힌 비율이에요. 뇌 피로나 건강 상태를 측정한 값은 아니에요.</p>
             <p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${baselineCopy.tone}`} role="status">{baselineCopy.body}</p>
@@ -799,7 +809,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         </div> : null}
 
         {phase === 'baseline-finished' && before && baselineCopy ? <div className="fatigue-game-summary fatigue-game-baseline-finished">
-          <div className={`fatigue-score-ring fatigue-score-ring-${baselineCopy.tone}`} role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>정답률</span></div><div><p className="fatigue-game-kicker">{baselineCopy.kicker} · 오늘의 게임 기록</p><h3>{baselineCopy.heading}</h3><p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${baselineCopy.tone}`} role="status">{baselineCopy.body}</p><details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>다시 해보기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 답변이 포함되지 않아요.</p> : null}</div>
+          <div className={`fatigue-score-ring fatigue-score-ring-${baselineCopy.tone}`} role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>정답률</span></div><div><p className="fatigue-game-kicker">{baselineCopy.kicker} · 오늘의 게임 기록</p><h3 ref={summaryHeadingRef} tabIndex={-1}>{baselineCopy.heading}</h3><p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${baselineCopy.tone}`} role="status">{baselineCopy.body}</p><details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>다시 해보기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 답변이 포함되지 않아요.</p> : null}</div>
         </div> : null}
 
         {phase === 'rest' ? <div className="fatigue-game-rest">
@@ -826,7 +836,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         </div> : null}
 
         {phase === 'complete' && before && after && comparison ? <div className="fatigue-game-summary fatigue-game-complete">
-          <div className={`fatigue-comparison fatigue-comparison-${comparison.tone}`}><ArrowRight size={24} aria-hidden="true" /><div><p className="fatigue-game-kicker">{mode === 'after' ? '5분 쉰 뒤 두 번째 게임' : '쉬지 않고 이어 한 두 번째 게임'}</p><h3>{comparison.heading}</h3></div></div>
+          <div className={`fatigue-comparison fatigue-comparison-${comparison.tone}`}><ArrowRight size={24} aria-hidden="true" /><div><p className="fatigue-game-kicker">{mode === 'after' ? '5분 쉰 뒤 두 번째 게임' : '쉬지 않고 이어 한 두 번째 게임'}</p><h3 ref={summaryHeadingRef} tabIndex={-1}>{comparison.heading}</h3></div></div>
           <p className="fatigue-game-comparison-note">{comparison.body}</p>
           <details className="fatigue-game-result-details"><summary>두 게임 기록 자세히 보기</summary><div className="fatigue-game-score-grid">{metrics.map(metric => <div key={metric.label}><span>{metric.label}</span><strong>첫 번째 {metric.before}</strong><strong>두 번째 {metric.after}</strong></div>)}</div></details>
           <p className="fatigue-game-viral-copy">친구도 직접 해보도록 챌린지를 보내 보세요.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>처음부터 다시 하기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 잠·휴식 답변이 포함되지 않아요.</p> : null}

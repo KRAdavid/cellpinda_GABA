@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /cellpinda_GABA/admin
 Disallow: /cellpinda_GABA/ops
+Disallow: /cellpinda_GABA/account
+Disallow: /cellpinda_GABA/?view=account
 
 Sitemap: https://kradavid.github.io/cellpinda_GABA/sitemap.xml

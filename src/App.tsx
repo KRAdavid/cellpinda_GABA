@@ -35,6 +35,10 @@ const productImages:Record<string,{styled:string;front:string}>={
 const eventMap:Record<string,string>={rhythm_start:'rhythm_check_started',rhythm_complete:'rhythm_check_completed',share_request:'share_requested',share_copy:'share_link_copied',card_download:'share_image_downloaded',purchase_click:'purchase_outbound_clicked',review_open:'review_opened',review_nav:'review_section_navigated',faq_open:'purchase_question_opened',research_highlight_opened:'research_highlight_opened',research_library_opened:'research_library_opened',consumer_reel_impression:'consumer_reel_impression',consumer_reel_step:'consumer_reel_step',consumer_reel_navigation:'consumer_reel_navigation',consumer_reel_cta:'consumer_reel_cta'};
 const siteRoot=import.meta.env.BASE_URL;
 const asset=(path:string)=>`${siteRoot}${path}`;
+function updateStructuredData(value: unknown) {
+ const element=document.head.querySelector<HTMLScriptElement>('script[type="application/ld+json"]');
+ if(element)element.textContent=JSON.stringify(value);
+}
 function evidenceLinkLabel(url:string): string {
  try {
   const host=new URL(url).hostname.toLowerCase();
@@ -158,8 +162,11 @@ export default function App(){
   document.title=title;
   const update=(selector:string,attribute:'name'|'property',value:string)=>{const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${selector}"]`);if(element)element.content=value;else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}};
   update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:image:alt','property','GABA 사람 연구를 쉬운 말로 살펴보는 셀핀다 연구 안내');update('og:url','property',new URL(`${siteRoot}research/`,window.location.origin).toString());update('twitter:title','name',title);update('twitter:description','name',description);update('twitter:image:alt','name','GABA 사람 연구를 쉬운 말로 살펴보는 셀핀다 연구 안내');
+  update('og:type','property','website');
   const canonical=document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if(canonical)canonical.href=new URL(`${siteRoot}research/`,window.location.origin).toString();
+  const researchUrl=new URL(`${siteRoot}research/`,window.location.origin).toString();
+  if(canonical)canonical.href=researchUrl;
+  updateStructuredData({'@context':'https://schema.org','@type':'WebPage',name:title,url:researchUrl,description,inLanguage:'ko-KR',isPartOf:{'@type':'WebSite',url:new URL(siteRoot,window.location.origin).toString()}});
  },[researchView]);
  useEffect(()=>{
   if(!isProductView || researchView || accountView || adminView || operationsView)return;
@@ -175,6 +182,7 @@ export default function App(){
   update('description','name',description);
   update('og:title','property',title);
   update('og:description','property',description);
+  update('og:type','property','product');
   update('og:url','property',productUrl);
   update('og:image','property',new URL(asset('assets/product-composition-1500.png'),window.location.origin).toString());
   update('og:image:alt','property','셀핀다 가바 1500, 30포 한 상자 구성 안내');
@@ -184,7 +192,34 @@ export default function App(){
   update('twitter:image:alt','name','셀핀다 가바 1500, 30포 한 상자 구성 안내');
   const canonical=document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if(canonical)canonical.href=productUrl;
+  updateStructuredData({'@context':'https://schema.org','@graph':[
+   {'@type':'WebPage',name:title,url:productUrl,description,inLanguage:'ko-KR',isPartOf:{'@type':'WebSite',url:new URL(siteRoot,window.location.origin).toString()},about:{'@id':`${productUrl}#product`}},
+   {'@type':'Product','@id':`${productUrl}#product`,name:'셀핀다 가바 1500',category:'기타가공품',brand:{'@type':'Brand',name:'셀핀다'},image:new URL(asset('assets/product-composition-1500.png'),window.location.origin).toString(),url:productUrl,sameAs:'https://smartstore.naver.com/cellpinda/products/4701017202',description}
+  ]});
  },[isProductView,researchView,accountView,adminView,operationsView]);
+ useEffect(()=>{
+  if(!accountView)return;
+  const title='내 리듬 기록 | Cellpinda';
+  const description='저장한 하루 리듬 기록을 확인하는 개인 공간입니다.';
+  const accountUrl=new URL(`${siteRoot}account`,window.location.origin).toString();
+  document.title=title;
+  const update=(selector:string,attribute:'name'|'property',value:string)=>{
+   const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${selector}"]`);
+   if(element)element.content=value;
+   else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}
+  };
+  update('robots','name','noindex, nofollow, noarchive');
+  update('description','name',description);
+  update('og:type','property','website');
+  update('og:title','property',title);
+  update('og:description','property',description);
+  update('og:url','property',accountUrl);
+  update('twitter:title','name',title);
+  update('twitter:description','name',description);
+  const canonical=document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if(canonical)canonical.href=accountUrl;
+  updateStructuredData({'@context':'https://schema.org','@type':'WebPage',name:title,url:accountUrl,description,inLanguage:'ko-KR'});
+ },[accountView]);
  useEffect(()=>{
  if(adminView || accountView || operationsView)return;
   trackOnce('landing_view',{path:'/'});

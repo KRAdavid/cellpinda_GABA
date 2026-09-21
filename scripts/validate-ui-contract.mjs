@@ -79,6 +79,8 @@ requireMatch(challenge, /isInvite \? '건강 검사가 아닌 휴식 기록이�
 requireMatch(challengeStyles, /\.seven-day-challenge\.is-invite \.challenge-start\{margin-top:14px;padding:18px 16px\}[\s\S]*?\.seven-day-challenge\.is-invite \.challenge-start \.button\{margin-top:12px;min-height:48px\}/, 'mobile challenge invitations must compact enough to keep their start action in view');
 requireMatch(app, /const description='잠·스트레스·머리를 많이 쓴 뒤 관찰한 내용을 그림으로 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\.'/ , 'research route metadata must state its scope and product boundary in plain language');
 requireMatch(app, /const isProductView = requestedView === 'products' \|\| currentPath === '\/products\/'[\s\S]*const title='셀핀다 가바 1500 · 30포 구성 보기'[\s\S]*update\('og:image','property',new URL\(asset\('assets\/product-composition-1500\.png'\)/, 'direct product views must publish product-specific title, description and social image metadata');
+requireMatch(app, /if\(!accountView\)return;[\s\S]*update\('robots','name','noindex, nofollow, noarchive'[\s\S]*accountUrl/, 'private account views must be excluded from indexing and use a private canonical URL');
+requireMatch(app, /updateStructuredData\([\s\S]*'@type':'Product'/, 'direct product views must publish Product structured data after client-side metadata updates');
 requireMatch(app, /if\(challengeInvite\)[\s\S]*?\['Tab','ArrowDown'/, 'keyboard navigation must stop automatic invite alignment');
 requireMatch(challenge, /isInvite\) return;[\s\S]*?inviteHeadingRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'seven-day invitation must move focus to its challenge heading');
 requireMatch(challenge, /id="challenge-heading" ref=\{inviteHeadingRef\} tabIndex=\{isInvite \? -1 : undefined\}/, 'challenge heading must accept programmatic focus when invited');
@@ -199,12 +201,15 @@ requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, '
 requireMatch(rhythm, /rhythm-result-challenge[\s\S]*?rhythm-result-commerce[\s\S]*?rhythm-result-invite[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?rhythm-more-share[\s\S]*?결과 카드 공유·저장 등 다른 방법/, 'result actions must guide the visitor from their next action to product, invitation and secondary sharing');
 requireMatch(fatigueGame, /fatigue-game-primary-action[\s\S]*?fatigue-game-onboarding-secondary[\s\S]*?바로 시작하기/, 'the focus challenge start screen must make practice primary and keep direct start and sound controls secondary');
 requireMatch(rhythm, /rhythm-result-commerce[\s\S]*?가바 1500 제품 구성 보기[\s\S]*?스마트스토어 구매자 후기 읽기/, 'completed rhythm results must offer the product and approved review destinations together');
+requireMatch(rhythm, /rhythm-result-next-step[\s\S]*?오늘 해볼 행동[\s\S]*?rhythm-result-challenge[\s\S]*?rhythm-result-commerce/, 'completed rhythm results must put the immediate action and product/review destinations together');
 requireMatch(app, /<RhythmExperience onEvent=\{track\} onResultChange=\{setHasRhythmResult\}\/>[\s\S]*?<ConsumerGabaReel onEvent=\{track\} hasRhythmResult=\{hasRhythmResult\}\/>[\s\S]*?<GabaStory claims=\{content\.claims\} hasReviews=\{content\.reviews\.length > 0\} hasRhythmResult=\{hasRhythmResult\}\/>/, 'the result state must flow through the consumer story so repeated product CTAs can be reduced after completion');
 requireMatch(await read('src/components/ConsumerGabaReel.tsx'), /slide\.link && !\(hasRhythmResult && slide\.id === 'next'\)/, 'the reel must avoid repeating the product CTA after a rhythm result while keeping it for first visits');
 requireMatch(consumerReel, /const nextSlideBody = hasRhythmResult[\s\S]*결과 화면에서 제품 구성과 구매자 후기를 확인할 수 있어요\./, 'the reel next-step copy must describe the result state instead of asking visitors to repeat the check');
+requireMatch(consumerReel, /const nextSlideTitle = hasRhythmResult[\s\S]*이제 제품 구성과 구매자 후기를 확인해 보세요\./, 'the reel next-step title must stop asking completed visitors to repeat the check');
 requireMatch(consumerReel, /hasRhythmResult \? <>내 상태를 확인한 뒤[\s\S]*: <>GABA가 궁금하다면[\s\S]*먼저 한 장씩 보세요/, 'the reel heading must match both direct entry and post-check entry');
 requireMatch(story, /hasRhythmResult \? null : <a className="text-link" href="#products">가바 1500 제품 구성 보기/, 'the GABA story must avoid repeating its product CTA after a rhythm result');
 requireMatch(fatigueGame, /fatigue-game-actions[\s\S]*?친구에게 1분 게임 보내기[\s\S]*?5분 쉬고 다시 해보기/, 'fatigue game results must prioritize the rest-and-retry action while keeping the invite secondary');
+requireMatch(fatigueGame, /summaryHeadingRef[\s\S]*?phase !== 'baseline-complete'[\s\S]*?summaryHeadingRef\.current\?\.focus/, 'focus challenge results must move keyboard focus to the new result heading');
 requireMatch(rhythm, /내 답변과 점수는 전송되지 않아요/, 'the primary invitation must explain what is not shared');
 if (/rhythm-mobile-share-bar/.test(rhythm + rhythmStyles)) fail('mobile should not show a second competing share bar');
 requireMatch(rhythm, /share\/(?:\$\{type\.id\}|type\.id)/, 'result-specific share URL is missing');

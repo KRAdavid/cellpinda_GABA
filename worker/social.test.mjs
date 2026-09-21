@@ -33,6 +33,12 @@ test('Product comparison sharing has its own safe metadata without price or pers
   assert.ok(!socialTags(meta).includes('PRIVATE'));assert.ok(!socialTags(meta).includes('22222'));assert.ok(!socialTags(meta).includes('#products'));assert.ok(socialTags(meta).includes('og:image:type'));assert.ok(socialTags(meta).includes('property="og:type" content="product"'));
   assert.equal(socialMetadata('https://hostile.example/?view=products').canonical,`${PUBLIC_ORIGIN}/products/`);
 });
+test('Private account and research query views receive route-specific metadata',()=>{
+  const account=socialMetadata(`${PUBLIC_ORIGIN}/?view=account`);
+  assert.equal(account.admin,true);assert.equal(account.robots,'noindex, nofollow, noarchive');assert.equal(account.canonical,`${PUBLIC_ORIGIN}/account`);assert.ok(!socialTags(account).includes('index, follow'));
+  const research=socialMetadata(`${PUBLIC_ORIGIN}/?view=research`);
+  assert.equal(research.view,'research');assert.equal(research.canonical,`${PUBLIC_ORIGIN}/research/`);assert.ok(research.title.includes('GABA 연구'));assert.ok(socialTags(research).includes(`og:url\" content=\"${PUBLIC_ORIGIN}/research/`));
+});
 test('Duplicate or ambiguous product view parameters fall back to generic metadata',()=>{
   for(const query of ['view=products&view=products','view=unknown','view=products&rhythm=active','view=products&rhythm=','view=unknown&rhythm=steady']){
     const meta=socialMetadata(`${PUBLIC_ORIGIN}/?${query}`);assert.equal(meta.view,null);assert.equal(meta.type,null);assert.equal(meta.canonical,`${PUBLIC_ORIGIN}/`);
