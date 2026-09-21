@@ -2,7 +2,7 @@
 
 ## 현재 확정 공개 상태 — 2026-09-21 23:11 KST
 
-PR #147을 관리자 병합한 뒤 보호 규칙을 즉시 복구했다. 최신 공개 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답과 현재 `candidateSha`, 그리고 [최신 성공 배포 run](https://github.com/KRAdavid/cellpinda_GABA/actions)을 우선한다. 문서 전용 병합도 candidate SHA를 바꾸므로 문서에 고정 SHA를 복제하지 않는다. 감사 스냅샷 갱신은 PR #148에서 반영했다. 1분 체크 전 챌린지 비노출, 결과 후 오늘 해볼 행동 패널, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
+PR #147을 관리자 병합한 뒤 보호 규칙을 즉시 복구했다. 최신 공개 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답과 현재 `candidateSha`, 그리고 [최신 성공 배포 run](https://github.com/KRAdavid/cellpinda_GABA/actions)을 우선한다. 문서 전용 병합도 candidate SHA를 바꾸므로 문서에 고정 SHA를 복제하지 않는다. 감사 스냅샷 갱신은 PR #148에서, 공유·집중 deep-link 메타데이터 보정은 PR #150에서 반영한다. 1분 체크 전 챌린지 비노출, 결과 후 오늘 해볼 행동 패널, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
 
 라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 65개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `HOLD`·외부 URL 없음을 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 65개·provenance 일치를 통과했다. 390px·1440px 감리에서 P0/P1 결함·가로 넘침·콘솔 오류는 확인되지 않았다.
 
