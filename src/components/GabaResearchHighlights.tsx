@@ -57,7 +57,7 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
         </div>
         <p>잠·머리를 많이 쓴 뒤·쉬었을 때와 운동했을 때,<br />일반 GABA 연구에서 관찰한 내용을 쉽게 정리했어요.</p>
       </div>
-      <p className="gaba-research-highlights-boundary"><span aria-hidden="true">i</span> 일반 GABA를 살펴본 사람 연구를 쉬운 말로 정리했어요. 아래 숫자는 각 논문에서 사용한 조건이며, 셀핀다 제품의 표시사항은 제품 카드에서 확인할 수 있어요.</p>
+      <p className="gaba-research-highlights-boundary"><span aria-hidden="true">i</span> 일반 GABA 연구를 쉬운 말로 정리했어요. 셀핀다 완제품으로 시험한 결과가 아니며, 아래 숫자는 논문에서 사용한 조건이에요. 셀핀다 제품 정보는 제품 카드에서 따로 확인할 수 있어요.</p>
       <div className="gaba-research-highlights-grid">
         {highlights.map(({id, label, title, summary, facts, Icon}) => {
           const claim = available.get(id)!;

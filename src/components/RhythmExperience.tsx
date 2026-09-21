@@ -573,7 +573,10 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
       ) : (
         <div className="rhythm-start-panel"><div><h3>지난 7일을 다섯 가지로 돌아봐요.</h3><p>퇴근 뒤에도 일이 생각났는지, 침대에서 오래 뒤척였는지 떠올려 보세요.</p><details className="rhythm-start-scenes"><summary>질문에 나오는 생활 장면</summary><ul><li>퇴근 뒤에도 일이 계속 생각남</li><li>침대에 누워 한참 뒤척임</li><li>하루 종일 쉴 틈이 없었음</li><li>아침에도 피로가 남아 있음</li></ul></details></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>지난 7일 1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">답변은 저장하지 않아요.</p></div></div>
       )}
-      <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} />
+      {/* Keep the second-stage challenge out of the initial landing flow. It is
+          available after the one-minute check or on a direct focus invite, so
+          the user always knows which step to take first. */}
+      {result || focusInviteArrival ? <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} /> : null}
       {result && friendType ? (
         <section className="rhythm-friend-comparison" aria-labelledby="rhythm-comparison-heading">
           <div className="rhythm-comparison-heading"><div><p className="rhythm-eyebrow">함께 돌아보는 하루</p><h3 id="rhythm-comparison-heading">나와 친구, 각자의 쉬는 방식.</h3></div><button type="button" className="rhythm-text-button" onClick={() => { setFriendType(null); setCompareConsent(false); }}>비교 지우기</button></div>
