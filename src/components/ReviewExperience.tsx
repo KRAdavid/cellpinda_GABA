@@ -66,7 +66,7 @@ export default function ReviewExperience({ reviews, onOpen }: Props) {
           <p className="review-quote-disclosure"><strong>제품을 무료로 받았거나 보상을 받았나요?</strong><br/>{review.disclosure}</p>
           <p className="review-quote-context"><strong>후기와 함께 밝힌 내용</strong><br/>{review.context}</p>
           <p className="review-quote-label">구매자가 남긴 후기</p><blockquote>{review.publicText}</blockquote>
-          <div className="review-quote-links"><a href={url} target="_blank" rel="noopener noreferrer" onClick={()=>onOpen?.(review.productId!)}>{review.sourceTitle}에서 더 보기 ↗</a><a href={`#product-${review.productId}`}>제품 구성 보기 →</a></div>
+          <div className="review-quote-links"><a href={url} target="_blank" rel="noopener noreferrer" onClick={()=>onOpen?.(review.productId!)}>{review.sourceTitle}에서 더 보기 ↗</a><a href={`#product-${review.productId}`} aria-label={`${productNames[review.productId!]} 제품 구성 보기`}>{productNames[review.productId!]} 제품 구성 보기 →</a></div>
         </article>)}</div>
       </div>}
       <div className={`review-experience-layout${quotes.length ? '' : ' review-experience-layout-destination-only'}`}>

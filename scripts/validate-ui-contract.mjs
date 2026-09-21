@@ -178,6 +178,7 @@ requireMatch(rhythm, /<article className="rhythm-result-card" id="rhythm-result"
 requireMatch(rhythm, /const description = `5개 질문 중 \$\{frequentAnswers\}개에서 힘들었다고 답했어요\.`[\s\S]*?다섯 질문에 고른 답을 정리한 기록이에요\./, 'the answer visualization must clearly describe its self-report basis');
 if (/products-intro-actions|products-intro-buy|products-review-shortcut/.test(app)) fail('product price and review shortcuts must not be repeated in the product intro beside their destination cards');
 requireMatch(app, /id="products"[\s\S]*?스마트스토어에서 가격·재고 확인하기[\s\S]*?id="reviews"|<ReviewExperience/, 'product purchase information must name the Smart Store destination on the product card, with reviews in their own section');
+requireMatch(review, /productNames\[review\.productId!\][\s\S]*?제품 구성 보기/, 'review cards must identify the product before linking back to its composition');
 requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must expose alternative text');
 requireMatch(app, /<ArrowRight(?:\s+size=\{18\})?\s+aria-hidden="true"\s*\/>/, 'decorative ArrowRight icons must be hidden from assistive technology');
 requireMatch(app, /<ArrowUpRight\s+size=\{18\}\s+aria-hidden="true"\s*\/>/, 'decorative ArrowUpRight icons must be hidden from assistive technology');
