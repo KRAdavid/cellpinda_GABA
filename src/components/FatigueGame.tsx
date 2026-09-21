@@ -16,7 +16,8 @@ import {
   type FocusTrialPlan,
   type FocusTrialRecord,
 } from '../domain/fatigue-game';
-import { BREATH_ACTIVE_SECONDS, BREATH_CYCLE_SECONDS, getBreathCue, type BreathCue, type BreathStage } from '../domain/breath-guide';
+import { BREATH_ACTIVE_SECONDS, BREATH_CYCLE_SECONDS, BREATH_EXHALE_SECONDS, BREATH_HOLD_SECONDS, BREATH_INHALE_SECONDS, getBreathCue, type BreathCue, type BreathStage } from '../domain/breath-guide';
+import { REVIEW_DESTINATION_URL } from '../domain/reviews';
 import './fatigue-game.css';
 
 type GamePhase = 'idle' | 'practice-press' | 'practice-hold' | 'practice-speed' | 'practice-switch-match' | 'practice-switch-hold' | 'practice-complete' | 'countdown' | 'running' | 'baseline-complete' | 'baseline-finished' | 'rest' | 'complete';
@@ -32,12 +33,14 @@ const shapeLabels: Record<FocusStimulusShape, string> = {
 };
 
 const breathStageCopy: Record<BreathStage, { title: string; detail: string }> = {
-  inhale: { title: '숨 들이쉬기', detail: '공이 올라가는 동안 · 4초' },
-  'hold-top': { title: '잠깐 멈추기', detail: '공이 위에 머무는 동안 · 2초' },
-  exhale: { title: '숨 내쉬기', detail: '공이 내려가는 동안 · 6초' },
-  'hold-bottom': { title: '다시 멈추기', detail: '공이 아래에 머무는 동안 · 2초' },
+  inhale: { title: '숨 들이쉬기', detail: `공이 올라가는 동안 · ${BREATH_INHALE_SECONDS}초` },
+  'hold-top': { title: '잠깐 멈추기', detail: `공이 위에서 옆으로 이동하는 동안 · ${BREATH_HOLD_SECONDS}초` },
+  exhale: { title: '숨 내쉬기', detail: `공이 내려가는 동안 · ${BREATH_EXHALE_SECONDS}초` },
+  'hold-bottom': { title: '다시 멈추기', detail: `공이 아래에서 옆으로 이동하는 동안 · ${BREATH_HOLD_SECONDS}초` },
   finish: { title: '편한 호흡으로 마무리', detail: '숨을 세지 말고 자연스럽게 돌아오세요' },
 };
+
+const BREATH_LINE_PATH = 'M80 280 L300 70 L540 70 L760 280 L80 280';
 
 interface FatigueGameProps {
   onEvent: (name: string, properties?: Record<string, string>) => void;
@@ -64,13 +67,14 @@ function ringSingingBowl(context: AudioContext) {
   const play = () => {
     if (context.state !== 'running') return;
     const startedAt = context.currentTime + 0.025;
+    const releaseSeconds = 5.2;
     const master = context.createGain();
     master.gain.setValueAtTime(0.0001, startedAt);
-    master.gain.exponentialRampToValueAtTime(0.14, startedAt + 0.025);
-    master.gain.exponentialRampToValueAtTime(0.0001, startedAt + 1.65);
+    master.gain.exponentialRampToValueAtTime(0.22, startedAt + 0.04);
+    master.gain.exponentialRampToValueAtTime(0.0001, startedAt + releaseSeconds);
     master.connect(context.destination);
 
-    const partials = [[220, 0.28], [440.6, 0.13], [661.8, 0.075], [883.1, 0.045], [1105.7, 0.025]] as const;
+    const partials = [[220, 0.28], [440.6, 0.13], [661.8, 0.075], [883.1, 0.045], [1105.7, 0.025], [1326.9, 0.016]] as const;
     partials.forEach(([frequency, level]) => {
       const oscillator = context.createOscillator();
       const voice = context.createGain();
@@ -84,9 +88,9 @@ function ringSingingBowl(context: AudioContext) {
         voice.disconnect();
       };
       oscillator.start(startedAt);
-      oscillator.stop(startedAt + 1.7);
+      oscillator.stop(startedAt + releaseSeconds + 0.1);
     });
-    window.setTimeout(() => master.disconnect(), 1_800);
+    window.setTimeout(() => master.disconnect(), (releaseSeconds + 0.3) * 1000);
   };
 
   if (context.state === 'running') play();
@@ -170,6 +174,50 @@ function comparisonText(before: FocusGameSummary, second: FocusGameSummary, rest
   return { heading, body, tone: comparison.direction };
 }
 
+type BaselineResultTone = 'steady' | 'watch' | 'pause';
+
+function baselineResultCopy(summary: FocusGameSummary): {
+  tone: BaselineResultTone;
+  kicker: string;
+  heading: string;
+  body: string;
+} {
+  if (summary.accuracyPct >= 85) return {
+    tone: 'steady',
+    kicker: '좋은 반응 흐름',
+    heading: '축하해요. 오늘 게임에서는 반응이 안정적이었어요.',
+    body: '지금처럼 중간중간 짧게 쉬는 리듬을 이어가 보세요.',
+  };
+  if (summary.accuracyPct >= 70) return {
+    tone: 'watch',
+    kicker: '잠깐 점검해 볼 기록',
+    heading: '오늘은 반응이 조금 흔들렸어요.',
+    body: '5분 화면을 내려놓고 다시 해보면 내 기록을 비교해 볼 수 있어요.',
+  };
+  return {
+    tone: 'pause',
+    kicker: '지금은 5분 회복을 권해요',
+    heading: '지금은 화면을 내려놓고 5분 쉬어 보세요.',
+    body: '오늘 머리가 과하게 바빴던 날일 수 있어요. 알림을 끄고 물을 마신 뒤 다시 해보세요.',
+  };
+}
+
+function FatigueGameNextSteps({ onEvent }: { onEvent: FatigueGameProps['onEvent'] }) {
+  return (
+    <nav className="fatigue-game-next-steps" aria-label="게임 뒤에 살펴볼 내용">
+      <a href="#story" onClick={() => onEvent('research_highlight_opened', { path: '/focus', source: 'game_result' })}>
+        <span>01</span><strong>GABA 이야기</strong><small>몸속에서 하는 일</small>
+      </a>
+      <a href="#products" onClick={() => onEvent('product_compare_view', { path: '/focus', source: 'game_result' })}>
+        <span>02</span><strong>가바 1500 구성</strong><small>한 상자에 무엇이 들었나</small>
+      </a>
+      <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={() => onEvent('review_source_click', { productId: 'gaba1500', path: '/focus', source: 'game_result' })}>
+        <span>03</span><strong>구매자 후기</strong><small>스마트스토어에서 읽기 ↗</small>
+      </a>
+    </nav>
+  );
+}
+
 function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: BreathCue }) {
   const pathRef = useRef<SVGPathElement>(null);
   const activePathRef = useRef<SVGPathElement>(null);
@@ -183,17 +231,27 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const totalLength = path.getTotalLength();
-    const halfLength = totalLength / 2;
+    const diagonalLength = Math.hypot(220, 210);
+    const segmentLengths = [diagonalLength, 240, diagonalLength, 680];
+    const totalSegmentLength = segmentLengths.reduce((sum, length) => sum + length, 0);
+    const stageStops = segmentLengths.reduce<number[]>((stops, segmentLength) => {
+      stops.push((stops.at(-1) ?? 0) + (segmentLength / totalSegmentLength) * totalLength);
+      return stops;
+    }, []);
     let frame = 0;
 
     const draw = () => {
       const elapsed = Math.max(0, (Date.now() - startedAt) / 1000);
-      const cycle = elapsed >= BREATH_ACTIVE_SECONDS ? 0 : elapsed % BREATH_CYCLE_SECONDS;
+      const finished = elapsed >= BREATH_ACTIVE_SECONDS;
+      const cycle = finished ? BREATH_CYCLE_SECONDS : elapsed % BREATH_CYCLE_SECONDS;
       let distance = 0;
-      if (cycle < 4) distance = halfLength * (cycle / 4);
-      else if (cycle < 6) distance = halfLength;
-      else if (cycle < 12) distance = halfLength + halfLength * ((cycle - 6) / 6);
-      else distance = totalLength;
+      const holdTopEnd = BREATH_INHALE_SECONDS + BREATH_HOLD_SECONDS;
+      const exhaleEnd = holdTopEnd + BREATH_EXHALE_SECONDS;
+      if (cycle < BREATH_INHALE_SECONDS) distance = stageStops[0] * (cycle / BREATH_INHALE_SECONDS);
+      else if (cycle < holdTopEnd) distance = stageStops[0];
+      else if (cycle < exhaleEnd) distance = stageStops[1] + (stageStops[2] - stageStops[1]) * ((cycle - holdTopEnd) / BREATH_EXHALE_SECONDS);
+      else distance = stageStops[2] + (stageStops[3] - stageStops[2]) * ((cycle - exhaleEnd) / BREATH_HOLD_SECONDS);
+      if (finished) distance = totalLength;
 
       const point = path.getPointAtLength(distance);
       ball.setAttribute('transform', `translate(${point.x} ${point.y})`);
@@ -210,13 +268,13 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
   const stars = [[52, 60], [142, 118], [228, 34], [324, 138], [404, 40], [546, 116], [650, 45], [724, 128], [836, 46], [916, 100], [90, 245], [246, 296], [390, 256], [588, 296], [770, 260], [884, 312]];
 
   return (
-    <div className="fatigue-breath-guide" aria-label="공의 움직임을 따라 하는 4초 들이쉬기, 2초 멈추기, 6초 내쉬기, 2초 멈추기 호흡 안내">
+    <div className="fatigue-breath-guide" aria-label={`공의 움직임을 따라 하는 ${BREATH_INHALE_SECONDS}초 들이쉬기, ${BREATH_HOLD_SECONDS}초 멈추기, ${BREATH_EXHALE_SECONDS}초 내쉬기, ${BREATH_HOLD_SECONDS}초 멈추기 호흡 안내`}>
       <div className="fatigue-breath-readout" role="timer" aria-label={`${breathStageCopy[cue.stage].title}, ${cue.seconds}초`}>
         <span>{breathStageCopy[cue.stage].detail}</span>
         <strong aria-live="polite" aria-atomic="true">{breathStageCopy[cue.stage].title}</strong>
         {cue.stage !== 'finish' ? <b>{cue.seconds}</b> : null}
       </div>
-      <svg className="fatigue-breath-line" viewBox="0 0 960 360" role="img" aria-label="공이 선을 따라 위로 올라갔다가 아래로 내려오는 애니메이션">
+      <svg className="fatigue-breath-line" viewBox="0 0 960 360" role="img" aria-label={`공이 선을 따라 ${BREATH_INHALE_SECONDS}초 동안 올라가고, 위에서 ${BREATH_HOLD_SECONDS}초 옆으로 이동하고, ${BREATH_EXHALE_SECONDS}초 동안 내려간 뒤, 아래에서 ${BREATH_HOLD_SECONDS}초 옆으로 돌아오는 애니메이션`}>
         <defs>
           <linearGradient id="breath-line-gradient" x1="0" x2="1">
             <stop offset="0" stopColor="#f3bc70" />
@@ -230,9 +288,9 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
         </defs>
         <rect width="960" height="360" rx="18" fill="#080b0a" />
         {stars.map(([x, y], index) => <circle key={index} cx={x} cy={y} r={index % 3 === 0 ? 1.7 : 1.2} fill="#d7ded9" opacity={index % 2 === 0 ? '.48' : '.24'} />)}
-        <path d="M480 300 C310 300 300 75 480 75 C660 75 650 300 480 300" fill="none" stroke="#77827b" strokeOpacity=".45" strokeWidth="4" strokeLinecap="round" />
-        <path ref={pathRef} d="M480 300 C310 300 300 75 480 75 C660 75 650 300 480 300" fill="none" stroke="transparent" strokeWidth="1" />
-        <path ref={activePathRef} d="M480 300 C310 300 300 75 480 75 C660 75 650 300 480 300" pathLength="100" fill="none" stroke="url(#breath-line-gradient)" strokeWidth="5" strokeLinecap="round" filter="url(#breath-ball-glow)" />
+        <path d={BREATH_LINE_PATH} fill="none" stroke="#77827b" strokeOpacity=".45" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path ref={pathRef} d={BREATH_LINE_PATH} fill="none" stroke="transparent" strokeWidth="1" />
+        <path ref={activePathRef} d={BREATH_LINE_PATH} pathLength="100" fill="none" stroke="url(#breath-line-gradient)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" filter="url(#breath-ball-glow)" />
         <g ref={ballRef} className="fatigue-breath-ball" aria-hidden="true">
           <circle r="15" fill="#fff" filter="url(#breath-ball-glow)" />
           <circle r="5" fill="#fff" />
@@ -242,7 +300,7 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
       <ol className="fatigue-breath-phases" aria-label="호흡 순서">
         {(['inhale', 'hold-top', 'exhale', 'hold-bottom'] as const).map((stage, index) => (
           <li key={stage} className={cue.stage === stage ? 'is-active' : ''} aria-current={cue.stage === stage ? 'step' : undefined}>
-            <span>0{index + 1}</span><strong>{breathStageCopy[stage].title}</strong><small>{[4, 2, 6, 2][index]}초</small>
+            <span>0{index + 1}</span><strong>{breathStageCopy[stage].title}</strong><small>{[BREATH_INHALE_SECONDS, BREATH_HOLD_SECONDS, BREATH_EXHALE_SECONDS, BREATH_HOLD_SECONDS][index]}초</small>
           </li>
         ))}
       </ol>
@@ -325,7 +383,11 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
       if (gameSoundEnabledRef.current) playFocusSoundCue(audio.context, cue);
     };
     if (audio.context.state === 'running') play();
-    else void audio.context.resume().then(play).catch(() => undefined);
+    else void audio.context.resume().then(play).catch(() => {
+      if (gameSoundEnabledRef.current) {
+        setGameSoundStatus('브라우저가 자동 소리를 막았어요. 효과음 버튼을 한 번 눌러 켜 주세요. 화면 신호로 계속 진행합니다.');
+      }
+    });
   }
 
   function toggleGameSound() {
@@ -610,6 +672,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   const currentSignalNumber = stageIndex * FOCUS_GAME_TRIALS_PER_STAGE + trialIndex + 1;
   const switchRule = trial?.targetColor ?? runPatternRef.current.trials.switch[trialIndex]?.targetColor ?? 'green';
   const comparison = before && after ? comparisonText(before, after, mode === 'after') : null;
+  const baselineCopy = before ? baselineResultCopy(before) : null;
   const metrics = before && after ? [
     { label: '전체 맞힌 비율', before: `${before.accuracyPct}%`, after: `${after.accuracyPct}%` },
     { label: '평균 누르는 시간', before: metricText(before.speed.averageMs), after: metricText(after.speed.averageMs) },
@@ -620,8 +683,8 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
   return (
     <section className="fatigue-game" id="focus-game" aria-labelledby="fatigue-game-heading">
       <div className="fatigue-game-heading">
-        <div><p className="fatigue-game-kicker">02 / 약 1분 · 24개 신호</p><h2 id="fatigue-game-heading" tabIndex={-1}>1분 색 신호 게임</h2></div>
-        <p>초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요. 게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.</p>
+        <div><p className="fatigue-game-kicker">02 / 약 1분 · 24개 신호</p><h2 id="fatigue-game-heading" tabIndex={-1}>뇌컨디션 확인 챌린지</h2></div>
+        <p>1분 색 신호 게임이에요. 초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요. 게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.</p>
       </div>
 
       <div className={`fatigue-game-panel fatigue-game-phase-${phase}`}>
@@ -629,9 +692,10 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <p className="fatigue-game-kicker">매번 신호 순서가 달라져요</p>
           <h3>세 가지만 기억하세요.</h3>
           <div className="fatigue-game-onboarding-actions">
-            <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 연습하기 <ArrowRight size={18} aria-hidden="true" /></button>
+            <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 연습하고 시작하기 <ArrowRight size={18} aria-hidden="true" /></button>
             <button type="button" className="fatigue-game-sound-toggle" onClick={toggleGameSound} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />} 효과음 {gameSoundEnabled ? '켜짐' : '꺼짐'}</button>
-            <button type="button" className="rhythm-text-button fatigue-game-skip-practice" onClick={() => startRun('baseline')}>설명 없이 바로 시작</button>
+            {gameSoundStatus ? <p className="fatigue-game-sound-status" role="status" aria-live="polite">{gameSoundStatus}</p> : null}
+            <button type="button" className="rhythm-text-button fatigue-game-skip-practice" onClick={() => startRun('baseline')}>연습을 건너뛰고 바로 시작</button>
           </div>
           <div className="fatigue-game-rule-cards" aria-label="게임 규칙">
             {FOCUS_GAME_STAGES.map(stage => <div className={`fatigue-game-rule-card fatigue-game-rule-card-${stage}`} key={stage}>
@@ -702,6 +766,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
 
         {phase === 'running' ? <div className="fatigue-game-running">
           <div className="fatigue-game-meta"><span>{stageIndex + 1} / 3 · {currentStage.label}</span><span><Timer size={15} aria-hidden="true" /> {mode === 'baseline' ? '첫 번째 게임' : mode === 'after' ? '5분 쉰 뒤 · 두 번째' : '이어 하는 두 번째'}<button type="button" className="fatigue-game-sound-icon" onClick={toggleGameSound} aria-label={`게임 효과음 ${gameSoundEnabled ? '끄기' : '켜기'}`} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />}</button></span></div>
+          {gameSoundStatus ? <p className="fatigue-game-sound-status fatigue-game-sound-status-running" role="status" aria-live="polite">{gameSoundStatus}</p> : null}
           <div className="fatigue-stage-instruction"><strong>{currentStage.instruction}</strong><span>{currentStage.detail}</span></div>
           <div className="fatigue-rule-slot">
             {FOCUS_GAME_STAGES[stageIndex] === 'switch' ? <div className="fatigue-rule-display"><span>이번 규칙</span><strong className={`fatigue-rule-color fatigue-rule-color-${switchRule}`}>{switchRule === 'green' ? '초록' : '보라'}</strong><small>이 색 신호만 누르기</small></div> : <span className="fatigue-rule-placeholder" aria-hidden="true" />}
@@ -713,14 +778,14 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <p className="fatigue-game-status" aria-live="polite">{status}</p>
         </div> : null}
 
-        {phase === 'baseline-complete' && before ? <div className="fatigue-game-summary">
-            <div className="fatigue-score-ring" role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>게임 정답률</span></div>
+        {phase === 'baseline-complete' && before && baselineCopy ? <div className="fatigue-game-summary">
+            <div className={`fatigue-score-ring fatigue-score-ring-${baselineCopy.tone}`} role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>게임 정답률</span></div>
             <div>
-            <p className="fatigue-game-kicker">오늘의 반응 기록</p>
-            <h3>오늘 게임을 마쳤어요.</h3>
+            <p className="fatigue-game-kicker">{baselineCopy.kicker} · 오늘의 반응 기록</p>
+            <h3>{baselineCopy.heading}</h3>
             <p className="fatigue-game-result-score">{before.total}개 신호 중 {before.correct}개를 맞혔어요.</p>
             <p className="fatigue-game-result-disclosure">오늘 게임에서 맞힌 비율이에요. 뇌 피로나 건강 상태를 측정한 값은 아니에요.</p>
-            <p className="fatigue-game-result-guidance" role="status">원하면 5분 쉬었다가 다른 신호로 한 번 더 해보세요. 친구에게 보내 함께 해봐도 좋아요.</p>
+            <p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${baselineCopy.tone}`} role="status">{baselineCopy.body}</p>
             <details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details>
             <div className="fatigue-game-actions">
               {onInvite ? <button type="button" className="rhythm-button secondary" onClick={() => void onInvite()}>친구에게 1분 게임 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}
@@ -731,16 +796,16 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           </div>
         </div> : null}
 
-        {phase === 'baseline-finished' && before ? <div className="fatigue-game-summary fatigue-game-baseline-finished">
-          <div className="fatigue-score-ring fatigue-score-ring-complete" role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>정답률</span></div><div><p className="fatigue-game-kicker">오늘의 게임 기록</p><h3>기록을 남겼어요.</h3><details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>다시 해보기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 답변이 포함되지 않아요.</p> : null}</div>
+        {phase === 'baseline-finished' && before && baselineCopy ? <div className="fatigue-game-summary fatigue-game-baseline-finished">
+          <div className={`fatigue-score-ring fatigue-score-ring-${baselineCopy.tone}`} role="img" aria-label={`오늘 게임 정답률 ${before.accuracyPct}%`} style={{ background: `conic-gradient(var(--score-color) ${before.accuracyPct}%, #dce7de 0)` }}><strong>{before.accuracyPct}<small>%</small></strong><span>정답률</span></div><div><p className="fatigue-game-kicker">{baselineCopy.kicker} · 오늘의 게임 기록</p><h3>{baselineCopy.heading}</h3><p className={`fatigue-game-result-guidance fatigue-game-result-guidance-${baselineCopy.tone}`} role="status">{baselineCopy.body}</p><details className="fatigue-game-result-details"><summary>세부 기록 보기</summary><div className="fatigue-mini-metrics"><span>누르는 시간 {metricText(before.speed.averageMs)}</span><span>멈춤 신호 {before.brake.accuracyPct}%</span><span>색 바꾸기 {before.switch.accuracyPct}%</span></div></details><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>다시 해보기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 답변이 포함되지 않아요.</p> : null}</div>
         </div> : null}
 
         {phase === 'rest' ? <div className="fatigue-game-rest">
-          <p className="fatigue-game-kicker">PAUSE · 5-MIN BREATH</p>
-          <h3 ref={restHeadingRef} tabIndex={-1}>화면에서 잠깐 눈을 떼고, 호흡을 천천히 해보세요.</h3>
-          <p>화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 선이 올라갈 때 들이쉬고, 내려갈 때 내쉬세요.</p>
+          <p className="fatigue-game-kicker">5분 휴식 · 호흡 안내</p>
+          <h3 ref={restHeadingRef} tabIndex={-1}>5분만 화면을 내려놓고 쉬어 보세요.</h3>
+          <p>화면을 보며 공을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 처음에 호흡 순서를 익힌 뒤에는 화면을 내려놓고 소리만 들어도 좋아요. 선이 올라갈 때 들이쉬고, 위·아래에서 옆으로 움직일 때 잠깐 멈추고, 내려갈 때 내쉬세요.</p>
           <BreathLineGuide startedAt={restStartedAt} cue={breathCue} />
-          <p className="fatigue-breath-note">들이쉬기 4초 · 멈추기 2초 · 내쉬기 6초 · 다시 멈추기 2초를 반복합니다. 숨을 참기 불편하거나 어지럽고 답답하면 멈춤을 건너뛰고 자연스럽게 호흡하세요.</p>
+          <p className="fatigue-breath-note">들이쉬기 {BREATH_INHALE_SECONDS}초 · 멈추기 {BREATH_HOLD_SECONDS}초 · 내쉬기 {BREATH_EXHALE_SECONDS}초 · 다시 멈추기 {BREATH_HOLD_SECONDS}초를 반복합니다. 숨을 참기 불편하거나 어지럽고 답답하면 멈춤을 건너뛰고 자연스럽게 호흡하세요.</p>
           <div className="fatigue-rest-clock" aria-label="5분 호흡 안내 타이머">
             <div className="fatigue-rest-clock-readout" role="timer" aria-label={`${Math.floor(restRemainingSeconds / 60)}분 ${restRemainingSeconds % 60}초 남음`}>
               <Timer size={20} aria-hidden="true" />
@@ -750,7 +815,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
             <progress max={5 * 60} value={5 * 60 - restRemainingSeconds} aria-label="5분 휴식 진행" />
           </div>
           <div className="fatigue-audio-panel" aria-label="호흡 단계별 싱잉볼 소리">
-            <div><strong><Volume2 size={17} aria-hidden="true" /> 4단계 싱잉볼 소리</strong><span>들이쉬기·멈추기·내쉬기 단계가 바뀔 때마다 짧게 울립니다.</span></div>
+            <div><strong><Volume2 size={17} aria-hidden="true" /> 4단계 싱잉볼 소리</strong><span>단계가 바뀔 때마다 크게 울린 뒤 5초 동안 천천히 잦아듭니다.</span></div>
             <div className="fatigue-audio-actions"><button type="button" className="fatigue-audio-button" onClick={toggleSingingBowlAudio} aria-pressed={bowlSoundEnabled} disabled={restComplete}>{bowlSoundEnabled ? <><VolumeX size={15} aria-hidden="true" /> 싱잉볼 소리 끄기</> : <><Volume2 size={15} aria-hidden="true" /> 싱잉볼 소리 켜기</>}</button></div>
             {audioMessage ? <p role="status" aria-live="polite">{audioMessage}</p> : null}
           </div>
@@ -763,6 +828,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <p className="fatigue-game-comparison-note">{comparison.body}</p>
           <details className="fatigue-game-result-details"><summary>두 게임 기록 자세히 보기</summary><div className="fatigue-game-score-grid">{metrics.map(metric => <div key={metric.label}><span>{metric.label}</span><strong>첫 번째 {metric.before}</strong><strong>두 번째 {metric.after}</strong></div>)}</div></details>
           <p className="fatigue-game-viral-copy">친구도 직접 해보도록 챌린지를 보내 보세요.</p><div className="fatigue-game-actions">{onInvite ? <button type="button" className="rhythm-button" onClick={() => void onInvite()}>친구에게 챌린지 보내기 <ArrowUpRight size={18} aria-hidden="true" /></button> : null}<button type="button" className="rhythm-button secondary" onClick={() => startRun('baseline')}>처음부터 다시 하기 <RotateCcw size={18} aria-hidden="true" /></button><button type="button" className="rhythm-text-button" onClick={reset}>게임 닫기</button></div>{onInvite ? <p className="fatigue-game-share-note">초대에는 내 게임 기록이나 잠·휴식 답변이 포함되지 않아요.</p> : null}
+          <FatigueGameNextSteps onEvent={onEvent} />
         </div> : null}
       </div>
     </section>

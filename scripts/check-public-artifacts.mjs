@@ -10,6 +10,7 @@ const requiredFiles = [
   'products/index.html',
   'data/content.json',
   'data/gaba-master-index.json',
+  'release-manifest.json',
   'assets/rhythm-window.webp',
 ];
 for (const file of requiredFiles) assert.ok(existsSync(resolve(outputDirectory, file)), `public artifact is missing ${file}`);
@@ -17,6 +18,8 @@ for (const file of requiredFiles) assert.ok(existsSync(resolve(outputDirectory, 
 const privateSnapshots = ['operations-queue.json', 'tf-pulse.json', 'goal-audit.json', 'tf-meeting-packet.json'];
 const leaked = privateSnapshots.filter(file => existsSync(resolve(outputDirectory, 'data', file)));
 assert.deepEqual(leaked, [], `internal operations snapshots must not ship in ${outputDirectory}`);
+const sourceLeak = privateSnapshots.filter(file => existsSync(resolve(process.cwd(), 'public/data', file)));
+assert.deepEqual(sourceLeak, [], 'internal operations snapshots must stay under tmp/operations and out of public/data');
 
 const publicManifestPaths = ['data/local-material-manifest.json', 'data/local-order-manifest.json'];
 for (const relativePath of publicManifestPaths) {

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AlertTriangle, ArrowRight, ArrowUpRight, ChevronLeft, Download } from 'lucide-react';
+import { AlertTriangle, ArrowRight, ArrowUpRight, Brain, CheckCircle2, ChevronLeft, Download, PauseCircle } from 'lucide-react';
 import { classifyRhythm, questions, resultTypes, rhythmIdFromUrl } from '../domain/rhythm';
 import { createFocusGameInviteText } from '../domain/fatigue-game';
 import { REVIEW_DESTINATION_URL } from '../domain/reviews';
@@ -47,26 +47,26 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
   if (result.loadLevel === 'low') return {
     tone: 'steady',
     label: '지난 7일 답변',
-    heading: '축하합니다. 지난 7일, 쉬는 시간을 잘 챙겨 오셨어요.',
-    body: '지금 잘 맞는 쉬는 습관을 이어가세요.',
+    heading: '축하합니다. 뇌 컨디션이 좋은 상태를 유지하고 있습니다.',
+    body: '최근 답변처럼 잠깐씩 쉬는 흐름을 계속 이어가세요.',
   };
   if (result.loadLevel === 'high') {
     if (result.loadScore < 10) return {
       tone: 'watch',
-      label: '자주 쉬지 못했다고 답한 순간이 있어요',
+      label: '최근 7일, 힘들었다고 답한 날이 있어요',
       heading: '지금 5분, 화면에서 눈을 떼고 쉬어 보세요.',
       body: '휴대폰을 내려놓고 물을 마시거나 창밖을 바라보세요.',
     };
     return {
       tone: 'high',
-      label: '여러 답변에서 머리가 쉴 틈이 부족했던 날이 보여요',
+      label: '최근 7일, 머리가 쉴 틈이 없었던 날이 여러 번 있었어요',
       heading: '지금 10분, 화면과 알림에서 떨어져 쉬어 보세요.',
       body: '해야 할 일은 메모하고 알림을 꺼 보세요.',
     };
   }
   return {
     tone: 'watch',
-    label: '자주 쉬지 못했다고 답한 순간이 있어요',
+    label: '최근 7일, 힘들었다고 답한 날이 있어요',
     heading: '오늘 일정에 5분 쉬는 시간을 지금 넣어 보세요.',
     body: '휴대폰을 내려놓고 물을 마시거나 창밖을 바라보세요.',
   };
@@ -77,15 +77,26 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const band = score >= 10 ? 'high' : score >= 5 ? 'watch' : 'low';
   const answerEntries = Object.entries(result.scores);
   const frequentAnswers = answerEntries.filter(([, value]) => value >= 2).length;
-  const description = `${frequentAnswers}개 질문에서 자주 또는 거의 매일 쉬지 못했다고 답했어요.`;
+  const description = `5개 질문 중 ${frequentAnswers}개에서 힘들었다고 답했어요.`;
+  const visualCopy = band === 'high'
+    ? { label: '머리에 할 일이 몰려 있어요', detail: '오늘은 화면과 알림에서 잠깐 떨어져 주세요.', Icon: AlertTriangle }
+    : band === 'watch'
+      ? { label: '잠깐 쉬어갈 때예요', detail: '다음 일정 전에 짧은 휴식을 넣어 보세요.', Icon: PauseCircle }
+      : { label: '지금은 여유가 있어요', detail: '지금의 쉬는 흐름을 그대로 이어가세요.', Icon: CheckCircle2 };
+  const StateIcon = visualCopy.Icon;
 
   return (
     <div className={`rhythm-load-score rhythm-load-score-${band}`}>
       <div className="rhythm-load-score-heading"><span>지난 7일 답변 기록</span><strong>{score}<small>/ 15</small></strong></div>
       <div className="rhythm-load-visual">
+        <div className="rhythm-load-state" role="img" aria-label={`오늘 내 상태: ${visualCopy.label}`}>
+          <div className="rhythm-load-brain" aria-hidden="true"><Brain size={30} strokeWidth={1.7} /><span className="rhythm-load-brain-pulse" /></div>
+          <div className="rhythm-load-state-copy"><strong>{visualCopy.label}</strong><span>{visualCopy.detail}</span></div>
+          <StateIcon className="rhythm-load-state-icon" size={22} strokeWidth={1.8} aria-hidden="true" />
+        </div>
         <div className="rhythm-load-visual-copy">
           <p className="rhythm-load-visual-kicker">5개 질문 중</p>
-          <strong>자주 쉬지 못했다고 답한 질문</strong>
+          <strong>힘들었다고 답한 질문</strong>
           <div className="rhythm-load-answer-row">
             <div className="rhythm-load-answer-dots" role="img" aria-label={description}>
               {answerEntries.map(([questionId, value]) => <i key={questionId} className={value >= 2 ? 'is-filled' : ''} />)}
@@ -191,12 +202,97 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const getShareReferralId=()=>{if(!shareReferralRef.current){shareReferralRef.current=crypto.randomUUID().replaceAll('-','').slice(0,16)}return shareReferralRef.current};
   useEffect(()=>{if(sharedType&&!sharedTracked.current){sharedTracked.current=true;onEvent('shared_link_landed',{path:'/share'});onEvent('result_viewed',{path:'/share'})}},[sharedType,onEvent]);
   useEffect(() => {
+    if (!sharedType || result) return;
+    let frame = 0;
+    let alignmentInterval = 0;
+    let stopped = false;
+    const stopAlignment = () => {
+      stopped = true;
+      if (alignmentInterval) window.clearInterval(alignmentInterval);
+      alignmentInterval = 0;
+      window.removeEventListener('wheel', stopAlignment);
+      window.removeEventListener('touchstart', stopAlignment);
+      window.removeEventListener('pointerdown', stopAlignment);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (['Tab', 'ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) stopAlignment();
+    };
+    const align = () => {
+      const target = document.getElementById('rhythm-result');
+      if (!target || stopped) return;
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+      const headerOffset = window.matchMedia('(max-width: 680px)').matches ? 72 : 88;
+      const correction = target.getBoundingClientRect().top - headerOffset;
+      if (Math.abs(correction) > 1) window.scrollBy({ top: correction, behavior: 'auto' });
+    };
+    const settle = () => {
+      const startedAt = performance.now();
+      const attempt = () => {
+        if (stopped) return;
+        align();
+        if (performance.now() - startedAt >= 2400) stopAlignment();
+      };
+      attempt();
+      alignmentInterval = window.setInterval(attempt, 120);
+      window.addEventListener('wheel', stopAlignment, { passive: true });
+      window.addEventListener('touchstart', stopAlignment, { passive: true });
+      window.addEventListener('pointerdown', stopAlignment, { passive: true });
+      window.addEventListener('keydown', onKeyDown);
+    };
+    frame = window.requestAnimationFrame(() => window.requestAnimationFrame(settle));
+    return () => {
+      window.cancelAnimationFrame(frame);
+      stopAlignment();
+    };
+  }, [sharedType, result]);
+  useEffect(() => {
     if (!focusInviteArrival) return;
-    const frame = window.requestAnimationFrame(() => {
-      document.getElementById('focus-game')?.scrollIntoView({ behavior: 'auto', block: 'start' });
-      document.getElementById('fatigue-game-heading')?.focus({ preventScroll: true });
-    });
-    return () => window.cancelAnimationFrame(frame);
+    let frame = 0;
+    let alignmentInterval = 0;
+    let stopped = false;
+    const stopAlignment = () => {
+      stopped = true;
+      if (alignmentInterval) window.clearInterval(alignmentInterval);
+      alignmentInterval = 0;
+      window.removeEventListener('wheel', stopAlignment);
+      window.removeEventListener('touchstart', stopAlignment);
+      window.removeEventListener('pointerdown', stopAlignment);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (['Tab', 'ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) stopAlignment();
+    };
+    const align = () => {
+      const target = document.getElementById('focus-game');
+      if (!target || stopped) return;
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+      const headerOffset = window.matchMedia('(max-width: 680px)').matches ? 72 : 88;
+      const correction = target.getBoundingClientRect().top - headerOffset;
+      if (Math.abs(correction) > 1) window.scrollBy({ top: correction, behavior: 'auto' });
+    };
+    const settle = () => {
+      const startedAt = performance.now();
+      const attempt = () => {
+        if (stopped) return;
+        align();
+        if (performance.now() - startedAt >= 2400) {
+          stopAlignment();
+          document.getElementById('fatigue-game-heading')?.focus({ preventScroll: true });
+        }
+      };
+      attempt();
+      alignmentInterval = window.setInterval(attempt, 120);
+      window.addEventListener('wheel', stopAlignment, { passive: true });
+      window.addEventListener('touchstart', stopAlignment, { passive: true });
+      window.addEventListener('pointerdown', stopAlignment, { passive: true });
+      window.addEventListener('keydown', onKeyDown);
+    };
+    frame = window.requestAnimationFrame(() => window.requestAnimationFrame(settle));
+    return () => {
+      window.cancelAnimationFrame(frame);
+      stopAlignment();
+    };
   }, [focusInviteArrival]);
   useEffect(()=>{if(!kakaoKey)return;const ready=()=>{if(!window.Kakao)return;try{if(!window.Kakao.isInitialized())window.Kakao.init(kakaoKey);setKakaoReady(true)}catch{setKakaoReady(false)}};if(window.Kakao){ready();return;}const script=document.createElement('script');script.src='https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js';script.async=true;script.onload=ready;script.onerror=()=>setKakaoReady(false);document.head.appendChild(script);return()=>{script.onload=null;script.onerror=null}},[]);
   const answerStarted=useRef(false);
@@ -344,7 +440,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
     onEvent('result_share_click',{path:result?'/result':'/share',channel:'invite'});
     if (navigator.share) {
       try {
-        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 1분 색 신호 게임' : '잠과 휴식 1분 체크', text: shareText, url });
+        await navigator.share({ title: kind === 'focus' ? '너도 해봐 · 뇌컨디션 확인 챌린지' : '잠과 휴식 1분 체크', text: shareText, url });
         setMessage(kind === 'focus' ? '게임 초대를 보냈어요. 친구도 설명을 읽고 직접 시작할 수 있어요.' : '1분 체크 초대 창을 열었어요. 친구도 직접 해보도록 보내 보세요.');
         onEvent('result_share_success',{path:result?'/result':'/share',channel:'invite'});
         return;
@@ -416,13 +512,13 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   return (
     <section className="rhythm-experience" id="rhythm" aria-labelledby="rhythm-heading">
       <div className="rhythm-heading-row">
-        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading">지난 7일, 잠과 휴식은<br />어땠나요?</h2></div>
-        <p className="rhythm-intro-copy">다섯 문항 · 누르면 다음 질문으로 넘어가요.</p>
+        <div><p className="rhythm-eyebrow">01 / 오늘 내 상태 확인</p><h2 id="rhythm-heading" aria-label="지난 7일, 잠들기 어렵거나 쉬지 못한 날이 있었나요?">지난 7일, 잠들기 어렵거나<br />쉬지 못한 날이 있었나요?</h2></div>
+        <p className="rhythm-intro-copy">다섯 문항 · 답을 고르면 다음 질문으로 넘어가요.</p>
       </div>
 
       {type ? (
         <div className="rhythm-result-layout">
-          <article className="rhythm-result-card">
+          <article className="rhythm-result-card" id="rhythm-result">
             <p className="rhythm-eyebrow">{sharedType ? '친구가 돌아본 생활 장면' : '지난 7일, 내가 돌아본 장면'}</p>
             <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
             {sharedType ? <p className="rhythm-shared-note">다른 사람이 공유한 생활 유형이에요. 나의 체크 결과는 아닙니다.</p> : null}
@@ -447,10 +543,15 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
               <button type="button" className="rhythm-button secondary" onClick={() => void copyLink()}>내 유형 링크 복사 <ArrowUpRight size={18} aria-hidden="true" /></button>
               <button type="button" className="rhythm-button secondary" onClick={downloadCard} disabled={!cardFile}>내 결과 카드 저장 <Download size={18} aria-hidden="true" /></button>
             </details>
-            {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
+            {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" aria-label="공유받은 유형과 내 결과 비교하기" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <details className="rhythm-rules"><summary>점수는 어떻게 나온 건가요?</summary><p>{result?.explanation ?? '지난 7일 동안 잠, 휴식, 아침 피로 등에 답한 내용을 모아 보여드려요. 점수는 내 답변을 정리한 것이며 건강 상태를 재거나 병을 진단하는 결과가 아닙니다.'}</p></details>
             <a className="rhythm-text-button" href="#brain-load-evidence">집중과 휴식 관련 연구 쉽게 보기 <ArrowRight size={18} aria-hidden="true" /></a>
+            <div className="rhythm-result-challenge" aria-label="다음으로 해볼 일">
+              <p className="rhythm-eyebrow">다음으로 해볼 일</p>
+              <a className="rhythm-button secondary" href="#focus-game">뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
+              <small>1분 색 신호 게임으로 내 반응 기록을 남겨 보세요.</small>
+            </div>
             <div className="rhythm-result-commerce" aria-label="제품과 구매자 후기 확인">
               <p className="rhythm-eyebrow">더 알아보기</p>
               <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>
@@ -467,7 +568,7 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
           </div>
         </div>
       ) : (
-        <div className="rhythm-start-panel"><div><h3>다섯 가지만 확인해요.</h3><p>일을 마쳐도 생각이 이어졌는지, 잠들기까지 오래 걸렸는지 떠올려 보세요.</p><details className="rhythm-start-scenes"><summary>질문에 나오는 생활 장면</summary><ul><li>퇴근 뒤에도 일이 계속 생각남</li><li>침대에 누워 한참 뒤척임</li><li>하루 종일 쉴 틈이 없었음</li><li>아침에도 피로가 남아 있음</li></ul></details></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>지난 7일 1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">답변은 저장하지 않아요.</p></div></div>
+        <div className="rhythm-start-panel"><div><h3>지난 7일을 다섯 가지로 돌아봐요.</h3><p>퇴근 뒤에도 일이 생각났는지, 침대에서 오래 뒤척였는지 떠올려 보세요.</p><details className="rhythm-start-scenes"><summary>질문에 나오는 생활 장면</summary><ul><li>퇴근 뒤에도 일이 계속 생각남</li><li>침대에 누워 한참 뒤척임</li><li>하루 종일 쉴 틈이 없었음</li><li>아침에도 피로가 남아 있음</li></ul></details></div><div className="rhythm-start-action"><button type="button" className="rhythm-button" onClick={start}>지난 7일 1분 체크 시작 <ArrowRight size={18} aria-hidden="true" /></button><p className="rhythm-note">답변은 저장하지 않아요.</p></div></div>
       )}
       <FatigueGame onEvent={onEvent} onInvite={() => shareInvite('focus')} />
       {result && friendType ? (

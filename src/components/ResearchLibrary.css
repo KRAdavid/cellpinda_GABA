@@ -36,7 +36,7 @@
 .research-library-card{scroll-margin-top:110px}.research-copy{margin-top:18px}.research-manual-link{display:block;width:100%;padding:12px;border:1px solid #cad3ce}
 .research-library-controls{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr)) auto;gap:20px;align-items:end;margin:24px 0 12px}.research-library-controls label{display:grid;gap:9px;font-size:14px;font-weight:500;min-width:0}.research-library-controls input,.research-library-controls select{display:block;width:100%;min-height:48px;padding:12px 14px;border:1px solid #cad3ce;border-radius:4px;background:#fff;color:#18382b;font:inherit;min-width:0}.research-library-controls>.text-link{font-size:13px;min-height:48px}.research-library-count{font-size:13px;margin:24px 0 12px;color:#486356}.research-library-empty{padding:28px;border:1px solid #d9e5dc;border-radius:6px;font-size:16px;line-height:1.75}.research-library-controls select:focus-visible{outline:2px solid #355c49;outline-offset:4px}
 .research-library-next{display:flex;justify-content:center;margin:28px 0 8px}
-@media(max-width:700px){.research-library-controls{grid-template-columns:minmax(0,1fr);gap:16px}.research-library-controls>.text-link{justify-self:start;min-height:36px}.research-library-empty{padding:20px}}
+@media(max-width:700px){.research-library-controls{grid-template-columns:minmax(0,1fr);gap:16px}.research-library-controls>.text-link{justify-self:start;min-height:44px}.research-library-empty{padding:20px}}
 
 /* Consumer-first, Apple-like reading layer: one short takeaway, then progressive detail. */
 .research-reading-path{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin:0 0 18px;background:#dfe8e1;border:1px solid #dfe8e1;border-radius:10px;overflow:hidden}
@@ -239,6 +239,10 @@
 .research-library-detail-context>span{min-width:0}
 .research-library-detail-finding{display:grid;gap:4px;padding:12px 14px;border-left:3px solid #9ab9a2;background:#f7f9f7}
 .research-library-detail-finding>strong{color:#315f48;font-size:13px}
+.research-library-next-step{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:16px 18px;border:1px solid #cfe5d7;border-radius:16px;background:#f4fbf6;color:#1f3d2d}
+.research-library-next-step-mark{display:grid;place-items:center;flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:#16834d;color:#fff;font-size:22px;font-weight:500;line-height:1}
+.research-library-next-step h4{margin:1px 0 5px;font-size:15px;letter-spacing:-.02em}
+.research-library-next-step p{margin:0;color:#435d4d;font-size:16px;line-height:1.65}
 .research-route-header{height:68px;padding:0 28px}
 .research-route-header .brand{font-size:27px}
 .research-route-header nav{font-size:14px}
@@ -273,6 +277,17 @@
   .research-library-card-featured>.study-insight{margin-top:7px;padding-top:8px}
   .research-library-disclosure{margin-top:8px;font-size:13px;line-height:1.5}
   .research-library-kind--general,.research-library-kind--non-ingestion{white-space:normal}
+}
+
+/* The two-column topic grid becomes cramped on the 390px phones used by
+   many middle-aged visitors. Give each topic a full-width row so the title,
+   description and count can be read without wrapping every few characters. */
+@media(max-width:460px){
+  .research-topic-cards{grid-template-columns:minmax(0,1fr);gap:8px}
+  .research-topic-card{grid-template-columns:auto minmax(0,1fr) auto;align-items:center;min-height:70px;padding:12px 14px;gap:10px}
+  .research-topic-card>b{grid-column:auto;justify-self:auto;align-self:center;margin-top:0}
+  .research-topic-card strong{font-size:16px;line-height:1.35}
+  .research-topic-card small{font-size:15px;line-height:1.4}
 }
 
 /* Center the research reading column and balance the featured study on wide screens. */

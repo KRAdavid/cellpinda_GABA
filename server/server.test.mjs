@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve, basename } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
@@ -25,10 +25,10 @@ test('Persistent approval, privacy, events and authenticated local API',async()=
     assert.equal((await fetch(`${base}/api/admin/content`)).status,401);
     assert.equal((await patch({revision:1,reason:'edit',publicText:'Changed'},'wrong')).status,401);
     assert.equal((await fetch(`${base}/api/content`,{headers:{origin:'https://evil.example'}})).status,403);
-    for(const origin of ['http://localhost:5173','http://127.0.0.1:5173','http://localhost:4173','http://127.0.0.1:4173']) {
+    for(const origin of ['http://localhost:5173','http://127.0.0.1:5173','http://localhost:4173','http://127.0.0.1:4173','http://127.0.0.1:4313','http://localhost:49201']) {
       const cors=await fetch(`${base}/api/content`,{headers:{origin}});assert.equal(cors.status,200);assert.equal(cors.headers.get('access-control-allow-origin'),origin);
     }
-    for(const origin of ['http://127.0.0.1:5174','https://localhost:5173','http://localhost:5173.evil.example']) assert.equal((await fetch(`${base}/api/content`,{headers:{origin}})).status,403);
+    for(const origin of ['https://localhost:5173','http://localhost:5173.evil.example','http://127.0.0.1.evil.example']) assert.equal((await fetch(`${base}/api/content`,{headers:{origin}})).status,403);
     assert.equal((await patch({revision:1,publicText:'Changed'})).status,400);
     response=await patch({revision:1,reason:'Changed copy requires review',publicText:'Changed'});assert.equal(response.status,200);assert.equal((await response.json()).status,'hold');
     data=await (await fetch(`${base}/api/content`)).json();assert.equal(data.claims.length,0);assert.equal(data.products.length,0);
@@ -238,6 +238,23 @@ test('Local ops audit endpoint exposes a private safe summary and omits raw inpu
   } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
 });
 
+test('Local operations snapshots stay behind the loopback API',async()=>{
+  const directory=mkdtempSync(join(tmpdir(),'cellpinda-api-'));
+  const operationsDirectory=join(directory,'operations');
+  const snapshot={schemaVersion:1,mode:'private',goalId:'GL-2026-CELL-GABA-001'};
+  for (const name of ['operations-queue.json','tf-pulse.json','goal-audit.json','tf-meeting-packet.json']) {
+    mkdirSync(operationsDirectory,{recursive:true});
+    writeFileSync(join(operationsDirectory,name),JSON.stringify(snapshot));
+  }
+  const {server}=createApi({dbPath:join(directory,'db.sqlite'),tokenPath:join(directory,'token'),operationsDirectory,seed});
+  try {
+    server.listen(0,'127.0.0.1');await once(server,'listening');const base=`http://127.0.0.1:${server.address().port}`;
+    let response=await fetch(`${base}/api/ops/snapshot`);assert.equal(response.status,200);const body=await response.json();
+    assert.equal(body.mode,'private_local_operations_snapshot');assert.equal(body.queue.goalId,'GL-2026-CELL-GABA-001');assert.equal(body.meetingPacket.mode,'private');
+    response=await fetch(`${base}/api/ops/snapshot`,{headers:{origin:'https://evil.example'}});assert.equal(response.status,403);
+  } finally {server.close();await once(server,'close');assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
+});
+
 test('Purchase decision events preserve only approved question identifiers',()=>{
   const store=createStore({dbPath:':memory:',seed});
   try {
@@ -274,10 +291,10 @@ test('Legacy DB gains flow column without removing existing events, and metadata
     const legacy=new DatabaseSync(dbPath);
     legacy.exec('CREATE TABLE events(id TEXT PRIMARY KEY,name TEXT NOT NULL,properties TEXT NOT NULL,created_at TEXT NOT NULL)');
     legacy.prepare('INSERT INTO events VALUES(?,?,?,?)').run(randomUUID(),'landing_view','{}','2026-01-01T00:00:00.000Z');legacy.close();
-    store=createStore({dbPath,seed:{...seed,claims:[{...seed.claims[0],metadata:{studyType:'Randomized trial',limitations:['Small sample'],productApplicability:'Not this product',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'},privatePath:'C:/secret',answers:['secret']}}]}});
+    store=createStore({dbPath,seed:{...seed,claims:[{...seed.claims[0],metadata:{studyType:'Randomized trial',limitations:['Small sample'],productApplicability:'Not this product',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerHighlight:'짧은 결과 요약은 공개 카드에서 먼저 보여요.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'},privatePath:'C:/secret',answers:['secret']}}]}});
     assert.equal(store.analytics().coverage.eventsWithoutFlow,1);assert.equal(store.analytics().counts[0].count,1);assert.equal(store.analytics().funnels[0].rate,null);
     const publicContent=store.publicContent();
-    assert.deepEqual(publicContent.claims[0].metadata,{studyType:'Randomized trial',productApplicability:'Not this product',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'}});
+    assert.deepEqual(publicContent.claims[0].metadata,{studyType:'Randomized trial',productApplicability:'Not this product',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerHighlight:'짧은 결과 요약은 공개 카드에서 먼저 보여요.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'}});
     assert.ok(!JSON.stringify(publicContent).includes('Small sample'));
     store.event({eventId:randomUUID(),flowId:randomUUID(),name:'landing_view'});assert.equal(store.analytics().counts[0].count,2);
   } finally {store?.close();assert.equal(dirname(resolve(directory)),resolve(tmpdir()));assert.ok(basename(directory).startsWith('cellpinda-api-'));rmSync(directory,{recursive:true,force:true});}
@@ -288,7 +305,10 @@ test('Teaser exposure events are accepted without collecting extra properties',(
   try {
     const flowId=randomUUID();
     assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_impression',properties:{path:'/teaser',private:'ignored'}}),{accepted:true,duplicate:false});
+    assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_embed_loaded',properties:{path:'/teaser'}}),{accepted:true,duplicate:false});
+    assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_external_opened',properties:{path:'/teaser'}}),{accepted:true,duplicate:false});
     assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'teaser_play',properties:{path:'/teaser'}}),{accepted:true,duplicate:false});
-    assert.deepEqual(store.analytics().counts.filter(item=>item.name.startsWith('teaser_')).map(item=>({name:item.name,count:item.count})),[{name:'teaser_impression',count:1},{name:'teaser_play',count:1}]);
+    assert.deepEqual(store.event({eventId:randomUUID(),flowId,name:'fatigue_game_practice_start',properties:{mode:'practice'}}),{accepted:true,duplicate:false});
+    assert.deepEqual(store.analytics().counts.filter(item=>item.name.startsWith('teaser_') || item.name==='fatigue_game_practice_start').map(item=>({name:item.name,count:item.count})),[{name:'fatigue_game_practice_start',count:1},{name:'teaser_embed_loaded',count:1},{name:'teaser_external_opened',count:1},{name:'teaser_impression',count:1},{name:'teaser_play',count:1}]);
   } finally {store.close();}
 });

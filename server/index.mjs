@@ -8,7 +8,10 @@ import { createStore } from './store.mjs';
 import { adminAction, adminRoleAllows, adminRoleCapabilities, adminRoleForToken, adminRoleLabel } from '../src/domain/admin-auth.ts';
 
 const LOOPBACK = new Set(['127.0.0.1','::1','::ffff:127.0.0.1']);
-const DEV_ORIGINS=new Set(['http://localhost:5173','http://127.0.0.1:5173','http://localhost:4173','http://127.0.0.1:4173']);
+// Vite may use an alternate local port when another preview is already
+// running. Keep the development CORS boundary loopback-only while allowing
+// those safe port changes; production still rejects every cross-origin call.
+const DEV_ORIGIN=/^http:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d{1,5})?$/;
 const allowedToken = (actual, expected) => {
   if (typeof actual !== 'string' || typeof expected !== 'string') return false;
   const received=Buffer.from(actual); const wanted=Buffer.from(expected);
@@ -96,7 +99,7 @@ function localAuditSummary(report) {
   };
 }
 
-export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),localAuditPath=resolve('tmp/local-goal-audit.json'),adminRoleTokens=process.env.ADMIN_ROLE_TOKENS,development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
+export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('data/content-ledger.json'),seed,tokenPath=resolve('var/operator-token'),localAuditPath=resolve('tmp/local-goal-audit.json'),operationsDirectory=resolve('tmp/operations'),adminRoleTokens=process.env.ADMIN_ROLE_TOKENS,development=process.env.NODE_ENV !== 'production',rateLimit=120}={}) {
   const store=createStore({dbPath,seedPath,seed});
   const token=randomBytes(32).toString('hex');
   mkdirSync(dirname(tokenPath),{recursive:true});
@@ -107,7 +110,7 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
     try {
       const origin=req.headers.origin;
       if (origin) {
-        if (!development || !DEV_ORIGINS.has(origin)) return reply(403,{error:'Origin not allowed'});
+        if (!development || !DEV_ORIGIN.test(origin)) return reply(403,{error:'Origin not allowed'});
         res.setHeader('Access-Control-Allow-Origin',origin); res.setHeader('Vary','Origin');
         res.setHeader('Access-Control-Allow-Headers','Content-Type, X-Admin-Token, X-Ops-Run-Key, X-Ops-Revision'); res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE, OPTIONS');
       }
@@ -140,6 +143,17 @@ export function createApi({dbPath=resolve('var/site.sqlite'),seedPath=resolve('d
       if (req.method==='GET' && path==='/api/member/status') return reply(200,{enabled:false,user:null,recoverySupported:false});
       if (req.method==='GET' && path==='/api/content') return reply(200,store.publicContent());
       if (req.method==='POST' && path==='/api/events') return reply(202,store.event(await readBody(req)));
+      if (req.method==='GET' && path==='/api/ops/snapshot') {
+        if (!LOOPBACK.has(address)) return reply(401,{error:'Local operator access required'});
+        const readSnapshot=(name)=>JSON.parse(readFileSync(resolve(operationsDirectory,name),'utf8'));
+        try {
+          return reply(200,{mode:'private_local_operations_snapshot',queue:readSnapshot('operations-queue.json'),pulse:readSnapshot('tf-pulse.json'),audit:readSnapshot('goal-audit.json'),meetingPacket:readSnapshot('tf-meeting-packet.json')});
+        } catch (error) {
+          if (error?.code==='ENOENT') return reply(404,{error:'Local operations snapshot unavailable',code:'LOCAL_OPERATIONS_SNAPSHOT_MISSING'});
+          if (error instanceof SyntaxError) return reply(422,{error:'Local operations snapshot is invalid',code:'LOCAL_OPERATIONS_SNAPSHOT_INVALID'});
+          throw error;
+        }
+      }
       if (req.method==='GET' && path==='/api/ops/local-audit') {
         if (!LOOPBACK.has(address)) return reply(401,{error:'Local operator access required'});
         try {

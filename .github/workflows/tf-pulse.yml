@@ -8,7 +8,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  statuses: write
 
 concurrency:
   group: tf-pulse
@@ -41,6 +40,7 @@ jobs:
       - name: Independently validate safe TF run
         run: node scripts/validate-safe-tf-run.mjs tf-safe-run.json tf-pulse.json | tee tf-safe-run-validation.json
       - name: Persist safe pulse heartbeat
+        if: github.ref == 'refs/heads/main'
         run: |
           node scripts/write-tf-pulse-heartbeat.mjs tf-pulse.json tf-safe-run.json tf-safe-run-validation.json
           git config user.name "cellpinda-tf-pulse[bot]"
@@ -61,14 +61,30 @@ jobs:
               pr_url="${existing_pr#*$'\t'}"
               echo "Updated existing TF heartbeat PR: $pr_url"
             else
-              pr_url="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$heartbeat_branch" --title "chore: refresh TF pulse heartbeat" --body "Automated safe TF pulse heartbeat update. Required checks and protected-main review remain in force; no external publication, purchase, or approval is performed by this workflow.")"
-              echo "Created TF heartbeat PR: $pr_url"
+              # Some repositories allow branch pushes from the automation token
+              # but disallow that token from creating pull requests. Keep the
+              # safe heartbeat and run its candidate checks in that case; the
+              # run summary must make the manual PR gate explicit.
+              pr_create_status=0
+              set +e
+              pr_url="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$heartbeat_branch" --title "chore: refresh TF pulse heartbeat" --body "Automated safe TF pulse heartbeat update. Required checks and protected-main review remain in force; no external publication, purchase, or approval is performed by this workflow." 2>&1)"
+              pr_create_status=$?
+              set -e
+              if [ "$pr_create_status" -ne 0 ]; then
+                echo "::warning::The heartbeat branch was pushed, but repository policy blocked automatic PR creation. A human must open the protected-main PR before the heartbeat can publish."
+                echo "$pr_url"
+                pr_url=""
+              else
+                echo "Created TF heartbeat PR: $pr_url"
+              fi
             fi
 
             # GITHUB_TOKEN-created PRs may not emit a second pull_request run,
             # and an untrusted branch can require manual workflow approval.
-            # Run the candidate's real release checks in this trusted pulse
-            # job before publishing required commit statuses.
+            # Run the same candidate checks here for evidence, but never write
+            # protected release status contexts from this abbreviated job.
+            # If the real pull_request checks do not run, branch protection
+            # must remain pending until a human opens or reruns the PR checks.
             pnpm run typecheck
             pnpm test
             pnpm run build
@@ -76,27 +92,35 @@ jobs:
             pnpm run test:worker-reviews
             pnpm exec wrangler deploy --dry-run --outdir worker-build
             heartbeat_sha="$(git rev-parse HEAD)"
-            gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$heartbeat_sha" \
-              -f state=success \
-              -f context=release-verify \
-              -f description="TF pulse candidate release verification passed" \
-              -f target_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-            gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$heartbeat_sha" \
-              -f state=success \
-              -f context=site-quality-verify \
-              -f description="TF pulse candidate consumer verification passed" \
-              -f target_url="https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             {
               echo
               echo "## Heartbeat review"
-              echo "The safe heartbeat was published through a protected-main PR."
-              echo "PR: $pr_url"
-              echo "Verification: candidate typecheck, tests, build and Worker dry-run passed on $heartbeat_sha."
+              if [ -n "$pr_url" ]; then
+                echo "The safe heartbeat was published through a protected-main PR."
+                echo "PR: $pr_url"
+              else
+                echo "The safe heartbeat branch was pushed, but automatic PR creation was blocked by repository policy."
+                echo "A human must open the protected-main PR before the heartbeat can publish."
+                echo "Branch: $heartbeat_branch"
+              fi
+              echo "Verification evidence: candidate typecheck, tests, build, readiness and Worker dry-run passed on $heartbeat_sha."
+              echo "Protected release-verify and site-quality-verify contexts are written only by their complete pull_request workflow; this pulse never marks them green."
               echo "The public packet changes only after the required checks and human merge pass."
             } >> "$GITHUB_STEP_SUMMARY"
           fi
         env:
           GH_TOKEN: ${{ github.token }}
+      - name: Verify non-main pulse candidate
+        if: github.ref != 'refs/heads/main'
+        run: |
+          # Manual candidate runs still exercise the same release checks, but
+          # never mutate the main heartbeat branch or create a review PR.
+          pnpm run typecheck
+          pnpm test
+          pnpm run build
+          pnpm run preflight:deploy
+          pnpm run test:worker-reviews
+          pnpm exec wrangler deploy --dry-run --outdir worker-build
       - name: Add pulse to run summary
         run: |
           {

@@ -24,13 +24,13 @@ class MockD1 {
   async batch(statements){const work=this.queue.then(async()=>{this.db.exec('BEGIN IMMEDIATE');try{const result=[];for(const statement of statements)result.push(await statement.run());this.db.exec('COMMIT');return result;}catch(error){this.db.exec('ROLLBACK');throw error;}});this.queue=work.catch(()=>{});return work;}
   close(){this.db.close();}
 }
-const seed={claims:[{id:'source',status:'approved',publicText:'Public fact',sources:[{title:'Source',url:'https://example.com'}],metadata:{sampleSize:'40',productApplicability:'Not a product study',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerFindingFirst:true,consumerDetail:'An expanded result detail.',consumerContext:'The paper reports the research context.',consumerDisclosure:'The article reports an author relationship.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'},result:'Internal observation',limitations:['Internal note'],privatePath:'secret'}},{id:'held',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba1500',status:'approved',sourceIds:['source'],name:'Product'}]};
+const seed={claims:[{id:'source',status:'approved',publicText:'Public fact',sources:[{title:'Source',url:'https://example.com'}],metadata:{sampleSize:'40',productApplicability:'Not a product study',consumerFinding:'Study participants recorded a measured change over four weeks.',consumerHighlight:'A short observed result is shown first.',consumerFindingFirst:true,consumerDetail:'An expanded result detail.',consumerContext:'The paper reports the research context.',consumerDisclosure:'The article reports an author relationship.',consumerVisual:{kind:'ratio',metric:'Blood marker',unit:'x',baseline:1,observed:4,comparisonLabel:'vs placebo',participantLabel:'11 adults',doseLabel:'single dose'},result:'Internal observation',limitations:['Internal note'],privatePath:'secret'}},{id:'held',status:'hold',publicText:'SECRET',sources:[]}],products:[{id:'gaba1500',status:'approved',sourceIds:['source'],name:'Product'}]};
 
 test('D1 approval transaction, seed preservation, public filtering and audit',async()=>{
   const db=new MockD1();const store=createStore(db);
   try {
     await store.initialize(seed);
-    let data=await store.publicContent();assert.equal(data.claims.length,1);assert.equal(data.products.length,1);assert.ok(!JSON.stringify(data).includes('secret'));assert.ok(!JSON.stringify(data).includes('Internal observation'));assert.ok(!JSON.stringify(data).includes('Internal note'));assert.equal(data.claims[0].metadata.consumerFinding,'Study participants recorded a measured change over four weeks.');assert.equal(data.claims[0].metadata.consumerFindingFirst,true);assert.equal(data.claims[0].metadata.consumerVisual.kind,'ratio');assert.equal(data.claims[0].metadata.consumerDetail,'An expanded result detail.');assert.equal(data.claims[0].metadata.consumerContext,'The paper reports the research context.');assert.equal(data.claims[0].metadata.consumerDisclosure,'The article reports an author relationship.');
+    let data=await store.publicContent();assert.equal(data.claims.length,1);assert.equal(data.products.length,1);assert.ok(!JSON.stringify(data).includes('secret'));assert.ok(!JSON.stringify(data).includes('Internal observation'));assert.ok(!JSON.stringify(data).includes('Internal note'));assert.equal(data.claims[0].metadata.consumerFinding,'Study participants recorded a measured change over four weeks.');assert.equal(data.claims[0].metadata.consumerHighlight,'A short observed result is shown first.');assert.equal(data.claims[0].metadata.consumerFindingFirst,true);assert.equal(data.claims[0].metadata.consumerVisual.kind,'ratio');assert.equal(data.claims[0].metadata.consumerDetail,'An expanded result detail.');assert.equal(data.claims[0].metadata.consumerContext,'The paper reports the research context.');assert.equal(data.claims[0].metadata.consumerDisclosure,'The article reports an author relationship.');
     await store.update('source',{revision:1,reason:'Rewording',publicText:'Changed'});
     data=await store.publicContent();assert.equal(data.claims.length,0);assert.equal(data.products.length,0);
     await assert.rejects(store.update('source',{revision:1,reason:'Stale',status:'approved'}),/Revision conflict/);
@@ -138,6 +138,16 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
   const call=(path,options={})=>worker.fetch(new Request(`https://site.example${path}`,options),env);
   try {
     assert.equal((await call('/api/content',{headers:{origin:'https://evil.example'}})).status,403);
+    const publicContent=await call('/api/content');
+    assert.equal(publicContent.status,200);
+    assert.equal(publicContent.headers.get('cache-control'),'public, max-age=300, must-revalidate');
+    const corsEnv={...env,MEMBER_ORIGIN:'https://app.example'};
+    const corsResponse=await worker.fetch(new Request('https://site.example/api/health',{headers:{origin:'https://app.example','sec-fetch-site':'cross-site'}}),corsEnv);
+    assert.equal(corsResponse.status,200);
+    assert.equal(corsResponse.headers.get('access-control-allow-origin'),'https://app.example');
+    assert.equal(corsResponse.headers.get('access-control-allow-credentials'),'true');
+    assert.match(corsResponse.headers.get('vary') || '',/Origin/);
+    assert.equal((await worker.fetch(new Request('https://site.example/api/health',{headers:{origin:'https://evil.example'}}),corsEnv)).status,403);
     assert.equal((await call('/api/admin/content')).status,401);
     assert.equal((await call('/api/health',{headers:{origin:'https://site.example'}})).status,200);
     assert.equal((await call('/api/admin/content',{headers:{'x-admin-token':token}})).status,200);
@@ -147,7 +157,10 @@ test('Worker routes reject bad origin, auth, oversized bodies, rate limits and p
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'landing_view',properties:{path:'/'}})})).status,202);
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'purchase_question_opened',properties:{questionId:'amount',email:'private@example.com'}})})).status,202);
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'teaser_impression',properties:{path:'/teaser'}})})).status,202);
+    assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'teaser_embed_loaded',properties:{path:'/teaser'}})})).status,202);
+    assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'teaser_external_opened',properties:{path:'/teaser'}})})).status,202);
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'teaser_play',properties:{path:'/teaser'}})})).status,202);
+    assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),flowId:randomUUID(),name:'fatigue_game_practice_start',properties:{mode:'practice'}})})).status,202);
     assert.equal((await call('/api/events',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({eventId:randomUUID(),name:'purchase_question_opened',properties:{questionId:'private'}})})).status,400);
     assert.equal(await (await call('/')).text(),'asset');
     env.RATE_LIMITER.limit=async()=>({success:false});assert.equal((await call('/api/health')).status,429);
@@ -204,7 +217,7 @@ test('Worker applies content-aware cache policy to public assets and data',async
   }}};
   try{
     const data=await worker.fetch(new Request('https://site.example/data/content.json'),env);
-    const hashed=await worker.fetch(new Request('https://site.example/assets/index-Ab12Cd34.js'),env);
+    const hashed=await worker.fetch(new Request('https://site.example/assets/index-DQsaX8_M.js'),env);
     const page=await worker.fetch(new Request('https://site.example/'),env);
     assert.equal(data.headers.get('cache-control'),'public, max-age=300, must-revalidate');
     assert.equal(hashed.headers.get('cache-control'),'public, max-age=31536000, immutable');

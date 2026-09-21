@@ -142,15 +142,16 @@
       "verifier": "표시·콘텐츠 검토",
       "risk": "D_EXTERNAL_REVERSIBLE",
       "dependencies": [],
-      "blockedBy": "로그인 없는 공개 영상·포스터·자막·대본·권리·표시사항·CTA 승인",
+      "blockedBy": "포스터·자막·대본·권리·표시사항·CTA 승인",
       "requiredInputs": [
-        "로그인 없는 공개 영상 주소 또는 MP4/HLS",
         "포스터·자막·대본·영상 길이",
         "음악·출연·이미지 사용 권리",
-        "표시사항·CTA 책임자 승인"
+        "제품 표시사항과 연구 장면별 출처 대조",
+        "영상 종료 CTA와 캠페인 기간",
+        "표시·콘텐츠 검토자의 공개 승인"
       ],
       "acceptance": ["공개 미디어 주소와 비로그인 재생 확인", "연구·제품 효능을 혼동하지 않는 편집·자막 검토", "영상 노출과 외부 게시를 분리한 측정 이벤트 확인"],
-      "evidence": ["data/teaser-manifest.json", "docs/TEASER_VIDEO_EXPOSURE_REVIEW.md", "scripts/validate-teaser-exposure.mjs", "2026-09-19 공개 영상 주소·미디어 파일은 승인 전까지 공개하지 않고 사이트에는 HOLD 카드만 표시; 자막·대본·권리·표시사항·CTA 최종 승인은 B4 WAITING으로 유지"]
+      "evidence": ["data/teaser-manifest.json", "docs/TEASER_VIDEO_EXPOSURE_REVIEW.md", "scripts/validate-teaser-exposure.mjs", "2026-09-20 비로그인 공개 HTML 애니메이션을 PREVIEW로 연결해 리듬 체크 다음에 자동 시작; 자막·대본·권리·표시사항·CTA 최종 승인은 B4 WAITING으로 유지"]
     },
     {
       "id": "C1",

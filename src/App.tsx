@@ -1,26 +1,37 @@
 import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { ArrowRight, ArrowUpRight, Menu, X } from 'lucide-react';
 import RhythmExperience from './components/RhythmExperience';
-import ResearchLibrary, {type Claim} from './components/ResearchLibrary';
-import './components/research-route.css';
-import ReviewExperience,{type PublicReview} from './components/ReviewExperience';
-import SevenDayChallenge from './components/SevenDayChallenge';
-import GabaStory from './components/GabaStory';
-import BrainLoadEvidence from './components/BrainLoadEvidence';
-import TeaserPreview from './components/TeaserPreview';
-import ProductShare from './components/ProductShare';
-import PurchaseQuestions from './components/PurchaseQuestions';
-import AnalyticsConsent from './components/AnalyticsConsent';
+import type {Claim} from './components/ResearchLibrary';
+import type {PublicReview} from './components/ReviewExperience';
 import {apiEndpoint} from './api-origin';
 import {resultTypes, rhythmIdFromUrl} from './domain/rhythm';
 import {analyticsConsentGranted} from './domain/analytics-consent';
 import {REVIEW_DESTINATION_URL} from './domain/reviews';
-const Admin = lazy(() => import('./components/Admin'));
+// Admin and TF operations are local-only review surfaces. Keep their route
+// chunks out of production/static bundles so a public visitor cannot download
+// internal labels or API paths even though the server still protects them.
+const Admin = import.meta.env.DEV ? lazy(() => import('./components/Admin')) : null;
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
-const OperationsMvp=lazy(()=>import('./components/OperationsMvp'));
+const OperationsMvp=import.meta.env.DEV ? lazy(()=>import('./components/OperationsMvp')) : null;
+const ResearchLibrary=lazy(()=>import('./components/ResearchLibrary'));
+// Keep the first route payload focused on the hero and one-minute check. The
+// long-form story, evidence, commerce, review and challenge sections load as
+// independent chunks after the shell is interactive.
+const ReviewExperience=lazy(()=>import('./components/ReviewExperience'));
+const SevenDayChallenge=lazy(()=>import('./components/SevenDayChallenge'));
+const GabaStory=lazy(()=>import('./components/GabaStory'));
+const GabaResearchHighlights=lazy(()=>import('./components/GabaResearchHighlights'));
+const BrainLoadEvidence=lazy(()=>import('./components/BrainLoadEvidence'));
+const TeaserPreview=lazy(()=>import('./components/TeaserPreview'));
+const ProductShare=lazy(()=>import('./components/ProductShare'));
+const PurchaseQuestions=lazy(()=>import('./components/PurchaseQuestions'));
+const AnalyticsConsent=lazy(()=>import('./components/AnalyticsConsent'));
 type Product={id:string;name:string;servings:number;category:string;officialUrl:string;availability?:string;priceDisplay?:string|null};
 type Content={claims:Claim[];products:Product[];reviews:PublicReview[]};
-const eventMap:Record<string,string>={rhythm_start:'rhythm_check_started',rhythm_complete:'rhythm_check_completed',share_request:'share_requested',share_copy:'share_link_copied',card_download:'share_image_downloaded',purchase_click:'purchase_outbound_clicked',review_open:'review_opened',review_nav:'review_section_navigated',faq_open:'purchase_question_opened'};
+const productImages:Record<string,{styled:string;front:string}>={
+ gaba1500:{styled:'assets/product-gaba1500-styled.webp',front:'assets/product-gaba1500-front.webp'},
+};
+const eventMap:Record<string,string>={rhythm_start:'rhythm_check_started',rhythm_complete:'rhythm_check_completed',share_request:'share_requested',share_copy:'share_link_copied',card_download:'share_image_downloaded',purchase_click:'purchase_outbound_clicked',review_open:'review_opened',review_nav:'review_section_navigated',faq_open:'purchase_question_opened',research_highlight_opened:'research_highlight_opened',research_library_opened:'research_library_opened'};
 const siteRoot=import.meta.env.BASE_URL;
 const asset=(path:string)=>`${siteRoot}${path}`;
 function evidenceLinkLabel(url:string): string {
@@ -41,6 +52,7 @@ const safeQueryValue=(name:string,maxLength=64)=>{const value=new URLSearchParam
 const campaignId=safeQueryValue('campaign');
 const challengeInvite=safeQueryValue('challenge')==='7days';
 const referralId=(()=>{const value=safeQueryValue('ref');return value.length>=8?value:'';})();
+const sharedRhythmId=rhythmIdFromUrl(new URL(window.location.href));
 const seenEvents=new Set<string>();
 let eventQueue=Promise.resolve();
 function trackOnce(name:string,properties:Record<string,string>={}){if(seenEvents.has(name)||!analyticsConsentGranted())return;seenEvents.add(name);track(name,properties)}
@@ -69,22 +81,38 @@ async function fetchContent(url:string, signal:AbortSignal, timeoutMs=8000):Prom
  }
 }
 async function loadContent(signal:AbortSignal):Promise<Content>{
+ const loadStaticContent=async():Promise<Content>=>{
+  const fallback=await fetchContent(`${import.meta.env.BASE_URL}data/content.json`,signal);
+  if(!fallback.ok)throw Error('Content unavailable');
+  const contentType=fallback.headers.get('content-type')?.toLowerCase()||'';
+  if(!contentType.includes('json'))throw Error('Content response was not JSON');
+  return fallback.json();
+ };
  const endpoint=apiEndpoint('/api/content');
  if(endpoint){
   try{
    const api=await fetchContent(endpoint,signal);
-   if(api.ok)return api.json();
+   const contentType=api.headers.get('content-type')?.toLowerCase()||'';
+   if(api.ok&&contentType.includes('json'))return api.json();
+   // A directly started Vite server has no API proxy and serves the app shell
+   // for /api/content. In development only, use the same reviewed public
+   // export that static hosting serves. Production Worker failures remain
+   // visible instead of silently masking an unavailable runtime API.
+   if(import.meta.env.DEV&&api.ok&&contentType.includes('text/html'))return loadStaticContent();
   }catch(error){
    if((error as Error).name==='AbortError')throw error;
   }
   throw Error('Content API unavailable');
  }
- const fallback=await fetchContent(`${import.meta.env.BASE_URL}data/content.json`,signal);
- if(!fallback.ok)throw Error('Content unavailable');
- return fallback.json();
+ return loadStaticContent();
 }
 function ContentFallback({loading,onRetry}:{loading:boolean;onRetry:()=>void}){
- return <section className="section wrap content-status" aria-live="polite"><p className="chapter">셀핀다 발효가바</p><h2>{loading?'정보를 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h2><p>{loading?'제품과 연구 정보를 불러오는 중입니다.':'1분 체크는 바로 할 수 있어요. 아래에서 GABA와 제품 정보를 먼저 살펴보세요.'}</p>{!loading?<div className="actions"><a className="button outline" href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noopener noreferrer">스마트스토어 제품 보기 ↗</a><button type="button" className="button outline" onClick={onRetry}>다시 불러오기</button></div>:null}{!loading?<div className="content-status-grid"><article id="story"><p className="chapter">GABA는?</p><h3>뇌세포 사이에서 신호를 주고받는 데 쓰이는 물질</h3><p>GABA는 뇌세포 사이에서 신호를 주고받는 과정에 쓰이는 물질 중 하나예요.</p></article><article id="fermentation"><p className="chapter">발효가바는?</p><h3>발효가바를 쉽게 알아보기</h3><p>발효가바를 만드는 방법과 확인 자료를 쉽게 소개해요.</p></article><article id="products"><p className="chapter">제품 구성</p><h3>셀핀다 가바 1500 · 30포 구성</h3><p>낱포 표시와 먹는 방법은 제품 포장에서, 가격과 재고는 스마트스토어에서 확인해 보세요.</p><a className="text-link" href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noopener noreferrer">스마트스토어에서 제품 보기 ↗</a></article><article id="reviews"><p className="chapter">구매자 후기</p><h3>가바 1500 구매자 후기</h3><p>스마트스토어에서 구매한 사람들의 후기를 읽어보세요.</p></article><article id="research"><p className="chapter">연구 이야기</p><h3>사람 연구에서 무엇을 살펴봤나요?</h3><p>GABA와 잠·긴장·운동에 관한 연구를 쉬운 말로 정리했어요.</p><ul><li><strong>긴장할 때</strong> 생각을 많이 쓰는 과제 뒤 뇌파와 기분</li><li><strong>잠</strong> 잠드는 시간과 수면 기록</li><li><strong>운동</strong> 운동 뒤 몸에서 살펴본 변화</li></ul></article></div>:null}</section>;
+ return <section className="section wrap content-status" aria-live="polite"><p className="chapter">셀핀다 발효가바</p><h2>{loading?'정보를 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h2><p>{loading?'제품과 연구 정보를 불러오는 중입니다.':'1분 체크는 바로 할 수 있어요. 아래에서 GABA와 제품 정보를 먼저 살펴보세요.'}</p>{!loading?<div className="actions"><a className="button outline" href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noopener noreferrer">스마트스토어 제품 보기 ↗</a><button type="button" className="button outline" onClick={onRetry}>다시 불러오기</button></div>:null}{!loading?<div className="content-status-grid"><article id="story"><p className="chapter">GABA는?</p><h3>뇌세포 사이에서 신호를 주고받는 데 쓰이는 물질</h3><p>GABA는 뇌세포 사이에서 신호를 주고받는 과정에 쓰이는 물질 중 하나예요.</p></article><article id="fermentation"><p className="chapter">발효가바는?</p><h3>발효가바를 쉽게 알아보기</h3><p>발효가바를 만드는 방법과 확인 자료를 쉽게 소개해요.</p></article><article id="products"><p className="chapter">제품 구성</p><h3>셀핀다 가바 1500 · 30포 구성</h3><p>낱포 표시와 먹는 방법은 제품 포장에서, 가격과 재고는 스마트스토어에서 확인해 보세요.</p><a className="text-link" href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noopener noreferrer">스마트스토어에서 제품 보기 ↗</a></article><article id="reviews"><p className="chapter">구매자 후기</p><h3>가바 1500 구매자 후기</h3><p>스마트스토어에서 구매한 사람들의 후기를 읽어보세요.</p></article><article id="research"><p className="chapter">연구 이야기</p><h3>사람 연구에서 무엇을 살펴봤나요?</h3><p>GABA와 잠·스트레스·운동에 관한 연구를 쉬운 말로 정리했어요.</p><ul><li><strong>스트레스가 쌓일 때</strong> 머리를 많이 쓴 뒤 뇌파와 기분</li><li><strong>잠</strong> 잠드는 시간과 수면 기록</li><li><strong>쉰 날·운동한 날</strong> 쉬었을 때와 운동했을 때 몸에서 살펴본 변화</li></ul></article></div>:null}</section>;
+}
+function ExperienceLoading({research=false,label,compact=false}:{research?:boolean;label?:string;compact?:boolean}){
+ const heading=research?'연구 카드를 불러오고 있어요.':label?`${label} 내용을 불러오고 있어요.`:'다음 이야기를 불러오고 있어요.';
+ const eyebrow=research?'사람 대상 GABA 연구':label||'셀핀다 발효가바';
+ return <section className={`section wrap experience-loading${research?' experience-loading-research':''}${compact?' experience-loading-compact':''}`} aria-live="polite" aria-busy="true"><div className="experience-loading-heading"><span className="experience-loading-orb" aria-hidden="true"/><div><p className="chapter">{eyebrow}</p><h2>{heading}</h2></div></div><div className="experience-loading-grid" aria-hidden="true"><span/><span/><span/></div><p className="sr-only">잠시만 기다리면 {research?'사람 연구와 제품 정보를':`${eyebrow} 정보를`} 이어서 볼 수 있어요.</p></section>;
 }
 export default function App(){
  const [content,setContent]=useState<Content|null>(null),[error,setError]=useState(false),[loading,setLoading]=useState(true),[menu,setMenu]=useState(false),[retryKey,setRetryKey]=useState(0);
@@ -102,26 +130,33 @@ export default function App(){
  const researchView = requestedView === 'research' || currentPath === '/research/';
  const isProductView = requestedView === 'products' || currentPath === '/products/';
  const adminView = import.meta.env.DEV && isLocalHost && (requestedView === 'admin' || currentPath === '/admin');
+ useEffect(()=>{
+  if(!researchView)return;
+  // Research-only layout rules should not add ~36 kB to the homepage CSS.
+  // Vite emits this CSS as a route chunk and injects it before the research
+  // cards resolve, while the shared shell stays immediately interactive.
+  void import('./components/research-route.css');
+ },[researchView]);
  useEffect(()=>{const c=new AbortController();setLoading(true);setError(false);loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[retryKey]);
  useEffect(()=>{
   const value=rhythmIdFromUrl(new URL(location.href));
   const type=value ? resultTypes[value] : null;
   const focusInvite=new URLSearchParams(location.search).get('focus')==='1' || location.pathname.endsWith('/focus/');
   if(!type&&!focusInvite)return;
-   const title=focusInvite ? '너도 해봐 · 1분 색 신호 게임 | 셀핀다' : `공유받은 하루 리듬: ‘${type!.shareLabel} · ${type!.name}’ | Cellpinda`;
+   const title=focusInvite ? '너도 해봐 · 뇌컨디션 확인 챌린지 | 셀핀다' : `공유받은 하루 리듬: ‘${type!.shareLabel} · ${type!.name}’ | Cellpinda`;
    const description=focusInvite ? '초록 신호는 누르고 빨강 신호는 기다리는 게임이에요. 24개 신호 순서는 매번 달라져요. 점수는 건강 상태가 아닌 게임 기록이에요.' : `친구가 고른 ‘${type!.shareLabel} · ${type!.name}’ 장면을 공유했어요. 내 체크 결과는 아니에요.`;
   document.title=title;
   const update=(selector:string,attribute:'name'|'property',value:string)=>{const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}=\"${selector}\"]`);if(element)element.content=value;else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}};
    const image=new URL(asset(focusInvite ? 'assets/focus-game-card-v5.png' : `assets/social-rhythm-${type!.id}.png`),window.location.origin).toString();
-  update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:image','property',image);update('og:url','property',window.location.href);update('twitter:title','name',title);update('twitter:description','name',description);update('twitter:image','name',image);
+   update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:image','property',image);update('og:image:alt','property',focusInvite ? '초록은 누르고 빨강은 기다리며, 표시된 색 신호를 따라가는 챌린지' : '친구가 고른 하루 리듬 장면 공유 카드');update('og:url','property',window.location.href);update('twitter:title','name',title);update('twitter:description','name',description);update('twitter:image','name',image);update('twitter:image:alt','name',focusInvite ? '초록은 누르고 빨강은 기다리며, 표시된 색 신호를 따라가는 챌린지' : '친구가 고른 하루 리듬 장면 공유 카드');
  },[]);
  useEffect(()=>{
   if(!researchView)return;
   const title='사람을 대상으로 한 GABA 연구를 쉽게 보기 | 셀핀다';
-  const description='잠·긴장·생각 과제에서 관찰한 내용을 그림으로 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.';
+  const description='잠·스트레스·머리를 많이 쓴 뒤 관찰한 내용을 그림으로 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.';
   document.title=title;
   const update=(selector:string,attribute:'name'|'property',value:string)=>{const element=document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${selector}"]`);if(element)element.content=value;else{const next=document.createElement('meta');next.setAttribute(attribute,selector);next.content=value;document.head.appendChild(next);}};
-  update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:url','property',new URL(`${siteRoot}research/`,window.location.origin).toString());update('twitter:title','name',title);update('twitter:description','name',description);
+  update('description','name',description);update('og:title','property',title);update('og:description','property',description);update('og:image:alt','property','GABA 사람 연구를 쉬운 말로 살펴보는 셀핀다 연구 안내');update('og:url','property',new URL(`${siteRoot}research/`,window.location.origin).toString());update('twitter:title','name',title);update('twitter:description','name',description);update('twitter:image:alt','name','GABA 사람 연구를 쉬운 말로 살펴보는 셀핀다 연구 안내');
   const canonical=document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if(canonical)canonical.href=new URL(`${siteRoot}research/`,window.location.origin).toString();
  },[researchView]);
@@ -145,6 +180,7 @@ export default function App(){
   update('twitter:title','name',title);
   update('twitter:description','name',description);
   update('twitter:image','name',new URL(asset('assets/product-composition-1500.png'),window.location.origin).toString());
+  update('twitter:image:alt','name','셀핀다 가바 1500, 30포 한 상자 구성 안내');
   const canonical=document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
   if(canonical)canonical.href=productUrl;
  },[isProductView,researchView,accountView,adminView,operationsView]);
@@ -204,6 +240,13 @@ export default function App(){
    trackOnce('shared_link_landed',{path:'/challenge',channel:'direct'});
    return()=>{window.cancelAnimationFrame(firstFrame);if(secondFrame)window.cancelAnimationFrame(secondFrame);stopAlignment();};
   }
+  if(url.hash==='#brain-load-evidence'){
+   const target=document.getElementById('brain-load-evidence');
+   if(!target)return;
+   const align=()=>{target.scrollIntoView({block:'start',behavior:'instant'});window.scrollBy({top:target.getBoundingClientRect().top-96,behavior:'instant'});};
+   const firstFrame=window.requestAnimationFrame(()=>{align();window.requestAnimationFrame(align);});
+   return()=>window.cancelAnimationFrame(firstFrame);
+  }
   const productView=url.searchParams.getAll('view').length===1&&url.searchParams.get('view')==='products'&&!url.searchParams.has('rhythm');
   if(productView){
    const target=document.getElementById('products');
@@ -255,22 +298,31 @@ export default function App(){
   else if(content.products.some(product=>url.hash===`#product-${product.id}`)){document.getElementById(url.hash.slice(1))?.scrollIntoView({block:'start',behavior:'instant'});}
  },[content,currentPath]);
  if(accountView)return <Suspense fallback={<p className="loading">내 기록을 여는 중입니다.</p>}><MemberRecords/></Suspense>;
- if(adminView)return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
- if(operationsView)return <Suspense fallback={<p className="loading">운영판을 여는 중입니다.</p>}><OperationsMvp/></Suspense>;
- if(researchView)return <><a className="skip" href="#main">본문으로 이동</a><header className="header research-route-header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav aria-label="연구 메뉴"><a href={siteRoot}>메인으로</a></nav></header><main id="main" className="research-route-main">{content?<><section className="research-route-intro wrap"><p className="chapter">사람을 대상으로 한 GABA 연구</p><h1>연구에서 무엇을 봤을까요?</h1><p>잠·긴장·생각 과제에서 관찰한 내용을 그림으로 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.</p></section><ResearchLibrary claims={content.claims} sectionTitle="주제별로 한눈에 보기" onOpen={()=>track('evidence_opened',{path:'/research'})}/><section className="research-route-product wrap" aria-labelledby="research-route-product-heading"><div><p className="chapter">다음으로</p><h2 id="research-route-product-heading">제품 구성도 살펴보세요.</h2><p>연구에서 본 일반 GABA 자료와 셀핀다 제품 정보는 따로 확인할 수 있어요.</p></div><a className="button" href={`${siteRoot}?view=products#products`} onClick={()=>track('product_compare_view',{path:'/research'})}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true"/></a></section></>:<section className="section wrap content-status"><p className="chapter">사람 대상 GABA 연구</p><h1>{loading?'연구 내용을 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h1><p>{loading?'사람 연구를 쉽게 정리한 내용을 불러오는 중입니다.':'연구 자료를 불러오지 못했습니다. 다시 시도해 주세요.'}</p>{!loading?<button type="button" className="button outline" onClick={()=>setRetryKey(value=>value+1)}>다시 불러오기</button>:null}</section>}</main><footer className="wrap footer research-route-footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>사람 대상 GABA 연구 안내</p><a href={siteRoot}>메인으로</a></footer></>;
- const linkContext=referralId?<aside className="link-context" aria-live="polite">공유된 리듬 링크로 방문했어요. 내 하루도 1분이면 확인할 수 있어요.</aside>:campaignId?<aside className="link-context" aria-live="polite">캠페인 링크로 방문했어요. 원하는 흐름부터 살펴보세요.</aside>:null;
-   return <><a className="skip" href="#main">본문으로 이동</a><header className="header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav id="primary-navigation" ref={menuNavRef} aria-label="주 메뉴" className={menu?'open':''} onClick={()=>closeMenu()} onKeyDown={event=>{if(event.key==='Escape')closeMenu(true)}}><a href="#rhythm">잠과 휴식 체크</a><a href="#story">GABA는?</a><a href={`${siteRoot}research/`}>GABA 연구 읽기</a><a href="#fermentation">발효가바는?</a><a href="#products">제품 구성</a>{content?.reviews?.length ? <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 후기 읽기 · 새 창" onClick={()=>track('review_open',{productId:'gaba1500',path:'/header'})}>가바 1500 스마트스토어 후기 읽기 ↗</a> : null}</nav><a href="#rhythm" className="button small" onClick={()=>track('hero_check_start',{path:'/header'})}>1분 체크 <ArrowRight size={18}/></a><button ref={menuToggleRef} className="menu-toggle" aria-label={menu?'메뉴 닫기':'메뉴 열기'} aria-expanded={menu} aria-controls="primary-navigation" onClick={()=>setMenu(!menu)}>{menu?<X/>:<Menu/>}</button></header>{linkContext}
-  <main id="main"><section className="hero"><img className="hero-photo" src={asset('assets/rhythm-window.webp')} width={1536} height={1024} fetchPriority="high" loading="eager" decoding="sync" alt="초록 나무가 보이는 열린 창가와 물 한 잔"/><div className="hero-copy"><p className="chapter">나의 하루 리듬 체크</p><h1>퇴근했는데도<br/>일 생각이<br className="mobile-break"/> 계속 나나요?</h1><p className="hero-question">지난 7일, 잠들기 어렵거나<br className="mobile-break"/> 아침에도 피곤한 날이 있었나요?</p><div className="actions"><a className="button" href="#rhythm" onClick={()=>track('hero_check_start',{path:'/'})}>잠과 휴식 1분 체크 <ArrowRight/></a></div></div></section>
+ if(adminView && Admin)return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
+ if(operationsView && OperationsMvp)return <Suspense fallback={<p className="loading">운영판을 여는 중입니다.</p>}><OperationsMvp/></Suspense>;
+ if(researchView)return <><a className="skip" href="#main">본문으로 이동</a><header className="header research-route-header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav aria-label="연구 메뉴"><a href={siteRoot}>메인으로</a></nav></header><main id="main" className="research-route-main">{content?<><section className="research-route-intro wrap"><p className="chapter">사람을 대상으로 한 GABA 연구</p><h1>사람 연구 결과를 한눈에 보기</h1><p>잠·스트레스·머리를 많이 쓴 뒤 관찰한 내용을 그림과 쉬운 말로 정리했어요. 카드에서 결과와 연구 조건을 함께 확인해 보세요.</p></section><Suspense fallback={<ExperienceLoading research/>}><ResearchLibrary claims={content.claims} sectionTitle="주제별로 한눈에 보기" onOpen={()=>track('evidence_opened',{path:'/research'})}/></Suspense><section className="research-route-product wrap" aria-labelledby="research-route-product-heading"><div><p className="chapter">다음으로</p><h2 id="research-route-product-heading">가바 1500 한 상자 구성을 확인하세요.</h2><p>연구에서 본 일반 GABA 자료와 셀핀다 제품 정보는 따로 확인할 수 있어요.</p></div><a className="button" href={`${siteRoot}?view=products#products`} onClick={()=>track('product_compare_view',{path:'/research'})}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true"/></a></section></>:<section className="section wrap content-status"><p className="chapter">사람 대상 GABA 연구</p><h1>{loading?'연구 내용을 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h1><p>{loading?'사람 연구를 쉽게 정리한 내용을 불러오는 중입니다.':'연구 자료를 불러오지 못했습니다. 다시 시도해 주세요.'}</p>{!loading?<button type="button" className="button outline" onClick={()=>setRetryKey(value=>value+1)}>다시 불러오기</button>:null}</section>}</main><footer className="wrap footer research-route-footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>사람 대상 GABA 연구 안내</p><a href={siteRoot}>메인으로</a></footer></>;
+ const linkContext=sharedRhythmId
+  ? <aside className="link-context link-context-shared" aria-live="polite"><span>친구가 공유한 하루 리듬 · {resultTypes[sharedRhythmId].name}</span><a href="#rhythm-result">공유 결과 바로 보기 <ArrowRight size={15} aria-hidden="true"/></a><small>내 답변은 아직 시작하지 않았어요.</small></aside>
+  : referralId
+    ? <aside className="link-context" aria-live="polite">공유된 리듬 링크로 방문했어요. 내 하루도 1분이면 확인할 수 있어요.</aside>
+    : campaignId
+      ? <aside className="link-context" aria-live="polite">캠페인 링크로 방문했어요. 원하는 흐름부터 살펴보세요.</aside>
+      : null;
+ return <><a className="skip" href="#main">본문으로 이동</a><header className="header"><a href={siteRoot} className="brand">Cellpinda<span className="brand-dot">.</span></a><nav id="primary-navigation" ref={menuNavRef} aria-label="주 메뉴" className={menu?'open':''} onClick={()=>closeMenu()} onKeyDown={event=>{if(event.key==='Escape')closeMenu(true)}}><a href="#rhythm">잠과 휴식 체크</a><a href="#story">GABA는?</a><a href={`${siteRoot}research/`}>GABA 연구 읽기</a><a href="#fermentation">발효가바는?</a><a href="#products">제품 구성</a>{content?.reviews?.length ? <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 후기 읽기 · 새 창" onClick={()=>track('review_open',{productId:'gaba1500',path:'/header'})}>가바 1500 스마트스토어 후기 읽기 ↗</a> : null}</nav><a href="#rhythm" className="button small" onClick={()=>track('hero_check_start',{path:'/header'})}>1분 체크 <ArrowRight size={18} aria-hidden="true"/></a><button type="button" ref={menuToggleRef} className="menu-toggle" aria-label={menu?'메뉴 닫기':'메뉴 열기'} aria-expanded={menu} aria-controls="primary-navigation" onClick={()=>setMenu(!menu)}>{menu?<X aria-hidden="true"/>:<Menu aria-hidden="true"/>}</button></header>{linkContext}
+  <main id="main"><section className="hero" aria-labelledby="hero-heading"><img className="hero-photo" src={asset('assets/rhythm-window.webp')} width={1536} height={1024} fetchPriority="high" loading="eager" decoding="sync" alt="초록 나무가 보이는 열린 창가와 물 한 잔"/><div className="hero-copy"><p className="chapter">셀핀다 발효가바 · 나의 하루 리듬 체크</p><h1 id="hero-heading" aria-label="퇴근했는데도 일 생각이 계속 나나요?">퇴근했는데도<br/>일 생각이<br className="mobile-break"/> 계속 나나요?</h1><p className="hero-question">지난 7일, 잠들기 어렵거나<br className="mobile-break"/> 아침에도 피곤한 날이 있었나요?</p><div className="actions"><a className="button" href="#rhythm" onClick={()=>track('hero_check_start',{path:'/'})}>잠과 휴식 1분 체크 <ArrowRight aria-hidden="true"/></a></div></div></section>
 
   <div className="wrap section"><RhythmExperience onEvent={track}/></div>
+  <Suspense fallback={<ExperienceLoading/>}>
   {content ? <>
-   <BrainLoadEvidence />
-   <GabaStory claims={content.claims} hasReviews={content.reviews.length > 0}/>
-   <TeaserPreview onEvent={track}/>
- <section id="fermentation" className="section sage"><div className="wrap"><div className="section-head"><div><p className="chapter">03 / 발효가바는?</p><h2>발효가바를<br/>쉽게 알아보세요.</h2></div><p>발효가 무엇인지, 제품 정보를 어디서 볼 수 있는지<br/>쉬운 말로 안내합니다.</p></div><div className="fermentation-questions">{[['무엇으로 만들었나요?','셀핀다 스마트스토어 상품은 발효가바로 소개돼 있어요. 원재료와 함량은 제품 표시사항에서 확인해 주세요.'],['발효 기술이 뭔가요?','특허 문서에 GABA를 만드는 방법이 소개돼 있어요. 셀핀다 제품의 실제 제조공정은 제품 자료에서 따로 확인해 주세요.'],['제품 정보는 어디서 보나요?','한 포에 든 양과 제품 구성은 제품 포장과 스마트스토어에서 확인할 수 있어요.'],['먹는 법은 어디에 있나요?','제품 포장에 적힌 먹는 방법과 주의사항을 확인해 주세요.']].map(([question,answer],index)=><article key={question}><span>0{index+1}</span><h3>{question}</h3><p>{answer}</p></article>)}</div><p className="process-note"><span>특허 문서의 기술 예시</span>특허 문서에 GABA를 만드는 방법이 소개돼 있어요. 셀핀다 제품의 실제 공정·순도 확인 자료와는 별도예요. <a className="text-link" href="https://patents.google.com/patent/KR101740968B1/ko" target="_blank" rel="noopener noreferrer">특허 문서 보기 ↗</a></p><div className="process">{['유산균 + 재료 성분','발효','GABA 생성'].map((t,i)=><div key={t}><span>0{i+1}</span><h3>{t}</h3></div>)}</div>{content.claims.filter(c=>!c.id.startsWith('product-')&&!c.id.startsWith('research-')&&!c.id.startsWith('gaba-')&&c.publicText).map(c=><details className="claim" key={c.id}><summary>{c.publicText}</summary><div>{c.sources.filter(s=>s.url).map(s=><a key={s.url} href={s.url!} target="_blank" rel="noopener noreferrer" aria-label={`${s.title} 문서 보기`}>{evidenceLinkLabel(s.url!)}</a>)}</div></details>)}</div></section>
- <section id="products" className="section wrap"><div className="section-head"><div><p className="chapter">04 / 제품 구성</p><h2>가바 1500 한 상자에는<br/>무엇이 들어 있나요?</h2></div></div><div className="products">{content.products.map(p=><article id={`product-${p.id}`} className="product" key={p.id}><div className="product-visual" role="img" aria-label={`${p.name}, ${p.servings}포 한 상자 구성, ${p.category} 식품 유형`}><span className="product-visual-kicker">한 상자 구성</span><strong>{p.servings}<small>포</small></strong><span className="product-visual-subtitle">한 상자에 든 포 수</span><div className="product-portion-grid" aria-hidden="true">{Array.from({length:p.servings},(_,index)=><i key={index}/>)}</div><div className="product-visual-facts"><span><strong>{p.category}</strong> 식품 유형</span></div></div><div className="product-body"><h3>{p.name} <small className="product-category">{p.category}</small></h3><a className="button outline product-cta" href={p.officialUrl} target="_blank" rel="noopener noreferrer" onClick={()=>{track('purchase_click',{productId:p.id,path:'/products'});track('purchase_cta_click',{productId:p.id,path:'/products'})}}>가격·재고 확인하기 <ArrowUpRight size={18}/></a><dl><div><dt>가격·재고</dt><dd>{p.availability || '스마트스토어에서 확인'}</dd></div><div><dt>먹는 법·보관</dt><dd>제품 포장에서 확인</dd></div></dl></div></article>)}</div><PurchaseQuestions products={content.products} onEvent={track} />{content.products.length>0&&<ProductShare onEvent={track}/>}</section>
- <ReviewExperience reviews={content.reviews} onOpen={productId=>{track('review_open',{productId});track('review_source_click',{productId,path:'/reviews'})}}/>
+   <Suspense fallback={<ExperienceLoading label="GABA 이야기" compact/>}><GabaStory claims={content.claims} hasReviews={content.reviews.length > 0}/></Suspense>
+   <Suspense fallback={<ExperienceLoading label="발효가바 영상" compact/>}><TeaserPreview onEvent={track}/></Suspense>
+   <Suspense fallback={<ExperienceLoading label="사람 연구" compact/>}><GabaResearchHighlights claims={content.claims} onEvent={track}/></Suspense>
+   <Suspense fallback={<ExperienceLoading label="휴식과 집중 연구" compact/>}><BrainLoadEvidence /></Suspense>
+ <section id="fermentation" className="section sage" aria-labelledby="fermentation-heading"><div className="wrap"><div className="section-head"><div><p className="chapter">03 / 발효가바는?</p><h2 id="fermentation-heading">발효가바를<br/>쉽게 알아보세요.</h2></div><p>발효가 무엇인지, 제품 정보를 어디서 볼 수 있는지<br/>쉬운 말로 안내합니다.</p></div><div className="fermentation-questions">{[['무엇으로 만들었나요?','셀핀다 스마트스토어 상품은 발효가바로 소개돼 있어요. 원재료와 함량은 제품 표시사항에서 확인해 주세요.'],['발효 기술이 뭔가요?','특허 문서에 GABA를 만드는 방법이 소개돼 있어요. 셀핀다 제품의 실제 제조공정은 제품 자료에서 따로 확인해 주세요.'],['제품 정보는 어디서 보나요?','한 포에 든 양과 제품 구성은 제품 포장과 스마트스토어에서 확인할 수 있어요.'],['먹는 법은 어디에 있나요?','제품 포장에 적힌 먹는 방법과 주의사항을 확인해 주세요.']].map(([question,answer],index)=><article key={question}><span>0{index+1}</span><h3>{question}</h3><p>{answer}</p></article>)}</div><p className="process-note"><span>특허 문서의 기술 예시</span>특허 문서에 GABA를 만드는 방법이 소개돼 있어요. 셀핀다 제품의 실제 공정·순도 확인 자료와는 별도예요. <a className="text-link" href="https://patents.google.com/patent/KR101740968B1/ko" target="_blank" rel="noopener noreferrer">특허 문서 보기 ↗</a></p><div className="process">{['유산균 + 재료 성분','발효','GABA 생성'].map((t,i)=><div key={t}><span>0{i+1}</span><h3>{t}</h3></div>)}</div>{content.claims.filter(c=>!c.id.startsWith('product-')&&!c.id.startsWith('research-')&&!c.id.startsWith('gaba-')&&c.publicText).map(c=><details className="claim" key={c.id}><summary>{c.publicText}</summary><div>{c.sources.filter(s=>s.url).map(s=><a className="evidence-source-link" key={s.url} href={s.url!} target="_blank" rel="noopener noreferrer" aria-label={`${s.title} 문서 보기`}>{evidenceLinkLabel(s.url!)}</a>)}</div></details>)}</div></section>
+ <section id="products" className="section wrap" aria-labelledby="products-heading"><div className="section-head"><div><p className="chapter">04 / 제품 구성</p><h2 id="products-heading">가바 1500 한 상자에는<br/>무엇이 들어 있나요?</h2></div></div><div className="products">{content.products.map(p=>{const images=productImages[p.id];return <article id={`product-${p.id}`} className="product" key={p.id}><div className={`product-visual${images?' product-visual-with-images':''}`} role="group" aria-label={`${p.name}, ${p.servings}포 한 상자 구성, ${p.category} 식품 유형`}>{images?<><span className="product-visual-kicker">제품 이미지</span><div className="product-gallery"><figure className="product-image-main"><img src={asset(images.styled)} width="1254" height="1254" loading="lazy" decoding="async" alt={`${p.name} 연출 이미지`} /></figure><div className="product-image-thumbs" aria-label="제품 포장 이미지"><figure><img src={asset(images.front)} width="1254" height="1254" loading="lazy" decoding="async" alt={`${p.name} 정면 이미지`} /></figure></div></div><div className="product-visual-facts"><span><strong>{p.servings}포 구성</strong> 한 상자</span><span><strong>{p.category}</strong> 식품 유형</span></div></>:<><span className="product-visual-kicker">한 상자 구성</span><strong>{p.servings}<small>포</small></strong><span className="product-visual-subtitle">한 상자에 든 포 수</span><div className="product-portion-grid" aria-hidden="true">{Array.from({length:p.servings},(_,index)=><i key={index}/>)}</div><div className="product-visual-facts"><span><strong>{p.category}</strong> 식품 유형</span></div></>}</div><div className="product-body"><h3>{p.name} <small className="product-category">{p.category}</small></h3><a className="button outline product-cta" href={p.officialUrl} target="_blank" rel="noopener noreferrer" onClick={()=>{track('purchase_click',{productId:p.id,path:'/products'});track('purchase_cta_click',{productId:p.id,path:'/products'})}}>스마트스토어에서 가격·재고 확인하기 <ArrowUpRight size={18} aria-hidden="true"/></a><dl><div><dt>가격·재고</dt><dd>{p.availability || '스마트스토어에서 확인'}</dd></div><div><dt>먹는 법·보관</dt><dd>제품 포장에서 확인</dd></div></dl></div></article>})}</div><Suspense fallback={<ExperienceLoading label="구매 전 안내" compact/>}><PurchaseQuestions products={content.products} onEvent={track} />{content.products.length>0&&<ProductShare onEvent={track}/>}</Suspense></section>
+ <Suspense fallback={<ExperienceLoading label="구매자 후기" compact/>}><ReviewExperience reviews={content.reviews} onOpen={productId=>{track('review_open',{productId});track('review_source_click',{productId,path:'/reviews'})}}/></Suspense>
  </> : <ContentFallback loading={loading} onRetry={()=>setRetryKey(value=>value+1)}/>} 
- <SevenDayChallenge onEvent={track} isInvite={challengeInvite}/>
-  <section className="closing"><div className="wrap between"><h2>오늘은 언제 잠깐 쉴 수 있을까요?<br/>1분 체크로 돌아봐요.</h2><a className="button light" href="#rhythm">잠과 휴식 1분 체크 <ArrowRight/></a></div></section></main><footer className="wrap footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>잠과 휴식에 대해 알아보고, 내게 맞는 선택을 해보세요.</p><a href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noopener noreferrer">스마트스토어 제품 보기 ↗</a><a href={`${siteRoot}?view=account`}>내 기록</a><AnalyticsConsent enabled={apiEndpoint('/api/events') !== null}/></footer></>;
+ <Suspense fallback={<ExperienceLoading label="7일 휴식 챌린지" compact/>}><SevenDayChallenge onEvent={track} isInvite={challengeInvite}/></Suspense>
+  <section className="closing" aria-labelledby="closing-heading"><div className="wrap between"><h2 id="closing-heading">오늘은 언제 잠깐 쉴 수 있을까요?<br/>1분 체크로 돌아봐요.</h2><a className="button light" href="#rhythm">잠과 휴식 1분 체크 <ArrowRight aria-hidden="true"/></a></div></section>
+  </Suspense></main><footer className="wrap footer"><a className="brand" href={siteRoot}>Cellpinda.</a><p>잠과 휴식에 대해 알아보고, 내게 맞는 선택을 해보세요.</p><a href="https://smartstore.naver.com/cellpinda/products/4701017202" target="_blank" rel="noopener noreferrer">스마트스토어 제품 보기 ↗</a><a href={`${siteRoot}?view=account`}>내 기록</a><Suspense fallback={null}><AnalyticsConsent enabled={apiEndpoint('/api/events') !== null}/></Suspense></footer></>;
 }

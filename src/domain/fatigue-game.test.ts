@@ -144,6 +144,6 @@ test('rejects a random source outside the expected range', () => {
 });
 
 test('creates an honest challenge invite without sharing a personal game result', () => {
-  assert.equal(createFocusGameInviteText(), '나랑 ‘1분 색 신호 게임’ 해볼래? 초록 신호는 누르고 빨강 신호는 기다리는 게임이야.');
+  assert.equal(createFocusGameInviteText(), '나랑 ‘뇌컨디션 확인 챌린지’ 해볼래? 1분 색 신호 게임이야. 초록 신호는 누르고 빨강 신호는 기다리는 게임이야.');
   assert.doesNotMatch(createFocusGameInviteText(), /정답률|건강 검사/);
 });

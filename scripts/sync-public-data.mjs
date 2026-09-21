@@ -1,11 +1,19 @@
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-import {existsSync, mkdirSync, readFileSync, writeFileSync} from 'node:fs';
+import {existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 
 const root=process.cwd();
 const source=resolve(root,'data/content-ledger.json');
 const target=resolve(root,'public/data/content.json');
+// Operations snapshots are for the local review console only. Keep them under
+// the ignored tmp directory so a static Pages build can never serve them.
+const privateOperationsDirectory=resolve(root,'tmp/operations');
+mkdirSync(privateOperationsDirectory,{recursive:true});
+for(const name of ['operations-queue.json','tf-pulse.json','goal-audit.json','tf-meeting-packet.json']){
+  const stalePublicPath=resolve(root,'public/data',name);
+  if(existsSync(stalePublicPath)) unlinkSync(stalePublicPath);
+}
 const goalContract=JSON.parse(readFileSync(resolve(root,'data/goal-contract.json'),'utf8'));
 const taskGraph=JSON.parse(readFileSync(resolve(root,'data/task-graph.json'),'utf8'));
 const teaser=JSON.parse(readFileSync(resolve(root,'data/teaser-manifest.json'),'utf8'));
@@ -59,7 +67,7 @@ function publicSources(item){
 const publicMetadataKeys=[
   'studyType','population','sampleSize','dose','duration','comparison',
   'outcome','productApplicability','question',
-  'searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerFindingFirst','consumerDetail','consumerContext','consumerDisclosure','consumerDisclosureStatus','consumerVisual','hopefulTakeaway',
+  'searchThrough','studyCount','consumerScope','consumerSummary','consumerFinding','consumerHighlight','consumerFindingFirst','consumerDetail','consumerContext','consumerDisclosure','consumerDisclosureStatus','consumerVisual','hopefulTakeaway',
 ];
 
 function publicMetadata(item){
@@ -139,7 +147,7 @@ const masterIndex={
   sourceCheckedAt:ledger.checkedAt,
   generatedAt:output.generatedAt,
   records:claims.filter(item=>item.id.startsWith('research-')).map(({id,topic,publicText,metadata,sources,reviewedAt,evidenceHash})=>{
-     return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerFindingFirst:metadata.consumerFindingFirst,consumerDetail:metadata.consumerDetail,consumerContext:metadata.consumerContext,consumerDisclosure:metadata.consumerDisclosure,consumerDisclosureStatus:metadata.consumerDisclosureStatus,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
+     return {id,topic,reviewedAt,question:metadata.question,studyType:metadata.studyType,population:metadata.population,sampleSize:metadata.sampleSize,dose:metadata.dose,duration:metadata.duration,comparison:metadata.comparison,outcome:metadata.outcome,consumerScope:metadata.consumerScope,consumerSummary:metadata.consumerSummary,consumerFinding:metadata.consumerFinding,consumerHighlight:metadata.consumerHighlight,consumerFindingFirst:metadata.consumerFindingFirst,consumerDetail:metadata.consumerDetail,consumerContext:metadata.consumerContext,consumerDisclosure:metadata.consumerDisclosure,consumerDisclosureStatus:metadata.consumerDisclosureStatus,consumerVisual:metadata.consumerVisual,hopefulTakeaway:metadata.hopefulTakeaway,productApplicability:metadata.productApplicability,sources,evidenceHash};
   }),
 };
 for(const record of masterIndex.records){
@@ -147,9 +155,9 @@ for(const record of masterIndex.records){
 }
 function consumerStudyType(value='',dose=''){
   if(/문헌고찰|메타분석|사람 연구 여러 편|여러 연구를 모아/.test(value)) return '사람 연구 여러 편을 모아 살펴봄';
-  if(/GABA를 먹지 않고|GABA 섭취 없이/.test(dose) || /관찰|MRS|뇌 신호|손끝 연습/.test(value)) return 'GABA를 먹지 않은 관찰 연구';
+  if(/GABA를 먹지 않고|GABA 섭취 없이/.test(dose) || /관찰|MRS|뇌 신호|손끝 연습/.test(value)) return 'GABA를 먹지 않고 살펴본 연구';
   if(/운동/.test(value)) return '사람이 참여한 운동 연구';
-  if(/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return 'GABA를 먹고 비교한 사람 연구';
+  if(/섭취|교차|위약|무작위|눈가림|평행군|사람이 먹고 비교/.test(value)) return '사람이 GABA를 먹고 비교한 연구';
   return '사람 연구';
 }
 mkdirSync(dirname(target),{recursive:true});
@@ -192,7 +200,7 @@ const operationsQueue={
   workstreams:goalContract.workstreams.map(({id,name,lead,verifier,status,nextAction})=>({id,name,lead,verifier,status,nextAction})),
   tasks:taskGraph.tasks.map(({id,stream,title,state,priority,lead,verifier,dependencies,blockedBy,requiredInputs,risk})=>({id,stream,title,state,priority,lead,verifier,dependencies, ...publicTaskDecision({state,blockedBy,requiredInputs}), decisionOptions:pulseDecisionByTaskId.get(id)?.decisionOptions ?? [], quorum:decisionQuorumFor({lead,verifier,risk}), requiredInputs:Array.isArray(requiredInputs) ? requiredInputs : [], ...(blockedBy ? {blockedBy} : {}), ...(risk ? {risk} : {})})),
 };
-const operationsTarget=resolve(root,'public/data/operations-queue.json');
+const operationsTarget=resolve(privateOperationsDirectory,'operations-queue.json');
 writeFileSync(operationsTarget,JSON.stringify(operationsQueue,null,2)+'\n');
 const publicPulse={
   schemaVersion:1,
@@ -213,7 +221,7 @@ const publicPulse={
   inputGates:pulseForQueue.inputGates.map(({taskId,state,chair,quorum,requiredInputs,nextAction})=>({taskId,state,chair,quorum,requiredInputs,nextAction})),
   meetingAgenda:pulseForQueue.meetingAgenda.map(({taskId,state,chair,participants,quorum,question,decision,decisionOptions,requiredInputs,nextAction,mode})=>({taskId,state,chair,participants,quorum,question,decision,decisionOptions,requiredInputs,nextAction,mode})),
 };
-const pulseTarget=resolve(root,'public/data/tf-pulse.json');
+const pulseTarget=resolve(privateOperationsDirectory,'tf-pulse.json');
 writeFileSync(pulseTarget,JSON.stringify(publicPulse,null,2)+'\n');
 const taskCounts=Object.fromEntries(taskGraph.stateMachine.map(state=>[state,taskGraph.tasks.filter(task=>task.state===state).length]));
 const hasUnfinishedTasks=taskGraph.tasks.some(task=>!['DONE','CANCELLED'].includes(task.state));
@@ -238,7 +246,7 @@ const publicAudit={
   teaserGate:{status:teaser.status==='APPROVED'?'APPROVED':'HOLD',taskId:'B4',taskState:taskGraph.tasks.find(task=>task.id==='B4')?.state ?? null},
   note:'이 패킷은 공개 운영 상태의 요약이며, 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않습니다.',
 };
-const auditTarget=resolve(root,'public/data/goal-audit.json');
+const auditTarget=resolve(privateOperationsDirectory,'goal-audit.json');
 writeFileSync(auditTarget,JSON.stringify(publicAudit,null,2)+'\n');
 const meetingPacket={
   schemaVersion:1,
@@ -257,6 +265,6 @@ const meetingPacket={
   audit:{overallStatus:publicAudit.overallStatus,checkedAt:publicAudit.checkedAt,taskCounts:publicAudit.taskCounts,milestones:publicAudit.milestones,teaserGate:publicAudit.teaserGate},
   note:'이 패킷은 공개 회의 준비용 요약이며, 실제 참석·전문가 자격·외부 승인·주문 완료를 증명하지 않습니다.',
 };
-const meetingPacketTarget=resolve(root,'public/data/tf-meeting-packet.json');
+const meetingPacketTarget=resolve(privateOperationsDirectory,'tf-meeting-packet.json');
 writeFileSync(meetingPacketTarget,JSON.stringify(meetingPacket,null,2)+'\n');
 console.log(JSON.stringify({target,masterTarget,teaserPreviewTarget,operationsTarget,pulseTarget,auditTarget,meetingPacketTarget,claims:claims.length,masterRecords:masterIndex.records.length,products:products.length,reviews:reviews.length,queueTasks:operationsQueue.tasks.length}));

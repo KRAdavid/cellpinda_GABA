@@ -21,15 +21,17 @@ for(const file of ['dist/index.html','dist/products/index.html','dist/data/conte
 const privateSnapshots=['operations-queue.json','tf-pulse.json','goal-audit.json','tf-meeting-packet.json'];
 const leakedSnapshots=privateSnapshots.filter(file=>existsSync(resolve(root,'dist/data',file)));
 check('private-operations-snapshots-excluded',leakedSnapshots.length===0,leakedSnapshots.length ? `found=${leakedSnapshots.join(',')}` : `${privateSnapshots.length} internal files excluded from the public build`);
+const sourceSnapshots=privateSnapshots.filter(file=>existsSync(resolve(root,'public/data',file)));
+check('private-operations-source-excluded',sourceSnapshots.length===0,sourceSnapshots.length ? `found=${sourceSnapshots.join(',')}` : `${privateSnapshots.length} internal files kept under tmp/operations only`);
 try { const bytes=statSync(resolve(root,'dist/assets/rhythm-window.webp')).size; check('hero-image-budget',bytes<=250_000,`${bytes} bytes (limit 250000)`); } catch { check('hero-image-budget',false,'optimized WebP hero image is missing'); }
 for(const type of ['active','sleep','irregular','sensory','unrested','steady']) check(`artifact:dist/assets/social-rhythm-${type}.png`,existsSync(resolve(root,`dist/assets/social-rhythm-${type}.png`)),'result-specific social preview present');
 try {
   const content=readJson('public/data/content.json');
   const master=readJson('public/data/gaba-master-index.json');
   const ledger=readJson('data/content-ledger.json');
-  const queue=readJson('public/data/operations-queue.json');
-  const audit=readJson('public/data/goal-audit.json');
-  const meetingPacket=readJson('public/data/tf-meeting-packet.json');
+  const queue=readJson('tmp/operations/operations-queue.json');
+  const audit=readJson('tmp/operations/goal-audit.json');
+  const meetingPacket=readJson('tmp/operations/tf-meeting-packet.json');
   const taskGraph=readJson('data/task-graph.json');
   const approvedResearch=(ledger.claims || []).filter(item=>item.status==='approved' && item.id?.startsWith('research-'));
   const masterIds=new Set((master.records || []).map(record=>record.id));
@@ -45,7 +47,7 @@ check('cloudflare-secrets',missingSecrets.length===0,missingSecrets.length ? `mi
 const configuredPublicOrigin=process.env.PUBLIC_SITE_URL?.trim() || '';
 let publicOriginValid=false;
 if(configuredPublicOrigin) {
-  try { const origin=new URL(configuredPublicOrigin); publicOriginValid=origin.protocol==='https:' && !origin.username && !origin.password && !origin.search && !origin.hash; } catch { publicOriginValid=false; }
+  try { const origin=new URL(configuredPublicOrigin); publicOriginValid=origin.protocol==='https:' && !origin.username && !origin.password && !origin.search && !origin.hash && origin.pathname==='/'; } catch { publicOriginValid=false; }
 }
 check('worker-public-origin',!strict || publicOriginValid,publicOriginValid ? 'PUBLIC_SITE_URL is a clean HTTPS origin' : strict ? 'strict Worker deployment requires PUBLIC_SITE_URL as a clean HTTPS origin' : 'not supplied in general readiness mode');
 if(process.env.ADMIN_ROLE_TOKENS?.trim()) {
@@ -56,7 +58,7 @@ if(process.env.ADMIN_ROLE_TOKENS?.trim()) {
   check('admin-role-tokens',valid,valid ? 'editor,reviewer,approver configured' : 'must contain three distinct role keys with credentials of at least 32 characters');
 }
 if(process.env.MEMBER_ORIGIN?.trim()) {
-  try { const origin=new URL(process.env.MEMBER_ORIGIN); check('member-origin',origin.protocol==='https:' || ['localhost','127.0.0.1'].includes(origin.hostname),`protocol=${origin.protocol}, host=${origin.hostname}`); }
+  try { const origin=new URL(process.env.MEMBER_ORIGIN); const valid=(origin.protocol==='https:' || ['localhost','127.0.0.1'].includes(origin.hostname)) && !origin.username && !origin.password && !origin.search && !origin.hash && origin.pathname==='/'; check('member-origin',valid,valid ? `protocol=${origin.protocol}, host=${origin.hostname}` : 'must be a clean HTTPS origin without path, credentials, query, or hash'); }
   catch { check('member-origin',false,'invalid URL'); }
 }
 

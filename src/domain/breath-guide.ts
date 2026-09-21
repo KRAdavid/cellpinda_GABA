@@ -1,4 +1,7 @@
-export const BREATH_CYCLE_SECONDS = 14;
+export const BREATH_INHALE_SECONDS = 3;
+export const BREATH_HOLD_SECONDS = 2;
+export const BREATH_EXHALE_SECONDS = 6;
+export const BREATH_CYCLE_SECONDS = BREATH_INHALE_SECONDS + BREATH_HOLD_SECONDS + BREATH_EXHALE_SECONDS + BREATH_HOLD_SECONDS;
 export const BREATH_CYCLE_COUNT = 21;
 export const BREATH_ACTIVE_SECONDS = BREATH_CYCLE_SECONDS * BREATH_CYCLE_COUNT;
 export const BREATH_REST_SECONDS = 5 * 60;
@@ -10,7 +13,7 @@ export interface BreathCue {
   seconds: number;
 }
 
-/** Returns the current 4-2-6-2 cue using elapsed milliseconds from the rest start. */
+/** Returns the current 3-2-6-2 cue using elapsed milliseconds from the rest start. */
 export function getBreathCue(elapsedMs: number): BreathCue {
   if (!Number.isFinite(elapsedMs)) throw new TypeError('elapsedMs must be finite');
   const elapsedSeconds = Math.max(0, elapsedMs) / 1000;
@@ -18,8 +21,8 @@ export function getBreathCue(elapsedMs: number): BreathCue {
     return { stage: 'finish', seconds: Math.max(0, Math.ceil(BREATH_REST_SECONDS - elapsedSeconds)) };
   }
   const cyclePosition = elapsedSeconds % BREATH_CYCLE_SECONDS;
-  if (cyclePosition < 4) return { stage: 'inhale', seconds: Math.ceil(4 - cyclePosition) };
-  if (cyclePosition < 6) return { stage: 'hold-top', seconds: Math.ceil(6 - cyclePosition) };
-  if (cyclePosition < 12) return { stage: 'exhale', seconds: Math.ceil(12 - cyclePosition) };
-  return { stage: 'hold-bottom', seconds: Math.ceil(14 - cyclePosition) };
+  if (cyclePosition < BREATH_INHALE_SECONDS) return { stage: 'inhale', seconds: Math.ceil(BREATH_INHALE_SECONDS - cyclePosition) };
+  if (cyclePosition < BREATH_INHALE_SECONDS + BREATH_HOLD_SECONDS) return { stage: 'hold-top', seconds: Math.ceil(BREATH_INHALE_SECONDS + BREATH_HOLD_SECONDS - cyclePosition) };
+  if (cyclePosition < BREATH_INHALE_SECONDS + BREATH_HOLD_SECONDS + BREATH_EXHALE_SECONDS) return { stage: 'exhale', seconds: Math.ceil(BREATH_INHALE_SECONDS + BREATH_HOLD_SECONDS + BREATH_EXHALE_SECONDS - cyclePosition) };
+  return { stage: 'hold-bottom', seconds: Math.ceil(BREATH_CYCLE_SECONDS - cyclePosition) };
 }

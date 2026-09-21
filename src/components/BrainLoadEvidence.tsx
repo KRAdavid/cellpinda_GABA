@@ -48,7 +48,7 @@ const evidence: EvidenceCard[] = [
     tag: '오래 이어지는 스트레스',
     title: '스트레스 부담이 오래 쌓이면 몸과 마음 건강을 함께 살펴야 해요',
     summary: '267개 연구에서 몸에 쌓인 부담과 건강 결과의 관계를 살펴봤어요.',
-    finding: '긴장과 피로가 오래 이어져 잠이나 일상에 영향을 주면 생활을 조정하고 전문가와 상담해 보세요.',
+    finding: '스트레스와 피로가 오래 이어져 잠이나 일상에 영향을 주면 생활을 조정하고 전문가와 상담해 보세요.',
     scale: '267개 연구를 모아 살펴봄',
     source: 'PubMed · 오래 쌓인 스트레스와 건강',
     sourceUrl: 'https://pubmed.ncbi.nlm.nih.gov/32799204/',
@@ -59,8 +59,8 @@ const evidence: EvidenceCard[] = [
     id: 'mental-fatigue-brain',
     number: '04',
     tag: '머리를 많이 쓴 뒤',
-    title: '생각을 많이 쓴 뒤 뇌의 전기 신호가 달라졌어요',
-    summary: '21개 연구를 모아 보니, 머리를 많이 쓰는 과제 뒤 뇌파(뇌의 전기 신호)가 달라진 결과가 여러 번 나왔어요.',
+    title: '머리를 많이 쓴 뒤 뇌의 전기 신호가 달라졌어요',
+    summary: '21개 연구를 모아 분석한 결과, 머리를 많이 쓴 뒤 뇌파(뇌의 전기 신호)가 달라진 연구가 있었어요.',
     finding: '이 짧은 게임은 뇌파를 재는 검사가 아니에요. 쉬기 전후의 내 기록을 살펴보는 놀이예요.',
     scale: '21개 연구 결과를 함께 살펴봄',
     source: 'PubMed · 머리를 많이 쓴 뒤 관찰된 뇌파 변화',
@@ -90,10 +90,10 @@ export default function BrainLoadEvidence() {
         <div className="section-head brain-load-evidence-head">
           <div>
             <p className="chapter">잠·집중·휴식에 관한 연구</p>
-            <h2 id="brain-load-evidence-heading">피곤할 때,<br />집중과 휴식은 어떻게 달라질까요?</h2>
-            <p className="brain-load-evidence-boundary">뇌 피로를 이해하기 위한 일반 연구 · GABA 섭취 연구와 별도</p>
+            <h2 id="brain-load-evidence-heading">잠이 부족하면<br />집중·기억·판단이 흔들릴 수 있어요.</h2>
+            <p className="brain-load-evidence-boundary">GABA 섭취 연구와 별도로, 잠·스트레스·집중을 이해하는 일반 건강 연구예요. 제품 정보는 따로 보여드려요.</p>
           </div>
-          <p>잠이 부족하거나 긴장이 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
+          <p>잠이 부족하거나 스트레스가 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
         </div>
 
         <div className="brain-load-reading-path" aria-label="연구를 살펴보는 순서">
@@ -102,22 +102,25 @@ export default function BrainLoadEvidence() {
           <div><span>03</span><strong>오늘 뭘 해볼까요?</strong><small>쉴 때를 찾아봐요.</small></div>
         </div>
 
-        <div className="brain-load-evidence-grid">
-          {evidence.map(({id, number, tag, title, summary, finding, scale, source, sourceUrl, Icon, tone}) => (
-            <article className={`brain-load-evidence-card brain-load-evidence-card--${tone}`} key={id}>
-              <div className="brain-load-evidence-card-top">
-                <span className="brain-load-evidence-number">{number}</span>
-                <span className="brain-load-evidence-tag">{tag}</span>
-                <Icon size={21} strokeWidth={1.8} aria-hidden="true" />
-              </div>
-              <h3>{title}</h3>
-              <p className="brain-load-evidence-summary">{summary}</p>
-              <div className="brain-load-evidence-scale"><strong>연구 규모</strong><span>{scale}</span></div>
-              <p className="brain-load-evidence-finding"><strong>오늘 해볼 일</strong>{finding}</p>
-              <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="brain-load-evidence-source" aria-label={`${source} 연구 출처 보기`}>연구 출처 보기 <ExternalLink size={15} aria-hidden="true" /></a>
-            </article>
-          ))}
-        </div>
+        <details className="brain-load-evidence-details">
+          <summary><span>일반 건강 연구 5편 보기</span><small>잠·집중·스트레스·휴식</small></summary>
+          <div className="brain-load-evidence-grid">
+            {evidence.map(({id, number, tag, title, summary, finding, scale, source, sourceUrl, Icon, tone}) => (
+              <article className={`brain-load-evidence-card brain-load-evidence-card--${tone}`} key={id}>
+                <div className="brain-load-evidence-card-top">
+                  <span className="brain-load-evidence-number">{number}</span>
+                  <span className="brain-load-evidence-tag">{tag}</span>
+                  <Icon size={21} strokeWidth={1.8} aria-hidden="true" />
+                </div>
+                <h3>{title}</h3>
+                <p className="brain-load-evidence-summary">{summary}</p>
+                <div className="brain-load-evidence-scale"><strong>연구 규모</strong><span>{scale}</span></div>
+                <p className="brain-load-evidence-finding"><strong>오늘 해볼 일</strong>{finding}</p>
+                <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="brain-load-evidence-source" aria-label={`${source} 연구 출처 보기`}>연구 출처 보기 <ExternalLink size={15} aria-hidden="true" /></a>
+              </article>
+            ))}
+          </div>
+        </details>
         <p className="brain-load-evidence-note">여기에는 잠·스트레스·휴식에 관한 연구를 모았어요. GABA 연구와 셀핀다 제품 정보는 각각 따로 확인할 수 있어요.</p>
       </div>
     </section>

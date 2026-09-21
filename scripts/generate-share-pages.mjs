@@ -1,14 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const shareTypes = [
-  ['active', '계속 작동형', '퇴근 뒤에도 일이 생각나는 날'],
-  ['sleep', '잠자리 전환형', '누워도 잠이 오지 않았던 날'],
-  ['irregular', '휴식 공백형', '하루에 쉴 틈이 부족했던 날'],
-  ['sensory', '자극 과부하형', '사람과 화면에 지친 날'],
-  ['unrested', '회복 우선형', '아침에도 피곤했던 날'],
-  ['steady', '안정 리듬형', '잠과 휴식이 괜찮았던 날'],
-];
+const shareLabels = JSON.parse(fs.readFileSync(path.resolve('data/rhythm-share-labels.json'), 'utf8'));
+const shareTypes = Object.entries(shareLabels).map(([id, value]) => [id, value.label, value.name]);
 const shareRoot = path.resolve('public/share');
 const siteRoot = 'https://kradavid.github.io/cellpinda_GABA';
 
@@ -53,8 +47,8 @@ for (const [id, label, name] of shareTypes) {
 <meta name="description" content="${safeDescription}">
 <link rel="canonical" href="${canonical}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="셀핀다 발효가바"><meta property="og:locale" content="ko_KR"><meta property="og:url" content="${canonical}"><meta property="og:title" content="${safeTitle}"><meta property="og:description" content="${safeDescription}"><meta property="og:image" content="${image}"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="${safeLabel} · ${safeName} 하루 리듬 공유 카드"><meta property="og:image:width" content="${imageWidth}"><meta property="og:image:height" content="${imageHeight}"><script type="application/ld+json">${structuredData}</script>
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${safeTitle}"><meta name="twitter:description" content="${safeDescription}"><meta name="twitter:image" content="${image}">
-<meta http-equiv="refresh" content="0;url=${destination}"></head><body><main><p>공유받은 하루 리듬 이야기를 여는 중입니다.</p><p><a href="${destination}">리듬 이야기 열기</a></p></main><script>
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${safeTitle}"><meta name="twitter:description" content="${safeDescription}"><meta name="twitter:image" content="${image}"><meta name="twitter:image:alt" content="${safeLabel} · ${safeName} 하루 리듬 공유 카드">
+</head><body><main><h1>${safeTitle}</h1><p>공유받은 하루 리듬 이야기를 여는 중입니다.</p><p><a href="${destination}">리듬 이야기 열기</a></p></main><script>
 (function(){const target=new URL('../../',location.href);target.searchParams.set('rhythm','${id}');for(const key of ['ref','campaign']){const value=new URLSearchParams(location.search).get(key)||'';if(/^[A-Za-z0-9_-]{1,64}$/.test(value))target.searchParams.set(key,value);}location.replace(target.toString());})();
 </script></body></html>
 `;
@@ -71,6 +65,7 @@ const productDescription = `셀핀다 가바 1500 · ${product.servings}포 구�
 const productCanonical = `${siteRoot}/products/`;
 const productImage = `${siteRoot}/assets/product-composition-1500.png`;
 const productStoreUrl = product.officialUrl;
+const productReviewUrl = `${productStoreUrl}#REVIEW_DIALOG`;
 const productDestination = '../?view=products#products';
 const productSchema = JSON.stringify({
   '@context': 'https://schema.org',
@@ -102,15 +97,16 @@ const productShareHtml = `<!doctype html>
 <title>${escapeHtml(productTitle)}</title><meta name="description" content="${escapeHtml(productDescription)}">
 <link rel="canonical" href="${productCanonical}"><meta name="robots" content="index,follow">
 <meta property="og:type" content="product"><meta property="og:site_name" content="셀핀다 발효가바"><meta property="og:locale" content="ko_KR"><meta property="og:url" content="${productCanonical}"><meta property="og:title" content="${escapeHtml(productTitle)}"><meta property="og:description" content="${escapeHtml(productDescription)}"><meta property="og:image" content="${productImage}"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="셀핀다 가바 1500, ${product.servings}포 한 상자 구성 안내"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(productTitle)}"><meta name="twitter:description" content="${escapeHtml(productDescription)}"><meta name="twitter:image" content="${productImage}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escapeHtml(productTitle)}"><meta name="twitter:description" content="${escapeHtml(productDescription)}"><meta name="twitter:image" content="${productImage}"><meta name="twitter:image:alt" content="셀핀다 가바 1500, ${product.servings}포 한 상자 구성 안내">
 <script type="application/ld+json">${productSchema}</script><link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<meta http-equiv="refresh" content="0;url=${productDestination}"></head><body>
+</head><body>
 <main style="max-width:720px;margin:0 auto;padding:40px 24px;font-family:Arial,'Malgun Gothic',sans-serif;line-height:1.7;color:#18382b">
 <p>셀핀다 발효가바 · 제품 구성</p><h1>${escapeHtml(productTitle)}</h1>
 <img src="../assets/product-composition-1500.svg" alt="셀핀다 가바 1500, ${product.servings}포 한 상자 구성, ${product.category} 식품 유형" style="display:block;width:min(100%,560px);height:auto;margin:24px auto">
 <p>셀핀다 가바 1500 · ${product.servings}포 구성입니다. 낱포 표시는 제품 포장에서, 가격과 재고는 스마트스토어에서 확인해 주세요.</p>
 <p><a href="${productDestination}" style="color:#158457;font-weight:700">사이트에서 제품 구성 보기 →</a></p>
 <p><a href="${escapeHtml(productStoreUrl)}" style="color:#158457;font-weight:700">스마트스토어에서 판매 정보 보기 ↗</a></p>
+<p><a href="${escapeHtml(productReviewUrl)}" style="color:#158457;font-weight:700">스마트스토어에서 후기 읽기 ↗</a></p>
 </main><script>(function(){const target=new URL('../',location.href);target.searchParams.set('view','products');for(const key of ['ref','campaign']){const value=new URLSearchParams(location.search).get(key)||'';if(/^[A-Za-z0-9_-]{1,64}$/.test(value))target.searchParams.set(key,value);}target.hash='products';location.replace(target.toString());})()</script>
 </body></html>
 `;

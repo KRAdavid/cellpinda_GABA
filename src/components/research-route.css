@@ -1,5 +1,5 @@
 .research-route-header{justify-content:space-between;border-bottom:1px solid #e1e8e3}
-.research-route-header nav{display:flex;align-items:center;gap:20px}
+.research-route-header nav{display:flex;align-items:center;gap:20px}.research-route-header nav a{display:inline-flex;align-items:center;min-height:44px}
 .research-route-intro{padding-top:64px;padding-bottom:22px}
 .research-route-intro h1{margin:14px 0 16px;font-size:clamp(38px,6vw,68px);line-height:1.16;letter-spacing:-.055em}
 .research-route-intro>p:last-child{max-width:64ch;color:#43584a;font-size:17px;line-height:1.8}
@@ -8,7 +8,7 @@
 .research-gateway p:not(.chapter){max-width:48ch;color:#53675a;line-height:1.7}
 .research-gateway-actions{display:grid;justify-items:start;gap:12px;flex:0 0 auto}
 .research-gateway-product-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:#176b47;font-size:15px;font-weight:600;text-underline-offset:4px}
-.research-route-footer{padding-top:28px;padding-bottom:28px}
+.research-route-footer{padding-top:28px;padding-bottom:28px}.research-route-footer>a{display:inline-flex;align-items:center;min-height:44px}
 .research-route-product{display:flex;align-items:center;justify-content:space-between;gap:28px;padding-top:44px;padding-bottom:44px;border-top:1px solid #dfe8e1}
 .research-route-product h2{margin:10px 0;font-size:clamp(26px,4vw,38px);line-height:1.3;letter-spacing:-.04em}
 .research-route-product p:not(.chapter){max-width:48ch;color:#53675a;line-height:1.7}
@@ -29,3 +29,8 @@
 /* Keep the research scope simple and distinguish it from product information. */
 .research-route-intro>p:last-child{max-width:58ch;margin-bottom:0;font-size:16px;line-height:1.7;color:#43584a}
 .research-library>.section-head h2{margin-bottom:0}
+
+/* Keep the research introduction inside the phone gutter at 390px and below. */
+@media(max-width:700px){
+  .research-route-intro>p:last-child{max-width:100%;overflow-wrap:anywhere;word-break:keep-all}
+}

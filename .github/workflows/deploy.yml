@@ -58,10 +58,16 @@ jobs:
           VITE_BASE_PATH: /cellpinda_GABA/
           VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
           PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
+          RELEASE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          RELEASE_RUNTIME_MODE: static
         run: |
           pnpm exec vite build --base "$VITE_BASE_PATH" --outDir dist-pages
           node scripts/rewrite-public-origin.mjs dist-pages
+          pnpm run generate:release-manifest -- dist-pages
+          pnpm run validate:release-manifest -- dist-pages
           node scripts/check-public-artifacts.mjs dist-pages
+          pnpm run validate:static-bundle -- dist-pages
+          pnpm run validate:performance -- dist-pages
       - name: Verify review publishing with isolated local D1
         run: pnpm run test:worker-reviews
       - name: Bundle Worker without deploying
@@ -72,6 +78,7 @@ jobs:
           name: cellpinda-gaba-${{ github.sha }}
           path: |
             dist/
+            dist-pages/
             worker-build/
           if-no-files-found: error
           retention-days: 7
@@ -81,8 +88,8 @@ jobs:
           path: dist-pages
 
   deploy-pages:
-    needs: release-verify
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: [release-verify, worker-readiness, deploy-worker]
+    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.release-verify.result == 'success' && needs.worker-readiness.result == 'success' && (needs.worker-readiness.outputs.enabled != 'true' || needs.deploy-worker.result == 'success')
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -98,7 +105,7 @@ jobs:
 
   smoke-live:
     needs: [deploy-pages, worker-readiness, deploy-worker]
-    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.deploy-pages.result == 'success' && (needs.worker-readiness.outputs.enabled != 'true' || needs.deploy-worker.result == 'success')
+    if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.deploy-pages.result == 'success' && needs.worker-readiness.result == 'success' && (needs.worker-readiness.outputs.enabled != 'true' || needs.deploy-worker.result == 'success')
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -115,6 +122,7 @@ jobs:
         env:
           PAGES_PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
           WORKER_PUBLIC_SITE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
+          EXPECTED_RELEASE_SHA: ${{ github.sha }}
           WORKER_ENABLED: ${{ needs.worker-readiness.outputs.enabled }}
           WORKER_RESULT: ${{ needs.deploy-worker.result }}
         run: |
@@ -191,6 +199,8 @@ jobs:
         env:
           VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
           PUBLIC_SITE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
+          RELEASE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          RELEASE_RUNTIME_MODE: worker
         run: pnpm run build
       - name: Strict deployment readiness gate
         if: env.DEPLOY_ENABLED == 'true'
@@ -229,6 +239,7 @@ jobs:
         if: env.DEPLOY_ENABLED == 'true'
         env:
           WORKER_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
+          MEMBER_ORIGIN: ${{ secrets.MEMBER_ORIGIN }}
         run: node scripts/validate-worker-live.mjs
 
   release-status:
@@ -246,15 +257,18 @@ jobs:
         with:
           node-version: 24.19.0
           package-manager-cache: false
+      - name: Install pinned package manager
+        run: npm install --global pnpm@11.19.0
       - name: Publish release mode
         id: status
         env:
           PAGES_RESULT: ${{ needs.deploy-pages.result }}
           SMOKE_RESULT: ${{ needs.smoke-live.result }}
           WORKER_RESULT: ${{ needs.deploy-worker.result }}
+          WORKER_READINESS_RESULT: ${{ needs.worker-readiness.result }}
           WORKER_ENABLED: ${{ needs.worker-readiness.outputs.enabled }}
         run: |
-          if [ "$PAGES_RESULT" != "success" ] || [ "$SMOKE_RESULT" != "success" ]; then
+          if [ "$PAGES_RESULT" != "success" ] || [ "$SMOKE_RESULT" != "success" ] || [ "$WORKER_READINESS_RESULT" != "success" ]; then
             mode="RELEASE_FAILED"
           elif [ "$WORKER_ENABLED" = "true" ] && [ "$WORKER_RESULT" != "success" ]; then
             mode="RELEASE_FAILED"
@@ -272,12 +286,13 @@ jobs:
             mode: process.env.RELEASE_MODE,
             pages: process.env.PAGES_RESULT,
             smoke: process.env.SMOKE_RESULT,
+            workerReadinessResult: process.env.WORKER_READINESS_RESULT,
             workerReadiness: process.env.WORKER_ENABLED === 'true',
             workerDeployment: process.env.WORKER_RESULT,
           };
           fs.writeFileSync('release-status.json', `${JSON.stringify(value, null, 2)}\n`);
           NODE
-          node scripts/validate-release-status.mjs release-status.json
+          pnpm run validate:release-status -- release-status.json
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
 
           {
@@ -285,7 +300,8 @@ jobs:
             echo "**$mode**"
             echo "- GitHub Pages: $PAGES_RESULT"
             echo "- Public smoke check: $SMOKE_RESULT"
-            echo "- Worker/D1 readiness: ${WORKER_ENABLED:-false}"
+            echo "- Worker/D1 readiness job: ${WORKER_READINESS_RESULT:-unknown}"
+            echo "- Worker/D1 readiness gate: ${WORKER_ENABLED:-false}"
             echo "- Worker/D1 deployment: $WORKER_RESULT"
             if [ "$mode" = "STATIC_ONLY" ]; then
               echo "- Worker/D1 remains HOLD; this run publishes the static public site only."

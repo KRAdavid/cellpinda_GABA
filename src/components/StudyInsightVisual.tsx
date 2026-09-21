@@ -66,14 +66,14 @@ export default function StudyInsightVisual({visual}:{visual:ConsumerVisual}){
     <figcaption><Brain size={18} aria-hidden="true"/>{visual.participantLabel} <span>{visual.comparisonLabel}</span></figcaption>
     <ol>{visual.steps.map((step,index)=>{
       const Icon=index===0?Pill:index===1?Clock3:index===2?Activity:Waves;
-      const label=step.replace(/^GABA\s*/,'').replace(/\s*1회$/,'').replace('정신 과제','과제');
+      const label=step.replace(/^GABA\s*/,'').replace(/\s*1회$/,'').replace('생각을 많이 쓰는 과제','머리를 많이 쓴 뒤').replace('정신 과제','머리를 많이 쓴 뒤');
       return <li key={step}><Icon size={21} strokeWidth={1.8} aria-hidden="true"/><strong>{label}</strong>{index<visual.steps.length-1?<ArrowRight size={15} className="study-journey-arrow" aria-hidden="true"/>:null}</li>;
     })}</ol>
     {visual.outcomes?.length?<div className="study-journey-outcome">{visual.outcomes.map(item=><span key={item.label}><Waves size={16} aria-hidden="true"/><b>{item.label}</b><small>{item.result}</small></span>)}</div>:null}
   </figure>;
 
   if(visual.kind==='observational-link')return <figure className="study-insight study-insight--observation" aria-label={`${visual.participantLabel}. ${visual.leftLabel}와 ${visual.rightLabel}를 함께 살펴봤어요`}>
-    <figcaption><ScanFace size={18} aria-hidden="true"/>손끝 연습과 뇌 신호를 살펴봄 <span>{visual.participantLabel}</span></figcaption>
+    <figcaption><ScanFace size={18} aria-hidden="true"/>뇌 속 GABA 신호와 손끝 연습 <span>{visual.participantLabel}</span></figcaption>
     <div className="study-observation-map"><div><Brain size={31} strokeWidth={1.5} aria-hidden="true"/><span>{visual.leftLabel}</span></div><span className="study-observation-link" aria-hidden="true"><i/></span><div><Hand size={31} strokeWidth={1.5} aria-hidden="true"/><span>{visual.rightLabel}</span></div></div>
     <small className="study-insight-footnote">{visual.studyLabel} · {visual.boundaryLabel}</small>
   </figure>;

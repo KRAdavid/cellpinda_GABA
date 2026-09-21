@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "status": "HOLD",
+  "status": "PREVIEW",
   "placement": "선택형 보조 CTA · 리듬 체크 다음",
   "title": "발효가바 이야기",
-  "description": "발효가바 이야기를 담은 영상을 공개 준비 중이에요.",
-  "note": "발효가바 이야기를 담은 영상은 공개 준비가 끝나면 이 자리에서 재생돼요.",
-  "url": null
+  "description": "발효가바가 만들어지는 이야기를 짧은 영상으로 만나보세요.",
+  "note": "브라우저 설정에 따라 재생 버튼이 필요할 수 있어요. 이 페이지는 셀핀다 완제품의 시험 영상이 아니라 발효가바 소개 영상입니다.",
+  "url": "https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site/"
 }

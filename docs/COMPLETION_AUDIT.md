@@ -1,6 +1,218 @@
 # 전체 목표 완료 간극 점검
 
-기준일 2026-09-12. 현재 브랜치의 최신 커밋 및 작업 파일. 사용자 원문 `goal-objective.md`, `docs/REQUIREMENTS.md`, `docs/IMPLEMENTATION_STATUS.md` 최신 추가 기록, 현재 프론트·Worker·원장을 대조했다. 과거 상태표의 pending과 오래된 연구 건수는 최신 증거로 보정했다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다. 최신 배포 검증은 커밋 `f0db8cd`의 [GitHub Actions 34635928779](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34635928779)와 2026-09-12 공개 URL 재검증을 기준으로 한다.
+## 2026-09-21 가바 1500 완제품 썸네일 반영 — 후보 작업 중
+
+제공된 두 제품 이미지를 `gaba1500` 제품 카드에 연결했다. 연출 이미지는 대표 영역, 정면 이미지는 보조 썸네일로 사용하고, 반응형 갤러리·alt 텍스트·제품 구성 정보를 함께 제공한다. 이미지 용량을 WebP로 줄인 뒤 UI 계약·타입검사·110개 테스트·production build·정적 번들·성능 예산 검증을 통과했다. 공개 승격은 독립 Code Owner 승인과 main 병합 뒤 진행한다.
+
+## 2026-09-21 호흡 주기·싱잉볼 감쇠 보정 — 후보 `0000d60`
+
+5분 휴식 호흡 안내를 3·2·6·2초로 중앙 도메인화했다. 공은 3초 상승·2초 상단 수평 이동·6초 하강·2초 하단 수평 이동을 반복하고, 단계 전환음은 처음 크게 울린 뒤 5.2초 동안 잦아드는 싱잉볼로 바꿨다. 타입검사·110개 회귀 테스트·UI 계약·production build·정적 번들·성능 예산 검증은 모두 통과했다.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`·`site-quality-verify`는 성공했지만 Code Owner 독립 승인이 없어 `OPEN · BLOCKED · REVIEW_REQUIRED` 상태다. `pnpm run validate:live-public`는 12회 재시도 후 공개 `/release-manifest.json` HTTP 404로 실패했고, `node scripts/check-deploy-readiness.mjs`는 `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `ADMIN_TOKEN`, `MEMBER_ORIGIN` 입력을 기다린다. 따라서 이번 보정은 후보 품질을 높인 기록이며 공개 배포 완료를 의미하지 않는다.
+
+## 2026-09-21 보안·의존성 재감리 — 후보 작업 중
+
+`pnpm audit --prod --audit-level=high`에서 알려진 고위험 취약점은 없었고, 타입검사와 110개 회귀 테스트가 통과했다. 현재 파일·공개 번들의 개인정보 경계 검사도 통과했다. 과거 reachable Git 이력에는 로컬 경로 패턴이 남은 12개 파일이 자문 경고로 확인되지만 일치 값은 출력하지 않으며, 현재 공개 파일에는 노출되지 않는다. 이력 완전 제거는 force push와 협업자 재동기화를 요구하므로 별도 영향 분석·명시적 승인 전에는 실행하지 않는다.
+
+## 2026-09-21 개발용 Vite 콘텐츠 폴백 보강 — 후보 작업 중
+
+직접 실행한 Vite가 `/api/content`에 `text/html`을 반환해 연구·제품 카드가 fallback으로 남던 P1을 재현했다. 개발 환경에서 이 응답일 때만 승인된 공개 JSON으로 복귀하도록 수정하고, Worker 운영 환경에서는 API 장애를 숨기지 않도록 기존 실패 경계를 유지했다. 실제 Chrome CDP에서 5174 연구 경로에 연구 카드 6개, 제품 경로에 제품 문구·스마트스토어 링크가 나타나며 `연결이 잠시 늦어졌어요.`가 사라지는 것을 확인했다. UI 계약·타입검사·110개 테스트를 통과했다.
+
+## 2026-09-21 정적 공유 경로 실제 착지 재검증 — 소스 후보 `87c5537`
+
+`/share/sleep/`를 정적 preview에서 직접 열어 390px·1440px의 최종 viewport 위치를 측정했다. 결과 카드 상단은 각각 `171.7px`와 `87.9px`였고, 두 화면 모두 공유 유형 제목과 친구 공유 안내가 첫 화면에 나타났다. document 전체 위치가 아니라 사용자가 실제 보는 viewport 기준으로 판정해, 공유 결과가 일반 히어로 아래에 숨는 P1 결함은 최신 후보에서 재현되지 않았다. Code Owner 승인·main 병합·Pages 반영 후 라이브에서 동일 조건을 다시 확인한다.
+
+## 2026-09-21 390px 실제 캡처 감리 — 후보 `ae25560`
+
+Chrome CDP에서 390px·1600px 뷰포트로 홈과 연구 경로를 캡처했다. 홈의 1분 체크 CTA와 질문 카드, 연구 경로의 결과 카드·주제 선택·제품 이동 CTA가 모두 화면 안에 들어왔고, 연구 화면의 `scrollWidth`는 390px로 가로 넘침이 없었다. 공유 리듬 URL은 자동 착지 뒤 결과 카드 상단이 188px에 놓였다. 추가 코드 결함은 발견하지 않았으며, 실제 Pages 반영 뒤 동일 캡처를 다시 수행한다.
+
+## 2026-09-21 연구 하이라이트 결과 방향 개선 — 후보 `ee8d576`
+
+Yoto 연구 하이라이트의 첫 문장을 `머리를 많이 쓴 뒤에도 뇌파와 활력이 더 유지됐어요`로 바꿔, 소비자가 결과 방향을 한 번에 읽도록 했다. 세부 설명에는 비교 캡슐과 관찰 조건을 남겼고, 일반 GABA 연구와 셀핀다 완제품 정보를 분리하는 범위는 유지했다. 공개 원장·무스크립트 안내·UI 계약 검증을 함께 갱신했고, production build·110개 회귀 테스트·PR 필수 검사까지 통과했다. 실제 Pages는 아직 이전 `main` 공개본이므로 라이브 반영은 승인·병합 뒤 확인한다.
+
+## 2026-09-21 공유 결과 CTA 터치 영역 보강 — 후보 `9f2177a`
+
+공유 결과 바로 보기 버튼의 최소 높이를 모바일·데스크톱 모두 44px로 맞춰, 40~50대 방문자가 손가락으로 안정적으로 누를 수 있게 했다. 공유 유형·결과 착지·개인정보 안내 문구와 공개 목적지는 그대로 유지했다. UI 계약·타입검사·성능 예산 검증을 통과했다.
+
+## 2026-09-21 공유 결과 선행 안내 보강 — 후보 `a87813d`
+
+공유 결과 자동 착지가 브라우저·로딩 순서에 따라 늦어져도 방문자가 일반 홈으로 잘못 이해하지 않도록, `?rhythm=*` 진입 시 헤더 바로 아래에 공유 유형과 `공유 결과 바로 보기` 링크를 표시한다. 링크는 `#rhythm-result`로 연결되고, `내 답변은 아직 시작하지 않았어요.`를 함께 보여 공유받은 유형과 자신의 체크 결과를 섞지 않게 했다. 모바일에서 줄바꿈되는 안내도 버튼 터치 영역을 유지한다.
+
+UI 계약·타입검사·110개 회귀 테스트·production build·10개 공개 경로·정적 번들·성능 예산 검증을 통과했다. 이 보정은 PR 후보의 공유 진입 이해도를 높인 것이며, Code Owner 승인·main 병합·Pages 라이브 반영 전의 공개 배포 완료를 의미하지 않는다.
+
+## 2026-09-21 공유 결과 진입 보정 — 후보 작업 중
+
+공유 리듬 링크(`/share/*/`·`?rhythm=*`)가 일반 홈 히어로에서 시작해 공유 결과 카드가 첫 화면에 보이지 않던 문제를 수정했다. 공유 결과 카드에 전용 착지 ID·헤더 보정·콘텐츠 정착 재정렬을 연결하고, 사용자가 스크롤·터치·키보드를 시작하면 자동 이동을 멈추도록 했다. UI 계약·타입검사·110개 회귀 테스트·production build·정적 10개 경로 검증을 통과했으며, PR 필수 검사는 새 후보에서 다시 확인한다.
+
+## 2026-09-21 최신 후보 동기화 — SHA는 release manifest 기준
+
+정적 공개 번들에 로컬 전용 `Admin`·`OperationsMvp` 청크가 다시 포함되지 않도록 파일명 검사까지 추가했다. 공개 JavaScript에 내부 운영 마커나 `/api/admin`·`/api/ops` 경로가 들어가면 `validate-static-bundle`이 실패한다. 재빌드 결과 내부 운영 청크는 생성되지 않았고, 10개 공개 경로·60개 manifest 파일·연구 6건·제품 1개·후기 목적지 1개를 유지했다. 후보 SHA는 매 빌드의 `dist/release-manifest.json`에서 확인한다.
+
+`pnpm run build`, 타입검사, 공개 export, UI·연구 문구·정적 번들·성능 검증과 PR의 `release-verify`·`site-quality-verify`가 통과했다. PR은 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`이며, Pages의 `/release-manifest.json`은 아직 404다. 따라서 이번 기록은 후보 품질 증거이며 공개 배포 완료를 의미하지 않는다.
+
+## 2026-09-21 API·정적 연구 요약 정합성 보정 — 후보 작업 중
+
+홈 연구 카드가 사용하는 짧은 관찰 요약 `consumerHighlight`가 정적 공개 데이터에는 있었지만 로컬 API·Cloudflare Worker의 공개 메타데이터 허용 목록에는 없었다. 두 API의 허용 목록을 정적 export와 맞추고 서버·Worker 테스트로 짧은 요약이 공개 응답에 남는지 검증했다. 긴 연구 결과로의 예기치 않은 대체를 줄이는 보정이며, 연구 근거와 제품 효능의 경계는 그대로 유지한다.
+
+## 2026-09-21 홈 랜드마크 이름 보정 — 후보 작업 중
+
+홈 상단 영웅 영역과 하단 1분 체크 CTA 영역을 각각 보이는 제목으로 명명했다. 보조기기와 키보드 사용자가 시작·재진입 행동을 구분할 수 있고, 기존 시각 레이아웃·문구·외부 목적지는 바뀌지 않는다. UI 계약 검사에 두 연결을 고정했다.
+
+## 2026-09-21 핵심 제목 읽기 흐름 보정 — 후보 작업 중
+
+첫 화면과 잠과 휴식 1분 체크 제목은 시각적으로 줄을 나눠 보여 주지만, 줄바꿈 때문에 보조기기에서 단어가 붙어 읽힐 여지가 있었다. 두 제목에 공백을 보존한 `aria-label`을 연결해 화면 디자인을 바꾸지 않고 핵심 질문을 자연스럽게 읽도록 보강했다. 390px·1440px 브라우저에서 가로 넘침 0, 콘솔 오류·경고 0, 이름 없는 주요 조작 요소 0, 키보드 포커스 표시를 확인했다.
+
+커밋 `acf2ccd`의 `release-verify`·`site-quality-verify`와 production build, 정적 경로·성능 검증을 통과했다. 공개 Pages의 `/release-manifest.json`은 아직 404이므로 후보 검증을 공개 배포 완료로 계산하지 않는다. 이번 보정은 사이트의 소비자 흐름을 더 명확하게 하지만 공개 배포 승인, 독립 소비자 이해도 조사, 외부 게이트를 대신하지 않는다.
+
+## 2026-09-21 콘텐츠 구역 접근성 보정 — 후보 작업 중
+
+GABA 이야기·발효가바·제품 구성 구역의 시각 제목과 접근성 이름을 `aria-labelledby`로 연결했다. UI 계약에 연결 상태를 고정하고 타입검사·110개 테스트·production build·정적 경로 검증을 통과했다. 공개 제품·연구 데이터와 외부 게이트 상태는 변경하지 않았다.
+
+## 2026-09-21 연구 흐름 중복 보정 — 후보 작업 중
+
+GABA 소개 단계가 바로 다음 연구 하이라이트의 수면·인지·운동 장면을 반복하던 문구를 제거했다. 소개 단계는 `연구 결과는 어떻게 읽나요?`라는 소비자 안내로 바꾸고, 참여자·비교 조건을 먼저 확인한 뒤 연구 카드로 이동하도록 연결했다. 하이라이트 섹션에는 헤더를 피하는 상단 스크롤 여백을 적용했다. 모바일 390px에서 앵커 이동, 가로 넘침, 콘솔 오류 0건을 재확인했다.
+
+이번 변경은 연구 결과의 의미·제품 적용 범위·권장량을 바꾸지 않으며, 후보 브랜치의 정보 구조와 문구 중복만 줄인다.
+
+## 2026-09-21 운영 스냅샷 공개 경계 보정 — 후보 작업 중
+
+운영 화면이 사용하던 업무 큐·TF pulse·목표 감사·회의 패킷을 `public/data`에서 제거하고 `tmp/operations`에만 생성하도록 변경했다. 로컬 운영판은 루프백 `/api/ops/snapshot`에서 네 패킷을 읽고, production 번들과 GitHub Pages에는 운영 상태·담당 역할·대기 게이트를 내보내지 않는다. 공개 export·배포 readiness·정적 산출물 검사는 공개 `data/` 경로에 내부 스냅샷이 생기면 실패하도록 강화했고, 110개 테스트·타입검사·production build·390px 로컬 운영판 동작을 통과했다.
+
+## 2026-09-21 공개 번들 내부 운영 청크 제거 — 후보 작업 중
+
+접근성·SEO 재감리에서 소비자 화면에는 실행되지 않지만 정적 산출물에 `Admin`·`OperationsMvp` lazy chunk가 포함되어 내부 운영 문구와 API 경로를 내려받을 수 있는 P2 노출을 확인했다. 두 화면은 로컬 개발 환경에서만 필요한 검토 표면이므로 production import를 제거하도록 보정했고, 정적 번들 검증기가 모든 JavaScript 자산에서 운영 마커와 `/api/admin`·`/api/ops` 경로를 검사하도록 강화했다. 재빌드 후 Admin·OperationsMvp 청크가 사라지고 10개 공개 경로·60개 manifest 파일·성능 예산이 통과했다.
+
+## 2026-09-20 현재 후보 재감리 — `8f7244e`
+
+현재 후보를 다시 빌드하고 전체 테스트 109개, 타입검사, 공개 export, 정적 번들, 성능 예산, 배포 workflow 계약, 운영 문서·TF pulse 검증을 모두 통과시켰다. production bundle은 10개 공개 경로·연구 6건·제품 1개·후기 목적지 1개·티저 `PREVIEW/HOLD`이며, release manifest의 candidate SHA는 현재 후보 `8f7244e7f98c5e3e3b3c7e9c07cba1609ccd085f`와 일치한다.
+
+Goal audit는 `ACTIVE · IN_PROGRESS_WITH_GATES`로 유지한다. 8개 역할군은 모두 연결되어 있고 작업은 DONE 10·VERIFYING 1·WAITING 4이며, 핵심 자동 검사는 모두 `MET`이다. 제품 표시(B2), 후기 권한(B3), 티저 공개 승인(B4), Cloudflare 운영(C2), 실주문 대사(E1)은 외부 입력이 없으므로 자동으로 승격하지 않는다.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`·`site-quality-verify`는 성공했지만 Code Owner 검토 전 `OPEN · BLOCKED · REVIEW_REQUIRED`다. 실제 Pages 루트와 `content.json`은 HTTP 200이지만 `release-manifest.json`·`goal-audit.json`·`tf-pulse.json`은 아직 404이므로, 후보 품질을 공개 배포 완료로 표시하지 않는다.
+
+## 2026-09-20 운영판 로컬 API CORS·영속성 보정 — 후보 작업 중
+
+대체 Vite 포트에서도 운영판 샌드박스가 실제로 서버에 저장되는지 확인하는 과정에서 개발 CORS 허용 목록이 5173·4173으로 고정된 결함을 발견했다. 개발 환경에서만 `localhost`·`127.0.0.1`·`[::1]`의 임의 포트를 허용하도록 정규식을 보정하고, 외부·HTTPS·유사 호스트는 계속 차단하도록 테스트를 갱신했다. 4313 포트에서 Goal Contract 생성·자동 협업 파동·서버 저장·390px 레이아웃을 재검증했다.
+
+## 2026-09-20 TF 자동 감시 heartbeat 갱신 — 후보 작업 중
+
+안전한 내부 TF 파동을 다시 실행하고 heartbeat를 `2026-09-20T14:33:04.730Z`로 갱신했다. 목표 지문은 그대로이며 상태 변화는 없고, 내부 검증 6건은 `MET`, B2·B3·B4·C2·E1은 사람 입력 게이트로 유지했다. 공개 게시·승인·구매·Cloudflare 설정은 자동으로 변경하지 않았다.
+
+## 2026-09-20 챌린지 휴식 전환·호흡 안내 감리 — 후보 `55f3983`
+
+뇌컨디션 확인 챌린지에서 휴식 CTA를 실제로 실행해 5분 화면 내려놓기 안내, 4·2·6·2초 호흡 단계, 단계 전환 싱잉볼 안내, 휴식 종료 후 재테스트 버튼을 확인했다. 나레이션 문구는 없었고 콘솔·페이지 오류도 없었다. 휴식 시간은 QA에서만 가속했으며 공개 동작의 5분 타이머 계약은 변경하지 않았다.
+
+## 2026-09-20 공개 경로 앵커 연결 재감리 — 후보 `15c6817`
+
+홈·연구·제품·focus·공유 결과의 내부 앵커를 실제 DOM에서 대조해 깨진 연결 0건을 확인했다. focus 전용 경로는 루트의 `?focus=1#focus-game`으로 정상 이동하고 페이지 제목과 챌린지 영역을 유지한다. 이는 후보 화면 연결성 증거이며, 공개 Pages가 후보 SHA로 승격됐다는 의미는 아니다.
+
+## 2026-09-20 뇌컨디션 결과 3구간 회귀 감리 — 후보 `571155f`
+
+실제 모바일 브라우저에서 0/15·6/15·15/15 답변 조합을 차례로 실행해 결과 상태 문구가 각각 `지금은 여유가 있어요`·`잠깐 쉬어갈 때예요`·`머리에 할 일이 몰려 있어요`로 정확히 연결되는지 확인했다. 세 구간 모두 상태 아이콘·색상·다음 행동 CTA가 보였고 가로 넘침·콘솔 오류·페이지 오류가 없었다. 이 점수는 지난 7일 답변을 정리한 참고 기록으로 유지한다.
+
+후보 검증은 통과했지만 Code Owner 승인·main 병합·Pages 게시 전이므로 공개 배포 완료로 승격하지 않는다.
+
+## 2026-09-20 안전 TF 파동 재실행 — 후보 작업 중
+
+`pnpm run tf:safe:local`을 실행해 목표 계약·연구 카피·티저 경계·샌드박스 MVP·공개 export·TF pulse 검사를 다시 통과시켰다. 실행 후보는 0건이며 B2·B3·B4·C2·E1은 사람 검토 또는 외부 입력 대기 상태로 보존됐다. 이 파동은 내부 공개 패킷만 재생성하고 외부 게시·구매·승인·canonical 업무 그래프 상태 변경은 수행하지 않았다.
+
+## 2026-09-20 B2 표시 자료 재감사 — 후보 작업 중
+
+제품 자료 감사에서 완제품 후보 5건·벌크 원료 제외 1건·전체 발견 7건·누락 0건을 다시 확인하고, 최신 SHA-256·분류 결과를 B2 검증 패킷에 기록했다. 자료 존재와 시각 대조 결과는 유지됐지만 최종 인쇄 승인본·현행 판매 SKU·제품 분류 책임자 승인은 확인되지 않아 B2는 `VERIFYING`으로 유지한다. 공개 제품 문구와 효능 표현은 변경하지 않았다.
+
+## 2026-09-20 TF heartbeat 재동기화 — 후보 작업 중
+
+최신 목표 계약·업무 그래프를 다시 읽고 TF pulse heartbeat를 `2026-09-20T14:07:26.973Z`로 갱신했다. 상태 지문은 동일해 `stateChanged=false`를 유지했고 안전한 내부 실행은 `MET`, 외부 입력 게이트 4건은 그대로 보존했다. 공개 운영 패킷도 같은 원장으로 재생성했으며, 승인·게시·구매·Cloudflare 설정 상태는 자동으로 변경하지 않았다.
+
+## 2026-09-20 뇌컨디션 결과 시각화 보강 — 후보 `a6e3ab5`
+
+뇌컨디션 확인 결과가 숫자와 점만 남아 사용자가 상태를 다시 해석해야 하던 흐름을 보완했다. 결과 카드에 점수 구간별 뇌 아이콘·색상·짧은 행동 문장을 함께 배치해 `지금은 여유가 있어요`·`잠깐 쉬어갈 때예요`·`머리에 할 일이 몰려 있어요`를 즉시 읽도록 했다. 점수는 여전히 지난 7일 답변을 정리한 값이며 건강 상태를 측정하거나 진단하는 결과로 확장하지 않는다.
+
+390px·1280px 브라우저 화면에서 결과 카드의 상태 시각화, 자동 문항 이동, 5분 휴식 CTA를 확인했고 `pnpm test`, `pnpm run typecheck`, `pnpm run build`, 연구 카피·UI·공개 export·정적 bundle·성능 검증을 통과했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 필수 검사는 성공했지만 Code Owner 승인 전 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 공개 Pages는 아직 후보와 동기화되지 않았다.
+
+## 2026-09-20 TF heartbeat 최신화 — 후보 작업 중
+
+상태 변화 없이 TF heartbeat의 생성 시각을 `2026-09-20T13:13:59`로 갱신하고 다음 재검토 시각을 함께 이동했다. 공개 콘텐츠 지문은 이전과 같고 내부 안전 실행 증거는 `MET`로 보존했다. 이 기록은 운영 감시 시각을 최신화한 것이며, B2·B3·B4·C2·E1 외부 게이트나 공개 배포 상태를 자동 승격하지 않는다.
+
+## 2026-09-20 로컬 브라우저 프로필 감시 충돌 보강 — 후보 작업 중
+
+헤드리스 브라우저 QA 프로필이 저장소 `tmp/` 아래에 있을 때 Vite가 Chromium Cookie 파일까지 감시해 `EBUSY`로 개발 서버를 종료하는 재현 결함을 확인했다. Vite 개발 감시에서 `tmp/`와 `var/`를 제외해 로컬 감사 산출물·운영자 토큰·브라우저 프로필을 감시 대상에서 분리했다. 공개 번들에는 포함되지 않는 개발 안정성 보강이다.
+
+기존 잠금 프로필이 있는 상태에서 `pnpm run dev -- --port 4312`가 정상 기동했고, 390px 연구 경로의 가로 스크롤 폭 390px·연구 필터 상호작용·홈 리듬 앵커 이동·런타임 예외 0건을 CDP로 확인했다.
+
+## 2026-09-20 TF pulse 재평가 — 후보 작업 중
+
+자동 TF heartbeat를 다시 실행해 최신 운영 큐를 재평가했다. 상태 지문은 이전과 같아 `stateChanged=false`를 유지했고, 안전한 내부 실행 검증은 `MET`였다. B2는 독립 검증 중이며 B3·B4·C2·E1은 필요한 외부 입력을 기다리는 상태를 그대로 보존했다. 다음 재검토 시각과 사람 판단 게이트도 새 heartbeat에 기록했다.
+
+`pnpm run tf:pulse:heartbeat`와 `pnpm run sync:data`를 실행했고, 외부 계정·후기·티저 권리·주문 상태를 자동으로 완료 처리하지 않았다.
+
+## 2026-09-20 운영 감사 날짜와 최신 pulse 구분 — 후보 작업 중
+
+운영판의 공개 목표 감사 카드에서 `기준일`을 `목표 계약 기준일`로 바꿨다. 감사 원장의 날짜는 목표 계약이 생성·검토된 기준일이고, 최신 TF pulse 시각은 별도 상태 줄에 표시되므로 두 시점을 혼동하지 않도록 라벨을 구체화했다. UI 계약에도 이 구분을 고정해 이후 문구 회귀를 막는다.
+
+`pnpm run validate:ui-contract`와 전체 107개 테스트를 통과했다. 이번 변경은 내부 운영 화면의 판독성 보완이며, 사람 승인·외부 입력·공개 배포 상태를 자동 완료로 바꾸지 않는다.
+
+## 2026-09-20 연구 결과 방향 카피 보완 — 후보 `f81491e`
+
+Yoto 사람 연구 하이라이트의 제목을 소비자가 결과 방향을 바로 읽을 수 있도록 `활력 점수는 덜 떨어지고, 뇌파 변화 폭은 작았어요`로 정리했다. 카드 요약은 비교 캡슐과의 관찰 조건을 함께 남겨, 긍정적인 차이는 보여 주되 셀핀다 완제품의 효과로 확대하지 않는다. UI 계약과 라이브 소비자 번들 회귀 검사를 새 문구에 맞춰 고정했다.
+
+`pnpm test` 107개, `pnpm run build`, 공개 export·정적 bundle·release manifest·성능 예산 검증이 통과했다. 카피 보완 시점의 `dist/release-manifest.json`은 `f81491edd8524f1345df48eda127b444964343d4`와 일치했고, 이후 문서 커밋을 포함한 후보도 같은 SHA 일치 검사를 유지한다. PR #97의 `release-verify`와 `site-quality-verify`가 각 후보에서 성공했다.
+
+PR은 Code Owner 승인 전 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 공개 Pages의 `/release-manifest.json`은 아직 HTTP 404이므로 이번 카피 보완은 후보 품질 개선이며 공개 배포 완료를 의미하지 않는다.
+
+## 2026-09-20 배포 게이트 실패 은폐 방지 — 후보 작업 중
+
+후보 브랜치의 배포 워크플로를 상태 전이별로 감리한 결과, `worker-readiness` 작업 자체가 실패하거나 취소되면 출력값이 비어도 `smoke-live`가 정적 Pages 검증으로 진행되고 `release-status`가 `STATIC_ONLY` 성공으로 기록할 수 있는 결함을 확인했다. 이는 Cloudflare 비밀값이 없어 정상적으로 `enabled=false`가 된 `HOLD`와 readiness 작업 오류를 구분하지 못하는 감사 추적 누락이었다.
+
+후보 워크플로는 이제 `worker-readiness.result == 'success'`일 때만 라이브 smoke를 실행한다. `release-status.json`에는 `workerReadinessResult`를 별도 기록하고, readiness 작업이 `failure`·`cancelled`·`skipped`이면 `RELEASE_FAILED`로 종료하도록 검증 규칙을 보강했다. 비밀값이 없는 정상 경로는 readiness 작업이 성공하고 `enabled=false`를 반환하므로 기존 `STATIC_ONLY` 운영이 유지된다. `pnpm run validate:deploy-workflow`와 정적 `STATIC_ONLY` 상태 패킷 검증을 통과했으며, 비밀값·Code Owner 승인·실제 배포는 변경하지 않았다.
+
+현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전이며, 공개 Pages 루트와 `data/content.json`은 HTTP 200이나 `/release-manifest.json`은 HTTP 404다. 따라서 이번 수정은 배포 전 게이트 신뢰성을 높인 후보 변경이며 공개 배포 완료를 의미하지 않는다.
+
+## 2026-09-20 모바일 조작 영역 보정 — 후보 작업 중
+
+홈·연구·뇌컨디션 경로를 390px에서 다시 감리해 보조 링크와 동의 조작의 터치 영역을 보강했다. 브랜드·footer 이동·연구 복귀·출처 열기·챌린지 복귀·생활 장면 펼치기·검색 지우기·통계 동의 버튼에 44px 최소 조작 높이를 적용했고, 회귀를 막는 UI 계약을 추가했다. production build와 107개 테스트, CDP 모바일·데스크톱 경로 점검을 통과했으며 이 변경은 PR 후보에만 반영되어 공개 Pages 승격 전 검토가 필요하다.
+
+## 2026-09-20 공개 문구 회귀 방지 보강 — 후보 `743c997`
+
+정적 배포 검증기가 실제 공개 텍스트 산출물을 스캔해 내부 검토용 연구 한계 표현이 소비자 번들에 들어가면 실패하도록 보강했다. 현재 후보에서 공개 연구 6건·제품 1종·후기 목적지 1개·750 제거·티저 `HOLD`와 함께 해당 회귀 검사를 통과했다. 이는 공개 문구 품질을 지키는 자동 가드이며, 연구·제품 표시 승인이나 공개 배포 승인을 대신하지 않는다.
+
+## 2026-09-20 최신 후보 공개 직전 상태 — `357529e`
+
+현재 추가 후보 `357529ec5386f7a01526c6682ecdeb523f01a65b`에서 로컬 production build와 전체 107개 회귀 테스트, 타입검사, 공개 export·연구 카피·UI 계약·정적 bundle 검증을 다시 통과했다. GitHub Actions의 `release-verify`와 `site-quality-verify`도 성공했다.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 현재 `OPEN / BLOCKED / REVIEW_REQUIRED`이며, PR 이벤트에서는 Pages·Worker·라이브 smoke가 의도된 `skipped`이다. 공개 Pages의 `/release-manifest.json`은 현재 HTTP 404이므로 `validate:live-public`는 ‘최신 후보 매니페스트 없음’으로 실패한다. 따라서 현재는 코드 품질 검증 완료와 공개 배포 완료를 분리하고, 사람 리뷰·main 병합 후 다시 Pages 배포와 매니페스트·라이브 smoke를 확인해야 한다.
+
+## 2026-09-20 운영판 공개본 상태 감시 보강 — 후보 `68bf1ec` (역사)
+
+로컬 운영판의 현재 운영 큐에 공개본 상태 카드를 추가했다. 첫 진입과 60초 주기로 `release-manifest.json`을 읽어 후보 SHA·생성 시각·런타임을 표시하고, 공개 Pages가 아직 이전 배포본이거나 매니페스트가 없을 때 소비자 화면에 노출하지 않고 운영자에게만 확인 대상을 알린다. 404와 개발 서버의 HTML fallback은 기술 오류 대신 “공개본 매니페스트가 없습니다”로 안내한다. 1280px·390px 화면에서 카드 표시, 가로 넘침 없음, 콘솔 오류·경고 없음을 확인했다.
+
+후보 `68bf1ec101130c48de8b0c5dd41b4e05bb9edf33`의 로컬 매니페스트 지문 일치, 전체 107개 회귀 테스트, 타입검사·UI 계약·production build, `release-verify`·`site-quality-verify` 성공을 확인했다. PR 이벤트에서는 Pages·Worker 게시와 라이브 smoke가 의도적으로 건너뛰며, 실제 공개본은 사람 리뷰와 main 반영 뒤 다시 `/release-manifest.json` 및 라이브 화면으로 확인한다.
+
+## 2026-09-20 TF pulse 자동 재평가 — 후보 `77d6de5`
+
+자동 heartbeat를 재실행해 운영 큐의 상태 지문과 외부 입력 게이트를 다시 대조했다. 지문은 변하지 않았고 `stateChanged=false`, `safeExecution=MET`, 사람 판단이 필요한 입력 게이트 4건을 유지했다. 다음 재검토 시각은 6시간 뒤로 예약했으며, 공개 제품·연구·후기 데이터와 외부 게시 상태는 자동으로 바꾸지 않았다.
+
+## 최신 후보 지문·감리 결과 동기화 — 2026-09-20 현재 후보
+
+후보 HEAD와 `dist/release-manifest.json`의 `candidateSha`가 일치하는지 확인했다. 로컬 회귀 107개, 타입검사, 공개 export·UI·연구 카피·티저·정적 bundle 검증과 PR 필수 검사 2개는 모두 성공했다. PR은 Code Owner 승인 전 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 공개 Pages에는 아직 후보가 반영되지 않았다.
+
+## Worker CORS 라이브 검증 보강 — 2026-09-20 코드 후보 `487c9f5`
+
+배포 후 Worker 검증이 설정된 `MEMBER_ORIGIN`으로 preflight·허용 요청·차단 요청을 실제로 보내도록 강화했다. 공개 Pages와 회원 origin을 분리하는 운영 계약을 배포 워크플로 검사에 고정했으며, 107개 테스트·타입검사·Wrangler dry-run·`release-verify`·`site-quality-verify`를 통과했다. Cloudflare 비밀값이 없는 현재 후보에서는 Worker 라이브 검증과 배포를 실행하지 않는다.
+
+## 이전 후보의 공개 동기화 재확인 — 2026-09-20 `541e0fd` (historical)
+
+당시 PR 후보는 `541e0fd4c59ee96ec809a35b5a2f2cf7a6e09040`였다. 이 기록은 후보 SHA와 정적 route 10개·파일 65개가 일치했던 시점의 감사 자료다. 공개 Pages 루트는 HTTP 200이지만 `/release-manifest.json`이 404였고 최신 후보 문구가 없어, PR 승인·main 병합·Pages 라이브 smoke 전에는 공개 배포 완료로 판정하지 않았다.
+
+## 이전 후보 완료 감사 기록 — 2026-09-20 `5c4a6a8` (historical)
+
+당시 배포 후보는 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `5c4a6a8d3b335011cee794ad8fbd9879a1c10360`였다. `release-verify`와 `site-quality-verify`가 성공했고, 연구·제품·후기·챌린지·공개 export·배포 번들 검사를 통과했다. 이 기록은 당시 후보의 품질 증거이며 현재 공개 배포 완료를 의미하지 않는다.
+
+2026-09-20 완제품 자료 재대조에서 단상자·3개입 샘플·낱포 도면·시험성적서·품목제조보고서의 표시 신호를 확인했다. 최종 인쇄 승인본·현행 판매 SKU·로트별 적용은 확인되지 않았으므로 B2는 `VERIFYING`으로 유지하고, 공개 사이트는 제품명·30포·기타가공품·스마트스토어 연결만 노출한다. 참고용 시험 수치와 인쇄 샘플을 완제품 효능·보장 함량으로 확대하지 않았다. 상세 내역은 [B2 검증 패킷](B2_MATERIAL_VERIFICATION_20260911.md)에 있다.
+
+현재 목표 상태는 `IN_PROGRESS_WITH_GATES`다. B2 표시 승인, B3 후기 재게시 권한, B4 티저 공개 승인, C2 Worker·D1 운영 비밀값, E1 실주문 대사는 외부 확인이 필요하다. `preflight:deploy`는 정적 산출물·제품 범위·연구 마스터 인덱스를 통과했지만 Cloudflare 운영 비밀값 5개가 없어 `WAITING`이며, PR 이벤트에서는 Pages·Worker·라이브 smoke가 의도적으로 건너뛰었다. 공개 URL의 후보 SHA와 `/release-manifest.json`을 확인하기 전에는 배포 완료로 판정하지 않는다.
+
+아래 본문은 2026-09-12 당시의 독립 검토 기록을 보존한 것이다. 현재 판정은 위의 2026-09-20 최신 완료 감사와 현재 PR·라이브 검증 결과를 우선한다. 코드 변경 없이 작성한 독립 AI 검토이며 실제 소비자 평가 또는 전문기관 인증이 아니다.
 
 커밋 `b5e70b4`에서 Node/SQLite와 Worker/D1의 초기화 시 canonical 스마트스토어 후기 목적지를 원장 해시 기준으로 동기화했다. 이후 `f0db8cd`에서 revision 1 미편집 seed claim도 현재 원장의 소비자 문구·메타데이터로 재동기화하도록 보강했다. 영구 DB에 남은 이전 목적지와 미편집 seed만 revision·audit과 함께 보정하며, revision 2 이상 운영자 수정본과 `hold` 상태는 보존한다. 81개 회귀 테스트, 타입검사, production build, 로컬 Worker/D1 HTTP에서 content 200(후기 1건)과 샌드박스 PUT/GET/DELETE 200을 확인했다. `docs/B2_MATERIAL_VERIFICATION_20260911.md`에는 완제품 포장 자료와 원료 제외 경계를 묶었고, `goal:next`는 B2 검증 진행을 별도 표시한다. 원격 Cloudflare D1·백업 복구는 여전히 외부 운영 조건이다.
 
@@ -596,3 +808,71 @@ safe run 직후 `validate-safe-tf-run.mjs`를 별도 단계로 실행해 목표 
 ## 2026-09-19 첫 화면 이미지 안정화
 
 공개 첫 화면의 창가 사진을 `loading="eager"`·`decoding="sync"`로 우선 처리하고, 사진 레이어와 문구 레이어의 `z-index`를 명시했다. 느린 네트워크나 첫 렌더 타이밍에서도 텍스트만 먼저 보이는 순간을 줄여 사진·핵심 문구·1분 체크 CTA가 함께 나타나도록 보완했다. `validate-ui-contract`에 우선 로드와 레이어 순서 회귀 가드를 추가했으며 타입검사·전체 104개 테스트·production build·Pages 배포·라이브 공개 검증을 통과했다. 이 변경은 기존 연구·제품·후기 문구와 외부 승인 게이트를 변경하지 않는다.
+
+## 2026-09-20 운영 큐 장애 중 공개본 상태 감시 유지
+
+운영 웹 큐가 로드되어야만 보이던 공개 릴리스 매니페스트 상태 카드를 큐 섹션과 분리했다. 이제 운영 큐가 실패해도 공개 Pages의 `release-manifest.json` 존재 여부와 최종 확인 시각을 확인할 수 있다. 데스크톱·모바일 브라우저에서 카드 노출·폭 초과 없음·콘솔 오류 없음을 확인했고, 운영 큐 요청을 실패시켜도 카드가 남는 것을 검증했다. 공개 Pages가 이전 배포본인 경우에는 이 카드가 ‘공개본 매니페스트가 없음’을 어떻게 확인했는지 명시하며, PR 승인·main 배포 게이트는 그대로 유지한다.
+
+## 2026-09-20 후보 릴리스 공개 전 판정
+
+현재 후보 HEAD는 `ad2d0e9d59653cbab07e69605f3dd0286d84e60a`이며 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 `OPEN · BLOCKED · REVIEW_REQUIRED` 상태다. `release-verify`와 `site-quality-verify`는 성공했고, Pages용 정적 산출물은 10개 경로·연구 6건·제품 1개·후기 목적지 1개·티저 `HOLD`를 기록한다. Pages base 경로 자산 검사, 390px 화면 가로 넘침·콘솔 오류·이미지 대체 텍스트·중복 ID 검사를 후보 산출물에서 확인했다.
+
+실제 공개 주소의 루트는 HTTP 200이지만 `https://kradavid.github.io/cellpinda_GABA/release-manifest.json`은 HTTP 404다. 따라서 공개 주소는 후보와 아직 동기화되지 않았으며 공개 배포 완료로 판정하지 않는다. Code Owner 승인과 main 병합 뒤 Pages 게시·release manifest 지문·핵심 경로 live smoke를 다시 확인해야 한다.
+
+남은 외부 판정 항목은 최종 제품 표시·SKU·섭취·보관·주의사항 승인(B2), 후기 원문·재게시 권한·개인정보 비식별 확인(B3), 티저 파일·자막·대본·권리·CTA 승인(B4), Cloudflare Worker/D1 운영 비밀값과 복구 확인(C2), 실제 주문·취소·환불 대사(E1)다. 이 문서는 코드·정적 후보 품질을 기록하며 외부 승인이나 실제 소비자 조사를 대신하지 않는다.
+
+## 2026-09-20 TF pulse 재생성·후보 CI 재검증
+
+후보 HEAD `01992e51d4475648c97abbedce4cd1023d9038e6`에서 TF pulse heartbeat를 재생성했다. snapshot hash `40aa99629ff6b3a4643dc0c0aeb9c8ec753d1fb0aff40fcba0f9215cd1c2732b`는 이전과 같아 공개 콘텐츠·제품·연구 범위에 변화가 없음을 확인했고, `safeExecution: MET`, 역할 8/8, DONE 10·VERIFYING 1·WAITING 4 및 사람 입력 게이트를 유지했다.
+
+새 후보 커밋의 [release-verify 35495678201](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35495678201)과 [site-quality-verify 35495678226](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35495678226)은 모두 성공했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 Code Owner 승인 전 `OPEN · BLOCKED · REVIEW_REQUIRED`이고, PR 이벤트에서는 Pages·Worker·live smoke가 의도적으로 실행되지 않는다.
+
+공개 Pages 루트는 HTTP 200이지만 후보의 `/release-manifest.json`은 아직 공개 주소에서 HTTP 404이므로 main 병합·Pages 게시·live smoke 전에는 배포 완료로 판정하지 않는다. 제품 표시 최종 승인(B2), 후기 재게시 권한(B3), 티저 권리·자막·CTA(B4), Cloudflare 운영 시크릿(C2), 실제 주문·취소·환불 대사(E1)도 사람 입력 게이트로 유지한다.
+
+## 2026-09-20 연구 하이라이트 CTA 소비자 문구 보정
+
+홈의 연구 하이라이트 카드에서 연구자 중심으로 읽힐 수 있던 `이 연구 자세히 보기`를 `그림으로 한눈에 보기`로 바꿨다. 링크 목적지는 동일한 연구 카드의 시각 요약·쉬운 설명으로 유지하고, `validate:ui-contract`에 새 문구 회귀 검사를 추가했다. `validate:ui-contract`, 타입검사, 전체 107개 테스트가 통과했으며 연구 결과·제품 적용 범위·스마트스토어 목적지는 변경하지 않았다.
+
+## 2026-09-20 후보 TF pulse 자동화 실실행 확인
+
+후보 브랜치 `9bd498b06891a2fb59d0d624c14ad4ecba8e14bd`에서 [TF decision pulse 실행 35496185505](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35496185505)을 수동 실행했다. TF 계약 확인, safe internal 실행, 독립 검증, heartbeat 생성, 타입검사·테스트·production build·배포 readiness·Worker review 통합 테스트·Worker dry-run이 성공했다.
+
+실행은 `success`로 종료됐고, 자동 PR 생성은 저장소 정책(GitHub Actions가 PR 생성 불가)으로 차단됐다. 대신 `automation/tf-pulse-heartbeat` 브랜치를 갱신하고, 보호된 main에 반영하려면 사람의 PR 생성·Code Owner 검토가 필요하다는 경고를 남겼다. 외부 게시·제품 승인·주문 처리는 수행하지 않았다.
+
+현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 최신 UI 보정 커밋 `9bd498b` 기준이며, 필수 `release-verify`·`site-quality-verify`는 성공했다. 공개 Pages의 `release-manifest.json`은 여전히 404이므로 main 병합 전 공개 배포 완료로 판정하지 않는다.
+
+## 2026-09-20 후보 문구·배포 증거 재감리
+
+후보 HEAD `150f498`에서 첫 화면에 `셀핀다 발효가바 · 나의 하루 리듬 체크`를 표시하고, 리듬 체크 문장을 `지난 7일, 잠들기 어렵거나 쉬지 못한 날이 있었나요?`로 바꿨다. 제품 CTA도 `스마트스토어에서 가격·재고 확인하기`로 목적지를 명시했으며 UI 계약 회귀 검사를 함께 갱신했다.
+
+배포 워크플로에는 실제 Pages 게시본인 `dist-pages/`를 일반 릴리스 증거 아티팩트에도 보관하도록 추가했다. `release-verify`와 `site-quality-verify`([35497232116](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35497232116), [35497232189](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35497232189))가 성공했고, 로컬 production build는 10개 route·65개 파일·성능 예산을 통과했다.
+
+공개 Pages는 여전히 이전 main 산출물을 제공해 `/release-manifest.json`이 HTTP 404다. Code Owner 승인·main 병합·Pages 게시·라이브 smoke 전에는 공개 배포 완료로 판정하지 않는다. B2 제품 표시, B3 후기 권한, B4 티저 권리, C2 Worker/D1 비밀값, E1 실주문 대사는 사람 입력 게이트로 유지한다.
+## 2026-09-20 Pages 게시 fail-closed 감리
+
+후보 배포 워크플로의 실제 상태 전이를 대조한 결과, `deploy-pages`가 `release-verify`만 기다리고 `worker-readiness`를 의존하지 않아 readiness 작업이 실패하거나 취소되어도 정적 Pages 게시가 먼저 진행될 수 있었다. 이후 `release-status`가 `RELEASE_FAILED`로 남더라도 공개본은 이미 갱신될 수 있는 게시 순서 결함이었다.
+
+`deploy-pages`가 `release-verify`와 `worker-readiness`를 모두 `needs`로 갖고, 두 작업이 모두 `success`인 경우에만 실행하도록 보강했다. 비밀값이 없는 정상 정적 경로는 readiness가 `success`와 `enabled=false`를 반환하므로 계속 게시되며, readiness 오류·취소·검증 실패는 Pages 게시 전에 멈춘다. `pnpm run validate:deploy-workflow`로 회귀 규칙을 통과시켰고, 실제 Pages 공개본은 후보와 분리된 상태에서 변경하지 않았다.
+
+## 2026-09-20 Worker 활성 배포 순서 재감리
+
+Worker 운영이 활성화된 경우 `deploy-worker`가 실패해도 Pages가 먼저 게시될 수 있는 부분 배포 경로를 추가로 확인했다. `deploy-pages`가 `deploy-worker`까지 의존하고, readiness가 `enabled=true`일 때 Worker 결과가 `success`인 경우에만 Pages를 게시하도록 보강했다. Worker가 비활성화된 정적 전용 경로는 `enabled=false` 조건으로 계속 게시할 수 있다.
+
+후보 커밋 `c5f95d0`의 `validate:deploy-workflow`, production build, 65개 파일 release manifest, 10개 정적 route, 성능 예산 검증을 통과했고, PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`([35498593515](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35498593515))와 `site-quality-verify`([35498593522](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35498593522))도 성공했다. 공개 Pages는 main 병합 전까지 후보와 분리된 상태로 유지한다.
+
+## 2026-09-20 소형 모바일 연구 주제 카드 보정
+
+390px 이하 화면에서 연구 주제 카드가 두 열로 눌려 제목과 설명이 짧게 끊기던 문제를 확인했다. 후보 `312281e`에서 소형 화면은 주제 카드를 한 열로 전환하고 제목·설명·연구 건수를 읽기 쉽게 배치했다. production build의 10개 route·65개 파일·성능 예산과 `validate:research-copy`, `validate:ui-contract`를 다시 통과시켰다.
+## 2026-09-20 로컬 TF safe-run·독립 검증 연결 보강
+
+`pnpm run tf:safe`는 원시 실행 결과를 표준 출력으로만 내보내고, `validate:tf-safe`는 별도 pulse·safe-run 파일을 요구한다. 로컬에서 이전 pulse 파일을 잘못 대입하면 실행 지문이 달라져 검증이 실패할 수 있어 `pnpm run tf:safe:local` 래퍼를 추가했다. 래퍼는 같은 pulse를 `tmp/`에 저장한 뒤 safe-run과 독립 검증을 순서대로 실행하고, 세 산출물을 개인정보·공개 경로 없이 보존한다. CI의 명시적 `tf-pulse.json → tf-safe-run.json → tf-safe-run-validation.json` 계약과 사람 게이트는 변경하지 않았다.
+## 2026-09-20 release-status pnpm 구분자 회귀 보강
+
+배포 workflow의 `pnpm run validate:release-status -- release-status.json` 호출을 실제로 재현했을 때 검증기가 `--`를 파일명으로 열어 실패하는 결함을 확인했다. 검증기가 pnpm 구분자와 옵션을 건너뛰고 실제 상태 패킷 경로를 읽도록 수정했으며, 정적 전용 성공 경로와 readiness 실패를 정적 전용으로 속이는 경로를 회귀 테스트로 추가했다. 이 수정은 배포 상태 판정만 보강하며 제품·연구·외부 승인 게이트를 변경하지 않는다.
+## 2026-09-20 자동 검증 상태의 fail-closed 보강
+
+TF pulse가 축약된 후보 검사만으로 보호된 `release-verify`·`site-quality-verify`를 직접 성공 처리하던 자동화 경로를 제거했다. 후보 typecheck·전체 테스트·build·readiness·Worker dry-run은 계속 증거로 남기지만, 실제 필수 상태는 완전한 `pull_request` 워크플로만 만들도록 경계를 분리했다. 검사가 생략되면 보호 규칙이 pending으로 남아 사람의 PR 재실행·검토 없이는 merge할 수 없다. 워크플로 정적 검증과 전체 사이트 회귀 검증을 다시 실행한 뒤 후보 PR의 새 CI 결과를 확인한다.
+
+## 2026-09-20 운영 문서와 TF 원장 수치 정합성 보강
+
+운영 문서 일부가 최신 `data/tf-role-registry.json`의 8개 역할군과 `data/task-graph.json`의 15개 작업을 7개·14개로 설명하던 드리프트를 확인했다. `docs/OPS_MVP.md`와 `docs/TF_BOARD.md`를 일러스트·정보시각화 역할까지 포함한 현재 책임 구조와 맞췄고, `scripts/validate-ops-docs.mjs`를 build에 연결해 역할 수·업무 수·공개 큐 범위가 다시 어긋나면 배포 검증이 실패하도록 했다.
