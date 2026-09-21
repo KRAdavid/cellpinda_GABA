@@ -1,10 +1,10 @@
 # 공개 Pages UI 검증 기록
 
-## 최신 라이브 확정 감리 — 2026-09-21 14:08 KST
+## 최신 라이브 확정 감리 — 2026-09-21 14:39 KST
 
-PR #101 병합 커밋 `a3d29885e4188db3e397440f24da6436774f8c0a`가 Pages에 게시된 뒤 [35563431421](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35563431421)의 라이브 smoke가 성공했다. `/release-manifest.json`은 HTTP 200이며 candidate SHA·정적 모드·10개 공개 경로·62개 파일 hash·연구 6건·제품 1개·후기 목적지 1개가 라이브와 일치한다. Smart Store 단일 목적지, 750 제품 제거, 내부 운영 JSON 제외, 티저 `PREVIEW` 경계도 재확인했다.
+PR #104 병합 커밋 `955c8e7f6963fe3a76923f6e0bfd22c6095fad5f`가 Pages에 게시된 뒤 [35565103216](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35565103216)의 재실행 라이브 smoke가 성공했다. 당시 `/release-manifest.json`은 HTTP 200이며 candidate SHA·정적 모드·10개 공개 경로·62개 파일 hash·연구 6건·제품 1개·후기 목적지 1개가 라이브와 일치했다. Smart Store 단일 목적지, 750 제품 제거, 내부 운영 JSON 제외, 티저 `PREVIEW` 경계도 재확인했다.
 
-Chromium CDP 감리에서 홈·연구·제품·공유·뇌컨디션 챌린지를 390px·1440px로 확인했다. 가로 overflow 0, 콘솔 오류 0, 메뉴·CTA·연구·제품·후기 링크·키보드 포커스·landmark/대체텍스트·대비 계약을 확인했다. 이 기록은 실제 기기 전체 조합 시험이나 B2·B3·B4·C2·E1 사람 승인 게이트를 대신하지 않는다.
+Chromium CDP 감리에서 홈·연구·제품·공유·뇌컨디션 챌린지를 390px·1440px로 확인했다. 가로 overflow 0, 콘솔 오류 0, 메뉴·CTA·연구·제품·후기 링크·키보드 포커스·landmark/대체텍스트·대비 계약을 확인했다. 연구 카드 제목을 `쉰 날·운동한 날 몸의 변화`로 줄였고 작은 연구 라벨 대비를 `#116f4a`로 보정했다. 이 기록은 실제 기기 전체 조합 시험이나 B2·B3·B4·C2·E1 사람 승인 게이트를 대신하지 않는다.
 
 ## 2026-09-21 티저 자동재생 안내 루트 번들 보강 — 후보 작업 중
 
