@@ -1,8 +1,8 @@
 # 공개 Pages UI 검증 기록
 
-## 2026-09-22 최신 라이브 재검증 — PR #174
+## 2026-09-22 라이브 검증 스냅샷 — PR #174
 
-PR [#174](https://github.com/KRAdavid/cellpinda_GABA/pull/174)의 필수 검사(`release-verify`, `site-quality-verify`)가 성공한 뒤 관리자 우회 병합을 진행했고, 병합 직후 전체 보호 규칙을 복원했다. 병합 커밋은 `c241eb6c1edbc33de023e38247578005413a3844`이며 동일 계정의 자기 승인을 독립 Code Owner 승인으로 기록하지 않는다. 배포 [run 35654735285](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35654735285)는 `release-verify`·Pages 게시·라이브 smoke·`release-status`를 모두 성공했다.
+PR [#174](https://github.com/KRAdavid/cellpinda_GABA/pull/174)의 필수 검사(`release-verify`, `site-quality-verify`)가 성공한 뒤 관리자 우회 병합을 진행했고, 병합 직후 전체 보호 규칙을 복원했다. 이 절은 해당 시점의 검증 스냅샷이며, 현재 공개 판정은 [live release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)과 [최신 성공 배포 목록](https://github.com/KRAdavid/cellpinda_GABA/actions)을 우선한다. 동일 계정의 자기 승인은 독립 Code Owner 승인으로 기록하지 않는다.
 
 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 HTTP 200이며 정적 모드·10개 경로·bundle hash 63개·연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·Smart Store 단일 목적지·750 제거·내부 운영 스냅샷 제외·티저 `HOLD`를 확인한다. `pnpm run validate:live-public`는 page 200·provenance 일치·제품 경계 문구·Smart Store 목적지를 통과했다.
 
