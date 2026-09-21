@@ -692,10 +692,12 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <p className="fatigue-game-kicker">매번 신호 순서가 달라져요</p>
           <h3>세 가지만 기억하세요.</h3>
           <div className="fatigue-game-onboarding-actions">
-            <button type="button" className="rhythm-button" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 연습하고 시작하기 <ArrowRight size={18} aria-hidden="true" /></button>
-            <button type="button" className="fatigue-game-sound-toggle" onClick={toggleGameSound} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />} 효과음 {gameSoundEnabled ? '켜짐' : '꺼짐'}</button>
+            <button type="button" className="rhythm-button fatigue-game-primary-action" onClick={beginPractice}><Gamepad2 size={18} aria-hidden="true" /> 먼저 연습하고 시작하기 <ArrowRight size={18} aria-hidden="true" /></button>
+            <div className="fatigue-game-onboarding-secondary" aria-label="챌린지 보조 설정">
+              <button type="button" className="fatigue-game-sound-toggle" onClick={toggleGameSound} aria-pressed={gameSoundEnabled}>{gameSoundEnabled ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />} 효과음 {gameSoundEnabled ? '켜짐' : '꺼짐'}</button>
+              <button type="button" className="rhythm-text-button fatigue-game-skip-practice" onClick={() => startRun('baseline')}>바로 시작하기</button>
+            </div>
             {gameSoundStatus ? <p className="fatigue-game-sound-status" role="status" aria-live="polite">{gameSoundStatus}</p> : null}
-            <button type="button" className="rhythm-text-button fatigue-game-skip-practice" onClick={() => startRun('baseline')}>연습을 건너뛰고 바로 시작</button>
           </div>
           <div className="fatigue-game-rule-cards" aria-label="게임 규칙">
             {FOCUS_GAME_STAGES.map(stage => <div className={`fatigue-game-rule-card fatigue-game-rule-card-${stage}`} key={stage}>
