@@ -151,7 +151,7 @@
         "표시·콘텐츠 검토자의 공개 승인"
       ],
       "acceptance": ["공개 미디어 주소와 비로그인 재생 확인", "연구·제품 효능을 혼동하지 않는 편집·자막 검토", "영상 노출과 외부 게시를 분리한 측정 이벤트 확인"],
-      "evidence": ["data/teaser-manifest.json", "docs/TEASER_VIDEO_EXPOSURE_REVIEW.md", "scripts/validate-teaser-exposure.mjs", "2026-09-20 비로그인 공개 HTML 애니메이션을 PREVIEW로 연결해 리듬 체크 다음에 자동 시작; 자막·대본·권리·표시사항·CTA 최종 승인은 B4 WAITING으로 유지"]
+      "evidence": ["data/teaser-manifest.json", "docs/TEASER_VIDEO_EXPOSURE_REVIEW.md", "scripts/validate-teaser-exposure.mjs", "2026-09-20 비로그인 공개 HTML 애니메이션을 PREVIEW로 연결해 리듬 체크 다음에 자동 시작; 자막·대본·권리·표시사항·CTA 최종 승인은 B4 WAITING으로 유지", "2026-09-21 B4 승인 전 공개 iframe·URL을 HOLD로 차단; 전체 자막·대본·권리·표시사항·CTA 승인 후에만 다시 공개"]
     },
     {
       "id": "C1",
