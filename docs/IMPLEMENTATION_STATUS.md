@@ -2,9 +2,11 @@
 
 ## 현재 확정 공개 상태 — 2026-09-22 00:00 KST
 
-PR [#151](https://github.com/KRAdavid/cellpinda_GABA/pull/151)을 관리자 우회로 병합한 뒤 보호 규칙을 즉시 복구했다. 최신 공개 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답과 현재 `candidateSha`, 그리고 [배포 run 35618510420](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35618510420)을 우선한다. 현재 라이브 candidate SHA는 `4a44cae9e83594ac8a1ce2a4c2bcd3b1ea700c7e`다. 1분 체크 전 챌린지 비노출, 결과 후 오늘 해볼 행동 패널, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
+PR [#151](https://github.com/KRAdavid/cellpinda_GABA/pull/151)을 관리자 우회로 병합한 뒤 보호 규칙을 즉시 복구했다. 최신 공개 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답과 그 안의 현재 `candidateSha`, 그리고 [GitHub Actions의 최신 성공 배포](https://github.com/KRAdavid/cellpinda_GABA/actions)를 우선한다. 1분 체크 전 챌린지 비노출, 결과 후 오늘 해볼 행동 패널, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
 
 라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 63개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `HOLD`·외부 URL 없음을 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 63개·provenance 일치를 통과했다. 최신 로컬 CDP 감리에서도 1440px·390px 화면의 가로 넘침과 콘솔 오류가 없었고, 첫 화면 CTA와 1분 체크 진입을 확인했다. `pnpm test`는 120/120, 타입검사·UI 계약·연구 카피·공개 export도 통과했다.
+
+추가 감리에서 정적 연구 페이지의 성장호르몬 연구 범위가 동적 카드보다 짧았던 P1을 확인해, 무스크립트·검색 진입에도 `90분 관찰`, `성장·근육 발달 효과를 확인한 연구가 아님`, `3g은 제품 섭취량 근거가 아님`을 함께 표시하도록 보정했다. 제품 카드의 분류는 소비자에게 `판매처에 표시된 유형 · 기타가공품`으로 읽히게 정리하고, 원장에는 출처가 붙은 원문을 유지한다.
 
 현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 관리자 강제 적용이 모두 활성이다. `deploy-worker`는 운영 비밀값 부재로 건너뛰었으며, 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트라 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
 
