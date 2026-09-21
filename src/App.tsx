@@ -200,9 +200,10 @@ export default function App(){
  if(!content||currentPath!=='/')return;
   const url=new URL(location.href);
   if(rhythmIdFromUrl(url)){
-   let secondFrame=0;
-   const firstFrame=window.requestAnimationFrame(()=>{secondFrame=window.requestAnimationFrame(()=>document.getElementById('rhythm')?.scrollIntoView({block:'start',behavior:'auto'}));});
-   return()=>{window.cancelAnimationFrame(firstFrame);if(secondFrame)window.cancelAnimationFrame(secondFrame);};
+   // RhythmExperience owns the shared-result alignment. Keeping a second
+   // app-level scroll here made shared links move twice: first to the section
+   // shell, then again to the result card after it rendered.
+   return;
   }
   if(challengeInvite){
    let secondFrame=0;

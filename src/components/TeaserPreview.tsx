@@ -96,7 +96,10 @@ export default function TeaserPreview({onEvent}: Props) {
               }
             }}
           /> : <p className="teaser-ready" aria-live="polite">이 화면 가까이 오면 바로 볼 수 있게 준비해요.</p>}
-          {frameRequested && !frameLoaded && <p className="teaser-loading" aria-live="polite">티저 화면을 불러오는 중입니다…</p>}
+          {frameRequested && !frameLoaded && <div className="teaser-loading" role="status" aria-live="polite">
+            <span>티저 화면을 불러오는 중입니다…</span>
+            <a href={preview.url!} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('teaser_external_opened',{path:'/teaser'})}>새 창에서 바로 보기 ↗</a>
+          </div>}
         </div>
         <div className="teaser-card-copy">
           <p className="teaser-label">{isOnHold ? '공개 준비 중' : '화면에 들어오면 자동 시작'}</p>
