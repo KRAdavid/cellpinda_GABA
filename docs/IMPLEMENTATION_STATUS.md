@@ -1,12 +1,12 @@
 # 중간 구현 상태 — 2026-09-21
 
-## 현재 확정 공개 상태 — 2026-09-21 14:39 KST
+## 현재 확정 공개 상태 — 2026-09-21 19:05 KST
 
-관리자 병합으로 PR #109를 main에 반영한 뒤, 보호 규칙을 즉시 복구했다. 마지막 애플리케이션 변경은 `8dc09e22b0a4d458e95a36946462ecd5d12a39d5`이며, 문서 갱신을 포함한 최신 배포 run [35569406055](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35569406055)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 `release-manifest.json`은 현재 main 후보 `2fe1776392019ba109e8a500e5a203bab66a8e1f`를 가리키고 HTTP 200이다. 공유 결과 단일 착지와 티저 지연 로딩 fallback 단일 노출을 포함한 상태를 현재 애플리케이션 기준으로 삼는다.
+관리자 병합으로 PR #125·#126·#127을 main에 반영한 뒤, 보호 규칙을 매번 즉시 복구했다. 최신 main 커밋은 `66809b11c8a0de1b88c2ce022fa230acb906ef87`이며, 최신 배포 run [35586426989](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35586426989)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 candidate SHA `66809b11c8a0de1b88c2ce022fa230acb906ef87`를 가리키고 HTTP 200이다. 공유 결과 단일 착지, 티저 지연 로딩 fallback, 최신 연구 측정 범위 문구를 현재 애플리케이션 기준으로 삼는다.
 
-라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 62개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `PREVIEW`를 확인한다. 390px·1440px 실제 화면 감리에서 가로 넘침·콘솔 오류·주요 접근성 누락은 확인되지 않았다. 연구 카드 모바일 줄바꿈과 뇌 근거 라벨 대비 P2도 보정했다.
+라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 65개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `PREVIEW`를 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 65개·provenance 일치를 통과했다. 390px·1440px 감리에서 P0/P1 결함·가로 넘침·콘솔 오류는 확인되지 않았다.
 
-PR #101은 저장소 전체 `CODEOWNERS`와 네 개 GitHub Actions 워크플로 최소 권한 계약을 `validate:governance`로 빌드에 연결했다. 현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 마지막 푸시 승인, 선형 이력, 대화 해결, `enforce_admins`가 모두 활성이다. 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트이며 자동으로 완료 처리하지 않는다.
+현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 마지막 푸시 승인, 선형 이력, 대화 해결, `enforce_admins`가 모두 활성이다. 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트이며 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
 
 이 절 아래의 후보·과거 실행 기록은 당시 상태를 보존하기 위한 감사 로그다. 현재 공개 판정은 이 절, 라이브 `release-manifest.json`, 최신 배포 run을 우선하며 아래의 과거 `OPEN`, `404`, `후보` 표현을 현재 상태로 해석하지 않는다.
 
