@@ -35,7 +35,7 @@
 .rhythm-result-primary-actions>small{display:block;margin-top:8px;color:#53695c;font-size:13px;line-height:1.55}
 .rhythm-result-actions{min-width:0}
 .rhythm-result-quick-action{margin:22px 0 0;padding:18px 18px 16px;border:1px solid #cbdaca;border-radius:8px;background:#f7fbf6}
-.rhythm-result-quick-action--wide{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:28px;margin:0 0 -20px;padding:20px 22px}
+.rhythm-result-quick-action--wide{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:28px;margin:0 0 -20px;padding:20px 22px;scroll-margin-top:104px}
 .rhythm-result-quick-action--wide>div{min-width:0}
 .rhythm-result-quick-action--wide>div>p:not(.rhythm-eyebrow){margin:0;color:#315f48;font-size:14px;line-height:1.65}
 .rhythm-result-quick-action--wide .rhythm-button{min-width:270px;justify-content:center}
