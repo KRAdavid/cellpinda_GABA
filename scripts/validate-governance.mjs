@@ -12,7 +12,7 @@ const expectedPermissions = {
   '.github/workflows/deploy.yml': {contents: 'read'},
   '.github/workflows/verify.yml': {contents: 'read'},
   '.github/workflows/daily-status-report.yml': {contents: 'read', issues: 'write'},
-  '.github/workflows/tf-pulse.yml': {contents: 'write', 'pull-requests': 'write', statuses: 'write'},
+  '.github/workflows/tf-pulse.yml': {contents: 'write', 'pull-requests': 'write'},
 };
 
 function permissionBlock(source, path) {
