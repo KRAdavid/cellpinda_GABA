@@ -34,3 +34,10 @@
 @media(max-width:700px){
   .research-route-intro>p:last-child{max-width:100%;overflow-wrap:anywhere;word-break:keep-all}
 }
+
+/* Keep the research return link in the header at tablet widths. */
+@media(min-width:681px) and (max-width:900px){
+  .header.research-route-header{height:68px;padding:0 28px}
+  .header.research-route-header nav{display:flex;position:static;inset:auto;flex-direction:row;gap:20px;width:auto;margin:0;padding:0;background:transparent;box-shadow:none;font-size:14px;white-space:nowrap}
+  .header.research-route-header .menu-toggle{display:none}
+}

@@ -6,8 +6,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  # The pulse itself is read-only.  The only write-capable job is the
+  # schedule-only heartbeat publisher below, which cannot run from an
+  # arbitrary workflow_dispatch ref.
+  contents: read
+  pull-requests: read
 
 concurrency:
   group: tf-pulse
@@ -15,13 +18,16 @@ concurrency:
 
 jobs:
   pulse:
+    permissions:
+      contents: read
+      pull-requests: read
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          persist-credentials: true
+          persist-credentials: false
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -39,8 +45,85 @@ jobs:
         run: node scripts/run-safe-tf-actions.mjs tf-pulse.json --out tf-safe-run.json | tee tf-safe-run-summary.json
       - name: Independently validate safe TF run
         run: node scripts/validate-safe-tf-run.mjs tf-safe-run.json tf-pulse.json | tee tf-safe-run-validation.json
+      - name: Verify non-main pulse candidate
+        if: github.ref != 'refs/heads/main'
+        run: |
+          # Manual candidate runs still exercise the same release checks, but
+          # never mutate the main heartbeat branch or create a review PR.
+          pnpm run typecheck
+          pnpm test
+          pnpm run build
+          pnpm run preflight:deploy
+          pnpm run test:worker-reviews
+          pnpm exec wrangler deploy --dry-run --outdir worker-build
+      - name: Add pulse to run summary
+        run: |
+          {
+            echo '## TF decision pulse'
+            echo
+            echo '```json'
+            cat tf-pulse.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo
+            echo '## Safe internal TF run'
+            echo
+            echo '```json'
+            cat tf-safe-run-summary.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo
+            echo '## Safe TF run independent validation'
+            echo
+            echo '```json'
+            cat tf-safe-run-validation.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload pulse artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: tf-pulse-${{ github.run_id }}
+          path: |
+            tf-pulse.json
+            tf-safe-run.json
+            tf-safe-run-summary.json
+            tf-safe-run-validation.json
+          if-no-files-found: error
+          retention-days: 14
+
+  # Only the scheduled run on the protected default branch can publish the
+  # heartbeat branch.  A manual workflow_dispatch on another ref never gets a
+  # write-capable job, even if its source contains a malicious change.
+  persist-heartbeat:
+    if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+    needs: pulse
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out protected main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Download verified pulse artifacts
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: tf-pulse-${{ github.run_id }}
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.19.0
+          package-manager-cache: false
+      - name: Install pinned package manager
+        run: npm install --global pnpm@11.19.0
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
       - name: Persist safe pulse heartbeat
-        if: github.ref == 'refs/heads/main'
         run: |
           node scripts/write-tf-pulse-heartbeat.mjs tf-pulse.json tf-safe-run.json tf-safe-run-validation.json
           git config user.name "cellpinda-tf-pulse[bot]"
@@ -110,50 +193,5 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ github.token }}
-      - name: Verify non-main pulse candidate
-        if: github.ref != 'refs/heads/main'
-        run: |
-          # Manual candidate runs still exercise the same release checks, but
-          # never mutate the main heartbeat branch or create a review PR.
-          pnpm run typecheck
-          pnpm test
-          pnpm run build
-          pnpm run preflight:deploy
-          pnpm run test:worker-reviews
-          pnpm exec wrangler deploy --dry-run --outdir worker-build
-      - name: Add pulse to run summary
-        run: |
-          {
-            echo '## TF decision pulse'
-            echo
-            echo '```json'
-            cat tf-pulse.json
-          echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-          {
-            echo
-            echo '## Safe internal TF run'
-            echo
-            echo '```json'
-            cat tf-safe-run-summary.json
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-          {
-            echo
-            echo '## Safe TF run independent validation'
-            echo
-            echo '```json'
-            cat tf-safe-run-validation.json
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-      - name: Upload pulse artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: tf-pulse-${{ github.run_id }}
-          path: |
-            tf-pulse.json
-            tf-safe-run.json
-            tf-safe-run-summary.json
-            tf-safe-run-validation.json
-          if-no-files-found: error
-          retention-days: 14
+
+# The gated writer is deliberately absent from workflow_dispatch; manual runs remain read-only.

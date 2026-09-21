@@ -3,15 +3,15 @@
   "mode": "automation_pulse_heartbeat",
   "goalId": "GL-2026-CELL-GABA-001",
   "goalStatus": "ACTIVE",
-  "generatedAt": "2026-09-21T18:52:35.940Z",
-  "snapshotHash": "9d189bf81952c5e6302e92368283da8b7eb095165e80e46279a7e72094350003",
+  "generatedAt": "2026-09-21T20:39:44.419Z",
+  "snapshotHash": "51c2f8fc1440a29410e0a1f1c12906ca6db10dec31a96efb7fa895e175ad5762",
   "previousSnapshotHash": "9d189bf81952c5e6302e92368283da8b7eb095165e80e46279a7e72094350003",
-  "stateChanged": false,
+  "stateChanged": true,
   "requiresHumanDecision": true,
   "continuation": {
     "mode": "human-gate-monitor",
     "cadenceHours": 6,
-    "nextReviewAt": "2026-09-22T00:52:35.940Z",
+    "nextReviewAt": "2026-09-22T02:39:44.419Z",
     "nextAction": "사람 판정과 입력 게이트를 보존하고 다음 pulse에서 변화·새 증거를 다시 확인한다."
   },
   "meetingProtocol": {
@@ -171,9 +171,10 @@
         "Cloudflare API token",
         "Cloudflare account ID와 D1 database ID",
         "운영 ADMIN_TOKEN과 MEMBER_ORIGIN",
+        "CLOUDFLARE_WORKER_URL repository variable",
         "복구·롤백·비밀 회수 확인"
       ],
-      "nextAction": "필요 입력(Cloudflare API token·account ID·D1 ID·운영 토큰·정식 origin)을 확보한 뒤 담당자와 검증자가 함께 재검토한다."
+      "nextAction": "필요 입력(Cloudflare API token·account ID·D1 ID·운영 토큰·정식 origin·Worker URL repository variable)을 확보한 뒤 담당자와 검증자가 함께 재검토한다."
     },
     {
       "taskId": "E1",
@@ -201,5 +202,60 @@
     "status": "HOLD",
     "taskId": "B4",
     "taskState": "WAITING"
+  },
+  "safeExecution": {
+    "mode": "safe_internal_tf_run",
+    "status": "MET",
+    "validatedAt": "2026-09-21T20:39:45.793Z",
+    "executionBoundary": {
+      "state": "READY",
+      "risk": "B_INTERNAL_WRITE",
+      "externalEffects": false
+    },
+    "preparation": {
+      "id": "sync-public-data",
+      "risk": "B_INTERNAL_WRITE",
+      "status": "MET"
+    },
+    "checks": [
+      {
+        "id": "goal-contract",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "research-copy",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "teaser-boundary",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "sandbox-mvp",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "public-export",
+        "risk": "A_READ",
+        "status": "MET"
+      },
+      {
+        "id": "tf-pulse",
+        "risk": "A_READ",
+        "status": "MET"
+      }
+    ],
+    "candidateTaskIds": [],
+    "humanGateTaskIds": [
+      "B2",
+      "B3",
+      "B4",
+      "C2",
+      "E1"
+    ]
   }
 }
