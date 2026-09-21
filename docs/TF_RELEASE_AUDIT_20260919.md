@@ -2,7 +2,7 @@
 
 ## 현재 공개 판정 — 2026-09-21 14:39 KST
 
-기술 배포는 완료 상태다. PR #109 병합 커밋 `8dc09e22b0a4d458e95a36946462ecd5d12a39d5`의 [35568559599](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35568559599)에서 release verify·Pages·라이브 smoke·release status가 성공했고, 현재 공개 매니페스트가 같은 SHA를 가리킨다. 정적 사이트는 연구 6건·공개 주장 12개·제품 1개·후기 1개·공유 6개를 제공하며 Smart Store 단일 목적지와 750 제거를 유지한다. 공유 결과는 앱 셸과 결과 카드가 중복 이동하지 않고, 티저 지연 로딩 중에는 오버레이 fallback 하나만 제공하며 로드 후 설명 영역 fallback으로 전환한다.
+기술 배포는 완료 상태다. PR #109 병합 커밋 `8dc09e22b0a4d458e95a36946462ecd5d12a39d5`의 애플리케이션 상태를 기준으로, 문서 갱신을 포함한 최신 [35569406055](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35569406055)에서 release verify·Pages·라이브 smoke·release status가 성공했다. 현재 공개 매니페스트는 main 후보 `2fe1776392019ba109e8a500e5a203bab66a8e1f`를 가리킨다. 정적 사이트는 연구 6건·공개 주장 12개·제품 1개·후기 1개·공유 6개를 제공하며 Smart Store 단일 목적지와 750 제거를 유지한다. 공유 결과는 앱 셸과 결과 카드가 중복 이동하지 않고, 티저 지연 로딩 중에는 오버레이 fallback 하나만 제공하며 로드 후 설명 영역 fallback으로 전환한다.
 
 관리자 우회는 `enforce_admins` 한 항목에만 적용했고 병합 직후 복구했다. 현재 branch protection은 Code Owner 리뷰 1명, 필수 검사 2개, 마지막 푸시 승인, 선형 이력, 대화 해결, 관리자 강제 적용을 모두 켠 상태다. `validate:governance`가 CODEOWNERS와 워크플로 최소 권한 계약을 빌드에서 회귀 검사한다. 티저는 `PREVIEW/HOLD`, Worker·D1 및 B2·B3·B4·C2·E1은 사람·외부 운영 입력 전까지 완료로 승격하지 않는다.
 
