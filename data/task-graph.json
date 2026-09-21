@@ -175,11 +175,12 @@
       "lead": "서버·보안·배포",
       "verifier": "QA·감사",
       "dependencies": ["C1"],
-      "blockedBy": "Cloudflare API token·account ID·D1 ID·운영 토큰·정식 origin",
+      "blockedBy": "Cloudflare API token·account ID·D1 ID·운영 토큰·정식 origin·Worker URL repository variable",
       "requiredInputs": [
         "Cloudflare API token",
         "Cloudflare account ID와 D1 database ID",
         "운영 ADMIN_TOKEN과 MEMBER_ORIGIN",
+        "CLOUDFLARE_WORKER_URL repository variable",
         "복구·롤백·비밀 회수 확인"
       ],
       "risk": "E_EXTERNAL_COMMITMENT",

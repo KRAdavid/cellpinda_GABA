@@ -8,16 +8,18 @@
 
 ## 라이브 증거
 
+아래 값은 2026-09-22 문서 작성 시점에 확인한 마지막 라이브 스냅샷이다. 이 문서 병합·재배포 뒤에는 SHA와 manifest 생성 시각이 바뀔 수 있으므로, 문서의 숫자를 현재값으로 재사용하지 않고 라이브 manifest와 최신 성공 run을 다시 확인한다.
+
 | 항목 | 확인값 |
 | --- | --- |
 | 공개 주소 | `https://kradavid.github.io/cellpinda_GABA` |
-| 라이브 candidate SHA | `bff012375b74639f434d29d3537e591ae5dfae7b` |
-| manifest 생성 시각 | `2026-09-21T20:14:56.482Z` |
+| 라이브 candidate SHA | `6d614d18f3ddd799d424699194629dfa80ea9847` |
+| manifest 생성 시각 | `2026-09-21T20:20:16.821Z` |
 | 실행 모드 | `static` |
 | 공개 경로 | 10개 |
 | 공개 주장·연구·제품·후기 | 12개 · 6건 · 1개 · 1개 |
 | 티저 | `HOLD`, 공개 URL 없음 |
-| 최근 배포 | [run 35649774771](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35649774771), `success` |
+| 최근 배포 | [run 35650335440](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35650335440), `success` |
 
 라이브 manifest의 자동 검사는 다음 7개가 모두 `true`다.
 
@@ -46,7 +48,9 @@
 - 선형 이력·대화 해결: 활성
 - force push·브랜치 삭제: 차단
 
-PR #168·#169·#171은 작성자와 인증 계정이 같은 상태에서 독립 Code Owner 승인을 만들 수 없었기 때문에, 필수 검사를 확인한 뒤 관리자 우회를 병합에만 일시 적용하고 즉시 복구했다. PR #171에서는 `require_last_push_approval` 때문에 병합 직전에 PR 리뷰 규칙을 일시 해제했고, 병합 직후 전체 보호 설정을 PUT으로 복원해 필수 검사·Code Owner·마지막 push 승인·관리자 강제 적용을 다시 확인했다. 이 기록은 독립 승인을 의미하지 않는다.
+PR #168·#169·#171·#172는 작성자와 인증 계정이 같은 상태에서 독립 Code Owner 승인을 만들 수 없었기 때문에, 필수 검사를 확인한 뒤 관리자 우회를 병합에만 일시 적용하고 즉시 복구했다. PR #171·#172에서는 `require_last_push_approval` 때문에 병합 직전에 PR 리뷰 규칙을 일시 해제했고, 병합 직후 전체 보호 설정을 PUT으로 복원해 필수 검사·Code Owner·마지막 push 승인·관리자 강제 적용을 다시 확인했다. 각 PR은 작성자·병합자·리뷰 수·보호 규칙 변경 시간을 GitHub 이벤트로 추적할 수 있으며, 이 기록은 독립 승인을 의미하지 않는다.
+
+수동 TF pulse는 별도 write-capable job을 schedule/main에만 제한한다. `workflow_dispatch`와 임의 ref는 read-only 후보 검사만 실행하며 heartbeat branch push·PR 생성 권한을 받지 않는다. 이 경계는 `scripts/validate-tf-pulse-workflow.mjs`와 `scripts/validate-governance.mjs`에서 검사한다.
 
 ## 재현한 검증
 
@@ -73,7 +77,7 @@ git diff --check
 | B2 | `VERIFYING` | 최종 제품 표시·분류·SKU·섭취/보관 주의 승인 |
 | B3 | `WAITING` | 후기 원문 출처·재게시 권한·개인정보·광고 관계 검토 |
 | B4 | `WAITING` | 티저 포스터·음원·대본·길이·권리·최종 CTA 승인 |
-| C2 | `WAITING` | Cloudflare 토큰·계정·D1·관리자 토큰·회원 origin·복구 점검 |
+| C2 | `WAITING` | Cloudflare 토큰·계정·D1·관리자 토큰·회원 origin·`CLOUDFLARE_WORKER_URL` repository variable·복구 점검 |
 | E1 | `WAITING` | 판매자 계정·상품 ID·주문/취소/환불 응답·대사 창구 |
 
 이 게이트는 자동으로 완료 처리하지 않는다. 증빙이 들어오면 해당 검증기와 라이브 smoke를 다시 실행하고, 독립 검토자·시각·파일 지문을 기록한 뒤 공개 상태를 갱신한다.

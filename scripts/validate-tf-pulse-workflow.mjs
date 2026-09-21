@@ -10,12 +10,17 @@ const requireText = (pattern, message) => { if (!pattern.test(source)) issues.pu
 
 requireText(/cron:\s*['"]17 \*\/6 \* \* \*['"]/, '6시간 pulse schedule이 없습니다.');
 requireText(/workflow_dispatch:/, '수동 pulse 실행 트리거가 없습니다.');
+requireText(/^permissions:\s*\n(?:  #[^\r\n]*\r?\n)*  contents:\s*read\s*\r?\n  pull-requests:\s*read/m, 'workflow 기본 권한은 read-only여야 합니다.');
+requireText(/pulse:\s*\r?\n\s+permissions:\s*\r?\n\s+contents:\s*read\s*\r?\n\s+pull-requests:\s*read/, 'pulse 후보 job은 read-only 권한이어야 합니다.');
+requireText(/persist-heartbeat:\s*\r?\n\s+if:\s*github\.event_name == 'schedule' && github\.ref == 'refs\/heads\/main'/, 'heartbeat 쓰기 job은 schedule/main에서만 실행되어야 합니다.');
+requireText(/persist-heartbeat:[\s\S]*?\r?\n\s+permissions:\s*\r?\n\s+contents:\s*write\s*\r?\n\s+pull-requests:\s*write/, 'heartbeat 쓰기 권한은 schedule/main job에만 있어야 합니다.');
+requireText(/needs:\s*pulse/, 'heartbeat publisher가 검증된 pulse job에 의존해야 합니다.');
 requireText(/name: Execute safe internal TF checks/, '읽기 전용 safe internal TF 실행 단계가 없습니다.');
 requireText(/run: node scripts\/run-safe-tf-actions\.mjs tf-pulse\.json --out tf-safe-run\.json \| tee tf-safe-run-summary\.json/, 'safe internal TF 실행 명령이 없습니다.');
 requireText(/name: Independently validate safe TF run/, 'safe internal TF 독립 검증 단계가 없습니다.');
 requireText(/run: node scripts\/validate-safe-tf-run\.mjs tf-safe-run\.json tf-pulse\.json \| tee tf-safe-run-validation\.json/, 'safe internal TF 독립 검증 명령이 없습니다.');
 requireText(/run:\s*\|\s*node scripts\/write-tf-pulse-heartbeat\.mjs tf-pulse\.json tf-safe-run\.json tf-safe-run-validation\.json/, 'heartbeat에 독립 검증된 safe 실행을 전달하지 않습니다.');
-requireText(/name: Persist safe pulse heartbeat\s+if: github\.ref == 'refs\/heads\/main'/, 'heartbeat 저장은 main에서만 실행되어야 합니다.');
+requireText(/name: Persist safe pulse heartbeat/, 'heartbeat 저장 단계가 없습니다.');
 requireText(/name: Verify non-main pulse candidate\s+if: github\.ref != 'refs\/heads\/main'/, '비-main 수동 pulse 후보 검증 단계가 없습니다.');
 requireText(/contents:\s*write/, 'heartbeat 커밋에 필요한 contents: write 권한이 없습니다.');
 requireText(/pull-requests:\s*write/, 'heartbeat PR 생성에 필요한 pull-requests: write 권한이 없습니다.');
@@ -36,6 +41,8 @@ requireText(/pnpm exec wrangler deploy --dry-run --outdir worker-build/, 'heartb
 requireText(/never write[\s\S]*protected release status contexts/, '축약 pulse가 보호된 release 상태를 직접 기록하지 않는다는 fail-closed 경계가 없습니다.');
 requireText(/branch protection[\s\S]*must remain pending/, '완전한 pull_request 검사가 실행되지 않으면 보호 규칙을 통과하지 않는 fail-closed 설명이 없습니다.');
 requireText(/GH_TOKEN:\s*\$\{\{ github\.token \}\}/, 'gh CLI에 GITHUB_TOKEN 연결이 없습니다.');
+requireText(/persist-credentials:\s*false/, 'read-only pulse checkout은 persist-credentials: false여야 합니다.');
+requireText(/persist-credentials:\s*true/, 'schedule/main heartbeat job은 push용 credential이 필요합니다.');
 requireText(/tf-safe-run\.json/, 'safe internal TF 결과 artifact가 없습니다.');
 requireText(/tf-safe-run-validation\.json/, 'safe internal TF 독립 검증 결과 artifact가 없습니다.');
 if (!/const scriptArgs = process\.argv\.slice\(2\)\.filter\(argument => argument !== '--'\)/.test(heartbeatScript)) issues.push('heartbeat 로컬·CI 인자가 pnpm 구분자를 제거하지 않습니다.');
@@ -46,8 +53,8 @@ const commitIndex = source.indexOf('git commit -m "chore: refresh TF pulse heart
 const pushIndex = source.indexOf('git push --force origin "HEAD:refs/heads/${heartbeat_branch}"');
 const prListIndex = source.indexOf('gh pr list --repo "$GITHUB_REPOSITORY"');
 const prCreateIndex = source.indexOf('gh pr create --repo "$GITHUB_REPOSITORY"');
-const verifyIndex = source.indexOf('pnpm run typecheck');
-const buildIndex = source.indexOf('pnpm run build');
+const verifyIndex = source.indexOf('pnpm run typecheck', prCreateIndex);
+const buildIndex = source.indexOf('pnpm run build', prCreateIndex);
 const safeRunIndex = source.indexOf('name: Execute safe internal TF checks');
 const safeValidationIndex = source.indexOf('name: Independently validate safe TF run');
 const heartbeatIndex = source.indexOf('name: Persist safe pulse heartbeat');
@@ -55,6 +62,7 @@ if (!(safeRunIndex >= 0 && safeRunIndex < safeValidationIndex && safeValidationI
 if (!(commitIndex >= 0 && commitIndex < pushIndex && pushIndex < prListIndex && prListIndex < prCreateIndex && prCreateIndex < verifyIndex && verifyIndex < buildIndex)) issues.push('heartbeat 커밋·브랜치 push·PR 검사·후보 검증 순서가 올바르지 않습니다.');
 if (/gh api\s+--method\s+POST\s+[^\n]*statuses\//.test(source) || /statuses:\s*write/.test(source)) issues.push('TF pulse가 보호된 release 상태를 직접 기록하거나 statuses 권한을 가져서는 안 됩니다.');
 if (/\[skip ci\]/.test(source)) issues.push('heartbeat PR은 자체 검증을 받아야 하므로 [skip ci]를 사용하면 안 됩니다.');
+if (/^permissions:\s*\r?\n\s+contents:\s*write/m.test(source)) issues.push('workflow 기본 권한을 write로 열어두면 수동 임의 ref가 쓰기 토큰을 상속하므로 job 수준으로 내려야 합니다.');
 
 if (issues.length) {
   console.error(JSON.stringify({workflow: '.github/workflows/tf-pulse.yml', status: 'invalid', issues}, null, 2));

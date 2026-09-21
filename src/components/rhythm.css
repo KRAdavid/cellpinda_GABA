@@ -67,3 +67,6 @@
 @media(max-width:760px){.rhythm-intro-copy,.rhythm-start-panel p:not(.rhythm-eyebrow),.rhythm-options label{font-size:16px;line-height:1.75}}
 @media(max-width:760px){.rhythm-result-quick-action--wide{display:grid;gap:12px;margin:0;padding:18px}.rhythm-result-quick-action--wide .rhythm-button{min-width:0}}
 @media(max-width:420px){.rhythm-load-score{padding:15px 14px}.rhythm-load-answer-row{gap:8px}.rhythm-load-answer-dots{grid-template-columns:repeat(5,16px);gap:7px}.rhythm-load-answer-dots i{width:16px;height:16px}.rhythm-load-visual-copy>strong{font-size:14px}}
+
+/* Reset the desktop result-row placement on phones so the result card and actions occupy separate rows. */
+@media(max-width:760px){.rhythm-result-layout>.rhythm-result-card,.rhythm-result-layout>.rhythm-result-actions{grid-row:auto}}
