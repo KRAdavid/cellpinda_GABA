@@ -1,8 +1,8 @@
 # 티저 영상 노출 검토
 
-## 최신 공개 상태 — 2026-09-19
+## 최신 공개 상태 — 2026-09-21
 
-현재 후보 배포본은 티저를 선택형 `PREVIEW`로 표시합니다. 비로그인으로 접근 가능한 HTML 애니메이션을 리듬 체크 다음에 자동 시작하도록 연결했으며, 자막·대본·권리·표시사항·CTA 최종 승인은 계속 `WAITING`으로 유지합니다. 최종 광고·SNS 게시와 MP4/HLS 재배포는 `APPROVED` 전환 뒤에만 가능합니다.
+현재 라이브 배포본은 B4 승인 전 티저를 `HOLD`로 표시합니다. 외부 HTML 애니메이션의 자막·대본·권리·표시사항·CTA 증빙이 확인되지 않아 공개 iframe과 URL을 제거했으며, 공개 승인이 끝나면 다시 검토할 수 있습니다. 최종 광고·SNS 게시와 MP4/HLS 재배포는 `APPROVED` 전환 뒤에만 가능합니다.
 
 검토일: 2026-09-11
 검토 URL: https://fermented-gaba-documentary-20260903.dubaissday.chatgpt.site/
@@ -21,7 +21,7 @@
 | 오디오 | Web Audio API 기반 배경음 토글 코드 확인 | 음원 권리와 자동재생·음량 정책을 별도로 승인해야 함 |
 | MP4/HLS/`<video>` | 해당 요소·주소를 확인하지 못함 | 파일 영상으로 재배포할 수 있는 상태는 아님 |
 
-따라서 이 URL은 **기술적으로는 공개 접근 가능한 브라우저 애니메이션**이지만, 표시·권리·자막 자료가 확인되지 않은 검토본이다. 현재 `data/teaser-manifest.json`은 `PREVIEW`이고 `publicPreviewUrl`만 공개 export에 연결하며 `publicMediaUrl`은 비워 둔다. 홈에서는 iframe을 화면 가까이에서 불러와 자동 시작하고, 임베드가 막힐 때만 새 창 대체 링크를 제공한다. B4 최종 공개 승인과 광고·카카오톡·인스타그램 공유 연결은 `WAITING`으로 유지한다. 공개 승인 시에는 애니메이션 URL을 최종 공개 주소로 유지할지, 별도 MP4/HLS를 발행할지 먼저 결정한다.
+따라서 이 URL은 **기술적으로는 공개 접근 가능한 브라우저 애니메이션**이지만, 표시·권리·자막 자료가 확인되지 않은 검토본이다. 현재 `data/teaser-manifest.json`은 `HOLD`이고 `publicPreviewUrl`·`publicMediaUrl` 모두 비어 있어 공개 export와 홈 iframe에 연결하지 않는다. B4 최종 공개 승인과 광고·카카오톡·인스타그램 공유 연결은 `WAITING`으로 유지한다. 승인 시에는 애니메이션 URL을 최종 공개 주소로 유지할지, 별도 MP4/HLS를 발행할지 먼저 결정한다.
 
 ## 권장 노출 위치
 
@@ -71,4 +71,4 @@ URL 접근은 공개 상태로 확인했지만, 비로그인 360px 모바일 재
 
 ## 운영 게이트
 
-`data/teaser-manifest.json`이 티저의 현재 상태를 단일하게 기록한다. 현재 상태는 `PREVIEW`이며 `publicPreviewUrl`은 검토된 HTTPS 페이지, `publicMediaUrl`은 비어 있는 최종 미디어 주소다. `pnpm run validate:teaser`는 지정된 `public/data/teaser-preview.json` 외에는 검토 URL이 `src/`, `public/`, `index.html`에 새어 나오지 않는지 확인한다. 최종 공개 승인으로 전환하려면 승인자·승인일, 자막·권리·표시사항 증거를 함께 추가하고 위 승인 기준을 다시 통과해야 한다. 기술 접근 성공만으로 B4 게이트를 완료 처리하지 않는다.
+`data/teaser-manifest.json`이 티저의 현재 상태를 단일하게 기록한다. 현재 상태는 B4 승인 전 `HOLD`이며 `publicPreviewUrl`·`publicMediaUrl`은 비어 있다. `pnpm run validate:teaser`는 승인 전 검토 URL이 `src/`, `public/`, `index.html`에 새어 나오지 않는지 확인한다. 최종 공개 승인으로 전환하려면 승인자·승인일, 자막·권리·표시사항 증거를 함께 추가하고 위 승인 기준을 다시 통과해야 한다. 기술 접근 성공만으로 B4 게이트를 완료 처리하지 않는다.
