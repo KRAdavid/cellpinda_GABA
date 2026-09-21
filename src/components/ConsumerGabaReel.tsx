@@ -157,7 +157,7 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
             <h3 id={`consumer-reel-${slide.id}-title`}>{slide.id === 'next' ? nextSlideTitle : slide.title}</h3>
             <p>{slide.id === 'next' ? nextSlideBody : slide.body}</p>
             {slide.link && !(hasRhythmResult && slide.id === 'next') ? <a className="consumer-reel__link" href={slide.link.href} onClick={() => onEvent?.('consumer_reel_cta', {path: '/'})}>{slide.link.label} <ExternalLink size={15} aria-hidden="true" /></a> : null}
-            {slide.id === 'research' ? <small className="consumer-reel__boundary">일반 GABA 연구를 쉽게 정리한 내용이에요. 셀핀다 제품 정보는 제품 구성에서 따로 확인해 보세요.</small> : null}
+            {slide.id === 'research' ? <small className="consumer-reel__boundary">일반 GABA 연구를 쉽게 정리한 내용이에요. 셀핀다 완제품 시험 결과가 아니며, 제품 정보는 제품 구성에서 따로 확인해 보세요.</small> : null}
           </article>;
         })}
       </div>
