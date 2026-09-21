@@ -1,12 +1,14 @@
 # 공개 Pages UI 검증 기록
 
-## 2026-09-22 최신 라이브 재검증 — PR #151
+## 2026-09-22 최신 라이브 재검증 — PR #153
 
-PR [#151](https://github.com/KRAdavid/cellpinda_GABA/pull/151) 이후 Pages 게시·라이브 smoke·release status가 성공한 최신 배포를 확인했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 HTTP 200이며 현재 `candidateSha`와 함께 정적 모드·10개 경로·hash 수·연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·Smart Store only·750 제거·내부 운영 스냅샷 제외·티저 `HOLD`를 확인하는 기준이다.
+PR [#153](https://github.com/KRAdavid/cellpinda_GABA/pull/153) 이후 Pages 게시·라이브 smoke·release status가 성공한 최신 배포를 확인했다. [배포 run 35624808752](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35624808752)는 성공했고, 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 HTTP 200이며 현재 `candidateSha`와 함께 정적 모드·10개 경로·hash 63개·연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·Smart Store only·750 제거·내부 운영 스냅샷 제외·티저 `HOLD`를 확인한다.
 
 로컬 production preview의 Chromium CDP 재검증에서 1440px·390px 첫 화면을 확인했고, 가로 넘침·콘솔 오류 없이 히어로 primary CTA, `GABA 한 장씩 보기` 보조 링크, 1분 체크 진입을 확인했다. `pnpm test` 120/120, 타입검사, UI 계약, 연구 카피, 공개 export, 라이브 공개 검증이 모두 통과했다. 보호 규칙은 Code Owner 승인 1명·필수 검사 2개·관리자 적용 상태로 복구되어 있다. Worker/D1은 운영 비밀값 미설정으로 계속 `skipped`이며 B2·B3·B4·C2·E1은 외부 입력 게이트다.
 
 정적 연구 진입에도 성장호르몬 연구의 90분 관찰 범위와 성장·근육 발달 효과가 아니라는 설명, 3g이 제품 섭취량 근거가 아니라는 문장을 동적 카드와 동일하게 반영했다. 제품 카드의 분류는 `판매처에 표시된 유형 · 기타가공품`으로 읽히며, 구조화 데이터에는 미확정 분류를 넣지 않는다.
+
+캐시를 비운 390px Chromium CDP 화면에서 티저 `HOLD` placeholder가 220px로 표시되고, 가로 넘침과 콘솔 오류가 없음을 확인했다. 1440px 화면도 동일한 공개 경로·CTA·제품 유형 표시를 유지한다.
 
 아래 기록은 당시 상태를 보존하는 감사 로그다. 현재 공개 판정은 이 절, 공개 `release-manifest.json`, 최신 성공 배포 run을 우선한다.
 
