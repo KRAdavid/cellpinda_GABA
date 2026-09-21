@@ -2,11 +2,11 @@
 
 ## 현재 확정 공개 상태 — 2026-09-21 · 라이브 기준
 
-이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 현재 공개 판정은 이 절을 기준으로 한다. 최신 main 병합 커밋은 `dee9c8f6d43df7d87a949396a25faa9e5abf816d`이며, [배포 run 35589008663](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35589008663)가 `release-verify`·Pages 게시·라이브 smoke·release status까지 모두 성공했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 HTTP 200으로 같은 SHA를 가리키며, `pnpm run validate:live-public`도 `provenance: matched`로 통과했다. 결과 화면은 `내 상태 확인 → 뇌컨디션 확인 챌린지 → 제품·후기 → 친구 공유` 순서로 정리했고, 1분 체크 전에는 챌린지를 숨겨 다음 행동을 하나로 고정했다. 직접 초대 경로에서는 챌린지를 바로 열 수 있다. 히어로 아래에는 4장 시각형 GABA 리엘을 배치해 리듬 체크 다음에 상태·휴식·일반 연구·1분 체크 흐름을 짧게 보여준다.
+이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 현재 공개 판정은 이 절을 기준으로 한다. 최신 main 병합 커밋은 `36eaf52f86b5d6a364e3a5f4fa6d5e066e0cc809`이며, [배포 run 35590974337](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35590974337)가 `release-verify`·Pages 게시·라이브 smoke·release status까지 모두 성공했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 HTTP 200으로 같은 SHA를 가리키며, `pnpm run validate:live-public`도 `provenance: matched`로 통과했다. 결과 화면은 `내 상태 확인 → 뇌컨디션 확인 챌린지 → 제품·후기 → 친구 공유` 순서로 정리했고, 1분 체크 전에는 챌린지를 숨겨 다음 행동을 하나로 고정했다. 직접 초대 경로에서는 챌린지를 바로 열 수 있다. 히어로 아래에는 4장 시각형 GABA 리엘을 배치해 리듬 체크 다음에 상태·휴식·일반 연구·1분 체크 흐름을 짧게 보여준다.
 
 라이브 검증에서 정적 모드·공개 경로 10개·hash 파일 65개·승인 연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·공유 경로 6개를 확인했다. 구매·후기 목적지는 지정된 Smart Store 한 곳으로 고정했고 750 제품과 내부 운영 스냅샷은 공개본에서 제외했다. 모바일 연구 카드 줄바꿈과 연구 측정 범위 문구를 보정했고, 최근 390px·1440px CDP 감리에서 P0/P1 결함·가로 넘침·콘솔 오류를 확인하지 않았다. 티저는 `PREVIEW` 상태로 경계가 표시되며, 최종 공개 권리·콘텐츠 승인은 아직 B4 `WAITING`이다.
 
-PR #125·#126·#127·#128·#129·#130은 필수 검사 통과 후 동일 계정의 마지막 푸시 승인 제한으로 관리자 병합을 진행했고, 병합 순간에만 보호 규칙을 일시 완화한 뒤 즉시 복구했다. 현재 보호 규칙은 Code Owner 리뷰 1명, 필수 검사 `release-verify`·`site-quality-verify`, 마지막 푸시 승인, 대화 해결, 선형 이력, 관리자 강제 적용을 모두 유지한다. 현재 열린 PR은 없다. 이 관리자 우회는 독립 Code Owner 승인을 대체한 운영 기록이며, 실제 독립 승인이 완료됐다고 해석하지 않는다.
+PR #125·#126·#127·#128·#129·#130·#132는 필수 검사 통과 후 동일 계정의 마지막 푸시 승인 제한으로 관리자 병합을 진행했고, 병합 순간에만 보호 규칙을 일시 완화한 뒤 즉시 복구했다. 현재 보호 규칙은 Code Owner 리뷰 1명, 필수 검사 `release-verify`·`site-quality-verify`, 마지막 푸시 승인, 대화 해결, 선형 이력, 관리자 강제 적용을 모두 유지한다. 현재 열린 PR은 없다. 이 관리자 우회는 독립 Code Owner 승인을 대체한 운영 기록이며, 실제 독립 승인이 완료됐다고 해석하지 않는다. PR #132에서는 연구 결과의 비교 대상과 측정 항목을 소비자 문장으로 명확히 하고, 일반 GABA 연구 제목과 카드 넘김 안내를 보정했다.
 
 ## 2026-09-21 시각형 GABA 리엘 — 4장 라이브 반영 완료
 
