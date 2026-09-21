@@ -182,7 +182,9 @@ requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must exp
 requireMatch(app, /<ArrowRight(?:\s+size=\{18\})?\s+aria-hidden="true"\s*\/>/, 'decorative ArrowRight icons must be hidden from assistive technology');
 requireMatch(app, /<ArrowUpRight\s+size=\{18\}\s+aria-hidden="true"\s*\/>/, 'decorative ArrowUpRight icons must be hidden from assistive technology');
 requireMatch(app, /menu\?<X\s+aria-hidden="true"\s*\/>:<Menu\s+aria-hidden="true"\s*\/>/, 'decorative menu icons must be hidden from assistive technology');
-requireMatch(app, /className="product-visual" role="img" aria-label=\{/, 'product composition diagram must expose an accessible text alternative');
+requireMatch(app, /product-visual-with-images[\s\S]*?aria-label=\{/, 'product imagery must expose an accessible product-group label');
+requireMatch(app, /product-gaba1500-styled\.webp[\s\S]*?product-gaba1500-front\.webp/, 'GABA 1500 product card must include the supplied styled and front package images');
+requireMatch(app, /product-image-main[\s\S]*?alt=\{`\$\{p\.name\} 연출 이미지`\}[\s\S]*?product-image-thumbs[\s\S]*?alt=\{`\$\{p\.name\} 정면 이미지`\}/, 'product gallery images must provide consumer-readable alternative text');
 requireMatch(app, /function ExperienceLoading\([\s\S]*?aria-busy="true"[\s\S]*?experience-loading-grid/, 'async content must show a visual loading state without leaving the first screen blank');
 requireMatch(styles, /\.sr-only\{position:absolute!important[\s\S]*?\.experience-loading-grid\{display:grid/, 'screen-reader-only content and visual loading state must have shared styles');
 if (/<Suspense fallback=\{null\}><(?:GabaStory|TeaserPreview|GabaResearchHighlights|BrainLoadEvidence|PurchaseQuestions|ReviewExperience|SevenDayChallenge)/.test(app)) fail('below-fold consumer sections must keep a visible loading state while their lazy bundles arrive');
@@ -335,7 +337,7 @@ if (!smartStoreLinks.length || smartStoreLinks.some(url => ![approvedSmartStoreU
   fail(`consumer Smart Store links must use the approved product detail or exact review dialog (${approvedSmartStoreUrl} / ${approvedSmartStoreReviewUrl})`);
 }
 const consumerImageTags = [...consumerSource.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
-if (consumerImageTags.some(tag => !/\balt\s*=\s*['"][^'"]*['"]/i.test(tag))) {
+if (consumerImageTags.some(tag => !/\balt\s*=\s*(?:['"][^'"]*['"]|\{[^}]+\})/i.test(tag))) {
   fail('consumer images must provide an explicit alt attribute');
 }
 const staticImagePages = ['public/products/index.html'];
