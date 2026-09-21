@@ -48,7 +48,7 @@ function buildSlides(): ReelSlide[] {
       id: 'next',
       eyebrow: '다음 단계',
       title: '지금 내 상태부터 1분이면 확인할 수 있어요.',
-      body: '오늘 필요한 휴식을 먼저 확인한 뒤, 제품 구성과 구매자 후기를 이어서 볼 수 있어요.',
+      body: '먼저 1분 체크로 내 상태를 확인한 뒤, 제품 구성과 구매자 후기를 볼 수 있어요.',
       kind: 'cta',
       icon: Sparkles,
       link: {href: '#products', label: '가바 1500 제품 구성 보기'},
@@ -59,6 +59,9 @@ function buildSlides(): ReelSlide[] {
 export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Props) {
   const slides = useMemo(() => buildSlides(), []);
   const slideCount = slides.length;
+  const nextSlideBody = hasRhythmResult
+    ? '결과 화면에서 제품 구성과 구매자 후기를 확인할 수 있어요.'
+    : '먼저 1분 체크로 내 상태를 확인한 뒤, 제품 구성과 구매자 후기를 볼 수 있어요.';
   const [activeIndex, setActiveIndex] = useState(0);
   const railRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<Array<HTMLElement | null>>([]);
@@ -122,7 +125,9 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
       <div className="consumer-reel__heading">
         <div>
           <p className="chapter">한 장씩 보는 GABA 이야기</p>
-          <h2 id="consumer-reel-heading">내 상태를 확인한 뒤<br />GABA를 알아보세요</h2>
+          <h2 id="consumer-reel-heading">
+            {hasRhythmResult ? <>내 상태를 확인한 뒤<br />GABA를 알아보세요</> : <>GABA가 궁금하다면<br />먼저 한 장씩 보세요</>}
+          </h2>
         </div>
         <p>옆으로 넘기며 한 장씩 확인해 보세요.<br />연구·제품·후기는 각각 다른 화면에서 확인할 수 있어요.</p>
         <span className="consumer-reel__swipe-hint" aria-hidden="true">다음 카드 →</span>
@@ -147,7 +152,7 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
             <div className="consumer-reel__card-top"><span>{String(index + 1).padStart(2, '0')}</span><span>{slide.eyebrow}</span></div>
             {Icon ? <span className="consumer-reel__icon"><Icon size={25} strokeWidth={1.7} aria-hidden="true" /></span> : null}
             <h3 id={`consumer-reel-${slide.id}-title`}>{slide.title}</h3>
-            <p>{slide.body}</p>
+            <p>{slide.id === 'next' ? nextSlideBody : slide.body}</p>
             {slide.link && !(hasRhythmResult && slide.id === 'next') ? <a className="consumer-reel__link" href={slide.link.href} onClick={() => onEvent?.('consumer_reel_cta', {path: '/'})}>{slide.link.label} <ExternalLink size={15} aria-hidden="true" /></a> : null}
             {slide.id === 'research' ? <small className="consumer-reel__boundary">일반 GABA 연구를 쉽게 정리한 내용이에요. 셀핀다 제품 정보는 제품 구성에서 따로 확인해 보세요.</small> : null}
           </article>;
