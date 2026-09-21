@@ -2,21 +2,27 @@
 
 ## 현재 확정 공개 상태 — 2026-09-21 · 라이브 기준
 
-이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 현재 공개 판정은 이 절을 기준으로 한다. 최신 애플리케이션 변경 커밋은 `452a3b82c62667800a407abee860aa9d6f19106d`이며, [배포 run 35573571534](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35573571534)가 성공했다. 공개 `release-manifest.json`은 HTTP 200으로 현재 main 후보 `452a3b82c62667800a407abee860aa9d6f19106d`를 가리킨다. 첫 화면 체크 CTA와 결과 화면의 제품·후기 CTA는 소비자가 다음 행동을 바로 이해하도록 정리했다.
+이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 현재 공개 판정은 이 절을 기준으로 한다. 최신 애플리케이션 변경 커밋은 `4aa655b187e90769c9951f727c8e362b41081c0e`이며, [배포 run 35576241688](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35576241688)가 `release-verify`·Pages·라이브 smoke·release status까지 성공했다. 공개 `release-manifest.json`은 HTTP 200으로 현재 main 후보 `4aa655b187e90769c9951f727c8e362b41081c0e`를 가리킨다. 결과 화면은 `내 상태 확인 → 뇌컨디션 확인 챌린지 → 제품·후기 → 친구 공유` 순서로 정리했고, 챌린지 시작 화면은 `먼저 연습하고 시작하기`를 주 행동으로 고정했다.
 
 라이브 검증에서 정적 모드·공개 경로 10개·hash 파일 62개·승인 연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·공유 경로 6개를 확인했다. 구매·후기 목적지는 지정된 Smart Store 한 곳으로 고정했고 750 제품과 내부 운영 스냅샷은 공개본에서 제외했다. 모바일 연구 카드 줄바꿈과 뇌 근거 라벨 대비 P2를 보정했다. 티저는 `PREVIEW` 상태로 경계가 표시되며, 최종 공개 권리·콘텐츠 승인은 아직 B4 `WAITING`이다.
 
-PR #113 관리자 병합은 필수 리뷰 조건만 병합 순간에 일시 완화하고 즉시 복구했다. 현재 보호 규칙은 Code Owner 리뷰 1명, 필수 검사 `release-verify`·`site-quality-verify`, 마지막 푸시 승인, 대화 해결, 선형 이력, 관리자 강제 적용을 모두 유지한다. GitHub Pages 환경도 `can_admins_bypass=false`로 설정해 관리자 우회를 차단했다. 현재 열린 PR은 없다.
+PR #116·#117·#118 관리자 병합은 필수 리뷰 조건만 병합 순간에 일시 완화하고 즉시 복구했다. 현재 보호 규칙은 Code Owner 리뷰 1명, 필수 검사 `release-verify`·`site-quality-verify`, 마지막 푸시 승인, 대화 해결, 선형 이력, 관리자 강제 적용을 모두 유지한다. GitHub Pages 환경도 `can_admins_bypass=false`로 설정해 관리자 우회를 차단했다. 현재 열린 PR은 없다.
 
 전체 목표는 기술 공개 단계까지 진행됐지만 운영 완료로 승격하지 않는다. B2(최종 제품 표시), B3(후기 재게시 권한), B4(티저 공개 승인), C2(Worker·D1 운영과 비밀·복구 검증), E1(실구매 대사)은 사람 승인 또는 외부 운영 입력을 기다린다. Worker/D1 필수 Secret이 없는 환경에서는 정적 Pages만 공개하고 `STATIC_ONLY`로 기록한다. 이 경계를 유지하는 것이 완료 판정을 과장하지 않고 감사 가능성을 보존하는 기준이다.
 
-## 2026-09-21 티저 승인 증빙 경계 보강 — 후보 작업 중
+## 2026-09-21 배포 복구 증빙·소비자 행동 순서 보강 — main 반영 완료
+
+PR [#117](https://github.com/KRAdavid/cellpinda_GABA/pull/117)은 결과 화면의 CTA 순서를 소비자 행동 흐름에 맞게 정리하고, 실패한 Pages·smoke·Worker 게이트의 후보 SHA·직전 성공 Pages 배포·복구 절차를 `release-recovery-packet.json`으로 항상 보존하도록 배포 artifact를 강화했다. 복구는 자동 실행하지 않고 사람 승인과 보호된 main 경로를 요구한다.
+
+첫 배포 run [35575718469](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35575718469)는 이전 smoke 문자열 검증이 새 `바로 시작하기` 문구를 인식하지 못해 `RELEASE_FAILED`가 됐다. 원인을 [PR #118](https://github.com/KRAdavid/cellpinda_GABA/pull/118)에서 검증기와 소비자 문구의 계약으로 맞췄고, 후속 run [35576241688](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35576241688)에서 라이브 smoke와 복구 패킷 생성·검증이 모두 통과했다.
+
+## 2026-09-21 티저 승인 증빙 경계 보강 — main 반영 완료
 
 티저를 `APPROVED`로 전환할 때 승인 체크리스트의 각 항목에 독립 검토자, 승인 시각, 근거 파일 SHA-256, 승인 범위를 함께 기록하도록 검증을 강화했다. 현재 티저는 `PREVIEW` 상태이므로 증빙이 없는 상태를 유지하며, 공개 미디어 URL로 자동 전환하지 않는다.
 
 ## 2026-09-21 TF heartbeat 신선도 배포 게이트 보강 — main 반영 완료
 
-배포 검증에 `validate:tf-pulse-freshness`를 추가해 TF heartbeat가 없거나 8시간보다 오래되면 Pages 게시 전 `release-verify`가 실패하도록 했다. 신선한 heartbeat만 배포 후보를 통과시키며, 이 검사는 사람 승인 게이트(B2·B3·B4·C2·E1)를 자동으로 완료시키지 않는다. 신선·만료 경계 테스트와 전체 회귀 테스트를 통과했고, main 배포 run `35573571534`에서 실제 게이트 통과를 확인했다.
+배포 검증에 `validate:tf-pulse-freshness`를 추가해 TF heartbeat가 없거나 8시간보다 오래되면 Pages 게시 전 `release-verify`가 실패하도록 했다. 신선한 heartbeat만 배포 후보를 통과시키며, 이 검사는 사람 승인 게이트(B2·B3·B4·C2·E1)를 자동으로 완료시키지 않는다. 신선·만료 경계 테스트와 전체 회귀 테스트를 통과했고, 최신 main 배포 run `35576241688`에서 실제 게이트 통과를 확인했다.
 
 ## 2026-09-21 소비자 CTA·Pages 승인 경계 최종 반영 — `c1fda83`
 
