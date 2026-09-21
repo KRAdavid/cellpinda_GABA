@@ -47,6 +47,7 @@
 .research-library-card{padding:3.2rem 0}
 .research-library-kind{display:flex;align-items:center;gap:9px;margin:0;color:#486356;font-size:.78rem;letter-spacing:.06em}
 .research-library-kind-mark{width:8px;height:8px;border-radius:50%;background:#14764e;box-shadow:0 0 0 5px #e8f1e7;flex:0 0 auto}
+.research-library-study-boundary{display:inline-flex;width:max-content;max-width:100%;margin:10px 0 0;padding:5px 9px;border-radius:999px;background:#f0f5f1;color:#3f5d4a;font-size:.78rem;line-height:1.4;font-weight:650;overflow-wrap:anywhere}
 .research-library-card h3{max-width:30ch;font-size:clamp(1.45rem,2.7vw,2.2rem);line-height:1.38;margin:.9rem 0 1.25rem}
 .research-library-consumer-summary{max-width:62ch;margin:0;line-height:1.85;font-size:1.05rem;color:#18382b}
 .research-library-consumer-summary strong{display:block;margin:0 0 .45rem;color:#14764e;font-size:.74rem;letter-spacing:.1em;font-weight:650}

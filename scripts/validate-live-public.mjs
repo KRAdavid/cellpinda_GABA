@@ -296,7 +296,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(metaContent(productSharePageText, 'property', 'og:image:height'), '630', 'live product Open Graph image height is invalid');
     const productSchema = jsonLd(productSharePageText);
     const productSchemaNode = Array.isArray(productSchema?.['@graph']) ? productSchema['@graph'].find(node => node?.['@type'] === 'Product') : null;
-    assert.ok(productSchema?.['@context'] === 'https://schema.org' && productSchemaNode?.name === '셀핀다 가바 1500' && productSchemaNode.category === '기타가공품', 'live product page Product structured data is missing or unsafe');
+    assert.ok(productSchema?.['@context'] === 'https://schema.org' && productSchemaNode?.name === '셀핀다 가바 1500' && !('category' in productSchemaNode), 'live product page Product structured data is missing or contains unverified classification');
     assert.equal(productSchemaNode.image, `${base}/assets/product-composition-1500.png`, 'live product Product image is invalid');
     assert.equal(productSchemaNode.sameAs, approvedSmartStoreUrl, 'live product Product destination is invalid');
     assert.ok(!productSchemaNode.offers && !productSchemaNode.aggregateRating && !productSchemaNode.review, 'live product Product structured data must not invent price, rating or review claims');
@@ -334,7 +334,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(pageText.includes(approvedReviewText), 'live static fallback must expose the approved consumer review guidance');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
-    assert.equal(content.products[0].category, '기타가공품', 'live export must match the user-confirmed product type');
+    assert.equal(content.products[0].category, '판매처 표기 기준 · 기타가공품', 'live export must keep the product type source-qualified until label confirmation');
     assert.equal(content.products[0].name, '셀핀다 가바 1500', 'live product must use the current confirmed product name');
     assert.equal(content.products[0].servings, 30, 'live product must preserve the confirmed package count');
     assert.ok(!('amountMg' in content.products[0]) && !('totalG' in content.products[0]), 'live export must not imply unverified per-packet GABA or net-content values');

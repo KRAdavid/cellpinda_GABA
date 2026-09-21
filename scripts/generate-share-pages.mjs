@@ -83,7 +83,6 @@ const productSchema = JSON.stringify({
       '@type': 'Product',
       '@id': `${productCanonical}#product`,
       name: '셀핀다 가바 1500',
-      category: product.category,
       brand: { '@type': 'Brand', name: '셀핀다' },
       image: productImage,
       url: productCanonical,
@@ -102,7 +101,7 @@ const productShareHtml = `<!doctype html>
 </head><body>
 <main style="max-width:720px;margin:0 auto;padding:40px 24px;font-family:Arial,'Malgun Gothic',sans-serif;line-height:1.7;color:#18382b">
 <p>셀핀다 발효가바 · 제품 구성</p><h1>${escapeHtml(productTitle)}</h1>
-<img src="../assets/product-composition-1500.svg" alt="셀핀다 가바 1500, ${product.servings}포 한 상자 구성, ${product.category} 식품 유형" style="display:block;width:min(100%,560px);height:auto;margin:24px auto">
+<img src="../assets/product-composition-1500.svg" alt="셀핀다 가바 1500, ${product.servings}포 한 상자 구성 안내" style="display:block;width:min(100%,560px);height:auto;margin:24px auto">
 <p>셀핀다 가바 1500 · ${product.servings}포 구성입니다. 낱포 표시는 제품 포장에서, 가격과 재고는 스마트스토어에서 확인해 주세요.</p>
 <p><a href="${productDestination}" style="color:#158457;font-weight:700">사이트에서 제품 구성 보기 →</a></p>
 <p><a href="${escapeHtml(productStoreUrl)}" style="color:#158457;font-weight:700">스마트스토어에서 판매 정보 보기 ↗</a></p>

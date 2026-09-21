@@ -63,6 +63,8 @@ requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서
 requireMatch(research, /research-library-next-step[\s\S]*metadata\.hopefulTakeaway/, 'research cards must show the approved consumer next step after the study facts');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
 requireMatch(hero, /잠과 휴식 1분 체크/, 'the first screen must have one clear action to start the check');
+requireMatch(hero, /<a className="button" href="#rhythm"[\s\S]*?잠과 휴식 1분 체크/, 'the first screen check CTA must remain the single primary action');
+requireMatch(hero, /<a className="hero-secondary-link" href="#consumer-reel"[\s\S]*?GABA 한 장씩 보기/, 'the first screen GABA story CTA must remain a secondary link');
 requireMatch(hero, /className="hero-photo"[^>]*fetchPriority="high"[^>]*loading="eager"[^>]*decoding="sync"/, 'the first-screen visual must be decoded eagerly for a stable public first impression');
 requireMatch(styles, /\.hero-photo\{z-index:0;display:block\}[\s\S]*?\.hero-copy\{z-index:1\}/, 'the first-screen image and copy layers must remain explicitly ordered');
 requireMatch(app, /특허 문서의 기술 예시[\s\S]*?특허 문서에 GABA를 만드는 방법[\s\S]*?특허 문서 보기/, 'fermentation visual must be labeled as a patent example and link to its source');
@@ -190,9 +192,9 @@ requireMatch(app, /className="hero-photo"[^>]+alt="[^"]+"/, 'hero image must exp
 requireMatch(app, /<ArrowRight(?:\s+size=\{18\})?\s+aria-hidden="true"\s*\/>/, 'decorative ArrowRight icons must be hidden from assistive technology');
 requireMatch(app, /<ArrowUpRight\s+size=\{18\}\s+aria-hidden="true"\s*\/>/, 'decorative ArrowUpRight icons must be hidden from assistive technology');
 requireMatch(app, /menu\?<X\s+aria-hidden="true"\s*\/>:<Menu\s+aria-hidden="true"\s*\/>/, 'decorative menu icons must be hidden from assistive technology');
-requireMatch(app, /product-visual-with-images[\s\S]*?aria-label=\{/, 'product imagery must expose an accessible product-group label');
-requireMatch(app, /product-gaba1500-styled\.webp[\s\S]*?product-gaba1500-front\.webp/, 'GABA 1500 product card must include the supplied styled and front package images');
-requireMatch(app, /product-image-main[\s\S]*?alt=\{`\$\{p\.name\} 연출 이미지`\}[\s\S]*?product-image-thumbs[\s\S]*?alt=\{`\$\{p\.name\} 정면 이미지`\}/, 'product gallery images must provide consumer-readable alternative text');
+if (/productImages|product-gaba1500-(?:styled|front)\.webp|product-image-main|product-image-thumbs/.test(app)) fail('consumer product UI must not expose unverified package-label imagery');
+requireMatch(app, /product-visual" role="group" aria-label=\{`\$\{p\.name\}, \$\{p\.servings\}포 한 상자 구성`\}/, 'product composition visual must expose a neutral accessible group label');
+requireMatch(app, /product-portion-grid/, 'product composition visual must show a neutral portion illustration');
 requireMatch(app, /function ExperienceLoading\([\s\S]*?aria-busy="true"[\s\S]*?experience-loading-grid/, 'async content must show a visual loading state without leaving the first screen blank');
 requireMatch(styles, /\.sr-only\{position:absolute!important[\s\S]*?\.experience-loading-grid\{display:grid/, 'screen-reader-only content and visual loading state must have shared styles');
 if (/<Suspense fallback=\{null\}><(?:GabaStory|TeaserPreview|GabaResearchHighlights|BrainLoadEvidence|PurchaseQuestions|ReviewExperience|SevenDayChallenge)/.test(app)) fail('below-fold consumer sections must keep a visible loading state while their lazy bundles arrive');
@@ -236,8 +238,11 @@ requireMatch(gabaResearchHighlights, /(?:GABA를 먹은 사람 연구에서|일�
 for (const marker of ['잠드는 시간과 수면 기록', '머리를 많이 쓴 뒤 뇌파·활력 점수의 감소 폭을 비교했어요', '쉰 날·운동한 날 혈액 속 성장호르몬을 비교했어요', '그림으로 한눈에 보기', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight[\s\S]*claim\.metadata\?\.consumerFinding[\s\S]*claim\.publicText/, 'post-teaser research highlights must read reviewed consumer copy and tolerate an older local API snapshot');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
+requireMatch(gabaResearchHighlights, /gaba-research-highlight-boundary-badge[\s\S]*일반 GABA 연구 · 셀핀다 완제품 시험 아님/, 'homepage research highlights must repeat the product-study boundary on each card');
+requireMatch(gabaResearchHighlights, /research-powers-2008[\s\S]*혈액 속 수치를 섭취 후 90분 동안 관찰한 결과[\s\S]*성장·근육 효과를 확인한 연구는 아니며/, 'the growth-hormone highlight must keep its measurement scope beside the result');
 for (const marker of ['연구 조건: 하루 100mg', '연구 조건: 100mg 한 번', '연구 조건: 3g 한 번']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
+requireMatch(research, /research-library-study-boundary[\s\S]*일반 GABA 연구 · 셀핀다 완제품 시험 아님/, 'research cards must show a compact product-study boundary badge');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
 for (const marker of ['잠이 부족하면', '집중·기억·판단이 흔들릴 수 있어요.', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 if (/내 생활에서/.test(brainLoadEvidence)) fail('brain-load evidence must label its practical suggestion without implying that a general study finding directly describes the visitor');

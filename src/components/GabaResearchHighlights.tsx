@@ -67,9 +67,11 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
           if (!summary || !result) return null;
           return <article className="gaba-research-highlight-card" key={id}>
           <div className="gaba-research-highlight-top"><span className="gaba-research-highlight-icon"><Icon size={21} strokeWidth={1.8} aria-hidden="true" /></span><span>{label}</span></div>
+          <p className="gaba-research-highlight-boundary-badge">일반 GABA 연구 · 셀핀다 완제품 시험 아님</p>
           <h3>{title}</h3>
           <p className="gaba-research-highlight-summary">{summary}</p>
           <div className="gaba-research-highlight-result"><strong>연구에서 관찰된 내용</strong><span>{result}</span></div>
+          {id === 'research-powers-2008' ? <p className="gaba-research-highlight-scope"><strong>읽는 법</strong>혈액 속 수치를 섭취 후 90분 동안 관찰한 결과예요. 성장·근육 효과를 확인한 연구는 아니며, 3g은 셀핀다 제품 섭취량의 근거가 아니에요.</p> : null}
           <ul className="gaba-research-highlight-facts" aria-label="연구 조건">{facts.map(fact => <li key={fact}>{fact}</li>)}</ul>
           <a className="text-link" href={`${import.meta.env.BASE_URL}research/#${id}`} onClick={() => onEvent?.('research_highlight_opened', {researchId: id, path: '/research-highlights'})}>그림으로 한눈에 보기 <span aria-hidden="true">↗</span></a>
         </article>;
