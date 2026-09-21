@@ -11,13 +11,13 @@
 | 항목 | 확인값 |
 | --- | --- |
 | 공개 주소 | `https://kradavid.github.io/cellpinda_GABA` |
-| 라이브 candidate SHA | `82a5f977eb715705db3481f3d029be03fcfd8a7d` |
-| manifest 생성 시각 | `2026-09-21T18:21:48.512Z` |
+| 라이브 candidate SHA | `645061ed278911fe2feb7c9f40c40c50f57cce82` |
+| manifest 생성 시각 | `2026-09-21T19:46:20.906Z` |
 | 실행 모드 | `static` |
 | 공개 경로 | 10개 |
 | 공개 주장·연구·제품·후기 | 12개 · 6건 · 1개 · 1개 |
 | 티저 | `HOLD`, 공개 URL 없음 |
-| 최근 배포 | [run 35637789496](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35637789496), `success` |
+| 최근 배포 | [run 35646822997](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35646822997), `success` |
 
 라이브 manifest의 자동 검사는 다음 7개가 모두 `true`다.
 
@@ -28,6 +28,7 @@
 ## 화면·콘텐츠 확인
 
 - 390px 모바일과 데스크톱 화면에서 가로 넘침과 콘솔 오류가 없다.
+- PR #168에서 데스크톱 결과 순서를 `챌린지 → 결과·제품/후기`로 고정했고, 독립 모바일 감리에서 발견한 390px grid 회귀를 PR #169에서 단일 열 자동 행으로 복원했다. 최신 라이브에서 제품 CTA 폭 312px, 후기 CTA 폭 226.8px, 가로 오버플로 0을 확인했다.
 - 결과 화면 바로 아래에 `뇌컨디션 확인 챌린지 해보기`가 노출되고, 클릭하면 챌린지 제목으로 포커스가 이동한다.
 - Powers 연구 카드는 `GABA 3g을 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 연구`로 표시된다.
 - 카드의 범위 안내는 `성장·근육 발달 효과를 확인한 연구가 아니며`, `3g은 셀핀다 제품 섭취량의 근거가 아니다`라고 연구 조건과 제품 정보를 분리한다.
@@ -44,7 +45,7 @@
 - 선형 이력·대화 해결: 활성
 - force push·브랜치 삭제: 차단
 
-PR #161은 작성자와 인증 계정이 같은 상태에서 독립 Code Owner 승인을 만들 수 없었기 때문에, 필수 검사를 확인한 뒤 관리자 우회를 병합에만 일시 적용하고 즉시 복구했다. 이 기록은 독립 승인을 의미하지 않는다.
+PR #168·#169는 작성자와 인증 계정이 같은 상태에서 독립 Code Owner 승인을 만들 수 없었기 때문에, 필수 검사를 확인한 뒤 관리자 우회를 병합에만 일시 적용하고 즉시 복구했다. 이 기록은 독립 승인을 의미하지 않는다.
 
 ## 재현한 검증
 
@@ -55,6 +56,7 @@ pnpm run validate:ui-contract
 pnpm test                         # 120/120
 pnpm run build
 pnpm run validate:live-public
+pnpm run audit:goal -- --json
 pnpm audit --prod --audit-level=high
 git diff --check
 ```
