@@ -326,6 +326,8 @@ requireMatch(teaser, /src=\{preview\.url!?\}/, 'teaser iframe must use the appro
 requireMatch(teaser, /teaser-card--hold/, 'teaser hold state must use a compact placeholder before a public video is available');
 requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hold[\s\S]*min-height: 220px/, 'teaser hold placeholder must stay compact on mobile');
 requireMatch(teaser, /teaser-hold-actions[\s\S]*GABA 연구 쉽게 보기[\s\S]*가바 1500 구성 보기/, 'teaser hold state must offer a clear research and product next action while the video is pending');
+requireMatch(teaser, /href="#gaba-research-highlights"[\s\S]*GABA 연구 쉽게 보기/, 'teaser GABA research action must land on the GABA research highlights section');
+if (/href="#brain-load-evidence"[\s\S]*GABA 연구 쉽게 보기/.test(teaser)) fail('teaser GABA research action must not land on the separate general health evidence section');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
