@@ -1,5 +1,11 @@
 # 공개 Pages UI 검증 기록
 
+## 2026-09-21 최신 라이브와 시각형 리엘 후보 감리
+
+최신 라이브 `9918f40e18194a6b01f8e1dd9e19b4807d3aa7b4`의 [35578802038](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35578802038)에서 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 `release-manifest.json`은 HTTP 200이며 10개 경로·hash 62개·연구 6건·제품 1개·후기 목적지 1개·Smart Store only·750 제거·티저 `PREVIEW`를 확인했다. 보호 규칙은 Code Owner 1명, 필수 검사, 관리자 적용, force push/deletion 차단으로 복구되어 있다.
+
+작업트리의 `ConsumerGabaReel` 후보는 11장 구성의 전환 지연과 반복 노출을 확인한 뒤 4장으로 축소했다. `지금 내 상태 → 쉬어야 하는 이유 → 일반 GABA 연구 → 1분 체크` 순서로 리듬 체크 뒤에 배치했으며, 390px CDP에서 가로 overflow 0·콘솔 오류 0·접근성 이름 누락 0을 확인했다. `prefers-reduced-motion` 스크롤, 리엘 rail 포커스 표시, 히어로에서 리엘로 이동하는 지연 앵커를 추가했다. 후보는 아직 라이브에 반영되지 않았다.
+
 ## 최신 라이브 확정 감리 — 2026-09-21 14:39 KST
 
 PR #109 병합 커밋 `8dc09e22b0a4d458e95a36946462ecd5d12a39d5`가 Pages에 게시된 뒤, 문서 갱신을 포함한 최신 [35569406055](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35569406055)의 release verify·라이브 smoke·release status가 성공했다. 현재 `/release-manifest.json`은 HTTP 200이며 candidate SHA `2fe1776392019ba109e8a500e5a203bab66a8e1f`, 정적 모드·10개 공개 경로·62개 파일 hash·연구 6건·제품 1개·후기 목적지 1개가 라이브와 일치한다. Smart Store 단일 목적지, 750 제품 제거, 내부 운영 JSON 제외, 티저 `PREVIEW` 경계와 공유 결과 단일 착지·티저 로딩 fallback 단일 노출을 재확인했다.
