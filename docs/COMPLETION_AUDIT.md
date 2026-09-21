@@ -2,11 +2,11 @@
 
 > **현재 감사 기준(2026-09-22):** [공개 배포 감사 스냅샷](RELEASE_AUDIT_20260922.md)을 먼저 확인하세요. 이 문서의 아래 항목은 변경 당시의 후보·검토 로그이며, 현재 공개 판정은 라이브 `release-manifest.json`, 최신 성공 배포 run, 현재 branch protection을 우선합니다.
 
-## 현재 확정 공개 상태 — 2026-09-22 · 라이브 기준
+## 현재 공개 상태 포인터 — 2026-09-22
 
-이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 현재 공개 판정은 [공개 release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 `candidateSha` `c241eb6c1edbc33de023e38247578005413a3844`, 생성 시각, 검사 결과와 [최신 성공 배포 run 35654735285](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35654735285)을 우선한다. 문서 병합 자체가 새 candidate SHA를 만들 수 있으므로 이후에도 라이브 manifest를 최종 기준으로 삼는다. PR [#174](https://github.com/KRAdavid/cellpinda_GABA/pull/174)에서 감사 문서 상단 스냅샷과 관리자 우회·보호 규칙 복원 이력을 최신화했다. 결과 화면은 `내 상태 확인 → 오늘 해볼 행동(뇌컨디션 확인 챌린지·제품·후기) → 친구 공유` 순서로 정리했고, 1분 체크 전에는 챌린지를 숨겨 다음 행동을 하나로 고정했다. 직접 초대 경로에서는 챌린지를 바로 열 수 있다. 히어로 아래에는 4장 시각형 GABA 리엘을 배치해 리듬 체크 다음에 상태·휴식·일반 연구·제품 구성 흐름을 짧게 보여주며, `/products/` 직접 진입도 제품 섹션에 자동 안착한다.
+이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 현재 공개 판정은 [공개 release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 `candidateSha`·생성 시각·검사 결과와 [최신 성공 배포 목록](https://github.com/KRAdavid/cellpinda_GABA/actions)을 우선한다. 문서 병합 자체가 새 candidate SHA를 만들 수 있으므로 현재 SHA와 run 번호를 이 문서에 복제하지 않는다. PR [#174](https://github.com/KRAdavid/cellpinda_GABA/pull/174)·[#175](https://github.com/KRAdavid/cellpinda_GABA/pull/175)·[#176](https://github.com/KRAdavid/cellpinda_GABA/pull/176)에서 감사 문서 상단 스냅샷과 관리자 우회·보호 규칙 복원 이력을 최신화했다. 결과 화면은 `내 상태 확인 → 오늘 해볼 행동(뇌컨디션 확인 챌린지·제품·후기) → 친구 공유` 순서로 정리했고, 1분 체크 전에는 챌린지를 숨겨 다음 행동을 하나로 고정했다. 직접 초대 경로에서는 챌린지를 바로 열 수 있다. 히어로 아래에는 4장 시각형 GABA 리엘을 배치해 리듬 체크 다음에 상태·휴식·일반 연구·제품 구성 흐름을 짧게 보여주며, `/products/` 직접 진입도 제품 섹션에 자동 안착한다.
 
-라이브 검증에서 정적 모드·공개 경로 10개·hash 파일 65개·승인 연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·공유 경로 6개를 확인했다. 구매·후기 목적지는 지정된 Smart Store 한 곳으로 고정했고 750 제품과 내부 운영 스냅샷은 공개본에서 제외했다. 개인 기록 경로는 `noindex, nofollow, noarchive`와 robots 차단을 적용했고, 결과 화면의 제품·후기 CTA를 모바일 우선 영역에 묶었다. 외부 티저는 B4 승인 전 `HOLD`로 전환해 공개 URL·iframe을 제거했다. `deploy-worker`는 운영 비밀값이 없어 건너뛰었고 정적 Pages만 공개했으며, B2·B3·B4·C2·E1은 사람 또는 외부 운영 입력을 기다린다.
+라이브 검증에서 정적 모드·공개 경로 10개·hash 파일 63개·승인 연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·공유 경로 6개를 확인했다. 구매·후기 목적지는 지정된 Smart Store 한 곳으로 고정했고 750 제품과 내부 운영 스냅샷은 공개본에서 제외했다. 개인 기록 경로는 `noindex, nofollow, noarchive`와 robots 차단을 적용했고, 결과 화면의 제품·후기 CTA를 모바일 우선 영역에 묶었다. 외부 티저는 B4 승인 전 `HOLD`로 전환해 공개 URL·iframe을 제거했다. `deploy-worker`는 운영 비밀값이 없어 건너뛰었고 정적 Pages만 공개했으며, B2·B3·B4·C2·E1은 사람 또는 외부 운영 입력을 기다린다.
 
 PR #147은 필수 검사 통과 후 동일 계정의 마지막 푸시 승인 제한으로 관리자 병합을 진행했고, 병합 순간에만 `enforce_admins`를 일시 완화한 뒤 즉시 복구했다. 현재 보호 규칙은 Code Owner 리뷰 1명, 필수 검사 `release-verify`·`site-quality-verify`, 관리자 강제 적용을 유지한다. 이 관리자 우회는 독립 Code Owner 승인을 대체한 운영 기록이며, 실제 독립 승인이 완료됐다고 해석하지 않는다. PR #147에서는 결과 직후 행동·제품·후기 영역을 묶고, 완료 상태의 리엘 문구를 제품·후기 안내로 바꾸며, 게임 결과 전환 시 키보드 초점을 결과 제목으로 이동했다. 제품·연구·개인 기록 쿼리 화면의 canonical·OG·robots·구조화 데이터도 각 화면에 맞게 갱신했다.
 
@@ -916,3 +916,4 @@ TF pulse가 축약된 후보 검사만으로 보호된 `release-verify`·`site-q
 ## 2026-09-20 운영 문서와 TF 원장 수치 정합성 보강
 
 운영 문서 일부가 최신 `data/tf-role-registry.json`의 8개 역할군과 `data/task-graph.json`의 15개 작업을 7개·14개로 설명하던 드리프트를 확인했다. `docs/OPS_MVP.md`와 `docs/TF_BOARD.md`를 일러스트·정보시각화 역할까지 포함한 현재 책임 구조와 맞췄고, `scripts/validate-ops-docs.mjs`를 build에 연결해 역할 수·업무 수·공개 큐 범위가 다시 어긋나면 배포 검증이 실패하도록 했다.
+
