@@ -1,12 +1,12 @@
 # 중간 구현 상태 — 2026-09-21
 
-## 현재 확정 공개 상태 — 2026-09-21 22:15 KST
+## 현재 확정 공개 상태 — 2026-09-21 23:11 KST
 
-관리자 병합으로 PR #125·#126·#127·#128·#129·#130·#132·#134·#135·#136·#137·#138·#139·#141·#143·#144를 main에 반영한 뒤, 보호 규칙을 매번 즉시 복구했다. 현재 공개 확인 스냅샷은 main `e3cacbb300b8ed9184874e899ff3af5ced1e1105`, 배포 run [35603667470](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35603667470)이며 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 최신 공개 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답과 `candidateSha`를 우선한다. 문서 전용 병합 뒤에는 candidate SHA가 달라질 수 있으므로 이 스냅샷 SHA를 영구적인 최신값으로 사용하지 않는다. 1분 체크 전 챌린지 비노출, 결과 후 챌린지 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
+PR #147을 관리자 병합한 뒤 보호 규칙을 즉시 복구했다. 현재 공개 확인 스냅샷은 main `bb30d946d0f0ebb29bb39100b98e0a7713bbff44`, [배포 run 35609486628](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35609486628)이며 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 최신 공개 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답과 `candidateSha`를 우선한다. 문서 전용 병합 뒤에는 candidate SHA가 달라질 수 있으므로 이 스냅샷 SHA를 영구적인 최신값으로 사용하지 않는다. 1분 체크 전 챌린지 비노출, 결과 후 오늘 해볼 행동 패널, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
 
 라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 65개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `HOLD`·외부 URL 없음을 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 65개·provenance 일치를 통과했다. 390px·1440px 감리에서 P0/P1 결함·가로 넘침·콘솔 오류는 확인되지 않았다.
 
-현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 마지막 푸시 승인, 선형 이력, 대화 해결, `enforce_admins`가 모두 활성이다. 제품 섹션 CTA는 가격을 고정하지 않고 `가바 1500 제품 구성 보기`로 통일했다. 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트이며 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
+라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 65개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `HOLD`·외부 URL 없음을 확인한다. 현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 관리자 강제 적용이 모두 활성이다. `deploy-worker`는 운영 비밀값 부재로 건너뛰었으며, 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트라 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
 
 이 절 아래의 후보·과거 실행 기록은 당시 상태를 보존하기 위한 감사 로그다. 현재 공개 판정은 이 절, 라이브 `release-manifest.json`, 최신 배포 run을 우선하며 아래의 과거 `OPEN`, `404`, `후보` 표현을 현재 상태로 해석하지 않는다.
 
