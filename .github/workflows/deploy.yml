@@ -53,6 +53,8 @@ jobs:
         run: pnpm run preflight:deploy
       - name: Audit active Goal Contract and gates
         run: node scripts/audit-goal.mjs --json | tee goal-audit.json
+      - name: Require fresh TF pulse
+        run: pnpm run validate:tf-pulse-freshness
       - name: Build GitHub Pages bundle
         env:
           VITE_BASE_PATH: /cellpinda_GABA/
