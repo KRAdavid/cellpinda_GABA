@@ -63,6 +63,8 @@ requireMatch(research, /metadata\.consumerFindingFirst[\s\S]*사람 연구에서
 requireMatch(research, /research-library-next-step[\s\S]*metadata\.hopefulTakeaway/, 'research cards must show the approved consumer next step after the study facts');
 requireMatch(app, /<small className="product-category">\{p\.category\}<\/small>/, 'the product category shown to consumers must come from synchronized product data');
 requireMatch(hero, /잠과 휴식 1분 체크/, 'the first screen must have one clear action to start the check');
+requireMatch(hero, /<a className="button" href="#rhythm"[\s\S]*?잠과 휴식 1분 체크/, 'the first screen check CTA must remain the single primary action');
+requireMatch(hero, /<a className="hero-secondary-link" href="#consumer-reel"[\s\S]*?GABA 한 장씩 보기/, 'the first screen GABA story CTA must remain a secondary link');
 requireMatch(hero, /className="hero-photo"[^>]*fetchPriority="high"[^>]*loading="eager"[^>]*decoding="sync"/, 'the first-screen visual must be decoded eagerly for a stable public first impression');
 requireMatch(styles, /\.hero-photo\{z-index:0;display:block\}[\s\S]*?\.hero-copy\{z-index:1\}/, 'the first-screen image and copy layers must remain explicitly ordered');
 requireMatch(app, /특허 문서의 기술 예시[\s\S]*?특허 문서에 GABA를 만드는 방법[\s\S]*?특허 문서 보기/, 'fermentation visual must be labeled as a patent example and link to its source');
