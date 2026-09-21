@@ -20,3 +20,4 @@
 .gaba-research-highlights-footer .button{white-space:nowrap}
 @media(max-width:800px){.gaba-research-highlights{padding-block:64px}.gaba-research-highlights-grid{grid-template-columns:1fr}.gaba-research-highlight-card{min-height:0}.gaba-research-highlights-footer{align-items:flex-start;flex-direction:column}.gaba-research-highlights-footer .button{width:100%;justify-content:center}}
 @media(max-width:520px){.gaba-research-highlights-head>p{margin-top:4px}.gaba-research-highlight-card{padding:21px}.gaba-research-highlight-card h3{font-size:20px}.gaba-research-highlights-boundary{align-items:flex-start}}
+@media(min-width:801px){.gaba-research-highlight-card h3{min-height:4.05em}}
