@@ -218,7 +218,10 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(!/한 포 1,500 mg|전체 45 g/.test(productSharePageText), 'live product share route must omit unverified label amounts');
     const moduleSources = [...pageText.matchAll(/<script[^>]+type="module"[^>]+src="([^"]+)"/gi)].map(match => match[1]).filter(Boolean);
     assert.ok(moduleSources.length > 0, 'live root must expose a module bundle for the consumer UI');
-    const moduleBundles = await Promise.all(moduleSources.map(async source => {
+    const releaseBundleSources = Object.keys(releaseManifest.fileHashes || {})
+      .filter(relativePath => relativePath.startsWith('assets/') && relativePath.endsWith('.js'));
+    const consumerBundleSources = [...new Set([...moduleSources, ...releaseBundleSources])];
+    const moduleBundles = await Promise.all(consumerBundleSources.map(async source => {
       const url = new URL(source, `${base}/`);
       const response = await fetch(`${url.href}${url.search ? '&' : '?'}release-smoke=1`);
       if (!response.ok) throw new Error(`consumer bundle returned HTTP ${response.status}`);
@@ -233,7 +236,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     }
     assert.ok(!consumerBundle.includes('운영 큐') && !consumerBundle.includes('운영판을 여는 중입니다.'), 'live consumer bundle must keep the internal operations UI in its lazy route chunk');
     assert.ok(consumerBundle.includes('뇌컨디션 확인 챌린지') && consumerBundle.includes('1분 색 신호 게임'), 'live consumer bundle must contain the current focus challenge name and its simple game description');
-    assert.ok(consumerBundle.includes('잠드는 시간이 비교 캡슐을 먹은 주보다 평균 5분 짧게 기록됐어요.') && consumerBundle.includes('머리를 많이 쓴 뒤에도 뇌파와 활력이 더 유지됐어요') && consumerBundle.includes('연구에서 관찰된 내용') && consumerBundle.includes('연구에서 먹은 양: 하루 100mg') && consumerBundle.includes('연구에서 먹은 양: 100mg 1회') && consumerBundle.includes('연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요.'), 'live consumer bundle must preserve plain-language research highlights and separate research amounts from product servings');
+    const publicResearchPayload = JSON.stringify(content.claims);
+    assert.ok(publicResearchPayload.includes('비교 캡슐을 먹은 주보다 평균 잠드는 시간이 5분 짧게 기록됐어요.') && publicResearchPayload.includes('뇌파와 활력 점수가 비교 캡슐보다 더 유지된 모습이 기록됐어요.') && publicResearchPayload.includes('연구에서 먹은 양: 하루 100mg'), 'live public research data must preserve plain-language highlights and separate research amounts from product servings');
     assert.ok(consumerBundle.includes('브라우저가 자동 소리를 막았어요.') && consumerBundle.includes('화면 신호로 계속 진행합니다.'), 'live consumer bundle must explain blocked game audio without stopping the visual game');
     assert.ok(consumerBundle.includes('매번 신호 순서가 달라져요') && consumerBundle.includes('초록은 누르고, 빨강은 기다려요') && consumerBundle.includes('뜨면 누르기') && consumerBundle.includes('표시된 색 누르기'), 'live consumer bundle must show the three game rules in direct, visual language');
     assert.ok(consumerBundle.includes('5분 쉰 뒤 한 번 더 하기') && consumerBundle.includes('싱잉볼 소리'), 'live consumer bundle must expose optional rest and breathing-stage singing bowl cues');
