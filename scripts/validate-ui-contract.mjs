@@ -193,7 +193,7 @@ requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is mi
 requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, 'result sharing must invite the recipient to run their own check');
 requireMatch(rhythm, /rhythm-result-challenge[\s\S]*?rhythm-result-commerce[\s\S]*?rhythm-result-invite[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?rhythm-more-share[\s\S]*?결과 카드 공유·저장 등 다른 방법/, 'result actions must guide the visitor from their next action to product, invitation and secondary sharing');
 requireMatch(fatigueGame, /fatigue-game-primary-action[\s\S]*?fatigue-game-onboarding-secondary[\s\S]*?바로 시작하기/, 'the focus challenge start screen must make practice primary and keep direct start and sound controls secondary');
-requireMatch(rhythm, /rhythm-result-commerce[\s\S]*?가바 1500 구성·가격 확인하기[\s\S]*?스마트스토어 구매자 후기 읽기/, 'completed rhythm results must offer the product and approved review destinations together');
+requireMatch(rhythm, /rhythm-result-commerce[\s\S]*?가바 1500 제품 구성 보기[\s\S]*?스마트스토어 구매자 후기 읽기/, 'completed rhythm results must offer the product and approved review destinations together');
 requireMatch(fatigueGame, /fatigue-game-actions[\s\S]*?친구에게 1분 게임 보내기[\s\S]*?5분 쉬고 다시 해보기/, 'fatigue game results must prioritize the rest-and-retry action while keeping the invite secondary');
 requireMatch(rhythm, /내 답변과 점수는 전송되지 않아요/, 'the primary invitation must explain what is not shared');
 if (/rhythm-mobile-share-bar/.test(rhythm + rhythmStyles)) fail('mobile should not show a second competing share bar');
