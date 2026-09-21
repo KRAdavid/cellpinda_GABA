@@ -265,6 +265,8 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 
 ## 2026-09-21 관리자 병합 후 공개본 최종 감리
 
+검증 시각: 2026-09-21 13:46 KST.
+
 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97), [#98](https://github.com/KRAdavid/cellpinda_GABA/pull/98), [#99](https://github.com/KRAdavid/cellpinda_GABA/pull/99)의 병합 후 `main` 공개본 커밋 `831d1fcbd32560d51dedc0ebe4033d4878726482`를 기준으로 다시 확인했다. 관리자 우회는 `enforce_admins`에만 일시 적용하고 병합 직후 복구했으며, 필수 검사·Code Owner·대화 해결·linear history 보호 규칙은 유지된다.
 
 GitHub Actions [35558910726](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35558910726)은 `release-verify`, Pages 게시, live smoke, release-status를 성공으로 완료했다. 라이브 `release-manifest.json`은 HTTP 200이며 candidate SHA가 `831d1fcbd32560d51dedc0ebe4033d4878726482`와 일치한다. 라이브 smoke는 연구 6건·공개 주장 12개·제품 1개·공유 경로 6개·스마트스토어 전용·750 제거·내부 운영 snapshot 제외·티저 `PREVIEW`를 확인했다.
