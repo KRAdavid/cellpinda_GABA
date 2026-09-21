@@ -80,7 +80,17 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
   };
 }
 
-function BrainLoadVisual({ result, showChallenge = false }: { result: RhythmResult; showChallenge?: boolean }) {
+function FocusChallengeCallout() {
+  return <div className="rhythm-result-quick-action rhythm-result-quick-action--wide" aria-label="다음 행동">
+    <div>
+      <p className="rhythm-eyebrow">다음은 1분이에요</p>
+      <p>지금 내 반응을 간단한 게임으로 확인해 보세요.</p>
+    </div>
+    <a className="rhythm-button" href="#focus-game" onClick={focusFocusChallengeHeading}>뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
+  </div>;
+}
+
+function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const { loadScore: score } = result;
   const band = score >= 10 ? 'high' : score >= 5 ? 'watch' : 'low';
   const answerEntries = Object.entries(result.scores);
@@ -96,11 +106,6 @@ function BrainLoadVisual({ result, showChallenge = false }: { result: RhythmResu
   return (
     <div className={`rhythm-load-score rhythm-load-score-${band}`}>
       <div className="rhythm-load-score-heading"><span>지난 7일 답변 기록</span><strong>{score}<small>/ 15</small></strong></div>
-      {showChallenge ? <div className="rhythm-result-quick-action" aria-label="다음 행동">
-        <p className="rhythm-eyebrow">다음은 1분이에요</p>
-        <p>지금 내 반응을 간단한 게임으로 확인해 보세요.</p>
-        <a className="rhythm-button" href="#focus-game" onClick={focusFocusChallengeHeading}>뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
-      </div> : null}
       <div className="rhythm-load-visual">
         <div className="rhythm-load-state" role="img" aria-label={`오늘 내 상태: ${visualCopy.label}`}>
           <div className="rhythm-load-brain" aria-hidden="true"><Brain size={30} strokeWidth={1.7} /><span className="rhythm-load-brain-pulse" /></div>
@@ -535,6 +540,7 @@ export default function RhythmExperience({ onEvent, onResultChange }: RhythmExpe
 
       {type ? (
         <div className="rhythm-result-layout">
+          {!sharedType ? <FocusChallengeCallout /> : null}
           <article className="rhythm-result-card" id="rhythm-result">
             <p className="rhythm-eyebrow">{sharedType ? '친구가 돌아본 생활 장면' : '지난 7일, 내가 돌아본 장면'}</p>
             <h3 ref={resultRef} tabIndex={-1}>{type.name}</h3>
@@ -543,7 +549,7 @@ export default function RhythmExperience({ onEvent, onResultChange }: RhythmExpe
               <p>나도 직접 해보기</p>
               <button type="button" className="rhythm-button" onClick={start}>나도 1분 체크 해보기 <ArrowRight size={18} aria-hidden="true" /></button>
             </div> : null}
-            {result ? <BrainLoadVisual result={result} showChallenge={!sharedType} /> : null}
+            {result ? <BrainLoadVisual result={result} /> : null}
             {signal ? <div className={`rhythm-fatigue-alert rhythm-fatigue-alert-${signal.tone}`} role="status"><AlertTriangle size={23} aria-hidden="true" /><div><p className="rhythm-eyebrow">{signal.label}</p><h4>{signal.heading}</h4><p>{signal.body}</p></div></div> : null}
             {result?.loadLevel === 'high' ? <details className="rhythm-care-guide"><summary>피로가 몇 주째 이어지거나 일상에 지장을 준다면</summary><p>이 점검은 건강 검사가 아니에요. 피로와 잠 문제는 원인이 다양할 수 있으니, 불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.</p></details> : null}
           </article>
