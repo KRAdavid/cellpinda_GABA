@@ -4,9 +4,12 @@ import {promisify} from 'node:util';
 import {dirname, resolve} from 'node:path';
 
 const execFileAsync = promisify(execFile);
-const source = process.argv[2] || 'tf-pulse.json';
-const safeRunSource = process.argv[3] || null;
-const safeValidationSource = process.argv[4] || null;
+// pnpm passes a literal `--` before script arguments. Strip that separator so
+// the documented local command and the CI invocation read the same paths.
+const scriptArgs = process.argv.slice(2).filter(argument => argument !== '--');
+const source = scriptArgs[0] || 'tf-pulse.json';
+const safeRunSource = scriptArgs[1] || null;
+const safeValidationSource = scriptArgs[2] || null;
 const destination = resolve(process.cwd(), 'data/tf-pulse-heartbeat.json');
 const readJson = async relative => JSON.parse(await readFile(resolve(process.cwd(), relative), 'utf8'));
 let pulse;
@@ -16,7 +19,7 @@ try {
   // A local operator should be able to reproduce the CI pulse without first
   // creating the transient tf-pulse.json file. Explicit source paths still
   // fail loudly so a typo cannot silently generate a different heartbeat.
-  if (process.argv[2] || error?.code !== 'ENOENT') throw error;
+  if (scriptArgs[0] || error?.code !== 'ENOENT') throw error;
   const generated = await execFileAsync(process.execPath, [resolve(process.cwd(), 'scripts/tf-pulse.mjs'), '--json'], {encoding: 'utf8'});
   pulse = JSON.parse(generated.stdout.trim());
 }

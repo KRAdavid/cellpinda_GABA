@@ -262,3 +262,15 @@ Chrome 기반 Playwright로 최신 GitHub Pages를 다시 열어 첫 방문부�
 공유 결과에 남아 있던 `계속 작동형`, `잠자리 전환형` 같은 내부 분류명을 실제 생활 장면으로 바꿨다. 공유 HTML·Worker 메타데이터·여섯 개 미리보기 PNG를 같은 매니페스트에서 다시 생성해, `퇴근 뒤에도 생각이 남는 날`, `누워도 잠이 안 오는 날`처럼 링크를 받은 사람도 바로 이해할 수 있게 맞췄다. 점수 시각화는 수면·아침 피로를 포함한 다섯 답변을 특정 휴식 문항으로 오해하지 않도록 `힘들었다고 답한 질문`으로 정리했다.
 
 연구 카드의 방법 중심 제목은 `이 연구에서 본 내용`으로 바꿨고, Powers 연구는 참여자·조건 요약과 관찰된 수치 결과를 별도 문단으로 나눴다. 숫자는 해당 연구의 조건 안에서만 읽히며 셀핀다 완제품 효능이나 권장량으로 확장되지 않는다. `validate:research-copy`, `validate:ui-contract`, 전체 테스트와 production build에서 이 구조를 다시 확인한다.
+
+## 2026-09-21 관리자 병합 후 공개본 최종 감리
+
+검증 시각: 2026-09-21 13:46 KST.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97), [#98](https://github.com/KRAdavid/cellpinda_GABA/pull/98), [#99](https://github.com/KRAdavid/cellpinda_GABA/pull/99)의 병합 후 `main` 공개본 커밋 `831d1fcbd32560d51dedc0ebe4033d4878726482`를 기준으로 다시 확인했다. 관리자 우회는 `enforce_admins`에만 일시 적용하고 병합 직후 복구했으며, 필수 검사·Code Owner·대화 해결·linear history 보호 규칙은 유지된다.
+
+GitHub Actions [35558910726](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35558910726)은 `release-verify`, Pages 게시, live smoke, release-status를 성공으로 완료했다. 라이브 `release-manifest.json`은 HTTP 200이며 candidate SHA가 `831d1fcbd32560d51dedc0ebe4033d4878726482`와 일치한다. 라이브 smoke는 연구 6건·공개 주장 12개·제품 1개·공유 경로 6개·스마트스토어 전용·750 제거·내부 운영 snapshot 제외·티저 `PREVIEW`를 확인했다.
+
+Chromium CDP로 390px·1440px에서 홈·연구·제품·뇌 컨디션 챌린지·공유 결과 흐름을 열었다. 메뉴 버튼과 키보드 포커스, 연구·제품 CTA, 후기 `#REVIEW_DIALOG` 목적지, 자동 진행 문항, focus 게임의 고정 시작 위치를 확인했고 가로 넘침·콘솔 오류·내부 운영 문구 노출은 없었다. Playwright 패키지는 저장소에 없어 Browser plugin 대신 실행 중인 Chromium CDP를 사용했다.
+
+같은 감리에서 `pnpm run tf:pulse:heartbeat -- ...`가 pnpm 구분자 `--`를 경로로 해석하던 운영 자동화 결함을 발견해 `write-tf-pulse-heartbeat.mjs`가 구분자를 제거하도록 보완했다. 명시 경로와 인자 없는 로컬 heartbeat 명령을 모두 재실행해 `safeExecution: MET`, B2·B3·B4·C2·E1 사람 게이트 보존, 상태 지문 불변을 확인했다. 제품 표시 최종 승인·후기 재게시 권한·티저 권리·Cloudflare 운영 비밀값·실주문 대사는 여전히 자동 승인하지 않는다.
