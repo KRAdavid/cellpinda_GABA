@@ -80,6 +80,8 @@ Pages 배포 뒤에는 `validate-live-public.mjs`가 공개 URL을 재시도하�
 
 배포 전에는 `pnpm run preflight:deploy`로 Wrangler 설정, production 산출물, 공개 export 범위와 Cloudflare 필수 Secrets의 존재 여부를 한 번에 확인한다. 검증 workflow도 같은 일반 모드를 실행해 매 push마다 준비도를 기록하고, Secrets가 설정된 Worker 배포 job은 strict 모드로 다시 통과해야 한다. 결과는 비밀값을 출력하지 않고 `READY` 또는 `WAITING`과 누락된 이름만 표시하며, `--strict` 모드에서는 하나라도 준비되지 않으면 실패한다.
 
+main 배포의 `release-status` job은 게시·라이브 smoke·Worker 게이트 중 하나라도 실패해도 `release-recovery-packet.json`을 항상 생성해 릴리스 상태 artifact에 함께 보관한다. 패킷은 현재 후보 SHA와 확인된 직전 Pages 성공 배포를 보여 주어 복구 판단을 빠르게 하지만, 자동 롤백·보호 브랜치 우회·배포 승인을 수행하지 않는다. 운영자는 [배포 복구 절차](./RELEASE_RECOVERY.md)에 따라 승인 후 복구 SHA를 재배포하고 라이브 manifest와 smoke를 다시 확인한다.
+
 ## GABA 목표 TF
 
 현재 목표에는 TF 리드·AI 비서실, 연구·제품 근거, 마케팅·소비자심리, 제품·품질, 표시·규제 검토, 데이터·성과, 데이터·판매처 운영, 스토리·UX·프런트, 재무·QA, 품질감사관을 배정한다. 각 역할은 책임 결과와 권한 범위를 갖고, 품질감사관과 재무·QA는 실행 담당과 독립적으로 둔다. 회의는 정기 잡담이 아니라 근거·가정·반대 의견·대안·승인 필요 여부·다음 조치를 기록해야 할 때만 연다.
