@@ -41,6 +41,8 @@ jobs:
         run: pnpm run sync:data
       - name: Validate active Goal Contract
         run: pnpm run validate:goal
+      - name: Validate external gate evidence
+        run: pnpm run validate:external-gate-evidence
       - name: Validate consumer research copy
         run: pnpm run validate:research-copy
       - name: Typecheck
