@@ -74,6 +74,10 @@ jobs:
               ? `${report.live.products}개`
               : '확인 필요';
             const runtime = report.live?.runtimeMode || '확인 필요';
+            const candidateSha = typeof report.live?.candidateSha === 'string' && report.live.candidateSha.length >= 12
+              ? report.live.candidateSha.slice(0, 12)
+              : '확인 필요';
+            const releaseGeneratedAt = report.live?.generatedAt || '확인 필요';
             const researchCount = Number.isFinite(report.live?.masterRecords)
               ? `${report.live.masterRecords}건`
               : '확인 필요';
@@ -98,6 +102,7 @@ jobs:
               `- 핵심 검증: **${report.coreValid ? 'MET' : '확인 필요'}**`,
               `- 작업 현황: DONE ${counts.DONE || 0} · VERIFYING ${counts.VERIFYING || 0} · WAITING ${counts.WAITING || 0} · FAILED ${counts.FAILED || 0}`,
               `- 공개 사이트: **${report.live?.status || 'UNKNOWN'}** · HTTP ${report.live?.page ?? '확인 필요'} · 런타임 ${runtime} · 제품 ${productCount} · 연구 ${researchCount} · 공유 경로 ${sharePages}`,
+              `- 배포 식별자: candidate ${candidateSha} · manifest 생성 ${releaseGeneratedAt}`,
               `- 공개 번들: hash ${bundleHashes} · 750 제거 ${report.live?.removed750 === true ? '확인' : '확인 필요'} · Smart Store 전용 ${report.live?.smartStoreOnly === true ? '확인' : '확인 필요'}`,
               `- 티저: **${teaserStatus}** · ${teaserUrl}`,
               '',
