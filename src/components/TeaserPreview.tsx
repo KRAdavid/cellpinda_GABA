@@ -82,7 +82,7 @@ export default function TeaserPreview({onEvent}: Props) {
             <strong>영상 공개 준비 중이에요</strong>
             <span>공개가 확정되면 이 자리에서 바로 만나보세요.</span>
             <div className="teaser-hold-actions" aria-label="영상 대신 먼저 볼 내용">
-              <a href="#brain-load-evidence" onClick={() => onEvent?.('research_highlight_opened', {path: '/teaser'})}>GABA 연구 쉽게 보기 <span aria-hidden="true">↘</span></a>
+              <a href="#gaba-research-highlights" onClick={() => onEvent?.('research_highlight_opened', {path: '/teaser'})}>GABA 연구 쉽게 보기 <span aria-hidden="true">↘</span></a>
               <a href="#products" onClick={() => onEvent?.('purchase_cta_click', {productId: 'gaba1500', path: '/teaser'})}>가바 1500 구성 보기 <span aria-hidden="true">↘</span></a>
             </div>
           </div> : frameRequested ? <iframe
