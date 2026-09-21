@@ -2,7 +2,7 @@
 
 ## 현재 확정 공개 상태 — 2026-09-21 19:05 KST
 
-관리자 병합으로 PR #125·#126·#127을 main에 반영한 뒤, 보호 규칙을 매번 즉시 복구했다. 최신 main 커밋은 `66809b11c8a0de1b88c2ce022fa230acb906ef87`이며, 최신 배포 run [35586426989](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35586426989)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 candidate SHA `66809b11c8a0de1b88c2ce022fa230acb906ef87`를 가리키고 HTTP 200이다. 공유 결과 단일 착지, 티저 지연 로딩 fallback, 최신 연구 측정 범위 문구를 현재 애플리케이션 기준으로 삼는다.
+관리자 병합으로 PR #125·#126·#127·#128·#129·#130을 main에 반영한 뒤, 보호 규칙을 매번 즉시 복구했다. 최신 main 커밋은 `dee9c8f6d43df7d87a949396a25faa9e5abf816d`이며, 최신 배포 run [35589008663](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35589008663)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 candidate SHA `dee9c8f6d43df7d87a949396a25faa9e5abf816d`를 가리키고 HTTP 200이다. 1분 체크 전 챌린지 비노출, 결과 후 챌린지 CTA, 연구 결과 소비자 문구와 라이브 smoke 계약을 현재 애플리케이션 기준으로 삼는다.
 
 라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 65개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `PREVIEW`를 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 65개·provenance 일치를 통과했다. 390px·1440px 감리에서 P0/P1 결함·가로 넘침·콘솔 오류는 확인되지 않았다.
 
