@@ -24,6 +24,8 @@ canonical 업무 그래프의 현재 상태는 `pnpm run tf:pulse`로 다시 읽
 
 전체 목표의 현재 판정은 `pnpm run audit:goal`에서 확인한다. 이 명령은 계약·TF 레지스트리·업무 그래프·샌드박스·공개 인덱스 검증을 함께 실행하고, B2·B3·B4·C2·E1 같은 외부 게이트는 `VERIFYING`·`WAITING`으로 남겨 완료와 구분한다. `--json` 출력은 회의·CI가 읽을 수 있는 상태와 다음 입력만 포함한다.
 
+B2·B3·E1이 실제로 `DONE`으로 바뀌는 순간에는 `pnpm run validate:external-gate-evidence`가 별도 증빙 원장을 확인한다. 제품은 최종 표시 승인·분류/SKU·섭취 주의사항, 후기는 원문·재게시 권한·맥락/개인정보 검토, 구매 대사는 판매자·상품 ID·주문/취소/환불 대사의 SHA-256 근거를 각각 요구한다. 현재처럼 증빙이 아직 없고 상태가 `VERIFYING` 또는 `WAITING`이면 원장을 만들지 않아도 통과하며, 이 검사는 게이트를 자동 승격하지 않는다.
+
 JSON 감사 출력의 `pulseHealth`는 저장된 heartbeat 시각·상태 지문·경과 분을 포함한다. 8시간을 넘기면 `stale`로 표시해, 운영 보드의 `업데이트 지연`과 같은 기준으로 자동 주기의 지연을 확인한다.
 
 로컬 자료까지 같은 회의 패킷에 연결할 때는 지정 폴더가 있는 PC에서 `pnpm run audit:goal:local`을 실행한다. JSON 패킷을 자동 저장하려면 `pnpm run audit:goal:local:json`을 사용한다. 이 명령은 완제품 자료 스캔과 주문 파일 구조 감사를 한 번에 실행해 비공개 `tmp/local-goal-audit.json`에 기록하며, 스캔 자체가 실패하면 종료 코드 1로 알려 준다. `local-material-inputs`와 `local-order-inputs`의 상태와 가장 최근 파일 수정 시각을 회의에서 바로 확인할 수 있다. 완제품 후보가 발견되어도 B2 독립 검증을 자동 승인하지 않고, 역사 주문의 1500 수량이 있어도 상태·취소·환불·판매자 계정이 확인되지 않으면 E1을 `WAITING`으로 유지한다. 로컬 파일명·경로·개인 행은 공개 export와 CI artifact에 넣지 않는다.
