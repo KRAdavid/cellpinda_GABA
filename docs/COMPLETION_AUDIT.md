@@ -1,5 +1,11 @@
 # 전체 목표 완료 간극 점검
 
+## 2026-09-21 호흡 주기·싱잉볼 감쇠 보정 — 후보 `0000d60`
+
+5분 휴식 호흡 안내를 3·2·6·2초로 중앙 도메인화했다. 공은 3초 상승·2초 상단 수평 이동·6초 하강·2초 하단 수평 이동을 반복하고, 단계 전환음은 처음 크게 울린 뒤 5.2초 동안 잦아드는 싱잉볼로 바꿨다. 타입검사·110개 회귀 테스트·UI 계약·production build·정적 번들·성능 예산 검증은 모두 통과했다.
+
+PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 `release-verify`·`site-quality-verify`는 성공했지만 Code Owner 독립 승인이 없어 `OPEN · BLOCKED · REVIEW_REQUIRED` 상태다. `pnpm run validate:live-public`는 12회 재시도 후 공개 `/release-manifest.json` HTTP 404로 실패했고, `node scripts/check-deploy-readiness.mjs`는 `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `ADMIN_TOKEN`, `MEMBER_ORIGIN` 입력을 기다린다. 따라서 이번 보정은 후보 품질을 높인 기록이며 공개 배포 완료를 의미하지 않는다.
+
 ## 2026-09-21 보안·의존성 재감리 — 후보 작업 중
 
 `pnpm audit --prod --audit-level=high`에서 알려진 고위험 취약점은 없었고, 타입검사와 110개 회귀 테스트가 통과했다. 현재 파일·공개 번들의 개인정보 경계 검사도 통과했다. 과거 reachable Git 이력에는 로컬 경로 패턴이 남은 12개 파일이 자문 경고로 확인되지만 일치 값은 출력하지 않으며, 현재 공개 파일에는 노출되지 않는다. 이력 완전 제거는 force push와 협업자 재동기화를 요구하므로 별도 영향 분석·명시적 승인 전에는 실행하지 않는다.
