@@ -59,6 +59,9 @@ function buildSlides(): ReelSlide[] {
 export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Props) {
   const slides = useMemo(() => buildSlides(), []);
   const slideCount = slides.length;
+  const nextSlideTitle = hasRhythmResult
+    ? '이제 제품 구성과 구매자 후기를 확인해 보세요.'
+    : '지금 내 상태부터 1분이면 확인할 수 있어요.';
   const nextSlideBody = hasRhythmResult
     ? '결과 화면에서 제품 구성과 구매자 후기를 확인할 수 있어요.'
     : '먼저 1분 체크로 내 상태를 확인한 뒤, 제품 구성과 구매자 후기를 볼 수 있어요.';
@@ -151,7 +154,7 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
           >
             <div className="consumer-reel__card-top"><span>{String(index + 1).padStart(2, '0')}</span><span>{slide.eyebrow}</span></div>
             {Icon ? <span className="consumer-reel__icon"><Icon size={25} strokeWidth={1.7} aria-hidden="true" /></span> : null}
-            <h3 id={`consumer-reel-${slide.id}-title`}>{slide.title}</h3>
+            <h3 id={`consumer-reel-${slide.id}-title`}>{slide.id === 'next' ? nextSlideTitle : slide.title}</h3>
             <p>{slide.id === 'next' ? nextSlideBody : slide.body}</p>
             {slide.link && !(hasRhythmResult && slide.id === 'next') ? <a className="consumer-reel__link" href={slide.link.href} onClick={() => onEvent?.('consumer_reel_cta', {path: '/'})}>{slide.link.label} <ExternalLink size={15} aria-hidden="true" /></a> : null}
             {slide.id === 'research' ? <small className="consumer-reel__boundary">일반 GABA 연구를 쉽게 정리한 내용이에요. 셀핀다 제품 정보는 제품 구성에서 따로 확인해 보세요.</small> : null}
