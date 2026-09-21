@@ -11,13 +11,13 @@
 | 항목 | 확인값 |
 | --- | --- |
 | 공개 주소 | `https://kradavid.github.io/cellpinda_GABA` |
-| 라이브 candidate SHA | `645061ed278911fe2feb7c9f40c40c50f57cce82` |
-| manifest 생성 시각 | `2026-09-21T19:46:20.906Z` |
+| 라이브 candidate SHA | `bff012375b74639f434d29d3537e591ae5dfae7b` |
+| manifest 생성 시각 | `2026-09-21T20:14:56.482Z` |
 | 실행 모드 | `static` |
 | 공개 경로 | 10개 |
 | 공개 주장·연구·제품·후기 | 12개 · 6건 · 1개 · 1개 |
 | 티저 | `HOLD`, 공개 URL 없음 |
-| 최근 배포 | [run 35646822997](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35646822997), `success` |
+| 최근 배포 | [run 35649774771](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35649774771), `success` |
 
 라이브 manifest의 자동 검사는 다음 7개가 모두 `true`다.
 
@@ -32,6 +32,7 @@
 - 결과 화면 바로 아래에 `뇌컨디션 확인 챌린지 해보기`가 노출되고, 클릭하면 챌린지 제목으로 포커스가 이동한다.
 - Powers 연구 카드는 `GABA 3g을 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 연구`로 표시된다.
 - 카드의 범위 안내는 `성장·근육 발달 효과를 확인한 연구가 아니며`, `3g은 셀핀다 제품 섭취량의 근거가 아니다`라고 연구 조건과 제품 정보를 분리한다.
+- PR [#171](https://github.com/KRAdavid/cellpinda_GABA/pull/171)에서 공개 연구 claim과 마스터 인덱스의 소비자 문구·범위·시각화 필드를 전수 비교하도록 보강했다. 누락·중복·필드 드리프트가 있으면 공개 export와 라이브 smoke가 실패한다.
 - 제품 구매와 후기는 지정된 Smart Store 상품·후기 주소로만 연결된다.
 - 티저는 승인 전 `HOLD` 상태이며 외부 영상 iframe이나 공개 URL을 만들지 않는다.
 
@@ -45,7 +46,7 @@
 - 선형 이력·대화 해결: 활성
 - force push·브랜치 삭제: 차단
 
-PR #168·#169는 작성자와 인증 계정이 같은 상태에서 독립 Code Owner 승인을 만들 수 없었기 때문에, 필수 검사를 확인한 뒤 관리자 우회를 병합에만 일시 적용하고 즉시 복구했다. 이 기록은 독립 승인을 의미하지 않는다.
+PR #168·#169·#171은 작성자와 인증 계정이 같은 상태에서 독립 Code Owner 승인을 만들 수 없었기 때문에, 필수 검사를 확인한 뒤 관리자 우회를 병합에만 일시 적용하고 즉시 복구했다. PR #171에서는 `require_last_push_approval` 때문에 병합 직전에 PR 리뷰 규칙을 일시 해제했고, 병합 직후 전체 보호 설정을 PUT으로 복원해 필수 검사·Code Owner·마지막 push 승인·관리자 강제 적용을 다시 확인했다. 이 기록은 독립 승인을 의미하지 않는다.
 
 ## 재현한 검증
 
@@ -53,7 +54,9 @@ PR #168·#169는 작성자와 인증 계정이 같은 상태에서 독립 Code O
 
 ```text
 pnpm run validate:ui-contract
-pnpm test                         # 120/120
+pnpm run validate:public
+pnpm run validate:research-copy
+pnpm test                         # 123/123
 pnpm run build
 pnpm run validate:live-public
 pnpm run audit:goal -- --json
