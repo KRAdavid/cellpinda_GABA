@@ -69,6 +69,8 @@ const report = {
     status: liveRun.ok ? 'HEALTHY' : 'FAILED',
     runtimeMode: live?.runtimeMode ?? null,
     page: live?.page ?? null,
+    candidateSha: live?.candidateSha ?? null,
+    generatedAt: live?.generatedAt ?? null,
     bundleHashes: live?.bundleHashes ?? null,
     claims: live?.claims ?? null,
     masterRecords: live?.masterRecords ?? null,

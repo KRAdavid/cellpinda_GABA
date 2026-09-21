@@ -20,6 +20,8 @@ requireText(/const productCount = Number\.isFinite\(report\.live\?\.products\)/,
 requireText(/공개 사이트 점검 사유/, '공개 사이트 점검 실패 원인을 보고서에 기록하지 않습니다.');
 requireText(/report\.live\?\.error/, '공개 사이트 점검 오류 필드가 보고서에 연결되지 않았습니다.');
 requireText(/report\.live\?\.runtimeMode/, '공개 런타임 모드가 누적 보고에 표시되지 않습니다.');
+requireText(/report\.live\?\.candidateSha/, '공개 배포 candidate SHA가 누적 보고에 표시되지 않습니다.');
+requireText(/report\.live\?\.generatedAt/, '공개 manifest 생성 시각이 누적 보고에 표시되지 않습니다.');
 requireText(/report\.live\?\.teaserPreview\?\.status/, '티저 공개 상태가 누적 보고에 표시되지 않습니다.');
 requireText(/공유 경로/, '공개 공유 경로 수가 누적 보고에 표시되지 않습니다.');
 const reportSource = readFileSync(resolve(process.cwd(), 'scripts/generate-daily-status-report.mjs'), 'utf8');
