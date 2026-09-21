@@ -53,7 +53,7 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
       <div className="section-head gaba-research-highlights-head">
         <div>
           <p className="chapter">사람 연구 한눈에</p>
-          <h2 id="gaba-research-highlights-heading">GABA를 먹은 사람 연구에서<br />무엇이 기록됐을까요?</h2>
+          <h2 id="gaba-research-highlights-heading">일반 GABA 연구에서<br />무엇이 기록됐을까요?</h2>
         </div>
         <p>잠·머리를 많이 쓴 뒤·쉬었을 때와 운동했을 때,<br />일반 GABA 연구에서 관찰한 내용을 쉽게 정리했어요.</p>
       </div>

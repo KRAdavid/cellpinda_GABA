@@ -3,6 +3,7 @@
 .consumer-reel__heading .chapter{color:#a8e7bd}
 .consumer-reel__heading h2{margin:0;font-size:clamp(32px,4vw,52px);color:#fff}
 .consumer-reel__heading>p{margin:0;max-width:390px;color:#cce4d2;font-size:15px;line-height:1.75}
+.consumer-reel__swipe-hint{display:block;margin-top:10px;color:#a8e7bd;font-size:13px;font-weight:700;letter-spacing:.02em}
 .consumer-reel__controls{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:15px;color:#a8e7bd;font-size:13px}
 .consumer-reel__controls>div{display:flex;gap:8px}
 .consumer-reel__control{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid #6e9c7e;border-radius:50%;background:transparent;color:#fff}

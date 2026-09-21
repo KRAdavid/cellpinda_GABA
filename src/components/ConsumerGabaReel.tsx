@@ -38,7 +38,7 @@ function buildSlides(): ReelSlide[] {
       id: 'research',
       eyebrow: '일반 GABA 연구',
       title: '일반 GABA 연구에서 뇌파·활력과 잠의 변화를 살펴봤어요.',
-      body: '머리를 많이 쓴 뒤 뇌파·활력 점수의 감소 폭, 잠드는 시간을 비교·기록한 연구가 있어요.',
+      body: '머리를 많이 쓴 뒤 뇌파와 활력 점수, 잠드는 시간을 비교해 기록한 연구가 있어요.',
       kind: 'research',
       icon: BookOpen,
       link: {href: '#gaba-research-highlights', label: '연구 내용을 쉽게 보기'},
@@ -47,7 +47,7 @@ function buildSlides(): ReelSlide[] {
       id: 'next',
       eyebrow: '다음 단계',
       title: '지금 내 상태부터 1분이면 확인할 수 있어요.',
-      body: '오늘 필요한 휴식이 무엇인지 먼저 확인하고, 제품 구성과 구매자 후기는 다음 단계에서 살펴보세요.',
+      body: '오늘 필요한 휴식을 먼저 확인한 뒤, 제품 구성과 구매자 후기를 이어서 볼 수 있어요.',
       kind: 'cta',
       icon: Sparkles,
       link: {href: '#rhythm', label: '잠과 휴식 1분 체크'},
@@ -106,9 +106,10 @@ export default function ConsumerGabaReel({onEvent}: Props) {
       <div className="consumer-reel__heading">
         <div>
           <p className="chapter">한 장씩 보는 GABA 이야기</p>
-          <h2 id="consumer-reel-heading">오늘 내 상태에서<br />GABA까지 이어서 보기</h2>
+          <h2 id="consumer-reel-heading">내 상태를 확인한 뒤<br />GABA를 알아보세요</h2>
         </div>
         <p>옆으로 넘기며 한 장씩 확인해 보세요.<br />연구·제품·후기는 각각 다른 화면에서 확인할 수 있어요.</p>
+        <span className="consumer-reel__swipe-hint" aria-hidden="true">다음 카드 →</span>
       </div>
       <div className="consumer-reel__controls" aria-label="GABA 이야기 카드 이동">
         <span aria-live="polite">{activeIndex + 1} / {slideCount}</span>
