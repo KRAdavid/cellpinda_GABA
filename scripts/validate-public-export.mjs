@@ -19,7 +19,10 @@ const researchHtml = await readFile(new URL('../public/research/index.html', imp
 const researchComponent = await readFile(new URL('../src/components/ResearchLibrary.tsx', import.meta.url), 'utf8');
 const productShareHtml = await readFile(new URL('../public/products/index.html', import.meta.url), 'utf8');
 const notFoundHtml = await readFile(new URL('../public/404.html', import.meta.url), 'utf8');
-const robots = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8');
+// Git may materialize tracked text files with CRLF on Windows. Normalize the
+// small public policy file before applying the line-oriented contract so the
+// same export check behaves identically in local and Linux CI environments.
+const robots = (await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8')).replace(/\r\n/g, '\n');
 const sitemap = await readFile(new URL('../public/sitemap.xml', import.meta.url), 'utf8');
 const teaser = await readJson('data/teaser-manifest.json');
 const teaserPreview = await readJson('public/data/teaser-preview.json');
