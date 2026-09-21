@@ -1,5 +1,7 @@
 # 전체 목표 완료 간극 점검
 
+> **현재 감사 기준(2026-09-22):** [공개 배포 감사 스냅샷](RELEASE_AUDIT_20260922.md)을 먼저 확인하세요. 이 문서의 아래 항목은 변경 당시의 후보·검토 로그이며, 현재 공개 판정은 라이브 `release-manifest.json`, 최신 성공 배포 run, 현재 branch protection을 우선합니다.
+
 ## 현재 확정 공개 상태 — 2026-09-21 · 라이브 기준
 
 이 문서의 아래 기록은 작업 당시의 후보·검토 로그를 보존한 것이다. 공개 판정의 권위는 항상 [공개 release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 현재 `candidateSha`, 생성 시각, 검사 결과와 [최신 성공 배포 run](https://github.com/KRAdavid/cellpinda_GABA/actions)이다. 문서 병합 자체가 새 candidate SHA를 만들 수 있으므로 상단에는 고정 SHA를 복제하지 않는다. 마지막 기능 보정은 [PR #147](https://github.com/KRAdavid/cellpinda_GABA/pull/147), 감사 스냅샷 갱신은 [PR #148](https://github.com/KRAdavid/cellpinda_GABA/pull/148), 공유·집중 deep-link 메타데이터 보정은 [PR #150](https://github.com/KRAdavid/cellpinda_GABA/pull/150)에서 반영한다. 결과 화면은 `내 상태 확인 → 오늘 해볼 행동(뇌컨디션 확인 챌린지·제품·후기) → 친구 공유` 순서로 정리했고, 1분 체크 전에는 챌린지를 숨겨 다음 행동을 하나로 고정했다. 직접 초대 경로에서는 챌린지를 바로 열 수 있다. 히어로 아래에는 4장 시각형 GABA 리엘을 배치해 리듬 체크 다음에 상태·휴식·일반 연구·제품 구성 흐름을 짧게 보여주며, `/products/` 직접 진입도 제품 섹션에 자동 안착한다.

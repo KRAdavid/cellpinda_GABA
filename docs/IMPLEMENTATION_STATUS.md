@@ -1,5 +1,7 @@
 # 중간 구현 상태 — 2026-09-22
 
+> **현재 공개 판정:** [2026-09-22 공개 배포 감사 스냅샷](RELEASE_AUDIT_20260922.md)을 기준으로 확인합니다. 아래 상세 기록은 각 작업 시점의 감사 이력이며, 현재 상태는 라이브 manifest와 최신 성공 배포 run으로 재검증해야 합니다.
+
 ## 현재 확정 공개 상태 — 2026-09-22 02:00 KST
 
 PR [#155](https://github.com/KRAdavid/cellpinda_GABA/pull/155)은 필수 검사 성공 후 관리자 우회로 병합했고, 병합 직후 보호 규칙을 복구했다. 병합 커밋은 `68c3fd55f2a7c689df992aadf5279a047c9867b6`이며, 독립 Code Owner 승인으로 기록하지 않는다. 최신 공개 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답과 그 안의 현재 `candidateSha`, 그리고 [GitHub Actions 배포 run 35628812922](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35628812922)를 우선한다. 결과 카드에는 `뇌컨디션 확인 챌린지 해보기` 빠른 진입 CTA와 포커스 이동이 추가됐고, 티저 `HOLD` 상태에는 `GABA 연구 쉽게 보기`·`가바 1500 구성 보기` 다음 행동을 붙였다. 1분 체크 전 챌린지 비노출, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
