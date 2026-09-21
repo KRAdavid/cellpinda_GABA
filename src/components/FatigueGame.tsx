@@ -16,7 +16,7 @@ import {
   type FocusTrialPlan,
   type FocusTrialRecord,
 } from '../domain/fatigue-game';
-import { BREATH_ACTIVE_SECONDS, BREATH_CYCLE_SECONDS, getBreathCue, type BreathCue, type BreathStage } from '../domain/breath-guide';
+import { BREATH_ACTIVE_SECONDS, BREATH_CYCLE_SECONDS, BREATH_EXHALE_SECONDS, BREATH_HOLD_SECONDS, BREATH_INHALE_SECONDS, getBreathCue, type BreathCue, type BreathStage } from '../domain/breath-guide';
 import { REVIEW_DESTINATION_URL } from '../domain/reviews';
 import './fatigue-game.css';
 
@@ -33,10 +33,10 @@ const shapeLabels: Record<FocusStimulusShape, string> = {
 };
 
 const breathStageCopy: Record<BreathStage, { title: string; detail: string }> = {
-  inhale: { title: '숨 들이쉬기', detail: '공이 올라가는 동안 · 4초' },
-  'hold-top': { title: '잠깐 멈추기', detail: '공이 위에서 옆으로 이동하는 동안 · 2초' },
-  exhale: { title: '숨 내쉬기', detail: '공이 내려가는 동안 · 6초' },
-  'hold-bottom': { title: '다시 멈추기', detail: '공이 아래에서 옆으로 이동하는 동안 · 2초' },
+  inhale: { title: '숨 들이쉬기', detail: `공이 올라가는 동안 · ${BREATH_INHALE_SECONDS}초` },
+  'hold-top': { title: '잠깐 멈추기', detail: `공이 위에서 옆으로 이동하는 동안 · ${BREATH_HOLD_SECONDS}초` },
+  exhale: { title: '숨 내쉬기', detail: `공이 내려가는 동안 · ${BREATH_EXHALE_SECONDS}초` },
+  'hold-bottom': { title: '다시 멈추기', detail: `공이 아래에서 옆으로 이동하는 동안 · ${BREATH_HOLD_SECONDS}초` },
   finish: { title: '편한 호흡으로 마무리', detail: '숨을 세지 말고 자연스럽게 돌아오세요' },
 };
 
@@ -67,13 +67,14 @@ function ringSingingBowl(context: AudioContext) {
   const play = () => {
     if (context.state !== 'running') return;
     const startedAt = context.currentTime + 0.025;
+    const releaseSeconds = 5.2;
     const master = context.createGain();
     master.gain.setValueAtTime(0.0001, startedAt);
-    master.gain.exponentialRampToValueAtTime(0.14, startedAt + 0.025);
-    master.gain.exponentialRampToValueAtTime(0.0001, startedAt + 1.65);
+    master.gain.exponentialRampToValueAtTime(0.22, startedAt + 0.04);
+    master.gain.exponentialRampToValueAtTime(0.0001, startedAt + releaseSeconds);
     master.connect(context.destination);
 
-    const partials = [[220, 0.28], [440.6, 0.13], [661.8, 0.075], [883.1, 0.045], [1105.7, 0.025]] as const;
+    const partials = [[220, 0.28], [440.6, 0.13], [661.8, 0.075], [883.1, 0.045], [1105.7, 0.025], [1326.9, 0.016]] as const;
     partials.forEach(([frequency, level]) => {
       const oscillator = context.createOscillator();
       const voice = context.createGain();
@@ -87,9 +88,9 @@ function ringSingingBowl(context: AudioContext) {
         voice.disconnect();
       };
       oscillator.start(startedAt);
-      oscillator.stop(startedAt + 1.7);
+      oscillator.stop(startedAt + releaseSeconds + 0.1);
     });
-    window.setTimeout(() => master.disconnect(), 1_800);
+    window.setTimeout(() => master.disconnect(), (releaseSeconds + 0.3) * 1000);
   };
 
   if (context.state === 'running') play();
@@ -232,8 +233,9 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
     const totalLength = path.getTotalLength();
     const diagonalLength = Math.hypot(220, 210);
     const segmentLengths = [diagonalLength, 240, diagonalLength, 680];
+    const totalSegmentLength = segmentLengths.reduce((sum, length) => sum + length, 0);
     const stageStops = segmentLengths.reduce<number[]>((stops, segmentLength) => {
-      stops.push((stops.at(-1) ?? 0) + (segmentLength / segmentLengths.reduce((sum, length) => sum + length, 0)) * totalLength);
+      stops.push((stops.at(-1) ?? 0) + (segmentLength / totalSegmentLength) * totalLength);
       return stops;
     }, []);
     let frame = 0;
@@ -243,10 +245,12 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
       const finished = elapsed >= BREATH_ACTIVE_SECONDS;
       const cycle = finished ? BREATH_CYCLE_SECONDS : elapsed % BREATH_CYCLE_SECONDS;
       let distance = 0;
-      if (cycle < 4) distance = stageStops[0] * (cycle / 4);
-      else if (cycle < 6) distance = stageStops[0];
-      else if (cycle < 12) distance = stageStops[0] + (stageStops[1] - stageStops[0]) + (stageStops[2] - stageStops[1]) * ((cycle - 6) / 6);
-      else distance = stageStops[2] + (stageStops[3] - stageStops[2]) * ((cycle - 12) / 2);
+      const holdTopEnd = BREATH_INHALE_SECONDS + BREATH_HOLD_SECONDS;
+      const exhaleEnd = holdTopEnd + BREATH_EXHALE_SECONDS;
+      if (cycle < BREATH_INHALE_SECONDS) distance = stageStops[0] * (cycle / BREATH_INHALE_SECONDS);
+      else if (cycle < holdTopEnd) distance = stageStops[0];
+      else if (cycle < exhaleEnd) distance = stageStops[1] + (stageStops[2] - stageStops[1]) * ((cycle - holdTopEnd) / BREATH_EXHALE_SECONDS);
+      else distance = stageStops[2] + (stageStops[3] - stageStops[2]) * ((cycle - exhaleEnd) / BREATH_HOLD_SECONDS);
       if (finished) distance = totalLength;
 
       const point = path.getPointAtLength(distance);
@@ -264,13 +268,13 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
   const stars = [[52, 60], [142, 118], [228, 34], [324, 138], [404, 40], [546, 116], [650, 45], [724, 128], [836, 46], [916, 100], [90, 245], [246, 296], [390, 256], [588, 296], [770, 260], [884, 312]];
 
   return (
-    <div className="fatigue-breath-guide" aria-label="공의 움직임을 따라 하는 4초 들이쉬기, 2초 멈추기, 6초 내쉬기, 2초 멈추기 호흡 안내">
+    <div className="fatigue-breath-guide" aria-label={`공의 움직임을 따라 하는 ${BREATH_INHALE_SECONDS}초 들이쉬기, ${BREATH_HOLD_SECONDS}초 멈추기, ${BREATH_EXHALE_SECONDS}초 내쉬기, ${BREATH_HOLD_SECONDS}초 멈추기 호흡 안내`}>
       <div className="fatigue-breath-readout" role="timer" aria-label={`${breathStageCopy[cue.stage].title}, ${cue.seconds}초`}>
         <span>{breathStageCopy[cue.stage].detail}</span>
         <strong aria-live="polite" aria-atomic="true">{breathStageCopy[cue.stage].title}</strong>
         {cue.stage !== 'finish' ? <b>{cue.seconds}</b> : null}
       </div>
-      <svg className="fatigue-breath-line" viewBox="0 0 960 360" role="img" aria-label="공이 선을 따라 4초 동안 올라가고, 위에서 2초 옆으로 이동하고, 6초 동안 내려간 뒤, 아래에서 2초 옆으로 돌아오는 애니메이션">
+      <svg className="fatigue-breath-line" viewBox="0 0 960 360" role="img" aria-label={`공이 선을 따라 ${BREATH_INHALE_SECONDS}초 동안 올라가고, 위에서 ${BREATH_HOLD_SECONDS}초 옆으로 이동하고, ${BREATH_EXHALE_SECONDS}초 동안 내려간 뒤, 아래에서 ${BREATH_HOLD_SECONDS}초 옆으로 돌아오는 애니메이션`}>
         <defs>
           <linearGradient id="breath-line-gradient" x1="0" x2="1">
             <stop offset="0" stopColor="#f3bc70" />
@@ -296,7 +300,7 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
       <ol className="fatigue-breath-phases" aria-label="호흡 순서">
         {(['inhale', 'hold-top', 'exhale', 'hold-bottom'] as const).map((stage, index) => (
           <li key={stage} className={cue.stage === stage ? 'is-active' : ''} aria-current={cue.stage === stage ? 'step' : undefined}>
-            <span>0{index + 1}</span><strong>{breathStageCopy[stage].title}</strong><small>{[4, 2, 6, 2][index]}초</small>
+            <span>0{index + 1}</span><strong>{breathStageCopy[stage].title}</strong><small>{[BREATH_INHALE_SECONDS, BREATH_HOLD_SECONDS, BREATH_EXHALE_SECONDS, BREATH_HOLD_SECONDS][index]}초</small>
           </li>
         ))}
       </ol>
@@ -801,7 +805,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
           <h3 ref={restHeadingRef} tabIndex={-1}>5분만 화면을 내려놓고 쉬어 보세요.</h3>
           <p>화면을 보며 공을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 처음에 호흡 순서를 익힌 뒤에는 화면을 내려놓고 소리만 들어도 좋아요. 선이 올라갈 때 들이쉬고, 위·아래에서 옆으로 움직일 때 잠깐 멈추고, 내려갈 때 내쉬세요.</p>
           <BreathLineGuide startedAt={restStartedAt} cue={breathCue} />
-          <p className="fatigue-breath-note">들이쉬기 4초 · 멈추기 2초 · 내쉬기 6초 · 다시 멈추기 2초를 반복합니다. 숨을 참기 불편하거나 어지럽고 답답하면 멈춤을 건너뛰고 자연스럽게 호흡하세요.</p>
+          <p className="fatigue-breath-note">들이쉬기 {BREATH_INHALE_SECONDS}초 · 멈추기 {BREATH_HOLD_SECONDS}초 · 내쉬기 {BREATH_EXHALE_SECONDS}초 · 다시 멈추기 {BREATH_HOLD_SECONDS}초를 반복합니다. 숨을 참기 불편하거나 어지럽고 답답하면 멈춤을 건너뛰고 자연스럽게 호흡하세요.</p>
           <div className="fatigue-rest-clock" aria-label="5분 호흡 안내 타이머">
             <div className="fatigue-rest-clock-readout" role="timer" aria-label={`${Math.floor(restRemainingSeconds / 60)}분 ${restRemainingSeconds % 60}초 남음`}>
               <Timer size={20} aria-hidden="true" />
@@ -811,7 +815,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
             <progress max={5 * 60} value={5 * 60 - restRemainingSeconds} aria-label="5분 휴식 진행" />
           </div>
           <div className="fatigue-audio-panel" aria-label="호흡 단계별 싱잉볼 소리">
-            <div><strong><Volume2 size={17} aria-hidden="true" /> 4단계 싱잉볼 소리</strong><span>들이쉬기·멈추기·내쉬기 단계가 바뀔 때마다 짧게 울립니다.</span></div>
+            <div><strong><Volume2 size={17} aria-hidden="true" /> 4단계 싱잉볼 소리</strong><span>단계가 바뀔 때마다 크게 울린 뒤 5초 동안 천천히 잦아듭니다.</span></div>
             <div className="fatigue-audio-actions"><button type="button" className="fatigue-audio-button" onClick={toggleSingingBowlAudio} aria-pressed={bowlSoundEnabled} disabled={restComplete}>{bowlSoundEnabled ? <><VolumeX size={15} aria-hidden="true" /> 싱잉볼 소리 끄기</> : <><Volume2 size={15} aria-hidden="true" /> 싱잉볼 소리 켜기</>}</button></div>
             {audioMessage ? <p role="status" aria-live="polite">{audioMessage}</p> : null}
           </div>
