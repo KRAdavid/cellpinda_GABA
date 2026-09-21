@@ -1,10 +1,10 @@
 # 중간 구현 상태 — 2026-09-21
 
-## 현재 확정 공개 상태 — 2026-09-21 19:55 KST
+## 현재 확정 공개 상태 — 2026-09-21 20:15 KST
 
-관리자 병합으로 PR #125·#126·#127·#128·#129·#130·#132를 main에 반영한 뒤, 보호 규칙을 매번 즉시 복구했다. 최신 main 커밋은 `36eaf52f86b5d6a364e3a5f4fa6d5e066e0cc809`이며, 최신 배포 run [35590974337](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35590974337)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 candidate SHA `36eaf52f86b5d6a364e3a5f4fa6d5e066e0cc809`를 가리키고 HTTP 200이다. 1분 체크 전 챌린지 비노출, 결과 후 챌린지 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구와 라이브 smoke 계약을 현재 애플리케이션 기준으로 삼는다.
+관리자 병합으로 PR #125·#126·#127·#128·#129·#130·#132·#134를 main에 반영한 뒤, 보호 규칙을 매번 즉시 복구했다. 최신 main 커밋은 `492b4b0cfdb0c45e54a5c5a7fd0b333079103918`이며, 최신 배포 run [35592783338](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35592783338)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 candidate SHA `492b4b0cfdb0c45e54a5c5a7fd0b333079103918`를 가리키고 HTTP 200이다. 1분 체크 전 챌린지 비노출, 결과 후 챌린지 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`를 현재 애플리케이션 기준으로 삼는다.
 
-라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 65개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `PREVIEW`를 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 65개·provenance 일치를 통과했다. 390px·1440px 감리에서 P0/P1 결함·가로 넘침·콘솔 오류는 확인되지 않았다.
+라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 65개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `HOLD`·외부 URL 없음을 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 65개·provenance 일치를 통과했다. 390px·1440px 감리에서 P0/P1 결함·가로 넘침·콘솔 오류는 확인되지 않았다.
 
 현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 마지막 푸시 승인, 선형 이력, 대화 해결, `enforce_admins`가 모두 활성이다. 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트이며 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
 
@@ -742,3 +742,4 @@ UI 계약·타입검사와 정적 route 검증을 통과했으며, 새 후보의
 ## 최신 업데이트 — 2026-09-20 TF pulse 필수 상태 fail-closed 보강
 
 TF pulse가 축약 검증 뒤 GitHub API로 `release-verify`·`site-quality-verify`를 직접 성공 처리하던 경로를 제거했다. 이제 pulse는 후보 타입검사·회귀 테스트·정적 build·readiness·Worker dry-run을 검증 증거로만 남기고, 보호 상태는 완전한 `pull_request` 배포 워크플로만 기록한다. 해당 검사가 실행되지 않으면 branch protection이 계속 대기하며, `validate:tf-pulse-workflow`가 `statuses` 권한과 상태 API 호출의 재유입을 차단한다.
+
