@@ -3,6 +3,7 @@ import {resolve} from 'node:path';
 
 const workflowPath = resolve(process.cwd(), '.github/workflows/tf-pulse.yml');
 const source = readFileSync(workflowPath, 'utf8');
+const heartbeatScript = readFileSync(resolve(process.cwd(), 'scripts/write-tf-pulse-heartbeat.mjs'), 'utf8');
 const packageJson = JSON.parse(readFileSync(resolve(process.cwd(), 'package.json'), 'utf8'));
 const issues = [];
 const requireText = (pattern, message) => { if (!pattern.test(source)) issues.push(message); };
@@ -37,6 +38,7 @@ requireText(/branch protection[\s\S]*must remain pending/, '완전한 pull_reque
 requireText(/GH_TOKEN:\s*\$\{\{ github\.token \}\}/, 'gh CLI에 GITHUB_TOKEN 연결이 없습니다.');
 requireText(/tf-safe-run\.json/, 'safe internal TF 결과 artifact가 없습니다.');
 requireText(/tf-safe-run-validation\.json/, 'safe internal TF 독립 검증 결과 artifact가 없습니다.');
+if (!/const scriptArgs = process\.argv\.slice\(2\)\.filter\(argument => argument !== '--'\)/.test(heartbeatScript)) issues.push('heartbeat 로컬·CI 인자가 pnpm 구분자를 제거하지 않습니다.');
 if (packageJson.scripts?.['tf:safe:local'] !== 'node scripts/run-local-safe-tf.mjs') issues.push('로컬 safe-run·독립 검증 래퍼가 package script에 연결되지 않았습니다.');
 if (/git push origin HEAD:main/.test(source)) issues.push('보호된 main에 heartbeat를 직접 push하면 안 됩니다.');
 
