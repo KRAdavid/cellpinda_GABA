@@ -2,7 +2,7 @@
 
 ## 현재 확정 공개 상태 — 2026-09-21 20:15 KST
 
-관리자 병합으로 PR #125·#126·#127·#128·#129·#130·#132·#134·#135·#136·#137·#138·#139를 main에 반영한 뒤, 보호 규칙을 매번 즉시 복구했다. 최신 main 커밋은 `8c548eca7cab5eb5be781e31999de52323b9e7fc`이며, 최신 배포 run [35597134765](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35597134765)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 candidate SHA `8c548eca7cab5eb5be781e31999de52323b9e7fc`를 가리키고 HTTP 200이다. 1분 체크 전 챌린지 비노출, 결과 후 챌린지 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
+관리자 병합으로 PR #125·#126·#127·#128·#129·#130·#132·#134·#135·#136·#137·#138·#139·#141을 main에 반영한 뒤, 보호 규칙을 매번 즉시 복구했다. 현재 공개 확인 스냅샷은 main `570a63efa7d3e044ceab7c199362bc3686ae3d7d`, 배포 run [35599044204](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35599044204)이며 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 최신 공개 판정은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 HTTP 200 응답과 `candidateSha`를 우선한다. 문서 전용 병합 뒤에는 candidate SHA가 달라질 수 있으므로 이 스냅샷 SHA를 영구적인 최신값으로 사용하지 않는다. 1분 체크 전 챌린지 비노출, 결과 후 챌린지 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, B4 승인 전 티저 `HOLD`, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
 
 라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 65개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `HOLD`·외부 URL 없음을 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 65개·provenance 일치를 통과했다. 390px·1440px 감리에서 P0/P1 결함·가로 넘침·콘솔 오류는 확인되지 않았다.
 
@@ -742,4 +742,5 @@ UI 계약·타입검사와 정적 route 검증을 통과했으며, 새 후보의
 ## 최신 업데이트 — 2026-09-20 TF pulse 필수 상태 fail-closed 보강
 
 TF pulse가 축약 검증 뒤 GitHub API로 `release-verify`·`site-quality-verify`를 직접 성공 처리하던 경로를 제거했다. 이제 pulse는 후보 타입검사·회귀 테스트·정적 build·readiness·Worker dry-run을 검증 증거로만 남기고, 보호 상태는 완전한 `pull_request` 배포 워크플로만 기록한다. 해당 검사가 실행되지 않으면 branch protection이 계속 대기하며, `validate:tf-pulse-workflow`가 `statuses` 권한과 상태 API 호출의 재유입을 차단한다.
+
 
