@@ -1,10 +1,10 @@
 # 공개 Pages UI 검증 기록
 
-## 2026-09-21 최신 라이브와 시각형 리엘 후보 감리
+## 2026-09-21 최신 라이브와 시각형 리엘 감리
 
-최신 라이브 `9918f40e18194a6b01f8e1dd9e19b4807d3aa7b4`의 [35578802038](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35578802038)에서 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 `release-manifest.json`은 HTTP 200이며 10개 경로·hash 62개·연구 6건·제품 1개·후기 목적지 1개·Smart Store only·750 제거·티저 `PREVIEW`를 확인했다. 보호 규칙은 Code Owner 1명, 필수 검사, 관리자 적용, force push/deletion 차단으로 복구되어 있다.
+최신 라이브 `74c8bb3e3f9545b17380dba8b6b1156dbed763fc`의 [35581359157](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35581359157)에서 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 `release-manifest.json`은 HTTP 200이며 10개 경로·hash 65개·연구 6건·제품 1개·후기 목적지 1개·Smart Store only·750 제거·티저 `PREVIEW`를 확인했다. 보호 규칙은 Code Owner 1명, 필수 검사, 관리자 적용, force push/deletion 차단으로 복구되어 있다.
 
-작업트리의 `ConsumerGabaReel` 후보는 11장 구성의 전환 지연과 반복 노출을 확인한 뒤 4장으로 축소했다. `지금 내 상태 → 쉬어야 하는 이유 → 일반 GABA 연구 → 1분 체크` 순서로 리듬 체크 뒤에 배치했으며, 390px CDP에서 가로 overflow 0·콘솔 오류 0·접근성 이름 누락 0을 확인했다. `prefers-reduced-motion` 스크롤, 리엘 rail 포커스 표시, 히어로에서 리엘로 이동하는 지연 앵커를 추가했다. 후보는 아직 라이브에 반영되지 않았다.
+`ConsumerGabaReel`은 11장 구성의 전환 지연과 반복 노출을 확인한 뒤 4장으로 축소했다. `지금 내 상태 → 쉬어야 하는 이유 → 일반 GABA 연구 → 1분 체크` 순서로 리듬 체크 뒤에 배치했으며, 라이브 390px CDP에서 가로 overflow 0·콘솔 오류 0·접근성 이름 누락 0·카드 4장을 확인했다. `prefers-reduced-motion` 스크롤, 리엘 rail 포커스 표시, 히어로에서 리엘로 이동하는 지연 앵커가 실제 공개본에 반영됐다.
 
 ## 최신 라이브 확정 감리 — 2026-09-21 14:39 KST
 
