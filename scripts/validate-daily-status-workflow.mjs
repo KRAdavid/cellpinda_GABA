@@ -27,6 +27,11 @@ requireText(/report\.live\?\.teaserPreview\?\.status/, '티저 공개 상태가 
 requireText(/공유 경로/, '공개 공유 경로 수가 누적 보고에 표시되지 않습니다.');
 requireText(/listWorkflowRuns\(/, '최신 TF pulse workflow 실행 상태를 조회하지 않습니다.');
 requireText(/workflow_id:\s*['"]tf-pulse\.yml['"]/, 'TF pulse workflow 파일을 명시적으로 조회하지 않습니다.');
+requireText(/report\.pulseHealth/, 'TF heartbeat freshness is not connected to the rolling report.');
+requireText(/pulseHealth\.status/, 'TF heartbeat status is not shown in the rolling report.');
+requireText(/pulseHealth\.ageMinutes/, 'TF heartbeat age is not shown in the rolling report.');
+requireText(/pulseHealth\.generatedAt/, 'TF heartbeat timestamp is not shown in the rolling report.');
+requireText(/TF heartbeat/, 'TF heartbeat freshness line is missing from the rolling report.');
 requireText(/TF 자동 pulse/, 'TF pulse 실행 상태가 누적 보고에 표시되지 않습니다.');
 const reportSource = readFileSync(resolve(process.cwd(), 'scripts/generate-daily-status-report.mjs'), 'utf8');
 if (!/\.replace\(\/\\s\+\/g,\s*['"] ['"]\)/.test(reportSource)) {
