@@ -16,7 +16,7 @@ const highlightOrder: Highlight[] = [
     id: 'research-yamatsu-2016',
     label: '잠',
     title: '잠드는 시간과 수면 기록',
-    summary: 'GABA 캡슐을 먹은 주와 비교 캡슐을 먹은 주의 잠 기록을 비교했어요.',
+    summary: 'GABA 캡슐과 비교 캡슐을 각각 1주 동안 먹고 잠 기록을 비교했어요.',
     facts: ['참여: 성인 10명', '연구 조건: 하루 100mg', '살펴본 내용: 잠드는 시간·수면 기록'],
     Icon: Moon,
   },
