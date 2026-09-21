@@ -81,7 +81,7 @@ function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady
 }
 
 function FocusChallengeCallout() {
-  return <div className="rhythm-result-quick-action rhythm-result-quick-action--wide" aria-label="다음 행동">
+  return <div className="rhythm-result-quick-action rhythm-result-quick-action--wide" id="rhythm-result-next" aria-label="다음 행동">
     <div>
       <p className="rhythm-eyebrow">다음은 1분이에요</p>
       <p>지금 내 반응을 간단한 게임으로 확인해 보세요.</p>
@@ -333,7 +333,12 @@ export default function RhythmExperience({ onEvent, onResultChange }: RhythmExpe
   useEffect(() => {
     if (started && !type) questionRef.current?.focus();
     if (sharedType && !result) resultRef.current?.focus({ preventScroll: true });
-    if (result) {resultRef.current?.focus();if(!resultViewed.current){resultViewed.current=true;onEvent('result_viewed',{path:'/result'})}}
+    if (result) {
+      resultRef.current?.focus({ preventScroll: true });
+      const primaryAction = document.getElementById('rhythm-result-next');
+      (primaryAction ?? resultRef.current)?.scrollIntoView({ behavior: 'auto', block: 'start' });
+      if(!resultViewed.current){resultViewed.current=true;onEvent('result_viewed',{path:'/result'})}
+    }
   }, [step, started, result, type, sharedType]);
 
   useEffect(() => {
