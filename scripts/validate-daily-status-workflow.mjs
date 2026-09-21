@@ -13,6 +13,7 @@ requireText(/generate-daily-status-report\.mjs/, '일일 상태 보고 생성 �
 requireText(/daily-status\.json/, '일일 상태 보고 산출물이 보존되지 않습니다.');
 requireText(/actions\/upload-artifact@/, '일일 상태 보고 아티팩트 업로드가 없습니다.');
 requireText(/github-script@/, '누적 보고 이슈 갱신 단계가 없습니다.');
+requireText(/actions\/github-script@373c709c69115d41ff229c7e5df9f8788daa9553\s+# v9\.0\.0/, '일일 보고 이슈 갱신이 Node 24 호환 github-script 버전으로 고정되지 않았습니다.');
 requireText(/issues:\s*write/, '누적 보고 이슈 갱신 권한이 없습니다.');
 requireText(/steps\.report\.outcome == ['"]failure['"]/, '보고서 검증 실패를 작업 실패로 전파하지 않습니다.');
 requireText(/const productCount = Number\.isFinite\(report\.live\?\.products\)/, '제품 수가 없을 때 단위를 잘못 붙이지 않도록 처리하지 않습니다.');
