@@ -23,6 +23,7 @@ const review = await read('src/components/ReviewExperience.tsx');
 const teaser = await read('src/components/TeaserPreview.tsx');
 const research = await read('src/components/ResearchLibrary.tsx');
 const story = await read('src/components/GabaStory.tsx');
+const consumerReel = await read('src/components/ConsumerGabaReel.tsx');
 const studyInsightVisual = await read('src/components/StudyInsightVisual.tsx');
 const studyInsightStyles = await read('src/components/StudyInsightVisual.css');
 const brainLoadEvidence = await read('src/components/BrainLoadEvidence.tsx');
@@ -110,6 +111,9 @@ requireMatch(app, /if\(operationsView && OperationsMvp\)return <Suspense fallbac
 requireMatch(operations, /목표 계약 기준일 \{goalAudit\.checkedAt\}/, 'operations audit must distinguish the Goal Contract date from the latest TF pulse time');
 requireMatch(teaser, /teaser_embed_loaded/, 'teaser analytics must distinguish embed load from video playback');
 if (teaser.includes("onEvent?.('teaser_play'")) fail('teaser iframe load must not count as video playback');
+requireMatch(consumerReel, /const handleRailKeyDown =/, 'the GABA story card rail must define a keyboard navigation handler');
+for (const key of ['ArrowRight', 'PageDown', 'ArrowLeft', 'PageUp', 'Home', 'End']) requireMatch(consumerReel, new RegExp(`handleRailKeyDown[\\s\\S]*${key}`), `the GABA story card rail must handle ${key}`);
+requireMatch(consumerReel, /onKeyDown=\{handleRailKeyDown\}/, 'the GABA story card rail must attach keyboard navigation after it receives focus');
 const nav = app.match(/<nav id="primary-navigation"[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
 if (!/<a href="#products">제품 구성<\/a>/.test(nav)) fail('consumer navigation must expose the product information destination');
