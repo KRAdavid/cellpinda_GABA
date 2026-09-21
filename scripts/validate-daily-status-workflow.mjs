@@ -19,6 +19,9 @@ requireText(/steps\.report\.outcome == ['"]failure['"]/, '보고서 검증 실�
 requireText(/const productCount = Number\.isFinite\(report\.live\?\.products\)/, '제품 수가 없을 때 단위를 잘못 붙이지 않도록 처리하지 않습니다.');
 requireText(/공개 사이트 점검 사유/, '공개 사이트 점검 실패 원인을 보고서에 기록하지 않습니다.');
 requireText(/report\.live\?\.error/, '공개 사이트 점검 오류 필드가 보고서에 연결되지 않았습니다.');
+requireText(/report\.live\?\.runtimeMode/, '공개 런타임 모드가 누적 보고에 표시되지 않습니다.');
+requireText(/report\.live\?\.teaserPreview\?\.status/, '티저 공개 상태가 누적 보고에 표시되지 않습니다.');
+requireText(/공유 경로/, '공개 공유 경로 수가 누적 보고에 표시되지 않습니다.');
 const reportSource = readFileSync(resolve(process.cwd(), 'scripts/generate-daily-status-report.mjs'), 'utf8');
 if (!/\.replace\(\/\\s\+\/g,\s*['"] ['"]\)/.test(reportSource)) {
   issues.push('일일 보고 오류가 여러 줄 스택 트레이스로 남아 읽기 어렵습니다.');
