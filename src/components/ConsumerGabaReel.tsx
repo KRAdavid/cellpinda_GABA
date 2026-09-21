@@ -14,6 +14,7 @@ type ReelSlide = {
 
 type Props = {
   onEvent?: (name: string, properties?: Record<string, string>) => void;
+  hasRhythmResult?: boolean;
 };
 
 function buildSlides(): ReelSlide[] {
@@ -55,7 +56,7 @@ function buildSlides(): ReelSlide[] {
   ];
 }
 
-export default function ConsumerGabaReel({onEvent}: Props) {
+export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Props) {
   const slides = useMemo(() => buildSlides(), []);
   const slideCount = slides.length;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -132,7 +133,7 @@ export default function ConsumerGabaReel({onEvent}: Props) {
             {Icon ? <span className="consumer-reel__icon"><Icon size={25} strokeWidth={1.7} aria-hidden="true" /></span> : null}
             <h3 id={`consumer-reel-${slide.id}-title`}>{slide.title}</h3>
             <p>{slide.body}</p>
-            {slide.link ? <a className="consumer-reel__link" href={slide.link.href} onClick={() => onEvent?.('consumer_reel_cta', {path: '/'})}>{slide.link.label} <ExternalLink size={15} aria-hidden="true" /></a> : null}
+            {slide.link && !(hasRhythmResult && slide.id === 'next') ? <a className="consumer-reel__link" href={slide.link.href} onClick={() => onEvent?.('consumer_reel_cta', {path: '/'})}>{slide.link.label} <ExternalLink size={15} aria-hidden="true" /></a> : null}
             {slide.id === 'research' ? <small className="consumer-reel__boundary">일반 GABA 연구를 쉽게 정리한 내용이에요. 셀핀다 제품 정보는 제품 구성에서 따로 확인해 보세요.</small> : null}
           </article>;
         })}

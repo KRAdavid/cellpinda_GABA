@@ -195,6 +195,9 @@ requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, '
 requireMatch(rhythm, /rhythm-result-challenge[\s\S]*?rhythm-result-commerce[\s\S]*?rhythm-result-invite[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?rhythm-more-share[\s\S]*?결과 카드 공유·저장 등 다른 방법/, 'result actions must guide the visitor from their next action to product, invitation and secondary sharing');
 requireMatch(fatigueGame, /fatigue-game-primary-action[\s\S]*?fatigue-game-onboarding-secondary[\s\S]*?바로 시작하기/, 'the focus challenge start screen must make practice primary and keep direct start and sound controls secondary');
 requireMatch(rhythm, /rhythm-result-commerce[\s\S]*?가바 1500 제품 구성 보기[\s\S]*?스마트스토어 구매자 후기 읽기/, 'completed rhythm results must offer the product and approved review destinations together');
+requireMatch(app, /<RhythmExperience onEvent=\{track\} onResultChange=\{setHasRhythmResult\}\/>[\s\S]*?<ConsumerGabaReel onEvent=\{track\} hasRhythmResult=\{hasRhythmResult\}\/>[\s\S]*?<GabaStory claims=\{content\.claims\} hasReviews=\{content\.reviews\.length > 0\} hasRhythmResult=\{hasRhythmResult\}\/>/, 'the result state must flow through the consumer story so repeated product CTAs can be reduced after completion');
+requireMatch(await read('src/components/ConsumerGabaReel.tsx'), /slide\.link && !\(hasRhythmResult && slide\.id === 'next'\)/, 'the reel must avoid repeating the product CTA after a rhythm result while keeping it for first visits');
+requireMatch(story, /hasRhythmResult \? null : <a className="text-link" href="#products">가바 1500 제품 구성 보기/, 'the GABA story must avoid repeating its product CTA after a rhythm result');
 requireMatch(fatigueGame, /fatigue-game-actions[\s\S]*?친구에게 1분 게임 보내기[\s\S]*?5분 쉬고 다시 해보기/, 'fatigue game results must prioritize the rest-and-retry action while keeping the invite secondary');
 requireMatch(rhythm, /내 답변과 점수는 전송되지 않아요/, 'the primary invitation must explain what is not shared');
 if (/rhythm-mobile-share-bar/.test(rhythm + rhythmStyles)) fail('mobile should not show a second competing share bar');
@@ -306,7 +309,7 @@ requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hol
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
-requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg과 비교 캡슐을 한 번씩 먹은 뒤, 뇌파와 활력 점수의 감소 폭을 비교한 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 GABA 100mg을 하루 먹은 주와 비교 캡슐을 먹은 주의 잠드는 시간과 수면 기록을 살펴본 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
+requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg과 비교 캡슐을 한 번씩 먹은 뒤, 뇌파와 활력 점수의 감소 폭을 비교한 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안 먹고, 잠드는 시간과 수면 기록을 살펴본 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
 requireMatch(indexHtml, /사람이 GABA를 먹은 연구 14편을 모아 참여자·먹은 양·기간을 정리한 자료예요\./, 'no-script research summary must include the approved research review record');
 requireMatch(indexHtml, /수면 불편<\/strong> 수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제와 GABA가 없는 비교 정제를 4주 먹고 잠드는 시간을 살펴본 연구예요\./, 'no-script research summary must include the approved four-week sleep study');
 if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');

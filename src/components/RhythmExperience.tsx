@@ -16,6 +16,7 @@ const campaignId = typeof window !== 'undefined'
 
 export interface RhythmExperienceProps {
   onEvent: (name: string, properties?: Record<string, string>) => void;
+  onResultChange?: (hasResult: boolean) => void;
 }
 
 function getSharedType(): RhythmType | null {
@@ -182,7 +183,7 @@ function createCard(type: RhythmType): Promise<Blob | null> {
   return new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
 }
 
-export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
+export default function RhythmExperience({ onEvent, onResultChange }: RhythmExperienceProps) {
   const [sharedType, setSharedType] = useState(getSharedType);
   const [compareConsent, setCompareConsent] = useState(false);
   const [friendType, setFriendType] = useState<RhythmType | null>(null);
@@ -303,6 +304,10 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
   const type = result?.type ?? sharedType;
   const signal = result ? fatigueSignal(result) : null;
   const question = questions[step]!;
+
+  useEffect(() => {
+    onResultChange?.(Boolean(type));
+  }, [onResultChange, type]);
 
   useEffect(() => () => {
     if (autoAdvanceTimer.current !== null) window.clearTimeout(autoAdvanceTimer.current);
