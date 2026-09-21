@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { projectConsumerVisual } from '../src/domain/public-research.ts';
+import { findPublicResearchParityMismatches } from './public-research-parity.mjs';
 
 const readJson = async relative => JSON.parse(await readFile(new URL(`../${relative}`, import.meta.url), 'utf8'));
 const fail = message => { throw new Error(`Public export invalid: ${message}`); };
@@ -53,6 +54,8 @@ const isSmartStoreReview = value => {
 };
 
 if (content.schemaVersion !== 1 || master.schemaVersion !== 1 || teaserPreview.schemaVersion !== 1 || operationsQueue.schemaVersion !== 1 || publicPulse.schemaVersion !== 1 || publicAudit.schemaVersion !== 1 || meetingPacket.schemaVersion !== 1) fail('unsupported schema');
+const researchParityMismatches = findPublicResearchParityMismatches(content, master);
+if (researchParityMismatches.length > 0) fail(`research content/master parity mismatch: ${researchParityMismatches.join('; ')}`);
 if (wranglerConfig.assets?.run_worker_first !== true) fail('all static Worker assets must pass through the security-header middleware');
 if (wranglerConfig.assets?.not_found_handling !== '404-page') fail('Worker assets must return a dedicated 404 page for unknown public paths');
 if (wranglerConfig.observability?.enabled !== true || wranglerConfig.observability?.head_sampling_rate !== 0.1 || wranglerConfig.observability?.redact_query_string !== true) fail('Worker observability must be enabled with bounded sampling and redacted query strings');

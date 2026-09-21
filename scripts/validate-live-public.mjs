@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {normalizePublicSiteUrl, publicSitePath} from './public-origin.mjs';
+import {findPublicResearchParityMismatches} from './public-research-parity.mjs';
 
 const cliBase = process.argv.slice(2).find(value => /^https:\/\//.test(value)) || '';
 const base = normalizePublicSiteUrl(process.env.PUBLIC_SITE_URL || cliBase || undefined);
@@ -174,6 +175,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const heroImageBytes = await heroImageResponse.arrayBuffer();
     assert.ok(heroImageBytes.byteLength >= 10_000, 'live hero image must contain the published visual asset');
     const [pageText, focusPageText, robotsText, sitemapText, content, master, teaserPreview, releaseManifest] = await Promise.all([page.text(), focusPageResponse.text(), robotsResponse.text(), sitemapResponse.text(), contentResponse.json(), masterResponse.json(), teaserPreviewResponse.json(), releaseManifestResponse.json()]);
+    const researchParityMismatches = findPublicResearchParityMismatches(content, master);
+    assert.deepEqual(researchParityMismatches, [], `live research content/master parity mismatch: ${researchParityMismatches.join('; ')}`);
     assert.equal(releaseManifest.schemaVersion, 1, 'live release manifest schema is invalid');
     assert.match(releaseManifest.candidateSha || '', /^[a-f0-9]{40}$/, 'live release manifest candidate SHA is invalid');
     if (expectedReleaseSha) assert.equal(releaseManifest.candidateSha, expectedReleaseSha, 'live release manifest does not match the deployed candidate SHA');
