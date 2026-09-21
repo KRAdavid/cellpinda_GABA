@@ -12,7 +12,9 @@
 .teaser-hold-icon { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid #7ebc8e; border-radius: 50%; color: #b8e3c0; font-size: 24px; }
 .teaser-hold strong { font-size: 20px; line-height: 1.4; }
 .teaser-hold span:last-child { max-width: 280px; color: #c3ddc9; font-size: 14px; line-height: 1.7; }
-.teaser-loading { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; padding: 20px; color: #d4e5d9; background: rgba(7, 23, 15, .64); font-size: 14px; }
+.teaser-loading { position: absolute; inset: 0; display: grid; place-content: center; gap: 14px; margin: 0; padding: 20px; color: #d4e5d9; background: linear-gradient(180deg, rgba(7, 23, 15, .78), rgba(7, 23, 15, .9)); font-size: 14px; text-align: center; }
+.teaser-loading a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border: 1px solid #b8e3c0; border-radius: 999px; color: #eff8f1; font-size: 13px; font-weight: 650; text-decoration: none; }
+.teaser-loading a:hover, .teaser-loading a:focus-visible { background: rgba(184, 227, 192, .16); }
 .teaser-card-copy { padding: 30px; }
 .teaser-card-title { margin: 8px 0 12px !important; font-size: 25px !important; line-height: 1.35 !important; font-weight: 650; color: #fff !important; }
 .teaser-card-copy p { margin-bottom: 22px; font-size: 15px; line-height: 1.7; }
