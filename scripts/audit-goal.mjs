@@ -59,6 +59,7 @@ const researchOk = commandCheck('research-copy', 'scripts/validate-research-copy
 const publicOk = commandCheck('public-export', 'scripts/validate-public-export.mjs', ['scripts/validate-public-export.mjs']);
 const opsOk = commandCheck('sandbox-mvp', 'scripts/validate-ops-mvp.mjs', ['src/domain/goal-mvp.ts', 'src/components/OperationsMvp.tsx']);
 const pulseOk = commandCheck('tf-pulse', 'scripts/validate-tf-pulse.mjs', ['data/tf-role-registry.json', 'data/tf-pulse-heartbeat.json']);
+const externalGateEvidenceOk = commandCheck('external-gate-evidence', 'scripts/validate-external-gate-evidence.mjs', ['data/task-graph.json', 'scripts/validate-external-gate-evidence.mjs']);
 const preflightResult = command('scripts/check-deploy-readiness.mjs');
 let preflight;
 try { preflight = JSON.parse(preflightResult.output || ''); } catch { preflight = undefined; }
@@ -164,8 +165,8 @@ const teaserConsistent = ['HOLD', 'PREVIEW'].includes(teaser.status) ? teaserTas
 const teaserStatus = teaserConsistent ? (teaser.status === 'APPROVED' ? 'MET' : 'WAITING') : 'INVALID';
 check('teaser-boundary', teaserStatus, teaserConsistent ? `티저 ${teaser.status}가 업무 그래프 ${teaserTaskState}와 일치` : '티저 공개 경계가 일치하지 않음', ['data/teaser-manifest.json', 'data/task-graph.json', 'scripts/validate-teaser-exposure.mjs'], teaserConsistent && teaser.status !== 'APPROVED' ? (teaser.requiredApprovals || []) : (teaserConsistent ? [] : ['B4와 티저 매니페스트 상태 대조']));
 
-const coreIds = new Set(['goal-contract', 'task-graph', 'research-copy', 'public-export', 'sandbox-mvp', 'tf-pulse', 'tf-role-registry', 'public-master-index']);
-const coreValid = checks.filter(item => coreIds.has(item.id)).every(item => item.status === 'MET') && contractOk && planOk && researchOk && publicOk && opsOk && pulseOk;
+const coreIds = new Set(['goal-contract', 'task-graph', 'research-copy', 'public-export', 'sandbox-mvp', 'tf-pulse', 'tf-role-registry', 'public-master-index', 'external-gate-evidence']);
+const coreValid = checks.filter(item => coreIds.has(item.id)).every(item => item.status === 'MET') && contractOk && planOk && researchOk && publicOk && opsOk && pulseOk && externalGateEvidenceOk;
 const unresolved = checks.filter(item => ['VERIFYING', 'WAITING', 'INVALID'].includes(item.status));
 const overallStatus = checks.some(item => item.status === 'INVALID') || !coreValid ? 'IN_PROGRESS_WITH_ERRORS' : unresolved.length ? 'IN_PROGRESS_WITH_GATES' : 'COMPLETE';
 const report = {
