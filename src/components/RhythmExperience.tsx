@@ -553,9 +553,9 @@ export default function RhythmExperience({ onEvent }: RhythmExperienceProps) {
               <small>1분 색 신호 게임으로 내 반응 기록을 남겨 보세요.</small>
             </div>
             <div className="rhythm-result-commerce" aria-label="제품과 구매자 후기 확인">
-              <p className="rhythm-eyebrow">더 알아보기</p>
-              <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>
-              <a className="rhythm-text-button" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 후기 읽기 · 새 창" onClick={() => onEvent('review_open', { productId: 'gaba1500', path: '/result' })}>가바 1500 스마트스토어 후기 읽기 <ArrowUpRight size={18} aria-hidden="true" /></a>
+              <p className="rhythm-eyebrow">제품과 구매자 후기를 확인하세요</p>
+              <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 구성·가격 확인하기 <ArrowRight size={18} aria-hidden="true" /></a>
+              <a className="rhythm-text-button" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 구매자 후기 읽기 · 새 창" onClick={() => onEvent('review_open', { productId: 'gaba1500', path: '/result' })}>스마트스토어 구매자 후기 읽기 <ArrowUpRight size={18} aria-hidden="true" /></a>
             </div>
           </div>
         </div>
