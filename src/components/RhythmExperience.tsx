@@ -44,6 +44,13 @@ function inviteUrl(kind: 'rhythm' | 'focus' = 'rhythm', referralId = ''): string
   return base.toString();
 }
 
+function focusFocusChallengeHeading() {
+  window.setTimeout(() => {
+    const heading = document.getElementById('fatigue-game-heading');
+    if (heading instanceof HTMLElement) heading.focus({ preventScroll: true });
+  }, 0);
+}
+
 function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady'; label: string; heading: string; body: string } {
   if (result.loadLevel === 'low') return {
     tone: 'steady',
@@ -537,7 +544,7 @@ export default function RhythmExperience({ onEvent, onResultChange }: RhythmExpe
             {result && !sharedType ? <div className="rhythm-result-quick-action" aria-label="다음 행동">
               <p className="rhythm-eyebrow">다음은 1분이에요</p>
               <p>지금 내 반응을 간단한 게임으로 확인해 보세요.</p>
-              <a className="rhythm-button" href="#focus-game">뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
+              <a className="rhythm-button" href="#focus-game" onClick={focusFocusChallengeHeading}>뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
             </div> : null}
           </article>
           <div className="rhythm-result-actions">

@@ -206,6 +206,7 @@ requireMatch(rhythm, /rhythm-result-quick-action[\s\S]*?뇌컨디션 확인 챌�
 requireMatch(fatigueGame, /fatigue-game-primary-action[\s\S]*?fatigue-game-onboarding-secondary[\s\S]*?바로 시작하기/, 'the focus challenge start screen must make practice primary and keep direct start and sound controls secondary');
 requireMatch(rhythm, /rhythm-result-commerce[\s\S]*?가바 1500 제품 구성 보기[\s\S]*?스마트스토어 구매자 후기 읽기/, 'completed rhythm results must offer the product and approved review destinations together');
 requireMatch(rhythm, /rhythm-result-quick-action[\s\S]*?다음은 1분이에요[\s\S]*?rhythm-result-next-step[\s\S]*?오늘 해볼 행동[\s\S]*?rhythm-result-commerce/, 'completed rhythm results must show the immediate action in the result card and keep product/review destinations together');
+requireMatch(rhythm, /focusFocusChallengeHeading[\s\S]*?href="#focus-game" onClick=\{focusFocusChallengeHeading\}/, 'result challenge CTA must move focus to the challenge heading after navigation');
 requireMatch(app, /<RhythmExperience onEvent=\{track\} onResultChange=\{setHasRhythmResult\}\/>[\s\S]*?<ConsumerGabaReel onEvent=\{track\} hasRhythmResult=\{hasRhythmResult\}\/>[\s\S]*?<GabaStory claims=\{content\.claims\} hasReviews=\{content\.reviews\.length > 0\} hasRhythmResult=\{hasRhythmResult\}\/>/, 'the result state must flow through the consumer story so repeated product CTAs can be reduced after completion');
 requireMatch(await read('src/components/ConsumerGabaReel.tsx'), /slide\.link && !\(hasRhythmResult && slide\.id === 'next'\)/, 'the reel must avoid repeating the product CTA after a rhythm result while keeping it for first visits');
 requireMatch(consumerReel, /const nextSlideBody = hasRhythmResult[\s\S]*결과 화면에서 제품 구성과 구매자 후기를 확인할 수 있어요\./, 'the reel next-step copy must describe the result state instead of asking visitors to repeat the check');
@@ -324,6 +325,7 @@ requireMatch(teaser, /frameRequested \? <iframe/, 'teaser frame must be absent u
 requireMatch(teaser, /src=\{preview\.url!?\}/, 'teaser iframe must use the approved preview URL directly');
 requireMatch(teaser, /teaser-card--hold/, 'teaser hold state must use a compact placeholder before a public video is available');
 requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hold[\s\S]*min-height: 220px/, 'teaser hold placeholder must stay compact on mobile');
+requireMatch(teaser, /teaser-hold-actions[\s\S]*GABA 연구 쉽게 보기[\s\S]*가바 1500 구성 보기/, 'teaser hold state must offer a clear research and product next action while the video is pending');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
