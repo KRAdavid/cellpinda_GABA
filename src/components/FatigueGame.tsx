@@ -34,11 +34,13 @@ const shapeLabels: Record<FocusStimulusShape, string> = {
 
 const breathStageCopy: Record<BreathStage, { title: string; detail: string }> = {
   inhale: { title: '숨 들이쉬기', detail: '공이 올라가는 동안 · 4초' },
-  'hold-top': { title: '잠깐 멈추기', detail: '공이 위에 머무는 동안 · 2초' },
+  'hold-top': { title: '잠깐 멈추기', detail: '공이 위에서 옆으로 이동하는 동안 · 2초' },
   exhale: { title: '숨 내쉬기', detail: '공이 내려가는 동안 · 6초' },
-  'hold-bottom': { title: '다시 멈추기', detail: '공이 아래에 머무는 동안 · 2초' },
+  'hold-bottom': { title: '다시 멈추기', detail: '공이 아래에서 옆으로 이동하는 동안 · 2초' },
   finish: { title: '편한 호흡으로 마무리', detail: '숨을 세지 말고 자연스럽게 돌아오세요' },
 };
+
+const BREATH_LINE_PATH = 'M80 280 L300 70 L540 70 L760 280 L80 280';
 
 interface FatigueGameProps {
   onEvent: (name: string, properties?: Record<string, string>) => void;
@@ -228,17 +230,24 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const totalLength = path.getTotalLength();
-    const halfLength = totalLength / 2;
+    const diagonalLength = Math.hypot(220, 210);
+    const segmentLengths = [diagonalLength, 240, diagonalLength, 680];
+    const stageStops = segmentLengths.reduce<number[]>((stops, segmentLength) => {
+      stops.push((stops.at(-1) ?? 0) + (segmentLength / segmentLengths.reduce((sum, length) => sum + length, 0)) * totalLength);
+      return stops;
+    }, []);
     let frame = 0;
 
     const draw = () => {
       const elapsed = Math.max(0, (Date.now() - startedAt) / 1000);
-      const cycle = elapsed >= BREATH_ACTIVE_SECONDS ? 0 : elapsed % BREATH_CYCLE_SECONDS;
+      const finished = elapsed >= BREATH_ACTIVE_SECONDS;
+      const cycle = finished ? BREATH_CYCLE_SECONDS : elapsed % BREATH_CYCLE_SECONDS;
       let distance = 0;
-      if (cycle < 4) distance = halfLength * (cycle / 4);
-      else if (cycle < 6) distance = halfLength;
-      else if (cycle < 12) distance = halfLength + halfLength * ((cycle - 6) / 6);
-      else distance = totalLength;
+      if (cycle < 4) distance = stageStops[0] * (cycle / 4);
+      else if (cycle < 6) distance = stageStops[0];
+      else if (cycle < 12) distance = stageStops[0] + (stageStops[1] - stageStops[0]) + (stageStops[2] - stageStops[1]) * ((cycle - 6) / 6);
+      else distance = stageStops[2] + (stageStops[3] - stageStops[2]) * ((cycle - 12) / 2);
+      if (finished) distance = totalLength;
 
       const point = path.getPointAtLength(distance);
       ball.setAttribute('transform', `translate(${point.x} ${point.y})`);
@@ -261,7 +270,7 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
         <strong aria-live="polite" aria-atomic="true">{breathStageCopy[cue.stage].title}</strong>
         {cue.stage !== 'finish' ? <b>{cue.seconds}</b> : null}
       </div>
-      <svg className="fatigue-breath-line" viewBox="0 0 960 360" role="img" aria-label="공이 선을 따라 위로 올라갔다가 아래로 내려오는 애니메이션">
+      <svg className="fatigue-breath-line" viewBox="0 0 960 360" role="img" aria-label="공이 선을 따라 4초 동안 올라가고, 위에서 2초 옆으로 이동하고, 6초 동안 내려간 뒤, 아래에서 2초 옆으로 돌아오는 애니메이션">
         <defs>
           <linearGradient id="breath-line-gradient" x1="0" x2="1">
             <stop offset="0" stopColor="#f3bc70" />
@@ -275,9 +284,9 @@ function BreathLineGuide({ startedAt, cue }: { startedAt: number | null; cue: Br
         </defs>
         <rect width="960" height="360" rx="18" fill="#080b0a" />
         {stars.map(([x, y], index) => <circle key={index} cx={x} cy={y} r={index % 3 === 0 ? 1.7 : 1.2} fill="#d7ded9" opacity={index % 2 === 0 ? '.48' : '.24'} />)}
-        <path d="M480 300 C310 300 300 75 480 75 C660 75 650 300 480 300" fill="none" stroke="#77827b" strokeOpacity=".45" strokeWidth="4" strokeLinecap="round" />
-        <path ref={pathRef} d="M480 300 C310 300 300 75 480 75 C660 75 650 300 480 300" fill="none" stroke="transparent" strokeWidth="1" />
-        <path ref={activePathRef} d="M480 300 C310 300 300 75 480 75 C660 75 650 300 480 300" pathLength="100" fill="none" stroke="url(#breath-line-gradient)" strokeWidth="5" strokeLinecap="round" filter="url(#breath-ball-glow)" />
+        <path d={BREATH_LINE_PATH} fill="none" stroke="#77827b" strokeOpacity=".45" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path ref={pathRef} d={BREATH_LINE_PATH} fill="none" stroke="transparent" strokeWidth="1" />
+        <path ref={activePathRef} d={BREATH_LINE_PATH} pathLength="100" fill="none" stroke="url(#breath-line-gradient)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" filter="url(#breath-ball-glow)" />
         <g ref={ballRef} className="fatigue-breath-ball" aria-hidden="true">
           <circle r="15" fill="#fff" filter="url(#breath-ball-glow)" />
           <circle r="5" fill="#fff" />
@@ -790,7 +799,7 @@ export default function FatigueGame({ onEvent, onInvite }: FatigueGameProps) {
         {phase === 'rest' ? <div className="fatigue-game-rest">
           <p className="fatigue-game-kicker">5분 휴식 · 호흡 안내</p>
           <h3 ref={restHeadingRef} tabIndex={-1}>5분만 화면을 내려놓고 쉬어 보세요.</h3>
-          <p>화면을 보며 선을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 처음에 호흡 순서를 익힌 뒤에는 화면을 내려놓고 소리만 들어도 좋아요. 선이 올라갈 때 들이쉬고 내려갈 때 내쉬세요.</p>
+          <p>화면을 보며 공을 따라가도 좋고, 싱잉볼 소리를 켠 뒤 눈을 감아도 괜찮아요. 처음에 호흡 순서를 익힌 뒤에는 화면을 내려놓고 소리만 들어도 좋아요. 선이 올라갈 때 들이쉬고, 위·아래에서 옆으로 움직일 때 잠깐 멈추고, 내려갈 때 내쉬세요.</p>
           <BreathLineGuide startedAt={restStartedAt} cue={breathCue} />
           <p className="fatigue-breath-note">들이쉬기 4초 · 멈추기 2초 · 내쉬기 6초 · 다시 멈추기 2초를 반복합니다. 숨을 참기 불편하거나 어지럽고 답답하면 멈춤을 건너뛰고 자연스럽게 호흡하세요.</p>
           <div className="fatigue-rest-clock" aria-label="5분 호흡 안내 타이머">
