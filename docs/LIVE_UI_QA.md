@@ -1,14 +1,14 @@
 # 공개 Pages UI 검증 기록
 
-## 2026-09-22 최신 라이브 재검증 — PR #155
+## 2026-09-22 최신 라이브 재검증 — PR #174
 
-PR [#155](https://github.com/KRAdavid/cellpinda_GABA/pull/155)의 필수 검사(`release-verify`, `site-quality-verify`)가 성공한 뒤 관리자 우회 병합을 진행했고, 병합 직후 `enforce_admins`를 복구했다. 병합 커밋은 `68c3fd55f2a7c689df992aadf5279a047c9867b6`이며 동일 계정의 자기 승인을 독립 Code Owner 승인으로 기록하지 않는다. 배포 [run 35628812922](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35628812922)는 `release-verify`·Pages 게시·라이브 smoke·`release-status`를 모두 성공했다.
+PR [#174](https://github.com/KRAdavid/cellpinda_GABA/pull/174)의 필수 검사(`release-verify`, `site-quality-verify`)가 성공한 뒤 관리자 우회 병합을 진행했고, 병합 직후 전체 보호 규칙을 복원했다. 병합 커밋은 `c241eb6c1edbc33de023e38247578005413a3844`이며 동일 계정의 자기 승인을 독립 Code Owner 승인으로 기록하지 않는다. 배포 [run 35654735285](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35654735285)는 `release-verify`·Pages 게시·라이브 smoke·`release-status`를 모두 성공했다.
 
 공개 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)은 HTTP 200이며 정적 모드·10개 경로·bundle hash 63개·연구 6건·공개 주장 12개·제품 1개·후기 목적지 1개·Smart Store 단일 목적지·750 제거·내부 운영 스냅샷 제외·티저 `HOLD`를 확인한다. `pnpm run validate:live-public`는 page 200·provenance 일치·제품 경계 문구·Smart Store 목적지를 통과했다.
 
 라이브 390px CDP 감리에서 결과 카드의 `뇌컨디션 확인 챌린지 해보기` CTA가 보이고, 클릭 뒤 `뇌컨디션 확인 챌린지` 제목으로 포커스가 이동하며 `#focus-game` 해시가 유지되는 것을 확인했다. 티저 `HOLD`에는 `GABA 연구 쉽게 보기`와 `가바 1500 구성 보기`가 표시되고 약 330px 높이로 잘리거나 가로로 넘치지 않는다. 연구 상세에는 Powers 연구의 `GABA 3g·90분 관찰`, 성장·근육 발달 효과를 확인한 연구가 아니라는 범위, 3g이 셀핀다 제품 섭취량 근거가 아니라는 설명이 포함된다.
 
-보호 규칙은 필수 검사 2개·Code Owner 리뷰 1명·관리자 강제 적용·force push/deletion 차단으로 복구되어 있다. Worker/D1은 운영 비밀값 미설정으로 `skipped`이며 B2·B3·B4·C2·E1은 외부 입력 게이트로 남아 있다. 이 기록은 공개 화면과 배포 증거를 갱신한 것이며, 외부 승인이나 제품 효능을 대신 확정하지 않는다.
+보호 규칙은 필수 검사 2개·Code Owner 리뷰 1명·마지막 push 승인·관리자 강제 적용·force push/deletion 차단으로 복구되어 있다. Worker/D1은 운영 비밀값 미설정으로 `skipped`이며 B2·B3·B4·C2·E1은 외부 입력 게이트로 남아 있다. 이 기록은 공개 화면과 배포 증거를 갱신한 것이며, 외부 승인이나 제품 효능을 대신 확정하지 않는다.
 
 ## 2026-09-22 최신 라이브 재검증 — PR #153
 
