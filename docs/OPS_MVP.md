@@ -2,7 +2,7 @@
 
 ## 최신 운영 상태 — 2026-09-21 · 라이브 release manifest 기준
 
-공개 Pages는 정적 배포본으로 정상 동작하고, 최신 확인 스냅샷인 [배포 run 35599044204](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35599044204)의 라이브 검증은 페이지 200·연구 6건·제품 1개·공유 페이지 6개·스마트스토어 목적지·750 제거·provenance 일치를 확인했다. 공개 판정의 권위는 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 `candidateSha`·생성 시각·검사 결과이며, 문서 전용 병합으로 SHA가 바뀌어도 manifest를 최종 기준으로 삼는다. 티저 B4는 `HOLD/WAITING`이다. 승인된 공개 미디어 주소가 생기기 전에는 외부 영상 iframe·재생 URL을 노출하지 않으며, 제품·후기·주문·Worker/D1 연결은 각각의 사람 입력 게이트를 유지한다. 라이브 smoke 출력도 티저를 `status`와 `publicUrl` 여부로 보고해 `HOLD`와 공개 재생을 혼동하지 않는다. `/products/` 직접 진입은 제품 섹션에 자동 안착한다.
+공개 Pages는 정적 배포본으로 정상 동작하고, 최신 확인 스냅샷인 [배포 run 35603667470](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35603667470)의 라이브 검증은 페이지 200·연구 6건·제품 1개·공유 페이지 6개·스마트스토어 목적지·750 제거·provenance 일치를 확인했다. 공개 판정의 권위는 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 `candidateSha`·생성 시각·검사 결과이며, 문서 전용 병합으로 SHA가 바뀌어도 manifest를 최종 기준으로 삼는다. 티저 B4는 `HOLD/WAITING`이다. 승인된 공개 미디어 주소가 생기기 전에는 외부 영상 iframe·재생 URL을 노출하지 않으며, 제품·후기·주문·Worker/D1 연결은 각각의 사람 입력 게이트를 유지한다. 라이브 smoke 출력도 티저를 `status`와 `publicUrl` 여부로 보고해 `HOLD`와 공개 재생을 혼동하지 않는다. `/products/` 직접 진입은 제품 섹션에 자동 안착한다.
 
 기준일: 2026-09-21
 
