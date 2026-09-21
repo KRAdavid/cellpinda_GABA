@@ -44,6 +44,13 @@ function inviteUrl(kind: 'rhythm' | 'focus' = 'rhythm', referralId = ''): string
   return base.toString();
 }
 
+function focusFocusChallengeHeading() {
+  window.setTimeout(() => {
+    const heading = document.getElementById('fatigue-game-heading');
+    if (heading instanceof HTMLElement) heading.focus({ preventScroll: true });
+  }, 0);
+}
+
 function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady'; label: string; heading: string; body: string } {
   if (result.loadLevel === 'low') return {
     tone: 'steady',
@@ -534,17 +541,17 @@ export default function RhythmExperience({ onEvent, onResultChange }: RhythmExpe
             {result ? <BrainLoadVisual result={result} /> : null}
             {signal ? <div className={`rhythm-fatigue-alert rhythm-fatigue-alert-${signal.tone}`} role="status"><AlertTriangle size={23} aria-hidden="true" /><div><p className="rhythm-eyebrow">{signal.label}</p><h4>{signal.heading}</h4><p>{signal.body}</p></div></div> : null}
             {result?.loadLevel === 'high' ? <details className="rhythm-care-guide"><summary>피로가 몇 주째 이어지거나 일상에 지장을 준다면</summary><p>이 점검은 건강 검사가 아니에요. 피로와 잠 문제는 원인이 다양할 수 있으니, 불편이 계속되면 의료진에게 현재 상황을 설명해 보세요.</p></details> : null}
+            {result && !sharedType ? <div className="rhythm-result-quick-action" aria-label="다음 행동">
+              <p className="rhythm-eyebrow">다음은 1분이에요</p>
+              <p>지금 내 반응을 간단한 게임으로 확인해 보세요.</p>
+              <a className="rhythm-button" href="#focus-game" onClick={focusFocusChallengeHeading}>뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
+            </div> : null}
           </article>
           <div className="rhythm-result-actions">
             {sharedType ? <label className="rhythm-compare-consent"><input type="checkbox" aria-label="공유받은 유형과 내 결과 비교하기" checked={compareConsent} onChange={event => setCompareConsent(event.target.checked)} /><span>공유받은 유형을 이 화면에서만 기억하고, 내 결과와 함께 볼게요.<small>선택 사항이에요. 문항별 답변은 알 수 없으며 새로고침하면 기억이 사라져요.</small></span></label> : null}
             {!sharedType ? <button type="button" className="rhythm-text-button" onClick={start}>다시 체크하기 <ArrowRight size={18} aria-hidden="true" /></button> : null}
             <div className="rhythm-result-next-step" aria-label="오늘 해볼 행동">
               <p className="rhythm-eyebrow">오늘 해볼 행동</p>
-              <div className="rhythm-result-challenge" aria-label="뇌컨디션 확인 챌린지">
-                <p className="rhythm-eyebrow">내 상태를 더 확인해 보세요</p>
-                <a className="rhythm-button" href="#focus-game">뇌컨디션 확인 챌린지 해보기 <ArrowRight size={18} aria-hidden="true" /></a>
-                <small>1분 색 신호 게임으로 내 반응 기록을 남겨 보세요.</small>
-              </div>
               <div className="rhythm-result-commerce" aria-label="제품과 구매자 후기 확인">
                 <p className="rhythm-eyebrow">제품과 구매자 후기를 확인하세요</p>
                 <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>

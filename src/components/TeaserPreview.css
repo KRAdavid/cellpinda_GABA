@@ -11,7 +11,10 @@
 .teaser-hold { display: grid; place-items: center; align-content: center; gap: 14px; min-height: 360px; padding: 32px; color: #eff8f1; text-align: center; background: radial-gradient(circle at 50% 42%, rgba(111, 184, 137, .22), transparent 52%), #07170f; }
 .teaser-hold-icon { display: grid; place-items: center; width: 52px; height: 52px; border: 1px solid #7ebc8e; border-radius: 50%; color: #b8e3c0; font-size: 24px; }
 .teaser-hold strong { font-size: 20px; line-height: 1.4; }
-.teaser-hold span:last-child { max-width: 280px; color: #c3ddc9; font-size: 14px; line-height: 1.7; }
+.teaser-hold > span:not(.teaser-hold-icon) { max-width: 280px; color: #c3ddc9; font-size: 14px; line-height: 1.7; }
+.teaser-hold-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.teaser-hold-actions a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 12px; border: 1px solid #8bc69a; border-radius: 999px; color: #eff8f1; font-size: 13px; font-weight: 650; text-decoration: none; }
+.teaser-hold-actions a:hover, .teaser-hold-actions a:focus-visible { background: rgba(184, 227, 192, .16); }
 .teaser-loading { position: absolute; inset: 0; display: grid; place-content: center; gap: 14px; margin: 0; padding: 20px; color: #d4e5d9; background: linear-gradient(180deg, rgba(7, 23, 15, .78), rgba(7, 23, 15, .9)); font-size: 14px; text-align: center; }
 .teaser-loading a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 16px; border: 1px solid #b8e3c0; border-radius: 999px; color: #eff8f1; font-size: 13px; font-weight: 650; text-decoration: none; }
 .teaser-loading a:hover, .teaser-loading a:focus-visible { background: rgba(184, 227, 192, .16); }
@@ -25,4 +28,4 @@
 @media(max-width: 800px) { .teaser-wrap { grid-template-columns: 1fr; gap: 28px; } .teaser-section { padding: 64px 0; } }
 @media(max-width: 800px) { .teaser-card { grid-template-columns: 1fr; } .teaser-player, .teaser-frame { min-height: min(70vh, 520px); height: min(70vh, 520px); } }
 @media(max-width: 520px) { .teaser-player, .teaser-frame { min-height: 360px; height: 70vh; } .teaser-card-copy { padding: 24px; } }
-@media(max-width: 520px) { .teaser-card--hold .teaser-player, .teaser-card--hold .teaser-hold { min-height: 220px; height: 220px; } }
+@media(max-width: 520px) { .teaser-card--hold .teaser-player, .teaser-card--hold .teaser-hold { min-height: 220px; height: auto; } }
