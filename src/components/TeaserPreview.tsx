@@ -105,7 +105,7 @@ export default function TeaserPreview({onEvent}: Props) {
           <p className="teaser-label">{isOnHold ? '공개 준비 중' : '화면에 들어오면 자동 시작'}</p>
           <p className="teaser-card-title">{preview.title}</p>
           <p>{isOnHold ? '발효가바가 만들어지는 이야기를 영상으로 준비하고 있어요.' : '이 화면에 들어오면 영상이 자동으로 시작돼요. 소리는 영상 안에서 켜고 끌 수 있어요.'}</p>
-          {!isOnHold && <p className="teaser-fallback">자동 시작이 막히면 화면 안의 재생 버튼을 눌러 주세요. 계속 어려우면 <a href={preview.url!} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('teaser_external_opened',{path:'/teaser'})}>새 창에서 보기 ↗</a></p>}
+          {!isOnHold && frameLoaded && <p className="teaser-fallback">자동 시작이 막히면 화면 안의 재생 버튼을 눌러 주세요. 계속 어려우면 <a href={preview.url!} target="_blank" rel="noopener noreferrer" onClick={()=>onEvent?.('teaser_external_opened',{path:'/teaser'})}>새 창에서 보기 ↗</a></p>}
         </div>
       </div>
       <p className="teaser-note">{preview.note}</p>
