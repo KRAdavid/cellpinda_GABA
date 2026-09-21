@@ -1,5 +1,13 @@
 # 중간 구현 상태 — 2026-09-21
 
+## 현재 확정 공개 상태 — 2026-09-21 14:08 KST
+
+관리자 병합으로 PR #100·#101을 main에 반영한 뒤, 보호 규칙을 즉시 복구했다. 현재 main은 `a3d29885e4188db3e397440f24da6436774f8c0a`이며 배포 run [35563431421](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35563431421)의 `release-verify`·Pages 게시·라이브 smoke·release status가 모두 성공했다. 공개 `release-manifest.json`도 같은 SHA를 가리키며 HTTP 200이다.
+
+라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 62개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `PREVIEW`를 확인한다. 390px·1440px 실제 화면 감리에서 가로 넘침·콘솔 오류·주요 접근성 누락은 확인되지 않았다.
+
+PR #101은 저장소 전체 `CODEOWNERS`와 네 개 GitHub Actions 워크플로 최소 권한 계약을 `validate:governance`로 빌드에 연결했다. 현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 마지막 푸시 승인, 선형 이력, 대화 해결, `enforce_admins`가 모두 활성이다. 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트이며 자동으로 완료 처리하지 않는다.
+
 ## 공유 링크 첫 화면 보정 — 후보 작업 중
 
 공유받은 하루 리듬 결과가 홈 히어로 아래에 묻히지 않도록 결과 카드로 자동 착지한다. 모바일·데스크톱 헤더 오프셋을 적용하고 사용자 조작 시 정렬을 중단한다. 공유가 아닌 일반 체크 흐름에는 적용하지 않는다.
