@@ -198,7 +198,7 @@ export default function App(){
   return()=>window.removeEventListener('cellpinda:analytics-consent-changed',onConsent);
  },[operationsView,adminView,accountView]);
  useEffect(()=>{
- if(!content||currentPath!=='/')return;
+  if(!content||!['/','/products/'].includes(currentPath))return;
   const url=new URL(location.href);
   if(rhythmIdFromUrl(url)){
    // RhythmExperience owns the shared-result alignment. Keeping a second
@@ -249,7 +249,7 @@ export default function App(){
    const firstFrame=window.requestAnimationFrame(()=>{align();window.requestAnimationFrame(align);});
    return()=>window.cancelAnimationFrame(firstFrame);
   }
-  const productView=url.searchParams.getAll('view').length===1&&url.searchParams.get('view')==='products'&&!url.searchParams.has('rhythm');
+  const productView=(currentPath==='/products/' || (url.searchParams.getAll('view').length===1&&url.searchParams.get('view')==='products'))&&!url.searchParams.has('rhythm');
   if(productView){
    const target=document.getElementById('products');
    if(!target)return;
