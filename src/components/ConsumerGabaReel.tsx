@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useRef, useState} from 'react';
+import {useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent} from 'react';
 import {ArrowLeft, ArrowRight, BookOpen, Brain, ExternalLink, PauseCircle, Sparkles} from 'lucide-react';
 import './ConsumerGabaReel.css';
 
@@ -102,6 +102,21 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
     onEvent?.('consumer_reel_navigation', {path: '/'});
   };
 
+  const handleRailKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    const nextIndex = event.key === 'ArrowRight' || event.key === 'PageDown'
+      ? activeIndex + 1
+      : event.key === 'ArrowLeft' || event.key === 'PageUp'
+        ? activeIndex - 1
+        : event.key === 'Home'
+          ? 0
+          : event.key === 'End'
+            ? slides.length - 1
+            : null;
+    if (nextIndex === null) return;
+    event.preventDefault();
+    goTo(nextIndex);
+  };
+
   return <section id="consumer-reel" className="consumer-reel" aria-labelledby="consumer-reel-heading">
     <div className="wrap consumer-reel__wrap">
       <div className="consumer-reel__heading">
@@ -119,7 +134,7 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
           <button type="button" className="consumer-reel__control" onClick={() => goTo(activeIndex + 1)} disabled={activeIndex === slides.length - 1} aria-label="다음 카드"><ArrowRight size={18} aria-hidden="true" /></button>
         </div>
       </div>
-      <div ref={railRef} className="consumer-reel__rail" tabIndex={0} aria-label="GABA 이야기 카드 목록">
+      <div ref={railRef} className="consumer-reel__rail" tabIndex={0} aria-label="GABA 이야기 카드 목록" onKeyDown={handleRailKeyDown}>
         {slides.map((slide, index) => {
           const Icon = slide.icon;
           return <article
