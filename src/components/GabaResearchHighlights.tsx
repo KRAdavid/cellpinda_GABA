@@ -31,7 +31,7 @@ const highlightOrder: Highlight[] = [
   {
     id: 'research-powers-2008',
     label: '쉬었을 때·운동했을 때',
-    title: '쉬었을 때와 운동했을 때의 혈액 속 변화',
+    title: '쉰 날·운동한 날 몸의 변화',
     summary: 'GABA 또는 비교 캡슐을 먹고 쉬었을 때와 운동했을 때 혈액 속 변화를 비교했어요.',
     facts: ['참여: 운동 경험 남성 11명', '연구 조건: 3g 한 번', '비교: 쉬었을 때·운동했을 때'],
     Icon: Dumbbell,
