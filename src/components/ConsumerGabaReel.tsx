@@ -50,7 +50,7 @@ function buildSlides(): ReelSlide[] {
       body: '오늘 필요한 휴식을 먼저 확인한 뒤, 제품 구성과 구매자 후기를 이어서 볼 수 있어요.',
       kind: 'cta',
       icon: Sparkles,
-      link: {href: '#rhythm', label: '잠과 휴식 1분 체크'},
+      link: {href: '#products', label: '제품 구성 확인하기'},
     },
   ];
 }
