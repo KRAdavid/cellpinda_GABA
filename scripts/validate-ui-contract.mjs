@@ -237,7 +237,7 @@ requireMatch(app, /<GabaResearchHighlights claims=\{content\.claims\}[^>]*\/>/, 
 requireMatch(app, /url\.hash==='#brain-load-evidence'[\s\S]*getElementById\('brain-load-evidence'\)[\s\S]*scrollIntoView/, 'brain-load evidence hash links must align after async content loads');
 requireMatch(gabaResearchHighlights, /일반 GABA 연구를 쉬운 말로 정리했어요\.[\s\S]*셀핀다 완제품으로 시험한 결과가 아니며[\s\S]*셀핀다 제품 정보는 제품 카드에서 따로 확인할 수 있어요\./, 'post-teaser research highlights must keep a clear general-research and product boundary');
 requireMatch(gabaResearchHighlights, /(?:GABA를 먹은 사람 연구에서|일반 GABA 연구에서)[\s\S]*무엇이 기록됐을까요\?/, 'post-teaser GABA research heading must state the consumer question directly');
-for (const marker of ['잠드는 시간과 수면 기록', '머리를 많이 쓴 뒤 뇌파·활력 점수의 감소 폭을 비교했어요', '쉰 날·운동한 날 혈액 속 성장호르몬을 비교했어요', '그림으로 한눈에 보기', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
+for (const marker of ['잠드는 시간과 수면 기록', '머리를 많이 쓴 뒤 뇌파·활력 점수의 감소 폭을 비교했어요', 'GABA 3g을 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 연구', '그림으로 한눈에 보기', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight[\s\S]*claim\.metadata\?\.consumerFinding[\s\S]*claim\.publicText/, 'post-teaser research highlights must read reviewed consumer copy and tolerate an older local API snapshot');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
 requireMatch(gabaResearchHighlights, /gaba-research-highlight-boundary-badge[\s\S]*일반 GABA 연구 · 셀핀다 완제품 시험 아님/, 'homepage research highlights must repeat the product-study boundary on each card');
@@ -245,6 +245,7 @@ requireMatch(gabaResearchHighlights, /research-powers-2008[\s\S]*혈액 속 수�
 for (const marker of ['연구 조건: 하루 100mg', '연구 조건: 100mg 한 번', '연구 조건: 3g 한 번']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
 requireMatch(research, /research-library-study-boundary[\s\S]*일반 GABA 연구 · 셀핀다 완제품 시험 아님/, 'research cards must show a compact product-study boundary badge');
+requireMatch(research, /claim\.id === 'research-powers-2008'[\s\S]*research-library-scope[\s\S]*섭취 후 90분 동안 혈액 속 수치를 살펴본 자료예요\.[\s\S]*연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요\./, 'growth-hormone scope must be visible before the detail disclosure');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
 for (const marker of ['잠이 부족하면', '집중·기억·판단이 흔들릴 수 있어요.', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 if (/내 생활에서/.test(brainLoadEvidence)) fail('brain-load evidence must label its practical suggestion without implying that a general study finding directly describes the visitor');
