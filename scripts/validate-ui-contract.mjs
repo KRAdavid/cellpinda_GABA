@@ -305,9 +305,9 @@ requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hol
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
-requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg을 한 번 먹은 뒤, 뇌파와 활력 점수의 감소 폭을 비교한 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 하루 100mg을 먹은 주와 비교 캡슐을 먹은 주의 잠드는 시간과 수면 기록을 살펴본 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
+requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg과 비교 캡슐을 한 번씩 먹은 뒤, 뇌파와 활력 점수의 감소 폭을 비교한 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 GABA 100mg을 하루 먹은 주와 비교 캡슐을 먹은 주의 잠드는 시간과 수면 기록을 살펴본 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
 requireMatch(indexHtml, /사람이 GABA를 먹은 연구 14편을 모아 참여자·먹은 양·기간을 정리한 자료예요\./, 'no-script research summary must include the approved research review record');
-requireMatch(indexHtml, /수면 불편<\/strong> 수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제와 비교 정제를 4주 먹고 잠드는 시간을 살펴본 연구예요\./, 'no-script research summary must include the approved four-week sleep study');
+requireMatch(indexHtml, /수면 불편<\/strong> 수면 불편을 호소한 성인 40명이 하루 GABA 300mg 정제와 GABA가 없는 비교 정제를 4주 먹고 잠드는 시간을 살펴본 연구예요\./, 'no-script research summary must include the approved four-week sleep study');
 if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');
 requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 3g을 한 번 먹고 운동 없이 쉰 조건과 운동 조건에서 혈액 속 성장호르몬 수치를 살펴봤어요\. 셀핀다 가바 1500 제품 정보와는 따로 확인해 주세요\./, 'no-script research summary must match the approved Powers study scope and product boundary');
 if (/운동 뒤 혈액 속 호르몬과 몸무게 변화/.test(indexHtml)) fail('no-script research summary must not expose the held body-composition study');
