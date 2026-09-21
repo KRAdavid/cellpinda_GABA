@@ -174,7 +174,7 @@ if (/rhythm-recovery-intro|rhythm-load-signals/.test(rhythm)) fail('the 1-minute
 requireMatch(rhythm, /rhythm-start-scenes[\s\S]*?질문에 나오는 생활 장면/, 'optional everyday examples must stay secondary to the check CTA');
 requireMatch(rhythm, /rhythm-load-answer-dots[\s\S]*value >= 2 \? 'is-filled' : ''/, 'the result must visualize frequent self-reported rest gaps by question, not as a measured brain image');
 requireMatch(rhythm, /result\.loadScore < 10[\s\S]*?최근 7일, 힘들었다고 답한 날이 있어요/, 'higher response load must lead to a clear, non-diagnostic rest suggestion');
-requireMatch(rhythm, /<article className="rhythm-result-card" id="rhythm-result">[\s\S]*?<h3 ref=\{resultRef\}[\s\S]*?rhythm-result-primary-actions[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?<BrainLoadVisual/, 'the privacy-preserving invitation must appear below the result name before the score visualization');
+requireMatch(rhythm, /<article className="rhythm-result-card" id="rhythm-result">[\s\S]*?<h3 ref=\{resultRef\}[\s\S]*?<BrainLoadVisual/, 'the result card must show the score visualization below the result name');
 requireMatch(rhythm, /const description = `5개 질문 중 \$\{frequentAnswers\}개에서 힘들었다고 답했어요\.`[\s\S]*?다섯 질문에 고른 답을 정리한 기록이에요\./, 'the answer visualization must clearly describe its self-report basis');
 if (/products-intro-actions|products-intro-buy|products-review-shortcut/.test(app)) fail('product price and review shortcuts must not be repeated in the product intro beside their destination cards');
 requireMatch(app, /id="products"[\s\S]*?스마트스토어에서 가격·재고 확인하기[\s\S]*?id="reviews"|<ReviewExperience/, 'product purchase information must name the Smart Store destination on the product card, with reviews in their own section');
@@ -191,7 +191,8 @@ if (/<Suspense fallback=\{null\}><(?:GabaStory|TeaserPreview|GabaResearchHighlig
 requireMatch(styles, /@media\(max-width:680px\)[\s\S]*?\.product-portion-grid\{grid-template-columns:repeat\(10,12px\);gap:6px[\s\S]*?\.product-body \.product-cta\{order:2/, 'mobile product composition must stay compact so the primary purchase CTA enters the first product viewport');
 requireMatch(rhythm, /navigator\.share|copyLink/, 'result sharing fallback is missing');
 requireMatch(rhythm, /친구에게 “너도 해봐” 보내기|shareInvite/, 'result sharing must invite the recipient to run their own check');
-requireMatch(rhythm, /rhythm-more-share[\s\S]*?결과 카드 공유·저장 등 다른 방법/, 'secondary result-share methods must be grouped below the primary invitation');
+requireMatch(rhythm, /rhythm-result-challenge[\s\S]*?rhythm-result-commerce[\s\S]*?rhythm-result-invite[\s\S]*?친구에게 1분 체크 보내기[\s\S]*?내 답변과 점수는 전송되지 않아요[\s\S]*?rhythm-more-share[\s\S]*?결과 카드 공유·저장 등 다른 방법/, 'result actions must guide the visitor from their next action to product, invitation and secondary sharing');
+requireMatch(fatigueGame, /fatigue-game-primary-action[\s\S]*?fatigue-game-onboarding-secondary[\s\S]*?바로 시작하기/, 'the focus challenge start screen must make practice primary and keep direct start and sound controls secondary');
 requireMatch(rhythm, /rhythm-result-commerce[\s\S]*?가바 1500 구성·가격 확인하기[\s\S]*?스마트스토어 구매자 후기 읽기/, 'completed rhythm results must offer the product and approved review destinations together');
 requireMatch(fatigueGame, /fatigue-game-actions[\s\S]*?친구에게 1분 게임 보내기[\s\S]*?5분 쉬고 다시 해보기/, 'fatigue game results must prioritize the rest-and-retry action while keeping the invite secondary');
 requireMatch(rhythm, /내 답변과 점수는 전송되지 않아요/, 'the primary invitation must explain what is not shared');
@@ -258,7 +259,7 @@ requireMatch(fatigueGame, /phase !== 'practice-hold' && phase !== 'practice-swit
 requireMatch(fatigueGame, /function finishPracticeSpeed\(\)[\s\S]*setPhase\('practice-switch-match'\)/, 'focus game must practice the all-signals stage before color matching');
 requireMatch(fatigueGame, /function finishPracticeSwitchMatch\(\)[\s\S]*setPhase\('practice-switch-hold'\)/, 'focus game must practice matching and non-matching switch signals');
 requireMatch(fatigueGame, /phase === 'practice-complete'[\s\S]*onClick=\{\(\) => startRun\('baseline'\)\}/, 'practice completion must lead to scored play');
-requireMatch(fatigueGame, /연습을 건너뛰고 바로 시작/, 'focus game must let returning users skip the practice');
+requireMatch(fatigueGame, /바로 시작하기/, 'focus game must let returning users skip the practice');
 requireMatch(fatigueGame, /aria-valuenow=\{3 - practiceCountdown\}/, 'practice wait must show clear visible progress');
 requireMatch(fatigueGame, /lastBowlStageRef\.current === breathCue\.stage[\s\S]*ringSingingBowl/, 'a singing bowl cue must play once at each breathing-stage transition');
 requireMatch(fatigueGame, /createFocusRunPattern\(Math\.random, runPatternRef\.current\.signature\)/, 'before and after challenge runs must receive different randomized forms');

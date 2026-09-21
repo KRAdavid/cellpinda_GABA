@@ -23,6 +23,11 @@ for (const job of ['deploy-pages', 'smoke-live', 'worker-readiness', 'deploy-wor
   assert.match(jobBlock, /github\.ref == 'refs\/heads\/main'/, `${job} must only run for main`);
 }
 
+const releaseStatusStart = lines.findIndex(line => line === '  release-status:');
+const releaseStatusEnd = lines.findIndex((line, index) => index > releaseStatusStart && /^  [\w-]+:$/.test(line));
+const releaseStatusJob = lines.slice(releaseStatusStart + 1, releaseStatusEnd < 0 ? lines.length : releaseStatusEnd).join('\n');
+assert.match(releaseStatusJob, /permissions:\r?\n\s+contents: read\r?\n\s+deployments: read/, 'release status must be able to read deployment history without write permissions');
+
 assert.match(workflow, /^  deploy-pages:\r?\n    needs: \[release-verify, worker-readiness, deploy-worker\]$/m, 'Pages publishing must wait for release verification, Worker readiness, and Worker deployment');
 assert.match(workflow, /deploy-pages:[\s\S]*if: always\(\) && github\.event_name != 'pull_request'[\s\S]*needs\.release-verify\.result == 'success'[\s\S]*needs\.worker-readiness\.result == 'success'[\s\S]*needs\.worker-readiness\.outputs\.enabled != 'true' \|\| needs\.deploy-worker\.result == 'success'/, 'Pages publishing must fail closed when verification, readiness, or an enabled Worker deployment fails');
 assert.match(workflow, /rewrite-public-origin\.mjs dist-pages/, 'Pages artifacts must apply the selected public origin');
@@ -42,6 +47,10 @@ assert.match(workflow, /mode="STATIC_ONLY"/, 'release status must identify a sta
 assert.match(workflow, /Worker\/D1 remains HOLD; this run publishes the static public site only\./, 'static-only releases must expose the operational hold');
 assert.match(workflow, /release-status:[\s\S]*actions\/upload-artifact@[a-f0-9]{40}/, 'release status must be retained as an auditable artifact');
 assert.match(workflow, /release-status:[\s\S]*pnpm run validate:release-status -- release-status\.json/, 'release status artifact must be schema validated through the package script');
+assert.match(releaseStatusJob, /name: Generate release recovery packet[\s\S]*if: always\(\)[\s\S]*generate-release-recovery-packet\.mjs --out release-recovery-packet\.json/, 'release status must generate a recovery packet even after a failed publish or smoke check');
+assert.match(releaseStatusJob, /name: Validate release recovery packet[\s\S]*if: always\(\)[\s\S]*pnpm run validate:release-recovery -- release-recovery-packet\.json/, 'recovery packets must be schema validated');
+assert.match(releaseStatusJob, /path: \|[\s\S]*release-status\.json[\s\S]*release-recovery-packet\.json/, 'release evidence must retain the release status and recovery packet together');
+assert.match(releaseStatusJob, /GH_TOKEN: \$\{\{ github\.token \}\}[\s\S]*GITHUB_API_URL: \$\{\{ github\.api_url \}\}[\s\S]*PAGES_RESULT: \$\{\{ needs\.deploy-pages\.result \}\}[\s\S]*WORKER_ENABLED: \$\{\{ needs\.worker-readiness\.outputs\.enabled \}\}/, 'recovery packet must receive the run and deployment gate context');
 assert.match(workflow, /Audit active Goal Contract and gates[\s\S]*Require fresh TF pulse[\s\S]*pnpm run validate:tf-pulse-freshness/, 'release verification must fail closed when the TF pulse heartbeat is stale or missing');
 assert.match(workflow, /release-status:[\s\S]*Install pinned package manager[\s\S]*pnpm@11\.19\.0[\s\S]*pnpm run validate:release-status/, 'release status must install the pinned package manager before using the package script');
 assert.match(workflow, /name: cellpinda-gaba-\$\{\{ github\.sha \}\}[\s\S]*path:\s+\|[\s\S]*dist\/\s+[\s\S]*dist-pages\/\s+[\s\S]*worker-build\//, 'release evidence must retain the exact Pages bundle alongside the Worker and production bundles');

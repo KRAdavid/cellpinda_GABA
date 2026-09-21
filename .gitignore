@@ -9,6 +9,8 @@ public/data/operations-queue.json
 public/data/tf-pulse.json
 public/data/goal-audit.json
 public/data/tf-meeting-packet.json
+release-status.json
+release-recovery-packet.json
 tmp/
 *.tsbuildinfo
 .env*

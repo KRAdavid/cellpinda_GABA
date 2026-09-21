@@ -249,6 +249,9 @@ jobs:
     if: always() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 3
+    permissions:
+      contents: read
+      deployments: read
     steps:
       - name: Check out source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -313,11 +316,33 @@ jobs:
           if [ "$mode" = "RELEASE_FAILED" ]; then
             exit 1
           fi
+      - name: Generate release recovery packet
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_API_URL: ${{ github.api_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          CANDIDATE_SHA: ${{ github.sha }}
+          PREVIOUS_CANDIDATE_SHA: ${{ github.event.before }}
+          PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
+          PAGES_RESULT: ${{ needs.deploy-pages.result }}
+          SMOKE_RESULT: ${{ needs.smoke-live.result }}
+          WORKER_RESULT: ${{ needs.deploy-worker.result }}
+          WORKER_READINESS_RESULT: ${{ needs.worker-readiness.result }}
+          WORKER_ENABLED: ${{ needs.worker-readiness.outputs.enabled }}
+        run: node scripts/generate-release-recovery-packet.mjs --out release-recovery-packet.json
+      - name: Validate release recovery packet
+        if: always()
+        run: pnpm run validate:release-recovery -- release-recovery-packet.json
       - name: Upload release status packet
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: cellpinda-gaba-release-status-${{ github.run_id }}
-          path: release-status.json
+          path: |
+            release-status.json
+            release-recovery-packet.json
           if-no-files-found: error
           retention-days: 30
