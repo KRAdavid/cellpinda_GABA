@@ -8,7 +8,8 @@ const packageJson = JSON.parse(readFileSync(resolve(process.cwd(), 'package.json
 const issues = [];
 const requireText = (pattern, message) => { if (!pattern.test(source)) issues.push(message); };
 
-requireText(/cron:\s*['"]17 \*\/6 \* \* \*['"]/, '6시간 pulse schedule이 없습니다.');
+const pulseSchedule = source.match(/cron:\s*['"]([0-5]?\d) \*\/6 \* \* \*['"]/);
+if (!pulseSchedule) issues.push('6시간 pulse schedule이 없습니다.');
 requireText(/workflow_dispatch:/, '수동 pulse 실행 트리거가 없습니다.');
 requireText(/^permissions:\s*\n(?:  #[^\r\n]*\r?\n)*  contents:\s*read\s*\r?\n  pull-requests:\s*read/m, 'workflow 기본 권한은 read-only여야 합니다.');
 requireText(/pulse:\s*\r?\n\s+permissions:\s*\r?\n\s+contents:\s*read\s*\r?\n\s+pull-requests:\s*read/, 'pulse 후보 job은 read-only 권한이어야 합니다.');
@@ -68,5 +69,5 @@ if (issues.length) {
   console.error(JSON.stringify({workflow: '.github/workflows/tf-pulse.yml', status: 'invalid', issues}, null, 2));
   process.exitCode = 1;
 } else {
-  console.log(JSON.stringify({workflow: '.github/workflows/tf-pulse.yml', status: 'ok', schedule: '17 */6 * * *', persistence: 'protected-main PR', verification: 'candidate evidence only; complete pull_request checks remain authoritative', reviewGate: 'required checks + human merge'}));
+  console.log(JSON.stringify({workflow: '.github/workflows/tf-pulse.yml', status: 'ok', schedule: `${pulseSchedule[1]} */6 * * *`, persistence: 'protected-main PR', verification: 'candidate evidence only; complete pull_request checks remain authoritative', reviewGate: 'required checks + human merge'}));
 }
