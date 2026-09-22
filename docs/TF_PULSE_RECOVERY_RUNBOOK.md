@@ -14,6 +14,8 @@ gh pr list --state open --base main --head automation/tf-pulse-heartbeat
 
 `workflow_dispatch` 성공은 현재 코드가 실행된다는 증거일 뿐, 예약 heartbeat 성공으로 대체하지 않는다. 예약 성공은 `event_name=schedule`, `ref=refs/heads/main`인 실행만 인정한다.
 
+신선도 감시는 실행 시점뿐 아니라 예약 run의 `head_sha`가 현재 monitor의 `GITHUB_SHA`와 같은지도 확인한다. 오래된 커밋의 예약 run을 재실행한 경우에는 시간이 최근이어도 현재 heartbeat의 근거로 인정하지 않는다.
+
 ## 2. 안전한 재시도
 
 예약 실행이 재시도 가능한 상태라면 해당 실행의 재실행을 먼저 시도한다.
