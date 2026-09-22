@@ -13,7 +13,7 @@ const candidateSha = process.env.RELEASE_SHA || process.env.GITHUB_SHA || execFi
 if (!/^[a-f0-9]{40}$/.test(candidateSha)) throw new Error('release manifest candidate SHA must be a full commit SHA');
 
 const routePaths = [
-  '/', '/products/', '/research/', '/focus/',
+  '/', '/products/', '/research/', '/guide/', '/focus/',
   '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/',
 ];
 const hashFile = content => createHash('sha256').update(content).digest('hex');
@@ -51,13 +51,13 @@ const teaserMatchesReviewedSource = reviewedTeaser.status === teaser.status && (
 );
 
 const checks = {
-  routeSet: routePaths.length === 10,
+  routeSet: routePaths.length === 11,
   smartStoreOnly: products.length === 1 && products[0]?.officialUrl === smartStoreProduct && !products.some(product => /750/.test(JSON.stringify(product))),
   reviewDestination: reviews.length === 1 && reviews[0]?.sourceUrl === smartStoreReview,
   researchIndex: research.length === 6 && research.every(record => typeof record.evidenceHash === 'string' && /^[a-f0-9]{64}$/.test(record.evidenceHash)),
   teaserBoundary: teaserMatchesReviewedSource && ((teaser.status === 'HOLD' && teaser.url === null) || (teaser.status === 'PREVIEW' && /^https:\/\//.test(teaser.url || ''))),
   challengeCopy: textBundle.includes('뇌컨디션 확인 챌린지') && textBundle.includes('5분 쉬고 다시 해보기') && textBundle.includes('싱잉볼 소리'),
-  productBoundary: textBundle.includes('셀핀다 완제품 연구와는 다른 자료입니다.') && textBundle.includes('연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요.'),
+  productBoundary: textBundle.includes('셀핀다 완제품 연구와는 다른 자료입니다.') && textBundle.includes('연구에서 먹은 양과 조건은 셀핀다 제품 표시와 다를 수 있어요.'),
 };
 for (const [key, value] of Object.entries(checks)) if (!value) throw new Error(`release manifest check failed: ${key}`);
 

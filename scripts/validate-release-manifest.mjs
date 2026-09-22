@@ -8,7 +8,7 @@ const outputArgument = process.argv.slice(2).find(value => !value.startsWith('-'
 const outputDirectory = resolve(process.cwd(), outputArgument);
 const manifest = JSON.parse(await readFile(resolve(outputDirectory, 'release-manifest.json'), 'utf8'));
 const reviewedTeaser = JSON.parse(await readFile(resolve(process.cwd(), 'data/teaser-manifest.json'), 'utf8'));
-const expectedRoutes = ['/', '/products/', '/research/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
+const expectedRoutes = ['/', '/products/', '/research/', '/guide/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
 assert.deepEqual(Object.keys(manifest).sort(), ['candidateSha', 'checks', 'counts', 'fileHashes', 'generatedAt', 'publicSiteUrl', 'routePaths', 'runtimeMode', 'schemaVersion', 'teaser'].sort(), 'release manifest fields are invalid');
 assert.equal(manifest.schemaVersion, 1, 'release manifest schema is unsupported');
 assert.match(manifest.candidateSha || '', /^[a-f0-9]{40}$/, 'release manifest candidate SHA is invalid');
