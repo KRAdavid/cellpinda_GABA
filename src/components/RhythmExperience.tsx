@@ -331,7 +331,16 @@ export default function RhythmExperience({ onEvent, onResultChange }: RhythmExpe
   }, []);
 
   useEffect(() => {
-    if (started && !type) questionRef.current?.focus();
+    if (started && !type) {
+      const question = questionRef.current;
+      question?.focus({ preventScroll: true });
+      if (question) {
+        question.scrollIntoView({ behavior: 'auto', block: 'start' });
+        const headerOffset = window.matchMedia('(max-width: 680px)').matches ? 72 : 88;
+        const correction = question.getBoundingClientRect().top - headerOffset;
+        if (Math.abs(correction) > 1) window.scrollBy({ top: correction, behavior: 'auto' });
+      }
+    }
     if (sharedType && !result) resultRef.current?.focus({ preventScroll: true });
     if (result) {
       resultRef.current?.focus({ preventScroll: true });
