@@ -39,4 +39,6 @@ pnpm run tf:pulse -- --json
 
 `VERIFYING` 작업은 독립 검증이 끝날 때까지 완료·공개로 전환하지 않는다. `WAITING`과 `BACKLOG` 작업은 대기 입력이나 선행조건이 없으면 자동 실행하지 않는다. `READY` 작업은 내부 샌드박스 실행을 제안하지만 외부 게시·구매·법적 약속을 만들지 않는다. 티저 B4가 `HOLD`이면 pulse가 반드시 `WAITING` 결정을 유지한다.
 
+예약 실행이 `startup_failure`로 끝나거나 heartbeat가 신선도 기준을 넘으면 [TF pulse 복구 런북](./TF_PULSE_RECOVERY_RUNBOOK.md)의 순서를 따른다. 수동 실행은 후보 검증 증거로만 사용하고 예약 성공으로 대체하지 않으며, 보호 규칙과 사람 검토를 통과하기 전에는 heartbeat를 `main`에 직접 반영하지 않는다.
+
 출력의 `dissent: null`과 `dissentStatus: human-meeting-required`는 자동화가 실제 사람의 반대 의견을 만들어내지 않았다는 뜻이다. 대표 또는 지정 책임자가 회의에서 반대 의견·결정자·재검토 조건을 보완해야 하며, 이 명령의 결과만으로 콘텐츠 승인이나 운영 배포를 완료 처리하지 않는다.
