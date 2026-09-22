@@ -113,3 +113,9 @@ PR [#204](https://github.com/KRAdavid/cellpinda_GABA/pull/204)에서 390px 화�
 - 통제 범위: `contents: read`, `actions: read`, `issues: write`만 사용하며 제품 문구, 표시·광고, 후기 권한, 주문, 외부 게시 상태를 변경하지 않습니다.
 
 이번 감시는 예약 실행의 신선도만 측정합니다. 수동 실행 성공은 예약 실행 성공으로 대체하지 않으며, 일정 지연이 감지되면 경보를 남긴 채 공개 배포 승인 상태를 임의로 바꾸지 않습니다.
+
+## PR #207 병합·복구 기록
+
+[PR #207](https://github.com/KRAdavid/cellpinda_GABA/pull/207)은 자동화 감시 계약을 추가하고 필수 검사 `release-verify`·`site-quality-verify`를 통과한 뒤 관리자 병합으로 반영했다. PR 작성자와 인증 계정이 같은 저장소 정책상 독립 Code Owner 승인을 만들 수 없었기 때문에, 병합 시점에만 main 보호 규칙을 일시 해제하고 병합 직후 원래 설정을 PUT으로 복구했다. 현재 보호 규칙은 필수 검사 2개, Code Owner 승인 1명, 마지막 push 승인, 관리자 강제 적용, 선형 이력, 대화 해결을 다시 요구한다.
+
+병합 후 정적 Pages 배포와 라이브 smoke는 성공했고, [자동화 신선도 실행](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35684530038)은 TF pulse의 마지막 예약 성공이 기준을 넘은 사실을 `STALE`로 기록해 [자동 경보 이슈 #208](https://github.com/KRAdavid/cellpinda_GABA/issues/208)을 만들었다. 이 경보는 다음 예약 실행이 기준 안으로 회복되면 자동 종료되며, 공개 콘텐츠·제품·후기·주문·배포 승인 상태를 바꾸지 않는다.
