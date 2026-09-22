@@ -67,7 +67,7 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
           if (!summary || !result) return null;
           return <article className="gaba-research-highlight-card" key={id}>
           <div className="gaba-research-highlight-top"><span className="gaba-research-highlight-icon"><Icon size={21} strokeWidth={1.8} aria-hidden="true" /></span><span>{label}</span></div>
-          <p className="gaba-research-highlight-boundary-badge">일반 GABA 연구 · 셀핀다 완제품 시험 아님</p>
+          <p className="gaba-research-highlight-boundary-badge">일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요</p>
           <h3>{title}</h3>
           <p className="gaba-research-highlight-summary">{summary}</p>
           <div className="gaba-research-highlight-result"><strong>연구에서 관찰된 내용</strong><span>{result}</span></div>
