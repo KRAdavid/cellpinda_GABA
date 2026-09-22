@@ -7,6 +7,8 @@ const registry = readJson('data/tf-role-registry.json');
 const taskGraph = readJson('data/task-graph.json');
 const opsMvp = readText('docs/OPS_MVP.md');
 const tfBoard = readText('docs/TF_BOARD.md');
+const implementationStatus = readText('docs/IMPLEMENTATION_STATUS.md');
+const releaseAudit = readText('docs/RELEASE_AUDIT_20260922.md');
 const roleCount = registry.roles.length;
 const taskCount = taskGraph.tasks.length;
 const issues = [];
@@ -22,6 +24,17 @@ requireText(opsMvp, new RegExp(`${taskCount}개 canonical 작업`), 'OPS_MVP의 
 requireText(opsMvp, new RegExp(`5개 스트림·${taskCount}개 작업`), 'OPS_MVP의 공개 큐 범위');
 requireText(tfBoard, new RegExp(`필수 ${roleCount}개 역할`), 'TF_BOARD의 역할 레지스트리 수');
 requireText(tfBoard, /현재 canonical 큐의 `DONE`·`VERIFYING`·`WAITING` 카운트는 최신 pulse/, 'TF_BOARD의 동적 상태 안내');
+
+const implementationHeader = implementationStatus.split('\n').slice(0, 25).join('\n');
+const releaseAuditHeader = releaseAudit.split('\n').slice(0, 25).join('\n');
+requireText(implementationHeader, /라이브 \[release-manifest\.json\].*최신 Actions 실행/s, '구현 상태 문서의 라이브 원천 포인터');
+requireText(releaseAuditHeader, /라이브 \[release-manifest\.json\].*`candidateSha`·`generatedAt`.*최신 성공 Actions 실행/s, '배포 감사 문서의 라이브 원천 포인터');
+if (/현재 main·live SHA는\s*`[0-9a-f]{7,}`/.test(implementationHeader)) {
+  issues.push('구현 상태 문서의 상단에 현재 SHA를 하드코딩하지 마세요. 라이브 manifest를 원천으로 사용해야 합니다.');
+}
+if (/\| 라이브 candidate SHA \|\s*`[0-9a-f]{7,}`/.test(releaseAuditHeader)) {
+  issues.push('배포 감사 표에 현재 candidate SHA를 하드코딩하지 마세요. 라이브 manifest를 원천으로 사용해야 합니다.');
+}
 
 for (const [source, label] of [[opsMvp, 'OPS_MVP'], [tfBoard, 'TF_BOARD']]) {
   for (const stale of [/7개 필수 역할군/, /7개 역할군/, /14개 canonical 작업/, /5개 스트림·14개 작업/, /필수 7개 역할/]) {
