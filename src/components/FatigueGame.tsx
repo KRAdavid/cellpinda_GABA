@@ -185,20 +185,20 @@ function baselineResultCopy(summary: FocusGameSummary): {
   if (summary.accuracyPct >= 85) return {
     tone: 'steady',
     kicker: '좋은 반응 흐름',
-    heading: '축하해요. 오늘 게임에서는 반응이 안정적이었어요.',
+    heading: '이번 게임에서 신호를 잘 따라왔어요.',
     body: '지금처럼 중간중간 짧게 쉬는 리듬을 이어가 보세요.',
   };
   if (summary.accuracyPct >= 70) return {
     tone: 'watch',
     kicker: '잠깐 점검해 볼 기록',
-    heading: '오늘은 반응이 조금 흔들렸어요.',
+    heading: '이번 게임에서 신호를 몇 번 놓쳤어요.',
     body: '5분 화면을 내려놓고 다시 해보면 내 기록을 비교해 볼 수 있어요.',
   };
   return {
     tone: 'pause',
     kicker: '지금은 5분 회복을 권해요',
-    heading: '지금은 화면을 내려놓고 5분 쉬어 보세요.',
-    body: '오늘 머리가 과하게 바빴던 날일 수 있어요. 알림을 끄고 물을 마신 뒤 다시 해보세요.',
+    heading: '이번 게임에서 놓친 신호가 많았어요. 화면을 내려놓고 5분 쉬어 보세요.',
+    body: '5분 뒤 다시 해보면 두 기록을 나란히 볼 수 있어요. 알림을 끄고 물을 마셔 보세요.',
   };
 }
 

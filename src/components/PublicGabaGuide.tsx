@@ -38,7 +38,7 @@ type ResearchTopic = {
   summary: string;
   observed: string;
   interpretation: string;
-  unknown: string;
+  scope: string;
   source: { label: string; url: string };
 };
 
@@ -47,24 +47,24 @@ const everydayTopics: EverydayTopic[] = [
     id: 'sleep',
     title: '잠들 때',
     question: '잠들 때 GABA는 무엇을 하나요?',
-    body: '수면이 시작되려면 각성을 유지하는 신경회로의 활동이 낮아져야 합니다. GABA성 신경전달은 수면 시작과 유지에 관여합니다.',
-    note: '수면과 각성의 리듬을 조율하는 GABA성 신경전달을 살펴보세요.',
+    body: '잠이 들 때는 뇌가 깨어 있으라는 신호를 천천히 낮춰야 해요. GABA는 이 과정에 관여해요.',
+    note: '잠으로 넘어가는 몸의 신호를 쉬운 그림으로 살펴보세요.',
     icon: 'moon',
   },
   {
     id: 'calm',
     title: '스트레스가 올라갈 때',
     question: '스트레스가 쌓일 때도 관련이 있나요?',
-    body: 'GABA는 위협과 스트레스에 반응하는 신경회로의 과도한 활동을 조절하는 과정에 관여합니다.',
-    note: 'GABA는 스트레스 반응 회로의 활동을 조율하는 신호로 연구되고 있습니다.',
+    body: '스트레스를 받을 때 뇌가 지나치게 예민해지지 않도록 신호를 조절하는 데 관여해요.',
+    note: '긴장할 때 몸의 신호가 어떻게 조절되는지 살펴보세요.',
     icon: 'sparkles',
   },
   {
     id: 'focus',
     title: '집중할 때',
     question: '집중하려면 왜 억제가 필요할까요?',
-    body: '집중은 필요한 정보를 키우는 일만이 아니라, 지금 필요하지 않은 신호를 덜어내는 일이기도 합니다. GABA는 선택적인 정보 처리에 관여합니다.',
-    note: '필요한 신호와 불필요한 신호를 나누는 조절이 집중을 만듭니다.',
+    body: '집중할 때는 필요한 정보에 신경 쓰고 덜 중요한 신호를 줄이는 과정도 필요해요.',
+    note: '필요한 신호에 집중하도록 주변 신호를 정리하는 과정을 살펴보세요.',
     icon: 'focus',
   },
 ];
@@ -76,10 +76,10 @@ const researchTopics: ResearchTopic[] = [
     english: 'Sleep latency',
     tone: 'human',
     label: '사람 대상 연구',
-    summary: '성인 10명이 GABA 100mg과 비교 캡슐을 번갈아 먹고, 잠드는 시간과 깊은 잠을 기록한 연구입니다.',
-    observed: '한 번의 섭취 뒤 잠드는 시간과 깊은 잠의 비율을 비교했습니다.',
-    interpretation: '정해진 조건에서 수면 지표를 본 결과입니다. 모든 사람의 수면 변화를 뜻하지는 않습니다.',
-    unknown: '셀핀다 가바 1500의 효과나 권장 섭취량을 확인한 연구는 아닙니다.',
+    summary: '잠이 불편하다고 답한 일본 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안 먹고, 잠드는 시간과 수면 기록을 비교한 연구입니다.',
+    observed: '각 1주 동안 먹은 뒤 잠드는 시간과 깊은 잠으로 분류되는 수면 단계의 비율을 비교했습니다.',
+    interpretation: '정해진 조건에서 수면 지표를 비교해 본 결과예요. 사람마다 기록은 다를 수 있어요.',
+    scope: '일반 GABA 연구를 살펴본 카드예요. 셀핀다 제품 정보는 제품 카드에서 확인하세요.',
     source: { label: 'Food Sci Biotechnol. 2016 · PMID 30263304', url: 'https://pubmed.ncbi.nlm.nih.gov/30263304/' },
   },
   {
@@ -88,10 +88,10 @@ const researchTopics: ResearchTopic[] = [
     english: 'Mental stress',
     tone: 'human',
     label: '사람 대상 연구',
-    summary: '성인 63명이 GABA 100mg 또는 비교 캡슐을 먹고 정신 과제 뒤 뇌파와 기분 변화를 기록한 연구입니다.',
+    summary: '성인 63명이 GABA 100mg 또는 비교 캡슐을 한 번 먹고, 정신 과제 뒤 뇌파와 기분 기록을 비교한 연구입니다.',
     observed: '과제 뒤 뇌파와 기분 점수의 변화를 비교했습니다.',
-    interpretation: '정신 과제와 한 번의 섭취 조건에서 본 결과입니다.',
-    unknown: '일상 스트레스가 줄거나 셀핀다 제품의 효능을 확정한 연구는 아닙니다.',
+    interpretation: '정신 과제 뒤 한 번의 섭취 조건에서 뇌파와 기분 기록을 비교해 본 결과예요.',
+    scope: '일반 GABA 연구를 살펴본 카드예요. 셀핀다 제품 정보는 제품 카드에서 확인하세요.',
     source: { label: 'Amino Acids. 2012 · PMID 22203366', url: 'https://pubmed.ncbi.nlm.nih.gov/22203366/' },
   },
 ];
@@ -209,12 +209,33 @@ export default function PublicGabaGuide() {
   const [shareStatus, setShareStatus] = useState('');
 
   useEffect(() => {
-    document.title = 'GABA, 우리 몸에서는 어떤 일을 할까요? | GABA Guide';
+    const guideUrl = new URL('guide/', new URL(siteRoot, window.location.origin)).toString();
+    const title = 'GABA, 우리 몸에서는 어떤 일을 할까요? | 셀핀다';
+    document.title = title;
     const description = 'GABA의 역할과 사람 연구를 쉬운 말과 그림으로 살펴보는 공개 안내서입니다. 셀핀다 완제품 시험과는 구분해 안내합니다.';
     const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = description;
+    const setMeta = (selector: string, content: string) => {
+      const element = document.head.querySelector<HTMLMetaElement>(selector);
+      if (element) element.content = content;
+    };
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-    if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
+    if (canonical) canonical.href = guideUrl;
+    setMeta('meta[property="og:url"]', guideUrl);
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[name="twitter:title"]', title);
+    setMeta('meta[name="twitter:description"]', description);
+    const jsonLd = document.head.querySelector<HTMLScriptElement>('script[type="application/ld+json"]');
+    if (jsonLd) {
+      try {
+        const structuredData = JSON.parse(jsonLd.textContent || '{}') as Record<string, unknown>;
+        structuredData.name = title;
+        structuredData.url = guideUrl;
+        structuredData.description = description;
+        jsonLd.textContent = JSON.stringify(structuredData);
+      } catch { /* keep the static structured data if a host page uses a different format */ }
+    }
     const targetId = window.location.hash.slice(1);
     if (targetId) requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'instant', block: 'start' }));
   }, []);
@@ -238,13 +259,14 @@ export default function PublicGabaGuide() {
   };
 
   const sharePage = async () => {
-    const shareData = { title: 'GABA, 우리 몸에서는 어떤 일을 할까요?', text: 'GABA의 역할과 사람 연구를 쉬운 말로 살펴보는 공개 안내서', url: window.location.href };
+    const guideUrl = new URL('guide/', new URL(siteRoot, window.location.origin)).toString();
+    const shareData = { title: 'GABA, 우리 몸에서는 어떤 일을 할까요?', text: 'GABA의 역할과 사람 연구를 쉬운 말로 살펴보는 공개 안내서', url: guideUrl };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
         setShareStatus('공유 창을 열었어요.');
       } else {
-        await navigator.clipboard.writeText(window.location.href);
+        await navigator.clipboard.writeText(guideUrl);
         setShareStatus('링크를 복사했어요. 자유롭게 공유해 보세요.');
       }
     } catch {
@@ -254,7 +276,7 @@ export default function PublicGabaGuide() {
 
   const myths = [
     { question: 'GABA는 신경세포의 활동 균형을 조절한다', answer: '핵심 역할', detail: 'GABA는 뇌와 척수에서 신경세포 사이의 신호 균형을 만드는 대표적인 억제성 신경전달물질입니다.' },
-    { question: 'GABA는 수면·스트레스·집중과 연결된다', answer: '사실', detail: 'GABA성 신경전달은 잠들기, 스트레스 반응, 선택적 집중과 관련된 신경회로에서 작용합니다.' },
+    { question: 'GABA는 잠·스트레스·집중과 관련된 신호에 관여한다', answer: '사실', detail: 'GABA 신호는 잠들기, 스트레스 반응, 집중과 관련된 신경회로에 관여해요.' },
     { question: '먹는 GABA 연구와 뇌 속 GABA 관찰은 같은가요?', answer: '구분 필요', detail: '사람 연구라도 무엇을 먹었는지, 뇌 속 신호를 관찰했는지에 따라 질문과 해석이 달라집니다.' },
   ];
   const activeMyth = myths[factIndex];
@@ -419,7 +441,7 @@ export default function PublicGabaGuide() {
                 <dl>
                   <div><dt>무엇을 관찰했나요?</dt><dd>{activeResearch.observed}</dd></div>
                   <div><dt>어떤 의미가 있나요?</dt><dd>{activeResearch.interpretation}</dd></div>
-                  <div><dt>아직 확인되지 않은 것은?</dt><dd>{activeResearch.unknown}</dd></div>
+                  <div><dt>이번 연구의 범위</dt><dd>{activeResearch.scope}</dd></div>
                 </dl>
                 <div className="guide-research-source"><span>연구 출처</span><a href={activeResearch.source.url} target="_blank" rel="noopener noreferrer">{activeResearch.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div>
               </article>
@@ -448,7 +470,7 @@ export default function PublicGabaGuide() {
             <div className="guide-source-list">
               <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>사람 연구와 뇌 속 신호 관찰을 구분합니다.</span></div>
               <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>연구에서 사용한 양과 기간을 함께 보여줍니다.</span></div>
-              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>짧게 측정한 수치를 오래 지속되는 효과로 바꾸어 말하지 않습니다.</span></div>
+              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>측정한 시간과 범위를 그대로 보여드립니다.</span></div>
               <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>일반 GABA 연구와 셀핀다 완제품 정보를 분리합니다.</span></div>
               <div className="guide-source-links"><strong>바로 확인하는 참고자료</strong><a href="https://pubmed.ncbi.nlm.nih.gov/32166183/" target="_blank" rel="noopener noreferrer">GABA 신경생리학 개요 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">경구 GABA와 수면을 본 사람 연구 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/22203366/" target="_blank" rel="noopener noreferrer">정신 과제 뒤 뇌파 연구 <ExternalLink size={14} aria-hidden="true" /></a></div>
             </div>
