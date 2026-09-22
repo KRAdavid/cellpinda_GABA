@@ -9,10 +9,10 @@ import {fileURLToPath} from 'node:url';
 
 const script = fileURLToPath(new URL('./check-automation-freshness.mjs', import.meta.url));
 
-function runMonitor(apiUrl, outputDir, checkedAt) {
+function runMonitor(apiUrl, outputDir, checkedAt, expectedHeadSha) {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [script, '--out', join(outputDir, 'freshness.json')], {
-      env: {...process.env, GITHUB_REPOSITORY: 'owner/repo', GITHUB_TOKEN: 'test-token', GITHUB_API_URL: apiUrl, CHECKED_AT: checkedAt},
+      env: {...process.env, GITHUB_REPOSITORY: 'owner/repo', GITHUB_TOKEN: 'test-token', GITHUB_API_URL: apiUrl, CHECKED_AT: checkedAt, GITHUB_SHA: expectedHeadSha || '', EXPECTED_HEAD_SHA: expectedHeadSha || ''},
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     let stdout = '';
@@ -64,13 +64,18 @@ test('automation freshness fails closed when TF pulse is stale', async () => {
   try {
     await withApi({
       daily: [{id: 1, status: 'completed', conclusion: 'success', completed_at: '2026-09-22T00:00:00.000Z', head_sha: 'daily', html_url: 'https://example.test/daily'}],
-      pulse: [{id: 2, status: 'completed', conclusion: 'success', completed_at: '2026-09-21T00:00:00.000Z', head_sha: 'pulse', html_url: 'https://example.test/pulse'}],
+      pulse: [
+        {id: 3, status: 'completed', conclusion: 'startup_failure', created_at: '2026-09-22T02:50:00.000Z', completed_at: '2026-09-22T02:50:01.000Z', head_sha: 'pulse-failed', html_url: 'https://example.test/pulse-failed'},
+        {id: 2, status: 'completed', conclusion: 'success', completed_at: '2026-09-21T00:00:00.000Z', head_sha: 'pulse', html_url: 'https://example.test/pulse'},
+      ],
     }, async apiUrl => {
       const result = await runMonitor(apiUrl, directory, '2026-09-22T03:00:00.000Z');
       assert.equal(result.code, 1);
       const parsed = JSON.parse(await readFile(join(directory, 'freshness.json'), 'utf8'));
       assert.equal(parsed.status, 'STALE');
       assert.deepEqual(parsed.checks.map(check => check.status), ['FRESH', 'STALE']);
+      assert.equal(parsed.checks[1].lastAttempt.conclusion, 'startup_failure');
+      assert.match(parsed.checks[1].reason, /최근 시도 startup_failure/);
     });
   } finally {
     await rm(directory, {recursive: true, force: true});
@@ -86,6 +91,28 @@ test('automation freshness writes an error artifact when GitHub API is unavailab
     assert.equal(parsed.status, 'ERROR');
     assert.equal(parsed.checks[0].status, 'ERROR');
     assert.equal(parsed.publicMutation, false);
+  } finally {
+    await rm(directory, {recursive: true, force: true});
+  }
+});
+
+test('automation freshness ignores a re-run scheduled success from an older commit', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cellpinda-freshness-'));
+  try {
+    await withApi({
+      daily: [{id: 1, status: 'completed', conclusion: 'success', completed_at: '2026-09-22T00:00:00.000Z', head_sha: 'current', html_url: 'https://example.test/daily'}],
+      pulse: [{id: 2, status: 'completed', conclusion: 'success', completed_at: '2026-09-22T02:59:00.000Z', head_sha: 'old-commit', html_url: 'https://example.test/pulse-old'}],
+    }, async apiUrl => {
+      const result = await runMonitor(apiUrl, directory, '2026-09-22T03:00:00.000Z', 'current');
+      assert.equal(result.code, 1);
+      const parsed = JSON.parse(await readFile(join(directory, 'freshness.json'), 'utf8'));
+      assert.equal(parsed.status, 'STALE');
+      assert.equal(parsed.checks[0].status, 'FRESH');
+      assert.equal(parsed.checks[1].status, 'STALE');
+      assert.match(parsed.checks[1].reason, /현재 커밋과 불일치/);
+      assert.equal(parsed.checks[1].latestSuccess.sha, 'old-commit');
+      assert.equal(parsed.checks[1].lastSuccess, null);
+    });
   } finally {
     await rm(directory, {recursive: true, force: true});
   }

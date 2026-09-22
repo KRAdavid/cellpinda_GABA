@@ -56,6 +56,10 @@ jobs:
       - name: Audit active Goal Contract and gates
         run: node scripts/audit-goal.mjs --json | tee goal-audit.json
       - name: Require fresh TF pulse
+        # The heartbeat is a main-branch operational gate. PRs still run the
+        # complete code/content/bundle verification above, while the main push
+        # must have a recent pulse before any public deployment can proceed.
+        if: github.event_name != 'pull_request'
         run: pnpm run validate:tf-pulse-freshness
       - name: Build GitHub Pages bundle
         env:
