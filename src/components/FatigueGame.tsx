@@ -208,7 +208,7 @@ function FatigueGameNextSteps({ onEvent }: { onEvent: FatigueGameProps['onEvent'
       <a href="#story" onClick={() => onEvent('research_highlight_opened', { path: '/focus', source: 'game_result' })}>
         <span>01</span><strong>GABA 이야기</strong><small>몸속에서 하는 일</small>
       </a>
-      <a href="#products" onClick={() => onEvent('product_compare_view', { path: '/focus', source: 'game_result' })}>
+      <a href="?view=products#products" onClick={() => onEvent('product_compare_view', { path: '/focus', source: 'game_result' })}>
         <span>02</span><strong>제품 표시사항 확인</strong><small>게임 기록과 별개로 구성 보기</small>
       </a>
       <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={() => onEvent('review_source_click', { productId: 'gaba1500', path: '/focus', source: 'game_result' })}>

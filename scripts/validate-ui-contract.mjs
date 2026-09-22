@@ -210,10 +210,10 @@ requireMatch(rhythm, /rhythm-result-quick-action[\s\S]*?다음은 1분이에요[
 requireMatch(rhythm, /focusFocusChallengeHeading[\s\S]*?href="#focus-game" onClick=\{focusFocusChallengeHeading\}/, 'result challenge CTA must move focus to the challenge heading after navigation');
 requireMatch(app, /<RhythmExperience onEvent=\{track\} onResultChange=\{setHasRhythmResult\}\/>[\s\S]*?<ConsumerGabaReel onEvent=\{track\} hasRhythmResult=\{hasRhythmResult\}\/>[\s\S]*?<GabaStory claims=\{content\.claims\} hasReviews=\{content\.reviews\.length > 0\} hasRhythmResult=\{hasRhythmResult\}\/>/, 'the result state must flow through the consumer story so repeated product CTAs can be reduced after completion');
 requireMatch(await read('src/components/ConsumerGabaReel.tsx'), /slide\.link && !\(hasRhythmResult && slide\.id === 'next'\)/, 'the reel must avoid repeating the product CTA after a rhythm result while keeping it for first visits');
-requireMatch(consumerReel, /const nextSlideBody = hasRhythmResult[\s\S]*결과 화면에서 제품 구성과 구매자 후기를 확인할 수 있어요\./, 'the reel next-step copy must describe the result state instead of asking visitors to repeat the check');
-requireMatch(consumerReel, /const nextSlideTitle = hasRhythmResult[\s\S]*이제 제품 구성과 구매자 후기를 확인해 보세요\./, 'the reel next-step title must stop asking completed visitors to repeat the check');
+requireMatch(consumerReel, /const nextSlideBody = hasRhythmResult[\s\S]*내 답변 기록과 제품 정보는 서로 따로 살펴보세요\./, 'the reel next-step copy must keep product information separate from the self-check result');
+requireMatch(consumerReel, /const nextSlideTitle = hasRhythmResult[\s\S]*오늘의 리듬을 확인했어요\./, 'the reel next-step title must acknowledge the completed check without a product handoff');
 requireMatch(consumerReel, /hasRhythmResult \? <>내 상태를 확인한 뒤[\s\S]*: <>GABA가 궁금하다면[\s\S]*먼저 한 장씩 보세요/, 'the reel heading must match both direct entry and post-check entry');
-requireMatch(story, /hasRhythmResult \? null : <a className="text-link" href="#products">가바 1500 제품 구성 보기/, 'the GABA story must avoid repeating its product CTA after a rhythm result');
+requireMatch(story, /hasRhythmResult \? null : <a className="text-link" href="\?view=products#products">가바 1500 제품 구성 보기/, 'the GABA story must avoid repeating its product CTA after a rhythm result');
 requireMatch(fatigueGame, /fatigue-game-actions[\s\S]*?친구에게 1분 게임 보내기[\s\S]*?5분 쉬고 다시 해보기/, 'fatigue game results must prioritize the rest-and-retry action while keeping the invite secondary');
 requireMatch(fatigueGame, /summaryHeadingRef[\s\S]*?phase !== 'baseline-complete'[\s\S]*?summaryHeadingRef\.current\?\.focus/, 'focus challenge results must move keyboard focus to the new result heading');
 requireMatch(rhythm, /내 답변과 점수는 전송되지 않아요/, 'the primary invitation must explain what is not shared');
@@ -325,7 +325,7 @@ requireMatch(teaser, /rootMargin: '560px 0px'/, 'teaser must wait until the read
 requireMatch(teaser, /frameRequested \? <iframe/, 'teaser frame must be absent until its visibility threshold is reached');
 requireMatch(teaser, /src=\{preview\.url!?\}/, 'teaser iframe must use the approved preview URL directly');
 requireMatch(teaser, /teaser-card--hold/, 'teaser hold state must use a compact placeholder before a public video is available');
-requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hold[\s\S]*min-height: 210px/, 'teaser hold placeholder must stay compact on mobile');
+requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hold[\s\S]*height: auto[\s\S]*@media\(max-width: 800px\)[\s\S]*teaser-hold-actions/, 'teaser hold placeholder must stay compact on mobile');
 requireMatch(teaser, /teaser-hold-actions[\s\S]*GABA 연구 쉽게 보기[\s\S]*가바 1500 구성 보기/, 'teaser hold state must offer a clear research and product next action while the video is pending');
 requireMatch(teaser, /href="#gaba-research-highlights"[\s\S]*GABA 연구 쉽게 보기/, 'teaser GABA research action must land on the GABA research highlights section');
 if (/href="#brain-load-evidence"[\s\S]*GABA 연구 쉽게 보기/.test(teaser)) fail('teaser GABA research action must not land on the separate general health evidence section');

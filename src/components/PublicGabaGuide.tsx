@@ -5,12 +5,10 @@ import {
   BookOpen,
   Check,
   ChevronDown,
-  CircleHelp,
   ExternalLink,
   FlaskConical,
   Menu,
   Moon,
-  Network,
   Share2,
   Sparkles,
   X,
@@ -28,7 +26,7 @@ type EverydayTopic = {
   question: string;
   body: string;
   note: string;
-  icon: 'moon' | 'sparkles' | 'focus' | 'movement' | 'sense';
+  icon: 'moon' | 'sparkles' | 'focus';
 };
 
 type ResearchTopic = {
@@ -69,22 +67,6 @@ const everydayTopics: EverydayTopic[] = [
     note: '필요한 신호와 불필요한 신호를 나누는 조절이 집중을 만듭니다.',
     icon: 'focus',
   },
-  {
-    id: 'movement',
-    title: '움직일 때',
-    question: '근육과 운동에도 GABA가 쓰이나요?',
-    body: 'GABA는 운동신경의 활동과 근육 긴장을 조절하는 신경회로에 관여합니다. 활성화와 억제가 함께 작동하는 균형이 매끄러운 움직임을 만듭니다.',
-    note: '활성화와 억제가 함께 작동하는 균형이 매끄러운 움직임을 만듭니다.',
-    icon: 'movement',
-  },
-  {
-    id: 'sense',
-    title: '감각을 처리할 때',
-    question: '소리와 촉감도 GABA와 관련이 있나요?',
-    body: '뇌는 들어오는 모든 감각을 같은 강도로 처리하지 않습니다. GABA성 억제는 감각 신호를 구분하고 조절하는 데 관여합니다.',
-    note: '감각 신호를 선별하는 조절이 집중과 편안한 감각 경험을 돕습니다.',
-    icon: 'sense',
-  },
 ];
 
 const researchTopics: ResearchTopic[] = [
@@ -112,30 +94,6 @@ const researchTopics: ResearchTopic[] = [
     unknown: '일상 스트레스가 줄거나 셀핀다 제품의 효능을 확정한 연구는 아닙니다.',
     source: { label: 'Amino Acids. 2012 · PMID 22203366', url: 'https://pubmed.ncbi.nlm.nih.gov/22203366/' },
   },
-  {
-    id: 'cognition',
-    title: '감각·인지 학습',
-    english: 'Perceptual learning',
-    tone: 'early',
-    label: '뇌 속 신호 관찰',
-    summary: '사람의 뇌 속 GABA 신호와 손끝 감각 학습 결과를 살펴본 연구입니다. GABA를 먹은 연구는 아닙니다.',
-    observed: '뇌 속 GABA+ 수치와 손끝 감각 학습 결과의 관계를 분석했습니다.',
-    interpretation: '뇌 속 신호와 학습의 관계를 본 연구입니다.',
-    unknown: '먹는 GABA가 기억력이나 집중력을 높인다는 근거는 아닙니다.',
-    source: { label: 'Cereb Cortex. 2016 · PMC4737612', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4737612/' },
-  },
-  {
-    id: 'growth-hormone',
-    title: '성장호르몬',
-    english: 'Growth hormone',
-    tone: 'early',
-    label: '사람 대상 연구',
-    summary: '운동 경험이 있는 18~30세 남성 11명이 GABA 3g을 한 번 먹고, 90분 동안 혈액 속 성장호르몬을 살펴본 연구입니다.',
-    observed: '쉬었을 때와 운동했을 때의 단기간 혈액 수치를 비교했습니다.',
-    interpretation: '일시적인 혈액 수치 변화는 성장 속도나 근육 발달과 다른 결과입니다.',
-    unknown: '셀핀다 제품 시험이나 성장·근육 발달 효과를 확인한 연구는 아닙니다.',
-    source: { label: 'Med Sci Sports Exerc. 2008 · PMID 18091016', url: 'https://pubmed.ncbi.nlm.nih.gov/18091016/' },
-  },
 ];
 
 const evidenceLabels: Record<EvidenceTone, { text: string; className: string }> = {
@@ -149,8 +107,6 @@ const evidenceLabels: Record<EvidenceTone, { text: string; className: string }> 
 function TopicIcon({ type }: { type: EverydayTopic['icon'] }) {
   if (type === 'moon') return <Moon aria-hidden="true" />;
   if (type === 'sparkles') return <Sparkles aria-hidden="true" />;
-  if (type === 'movement') return <Network aria-hidden="true" />;
-  if (type === 'sense') return <CircleHelp aria-hidden="true" />;
   return <FocusIcon />;
 }
 
@@ -221,8 +177,6 @@ function ResearchGlyph({ id }: { id: string }) {
     <div className={`guide-research-glyph glyph-${id}`} aria-hidden="true">
       {id === 'sleep' && <><span /><span /></>}
       {id === 'stress' && <><span /><span /><span /></>}
-      {id === 'cognition' && <><span /><span /><span /><span /></>}
-      {id === 'growth-hormone' && <><span /><span /></>}
     </div>
   );
 }
@@ -300,9 +254,8 @@ export default function PublicGabaGuide() {
 
   const myths = [
     { question: 'GABA는 신경세포의 활동 균형을 조절한다', answer: '핵심 역할', detail: 'GABA는 뇌와 척수에서 신경세포 사이의 신호 균형을 만드는 대표적인 억제성 신경전달물질입니다.' },
-    { question: 'GABA는 수면·스트레스·집중·운동과 연결된다', answer: '사실', detail: 'GABA성 신경전달은 잠들기, 스트레스 반응, 선택적 집중, 운동 조절에 관여합니다.' },
+    { question: 'GABA는 수면·스트레스·집중과 연결된다', answer: '사실', detail: 'GABA성 신경전달은 잠들기, 스트레스 반응, 선택적 집중과 관련된 신경회로에서 작용합니다.' },
     { question: '먹는 GABA 연구와 뇌 속 GABA 관찰은 같은가요?', answer: '구분 필요', detail: '사람 연구라도 무엇을 먹었는지, 뇌 속 신호를 관찰했는지에 따라 질문과 해석이 달라집니다.' },
-    { question: '성장호르몬 수치가 오르면 키가 크나요?', answer: '구분 필요', detail: '짧은 시간의 혈액 수치 변화는 성장 속도나 근육 발달과 같은 뜻이 아닙니다.' },
   ];
   const activeMyth = myths[factIndex];
 
@@ -347,7 +300,7 @@ export default function PublicGabaGuide() {
         <section className="guide-summary-band" aria-label="30초 요약">
           <div className="guide-container guide-summary-grid">
             <span className="guide-summary-label">30초 요약</span>
-            <p>GABA는 뇌와 척수에서 신호가 너무 커지지 않도록 조절하는 물질이에요. 잠·감정·감각·집중·운동에 관련된 신경회로에서 작용합니다.</p>
+            <p>GABA는 뇌와 척수에서 신호가 너무 커지지 않도록 조절하는 물질이에요. 잠·감정·집중에 관련된 신경회로에서 작용합니다.</p>
             <span className="guide-summary-mark">GABA<br />= 조절의 신호</span>
           </div>
         </section>
@@ -497,7 +450,7 @@ export default function PublicGabaGuide() {
               <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>연구에서 사용한 양과 기간을 함께 보여줍니다.</span></div>
               <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>짧게 측정한 수치를 오래 지속되는 효과로 바꾸어 말하지 않습니다.</span></div>
               <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>일반 GABA 연구와 셀핀다 완제품 정보를 분리합니다.</span></div>
-              <div className="guide-source-links"><strong>바로 확인하는 참고자료</strong><a href="https://pubmed.ncbi.nlm.nih.gov/32166183/" target="_blank" rel="noopener noreferrer">GABA 신경생리학 개요 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">경구 GABA와 수면을 본 사람 연구 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/22203366/" target="_blank" rel="noopener noreferrer">정신 과제 뒤 뇌파 연구 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4737612/" target="_blank" rel="noopener noreferrer">감각 학습과 뇌 속 GABA 연구 <ExternalLink size={14} aria-hidden="true" /></a></div>
+              <div className="guide-source-links"><strong>바로 확인하는 참고자료</strong><a href="https://pubmed.ncbi.nlm.nih.gov/32166183/" target="_blank" rel="noopener noreferrer">GABA 신경생리학 개요 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">경구 GABA와 수면을 본 사람 연구 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/22203366/" target="_blank" rel="noopener noreferrer">정신 과제 뒤 뇌파 연구 <ExternalLink size={14} aria-hidden="true" /></a></div>
             </div>
           </div>
         </section>
