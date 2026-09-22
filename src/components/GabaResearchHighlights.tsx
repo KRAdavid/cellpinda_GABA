@@ -24,7 +24,7 @@ const highlightOrder: Highlight[] = [
     id: 'research-yoto-2012',
     label: '머리를 많이 쓴 뒤',
     title: '머리를 많이 쓴 뒤 뇌파와 활력 점수를 비교했어요',
-    summary: 'GABA 캡슐 조건에서 뇌파 변화와 활력 점수가 비교 캡슐보다 덜 줄어든 것으로 기록됐어요.',
+    summary: '건강한 성인 63명이 GABA 캡슐과 비교 캡슐을 먹고 머리를 많이 쓴 뒤, 뇌파와 활력 점수를 기록했어요.',
     facts: ['참여: 성인 63명', '연구 조건: 100mg 한 번', '살펴본 항목: 뇌파 변화·활력 점수'],
     Icon: Activity,
   },
