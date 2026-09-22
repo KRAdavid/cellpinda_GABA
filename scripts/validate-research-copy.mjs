@@ -25,6 +25,7 @@ if (!appSource.includes("requestedView === 'guide'") || !appSource.includes('<Pu
 if (!publicGuide.includes('guide-boundary-note') || !publicGuide.includes('unknown:') || !publicGuide.includes('REVIEW_DESTINATION_URL') || !publicGuide.includes('?view=products#products') || !publicGuide.includes('#rhythm')) fail('the public GABA guide must show the product boundary and link to rhythm, product and review destinations');
 if (/id: '(?:skin|muscle|height|immune)'|사업자용 메시지|사업자가 바로/.test(publicGuide)) fail('the public GABA guide must not reintroduce unreviewed research cards or business-only copy');
 if (publicGuide.includes('message:')) fail('the public GABA guide must not expose copy-only business message fields in research cards');
+if (/research-powers-2008|성장호르몬/.test(gabaResearchHighlights)) fail('the landing research highlights must keep growth-hormone material in the full research library instead of the conversion flow');
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
 const publicResearchCopy = JSON.stringify(research);

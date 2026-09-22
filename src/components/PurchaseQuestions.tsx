@@ -36,8 +36,8 @@ export default function PurchaseQuestions({ products, onEvent }: { products: Pro
         <div><p>후기는 한 사람의 경험이에요. 작성 날짜와 사용 기간, 제품을 무료로 받았거나 보상을 받았는지도 함께 살펴보세요.</p><a className="text-link" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 후기 읽기 · 새 창" onClick={()=>onEvent?.('review_open',{productId:products[0]?.id ?? 'gaba1500',path:'/purchase-faq'})}>가바 1500 스마트스토어 후기 읽기 ↗</a></div>
       </details>
       <details onToggle={event => { if (event.currentTarget.open) onEvent?.('faq_open', { questionId: 'evidence' }); }}>
-        <summary>연구 내용은 제품을 이해하는 데 어떻게 도움이 되나요?</summary>
-        <div><p>연구에 누가 참여했고, 무엇을 얼마나 먹었는지 쉬운 말로 정리했어요. 셀핀다 제품 포장에 적힌 내용도 함께 확인해 보세요.</p><a className="text-link" href={`${import.meta.env.BASE_URL}research/`}>사람 대상 GABA 연구 보기 →</a></div>
+        <summary>GABA 연구는 어떻게 읽으면 되나요?</summary>
+        <div><p>연구마다 참여자와 먹은 양이 달라요. 제품의 구성·먹는 법·주의사항은 포장과 스마트스토어 표시사항에서 확인하세요.</p><a className="text-link" href={`${import.meta.env.BASE_URL}research/`}>사람 대상 GABA 연구 보기 →</a></div>
       </details>
     </div>
   </section>;
