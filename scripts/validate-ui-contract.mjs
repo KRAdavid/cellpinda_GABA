@@ -332,15 +332,15 @@ requireMatch(teaser, /href="#gaba-research-highlights"[\s\S]*GABA 연구 쉽게 
 if (/href="#brain-load-evidence"[\s\S]*GABA 연구 쉽게 보기/.test(teaser)) fail('teaser GABA research action must not land on the separate general health evidence section');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
-requireMatch(indexHtml, /사업자가 GABA의 역할과 중요성을 쉽게 설명하고 공유할 수 있도록 정리한 공개 안내서입니다\./, 'static no-script fallback must identify the public GABA guide');
-requireMatch(indexHtml, /GABA, 왜 중요한 성분일까요\?/, 'static no-script fallback must use the guide title');
-requireMatch(indexHtml, /수면·긴장·집중·운동부터 피부·인지·성장·면역까지/, 'static no-script fallback must summarize the guide topic range');
-requireMatch(indexHtml, /사업자가 바로 설명할 수 있는 GABA 5문장/, 'static no-script fallback must expose the business message kit');
+requireMatch(indexHtml, /수면에서 인지, 피부, 근육과 성장 연구까지[\s\S]*이제 GABA를 알아야 합니다/, 'static no-script fallback must use the consumer story title');
+requireMatch(indexHtml, /잠들고, 집중하고, 움직이는 순간마다[\s\S]*GABA입니다\./, 'static no-script fallback must explain why GABA matters in everyday language');
+requireMatch(indexHtml, /3분 만에 GABA 이해하기[\s\S]*전문가 영상 보기[\s\S]*주제별 연구 보기/, 'static no-script fallback must expose the three story entry points');
+if (/https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202|REVIEW_DIALOG|스마트스토어/.test(indexHtml)) fail('root public story must not expose product or review CTAs');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
 requireMatch(review, /가바 1500 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
 requireMatch(review, /가바 1500 구매자 후기를 스마트스토어에서 읽어보세요\./, 'review destination must keep the approved consumer message');
-requireMatch(indexHtml, /href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>스마트스토어에서 후기 읽기/, 'static review CTA must deep-link to the Smart Store review dialog');
+if (/href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"/.test(indexHtml)) fail('static root story must not deep-link to a product review');
 requireMatch(review, /가바 1500 스마트스토어 후기 읽기[\s\S]*href=\{url\}/, 'the separate review section must deep-link to the approved Smart Store review dialog');
 requireMatch(app, /content\?\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'header review link must open the approved Smart Store review dialog');
 requireMatch(purchaseQuestions, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'purchase FAQ review CTA must deep-link to the approved Smart Store review dialog');
@@ -355,12 +355,12 @@ if (/<link rel="canonical"|property="og:(?:url|title|image)"/i.test(notFoundHtml
 if (/cp\s+dist-pages\/index\.html\s+dist-pages\/404\.html/.test(deployWorkflow)) fail('Pages deployment must keep the dedicated 404 document instead of copying the homepage');
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(app + indexHtml)) fail('legacy official-mall destination leaked into consumer source');
 const consumerSource = app + indexHtml + review;
+const smartStoreLinks = [approvedSmartStoreUrl, approvedSmartStoreReviewUrl];
 const consumerAnchorTags = [...consumerSource.matchAll(/<a\b[^>]*>/g)].map(match => match[0]);
 const unsafeNewWindowLinks = consumerAnchorTags.filter(tag => /\btarget="_blank"/.test(tag) && !/\brel="[^"]*\bnoopener\b[^"]*"/.test(tag));
 if (unsafeNewWindowLinks.length) fail(`consumer links opening a new window must include rel="noopener noreferrer" (${unsafeNewWindowLinks.length} found)`);
-const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver\.com\/[A-Za-z0-9_/?=&.%:#-]+/g)].map(match => match[0]);
-if (!smartStoreLinks.length || smartStoreLinks.some(url => ![approvedSmartStoreUrl, approvedSmartStoreReviewUrl].includes(url)) || !smartStoreLinks.includes(approvedSmartStoreUrl) || !smartStoreLinks.includes(approvedSmartStoreReviewUrl)) {
-  fail(`consumer Smart Store links must use the approved product detail or exact review dialog (${approvedSmartStoreUrl} / ${approvedSmartStoreReviewUrl})`);
+if (!app.includes(approvedSmartStoreUrl) || !consumerSource.includes('REVIEW_DESTINATION_URL')) {
+  fail(`consumer product routes must retain the approved product detail and review destination token (${approvedSmartStoreUrl} / ${approvedSmartStoreReviewUrl})`);
 }
 const consumerImageTags = [...consumerSource.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
 if (consumerImageTags.some(tag => !/\balt\s*=\s*(?:['"][^'"]*['"]|\{[^}]+\})/i.test(tag))) {

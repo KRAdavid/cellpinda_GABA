@@ -334,11 +334,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.ok(!/제한적|결과가 일치하지|정량 메타분석|이상사례|유의하지 않음/i.test(sharePage), `share page ${id} contains blocked research copy`);
     }
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
-    assert.ok(pageText.includes(approvedSmartStoreUrl), 'live static fallback must keep the approved Smart Store 1500 detail link');
-    assert.ok(pageText.includes('스마트스토어에서 제품 보기'), 'live static fallback must label the Smart Store destination for consumers');
-    assert.ok(pageText.includes('스마트스토어에서 후기 읽기'), 'live static fallback must expose the Smart Store review label');
-    assert.ok(pageText.includes(approvedSmartStoreReviewUrl), 'live static fallback must deep-link to the Smart Store review dialog');
-    assert.ok(pageText.includes(approvedReviewText), 'live static fallback must expose the approved consumer review guidance');
+    assert.ok(pageText.includes('수면에서 인지, 피부, 근육과 성장 연구까지') && pageText.includes('전문가 영상 보기'), 'live static fallback must expose the consumer GABA story entry points');
+    assert.ok(!pageText.includes(approvedSmartStoreUrl) && !pageText.includes(approvedSmartStoreReviewUrl), 'live root story must not expose product or review CTAs');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
     assert.equal(content.products[0].category, '판매처 표기 기준 · 기타가공품', 'live export must keep the product type source-qualified until label confirmation');
