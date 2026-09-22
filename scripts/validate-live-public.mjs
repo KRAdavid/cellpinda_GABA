@@ -191,7 +191,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(releaseManifest.checks?.smartStoreOnly && releaseManifest.checks?.reviewDestination && releaseManifest.checks?.researchIndex && releaseManifest.checks?.teaserBoundary && releaseManifest.checks?.challengeCopy && releaseManifest.checks?.productBoundary, 'live release manifest checks are incomplete');
     const bundleHashCount = await validateLiveBundleHashes(releaseManifest);
     validatePublicMetadata(pageText, '/', `${base}/`);
-    assert.ok(pageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live root fallback must distinguish general GABA research from Cellpinda product research');
+    assert.ok(pageText.includes('사업자가 GABA의 역할과 중요성을 쉽게 설명하고 공유할 수 있도록 정리한 공개 안내서입니다.'), 'live root fallback must identify the public GABA guide');
+    assert.ok(pageText.includes('사업자가 바로 설명할 수 있는 GABA 5문장'), 'live root fallback must expose the business message kit');
     validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);
     const internalSnapshots = [
       ['/data/operations-queue.json', queueResponse],
@@ -315,7 +316,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 시작하기') && focusPageText.includes('초록 신호는 누르고 빨강 신호는 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
     const focusGameCardResponse = await request('/assets/focus-game-card-v5.png');
     assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
-    assert.match(pageText, new RegExp(`<script type="application\\/ld\\+json">\\{"@context":"https:\\/\\/schema\\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"${escapeRegExp(`${base}/`)}"[^<]*"inLanguage":"ko-KR"\\}<\\/script>`), 'live root WebSite structured data is invalid');
+    assert.match(pageText, new RegExp(`<script type="application\\/ld\\+json">\\{"@context":"https:\\/\\/schema\\.org","@type":"WebSite","name":"GABA Guide · 뇌와 우리","url":"${escapeRegExp(`${base}/`)}"[^<]*"inLanguage":"ko-KR"\\}<\\/script>`), 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';
       validatePublicMetadata(sharePage, `/share/${id}/`, `${base}/share/${id}/`);
