@@ -1,6 +1,6 @@
-# 공개 배포 감사 스냅샷 — 2026-09-22 (PR #198 이후 감사 포인터)
+# 공개 배포 감사 기준 — 2026-09-22 (라이브 원천 포인터)
 
-이 문서는 2026년 9월 22일 KST에 공개 배포 상태를 다시 확인한 결과를 보존한다. 상단 감사 포인터는 PR [#190](https://github.com/KRAdavid/cellpinda_GABA/pull/190)·[#191](https://github.com/KRAdavid/cellpinda_GABA/pull/191)·[#198](https://github.com/KRAdavid/cellpinda_GABA/pull/198) 병합 뒤 main·live SHA `ae4ed2783f2bfc9c8ed6411602f0381e1d4f6cb1`, 라이브 manifest 생성 시각 `2026-09-22T01:29:21.088Z`, 최신 성공 배포 [run 35675887961](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35675887961)를 문서 작성 시점 스냅샷으로 기록한다. PR #198은 일반 건강 연구와 GABA 섭취 연구를 소비자 화면에서 분리하고 연구 경계 문구를 회귀 검증에 고정했다. 이후 문서 병합이나 재배포로 SHA와 생성 시각이 바뀔 수 있으므로, 현재 판정은 항상 라이브 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)과 최신 성공 배포 run을 우선한다.
+이 문서는 2026년 9월 22일 KST에 확인한 공개 배포 감사 기준을 보존한다. PR [#198](https://github.com/KRAdavid/cellpinda_GABA/pull/198)은 일반 건강 연구와 GABA 섭취 연구를 소비자 화면에서 분리하고 연구 경계 문구를 회귀 검증에 고정했다. 라이브 SHA·manifest 생성 시각·최신 배포 run은 문서에 복제하지 않는다. 문서 전용 병합도 main SHA를 바꾸기 때문에, 현재 판정은 항상 라이브 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 `candidateSha`·`generatedAt`과 [최신 성공 Actions 실행](https://github.com/KRAdavid/cellpinda_GABA/actions)을 직접 확인한다.
 
 ## 판정
 
@@ -13,15 +13,15 @@
 | 항목 | 확인값 |
 | --- | --- |
 | 공개 주소 | `https://kradavid.github.io/cellpinda_GABA` |
-| 라이브 candidate SHA | `ae4ed2783f2bfc9c8ed6411602f0381e1d4f6cb1` |
-| manifest 생성 시각 | `2026-09-22T01:29:21.088Z` |
+| 라이브 candidate SHA | 라이브 `release-manifest.json`의 `candidateSha` |
+| manifest 생성 시각 | 라이브 `release-manifest.json`의 `generatedAt` |
 | 실행 모드 | `static` |
 | 공개 경로 | 10개 |
 | 공개 주장·연구·제품·후기 | 12개 · 6건 · 1개 · 1개 |
 | 티저 | `HOLD`, 공개 URL 없음 |
-| 최근 배포 | [run 35675887961](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35675887961), `success` |
+| 최근 배포 | main 기준 최신 성공 [Actions 실행](https://github.com/KRAdavid/cellpinda_GABA/actions) |
 
-직전 PR #191 감사 시점의 역사 스냅샷인 candidate SHA `e8a3d34da59d01d1b9296dab81e39d980505759d`, manifest 생성 시각 `2026-09-22T00:06:53.388Z`, 배포 run `35670446287`와 그 이전 감사 스냅샷은 감사 이력으로 보존한다. PR #198도 작성자·병합자가 `KRAdavid`, 독립 리뷰 0건·`REVIEW_REQUIRED`인 관리자 병합이며, 현재 [CODEOWNERS](../.github/CODEOWNERS)는 단일 계정만 지정한다. 이 병합은 독립 Code Owner 승인을 의미하지 않는다.
+PR #198의 코드 배포 시점에는 candidate SHA `ae4ed2783f2bfc9c8ed6411602f0381e1d4f6cb1`, manifest 생성 시각 `2026-09-22T01:29:21.088Z`, 배포 run `35675887961`이 기록됐다. 이 값은 코드 변경 시점의 역사 스냅샷이며 현재값으로 재사용하지 않는다. PR #198·#199 모두 작성자·병합자가 `KRAdavid`, 독립 리뷰 0건·`REVIEW_REQUIRED`인 관리자 병합이며, 현재 [CODEOWNERS](../.github/CODEOWNERS)는 단일 계정만 지정한다. 이 병합은 독립 Code Owner 승인을 의미하지 않는다.
 
 라이브 manifest의 자동 검사는 다음 7개가 모두 `true`다.
 
