@@ -92,8 +92,8 @@ if (/<button className=/.test(challenge)) fail('seven-day challenge action butto
 if (/<button className=/.test(admin)) fail('admin action buttons must declare an explicit type');
 requireMatch(rhythm, /if \(sharedType && !result\) resultRef\.current\?\.focus\(\{ preventScroll: true \}\)/, 'shared rhythm arrival must focus the shared result heading');
 if (/href="#products"|셀핀다 제품 구성 확인|스마트스토어/.test(research)) fail('research reading must not contain a product-purchase CTA');
-requireMatch(brainLoadEvidence, /잠·집중·휴식에 관한 연구/, 'general brain-health evidence must be presented as secondary reading');
-requireMatch(brainLoadEvidence, /GABA 섭취 연구와 별도로, 잠·스트레스·집중을 이해하는 일반 건강 연구예요\. 제품 정보는 따로 보여드려요\./, 'secondary health evidence must be clearly separated from GABA ingestion research');
+requireMatch(brainLoadEvidence, /쉬어야 하는 이유 · 일반 건강 연구/, 'general brain-health evidence must be presented as secondary reading');
+requireMatch(brainLoadEvidence, /이 카드는 GABA를 먹은 연구가 아니에요\. 잠·스트레스·휴식 자체를 살펴본 자료예요\./, 'secondary health evidence must be clearly separated from GABA ingestion research');
 requireMatch(app, /<main id="main">/, 'main landmark is missing');
 requireMatch(app, /className="skip" href="#main"/, 'keyboard skip link is missing');
 requireMatch(app, /<nav id="primary-navigation"[^>]*aria-label="주 메뉴"/, 'consumer navigation label is missing');
@@ -248,12 +248,12 @@ requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*
 requireMatch(research, /research-library-study-boundary[\s\S]*일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요/, 'research cards must show a compact plain-language product-information handoff');
 requireMatch(research, /claim\.id === 'research-powers-2008'[\s\S]*research-library-scope[\s\S]*GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요\.[\s\S]*성장이나 근육 발달 효과를 확인한 연구는 아니며[\s\S]*연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요\./, 'growth-hormone scope must be visible before the detail disclosure');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
-for (const marker of ['잠이 부족하면', '집중·기억·판단이 흔들릴 수 있어요.', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
+for (const marker of ['잠이 부족하면', '다음 날 집중과 판단이 더 어려울 수 있어요.', '61개 연구', '267개 연구', '21개 연구', '덜 피곤하고 기운이 난다고 답했어요', '연구 출처 보기', '오늘 해볼 일']) requireMatch(brainLoadEvidence, new RegExp(marker), `brain-load evidence marker ${marker} is missing`);
 if (/내 생활에서/.test(brainLoadEvidence)) fail('brain-load evidence must label its practical suggestion without implying that a general study finding directly describes the visitor');
 requireMatch(brainLoadEvidence, /pubmed\.ncbi\.nlm\.nih\.gov|cdc\.gov\/niosh\/fatigue|onlinelibrary\.wiley\.com/, 'brain-load evidence must link to trusted public sources');
 requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-template-columns/, 'brain-load evidence must use a visual card grid');
-requireMatch(brainLoadEvidence, /brain-load-evidence-details[\s\S]*일반 건강 연구 5편 보기[\s\S]*brain-load-evidence-grid/, 'brain-load evidence details must stay behind an optional consumer-friendly disclosure');
-requireMatch(brainLoadEvidence, /잠이 부족하면[\s\S]*집중·기억·판단이 흔들릴 수 있어요\./, 'general health evidence heading must state the everyday consequence directly');
+requireMatch(brainLoadEvidence, /brain-load-evidence-details[\s\S]*잠·집중·스트레스·휴식 연구 5편 보기[\s\S]*GABA 섭취 연구와 별도[\s\S]*brain-load-evidence-grid/, 'brain-load evidence details must stay behind an optional consumer-friendly disclosure and remain separate from GABA intake studies');
+requireMatch(brainLoadEvidence, /잠이 부족하면[\s\S]*다음 날 집중과 판단이 더 어려울 수 있어요\./, 'general health evidence heading must state the everyday consequence directly');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
 for (const marker of ['뇌컨디션 확인 챌린지', '1분 색 신호 게임', '규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 신호 순서가 달라져요', '오늘의 반응 기록', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요.', '게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.', '오늘 게임에서 맞힌 비율이에요. 뇌 피로나 건강 상태를 측정한 값은 아니에요.', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '먼저 연습하고 시작하기', '다음 규칙 연습하기', '연습 마치기', '좋은 반응 흐름', '축하해요. 오늘 게임에서는 반응이 안정적이었어요.', '잠깐 점검해 볼 기록', '오늘은 반응이 조금 흔들렸어요.', '지금은 5분 회복을 권해요', '지금은 화면을 내려놓고 5분 쉬어 보세요.', 'fatigue-game-result-guidance-${baselineCopy.tone}', '친구에게 1분 게임 보내기', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker.replace(/[${}]/g, '\\$&')), `advanced focus game marker ${marker} is missing`);
 requireMatch(fatigueGame, /fatigue-game-heading[\s\S]*초록 신호는 누르고 빨강 신호는 기다려요\.[\s\S]*게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요\.[\s\S]*phase === 'idle'/, 'the game action and non-diagnostic scope must be visible before the player starts');
