@@ -122,7 +122,7 @@ h1,h2,h3,p,summary,.habit{word-break:keep-all;overflow-wrap:break-word}@media(ma
 .hero-product-arrow{flex:none;margin-left:6px;color:var(--green)}
 
 /* Keep navigation and the first screen readable between phone and desktop widths. */
-@media (min-width:681px) and (max-width:900px){
+@media (min-width:681px) and (max-width:1100px){
   .header{height:76px;padding:0 24px;gap:16px}
   .header nav{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;gap:16px;background:white;padding:22px 24px;box-shadow:0 12px 18px #18382b10}
   .header nav.open{display:flex}

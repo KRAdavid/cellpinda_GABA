@@ -55,8 +55,8 @@ const everydayTopics: EverydayTopic[] = [
   },
   {
     id: 'calm',
-    title: '긴장되는 순간',
-    question: '긴장과 스트레스에도 관련이 있나요?',
+    title: '스트레스가 올라갈 때',
+    question: '스트레스가 쌓일 때도 관련이 있나요?',
     body: 'GABA는 위협과 스트레스에 반응하는 신경회로의 과도한 활동을 조절하는 과정에 관여합니다.',
     note: 'GABA는 스트레스 반응 회로의 활동을 조율하는 신호로 연구되고 있습니다.',
     icon: 'sparkles',
@@ -300,7 +300,7 @@ export default function PublicGabaGuide() {
 
   const myths = [
     { question: 'GABA는 신경세포의 활동 균형을 조절한다', answer: '핵심 역할', detail: 'GABA는 뇌와 척수에서 신경세포 사이의 신호 균형을 만드는 대표적인 억제성 신경전달물질입니다.' },
-    { question: 'GABA는 수면·긴장·집중·운동과 연결된다', answer: '사실', detail: 'GABA성 신경전달은 잠들기, 스트레스 반응, 선택적 집중, 운동 조절에 관여합니다.' },
+    { question: 'GABA는 수면·스트레스·집중·운동과 연결된다', answer: '사실', detail: 'GABA성 신경전달은 잠들기, 스트레스 반응, 선택적 집중, 운동 조절에 관여합니다.' },
     { question: '먹는 GABA 연구와 뇌 속 GABA 관찰은 같은가요?', answer: '구분 필요', detail: '사람 연구라도 무엇을 먹었는지, 뇌 속 신호를 관찰했는지에 따라 질문과 해석이 달라집니다.' },
     { question: '성장호르몬 수치가 오르면 키가 크나요?', answer: '구분 필요', detail: '짧은 시간의 혈액 수치 변화는 성장 속도나 근육 발달과 같은 뜻이 아닙니다.' },
   ];
@@ -332,13 +332,13 @@ export default function PublicGabaGuide() {
           <div className="guide-hero-copy">
             <p className="guide-kicker">GABA GUIDE · 약 3분 안내서</p>
             <h1 id="guide-hero-heading"><em>GABA,</em> 우리 몸에서는<br />어떤 일을 할까요?</h1>
-            <p className="guide-hero-question">잠·긴장·집중이 궁금하다면, GABA가 어떤 신호인지부터 알아보세요.</p>
+            <p className="guide-hero-question">잠·스트레스·집중이 궁금하다면, GABA가 어떤 신호인지부터 알아보세요.</p>
             <p className="guide-hero-body">GABA는 우리 몸에 원래 존재하는 신경전달물질입니다. 이 안내서는 GABA의 역할과 사람 연구에서 실제로 살펴본 내용을 쉬운 말과 그림으로 정리했습니다.</p>
             <div className="guide-hero-actions">
               <button type="button" className="guide-primary-button" onClick={() => scrollTo('basics')}>3분 안에 이해하기 <ArrowRight size={17} aria-hidden="true" /></button>
               <button type="button" className="guide-quiet-button" onClick={() => scrollTo('research')}><BookOpen size={16} aria-hidden="true" /> 수면·스트레스 연구 보기</button>
             </div>
-            <p className="guide-boundary-note">일반 GABA의 역할과 사람 연구를 설명하는 안내서예요. 셀핀다 가바 1500의 효능이나 권장 섭취량을 확인하는 제품 시험 페이지는 아닙니다.</p>
+            <p className="guide-boundary-note">일반 GABA와 사람 연구를 쉽게 소개합니다. 제품 표시는 제품 카드에서 확인하세요.</p>
           </div>
           <NeuronNetwork />
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
@@ -347,7 +347,7 @@ export default function PublicGabaGuide() {
         <section className="guide-summary-band" aria-label="30초 요약">
           <div className="guide-container guide-summary-grid">
             <span className="guide-summary-label">30초 요약</span>
-            <p>GABA는 뇌와 척수에서 작용하는 대표적인 억제성 신경전달물질입니다. 신경세포의 활동 균형을 조절하고 수면·감정·감각·집중·운동에 관련된 회로를 연결합니다.</p>
+            <p>GABA는 뇌와 척수에서 신호가 너무 커지지 않도록 조절하는 물질이에요. 잠·감정·감각·집중·운동에 관련된 신경회로에서 작용합니다.</p>
             <span className="guide-summary-mark">GABA<br />= 조절의 신호</span>
           </div>
         </section>
@@ -438,7 +438,7 @@ export default function PublicGabaGuide() {
           <div className="guide-container guide-balance-grid">
             <div className="guide-balance-mark" aria-hidden="true"><span /><span /><span /></div>
             <div><p className="guide-section-number">04 · KEEP THE SCOPE CLEAR</p><h2 id="balance-heading">GABA를 알 때<br />꼭 구분할 것</h2><p>몸속에서 하는 역할과, 먹었을 때 사람에게 나타나는 변화는 같은 질문이 아닙니다.</p></div>
-            <div className="guide-balance-warning"><Sparkles size={20} aria-hidden="true" /><strong>일반 GABA와 제품 정보는 따로 보세요</strong><p>이 안내서는 일반 GABA의 역할과 사람 연구를 설명합니다. 셀핀다 가바 1500의 효능이나 권장 섭취량을 확인하는 제품 시험 페이지는 아닙니다.</p></div>
+            <div className="guide-balance-warning"><Sparkles size={20} aria-hidden="true" /><strong>일반 GABA와 제품 정보는 따로 보세요</strong><p>이 안내서는 일반 GABA의 역할과 사람 연구를 설명합니다. 제품 구성과 표시는 제품 카드에서 확인하세요.</p></div>
           </div>
         </section>
 
