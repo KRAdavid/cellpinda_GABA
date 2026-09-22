@@ -62,7 +62,7 @@ const everydayTopics: EverydayTopic[] = [
   {
     id: 'focus',
     title: '집중할 때',
-    question: '집중하려면 왜 억제가 필요할까요?',
+    question: '집중하려면 왜 다른 생각을 줄여야 할까요?',
     body: '집중할 때는 필요한 정보에 신경 쓰고 덜 중요한 신호를 줄이는 과정도 필요해요.',
     note: '필요한 신호에 집중하도록 주변 신호를 정리하는 과정을 살펴보세요.',
     icon: 'focus',
@@ -77,7 +77,7 @@ const researchTopics: ResearchTopic[] = [
     tone: 'human',
     label: '사람 대상 연구',
     summary: '잠이 불편하다고 답한 일본 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안 먹고, 잠드는 시간과 수면 기록을 비교한 연구입니다.',
-    observed: '각 1주 동안 먹은 뒤 잠드는 시간과 깊은 잠으로 분류되는 수면 단계의 비율을 비교했습니다.',
+    observed: '각 1주 동안 먹은 뒤 잠드는 시간과 깊게 잔 시간의 비율을 비교했습니다.',
     interpretation: '정해진 조건에서 수면 지표를 비교해 본 결과예요. 사람마다 기록은 다를 수 있어요.',
     scope: '일반 GABA 연구를 살펴본 카드예요. 셀핀다 제품 정보는 제품 카드에서 확인하세요.',
     source: { label: 'Food Sci Biotechnol. 2016 · PMID 30263304', url: 'https://pubmed.ncbi.nlm.nih.gov/30263304/' },
@@ -275,7 +275,7 @@ export default function PublicGabaGuide() {
   };
 
   const myths = [
-    { question: 'GABA는 신경세포의 활동 균형을 조절한다', answer: '핵심 역할', detail: 'GABA는 뇌와 척수에서 신경세포 사이의 신호 균형을 만드는 대표적인 억제성 신경전달물질입니다.' },
+    { question: 'GABA는 신경세포의 활동 균형을 조절한다', answer: '핵심 역할', detail: 'GABA는 뇌와 척수에서 신경세포 사이의 신호가 너무 커지지 않도록 조절하는 물질입니다.' },
     { question: 'GABA는 잠·스트레스·집중과 관련된 신호에 관여한다', answer: '사실', detail: 'GABA 신호는 잠들기, 스트레스 반응, 집중과 관련된 신경회로에 관여해요.' },
     { question: '먹는 GABA 연구와 뇌 속 GABA 관찰은 같은가요?', answer: '구분 필요', detail: '사람 연구라도 무엇을 먹었는지, 뇌 속 신호를 관찰했는지에 따라 질문과 해석이 달라집니다.' },
   ];
@@ -421,7 +421,7 @@ export default function PublicGabaGuide() {
           <div className="guide-container">
             <div className="guide-section-heading guide-section-heading-wide">
               <div><p className="guide-section-number">05 · RESEARCH EXPLORER</p><h2 id="research-heading">사람 연구에서<br />무엇을 봤을까요?</h2></div>
-              <p>연구 대상·양·기간을 먼저 보고,<br /><strong>관찰한 범위만</strong> 읽어보세요.</p>
+              <p>누가 참여했고 얼마나 살펴봤는지 먼저 보고,<br /><strong>연구에서 실제로 본 내용만</strong> 읽어보세요.</p>
             </div>
             <div className="guide-research-layout">
               <div className="guide-research-grid" role="tablist" aria-label="GABA 연구 주제">
@@ -446,7 +446,7 @@ export default function PublicGabaGuide() {
                 <div className="guide-research-source"><span>연구 출처</span><a href={activeResearch.source.url} target="_blank" rel="noopener noreferrer">{activeResearch.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div>
               </article>
             </div>
-            <p className="guide-research-reminder"><FlaskConical size={18} aria-hidden="true" /><span>각 연구의 대상·용량·기간·비교 조건을 함께 살펴보면 GABA 연구의 흐름을 더 선명하게 이해할 수 있습니다.</span></p>
+            <p className="guide-research-reminder"><FlaskConical size={18} aria-hidden="true" /><span>누가 참여했고, 얼마나 먹고, 얼마나 지켜봤는지 함께 보면 연구 내용을 더 쉽게 이해할 수 있습니다.</span></p>
           </div>
         </section>
 
