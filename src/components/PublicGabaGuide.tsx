@@ -225,7 +225,7 @@ export default function PublicGabaGuide() {
   const researchIds = researchTopics.map((topic) => topic.id);
   const nextSteps: Array<{ label: string; body: string; href: string; external?: boolean }> = [
     { label: 'GABA 기본 역할', body: '몸속에 원래 있는 신호부터 알아보기', href: '#basics' },
-    { label: '사람 연구', body: '잠·스트레스·집중 연구에서 실제로 본 내용', href: '#research' },
+    { label: '사람 연구', body: '잠·스트레스 연구에서 실제로 본 내용', href: '#research' },
     { label: '나의 하루 리듬', body: '지난 7일 잠과 휴식을 1분 체크하기', href: `${siteRoot}#rhythm` },
     { label: '가바 1500 구성', body: '셀핀다 제품의 표시와 구성을 확인하기', href: `${siteRoot}?view=products#products` },
     { label: '구매자 후기', body: '가바 1500 사용 경험을 스마트스토어에서 읽기', href: REVIEW_DESTINATION_URL, external: true },

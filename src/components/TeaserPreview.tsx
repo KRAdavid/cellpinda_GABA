@@ -67,8 +67,8 @@ export default function TeaserPreview({onEvent}: Props) {
   const hasPublicVideo = isHttps(preview.url);
   const isOnHold = preview.status === 'HOLD' || !hasPublicVideo;
 
-  return <section id="teaser" className="teaser-section" aria-labelledby="teaser-heading">
-    <div className="wrap teaser-wrap">
+  return <section id="teaser" className={`teaser-section${isOnHold ? ' teaser-section--hold' : ''}`} aria-labelledby="teaser-heading">
+    <div className={`wrap teaser-wrap${isOnHold ? ' teaser-wrap--hold' : ''}`}>
       <div className="teaser-intro">
         <p className="chapter">02 / 발효가바 영상</p>
         <h2 id="teaser-heading">발효가바는<br />어떻게 만들어질까요?</h2>
@@ -80,7 +80,7 @@ export default function TeaserPreview({onEvent}: Props) {
           {isOnHold ? <div className="teaser-hold" role="status" aria-live="polite">
             <div className="teaser-hold-visual" aria-hidden="true"><span className="teaser-hold-orbit teaser-hold-orbit--one" /><span className="teaser-hold-orbit teaser-hold-orbit--two" /><span className="teaser-hold-signal" /></div>
             <span className="teaser-hold-icon" aria-hidden="true">✦</span>
-            <div className="teaser-hold-copy"><strong>발효가바 영상 준비 중</strong><span>영상이 공개되면 이 자리에서 바로 재생됩니다.</span></div>
+            <div className="teaser-hold-copy"><strong id={isOnHold ? 'teaser-heading' : undefined}>발효가바 영상 준비 중</strong><span>영상이 공개되면 이 자리에서 바로 재생됩니다.</span></div>
             <div className="teaser-hold-actions" aria-label="영상 대신 먼저 볼 내용">
               <a href="#gaba-research-highlights" onClick={() => onEvent?.('research_highlight_opened', {path: '/teaser'})}>GABA 연구 쉽게 보기 <span aria-hidden="true">↘</span></a>
               <a href={`${import.meta.env.BASE_URL}?view=products#products`} onClick={() => onEvent?.('purchase_cta_click', {productId: 'gaba1500', path: '/teaser'})}>가바 1500 구성 보기 <span aria-hidden="true">↘</span></a>
