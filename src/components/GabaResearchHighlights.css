@@ -4,7 +4,7 @@
 .gaba-research-highlights-head>p{max-width:340px;color:#52665a}
 .gaba-research-highlights-boundary{display:flex;align-items:center;gap:10px;margin:28px 0 22px;padding:13px 16px;border:1px solid #cfe0d2;border-radius:12px;background:#fff;color:#385343;font-size:14px;line-height:1.6}
 .gaba-research-highlights-boundary span{display:grid;place-items:center;flex:0 0 20px;width:20px;height:20px;border-radius:50%;background:#1f8050;color:#fff;font-size:12px;font-weight:700}
-.gaba-research-highlights-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.gaba-research-highlights-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .gaba-research-highlight-card{display:flex;flex-direction:column;min-height:385px;padding:25px;border:1px solid #d9e4da;border-radius:18px;background:#fff;box-shadow:0 12px 32px rgba(24,56,43,.06)}
 .gaba-research-highlight-top{display:flex;align-items:center;gap:9px;color:#1f8050;font-size:13px;font-weight:700;letter-spacing:.02em}
 .gaba-research-highlight-icon{display:grid;place-items:center;width:38px;height:38px;border:1px solid #cfe0d2;border-radius:12px;color:#1f8050;background:#f4faf5}

@@ -1,4 +1,4 @@
-import {Activity, Dumbbell, Moon, type LucideIcon} from 'lucide-react';
+import {Activity, Moon, type LucideIcon} from 'lucide-react';
 import type {Claim} from './ResearchLibrary';
 import './GabaResearchHighlights.css';
 
@@ -27,14 +27,6 @@ const highlightOrder: Highlight[] = [
     summary: '건강한 성인 63명이 GABA 캡슐과 비교 캡슐을 먹고 머리를 많이 쓴 뒤, 뇌파와 활력 점수를 기록했어요.',
     facts: ['참여: 성인 63명', '연구 조건: 100mg 한 번', '살펴본 항목: 뇌파 변화·활력 점수'],
     Icon: Activity,
-  },
-  {
-    id: 'research-powers-2008',
-    label: '쉬었을 때·운동했을 때',
-    title: 'GABA 3g을 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 연구',
-    summary: 'GABA 또는 비교 캡슐을 먹고 쉬었을 때와 운동했을 때 혈액 속 변화를 비교했어요.',
-    facts: ['참여: 운동 경험 남성 11명', '연구 조건: 3g 한 번', '비교: 쉬었을 때·운동했을 때'],
-    Icon: Dumbbell,
   },
 ];
 
@@ -71,7 +63,6 @@ export default function GabaResearchHighlights({claims, onEvent}: {claims: Claim
           <h3>{title}</h3>
           <p className="gaba-research-highlight-summary">{summary}</p>
           <div className="gaba-research-highlight-result"><strong>연구에서 관찰된 내용</strong><span>{result}</span></div>
-          {id === 'research-powers-2008' ? <p className="gaba-research-highlight-scope"><strong>읽는 법</strong>GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요.</p> : null}
           <ul className="gaba-research-highlight-facts" aria-label="연구 조건">{facts.map(fact => <li key={fact}>{fact}</li>)}</ul>
           <a className="text-link" href={`${import.meta.env.BASE_URL}research/#${id}`} onClick={() => onEvent?.('research_highlight_opened', {researchId: id, path: '/research-highlights'})}>그림으로 한눈에 보기 <span aria-hidden="true">↗</span></a>
         </article>;

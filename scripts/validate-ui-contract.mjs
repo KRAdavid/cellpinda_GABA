@@ -129,8 +129,8 @@ requireMatch(app, /className="mobile-break"/, 'mobile hero headline must wrap in
 requireMatch(app, /<section className="hero" aria-labelledby="hero-heading">[\s\S]*<h1 id="hero-heading"/, 'hero landmark must be named by its visible headline');
 requireMatch(app, /<h1 id="hero-heading" aria-label="퇴근했는데도 일 생각이 계속 나나요\?">/, 'hero headline must keep a space-preserving accessible name across visual line breaks');
 requireMatch(styles, /@media\(max-width:680px\)\{\.header>\.button\{display:none\}\.menu-toggle\{display:flex;[^}]*width:44px;height:44px/, 'mobile header must keep its menu toggle inside the viewport');
-requireMatch(styles, /@media \(min-width:681px\) and \(max-width:900px\)[\s\S]*?\.header nav\{display:none[\s\S]*?\.menu-toggle\{display:flex/, 'tablet navigation must collapse before menu labels wrap');
-requireMatch(styles, /@media \(min-width:681px\) and \(max-width:900px\)[\s\S]*?\.hero-copy\{[^}]*background:linear-gradient/, 'tablet hero text must keep a readable background over the photo');
+requireMatch(styles, /@media \(min-width:681px\) and \(max-width:1100px\)[\s\S]*?\.header nav\{display:none[\s\S]*?\.menu-toggle\{display:flex/, 'tablet navigation must collapse before menu labels wrap');
+requireMatch(styles, /@media \(min-width:681px\) and \(max-width:1100px\)[\s\S]*?\.hero-copy\{[^}]*background:linear-gradient/, 'tablet hero text must keep a readable background over the photo');
 requireMatch(research, /research-method-filter[\s\S]*연구 방법[\s\S]*더보기/, 'research method filter must stay behind an optional consumer-friendly control');
 requireMatch(researchStyles, /research-library-card-featured \.research-library-quick-facts\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'the first mobile research result must keep its core study facts compact and readable');
 requireMatch(styles, /\.brand\{display:inline-flex;align-items:center;min-height:44px/, 'brand links must keep a reachable touch target');
@@ -238,13 +238,12 @@ requireMatch(app, /<GabaResearchHighlights claims=\{content\.claims\}[^>]*\/>/, 
 requireMatch(app, /url\.hash==='#brain-load-evidence'[\s\S]*getElementById\('brain-load-evidence'\)[\s\S]*scrollIntoView/, 'brain-load evidence hash links must align after async content loads');
 requireMatch(gabaResearchHighlights, /일반 GABA 연구를 쉬운 말로 정리했어요\.[\s\S]*셀핀다 완제품으로 시험한 결과가 아니며[\s\S]*셀핀다 제품 정보는 제품 카드에서 따로 확인할 수 있어요\./, 'post-teaser research highlights must keep a clear general-research and product boundary');
 requireMatch(gabaResearchHighlights, /(?:GABA를 먹은 사람 연구에서|일반 GABA 연구에서)[\s\S]*무엇이 기록됐을까요\?/, 'post-teaser GABA research heading must state the consumer question directly');
-for (const marker of ['잠드는 시간과 수면 기록', '머리를 많이 쓴 뒤 뇌파와 활력 점수를 비교했어요', 'GABA 3g을 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 연구', '그림으로 한눈에 보기', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
+for (const marker of ['잠드는 시간과 수면 기록', '머리를 많이 쓴 뒤 뇌파와 활력 점수를 비교했어요', '그림으로 한눈에 보기', '전체 연구 카드 보기']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser GABA research highlight ${marker} is missing`);
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight[\s\S]*claim\.metadata\?\.consumerFinding[\s\S]*claim\.publicText/, 'post-teaser research highlights must read reviewed consumer copy and tolerate an older local API snapshot');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
 requireMatch(gabaResearchHighlights, /gaba-research-highlight-boundary-badge[\s\S]*일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요/, 'homepage research highlights must keep a plain-language product-information handoff on each card');
-requireMatch(gabaResearchHighlights, /research-powers-2008[\s\S]*GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요\.[\s\S]*성장이나 근육 발달 효과를 확인한 연구는 아니며/, 'the growth-hormone highlight must keep its measurement scope beside the result');
-for (const marker of ['연구 조건: 하루 100mg', '연구 조건: 100mg 한 번', '연구 조건: 3g 한 번']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
-requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(3/, 'post-teaser GABA research highlights must use a visual three-card grid');
+for (const marker of ['연구 조건: 하루 100mg', '연구 조건: 100mg 한 번']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
+requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(2/, 'post-teaser GABA research highlights must use a focused two-card grid');
 requireMatch(research, /research-library-study-boundary[\s\S]*일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요/, 'research cards must show a compact plain-language product-information handoff');
 requireMatch(research, /claim\.id === 'research-powers-2008'[\s\S]*research-library-scope[\s\S]*GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요\.[\s\S]*성장이나 근육 발달 효과를 확인한 연구는 아니며[\s\S]*연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요\./, 'growth-hormone scope must be visible before the detail disclosure');
 if (/intro-strip wrap/.test(app)) fail('the landing page must not repeat the hero check in a second introductory roadmap');
@@ -304,7 +303,7 @@ requireMatch(fatigueGameStyles, /fatigue-game-rule-cards[\s\S]*fatigue-game-prac
 requireMatch(fatigueGame, /fatigue-rule-slot[\s\S]*fatigue-rule-placeholder/, 'focus game must reserve the rule position in every stage');
 requireMatch(fatigueGameStyles, /\.fatigue-game-running\{display:grid;grid-template-rows:[^}]+\}[\s\S]*\.fatigue-stage-instruction\{[^}]*height:78px[\s\S]*\.fatigue-rule-slot\{[^}]*height:48px/, 'focus stage instructions and play area must keep stable vertical positions');
 requireMatch(fatigueGame, /function FatigueGameNextSteps/, 'completed focus results must define a compact next-step navigation');
-requireMatch(fatigueGame, /fatigue-game-next-steps[\s\S]*GABA 이야기[\s\S]*가바 1500 구성[\s\S]*구매자 후기/, 'completed focus results must offer GABA context, product details, and an approved review label');
+requireMatch(fatigueGame, /fatigue-game-next-steps[\s\S]*GABA 이야기[\s\S]*제품 표시사항 확인[\s\S]*구매자 후기/, 'completed focus results must offer GABA context, product details, and an approved review label');
 requireMatch(fatigueGame, /href=\{REVIEW_DESTINATION_URL\}/, 'completed focus results must link to the approved review destination');
 requireMatch(fatigueGame, /phase === 'complete'[\s\S]*FatigueGameNextSteps/, 'the post-comparison result must expose next-step links without hiding them in the game controls');
 requireMatch(researchStyles, /research-library-consumer-summary[\s\S]*?font-size:\s*16px;\s*line-height:\s*1\.75/, 'research copy must be at least 16px on mobile');
@@ -326,7 +325,7 @@ requireMatch(teaser, /rootMargin: '560px 0px'/, 'teaser must wait until the read
 requireMatch(teaser, /frameRequested \? <iframe/, 'teaser frame must be absent until its visibility threshold is reached');
 requireMatch(teaser, /src=\{preview\.url!?\}/, 'teaser iframe must use the approved preview URL directly');
 requireMatch(teaser, /teaser-card--hold/, 'teaser hold state must use a compact placeholder before a public video is available');
-requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hold[\s\S]*min-height: 220px/, 'teaser hold placeholder must stay compact on mobile');
+requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hold[\s\S]*min-height: 210px/, 'teaser hold placeholder must stay compact on mobile');
 requireMatch(teaser, /teaser-hold-actions[\s\S]*GABA 연구 쉽게 보기[\s\S]*가바 1500 구성 보기/, 'teaser hold state must offer a clear research and product next action while the video is pending');
 requireMatch(teaser, /href="#gaba-research-highlights"[\s\S]*GABA 연구 쉽게 보기/, 'teaser GABA research action must land on the GABA research highlights section');
 if (/href="#brain-load-evidence"[\s\S]*GABA 연구 쉽게 보기/.test(teaser)) fail('teaser GABA research action must not land on the separate general health evidence section');
