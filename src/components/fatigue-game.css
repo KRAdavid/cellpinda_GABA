@@ -66,7 +66,7 @@
 @media(max-width:760px){.fatigue-game-running{grid-template-rows:40px 78px 48px 28px 148px 48px}.fatigue-game-sound-toggle{font-size:15px}}
 @media(max-width:760px){.fatigue-game-sound-status-running{top:46px;right:0;max-width:100%;text-align:center!important}}
 .fatigue-game-share-note{margin:8px 0 0!important;color:#53695c!important;font-size:12px!important;line-height:1.6!important}
-.fatigue-game-heading h2:focus,.fatigue-game-rest h3:focus{outline:none}
+.fatigue-game-heading h2:focus,.fatigue-game-rest h3:focus{outline:none}.fatigue-game-rest h3{scroll-margin-top:96px}
 .fatigue-game-more-actions{margin:16px 0;padding:12px 14px;border:1px solid #d6e1d7;border-radius:5px;background:#f8faf8}
 .fatigue-game-more-actions>summary{min-height:40px;color:#315842;font-size:14px;font-weight:600;cursor:pointer}
 .fatigue-game-more-actions>.rhythm-button{width:100%;margin:8px 0}
