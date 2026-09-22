@@ -12,6 +12,7 @@ const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles
 ])));
 const appSource = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const publicGuide = await readFile(new URL('../src/components/PublicGabaGuide.tsx', import.meta.url), 'utf8');
 const researchLibrary = consumerSources['ResearchLibrary.tsx'];
 const gabaResearchHighlights = consumerSources['GabaResearchHighlights.tsx'];
 const gameDomain = await readFile(new URL('../src/domain/fatigue-game.ts', import.meta.url), 'utf8');
@@ -20,6 +21,10 @@ const reviewExperience = consumerSources['ReviewExperience.tsx'];
 const gabaStory = consumerSources['GabaStory.tsx'];
 const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml, gameDomain].join('\n');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
+if (!appSource.includes("requestedView === 'guide'") || !appSource.includes('<PublicGabaGuide/>') || /currentPath === '\/' && !requestedView && !sharedRhythmId/.test(appSource)) fail('the public GABA guide must stay on its explicit guide route without replacing the root rhythm flow');
+if (!publicGuide.includes('guide-boundary-note') || !publicGuide.includes('unknown:') || !publicGuide.includes('REVIEW_DESTINATION_URL') || !publicGuide.includes('?view=products#products') || !publicGuide.includes('#rhythm')) fail('the public GABA guide must show the product boundary and link to rhythm, product and review destinations');
+if (/id: '(?:skin|muscle|height|immune)'|사업자용 메시지|사업자가 바로/.test(publicGuide)) fail('the public GABA guide must not reintroduce unreviewed research cards or business-only copy');
+if (publicGuide.includes('message:')) fail('the public GABA guide must not expose copy-only business message fields in research cards');
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
 const publicResearchCopy = JSON.stringify(research);
@@ -116,3 +121,5 @@ if (/연구마다 다르게 보고됐어요|근거가 매우 제한적|근거가
 if (/이 사이트는 확인하지 못한 내용을 추정해 채우지 않습니다/.test(purchaseQuestions) || !/먹는 방법·보관법·주의사항은 구매 전에 제품 포장과 스마트스토어에서 확인해 주세요/.test(purchaseQuestions)) fail('purchase guidance must point consumers to the current package and Smart Store details');
 
 console.log(JSON.stringify({approvedResearch: research.length, fields: ['consumerScope', 'consumerSummary', 'consumerFinding', 'consumerHighlight', 'consumerDetail', 'hopefulTakeaway', 'productApplicability'], visuals: 'reviewed consumerVisual schemas; raw results stay internal', detailFields: ['result', 'limitations'], flowGuard: 'independent-research-route-with-neutral-product-handoff', status: 'ok'}));
+
+
