@@ -102,3 +102,14 @@ PR [#204](https://github.com/KRAdavid/cellpinda_GABA/pull/204)에서 390px 화�
 - 필수 PR 검사 `release-verify`·`site-quality-verify` 및 Pages 배포 run [#35681874175](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35681874175) 성공
 
 이 변경은 모바일 탐색 품질만 보정했으며, 연구·제품 효능 범위나 B2·B3·B4·C2·E1 외부 승인 상태를 변경하지 않았다.
+
+## 예약 자동화 신선도 감시
+
+- 목적: 일일 보고와 TF pulse의 예약 실행이 멈추거나 지연된 상태를 공개 사이트 변경 없이 감지합니다.
+- 감시 주기: 매시 15분(`automation-freshness.yml`)
+- 기준: 일일 보고 마지막 예약 성공 후 26시간 이내, TF pulse 마지막 예약 성공 후 8시간 이내
+- 산출물: 실행별 JSON 아티팩트 14일 보관과 단일 자동 경보 이슈
+- 복구: 상태가 `MET`으로 돌아오면 열린 경보 이슈를 자동 종료합니다.
+- 통제 범위: `contents: read`, `actions: read`, `issues: write`만 사용하며 제품 문구, 표시·광고, 후기 권한, 주문, 외부 게시 상태를 변경하지 않습니다.
+
+이번 감시는 예약 실행의 신선도만 측정합니다. 수동 실행 성공은 예약 실행 성공으로 대체하지 않으며, 일정 지연이 감지되면 경보를 남긴 채 공개 배포 승인 상태를 임의로 바꾸지 않습니다.
