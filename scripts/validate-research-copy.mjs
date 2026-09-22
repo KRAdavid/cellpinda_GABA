@@ -12,6 +12,7 @@ const consumerSources = Object.fromEntries(await Promise.all(consumerSourceFiles
 ])));
 const appSource = await readFile(new URL('../src/App.tsx', import.meta.url), 'utf8');
 const indexHtml = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+const publicGuide = await readFile(new URL('../src/components/PublicGabaGuide.tsx', import.meta.url), 'utf8');
 const researchLibrary = consumerSources['ResearchLibrary.tsx'];
 const gabaResearchHighlights = consumerSources['GabaResearchHighlights.tsx'];
 const gameDomain = await readFile(new URL('../src/domain/fatigue-game.ts', import.meta.url), 'utf8');
@@ -20,6 +21,8 @@ const reviewExperience = consumerSources['ReviewExperience.tsx'];
 const gabaStory = consumerSources['GabaStory.tsx'];
 const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml, gameDomain].join('\n');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
+if (!appSource.includes("requestedView === 'guide'") || !appSource.includes('<PublicGabaGuide/>') || !appSource.includes("currentPath === '/' && !requestedView && !sharedRhythmId")) fail('the public GABA guide must render at the root and preserve shared result routes');
+if (!publicGuide.includes('사업자용 메시지') || !publicGuide.includes('사업자가 바로 설명할 수 있는') || !publicGuide.includes('message:') || !publicGuide.includes("id: 'skin'") || !publicGuide.includes("id: 'immune'")) fail('the public GABA guide must expose the shareable business message kit and expanded GABA topics');
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
 const publicResearchCopy = JSON.stringify(research);
