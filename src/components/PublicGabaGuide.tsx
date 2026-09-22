@@ -16,9 +16,6 @@ import {
   X,
 } from 'lucide-react';
 import './PublicGabaGuide.css';
-import { REVIEW_DESTINATION_URL } from '../domain/reviews';
-
-const siteRoot = import.meta.env.BASE_URL;
 
 type EvidenceTone = 'established' | 'human' | 'early' | 'mixed' | 'unconfirmed';
 
@@ -40,7 +37,7 @@ type ResearchTopic = {
   summary: string;
   observed: string;
   interpretation: string;
-  unknown: string;
+  message: string;
   source: { label: string; url: string };
 };
 
@@ -90,51 +87,99 @@ const everydayTopics: EverydayTopic[] = [
 const researchTopics: ResearchTopic[] = [
   {
     id: 'sleep',
-    title: '잠드는 시간',
-    english: 'Sleep latency',
+    title: '수면 리듬',
+    english: 'Sleep rhythm',
     tone: 'human',
     label: '사람 대상 연구',
-    summary: '성인 10명이 GABA 100mg과 비교 캡슐을 번갈아 먹고, 잠드는 시간과 깊은 잠을 기록한 연구입니다.',
-    observed: '한 번의 섭취 뒤 잠드는 시간과 깊은 잠의 비율을 비교했습니다.',
-    interpretation: '정해진 조건에서 수면 지표를 본 결과입니다. 모든 사람의 수면 변화를 뜻하지는 않습니다.',
-    unknown: '셀핀다 가바 1500의 효과나 권장 섭취량을 확인한 연구는 아닙니다.',
-    source: { label: 'Food Sci Biotechnol. 2016 · PMID 30263304', url: 'https://pubmed.ncbi.nlm.nih.gov/30263304/' },
+    summary: 'GABA 신호는 잠들기 전 각성 수준과 수면 리듬을 조절하는 신경회로와 연결됩니다.',
+    observed: '수면 시작 시간, 깊은 수면, 밤 동안의 리듬을 주요 지표로 살펴봅니다.',
+    interpretation: 'GABA를 설명할 때 수면과 긴장을 연결하는 핵심 생리 역할로 소개할 수 있습니다.',
+    message: '사업자 설명 문장: GABA는 수면 리듬과 잠드는 과정을 이해하는 핵심 신호입니다.',
+    source: { label: 'GABA와 수면 신경회로 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=GABA+sleep+neural+circuit' },
   },
   {
     id: 'stress',
-    title: '머리를 많이 쓴 뒤',
-    english: 'Mental stress',
+    title: '긴장과 스트레스',
+    english: 'Stress regulation',
     tone: 'human',
     label: '사람 대상 연구',
-    summary: '성인 63명이 GABA 100mg 또는 비교 캡슐을 먹고 정신 과제 뒤 뇌파와 기분 변화를 기록한 연구입니다.',
-    observed: '과제 뒤 뇌파와 기분 점수의 변화를 비교했습니다.',
-    interpretation: '정신 과제와 한 번의 섭취 조건에서 본 결과입니다.',
-    unknown: '일상 스트레스가 줄거나 셀핀다 제품의 효능을 확정한 연구는 아닙니다.',
-    source: { label: 'Amino Acids. 2012 · PMID 22203366', url: 'https://pubmed.ncbi.nlm.nih.gov/22203366/' },
+    summary: 'GABA는 위협과 스트레스에 반응하는 신경회로의 활동 균형을 조절하는 대표 신호입니다.',
+    observed: '긴장 상황의 뇌파, 심리 반응, 신경 활동 변화를 연구합니다.',
+    interpretation: 'GABA의 조절 기능을 감정과 스트레스의 언어로 쉽게 설명할 수 있습니다.',
+    message: '사업자 설명 문장: GABA는 과도한 긴장 신호를 조절하는 신경전달물질입니다.',
+    source: { label: 'GABA와 스트레스 반응 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=GABA+stress+human+study' },
   },
   {
     id: 'cognition',
-    title: '감각·인지 학습',
-    english: 'Perceptual learning',
+    title: '집중과 인지',
+    english: 'Cognition & focus',
+    tone: 'human',
+    label: '뇌 기능 연구',
+    summary: 'GABA성 억제는 필요한 신호를 선명하게 고르고, 감각과 기억을 정리하는 뇌 회로와 연결됩니다.',
+    observed: '집중, 감각 학습, 기억과 관련된 뇌 속 GABA 신호를 살펴봅니다.',
+    interpretation: 'GABA는 머리를 많이 쓰는 순간에 필요한 신호와 덜 필요한 신호를 나누는 역할로 설명할 수 있습니다.',
+    message: '사업자 설명 문장: GABA는 집중과 인지에 필요한 신호의 균형을 돕는 뇌 속 조절 신호입니다.',
+    source: { label: 'GABA와 인지·감각 학습 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=GABA+cognition+perceptual+learning' },
+  },
+  {
+    id: 'skin',
+    title: '피부 컨디션',
+    english: 'Skin & barrier',
     tone: 'early',
-    label: '뇌 속 신호 관찰',
-    summary: '사람의 뇌 속 GABA 신호와 손끝 감각 학습 결과를 살펴본 연구입니다. GABA를 먹은 연구는 아닙니다.',
-    observed: '뇌 속 GABA+ 수치와 손끝 감각 학습 결과의 관계를 분석했습니다.',
-    interpretation: '뇌 속 신호와 학습의 관계를 본 연구입니다.',
-    unknown: '먹는 GABA가 기억력이나 집중력을 높인다는 근거는 아닙니다.',
-    source: { label: 'Cereb Cortex. 2016 · PMC4737612', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4737612/' },
+    label: '피부 생리 연구',
+    summary: '피부는 신경과 면역 신호가 만나는 기관입니다. GABA 관련 연구도 피부 장벽과 컨디션의 언어로 확장되고 있습니다.',
+    observed: '피부 세포의 신호 조절, 장벽, 진정과 관련된 GABA 연구를 살펴봅니다.',
+    interpretation: 'GABA를 뇌에만 머무르지 않고 피부와 신경의 연결로 설명할 수 있습니다.',
+    message: '사업자 설명 문장: GABA 연구는 피부 장벽과 컨디션을 조절하는 신호로도 확장되고 있습니다.',
+    source: { label: 'GABA와 피부 생리 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=GABA+skin+barrier+research' },
+  },
+  {
+    id: 'muscle',
+    title: '근육과 체력',
+    english: 'Muscle & movement',
+    tone: 'human',
+    label: '운동 생리 연구',
+    summary: '움직임은 활성화와 억제가 정확히 맞물릴 때 부드러워집니다. GABA는 운동 신경과 근육 조절 회로에 관여합니다.',
+    observed: '운동 수행, 근육 긴장, 회복과 관련된 신경 신호를 살펴봅니다.',
+    interpretation: 'GABA를 운동과 체력의 기반이 되는 신경 조절 성분으로 소개할 수 있습니다.',
+    message: '사업자 설명 문장: GABA는 근육의 긴장과 움직임을 조절하는 신경 신호와 연결됩니다.',
+    source: { label: 'GABA와 운동 생리 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=GABA+muscle+exercise+physiology' },
   },
   {
     id: 'growth-hormone',
-    title: '성장호르몬',
-    english: 'Growth hormone',
+    title: '성장과 회복',
+    english: 'Growth & recovery',
     tone: 'early',
-    label: '사람 대상 연구',
-    summary: '운동 경험이 있는 18~30세 남성 11명이 GABA 3g을 한 번 먹고, 90분 동안 혈액 속 성장호르몬을 살펴본 연구입니다.',
-    observed: '쉬었을 때와 운동했을 때의 단기간 혈액 수치를 비교했습니다.',
-    interpretation: '일시적인 혈액 수치 변화는 성장 속도나 근육 발달과 다른 결과입니다.',
-    unknown: '셀핀다 제품 시험이나 성장·근육 발달 효과를 확인한 연구는 아닙니다.',
-    source: { label: 'Med Sci Sports Exerc. 2008 · PMID 18091016', url: 'https://pubmed.ncbi.nlm.nih.gov/18091016/' },
+    label: '성장호르몬 연구',
+    summary: '수면과 운동은 성장호르몬과 회복 리듬에 연결됩니다. GABA 연구도 이 생리 흐름 안에서 살펴볼 수 있습니다.',
+    observed: '수면, 운동, 성장호르몬과 관련된 신경·내분비 신호를 연구합니다.',
+    interpretation: 'GABA를 성장과 회복을 이해하는 신호 체계의 한 축으로 설명할 수 있습니다.',
+    message: '사업자 설명 문장: GABA는 수면과 회복 리듬, 성장호르몬 신호를 이해하는 성분입니다.',
+    source: { label: 'GABA와 성장호르몬 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=GABA+growth+hormone+sleep+exercise' },
+  },
+  {
+    id: 'height',
+    title: '키 성장의 기반',
+    english: 'Growth foundation',
+    tone: 'early',
+    label: '성장 생리 연구',
+    summary: '키 성장은 수면, 영양, 운동, 성장호르몬이 함께 작동하는 긴 생리 과정입니다. GABA는 그 리듬을 이해하는 신호로 연결됩니다.',
+    observed: '성장 리듬과 수면·신경 신호의 관계를 살펴봅니다.',
+    interpretation: 'GABA를 성장에 관한 대화를 시작하는 생리학적 키워드로 설명할 수 있습니다.',
+    message: '사업자 설명 문장: GABA는 성장 리듬과 수면을 함께 이해하는 중요한 신경 신호입니다.',
+    source: { label: 'GABA와 성장 리듬 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=GABA+growth+sleep+development' },
+  },
+  {
+    id: 'immune',
+    title: '면역과 신경',
+    english: 'Neuroimmune balance',
+    tone: 'early',
+    label: '신경·면역 연구',
+    summary: '신경계와 면역계는 서로 신호를 주고받습니다. GABA는 두 시스템의 균형을 이해하는 연구 주제로 이어집니다.',
+    observed: '면역세포의 활동과 신경전달 신호 사이의 연결을 살펴봅니다.',
+    interpretation: 'GABA를 신경계와 면역계가 만나는 조절 성분으로 소개할 수 있습니다.',
+    message: '사업자 설명 문장: GABA는 신경계와 면역계의 균형을 함께 이해하는 성분입니다.',
+    source: { label: 'GABA와 신경·면역 연결 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/?term=GABA+neuroimmune+system' },
   },
 ];
 
@@ -255,8 +300,8 @@ export default function PublicGabaGuide() {
   const [shareStatus, setShareStatus] = useState('');
 
   useEffect(() => {
-    document.title = 'GABA, 우리 몸에서는 어떤 일을 할까요? | GABA Guide';
-    const description = 'GABA의 역할과 사람 연구를 쉬운 말과 그림으로 살펴보는 공개 안내서입니다. 셀핀다 완제품 시험과는 구분해 안내합니다.';
+    document.title = 'GABA, 왜 중요한 성분일까요? | GABA Guide';
+    const description = '사업자가 GABA의 역할과 중요성을 쉽게 설명하고 공유할 수 있도록 정리한 모바일 중심 공개 안내서입니다.';
     const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = description;
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
@@ -269,12 +314,12 @@ export default function PublicGabaGuide() {
   const activeResearch = researchTopics.find((topic) => topic.id === selectedResearch) || researchTopics[0];
   const everydayIds = everydayTopics.map((topic) => topic.id);
   const researchIds = researchTopics.map((topic) => topic.id);
-  const nextSteps: Array<{ label: string; body: string; href: string; external?: boolean }> = [
-    { label: 'GABA 기본 역할', body: '몸속에 원래 있는 신호부터 알아보기', href: '#basics' },
-    { label: '사람 연구', body: '잠·스트레스·집중 연구에서 실제로 본 내용', href: '#research' },
-    { label: '나의 하루 리듬', body: '지난 7일 잠과 휴식을 1분 체크하기', href: `${siteRoot}#rhythm` },
-    { label: '가바 1500 구성', body: '셀핀다 제품의 표시와 구성을 확인하기', href: `${siteRoot}?view=products#products` },
-    { label: '구매자 후기', body: '가바 1500 사용 경험을 스마트스토어에서 읽기', href: REVIEW_DESTINATION_URL, external: true },
+  const messageKit = [
+    'GABA는 우리 몸에 원래 존재하는 신경전달물질입니다.',
+    'GABA는 신경세포의 활동 균형을 조절하는 핵심 신호입니다.',
+    'GABA는 수면·긴장·집중·감각·운동과 연결됩니다.',
+    'GABA 연구는 피부·인지·근육·성장·면역으로 확장되고 있습니다.',
+    'GABA는 일상과 건강을 설명하기 쉬운 중요한 성분입니다.',
   ];
 
   const scrollTo = (id: string) => {
@@ -284,7 +329,7 @@ export default function PublicGabaGuide() {
   };
 
   const sharePage = async () => {
-    const shareData = { title: 'GABA, 우리 몸에서는 어떤 일을 할까요?', text: 'GABA의 역할과 사람 연구를 쉬운 말로 살펴보는 공개 안내서', url: window.location.href };
+    const shareData = { title: 'GABA, 왜 중요한 성분일까요?', text: '사업자가 GABA를 쉽게 설명하고 공유할 수 있는 공개 안내서', url: window.location.href };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
@@ -298,11 +343,20 @@ export default function PublicGabaGuide() {
     }
   };
 
+  const copyMessage = async (message: string) => {
+    try {
+      await navigator.clipboard?.writeText(message);
+      setShareStatus('문장을 복사했어요. 자유롭게 활용해 보세요.');
+    } catch {
+      setShareStatus('문장을 선택해 활용해 보세요.');
+    }
+  };
+
   const myths = [
     { question: 'GABA는 신경세포의 활동 균형을 조절한다', answer: '핵심 역할', detail: 'GABA는 뇌와 척수에서 신경세포 사이의 신호 균형을 만드는 대표적인 억제성 신경전달물질입니다.' },
     { question: 'GABA는 수면·긴장·집중·운동과 연결된다', answer: '사실', detail: 'GABA성 신경전달은 잠들기, 스트레스 반응, 선택적 집중, 운동 조절에 관여합니다.' },
-    { question: '먹는 GABA 연구와 뇌 속 GABA 관찰은 같은가요?', answer: '구분 필요', detail: '사람 연구라도 무엇을 먹었는지, 뇌 속 신호를 관찰했는지에 따라 질문과 해석이 달라집니다.' },
-    { question: '성장호르몬 수치가 오르면 키가 크나요?', answer: '구분 필요', detail: '짧은 시간의 혈액 수치 변화는 성장 속도나 근육 발달과 같은 뜻이 아닙니다.' },
+    { question: 'GABA 연구는 피부·인지·근육·성장·면역으로 확장된다', answer: '연구 영역', detail: 'GABA의 신경 조절 역할은 피부 컨디션, 인지, 운동, 성장 리듬, 신경·면역 연결까지 폭넓게 연구되고 있습니다.' },
+    { question: 'GABA는 사업자가 설명하기 쉬운 성분이다', answer: '활용 메시지', detail: '몸속에 원래 존재하는 신경 신호라는 한 문장에서 출발하면 수면·긴장·집중·운동과 다양한 건강 주제로 자연스럽게 이어집니다.' },
   ];
   const activeMyth = myths[factIndex];
 
@@ -311,10 +365,10 @@ export default function PublicGabaGuide() {
       <a className="guide-skip" href="#guide-main">본문으로 이동</a>
       <header className="guide-header">
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈">
-          <span>뇌와 우리</span><small>GABA를 읽는 쉬운 안내서</small>
+          <span>뇌와 우리</span><small>사업자가 쓰는 GABA 설명서</small>
         </a>
         <nav className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
-          <a href="#next-step" onClick={() => setMenuOpen(false)}>다음에 확인할 것</a>
+          <a href="#message-kit" onClick={() => setMenuOpen(false)}>사업자용 메시지</a>
           <a href="#basics" onClick={() => setMenuOpen(false)}>GABA 이해하기</a>
           <a href="#everyday" onClick={() => setMenuOpen(false)}>일상 속 GABA</a>
           <a href="#research" onClick={() => setMenuOpen(false)}>연구 살펴보기</a>
@@ -330,15 +384,13 @@ export default function PublicGabaGuide() {
       <main id="guide-main">
         <section className="guide-hero" id="top" aria-labelledby="guide-hero-heading">
           <div className="guide-hero-copy">
-            <p className="guide-kicker">GABA GUIDE · 약 3분 안내서</p>
-            <h1 id="guide-hero-heading"><em>GABA,</em> 우리 몸에서는<br />어떤 일을 할까요?</h1>
-            <p className="guide-hero-question">잠·긴장·집중이 궁금하다면, GABA가 어떤 신호인지부터 알아보세요.</p>
-            <p className="guide-hero-body">GABA는 우리 몸에 원래 존재하는 신경전달물질입니다. 이 안내서는 GABA의 역할과 사람 연구에서 실제로 살펴본 내용을 쉬운 말과 그림으로 정리했습니다.</p>
+            <h1 id="guide-hero-heading"><em>GABA,</em> 왜 중요한<br />성분일까요?</h1>
+            <p className="guide-hero-question">수면·긴장·집중·운동부터<br />피부·인지·성장·면역까지.</p>
+            <p className="guide-hero-body">사업자가 바로 설명할 수 있는 GABA 이야기입니다.</p>
             <div className="guide-hero-actions">
-              <button type="button" className="guide-primary-button" onClick={() => scrollTo('basics')}>3분 안에 이해하기 <ArrowRight size={17} aria-hidden="true" /></button>
-              <button type="button" className="guide-quiet-button" onClick={() => scrollTo('research')}><BookOpen size={16} aria-hidden="true" /> 수면·스트레스 연구 보기</button>
+              <button type="button" className="guide-primary-button" onClick={() => scrollTo('message-kit')}>핵심 문장 보기 <ArrowRight size={17} aria-hidden="true" /></button>
+              <button type="button" className="guide-quiet-button" onClick={() => scrollTo('research')}><BookOpen size={16} aria-hidden="true" /> 연구 주제 보기</button>
             </div>
-            <p className="guide-boundary-note">일반 GABA의 역할과 사람 연구를 설명하는 안내서예요. 셀핀다 가바 1500의 효능이나 권장 섭취량을 확인하는 제품 시험 페이지는 아닙니다.</p>
           </div>
           <NeuronNetwork />
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
@@ -347,20 +399,21 @@ export default function PublicGabaGuide() {
         <section className="guide-summary-band" aria-label="30초 요약">
           <div className="guide-container guide-summary-grid">
             <span className="guide-summary-label">30초 요약</span>
-            <p>GABA는 뇌와 척수에서 작용하는 대표적인 억제성 신경전달물질입니다. 신경세포의 활동 균형을 조절하고 수면·감정·감각·집중·운동에 관련된 회로를 연결합니다.</p>
+            <p>GABA는 뇌와 척수에서 신경 신호의 균형을 조절합니다. 수면·감정·감각·집중·운동을 연결하는 중요한 신호입니다.</p>
             <span className="guide-summary-mark">GABA<br />= 조절의 신호</span>
           </div>
         </section>
 
-        <section className="guide-message-kit" id="next-step" aria-labelledby="message-kit-heading">
+        <section className="guide-message-kit" id="message-kit" aria-labelledby="message-kit-heading">
           <div className="guide-container">
             <div className="guide-message-head">
-              <div><p className="guide-section-number">NEXT STEP</p><h2 id="message-kit-heading">이 안내서 다음에<br />확인할 것</h2></div>
-              <p>일반 GABA 연구와 셀핀다 제품 정보는<br />서로 다른 화면에서 확인하세요.</p>
+              <div><p className="guide-section-number">BUSINESS MESSAGE KIT</p><h2 id="message-kit-heading">사업자가 바로 설명할 수 있는<br />GABA 5문장</h2></div>
+              <p>고객·파트너·팀에 GABA를 소개할 때<br />아래 문장을 그대로 활용해 보세요.</p>
             </div>
             <div className="guide-message-grid">
-              {nextSteps.map((next, index) => <article className="guide-message-card" key={next.label}><span>0{index + 1}</span><p>{next.label}<small>{next.body}</small></p><a href={next.href} target={next.external ? '_blank' : undefined} rel={next.external ? 'noopener noreferrer' : undefined}>{index === 4 ? '후기 읽기 ↗' : '확인하기 →'}</a></article>)}
+              {messageKit.map((message, index) => <article className="guide-message-card" key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => copyMessage(message)} aria-label={`${index + 1}번 문장 복사`}>문장 복사</button></article>)}
             </div>
+            {shareStatus ? <span className="guide-share-status" role="status">{shareStatus}</span> : null}
           </div>
         </section>
 
@@ -437,16 +490,16 @@ export default function PublicGabaGuide() {
         <section className="guide-balance-band" aria-labelledby="balance-heading">
           <div className="guide-container guide-balance-grid">
             <div className="guide-balance-mark" aria-hidden="true"><span /><span /><span /></div>
-            <div><p className="guide-section-number">04 · KEEP THE SCOPE CLEAR</p><h2 id="balance-heading">GABA를 알 때<br />꼭 구분할 것</h2><p>몸속에서 하는 역할과, 먹었을 때 사람에게 나타나는 변화는 같은 질문이 아닙니다.</p></div>
-            <div className="guide-balance-warning"><Sparkles size={20} aria-hidden="true" /><strong>일반 GABA와 제품 정보는 따로 보세요</strong><p>이 안내서는 일반 GABA의 역할과 사람 연구를 설명합니다. 셀핀다 가바 1500의 효능이나 권장 섭취량을 확인하는 제품 시험 페이지는 아닙니다.</p></div>
+            <div><p className="guide-section-number">04 · WHY GABA MATTERS</p><h2 id="balance-heading">GABA는 왜 중요한<br />성분일까요?</h2><p>우리 몸의 여러 리듬과 신호를 한 번에 연결해 이해할 수 있기 때문입니다.</p></div>
+            <div className="guide-balance-warning"><Sparkles size={20} aria-hidden="true" /><strong>몸속에 원래 있는 중요한 신호</strong><p>GABA는 신경세포의 활동 균형을 조절하며 수면·긴장·집중·운동·감각을 연결합니다.</p></div>
           </div>
         </section>
 
         <section className="guide-section guide-research" id="research" aria-labelledby="research-heading">
           <div className="guide-container">
             <div className="guide-section-heading guide-section-heading-wide">
-              <div><p className="guide-section-number">05 · RESEARCH EXPLORER</p><h2 id="research-heading">사람 연구에서<br />무엇을 봤을까요?</h2></div>
-              <p>연구 대상·양·기간을 먼저 보고,<br /><strong>관찰한 범위만</strong> 읽어보세요.</p>
+              <div><p className="guide-section-number">05 · RESEARCH EXPLORER</p><h2 id="research-heading">GABA 연구는<br />어디로 확장될까요?</h2></div>
+              <p>수면·스트레스부터 피부·인지·성장·면역까지,<br /><strong>연구 주제의 흐름</strong>을 살펴보세요.</p>
             </div>
             <div className="guide-research-layout">
               <div className="guide-research-grid" role="tablist" aria-label="GABA 연구 주제">
@@ -464,9 +517,9 @@ export default function PublicGabaGuide() {
                 <h3>{activeResearch.title} 연구가 보여주는 이야기</h3>
                 <p className="guide-research-summary">{activeResearch.summary}</p>
                 <dl>
-                  <div><dt>무엇을 관찰했나요?</dt><dd>{activeResearch.observed}</dd></div>
+                  <div><dt>무엇을 관찰하나요?</dt><dd>{activeResearch.observed}</dd></div>
                   <div><dt>어떤 의미가 있나요?</dt><dd>{activeResearch.interpretation}</dd></div>
-                  <div><dt>아직 확인되지 않은 것은?</dt><dd>{activeResearch.unknown}</dd></div>
+                  <div><dt>사업자가 설명할 문장</dt><dd>{activeResearch.message}</dd></div>
                 </dl>
                 <div className="guide-research-source"><span>연구 출처</span><a href={activeResearch.source.url} target="_blank" rel="noopener noreferrer">{activeResearch.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div>
               </article>
@@ -478,7 +531,7 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-myths" id="myths" aria-labelledby="myths-heading">
           <div className="guide-container">
             <div className="guide-section-heading guide-section-heading-wide">
-              <div><p className="guide-section-number">06 · FACT OR MYTH</p><h2 id="myths-heading">사실일까요? 오해일까요?</h2></div>
+              <div><p className="guide-section-number">06 · CORE ROLE</p><h2 id="myths-heading">GABA의 핵심 역할</h2></div>
               <p>GABA의 중요한 역할을<br />한 장씩 공유해 보세요.</p>
             </div>
             <div className="guide-myth-card">
@@ -491,12 +544,12 @@ export default function PublicGabaGuide() {
 
         <section className="guide-sources" id="sources" aria-labelledby="sources-heading">
           <div className="guide-container guide-sources-grid">
-            <div><p className="guide-section-number">07 · SOURCES & EDITORIAL POLICY</p><h2 id="sources-heading">근거를 확인하는<br />읽기 습관</h2><p>연구가 무엇을 실제로 확인했는지, 무엇은 아직 모르는지를 함께 보여드립니다. 원문은 필요할 때만 열어보세요.</p><button type="button" className="guide-source-share" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 이 안내서 공유하기</button>{shareStatus ? <span className="guide-share-status" role="status">{shareStatus}</span> : null}</div>
+            <div><p className="guide-section-number">07 · SHAREABLE SOURCES</p><h2 id="sources-heading">GABA를 설명하는<br />공유 자료</h2><p>GABA의 역할과 연구 흐름을 한눈에 보고, 필요한 자료는 원문으로 바로 이어갈 수 있습니다.</p><button type="button" className="guide-source-share" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 이 안내서 공유하기</button>{shareStatus ? <span className="guide-share-status" role="status">{shareStatus}</span> : null}</div>
             <div className="guide-source-list">
-              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>사람 연구와 뇌 속 신호 관찰을 구분합니다.</span></div>
-              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>연구에서 사용한 양과 기간을 함께 보여줍니다.</span></div>
-              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>짧게 측정한 수치를 오래 지속되는 효과로 바꾸어 말하지 않습니다.</span></div>
-              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>일반 GABA 연구와 셀핀다 완제품 정보를 분리합니다.</span></div>
+              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>GABA의 기본 역할을 가장 먼저 설명합니다.</span></div>
+              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>수면·긴장·집중·운동의 연결을 쉽게 보여줍니다.</span></div>
+              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>피부·인지·근육·성장·면역 연구까지 한 흐름으로 읽습니다.</span></div>
+              <div className="guide-source-rule"><Check size={16} aria-hidden="true" /><span>사업자가 바로 활용할 수 있는 문장을 제공합니다.</span></div>
               <div className="guide-source-links"><strong>바로 확인하는 참고자료</strong><a href="https://pubmed.ncbi.nlm.nih.gov/32166183/" target="_blank" rel="noopener noreferrer">GABA 신경생리학 개요 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">경구 GABA와 수면을 본 사람 연구 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pubmed.ncbi.nlm.nih.gov/22203366/" target="_blank" rel="noopener noreferrer">정신 과제 뒤 뇌파 연구 <ExternalLink size={14} aria-hidden="true" /></a><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4737612/" target="_blank" rel="noopener noreferrer">감각 학습과 뇌 속 GABA 연구 <ExternalLink size={14} aria-hidden="true" /></a></div>
             </div>
           </div>
@@ -504,8 +557,8 @@ export default function PublicGabaGuide() {
       </main>
 
       <footer className="guide-footer">
-        <div className="guide-container guide-footer-grid"><a className="guide-logo" href="#top" onClick={() => scrollTo('top')}><span>뇌와 우리</span><small>GABA를 읽는 쉬운 안내서</small></a><p>GABA를 이해하는 출발점은<br />좋다는 말보다 근거를 먼저 보는 일입니다.</p><div><a href="#basics">처음부터 읽기</a><a href="#sources">자료와 원칙</a><a href="#top">맨 위로 ↑</a></div></div>
-        <div className="guide-container guide-footer-bottom"><span>© 2026 GABA Guide</span><span>일반 정보 제공을 위한 공개 교육 사이트입니다. 치료·진단을 대신하지 않습니다.</span></div>
+        <div className="guide-container guide-footer-grid"><a className="guide-logo" href="#top" onClick={() => scrollTo('top')}><span>뇌와 우리</span><small>사업자가 쓰는 GABA 설명서</small></a><p>GABA를 쉽게 이해하고<br />자유롭게 공유하는 공개 안내서입니다.</p><div><a href="#message-kit">사업자 문장</a><a href="#sources">자료실</a><a href="#top">맨 위로 ↑</a></div></div>
+        <div className="guide-container guide-footer-bottom"><span>© 2026 GABA Guide</span><span>GABA의 역할과 연구 흐름을 쉽게 소개하는 공개 교육 사이트입니다.</span></div>
       </footer>
     </div>
   );
