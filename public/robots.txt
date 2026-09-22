@@ -4,5 +4,7 @@ Disallow: /cellpinda_GABA/admin
 Disallow: /cellpinda_GABA/ops
 Disallow: /cellpinda_GABA/account
 Disallow: /cellpinda_GABA/?view=account
+Disallow: /cellpinda_GABA/?view=admin
+Disallow: /cellpinda_GABA/?view=ops
 
 Sitemap: https://kradavid.github.io/cellpinda_GABA/sitemap.xml

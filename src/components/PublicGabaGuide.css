@@ -113,3 +113,8 @@
   .guide-hero-question{max-width:25ch}
   .guide-message-kit{padding-top:92px;padding-bottom:92px}
 }
+/* Keep small labels readable on white surfaces at mobile and desktop sizes. */
+.guide-kicker,.guide-section-number{color:#55728e}
+.guide-research-detail-top{color:#5d7182}
+.guide-research-card-head small{color:#5d7182}
+.guide-process-footnote{color:#4f6b80}

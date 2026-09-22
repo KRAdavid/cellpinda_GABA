@@ -21,6 +21,7 @@ const researchStyles = await read('src/components/ResearchLibrary.css');
 const reviewStyles = await read('src/components/ReviewExperience.css');
 const review = await read('src/components/ReviewExperience.tsx');
 const teaser = await read('src/components/TeaserPreview.tsx');
+const guide = await read('src/components/PublicGabaGuide.tsx');
 const research = await read('src/components/ResearchLibrary.tsx');
 const story = await read('src/components/GabaStory.tsx');
 const consumerReel = await read('src/components/ConsumerGabaReel.tsx');
@@ -246,6 +247,13 @@ for (const marker of ['잠드는 시간과 수면 기록', '머리를 많이 쓴
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight[\s\S]*claim\.metadata\?\.consumerFinding[\s\S]*claim\.publicText/, 'post-teaser research highlights must read reviewed consumer copy and tolerate an older local API snapshot');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
 requireMatch(gabaResearchHighlights, /gaba-research-highlight-boundary-badge[\s\S]*일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요/, 'homepage research highlights must keep a plain-language product-information handoff on each card');
+requireMatch(guide, /잠이 들 때는 뇌가 깨어 있으라는 신호를 천천히 낮춰야 해요\.[\s\S]*GABA는 이 과정에 관여해요\./, 'GABA guide sleep copy must use plain consumer language');
+requireMatch(guide, /잠이 불편하다고 답한 일본 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안/, 'GABA guide sleep study must show its reviewed population, dose and duration');
+requireMatch(guide, /이번 연구의 범위/, 'GABA guide research cards must label the scope in plain language');
+requireMatch(guide, /scope: '일반 GABA 연구를 살펴본 카드예요\. 셀핀다 제품 정보는 제품 카드에서 확인하세요\.'/g, 'GABA guide research cards must keep a plain product-information boundary');
+requireMatch(guide, /GABA는 잠·스트레스·집중과 관련된 신호에 관여한다/, 'GABA guide facts must use the consumer-facing topic wording');
+requireMatch(guide, /const guideUrl = new URL\('guide\/', new URL\(siteRoot, window\.location\.origin\)\)\.toString\(\)[\s\S]*canonical\.href = guideUrl[\s\S]*navigator\.clipboard\.writeText\(guideUrl\)/, 'GABA guide canonical and share link must stay on the public guide route');
+if (/아직 확인되지 않은 것은\?|GABA성 신경전달은 잠들기, 스트레스 반응, 선택적 집중/.test(guide)) fail('GABA guide must not expose technical or negative-sounding research-scope copy');
 for (const marker of ['연구 조건: 하루 100mg', '연구 조건: 100mg 한 번']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(2/, 'post-teaser GABA research highlights must use a focused two-card grid');
 requireMatch(research, /research-library-study-boundary[\s\S]*일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요/, 'research cards must show a compact plain-language product-information handoff');
@@ -258,7 +266,7 @@ requireMatch(brainLoadEvidenceStyles, /brain-load-evidence-grid[\s\S]*grid-templ
 requireMatch(brainLoadEvidence, /brain-load-evidence-details[\s\S]*잠·집중·스트레스·휴식 연구 5편 보기[\s\S]*GABA 섭취 연구와 별도[\s\S]*brain-load-evidence-grid/, 'brain-load evidence details must stay behind an optional consumer-friendly disclosure and remain separate from GABA intake studies');
 requireMatch(brainLoadEvidence, /잠이 부족하면[\s\S]*다음 날 집중과 판단이 더 어려울 수 있어요\./, 'general health evidence heading must state the everyday consequence directly');
 requireMatch(fatigueGame, /FOCUS_GAME_TRIALS_PER_STAGE|fatigue_game_start|5분 쉰 뒤 한 번 더 하기/, 'reaction game and optional rest comparison flow are missing');
-for (const marker of ['뇌컨디션 확인 챌린지', '1분 색 신호 게임', '규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 신호 순서가 달라져요', '오늘의 반응 기록', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요.', '게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.', '오늘 게임에서 맞힌 비율이에요. 뇌 피로나 건강 상태를 측정한 값은 아니에요.', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '먼저 연습하고 시작하기', '다음 규칙 연습하기', '연습 마치기', '좋은 반응 흐름', '축하해요. 오늘 게임에서는 반응이 안정적이었어요.', '잠깐 점검해 볼 기록', '오늘은 반응이 조금 흔들렸어요.', '지금은 5분 회복을 권해요', '지금은 화면을 내려놓고 5분 쉬어 보세요.', 'fatigue-game-result-guidance-${baselineCopy.tone}', '친구에게 1분 게임 보내기', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker.replace(/[${}]/g, '\\$&')), `advanced focus game marker ${marker} is missing`);
+for (const marker of ['뇌컨디션 확인 챌린지', '1분 색 신호 게임', '규칙 바꾸기', 'FOCUS_GAME_TOTAL_TRIALS', '매번 신호 순서가 달라져요', '오늘의 반응 기록', '5분 쉬고 다시 해보기', '싱잉볼 소리', '시작 준비', 'ringSingingBowl', '초록 신호는 누르고 빨강 신호는 기다려요. 24개 신호에 반응하며 기록을 남겨 보세요.', '게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요.', '오늘 게임에서 맞힌 비율이에요. 뇌 피로나 건강 상태를 측정한 값은 아니에요.', '첫 번째 게임', '쉬지 않고 이어서 하기', '휴식이 기록 변화의 원인이라고 단정할 수는 없어요.', 'fatigue-target-label', '친구에게 챌린지 보내기', '먼저 연습하고 시작하기', '다음 규칙 연습하기', '연습 마치기', '좋은 반응 흐름', '이번 게임에서 신호를 잘 따라왔어요.', '잠깐 점검해 볼 기록', '이번 게임에서 신호를 몇 번 놓쳤어요.', '지금은 5분 회복을 권해요', '이번 게임에서 놓친 신호가 많았어요. 화면을 내려놓고 5분 쉬어 보세요.', 'fatigue-game-result-guidance-${baselineCopy.tone}', '친구에게 1분 게임 보내기', '연습 1 / 5', '연습 2 / 5', '연습 3 / 5', '연습 4 / 5', '연습 5 / 5', '연습 완료']) requireMatch(fatigueGame, new RegExp(marker.replace(/[${}]/g, '\\$&')), `advanced focus game marker ${marker} is missing`);
 requireMatch(fatigueGame, /fatigue-game-heading[\s\S]*초록 신호는 누르고 빨강 신호는 기다려요\.[\s\S]*게임 점수는 뇌 피로나 건강 상태를 뜻하지 않아요\.[\s\S]*phase === 'idle'/, 'the game action and non-diagnostic scope must be visible before the player starts');
 requireMatch(fatigueGame, /gameSoundStatus[\s\S]*role="status"/, 'focus game must expose a visible and accessible audio status');
 requireMatch(fatigueGame, /브라우저가 자동 소리를 막았어요\./, 'focus game must explain the browser audio autoplay fallback');
@@ -349,6 +357,7 @@ requireMatch(review, /가바 1500 구매자 후기를 스마트스토어에서 �
 requireMatch(indexHtml, /href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>스마트스토어에서 후기 읽기/, 'static review CTA must deep-link to the Smart Store review dialog');
 requireMatch(review, /가바 1500 스마트스토어 후기 읽기[\s\S]*href=\{url\}/, 'the separate review section must deep-link to the approved Smart Store review dialog');
 requireMatch(app, /content\?\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'header review link must open the approved Smart Store review dialog');
+requireMatch(app, /function ContentFallback[\s\S]*SMARTSTORE_PRODUCT_URL[\s\S]*스마트스토어 제품 보기[\s\S]*REVIEW_DESTINATION_URL[\s\S]*가바 1500 구매자 후기 읽기/, 'content failure fallback must keep direct Smart Store product and review destinations');
 requireMatch(purchaseQuestions, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'purchase FAQ review CTA must deep-link to the approved Smart Store review dialog');
 requireMatch(story, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'GABA story review link must open the approved Smart Store review dialog');
 requireMatch(review, /quotes\.length > 0 \|\| destinations\.length > 0/, 'review reading guide must remain visible with an approved Smart Store destination');

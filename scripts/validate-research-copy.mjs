@@ -22,7 +22,7 @@ const gabaStory = consumerSources['GabaStory.tsx'];
 const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml, gameDomain].join('\n');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
 if (!appSource.includes("requestedView === 'guide'") || !appSource.includes('<PublicGabaGuide/>') || /currentPath === '\/' && !requestedView && !sharedRhythmId/.test(appSource)) fail('the public GABA guide must stay on its explicit guide route without replacing the root rhythm flow');
-if (!publicGuide.includes('guide-boundary-note') || !publicGuide.includes('unknown:') || !publicGuide.includes('REVIEW_DESTINATION_URL') || !publicGuide.includes('?view=products#products') || !publicGuide.includes('#rhythm')) fail('the public GABA guide must show the product boundary and link to rhythm, product and review destinations');
+if (!publicGuide.includes('guide-boundary-note') || !publicGuide.includes('scope:') || !publicGuide.includes('REVIEW_DESTINATION_URL') || !publicGuide.includes('?view=products#products') || !publicGuide.includes('#rhythm')) fail('the public GABA guide must show the product boundary and link to rhythm, product and review destinations');
 if (/id: '(?:skin|muscle|height|immune)'|사업자용 메시지|사업자가 바로/.test(publicGuide)) fail('the public GABA guide must not reintroduce unreviewed research cards or business-only copy');
 if (/growth-hormone|성장호르몬|근육 발달|운동 조절|감각 학습/.test(publicGuide)) fail('the public GABA guide must keep off-target growth, muscle, exercise and sensory-study material in the full research library');
 if (/GABA와 잠·스트레스·운동|쉰 날·운동한 날|쉬었을 때와 운동했을 때 몸에서/.test(appSource)) fail('the public fallback must keep off-target exercise research out of the consumer recovery path');
