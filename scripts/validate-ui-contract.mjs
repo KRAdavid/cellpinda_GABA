@@ -326,6 +326,8 @@ requireMatch(teaser, /frameRequested \? <iframe/, 'teaser frame must be absent u
 requireMatch(teaser, /src=\{preview\.url!?\}/, 'teaser iframe must use the approved preview URL directly');
 requireMatch(teaser, /teaser-card--hold/, 'teaser hold state must use a compact placeholder before a public video is available');
 requireMatch((await read('src/components/TeaserPreview.css')), /teaser-card--hold[\s\S]*height: auto[\s\S]*@media\(max-width: 800px\)[\s\S]*teaser-hold-actions/, 'teaser hold placeholder must stay compact on mobile');
+requireMatch(teaser, /const headingId = isOnHold \? 'teaser-hold-heading' : 'teaser-heading'/, 'teaser hold and video states must use distinct accessible heading IDs');
+requireMatch(teaser, /aria-labelledby=\{headingId\}[\s\S]*<h2 id=\{isOnHold \? undefined : headingId\}/, 'teaser section label must resolve to exactly one visible heading in each state');
 requireMatch(teaser, /teaser-hold-actions[\s\S]*GABA 연구 쉽게 보기[\s\S]*가바 1500 구성 보기/, 'teaser hold state must offer a clear research and product next action while the video is pending');
 requireMatch(teaser, /href="#gaba-research-highlights"[\s\S]*GABA 연구 쉽게 보기/, 'teaser GABA research action must land on the GABA research highlights section');
 if (/href="#brain-load-evidence"[\s\S]*GABA 연구 쉽게 보기/.test(teaser)) fail('teaser GABA research action must not land on the separate general health evidence section');
