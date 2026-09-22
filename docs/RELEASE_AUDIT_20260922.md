@@ -70,7 +70,7 @@ pnpm audit --prod --audit-level=high
 git diff --check
 ```
 
-과거 이력에 남은 로컬 경로 패턴은 현재 공개 파일에 포함되지 않으며, force push 없이 보존한다.
+현재 공개 파일에는 로컬 경로가 포함되지 않지만 `pnpm run audit:history-privacy`는 과거 이력의 12개 경로에서 로컬 경로 패턴을 찾는 advisory 경고를 남긴다. 이는 `server/server.test.mjs`, `worker/worker.test.mjs`, 과거 감사 문서·로컬 manifest 등 과거 버전에 한정된 기록이다. 공개 저장소의 이력을 force push로 다시 쓰지 않고 보존하기 때문에, 이 경고는 공개 번들 누출이 아니라 역사 정리 보류 상태로 기록한다. 저장소를 깨끗한 이력으로 재작성하려면 별도 보안 검토·백업·보호 규칙 해제 승인·외부 clone 영향 확인이 선행되어야 한다.
 
 ## 남은 외부 게이트
 
