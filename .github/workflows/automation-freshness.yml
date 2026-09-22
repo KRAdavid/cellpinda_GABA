@@ -36,6 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_API_URL: ${{ github.api_url }}
+          EXPECTED_HEAD_SHA: ${{ github.sha }}
         run: node scripts/check-automation-freshness.mjs --out automation-freshness.json
       - name: Upload freshness evidence
         if: always()
@@ -63,8 +64,9 @@ jobs:
               '',
               ...result.checks.map(check => {
                 const run = check.lastSuccess?.url ? ` · [최근 성공 실행](${check.lastSuccess.url})` : '';
+                const latest = check.latestSuccess?.url && !check.lastSuccess ? ` · [현재 커밋과 다른 최근 성공 실행](${check.latestSuccess.url})` : '';
                 const attempt = check.lastAttempt?.url ? ` · [최근 시도](${check.lastAttempt.url}) ${check.lastAttempt.conclusion || check.lastAttempt.status}` : '';
-                return `- **${check.label}** · ${check.status} · ${check.reason}${run}${attempt}`;
+                return `- **${check.label}** · ${check.status} · ${check.reason}${run}${latest}${attempt}`;
               }),
               '',
               '이 모니터는 보고서·TF pulse의 예약 실행 신선도만 확인하며, 제품 표시·광고·후기 권한·주문·외부 게시 상태를 변경하지 않습니다.',
