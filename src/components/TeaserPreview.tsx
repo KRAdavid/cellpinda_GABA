@@ -78,9 +78,10 @@ export default function TeaserPreview({onEvent}: Props) {
       <div className={`teaser-card teaser-card-player${isOnHold ? ' teaser-card--hold' : ''}`} aria-busy={frameRequested && !frameLoaded}>
         <div className="teaser-player">
           {isOnHold ? <div className="teaser-hold" role="status" aria-live="polite">
+            <div className="teaser-hold-visual" aria-hidden="true"><span className="teaser-hold-orbit teaser-hold-orbit--one" /><span className="teaser-hold-orbit teaser-hold-orbit--two" /><span className="teaser-hold-signal" /></div>
             <span className="teaser-hold-icon" aria-hidden="true">✦</span>
-            <strong>영상 공개 준비 중이에요</strong>
-            <span>공개가 확정되면 이 자리에서 바로 만나보세요.</span>
+            <strong>영상 전, 먼저 확인해 보세요</strong>
+            <span>영상은 공개 승인 후 재생됩니다. 지금은 GABA 연구와 제품 구성을 바로 볼 수 있어요.</span>
             <div className="teaser-hold-actions" aria-label="영상 대신 먼저 볼 내용">
               <a href="#gaba-research-highlights" onClick={() => onEvent?.('research_highlight_opened', {path: '/teaser'})}>GABA 연구 쉽게 보기 <span aria-hidden="true">↘</span></a>
               <a href="#products" onClick={() => onEvent?.('purchase_cta_click', {productId: 'gaba1500', path: '/teaser'})}>가바 1500 구성 보기 <span aria-hidden="true">↘</span></a>
