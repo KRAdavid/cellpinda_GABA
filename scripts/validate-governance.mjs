@@ -12,6 +12,7 @@ const expectedPermissions = {
   '.github/workflows/deploy.yml': {contents: 'read'},
   '.github/workflows/verify.yml': {contents: 'read'},
   '.github/workflows/daily-status-report.yml': {contents: 'read', actions: 'read', issues: 'write'},
+  '.github/workflows/automation-freshness.yml': {contents: 'read', actions: 'read', issues: 'write'},
   '.github/workflows/tf-pulse.yml': {contents: 'read', 'pull-requests': 'read'},
 };
 

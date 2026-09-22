@@ -1,0 +1,87 @@
+name: Cellpinda automation freshness
+
+on:
+  schedule:
+    - cron: '15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+concurrency:
+  group: automation-freshness
+  cancel-in-progress: true
+
+jobs:
+  monitor:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.19.0
+          package-manager-cache: false
+      - name: Check scheduled automation freshness
+        id: freshness
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_API_URL: ${{ github.api_url }}
+        run: node scripts/check-automation-freshness.mjs --out automation-freshness.json
+      - name: Upload freshness evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: cellpinda-automation-freshness-${{ github.run_id }}
+          path: automation-freshness.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Update automation alert issue
+        if: always()
+        uses: actions/github-script@373c709c69115d41ff229c7e5df9f8788daa9553 # v9.0.0 · Node 24
+        env:
+          FRESHNESS_PATH: automation-freshness.json
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const fs = require('fs');
+            const result = JSON.parse(fs.readFileSync(process.env.FRESHNESS_PATH, 'utf8'));
+            const title = '[자동 경보] 셀핀다 GABA 자동화 신선도';
+            const lines = [
+              `## ${title}`,
+              `- 점검 시각(UTC): ${result.checkedAt}`,
+              `- 판정: **${result.status}**`,
+              '',
+              ...result.checks.map(check => {
+                const run = check.lastSuccess?.url ? ` · [최근 성공 실행](${check.lastSuccess.url})` : '';
+                return `- **${check.label}** · ${check.status} · ${check.reason}${run}`;
+              }),
+              '',
+              '이 모니터는 보고서·TF pulse의 예약 실행 신선도만 확인하며, 제품 표시·광고·후기 권한·주문·외부 게시 상태를 변경하지 않습니다.',
+              `실행: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            ];
+            const body = lines.join('\n');
+            const {data: issues} = await github.rest.issues.listForRepo({owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100});
+            const existing = issues.find(issue => issue.title === title);
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+                state: result.status === 'MET' ? 'closed' : 'open',
+              });
+            } else if (result.status !== 'MET') {
+              await github.rest.issues.create({owner: context.repo.owner, repo: context.repo.repo, title, body});
+            }
+      - name: Fail when automation is stale
+        if: steps.freshness.outcome == 'failure'
+        run: exit 1
