@@ -53,7 +53,7 @@ const validateContinuation = (value, label) => {
 };
 const expectedSafeChecks = ['goal-contract', 'research-copy', 'teaser-boundary', 'sandbox-mvp', 'public-export', 'tf-pulse'];
 const sharedResultIds = ['active', 'sleep', 'irregular', 'sensory', 'unrested', 'steady'];
-const expectedReleaseRoutes = ['/', '/products/', '/research/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
+const expectedReleaseRoutes = ['/', '/products/', '/research/', '/guide/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
 const sharedResultLabels = Object.fromEntries(Object.entries(JSON.parse(readFileSync(resolve('data/rhythm-share-labels.json'), 'utf8'))).map(([id, value]) => [id, value.label]));
 const metaContent = (html, attribute, value) => {
   const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -204,16 +204,20 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const productSharePageText = await productSharePageResponse.text();
     const researchPageResponse = await request('/research/');
     const researchPageText = await researchPageResponse.text();
+    const guidePageResponse = await request('/guide/');
+    const guidePageText = await guidePageResponse.text();
     validatePublicMetadata(productSharePageText, '/products/', `${base}/products/`);
     validatePublicMetadata(researchPageText, '/research/', `${base}/research/`);
+    validatePublicMetadata(guidePageText, '/guide/', `${base}/guide/`);
+    assert.match(guidePageText, /GABA, 우리 몸에서는 어떤 일을 할까요\?/,'live guide route must identify its guide content');
+    assert.match(guidePageText, /view=guide/, 'live guide route must hand off to its interactive guide');
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
     assert.match(researchPageText, /property="og:title" content="사람을 대상으로 한 GABA 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
-    assert.ok(researchPageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live research page must distinguish general GABA research from Cellpinda product research');
+    assert.ok(researchPageText.includes('일반 GABA 연구를 쉬운 말로 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live research page must distinguish general GABA research from Cellpinda product research');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
-    assert.ok(researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && researchPageText.includes('손끝 감각: GABA를 먹지 않고 뇌 속 GABA 신호와 손끝 연습을 살펴본 연구예요.') && !researchPageText.includes('일반 GABA 섭취 연구') && !researchPageText.includes('GABA를 먹지 않은 관찰 연구'), 'live research fallback must keep the consumer-first topic guide and plain-language non-ingestion study boundary');
+    assert.ok(researchPageText.includes('잠: 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안 먹고, 잠드는 시간과 수면 기록을 살펴본 연구예요.') && researchPageText.includes('머리를 많이 쓴 뒤: 성인 63명이 GABA 100mg과 비교 캡슐을 한 번씩 먹고, 뇌파와 활력 점수를 비교한 연구예요.') && researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && !/성장호르몬|근육 발달|GABA 3g|운동 경험이 있는 남성|손끝 감각|14편|300mg|4주/.test(researchPageText), 'live research fallback must keep only the focused sleep and mental-task research summary');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
     assert.ok(researchPageText.includes('가바 1500 제품 구성 보기') && researchPageText.includes('view=products'), 'live research page must offer a neutral product-information handoff');
-    assert.ok(researchPageText.includes('운동 경험이 있는 남성 11명이 GABA 3g을 한 번 먹고, 운동 없이 쉰 조건과 운동 조건에서 90분 동안 혈액 속 수치를 살펴봤어요. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요.') && !researchPageText.includes('GABA와 단백질을 함께 사용한 연구'), 'live research fallback must match the approved Powers study scope and separate its research amount from the product');
     assert.equal(canonicalHref(productSharePageText), `${base}/products/`, 'live product share route must expose a product-specific canonical URL');
     assert.equal(metaContent(productSharePageText, 'property', 'og:url'), `${base}/products/`, 'live product share route must expose a product-specific Open Graph URL');
     assert.match(productSharePageText, /property="og:title" content="셀핀다 가바 1500 · 30포 구성 보기"/, 'live product share route must show the confirmed product name and package count');
@@ -279,7 +283,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(adminRoute.text, /<meta[^>]+name="robots"[^>]+content="noindex, nofollow"/i, 'live 404 page must keep missing and internal routes out of search indexes');
     assert.ok(!/<link[^>]+rel="canonical"|<meta[^>]+property="og:(?:url|title|image)"/i.test(adminRoute.text), 'live 404 page must not reuse public canonical or social metadata');
     const sitemapUrls = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-    const expectedSitemapUrls = [`${base}/`, `${base}/products/`, `${base}/research/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
+    const expectedSitemapUrls = [`${base}/`, `${base}/products/`, `${base}/research/`, `${base}/guide/`, `${base}/focus/`, ...sharedResultIds.map(id => `${base}/share/${id}/`)];
     assert.deepEqual(sitemapUrls, expectedSitemapUrls, 'live sitemap must contain public landing, product, independent research, focus invite and share pages only');
     assert.ok(!sitemapText.includes('/admin') && !sitemapText.includes('/ops'), 'live sitemap must not list internal routes');
     for (const [label, route] of [['/admin', adminRoute], ['/ops', opsRoute], ['/?view=admin', adminQueryRoute], ['/?view=ops', opsQueryRoute]]) {

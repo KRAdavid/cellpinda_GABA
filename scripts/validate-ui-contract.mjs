@@ -36,6 +36,7 @@ const admin = await read('src/components/Admin.tsx');
 const operations = await read('src/components/OperationsMvp.tsx');
 const indexHtml = await read('index.html');
 const researchRouteHtml = await read('public/research/index.html');
+const guideRouteHtml = await read('public/guide/index.html');
 const notFoundHtml = await read('public/404.html');
 const deployWorkflow = await read('.github/workflows/deploy.yml');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
@@ -164,6 +165,9 @@ requireMatch(research, /이 연구, 어떻게 했나요\?/, 'research detail mus
 requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
 requireMatch(research, /topic:'뇌·손끝 연습'[\s\S]*손끝 감각/, 'research topic filters must include the approved non-ingestion hand-sensation study');
 requireMatch(researchRouteHtml, /사람 연구 살펴보기/, 'no-script research fallback must use a consumer-friendly label');
+requireMatch(guideRouteHtml, /canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/guide\//, 'guide route must expose a dedicated canonical URL');
+if (!guideRouteHtml.includes('GABA, 우리 몸에서는 어떤 일을 할까요?') || !guideRouteHtml.includes('../?view=guide')) fail('guide route must expose guide-specific copy and a readable handoff');
+if (/성장호르몬|근육 발달|GABA 3g|손끝 감각/.test(researchRouteHtml)) fail('static research fallback must keep off-target studies out of the consumer entry page');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
 requireMatch(story, /<section id="story" className="section sage" aria-labelledby="story-heading"[\s\S]*<h2 id="story-heading">/, 'GABA story must expose its visible heading as the section label');
 requireMatch(app, /<section id="fermentation" className="section sage" aria-labelledby="fermentation-heading"[\s\S]*<h2 id="fermentation-heading">/, 'fermentation section must expose its visible heading as the section label');

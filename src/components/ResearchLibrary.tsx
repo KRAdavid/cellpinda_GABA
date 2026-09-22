@@ -78,8 +78,14 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
     'research-yamatsu-2016', 'research-byun-2018', 'research-yoto-2012',
     'research-powers-2008', 'research-review-2020', 'research-heba-2016',
   ].map((id, index) => [id, index] as const));
+  // The public reading route is a short, consumer-first selection. The full
+  // approved master index remains available in public/data for audit and
+  // editorial work, while the landing and reading views share these two
+  // studies so research and product context do not get mixed on one screen.
+  const publicConsumerResearchIds = new Set(['research-yamatsu-2016', 'research-yoto-2012']);
   const eligibleStudies = claims.filter(claim =>
     claim.status === 'approved' && claim.id.startsWith('research-') &&
+    publicConsumerResearchIds.has(claim.id) &&
     claim.publicText && claim.metadata?.consumerSummary &&
     claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)),
   );
@@ -116,7 +122,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
     const reveal=()=>{
       let id: string;
       try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
-      if (!claims.some(claim => claim.id === id && claim.status === 'approved' && id.startsWith('research-') && claim.publicText && claim.metadata?.consumerSummary && claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)))) return;
+      if (!claims.some(claim => publicConsumerResearchIds.has(claim.id) && claim.id === id && claim.status === 'approved' && id.startsWith('research-') && claim.publicText && claim.metadata?.consumerSummary && claim.metadata.productApplicability && claim.sources.some(source => isPublicUrl(source.url)))) return;
       setQuery(''); setTopic(''); setStudyType(''); setRequestedId(id);
     };
     reveal();window.addEventListener('hashchange',reveal);return()=>window.removeEventListener('hashchange',reveal);
