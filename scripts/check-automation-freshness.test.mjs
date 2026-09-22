@@ -12,7 +12,7 @@ const script = fileURLToPath(new URL('./check-automation-freshness.mjs', import.
 function runMonitor(apiUrl, outputDir, checkedAt, expectedHeadSha) {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [script, '--out', join(outputDir, 'freshness.json')], {
-      env: {...process.env, GITHUB_REPOSITORY: 'owner/repo', GITHUB_TOKEN: 'test-token', GITHUB_API_URL: apiUrl, CHECKED_AT: checkedAt, ...(expectedHeadSha ? {EXPECTED_HEAD_SHA: expectedHeadSha} : {})},
+      env: {...process.env, GITHUB_REPOSITORY: 'owner/repo', GITHUB_TOKEN: 'test-token', GITHUB_API_URL: apiUrl, CHECKED_AT: checkedAt, GITHUB_SHA: expectedHeadSha || '', EXPECTED_HEAD_SHA: expectedHeadSha || ''},
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     let stdout = '';
