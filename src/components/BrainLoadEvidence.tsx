@@ -89,11 +89,11 @@ export default function BrainLoadEvidence() {
       <div className="wrap">
         <div className="section-head brain-load-evidence-head">
           <div>
-            <p className="chapter">잠·집중·휴식에 관한 연구</p>
-            <h2 id="brain-load-evidence-heading">잠이 부족하면<br />집중·기억·판단이 흔들릴 수 있어요.</h2>
-            <p className="brain-load-evidence-boundary">GABA 섭취 연구와 별도로, 잠·스트레스·집중을 이해하는 일반 건강 연구예요. 제품 정보는 따로 보여드려요.</p>
+            <p className="chapter">쉬어야 하는 이유 · 일반 건강 연구</p>
+            <h2 id="brain-load-evidence-heading">잠이 부족하면<br />다음 날 집중과 판단이 더 어려울 수 있어요.</h2>
+            <p className="brain-load-evidence-boundary">이 카드는 GABA를 먹은 연구가 아니에요. 잠·스트레스·휴식 자체를 살펴본 자료예요.</p>
           </div>
-          <p>잠이 부족하거나 스트레스가 오래 이어질 때를 살펴본 연구를<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
+          <p>쉬지 못한 날과 스트레스가 이어진 날, 일상에서 어떤 변화가 기록됐는지<br />생활에서 쓰는 말로 간단히 정리했어요.</p>
         </div>
 
         <div className="brain-load-reading-path" aria-label="연구를 살펴보는 순서">
@@ -103,7 +103,7 @@ export default function BrainLoadEvidence() {
         </div>
 
         <details className="brain-load-evidence-details">
-          <summary><span>일반 건강 연구 5편 보기</span><small>잠·집중·스트레스·휴식</small></summary>
+          <summary><span>잠·집중·스트레스·휴식 연구 5편 보기</span><small>GABA 섭취 연구와 별도</small></summary>
           <div className="brain-load-evidence-grid">
             {evidence.map(({id, number, tag, title, summary, finding, scale, source, sourceUrl, Icon, tone}) => (
               <article className={`brain-load-evidence-card brain-load-evidence-card--${tone}`} key={id}>
@@ -121,7 +121,7 @@ export default function BrainLoadEvidence() {
             ))}
           </div>
         </details>
-        <p className="brain-load-evidence-note">여기에는 잠·스트레스·휴식에 관한 연구를 모았어요. GABA 연구와 셀핀다 제품 정보는 각각 따로 확인할 수 있어요.</p>
+        <p className="brain-load-evidence-note">GABA 섭취 연구와 셀핀다 제품 정보는 각각 해당 카드에서 따로 확인해요.</p>
       </div>
     </section>
   );
