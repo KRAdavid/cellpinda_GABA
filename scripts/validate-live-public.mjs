@@ -233,7 +233,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const consumerBundle = moduleBundles.join('\n');
     assert.ok(consumerBundle.includes('발효가바 영상') && consumerBundle.includes('발효가바는'), 'live consumer bundle must contain the embedded fermentation teaser section');
     if (teaserPreview.status === 'HOLD') {
-      assert.ok(consumerBundle.includes('영상 전, 먼저 확인해 보세요') && consumerBundle.includes('영상은 공개 승인 후 재생됩니다. 지금은 GABA 연구와 제품 구성을 바로 볼 수 있어요.') && consumerBundle.includes('teaser-hold-visual') && consumerBundle.includes('GABA 연구 쉽게 보기') && consumerBundle.includes('가바 1500 구성 보기') && consumerBundle.includes('#gaba-research-highlights'), 'live consumer bundle must show the approved teaser hold state, visual cue, and next actions');
+      assert.ok(consumerBundle.includes('발효가바 영상 준비 중') && consumerBundle.includes('영상이 공개되면 이 자리에서 바로 재생됩니다.') && consumerBundle.includes('teaser-hold-visual') && consumerBundle.includes('GABA 연구 쉽게 보기') && consumerBundle.includes('가바 1500 구성 보기') && consumerBundle.includes('#gaba-research-highlights'), 'live consumer bundle must show the compact teaser hold state, visual cue, and next actions');
     } else {
       assert.ok(consumerBundle.includes('화면에 들어오면 자동 시작') && consumerBundle.includes('이 화면에 들어오면 영상이 자동으로 시작돼요') && consumerBundle.includes('자동 시작이 막히면'), 'live consumer bundle must explain teaser autoplay and its user-controlled fallback');
     }
