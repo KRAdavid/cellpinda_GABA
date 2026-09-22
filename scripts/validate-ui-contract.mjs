@@ -332,13 +332,10 @@ requireMatch(teaser, /href="#gaba-research-highlights"[\s\S]*GABA 연구 쉽게 
 if (/href="#brain-load-evidence"[\s\S]*GABA 연구 쉽게 보기/.test(teaser)) fail('teaser GABA research action must not land on the separate general health evidence section');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
-requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
-requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양은 셀핀다 제품에 적힌 양과 달라요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg과 비교 캡슐을 한 번씩 먹은 뒤, 뇌파와 활력 점수의 감소 폭을 비교한 연구예요\.[\s\S]*<strong>수면<\/strong> 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안 먹고, 잠드는 시간과 수면 기록을 살펴본 연구예요\./, 'no-script research summary must use the current consumer topics, study amounts and product boundary');
-requireMatch(indexHtml, /사람이 GABA를 먹은 연구 14편을 모아 참여자·먹은 양·기간을 정리한 자료예요\./, 'no-script research summary must include the approved research review record');
-requireMatch(indexHtml, /수면 불편<\/strong> 잠드는 데 어려움이 있던 성인 40명이 하루 GABA 300mg 정제와 GABA가 없는 비교 정제를 4주 먹고 잠드는 시간을 살펴본 연구예요\./, 'no-script research summary must include the approved four-week sleep study');
-if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');
-requireMatch(indexHtml, /운동 경험이 있는 남성 11명이 GABA 3g을 한 번 먹고, 운동 없이 쉰 조건과 운동 조건에서 90분 동안 혈액 속 수치를 살펴봤어요\. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요\./, 'no-script research summary must match the approved Powers study scope and product boundary');
-if (/운동 뒤 혈액 속 호르몬과 몸무게 변화/.test(indexHtml)) fail('no-script research summary must not expose the held body-composition study');
+requireMatch(indexHtml, /사업자가 GABA의 역할과 중요성을 쉽게 설명하고 공유할 수 있도록 정리한 공개 안내서입니다\./, 'static no-script fallback must identify the public GABA guide');
+requireMatch(indexHtml, /GABA, 왜 중요한 성분일까요\?/, 'static no-script fallback must use the guide title');
+requireMatch(indexHtml, /수면·긴장·집중·운동부터 피부·인지·성장·면역까지/, 'static no-script fallback must summarize the guide topic range');
+requireMatch(indexHtml, /사업자가 바로 설명할 수 있는 GABA 5문장/, 'static no-script fallback must expose the business message kit');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
 requireMatch(review, /가바 1500 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
