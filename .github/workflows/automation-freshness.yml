@@ -73,8 +73,10 @@ jobs:
               `실행: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
             ];
             const body = lines.join('\n');
-            const {data: issues} = await github.rest.issues.listForRepo({owner: context.repo.owner, repo: context.repo.repo, state: 'open', per_page: 100});
-            const existing = issues.find(issue => issue.title === title);
+            const {data: issues} = await github.rest.issues.listForRepo({owner: context.repo.owner, repo: context.repo.repo, state: 'all', per_page: 100});
+            const existing = issues
+              .filter(issue => issue.title === title)
+              .sort((left, right) => Date.parse(right.updated_at) - Date.parse(left.updated_at))[0];
             if (existing) {
               await github.rest.issues.update({
                 owner: context.repo.owner,
