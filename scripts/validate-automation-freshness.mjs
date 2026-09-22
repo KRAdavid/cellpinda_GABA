@@ -8,7 +8,7 @@ const script = await read('scripts/check-automation-freshness.mjs');
 const issues = [];
 const requireText = (pattern, message) => { if (!pattern.test(workflow)) issues.push(message); };
 
-requireText(/cron:\s*['"]15 \* \* \* \*['"]/, '시간별 자동화 신선도 감시 일정이 없습니다.');
+requireText(/cron:\s*['"]37 \* \* \* \*['"]/, '시간별 자동화 신선도 감시 일정이 없습니다.');
 requireText(/workflow_dispatch:/, '수동 신선도 점검 트리거가 없습니다.');
 requireText(/contents:\s*read/, '모니터가 contents read 권한을 선언하지 않습니다.');
 requireText(/actions:\s*read/, '모니터가 Actions read 권한을 선언하지 않습니다.');
@@ -30,5 +30,5 @@ if (issues.length) {
   console.error(JSON.stringify({workflow: '.github/workflows/automation-freshness.yml', status: 'invalid', issues}, null, 2));
   process.exitCode = 1;
 } else {
-  console.log(JSON.stringify({workflow: '.github/workflows/automation-freshness.yml', status: 'ok', schedule: '15 * * * *', thresholds: {dailyStatusMinutes: 1560, tfPulseMinutes: 480}}));
+  console.log(JSON.stringify({workflow: '.github/workflows/automation-freshness.yml', status: 'ok', schedule: '37 * * * *', thresholds: {dailyStatusMinutes: 1560, tfPulseMinutes: 480}}));
 }

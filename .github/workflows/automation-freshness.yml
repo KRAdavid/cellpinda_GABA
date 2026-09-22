@@ -2,7 +2,8 @@ name: Cellpinda automation freshness
 
 on:
   schedule:
-    - cron: '15 * * * *'
+    # Stagger away from the daily :00 and TF pulse :29 scheduler windows.
+    - cron: '37 * * * *'
   workflow_dispatch:
 
 permissions:

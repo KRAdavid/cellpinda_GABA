@@ -106,7 +106,7 @@ PR [#204](https://github.com/KRAdavid/cellpinda_GABA/pull/204)에서 390px 화�
 ## 예약 자동화 신선도 감시
 
 - 목적: 일일 보고와 TF pulse의 예약 실행이 멈추거나 지연된 상태를 공개 사이트 변경 없이 감지합니다.
-- 감시 주기: 매시 15분(`automation-freshness.yml`)
+- 감시 주기: 매시 37분(`automation-freshness.yml`), 일일 보고 `:00`·TF pulse `:29`와 분리
 - 기준: 일일 보고 마지막 예약 성공 후 26시간 이내, TF pulse 마지막 예약 성공 후 8시간 이내
 - 산출물: 실행별 JSON 아티팩트 14일 보관과 단일 자동 경보 이슈
 - 복구: 상태가 `MET`으로 돌아오면 열린 경보 이슈를 자동 종료합니다.
