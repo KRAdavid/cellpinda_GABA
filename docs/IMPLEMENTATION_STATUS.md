@@ -4,7 +4,7 @@
 
 ## 공개 검증 스냅샷 — 2026-09-22 KST
 
-이번 상단 포인터에 포함된 최신 병합 감사 이력은 PR [#184](https://github.com/KRAdavid/cellpinda_GABA/pull/184)·[#185](https://github.com/KRAdavid/cellpinda_GABA/pull/185)·[#186](https://github.com/KRAdavid/cellpinda_GABA/pull/186)·[#187](https://github.com/KRAdavid/cellpinda_GABA/pull/187)·[#189](https://github.com/KRAdavid/cellpinda_GABA/pull/189)·[#190](https://github.com/KRAdavid/cellpinda_GABA/pull/190)·[#191](https://github.com/KRAdavid/cellpinda_GABA/pull/191)이다. #190은 #189 감사 포인터를 갱신했고 #191은 첫 연구 카드의 제품 경계 문구를 회귀 검증에 고정했다. 현재 main·live SHA는 `e8a3d34da59d01d1b9296dab81e39d980505759d`, 라이브 manifest 생성 시각은 `2026-09-22T00:06:53.388Z`, 최신 성공 배포는 [run 35670446287](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35670446287)이다. 이 값은 현재 감사 시점의 포인터이며, 이후 배포가 일어나면 라이브 manifest와 최신 성공 배포를 다시 확인한다.
+이번 상단 포인터에 포함된 최신 병합 감사 이력은 PR [#184](https://github.com/KRAdavid/cellpinda_GABA/pull/184)·[#185](https://github.com/KRAdavid/cellpinda_GABA/pull/185)·[#186](https://github.com/KRAdavid/cellpinda_GABA/pull/186)·[#187](https://github.com/KRAdavid/cellpinda_GABA/pull/187)·[#189](https://github.com/KRAdavid/cellpinda_GABA/pull/189)·[#190](https://github.com/KRAdavid/cellpinda_GABA/pull/190)·[#191](https://github.com/KRAdavid/cellpinda_GABA/pull/191)·[#198](https://github.com/KRAdavid/cellpinda_GABA/pull/198)이다. #198은 일반 건강 연구와 GABA 섭취 연구를 소비자 화면에서 분리하고 연구 경계 문구를 회귀 검증에 고정했다. 현재 main·live SHA는 `ae4ed2783f2bfc9c8ed6411602f0381e1d4f6cb1`, 라이브 manifest 생성 시각은 `2026-09-22T01:29:21.088Z`, 최신 성공 배포는 [run 35675887961](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35675887961)이다. 이 값은 현재 감사 시점의 포인터이며, 이후 배포가 일어나면 라이브 manifest와 최신 성공 배포를 다시 확인한다.
 
 현재까지 기록된 관리자 우회 병합 PR은 작성자와 병합자가 `KRAdavid`이고 독립 리뷰 0건·`REVIEW_REQUIRED` 상태였다. 현재 [CODEOWNERS](../.github/CODEOWNERS)는 `@KRAdavid` 단일 계정만 지정하므로 독립 Code Owner 승인이 없었으며, 관리자 병합은 독립 승인을 대체하지 않는다. 병합 직전에만 보호 규칙을 해제하고, 병합 직후 필수 검사·Code Owner·마지막 push 승인·관리자 강제 적용을 복구했다.
 
@@ -16,7 +16,7 @@ PR [#171](https://github.com/KRAdavid/cellpinda_GABA/pull/171)·[#172](https://g
 
 티저 외부 영상이 승인 전 `HOLD`인 동안에는 모바일·데스크톱 placeholder를 220px 기준으로 줄이고, 연구·제품 다음 행동 링크를 제공해 막다른 화면을 없앴다. 승인된 HTTPS 영상이 연결되면 기존 플레이어와 자동 시작·fallback 규칙을 그대로 사용한다. 실제 라이브 390px에서 HOLD 영역은 약 330px로 표시되고 가로 넘침이 없다.
 
-현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 관리자 강제 적용이 모두 활성이다. PR #173 병합 뒤에도 같은 설정을 복원했다. `deploy-worker`는 운영 비밀값 부재로 건너뛰었으며, 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트라 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
+현재 보호 규칙은 필수 검사 `release-verify`·`site-quality-verify`, Code Owner 리뷰 1명, 관리자 강제 적용이 모두 활성이다. PR #198 병합 뒤에도 같은 설정을 복원했다. `deploy-worker`는 운영 비밀값 부재로 건너뛰었으며, 남은 B2·B3·B4·C2·E1은 사람 승인 또는 외부 운영 입력 게이트라 자동으로 완료 처리하지 않는다. 동일 계정의 자기 승인 제한 때문에 진행한 관리자 우회는 독립 Code Owner 승인으로 기록하지 않는다.
 
 이 절 아래의 후보·과거 실행 기록은 당시 상태를 보존하기 위한 감사 로그다. 현재 공개 판정은 이 절, 라이브 `release-manifest.json`, 최신 배포 run을 우선하며 아래의 과거 `OPEN`, `404`, `후보` 표현을 현재 상태로 해석하지 않는다.
 
