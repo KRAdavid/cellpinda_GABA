@@ -64,13 +64,18 @@ test('automation freshness fails closed when TF pulse is stale', async () => {
   try {
     await withApi({
       daily: [{id: 1, status: 'completed', conclusion: 'success', completed_at: '2026-09-22T00:00:00.000Z', head_sha: 'daily', html_url: 'https://example.test/daily'}],
-      pulse: [{id: 2, status: 'completed', conclusion: 'success', completed_at: '2026-09-21T00:00:00.000Z', head_sha: 'pulse', html_url: 'https://example.test/pulse'}],
+      pulse: [
+        {id: 3, status: 'completed', conclusion: 'startup_failure', created_at: '2026-09-22T02:50:00.000Z', completed_at: '2026-09-22T02:50:01.000Z', head_sha: 'pulse-failed', html_url: 'https://example.test/pulse-failed'},
+        {id: 2, status: 'completed', conclusion: 'success', completed_at: '2026-09-21T00:00:00.000Z', head_sha: 'pulse', html_url: 'https://example.test/pulse'},
+      ],
     }, async apiUrl => {
       const result = await runMonitor(apiUrl, directory, '2026-09-22T03:00:00.000Z');
       assert.equal(result.code, 1);
       const parsed = JSON.parse(await readFile(join(directory, 'freshness.json'), 'utf8'));
       assert.equal(parsed.status, 'STALE');
       assert.deepEqual(parsed.checks.map(check => check.status), ['FRESH', 'STALE']);
+      assert.equal(parsed.checks[1].lastAttempt.conclusion, 'startup_failure');
+      assert.match(parsed.checks[1].reason, /최근 시도 startup_failure/);
     });
   } finally {
     await rm(directory, {recursive: true, force: true});

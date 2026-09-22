@@ -33,7 +33,9 @@ let status = 'MET';
 try {
   for (const item of monitored) {
     const data = await request(`/repos/${repository}/actions/workflows/${item.workflow}/runs?event=schedule&status=completed&per_page=20`);
-    const successful = (data.workflow_runs || []).find(run => run.conclusion === 'success' && run.status === 'completed');
+    const attempts = data.workflow_runs || [];
+    const latestAttempt = attempts[0] || null;
+    const successful = attempts.find(run => run.conclusion === 'success' && run.status === 'completed');
     const completedAt = successful?.completed_at || successful?.updated_at || null;
     const ageMinutes = completedAt ? Math.max(0, Math.round((checkedAt.getTime() - new Date(completedAt).getTime()) / 60000)) : null;
     const fresh = Number.isFinite(ageMinutes) && ageMinutes <= item.maxAgeMinutes;
@@ -44,8 +46,16 @@ try {
       status: fresh ? 'FRESH' : 'STALE',
       maxAgeMinutes: item.maxAgeMinutes,
       ageMinutes,
+      lastAttempt: latestAttempt ? {
+        id: latestAttempt.id,
+        status: latestAttempt.status,
+        conclusion: latestAttempt.conclusion,
+        createdAt: latestAttempt.created_at,
+        completedAt: latestAttempt.completed_at,
+        url: latestAttempt.html_url,
+      } : null,
       lastSuccess: successful ? {id: successful.id, completedAt, sha: successful.head_sha, url: successful.html_url} : null,
-      reason: fresh ? '최근 예약 실행 성공' : successful ? `마지막 예약 성공 후 ${ageMinutes}분 경과` : '성공한 예약 실행 기록 없음',
+      reason: fresh ? '최근 예약 실행 성공' : successful ? `마지막 예약 성공 후 ${ageMinutes}분 경과${latestAttempt && latestAttempt.id !== successful.id ? ` · 최근 시도 ${latestAttempt.conclusion || latestAttempt.status}` : ''}` : '성공한 예약 실행 기록 없음',
     });
   }
   status = checks.every(check => check.status === 'FRESH') ? 'MET' : 'STALE';

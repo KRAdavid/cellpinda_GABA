@@ -62,7 +62,8 @@ jobs:
               '',
               ...result.checks.map(check => {
                 const run = check.lastSuccess?.url ? ` · [최근 성공 실행](${check.lastSuccess.url})` : '';
-                return `- **${check.label}** · ${check.status} · ${check.reason}${run}`;
+                const attempt = check.lastAttempt?.url ? ` · [최근 시도](${check.lastAttempt.url}) ${check.lastAttempt.conclusion || check.lastAttempt.status}` : '';
+                return `- **${check.label}** · ${check.status} · ${check.reason}${run}${attempt}`;
               }),
               '',
               '이 모니터는 보고서·TF pulse의 예약 실행 신선도만 확인하며, 제품 표시·광고·후기 권한·주문·외부 게시 상태를 변경하지 않습니다.',
