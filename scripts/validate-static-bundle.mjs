@@ -68,7 +68,8 @@ assert.match(notFoundHtml, /<meta[^>]+name="robots"[^>]+content="noindex, nofoll
 assert.ok(!/<link[^>]+rel="canonical"|<meta[^>]+property="og:(?:url|title|image)"/i.test(notFoundHtml), '404 route must not reuse public metadata');
 
 const rootHtml = await readFile(resolve(outputDirectory, 'index.html'), 'utf8');
-assert.ok(rootHtml.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요.'), 'root fallback must preserve the research/product boundary');
+assert.ok(rootHtml.includes('수면에서 인지, 피부, 근육과 성장 연구까지') && rootHtml.includes('이제 GABA를 알아야 합니다'), 'root fallback must identify the consumer GABA story');
+assert.ok(rootHtml.includes('3분 만에 GABA 이해하기') && rootHtml.includes('전문가 영상 보기') && rootHtml.includes('주제별 연구 보기'), 'root fallback must expose the three story entry points');
 if (outputDirectory.endsWith('dist-pages')) {
   const publicPath = new URL(manifest.publicSiteUrl).pathname.replace(/\/$/, '');
   const assetPrefix = publicPath ? `${publicPath}/` : '/';

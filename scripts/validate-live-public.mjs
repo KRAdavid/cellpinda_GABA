@@ -191,7 +191,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(releaseManifest.checks?.smartStoreOnly && releaseManifest.checks?.reviewDestination && releaseManifest.checks?.researchIndex && releaseManifest.checks?.teaserBoundary && releaseManifest.checks?.challengeCopy && releaseManifest.checks?.productBoundary, 'live release manifest checks are incomplete');
     const bundleHashCount = await validateLiveBundleHashes(releaseManifest);
     validatePublicMetadata(pageText, '/', `${base}/`);
-    assert.ok(pageText.includes('사람 연구에서 관찰한 내용을 쉽게 정리했어요. 셀핀다 완제품 연구와는 다른 자료입니다.'), 'live root fallback must distinguish general GABA research from Cellpinda product research');
+    assert.ok(pageText.includes('사업자가 GABA의 역할과 중요성을 쉽게 설명하고 공유할 수 있도록 정리한 공개 안내서입니다.'), 'live root fallback must identify the public GABA guide');
+    assert.ok(pageText.includes('사업자가 바로 설명할 수 있는 GABA 5문장'), 'live root fallback must expose the business message kit');
     validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);
     const internalSnapshots = [
       ['/data/operations-queue.json', queueResponse],
@@ -319,7 +320,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(focusPageText.includes('24개') && focusPageText.includes('먼저 연습하고 시작하기') && focusPageText.includes('초록 신호는 누르고 빨강 신호는 기다려요'), 'live focus invite must explain the randomized game before the user starts it');
     const focusGameCardResponse = await request('/assets/focus-game-card-v5.png');
     assert.equal(focusGameCardResponse.status, 200, 'live focus invite card image must be available');
-    assert.match(pageText, new RegExp(`<script type="application\\/ld\\+json">\\{"@context":"https:\\/\\/schema\\.org","@type":"WebSite","name":"셀핀다 발효가바","url":"${escapeRegExp(`${base}/`)}"[^<]*"inLanguage":"ko-KR"\\}<\\/script>`), 'live root WebSite structured data is invalid');
+    assert.match(pageText, new RegExp(`<script type="application\\/ld\\+json">\\{"@context":"https:\\/\\/schema\\.org","@type":"WebSite","name":"GABA Guide · 뇌와 우리","url":"${escapeRegExp(`${base}/`)}"[^<]*"inLanguage":"ko-KR"\\}<\\/script>`), 'live root WebSite structured data is invalid');
     for (const [index, id] of sharedResultIds.entries()) {
       const sharePage = sharePageTexts[index] || '';
       validatePublicMetadata(sharePage, `/share/${id}/`, `${base}/share/${id}/`);
@@ -337,11 +338,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.ok(!/제한적|결과가 일치하지|정량 메타분석|이상사례|유의하지 않음/i.test(sharePage), `share page ${id} contains blocked research copy`);
     }
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
-    assert.ok(pageText.includes(approvedSmartStoreUrl), 'live static fallback must keep the approved Smart Store 1500 detail link');
-    assert.ok(pageText.includes('스마트스토어에서 제품 보기'), 'live static fallback must label the Smart Store destination for consumers');
-    assert.ok(pageText.includes('스마트스토어에서 후기 읽기'), 'live static fallback must expose the Smart Store review label');
-    assert.ok(pageText.includes(approvedSmartStoreReviewUrl), 'live static fallback must deep-link to the Smart Store review dialog');
-    assert.ok(pageText.includes(approvedReviewText), 'live static fallback must expose the approved consumer review guidance');
+    assert.ok(pageText.includes('수면에서 인지, 피부, 근육과 성장 연구까지') && pageText.includes('전문가 영상 보기'), 'live static fallback must expose the consumer GABA story entry points');
+    assert.ok(!pageText.includes(approvedSmartStoreUrl) && !pageText.includes(approvedSmartStoreReviewUrl), 'live root story must not expose product or review CTAs');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');
     assert.equal(content.products[0].category, '판매처 표기 기준 · 기타가공품', 'live export must keep the product type source-qualified until label confirmation');

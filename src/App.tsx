@@ -136,7 +136,7 @@ export default function App(){
  const operationsView = import.meta.env.DEV && isLocalHost && (requestedView === 'ops' || currentPath === '/ops');
  const accountView = requestedView === 'account' || currentPath === '/account';
  const researchView = requestedView === 'research' || currentPath === '/research/';
- const guideView = requestedView === 'guide' || currentPath === '/guide/';
+ const guideView = requestedView === 'guide' || currentPath === '/guide/' || (currentPath === '/' && !requestedView && !sharedRhythmId && !challengeInvite);
  const isProductView = requestedView === 'products' || currentPath === '/products/';
  const adminView = import.meta.env.DEV && isLocalHost && (requestedView === 'admin' || currentPath === '/admin');
  useEffect(()=>{
