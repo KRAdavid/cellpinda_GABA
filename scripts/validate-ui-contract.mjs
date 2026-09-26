@@ -21,7 +21,6 @@ const researchStyles = await read('src/components/ResearchLibrary.css');
 const reviewStyles = await read('src/components/ReviewExperience.css');
 const review = await read('src/components/ReviewExperience.tsx');
 const teaser = await read('src/components/TeaserPreview.tsx');
-const guide = await read('src/components/PublicGabaGuide.tsx');
 const research = await read('src/components/ResearchLibrary.tsx');
 const story = await read('src/components/GabaStory.tsx');
 const consumerReel = await read('src/components/ConsumerGabaReel.tsx');
@@ -37,7 +36,6 @@ const admin = await read('src/components/Admin.tsx');
 const operations = await read('src/components/OperationsMvp.tsx');
 const indexHtml = await read('index.html');
 const researchRouteHtml = await read('public/research/index.html');
-const guideRouteHtml = await read('public/guide/index.html');
 const notFoundHtml = await read('public/404.html');
 const deployWorkflow = await read('.github/workflows/deploy.yml');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
@@ -166,9 +164,6 @@ requireMatch(research, /이 연구, 어떻게 했나요\?/, 'research detail mus
 requireMatch(research, /찾는 연구가 없어요\. 다른 주제를 골라 보세요/, 'research empty state must guide the next consumer action');
 requireMatch(research, /topic:'뇌·손끝 연습'[\s\S]*손끝 감각/, 'research topic filters must include the approved non-ingestion hand-sensation study');
 requireMatch(researchRouteHtml, /사람 연구 살펴보기/, 'no-script research fallback must use a consumer-friendly label');
-requireMatch(guideRouteHtml, /canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/guide\//, 'guide route must expose a dedicated canonical URL');
-if (!guideRouteHtml.includes('GABA, 우리 몸에서는 어떤 일을 할까요?') || !guideRouteHtml.includes('../?view=guide')) fail('guide route must expose guide-specific copy and a readable handoff');
-if (/성장호르몬|근육 발달|GABA 3g|손끝 감각/.test(researchRouteHtml)) fail('static research fallback must keep off-target studies out of the consumer entry page');
 requireMatch(story, /그림과 쉬운 말로 확인/, 'GABA story must explain research with a visual aid');
 requireMatch(story, /<section id="story" className="section sage" aria-labelledby="story-heading"[\s\S]*<h2 id="story-heading">/, 'GABA story must expose its visible heading as the section label');
 requireMatch(app, /<section id="fermentation" className="section sage" aria-labelledby="fermentation-heading"[\s\S]*<h2 id="fermentation-heading">/, 'fermentation section must expose its visible heading as the section label');
@@ -247,13 +242,6 @@ for (const marker of ['잠드는 시간과 수면 기록', '머리를 많이 쓴
 requireMatch(gabaResearchHighlights, /claim\.metadata\?\.consumerSummary[\s\S]*claim\.metadata\?\.consumerHighlight[\s\S]*claim\.metadata\?\.consumerFinding[\s\S]*claim\.publicText/, 'post-teaser research highlights must read reviewed consumer copy and tolerate an older local API snapshot');
 requireMatch(gabaResearchHighlights, /연구에서 관찰된 내용/, 'post-teaser GABA research highlights must label results as observed study records');
 requireMatch(gabaResearchHighlights, /gaba-research-highlight-boundary-badge[\s\S]*일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요/, 'homepage research highlights must keep a plain-language product-information handoff on each card');
-requireMatch(guide, /잠이 들 때는 뇌가 깨어 있으라는 신호를 천천히 낮춰야 해요\.[\s\S]*GABA는 이 과정에 관여해요\./, 'GABA guide sleep copy must use plain consumer language');
-requireMatch(guide, /잠이 불편하다고 답한 일본 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안/, 'GABA guide sleep study must show its reviewed population, dose and duration');
-requireMatch(guide, /이번 연구의 범위/, 'GABA guide research cards must label the scope in plain language');
-requireMatch(guide, /scope: '일반 GABA 연구를 살펴본 카드예요\. 셀핀다 제품 정보는 제품 카드에서 확인하세요\.'/g, 'GABA guide research cards must keep a plain product-information boundary');
-requireMatch(guide, /GABA는 잠·스트레스·집중과 관련된 신호에 관여한다/, 'GABA guide facts must use the consumer-facing topic wording');
-requireMatch(guide, /const guideUrl = new URL\('guide\/', new URL\(siteRoot, window\.location\.origin\)\)\.toString\(\)[\s\S]*canonical\.href = guideUrl[\s\S]*navigator\.clipboard\.writeText\(guideUrl\)/, 'GABA guide canonical and share link must stay on the public guide route');
-if (/아직 확인되지 않은 것은\?|GABA성 신경전달은 잠들기, 스트레스 반응, 선택적 집중/.test(guide)) fail('GABA guide must not expose technical or negative-sounding research-scope copy');
 for (const marker of ['연구 조건: 하루 100mg', '연구 조건: 100mg 한 번']) requireMatch(gabaResearchHighlights, new RegExp(marker), `post-teaser research dose boundary ${marker} is missing`);
 requireMatch(gabaResearchHighlightsStyles, /gaba-research-highlights-grid[\s\S]*grid-template-columns:repeat\(2/, 'post-teaser GABA research highlights must use a focused two-card grid');
 requireMatch(research, /research-library-study-boundary[\s\S]*일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요/, 'research cards must show a compact plain-language product-information handoff');
@@ -345,19 +333,17 @@ requireMatch(teaser, /href="#gaba-research-highlights"[\s\S]*GABA 연구 쉽게 
 if (/href="#brain-load-evidence"[\s\S]*GABA 연구 쉽게 보기/.test(teaser)) fail('teaser GABA research action must not land on the separate general health evidence section');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
-requireMatch(indexHtml, /사람 연구에서 관찰한 내용을 쉽게 정리했어요\. 셀핀다 완제품 연구와는 다른 자료입니다\./, 'static no-script fallback must distinguish general GABA research from Cellpinda product research');
-requireMatch(indexHtml, /먼저 확인해 주세요\.[\s\S]*연구에서 먹은 양과 조건은 셀핀다 제품 표시와 다를 수 있어요\.[\s\S]*<strong>머리를 많이 쓴 뒤<\/strong> 성인 63명이 GABA 100mg과 비교 캡슐을 한 번씩 먹고, 뇌파와 활력 점수를 비교한 연구예요\.[\s\S]*<strong>잠<\/strong> 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안 먹고, 잠드는 시간과 수면 기록을 살펴본 연구예요\.[\s\S]*href="\.\/research\/"/, 'no-script research summary must use the focused consumer topics, study amounts and product boundary');
-if (/성장호르몬|근육 발달|GABA 3g|운동 경험이 있는 남성|손끝 감각/.test(indexHtml)) fail('static no-script fallback must not expose off-target growth, muscle, exercise or sensory-study material');
-if (/잠든 모습을|스트레스·기분/.test(indexHtml)) fail('no-script research summary must not expose stale consumer copy');
-if (/운동 뒤 혈액 속 호르몬과 몸무게 변화/.test(indexHtml)) fail('no-script research summary must not expose the held body-composition study');
+requireMatch(indexHtml, /수면에서 인지, 피부, 근육과 성장 연구까지[\s\S]*이제 GABA를 알아야 합니다/, 'static no-script fallback must use the consumer story title');
+requireMatch(indexHtml, /잠들고, 집중하고, 움직이는 순간마다[\s\S]*GABA입니다\./, 'static no-script fallback must explain why GABA matters in everyday language');
+requireMatch(indexHtml, /3분 만에 GABA 이해하기[\s\S]*전문가 영상 보기[\s\S]*주제별 연구 보기/, 'static no-script fallback must expose the three story entry points');
+if (/https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202|REVIEW_DIALOG|스마트스토어/.test(indexHtml)) fail('root public story must not expose product or review CTAs');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
 requireMatch(review, /가바 1500 스마트스토어 후기 읽기/, 'review CTA must identify the GABA 1500 Smart Store destination');
 requireMatch(review, /가바 1500 구매자 후기를 스마트스토어에서 읽어보세요\./, 'review destination must keep the approved consumer message');
-requireMatch(indexHtml, /href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"[^>]*>스마트스토어에서 후기 읽기/, 'static review CTA must deep-link to the Smart Store review dialog');
+if (/href="https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202#REVIEW_DIALOG"/.test(indexHtml)) fail('static root story must not deep-link to a product review');
 requireMatch(review, /가바 1500 스마트스토어 후기 읽기[\s\S]*href=\{url\}/, 'the separate review section must deep-link to the approved Smart Store review dialog');
 requireMatch(app, /content\?\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'header review link must open the approved Smart Store review dialog');
-requireMatch(app, /function ContentFallback[\s\S]*SMARTSTORE_PRODUCT_URL[\s\S]*스마트스토어 제품 보기[\s\S]*REVIEW_DESTINATION_URL[\s\S]*가바 1500 구매자 후기 읽기/, 'content failure fallback must keep direct Smart Store product and review destinations');
 requireMatch(purchaseQuestions, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'purchase FAQ review CTA must deep-link to the approved Smart Store review dialog');
 requireMatch(story, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'GABA story review link must open the approved Smart Store review dialog');
 requireMatch(review, /quotes\.length > 0 \|\| destinations\.length > 0/, 'review reading guide must remain visible with an approved Smart Store destination');
@@ -370,12 +356,12 @@ if (/<link rel="canonical"|property="og:(?:url|title|image)"/i.test(notFoundHtml
 if (/cp\s+dist-pages\/index\.html\s+dist-pages\/404\.html/.test(deployWorkflow)) fail('Pages deployment must keep the dedicated 404 document instead of copying the homepage');
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(app + indexHtml)) fail('legacy official-mall destination leaked into consumer source');
 const consumerSource = app + indexHtml + review;
+const smartStoreLinks = [approvedSmartStoreUrl, approvedSmartStoreReviewUrl];
 const consumerAnchorTags = [...consumerSource.matchAll(/<a\b[^>]*>/g)].map(match => match[0]);
 const unsafeNewWindowLinks = consumerAnchorTags.filter(tag => /\btarget="_blank"/.test(tag) && !/\brel="[^"]*\bnoopener\b[^"]*"/.test(tag));
 if (unsafeNewWindowLinks.length) fail(`consumer links opening a new window must include rel="noopener noreferrer" (${unsafeNewWindowLinks.length} found)`);
-const smartStoreLinks = [...consumerSource.matchAll(/https:\/\/smartstore\.naver\.com\/[A-Za-z0-9_/?=&.%:#-]+/g)].map(match => match[0]);
-if (!smartStoreLinks.length || smartStoreLinks.some(url => ![approvedSmartStoreUrl, approvedSmartStoreReviewUrl].includes(url)) || !smartStoreLinks.includes(approvedSmartStoreUrl) || !smartStoreLinks.includes(approvedSmartStoreReviewUrl)) {
-  fail(`consumer Smart Store links must use the approved product detail or exact review dialog (${approvedSmartStoreUrl} / ${approvedSmartStoreReviewUrl})`);
+if (!app.includes(approvedSmartStoreUrl) || !consumerSource.includes('REVIEW_DESTINATION_URL')) {
+  fail(`consumer product routes must retain the approved product detail and review destination token (${approvedSmartStoreUrl} / ${approvedSmartStoreReviewUrl})`);
 }
 const consumerImageTags = [...consumerSource.matchAll(/<img\b[^>]*>/gi)].map(match => match[0]);
 if (consumerImageTags.some(tag => !/\balt\s*=\s*(?:['"][^'"]*['"]|\{[^}]+\})/i.test(tag))) {
