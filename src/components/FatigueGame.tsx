@@ -185,20 +185,20 @@ function baselineResultCopy(summary: FocusGameSummary): {
   if (summary.accuracyPct >= 85) return {
     tone: 'steady',
     kicker: '좋은 반응 흐름',
-    heading: '축하해요. 오늘 게임에서는 반응이 안정적이었어요.',
+    heading: '이번 게임에서 신호를 잘 따라왔어요.',
     body: '지금처럼 중간중간 짧게 쉬는 리듬을 이어가 보세요.',
   };
   if (summary.accuracyPct >= 70) return {
     tone: 'watch',
     kicker: '잠깐 점검해 볼 기록',
-    heading: '오늘은 반응이 조금 흔들렸어요.',
+    heading: '이번 게임에서 신호를 몇 번 놓쳤어요.',
     body: '5분 화면을 내려놓고 다시 해보면 내 기록을 비교해 볼 수 있어요.',
   };
   return {
     tone: 'pause',
     kicker: '지금은 5분 회복을 권해요',
-    heading: '지금은 화면을 내려놓고 5분 쉬어 보세요.',
-    body: '오늘 머리가 과하게 바빴던 날일 수 있어요. 알림을 끄고 물을 마신 뒤 다시 해보세요.',
+    heading: '이번 게임에서 놓친 신호가 많았어요. 화면을 내려놓고 5분 쉬어 보세요.',
+    body: '5분 뒤 다시 해보면 두 기록을 나란히 볼 수 있어요. 알림을 끄고 물을 마셔 보세요.',
   };
 }
 
@@ -208,7 +208,7 @@ function FatigueGameNextSteps({ onEvent }: { onEvent: FatigueGameProps['onEvent'
       <a href="#story" onClick={() => onEvent('research_highlight_opened', { path: '/focus', source: 'game_result' })}>
         <span>01</span><strong>GABA 이야기</strong><small>몸속에서 하는 일</small>
       </a>
-      <a href="#products" onClick={() => onEvent('product_compare_view', { path: '/focus', source: 'game_result' })}>
+      <a href="?view=products#products" onClick={() => onEvent('product_compare_view', { path: '/focus', source: 'game_result' })}>
         <span>02</span><strong>제품 표시사항 확인</strong><small>게임 기록과 별개로 구성 보기</small>
       </a>
       <a href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" onClick={() => onEvent('review_source_click', { productId: 'gaba1500', path: '/focus', source: 'game_result' })}>

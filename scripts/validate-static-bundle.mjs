@@ -8,7 +8,7 @@ const manifestPath = resolve(outputDirectory, 'release-manifest.json');
 assert.ok(existsSync(manifestPath), 'static bundle is missing release-manifest.json');
 const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
 const reviewedTeaser = JSON.parse(await readFile(resolve(process.cwd(), 'data/teaser-manifest.json'), 'utf8'));
-const expectedRoutes = ['/', '/products/', '/research/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
+const expectedRoutes = ['/', '/products/', '/research/', '/guide/', '/focus/', '/share/active/', '/share/sleep/', '/share/irregular/', '/share/sensory/', '/share/unrested/', '/share/steady/'];
 assert.deepEqual(manifest.routePaths, expectedRoutes, 'static bundle route manifest is out of sync');
 assert.ok(['static', 'worker'].includes(manifest.runtimeMode), 'deployment bundle runtime mode is invalid');
 assert.ok(['HOLD', 'PREVIEW'].includes(manifest.teaser?.status), 'static bundle must preserve a supported teaser preview state');

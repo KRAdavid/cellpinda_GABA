@@ -54,9 +54,9 @@ function focusFocusChallengeHeading() {
 function fatigueSignal(result: RhythmResult): { tone: 'high' | 'watch' | 'steady'; label: string; heading: string; body: string } {
   if (result.loadLevel === 'low') return {
     tone: 'steady',
-    label: '지난 7일 답변',
-    heading: '축하합니다. 뇌 컨디션이 좋은 상태를 유지하고 있습니다.',
-    body: '최근 답변처럼 잠깐씩 쉬는 흐름을 계속 이어가세요.',
+    label: '답변에서 쉬는 흐름이 괜찮았어요',
+    heading: '축하합니다. 지난 7일 답변에서는 잠과 휴식이 비교적 괜찮았어요.',
+    body: '최근처럼 잠깐씩 쉬는 시간을 계속 이어가세요.',
   };
   if (result.loadLevel === 'high') {
     if (result.loadScore < 10) return {
@@ -97,17 +97,17 @@ function BrainLoadVisual({ result }: { result: RhythmResult }) {
   const frequentAnswers = answerEntries.filter(([, value]) => value >= 2).length;
   const description = `5개 질문 중 ${frequentAnswers}개에서 힘들었다고 답했어요.`;
   const visualCopy = band === 'high'
-    ? { label: '머리에 할 일이 몰려 있어요', detail: '오늘은 화면과 알림에서 잠깐 떨어져 주세요.', Icon: AlertTriangle }
+    ? { label: '답변에서 머릿속 일이 많이 남은 날이 보여요', detail: '지금은 화면과 알림에서 잠깐 떨어져 주세요.', Icon: AlertTriangle }
     : band === 'watch'
-      ? { label: '잠깐 쉬어갈 때예요', detail: '다음 일정 전에 짧은 휴식을 넣어 보세요.', Icon: PauseCircle }
-      : { label: '지금은 여유가 있어요', detail: '지금의 쉬는 흐름을 그대로 이어가세요.', Icon: CheckCircle2 };
+      ? { label: '답변에서 잠깐 쉬고 싶은 날이 보여요', detail: '다음 일정 전에 짧은 휴식을 넣어 보세요.', Icon: PauseCircle }
+      : { label: '답변에서 쉬는 흐름이 괜찮았어요', detail: '지금의 쉬는 흐름을 그대로 이어가세요.', Icon: CheckCircle2 };
   const StateIcon = visualCopy.Icon;
 
   return (
     <div className={`rhythm-load-score rhythm-load-score-${band}`}>
       <div className="rhythm-load-score-heading"><span>지난 7일 답변 기록</span><strong>{score}<small>/ 15</small></strong></div>
       <div className="rhythm-load-visual">
-        <div className="rhythm-load-state" role="img" aria-label={`오늘 내 상태: ${visualCopy.label}`}>
+        <div className="rhythm-load-state" role="img" aria-label={`지난 7일 답변 기록: ${visualCopy.label}`}>
           <div className="rhythm-load-brain" aria-hidden="true"><Brain size={30} strokeWidth={1.7} /><span className="rhythm-load-brain-pulse" /></div>
           <div className="rhythm-load-state-copy"><strong>{visualCopy.label}</strong><span>{visualCopy.detail}</span></div>
           <StateIcon className="rhythm-load-state-icon" size={22} strokeWidth={1.8} aria-hidden="true" />
@@ -573,8 +573,8 @@ export default function RhythmExperience({ onEvent, onResultChange }: RhythmExpe
             <div className="rhythm-result-next-step" aria-label="오늘 해볼 행동">
               <p className="rhythm-eyebrow">오늘 해볼 행동</p>
               <div className="rhythm-result-commerce" aria-label="제품과 구매자 후기 확인">
-                <p className="rhythm-eyebrow">제품과 구매자 후기를 확인하세요</p>
-                <a className="rhythm-button secondary" href="#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>
+                <p className="rhythm-eyebrow">점검 결과와 별개로 제품 표시사항을 확인하세요</p>
+                <a className="rhythm-button secondary" href="?view=products#products" onClick={() => onEvent('purchase_cta_click', { productId: 'gaba1500', path: '/result' })}>가바 1500 제품 구성 보기 <ArrowRight size={18} aria-hidden="true" /></a>
                 <a className="rhythm-text-button" href={REVIEW_DESTINATION_URL} target="_blank" rel="noopener noreferrer" aria-label="가바 1500 스마트스토어 구매자 후기 읽기 · 새 창" onClick={() => onEvent('review_open', { productId: 'gaba1500', path: '/result' })}>스마트스토어 구매자 후기 읽기 <ArrowUpRight size={18} aria-hidden="true" /></a>
               </div>
             </div>

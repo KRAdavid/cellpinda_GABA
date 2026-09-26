@@ -51,7 +51,7 @@ function buildSlides(): ReelSlide[] {
       body: '먼저 1분 체크로 내 상태를 확인한 뒤, 제품 구성과 구매자 후기를 볼 수 있어요.',
       kind: 'cta',
       icon: Sparkles,
-      link: {href: '#products', label: '가바 1500 제품 구성 보기'},
+      link: {href: '#rhythm', label: '지난 7일 1분 체크하기'},
     },
   ];
 }
@@ -60,11 +60,11 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
   const slides = useMemo(() => buildSlides(), []);
   const slideCount = slides.length;
   const nextSlideTitle = hasRhythmResult
-    ? '이제 제품 구성과 구매자 후기를 확인해 보세요.'
-    : '지금 내 상태부터 1분이면 확인할 수 있어요.';
+    ? '오늘의 리듬을 확인했어요.'
+    : '지난 7일 리듬을 1분이면 돌아볼 수 있어요.';
   const nextSlideBody = hasRhythmResult
-    ? '결과 화면에서 제품 구성과 구매자 후기를 확인할 수 있어요.'
-    : '먼저 1분 체크로 내 상태를 확인한 뒤, 제품 구성과 구매자 후기를 볼 수 있어요.';
+    ? '내 답변 기록과 제품 정보는 서로 따로 살펴보세요. 제품 표시는 제품 영역에서 확인할 수 있어요.'
+    : '잠과 휴식에 관한 다섯 가지 질문에 답하고, 오늘 해볼 행동을 확인해 보세요.';
   const [activeIndex, setActiveIndex] = useState(0);
   const railRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<Array<HTMLElement | null>>([]);

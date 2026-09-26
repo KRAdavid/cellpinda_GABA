@@ -76,15 +76,15 @@ const metaContent = (html, property) => {
 };
 const sharedResultIds = ['active','sleep','irregular','sensory','unrested','steady'];
 
-const [pageResponse, healthResponse, contentResponse, robotsResponse, sitemapResponse, productResponse, researchResponse, focusResponse, accountResponse, missingResponse] = await Promise.all([
+const [pageResponse, healthResponse, contentResponse, robotsResponse, sitemapResponse, productResponse, researchResponse, guideResponse, focusResponse, accountResponse, missingResponse] = await Promise.all([
   request('/'), request('/api/health'), request('/api/content'), request('/robots.txt'), request('/sitemap.xml'),
-  request('/products/'), request('/research/'), request('/focus/'), request('/account'), fetchRoute('/release-audit-missing-route'),
+  request('/products/'), request('/research/'), request('/guide/'), request('/focus/'), request('/account'), fetchRoute('/release-audit-missing-route'),
 ]);
 const corsVerified = await verifyCors();
 if (missingResponse.status !== 404) throw new Error(`/release-audit-missing-route returned HTTP ${missingResponse.status}; Worker unknown paths must remain 404`);
-const [page, health, content, robots, sitemap, productPage, researchPage, focusPage, accountPage] = await Promise.all([
+const [page, health, content, robots, sitemap, productPage, researchPage, guidePage, focusPage, accountPage] = await Promise.all([
   pageResponse.text(), healthResponse.json(), contentResponse.json(), robotsResponse.text(), sitemapResponse.text(),
-  productResponse.text(), researchResponse.text(), focusResponse.text(), accountResponse.text(),
+  productResponse.text(), researchResponse.text(), guideResponse.text(), focusResponse.text(), accountResponse.text(),
 ]);
 if (pageResponse.headers.get('cache-control') !== 'no-store') throw new Error('Worker root shell must be no-store because runtime metadata is rewritten');
 if (accountResponse.headers.get('cache-control') !== 'no-store') throw new Error('Worker account shell must be no-store because it is a private runtime view');
@@ -98,9 +98,10 @@ const productSchema = jsonLd(productPage);
 const productSchemaNode = Array.isArray(productSchema?.['@graph']) ? productSchema['@graph'].find(node => node?.['@type'] === 'Product') : null;
 if (productSchema?.['@context'] !== 'https://schema.org' || productSchemaNode?.name !== '셀핀다 가바 1500' || 'category' in productSchemaNode || productSchemaNode.image !== `${base.origin}/assets/product-composition-1500.png` || productSchemaNode.sameAs !== approvedSmartStoreUrl || productSchemaNode.offers || productSchemaNode.aggregateRating || productSchemaNode.review) throw new Error('Worker product route has missing or unsafe Product structured data');
 if (canonicalHref(researchPage)!==`${base.origin}/research/` || metaContent(researchPage,'og:url')!==`${base.origin}/research/`) throw new Error('Worker research route must preserve its research canonical/Open Graph URL');
+if (canonicalHref(guidePage)!==`${base.origin}/guide/` || metaContent(guidePage,'og:url')!==`${base.origin}/guide/`) throw new Error('Worker guide route must preserve its guide canonical/Open Graph URL');
 if (canonicalHref(focusPage)!==`${base.origin}/focus/` || metaContent(focusPage,'og:url')!==`${base.origin}/focus/`) throw new Error('Worker focus route must preserve its invite canonical/Open Graph URL');
 const sitemapUrls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match=>match[1]);
-const expectedSitemap=[`${base.origin}/`,`${base.origin}/products/`,`${base.origin}/research/`,`${base.origin}/focus/`,...sharedResultIds.map(id=>`${base.origin}/share/${id}/`)];
+const expectedSitemap=[`${base.origin}/`,`${base.origin}/products/`,`${base.origin}/research/`,`${base.origin}/guide/`,`${base.origin}/focus/`,...sharedResultIds.map(id=>`${base.origin}/share/${id}/`)];
 if (JSON.stringify(sitemapUrls)!==JSON.stringify(expectedSitemap)) throw new Error('Worker sitemap route set is not the public route set');
 const moduleSources=[...page.matchAll(/<script[^>]+type="module"[^>]+src="([^"]+)"/gi)].map(match=>match[1]).filter(Boolean);
 if (!moduleSources.length) throw new Error('Worker root shell did not expose a module bundle');
