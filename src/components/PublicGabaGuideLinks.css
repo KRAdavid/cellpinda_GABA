@@ -1,0 +1,43 @@
+.guide-everyday-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  margin-top: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--guide-teal-dark);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.guide-everyday-link:hover,
+.guide-everyday-link:focus-visible,
+.guide-research-library-link:hover,
+.guide-research-library-link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.guide-research-library-link {
+  margin-top: 16px;
+}
+
+.guide-growth-note .guide-inline-link {
+  display: flex;
+  width: max-content;
+  margin-top: 14px;
+}
+
+@media (max-width: 700px) {
+  .guide-everyday-link {
+    margin-top: 14px;
+    font-size: 14px;
+  }
+
+  .guide-research-library-link {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}

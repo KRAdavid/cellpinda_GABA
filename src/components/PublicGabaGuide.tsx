@@ -15,6 +15,7 @@ import {
   X,
 } from 'lucide-react';
 import './PublicGabaGuide.css';
+import './PublicGabaGuideLinks.css';
 
 type EvidenceTone = 'established' | 'human' | 'early' | 'mixed';
 
@@ -162,6 +163,17 @@ const libraryRows: LibraryRow[] = [
 ];
 
 const growthSteps = ['GABA 연구', '수면 및 신경 조절', '성장호르몬 반응', '체성분과 성장 관련 지표', '성장기 동물 연구', '어린이 대상 연구'];
+const libraryTopicByResearchId: Partial<Record<ResearchTopic['id'], string>> = {
+  cognition: '인지',
+  'growth-hormone': '성장호르몬',
+};
+const everydayTargets: Record<EverydayTopic['id'], { label: string; section: 'sleep' | 'research' | 'library'; researchId?: ResearchTopic['id']; libraryTopic?: string }> = {
+  sleep: { label: '수면 사례로 읽기', section: 'sleep' },
+  stress: { label: '스트레스 연구로 읽기', section: 'library', libraryTopic: '스트레스' },
+  focus: { label: '인지 연구로 읽기', section: 'research', researchId: 'cognition' },
+  movement: { label: '근육 연구로 읽기', section: 'research', researchId: 'muscle' },
+  sense: { label: '인지 연구로 읽기', section: 'research', researchId: 'cognition' },
+};
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
   'GABA는 신경세포의 활동 균형을 조절하는 핵심 신호입니다.',
@@ -285,6 +297,24 @@ export default function PublicGabaGuide() {
     setMenuOpen(false);
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     document.getElementById(id)?.scrollIntoView({ behavior, block: 'start' });
+    window.history.replaceState(null, '', `#${id}`);
+  };
+
+  const openResearch = (id: ResearchTopic['id']) => {
+    setSelectedResearch(id);
+    window.requestAnimationFrame(() => scrollTo('research-panel'));
+  };
+
+  const openLibrary = (topic = '전체') => {
+    setLibraryTopic(topic);
+    scrollTo('library');
+  };
+
+  const openEverydayTopic = (id: EverydayTopic['id']) => {
+    const target = everydayTargets[id];
+    if (target.section === 'research' && target.researchId) openResearch(target.researchId);
+    else if (target.section === 'library') openLibrary(target.libraryTopic);
+    else scrollTo(target.section);
   };
 
   const sharePage = async () => {
@@ -361,7 +391,7 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-everyday guide-story-section" id="everyday" aria-labelledby="everyday-heading">
           <div className="guide-container">
             <div className="guide-section-heading"><div><p className="guide-section-number">03 · EVERYDAY GABA</p><h2 id="everyday-heading">우리는 이미 매일 GABA의<br />조절 속에서 생활합니다</h2></div><p>논문보다 먼저,<br />일상의 순간으로 이해해 보세요.</p></div>
-            <div className="guide-everyday-cards">{everydayTopics.map((topic, index) => <article className="guide-everyday-card" key={topic.id}><span className="guide-everyday-number">0{index + 1}</span><span className="guide-topic-icon"><TopicIcon type={topic.icon} /></span><h3>{topic.title}</h3><p>{topic.body}</p></article>)}</div>
+            <div className="guide-everyday-cards">{everydayTopics.map((topic, index) => <article className="guide-everyday-card" key={topic.id}><span className="guide-everyday-number">0{index + 1}</span><span className="guide-topic-icon"><TopicIcon type={topic.icon} /></span><h3>{topic.title}</h3><p>{topic.body}</p><button type="button" className="guide-everyday-link" onClick={() => openEverydayTopic(topic.id)}>{everydayTargets[topic.id].label} <ArrowRight size={14} aria-hidden="true" /></button></article>)}</div>
           </div>
         </section>
 
@@ -384,13 +414,13 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-research guide-story-section" id="research" aria-labelledby="research-heading">
           <div className="guide-container">
             <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">05 · RESEARCH EXPANSION</p><h2 id="research-heading">GABA 연구는 어디까지<br />확장되고 있을까요?</h2></div><p>수면에서 시작해<br />다섯 영역으로 넓어집니다.</p></div>
-            <div className="guide-research-layout"><div className="guide-research-grid guide-research-five" role="tablist" aria-label="GABA 연구 확장 주제">{researchTopics.map((topic) => <button type="button" role="tab" id={`research-tab-${topic.id}`} aria-controls="research-panel" aria-selected={selectedResearch === topic.id} tabIndex={selectedResearch === topic.id ? 0 : -1} key={topic.id} className={`guide-research-card ${selectedResearch === topic.id ? 'is-active' : ''}`} onClick={() => setSelectedResearch(topic.id)} onKeyDown={(event) => moveGuideTab(event, researchIds, selectedResearch, setSelectedResearch, 'research-tab')}><div className="guide-research-card-head"><span>{topic.title}</span><small>{topic.english}</small></div><EvidenceBadge tone={topic.tone} label={topic.label} /><ResearchGlyph id={topic.id} /><span className="guide-research-open">대표 연구 보기 <ArrowRight size={15} aria-hidden="true" /></span></button>)}</div><article className="guide-research-detail" id="research-panel" role="tabpanel" aria-labelledby={`research-tab-${activeResearch.id}`} aria-live="polite"><div className="guide-research-detail-top"><EvidenceBadge tone={activeResearch.tone} label={activeResearch.label} /><span>{activeResearch.english}</span></div><h3>{activeResearch.title} 연구가 보여주는 이야기</h3><p className="guide-research-summary">{activeResearch.summary}</p><dl><div><dt>무엇을 관찰하나요?</dt><dd>{activeResearch.observed}</dd></div><div><dt>어떤 흐름으로 읽나요?</dt><dd>{activeResearch.interpretation}</dd></div></dl><div className="guide-research-source"><span>대표 연구</span><a href={activeResearch.source.url} target="_blank" rel="noopener noreferrer">{activeResearch.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article></div>
+            <div className="guide-research-layout"><div className="guide-research-grid guide-research-five" role="tablist" aria-label="GABA 연구 확장 주제">{researchTopics.map((topic) => <button type="button" role="tab" id={`research-tab-${topic.id}`} aria-controls="research-panel" aria-selected={selectedResearch === topic.id} tabIndex={selectedResearch === topic.id ? 0 : -1} key={topic.id} className={`guide-research-card ${selectedResearch === topic.id ? 'is-active' : ''}`} onClick={() => openResearch(topic.id)} onKeyDown={(event) => moveGuideTab(event, researchIds, selectedResearch, setSelectedResearch, 'research-tab')}><div className="guide-research-card-head"><span>{topic.title}</span><small>{topic.english}</small></div><EvidenceBadge tone={topic.tone} label={topic.label} /><ResearchGlyph id={topic.id} /><span className="guide-research-open">대표 연구 보기 <ArrowRight size={15} aria-hidden="true" /></span></button>)}</div><article className="guide-research-detail" id="research-panel" role="tabpanel" aria-labelledby={`research-tab-${activeResearch.id}`} aria-live="polite"><div className="guide-research-detail-top"><EvidenceBadge tone={activeResearch.tone} label={activeResearch.label} /><span>{activeResearch.english}</span></div><h3>{activeResearch.title} 연구가 보여주는 이야기</h3><p className="guide-research-summary">{activeResearch.summary}</p><dl><div><dt>무엇을 관찰하나요?</dt><dd>{activeResearch.observed}</dd></div><div><dt>어떤 흐름으로 읽나요?</dt><dd>{activeResearch.interpretation}</dd></div></dl><div className="guide-research-source"><span>대표 연구</span><a href={activeResearch.source.url} target="_blank" rel="noopener noreferrer">{activeResearch.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div><button type="button" className="guide-inline-link guide-research-library-link" onClick={() => openLibrary(libraryTopicByResearchId[activeResearch.id])}>{libraryTopicByResearchId[activeResearch.id] ? `${libraryTopicByResearchId[activeResearch.id]} 연구 카드에서 상세 조건 보기` : '자료실에서 관련 연구 보기'} <ArrowRight size={15} aria-hidden="true" /></button></article></div>
             <p className="guide-research-reminder"><FlaskConical size={18} aria-hidden="true" /><span>각 카드에서는 한 문장으로 읽고, 자료실에서 참여자·측정 항목·관찰 기록을 더 자세히 살펴볼 수 있습니다.</span></p>
           </div>
         </section>
 
         <section className="guide-section guide-growth-story guide-story-section" id="growth" aria-labelledby="growth-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">06 · GROWTH QUESTION</p><h2 id="growth-heading">성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">현재 공개된 성인 성장호르몬 연구, 성장기 동물 연구 및 복합원료 연구를 한곳에서 확인할 수 있습니다. 어린이의 성장속도와 최종 신장을 평가한 GABA 단독 인체연구는 업데이트 항목으로 관리합니다.</p></div>
+          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">06 · GROWTH QUESTION</p><h2 id="growth-heading">성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">현재 공개된 성인 성장호르몬 연구, 성장기 동물 연구 및 복합원료 연구를 한곳에서 확인할 수 있습니다. 어린이의 성장속도와 최종 신장을 평가한 GABA 단독 인체연구는 업데이트 항목으로 관리합니다.<button type="button" className="guide-inline-link" onClick={() => openLibrary('성장호르몬')}>성장호르몬 연구 카드 보기 <ArrowRight size={15} aria-hidden="true" /></button></p></div>
         </section>
 
         <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
