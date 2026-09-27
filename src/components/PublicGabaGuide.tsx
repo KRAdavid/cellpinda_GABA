@@ -174,6 +174,7 @@ const everydayTargets: Record<EverydayTopic['id'], { label: string; section: 'sl
   movement: { label: '근육 연구로 읽기', section: 'research', researchId: 'muscle' },
   sense: { label: '인지 연구로 읽기', section: 'research', researchId: 'cognition' },
 };
+const libraryTopicOptions = ['전체', '수면', '인지', '성장호르몬', '스트레스'];
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
   'GABA는 신경세포의 활동 균형을 조절하는 핵심 신호입니다.',
@@ -188,6 +189,14 @@ const evidenceLabels: Record<EvidenceTone, { text: string; className: string }> 
   early: { text: '확장 연구', className: 'is-early' },
   mixed: { text: '연구 흐름', className: 'is-mixed' },
 };
+
+function decodeGuideHash(value: string) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
 
 function TopicIcon({ type }: { type: EverydayTopic['icon'] }) {
   if (type === 'moon') return <Moon aria-hidden="true" />;
@@ -279,8 +288,19 @@ export default function PublicGabaGuide() {
     if (meta) meta.content = description;
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
-    const targetId = window.location.hash.slice(1);
-    if (targetId) requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'instant', block: 'start' }));
+    const hash = decodeGuideHash(window.location.hash.slice(1));
+    let targetId = hash;
+    const researchId = hash.startsWith('research-') ? hash.slice('research-'.length) : '';
+    if (researchId && researchTopics.some((topic) => topic.id === researchId)) {
+      setSelectedResearch(researchId);
+      targetId = 'research-panel';
+    }
+    const libraryTopic = hash.startsWith('library-') ? hash.slice('library-'.length) : '';
+    if (libraryTopic && libraryTopicOptions.includes(libraryTopic)) {
+      setLibraryTopic(libraryTopic);
+      targetId = 'library';
+    }
+    if (targetId) requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'auto', block: 'start' })));
   }, []);
 
   const activeResearch = researchTopics.find((topic) => topic.id === selectedResearch) || researchTopics[0];
@@ -293,21 +313,26 @@ export default function PublicGabaGuide() {
     && (libraryMeasure === '전체' || row.measure === libraryMeasure)
   )), [libraryInstitution, libraryMeasure, libraryModel, libraryTopic, libraryYear]);
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string, hash = id) => {
     setMenuOpen(false);
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     document.getElementById(id)?.scrollIntoView({ behavior, block: 'start' });
-    window.history.replaceState(null, '', `#${id}`);
+    window.history.replaceState(null, '', `#${hash}`);
   };
 
   const openResearch = (id: ResearchTopic['id']) => {
     setSelectedResearch(id);
-    window.requestAnimationFrame(() => scrollTo('research-panel'));
+    window.requestAnimationFrame(() => scrollTo('research-panel', `research-${id}`));
   };
 
   const openLibrary = (topic = '전체') => {
     setLibraryTopic(topic);
-    scrollTo('library');
+    scrollTo('library', topic === '전체' ? 'library' : `library-${encodeURIComponent(topic)}`);
+  };
+
+  const changeLibraryTopic = (topic: string) => {
+    setLibraryTopic(topic);
+    window.history.replaceState(null, '', topic === '전체' ? '#library' : `#library-${encodeURIComponent(topic)}`);
   };
 
   const openEverydayTopic = (id: EverydayTopic['id']) => {
@@ -323,9 +348,11 @@ export default function PublicGabaGuide() {
       if (navigator.share) {
         await navigator.share(shareData);
         setShareStatus('공유 창을 열었어요.');
-      } else {
+      } else if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(window.location.href);
         setShareStatus('링크를 복사했어요. 자유롭게 공유해 보세요.');
+      } else {
+        setShareStatus('주소창의 링크를 복사해 자유롭게 공유해 보세요.');
       }
     } catch {
       setShareStatus('공유를 취소했어요.');
@@ -333,8 +360,12 @@ export default function PublicGabaGuide() {
   };
 
   const copyMessage = async (message: string) => {
+    if (!navigator.clipboard?.writeText) {
+      setShareStatus('이 문장을 길게 눌러 복사해 보세요.');
+      return;
+    }
     try {
-      await navigator.clipboard?.writeText(message);
+      await navigator.clipboard.writeText(message);
       setShareStatus('문장을 복사했어요. 자유롭게 활용해 보세요.');
     } catch {
       setShareStatus('문장을 선택해 활용해 보세요.');
@@ -346,14 +377,14 @@ export default function PublicGabaGuide() {
       <a className="guide-skip" href="#guide-main">본문으로 이동</a>
       <header className="guide-header">
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈"><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a>
-        <nav className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
+        <nav id="guide-primary-navigation" className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
           <a href="#basics" onClick={() => setMenuOpen(false)}>GABA란</a>
           <a href="#sleep" onClick={() => setMenuOpen(false)}>수면</a>
           <a href="#research" onClick={() => setMenuOpen(false)}>연구 확장</a>
           <a href="#expert-videos" onClick={() => setMenuOpen(false)}>전문가 영상</a>
           <a href="#library" onClick={() => setMenuOpen(false)}>자료실</a>
         </nav>
-        <button type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+        <button type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         <button type="button" className="guide-header-share" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
       </header>
 
@@ -414,7 +445,7 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-research guide-story-section" id="research" aria-labelledby="research-heading">
           <div className="guide-container">
             <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">05 · RESEARCH EXPANSION</p><h2 id="research-heading">GABA 연구는 어디까지<br />확장되고 있을까요?</h2></div><p>수면에서 시작해<br />다섯 영역으로 넓어집니다.</p></div>
-            <div className="guide-research-layout"><div className="guide-research-grid guide-research-five" role="tablist" aria-label="GABA 연구 확장 주제">{researchTopics.map((topic) => <button type="button" role="tab" id={`research-tab-${topic.id}`} aria-controls="research-panel" aria-selected={selectedResearch === topic.id} tabIndex={selectedResearch === topic.id ? 0 : -1} key={topic.id} className={`guide-research-card ${selectedResearch === topic.id ? 'is-active' : ''}`} onClick={() => openResearch(topic.id)} onKeyDown={(event) => moveGuideTab(event, researchIds, selectedResearch, setSelectedResearch, 'research-tab')}><div className="guide-research-card-head"><span>{topic.title}</span><small>{topic.english}</small></div><EvidenceBadge tone={topic.tone} label={topic.label} /><ResearchGlyph id={topic.id} /><span className="guide-research-open">대표 연구 보기 <ArrowRight size={15} aria-hidden="true" /></span></button>)}</div><article className="guide-research-detail" id="research-panel" role="tabpanel" aria-labelledby={`research-tab-${activeResearch.id}`} aria-live="polite"><div className="guide-research-detail-top"><EvidenceBadge tone={activeResearch.tone} label={activeResearch.label} /><span>{activeResearch.english}</span></div><h3>{activeResearch.title} 연구가 보여주는 이야기</h3><p className="guide-research-summary">{activeResearch.summary}</p><dl><div><dt>무엇을 관찰하나요?</dt><dd>{activeResearch.observed}</dd></div><div><dt>어떤 흐름으로 읽나요?</dt><dd>{activeResearch.interpretation}</dd></div></dl><div className="guide-research-source"><span>대표 연구</span><a href={activeResearch.source.url} target="_blank" rel="noopener noreferrer">{activeResearch.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div><button type="button" className="guide-inline-link guide-research-library-link" onClick={() => openLibrary(libraryTopicByResearchId[activeResearch.id])}>{libraryTopicByResearchId[activeResearch.id] ? `${libraryTopicByResearchId[activeResearch.id]} 연구 카드에서 상세 조건 보기` : '자료실에서 관련 연구 보기'} <ArrowRight size={15} aria-hidden="true" /></button></article></div>
+            <div className="guide-research-layout"><div className="guide-research-grid guide-research-five" role="tablist" aria-label="GABA 연구 확장 주제">{researchTopics.map((topic) => <button type="button" role="tab" id={`research-tab-${topic.id}`} aria-controls="research-panel" aria-selected={selectedResearch === topic.id} tabIndex={selectedResearch === topic.id ? 0 : -1} key={topic.id} className={`guide-research-card ${selectedResearch === topic.id ? 'is-active' : ''}`} onClick={() => openResearch(topic.id)} onKeyDown={(event) => moveGuideTab(event, researchIds, selectedResearch, (id) => openResearch(id as ResearchTopic['id']), 'research-tab')}><div className="guide-research-card-head"><span>{topic.title}</span><small>{topic.english}</small></div><EvidenceBadge tone={topic.tone} label={topic.label} /><ResearchGlyph id={topic.id} /><span className="guide-research-open">대표 연구 보기 <ArrowRight size={15} aria-hidden="true" /></span></button>)}</div><article className="guide-research-detail" id="research-panel" role="tabpanel" aria-labelledby={`research-tab-${activeResearch.id}`} aria-live="polite"><div className="guide-research-detail-top"><EvidenceBadge tone={activeResearch.tone} label={activeResearch.label} /><span>{activeResearch.english}</span></div><h3>{activeResearch.title} 연구가 보여주는 이야기</h3><p className="guide-research-summary">{activeResearch.summary}</p><dl><div><dt>무엇을 관찰하나요?</dt><dd>{activeResearch.observed}</dd></div><div><dt>어떤 흐름으로 읽나요?</dt><dd>{activeResearch.interpretation}</dd></div></dl><div className="guide-research-source"><span>대표 연구</span><a href={activeResearch.source.url} target="_blank" rel="noopener noreferrer">{activeResearch.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div><button type="button" className="guide-inline-link guide-research-library-link" onClick={() => openLibrary(libraryTopicByResearchId[activeResearch.id])}>{libraryTopicByResearchId[activeResearch.id] ? `${libraryTopicByResearchId[activeResearch.id]} 연구 카드에서 상세 조건 보기` : '자료실에서 관련 연구 보기'} <ArrowRight size={15} aria-hidden="true" /></button></article></div>
             <p className="guide-research-reminder"><FlaskConical size={18} aria-hidden="true" /><span>각 카드에서는 한 문장으로 읽고, 자료실에서 참여자·측정 항목·관찰 기록을 더 자세히 살펴볼 수 있습니다.</span></p>
           </div>
         </section>
@@ -428,7 +459,7 @@ export default function PublicGabaGuide() {
         </section>
 
         <section className="guide-section guide-library guide-story-section" id="library" aria-labelledby="library-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">08 · RESEARCH LIBRARY</p><h2 id="library-heading">궁금한 연구를<br />직접 확인해 보세요</h2></div><p>필터로 좁히고,<br />세부 조건은 펼쳐보세요.</p></div><div className="guide-library-filters" aria-label="연구자료실 필터"><label>주제<select value={libraryTopic} onChange={(event) => setLibraryTopic(event.target.value)}><option>전체</option><option>수면</option><option>인지</option><option>성장호르몬</option><option>스트레스</option></select></label><label>대상<select value={libraryModel} onChange={(event) => setLibraryModel(event.target.value)}><option>전체</option><option>사람</option><option>동물</option><option>세포</option></select></label><label>연구 연도<select value={libraryYear} onChange={(event) => setLibraryYear(event.target.value)}><option>전체</option><option>2020년대</option><option>2010년대</option><option>2000년대</option></select></label><label>연구기관<select value={libraryInstitution} onChange={(event) => setLibraryInstitution(event.target.value)}><option>전체</option><option>일본 연구</option><option>사람 대상 연구</option><option>Pharma Foods 관계 저자</option><option>운동 생리 연구</option><option>사람 대상 관찰</option><option>검토 논문</option></select></label><label>측정 항목<select value={libraryMeasure} onChange={(event) => setLibraryMeasure(event.target.value)}><option>전체</option><option>수면 기록</option><option>잠드는 시간</option><option>뇌파·활력</option><option>성장호르몬</option><option>손끝 감각</option><option>스트레스·잠</option></select></label></div><p className="guide-library-count">현재 {filteredLibraryRows.length}개의 연구를 보고 있습니다.</p><div className="guide-library-list">{filteredLibraryRows.length ? filteredLibraryRows.map((row) => <article className="guide-library-card" key={row.id}><div className="guide-library-card-top"><span>{row.topic}</span><small>{row.year} · {row.model}</small></div><h3>{row.title}</h3><dl><div><dt>누구를 연구했는가</dt><dd>{row.participant}</dd></div><div><dt>무엇을 측정했는가</dt><dd>{row.measure}</dd></div><div><dt>무엇이 관찰됐는가</dt><dd>{row.observed}</dd></div></dl><details className="guide-library-details"><summary>세부 조건 펼쳐보기</summary><p>{row.detail}</p><p className="guide-library-source">{row.institution} · <a href={row.source.url} target="_blank" rel="noopener noreferrer">{row.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></details></article>) : <p className="guide-library-empty">선택한 조건의 연구를 준비하고 있습니다. 전체 필터로 돌아가 다른 연구를 살펴보세요.</p>}</div></div>
+          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">08 · RESEARCH LIBRARY</p><h2 id="library-heading">궁금한 연구를<br />직접 확인해 보세요</h2></div><p>필터로 좁히고,<br />세부 조건은 펼쳐보세요.</p></div><div className="guide-library-filters" aria-label="연구자료실 필터"><label>주제<select value={libraryTopic} onChange={(event) => changeLibraryTopic(event.target.value)}><option>전체</option><option>수면</option><option>인지</option><option>성장호르몬</option><option>스트레스</option></select></label><label>대상<select value={libraryModel} onChange={(event) => setLibraryModel(event.target.value)}><option>전체</option><option>사람</option><option>동물</option><option>세포</option></select></label><label>연구 연도<select value={libraryYear} onChange={(event) => setLibraryYear(event.target.value)}><option>전체</option><option>2020년대</option><option>2010년대</option><option>2000년대</option></select></label><label>연구기관<select value={libraryInstitution} onChange={(event) => setLibraryInstitution(event.target.value)}><option>전체</option><option>일본 연구</option><option>사람 대상 연구</option><option>Pharma Foods 관계 저자</option><option>운동 생리 연구</option><option>사람 대상 관찰</option><option>검토 논문</option></select></label><label>측정 항목<select value={libraryMeasure} onChange={(event) => setLibraryMeasure(event.target.value)}><option>전체</option><option>수면 기록</option><option>잠드는 시간</option><option>뇌파·활력</option><option>성장호르몬</option><option>손끝 감각</option><option>스트레스·잠</option></select></label></div><p className="guide-library-count" aria-live="polite">현재 {filteredLibraryRows.length}개의 연구를 보고 있습니다.</p><div className="guide-library-list">{filteredLibraryRows.length ? filteredLibraryRows.map((row) => <article className="guide-library-card" key={row.id}><div className="guide-library-card-top"><span>{row.topic}</span><small>{row.year} · {row.model}</small></div><h3>{row.title}</h3><dl><div><dt>누구를 연구했는가</dt><dd>{row.participant}</dd></div><div><dt>무엇을 측정했는가</dt><dd>{row.measure}</dd></div><div><dt>무엇이 관찰됐는가</dt><dd>{row.observed}</dd></div></dl><details className="guide-library-details"><summary>세부 조건 펼쳐보기</summary><p>{row.detail}</p><p className="guide-library-source">{row.institution} · <a href={row.source.url} target="_blank" rel="noopener noreferrer">{row.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></details></article>) : <p className="guide-library-empty">선택한 조건의 연구를 준비하고 있습니다. 전체 필터로 돌아가 다른 연구를 살펴보세요.</p>}</div></div>
         </section>
 
         <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">09 · SHARE THE STORY</p><h2 id="final-heading">GABA를 알면 수면만이 아니라<br />신경계의 조절을 이해하게 됩니다</h2><p className="guide-final-copy">GABA는 잠잘 때만 작용하는 물질이 아닙니다. 깨어 있는 동안에도 감정, 감각, 집중, 기억과 움직임에 관련된 신경회로를 조절합니다. 그리고 그 연구 영역은 피부, 근육, 성장호르몬, 면역과 성장으로 확장되고 있습니다.</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 3분 요약 공유하기 <ArrowRight size={17} aria-hidden="true" /></button><button type="button" className="guide-quiet-button" onClick={() => scrollTo('expert-videos')}><span className="guide-action-play" aria-hidden="true">▶</span> 전문가 영상 모아보기 <ArrowRight size={17} aria-hidden="true" /></button><button type="button" className="guide-quiet-button" onClick={() => scrollTo('library')}><BookOpen size={16} aria-hidden="true" /> 연구 원문 확인하기 <ArrowRight size={17} aria-hidden="true" /></button></div>{shareStatus ? <span className="guide-share-status guide-final-status" role="status">{shareStatus}</span> : null}<details className="guide-share-lines"><summary>사업자가 바로 설명할 수 있는 GABA 5문장 보기</summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
