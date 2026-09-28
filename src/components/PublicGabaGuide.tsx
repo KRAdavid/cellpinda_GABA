@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import {
   ArrowDown,
   ArrowDownRight,
@@ -20,6 +20,7 @@ import {
   Sprout,
   X,
 } from 'lucide-react';
+import gabaNaturalHero from '../assets/gaba-natural-hero.jpg';
 import './PublicGabaGuide.css';
 
 type EvidenceTone = 'established' | 'human' | 'early' | 'mixed';
@@ -530,7 +531,7 @@ export default function PublicGabaGuide() {
       </header>
 
       <main id="guide-main">
-        <section className="guide-hero guide-hero-story" id="top" aria-labelledby="guide-hero-heading">
+        <section className="guide-hero guide-hero-story" id="top" aria-labelledby="guide-hero-heading" style={{ '--guide-hero-image': `url(${gabaNaturalHero})` } as CSSProperties}>
           <div className="guide-hero-copy">
             <p className="guide-hero-kicker">1950 · THE FIRST CLUE</p>
             <h1 id="guide-hero-heading"><span>1950년,<br />뇌 속에서 한 신호가 발견됐습니다</span><em>그 이름은<span className="guide-mobile-break"><br /></span>{' '}GABA였습니다</em></h1>
@@ -543,7 +544,7 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-history guide-story-section" id="history" aria-labelledby="history-heading">
           <div className="guide-container">
-            <div className="guide-section-heading guide-history-heading"><div><p className="guide-section-number">01 · THE DISCOVERY</p><h2 id="history-heading">처음에는 이름도 없었습니다.<br />다만, 뇌 속에 있었습니다.</h2></div><p>한 줄의 발견이<br />75년의 연구를 열었습니다.</p></div>
+            <div className="guide-section-heading guide-history-heading"><div><p className="guide-section-number">01 · THE DISCOVERY</p><h2 id="history-heading">처음에는 이름도<span className="guide-mobile-break"><br /></span> 없었습니다.<br />다만, 뇌 속에 있었습니다.</h2></div><p>한 줄의 발견이<br />75년의 연구를 열었습니다.</p></div>
             <p className="guide-section-lead">유진 로버츠와 샘 프랭클은 당시의 분석 기술로 뇌 조직을 들여다보다가, 다른 조직에서는 거의 보이지 않는 물질을 발견했습니다. 그 물질이 바로 GABA였습니다.</p>
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <p className="guide-history-quote">작은 분자 하나의 발견은<br /><strong>뇌가 균형을 만드는 방식을 읽는 새로운 언어</strong>가 되었습니다.</p>
