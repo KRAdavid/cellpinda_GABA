@@ -506,3 +506,41 @@
   .guide-application-card,.guide-process-flow article,.guide-research-detail-inline{border-radius:18px}
 }
 @media(prefers-reduced-motion:reduce){.guide-header-share,.guide-application-card,.guide-process-flow article,.guide-video-feature{box-shadow:none}}
+
+/* v11 research scale: make the discovery line land with visible academic weight. */
+.guide-research-scale{position:relative;margin-top:48px;padding:35px 38px 31px;border-radius:25px;background:linear-gradient(135deg,#132f56 0%,#173f60 57%,#0b777d 100%);color:#fff;overflow:hidden;isolation:isolate;box-shadow:0 22px 42px rgba(19,47,86,.16)}
+.guide-research-scale:after{content:"GABA";position:absolute;z-index:-1;right:-22px;bottom:-48px;color:rgba(255,255,255,.065);font-size:176px;font-weight:900;letter-spacing:-.12em;line-height:1}
+.guide-research-scale-head{display:flex;align-items:end;justify-content:space-between;gap:28px;padding-bottom:25px;border-bottom:1px solid rgba(224,247,248,.2)}
+.guide-research-scale-head .guide-section-number{color:#89d2d1}
+.guide-research-scale-head h3{margin:10px 0 0;color:#fff;font-size:clamp(25px,3vw,38px);font-weight:850;letter-spacing:-.08em;line-height:1.15}
+.guide-research-scale-head>p{margin:0;color:#b9d7df;font-size:13px;line-height:1.65;letter-spacing:-.03em;text-align:right}
+.guide-research-scale-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:6px}
+.guide-research-scale-grid article{min-width:0;padding:25px 24px 19px;border-left:1px solid rgba(224,247,248,.18)}
+.guide-research-scale-grid article:first-child{padding-left:0;border-left:0}
+.guide-research-scale-grid article:last-child{padding-right:0}
+.guide-research-scale-grid strong{display:block;color:#96e3df;font-size:clamp(40px,5vw,70px);font-weight:850;letter-spacing:-.075em;line-height:.96;font-variant-numeric:tabular-nums}
+.guide-research-scale-grid h4{margin:18px 0 7px;color:#fff;font-size:15px;font-weight:850;letter-spacing:-.045em;line-height:1.4}
+.guide-research-scale-grid p{margin:0;color:#b9d7df;font-size:11px;line-height:1.6;letter-spacing:-.03em}
+.guide-research-scale-grid a{display:inline-flex;align-items:center;gap:4px;margin-top:12px;color:#89d2d1;font-size:11px;font-weight:800;text-decoration:none}
+.guide-research-scale-grid a:hover{text-decoration:underline;text-underline-offset:4px}
+.guide-research-scale-caption{margin:4px 0 0;color:#9fc1ce;font-size:10px;line-height:1.65;letter-spacing:-.025em}
+.guide-research-scale .guide-history-quote{margin:27px 0 0;padding:26px 0 1px;border-top:1px solid rgba(224,247,248,.2);border-left:0;background:transparent;color:#b9d7df;font-size:clamp(18px,2.4vw,27px);line-height:1.55;letter-spacing:-.065em}
+.guide-research-scale .guide-history-quote strong{color:#fff;font-weight:850}
+@media(max-width:700px){
+  .guide-research-scale{margin-top:34px;padding:27px 20px 24px;border-radius:21px}
+  .guide-research-scale:after{right:-21px;bottom:-25px;font-size:115px}
+  .guide-research-scale-head{display:block;padding-bottom:20px}
+  .guide-research-scale-head h3{font-size:27px;line-height:1.18}
+  .guide-research-scale-head>p{margin-top:11px;font-size:13px;text-align:left}
+  .guide-research-scale-grid{display:block;margin-top:0}
+  .guide-research-scale-grid article,.guide-research-scale-grid article:first-child,.guide-research-scale-grid article:last-child{padding:20px 0 17px;border-top:1px solid rgba(224,247,248,.18);border-left:0}
+  .guide-research-scale-grid article:first-child{border-top:0}
+  .guide-research-scale-grid strong{font-size:52px}
+  .guide-research-scale-grid h4{display:inline-block;margin:11px 8px 0 0;font-size:16px}
+  .guide-research-scale-grid p{display:inline;font-size:11px}
+  .guide-research-scale-grid a{display:flex;width:max-content;margin-top:8px}
+  .guide-research-scale-caption{margin-top:5px;font-size:10px;line-height:1.65}
+  .guide-research-scale .guide-history-quote{margin-top:21px;padding-top:21px;font-size:20px;line-height:1.55}
+  .guide-history-heading>div,.guide-history-item,.guide-history-copy{min-width:0;max-width:100%}
+  .guide-history-heading h2{max-width:100%;min-width:0;word-break:keep-all;overflow-wrap:anywhere}
+}
