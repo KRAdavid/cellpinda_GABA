@@ -201,3 +201,71 @@
   .guide-expert-thread{align-items:flex-start;gap:8px 11px}
   .guide-reading-note{padding:28px 0}
 }
+
+/* v6 discovery-led opening: history -> academic map -> applications. */
+.guide-hero-story{background:radial-gradient(circle at 78% 38%,#e9faf9 0%,rgba(233,250,249,.42) 18%,transparent 44%),linear-gradient(112deg,#fff 0%,#fff 45%,#f3fbfc 100%)}
+.guide-hero-kicker{margin:0;color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.22em;line-height:1.4}
+.guide-hero-story h1 span{font-size:.9em}
+.guide-hero-story h1 em{font-size:1.02em}
+.guide-history{background:#f7fbfd}
+.guide-history-heading{margin-bottom:22px}
+.guide-history .guide-section-lead{max-width:66ch}
+.guide-history-timeline{display:grid;gap:0;max-width:900px;margin-top:42px}
+.guide-history-item{display:grid;grid-template-columns:112px minmax(0,1fr);gap:28px;min-height:148px}
+.guide-history-marker{position:relative;color:var(--guide-teal-dark);font-size:16px;font-weight:900;letter-spacing:-.04em}
+.guide-history-marker i{position:absolute;top:32px;left:8px;width:1px;height:116px;background:#bfe1e3}
+.guide-history-copy{padding:0 0 34px;border-bottom:1px solid #dbecef}
+.guide-history-item:last-child .guide-history-copy{border-bottom:0}
+.guide-history-copy h3{margin:0 0 11px;font-size:23px;letter-spacing:-.06em;line-height:1.35}
+.guide-history-copy p{max-width:59ch;margin:0;color:#637d91;font-size:15px;line-height:1.82;letter-spacing:-.035em}
+.guide-history-copy .guide-study-source{margin-top:13px}
+.guide-history-quote{max-width:740px;margin:27px 0 0;padding:22px 24px;border-left:3px solid var(--guide-teal);background:#fff;color:#7890a1;font-size:16px;line-height:1.75;letter-spacing:-.04em}
+.guide-history-quote strong{color:var(--guide-ink)}
+.guide-academic{background:#fff}
+.guide-academic-map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:36px}
+.guide-academic-map article{display:flex;flex-direction:column;min-height:196px;padding:20px 18px;border-top:3px solid #a8dfe0;background:#f7fbfc}
+.guide-academic-map article:nth-child(2){border-top-color:#79c7cc}.guide-academic-map article:nth-child(3){border-top-color:#4fb0b9}.guide-academic-map article:nth-child(4){border-top-color:#2c9ba6}.guide-academic-map article:nth-child(5){border-top-color:#157f8b}
+.guide-academic-map article>span{color:#91acb8;font-size:10px;font-weight:900;letter-spacing:.12em}
+.guide-academic-map h3{margin:28px 0 9px;color:var(--guide-ink);font-size:18px;letter-spacing:-.06em;line-height:1.35}
+.guide-academic-map p{margin:0;color:#6c8598;font-size:13px;line-height:1.72;letter-spacing:-.035em}
+.guide-academic-caption{display:flex;align-items:center;gap:8px;margin:20px 0 0;color:var(--guide-teal-dark);font-size:13px;font-weight:800;letter-spacing:-.03em}
+.guide-applications{background:#f7fbfd}
+.guide-application-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:36px}
+.guide-application-card{display:flex;flex-direction:column;min-height:360px;padding:25px 23px;border:1px solid #dbecef;border-radius:16px;background:#fff}
+.guide-application-top{display:flex;align-items:center;gap:10px;color:#829aa8;font-size:10px;font-weight:900;letter-spacing:.12em}
+.guide-application-icon{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:#e7f7f7;color:var(--guide-teal-dark)}
+.guide-application-icon svg{width:20px;height:20px}
+.guide-application-card h3{margin:25px 0 10px;color:var(--guide-ink);font-size:23px;letter-spacing:-.07em}
+.guide-application-card>p{margin:0;color:#647e91;font-size:14px;line-height:1.8;letter-spacing:-.035em}
+.guide-application-card>strong{margin-top:17px;color:var(--guide-teal-dark);font-size:14px;line-height:1.65;letter-spacing:-.04em}
+.guide-application-sources{display:grid;gap:8px;margin-top:auto;padding-top:22px;border-top:1px solid #e0edf1}
+.guide-application-sources>span{color:#8aa3b1;font-size:11px;font-weight:850}
+.guide-application-sources a{display:flex;align-items:flex-start;gap:5px;color:var(--guide-teal-dark);font-size:12px;font-weight:800;line-height:1.5;text-decoration:none}
+.guide-application-sources a:hover{text-decoration:underline;text-underline-offset:3px}
+@media(max-width:1100px){
+  .guide-academic-map{grid-template-columns:repeat(3,1fr)}
+  .guide-application-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .guide-hero-story{background:#fff}
+  .guide-hero-kicker{font-size:10px}
+  .guide-hero-story h1 span{font-size:.92em}
+  .guide-hero-story h1 em{font-size:1em}
+  .guide-history-item{grid-template-columns:67px minmax(0,1fr);gap:14px;min-height:0}
+  .guide-history-marker{font-size:13px}
+  .guide-history-marker i{left:5px;top:27px;height:calc(100% - 5px)}
+  .guide-history-copy{padding-bottom:30px}
+  .guide-history-copy h3{font-size:21px}
+  .guide-history-copy p{font-size:15px;line-height:1.75}
+  .guide-history-quote{padding:18px 19px;font-size:15px}
+  .guide-academic-map{grid-template-columns:1fr;gap:8px;margin-top:28px}
+  .guide-academic-map article{min-height:0;padding:18px 17px}
+  .guide-academic-map h3{margin:14px 0 6px;font-size:19px}
+  .guide-academic-map p{font-size:15px;line-height:1.7}
+  .guide-academic-caption{align-items:flex-start;font-size:13px;line-height:1.6}
+  .guide-application-grid{grid-template-columns:1fr;gap:10px;margin-top:28px}
+  .guide-application-card{min-height:0;padding:22px 20px}
+  .guide-application-card h3{margin-top:20px;font-size:22px}
+  .guide-application-card>p{font-size:15px;line-height:1.75}
+  .guide-application-sources{margin-top:22px}
+}

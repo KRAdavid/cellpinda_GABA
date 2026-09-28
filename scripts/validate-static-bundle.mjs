@@ -68,8 +68,8 @@ assert.match(notFoundHtml, /<meta[^>]+name="robots"[^>]+content="noindex, nofoll
 assert.ok(!/<link[^>]+rel="canonical"|<meta[^>]+property="og:(?:url|title|image)"/i.test(notFoundHtml), '404 route must not reuse public metadata');
 
 const rootHtml = await readFile(resolve(outputDirectory, 'index.html'), 'utf8');
-assert.ok(rootHtml.includes('수면에서 인지, 피부, 근육과 성장 연구까지') && rootHtml.includes('이제 GABA를 알아야 합니다'), 'root fallback must identify the consumer GABA story');
-assert.ok(rootHtml.includes('읽는 순서') && rootHtml.includes('GABA란') && rootHtml.includes('수면 연구') && rootHtml.includes('논문 출처'), 'root fallback must expose the continuous reading order');
+assert.ok(rootHtml.includes('1950년, 뇌 속에서 한 신호가 발견됐습니다') && rootHtml.includes('그 이름은 GABA였습니다'), 'root fallback must identify the discovery-led consumer GABA story');
+assert.ok(rootHtml.includes('읽는 순서') && rootHtml.includes('발견의 순간') && rootHtml.includes('연구 지도') && rootHtml.includes('국내외 활용 사례') && rootHtml.includes('논문 출처'), 'root fallback must expose the discovery-led reading order');
 if (outputDirectory.endsWith('dist-pages')) {
   const publicPath = new URL(manifest.publicSiteUrl).pathname.replace(/\/$/, '');
   const assetPrefix = publicPath ? `${publicPath}/` : '/';

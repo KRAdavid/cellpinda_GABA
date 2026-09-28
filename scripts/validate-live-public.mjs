@@ -210,7 +210,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     validatePublicMetadata(productSharePageText, '/products/', `${base}/products/`);
     validatePublicMetadata(researchPageText, '/research/', `${base}/research/`);
     validatePublicMetadata(guidePageText, '/guide/', `${base}/guide/`);
-    assert.match(guidePageText, /GABA, 우리 몸에서는 어떤 일을 할까요\?/,'live guide route must identify its guide content');
+    assert.match(guidePageText, /1950년, 뇌 속에서 발견된 신호/,'live guide route must identify its discovery-led guide content');
     assert.match(guidePageText, /view=guide/, 'live guide route must hand off to its interactive guide');
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
     assert.match(researchPageText, /property="og:title" content="사람을 대상으로 한 GABA 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
@@ -338,7 +338,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
       assert.ok(!/제한적|결과가 일치하지|정량 메타분석|이상사례|유의하지 않음/i.test(sharePage), `share page ${id} contains blocked research copy`);
     }
     assert.match(pageText, /Cellpinda|GABA/i, 'public page does not contain the site shell');
-    assert.ok(pageText.includes('수면에서 인지, 피부, 근육과 성장 연구까지') && pageText.includes('논문 출처'), 'live static fallback must expose the continuous consumer GABA story');
+    assert.ok(pageText.includes('1950년, 뇌 속에서 한 신호가 발견됐습니다') && pageText.includes('논문 출처'), 'live static fallback must expose the discovery-led consumer GABA story');
     assert.ok(!pageText.includes(approvedSmartStoreUrl) && !pageText.includes(approvedSmartStoreReviewUrl), 'live root story must not expose product or review CTAs');
     assert.equal(content.products.length, 1, 'live export must contain one product');
     assert.equal(content.products[0].id, 'gaba1500', 'live export product must be gaba1500');

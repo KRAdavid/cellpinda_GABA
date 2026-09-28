@@ -342,9 +342,13 @@ requireMatch(teaser, /href="#gaba-research-highlights"[\s\S]*GABA 연구 쉽게 
 if (/href="#brain-load-evidence"[\s\S]*GABA 연구 쉽게 보기/.test(teaser)) fail('teaser GABA research action must not land on the separate general health evidence section');
 if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must not promise an unverified duration');
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
-requireMatch(indexHtml, /수면에서 인지, 피부, 근육과 성장 연구까지[\s\S]*이제 GABA를 알아야 합니다/, 'static no-script fallback must use the consumer story title');
-requireMatch(indexHtml, /잠들고, 집중하고, 움직이는 순간마다[\s\S]*GABA입니다\./, 'static no-script fallback must explain why GABA matters in everyday language');
-requireMatch(indexHtml, /읽는 순서[\s\S]*GABA란[\s\S]*수면 연구[\s\S]*논문 출처/, 'static no-script fallback must preserve the continuous reading order');
+requireMatch(indexHtml, /1950년, 뇌 속에서 한 신호가 발견됐습니다[\s\S]*그 이름은 GABA였습니다/, 'static no-script fallback must use the discovery-led story title');
+requireMatch(indexHtml, /유진 로버츠와 샘 프랭클[\s\S]*GABA/, 'static no-script fallback must name the discovery researchers');
+requireMatch(indexHtml, /읽는 순서[\s\S]*발견의 순간[\s\S]*연구 지도[\s\S]*국내외 활용 사례[\s\S]*논문 출처/, 'static no-script fallback must preserve the discovery-led reading order');
+requireMatch(publicGuide, /historyMilestones[\s\S]*Roberts & Frankel[\s\S]*PMID 14794689/, 'public GABA guide must lead with the 1950 Roberts and Frankel discovery');
+requireMatch(publicGuide, /academicFields[\s\S]*신경계의 균형[\s\S]*몸 전체로 넓어지는 연구/, 'public GABA guide must expose the broad academic research map');
+requireMatch(publicGuide, /applicationCases[\s\S]*발효식품과 유산균[\s\S]*발아현미와 기능성 식품[\s\S]*곡류·빵·유제품·음료/, 'public GABA guide must expose Korea, Japan and global application examples');
+if (/셀핀다 가바|셀핀다 완제품|스마트스토어/.test(publicGuide)) fail('public GABA guide must remain product-free');
 if (/https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202|REVIEW_DIALOG|스마트스토어/.test(indexHtml)) fail('root public story must not expose product or review CTAs');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
