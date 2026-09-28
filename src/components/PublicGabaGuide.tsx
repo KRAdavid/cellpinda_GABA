@@ -72,7 +72,7 @@ const researchTopics: ResearchTopic[] = [
     tone: 'human',
     label: '사람 63명 · 무작위 교차시험',
     study: '건강한 성인 63명이 GABA 100mg 또는 위약을 먹고 정신적 부담이 있는 과제를 수행한 무작위·위약 대조 교차시험입니다.',
-    finding: 'GABA를 먹은 뒤 30분에는 위약보다 과제 중 감소하던 뇌파 알파파·베타파가 덜 감소했고, 기분 상태 점수도 같은 방향으로 나타났습니다.',
+    finding: 'GABA를 먹고 30분 뒤, 머리를 많이 쓰는 과제에서 뇌파 변화와 활력 설문 점수가 비교 조건보다 덜 줄어든 것으로 기록됐습니다.',
     interpretation: '이 연구가 직접 본 결과는 기억력 향상이나 치매 개선이 아니라, 정신적 스트레스 상황에서의 뇌파와 기분 변화입니다.',
     source: { label: 'Yoto et al. 2012 · PMID 22203366', url: 'https://pubmed.ncbi.nlm.nih.gov/22203366/' },
   },
