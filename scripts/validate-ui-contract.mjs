@@ -53,6 +53,8 @@ const approvedSmartStoreReviewUrl = `${approvedSmartStoreUrl}#REVIEW_DIALOG`;
 
 requireMatch(publicGuide, /<h2 id="expert-heading">영상으로 확인하세요<\/h2>/, 'the public guide must use direct video-first language');
 requireMatch(publicGuide, /guide-video-board[\s\S]*원문으로 확인하세요/, 'the public guide must show videos in a board-style gallery with source links');
+requireMatch(publicGuide, /여에스더의 GABA 소개[\s\S]*roEtojyk9_0/, 'the public guide must place the requested Yesuder GABA introduction video first');
+if (publicGuide.indexOf('여에스더의 GABA 소개') > publicGuide.indexOf('잠들기 전 GABA 신호')) fail('the requested GABA introduction video must appear before the topic cards');
 if (/영상은 다음 순서로 이어집니다|guide-expert-thread/.test(publicGuide)) fail('the public guide must not route videos through a sequential next-video thread');
 requireMatch(publicGuideStyles, /guide-video-board[\s\S]*grid-template-columns:repeat\(3,1fr\)/, 'the public guide video board must use a gallery grid');
 
