@@ -2,7 +2,7 @@ import {readFile, writeFile} from 'node:fs/promises';
 
 const RESULT_STATES = new Set(['success', 'failure', 'cancelled', 'skipped', 'unknown']);
 const SHA_PATTERN = /^[a-f0-9]{40}$/;
-const DEFAULT_PUBLIC_SITE_URL = 'https://kradavid.github.io/cellpinda_GABA';
+const DEFAULT_PUBLIC_SITE_URL = 'https://kradavid.github.io/gaba_info';
 
 function optionValue(name) {
   const index = process.argv.indexOf(name);

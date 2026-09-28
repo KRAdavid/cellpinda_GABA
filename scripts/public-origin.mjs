@@ -1,4 +1,4 @@
-export const DEFAULT_PUBLIC_SITE_URL = 'https://kradavid.github.io/cellpinda_GABA';
+export const DEFAULT_PUBLIC_SITE_URL = 'https://kradavid.github.io/gaba_info';
 
 export function normalizePublicSiteUrl(value = DEFAULT_PUBLIC_SITE_URL) {
   const raw = String(value ?? '').trim();

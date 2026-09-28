@@ -21,7 +21,7 @@
 | 기계 검증 | `pnpm run validate:goal` |
 | 다음 작업 조회 | `pnpm run goal:next` |
 | 작업 그래프 | `data/task-graph.json` |
-| 공개 배포 | [GitHub Pages](https://kradavid.github.io/cellpinda_GABA/) |
+| 공개 배포 | [GitHub Pages](https://kradavid.github.io/gaba_info/) |
 
 ## 성공 기준과 현재 판정
 

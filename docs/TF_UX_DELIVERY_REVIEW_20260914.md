@@ -1,7 +1,7 @@
 # UX·기술·배포 TF 인계 기록
 
 기준일: 2026-09-14  
-대상: `KRAdavid/cellpinda_GABA` 공개 사이트와 로컬 운영 화면  
+대상: `KRAdavid/gaba_info` 공개 사이트와 로컬 운영 화면
 목적: 한 문장 목표에서 실제 공개 사이트 완성까지, 작업 소유권과 검증 순서를 고정한다.
 
 ## 현재 실행 경로
@@ -19,7 +19,7 @@ pnpm run build
 
 GitHub Actions main push
   ├─ verify: install → sync → contract/test/build/preflight
-  ├─ GitHub Pages: /cellpinda_GABA/
+  ├─ GitHub Pages: /gaba_info/
   └─ smoke-live: 공개 HTML·데이터·자산 HTTP 확인
 ```
 

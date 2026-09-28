@@ -63,9 +63,9 @@ jobs:
         run: pnpm run validate:tf-pulse-freshness
       - name: Build GitHub Pages bundle
         env:
-          VITE_BASE_PATH: /cellpinda_GABA/
+          VITE_BASE_PATH: /gaba_info/
           VITE_KAKAO_JS_KEY: ${{ vars.KAKAO_JS_KEY }}
-          PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
+          PUBLIC_SITE_URL: https://kradavid.github.io/gaba_info
           RELEASE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
           RELEASE_RUNTIME_MODE: static
         run: |
@@ -128,7 +128,7 @@ jobs:
           package-manager-cache: false
       - name: Verify live public export
         env:
-          PAGES_PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
+          PAGES_PUBLIC_SITE_URL: https://kradavid.github.io/gaba_info
           WORKER_PUBLIC_SITE_URL: ${{ vars.CLOUDFLARE_WORKER_URL }}
           EXPECTED_RELEASE_SHA: ${{ github.sha }}
           WORKER_ENABLED: ${{ needs.worker-readiness.outputs.enabled }}
@@ -332,7 +332,7 @@ jobs:
           GITHUB_SERVER_URL: ${{ github.server_url }}
           CANDIDATE_SHA: ${{ github.sha }}
           PREVIOUS_CANDIDATE_SHA: ${{ github.event.before }}
-          PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
+          PUBLIC_SITE_URL: https://kradavid.github.io/gaba_info
           PAGES_RESULT: ${{ needs.deploy-pages.result }}
           SMOKE_RESULT: ${{ needs.smoke-live.result }}
           WORKER_RESULT: ${{ needs.deploy-worker.result }}

@@ -19,7 +19,7 @@ function runGenerator(env, history = []) {
   const result = spawnSync(process.execPath, [generator, '--out', output, '--deployment-history', historyFile], {
     cwd: root,
     encoding: 'utf8',
-    env: {...process.env, ...env, CANDIDATE_SHA: candidateSha, GITHUB_REPOSITORY: 'KRAdavid/cellpinda_GABA', GITHUB_RUN_ID: '123', PUBLIC_SITE_URL: 'https://kradavid.github.io/cellpinda_GABA'},
+    env: {...process.env, ...env, CANDIDATE_SHA: candidateSha, GITHUB_REPOSITORY: 'KRAdavid/gaba_info', GITHUB_RUN_ID: '123', PUBLIC_SITE_URL: 'https://kradavid.github.io/gaba_info'},
   });
   const packet = result.status === 0 ? JSON.parse(readFileSync(output, 'utf8')) : null;
   return {directory, output, result, packet};
@@ -35,7 +35,7 @@ const successfulDeployment = {
   environment: 'github-pages',
   created_at: '2026-09-20T01:00:00.000Z',
   updated_at: '2026-09-20T01:01:00.000Z',
-  statuses: [{state: 'success', created_at: '2026-09-20T01:01:00.000Z', environment_url: 'https://kradavid.github.io/cellpinda_GABA'}],
+  statuses: [{state: 'success', created_at: '2026-09-20T01:01:00.000Z', environment_url: 'https://kradavid.github.io/gaba_info'}],
 };
 
 test('generator creates an auditable operator recovery packet from failed smoke', () => {

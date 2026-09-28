@@ -8,7 +8,7 @@
 
 ```sh
 gh run list --workflow tf-pulse.yml --event schedule --limit 5
-gh api repos/KRAdavid/cellpinda_GABA/branches/automation%2Ftf-pulse-heartbeat
+gh api repos/KRAdavid/gaba_info/branches/automation%2Ftf-pulse-heartbeat
 gh pr list --state open --base main --head automation/tf-pulse-heartbeat
 ```
 

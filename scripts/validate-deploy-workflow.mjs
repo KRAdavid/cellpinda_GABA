@@ -56,7 +56,7 @@ assert.match(workflow, /name: Require fresh TF pulse[\s\S]*if: github\.event_nam
 assert.match(workflow, /Validate active Goal Contract[\s\S]*Validate external gate evidence[\s\S]*pnpm run validate:external-gate-evidence/, 'release verification must require field-level evidence before an external gate can be marked DONE');
 assert.match(workflow, /release-status:[\s\S]*Install pinned package manager[\s\S]*pnpm@11\.19\.0[\s\S]*pnpm run validate:release-status/, 'release status must install the pinned package manager before using the package script');
 assert.match(workflow, /name: cellpinda-gaba-\$\{\{ github\.sha \}\}[\s\S]*path:\s+\|[\s\S]*dist\/\s+[\s\S]*dist-pages\/\s+[\s\S]*worker-build\//, 'release evidence must retain the exact Pages bundle alongside the Worker and production bundles');
-assert.match(workflow, /PAGES_PUBLIC_SITE_URL: https:\/\/kradavid\.github\.io\/cellpinda_GABA[\s\S]*WORKER_PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}/, 'live smoke must keep Pages and Worker public origins explicit');
+assert.match(workflow, /PAGES_PUBLIC_SITE_URL: https:\/\/kradavid\.github\.io\/gaba_info[\s\S]*WORKER_PUBLIC_SITE_URL: \$\{\{ vars\.CLOUDFLARE_WORKER_URL \}\}/, 'live smoke must keep Pages and Worker public origins explicit');
 assert.match(workflow, /PUBLIC_SITE_URL="\$WORKER_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=worker/, 'full-release smoke must verify the Worker public origin');
 assert.match(workflow, /PUBLIC_SITE_URL="\$PAGES_PUBLIC_SITE_URL" PUBLIC_RUNTIME_MODE=static/, 'static-only smoke must verify the Pages public origin');
 assert.match(workflow, /EXPECTED_RELEASE_SHA: \$\{\{ github\.sha \}\}[\s\S]*validate-live-public\.mjs/, 'live smoke must compare the published release manifest with the candidate SHA');

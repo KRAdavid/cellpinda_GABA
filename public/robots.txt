@@ -1,10 +1,10 @@
 User-agent: *
 Allow: /
-Disallow: /cellpinda_GABA/admin
-Disallow: /cellpinda_GABA/ops
-Disallow: /cellpinda_GABA/account
-Disallow: /cellpinda_GABA/?view=account
-Disallow: /cellpinda_GABA/?view=admin
-Disallow: /cellpinda_GABA/?view=ops
+Disallow: /gaba_info/admin
+Disallow: /gaba_info/ops
+Disallow: /gaba_info/account
+Disallow: /gaba_info/?view=account
+Disallow: /gaba_info/?view=admin
+Disallow: /gaba_info/?view=ops
 
-Sitemap: https://kradavid.github.io/cellpinda_GABA/sitemap.xml
+Sitemap: https://kradavid.github.io/gaba_info/sitemap.xml

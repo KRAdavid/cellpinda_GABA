@@ -34,7 +34,7 @@ jobs:
         id: report
         continue-on-error: true
         env:
-          PUBLIC_SITE_URL: https://kradavid.github.io/cellpinda_GABA
+          PUBLIC_SITE_URL: https://kradavid.github.io/gaba_info
         run: node scripts/generate-daily-status-report.mjs --out daily-status.json
       - name: Upload daily status artifact
         if: always()

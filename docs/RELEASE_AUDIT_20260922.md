@@ -1,6 +1,6 @@
 # 공개 배포 감사 기준 — 2026-09-22 (라이브 원천 포인터)
 
-이 문서는 2026년 9월 22일 KST에 확인한 공개 배포 감사 기준을 보존한다. PR [#198](https://github.com/KRAdavid/cellpinda_GABA/pull/198)은 일반 건강 연구와 GABA 섭취 연구를 소비자 화면에서 분리하고 연구 경계 문구를 회귀 검증에 고정했다. 라이브 SHA·manifest 생성 시각·최신 배포 run은 문서에 복제하지 않는다. 문서 전용 병합도 main SHA를 바꾸기 때문에, 현재 판정은 항상 라이브 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)의 `candidateSha`·`generatedAt`과 [최신 성공 Actions 실행](https://github.com/KRAdavid/cellpinda_GABA/actions)을 직접 확인한다.
+이 문서는 2026년 9월 22일 KST에 확인한 공개 배포 감사 기준을 보존한다. PR [#198](https://github.com/KRAdavid/gaba_info/pull/198)은 일반 건강 연구와 GABA 섭취 연구를 소비자 화면에서 분리하고 연구 경계 문구를 회귀 검증에 고정했다. 라이브 SHA·manifest 생성 시각·최신 배포 run은 문서에 복제하지 않는다. 문서 전용 병합도 main SHA를 바꾸기 때문에, 현재 판정은 항상 라이브 [release-manifest.json](https://kradavid.github.io/gaba_info/release-manifest.json)의 `candidateSha`·`generatedAt`과 [최신 성공 Actions 실행](https://github.com/KRAdavid/gaba_info/actions)을 직접 확인한다.
 
 ## 판정
 
@@ -12,14 +12,14 @@
 
 | 항목 | 확인값 |
 | --- | --- |
-| 공개 주소 | `https://kradavid.github.io/cellpinda_GABA` |
+| 공개 주소 | `https://kradavid.github.io/gaba_info` |
 | 라이브 candidate SHA | 라이브 `release-manifest.json`의 `candidateSha` |
 | manifest 생성 시각 | 라이브 `release-manifest.json`의 `generatedAt` |
 | 실행 모드 | `static` |
 | 공개 경로 | 10개 |
 | 공개 주장·연구·제품·후기 | 12개 · 6건 · 1개 · 1개 |
 | 티저 | `HOLD`, 공개 URL 없음 |
-| 최근 배포 | main 기준 최신 성공 [Actions 실행](https://github.com/KRAdavid/cellpinda_GABA/actions) |
+| 최근 배포 | main 기준 최신 성공 [Actions 실행](https://github.com/KRAdavid/gaba_info/actions) |
 
 PR #198의 코드 배포 시점에는 candidate SHA `ae4ed2783f2bfc9c8ed6411602f0381e1d4f6cb1`, manifest 생성 시각 `2026-09-22T01:29:21.088Z`, 배포 run `35675887961`이 기록됐다. 이 값은 코드 변경 시점의 역사 스냅샷이며 현재값으로 재사용하지 않는다. PR #198·#199 모두 작성자·병합자가 `KRAdavid`, 독립 리뷰 0건·`REVIEW_REQUIRED`인 관리자 병합이며, 현재 [CODEOWNERS](../.github/CODEOWNERS)는 단일 계정만 지정한다. 이 병합은 독립 Code Owner 승인을 의미하지 않는다.
 
@@ -36,7 +36,7 @@ PR #198의 코드 배포 시점에는 candidate SHA `ae4ed2783f2bfc9c8ed6411602f
 - 결과 화면 바로 아래에 `뇌컨디션 확인 챌린지 해보기`가 노출되고, 클릭하면 챌린지 제목으로 포커스가 이동한다.
 - Powers 연구 카드는 `GABA 3g을 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 연구`로 표시된다.
 - 카드의 범위 안내는 `성장·근육 발달 효과를 확인한 연구가 아니며`, `3g은 셀핀다 제품 섭취량의 근거가 아니다`라고 연구 조건과 제품 정보를 분리한다.
-- PR [#171](https://github.com/KRAdavid/cellpinda_GABA/pull/171)에서 공개 연구 claim과 마스터 인덱스의 소비자 문구·범위·시각화 필드를 전수 비교하도록 보강했다. 누락·중복·필드 드리프트가 있으면 공개 export와 라이브 smoke가 실패한다.
+- PR [#171](https://github.com/KRAdavid/gaba_info/pull/171)에서 공개 연구 claim과 마스터 인덱스의 소비자 문구·범위·시각화 필드를 전수 비교하도록 보강했다. 누락·중복·필드 드리프트가 있으면 공개 export와 라이브 smoke가 실패한다.
 - 제품 구매와 후기는 지정된 Smart Store 상품·후기 주소로만 연결된다.
 - 티저는 승인 전 `HOLD` 상태이며 외부 영상 iframe이나 공개 URL을 만들지 않는다.
 
@@ -90,7 +90,7 @@ git diff --check
 
 ## 2026-09-22 모바일 첫 질문 노출 보정 및 라이브 재검증
 
-PR [#204](https://github.com/KRAdavid/cellpinda_GABA/pull/204)에서 390px 화면에서 1분 체크를 시작할 때 질문 제목만 화면에 맞고 첫 선택지가 아래로 밀리던 문제를 수정했다. 질문 제목을 모바일 헤더 아래에 맞춘 뒤 첫 선택지가 함께 보이도록 포커스 스크롤 보정값을 적용했다.
+PR [#204](https://github.com/KRAdavid/gaba_info/pull/204)에서 390px 화면에서 1분 체크를 시작할 때 질문 제목만 화면에 맞고 첫 선택지가 아래로 밀리던 문제를 수정했다. 질문 제목을 모바일 헤더 아래에 맞춘 뒤 첫 선택지가 함께 보이도록 포커스 스크롤 보정값을 적용했다.
 
 병합·배포 후 다음을 다시 확인했다.
 
@@ -99,7 +99,7 @@ PR [#204](https://github.com/KRAdavid/cellpinda_GABA/pull/204)에서 390px 화�
 - 데스크톱 1440×900: 질문 상단 `87.9px`, 첫 선택지 상단 `254.3px`, 헤더 하단 `88px`
 - 라이브 `validate:live-public`: HTTP 200, provenance `matched`, 제품 1개, 연구 6건, 공유 경로 6개, 750 제거, Smart Store 단일 목적지
 - 15개 주요 화면 감리: 가로 넘침·콘솔 오류·이름 없는 컨트롤·alt 누락 각 0건
-- 필수 PR 검사 `release-verify`·`site-quality-verify` 및 Pages 배포 run [#35681874175](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35681874175) 성공
+- 필수 PR 검사 `release-verify`·`site-quality-verify` 및 Pages 배포 run [#35681874175](https://github.com/KRAdavid/gaba_info/actions/runs/35681874175) 성공
 
 이 변경은 모바일 탐색 품질만 보정했으며, 연구·제품 효능 범위나 B2·B3·B4·C2·E1 외부 승인 상태를 변경하지 않았다.
 
@@ -116,6 +116,6 @@ PR [#204](https://github.com/KRAdavid/cellpinda_GABA/pull/204)에서 390px 화�
 
 ## PR #207 병합·복구 기록
 
-[PR #207](https://github.com/KRAdavid/cellpinda_GABA/pull/207)은 자동화 감시 계약을 추가하고 필수 검사 `release-verify`·`site-quality-verify`를 통과한 뒤 관리자 병합으로 반영했다. PR 작성자와 인증 계정이 같은 저장소 정책상 독립 Code Owner 승인을 만들 수 없었기 때문에, 병합 시점에만 main 보호 규칙을 일시 해제하고 병합 직후 원래 설정을 PUT으로 복구했다. 현재 보호 규칙은 필수 검사 2개, Code Owner 승인 1명, 마지막 push 승인, 관리자 강제 적용, 선형 이력, 대화 해결을 다시 요구한다.
+[PR #207](https://github.com/KRAdavid/gaba_info/pull/207)은 자동화 감시 계약을 추가하고 필수 검사 `release-verify`·`site-quality-verify`를 통과한 뒤 관리자 병합으로 반영했다. PR 작성자와 인증 계정이 같은 저장소 정책상 독립 Code Owner 승인을 만들 수 없었기 때문에, 병합 시점에만 main 보호 규칙을 일시 해제하고 병합 직후 원래 설정을 PUT으로 복구했다. 현재 보호 규칙은 필수 검사 2개, Code Owner 승인 1명, 마지막 push 승인, 관리자 강제 적용, 선형 이력, 대화 해결을 다시 요구한다.
 
-병합 후 정적 Pages 배포와 라이브 smoke는 성공했고, [자동화 신선도 실행](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/35684530038)은 TF pulse의 마지막 예약 성공이 기준을 넘은 사실을 `STALE`로 기록해 [자동 경보 이슈 #208](https://github.com/KRAdavid/cellpinda_GABA/issues/208)을 만들었다. 이 경보는 다음 예약 실행이 기준 안으로 회복되면 자동 종료되며, 공개 콘텐츠·제품·후기·주문·배포 승인 상태를 바꾸지 않는다.
+병합 후 정적 Pages 배포와 라이브 smoke는 성공했고, [자동화 신선도 실행](https://github.com/KRAdavid/gaba_info/actions/runs/35684530038)은 TF pulse의 마지막 예약 성공이 기준을 넘은 사실을 `STALE`로 기록해 [자동 경보 이슈 #208](https://github.com/KRAdavid/gaba_info/issues/208)을 만들었다. 이 경보는 다음 예약 실행이 기준 안으로 회복되면 자동 종료되며, 공개 콘텐츠·제품·후기·주문·배포 승인 상태를 바꾸지 않는다.

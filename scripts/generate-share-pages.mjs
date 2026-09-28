@@ -4,7 +4,7 @@ import path from 'node:path';
 const shareLabels = JSON.parse(fs.readFileSync(path.resolve('data/rhythm-share-labels.json'), 'utf8'));
 const shareTypes = Object.entries(shareLabels).map(([id, value]) => [id, value.label, value.name]);
 const shareRoot = path.resolve('public/share');
-const siteRoot = 'https://kradavid.github.io/cellpinda_GABA';
+const siteRoot = 'https://kradavid.github.io/gaba_info';
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));

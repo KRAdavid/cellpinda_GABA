@@ -109,7 +109,7 @@
 - [TF decision pulse workflow](../.github/workflows/tf-pulse.yml)는 6시간 주기와 수동 실행을 제공하며, run summary·14일 artifact·안전한 heartbeat에 회의 안건을 남긴다. heartbeat 후보 브랜치에서 타입검사·전체 테스트·정적 build·배포 readiness·Worker dry-run을 검증 증거로 실행하지만, `release-verify`·`site-quality-verify` 보호 상태를 직접 기록하지 않는다. 완전한 `pull_request` 검사가 실행되지 않으면 보호 규칙이 계속 대기하며, 보호된 PR merge 후에만 main 배포가 공개본을 갱신한다. 운영 큐·pulse·회의 패킷은 로컬 `tmp/operations`와 루프백 API에만 남기며 Pages에는 제공하지 않는다. 최신 후보의 실제 CI 결과와 승인 상태는 PR에서 확인한다.
 - 현재 canonical 큐의 `DONE`·`VERIFYING`·`WAITING` 카운트는 최신 pulse와 목표 감사 패킷에서 확인하며, B2·B3·B4·C2·E1은 독립 검토 또는 외부 입력 게이트로 유지한다. 자동 pulse는 이 상태를 완료로 승격하지 않는다.
 
-- TF 구현 기준점: [KRAdavid/cellpinda_GABA](https://github.com/KRAdavid/cellpinda_GABA) `main`과 GitHub Pages에 반영된 현재 운영 코드·공개 packet.
+- TF 구현 기준점: [KRAdavid/gaba_info](https://github.com/KRAdavid/gaba_info) `main`과 GitHub Pages에 반영된 현재 운영 코드·공개 packet.
 - 마케팅·심리: 날짜형7일기록과 친구비교 구현·실제브라우저 검증. 실제 소비자 이해도/구매의향 실험은 미실시.
 - UX·서버: 공유 HTML 메타데이터와 D1 승인/이벤트 동작 검증. 전용 GitHub 저장소와 영구 배포는 미연결.
 - 근거: 연구2건 상세 공개, 현행 뒷면 자료 부족 확인, GitHub 근거인덱스의 후속 연구3건 발견. 원문검증 전 공개추가 안함.

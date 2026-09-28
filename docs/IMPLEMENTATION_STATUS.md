@@ -4,11 +4,11 @@
 
 ## 공개 검증 스냅샷 — 2026-09-22 KST
 
-이번 상단 포인터에 포함된 최신 병합 감사 이력은 PR [#184](https://github.com/KRAdavid/cellpinda_GABA/pull/184)·[#185](https://github.com/KRAdavid/cellpinda_GABA/pull/185)·[#186](https://github.com/KRAdavid/cellpinda_GABA/pull/186)·[#187](https://github.com/KRAdavid/cellpinda_GABA/pull/187)·[#189](https://github.com/KRAdavid/cellpinda_GABA/pull/189)·[#190](https://github.com/KRAdavid/cellpinda_GABA/pull/190)·[#191](https://github.com/KRAdavid/cellpinda_GABA/pull/191)·[#198](https://github.com/KRAdavid/cellpinda_GABA/pull/198)이다. #198은 일반 건강 연구와 GABA 섭취 연구를 소비자 화면에서 분리하고 연구 경계 문구를 회귀 검증에 고정했다. 현재 라이브 SHA·manifest 시각·최신 성공 배포는 문서에 복제하지 않고 라이브 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)과 [최신 Actions 실행](https://github.com/KRAdavid/cellpinda_GABA/actions)에서 확인한다. 문서 전용 PR #199처럼 이 파일이 병합되면 main SHA가 바뀌므로, 문서의 숫자를 현재값으로 해석하지 않는 원칙을 유지한다.
+이번 상단 포인터에 포함된 최신 병합 감사 이력은 PR [#184](https://github.com/KRAdavid/gaba_info/pull/184)·[#185](https://github.com/KRAdavid/gaba_info/pull/185)·[#186](https://github.com/KRAdavid/gaba_info/pull/186)·[#187](https://github.com/KRAdavid/gaba_info/pull/187)·[#189](https://github.com/KRAdavid/gaba_info/pull/189)·[#190](https://github.com/KRAdavid/gaba_info/pull/190)·[#191](https://github.com/KRAdavid/gaba_info/pull/191)·[#198](https://github.com/KRAdavid/gaba_info/pull/198)이다. #198은 일반 건강 연구와 GABA 섭취 연구를 소비자 화면에서 분리하고 연구 경계 문구를 회귀 검증에 고정했다. 현재 라이브 SHA·manifest 시각·최신 성공 배포는 문서에 복제하지 않고 라이브 [release-manifest.json](https://kradavid.github.io/gaba_info/release-manifest.json)과 [최신 Actions 실행](https://github.com/KRAdavid/gaba_info/actions)에서 확인한다. 문서 전용 PR #199처럼 이 파일이 병합되면 main SHA가 바뀌므로, 문서의 숫자를 현재값으로 해석하지 않는 원칙을 유지한다.
 
 현재까지 기록된 관리자 우회 병합 PR은 작성자와 병합자가 `KRAdavid`이고 독립 리뷰 0건·`REVIEW_REQUIRED` 상태였다. 현재 [CODEOWNERS](../.github/CODEOWNERS)는 `@KRAdavid` 단일 계정만 지정하므로 독립 Code Owner 승인이 없었으며, 관리자 병합은 독립 승인을 대체하지 않는다. 병합 직전에만 보호 규칙을 해제하고, 병합 직후 필수 검사·Code Owner·마지막 push 승인·관리자 강제 적용을 복구했다.
 
-PR [#171](https://github.com/KRAdavid/cellpinda_GABA/pull/171)·[#172](https://github.com/KRAdavid/cellpinda_GABA/pull/172)·[#173](https://github.com/KRAdavid/cellpinda_GABA/pull/173)·[#174](https://github.com/KRAdavid/cellpinda_GABA/pull/174)·[#175](https://github.com/KRAdavid/cellpinda_GABA/pull/175)·[#176](https://github.com/KRAdavid/cellpinda_GABA/pull/176)·[#177](https://github.com/KRAdavid/cellpinda_GABA/pull/177)·[#178](https://github.com/KRAdavid/cellpinda_GABA/pull/178)·[#179](https://github.com/KRAdavid/cellpinda_GABA/pull/179)·[#180](https://github.com/KRAdavid/cellpinda_GABA/pull/180)·[#181](https://github.com/KRAdavid/cellpinda_GABA/pull/181)은 필수 검사 성공 후 관리자 우회로 병합했고, 병합 직후 보호 규칙을 복구했다. 이 병합들은 독립 Code Owner 승인으로 기록하지 않는다. 현재 라이브 SHA·생성 시각·배포 run은 [release-manifest.json](https://kradavid.github.io/cellpinda_GABA/release-manifest.json)과 [최신 성공 배포 목록](https://github.com/KRAdavid/cellpinda_GABA/actions)에서 직접 확인한다. 문서 전용 병합이 SHA를 바꾸므로 이 상태 문서에는 고정 SHA와 run 번호를 복제하지 않는다. 결과 카드에는 `뇌컨디션 확인 챌린지 해보기` 빠른 진입 CTA와 포커스 이동이 추가됐고, 티저 `HOLD` 상태에는 `GABA 연구 쉽게 보기`·`가바 1500 구성 보기` 다음 행동을 붙였다. 1분 체크 전 챌린지 비노출, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
+PR [#171](https://github.com/KRAdavid/gaba_info/pull/171)·[#172](https://github.com/KRAdavid/gaba_info/pull/172)·[#173](https://github.com/KRAdavid/gaba_info/pull/173)·[#174](https://github.com/KRAdavid/gaba_info/pull/174)·[#175](https://github.com/KRAdavid/gaba_info/pull/175)·[#176](https://github.com/KRAdavid/gaba_info/pull/176)·[#177](https://github.com/KRAdavid/gaba_info/pull/177)·[#178](https://github.com/KRAdavid/gaba_info/pull/178)·[#179](https://github.com/KRAdavid/gaba_info/pull/179)·[#180](https://github.com/KRAdavid/gaba_info/pull/180)·[#181](https://github.com/KRAdavid/gaba_info/pull/181)은 필수 검사 성공 후 관리자 우회로 병합했고, 병합 직후 보호 규칙을 복구했다. 이 병합들은 독립 Code Owner 승인으로 기록하지 않는다. 현재 라이브 SHA·생성 시각·배포 run은 [release-manifest.json](https://kradavid.github.io/gaba_info/release-manifest.json)과 [최신 성공 배포 목록](https://github.com/KRAdavid/gaba_info/actions)에서 직접 확인한다. 문서 전용 병합이 SHA를 바꾸므로 이 상태 문서에는 고정 SHA와 run 번호를 복제하지 않는다. 결과 카드에는 `뇌컨디션 확인 챌린지 해보기` 빠른 진입 CTA와 포커스 이동이 추가됐고, 티저 `HOLD` 상태에는 `GABA 연구 쉽게 보기`·`가바 1500 구성 보기` 다음 행동을 붙였다. 1분 체크 전 챌린지 비노출, 제품·후기 CTA, 일반 GABA 연구의 비교 대상·측정 항목을 풀어 쓴 소비자 문구, `/products/` 직접 진입 시 제품 섹션 자동 안착을 현재 애플리케이션 기준으로 삼는다.
 
 라이브 검증 결과는 정적 모드, 공개 경로 10개, 파일 hash 63개, 승인 연구 6건, 공개 주장 12개, 제품 1개, 후기 목적지 1개, Smart Store 단일 목적지, 750 제품 제거, 내부 운영 스냅샷 제외, 티저 `HOLD`·외부 URL 없음을 확인한다. `pnpm run validate:live-public`는 page 200·bundle hash 63개·provenance 일치를 통과했다. 최신 로컬 CDP 감리에서도 1440px·390px 화면의 가로 넘침과 콘솔 오류가 없었고, 첫 화면 CTA와 1분 체크 진입을 확인했다. `pnpm test`는 123/123, 타입검사·UI 계약·연구 카피·공개 export도 통과했다.
 
@@ -56,7 +56,7 @@ Admin·TF 운영판은 로컬 개발 검토 화면이므로 production 정적 �
 
 ## 공개 번들 성능 예산 — 2026-09-20 현재 후보
 
-초기 JavaScript 299,965B, 초기 CSS 86,837B, 전체 assets 1,345,309B, 최대 단일 파일 299,965B를 측정했다. 초기 JS 380KB·초기 CSS 110KB·전체 assets 1.6MB·단일 파일 380KB 예산을 모두 통과하며, 동일 검사는 정적 Pages용 `dist-pages`에도 배포 워크플로에서 실행된다. Pages base path가 붙은 `/cellpinda_GABA/assets/...` URL도 `/assets/` 기준으로 매칭해 초기 번들을 0B로 잘못 보고하지 않는다.
+초기 JavaScript 299,965B, 초기 CSS 86,837B, 전체 assets 1,345,309B, 최대 단일 파일 299,965B를 측정했다. 초기 JS 380KB·초기 CSS 110KB·전체 assets 1.6MB·단일 파일 380KB 예산을 모두 통과하며, 동일 검사는 정적 Pages용 `dist-pages`에도 배포 워크플로에서 실행된다. Pages base path가 붙은 `/gaba_info/assets/...` URL도 `/assets/` 기준으로 매칭해 초기 번들을 0B로 잘못 보고하지 않는다.
 
 ## Worker 공개 origin·회원 origin 분리 검증 보강 — 2026-09-20 코드 후보 `487c9f5`
 
@@ -102,7 +102,7 @@ TF pulse heartbeat를 갱신했다. 이전 상태 지문과 동일해 `stateChan
 
 스토리·티저·연구·후기·구매 전 안내·7일 챌린지의 지연 로딩 구간에 섹션별 스켈레톤과 보조기술용 상태 문구를 연결해 네트워크가 늦어도 빈 공간이 보이지 않게 했다. 티저가 보내는 `teaser_embed_loaded`·`teaser_external_opened` 이벤트는 Node SQLite와 Worker/D1 허용 목록 및 회귀 테스트에 연결했고, 실제 재생을 의미하지 않는 `teaser_play`는 프런트에서 사용하지 않는다.
 
-현재 PR HEAD 후보는 107개 테스트, 타입검사, 연구 카피·UI·티저·공개 export 검증, production build, 10개 정적 route 및 65개 manifest 파일 검사를 통과했다. 최신 빌드 초기 JavaScript는 299.93KB( gzip 91.99KB ), CSS는 86.79KB( gzip 16.58KB )다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/)의 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 후보 SHA는 PR HEAD와 생성된 `release-manifest.json`에서 확인한다.
+현재 PR HEAD 후보는 107개 테스트, 타입검사, 연구 카피·UI·티저·공개 export 검증, production build, 10개 정적 route 및 65개 manifest 파일 검사를 통과했다. 최신 빌드 초기 JavaScript는 299.93KB( gzip 91.99KB ), CSS는 86.79KB( gzip 16.58KB )다. PR [#97](https://github.com/KRAdavid/gaba_info/)의 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 후보 SHA는 PR HEAD와 생성된 `release-manifest.json`에서 확인한다.
 
 현재 공개 Pages 루트는 HTTP 200이지만 후보 SHA를 포함하지 않고 `/release-manifest.json`은 HTTP 404다. 따라서 후보가 공개 배포됐다고 판정하지 않는다. B2 제품 표시, B3 후기 권한, B4 티저 공개 승인, C2 Worker/D1 설정, E1 실구매 대사는 기존 사람 판단 게이트로 유지한다.
 
@@ -126,7 +126,7 @@ production preview를 Chrome CDP로 390px 모바일 viewport에서 다시 열어
 
 후보의 소비자·모바일 감리를 마무리하면서 메뉴 링크, 연구 상세 접기, 제품·후기 바로가기, 게임 연습 건너뛰기와 연구 출처 링크의 터치 영역을 최소 44px로 맞췄다. 키보드 사용 시에도 같은 요소가 포커스 가능한 높이를 유지하도록 공개 화면 공통 스타일과 챌린지 스타일을 함께 보정했다. 터치 보정은 `d41b866`에서 반영했고 이 감사 기록은 `a81b0aa`에서 갱신했다. 변경 후 `pnpm test` 107/107, 타입검사, production build, `release-verify`, `site-quality-verify`를 다시 통과했다.
 
-현재 후보 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)은 필수 검사 2개가 통과했지만 Code Owner 독립 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 공개 Pages는 이전 `main`을 가리키며 후보와 동기화되지 않았다. 병합 전에는 공개 배포로 판정하지 않으며, 병합 뒤 release manifest의 후보 SHA와 파일 해시를 실제 Pages·Worker 응답에 대조하는 라이브 smoke가 실행된다.
+현재 후보 PR [#97](https://github.com/KRAdavid/gaba_info/pull/97)은 필수 검사 2개가 통과했지만 Code Owner 독립 승인 전이라 `OPEN / BLOCKED / REVIEW_REQUIRED`다. 공개 Pages는 이전 `main`을 가리키며 후보와 동기화되지 않았다. 병합 전에는 공개 배포로 판정하지 않으며, 병합 뒤 release manifest의 후보 SHA와 파일 해시를 실제 Pages·Worker 응답에 대조하는 라이브 smoke가 실행된다.
 
 ## 최신 성능 보정 — 2026-09-20 `3d01dbd`
 
@@ -136,7 +136,7 @@ production preview를 Chrome CDP로 390px 모바일 viewport에서 다시 열어
 
 배포 후보에 `release-manifest.json`을 생성해 후보 커밋 SHA, 공개 route, 제품·연구·후기 수, SmartStore 목적지, 750 제거, 티저 `HOLD`, 챌린지·제품 경계 문구와 모든 정적 asset hash를 함께 기록한다. Pages와 Worker 빌드는 각각 `static`·`worker` 모드를 manifest에 남기고, 라이브 smoke는 공개 manifest의 SHA와 route·콘텐츠 수·핵심 marker를 후보와 대조한다. 이 값이 다르면 배포 완료로 판정하지 않는다. 정적 연구 fallback과 자바스크립트가 꺼진 첫 화면에도 연구 사용량과 제품 권장량의 구분을 표시하고 UI 계약으로 고정했다.
 
-후보 빌드는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build, release manifest 및 정적 산출물 검사를 통과했다. 배포 후보 SHA는 문서에 중복 기록하지 않고 산출물의 `release-manifest.json`과 PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97) HEAD를 기준으로 확인한다. PR은 Code Owner 승인 전이라 계속 `BLOCKED / REVIEW_REQUIRED`이며, 공개 Pages에는 아직 후보가 반영되지 않았다.
+후보 빌드는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build, release manifest 및 정적 산출물 검사를 통과했다. 배포 후보 SHA는 문서에 중복 기록하지 않고 산출물의 `release-manifest.json`과 PR [#97](https://github.com/KRAdavid/gaba_info/pull/97) HEAD를 기준으로 확인한다. PR은 Code Owner 승인 전이라 계속 `BLOCKED / REVIEW_REQUIRED`이며, 공개 Pages에는 아직 후보가 반영되지 않았다.
 
 ## 렌더링 감리 — 2026-09-20 production preview
 
@@ -158,7 +158,7 @@ UI 계약도 이 두 색상 토큰과 CTA 아이콘의 `aria-hidden`을 직접 �
 
 ## 현재 후보 검증 — 2026-09-20 06:16 KST
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 HEAD에서 `release-verify`와 `site-quality-verify`가 모두 성공했다. PR은 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 Code Owner 승인 전이다. 후보 SHA는 이 문서에 복제하지 않고 PR HEAD와 `release-manifest.json`으로 확인한다. PR 이벤트에서는 Pages 게시·Worker 배포·라이브 smoke가 의도적으로 건너뛰므로, 현재 공개 Pages는 후보와 동기화됐다고 판정하지 않는다.
+PR [#97](https://github.com/KRAdavid/gaba_info/pull/97)의 최신 후보 HEAD에서 `release-verify`와 `site-quality-verify`가 모두 성공했다. PR은 `OPEN / BLOCKED / REVIEW_REQUIRED`이며 Code Owner 승인 전이다. 후보 SHA는 이 문서에 복제하지 않고 PR HEAD와 `release-manifest.json`으로 확인한다. PR 이벤트에서는 Pages 게시·Worker 배포·라이브 smoke가 의도적으로 건너뛰므로, 현재 공개 Pages는 후보와 동기화됐다고 판정하지 않는다.
 
 결과 화면의 연구·제품 안내 다음에 `다음으로 해볼 일 → 뇌컨디션 확인 챌린지 해보기`를 배치해 리듬 체크 완료 뒤 게임으로 바로 이어지는 경로를 만들었다. PR 검증용 정적·Worker manifest는 PR 이벤트에서 병합용 임시 커밋이 아니라 PR HEAD SHA를 기록하고, main 배포에서는 main SHA를 기록하도록 workflow 계약과 검증기를 맞췄다. 로컬 후보는 타입검사, 107개 테스트, production build, 공개 export, 정적 route, 연구 문구·UI·배포 workflow 검증을 다시 통과했다.
 
@@ -168,7 +168,7 @@ PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 HE
 
 연구 하이라이트의 소비자 문장을 다시 감리해 수면 카드의 `눈동자 움직임이 적은 수면 단계의 시간`, 연구 목록의 `사람이 GABA를 먹고 비교한 연구`, 주제 카드의 생활 언어를 적용했다. 수면·뇌파 카드에는 `연구 사용량`과 `제품 권장량과 별개`를 함께 표시하고, 정적 연구 페이지의 운동 연구에도 `GABA 3g`이 셀핀다 제품 권장량이 아니라는 구분을 넣었다. 이 표현이 다시 연구자식 라벨이나 제품 권장량처럼 보이지 않도록 연구 카피·UI·공개 export·라이브 smoke 회귀 조건을 갱신했다.
 
-후보 `486b748`는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build와 정적 산출물 검사를 통과했다. PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `BLOCKED / REVIEW_REQUIRED`다. 현재 main은 `ea1cc42`이며 공개 Pages에는 후보가 반영되지 않았다.
+후보 `486b748`는 `pnpm test` 107개, 타입검사, 연구 카피·UI 계약, 공개 export, production build와 정적 산출물 검사를 통과했다. PR [#97](https://github.com/KRAdavid/gaba_info/pull/97)의 최신 `release-verify`와 `site-quality-verify`도 성공했지만 Code Owner 승인 전이라 `BLOCKED / REVIEW_REQUIRED`다. 현재 main은 `ea1cc42`이며 공개 Pages에는 후보가 반영되지 않았다.
 
 현재 후보를 공개 주소에 대조한 `pnpm run validate:live-public`는 12회 후 기존 Pages 번들의 연구 경계 문구 불일치로 실패했다. `pnpm run preflight:deploy`는 정적 산출물과 공개 범위는 확인했지만 Cloudflare·운영용 Secrets 5개가 없어 `WAITING`이다. 티저는 공개 URL·미디어·자막·권리·CTA 승인이 없어 `HOLD`를 유지한다.
 
@@ -184,7 +184,7 @@ PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 최신 후보 HE
 
 ## 릴리스 후보 통합 검증 — 2026-09-19
 
-PR [#97](https://github.com/KRAdavid/cellpinda_GABA/pull/97)의 기능 후보 커밋 `0b1f477`에 게임 이름 통일, 연구 출처 변형 중복 제거, 브라우저 오디오 차단 안내, 정적 fallback 연구 경계, 점수 구간별 결과 안내를 반영했고 후보 HEAD는 배포 통제 문서와 후보 근거를 함께 동기화한다. 최신 필수 검증은 후보 HEAD가 갱신될 때마다 다시 실행한다.
+PR [#97](https://github.com/KRAdavid/gaba_info/pull/97)의 기능 후보 커밋 `0b1f477`에 게임 이름 통일, 연구 출처 변형 중복 제거, 브라우저 오디오 차단 안내, 정적 fallback 연구 경계, 점수 구간별 결과 안내를 반영했고 후보 HEAD는 배포 통제 문서와 후보 근거를 함께 동기화한다. 최신 필수 검증은 후보 HEAD가 갱신될 때마다 다시 실행한다.
 
 후보 브랜치의 `pnpm test` 107개, 타입검사, production build, 공개 export 검증을 통과했다. 로컬 production preview에 API를 연결해 Chromium CDP로 390px·1440px의 홈·연구·제품·공유·뇌컨디션 확인 챌린지를 확인했으며 가로 넘침 0건·콘솔 오류 0건이었다. 연구 페이지는 소비자용 제목과 주제 카드, 제품 경로는 `셀핀다 가바 1500 · 30포 구성 보기`, 챌린지 경로는 `너도 해봐 · 뇌컨디션 확인 챌린지`를 사용한다. 자동 재생이 차단된 브라우저에서도 `브라우저가 자동 소리를 막았어요… 화면 신호로 계속 진행합니다.` 안내가 게임 카드 안에서 겹침 없이 표시되는 것을 별도 CDP 재현으로 확인했다.
 
@@ -274,19 +274,19 @@ CI의 임시 safe-run 파일 없이 `pnpm run tf:pulse:heartbeat`를 실행할 �
 
 소비자 화면의 발효 흐름에서 연구자에게 익숙한 `정량분석`을 `함량 확인`으로 바꿨다. 오류 화면의 기본 안내와 정상 발효 섹션 모두 `발효 → 분리·회수 → 함량 확인 → 품질 확인`으로 통일해, 기술 용어를 소비자가 이해할 수 있는 행동 언어로 번역했다. 공개 화면에서 `정량분석`과 과거 연구자용 상세 레이블이 다시 노출되지 않도록 `scripts/validate-ui-contract.mjs`에 회귀 검사를 추가했다.
 
-커밋 [`624c7a7`](https://github.com/KRAdavid/cellpinda_GABA/commit/624c7a7)은 타입검사·73개 회귀 테스트·production build·GitHub Pages 배포·라이브 smoke를 통과했다. 라이브 검증은 연구 8건·제품 1건·750 미노출·Smart Store 단일 목적지·공개 부정형 연구 문구 0건을 확인했다. 실제 제품 표시 최종 승인, 후기 원문·재게시 권한, 티저 권리·공개 승인, Cloudflare Worker/D1 Secrets, 스마트스토어 주문 대사는 외부 입력 게이트로 계속 대기한다.
+커밋 [`624c7a7`](https://github.com/KRAdavid/gaba_info/commit/624c7a7)은 타입검사·73개 회귀 테스트·production build·GitHub Pages 배포·라이브 smoke를 통과했다. 라이브 검증은 연구 8건·제품 1건·750 미노출·Smart Store 단일 목적지·공개 부정형 연구 문구 0건을 확인했다. 실제 제품 표시 최종 승인, 후기 원문·재게시 권한, 티저 권리·공개 승인, Cloudflare Worker/D1 Secrets, 스마트스토어 주문 대사는 외부 입력 게이트로 계속 대기한다.
 
 ## 최신 업데이트 — 2026-09-11 연구 상세 열림 문구 단순화
 
 연구 카드의 선택형 세부 영역 제목을 `숫자와 출처 더 보기`에서 `더 자세한 이야기 보기`로 바꿨다. 소비자는 먼저 질문·관찰·비교를 아이콘과 짧은 설명으로 읽고, 더 궁금할 때만 세부 정보와 원문 링크를 펼친다. 연구자용 표현이 다시 들어오지 않도록 UI 계약 검사에서 이전 제목도 차단한다.
 
-커밋 [`3b020a6`](https://github.com/KRAdavid/cellpinda_GABA/commit/3b020a6)은 공개 연구 문구·타입검사·73개 회귀 테스트·production build를 통과했다. 공개 export에는 부정형 연구 문구와 내부 `result`·`limitations`를 포함하지 않는 기존 경계를 유지한다.
+커밋 [`3b020a6`](https://github.com/KRAdavid/gaba_info/commit/3b020a6)은 공개 연구 문구·타입검사·73개 회귀 테스트·production build를 통과했다. 공개 export에는 부정형 연구 문구와 내부 `result`·`limitations`를 포함하지 않는 기존 경계를 유지한다.
 
 ## 최신 업데이트 — 2026-09-11 출처 영역 시각적 정리
 
 연구 카드의 출처 영역에서 소비자에게 의미가 적은 근거 식별자 해시를 숨기고, `더 궁금할 때 출처 보기`와 자료 확인일만 표시하도록 정리했다. 해시와 전체 감사 정보는 내부 원장·검증 데이터에 계속 보존되며, 소비자 화면은 쉬운 설명 뒤에 선택형 출처를 배치한다.
 
-커밋 [`bc87c27`](https://github.com/KRAdavid/cellpinda_GABA/commit/bc87c27)은 UI 계약·연구 문구·공개 export 검사를 통과했다.
+커밋 [`bc87c27`](https://github.com/KRAdavid/gaba_info/commit/bc87c27)은 UI 계약·연구 문구·공개 export 검사를 통과했다.
 
 ## 최신 업데이트 — 2026-09-11 연구에서 제품으로 넘어가는 순서 보강
 
@@ -300,9 +300,9 @@ CI의 임시 safe-run 파일 없이 `pnpm run tf:pulse:heartbeat`를 실행할 �
 
 ## 최신 업데이트 — 2026-09-11 공개 목표 감사 패킷
 
-공개 운영 큐에서 `목표 감사 JSON`을 바로 열 수 있게 하고, Goal Contract·6개 역할군·상태별 작업 수·완료 마일스톤·현재 `VERIFYING`·`WAITING` 게이트를 동일한 실행에서 생성하도록 연결했다. `validate:public`, `validate-live-public`, `preflight:deploy`가 감사 패킷의 목표 ID·상태·카운트·게이트·pulse 상태 지문 일치를 검사한다. 커밋 [`7302cef`](https://github.com/KRAdavid/cellpinda_GABA/commit/7302cef)와 생성 산출물 무시 정리 [`0421ef2`](https://github.com/KRAdavid/cellpinda_GABA/commit/0421ef2)의 [GitHub Actions 34532696449](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34532696449)는 verify·Pages·라이브 smoke를 성공시켰다.
+공개 운영 큐에서 `목표 감사 JSON`을 바로 열 수 있게 하고, Goal Contract·6개 역할군·상태별 작업 수·완료 마일스톤·현재 `VERIFYING`·`WAITING` 게이트를 동일한 실행에서 생성하도록 연결했다. `validate:public`, `validate-live-public`, `preflight:deploy`가 감사 패킷의 목표 ID·상태·카운트·게이트·pulse 상태 지문 일치를 검사한다. 커밋 [`7302cef`](https://github.com/KRAdavid/gaba_info/commit/7302cef)와 생성 산출물 무시 정리 [`0421ef2`](https://github.com/KRAdavid/gaba_info/commit/0421ef2)의 [GitHub Actions 34532696449](https://github.com/KRAdavid/gaba_info/actions/runs/34532696449)는 verify·Pages·라이브 smoke를 성공시켰다.
 
-라이브 [목표 감사 패킷](https://kradavid.github.io/cellpinda_GABA/data/goal-audit.json)은 `IN_PROGRESS_WITH_GATES`, 게이트 5건(B2 VERIFYING, B3·B4·C2·E1 WAITING), 논문 레코드 8건, Smart Store 1500 제품 1건을 보여 준다. 감사 패킷은 중간 검토용 요약이며 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않는다.
+라이브 [목표 감사 패킷](https://kradavid.github.io/gaba_info/data/goal-audit.json)은 `IN_PROGRESS_WITH_GATES`, 게이트 5건(B2 VERIFYING, B3·B4·C2·E1 WAITING), 논문 레코드 8건, Smart Store 1500 제품 1건을 보여 준다. 감사 패킷은 중간 검토용 요약이며 실제 전문가 자격·외부 승인·주문 완료를 증명하지 않는다.
 
 운영 화면에도 같은 패킷을 `공개 목표 감사` 요약 카드로 표시해 모바일 회의에서 논문·제품·완료 작업 수와 게이트별 담당·독립 검증·다음 조치를 바로 확인할 수 있게 했다. 화면과 JSON은 하나의 fetch 결과를 사용하며, 패킷이 없거나 검증되지 않으면 운영 큐를 표시하지 않는다.
 
@@ -312,7 +312,7 @@ TF heartbeat에 직전 상태 지문 비교를 추가해 `stateChanged`를 기�
 
 ## 최신 업데이트 — 2026-09-11 TF pulse 재현과 신선도 표시
 
-운영 보드가 마지막 TF pulse 시각뿐 아니라 `방금 갱신`·`몇 분 전 갱신`·`업데이트 지연` 상태를 표시하도록 보강했다. 6시간 주기 pulse를 현재 코드에서 수동 재현한 [34530924367](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530924367)은 계약·역할·업무 그래프 검증과 안전 heartbeat 생성을 성공시켰고, heartbeat 커밋 [`97026c2`](https://github.com/KRAdavid/cellpinda_GABA/commit/97026c2) 이후 [단일 deploy·Pages·라이브 smoke 34530948751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34530948751)도 성공했다. `[skip ci]`와 명시적 dispatch 경계가 유지되어 중복 배포는 발생하지 않았다.
+운영 보드가 마지막 TF pulse 시각뿐 아니라 `방금 갱신`·`몇 분 전 갱신`·`업데이트 지연` 상태를 표시하도록 보강했다. 6시간 주기 pulse를 현재 코드에서 수동 재현한 [34530924367](https://github.com/KRAdavid/gaba_info/actions/runs/34530924367)은 계약·역할·업무 그래프 검증과 안전 heartbeat 생성을 성공시켰고, heartbeat 커밋 [`97026c2`](https://github.com/KRAdavid/gaba_info/commit/97026c2) 이후 [단일 deploy·Pages·라이브 smoke 34530948751](https://github.com/KRAdavid/gaba_info/actions/runs/34530948751)도 성공했다. `[skip ci]`와 명시적 dispatch 경계가 유지되어 중복 배포는 발생하지 않았다.
 
 현재 라이브 export는 연구 8건·소비자 주장 14건·Smart Store `gaba1500` 1개·업무 13개이며, canonical 그래프는 DONE 8건·VERIFYING B2 1건·WAITING B3·B4·C2·E1 4건이다. Cloudflare 운영 Secrets, 후기 재게시 권한, 현행 표시 최종 승인, 실제 주문·취소·환불 응답이 도착하기 전에는 전체 목표를 완료로 승격하지 않는다. 역할 레지스트리는 역할 책임을 고정하는 장치이며 실제 전문가 자격·섭외를 증명하지 않는다.
 
@@ -324,25 +324,25 @@ TF pulse가 활성 작업마다 상태에 맞는 두 가지 결정 경로와 최
 
 `tf-pulse`가 현재 상태에서 다음 운영 모드를 자동 계산하도록 보강했다. `human-gate-monitor`는 B2·B3·B4·C2·E1처럼 사람 입력이 필요한 게이트를 보존하면서 다음 pulse에서 변화와 새 증거를 다시 확인하고, `continue-execution`은 실행 가능한 작업을 다음 독립 검증으로 넘긴다. 활성 작업이 없으면 `close`, 그 외에는 `reassess-next-cycle`로 기록한다. 모든 모드는 6시간 뒤 재검토 시각과 다음 행동을 포함하며 heartbeat·공개 `tf-pulse.json`·`operations-queue.json`·`goal-audit.json`·운영 화면에서 같은 값으로 검증된다. `nextReviewAt`은 이전 heartbeat가 유지될 때 그 예약을 보존해 반복 실행으로 회의 시각이 임의로 밀리지 않게 했다.
 
-수동 [TF decision pulse 34544753916](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34544753916)로 heartbeat 생성과 후속 [Pages 배포·라이브 smoke 34544768345](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34544768345)를 재현했다. 상태가 바뀌지 않은 회차에서도 `human-gate-monitor`, 6시간 cadence, `nextReviewAt`, 다음 행동이 공개 세 패킷에 동일하게 남았고, heartbeat push는 `[skip ci]`와 명시적 deploy dispatch 한 번으로 중복 배포 없이 처리됐다.
+수동 [TF decision pulse 34544753916](https://github.com/KRAdavid/gaba_info/actions/runs/34544753916)로 heartbeat 생성과 후속 [Pages 배포·라이브 smoke 34544768345](https://github.com/KRAdavid/gaba_info/actions/runs/34544768345)를 재현했다. 상태가 바뀌지 않은 회차에서도 `human-gate-monitor`, 6시간 cadence, `nextReviewAt`, 다음 행동이 공개 세 패킷에 동일하게 남았고, heartbeat push는 `[skip ci]`와 명시적 deploy dispatch 한 번으로 중복 배포 없이 처리됐다.
 
 ## 2026-09-11 사람 회의 의견 입력과 배포 재검증
 
 운영 MVP의 TF 의사결정 로그에 사람이 직접 반대 의견·재검토 조건을 남기는 입력 폼을 추가했다. 자동 생성 안전 경계는 `guardrail`, 회의에서 작성한 기록은 `human-meeting`으로 분리하고 기록 시각을 저장한다. pulse의 `VERIFYING`·`WAITING` 작업은 `다음 TF 회의 안건` 패널에서 담당자·검증자·다음 조치와 함께 확인할 수 있다. 10자 미만 메모와 허용되지 않은 상태·시각은 공통 상태 검증에서 거부하며, 서버 저장·브라우저 `localStorage`·JSON 승인 보고서에 같은 구조로 보존된다. `pnpm test` 66개, 타입검사, production build와 로컬 API 연동 Playwright 데스크톱·모바일 검증이 통과했다.
 
-커밋 `d4f8b7d`의 [GitHub Actions 34510329707](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34510329707)은 verify·Pages·Worker 구성 점검·라이브 smoke를 모두 성공했다. 최신 공개 URL 검증은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 공개 `?view=ops`에서 Goal Contract 생성 후 회의 안건 패널, G1 독립 검증 대기, 회의 의견 추가, 자동 경계·사람 기록 구분과 기록 시각 표시를 1440px·390px에서 재현했으며 콘솔 오류와 가로 넘침이 없었다. Cloudflare 운영 Secrets가 없는 환경에서는 Worker 실제 배포 대신 구성 점검만 성공하고 정적 Pages를 계속 제공한다.
+커밋 `d4f8b7d`의 [GitHub Actions 34510329707](https://github.com/KRAdavid/gaba_info/actions/runs/34510329707)은 verify·Pages·Worker 구성 점검·라이브 smoke를 모두 성공했다. 최신 공개 URL 검증은 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 공개 `?view=ops`에서 Goal Contract 생성 후 회의 안건 패널, G1 독립 검증 대기, 회의 의견 추가, 자동 경계·사람 기록 구분과 기록 시각 표시를 1440px·390px에서 재현했으며 콘솔 오류와 가로 넘침이 없었다. Cloudflare 운영 Secrets가 없는 환경에서는 Worker 실제 배포 대신 구성 점검만 성공하고 정적 Pages를 계속 제공한다.
 
 ## 2026-09-11 독립 검토 게이트와 상시 TF pulse
 
 운영 MVP 화면은 자동 파동을 `VERIFYING`에서 멈추고, 독립 검토자가 모든 수락 기준과 근거를 확인한 뒤 `accept` 또는 `rework`를 기록하도록 연결했다. 보고서는 샌드박스 시뮬레이션과 사람 독립 검토를 별도 집계하며, 검토 기록·감사 이벤트·다음 의존 작업을 함께 보존한다. Node/Worker 공통 상태 검증과 회귀 테스트 64개가 이 경계를 확인한다.
 
-`.github/workflows/tf-pulse.yml`은 6시간마다 Goal Contract·canonical 업무 그래프를 읽어 회의용 결정 제안을 생성하고, `scripts/validate-tf-pulse.mjs`가 계약·상태·담당자·검증자·다음 행동·입력 체크리스트·B4 티저 게이트의 일치를 먼저 검사한다. 안전한 heartbeat를 저장한 뒤 deploy workflow를 명시적으로 호출해 Pages 공개 큐의 pulse 시각과 상태 지문을 갱신한다. 최신 [TF pulse 34513525751](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34513525751)과 [연결된 배포 34513547183](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34513547183)이 계약 검증·heartbeat·Pages·라이브 smoke까지 성공했다. 자동화는 사람의 반대 의견이나 외부 승인 결과를 만들지 않는다.
+`.github/workflows/tf-pulse.yml`은 6시간마다 Goal Contract·canonical 업무 그래프를 읽어 회의용 결정 제안을 생성하고, `scripts/validate-tf-pulse.mjs`가 계약·상태·담당자·검증자·다음 행동·입력 체크리스트·B4 티저 게이트의 일치를 먼저 검사한다. 안전한 heartbeat를 저장한 뒤 deploy workflow를 명시적으로 호출해 Pages 공개 큐의 pulse 시각과 상태 지문을 갱신한다. 최신 [TF pulse 34513525751](https://github.com/KRAdavid/gaba_info/actions/runs/34513525751)과 [연결된 배포 34513547183](https://github.com/KRAdavid/gaba_info/actions/runs/34513547183)이 계약 검증·heartbeat·Pages·라이브 smoke까지 성공했다. 자동화는 사람의 반대 의견이나 외부 승인 결과를 만들지 않는다.
 
 현재 canonical 업무 그래프는 DONE 8건, VERIFYING B2 1건, WAITING B3·B4·C2·E1 4건이다. 라이브 공개 export는 연구 8건·소비자용 주장 14건·제품 1종이며, 스마트스토어 연결과 750 제품 제거를 다시 확인했다. 전체 목표는 실제 후기 권한·현행 표시 승인·Cloudflare 운영 설정·실주문 대사·소비자 사용성 검증 전까지 완료로 선언하지 않는다.
 
 ## 2026-09-11 샌드박스 판정 경계 및 공개 재검증
 
-커밋 `c5fc87c`에서 샌드박스 시뮬레이션만으로 운영 승인을 추천하지 않도록 보고서 판정을 보강했다. 모든 작업이 `sandbox_simulation` 검증으로 끝나면 추천은 `revise`로 남고, 운영 화면은 `샌드박스 완료 · 실제 검증 필요`를 표시한다. 로컬 `pnpm test` 60개·타입검사·production build가 통과했으며, 최신 [GitHub Actions 34499389071](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34499389071)의 verify·Pages·라이브 smoke가 성공했다.
+커밋 `c5fc87c`에서 샌드박스 시뮬레이션만으로 운영 승인을 추천하지 않도록 보고서 판정을 보강했다. 모든 작업이 `sandbox_simulation` 검증으로 끝나면 추천은 `revise`로 남고, 운영 화면은 `샌드박스 완료 · 실제 검증 필요`를 표시한다. 로컬 `pnpm test` 60개·타입검사·production build가 통과했으며, 최신 [GitHub Actions 34499389071](https://github.com/KRAdavid/gaba_info/actions/runs/34499389071)의 verify·Pages·라이브 smoke가 성공했다.
 
 최신 공개 URL 재검증 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 13, waitingTasks 4, `smartStoreOnly: true`, `removed750: true`, `provenance: matched`다. 티저는 `PREVIEW` 상태로 리듬 체크 다음에 페이지 안에서 즉시 재생되는 iframe을 노출하고, 임베드가 막힐 때만 외부 페이지 대체 링크를 제공한다. 최종 공개 승인 게이트 B4는 업무 그래프와 공개 운영 큐에서 `WAITING`으로 유지한다. 390px·1440px 네 화면의 가로 넘침·콘솔 오류·400 이상 응답은 없었다. 제품 자료 감사는 7개 파일(완제품 후보 5개)을 찾았고, 주문 자료 감사는 1,086개 파일을 읽어 1500 후보 114행·121개 수량을 집계했지만 상태·취소·환불 필드와 실판매자 응답이 없어 E1은 계속 `WAITING`이다.
 
@@ -356,7 +356,7 @@ TF pulse가 활성 작업마다 상태에 맞는 두 가지 결정 경로와 최
 
 회귀 테스트는 60개 전체 통과했다. 로컬 Worker/D1(`127.0.0.1:8788`) 실제 HTTP에서 `/api/content`는 claims 14·products 1·reviews 1을 반환하고 후기 목적지 호스트가 `smartstore.naver.com`임을 확인했으며, 샌드박스 상태 PUT/GET/DELETE는 모두 200이었다. 타입검사와 production build도 통과했다. 이 검증은 로컬 영속 경로의 동기화 증거이며, Cloudflare 원격 D1 배포·백업 복구를 완료했다는 뜻은 아니다.
 
-`docs/B2_MATERIAL_VERIFICATION_20260911.md`에 1500 단상자·3개입·낱포 도면·제품 관련 시험성적서의 SHA-256과 시각 확인 범위를 묶었다. 원료 1 kg·10 kg 라벨은 명시적으로 제외하고, 최종 인쇄 승인·SKU 대조가 남아 B2는 `VERIFYING`이다. `goal:next`는 이 검증 중 작업을 별도 목록으로 출력해 외부 입력 대기와 구분한다. 이 문서·큐 가시성 변경을 포함한 [GitHub Actions 34499389071](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34499389071)의 verify·Pages·라이브 smoke가 성공했다.
+`docs/B2_MATERIAL_VERIFICATION_20260911.md`에 1500 단상자·3개입·낱포 도면·제품 관련 시험성적서의 SHA-256과 시각 확인 범위를 묶었다. 원료 1 kg·10 kg 라벨은 명시적으로 제외하고, 최종 인쇄 승인·SKU 대조가 남아 B2는 `VERIFYING`이다. `goal:next`는 이 검증 중 작업을 별도 목록으로 출력해 외부 입력 대기와 구분한다. 이 문서·큐 가시성 변경을 포함한 [GitHub Actions 34499389071](https://github.com/KRAdavid/gaba_info/actions/runs/34499389071)의 verify·Pages·라이브 smoke가 성공했다.
 
 ## 2026-09-10 로컬 제품 자료 재점검
 
@@ -370,7 +370,7 @@ TF pulse가 활성 작업마다 상태에 맞는 두 가지 결정 경로와 최
 
 ## 최신 현재 상태 — 2026-09-10 공개 배포와 살아있는 TF 운영 MVP
 
-- `main`의 GitHub Pages 배포가 성공했다. 공개 주소는 https://kradavid.github.io/cellpinda_GABA/ 이며 운영 MVP는 `?view=ops`에서 확인한다.
+- `main`의 GitHub Pages 배포가 성공했다. 공개 주소는 https://kradavid.github.io/gaba_info/ 이며 운영 MVP는 `?view=ops`에서 확인한다.
 - 공개 `gaba-master-index.json`은 연구 8건, 제품 1건(가바 1500), `750` 제품 0건을 포함한다. 제품·후기 CTA와 구매 목적지는 가바 1500 스마트스토어 상세 페이지(`https://smartstore.naver.com/cellpinda/products/4701017202`)로 통일했다. 연구 원장에 남은 과거 판매 페이지 URL은 출처 provenance이며 소비자 구매 목적지가 아니다.
 - TF 운영 MVP는 5개 스트림과 10개 역할(마케팅·소비자심리, 데이터·판매처 운영, 재무·QA, 독립 품질감사관 포함)을 생성하고, 목표 계약 회의 기록을 시작으로 실행·승인 대기·독립 검증별 의사결정(참여 역할·판단·반대 의견·증거·다음 조치)을 승인 보고서에 포함한다.
 - 로컬 Node/SQLite와 Worker/D1 모두 `/api/ops/runs/:runId` 저장 계약을 제공한다. revision·감사 snapshot·30일 만료·클라이언트 샌드박스 키로 재개를 지원하며, 정적 Pages에서는 API가 없을 때 브라우저 저장으로 폴백한다.
@@ -391,7 +391,7 @@ TF pulse가 활성 작업마다 상태에 맞는 두 가지 결정 경로와 최
 
 작은 계약 초안은 재개를 위해 허용하지만 작업이 포함된 상태는 담당자·검증자·수락 기준을 갖춰야 하며, 완료 작업은 `sandbox_simulation` 검증과 `independent-review` 증거를 함께 남겨야 한다. 이 검증은 외부 운영 결과를 만들어 주지 않으며, 서버 저장 데이터의 무결성과 개인정보 최소화를 보장하기 위한 경계다. Node·Worker 샌드박스 API 테스트에 위조 완료·위조 전환·비공개 필드 거부 회귀를 추가했다.
 
-커밋 `e0d9d00`의 GitHub Actions `34482666207`은 검증·Pages 배포·Worker 설정 점검·라이브 smoke를 모두 성공했다. Worker는 Cloudflare Secrets가 없어 실제 Worker 배포 단계는 건너뛰었고, 정적 공개 URL은 새 번들의 운영 문구와 공개 export를 확인했다. `pnpm run validate:live -- https://kradavid.github.io/cellpinda_GABA` 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 12, waitingTasks 3, smartStoreOnly true, removed750 true다.
+커밋 `e0d9d00`의 GitHub Actions `34482666207`은 검증·Pages 배포·Worker 설정 점검·라이브 smoke를 모두 성공했다. Worker는 Cloudflare Secrets가 없어 실제 Worker 배포 단계는 건너뛰었고, 정적 공개 URL은 새 번들의 운영 문구와 공개 export를 확인했다. `pnpm run validate:live -- https://kradavid.github.io/gaba_info` 결과는 page 200, claims 14, masterRecords 8, products 1, queueTasks 12, waitingTasks 3, smartStoreOnly true, removed750 true다.
 
 커밋 `b352daf`에 `pnpm run preflight:deploy`를 추가했다. 이 명령은 Wrangler 설정, production 산출물, 공개 export(가바1500 1개·연구 8건·운영 작업 12건)와 Cloudflare 필수 Secrets의 존재 여부를 비밀값 없이 점검한다. 현재 로컬 실행은 구조·산출물·공개 범위는 통과하고 `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `ADMIN_TOKEN`, `MEMBER_ORIGIN`이 없어 `WAITING`이다. 가짜 값으로 strict 성공 경로도 확인했으며, 실제 비밀값을 저장하거나 출력하지 않았다. 최신 CI 실행 `34487336124`도 검증·Pages·라이브 smoke에 성공했다.
 
@@ -567,11 +567,11 @@ Worker는 제품 전용 title/description/canonical을 출력하고, 중복/잘�
 
 ## 2026-09-10 자동 협업 파동 시작 보강
 
-`startMvpSession`을 도메인 계약으로 추가해 목표 생성과 안전한 내부 파동 실행을 하나의 테스트 가능한 흐름으로 묶었다. `?view=ops`에서 목표를 생성하면 G1·E1·E2·C1·Q1을 우선순위대로 실행하고 독립 검증한 뒤, 외부 약속 작업 P1은 승인 요청과 `WAITING` 상태로 남긴다. 승인·게시·구매는 실행하지 않는다. 로컬 브라우저에서 목표 생성 직후 완료 5건·대기 1건, 새로고침 복원, 390px 가로 넘침 없음·HTTP/콘솔 오류 없음을 확인했다. 도메인 테스트는 59개로 늘었고, release HEAD `2e6a3fa`의 [GitHub 실행 34488512347](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34488512347)은 검증·Pages·라이브 smoke에 성공했다. Cloudflare Secrets가 없어 Worker 영구 배포는 계속 `WAITING`이며, 실제 주문·후기 권한·소비자 사용성 조사는 별도 입력이 필요하다.
+`startMvpSession`을 도메인 계약으로 추가해 목표 생성과 안전한 내부 파동 실행을 하나의 테스트 가능한 흐름으로 묶었다. `?view=ops`에서 목표를 생성하면 G1·E1·E2·C1·Q1을 우선순위대로 실행하고 독립 검증한 뒤, 외부 약속 작업 P1은 승인 요청과 `WAITING` 상태로 남긴다. 승인·게시·구매는 실행하지 않는다. 로컬 브라우저에서 목표 생성 직후 완료 5건·대기 1건, 새로고침 복원, 390px 가로 넘침 없음·HTTP/콘솔 오류 없음을 확인했다. 도메인 테스트는 59개로 늘었고, release HEAD `2e6a3fa`의 [GitHub 실행 34488512347](https://github.com/KRAdavid/gaba_info/actions/runs/34488512347)은 검증·Pages·라이브 smoke에 성공했다. Cloudflare Secrets가 없어 Worker 영구 배포는 계속 `WAITING`이며, 실제 주문·후기 권한·소비자 사용성 조사는 별도 입력이 필요하다.
 
 ## 재개 저장 revision 보호
 
-여러 탭·새로고침에서 오래된 샌드박스 상태가 최신 승인 상태를 덮어쓰지 않도록 Node API·Cloudflare Worker·브라우저 저장 요청에 `X-Ops-Revision` 낙관적 충돌 검사를 연결했다. 서버는 기대 revision이 현재 값과 다르면 `409`로 거부하고 상태를 변경하지 않으며, 브라우저는 최신 상태를 확인하도록 안내한다. Node·Worker 회귀검사에서 오래된 revision 거부 후 최신 revision 저장을 확인했고, 실제 로컬 브라우저에서 최초 revision `0` 저장·새로고침 복원·완료 5건/검증대기 1건·성공 후 반복 PUT 없음·콘솔 오류 없음을 확인했다. release HEAD `21f7c75`의 [GitHub 실행 34490972163](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34490972163)은 타입검사·테스트·빌드·Pages·라이브 smoke에 성공했다. 이 보호는 영구 Worker 비밀값이 설정되기 전 로컬/Pages 운영 코어의 무결성을 검증한 것이며, 실제 Cloudflare D1 운영·다중 운영자 권한·외부 주문은 별도 대기다.
+여러 탭·새로고침에서 오래된 샌드박스 상태가 최신 승인 상태를 덮어쓰지 않도록 Node API·Cloudflare Worker·브라우저 저장 요청에 `X-Ops-Revision` 낙관적 충돌 검사를 연결했다. 서버는 기대 revision이 현재 값과 다르면 `409`로 거부하고 상태를 변경하지 않으며, 브라우저는 최신 상태를 확인하도록 안내한다. Node·Worker 회귀검사에서 오래된 revision 거부 후 최신 revision 저장을 확인했고, 실제 로컬 브라우저에서 최초 revision `0` 저장·새로고침 복원·완료 5건/검증대기 1건·성공 후 반복 PUT 없음·콘솔 오류 없음을 확인했다. release HEAD `21f7c75`의 [GitHub 실행 34490972163](https://github.com/KRAdavid/gaba_info/actions/runs/34490972163)은 타입검사·테스트·빌드·Pages·라이브 smoke에 성공했다. 이 보호는 영구 Worker 비밀값이 설정되기 전 로컬/Pages 운영 코어의 무결성을 검증한 것이며, 실제 Cloudflare D1 운영·다중 운영자 권한·외부 주문은 별도 대기다.
 
 ## 정적 호스트 API 폴백
 
@@ -631,7 +631,7 @@ GitHub Pages처럼 Worker API가 없는 정적 호스트에서는 API 주소를 
 
 `generate:share-pages`를 빌드에 포함하고 라이브 검증에서 6개 공유 경로·결과 이미지·앱 전환·부정적 연구 문구 미포함을 확인한다. 공개 공유 미리보기는 생활 유형을 소개하는 기능이며 제품 효능이나 건강 상태를 판정하지 않는다.
 
-커밋 `46e2c51`의 [GitHub Actions 34590029891](https://github.com/KRAdavid/cellpinda_GABA/actions/runs/34590029891)은 검증·Pages 게시·라이브 smoke를 성공시켰다. 라이브 `validate:live`는 페이지 200, 공유 경로 6개, 연구 8건, 제품 1종, Smart Store only, 750 제거, 부정적 연구 문구 0건을 확인했다.
+커밋 `46e2c51`의 [GitHub Actions 34590029891](https://github.com/KRAdavid/gaba_info/actions/runs/34590029891)은 검증·Pages 게시·라이브 smoke를 성공시켰다. 라이브 `validate:live`는 페이지 200, 공유 경로 6개, 연구 8건, 제품 1종, Smart Store only, 750 제거, 부정적 연구 문구 0건을 확인했다.
 
 ## 2026-09-11 모바일 본문 가독성 계약 보강
 
@@ -686,7 +686,7 @@ Chrome 기반 Playwright 임시 실행기로 데스크톱 1440×1000과 모바�
 
 `validate:research-copy`, `validate:ui-contract`, 전체 production build, 76개 회귀 테스트가 통과했다. 이 변경은 연구 정보를 소비자 언어와 도표로 배치한 것이며 연구 용량·완제품 효능·권장량을 새로 승인한 것이 아니다.
 
-같은 변경의 GitHub Actions `34624983973`에서 검증·Pages 게시·Worker 설정 점검·라이브 smoke가 모두 성공했다. 배포 후 `pnpm run validate:live -- https://kradavid.github.io/cellpinda_GABA`는 `page=200`, `claims=14`, `masterRecords=8`, `products=1`, `sharePages=6`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+같은 변경의 GitHub Actions `34624983973`에서 검증·Pages 게시·Worker 설정 점검·라이브 smoke가 모두 성공했다. 배포 후 `pnpm run validate:live -- https://kradavid.github.io/gaba_info`는 `page=200`, `claims=14`, `masterRecords=8`, `products=1`, `sharePages=6`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
 
 ## 2026-09-12 로컬 원장 자동 동기화 보강
 
@@ -724,7 +724,7 @@ Chrome 기반 Playwright 임시 실행기로 데스크톱 1440×1000과 모바�
 
 ## 2026-09-19 Pages 경로 렌더링 QA 및 공개 데이터 누락 수정
 
-GitHub Pages와 같은 `/cellpinda_GABA/` 경로로 정적 빌드를 렌더링해 데스크톱 1440×1400·모바일 390×844에서 확인했다. 첫 연구 상세를 열어 참여자와 PSQI·ISI 안내를 확인했고, 7개 연구 카드와 모바일 폭을 검증했다. 점검 중 공개 JSON 투영기가 `consumerFindingFirst`를 버려 Powers 성장호르몬 카드가 관찰 결과부터 보이지 않는 문제를 발견했다. `sync-public-data.mjs`와 공개 스냅샷 exporter에 필드를 추가하고, public export와 라이브 smoke에서 값을 확인하는 회귀 검사를 넣었다. 재빌드 후 콘텐츠 JSON·마스터 인덱스 둘 다 해당 필드를 유지하며, Powers 카드 상세에 중복 결과 문단이 나타나지 않는 것을 확인했다. 전체 101개 테스트, Worker·프런트 타입검사, production build와 Pages artifact 검증을 통과했다. 브라우저 화면은 Chromium headless CDP로 확인했으며 실기기·외부 소비자 조사는 아니다.
+GitHub Pages와 같은 `/gaba_info/` 경로로 정적 빌드를 렌더링해 데스크톱 1440×1400·모바일 390×844에서 확인했다. 첫 연구 상세를 열어 참여자와 PSQI·ISI 안내를 확인했고, 7개 연구 카드와 모바일 폭을 검증했다. 점검 중 공개 JSON 투영기가 `consumerFindingFirst`를 버려 Powers 성장호르몬 카드가 관찰 결과부터 보이지 않는 문제를 발견했다. `sync-public-data.mjs`와 공개 스냅샷 exporter에 필드를 추가하고, public export와 라이브 smoke에서 값을 확인하는 회귀 검사를 넣었다. 재빌드 후 콘텐츠 JSON·마스터 인덱스 둘 다 해당 필드를 유지하며, Powers 카드 상세에 중복 결과 문단이 나타나지 않는 것을 확인했다. 전체 101개 테스트, Worker·프런트 타입검사, production build와 Pages artifact 검증을 통과했다. 브라우저 화면은 Chromium headless CDP로 확인했으며 실기기·외부 소비자 조사는 아니다.
 
 ## 2026-09-19 감리 개선사항 적용
 

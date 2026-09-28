@@ -356,11 +356,11 @@ requireMatch(app, /content\?\.reviews\?\.length \? <a href=\{REVIEW_DESTINATION_
 requireMatch(purchaseQuestions, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'purchase FAQ review CTA must deep-link to the approved Smart Store review dialog');
 requireMatch(story, /href=\{REVIEW_DESTINATION_URL\}[\s\S]*?>가바 1500 스마트스토어 후기 읽기/, 'GABA story review link must open the approved Smart Store review dialog');
 requireMatch(review, /quotes\.length > 0 \|\| destinations\.length > 0/, 'review reading guide must remain visible with an approved Smart Store destination');
-requireMatch(indexHtml, /rel="canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root canonical metadata is missing');
-requireMatch(indexHtml, /property="og:url" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\//, 'root Open Graph URL is missing');
+requireMatch(indexHtml, /rel="canonical" href="https:\/\/kradavid\.github\.io\/gaba_info\//, 'root canonical metadata is missing');
+requireMatch(indexHtml, /property="og:url" content="https:\/\/kradavid\.github\.io\/gaba_info\//, 'root Open Graph URL is missing');
 requireMatch(indexHtml, /application\/ld\+json[\s\S]*"@type":"WebSite"[\s\S]*"inLanguage":"ko-KR"/, 'root WebSite structured data is missing');
 requireMatch(notFoundHtml, /<title>페이지를 찾을 수 없어요 \| 셀핀다<\/title>[\s\S]*페이지를<br\s*\/>찾을 수 없어요\./, 'static not-found page must explain the dead end in consumer language');
-requireMatch(notFoundHtml, /href="\/cellpinda_GABA\/"[\s\S]*href="\/cellpinda_GABA\/#rhythm"/, 'not-found page must offer a working home and one-minute-check path');
+requireMatch(notFoundHtml, /href="\/gaba_info\/"[\s\S]*href="\/gaba_info\/#rhythm"/, 'not-found page must offer a working home and one-minute-check path');
 if (/<link rel="canonical"|property="og:(?:url|title|image)"/i.test(notFoundHtml)) fail('not-found page must not reuse home-page canonical or social metadata');
 if (/cp\s+dist-pages\/index\.html\s+dist-pages\/404\.html/.test(deployWorkflow)) fail('Pages deployment must keep the dedicated 404 document instead of copying the homepage');
 if (/cellpinda\.co\.kr|cellpindamall\.com|공식몰/i.test(app + indexHtml)) fail('legacy official-mall destination leaked into consumer source');
@@ -396,7 +396,7 @@ for (const id of shareIds) {
   const page = resolve(shareRoot, id, 'index.html');
   if (!existsSync(page)) fail(`share page ${id} is missing`);
   const html = await readFile(page, 'utf8');
-  requireMatch(html, new RegExp(`canonical" href="https:\\/\\/kradavid\\.github\\.io\\/cellpinda_GABA\\/share\\/${id}\\/`), `share page ${id} canonical metadata is missing`);
+  requireMatch(html, new RegExp(`canonical" href="https:\\/\\/kradavid\\.github\\.io\\/gaba_info\\/share\\/${id}\\/`), `share page ${id} canonical metadata is missing`);
   requireMatch(html, new RegExp(`rhythm=${id}`), `share page ${id} handoff is missing`);
   requireMatch(html, new RegExp(`href="\\.\\.\\/\\.\\.\\/\\?rhythm=${id}"`), `share page ${id} no-script handoff must preserve the result type`);
   requireMatch(html, new RegExp(`target\\.searchParams\\.set\\('rhythm','${id}'\\)`), `share page ${id} script handoff must preserve the result type`);
@@ -414,10 +414,10 @@ for (const id of shareIds) {
 const focusPage = resolve(root, 'public/focus/index.html');
 if (!existsSync(focusPage)) fail('focus invite page is missing');
 const focusHtml = await readFile(focusPage, 'utf8');
-requireMatch(focusHtml, /canonical" href="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/focus\//, 'focus invite canonical metadata is missing');
+requireMatch(focusHtml, /canonical" href="https:\/\/kradavid\.github\.io\/gaba_info\/focus\//, 'focus invite canonical metadata is missing');
 requireMatch(focusHtml, /focus=1#focus-game|focus=1/, 'focus invite handoff is missing');
 requireMatch(focusHtml, /property="og:title" content="“너도 해봐” 뇌컨디션 확인 챌린지"/, 'focus invite Open Graph title is missing');
-requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/cellpinda_GABA\/assets\/focus-game-card-v5\.png"/, 'focus invite Open Graph image is missing');
+requireMatch(focusHtml, /property="og:image" content="https:\/\/kradavid\.github\.io\/gaba_info\/assets\/focus-game-card-v5\.png"/, 'focus invite Open Graph image is missing');
 requireMatch(focusHtml, /application\/ld\+json[\s\S]*"@type":"WebPage"[\s\S]*"inLanguage":"ko-KR"/, 'focus invite WebPage structured data is missing');
 
   const researchAccent = researchStyles.match(/research-library-consumer-summary strong\{[^}]*color:#([0-9a-f]{6})/i)?.[1];

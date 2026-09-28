@@ -64,8 +64,8 @@ test('all 1024 complete responses are deterministic and preserve their inputs', 
 });
 
 test('shared result URLs resolve both static paths and query fallbacks safely', () => {
-  assert.equal(rhythmIdFromUrl(new URL('https://example.test/cellpinda_GABA/share/active/')), 'active');
-  assert.equal(rhythmIdFromUrl(new URL('https://example.test/cellpinda_GABA/?rhythm=sleep#rhythm')), 'sleep');
-  assert.equal(rhythmIdFromUrl(new URL('https://example.test/cellpinda_GABA/share/not-a-type/')), null);
-  assert.equal(rhythmIdFromUrl(new URL('https://example.test/cellpinda_GABA/?rhythm=active<script>')), null);
+  assert.equal(rhythmIdFromUrl(new URL('https://example.test/gaba_info/share/active/')), 'active');
+  assert.equal(rhythmIdFromUrl(new URL('https://example.test/gaba_info/?rhythm=sleep#rhythm')), 'sleep');
+  assert.equal(rhythmIdFromUrl(new URL('https://example.test/gaba_info/share/not-a-type/')), null);
+  assert.equal(rhythmIdFromUrl(new URL('https://example.test/gaba_info/?rhythm=active<script>')), null);
 });
