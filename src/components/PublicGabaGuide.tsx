@@ -13,6 +13,7 @@ import {
   Menu,
   Moon,
   Network,
+  Play,
   Share2,
   ShieldCheck,
   Sparkles,
@@ -85,6 +86,13 @@ type FermentedSafetyStep = {
   body: string;
   icon: 'ferment' | 'quality' | 'human';
   source: { label: string; url: string };
+};
+
+type ExpertVideo = {
+  id: string;
+  title: string;
+  topic: string;
+  channel: string;
 };
 
 const everydayTopics: EverydayTopic[] = [
@@ -290,6 +298,17 @@ const fermentedSafetySteps: FermentedSafetyStep[] = [
   },
 ];
 
+const expertVideos: ExpertVideo[] = [
+  { id: 'RLAU1VWGsaI', title: 'GABA와 수면 리듬', topic: '수면', channel: '교육하는 의사! 이동환TV' },
+  { id: 'Cnk0PGn9YBM', title: '갱년기와 잠, GABA 질문', topic: '수면', channel: '셀럽의 건강비결' },
+  { id: 'roEtojyk9_0', title: '잠이 안 올 때 GABA 이야기', topic: '수면', channel: '여에스더의 에스더TV' },
+  { id: 'BiZXS_ojLUA', title: '불면과 GABA의 관계', topic: '수면', channel: '브레인튜브 Brain Doctor' },
+  { id: 'rOFkZg09AoY', title: 'GABA 섭취 연구 읽기', topic: '연구 읽기', channel: 'SLEEP Dr. 신원철 꿀잠튜브' },
+  { id: '4xGSHxkMYew', title: 'GABA의 기본 역할', topic: 'GABA란', channel: '비엠한방내과 [bm_k_clinic]' },
+  { id: '7Zsxm9Wh2Yg', title: '자율신경과 GABA 식품', topic: '자율신경', channel: '30년 자율신경, 정이안한의원TV' },
+  { id: 'vnocd9ZVJj0', title: 'GABA 수용체와 수면', topic: '수용체', channel: '영양과학자 양과자' },
+];
+
 const growthSteps = ['GABA 연구', '수면 및 신경 조절', '성장호르몬 반응', '체성분과 성장 관련 지표', '성장기 동물 연구', '어린이 대상 연구'];
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
@@ -435,6 +454,8 @@ function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
 export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
+  const [activeVideoId, setActiveVideoId] = useState(expertVideos[0].id);
+  const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
 
   useEffect(() => {
     document.title = '1950년의 발견, 발효와 연구로 이어진 GABA | GABA Guide';
@@ -452,6 +473,14 @@ export default function PublicGabaGuide() {
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     document.getElementById(id)?.scrollIntoView({ behavior, block: 'start' });
     window.history.replaceState(null, '', `#${hash}`);
+  };
+
+  const selectExpertVideo = (id: string) => {
+    setActiveVideoId(id);
+    if (window.matchMedia('(max-width: 700px)').matches) {
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      requestAnimationFrame(() => document.getElementById('expert-video-feature')?.scrollIntoView({ behavior, block: 'start' }));
+    }
   };
 
   const sharePage = async () => {
@@ -602,7 +631,22 @@ export default function PublicGabaGuide() {
         </section>
 
         <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">10 · EXPERT VOICES</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>연구 결과를 먼저 읽고<br />영상은 다음 순서로 이어집니다.</p></div><div className="guide-expert-intro"><div className="guide-video-placeholder"><span className="guide-video-play" aria-hidden="true">▶</span><strong>전문가 영상 큐레이션 중</strong><p>영상이 준비되면 이 흐름 안에서 같은 연구 결과와 함께 보여드립니다.</p></div><p className="guide-expert-note">지금은 앞에서 읽은<br /><strong>사람·동물·피부 연구 결과</strong>와<br />각 논문의 출처를 먼저 제공합니다.</p></div><div className="guide-expert-thread"><span>이어서 읽기</span><strong>수면 연구</strong><i>→</i><strong>연구 결과</strong><i>→</i><strong>출처 원문</strong></div></div>
+          <div className="guide-container">
+            <div className="guide-section-heading"><div><p className="guide-section-number">10 · EXPERT VOICES</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>히어로샷을 고르고<br />영상은 바로 재생됩니다.</p></div>
+            <p className="guide-section-lead guide-video-gallery-lead">공개된 의사·과학자 채널의 Shorts를 수면, GABA의 기본 역할, 자율신경과 연구 읽기 주제로 모았습니다.</p>
+            <div className="guide-video-gallery">
+              <article className="guide-video-feature" id="expert-video-feature" aria-live="polite">
+                <div className="guide-video-feature-media"><iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="eager" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+                <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>SHORTS</span></div><h3>{activeVideo.title}</h3><p>{activeVideo.channel}</p><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a></div>
+              </article>
+              <div className="guide-video-board" aria-label="전문가 영상 게시판">
+                <div className="guide-video-board-head"><span>VIDEO BOARD</span><strong>{expertVideos.length}개 영상</strong></div>
+                <div className="guide-video-grid">{expertVideos.map((video, index) => <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} onClick={() => selectExpertVideo(video.id)}><span className="guide-video-card-thumb"><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" /><span className="guide-video-card-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span></span><span className="guide-video-card-copy"><span>{video.topic}</span><strong>{video.title}</strong><small>{video.channel}</small></span></button>)}</div>
+              </div>
+            </div>
+            <p className="guide-expert-note guide-video-gallery-note">영상은 각 채널의 공개 Shorts를 임베드한 큐레이션입니다. 선택한 영상은 이 페이지 안에서 바로 재생되고, 원문 링크도 함께 제공합니다.</p>
+            <div className="guide-expert-thread"><span>이어서 읽기</span><strong>수면 연구</strong><i>→</i><strong>연구 결과</strong><i>→</i><strong>출처 원문</strong></div>
+          </div>
         </section>
 
         <section className="guide-section guide-reading-note guide-story-section" aria-label="연구 읽는 순서"><div className="guide-container"><p className="guide-section-number">11 · READ THE SOURCES</p><p className="guide-reading-note-copy">각 연구 카드에서 연구 방법과 실제 관찰 결과를 읽은 다음, 카드 아래 출처를 통해 원문으로 이어집니다.</p></div></section>
