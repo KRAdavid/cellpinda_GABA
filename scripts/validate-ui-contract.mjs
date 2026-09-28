@@ -35,6 +35,7 @@ const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css')
 const admin = await read('src/components/Admin.tsx');
 const operations = await read('src/components/OperationsMvp.tsx');
 const indexHtml = await read('index.html');
+const publicGuideStyles = await read('src/components/PublicGabaGuide.css');
 const researchRouteHtml = await read('public/research/index.html');
 const notFoundHtml = await read('public/404.html');
 const deployWorkflow = await read('.github/workflows/deploy.yml');
@@ -129,6 +130,10 @@ requireMatch(app, /className="mobile-break"/, 'mobile hero headline must wrap in
 requireMatch(app, /<section className="hero" aria-labelledby="hero-heading">[\s\S]*<h1 id="hero-heading"/, 'hero landmark must be named by its visible headline');
 requireMatch(app, /<h1 id="hero-heading" aria-label="퇴근했는데도 일 생각이 계속 나나요\?">/, 'hero headline must keep a space-preserving accessible name across visual line breaks');
 requireMatch(styles, /@media\(max-width:680px\)\{\.header>\.button\{display:none\}\.menu-toggle\{display:flex;[^}]*width:44px;height:44px/, 'mobile header must keep its menu toggle inside the viewport');
+requireMatch(publicGuideStyles, /\.gaba-guide\{overflow:clip\}/, 'public GABA guide must avoid an ancestor overflow container that can break sticky mobile navigation');
+requireMatch(publicGuideStyles, /\.guide-research-detail\{scroll-margin-top:92px\}/, 'public GABA research detail must clear the sticky header after a mobile deep-link jump');
+requireMatch(publicGuideStyles, /@media \(max-width:700px\)\{[\s\S]*?\.guide-header nav\{top:70px/, 'public GABA mobile menu must begin below its 70px header');
+requireMatch(publicGuideStyles, /\.guide-library-filters\{grid-template-columns:1fr\}/, 'public GABA mobile research filters must remain one readable column');
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:1100px\)[\s\S]*?\.header nav\{display:none[\s\S]*?\.menu-toggle\{display:flex/, 'tablet navigation must collapse before menu labels wrap');
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:1100px\)[\s\S]*?\.hero-copy\{[^}]*background:linear-gradient/, 'tablet hero text must keep a readable background over the photo');
 requireMatch(research, /research-method-filter[\s\S]*연구 방법[\s\S]*더보기/, 'research method filter must stay behind an optional consumer-friendly control');
