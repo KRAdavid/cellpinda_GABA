@@ -1,5 +1,5 @@
 import {useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent} from 'react';
-import {ArrowLeft, ArrowRight, BookOpen, Brain, ExternalLink, PauseCircle, Sparkles} from 'lucide-react';
+import {ArrowLeft, ArrowRight, BookOpen, Brain, ExternalLink, PauseCircle, PlayCircle, Sparkles} from 'lucide-react';
 import './ConsumerGabaReel.css';
 
 type ReelSlide = {
@@ -66,9 +66,23 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
     ? '내 답변 기록과 제품 정보는 서로 따로 살펴보세요. 제품 표시는 제품 영역에서 확인할 수 있어요.'
     : '잠과 휴식에 관한 다섯 가지 질문에 답하고, 오늘 해볼 행동을 확인해 보세요.';
   const [activeIndex, setActiveIndex] = useState(0);
+  const [manualAutoplayPaused, setManualAutoplayPaused] = useState(false);
+  const [railInteracting, setRailInteracting] = useState(false);
   const railRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<Array<HTMLElement | null>>([]);
   const impressionTracked = useRef(false);
+
+  useEffect(() => {
+    if (manualAutoplayPaused || railInteracting || slideCount < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setInterval(() => {
+      setActiveIndex(current => {
+        const nextIndex = (current + 1) % slideCount;
+        slideRefs.current[nextIndex]?.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'center'});
+        return nextIndex;
+      });
+    }, 3000);
+    return () => window.clearInterval(timer);
+  }, [activeIndex, manualAutoplayPaused, railInteracting, slideCount]);
 
   useEffect(() => {
     const rail = railRef.current;
@@ -132,17 +146,18 @@ export default function ConsumerGabaReel({onEvent, hasRhythmResult = false}: Pro
             {hasRhythmResult ? <>내 상태를 확인한 뒤<br />GABA를 알아보세요</> : <>GABA가 궁금하다면<br />먼저 한 장씩 보세요</>}
           </h2>
         </div>
-        <p>옆으로 넘기며 한 장씩 확인해 보세요.<br />연구·제품·후기는 각각 다른 화면에서 확인할 수 있어요.</p>
+        <p>3초마다 다음 카드로 자동 이동해요.<br />읽는 중에는 자동 넘김을 멈출 수 있어요.</p>
         <span className="consumer-reel__swipe-hint" aria-hidden="true">다음 카드 →</span>
       </div>
       <div className="consumer-reel__controls" aria-label="GABA 이야기 카드 이동">
         <span aria-live="polite">{activeIndex + 1} / {slideCount}</span>
         <div>
+          <button type="button" className="consumer-reel__autoplay" onClick={() => setManualAutoplayPaused(paused => !paused)} aria-pressed={manualAutoplayPaused}>{manualAutoplayPaused ? <PlayCircle size={16} aria-hidden="true" /> : <PauseCircle size={16} aria-hidden="true" />}{manualAutoplayPaused ? '자동 넘김 시작' : '자동 넘김 멈춤'}</button>
           <button type="button" className="consumer-reel__control" onClick={() => goTo(activeIndex - 1)} disabled={activeIndex === 0} aria-label="이전 카드"><ArrowLeft size={18} aria-hidden="true" /></button>
           <button type="button" className="consumer-reel__control" onClick={() => goTo(activeIndex + 1)} disabled={activeIndex === slides.length - 1} aria-label="다음 카드"><ArrowRight size={18} aria-hidden="true" /></button>
         </div>
       </div>
-      <div ref={railRef} className="consumer-reel__rail" tabIndex={0} aria-label="GABA 이야기 카드 목록" onKeyDown={handleRailKeyDown}>
+      <div ref={railRef} className="consumer-reel__rail" tabIndex={0} aria-label="GABA 이야기 카드 목록" onKeyDown={handleRailKeyDown} onMouseEnter={() => setRailInteracting(true)} onMouseLeave={() => setRailInteracting(false)} onFocusCapture={() => setRailInteracting(true)} onBlurCapture={event => {if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setRailInteracting(false);}} onPointerDown={() => setRailInteracting(true)} onPointerUp={() => setRailInteracting(false)}>
         {slides.map((slide, index) => {
           const Icon = slide.icon;
           return <article

@@ -122,6 +122,9 @@ if (teaser.includes("onEvent?.('teaser_play'")) fail('teaser iframe load must no
 requireMatch(consumerReel, /const handleRailKeyDown =/, 'the GABA story card rail must define a keyboard navigation handler');
 for (const key of ['ArrowRight', 'PageDown', 'ArrowLeft', 'PageUp', 'Home', 'End']) requireMatch(consumerReel, new RegExp(`handleRailKeyDown[\\s\\S]*${key}`), `the GABA story card rail must handle ${key}`);
 requireMatch(consumerReel, /onKeyDown=\{handleRailKeyDown\}/, 'the GABA story card rail must attach keyboard navigation after it receives focus');
+requireMatch(consumerReel, /setInterval\(\(\) => \{[\s\S]*\}, 3000\)/, 'the GABA story card rail must auto-advance every three seconds');
+if (!consumerReel.includes('manualAutoplayPaused') || !consumerReel.includes('자동 넘김 멈춤') || !consumerReel.includes('자동 넘김 시작')) fail('the GABA story card rail must provide a visible autoplay pause and resume control');
+requireMatch(consumerReel, /prefers-reduced-motion: reduce/, 'the GABA story card rail must respect reduced-motion preferences while autoplaying');
 requireMatch(consumerReel, /consumer-reel__boundary[\s\S]*일반 GABA 연구를 쉽게 정리한 내용이에요\. 셀핀다 완제품 시험 결과가 아니며[\s\S]*제품 정보는 제품 구성에서 따로 확인해 보세요\./, 'the first GABA story research card must state that it is not a Cellpinda finished-product trial');
 const nav = app.match(/<nav id="primary-navigation"[\s\S]*?<\/nav>/)?.[0] || '';
 if (/ops|admin|account|운영판|관리자/i.test(nav)) fail('internal routes leaked into consumer navigation');
