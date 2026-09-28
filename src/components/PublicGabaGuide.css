@@ -515,9 +515,11 @@
 .guide-research-scale-head h3{margin:10px 0 0;color:#fff;font-size:clamp(25px,3vw,38px);font-weight:850;letter-spacing:-.08em;line-height:1.15}
 .guide-research-scale-head>p{margin:0;color:#b9d7df;font-size:13px;line-height:1.65;letter-spacing:-.03em;text-align:right}
 .guide-research-scale-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:6px}
-.guide-research-scale-grid article{min-width:0;padding:25px 24px 19px;border-left:1px solid rgba(224,247,248,.18)}
+.guide-research-scale-grid article{display:grid;grid-template-columns:10px minmax(0,1fr);gap:18px;min-width:0;padding:25px 24px 19px;border-left:1px solid rgba(224,247,248,.18)}
 .guide-research-scale-grid article:first-child{padding-left:0;border-left:0}
 .guide-research-scale-grid article:last-child{padding-right:0}
+.guide-research-scale-bar{position:relative;align-self:stretch;min-height:139px;border-radius:999px;background:rgba(223,247,248,.14);overflow:hidden}
+.guide-research-scale-bar span{position:absolute;right:0;bottom:0;left:0;min-height:6px;border-radius:999px;background:linear-gradient(180deg,#9de9e4 0%,#37b9ba 100%);height:var(--guide-scale-height)}
 .guide-research-scale-grid strong{display:block;color:#96e3df;font-size:clamp(40px,5vw,70px);font-weight:850;letter-spacing:-.075em;line-height:.96;font-variant-numeric:tabular-nums}
 .guide-research-scale-grid h4{margin:18px 0 7px;color:#fff;font-size:15px;font-weight:850;letter-spacing:-.045em;line-height:1.4}
 .guide-research-scale-grid p{margin:0;color:#b9d7df;font-size:11px;line-height:1.6;letter-spacing:-.03em}
@@ -533,8 +535,9 @@
   .guide-research-scale-head h3{font-size:27px;line-height:1.18}
   .guide-research-scale-head>p{margin-top:11px;font-size:13px;text-align:left}
   .guide-research-scale-grid{display:block;margin-top:0}
-  .guide-research-scale-grid article,.guide-research-scale-grid article:first-child,.guide-research-scale-grid article:last-child{padding:20px 0 17px;border-top:1px solid rgba(224,247,248,.18);border-left:0}
+  .guide-research-scale-grid article,.guide-research-scale-grid article:first-child,.guide-research-scale-grid article:last-child{grid-template-columns:8px minmax(0,1fr);gap:16px;padding:20px 0 17px;border-top:1px solid rgba(224,247,248,.18);border-left:0}
   .guide-research-scale-grid article:first-child{border-top:0}
+  .guide-research-scale-bar{min-height:104px}
   .guide-research-scale-grid strong{font-size:52px}
   .guide-research-scale-grid h4{display:inline-block;margin:11px 8px 0 0;font-size:16px}
   .guide-research-scale-grid p{display:inline;font-size:11px}

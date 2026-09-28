@@ -74,6 +74,7 @@ type ResearchScaleStat = {
   value: string;
   label: string;
   detail: string;
+  scale: number;
   source: { label: string; url: string };
 };
 
@@ -282,8 +283,9 @@ const applicationCases: ApplicationCase[] = [
 const researchScaleStats: ResearchScaleStat[] = [
   {
     value: '984',
-    label: '하버드 소속 GABA 문헌',
-    detail: 'PubMed 제목·초록 + 소속 검색',
+    label: '하버드',
+    detail: 'GABA 문헌 · PubMed',
+    scale: 8,
     source: {
       label: 'PubMed 검색',
       url: 'https://pubmed.ncbi.nlm.nih.gov/?term=%28%28GABA%5BTitle%2FAbstract%5D%29+OR+%28%22gamma-aminobutyric+acid%22%5BTitle%2FAbstract%5D%29%29+AND+%28Harvard%5BAffiliation%5D+OR+%22Harvard+Medical+School%22%5BAffiliation%5D%29',
@@ -291,8 +293,9 @@ const researchScaleStats: ResearchScaleStat[] = [
   },
   {
     value: '557',
-    label: '옥스퍼드 소속 GABA 문헌',
-    detail: 'PubMed 제목·초록 + 소속 검색',
+    label: '옥스퍼드',
+    detail: 'GABA 문헌 · PubMed',
+    scale: 5,
     source: {
       label: 'PubMed 검색',
       url: 'https://pubmed.ncbi.nlm.nih.gov/?term=%28%28GABA%5BTitle%2FAbstract%5D%29+OR+%28%22gamma-aminobutyric+acid%22%5BTitle%2FAbstract%5D%29%29+AND+%28Oxford%5BAffiliation%5D+OR+%22University+of+Oxford%22%5BAffiliation%5D%29',
@@ -300,8 +303,9 @@ const researchScaleStats: ResearchScaleStat[] = [
   },
   {
     value: '12,124',
-    label: 'GABA-A 수용체 SCIE 문헌',
+    label: 'GABA-A · SCIE',
     detail: 'WoS Core Collection · 1999–2022',
+    scale: 100,
     source: {
       label: 'GABA-A 연구 분석',
       url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10289248/',
@@ -585,8 +589,8 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead">유진 로버츠와 샘 프랭클은 당시의 분석 기술로 뇌 조직을 들여다보다가, 다른 조직에서는 거의 보이지 않는 물질을 발견했습니다. 그 물질이 바로 GABA였습니다.</p>
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <div className="guide-research-scale" aria-label="GABA 연구 규모">
-              <div className="guide-research-scale-head"><div><p className="guide-section-number">RESEARCH SCALE</p><h3>한 분자에서 시작된<br />거대한 연구 지도</h3></div><p>숫자로 보는 GABA 연구의 확장</p></div>
-              <div className="guide-research-scale-grid">{researchScaleStats.map((stat) => <article key={stat.label}><strong>{stat.value}</strong><h4>{stat.label}</h4><p>{stat.detail}</p><a href={stat.source.url} target="_blank" rel="noopener noreferrer">{stat.source.label} <ExternalLink size={12} aria-hidden="true" /></a></article>)}</div>
+              <div className="guide-research-scale-head"><div><p className="guide-section-number">RESEARCH SCALE</p><h3>하나의 신호.<br />넓어진 연구.</h3></div><p>75 YEARS · GABA</p></div>
+              <div className="guide-research-scale-grid">{researchScaleStats.map((stat) => <article key={stat.label} aria-label={`${stat.label} ${stat.value}편 · ${stat.detail}`}><div className="guide-research-scale-bar" aria-hidden="true"><span style={{ '--guide-scale-height': `${stat.scale}%` } as CSSProperties} /></div><div><strong>{stat.value}</strong><h4>{stat.label}</h4><p>{stat.detail}</p><a href={stat.source.url} target="_blank" rel="noopener noreferrer">{stat.source.label} <ExternalLink size={12} aria-hidden="true" /></a></div></article>)}</div>
               <p className="guide-research-scale-caption">기관 문헌 수는 2026년 9월 28일 PubMed 검색 기준이며, SCIE 문헌 수는 공개된 Web of Science Core Collection 기반 GABA-A 수용체 연구 분석의 집계입니다.</p>
               <p className="guide-history-quote">작은 분자 하나의 발견은<br /><strong>뇌가 균형을 만드는 방식을 읽는 새로운 언어</strong>가 되었습니다.</p>
             </div>
