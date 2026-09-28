@@ -35,6 +35,15 @@ type ResearchTopic = {
   source: { label: string; url: string };
 };
 
+type VideoBoardItem = {
+  id: string;
+  category: string;
+  title: string;
+  summary: string;
+  visualLabel: string;
+  source: { label: string; url: string };
+};
+
 const everydayTopics: EverydayTopic[] = [
   { id: 'sleep', title: '잠들 때', body: '각성과 휴식의 리듬을 바꾸는 신경회로가 움직입니다.', icon: 'moon' },
   { id: 'stress', title: '긴장되는 순간', body: '과도한 신호를 낮추고 균형을 찾는 과정이 시작됩니다.', icon: 'sparkles' },
@@ -99,6 +108,15 @@ const researchTopics: ResearchTopic[] = [
     interpretation: '이 연구가 직접 측정한 것은 스트레스 상황의 뇌파와 침 속 IgA이며, 감염 예방률이나 질병 치료율은 측정하지 않았습니다.',
     source: { label: 'Abdou et al. 2006 · PMID 16971751', url: 'https://pubmed.ncbi.nlm.nih.gov/16971751/' },
   },
+];
+
+const videoBoardItems: VideoBoardItem[] = [
+  { id: 'sleep', category: '수면', title: '잠들기 전 GABA 신호', summary: '잠과 GABA의 관계를 짧게 보고, 실제 수면 기록은 원문에서 확인하세요.', visualLabel: 'SLEEP', source: { label: 'Yamatsu et al. 2016 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/30263304/' } },
+  { id: 'cognition', category: '집중·인지', title: '머리를 쓸 때 GABA 신호', summary: '정신적 과제를 수행한 사람 연구에서 관찰된 뇌파와 기분 변화를 살펴보세요.', visualLabel: 'FOCUS', source: researchTopics.find(topic => topic.id === 'cognition')!.source },
+  { id: 'stress', category: '긴장·스트레스', title: '긴장할 때 신경계의 균형', summary: '스트레스 상황에서 측정한 뇌파와 면역 지표를 쉬운 말로 확인하세요.', visualLabel: 'CALM', source: researchTopics.find(topic => topic.id === 'immune')!.source },
+  { id: 'movement', category: '운동·근육', title: '운동 뒤 성장호르몬 반응', summary: '운동 뒤 혈액에서 측정한 변화와 연구 조건을 함께 살펴보세요.', visualLabel: 'MOVE', source: researchTopics.find(topic => topic.id === 'muscle')!.source },
+  { id: 'growth', category: '성장 연구', title: '성장호르몬을 본 동물 연구', summary: '성장기 생쥐에서 관찰된 결과와 사람에게 적용할 수 있는 범위를 구분해 보세요.', visualLabel: 'GROW', source: researchTopics.find(topic => topic.id === 'growth-hormone')!.source },
+  { id: 'skin', category: '피부 연구', title: '피부 장벽을 살펴본 실험', summary: '피부 장벽 실험에서 관찰된 결과와 연구 대상을 확인하세요.', visualLabel: 'SKIN', source: researchTopics.find(topic => topic.id === 'skin')!.source },
 ];
 
 const growthSteps = ['GABA 연구', '수면 및 신경 조절', '성장호르몬 반응', '체성분과 성장 관련 지표', '성장기 동물 연구', '어린이 대상 연구'];
@@ -310,7 +328,20 @@ export default function PublicGabaGuide() {
         </section>
 
         <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">07 · EXPERT VOICES</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>연구 결과를 먼저 읽고<br />영상은 다음 순서로 이어집니다.</p></div><div className="guide-expert-intro"><div className="guide-video-placeholder"><span className="guide-video-play" aria-hidden="true">▶</span><strong>전문가 영상 큐레이션 중</strong><p>영상이 준비되면 이 흐름 안에서 같은 연구 결과와 함께 보여드립니다.</p></div><p className="guide-expert-note">지금은 앞에서 읽은<br /><strong>사람·동물·피부 연구 결과</strong>와<br />각 논문의 출처를 먼저 제공합니다.</p></div><div className="guide-expert-thread"><span>이어서 읽기</span><strong>수면 연구</strong><i>→</i><strong>연구 결과</strong><i>→</i><strong>출처 원문</strong></div></div>
+          <div className="guide-container">
+            <div className="guide-section-heading">
+              <div><p className="guide-section-number">07 · EXPERT VOICES</p><h2 id="expert-heading">영상으로 확인하세요</h2></div>
+              <p>주제별 카드에서 골라 보고<br />근거는 원문으로 확인하세요.</p>
+            </div>
+            <div className="guide-video-board-intro"><strong>짧은 영상으로 핵심을 보고, 같은 주제의 연구 원문을 바로 확인할 수 있어요.</strong><span>다음 영상 버튼 없이 한 화면에서 원하는 주제를 선택하세요.</span></div>
+            <div className="guide-video-board" aria-label="주제별 GABA 영상 게시판">
+              {videoBoardItems.map((item, index) => <article className="guide-video-board-card" key={item.id}>
+                <div className={`guide-video-board-thumb guide-video-board-thumb--${index % 4}`} aria-hidden="true"><span>{item.visualLabel}</span><i>▶</i></div>
+                <div className="guide-video-board-body"><span className="guide-video-board-category">{item.category}</span><h3>{item.title}</h3><p>{item.summary}</p><div className="guide-video-board-links"><span className="guide-video-board-status">영상 준비 중</span><a href={item.source.url} target="_blank" rel="noopener noreferrer">원문으로 확인하세요 <ExternalLink size={13} aria-hidden="true" /></a></div></div>
+              </article>)}
+            </div>
+            <p className="guide-video-board-note">영상은 공개 승인이 완료된 주제부터 순서대로 연결합니다. 현재는 검토가 끝난 연구 원문을 먼저 확인할 수 있어요.</p>
+          </div>
         </section>
 
         <section className="guide-section guide-reading-note guide-story-section" aria-label="연구 읽는 순서"><div className="guide-container"><p className="guide-section-number">08 · READ THE SOURCES</p><p className="guide-reading-note-copy">각 연구 카드에서 연구 방법과 실제 관찰 결과를 읽은 다음, 카드 아래 출처를 통해 원문으로 이어집니다.</p></div></section>
