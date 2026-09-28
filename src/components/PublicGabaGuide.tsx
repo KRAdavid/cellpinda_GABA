@@ -14,6 +14,7 @@ import {
   Moon,
   Network,
   Share2,
+  ShieldCheck,
   Sparkles,
   Sprout,
   X,
@@ -75,6 +76,15 @@ type ApplicationCase = {
   detail: string;
   icon: 'book' | 'sprout' | 'globe';
   sources: { label: string; url: string }[];
+};
+
+type FermentedSafetyStep = {
+  number: string;
+  eyebrow: string;
+  title: string;
+  body: string;
+  icon: 'ferment' | 'quality' | 'human';
+  source: { label: string; url: string };
 };
 
 const everydayTopics: EverydayTopic[] = [
@@ -253,13 +263,40 @@ const applicationCases: ApplicationCase[] = [
   },
 ];
 
+const fermentedSafetySteps: FermentedSafetyStep[] = [
+  {
+    number: '01',
+    eyebrow: 'FERMENTATION',
+    title: '유산균이 만드는 GABA',
+    body: '유산균은 발효 과정에서 L-글루탐산을 GABA로 바꾸는 경로를 만들 수 있습니다. 김치와 발효식품 연구가 이 출발점을 보여줍니다.',
+    icon: 'ferment',
+    source: { label: '발효식품 속 GABA 생산 미생물 리뷰', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3769009/' },
+  },
+  {
+    number: '02',
+    eyebrow: 'QUALITY & PROCESS',
+    title: '균주부터 최종 원료까지',
+    body: '공개된 식품 원료 자료에서는 발효 균주, 제조공정, 최종 원료의 품질 항목을 함께 검토합니다. 발효 GABA가 식품공학의 연구 소재가 된 이유입니다.',
+    icon: 'quality',
+    source: { label: '미국 FDA 공개 GRAS Notice 595', url: 'https://www.fda.gov/files/food/published/GRAS-Notice-000595--Gamma-Aminobutyric-Acid-(GABA).pdf' },
+  },
+  {
+    number: '03',
+    eyebrow: 'HUMAN STUDY',
+    title: '사람에게서 남은 안전성 기록',
+    body: '발효 현미 유래 GABA를 섭취한 성인 40명 대상 4주 무작위·위약 대조 시험에서는 중대한 이상반응 없이 관찰됐습니다.',
+    icon: 'human',
+    source: { label: 'Byun et al. 2018 · PMID 29856155', url: 'https://pubmed.ncbi.nlm.nih.gov/29856155/' },
+  },
+];
+
 const growthSteps = ['GABA 연구', '수면 및 신경 조절', '성장호르몬 반응', '체성분과 성장 관련 지표', '성장기 동물 연구', '어린이 대상 연구'];
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
   'GABA는 신경세포의 활동 균형을 조절하는 핵심 신호입니다.',
   'GABA는 수면·긴장·집중·감각·운동과 연결됩니다.',
   'GABA 연구는 피부·인지·근육·성장·면역으로 확장되고 있습니다.',
-  'GABA를 알면 수면뿐 아니라 신경계의 조절을 이해할 수 있습니다.',
+  '발효 GABA는 발효 원리와 품질 관리, 사람 대상 섭취 연구가 함께 쌓인 식품 연구 소재입니다.',
 ];
 
 const evidenceLabels: Record<EvidenceTone, { text: string; className: string }> = {
@@ -291,6 +328,12 @@ function ApplicationIcon({ type }: { type: ApplicationCase['icon'] }) {
   if (type === 'sprout') return <Sprout aria-hidden="true" />;
   if (type === 'globe') return <Globe2 aria-hidden="true" />;
   return <BookOpen aria-hidden="true" />;
+}
+
+function FermentedSafetyIcon({ type }: { type: FermentedSafetyStep['icon'] }) {
+  if (type === 'ferment') return <Sprout aria-hidden="true" />;
+  if (type === 'quality') return <FlaskConical aria-hidden="true" />;
+  return <ShieldCheck aria-hidden="true" />;
 }
 
 function NeuronNetwork() {
@@ -394,8 +437,8 @@ export default function PublicGabaGuide() {
   const [shareStatus, setShareStatus] = useState('');
 
   useEffect(() => {
-    document.title = '1950년, 뇌 속에서 발견된 신호 | GABA Guide';
-    const description = '1950년 뇌 속에서 발견된 GABA의 역사와 신경계 연구, 국내외 활용 사례를 쉽게 읽는 공개 안내서입니다.';
+    document.title = '1950년의 발견, 발효와 연구로 이어진 GABA | GABA Guide';
+    const description = '1950년 뇌 속에서 발견된 GABA의 역사부터 신경계 연구, 국내외 활용과 발효 GABA의 안전성 기록까지 쉽게 읽는 공개 안내서입니다.';
     const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = description;
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
@@ -412,7 +455,7 @@ export default function PublicGabaGuide() {
   };
 
   const sharePage = async () => {
-    const shareData = { title: '1950년, 뇌 속에서 발견된 신호', text: 'GABA의 발견부터 신경계 연구와 국내외 활용 사례까지 읽는 공개 안내서', url: window.location.href };
+    const shareData = { title: '1950년의 발견, 발효와 연구로 이어진 GABA', text: 'GABA의 발견부터 광범위한 연구와 발효 GABA의 안전성 기록까지 읽는 공개 안내서', url: window.location.href };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
@@ -451,6 +494,7 @@ export default function PublicGabaGuide() {
           <a href="#basics" onClick={() => setMenuOpen(false)}>GABA란</a>
           <a href="#academic" onClick={() => setMenuOpen(false)}>연구 지도</a>
           <a href="#applications" onClick={() => setMenuOpen(false)}>활용 사례</a>
+          <a href="#fermented-safety" onClick={() => setMenuOpen(false)}>발효·안전</a>
         </nav>
         <button type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         <button type="button" className="guide-header-share" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
@@ -461,8 +505,8 @@ export default function PublicGabaGuide() {
           <div className="guide-hero-copy">
             <p className="guide-hero-kicker">1950 · THE FIRST CLUE</p>
             <h1 id="guide-hero-heading"><span>1950년,<br />뇌 속에서 한 신호가 발견됐습니다</span><em>그 이름은<span className="guide-mobile-break"><br /></span>{' '}GABA였습니다</em></h1>
-            <p className="guide-hero-body">처음에는 정체를 알 수 없던 작은 물질. 이어진 연구는 GABA를 뇌가 신호의 균형을 만드는 핵심 언어로 확장했습니다.</p>
-            <p className="guide-reading-sequence"><span>3분 읽기</span> 발견의 순간 <i>→</i> GABA란 <i>→</i> 연구 지도 <i>→</i> 국내외 활용</p>
+            <p className="guide-hero-body">1950년 뇌 속의 작은 신호 하나가 발견됐습니다. 그 발견은 수면과 집중에서 피부·근육·성장·면역, 그리고 발효 식품으로 이어지는 넓은 연구 지도를 열었습니다.</p>
+            <p className="guide-reading-sequence"><span>3분 읽기</span> 발견의 순간 <i>→</i> GABA란 <i>→</i> 연구 지도 <i>→</i> 국내외 활용 <i>→</i> 발효·안전</p>
           </div>
           <NeuronNetwork />
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
@@ -541,17 +585,29 @@ export default function PublicGabaGuide() {
           </div>
         </section>
 
+        <section className="guide-section guide-fermented-safety guide-story-section" id="fermented-safety" aria-labelledby="fermented-safety-heading">
+          <div className="guide-container">
+            <div className="guide-section-heading guide-fermented-heading"><div><p className="guide-section-number">08 · FERMENTATION &amp; SAFETY</p><h2 id="fermented-safety-heading">발효는 GABA를<br />식품의 언어로 바꾸었습니다</h2></div><p>발효의 시작부터<br />안전성 기록까지</p></div>
+            <div className="guide-fermented-intro">
+              <div className="guide-fermented-statement"><span className="guide-fermented-seal"><ShieldCheck aria-hidden="true" /></span><p><strong>하나의 신호가<br />식탁 위의 연구가 되기까지</strong><span>발효 원리 · 공정과 품질 · 사람 대상 섭취</span></p></div>
+              <p className="guide-section-lead">김치와 발효식품에서 출발한 미생물 연구는 GABA를 신경과학의 물질에서 식품공학의 연구 소재로 확장했습니다. 발효 GABA에 대한 관심은 만들어지는 과정과 품질, 그리고 사람에게 섭취된 기록까지 이어집니다.</p>
+            </div>
+            <div className="guide-fermented-steps">{fermentedSafetySteps.map((step) => <article className="guide-fermented-step" key={step.number}><div className="guide-fermented-step-top"><span className="guide-fermented-step-number">{step.number}</span><span className="guide-fermented-step-icon"><FermentedSafetyIcon type={step.icon} /></span><span>{step.eyebrow}</span></div><h3>{step.title}</h3><p>{step.body}</p><a href={step.source.url} target="_blank" rel="noopener noreferrer">{step.source.label} <ExternalLink size={13} aria-hidden="true" /></a></article>)}</div>
+            <p className="guide-fermented-note"><Check size={16} aria-hidden="true" /> 발효 GABA의 안전성은 발효했다는 한 단어가 아니라, 균주·공정·최종 원료·사람 대상 연구가 함께 쌓인 공개 기록으로 읽을 수 있습니다.</p>
+          </div>
+        </section>
+
         <section className="guide-section guide-growth-story guide-story-section" id="growth" aria-labelledby="growth-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">08 · GROWTH QUESTION</p><h2 id="growth-heading">성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞의 근육·성장호르몬 연구에서 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 확인했습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p></div>
+          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · GROWTH QUESTION</p><h2 id="growth-heading">성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞의 근육·성장호르몬 연구에서 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 확인했습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p></div>
         </section>
 
         <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · EXPERT VOICES</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>연구 결과를 먼저 읽고<br />영상은 다음 순서로 이어집니다.</p></div><div className="guide-expert-intro"><div className="guide-video-placeholder"><span className="guide-video-play" aria-hidden="true">▶</span><strong>전문가 영상 큐레이션 중</strong><p>영상이 준비되면 이 흐름 안에서 같은 연구 결과와 함께 보여드립니다.</p></div><p className="guide-expert-note">지금은 앞에서 읽은<br /><strong>사람·동물·피부 연구 결과</strong>와<br />각 논문의 출처를 먼저 제공합니다.</p></div><div className="guide-expert-thread"><span>이어서 읽기</span><strong>수면 연구</strong><i>→</i><strong>연구 결과</strong><i>→</i><strong>출처 원문</strong></div></div>
+          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">10 · EXPERT VOICES</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>연구 결과를 먼저 읽고<br />영상은 다음 순서로 이어집니다.</p></div><div className="guide-expert-intro"><div className="guide-video-placeholder"><span className="guide-video-play" aria-hidden="true">▶</span><strong>전문가 영상 큐레이션 중</strong><p>영상이 준비되면 이 흐름 안에서 같은 연구 결과와 함께 보여드립니다.</p></div><p className="guide-expert-note">지금은 앞에서 읽은<br /><strong>사람·동물·피부 연구 결과</strong>와<br />각 논문의 출처를 먼저 제공합니다.</p></div><div className="guide-expert-thread"><span>이어서 읽기</span><strong>수면 연구</strong><i>→</i><strong>연구 결과</strong><i>→</i><strong>출처 원문</strong></div></div>
         </section>
 
-        <section className="guide-section guide-reading-note guide-story-section" aria-label="연구 읽는 순서"><div className="guide-container"><p className="guide-section-number">10 · READ THE SOURCES</p><p className="guide-reading-note-copy">각 연구 카드에서 연구 방법과 실제 관찰 결과를 읽은 다음, 카드 아래 출처를 통해 원문으로 이어집니다.</p></div></section>
+        <section className="guide-section guide-reading-note guide-story-section" aria-label="연구 읽는 순서"><div className="guide-container"><p className="guide-section-number">11 · READ THE SOURCES</p><p className="guide-reading-note-copy">각 연구 카드에서 연구 방법과 실제 관찰 결과를 읽은 다음, 카드 아래 출처를 통해 원문으로 이어집니다.</p></div></section>
 
-        <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">11 · SHARE THE STORY</p><h2 id="final-heading">1950년의 발견은<br />오늘도 계속되고 있습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 연결하는 연구의 언어가 되었습니다. 이제 그 흐름을 자유롭게 읽고 공유해 보세요.</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div>{shareStatus ? <span className="guide-share-status guide-final-status" role="status">{shareStatus}</span> : null}<details className="guide-share-lines"><summary>사업자가 바로 설명할 수 있는 GABA 5문장 보기</summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
+        <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · SHARE THE STORY</p><h2 id="final-heading">1950년의 작은 발견은<br />오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 이제 그 흐름을 자유롭게 읽고 공유해 보세요.</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div>{shareStatus ? <span className="guide-share-status guide-final-status" role="status">{shareStatus}</span> : null}<details className="guide-share-lines"><summary>사업자가 바로 설명할 수 있는 GABA 5문장 보기</summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
       </main>
 
       <footer className="guide-footer"><div className="guide-container guide-footer-grid"><a className="guide-logo" href="#top" onClick={() => scrollTo('top')}><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a><p>GABA를 쉽게 이해하고<br />자유롭게 공유하는 공개 안내서입니다.</p><div><a href="#history">발견의 역사</a><a href="#applications">활용 사례</a><a href="#top">맨 위로 ↑</a></div></div><div className="guide-container guide-footer-bottom"><span>© 2026 GABA Guide</span><span>1950년, 뇌 속에서 발견된 신호</span></div></footer>

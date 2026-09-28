@@ -340,3 +340,44 @@
   .guide-outcome-signal-row{padding:10px}
   .guide-outcome-chart-note{font-size:12px}
 }
+
+/* v8 fermentation story: connect food science, process quality, and human safety records. */
+.guide-fermented-safety{background:linear-gradient(145deg,#eefafa 0%,#f7fbfd 58%,#fff 100%)}
+.guide-fermented-heading{margin-bottom:30px}
+.guide-fermented-intro{display:grid;grid-template-columns:minmax(320px,.84fr) minmax(0,1.16fr);gap:26px;align-items:stretch}
+.guide-fermented-statement{display:flex;align-items:center;gap:17px;min-height:142px;padding:24px 25px;border-radius:18px;background:var(--guide-ink);color:#fff;box-shadow:0 16px 30px rgba(19,47,86,.1)}
+.guide-fermented-seal{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:62px;height:62px;border:1px solid rgba(133,220,218,.55);border-radius:50%;background:rgba(88,204,204,.14);color:#8de0dc}
+.guide-fermented-seal svg{width:28px;height:28px}
+.guide-fermented-statement p{margin:0}
+.guide-fermented-statement strong{display:block;color:#fff;font-size:22px;letter-spacing:-.07em;line-height:1.35}
+.guide-fermented-statement p>span{display:block;margin-top:12px;color:#9ed9db;font-size:11px;font-weight:800;letter-spacing:-.035em;line-height:1.5}
+.guide-fermented-intro>.guide-section-lead{align-self:center;margin:0;max-width:58ch}
+.guide-fermented-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+.guide-fermented-step{display:flex;flex-direction:column;min-height:285px;padding:23px 22px;border:1px solid #d3e8eb;border-radius:16px;background:rgba(255,255,255,.9)}
+.guide-fermented-step-top{display:flex;align-items:center;gap:9px;color:#8aa5b1;font-size:10px;font-weight:900;letter-spacing:.12em}
+.guide-fermented-step-number{color:var(--guide-teal-dark);font-size:12px;letter-spacing:.08em}
+.guide-fermented-step-icon{display:flex;align-items:center;justify-content:center;width:34px;height:34px;margin-left:auto;border-radius:50%;background:#e5f7f6;color:var(--guide-teal-dark)}
+.guide-fermented-step-icon svg{width:18px;height:18px}
+.guide-fermented-step h3{margin:26px 0 9px;color:var(--guide-ink);font-size:21px;letter-spacing:-.065em;line-height:1.35}
+.guide-fermented-step p{margin:0;color:#668096;font-size:14px;line-height:1.78;letter-spacing:-.035em}
+.guide-fermented-step>a{display:inline-flex;align-items:flex-start;gap:4px;margin-top:auto;padding-top:18px;border-top:1px solid #e1eef0;color:var(--guide-teal-dark);font-size:11px;font-weight:850;line-height:1.5;text-decoration:none}
+.guide-fermented-step>a:hover{text-decoration:underline;text-underline-offset:3px}
+.guide-fermented-note{display:flex;align-items:flex-start;gap:8px;margin:24px 0 0;padding:16px 18px;border-top:1px solid #cce5e7;border-bottom:1px solid #cce5e7;color:#668397;font-size:13px;line-height:1.7;letter-spacing:-.03em}
+.guide-fermented-note svg{flex:0 0 auto;margin-top:2px;color:var(--guide-teal-dark)}
+@media(max-width:1100px){
+  .guide-fermented-intro{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .guide-fermented-heading{margin-bottom:26px}
+  .guide-fermented-statement{min-height:132px;padding:21px 19px}
+  .guide-fermented-seal{width:54px;height:54px}
+  .guide-fermented-statement strong{font-size:20px}
+  .guide-fermented-statement p>span{font-size:10px}
+  .guide-fermented-intro>.guide-section-lead{margin-top:0;font-size:16px;line-height:1.8}
+  .guide-fermented-steps{grid-template-columns:1fr;gap:9px;margin-top:20px}
+  .guide-fermented-step{min-height:0;padding:20px 18px}
+  .guide-fermented-step h3{margin:19px 0 8px;font-size:21px}
+  .guide-fermented-step p{font-size:15px;line-height:1.75}
+  .guide-fermented-step>a{margin-top:18px;padding-top:14px;font-size:12px}
+  .guide-fermented-note{font-size:14px;line-height:1.75}
+}
