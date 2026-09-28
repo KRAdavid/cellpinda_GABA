@@ -494,7 +494,7 @@
   .guide-hero-copy{width:100%;min-width:0;max-width:100%}
   .guide-hero h1{max-width:100%;font-size:clamp(41px,11.2vw,53px);line-height:1.08;word-break:normal;overflow-wrap:anywhere}
   .guide-hero h1 em{margin-top:5px}
-  .guide-hero-story .guide-hero-body{width:100%;max-width:100%;font-size:15px;line-height:1.78;white-space:normal;word-break:break-all;overflow-wrap:anywhere}
+  .guide-hero-story .guide-hero-body{width:min(100%,330px);max-width:330px;font-size:15px;line-height:1.78;white-space:normal;word-break:break-all;overflow-wrap:anywhere}
   .guide-hero-story .guide-reading-sequence{position:relative;z-index:2;max-width:30ch;margin-top:22px;line-height:1.7}
   .guide-hero-scroll{display:none}
   .guide-summary-grid{min-height:0}
