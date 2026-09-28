@@ -41,7 +41,8 @@ type VideoBoardItem = {
   title: string;
   summary: string;
   visualLabel: string;
-  source: { label: string; url: string };
+  videoUrl?: string;
+  source?: { label: string; url: string };
 };
 
 const everydayTopics: EverydayTopic[] = [
@@ -111,6 +112,7 @@ const researchTopics: ResearchTopic[] = [
 ];
 
 const videoBoardItems: VideoBoardItem[] = [
+  { id: 'yesedor-intro', category: 'GABA 소개', title: '여에스더의 GABA 소개', summary: 'GABA가 무엇인지 쉽게 시작하는 짧은 소개 영상입니다.', visualLabel: 'INTRO', videoUrl: 'https://www.youtube.com/shorts/roEtojyk9_0' },
   { id: 'sleep', category: '수면', title: '잠들기 전 GABA 신호', summary: '잠과 GABA의 관계를 짧게 보고, 실제 수면 기록은 원문에서 확인하세요.', visualLabel: 'SLEEP', source: { label: 'Yamatsu et al. 2016 · PubMed', url: 'https://pubmed.ncbi.nlm.nih.gov/30263304/' } },
   { id: 'cognition', category: '집중·인지', title: '머리를 쓸 때 GABA 신호', summary: '정신적 과제를 수행한 사람 연구에서 관찰된 뇌파와 기분 변화를 살펴보세요.', visualLabel: 'FOCUS', source: researchTopics.find(topic => topic.id === 'cognition')!.source },
   { id: 'stress', category: '긴장·스트레스', title: '긴장할 때 신경계의 균형', summary: '스트레스 상황에서 측정한 뇌파와 면역 지표를 쉬운 말로 확인하세요.', visualLabel: 'CALM', source: researchTopics.find(topic => topic.id === 'immune')!.source },
@@ -336,8 +338,8 @@ export default function PublicGabaGuide() {
             <div className="guide-video-board-intro"><strong>짧은 영상으로 핵심을 보고, 같은 주제의 연구 원문을 바로 확인할 수 있어요.</strong><span>다음 영상 버튼 없이 한 화면에서 원하는 주제를 선택하세요.</span></div>
             <div className="guide-video-board" aria-label="주제별 GABA 영상 게시판">
               {videoBoardItems.map((item, index) => <article className="guide-video-board-card" key={item.id}>
-                <div className={`guide-video-board-thumb guide-video-board-thumb--${index % 4}`} aria-hidden="true"><span>{item.visualLabel}</span><i>▶</i></div>
-                <div className="guide-video-board-body"><span className="guide-video-board-category">{item.category}</span><h3>{item.title}</h3><p>{item.summary}</p><div className="guide-video-board-links"><span className="guide-video-board-status">영상 준비 중</span><a href={item.source.url} target="_blank" rel="noopener noreferrer">원문으로 확인하세요 <ExternalLink size={13} aria-hidden="true" /></a></div></div>
+                {item.videoUrl ? <a className={`guide-video-board-thumb guide-video-board-thumb--${index % 4}`} href={item.videoUrl} target="_blank" rel="noopener noreferrer" aria-label={`${item.title} 영상 보기`}><span>{item.visualLabel}</span><i>▶</i></a> : <div className={`guide-video-board-thumb guide-video-board-thumb--${index % 4}`} aria-hidden="true"><span>{item.visualLabel}</span><i>▶</i></div>}
+                <div className="guide-video-board-body"><span className="guide-video-board-category">{item.category}</span><h3>{item.title}</h3><p>{item.summary}</p><div className="guide-video-board-links">{item.videoUrl ? <a href={item.videoUrl} target="_blank" rel="noopener noreferrer">영상 보기 <ExternalLink size={13} aria-hidden="true" /></a> : <span className="guide-video-board-status">영상 준비 중</span>}{item.source ? <a href={item.source.url} target="_blank" rel="noopener noreferrer">원문으로 확인하세요 <ExternalLink size={13} aria-hidden="true" /></a> : null}</div></div>
               </article>)}
             </div>
             <p className="guide-video-board-note">영상은 공개 승인이 완료된 주제부터 순서대로 연결합니다. 현재는 검토가 끝난 연구 원문을 먼저 확인할 수 있어요.</p>
