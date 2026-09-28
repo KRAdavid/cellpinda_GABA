@@ -315,6 +315,22 @@ const researchScaleStats: ResearchScaleStat[] = [
   },
 ];
 
+const readingChapters = [
+  { id: 'top', label: '도입' },
+  { id: 'history', label: '발견의 순간' },
+  { id: 'basics', label: 'GABA란' },
+  { id: 'academic', label: '연구 지도' },
+  { id: 'everyday', label: '일상의 순간' },
+  { id: 'sleep', label: '수면 연구' },
+  { id: 'research', label: '다섯 연구 영역' },
+  { id: 'applications', label: '국내외 활용' },
+  { id: 'fermented-safety', label: '발효·안전' },
+  { id: 'growth', label: '성장 연구' },
+  { id: 'expert-videos', label: '전문가 영상' },
+  { id: 'final', label: '공유하기' },
+] as const;
+type ReadingChapterId = (typeof readingChapters)[number]['id'];
+
 const fermentedSafetySteps: FermentedSafetyStep[] = [
   {
     number: '01',
@@ -499,7 +515,10 @@ export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
   const [activeVideoId, setActiveVideoId] = useState(expertVideos[0].id);
+  const [activeChapterId, setActiveChapterId] = useState<ReadingChapterId>(readingChapters[0].id);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
+  const activeChapterIndex = Math.max(0, readingChapters.findIndex((chapter) => chapter.id === activeChapterId));
+  const activeChapter = readingChapters[activeChapterIndex];
 
   useEffect(() => {
     document.title = '1950년의 발견, 발효와 연구로 이어진 GABA | GABA Guide';
@@ -510,6 +529,34 @@ export default function PublicGabaGuide() {
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
     const targetId = window.location.hash.slice(1);
     if (targetId) requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'auto', block: 'start' })));
+  }, []);
+
+  useEffect(() => {
+    let frame = 0;
+    const updateReadingChapter = () => {
+      const readingPoint = window.scrollY + Math.min(window.innerHeight * 0.3, 260);
+      let currentChapter: ReadingChapterId = readingChapters[0].id;
+      for (const chapter of readingChapters) {
+        const section = document.getElementById(chapter.id);
+        if (section && section.offsetTop <= readingPoint) currentChapter = chapter.id;
+      }
+      setActiveChapterId((previous) => previous === currentChapter ? previous : currentChapter);
+    };
+    const handleScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        updateReadingChapter();
+      });
+    };
+    updateReadingChapter();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   const scrollTo = (id: string, hash = id) => {
@@ -571,6 +618,10 @@ export default function PublicGabaGuide() {
         </nav>
         <button type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         <button type="button" className="guide-header-share" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
+        <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`} aria-label="GABA 안내서 읽기 진행">
+          <div className="guide-reading-progress-track" aria-hidden="true"><span style={{ width: `${((activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
+          <div className="guide-reading-progress-meta"><span>NOW READING</span><strong aria-live="polite">{activeChapter.label}</strong><small>{String(activeChapterIndex + 1).padStart(2, '0')} / {String(readingChapters.length).padStart(2, '0')}</small></div>
+        </div>
       </header>
 
       <main id="guide-main">
@@ -688,7 +739,7 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead guide-video-gallery-lead">공개된 의사·과학자 채널의 Shorts를 수면, GABA의 기본 역할, 자율신경과 연구 읽기 주제로 모았습니다.</p>
             <div className="guide-video-gallery">
               <article className="guide-video-feature" id="expert-video-feature" aria-live="polite">
-                <div className="guide-video-feature-media"><iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="eager" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+                <div className="guide-video-feature-media"><iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
                 <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>SHORTS</span></div><h3>{activeVideo.title}</h3><p>{activeVideo.channel}</p><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a></div>
               </article>
               <div className="guide-video-board" aria-label="전문가 영상 게시판">
