@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
   ArrowDown,
+  ArrowDownRight,
   ArrowRight,
+  ArrowUpRight,
   BookOpen,
   Check,
   CircleHelp,
@@ -37,7 +39,26 @@ type ResearchTopic = {
   finding: string;
   interpretation: string;
   source: { label: string; url: string };
+  chart: ResearchChart;
 };
+
+type ResearchComparison = {
+  label: string;
+  reference: string;
+  result: string;
+  visual: 'result-less' | 'result-more';
+};
+
+type ResearchSignal = {
+  label: string;
+  value: string;
+  direction: 'up' | 'down';
+};
+
+type ResearchChart =
+  | { kind: 'comparison'; title: string; note: string; rows: ResearchComparison[] }
+  | { kind: 'metrics'; title: string; note: string; metrics: { label: string; value: string; note: string }[] }
+  | { kind: 'signals'; title: string; note: string; rows: ResearchSignal[] };
 
 type HistoryMilestone = {
   year: string;
@@ -75,6 +96,15 @@ const researchTopics: ResearchTopic[] = [
     finding: 'GABA를 먹고 30분 뒤, 머리를 많이 쓰는 과제에서 뇌파 변화와 활력 설문 점수가 비교 조건보다 덜 줄어든 것으로 기록됐습니다.',
     interpretation: '이 연구가 직접 본 결과는 기억력 향상이나 치매 개선이 아니라, 정신적 스트레스 상황에서의 뇌파와 기분 변화입니다.',
     source: { label: 'Yoto et al. 2012 · PMID 22203366', url: 'https://pubmed.ncbi.nlm.nih.gov/22203366/' },
+    chart: {
+      kind: 'comparison',
+      title: '머리를 많이 쓴 뒤 변화 방향',
+      note: '비교 조건과 GABA 조건의 변화 방향을 한눈에 보여줍니다.',
+      rows: [
+        { label: '뇌파 변화', reference: '더 크게 줄어듦', result: '덜 줄어듦', visual: 'result-less' },
+        { label: '활력 설문', reference: '더 크게 줄어듦', result: '덜 줄어듦', visual: 'result-less' },
+      ],
+    },
   },
   {
     id: 'skin',
@@ -86,6 +116,15 @@ const researchTopics: ResearchTopic[] = [
     finding: 'GABA를 바른 피부는 장벽 회복이 빨라졌고, 건조 환경에서 장벽 손상 뒤 나타난 표피 과형성이 줄었습니다.',
     interpretation: '피부 연구에서 측정된 결과는 피부 장벽 회복과 표피 반응이며, 사람의 피부 탄력이나 주름을 측정한 시험은 아닙니다.',
     source: { label: 'Denda et al. 2002 · PMID 12445190', url: 'https://pubmed.ncbi.nlm.nih.gov/12445190/' },
+    chart: {
+      kind: 'comparison',
+      title: '피부 장벽에서 보인 변화',
+      note: '피부 장벽 실험에서 관찰된 두 가지 결과를 정리했습니다.',
+      rows: [
+        { label: '장벽 회복', reference: '느리게 회복', result: '빠르게 회복', visual: 'result-more' },
+        { label: '표피 과형성', reference: '더 크게 나타남', result: '줄어듦', visual: 'result-less' },
+      ],
+    },
   },
   {
     id: 'muscle',
@@ -97,6 +136,15 @@ const researchTopics: ResearchTopic[] = [
     finding: '휴식 조건에서 GABA의 성장호르몬 최고치는 위약보다 약 400%, 총 반응량은 약 375% 높았습니다. 운동 조건에서도 섭취 30분 뒤 GABA군의 반응이 운동 위약군보다 높았습니다.',
     interpretation: '이 연구가 측정한 것은 혈액 속 성장호르몬 반응이며, 근육 크기·근력·체력 향상은 측정하지 않았습니다.',
     source: { label: 'Powers et al. 2008 · PMID 18091016', url: 'https://pubmed.ncbi.nlm.nih.gov/18091016/' },
+    chart: {
+      kind: 'metrics',
+      title: '성장호르몬 반응',
+      note: '휴식 조건에서 위약 대비 연구에 기록된 값입니다. 운동 조건에서도 섭취 30분 뒤 더 높았습니다.',
+      metrics: [
+        { label: '최고치', value: '약 +400%', note: '위약 대비' },
+        { label: '총 반응량', value: '약 +375%', note: '위약 대비' },
+      ],
+    },
   },
   {
     id: 'growth-hormone',
@@ -108,6 +156,17 @@ const researchTopics: ResearchTopic[] = [
     finding: 'GABA군 수컷 생쥐의 몸길이는 대조군보다 길었고, 수컷의 체지방 지표는 낮았습니다. 뇌하수체 성장호르몬 단백질은 암수 모두에서 증가했고, 혈청 성장호르몬은 수컷에서 증가했습니다.',
     interpretation: '이 결과는 청소년기 생쥐의 성장·성장호르몬 변화입니다. 어린이의 키 성장이나 성인의 최종 신장을 측정한 결과는 아닙니다.',
     source: { label: '청소년기 생쥐 성장 연구 · PMID 40431374', url: 'https://pubmed.ncbi.nlm.nih.gov/40431374/' },
+    chart: {
+      kind: 'signals',
+      title: '성장 관련 지표 변화',
+      note: '청소년기 생쥐 연구에서 기록된 변화 방향을 정리했습니다.',
+      rows: [
+        { label: '수컷 몸길이', value: '더 길게', direction: 'up' },
+        { label: '수컷 체지방 지표', value: '낮게', direction: 'down' },
+        { label: '뇌하수체 성장호르몬 단백질', value: '증가', direction: 'up' },
+        { label: '혈청 성장호르몬', value: '수컷에서 증가', direction: 'up' },
+      ],
+    },
   },
   {
     id: 'immune',
@@ -119,6 +178,16 @@ const researchTopics: ResearchTopic[] = [
     finding: '섭취 60분 뒤 GABA군은 물·L-테아닌군보다 알파파가 증가하고 베타파가 감소했습니다. 현수교 스트레스 상황에서는 GABA군의 침 속 IgA가 위약군보다 높게 유지됐습니다.',
     interpretation: '이 연구가 직접 측정한 것은 스트레스 상황의 뇌파와 침 속 IgA이며, 감염 예방률이나 질병 치료율은 측정하지 않았습니다.',
     source: { label: 'Abdou et al. 2006 · PMID 16971751', url: 'https://pubmed.ncbi.nlm.nih.gov/16971751/' },
+    chart: {
+      kind: 'signals',
+      title: '긴장 상황에서 측정한 지표',
+      note: '섭취 뒤 뇌파와 침 속 면역 관련 지표에서 나타난 변화를 정리했습니다.',
+      rows: [
+        { label: '알파파', value: '증가', direction: 'up' },
+        { label: '베타파', value: '감소', direction: 'down' },
+        { label: '침 속 IgA', value: '더 높게 유지', direction: 'up' },
+      ],
+    },
   },
 ];
 
@@ -269,6 +338,57 @@ function ResearchGlyph({ id }: { id: string }) {
   );
 }
 
+function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
+  const chartId = `research-chart-${topic.id}`;
+  return (
+    <figure className={`guide-outcome-chart guide-outcome-chart-${topic.chart.kind}`} aria-labelledby={`${chartId}-title`}>
+      <div className="guide-outcome-chart-head">
+        <figcaption id={`${chartId}-title`}>{topic.chart.title}</figcaption>
+        <span>연구 결과 한눈에</span>
+      </div>
+      {topic.chart.kind === 'comparison' ? (
+        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교`}>
+          <div className="guide-outcome-comparison-head"><span>측정 지표</span><span>비교 조건</span><span>GABA</span></div>
+          <div className="guide-outcome-comparison-list">
+            {topic.chart.rows.map((row) => (
+              <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
+                <strong>{row.label}</strong>
+                <div className="guide-outcome-cell is-reference"><span>{row.reference}</span><i aria-hidden="true"><b /></i></div>
+                <div className="guide-outcome-cell is-result"><span>{row.result}</span><i aria-hidden="true"><b /></i></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+      {topic.chart.kind === 'metrics' ? (
+        <div className="guide-outcome-metrics" role="img" aria-label={`${topic.chart.title}. ${topic.chart.metrics.map((metric) => `${metric.label} ${metric.value}`).join(', ')}`}>
+          {topic.chart.metrics.map((metric) => (
+            <div className="guide-outcome-metric" key={metric.label}>
+              <span>{metric.label}</span>
+              <strong>{metric.value}</strong>
+              <small>{metric.note}</small>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      {topic.chart.kind === 'signals' ? (
+        <div className="guide-outcome-signals" role="img" aria-label={`${topic.chart.title}. ${topic.chart.rows.map((row) => `${row.label} ${row.value}`).join(', ')}`}>
+          {topic.chart.rows.map((row) => (
+            <div className="guide-outcome-signal-row" key={row.label}>
+              <span>{row.label}</span>
+              <strong className={`is-${row.direction}`}>
+                {row.direction === 'up' ? <ArrowUpRight size={15} aria-hidden="true" /> : <ArrowDownRight size={15} aria-hidden="true" />}
+                {row.value}
+              </strong>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      <p className="guide-outcome-chart-note">{topic.chart.note}</p>
+    </figure>
+  );
+}
+
 export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
@@ -340,7 +460,7 @@ export default function PublicGabaGuide() {
         <section className="guide-hero guide-hero-story" id="top" aria-labelledby="guide-hero-heading">
           <div className="guide-hero-copy">
             <p className="guide-hero-kicker">1950 · THE FIRST CLUE</p>
-            <h1 id="guide-hero-heading"><span>1950년,<br />뇌 속에서 한 신호가 발견됐습니다</span><em>그 이름은 GABA였습니다</em></h1>
+            <h1 id="guide-hero-heading"><span>1950년,<br />뇌 속에서 한 신호가 발견됐습니다</span><em>그 이름은<span className="guide-mobile-break"><br /></span>{' '}GABA였습니다</em></h1>
             <p className="guide-hero-body">처음에는 정체를 알 수 없던 작은 물질. 이어진 연구는 GABA를 뇌가 신호의 균형을 만드는 핵심 언어로 확장했습니다.</p>
             <p className="guide-reading-sequence"><span>3분 읽기</span> 발견의 순간 <i>→</i> GABA란 <i>→</i> 연구 지도 <i>→</i> 국내외 활용</p>
           </div>
@@ -408,7 +528,7 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-research guide-story-section" id="research" aria-labelledby="research-heading">
           <div className="guide-container">
             <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">06 · RESEARCH EXPANSION</p><h2 id="research-heading">수면에서 시작해<br />다섯 영역으로 확장됩니다</h2></div><p>각 연구의 결과를<br />출처와 함께 읽습니다.</p></div>
-            <div className="guide-research-flow">{researchTopics.map((topic) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><dl><div><dt>어떤 연구인가요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 관찰됐나요?</dt><dd className="guide-research-finding">{topic.finding}</dd></div><div><dt>이 결과가 말해주는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
+            <div className="guide-research-flow">{researchTopics.map((topic) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떤 연구인가요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 관찰됐나요?</dt><dd className="guide-research-finding">{topic.finding}</dd></div><div><dt>이 결과가 말해주는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
           </div>
         </section>

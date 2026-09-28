@@ -203,6 +203,7 @@
 }
 
 /* v6 discovery-led opening: history -> academic map -> applications. */
+.guide-mobile-break{display:none}
 .guide-hero-story{background:radial-gradient(circle at 78% 38%,#e9faf9 0%,rgba(233,250,249,.42) 18%,transparent 44%),linear-gradient(112deg,#fff 0%,#fff 45%,#f3fbfc 100%)}
 .guide-hero-kicker{margin:0;color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.22em;line-height:1.4}
 .guide-hero-story h1 span{font-size:.9em}
@@ -249,6 +250,9 @@
 @media(max-width:700px){
   .guide-hero-story{background:#fff}
   .guide-hero-kicker{font-size:10px}
+  .guide-hero-story h1 .guide-mobile-break{display:inline}
+  .guide-hero-story h1 span,.guide-hero-story h1 em{max-width:100%;overflow-wrap:anywhere;word-break:keep-all}
+  .guide-hero-story .guide-hero-body{overflow-wrap:anywhere}
   .guide-hero-story h1 span{font-size:.92em}
   .guide-hero-story h1 em{font-size:1em}
   .guide-history-item{grid-template-columns:67px minmax(0,1fr);gap:14px;min-height:0}
@@ -268,4 +272,54 @@
   .guide-application-card h3{margin-top:20px;font-size:22px}
   .guide-application-card>p{font-size:15px;line-height:1.75}
   .guide-application-sources{margin-top:22px}
+}
+
+/* v7 research outcomes: fast, honest visual summaries for each study. */
+.guide-outcome-chart{margin:23px 0 26px;padding:17px 18px 15px;border:1px solid #d7e9ed;border-radius:15px;background:#fff;box-shadow:0 8px 20px rgba(20,87,108,.035)}
+.guide-outcome-chart-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:15px}
+.guide-outcome-chart-head figcaption{color:var(--guide-ink);font-size:14px;font-weight:850;letter-spacing:-.045em}
+.guide-outcome-chart-head>span{color:#91aab7;font-size:10px;font-weight:850;letter-spacing:.08em;white-space:nowrap}
+.guide-outcome-comparison-head,.guide-outcome-comparison-row{display:grid;grid-template-columns:minmax(100px,1.05fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center}
+.guide-outcome-comparison-head{padding:0 10px 7px;color:#9bb1bc;font-size:10px;font-weight:850;letter-spacing:-.02em}
+.guide-outcome-comparison-head span:not(:first-child){text-align:center}
+.guide-outcome-comparison-list{display:grid;gap:7px}
+.guide-outcome-comparison-row{padding:10px;border-radius:11px;background:#f6fbfc}
+.guide-outcome-comparison-row>strong{color:#668196;font-size:12px;letter-spacing:-.035em}
+.guide-outcome-cell{display:grid;gap:6px;min-width:0}
+.guide-outcome-cell>span{color:#6b8495;font-size:11px;font-weight:800;line-height:1.35;letter-spacing:-.04em;text-align:center}
+.guide-outcome-cell.is-result>span{color:var(--guide-teal-dark)}
+.guide-outcome-cell i{display:block;height:5px;border-radius:999px;background:#dfecef;overflow:hidden}
+.guide-outcome-cell i b{display:block;height:100%;border-radius:inherit;background:#b7d1da}
+.guide-outcome-cell.is-result i b{background:#26a6aa}
+.guide-outcome-comparison-row.is-result-less .is-reference i b{width:78%}
+.guide-outcome-comparison-row.is-result-less .is-result i b{width:43%}
+.guide-outcome-comparison-row.is-result-more .is-reference i b{width:43%}
+.guide-outcome-comparison-row.is-result-more .is-result i b{width:78%}
+.guide-outcome-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.guide-outcome-metric{position:relative;min-height:105px;padding:13px 14px;border-radius:12px;background:linear-gradient(145deg,#effafa,#f8fcfc)}
+.guide-outcome-metric:after{content:"";position:absolute;right:15px;bottom:15px;width:42px;height:42px;border:1px solid rgba(18,154,163,.25);border-radius:50%}
+.guide-outcome-metric>span{display:block;color:#6c8997;font-size:11px;font-weight:850}
+.guide-outcome-metric>strong{display:block;margin-top:10px;color:var(--guide-teal-dark);font-size:25px;letter-spacing:-.08em;line-height:1}
+.guide-outcome-metric>small{display:block;margin-top:8px;color:#8da5b1;font-size:10px;font-weight:750}
+.guide-outcome-signals{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 10px}
+.guide-outcome-signal-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;padding:10px 11px;border-radius:10px;background:#f6fbfc}
+.guide-outcome-signal-row>span{min-width:0;color:#6a8392;font-size:11px;line-height:1.35;letter-spacing:-.04em}
+.guide-outcome-signal-row>strong{display:inline-flex;align-items:center;gap:3px;flex:0 0 auto;color:var(--guide-teal-dark);font-size:12px;letter-spacing:-.04em;white-space:nowrap}
+.guide-outcome-signal-row>strong.is-down{color:#3485a0}
+.guide-outcome-chart-note{margin:13px 0 0;color:#8ca5b1;font-size:11px;line-height:1.55;letter-spacing:-.03em}
+@media(max-width:700px){
+  .guide-outcome-chart{margin:19px 0 22px;padding:15px 13px 13px}
+  .guide-outcome-chart-head{align-items:flex-start;gap:8px;margin-bottom:13px}
+  .guide-outcome-chart-head figcaption{font-size:15px}
+  .guide-outcome-chart-head>span{font-size:9px}
+  .guide-outcome-comparison-head,.guide-outcome-comparison-row{grid-template-columns:minmax(86px,.95fr) minmax(0,1fr) minmax(0,1fr);gap:7px}
+  .guide-outcome-comparison-head{padding:0 7px 6px;font-size:9px}
+  .guide-outcome-comparison-row{padding:9px 7px}
+  .guide-outcome-comparison-row>strong{font-size:11px;line-height:1.35}
+  .guide-outcome-cell>span{font-size:10px}
+  .guide-outcome-metric{min-height:102px;padding:12px}
+  .guide-outcome-metric>strong{font-size:23px}
+  .guide-outcome-signals{grid-template-columns:1fr;gap:6px}
+  .guide-outcome-signal-row{padding:10px}
+  .guide-outcome-chart-note{font-size:12px}
 }
