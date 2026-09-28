@@ -191,7 +191,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.ok(releaseManifest.checks?.smartStoreOnly && releaseManifest.checks?.reviewDestination && releaseManifest.checks?.researchIndex && releaseManifest.checks?.teaserBoundary && releaseManifest.checks?.challengeCopy && releaseManifest.checks?.productBoundary, 'live release manifest checks are incomplete');
     const bundleHashCount = await validateLiveBundleHashes(releaseManifest);
     validatePublicMetadata(pageText, '/', `${base}/`);
-    assert.ok(pageText.includes('사업자가 GABA의 역할과 중요성을 쉽게 설명하고 공유할 수 있도록 정리한 공개 안내서입니다.'), 'live root fallback must identify the public GABA guide');
+    assert.ok(pageText.includes('유진 로버츠와 샘 프랭클의 발견에서 시작해'), 'live root fallback must identify the discovery-led public GABA guide');
     assert.ok(pageText.includes('사업자가 바로 설명할 수 있는 GABA 5문장'), 'live root fallback must expose the business message kit');
     validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);
     const internalSnapshots = [
