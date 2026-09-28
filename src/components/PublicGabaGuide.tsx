@@ -20,7 +20,9 @@ import {
   Sprout,
   X,
 } from 'lucide-react';
+import gabaFermentationEditorial from '../assets/gaba-fermentation-editorial.jpg';
 import gabaNaturalHero from '../assets/gaba-natural-hero.jpg';
+import gabaSleepEditorial from '../assets/gaba-sleep-editorial.jpg';
 import './PublicGabaGuide.css';
 
 type EvidenceTone = 'established' | 'human' | 'early' | 'mixed';
@@ -617,6 +619,7 @@ export default function PublicGabaGuide() {
           <div className="guide-container">
             <div className="guide-section-heading"><div><p className="guide-section-number">03 · THE ACADEMIC MAP</p><h2 id="academic-heading">GABA 연구는<br />한 분야에 머물지 않았습니다</h2></div><p>하나의 신호에서<br />넓은 학술 지도로</p></div>
             <p className="guide-section-lead">신경세포의 활동을 조절하는 기본 원리에서 출발한 GABA 연구는 수면과 집중, 감각과 움직임, 그리고 몸 전체의 다양한 연구 영역으로 뻗어 나갔습니다.</p>
+            <div className="guide-editorial-band guide-editorial-band-academic" style={{ '--guide-editorial-image': `url(${gabaNaturalHero})` } as CSSProperties} role="img" aria-label="물과 돌, 잎의 자연 질감으로 표현한 GABA 연구 지도 이미지"><span><small>FROM SIGNAL TO SYSTEM</small><strong>하나의 신호가<br />넓은 연구 지도가 되었습니다</strong></span></div>
             <div className="guide-academic-map">{academicFields.map((field, index) => <article key={field.title}><span>0{index + 1}</span><div><h3>{field.title}</h3><p>{field.body}</p></div></article>)}</div>
             <p className="guide-academic-caption"><FlaskConical size={17} aria-hidden="true" /> 기초 신경과학에서 사람 연구, 피부·근육·성장·면역 연구까지</p>
           </div>
@@ -640,7 +643,7 @@ export default function PublicGabaGuide() {
                 <article><span>03</span><div><h3>수면 기록에서 보인 변화</h3><div className="guide-compare-row"><span>잠드는 시간</span><strong>GABA 기간에 더 짧아짐</strong></div><div className="guide-compare-row"><span>전체 비렘수면</span><strong>GABA 기간에 늘어남</strong></div><p className="guide-study-source">연구 출처는 바로 앞 결과에 함께 표시했습니다.</p></div></article>
                 <article><span>04</span><div><h3>생리와 연구 결과 연결</h3><div className="guide-compare-row"><span>생리학의 언어</span><strong>GABA와 수면 리듬의 관계</strong></div><div className="guide-compare-row"><span>사람 연구의 기록</span><strong>잠드는 시간·전체 비렘수면</strong></div></div></article>
               </div>
-              <div className="guide-sleep-visual" aria-label="수면 연구를 설명하는 추상적인 파형 그림" role="img"><div className="guide-sleep-wave"><i /><i /><i /><i /><i /><i /></div><span className="guide-sleep-orbit guide-sleep-orbit-one" /><span className="guide-sleep-orbit guide-sleep-orbit-two" /><strong>잠들기 전<br />신경 신호의 리듬</strong></div>
+              <div className="guide-sleep-visual" style={{ '--guide-sleep-image': `url(${gabaSleepEditorial})` } as CSSProperties} aria-label="잔잔한 물결과 달빛으로 표현한 수면 연구 이미지" role="img"><div className="guide-sleep-wave"><i /><i /><i /><i /><i /><i /></div><span className="guide-sleep-orbit guide-sleep-orbit-one" /><span className="guide-sleep-orbit guide-sleep-orbit-two" /><strong>잠들기 전<br />신경 신호의 리듬</strong></div>
             </div>
           </div>
         </section>
@@ -657,6 +660,7 @@ export default function PublicGabaGuide() {
           <div className="guide-container">
             <div className="guide-section-heading"><div><p className="guide-section-number">07 · AROUND THE WORLD</p><h2 id="applications-heading">GABA는 연구실을 넘어<br />여러 분야로 이어지고 있습니다</h2></div><p>국내외 활용 사례를<br />한 흐름으로 살펴봅니다.</p></div>
             <p className="guide-section-lead">발효와 발아, 식품과 바이오 기술. GABA는 신경과학의 언어를 넘어 다양한 연구와 산업 현장에서 새로운 가능성을 만들고 있습니다.</p>
+            <div className="guide-editorial-band guide-editorial-band-applications" style={{ '--guide-editorial-image': `url(${gabaFermentationEditorial})` } as CSSProperties} role="img" aria-label="발아 곡물과 발효 용기로 표현한 국내외 활용 연구 이미지"><span><small>FROM KOREA TO THE WORLD</small><strong>발효와 발아,<br />식품과 바이오 기술로</strong></span></div>
             <div className="guide-application-grid">{applicationCases.map((item) => <article className="guide-application-card" key={item.id}><div className="guide-application-top"><span className="guide-application-icon"><ApplicationIcon type={item.icon} /></span><span>{item.region}</span></div><h3>{item.title}</h3><p>{item.body}</p><strong>{item.detail}</strong><div className="guide-application-sources"><span>연구·공공자료</span>{item.sources.map((source) => <a href={source.url} target="_blank" rel="noopener noreferrer" key={source.url}>{source.label} <ExternalLink size={13} aria-hidden="true" /></a>)}</div></article>)}</div>
           </div>
         </section>
@@ -664,6 +668,7 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-fermented-safety guide-story-section" id="fermented-safety" aria-labelledby="fermented-safety-heading">
           <div className="guide-container">
             <div className="guide-section-heading guide-fermented-heading"><div><p className="guide-section-number">08 · FERMENTATION &amp; SAFETY</p><h2 id="fermented-safety-heading">발효는 GABA를<br />식품의 언어로 바꾸었습니다</h2></div><p>발효의 시작부터<br />안전성 기록까지</p></div>
+            <div className="guide-editorial-band guide-editorial-band-fermentation" style={{ '--guide-editorial-image': `url(${gabaFermentationEditorial})` } as CSSProperties} role="img" aria-label="발효 용기와 발아 곡물로 표현한 발효 GABA 연구 이미지"><span><small>FROM FERMENTATION TO RECORD</small><strong>자연의 발효가<br />공개된 기록이 되기까지</strong></span></div>
             <div className="guide-fermented-intro">
               <div className="guide-fermented-statement"><span className="guide-fermented-seal"><ShieldCheck aria-hidden="true" /></span><p><strong>하나의 신호가<br />식탁 위의 연구가 되기까지</strong><span>발효 원리 · 공정과 품질 · 사람 대상 섭취</span></p></div>
               <p className="guide-section-lead">김치와 발효식품에서 출발한 미생물 연구는 GABA를 신경과학의 물질에서 식품공학의 연구 소재로 확장했습니다. 발효 GABA에 대한 관심은 만들어지는 과정과 품질, 그리고 사람에게 섭취된 기록까지 이어집니다.</p>
