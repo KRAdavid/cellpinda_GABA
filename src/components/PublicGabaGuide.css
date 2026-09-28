@@ -167,3 +167,37 @@
   .guide-library-filters{grid-template-columns:1fr}
   .guide-research-detail{scroll-margin-top:86px}
 }
+
+/* v5 reading flow: research appears in place instead of behind jump links. */
+.guide-reading-sequence{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:30px 0 0;color:#7089a0;font-size:13px;font-weight:750;line-height:1.7;letter-spacing:-.03em}
+.guide-reading-sequence span{padding:6px 10px;border-radius:999px;background:#e8f7f7;color:var(--guide-teal-dark);font-size:11px;font-weight:850}
+.guide-reading-sequence i{color:#9ab4c0;font-style:normal}
+.guide-research-flow{display:grid;gap:16px}
+.guide-research-detail-inline{background:#f3fafb}
+.guide-research-inline-heading{display:flex;align-items:center;gap:16px;margin-top:23px}
+.guide-research-inline-heading .guide-research-glyph{flex:0 0 auto;margin:0;width:62px;height:48px;transform:scale(.84);transform-origin:left center}
+.guide-research-inline-heading h3{margin:0}
+.guide-research-detail-inline .guide-research-finding{color:var(--guide-ink);font-weight:750}
+.guide-study-source{margin:14px 0 0;color:#7890a1;font-size:12px;line-height:1.7}
+.guide-study-source a{display:inline-flex;align-items:center;gap:4px;color:var(--guide-teal-dark);font-weight:800;text-decoration:none}
+.guide-study-source a:hover{text-decoration:underline;text-underline-offset:3px}
+.guide-result-line{display:block;margin-top:13px;color:var(--guide-ink);font-size:15px;line-height:1.7;letter-spacing:-.035em}
+.guide-research-reminder{display:block}
+.guide-expert-thread{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:22px;padding:18px 20px;border-top:1px solid #dce9ef;border-bottom:1px solid #dce9ef;color:#7890a1;font-size:13px}
+.guide-expert-thread span{color:var(--guide-teal-dark);font-weight:850}
+.guide-expert-thread strong{color:var(--guide-ink);font-size:15px}
+.guide-expert-thread i{color:#9ab4c0;font-style:normal}
+.guide-reading-note{padding:38px 0;background:#f7fbfd}
+.guide-reading-note-copy{max-width:70ch;margin:0;color:#637d91;font-size:15px;line-height:1.8;letter-spacing:-.035em}
+.guide-final-actions{grid-template-columns:minmax(0,390px)}
+@media(max-width:700px){
+  .guide-reading-sequence{gap:7px;margin-top:25px;font-size:13px}
+  .guide-reading-sequence i{display:none}
+  .guide-research-inline-heading{align-items:flex-start;gap:8px}
+  .guide-research-inline-heading .guide-research-glyph{display:none}
+  .guide-research-detail-inline .guide-research-source{display:block}
+  .guide-research-detail-inline .guide-research-source a{margin-top:6px}
+  .guide-result-line{font-size:16px}
+  .guide-expert-thread{align-items:flex-start;gap:8px 11px}
+  .guide-reading-note{padding:28px 0}
+}

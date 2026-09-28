@@ -35,6 +35,7 @@ const analyticsConsentStyles = await read('src/components/AnalyticsConsent.css')
 const admin = await read('src/components/Admin.tsx');
 const operations = await read('src/components/OperationsMvp.tsx');
 const indexHtml = await read('index.html');
+const publicGuide = await read('src/components/PublicGabaGuide.tsx');
 const publicGuideStyles = await read('src/components/PublicGabaGuide.css');
 const researchRouteHtml = await read('public/research/index.html');
 const notFoundHtml = await read('public/404.html');
@@ -134,6 +135,9 @@ requireMatch(publicGuideStyles, /\.gaba-guide\{overflow:clip\}/, 'public GABA gu
 requireMatch(publicGuideStyles, /\.guide-research-detail\{scroll-margin-top:92px\}/, 'public GABA research detail must clear the sticky header after a mobile deep-link jump');
 requireMatch(publicGuideStyles, /@media \(max-width:700px\)\{[\s\S]*?\.guide-header nav\{top:70px/, 'public GABA mobile menu must begin below its 70px header');
 requireMatch(publicGuideStyles, /\.guide-library-filters\{grid-template-columns:1fr\}/, 'public GABA mobile research filters must remain one readable column');
+if (/대표 연구 보기|대표 논문 먼저 보기|궁금한 연구를\s*직접 확인해 보세요|href="#library"/.test(publicGuide)) fail('public GABA guide must keep research summaries in the reading flow instead of jump links');
+requireMatch(publicGuide, /guide-research-flow[\s\S]*어떤 연구인가요\?[\s\S]*무엇이 관찰됐나요\?[\s\S]*출처/, 'public GABA guide must show study method, observed result, and source in sequence');
+for (const sourceId of ['30263304', '22203366', '12445190', '18091016', '40431374', '16971751']) requireMatch(publicGuide, new RegExp(sourceId), `public GABA guide source PMID ${sourceId} is missing`);
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:1100px\)[\s\S]*?\.header nav\{display:none[\s\S]*?\.menu-toggle\{display:flex/, 'tablet navigation must collapse before menu labels wrap');
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:1100px\)[\s\S]*?\.hero-copy\{[^}]*background:linear-gradient/, 'tablet hero text must keep a readable background over the photo');
 requireMatch(research, /research-method-filter[\s\S]*연구 방법[\s\S]*더보기/, 'research method filter must stay behind an optional consumer-friendly control');
@@ -340,7 +344,7 @@ if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must no
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /수면에서 인지, 피부, 근육과 성장 연구까지[\s\S]*이제 GABA를 알아야 합니다/, 'static no-script fallback must use the consumer story title');
 requireMatch(indexHtml, /잠들고, 집중하고, 움직이는 순간마다[\s\S]*GABA입니다\./, 'static no-script fallback must explain why GABA matters in everyday language');
-requireMatch(indexHtml, /3분 만에 GABA 이해하기[\s\S]*전문가 영상 보기[\s\S]*주제별 연구 보기/, 'static no-script fallback must expose the three story entry points');
+requireMatch(indexHtml, /읽는 순서[\s\S]*GABA란[\s\S]*수면 연구[\s\S]*논문 출처/, 'static no-script fallback must preserve the continuous reading order');
 if (/https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202|REVIEW_DIALOG|스마트스토어/.test(indexHtml)) fail('root public story must not expose product or review CTAs');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
 requireMatch(app + indexHtml, /https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202/, 'Smart Store CTA must target the approved GABA 1500 product detail');
