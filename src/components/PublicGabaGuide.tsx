@@ -64,7 +64,7 @@ type ResearchSignal = {
 };
 
 type ResearchChart =
-  | { kind: 'comparison'; title: string; summary: string; note: string; rows: ResearchComparison[] }
+  | { kind: 'comparison'; title: string; summary: string; note: string; referenceLabel: string; resultLabel: string; rows: ResearchComparison[] }
   | { kind: 'metrics'; title: string; summary: string; note: string; metrics: { label: string; value: string; note: string }[] }
   | { kind: 'signals'; title: string; summary: string; note: string; rows: ResearchSignal[] };
 
@@ -174,16 +174,18 @@ const researchTopics: ResearchTopic[] = [
     title: '인지',
     english: 'Cognition & focus',
     tone: 'human',
-    label: '사람 63명 · 무작위 교차시험',
+    label: '사람 63명 · 비교 연구',
     study: '건강한 성인 63명이 GABA 100mg 또는 위약을 먹고 정신적 부담이 있는 과제를 수행한 무작위·위약 대조 교차시험입니다.',
-    finding: '같은 과제를 마친 뒤에도 GABA 섭취 조건에서는 뇌파와 활력감의 감소 폭이 비교 조건보다 작게 기록되었습니다. 연구진은 이를 정신적 스트레스 반응이 완화된 결과로 해석했습니다.',
+    finding: '머리를 많이 쓴 과제를 마친 뒤, GABA를 먹은 그룹은 비교 그룹보다 뇌파와 활력감이 덜 떨어졌습니다. 연구진은 이를 정신적 스트레스 반응이 줄어든 결과로 해석했습니다.',
     interpretation: '이 연구가 직접 본 결과는 기억력 향상이나 치매 개선이 아니라, 정신적 스트레스 상황에서의 뇌파와 기분 변화입니다.',
     source: { label: 'Yoto et al. 2012 · PMID 22203366', url: 'https://pubmed.ncbi.nlm.nih.gov/22203366/' },
     chart: {
       kind: 'comparison',
-      title: '머리를 많이 쓴 뒤, 변화 폭 비교',
-      summary: '같은 과제를 마친 뒤, GABA 조건의 뇌파와 활력감 감소 폭이 더 작았습니다.',
-      note: '막대 길이는 두 조건의 변화 폭을 비교해 보기 쉽게 표현했습니다.',
+      title: '머리를 많이 쓴 뒤, 두 그룹은 어떻게 달랐을까요?',
+      summary: 'GABA를 먹은 그룹은 뇌파와 활력감이 비교 그룹보다 덜 떨어졌습니다.',
+      note: '두 그룹의 변화 폭을 같은 기준으로 그렸습니다.',
+      referenceLabel: '비교 캡슐',
+      resultLabel: 'GABA 캡슐',
       rows: [
         { label: '뇌파 변화', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
         { label: '활력 설문', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
@@ -195,19 +197,21 @@ const researchTopics: ResearchTopic[] = [
     title: '피부',
     english: 'Skin & barrier',
     tone: 'early',
-    label: '털 없는 생쥐 피부·사람 각질형성세포',
-    study: '피부 장벽을 손상시킨 털 없는 생쥐에 GABA를 바르고, 사람 각질형성세포에서도 GABA 수용체 반응을 살펴본 실험입니다.',
-    finding: 'GABA를 바른 피부는 장벽 회복이 빨라졌고, 건조 환경에서 장벽 손상 뒤 나타난 표피 과형성이 줄었습니다.',
+    label: '생쥐 피부·사람 피부 세포 실험',
+    study: '피부 장벽을 손상시킨 생쥐에 GABA를 바르고, 사람 피부 세포에서도 반응을 살펴본 실험입니다.',
+    finding: 'GABA를 바른 피부는 장벽이 더 빨리 회복됐고, 피부가 두꺼워지는 변화는 줄었습니다.',
     interpretation: '피부 연구에서 측정된 결과는 피부 장벽 회복과 표피 반응이며, 사람의 피부 탄력이나 주름을 측정한 시험은 아닙니다.',
     source: { label: 'Denda et al. 2002 · PMID 12445190', url: 'https://pubmed.ncbi.nlm.nih.gov/12445190/' },
     chart: {
       kind: 'comparison',
-      title: '피부 장벽에서 보인 변화',
-      summary: 'GABA를 바른 피부에서 장벽 회복은 빨라지고, 표피 과형성은 줄었습니다.',
-      note: '막대 길이는 피부 장벽 실험의 두 결과를 비교해 보기 쉽게 표현했습니다.',
+      title: 'GABA를 바른 피부는 어떻게 달라졌을까요?',
+      summary: 'GABA를 바른 피부는 장벽이 더 빨리 회복됐고, 피부가 두꺼워지는 변화는 줄었습니다.',
+      note: '두 조건의 변화 폭을 같은 기준으로 그렸습니다.',
+      referenceLabel: '비교 조건',
+      resultLabel: 'GABA를 바른 조건',
       rows: [
-        { label: '장벽 회복', reference: '느리게 회복', result: '빠르게 회복', visual: 'result-more' },
-        { label: '표피가 두꺼워지는 변화', reference: '더 크게 나타났습니다', result: '줄었습니다', visual: 'result-less' },
+        { label: '장벽 회복', reference: '더 느리게 회복됐습니다', result: '더 빨리 회복됐습니다', visual: 'result-more' },
+        { label: '피부가 두꺼워지는 변화', reference: '더 많이 나타났습니다', result: '덜 나타났습니다', visual: 'result-less' },
       ],
     },
   },
@@ -216,7 +220,7 @@ const researchTopics: ResearchTopic[] = [
     title: '근육',
     english: 'Muscle & movement',
     tone: 'human',
-    label: '저항운동 경험 남성 11명 · 교차시험',
+    label: '남성 11명 · 운동 비교 연구',
     study: '저항운동 경험이 있는 남성 11명이 GABA 3g 또는 위약을 먹은 뒤 쉬거나 저항운동을 하고, 90분 동안 혈액 속 성장호르몬을 측정한 이중맹검 교차시험입니다.',
     finding: '휴식 조건에서 GABA의 성장호르몬 최고치는 위약보다 약 400%, 총 반응량은 약 375% 높았습니다. 운동 조건에서도 섭취 30분 뒤 GABA군의 반응이 운동 위약군보다 높았습니다.',
     interpretation: '이 연구가 측정한 것은 혈액 속 성장호르몬 반응이며, 근육 크기·근력·체력 향상은 측정하지 않았습니다.',
@@ -224,7 +228,7 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'metrics',
       title: '성장호르몬 반응',
-      summary: '쉬었을 때 GABA의 성장호르몬 반응이 위약보다 높았습니다.',
+      summary: '쉬었을 때 GABA를 먹은 그룹의 성장호르몬 반응이 비교 그룹보다 높았습니다.',
       note: '휴식 조건에서 위약 대비 연구에 기록된 값입니다. 운동 조건에서도 섭취 30분 뒤 더 높았습니다.',
       metrics: [
         { label: '최고치', value: '약 +400%', note: '위약 대비' },
@@ -237,19 +241,19 @@ const researchTopics: ResearchTopic[] = [
     title: '성장호르몬',
     english: 'Growth hormone',
     tone: 'early',
-    label: '청소년기 생쥐 · 16주 섭취시험',
+    label: '청소년기 생쥐 · 16주 연구',
     study: '청소년기 수컷·암컷 생쥐에 GABA를 16주 동안 먹이고 몸길이, 체지방 지표, 뇌하수체와 혈청의 성장호르몬을 측정한 동물시험입니다.',
     finding: 'GABA군 수컷 생쥐의 몸길이는 대조군보다 길었고, 수컷의 체지방 지표는 낮았습니다. 뇌하수체 성장호르몬 단백질은 암수 모두에서 증가했고, 혈청 성장호르몬은 수컷에서 증가했습니다.',
     interpretation: '이 결과는 청소년기 생쥐의 성장·성장호르몬 변화입니다. 어린이의 키 성장이나 성인의 최종 신장을 측정한 결과는 아닙니다.',
     source: { label: '청소년기 생쥐 성장 연구 · PMID 40431374', url: 'https://pubmed.ncbi.nlm.nih.gov/40431374/' },
     chart: {
       kind: 'signals',
-      title: '성장 관련 지표 변화',
-      summary: '청소년기 생쥐에서 몸길이와 성장호르몬 관련 지표에 차이가 나타났습니다.',
+      title: '생쥐에서 달라진 성장 관련 지표',
+      summary: '청소년기 생쥐에서 몸길이와 성장호르몬 관련 수치에 차이가 나타났습니다.',
       note: '청소년기 생쥐 연구에서 어떤 변화가 나타났는지 정리했습니다.',
       rows: [
-        { label: '수컷 몸길이', value: '더 길었습니다', direction: 'up' },
-        { label: '수컷 체지방 지표', value: '더 낮았습니다', direction: 'down' },
+        { label: '수컷의 몸길이', value: '더 길었습니다', direction: 'up' },
+        { label: '수컷의 체지방 지표', value: '더 낮았습니다', direction: 'down' },
         { label: '뇌하수체 성장호르몬 단백질', value: '증가했습니다', direction: 'up' },
         { label: '혈청 성장호르몬', value: '수컷에서 증가했습니다', direction: 'up' },
       ],
@@ -260,15 +264,15 @@ const researchTopics: ResearchTopic[] = [
     title: '면역',
     english: 'Neuroimmune balance',
     tone: 'human',
-    label: '사람 스트레스 실험 · IgA 측정',
-    study: '건강한 성인 13명의 뇌파 실험과 고소공포증 성인 8명의 현수교 스트레스 실험으로, GABA 섭취 뒤 뇌파와 침 속 면역글로불린 A(IgA)를 측정했습니다.',
+    label: '사람 21명 · 스트레스 실험',
+    study: '건강한 성인 13명의 뇌파 실험과 성인 8명의 현수교 스트레스 실험에서, GABA를 먹은 뒤 뇌파와 침 속 면역 단백질 IgA를 측정했습니다.',
     finding: '섭취 60분 뒤 GABA군은 물·L-테아닌군보다 알파파가 증가하고 베타파가 감소했습니다. 현수교 스트레스 상황에서는 GABA군의 침 속 IgA가 위약군보다 높게 유지됐습니다.',
     interpretation: '이 연구가 직접 측정한 것은 스트레스 상황의 뇌파와 침 속 IgA이며, 감염 예방률이나 질병 치료율은 측정하지 않았습니다.',
     source: { label: 'Abdou et al. 2006 · PMID 16971751', url: 'https://pubmed.ncbi.nlm.nih.gov/16971751/' },
     chart: {
       kind: 'signals',
-      title: '긴장 상황에서 측정한 지표',
-      summary: 'GABA 섭취 뒤 알파파와 침 속 IgA는 더 높았고, 베타파는 더 낮았습니다.',
+      title: '긴장되는 상황에서 달라진 신호',
+      summary: 'GABA를 먹은 뒤 알파파와 침 속 IgA는 더 높았고, 베타파는 더 낮았습니다.',
       note: '섭취 뒤 뇌파와 침 속 면역 관련 지표에서 나타난 변화를 정리했습니다.',
       rows: [
         { label: '알파파', value: '증가했습니다', direction: 'up' },
@@ -521,6 +525,7 @@ function ResearchGlyph({ id }: { id: string }) {
 
 function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
   const chartId = `research-chart-${topic.id}`;
+  const comparisonChart = topic.chart.kind === 'comparison' ? topic.chart : null;
   return (
     <figure className={`guide-outcome-chart guide-outcome-chart-${topic.chart.kind}`} aria-labelledby={`${chartId}-title`}>
       <div className="guide-outcome-chart-head">
@@ -528,20 +533,20 @@ function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
         <span>연구 결과 한눈에</span>
       </div>
       <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div>
-      {topic.chart.kind === 'comparison' ? (
+      {comparisonChart ? (
         <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교`}>
-          <div className="guide-outcome-comparison-head"><span>측정 항목</span><span className="is-reference"><i aria-hidden="true" />비교 조건</span><span className="is-result"><i aria-hidden="true" />GABA 조건</span></div>
+          <div className="guide-outcome-comparison-head"><span>무엇을 비교했나요?</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
           <div className="guide-outcome-comparison-list">
-            {topic.chart.rows.map((row) => (
+            {comparisonChart.rows.map((row) => (
               <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
-                <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong><small>관찰된 변화</small></div>
+                <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong></div>
                 <div className="guide-outcome-lanes">
                   <div className="guide-outcome-lane is-reference">
-                    <div className="guide-outcome-lane-top"><span>비교 조건</span><strong>{row.reference}</strong></div>
+                    <div className="guide-outcome-lane-top"><span>{comparisonChart.referenceLabel}</span><strong>{row.reference}</strong></div>
                     <i aria-hidden="true"><b /></i>
                   </div>
                   <div className="guide-outcome-lane is-result">
-                    <div className="guide-outcome-lane-top"><span>GABA 조건</span><strong>{row.result}</strong></div>
+                    <div className="guide-outcome-lane-top"><span>{comparisonChart.resultLabel}</span><strong>{row.result}</strong></div>
                     <i aria-hidden="true"><b /></i>
                   </div>
                 </div>
@@ -753,7 +758,7 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead">GABA는 뇌와 척수에서 신경세포의 과도한 활성화를 억제하고, 신경계의 흥분과 억제 균형을 조절합니다.</p>
             <div className="guide-basics-grid guide-basics-three">
               <article className="guide-definition-card"><span className="guide-card-index">01</span><h3>신경세포 활동 조절</h3><p>신경세포가 지나치게 활성화되지 않도록 신호의 크기와 흐름을 조절합니다.</p><div className="guide-card-motif guide-motif-signal" aria-hidden="true"><i /><i /><i /><i /></div></article>
-              <article className="guide-definition-card is-highlighted"><span className="guide-card-index">02</span><h3>수면과 각성의 리듬</h3><p>잠들고 깨어나는 리듬을 만드는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-moon" aria-hidden="true"><Moon /></div></article>
+              <article className="guide-definition-card is-highlighted"><span className="guide-card-index">02</span><h3>수면과 각성의 리듬</h3><p>잠들고 깨어나는 리듬을 조절하는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-moon" aria-hidden="true"><Moon /></div></article>
               <article className="guide-definition-card"><span className="guide-card-index">03</span><h3>감정·감각·집중·운동 회로</h3><p>감정, 감각, 집중, 움직임을 조율하는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-network" aria-hidden="true"><Network /></div></article>
             </div>
           </div>
@@ -825,7 +830,7 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-research guide-story-section" id="research" aria-labelledby="research-heading">
           <div className="guide-container">
             <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">06 · RESEARCH EXPANSION</p><h2 id="research-heading">수면에서 시작해<br />다섯 영역으로 확장됩니다</h2></div><p>각 연구의 결과를<br />출처와 함께 읽습니다.</p></div>
-            <div className="guide-research-flow">{researchTopics.map((topic) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떤 연구인가요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 관찰됐나요?</dt><dd className="guide-research-finding">{topic.finding}</dd></div><div><dt>이 결과가 말해주는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
+            <div className="guide-research-flow">{researchTopics.map((topic) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding">{topic.finding}</dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
           </div>
         </section>

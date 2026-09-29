@@ -277,12 +277,12 @@
 /* v7 research outcomes: fast, honest visual summaries for each study. */
 .guide-outcome-chart{margin:23px 0 26px;padding:17px 18px 15px;border:1px solid #d7e9ed;border-radius:15px;background:#fff;box-shadow:0 8px 20px rgba(20,87,108,.035)}
 .guide-outcome-chart-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:15px}
-.guide-outcome-chart-head figcaption{color:var(--guide-ink);font-size:14px;font-weight:850;letter-spacing:-.045em}
+.guide-outcome-chart-head figcaption{color:var(--guide-ink);font-size:14px;font-weight:850;letter-spacing:-.045em;word-break:keep-all}
 .guide-outcome-chart-head>span{color:#91aab7;font-size:10px;font-weight:850;letter-spacing:.08em;white-space:nowrap}
 .guide-outcome-summary{display:grid;gap:5px;margin:-2px 0 15px;padding:12px 14px;border-left:3px solid var(--guide-teal);border-radius:0 11px 11px 0;background:linear-gradient(110deg,#edfafa 0%,#f8fcfc 100%)}
 .guide-outcome-summary>span{display:flex;align-items:center;gap:6px;color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:.06em}
 .guide-outcome-summary>span i{display:block;width:6px;height:6px;border-radius:50%;background:var(--guide-teal)}
-.guide-outcome-summary>strong{color:var(--guide-ink);font-size:14px;line-height:1.55;letter-spacing:-.045em}
+.guide-outcome-summary>strong{color:var(--guide-ink);font-size:14px;line-height:1.55;letter-spacing:-.045em;word-break:keep-all}
 .guide-outcome-comparison-head{display:grid;grid-template-columns:minmax(110px,.7fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:0 10px 8px;color:#9bb1bc;font-size:10px;font-weight:850;letter-spacing:-.02em}
 .guide-outcome-comparison-head>span:not(:first-child){display:flex;align-items:center;justify-content:center;gap:5px;text-align:center}
 .guide-outcome-comparison-head>span.is-reference{color:#6c8795}
