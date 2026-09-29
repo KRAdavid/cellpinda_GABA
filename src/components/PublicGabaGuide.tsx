@@ -183,7 +183,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: '머리를 많이 쓴 뒤, 변화 폭 비교',
       summary: '같은 과제를 마친 뒤, GABA 조건의 뇌파와 활력감 감소 폭이 더 작았습니다.',
-      note: '두 조건을 같은 기준으로 나란히 비교합니다.',
+      note: '막대 길이는 두 조건의 변화 폭을 비교해 보기 쉽게 표현했습니다.',
       rows: [
         { label: '뇌파 변화', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
         { label: '활력 설문', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
@@ -204,7 +204,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: '피부 장벽에서 보인 변화',
       summary: 'GABA를 바른 피부에서 장벽 회복은 빨라지고, 표피 과형성은 줄었습니다.',
-      note: '피부 장벽 실험에서 관찰된 두 가지 결과를 정리했습니다.',
+      note: '막대 길이는 피부 장벽 실험의 두 결과를 비교해 보기 쉽게 표현했습니다.',
       rows: [
         { label: '장벽 회복', reference: '느리게 회복', result: '빠르게 회복', visual: 'result-more' },
         { label: '표피가 두꺼워지는 변화', reference: '더 크게 나타났습니다', result: '줄었습니다', visual: 'result-less' },
@@ -530,14 +530,21 @@ function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
       <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div>
       {topic.chart.kind === 'comparison' ? (
         <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교`}>
-          <div className="guide-outcome-comparison-head"><span>측정 지표</span><span className="is-reference"><i aria-hidden="true" />비교 조건</span><span aria-hidden="true" /><span className="is-result"><i aria-hidden="true" />GABA</span></div>
+          <div className="guide-outcome-comparison-head"><span>측정 항목</span><span className="is-reference"><i aria-hidden="true" />비교 조건</span><span className="is-result"><i aria-hidden="true" />GABA 조건</span></div>
           <div className="guide-outcome-comparison-list">
             {topic.chart.rows.map((row) => (
               <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
-                <strong><span>{row.label}</span><small>관찰된 변화</small></strong>
-                <div className="guide-outcome-cell is-reference"><span className="guide-outcome-condition">비교 조건</span><strong>{row.reference}</strong><i aria-hidden="true"><b /></i></div>
-                <span className="guide-outcome-vs" aria-hidden="true">VS</span>
-                <div className="guide-outcome-cell is-result"><span className="guide-outcome-condition">GABA</span><strong>{row.result}</strong><i aria-hidden="true"><b /></i></div>
+                <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong><small>관찰된 변화</small></div>
+                <div className="guide-outcome-lanes">
+                  <div className="guide-outcome-lane is-reference">
+                    <div className="guide-outcome-lane-top"><span>비교 조건</span><strong>{row.reference}</strong></div>
+                    <i aria-hidden="true"><b /></i>
+                  </div>
+                  <div className="guide-outcome-lane is-result">
+                    <div className="guide-outcome-lane-top"><span>GABA 조건</span><strong>{row.result}</strong></div>
+                    <i aria-hidden="true"><b /></i>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
