@@ -6,6 +6,8 @@ import {
   ArrowUpRight,
   BookOpen,
   Check,
+  ChevronLeft,
+  ChevronRight,
   CircleHelp,
   ExternalLink,
   FlaskConical,
@@ -13,6 +15,7 @@ import {
   Menu,
   Moon,
   Network,
+  Pause,
   Play,
   Share2,
   ShieldCheck,
@@ -113,6 +116,45 @@ const everydayTopics: EverydayTopic[] = [
   { id: 'movement', title: '몸을 움직이고 멈출 때', body: '활성화와 억제가 맞물려 부드러운 움직임을 만듭니다.', icon: 'movement' },
   { id: 'sense', title: '감각 정보를 구분할 때', body: '들어오는 소리와 촉감을 같은 강도로 처리하지 않습니다.', icon: 'sense' },
 ];
+
+const recoveryCards = [
+  {
+    eyebrow: '01 · 밤의 회복',
+    title: '잠은 회복이 이어지는 시간입니다',
+    body: '낮에는 움직이며 에너지를 쓰고, 밤에는 뇌가 기억을 정리하고 몸이 회복을 이어갑니다.',
+    tone: 'night',
+  },
+  {
+    eyebrow: '02 · 회복의 속도',
+    title: '수면의 질이 떨어지면 회복의 속도도 달라집니다',
+    body: '잠이 얕아지고 자주 깨는 밤이 이어지면, 다음 날까지 회복감과 활력이 무거워집니다.',
+    tone: 'recovery',
+  },
+  {
+    eyebrow: '03 · 밤의 긴장',
+    title: '그런데 밤에도 긴장이 풀리지 않는다면?',
+    body: '스트레스와 높아진 각성 상태는 잠들기 어렵게 만들고, 몸이 휴식으로 전환하는 흐름을 방해합니다.',
+    tone: 'stress',
+  },
+  {
+    eyebrow: '04 · 다음 날',
+    title: '수면의 흐름은 다음 날까지 이어집니다',
+    body: '잠이 흐트러지면 다음 날의 집중과 활력, 몸이 느끼는 회복감에도 영향을 줍니다.',
+    tone: 'morning',
+  },
+  {
+    eyebrow: '05 · 반복되는 고리',
+    title: '지침은 다시 수면을 흔드는 고리가 됩니다',
+    body: '잠을 못 자서 지치고, 지쳐서 더 예민해지고, 예민해져 다시 잠들기 어려워집니다.',
+    tone: 'loop',
+  },
+  {
+    eyebrow: '06 · 노화의 언어',
+    title: '노화는 나이를 먹는 것만을 뜻하지 않습니다',
+    body: '몸이 손상을 회복하는 속도가 점차 느려지는 과정입니다. 그래서 수면과 회복의 리듬을 이해하는 일이 중요합니다.',
+    tone: 'age',
+  },
+] as const;
 
 const researchTopics: ResearchTopic[] = [
   {
@@ -516,9 +558,13 @@ export default function PublicGabaGuide() {
   const [shareStatus, setShareStatus] = useState('');
   const [activeVideoId, setActiveVideoId] = useState(expertVideos[0].id);
   const [activeChapterId, setActiveChapterId] = useState<ReadingChapterId>(readingChapters[0].id);
+  const [activeRecoveryCard, setActiveRecoveryCard] = useState(0);
+  const [recoveryPaused, setRecoveryPaused] = useState(false);
+  const [recoveryReducedMotion, setRecoveryReducedMotion] = useState(false);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const activeChapterIndex = Math.max(0, readingChapters.findIndex((chapter) => chapter.id === activeChapterId));
   const activeChapter = readingChapters[activeChapterIndex];
+  const recoveryCard = recoveryCards[activeRecoveryCard];
 
   useEffect(() => {
     document.title = '1950년의 발견, 발효와 연구로 이어진 GABA | GABA Guide';
@@ -530,6 +576,22 @@ export default function PublicGabaGuide() {
     const targetId = window.location.hash.slice(1);
     if (targetId) requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'auto', block: 'start' })));
   }, []);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncReducedMotion = () => setRecoveryReducedMotion(mediaQuery.matches);
+    syncReducedMotion();
+    mediaQuery.addEventListener?.('change', syncReducedMotion);
+    return () => mediaQuery.removeEventListener?.('change', syncReducedMotion);
+  }, []);
+
+  useEffect(() => {
+    if (recoveryPaused || recoveryReducedMotion) return;
+    const intervalId = window.setInterval(() => {
+      setActiveRecoveryCard((current) => (current + 1) % recoveryCards.length);
+    }, 2000);
+    return () => window.clearInterval(intervalId);
+  }, [recoveryPaused, recoveryReducedMotion]);
 
   useEffect(() => {
     let frame = 0;
@@ -572,6 +634,11 @@ export default function PublicGabaGuide() {
       const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
       requestAnimationFrame(() => document.getElementById('expert-video-feature')?.scrollIntoView({ behavior, block: 'start' }));
     }
+  };
+
+  const moveRecoveryCard = (direction: -1 | 1) => {
+    setRecoveryPaused(true);
+    setActiveRecoveryCard((current) => (current + direction + recoveryCards.length) % recoveryCards.length);
   };
 
   const sharePage = async () => {
@@ -665,6 +732,36 @@ export default function PublicGabaGuide() {
             </div>
           </div>
         </section>
+
+        <aside className="guide-recovery-break" aria-labelledby="recovery-break-heading">
+          <div className="guide-container">
+            <div className="guide-recovery-break-head">
+              <div>
+                <p className="guide-section-number">HERE FOR A MOMENT</p>
+                <h2 id="recovery-break-heading">여기서 잠깐</h2>
+              </div>
+              <p>GABA의 수면 이야기를<br />회복의 언어로 연결합니다.</p>
+            </div>
+            <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} aria-live="polite" aria-atomic="true">
+              <div className="guide-recovery-card-copy">
+                <p className="guide-recovery-card-eyebrow">{recoveryCard.eyebrow}</p>
+                <h3>{recoveryCard.title}</h3>
+                <p>{recoveryCard.body}</p>
+              </div>
+              <div className="guide-recovery-card-footer">
+                <div className="guide-recovery-progress" aria-hidden="true"><i key={activeRecoveryCard} /></div>
+                <span>{String(activeRecoveryCard + 1).padStart(2, '0')} / {String(recoveryCards.length).padStart(2, '0')}</span>
+                <span>{recoveryPaused ? '일시정지' : '2초마다 전환'}</span>
+              </div>
+            </div>
+            <div className="guide-recovery-controls" aria-label="수면과 회복 카드 조작">
+              <button type="button" aria-label="이전 카드" onClick={() => moveRecoveryCard(-1)}><ChevronLeft size={17} aria-hidden="true" /></button>
+              <button type="button" className="guide-recovery-toggle" aria-pressed={recoveryPaused} onClick={() => setRecoveryPaused((paused) => !paused)}>{recoveryPaused ? <Play size={13} fill="currentColor" aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}<span>{recoveryPaused ? '다시 재생' : '잠시 멈춤'}</span></button>
+              <button type="button" aria-label="다음 카드" onClick={() => moveRecoveryCard(1)}><ChevronRight size={17} aria-hidden="true" /></button>
+            </div>
+            <p className="guide-recovery-thread"><span>GABA BASICS</span><i>→</i><strong>수면과 회복</strong><i>→</i><span>연구 결과</span></p>
+          </div>
+        </aside>
 
         <section className="guide-section guide-academic guide-story-section" id="academic" aria-labelledby="academic-heading">
           <div className="guide-container">
