@@ -181,8 +181,8 @@ const researchTopics: ResearchTopic[] = [
     source: { label: 'Yoto et al. 2012 · PMID 22203366', url: 'https://pubmed.ncbi.nlm.nih.gov/22203366/' },
     chart: {
       kind: 'comparison',
-      title: '머리를 많이 쓴 뒤 변화 방향',
-      note: '비교 조건과 GABA 조건의 변화 방향을 한눈에 보여줍니다.',
+      title: '머리를 많이 쓴 뒤, 변화 폭 비교',
+      note: '두 조건을 같은 기준으로 나란히 비교합니다.',
       rows: [
         { label: '뇌파 변화', reference: '더 크게 줄어듦', result: '덜 줄어듦', visual: 'result-less' },
         { label: '활력 설문', reference: '더 크게 줄어듦', result: '덜 줄어듦', visual: 'result-less' },
@@ -524,13 +524,14 @@ function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
       </div>
       {topic.chart.kind === 'comparison' ? (
         <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교`}>
-          <div className="guide-outcome-comparison-head"><span>측정 지표</span><span>비교 조건</span><span>GABA</span></div>
+          <div className="guide-outcome-comparison-head"><span>측정 지표</span><span className="is-reference"><i aria-hidden="true" />비교 조건</span><span aria-hidden="true" /><span className="is-result"><i aria-hidden="true" />GABA</span></div>
           <div className="guide-outcome-comparison-list">
             {topic.chart.rows.map((row) => (
               <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
-                <strong>{row.label}</strong>
-                <div className="guide-outcome-cell is-reference"><span>{row.reference}</span><i aria-hidden="true"><b /></i></div>
-                <div className="guide-outcome-cell is-result"><span>{row.result}</span><i aria-hidden="true"><b /></i></div>
+                <strong><span>{row.label}</span><small>변화 방향</small></strong>
+                <div className="guide-outcome-cell is-reference"><span className="guide-outcome-condition">비교 조건</span><strong>{row.reference}</strong><i aria-hidden="true"><b /></i></div>
+                <span className="guide-outcome-vs" aria-hidden="true">VS</span>
+                <div className="guide-outcome-cell is-result"><span className="guide-outcome-condition">GABA</span><strong>{row.result}</strong><i aria-hidden="true"><b /></i></div>
               </div>
             ))}
           </div>
