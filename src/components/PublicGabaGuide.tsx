@@ -185,8 +185,8 @@ const researchTopics: ResearchTopic[] = [
       summary: '같은 과제를 마친 뒤, GABA 조건의 뇌파와 활력감 감소 폭이 더 작았습니다.',
       note: '두 조건을 같은 기준으로 나란히 비교합니다.',
       rows: [
-        { label: '뇌파 변화', reference: '더 크게 줄어듦', result: '덜 줄어듦', visual: 'result-less' },
-        { label: '활력 설문', reference: '더 크게 줄어듦', result: '덜 줄어듦', visual: 'result-less' },
+        { label: '뇌파 변화', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
+        { label: '활력 설문', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
       ],
     },
   },
@@ -207,7 +207,7 @@ const researchTopics: ResearchTopic[] = [
       note: '피부 장벽 실험에서 관찰된 두 가지 결과를 정리했습니다.',
       rows: [
         { label: '장벽 회복', reference: '느리게 회복', result: '빠르게 회복', visual: 'result-more' },
-        { label: '표피 과형성', reference: '더 크게 나타남', result: '줄어듦', visual: 'result-less' },
+        { label: '표피가 두꺼워지는 변화', reference: '더 크게 나타났습니다', result: '줄었습니다', visual: 'result-less' },
       ],
     },
   },
@@ -224,7 +224,7 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'metrics',
       title: '성장호르몬 반응',
-      summary: '휴식 조건에서 GABA의 성장호르몬 반응이 위약보다 높게 기록되었습니다.',
+      summary: '쉬었을 때 GABA의 성장호르몬 반응이 위약보다 높았습니다.',
       note: '휴식 조건에서 위약 대비 연구에 기록된 값입니다. 운동 조건에서도 섭취 30분 뒤 더 높았습니다.',
       metrics: [
         { label: '최고치', value: '약 +400%', note: '위약 대비' },
@@ -245,13 +245,13 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'signals',
       title: '성장 관련 지표 변화',
-      summary: '청소년기 생쥐에서 몸길이와 성장호르몬 관련 지표의 변화가 기록되었습니다.',
-      note: '청소년기 생쥐 연구에서 기록된 변화 방향을 정리했습니다.',
+      summary: '청소년기 생쥐에서 몸길이와 성장호르몬 관련 지표에 차이가 나타났습니다.',
+      note: '청소년기 생쥐 연구에서 어떤 변화가 나타났는지 정리했습니다.',
       rows: [
-        { label: '수컷 몸길이', value: '더 길게', direction: 'up' },
-        { label: '수컷 체지방 지표', value: '낮게', direction: 'down' },
-        { label: '뇌하수체 성장호르몬 단백질', value: '증가', direction: 'up' },
-        { label: '혈청 성장호르몬', value: '수컷에서 증가', direction: 'up' },
+        { label: '수컷 몸길이', value: '더 길었습니다', direction: 'up' },
+        { label: '수컷 체지방 지표', value: '더 낮았습니다', direction: 'down' },
+        { label: '뇌하수체 성장호르몬 단백질', value: '증가했습니다', direction: 'up' },
+        { label: '혈청 성장호르몬', value: '수컷에서 증가했습니다', direction: 'up' },
       ],
     },
   },
@@ -268,12 +268,12 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'signals',
       title: '긴장 상황에서 측정한 지표',
-      summary: 'GABA 섭취 뒤 알파파와 침 속 IgA는 높게, 베타파는 낮게 기록되었습니다.',
+      summary: 'GABA 섭취 뒤 알파파와 침 속 IgA는 더 높았고, 베타파는 더 낮았습니다.',
       note: '섭취 뒤 뇌파와 침 속 면역 관련 지표에서 나타난 변화를 정리했습니다.',
       rows: [
-        { label: '알파파', value: '증가', direction: 'up' },
-        { label: '베타파', value: '감소', direction: 'down' },
-        { label: '침 속 IgA', value: '더 높게 유지', direction: 'up' },
+        { label: '알파파', value: '증가했습니다', direction: 'up' },
+        { label: '베타파', value: '감소했습니다', direction: 'down' },
+        { label: '침 속 IgA', value: '더 높게 유지됐습니다', direction: 'up' },
       ],
     },
   },
@@ -534,7 +534,7 @@ function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
           <div className="guide-outcome-comparison-list">
             {topic.chart.rows.map((row) => (
               <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
-                <strong><span>{row.label}</span><small>변화 방향</small></strong>
+                <strong><span>{row.label}</span><small>관찰된 변화</small></strong>
                 <div className="guide-outcome-cell is-reference"><span className="guide-outcome-condition">비교 조건</span><strong>{row.reference}</strong><i aria-hidden="true"><b /></i></div>
                 <span className="guide-outcome-vs" aria-hidden="true">VS</span>
                 <div className="guide-outcome-cell is-result"><span className="guide-outcome-condition">GABA</span><strong>{row.result}</strong><i aria-hidden="true"><b /></i></div>
@@ -746,8 +746,8 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead">GABA는 뇌와 척수에서 신경세포의 과도한 활성화를 억제하고, 신경계의 흥분과 억제 균형을 조절합니다.</p>
             <div className="guide-basics-grid guide-basics-three">
               <article className="guide-definition-card"><span className="guide-card-index">01</span><h3>신경세포 활동 조절</h3><p>신경세포가 지나치게 활성화되지 않도록 신호의 크기와 흐름을 조절합니다.</p><div className="guide-card-motif guide-motif-signal" aria-hidden="true"><i /><i /><i /><i /></div></article>
-              <article className="guide-definition-card is-highlighted"><span className="guide-card-index">02</span><h3>수면과 각성에 관여</h3><p>잠들고 깨어 있는 리듬을 만드는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-moon" aria-hidden="true"><Moon /></div></article>
-              <article className="guide-definition-card"><span className="guide-card-index">03</span><h3>감정·감각·집중·운동 회로</h3><p>감정, 감각, 집중, 움직임을 나누고 조율하는 회로에 관여합니다.</p><div className="guide-card-motif guide-motif-network" aria-hidden="true"><Network /></div></article>
+              <article className="guide-definition-card is-highlighted"><span className="guide-card-index">02</span><h3>수면과 각성의 리듬</h3><p>잠들고 깨어나는 리듬을 만드는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-moon" aria-hidden="true"><Moon /></div></article>
+              <article className="guide-definition-card"><span className="guide-card-index">03</span><h3>감정·감각·집중·운동 회로</h3><p>감정, 감각, 집중, 움직임을 조율하는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-network" aria-hidden="true"><Network /></div></article>
             </div>
           </div>
         </section>
@@ -806,8 +806,8 @@ export default function PublicGabaGuide() {
             <div className="guide-sleep-grid">
               <div className="guide-sleep-steps">
                 <article><span>01</span><div><h3>수면과 GABA의 생리적 관계</h3><p>잠들기 전에는 각성을 유지하는 신경회로의 활동이 낮아져야 합니다. GABA성 신경전달은 그 수면 시작과 유지의 리듬에 관여합니다.</p></div></article>
-                <article><span>02</span><div><h3>수면 인체연구 결과</h3><p>수면의 질이 낮게 나온 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 먹은 무작위·위약 대조 교차시험입니다.</p><strong className="guide-result-line">GABA 기간에는 잠드는 시간이 짧아졌고, 전체 비렘수면 시간이 늘었습니다.</strong><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
-                <article><span>03</span><div><h3>수면 기록에서 보인 변화</h3><div className="guide-compare-row"><span>잠드는 시간</span><strong>GABA 기간에 더 짧아짐</strong></div><div className="guide-compare-row"><span>전체 비렘수면</span><strong>GABA 기간에 늘어남</strong></div><p className="guide-study-source">연구 출처는 바로 앞 결과에 함께 표시했습니다.</p></div></article>
+                <article><span>02</span><div><h3>수면 인체연구 결과</h3><p>수면의 질이 낮게 나온 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 먹은 무작위·위약 대조 교차시험입니다.</p><strong className="guide-result-line">GABA 기간에는 잠드는 시간이 더 짧았고, 전체 비렘수면은 더 길었습니다.</strong><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
+                <article><span>03</span><div><h3>수면 기록에서 보인 변화</h3><div className="guide-compare-row"><span>잠드는 시간</span><strong>더 짧았습니다</strong></div><div className="guide-compare-row"><span>전체 비렘수면</span><strong>더 길었습니다</strong></div><p className="guide-study-source">연구 출처는 바로 앞 결과에 함께 표시했습니다.</p></div></article>
                 <article><span>04</span><div><h3>생리와 연구 결과 연결</h3><div className="guide-compare-row"><span>생리학의 언어</span><strong>GABA와 수면 리듬의 관계</strong></div><div className="guide-compare-row"><span>사람 연구의 기록</span><strong>잠드는 시간·전체 비렘수면</strong></div></div></article>
               </div>
               <div className="guide-sleep-visual" style={{ '--guide-sleep-image': `url(${gabaSleepEditorial})` } as CSSProperties} aria-label="잔잔한 물결과 달빛으로 표현한 수면 연구 이미지" role="img"><div className="guide-sleep-wave"><i /><i /><i /><i /><i /><i /></div><span className="guide-sleep-orbit guide-sleep-orbit-one" /><span className="guide-sleep-orbit guide-sleep-orbit-two" /><strong>잠들기 전<br />신경 신호의 리듬</strong></div>
