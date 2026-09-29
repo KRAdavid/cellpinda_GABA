@@ -64,9 +64,9 @@ type ResearchSignal = {
 };
 
 type ResearchChart =
-  | { kind: 'comparison'; title: string; note: string; rows: ResearchComparison[] }
-  | { kind: 'metrics'; title: string; note: string; metrics: { label: string; value: string; note: string }[] }
-  | { kind: 'signals'; title: string; note: string; rows: ResearchSignal[] };
+  | { kind: 'comparison'; title: string; summary: string; note: string; rows: ResearchComparison[] }
+  | { kind: 'metrics'; title: string; summary: string; note: string; metrics: { label: string; value: string; note: string }[] }
+  | { kind: 'signals'; title: string; summary: string; note: string; rows: ResearchSignal[] };
 
 type HistoryMilestone = {
   year: string;
@@ -182,6 +182,7 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'comparison',
       title: '머리를 많이 쓴 뒤, 변화 폭 비교',
+      summary: '같은 과제를 마친 뒤, GABA 조건의 뇌파와 활력감 감소 폭이 더 작았습니다.',
       note: '두 조건을 같은 기준으로 나란히 비교합니다.',
       rows: [
         { label: '뇌파 변화', reference: '더 크게 줄어듦', result: '덜 줄어듦', visual: 'result-less' },
@@ -202,6 +203,7 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'comparison',
       title: '피부 장벽에서 보인 변화',
+      summary: 'GABA를 바른 피부에서 장벽 회복은 빨라지고, 표피 과형성은 줄었습니다.',
       note: '피부 장벽 실험에서 관찰된 두 가지 결과를 정리했습니다.',
       rows: [
         { label: '장벽 회복', reference: '느리게 회복', result: '빠르게 회복', visual: 'result-more' },
@@ -222,6 +224,7 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'metrics',
       title: '성장호르몬 반응',
+      summary: '휴식 조건에서 GABA의 성장호르몬 반응이 위약보다 높게 기록되었습니다.',
       note: '휴식 조건에서 위약 대비 연구에 기록된 값입니다. 운동 조건에서도 섭취 30분 뒤 더 높았습니다.',
       metrics: [
         { label: '최고치', value: '약 +400%', note: '위약 대비' },
@@ -242,6 +245,7 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'signals',
       title: '성장 관련 지표 변화',
+      summary: '청소년기 생쥐에서 몸길이와 성장호르몬 관련 지표의 변화가 기록되었습니다.',
       note: '청소년기 생쥐 연구에서 기록된 변화 방향을 정리했습니다.',
       rows: [
         { label: '수컷 몸길이', value: '더 길게', direction: 'up' },
@@ -264,6 +268,7 @@ const researchTopics: ResearchTopic[] = [
     chart: {
       kind: 'signals',
       title: '긴장 상황에서 측정한 지표',
+      summary: 'GABA 섭취 뒤 알파파와 침 속 IgA는 높게, 베타파는 낮게 기록되었습니다.',
       note: '섭취 뒤 뇌파와 침 속 면역 관련 지표에서 나타난 변화를 정리했습니다.',
       rows: [
         { label: '알파파', value: '증가', direction: 'up' },
@@ -522,6 +527,7 @@ function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
         <figcaption id={`${chartId}-title`}>{topic.chart.title}</figcaption>
         <span>연구 결과 한눈에</span>
       </div>
+      <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div>
       {topic.chart.kind === 'comparison' ? (
         <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교`}>
           <div className="guide-outcome-comparison-head"><span>측정 지표</span><span className="is-reference"><i aria-hidden="true" />비교 조건</span><span aria-hidden="true" /><span className="is-result"><i aria-hidden="true" />GABA</span></div>
