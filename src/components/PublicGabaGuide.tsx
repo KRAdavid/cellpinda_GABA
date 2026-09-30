@@ -155,7 +155,7 @@ const recoveryCards = [
   },
   {
     eyebrow: '08 · 회복할 시간이 줄어들면',
-    body: '지속적인 수면장애로 회복할 시간이 줄어들면, 노화는 가속됩니다.',
+    body: '수면 장애가 계속되면 몸은 손상과 피로를 회복할 시간을 잃습니다. 회복할 기회가 줄어든 상태가 반복되면, 몸의 균형을 되찾는 속도가 느려지고 노화는 가속됩니다.',
     tone: 'age',
   },
 ] as const;
@@ -614,7 +614,7 @@ export default function PublicGabaGuide() {
     if (recoveryPaused || recoveryReducedMotion) return;
     const intervalId = window.setInterval(() => {
       setActiveRecoveryCard((current) => (current + 1) % recoveryCards.length);
-    }, 2000);
+    }, 3000);
     return () => window.clearInterval(intervalId);
   }, [recoveryPaused, recoveryReducedMotion]);
 
@@ -764,9 +764,9 @@ export default function PublicGabaGuide() {
             <div className="guide-recovery-break-head">
               <div>
                 <p className="guide-section-number">잠깐, 수면과 회복</p>
-                <h2 id="recovery-break-heading">잠과 회복을<br />잠시 생각해 볼까요?</h2>
+                <h2 id="recovery-break-heading">GABA를 모르면<br />노화는 가속됩니다.</h2>
               </div>
-              <p>수면이 흐트러지면<br />몸의 회복도 달라집니다.</p>
+              <p>잠은 단순히 멈추는 시간이 아닙니다.<br />뇌와 몸이 손상과 피로를 정리하고<br />다시 균형을 되찾는 회복의 시간입니다.</p>
             </div>
             <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} aria-live="polite" aria-atomic="true">
               <div className="guide-recovery-card-copy">
@@ -776,7 +776,7 @@ export default function PublicGabaGuide() {
               <div className="guide-recovery-card-footer">
                 <div className="guide-recovery-progress" aria-hidden="true"><i key={activeRecoveryCard} /></div>
                 <span>{String(activeRecoveryCard + 1).padStart(2, '0')} / {String(recoveryCards.length).padStart(2, '0')}</span>
-                <span>{recoveryPaused ? '일시정지' : '2초마다 다음 카드'}</span>
+                <span>{recoveryPaused ? '일시정지' : '3초마다 다음 카드'}</span>
               </div>
             </div>
             <div className="guide-recovery-controls" aria-label="수면과 회복 카드 조작">
@@ -788,7 +788,7 @@ export default function PublicGabaGuide() {
             <div className="guide-recovery-next">
               <p className="guide-recovery-next-kicker">그다음</p>
               <h3>GABA를 읽는 시작점</h3>
-              <p>휴식과 회복에 반드시 필요한 성분이 GABA입니다. GABA에 대한 수많은 연구는 계속되고 있습니다.</p>
+              <p>수면과 회복을 이해하는 첫 단서가 GABA입니다. GABA는 신경계의 흥분과 억제 균형을 조절하며, 잠들고 깨어나는 리듬과 연결됩니다.</p>
             </div>
           </div>
         </aside>
