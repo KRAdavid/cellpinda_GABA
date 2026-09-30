@@ -1,4 +1,4 @@
-import { useEffect, useState, type CSSProperties } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type TouchEvent } from 'react';
 import {
   ArrowDown,
   ArrowDownRight,
@@ -599,6 +599,9 @@ export default function PublicGabaGuide() {
   const [activeRecoveryCard, setActiveRecoveryCard] = useState(0);
   const [recoveryPaused, setRecoveryPaused] = useState(false);
   const [recoveryReducedMotion, setRecoveryReducedMotion] = useState(false);
+  const [recoveryInView, setRecoveryInView] = useState(false);
+  const recoveryBreakRef = useRef<HTMLElement | null>(null);
+  const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const activeChapterIndex = Math.max(0, readingChapters.findIndex((chapter) => chapter.id === activeChapterId));
   const activeChapter = readingChapters[activeChapterIndex];
@@ -625,7 +628,18 @@ export default function PublicGabaGuide() {
   }, []);
 
   useEffect(() => {
-    if (recoveryPaused || recoveryReducedMotion) return;
+    const section = recoveryBreakRef.current;
+    if (!section || !('IntersectionObserver' in window)) {
+      setRecoveryInView(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => setRecoveryInView(entry.isIntersecting), { rootMargin: '-18% 0px -18% 0px' });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (recoveryPaused || recoveryReducedMotion || !recoveryInView) return;
     const intervalId = window.setInterval(() => {
       setActiveRecoveryCard((current) => (current + 1) % recoveryCards.length);
     }, 3000);
@@ -683,6 +697,33 @@ export default function PublicGabaGuide() {
   const selectRecoveryCard = (index: number) => {
     setRecoveryPaused(true);
     setActiveRecoveryCard(index);
+  };
+
+  const handleRecoveryKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      moveRecoveryCard(-1);
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      moveRecoveryCard(1);
+    }
+  };
+
+  const handleRecoveryTouchStart = (event: TouchEvent<HTMLElement>) => {
+    const touch = event.changedTouches[0];
+    recoveryTouchStart.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleRecoveryTouchEnd = (event: TouchEvent<HTMLElement>) => {
+    const start = recoveryTouchStart.current;
+    recoveryTouchStart.current = null;
+    if (!start) return;
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - start.x;
+    const deltaY = touch.clientY - start.y;
+    if (Math.abs(deltaX) < 44 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
+    moveRecoveryCard(deltaX < 0 ? 1 : -1);
   };
 
   const sharePage = async () => {
@@ -778,7 +819,7 @@ export default function PublicGabaGuide() {
           </div>
         </section>
 
-        <aside className="guide-recovery-break" aria-labelledby="recovery-break-heading">
+        <aside ref={recoveryBreakRef} className="guide-recovery-break" aria-labelledby="recovery-break-heading">
           <div className="guide-container">
             <div className="guide-recovery-break-head">
               <div>
@@ -793,7 +834,7 @@ export default function PublicGabaGuide() {
                 return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} aria-label={card.eyebrow} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span></button>;
               })}
             </div>
-            <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} aria-live="polite">
+            <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} role="group" aria-roledescription="carousel" aria-label={`수면과 회복 카드 ${activeRecoveryCard + 1} / ${recoveryCards.length}: ${recoveryCard.eyebrow}`} tabIndex={0} onKeyDown={handleRecoveryKeyDown} onTouchStart={handleRecoveryTouchStart} onTouchEnd={handleRecoveryTouchEnd} aria-live="polite">
               <div className="guide-recovery-card-top">
                 <div className="guide-recovery-card-copy">
                   <h3 className="guide-recovery-card-eyebrow">{recoveryCard.eyebrow}</h3>
