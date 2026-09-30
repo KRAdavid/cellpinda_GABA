@@ -120,49 +120,41 @@ const everydayTopics: EverydayTopic[] = [
 const recoveryCards = [
   {
     eyebrow: '01 · 낮과 밤',
-    title: '낮에는 몸을 쓰고, 밤에는 몸을 회복합니다',
     body: '낮에는 움직이고 일하며 에너지를 씁니다. 밤이 되면 뇌는 하루 동안 쌓인 정보를 정리하고 몸은 회복을 이어갑니다.',
     tone: 'night',
   },
   {
     eyebrow: '02 · 잠의 역할',
-    title: '잠은 멈춰 있는 시간이 아니라, 다음 날을 준비하는 시간입니다',
     body: '잠든 동안 뇌와 몸은 쉬면서 다음 날 집중하고 움직일 힘을 준비합니다. 그래서 수면의 질은 하루의 컨디션과 이어집니다.',
     tone: 'recovery',
   },
   {
     eyebrow: '03 · 회복의 속도',
-    title: '수면의 질이 떨어지면 회복의 속도도 달라집니다',
     body: '잠이 얕거나 자주 깨는 밤이 이어지면, 충분히 잔 것 같아도 다음 날 몸이 무겁고 활력이 떨어진 것처럼 느껴집니다.',
     tone: 'recovery',
   },
   {
     eyebrow: '04 · 밤의 긴장',
-    title: '밤에도 긴장이 남아 있으면 잠들기 어렵습니다',
     body: '스트레스가 계속되거나 뇌가 깨어 있는 상태가 높아지면, 몸은 쉽게 쉬는 상태로 들어가지 못합니다.',
     tone: 'stress',
   },
   {
     eyebrow: '05 · 다음 날',
-    title: '수면의 흐름은 다음 날까지 이어집니다',
     body: '잠을 충분히 자지 못한 날에는 머리가 무겁고 집중이 오래 가지 않으며, 몸의 회복도 더디게 느껴집니다.',
     tone: 'morning',
   },
   {
     eyebrow: '06 · 반복되는 고리',
-    title: '피곤함과 예민함은 서로를 키우는 고리가 됩니다',
     body: '잠을 못 자서 지치고, 지쳐서 더 예민해지고, 예민해져 다시 잠들기 어려워집니다.',
     tone: 'loop',
   },
   {
     eyebrow: '07 · 노화의 언어',
-    title: '노화는 나이를 먹는 것만을 뜻하지 않습니다',
     body: '몸이 손상을 회복하고 균형을 되찾는 속도가 조금씩 느려지는 과정이기도 합니다.',
     tone: 'age',
   },
   {
     eyebrow: '08 · GABA를 읽는 시작점',
-    title: '그래서 수면과 회복의 리듬을 이해해야 합니다',
     body: '잠들고 깨어나는 과정을 조절하는 신경계의 역할을 이해하면, GABA가 왜 중요한 연구 주제인지 더 선명해집니다.',
     tone: 'age',
   },
@@ -775,8 +767,7 @@ export default function PublicGabaGuide() {
             </div>
             <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} aria-live="polite" aria-atomic="true">
               <div className="guide-recovery-card-copy">
-                <p className="guide-recovery-card-eyebrow">{recoveryCard.eyebrow}</p>
-                <h3>{recoveryCard.title}</h3>
+                <h3 className="guide-recovery-card-eyebrow">{recoveryCard.eyebrow}</h3>
                 <p>{recoveryCard.body}</p>
               </div>
               <div className="guide-recovery-card-footer">

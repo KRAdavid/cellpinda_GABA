@@ -624,8 +624,7 @@
 .guide-recovery-card.is-loop{background:linear-gradient(135deg,#183452 0%,#355f72 100%)}
 .guide-recovery-card.is-age{background:linear-gradient(135deg,#182f4e 0%,#315d70 100%)}
 .guide-recovery-card-copy{position:relative;z-index:1;max-width:760px}
-.guide-recovery-card-eyebrow{margin:0;color:#9fe0dd;font-size:11px;font-weight:900;letter-spacing:.16em;line-height:1.4}
-.guide-recovery-card h3{max-width:16ch;margin:30px 0 18px;color:#fff;font-size:clamp(35px,4.7vw,62px);font-weight:850;letter-spacing:-.095em;line-height:1.12}
+.guide-recovery-card-eyebrow{max-width:100%;margin:0 0 24px;color:#a9e4e0;font-size:18px;font-weight:850;letter-spacing:-.045em;line-height:1.4;word-break:keep-all;overflow-wrap:anywhere}
 .guide-recovery-card-copy>p:last-child{max-width:47ch;margin:0;color:#d1e3e8;font-size:16px;line-height:1.85;letter-spacing:-.04em}
 .guide-recovery-card-footer{position:relative;z-index:1;display:grid;grid-template-columns:minmax(120px,1fr) auto auto;align-items:center;gap:13px;margin-top:28px;color:#a9d3d7;font-size:11px;letter-spacing:.03em}
 .guide-recovery-progress{height:3px;border-radius:999px;background:rgba(223,247,248,.2);overflow:hidden}
@@ -650,7 +649,7 @@
   .guide-recovery-break-head>p{margin-top:12px;font-size:14px;text-align:left}
   .guide-recovery-card{min-height:356px;padding:28px 22px 21px;border-radius:22px}
   .guide-recovery-card:after{right:-14px;bottom:-28px;font-size:78px}
-  .guide-recovery-card h3{max-width:100%;margin:26px 0 16px;font-size:clamp(31px,9.2vw,39px);line-height:1.18;word-break:keep-all;overflow-wrap:anywhere}
+  .guide-recovery-card-eyebrow{margin-bottom:19px;font-size:16px;line-height:1.45}
   .guide-recovery-card-copy>p:last-child{font-size:16px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
   .guide-recovery-card-footer{grid-template-columns:minmax(0,1fr) auto;gap:9px;margin-top:25px;font-size:10px}
   .guide-recovery-card-footer span:last-child{grid-column:1/-1}
