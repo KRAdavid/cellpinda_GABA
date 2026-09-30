@@ -149,13 +149,13 @@ const recoveryCards = [
     tone: 'loop',
   },
   {
-    eyebrow: '07 · 노화의 언어',
-    body: '몸이 손상을 회복하고 균형을 되찾는 속도가 조금씩 느려지는 과정이기도 합니다.',
+    eyebrow: '07 · 노화의 정의',
+    body: '몸이 손상을 회복하고 균형을 되찾는 속도가 조금씩 느려지는 과정입니다.',
     tone: 'age',
   },
   {
-    eyebrow: '08 · GABA를 읽는 시작점',
-    body: '잠들고 깨어나는 과정을 조절하는 신경계의 역할을 이해하면, GABA가 왜 중요한 연구 주제인지 더 선명해집니다.',
+    eyebrow: '08 · 회복할 시간이 줄어들면',
+    body: '지속적인 수면장애로 회복할 시간이 줄어들면, 노화는 가속됩니다.',
     tone: 'age',
   },
 ] as const;
@@ -784,7 +784,12 @@ export default function PublicGabaGuide() {
               <button type="button" className="guide-recovery-toggle" aria-pressed={recoveryPaused} onClick={() => setRecoveryPaused((paused) => !paused)}>{recoveryPaused ? <Play size={13} fill="currentColor" aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}<span>{recoveryPaused ? '다시 재생' : '잠시 멈춤'}</span></button>
               <button type="button" aria-label="다음 카드" onClick={() => moveRecoveryCard(1)}><ChevronRight size={17} aria-hidden="true" /></button>
             </div>
-            <p className="guide-recovery-thread"><span>GABA란</span><i>→</i><strong>수면과 회복</strong><i>→</i><span>연구 결과</span></p>
+            <p className="guide-recovery-thread"><span>GABA란</span><i>→</i><strong>수면과 회복</strong><i>→</i><span>GABA를 읽는 시작점</span></p>
+            <div className="guide-recovery-next">
+              <p className="guide-recovery-next-kicker">그다음</p>
+              <h3>GABA를 읽는 시작점</h3>
+              <p>휴식과 회복에 반드시 필요한 성분이 GABA입니다. GABA에 대한 수많은 연구는 계속되고 있습니다.</p>
+            </div>
           </div>
         </aside>
 

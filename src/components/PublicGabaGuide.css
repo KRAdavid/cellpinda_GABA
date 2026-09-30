@@ -668,3 +668,14 @@
 @media(max-width:700px){
   .guide-editorial-note{margin-top:16px;padding-left:10px;font-size:13px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere}
 }
+
+/* v16 recovery handoff: name the next reading step after the sleep bridge. */
+.guide-recovery-next{max-width:940px;margin:34px auto 0;padding:25px 28px 26px;border:1px solid #cfe5e8;border-radius:20px;background:rgba(255,255,255,.72)}
+.guide-recovery-next-kicker{margin:0;color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.14em}
+.guide-recovery-next h3{margin:10px 0 8px;color:var(--guide-ink);font-size:clamp(24px,3vw,34px);font-weight:850;letter-spacing:-.075em;line-height:1.2}
+.guide-recovery-next>p:last-child{max-width:58ch;margin:0;color:#627d91;font-size:15px;line-height:1.8;letter-spacing:-.035em}
+@media(max-width:700px){
+  .guide-recovery-next{margin-top:28px;padding:21px 19px 22px;border-radius:18px}
+  .guide-recovery-next h3{font-size:25px}
+  .guide-recovery-next>p:last-child{font-size:15px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+}
