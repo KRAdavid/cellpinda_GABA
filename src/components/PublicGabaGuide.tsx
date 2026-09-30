@@ -122,61 +122,51 @@ const recoveryIcons = [Sparkles, Moon, Share2, ArrowDown, Moon, ShieldCheck, Arr
 const recoveryCards = [
   {
     eyebrow: '01 · 낮의 활동',
-    label: '활동',
     body: '낮에는 움직이고 일하며 에너지를 씁니다.',
     tone: 'night',
   },
   {
     eyebrow: '02 · 밤의 전환',
-    label: '전환',
     body: '밤이 되면 몸은 활동에서 휴식으로 전환됩니다.',
     tone: 'recovery',
   },
   {
     eyebrow: '03 · 뇌의 정리',
-    label: '정리',
     body: '잠든 동안 뇌는 하루 동안 쌓인 정보를 정리합니다.',
     tone: 'recovery',
   },
   {
     eyebrow: '04 · 몸의 회복',
-    label: '회복',
     body: '몸은 손상과 피로를 회복하며 다음 날을 준비합니다.',
     tone: 'recovery',
   },
   {
     eyebrow: '05 · 수면의 질',
-    label: '질',
     body: '잠이 얕거나 자주 깨면, 회복에 쓸 시간이 줄어듭니다.',
     tone: 'recovery',
   },
   {
     eyebrow: '06 · 밤의 긴장',
-    label: '긴장',
     body: '스트레스가 이어지면 뇌가 쉽게 쉬는 상태로 전환되지 않습니다.',
     tone: 'stress',
   },
   {
     eyebrow: '07 · 다음 날',
-    label: '다음 날',
     body: '잠이 흐트러진 다음 날에는 집중과 활력도 떨어지기 쉽습니다.',
     tone: 'morning',
   },
   {
     eyebrow: '08 · 반복되는 고리',
-    label: '반복',
     body: '지치고 예민해질수록 다시 잠들기 어려워지는 고리가 만들어집니다.',
     tone: 'loop',
   },
   {
     eyebrow: '09 · 노화의 정의',
-    label: '노화',
     body: '노화는 몸이 손상을 회복하고 균형을 되찾는 속도가 느려지는 과정입니다.',
     tone: 'age',
   },
   {
     eyebrow: '10 · 회복할 시간이 줄어들면',
-    label: '가속',
     body: '수면 장애가 계속되면 몸은 손상과 피로를 회복할 시간을 잃습니다. 회복할 기회가 줄어든 상태가 반복되면, 몸의 균형을 되찾는 속도가 느려지고 노화는 가속됩니다.',
     tone: 'age',
   },
@@ -798,10 +788,10 @@ export default function PublicGabaGuide() {
             <div className="guide-recovery-map">
               {recoveryCards.map((card, index) => {
                 const Icon = recoveryIcons[index];
-                return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span><span>{card.label}</span></button>;
+                return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} aria-label={card.eyebrow} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span></button>;
               })}
             </div>
-            <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} aria-live="polite" aria-atomic="true">
+            <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} aria-live="polite">
               <div className="guide-recovery-card-copy">
                 <h3 className="guide-recovery-card-eyebrow">{recoveryCard.eyebrow}</h3>
                 <p>{recoveryCard.body}</p>
