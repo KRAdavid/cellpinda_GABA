@@ -23,9 +23,10 @@ import {
   Sprout,
   X,
 } from 'lucide-react';
-import gabaFermentationEditorial from '../assets/gaba-fermentation-editorial.jpg';
-import gabaNaturalHero from '../assets/gaba-natural-hero.jpg';
-import gabaSleepEditorial from '../assets/gaba-sleep-editorial.jpg';
+import gabaFermentationEditorial from '../assets/gaba-fermentation-editorial-q55.webp';
+import gabaNaturalHero from '../assets/gaba-natural-hero-q55.webp';
+import gabaRecoveryIllustrationSheet from '../assets/gaba-recovery-illustration-sheet-card.webp';
+import gabaSleepEditorial from '../assets/gaba-sleep-editorial-q55.webp';
 import './PublicGabaGuide.css';
 
 type EvidenceTone = 'established' | 'human' | 'early' | 'mixed';
@@ -602,6 +603,7 @@ export default function PublicGabaGuide() {
   const activeChapterIndex = Math.max(0, readingChapters.findIndex((chapter) => chapter.id === activeChapterId));
   const activeChapter = readingChapters[activeChapterIndex];
   const recoveryCard = recoveryCards[activeRecoveryCard];
+  const recoveryArtPosition = `${activeRecoveryCard % 2 ? '100%' : '0%'} ${Math.floor(activeRecoveryCard / 2) * 25}%`;
 
   useEffect(() => {
     document.title = '1950년의 발견, 발효와 연구로 이어진 GABA | GABA Guide';
@@ -792,9 +794,12 @@ export default function PublicGabaGuide() {
               })}
             </div>
             <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} aria-live="polite">
-              <div className="guide-recovery-card-copy">
-                <h3 className="guide-recovery-card-eyebrow">{recoveryCard.eyebrow}</h3>
-                <p>{recoveryCard.body}</p>
+              <div className="guide-recovery-card-top">
+                <div className="guide-recovery-card-copy">
+                  <h3 className="guide-recovery-card-eyebrow">{recoveryCard.eyebrow}</h3>
+                  <p>{recoveryCard.body}</p>
+                </div>
+                <div className="guide-recovery-card-art" style={{ backgroundImage: `url(${gabaRecoveryIllustrationSheet})`, backgroundPosition: recoveryArtPosition }} aria-hidden="true" />
               </div>
               <div className="guide-recovery-card-footer">
                 <div className="guide-recovery-progress" aria-hidden="true"><i key={activeRecoveryCard} /></div>
