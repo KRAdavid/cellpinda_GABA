@@ -595,6 +595,7 @@ export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
   const [activeVideoId, setActiveVideoId] = useState(expertVideos[0].id);
+  const [videoStarted, setVideoStarted] = useState(false);
   const [activeChapterId, setActiveChapterId] = useState<ReadingChapterId>(readingChapters[0].id);
   const [activeRecoveryCard, setActiveRecoveryCard] = useState(0);
   const [recoveryPaused, setRecoveryPaused] = useState(false);
@@ -683,6 +684,7 @@ export default function PublicGabaGuide() {
 
   const selectExpertVideo = (id: string) => {
     setActiveVideoId(id);
+    setVideoStarted(true);
     if (window.matchMedia('(max-width: 700px)').matches) {
       const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
       requestAnimationFrame(() => document.getElementById('expert-video-feature')?.scrollIntoView({ behavior, block: 'start' }));
@@ -935,7 +937,7 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead guide-video-gallery-lead">의사와 과학자가 공개한 짧은 영상을 수면, GABA의 기본 역할, 자율신경과 연구 읽기 주제로 모았습니다.</p>
             <div className="guide-video-gallery">
               <article className="guide-video-feature" id="expert-video-feature" aria-live="polite">
-                <div className="guide-video-feature-media"><iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+                <div className="guide-video-feature-media">{videoStarted ? <iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /> : <button type="button" className="guide-video-feature-poster" onClick={() => setVideoStarted(true)} aria-label={`${activeVideo.title} 영상 재생`}><img src={`https://i.ytimg.com/vi/${activeVideo.id}/hqdefault.jpg`} alt={`${activeVideo.title} 영상 썸네일`} fetchPriority="high" decoding="async" /><span className="guide-video-feature-poster-shade" aria-hidden="true" /><span className="guide-video-feature-poster-play"><Play size={20} fill="currentColor" aria-hidden="true" /><strong>영상 재생</strong></span></button>}</div>
                 <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>짧은 영상</span></div><h3>{activeVideo.title}</h3><p>{activeVideo.channel}</p><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a></div>
               </article>
               <div className="guide-video-board" aria-label="전문가 영상 게시판">
