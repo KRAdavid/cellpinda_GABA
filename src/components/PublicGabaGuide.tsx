@@ -423,6 +423,7 @@ const expertVideos: ExpertVideo[] = [
   { id: '4xGSHxkMYew', title: 'GABA의 기본 역할', topic: 'GABA란', channel: '비엠한방내과 [bm_k_clinic]' },
   { id: '7Zsxm9Wh2Yg', title: '자율신경과 GABA 식품', topic: '자율신경', channel: '30년 자율신경, 정이안한의원TV' },
   { id: 'vnocd9ZVJj0', title: 'GABA 수용체와 수면', topic: '수용체', channel: '영양과학자 양과자' },
+  { id: 'bQ0QQHpUzdI', title: '불면·우울감과 GABA 이야기', topic: '수면·기분', channel: 'dr밸런스' },
 ];
 
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
