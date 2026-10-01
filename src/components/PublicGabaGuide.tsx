@@ -118,58 +118,92 @@ const everydayTopics: EverydayTopic[] = [
   { id: 'sense', title: '감각 정보를 구분할 때', body: '소리와 촉감 중 중요한 신호를 골라 받아들입니다.', icon: 'sense' },
 ];
 
-const recoveryIcons = [Sparkles, Moon, Share2, ArrowDown, Moon, ShieldCheck, ArrowRight, Share2, Check, ArrowRight];
+const recoveryIcons = [Sparkles, Moon, Share2, ArrowDown, Moon, ShieldCheck, ArrowRight, Share2, Check, ArrowRight, ShieldCheck, ArrowDown, Share2, ArrowRight];
 
 const recoveryCards = [
   {
     eyebrow: '01 · 낮의 활동',
     body: '낮에는 움직이고 일하며 에너지를 씁니다.',
     tone: 'night',
+    artIndex: 0,
   },
   {
     eyebrow: '02 · 밤의 전환',
     body: '밤이 되면 몸은 활동에서 휴식으로 전환됩니다.',
     tone: 'recovery',
+    artIndex: 1,
   },
   {
     eyebrow: '03 · 뇌의 정리',
     body: '잠든 동안 뇌는 하루 동안 쌓인 정보를 정리합니다.',
     tone: 'recovery',
+    artIndex: 2,
   },
   {
     eyebrow: '04 · 몸의 회복',
     body: '몸은 손상과 피로를 회복하며 다음 날을 준비합니다.',
     tone: 'recovery',
+    artIndex: 3,
   },
   {
     eyebrow: '05 · 수면의 질',
     body: '잠이 얕거나 자주 깨면, 회복에 쓸 시간이 줄어듭니다.',
     tone: 'recovery',
+    artIndex: 4,
   },
   {
     eyebrow: '06 · 밤의 긴장',
     body: '스트레스가 이어지면 뇌가 쉽게 쉬는 상태로 전환되지 않습니다.',
     tone: 'stress',
+    artIndex: 5,
   },
   {
     eyebrow: '07 · 다음 날',
     body: '잠이 흐트러진 다음 날에는 집중과 활력도 떨어지기 쉽습니다.',
     tone: 'morning',
+    artIndex: 6,
   },
   {
     eyebrow: '08 · 반복되는 고리',
     body: '지치고 예민해질수록 다시 잠들기 어려워지는 고리가 만들어집니다.',
     tone: 'loop',
+    artIndex: 7,
   },
   {
     eyebrow: '09 · 노화의 정의',
     body: '노화는 몸이 손상을 회복하고 균형을 되찾는 속도가 느려지는 과정입니다.',
     tone: 'age',
+    artIndex: 8,
   },
   {
-    eyebrow: '10 · 회복할 시간이 줄어들면',
-    body: '수면 장애가 계속되면 몸은 손상과 피로를 회복할 시간을 잃습니다. 회복할 기회가 줄어든 상태가 반복되면, 몸의 균형을 되찾는 속도가 느려지고 노화는 가속됩니다.',
+    eyebrow: '10 · 회복할 여유',
+    body: '회복에는 몸이 손상과 피로를 정리할 시간이 필요합니다. 충분한 수면은 그 회복을 이어가는 바탕이 됩니다.',
     tone: 'age',
+    artIndex: 3,
+  },
+  {
+    eyebrow: '11 · 회복할 시간이 줄어들면',
+    body: '수면이 계속 흐트러지면 몸은 손상과 피로를 회복할 시간을 잃고, 균형을 되찾을 기회도 줄어듭니다.',
+    tone: 'age',
+    artIndex: 9,
+  },
+  {
+    eyebrow: '12 · 반복의 누적',
+    body: '회복하지 못한 피로는 다음 날의 예민함과 긴장으로 이어지고, 그 긴장은 다시 밤의 휴식을 방해할 수 있습니다.',
+    tone: 'loop',
+    artIndex: 7,
+  },
+  {
+    eyebrow: '13 · 노화의 가속',
+    body: '회복할 기회가 줄어든 상태가 오래 반복되면, 몸이 손상과 피로를 정리하고 균형을 되찾는 속도는 더 느려집니다.',
+    tone: 'age',
+    artIndex: 8,
+  },
+  {
+    eyebrow: '14 · GABA를 읽는 시작점',
+    body: 'GABA는 신경계의 흥분과 억제 균형을 조절하는 신호로 연구됩니다. 이제 수면과 회복의 연결에서 GABA를 읽어봅니다.',
+    tone: 'recovery',
+    artIndex: 2,
   },
 ] as const;
 
@@ -607,7 +641,7 @@ export default function PublicGabaGuide() {
   const activeChapterIndex = Math.max(0, readingChapters.findIndex((chapter) => chapter.id === activeChapterId));
   const activeChapter = readingChapters[activeChapterIndex];
   const recoveryCard = recoveryCards[activeRecoveryCard];
-  const recoveryArtPosition = `${activeRecoveryCard % 2 ? '100%' : '0%'} ${Math.floor(activeRecoveryCard / 2) * 25}%`;
+  const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
   useEffect(() => {
     document.title = '1950년의 발견, 발효와 연구로 이어진 GABA | GABA Guide';
@@ -645,7 +679,7 @@ export default function PublicGabaGuide() {
       setActiveRecoveryCard((current) => (current + 1) % recoveryCards.length);
     }, 3000);
     return () => window.clearInterval(intervalId);
-  }, [recoveryPaused, recoveryReducedMotion]);
+  }, [recoveryPaused, recoveryReducedMotion, recoveryInView]);
 
   useEffect(() => {
     let frame = 0;
@@ -858,8 +892,8 @@ export default function PublicGabaGuide() {
             <p className="guide-recovery-thread"><span>GABA란</span><i>→</i><strong>수면과 회복</strong><i>→</i><span>GABA를 읽는 시작점</span></p>
             <div className="guide-recovery-next">
               <p className="guide-recovery-next-kicker">그다음</p>
-              <h3>GABA를 읽는 시작점</h3>
-              <p>수면과 회복을 이해하는 첫 단서가 GABA입니다. GABA는 신경계의 흥분과 억제 균형을 조절하며, 잠들고 깨어나는 리듬과 연결됩니다.</p>
+              <h3>GABA의 연구 지도로</h3>
+              <p>수면과 회복에서 시작한 질문은 신경계의 균형, 집중, 감각, 피부, 근육과 성장 연구로 이어집니다.</p>
             </div>
           </div>
         </aside>
