@@ -111,11 +111,11 @@ type ExpertVideo = {
 };
 
 const everydayTopics: EverydayTopic[] = [
-  { id: 'sleep', title: '잠들 때', body: '잠들고 깨어나는 리듬을 조절하는 신경 신호가 작동합니다.', icon: 'moon' },
-  { id: 'stress', title: '긴장되는 순간', body: '높아진 신경 신호를 낮추며 몸의 균형을 찾습니다.', icon: 'sparkles' },
-  { id: 'focus', title: '필요한 정보에 집중할 때', body: '필요한 정보에 집중하도록 다른 신호를 잠시 낮춥니다.', icon: 'focus' },
+  { id: 'sleep', title: '잠들 때', body: '잠들고 깨어나는 리듬에도 신경 신호가 관여합니다.', icon: 'moon' },
+  { id: 'stress', title: '긴장되는 순간', body: '높아진 신경 활동을 낮추며 몸이 균형을 되찾는 과정이 이어집니다.', icon: 'sparkles' },
+  { id: 'focus', title: '필요한 정보에 집중할 때', body: '필요한 정보에 집중하는 동안 다른 신호는 잠시 낮아집니다.', icon: 'focus' },
   { id: 'movement', title: '몸을 움직이고 멈출 때', body: '움직일 때와 멈출 때를 구분해 몸의 움직임을 조절합니다.', icon: 'movement' },
-  { id: 'sense', title: '감각 정보를 구분할 때', body: '소리와 촉감 중 중요한 신호를 골라 받아들입니다.', icon: 'sense' },
+  { id: 'sense', title: '감각 정보를 구분할 때', body: '소리와 촉감 같은 감각 신호를 구분하는 과정에도 관여합니다.', icon: 'sense' },
 ];
 
 const recoveryIcons = [Sparkles, Moon, Share2, ArrowDown, Moon, ShieldCheck, ArrowRight, Share2, Check, ArrowRight, ShieldCheck, ArrowDown, Share2, ArrowRight];
@@ -129,7 +129,7 @@ const recoveryCards = [
   },
   {
     eyebrow: '02 · 밤의 전환',
-    body: '밤이 되면 몸은 활동에서 휴식으로 전환됩니다.',
+    body: '밤이 되면 몸은 활동을 멈추고 휴식에 들어갑니다.',
     tone: 'recovery',
     artIndex: 1,
   },
@@ -141,7 +141,7 @@ const recoveryCards = [
   },
   {
     eyebrow: '04 · 몸의 회복',
-    body: '몸은 손상과 피로를 회복하며 다음 날을 준비합니다.',
+    body: '몸은 손상된 부분을 회복하고 쌓인 피로를 풀며 다음 날을 준비합니다.',
     tone: 'recovery',
     artIndex: 3,
   },
@@ -153,19 +153,19 @@ const recoveryCards = [
   },
   {
     eyebrow: '06 · 밤의 긴장',
-    body: '스트레스가 이어지면 뇌가 쉽게 쉬는 상태로 전환되지 않습니다.',
+    body: '스트레스가 이어지면 뇌가 쉽게 휴식 상태로 전환되지 않습니다.',
     tone: 'stress',
     artIndex: 5,
   },
   {
     eyebrow: '07 · 다음 날',
-    body: '잠이 흐트러진 다음 날에는 집중과 활력도 떨어지기 쉽습니다.',
+    body: '수면이 흐트러진 다음 날에는 집중과 활력도 떨어지기 쉽습니다.',
     tone: 'morning',
     artIndex: 6,
   },
   {
     eyebrow: '08 · 반복되는 고리',
-    body: '지치고 예민해질수록 다시 잠들기 어려워지는 고리가 만들어집니다.',
+    body: '지치고 예민해질수록 다시 잠들기 어려운 악순환이 이어질 수 있습니다.',
     tone: 'loop',
     artIndex: 7,
   },
@@ -177,31 +177,31 @@ const recoveryCards = [
   },
   {
     eyebrow: '10 · 회복할 여유',
-    body: '회복에는 몸이 손상과 피로를 정리할 시간이 필요합니다. 충분한 수면은 그 회복을 이어가는 바탕이 됩니다.',
+    body: '회복하려면 몸이 손상과 피로를 정리할 시간이 필요합니다. 충분한 수면은 그 회복을 이어가는 바탕이 됩니다.',
     tone: 'age',
     artIndex: 3,
   },
   {
     eyebrow: '11 · 회복할 시간이 줄어들면',
-    body: '수면이 계속 흐트러지면 몸은 손상과 피로를 회복할 시간을 잃고, 균형을 되찾을 기회도 줄어듭니다.',
+    body: '수면이 계속 흐트러지면 몸이 손상과 피로를 정리할 시간이 줄어들고, 균형을 되찾을 기회도 함께 줄어듭니다.',
     tone: 'age',
     artIndex: 9,
   },
   {
     eyebrow: '12 · 반복의 누적',
-    body: '회복하지 못한 피로는 다음 날의 예민함과 긴장으로 이어지고, 그 긴장은 다시 밤의 휴식을 방해할 수 있습니다.',
+    body: '풀리지 않은 피로는 다음 날의 예민함과 긴장으로 이어지고, 그 긴장은 다시 밤의 휴식을 방해할 수 있습니다.',
     tone: 'loop',
     artIndex: 7,
   },
   {
     eyebrow: '13 · 노화의 가속',
-    body: '회복할 기회가 줄어든 상태가 오래 반복되면, 몸이 손상과 피로를 정리하고 균형을 되찾는 속도는 더 느려집니다.',
+    body: '회복할 기회가 줄어든 상태가 오래 이어지면, 몸이 손상과 피로를 정리하고 균형을 되찾는 속도는 더 느려집니다.',
     tone: 'age',
     artIndex: 8,
   },
   {
     eyebrow: '14 · GABA를 읽는 시작점',
-    body: 'GABA는 신경계의 흥분과 억제 균형을 조절하는 신호로 연구됩니다. 이제 수면과 회복의 연결에서 GABA를 읽어봅니다.',
+    body: 'GABA는 신경계의 흥분과 억제 사이의 균형에 관여하는 물질로 연구되고 있습니다. 이제 수면과 회복의 연결 속에서 GABA를 살펴봅니다.',
     tone: 'recovery',
     artIndex: 2,
   },
@@ -214,14 +214,14 @@ const researchTopics: ResearchTopic[] = [
     english: '인지와 집중',
     tone: 'human',
     label: '사람 63명 · 비교 연구',
-    study: '건강한 성인 63명이 GABA 100mg과 위약을 각각 먹고, 머리를 많이 쓰는 과제를 수행한 무작위·위약 대조 교차시험입니다.',
-    finding: '머리를 많이 쓴 과제를 마친 뒤, GABA를 먹은 그룹은 비교 그룹보다 뇌파와 활력 점수가 덜 떨어졌습니다. 연구진은 정신적 스트레스 반응이 덜 나타난 결과로 해석했습니다.',
+    study: '건강한 성인 63명이 GABA 100mg과 위약을 각각 섭취하고, 머리를 많이 쓰는 과제를 수행한 무작위·위약 대조 교차시험입니다.',
+    finding: '머리를 많이 쓴 과제를 마친 뒤, GABA를 섭취한 그룹은 비교 그룹보다 뇌파와 활력 점수가 덜 떨어졌습니다. 연구진은 정신적 스트레스 반응이 덜 나타난 결과로 해석했습니다.',
     interpretation: '이 연구가 직접 살펴본 항목은 기억력이나 치매가 아니라, 정신적 부담이 있는 상황에서의 뇌파와 기분 변화입니다.',
     source: { label: 'Yoto et al. 2012 · PMID 22203366', url: 'https://pubmed.ncbi.nlm.nih.gov/22203366/' },
     chart: {
       kind: 'comparison',
       title: '머리를 많이 쓴 뒤, 두 그룹은 어떻게 달랐을까요?',
-      summary: 'GABA를 먹은 그룹은 뇌파와 활력 점수가 비교 그룹보다 덜 떨어졌습니다.',
+      summary: 'GABA를 섭취한 그룹은 뇌파와 활력 점수가 비교 그룹보다 덜 떨어졌습니다.',
       note: '두 그룹의 변화 폭을 같은 기준으로 그렸습니다.',
       referenceLabel: '비교 캡슐',
       resultLabel: 'GABA 캡슐',
@@ -237,7 +237,7 @@ const researchTopics: ResearchTopic[] = [
     english: '피부와 장벽',
     tone: 'early',
     label: '생쥐 피부·사람 피부 세포 실험',
-    study: '피부 장벽을 손상시킨 생쥐에 GABA를 바르고, 사람 피부 세포에서도 반응을 확인한 실험입니다.',
+    study: '피부 장벽을 손상시킨 생쥐에 GABA를 바르고, 사람 피부 세포에서도 반응을 살핀 실험입니다.',
     finding: 'GABA를 바른 피부는 장벽이 더 빨리 회복됐고, 피부 표면이 두꺼워지는 변화는 줄었습니다.',
     interpretation: '이 연구가 본 결과는 피부 장벽 회복과 피부 표면의 변화이며, 사람의 피부 탄력이나 주름을 직접 측정한 시험은 아닙니다.',
     source: { label: 'Denda et al. 2002 · PMID 12445190', url: 'https://pubmed.ncbi.nlm.nih.gov/12445190/' },
@@ -260,15 +260,15 @@ const researchTopics: ResearchTopic[] = [
     english: '근육과 움직임',
     tone: 'human',
     label: '남성 11명 · 운동 비교 연구',
-    study: '저항운동 경험이 있는 남성 11명이 GABA 3g 또는 위약을 먹은 뒤 쉬거나 운동하고, 90분 동안 혈액 속 성장호르몬을 측정한 이중맹검 교차시험입니다.',
-    finding: '쉬었을 때 GABA를 먹은 그룹의 성장호르몬 최고 수치는 위약 그룹보다 약 400%, 전체 반응량은 약 375% 높았습니다. 운동한 뒤에도 섭취 30분 후 GABA 그룹의 반응이 비교 그룹보다 높았습니다.',
+    study: '저항운동 경험이 있는 남성 11명이 참여했습니다. GABA 3g 또는 위약을 섭취한 뒤 휴식하거나 운동했고, 90분 동안 혈액 속 성장호르몬 변화를 살핀 이중맹검 교차시험입니다.',
+    finding: '쉬었을 때 GABA를 섭취한 그룹의 성장호르몬 최고 수치는 위약 그룹보다 약 400%, 전체 반응량은 약 375% 높았습니다. 운동 조건에서도 섭취 30분 뒤 GABA 그룹의 반응이 비교 그룹보다 높게 기록됐습니다.',
     interpretation: '이 연구가 측정한 것은 혈액 속 성장호르몬 반응이며, 근육 크기·근력·체력이 좋아졌는지는 측정하지 않았습니다.',
     source: { label: 'Powers et al. 2008 · PMID 18091016', url: 'https://pubmed.ncbi.nlm.nih.gov/18091016/' },
     chart: {
       kind: 'metrics',
       title: '성장호르몬 반응',
-      summary: '쉬었을 때 GABA를 먹은 그룹의 성장호르몬 반응이 비교 그룹보다 높았습니다.',
-      note: '휴식 조건에서 위약 대비 연구에 기록된 값입니다. 운동 조건에서도 섭취 30분 뒤 더 높았습니다.',
+      summary: '쉬었을 때 GABA를 섭취한 그룹의 성장호르몬 반응이 비교 그룹보다 높았습니다.',
+      note: '휴식 조건에서 위약과 비교해 기록된 값입니다. 운동 조건에서도 섭취 30분 뒤 더 높았습니다.',
       metrics: [
         { label: '최고치', value: '약 +400%', note: '위약 대비' },
         { label: '총 반응량', value: '약 +375%', note: '위약 대비' },
@@ -281,8 +281,8 @@ const researchTopics: ResearchTopic[] = [
     english: '성장호르몬',
     tone: 'early',
     label: '청소년기 생쥐 · 16주 연구',
-    study: '청소년기에 해당하는 수컷·암컷 생쥐에 16주 동안 GABA를 먹이고, 몸길이와 체지방, 뇌하수체와 혈액 속 성장호르몬을 살펴본 동물시험입니다.',
-    finding: 'GABA를 먹은 수컷 생쥐의 몸길이는 대조군보다 길었고, 체지방 지표는 낮았습니다. 뇌하수체 안의 성장호르몬 단백질은 암수 모두에서 증가했고, 혈액 속 성장호르몬은 수컷에서 증가했습니다.',
+    study: '청소년기에 해당하는 수컷·암컷 생쥐에 16주 동안 GABA를 투여하고, 몸길이와 체지방, 뇌하수체와 혈액 속 성장호르몬을 살펴본 동물시험입니다.',
+    finding: 'GABA를 투여한 수컷 생쥐의 몸길이는 대조군보다 길었고, 체지방 지표는 낮았습니다. 뇌하수체 안의 성장호르몬 단백질은 암수 모두에서 증가했고, 혈액 속 성장호르몬은 수컷에서 증가했습니다.',
     interpretation: '이 결과는 청소년기 생쥐의 성장·성장호르몬 변화입니다. 어린이의 키 성장이나 성인의 최종 신장을 측정한 결과는 아닙니다.',
     source: { label: '청소년기 생쥐 성장 연구 · PMID 40431374', url: 'https://pubmed.ncbi.nlm.nih.gov/40431374/' },
     chart: {
@@ -304,14 +304,14 @@ const researchTopics: ResearchTopic[] = [
     english: '신경과 면역',
     tone: 'human',
     label: '사람 21명 · 스트레스 실험',
-    study: '건강한 성인 13명의 뇌파 실험과 성인 8명이 높은 다리 위에서 긴장하는 실험에서, GABA를 먹은 뒤 뇌파와 침 속 면역 단백질 IgA를 측정했습니다.',
-    finding: '섭취 60분 뒤 GABA를 먹은 그룹은 물·L-테아닌 그룹보다 알파파가 높고 베타파가 낮았습니다. 높은 다리 위에서 긴장하는 상황에서는 침 속 IgA가 위약 그룹보다 높게 유지됐습니다.',
+    study: '건강한 성인 13명의 뇌파 실험과 성인 8명이 높은 다리 위에서 긴장하는 실험에서, GABA를 섭취한 뒤 뇌파와 침 속 면역 단백질 IgA를 측정했습니다.',
+    finding: '섭취 60분 뒤 GABA를 섭취한 그룹은 물·L-테아닌 그룹보다 알파파가 높고 베타파가 낮았습니다. 높은 다리 위에서 긴장하는 상황에서는 침 속 IgA가 위약 그룹보다 높게 유지됐습니다.',
     interpretation: '이 연구가 직접 측정한 것은 스트레스 상황의 뇌파와 침 속 IgA이며, 감염 예방률이나 질병 치료율은 측정하지 않았습니다.',
     source: { label: 'Abdou et al. 2006 · PMID 16971751', url: 'https://pubmed.ncbi.nlm.nih.gov/16971751/' },
     chart: {
       kind: 'signals',
       title: '긴장되는 상황에서 달라진 신호',
-      summary: 'GABA를 먹은 뒤 알파파와 침 속 IgA는 더 높았고, 베타파는 더 낮았습니다.',
+      summary: 'GABA를 섭취한 뒤 알파파와 침 속 IgA는 더 높았고, 베타파는 더 낮았습니다.',
       note: '섭취 뒤 뇌파와 침 속 면역 관련 지표에서 나타난 변화를 정리했습니다.',
       rows: [
         { label: '알파파', value: '증가했습니다', direction: 'up' },
@@ -356,7 +356,7 @@ const applicationCases: ApplicationCase[] = [
     id: 'korea',
     region: '국내 · 발효',
     title: '발효식품과 유산균',
-    body: '국내 연구진은 김치 등 발효식품에서 GABA를 만드는 유산균을 찾고, 식품 발효 조건을 조절하는 연구를 이어왔습니다.',
+    body: '국내 연구진은 김치 등 발효 식품에서 GABA를 만드는 유산균을 찾고, 식품 발효 조건을 조절하는 연구를 이어왔습니다.',
     detail: 'GABA는 발효를 통해 식품 속에서도 만들어지는 아미노산으로 연구됩니다.',
     icon: 'book',
     sources: [{ label: 'Yeungnam University 연구진 · GABA 생산 미생물 리뷰', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3769009/' }],
@@ -365,7 +365,7 @@ const applicationCases: ApplicationCase[] = [
     id: 'japan',
     region: '일본 · 발아 곡물',
     title: '발아현미와 기능성 식품',
-    body: '일본에서는 현미를 발아시켜 GABA 함량을 높이는 식품 연구가 진행됐습니다. 기능성 표시 식품의 근거를 공개하는 체계도 운영됩니다.',
+    body: '일본에서는 현미를 발아시켜 GABA 함량을 높이는 식품 연구가 진행됐습니다. 기능성 표시 식품의 근거를 공개하는 제도도 운영되고 있습니다.',
     detail: '발아부터 가공과 표시까지, 식품의 전체 흐름에서 GABA가 다뤄집니다.',
     icon: 'sprout',
     sources: [
@@ -408,7 +408,7 @@ const researchScaleStats: ResearchScaleStat[] = [
   {
     value: '12,124',
     label: 'GABA-A 수용체 · SCIE',
-    detail: 'WoS Core Collection · 1999–2022년',
+    detail: 'WoS Core Collection · 1999~2022년',
     scale: 100,
     source: {
       label: 'GABA-A 연구 분석',
@@ -432,16 +432,16 @@ const readingChapters = [
   { id: 'final', label: '공유하기' },
 ] as const;
 type ReadingChapterId = (typeof readingChapters)[number]['id'];
-const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, GABA에 관한 과학적 정보와 공개 연구를 알기 쉽게 소개하는 정보 안내서입니다.';
+const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, GABA에 관한 과학적 정보와 공개 연구를 알기 쉽게 소개하는 공개 안내서입니다.';
 
 const fermentedSafetySteps: FermentedSafetyStep[] = [
   {
     number: '01',
     eyebrow: '발효',
     title: '유산균이 만드는 GABA',
-    body: '일부 유산균은 발효하면서 L-글루탐산을 GABA로 바꿉니다. 김치와 발효식품 연구가 이 출발점을 보여줍니다.',
+    body: '일부 유산균은 발효하면서 L-글루탐산을 GABA로 바꿉니다. 김치와 발효 식품에 관한 연구가 이 원리를 보여줍니다.',
     icon: 'ferment',
-    source: { label: '발효식품 속 GABA 생산 미생물 리뷰', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3769009/' },
+    source: { label: '발효 식품 속 GABA 생산 미생물 리뷰', url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3769009/' },
   },
   {
     number: '02',
@@ -454,8 +454,8 @@ const fermentedSafetySteps: FermentedSafetyStep[] = [
   {
     number: '03',
     eyebrow: '사람 대상 연구',
-    title: '사람 대상 연구에서 확인된 기록',
-    body: '발효 현미 유래 GABA를 섭취한 성인 40명을 4주 동안 관찰한 무작위·위약 대조 시험에서는 중대한 이상반응이 보고되지 않았습니다.',
+    title: '사람을 대상으로 한 연구 기록',
+    body: '발효 현미에서 얻은 GABA를 섭취한 성인 40명을 4주간 관찰한 무작위·위약 대조 시험에서 중대한 이상반응은 보고되지 않았습니다.',
     icon: 'human',
     source: { label: 'Byun et al. 2018 · PMID 29856155', url: 'https://pubmed.ncbi.nlm.nih.gov/29856155/' },
   },
@@ -463,12 +463,12 @@ const fermentedSafetySteps: FermentedSafetyStep[] = [
 
 const expertVideos: ExpertVideo[] = [
   { id: 'RLAU1VWGsaI', title: 'GABA와 수면 리듬', topic: '수면', channel: '교육하는 의사! 이동환TV' },
-  { id: 'Cnk0PGn9YBM', title: '갱년기와 잠, GABA 질문', topic: '수면', channel: '셀럽의 건강비결' },
+  { id: 'Cnk0PGn9YBM', title: '갱년기와 수면, GABA에 대한 질문', topic: '수면', channel: '셀럽의 건강비결' },
   { id: 'roEtojyk9_0', title: '잠이 안 올 때 GABA 이야기', topic: '수면', channel: '여에스더의 에스더TV' },
   { id: 'BiZXS_ojLUA', title: '불면과 GABA의 관계', topic: '수면', channel: '브레인튜브 Brain Doctor' },
   { id: 'rOFkZg09AoY', title: 'GABA 섭취 연구 읽기', topic: '연구 읽기', channel: 'SLEEP Dr. 신원철 꿀잠튜브' },
   { id: '4xGSHxkMYew', title: 'GABA의 기본 역할', topic: 'GABA란', channel: '비엠한방내과 [bm_k_clinic]' },
-  { id: '7Zsxm9Wh2Yg', title: '자율신경과 GABA 식품', topic: '자율신경', channel: '30년 자율신경, 정이안한의원TV' },
+  { id: '7Zsxm9Wh2Yg', title: '자율신경과 GABA 식품 이야기', topic: '자율신경', channel: '30년 자율신경, 정이안한의원TV' },
   { id: 'vnocd9ZVJj0', title: 'GABA 수용체와 수면', topic: '수용체', channel: '영양과학자 양과자' },
   { id: 'bQ0QQHpUzdI', title: '불면·우울감과 GABA 이야기', topic: '수면·기분', channel: 'dr밸런스' },
 ];
@@ -835,20 +835,20 @@ export default function PublicGabaGuide() {
               <p>잠의 역할을 이해하면<br />GABA를 읽는 이유가 보입니다.</p>
             </div>
             <div className="guide-opening-bridge-grid">
-              <article><span>01</span><div><h3>낮에는 사용합니다</h3><p>뇌와 몸은 움직이며 에너지를 사용하고, 하루의 정보를 받아들입니다.</p></div></article>
-              <article><span>02</span><div><h3>밤에는 정리합니다</h3><p>잠든 동안 뇌는 정보를 정리하고, 몸은 균형을 되찾는 과정으로 들어갑니다.</p></div></article>
+              <article><span>01</span><div><h3>낮에는 움직입니다</h3><p>뇌와 몸은 움직이며 에너지를 쓰고, 하루의 정보를 받아들입니다.</p></div></article>
+              <article><span>02</span><div><h3>밤에는 정리합니다</h3><p>잠든 동안 뇌는 정보를 정리하고, 몸은 회복을 시작합니다.</p></div></article>
               <article><span>03</span><div><h3>회복할 시간이 필요합니다</h3><p>잠이 줄어들면 몸이 회복에 사용할 수 있는 시간도 함께 줄어듭니다.</p></div></article>
             </div>
             <div className="guide-opening-bridge-source">
               <BookOpen size={18} aria-hidden="true" />
-              <p><strong>매슈 워커는 『우리는 왜 잠을 자야 할까』에서</strong> 잠을 단순한 휴식이 아니라 뇌와 몸의 건강을 유지하는 핵심 생리 과정으로 설명합니다.<small>참고 도서 · 매슈 워커, 『우리는 왜 잠을 자야 할까』, 열린책들</small></p>
+              <p><strong>매슈 워커는 『우리는 왜 잠을 자야 할까』에서</strong> 잠을 단순한 휴식이 아니라 뇌와 몸이 건강을 유지하는 데 필요한 중요한 생리 과정으로 설명합니다.<small>참고 도서 · 매슈 워커, 『우리는 왜 잠을 자야 할까』, 열린책들</small></p>
             </div>
           </div>
         </section>
 
         <section className="guide-section guide-history guide-story-section" id="history" aria-labelledby="history-heading">
           <div className="guide-container">
-            <div className="guide-section-heading guide-history-heading"><div><p className="guide-section-number">01 · 발견</p><h2 id="history-heading">처음에는 이름도<span className="guide-mobile-break"><br /></span> 없었습니다.<br />다만, 뇌 속에 있었습니다.</h2></div><p>한 줄의 발견이<br />75년의 연구를 열었습니다.</p></div>
+            <div className="guide-section-heading guide-history-heading"><div><p className="guide-section-number">01 · 발견</p><h2 id="history-heading">처음에는 이름도<span className="guide-mobile-break"><br /></span> 없었습니다.<br />다만, 뇌 속에 있었습니다.</h2></div><p>하나의 발견이<br />75년의 연구로 이어졌습니다.</p></div>
             <p className="guide-section-lead">유진 로버츠와 샘 프랭클은 당시의 분석 기술로 뇌 조직을 들여다보다가, 다른 조직에서는 거의 보이지 않는 물질을 발견했습니다. 그 물질이 바로 GABA였습니다.</p>
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <div className="guide-research-scale" aria-label="GABA 연구 규모">
@@ -867,10 +867,10 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-basics guide-story-section" id="basics" aria-labelledby="basics-heading">
           <div className="guide-container">
             <div className="guide-section-heading"><div><p className="guide-section-number">02 · GABA란</p><h2 id="basics-heading">GABA는 우리 몸에서 만들어지는<br />신경전달물질입니다</h2></div><p>전문용어는 잠시 내려놓고,<br />세 가지 핵심으로 읽어보세요.</p></div>
-            <p className="guide-section-lead">GABA는 뇌와 척수에서 신경 신호가 지나치게 커지지 않도록 낮추며, 신경계의 균형을 조절합니다.</p>
+            <p className="guide-section-lead">GABA는 뇌와 척수에서 신경 신호가 지나치게 커지지 않도록 조절하며, 신경계의 균형에 관여합니다.</p>
             <div className="guide-basics-grid guide-basics-three">
               <article className="guide-definition-card"><span className="guide-card-index">01</span><h3>신경세포 활동 조절</h3><p>신경세포가 지나치게 활성화되지 않도록 신호의 크기와 흐름을 조절합니다.</p><div className="guide-card-motif guide-motif-signal" aria-hidden="true"><i /><i /><i /><i /></div></article>
-              <article className="guide-definition-card is-highlighted"><span className="guide-card-index">02</span><h3>잠들고 깨어나는 리듬</h3><p>잠들고 깨어나는 리듬을 조절하는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-moon" aria-hidden="true"><Moon /></div></article>
+              <article className="guide-definition-card is-highlighted"><span className="guide-card-index">02</span><h3>잠들고 깨어나는 리듬</h3><p>잠들고 깨어나는 리듬에 관여하는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-moon" aria-hidden="true"><Moon /></div></article>
               <article className="guide-definition-card"><span className="guide-card-index">03</span><h3>감정·감각·집중·움직임</h3><p>감정, 감각, 집중, 움직임을 조율하는 신경회로와 연결되어 있습니다.</p><div className="guide-card-motif guide-motif-network" aria-hidden="true"><Network /></div></article>
             </div>
           </div>
@@ -883,7 +883,7 @@ export default function PublicGabaGuide() {
                 <p className="guide-section-number">잠깐, 수면과 회복</p>
                 <h2 id="recovery-break-heading">GABA를 모르면<br />노화는 가속됩니다.</h2>
               </div>
-              <p>잠은 단순히 멈추는 시간이 아닙니다.<br />뇌와 몸이 손상과 피로를 정리하고<br />다시 균형을 되찾는 회복의 시간입니다.</p>
+              <p>잠은 단순히 멈추는 시간이 아닙니다.<br />뇌와 몸이 손상된 부분을 회복하고<br />쌓인 피로를 정리하는 시간입니다.</p>
             </div>
             <div className="guide-recovery-map">
               {recoveryCards.map((card, index) => {
@@ -931,7 +931,7 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-everyday guide-story-section" id="everyday" aria-labelledby="everyday-heading">
           <div className="guide-container">
-            <div className="guide-section-heading"><div><p className="guide-section-number">04 · 일상 속 GABA</p><h2 id="everyday-heading">우리는 이미 매일 GABA의<br />조절 속에서 생활합니다</h2></div><p>논문보다 먼저,<br />일상의 순간으로 이해해 보세요.</p></div>
+            <div className="guide-section-heading"><div><p className="guide-section-number">04 · 일상 속 GABA</p><h2 id="everyday-heading">우리는 매일 GABA의<br />조절 속에서 살아갑니다</h2></div><p>논문보다 먼저,<br />일상의 순간으로 이해해 보세요.</p></div>
             <div className="guide-everyday-cards">{everydayTopics.map((topic, index) => <article className="guide-everyday-card" key={topic.id}><span className="guide-everyday-number">0{index + 1}</span><span className="guide-topic-icon"><TopicIcon type={topic.icon} /></span><h3>{topic.title}</h3><p>{topic.body}</p></article>)}</div>
           </div>
         </section>
@@ -943,8 +943,8 @@ export default function PublicGabaGuide() {
             <div className="guide-sleep-grid">
               <div className="guide-sleep-steps">
                 <article><span>01</span><div><h3>잠들고 깨는 과정과 GABA</h3><p>잠들려면 깨어 있게 하는 신경 신호가 낮아져야 합니다. GABA 신호는 잠이 시작되고 이어지는 과정과 관련이 있습니다.</p></div></article>
-                <article><span>02</span><div><h3>사람 대상 수면 연구</h3><p>수면의 질이 낮았던 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 먹은 무작위·위약 대조 교차시험입니다.</p><strong className="guide-result-line">GABA를 먹은 기간에는 잠드는 시간이 더 짧았고, 전체 비렘수면은 더 길었습니다.</strong><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
-                <article><span>03</span><div><h3>실제로 달라진 수면 기록</h3><div className="guide-compare-row"><span>잠드는 시간</span><strong>더 짧았습니다</strong></div><div className="guide-compare-row"><span>전체 비렘수면</span><strong>더 길었습니다</strong></div><p className="guide-study-source">연구 결과와 출처를 바로 앞에서 함께 확인했습니다.</p></div></article>
+              <article><span>02</span><div><h3>사람 대상 수면 연구</h3><p>수면의 질이 낮았던 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 섭취한 무작위·위약 대조 교차시험입니다.</p><strong className="guide-result-line">GABA를 섭취한 기간에는 잠드는 시간이 더 짧았고, 전체 비렘수면은 더 길었습니다.</strong><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
+              <article><span>03</span><div><h3>실제로 달라진 수면 기록</h3><div className="guide-compare-row"><span>잠드는 시간</span><strong>더 짧았습니다</strong></div><div className="guide-compare-row"><span>전체 비렘수면</span><strong>더 길었습니다</strong></div><p className="guide-study-source">연구 결과와 출처를 한 화면에서 함께 살펴봅니다.</p></div></article>
                 <article><span>04</span><div><h3>몸의 리듬과 연구 결과</h3><div className="guide-compare-row"><span>몸에서 일어나는 일</span><strong>GABA와 수면 리듬의 관계</strong></div><div className="guide-compare-row"><span>사람 대상 연구에서 본 변화</span><strong>잠드는 시간·전체 비렘수면</strong></div></div></article>
               </div>
               <div className="guide-sleep-visual" style={{ '--guide-sleep-image': `url(${gabaSleepEditorial})` } as CSSProperties} aria-label="잔잔한 물결과 달빛으로 표현한 수면 연구 이미지" role="img"><div className="guide-sleep-wave"><i /><i /><i /><i /><i /><i /></div><span className="guide-sleep-orbit guide-sleep-orbit-one" /><span className="guide-sleep-orbit guide-sleep-orbit-two" /><strong>잠들기 전<br />신경 신호의 리듬</strong></div>
@@ -975,21 +975,21 @@ export default function PublicGabaGuide() {
             <div className="guide-editorial-band guide-editorial-band-fermentation" style={{ '--guide-editorial-image': `url(${gabaFermentationEditorial})` } as CSSProperties} role="img" aria-label="발효 용기와 발아 곡물로 표현한 발효 GABA 연구 이미지"><span><small>발효에서 기록으로</small><strong>자연의 발효가<br />공개된 기록이 되기까지</strong></span></div>
             <div className="guide-fermented-intro">
               <div className="guide-fermented-statement"><span className="guide-fermented-seal"><ShieldCheck aria-hidden="true" /></span><p><strong>하나의 신호가<br />식탁 위의 연구가 되기까지</strong><span>발효 원리 · 공정과 품질 · 사람 대상 연구</span></p></div>
-              <p className="guide-section-lead">김치와 발효식품을 연구하던 미생물 연구는 GABA를 뇌 연구의 물질에서 식품 연구의 소재로 넓혀 왔습니다. 발효 GABA에 대한 관심은 만들어지는 과정과 품질, 그리고 사람이 섭취한 연구 기록까지 이어집니다.</p>
+              <p className="guide-section-lead">김치와 발효 식품에서 GABA를 만드는 미생물을 찾는 연구가 이어지며, GABA 연구는 뇌 속 신호에서 식품 연구의 소재로 넓어졌습니다. 발효 GABA에 대한 관심은 만들어지는 과정과 품질, 사람이 섭취했을 때의 연구 기록까지 이어집니다.</p>
             </div>
             <div className="guide-fermented-steps">{fermentedSafetySteps.map((step) => <article className="guide-fermented-step" key={step.number}><div className="guide-fermented-step-top"><span className="guide-fermented-step-number">{step.number}</span><span className="guide-fermented-step-icon"><FermentedSafetyIcon type={step.icon} /></span><span>{step.eyebrow}</span></div><h3>{step.title}</h3><p>{step.body}</p><a href={step.source.url} target="_blank" rel="noopener noreferrer">{step.source.label} <ExternalLink size={13} aria-hidden="true" /></a></article>)}</div>
-            <p className="guide-fermented-note"><Check size={16} aria-hidden="true" /> 발효 GABA의 안전성은 발효했다는 사실 하나만으로 판단하는 것이 아니라, 균주·공정·최종 원료·사람 대상 연구가 함께 쌓인 공개 기록으로 확인할 수 있습니다.</p>
+            <p className="guide-fermented-note"><Check size={16} aria-hidden="true" /> 발효 GABA의 안전성은 발효했다는 사실만으로 판단하는 것이 아니라, 균주·공정·최종 원료·사람 대상 연구가 함께 쌓인 공개 기록으로 살펴볼 수 있습니다.</p>
           </div>
         </section>
 
         <section className="guide-section guide-growth-story guide-story-section" id="growth" aria-labelledby="growth-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · 성장 연구</p><h2 id="growth-heading">성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞의 근육·성장호르몬 연구에서 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 확인했습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p></div>
+          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · 성장 연구</p><h2 id="growth-heading">성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞서 본 근육·성장호르몬 연구에서는 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 살폈습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p></div>
         </section>
 
         <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
           <div className="guide-container">
             <div className="guide-section-heading"><div><p className="guide-section-number">10 · 전문가 영상</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>관심 있는 영상을 고르면<br />바로 재생됩니다.</p></div>
-            <p className="guide-section-lead guide-video-gallery-lead">의사와 과학자가 공개한 짧은 영상을 수면, GABA의 기본 역할, 자율신경과 연구 읽기 주제로 모았습니다.</p>
+            <p className="guide-section-lead guide-video-gallery-lead">의사와 과학자들이 공개한 짧은 영상을 수면·GABA의 기본 역할·자율신경·연구 읽기 주제로 나누어 모았습니다.</p>
             <div className="guide-video-gallery">
               <article className="guide-video-feature" id="expert-video-feature" aria-live="polite">
                 <div className="guide-video-feature-media">{videoStarted ? <iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /> : <button type="button" className="guide-video-feature-poster" onClick={() => setVideoStarted(true)} aria-label={`${activeVideo.title} 영상 재생`}><img src={`https://i.ytimg.com/vi/${activeVideo.id}/hqdefault.jpg`} alt={`${activeVideo.title} 영상 썸네일`} fetchPriority="high" decoding="async" /><span className="guide-video-feature-poster-shade" aria-hidden="true" /><span className="guide-video-feature-poster-play"><Play size={20} fill="currentColor" aria-hidden="true" /><strong>영상 재생</strong></span></button>}</div>
