@@ -947,16 +947,33 @@ export default function PublicGabaGuide() {
   };
 
   const copyMessage = async (message: string) => {
-    if (!navigator.clipboard?.writeText) {
-      announceShareStatus('이 문장을 길게 눌러 복사해 보세요.');
-      return;
-    }
+    let copied = false;
     try {
-      await navigator.clipboard.writeText(message);
-      announceShareStatus('문장을 복사했어요. 자유롭게 활용해 보세요.');
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(message);
+        copied = true;
+      }
     } catch {
-      announceShareStatus('문장을 선택해 활용해 보세요.');
+      copied = false;
     }
+    if (!copied) {
+      const helper = document.createElement('textarea');
+      helper.value = message;
+      helper.setAttribute('readonly', '');
+      helper.style.position = 'fixed';
+      helper.style.opacity = '0';
+      helper.style.pointerEvents = 'none';
+      document.body.appendChild(helper);
+      helper.select();
+      helper.setSelectionRange(0, helper.value.length);
+      try {
+        copied = document.execCommand('copy');
+      } catch {
+        copied = false;
+      }
+      helper.remove();
+    }
+    announceShareStatus(copied ? '문장을 복사했어요. 자유롭게 활용해 보세요.' : '문장을 선택해 활용해 보세요.');
   };
 
   const toggleReadingSize = () => {
