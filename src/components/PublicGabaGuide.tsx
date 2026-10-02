@@ -644,8 +644,8 @@ export default function PublicGabaGuide() {
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
   useEffect(() => {
-    document.title = '1950년의 발견, 발효와 연구로 이어진 GABA | GABA Guide';
-    const description = '1950년 뇌 속에서 발견된 GABA의 역사부터 신경계 연구, 국내외 활용과 발효 GABA의 안전성 기록까지 쉽게 읽는 공개 안내서입니다.';
+    document.title = '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide';
+    const description = '수면과 회복의 관계부터 1950년 GABA 발견, 신경계 연구, 국내외 활용과 발효 GABA의 안전성 기록까지 쉽게 읽는 공개 안내서입니다.';
     const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = description;
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
@@ -763,7 +763,7 @@ export default function PublicGabaGuide() {
   };
 
   const sharePage = async () => {
-    const shareData = { title: '1950년의 발견, 발효와 연구로 이어진 GABA', text: 'GABA의 발견부터 광범위한 연구와 발효 GABA의 안전성 기록까지 읽는 공개 안내서', url: window.location.href };
+    const shareData = { title: '저속노화, 회복하는 밤에서 시작되는 GABA', text: '수면과 회복에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서', url: window.location.href };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
@@ -815,14 +815,35 @@ export default function PublicGabaGuide() {
       <main id="guide-main">
         <section className="guide-hero guide-hero-story" id="top" aria-labelledby="guide-hero-heading" style={{ '--guide-hero-image': `url(${gabaNaturalHero})` } as CSSProperties}>
           <div className="guide-hero-copy">
-            <p className="guide-hero-kicker">1950 · 첫 단서</p>
-            <h1 id="guide-hero-heading"><span>1950년,<br />뇌 속에서 한 신호가 발견됐습니다</span><em>그 이름은<span className="guide-mobile-break"><br /></span>{' '}GABA였습니다</em></h1>
-            <p className="guide-hero-body">1950년 뇌 속의 작은 신호 하나가 발견됐습니다. 그 발견은 수면과 집중에서 피부·근육·성장·면역, 그리고 발효 식품으로 이어지는 넓은 연구 지도를 열었습니다.</p>
+            <p className="guide-hero-kicker">수면의 질 · 회복의 시간</p>
+            <h1 id="guide-hero-heading"><span>저속노화,<br />회복하는 밤에서 시작됩니다</span><em>그 회복의 신호를<span className="guide-mobile-break"><br /></span>{' '}GABA에서 읽습니다</em></h1>
+            <p className="guide-hero-body">낮에는 몸과 뇌가 에너지를 사용합니다. 밤이 되면 몸은 회복에 필요한 과정으로 전환됩니다.</p>
             <p className="guide-editorial-note">{editorialNotice}</p>
-            <p className="guide-reading-sequence"><span>3분 읽기</span> 발견의 순간 <i>→</i> GABA란 <i>→</i> 연구 지도 <i>→</i> 활용 사례 <i>→</i> 발효와 안전</p>
+            <p className="guide-reading-sequence"><span>3분 읽기</span> 수면과 회복 <i>→</i> GABA의 발견 <i>→</i> GABA란 <i>→</i> 연구 지도 <i>→</i> 활용 사례</p>
           </div>
           <NeuronNetwork />
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
+        </section>
+
+        <section className="guide-opening-bridge guide-story-section" aria-labelledby="opening-bridge-heading">
+          <div className="guide-container">
+            <div className="guide-opening-bridge-head">
+              <div>
+                <p className="guide-section-number">수면과 회복</p>
+                <h2 id="opening-bridge-heading">잠은 멈춤이 아니라,<br />회복이 시작되는 시간입니다</h2>
+              </div>
+              <p>잠의 역할을 이해하면<br />GABA를 읽는 이유가 보입니다.</p>
+            </div>
+            <div className="guide-opening-bridge-grid">
+              <article><span>01</span><div><h3>낮에는 사용합니다</h3><p>뇌와 몸은 움직이며 에너지를 사용하고, 하루의 정보를 받아들입니다.</p></div></article>
+              <article><span>02</span><div><h3>밤에는 정리합니다</h3><p>잠든 동안 뇌는 정보를 정리하고, 몸은 균형을 되찾는 과정으로 들어갑니다.</p></div></article>
+              <article><span>03</span><div><h3>회복할 시간이 필요합니다</h3><p>잠이 줄어들면 몸이 회복에 사용할 수 있는 시간도 함께 줄어듭니다.</p></div></article>
+            </div>
+            <div className="guide-opening-bridge-source">
+              <BookOpen size={18} aria-hidden="true" />
+              <p><strong>매슈 워커는 『우리는 왜 잠을 자야 할까』에서</strong> 잠을 단순한 휴식이 아니라 뇌와 몸의 건강을 유지하는 핵심 생리 과정으로 설명합니다.<small>참고 도서 · 매슈 워커, 『우리는 왜 잠을 자야 할까』, 열린책들</small></p>
+            </div>
+          </div>
         </section>
 
         <section className="guide-section guide-history guide-story-section" id="history" aria-labelledby="history-heading">
