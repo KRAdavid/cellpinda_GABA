@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T11:27:12.110196Z",
+  "updated_at": "2026-10-02T11:39:18.931231Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -155,7 +155,8 @@
         "E-LOCAL-BUILD",
         "E-LOCAL-BUILD-FOLLOWUP",
         "E-LOCAL-BUILD-B7",
-        "E-LOCAL-BUILD-RELEASE"
+        "E-LOCAL-BUILD-RELEASE",
+        "E-RELEASE-D7"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -180,7 +181,8 @@
         "E-CDP-READABILITY-B7",
         "E-CDP-NAVIGATION-B7",
         "E-CDP-POLISH-RELEASE",
-        "E-CDP-NAVIGATION-RELEASE"
+        "E-CDP-NAVIGATION-RELEASE",
+        "E-RELEASE-D7"
       ],
       "owner": "UX QA"
     },
@@ -279,7 +281,8 @@
         "E-LOCAL-BUILD",
         "E-LOCAL-BUILD-FOLLOWUP",
         "E-LOCAL-BUILD-B7",
-        "E-LOCAL-BUILD-RELEASE"
+        "E-LOCAL-BUILD-RELEASE",
+        "E-RELEASE-D7"
       ],
       "owner": "QA"
     },
@@ -295,7 +298,8 @@
         "E-LIVE-PUBLIC-B7",
         "E-DEPLOY-PIPELINE-B7",
         "E-LIVE-PUBLIC-RELEASE",
-        "E-DEPLOY-PIPELINE-RELEASE"
+        "E-DEPLOY-PIPELINE-RELEASE",
+        "E-RELEASE-D7"
       ],
       "owner": "배포 QA"
     },
@@ -327,7 +331,8 @@
         "E-LIVE-PUBLIC-B7",
         "E-DEPLOY-PIPELINE-B7",
         "E-LIVE-PUBLIC-RELEASE",
-        "E-DEPLOY-PIPELINE-RELEASE"
+        "E-DEPLOY-PIPELINE-RELEASE",
+        "E-RELEASE-D7"
       ],
       "owner": "운영 QA"
     },
@@ -431,7 +436,8 @@
         "E-LOCAL-TYPECHECK",
         "E-LOCAL-BUILD",
         "E-LOCAL-BUILD-FOLLOWUP",
-        "E-LOCAL-BUILD-B7"
+        "E-LOCAL-BUILD-B7",
+        "E-RELEASE-D7"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -455,7 +461,8 @@
         "E-CDP-READABILITY-B7",
         "E-CDP-NAVIGATION-B7",
         "E-CDP-POLISH-RELEASE",
-        "E-CDP-NAVIGATION-RELEASE"
+        "E-CDP-NAVIGATION-RELEASE",
+        "E-RELEASE-D7"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -478,7 +485,8 @@
         "E-LIVE-PUBLIC-B7",
         "E-DEPLOY-PIPELINE-B7",
         "E-LIVE-PUBLIC-RELEASE",
-        "E-DEPLOY-PIPELINE-RELEASE"
+        "E-DEPLOY-PIPELINE-RELEASE",
+        "E-RELEASE-D7"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -687,7 +695,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "80d9b0a6ff53adf6bed0056f89ab6caed1bed3b82083bd5766b4c03a19a4d30b",
+    "assessed_input_sha256": "30a63ab5576619f3d99d6b0fb9995d0f04da8b370c4e3159ece8dcf68d8cac60",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -762,7 +770,8 @@
           "E-CDP-MOBILE",
           "E-CDP-POLISH-FOLLOWUP",
           "E-CDP-READABILITY-B7",
-          "E-CDP-POLISH-RELEASE"
+          "E-CDP-POLISH-RELEASE",
+          "E-RELEASE-D7"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -784,7 +793,8 @@
           "E-CDP-NAVIGATION-FOLLOWUP",
           "E-CDP-NAVIGATION-LATEST",
           "E-CDP-NAVIGATION-B7",
-          "E-CDP-NAVIGATION-RELEASE"
+          "E-CDP-NAVIGATION-RELEASE",
+          "E-RELEASE-D7"
         ],
         "notes": "390px 가로 넘침 없음, 메뉴 열린 상태 확인"
       },
@@ -797,7 +807,8 @@
           "E-LOCAL-BUILD",
           "E-LOCAL-BUILD-FOLLOWUP",
           "E-LOCAL-BUILD-B7",
-          "E-LOCAL-BUILD-RELEASE"
+          "E-LOCAL-BUILD-RELEASE",
+          "E-RELEASE-D7"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·성능 예산 통과"
       },

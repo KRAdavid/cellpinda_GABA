@@ -344,6 +344,17 @@
       "captured_at": "2026-10-02T11:23:01Z",
       "reviewer_id": "NAVI-LIVE-QA-20261002-RELEASE",
       "claim_refs": ["C-002", "C-007"]
+    },
+    {
+      "id": "E-RELEASE-D7",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "d7bf1cb 모바일 장 제목 보정의 127개 테스트·production build·Pages 정적 번들·390px/1440px Chrome CDP QA·GitHub Actions 배포·라이브 공개 검증이 모두 통과했다.",
+      "locator": "pnpm test 127/127; pnpm run build total 1599512; Pages-style performance total 1599593 <= 1600000; mobile 390 scrollWidth 390; desktop 1440 scrollWidth 1425; scale values 984/557/12,124; comparisonHeader true; menu/escape/focus/#academic navigation passed; runtimeErrors []; GitHub Actions 37001880683 success; live page 200 candidateSha d7bf1cb37ea7d2400850e8662253099e9bab8779, bundleHashes 73, claims 12, masterRecords 6, products 1, sharePages 6, teaser HOLD, internalOpsSnapshots excluded, smartStoreOnly true, provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-02T11:36:52Z",
+      "reviewer_id": "NAVI-QA-GABA-20261002-D7",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-007"]
     }
   ]
 }
