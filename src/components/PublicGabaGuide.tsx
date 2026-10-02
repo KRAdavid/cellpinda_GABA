@@ -222,7 +222,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: '머리를 많이 쓴 뒤, 두 그룹은 어떻게 달랐을까요?',
       summary: 'GABA를 섭취한 그룹은 뇌파와 활력 점수가 비교 그룹보다 덜 떨어졌습니다.',
-      note: '막대는 변화 방향을 보여줍니다.',
+      note: '막대가 짧을수록 감소 폭이 작다는 뜻입니다.',
       referenceLabel: '비교 캡슐',
       resultLabel: 'GABA 캡슐',
       rows: [
@@ -592,7 +592,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
       </div>
       <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div>
       {comparisonChart ? (
-        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교`}>
+        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교. ${comparisonChart.note}`}>
           <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">변화 방향</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
           <div className="guide-outcome-comparison-list">
             {comparisonChart.rows.map((row) => (
@@ -637,7 +637,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
           ))}
         </div>
       ) : null}
-      <p className="guide-outcome-chart-note">{topic.chart.note}</p>
+      <p className="guide-outcome-chart-note"><span aria-hidden="true">↔</span>{topic.chart.note}</p>
     </figure>
   );
 }
