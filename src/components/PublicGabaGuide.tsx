@@ -651,6 +651,8 @@ export default function PublicGabaGuide() {
   const [recoveryPaused, setRecoveryPaused] = useState(false);
   const [recoveryReducedMotion, setRecoveryReducedMotion] = useState(false);
   const [recoveryInView, setRecoveryInView] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+  const menuToggleRef = useRef<HTMLButtonElement | null>(null);
   const recoveryBreakRef = useRef<HTMLElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
@@ -677,6 +679,24 @@ export default function PublicGabaGuide() {
     mediaQuery.addEventListener?.('change', syncReducedMotion);
     return () => mediaQuery.removeEventListener?.('change', syncReducedMotion);
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setMenuOpen(false);
+      menuToggleRef.current?.focus();
+    };
+    const closeOnOutsidePointer = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setMenuOpen(false);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    document.addEventListener('pointerdown', closeOnOutsidePointer);
+    return () => {
+      document.removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('pointerdown', closeOnOutsidePointer);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     const section = recoveryBreakRef.current;
@@ -730,6 +750,11 @@ export default function PublicGabaGuide() {
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     document.getElementById(id)?.scrollIntoView({ behavior, block: 'start' });
     window.history.replaceState(null, '', `#${hash}`);
+  };
+
+  const isNavCurrent = (id: ReadingChapterId) => {
+    if (id === 'academic') return activeChapterId === 'academic' || activeChapterId === 'research';
+    return activeChapterId === id;
   };
 
   const selectExpertVideo = (id: string) => {
@@ -811,16 +836,16 @@ export default function PublicGabaGuide() {
   return (
     <div className="gaba-guide">
       <a className="guide-skip" href="#guide-main">본문으로 이동</a>
-      <header className="guide-header">
+      <header className="guide-header" ref={headerRef}>
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈"><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a>
         <nav id="guide-primary-navigation" className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
-          <a href="#history" onClick={() => setMenuOpen(false)}>발견</a>
-          <a href="#basics" onClick={() => setMenuOpen(false)}>GABA란</a>
-          <a href="#academic" onClick={() => setMenuOpen(false)}>연구 지도</a>
-          <a href="#applications" onClick={() => setMenuOpen(false)}>활용 사례</a>
-          <a href="#fermented-safety" onClick={() => setMenuOpen(false)}>발효·안전</a>
+          <a href="#history" aria-current={isNavCurrent('history') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견</a>
+          <a href="#basics" aria-current={isNavCurrent('basics') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('basics'); }}>GABA란</a>
+          <a href="#academic" aria-current={isNavCurrent('academic') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('academic'); }}>연구 지도</a>
+          <a href="#applications" aria-current={isNavCurrent('applications') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a>
+          <a href="#fermented-safety" aria-current={isNavCurrent('fermented-safety') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('fermented-safety'); }}>발효·안전</a>
         </nav>
-        <button type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+        <button ref={menuToggleRef} type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         <button type="button" className="guide-header-share" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`} aria-label="GABA 안내서 읽기 진행">
           <div className="guide-reading-progress-track" aria-hidden="true"><span style={{ width: `${((activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
