@@ -78,7 +78,6 @@ type HistoryMilestone = {
 
 type ResearchScaleStat = {
   value: string;
-  unit: string;
   label: string;
   detail: string;
   scale: number;
@@ -404,7 +403,6 @@ const applicationCases: ApplicationCase[] = [
 const researchScaleStats: ResearchScaleStat[] = [
   {
     value: '984',
-    unit: '편',
     label: '하버드',
     detail: 'GABA 문헌 · PubMed',
     scale: 8,
@@ -415,7 +413,6 @@ const researchScaleStats: ResearchScaleStat[] = [
   },
   {
     value: '557',
-    unit: '편',
     label: '옥스퍼드',
     detail: 'GABA 문헌 · PubMed',
     scale: 5,
@@ -426,7 +423,6 @@ const researchScaleStats: ResearchScaleStat[] = [
   },
   {
     value: '12,124',
-    unit: '편',
     label: 'GABA-A 수용체 · SCIE',
     detail: 'WoS Core Collection · 1999~2022년',
     scale: 100,
@@ -898,7 +894,7 @@ export default function PublicGabaGuide() {
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <div className="guide-research-scale" aria-label="GABA 연구 규모">
               <div className="guide-research-scale-head"><div><p className="guide-section-number">연구 규모</p><h3>하나의 신호.<br />넓어진 연구.</h3></div><p>75년 · GABA</p></div>
-              <div className="guide-research-scale-grid">{researchScaleStats.map((stat) => <article key={stat.label} aria-label={`${stat.label} ${stat.value}${stat.unit} · ${stat.detail}`}><div className="guide-research-scale-bar" aria-hidden="true"><span style={{ '--guide-scale-height': `${stat.scale}%` } as CSSProperties} /></div><div><strong>{stat.value}<small>{stat.unit}</small></strong><h4>{stat.label}</h4><p>{stat.detail}</p><a href={stat.source.url} target="_blank" rel="noopener noreferrer">{stat.source.label} <ExternalLink size={12} aria-hidden="true" /></a></div></article>)}</div>
+              <div className="guide-research-scale-grid">{researchScaleStats.map((stat) => <article key={stat.label} aria-label={`${stat.label} ${stat.value}편 · ${stat.detail}`}><div className="guide-research-scale-bar" aria-hidden="true"><span style={{ '--guide-scale-height': `${stat.scale}%` } as CSSProperties} /></div><div><strong>{stat.value}</strong><h4>{stat.label}</h4><p>{stat.detail}</p><a href={stat.source.url} target="_blank" rel="noopener noreferrer">{stat.source.label} <ExternalLink size={12} aria-hidden="true" /></a></div></article>)}</div>
               <p className="guide-research-scale-caption">하버드·옥스퍼드 수치는 PubMed 검색 결과이며, SCIE 수치는 GABA-A 수용체 관련 공개 연구 분석에서 집계된 숫자입니다. 검색일은 2026년 9월 28일입니다.</p>
               <p className="guide-history-quote">작은 분자 하나의 발견은<br /><strong>뇌가 균형을 만드는 방식을 읽는 새로운 언어</strong>가 되었습니다.</p>
             </div>

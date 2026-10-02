@@ -340,9 +340,8 @@
   .guide-outcome-chart-head>span{display:none}
   .guide-outcome-summary{margin:-1px 0 13px;padding:11px 12px}
   .guide-outcome-summary>strong{font-size:14px;line-height:1.55}
-  .guide-outcome-comparison-head{display:flex;align-items:center;gap:13px;margin:-1px 0 10px;padding:8px 10px;border-radius:9px;background:#f6fbfc;font-size:10px;line-height:1.2;letter-spacing:-.03em}
+  .guide-outcome-comparison-head{display:flex;gap:13px;margin:-1px 0 10px;padding:8px 10px;background:#f6fbfc}
   .guide-outcome-comparison-head>span:first-child{display:none}
-  .guide-outcome-comparison-head>span:not(:first-child){justify-content:flex-start;gap:5px;text-align:left}
   .guide-outcome-comparison-row{grid-template-columns:1fr;gap:9px;padding:13px 9px}
   .guide-outcome-comparison-metric{gap:3px}
   .guide-outcome-comparison-metric>strong{font-size:15px}
@@ -546,7 +545,7 @@
 .guide-research-scale-bar{position:relative;align-self:stretch;min-height:139px;border-radius:999px;background:rgba(223,247,248,.14);overflow:hidden}
 .guide-research-scale-bar span{position:absolute;right:0;bottom:0;left:0;min-height:6px;border-radius:999px;background:linear-gradient(180deg,#9de9e4 0%,#37b9ba 100%);height:var(--guide-scale-height)}
 .guide-research-scale-grid strong{display:block;color:#96e3df;font-size:clamp(40px,5vw,70px);font-weight:850;letter-spacing:-.075em;line-height:.96;font-variant-numeric:tabular-nums}
-.guide-research-scale-grid strong small{display:inline-block;margin-left:6px;color:#b5ece7;font-size:clamp(15px,1.5vw,20px);font-weight:800;letter-spacing:-.04em;vertical-align:baseline}
+.guide-research-scale-grid strong:after{content:' 편';color:#b5ece7;font-size:clamp(15px,1.5vw,20px);font-weight:800;letter-spacing:-.04em;vertical-align:baseline}
 .guide-research-scale-grid h4{margin:18px 0 7px;color:#fff;font-size:15px;font-weight:850;letter-spacing:-.045em;line-height:1.4}
 .guide-research-scale-grid p{margin:0;color:#b9d7df;font-size:11px;line-height:1.6;letter-spacing:-.03em}
 .guide-research-scale-grid a{display:inline-flex;align-items:center;gap:4px;margin-top:12px;color:#89d2d1;font-size:11px;font-weight:800;text-decoration:none}
