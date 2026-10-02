@@ -4,13 +4,13 @@
     {
       "id": "C-001",
       "statement": "공개 사이트의 코드·정적 번들·공개 카피·성능 검사가 기준선을 통과했다.",
-      "evidence_refs": ["E-LOCAL-TYPECHECK", "E-LOCAL-TESTS", "E-LOCAL-BUILD", "E-LOCAL-BUILD-FOLLOWUP", "E-RESEARCH-COPY", "E-DEPLOY-PIPELINE-LATEST", "E-LOCAL-BUILD-PROGRESS", "E-DEPLOY-PIPELINE-PROGRESS", "E-LOCAL-BUILD-FINAL", "E-DEPLOY-PIPELINE-FINAL", "E-LOCAL-BUILD-SHARE-KIT", "E-DEPLOY-PIPELINE-SHARE-KIT", "E-LOCAL-BUILD-UI-POLISH", "E-DEPLOY-PIPELINE-UI-POLISH", "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS", "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS", "E-LOCAL-BUILD-CHART-CUE", "E-DEPLOY-PIPELINE-CHART-CUE", "E-LOCAL-BUILD-RECOVERY-TRACK", "E-DEPLOY-PIPELINE-RECOVERY-TRACK"],
+      "evidence_refs": ["E-LOCAL-TYPECHECK", "E-LOCAL-TESTS", "E-LOCAL-BUILD", "E-LOCAL-BUILD-FOLLOWUP", "E-RESEARCH-COPY", "E-DEPLOY-PIPELINE-LATEST", "E-LOCAL-BUILD-PROGRESS", "E-DEPLOY-PIPELINE-PROGRESS", "E-LOCAL-BUILD-FINAL", "E-DEPLOY-PIPELINE-FINAL", "E-LOCAL-BUILD-SHARE-KIT", "E-DEPLOY-PIPELINE-SHARE-KIT", "E-LOCAL-BUILD-UI-POLISH", "E-DEPLOY-PIPELINE-UI-POLISH", "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS", "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS", "E-LOCAL-BUILD-CHART-CUE", "E-DEPLOY-PIPELINE-CHART-CUE", "E-LOCAL-BUILD-RECOVERY-TRACK", "E-DEPLOY-PIPELINE-RECOVERY-TRACK", "E-LOCAL-BUILD-RECOVERY-A11Y", "E-DEPLOY-PIPELINE-RECOVERY-A11Y"],
       "status": "SUPPORTED"
     },
     {
       "id": "C-002",
       "statement": "GitHub Pages 공개 URL은 라이브 검증을 통해 200 응답과 정적 번들·공개 데이터 정합성이 확인된 상태다.",
-      "evidence_refs": ["E-LIVE-PUBLIC", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-DEPLOY-PIPELINE-FOLLOWUP", "E-DEPLOY-PIPELINE-LATEST", "E-LIVE-PUBLIC-PROGRESS", "E-DEPLOY-PIPELINE-PROGRESS", "E-LIVE-PUBLIC-FINAL", "E-DEPLOY-PIPELINE-FINAL", "E-LIVE-PUBLIC-SHARE-KIT", "E-DEPLOY-PIPELINE-SHARE-KIT", "E-LIVE-PUBLIC-UI-POLISH", "E-DEPLOY-PIPELINE-UI-POLISH", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS", "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-NAVI-SYNC", "E-LIVE-PUBLIC-CHART-CUE", "E-DEPLOY-PIPELINE-CHART-CUE", "E-LIVE-PUBLIC-RECOVERY-TRACK", "E-DEPLOY-PIPELINE-RECOVERY-TRACK"],
+      "evidence_refs": ["E-LIVE-PUBLIC", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-DEPLOY-PIPELINE-FOLLOWUP", "E-DEPLOY-PIPELINE-LATEST", "E-LIVE-PUBLIC-PROGRESS", "E-DEPLOY-PIPELINE-PROGRESS", "E-LIVE-PUBLIC-FINAL", "E-DEPLOY-PIPELINE-FINAL", "E-LIVE-PUBLIC-SHARE-KIT", "E-DEPLOY-PIPELINE-SHARE-KIT", "E-LIVE-PUBLIC-UI-POLISH", "E-DEPLOY-PIPELINE-UI-POLISH", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS", "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-NAVI-SYNC", "E-LIVE-PUBLIC-CHART-CUE", "E-DEPLOY-PIPELINE-CHART-CUE", "E-LIVE-PUBLIC-RECOVERY-TRACK", "E-DEPLOY-PIPELINE-RECOVERY-TRACK", "E-LIVE-PUBLIC-RECOVERY-A11Y", "E-DEPLOY-PIPELINE-RECOVERY-A11Y"],
       "status": "SUPPORTED"
     },
     {
@@ -40,7 +40,7 @@
     {
       "id": "C-007",
       "statement": "최신 공개본은 모바일에서 현재 읽는 연구 섹션을 헤더·진행 표시와 동기화하고, 메뉴 외부 클릭·Escape·포커스 복귀를 지원한다.",
-      "evidence_refs": ["E-CDP-NAVIGATION-FOLLOWUP", "E-CDP-NAVIGATION-LATEST", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-CDP-NAVIGATION-PROGRESS", "E-LIVE-PUBLIC-PROGRESS", "E-CDP-FINAL", "E-LIVE-PUBLIC-FINAL", "E-CDP-SHARE-KIT", "E-LIVE-PUBLIC-SHARE-KIT", "E-CDP-UI-POLISH", "E-LIVE-PUBLIC-UI-POLISH", "E-CDP-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-NAVI-SYNC", "E-CDP-CHART-CUE", "E-LIVE-PUBLIC-CHART-CUE", "E-CDP-RECOVERY-TRACK", "E-LIVE-PUBLIC-RECOVERY-TRACK"],
+      "evidence_refs": ["E-CDP-NAVIGATION-FOLLOWUP", "E-CDP-NAVIGATION-LATEST", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-CDP-NAVIGATION-PROGRESS", "E-LIVE-PUBLIC-PROGRESS", "E-CDP-FINAL", "E-LIVE-PUBLIC-FINAL", "E-CDP-SHARE-KIT", "E-LIVE-PUBLIC-SHARE-KIT", "E-CDP-UI-POLISH", "E-LIVE-PUBLIC-UI-POLISH", "E-CDP-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-NAVI-SYNC", "E-CDP-CHART-CUE", "E-LIVE-PUBLIC-CHART-CUE", "E-CDP-RECOVERY-TRACK", "E-LIVE-PUBLIC-RECOVERY-TRACK", "E-CDP-RECOVERY-A11Y", "E-LIVE-PUBLIC-RECOVERY-A11Y"],
       "status": "SUPPORTED"
     }
   ],
@@ -712,6 +712,48 @@
       "source_uri": "https://kradavid.github.io/gaba_info/",
       "captured_at": "2026-10-02T15:15:49Z",
       "reviewer_id": "NAVI-LIVE-QA-20261002-RECOVERY-TRACK",
+      "claim_refs": ["C-002", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-A11Y",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "14단계 수면·회복 카드의 읽기 중 일시정지·간결한 라이브 안내·단계 관계 표기가 반영된 공개 안내서가 타입체크·127개 테스트·production build·정적 라우트·성능 예산을 통과했다.",
+      "locator": "pnpm run typecheck; pnpm test 127/127; pnpm run build; routes 11; files 73; validate:performance total 1599487 <= 1600000",
+      "captured_at": "2026-10-02T15:35:36Z",
+      "reviewer_id": "NAVI-QA-GABA-20261002-RECOVERY-A11Y",
+      "claim_refs": ["C-001"]
+    },
+    {
+      "id": "E-CDP-RECOVERY-A11Y",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP 390px에서 회복 단계 버튼이 단계·현재 선택 상태·카드 연결 관계를 노출하고, focusin 일시정지 후 카드가 유지되며 가로 넘침과 런타임 오류가 없었다.",
+      "locator": "temporary Chrome CDP scripts outside the repository; step aria-label and aria-controls recovery-story-card; focusin pause; width 390; scrollWidth 390; runtimeErrors []",
+      "captured_at": "2026-10-02T15:35:36Z",
+      "reviewer_id": "NAVI-QA-CDP-20261002-RECOVERY-A11Y",
+      "claim_refs": ["C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-A11Y",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #14의 읽기 접근성 개선이 필수 검사를 통과한 뒤 fed8b6a로 보호된 main에 병합되었고 공개 배포 파이프라인이 성공했다.",
+      "locator": "PR #14; release-verify and site-quality-verify passed; GitHub Actions workflow run 37027958956; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37027958956",
+      "captured_at": "2026-10-02T15:35:36Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261002-RECOVERY-A11Y",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-A11Y",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "fed8b6a가 반영된 GitHub Pages 공개본이 200으로 응답했고 14단계 마지막 카드의 활성 단계 추적·최종 연결 문구·공개 데이터 경계가 유지됐다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha fed8b6aa378521694bca6f84c14dd8b4227f7bd8; generatedAt 2026-10-02T15:35:36.544Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Chrome CDP live QA mobile active 13, activeWithinViewport true, mapScrollLeft 529, pageScrollWidth 390, cardHasFinalCopy true, runtimeErrors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-02T15:35:36Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261002-RECOVERY-A11Y",
       "claim_refs": ["C-002", "C-007"]
     }
   ]
