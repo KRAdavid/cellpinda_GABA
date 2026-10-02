@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 5af1f11 — 2026-10-03
+
+- `06 · 연구의 확장` 연구 지도 아래에 `읽는 순서 → 01 지도 → 02 대상 → 03 결과 → 04 해석`을 추가했다. 별도 링크나 중간 이동 없이 첫 연구 결과 카드로 이어지는 읽기 흐름을 데스크톱·모바일에 맞췄다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 성능 `1649481 <= 1650000` bytes를 통과했다. Pages CI도 `1649972 <= 1650000` bytes를 통과했다.
+- PR #43의 `release-verify`·`site-quality-verify`와 main GitHub Actions `37068741690`의 `release-verify`, fresh TF pulse, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했고 `deploy-worker`는 `STATIC_ONLY`로 건너뛰었다.
+- 라이브 validator는 candidate `5af1f11d688c09b95ee3f9e6a391f12e0a0d3c16`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly 및 provenance matched를 확인했다.
+- 공개 URL Chrome CDP 대체 QA에서 1440px·390px의 연구 지도 → 읽기 레일 → 첫 `인지 연구 결과` 카드 흐름을 확인했다. 가로 넘침은 없었고 runtime errors `[]`였다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다.
+- 위 변경은 히어로 카피와 제품 독립 과학 정보 경계를 유지한 채 연구 읽기 흐름만 보완한 것이다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존처럼 OPEN으로 유지한다.
+
 ## Latest Public Release Recheck — ca20d1e — 2026-10-03
 
 - `06 · 연구의 확장` 연구 지도를 본 뒤 별도 링크나 중간 이동 없이 `지도 → 대상 → 결과 → 해석` 순서로 상세 연구 카드로 이어지는 읽기 큐를 추가했다. 데스크톱·모바일에서 시각 지도와 첫 카드의 연결이 한 흐름으로 읽힌다.

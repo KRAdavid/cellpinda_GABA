@@ -1133,6 +1133,49 @@
       "captured_at": "2026-10-02T21:24:47Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-READING-SEQUENCE",
       "claim_refs": ["C-002", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-READING-RAIL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 아래에 읽기 레일을 추가한 공개 안내서가 타입체크·127개 테스트·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "source 9eb4b68; pnpm run typecheck; pnpm test 127/127; pnpm run build; routes 11; files 74; validate:performance total 1649481 <= 1650000",
+      "captured_at": "2026-10-02T21:48:55Z",
+      "reviewer_id": "NAVI-QA-GABA-20261003-RESEARCH-READING-RAIL",
+      "claim_refs": ["C-001"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-READING-RAIL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본의 1440px·390px 연구 지도 아래에서 읽기 레일과 첫 연구 카드가 연속 표시되고 런타임 오류와 가로 넘침이 없었다.",
+      "locator": "temporary Chrome CDP visual audit outside the repository; live 1440px and 390px research screenshots inspected; sequence `01 지도`, `02 대상`, `03 결과`, `04 해석`; first card `인지 연구 결과`; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-02T21:48:55Z",
+      "reviewer_id": "NAVI-QA-CDP-20261003-RESEARCH-READING-RAIL",
+      "claim_refs": ["C-003"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-READING-RAIL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "읽기 레일 보완이 PR #43 필수 검사를 통과한 뒤 5af1f11로 main에 병합되었고 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #43; release-verify run 37068598244 and site-quality-verify run 37068598261 passed; main workflow 37068741690 release-verify, fresh TF pulse, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition; Pages performance total 1649972 <= 1650000",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37068741690",
+      "captured_at": "2026-10-02T21:47:53Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RESEARCH-READING-RAIL",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-READING-RAIL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "5af1f11이 반영된 GitHub Pages 공개본이 200으로 응답했고 연구 지도에서 읽기 레일·첫 연구 카드로 이어지는 흐름과 제품 독립 공개 경계가 라이브에서 유지됐다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 5af1f11d688c09b95ee3f9e6a391f12e0a0d3c16; generatedAt 2026-10-02T21:46:41.419Z; bundleHashes 74; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP visual audit errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-02T21:48:55Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-READING-RAIL",
+      "claim_refs": ["C-002", "C-003"]
     }
   ]
 }
