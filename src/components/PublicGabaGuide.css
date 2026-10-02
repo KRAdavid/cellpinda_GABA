@@ -461,7 +461,7 @@
 .guide-logo span{font-size:22px;letter-spacing:-.085em}
 .guide-logo small{color:#7b8e9b}
 .guide-header nav{gap:21px}
-.guide-header nav a,.guide-header-share{color:#607789}
+.guide-header nav a{color:#607789}.guide-header-share{color:#fff}
 .guide-header-share{border-radius:14px;background:var(--guide-ink);box-shadow:0 8px 20px rgba(21,47,79,.12)}
 .guide-hero-story{isolation:isolate;overflow:hidden;background:#fff}
 .guide-hero-story:before{content:"";position:absolute;z-index:0;inset:0 0 0 43%;background-image:var(--guide-hero-image);background-size:cover;background-position:center right;clip-path:inset(0 round 0 0 0 32px)}
