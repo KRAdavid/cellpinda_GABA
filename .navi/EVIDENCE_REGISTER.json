@@ -9,7 +9,7 @@
     },
     {
       "id": "C-002",
-      "statement": "공개 URL은 후보 SHA 644144ef의 정적 번들과 공개 데이터 정합성을 제공한다.",
+      "statement": "GitHub Pages 공개 URL은 라이브 검증을 통해 200 응답과 정적 번들·공개 데이터 정합성이 확인된 상태다.",
       "evidence_refs": ["E-LIVE-PUBLIC"],
       "status": "SUPPORTED"
     },
@@ -123,7 +123,7 @@
       "id": "E-LIVE-PUBLIC",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
-      "statement": "GitHub Pages 공개 URL이 200으로 응답하고 최신 candidate SHA·정적 번들·공개 데이터·페이지 수가 일치했다.",
+      "statement": "2026-10-02 라이브 검증에서 GitHub Pages 공개 URL이 200으로 응답했고 해당 검증 후보의 정적 번들·공개 데이터·페이지 수가 일치했다.",
       "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 644144ef6fd7cde75e949c53e06b2168c72a1256; bundleHashes 73; masterRecords 6; sharePages 6",
       "source_uri": "https://kradavid.github.io/gaba_info/",
       "captured_at": "2026-10-02T10:00:23Z",
