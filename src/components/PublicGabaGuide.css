@@ -174,9 +174,11 @@
 }
 
 /* v5 reading flow: research appears in place instead of behind jump links. */
-.guide-reading-sequence{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:30px 0 0;color:#7089a0;font-size:13px;font-weight:750;line-height:1.7;letter-spacing:-.03em}
-.guide-reading-sequence span{padding:6px 10px;border-radius:999px;background:#e8f7f7;color:var(--guide-teal-dark);font-size:11px;font-weight:850}
-.guide-reading-sequence i{color:#9ab4c0;font-style:normal}
+.guide-rail{display:flex;gap:14px;margin:30px 0 0;font-size:13px}
+.guide-rail ol{display:flex;margin:0;padding:0;list-style:none}
+.guide-rail li{color:var(--guide-ink);font-weight:850}
+.guide-rail li+li:before{content:"→"}
+.guide-rail li b{color:var(--guide-teal-dark)}
 .guide-research-flow{display:grid;gap:16px}
 .guide-research-detail-inline{background:#f3fafb}
 .guide-research-inline-heading{display:flex;align-items:center;gap:16px;margin-top:23px}
@@ -196,8 +198,7 @@
 .guide-reading-note-copy{max-width:70ch;margin:0;color:#637d91;font-size:15px;line-height:1.8;letter-spacing:-.035em}
 .guide-final-actions{grid-template-columns:minmax(0,390px)}
 @media(max-width:700px){
-  .guide-reading-sequence{gap:7px;margin-top:25px;font-size:13px}
-  .guide-reading-sequence i{display:none}
+  .guide-rail{display:block;margin-top:25px}
   .guide-research-inline-heading{align-items:flex-start;gap:8px}
   .guide-research-inline-heading .guide-research-glyph{display:none}
   .guide-research-detail-inline .guide-research-source{display:block}
@@ -482,8 +483,8 @@
 .guide-hero h1 span{display:block;color:var(--guide-ink)}
 .guide-hero h1 em{display:block;margin-top:7px;color:var(--guide-teal-dark);letter-spacing:-.045em}
 .guide-hero-body{max-width:43ch;color:#5b7081;font-size:16px;line-height:1.82}
-.guide-hero-story .guide-reading-sequence{margin-top:27px;color:#708897;font-size:12px;line-height:1.65}
-.guide-hero-story .guide-reading-sequence span{display:inline-block;margin-right:6px;padding:3px 9px;border-radius:999px;background:#e6f6f6;color:var(--guide-teal-dark);font-weight:850;white-space:nowrap}
+.guide-hero-story .guide-rail{margin-top:27px;color:#708897;font-size:12px;line-height:1.65}
+.guide-hero-story .guide-rail span{display:inline-block;margin-right:6px;padding:3px 9px;border-radius:999px;background:#e6f6f6;color:var(--guide-teal-dark);font-weight:850;white-space:nowrap}
 .guide-neuron-visual{display:none}
 .guide-hero-scroll{color:#738c98}
 .guide-summary-band{background:#f0f7f8}
@@ -528,8 +529,8 @@
   .guide-hero h1{max-width:100%;font-size:clamp(41px,11.2vw,53px);line-height:1.08;word-break:normal;overflow-wrap:anywhere}
   .guide-hero h1 em{margin-top:5px}
   .guide-hero-story .guide-hero-body{width:min(100%,330px);max-width:330px;font-size:15px;line-height:1.78;white-space:normal;word-break:keep-all;overflow-wrap:break-word}
-  .guide-hero-story .guide-reading-sequence{max-width:30ch;margin-top:19px;font-size:13px}
-  .guide-hero-story .guide-reading-sequence span{margin-right:4px}
+  .guide-hero-story .guide-rail{max-width:30ch;margin-top:19px;font-size:13px}
+  .guide-hero-story .guide-rail span{margin-right:4px}
   .guide-hero-scroll{display:none}
   .guide-summary-grid{min-height:0}
   .guide-section{padding-block:75px}

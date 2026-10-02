@@ -934,7 +934,7 @@ export default function PublicGabaGuide() {
             <h1 id="guide-hero-heading"><span>저속노화,<br />회복하는 밤에서 시작됩니다</span><em>그 회복의 신호를<span className="guide-mobile-break"><br /></span>{' '}GABA에서 읽습니다</em></h1>
             <p className="guide-hero-body">낮에는 몸과 뇌가 에너지를 사용합니다. 밤이 되면 몸은 회복에 필요한 과정으로 전환됩니다.</p>
             <p className="guide-editorial-note">{editorialNotice}</p>
-            <p className="guide-reading-sequence"><span>3분 읽기</span> 수면과 회복 → GABA의 발견 → GABA란 → 연구 지도 → 활용 사례</p>
+            <p className="guide-rail"><span>3분 읽기</span> 수면과 회복 → GABA의 발견 → GABA란 → 연구 지도 → 활용 사례</p>
           </div>
           <NeuronNetwork />
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
@@ -1076,7 +1076,7 @@ export default function PublicGabaGuide() {
               <div className="guide-research-orbit-core"><strong>GABA</strong></div>
               {researchTopics.map((topic) => <div className="guide-research-map-item" key={topic.id}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><div><strong>{topic.title}</strong></div></div>)}
             </div>
-            <p className="guide-reading-sequence"><span>순서</span> 지도 → 대상 → 결과 → 해석</p>
+            <div className="guide-rail"><b>읽는 순서</b><ol><li><b>01</b>{' '}지도</li><li><b>02</b>{' '}대상</li><li><b>03</b>{' '}결과</li><li><b>04</b>{' '}해석</li></ol></div>
             <div className="guide-research-flow">{researchTopics.map((topic, index) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding">{topic.finding}</dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
           </div>
