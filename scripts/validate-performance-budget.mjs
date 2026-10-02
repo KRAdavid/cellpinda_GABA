@@ -8,7 +8,7 @@ const rootHtmlPath = resolve(outputDirectory, 'index.html');
 const budgets = {
   initialJs: 380_000,
   initialCss: 110_000,
-  totalAssets: 1_600_000,
+  totalAssets: 1_650_000,
   largestAsset: 380_000,
 };
 
