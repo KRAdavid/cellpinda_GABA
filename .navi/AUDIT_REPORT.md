@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 24c718b — 2026-10-03
+
+- 큰 글씨 모드에서 연구 결과 도표의 핵심 요약·측정값·비교 결과·차트 주석도 함께 확대되도록 보완했다. 헤더 공유 버튼에는 접근성 라벨을 유지하고, 320/360px에서는 메뉴·큰 글씨·공유 컨트롤을 44px 아이콘형으로 유지했다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 성능 `1649462 <= 1650000` bytes를 통과했다. GitHub Pages release verification도 같은 성능 게이트를 통과했다.
+- Chrome CDP 라이브 QA에서 390px 기본 본문 16px가 큰 글씨 선택 후 본문·도표 요약·도표 주석 모두 16.96px로 확대되고, 선택 상태가 새로고침 후 유지되며 `scrollWidth=390`, `runtimeErrors []`였다. 320/360/390px에서 헤더 겹침 없음, 세 컨트롤 44px 이상, 각 화면 가로 넘침 없음, 런타임 오류 0건을 확인했다.
+- PR #35의 `release-verify`·`site-quality-verify`와 main Actions `37059529485`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했다. `deploy-worker`는 `STATIC_ONLY` 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `24c718bc46ae818ab09a460c09ff8823dd1c8560`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly 및 provenance matched를 확인했다.
+- 이번 변경은 큰 글씨 독해성과 모바일 조작성을 개선한 것이며, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수의 잔여 조건은 기존처럼 OPEN으로 유지한다.
+
 ## Latest Public Release Recheck — b3059b2 — 2026-10-03
 
 - 320–360px 초소형 모바일 헤더에서 메뉴·읽기 크기·공유 컨트롤을 아이콘형으로 압축하고 세 컨트롤의 최소 터치 영역을 44px로 고정했다. 390px에서는 기존 텍스트형 표현을 유지한다.

@@ -11,6 +11,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 결과 비교 도표와 성장호르몬 상대 크기 막대, 출처 연결 구조
 - NAVI 목표·산출물·coverage·증거·감사·레드팀 기록
 
+## Latest Release Recheck — 24c718b — 2026-10-03
+
+- `24c718b` 공개본에서 큰 글씨 모드가 연구 결과 도표의 요약·측정값·주석까지 함께 확대되도록 보완했다.
+- 라이브 390px Chrome CDP에서 본문·도표 요약·도표 주석이 16px에서 16.96px로 확대되고 새로고침 후 선택이 유지되며, 320/360/390px 헤더의 세 컨트롤이 44px 이상이고 가로 넘침·런타임 오류가 없음을 확인했다.
+- 라이브 validator는 HTTP 200, candidate `24c718bc46ae818ab09a460c09ff8823dd1c8560`, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외를 확인했다.
+- GitHub Actions `37059529485`의 release verification, Pages 배포, 라이브 smoke test, release status가 모두 성공했다.
+
 ## Latest Release Recheck — b3059b2 — 2026-10-03
 
 - `b3059b2` 공개본에서 320–360px 초소형 모바일 헤더를 아이콘형으로 정리해 메뉴·큰 글씨·공유 컨트롤이 각각 44px 터치 영역을 유지하도록 보완했다.
