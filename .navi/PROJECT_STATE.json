@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T22:37:46.402390Z",
+  "updated_at": "2026-10-02T22:44:23.341560Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -578,7 +578,8 @@
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-READING-PROGRESS",
-        "E-LIVE-PUBLIC-READING-PROGRESS"
+        "E-LIVE-PUBLIC-READING-PROGRESS",
+        "E-LIVE-PUBLIC-NAVI-RELEASE"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -791,7 +792,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "2db03f1a929c12b39dbed6f14a4805a8c259fe69640adb2f6e27814ab64dccc6",
+    "assessed_input_sha256": "d59d9b11f29305681985bb5e91da0b6e64926bdd2051b8fc00befe585025b19d",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -890,7 +891,8 @@
           "E-LIVE-PUBLIC-ANCHOR-OFFSET",
           "E-LOCAL-BUILD-READING-PROGRESS",
           "E-DEPLOY-PIPELINE-READING-PROGRESS",
-          "E-LIVE-PUBLIC-READING-PROGRESS"
+          "E-LIVE-PUBLIC-READING-PROGRESS",
+          "E-LIVE-PUBLIC-NAVI-RELEASE"
         ],
         "notes": "34807cb 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·차트 큰 글씨 체계를 재확인"
       },
@@ -1014,7 +1016,8 @@
           "E-LOCAL-BUILD-ANCHOR-OFFSET",
           "E-DEPLOY-PIPELINE-ANCHOR-OFFSET",
           "E-LOCAL-BUILD-READING-PROGRESS",
-          "E-DEPLOY-PIPELINE-READING-PROGRESS"
+          "E-DEPLOY-PIPELINE-READING-PROGRESS",
+          "E-LIVE-PUBLIC-NAVI-RELEASE"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 지도 레이아웃 검증 통과"
       },
@@ -1150,6 +1153,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T00:32:43Z"
+    },
+    {
+      "id": "H-017",
+      "event": "NAVI 문서 PR을 main에 병합한 최종 공개 candidate 49daf99를 다시 검증하고 라이브 증적을 최신 SHA로 동기화했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T00:42:37Z"
     }
   ]
 }

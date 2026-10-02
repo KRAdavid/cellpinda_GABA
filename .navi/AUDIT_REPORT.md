@@ -1,5 +1,12 @@
 # Audit Report
 
+## Final NAVI Documentation Release Recheck — 49daf99 — 2026-10-03
+
+- NAVI 증적·감사·레드팀·완료 문서를 main에 병합한 뒤 공개 배포가 다시 완료됐다. 문서 변경은 공개 런타임 코드를 변경하지 않았으며, 현재 라이브 candidate는 `49daf9901113be3876b7fd6f94684ba2121c3b9a`다.
+- 최종 라이브 validator는 HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다. main workflow `37073665476`의 release verification, Pages publish, smoke-live, release status도 성공했다.
+- 이전 읽기 진행 표시 보완의 코드·시각·배포 증적은 유지되며, NAVI 문서까지 반영된 최종 공개 SHA로 정합성을 갱신했다.
+- 감사·레드팀 결과는 `PASS_WITH_CONDITIONS`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 여전히 OPEN이며 `COMPLETED`로 승격하지 않는다.
+
 ## Latest Public Release Recheck — 7a64726 — 2026-10-03
 
 - 읽기 진행 표시를 `role="progressbar"`와 현재 장 번호에 연결하고, 기존 CSS 규칙에 시각 보정을 통합해 데스크톱·모바일에서 현재 위치가 더 또렷하게 읽히도록 했다. 실제 사용하지 않는 구형 챌린지 이미지 4종은 배포 번들에서 제거하고 현재 사용하는 `focus-game-card-v5.png`와 SVG는 보존했다.
