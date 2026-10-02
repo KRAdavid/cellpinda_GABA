@@ -133,3 +133,12 @@
 - 최종 라이브 validator는 candidate `9457237b8938109312482ce38199f05096da9365`, generatedAt `2026-10-02T14:41:14.592Z`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외를 확인했다.
 - 공개 UI 코드의 최종 연구 지도 보완은 이전 `f5f7cb6` 검증 증적에 기록되어 있고, 이번 커밋은 그 증적과 NAVI 상태를 공개 배포 기록에 정합화한 문서 동기화다.
 - Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+## Release Recheck — 28315ad — 2026-10-02
+
+- 연구 결과 비교 도표에 `↔` 안내 큐와 `막대가 짧을수록 감소 폭이 작다는 뜻입니다` 문구를 추가해 모바일 판독 순서를 보완했다. 비교 결과의 연구 요약·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 73개 번들 파일, 성능 예산 `1598595 <= 1600000`을 통과했다.
+- Chrome CDP 대표 QA는 390px·1440px에서 업데이트된 비교 도표, 가로 넘침 없음, runtimeErrors 0건을 확인했다.
+- PR #8의 `release-verify`·`site-quality-verify` 통과 후 merge `28315ad`를 확인했다. GitHub Actions `37023282248`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고 `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `28315ad3502b3400053f70e412cdee4e1d7ef318`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance 일치를 확인했다.
+- 과거 Git 기록의 local-path 패턴 12건은 CI 경고로 남지만 현재 공개 번들에는 포함되지 않는 것으로 검증됐다. Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
