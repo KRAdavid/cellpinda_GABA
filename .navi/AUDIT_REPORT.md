@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 79432de — 2026-10-03
+
+- `06 · 연구의 확장` 연구 지도를 본 뒤 별도 링크나 중간 이동 없이 `지도 → 대상 → 결과 → 해석` 순서로 상세 연구 카드로 이어지는 읽기 큐를 추가했다. 데스크톱·모바일에서 시각 지도와 첫 카드의 연결이 한 흐름으로 읽힌다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 성능 `1649489 <= 1650000` bytes를 통과했다. PR #38의 `release-verify`·`site-quality-verify`도 통과했다.
+- heartbeat PR #39를 보호된 main에 병합한 뒤 GitHub Actions `37065791706`의 `release-verify`, fresh TF pulse, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했고 `deploy-worker`는 `STATIC_ONLY` 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `79432dec5c57170a75e6bdaa07402fbbdd1dc494`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly 및 provenance matched를 확인했다.
+- Chrome CDP 대체 QA로 공개 URL 1440px·390px 연구 지도를 캡처해 확인했고, 390px에서 `순서 지도 → 대상 → 결과 → 해석`과 첫 상세 카드가 연속 표시됐다. runtime errors `[]`였으며, Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다.
+- 이번 보완은 연구 지도에서 상세 카드로의 독해 전환을 개선한 것이다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수의 잔여 조건은 기존처럼 OPEN으로 유지한다.
+
 ## Latest Public Release Recheck — 713627f — 2026-10-03
 
 - `06 · 연구의 확장` 지도에 인지·피부·근육·성장호르몬·면역을 의미별로 구분하는 선형 아이콘을 추가해 다섯 연구 영역의 식별성을 높였다. 중앙 GABA 노드·연결선·연구 카드·제품 독립 안내 문구는 유지했다.
