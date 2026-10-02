@@ -81,6 +81,15 @@
 - GitHub Actions `37003371638`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고, 라이브 candidate `c13be36...`가 확인됐다.
 - Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다.
 
+## Release Recheck — 7ee9b3d — 2026-10-02
+
+- 마지막 공유 영역의 접힌 라벨을 `사업자용 GABA 핵심 5문장 · 바로 복사하기`로 정리해 사업자가 활용할 수 있는 행동을 첫 화면에서 바로 이해하도록 보완했다. 메시지 내용·연구 데이터·제품 경계는 변경하지 않았다.
+- 로컬 검증은 공개 연구 카피 검사, 127개 테스트, Pages 정적 번들 검증, 성능 `1599631 <= 1600000` bytes를 통과했다.
+- Chrome CDP에서 390px 최종 공유 화면의 문구 흐름·가로 넘침·런타임 오류 0건을 확인했고, 메뉴·Escape·포커스 복귀·연구 지도 이동도 재확인했다.
+- GitHub Actions `37009746032`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고 `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `7ee9b3df20499d86058b0f5bfd461b9b30e7189d`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외를 확인했다.
+- Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다.
+
 ## Release Recheck — 1f56cb6 — 2026-10-02
 
 - 읽기 진행 표시가 본문 장 번호와 일치하도록 정렬되어 모바일 대표 화면에서 `07 / 12`, `08 / 12`, `11 / 12`, `12 / 12`가 확인됐다.

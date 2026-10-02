@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T12:47:54.629419Z",
+  "updated_at": "2026-10-02T13:01:32.184211Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -770,9 +770,12 @@
           "E-DEPLOY-PIPELINE-PROGRESS",
           "E-LIVE-PUBLIC-PROGRESS",
           "E-DEPLOY-PIPELINE-FINAL",
-          "E-LIVE-PUBLIC-FINAL"
+          "E-LIVE-PUBLIC-FINAL",
+          "E-LOCAL-BUILD-SHARE-KIT",
+          "E-DEPLOY-PIPELINE-SHARE-KIT",
+          "E-LIVE-PUBLIC-SHARE-KIT"
         ],
-        "notes": "588f266 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성을 재확인"
+        "notes": "7ee9b3d 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·사업자 공유 문구를 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -832,9 +835,10 @@
           "E-RELEASE-D7",
           "E-RELEASE-C13",
           "E-LOCAL-BUILD-PROGRESS",
-          "E-LOCAL-BUILD-FINAL"
+          "E-LOCAL-BUILD-FINAL",
+          "E-LOCAL-BUILD-SHARE-KIT"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·성능 예산 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·성능 예산·사업자 공유 문구 검증 통과"
       },
       {
         "criterion_id": "AC-006",
