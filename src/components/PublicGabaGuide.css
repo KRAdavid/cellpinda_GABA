@@ -847,3 +847,18 @@
   .gaba-guide .guide-header-share{justify-content:center;gap:0;font-size:0}
   .gaba-guide .guide-header-share svg{display:block}
 }
+
+/* v20 narrow-phone hardening: keep the first impression readable at 390px and below. */
+@media(max-width:430px){
+  .guide-header{gap:8px;padding-inline:max(12px,env(safe-area-inset-left)) max(12px,env(safe-area-inset-right))}
+  .guide-header .guide-logo{flex:1 1 auto;min-width:0}
+  .guide-menu-toggle,.guide-reading-size-toggle,.guide-header-share{flex:0 0 44px;width:44px;min-width:44px;padding:0}
+  .guide-menu-toggle{display:inline-flex;align-items:center;justify-content:center}
+  .guide-reading-size-toggle{gap:0}
+  .guide-reading-size-toggle span,.gaba-guide .guide-header-share{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .guide-reading-size-toggle svg,.gaba-guide .guide-header-share svg{display:block}
+  .gaba-guide .guide-header-share{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:0;height:44px;margin:0;overflow:visible;clip:auto;white-space:normal;border:0;border-radius:12px;background:var(--guide-ink);color:#fff;font-size:0}
+  .guide-hero-story h1{font-size:clamp(36px,10.25vw,40px);letter-spacing:-.095em;line-height:1.1}
+  .guide-hero-story h1 span{font-size:.92em}
+  .guide-hero-story h1 em{font-size:.98em;line-height:1.12}
+}
