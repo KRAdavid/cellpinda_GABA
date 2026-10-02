@@ -655,6 +655,7 @@ export default function PublicGabaGuide() {
   const [recoveryInView, setRecoveryInView] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const menuToggleRef = useRef<HTMLButtonElement | null>(null);
+  const shareStatusTimer = useRef<number | null>(null);
   const recoveryBreakRef = useRef<HTMLElement | null>(null);
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
@@ -673,6 +674,10 @@ export default function PublicGabaGuide() {
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
     const targetId = window.location.hash.slice(1);
     if (targetId) requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'auto', block: 'start' })));
+  }, []);
+
+  useEffect(() => () => {
+    if (shareStatusTimer.current !== null) window.clearTimeout(shareStatusTimer.current);
   }, []);
 
   useEffect(() => {
@@ -801,6 +806,15 @@ export default function PublicGabaGuide() {
     setActiveRecoveryCard(index);
   };
 
+  const announceShareStatus = (message: string) => {
+    if (shareStatusTimer.current !== null) window.clearTimeout(shareStatusTimer.current);
+    setShareStatus(message);
+    shareStatusTimer.current = window.setTimeout(() => {
+      setShareStatus('');
+      shareStatusTimer.current = null;
+    }, 4200);
+  };
+
   const handleRecoveryKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
@@ -833,34 +847,35 @@ export default function PublicGabaGuide() {
     try {
       if (navigator.share) {
         await navigator.share(shareData);
-        setShareStatus('공유 창을 열었어요.');
+        announceShareStatus('공유 창을 열었어요.');
       } else if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(window.location.href);
-        setShareStatus('링크를 복사했어요. 자유롭게 공유해 보세요.');
+        announceShareStatus('링크를 복사했어요. 자유롭게 공유해 보세요.');
       } else {
-        setShareStatus('주소창의 링크를 복사해 자유롭게 공유해 보세요.');
+        announceShareStatus('주소창의 링크를 복사해 자유롭게 공유해 보세요.');
       }
     } catch {
-      setShareStatus('공유를 취소했어요.');
+      announceShareStatus('공유를 취소했어요.');
     }
   };
 
   const copyMessage = async (message: string) => {
     if (!navigator.clipboard?.writeText) {
-      setShareStatus('이 문장을 길게 눌러 복사해 보세요.');
+      announceShareStatus('이 문장을 길게 눌러 복사해 보세요.');
       return;
     }
     try {
       await navigator.clipboard.writeText(message);
-      setShareStatus('문장을 복사했어요. 자유롭게 활용해 보세요.');
+      announceShareStatus('문장을 복사했어요. 자유롭게 활용해 보세요.');
     } catch {
-      setShareStatus('문장을 선택해 활용해 보세요.');
+      announceShareStatus('문장을 선택해 활용해 보세요.');
     }
   };
 
   return (
     <div className="gaba-guide">
       <a className="guide-skip" href="#guide-main">본문으로 이동</a>
+      <div className={`guide-share-toast${shareStatus ? ' is-visible' : ''}`} role="status" aria-live="polite" aria-atomic="true">{shareStatus}</div>
       <header className="guide-header" ref={headerRef}>
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈"><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a>
         <nav id="guide-primary-navigation" className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
