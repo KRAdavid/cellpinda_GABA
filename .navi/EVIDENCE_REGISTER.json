@@ -1128,9 +1128,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "79432de가 반영된 GitHub Pages 공개본이 200으로 응답했고 연구 지도에서 상세 카드로 이어지는 읽기 흐름·제품 독립 경계·정적 공개 번들이 라이브에서 유지됐다.",
-      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 79432dec5c57170a75e6bdaa07402fbbdd1dc494; generatedAt 2026-10-02T21:16:58.274Z; bundleHashes 74; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP visual audit errors []",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha ca20d1e995f3adbdeba4015b1827f3c9a001a7a2; generatedAt 2026-10-02T21:24:47.340Z; bundleHashes 74; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP visual audit errors []",
       "source_uri": "https://kradavid.github.io/gaba_info/",
-      "captured_at": "2026-10-02T21:19:29Z",
+      "captured_at": "2026-10-02T21:24:47Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-READING-SEQUENCE",
       "claim_refs": ["C-002", "C-003"]
     }
