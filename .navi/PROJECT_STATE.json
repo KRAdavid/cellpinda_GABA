@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T10:47:27.234155Z",
+  "updated_at": "2026-10-02T11:04:17.896929Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -153,7 +153,8 @@
       "evidence_refs": [
         "E-LOCAL-TYPECHECK",
         "E-LOCAL-BUILD",
-        "E-LOCAL-BUILD-FOLLOWUP"
+        "E-LOCAL-BUILD-FOLLOWUP",
+        "E-LOCAL-BUILD-B7"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -174,7 +175,9 @@
         "E-CDP-DESKTOP",
         "E-CDP-MOBILE",
         "E-CDP-POLISH-FOLLOWUP",
-        "E-CDP-NAVIGATION-LATEST"
+        "E-CDP-NAVIGATION-LATEST",
+        "E-CDP-READABILITY-B7",
+        "E-CDP-NAVIGATION-B7"
       ],
       "owner": "UX QA"
     },
@@ -271,7 +274,8 @@
       "evidence_refs": [
         "E-LOCAL-TESTS",
         "E-LOCAL-BUILD",
-        "E-LOCAL-BUILD-FOLLOWUP"
+        "E-LOCAL-BUILD-FOLLOWUP",
+        "E-LOCAL-BUILD-B7"
       ],
       "owner": "QA"
     },
@@ -283,7 +287,9 @@
         "E-LIVE-PUBLIC",
         "E-DEPLOY-PIPELINE",
         "E-LIVE-PUBLIC-LATEST",
-        "E-DEPLOY-PIPELINE-LATEST"
+        "E-DEPLOY-PIPELINE-LATEST",
+        "E-LIVE-PUBLIC-B7",
+        "E-DEPLOY-PIPELINE-B7"
       ],
       "owner": "배포 QA"
     },
@@ -311,7 +317,9 @@
         "E-LIVE-PUBLIC",
         "E-DEPLOY-PIPELINE",
         "E-LIVE-PUBLIC-LATEST",
-        "E-DEPLOY-PIPELINE-LATEST"
+        "E-DEPLOY-PIPELINE-LATEST",
+        "E-LIVE-PUBLIC-B7",
+        "E-DEPLOY-PIPELINE-B7"
       ],
       "owner": "운영 QA"
     },
@@ -414,7 +422,8 @@
       "verification": [
         "E-LOCAL-TYPECHECK",
         "E-LOCAL-BUILD",
-        "E-LOCAL-BUILD-FOLLOWUP"
+        "E-LOCAL-BUILD-FOLLOWUP",
+        "E-LOCAL-BUILD-B7"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -434,7 +443,9 @@
         "E-CDP-DESKTOP",
         "E-CDP-MOBILE",
         "E-CDP-POLISH-FOLLOWUP",
-        "E-CDP-NAVIGATION-LATEST"
+        "E-CDP-NAVIGATION-LATEST",
+        "E-CDP-READABILITY-B7",
+        "E-CDP-NAVIGATION-B7"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -453,7 +464,9 @@
       "verification": [
         "E-LIVE-PUBLIC",
         "E-DEPLOY-PIPELINE-LATEST",
-        "E-LIVE-PUBLIC-LATEST"
+        "E-LIVE-PUBLIC-LATEST",
+        "E-LIVE-PUBLIC-B7",
+        "E-DEPLOY-PIPELINE-B7"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -662,7 +675,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "3983d41567a1ab6a3eb24974c51e22631fb68585ffa801aa3237bec193386f89",
+    "assessed_input_sha256": "b6cd51c240f21acfe10d30f416093362153a5b9415917a1d33f426a6402d33d7",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -721,7 +734,9 @@
           "E-LIVE-PUBLIC-FOLLOWUP",
           "E-DEPLOY-PIPELINE-FOLLOWUP",
           "E-LIVE-PUBLIC-LATEST",
-          "E-DEPLOY-PIPELINE-LATEST"
+          "E-DEPLOY-PIPELINE-LATEST",
+          "E-LIVE-PUBLIC-B7",
+          "E-DEPLOY-PIPELINE-B7"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·제목·히어로·정적 번들을 재확인"
       },
@@ -731,7 +746,8 @@
         "evidence_refs": [
           "E-CDP-DESKTOP",
           "E-CDP-MOBILE",
-          "E-CDP-POLISH-FOLLOWUP"
+          "E-CDP-POLISH-FOLLOWUP",
+          "E-CDP-READABILITY-B7"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -740,7 +756,8 @@
         "status": "PASS",
         "evidence_refs": [
           "E-CDP-DESKTOP",
-          "E-CDP-POLISH-FOLLOWUP"
+          "E-CDP-POLISH-FOLLOWUP",
+          "E-CDP-READABILITY-B7"
         ],
         "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
@@ -750,7 +767,8 @@
         "evidence_refs": [
           "E-CDP-MOBILE",
           "E-CDP-NAVIGATION-FOLLOWUP",
-          "E-CDP-NAVIGATION-LATEST"
+          "E-CDP-NAVIGATION-LATEST",
+          "E-CDP-NAVIGATION-B7"
         ],
         "notes": "390px 가로 넘침 없음, 메뉴 열린 상태 확인"
       },
@@ -761,7 +779,8 @@
           "E-LOCAL-TYPECHECK",
           "E-LOCAL-TESTS",
           "E-LOCAL-BUILD",
-          "E-LOCAL-BUILD-FOLLOWUP"
+          "E-LOCAL-BUILD-FOLLOWUP",
+          "E-LOCAL-BUILD-B7"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·성능 예산 통과"
       },

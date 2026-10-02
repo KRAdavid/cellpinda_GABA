@@ -15,11 +15,11 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 
 | Criterion | Result | Evidence | Notes |
 |---|---|---|---|
-| AC-001 | PASS | E-LIVE-PUBLIC-LATEST, E-DEPLOY-PIPELINE-LATEST | f82bcb4 최신 main 배포 성공, 라이브 200, 올바른 제목·히어로·정적 번들 재확인 |
-| AC-002 | PASS | E-CDP-DESKTOP, E-CDP-MOBILE, E-CDP-POLISH-FOLLOWUP | 연구 영역 5개와 상세 카드 5개 확인 |
-| AC-003 | PASS | E-CDP-DESKTOP, E-CDP-POLISH-FOLLOWUP | 비교 조건·GABA 조건·핵심 결과·출처와 연구 규모 단위가 표시됨 |
-| AC-004 | PASS | E-CDP-MOBILE, E-CDP-NAVIGATION-LATEST | 390px 가로 넘침 없음, 메뉴·연구 지도 이동 상태 확인 |
-| AC-005 | PASS | E-LOCAL-TYPECHECK, E-LOCAL-TESTS, E-LOCAL-BUILD-FOLLOWUP | 타입체크·127개 테스트·공개 검사·Pages 성능 예산 통과 |
+| AC-001 | PASS | E-LIVE-PUBLIC-B7, E-DEPLOY-PIPELINE-B7 | b7cf813 최신 main 배포 성공, 라이브 200, 올바른 제목·히어로·정적 번들 재확인 |
+| AC-002 | PASS | E-CDP-DESKTOP, E-CDP-MOBILE, E-CDP-POLISH-FOLLOWUP, E-CDP-READABILITY-B7 | 연구 영역 5개와 상세 카드 5개 확인 |
+| AC-003 | PASS | E-CDP-DESKTOP, E-CDP-POLISH-FOLLOWUP, E-CDP-READABILITY-B7 | 비교 조건·GABA 조건·핵심 결과·출처와 연구 규모 단위가 표시됨 |
+| AC-004 | PASS | E-CDP-MOBILE, E-CDP-NAVIGATION-LATEST, E-CDP-NAVIGATION-B7 | 390px 가로 넘침 없음, 메뉴·연구 지도 이동 상태 확인 |
+| AC-005 | PASS | E-LOCAL-TYPECHECK, E-LOCAL-TESTS, E-LOCAL-BUILD-FOLLOWUP, E-LOCAL-BUILD-B7 | 타입체크·127개 테스트·공개 검사·Pages 성능 예산 통과 |
 | AC-006 | PASS | E-RESEARCH-COPY | 제품 독립 과학 정보 경계와 연구 출처 연결 유지 |
 | AC-007 | PASS_WITH_CONDITIONS | E-LOCAL-BUILD, E-REDTEAM-REVIEW | 감사·레드팀은 분리됐으나 외부 검증은 남음 |
 
@@ -35,5 +35,5 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - Red Team Result: PASS_WITH_CONDITIONS
 - User Decisions Required: 외부 과학·규제 감수와 추가 실기기 QA를 언제 완료할지 결정.
 - Recommended Next Actions: 외부 검토 증거와 대표 실기기 QA를 등록한 뒤 동일 gate를 재실행.
-- Deployment Follow-up: main 배포 run 36996976297이 통과했고, Pages 배포·라이브 smoke test·release status를 확인했다. 공개 URL의 candidate SHA는 `f82bcb4b984df74545c4d5c78b42afb67b042471`이다.
+- Deployment Follow-up: main 배포 run 36998491670이 통과했고, Pages 배포·라이브 smoke test·release status를 확인했다. 공개 URL의 candidate SHA는 `b7cf813f5b7cf6144e138b210d1f9a8073684c67`이다.
 - Final Status: INTERNAL_QA_READY_WITH_CONDITIONS; NAVI 상태는 USER_DECISION. 외부 과학·규제 감수, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트는 완료로 표시하지 않는다.
