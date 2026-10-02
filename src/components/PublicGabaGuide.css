@@ -444,7 +444,7 @@
   .guide-video-gallery-lead{margin-top:-7px;margin-bottom:22px;font-size:16px;line-height:1.8}
   .guide-video-gallery{grid-template-columns:1fr;gap:12px}
   .guide-video-feature{grid-template-columns:1fr;gap:13px;padding:12px;border-radius:19px}
-  .guide-video-feature-media{max-width:270px;margin:0 auto;border-radius:14px}
+  .guide-video-feature-media{max-width:230px;margin:0 auto;border-radius:14px}
   .guide-video-feature-copy{padding:2px 6px 7px}
   .guide-video-feature-copy h3{margin:14px 0 7px;font-size:22px}
   .guide-video-feature-copy>a{margin-top:16px}
