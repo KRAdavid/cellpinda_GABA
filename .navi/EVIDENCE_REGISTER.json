@@ -10,7 +10,7 @@
     {
       "id": "C-002",
       "statement": "GitHub Pages 공개 URL은 라이브 검증을 통해 200 응답과 정적 번들·공개 데이터 정합성이 확인된 상태다.",
-      "evidence_refs": ["E-LIVE-PUBLIC", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-DEPLOY-PIPELINE-FOLLOWUP", "E-DEPLOY-PIPELINE-LATEST", "E-LIVE-PUBLIC-PROGRESS", "E-DEPLOY-PIPELINE-PROGRESS", "E-LIVE-PUBLIC-FINAL", "E-DEPLOY-PIPELINE-FINAL", "E-LIVE-PUBLIC-SHARE-KIT", "E-DEPLOY-PIPELINE-SHARE-KIT", "E-LIVE-PUBLIC-UI-POLISH", "E-DEPLOY-PIPELINE-UI-POLISH", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS", "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS"],
+      "evidence_refs": ["E-LIVE-PUBLIC", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-DEPLOY-PIPELINE-FOLLOWUP", "E-DEPLOY-PIPELINE-LATEST", "E-LIVE-PUBLIC-PROGRESS", "E-DEPLOY-PIPELINE-PROGRESS", "E-LIVE-PUBLIC-FINAL", "E-DEPLOY-PIPELINE-FINAL", "E-LIVE-PUBLIC-SHARE-KIT", "E-DEPLOY-PIPELINE-SHARE-KIT", "E-LIVE-PUBLIC-UI-POLISH", "E-DEPLOY-PIPELINE-UI-POLISH", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS", "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-NAVI-SYNC"],
       "status": "SUPPORTED"
     },
     {
@@ -40,7 +40,7 @@
     {
       "id": "C-007",
       "statement": "최신 공개본은 모바일에서 현재 읽는 연구 섹션을 헤더·진행 표시와 동기화하고, 메뉴 외부 클릭·Escape·포커스 복귀를 지원한다.",
-      "evidence_refs": ["E-CDP-NAVIGATION-FOLLOWUP", "E-CDP-NAVIGATION-LATEST", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-CDP-NAVIGATION-PROGRESS", "E-LIVE-PUBLIC-PROGRESS", "E-CDP-FINAL", "E-LIVE-PUBLIC-FINAL", "E-CDP-SHARE-KIT", "E-LIVE-PUBLIC-SHARE-KIT", "E-CDP-UI-POLISH", "E-LIVE-PUBLIC-UI-POLISH", "E-CDP-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS"],
+      "evidence_refs": ["E-CDP-NAVIGATION-FOLLOWUP", "E-CDP-NAVIGATION-LATEST", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-CDP-NAVIGATION-PROGRESS", "E-LIVE-PUBLIC-PROGRESS", "E-CDP-FINAL", "E-LIVE-PUBLIC-FINAL", "E-CDP-SHARE-KIT", "E-LIVE-PUBLIC-SHARE-KIT", "E-CDP-UI-POLISH", "E-LIVE-PUBLIC-UI-POLISH", "E-CDP-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-NAVI-SYNC"],
       "status": "SUPPORTED"
     }
   ],
@@ -617,6 +617,17 @@
       "source_uri": "https://kradavid.github.io/gaba_info/",
       "captured_at": "2026-10-02T14:38:41Z",
       "reviewer_id": "NAVI-LIVE-QA-20261002-RESEARCH-MAP-CONNECTORS",
+      "claim_refs": ["C-002", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NAVI-SYNC",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 증적 문서 동기화 커밋까지 반영된 최종 GitHub Pages 공개본이 정상 응답하고 연구 지도 보완을 포함한 공개 번들·데이터 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 9457237b8938109312482ce38199f05096da9365; generatedAt 2026-10-02T14:41:14.592Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-02T14:41:14Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261002-NAVI-SYNC",
       "claim_refs": ["C-002", "C-007"]
     }
   ]

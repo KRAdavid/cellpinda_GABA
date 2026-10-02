@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T14:40:02.764832Z",
+  "updated_at": "2026-10-02T14:43:55.302434Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -313,7 +313,8 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS",
-        "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS"
+        "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS",
+        "E-LIVE-PUBLIC-NAVI-SYNC"
       ],
       "owner": "배포 QA"
     },
@@ -351,7 +352,8 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS",
-        "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS"
+        "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS",
+        "E-LIVE-PUBLIC-NAVI-SYNC"
       ],
       "owner": "운영 QA"
     },
@@ -794,7 +796,8 @@
           "E-DEPLOY-PIPELINE-RESEARCH-MAP",
           "E-LIVE-PUBLIC-RESEARCH-MAP",
           "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS",
+          "E-LIVE-PUBLIC-NAVI-SYNC"
         ],
         "notes": "6df3e36 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 지도 레이아웃을 재확인"
       },
