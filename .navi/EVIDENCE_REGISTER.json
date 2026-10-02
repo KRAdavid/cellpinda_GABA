@@ -1328,6 +1328,50 @@
       "captured_at": "2026-10-03T00:00:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-ANCHOR-OFFSET",
       "claim_refs": ["C-002", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-PROFILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드에 대상·방법·측정 3요소 프로필을 추가한 공개 안내서가 타입체크·127개 테스트·production build·정적 라우트·성능 예산을 통과했다.",
+      "locator": "PR #53 candidate c0d904c; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test 127/127; pnpm run build PASS; static routes 11; files 70; validate:performance total 1433980 <= 1650000 bytes; initial JS 310538 and CSS 92953 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/53",
+      "captured_at": "2026-10-02T23:29:10Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RESEARCH-PROFILE",
+      "claim_refs": ["C-001", "C-002", "C-003"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-PROFILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 390px·1440px Chrome CDP 렌더링에서 연구 프로필이 결과 도표 앞의 읽기 순서로 표시되고, 가로 넘침과 런타임 오류가 없었다.",
+      "locator": "temporary Chrome CDP fallback; live https://kradavid.github.io/gaba_info/guide/; CSS viewport 390/1440; document/body scrollWidth 390/1425; six research profiles rendered with all profile rectangles inside the viewport; screenshots inspected; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/",
+      "captured_at": "2026-10-02T23:29:10Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RESEARCH-PROFILE",
+      "claim_refs": ["C-002", "C-003", "C-004"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 프로필 보완 PR과 main 공개 배포 파이프라인이 필수 검사를 통과했다.",
+      "locator": "PR #53 checks release-verify run 37077495017 PASS and site-quality-verify run 37077495007 PASS; main workflow 37077676557 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37077676557",
+      "captured_at": "2026-10-02T23:29:10Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RESEARCH-PROFILE",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-PROFILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 프로필 보완이 반영된 최신 GitHub Pages 공개본이 200으로 응답했고 공개 번들·데이터 경계·공유 경로가 유지됐다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 3f4a3e552978721ccc72187ae85a89af05174d5f; generatedAt 2026-10-02T23:29:10.539Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-02T23:29:10Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-PROFILE",
+      "claim_refs": ["C-001", "C-002", "C-003"]
     }
   ]
 }

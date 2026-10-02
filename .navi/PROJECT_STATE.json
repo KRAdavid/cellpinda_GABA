@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T23:12:37.789947Z",
+  "updated_at": "2026-10-02T23:35:50.713817Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -169,7 +169,8 @@
         "E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE",
         "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
         "E-LOCAL-BUILD-ANCHOR-OFFSET",
-        "E-DEPLOY-PIPELINE-ANCHOR-OFFSET"
+        "E-DEPLOY-PIPELINE-ANCHOR-OFFSET",
+        "E-LOCAL-BUILD-RESEARCH-PROFILE"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -208,7 +209,8 @@
         "E-CDP-RESEARCH-READING-SEQUENCE",
         "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
         "E-CDP-ANCHOR-OFFSET",
-        "E-LIVE-PUBLIC-ANCHOR-OFFSET"
+        "E-LIVE-PUBLIC-ANCHOR-OFFSET",
+        "E-CDP-RESEARCH-PROFILE"
       ],
       "owner": "UX QA"
     },
@@ -317,7 +319,8 @@
         "E-LOCAL-BUILD-READING-SIZE",
         "E-LOCAL-BUILD-COMPACT-HEADER",
         "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
-        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS"
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
+        "E-LOCAL-BUILD-RESEARCH-PROFILE"
       ],
       "owner": "QA"
     },
@@ -354,7 +357,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
         "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
         "E-DEPLOY-PIPELINE-ANCHOR-OFFSET",
-        "E-LIVE-PUBLIC-ANCHOR-OFFSET"
+        "E-LIVE-PUBLIC-ANCHOR-OFFSET",
+        "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
+        "E-LIVE-PUBLIC-RESEARCH-PROFILE"
       ],
       "owner": "배포 QA"
     },
@@ -403,7 +408,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
-        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+        "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
+        "E-LIVE-PUBLIC-RESEARCH-PROFILE"
       ],
       "owner": "운영 QA"
     },
@@ -522,7 +529,8 @@
         "E-LOCAL-BUILD-B7",
         "E-RELEASE-D7",
         "E-RELEASE-C13",
-        "E-LOCAL-BUILD-RESEARCH-MAP-ICONS"
+        "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
+        "E-LOCAL-BUILD-RESEARCH-PROFILE"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -549,7 +557,8 @@
         "E-CDP-NAVIGATION-RELEASE",
         "E-RELEASE-D7",
         "E-RELEASE-C13",
-        "E-CDP-RESEARCH-MAP-ICONS"
+        "E-CDP-RESEARCH-MAP-ICONS",
+        "E-CDP-RESEARCH-PROFILE"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -584,7 +593,11 @@
         "E-LOCAL-BUILD-MOBILE-HARDENING",
         "E-CDP-MOBILE-HARDENING",
         "E-DEPLOY-PIPELINE-MOBILE-HARDENING",
-        "E-LIVE-PUBLIC-MOBILE-HARDENING"
+        "E-LIVE-PUBLIC-MOBILE-HARDENING",
+        "E-LOCAL-BUILD-RESEARCH-PROFILE",
+        "E-CDP-RESEARCH-PROFILE",
+        "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
+        "E-LIVE-PUBLIC-RESEARCH-PROFILE"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -709,7 +722,9 @@
           "E-CDP-DESKTOP",
           "E-CDP-MOBILE",
           "E-CDP-RESEARCH-MAP-ICONS",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
+          "E-CDP-RESEARCH-PROFILE",
+          "E-LIVE-PUBLIC-RESEARCH-PROFILE"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -797,7 +812,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "74517dde373137c766b83ec11478e6070a1833c482c5b659b439893dc08b7e57",
+    "assessed_input_sha256": "83a7adc3c9c59f4d6f12ff34fbd6be38202df551148c499e04b417f42908808b",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -901,9 +916,11 @@
           "E-LIVE-PUBLIC-NAVI-FINAL",
           "E-LOCAL-BUILD-MOBILE-HARDENING",
           "E-DEPLOY-PIPELINE-MOBILE-HARDENING",
-          "E-LIVE-PUBLIC-MOBILE-HARDENING"
+          "E-LIVE-PUBLIC-MOBILE-HARDENING",
+          "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
+          "E-LIVE-PUBLIC-RESEARCH-PROFILE"
         ],
-        "notes": "34807cb 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·차트 큰 글씨 체계를 재확인"
+        "notes": "3f4a3e5 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -934,9 +951,11 @@
           "E-CDP-READING-PROGRESS",
           "E-LIVE-PUBLIC-READING-PROGRESS",
           "E-CDP-MOBILE-HARDENING",
-          "E-LIVE-PUBLIC-MOBILE-HARDENING"
+          "E-LIVE-PUBLIC-MOBILE-HARDENING",
+          "E-CDP-RESEARCH-PROFILE",
+          "E-LIVE-PUBLIC-RESEARCH-PROFILE"
         ],
-        "notes": "연구 영역 5개와 상세 카드 5개 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필을 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -962,9 +981,11 @@
           "E-CDP-READING-PROGRESS",
           "E-LIVE-PUBLIC-READING-PROGRESS",
           "E-CDP-MOBILE-HARDENING",
-          "E-LIVE-PUBLIC-MOBILE-HARDENING"
+          "E-LIVE-PUBLIC-MOBILE-HARDENING",
+          "E-CDP-RESEARCH-PROFILE",
+          "E-LIVE-PUBLIC-RESEARCH-PROFILE"
         ],
-        "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
+        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
       {
         "criterion_id": "AC-004",
@@ -1034,9 +1055,12 @@
           "E-LIVE-PUBLIC-NAVI-FINAL",
           "E-LOCAL-BUILD-MOBILE-HARDENING",
           "E-DEPLOY-PIPELINE-MOBILE-HARDENING",
-          "E-LIVE-PUBLIC-MOBILE-HARDENING"
+          "E-LIVE-PUBLIC-MOBILE-HARDENING",
+          "E-LOCAL-BUILD-RESEARCH-PROFILE",
+          "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
+          "E-LIVE-PUBLIC-RESEARCH-PROFILE"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 지도 레이아웃 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -1191,6 +1215,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-02T23:08:32Z"
+    },
+    {
+      "id": "H-020",
+      "event": "연구 카드에 대상·방법·측정 3요소 프로필을 추가하고 PR #53·main 배포·390/1440px 라이브 CDP·live validator를 재검증했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-02T23:29:10Z"
     }
   ]
 }

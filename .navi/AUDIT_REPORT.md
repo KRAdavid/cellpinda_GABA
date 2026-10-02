@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 3f4a3e5 — 2026-10-03
+
+- PR #53은 각 연구 결과 그래프 앞에 `대상·방법·측정` 3요소 연구 프로필을 추가했으며, 수면 연구에도 같은 구조를 적용했다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build와 성능 검사가 모두 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,433,980 <= 1,650,000` bytes였다.
+- Chrome CDP 대체 라이브 QA는 390px·1440px에서 6개 연구 프로필, viewport 내부 배치, 가로 넘침 없음, runtime errors `[]`를 확인했다.
+- PR #53 검사 `37077495017`, `37077495007`과 main 배포 run `37077676557`의 release verification, Pages publish, smoke-live, release status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 HTTP 200, candidate `3f4a3e552978721ccc72187ae85a89af05174d5f`, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Narrow-phone Mobile Hardening Recheck — d0f1741 — 2026-10-03
 
 - PR #51의 모바일 보정은 320–430px에서 헤드라인이 오른쪽으로 잘리지 않도록 줄 크기·줄바꿈을 조정하고, 메뉴·큰 글씨·공유 컨트롤을 각각 44px 터치 영역으로 정렬했다. 데스크톱 히어로 구성은 유지했다.
