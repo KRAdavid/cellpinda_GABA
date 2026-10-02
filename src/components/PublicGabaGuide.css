@@ -315,11 +315,13 @@
 .guide-outcome-comparison-row.result-more .is-reference>i b{width:43%}
 .guide-outcome-comparison-row.result-more .is-result>i b{width:78%}
 .guide-outcome-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.guide-outcome-metric{position:relative;min-height:105px;padding:13px 14px;border-radius:12px;background:linear-gradient(145deg,#effafa,#f8fcfc)}
-.guide-outcome-metric:after{content:"";position:absolute;right:15px;bottom:15px;width:42px;height:42px;border:1px solid rgba(18,154,163,.25);border-radius:50%}
+.guide-outcome-metric{position:relative;min-height:122px;padding:13px 14px;border-radius:12px;background:linear-gradient(145deg,#effafa,#f8fcfc);overflow:hidden}
+.guide-outcome-metric:after{content:"";position:absolute;right:-5px;bottom:-13px;width:58px;height:58px;border:1px solid rgba(18,154,163,.2);border-radius:50%;pointer-events:none}
 .guide-outcome-metric>span{display:block;color:#6c8997;font-size:11px;font-weight:850}
 .guide-outcome-metric>strong{display:block;margin-top:10px;color:var(--guide-teal-dark);font-size:25px;letter-spacing:-.08em;line-height:1}
-.guide-outcome-metric>small{display:block;margin-top:8px;color:#8da5b1;font-size:10px;font-weight:750}
+.guide-outcome-metric-track{position:relative;z-index:1;height:8px;margin:14px 0 8px;border-radius:999px;background:#dcecef;overflow:hidden}
+.guide-outcome-metric-track i{display:block;width:var(--guide-metric-width);height:100%;border-radius:inherit;background:linear-gradient(90deg,#55c9c6 0%,#128d98 100%)}
+.guide-outcome-metric>small{position:relative;z-index:1;display:block;margin-top:0;color:#8da5b1;font-size:10px;font-weight:750}
 .guide-outcome-signals{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 10px}
 .guide-outcome-signal-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;padding:10px 11px;border-radius:10px;background:#f6fbfc}
 .guide-outcome-signal-row>span{min-width:0;color:#6a8392;font-size:11px;line-height:1.35;letter-spacing:-.04em}
@@ -359,8 +361,9 @@
   .guide-outcome-lane-top>span{font-size:11px;flex:0 0 auto}
   .guide-outcome-lane-top>strong{min-height:0;font-size:13px;text-align:right}
   .guide-outcome-lane>i{height:8px}
-  .guide-outcome-metric{min-height:102px;padding:12px}
+  .guide-outcome-metric{min-height:116px;padding:12px}
   .guide-outcome-metric>strong{font-size:23px}
+  .guide-outcome-metric-track{margin-top:13px}
   .guide-outcome-signals{grid-template-columns:1fr;gap:6px}
   .guide-outcome-signal-row{padding:10px}
   .guide-outcome-chart-note{font-size:12px}

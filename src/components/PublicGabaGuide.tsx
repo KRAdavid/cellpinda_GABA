@@ -67,7 +67,7 @@ type ResearchSignal = {
 
 type ResearchChart =
   | { kind: 'comparison'; title: string; summary: string; note: string; referenceLabel: string; resultLabel: string; rows: ResearchComparison[] }
-  | { kind: 'metrics'; title: string; summary: string; note: string; metrics: { label: string; value: string; note: string }[] }
+  | { kind: 'metrics'; title: string; summary: string; note: string; metrics: { label: string; value: string; note: string; scale: number }[] }
   | { kind: 'signals'; title: string; summary: string; note: string; rows: ResearchSignal[] };
 
 type HistoryMilestone = {
@@ -269,10 +269,10 @@ const researchTopics: ResearchTopic[] = [
       kind: 'metrics',
       title: '성장호르몬 반응',
       summary: '쉬었을 때 GABA를 섭취한 그룹의 성장호르몬 반응이 비교 그룹보다 높았습니다.',
-      note: '휴식 조건에서 위약과 비교해 기록된 값입니다. 운동 조건에서도 섭취 30분 뒤 더 높았습니다.',
+      note: '막대는 이 연구에서 가장 높은 반응을 100으로 둔 상대 표시입니다. 휴식 조건에서 위약과 비교해 기록된 값이며, 운동 조건에서도 섭취 30분 뒤 더 높았습니다.',
       metrics: [
-        { label: '최고치', value: '약 +400%', note: '위약 대비' },
-        { label: '총 반응량', value: '약 +375%', note: '위약 대비' },
+        { label: '최고치', value: '약 +400%', note: '위약 대비', scale: 100 },
+        { label: '총 반응량', value: '약 +375%', note: '위약 대비', scale: 94 },
       ],
     },
   },
@@ -620,6 +620,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
             <div className="guide-outcome-metric" key={metric.label}>
               <span>{metric.label}</span>
               <strong>{metric.value}</strong>
+              <div className="guide-outcome-metric-track" aria-hidden="true"><i style={{ '--guide-metric-width': `${metric.scale}%` } as CSSProperties} /></div>
               <small>{metric.note}</small>
             </div>
           ))}
