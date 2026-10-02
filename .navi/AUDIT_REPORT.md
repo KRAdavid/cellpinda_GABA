@@ -116,3 +116,13 @@
 - GitHub Actions `37005335681`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고, `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
 - 라이브 validator는 candidate `1f56cb68799a8a430ec27940240b7f894a00f2be`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외를 확인했다.
 - Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다.
+
+## Release Recheck — 5350da8 — 2026-10-02
+
+- 연구 확장 지도를 GABA 중심의 연결 인포그래픽으로 보강해 인지·피부·근육·성장호르몬·면역의 관계를 모바일에서도 한 번에 읽도록 정리했다. 연결선은 SVG로 분리하고 노드와 중앙 원의 겹침을 방지했다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 공개 연구 카피, 11개 정적 라우트·73개 파일, 성능 `1598211 <= 1600000` bytes를 통과했다.
+- Chrome CDP 대표 QA는 390px·320px·1440px에서 연구 지도와 5개 라벨을 확인했고 scrollWidth `390/320/1425`, runtimeErrors `[]`를 기록했다. 메뉴·회복 카드 이동 상호작용도 통과했다.
+- 예약 TF pulse가 생성한 heartbeat 브랜치를 보호된 PR #7로 복구했고 `release-verify`·`site-quality-verify` 통과 후 main merge `5350da8`을 확인했다. GitHub Actions `37020753980`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고 deploy-worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator는 candidate `5350da8d34ef3a2aa875b2ff3ec479fe55f9bf16`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance 일치를 확인했다.
+- 과거 Git 기록의 local-path 패턴 12건은 CI 경고로 남지만 현재 공개 번들에는 포함되지 않는 것으로 검증됐다.
+- Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
