@@ -890,7 +890,7 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-history guide-story-section" id="history" aria-labelledby="history-heading">
           <div className="guide-container">
-            <div className="guide-section-heading guide-history-heading"><div><p className="guide-section-number">01 · 발견</p><h2 id="history-heading">처음에는 이름도<span className="guide-mobile-break"><br /></span> 없었습니다.<br />다만, 뇌 속에 있었습니다.</h2></div><div className="guide-history-arc">하나의 발견이<br /><b>넓어진 연구로 이어졌습니다.</b><br /><small>1950—오늘</small></div></div>
+            <div className="guide-section-heading guide-history-heading"><div><p className="guide-section-number">01 · 발견</p><h2 id="history-heading">처음에는 이름도<span className="guide-mobile-break"><br /></span> 없었습니다.<br />다만, 뇌 속에 있었습니다.</h2></div><p>하나의 발견이<br />넓어진 연구로 이어졌습니다.</p></div>
             <p className="guide-section-lead">유진 로버츠와 샘 프랭클은 당시의 분석 기술로 뇌 조직을 들여다보다가, 다른 조직에서는 거의 보이지 않는 물질을 발견했습니다. 그 물질이 바로 GABA였습니다.</p>
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <div className="guide-research-scale" aria-label="GABA 연구 규모">
