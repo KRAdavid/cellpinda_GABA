@@ -585,6 +585,7 @@
 .guide-editorial-band-fermentation{background-position:center left}
 .guide-sleep-visual{background:linear-gradient(180deg,rgba(9,40,59,.06) 8%,rgba(7,37,57,.62) 100%),var(--guide-sleep-image);background-position:center;background-size:cover;box-shadow:0 18px 34px rgba(19,47,86,.1)}
 .guide-sleep-visual strong{color:#fff;text-shadow:0 3px 18px rgba(7,30,49,.34)}
+.gaba-guide :focus-visible{outline:2px solid #83ded9}
 
 @media(max-width:700px){
   .guide-editorial-band{min-height:210px;margin-top:24px;padding:22px 20px;border-radius:20px;background-position:center}
