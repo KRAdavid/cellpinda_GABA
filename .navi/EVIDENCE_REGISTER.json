@@ -1,0 +1,128 @@
+{
+  "schema_version": "0.1.0",
+  "claims": [
+    {
+      "id": "C-001",
+      "statement": "공개 사이트의 코드·정적 번들·공개 카피·성능 검사가 기준선을 통과했다.",
+      "evidence_refs": ["E-LOCAL-TYPECHECK", "E-LOCAL-TESTS", "E-LOCAL-BUILD", "E-RESEARCH-COPY"],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "C-002",
+      "statement": "공개 URL은 후보 SHA 244ceea의 정적 번들과 공개 데이터 정합성을 제공한다.",
+      "evidence_refs": ["E-LIVE-PUBLIC"],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "C-003",
+      "statement": "연구 확장 지도와 상세 카드 5개가 1440px·390px 대표 화면에서 렌더된다.",
+      "evidence_refs": ["E-CDP-DESKTOP", "E-CDP-MOBILE"],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "C-004",
+      "statement": "현재 자동·대표 브라우저 검증만으로 독립 과학·규제 적합성이나 전체 브라우저 품질을 확정할 수 없다.",
+      "evidence_refs": ["E-REDTEAM-REVIEW"],
+      "status": "EXTERNAL_VALIDATION_REQUIRED"
+    },
+    {
+      "id": "C-005",
+      "statement": "현재 사용자는 공개 배포 품질 점검 결과에 따라 저장소 내 보완을 자동 진행하도록 요청했다.",
+      "evidence_refs": ["E-USER-AUTO-UPDATE"],
+      "status": "SUPPORTED"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E-USER-AUTO-UPDATE",
+      "kind": "DECISION",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사용자가 NAVI 자동 점검과 프로젝트 보완 진행을 요청했다.",
+      "locator": "현재 사용자 요청: 현재 프로젝트 공개 배포 시 잘 만들었다는 평가를 받을 수 있도록 NAVI 자동으로 점검하고 업데이트 진행",
+      "captured_at": "2026-10-02T08:06:57Z",
+      "reviewer_id": "현재 사용자",
+      "claim_refs": ["C-005"]
+    },
+    {
+      "id": "E-LOCAL-TYPECHECK",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "TypeScript 애플리케이션과 Worker 타입체크가 통과했다.",
+      "locator": "pnpm run typecheck; exit code 0",
+      "captured_at": "2026-10-02T08:03:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261002",
+      "claim_refs": ["C-001"]
+    },
+    {
+      "id": "E-LOCAL-TESTS",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "프로젝트 테스트 127개가 모두 통과했다.",
+      "locator": "pnpm test; tests 127, pass 127, fail 0",
+      "captured_at": "2026-10-02T08:03:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261002",
+      "claim_refs": ["C-001"]
+    },
+    {
+      "id": "E-LOCAL-BUILD",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 카피·UI 계약·정적 번들·성능 예산을 포함한 pnpm build가 통과했다.",
+      "locator": "pnpm run build; static routes 11; performance total 1599428 <= 1600000",
+      "captured_at": "2026-10-02T08:04:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261002",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-RESEARCH-COPY",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 연구 카피 6건과 소비자용 필드·제품 적용 경계 검사가 통과했다.",
+      "locator": "pnpm run validate:research-copy; approvedResearch 6; flowGuard independent-research-route-with-neutral-product-handoff",
+      "captured_at": "2026-10-02T08:04:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261002",
+      "claim_refs": ["C-001", "C-004"]
+    },
+    {
+      "id": "E-CDP-DESKTOP",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP 1440px 화면에서 제목·연구 지도 5개·상세 카드 5개·결과 도표와 런타임 오류 0건을 확인했다.",
+      "locator": "temporary Chrome CDP screenshots outside the repository: hero-desktop.png and research-map-desktop.png; node temporary CDP script",
+      "captured_at": "2026-10-02T08:06:57Z",
+      "reviewer_id": "NAVI-QA-CDP-20261002",
+      "claim_refs": ["C-003", "C-004"]
+    },
+    {
+      "id": "E-CDP-MOBILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP 390px 화면에서 첫 화면·연구 지도·상세 카드·메뉴 열린 상태를 확인했고 scrollWidth가 390px이며 런타임 오류가 없었다.",
+      "locator": "temporary Chrome CDP screenshots outside the repository: hero-mobile.png and research-section-mobile.png; menu aria-expanded false -> true, nav is-open",
+      "captured_at": "2026-10-02T08:06:57Z",
+      "reviewer_id": "NAVI-QA-CDP-20261002",
+      "claim_refs": ["C-003", "C-004"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개 URL이 200으로 응답하고 candidate SHA·정적 번들·공개 데이터·페이지 수가 일치했다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 244ceea970ae0054a444e2c3d459c1b3381c8c25",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-02T08:05:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261002",
+      "claim_refs": ["C-002"]
+    },
+    {
+      "id": "E-REDTEAM-REVIEW",
+      "kind": "OTHER",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "독립 레드팀이 브라우저 범위, 과학 카피 오인, 실제 고령 사용자 검증의 잔여 위험을 식별했다.",
+      "locator": ".navi/RED_TEAM_REPORT.md; reviewer NAVI-REDTEAM-GABA-20261002",
+      "captured_at": "2026-10-02T08:06:57Z",
+      "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
+      "claim_refs": ["C-004"]
+    }
+  ]
+}

@@ -1,0 +1,825 @@
+{
+  "schema_version": "0.1.0",
+  "project_id": "project-c21d3d8e2d",
+  "project_name": "셀핀다가바 GABA 공개 안내서",
+  "status": "USER_DECISION",
+  "previous_status": "RED_TEAM",
+  "updated_at": "2026-10-02T08:16:32.114257Z",
+  "goal_lock": {
+    "status": "LOCKED",
+    "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
+    "user_intent": "일반 소비자와 사업자가 GABA를 쉽게 이해하고 공유할 수 있는 공개 사이트를 안정적으로 운영한다.",
+    "goal_statement": "제품 광고와 분리된 GABA 공개 안내서를 모바일 중심·출처 연결형 정보 경험으로 점검하고, 공개 배포 품질 기준을 통과시킨다.",
+    "problem_definition": "연구·일상·영상·출처 정보가 많아 방문자가 첫 화면에서 전체 흐름과 연구 결과를 직관적으로 이해하기 어렵고, 공개 배포 품질을 한 번에 재현할 검증 기록이 필요하다.",
+    "why_it_matters": "소비자는 신뢰할 수 있는 흐름으로 GABA를 읽고, 사업자는 과장 없이 설명 자료로 활용할 수 있어야 한다.",
+    "user_decision_enabled": "현재 공개 배포본을 유지할지, 발견된 결함을 보완한 뒤 재배포할지 검증 결과와 잔여 위험을 기준으로 판단한다.",
+    "scope": [
+      "첫 화면",
+      "모바일 반응형",
+      "연구 확장 섹션",
+      "연구 결과 도표",
+      "출처 링크",
+      "전문가 영상 흐름",
+      "공유 경험",
+      "접근성",
+      "정적 번들",
+      "라이브 공개 URL",
+      "NAVI 감사·레드팀 기록"
+    ],
+    "out_of_scope": [
+      "제품 판매·구매 CTA",
+      "새로운 임상·효능 주장 생성",
+      "법률·의학적 보증",
+      "비공개 운영 데이터 공개",
+      "Safari·실기기 전체 조합의 현장 테스트"
+    ],
+    "constraints": [
+      "한국어 가독성",
+      "모바일 우선",
+      "제품 독립적 공개 과학 안내",
+      "GitHub Pages 공개 URL",
+      "기존 사용자 파일 보존",
+      "근거와 해석의 경계 유지"
+    ],
+    "priority": "HIGH",
+    "unknowns": [
+      "실제 사용자 인지 부하와 고령 사용자 독해성",
+      "Chrome CDP 외 브라우저별 시각 차이",
+      "공개 과학 카피에 대한 독립적인 규제·과학 감수"
+    ],
+    "locked_at": "2026-10-02T08:06:57Z",
+    "lock_hash": "93956023576b249855e412256fe58f745aa1fccf5fe1670617fef3f9ba6084b8",
+    "lock_history": [
+      {
+        "id": "LH-GOAL-INITIAL-001",
+        "old_hash": null,
+        "new_hash": "93956023576b249855e412256fe58f745aa1fccf5fe1670617fef3f9ba6084b8",
+        "change_control_id": "INITIAL_LOCK",
+        "approval_status": "APPROVED_BY_USER"
+      }
+    ]
+  },
+  "deliverable_lock": {
+    "status": "LOCKED",
+    "deliverables": [
+      {
+        "name": "공개 배포용 GABA 안내서 및 품질 검증 패킷",
+        "primary_user": "일반 소비자, GABA 자료를 활용하는 사업자, 사이트 운영자",
+        "usage_context": "https://kradavid.github.io/gaba_info/ 공개 페이지를 읽고 공유하거나 배포 전 품질을 확인할 때 사용",
+        "format": "React/Vite 정적 사이트, 연구 결과 시각화 카드, 출처 연결 콘텐츠, NAVI 상태·감사·레드팀 기록",
+        "required_sections_or_features": [
+          "첫 화면에서 수면·회복과 GABA 안내 목적을 이해할 수 있는 히어로",
+          "발견의 역사에서 연구 확장, 일상, 수면, 활용, 발효·안전, 출처로 이어지는 자연스러운 흐름",
+          "인지·피부·근육·성장호르몬·면역 5개 연구 영역 지도와 연구 카드",
+          "연구 대상·관찰 결과·해석·출처를 한 화면에서 읽는 도표형 카드",
+          "전문가 영상 선택 즉시 재생, 출처 링크, 공유 흐름",
+          "390px 모바일 대응, 가로 넘침 방지, 메뉴·공유 버튼의 실제 상태 변경",
+          "제품 광고·구매 유도와 분리된 과학 정보 안내 문구"
+        ],
+        "required_data": [
+          "승인된 공개 연구 인덱스와 소비자용 요약",
+          "연구 카드의 출처·PMID/원문 링크",
+          "타입체크·테스트·빌드·성능·정적 번들·라이브 검증 결과",
+          "데스크톱·모바일 렌더와 핵심 상호작용 결과"
+        ],
+        "quality_requirements": [
+          "자연스러운 한국어와 큰 글자 중심의 가독성",
+          "제품 독립적이고 과장 없는 공개 과학 안내",
+          "출처와 연구 결과의 구분, 관찰 결과와 해석의 구분",
+          "정적 사이트 성능 예산과 접근성 계약 유지",
+          "자동 검증을 재실행할 수 있는 명령·증거·감사 기록"
+        ],
+        "acceptance_criteria": [
+          {
+            "id": "AC-001",
+            "statement": "공개 URL이 200으로 응답하고 올바른 제목·히어로·정적 번들을 제공한다."
+          },
+          {
+            "id": "AC-002",
+            "statement": "연구 확장 섹션에 5개 연구 영역과 5개 상세 카드가 데스크톱·모바일에서 표시된다."
+          },
+          {
+            "id": "AC-003",
+            "statement": "연구 결과가 비교 조건·GABA 조건·핵심 결과·출처와 함께 도표로 이해된다."
+          },
+          {
+            "id": "AC-004",
+            "statement": "390px 화면에서 가로 넘침이 없고 메뉴 상호작용이 실제 열린 상태로 변한다."
+          },
+          {
+            "id": "AC-005",
+            "statement": "타입체크, 127개 테스트, 공개 카피·UI·정적 번들·성능 검사가 통과한다."
+          },
+          {
+            "id": "AC-006",
+            "statement": "제품 독립적 과학 정보라는 경계와 연구 출처 연결이 공개 화면에 유지된다."
+          },
+          {
+            "id": "AC-007",
+            "statement": "감사와 레드팀이 실행 역할과 분리되어 잔여 위험·추가 검증 조건을 기록한다."
+          }
+        ],
+        "prohibited_content_or_behavior": [
+          "검증되지 않은 효능·치료·성장·치매 예방의 단정",
+          "제품 구매, 상담, 판매 전환을 공개 과학 안내의 핵심 CTA로 사용하는 것",
+          "실제 연구 결과를 임의로 확대하거나 비교 도표를 효과 크기로 오인하게 만드는 표현",
+          "연구 원문으로 이동하기 전 흐름을 끊는 불필요한 메뉴형 중간 화면"
+        ],
+        "definition_of_done": [
+          "위 기준에 대한 실행 증거가 EVIDENCE_REGISTER에 연결된다.",
+          "코드 변경이 필요하면 보완 후 동일 QA를 재실행한다.",
+          "독립 감사·레드팀 결과와 남은 외부 검증을 상태에 기록한다.",
+          "사용자 결정이 필요한 잔여 위험을 숨기지 않고 공개 배포 상태와 구분한다."
+        ]
+      }
+    ],
+    "locked_at": "2026-10-02T08:06:57Z",
+    "lock_hash": "8b2e0e7dbe5c5e1dfafab24955a66b9cdb1939f9e8c914b99f3c73a0f05bb0fc",
+    "lock_history": [
+      {
+        "id": "LH-DELIVERABLE-INITIAL-001",
+        "old_hash": null,
+        "new_hash": "8b2e0e7dbe5c5e1dfafab24955a66b9cdb1939f9e8c914b99f3c73a0f05bb0fc",
+        "change_control_id": "INITIAL_LOCK",
+        "approval_status": "APPROVED_BY_USER"
+      }
+    ]
+  },
+  "coverage": [
+    {
+      "area": "Technology",
+      "status": "CHECKED",
+      "rationale": "React/Vite 타입·빌드·정적 라우트 검증",
+      "evidence_refs": [
+        "E-LOCAL-TYPECHECK",
+        "E-LOCAL-BUILD"
+      ],
+      "owner": "프런트엔드 QA"
+    },
+    {
+      "area": "Product",
+      "status": "CHECKED",
+      "rationale": "제품 광고와 공개 과학 안내의 경계 확인",
+      "evidence_refs": [
+        "E-RESEARCH-COPY"
+      ],
+      "owner": "콘텐츠 QA"
+    },
+    {
+      "area": "User",
+      "status": "CHECKED",
+      "rationale": "소비자 흐름·가독성·모바일 화면 확인",
+      "evidence_refs": [
+        "E-CDP-DESKTOP",
+        "E-CDP-MOBILE"
+      ],
+      "owner": "UX QA"
+    },
+    {
+      "area": "Market",
+      "status": "NOT_APPLICABLE",
+      "rationale": "시장 규모나 판매 의사결정이 범위가 아님",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Competitors",
+      "status": "NOT_APPLICABLE",
+      "rationale": "경쟁사 비교를 하지 않는 공개 안내서",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Science",
+      "status": "EXTERNAL_REVIEW",
+      "rationale": "공개 연구 요약은 자동 검증했으나 독립 과학 감수는 별도 게이트",
+      "evidence_refs": [
+        "E-RESEARCH-COPY",
+        "E-REDTEAM-REVIEW"
+      ],
+      "owner": "외부 과학 감수 필요"
+    },
+    {
+      "area": "Data",
+      "status": "CHECKED",
+      "rationale": "공개 인덱스·카피·번들 간 정합성 확인",
+      "evidence_refs": [
+        "E-LOCAL-BUILD"
+      ],
+      "owner": "데이터 QA"
+    },
+    {
+      "area": "Regulation",
+      "status": "EXTERNAL_REVIEW",
+      "rationale": "건강·과학 정보의 공개 표현에 독립 규제 검토 필요",
+      "evidence_refs": [
+        "E-REDTEAM-REVIEW"
+      ],
+      "owner": "외부 검토 필요"
+    },
+    {
+      "area": "Legal",
+      "status": "EXTERNAL_REVIEW",
+      "rationale": "법률 의견이나 광고 적합성 판정은 자동 QA 범위 밖",
+      "evidence_refs": [
+        "E-REDTEAM-REVIEW"
+      ],
+      "owner": "외부 검토 필요"
+    },
+    {
+      "area": "IP",
+      "status": "NOT_APPLICABLE",
+      "rationale": "신규 지식재산권 판단을 하지 않음",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Finance",
+      "status": "NOT_APPLICABLE",
+      "rationale": "비용·매출·가격을 결정하지 않음",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Cost",
+      "status": "NOT_APPLICABLE",
+      "rationale": "비용 산정이 목표가 아님",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Manufacturing",
+      "status": "NOT_APPLICABLE",
+      "rationale": "제조 공정을 다루지 않음",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Supply Chain",
+      "status": "NOT_APPLICABLE",
+      "rationale": "공급망 실행을 다루지 않음",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Quality",
+      "status": "CHECKED",
+      "rationale": "콘텐츠·코드·정적 번들 품질을 점검",
+      "evidence_refs": [
+        "E-LOCAL-TESTS",
+        "E-LOCAL-BUILD"
+      ],
+      "owner": "QA"
+    },
+    {
+      "area": "Distribution",
+      "status": "CHECKED",
+      "rationale": "GitHub Pages 라이브 공개 응답과 번들 확인",
+      "evidence_refs": [
+        "E-LIVE-PUBLIC"
+      ],
+      "owner": "배포 QA"
+    },
+    {
+      "area": "Sales",
+      "status": "NOT_APPLICABLE",
+      "rationale": "판매 전환을 목표로 하지 않음",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Marketing",
+      "status": "CHECKED",
+      "rationale": "사업자 활용을 고려하되 제품 광고와 분리",
+      "evidence_refs": [
+        "E-RESEARCH-COPY"
+      ],
+      "owner": "콘텐츠 QA"
+    },
+    {
+      "area": "Operations",
+      "status": "CHECKED",
+      "rationale": "배포·검증·복구 절차가 저장소에 존재",
+      "evidence_refs": [
+        "E-LIVE-PUBLIC"
+      ],
+      "owner": "운영 QA"
+    },
+    {
+      "area": "People",
+      "status": "EXTERNAL_REVIEW",
+      "rationale": "실제 고령 사용자 독해성은 사용자 테스트 필요",
+      "evidence_refs": [
+        "E-CDP-MOBILE",
+        "E-REDTEAM-REVIEW"
+      ],
+      "owner": "사용자 테스트 필요"
+    },
+    {
+      "area": "Contracts",
+      "status": "NOT_APPLICABLE",
+      "rationale": "계약을 체결하거나 검토하지 않음",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Tax",
+      "status": "NOT_APPLICABLE",
+      "rationale": "세무를 다루지 않음",
+      "evidence_refs": [],
+      "owner": "범위 제외"
+    },
+    {
+      "area": "Security",
+      "status": "CHECKED",
+      "rationale": "공개 번들에서 비공개 운영 자료 제외 확인",
+      "evidence_refs": [
+        "E-LOCAL-BUILD"
+      ],
+      "owner": "보안 QA"
+    },
+    {
+      "area": "Risk",
+      "status": "CHECKED",
+      "rationale": "잔여 위험과 외부 검증 게이트 기록",
+      "evidence_refs": [
+        "E-REDTEAM-REVIEW"
+      ],
+      "owner": "NAVI"
+    },
+    {
+      "area": "Execution",
+      "status": "CHECKED",
+      "rationale": "자동 점검 명령과 결과를 재현",
+      "evidence_refs": [
+        "E-LOCAL-TESTS",
+        "E-CDP-MOBILE"
+      ],
+      "owner": "QA"
+    },
+    {
+      "area": "Post-launch",
+      "status": "EXTERNAL_REVIEW",
+      "rationale": "실제 사용자 반응·브라우저 전체 조합은 공개 후 관찰 필요",
+      "evidence_refs": [
+        "E-LIVE-PUBLIC",
+        "E-REDTEAM-REVIEW"
+      ],
+      "owner": "운영자"
+    }
+  ],
+  "workstreams": [
+    {
+      "id": "WS-001-CONTENT",
+      "capabilities": [
+        "콘텐츠·근거 검토"
+      ],
+      "outputs": [
+        "공개 카피·연구 카드·출처 경계"
+      ],
+      "dependencies": [
+        "D-001"
+      ],
+      "verification": [
+        "E-RESEARCH-COPY"
+      ],
+      "owner": "콘텐츠 QA",
+      "status": "DONE"
+    },
+    {
+      "id": "WS-002-FRONTEND",
+      "capabilities": [
+        "React/Vite UX",
+        "반응형 설계"
+      ],
+      "outputs": [
+        "첫 화면·연구 확장·모바일 레이아웃"
+      ],
+      "dependencies": [
+        "D-003"
+      ],
+      "verification": [
+        "E-LOCAL-TYPECHECK",
+        "E-LOCAL-BUILD"
+      ],
+      "owner": "프런트엔드",
+      "status": "DONE"
+    },
+    {
+      "id": "WS-003-UI-QA",
+      "capabilities": [
+        "렌더·상호작용 QA"
+      ],
+      "outputs": [
+        "1440px·390px·메뉴 상태 검증"
+      ],
+      "dependencies": [
+        "D-003"
+      ],
+      "verification": [
+        "E-CDP-DESKTOP",
+        "E-CDP-MOBILE"
+      ],
+      "owner": "UX QA",
+      "status": "DONE_WITH_CONDITIONS"
+    },
+    {
+      "id": "WS-004-DEPLOY",
+      "capabilities": [
+        "배포·운영 검증"
+      ],
+      "outputs": [
+        "GitHub Pages 공개 번들·라이브 검증"
+      ],
+      "dependencies": [
+        "D-002"
+      ],
+      "verification": [
+        "E-LIVE-PUBLIC"
+      ],
+      "owner": "배포 QA",
+      "status": "DONE"
+    },
+    {
+      "id": "WS-005-REVIEW",
+      "capabilities": [
+        "독립 감사·레드팀"
+      ],
+      "outputs": [
+        "감사 보고서·잔여 위험·다음 게이트"
+      ],
+      "dependencies": [
+        "D-004",
+        "D-005"
+      ],
+      "verification": [
+        "E-REDTEAM-REVIEW"
+      ],
+      "owner": "NAVI",
+      "status": "DONE_WITH_CONDITIONS"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A-001",
+      "statement": "현재 저장소와 GitHub Pages 공개 URL이 실행 대상이다.",
+      "type": "FACT",
+      "status": "VALIDATED",
+      "evidence_refs": [
+        "E-LIVE-PUBLIC"
+      ]
+    },
+    {
+      "id": "A-002",
+      "statement": "공개 번들은 제품 구매 안내가 아닌 GABA 과학 정보 안내 흐름이다.",
+      "type": "FACT",
+      "status": "VALIDATED",
+      "evidence_refs": [
+        "E-RESEARCH-COPY"
+      ]
+    },
+    {
+      "id": "A-003",
+      "statement": "Chrome CDP 1440px·390px 렌더가 대표 화면을 점검하는 기준이다.",
+      "type": "ASSUMPTION",
+      "status": "OPEN",
+      "evidence_refs": [
+        "E-CDP-DESKTOP",
+        "E-CDP-MOBILE"
+      ]
+    },
+    {
+      "id": "U-001",
+      "statement": "Safari, iOS Safari, Android Chrome의 폰트·이미지·sticky header 차이는 확인하지 않았다.",
+      "type": "UNKNOWN",
+      "status": "OPEN",
+      "evidence_refs": [
+        "E-REDTEAM-REVIEW"
+      ]
+    },
+    {
+      "id": "U-002",
+      "statement": "고령 사용자의 실제 독해 시간·회상률·연구 도표 이해도는 사용자 테스트로 확인하지 않았다.",
+      "type": "UNKNOWN",
+      "status": "OPEN",
+      "evidence_refs": [
+        "E-REDTEAM-REVIEW"
+      ]
+    },
+    {
+      "id": "U-003",
+      "statement": "공개 과학·건강 표현에 대한 독립 과학·규제 감수는 자동화된 QA로 대체할 수 없다.",
+      "type": "EXTERNAL_VALIDATION_REQUIRED",
+      "status": "OPEN",
+      "evidence_refs": [
+        "E-REDTEAM-REVIEW"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "D-001",
+      "statement": "승인된 공개 연구 인덱스와 소비자 카피가 연구 카드에 연결되어야 한다.",
+      "status": "RESOLVED",
+      "owner": "콘텐츠 QA"
+    },
+    {
+      "id": "D-002",
+      "statement": "main 배포와 라이브 검증이 공개 URL을 확인해야 한다.",
+      "status": "RESOLVED",
+      "owner": "배포 QA"
+    },
+    {
+      "id": "D-003",
+      "statement": "타입체크와 성능 예산이 통과되어야 정적 번들을 배포할 수 있다.",
+      "status": "RESOLVED",
+      "owner": "프런트엔드"
+    },
+    {
+      "id": "D-004",
+      "statement": "Safari/iOS/Android 대표 화면 검증 환경이 필요하다.",
+      "status": "OPEN",
+      "owner": "UX QA"
+    },
+    {
+      "id": "D-005",
+      "statement": "공개 과학 표현을 외부 검토할 독립 reviewer가 필요하다.",
+      "status": "OPEN",
+      "owner": "콘텐츠 책임자"
+    }
+  ],
+  "audit": {
+    "status": "PASS_WITH_CONDITIONS",
+    "findings": [
+      {
+        "id": "AUD-001",
+        "severity": "MINOR",
+        "status": "OPEN",
+        "statement": "Browser 플러그인과 실기기 전체 조합은 확인하지 못했다.",
+        "evidence_refs": [
+          "E-CDP-DESKTOP",
+          "E-CDP-MOBILE"
+        ],
+        "impact": "브라우저별 시각 차이가 남을 수 있다.",
+        "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
+        "owner": "QA"
+      },
+      {
+        "id": "AUD-002",
+        "severity": "MAJOR",
+        "status": "OPEN",
+        "statement": "자동 카피 검사는 독립 과학·규제 적합성 판정을 대신하지 못한다.",
+        "evidence_refs": [
+          "E-RESEARCH-COPY",
+          "E-REDTEAM-REVIEW"
+        ],
+        "impact": "공개 표현의 외부 적합성이 확정되지 않는다.",
+        "required_action": "독립 과학·규제 감수 증거 등록",
+        "owner": "콘텐츠 책임자"
+      },
+      {
+        "id": "AUD-003",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "연구 확장 지도와 결과 도표가 두 대표 화면 크기에서 자연스럽게 읽힌다.",
+        "evidence_refs": [
+          "E-CDP-DESKTOP",
+          "E-CDP-MOBILE"
+        ],
+        "impact": "현재 구현은 목표 화면에서 usable하다.",
+        "required_action": "변경 시 동일 QA 재실행",
+        "owner": "프런트엔드"
+      }
+    ],
+    "independent_from_execution": true,
+    "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
+    "last_run_at": "2026-10-02T08:06:57Z"
+  },
+  "red_team": {
+    "status": "PASS_WITH_CONDITIONS",
+    "findings": [
+      {
+        "id": "RT-001",
+        "severity": "MAJOR",
+        "status": "OPEN",
+        "statement": "Chrome 기반 대표 화면만으로 모든 브라우저·실기기를 보장할 수 없다.",
+        "evidence_refs": [
+          "E-CDP-DESKTOP",
+          "E-CDP-MOBILE"
+        ],
+        "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
+        "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
+        "owner": "QA"
+      },
+      {
+        "id": "RT-002",
+        "severity": "MAJOR",
+        "status": "OPEN",
+        "statement": "연구 결과 문장이 외부 공유 과정에서 효능 단정으로 재해석될 수 있다.",
+        "evidence_refs": [
+          "E-RESEARCH-COPY",
+          "E-REDTEAM-REVIEW"
+        ],
+        "impact": "과학 정보가 제품 효능처럼 확산될 수 있다.",
+        "required_action": "독립 과학·규제 감수와 공유 카피 변경 감시",
+        "owner": "콘텐츠 책임자"
+      },
+      {
+        "id": "RT-003",
+        "severity": "MINOR",
+        "status": "OPEN",
+        "statement": "실제 고령 사용자의 독해성은 화면 크기만으로 증명되지 않는다.",
+        "evidence_refs": [
+          "E-CDP-MOBILE",
+          "E-REDTEAM-REVIEW"
+        ],
+        "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
+        "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
+        "owner": "UX QA"
+      }
+    ],
+    "independent_from_execution": true,
+    "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
+    "last_run_at": "2026-10-02T08:06:57Z"
+  },
+  "risk_controls": {
+    "schema_version": "0.1.0",
+    "assessed_input_sha256": "e0751538977a28826415a60f818cdd44d7de73405b8225e360cfc99ea6e8eb0a",
+    "detected_domains": [
+      "FINANCIAL",
+      "LEGAL",
+      "PRODUCTION",
+      "REGULATORY",
+      "SAFETY",
+      "SECURITY"
+    ],
+    "required_controls": [
+      "EXTERNAL_VALIDATION",
+      "INDEPENDENT_REVIEW",
+      "USER_APPROVAL"
+    ],
+    "user_approval_required": true,
+    "user_approval_status": "APPROVED",
+    "approval_authority": "현재 사용자",
+    "approval_evidence_refs": [
+      "E-USER-AUTO-UPDATE"
+    ],
+    "execution_blocked": false,
+    "notes": "Automatic classification is a conservative control trigger, not a truth judgment."
+  },
+  "external_validation": {
+    "status": "REQUIRED",
+    "requirements": [
+      "독립 과학 감수자의 공개 연구 카피 검토",
+      "건강·광고 표현의 독립 규제 검토",
+      "Safari/iOS/Android 대표 환경 또는 실기기 QA"
+    ],
+    "evidence_refs": [],
+    "reviewer_id": null,
+    "completed_at": null,
+    "decision_reason": "자동화된 사이트 품질 검증은 통과했지만 공개 과학 표현과 브라우저 전체 품질은 외부 검증이 필요하다.",
+    "decision_authority": "독립 과학·규제 reviewer 또는 실제 브라우저 QA 담당자",
+    "requirement_locked": true
+  },
+  "completion": {
+    "ready_for_completion": false,
+    "user_approval_required": true,
+    "user_approved": false,
+    "auto_completion_condition_met": false,
+    "auto_completion_condition": null,
+    "auto_completion_evidence": [],
+    "blocking_unknowns": [
+      "U-001",
+      "U-002",
+      "U-003"
+    ],
+    "criteria_results": [
+      {
+        "criterion_id": "AC-001",
+        "status": "PASS",
+        "evidence_refs": [
+          "E-LIVE-PUBLIC"
+        ],
+        "notes": "라이브 200과 제목·히어로·정적 번들 확인"
+      },
+      {
+        "criterion_id": "AC-002",
+        "status": "PASS",
+        "evidence_refs": [
+          "E-CDP-DESKTOP",
+          "E-CDP-MOBILE"
+        ],
+        "notes": "연구 영역 5개와 상세 카드 5개 확인"
+      },
+      {
+        "criterion_id": "AC-003",
+        "status": "PASS",
+        "evidence_refs": [
+          "E-CDP-DESKTOP"
+        ],
+        "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
+      },
+      {
+        "criterion_id": "AC-004",
+        "status": "PASS",
+        "evidence_refs": [
+          "E-CDP-MOBILE"
+        ],
+        "notes": "390px 가로 넘침 없음, 메뉴 열린 상태 확인"
+      },
+      {
+        "criterion_id": "AC-005",
+        "status": "PASS",
+        "evidence_refs": [
+          "E-LOCAL-TYPECHECK",
+          "E-LOCAL-TESTS",
+          "E-LOCAL-BUILD"
+        ],
+        "notes": "타입체크·127개 테스트·공개 검사·성능 예산 통과"
+      },
+      {
+        "criterion_id": "AC-006",
+        "status": "PASS",
+        "evidence_refs": [
+          "E-RESEARCH-COPY"
+        ],
+        "notes": "제품 독립 과학 정보 경계와 연구 출처 연결 유지"
+      },
+      {
+        "criterion_id": "AC-007",
+        "status": "PASS_WITH_CONDITIONS",
+        "evidence_refs": [
+          "E-REDTEAM-REVIEW"
+        ],
+        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음"
+      }
+    ],
+    "final_status": "NOT_READY"
+  },
+  "change_control": [],
+  "history": [
+    {
+      "id": "H-001",
+      "event": "프로젝트 루트와 공개 배포 범위를 확인했다.",
+      "from_status": "NEW",
+      "to_status": "DISCOVERY",
+      "recorded_at": "2026-10-02T08:00:00Z"
+    },
+    {
+      "id": "H-002",
+      "event": "GABA 공개 안내서 공개 배포 품질 목표를 사용자 요청에 따라 잠갔다.",
+      "from_status": "DISCOVERY",
+      "to_status": "GOAL_LOCK",
+      "recorded_at": "2026-10-02T08:06:57Z"
+    },
+    {
+      "id": "H-003",
+      "event": "사이트와 검증 패킷의 기능·품질·금지 조건을 잠갔다.",
+      "from_status": "GOAL_LOCK",
+      "to_status": "DELIVERABLE_LOCK",
+      "recorded_at": "2026-10-02T08:06:57Z"
+    },
+    {
+      "id": "H-004",
+      "event": "coverage, workstream, dependency, evidence 구조를 만들었다.",
+      "from_status": "DELIVERABLE_LOCK",
+      "to_status": "ARCHITECTED",
+      "recorded_at": "2026-10-02T08:06:57Z"
+    },
+    {
+      "id": "H-005",
+      "event": "자동 검증 명령과 대표 렌더 검증 계획을 확정했다.",
+      "from_status": "ARCHITECTED",
+      "to_status": "PLANNED",
+      "recorded_at": "2026-10-02T08:06:57Z"
+    },
+    {
+      "id": "H-006",
+      "event": "정적·실행·라이브·시각·상호작용 QA를 실행했다.",
+      "from_status": "PLANNED",
+      "to_status": "EXECUTING",
+      "recorded_at": "2026-10-02T08:06:57Z"
+    },
+    {
+      "id": "H-007",
+      "event": "코드 결함 없이 자동 검증과 대표 화면 검증을 마치고 감사로 이동했다.",
+      "from_status": "EXECUTING",
+      "to_status": "AUDITING",
+      "recorded_at": "2026-10-02T08:06:57Z"
+    },
+    {
+      "id": "H-008",
+      "event": "실행 역할과 분리된 감사에서 통과 조건과 잔여 위험을 기록했다.",
+      "from_status": "AUDITING",
+      "to_status": "RED_TEAM",
+      "recorded_at": "2026-10-02T08:06:57Z"
+    },
+    {
+      "id": "H-009",
+      "event": "레드팀이 브라우저·과학 카피·고령 사용자 검증의 미확정 사항을 식별해 사용자 결정으로 보냈다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-02T08:06:57Z"
+    }
+  ]
+}
