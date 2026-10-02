@@ -135,6 +135,10 @@ requireMatch(publicGuideStyles, /\.gaba-guide\{overflow:clip\}/, 'public GABA gu
 requireMatch(publicGuideStyles, /\.guide-research-detail\{scroll-margin-top:116px\}/, 'public GABA research detail must clear the sticky header and reading progress bar after a deep-link jump');
 requireMatch(publicGuideStyles, /@media \(max-width:700px\)\{[\s\S]*?\.guide-research-detail\{scroll-margin-top:106px\}/, 'public GABA mobile research detail must clear the 70px header and reading progress bar after a deep-link jump');
 requireMatch(publicGuide, /const target = document\.getElementById\(id\);[\s\S]*?window\.scrollTo\(\{ top: target\.offsetTop - 116, behavior \}\)/, 'public GABA section anchors must clear the sticky header and reading progress bar');
+requireMatch(publicGuide, /guide-reading-progress[\s\S]*?role="progressbar"[\s\S]*?aria-valuemin=\{0\}[\s\S]*?aria-valuemax=\{readingChapters\.length\}[\s\S]*?aria-valuenow=\{Math\.max\(0, activeChapterIndex \+ 1\)\}/, 'public GABA reading progress must expose the current chapter to assistive technology');
+requireMatch(publicGuideStyles, /\.guide-reading-progress-track\{height:3px;background:/, 'public GABA reading progress must keep a visible three-pixel track');
+requireMatch(publicGuideStyles, /@media\(max-width:700px\)\{[\s\S]*?\.guide-reading-progress-meta\{width:[^}]*min-height:32px/, 'public GABA mobile reading progress must remain legible without wrapping');
+requireMatch(publicGuideStyles, /\.guide-reading-progress-meta strong\{font-size:13px\}/, 'public GABA reading progress chapter label must remain readable');
 requireMatch(publicGuideStyles, /@media \(max-width:700px\)\{[\s\S]*?\.guide-header nav\{top:70px/, 'public GABA mobile menu must begin below its 70px header');
 requireMatch(publicGuideStyles, /\.guide-library-filters\{grid-template-columns:1fr\}/, 'public GABA mobile research filters must remain one readable column');
 if (/대표 연구 보기|대표 논문 먼저 보기|궁금한 연구를\s*직접 확인해 보세요|href="#library"/.test(publicGuide)) fail('public GABA guide must keep research summaries in the reading flow instead of jump links');
