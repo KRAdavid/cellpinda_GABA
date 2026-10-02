@@ -282,7 +282,7 @@
 .guide-outcome-summary>span{display:flex;align-items:center;gap:6px;color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:.06em}
 .guide-outcome-summary>span i{display:block;width:6px;height:6px;border-radius:50%;background:var(--guide-teal)}
 .guide-outcome-summary>strong{color:var(--guide-ink);font-size:14px;line-height:1.55;letter-spacing:-.045em;word-break:keep-all}
-.guide-outcome-comparison-head{display:grid;grid-template-columns:minmax(110px,.7fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:0 10px 8px;color:#9bb1bc;font-size:10px;font-weight:850;letter-spacing:-.02em}
+.guide-outcome-comparison-head{display:grid;grid-template-columns:minmax(110px,.7fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:0 10px 8px;color:#9bb1bc;font-size:11px;font-weight:850;letter-spacing:-.02em}
 .guide-outcome-comparison-head>span:not(:first-child){display:flex;align-items:center;justify-content:center;gap:5px;text-align:center}
 .guide-outcome-comparison-head>span.is-reference{color:#6c8795}
 .guide-outcome-comparison-head>span.is-result{color:var(--guide-teal-dark)}
@@ -292,12 +292,12 @@
 .guide-outcome-comparison-row{display:grid;grid-template-columns:minmax(110px,.7fr) minmax(0,1.3fr);gap:12px;align-items:center;padding:14px 12px;border-radius:14px;background:#f6fbfc}
 .guide-outcome-comparison-metric{display:grid;gap:5px;min-width:0}
 .guide-outcome-comparison-metric>strong{color:#38566a;font-size:14px;line-height:1.35;letter-spacing:-.045em;word-break:keep-all}
-.guide-outcome-comparison-metric>small{color:#9bb1bc;font-size:10px;font-weight:750;letter-spacing:-.02em}
+.guide-outcome-comparison-metric>small{color:#9bb1bc;font-size:11px;font-weight:750;letter-spacing:-.02em}
 .guide-outcome-lanes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;min-width:0}
 .guide-outcome-lane{display:grid;gap:7px;min-width:0;padding:11px 12px;border:1px solid #d9e8ec;border-radius:11px;background:#fff}
 .guide-outcome-lane.is-result{border-color:#a9dfe0;background:#f7ffff}
 .guide-outcome-lane-top{display:grid;gap:5px;min-width:0}
-.guide-outcome-lane-top>span{color:#6b8495;font-size:10px;font-weight:850;line-height:1.2;letter-spacing:-.03em}
+.guide-outcome-lane-top>span{color:#6b8495;font-size:11px;font-weight:850;line-height:1.2;letter-spacing:-.03em}
 .guide-outcome-lane.is-result .guide-outcome-lane-top>span{color:var(--guide-teal-dark)}
 .guide-outcome-lane-top>strong{min-height:2.65em;color:#38566a;font-size:12px;font-weight:850;line-height:1.35;letter-spacing:-.045em;word-break:keep-all}
 .guide-outcome-lane.is-result .guide-outcome-lane-top>strong{color:#126f73}
@@ -345,11 +345,11 @@
   .guide-outcome-comparison-row{grid-template-columns:1fr;gap:9px;padding:13px 9px}
   .guide-outcome-comparison-metric{gap:3px}
   .guide-outcome-comparison-metric>strong{font-size:15px}
-  .guide-outcome-comparison-metric>small{font-size:10px}
+.guide-outcome-comparison-metric>small{font-size:11px}
   .guide-outcome-lanes{grid-template-columns:1fr;gap:7px}
   .guide-outcome-lane{gap:7px;padding:11px 12px}
   .guide-outcome-lane-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-  .guide-outcome-lane-top>span{font-size:10px;flex:0 0 auto}
+  .guide-outcome-lane-top>span{font-size:11px;flex:0 0 auto}
   .guide-outcome-lane-top>strong{min-height:0;font-size:13px;text-align:right}
   .guide-outcome-lane>i{height:8px}
   .guide-outcome-metric{min-height:102px;padding:12px}
@@ -420,7 +420,7 @@
 .guide-video-feature-copy>a{display:inline-flex;align-items:center;gap:5px;margin-top:24px;color:#9ce0de;font-size:12px;font-weight:850;text-decoration:none}
 .guide-video-feature-copy>a:hover{text-decoration:underline;text-underline-offset:3px}
 .guide-video-board{padding:16px;border:1px solid #dbe9ef;border-radius:20px;background:#f7fbfd}
-.guide-video-board-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 3px 12px;color:#8aa2b1;font-size:10px;font-weight:900;letter-spacing:.16em}
+.guide-video-board-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 3px 12px;color:#8aa2b1;font-size:11px;font-weight:900;letter-spacing:.16em}
 .guide-video-board-head strong{color:var(--guide-teal-dark);font-size:11px;letter-spacing:-.03em}
 .guide-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .guide-video-card{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;min-width:0;padding:9px;border:1px solid #dce9ef;border-radius:13px;background:#fff;color:var(--guide-ink);text-align:left;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
@@ -430,7 +430,7 @@
 .guide-video-card-thumb img{display:block;width:100%;height:100%;object-fit:cover}
 .guide-video-card-play{position:absolute;right:6px;bottom:6px;display:flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;background:rgba(19,47,86,.88);color:#fff}
 .guide-video-card-copy{display:flex;flex-direction:column;min-width:0;padding:3px 1px 2px}
-.guide-video-card-copy>span{color:var(--guide-teal-dark);font-size:10px;font-weight:850;letter-spacing:-.03em}
+.guide-video-card-copy>span{color:var(--guide-teal-dark);font-size:11px;font-weight:850;letter-spacing:-.03em}
 .guide-video-card-copy strong{display:block;margin-top:9px;color:var(--guide-ink);font-size:14px;line-height:1.38;letter-spacing:-.055em;overflow-wrap:anywhere}
 .guide-video-card-copy small{display:block;margin-top:auto;color:#8aa0af;font-size:10px;line-height:1.4;letter-spacing:-.04em;overflow-wrap:anywhere}
 .guide-video-gallery-note{display:block;margin-top:16px;padding:15px 18px;color:#6b8396;font-size:13px;line-height:1.7}
