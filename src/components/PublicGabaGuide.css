@@ -787,3 +787,48 @@
   .guide-header nav a[aria-current="page"]{border-radius:9px;background:#eef8f8;color:var(--guide-teal-dark);font-weight:850}
   .guide-header nav a[aria-current="page"]:after{right:auto;bottom:50%;left:0;width:3px;height:20px;transform:translateY(50%)}
 }
+
+/* v18 reading control: let older readers enlarge explanatory copy without changing the editorial rhythm. */
+.guide-reading-size-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 11px;border:1px solid #d7e7ec;border-radius:12px;background:#fff;color:#526f84;font-size:11px;font-weight:850;letter-spacing:-.04em;white-space:nowrap;transition:background .18s ease,border-color .18s ease,color .18s ease}
+.guide-reading-size-toggle:hover,.guide-reading-size-toggle:focus-visible{border-color:#82caca;color:var(--guide-teal-dark)}
+.guide-reading-size-toggle.is-active{border-color:#92d6d5;background:#eefafa;color:var(--guide-teal-dark)}
+.gaba-guide.is-large-text .guide-hero-body,
+.gaba-guide.is-large-text .guide-editorial-note,
+.gaba-guide.is-large-text .guide-section-lead,
+.gaba-guide.is-large-text .guide-opening-bridge-grid p,
+.gaba-guide.is-large-text .guide-opening-bridge-source p,
+.gaba-guide.is-large-text .guide-history-copy p,
+.gaba-guide.is-large-text .guide-definition-card p,
+.gaba-guide.is-large-text .guide-sleep-steps p,
+.gaba-guide.is-large-text .guide-recovery-card-copy>p:last-child,
+.gaba-guide.is-large-text .guide-recovery-next>p:last-child,
+.gaba-guide.is-large-text .guide-research-detail-inline dd,
+.gaba-guide.is-large-text .guide-application-card>p,
+.gaba-guide.is-large-text .guide-application-card>strong,
+.gaba-guide.is-large-text .guide-fermented-step p,
+.gaba-guide.is-large-text .guide-growth-note,
+.gaba-guide.is-large-text .guide-video-gallery-lead,
+.gaba-guide.is-large-text .guide-expert-note,
+.gaba-guide.is-large-text .guide-reading-note-copy,
+.gaba-guide.is-large-text .guide-final-copy{font-size:calc(1em * 1.08)}
+.gaba-guide.is-large-text .guide-summary-grid p{font-size:calc(1em * 1.08)}
+@media(max-width:700px){
+  .guide-reading-size-toggle{min-height:44px;padding:0 9px;font-size:11px}
+  .gaba-guide.is-large-text .guide-hero-body,
+  .gaba-guide.is-large-text .guide-section-lead,
+  .gaba-guide.is-large-text .guide-opening-bridge-grid p,
+  .gaba-guide.is-large-text .guide-opening-bridge-source p,
+  .gaba-guide.is-large-text .guide-history-copy p,
+  .gaba-guide.is-large-text .guide-definition-card p,
+  .gaba-guide.is-large-text .guide-sleep-steps p,
+  .gaba-guide.is-large-text .guide-recovery-card-copy>p:last-child,
+  .gaba-guide.is-large-text .guide-research-detail-inline dd,
+  .gaba-guide.is-large-text .guide-application-card>p,
+  .gaba-guide.is-large-text .guide-fermented-step p,
+  .gaba-guide.is-large-text .guide-growth-note,
+  .gaba-guide.is-large-text .guide-video-gallery-lead,
+  .gaba-guide.is-large-text .guide-expert-note,
+  .gaba-guide.is-large-text .guide-reading-note-copy,
+  .gaba-guide.is-large-text .guide-final-copy{font-size:calc(1em * 1.06)}
+}
+@media(prefers-reduced-motion:reduce){.guide-reading-size-toggle{transition:none}}
