@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T12:17:14.051892Z",
+  "updated_at": "2026-10-02T12:47:54.629419Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -768,9 +768,11 @@
           "E-LIVE-PUBLIC-RELEASE",
           "E-DEPLOY-PIPELINE-RELEASE",
           "E-DEPLOY-PIPELINE-PROGRESS",
-          "E-LIVE-PUBLIC-PROGRESS"
+          "E-LIVE-PUBLIC-PROGRESS",
+          "E-DEPLOY-PIPELINE-FINAL",
+          "E-LIVE-PUBLIC-FINAL"
         ],
-        "notes": "최신 main 배포가 완료됐고 라이브 200·제목·히어로·정적 번들을 재확인"
+        "notes": "588f266 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -784,7 +786,9 @@
           "E-RELEASE-D7",
           "E-RELEASE-C13",
           "E-LOCAL-BUILD-PROGRESS",
-          "E-CDP-NAVIGATION-PROGRESS"
+          "E-CDP-NAVIGATION-PROGRESS",
+          "E-LOCAL-BUILD-FINAL",
+          "E-CDP-FINAL"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -794,7 +798,8 @@
         "evidence_refs": [
           "E-CDP-DESKTOP",
           "E-CDP-POLISH-FOLLOWUP",
-          "E-CDP-READABILITY-B7"
+          "E-CDP-READABILITY-B7",
+          "E-CDP-FINAL"
         ],
         "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
@@ -809,7 +814,8 @@
           "E-CDP-NAVIGATION-RELEASE",
           "E-RELEASE-D7",
           "E-RELEASE-C13",
-          "E-CDP-NAVIGATION-PROGRESS"
+          "E-CDP-NAVIGATION-PROGRESS",
+          "E-CDP-FINAL"
         ],
         "notes": "390px 가로 넘침 없음, 메뉴 열린 상태 확인"
       },
@@ -825,7 +831,8 @@
           "E-LOCAL-BUILD-RELEASE",
           "E-RELEASE-D7",
           "E-RELEASE-C13",
-          "E-LOCAL-BUILD-PROGRESS"
+          "E-LOCAL-BUILD-PROGRESS",
+          "E-LOCAL-BUILD-FINAL"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·성능 예산 통과"
       },
