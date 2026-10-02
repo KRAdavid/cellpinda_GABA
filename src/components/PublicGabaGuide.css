@@ -209,8 +209,7 @@
 .guide-hero-story h1 em{font-size:1.02em}
 .guide-history{background:#f7fbfd}
 .guide-history-heading{margin-bottom:22px}
-.guide-history-arc{display:grid;justify-items:end;color:#71899a;font-size:14px}
-.guide-history-arc:after{content:"1950—오늘";color:var(--guide-ink);font-size:12px;font-weight:900}
+.guide-history-arc{color:#71899a;text-align:right}
 .guide-history .guide-section-lead{max-width:66ch}
 .guide-history-timeline{display:grid;gap:0;max-width:900px;margin-top:42px}
 .guide-history-item{display:grid;grid-template-columns:112px minmax(0,1fr);gap:28px;min-height:148px}
@@ -257,7 +256,7 @@
   .guide-hero-story h1 span{font-size:.92em}
   .guide-hero-story h1 em{font-size:1em}
   .guide-history-item{grid-template-columns:67px minmax(0,1fr);gap:14px;min-height:0}
-  .guide-history-arc{justify-items:start;gap:10px;margin-top:19px;font-size:13px;line-height:1.6}
+  .guide-history-arc{margin-top:19px;font-size:13px;line-height:1.6;text-align:left}
   .guide-history-marker{font-size:13px}
   .guide-history-marker i{left:5px;top:27px;height:calc(100% - 5px)}
   .guide-history-copy{padding-bottom:30px}
