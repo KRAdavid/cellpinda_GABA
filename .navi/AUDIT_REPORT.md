@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — b3059b2 — 2026-10-03
+
+- 320–360px 초소형 모바일 헤더에서 메뉴·읽기 크기·공유 컨트롤을 아이콘형으로 압축하고 세 컨트롤의 최소 터치 영역을 44px로 고정했다. 390px에서는 기존 텍스트형 표현을 유지한다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 성능 `1648900 <= 1650000` bytes를 통과했다.
+- Chrome CDP 라이브 QA에서 320/360/390px 모두 버튼 간 수평 겹침 없음, 각 컨트롤 44px 이상, 읽기 버튼 접근성 라벨, `scrollWidth`가 뷰포트와 동일, `runtimeErrors []`를 확인했다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 대체 증거로 사용했다.
+- PR #34의 `release-verify`·`site-quality-verify`가 통과했고, GitHub Actions `37057405022`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했다. `deploy-worker`는 `STATIC_ONLY` 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `b3059b2e45b60af031bf174e07bff7f532906643`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly 및 provenance matched를 확인했다.
+- 이번 변경은 초소형 화면의 조작 가능성을 개선한 것이며, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수의 잔여 조건은 기존처럼 OPEN으로 유지한다.
+
 ## Latest Public Release Recheck — 0c464c1 — 2026-10-03
 
 - 공개 GABA 안내서 헤더에 `큰 글씨`·`기본 글씨` 토글을 추가해 모바일에서 본문 읽기 크기를 선택할 수 있게 했다. 선택 상태는 새로고침 후에도 유지되며 기본 글씨 상태의 레이아웃은 변경하지 않는다.
