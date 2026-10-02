@@ -11,6 +11,15 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 결과 비교 도표와 성장호르몬 상대 크기 막대, 출처 연결 구조
 - NAVI 목표·산출물·coverage·증거·감사·레드팀 기록
 
+## Latest Release Recheck — 79432de — 2026-10-03
+
+- 연구 확장 지도 아래에 `지도 → 대상 → 결과 → 해석` 읽기 순서를 표시해, 연구 영역을 선택하거나 다른 페이지로 이동하지 않고 바로 상세 카드로 이해하도록 흐름을 보완했다.
+- 로컬 타입체크·127개 테스트·production build·11개 정적 라우트·74개 번들·성능 `1649489 <= 1650000` bytes와 PR #38 필수 검사를 통과했다.
+- heartbeat PR #39 병합 후 main 배포 run `37065791706`의 release verification, fresh TF pulse, Pages 배포, 라이브 smoke, release status가 성공했다. `deploy-worker`는 `STATIC_ONLY`로 건너뛰었다.
+- 라이브 validator는 HTTP 200, candidate `79432dec5c57170a75e6bdaa07402fbbdd1dc494`, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외를 확인했다.
+- Chrome CDP 대체 시각 QA에서 1440px·390px 연구 지도와 연구 카드 전환을 확인했고 runtime errors `[]`였다. 320/360/390px 헤더의 기존 충돌·가로 넘침 없음과 큰 글씨 선택 유지도 보존됐다.
+- 외부 과학·규제 감수, Safari/iOS/Android 실기기, 실제 고령 사용자 테스트는 완료로 표시하지 않는다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`, NAVI 상태는 `USER_DECISION`을 유지한다.
+
 ## Latest Release Recheck — 713627f — 2026-10-03
 
 - 연구 확장 지도에 인지·피부·근육·성장호르몬·면역을 구분하는 의미 기반 선형 아이콘을 추가해 소비자가 다섯 영역을 연결 구조 안에서 빠르게 식별하도록 보완했다.
