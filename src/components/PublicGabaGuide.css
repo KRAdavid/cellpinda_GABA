@@ -609,6 +609,7 @@
   .guide-reading-progress-meta>span{font-size:8px;letter-spacing:.1em}
   .guide-reading-progress-meta strong{font-size:12px}
   .guide-reading-progress-meta small{font-size:9px}
+  .guide-section-heading .guide-section-number{display:block;color:var(--guide-teal-dark)}
   .guide-section-heading h2,.guide-hero h1{word-break:keep-all;overflow-wrap:anywhere}
   .guide-hero-story .guide-hero-body{word-break:keep-all}
 }
