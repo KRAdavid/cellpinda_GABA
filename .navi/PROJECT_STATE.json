@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T22:44:23.341560Z",
+  "updated_at": "2026-10-02T22:50:58.691068Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -579,7 +579,8 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-READING-PROGRESS",
         "E-LIVE-PUBLIC-READING-PROGRESS",
-        "E-LIVE-PUBLIC-NAVI-RELEASE"
+        "E-LIVE-PUBLIC-NAVI-RELEASE",
+        "E-LIVE-PUBLIC-NAVI-FINAL"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -741,7 +742,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T00:32:43Z"
+    "last_run_at": "2026-10-03T00:47:38Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -788,11 +789,11 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T00:32:43Z"
+    "last_run_at": "2026-10-03T00:47:38Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "d59d9b11f29305681985bb5e91da0b6e64926bdd2051b8fc00befe585025b19d",
+    "assessed_input_sha256": "c92a0cdaa811ae3040df90846a241b9da268a7390f1f2789b6bed8b57ca4a482",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -892,7 +893,8 @@
           "E-LOCAL-BUILD-READING-PROGRESS",
           "E-DEPLOY-PIPELINE-READING-PROGRESS",
           "E-LIVE-PUBLIC-READING-PROGRESS",
-          "E-LIVE-PUBLIC-NAVI-RELEASE"
+          "E-LIVE-PUBLIC-NAVI-RELEASE",
+          "E-LIVE-PUBLIC-NAVI-FINAL"
         ],
         "notes": "34807cb 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·차트 큰 글씨 체계를 재확인"
       },
@@ -1017,7 +1019,8 @@
           "E-DEPLOY-PIPELINE-ANCHOR-OFFSET",
           "E-LOCAL-BUILD-READING-PROGRESS",
           "E-DEPLOY-PIPELINE-READING-PROGRESS",
-          "E-LIVE-PUBLIC-NAVI-RELEASE"
+          "E-LIVE-PUBLIC-NAVI-RELEASE",
+          "E-LIVE-PUBLIC-NAVI-FINAL"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 지도 레이아웃 검증 통과"
       },
@@ -1160,6 +1163,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T00:42:37Z"
+    },
+    {
+      "id": "H-018",
+      "event": "NAVI 문서 동기화 이후 main 공개 후보 6f48bae를 배포하고 라이브 validator로 공개 번들·데이터 경계·공유 경로를 재검증했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T00:47:38Z"
     }
   ]
 }

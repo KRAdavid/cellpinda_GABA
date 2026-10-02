@@ -2,6 +2,7 @@
 
 | Date | State / Change | Reason | Evidence or Decision | Owner |
 |---|---|---|---|---|
+| 2026-10-03 | NAVI 문서 동기화 이후 최종 공개 후보 `6f48bae`를 재검증 | main 배포·라이브 공개본·제품 독립 데이터 경계·공유 경로의 최신 SHA 정합성을 확인. release-verify, Pages publish, smoke-live, release status와 live validator 성공 | E-LIVE-PUBLIC-NAVI-FINAL, GitHub Actions 37074307727 | NAVI / QA |
 | 2026-10-03 | NAVI 감사·레드팀·완료 문서를 main에 반영하고 최종 candidate `49daf99`를 재검증 | 공개 코드 변경 이후 governance 증적과 실제 라이브 SHA의 정합성을 맞춤. main 배포·라이브 validator를 다시 통과 | E-LIVE-PUBLIC-NAVI-RELEASE, GitHub Actions 37073665476 | NAVI / QA |
 | 2026-10-03 | 읽기 진행 표시의 접근성·가독성을 보완하고 사용하지 않는 구형 챌린지 이미지 4종을 제거한 뒤 `7a64726`으로 공개 배포 | 긴 모바일 안내서에서 현재 장을 더 빠르게 파악하고 Pages 번들 성능 여유를 확보. PR #47 필수 검사, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-READING-PROGRESS, E-CDP-READING-PROGRESS, E-DEPLOY-PIPELINE-READING-PROGRESS, E-LIVE-PUBLIC-READING-PROGRESS | NAVI / QA |
 | 2026-10-03 | 고정 헤더·읽기 진행 표시와 섹션 앵커가 겹치지 않도록 보완하고 `2c8bd84`로 공개 배포 | 메뉴·앵커 이동 뒤 섹션 제목이 가려지지 않게 해 모바일·데스크톱의 자연스러운 독해 흐름을 회복. PR #45 필수 검사, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-ANCHOR-OFFSET, E-CDP-ANCHOR-OFFSET, E-DEPLOY-PIPELINE-ANCHOR-OFFSET, E-LIVE-PUBLIC-ANCHOR-OFFSET | NAVI / QA |

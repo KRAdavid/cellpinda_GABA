@@ -1264,6 +1264,17 @@
       "claim_refs": ["C-001", "C-002"]
     },
     {
+      "id": "E-LIVE-PUBLIC-NAVI-FINAL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 문서 동기화 이후의 최신 GitHub Pages 공개본이 200으로 응답했고 공개 번들·제품 독립 데이터 경계·공유 경로가 라이브에서 유지됐다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 6f48bae7a7adcc22b68fbefc2a9ca13b002fe540; generatedAt 2026-10-02T22:47:38.294Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; GitHub Actions 37074307727 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T00:47:38Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-NAVI-FINAL",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
       "id": "E-LIVE-PUBLIC-ANCHOR-OFFSET",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",

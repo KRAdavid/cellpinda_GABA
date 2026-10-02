@@ -11,6 +11,12 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 결과 비교 도표와 성장호르몬 상대 크기 막대, 출처 연결 구조
 - NAVI 목표·산출물·coverage·증거·감사·레드팀 기록
 
+## Final Public Recheck After NAVI Sync — 6f48bae — 2026-10-03
+
+- 공개 후보 `6f48bae7a7adcc22b68fbefc2a9ca13b002fe540`의 main 배포 run `37074307727`이 성공했고, 라이브 validator가 HTTP 200·70 bundle hashes·12 claims·6 master records·6 share pages를 확인했다.
+- 제품 데이터 경계, 내부 운영 스냅샷 제외, teaser HOLD, smartStoreOnly, removed750 및 provenance 일치도 유지됐다.
+- 자동 검증은 통과했지만 외부 과학·규제 감수, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트가 남아 있어 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
 ## Final NAVI Documentation Release Recheck — 49daf99 — 2026-10-03
 
 - NAVI 상태·감사·레드팀·증적 문서를 main에 반영한 최종 공개 candidate `49daf9901113be3876b7fd6f94684ba2121c3b9a`를 확인했다.
