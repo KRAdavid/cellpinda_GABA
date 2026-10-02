@@ -222,7 +222,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: '머리를 많이 쓴 뒤, 두 그룹은 어떻게 달랐을까요?',
       summary: 'GABA를 섭취한 그룹은 뇌파와 활력 점수가 비교 그룹보다 덜 떨어졌습니다.',
-      note: '막대는 연구에서 관찰된 변화 방향을 시각화한 표현입니다.',
+      note: '막대는 변화 방향을 보여줍니다.',
       referenceLabel: '비교 캡슐',
       resultLabel: 'GABA 캡슐',
       rows: [
@@ -245,7 +245,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: 'GABA를 바른 피부는 어떻게 달라졌을까요?',
       summary: 'GABA를 바른 피부는 장벽이 더 빨리 회복됐고, 피부가 두꺼워지는 변화는 줄었습니다.',
-      note: '막대는 연구에서 관찰된 변화 방향을 시각화한 표현입니다.',
+      note: '막대는 변화 방향을 보여줍니다.',
       referenceLabel: '비교 조건',
       resultLabel: 'GABA를 바른 조건',
       rows: [
@@ -584,7 +584,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
   const chartId = `research-chart-${topic.id}`;
   const comparisonChart = topic.chart.kind === 'comparison' ? topic.chart : null;
   return (
-    <figure className={`guide-outcome-chart guide-outcome-chart-${topic.chart.kind}`} aria-labelledby={`${chartId}-title`} aria-describedby={`${chartId}-note`}>
+    <figure className={`guide-outcome-chart guide-outcome-chart-${topic.chart.kind}`} aria-labelledby={`${chartId}-title`}>
       <div className="guide-outcome-chart-head">
         <figcaption id={`${chartId}-title`}>{topic.chart.title}</figcaption>
         <span>연구 결과 한눈에</span>
@@ -636,7 +636,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
           ))}
         </div>
       ) : null}
-      <p className="guide-outcome-chart-note" id={`${chartId}-note`}>{topic.chart.note}</p>
+      <p className="guide-outcome-chart-note">{topic.chart.note}</p>
     </figure>
   );
 }
