@@ -143,6 +143,7 @@ requireMatch(publicGuideStyles, /@media \(max-width:700px\)\{[\s\S]*?\.guide-hea
 requireMatch(publicGuideStyles, /\.guide-library-filters\{grid-template-columns:1fr\}/, 'public GABA mobile research filters must remain one readable column');
 if (/대표 연구 보기|대표 논문 먼저 보기|궁금한 연구를\s*직접 확인해 보세요|href="#library"/.test(publicGuide)) fail('public GABA guide must keep research summaries in the reading flow instead of jump links');
 requireMatch(publicGuide, /guide-research-flow[\s\S]*어떻게 살펴봤나요\?[\s\S]*무엇이 달라졌나요\?[\s\S]*출처/, 'public GABA guide must show study method, observed result, and source in sequence');
+requireMatch(publicGuide, /guide-research-finding[\s\S]*guide-research-copy[\s\S]*copyMessage\(topic\.finding\)/, 'public GABA research cards must offer a direct copy action for the observed finding');
 for (const sourceId of ['30263304', '22203366', '12445190', '18091016', '40431374', '16971751']) requireMatch(publicGuide, new RegExp(sourceId), `public GABA guide source PMID ${sourceId} is missing`);
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:1100px\)[\s\S]*?\.header nav\{display:none[\s\S]*?\.menu-toggle\{display:flex/, 'tablet navigation must collapse before menu labels wrap');
 requireMatch(styles, /@media \(min-width:681px\) and \(max-width:1100px\)[\s\S]*?\.hero-copy\{[^}]*background:linear-gradient/, 'tablet hero text must keep a readable background over the photo');
