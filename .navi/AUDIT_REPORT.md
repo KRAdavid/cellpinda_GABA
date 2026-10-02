@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 3af1327 — 2026-10-03
+
+- 성장호르몬 연구 카드의 `약 +400%`·`약 +375%` 수치를 상대 크기 막대로 시각화하고, 막대가 해당 연구 안에서 가장 높은 반응을 100으로 둔 표시라는 설명을 추가했다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 성능 `1644458 <= 1650000` bytes를 통과했다.
+- 캐시를 비활성화한 Chrome CDP 라이브 QA에서 390px 화면의 두 막대와 해석 문구, 가로 넘침 없음, runtimeErrors 0건을 확인했다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 대체 증거로 사용했다.
+- PR #31의 필수 검사가 통과했고, GitHub Actions `37052611008`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했다. `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `3af1327b2f2e47a7feea54201928183271dfce20`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly 및 provenance matched를 확인했다.
+- 이번 변경은 연구 카드의 판독성을 개선한 것이며, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수의 잔여 조건은 기존처럼 OPEN으로 유지한다.
+
 ## Final Public Release Recheck — 588f266 — 2026-10-02
 
 - 연구 히스토리의 보조 문구를 기존 섹션 헤더 구조 안에서 `하나의 발견이 / 넓어진 연구로 이어졌습니다.`로 정리해 모바일·데스크톱 흐름을 유지했다.

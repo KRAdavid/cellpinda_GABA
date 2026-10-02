@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T15:58:31.741221Z",
+  "updated_at": "2026-10-02T19:16:57.412836Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -159,7 +159,8 @@
         "E-RELEASE-D7",
         "E-RELEASE-C13",
         "E-LOCAL-BUILD-RESEARCH-MAP",
-        "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS"
+        "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS",
+        "E-LOCAL-BUILD-METRIC-VIZ"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -188,7 +189,8 @@
         "E-RELEASE-D7",
         "E-RELEASE-C13",
         "E-CDP-RESEARCH-MAP",
-        "E-CDP-RESEARCH-MAP-CONNECTORS"
+        "E-CDP-RESEARCH-MAP-CONNECTORS",
+        "E-CDP-METRIC-VIZ"
       ],
       "owner": "UX QA"
     },
@@ -291,7 +293,8 @@
         "E-RELEASE-D7",
         "E-RELEASE-C13",
         "E-LOCAL-BUILD-RESEARCH-MAP",
-        "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS"
+        "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS",
+        "E-LOCAL-BUILD-METRIC-VIZ"
       ],
       "owner": "QA"
     },
@@ -314,7 +317,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-MAP",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS",
-        "E-LIVE-PUBLIC-NAVI-SYNC"
+        "E-LIVE-PUBLIC-NAVI-SYNC",
+        "E-LIVE-PUBLIC-METRIC-VIZ",
+        "E-DEPLOY-PIPELINE-METRIC-VIZ"
       ],
       "owner": "배포 QA"
     },
@@ -407,7 +412,9 @@
         "E-LOCAL-TESTS",
         "E-CDP-MOBILE",
         "E-LOCAL-BUILD-FOLLOWUP",
-        "E-CDP-NAVIGATION-LATEST"
+        "E-CDP-NAVIGATION-LATEST",
+        "E-CDP-METRIC-VIZ",
+        "E-LIVE-PUBLIC-METRIC-VIZ"
       ],
       "owner": "QA"
     },

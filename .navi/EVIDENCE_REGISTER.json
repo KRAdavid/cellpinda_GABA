@@ -797,6 +797,48 @@
       "captured_at": "2026-10-02T15:57:27Z",
       "reviewer_id": "NAVI-LIVE-QA-20261002-MENU-FOCUS",
       "claim_refs": ["C-002", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-METRIC-VIZ",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "성장호르몬 연구 카드에 상대 크기 막대를 추가한 보완이 타입체크·127개 테스트·production build·정적 라우트·성능 예산을 통과했다.",
+      "locator": "source 37f5284; pnpm run typecheck; pnpm test 127/127; pnpm run build; routes 11; files 74; validate:performance total 1644458 <= 1650000",
+      "captured_at": "2026-10-02T19:10:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261002-METRIC-VIZ",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-CDP-METRIC-VIZ",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "캐시를 끈 Chrome CDP 390px 라이브 화면에서 성장호르몬 연구 카드의 약 +400%·약 +375% 값과 상대 막대, 해석 문구가 표시되고 가로 넘침과 런타임 오류가 없었다.",
+      "locator": "temporary Chrome CDP script outside the repository; width 390; metric bars 104.5px and 98.2188px against 104.5px track; normalized-chart note visible; page scrollWidth 390; runtimeErrors []",
+      "captured_at": "2026-10-02T19:14:00Z",
+      "reviewer_id": "NAVI-QA-CDP-20261002-METRIC-VIZ",
+      "claim_refs": ["C-003", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-METRIC-VIZ",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "성장호르몬 연구 결과 시각화 보완이 반영된 3af1327 main 공개 배포 파이프라인의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했다.",
+      "locator": "PR #31; GitHub Actions workflow run 37052611008; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37052611008",
+      "captured_at": "2026-10-02T19:15:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261002-METRIC-VIZ",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-METRIC-VIZ",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "3af1327이 반영된 GitHub Pages 공개본이 200으로 응답했고, 최신 번들에서 성장호르몬 상대 막대·해석 문구와 공개 데이터 경계가 유지됐다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 3af1327b2f2e47a7feea54201928183271dfce20; generatedAt 2026-10-02T19:13:37.932Z; bundleHashes 74; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Chrome CDP live metric QA width 390, pageScrollWidth 390, runtimeErrors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-02T19:16:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261002-METRIC-VIZ",
+      "claim_refs": ["C-002", "C-003", "C-007"]
     }
   ]
 }
