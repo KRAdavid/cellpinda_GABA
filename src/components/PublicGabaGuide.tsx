@@ -848,9 +848,9 @@ export default function PublicGabaGuide() {
         </nav>
         <button ref={menuToggleRef} type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         <button type="button" className="guide-header-share" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
-        <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`} aria-label="GABA 안내서 읽기 진행">
+        <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`}>
           <div className="guide-reading-progress-track" aria-hidden="true"><span style={{ width: `${(Math.max(0, activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
-          <div className="guide-reading-progress-meta"><span>지금 읽는 중</span><strong aria-live="polite">{activeChapter.label}</strong><small>{activeChapterId === 'top' ? '도입' : `${String(activeChapterIndex + 1).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
+          <div className="guide-reading-progress-meta"><span>지금 읽는 중</span><strong aria-live="polite">{activeChapter.label}</strong><small>{`${String(Math.max(0, activeChapterIndex + 1)).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
         </div>
       </header>
 
