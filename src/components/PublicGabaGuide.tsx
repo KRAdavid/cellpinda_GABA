@@ -655,6 +655,7 @@ export default function PublicGabaGuide() {
   const headerRef = useRef<HTMLElement | null>(null);
   const menuToggleRef = useRef<HTMLButtonElement | null>(null);
   const recoveryBreakRef = useRef<HTMLElement | null>(null);
+  const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
@@ -717,6 +718,15 @@ export default function PublicGabaGuide() {
     }, 3000);
     return () => window.clearInterval(intervalId);
   }, [recoveryPaused, recoveryReducedMotion, recoveryInView]);
+
+  useEffect(() => {
+    const map = recoveryMapRef.current;
+    const activeStep = map?.querySelector<HTMLButtonElement>(`[data-recovery-index="${activeRecoveryCard}"]`);
+    if (!map || !activeStep || map.scrollWidth <= map.clientWidth) return;
+    const targetLeft = activeStep.offsetLeft - (map.clientWidth - activeStep.offsetWidth) / 2;
+    const maxLeft = map.scrollWidth - map.clientWidth;
+    map.scrollTo({ left: Math.max(0, Math.min(targetLeft, maxLeft)), behavior: recoveryReducedMotion ? 'auto' : 'smooth' });
+  }, [activeRecoveryCard, recoveryReducedMotion]);
 
   useEffect(() => {
     let frame = 0;
@@ -927,10 +937,10 @@ export default function PublicGabaGuide() {
               </div>
               <p>잠은 단순히 멈추는 시간이 아닙니다.<br />뇌와 몸이 손상된 부분을 회복하고<br />쌓인 피로를 정리하는 시간입니다.</p>
             </div>
-            <div className="guide-recovery-map">
+            <div ref={recoveryMapRef} className="guide-recovery-map" role="group" aria-label={`수면과 회복의 흐름 ${recoveryCards.length}단계`}>
               {recoveryCards.map((card, index) => {
                 const Icon = recoveryIcons[index];
-                return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} aria-label={card.eyebrow} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span></button>;
+                return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} data-recovery-index={index} aria-label={card.eyebrow} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span></button>;
               })}
             </div>
             <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} role="group" aria-roledescription="carousel" aria-label={`수면과 회복 카드 ${activeRecoveryCard + 1} / ${recoveryCards.length}: ${recoveryCard.eyebrow}`} tabIndex={0} onKeyDown={handleRecoveryKeyDown} onTouchStart={handleRecoveryTouchStart} onTouchEnd={handleRecoveryTouchEnd} aria-live="polite">
