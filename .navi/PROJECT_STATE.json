@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T20:22:23.528329Z",
+  "updated_at": "2026-10-02T20:38:07.647638Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -838,9 +838,11 @@
           "E-DEPLOY-PIPELINE-READING-SIZE",
           "E-LIVE-PUBLIC-COMPACT-HEADER",
           "E-DEPLOY-PIPELINE-COMPACT-HEADER",
-          "E-DEPLOY-PIPELINE-LARGE-TEXT-CHART"
+          "E-DEPLOY-PIPELINE-LARGE-TEXT-CHART",
+          "E-LOCAL-BUILD-LARGE-TEXT-CHART-TYPE",
+          "E-DEPLOY-PIPELINE-LARGE-TEXT-CHART-TYPE"
         ],
-        "notes": "6df3e36 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 지도 레이아웃을 재확인"
+        "notes": "34807cb 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·차트 큰 글씨 체계를 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -860,7 +862,8 @@
           "E-CDP-RESEARCH-MAP",
           "E-CDP-RESEARCH-MAP-CONNECTORS",
           "E-CDP-RECOVERY-INDEX",
-          "E-CDP-LARGE-TEXT-CHART"
+          "E-CDP-LARGE-TEXT-CHART",
+          "E-CDP-LARGE-TEXT-CHART-TYPE"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -876,7 +879,9 @@
           "E-CDP-RESEARCH-MAP-CONNECTORS",
           "E-CDP-RECOVERY-INDEX",
           "E-CDP-LARGE-TEXT-CHART",
-          "E-LIVE-PUBLIC-LARGE-TEXT-CHART"
+          "E-LIVE-PUBLIC-LARGE-TEXT-CHART",
+          "E-CDP-LARGE-TEXT-CHART-TYPE",
+          "E-LIVE-PUBLIC-LARGE-TEXT-CHART-TYPE"
         ],
         "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
@@ -902,7 +907,9 @@
           "E-CDP-COMPACT-HEADER",
           "E-LIVE-PUBLIC-COMPACT-HEADER",
           "E-CDP-LARGE-TEXT-CHART",
-          "E-LIVE-PUBLIC-LARGE-TEXT-CHART"
+          "E-LIVE-PUBLIC-LARGE-TEXT-CHART",
+          "E-CDP-LARGE-TEXT-CHART-TYPE",
+          "E-LIVE-PUBLIC-LARGE-TEXT-CHART-TYPE"
         ],
         "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태와 연구 지도 배치 확인"
       },
@@ -927,7 +934,8 @@
           "E-LOCAL-BUILD-RECOVERY-INDEX",
           "E-LOCAL-BUILD-READING-SIZE",
           "E-LOCAL-BUILD-COMPACT-HEADER",
-          "E-LOCAL-BUILD-LARGE-TEXT-CHART"
+          "E-LOCAL-BUILD-LARGE-TEXT-CHART",
+          "E-LOCAL-BUILD-LARGE-TEXT-CHART-TYPE"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 지도 레이아웃 검증 통과"
       },
@@ -1021,6 +1029,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-02T20:17:28Z"
+    },
+    {
+      "id": "H-011",
+      "event": "연구 결과 도표의 전체 글자 체계를 큰 글씨 모드와 일관되게 묶고 공개 배포·라이브·NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-02T20:35:44Z"
     }
   ]
 }
