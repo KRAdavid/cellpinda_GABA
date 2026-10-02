@@ -701,7 +701,9 @@
         "status": "PASS",
         "evidence_refs": [
           "E-LIVE-PUBLIC",
-          "E-DEPLOY-PIPELINE"
+          "E-DEPLOY-PIPELINE",
+          "E-LIVE-PUBLIC-FOLLOWUP",
+          "E-DEPLOY-PIPELINE-FOLLOWUP"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·제목·히어로·정적 번들을 재확인"
       },
@@ -726,7 +728,8 @@
         "criterion_id": "AC-004",
         "status": "PASS",
         "evidence_refs": [
-          "E-CDP-MOBILE"
+          "E-CDP-MOBILE",
+          "E-CDP-NAVIGATION-FOLLOWUP"
         ],
         "notes": "390px 가로 넘침 없음, 메뉴 열린 상태 확인"
       },
