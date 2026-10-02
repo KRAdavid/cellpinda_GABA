@@ -355,6 +355,17 @@
       "captured_at": "2026-10-02T11:36:52Z",
       "reviewer_id": "NAVI-QA-GABA-20261002-D7",
       "claim_refs": ["C-001", "C-002", "C-003", "C-007"]
+    },
+    {
+      "id": "E-RELEASE-C13",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "c13be36 연구 결과 비교 도표의 모바일 판독성 보정과 Pages 성능 예산 조정 후 127개 테스트·Pages 번들·390px/1440px Chrome CDP QA·GitHub Actions 배포·라이브 공개 검증이 모두 통과했다.",
+      "locator": "pnpm test 127/127; Pages-style performance total 1599599 <= 1600000; mobile 390 scrollWidth 390; desktop 1440 scrollWidth 1425; scale values 984/557/12,124; comparisonHeader true; menu/escape/focus/#academic navigation passed; runtimeErrors []; GitHub Actions 37003371638 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; live page 200 candidateSha c13be36d4aeb4b4db23146dc88f7932aafc13aa6, bundleHashes 73, claims 12, masterRecords 6, products 1, sharePages 6, teaser HOLD, internalOpsSnapshots excluded, smartStoreOnly true, removed750 true, provenance matched",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37003371638",
+      "captured_at": "2026-10-02T11:53:01Z",
+      "reviewer_id": "NAVI-QA-GABA-20261002-C13",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-007"]
     }
   ]
 }
