@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T10:08:39.161916Z",
+  "updated_at": "2026-10-02T10:47:27.234155Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -152,7 +152,8 @@
       "rationale": "React/Vite 타입·빌드·정적 라우트 검증",
       "evidence_refs": [
         "E-LOCAL-TYPECHECK",
-        "E-LOCAL-BUILD"
+        "E-LOCAL-BUILD",
+        "E-LOCAL-BUILD-FOLLOWUP"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -171,7 +172,9 @@
       "rationale": "소비자 흐름·가독성·모바일 화면 확인",
       "evidence_refs": [
         "E-CDP-DESKTOP",
-        "E-CDP-MOBILE"
+        "E-CDP-MOBILE",
+        "E-CDP-POLISH-FOLLOWUP",
+        "E-CDP-NAVIGATION-LATEST"
       ],
       "owner": "UX QA"
     },
@@ -267,7 +270,8 @@
       "rationale": "콘텐츠·코드·정적 번들 품질을 점검",
       "evidence_refs": [
         "E-LOCAL-TESTS",
-        "E-LOCAL-BUILD"
+        "E-LOCAL-BUILD",
+        "E-LOCAL-BUILD-FOLLOWUP"
       ],
       "owner": "QA"
     },
@@ -277,7 +281,9 @@
       "rationale": "GitHub Pages 라이브 공개 응답과 번들 확인",
       "evidence_refs": [
         "E-LIVE-PUBLIC",
-        "E-DEPLOY-PIPELINE"
+        "E-DEPLOY-PIPELINE",
+        "E-LIVE-PUBLIC-LATEST",
+        "E-DEPLOY-PIPELINE-LATEST"
       ],
       "owner": "배포 QA"
     },
@@ -303,7 +309,9 @@
       "rationale": "배포·검증·복구 절차가 저장소에 존재",
       "evidence_refs": [
         "E-LIVE-PUBLIC",
-        "E-DEPLOY-PIPELINE"
+        "E-DEPLOY-PIPELINE",
+        "E-LIVE-PUBLIC-LATEST",
+        "E-DEPLOY-PIPELINE-LATEST"
       ],
       "owner": "운영 QA"
     },
@@ -355,7 +363,9 @@
       "rationale": "자동 점검 명령과 결과를 재현",
       "evidence_refs": [
         "E-LOCAL-TESTS",
-        "E-CDP-MOBILE"
+        "E-CDP-MOBILE",
+        "E-LOCAL-BUILD-FOLLOWUP",
+        "E-CDP-NAVIGATION-LATEST"
       ],
       "owner": "QA"
     },
@@ -365,6 +375,7 @@
       "rationale": "실제 사용자 반응·브라우저 전체 조합은 공개 후 관찰 필요",
       "evidence_refs": [
         "E-LIVE-PUBLIC",
+        "E-LIVE-PUBLIC-LATEST",
         "E-REDTEAM-REVIEW"
       ],
       "owner": "운영자"
@@ -402,7 +413,8 @@
       ],
       "verification": [
         "E-LOCAL-TYPECHECK",
-        "E-LOCAL-BUILD"
+        "E-LOCAL-BUILD",
+        "E-LOCAL-BUILD-FOLLOWUP"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -420,7 +432,9 @@
       ],
       "verification": [
         "E-CDP-DESKTOP",
-        "E-CDP-MOBILE"
+        "E-CDP-MOBILE",
+        "E-CDP-POLISH-FOLLOWUP",
+        "E-CDP-NAVIGATION-LATEST"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -437,7 +451,9 @@
         "D-002"
       ],
       "verification": [
-        "E-LIVE-PUBLIC"
+        "E-LIVE-PUBLIC",
+        "E-DEPLOY-PIPELINE-LATEST",
+        "E-LIVE-PUBLIC-LATEST"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -646,7 +662,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "e0751538977a28826415a60f818cdd44d7de73405b8225e360cfc99ea6e8eb0a",
+    "assessed_input_sha256": "3983d41567a1ab6a3eb24974c51e22631fb68585ffa801aa3237bec193386f89",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -703,7 +719,9 @@
           "E-LIVE-PUBLIC",
           "E-DEPLOY-PIPELINE",
           "E-LIVE-PUBLIC-FOLLOWUP",
-          "E-DEPLOY-PIPELINE-FOLLOWUP"
+          "E-DEPLOY-PIPELINE-FOLLOWUP",
+          "E-LIVE-PUBLIC-LATEST",
+          "E-DEPLOY-PIPELINE-LATEST"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·제목·히어로·정적 번들을 재확인"
       },
@@ -712,7 +730,8 @@
         "status": "PASS",
         "evidence_refs": [
           "E-CDP-DESKTOP",
-          "E-CDP-MOBILE"
+          "E-CDP-MOBILE",
+          "E-CDP-POLISH-FOLLOWUP"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -720,7 +739,8 @@
         "criterion_id": "AC-003",
         "status": "PASS",
         "evidence_refs": [
-          "E-CDP-DESKTOP"
+          "E-CDP-DESKTOP",
+          "E-CDP-POLISH-FOLLOWUP"
         ],
         "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
@@ -729,7 +749,8 @@
         "status": "PASS",
         "evidence_refs": [
           "E-CDP-MOBILE",
-          "E-CDP-NAVIGATION-FOLLOWUP"
+          "E-CDP-NAVIGATION-FOLLOWUP",
+          "E-CDP-NAVIGATION-LATEST"
         ],
         "notes": "390px 가로 넘침 없음, 메뉴 열린 상태 확인"
       },
@@ -739,7 +760,8 @@
         "evidence_refs": [
           "E-LOCAL-TYPECHECK",
           "E-LOCAL-TESTS",
-          "E-LOCAL-BUILD"
+          "E-LOCAL-BUILD",
+          "E-LOCAL-BUILD-FOLLOWUP"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·성능 예산 통과"
       },
