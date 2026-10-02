@@ -805,7 +805,8 @@ export default function PublicGabaGuide() {
   const scrollTo = (id: string, hash = id) => {
     setMenuOpen(false);
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-    document.getElementById(id)?.scrollIntoView({ behavior, block: 'start' });
+    const target = document.getElementById(id);
+    if (target) window.scrollTo({ top: target.offsetTop - 116, behavior });
     window.history.replaceState(null, '', `#${hash}`);
   };
 
