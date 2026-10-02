@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T21:50:07.440591Z",
+  "updated_at": "2026-10-02T22:08:56.160893Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -167,7 +167,9 @@
         "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
         "E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE",
-        "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE"
+        "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
+        "E-LOCAL-BUILD-ANCHOR-OFFSET",
+        "E-DEPLOY-PIPELINE-ANCHOR-OFFSET"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -204,7 +206,9 @@
         "E-CDP-RESEARCH-MAP-ICONS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-CDP-RESEARCH-READING-SEQUENCE",
-        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+        "E-CDP-ANCHOR-OFFSET",
+        "E-LIVE-PUBLIC-ANCHOR-OFFSET"
       ],
       "owner": "UX QA"
     },
@@ -348,7 +352,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
-        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+        "E-DEPLOY-PIPELINE-ANCHOR-OFFSET",
+        "E-LIVE-PUBLIC-ANCHOR-OFFSET"
       ],
       "owner": "배포 QA"
     },
@@ -876,7 +882,10 @@
           "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
           "E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE",
           "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
-          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+          "E-LOCAL-BUILD-ANCHOR-OFFSET",
+          "E-DEPLOY-PIPELINE-ANCHOR-OFFSET",
+          "E-LIVE-PUBLIC-ANCHOR-OFFSET"
         ],
         "notes": "34807cb 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·차트 큰 글씨 체계를 재확인"
       },
@@ -903,7 +912,9 @@
           "E-CDP-RESEARCH-MAP-ICONS",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
           "E-CDP-RESEARCH-READING-SEQUENCE",
-          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+          "E-CDP-ANCHOR-OFFSET",
+          "E-LIVE-PUBLIC-ANCHOR-OFFSET"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -925,7 +936,9 @@
           "E-CDP-RESEARCH-MAP-ICONS",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
           "E-CDP-RESEARCH-READING-SEQUENCE",
-          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+          "E-CDP-ANCHOR-OFFSET",
+          "E-LIVE-PUBLIC-ANCHOR-OFFSET"
         ],
         "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
@@ -955,7 +968,9 @@
           "E-CDP-LARGE-TEXT-CHART-TYPE",
           "E-LIVE-PUBLIC-LARGE-TEXT-CHART-TYPE",
           "E-CDP-RESEARCH-READING-SEQUENCE",
-          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+          "E-CDP-ANCHOR-OFFSET",
+          "E-LIVE-PUBLIC-ANCHOR-OFFSET"
         ],
         "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태와 연구 지도 배치 확인"
       },
@@ -984,7 +999,9 @@
           "E-LOCAL-BUILD-LARGE-TEXT-CHART-TYPE",
           "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
           "E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE",
-          "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE"
+          "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
+          "E-LOCAL-BUILD-ANCHOR-OFFSET",
+          "E-DEPLOY-PIPELINE-ANCHOR-OFFSET"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 지도 레이아웃 검증 통과"
       },
@@ -1106,6 +1123,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-02T21:24:47Z"
+    },
+    {
+      "id": "H-015",
+      "event": "고정 헤더·읽기 진행 표시와 섹션 앵커의 충돌을 보완하고 PR·main 배포·라이브 검증·NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-02T22:08:56Z"
     }
   ]
 }

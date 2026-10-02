@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 2c8bd84 — 2026-10-03
+
+- 섹션·헤더 앵커 이동을 고정 헤더와 읽기 진행 표시 아래에 가리지 않도록 보완했다. 실제 헤더 메뉴의 `연구 확장` 이동과 `history`·`sleep`·`research`·`expert-videos`·`final` 앵커를 1440px·390px에서 점검했으며 각 제목이 진행 표시 아래에 남았다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 정확한 Pages 성능 `1649668 <= 1650000` bytes와 UI 계약 검사를 통과했다. PR #45의 `release-verify`·`site-quality-verify`도 성공했다.
+- main 배포 run `37070479805`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 성공했고 `deploy-worker`는 `STATIC_ONLY`로 건너뛰었다. 과거 revision의 로컬 경로 패턴 12건에 대한 scanner annotation warning은 남아 있지만 release gate 실패는 아니다.
+- 라이브 validator는 candidate `2c8bd8452eaf978b41717feb999bbbcc35b84a33`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL Chrome CDP 대체 QA에서 1440px·390px의 연구 확장 메뉴 이동 및 모든 핵심 앵커가 진행 표시와 겹치지 않았고, 가로 넘침은 없었으며 runtime errors `[]`였다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다.
+- 이번 변경은 고정 UI에 가려지는 탐색 결함을 보완한 것이다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존처럼 OPEN으로 유지한다.
+
 ## Latest Public Release Recheck — 5af1f11 — 2026-10-03
 
 - `06 · 연구의 확장` 연구 지도 아래에 `읽는 순서 → 01 지도 → 02 대상 → 03 결과 → 04 해석`을 추가했다. 별도 링크나 중간 이동 없이 첫 연구 결과 카드로 이어지는 읽기 흐름을 데스크톱·모바일에 맞췄다.

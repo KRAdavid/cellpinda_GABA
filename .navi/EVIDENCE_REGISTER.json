@@ -1176,6 +1176,49 @@
       "captured_at": "2026-10-02T21:48:55Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-READING-RAIL",
       "claim_refs": ["C-002", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-ANCHOR-OFFSET",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "고정 헤더와 읽기 진행 표시를 고려한 섹션 앵커 이동 보완이 타입체크·127개 테스트·production build·정적 라우트·UI 계약·Pages 성능 예산을 통과했다.",
+      "locator": "source e02670c; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127/127; pnpm run build; routes 11; files 74; validate:performance total 1649668 <= 1650000",
+      "captured_at": "2026-10-03T00:00:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261003-ANCHOR-OFFSET",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-CDP-ANCHOR-OFFSET",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 1440px·390px에서 연구 확장 메뉴 이동과 핵심 섹션 앵커가 고정 헤더·읽기 진행 표시 아래에 가리지 않고, 가로 넘침과 런타임 오류가 없었다.",
+      "locator": "temporary Chrome CDP visual audit outside the repository; live 1440px and 390px screenshots inspected; navCheck academic clear true; history, sleep, research, expert-videos, final clear true; scrollWidth 1425/390; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-03T00:00:00Z",
+      "reviewer_id": "NAVI-QA-CDP-20261003-ANCHOR-OFFSET",
+      "claim_refs": ["C-003"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-ANCHOR-OFFSET",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "섹션 앵커 이동 보완이 PR #45 필수 검사를 통과한 뒤 2c8bd845로 main에 병합되었고 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #45; release-verify run 37070347822 and site-quality-verify run 37070347817 passed; main workflow 37070479805 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37070479805",
+      "captured_at": "2026-10-03T00:00:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-ANCHOR-OFFSET",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-ANCHOR-OFFSET",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "2c8bd845가 반영된 GitHub Pages 공개본이 200으로 응답했고 앵커 이동·정적 공개 번들·제품 독립 공개 경계가 라이브에서 유지됐다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 2c8bd8452eaf978b41717feb999bbbcc35b84a33; generatedAt 2026-10-02T22:05:20.575Z; bundleHashes 74; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP visual audit errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T00:00:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-ANCHOR-OFFSET",
+      "claim_refs": ["C-002", "C-003"]
     }
   ]
 }

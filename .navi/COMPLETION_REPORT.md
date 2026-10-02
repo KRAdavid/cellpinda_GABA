@@ -11,6 +11,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 결과 비교 도표와 성장호르몬 상대 크기 막대, 출처 연결 구조
 - NAVI 목표·산출물·coverage·증거·감사·레드팀 기록
 
+## Latest Release Recheck — 2c8bd84 — 2026-10-03
+
+- 고정 헤더·읽기 진행 표시와 섹션 앵커가 겹치지 않도록 이동 오프셋을 보완해, 모바일·데스크톱에서 메뉴를 누른 뒤 섹션 제목과 다음 콘텐츠가 바로 읽히도록 했다.
+- 로컬 타입체크·127개 테스트·production build·11개 정적 라우트·74개 번들·UI 계약 검사와 정확한 Pages 성능 `1649668 <= 1650000` bytes를 통과했다. PR #45 필수 검사와 main 배포 run `37070479805`의 Pages·smoke·release status도 성공했다.
+- 라이브 validator는 HTTP 200, candidate `2c8bd8452eaf978b41717feb999bbbcc35b84a33`, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750, provenance matched를 확인했다.
+- 공개 URL 1440px·390px Chrome CDP 시각·상호작용 검증에서 연구 확장 메뉴 이동과 핵심 앵커의 고정 UI 충돌 없음, 가로 넘침 없음, runtime errors `[]`를 확인했다. 잔여 외부 조건은 유지한다.
+
 ## Latest Release Recheck — 5af1f11 — 2026-10-03
 
 - `06 · 연구의 확장` 지도 아래에 `읽는 순서 → 01 지도 → 02 대상 → 03 결과 → 04 해석` 시각 레일을 추가해 연구 카드의 대상·결과·해석을 별도 이동 없이 바로 읽도록 보완했다.

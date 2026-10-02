@@ -2,6 +2,7 @@
 
 | Date | State / Change | Reason | Evidence or Decision | Owner |
 |---|---|---|---|---|
+| 2026-10-03 | 고정 헤더·읽기 진행 표시와 섹션 앵커가 겹치지 않도록 보완하고 `2c8bd84`로 공개 배포 | 메뉴·앵커 이동 뒤 섹션 제목이 가려지지 않게 해 모바일·데스크톱의 자연스러운 독해 흐름을 회복. PR #45 필수 검사, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-ANCHOR-OFFSET, E-CDP-ANCHOR-OFFSET, E-DEPLOY-PIPELINE-ANCHOR-OFFSET, E-LIVE-PUBLIC-ANCHOR-OFFSET | NAVI / QA |
 | 2026-10-03 | 연구 지도 아래에 `읽는 순서 → 01 지도 → 02 대상 → 03 결과 → 04 해석` 시각 레일을 추가하고 `5af1f11`로 공개 배포 | 별도 이동 링크 없이 연구 지도를 본 뒤 대상·결과·해석 카드로 자연스럽게 이어지도록 보완. PR #43 필수 검사, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-RESEARCH-READING-RAIL, E-CDP-RESEARCH-READING-RAIL, E-DEPLOY-PIPELINE-RESEARCH-READING-RAIL, E-LIVE-PUBLIC-RESEARCH-READING-RAIL | NAVI / QA |
 | 2026-10-03 | 연구 지도에서 상세 카드로 이어지는 `지도 → 대상 → 결과 → 해석` 읽기 순서를 추가하고 기능 변경 `79432de`·최종 공개본 `ca20d1e`로 반영 | 별도 이동 링크 없이 연구 지도 다음에 대상·결과·해석 카드를 바로 보여줘 연구 흐름을 자연스럽게 연결. PR #38 품질 검사, heartbeat PR #39, NAVI 문서 PR #40, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE, E-CDP-RESEARCH-READING-SEQUENCE, E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE, E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE | NAVI / QA |
 | 2026-10-03 | 연구 확장 지도에 의미 기반 아이콘을 적용하고 `713627f`로 공개 배포 | 인지·피부·근육·성장호르몬·면역을 동일한 구조 안에서 빠르게 구분하도록 선형 아이콘을 추가. PR #37 필수 검사, main 배포, 라이브 validator, 1440/390px Chrome CDP 시각 검증을 통과 | E-LOCAL-BUILD-RESEARCH-MAP-ICONS, E-CDP-RESEARCH-MAP-ICONS, E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS, E-LIVE-PUBLIC-RESEARCH-MAP-ICONS | NAVI / QA |
