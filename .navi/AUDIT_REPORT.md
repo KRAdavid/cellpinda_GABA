@@ -160,3 +160,12 @@
 - PR #12의 `release-verify`·`site-quality-verify` 통과 후 merge `454f506`을 확인했다. GitHub Actions `37025368458`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고 `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
 - 라이브 validator와 Chrome CDP는 candidate `454f506672440c49b5583f0d4f077f5d0f67fc3e`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance 일치, 마지막 카드 활성 단계 노출을 확인했다.
 - 과거 Git 기록의 local-path 패턴 12건은 CI 경고로 남지만 현재 공개 번들에는 포함되지 않는 것으로 검증됐다. Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+## Release Recheck — b0183b8 — 2026-10-03
+
+- 모바일 메뉴를 연 직후 첫 메뉴 링크로 포커스를 이동하도록 보완해, 작은 화면에서 키보드·보조기기 사용자가 탐색을 바로 시작할 수 있게 했다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 73개 번들 파일, 성능 예산 `1599468 <= 1600000`을 통과했다. PR #16의 `release-verify`·`site-quality-verify`도 통과했다.
+- Chrome CDP 390px 로컬 QA는 메뉴 열림·첫 포커스 `발견`·외부 클릭 닫힘·회복 단계 이동·scrollWidth 390·runtimeErrors 0건을 확인했다. 공개 URL에서도 메뉴 열림·첫 포커스 `발견`·scrollWidth 375·runtimeErrors 0건을 재확인했다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 대체 증거로 사용했다.
+- GitHub Actions `37030197880`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했고 `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `b0183b85cb3c88c57dc81373ab82c75887882406`, generatedAt `2026-10-02T15:55:00.193Z`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance 일치를 확인했다.
+- 과거 Git 기록의 local-path 패턴 12건은 CI 경고로 남지만 현재 공개 번들에는 포함되지 않는다. Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
