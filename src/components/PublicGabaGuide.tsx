@@ -860,7 +860,7 @@ export default function PublicGabaGuide() {
             <h1 id="guide-hero-heading"><span>저속노화,<br />회복하는 밤에서 시작됩니다</span><em>그 회복의 신호를<span className="guide-mobile-break"><br /></span>{' '}GABA에서 읽습니다</em></h1>
             <p className="guide-hero-body">낮에는 몸과 뇌가 에너지를 사용합니다. 밤이 되면 몸은 회복에 필요한 과정으로 전환됩니다.</p>
             <p className="guide-editorial-note">{editorialNotice}</p>
-            <p className="guide-reading-sequence"><span>3분 읽기</span><span>수면과 회복 <i>→</i> GABA의 발견 <i>→</i> GABA란 <i>→</i> 연구 지도 <i>→</i> 활용 사례</span></p>
+            <p className="guide-reading-sequence"><span>3분 읽기</span> 수면과 회복 → GABA의 발견 → GABA란 → 연구 지도 → 활용 사례</p>
           </div>
           <NeuronNetwork />
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
