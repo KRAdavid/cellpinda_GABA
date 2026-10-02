@@ -81,6 +81,15 @@
 - GitHub Actions `37003371638`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고, 라이브 candidate `c13be36...`가 확인됐다.
 - Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다.
 
+## Release Recheck — cd0912f — 2026-10-02
+
+- 헤더 `공유하기` 버튼의 대비를 보강해 비활성처럼 보이던 인상을 제거했고, 연구 규모 표기를 `1950 → 지금`으로 정리했다.
+- 로컬 검증은 타입체크, 공개 연구 카피 검사, 127개 테스트, Pages 정적 번들 검증, 성능 `1599644 <= 1600000` bytes를 통과했다.
+- Chrome CDP에서 모바일 390px·데스크톱 1440px 대표 화면의 공유 버튼·연구 규모 표기·가로 넘침·런타임 오류 0건을 확인했고, 메뉴·Escape·포커스 복귀·연구 지도 이동도 재확인했다.
+- GitHub Actions `37011130709`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고 `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
+- 라이브 manifest는 candidate `cd0912f1c35aace859c7b05127afb9a6994c6697`, HTTP 200, static runtime, 11개 라우트와 공개 번들 UI 문자열을 확인했다.
+- Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다.
+
 ## Release Recheck — 7ee9b3d — 2026-10-02
 
 - 마지막 공유 영역의 접힌 라벨을 `사업자용 GABA 핵심 5문장 · 바로 복사하기`로 정리해 사업자가 활용할 수 있는 행동을 첫 화면에서 바로 이해하도록 보완했다. 메시지 내용·연구 데이터·제품 경계는 변경하지 않았다.
