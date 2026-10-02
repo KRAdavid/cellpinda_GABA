@@ -1,5 +1,11 @@
 # Audit Report
 
+## Final Public Recheck After NAVI Sync — 6f48bae — 2026-10-03
+
+- NAVI 문서 동기화 이후 main 공개 후보 `6f48bae7a7adcc22b68fbefc2a9ca13b002fe540`의 배포 run `37074307727`을 재검증했다. `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 성공했고 Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 배포 품질은 자동·대표 브라우저 범위에서 유지되지만, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 여전히 OPEN이다. 따라서 NAVI 상태는 `PASS_WITH_CONDITIONS` / `USER_DECISION`을 유지한다.
+
 ## Final NAVI Documentation Release Recheck — 49daf99 — 2026-10-03
 
 - NAVI 증적·감사·레드팀·완료 문서를 main에 병합한 뒤 공개 배포가 다시 완료됐다. 문서 변경은 공개 런타임 코드를 변경하지 않았으며, 현재 라이브 candidate는 `49daf9901113be3876b7fd6f94684ba2121c3b9a`다.
