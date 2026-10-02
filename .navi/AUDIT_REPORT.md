@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 713627f — 2026-10-03
+
+- `06 · 연구의 확장` 지도에 인지·피부·근육·성장호르몬·면역을 의미별로 구분하는 선형 아이콘을 추가해 다섯 연구 영역의 식별성을 높였다. 중앙 GABA 노드·연결선·연구 카드·제품 독립 안내 문구는 유지했다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 성능 `1649348 <= 1650000` bytes를 통과했다. PR #37의 `release-verify`·`site-quality-verify`도 통과했다.
+- GitHub Actions `37063502715`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했고 `deploy-worker`는 `STATIC_ONLY` 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `713627f3faa7d876ffabc2aa58332433342c6fad`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly 및 provenance matched를 확인했다.
+- Chrome CDP 대체 QA로 공개 URL 1440px·390px 연구 지도와 히어로·최종 화면을 캡처해 확인했고 runtime errors `[]`였다. 320/360/390px 헤더·큰 글씨 모드도 가로 넘침 없이 유지됐다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다.
+- 이 보완은 연구 영역의 시각적 식별성을 개선한 것이며, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수의 잔여 조건은 기존처럼 OPEN으로 유지한다.
+
 ## Latest Public Release Recheck — 34807cb — 2026-10-03
 
 - 연구 결과 도표의 글자 크기를 차트 내부 기준 글자에 상대적으로 묶어, 큰 글씨 모드에서 비교 조건·측정값·막대 설명·신호·주석까지 같은 비율로 읽히도록 보완했다. 기존 모바일 헤더의 44px 터치 목표와 가로 폭 제약은 유지했다.

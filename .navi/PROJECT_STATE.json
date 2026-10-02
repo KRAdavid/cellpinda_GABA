@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T20:38:07.647638Z",
+  "updated_at": "2026-10-02T21:00:08.874452Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -163,7 +163,9 @@
         "E-LOCAL-BUILD-METRIC-VIZ",
         "E-LOCAL-BUILD-RECOVERY-INDEX",
         "E-LOCAL-BUILD-READING-SIZE",
-        "E-LOCAL-BUILD-COMPACT-HEADER"
+        "E-LOCAL-BUILD-COMPACT-HEADER",
+        "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -196,7 +198,9 @@
         "E-CDP-METRIC-VIZ",
         "E-CDP-RECOVERY-INDEX",
         "E-CDP-READING-SIZE",
-        "E-CDP-COMPACT-HEADER"
+        "E-CDP-COMPACT-HEADER",
+        "E-CDP-RESEARCH-MAP-ICONS",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
       ],
       "owner": "UX QA"
     },
@@ -303,7 +307,9 @@
         "E-LOCAL-BUILD-METRIC-VIZ",
         "E-LOCAL-BUILD-RECOVERY-INDEX",
         "E-LOCAL-BUILD-READING-SIZE",
-        "E-LOCAL-BUILD-COMPACT-HEADER"
+        "E-LOCAL-BUILD-COMPACT-HEADER",
+        "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS"
       ],
       "owner": "QA"
     },
@@ -334,7 +340,9 @@
         "E-LIVE-PUBLIC-READING-SIZE",
         "E-DEPLOY-PIPELINE-READING-SIZE",
         "E-LIVE-PUBLIC-COMPACT-HEADER",
-        "E-DEPLOY-PIPELINE-COMPACT-HEADER"
+        "E-DEPLOY-PIPELINE-COMPACT-HEADER",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
       ],
       "owner": "배포 QA"
     },
@@ -379,7 +387,9 @@
         "E-LIVE-PUBLIC-READING-SIZE",
         "E-DEPLOY-PIPELINE-READING-SIZE",
         "E-LIVE-PUBLIC-COMPACT-HEADER",
-        "E-DEPLOY-PIPELINE-COMPACT-HEADER"
+        "E-DEPLOY-PIPELINE-COMPACT-HEADER",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
       ],
       "owner": "운영 QA"
     },
@@ -441,7 +451,9 @@
         "E-CDP-READING-SIZE",
         "E-LIVE-PUBLIC-READING-SIZE",
         "E-CDP-COMPACT-HEADER",
-        "E-LIVE-PUBLIC-COMPACT-HEADER"
+        "E-LIVE-PUBLIC-COMPACT-HEADER",
+        "E-CDP-RESEARCH-MAP-ICONS",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
       ],
       "owner": "QA"
     },
@@ -493,7 +505,8 @@
         "E-LOCAL-BUILD-FOLLOWUP",
         "E-LOCAL-BUILD-B7",
         "E-RELEASE-D7",
-        "E-RELEASE-C13"
+        "E-RELEASE-C13",
+        "E-LOCAL-BUILD-RESEARCH-MAP-ICONS"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -519,7 +532,8 @@
         "E-CDP-POLISH-RELEASE",
         "E-CDP-NAVIGATION-RELEASE",
         "E-RELEASE-D7",
-        "E-RELEASE-C13"
+        "E-RELEASE-C13",
+        "E-CDP-RESEARCH-MAP-ICONS"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -544,7 +558,9 @@
         "E-LIVE-PUBLIC-RELEASE",
         "E-DEPLOY-PIPELINE-RELEASE",
         "E-RELEASE-D7",
-        "E-RELEASE-C13"
+        "E-RELEASE-C13",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -667,7 +683,9 @@
         "statement": "Browser 플러그인과 실기기 전체 조합은 확인하지 못했다.",
         "evidence_refs": [
           "E-CDP-DESKTOP",
-          "E-CDP-MOBILE"
+          "E-CDP-MOBILE",
+          "E-CDP-RESEARCH-MAP-ICONS",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -693,7 +711,9 @@
         "statement": "연구 확장 지도와 결과 도표가 두 대표 화면 크기에서 자연스럽게 읽힌다.",
         "evidence_refs": [
           "E-CDP-DESKTOP",
-          "E-CDP-MOBILE"
+          "E-CDP-MOBILE",
+          "E-CDP-RESEARCH-MAP-ICONS",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -753,7 +773,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "08c286992360bac9df3e86b82ac25f2f368c18255140f8ef6b7ce019e67c7ada",
+    "assessed_input_sha256": "2ad7f81cd202460a9cea6e5b676eab018bd6ae0b9615d4e8074cc462f20b8327",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -840,7 +860,10 @@
           "E-DEPLOY-PIPELINE-COMPACT-HEADER",
           "E-DEPLOY-PIPELINE-LARGE-TEXT-CHART",
           "E-LOCAL-BUILD-LARGE-TEXT-CHART-TYPE",
-          "E-DEPLOY-PIPELINE-LARGE-TEXT-CHART-TYPE"
+          "E-DEPLOY-PIPELINE-LARGE-TEXT-CHART-TYPE",
+          "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
+          "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
         ],
         "notes": "34807cb 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·차트 큰 글씨 체계를 재확인"
       },
@@ -863,7 +886,9 @@
           "E-CDP-RESEARCH-MAP-CONNECTORS",
           "E-CDP-RECOVERY-INDEX",
           "E-CDP-LARGE-TEXT-CHART",
-          "E-CDP-LARGE-TEXT-CHART-TYPE"
+          "E-CDP-LARGE-TEXT-CHART-TYPE",
+          "E-CDP-RESEARCH-MAP-ICONS",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -881,7 +906,9 @@
           "E-CDP-LARGE-TEXT-CHART",
           "E-LIVE-PUBLIC-LARGE-TEXT-CHART",
           "E-CDP-LARGE-TEXT-CHART-TYPE",
-          "E-LIVE-PUBLIC-LARGE-TEXT-CHART-TYPE"
+          "E-LIVE-PUBLIC-LARGE-TEXT-CHART-TYPE",
+          "E-CDP-RESEARCH-MAP-ICONS",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
         ],
         "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
@@ -935,7 +962,8 @@
           "E-LOCAL-BUILD-READING-SIZE",
           "E-LOCAL-BUILD-COMPACT-HEADER",
           "E-LOCAL-BUILD-LARGE-TEXT-CHART",
-          "E-LOCAL-BUILD-LARGE-TEXT-CHART-TYPE"
+          "E-LOCAL-BUILD-LARGE-TEXT-CHART-TYPE",
+          "E-LOCAL-BUILD-RESEARCH-MAP-ICONS"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 지도 레이아웃 검증 통과"
       },
@@ -1036,6 +1064,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-02T20:35:44Z"
+    },
+    {
+      "id": "H-012",
+      "event": "연구 확장 지도에 다섯 주제를 구분하는 의미 기반 아이콘을 추가하고 PR·main 배포·라이브 검증·NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-02T20:55:00Z"
     }
   ]
 }
