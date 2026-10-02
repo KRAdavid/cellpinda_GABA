@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 0c464c1 — 2026-10-03
+
+- 공개 GABA 안내서 헤더에 `큰 글씨`·`기본 글씨` 토글을 추가해 모바일에서 본문 읽기 크기를 선택할 수 있게 했다. 선택 상태는 새로고침 후에도 유지되며 기본 글씨 상태의 레이아웃은 변경하지 않는다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 성능 `1648238 <= 1650000` bytes를 통과했다.
+- Chrome CDP 라이브 QA에서 390px 화면의 기본 본문 16px가 큰 글씨 선택 후 16.96px로 바뀌고, `aria-pressed=true`, localStorage 유지, `scrollWidth=390`, `runtimeErrors []`를 확인했다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 대체 증거로 사용했다.
+- PR #33의 `release-verify`·`site-quality-verify`가 통과했고, GitHub Actions `37055827540`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했다. `deploy-worker`는 `STATIC_ONLY` 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `0c464c197d7ab3b3c7f992be89b49a310339075d`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly 및 provenance matched를 확인했다.
+- 이번 변경은 읽기 접근성을 개선한 것이며, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수의 잔여 조건은 기존처럼 OPEN으로 유지한다.
+
 ## Latest Public Release Recheck — 5321f9d — 2026-10-03
 
 - 수면·회복 14단계 지도에 `01–14` 단계 번호와 `aria-current="step"` 현재 위치 표시를 추가해 모바일에서 읽기 순서를 숫자로 빠르게 파악할 수 있도록 보완했다.
