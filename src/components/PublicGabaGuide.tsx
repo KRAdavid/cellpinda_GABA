@@ -712,6 +712,18 @@ export default function PublicGabaGuide() {
   }, []);
 
   useEffect(() => {
+    const section = recoveryBreakRef.current;
+    if (!section) return;
+    const pauseForReading = () => setRecoveryPaused(true);
+    section.addEventListener('focusin', pauseForReading);
+    section.addEventListener('pointerenter', pauseForReading);
+    return () => {
+      section.removeEventListener('focusin', pauseForReading);
+      section.removeEventListener('pointerenter', pauseForReading);
+    };
+  }, []);
+
+  useEffect(() => {
     if (recoveryPaused || recoveryReducedMotion || !recoveryInView) return;
     const intervalId = window.setInterval(() => {
       setActiveRecoveryCard((current) => (current + 1) % recoveryCards.length);
@@ -940,10 +952,11 @@ export default function PublicGabaGuide() {
             <div ref={recoveryMapRef} className="guide-recovery-map" role="group" aria-label={`수면과 회복의 흐름 ${recoveryCards.length}단계`}>
               {recoveryCards.map((card, index) => {
                 const Icon = recoveryIcons[index];
-                return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} data-recovery-index={index} aria-label={card.eyebrow} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span></button>;
+                return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} data-recovery-index={index} aria-label={`${card.eyebrow} · ${index + 1}단계${index === activeRecoveryCard ? ' · 현재 선택됨' : ''}`} aria-controls="recovery-story-card" aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span></button>;
               })}
             </div>
-            <div className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} role="group" aria-roledescription="carousel" aria-label={`수면과 회복 카드 ${activeRecoveryCard + 1} / ${recoveryCards.length}: ${recoveryCard.eyebrow}`} tabIndex={0} onKeyDown={handleRecoveryKeyDown} onTouchStart={handleRecoveryTouchStart} onTouchEnd={handleRecoveryTouchEnd} aria-live="polite">
+            <div id="recovery-story-card" className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} role="group" aria-roledescription="자동 넘김 카드" aria-label={`수면과 회복 카드 ${activeRecoveryCard + 1} / ${recoveryCards.length}: ${recoveryCard.eyebrow}`} tabIndex={0} onKeyDown={handleRecoveryKeyDown} onTouchStart={handleRecoveryTouchStart} onTouchEnd={handleRecoveryTouchEnd}>
+              <span className="sr-only" aria-live="polite">읽는 카드: {recoveryCard.eyebrow}, {activeRecoveryCard + 1}단계 / {recoveryCards.length}단계</span>
               <div className="guide-recovery-card-top">
                 <div className="guide-recovery-card-copy">
                   <h3 className="guide-recovery-card-eyebrow">{recoveryCard.eyebrow}</h3>
