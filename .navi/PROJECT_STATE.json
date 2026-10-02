@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T09:44:34.843680Z",
+  "updated_at": "2026-10-02T09:59:28.976046Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -595,7 +595,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-02T08:06:57Z"
+    "last_run_at": "2026-10-02T09:58:41.1599567Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -642,7 +642,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-02T08:06:57Z"
+    "last_run_at": "2026-10-02T09:58:41.1599567Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",

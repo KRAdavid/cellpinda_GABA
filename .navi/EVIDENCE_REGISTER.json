@@ -9,7 +9,7 @@
     },
     {
       "id": "C-002",
-      "statement": "공개 URL은 후보 SHA bb4504fa의 정적 번들과 공개 데이터 정합성을 제공한다.",
+      "statement": "공개 URL은 후보 SHA 871cc712의 정적 번들과 공개 데이터 정합성을 제공한다.",
       "evidence_refs": ["E-LIVE-PUBLIC"],
       "status": "SUPPORTED"
     },
@@ -29,6 +29,12 @@
       "id": "C-005",
       "statement": "현재 사용자는 공개 배포 품질 점검 결과에 따라 저장소 내 보완을 자동 진행하도록 요청했다.",
       "evidence_refs": ["E-USER-AUTO-UPDATE"],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "C-006",
+      "statement": "전문가 영상은 모바일에서 카드를 선택하면 선택된 영상이 즉시 재생되고, 게시판의 선택 상태가 하나로 유지된다.",
+      "evidence_refs": ["E-CDP-INTERACTION"],
       "status": "SUPPORTED"
     }
   ],
@@ -68,8 +74,8 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "공개 카피·UI 계약·정적 번들·성능 예산을 포함한 pnpm build가 통과했다.",
-      "locator": "pnpm run build; static routes 11; performance total 1599428 <= 1600000",
-      "captured_at": "2026-10-02T08:04:00Z",
+      "locator": "pnpm run build; static routes 11; performance total 1597771 <= 1600000; initial JS 310538; initial CSS 92953",
+      "captured_at": "2026-10-02T09:53:00Z",
       "reviewer_id": "NAVI-QA-GABA-20261002",
       "claim_refs": ["C-001", "C-003"]
     },
@@ -104,13 +110,23 @@
       "claim_refs": ["C-003", "C-004"]
     },
     {
+      "id": "E-CDP-INTERACTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP 390px에서 메뉴가 aria-expanded=true·is-open으로 열리고, 두 번째 전문가 영상 선택 후 활성 카드 1개와 autoplay iframe이 유지되며 런타임 오류가 없었다.",
+      "locator": "temporary Chrome CDP script outside the repository: menu state, expert-selected-mobile.png; iframe src contains Cnk0PGn9YBM?autoplay=1; scrollWidth 390",
+      "captured_at": "2026-10-02T09:58:20Z",
+      "reviewer_id": "NAVI-QA-CDP-20261002",
+      "claim_refs": ["C-003", "C-006"]
+    },
+    {
       "id": "E-LIVE-PUBLIC",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "GitHub Pages 공개 URL이 200으로 응답하고 최신 candidate SHA·정적 번들·공개 데이터·페이지 수가 일치했다.",
-      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha bb4504fa902abbdb52b99f2998da6f2cd20ef1b0; bundleHashes 73; masterRecords 6; sharePages 6",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 871cc712350183b4a7c9f5c62b1892f180597d89; bundleHashes 73; masterRecords 6; sharePages 6",
       "source_uri": "https://kradavid.github.io/gaba_info/",
-      "captured_at": "2026-10-02T08:37:30Z",
+      "captured_at": "2026-10-02T09:56:12Z",
       "reviewer_id": "NAVI-LIVE-QA-20261002",
       "claim_refs": ["C-002"]
     },
@@ -119,9 +135,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "heartbeat PR 검증과 main 공개 배포 파이프라인이 모두 성공했고, Pages 배포·라이브 smoke test·release status가 통과했다.",
-      "locator": "PR #6; workflow run 36984877866; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success",
-      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/36984877866",
-      "captured_at": "2026-10-02T08:37:04Z",
+      "locator": "workflow run 36992541023; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/36992541023",
+      "captured_at": "2026-10-02T09:57:24Z",
       "reviewer_id": "NAVI-DEPLOY-QA-20261002",
       "claim_refs": ["C-001", "C-002"]
     },
