@@ -81,6 +81,15 @@
 - GitHub Actions `37003371638`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고, 라이브 candidate `c13be36...`가 확인됐다.
 - Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다.
 
+## Release Recheck — 6df3e36 — 2026-10-02
+
+- 연구 지도 레이아웃을 데스크톱·모바일 공통 3×3 중심 구조로 통일해 GABA와 인지·피부·근육·성장호르몬·면역의 관계를 같은 시각 언어로 정리했다.
+- 로컬 Pages 정확 조건에서 타입체크·127개 테스트·공개 연구 카피·정적 11개 라우트·73개 번들·성능 `1599644 <= 1600000` bytes를 통과했다.
+- Chrome CDP에서 390px·320px·1440px 연구 지도와 390px·1440px 대표 화면을 확인했고 가로 넘침·runtimeErrors 0건을 재확인했다.
+- GitHub Actions `37013863270`의 release-verify, worker-readiness, deploy-pages, smoke-live, release-status가 모두 성공했고 `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `6df3e3665e9172e90267f9ebcd33fd3684af0f3a`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외를 확인했다.
+- Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다.
+
 ## Release Recheck — cd0912f — 2026-10-02
 
 - 헤더 `공유하기` 버튼의 대비를 보강해 비활성처럼 보이던 인상을 제거했고, 연구 규모 표기를 `1950 → 지금`으로 정리했다.
