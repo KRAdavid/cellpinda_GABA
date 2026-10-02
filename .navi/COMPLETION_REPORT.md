@@ -15,7 +15,7 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 
 | Criterion | Result | Evidence | Notes |
 |---|---|---|---|
-| AC-001 | PASS | E-LIVE-PUBLIC | 라이브 200, 올바른 제목·히어로·정적 번들 확인 |
+| AC-001 | PASS | E-LIVE-PUBLIC, E-DEPLOY-PIPELINE | 최신 main 배포 성공, 라이브 200, 올바른 제목·히어로·정적 번들 재확인 |
 | AC-002 | PASS | E-CDP-DESKTOP, E-CDP-MOBILE | 연구 영역 5개와 상세 카드 5개 확인 |
 | AC-003 | PASS | E-CDP-DESKTOP | 비교 조건·GABA 조건·핵심 결과·출처가 도표 카드에 표시됨 |
 | AC-004 | PASS | E-CDP-MOBILE | 390px 가로 넘침 없음, 메뉴가 열린 상태로 전환됨 |
@@ -35,4 +35,5 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - Red Team Result: PASS_WITH_CONDITIONS
 - User Decisions Required: 외부 과학·규제 감수와 추가 실기기 QA를 언제 완료할지 결정.
 - Recommended Next Actions: 외부 검토 증거와 대표 실기기 QA를 등록한 뒤 동일 gate를 재실행.
-- Final Status: INTERNAL_QA_READY_WITH_CONDITIONS; NAVI 상태는 USER_DECISION.
+- Deployment Follow-up: heartbeat PR #6과 main 배포 run 36984877866이 통과했고, Pages 배포·라이브 smoke test·release status를 확인했다. 공개 URL의 candidate SHA는 `bb4504fa902abbdb52b99f2998da6f2cd20ef1b0`이다.
+- Final Status: INTERNAL_QA_READY_WITH_CONDITIONS; NAVI 상태는 USER_DECISION. 외부 과학·규제 감수, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트는 완료로 표시하지 않는다.

@@ -6,6 +6,13 @@
 - Scope Reviewed: 공개 사이트, 연구 확장 카드, 공개 번들, 라이브 URL, 대표 데스크톱·모바일 렌더, 메뉴 상호작용
 - Date: 2026-10-02
 
+## Deployment Follow-up
+
+- Heartbeat PR #6 passed `release-verify` and `site-quality-verify` before merge.
+- Main deployment run `36984877866` passed `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, and `release-status`.
+- `pnpm run validate:live-public` confirmed candidate `bb4504fa902abbdb52b99f2998da6f2cd20ef1b0`, 73 bundle hashes, 6 research records, 6 share pages, and excluded internal operations snapshots.
+- This confirms deployment integrity; it does not close the independent science/regulatory, full-browser, or older-adult usability findings below.
+
 ## Findings
 
 | ID | Severity | Area | Evidence | Impact | Required Fix | Owner | Status |

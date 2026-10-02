@@ -9,7 +9,7 @@
     },
     {
       "id": "C-002",
-      "statement": "공개 URL은 후보 SHA 244ceea의 정적 번들과 공개 데이터 정합성을 제공한다.",
+      "statement": "공개 URL은 후보 SHA bb4504fa의 정적 번들과 공개 데이터 정합성을 제공한다.",
       "evidence_refs": ["E-LIVE-PUBLIC"],
       "status": "SUPPORTED"
     },
@@ -107,12 +107,23 @@
       "id": "E-LIVE-PUBLIC",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
-      "statement": "GitHub Pages 공개 URL이 200으로 응답하고 candidate SHA·정적 번들·공개 데이터·페이지 수가 일치했다.",
-      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha 244ceea970ae0054a444e2c3d459c1b3381c8c25",
+      "statement": "GitHub Pages 공개 URL이 200으로 응답하고 최신 candidate SHA·정적 번들·공개 데이터·페이지 수가 일치했다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; candidateSha bb4504fa902abbdb52b99f2998da6f2cd20ef1b0; bundleHashes 73; masterRecords 6; sharePages 6",
       "source_uri": "https://kradavid.github.io/gaba_info/",
-      "captured_at": "2026-10-02T08:05:00Z",
+      "captured_at": "2026-10-02T08:37:30Z",
       "reviewer_id": "NAVI-LIVE-QA-20261002",
       "claim_refs": ["C-002"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "heartbeat PR 검증과 main 공개 배포 파이프라인이 모두 성공했고, Pages 배포·라이브 smoke test·release status가 통과했다.",
+      "locator": "PR #6; workflow run 36984877866; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/36984877866",
+      "captured_at": "2026-10-02T08:37:04Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261002",
+      "claim_refs": ["C-001", "C-002"]
     },
     {
       "id": "E-REDTEAM-REVIEW",

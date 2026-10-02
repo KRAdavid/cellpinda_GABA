@@ -8,3 +8,10 @@
 | 2026-10-02 | 코드 결함이 없어 UI 코드는 변경하지 않고 감사·레드팀 잔여 위험 기록 | 불필요한 회귀 방지 | DEC-004, E-REDTEAM-REVIEW | NAVI |
 
 Record lifecycle transitions, approved changes, rework, and meaningful evidence updates. Do not use this file to erase history.
+# 2026-10-02 · Public deployment verification follow-up
+
+- Scheduled TF pulse produced a verified heartbeat commit; automatic PR creation was blocked by repository policy, so PR #6 was opened through the repository workflow.
+- PR #6 passed `release-verify` and `site-quality-verify` and was merged without changing the public science copy.
+- Main deployment run `36984877866` passed release verification, GitHub Pages deployment, live smoke test, and release status.
+- Live validation confirmed candidate `bb4504fa902abbdb52b99f2998da6f2cd20ef1b0`, 6 research records, 6 share pages, and no public internal-operation snapshots.
+- NAVI remains `USER_DECISION` / `INTERNAL_QA_READY_WITH_CONDITIONS`; open external-validation items remain open.

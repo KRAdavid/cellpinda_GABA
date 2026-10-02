@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T08:16:32.114257Z",
+  "updated_at": "2026-10-02T08:39:18.595493Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -276,7 +276,8 @@
       "status": "CHECKED",
       "rationale": "GitHub Pages 라이브 공개 응답과 번들 확인",
       "evidence_refs": [
-        "E-LIVE-PUBLIC"
+        "E-LIVE-PUBLIC",
+        "E-DEPLOY-PIPELINE"
       ],
       "owner": "배포 QA"
     },
@@ -301,7 +302,8 @@
       "status": "CHECKED",
       "rationale": "배포·검증·복구 절차가 저장소에 존재",
       "evidence_refs": [
-        "E-LIVE-PUBLIC"
+        "E-LIVE-PUBLIC",
+        "E-DEPLOY-PIPELINE"
       ],
       "owner": "운영 QA"
     },
@@ -698,9 +700,10 @@
         "criterion_id": "AC-001",
         "status": "PASS",
         "evidence_refs": [
-          "E-LIVE-PUBLIC"
+          "E-LIVE-PUBLIC",
+          "E-DEPLOY-PIPELINE"
         ],
-        "notes": "라이브 200과 제목·히어로·정적 번들 확인"
+        "notes": "최신 main 배포가 완료됐고 라이브 200·제목·히어로·정적 번들을 재확인"
       },
       {
         "criterion_id": "AC-002",
