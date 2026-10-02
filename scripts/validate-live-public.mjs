@@ -192,7 +192,7 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     const bundleHashCount = await validateLiveBundleHashes(releaseManifest);
     validatePublicMetadata(pageText, '/', `${base}/`);
     assert.ok(pageText.includes('유진 로버츠와 샘 프랭클의 발견에서 시작해'), 'live root fallback must identify the discovery-led public GABA guide');
-    assert.ok(pageText.includes('사업자가 바로 설명할 수 있는 GABA 5문장'), 'live root fallback must expose the business message kit');
+    assert.ok(pageText.includes('사업자용 GABA 핵심 5문장 · 바로 복사하기'), 'live root fallback must expose the business message kit');
     validatePublicMetadata(focusPageText, '/focus/', `${base}/focus/`);
     const internalSnapshots = [
       ['/data/operations-queue.json', queueResponse],
