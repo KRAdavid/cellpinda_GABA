@@ -725,3 +725,56 @@
   .guide-recovery-next h3{font-size:25px}
   .guide-recovery-next>p:last-child{font-size:15px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
 }
+
+/* v18 research map: give the expansion section an editorial overview before the detailed evidence. */
+.guide-research-map{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:0 0 32px;padding:27px 18px 25px;border-block:1px solid #dcebed;background:linear-gradient(180deg,#fbfefe 0%,#f3f9fa 100%)}
+.guide-research-map-line{position:absolute;top:63px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,#cce6e8 0%,#44aeb1 50%,#cce6e8 100%)}
+.guide-research-map-item{position:relative;display:grid;justify-items:center;gap:8px;text-align:center}
+.guide-research-map-number{color:#91aab7;font-size:10px;font-weight:900;letter-spacing:.14em}
+.guide-research-map-dot{display:grid;place-items:center;width:18px;height:18px;border:1px solid #b8dcdf;border-radius:50%;background:#f7fcfc}
+.guide-research-map-dot i{display:block;width:7px;height:7px;border-radius:50%;background:var(--guide-teal)}
+.guide-research-map-item-skin .guide-research-map-dot i{background:#d9898e}
+.guide-research-map-item-muscle .guide-research-map-dot i{background:#e59b83}
+.guide-research-map-item-growth-hormone .guide-research-map-dot i{background:#77aac7}
+.guide-research-map-item-immune .guide-research-map-dot i{background:#74b9c0}
+.guide-research-map-item div{display:grid;gap:4px}
+.guide-research-map-item strong{color:var(--guide-ink);font-size:15px;font-weight:850;letter-spacing:-.055em;line-height:1.3}
+.guide-research-map-item small{max-width:20ch;color:#8ba3af;font-size:10px;line-height:1.45;word-break:keep-all}
+.guide-research-detail-inline{position:relative;display:grid;grid-template-columns:minmax(220px,.72fr) minmax(0,1.28fr);column-gap:34px;padding:30px 34px 27px 38px;background:linear-gradient(135deg,#f5fbfc 0%,#eef8f9 100%)}
+.guide-research-detail-inline:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--guide-research-accent,#27a5aa)}
+.guide-research-detail-inline:nth-child(1){--guide-research-accent:#2f9da8}.guide-research-detail-inline:nth-child(2){--guide-research-accent:#d38a8f}.guide-research-detail-inline:nth-child(3){--guide-research-accent:#e49a82}.guide-research-detail-inline:nth-child(4){--guide-research-accent:#73a8c4}.guide-research-detail-inline:nth-child(5){--guide-research-accent:#72b7bd}
+.guide-research-detail-inline .guide-research-detail-top{grid-column:1 / -1;padding-bottom:16px;border-bottom:1px solid #d4e7ea}
+.guide-research-detail-inline .guide-research-inline-heading{grid-column:1;grid-row:2;display:grid;grid-template-columns:24px 62px minmax(0,1fr);align-items:center;gap:10px;margin-top:27px}
+.guide-research-card-number{color:var(--guide-research-accent,#27a5aa);font-size:10px;font-weight:900;letter-spacing:.12em}
+.guide-research-detail-inline .guide-research-inline-heading .guide-research-glyph{width:62px;height:46px;margin:0;transform:scale(.74)}
+.guide-research-detail-inline .guide-research-inline-heading h3{min-width:0;font-size:25px;line-height:1.25;word-break:keep-all}
+.guide-research-detail-inline .guide-outcome-chart{grid-column:2;grid-row:2 / span 2;align-self:start;margin:27px 0 0;border-color:#d4e7ea;background:rgba(255,255,255,.82);box-shadow:0 13px 28px rgba(23,72,92,.06)}
+.guide-research-detail-inline dl{grid-column:1;grid-row:3;align-self:start;margin-top:25px}
+.guide-research-detail-inline .guide-research-source{grid-column:1 / -1;grid-row:4;margin-top:24px}
+.guide-research-detail-inline .guide-research-finding{padding-left:11px;border-left:2px solid var(--guide-research-accent,#27a5aa)}
+@media(max-width:1100px){
+  .guide-research-map{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 10px}
+  .guide-research-map-line{display:none}
+}
+@media(max-width:900px){
+  .guide-research-detail-inline{display:block;padding:28px 29px 25px}
+  .guide-research-detail-inline .guide-research-inline-heading{display:flex;align-items:center;gap:10px;margin-top:22px}
+  .guide-research-detail-inline .guide-research-inline-heading .guide-research-glyph{flex:0 0 62px}
+  .guide-research-detail-inline .guide-outcome-chart{margin:22px 0 23px}
+  .guide-research-detail-inline dl{margin-top:0}
+  .guide-research-detail-inline .guide-research-source{margin-top:22px}
+}
+@media(max-width:700px){
+  .guide-research-map{grid-template-columns:repeat(2,minmax(0,1fr));gap:23px 10px;margin-bottom:24px;padding:22px 0 20px}
+  .guide-research-map-item strong{font-size:16px}
+  .guide-research-map-item small{font-size:10px}
+  .guide-research-detail-inline{padding:24px 18px 21px;border-radius:18px}
+  .guide-research-detail-inline .guide-research-detail-top{gap:6px 8px;padding-bottom:13px}
+  .guide-research-detail-inline .guide-research-inline-heading{gap:8px;margin-top:19px}
+  .guide-research-detail-inline .guide-research-inline-heading .guide-research-glyph{display:flex;flex:0 0 43px;width:43px;height:35px;transform:scale(.58)}
+  .guide-research-detail-inline .guide-research-inline-heading h3{font-size:22px;line-height:1.3}
+  .guide-research-detail-inline .guide-outcome-chart{margin:18px 0 20px}
+  .guide-research-detail-inline dl{gap:13px}
+  .guide-research-detail-inline .guide-research-source{display:block;margin-top:20px}
+  .guide-research-detail-inline .guide-research-source a{margin-top:6px}
+}
