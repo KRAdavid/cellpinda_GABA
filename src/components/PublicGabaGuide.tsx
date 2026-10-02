@@ -434,7 +434,6 @@ const researchScaleStats: ResearchScaleStat[] = [
 ];
 
 const readingChapters = [
-  { id: 'top', label: '도입' },
   { id: 'history', label: '발견의 순간' },
   { id: 'basics', label: 'GABA란' },
   { id: 'academic', label: '연구 지도' },
@@ -445,9 +444,11 @@ const readingChapters = [
   { id: 'fermented-safety', label: '발효·안전' },
   { id: 'growth', label: '성장 연구' },
   { id: 'expert-videos', label: '전문가 영상' },
+  { id: 'reading-note', label: '출처 읽기' },
   { id: 'final', label: '공유하기' },
 ] as const;
 type ReadingChapterId = (typeof readingChapters)[number]['id'];
+type ActiveChapterId = ReadingChapterId | 'top';
 const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, GABA에 관한 과학적 정보와 공개 연구를 알기 쉽게 소개하는 공개 안내서입니다.';
 
 const fermentedSafetySteps: FermentedSafetyStep[] = [
@@ -646,7 +647,7 @@ export default function PublicGabaGuide() {
   const [shareStatus, setShareStatus] = useState('');
   const [activeVideoId, setActiveVideoId] = useState(expertVideos[0].id);
   const [videoStarted, setVideoStarted] = useState(false);
-  const [activeChapterId, setActiveChapterId] = useState<ReadingChapterId>(readingChapters[0].id);
+  const [activeChapterId, setActiveChapterId] = useState<ActiveChapterId>('top');
   const [activeRecoveryCard, setActiveRecoveryCard] = useState(0);
   const [recoveryPaused, setRecoveryPaused] = useState(false);
   const [recoveryReducedMotion, setRecoveryReducedMotion] = useState(false);
@@ -656,8 +657,8 @@ export default function PublicGabaGuide() {
   const recoveryBreakRef = useRef<HTMLElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
-  const activeChapterIndex = Math.max(0, readingChapters.findIndex((chapter) => chapter.id === activeChapterId));
-  const activeChapter = readingChapters[activeChapterIndex];
+  const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
+  const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
@@ -721,7 +722,7 @@ export default function PublicGabaGuide() {
     let frame = 0;
     const updateReadingChapter = () => {
       const readingPoint = window.scrollY + Math.min(window.innerHeight * 0.3, 260);
-      let currentChapter: ReadingChapterId = readingChapters[0].id;
+      let currentChapter: ActiveChapterId = 'top';
       for (const chapter of readingChapters) {
         const section = document.getElementById(chapter.id);
         if (section && section.offsetTop <= readingPoint) currentChapter = chapter.id;
@@ -848,8 +849,8 @@ export default function PublicGabaGuide() {
         <button ref={menuToggleRef} type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         <button type="button" className="guide-header-share" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`} aria-label="GABA 안내서 읽기 진행">
-          <div className="guide-reading-progress-track" aria-hidden="true"><span style={{ width: `${((activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
-          <div className="guide-reading-progress-meta"><span>지금 읽는 중</span><strong aria-live="polite">{activeChapter.label}</strong><small>{String(activeChapterIndex + 1).padStart(2, '0')} / {String(readingChapters.length).padStart(2, '0')}</small></div>
+          <div className="guide-reading-progress-track" aria-hidden="true"><span style={{ width: `${(Math.max(0, activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
+          <div className="guide-reading-progress-meta"><span>지금 읽는 중</span><strong aria-live="polite">{activeChapter.label}</strong><small>{activeChapterId === 'top' ? '도입' : `${String(activeChapterIndex + 1).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
         </div>
       </header>
 
@@ -1050,7 +1051,7 @@ export default function PublicGabaGuide() {
           </div>
         </section>
 
-        <section className="guide-section guide-reading-note guide-story-section" aria-label="연구 읽는 순서"><div className="guide-container"><p className="guide-section-number">11 · 출처 읽기</p><p className="guide-reading-note-copy">각 연구 카드에서 연구 방법과 실제 관찰 결과를 읽은 뒤, 카드 아래 출처를 통해 원문으로 이어집니다.</p></div></section>
+        <section className="guide-section guide-reading-note guide-story-section" id="reading-note" aria-label="연구 읽는 순서"><div className="guide-container"><p className="guide-section-number">11 · 출처 읽기</p><p className="guide-reading-note-copy">각 연구 카드에서 연구 방법과 실제 관찰 결과를 읽은 뒤, 카드 아래 출처를 통해 원문으로 이어집니다.</p></div></section>
 
         <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading">1950년의 작은 발견은<br />오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div>{shareStatus ? <span className="guide-share-status guide-final-status" role="status">{shareStatus}</span> : null}<details className="guide-share-lines"><summary>사업자가 바로 설명할 수 있는 GABA 5문장 보기</summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
       </main>
