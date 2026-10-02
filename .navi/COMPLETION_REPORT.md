@@ -11,6 +11,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 결과 비교 도표와 성장호르몬 상대 크기 막대, 출처 연결 구조
 - NAVI 목표·산출물·coverage·증거·감사·레드팀 기록
 
+## Latest Release Recheck — 7a64726 — 2026-10-03
+
+- 긴 안내서의 현재 위치를 `progressbar`로 보조기기에 노출하고 진행 표시의 숫자·글자 크기를 모바일에서도 읽기 쉽게 보완했다. 현재 사용하지 않는 구형 챌린지 이미지 4종은 정적 번들에서 제거했다.
+- 로컬 검증은 UI 계약, 타입체크, 127개 테스트, production build, 11개 라우트, 70개 번들을 통과했다. `/gaba_info/` Pages 빌드 로컬 재현 성능은 `1,430,551 <= 1,650,000` bytes였다.
+- PR #47 필수 검사(`37072831937`, `37072831902`)와 main 배포 run `37072974276`의 Pages publish·라이브 smoke·release status가 성공했다. 공개 validator는 candidate `7a64726c5e5df25d0b1f0377bb42e2b15face784`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, 내부 운영 스냅샷 제외, 제품 데이터 경계 유지와 provenance 일치를 확인했다.
+- 1440px·390px Chrome CDP 대체 QA에서 진행 표시 접근성 값·큰 글씨 상태·앵커 비가림·가로 넘침 없음·runtime errors `[]`를 확인했다.
+
 ## Latest Release Recheck — 2c8bd84 — 2026-10-03
 
 - 고정 헤더·읽기 진행 표시와 섹션 앵커가 겹치지 않도록 이동 오프셋을 보완해, 모바일·데스크톱에서 메뉴를 누른 뒤 섹션 제목과 다음 콘텐츠가 바로 읽히도록 했다.

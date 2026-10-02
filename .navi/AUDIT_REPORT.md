@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 7a64726 — 2026-10-03
+
+- 읽기 진행 표시를 `role="progressbar"`와 현재 장 번호에 연결하고, 기존 CSS 규칙에 시각 보정을 통합해 데스크톱·모바일에서 현재 위치가 더 또렷하게 읽히도록 했다. 실제 사용하지 않는 구형 챌린지 이미지 4종은 배포 번들에서 제거하고 현재 사용하는 `focus-game-card-v5.png`와 SVG는 보존했다.
+- 로컬 검증은 `pnpm run validate:ui-contract`, `pnpm run typecheck`, `pnpm test` 127/127, production build, 11개 정적 라우트, 70개 번들 파일을 통과했다. `/gaba_info/` Pages 빌드의 로컬 재현 성능은 `1,430,551 <= 1,650,000` bytes였다.
+- PR #47의 `release-verify` run `37072831937`와 `site-quality-verify` run `37072831902`가 성공했고, main 병합 SHA `7a64726c5e5df25d0b1f0377bb42e2b15face784`의 배포 run `37072974276`에서 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 성공했다. Worker는 구성되지 않은 `STATIC_ONLY` 상태로 배포하지 않았다.
+- 라이브 validator는 candidate `7a64726c5e5df25d0b1f0377bb42e2b15face784`, generatedAt `2026-10-02T22:32:43.088Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- Chrome CDP 대체 QA는 병합 전 동일 후보의 1440px·390px에서 진행 표시의 `progressbar` 역할·현재 장 값, 큰 글씨 모드의 가독성, 핵심 앵커의 고정 UI 비가림, 가로 넘침 없음과 runtime errors `[]`를 확인했다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다.
+- 남은 조건은 동일하다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 자동 검증으로 대체하지 않으며 OPEN으로 유지한다. 과거 Git 기록의 local-path 패턴 12건은 CI 경고로 남지만 현재 공개 번들에는 포함되지 않는다.
+
 ## Latest Public Release Recheck — 2c8bd84 — 2026-10-03
 
 - 섹션·헤더 앵커 이동을 고정 헤더와 읽기 진행 표시 아래에 가리지 않도록 보완했다. 실제 헤더 메뉴의 `연구 확장` 이동과 `history`·`sleep`·`research`·`expert-videos`·`final` 앵커를 1440px·390px에서 점검했으며 각 제목이 진행 표시 아래에 남았다.
