@@ -832,3 +832,15 @@
   .gaba-guide.is-large-text .guide-final-copy{font-size:calc(1em * 1.06)}
 }
 @media(prefers-reduced-motion:reduce){.guide-reading-size-toggle{transition:none}}
+
+/* v19 compact mobile header: preserve 44px touch targets on narrow phones. */
+@media(max-width:380px){
+  .guide-header{gap:8px;padding-inline:12px}
+  .guide-header .guide-logo{flex:1 1 auto;min-width:0}
+  .guide-menu-toggle,.guide-reading-size-toggle,.guide-header-share{flex:0 0 44px;width:44px;min-width:44px;padding:0}
+  .guide-menu-toggle{display:grid;place-items:center}
+  .guide-reading-size-toggle{gap:0}
+  .guide-reading-size-toggle span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .gaba-guide .guide-header-share{justify-content:center;gap:0;font-size:0}
+  .gaba-guide .guide-header-share svg{display:block}
+}
