@@ -322,6 +322,22 @@ const researchTopics: ResearchTopic[] = [
   },
 ];
 
+const sleepResultTopic: Pick<ResearchTopic, 'id' | 'chart'> = {
+  id: 'sleep-result',
+  chart: {
+    kind: 'comparison',
+    title: '수면 연구 결과를 방향으로 비교',
+    summary: 'GABA 섭취 기간에는 잠드는 시간이 더 짧고, 전체 비렘수면이 더 길었습니다.',
+    note: '숫자 대신 연구에서 확인된 변화 방향을 보여줍니다.',
+    referenceLabel: '비교 캡슐',
+    resultLabel: 'GABA 캡슐',
+    rows: [
+      { label: '잠드는 시간', reference: '더 길었습니다', result: '더 짧았습니다', visual: 'result-less' },
+      { label: '전체 비렘수면', reference: '더 짧았습니다', result: '더 길었습니다', visual: 'result-more' },
+    ],
+  },
+};
+
 const historyMilestones: HistoryMilestone[] = [
   {
     year: '1950',
@@ -564,7 +580,7 @@ function ResearchGlyph({ id }: { id: string }) {
   );
 }
 
-function ResearchOutcomeChart({ topic }: { topic: ResearchTopic }) {
+function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'chart'> }) {
   const chartId = `research-chart-${topic.id}`;
   const comparisonChart = topic.chart.kind === 'comparison' ? topic.chart : null;
   return (
@@ -944,7 +960,7 @@ export default function PublicGabaGuide() {
               <div className="guide-sleep-steps">
                 <article><span>01</span><div><h3>잠들고 깨는 과정과 GABA</h3><p>잠들려면 깨어 있게 하는 신경 신호가 낮아져야 합니다. GABA 신호는 잠이 시작되고 이어지는 과정과 관련이 있습니다.</p></div></article>
               <article><span>02</span><div><h3>사람 대상 수면 연구</h3><p>수면의 질이 낮았던 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 섭취한 무작위·위약 대조 교차시험입니다.</p><strong className="guide-result-line">GABA를 섭취한 기간에는 잠드는 시간이 더 짧았고, 전체 비렘수면은 더 길었습니다.</strong><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
-              <article><span>03</span><div><h3>실제로 달라진 수면 기록</h3><div className="guide-compare-row"><span>잠드는 시간</span><strong>더 짧았습니다</strong></div><div className="guide-compare-row"><span>전체 비렘수면</span><strong>더 길었습니다</strong></div><p className="guide-study-source">연구 결과와 출처를 한 화면에서 함께 살펴봅니다.</p></div></article>
+              <article><span>03</span><div><h3>실제로 달라진 수면 기록</h3><ResearchOutcomeChart topic={sleepResultTopic} /><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
                 <article><span>04</span><div><h3>몸의 리듬과 연구 결과</h3><div className="guide-compare-row"><span>몸에서 일어나는 일</span><strong>GABA와 수면 리듬의 관계</strong></div><div className="guide-compare-row"><span>사람 대상 연구에서 본 변화</span><strong>잠드는 시간·전체 비렘수면</strong></div></div></article>
               </div>
               <div className="guide-sleep-visual" style={{ '--guide-sleep-image': `url(${gabaSleepEditorial})` } as CSSProperties} aria-label="잔잔한 물결과 달빛으로 표현한 수면 연구 이미지" role="img"><div className="guide-sleep-wave"><i /><i /><i /><i /><i /><i /></div><span className="guide-sleep-orbit guide-sleep-orbit-one" /><span className="guide-sleep-orbit guide-sleep-orbit-two" /><strong>잠들기 전<br />신경 신호의 리듬</strong></div>
