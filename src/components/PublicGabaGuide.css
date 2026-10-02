@@ -186,6 +186,7 @@
 .guide-expert-thread span{color:var(--guide-teal-dark);font-weight:850}
 .guide-expert-thread strong{color:var(--guide-ink);font-size:15px}
 .guide-expert-thread i{color:#9ab4c0;font-style:normal}
+@media(min-width:1100px){.guide-final{background:linear-gradient(#135,#135)}}
 .guide-reading-note{padding:38px 0;background:#f7fbfd}
 .guide-reading-note-copy{max-width:70ch;margin:0;color:#637d91;font-size:15px;line-height:1.8;letter-spacing:-.035em}
 .guide-final-actions{grid-template-columns:minmax(0,390px)}
