@@ -1004,7 +1004,7 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-sleep-story guide-story-section" id="sleep" aria-labelledby="sleep-heading">
           <div className="guide-container">
-            <div className="guide-section-heading"><div><p className="guide-section-number">05 · 수면 연구</p><h2 id="sleep-heading">GABA가 가장 먼저 주목받은<br />분야, 수면</h2></div><p>수면 연구부터<br />GABA를 이해해 보세요.</p></div>
+            <div className="guide-section-heading"><div><p className="guide-section-number">05 · 수면 연구</p><h2 id="sleep-heading">GABA가 가장 먼저 주목받은 분야, 수면</h2></div><p>수면 연구부터<br />GABA를 이해해 보세요.</p></div>
             <p className="guide-section-lead">GABA와 수면이 어떻게 연결되는지, 전문가 설명과 사람 대상 연구를 함께 살펴봅니다.</p>
             <div className="guide-sleep-grid">
               <div className="guide-sleep-steps">
@@ -1024,7 +1024,7 @@ export default function PublicGabaGuide() {
             <div className="guide-research-map" aria-label="GABA에서 다섯 연구 영역으로 확장되는 구조">
               <svg className="guide-research-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 43V22M57 50H78M56 56L77 77M44 56L23 77M43 50H22" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth=".65" strokeDasharray="1 2" /></svg>
               <div className="guide-research-orbit-core"><strong>GABA</strong></div>
-              {researchTopics.map((topic) => <div className="guide-research-map-item" data-topic={topic.id} key={topic.id}><span className="guide-research-map-dot" aria-hidden="true"><i /></span><div><strong>{topic.title}</strong></div></div>)}
+              {researchTopics.map((topic) => <div className="guide-research-map-item" key={topic.id}><span className="guide-research-map-dot" aria-hidden="true"><i /></span><div><strong>{topic.title}</strong></div></div>)}
             </div>
             <div className="guide-research-flow">{researchTopics.map((topic, index) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding">{topic.finding}</dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
