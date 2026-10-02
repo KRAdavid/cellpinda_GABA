@@ -1,5 +1,13 @@
 # Audit Report
 
+## Narrow-phone Mobile Hardening Recheck — d0f1741 — 2026-10-03
+
+- PR #51의 모바일 보정은 320–430px에서 헤드라인이 오른쪽으로 잘리지 않도록 줄 크기·줄바꿈을 조정하고, 메뉴·큰 글씨·공유 컨트롤을 각각 44px 터치 영역으로 정렬했다. 데스크톱 히어로 구성은 유지했다.
+- 로컬 검증은 `validate:ui-contract`, typecheck, 127개 테스트, production build를 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,431,521 <= 1,650,000` bytes였다.
+- PR #51 검사 `release-verify 37075945151`, `site-quality-verify 37075945212`와 main 배포 run `37076052369`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 실제 공개 URL Chrome CDP 대체 QA는 390px에서 `scrollWidth=390`, 헤더 3개 컨트롤 각 44px, 메뉴 열기·큰 글씨 전환, runtime errors `[]`를 확인했다. 라이브 validator는 candidate `d0f17418c6e2b255a2999e64a6f8bd861bc088bd`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, 내부 운영 스냅샷 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Final Public Recheck After NAVI Sync — 6f48bae — 2026-10-03
 
 - NAVI 문서 동기화 이후 main 공개 후보 `6f48bae7a7adcc22b68fbefc2a9ca13b002fe540`의 배포 run `37074307727`을 재검증했다. `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 성공했고 Worker는 `STATIC_ONLY`라 배포하지 않았다.
