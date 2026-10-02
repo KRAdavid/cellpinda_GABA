@@ -518,15 +518,15 @@
   .guide-hero-copy{width:100%;min-width:0;max-width:100%}
   .guide-hero h1{max-width:100%;font-size:clamp(41px,11.2vw,53px);line-height:1.08;word-break:normal;overflow-wrap:anywhere}
   .guide-hero h1 em{margin-top:5px}
-  .guide-hero-story .guide-hero-body{width:min(100%,330px);max-width:330px;font-size:15px;line-height:1.78;white-space:normal;word-break:break-all;overflow-wrap:anywhere}
+  .guide-hero-story .guide-hero-body{width:min(100%,330px);max-width:330px;font-size:15px;line-height:1.78;white-space:normal;word-break:keep-all;overflow-wrap:break-word}
   .guide-hero-story .guide-reading-sequence{max-width:30ch;margin-top:19px;font-size:13px}
   .guide-hero-story .guide-reading-sequence span{margin-right:4px}
   .guide-hero-scroll{display:none}
   .guide-summary-grid{min-height:0}
   .guide-section{padding-block:75px}
-  .guide-section-heading h2{max-width:100%;font-size:clamp(33px,8.9vw,41px);word-break:break-all;overflow-wrap:anywhere}
+  .guide-section-heading h2{max-width:100%;font-size:clamp(33px,8.9vw,41px);word-break:keep-all;overflow-wrap:break-word}
   .guide-history-heading .guide-mobile-break{display:inline}
-  .guide-section-lead{max-width:100%;font-size:16px;line-height:1.82;word-break:normal;overflow-wrap:anywhere}
+  .guide-section-lead{max-width:100%;font-size:16px;line-height:1.82;word-break:keep-all;overflow-wrap:break-word}
   .guide-history{background:#f8fbfb}
   .guide-application-card,.guide-process-flow article,.guide-research-detail-inline{border-radius:18px}
 }
