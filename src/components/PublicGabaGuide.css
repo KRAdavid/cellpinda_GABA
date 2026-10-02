@@ -728,15 +728,10 @@
 
 /* v18 research map: give the expansion section an editorial overview before the detailed evidence. */
 .guide-research-map{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:0 0 32px;padding:27px 18px 25px;border-block:1px solid #dcebed;background:linear-gradient(180deg,#fbfefe 0%,#f3f9fa 100%)}
-.guide-research-map-line{position:absolute;top:63px;left:8%;right:8%;height:1px;background:linear-gradient(90deg,#cce6e8 0%,#44aeb1 50%,#cce6e8 100%)}
 .guide-research-map-item{position:relative;display:grid;justify-items:center;gap:8px;text-align:center}
 .guide-research-map-number{color:#91aab7;font-size:10px;font-weight:900;letter-spacing:.14em}
 .guide-research-map-dot{display:grid;place-items:center;width:18px;height:18px;border:1px solid #b8dcdf;border-radius:50%;background:#f7fcfc}
 .guide-research-map-dot i{display:block;width:7px;height:7px;border-radius:50%;background:var(--guide-teal)}
-.guide-research-map-item-skin .guide-research-map-dot i{background:#d9898e}
-.guide-research-map-item-muscle .guide-research-map-dot i{background:#e59b83}
-.guide-research-map-item-growth-hormone .guide-research-map-dot i{background:#77aac7}
-.guide-research-map-item-immune .guide-research-map-dot i{background:#74b9c0}
 .guide-research-map-item div{display:grid;gap:4px}
 .guide-research-map-item strong{color:var(--guide-ink);font-size:15px;font-weight:850;letter-spacing:-.055em;line-height:1.3}
 .guide-research-map-item small{max-width:20ch;color:#8ba3af;font-size:10px;line-height:1.45;word-break:keep-all}
@@ -754,7 +749,6 @@
 .guide-research-detail-inline .guide-research-finding{padding-left:11px;border-left:2px solid var(--guide-research-accent,#27a5aa)}
 @media(max-width:1100px){
   .guide-research-map{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 10px}
-  .guide-research-map-line{display:none}
 }
 @media(max-width:900px){
   .guide-research-detail-inline{display:block;padding:28px 29px 25px}
