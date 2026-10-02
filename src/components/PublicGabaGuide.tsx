@@ -46,11 +46,18 @@ type ResearchTopic = {
   english: string;
   tone: EvidenceTone;
   label: string;
+  profile: ResearchProfileData;
   study: string;
   finding: string;
   interpretation: string;
   source: { label: string; url: string };
   chart: ResearchChart;
+};
+
+type ResearchProfileData = {
+  subject: string;
+  design: string;
+  measured: string;
 };
 
 type ResearchComparison = {
@@ -218,6 +225,11 @@ const researchTopics: ResearchTopic[] = [
     english: '인지와 집중',
     tone: 'human',
     label: '사람 63명 · 비교 연구',
+    profile: {
+      subject: '건강한 성인 63명',
+      design: '무작위·위약 대조 교차시험',
+      measured: '뇌파·활력 점수',
+    },
     study: '건강한 성인 63명이 GABA 100mg과 위약을 각각 섭취하고, 머리를 많이 쓰는 과제를 수행한 무작위·위약 대조 교차시험입니다.',
     finding: '머리를 많이 쓴 과제를 마친 뒤, GABA를 섭취한 그룹은 비교 그룹보다 뇌파와 활력 점수가 덜 떨어졌습니다. 연구진은 정신적 스트레스 반응이 덜 나타난 결과로 해석했습니다.',
     interpretation: '이 연구가 직접 살펴본 항목은 기억력이나 치매가 아니라, 정신적 부담이 있는 상황에서의 뇌파와 기분 변화입니다.',
@@ -241,6 +253,11 @@ const researchTopics: ResearchTopic[] = [
     english: '피부와 장벽',
     tone: 'early',
     label: '생쥐 피부·사람 피부 세포 실험',
+    profile: {
+      subject: '생쥐 피부·사람 피부 세포',
+      design: '피부 장벽 손상 실험',
+      measured: '장벽 회복·피부 표면 변화',
+    },
     study: '피부 장벽을 손상시킨 생쥐에 GABA를 바르고, 사람 피부 세포에서도 반응을 살핀 실험입니다.',
     finding: 'GABA를 바른 피부는 장벽이 더 빨리 회복됐고, 피부 표면이 두꺼워지는 변화는 줄었습니다.',
     interpretation: '이 연구가 본 결과는 피부 장벽 회복과 피부 표면의 변화이며, 사람의 피부 탄력이나 주름을 직접 측정한 시험은 아닙니다.',
@@ -264,6 +281,11 @@ const researchTopics: ResearchTopic[] = [
     english: '근육과 움직임',
     tone: 'human',
     label: '남성 11명 · 운동 비교 연구',
+    profile: {
+      subject: '저항운동 경험 남성 11명',
+      design: '이중맹검·위약 대조 교차시험',
+      measured: '혈액 속 성장호르몬',
+    },
     study: '저항운동 경험이 있는 남성 11명이 참여했습니다. GABA 3g 또는 위약을 섭취한 뒤 휴식하거나 운동했고, 90분 동안 혈액 속 성장호르몬 변화를 살핀 이중맹검 교차시험입니다.',
     finding: '쉬었을 때 GABA를 섭취한 그룹의 성장호르몬 최고 수치는 위약 그룹보다 약 400%, 전체 반응량은 약 375% 높았습니다. 운동 조건에서도 섭취 30분 뒤 GABA 그룹의 반응이 비교 그룹보다 높게 기록됐습니다.',
     interpretation: '이 연구가 측정한 것은 혈액 속 성장호르몬 반응이며, 근육 크기·근력·체력이 좋아졌는지는 측정하지 않았습니다.',
@@ -285,6 +307,11 @@ const researchTopics: ResearchTopic[] = [
     english: '성장호르몬',
     tone: 'early',
     label: '청소년기 생쥐 · 16주 연구',
+    profile: {
+      subject: '청소년기 수컷·암컷 생쥐',
+      design: '16주 동물시험',
+      measured: '몸길이·체지방·성장호르몬',
+    },
     study: '청소년기에 해당하는 수컷·암컷 생쥐에 16주 동안 GABA를 투여하고, 몸길이와 체지방, 뇌하수체와 혈액 속 성장호르몬을 살펴본 동물시험입니다.',
     finding: 'GABA를 투여한 수컷 생쥐의 몸길이는 대조군보다 길었고, 체지방 지표는 낮았습니다. 뇌하수체 안의 성장호르몬 단백질은 암수 모두에서 증가했고, 혈액 속 성장호르몬은 수컷에서 증가했습니다.',
     interpretation: '이 결과는 청소년기 생쥐의 성장·성장호르몬 변화입니다. 어린이의 키 성장이나 성인의 최종 신장을 측정한 결과는 아닙니다.',
@@ -308,6 +335,11 @@ const researchTopics: ResearchTopic[] = [
     english: '신경과 면역',
     tone: 'human',
     label: '사람 21명 · 스트레스 실험',
+    profile: {
+      subject: '건강한 성인 21명',
+      design: '뇌파·스트레스 상황 비교',
+      measured: '뇌파·침 속 IgA',
+    },
     study: '건강한 성인 13명의 뇌파 실험과 성인 8명이 높은 다리 위에서 긴장하는 실험에서, GABA를 섭취한 뒤 뇌파와 침 속 면역 단백질 IgA를 측정했습니다.',
     finding: '섭취 60분 뒤 GABA를 섭취한 그룹은 물·L-테아닌 그룹보다 알파파가 높고 베타파가 낮았습니다. 높은 다리 위에서 긴장하는 상황에서는 침 속 IgA가 위약 그룹보다 높게 유지됐습니다.',
     interpretation: '이 연구가 직접 측정한 것은 스트레스 상황의 뇌파와 침 속 IgA이며, 감염 예방률이나 질병 치료율은 측정하지 않았습니다.',
@@ -340,6 +372,12 @@ const sleepResultTopic: Pick<ResearchTopic, 'id' | 'chart'> = {
       { label: '전체 비렘수면', reference: '더 짧았습니다', result: '더 길었습니다', visual: 'result-more' },
     ],
   },
+};
+
+const sleepStudyProfile: ResearchProfileData = {
+  subject: '수면의 질이 낮았던 성인 16명',
+  design: '무작위·위약 대조 교차시험',
+  measured: '잠드는 시간·전체 비렘수면',
 };
 
 const historyMilestones: HistoryMilestone[] = [
@@ -589,6 +627,26 @@ function ResearchGlyph({ id }: { id: string }) {
       {id === 'muscle' && <><span /><span /><span /></>}
       {id === 'immune' && <><span /><span /><span /><span /><span /></>}
       {id === 'skin' && <><span /><span /></>}
+    </div>
+  );
+}
+
+function ResearchProfile({ profile }: { profile: ResearchProfileData }) {
+  return (
+    <div className="guide-research-profile" aria-label="연구 구성">
+      <p className="guide-research-profile-kicker">연구 구성</p>
+      <div>
+        <span>대상</span>
+        <strong>{profile.subject}</strong>
+      </div>
+      <div>
+        <span>방법</span>
+        <strong>{profile.design}</strong>
+      </div>
+      <div>
+        <span>측정</span>
+        <strong>{profile.measured}</strong>
+      </div>
     </div>
   );
 }
@@ -1060,7 +1118,7 @@ export default function PublicGabaGuide() {
             <div className="guide-sleep-grid">
               <div className="guide-sleep-steps">
                 <article><span>01</span><div><h3>잠들고 깨는 과정과 GABA</h3><p>잠들려면 깨어 있게 하는 신경 신호가 낮아져야 합니다. GABA 신호는 잠이 시작되고 이어지는 과정과 관련이 있습니다.</p></div></article>
-              <article><span>02</span><div><h3>사람 대상 수면 연구</h3><p>수면의 질이 낮았던 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 섭취한 무작위·위약 대조 교차시험입니다.</p><strong className="guide-result-line">GABA를 섭취한 기간에는 잠드는 시간이 더 짧았고, 전체 비렘수면은 더 길었습니다.</strong><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
+              <article><span>02</span><div><h3>사람 대상 수면 연구</h3><p>수면의 질이 낮았던 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 섭취한 무작위·위약 대조 교차시험입니다.</p><ResearchProfile profile={sleepStudyProfile} /><strong className="guide-result-line">GABA를 섭취한 기간에는 잠드는 시간이 더 짧았고, 전체 비렘수면은 더 길었습니다.</strong><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
               <article><span>03</span><div><h3>실제로 달라진 수면 기록</h3><ResearchOutcomeChart topic={sleepResultTopic} /><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
                 <article><span>04</span><div><h3>몸의 리듬과 연구 결과</h3><div className="guide-compare-row"><span>몸에서 일어나는 일</span><strong>GABA와 수면 리듬의 관계</strong></div><div className="guide-compare-row"><span>사람 대상 연구에서 본 변화</span><strong>잠드는 시간·전체 비렘수면</strong></div></div></article>
               </div>
@@ -1078,7 +1136,7 @@ export default function PublicGabaGuide() {
               {researchTopics.map((topic) => <div className="guide-research-map-item" key={topic.id}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><div><strong>{topic.title}</strong></div></div>)}
             </div>
             <div className="guide-rail"><b>읽는 순서</b><ol><li><b>01</b>{' '}지도</li><li><b>02</b>{' '}대상</li><li><b>03</b>{' '}결과</li><li><b>04</b>{' '}해석</li></ol></div>
-            <div className="guide-research-flow">{researchTopics.map((topic, index) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding">{topic.finding}</dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
+            <div className="guide-research-flow">{researchTopics.map((topic, index) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchProfile profile={topic.profile} /><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding">{topic.finding}</dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
           </div>
         </section>
