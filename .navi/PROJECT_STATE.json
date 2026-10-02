@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T19:16:57.412836Z",
+  "updated_at": "2026-10-02T19:28:55.464099Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -160,7 +160,8 @@
         "E-RELEASE-C13",
         "E-LOCAL-BUILD-RESEARCH-MAP",
         "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS",
-        "E-LOCAL-BUILD-METRIC-VIZ"
+        "E-LOCAL-BUILD-METRIC-VIZ",
+        "E-LOCAL-BUILD-RECOVERY-INDEX"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -190,7 +191,8 @@
         "E-RELEASE-C13",
         "E-CDP-RESEARCH-MAP",
         "E-CDP-RESEARCH-MAP-CONNECTORS",
-        "E-CDP-METRIC-VIZ"
+        "E-CDP-METRIC-VIZ",
+        "E-CDP-RECOVERY-INDEX"
       ],
       "owner": "UX QA"
     },
@@ -294,7 +296,8 @@
         "E-RELEASE-C13",
         "E-LOCAL-BUILD-RESEARCH-MAP",
         "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS",
-        "E-LOCAL-BUILD-METRIC-VIZ"
+        "E-LOCAL-BUILD-METRIC-VIZ",
+        "E-LOCAL-BUILD-RECOVERY-INDEX"
       ],
       "owner": "QA"
     },
@@ -319,7 +322,9 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS",
         "E-LIVE-PUBLIC-NAVI-SYNC",
         "E-LIVE-PUBLIC-METRIC-VIZ",
-        "E-DEPLOY-PIPELINE-METRIC-VIZ"
+        "E-DEPLOY-PIPELINE-METRIC-VIZ",
+        "E-LIVE-PUBLIC-RECOVERY-INDEX",
+        "E-DEPLOY-PIPELINE-RECOVERY-INDEX"
       ],
       "owner": "배포 QA"
     },
@@ -358,7 +363,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-MAP",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS",
-        "E-LIVE-PUBLIC-NAVI-SYNC"
+        "E-LIVE-PUBLIC-NAVI-SYNC",
+        "E-LIVE-PUBLIC-RECOVERY-INDEX",
+        "E-DEPLOY-PIPELINE-RECOVERY-INDEX"
       ],
       "owner": "운영 QA"
     },
@@ -414,7 +421,8 @@
         "E-LOCAL-BUILD-FOLLOWUP",
         "E-CDP-NAVIGATION-LATEST",
         "E-CDP-METRIC-VIZ",
-        "E-LIVE-PUBLIC-METRIC-VIZ"
+        "E-LIVE-PUBLIC-METRIC-VIZ",
+        "E-LIVE-PUBLIC-RECOVERY-INDEX"
       ],
       "owner": "QA"
     },
@@ -804,7 +812,9 @@
           "E-LIVE-PUBLIC-RESEARCH-MAP",
           "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONNECTORS",
           "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS",
-          "E-LIVE-PUBLIC-NAVI-SYNC"
+          "E-LIVE-PUBLIC-NAVI-SYNC",
+          "E-LIVE-PUBLIC-RECOVERY-INDEX",
+          "E-DEPLOY-PIPELINE-RECOVERY-INDEX"
         ],
         "notes": "6df3e36 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 지도 레이아웃을 재확인"
       },
@@ -824,7 +834,8 @@
           "E-LOCAL-BUILD-FINAL",
           "E-CDP-FINAL",
           "E-CDP-RESEARCH-MAP",
-          "E-CDP-RESEARCH-MAP-CONNECTORS"
+          "E-CDP-RESEARCH-MAP-CONNECTORS",
+          "E-CDP-RECOVERY-INDEX"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -837,7 +848,8 @@
           "E-CDP-READABILITY-B7",
           "E-CDP-FINAL",
           "E-CDP-RESEARCH-MAP",
-          "E-CDP-RESEARCH-MAP-CONNECTORS"
+          "E-CDP-RESEARCH-MAP-CONNECTORS",
+          "E-CDP-RECOVERY-INDEX"
         ],
         "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
@@ -855,7 +867,9 @@
           "E-CDP-NAVIGATION-PROGRESS",
           "E-CDP-FINAL",
           "E-CDP-RESEARCH-MAP",
-          "E-CDP-RESEARCH-MAP-CONNECTORS"
+          "E-CDP-RESEARCH-MAP-CONNECTORS",
+          "E-CDP-RECOVERY-INDEX",
+          "E-LIVE-PUBLIC-RECOVERY-INDEX"
         ],
         "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태와 연구 지도 배치 확인"
       },
@@ -876,7 +890,8 @@
           "E-LOCAL-BUILD-SHARE-KIT",
           "E-LOCAL-BUILD-UI-POLISH",
           "E-LOCAL-BUILD-RESEARCH-MAP",
-          "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS"
+          "E-LOCAL-BUILD-RESEARCH-MAP-CONNECTORS",
+          "E-LOCAL-BUILD-RECOVERY-INDEX"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 지도 레이아웃 검증 통과"
       },

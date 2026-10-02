@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 5321f9d — 2026-10-03
+
+- 수면·회복 14단계 지도에 `01–14` 단계 번호와 `aria-current="step"` 현재 위치 표시를 추가해 모바일에서 읽기 순서를 숫자로 빠르게 파악할 수 있도록 보완했다.
+- 로컬 검증은 타입체크, 127개 테스트, production build, 11개 정적 라우트, 74개 번들 파일, 성능 `1644866 <= 1650000` bytes를 통과했다.
+- Chrome CDP 라이브 QA에서 390px 화면의 14개 단계 번호, 마지막 단계 선택, 활성 단계 자동 중앙 정렬, 가로 넘침 없음, `runtimeErrors []`를 확인했다. Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 대체 증거로 사용했다.
+- PR #32의 필수 검사가 통과했고, GitHub Actions `37053872031`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했다. `deploy-worker`는 `STATIC_ONLY` 조건으로 건너뛰었다.
+- 라이브 validator는 candidate `5321f9d4f3f0e1af56b73b225ea0dfc00fc3f4be`, HTTP 200, 74 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly 및 provenance matched를 확인했다.
+- 이번 변경은 수면·회복 흐름의 위치 인지성과 접근성을 개선한 것이며, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수의 잔여 조건은 기존처럼 OPEN으로 유지한다.
+
 ## Latest Public Release Recheck — 3af1327 — 2026-10-03
 
 - 성장호르몬 연구 카드의 `약 +400%`·`약 +375%` 수치를 상대 크기 막대로 시각화하고, 막대가 해당 연구 안에서 가장 높은 반응을 100으로 둔 표시라는 설명을 추가했다.
