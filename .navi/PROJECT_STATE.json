@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T22:50:58.691068Z",
+  "updated_at": "2026-10-02T23:12:37.789947Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -580,7 +580,11 @@
         "E-DEPLOY-PIPELINE-READING-PROGRESS",
         "E-LIVE-PUBLIC-READING-PROGRESS",
         "E-LIVE-PUBLIC-NAVI-RELEASE",
-        "E-LIVE-PUBLIC-NAVI-FINAL"
+        "E-LIVE-PUBLIC-NAVI-FINAL",
+        "E-LOCAL-BUILD-MOBILE-HARDENING",
+        "E-CDP-MOBILE-HARDENING",
+        "E-DEPLOY-PIPELINE-MOBILE-HARDENING",
+        "E-LIVE-PUBLIC-MOBILE-HARDENING"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -742,7 +746,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T00:47:38Z"
+    "last_run_at": "2026-10-02T23:08:32Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -789,11 +793,11 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T00:47:38Z"
+    "last_run_at": "2026-10-02T23:08:32Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "c92a0cdaa811ae3040df90846a241b9da268a7390f1f2789b6bed8b57ca4a482",
+    "assessed_input_sha256": "74517dde373137c766b83ec11478e6070a1833c482c5b659b439893dc08b7e57",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -894,7 +898,10 @@
           "E-DEPLOY-PIPELINE-READING-PROGRESS",
           "E-LIVE-PUBLIC-READING-PROGRESS",
           "E-LIVE-PUBLIC-NAVI-RELEASE",
-          "E-LIVE-PUBLIC-NAVI-FINAL"
+          "E-LIVE-PUBLIC-NAVI-FINAL",
+          "E-LOCAL-BUILD-MOBILE-HARDENING",
+          "E-DEPLOY-PIPELINE-MOBILE-HARDENING",
+          "E-LIVE-PUBLIC-MOBILE-HARDENING"
         ],
         "notes": "34807cb 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·차트 큰 글씨 체계를 재확인"
       },
@@ -925,7 +932,9 @@
           "E-CDP-ANCHOR-OFFSET",
           "E-LIVE-PUBLIC-ANCHOR-OFFSET",
           "E-CDP-READING-PROGRESS",
-          "E-LIVE-PUBLIC-READING-PROGRESS"
+          "E-LIVE-PUBLIC-READING-PROGRESS",
+          "E-CDP-MOBILE-HARDENING",
+          "E-LIVE-PUBLIC-MOBILE-HARDENING"
         ],
         "notes": "연구 영역 5개와 상세 카드 5개 확인"
       },
@@ -951,7 +960,9 @@
           "E-CDP-ANCHOR-OFFSET",
           "E-LIVE-PUBLIC-ANCHOR-OFFSET",
           "E-CDP-READING-PROGRESS",
-          "E-LIVE-PUBLIC-READING-PROGRESS"
+          "E-LIVE-PUBLIC-READING-PROGRESS",
+          "E-CDP-MOBILE-HARDENING",
+          "E-LIVE-PUBLIC-MOBILE-HARDENING"
         ],
         "notes": "도표 카드에서 비교 조건·GABA 조건·핵심 결과·출처 확인"
       },
@@ -1020,7 +1031,10 @@
           "E-LOCAL-BUILD-READING-PROGRESS",
           "E-DEPLOY-PIPELINE-READING-PROGRESS",
           "E-LIVE-PUBLIC-NAVI-RELEASE",
-          "E-LIVE-PUBLIC-NAVI-FINAL"
+          "E-LIVE-PUBLIC-NAVI-FINAL",
+          "E-LOCAL-BUILD-MOBILE-HARDENING",
+          "E-DEPLOY-PIPELINE-MOBILE-HARDENING",
+          "E-LIVE-PUBLIC-MOBILE-HARDENING"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 지도 레이아웃 검증 통과"
       },
@@ -1170,6 +1184,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T00:47:38Z"
+    },
+    {
+      "id": "H-019",
+      "event": "좁은 모바일 첫 화면을 보완한 PR #51을 main에 병합하고 390px 공개 URL의 가로 폭·44px 터치 영역·메뉴·큰 글씨 상호작용을 재검증했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-02T23:08:32Z"
     }
   ]
 }

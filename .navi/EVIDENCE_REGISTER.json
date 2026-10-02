@@ -1275,6 +1275,50 @@
       "claim_refs": ["C-001", "C-002"]
     },
     {
+      "id": "E-LOCAL-BUILD-MOBILE-HARDENING",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 헤더·히어로 보정이 로컬 품질 기준과 Pages 성능 예산을 통과했다.",
+      "locator": "PR #51 candidate 7100830; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test 127/127; pnpm run build PASS; static routes 11; files 70; performance total 1431521 <= 1650000 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/51",
+      "captured_at": "2026-10-02T23:05:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-MOBILE-HARDENING",
+      "claim_refs": ["C-001", "C-003", "C-004"]
+    },
+    {
+      "id": "E-CDP-MOBILE-HARDENING",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP 대체 렌더링 QA에서 320·360·390px의 가로 넘침과 좁은 모바일 헤더·히어로 문제를 확인하고 보정했다.",
+      "locator": "Chrome CDP fallback; CSS viewport 320/360/390; document/body scrollWidth matched viewport; header/menu/reading-size/share each 44px; 390px menuOpen true and largeText true after interaction; runtime errors []",
+      "source_uri": "http://127.0.0.1:5180/",
+      "captured_at": "2026-10-02T23:04:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-MOBILE-HARDENING",
+      "claim_refs": ["C-003", "C-004"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-HARDENING",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 보정 PR과 main 배포 파이프라인이 필수 검사를 통과했다.",
+      "locator": "PR #51 checks release-verify 37075945151 PASS and site-quality-verify 37075945212 PASS; main run 37076052369 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker STATIC_ONLY skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37076052369",
+      "captured_at": "2026-10-02T23:08:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-MOBILE-HARDENING",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-HARDENING",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 보정이 반영된 최신 GitHub Pages 공개본이 200으로 응답했고 공개 번들·데이터 경계·공유 경로가 유지됐다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha d0f17418c6e2b255a2999e64a6f8bd861bc088bd; generatedAt 2026-10-02T23:08:32.512Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP 390px scrollWidth 390, controls 44px, menu/large-text interaction passed, runtime errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-02T23:08:32Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-MOBILE-HARDENING",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004"]
+    },
+    {
       "id": "E-LIVE-PUBLIC-ANCHOR-OFFSET",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
