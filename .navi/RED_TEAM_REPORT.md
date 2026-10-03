@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Expert Video Thumbnail Fallback Red-Team Recheck — 342f43f — 2026-10-04
+
+- 기본·대체 썸네일 요청을 모두 실패시키는 조건에서 이미지 요소가 숨겨지고 `GABA VIDEO` 표지가 실제로 보이는지 확인했다. 정상 공개본에서는 320/390/1440px의 9개 썸네일 로딩, 첫 4개 eager, 가로 폭과 브라우저 오류도 재확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 영상 선택·iframe 재생·영상 데이터·제품 독립 경계는 변경하지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-FALLBACK-20261004`.
+
 ## Expert Video Thumbnail Loading Red-Team Recheck — 8093615 — 2026-10-04
 
 - 모바일 전문가 영상 게시판의 일부 카드가 이미지 로딩 전 빈 표면으로 보이던 결함을 확인했고, 첫 4개 eager 로드와 `GABA VIDEO` 대체 표면으로 보완했다. 320/390/1440px 공개 Chrome fallback에서 첫 4개 썸네일 로드, 가로 넘침 없음, 브라우저 오류 없음을 확인했으며 새 CRITICAL/MAJOR 결함은 없었다.

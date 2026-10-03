@@ -1,5 +1,13 @@
 # Completion Report
 
+## Expert Video Thumbnail Fallback Release Recheck — 342f43f — 2026-10-04
+
+- 기본·대체 썸네일이 모두 실패하는 상황에서도 빈 박스가 아닌 `GABA VIDEO` 표지가 보이도록 전문가 영상 게시판의 실패 상태를 보완했다.
+- 로컬 typecheck·UI contract·127 tests·build, 390px 강제 이중 실패 Playwright, PR #158 checks, main workflow `37144428732`, Pages 배포·라이브 smoke·release status와 공개 validator가 통과했다. 공개 candidate는 `342f43ff5242a44e5a32cb9c3909be5c37c3809b`다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android 대표 환경, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-FALLBACK-20261004`.
+
 ## Expert Video Thumbnail Release Recheck — 8093615 — 2026-10-04
 
 - 전문가 영상 게시판의 첫 4개 썸네일 eager 로드와 지연 로드용 `GABA VIDEO` 표지를 추가해 모바일 초기 빈 썸네일 문제를 보완했다. 320/390/1440px에서 가로 넘침 없음·브라우저 오류 없음, 필터 4개 카드 전환, 영상 선택·iframe 로딩 상태를 확인했다.
