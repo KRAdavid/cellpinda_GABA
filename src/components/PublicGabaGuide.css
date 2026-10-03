@@ -689,8 +689,10 @@
   .guide-recovery-break-head{display:block;margin-bottom:20px}
   .guide-recovery-break-head h2{font-size:42px}
   .guide-recovery-break-head>p{margin-top:12px;font-size:14px;text-align:left}
-  .guide-recovery-map{display:flex;gap:3px;margin:0 -20px 18px;padding:0 20px 9px;overflow-x:auto}
-  .guide-recovery-map-step{flex:0 0 60px}
+  /* Show the complete 14-card path without hiding later steps behind a
+     horizontal scroller. The active card remains the visual focus. */
+  .guide-recovery-map{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:13px 4px;margin:0 0 18px;padding:0;overflow:visible}
+  .guide-recovery-map-step{flex:unset}
   .guide-recovery-map-icon{width:32px;height:32px}
   .guide-recovery-card{min-height:356px;padding:28px 22px 21px;border-radius:22px}
   .guide-recovery-card-top{grid-template-columns:1fr;gap:15px;min-height:0}
