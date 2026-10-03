@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Expert Video Feature Focus Red-Team Recheck — c33b427 — 2026-10-04
+
+- 390px에서 전문가 영상 두 번째 카드를 클릭하고 Enter로 선택하는 경로를 공격적으로 재현했다. 선택된 영상 iframe으로 전환되면서 `#expert-video-feature`에 실제 포커스가 놓이고 focus-visible 윤곽선이 표시되며 선택 카드는 하나로 유지됐다.
+- 로컬 preview에서 가로 넘침과 콘솔·페이지 오류가 없었고, main workflow `37152307391`의 정적 Pages 배포·라이브 smoke·release status와 live validator candidate `c33b427`가 성공했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. 공개 연구 카피와 제품 독립 경계는 변경하지 않았다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FEATURE-FOCUS-20261004`, `E-PLAYWRIGHT-VIDEO-FEATURE-FOCUS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-FOCUS-20261004`, `E-LIVE-PUBLIC-VIDEO-FEATURE-FOCUS-20261004`.
+
 ## Public Release Interaction and Cross-Viewport Red-Team Recheck — 4d94150 — 2026-10-04
 
 - 메뉴 항목 이동·Escape·연구 지도 선택·영상 주제 필터·선택 즉시 재생·회복 카드 자동 전환을 공격 경로로 재현했으며, 상태가 하나로 유지되고 포커스가 문서 배경으로 빠지지 않았다. 320·390·412·768·1440px 직접 해시 진입에서도 제목 정렬·진행 상태·가로 폭이 유지됐다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T20:24:43Z",
+  "updated_at": "2026-10-03T20:43:46Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2767,6 +2767,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T20:24:43Z"
+    },
+    {
+      "id": "H-074",
+      "event": "전문가 영상 카드를 선택했을 때 동적 영상 영역에 키보드·스크린리더 포커스가 남도록 PR #164를 보완하고 main 커밋 `c33b427`로 공개 배포했다. 로컬 typecheck·UI 계약·127개 테스트·build와 390px Chrome fallback에서 클릭·Enter 선택, `#expert-video-feature` 포커스, focus-visible 윤곽선, iframe 선택 상태, 가로 폭·브라우저 오류를 확인했다. main workflow `37152307391`의 Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 공개 연구 카피·제품 독립 경계는 변경하지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T20:43:46Z"
     }
   ]
 }

@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 전문가 영상 선택 포커스 복귀 공개 배포: 2026-10-04 / candidate `c33b427`
+
+전문가 영상 카드를 클릭하거나 Enter로 선택한 뒤 새 영상 영역을 바로 읽을 수 있도록 `#expert-video-feature`에 포커스를 복귀시키고 동적 제목 연결·`aria-live`·focus-visible 윤곽선을 보강했다. PR #164, main workflow `37152307391`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬 390px Chrome fallback에서 영상 iframe 전환·선택 카드 1개·가로 넘침 없음·오류 없음을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-FEATURE-FOCUS-20261004`, `E-PLAYWRIGHT-VIDEO-FEATURE-FOCUS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-FOCUS-20261004`, `E-LIVE-PUBLIC-VIDEO-FEATURE-FOCUS-20261004`.
+
 ## 공개 배포 자동 재감리·NAVI 동기화: 2026-10-04 / candidate `4d94150`
 
 최신 공개본을 실제 독자 흐름으로 자동 재현했다. 390px 메뉴·포커스·연구 지도·수면 영상 필터·iframe 즉시 재생·3초 회복 카드, 320/390/412/768/1440px 직접 해시 진입을 확인했고 새 CRITICAL/MAJOR 결함은 없었다. NAVI 문서 동기화 후 main workflow `37151251781`의 Pages 배포·라이브 smoke·release status까지 성공했으며 라이브 validator도 HTTP 200·STATIC·candidate `4d94150`·정적 공개 경계 정합성을 유지했다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 외부 브라우저·실사용자·독립 과학·규제 감수는 남아 있다. 공개 UI 코드 변경은 필요하지 않아 불필요한 재작업은 하지 않고 NAVI 증거·감사·레드팀 기록만 갱신했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

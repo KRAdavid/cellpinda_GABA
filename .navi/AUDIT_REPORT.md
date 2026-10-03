@@ -1,5 +1,13 @@
 # Audit Report
 
+## Expert Video Feature Focus Audit — c33b427 — 2026-10-04
+
+- 전문가 영상 카드를 선택한 뒤 동적 영상 영역으로 포커스가 이동하지 않아 키보드·스크린리더 사용자가 새 콘텐츠 위치를 놓칠 수 있는 결함을 PR #164에서 보완했다. `#expert-video-feature`에 동적 제목 연결과 `aria-live`를 유지하고, 새 영상 선택 시 실제 포커스를 영상 영역으로 복귀시켰다.
+- 로컬 typecheck·UI 계약·127개 테스트·build가 통과했고, 390px Chrome fallback에서 클릭·Enter 선택 후 `#expert-video-feature` 포커스·focus-visible 윤곽선·iframe 선택 상태·가로 폭·브라우저 오류 없음을 확인했다. main workflow `37152307391`, Pages 배포·라이브 smoke·release status와 live validator candidate `c33b427`도 통과했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FEATURE-FOCUS-20261004`, `E-PLAYWRIGHT-VIDEO-FEATURE-FOCUS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-FOCUS-20261004`, `E-LIVE-PUBLIC-VIDEO-FEATURE-FOCUS-20261004`.
+
 ## Public Release Interaction and Cross-Viewport Recheck — 4d94150 — 2026-10-04
 
 - 최신 공개본을 실제 독자 흐름으로 재감리했다. 390px에서 메뉴 열림·첫 항목 포커스·Escape 닫힘·토글 포커스 복귀·`#academic` 이동, 연구 지도에서 근육 카드 선택, 수면 영상 필터 4개 전환·YouTube iframe 재생, 3초 회복 카드 자동 전환을 확인했다.
