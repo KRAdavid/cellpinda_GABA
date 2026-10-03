@@ -1427,7 +1427,7 @@ export default function PublicGabaGuide() {
                 <span className="guide-reading-note-source-kicker">예시 출처 · 사람 대상 연구</span>
                 <strong>{researchTopics[0].source.label}</strong>
                 <small>건강한 성인 63명 · 뇌파·활력 점수 · 무작위·위약 대조 교차시험</small>
-                <ExternalLink size={15} aria-hidden="true" />
+                <span className="guide-reading-note-source-action">원문 보기 <ExternalLink size={14} aria-hidden="true" /></span>
               </a>
             </div>
           </div>
