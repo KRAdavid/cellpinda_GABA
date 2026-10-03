@@ -2758,6 +2758,50 @@
       "captured_at": "2026-10-03T11:04:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-SCALE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-HERO-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 히어로를 단일 열로 보정하고 좁은 화면 헤더 컨트롤을 고정한 PR #121의 로컬 검증이 통과했다. 기존 공개 카피·제품 독립 경계는 변경하지 않았다.",
+      "locator": "PR #121 candidate 882e6a4; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; static routes 11, files 70; performance initial JS 311157, CSS 95703, total assets 1461084; Playwright Chrome true viewport screenshots captured at 320px, 390px, 1440px",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/121",
+      "captured_at": "2026-10-03T11:34:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-MOBILE-HERO",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-HERO-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 320px·390px 모바일 viewport에서 뇌와 우리 헤더의 메뉴·큰 글씨·공유 아이콘이 모두 화면 안에 표시되고, 히어로 문장·제품 독립 안내·3분 읽기 레일·다음 장 제목이 잘림 없이 이어졌다. 1440px에서는 기존 2열 자연 이미지 레이아웃을 유지했다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; local http://127.0.0.1:5205/; viewport 320x900, 390x1000, 1440x1000; screenshots final-320.png, final-390.png, final-1440.png; above-the-fold visual review completed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/121",
+      "captured_at": "2026-10-03T11:34:30Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261003-MOBILE-HERO",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-HERO-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 히어로·좁은 화면 헤더 보완 PR #121의 필수 검사를 통과했고 main 병합 후 정적 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #121 checks 37120050012 release-verify PASS and 37120049938 site-quality-verify PASS; merge commit badde8b982e1cee73b3a75d3513e65fcc38508c9; main workflow 37120130983 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37120130983",
+      "captured_at": "2026-10-03T11:37:20Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-MOBILE-HERO",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-HERO-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 실제 320px·390px viewport에서 모바일 히어로와 헤더 컨트롤이 로컬 검증과 동일하게 표시되며 다음 장으로 자연스럽게 이어졌다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha badde8b982e1cee73b3a75d3513e65fcc38508c9; generatedAt 2026-10-03T11:36:14.693Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; temporary Playwright Chrome channel screenshots live-320.png and live-390.png",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T11:39:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-MOBILE-HERO",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-006", "C-007"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Mobile Hero and Narrow Header Release Recheck — badde8b — 2026-10-03
+
+- 모바일 히어로를 단일 열로 전환해 데스크톱 비주얼 트랙 때문에 제목이 잘리던 문제를 제거하고, 430px 이하에서 메뉴·큰 글씨·공유 컨트롤을 44px 아이콘 버튼으로 화면 안에 고정했다. 공개 카피·제품 독립 경계는 유지했다.
+- PR #121의 필수 검사, main workflow `37120130983`, Pages/live validator, 로컬·라이브 Playwright Chrome 실제 viewport 320/390/1440px 시각 검증이 통과했다. 공개 후보는 `badde8b982e1cee73b3a75d3513e65fcc38508c9`이다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Safari/iOS/Android 대표 환경, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-20261003`, `E-PLAYWRIGHT-MOBILE-HERO-20261003`, `E-DEPLOY-PIPELINE-MOBILE-HERO-20261003`, `E-LIVE-PUBLIC-MOBILE-HERO-20261003`.
+
 ## Research Scale Infographic Release Recheck — b8e6236 — 2026-10-03
 
 - 연구 규모 인포그래픽을 고도화해 같은 PubMed 검색 기준의 Harvard·Oxford 문헌은 기관 비교로, 별도 WoS Core Collection SCIE 분석은 독립된 강조 수치로 읽히도록 분리했다. 연구 카피·제품 경계는 유지했다.

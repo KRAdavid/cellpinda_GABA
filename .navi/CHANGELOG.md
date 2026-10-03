@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 모바일 히어로·좁은 화면 헤더 고도화 공개 재검증: 2026-10-03 / candidate `badde8b982e1cee73b3a75d3513e65fcc38508c9`
+
+모바일 히어로의 데스크톱 시각 트랙 잔류로 제목 일부가 잘리던 문제를 단일 열로 보정하고, 430px 이하 헤더에서 메뉴·큰 글씨·공유 컨트롤을 고정 44px 아이콘 버튼으로 배치했다. PR #121의 `release-verify`·`site-quality-verify`, main workflow `37120130983`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. 로컬과 공개 URL에서 실제 Playwright Chrome viewport 320/390/1440px를 캡처해 히어로 문장·제품 독립 안내·3분 읽기 레일·다음 장 진입과 데스크톱 2열 이미지를 확인했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-HERO-20261003`, `E-PLAYWRIGHT-MOBILE-HERO-20261003`, `E-DEPLOY-PIPELINE-MOBILE-HERO-20261003`, `E-LIVE-PUBLIC-MOBILE-HERO-20261003`.
+
 ## 연구 규모 인포그래픽 고도화 공개 재검증: 2026-10-03 / candidate `b8e6236d6dc749ea23191e45dd58d0ab9c542a0a`
 
 같은 PubMed 검색 기준의 Harvard·Oxford 문헌은 기관 비교로 묶고, 별도 WoS Core Collection SCIE 분석은 독립된 강조 블록으로 분리해 연구 범위를 한눈에 구분하도록 고도화했다. PR #119 checks, main workflow `37118207429`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 390px 연구 지도 피부 선택의 읽기 레일·상세 카드 동기화도 유지했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-SCALE-20261003`, `E-CDP-RESEARCH-SCALE-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003`, `E-LIVE-PUBLIC-RESEARCH-SCALE-20261003`.
