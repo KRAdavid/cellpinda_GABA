@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T00:02:51.281790Z",
+  "updated_at": "2026-10-03T00:21:44.052974Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -171,7 +171,8 @@
         "E-LOCAL-BUILD-ANCHOR-OFFSET",
         "E-DEPLOY-PIPELINE-ANCHOR-OFFSET",
         "E-LOCAL-BUILD-RESEARCH-PROFILE",
-        "E-LOCAL-BUILD-RESEARCH-SHARING"
+        "E-LOCAL-BUILD-RESEARCH-SHARING",
+        "E-LOCAL-BUILD-RESEARCH-KEY"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -213,7 +214,9 @@
         "E-LIVE-PUBLIC-ANCHOR-OFFSET",
         "E-CDP-RESEARCH-PROFILE",
         "E-CDP-RESEARCH-SHARING",
-        "E-LIVE-PUBLIC-RESEARCH-SHARING"
+        "E-LIVE-PUBLIC-RESEARCH-SHARING",
+        "E-CDP-RESEARCH-KEY",
+        "E-LIVE-PUBLIC-RESEARCH-KEY"
       ],
       "owner": "UX QA"
     },
@@ -324,7 +327,8 @@
         "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
         "E-LOCAL-BUILD-RESEARCH-PROFILE",
-        "E-LOCAL-BUILD-RESEARCH-SHARING"
+        "E-LOCAL-BUILD-RESEARCH-SHARING",
+        "E-LOCAL-BUILD-RESEARCH-KEY"
       ],
       "owner": "QA"
     },
@@ -365,7 +369,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
         "E-LIVE-PUBLIC-RESEARCH-PROFILE",
         "E-DEPLOY-PIPELINE-RESEARCH-SHARING",
-        "E-LIVE-PUBLIC-RESEARCH-SHARING"
+        "E-LIVE-PUBLIC-RESEARCH-SHARING",
+        "E-DEPLOY-PIPELINE-RESEARCH-KEY",
+        "E-LIVE-PUBLIC-RESEARCH-KEY"
       ],
       "owner": "배포 QA"
     },
@@ -418,7 +424,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
         "E-LIVE-PUBLIC-RESEARCH-PROFILE",
         "E-DEPLOY-PIPELINE-RESEARCH-SHARING",
-        "E-LIVE-PUBLIC-RESEARCH-SHARING"
+        "E-LIVE-PUBLIC-RESEARCH-SHARING",
+        "E-DEPLOY-PIPELINE-RESEARCH-KEY",
+        "E-LIVE-PUBLIC-RESEARCH-KEY"
       ],
       "owner": "운영 QA"
     },
@@ -539,7 +547,8 @@
         "E-RELEASE-C13",
         "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
         "E-LOCAL-BUILD-RESEARCH-PROFILE",
-        "E-LOCAL-BUILD-RESEARCH-SHARING"
+        "E-LOCAL-BUILD-RESEARCH-SHARING",
+        "E-LOCAL-BUILD-RESEARCH-KEY"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -569,7 +578,9 @@
         "E-CDP-RESEARCH-MAP-ICONS",
         "E-CDP-RESEARCH-PROFILE",
         "E-CDP-RESEARCH-SHARING",
-        "E-LIVE-PUBLIC-RESEARCH-SHARING"
+        "E-LIVE-PUBLIC-RESEARCH-SHARING",
+        "E-CDP-RESEARCH-KEY",
+        "E-LIVE-PUBLIC-RESEARCH-KEY"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -610,7 +621,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
         "E-LIVE-PUBLIC-RESEARCH-PROFILE",
         "E-DEPLOY-PIPELINE-RESEARCH-SHARING",
-        "E-LIVE-PUBLIC-RESEARCH-SHARING"
+        "E-LIVE-PUBLIC-RESEARCH-SHARING",
+        "E-DEPLOY-PIPELINE-RESEARCH-KEY",
+        "E-LIVE-PUBLIC-RESEARCH-KEY"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -825,7 +838,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "17b5d85daa12af25c6efcdcb206a4c6563bfe18cd3709319c4f9afc4bc2609c4",
+    "assessed_input_sha256": "4c8d35b1f04225cd806740c8c58d78e879b124f34644c8d5b3bc46a680ea1f3b",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -933,9 +946,11 @@
           "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
           "E-LIVE-PUBLIC-RESEARCH-PROFILE",
           "E-DEPLOY-PIPELINE-RESEARCH-SHARING",
-          "E-LIVE-PUBLIC-RESEARCH-SHARING"
+          "E-LIVE-PUBLIC-RESEARCH-SHARING",
+          "E-DEPLOY-PIPELINE-RESEARCH-KEY",
+          "E-LIVE-PUBLIC-RESEARCH-KEY"
         ],
-        "notes": "19a38ab 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·연구 결과 공유 경로를 재확인"
+        "notes": "89978ea 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·연구 결과 공유·연구 읽는 기준을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -970,9 +985,11 @@
           "E-CDP-RESEARCH-PROFILE",
           "E-LIVE-PUBLIC-RESEARCH-PROFILE",
           "E-CDP-RESEARCH-SHARING",
-          "E-LIVE-PUBLIC-RESEARCH-SHARING"
+          "E-LIVE-PUBLIC-RESEARCH-SHARING",
+          "E-CDP-RESEARCH-KEY",
+          "E-LIVE-PUBLIC-RESEARCH-KEY"
         ],
-        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·390/1440px 공유 버튼을 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·390/1440px 공유 버튼을 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -1002,9 +1019,11 @@
           "E-CDP-RESEARCH-PROFILE",
           "E-LIVE-PUBLIC-RESEARCH-PROFILE",
           "E-CDP-RESEARCH-SHARING",
-          "E-LIVE-PUBLIC-RESEARCH-SHARING"
+          "E-LIVE-PUBLIC-RESEARCH-SHARING",
+          "E-CDP-RESEARCH-KEY",
+          "E-LIVE-PUBLIC-RESEARCH-KEY"
         ],
-        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 관찰된 결과 문장 복사 경로를 추가 확인"
+        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준과 관찰된 결과 문장 복사 경로를 추가 확인"
       },
       {
         "criterion_id": "AC-004",
@@ -1079,9 +1098,11 @@
           "E-DEPLOY-PIPELINE-RESEARCH-PROFILE",
           "E-LIVE-PUBLIC-RESEARCH-PROFILE",
           "E-LOCAL-BUILD-RESEARCH-SHARING",
-          "E-LIVE-PUBLIC-RESEARCH-SHARING"
+          "E-LIVE-PUBLIC-RESEARCH-SHARING",
+          "E-LOCAL-BUILD-RESEARCH-KEY",
+          "E-LIVE-PUBLIC-RESEARCH-KEY"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유 기능 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -1250,6 +1271,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-02T23:57:05Z"
+    },
+    {
+      "id": "H-022",
+      "event": "연구 카드의 사람 대상·확장 연구 라벨을 설명하는 시각 키와 모바일 컨트롤 보조 설명을 추가하고 PR #58·main 배포·390/1440px 라이브 CDP·live validator를 재검증했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T00:17:33Z"
     }
   ]
 }
