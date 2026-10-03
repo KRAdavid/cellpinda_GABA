@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — cbd2f8e — 2026-10-03
+
+- 지도 선택 후 도착 카드가 선택 상태를 충분히 드러내지 않아 긴 연구 섹션에서 시선이 끊길 수 있던 경미한 방향성 결함을 PR #110에서 보완했다. 390px에서 카드 테두리·그림자·왼쪽 포인트와 지도 `인지` 상태가 함께 활성화되고, 1440px 레이아웃 보존·가로 넘침 없음·런타임 오류 0건을 확인했다.
+- PR #110 checks, main `37112425820`, live validator, 390px 지도 클릭·카드 도착·메뉴 열림/닫힘, 1440px 히어로·헤더를 재확인했다. 새 과학·제품 주장은 추가되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION`, `E-CDP-RESEARCH-MAP-ORIENTATION`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-ORIENTATION`, `E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION`.
+
 ## Latest Red-Team Recheck — c6291f6 — 2026-10-03
 
 - 모바일 CSS가 작은 장 제목을 전역으로 숨겨 긴 페이지에서 현재 위치를 잃게 하던 가독성 결함을 PR #108에서 보완했다. 390px·320px 제목 표시와 1440px 데스크톱 보존, 레일과의 간격을 확인했으며 새 치명적 결함은 확인되지 않았다.

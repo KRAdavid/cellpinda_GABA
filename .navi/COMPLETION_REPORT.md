@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — cbd2f8e — 2026-10-03
+
+- 연구 지도에서 선택한 주제가 상세 카드에서도 즉시 보이도록 활성 카드 강조와 선택 상태 동기화를 추가했다. 공개 과학 카피·제품 경계·연구 출처는 유지했다.
+- PR #110 checks, main `37112425820`, Pages/live validator, 390px·1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `cbd2f8ea1d5b341dbe5804b5f16f756e157c553b`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION`, `E-CDP-RESEARCH-MAP-ORIENTATION`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-ORIENTATION`, `E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION`.
+
 ## Latest Release Recheck — c6291f6 — 2026-10-03
 
 - 공개 GABA 안내서 모바일 화면에서 작은 장 제목을 복원해 긴 페이지의 위치 단서를 강화했다. 공개 과학 카피·제품 경계는 유지했다.

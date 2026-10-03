@@ -2527,6 +2527,50 @@
       "captured_at": "2026-10-03T09:00:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-MOBILE-CHAPTER-LABELS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도에서 주제를 선택하면 해당 상세 카드가 즉시 활성 상태로 표시되도록 보완했다. 카드 테두리·그림자·왼쪽 포인트가 지도 선택과 동기화되며 과학 카피·제품 경계·연구 데이터는 변경하지 않았다.",
+      "locator": "PR #110 candidate dca39c3; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; static routes 11, files 70; initial JS 311157, CSS 95703, total assets 1453735; local Chrome CDP 390px research map -> first topic click set active map/card to `인지`, targetTop 113.09px, readingRailBottom 105px, document scrollWidth 390",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/110",
+      "captured_at": "2026-10-03T09:14:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RESEARCH-MAP-ORIENTATION",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-MAP-ORIENTATION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 배포본에서 연구 지도의 주제를 선택하면 선택 지도 항목과 상세 연구 카드가 함께 활성화되고, 카드가 고정 읽기 레일 아래에 정확히 정렬됐다. 공개 화면에 오류 오버레이와 런타임 오류는 없었다.",
+      "locator": "temporary Chrome CDP fallback; live candidate cbd2f8ea1d5b341dbe5804b5f16f756e157c553b at https://kradavid.github.io/gaba_info/; 390px first map click -> active map `인지`, active card `research-cognition`, targetTop 113.09px, railBottom 105px, document scrollWidth 390, overlay false, errors []; 1440px width 1440, document scrollWidth 1425, title/hero/header present, six desktop nav links; mobile menu expanded=true/overflow hidden then expanded=false/overflow visible",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/110",
+      "captured_at": "2026-10-03T09:16:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RESEARCH-MAP-ORIENTATION",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-ORIENTATION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 선택 카드 강조 PR #110의 필수 검사를 통과했고 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #110 checks 37112343183 `Verify consumer site` and 37112343201 `Verify and deploy Cellpinda GABA` success; merge commit cbd2f8ea1d5b341dbe5804b5f16f756e157c553b; main workflow 37112425820 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37112425820",
+      "captured_at": "2026-10-03T09:16:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RESEARCH-MAP-ORIENTATION",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 선택 카드 강조가 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 정적 번들·공개 데이터 경계·연구 출처 정합성을 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha cbd2f8ea1d5b341dbe5804b5f16f756e157c553b; generatedAt 2026-10-03T09:16:03.359Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px map click active map/card `인지`/`research-cognition`, targetTop 113.09px, railBottom 105px, document scrollWidth 390, overlay false, errors []; live 1440px title/hero/header/nav rendered, document scrollWidth 1425",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T09:17:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-MAP-ORIENTATION",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
     }
   ]
 }
