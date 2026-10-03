@@ -891,6 +891,9 @@
 /* v21 reading rail legibility: keep scrolled copy from bleeding through the progress strip. */
 .guide-reading-progress{background:#fff;isolation:isolate}
 
+/* v22 mobile menu layer: keep the chapter menu above the sticky reading context. */
+@media(max-width:700px){.guide-header nav.is-open{z-index:22}}
+
 /* v19 compact mobile header: preserve 44px touch targets on narrow phones. */
 @media(max-width:380px){
   .guide-header{gap:8px;padding-inline:12px}
