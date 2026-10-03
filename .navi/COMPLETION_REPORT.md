@@ -1,9 +1,9 @@
 # Completion Report
 
-## Latest Release Recheck — 8825626 — 2026-10-03
+## Latest Release Recheck — 288a883 — 2026-10-03
 
 - 수면과 회복 인터스티셜을 읽기 진행 표시와 동기화해 모바일·데스크톱에서 `수면과 회복 02 / 12` 이후 `연구 지도 03 / 12`로 자연스럽게 이어지도록 고도화했다.
-- PR #70 checks, main push run `37089334725`, 라이브 validator, 390/1440px Chrome CDP fallback 검증이 통과했다. 공개 후보는 `8825626c57dbfdcdbadb8c6119c734c2b4778f1a`이다.
+- PR #70 checks, main push run `37089334725`, 문서 동기화 main push run `37089833696`, 라이브 validator, 390/1440px Chrome CDP fallback 검증이 통과했다. 공개 후보는 `288a883d5e0537a1be6bdd2660d90edcc5e82df0`이다.
 - 자동 검증은 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
 
 ## Latest Release Recheck — 48f4876 — 2026-10-03
