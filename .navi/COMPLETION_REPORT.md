@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — 9c2913d — 2026-10-03
+
+- 읽기 진행 레일의 장 순서를 실제 페이지 흐름과 맞추고 수면·회복 프롤로그를 03/13으로 정합화했다. 해시 링크·전문가 영상 선택 이동도 고정 헤더 아래에 안전하게 도착한다.
+- PR #100 checks, main `37105696713`, Pages/live validator, 390px·1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `9c2913db11440b10734345bc5bcba1d31161cc71`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-READING-RAIL-DEEPLINK`, `E-CDP-READING-RAIL-DEEPLINK`, `E-DEPLOY-PIPELINE-READING-RAIL-DEEPLINK`, `E-LIVE-PUBLIC-READING-RAIL-DEEPLINK`.
+
 ## Latest Release Recheck — 3d788e3 — 2026-10-03
 
 - 모바일·태블릿 메뉴에 배경 분리·스크롤 잠금·배경 버튼 닫힘을 적용해 메뉴를 읽는 동안 페이지 위치가 흔들리지 않도록 했다.

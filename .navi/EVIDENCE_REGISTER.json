@@ -2307,6 +2307,50 @@
       "captured_at": "2026-10-03T06:49:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-MOBILE-MENU-FOCUS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-READING-RAIL-DEEPLINK",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "읽기 진행 레일의 장 순서를 실제 페이지 흐름과 일치시키고, 수면·회복 프롤로그를 03/13으로 표시하도록 보완했다. 해시 링크와 전문가 영상 선택 이동은 sticky header와 reading rail 아래에 도착하도록 보정했으며 연구 카피·제품 경계는 변경하지 않았다.",
+      "locator": "PR #100 candidate 6fc091f; pnpm test PASS 127/127; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm run build PASS; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1448297; local Chrome CDP 390px recovery-break progress 03/13, #research deep-link heading below rail, document scrollWidth 390, mobile menu open/close restored overflow; 1440px chapter progress 01/13 and desktop nav preserved",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/100",
+      "captured_at": "2026-10-03T07:12:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-READING-RAIL-DEEPLINK",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-READING-RAIL-DEEPLINK",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개본을 Chrome CDP fallback으로 확인한 결과, 모바일 해시 링크의 연구 제목이 고정 읽기 레일 아래에 표시되고 메뉴 열림·닫힘·스크롤 잠금·복원이 정상 동작했으며 데스크톱 내비게이션은 유지됐다.",
+      "locator": "temporary Chrome CDP fallback; live candidate 9c2913db11440b10734345bc5bcba1d31161cc71 at https://kradavid.github.io/gaba_info/; 390px #research heading top 565px, reading rail bottom 105px, document scrollWidth 390; open state expanded=true/backdrop=true/overflow hidden/nav z-index 22; close state expanded=false/backdrop=false/overflow visible; 1440px nav display flex/document scrollWidth 1425",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/100",
+      "captured_at": "2026-10-03T07:16:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-READING-RAIL-DEEPLINK",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-READING-RAIL-DEEPLINK",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "읽기 순서·해시 링크 보완 PR #100의 필수 검사를 통과했고 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #100 checks PASS; merge commit 9c2913db11440b10734345bc5bcba1d31161cc71; main workflow 37105696713 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37105696713",
+      "captured_at": "2026-10-03T07:15:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-READING-RAIL-DEEPLINK",
+      "claim_refs": ["C-001", "C-002", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-READING-RAIL-DEEPLINK",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "읽기 진행 레일·해시 링크 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고 공개 데이터 경계와 정적 번들 지표를 유지했으며 모바일·데스크톱 실제 화면을 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 9c2913db11440b10734345bc5bcba1d31161cc71; generatedAt 2026-10-03T07:15:35.007Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px deep-link heading below reading rail, document/body scrollWidth 390, menu open/close state restored; live 1440px nav display flex/document scrollWidth 1425",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T07:16:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-READING-RAIL-DEEPLINK",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }
