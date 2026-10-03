@@ -42,6 +42,12 @@
       "statement": "최신 공개본은 모바일에서 현재 읽는 연구 섹션을 헤더·진행 표시와 동기화하고, 메뉴 외부 클릭·Escape·포커스 복귀를 지원한다.",
       "evidence_refs": ["E-CDP-NAVIGATION-FOLLOWUP", "E-CDP-NAVIGATION-LATEST", "E-LIVE-PUBLIC-FOLLOWUP", "E-LIVE-PUBLIC-LATEST", "E-CDP-NAVIGATION-PROGRESS", "E-LIVE-PUBLIC-PROGRESS", "E-CDP-FINAL", "E-LIVE-PUBLIC-FINAL", "E-CDP-SHARE-KIT", "E-LIVE-PUBLIC-SHARE-KIT", "E-CDP-UI-POLISH", "E-LIVE-PUBLIC-UI-POLISH", "E-CDP-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-RESEARCH-MAP-CONNECTORS", "E-LIVE-PUBLIC-NAVI-SYNC", "E-CDP-CHART-CUE", "E-LIVE-PUBLIC-CHART-CUE", "E-CDP-RECOVERY-TRACK", "E-LIVE-PUBLIC-RECOVERY-TRACK", "E-CDP-RECOVERY-A11Y", "E-LIVE-PUBLIC-RECOVERY-A11Y", "E-CDP-MENU-FOCUS", "E-LIVE-PUBLIC-MENU-FOCUS", "E-CDP-RECOVERY-INDEX", "E-LIVE-PUBLIC-RECOVERY-INDEX", "E-CDP-READING-SIZE", "E-LIVE-PUBLIC-READING-SIZE", "E-CDP-COMPACT-HEADER", "E-LIVE-PUBLIC-COMPACT-HEADER", "E-CDP-LARGE-TEXT-CHART", "E-LIVE-PUBLIC-LARGE-TEXT-CHART", "E-CDP-LARGE-TEXT-CHART-TYPE", "E-LIVE-PUBLIC-LARGE-TEXT-CHART-TYPE", "E-CDP-READING-PROGRESS", "E-LIVE-PUBLIC-READING-PROGRESS", "E-CDP-RESEARCH-MAP-ACTIVE", "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE", "E-CDP-RECOVERY-PROGRESS", "E-LIVE-PUBLIC-RECOVERY-PROGRESS", "E-PLAYWRIGHT-NARROW-SLEEP-20261003", "E-LIVE-PUBLIC-NARROW-SLEEP-20261003", "E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004", "E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004", "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004", "E-PLAYWRIGHT-PUBLIC-INTERACTION-AUDIT-20261004", "E-PLAYWRIGHT-PUBLIC-HASH-CROSSWIDTH-20261004", "E-LIVE-PUBLIC-CURRENT-RECHECK-20261004", "E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261004", "E-LOCAL-BUILD-VIDEO-FEATURE-FOCUS-20261004", "E-PLAYWRIGHT-VIDEO-FEATURE-FOCUS-20261004", "E-LIVE-PUBLIC-VIDEO-FEATURE-FOCUS-20261004", "E-LOCAL-BUILD-DEEP-LINK-ALIGN-20261004", "E-PLAYWRIGHT-DEEP-LINK-ALIGN-20261004", "E-LIVE-PUBLIC-DEEP-LINK-ALIGN-20261004", "E-LOCAL-BUILD-MOBILE-PERFORMANCE-20261004", "E-PLAYWRIGHT-MOBILE-PERFORMANCE-20261004", "E-LIVE-PUBLIC-MOBILE-PERFORMANCE-20261004"],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-008",
+      "statement": "선택한 전문가 영상은 공유 URL에 식별자가 보존되고, 장 위치·브라우저 제목·공유 문구가 현재 읽는 맥락을 유지한다.",
+      "evidence_refs": ["E-LOCAL-BUILD-VIDEO-SHARE-CONTEXT-20261004", "E-PLAYWRIGHT-VIDEO-SHARE-CONTEXT-20261004", "E-DEPLOY-PIPELINE-VIDEO-SHARE-CONTEXT-20261004", "E-LIVE-PUBLIC-VIDEO-SHARE-CONTEXT-20261004"],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -3902,6 +3908,50 @@
       "captured_at": "2026-10-03T21:27:57Z",
       "reviewer_id": "NAVI-LIVE-QA-20261004-MOBILE-PERFORMANCE",
       "claim_refs": ["C-002", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-SHARE-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "선택한 전문가 영상의 식별자를 공유 URL에 보존하고, 재진입 시 같은 영상과 장 맥락을 복원하도록 고도화했다. recovery heading의 접근성 문장도 자연스러운 띄어쓰기로 보정했다.",
+      "locator": "PR #167 candidate 2c21b54d3bfa471f610110ae9607afd184b17010; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback at 320/390/1440px: click video -> ?view=guide&video=roEtojyk9_0#expert-videos, reload restores selected title, title updates, scrollWidth equals viewport, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/167",
+      "captured_at": "2026-10-03T21:44:26Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-VIDEO-SHARE-CONTEXT",
+      "claim_refs": ["C-008"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-VIDEO-SHARE-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본의 전문가 영상 공유 URL이 320·390·1440px에서 선택 영상을 복원하고, 장 제목·진행 표시·가로 폭을 유지했다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/?view=guide&video=roEtojyk9_0#expert-videos; selected 잠이 안 올 때 GABA 이야기; title 전문가 영상 · 잠이 안 올 때 GABA 이야기 | GABA Guide; poster true, iframe false until click; progress 전문가 영상; headingTop 131/132/151px; scrollY 26966/24712/17061; scrollWidth 320/390/1440; errors []; default /guide/ 390px initial video requests 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&video=roEtojyk9_0#expert-videos",
+      "captured_at": "2026-10-03T21:54:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-VIDEO-SHARE-CONTEXT",
+      "claim_refs": ["C-008"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-SHARE-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #167 코드 병합과 heartbeat PR #168 이후 main 공개 배포 파이프라인이 최종 성공했다. Pages·라이브 smoke·release status가 통과했고 Worker는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #167 merge a1de95919a5a275c9f6444e86b908cd1167906ee; heartbeat PR #168 merge 68efacaf8d4c09dea1631443970f65bc48f6ef15; main workflow 37156517433; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37156517433",
+      "captured_at": "2026-10-03T21:54:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-VIDEO-SHARE-CONTEXT",
+      "claim_refs": ["C-008"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-SHARE-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본은 HTTP 200과 candidate 68efacaf를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 68efacaf8d4c09dea1631443970f65bc48f6ef15; generatedAt 2026-10-03T21:53:35.156Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T21:54:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-VIDEO-SHARE-CONTEXT",
+      "claim_refs": ["C-008"]
     }
   ]
 }

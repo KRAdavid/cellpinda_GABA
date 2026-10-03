@@ -1,5 +1,14 @@
 # Audit Report
 
+## 전문가 영상 공유 맥락 고도화 감사 — 68efaca — 2026-10-04
+
+- 선택 영상 ID를 `?video=...#expert-videos`에 보존하고 재진입 시 복원했다. 현재 장·선택 영상 제목을 브라우저 제목과 공유 payload에 연결해 공유받은 사람이 같은 맥락에서 읽도록 했다. recovery heading의 접근성 문장도 자연스럽게 보정했다.
+- 로컬 UI 계약·typecheck·127개 테스트·build가 통과했고, 320·390·1440px Chrome fallback에서 영상 선택 → 공유 URL 생성 → 새로고침 복원을 확인했다. 선택 영상 제목·진행 표시·가로 폭이 유지됐고 초기 포스터에는 iframe이 로드되지 않았다. 기본 `/guide/` 390px 진입은 YouTube 요청 0건이었다.
+- PR #167 merge `a1de959`, heartbeat PR #168 merge `68efaca`, main workflow `37156517433`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `68efaca`는 HTTP 200·STATIC·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-SHARE-CONTEXT-20261004`, `E-PLAYWRIGHT-VIDEO-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-VIDEO-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-VIDEO-SHARE-CONTEXT-20261004`.
+
 ## Mobile Publishing Performance Audit — d71ab6c — 2026-10-04
 
 - 첫 화면에 보이지 않는 전문가 영상 썸네일을 `loading="lazy"`·낮은 우선순위로 전환하고 장문 제목에 균형 잡힌 줄바꿈을 적용했다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.

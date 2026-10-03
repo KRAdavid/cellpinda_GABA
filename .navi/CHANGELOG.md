@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 전문가 영상 공유·재진입 맥락 고도화 공개 배포: 2026-10-04 / candidate `68efaca`
+
+선택한 전문가 영상의 식별자를 `?video=...#expert-videos`에 보존하고, 공유 URL 재진입 시 같은 영상과 장 위치를 복원하도록 고도화했다. 브라우저 제목과 공유 문구도 현재 장·선택 영상에 맞춰 갱신하고 recovery heading의 접근성 문장을 보정했다. PR #167 merge `a1de959`, heartbeat PR #168 merge `68efaca`, main workflow `37156517433`, live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px에서 클릭·새로고침 복원·포스터/iframe 지연·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-SHARE-CONTEXT-20261004`, `E-PLAYWRIGHT-VIDEO-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-VIDEO-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-VIDEO-SHARE-CONTEXT-20261004`.
+
 ## 모바일 퍼블리싱 성능·타이포그래피 고도화 공개 배포: 2026-10-04 / candidate `d71ab6c`
 
 첫 화면에 보이지 않는 전문가 영상 썸네일을 지연 로딩으로 전환해 초기 모바일 진입 요청을 줄이고, 한국어 장문 제목에 균형 잡힌 줄바꿈을 적용했다. PR #166, main workflow `37154976973`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px 직접 링크, 초기 영상 요청 0건, 연구 지도 근육 카드 이동, 가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

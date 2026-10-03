@@ -2788,6 +2788,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T21:27:57Z"
+    },
+    {
+      "id": "H-077",
+      "event": "선택한 전문가 영상이 화면에서만 유지되고 공유·재진입에서 기본 영상으로 돌아가던 출판 흐름을 PR #167에서 보완했다. video 쿼리와 #expert-videos를 URL에 보존하고 유효한 영상 ID를 재진입 시 복원하며, 현재 장·선택 영상에 맞춰 브라우저 제목과 공유 문구를 갱신했다. recovery heading의 접근성 문장도 보정했다. 로컬 UI 계약·typecheck·127개 테스트·build와 320·390·1440px Chrome fallback에서 클릭·새로고침 복원·가로 폭·오류 없음을 확인했다. PR #167 merge `a1de959`, heartbeat PR #168 merge `68efaca`, main workflow `37156517433`, live validator candidate `68efaca`를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T21:54:00Z"
     }
   ]
 }
