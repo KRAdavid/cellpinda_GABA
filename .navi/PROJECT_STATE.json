@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T20:18:45Z",
+  "updated_at": "2026-10-03T20:24:43Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2763,10 +2763,10 @@
     },
     {
       "id": "H-073",
-      "event": "공개 배포본을 NAVI 자동 재감리했다. 390px 실제 독자 흐름에서 메뉴·Escape·포커스 복귀·연구 지도 선택·수면 영상 필터·iframe 즉시 재생·3초 회복 카드 전환을 재현했고, 320/390/412/768/1440px 직접 해시 진입에서 제목·진행 상태·가로 폭을 확인했다. 라이브 validator는 HTTP 200·STATIC·candidate `25561b6`·정적 공개 경계 정합성을 유지했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 코드 변경은 필요하지 않아 공개본을 불필요하게 재배포하지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
+      "event": "공개 배포본을 NAVI 자동 재감리했다. 390px 실제 독자 흐름에서 메뉴·Escape·포커스 복귀·연구 지도 선택·수면 영상 필터·iframe 즉시 재생·3초 회복 카드 전환을 재현했고, 320/390/412/768/1440px 직접 해시 진입에서 제목·진행 상태·가로 폭을 확인했다. NAVI 문서 동기화 후 main workflow `37151251781`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 라이브 validator는 HTTP 200·STATIC·candidate `4d94150`·정적 공개 경계 정합성을 유지했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
-      "recorded_at": "2026-10-03T20:18:45Z"
+      "recorded_at": "2026-10-03T20:24:43Z"
     }
   ]
 }

@@ -1,12 +1,12 @@
 # Audit Report
 
-## Public Release Interaction and Cross-Viewport Recheck — 25561b6 — 2026-10-04
+## Public Release Interaction and Cross-Viewport Recheck — 4d94150 — 2026-10-04
 
 - 최신 공개본을 실제 독자 흐름으로 재감리했다. 390px에서 메뉴 열림·첫 항목 포커스·Escape 닫힘·토글 포커스 복귀·`#academic` 이동, 연구 지도에서 근육 카드 선택, 수면 영상 필터 4개 전환·YouTube iframe 재생, 3초 회복 카드 자동 전환을 확인했다.
-- 320·390·412·768·1440px에서 `#recovery-break`, `#research`, `#expert-videos`, `#final` 직접 진입을 확인했고 제목이 고정 읽기 레일 아래에 놓이며 진행 상태·문서 가로 폭·브라우저 오류가 안정적으로 유지됐다. 라이브 validator는 HTTP 200, STATIC, candidate `25561b6`, bundleHashes 70, claims 12, masterRecords 6, products 1, sharePages 6, teaser publicUrl false를 확인했다.
-- 새 CRITICAL/MAJOR 결함은 확인되지 않아 코드 변경과 불필요한 재배포는 하지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+- 320·390·412·768·1440px에서 `#recovery-break`, `#research`, `#expert-videos`, `#final` 직접 진입을 확인했고 제목이 고정 읽기 레일 아래에 놓이며 진행 상태·문서 가로 폭·브라우저 오류가 안정적으로 유지됐다. 라이브 validator는 HTTP 200, STATIC, candidate `4d94150`, bundleHashes 70, claims 12, masterRecords 6, products 1, sharePages 6, teaser publicUrl false를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않아 코드 변경은 하지 않았다. NAVI 문서 동기화 후 main workflow `37151251781`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
 
-증적: `E-PLAYWRIGHT-PUBLIC-INTERACTION-AUDIT-20261004`, `E-PLAYWRIGHT-PUBLIC-HASH-CROSSWIDTH-20261004`, `E-LIVE-PUBLIC-CURRENT-RECHECK-20261004`.
+증적: `E-PLAYWRIGHT-PUBLIC-INTERACTION-AUDIT-20261004`, `E-PLAYWRIGHT-PUBLIC-HASH-CROSSWIDTH-20261004`, `E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261004`, `E-LIVE-PUBLIC-CURRENT-RECHECK-20261004`.
 
 ## Mobile Menu Focus Restoration Audit — 510e9ad — 2026-10-04
 
