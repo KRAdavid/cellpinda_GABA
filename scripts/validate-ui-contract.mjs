@@ -160,8 +160,8 @@ requireMatch(publicGuide, /const activeResearchTopic = researchTopics\.find\(\(t
 requireMatch(publicGuideStyles, /\.guide-reading-progress-meta strong\{min-width:0;overflow:hidden[\s\S]*?text-overflow:ellipsis;white-space:nowrap\}/, 'public GABA reading rail labels must stay single-line and readable when a research title is active');
 requireMatch(publicGuide, /guide-research-scale-groups[\s\S]*?stat\.group === 'institution'[\s\S]*?ResearchScaleMetric[\s\S]*?featured/, 'public GABA research scale must separate comparable institution searches from the distinct SCIE analysis');
 requireMatch(publicGuideStyles, /v13 research scale[\s\S]*?\.guide-research-scale-feature[\s\S]*?@media\(max-width:700px\)/, 'public GABA research scale must keep the separated comparison readable on mobile');
-requireMatch(publicGuide, /videoFiltersHaveMore[\s\S]*?guide-video-filters-wrap[\s\S]*?videoThumbnailUrl/, 'public GABA expert video board must expose horizontal filter continuation and resilient thumbnails');
-requireMatch(publicGuideStyles, /\.guide-video-filters-wrap[\s\S]*?\.guide-video-filters-wrap\.has-more:after/, 'public GABA mobile expert filters must show a continuation cue when more topics are available');
+requireMatch(publicGuide, /guide-video-filters-wrap[\s\S]*?guide-video-filters[\s\S]*?role="group"[\s\S]*?videoThumbnailUrl/, 'public GABA expert video board must expose all topic filters and resilient thumbnails');
+requireMatch(publicGuideStyles, /\.guide-video-filters\{flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:1px 2px 2px\}/, 'public GABA mobile expert filters must keep every topic visible without a hidden horizontal rail');
 requireMatch(publicGuide, /guide-outcome-comparison[\s\S]*?comparisonChart\.rows\.map/, 'public GABA comparison charts must expose each visible result row to assistive technology');
 requireMatch(publicGuideStyles, /@media\(max-width:700px\)\{[\s\S]*?\.guide-outcome-lanes\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'public GABA mobile comparison charts must place both conditions side by side on standard phone widths');
 requireMatch(publicGuideStyles, /@media\(max-width:350px\)\{[\s\S]*?\.guide-outcome-lanes\{grid-template-columns:1fr;/, 'public GABA narrow-phone comparison charts must fall back to a readable single-column layout');
@@ -386,8 +386,8 @@ requireMatch(indexHtml, /읽는 순서[\s\S]*발견의 순간[\s\S]*연구 지�
 requireMatch(publicGuide, /historyMilestones[\s\S]*Roberts & Frankel[\s\S]*PMID 14794689/, 'public GABA guide must lead with the 1950 Roberts and Frankel discovery');
 requireMatch(publicGuide, /academicFields[\s\S]*신경계의 균형[\s\S]*몸 전체로 넓어지는 연구/, 'public GABA guide must expose the broad academic research map');
 requireMatch(publicGuide, /applicationCases[\s\S]*발효식품과 유산균[\s\S]*발아현미와 기능성 식품[\s\S]*곡류·빵·유제품·음료/, 'public GABA guide must expose Korea, Japan and global application examples');
-requireMatch(publicGuide, /guide-video-filters-wrap[\s\S]*videoFiltersHaveMore \? <span className="guide-video-filter-cue"[\s\S]*ArrowRight/, 'mobile expert video topic filters must expose a continuation cue when more topics are available');
-requireMatch(publicGuideStyles, /v32 video topic rail[\s\S]*\.guide-video-filters\{scroll-snap-type:x proximity;scroll-padding-inline:2px;overscroll-behavior-inline:contain[\s\S]*\.guide-video-filter-cue\{position:absolute/, 'mobile expert video topic rail must keep a touch-scroll rhythm and visible continuation cue');
+requireMatch(publicGuide, /guide-video-filters-wrap"><div className="guide-video-filters"[\s\S]*?role="group" aria-label="전문가 영상 주제 필터"[\s\S]*?expertVideoTopics.map/, 'mobile expert video topic filters must render as a complete visible group');
+requireMatch(publicGuideStyles, /v40 video topic filters[\s\S]*?\.guide-video-filters-wrap\{overflow:visible\}/, 'mobile expert video topic filters must remain fully visible and avoid hidden horizontal scrolling');
 if (/셀핀다 가바|셀핀다 완제품|스마트스토어/.test(publicGuide)) fail('public GABA guide must remain product-free');
 if (/https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202|REVIEW_DIALOG|스마트스토어/.test(indexHtml)) fail('root public story must not expose product or review CTAs');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');

@@ -801,8 +801,6 @@ export default function PublicGabaGuide() {
   const recoveryBreakRef = useRef<HTMLElement | null>(null);
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
-  const videoFiltersRef = useRef<HTMLDivElement | null>(null);
-  const [videoFiltersHaveMore, setVideoFiltersHaveMore] = useState(false);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
@@ -824,26 +822,6 @@ export default function PublicGabaGuide() {
     : `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장.`;
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
-
-  useEffect(() => {
-    const filters = videoFiltersRef.current;
-    if (!filters) return;
-    const updateFilterOverflow = () => {
-      const canScroll = filters.scrollWidth - filters.clientWidth > 2;
-      const atEnd = filters.scrollLeft + filters.clientWidth >= filters.scrollWidth - 2;
-      setVideoFiltersHaveMore(canScroll && !atEnd);
-    };
-    updateFilterOverflow();
-    filters.addEventListener('scroll', updateFilterOverflow, { passive: true });
-    window.addEventListener('resize', updateFilterOverflow);
-    const resizeObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(updateFilterOverflow);
-    resizeObserver?.observe(filters);
-    return () => {
-      filters.removeEventListener('scroll', updateFilterOverflow);
-      window.removeEventListener('resize', updateFilterOverflow);
-      resizeObserver?.disconnect();
-    };
-  }, []);
 
   useEffect(() => {
     document.title = '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide';
@@ -1060,10 +1038,6 @@ export default function PublicGabaGuide() {
     const nextVideos = topic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === topic);
     setActiveVideoTopic(topic);
     if (!nextVideos.some((video) => video.id === activeVideoId)) selectExpertVideo(nextVideos[0]?.id ?? expertVideos[0].id);
-    requestAnimationFrame(() => {
-      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-      document.querySelector<HTMLElement>('.guide-video-filter.is-active')?.scrollIntoView({ behavior, block: 'nearest', inline: 'center' });
-    });
   };
 
   const moveRecoveryCard = (direction: -1 | 1) => {
@@ -1398,7 +1372,7 @@ export default function PublicGabaGuide() {
               </article>
                 <div className="guide-video-board" aria-label="전문가 영상 게시판">
                 <div className="guide-video-board-head"><span>전문가 영상</span><strong>{visibleExpertVideos.length}개 영상</strong></div>
-                <div className={`guide-video-filters-wrap${videoFiltersHaveMore ? ' has-more' : ''}`}><div className="guide-video-filters" ref={videoFiltersRef} role="group" aria-label="전문가 영상 주제 필터">{expertVideoTopics.map((topic) => { const count = topic === '전체' ? expertVideos.length : expertVideos.filter((video) => video.topic === topic).length; return <button type="button" className={`guide-video-filter${activeVideoTopic === topic ? ' is-active' : ''}`} aria-pressed={activeVideoTopic === topic} key={topic} onClick={() => selectExpertVideoTopic(topic)}>{topic}<span>{count}</span></button>; })}</div>{videoFiltersHaveMore ? <span className="guide-video-filter-cue" aria-hidden="true"><ArrowRight size={14} /></span> : null}</div>
+                <div className="guide-video-filters-wrap"><div className="guide-video-filters" role="group" aria-label="전문가 영상 주제 필터">{expertVideoTopics.map((topic) => { const count = topic === '전체' ? expertVideos.length : expertVideos.filter((video) => video.topic === topic).length; return <button type="button" className={`guide-video-filter${activeVideoTopic === topic ? ' is-active' : ''}`} aria-pressed={activeVideoTopic === topic} key={topic} onClick={() => selectExpertVideoTopic(topic)}>{topic}<span>{count}</span></button>; })}</div></div>
                 <div className="guide-video-grid">{visibleExpertVideos.map((video, index) => <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} onClick={() => selectExpertVideo(video.id)}><span className="guide-video-card-thumb"><img src={videoThumbnailUrl(video.id)} onError={(event) => fallbackVideoThumbnail(event, video.id)} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" /><span className="guide-video-card-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span></span><span className="guide-video-card-copy"><span className="guide-video-card-copy-top"><span>{video.topic}</span>{activeVideo.id === video.id ? <em>재생 중</em> : null}</span><strong>{video.title}</strong><small>{video.channel}</small></span></button>)}</div>
               </div>
             </div>
