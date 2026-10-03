@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T20:43:46Z",
+  "updated_at": "2026-10-03T21:06:51Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2774,6 +2774,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T20:43:46Z"
+    },
+    {
+      "id": "H-075",
+      "event": "공유 링크로 장에 직접 진입할 때 이미지·폰트·레이아웃 로딩에 따라 제목 정렬이 늦어질 수 있던 흐름을 PR #165에서 보완했다. 초기 정렬과 180·420·780·1200·1800ms 안정화, window load·document.fonts·ResizeObserver 재정렬을 적용했고, 로컬·공개 Chrome fallback 320·390·1440px에서 `#expert-videos` 제목·진행 레일·영상 영역·가로 폭·브라우저 오류를 확인했다. main workflow `37153757926`의 Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 공개 연구 카피·제품 독립 경계는 변경하지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T21:06:51Z"
     }
   ]
 }

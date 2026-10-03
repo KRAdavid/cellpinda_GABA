@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Direct Chapter Link Stability Red-Team Recheck — 818cc2f — 2026-10-04
+
+- 320·390·1440px에서 `#expert-videos` 직접 진입을 반복 재현해 초기 화면·지연 로딩 후·안정화 시점의 제목 위치, 읽기 진행 레일, 영상 영역, 문서 폭을 공격적으로 확인했다. 제목은 131.34/131.63/150.50px에 놓였고 진행 상태는 `전문가 영상 10 / 12`로 유지됐다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 공개 Chrome fallback에서 가로 넘침과 콘솔·페이지 오류가 없었고, PR #165의 정렬 보강은 공유 링크 흐름에만 한정됐다. 공개 연구 카피와 제품 독립 경계는 변경하지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-DEEP-LINK-ALIGN-20261004`, `E-PLAYWRIGHT-DEEP-LINK-ALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-ALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-ALIGN-20261004`.
+
 ## Expert Video Feature Focus Red-Team Recheck — c33b427 — 2026-10-04
 
 - 390px에서 전문가 영상 두 번째 카드를 클릭하고 Enter로 선택하는 경로를 공격적으로 재현했다. 선택된 영상 iframe으로 전환되면서 `#expert-video-feature`에 실제 포커스가 놓이고 focus-visible 윤곽선이 표시되며 선택 카드는 하나로 유지됐다.

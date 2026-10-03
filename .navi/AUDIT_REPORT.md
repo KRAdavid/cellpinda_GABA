@@ -1,5 +1,13 @@
 # Audit Report
 
+## Direct Chapter Link Stability Audit — 818cc2f — 2026-10-04
+
+- 공유 링크로 `#expert-videos` 같은 장에 직접 들어올 때 이미지·폰트·레이아웃 로딩 순서에 따라 제목이 늦게 정렬될 수 있는 흐름을 PR #165에서 보완했다. 초기 정렬에 더해 `window.load`, `document.fonts`, `ResizeObserver`와 180·420·780·1200·1800ms 안정화 재정렬을 연결했다.
+- 로컬 typecheck·UI 계약·127개 테스트·build가 통과했고, 320·390·1440px Chrome fallback에서 제목이 고정 읽기 레일 아래에 놓이고 진행 상태가 `전문가 영상 10 / 12`로 유지되며 영상 영역·가로 폭·브라우저 오류가 안정적이었다. main workflow `37153757926`, Pages 배포·라이브 smoke·release status와 live validator candidate `818cc2f`도 통과했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-DEEP-LINK-ALIGN-20261004`, `E-PLAYWRIGHT-DEEP-LINK-ALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-ALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-ALIGN-20261004`.
+
 ## Expert Video Feature Focus Audit — c33b427 — 2026-10-04
 
 - 전문가 영상 카드를 선택한 뒤 동적 영상 영역으로 포커스가 이동하지 않아 키보드·스크린리더 사용자가 새 콘텐츠 위치를 놓칠 수 있는 결함을 PR #164에서 보완했다. `#expert-video-feature`에 동적 제목 연결과 `aria-live`를 유지하고, 새 영상 선택 시 실제 포커스를 영상 영역으로 복귀시켰다.

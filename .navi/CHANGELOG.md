@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 직접 공유 링크 정렬 안정화 공개 배포: 2026-10-04 / candidate `818cc2f`
+
+`#expert-videos` 같은 장으로 직접 진입할 때 이미지·폰트·레이아웃이 늦게 안정화되어 제목이 어긋날 수 있는 흐름을 PR #165에서 보완했다. 초기 정렬과 다중 안정화 시점, `window.load`·`document.fonts`·`ResizeObserver` 재정렬을 적용했다. main workflow `37153757926`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px Chrome fallback에서 제목·진행 레일·영상 영역·가로 폭·오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-DEEP-LINK-ALIGN-20261004`, `E-PLAYWRIGHT-DEEP-LINK-ALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-ALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-ALIGN-20261004`.
+
 ## 전문가 영상 선택 포커스 복귀 공개 배포: 2026-10-04 / candidate `c33b427`
 
 전문가 영상 카드를 클릭하거나 Enter로 선택한 뒤 새 영상 영역을 바로 읽을 수 있도록 `#expert-video-feature`에 포커스를 복귀시키고 동적 제목 연결·`aria-live`·focus-visible 윤곽선을 보강했다. PR #164, main workflow `37152307391`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬 390px Chrome fallback에서 영상 iframe 전환·선택 카드 1개·가로 넘침 없음·오류 없음을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-FEATURE-FOCUS-20261004`, `E-PLAYWRIGHT-VIDEO-FEATURE-FOCUS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-FOCUS-20261004`, `E-LIVE-PUBLIC-VIDEO-FEATURE-FOCUS-20261004`.
