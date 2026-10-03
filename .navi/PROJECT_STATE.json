@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T04:41:11.038800Z",
+  "updated_at": "2026-10-03T05:03:55.330323Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -187,7 +187,9 @@
         "E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL",
         "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL",
         "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
-        "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE"
+        "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
+        "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -257,7 +259,9 @@
         "E-CDP-RESEARCH-SOURCE-LABEL",
         "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL",
         "E-CDP-RESEARCH-PRODUCT-FREE",
-        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+        "E-CDP-RECOVERY-MAP-MOBILE",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
       ],
       "owner": "UX QA"
     },
@@ -377,7 +381,9 @@
         "E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL",
         "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL",
         "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
-        "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE"
+        "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
+        "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE"
       ],
       "owner": "QA"
     },
@@ -432,7 +438,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL",
         "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL",
         "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
-        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
       ],
       "owner": "배포 QA"
     },
@@ -497,7 +505,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL",
         "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL",
         "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
-        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
       ],
       "owner": "운영 QA"
     },
@@ -623,7 +633,8 @@
         "E-LOCAL-BUILD-RAIL-LEGIBILITY",
         "E-LOCAL-BUILD-RESEARCH-RAIL",
         "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE",
-        "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE"
+        "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
+        "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -667,7 +678,9 @@
         "E-CDP-RECOVERY-PROGRESS",
         "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
         "E-CDP-RESEARCH-PRODUCT-FREE",
-        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+        "E-CDP-RECOVERY-MAP-MOBILE",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -722,7 +735,9 @@
         "E-DEPLOY-PIPELINE-RECOVERY-PROGRESS",
         "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
         "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
-        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+        "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -979,7 +994,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "3a6808b1e452c57b151a199e49fb9aa489e98dbd5b24e15e58a2ac13596554ac",
+    "assessed_input_sha256": "e4fc8d0269bcabc72e1946c949f3ce9c1c48463acfa8190260cabe11cbd70b4c",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -1118,7 +1133,9 @@
           "E-CDP-VIDEO-SELECTION-STATE",
           "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
           "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
-          "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+          "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+          "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·제품 독립 연구 경로를 재확인"
       },
@@ -1173,7 +1190,9 @@
           "E-CDP-RECOVERY-NAV",
           "E-LIVE-PUBLIC-RECOVERY-NAV",
           "E-CDP-TABLET-HEADER",
-          "E-LIVE-PUBLIC-TABLET-HEADER"
+          "E-LIVE-PUBLIC-TABLET-HEADER",
+          "E-CDP-RECOVERY-MAP-MOBILE",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴를 확인"
       },
@@ -1227,7 +1246,9 @@
           "E-CDP-VIDEO-LOADING",
           "E-LIVE-PUBLIC-VIDEO-LOADING",
           "E-CDP-VIDEO-SELECTION-STATE",
-          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
+          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
+          "E-CDP-RECOVERY-MAP-MOBILE",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락을 추가 확인"
       },
@@ -1287,7 +1308,9 @@
           "E-CDP-RESEARCH-SOURCE-LABEL",
           "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL",
           "E-CDP-RESEARCH-PRODUCT-FREE",
-          "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+          "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+          "E-CDP-RECOVERY-MAP-MOBILE",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
         ],
         "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로 유지 확인"
       },
@@ -1368,7 +1391,10 @@
           "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL",
           "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
           "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
-          "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+          "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+          "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
+          "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·태블릿 헤더·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
       },
@@ -1647,6 +1673,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T04:37:09.8999019Z"
+    },
+    {
+      "id": "H-037",
+      "event": "모바일 수면·회복 카드 진행 맵의 14단계를 7×2 전체 표시로 보완한 PR #87을 main에 병합하고 320/390/1440px 로컬·라이브 Chrome CDP에서 전체 단계·마지막 카드 선택·가로 폭·런타임 오류를 재검증해 공개본과 NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T04:57:00Z"
     }
   ]
 }

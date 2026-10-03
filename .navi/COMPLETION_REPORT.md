@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — 698f1fb — 2026-10-03
+
+- 모바일 수면·회복 카드 진행 맵을 7×2 전체 단계 표시로 고도화해 14개 카드의 흐름을 한눈에 확인하도록 했다. 320/390/1440px 렌더와 마지막 단계 선택, 자동 전환·일시정지 구조를 확인했다.
+- PR #87 checks, main workflow `37098162499`, live validator, 390px·1440px Chrome CDP fallback 검증이 통과했다. 공개 candidate는 `698f1fbf93b960df38955fdb85ee223260df4cc7`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-MOBILE`, `E-CDP-RECOVERY-MAP-MOBILE`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE`, `E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE`.
+
 ## Latest Release Recheck — 3b75bae — 2026-10-03
 
 - 공개 `/research/`를 제품 광고·구매 유도와 분리된 일반 GABA 연구 읽기 경로로 고도화했다. 연구 카드의 관찰 결과, 연구 조건, 출처 연결은 유지하고 제품 CTA·제품 브랜드·`view=products`·SmartStore 연결은 제거했다.

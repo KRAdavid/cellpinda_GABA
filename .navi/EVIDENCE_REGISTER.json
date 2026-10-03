@@ -2032,6 +2032,50 @@
       "captured_at": "2026-10-03T04:36:30Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-PRODUCT-FREE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 수면·회복 카드 진행 맵을 가로 스크롤에서 7×2 전체 단계 표시로 보완해 14개 카드의 읽기 순서를 한 화면에서 확인하도록 했으며 기존 자동 전환·수동 선택·접근성 구조를 유지했다.",
+      "locator": "PR #87 candidate c1cbda9; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm run validate:research-copy PASS; pnpm run validate:public PASS; pnpm test -- --runInBand 127/127; pnpm run build PASS; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1443834; local 320px and 390px Chrome CDP showed 14 recovery steps, no horizontal overflow, errors []; last-step selection showed card 14 / 14",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/87",
+      "captured_at": "2026-10-03T04:52:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RECOVERY-MAP-MOBILE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-RECOVERY-MAP-MOBILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback에서 320px·390px 모바일과 1440px 데스크톱의 수면·회복 진행 맵이 가로 넘침 없이 표시되고 01–14 단계가 모두 노출되며 마지막 단계 선택 시 `14 / 14 · GABA를 읽는 시작점`으로 전환됐다.",
+      "locator": "temporary Chrome CDP fallback; local candidate c1cbda9 at http://127.0.0.1:5198/; 320px scrollWidth 320, 390px scrollWidth 390, 1440px document/body scrollWidth 1425, recovery stepCount 14, activeStep 13 after last-step click, card text includes `14 · GABA를 읽는 시작점` and `14 / 14`, errors []",
+      "source_uri": "http://127.0.0.1:5198/",
+      "captured_at": "2026-10-03T04:53:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RECOVERY-MAP-MOBILE",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 수면·회복 진행 맵 보완 PR #87이 필수 검사를 통과해 main에 병합됐고 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #87 checks 37098083671 and 37098083669 PASS; main workflow 37098162499; merge commit 698f1fbf93b960df38955fdb85ee223260df4cc7; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition; historical local-path scanner annotation warning remained non-blocking",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37098162499",
+      "captured_at": "2026-10-03T04:56:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RECOVERY-MAP-MOBILE",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 수면·회복 진행 맵 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고 390px 라이브 화면에서 14단계 전체 노출·마지막 단계 선택·가로 넘침 없음·runtime errors 없음과 1440px 데스크톱 렌더를 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 698f1fbf93b960df38955fdb85ee223260df4cc7; generatedAt 2026-10-03T04:56:33.135Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 390px CDP stepCount 14, activeStep 13, card text includes `14 / 14`, document/body scrollWidth 390, errors []; live 1440px CDP document/body scrollWidth 1425, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T04:57:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RECOVERY-MAP-MOBILE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }

@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 698f1fb — 2026-10-03
+
+- 모바일 수면·회복 진행 맵을 7×2 전체 단계 표시로 보완해 14개 카드의 읽기 순서를 한 화면에서 파악할 수 있게 했다. 기존 3초 자동 전환·수동 선택·일시정지·카드 일러스트는 유지했다.
+- 로컬 typecheck, UI contract, research copy, public export, production build·정적 bundle·성능 예산과 127개 테스트가 통과했다. 정적 Pages 번들은 11개 라우트·70개 파일·초기 JS 309,865 bytes·CSS 92,953 bytes·전체 1,443,834 bytes였다.
+- PR #87 checks와 main workflow `37098162499`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았고 과거 Git 이력 local-path scanner annotation은 비차단 경고로 남았다.
+- 라이브 validator는 candidate `698f1fbf93b960df38955fdb85ee223260df4cc7`, generatedAt `2026-10-03T04:56:33.135Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외를 확인했다. 390px 라이브 CDP에서 14단계·마지막 카드 `14 / 14`·scrollWidth 390·runtime errors `[]`, 1440px에서 scrollWidth 1425를 확인했다.
+- Browser 플러그인은 사용할 수 없어 CDP fallback으로 대체했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-MOBILE`, `E-CDP-RECOVERY-MAP-MOBILE`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE`, `E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE`.
+
 ## Latest Public Release Recheck — 3b75bae — 2026-10-03
 
 - PR #85에서 공개 `/research/` 경로의 제품 CTA·제품 브랜드 노출·`view=products` 연결을 제거하고, 연구 결과·연구 조건·출처만 이어지는 제품 독립 읽기 흐름으로 보완했다. 별도 제품 경로와 내부 데이터 ledger는 유지했다.

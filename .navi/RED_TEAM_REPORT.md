@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — 698f1fb — 2026-10-03
+
+- 모바일에서 14장 중 첫 6장만 보이던 진행 맵은 후속 단계가 숨겨져 있다는 점에서 실제 독해 흐름을 약화시킬 수 있었고, PR #87에서 7×2 전체 표시로 보완됐다. 320px·390px에서 01–14 단계와 마지막 카드 선택을 확인했다.
+- 이번 변경은 과학 카피·제품 효능·제품 CTA를 추가하지 않았고, 카드 자동 전환과 수동 조작을 유지했다. 새 치명적 결함은 확인되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-MOBILE`, `E-CDP-RECOVERY-MAP-MOBILE`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE`, `E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE`.
+
 ## Latest Red-Team Recheck — 3b75bae — 2026-10-03
 
 - 공개 `/research/`에 제품 CTA와 제품 브랜드가 섞여 연구 읽기 흐름을 방해하던 결함은 PR #85에서 제거됐다. 390px 라이브 CDP에서 제품 CTA·`view=products`·SmartStore 연결이 모두 없고 연구 조건·출처가 카드 안에 남아 있는 것을 확인했다.
