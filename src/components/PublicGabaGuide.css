@@ -921,6 +921,13 @@
 /* v22 mobile menu layer: keep the chapter menu above the sticky reading context. */
 @media(max-width:700px){.guide-header nav.is-open{z-index:22}}
 
+/* v24 mobile menu focus: separate the open navigation from the reading surface. */
+.guide-menu-backdrop{display:none}
+@media(max-width:860px){
+  .guide-menu-backdrop{display:block;position:fixed;z-index:19;inset:70px 0 0;border:0;background:rgba(14,37,61,.22);backdrop-filter:blur(2px);cursor:default}
+  .guide-menu-backdrop:focus-visible{outline:3px solid rgba(22,143,149,.45);outline-offset:-3px}
+}
+
 /* v23 tablet header: collapse the full chapter row before controls are pushed off-canvas. */
 @media(min-width:701px) and (max-width:860px){
   .guide-header{height:70px;gap:12px;padding-inline:22px}

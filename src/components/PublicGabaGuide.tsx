@@ -808,6 +808,15 @@ export default function PublicGabaGuide() {
   }, [menuOpen]);
 
   useEffect(() => {
+    if (!menuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
     const section = recoveryBreakRef.current;
     if (!section || !('IntersectionObserver' in window)) {
       setRecoveryInView(true);
@@ -1054,6 +1063,7 @@ export default function PublicGabaGuide() {
           <div className="guide-reading-progress-meta" role="status" aria-live="polite" aria-atomic="true" aria-label={`현재 읽는 장: ${activeChapter.label}. 전체 ${readingChapters.length}장 중 ${Math.max(0, activeChapterIndex + 1)}장.`}><span aria-hidden="true">지금 읽는 중</span><strong aria-hidden="true">{activeChapter.label}</strong><small aria-hidden="true">{`${String(Math.max(0, activeChapterIndex + 1)).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
         </div>
       </header>
+      {menuOpen ? <button type="button" className="guide-menu-backdrop" aria-label="메뉴 닫기" onClick={() => setMenuOpen(false)} /> : null}
 
       <main id="guide-main">
         <section className="guide-hero guide-hero-story" id="top" aria-labelledby="guide-hero-heading" style={{ '--guide-hero-image': `url(${gabaNaturalHero})` } as CSSProperties}>
