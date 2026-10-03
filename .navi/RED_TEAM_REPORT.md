@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Definition Card Motif Red-Team Recheck — 4e558ee — 2026-10-04
+
+- 320px에서 두 번째 기본 설명 카드의 달 장식이 본문 마지막 줄과 겹치던 결함을 확인했고, 모바일 카드 하단의 장식 전용 여백으로 보완했다. 320/390px 공개 Chrome fallback에서 본문-아이콘 간격 6px, 가로 넘침 없음, 브라우저 오류 없음을 확인했으며 새 CRITICAL/MAJOR 결함은 없었다.
+- 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-DEFINITION-MOTIF-20261004`, `E-PLAYWRIGHT-DEFINITION-MOTIF-20261004`, `E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004`, `E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004`.
+
 ## Mobile Research Card Width Red-Team Recheck — 7a6db416 — 2026-10-04
 
 - 320px에서 연구 결과 카드가 필요 이상으로 좁아져 도표 조건 문구가 여러 줄로 꺾이던 결함을 확인했고, 320/390/1440px에서 모바일 가용 폭을 사용하는 보정 후 재검증했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.

@@ -3418,6 +3418,50 @@
       "captured_at": "2026-10-03T17:25:50Z",
       "reviewer_id": "NAVI-LIVE-QA-20261004-RESEARCH-CARD-WIDTH",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-DEFINITION-MOTIF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GABA 기본 설명 카드의 모바일 장식 아이콘이 본문과 겹치지 않도록 아이콘 전용 하단 여백을 확보했다. 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다.",
+      "locator": "PR #153 candidate f8c834a; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; git diff --check PASS; local Playwright Chrome fallback at 320/390px: second card width 280/350, body bottom 884.89/830.20, motif top 890.89/836.20, clear gap 6px, scrollWidth equals viewport, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/153",
+      "captured_at": "2026-10-03T17:50:30Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-DEFINITION-MOTIF",
+      "claim_refs": ["C-001", "C-003", "C-004"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-DEFINITION-MOTIF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본을 Chrome fallback으로 320px·390px에서 확인했다. 두 번째 GABA 기본 설명 카드의 본문과 달 아이콘이 분리되어 읽히고 가로 넘침과 브라우저 오류가 없었다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/#basics; v43-basics-card-crop.mjs and v43-basics-local-audit.mjs; 320px/390px second card width 280/350; body-to-motif clear gap 6px at both widths; scrollWidth equals viewport; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/153",
+      "captured_at": "2026-10-03T17:50:30Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-DEFINITION-MOTIF",
+      "claim_refs": ["C-002", "C-003", "C-004"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #153의 release-verify와 site-quality-verify가 통과했고 main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드에서 정상적으로 건너뛰었다.",
+      "locator": "PR #153 checks 37141582625 release-verify PASS and 37141582634 site-quality-verify PASS; merge commit 4e558eeefec8e9cbbb133629658fb0b5b28b7762; main workflow 37141668244 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37141668244",
+      "captured_at": "2026-10-03T17:50:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-DEFINITION-MOTIF",
+      "claim_refs": ["C-001", "C-002", "C-005"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답하고 main 병합 SHA를 제공했으며 모바일 기본 설명 카드의 본문·장식 분리와 정적 공개 경계를 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 4e558eeefec8e9cbbb133629658fb0b5b28b7762; generatedAt 2026-10-03T17:46:15.030Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Playwright results recorded in E-PLAYWRIGHT-DEFINITION-MOTIF-20261004",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T17:50:30Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261004-DEFINITION-MOTIF",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005"]
     }
   ]
 }

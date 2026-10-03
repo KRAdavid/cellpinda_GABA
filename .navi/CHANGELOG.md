@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 모바일 기본 카드 장식 겹침 보정 공개 배포: 2026-10-04 / candidate `4e558ee`
+
+320px 화면에서 GABA 기본 설명 카드의 달 아이콘이 본문 마지막 줄과 겹치던 가독성 결함을 확인하고 모바일 카드에 장식 전용 하단 여백을 확보했다. 로컬 typecheck·UI contract·127 tests·build, PR #153 checks, main workflow `37141668244`, Pages·라이브 smoke·release status, 공개 validator와 320/390px Chrome fallback을 재검증했다. 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-DEFINITION-MOTIF-20261004`, `E-PLAYWRIGHT-DEFINITION-MOTIF-20261004`, `E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004`, `E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004`.
+
 ## 모바일 연구 결과 카드 가독성 고도화 공개 배포: 2026-10-04 / candidate `7a6db416`
 
 320px·390px에서 연구 결과 카드가 가용 폭을 모두 사용하도록 보정해 도표 라벨의 불필요한 줄바꿈과 세로 밀도를 줄였다. 연구 문구·데이터·해석·제품 독립 경계는 변경하지 않았다. PR #151의 release-verify·site-quality-verify, main workflow `37140273727`의 정적 Pages 배포·라이브 smoke·release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback 320/390/1440px에서 카드 폭 280/350/1180px, 도표 폭 244/314/687px, 가로 넘침 없음·브라우저 오류 없음을 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004`, `E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004`, `E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004`.
@@ -231,3 +235,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - Main deployment run `36984877866` passed release verification, GitHub Pages deployment, live smoke test, and release status.
 - Live validation confirmed candidate `bb4504fa902abbdb52b99f2998da6f2cd20ef1b0`, 6 research records, 6 share pages, and no public internal-operation snapshots.
 - NAVI remains `USER_DECISION` / `INTERNAL_QA_READY_WITH_CONDITIONS`; open external-validation items remain open.
+# Change Log
+
+## v43 · 모바일 기본 카드 장식 겹침 보정 — 4e558ee — 2026-10-04
+
+- 320px 화면에서 GABA 기본 설명 카드의 달 아이콘이 본문 마지막 줄과 겹치던 가독성 결함을 확인하고, 모바일 카드에 장식 전용 하단 여백을 확보했다.
+- 로컬 typecheck·UI contract·127 tests·build, PR #153 checks, main workflow `37141668244`, Pages·라이브 smoke·release status, 공개 validator와 320/390px Chrome fallback을 재검증했다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-DEFINITION-MOTIF-20261004`, `E-PLAYWRIGHT-DEFINITION-MOTIF-20261004`, `E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004`, `E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004`.

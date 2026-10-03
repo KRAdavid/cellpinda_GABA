@@ -1,5 +1,13 @@
 # Completion Report
 
+## Mobile Definition Card Motif Release Recheck — 4e558ee — 2026-10-04
+
+- GABA 기본 설명 카드의 장식 아이콘이 모바일 본문과 겹치지 않도록 하단 읽기 여백을 추가했다. 320/390px에서 본문-아이콘 간격 6px와 가로 넘침 없음, 브라우저 오류 없음을 확인했다.
+- 로컬 typecheck·UI contract·127 tests·build, PR #153 checks, main workflow `37141668244`, Pages 배포·라이브 smoke·release status와 공개 validator가 통과했다. 공개 candidate는 `4e558eeefec8e9cbbb133629658fb0b5b28b7762`다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android 대표 환경, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-DEFINITION-MOTIF-20261004`, `E-PLAYWRIGHT-DEFINITION-MOTIF-20261004`, `E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004`, `E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004`.
+
 ## Mobile Research Card Width Release Recheck — 7a6db416 — 2026-10-04
 
 - 모바일 연구 결과 카드의 내부 폭을 가용 폭으로 보정해 320px·390px에서 도표 문구가 더 자연스럽게 읽히도록 고도화했다. 연구 문구·데이터·해석·출처와 제품 독립 경계는 그대로 유지했다.

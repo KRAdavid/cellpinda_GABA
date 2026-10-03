@@ -1,5 +1,13 @@
 # Audit Report
 
+## Mobile Definition Card Motif Audit — 4e558ee — 2026-10-04
+
+- 320px 공개 화면에서 두 번째 GABA 기본 설명 카드의 달 아이콘이 본문과 시각적으로 겹치는 경미한 가독성 결함을 확인했다. 모바일 카드 하단에 장식 전용 여백을 추가해 본문과 아이콘 사이 6px 간격을 확보했다.
+- 로컬과 공개 Chrome fallback 320/390px에서 카드 폭 280/350, 가로 넘침 없음, 브라우저 오류 없음과 본문-아이콘 분리를 재확인했다. PR #153 검사와 main workflow `37141668244`, Pages·라이브 smoke·release status·live validator도 통과했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-DEFINITION-MOTIF-20261004`, `E-PLAYWRIGHT-DEFINITION-MOTIF-20261004`, `E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004`, `E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004`.
+
 ## Mobile Research Card Width Audit — 7a6db416 — 2026-10-04
 
 - 연구 결과 카드의 모바일 좌우 여백이 320px에서 도표 문구를 조기에 줄바꿈시키고 카드 높이를 키우는 경미한 사용성 결함을 확인했다. 카드 내부 폭을 모바일 가용 폭으로 확장했으며 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다.
