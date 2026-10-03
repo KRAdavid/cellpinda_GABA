@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-03 — 95c3830
+
+- 전문가 영상 선택 직후의 검은 빈 iframe 인상을 재현하고, iframe 로딩 중 상태 문구·오버레이를 추가해 사용자가 고장으로 오인할 가능성을 낮췄다. 로컬 390px에서는 로딩 상태, 라이브 390px에서는 autoplay iframe과 로드 완료 상태를 확인했다.
+- PR #77 checks와 main workflow `37092613987`, live validator가 통과했다. 공개 데이터·연구 카피·제품 독립 경계와 teaser HOLD는 변하지 않았다.
+- 새 치명적 결함은 확인되지 않았고 결과는 `PASS_WITH_CONDITIONS`를 유지한다. Browser 플러그인 미사용으로 CDP fallback을 사용했으며 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-VIDEO-LOADING`, `E-CDP-VIDEO-LOADING`, `E-DEPLOY-PIPELINE-VIDEO-LOADING`, `E-LIVE-PUBLIC-VIDEO-LOADING`.
+
 ## Recheck — 2026-10-03 — 79eea1f
 
 - 768px·820px 태블릿에서 기존 데스크톱 메뉴가 공유 버튼을 화면 밖으로 밀어내던 실패 모드를 확인했고, 701–860px 아이콘 메뉴 전환으로 보완했다. 메뉴·큰 글씨·공유 동작, 모바일 회복 이동, 데스크톱 진행 상태를 다시 실행했으며 새 치명적 결함과 runtime errors는 확인되지 않았다.
