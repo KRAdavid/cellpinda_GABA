@@ -1158,13 +1158,26 @@ export default function PublicGabaGuide() {
     const shareText = activeChapterId === 'expert-videos'
       ? `${activeVideo.title} 영상을 보며 GABA를 읽는 공개 안내서입니다.`
       : `${activeReadingLabel}에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서입니다.`;
-    const shareData = { title: shareTitle, text: shareText, url: window.location.href };
+    const shareUrl = new URL(window.location.href);
+    shareUrl.searchParams.set('view', 'guide');
+    if (activeChapterId === 'research' && activeResearchTopicId) {
+      shareUrl.hash = `research-${activeResearchTopicId}`;
+    } else if (activeChapterId === 'top') {
+      shareUrl.searchParams.delete('video');
+      shareUrl.hash = 'top';
+    } else {
+      shareUrl.hash = activeChapterId;
+      if (activeChapterId === 'expert-videos') shareUrl.searchParams.set('video', activeVideo.id);
+      else shareUrl.searchParams.delete('video');
+    }
+    const shareHref = shareUrl.toString();
+    const shareData = { title: shareTitle, text: shareText, url: shareHref };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
         announceShareStatus('공유 창을 열었어요.');
       } else if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(window.location.href);
+        await navigator.clipboard.writeText(shareHref);
         announceShareStatus('링크를 복사했어요. 자유롭게 공유해 보세요.');
       } else {
         announceShareStatus('주소창의 링크를 복사해 자유롭게 공유해 보세요.');
