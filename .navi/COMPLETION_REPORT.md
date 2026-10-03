@@ -1,5 +1,13 @@
 # Completion Report
 
+## Chapter Entry Clearance Release Recheck — b9f21d0 — 2026-10-04
+
+- 장 진입 시 제목만 보이던 위치를 장 헤더 전체가 보이는 위치로 보정해 모바일에서도 `06 · 연구의 확장` 같은 장 표시와 제목을 함께 읽도록 고도화했다.
+- 로컬 typecheck/UI contract/127 tests/build, PR #149 검사, main workflow `37139270708`, Pages 배포·라이브 smoke·release status와 공개 validator가 통과했다. 공개 320/390/1440px Playwright에서 `#research` 직접 진입 시 장 표시가 진행 바 아래에 있고, 가로 넘침과 브라우저 오류가 없음을 확인했다.
+- 공개 candidate는 `b9f21d0ceba52e0d3ea4745d65232e3661ffd7ea`이며, 제품 독립 과학 안내·연구 데이터·출처 경계는 유지했다. 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 NAVI 상태는 `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-CHAPTER-ENTRY-20261004`, `E-PLAYWRIGHT-CHAPTER-ENTRY-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004`, `E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004`.
+
 ## Mobile Expert Video Topic Visibility Release Recheck — 71960f0 — 2026-10-04
 
 - 전문가 영상 주제 필터를 모바일 가로 스크롤에서 전체 노출형 줄바꿈으로 바꿔 320px·390px에서 7개 주제를 즉시 읽고 선택할 수 있게 고도화했다. 선택 후 `수용체` 영상 1개와 iframe 재생 상태를 확인했다.
