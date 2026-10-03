@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Expert Video Gallery Red-Team Recheck — 10a6192 — 2026-10-03
+
+- 긴 주제 목록이 모바일에서 잘린 것처럼 보일 수 있던 탐색 단서를 PR #113에서 보완했다. 390px에서 오른쪽 continuation cue가 표시되고, 끝에 도달하면 사라지며, 고해상도 썸네일이 선택 영상과 일치하는지 확인했다.
+- `연구 읽기`를 선택하면 해당 카드와 YouTube iframe이 동기화되고, 390px·1440px에서 가로 넘침이나 오류 오버레이가 없었다. 새 과학 주장·제품 광고는 추가되지 않았다.
+- 새 치명적 결함은 확인되지 않았지만 Browser 플러그인, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-BROWSING-20261003`, `E-CDP-EXPERT-VIDEO-BROWSING-20261003`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003`, `E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003`.
+
 ## Final Red-Team Recheck — 16fc5d4 — 2026-10-03
 
 - 문서 PR #111 병합 뒤 공개 URL의 상태·번들·공개 데이터 경계를 재확인했다. 새 코드 결함이나 공개 배포 실패는 확인되지 않았다.

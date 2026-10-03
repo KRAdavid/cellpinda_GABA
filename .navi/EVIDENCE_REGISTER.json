@@ -2582,6 +2582,50 @@
       "captured_at": "2026-10-03T09:27:00Z",
       "reviewer_id": "NAVI-FINAL-LIVE-QA-20261003",
       "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-BROWSING-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 갤러리를 고도화해 고해상도 썸네일과 안전한 저해상도 대체 경로를 사용하고, 모바일에서는 아직 이어지는 주제가 있음을 시각적으로 안내하도록 보완했다. 과학 카피·제품 경계·영상 선택 즉시 재생 흐름은 유지했다.",
+      "locator": "PR #113 candidate e6313ee480772f611e6abda065c88e8c63f06ae0; pnpm install --frozen-lockfile PASS; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; static routes 11, files 70; initial JS 311157, CSS 95703, total assets 1454704; local Chrome CDP fallback 390px filter scrollWidth 705/clientWidth 322, maxresdefault thumbnail, `연구 읽기` selection -> matching card and iframe, document scrollWidth 390; 1440px document scrollWidth 1425",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/113",
+      "captured_at": "2026-10-03T09:48:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-EXPERT-VIDEO-BROWSING",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-EXPERT-VIDEO-BROWSING-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 배포본을 Chrome CDP fallback으로 확인한 결과, 모바일 전문가 영상 필터가 더 많은 주제의 존재를 자연스럽게 안내하고 주제를 선택하면 선택 카드와 영상이 즉시 동기화됐다. 필터 끝에서는 안내 단서가 사라졌고 데스크톱 가로 넘침은 없었다.",
+      "locator": "temporary Chrome CDP fallback; live candidate 10a61920df8bbcbe1b6f288a1d61425f48687800 at https://kradavid.github.io/gaba_info/; 390px wrapper `has-more`, filter scrollWidth 705/clientWidth 322, first card maxresdefault thumbnail, `연구 읽기` -> active topic/card and iframe `rOFkZg09AoY`, document scrollWidth 390, overlay false; filter end -> wrapper without `has-more`; 1440px width 1440, document scrollWidth 1425, title/hero present",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T09:53:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-EXPERT-VIDEO-BROWSING",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 갤러리 고도화 PR #113의 필수 검사를 통과했고 main 병합 후 정적 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #113 checks 37114246192 `Verify consumer site` and 37114246168 `Verify and deploy Cellpinda GABA` success; merge commit 10a61920df8bbcbe1b6f288a1d61425f48687800; main workflow 37114410997 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37114410997",
+      "captured_at": "2026-10-03T09:52:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-EXPERT-VIDEO-BROWSING",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "고도화된 전문가 영상 갤러리가 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 모바일 영상 필터 연속성·주제 선택·선택 영상 재생·데스크톱 레이아웃과 공개 데이터 경계를 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 10a61920df8bbcbe1b6f288a1d61425f48687800; generatedAt 2026-10-03T09:51:25.742Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; temporary Chrome CDP fallback 390px wrapper `has-more`, filter scrollWidth 705/clientWidth 322, maxresdefault thumbnail, `연구 읽기` active card and iframe `rOFkZg09AoY`, document scrollWidth 390, overlay false; scrolling filters to end removed `has-more`; 1440px title/hero present and document scrollWidth 1425",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T09:54:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-EXPERT-VIDEO-BROWSING",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
     }
   ]
 }
