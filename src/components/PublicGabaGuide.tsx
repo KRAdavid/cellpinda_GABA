@@ -240,9 +240,9 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: '머리를 많이 쓴 뒤, 두 그룹은 어떻게 달랐을까요?',
       summary: 'GABA를 섭취한 그룹은 뇌파와 활력 점수가 비교 그룹보다 덜 떨어졌습니다.',
-      note: '막대 길이로 크기를 비교하지 않고, 두 조건에서 관찰된 변화 방향을 나란히 보여줍니다.',
-      referenceLabel: '비교 캡슐',
-      resultLabel: 'GABA 캡슐',
+      note: '표시의 개수는 연구에서 관찰된 ‘더 많이·덜’의 방향만 나타내며, 실제 효과 크기나 수치를 뜻하지 않습니다.',
+      referenceLabel: '비교 조건',
+      resultLabel: 'GABA 섭취',
       rows: [
         { label: '뇌파 변화', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
         { label: '활력 점수', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
@@ -268,7 +268,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: 'GABA를 바른 피부는 어떻게 달라졌을까요?',
       summary: 'GABA를 바른 피부는 장벽이 더 빨리 회복됐고, 피부가 두꺼워지는 변화는 줄었습니다.',
-      note: '정확한 수치를 비교하는 그래프가 아니라, 두 조건에서 관찰된 변화 방향을 보여줍니다.',
+      note: '표시의 개수는 연구에서 관찰된 ‘더 많이·덜’의 방향만 나타내며, 실제 효과 크기나 수치를 뜻하지 않습니다.',
       referenceLabel: '비교 조건',
       resultLabel: 'GABA를 바른 조건',
       rows: [
@@ -366,9 +366,9 @@ const sleepResultTopic: Pick<ResearchTopic, 'id' | 'chart'> = {
     kind: 'comparison',
     title: '수면 연구 결과를 방향으로 비교',
     summary: 'GABA 섭취 기간에는 잠드는 시간이 더 짧고, 전체 비렘수면이 더 길었습니다.',
-    note: '정확한 수치 대신, 연구에서 확인된 변화 방향을 두 조건으로 나누어 보여줍니다.',
-    referenceLabel: '비교 캡슐',
-    resultLabel: 'GABA 캡슐',
+    note: '표시의 개수는 연구에서 관찰된 ‘더 많이·덜’의 방향만 나타내며, 실제 효과 크기나 수치를 뜻하지 않습니다.',
+    referenceLabel: '비교 조건',
+    resultLabel: 'GABA 섭취',
     rows: [
       { label: '잠드는 시간', reference: '더 길었습니다', result: '더 짧았습니다', visual: 'result-less' },
       { label: '전체 비렘수면', reference: '더 짧았습니다', result: '더 길었습니다', visual: 'result-more' },
@@ -667,21 +667,25 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
         <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교. ${comparisonChart.note}`}>
           <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">변화 방향</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
           <div className="guide-outcome-comparison-list">
-            {comparisonChart.rows.map((row) => (
-              <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
-                <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong></div>
-                <div className="guide-outcome-lanes">
-                  <div className="guide-outcome-lane is-reference">
-                    <div className="guide-outcome-lane-top"><span>{comparisonChart.referenceLabel}</span><strong>{row.reference}</strong></div>
-                    <i aria-hidden="true"><b /></i>
-                  </div>
-                  <div className="guide-outcome-lane is-result">
-                    <div className="guide-outcome-lane-top"><span>{comparisonChart.resultLabel}</span><strong>{row.result}</strong></div>
-                    <i aria-hidden="true"><b /></i>
+            {comparisonChart.rows.map((row) => {
+              const referenceSignal = row.visual === 'result-less' ? 'more' : 'less';
+              const resultSignal = row.visual === 'result-less' ? 'less' : 'more';
+              return (
+                <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
+                  <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong></div>
+                  <div className="guide-outcome-lanes">
+                    <div className="guide-outcome-lane is-reference">
+                      <div className="guide-outcome-lane-top"><span>{comparisonChart.referenceLabel}</span><strong>{row.reference}</strong></div>
+                      <span className={`guide-outcome-lane-signal is-${referenceSignal}`} aria-hidden="true"><i /><i /></span>
+                    </div>
+                    <div className="guide-outcome-lane is-result">
+                      <div className="guide-outcome-lane-top"><span>{comparisonChart.resultLabel}</span><strong>{row.result}</strong></div>
+                      <span className={`guide-outcome-lane-signal is-${resultSignal}`} aria-hidden="true"><i /><i /></span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       ) : null}
