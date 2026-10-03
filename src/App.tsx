@@ -14,7 +14,22 @@ const Admin = import.meta.env.DEV ? lazy(() => import('./components/Admin')) : n
 const MemberRecords=lazy(()=>import('./components/MemberRecords'));
 const OperationsMvp=import.meta.env.DEV ? lazy(()=>import('./components/OperationsMvp')) : null;
 const ResearchLibrary=lazy(()=>import('./components/ResearchLibrary'));
-const PublicGabaGuide=lazy(()=>import('./components/PublicGabaGuide'));
+// The GABA guide is the default public entry. Start its route chunk while the
+// app shell is evaluating so the first menu interaction is not held behind a
+// Suspense fallback on slower mobile connections. Other routes keep the guide
+// chunk lazy and do not pay for it until they are requested.
+const initialUrl = new URL(window.location.href);
+const initialBasePath = import.meta.env.BASE_URL.replace(/\/+$/, '');
+const initialPath = initialUrl.pathname.replace(/\/+$/, '') || '/';
+const initialRelativePath = initialBasePath && initialPath.startsWith(initialBasePath)
+  ? initialPath.slice(initialBasePath.length) || '/'
+  : initialPath;
+const initialRequestedView = initialUrl.searchParams.get('view');
+const initialGuideEntry = initialRequestedView === 'guide'
+  || initialRelativePath === '/guide'
+  || (initialRelativePath === '/' && !initialRequestedView && !rhythmIdFromUrl(initialUrl) && initialUrl.searchParams.get('challenge') !== '7days');
+const initialPublicGuideImport = initialGuideEntry ? import('./components/PublicGabaGuide') : null;
+const PublicGabaGuide=lazy(()=>initialPublicGuideImport ?? import('./components/PublicGabaGuide'));
 // Keep the first route payload focused on the hero and one-minute check. The
 // long-form story, evidence, commerce, review and challenge sections load as
 // independent chunks after the shell is interactive.
@@ -121,6 +136,9 @@ function ExperienceLoading({research=false,label,compact=false}:{research?:boole
  const heading=research?'연구 카드를 불러오고 있어요.':label?`${label} 내용을 불러오고 있어요.`:'다음 이야기를 불러오고 있어요.';
  const eyebrow=research?'사람 대상 GABA 연구':label||'셀핀다 발효가바';
  return <section className={`section wrap experience-loading${research?' experience-loading-research':''}${compact?' experience-loading-compact':''}`} aria-live="polite" aria-busy="true"><div className="experience-loading-heading"><span className="experience-loading-orb" aria-hidden="true"/><div><p className="chapter">{eyebrow}</p><h2>{heading}</h2></div></div><div className="experience-loading-grid" aria-hidden="true"><span/><span/><span/></div><p className="sr-only">잠시만 기다리면 {research?'사람 연구와 제품 정보를':`${eyebrow} 정보를`} 이어서 볼 수 있어요.</p></section>;
+}
+function PublicGuideLoading(){
+ return <main className="guide-route-loading" aria-live="polite" aria-busy="true"><div className="guide-route-loading-header"><strong>뇌와 우리</strong><div aria-hidden="true"><i/><i/><i/></div></div><section className="guide-route-loading-hero"><div className="guide-route-loading-copy"><span className="guide-route-loading-kicker">GABA GUIDE</span><span className="guide-route-loading-title"/><span className="guide-route-loading-title guide-route-loading-title-short"/><span className="guide-route-loading-body"/><span className="guide-route-loading-body guide-route-loading-body-short"/></div><div className="guide-route-loading-art" aria-hidden="true"/></section><p className="guide-route-loading-status">GABA 안내서를 준비하고 있어요.</p></main>;
 }
 export default function App(){
  const [content,setContent]=useState<Content|null>(null),[error,setError]=useState(false),[loading,setLoading]=useState(true),[menu,setMenu]=useState(false),[retryKey,setRetryKey]=useState(0),[hasRhythmResult,setHasRhythmResult]=useState(false);
@@ -347,7 +365,7 @@ export default function App(){
  if(accountView)return <Suspense fallback={<p className="loading">내 기록을 여는 중입니다.</p>}><MemberRecords/></Suspense>;
  if(adminView && Admin)return <Suspense fallback={<p className="loading">검토실을 여는 중입니다.</p>}><Admin/></Suspense>;
  if(operationsView && OperationsMvp)return <Suspense fallback={<p className="loading">운영판을 여는 중입니다.</p>}><OperationsMvp/></Suspense>;
- if(guideView)return <Suspense fallback={<p className="loading">GABA 안내서를 여는 중입니다.</p>}><PublicGabaGuide/></Suspense>;
+ if(guideView)return <Suspense fallback={<PublicGuideLoading/>}><PublicGabaGuide/></Suspense>;
  if(researchView)return <><a className="skip" href="#main">본문으로 이동</a><header className="header research-route-header"><a href={siteRoot} className="brand">GABA Guide<span className="brand-dot">·</span></a><nav aria-label="연구 메뉴"><a href={siteRoot}>메인으로</a></nav></header><main id="main" className="research-route-main">{content?<><section className="research-route-intro wrap"><p className="chapter">사람을 대상으로 한 GABA 연구</p><h1>사람 연구 결과를 한눈에 보기</h1><p>잠·스트레스·머리를 많이 쓴 뒤 관찰한 내용을 그림과 쉬운 말로 정리했어요. 카드에서 결과와 연구 조건을 함께 확인해 보세요.</p></section><Suspense fallback={<ExperienceLoading research/>}><ResearchLibrary claims={content.claims} sectionTitle="주제별로 한눈에 보기" onOpen={()=>track('evidence_opened',{path:'/research'})}/></Suspense></>:<section className="section wrap content-status"><p className="chapter">사람 대상 GABA 연구</p><h1>{loading?'연구 내용을 불러오고 있어요.':'연결이 잠시 늦어졌어요.'}</h1><p>{loading?'사람 연구를 쉽게 정리한 내용을 불러오는 중입니다.':'연구 자료를 불러오지 못했습니다. 다시 시도해 주세요.'}</p>{!loading?<button type="button" className="button outline" onClick={()=>setRetryKey(value=>value+1)}>다시 불러오기</button>:null}</section>}</main><footer className="wrap footer research-route-footer"><a className="brand" href={siteRoot}>GABA Guide.</a><p>사람 대상 GABA 연구 안내</p><a href={siteRoot}>메인으로</a></footer></>;
  const linkContext=sharedRhythmId
   ? <aside className="link-context link-context-shared" aria-live="polite"><span>친구가 공유한 하루 리듬 · {resultTypes[sharedRhythmId].name}</span><a href="#rhythm-result">공유 결과 바로 보기 <ArrowRight size={15} aria-hidden="true"/></a><small>내 답변은 아직 시작하지 않았어요.</small></aside>
