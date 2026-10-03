@@ -11,6 +11,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 결과 비교 도표와 성장호르몬 상대 크기 막대, 출처 연결 구조
 - NAVI 목표·산출물·coverage·증거·감사·레드팀 기록
 
+## Latest Release Recheck — 19a38ab — 2026-10-03
+
+- 공개 연구 카드에서 관찰된 핵심 결과 문장을 바로 복사할 수 있고, 브라우저 클립보드 권한이 없으면 대체 선택 안내를 표시한다.
+- 로컬 UI 계약·typecheck·127개 테스트·build·성능, 라이브 390/1440px CDP, main 배포가 모두 통과했다.
+- 현재 확인한 공개 후보는 `19a38abc7f1a7b5591f228c7abe1e42862ef0cca`이며 validator는 HTTP 200·70 bundles·12 claims·6 master records·6 share pages를 보고했다.
+- 자동 검증은 통과했지만 Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
 ## Latest Release Recheck — 3f4a3e5 — 2026-10-03
 
 - 연구 결과 그래프 앞에 `대상·방법·측정` 연구 프로필을 추가해 소비자가 결과를 보기 전에 연구의 범위와 측정 대상을 한눈에 파악하도록 보완했다.
