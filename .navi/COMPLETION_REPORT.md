@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — b9160e4 — 2026-10-03
+
+- 모바일 메뉴 접근성을 고도화해 키보드 포커스 순환과 현재 읽는 위치 semantics를 추가했다.
+- PR #102 checks, main `37106966171`, Pages/live validator, 390/1440px Chrome CDP fallback이 통과했다. 공개 UI candidate는 `b9160e40fbca673134ca1563651a00d8dfdd615a`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-FOCUS-TRAP`, `E-CDP-MOBILE-FOCUS-TRAP`, `E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP`, `E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP`.
+
 ## Latest Release Recheck — 9c2913d — 2026-10-03
 
 - 읽기 진행 레일의 장 순서를 실제 페이지 흐름과 맞추고 수면·회복 프롤로그를 03/13으로 정합화했다. 해시 링크·전문가 영상 선택 이동도 고정 헤더 아래에 안전하게 도착한다.

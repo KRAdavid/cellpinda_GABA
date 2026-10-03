@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — b9160e4 — 2026-10-03
+
+- 모바일 메뉴에서 Tab 이동이 배경 콘텐츠로 빠질 수 있던 접근성 결함을 PR #102에서 포커스 순환으로 보완했다. `aria-current=location`, 390px 메뉴 상태, 가로 폭, 새 치명적 결함 없음을 확인했다.
+- PR #102 checks, main `37106966171`, live validator, 390/1440px CDP를 재확인했다. 새 과학·제품 주장은 추가되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-FOCUS-TRAP`, `E-CDP-MOBILE-FOCUS-TRAP`, `E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP`, `E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP`.
+
 ## Latest Red-Team Recheck — 9c2913d — 2026-10-03
 
 - 진행 레일이 실제 페이지 순서와 어긋나 수면·회복 프롤로그가 뒤늦게 표시될 수 있고, 해시 앵커가 sticky rail 아래에 가려질 수 있던 결함을 PR #100에서 보완했다. DOM 순서 기반 13단계 진행, 동적 오프셋, 전문가 영상 선택 이동을 확인했으며 새 치명적 결함은 확인되지 않았다.

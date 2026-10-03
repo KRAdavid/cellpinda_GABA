@@ -2351,6 +2351,50 @@
       "captured_at": "2026-10-03T07:16:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-READING-RAIL-DEEPLINK",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-FOCUS-TRAP",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 GABA 안내서 메뉴가 열린 동안 키보드 Tab·Shift+Tab 포커스를 메뉴 내부에서 순환시키고, 현재 읽는 장의 위치 의미를 location으로 정리하도록 보완했다. 과학 카피·제품 경계·시각 자산은 변경하지 않았다.",
+      "locator": "PR #102 candidate 0425571; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run validate:ui-contract PASS; pnpm run build PASS; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1448897; local Chrome CDP 390px history current location `발견`, menu focusables 7, forward Tab wrapped to `수면과 회복`, reverse Shift+Tab wrapped to `메뉴 닫기`, open state overflow hidden/backdrop true, close state overflow visible/backdrop false, document scrollWidth 390",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/102",
+      "captured_at": "2026-10-03T07:35:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-MOBILE-FOCUS-TRAP",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-MOBILE-FOCUS-TRAP",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개본을 Chrome CDP fallback으로 확인한 결과, 모바일 메뉴의 키보드 포커스 순환·현재 읽는 장 표시·스크롤 잠금과 닫힘 복원이 정상 동작했고 가로 넘침이 없었다.",
+      "locator": "temporary Chrome CDP fallback; live candidate b9160e40fbca673134ca1563651a00d8dfdd615a at https://kradavid.github.io/gaba_info/; 390px history current location `발견`, focusables 7, forward Tab `수면과 회복`, reverse Shift+Tab `메뉴 닫기`, open expanded=true/backdrop=true/overflow hidden, close expanded=false/backdrop=false/overflow visible, document scrollWidth 390",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/102",
+      "captured_at": "2026-10-03T07:39:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-MOBILE-FOCUS-TRAP",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 메뉴 접근성 보완 PR #102의 release-verify·site-quality-verify를 통과했고 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #102 checks 37106896121 and 37106896105 PASS; merge commit b9160e40fbca673134ca1563651a00d8dfdd615a; main workflow 37106966171 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37106966171",
+      "captured_at": "2026-10-03T07:40:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-MOBILE-FOCUS-TRAP",
+      "claim_refs": ["C-001", "C-002", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 메뉴 포커스 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 공개 데이터 경계·정적 번들 지표·390px/1440px 화면을 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha b9160e40fbca673134ca1563651a00d8dfdd615a; generatedAt 2026-10-03T07:38:26.221Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px focus loop and menu state restored, document/body scrollWidth 390; live 1440px desktop hero and nav rendered, document scrollWidth 1425",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T07:40:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-MOBILE-FOCUS-TRAP",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }

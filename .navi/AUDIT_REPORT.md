@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — b9160e4 — 2026-10-03
+
+- 모바일 메뉴가 열린 상태에서 키보드 Tab·Shift+Tab 포커스를 메뉴 내부로 순환시키고 현재 읽는 장을 `location`으로 노출했다. 기존 시각 디자인·연구 카피·제품 경계는 유지했다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 309,865, CSS 92,953, total 1,448,897.
+- PR #102 checks `37106896121`·`37106996105`와 main `37106966171` release-verify/worker-readiness/Pages publish/smoke-live/release-status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `b9160e40fbca673134ca1563651a00d8dfdd615a`, generatedAt `2026-10-03T07:38:26.221Z`, HTTP 200, 70 hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. Live CDP 390px 포커스 순환·메뉴 열림/닫힘과 1440px 데스크톱 가로 폭 1425를 확인했다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-FOCUS-TRAP`, `E-CDP-MOBILE-FOCUS-TRAP`, `E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP`, `E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP`.
+
 ## Latest Public Release Recheck — 9c2913d — 2026-10-03
 
 - 읽기 진행 레일의 실제 DOM 순서를 13장으로 정합화하고 수면·회복 프롤로그를 03/13으로 표시했다. 해시 링크와 모바일 전문가 영상 선택 이동은 sticky header·reading rail 아래에 도착하도록 보정했다.
