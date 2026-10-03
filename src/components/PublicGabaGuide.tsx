@@ -1151,7 +1151,7 @@ export default function PublicGabaGuide() {
             <div className="guide-research-map" aria-label="GABA에서 다섯 연구 영역으로 확장되는 구조">
               <svg className="guide-research-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 43V22M57 50H78M56 56L77 77M44 56L23 77M43 50H22" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth=".65" strokeDasharray="1 2" /></svg>
               <div className="guide-research-orbit-core"><strong>GABA</strong></div>
-              {researchTopics.map((topic) => <div className="guide-research-map-item" key={topic.id}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><div><strong>{topic.title}</strong></div></div>)}
+              {researchTopics.map((topic) => <button type="button" className="guide-research-map-item" key={topic.id} onClick={() => scrollTo(`research-${topic.id}`)} aria-label={`${topic.title} 연구 카드로 이동`}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><span><strong>{topic.title}</strong></span></button>)}
             </div>
             <div className="guide-rail"><b>읽는 순서</b><ol><li><b>01</b>{' '}지도</li><li><b>02</b>{' '}대상</li><li><b>03</b>{' '}결과</li><li><b>04</b>{' '}해석</li></ol></div>
             <div className="guide-research-key" aria-label="연구 카드 표시 기준">
