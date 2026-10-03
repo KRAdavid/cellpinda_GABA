@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Reading Clarity Red-Team Recheck — 37737d2 — 2026-10-04
+
+- 좁은 화면에서 기능 라벨이 장식 요소보다 작아질 수 있는 사용성 결함을 재검토했다. 320/390px 공개본에서 진행 상태·장 표시·연구 출처·결과 방향 라벨을 12px로 확인했고, 읽기 크기 버튼은 `가+`/`가−`로 상태를 시각적으로 드러냈다.
+- Chrome fallback 기준 320/390/1440px에서 가로 넘침과 런타임 오류가 없고, 읽기 크기 클릭 후 `is-large-text`와 상태 문구가 갱신된다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 잔여 위험은 동일하다. Browser 플러그인 부재로 Chrome fallback만 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 별도 검증이 필요하다. 연구 카피나 제품 광고는 이번 변경에서 추가하지 않았다. 상태는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004`, `E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004`, `E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004`.
+
 ## Expert Video Thumbnail Resolution Red-Team Recheck — 52ff08b — 2026-10-04
 
 - `maxres`와 `hq` 썸네일을 모두 1px 이미지로 성공 응답시키는 조건에서 공개 390px 화면을 재현했다. 이미지가 `is-unavailable`로 숨겨지고 `GABA VIDEO` 표지가 표시되는 것을 확인했으며, 정상 320/390/1440px에서는 가로 넘침과 브라우저 오류가 없었다.

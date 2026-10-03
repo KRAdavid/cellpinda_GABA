@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 모바일 읽기 라벨·읽기 크기 조절 고도화 공개 배포: 2026-10-04 / candidate `37737d2`
+
+모바일 읽기 흐름의 진행 상태·장 표시·연구 출처·결과 방향 라벨을 12px 기준으로 보정하고, 읽기 크기 조절 버튼에 `가+`/`가−` 표기를 추가했다. PR #161, main workflow `37147186088`, Pages·라이브 smoke·release status와 공개 validator, 320/390/1440px Chrome fallback 검증이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004`, `E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004`, `E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004`.
+
 ## 전문가 영상 저해상도 썸네일 방어 공개 배포: 2026-10-04 / candidate `52ff08b`
 
 YouTube 썸네일이 오류 대신 저해상도 성공 응답을 반환해도 decoded width를 검사하고, 기본·대체 이미지 모두 기준 미달이면 `GABA VIDEO` 표지를 노출하도록 PR #160에서 보완했다. 로컬·공개 Playwright, main workflow `37145916564`, Pages·라이브 smoke·release status·공개 validator를 재검증했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004`.

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Mobile Reading Clarity Release Gate — 37737d2 — 2026-10-04
+
+- 이번 보완은 모바일 기능 라벨의 최소 가독성과 읽기 크기 조절의 시각 단서를 강화한 범위다. 로컬 검증과 공개 Chrome fallback 320/390/1440px 검증, PR #161 병합, main workflow `37147186088`, GitHub Pages 라이브 validator가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, candidate SHA `37737d2`, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 6개 share page, 제품 독립 공개 경계 유지.
+- 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004`, `E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004`, `E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004`.
+
 ## Expert Video Thumbnail Resolution Release Recheck — 52ff08b — 2026-10-04
 
 - 전문가 영상 썸네일이 오류가 아닌 저해상도 성공 응답을 반환하는 경우에도 decoded width를 검사해 대체 이미지를 시도하고, 두 이미지 모두 기준 미달이면 `GABA VIDEO` 표지를 보여주도록 보완했다.

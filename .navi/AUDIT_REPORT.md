@@ -1,5 +1,13 @@
 # Audit Report
 
+## Mobile Reading Clarity Audit — 37737d2 — 2026-10-04
+
+- 모바일에서 읽기 기능에 직접 필요한 진행 상태·장 표시·연구 출처·결과 방향 라벨을 12px 기준으로 보정하고, 읽기 크기 조절 버튼에 보이는 `가+`/`가−` 표기를 추가했다. 장식용 숫자와 공개 연구 카피·제품 독립 경계는 변경하지 않았다.
+- 로컬 typecheck·UI contract·127 tests·build, 공개 320/390/1440px Chrome fallback에서 가로 넘침 0·브라우저 오류 0·상세 연구 카드 5개·읽기 크기 전환을 확인했다. 320/390px 기능 라벨은 12px, `가+`에서 `가−`로 전환되며 상태 문구가 표시된다.
+- PR #161 merge commit `37737d2`, main workflow `37147186088`, Pages 배포·라이브 smoke·release status와 live validator candidate `37737d2`가 모두 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004`, `E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004`, `E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004`.
+
 ## Expert Video Thumbnail Resolution Audit — 52ff08b — 2026-10-04
 
 - YouTube `maxres`/`hq` 썸네일이 오류가 아닌 저해상도 성공 응답을 반환하는 경우를 새 결함 표면으로 분류했다. decoded width가 200px 미만이면 대체 URL을 시도하고, 두 URL 모두 기준 미달이면 `GABA VIDEO` 표지를 노출하도록 PR #160에서 보완했다.
