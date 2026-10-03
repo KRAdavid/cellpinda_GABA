@@ -1,5 +1,13 @@
 # Audit Report
 
+## Final Public Recheck — 16fc5d4 — 2026-10-03
+
+- NAVI 문서 PR #111 병합 후 main workflow `37113016531`의 release-verify·worker-readiness·Pages 배포·smoke-live·release-status가 성공했다. Worker 실제 배포는 정적 전용 모드로 건너뛰었다.
+- 최종 `validate:live-public`은 HTTP 200, `STATIC`, candidate `16fc5d491c3a4bae1f81d060727fac111e48df33`, 70개 번들 해시, 12개 공개 claim, 6개 master record, 6개 share page, `teaser HOLD`, 내부 운영 스냅샷 제외, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 여전히 외부 검증 항목이다. 자동화 완료를 외부 검증 완료로 확대하지 않는다.
+
+증적: `E-LIVE-PUBLIC-NAVI-MERGE-20261003`.
+
 ## Latest Public Release Recheck — cbd2f8e — 2026-10-03
 
 - 연구 지도에서 주제를 선택할 때 상세 카드에도 즉시 활성 상태를 표시해 긴 모바일 페이지의 방향 감각을 보완했다. 새 과학·제품 주장이나 출처 변경은 없었다.
