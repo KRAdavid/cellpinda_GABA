@@ -898,9 +898,15 @@ export default function PublicGabaGuide() {
   };
 
   const selectExpertVideo = (id: string) => {
-    setActiveVideoId(id);
-    setVideoFrameReady(false);
-    setVideoStarted(true);
+    const isNewVideo = id !== activeVideoId;
+    if (isNewVideo) {
+      setActiveVideoId(id);
+      setVideoFrameReady(false);
+      setVideoStarted(true);
+    } else if (!videoStarted) {
+      setVideoFrameReady(false);
+      setVideoStarted(true);
+    }
     if (window.matchMedia('(max-width: 700px)').matches) {
       const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
       requestAnimationFrame(() => document.getElementById('expert-video-feature')?.scrollIntoView({ behavior, block: 'start' }));
