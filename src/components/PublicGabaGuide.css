@@ -529,7 +529,10 @@
   .guide-hero h1{max-width:100%;font-size:clamp(41px,11.2vw,53px);line-height:1.08;word-break:normal;overflow-wrap:anywhere}
   .guide-hero h1 em{margin-top:5px}
   .guide-hero-story .guide-hero-body{width:min(100%,330px);max-width:330px;font-size:15px;line-height:1.78;white-space:normal;word-break:keep-all;overflow-wrap:break-word}
-  .guide-hero-story .guide-rail{max-width:30ch;margin-top:19px;font-size:13px}
+  .guide-hero-story .guide-editorial-note,
+  .guide-hero-story .guide-rail{position:relative;z-index:3;width:100%;max-width:100%;border-radius:13px;background:rgba(255,255,255,.86);box-shadow:0 8px 22px rgba(22,60,75,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .guide-hero-story .guide-editorial-note{margin-top:16px;padding:10px 12px 10px 11px}
+  .guide-hero-story .guide-rail{max-width:30ch;margin-top:10px;padding:9px 10px;color:#536d7d;font-size:13px;line-height:1.65}
   .guide-hero-story .guide-rail span{margin-right:4px}
   .guide-hero-scroll{display:none}
   .guide-summary-grid{min-height:0}
