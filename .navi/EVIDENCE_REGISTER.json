@@ -3143,6 +3143,50 @@
       "captured_at": "2026-10-03T15:04:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261004-READING-NOTE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CHART-NAV-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 결과 도표의 비교 조건·연구 메타데이터가 작은 화면에서도 읽히도록 최소 글자 크기를 보완하고, 긴 장 이동은 즉시 도착하도록 초기 hash 정렬 충돌을 제거한 PR #140 후보의 로컬 검증이 통과했다. 공개 과학 카피와 제품 경계는 변경하지 않았다.",
+      "locator": "PR #140 candidate 03aa654; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157, CSS 95703, total assets 1465370; 320/390/1440px local Playwright Chrome fallback passed with no horizontal overflow or browser errors",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/140",
+      "captured_at": "2026-10-03T15:31:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-CHART-NAV",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 GitHub Pages를 Playwright Chrome fallback으로 320px·390px·1440px에서 재검증했다. 모바일 연구 결과 도표의 글자 바닥값과 가로 폭이 유지됐고, 메뉴에서 연구 지도로 이동한 뒤 제목이 고정 읽기 레일 아래에 도착했으며, 전문가 영상 선택 재생도 오류 없이 동작했다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/; v37 public interaction script; 320px chart 251.125px, lane widths 205.125px, section number 11px, academic headingTop 115.109 > railBottom 105, scrollY 6874; 390px chart 269px, lane widths 108px, section number 11px, academic headingTop 115.484 > railBottom 105, scrollY 6368; 1440px chart 593.594px, lane widths 164.375px; document scrollWidth equals viewport at all widths; mobile selected video iframe 1 and active title `갱년기와 수면, GABA에 대한 질문`; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/140",
+      "captured_at": "2026-10-03T15:37:30Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-CHART-NAV",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CHART-NAV-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #140의 필수 검사를 통과했고 main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드에서 정상적으로 건너뛰었다.",
+      "locator": "PR #140 checks 37133828266 release-verify PASS and 37133828243 site-quality-verify PASS; merge commit b778f23b65a67cf919171d212a9305927a34d0ff; main workflow 37133909361 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37133909361",
+      "captured_at": "2026-10-03T15:38:20Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-CHART-NAV",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CHART-NAV-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답하고 새 병합 SHA를 제공했으며, 정적 번들·공개 데이터·제품 독립 경계를 유지했다. 모바일 차트 가독성과 긴 장 이동 보완이 실제 공개 URL에 반영됐다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha b778f23b65a67cf919171d212a9305927a34d0ff; generatedAt 2026-10-03T15:38:39.916Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T15:39:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261004-CHART-NAV",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
     }
   ]
 }

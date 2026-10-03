@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Chart Readability and Long-Jump Navigation Recheck — b778f23 — 2026-10-04
+
+- 모바일 연구 결과 도표의 비교 조건·연구 메타데이터에 작은 화면용 글자 바닥값을 적용했고, 사용자의 메뉴 이동 뒤 초기 hash 정렬이 다시 실행되던 충돌을 수동 이동 취소 ref로 보완했다. 제품 독립 과학 카피·출처·연구 데이터는 변경하지 않았다.
+- PR #140의 release-verify·site-quality-verify, 로컬 typecheck/UI contract/127 tests/build가 통과했고, main workflow `37133909361`의 release-verify·worker-readiness·Pages 배포·smoke-live·release status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- 공개 validator candidate `b778f23b65a67cf919171d212a9305927a34d0ff`, HTTP 200, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`, 내부 운영 스냅샷 제외, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. 공개 Playwright Chrome fallback 320/390/1440px에서 차트 폭·가로 넘침·연구 지도 장 이동·전문가 영상 선택 재생·브라우저 오류 없음을 확인했다.
+- Browser 플러그인은 사용할 수 없어 Playwright Chrome fallback으로 대체했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목이며 결과는 `PASS_WITH_CONDITIONS`다.
+
+증적: `E-LOCAL-BUILD-CHART-NAV-20261004`, `E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004`, `E-DEPLOY-PIPELINE-CHART-NAV-20261004`, `E-LIVE-PUBLIC-CHART-NAV-20261004`.
+
 ## Research Scale Infographic Polish — b8e6236 — 2026-10-03
 
 - 연구 규모 인포그래픽에서 같은 PubMed 검색 기준의 Harvard·Oxford 문헌을 같은 비교 그룹으로 묶고, 별도 WoS Core Collection SCIE 분석은 독립된 강조 블록으로 분리했다. 큰 수치는 유지하되 서로 다른 조사 범위를 하나의 막대 척도로 오인하지 않도록 시각 구조를 정리했으며, 과학·제품 카피는 추가하지 않았다.

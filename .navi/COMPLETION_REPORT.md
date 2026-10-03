@@ -1,5 +1,13 @@
 # Completion Report
 
+## Mobile Chart Readability and Long-Jump Navigation Release Recheck — b778f23 — 2026-10-04
+
+- 모바일 연구 결과 도표의 비교 조건·연구 메타데이터를 읽기 쉽게 보정하고, 사용자의 긴 장 이동을 초기 hash 정렬 타이머가 되돌리지 않도록 보완했다. 공개 과학 카피·제품 독립 경계·연구 출처는 변경하지 않았다.
+- PR #140 검사, 로컬 typecheck/UI contract/127 tests/build, main workflow `37133909361`, GitHub Pages 배포, 라이브 smoke, release status, 공개 validator와 320/390/1440px Playwright Chrome fallback이 통과했다. 공개 candidate는 `b778f23b65a67cf919171d212a9305927a34d0ff`다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android 대표 환경, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-CHART-NAV-20261004`, `E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004`, `E-DEPLOY-PIPELINE-CHART-NAV-20261004`, `E-LIVE-PUBLIC-CHART-NAV-20261004`.
+
 ## Narrow-phone Sleep Layout Release Recheck — 81d9dbb — 2026-10-03
 
 - 320px 협소 화면에서 수면 연구 카드가 화면 밖으로 밀리던 레이아웃 문제를 `min-width: 0`과 `minmax(0, 1fr)`로 보완했다. 공개 카피·제품 독립 경계와 연구 내용은 변경하지 않았다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Chart Readability and Long-Jump Navigation Red-Team Recheck — b778f23 — 2026-10-04
+
+- 모바일 차트의 작은 메타데이터가 고령 사용자의 비교 판단을 방해할 수 있었고, 초기 hash 정렬 타이머가 메뉴 이동 뒤 목적지에서 다시 맨 위로 돌릴 수 있었다. 글자 바닥값·수동 이동 취소를 추가한 뒤 320/390/1440px 공개 Playwright에서 차트와 장 이동을 재확인했으며 새 CRITICAL/MAJOR 결함은 확인하지 않았다.
+- 제품 독립 경계·출처·연구 카피는 변경되지 않았고, 자동 검증·배포 검증·라이브 검증은 일치했다. 다만 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수를 닫을 수 없다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-CHART-NAV-20261004`, `E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004`, `E-DEPLOY-PIPELINE-CHART-NAV-20261004`, `E-LIVE-PUBLIC-CHART-NAV-20261004`.
+
 ## Research Scale Infographic Red-Team Recheck — b8e6236 — 2026-10-03
 
 - 기존 연구 규모 화면은 Harvard·Oxford PubMed 검색 결과와 별도 GABA-A receptor SCIE/WoS 분석을 같은 시각 척도처럼 보여 첫 두 막대가 과도하게 작아지고, 비교 대상의 범위를 혼동할 여지가 있었다. PR #119에서 동일 PubMed 기관 비교와 별도 SCIE 강조 블록으로 분리해 시각적 비교 범위를 명시했다.
