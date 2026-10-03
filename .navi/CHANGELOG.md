@@ -2,6 +2,7 @@
 
 | Date | State / Change | Reason | Evidence or Decision | Owner |
 |---|---|---|---|---|
+| 2026-10-03 | 연구 결과 카드에 `핵심 결과 복사`와 브라우저 복사 대체 경로를 추가하고 `19a38ab`로 공개 배포 | 사업자가 관찰된 연구 결과 문장을 바로 재사용할 수 있게 보완. PR #55·#56 검사, main 배포·라이브 validator·390/1440px Chrome CDP 검증 통과 | E-LOCAL-BUILD-RESEARCH-SHARING, E-CDP-RESEARCH-SHARING, E-DEPLOY-PIPELINE-RESEARCH-SHARING, E-LIVE-PUBLIC-RESEARCH-SHARING | NAVI / QA |
 | 2026-10-03 | 연구 카드에 대상·방법·측정 프로필을 추가하고 `3f4a3e5`로 공개 배포 | 결과 그래프를 보기 전 연구 대상·방법·측정 항목을 한눈에 파악하도록 보완. PR #53 검사, main 배포·라이브 validator·390/1440px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-RESEARCH-PROFILE, E-CDP-RESEARCH-PROFILE, E-DEPLOY-PIPELINE-RESEARCH-PROFILE, E-LIVE-PUBLIC-RESEARCH-PROFILE | NAVI / QA |
 | 2026-10-03 | 320–430px 좁은 모바일의 히어로·헤더를 보완하고 `d0f1741`로 공개 배포 | 헤드라인 클리핑과 공유 버튼 잘림을 제거하고 44px 터치 영역을 확보. PR #51 검사, main 배포·라이브 validator·390/360/320px CDP QA 통과 | E-LOCAL-BUILD-MOBILE-HARDENING, E-CDP-MOBILE-HARDENING, E-DEPLOY-PIPELINE-MOBILE-HARDENING, E-LIVE-PUBLIC-MOBILE-HARDENING | NAVI / QA |
 | 2026-10-03 | NAVI 문서 동기화 이후 최종 공개 후보 `6f48bae`를 재검증 | main 배포·라이브 공개본·제품 독립 데이터 경계·공유 경로의 최신 SHA 정합성을 확인. release-verify, Pages publish, smoke-live, release status와 live validator 성공 | E-LIVE-PUBLIC-NAVI-FINAL, GitHub Actions 37074307727 | NAVI / QA |

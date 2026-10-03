@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 19a38ab — 2026-10-03
+
+- PR #55는 각 공개 연구 카드의 관찰된 결과에 `핵심 결과 복사` 동작을 추가했고, PR #56은 브라우저 클립보드 권한이 없을 때 숨은 textarea와 `execCommand('copy')`를 시도하는 대체 경로를 추가했다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build와 성능 검사가 모두 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,435,325 <= 1,650,000` bytes였다.
+- Chrome CDP 대체 라이브 QA는 390px·1440px에서 5개 44px 복사 버튼, 6개 연구 프로필, 가로 넘침 없음, runtime errors `[]`를 확인했다.
+- CDP 컨텍스트에서는 클립보드 권한이 없어 실제 복사 대신 `문장을 선택해 활용해 보세요.`라는 수동 선택 안내가 표시됐다. 권한이 없는 환경에서 성공을 가장하지 않는 fallback 동작을 확인한 것이다.
+- PR #56 검사 `37079795500`, `37079795543`과 main 배포 run `37079889105`의 release verification, Pages publish, smoke-live, release status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 HTTP 200, candidate `19a38abc7f1a7b5591f228c7abe1e42862ef0cca`, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Latest Public Release Recheck — 3f4a3e5 — 2026-10-03
 
 - PR #53은 각 연구 결과 그래프 앞에 `대상·방법·측정` 3요소 연구 프로필을 추가했으며, 수면 연구에도 같은 구조를 적용했다.
