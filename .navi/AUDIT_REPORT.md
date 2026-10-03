@@ -1,5 +1,14 @@
 # Audit Report
 
+## Expert Video Gallery Polish — 10a6192 — 2026-10-03
+
+- PR #113에서 전문가 영상 썸네일을 고해상도 우선·`hqdefault` 대체 경로로 보완하고, 모바일 주제 필터에 다음 항목 존재를 알려주는 연속성 단서를 추가했다. 과학 카피·제품 경계·선택 영상 즉시 재생은 변경하지 않았다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 311,157, CSS 95,703, total assets 1,454,704. PR #113 checks와 main workflow `37114410997`의 release-verify·worker-readiness·Pages 배포·smoke-live·release-status가 성공했고 Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `10a61920df8bbcbe1b6f288a1d61425f48687800`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. Chrome CDP fallback 390px에서 필터 `scrollWidth 705 / clientWidth 322`, maxres 썸네일, `연구 읽기` 선택 카드·iframe, 가로 폭 390px를 확인했고 끝까지 이동하면 `has-more` 단서가 사라졌다. 1440px document width는 `1425px`였다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 외부 검증 항목이며 자동화 결과를 그 완료로 확대하지 않는다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-BROWSING-20261003`, `E-CDP-EXPERT-VIDEO-BROWSING-20261003`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003`, `E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003`.
+
 ## Final Public Recheck — 16fc5d4 — 2026-10-03
 
 - NAVI 문서 PR #111 병합 후 main workflow `37113016531`의 release-verify·worker-readiness·Pages 배포·smoke-live·release-status가 성공했다. Worker 실제 배포는 정적 전용 모드로 건너뛰었다.

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Expert Video Gallery Release Recheck — 10a6192 — 2026-10-03
+
+- 전문가 영상 갤러리에 고해상도 썸네일, 안전한 대체 이미지, 모바일 필터 연속성 단서를 적용하고 PR #113을 main에 병합했다. 공개 과학 카피·제품 경계는 유지했다.
+- PR #113 checks, main workflow `37114410997`, Pages/live validator, 390px·1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `10a61920df8bbcbe1b6f288a1d61425f48687800`이다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-BROWSING-20261003`, `E-CDP-EXPERT-VIDEO-BROWSING-20261003`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003`, `E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003`.
+
 ## Final Public Recheck — 16fc5d4 — 2026-10-03
 
 - NAVI 문서 동기화 PR #111 병합과 main workflow `37113016531`의 release-verify·Pages 배포·라이브 smoke·release-status 성공을 확인했다.

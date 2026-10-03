@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T09:29:32.276027Z",
+  "updated_at": "2026-10-03T09:57:11.504393Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1295,7 +1295,9 @@
           "E-CDP-RESEARCH-MAP-ORIENTATION",
           "E-DEPLOY-PIPELINE-RESEARCH-MAP-ORIENTATION",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
-          "E-LIVE-PUBLIC-NAVI-MERGE-20261003"
+          "E-LIVE-PUBLIC-NAVI-MERGE-20261003",
+          "E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003",
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로를 재확인"
       },
@@ -1378,7 +1380,9 @@
           "E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION",
           "E-CDP-RESEARCH-MAP-ORIENTATION",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
-          "E-LIVE-PUBLIC-NAVI-MERGE-20261003"
+          "E-LIVE-PUBLIC-NAVI-MERGE-20261003",
+          "E-CDP-EXPERT-VIDEO-BROWSING-20261003",
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환을 확인"
       },
@@ -1463,7 +1467,9 @@
           "E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION",
           "E-CDP-RESEARCH-MAP-ORIENTATION",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
-          "E-LIVE-PUBLIC-NAVI-MERGE-20261003"
+          "E-LIVE-PUBLIC-NAVI-MERGE-20261003",
+          "E-CDP-EXPERT-VIDEO-BROWSING-20261003",
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환을 추가 확인"
       },
@@ -1656,7 +1662,10 @@
           "E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION",
           "E-CDP-RESEARCH-MAP-ORIENTATION",
           "E-DEPLOY-PIPELINE-RESEARCH-MAP-ORIENTATION",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
+          "E-LOCAL-BUILD-EXPERT-VIDEO-BROWSING-20261003",
+          "E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003",
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
       },
@@ -2027,6 +2036,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T09:27:00Z"
+    },
+    {
+      "id": "H-050",
+      "event": "전문가 영상 갤러리의 고해상도 썸네일·대체 이미지·모바일 필터 연속성 단서를 보완한 PR #113을 main `10a6192`에 병합했다. main workflow 37114410997의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release-status가 성공했고, 390px/1440px 공개 URL 상호작용과 live validator 결과를 NAVI 증적에 추가했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T09:54:30Z"
     }
   ]
 }
