@@ -514,6 +514,7 @@ const readingChapters = [
 ] as const;
 type ReadingChapterId = (typeof readingChapters)[number]['id'];
 type ActiveChapterId = ReadingChapterId | 'top';
+const progressChapters = readingChapters.filter((chapter) => chapter.id !== 'recovery-break');
 const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, GABA에 관한 과학적 정보와 공개 연구를 알기 쉽게 소개하는 공개 안내서입니다.';
 
 const getGuideScrollTop = (target: HTMLElement) => {
@@ -794,6 +795,17 @@ export default function PublicGabaGuide() {
   const activeReadingLabel = activeChapterId === 'research' && activeResearchTopic
     ? `${activeResearchTopic.title} 연구 결과`
     : activeChapter.label;
+  const activeProgressIndex = progressChapters.findIndex((chapter) => chapter.id === activeChapterId);
+  const progressChapterCount = progressChapters.length;
+  const progressValue = activeChapterId === 'recovery-break'
+    ? progressChapters.findIndex((chapter) => chapter.id === 'academic') + 0.5
+    : Math.max(0, activeProgressIndex + 1);
+  const progressCountLabel = activeChapterId === 'recovery-break'
+    ? `보충 / ${String(progressChapterCount).padStart(2, '0')}`
+    : `${String(Math.max(0, activeProgressIndex + 1)).padStart(2, '0')} / ${String(progressChapterCount).padStart(2, '0')}`;
+  const progressAriaLabel = activeChapterId === 'recovery-break'
+    ? `현재 읽는 장: ${activeReadingLabel}. 본문 사이 보충 읽기입니다. 전체 ${progressChapterCount}장.`
+    : `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장.`;
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
@@ -825,10 +837,26 @@ export default function PublicGabaGuide() {
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
     const targetId = window.location.hash.slice(1);
-    if (targetId) requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (!targetId) return;
+    let cancelled = false;
+    const alignHashTarget = () => {
+      if (cancelled) return;
       const target = document.getElementById(targetId);
-      if (target) window.scrollTo({ top: getGuideScrollTop(target), behavior: 'auto' });
-    }));
+      if (!target) return;
+      const root = document.documentElement;
+      const previousScrollBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo({ top: getGuideScrollTop(target), behavior: 'auto' });
+      root.style.scrollBehavior = previousScrollBehavior;
+      window.dispatchEvent(new Event('scroll'));
+    };
+    const firstFrame = window.requestAnimationFrame(() => window.requestAnimationFrame(alignHashTarget));
+    const settleTimers = [180, 600, 1200].map((delay) => window.setTimeout(alignHashTarget, delay));
+    return () => {
+      cancelled = true;
+      window.cancelAnimationFrame(firstFrame);
+      settleTimers.forEach((timer) => window.clearTimeout(timer));
+    };
   }, []);
 
   useEffect(() => () => {
@@ -1137,8 +1165,8 @@ export default function PublicGabaGuide() {
         <button type="button" className={`guide-reading-size-toggle${largeText ? ' is-active' : ''}`} aria-label={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} title={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} aria-pressed={largeText} onClick={toggleReadingSize}><Type size={15} aria-hidden="true" /><span>{largeText ? '기본 글씨' : '큰 글씨'}</span></button>
         <button type="button" className="guide-header-share" aria-label="페이지 공유하기" title="페이지 공유하기" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`}>
-          <div className="guide-reading-progress-track" role="progressbar" aria-label="읽기 진행" aria-valuemin={0} aria-valuemax={readingChapters.length} aria-valuenow={Math.max(0, activeChapterIndex + 1)}><span aria-hidden="true" style={{ width: `${(Math.max(0, activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
-          <div className="guide-reading-progress-meta" role="status" aria-live="polite" aria-atomic="true" aria-label={`현재 읽는 장: ${activeReadingLabel}. 전체 ${readingChapters.length}장 중 ${Math.max(0, activeChapterIndex + 1)}장.`}><span aria-hidden="true">지금 읽는 중</span><strong aria-hidden="true">{activeReadingLabel}</strong><small aria-hidden="true">{`${String(Math.max(0, activeChapterIndex + 1)).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
+          <div className="guide-reading-progress-track" role="progressbar" aria-label="읽기 진행" aria-valuemin={0} aria-valuemax={progressChapterCount} aria-valuenow={progressValue}><span aria-hidden="true" style={{ width: `${(progressValue / progressChapterCount) * 100}%` }} /></div>
+          <div className="guide-reading-progress-meta" role="status" aria-live="polite" aria-atomic="true" aria-label={progressAriaLabel}><span aria-hidden="true">지금 읽는 중</span><strong aria-hidden="true">{activeReadingLabel}</strong><small aria-hidden="true">{progressCountLabel}</small></div>
         </div>
       </header>
       {menuOpen ? <button type="button" className="guide-menu-backdrop" aria-label="메뉴 닫기" onClick={() => setMenuOpen(false)} /> : null}
