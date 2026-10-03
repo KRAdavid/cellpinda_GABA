@@ -4025,9 +4025,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "연구 지도 피부 딥링크가 모바일·데스크톱에서 선택 지도·카드·읽기 진행·브라우저 제목을 복원하고, 해시 변경 시 근육 상태로 동기화됐다.",
-      "locator": "temporary Playwright 1.63.0 with Chrome channel; local http://127.0.0.1:4182/?view=guide#research-skin; 390/1440px; initial activeMap 피부, activeCard research-skin, title 피부 연구 결과 | GABA Guide, progress 지금 읽는 중피부 연구 결과06 / 12, scrollWidth equals viewport, then location.hash=research-muscle -> activeMap 근육, activeCard research-muscle, errors []",
-      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/170",
-      "captured_at": "2026-10-03T22:27:31Z",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/?view=guide#research-skin; 390/1440px; initial activeMap 피부, activeCard research-skin, title 피부 연구 결과 | GABA Guide, progress 지금 읽는 중피부 연구 결과06 / 12, scrollWidth equals viewport, then location.hash=research-muscle -> activeMap 근육, activeCard research-muscle, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-skin",
+      "captured_at": "2026-10-03T22:34:27Z",
       "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RESEARCH-DEEPLINK-CONTEXT",
       "claim_refs": ["C-010"]
     },
@@ -4046,10 +4046,10 @@
       "id": "E-LIVE-PUBLIC-RESEARCH-DEEPLINK-CONTEXT-20261004",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
-      "statement": "연구 딥링크 보완이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate 4d9bfde를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
-      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 4d9bfde747665696758dd1d78da6338177f5a762; generatedAt 2026-10-03T22:27:31.289Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "statement": "연구 딥링크 보완과 NAVI 문서 동기화가 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate cb494e2를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha cb494e20bc038a0046bc51400d2bbb991b371884; generatedAt 2026-10-03T22:32:24.705Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
       "source_uri": "https://kradavid.github.io/gaba_info/",
-      "captured_at": "2026-10-03T22:27:31Z",
+      "captured_at": "2026-10-03T22:34:27Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-DEEPLINK-CONTEXT",
       "claim_refs": ["C-010"]
     }

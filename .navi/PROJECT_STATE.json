@@ -2805,7 +2805,7 @@
     },
     {
       "id": "H-079",
-      "event": "연구 지도 딥링크가 초기 진입과 브라우저 해시 변경에서 선택 주제·카드·읽기 진행·브라우저 제목을 복원하도록 PR #170에서 보완했다. #research-skin 직접 진입 후 피부 상태, hashchange로 research-muscle 변경 후 근육 상태를 390·1440px에서 확인했다. PR #170 merge `4d9bfde`, main workflow `37158456376`, live validator candidate `4d9bfde`를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
+      "event": "연구 지도 딥링크가 초기 진입과 브라우저 해시 변경에서 선택 주제·카드·읽기 진행·브라우저 제목을 복원하도록 PR #170에서 보완했다. 최종 GitHub Pages 공개본의 #research-skin 직접 진입 후 피부 상태, hashchange로 research-muscle 변경 후 근육 상태를 390·1440px에서 확인했다. PR #170 merge `4d9bfde`, main workflow `37158456376`, NAVI 문서 동기화 workflow `37158735199`, live validator 최종 candidate `cb494e2`를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T22:27:31Z"

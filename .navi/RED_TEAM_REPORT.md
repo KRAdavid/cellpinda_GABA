@@ -2,8 +2,8 @@
 
 ## 연구 지도 딥링크 상태 복원 레드팀 재검증 — 4d9bfde — 2026-10-04
 
-- 390·1440px에서 `#research-skin` 직접 진입을 재현해 선택 지도·상세 카드·읽기 진행·브라우저 제목이 `피부 연구 결과`로 일치하는지 확인했다. 이후 `location.hash`를 `#research-muscle`로 변경해 선택 상태가 `근육 연구 결과`로 동기화되는 경로를 공격적으로 확인했다.
-- 공개 배포 파이프라인과 live validator는 HTTP 200·STATIC·candidate `4d9bfde`·공개 데이터·제품 독립 경계를 확인했고, 테스트 중 가로 넘침과 브라우저 오류는 없었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 최종 GitHub Pages 공개본에서 390·1440px `#research-skin` 직접 진입을 재현해 선택 지도·상세 카드·읽기 진행·브라우저 제목이 `피부 연구 결과`로 일치하는지 확인했다. 이후 `location.hash`를 `#research-muscle`로 변경해 선택 상태가 `근육 연구 결과`로 동기화되는 경로를 공격적으로 확인했다.
+- 공개 배포 파이프라인과 live validator는 HTTP 200·STATIC·최종 candidate `cb494e2`·공개 데이터·제품 독립 경계를 확인했고, 테스트 중 가로 넘침과 브라우저 오류는 없었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
 - 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-PLAYWRIGHT-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-LIVE-PUBLIC-RESEARCH-DEEPLINK-CONTEXT-20261004`.
