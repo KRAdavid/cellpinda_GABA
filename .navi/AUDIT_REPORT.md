@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 지도 딥링크 상태 복원 감사 — 4d9bfde — 2026-10-04
+
+- `#research-skin` 같은 연구 카드 딥링크가 초기 진입에서 선택 지도·상세 카드·읽기 진행·브라우저 제목을 함께 복원하도록 PR #170에서 보완했다. 브라우저 해시가 바뀌면 `hashchange`로 선택 연구 주제도 동기화된다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build가 통과했다. Playwright 1.63.0 Chrome fallback에서 390·1440px `#research-skin` 진입 후 `피부 연구 결과` 상태를 확인했고, `#research-muscle`로 해시를 바꾼 뒤 `근육 연구 결과` 상태로 전환되는 것을 확인했다. 가로 폭은 viewport와 일치했고 errors는 없었다.
+- PR #170 merge `4d9bfde`, main workflow `37158456376`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `4d9bfde`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-PLAYWRIGHT-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-LIVE-PUBLIC-RESEARCH-DEEPLINK-CONTEXT-20261004`.
+
 ## 선택 영상 카드 직접 공유 고도화 감사 — e709f2c — 2026-10-04
 
 - 전문가 영상 선택 카드 안에 `이 영상 공유` 행동을 추가했다. 기존 URL 보존 로직을 재사용해 현재 영상 ID·장 위치·영상 제목을 공유 payload에 유지하고, 미디어 패널의 색·radius·focus-visible 규칙에 맞췄다.

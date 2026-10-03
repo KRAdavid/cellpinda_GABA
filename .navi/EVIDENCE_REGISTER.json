@@ -54,6 +54,12 @@
       "statement": "선택한 전문가 영상 카드 안에서 직접 공유할 수 있고, 공유 payload가 현재 영상 제목과 선택 영상 URL을 유지한다.",
       "evidence_refs": ["E-LOCAL-BUILD-DIRECT-VIDEO-SHARE-20261004", "E-PLAYWRIGHT-DIRECT-VIDEO-SHARE-20261004", "E-DEPLOY-PIPELINE-DIRECT-VIDEO-SHARE-20261004", "E-LIVE-PUBLIC-DIRECT-VIDEO-SHARE-20261004"],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-010",
+      "statement": "연구 지도 딥링크는 초기 진입과 브라우저 해시 변경에서 선택한 연구 주제·카드·읽기 진행·브라우저 제목 맥락을 함께 복원한다.",
+      "evidence_refs": ["E-LOCAL-BUILD-RESEARCH-DEEPLINK-CONTEXT-20261004", "E-PLAYWRIGHT-RESEARCH-DEEPLINK-CONTEXT-20261004", "E-DEPLOY-PIPELINE-RESEARCH-DEEPLINK-CONTEXT-20261004", "E-LIVE-PUBLIC-RESEARCH-DEEPLINK-CONTEXT-20261004"],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4002,6 +4008,50 @@
       "captured_at": "2026-10-03T22:15:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-DIRECT-VIDEO-SHARE",
       "claim_refs": ["C-009"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-DEEPLINK-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 주제 해시를 초기 상태로 읽고 hashchange에서 선택 상태를 동기화하도록 보완했다. 연구 지도 딥링크와 UI 계약·typecheck·127개 테스트·production build가 통과했다.",
+      "locator": "PR #170 candidate 9f3816b276e2fcbad87a19cab77de35e4728e953; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; candidate performance initial JS 311157, initial CSS 95703, total assets 1474533",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/170",
+      "captured_at": "2026-10-03T22:27:31Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-RESEARCH-DEEPLINK-CONTEXT",
+      "claim_refs": ["C-010"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-DEEPLINK-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 피부 딥링크가 모바일·데스크톱에서 선택 지도·카드·읽기 진행·브라우저 제목을 복원하고, 해시 변경 시 근육 상태로 동기화됐다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; local http://127.0.0.1:4182/?view=guide#research-skin; 390/1440px; initial activeMap 피부, activeCard research-skin, title 피부 연구 결과 | GABA Guide, progress 지금 읽는 중피부 연구 결과06 / 12, scrollWidth equals viewport, then location.hash=research-muscle -> activeMap 근육, activeCard research-muscle, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/170",
+      "captured_at": "2026-10-03T22:27:31Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RESEARCH-DEEPLINK-CONTEXT",
+      "claim_refs": ["C-010"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-DEEPLINK-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #170 코드 병합 후 main 공개 배포 파이프라인이 최종 성공했다. release-verify, worker-readiness, Pages, 라이브 smoke, release status가 통과했고 Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #170 merge 4d9bfde747665696758dd1d78da6338177f5a762; main workflow 37158456376; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37158456376",
+      "captured_at": "2026-10-03T22:27:31Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-DEEPLINK-CONTEXT",
+      "claim_refs": ["C-010"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-DEEPLINK-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 딥링크 보완이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate 4d9bfde를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 4d9bfde747665696758dd1d78da6338177f5a762; generatedAt 2026-10-03T22:27:31.289Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T22:27:31Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-DEEPLINK-CONTEXT",
+      "claim_refs": ["C-010"]
     }
   ]
 }

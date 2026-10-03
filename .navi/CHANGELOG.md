@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 연구 지도 딥링크 상태 복원 공개 배포: 2026-10-04 / candidate `4d9bfde`
+
+`#research-skin` 등 연구 카드 공유 링크가 초기 진입에서 선택 연구 지도·상세 카드·읽기 진행·브라우저 제목을 함께 복원하도록 보완했다. 브라우저 해시 변경 시에도 연구 주제 상태를 동기화한다. PR #170, main workflow `37158456376`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·Playwright Chrome fallback 390/1440px에서 피부 딥링크 진입 후 근육 해시 변경을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-PLAYWRIGHT-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-LIVE-PUBLIC-RESEARCH-DEEPLINK-CONTEXT-20261004`.
+
 ## 선택 영상 카드 직접 공유 고도화 공개 배포: 2026-10-04 / candidate `e709f2c`
 
 전문가 영상 선택 카드 안에 `이 영상 공유` 행동을 추가했다. 현재 영상의 제목·video 쿼리·`#expert-videos` 위치를 그대로 공유하도록 기존 chapter-aware payload를 연결하고, 모바일에서도 읽기 쉬운 dark-panel 버튼과 focus-visible 상태를 적용했다. PR #169, main workflow `37157666983`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 320/390/1440px에서 공유 버튼·toast·payload·포스터·진행 표시·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
