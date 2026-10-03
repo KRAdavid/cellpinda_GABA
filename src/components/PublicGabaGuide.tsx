@@ -491,7 +491,7 @@ const readingChapters = [
   { id: 'final', label: '공유하기' },
 ] as const;
 type ReadingChapterId = (typeof readingChapters)[number]['id'];
-type ActiveChapterId = ReadingChapterId | 'top';
+type ActiveChapterId = ReadingChapterId | 'top' | 'recovery-break';
 const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, GABA에 관한 과학적 정보와 공개 연구를 알기 쉽게 소개하는 공개 안내서입니다.';
 
 const fermentedSafetySteps: FermentedSafetyStep[] = [
@@ -739,8 +739,9 @@ export default function PublicGabaGuide() {
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
-  const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
-  const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
+  const activeChapterIndex = activeChapterId === 'recovery-break' ? 1 : readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
+  const activeChapterLookupIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
+  const activeChapter = activeChapterId === 'top' ? { label: '도입' } : activeChapterId === 'recovery-break' ? { label: '수면과 회복' } : readingChapters[Math.max(0, activeChapterLookupIndex)];
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
@@ -853,9 +854,14 @@ export default function PublicGabaGuide() {
     const updateReadingChapter = () => {
       const readingPoint = window.scrollY + Math.min(window.innerHeight * 0.3, 260);
       let currentChapter: ActiveChapterId = 'top';
+      const recoverySection = document.getElementById('recovery-break');
+      const academicSection = document.getElementById('academic');
+      if (recoverySection && academicSection && recoverySection.offsetTop <= readingPoint && readingPoint < academicSection.offsetTop) {
+        currentChapter = 'recovery-break';
+      }
       for (const chapter of readingChapters) {
         const section = document.getElementById(chapter.id);
-        if (section && section.offsetTop <= readingPoint) currentChapter = chapter.id;
+        if (currentChapter !== 'recovery-break' && section && section.offsetTop <= readingPoint) currentChapter = chapter.id;
       }
       setActiveChapterId((previous) => previous === currentChapter ? previous : currentChapter);
     };
@@ -1083,7 +1089,7 @@ export default function PublicGabaGuide() {
           </div>
         </section>
 
-        <aside ref={recoveryBreakRef} className="guide-recovery-break" aria-labelledby="recovery-break-heading">
+        <aside ref={recoveryBreakRef} className="guide-recovery-break" id="recovery-break" aria-labelledby="recovery-break-heading">
           <div className="guide-container">
             <div className="guide-recovery-break-head">
               <div>
