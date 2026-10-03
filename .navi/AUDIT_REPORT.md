@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 10aedca — 2026-10-03
+
+- PR #81에서 이미 재생 중인 전문가 영상 카드를 다시 선택할 때 `videoFrameReady`를 불필요하게 초기화하던 예외를 보완했다. 다른 영상을 선택할 때만 iframe 로딩 상태를 초기화하고, 모바일에서는 기존처럼 플레이어 영역으로 이동한다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build·정적 bundle·성능 예산이 통과했다. release manifest candidate는 `862da0cf93cf5d209dd601bc36d2592fb52ef573`이며 Pages 정적 번들은 70개 파일과 `1,444,197 <= 1,650,000` bytes 예산을 유지했다.
+- PR #81 checks와 main workflow `37094629598`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다. 과거 Git 이력의 local-path scanner annotation은 비차단 경고로 남았다.
+- 라이브 validator는 candidate `10aedcab10448e5341123234b6ce9979b068bc58`, generatedAt `2026-10-03T03:53:19.520Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL 390px Chrome CDP fallback에서 같은 전문가 영상 카드를 연속 두 번 선택해도 autoplay iframe·`aria-pressed=true`·`재생 중` 배지·로딩 opacity `0`·가로 폭 390·runtime errors `[]`가 유지됐다. Browser 플러그인은 사용할 수 없어 CDP fallback으로 대체했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-VIDEO-RESELECT`, `E-CDP-VIDEO-RESELECT`, `E-DEPLOY-PIPELINE-VIDEO-RESELECT`, `E-LIVE-PUBLIC-VIDEO-RESELECT`.
+
 ## Latest Public Release Recheck — 4604805 — 2026-10-03
 
 - PR #79에서 전문가 영상 게시판의 현재 선택 카드에 `재생 중` 상태를 추가해 플레이어와 목록의 연결을 명확히 했다. 즉시 재생·로딩 오버레이·제품 독립 정보 흐름은 유지했다.

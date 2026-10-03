@@ -1900,6 +1900,50 @@
       "captured_at": "2026-10-03T03:34:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-VIDEO-SELECTION-STATE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-RESELECT",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "이미 재생 중인 전문가 영상 카드를 다시 선택해도 iframe 준비 상태를 유지하고, 다른 영상을 선택할 때만 로딩 상태를 초기화하도록 보완했으며 UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과했다.",
+      "locator": "PR #81 candidate 862da0cf93cf5d209dd601bc36d2592fb52ef573; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test -- --runInBand 127/127; pnpm run build PASS; release manifest candidateSha 862da0cf93cf5d209dd601bc36d2592fb52ef573; validate:performance total 1444197 <= 1650000 bytes; 390px local Chrome CDP same card selected twice, iframe ready, loading opacity 0, document/body scrollWidth 390, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/81",
+      "captured_at": "2026-10-03T03:49:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-VIDEO-RESELECT",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-VIDEO-RESELECT",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "390px 모바일 Chrome CDP fallback에서 두 번째 전문가 영상 카드를 연속 두 번 선택해도 자동재생 iframe이 유지되고 로딩 오버레이가 사라진 상태가 유지되며 선택 카드의 `재생 중`·aria-pressed=true와 가로 폭 390px을 확인했다.",
+      "locator": "temporary Chrome CDP fallback; local candidate 862da0cf93cf5d209dd601bc36d2592fb52ef573 at http://127.0.0.1:5198/; live candidate 10aedcab10448e5341123234b6ce9979b068bc58 at 390px; video iframe width 230 height 408.875; src includes autoplay=1&mute=1&playsinline=1; active card text includes `재생 중`; pressed=true; video mediaClass has no is-loading; loading opacity 0; document/body scrollWidth 390; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T03:53:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-VIDEO-RESELECT",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-RESELECT",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 재선택 로딩 예외 보완 PR #81과 main 공개 배포 파이프라인이 release-verify·worker-readiness·Pages publish·라이브 smoke·release status를 모두 통과했다.",
+      "locator": "PR #81 checks PASS; main workflow 37094629598; merge commit 10aedcab10448e5341123234b6ce9979b068bc58; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition; historical local-path scanner annotation warning remained non-blocking",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37094629598",
+      "captured_at": "2026-10-03T03:52:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-VIDEO-RESELECT",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-RESELECT",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 재선택 보완이 반영된 최신 GitHub Pages 공개본이 200으로 응답했고 공개 번들·데이터 경계·공유 경로를 유지했으며 390px에서 같은 영상 재선택 후에도 자동재생·로딩 완료·선택 상태를 확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 10aedcab10448e5341123234b6ce9979b068bc58; generatedAt 2026-10-03T03:53:19.520Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 390 CDP same card selected twice, video iframe src includes autoplay=1&mute=1&playsinline=1, active card text includes `재생 중`, pressed=true, loading opacity 0, document/body scrollWidth 390, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T03:53:30Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-VIDEO-RESELECT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }

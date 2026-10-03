@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-03 — 10aedca
+
+- 이미 재생 중인 전문가 영상 카드를 다시 선택하는 시나리오에서 준비 완료 iframe을 다시 로딩 상태로 되돌릴 수 있는 예외를 확인하고, 새 영상 선택과 동일 영상 재선택을 분리했다. 동일 영상 재선택 후에도 autoplay iframe·`재생 중`·`aria-pressed=true`·로딩 완료·가로 폭 390px을 재확인했다.
+- PR #81 checks와 main workflow `37094629598`, 라이브 validator가 통과했다. 공개 데이터·연구 카피·제품 독립 경계와 teaser HOLD는 변하지 않았다.
+- 새 치명적 결함은 확인되지 않았고 결과는 `PASS_WITH_CONDITIONS`를 유지한다. Browser 플러그인 미사용으로 CDP fallback을 사용했으며 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-VIDEO-RESELECT`, `E-CDP-VIDEO-RESELECT`, `E-DEPLOY-PIPELINE-VIDEO-RESELECT`, `E-LIVE-PUBLIC-VIDEO-RESELECT`.
+
 ## Recheck — 2026-10-03 — 4604805
 
 - 전문가 영상 목록에서 현재 선택된 카드가 분명하지 않은 상태를 확인하고, 선택 카드에 `재생 중` 배지를 추가했다. 390px 로컬·라이브에서 선택 상태, autoplay iframe, 가로 폭과 runtime errors를 다시 확인했다.
