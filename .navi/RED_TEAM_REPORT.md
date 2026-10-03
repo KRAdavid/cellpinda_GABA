@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — bf235ed — 2026-10-03
+
+- 새 방문자가 기본 공개 경로에서 코드 split 대기 시간을 마주칠 때 헤더와 히어로가 잠시 사라질 수 있던 첫 상호작용 결함을 PR #104에서 guide-only preloading과 branded loading shell로 보완했다. 390px 메뉴 상태·1440px 데스크톱 내비게이션·히어로 유지와 새 치명적 결함 없음 확인.
+- PR #104 checks, main `37108431389`, live validator, 390/1440px CDP를 재확인했다. 이번 변경으로 새 과학·제품 주장은 추가되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-GUIDE-LOADING-SHELL`, `E-CDP-GUIDE-LOADING-SHELL`, `E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL`, `E-LIVE-PUBLIC-GUIDE-LOADING-SHELL`.
+
 ## Latest Red-Team Recheck — b9160e4 — 2026-10-03
 
 - 모바일 메뉴에서 Tab 이동이 배경 콘텐츠로 빠질 수 있던 접근성 결함을 PR #102에서 포커스 순환으로 보완했다. `aria-current=location`, 390px 메뉴 상태, 가로 폭, 새 치명적 결함 없음을 확인했다.
