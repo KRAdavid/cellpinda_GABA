@@ -12,6 +12,7 @@
 .guide-message-card a{width:max-content;margin-top:auto;color:var(--guide-teal-dark);font-size:12px;font-weight:850;text-decoration:none}
 .guide-message-card a:hover{text-decoration:underline;text-underline-offset:4px}
 .guide-research-source{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:15px;border-top:1px solid #d6e8ec;color:#7890a1;font-size:11px}
+.guide-research-source-label{color:#7890a1;font-weight:800;white-space:nowrap}
 .guide-research-source a{display:inline-flex;align-items:center;gap:4px;color:var(--guide-teal-dark);font-weight:800;text-decoration:none}
 .guide-research-source a:hover{text-decoration:underline;text-underline-offset:3px}
 .glyph-sleep:before{content:'☾';position:absolute;left:19px;top:1px;color:#6eb1cb;font-size:44px;line-height:1}
@@ -202,6 +203,7 @@
   .guide-research-inline-heading{align-items:flex-start;gap:8px}
   .guide-research-inline-heading .guide-research-glyph{display:none}
   .guide-research-detail-inline .guide-research-source{display:block}
+  .guide-research-detail-inline .guide-research-source-label{display:block}
   .guide-research-detail-inline .guide-research-source a{margin-top:6px}
   .guide-result-line{font-size:16px}
   .guide-expert-thread{align-items:flex-start;gap:8px 11px}
