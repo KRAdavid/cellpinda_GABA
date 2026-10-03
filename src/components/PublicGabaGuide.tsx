@@ -517,11 +517,18 @@ type ActiveChapterId = ReadingChapterId | 'top';
 const progressChapters = readingChapters.filter((chapter) => chapter.id !== 'recovery-break');
 const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, GABA에 관한 과학적 정보와 공개 연구를 알기 쉽게 소개하는 공개 안내서입니다.';
 
+const getGuideScrollTarget = (target: HTMLElement) => {
+  if (!target.matches('.guide-story-section, .guide-recovery-break, .guide-final')) return target;
+  const headingId = target.getAttribute('aria-labelledby');
+  return headingId ? document.getElementById(headingId) ?? target : target;
+};
+
 const getGuideScrollTop = (target: HTMLElement) => {
   const headerHeight = document.querySelector<HTMLElement>('.guide-header')?.getBoundingClientRect().height ?? 78;
   const readingRailHeight = document.querySelector<HTMLElement>('.guide-reading-progress')?.getBoundingClientRect().height ?? 0;
   const offset = headerHeight + readingRailHeight + 10;
-  return Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+  const anchor = getGuideScrollTarget(target);
+  return Math.max(0, anchor.getBoundingClientRect().top + window.scrollY - offset);
 };
 
 const fermentedSafetySteps: FermentedSafetyStep[] = [
