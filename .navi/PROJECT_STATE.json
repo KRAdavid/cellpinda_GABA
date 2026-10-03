@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T00:43:21.944323Z",
+  "updated_at": "2026-10-03T01:10:41.179728Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -173,7 +173,8 @@
         "E-LOCAL-BUILD-RESEARCH-PROFILE",
         "E-LOCAL-BUILD-RESEARCH-SHARING",
         "E-LOCAL-BUILD-RESEARCH-KEY",
-        "E-LOCAL-BUILD-RAIL-LEGIBILITY"
+        "E-LOCAL-BUILD-RAIL-LEGIBILITY",
+        "E-LOCAL-BUILD-HERO-SURFACE"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -219,7 +220,9 @@
         "E-CDP-RESEARCH-KEY",
         "E-LIVE-PUBLIC-RESEARCH-KEY",
         "E-CDP-RAIL-LEGIBILITY",
-        "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+        "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+        "E-CDP-HERO-SURFACE",
+        "E-LIVE-PUBLIC-HERO-SURFACE"
       ],
       "owner": "UX QA"
     },
@@ -377,7 +380,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-KEY",
         "E-LIVE-PUBLIC-RESEARCH-KEY",
         "E-DEPLOY-PIPELINE-RAIL-LEGIBILITY",
-        "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+        "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+        "E-DEPLOY-PIPELINE-HERO-SURFACE",
+        "E-LIVE-PUBLIC-HERO-SURFACE"
       ],
       "owner": "배포 QA"
     },
@@ -432,7 +437,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-SHARING",
         "E-LIVE-PUBLIC-RESEARCH-SHARING",
         "E-DEPLOY-PIPELINE-RESEARCH-KEY",
-        "E-LIVE-PUBLIC-RESEARCH-KEY"
+        "E-LIVE-PUBLIC-RESEARCH-KEY",
+        "E-DEPLOY-PIPELINE-HERO-SURFACE",
+        "E-LIVE-PUBLIC-HERO-SURFACE"
       ],
       "owner": "운영 QA"
     },
@@ -589,7 +596,9 @@
         "E-CDP-RESEARCH-KEY",
         "E-LIVE-PUBLIC-RESEARCH-KEY",
         "E-CDP-RAIL-LEGIBILITY",
-        "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+        "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+        "E-CDP-HERO-SURFACE",
+        "E-LIVE-PUBLIC-HERO-SURFACE"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -634,7 +643,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-KEY",
         "E-LIVE-PUBLIC-RESEARCH-KEY",
         "E-DEPLOY-PIPELINE-RAIL-LEGIBILITY",
-        "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+        "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+        "E-DEPLOY-PIPELINE-HERO-SURFACE",
+        "E-LIVE-PUBLIC-HERO-SURFACE"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -849,7 +860,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "2f5a42f6e1e64c8dc76c5ebe0c6894218f9ebe3bdad550d7eb786367264f329a",
+    "assessed_input_sha256": "027447734ccd94874516b823b5f2a8187d6d1bff29f6ad6785404031d1fdb582",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -961,9 +972,11 @@
           "E-DEPLOY-PIPELINE-RESEARCH-KEY",
           "E-LIVE-PUBLIC-RESEARCH-KEY",
           "E-DEPLOY-PIPELINE-RAIL-LEGIBILITY",
-          "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+          "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+          "E-DEPLOY-PIPELINE-HERO-SURFACE",
+          "E-LIVE-PUBLIC-HERO-SURFACE"
         ],
-        "notes": "078d231 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·연구 결과 공유·읽기 진행 바 가독성을 재확인"
+        "notes": "0147e3c 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·연구 결과 공유·모바일 히어로 읽기 표면을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -1002,9 +1015,11 @@
           "E-CDP-RESEARCH-KEY",
           "E-LIVE-PUBLIC-RESEARCH-KEY",
           "E-CDP-RAIL-LEGIBILITY",
-          "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+          "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+          "E-CDP-HERO-SURFACE",
+          "E-LIVE-PUBLIC-HERO-SURFACE"
         ],
-        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·읽기 진행 바·390/320/1440px 공유 버튼을 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로 읽기 표면·390/320/1440px 공유 버튼을 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -1038,9 +1053,11 @@
           "E-CDP-RESEARCH-KEY",
           "E-LIVE-PUBLIC-RESEARCH-KEY",
           "E-CDP-RAIL-LEGIBILITY",
-          "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+          "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+          "E-CDP-HERO-SURFACE",
+          "E-LIVE-PUBLIC-HERO-SURFACE"
         ],
-        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거를 추가 확인"
+        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로 읽기 표면을 추가 확인"
       },
       {
         "criterion_id": "AC-004",
@@ -1074,9 +1091,11 @@
           "E-CDP-READING-PROGRESS",
           "E-LIVE-PUBLIC-READING-PROGRESS",
           "E-CDP-RAIL-LEGIBILITY",
-          "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+          "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+          "E-CDP-HERO-SURFACE",
+          "E-LIVE-PUBLIC-HERO-SURFACE"
         ],
-        "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·스크롤 진행 바 불투명 레이어 확인"
+        "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·스크롤 진행 바·모바일 히어로 읽기 표면 확인"
       },
       {
         "criterion_id": "AC-005",
@@ -1122,9 +1141,12 @@
           "E-LIVE-PUBLIC-RESEARCH-KEY",
           "E-LOCAL-BUILD-RAIL-LEGIBILITY",
           "E-DEPLOY-PIPELINE-RAIL-LEGIBILITY",
-          "E-LIVE-PUBLIC-RAIL-LEGIBILITY"
+          "E-LIVE-PUBLIC-RAIL-LEGIBILITY",
+          "E-LOCAL-BUILD-HERO-SURFACE",
+          "E-DEPLOY-PIPELINE-HERO-SURFACE",
+          "E-LIVE-PUBLIC-HERO-SURFACE"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바 가독성 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로 가독성 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -1307,6 +1329,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T00:38:37Z"
+    },
+    {
+      "id": "H-024",
+      "event": "모바일 히어로의 편집 안내와 3분 읽기 레일에 읽기용 반투명 표면을 적용하고 PR #62·main 배포·320/390/1440px CDP·live validator를 재검증했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T01:07:16Z"
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Audit Report
 
+## Latest Public Release Recheck — 0147e3c — 2026-10-03
+
+- PR #62에서 모바일 첫 화면의 편집 안내와 `3분 읽기` 레일에 반투명 읽기 표면을 적용했다. 자연 이미지 위에서 보조 문장이 묻히지 않도록 하되, 히어로 카피·연구 카피·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build와 성능 검사가 모두 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,437,548 <= 1,650,000` bytes였다.
+- PR #62 checks `37084353265`, `37084353239`와 main push run `37084454201`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 HTTP 200, candidate `0147e3c15a7e0acd700ff4f75e9fcddc03b39b05`, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL Chrome CDP는 390px·320px에서 가로 넘침 없이 헤더·모바일 컨트롤을 확인했고, 1440px에서도 `scrollWidth 1425`, runtime errors `[]`, 연구 프로필·44px 복사 버튼을 확인했다. 메뉴·큰 글씨 상호작용도 다시 실행했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Latest Public Release Recheck — 078d231 — 2026-10-03
 
 - PR #60은 스크롤 중 읽기 진행 바에 아래 연구 문장이 비치는 현상을 발견해 진행 바를 불투명 레이어로 보정했다. 헤더의 시각적 깊이는 유지하면서 연구 도표 위 텍스트 비침을 제거했다.

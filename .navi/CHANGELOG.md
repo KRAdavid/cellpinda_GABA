@@ -1,5 +1,9 @@
 # Project Changelog
 
+최신 공개 재검증: 2026-10-03 / candidate `0147e3c15a7e0acd700ff4f75e9fcddc03b39b05`
+
+모바일 히어로의 편집 안내와 `3분 읽기` 레일에 읽기용 반투명 표면을 적용했다. PR #62 검사, main 배포·라이브 validator·320/390/1440px Chrome CDP 검증을 통과했으며 카피·출처·제품 독립 경계는 유지했다. 증적: `E-LOCAL-BUILD-HERO-SURFACE`, `E-CDP-HERO-SURFACE`, `E-DEPLOY-PIPELINE-HERO-SURFACE`, `E-LIVE-PUBLIC-HERO-SURFACE`.
+
 | Date | State / Change | Reason | Evidence or Decision | Owner |
 |---|---|---|---|---|
 | 2026-10-03 | 스크롤 중 읽기 진행 바를 불투명 레이어로 보정하고 `078d231`로 공개 배포 | 연구 결과 도표 위로 아래 콘텐츠가 비치는 현상을 제거해 모바일·데스크톱에서 읽기 안내와 연구 문장을 분리. PR #60 검사, main 배포·라이브 validator·320/390/1440px Chrome CDP 검증 통과 | E-LOCAL-BUILD-RAIL-LEGIBILITY, E-CDP-RAIL-LEGIBILITY, E-DEPLOY-PIPELINE-RAIL-LEGIBILITY, E-LIVE-PUBLIC-RAIL-LEGIBILITY | NAVI / QA |

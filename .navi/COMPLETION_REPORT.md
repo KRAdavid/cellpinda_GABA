@@ -1,5 +1,11 @@
 # Completion Report
 
+## Latest Release Recheck — 0147e3c — 2026-10-03
+
+- 모바일 히어로의 편집 안내와 `3분 읽기` 레일을 반투명 읽기 표면으로 보강해 자연 이미지 위의 보조 문장 가독성을 높였다.
+- PR #62 checks, main push run `37084454201`, 라이브 validator, 390/320/1440px Chrome CDP 검증이 통과했다. 공개 후보는 `0147e3c15a7e0acd700ff4f75e9fcddc03b39b05`이다.
+- 자동 검증은 통과했지만 Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
 ## Latest Release Recheck — 078d231 — 2026-10-03
 
 - 연구 도표를 읽는 중 상단 진행 바 뒤로 콘텐츠가 비치던 작은 가독성 결함을 불투명 레이어로 보정했다. 연구 결과·해석 텍스트가 진행 안내와 시각적으로 분리된다.

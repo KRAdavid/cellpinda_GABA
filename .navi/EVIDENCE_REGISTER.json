@@ -1504,6 +1504,50 @@
       "captured_at": "2026-10-03T00:38:37Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RAIL-LEGIBILITY",
       "claim_refs": ["C-001", "C-002", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-HERO-SURFACE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 첫 화면의 편집 안내와 3분 읽기 레일에 읽기용 반투명 표면을 적용해 자연 이미지 위에서도 문장이 안정적으로 읽히며, UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과했다.",
+      "locator": "PR #62 candidate 45dbc5e; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test 127/127; pnpm run build PASS; static routes 11; files 70; validate:performance total 1437548 <= 1650000 bytes; initial JS 310538 and CSS 92953 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/62",
+      "captured_at": "2026-10-03T00:58:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-HERO-SURFACE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004"]
+    },
+    {
+      "id": "E-CDP-HERO-SURFACE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 390px·320px·1440px Chrome CDP 렌더링에서 모바일 히어로 읽기 표면, 44px 헤더·복사 컨트롤, 가로 폭과 런타임 오류를 확인했다.",
+      "locator": "temporary Chrome CDP fallback; live https://kradavid.github.io/gaba_info/guide/; CSS viewport 390/320/1440; document/body scrollWidth matched viewport at 390/320 and 1425 at the 1440 CSS viewport; header and mobile controls remained within the viewport; five research copy buttons rendered at 44px height; clean hero/research screenshots inspected; interaction state menuOpen true and largeText true also exercised; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/",
+      "captured_at": "2026-10-03T01:07:16Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-HERO-SURFACE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-HERO-SURFACE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 히어로 읽기 표면 보완 PR과 main 공개 배포 파이프라인이 필수 검사를 통과했다.",
+      "locator": "PR #62 release-verify run 37084353265 PASS and site-quality-verify run 37084353239 PASS; main workflow 37084454201 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37084454201",
+      "captured_at": "2026-10-03T01:02:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-HERO-SURFACE",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HERO-SURFACE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 히어로 읽기 표면 보완이 반영된 최신 GitHub Pages 공개본이 200으로 응답했고 제품 독립 공개 데이터 경계와 공유 경로가 유지됐다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 0147e3c15a7e0acd700ff4f75e9fcddc03b39b05; generatedAt 2026-10-03T01:02:05.837Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 390/320 CDP scrollWidth matched viewport, controls 44px, runtime errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T01:02:05Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-HERO-SURFACE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004"]
     }
   ]
 }
