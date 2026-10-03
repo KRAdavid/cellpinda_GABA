@@ -973,3 +973,10 @@
 @media(max-width:700px){
   .guide-story-section,.guide-final{scroll-margin-top:112px}
 }
+
+/* v26 mobile title clearance: keep every chapter heading below the sticky reading rail at section entry. */
+@media(max-width:700px){
+  .guide-section.guide-story-section{padding-top:110px}
+  .guide-recovery-break{padding-top:110px}
+  .guide-final{padding-top:110px}
+}
