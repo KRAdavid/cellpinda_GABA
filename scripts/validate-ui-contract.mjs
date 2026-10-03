@@ -146,6 +146,9 @@ requireMatch(publicGuideStyles, /v27 mobile chapter labels[\s\S]*?\.guide-sectio
 requireMatch(publicGuideStyles, /v28 research orientation[\s\S]*?\.guide-research-detail-inline\.is-active/, 'public GABA research map selections must visibly orient the active result card');
 requireMatch(publicGuide, /videoFiltersHaveMore[\s\S]*?guide-video-filters-wrap[\s\S]*?videoThumbnailUrl/, 'public GABA expert video board must expose horizontal filter continuation and resilient thumbnails');
 requireMatch(publicGuideStyles, /\.guide-video-filters-wrap[\s\S]*?\.guide-video-filters-wrap\.has-more:after/, 'public GABA mobile expert filters must show a continuation cue when more topics are available');
+requireMatch(publicGuide, /guide-outcome-comparison[\s\S]*?comparisonChart\.rows\.map/, 'public GABA comparison charts must expose each visible result row to assistive technology');
+requireMatch(publicGuideStyles, /@media\(max-width:700px\)\{[\s\S]*?\.guide-outcome-lanes\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/, 'public GABA mobile comparison charts must place both conditions side by side on standard phone widths');
+requireMatch(publicGuideStyles, /@media\(max-width:350px\)\{[\s\S]*?\.guide-outcome-lanes\{grid-template-columns:1fr;/, 'public GABA narrow-phone comparison charts must fall back to a readable single-column layout');
 requireMatch(publicGuideStyles, /@media \(max-width:700px\)\{[\s\S]*?\.guide-header nav\{top:70px/, 'public GABA mobile menu must begin below its 70px header');
 requireMatch(publicGuide, /const keepFocusInsideMenu = \(event: globalThis\.KeyboardEvent\) =>[\s\S]*?event\.key !== 'Tab'[\s\S]*?document\.addEventListener\('keydown', keepFocusInsideMenu\)/, 'public GABA mobile menu must keep keyboard focus inside the open menu');
 requireMatch(publicGuide, /aria-current=\{isNavCurrent\('history'\) \? 'location'/, 'public GABA navigation must expose the current reading location semantically');
