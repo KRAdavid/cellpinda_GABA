@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Expert Video Topic Visibility Red-Team Recheck — 71960f0 — 2026-10-04
+
+- 320px·390px에서 모든 전문가 영상 주제가 보이고, 1440px에서는 기존 갤러리 2열 균형이 유지되며 `수용체` 선택 시 1개 영상·iframe으로 전환된다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 전체 노출은 숨은 가로 스크롤을 없애 발견성을 높였지만, 필터 수가 계속 늘어나면 모바일 세로 길이가 커질 수 있으므로 이후 영상 추가 시 다시 밀도 감사를 실행한다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FILTERS-20261004`, `E-PLAYWRIGHT-VIDEO-FILTERS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004`, `E-LIVE-PUBLIC-VIDEO-FILTERS-20261004`.
+
 ## Explicit Original-Source Action Red-Team Recheck — 32b37a1 — 2026-10-04
 
 - 아이콘만 있던 출처 카드의 다음 행동 불명확성을 `원문 보기` 텍스트 행동으로 보완했다. 공개 320/390/1440px에서 표시·가로 폭·오류를 확인했고 클릭 시 `https://pubmed.ncbi.nlm.nih.gov/22203366/` 새 탭으로 이동했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
