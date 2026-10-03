@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T01:45:53.612295Z",
+  "updated_at": "2026-10-03T02:04:14.096480Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -175,7 +175,9 @@
         "E-LOCAL-BUILD-RESEARCH-KEY",
         "E-LOCAL-BUILD-RAIL-LEGIBILITY",
         "E-LOCAL-BUILD-HERO-SURFACE",
-        "E-LOCAL-BUILD-RESEARCH-RAIL"
+        "E-LOCAL-BUILD-RESEARCH-RAIL",
+        "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -225,7 +227,9 @@
         "E-CDP-HERO-SURFACE",
         "E-LIVE-PUBLIC-HERO-SURFACE",
         "E-CDP-RESEARCH-RAIL",
-        "E-LIVE-PUBLIC-RESEARCH-RAIL"
+        "E-LIVE-PUBLIC-RESEARCH-RAIL",
+        "E-CDP-RESEARCH-MAP-ACTIVE",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
       ],
       "owner": "UX QA"
     },
@@ -339,7 +343,8 @@
         "E-LOCAL-BUILD-RESEARCH-SHARING",
         "E-LOCAL-BUILD-RESEARCH-KEY",
         "E-LOCAL-BUILD-RAIL-LEGIBILITY",
-        "E-LOCAL-BUILD-RESEARCH-RAIL"
+        "E-LOCAL-BUILD-RESEARCH-RAIL",
+        "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE"
       ],
       "owner": "QA"
     },
@@ -388,7 +393,9 @@
         "E-DEPLOY-PIPELINE-HERO-SURFACE",
         "E-LIVE-PUBLIC-HERO-SURFACE",
         "E-DEPLOY-PIPELINE-RESEARCH-RAIL",
-        "E-LIVE-PUBLIC-RESEARCH-RAIL"
+        "E-LIVE-PUBLIC-RESEARCH-RAIL",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
       ],
       "owner": "배포 QA"
     },
@@ -447,7 +454,9 @@
         "E-DEPLOY-PIPELINE-HERO-SURFACE",
         "E-LIVE-PUBLIC-HERO-SURFACE",
         "E-DEPLOY-PIPELINE-RESEARCH-RAIL",
-        "E-LIVE-PUBLIC-RESEARCH-RAIL"
+        "E-LIVE-PUBLIC-RESEARCH-RAIL",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
       ],
       "owner": "운영 QA"
     },
@@ -571,7 +580,8 @@
         "E-LOCAL-BUILD-RESEARCH-SHARING",
         "E-LOCAL-BUILD-RESEARCH-KEY",
         "E-LOCAL-BUILD-RAIL-LEGIBILITY",
-        "E-LOCAL-BUILD-RESEARCH-RAIL"
+        "E-LOCAL-BUILD-RESEARCH-RAIL",
+        "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -609,7 +619,9 @@
         "E-CDP-HERO-SURFACE",
         "E-LIVE-PUBLIC-HERO-SURFACE",
         "E-CDP-RESEARCH-RAIL",
-        "E-LIVE-PUBLIC-RESEARCH-RAIL"
+        "E-LIVE-PUBLIC-RESEARCH-RAIL",
+        "E-CDP-RESEARCH-MAP-ACTIVE",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -658,7 +670,9 @@
         "E-DEPLOY-PIPELINE-HERO-SURFACE",
         "E-LIVE-PUBLIC-HERO-SURFACE",
         "E-DEPLOY-PIPELINE-RESEARCH-RAIL",
-        "E-LIVE-PUBLIC-RESEARCH-RAIL"
+        "E-LIVE-PUBLIC-RESEARCH-RAIL",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -822,7 +836,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-02T23:08:32Z"
+    "last_run_at": "2026-10-03T02:00:40Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -869,11 +883,11 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-02T23:08:32Z"
+    "last_run_at": "2026-10-03T02:00:40Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "c496fde3e2d217f875f183d267dfc80d0dbcd59a9dd4d9f1d07f3723a72833f7",
+    "assessed_input_sha256": "2754e7e2f32bbcbbc0018cb5f63a000150135801be5f100716137c48d5742141",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -993,9 +1007,13 @@
           "E-LOCAL-BUILD-RESEARCH-MAP-NAV",
           "E-DEPLOY-PIPELINE-RESEARCH-MAP-NAV",
           "E-CDP-RESEARCH-MAP-NAV",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV",
+          "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE",
+          "E-CDP-RESEARCH-MAP-ACTIVE",
+          "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
         ],
-        "notes": "e514a37 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·모바일 히어로·연구 읽기 레일을 재확인"
+        "notes": "48f4876 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성 상태를 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -1040,9 +1058,11 @@
           "E-CDP-RESEARCH-RAIL",
           "E-LIVE-PUBLIC-RESEARCH-RAIL",
           "E-CDP-RESEARCH-MAP-NAV",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV",
+          "E-CDP-RESEARCH-MAP-ACTIVE",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
         ],
-        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·390/320/1440px 공유 버튼을 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·390/320/1440px 공유 버튼을 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -1082,9 +1102,11 @@
           "E-CDP-RESEARCH-RAIL",
           "E-LIVE-PUBLIC-RESEARCH-RAIL",
           "E-CDP-RESEARCH-MAP-NAV",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV",
+          "E-CDP-RESEARCH-MAP-ACTIVE",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
         ],
-        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일을 추가 확인"
+        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성 표시를 추가 확인"
       },
       {
         "criterion_id": "AC-004",
@@ -1124,9 +1146,11 @@
           "E-CDP-RESEARCH-RAIL",
           "E-LIVE-PUBLIC-RESEARCH-RAIL",
           "E-CDP-RESEARCH-MAP-NAV",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV",
+          "E-CDP-RESEARCH-MAP-ACTIVE",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
         ],
-        "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·스크롤 진행 바·모바일 히어로·01–04 연구 읽기 레일 확인"
+        "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성·스크롤 진행 바·모바일 히어로·01–04 연구 읽기 레일 확인"
       },
       {
         "criterion_id": "AC-005",
@@ -1181,9 +1205,12 @@
           "E-LIVE-PUBLIC-RESEARCH-RAIL",
           "E-LOCAL-BUILD-RESEARCH-MAP-NAV",
           "E-DEPLOY-PIPELINE-RESEARCH-MAP-NAV",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV",
+          "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE",
+          "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성 표시 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -1387,6 +1414,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T01:41:03Z"
+    },
+    {
+      "id": "H-027",
+      "event": "연구 상세 카드를 읽는 동안 지도에서 현재 연구 주제를 활성화해 긴 모바일 페이지의 맥락을 유지하도록 보완한 PR #68·main 배포·390/1440px 라이브 CDP·live validator를 재검증했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T02:00:40Z"
     }
   ]
 }
