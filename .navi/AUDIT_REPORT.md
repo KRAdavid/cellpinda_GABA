@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 89978ea — 2026-10-03
+
+- PR #58은 연구 카드 앞에 `연구를 읽는 기준` 시각 키를 추가해 `사람 대상 연구`와 `피부·성장 등 확장 연구` 라벨의 의미를 먼저 설명하고, 모바일 헤더 아이콘 컨트롤에 보조 title을 추가했다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build와 성능 검사가 모두 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,437,100 <= 1,650,000` bytes였다.
+- Chrome CDP 대체 라이브 QA는 390px·320px·1440px에서 연구 지도와 시각 키의 연결, 헤더 44px 컨트롤, 5개 연구 결과 복사 버튼, 가로 넘침 없음, runtime errors `[]`를 확인했다.
+- 메뉴 열기·큰 글씨 전환·연구 결과 복사 동작을 다시 실행했으며, CDP 클립보드 권한이 없는 환경에서는 `문장을 선택해 활용해 보세요.`라는 수동 선택 안내가 표시됐다.
+- PR #58 검사 `37081285437`, `37081285448`과 main 배포 run `37081390114`의 release verification, Pages publish, smoke-live, release status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 HTTP 200, candidate `89978ea124178774617b5f97ac469b6dca2e4027`, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- Browser/Playwright 플러그인은 사용할 수 없어 Chrome CDP를 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Latest Public Release Recheck — 19a38ab — 2026-10-03
 
 - PR #55는 각 공개 연구 카드의 관찰된 결과에 `핵심 결과 복사` 동작을 추가했고, PR #56은 브라우저 클립보드 권한이 없을 때 숨은 textarea와 `execCommand('copy')`를 시도하는 대체 경로를 추가했다.
