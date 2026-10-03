@@ -1719,9 +1719,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "수면과 회복 읽기 진행 맥락 보강이 반영된 최신 GitHub Pages 공개본이 200으로 응답했고 공개 번들·데이터 경계·공유 경로가 유지됐다.",
-      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 8825626c57dbfdcdbadb8c6119c734c2b4778f1a; generatedAt 2026-10-03T02:19:17.787Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 390/1440 CDP recovery progress scrollWidth 390/1425, `수면과 회복 02 / 12`, academic `연구 지도 03 / 12`, map click activeResearchMapItems [인지], errors []",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 288a883d5e0537a1be6bdd2660d90edcc5e82df0; generatedAt 2026-10-03T02:27:41.972Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 390/1440 CDP recovery progress scrollWidth 390/1425, `수면과 회복 02 / 12`, academic `연구 지도 03 / 12`, map click activeResearchMapItems [인지], errors []",
       "source_uri": "https://kradavid.github.io/gaba_info/",
-      "captured_at": "2026-10-03T02:23:30Z",
+      "captured_at": "2026-10-03T02:29:25Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RECOVERY-PROGRESS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-007"]
     }

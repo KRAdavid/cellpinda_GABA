@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T02:24:51.229503Z",
+  "updated_at": "2026-10-03T02:29:41.469170Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -845,7 +845,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T02:23:30Z"
+    "last_run_at": "2026-10-03T02:29:25Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -892,7 +892,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T02:23:30Z"
+    "last_run_at": "2026-10-03T02:29:25Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -1025,7 +1025,7 @@
           "E-DEPLOY-PIPELINE-RECOVERY-PROGRESS",
           "E-LIVE-PUBLIC-RECOVERY-PROGRESS"
         ],
-        "notes": "8825626 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·수면과 회복 02 / 12 진행 맥락을 재확인"
+        "notes": "288a883 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·수면과 회복 02 / 12 진행 맥락을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -1449,6 +1449,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T02:23:30Z"
+    },
+    {
+      "id": "H-029",
+      "event": "NAVI 문서 동기화 PR #71을 main에 병합하고 문서 병합으로 갱신된 공개 후보 `288a883`를 라이브 validator·390/1440px Chrome CDP로 재검증해 코드·배포·NAVI 증거의 SHA 정합성을 맞췄다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T02:29:25Z"
     }
   ]
 }
