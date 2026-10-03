@@ -995,9 +995,9 @@ export default function PublicGabaGuide() {
           <a href="#applications" aria-current={isNavCurrent('applications') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a>
           <a href="#fermented-safety" aria-current={isNavCurrent('fermented-safety') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('fermented-safety'); }}>발효·안전</a>
         </nav>
-        <button ref={menuToggleRef} type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
-        <button type="button" className={`guide-reading-size-toggle${largeText ? ' is-active' : ''}`} aria-label={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} aria-pressed={largeText} onClick={toggleReadingSize}><Type size={15} aria-hidden="true" /><span>{largeText ? '기본 글씨' : '큰 글씨'}</span></button>
-        <button type="button" className="guide-header-share" aria-label="페이지 공유하기" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
+        <button ref={menuToggleRef} type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} title={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
+        <button type="button" className={`guide-reading-size-toggle${largeText ? ' is-active' : ''}`} aria-label={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} title={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} aria-pressed={largeText} onClick={toggleReadingSize}><Type size={15} aria-hidden="true" /><span>{largeText ? '기본 글씨' : '큰 글씨'}</span></button>
+        <button type="button" className="guide-header-share" aria-label="페이지 공유하기" title="페이지 공유하기" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`}>
           <div className="guide-reading-progress-track" role="progressbar" aria-label="읽기 진행" aria-valuemin={0} aria-valuemax={readingChapters.length} aria-valuenow={Math.max(0, activeChapterIndex + 1)}><span aria-hidden="true" style={{ width: `${(Math.max(0, activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
           <div className="guide-reading-progress-meta"><span>지금 읽는 중</span><strong aria-live="polite">{activeChapter.label}</strong><small>{`${String(Math.max(0, activeChapterIndex + 1)).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
@@ -1154,6 +1154,14 @@ export default function PublicGabaGuide() {
               {researchTopics.map((topic) => <div className="guide-research-map-item" key={topic.id}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><div><strong>{topic.title}</strong></div></div>)}
             </div>
             <div className="guide-rail"><b>읽는 순서</b><ol><li><b>01</b>{' '}지도</li><li><b>02</b>{' '}대상</li><li><b>03</b>{' '}결과</li><li><b>04</b>{' '}해석</li></ol></div>
+            <div className="guide-research-key" aria-label="연구 카드 표시 기준">
+              <strong>연구를 읽는 기준</strong>
+              <ul>
+                <li><i className="is-human" aria-hidden="true" />사람 대상 연구</li>
+                <li><i className="is-early" aria-hidden="true" />피부·성장 등 확장 연구</li>
+              </ul>
+              <span>카드 상단의 라벨은 연구 대상을 먼저 보여줍니다.</span>
+            </div>
             <div className="guide-research-flow">{researchTopics.map((topic, index) => <article className="guide-research-detail guide-research-detail-inline" id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchProfile profile={topic.profile} /><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding"><span>{topic.finding}</span><button type="button" className="guide-research-copy" onClick={() => void copyMessage(topic.finding)} aria-label={`${topic.title} 연구 핵심 결과 복사`}><Clipboard size={13} aria-hidden="true" /> 핵심 결과 복사</button></dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span>출처</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p></article>)}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
           </div>
