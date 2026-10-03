@@ -2,7 +2,7 @@
 
 ## 전문가 영상 썸네일 로딩 품질 공개 배포: 2026-10-04 / candidate `8093615`
 
-전문가 영상 게시판의 첫 4개 썸네일을 eager 로드하고, 지연 로드 중에는 `GABA VIDEO` 표지를 보여줘 빈 썸네지 영역이 완성도 저하로 보이지 않도록 보완했다. PR #155 checks, main workflow `37142835851`, Pages·라이브 smoke·release status, 공개 validator와 320/390/1440px Chrome fallback을 재검증했다. `수면` 필터 4개 카드와 `잠이 안 올 때 GABA 이야기` 선택 후 iframe 전환도 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004`.
+전문가 영상 게시판의 첫 4개 썸네일을 eager 로드하고, 지연 로드 중에는 `GABA VIDEO` 표지를 보여줘 빈 썸네일 영역이 완성도 저하로 보이지 않도록 보완했다. PR #155 checks, main workflow `37142835851`, Pages·라이브 smoke·release status, 공개 validator와 320/390/1440px Chrome fallback을 재검증했다. `수면` 필터 4개 카드와 `잠이 안 올 때 GABA 이야기` 선택 후 iframe 전환도 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004`.
 
 ## 모바일 기본 카드 장식 겹침 보정 공개 배포: 2026-10-04 / candidate `4e558ee`
 
