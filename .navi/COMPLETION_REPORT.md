@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — cf2f123 — 2026-10-03
+
+- 연구 결과 도표를 증가·감소 방향 화살표와 명시적 라벨로 고도화하고 320px 조건명 줄바꿈을 보정했다. 비교 문장과 방향 시각화가 한 화면에서 연결된다.
+- PR #96 checks, main `37103072296`, Pages/live validator, 320/390/1440px Chrome CDP fallback 검증이 통과했다. 공개 candidate는 `cf2f123a74013956399306c591f2de261d1bf049`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-OUTCOME-DIRECTION`, `E-CDP-RESEARCH-OUTCOME-DIRECTION`, `E-DEPLOY-PIPELINE-RESEARCH-OUTCOME-DIRECTION`, `E-LIVE-PUBLIC-RESEARCH-OUTCOME-DIRECTION`.
+
 ## Latest Release Recheck — b1afe87 — 2026-10-03
 
 - 전문가 영상 게시판에 주제 필터·영상 수를 추가하고 활성 필터를 모바일에서 중앙 정렬해, 필터 목록·선택 카드·즉시 재생이 함께 움직이도록 고도화했다.

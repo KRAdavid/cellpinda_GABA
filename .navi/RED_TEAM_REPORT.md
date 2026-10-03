@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — cf2f123 — 2026-10-03
+
+- 기존 비교 도표의 장식형 신호가 효과 크기처럼 읽힐 가능성을 PR #96에서 증가·감소 방향 화살표와 명시적 라벨로 보완했다. 320px 조건명 중간 줄바꿈도 수정했으며 새 치명적 결함은 확인되지 않았다.
+- PR #96 checks, main `37103072296`, live validator, 390/1440px CDP를 재확인했다. 이번 변경으로 새 과학·제품 주장은 추가되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-OUTCOME-DIRECTION`, `E-CDP-RESEARCH-OUTCOME-DIRECTION`, `E-DEPLOY-PIPELINE-RESEARCH-OUTCOME-DIRECTION`, `E-LIVE-PUBLIC-RESEARCH-OUTCOME-DIRECTION`.
+
 ## Latest Red-Team Recheck — b1afe87 — 2026-10-03
 
 - 전문가 영상이 늘어나면 단일 그리드 탐색성이 떨어질 수 있었던 점을 PR #94에서 주제 필터·영상 수·활성 상태로 보완했다. 모바일에서 filter min-content expansion을 발견해 `min-width: 0`으로 수정했고, 활성 칩은 중앙 정렬된다. 새 치명적 결함은 확인되지 않았다.

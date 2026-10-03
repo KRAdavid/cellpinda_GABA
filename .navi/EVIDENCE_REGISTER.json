@@ -2219,6 +2219,50 @@
       "captured_at": "2026-10-03T06:08:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-EXPERT-VIDEO-FILTER",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-OUTCOME-DIRECTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 비교 도표의 장식형 신호를 증가·감소 방향 화살표와 명시적 방향 라벨로 보완하고, 시각 요소가 효과 크기를 뜻하지 않는다는 설명을 유지했으며 로컬 품질 검사를 통과했다.",
+      "locator": "PR #96 candidate 3933fdb; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test -- --runInBand 127/127; pnpm run build PASS; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1447491; local Chrome CDP 320px, 390px, 1440px rendered increase/decrease arrows and intact condition labels without overflow or runtime errors",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/96",
+      "captured_at": "2026-10-03T06:23:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RESEARCH-OUTCOME-DIRECTION",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-OUTCOME-DIRECTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 공개본을 Chrome CDP fallback으로 확인한 결과, 연구 결과 카드의 증가·감소 방향과 비교 조건·GABA 섭취 조건이 모바일·데스크톱에서 읽히고 가로 넘침과 runtime errors가 없었다.",
+      "locator": "temporary Chrome CDP fallback; live candidate cf2f123a74013956399306c591f2de261d1bf049 at https://kradavid.github.io/gaba_info/; research-cognition; live 390px direction labels `감소`, `감소`, `증가`, `증가`, document/body scrollWidth 390, errors []; live 1440px direction labels rendered, document/body scrollWidth 1425, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T06:28:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RESEARCH-OUTCOME-DIRECTION",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-OUTCOME-DIRECTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 방향 도표 보완 PR #96의 필수 검사를 통과했고 cf2f123 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #96 checks 37102991208 and 37102991278 PASS; merge commit cf2f123a74013956399306c591f2de261d1bf049; main workflow 37103072296 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37103072296",
+      "captured_at": "2026-10-03T06:27:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RESEARCH-OUTCOME-DIRECTION",
+      "claim_refs": ["C-001", "C-002", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-OUTCOME-DIRECTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 방향 도표 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고 공개 데이터 경계를 유지했으며 390px·1440px 라이브 화면에서 방향 라벨·가로 폭·runtime errors를 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha cf2f123a74013956399306c591f2de261d1bf049; generatedAt 2026-10-03T06:27:38.833Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px direction labels and scrollWidth 390, errors []; live 1440px direction labels and scrollWidth 1425, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T06:28:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-OUTCOME-DIRECTION",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }
