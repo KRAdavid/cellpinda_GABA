@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 공개 배포 자동 재감리·NAVI 동기화: 2026-10-04 / candidate `25561b6`
+
+최신 공개본을 다시 배포하는 대신 실제 독자 흐름을 자동 재현했다. 390px 메뉴·포커스·연구 지도·수면 영상 필터·iframe 즉시 재생·3초 회복 카드, 320/390/412/768/1440px 직접 해시 진입을 확인했고 새 CRITICAL/MAJOR 결함은 없었다. 라이브 validator도 HTTP 200·STATIC·candidate `25561b6`·정적 공개 경계 정합성을 유지했다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 외부 브라우저·실사용자·독립 과학·규제 감수는 남아 있다. 코드 변경과 불필요한 재배포는 하지 않고 NAVI 증거·감사·레드팀 기록만 갱신했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-PLAYWRIGHT-PUBLIC-INTERACTION-AUDIT-20261004`, `E-PLAYWRIGHT-PUBLIC-HASH-CROSSWIDTH-20261004`, `E-LIVE-PUBLIC-CURRENT-RECHECK-20261004`.
+
 ## 모바일 메뉴 닫힘 포커스 복귀 공개 배포: 2026-10-04 / candidate `510e9ad`
 
 모바일 메뉴 항목 이동과 배경 클릭으로 메뉴가 닫힐 때 키보드·스크린리더 포커스가 문서 배경에 남지 않도록 토글 버튼으로 복귀시켰다. PR #163, main workflow `37149705144`, Pages·라이브 smoke·release status와 공개 live validator, 390px Chrome fallback 상호작용 검증이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004`, `E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004`.
