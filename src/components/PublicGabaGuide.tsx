@@ -509,7 +509,7 @@ const readingChapters = [
   { id: 'growth', label: '성장 연구' },
   { id: 'expert-videos', label: '전문가 영상' },
   { id: 'reading-note', label: '출처 읽기' },
-  { id: 'final', label: '공유하기' },
+  { id: 'final', label: '이야기 공유' },
 ] as const;
 type ReadingChapterId = (typeof readingChapters)[number]['id'];
 type ActiveChapterId = ReadingChapterId | 'top';
