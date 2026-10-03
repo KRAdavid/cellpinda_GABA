@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 읽기 진행표·직접 링크 정합성 고도화 공개 재검증: 2026-10-03 / candidate `33e8b6a57202c21826ec2ebf3ffcd8b55ee01466`
+
+읽기 진행표에서 실제 본문 12개 장과 수면·회복 보충 구간을 분리했다. 보충 구간은 `보충 / 12`, 마지막 공유 장은 `12 / 12`로 표시해 숫자와 본문 흐름을 일치시켰다. `#recovery-break`·`#final` 직접 링크는 이미지 레이아웃이 안정된 뒤 고정 읽기 레일 아래에 제목이 도착하도록 재정렬했다. PR #133의 release-verify·site-quality-verify, main workflow `37128146175`의 정적 Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390/1440px에서 진행표·직접 링크·전문가 영상 필터·영상 즉시 재생·가로폭·오류를 재확인했다. 공개 GABA 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 사용자 결정 대기(`USER_DECISION`)로 유지한다. 증적: `E-LOCAL-BUILD-READING-PROGRESS-20261003`, `E-PLAYWRIGHT-READING-PROGRESS-20261003`, `E-DEPLOY-PIPELINE-READING-PROGRESS-20261003`, `E-LIVE-PUBLIC-READING-PROGRESS-20261003`.
+
 ## 모바일 전문가 영상 탐색 단서 고도화 공개 재검증: 2026-10-03 / candidate `5f7f1cdb0db9315ed39535ffb290160a98afedb9`
 
 전문가 영상 주제 필터가 모바일에서 더 이어진다는 사실을 원형 화살표 단서로 명확히 표시하고, 가로 터치 스크롤 스냅과 오버스크롤 경계를 보완했다. PR #130의 release-verify·site-quality-verify와 main workflow `37126713484`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390px에서는 단서가 시작 시 보이고 끝에서 사라졌으며, 영상 카드 선택 시 iframe 재생과 선택 상태가 갱신됐다. 1440px에서는 필터가 한 화면에 들어왔다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 배포 전 stale TF heartbeat gate는 예약 pulse 재실행과 보호된 heartbeat PR #131 병합으로 갱신한 뒤 재배포했다. 증적: `E-LOCAL-BUILD-VIDEO-RAIL-CUE-20261003`, `E-PLAYWRIGHT-VIDEO-RAIL-CUE-20261003`, `E-DEPLOY-PIPELINE-VIDEO-RAIL-CUE-20261003`, `E-LIVE-PUBLIC-VIDEO-RAIL-CUE-20261003`, `E-NAVI-TF-FRESHNESS-20261003`.
