@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 공유 맥락 레드팀 재검증 — 68efaca — 2026-10-04
+
+- 320·390·1440px에서 `?video=roEtojyk9_0#expert-videos`로 직접 진입하고 새로고침을 반복해 선택 영상·장 제목·진행 표시·가로 폭을 공격적으로 확인했다. `잠이 안 올 때 GABA 이야기`가 복원됐고, 포스터는 유지되며 사용자가 재생하기 전 iframe은 생성되지 않았다.
+- 기본 `/guide/` 390px 진입에서는 초기 YouTube 관련 요청 0건을 확인했다. 공개본에서 브라우저 제목은 선택 장·영상과 일치했고 콘솔·페이지 오류와 가로 넘침은 없었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-SHARE-CONTEXT-20261004`, `E-PLAYWRIGHT-VIDEO-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-VIDEO-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-VIDEO-SHARE-CONTEXT-20261004`.
+
 ## Mobile Publishing Performance Red-Team Recheck — d71ab6c — 2026-10-04
 
 - 초기 390px 진입에서 전문가 영상 썸네일 네트워크 요청이 0건인지, `#expert-videos` 직접 진입 뒤 필요한 썸네일만 로드되는지 공격적으로 확인했다. 320·390·1440px에서 제목은 131/132/151px에 정렬되고 진행 상태는 `전문가 영상 10 / 12`로 유지됐다.
