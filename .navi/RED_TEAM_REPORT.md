@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Research Scale Infographic Red-Team Recheck — b8e6236 — 2026-10-03
+
+- 기존 연구 규모 화면은 Harvard·Oxford PubMed 검색 결과와 별도 GABA-A receptor SCIE/WoS 분석을 같은 시각 척도처럼 보여 첫 두 막대가 과도하게 작아지고, 비교 대상의 범위를 혼동할 여지가 있었다. PR #119에서 동일 PubMed 기관 비교와 별도 SCIE 강조 블록으로 분리해 시각적 비교 범위를 명시했다.
+- 390px에서 기관 비교 2개와 SCIE 강조 1개가 분리되어 보이고, 320px·1440px 가로 넘침이 없었다. 피부 연구 지도 선택 시 `피부 연구 결과` 레일과 `research-skin` 카드 동기화도 유지됐다. 새 과학 주장·제품 광고는 추가되지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SCALE-20261003`, `E-CDP-RESEARCH-SCALE-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003`, `E-LIVE-PUBLIC-RESEARCH-SCALE-20261003`.
+
 ## Sticky Research Rail Orientation Red-Team Recheck — 77a3032 — 2026-10-03
 
 - 긴 모바일 연구 카드에서 진행 레일의 제목이 전체 장 이름만 보여 현재 세부 주제를 잃을 수 있던 경미한 방향성 결함을 PR #117에서 보완했다. 지도에서 피부를 선택한 뒤 레일·선택 카드가 `피부 연구 결과`로 동기화되고, 390px·320px·1440px에서 가로 넘침과 오류 오버레이가 없음을 확인했다.

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Research Scale Infographic Release Recheck — b8e6236 — 2026-10-03
+
+- 연구 규모 인포그래픽을 고도화해 같은 PubMed 검색 기준의 Harvard·Oxford 문헌은 기관 비교로, 별도 WoS Core Collection SCIE 분석은 독립된 강조 수치로 읽히도록 분리했다. 연구 카피·제품 경계는 유지했다.
+- PR #119 checks, main workflow `37118207429`, Pages/live validator, 390px·320px·1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `b8e6236d6dc749ea23191e45dd58d0ab9c542a0a`이다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SCALE-20261003`, `E-CDP-RESEARCH-SCALE-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003`, `E-LIVE-PUBLIC-RESEARCH-SCALE-20261003`.
+
 ## Research Reading Orientation Release Recheck — 77a3032 — 2026-10-03
 
 - 긴 연구 카드 구간의 sticky 읽기 레일이 현재 활성 연구 결과 제목을 보여주도록 고도화했다. 390px에서 지도 피부 선택 → `피부 연구 결과` 레일 → `research-skin` 카드 도착 흐름을 확인했고, 320px 한 열·1440px 데스크톱 레이아웃도 유지했다.

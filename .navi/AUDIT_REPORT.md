@@ -1,5 +1,14 @@
 # Audit Report
 
+## Research Scale Infographic Polish — b8e6236 — 2026-10-03
+
+- 연구 규모 인포그래픽에서 같은 PubMed 검색 기준의 Harvard·Oxford 문헌을 같은 비교 그룹으로 묶고, 별도 WoS Core Collection SCIE 분석은 독립된 강조 블록으로 분리했다. 큰 수치는 유지하되 서로 다른 조사 범위를 하나의 막대 척도로 오인하지 않도록 시각 구조를 정리했으며, 과학·제품 카피는 추가하지 않았다.
+- PR #119 로컬 typecheck/UI contract/127 tests/build/perf가 통과했고, main workflow `37118207429`의 release-verify·worker-readiness·Pages 배포·smoke-live·release-status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live candidate `b8e6236d6dc749ea23191e45dd58d0ab9c542a0a`, HTTP 200, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`, 내부 운영 스냅샷 제외, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. Chrome CDP fallback에서 390px은 기관 비교 2개·SCIE 강조 1개, 320px과 1440px은 가로 넘침 없음, 피부 연구 지도 선택은 읽기 레일·상세 카드와 동기화됐다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SCALE-20261003`, `E-CDP-RESEARCH-SCALE-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003`, `E-LIVE-PUBLIC-RESEARCH-SCALE-20261003`.
+
 ## Sticky Research Rail Orientation — 77a3032 — 2026-10-03
 
 - 긴 연구 카드 구간에서 현재 읽는 주제를 잃지 않도록 sticky 읽기 레일에 활성 연구 결과 제목을 표시했다. 연구 지도에서 피부를 선택하면 `피부 연구 결과`와 `research-skin` 카드가 함께 활성화되며, 좁은 화면에서는 제목을 한 줄 말줄임으로 보호한다.
