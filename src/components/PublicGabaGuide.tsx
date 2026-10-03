@@ -609,6 +609,13 @@ const researchTopicIdFromHash = (hash: string) => {
   return researchTopics.find((topic) => `research-${topic.id}` === targetId)?.id ?? null;
 };
 
+const readingChapterIdFromHash = (hash: string): ActiveChapterId | null => {
+  const targetId = hash.replace(/^#/, '');
+  if (researchTopicIdFromHash(hash)) return 'research';
+  if (targetId === 'top') return 'top';
+  return readingChapters.some((chapter) => chapter.id === targetId) ? targetId as ReadingChapterId : null;
+};
+
 const getInitialResearchTopicId = () => typeof window === 'undefined' ? null : researchTopicIdFromHash(window.location.hash);
 
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
@@ -863,7 +870,7 @@ export default function PublicGabaGuide() {
     let layoutObserver: ResizeObserver | null = null;
     let layoutObserverTimer = 0;
     const alignHashTarget = () => {
-      if (cancelled || hashAlignmentCancelled.current) return;
+      if (cancelled || hashAlignmentCancelled.current || window.location.hash.slice(1) !== targetId) return;
       const target = document.getElementById(targetId);
       if (!target) return;
       const root = document.documentElement;
@@ -895,9 +902,30 @@ export default function PublicGabaGuide() {
   }, []);
 
   useEffect(() => {
-    const syncResearchTopicFromHash = () => setActiveResearchTopicId(researchTopicIdFromHash(window.location.hash));
-    window.addEventListener('hashchange', syncResearchTopicFromHash);
-    return () => window.removeEventListener('hashchange', syncResearchTopicFromHash);
+    let frame = 0;
+    const syncReadingContextFromHash = () => {
+      const targetId = window.location.hash.slice(1);
+      const nextChapterId = readingChapterIdFromHash(window.location.hash);
+      setActiveResearchTopicId(researchTopicIdFromHash(window.location.hash));
+      if (!nextChapterId) return;
+      hashAlignmentCancelled.current = false;
+      setActiveChapterId(nextChapterId);
+      const target = document.getElementById(targetId || 'top');
+      if (!target) return;
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = window.requestAnimationFrame(() => {
+          if (hashAlignmentCancelled.current) return;
+          scrollGuideTo(target, 'auto');
+          window.dispatchEvent(new Event('scroll'));
+        });
+      });
+    };
+    window.addEventListener('hashchange', syncReadingContextFromHash);
+    return () => {
+      window.removeEventListener('hashchange', syncReadingContextFromHash);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
@@ -1078,13 +1106,7 @@ export default function PublicGabaGuide() {
     hashAlignmentCancelled.current = true;
     const restoreMenuFocus = menuOpen;
     setMenuOpen(false);
-    const nextChapterId: ActiveChapterId | null = id.startsWith('research-')
-      ? 'research'
-      : id === 'top'
-        ? 'top'
-        : readingChapters.some((chapter) => chapter.id === id)
-          ? id as ReadingChapterId
-          : null;
+    const nextChapterId = readingChapterIdFromHash(`#${id}`);
     if (nextChapterId) setActiveChapterId(nextChapterId);
     const target = document.getElementById(id);
     const distance = target ? Math.abs(target.getBoundingClientRect().top) : 0;
