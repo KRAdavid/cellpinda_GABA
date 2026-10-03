@@ -478,9 +478,11 @@
 .guide-video-card{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;min-width:0;padding:9px;border:1px solid #dce9ef;border-radius:13px;background:#fff;color:var(--guide-ink);text-align:left;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
 .guide-video-card:hover,.guide-video-card:focus-visible,.guide-video-card.is-active{border-color:#73c7c9;box-shadow:0 9px 18px rgba(32,119,139,.09);transform:translateY(-1px)}
 .guide-video-card:focus-visible{outline:3px solid rgba(18,154,163,.22);outline-offset:2px}
-.guide-video-card-thumb{position:relative;display:block;aspect-ratio:9/14;overflow:hidden;border-radius:9px;background:#dceff2}
-.guide-video-card-thumb img{display:block;width:100%;height:100%;object-fit:cover}
-.guide-video-card-play{position:absolute;right:6px;bottom:6px;display:flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;background:rgba(19,47,86,.88);color:#fff}
+.guide-video-card-thumb{position:relative;display:block;aspect-ratio:9/14;overflow:hidden;border-radius:9px;background:radial-gradient(circle at 36% 28%,#f6ffff 0%,#dceff2 48%,#c8e0e8 100%)}
+.guide-video-card-thumb-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;color:rgba(19,47,86,.34);font-size:15px;font-weight:900;letter-spacing:.14em;line-height:1}
+.guide-video-card-thumb-placeholder span{font-size:7px;letter-spacing:.22em}
+.guide-video-card-thumb img{position:relative;z-index:1;display:block;width:100%;height:100%;object-fit:cover}
+.guide-video-card-play{position:absolute;z-index:2;right:6px;bottom:6px;display:flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;background:rgba(19,47,86,.88);color:#fff}
 .guide-video-card-copy{display:flex;flex-direction:column;min-width:0;padding:3px 1px 2px}
 .guide-video-card-copy-top{display:flex;align-items:center;justify-content:space-between;gap:6px;min-width:0}
 .guide-video-card-copy-top>span{min-width:0;color:var(--guide-teal-dark);font-size:11px;font-weight:850;letter-spacing:-.03em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
