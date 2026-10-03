@@ -1,5 +1,9 @@
 # Project Changelog
 
+최신 공개 재검증: 2026-10-03 / candidate `3b75baecbc84623a759131393ef1e47f3aa2ba07`
+
+공개 `/research/` 경로에서 제품 CTA·제품 브랜드 노출·`view=products`·SmartStore 연결을 제거하고 연구 결과·연구 조건·출처 중심의 읽기 흐름으로 정리했다. PR #85 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback에서 HTTP 200·가로 폭 390px·runtime errors `[]`·제품 문구 부재를 확인했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE`, `E-CDP-RESEARCH-PRODUCT-FREE`, `E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE`, `E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE`.
+
 최신 공개 재검증: 2026-10-03 / candidate `a0ee159235477ee24c2855251b2d17b21c0b317e`
 
 모바일 연구 카드에서 `출처`와 원문 링크가 붙어 읽히던 문제를 `출처 ·` 라벨과 링크의 줄 분리로 보완했다. PR #83 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback에서 출처 계층·가로 폭 390px·runtime errors `[]`를 확인했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL`, `E-CDP-RESEARCH-SOURCE-LABEL`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL`.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — 3b75bae — 2026-10-03
+
+- 공개 `/research/`에 제품 CTA와 제품 브랜드가 섞여 연구 읽기 흐름을 방해하던 결함은 PR #85에서 제거됐다. 390px 라이브 CDP에서 제품 CTA·`view=products`·SmartStore 연결이 모두 없고 연구 조건·출처가 카드 안에 남아 있는 것을 확인했다.
+- 이 보완은 RT-002의 제품 효능처럼 재해석될 가능성을 낮추지만, 자동 카피 검사가 독립 과학·규제 감수를 대신하지는 않으므로 RT-002는 `OPEN`으로 유지한다. RT-001 브라우저 범위와 RT-003 실제 고령 사용자 독해성도 그대로 `OPEN`이다.
+- 결과는 `PASS_WITH_CONDITIONS`를 유지한다. 새 과학 주장이나 제품 효능 주장을 추가하지 않았고, 공개 경로의 제품 독립 경계만 명확히 했다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE`, `E-CDP-RESEARCH-PRODUCT-FREE`, `E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE`, `E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE`.
+
 ## Recheck — 2026-10-03 — a0ee159
 
 - 모바일 연구 카드에서 `출처`와 인용 링크가 시각적으로 붙어 읽히던 결함을 확인하고, `출처 ·` 라벨과 원문 링크를 분리했다. 390px 공개본에서 성장호르몬 연구 카드의 출처 계층·가로 폭·runtime errors를 다시 확인했다.

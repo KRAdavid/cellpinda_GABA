@@ -1988,6 +1988,50 @@
       "captured_at": "2026-10-03T04:11:30Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-SOURCE-LABEL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 연구 경로에서 제품 CTA와 제품 연결을 제거하고 연구 조건·출처 중심의 읽기 흐름으로 정리했으며 타입체크·UI 계약·연구 카피·공개 export·production build·성능 예산·127개 테스트를 통과했다.",
+      "locator": "PR #85 candidate 5215b8a7345609ffe6641bef6c82cb264958ddd6; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm run validate:research-copy PASS; pnpm run validate:public PASS; pnpm run build PASS; pnpm test -- --runInBand 127/127; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1443798; research route no research-route-product, view=products, or SmartStore CTA",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/85",
+      "captured_at": "2026-10-03T04:31:43Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RESEARCH-PRODUCT-FREE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-PRODUCT-FREE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "390px 모바일 Chrome CDP fallback에서 공개 연구 경로가 GABA Guide 헤더와 연구 카드만으로 표시되고 제품 CTA·view=products·SmartStore 문구가 없으며 가로 넘침과 runtime errors가 없음을 확인했다.",
+      "locator": "temporary Chrome CDP fallback; local and live /research/ at 390x844; title `사람을 대상으로 한 GABA 연구를 쉽게 보기 | GABA Guide`; productCta false; productView false; smartStore false; document/body scrollWidth 390; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/research/",
+      "captured_at": "2026-10-03T04:36:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RESEARCH-PRODUCT-FREE",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 연구 경로 제품 독립화 PR #85가 main에 병합됐고 release-verify·worker-readiness·Pages publish·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #85 checks PASS; main workflow 37096916896; merge commit 3b75baecbc84623a759131393ef1e47f3aa2ba07; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition; historical local-path scanner annotation warning remained non-blocking",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37096916896",
+      "captured_at": "2026-10-03T04:35:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RESEARCH-PRODUCT-FREE",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "제품 독립 연구 경로가 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고 라이브 validator와 390px CDP에서 연구 조건·출처 흐름, 공개 데이터 정합성, 제품 CTA 부재를 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 3b75baecbc84623a759131393ef1e47f3aa2ba07; generatedAt 2026-10-03T04:33:54.616Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 390 CDP /research/ productCta false, productView false, smartStore false, document/body scrollWidth 390, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/research/",
+      "captured_at": "2026-10-03T04:36:30Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-PRODUCT-FREE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }
