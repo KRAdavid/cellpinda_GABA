@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — 0257636 — 2026-10-03
+
+- 이전 비교 도표의 임의 막대 길이는 실제 효과 크기처럼 읽힐 수 있었다. PR #89에서 이를 제거하고 같은 길이의 점선·실선 조건 리본으로 바꿔, 보고된 숫자와 시각적 크기를 혼동할 가능성을 줄였다. 카드 문구도 정성적 변화 방향을 보여주는 표현으로 정리됐다.
+- PR #89의 로컬·배포 검증, PR #90의 TF heartbeat 복구, 최종 main workflow `37099561557`, 라이브 validator, 390/1440px CDP에서 새 도표·가로 폭·runtime errors `[]`를 재확인했다. 이번 변경으로 새 치명적 결함은 확인되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-QUALITATIVE-COMPARISON`, `E-CDP-QUALITATIVE-COMPARISON`, `E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON`, `E-LIVE-PUBLIC-QUALITATIVE-COMPARISON`, `E-NAVI-TF-HEARTBEAT-REFRESH`.
+
 ## Latest Red-Team Recheck — 698f1fb — 2026-10-03
 
 - 모바일에서 14장 중 첫 6장만 보이던 진행 맵은 후속 단계가 숨겨져 있다는 점에서 실제 독해 흐름을 약화시킬 수 있었고, PR #87에서 7×2 전체 표시로 보완됐다. 320px·390px에서 01–14 단계와 마지막 카드 선택을 확인했다.

@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 0257636 — 2026-10-03
+
+- 연구 비교 도표는 정량 효과 크기가 보고되지 않은 연구에서 임의 막대 길이를 사용하지 않는다. 비교 조건은 같은 길이의 점선 리본, GABA 조건은 같은 길이의 실선 리본으로 표시하고, 카드 문구도 정확한 수치 비교가 아니라 관찰된 변화 방향을 보여준다는 점을 명시한다.
+- 로컬 typecheck, UI contract, research copy, public export, production build·정적 bundle·성능 예산과 127개 테스트가 통과했다. 정적 Pages 번들은 11개 라우트·70개 파일·초기 JS 309,865 bytes·CSS 92,953 bytes·전체 1,443,832 bytes였다.
+- PR #89 checks `37099258471`·`37099258406`은 성공했다. 첫 main workflow `37099359755`는 코드가 아닌 TF heartbeat age 484분 초과로 중단됐고, PR #90에서 heartbeat를 갱신한 뒤 checks `37099478278`·`37099478245`와 최종 main workflow `37099561557`의 release-verify·worker-readiness·Pages publish·smoke-live·release-status가 모두 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 candidate `0257636233ae758a4bc6e90dac7c77e6fd42bc67`, generatedAt `2026-10-03T05:22:11.052Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal operations snapshots 제외, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. 390/1440px Chrome CDP fallback에서 두 조건 리본의 동일 197px 길이, 점선·실선 구분, 가로 폭 390/1425, runtime errors `[]`를 확인했다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-QUALITATIVE-COMPARISON`, `E-CDP-QUALITATIVE-COMPARISON`, `E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON`, `E-LIVE-PUBLIC-QUALITATIVE-COMPARISON`, `E-NAVI-TF-HEARTBEAT-REFRESH`.
+
 ## Latest Public Release Recheck — 698f1fb — 2026-10-03
 
 - 모바일 수면·회복 진행 맵을 7×2 전체 단계 표시로 보완해 14개 카드의 읽기 순서를 한 화면에서 파악할 수 있게 했다. 기존 3초 자동 전환·수동 선택·일시정지·카드 일러스트는 유지했다.
