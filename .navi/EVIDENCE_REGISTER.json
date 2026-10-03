@@ -3055,6 +3055,50 @@
       "captured_at": "2026-10-03T14:14:22Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-NAVI-DOCS",
       "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CHAPTER-DEEPLINK-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "상단 메뉴와 장 직접 링크가 섹션의 넓은 상단 여백이 아니라 실제 장 제목을 sticky 읽기 레일 아래에 맞추도록 보완한 PR #136의 로컬 검증이 통과했다. 연구 지도·전문가 영상 내부 카드 타깃은 유지했고 공개 과학 카피·제품 경계는 변경하지 않았다.",
+      "locator": "PR #136 candidate 18ccdce; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; static routes 11, files 70; performance initial JS 311157, CSS 95703, total assets 1463234; chapter target helper and UI contract guard passed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/136",
+      "captured_at": "2026-10-03T14:30:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-CHAPTER-DEEPLINK",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-CHAPTER-DEEPLINK-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 GitHub Pages를 Playwright Chrome fallback으로 390px·1440px에서 확인했다. basics·recovery-break·research·expert-videos·final의 장 제목이 각각 읽기 레일 아래에 도착했고, 모바일 메뉴 이동·전문가 영상 필터 끝 도달·영상 선택 재생도 오류 없이 동작했다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/; viewport 390x1000 and 1440x900; 390px headings 115.406/115.328/115.484/115.016/114.734 > railBottom 105; 1440px headings 126.141/125.703/125.859/126.328/125.984 > railBottom 116; counts 02/12, 보충/12, 06/12, 10/12, 12/12; document scrollWidth equals viewport; menu academic headingTop 115.141 and menu closed; filter cue true -> false at scrollLeft 383; iframe 1; active title `갱년기와 수면, GABA에 대한 질문`; errors []; screenshots v35-live-deeplink-390-research.png, v35-live-deeplink-1440-expert-videos.png, v35-live-deeplink-390-final.png",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/136",
+      "captured_at": "2026-10-03T14:38:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261003-CHAPTER-DEEPLINK",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CHAPTER-DEEPLINK-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #136의 release-verify와 site-quality-verify를 통과했고 main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드에서 실행 대상이 아니었다.",
+      "locator": "PR #136 checks 37130121713 release-verify PASS and 37130121744 site-quality-verify PASS; merge commit a189d9432cc7003def5a791b381c6b15a55aab09; main workflow 37130208546 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37130208546",
+      "captured_at": "2026-10-03T14:39:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-CHAPTER-DEEPLINK",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CHAPTER-DEEPLINK-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 정적 번들·공개 데이터·제품 독립 경계를 유지했다. 실제 공개 URL에서 장 제목 정렬·메뉴 이동·전문가 영상 탐색과 선택 재생을 재검증했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha a189d9432cc7003def5a791b381c6b15a55aab09; generatedAt 2026-10-03T14:37:37.708Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Playwright Chrome fallback results and screenshots recorded in E-PLAYWRIGHT-CHAPTER-DEEPLINK-20261003",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T14:40:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-CHAPTER-DEEPLINK",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
     }
   ]
 }
