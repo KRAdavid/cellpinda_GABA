@@ -1075,3 +1075,11 @@
 @media(max-width:700px){
   .guide-recovery-break{scroll-margin-top:112px}
 }
+
+/* v32 video topic rail: make the mobile continuation cue and touch scroll rhythm explicit. */
+.guide-video-filter-cue{display:none}
+@media(max-width:700px){
+  .guide-video-filters{scroll-snap-type:x proximity;scroll-padding-inline:2px;overscroll-behavior-inline:contain;scrollbar-width:thin}
+  .guide-video-filter{scroll-snap-align:start}
+  .guide-video-filter-cue{position:absolute;z-index:3;top:7px;right:7px;display:grid;place-items:center;width:27px;height:27px;border:1px solid rgba(177,216,220,.85);border-radius:50%;background:rgba(248,251,251,.96);box-shadow:0 3px 9px rgba(26,93,108,.1);color:var(--guide-teal-dark);pointer-events:none}
+}

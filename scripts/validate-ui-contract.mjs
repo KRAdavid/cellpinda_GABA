@@ -378,6 +378,8 @@ requireMatch(indexHtml, /읽는 순서[\s\S]*발견의 순간[\s\S]*연구 지�
 requireMatch(publicGuide, /historyMilestones[\s\S]*Roberts & Frankel[\s\S]*PMID 14794689/, 'public GABA guide must lead with the 1950 Roberts and Frankel discovery');
 requireMatch(publicGuide, /academicFields[\s\S]*신경계의 균형[\s\S]*몸 전체로 넓어지는 연구/, 'public GABA guide must expose the broad academic research map');
 requireMatch(publicGuide, /applicationCases[\s\S]*발효식품과 유산균[\s\S]*발아현미와 기능성 식품[\s\S]*곡류·빵·유제품·음료/, 'public GABA guide must expose Korea, Japan and global application examples');
+requireMatch(publicGuide, /guide-video-filters-wrap[\s\S]*videoFiltersHaveMore \? <span className="guide-video-filter-cue"[\s\S]*ArrowRight/, 'mobile expert video topic filters must expose a continuation cue when more topics are available');
+requireMatch(publicGuideStyles, /v32 video topic rail[\s\S]*\.guide-video-filters\{scroll-snap-type:x proximity;scroll-padding-inline:2px;overscroll-behavior-inline:contain[\s\S]*\.guide-video-filter-cue\{position:absolute/, 'mobile expert video topic rail must keep a touch-scroll rhythm and visible continuation cue');
 if (/셀핀다 가바|셀핀다 완제품|스마트스토어/.test(publicGuide)) fail('public GABA guide must remain product-free');
 if (/https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202|REVIEW_DIALOG|스마트스토어/.test(indexHtml)) fail('root public story must not expose product or review CTAs');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');
