@@ -1724,6 +1724,50 @@
       "captured_at": "2026-10-03T02:29:25Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RECOVERY-PROGRESS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-NAV",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면과 회복 장을 전역 메뉴에서 직접 열고 읽기 진행 상태를 보조기기용 단일 안내로 정리했으며 모바일 메뉴 레이어 보정과 공개 번들 검증을 완료했다.",
+      "locator": "PR #73 candidate ea99cea; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test -- --runInBand 127/127; pnpm run build PASS; static routes 11; files 70; validate:performance total 1441592 <= 1650000 bytes; initial JS 310538 and CSS 92953 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/73",
+      "captured_at": "2026-10-03T02:45:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RECOVERY-NAV",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-RECOVERY-NAV",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback에서 모바일 메뉴를 열어 수면과 회복을 선택하면 메뉴가 닫히고 `#recovery-break`, `aria-current=page`, `수면과 회복 02 / 12`가 함께 갱신되며 데스크톱에서도 전역 메뉴와 진행 바가 안정적으로 배치된다.",
+      "locator": "temporary Chrome CDP fallback; local candidate ea99cea at 390/1440; mobile document/body scrollWidth 390; desktop document/body scrollWidth 1425; menu selection menuOpen false, hash #recovery-break, recoveryNavCurrent page, valueNow 2/valueMax 12; mobile controls 44px; runtime errors []",
+      "source_uri": "http://127.0.0.1:5197/",
+      "captured_at": "2026-10-03T02:41:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RECOVERY-NAV",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-NAV",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전역 탐색·읽기 진행 보강 PR #73과 main 공개 배포 파이프라인이 필수 검사를 통과했고 Pages publish·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #73 checks 37090707571 and 37090707626 PASS; main workflow 37090787855 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition; historical local-path scanner annotation warning remained non-blocking",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37090787855",
+      "captured_at": "2026-10-03T02:46:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RECOVERY-NAV",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-NAV",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전역 메뉴에서 수면과 회복으로 바로 진입하는 보강이 반영된 최신 GitHub Pages 공개본이 200으로 응답했고 공개 번들·데이터 경계·공유 경로가 유지됐다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha e5f1eab190cd29fb4c18ffe2e469f18edb92ba1f; generatedAt 2026-10-03T02:44:23.942Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 390/1440 CDP scrollWidth 390/1425, menu selection hash #recovery-break, aria-current page, `수면과 회복 02 / 12`, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T02:47:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RECOVERY-NAV",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-007"]
     }
   ]
 }

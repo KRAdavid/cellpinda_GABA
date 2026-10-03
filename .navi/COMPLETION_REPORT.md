@@ -1,5 +1,11 @@
 # Completion Report
 
+## Latest Release Recheck — e5f1eab — 2026-10-03
+
+- 전역 메뉴 첫 항목에 `수면과 회복`을 연결하고, 읽기 진행 메타를 보조기기용 단일 상태로 정리했으며, 모바일 메뉴 레이어를 sticky 진행 바 위로 보정했다.
+- PR #73 checks, main workflow `37090787855`, 라이브 validator, 390/1440px Chrome CDP fallback 검증이 통과했다. 공개 후보는 `e5f1eab190cd29fb4c18ffe2e469f18edb92ba1f`이다.
+- 자동 검증은 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
 ## Latest Release Recheck — 288a883 — 2026-10-03
 
 - 수면과 회복 인터스티셜을 읽기 진행 표시와 동기화해 모바일·데스크톱에서 `수면과 회복 02 / 12` 이후 `연구 지도 03 / 12`로 자연스럽게 이어지도록 고도화했다.

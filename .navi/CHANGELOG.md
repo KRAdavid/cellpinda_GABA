@@ -1,6 +1,10 @@
 # Project Changelog
 
-최신 공개 재검증: 2026-10-03 / candidate `288a883d5e0537a1be6bdd2660d90edcc5e82df0`
+최신 공개 재검증: 2026-10-03 / candidate `e5f1eab190cd29fb4c18ffe2e469f18edb92ba1f`
+
+전역 메뉴 첫 항목에 `수면과 회복`을 연결하고, 읽기 진행 안내를 하나의 보조기기 상태로 정리했으며 모바일 메뉴가 sticky 진행 바에 가려지지 않도록 레이어를 보정했다. PR #73 검사와 main 배포, 라이브 validator·390/1440px Chrome CDP fallback·실제 메뉴 선택 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-NAV`, `E-CDP-RECOVERY-NAV`, `E-DEPLOY-PIPELINE-RECOVERY-NAV`, `E-LIVE-PUBLIC-RECOVERY-NAV`.
+
+이전 공개 재검증: 2026-10-03 / candidate `288a883d5e0537a1be6bdd2660d90edcc5e82df0`
 
 수면과 회복 인터스티셜을 읽기 진행 표시의 독립 맥락으로 연결해 모바일·데스크톱에서 `수면과 회복 02 / 12` 다음 `연구 지도 03 / 12`로 자연스럽게 이어지도록 보완했다. PR #70 검사와 main 문서 동기화 배포 #71, 라이브 validator·390/1440px Chrome CDP fallback·연구 지도 `인지` 활성 동작 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-PROGRESS`, `E-CDP-RECOVERY-PROGRESS`, `E-DEPLOY-PIPELINE-RECOVERY-PROGRESS`, `E-LIVE-PUBLIC-RECOVERY-PROGRESS`.
 

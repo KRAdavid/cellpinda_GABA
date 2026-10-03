@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T02:29:41.469170Z",
+  "updated_at": "2026-10-03T02:48:26.497109Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -179,7 +179,9 @@
         "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE",
         "E-LOCAL-BUILD-RECOVERY-PROGRESS",
-        "E-DEPLOY-PIPELINE-RECOVERY-PROGRESS"
+        "E-DEPLOY-PIPELINE-RECOVERY-PROGRESS",
+        "E-LOCAL-BUILD-RECOVERY-NAV",
+        "E-DEPLOY-PIPELINE-RECOVERY-NAV"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -233,7 +235,9 @@
         "E-CDP-RESEARCH-MAP-ACTIVE",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE",
         "E-CDP-RECOVERY-PROGRESS",
-        "E-LIVE-PUBLIC-RECOVERY-PROGRESS"
+        "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
+        "E-CDP-RECOVERY-NAV",
+        "E-LIVE-PUBLIC-RECOVERY-NAV"
       ],
       "owner": "UX QA"
     },
@@ -808,7 +812,9 @@
           "E-CDP-RESEARCH-MAP-ICONS",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
           "E-CDP-RESEARCH-PROFILE",
-          "E-LIVE-PUBLIC-RESEARCH-PROFILE"
+          "E-LIVE-PUBLIC-RESEARCH-PROFILE",
+          "E-CDP-RECOVERY-NAV",
+          "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -836,7 +842,9 @@
           "E-CDP-DESKTOP",
           "E-CDP-MOBILE",
           "E-CDP-RESEARCH-MAP-ICONS",
-          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS"
+          "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
+          "E-CDP-RECOVERY-NAV",
+          "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -845,7 +853,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T02:29:25Z"
+    "last_run_at": "2026-10-03T02:47:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -857,7 +865,9 @@
         "statement": "Chrome 기반 대표 화면만으로 모든 브라우저·실기기를 보장할 수 없다.",
         "evidence_refs": [
           "E-CDP-DESKTOP",
-          "E-CDP-MOBILE"
+          "E-CDP-MOBILE",
+          "E-CDP-RECOVERY-NAV",
+          "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -870,7 +880,8 @@
         "statement": "연구 결과 문장이 외부 공유 과정에서 효능 단정으로 재해석될 수 있다.",
         "evidence_refs": [
           "E-RESEARCH-COPY",
-          "E-REDTEAM-REVIEW"
+          "E-REDTEAM-REVIEW",
+          "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
         "impact": "과학 정보가 제품 효능처럼 확산될 수 있다.",
         "required_action": "독립 과학·규제 감수와 공유 카피 변경 감시",
@@ -883,7 +894,8 @@
         "statement": "실제 고령 사용자의 독해성은 화면 크기만으로 증명되지 않는다.",
         "evidence_refs": [
           "E-CDP-MOBILE",
-          "E-REDTEAM-REVIEW"
+          "E-REDTEAM-REVIEW",
+          "E-CDP-RECOVERY-NAV"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -892,7 +904,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T02:29:25Z"
+    "last_run_at": "2026-10-03T02:47:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -1023,9 +1035,13 @@
           "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE",
           "E-LOCAL-BUILD-RECOVERY-PROGRESS",
           "E-DEPLOY-PIPELINE-RECOVERY-PROGRESS",
-          "E-LIVE-PUBLIC-RECOVERY-PROGRESS"
+          "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
+          "E-LOCAL-BUILD-RECOVERY-NAV",
+          "E-CDP-RECOVERY-NAV",
+          "E-DEPLOY-PIPELINE-RECOVERY-NAV",
+          "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
-        "notes": "288a883 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·수면과 회복 02 / 12 진행 맥락을 재확인"
+        "notes": "e5f1eab 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -1074,7 +1090,9 @@
           "E-CDP-RESEARCH-MAP-ACTIVE",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE",
           "E-CDP-RECOVERY-PROGRESS",
-          "E-LIVE-PUBLIC-RECOVERY-PROGRESS"
+          "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
+          "E-CDP-RECOVERY-NAV",
+          "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·390/320/1440px 공유 버튼을 확인"
       },
@@ -1120,7 +1138,9 @@
           "E-CDP-RESEARCH-MAP-ACTIVE",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE",
           "E-CDP-RECOVERY-PROGRESS",
-          "E-LIVE-PUBLIC-RECOVERY-PROGRESS"
+          "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
+          "E-CDP-RECOVERY-NAV",
+          "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락을 추가 확인"
       },
@@ -1166,7 +1186,9 @@
           "E-CDP-RESEARCH-MAP-ACTIVE",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE",
           "E-CDP-RECOVERY-PROGRESS",
-          "E-LIVE-PUBLIC-RECOVERY-PROGRESS"
+          "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
+          "E-CDP-RECOVERY-NAV",
+          "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
         "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·모바일 히어로·01–04 연구 읽기 레일 확인"
       },
@@ -1456,6 +1478,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T02:29:25Z"
+    },
+    {
+      "id": "H-030",
+      "event": "전역 메뉴에서 수면과 회복으로 바로 진입할 수 있도록 연결하고 읽기 진행 안내를 단일 보조기기 상태로 정리했으며, 모바일 메뉴가 sticky 진행 바 위에 표시되도록 보완한 PR #73·main 배포·라이브 검증·NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T02:45:30Z"
     }
   ]
 }

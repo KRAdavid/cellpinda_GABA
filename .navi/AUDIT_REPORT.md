@@ -1,5 +1,13 @@
 # Audit Report
 
+## Latest Public Release Recheck — e5f1eab — 2026-10-03
+
+- PR #73에서 기존 `수면과 회복` 인터스티셜을 전역 메뉴의 첫 항목으로 연결했다. 읽기 진행 메타는 시각 요소를 중복 안내하지 않고 `role="status"`와 하나의 `aria-label`로 현재 장을 전달하며, 모바일 메뉴는 sticky 진행 바보다 위에 표시된다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build·정적 번들·성능 검사가 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,441,592 <= 1,650,000` bytes였고 초기 JS 310,538 bytes·CSS 92,953 bytes였다.
+- PR #73 checks `37090707571`, `37090707626`과 main workflow `37090787855`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다. 과거 Git 이력의 local-path scanner annotation은 비차단 경고로 남았다.
+- 라이브 validator는 candidate `e5f1eab190cd29fb4c18ffe2e469f18edb92ba1f`, generatedAt `2026-10-03T02:44:23.942Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL Chrome CDP fallback은 390px·1440px에서 가로 폭 `390/1425`, 메뉴 선택 후 `#recovery-break`, `aria-current="page"`, `수면과 회복 02 / 12`, 44px 모바일 컨트롤, runtime errors `[]`를 확인했다. Browser 플러그인은 사용할 수 없어 CDP fallback으로 대체했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Latest Public Release Recheck — 288a883 — 2026-10-03
 
 - PR #70에서 `수면과 회복` 인터스티셜을 읽기 진행 맥락에 포함했다. 공개 화면의 sticky 진행 표시가 이전 장에 머물지 않고 `수면과 회복 02 / 12`를 보여준 뒤 학술 연구 섹션에서 `연구 지도 03 / 12`로 전환된다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
