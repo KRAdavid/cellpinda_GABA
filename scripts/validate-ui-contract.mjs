@@ -141,6 +141,7 @@ requireMatch(publicGuide, /guide-reading-progress[\s\S]*?role="progressbar"[\s\S
 requireMatch(publicGuideStyles, /\.guide-reading-progress-track\{height:3px;background:/, 'public GABA reading progress must keep a visible three-pixel track');
 requireMatch(publicGuideStyles, /@media\(max-width:700px\)\{[\s\S]*?\.guide-reading-progress-meta\{width:[^}]*min-height:32px/, 'public GABA mobile reading progress must remain legible without wrapping');
 requireMatch(publicGuideStyles, /\.guide-reading-progress-meta strong\{font-size:13px\}/, 'public GABA reading progress chapter label must remain readable');
+requireMatch(publicGuideStyles, /v26 mobile title clearance[\s\S]*?\.guide-section\.guide-story-section\{padding-top:110px\}/, 'public GABA mobile chapter titles must clear the sticky reading rail');
 requireMatch(publicGuideStyles, /@media \(max-width:700px\)\{[\s\S]*?\.guide-header nav\{top:70px/, 'public GABA mobile menu must begin below its 70px header');
 requireMatch(publicGuide, /const keepFocusInsideMenu = \(event: globalThis\.KeyboardEvent\) =>[\s\S]*?event\.key !== 'Tab'[\s\S]*?document\.addEventListener\('keydown', keepFocusInsideMenu\)/, 'public GABA mobile menu must keep keyboard focus inside the open menu');
 requireMatch(publicGuide, /aria-current=\{isNavCurrent\('history'\) \? 'location'/, 'public GABA navigation must expose the current reading location semantically');
