@@ -1,5 +1,9 @@
 # Project Changelog
 
+최신 공개 재검증: 2026-10-03 / candidate `e514a375f0d8fdfeefbba2043b0a18268224b5d2`
+
+연구 지도 아래의 기존 읽기 순서를 01–04 시각 레일로 정리했다. 모바일에서는 번호 노드와 연결선으로 `지도 → 대상 → 결과 → 해석`을 분리하고, 데스크톱에서는 기존 여백과 지도 구조를 유지했다. PR #64 검사, main 배포·라이브 validator·390/1440px Chrome CDP 검증을 통과했다. 증적: `E-LOCAL-BUILD-RESEARCH-RAIL`, `E-CDP-RESEARCH-RAIL`, `E-DEPLOY-PIPELINE-RESEARCH-RAIL`, `E-LIVE-PUBLIC-RESEARCH-RAIL`.
+
 최신 공개 재검증: 2026-10-03 / candidate `0147e3c15a7e0acd700ff4f75e9fcddc03b39b05`
 
 모바일 히어로의 편집 안내와 `3분 읽기` 레일에 읽기용 반투명 표면을 적용했다. PR #62 검사, main 배포·라이브 validator·320/390/1440px Chrome CDP 검증을 통과했으며 카피·출처·제품 독립 경계는 유지했다. 증적: `E-LOCAL-BUILD-HERO-SURFACE`, `E-CDP-HERO-SURFACE`, `E-DEPLOY-PIPELINE-HERO-SURFACE`, `E-LIVE-PUBLIC-HERO-SURFACE`.

@@ -1548,6 +1548,50 @@
       "captured_at": "2026-10-03T01:02:05Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-HERO-SURFACE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-RAIL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "기존 연구 읽기 순서를 01–04 시각 레일로 정리해 지도에서 대상·결과·해석으로 이어지는 구분을 강화했으며, UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과했다.",
+      "locator": "PR #64 candidate c96d996; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test 127/127; pnpm run build PASS; static routes 11; files 70; validate:performance total 1439166 <= 1650000 bytes; initial JS 310538 and CSS 92953 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/64",
+      "captured_at": "2026-10-03T01:18:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RESEARCH-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-RAIL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 390px·1440px Chrome CDP 렌더링에서 연구 지도 아래 01–04 읽기 레일이 또렷하게 표시되고, 가로 폭·헤더 컨트롤·연구 프로필·런타임 오류가 유지됐다.",
+      "locator": "temporary Chrome CDP fallback; live https://kradavid.github.io/gaba_info/guide/; research anchor screenshot inspected at 390/1440; document/body scrollWidth 390/1425; mobile header controls 44px; five research copy buttons 44px; menu and large text interaction remained available; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/",
+      "captured_at": "2026-10-03T01:22:18Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RESEARCH-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-RAIL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 읽기 레일 보완 PR과 main 공개 배포 파이프라인이 필수 검사를 통과했다.",
+      "locator": "PR #64 release-verify run 37085704930 PASS and site-quality-verify run 37085704950 PASS; main workflow 37085785228 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37085785228",
+      "captured_at": "2026-10-03T01:22:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RESEARCH-RAIL",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-RAIL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 읽기 레일 보완이 반영된 최신 GitHub Pages 공개본이 200으로 응답했고 공개 번들·데이터 경계·공유 경로가 유지됐다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha e514a375f0d8fdfeefbba2043b0a18268224b5d2; generatedAt 2026-10-03T01:22:18.213Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 390/1440 CDP scrollWidth 390/1425, runtime errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T01:22:18Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003"]
     }
   ]
 }
