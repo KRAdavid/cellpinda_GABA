@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T02:48:26.497109Z",
+  "updated_at": "2026-10-03T03:05:26.831847Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -237,7 +237,9 @@
         "E-CDP-RECOVERY-PROGRESS",
         "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
         "E-CDP-RECOVERY-NAV",
-        "E-LIVE-PUBLIC-RECOVERY-NAV"
+        "E-LIVE-PUBLIC-RECOVERY-NAV",
+        "E-CDP-TABLET-HEADER",
+        "E-LIVE-PUBLIC-TABLET-HEADER"
       ],
       "owner": "UX QA"
     },
@@ -814,7 +816,9 @@
           "E-CDP-RESEARCH-PROFILE",
           "E-LIVE-PUBLIC-RESEARCH-PROFILE",
           "E-CDP-RECOVERY-NAV",
-          "E-LIVE-PUBLIC-RECOVERY-NAV"
+          "E-LIVE-PUBLIC-RECOVERY-NAV",
+          "E-CDP-TABLET-HEADER",
+          "E-LIVE-PUBLIC-TABLET-HEADER"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -844,7 +848,9 @@
           "E-CDP-RESEARCH-MAP-ICONS",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
           "E-CDP-RECOVERY-NAV",
-          "E-LIVE-PUBLIC-RECOVERY-NAV"
+          "E-LIVE-PUBLIC-RECOVERY-NAV",
+          "E-CDP-TABLET-HEADER",
+          "E-LIVE-PUBLIC-TABLET-HEADER"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -853,7 +859,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T02:47:00Z"
+    "last_run_at": "2026-10-03T03:06:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -867,7 +873,9 @@
           "E-CDP-DESKTOP",
           "E-CDP-MOBILE",
           "E-CDP-RECOVERY-NAV",
-          "E-LIVE-PUBLIC-RECOVERY-NAV"
+          "E-LIVE-PUBLIC-RECOVERY-NAV",
+          "E-CDP-TABLET-HEADER",
+          "E-LIVE-PUBLIC-TABLET-HEADER"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -904,7 +912,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T02:47:00Z"
+    "last_run_at": "2026-10-03T03:06:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -1039,9 +1047,13 @@
           "E-LOCAL-BUILD-RECOVERY-NAV",
           "E-CDP-RECOVERY-NAV",
           "E-DEPLOY-PIPELINE-RECOVERY-NAV",
-          "E-LIVE-PUBLIC-RECOVERY-NAV"
+          "E-LIVE-PUBLIC-RECOVERY-NAV",
+          "E-LOCAL-BUILD-TABLET-HEADER",
+          "E-DEPLOY-PIPELINE-TABLET-HEADER",
+          "E-LIVE-PUBLIC-TABLET-HEADER",
+          "E-CDP-TABLET-HEADER"
         ],
-        "notes": "e5f1eab 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락을 재확인"
+        "notes": "79eea1f 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더 컨트롤을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -1092,9 +1104,11 @@
           "E-CDP-RECOVERY-PROGRESS",
           "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
           "E-CDP-RECOVERY-NAV",
-          "E-LIVE-PUBLIC-RECOVERY-NAV"
+          "E-LIVE-PUBLIC-RECOVERY-NAV",
+          "E-CDP-TABLET-HEADER",
+          "E-LIVE-PUBLIC-TABLET-HEADER"
         ],
-        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·390/320/1440px 공유 버튼을 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴를 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -1140,7 +1154,9 @@
           "E-CDP-RECOVERY-PROGRESS",
           "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
           "E-CDP-RECOVERY-NAV",
-          "E-LIVE-PUBLIC-RECOVERY-NAV"
+          "E-LIVE-PUBLIC-RECOVERY-NAV",
+          "E-CDP-TABLET-HEADER",
+          "E-LIVE-PUBLIC-TABLET-HEADER"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락을 추가 확인"
       },
@@ -1148,6 +1164,8 @@
         "criterion_id": "AC-004",
         "status": "PASS",
         "evidence_refs": [
+          "E-CDP-TABLET-HEADER",
+          "E-LIVE-PUBLIC-TABLET-HEADER",
           "E-CDP-MOBILE",
           "E-CDP-NAVIGATION-FOLLOWUP",
           "E-CDP-NAVIGATION-LATEST",
@@ -1190,7 +1208,7 @@
           "E-CDP-RECOVERY-NAV",
           "E-LIVE-PUBLIC-RECOVERY-NAV"
         ],
-        "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·모바일 히어로·01–04 연구 읽기 레일 확인"
+        "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤 확인"
       },
       {
         "criterion_id": "AC-005",
@@ -1251,9 +1269,12 @@
           "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE",
           "E-LOCAL-BUILD-RECOVERY-PROGRESS",
           "E-DEPLOY-PIPELINE-RECOVERY-PROGRESS",
-          "E-LIVE-PUBLIC-RECOVERY-PROGRESS"
+          "E-LIVE-PUBLIC-RECOVERY-PROGRESS",
+          "E-LOCAL-BUILD-TABLET-HEADER",
+          "E-DEPLOY-PIPELINE-TABLET-HEADER",
+          "E-LIVE-PUBLIC-TABLET-HEADER"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·태블릿 헤더 보강 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -1485,6 +1506,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T02:45:30Z"
+    },
+    {
+      "id": "H-031",
+      "event": "701–860px 태블릿 헤더에서 컨트롤이 화면 밖으로 밀리던 결함을 아이콘 메뉴 전환으로 보완한 PR #75를 main에 병합하고 768/820px 태블릿·390px 모바일·1440px 데스크톱 라이브 검증과 NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T03:06:00Z"
     }
   ]
 }

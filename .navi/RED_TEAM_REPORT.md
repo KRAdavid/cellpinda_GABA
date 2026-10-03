@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-03 — 79eea1f
+
+- 768px·820px 태블릿에서 기존 데스크톱 메뉴가 공유 버튼을 화면 밖으로 밀어내던 실패 모드를 확인했고, 701–860px 아이콘 메뉴 전환으로 보완했다. 메뉴·큰 글씨·공유 동작, 모바일 회복 이동, 데스크톱 진행 상태를 다시 실행했으며 새 치명적 결함과 runtime errors는 확인되지 않았다.
+- PR #75와 main workflow `37091703892`, 라이브 validator, 768/820/390/1440px Chrome CDP fallback이 통과했다. 공개 데이터·연구 카피·제품 독립 경계와 teaser HOLD는 변하지 않았다.
+- 결과는 `PASS_WITH_CONDITIONS`를 유지한다. Browser 플러그인 미사용으로 CDP fallback을 사용했으며 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-TABLET-HEADER`, `E-CDP-TABLET-HEADER`, `E-DEPLOY-PIPELINE-TABLET-HEADER`, `E-LIVE-PUBLIC-TABLET-HEADER`.
+
 ## Recheck — 2026-10-03 — e5f1eab
 
 - 전역 메뉴에서 `수면과 회복`을 바로 선택할 수 있게 해 긴 페이지의 핵심 회복 흐름 접근성을 높였고, 읽기 진행 안내를 단일 보조기기 상태로 정리했다. 모바일 메뉴가 sticky 진행 바에 가려지던 레이어 결함도 보완했다. 새 과학 주장·제품 광고·출처 변경은 없었다.

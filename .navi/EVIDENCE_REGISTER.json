@@ -1768,6 +1768,50 @@
       "captured_at": "2026-10-03T02:47:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RECOVERY-NAV",
       "claim_refs": ["C-001", "C-002", "C-003", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TABLET-HEADER",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "701–860px 태블릿 구간에서 데스크톱 전체 메뉴를 아이콘 메뉴로 전환해 헤더 컨트롤이 화면 밖으로 밀리지 않도록 보완했으며 UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과했다.",
+      "locator": "PR #75 candidate 73cb0a9aae0bca0cdf702b8ca2db0401b38c0653; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test -- --runInBand 127/127; pnpm run build PASS; static routes 11; files 70; validate:performance total 1442606 <= 1650000 bytes; initial JS 310538 and CSS 92953 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/75",
+      "captured_at": "2026-10-03T03:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-TABLET-HEADER",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-TABLET-HEADER",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 768px·820px Chrome CDP fallback에서 태블릿 메뉴를 열고 큰 글씨를 전환했으며 메뉴·읽기 크기·공유 컨트롤이 모두 44px로 화면 안에 남고 가로 넘침과 runtime errors가 없었다.",
+      "locator": "temporary Chrome CDP fallback; live https://kradavid.github.io/gaba_info/?release=79eea1f at 768/820; document/body scrollWidth 768/820; 768 controls menu 590–634, reading 646–690, share 702–746; 820 controls menu 642–686, reading 698–742, share 754–798; menuOpen true; largeText true at 820; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T03:01:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-TABLET-HEADER",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TABLET-HEADER",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 헤더 보강 PR #75와 main 공개 배포 파이프라인이 release-verify·worker-readiness·Pages publish·라이브 smoke·release status를 모두 통과했다.",
+      "locator": "PR #75 checks 37091618659 and 37091618584 PASS; main workflow 37091703892, commit 79eea1f08423f7d9f52021770310691b9f6e4db2; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY release condition; historical local-path scanner annotation warning remained non-blocking",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37091703892",
+      "captured_at": "2026-10-03T03:02:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-TABLET-HEADER",
+      "claim_refs": ["C-001", "C-002"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TABLET-HEADER",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 헤더 보강이 반영된 최신 GitHub Pages 공개본이 200으로 응답했고 공개 번들·데이터 경계·공유 경로를 유지했으며 390px 모바일 이동과 1440px 데스크톱 진행 상태도 정상이다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 79eea1f08423f7d9f52021770310691b9f6e4db2; generatedAt 2026-10-03T03:00:28.473Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live 768/820 CDP tablet controls fit with scrollWidth equal to viewport, live 390 recovery navigation hash #recovery-break and valueNow 2/valueMax 12, live 1440 recoveryNavCurrent page valueNow 2/valueMax 12, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T03:04:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-TABLET-HEADER",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }

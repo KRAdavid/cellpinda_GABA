@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — 79eea1f — 2026-10-03
+
+- 공개 배포본의 701–860px 태블릿 헤더를 아이콘 메뉴 전환으로 보완해 메뉴·큰 글씨·공유 버튼이 화면 밖으로 밀리지 않도록 했다. 768px·820px에서 실제 메뉴를 열어 44px 컨트롤과 가로 폭을 확인했다.
+- PR #75 checks, main workflow `37091703892`, live validator, 768/820/390/1440px Chrome CDP fallback 검증이 통과했다. 공개 후보는 `79eea1f08423f7d9f52021770310691b9f6e4db2`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-HEADER`, `E-CDP-TABLET-HEADER`, `E-DEPLOY-PIPELINE-TABLET-HEADER`, `E-LIVE-PUBLIC-TABLET-HEADER`.
+
 ## Latest Release Recheck — e5f1eab — 2026-10-03
 
 - 전역 메뉴 첫 항목에 `수면과 회복`을 연결하고, 읽기 진행 메타를 보조기기용 단일 상태로 정리했으며, 모바일 메뉴 레이어를 sticky 진행 바 위로 보정했다.
