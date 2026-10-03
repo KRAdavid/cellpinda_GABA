@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — 3d788e3 — 2026-10-03
+
+- 모바일·태블릿 메뉴에 배경 분리·스크롤 잠금·배경 버튼 닫힘을 적용해 메뉴를 읽는 동안 페이지 위치가 흔들리지 않도록 했다.
+- PR #98 checks, main `37104179510`, Pages/live validator, 390px 메뉴 열림·닫힘과 1440px Chrome CDP fallback 검증이 통과했다. 공개 candidate는 `3d788e39ef4d1dfa9d6d20845380ddcf7bfcc255`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS`, `E-CDP-MOBILE-MENU-FOCUS`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS`.
+
 ## Latest Release Recheck — cf2f123 — 2026-10-03
 
 - 연구 결과 도표를 증가·감소 방향 화살표와 명시적 라벨로 고도화하고 320px 조건명 줄바꿈을 보정했다. 비교 문장과 방향 시각화가 한 화면에서 연결된다.
