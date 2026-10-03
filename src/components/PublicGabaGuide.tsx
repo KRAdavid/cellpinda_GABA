@@ -67,6 +67,7 @@ type ResearchComparison = {
   reference: string;
   result: string;
   visual: 'result-less' | 'result-more';
+  direction: 'up' | 'down';
 };
 
 type ResearchSignal = {
@@ -240,12 +241,12 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: '머리를 많이 쓴 뒤, 두 그룹은 어떻게 달랐을까요?',
       summary: 'GABA를 섭취한 그룹은 뇌파와 활력 점수가 비교 그룹보다 덜 떨어졌습니다.',
-      note: '표시의 개수는 연구에서 관찰된 ‘더 많이·덜’의 방향만 나타내며, 실제 효과 크기나 수치를 뜻하지 않습니다.',
+      note: '화살표는 지표의 증가·감소 방향을, 문구는 두 조건 사이의 상대적인 차이를 보여줍니다. 시각 요소의 크기는 실제 효과 크기나 수치를 뜻하지 않습니다.',
       referenceLabel: '비교 조건',
       resultLabel: 'GABA 섭취',
       rows: [
-        { label: '뇌파 변화', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
-        { label: '활력 점수', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less' },
+        { label: '뇌파 변화', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less', direction: 'down' },
+        { label: '활력 점수', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less', direction: 'down' },
       ],
     },
   },
@@ -268,12 +269,12 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: 'GABA를 바른 피부는 어떻게 달라졌을까요?',
       summary: 'GABA를 바른 피부는 장벽이 더 빨리 회복됐고, 피부가 두꺼워지는 변화는 줄었습니다.',
-      note: '표시의 개수는 연구에서 관찰된 ‘더 많이·덜’의 방향만 나타내며, 실제 효과 크기나 수치를 뜻하지 않습니다.',
+      note: '화살표는 지표의 증가·감소 방향을, 문구는 두 조건 사이의 상대적인 차이를 보여줍니다. 시각 요소의 크기는 실제 효과 크기나 수치를 뜻하지 않습니다.',
       referenceLabel: '비교 조건',
       resultLabel: 'GABA를 바른 조건',
       rows: [
-        { label: '장벽 회복', reference: '더 느리게 회복됐습니다', result: '더 빨리 회복됐습니다', visual: 'result-more' },
-        { label: '피부가 두꺼워지는 변화', reference: '더 많이 나타났습니다', result: '덜 나타났습니다', visual: 'result-less' },
+        { label: '장벽 회복', reference: '더 느리게 회복됐습니다', result: '더 빨리 회복됐습니다', visual: 'result-more', direction: 'up' },
+        { label: '피부가 두꺼워지는 변화', reference: '더 많이 나타났습니다', result: '덜 나타났습니다', visual: 'result-less', direction: 'down' },
       ],
     },
   },
@@ -366,12 +367,12 @@ const sleepResultTopic: Pick<ResearchTopic, 'id' | 'chart'> = {
     kind: 'comparison',
     title: '수면 연구 결과를 방향으로 비교',
     summary: 'GABA 섭취 기간에는 잠드는 시간이 더 짧고, 전체 비렘수면이 더 길었습니다.',
-    note: '표시의 개수는 연구에서 관찰된 ‘더 많이·덜’의 방향만 나타내며, 실제 효과 크기나 수치를 뜻하지 않습니다.',
+    note: '화살표는 지표의 증가·감소 방향을, 문구는 두 조건 사이의 상대적인 차이를 보여줍니다. 시각 요소의 크기는 실제 효과 크기나 수치를 뜻하지 않습니다.',
     referenceLabel: '비교 조건',
     resultLabel: 'GABA 섭취',
     rows: [
-      { label: '잠드는 시간', reference: '더 길었습니다', result: '더 짧았습니다', visual: 'result-less' },
-      { label: '전체 비렘수면', reference: '더 짧았습니다', result: '더 길었습니다', visual: 'result-more' },
+      { label: '잠드는 시간', reference: '더 길었습니다', result: '더 짧았습니다', visual: 'result-less', direction: 'down' },
+      { label: '전체 비렘수면', reference: '더 짧았습니다', result: '더 길었습니다', visual: 'result-more', direction: 'up' },
     ],
   },
 };
@@ -672,17 +673,18 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
             {comparisonChart.rows.map((row) => {
               const referenceSignal = row.visual === 'result-less' ? 'more' : 'less';
               const resultSignal = row.visual === 'result-less' ? 'less' : 'more';
+              const DirectionIcon = row.direction === 'up' ? ArrowUpRight : ArrowDownRight;
               return (
                 <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
                   <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong></div>
                   <div className="guide-outcome-lanes">
                     <div className="guide-outcome-lane is-reference">
                       <div className="guide-outcome-lane-top"><span>{comparisonChart.referenceLabel}</span><strong>{row.reference}</strong></div>
-                      <span className={`guide-outcome-lane-signal is-${referenceSignal}`} aria-hidden="true"><i /><i /></span>
+                      <span className={`guide-outcome-lane-signal is-${referenceSignal} is-direction-${row.direction}`} aria-hidden="true"><DirectionIcon size={16} strokeWidth={2.2} /><em>{row.direction === 'up' ? '증가' : '감소'}</em></span>
                     </div>
                     <div className="guide-outcome-lane is-result">
                       <div className="guide-outcome-lane-top"><span>{comparisonChart.resultLabel}</span><strong>{row.result}</strong></div>
-                      <span className={`guide-outcome-lane-signal is-${resultSignal}`} aria-hidden="true"><i /><i /></span>
+                      <span className={`guide-outcome-lane-signal is-${resultSignal} is-direction-${row.direction}`} aria-hidden="true"><DirectionIcon size={16} strokeWidth={2.2} /><em>{row.direction === 'up' ? '증가' : '감소'}</em></span>
                     </div>
                   </div>
                 </div>

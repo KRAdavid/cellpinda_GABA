@@ -293,6 +293,7 @@
 .guide-outcome-summary>strong{color:var(--guide-ink);font-size:1em;line-height:1.55;letter-spacing:-.045em;word-break:keep-all}
 .guide-outcome-comparison-head{display:grid;grid-template-columns:minmax(110px,.7fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:0 10px 8px;color:#9bb1bc;font-size:.786em;font-weight:850;letter-spacing:-.02em}
 .guide-outcome-comparison-head>span:not(:first-child){display:flex;align-items:center;justify-content:center;gap:5px;text-align:center}
+.guide-outcome-comparison-head>span:not(:first-child){white-space:nowrap}
 .guide-outcome-comparison-head>span.is-reference{color:#6c8795}
 .guide-outcome-comparison-head>span.is-result{color:var(--guide-teal-dark)}
 .guide-outcome-comparison-head i{display:block;width:7px;height:7px;border-radius:50%;background:#b7d1da}
@@ -310,13 +311,16 @@
 .guide-outcome-lane.is-result .guide-outcome-lane-top>span{color:var(--guide-teal-dark)}
 .guide-outcome-lane-top>strong{min-height:2.65em;color:#38566a;font-size:.857em;font-weight:850;line-height:1.35;letter-spacing:-.045em;word-break:keep-all}
 .guide-outcome-lane.is-result .guide-outcome-lane-top>strong{color:#126f73}
-.guide-outcome-lane-signal{display:flex;align-items:center;gap:5px;height:9px}
-.guide-outcome-lane-signal i{display:block;width:17px;height:7px;border-radius:999px;background:#b7d1da;opacity:.28}
-.guide-outcome-lane-signal.is-less i:first-child{opacity:.86}
-.guide-outcome-lane-signal.is-more i{opacity:1}
-.guide-outcome-lane.is-result .guide-outcome-lane-signal i{background:linear-gradient(90deg,#55c9c6 0%,#168d98 100%)}
-.guide-outcome-lane.is-result .guide-outcome-lane-signal.is-less i{opacity:.28}
-.guide-outcome-lane.is-result .guide-outcome-lane-signal.is-less i:first-child{opacity:.86}
+.guide-outcome-lane-signal{display:flex;align-items:center;gap:6px;min-height:22px;color:#91aebc}
+.guide-outcome-lane-signal:before{content:"";display:block;flex:1;height:2px;border-radius:999px;background:currentColor;opacity:.28}
+.guide-outcome-lane-signal svg{flex:0 0 auto}
+.guide-outcome-lane-signal em{font-size:.714em;font-style:normal;font-weight:900;letter-spacing:-.03em;white-space:nowrap}
+.guide-outcome-lane-signal.is-more{color:#5b9cab}
+.guide-outcome-lane-signal.is-more:before{opacity:.72}
+.guide-outcome-lane-signal.is-less:before{opacity:.2}
+.guide-outcome-lane.is-result .guide-outcome-lane-signal{color:#158e98}
+.guide-outcome-lane.is-result .guide-outcome-lane-signal.is-less{color:#35aeb7}
+.guide-outcome-lane.is-result .guide-outcome-lane-signal.is-less:before{opacity:.4}
 .guide-outcome-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
 .guide-outcome-metric{position:relative;min-height:122px;padding:13px 14px;border-radius:12px;background:linear-gradient(145deg,#effafa,#f8fcfc);overflow:hidden}
 .guide-outcome-metric:after{content:"";position:absolute;right:-5px;bottom:-13px;width:58px;height:58px;border:1px solid rgba(18,154,163,.2);border-radius:50%;pointer-events:none}
@@ -353,7 +357,8 @@
   .guide-outcome-summary{margin:-1px 0 13px;padding:11px 12px}
   .guide-outcome-summary>strong{font-size:1em;line-height:1.55}
   .guide-outcome-comparison-head{display:flex;gap:13px;margin:-1px 0 10px;padding:8px 10px;background:#f6fbfc}
-  .guide-outcome-comparison-head>span:first-child{display:block;margin-right:auto}
+  .guide-outcome-comparison-head>span:first-child{display:block;flex:0 0 auto;margin-right:auto;white-space:nowrap}
+  .guide-outcome-comparison-head>span:not(:first-child){flex:0 0 auto}
   .guide-outcome-comparison-row{grid-template-columns:1fr;gap:9px;padding:13px 9px}
   .guide-outcome-comparison-metric{gap:3px}
   .guide-outcome-comparison-metric>strong{font-size:1.071em}
@@ -363,7 +368,7 @@
   .guide-outcome-lane-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
   .guide-outcome-lane-top>span{font-size:.786em;flex:0 0 auto}
   .guide-outcome-lane-top>strong{min-height:0;font-size:.929em;text-align:right}
-  .guide-outcome-lane-signal{height:8px}
+  .guide-outcome-lane-signal{min-height:20px}
   .guide-outcome-metric{min-height:116px;padding:12px}
   .guide-outcome-metric>strong{font-size:1.643em}
   .guide-outcome-metric-track{margin-top:13px}
