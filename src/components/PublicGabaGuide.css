@@ -654,7 +654,7 @@
 .guide-reading-progress-track span{display:block;height:100%;background:var(--guide-teal);transition:width .35s ease}
 .guide-reading-progress-meta{display:flex;align-items:center;gap:10px;width:min(1180px,calc(100% - 64px));min-height:35px;margin:0 auto;color:#78909f;font-size:11px;letter-spacing:.12em}
 .guide-reading-progress-meta>span{color:var(--guide-teal-dark);font-size:10px;font-weight:900}
-.guide-reading-progress-meta strong{color:var(--guide-ink);font-size:13px;letter-spacing:-.04em}
+.guide-reading-progress-meta strong{min-width:0;overflow:hidden;color:var(--guide-ink);font-size:13px;letter-spacing:-.04em;text-overflow:ellipsis;white-space:nowrap}
 .guide-reading-progress-meta small{margin-left:auto;color:#95aab5;font-size:11px;letter-spacing:.1em}
 
 @media(max-width:700px){

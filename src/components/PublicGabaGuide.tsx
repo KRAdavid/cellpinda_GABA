@@ -771,6 +771,10 @@ export default function PublicGabaGuide() {
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
+  const activeResearchTopic = researchTopics.find((topic) => topic.id === activeResearchTopicId);
+  const activeReadingLabel = activeChapterId === 'research' && activeResearchTopic
+    ? `${activeResearchTopic.title} 연구 결과`
+    : activeChapter.label;
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
@@ -1115,7 +1119,7 @@ export default function PublicGabaGuide() {
         <button type="button" className="guide-header-share" aria-label="페이지 공유하기" title="페이지 공유하기" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`}>
           <div className="guide-reading-progress-track" role="progressbar" aria-label="읽기 진행" aria-valuemin={0} aria-valuemax={readingChapters.length} aria-valuenow={Math.max(0, activeChapterIndex + 1)}><span aria-hidden="true" style={{ width: `${(Math.max(0, activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
-          <div className="guide-reading-progress-meta" role="status" aria-live="polite" aria-atomic="true" aria-label={`현재 읽는 장: ${activeChapter.label}. 전체 ${readingChapters.length}장 중 ${Math.max(0, activeChapterIndex + 1)}장.`}><span aria-hidden="true">지금 읽는 중</span><strong aria-hidden="true">{activeChapter.label}</strong><small aria-hidden="true">{`${String(Math.max(0, activeChapterIndex + 1)).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
+          <div className="guide-reading-progress-meta" role="status" aria-live="polite" aria-atomic="true" aria-label={`현재 읽는 장: ${activeReadingLabel}. 전체 ${readingChapters.length}장 중 ${Math.max(0, activeChapterIndex + 1)}장.`}><span aria-hidden="true">지금 읽는 중</span><strong aria-hidden="true">{activeReadingLabel}</strong><small aria-hidden="true">{`${String(Math.max(0, activeChapterIndex + 1)).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
         </div>
       </header>
       {menuOpen ? <button type="button" className="guide-menu-backdrop" aria-label="메뉴 닫기" onClick={() => setMenuOpen(false)} /> : null}
