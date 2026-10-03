@@ -724,6 +724,7 @@ export default function PublicGabaGuide() {
   const [recoveryPaused, setRecoveryPaused] = useState(false);
   const [recoveryReducedMotion, setRecoveryReducedMotion] = useState(false);
   const [recoveryInView, setRecoveryInView] = useState(false);
+  const [activeResearchTopicId, setActiveResearchTopicId] = useState<string | null>(null);
   const [largeText, setLargeText] = useState(() => {
     try {
       return window.localStorage.getItem(readingSizeStorageKey) === 'large';
@@ -801,6 +802,20 @@ export default function PublicGabaGuide() {
     }
     const observer = new IntersectionObserver(([entry]) => setRecoveryInView(entry.isIntersecting), { rootMargin: '-18% 0px -18% 0px' });
     observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.guide-research-detail-inline'));
+    if (!cards.length || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      const visibleCard = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+      if (!visibleCard) return;
+      setActiveResearchTopicId(visibleCard.target.id.replace(/^research-/, ''));
+    }, { rootMargin: '-28% 0px -42% 0px', threshold: [0.15, 0.35, 0.6] });
+    cards.forEach((card) => observer.observe(card));
     return () => observer.disconnect();
   }, []);
 
@@ -1151,7 +1166,7 @@ export default function PublicGabaGuide() {
             <div className="guide-research-map" aria-label="GABA에서 다섯 연구 영역으로 확장되는 구조">
               <svg className="guide-research-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 43V22M57 50H78M56 56L77 77M44 56L23 77M43 50H22" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth=".65" strokeDasharray="1 2" /></svg>
               <div className="guide-research-orbit-core"><strong>GABA</strong></div>
-              {researchTopics.map((topic) => <button type="button" className="guide-research-map-item" key={topic.id} onClick={() => scrollTo(`research-${topic.id}`)} aria-label={`${topic.title} 연구 카드로 이동`}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><span><strong>{topic.title}</strong></span></button>)}
+              {researchTopics.map((topic) => <button type="button" className={`guide-research-map-item${activeResearchTopicId === topic.id ? ' is-active' : ''}`} key={topic.id} onClick={() => scrollTo(`research-${topic.id}`)} aria-current={activeResearchTopicId === topic.id ? 'true' : undefined} aria-label={`${topic.title} 연구 카드로 이동`}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><span><strong>{topic.title}</strong></span></button>)}
             </div>
             <div className="guide-rail"><b>읽는 순서</b><ol><li><b>01</b>{' '}지도</li><li><b>02</b>{' '}대상</li><li><b>03</b>{' '}결과</li><li><b>04</b>{' '}해석</li></ol></div>
             <div className="guide-research-key" aria-label="연구 카드 표시 기준">
