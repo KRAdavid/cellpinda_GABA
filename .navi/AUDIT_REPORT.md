@@ -1,5 +1,12 @@
 # Audit Report
 
+## Latest Public Release Recheck — 48f4876 — 2026-10-03
+
+- 연구 상세 카드가 보이는 위치를 감지해 연구 지도에서 현재 주제를 활성화하도록 보완했다. 지도 선택은 기존처럼 해당 카드로 이동하고, `aria-current`로 현재 맥락을 보조한다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
+- PR #68 checks `37087953864`, `37087953888`과 main push run `37088047547`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 HTTP 200, candidate `48f48764fd4fa06bb785a2b12cc5c639104e2dd2`, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL Chrome CDP fallback은 390px·1440px에서 가로 폭 `390/1425`, 44px 헤더·복사 컨트롤, 지도 클릭 후 `인지` 활성, runtime errors `[]`를 확인했다. Browser 플러그인은 사용할 수 없어 CDP fallback으로 대체했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Latest Public Release Recheck — d3ff9e3 — 2026-10-03
 
 - 연구 지도 5개 주제를 실제 선택 요소로 바꾸고, `인지·피부·근육·성장호르몬·면역`을 누르면 해당 상세 연구 카드로 이어지도록 연결했다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.

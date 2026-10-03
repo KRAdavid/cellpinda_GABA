@@ -1,5 +1,9 @@
 # Project Changelog
 
+최신 공개 재검증: 2026-10-03 / candidate `48f48764fd4fa06bb785a2b12cc5c639104e2dd2`
+
+연구 상세 카드를 읽는 동안 연구 지도에서 현재 주제를 활성화하고 지도 선택 상태를 `aria-current`와 함께 유지했다. PR #68 검사, main 배포·라이브 validator·390/1440px Chrome CDP fallback·지도 클릭 후 `인지` 활성 동작 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE`, `E-CDP-RESEARCH-MAP-ACTIVE`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE`, `E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE`.
+
 최신 공개 재검증: 2026-10-03 / candidate `d3ff9e3f27833f3719b76f0cc377468a23bcc421`
 
 연구 지도 5개 주제를 키보드·터치로 선택할 수 있게 하고 각 상세 연구 카드로 연결했다. PR #66 검사, main 배포·라이브 validator·390/1440px Chrome CDP·지도 선택 동작 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-MAP-NAV`, `E-CDP-RESEARCH-MAP-NAV`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-NAV`, `E-LIVE-PUBLIC-RESEARCH-MAP-NAV`.
