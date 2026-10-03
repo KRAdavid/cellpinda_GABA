@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — cbd2f8e — 2026-10-03
+
+- 연구 지도에서 주제를 선택할 때 상세 카드에도 즉시 활성 상태를 표시해 긴 모바일 페이지의 방향 감각을 보완했다. 새 과학·제품 주장이나 출처 변경은 없었다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 311,157, CSS 95,703, total assets 1,453,735. PR #110 checks와 main `37112425820`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `cbd2f8ea1d5b341dbe5804b5f16f756e157c553b`, generatedAt `2026-10-03T09:16:03.359Z`, HTTP 200, 70 hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. 라이브 CDP 390px에서 지도 `인지`와 카드 `research-cognition`이 함께 활성화되고 target top `113.09px`, rail bottom `105px`, document width `390px`, overlay false, errors `[]`를 확인했다. 1440px document width는 `1425px`였다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION`, `E-CDP-RESEARCH-MAP-ORIENTATION`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-ORIENTATION`, `E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION`.
+
 ## Latest Public Release Recheck — c6291f6 — 2026-10-03
 
 - 모바일에서 전역으로 숨겨지던 작은 장 제목을 다시 표시해 수면·회복, 연구 규모, 출처 읽기, 이야기 공유의 위치 단서를 복원했다. 과학 카피·제품 경계·연구 데이터는 변경하지 않았다.

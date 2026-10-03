@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 최신 공개 재검증: 2026-10-03 / candidate `cbd2f8ea1d5b341dbe5804b5f16f756e157c553b`
+
+연구 지도에서 주제를 선택하면 도착한 상세 카드도 즉시 활성화되도록 보완했다. 카드 테두리·그림자·왼쪽 포인트가 지도 선택과 동기화되어 `지도 → 대상 → 결과` 흐름을 한눈에 따라갈 수 있다. PR #110의 검증, main workflow `37112425820`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했고 Worker는 `STATIC_ONLY` 조건으로 건너뛰었다. live validator는 HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. Chrome CDP fallback에서 390px 연구 지도 클릭 후 선택 지도·상세 카드가 함께 활성화되고 카드 top `113.09px`, 읽기 레일 bottom `105px`, document width `390px`, 오류 오버레이·런타임 오류 0건을 확인했으며 1440px document width는 `1425px`였다. 새 과학 주장·제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION`, `E-CDP-RESEARCH-MAP-ORIENTATION`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-ORIENTATION`, `E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION`.
+
 ## 최신 공개 재검증: 2026-10-03 / candidate `c6291f6bd2c62e77529da767b1d2a985f4acaab5`
 
 모바일 CSS가 전역으로 숨기던 작은 장 제목을 다시 표시해 `수면과 회복`, `연구 규모`, `출처 읽기`, `이야기 공유`의 읽기 위치 단서를 복원했다. PR #108의 `release-verify`·`site-quality-verify`, main workflow `37111226511`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. live validator는 HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. Chrome CDP fallback에서 390px 제목 위치와 레일 하단 간격, 320px 가로 폭, 1440px 데스크톱 레이아웃을 재확인했다. 새 과학 주장·제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-LABELS`, `E-CDP-MOBILE-CHAPTER-LABELS`, `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-LABELS`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-LABELS`.
