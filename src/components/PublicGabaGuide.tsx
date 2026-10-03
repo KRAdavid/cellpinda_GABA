@@ -890,7 +890,7 @@ export default function PublicGabaGuide() {
     window.history.replaceState(null, '', `#${hash}`);
   };
 
-  const isNavCurrent = (id: ReadingChapterId) => {
+  const isNavCurrent = (id: ReadingChapterId | 'recovery-break') => {
     if (id === 'academic') return activeChapterId === 'academic' || activeChapterId === 'research';
     return activeChapterId === id;
   };
@@ -1010,6 +1010,7 @@ export default function PublicGabaGuide() {
       <header className="guide-header" ref={headerRef}>
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈"><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a>
         <nav id="guide-primary-navigation" className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
+          <a href="#recovery-break" aria-current={isNavCurrent('recovery-break') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('recovery-break'); }}>수면과 회복</a>
           <a href="#history" aria-current={isNavCurrent('history') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견</a>
           <a href="#basics" aria-current={isNavCurrent('basics') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('basics'); }}>GABA란</a>
           <a href="#academic" aria-current={isNavCurrent('academic') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('academic'); }}>연구 지도</a>
@@ -1021,7 +1022,7 @@ export default function PublicGabaGuide() {
         <button type="button" className="guide-header-share" aria-label="페이지 공유하기" title="페이지 공유하기" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`}>
           <div className="guide-reading-progress-track" role="progressbar" aria-label="읽기 진행" aria-valuemin={0} aria-valuemax={readingChapters.length} aria-valuenow={Math.max(0, activeChapterIndex + 1)}><span aria-hidden="true" style={{ width: `${(Math.max(0, activeChapterIndex + 1) / readingChapters.length) * 100}%` }} /></div>
-          <div className="guide-reading-progress-meta"><span>지금 읽는 중</span><strong aria-live="polite">{activeChapter.label}</strong><small>{`${String(Math.max(0, activeChapterIndex + 1)).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
+          <div className="guide-reading-progress-meta" role="status" aria-live="polite" aria-atomic="true" aria-label={`현재 읽는 장: ${activeChapter.label}. 전체 ${readingChapters.length}장 중 ${Math.max(0, activeChapterIndex + 1)}장.`}><span aria-hidden="true">지금 읽는 중</span><strong aria-hidden="true">{activeChapter.label}</strong><small aria-hidden="true">{`${String(Math.max(0, activeChapterIndex + 1)).padStart(2, '0')} / ${String(readingChapters.length).padStart(2, '0')}`}</small></div>
         </div>
       </header>
 
