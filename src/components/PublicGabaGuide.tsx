@@ -811,6 +811,7 @@ export default function PublicGabaGuide() {
   const recoveryBreakRef = useRef<HTMLElement | null>(null);
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
+  const videoFeatureRef = useRef<HTMLElement | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
@@ -1040,6 +1041,9 @@ export default function PublicGabaGuide() {
     } else if (!videoStarted) {
       setVideoFrameReady(false);
       setVideoStarted(true);
+    }
+    if (isNewVideo || !videoStarted) {
+      window.requestAnimationFrame(() => videoFeatureRef.current?.focus({ preventScroll: true }));
     }
     if (window.matchMedia('(max-width: 700px)').matches) {
       const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
@@ -1382,9 +1386,9 @@ export default function PublicGabaGuide() {
             <div className="guide-section-heading"><div><p className="guide-section-number">10 · 전문가 영상</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>관심 있는 영상을 고르면<br />바로 재생됩니다.</p></div>
             <p className="guide-section-lead guide-video-gallery-lead">의사와 과학자들이 공개한 짧은 영상을 수면, GABA의 기본 역할, 자율신경, 연구 읽기 주제로 나누어 모았습니다.</p>
             <div className="guide-video-gallery">
-              <article className="guide-video-feature" id="expert-video-feature" aria-live="polite">
+              <article ref={videoFeatureRef} className="guide-video-feature" id="expert-video-feature" tabIndex={-1} aria-labelledby="expert-video-title" aria-live="polite">
                 <div className={`guide-video-feature-media${videoStarted && !videoFrameReady ? ' is-loading' : ''}`} aria-busy={videoStarted && !videoFrameReady}>{videoStarted ? <><iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" onLoad={() => setVideoFrameReady(true)} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /><span className="guide-video-feature-loading" role="status"><LoaderCircle size={18} aria-hidden="true" /> 영상을 불러오는 중</span></> : <button type="button" className="guide-video-feature-poster" onClick={() => { setVideoFrameReady(false); setVideoStarted(true); }} aria-label={`${activeVideo.title} 영상 재생`}><img src={videoThumbnailUrl(activeVideo.id)} onError={(event) => fallbackVideoThumbnail(event, activeVideo.id)} onLoad={(event) => validateVideoThumbnail(event, activeVideo.id)} alt={`${activeVideo.title} 영상 썸네일`} fetchPriority="high" decoding="async" /><span className="guide-video-feature-poster-shade" aria-hidden="true" /><span className="guide-video-feature-poster-play"><Play size={20} fill="currentColor" aria-hidden="true" /><strong>영상 재생</strong></span></button>}</div>
-                <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>선택 즉시 재생</span></div><h3>{activeVideo.title}</h3><p>{activeVideo.channel}</p><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a></div>
+                <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>선택 즉시 재생</span></div><h3 id="expert-video-title">{activeVideo.title}</h3><p>{activeVideo.channel}</p><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a></div>
               </article>
                 <div className="guide-video-board" aria-label="전문가 영상 게시판">
                 <div className="guide-video-board-head"><span>전문가 영상</span><strong>{visibleExpertVideos.length}개 영상</strong></div>
