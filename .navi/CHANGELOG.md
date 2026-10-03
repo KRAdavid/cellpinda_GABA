@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 출처 읽기 장의 시각·시맨틱 계층 보강: 2026-10-04 / candidate `4379325e8773cbbea9ee1a9aee86ed02ac282bab`
+
+`출처 읽기` 장에 `연구를 이해하는 마지막 단계` h2와 `연구 카드 → 원문 출처` 흐름을 추가하고 `aria-labelledby`를 연결했다. PR #138의 release-verify·site-quality-verify, main workflow `37131613828`의 release-verify·worker-readiness·정적 Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, 정적 모드, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390/1440px에서 출처 읽기 제목 정렬과 13개 장 직접 링크, 모바일 메뉴·전문가 영상 필터·선택 즉시 재생·가로 넘침·브라우저 오류 없음을 확인했다. 기존 공개 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 사용자 결정 대기(`USER_DECISION`)로 유지한다. 증적: `E-LOCAL-BUILD-READING-NOTE-20261004`, `E-PLAYWRIGHT-READING-NOTE-20261004`, `E-DEPLOY-PIPELINE-READING-NOTE-20261004`, `E-LIVE-PUBLIC-READING-NOTE-20261004`.
+
 ## 모바일 장 딥링크를 실제 제목에 정렬: 2026-10-03 / candidate `a189d9432cc7003def5a791b381c6b15a55aab09`
 
 상단 메뉴와 장 직접 링크가 섹션의 넓은 상단 여백에 멈추지 않고 실제 장 제목을 sticky 읽기 레일 아래에 보여주도록 보정했다. PR #136의 release-verify·site-quality-verify, main workflow `37130208546`의 release-verify·worker-readiness·정적 Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, 정적 모드, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390/1440px에서 `#basics`, `#recovery-break`, `#research`, `#expert-videos`, `#final` 제목 정렬과 `02 / 12`, `보충 / 12`, `06 / 12`, `10 / 12`, `12 / 12` 진행표를 확인했고 모바일 메뉴 이동·영상 필터·선택 즉시 재생·가로 넘침·브라우저 오류가 없었다. 기존 공개 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 사용자 결정 대기(`USER_DECISION`)로 유지한다. 증적: `E-LOCAL-BUILD-CHAPTER-DEEPLINK-20261003`, `E-PLAYWRIGHT-CHAPTER-DEEPLINK-20261003`, `E-DEPLOY-PIPELINE-CHAPTER-DEEPLINK-20261003`, `E-LIVE-PUBLIC-CHAPTER-DEEPLINK-20261003`.
