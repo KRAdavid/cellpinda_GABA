@@ -1,5 +1,13 @@
 # Completion Report
 
+## Mobile Expert Video Topic Visibility Release Recheck — 71960f0 — 2026-10-04
+
+- 전문가 영상 주제 필터를 모바일 가로 스크롤에서 전체 노출형 줄바꿈으로 바꿔 320px·390px에서 7개 주제를 즉시 읽고 선택할 수 있게 고도화했다. 선택 후 `수용체` 영상 1개와 iframe 재생 상태를 확인했다.
+- 로컬 typecheck/UI contract/127 tests/build, PR #147 검사, main workflow `37138030444`, Pages 배포·라이브 smoke·release status와 공개 validator가 통과했다. 공개 320/390/1440px Playwright Chrome fallback에서 모든 필터 표시·가로 넘침 없음·영상 선택 전환을 확인했다.
+- 공개 candidate는 `71960f083e21577641074358b74a0ca447cdd216`이며, 제품 독립 과학 안내·연구 데이터·출처 경계는 유지했다. 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 NAVI 상태는 `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FILTERS-20261004`, `E-PLAYWRIGHT-VIDEO-FILTERS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004`, `E-LIVE-PUBLIC-VIDEO-FILTERS-20261004`.
+
 ## Explicit Original-Source Action Release Recheck — 32b37a1 — 2026-10-04
 
 - 출처 읽기 카드에 `원문 보기`를 명시해 모바일·고령 사용자도 원문 이동을 바로 이해하도록 고도화했다. 기존 네 가지 연구 읽기 질문과 Yoto et al. 2012 PubMed 예시는 유지했다.

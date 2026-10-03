@@ -1,5 +1,13 @@
 # Audit Report
 
+## Mobile Expert Video Topic Visibility Recheck — 71960f0 — 2026-10-04
+
+- 모바일에서 일부 주제가 가로 스크롤 뒤에 숨던 탐색 단서를 전체 주제 줄바꿈으로 바꿔 320px·390px에서 7개 필터가 모두 보이도록 보완했다. `수용체` 선택은 해당 영상 1개와 iframe으로 전환된다.
+- PR #147 검사, 로컬 typecheck/UI contract/127 tests/build, main workflow `37138030444`, Pages 배포·라이브 smoke·release status, 공개 validator와 320/390/1440px Playwright Chrome fallback이 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FILTERS-20261004`, `E-PLAYWRIGHT-VIDEO-FILTERS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004`, `E-LIVE-PUBLIC-VIDEO-FILTERS-20261004`.
+
 ## Explicit Original-Source Action Recheck — 32b37a1 — 2026-10-04
 
 - 출처 카드에 `원문 보기`를 추가해 아이콘 의미를 추측하지 않고 PubMed 원문으로 이어지는 행동을 한눈에 인식하도록 보강했다. 이는 기존 연구 결과나 제품 경계를 바꾸지 않는 정보 구조 개선이다.

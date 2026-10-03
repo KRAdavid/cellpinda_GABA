@@ -3286,6 +3286,50 @@
       "captured_at": "2026-10-03T16:26:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261004-SOURCE-ACTION",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-FILTERS-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 주제 필터를 모바일 가로 스크롤에서 전체 주제 즉시 노출형 줄바꿈으로 바꾼 PR #147 후보의 로컬 검증이 통과했다. 320px·390px에서 7개 주제가 모두 보이고 가로 넘침이 없으며, 기존 영상 선택·iframe 재생 흐름과 제품 독립 경계를 유지했다.",
+      "locator": "PR #147 candidate 9d2fe20; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback 320/390/1440px: visibleFilterCount 7/7/7, filterRows 4/3/2, filterOverflowX false, errors []; `수용체` filter selected with visibleVideos 1 and iframeCount 1",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/147",
+      "captured_at": "2026-10-03T16:48:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-VIDEO-FILTERS",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-VIDEO-FILTERS-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본을 Chrome fallback으로 320px·390px·1440px에서 확인했다. 전문가 영상 주제 7개가 모든 화면에서 표시되고 모바일 가로 넘침이 없으며, `수용체` 선택 시 해당 영상 1개와 iframe이 정상 전환되고 브라우저 오류가 없었다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/; v40-video-filters.mjs; 320px visibleFilterCount 7, rows 4; 390px visibleFilterCount 7, rows 3; 1440px visibleFilterCount 7, rows 2; filterOverflowX false at all widths; interaction activeTopic true, visibleVideos 1, selectedLabel `수용체`, iframeCount 1, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/147",
+      "captured_at": "2026-10-03T16:48:55Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-VIDEO-FILTERS",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-006", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #147의 release-verify와 site-quality-verify가 통과했고 main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드에서 정상적으로 건너뛰었다.",
+      "locator": "PR #147 checks 37137939104 release-verify PASS and 37137939129 site-quality-verify PASS; merge commit 71960f083e21577641074358b74a0ca447cdd216; main workflow 37138030444 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37138030444",
+      "captured_at": "2026-10-03T16:48:55Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-VIDEO-FILTERS",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답하고 병합 SHA를 제공했으며, 전문가 영상 주제 필터의 전체 노출·원문 흐름·정적 번들·공개 데이터·제품 독립 경계를 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 71960f083e21577641074358b74a0ca447cdd216; generatedAt 2026-10-03T16:46:30.842Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Playwright video-filters results recorded in E-PLAYWRIGHT-VIDEO-FILTERS-20261004",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T16:48:55Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261004-VIDEO-FILTERS",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
     }
   ]
 }
