@@ -2781,6 +2781,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T21:06:51Z"
+    },
+    {
+      "id": "H-076",
+      "event": "전문 퍼블리싱 고도화로 첫 화면에 보이지 않는 전문가 영상 썸네일의 초기 네트워크 요청을 제거하고, 한국어 장문 제목의 균형 잡힌 줄바꿈을 적용한 PR #166을 main `d71ab6c`에 병합했다. 로컬 UI 계약·typecheck·127개 테스트·build, 초기 390px 영상 요청 0건, 320·390·1440px `#expert-videos` 직접 진입, 근육 연구 카드 이동, 가로 폭·브라우저 오류를 재확인했다. main workflow `37154976973`의 Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·candidate `d71ab6c`·공개 데이터 정합성이 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T21:27:57Z"
     }
   ]
 }

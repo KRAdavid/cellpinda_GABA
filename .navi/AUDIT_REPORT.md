@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Publishing Performance Audit — d71ab6c — 2026-10-04
+
+- 첫 화면에 보이지 않는 전문가 영상 썸네일을 `loading="lazy"`·낮은 우선순위로 전환하고 장문 제목에 균형 잡힌 줄바꿈을 적용했다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약·typecheck·127개 테스트·build가 통과했고, 로컬 390px 초기 진입에서 YouTube 썸네일 요청 0건을 확인했다. 공개 320·390·1440px `#expert-videos` 직접 진입은 제목 131/132/151px, `전문가 영상 10 / 12`, 가로 폭 일치, 오류 없음으로 안정적이었다. 근육 연구 카드 선택도 `근육 연구 결과`로 도착했다.
+- PR #166 및 main workflow `37154976973`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `d71ab6c`는 HTTP 200·STATIC·bundleHashes 70·claims 12·masterRecords 6·products 1·sharePages 6·teaser HOLD·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-PERFORMANCE-20261004`, `E-PLAYWRIGHT-MOBILE-PERFORMANCE-20261004`, `E-DEPLOY-PIPELINE-MOBILE-PERFORMANCE-20261004`, `E-LIVE-PUBLIC-MOBILE-PERFORMANCE-20261004`.
+
 ## Direct Chapter Link Stability Audit — 818cc2f — 2026-10-04
 
 - 공유 링크로 `#expert-videos` 같은 장에 직접 들어올 때 이미지·폰트·레이아웃 로딩 순서에 따라 제목이 늦게 정렬될 수 있는 흐름을 PR #165에서 보완했다. 초기 정렬에 더해 `window.load`, `document.fonts`, `ResizeObserver`와 180·420·780·1200·1800ms 안정화 재정렬을 연결했다.

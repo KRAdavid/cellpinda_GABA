@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 모바일 퍼블리싱 성능·타이포그래피 고도화 공개 배포: 2026-10-04 / candidate `d71ab6c`
+
+첫 화면에 보이지 않는 전문가 영상 썸네일을 지연 로딩으로 전환해 초기 모바일 진입 요청을 줄이고, 한국어 장문 제목에 균형 잡힌 줄바꿈을 적용했다. PR #166, main workflow `37154976973`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px 직접 링크, 초기 영상 요청 0건, 연구 지도 근육 카드 이동, 가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-PERFORMANCE-20261004`, `E-PLAYWRIGHT-MOBILE-PERFORMANCE-20261004`, `E-DEPLOY-PIPELINE-MOBILE-PERFORMANCE-20261004`, `E-LIVE-PUBLIC-MOBILE-PERFORMANCE-20261004`.
+
 ## 직접 공유 링크 정렬 안정화 공개 배포: 2026-10-04 / candidate `818cc2f`
 
 `#expert-videos` 같은 장으로 직접 진입할 때 이미지·폰트·레이아웃이 늦게 안정화되어 제목이 어긋날 수 있는 흐름을 PR #165에서 보완했다. 초기 정렬과 다중 안정화 시점, `window.load`·`document.fonts`·`ResizeObserver` 재정렬을 적용했다. main workflow `37153757926`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px Chrome fallback에서 제목·진행 레일·영상 영역·가로 폭·오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-DEEP-LINK-ALIGN-20261004`, `E-PLAYWRIGHT-DEEP-LINK-ALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-ALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-ALIGN-20261004`.

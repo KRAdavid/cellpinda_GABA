@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Publishing Performance Red-Team Recheck — d71ab6c — 2026-10-04
+
+- 초기 390px 진입에서 전문가 영상 썸네일 네트워크 요청이 0건인지, `#expert-videos` 직접 진입 뒤 필요한 썸네일만 로드되는지 공격적으로 확인했다. 320·390·1440px에서 제목은 131/132/151px에 정렬되고 진행 상태는 `전문가 영상 10 / 12`로 유지됐다.
+- 연구 지도에서 근육 카드를 선택하면 `근육 연구 결과` 카드로 이동했고, 공개본의 가로 폭은 각 viewport와 일치했으며 콘솔·페이지 오류가 없었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 지연 로딩과 제목 줄바꿈 변경은 영상·연구 내용, 출처, 제품 독립 경계를 바꾸지 않았다. 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없으므로 RT-001·RT-002·RT-003은 계속 `OPEN`, 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-PERFORMANCE-20261004`, `E-PLAYWRIGHT-MOBILE-PERFORMANCE-20261004`, `E-DEPLOY-PIPELINE-MOBILE-PERFORMANCE-20261004`, `E-LIVE-PUBLIC-MOBILE-PERFORMANCE-20261004`.
+
 ## Direct Chapter Link Stability Red-Team Recheck — 818cc2f — 2026-10-04
 
 - 320·390·1440px에서 `#expert-videos` 직접 진입을 반복 재현해 초기 화면·지연 로딩 후·안정화 시점의 제목 위치, 읽기 진행 레일, 영상 영역, 문서 폭을 공격적으로 확인했다. 제목은 131.34/131.63/150.50px에 놓였고 진행 상태는 `전문가 영상 10 / 12`로 유지됐다.
