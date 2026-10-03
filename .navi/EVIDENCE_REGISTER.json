@@ -2263,6 +2263,50 @@
       "captured_at": "2026-10-03T06:28:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-OUTCOME-DIRECTION",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-MENU-FOCUS",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일·태블릿 메뉴가 열린 동안 배경 콘텐츠를 분리하고 body 스크롤을 잠그며, 메뉴를 닫을 때 원래 상태로 복원하도록 보완했다. 연구 카피·제품 경계는 변경하지 않았고 로컬 품질 검사를 통과했다.",
+      "locator": "PR #98 candidate 727a666; pnpm test PASS 127/127; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm run build PASS; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1448098; local Chrome CDP 390px opened menu with backdrop, body overflow hidden, nav z-index 22, closed menu restored overflow visible; 1440px kept desktop nav and no backdrop",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/98",
+      "captured_at": "2026-10-03T06:45:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-MOBILE-MENU-FOCUS",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-MOBILE-MENU-FOCUS",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback에서 모바일 메뉴 열림·닫힘 상태를 확인한 결과, 열린 메뉴는 배경과 시각적으로 분리되고 body 스크롤이 잠기며, 닫으면 backdrop이 제거되고 스크롤이 복원됐다. 데스크톱에서는 기존 내비게이션을 유지했다.",
+      "locator": "temporary Chrome CDP fallback; local candidate 727a666 at http://127.0.0.1:4173/ and live candidate 3d788e39ef4d1dfa9d6d20845380ddcf7bfcc255 at https://kradavid.github.io/gaba_info/; 390px opened state expanded=true, backdrop=true, overflow=hidden, nav z-index 22; close state expanded=false, backdrop=false, overflow=visible, document scrollWidth 390; 1440px nav display flex, backdrop absent, document scrollWidth 1425",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/98",
+      "captured_at": "2026-10-03T06:48:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-MOBILE-MENU-FOCUS",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 메뉴 포커스 보완 PR #98의 필수 검사를 통과했고 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #98 checks 37104089583 and 37104089543 PASS; merge commit 3d788e39ef4d1dfa9d6d20845380ddcf7bfcc255; main workflow 37104179510 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37104179510",
+      "captured_at": "2026-10-03T06:48:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-MOBILE-MENU-FOCUS",
+      "claim_refs": ["C-001", "C-002", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 메뉴 포커스 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 390px에서 메뉴의 실제 열림·닫힘과 스크롤 잠금·복원을, 1440px에서 기존 데스크톱 내비게이션과 가로 폭을 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 3d788e39ef4d1dfa9d6d20845380ddcf7bfcc255; generatedAt 2026-10-03T06:47:43.507Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px opened state expanded=true/backdrop=true/overflow hidden and close state expanded=false/backdrop=false/overflow visible/document scrollWidth 390; live 1440px nav display flex/backdrop absent/document scrollWidth 1425",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T06:49:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-MOBILE-MENU-FOCUS",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }

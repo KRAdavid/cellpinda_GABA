@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 3d788e3 — 2026-10-03
+
+- 모바일·태블릿 메뉴가 열린 상태에서 배경을 분리하고 body 스크롤을 잠그며, 배경 버튼으로 닫을 수 있도록 보완했다. 닫은 뒤 `overflow: visible`과 메뉴 상태가 복원된다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 309,865, CSS 92,953, total 1,448,098.
+- PR #98 checks `37104089583`·`37104089543`와 main `37104179510` release-verify/worker-readiness/Pages publish/smoke-live/release-status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `3d788e39ef4d1dfa9d6d20845380ddcf7bfcc255`, generatedAt `2026-10-03T06:47:43.507Z`, HTTP 200, 70 hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. Live CDP 390px에서 메뉴 열림·닫힘과 스크롤 잠금·복원, 1440px에서 데스크톱 내비게이션과 가로 폭 1425를 확인했다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS`, `E-CDP-MOBILE-MENU-FOCUS`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS`.
+
 ## Latest Public Release Recheck — cf2f123 — 2026-10-03
 
 - 연구 비교 도표에서 효과 크기처럼 보일 수 있던 장식형 신호를 증가·감소 방향 화살표와 명시적 라벨로 바꿨다. 조건명은 모바일에서도 한 단위로 유지된다.

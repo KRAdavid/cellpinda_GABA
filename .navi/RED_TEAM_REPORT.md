@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — 3d788e3 — 2026-10-03
+
+- 모바일·태블릿 메뉴가 열린 상태에서 배경 콘텐츠가 계속 스크롤되어 사용자의 읽기 위치를 잃을 수 있던 결함을 PR #98에서 보완했다. backdrop, `overflow: hidden`, 배경 버튼 닫힘과 닫힌 뒤 복원을 확인했으며 새 치명적 결함은 확인되지 않았다.
+- PR #98 checks, main `37104179510`, live validator, 390/1440px CDP를 재확인했다. 이번 변경으로 새 과학·제품 주장은 추가되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS`, `E-CDP-MOBILE-MENU-FOCUS`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS`.
+
 ## Latest Red-Team Recheck — cf2f123 — 2026-10-03
 
 - 기존 비교 도표의 장식형 신호가 효과 크기처럼 읽힐 가능성을 PR #96에서 증가·감소 방향 화살표와 명시적 라벨로 보완했다. 320px 조건명 중간 줄바꿈도 수정했으며 새 치명적 결함은 확인되지 않았다.
