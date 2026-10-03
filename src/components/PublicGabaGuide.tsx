@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type SyntheticEvent, type TouchEvent } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type SyntheticEvent, type TouchEvent } from 'react';
 import {
   ArrowDown,
   ArrowDownRight,
@@ -833,7 +833,7 @@ export default function PublicGabaGuide() {
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.title = '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide';
     const description = '수면과 회복의 관계부터 1950년 GABA 발견, 신경계 연구, 국내외 활용과 발효 GABA의 안전성 기록까지 쉽게 읽는 공개 안내서입니다.';
     const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
@@ -854,8 +854,9 @@ export default function PublicGabaGuide() {
       root.style.scrollBehavior = previousScrollBehavior;
       window.dispatchEvent(new Event('scroll'));
     };
-    const firstFrame = window.requestAnimationFrame(() => window.requestAnimationFrame(alignHashTarget));
-    const settleTimers = [180, 600, 1200].map((delay) => window.setTimeout(alignHashTarget, delay));
+    alignHashTarget();
+    const firstFrame = window.requestAnimationFrame(alignHashTarget);
+    const settleTimers = [180, 420, 780].map((delay) => window.setTimeout(alignHashTarget, delay));
     return () => {
       cancelled = true;
       window.cancelAnimationFrame(firstFrame);
