@@ -1109,3 +1109,46 @@
   .guide-outcome-signal-row>span{font-size:.86em}
   .guide-outcome-signal-row>strong{font-size:.93em}
 }
+
+/* v38 source bridge: turn the final reading handoff into a calm, scannable editorial panel. */
+.guide-reading-note{padding:94px 0;background:linear-gradient(180deg,#f7fbfd 0%,#f1f8f9 100%)}
+.guide-reading-note-layout{display:grid;grid-template-columns:minmax(270px,.76fr) minmax(0,1.24fr);align-items:start;gap:54px}
+.guide-reading-note-intro{padding-top:7px}
+.guide-reading-note h2{max-width:11ch;margin:14px 0 0;font-size:clamp(36px,4vw,55px);line-height:1.14}
+.guide-reading-note-copy{max-width:38ch;margin:25px 0 0;color:#637d91;font-size:16px;line-height:1.85;letter-spacing:-.035em}
+.guide-reading-note-flow{display:flex;align-items:center;gap:12px;margin-top:30px;padding-top:17px;border-top:1px solid #d3e5e9;color:#79919f;font-size:13px;font-weight:750}
+.guide-reading-note-flow span:first-child,.guide-reading-note-flow span:last-child{color:var(--guide-teal-dark);font-weight:850}
+.guide-reading-note-flow i{color:#9bb6c2;font-style:normal}
+.guide-reading-note-panel{min-width:0;padding:25px 26px 24px;border:1px solid #d6e7eb;border-radius:24px;background:#fff;box-shadow:0 16px 34px rgba(23,72,92,.06)}
+.guide-reading-note-panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding-bottom:16px;border-bottom:1px solid #e2edf0;color:#6c8796;font-size:12px;font-weight:850;letter-spacing:-.025em}
+.guide-reading-note-panel-head strong{color:var(--guide-teal-dark);font-size:11px;letter-spacing:.13em}
+.guide-reading-note-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;margin:0;padding:0;list-style:none}
+.guide-reading-note-steps li{display:flex;align-items:flex-start;gap:12px;min-width:0;padding:18px 0 17px;border-bottom:1px solid #e3eef1}
+.guide-reading-note-steps li>span{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:29px;height:29px;border:1px solid #9ed7d7;border-radius:50%;color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:.05em}
+.guide-reading-note-steps li>div{min-width:0}
+.guide-reading-note-steps strong{display:block;color:var(--guide-ink);font-size:15px;line-height:1.45;letter-spacing:-.045em}
+.guide-reading-note-steps small{display:block;margin-top:5px;color:#728c9b;font-size:13px;line-height:1.55;letter-spacing:-.035em}
+.guide-reading-note-source{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;margin-top:19px;padding:17px 42px 17px 18px;border:1px solid #cfe6e7;border-radius:16px;background:#f4fbfb;color:var(--guide-ink);text-decoration:none}
+.guide-reading-note-source:hover{border-color:#75c9ca;background:#eef9f9}
+.guide-reading-note-source:focus-visible{outline:3px solid rgba(18,154,163,.24);outline-offset:3px}
+.guide-reading-note-source-kicker{grid-column:1/-1;color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.08em}
+.guide-reading-note-source strong{display:block;min-width:0;color:var(--guide-ink);font-size:15px;line-height:1.45;letter-spacing:-.04em;overflow-wrap:anywhere}
+.guide-reading-note-source small{grid-column:1/-1;color:#708a99;font-size:12px;line-height:1.55;letter-spacing:-.035em}
+.guide-reading-note-source>svg{position:absolute;top:19px;right:17px;color:var(--guide-teal-dark)}
+@media(max-width:700px){
+  .guide-section.guide-reading-note{padding-top:110px;padding-bottom:78px}
+  .guide-reading-note-layout{display:block}
+  .guide-reading-note h2{max-width:none;font-size:38px;line-height:1.16}
+  .guide-reading-note-copy{max-width:none;margin-top:20px;font-size:16px;line-height:1.8}
+  .guide-reading-note-flow{margin-top:24px}
+  .guide-reading-note-panel{margin-top:26px;padding:19px 17px 18px;border-radius:20px}
+  .guide-reading-note-panel-head{align-items:flex-start;display:block;padding-bottom:13px;font-size:14px;line-height:1.45}
+  .guide-reading-note-panel-head strong{display:block;margin-top:5px;font-size:11px}
+  .guide-reading-note-steps{display:block}
+  .guide-reading-note-steps li{padding:16px 0 15px}
+  .guide-reading-note-steps strong{font-size:16px}
+  .guide-reading-note-steps small{font-size:14px;line-height:1.6}
+  .guide-reading-note-source{margin-top:18px;padding:16px 39px 16px 15px}
+  .guide-reading-note-source strong{font-size:16px}
+  .guide-reading-note-source small{font-size:13px;line-height:1.6}
+}
