@@ -1,5 +1,9 @@
 # Project Changelog
 
+최신 공개 재검증: 2026-10-03 / candidate `4604805e746be4d28b34fb200196ce8d5905c85f`
+
+전문가 영상 게시판에서 현재 선택된 카드에 `재생 중` 상태를 추가해 플레이어와 목록의 연결을 명확히 했다. PR #79 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-VIDEO-SELECTION-STATE`, `E-CDP-VIDEO-SELECTION-STATE`, `E-DEPLOY-PIPELINE-VIDEO-SELECTION-STATE`, `E-LIVE-PUBLIC-VIDEO-SELECTION-STATE`.
+
 최신 공개 재검증: 2026-10-03 / candidate `95c3830984d09ee8baca62ebafacd3a0c8c3d715`
 
 전문가 영상 카드를 선택한 직후 검은 빈 iframe처럼 보이던 구간을 로딩 오버레이와 `영상을 불러오는 중` 상태로 보완하고, iframe 로드 완료 후 오버레이가 사라지도록 했다. `prefers-reduced-motion`에서는 스피너를 정지한다. PR #77 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-VIDEO-LOADING`, `E-CDP-VIDEO-LOADING`, `E-DEPLOY-PIPELINE-VIDEO-LOADING`, `E-LIVE-PUBLIC-VIDEO-LOADING`.

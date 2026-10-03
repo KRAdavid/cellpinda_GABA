@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 4604805 — 2026-10-03
+
+- PR #79에서 전문가 영상 게시판의 현재 선택 카드에 `재생 중` 상태를 추가해 플레이어와 목록의 연결을 명확히 했다. 즉시 재생·로딩 오버레이·제품 독립 정보 흐름은 유지했다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build·정적 bundle·성능 예산이 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,444,197 <= 1,650,000` bytes였고 초기 JS 310,538 bytes·CSS 92,953 bytes였다.
+- PR #79 checks `37093437327`, `37093437351`와 main workflow `37093519815`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다. 과거 Git 이력의 local-path scanner annotation은 비차단 경고로 남았다.
+- 라이브 validator는 candidate `4604805e746be4d28b34fb200196ce8d5905c85f`, generatedAt `2026-10-03T03:33:03.789Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL 390px Chrome CDP fallback에서 두 번째 전문가 영상 선택 시 autoplay iframe·`aria-pressed=true`·`재생 중` 배지·가로 폭 390·runtime errors `[]`를 확인했다. Browser 플러그인은 사용할 수 없어 CDP fallback으로 대체했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-VIDEO-SELECTION-STATE`, `E-CDP-VIDEO-SELECTION-STATE`, `E-DEPLOY-PIPELINE-VIDEO-SELECTION-STATE`, `E-LIVE-PUBLIC-VIDEO-SELECTION-STATE`.
+
 ## Latest Public Release Recheck — 95c3830 — 2026-10-03
 
 - PR #77에서 전문가 영상 카드를 선택한 직후 검은 빈 iframe처럼 보이던 구간을 로딩 오버레이와 `영상을 불러오는 중` 상태로 보완했다. iframe `onLoad` 이후 오버레이가 사라지고, `prefers-reduced-motion`에서는 스피너를 정지한다.

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — 4604805 — 2026-10-03
+
+- 전문가 영상 게시판에서 현재 선택된 영상 카드에 `재생 중` 배지를 추가해 모바일에서도 플레이어와 목록의 연결을 즉시 이해할 수 있게 했다.
+- PR #79 checks, main workflow `37093519815`, live validator, 390px Chrome CDP fallback 검증이 통과했다. 공개 후보는 `4604805e746be4d28b34fb200196ce8d5905c85f`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-SELECTION-STATE`, `E-CDP-VIDEO-SELECTION-STATE`, `E-DEPLOY-PIPELINE-VIDEO-SELECTION-STATE`, `E-LIVE-PUBLIC-VIDEO-SELECTION-STATE`.
+
 ## Latest Release Recheck — 95c3830 — 2026-10-03
 
 - 전문가 영상 선택 직후 검은 빈 화면처럼 보이던 구간을 로딩 오버레이로 보완하고, 영상이 준비되면 자연스럽게 실제 화면으로 전환되도록 했다. 모션 감소 환경의 스피너 정지도 반영했다.
