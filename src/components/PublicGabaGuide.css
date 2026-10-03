@@ -1069,3 +1069,9 @@
   .guide-sleep-steps article,
   .guide-sleep-visual{min-width:0}
 }
+
+/* v31 recovery anchor rhythm: keep the sleep-and-recovery heading below the fixed reading rail on native hash jumps. */
+.guide-recovery-break{scroll-margin-top:126px}
+@media(max-width:700px){
+  .guide-recovery-break{scroll-margin-top:112px}
+}
