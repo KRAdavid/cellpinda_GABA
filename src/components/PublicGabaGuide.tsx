@@ -481,6 +481,7 @@ const researchScaleStats: ResearchScaleStat[] = [
 const readingChapters = [
   { id: 'history', label: '발견의 순간' },
   { id: 'basics', label: 'GABA란' },
+  { id: 'recovery-break', label: '수면과 회복' },
   { id: 'academic', label: '연구 지도' },
   { id: 'everyday', label: '일상의 순간' },
   { id: 'sleep', label: '수면 연구' },
@@ -493,8 +494,15 @@ const readingChapters = [
   { id: 'final', label: '공유하기' },
 ] as const;
 type ReadingChapterId = (typeof readingChapters)[number]['id'];
-type ActiveChapterId = ReadingChapterId | 'top' | 'recovery-break';
+type ActiveChapterId = ReadingChapterId | 'top';
 const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, GABA에 관한 과학적 정보와 공개 연구를 알기 쉽게 소개하는 공개 안내서입니다.';
+
+const getGuideScrollTop = (target: HTMLElement) => {
+  const headerHeight = document.querySelector<HTMLElement>('.guide-header')?.getBoundingClientRect().height ?? 78;
+  const readingRailHeight = document.querySelector<HTMLElement>('.guide-reading-progress')?.getBoundingClientRect().height ?? 0;
+  const offset = headerHeight + readingRailHeight + 10;
+  return Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset);
+};
 
 const fermentedSafetySteps: FermentedSafetyStep[] = [
   {
@@ -751,9 +759,9 @@ export default function PublicGabaGuide() {
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
-  const activeChapterIndex = activeChapterId === 'recovery-break' ? 1 : readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
+  const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapterLookupIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
-  const activeChapter = activeChapterId === 'top' ? { label: '도입' } : activeChapterId === 'recovery-break' ? { label: '수면과 회복' } : readingChapters[Math.max(0, activeChapterLookupIndex)];
+  const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterLookupIndex)];
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
@@ -765,7 +773,10 @@ export default function PublicGabaGuide() {
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
     const targetId = window.location.hash.slice(1);
-    if (targetId) requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'auto', block: 'start' })));
+    if (targetId) requestAnimationFrame(() => requestAnimationFrame(() => {
+      const target = document.getElementById(targetId);
+      if (target) window.scrollTo({ top: getGuideScrollTop(target), behavior: 'auto' });
+    }));
   }, []);
 
   useEffect(() => () => {
@@ -875,14 +886,9 @@ export default function PublicGabaGuide() {
     const updateReadingChapter = () => {
       const readingPoint = window.scrollY + Math.min(window.innerHeight * 0.3, 260);
       let currentChapter: ActiveChapterId = 'top';
-      const recoverySection = document.getElementById('recovery-break');
-      const academicSection = document.getElementById('academic');
-      if (recoverySection && academicSection && recoverySection.offsetTop <= readingPoint && readingPoint < academicSection.offsetTop) {
-        currentChapter = 'recovery-break';
-      }
       for (const chapter of readingChapters) {
         const section = document.getElementById(chapter.id);
-        if (currentChapter !== 'recovery-break' && section && section.offsetTop <= readingPoint) currentChapter = chapter.id;
+        if (section && section.offsetTop <= readingPoint) currentChapter = chapter.id;
       }
       setActiveChapterId((previous) => previous === currentChapter ? previous : currentChapter);
     };
@@ -907,7 +913,7 @@ export default function PublicGabaGuide() {
     setMenuOpen(false);
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     const target = document.getElementById(id);
-    if (target) window.scrollTo({ top: target.offsetTop - 116, behavior });
+    if (target) window.scrollTo({ top: getGuideScrollTop(target), behavior });
     window.history.replaceState(null, '', `#${hash}`);
   };
 
@@ -928,7 +934,10 @@ export default function PublicGabaGuide() {
     }
     if (window.matchMedia('(max-width: 700px)').matches) {
       const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-      requestAnimationFrame(() => document.getElementById('expert-video-feature')?.scrollIntoView({ behavior, block: 'start' }));
+      requestAnimationFrame(() => {
+        const target = document.getElementById('expert-video-feature');
+        if (target) window.scrollTo({ top: getGuideScrollTop(target), behavior });
+      });
     }
   };
 

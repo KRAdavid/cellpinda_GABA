@@ -967,3 +967,9 @@
   .guide-hero-story h1 span{font-size:.92em}
   .guide-hero-story h1 em{font-size:.98em;line-height:1.12}
 }
+
+/* v25 deep-link alignment: keep every chapter title below the sticky reading rail. */
+.guide-story-section,.guide-final{scroll-margin-top:126px}
+@media(max-width:700px){
+  .guide-story-section,.guide-final{scroll-margin-top:112px}
+}
