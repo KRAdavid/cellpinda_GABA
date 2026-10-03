@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — 3b75bae — 2026-10-03
+
+- 공개 `/research/`를 제품 광고·구매 유도와 분리된 일반 GABA 연구 읽기 경로로 고도화했다. 연구 카드의 관찰 결과, 연구 조건, 출처 연결은 유지하고 제품 CTA·제품 브랜드·`view=products`·SmartStore 연결은 제거했다.
+- PR #85 checks, main workflow `37096916896`, live validator, 390px Chrome CDP fallback 검증이 통과했다. 공개 후보는 `3b75baecbc84623a759131393ef1e47f3aa2ba07`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE`, `E-CDP-RESEARCH-PRODUCT-FREE`, `E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE`, `E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE`.
+
 ## Latest Release Recheck — a0ee159 — 2026-10-03
 
 - 모바일 연구 카드에서 출처 라벨과 원문 링크가 붙어 읽히던 문제를 보완해 `출처 ·`와 PMID 링크를 분리했다. 연구 결과나 과학적 주장을 새로 추가하지 않았다.
