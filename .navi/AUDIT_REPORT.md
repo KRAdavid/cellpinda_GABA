@@ -1,5 +1,13 @@
 # Audit Report
 
+## Expert Video Thumbnail Fallback Audit — 342f43f — 2026-10-04
+
+- 전문가 영상 게시판에서 기본·대체 썸네일 URL이 모두 실패하는 네트워크 조건을 재현했다. 기존 구현은 실패한 이미지 요소가 `GABA VIDEO` 표지를 가릴 수 있었으므로, 두 요청이 모두 실패한 뒤에만 이미지 요소를 숨기고 설계된 fallback 표면을 드러내도록 PR #158에서 보완했다.
+- 로컬 typecheck·UI contract·127개 테스트·build와 PR #158 checks가 통과했다. 공개 320/390/1440px에서 첫 4개 eager 로드, 9개 스크롤 후 로드, 가로 넘침 없음·브라우저 오류 없음을 확인했고, 390px 강제 이중 실패에서 `is-unavailable`·표지 노출을 확인했다. main workflow `37144428732`, Pages·라이브 smoke·release status·live validator도 통과했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-FALLBACK-20261004`.
+
 ## Expert Video Thumbnail Loading Audit — 8093615 — 2026-10-04
 
 - 모바일 전문가 영상 게시판에서 일부 lazy 썸네일이 초기 캡처 시 빈 연한 박스로 남아 시각적 완성도를 떨어뜨리는 경미한 결함을 확인했다. 첫 4개 이미지를 eager 로드하고 나머지는 lazy 로드로 유지했으며, 로딩 전에는 `GABA VIDEO` 표지를 노출하도록 보완했다.
