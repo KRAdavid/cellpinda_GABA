@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T03:58:42.346983Z",
+  "updated_at": "2026-10-03T04:15:23.541785Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -183,7 +183,9 @@
         "E-LOCAL-BUILD-RECOVERY-NAV",
         "E-DEPLOY-PIPELINE-RECOVERY-NAV",
         "E-LOCAL-BUILD-VIDEO-RESELECT",
-        "E-DEPLOY-PIPELINE-VIDEO-RESELECT"
+        "E-DEPLOY-PIPELINE-VIDEO-RESELECT",
+        "E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL",
+        "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -249,7 +251,9 @@
         "E-DEPLOY-PIPELINE-VIDEO-SELECTION-STATE",
         "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
         "E-CDP-VIDEO-RESELECT",
-        "E-LIVE-PUBLIC-VIDEO-RESELECT"
+        "E-LIVE-PUBLIC-VIDEO-RESELECT",
+        "E-CDP-RESEARCH-SOURCE-LABEL",
+        "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
       ],
       "owner": "UX QA"
     },
@@ -365,7 +369,9 @@
         "E-LOCAL-BUILD-RAIL-LEGIBILITY",
         "E-LOCAL-BUILD-RESEARCH-RAIL",
         "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE",
-        "E-LOCAL-BUILD-RECOVERY-PROGRESS"
+        "E-LOCAL-BUILD-RECOVERY-PROGRESS",
+        "E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL",
+        "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL"
       ],
       "owner": "QA"
     },
@@ -416,7 +422,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-RAIL",
         "E-LIVE-PUBLIC-RESEARCH-RAIL",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE",
-        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE",
+        "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL",
+        "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
       ],
       "owner": "배포 QA"
     },
@@ -477,7 +485,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-RAIL",
         "E-LIVE-PUBLIC-RESEARCH-RAIL",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE",
-        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE"
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE",
+        "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL",
+        "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
       ],
       "owner": "운영 QA"
     },
@@ -834,7 +844,9 @@
           "E-CDP-VIDEO-SELECTION-STATE",
           "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
           "E-CDP-VIDEO-RESELECT",
-          "E-LIVE-PUBLIC-VIDEO-RESELECT"
+          "E-LIVE-PUBLIC-VIDEO-RESELECT",
+          "E-CDP-RESEARCH-SOURCE-LABEL",
+          "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -872,7 +884,9 @@
           "E-CDP-VIDEO-SELECTION-STATE",
           "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
           "E-CDP-VIDEO-RESELECT",
-          "E-LIVE-PUBLIC-VIDEO-RESELECT"
+          "E-LIVE-PUBLIC-VIDEO-RESELECT",
+          "E-CDP-RESEARCH-SOURCE-LABEL",
+          "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -881,7 +895,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T03:53:30Z"
+    "last_run_at": "2026-10-03T04:11:30Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -903,7 +917,9 @@
           "E-CDP-VIDEO-SELECTION-STATE",
           "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
           "E-CDP-VIDEO-RESELECT",
-          "E-LIVE-PUBLIC-VIDEO-RESELECT"
+          "E-LIVE-PUBLIC-VIDEO-RESELECT",
+          "E-CDP-RESEARCH-SOURCE-LABEL",
+          "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -940,7 +956,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T03:53:30Z"
+    "last_run_at": "2026-10-03T04:11:30Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -1246,7 +1262,9 @@
           "E-CDP-VIDEO-SELECTION-STATE",
           "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
           "E-CDP-VIDEO-RESELECT",
-          "E-LIVE-PUBLIC-VIDEO-RESELECT"
+          "E-LIVE-PUBLIC-VIDEO-RESELECT",
+          "E-CDP-RESEARCH-SOURCE-LABEL",
+          "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
         ],
         "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택 유지 확인"
       },
@@ -1321,7 +1339,10 @@
           "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
           "E-LOCAL-BUILD-VIDEO-RESELECT",
           "E-DEPLOY-PIPELINE-VIDEO-RESELECT",
-          "E-LIVE-PUBLIC-VIDEO-RESELECT"
+          "E-LIVE-PUBLIC-VIDEO-RESELECT",
+          "E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL",
+          "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL",
+          "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·태블릿 헤더·전문가 영상 로딩·동일 영상 재선택 상태 보강 검증 통과"
       },
@@ -1583,6 +1604,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T03:53:30Z"
+    },
+    {
+      "id": "H-035",
+      "event": "모바일 연구 카드에서 출처 라벨과 원문 링크가 붙어 읽히던 결함을 보완한 PR #83을 main에 병합했으며 390px에서 `출처 ·`와 PMID 링크의 분리 표시·가로 폭·콘솔 오류와 Pages 라이브 배포를 재검증해 공개본을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T04:11:30Z"
     }
   ]
 }
