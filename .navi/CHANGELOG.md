@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 현재 장 이동 읽기 레일 동기화 공개 배포: 2026-10-04 / candidate `a396ca8`
+
+모바일 메뉴 이동 직후 읽기 진행 레일과 브라우저 제목이 이전 장으로 되돌아가던 상태 경합을 보완했다. smooth scroll 동안 목적지 장을 유지하고, 사용자의 직접 스크롤과 연구→전문가 영상 연속 이동에서는 잠금을 해제한다. PR #174, main workflow `37162395001`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 연구 지도 즉시 동기화, 연구 카드·전문가 영상·마지막 공유, 가로 폭·브라우저 오류 없음을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-CHAPTER-RAIL-SYNC-20261004`, `E-PLAYWRIGHT-CHAPTER-RAIL-SYNC-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-RAIL-SYNC-20261004`, `E-LIVE-PUBLIC-CHAPTER-RAIL-SYNC-20261004`.
+
 ## 현재 읽는 위치 공유 맥락 공개 배포: 2026-10-04 / candidate `b03b7df`
 
 자연 스크롤로 마지막 장까지 읽은 뒤에도 공유 버튼이 이전 장의 해시를 사용하던 흐름을 보완했다. 현재 장·연구 카드·선택 전문가 영상에 맞춰 공유 URL을 재구성하며, `#research-muscle`, `?video=RLAU1VWGsaI#expert-videos`, `#final` 주소를 각각 확인했다. PR #173, main workflow `37161370503`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 메뉴·큰 글씨·연구 선택·영상 iframe·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

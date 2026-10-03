@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T23:22:25Z",
+  "updated_at": "2026-10-03T23:41:32Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2830,6 +2830,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T23:22:25Z"
+    },
+    {
+      "id": "H-083",
+      "event": "모바일 메뉴로 장을 이동할 때 목적지 장이 보이기 전까지 이전 장으로 되돌아가던 읽기 레일·브라우저 제목 경합을 PR #174에서 보완했다. smooth scroll 동안 목적지 장을 잠시 고정하고 사용자가 직접 스크롤하면 잠금을 해제하며, 연구 지도에서 전문가 영상으로 이어질 때 잠금을 초기화했다. 로컬 UI 계약·typecheck·127개 테스트·build, 공개 390px Chrome fallback의 즉시 연구 지도 레일 동기화와 연구·영상·마지막 공유 흐름, live validator HTTP 200·STATIC·candidate a396ca8, main workflow 37162395001의 Pages·라이브 smoke·release status 성공을 확인했다. 공개 과학 카피·제품 독립 경계는 변경하지 않았으며 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T23:41:32Z"
     }
   ]
 }

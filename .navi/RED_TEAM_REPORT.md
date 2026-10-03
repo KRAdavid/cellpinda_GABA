@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 현재 장 이동 읽기 레일 동기화 레드팀 재검증 — a396ca8 — 2026-10-04
+
+- 공개 390px에서 모바일 메뉴로 연구 지도를 선택한 직후 제목·진행 레일이 `연구 지도 | GABA Guide`·`연구 지도 03 / 12`로 유지되는지 확인했다. 이후 연구 카드→전문가 영상→마지막 공유까지 이동해 이전 장 잠금이 남지 않는 경로를 재현했다.
+- smooth scroll 중 잠금은 읽기 관찰자의 되돌림을 막고, 사용자 wheel/touch와 연구→영상 선택에서는 해제된다. 390px 가로 폭은 viewport와 같고 page/console errors는 없었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-CHAPTER-RAIL-SYNC-20261004`, `E-PLAYWRIGHT-CHAPTER-RAIL-SYNC-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-RAIL-SYNC-20261004`, `E-LIVE-PUBLIC-CHAPTER-RAIL-SYNC-20261004`.
+
 ## 현재 읽는 위치 공유 맥락 레드팀 재검증 — b03b7df — 2026-10-04
 
 - 공개 390px에서 연구 지도 근육 카드 선택 후 공유, 전문가 영상 선택 후 공유, 마지막 장까지 자연 스크롤 후 공유를 각각 재현해 주소가 현재 맥락으로 바뀌는지 확인했다. 이전 `#expert-videos` 주소가 마지막 장 공유에 남지 않고 `#final`로 재구성됐다.
