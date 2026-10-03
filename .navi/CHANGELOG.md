@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 수면과 회복 진행 문구 명료화 공개 배포: 2026-10-04 / candidate `14528e9`
+
+`잠깐, 수면과 회복` 구간의 모호한 `보충 / 12` 진행 표시를 `이어 읽기 / 12`로 바꾸고, 보조기기 안내 문장도 같은 뜻으로 정렬했다. PR #171, main workflow `37159578042`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 문구·aria-label·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-INTERLUDE-PROGRESS-20261004`, `E-PLAYWRIGHT-INTERLUDE-PROGRESS-20261004`, `E-DEPLOY-PIPELINE-INTERLUDE-PROGRESS-20261004`, `E-LIVE-PUBLIC-INTERLUDE-PROGRESS-20261004`.
+
 ## 연구 지도 딥링크 상태 복원 공개 배포: 2026-10-04 / candidate `4d9bfde`
 
 `#research-skin` 등 연구 카드 공유 링크가 초기 진입에서 선택 연구 지도·상세 카드·읽기 진행·브라우저 제목을 함께 복원하도록 보완했다. 브라우저 해시 변경 시에도 연구 주제 상태를 동기화한다. PR #170, main workflow `37158456376`, NAVI 문서 동기화 workflow `37158735199`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·최종 candidate `cb494e2`·공개 데이터 정합성이 성공했다. 최종 공개본을 대상으로 Playwright Chrome fallback 390/1440px에서 피부 딥링크 진입 후 근육 해시 변경을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

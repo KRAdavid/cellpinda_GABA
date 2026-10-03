@@ -1,5 +1,14 @@
 # Audit Report
 
+## 수면과 회복 진행 문구 명료화 감사 — 14528e9 — 2026-10-04
+
+- interlude 상단 진행 표시의 `보충 / 12`가 소비자에게 의미가 모호한 문제를 확인해 `이어 읽기 / 12`로 보정하고, `aria-label`도 본문 사이에 이어지는 설명이라는 같은 뜻으로 정렬했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build가 통과했다. 최종 GitHub Pages 공개본 390px Chrome fallback에서 제목·진행 문구·보조기기 안내·가로 폭·브라우저 오류를 확인했다.
+- PR #171 merge `14528e9`, main workflow `37159578042`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `14528e9`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-INTERLUDE-PROGRESS-20261004`, `E-PLAYWRIGHT-INTERLUDE-PROGRESS-20261004`, `E-DEPLOY-PIPELINE-INTERLUDE-PROGRESS-20261004`, `E-LIVE-PUBLIC-INTERLUDE-PROGRESS-20261004`.
+
 ## 연구 지도 딥링크 상태 복원 감사 — 4d9bfde — 2026-10-04
 
 - `#research-skin` 같은 연구 카드 딥링크가 초기 진입에서 선택 지도·상세 카드·읽기 진행·브라우저 제목을 함께 복원하도록 PR #170에서 보완했다. 브라우저 해시가 바뀌면 `hashchange`로 선택 연구 주제도 동기화된다.

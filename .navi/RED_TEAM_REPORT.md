@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 수면과 회복 진행 문구 명료화 레드팀 재검증 — 14528e9 — 2026-10-04
+
+- 최종 GitHub Pages 공개본 390px에서 `#recovery-break` 직접 진입을 공격적으로 확인했다. 상단에는 `이어 읽기 / 12`가 표시되고 `aria-label`은 본문 사이에 이어지는 설명이라는 문구를 전달했으며, 제목·가로 폭·페이지 오류는 안정적이었다.
+- 문구 변경은 진행 상태의 의미만 명료화하고 연구 카피·출처·제품 독립 경계를 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-INTERLUDE-PROGRESS-20261004`, `E-PLAYWRIGHT-INTERLUDE-PROGRESS-20261004`, `E-DEPLOY-PIPELINE-INTERLUDE-PROGRESS-20261004`, `E-LIVE-PUBLIC-INTERLUDE-PROGRESS-20261004`.
+
 ## 연구 지도 딥링크 상태 복원 레드팀 재검증 — 4d9bfde — 2026-10-04
 
 - 최종 GitHub Pages 공개본에서 390·1440px `#research-skin` 직접 진입을 재현해 선택 지도·상세 카드·읽기 진행·브라우저 제목이 `피부 연구 결과`로 일치하는지 확인했다. 이후 `location.hash`를 `#research-muscle`로 변경해 선택 상태가 `근육 연구 결과`로 동기화되는 경로를 공격적으로 확인했다.
