@@ -821,6 +821,8 @@ export default function PublicGabaGuide() {
   const menuToggleRef = useRef<HTMLButtonElement | null>(null);
   const shareStatusTimer = useRef<number | null>(null);
   const hashAlignmentCancelled = useRef(false);
+  const pendingChapterNavigation = useRef<{ id: ActiveChapterId; targetId: string } | null>(null);
+  const chapterNavigationLockUntil = useRef(0);
   const recoveryBreakRef = useRef<HTMLElement | null>(null);
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
@@ -1028,7 +1030,21 @@ export default function PublicGabaGuide() {
 
   useEffect(() => {
     let frame = 0;
+    const clearPendingChapterNavigation = () => {
+      pendingChapterNavigation.current = null;
+      chapterNavigationLockUntil.current = 0;
+    };
     const updateReadingChapter = () => {
+      if (performance.now() < chapterNavigationLockUntil.current) return;
+      const pending = pendingChapterNavigation.current;
+      if (pending) {
+        const target = document.getElementById(pending.targetId);
+        if (target && Math.abs(window.scrollY - getGuideScrollTop(target)) > 28) {
+          setActiveChapterId((previous) => previous === pending.id ? previous : pending.id);
+          return;
+        }
+        pendingChapterNavigation.current = null;
+      }
       const readingPoint = window.scrollY + Math.min(window.innerHeight * 0.3, 260);
       let currentChapter: ActiveChapterId = 'top';
       for (const chapter of readingChapters) {
@@ -1047,9 +1063,13 @@ export default function PublicGabaGuide() {
     updateReadingChapter();
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
+    window.addEventListener('wheel', clearPendingChapterNavigation, { passive: true });
+    window.addEventListener('touchstart', clearPendingChapterNavigation, { passive: true });
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('wheel', clearPendingChapterNavigation);
+      window.removeEventListener('touchstart', clearPendingChapterNavigation);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
@@ -1058,10 +1078,25 @@ export default function PublicGabaGuide() {
     hashAlignmentCancelled.current = true;
     const restoreMenuFocus = menuOpen;
     setMenuOpen(false);
+    const nextChapterId: ActiveChapterId | null = id.startsWith('research-')
+      ? 'research'
+      : id === 'top'
+        ? 'top'
+        : readingChapters.some((chapter) => chapter.id === id)
+          ? id as ReadingChapterId
+          : null;
+    if (nextChapterId) setActiveChapterId(nextChapterId);
     const target = document.getElementById(id);
     const distance = target ? Math.abs(target.getBoundingClientRect().top) : 0;
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches || distance > window.innerHeight * 3 ? 'auto' : 'smooth';
-    if (target) scrollGuideTo(target, behavior);
+    if (target && nextChapterId) {
+      pendingChapterNavigation.current = { id: nextChapterId, targetId: id };
+      chapterNavigationLockUntil.current = performance.now() + (behavior === 'smooth' ? 900 : 350);
+      scrollGuideTo(target, behavior);
+    } else {
+      pendingChapterNavigation.current = null;
+      chapterNavigationLockUntil.current = 0;
+    }
     window.history.replaceState(null, '', `#${hash}`);
     if (restoreMenuFocus) window.requestAnimationFrame(() => menuToggleRef.current?.focus());
   };
@@ -1072,6 +1107,8 @@ export default function PublicGabaGuide() {
   };
 
   const selectExpertVideo = (id: string) => {
+    pendingChapterNavigation.current = null;
+    chapterNavigationLockUntil.current = 0;
     const isNewVideo = id !== activeVideoId;
     const selectedVideo = expertVideos.find((video) => video.id === id);
     if (selectedVideo) {
@@ -1494,7 +1531,7 @@ export default function PublicGabaGuide() {
         <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading">1950년의 작은 발견은<br />오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div><details className="guide-share-lines"><summary>사업자용 GABA 핵심 5문장 · 바로 복사하기</summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
       </main>
 
-      <footer className="guide-footer"><div className="guide-container guide-footer-grid"><a className="guide-logo" href="#top" onClick={() => scrollTo('top')}><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a><p>GABA를 쉽게 이해하고<br />자유롭게 공유하는 공개 안내서입니다.</p><div><a href="#history">발견의 역사</a><a href="#applications">활용 사례</a><a href="#top">맨 위로 ↑</a></div></div><div className="guide-container guide-footer-bottom"><span>© 2026 GABA Guide</span><span>1950년, 뇌 속에서 발견된 신호</span></div></footer>
+      <footer className="guide-footer"><div className="guide-container guide-footer-grid"><a className="guide-logo" href="#top" onClick={() => scrollTo('top')}><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a><p>GABA를 쉽게 이해하고<br />자유롭게 공유하는 공개 안내서입니다.</p><div><a href="#history" onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견의 역사</a><a href="#applications" onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a><a href="#top" onClick={(event) => { event.preventDefault(); scrollTo('top'); }}>맨 위로 ↑</a></div></div><div className="guide-container guide-footer-bottom"><span>© 2026 GABA Guide</span><span>1950년, 뇌 속에서 발견된 신호</span></div></footer>
     </div>
   );
 }
