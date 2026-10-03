@@ -1,5 +1,14 @@
 # Audit Report
 
+## 현재 읽는 위치 공유 맥락 감사 — b03b7df — 2026-10-04
+
+- 자연 스크롤로 마지막 장까지 읽은 뒤 공유하면 주소 해시가 이전 장에 남을 수 있던 결함을 확인해, 현재 장·연구 카드·선택 전문가 영상에 맞춰 공유 URL을 재구성하도록 PR #173에서 보완했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build가 통과했다. 최종 GitHub Pages 공개본 390px Chrome fallback에서 메뉴 이동·큰 글씨·근육 연구 카드 선택·전문가 영상 iframe·마지막 공유 흐름과 `#research-muscle`, `?video=RLAU1VWGsaI#expert-videos`, `#final` 주소를 확인했다.
+- PR #173 merge `b03b7df`, main workflow `37161370503`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `b03b7df`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SHARE-CONTEXT-20261004`, `E-PLAYWRIGHT-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-SHARE-CONTEXT-20261004`.
+
 ## 마지막 이야기 공유 라벨 일관성 감사 — 26077a2 — 2026-10-04
 
 - 본문 섹션 번호가 `12 · 이야기 공유`인데 진행 레일과 브라우저 제목이 `공유하기`였던 불일치를 확인해 세 위치를 `이야기 공유`로 통일했다.

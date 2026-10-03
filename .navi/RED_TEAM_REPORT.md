@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 현재 읽는 위치 공유 맥락 레드팀 재검증 — b03b7df — 2026-10-04
+
+- 공개 390px에서 연구 지도 근육 카드 선택 후 공유, 전문가 영상 선택 후 공유, 마지막 장까지 자연 스크롤 후 공유를 각각 재현해 주소가 현재 맥락으로 바뀌는지 확인했다. 이전 `#expert-videos` 주소가 마지막 장 공유에 남지 않고 `#final`로 재구성됐다.
+- 연구 공유는 `#research-muscle`, 선택 영상 공유는 `?video=RLAU1VWGsaI#expert-videos`를 유지했으며 390px 가로 폭은 viewport와 같고 console/page error는 없었다. 제품 광고·연구 카피·출처 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SHARE-CONTEXT-20261004`, `E-PLAYWRIGHT-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-SHARE-CONTEXT-20261004`.
+
 ## 마지막 이야기 공유 라벨 일관성 레드팀 재검증 — 26077a2 — 2026-10-04
 
 - 최종 GitHub Pages 공개본 390px에서 `#final` 직접 진입을 공격적으로 확인했다. 브라우저 제목·상단 진행 레일·본문 섹션 번호가 모두 `이야기 공유`로 일치했고, 가로 넘침과 페이지 오류는 없었다.

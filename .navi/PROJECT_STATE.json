@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T23:02:08Z",
+  "updated_at": "2026-10-03T23:22:25Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2823,6 +2823,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T23:02:08Z"
+    },
+    {
+      "id": "H-082",
+      "event": "자연 스크롤로 마지막 장까지 이동한 뒤에도 공유 버튼이 이전 장의 해시를 공유할 수 있던 결함을 PR #173에서 보완했다. 현재 장·연구 카드·선택 전문가 영상에 따라 hash와 video query를 재구성하며, 제품 독립 공개 카피는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build와 390px Chrome fallback에서 연구 카드 `#research-muscle`, 영상 `?video=RLAU1VWGsaI#expert-videos`, 마지막 장 `#final` 공유 주소를 확인했다. PR #173 merge `b03b7df`, main workflow `37161370503`, Pages·라이브 smoke·release status와 live validator HTTP 200·STATIC·candidate `b03b7df`를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T23:22:25Z"
     }
   ]
 }
