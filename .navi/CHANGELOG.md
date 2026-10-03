@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 모바일 메뉴 닫힘 포커스 복귀 공개 배포: 2026-10-04 / candidate `510e9ad`
+
+모바일 메뉴 항목 이동과 배경 클릭으로 메뉴가 닫힐 때 키보드·스크린리더 포커스가 문서 배경에 남지 않도록 토글 버튼으로 복귀시켰다. PR #163, main workflow `37149705144`, Pages·라이브 smoke·release status와 공개 live validator, 390px Chrome fallback 상호작용 검증이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004`, `E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004`.
+
 ## 직접 해시 진입 정렬 고도화 공개 배포: 2026-10-04 / candidate `70d66b5`
 
 직접 링크로 연구·수면·전문가 영상 장에 들어올 때 제목이 고정 읽기 레일에 늦게 맞춰지던 문제를 PR #162에서 `useLayoutEffect` 초기 정렬과 180/420/780ms 안정화 재정렬로 보완했다. main workflow `37148328986`, Pages·라이브 smoke·release status, 공개 390px 해시 진입 검증과 live validator가 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004`, `E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004`, `E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004`, `E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004`.

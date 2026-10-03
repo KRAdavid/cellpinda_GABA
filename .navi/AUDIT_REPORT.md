@@ -1,5 +1,13 @@
 # Audit Report
 
+## Mobile Menu Focus Restoration Audit — 510e9ad — 2026-10-04
+
+- 모바일 메뉴 항목 이동과 메뉴 바깥 배경 클릭으로 닫히는 경로에서 포커스가 문서 배경으로 남을 수 있던 결함을 확인하고 PR #163에서 메뉴 토글 버튼 복귀를 보완했다. 메뉴 링크 경로와 `pointerdown` 외부 닫힘 경로를 모두 처리했으며 공개 과학 카피·제품 독립 경계는 변경하지 않았다.
+- 로컬 typecheck·UI contract·127 tests·build, 공개 390px Chrome fallback에서 첫 링크 포커스·`#academic` 이동·배경 닫기·토글 포커스 복귀·가로 폭·브라우저 오류 없음을 확인했다. PR #163 checks, main workflow `37149705144`, Pages·라이브 smoke·release status와 live validator candidate `510e9ad`가 통과했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004`, `E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004`.
+
 ## Direct Hash Entry Alignment Audit — 70d66b5 — 2026-10-04
 
 - 직접 해시 진입(` #recovery-break`, `#research`, `#expert-videos`)에서 제목이 늦게 고정 읽기 레일에 맞춰지던 결함을 PR #162에서 `useLayoutEffect` 초기 정렬과 180/420/780ms 안정화 재정렬로 보완했다.

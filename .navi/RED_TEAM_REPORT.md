@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Menu Focus Restoration Red-Team Recheck — 510e9ad — 2026-10-04
+
+- 공격 경로로 모바일 메뉴 항목 선택, 메뉴 외부 `pointerdown`, 배경 버튼 클릭을 각각 재현해 닫힌 뒤 포커스가 문서 `body`로 남는 결함을 점검했다. PR #163에서 외부 닫힘과 메뉴 이동 모두 `guide-menu-toggle`로 포커스를 복귀하도록 보완했고, 메뉴 첫 항목 포커스와 가로 폭 390px도 재확인했다.
+- 공개 390px Chrome fallback에서 메뉴 열림·첫 링크 포커스·`#academic` 이동·배경 닫기·토글 포커스 복귀·콘솔/페이지 오류 없음이 확인됐다. 새 CRITICAL/MAJOR 결함은 없으며 결과는 `PASS_WITH_CONDITIONS`다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004`, `E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004`.
+
 ## Direct Hash Entry Alignment Red-Team Recheck — 70d66b5 — 2026-10-04
 
 - 390px 공개본에서 `#recovery-break`, `#research`, `#expert-videos`를 새로고침해도 장 제목이 고정 읽기 레일 아래에 놓이고, 진행 상태가 `보충 / 12`, `06 / 12`, `10 / 12`로 맞춰지는지 재현했다. 가로 넘침과 브라우저 오류는 없었다.
