@@ -1058,3 +1058,14 @@
   .guide-header .guide-reading-size-toggle svg,.guide-header .guide-header-share svg{display:block}
   .guide-header .guide-header-share{overflow:visible;clip:auto;white-space:normal;border:0;border-radius:12px;background:var(--guide-ink);color:#fff;font-size:0}
 }
+
+/* v30 narrow-phone sleep layout: let the study stack shrink to the viewport instead of inheriting a content minimum. */
+.guide-sleep-grid,
+.guide-sleep-steps,
+.guide-sleep-visual{min-width:0}
+@media(max-width:700px){
+  .guide-sleep-grid{grid-template-columns:minmax(0,1fr)}
+  .guide-sleep-steps,
+  .guide-sleep-steps article,
+  .guide-sleep-visual{min-width:0}
+}
