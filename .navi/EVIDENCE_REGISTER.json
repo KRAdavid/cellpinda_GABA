@@ -66,6 +66,12 @@
       "statement": "수면과 회복 interlude의 진행 표시는 일반 독자가 읽기 흐름을 바로 이해할 수 있는 자연스러운 문구와 보조기기 안내를 함께 제공한다.",
       "evidence_refs": ["E-LOCAL-BUILD-INTERLUDE-PROGRESS-20261004", "E-PLAYWRIGHT-INTERLUDE-PROGRESS-20261004", "E-DEPLOY-PIPELINE-INTERLUDE-PROGRESS-20261004", "E-LIVE-PUBLIC-INTERLUDE-PROGRESS-20261004"],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-012",
+      "statement": "마지막 이야기 공유 섹션은 본문 제목·읽기 진행 레일·브라우저 제목이 같은 명칭으로 연결되어 현재 읽는 위치를 일관되게 전달한다.",
+      "evidence_refs": ["E-LOCAL-BUILD-FINAL-LABEL-20261004", "E-PLAYWRIGHT-FINAL-LABEL-20261004", "E-DEPLOY-PIPELINE-FINAL-LABEL-20261004", "E-LIVE-PUBLIC-FINAL-LABEL-20261004"],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4102,6 +4108,50 @@
       "captured_at": "2026-10-03T22:49:44Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-INTERLUDE-PROGRESS",
       "claim_refs": ["C-011"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-FINAL-LABEL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "마지막 섹션의 진행 레일·브라우저 제목을 `공유하기`에서 `이야기 공유`로 통일하고, 화면의 `12 · 이야기 공유`와 읽기 상태를 일치시켰다. UI 계약·typecheck·127개 테스트·production build가 통과했다.",
+      "locator": "PR #172 candidate 3161556e22abeb9bbc9523b5dc983cb0afee5788; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback at 390px #final verified title/progress/section label/scroll width/errors",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/172",
+      "captured_at": "2026-10-03T23:02:08Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-FINAL-LABEL",
+      "claim_refs": ["C-012"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-FINAL-LABEL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본의 마지막 섹션에서 브라우저 제목·읽기 진행 레일·본문 섹션 번호가 모두 `이야기 공유`로 일치했다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/?view=guide#final; viewport 390x844; title 이야기 공유 | GABA Guide; progress 지금 읽는 중이야기 공유12 / 12; sectionNumber 12 · 이야기 공유; heading 1950년의 작은 발견은오늘의 연구 지도가 되었습니다; scrollWidth 390 equals viewportWidth; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#final",
+      "captured_at": "2026-10-03T23:02:08Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-FINAL-LABEL",
+      "claim_refs": ["C-012"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-FINAL-LABEL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #172 코드 병합 후 main 공개 배포 파이프라인이 최종 성공했다. release-verify, worker-readiness, Pages, 라이브 smoke, release status가 통과했고 Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #172 merge 26077a24c819b1a8aa1718d0bf06c711ff88531c; main workflow 37160262285; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37160262285",
+      "captured_at": "2026-10-03T23:02:08Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-FINAL-LABEL",
+      "claim_refs": ["C-012"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-FINAL-LABEL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "마지막 이야기 공유 라벨 보정이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate 26077a2를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 26077a24c819b1a8aa1718d0bf06c711ff88531c; generatedAt 2026-10-03T23:00:07.884Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T23:02:08Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-FINAL-LABEL",
+      "claim_refs": ["C-012"]
     }
   ]
 }

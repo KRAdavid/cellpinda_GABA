@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 마지막 이야기 공유 라벨 일관성 공개 배포: 2026-10-04 / candidate `26077a2`
+
+본문의 `12 · 이야기 공유`와 상단 진행 레일·브라우저 제목의 `공유하기`를 `이야기 공유`로 통일했다. PR #172, main workflow `37160262285`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 제목·진행 레일·본문 번호·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-FINAL-LABEL-20261004`, `E-PLAYWRIGHT-FINAL-LABEL-20261004`, `E-DEPLOY-PIPELINE-FINAL-LABEL-20261004`, `E-LIVE-PUBLIC-FINAL-LABEL-20261004`.
+
 ## 수면과 회복 진행 문구 명료화 공개 배포: 2026-10-04 / candidate `14528e9`
 
 `잠깐, 수면과 회복` 구간의 모호한 `보충 / 12` 진행 표시를 `이어 읽기 / 12`로 바꾸고, 보조기기 안내 문장도 같은 뜻으로 정렬했다. PR #171, main workflow `37159578042`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 문구·aria-label·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
