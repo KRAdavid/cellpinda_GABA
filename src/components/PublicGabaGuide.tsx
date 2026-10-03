@@ -531,6 +531,14 @@ const getGuideScrollTop = (target: HTMLElement) => {
   return Math.max(0, anchor.getBoundingClientRect().top + window.scrollY - offset);
 };
 
+const scrollGuideTo = (target: HTMLElement, behavior: ScrollBehavior) => {
+  const root = document.documentElement;
+  const previousScrollBehavior = root.style.scrollBehavior;
+  if (behavior === 'auto') root.style.scrollBehavior = 'auto';
+  window.scrollTo({ top: getGuideScrollTop(target), behavior });
+  root.style.scrollBehavior = previousScrollBehavior;
+};
+
 const fermentedSafetySteps: FermentedSafetyStep[] = [
   {
     number: '01',
@@ -789,6 +797,7 @@ export default function PublicGabaGuide() {
   const headerRef = useRef<HTMLElement | null>(null);
   const menuToggleRef = useRef<HTMLButtonElement | null>(null);
   const shareStatusTimer = useRef<number | null>(null);
+  const hashAlignmentCancelled = useRef(false);
   const recoveryBreakRef = useRef<HTMLElement | null>(null);
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
@@ -847,7 +856,7 @@ export default function PublicGabaGuide() {
     if (!targetId) return;
     let cancelled = false;
     const alignHashTarget = () => {
-      if (cancelled) return;
+      if (cancelled || hashAlignmentCancelled.current) return;
       const target = document.getElementById(targetId);
       if (!target) return;
       const root = document.documentElement;
@@ -1014,10 +1023,12 @@ export default function PublicGabaGuide() {
   }, []);
 
   const scrollTo = (id: string, hash = id) => {
+    hashAlignmentCancelled.current = true;
     setMenuOpen(false);
-    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     const target = document.getElementById(id);
-    if (target) window.scrollTo({ top: getGuideScrollTop(target), behavior });
+    const distance = target ? Math.abs(target.getBoundingClientRect().top) : 0;
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches || distance > window.innerHeight * 3 ? 'auto' : 'smooth';
+    if (target) scrollGuideTo(target, behavior);
     window.history.replaceState(null, '', `#${hash}`);
   };
 

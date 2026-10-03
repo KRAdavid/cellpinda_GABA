@@ -1092,3 +1092,20 @@
   .guide-video-filter{scroll-snap-align:start}
   .guide-video-filter-cue{position:absolute;z-index:3;top:7px;right:7px;display:grid;place-items:center;width:27px;height:27px;border:1px solid rgba(177,216,220,.85);border-radius:50%;background:rgba(248,251,251,.96);box-shadow:0 3px 9px rgba(26,93,108,.1);color:var(--guide-teal-dark);pointer-events:none}
 }
+
+/* v37 chart readability: give research labels a clear type floor on small screens. */
+.guide-research-detail-top{font-size:11px}
+.guide-evidence{font-size:11px;line-height:1.35}
+.guide-research-profile-kicker{font-size:11px}
+.guide-research-profile span{font-size:11px}
+@media(max-width:700px){
+  .guide-section-number{font-size:11px;letter-spacing:.18em}
+  .guide-outcome-comparison-head{font-size:.88em}
+  .guide-outcome-comparison-metric>small{font-size:.86em}
+  .guide-outcome-lane-top>span{font-size:.86em}
+  .guide-outcome-lane-top>strong{font-size:.94em}
+  .guide-outcome-lane-signal em{font-size:.75em}
+  .guide-outcome-metric>span{font-size:.86em}
+  .guide-outcome-signal-row>span{font-size:.86em}
+  .guide-outcome-signal-row>strong{font-size:.93em}
+}
