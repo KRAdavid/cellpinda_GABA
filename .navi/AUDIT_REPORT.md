@@ -1,5 +1,13 @@
 # Audit Report
 
+## Expert Video Thumbnail Resolution Audit — 52ff08b — 2026-10-04
+
+- YouTube `maxres`/`hq` 썸네일이 오류가 아닌 저해상도 성공 응답을 반환하는 경우를 새 결함 표면으로 분류했다. decoded width가 200px 미만이면 대체 URL을 시도하고, 두 URL 모두 기준 미달이면 `GABA VIDEO` 표지를 노출하도록 PR #160에서 보완했다.
+- 로컬 typecheck·UI contract·127 tests·build, 로컬 390px 저해상도 강제 Playwright, 공개 320/390/1440px 정상 로딩과 공개 390px 저해상도 강제 Playwright, main workflow `37145916564`, Pages·라이브 smoke·release status·live validator `52ff08b`를 통과했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004`.
+
 ## Expert Video Thumbnail Fallback Audit — 342f43f — 2026-10-04
 
 - 전문가 영상 게시판에서 기본·대체 썸네일 URL이 모두 실패하는 네트워크 조건을 재현했다. 기존 구현은 실패한 이미지 요소가 `GABA VIDEO` 표지를 가릴 수 있었으므로, 두 요청이 모두 실패한 뒤에만 이미지 요소를 숨기고 설계된 fallback 표면을 드러내도록 PR #158에서 보완했다.

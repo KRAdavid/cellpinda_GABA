@@ -1,5 +1,13 @@
 # Completion Report
 
+## Expert Video Thumbnail Resolution Release Recheck — 52ff08b — 2026-10-04
+
+- 전문가 영상 썸네일이 오류가 아닌 저해상도 성공 응답을 반환하는 경우에도 decoded width를 검사해 대체 이미지를 시도하고, 두 이미지 모두 기준 미달이면 `GABA VIDEO` 표지를 보여주도록 보완했다.
+- 로컬 typecheck·UI contract·127 tests·build, 로컬·공개 저해상도 강제 Playwright, 320/390/1440px 공개 정상 로딩, main workflow `37145916564`, Pages·라이브 smoke·release status와 공개 validator candidate `52ff08b`를 통과했다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android 대표 환경, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004`.
+
 ## Expert Video Thumbnail Fallback Release Recheck — 342f43f — 2026-10-04
 
 - 기본·대체 썸네일이 모두 실패하는 상황에서도 빈 박스가 아닌 `GABA VIDEO` 표지가 보이도록 전문가 영상 게시판의 실패 상태를 보완했다.

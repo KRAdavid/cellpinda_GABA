@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Expert Video Thumbnail Resolution Red-Team Recheck — 52ff08b — 2026-10-04
+
+- `maxres`와 `hq` 썸네일을 모두 1px 이미지로 성공 응답시키는 조건에서 공개 390px 화면을 재현했다. 이미지가 `is-unavailable`로 숨겨지고 `GABA VIDEO` 표지가 표시되는 것을 확인했으며, 정상 320/390/1440px에서는 가로 넘침과 브라우저 오류가 없었다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 영상 선택·iframe 재생·공개 카피·제품 독립 경계는 변경하지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004`.
+
 ## Expert Video Thumbnail Fallback Red-Team Recheck — 342f43f — 2026-10-04
 
 - 기본·대체 썸네일 요청을 모두 실패시키는 조건에서 이미지 요소가 숨겨지고 `GABA VIDEO` 표지가 실제로 보이는지 확인했다. 정상 공개본에서는 320/390/1440px의 9개 썸네일 로딩, 첫 4개 eager, 가로 폭과 브라우저 오류도 재확인했다.

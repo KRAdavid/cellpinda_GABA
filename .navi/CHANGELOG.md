@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 전문가 영상 저해상도 썸네일 방어 공개 배포: 2026-10-04 / candidate `52ff08b`
+
+YouTube 썸네일이 오류 대신 저해상도 성공 응답을 반환해도 decoded width를 검사하고, 기본·대체 이미지 모두 기준 미달이면 `GABA VIDEO` 표지를 노출하도록 PR #160에서 보완했다. 로컬·공개 Playwright, main workflow `37145916564`, Pages·라이브 smoke·release status·공개 validator를 재검증했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004`.
+
 ## 전문가 영상 썸네일 이중 실패 fallback 보완 공개 배포: 2026-10-04 / candidate `342f43f`
 
 기본·대체 썸네일 URL이 모두 실패하는 경우에도 이미지 요소가 `GABA VIDEO` 표지를 가리지 않도록 실패 상태를 보완했다. PR #158 checks, main workflow `37144428732`, Pages·라이브 smoke·release status와 공개 validator, 320/390/1440px 정상 썸네일 로딩 및 390px 강제 이중 실패 fallback을 재검증했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-FALLBACK-20261004`.
