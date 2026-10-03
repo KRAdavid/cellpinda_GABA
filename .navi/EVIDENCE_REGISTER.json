@@ -3330,6 +3330,50 @@
       "captured_at": "2026-10-03T16:48:55Z",
       "reviewer_id": "NAVI-LIVE-QA-20261004-VIDEO-FILTERS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CHAPTER-ENTRY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "장 진입 시 제목만 맞추던 스크롤 기준을 장 헤더 전체로 보정한 PR #149 후보의 로컬 검증이 통과했다. 고정 읽기 진행 바 아래에 장 표시가 노출되고, 기존 제품 독립 과학 안내 흐름은 변경하지 않았다.",
+      "locator": "PR #149 candidate c450f78; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback at 320/390/1440px: chapter marker top 115/115/126, reading rail bottom 105/105/116, document scrollWidth equals viewport, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/149",
+      "captured_at": "2026-10-03T17:03:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-CHAPTER-ENTRY",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-CHAPTER-ENTRY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본을 Chrome fallback으로 320px·390px·1440px에서 확인했다. `#research` 직접 진입 시 장 표시가 고정 읽기 진행 바와 겹치지 않고 제목과 함께 보이며, 가로 넘침과 브라우저 오류가 없었다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/; v41-chapter-entry.mjs; 320px marker top 115 / rail bottom 105; 390px marker top 115 / rail bottom 105; 1440px marker top 126 / rail bottom 116; scrollWidth equals viewport at all widths; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/149",
+      "captured_at": "2026-10-03T17:07:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-CHAPTER-ENTRY",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-006", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #149의 release-verify와 site-quality-verify가 통과했고 main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드에서 정상적으로 건너뛰었다.",
+      "locator": "PR #149 checks 37139194690 release-verify PASS and 37139194661 site-quality-verify PASS; merge commit b9f21d0ceba52e0d3ea4745d65232e3661ffd7ea; main workflow 37139270708 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37139270708",
+      "captured_at": "2026-10-03T17:10:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-CHAPTER-ENTRY",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답하고 main 병합 SHA를 제공했으며, 장 진입 시 작은 장 표시가 고정 읽기 진행 바 아래에 노출되는 보정과 정적 공개 경계를 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha b9f21d0ceba52e0d3ea4745d65232e3661ffd7ea; generatedAt 2026-10-03T17:07:09.212Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Playwright chapter-entry results recorded in E-PLAYWRIGHT-CHAPTER-ENTRY-20261004",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T17:10:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261004-CHAPTER-ENTRY",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
     }
   ]
 }

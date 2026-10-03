@@ -1,5 +1,13 @@
 # Audit Report
 
+## Chapter Entry Clearance Recheck — b9f21d0 — 2026-10-04
+
+- 장 진입 스크롤 기준을 제목 단일 요소에서 장 헤더 전체로 보정해 고정 읽기 진행 바와 작은 장 표시의 겹침을 해소했다. 320px·390px·1440px에서 `#research` 직접 진입 후 장 표시가 진행 바 아래에 노출되고 가로 넘침·브라우저 오류가 없었다.
+- PR #149 검사, 로컬 typecheck/UI contract/127 tests/build, main workflow `37139270708`, Pages 배포·라이브 smoke·release status와 공개 validator가 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-CHAPTER-ENTRY-20261004`, `E-PLAYWRIGHT-CHAPTER-ENTRY-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004`, `E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004`.
+
 ## Mobile Expert Video Topic Visibility Recheck — 71960f0 — 2026-10-04
 
 - 모바일에서 일부 주제가 가로 스크롤 뒤에 숨던 탐색 단서를 전체 주제 줄바꿈으로 바꿔 320px·390px에서 7개 필터가 모두 보이도록 보완했다. `수용체` 선택은 해당 영상 1개와 iframe으로 전환된다.

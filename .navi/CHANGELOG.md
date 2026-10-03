@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 장 진입 표시와 고정 읽기 바 겹침 보정 공개 배포: 2026-10-04 / candidate `b9f21d0ceba52e0d3ea4745d65232e3661ffd7ea`
+
+장 링크로 이동할 때 제목만 맞추던 기준을 장 헤더 전체로 바꿔 `06 · 연구의 확장` 같은 작은 장 표시가 고정 읽기 진행 바 뒤에 숨지 않도록 보완했다. PR #149의 필수 검사, main workflow `37139270708`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback 320/390/1440px에서 `#research` 직접 진입 시 장 표시·제목·진행 바 간격, 가로 넘침 없음, 브라우저 오류 없음을 확인했다. 공개 과학 카피·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-CHAPTER-ENTRY-20261004`, `E-PLAYWRIGHT-CHAPTER-ENTRY-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004`, `E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004`.
+
 ## 모바일 전문가 영상 주제 전체 노출 공개 배포: 2026-10-04 / candidate `71960f083e21577641074358b74a0ca447cdd216`
 
 모바일 전문가 영상 주제 필터를 가로 스크롤에서 전체 주제 즉시 노출형 줄바꿈으로 바꿔 320px·390px에서도 7개 주제를 한눈에 확인할 수 있도록 보강했다. PR #147의 필수 검사, main workflow `37138030444`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback에서 320/390/1440px 가로 넘침 없음, `수용체` 필터 선택과 iframe 전환을 확인했다. 기존 과학 카피·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-FILTERS-20261004`, `E-PLAYWRIGHT-VIDEO-FILTERS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004`, `E-LIVE-PUBLIC-VIDEO-FILTERS-20261004`.

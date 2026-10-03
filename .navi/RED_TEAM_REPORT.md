@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Chapter Entry Clearance Red-Team Recheck — b9f21d0 — 2026-10-04
+
+- 장 헤더 전체를 앵커로 삼아 `06 · 연구의 확장` 같은 작은 장 표시가 고정 읽기 진행 바와 겹치지 않도록 보완했다. 320px·390px·1440px에서 표시·제목·진행 바의 세로 관계와 가로 폭을 확인했으며 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 직접 해시 진입과 기존 메뉴 이동 경로의 공개 정적 동작을 확인했지만, Chrome fallback만으로 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도를 닫을 수 없다. 독립 과학·규제 감수도 외부 게이트로 남는다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-CHAPTER-ENTRY-20261004`, `E-PLAYWRIGHT-CHAPTER-ENTRY-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004`, `E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004`.
+
 ## Mobile Expert Video Topic Visibility Red-Team Recheck — 71960f0 — 2026-10-04
 
 - 320px·390px에서 모든 전문가 영상 주제가 보이고, 1440px에서는 기존 갤러리 2열 균형이 유지되며 `수용체` 선택 시 1개 영상·iframe으로 전환된다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
