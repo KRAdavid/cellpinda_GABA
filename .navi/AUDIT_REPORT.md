@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — b1afe87 — 2026-10-03
+
+- 전문가 영상 게시판에 주제 필터·영상 수를 추가해 영상 확장에 따른 탐색 부담을 낮췄고, 선택 주제·카드 목록·선택 영상·즉시 재생을 동기화했다. 모바일 활성 필터는 가로 스크롤 안에서 중앙 정렬된다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 309,865, CSS 92,953, total 1,446,627.
+- PR #94 checks `37101853245`·`37101853172` and main `37101931045` release-verify/worker-readiness/Pages publish/smoke-live/release-status success; worker STATIC_ONLY skipped.
+- live validator candidate `b1afe879a3266dd802e4f3d470a49d5985616b70`, generatedAt `2026-10-03T06:06:50.513Z`, HTTP 200, 70 hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. Live CDP 390/1440 selected filter/card, widths 390/1425, errors `[]`.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-FILTER`, `E-CDP-EXPERT-VIDEO-FILTER`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-FILTER`, `E-LIVE-PUBLIC-EXPERT-VIDEO-FILTER`.
+
 ## Latest Public Release Recheck — bed5bf3 — 2026-10-03
 
 - 연구 비교 도표는 보고되지 않은 수치를 시각적으로 만들어내지 않도록 1·2단계 상대 방향 신호로 보완했고, 조건명을 `비교 조건`·`GABA 섭취`로 중립화했다. 안내 문구는 신호 개수가 실제 효과 크기나 수치를 뜻하지 않는다고 명시한다.

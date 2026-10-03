@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — b1afe87 — 2026-10-03
+
+- 전문가 영상이 늘어나면 단일 그리드 탐색성이 떨어질 수 있었던 점을 PR #94에서 주제 필터·영상 수·활성 상태로 보완했다. 모바일에서 filter min-content expansion을 발견해 `min-width: 0`으로 수정했고, 활성 칩은 중앙 정렬된다. 새 치명적 결함은 확인되지 않았다.
+- PR #94 checks, main `37101931045`, live validator, 390/1440px CDP를 재확인했다. 이번 변경으로 새 과학·제품 주장은 추가되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-FILTER`, `E-CDP-EXPERT-VIDEO-FILTER`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-FILTER`, `E-LIVE-PUBLIC-EXPERT-VIDEO-FILTER`.
+
 ## Latest Red-Team Recheck — bed5bf3 — 2026-10-03
 
 - 이전 동일 길이 리본은 시각적으로 두 조건이 같은 값처럼 읽힐 수 있었다. PR #92에서 1·2단계 상대 방향 신호를 추가하고 조건명을 `비교 조건`·`GABA 섭취`로 중립화했다. 신호 개수는 실제 효과 크기나 수치를 뜻하지 않는다는 안내도 함께 확인했다.

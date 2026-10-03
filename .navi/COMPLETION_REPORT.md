@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — b1afe87 — 2026-10-03
+
+- 전문가 영상 게시판에 주제 필터·영상 수를 추가하고 활성 필터를 모바일에서 중앙 정렬해, 필터 목록·선택 카드·즉시 재생이 함께 움직이도록 고도화했다.
+- PR #94 checks, main `37101931045`, Pages/live validator, 320/390/1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `b1afe879a3266dd802e4f3d470a49d5985616b70`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-FILTER`, `E-CDP-EXPERT-VIDEO-FILTER`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-FILTER`, `E-LIVE-PUBLIC-EXPERT-VIDEO-FILTER`.
+
 ## Latest Release Recheck — bed5bf3 — 2026-10-03
 
 - 공개 연구 결과 도표를 1·2단계 상대 방향 신호와 중립 조건명으로 고도화해, 보고되지 않은 정량 효과를 시각적으로 암시하지 않으면서 비교 방향을 빠르게 읽도록 했다.

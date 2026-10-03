@@ -2175,6 +2175,50 @@
       "captured_at": "2026-10-03T05:45:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-QUALITATIVE-DIRECTION",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-FILTER",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 게시판에 주제 필터와 영상 수를 추가하고, 선택한 주제에 맞춰 카드 목록·선택 영상·즉시 재생이 동기화되도록 보완했다. 모바일 필터는 가로 스크롤과 활성 항목 중앙 정렬을 사용하며 로컬 품질 검사를 통과했다.",
+      "locator": "PR #94 candidate f0f71af; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test -- --runInBand 127/127; pnpm run build PASS; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1446627; local Chrome CDP 320px, 390px, 1440px topic selection verified with document/body scrollWidth 320/390/1425 and errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/94",
+      "captured_at": "2026-10-03T06:03:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-EXPERT-VIDEO-FILTER",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-EXPERT-VIDEO-FILTER",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 공개본을 Chrome CDP fallback으로 확인한 결과, GABA란 주제 필터 선택 시 활성 필터가 보이고 1개 영상 카드와 GABA 기본 역할 영상이 선택·재생 상태로 연결되며 모바일 가로 넘침과 runtime errors가 없었다.",
+      "locator": "temporary Chrome CDP fallback; live candidate b1afe879a3266dd802e4f3d470a49d5985616b70 at https://kradavid.github.io/gaba_info/; expert-video-feature; selected topic GABA란; active card video id 4xGSHxkMYew; 390px feature width 350px, media width 230px, active filter centered within the scrollable filter row, document/body scrollWidth 390, errors []; 1440px document/body scrollWidth 1425, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T06:08:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-EXPERT-VIDEO-FILTER",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-FILTER",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 주제 필터 보완 PR #94의 필수 검사를 통과했고 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #94 checks 37101853245 and 37101853172 PASS; merge commit b1afe879a3266dd802e4f3d470a49d5985616b70; main workflow 37101931045 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37101931045",
+      "captured_at": "2026-10-03T06:06:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-EXPERT-VIDEO-FILTER",
+      "claim_refs": ["C-001", "C-002", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-FILTER",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 필터가 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고 공개 데이터 경계를 유지했으며 GABA란 필터·선택 영상·모바일/데스크톱 가로 폭·runtime errors를 라이브에서 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha b1afe879a3266dd802e4f3d470a49d5985616b70; generatedAt 2026-10-03T06:06:50.513Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px selected GABA란 filter with 1 visible card and active video, document/body scrollWidth 390, errors []; live 1440px document/body scrollWidth 1425, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T06:08:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-EXPERT-VIDEO-FILTER",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }

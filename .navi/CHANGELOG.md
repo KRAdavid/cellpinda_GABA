@@ -1,5 +1,9 @@
 # Project Changelog
 
+최신 공개 재검증: 2026-10-03 / candidate `b1afe879a3266dd802e4f3d470a49d5985616b70`
+
+전문가 영상 게시판에 주제 필터와 영상 수를 추가해 앞으로 영상이 늘어나도 수면·GABA란·연구 읽기·자율신경 등 관심 주제만 빠르게 탐색할 수 있도록 했다. 선택한 주제는 영상 목록·선택 상태·즉시 재생과 동기화되고 모바일에서는 활성 필터를 중앙에 정렬한다. PR #94의 release-verify·site-quality-verify, main workflow `37101931045`, Pages 배포·라이브 smoke·release status, live validator, 320/390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-EXPERT-VIDEO-FILTER`, `E-CDP-EXPERT-VIDEO-FILTER`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-FILTER`, `E-LIVE-PUBLIC-EXPERT-VIDEO-FILTER`.
+
 최신 공개 재검증: 2026-10-03 / candidate `bed5bf3245d489e74a79b33249bcdf9fba00668d`
 
 연구 결과 비교 도표의 동일 길이 장식을 1·2단계 상대 방향 신호로 보완하고, 조건명을 `비교 조건`·`GABA 섭취`로 중립화했다. 설명에는 신호 개수가 실제 효과 크기나 수치를 뜻하지 않는다는 점을 명시했다. PR #92의 release-verify·site-quality-verify, main workflow `37100751730`, Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-QUALITATIVE-DIRECTION`, `E-CDP-QUALITATIVE-DIRECTION`, `E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION`, `E-LIVE-PUBLIC-QUALITATIVE-DIRECTION`.
