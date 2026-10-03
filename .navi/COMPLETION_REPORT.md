@@ -1,5 +1,13 @@
 # Completion Report
 
+## Explicit Original-Source Action Release Recheck — 32b37a1 — 2026-10-04
+
+- 출처 읽기 카드에 `원문 보기`를 명시해 모바일·고령 사용자도 원문 이동을 바로 이해하도록 고도화했다. 기존 네 가지 연구 읽기 질문과 Yoto et al. 2012 PubMed 예시는 유지했다.
+- 로컬 typecheck/UI contract/127 tests/build, PR #145 검사, main workflow `37136765623`, Pages 배포·라이브 smoke·release status와 공개 validator가 통과했다. 공개 320/390/1440px Playwright에서 `원문 보기` 표시·PubMed 새 탭 이동·가로 넘침 없음·메뉴/연구 지도/전문가 영상 선택 재생을 확인했다.
+- 공개 candidate는 `32b37a11a327a351b79a3822029d35d19d58bae6`이며, 제품 독립 과학 안내·연구 데이터·출처 경계는 유지했다. 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 NAVI 상태는 `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-SOURCE-ACTION-20261004`, `E-PLAYWRIGHT-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-SOURCE-ACTION-20261004`.
+
 ## Source Reading Bridge Release Recheck — a8cc869 — 2026-10-04
 
 - `출처 읽기` 구간을 네 가지 연구 읽기 질문과 Yoto et al. 2012 PubMed 원문 예시가 연결된 편집형 브리지로 고도화했다. 결과만 소비하지 않고 연구 대상·비교·관찰 결과·해석 범위를 한 흐름으로 읽게 하는 개선이다.

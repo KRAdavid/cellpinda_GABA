@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 출처 원문 행동 명시화 공개 배포: 2026-10-04 / candidate `32b37a11a327a351b79a3822029d35d19d58bae6`
+
+출처 읽기 브리지의 실제 연구 카드에 아이콘만 두지 않고 `원문 보기` 행동을 명시해 모바일과 큰 글씨 읽기에서 다음 행동을 바로 이해하도록 보강했다. PR #145의 필수 검사, main workflow `37136765623`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback 320/390/1440px에서 네 단계·원문 표시·가로 넘침 없음·메뉴/연구 지도/전문가 영상 선택 재생을 확인했고, `원문 보기` 클릭은 PubMed 새 탭으로 이동했다. 기존 과학 카피·제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-SOURCE-ACTION-20261004`, `E-PLAYWRIGHT-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-SOURCE-ACTION-20261004`.
+
 ## 출처 읽기 브리지 고도화 공개 배포: 2026-10-04 / candidate `a8cc869b2c1537b2568b2f0e99c31adc3eae9353`
 
 `출처 읽기`의 빈 연결 구간을 `누구를 살폈나요? → 어떻게 비교했나요? → 무엇이 달라졌나요? → 어디까지 알 수 있나요?`의 네 질문과 Yoto et al. 2012 PubMed 원문 예시로 보강했다. PR #143의 필수 검사, main workflow `37135553445`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했으며 공개 Playwright Chrome fallback 320/390/1440px에서 네 단계·원문 링크·가로 넘침 없음·핵심 메뉴/영상 상호작용을 확인했다. 과학 카피·제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-SOURCE-BRIDGE-20261004`, `E-PLAYWRIGHT-SOURCE-BRIDGE-20261004`, `E-DEPLOY-PIPELINE-SOURCE-BRIDGE-20261004`, `E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004`.

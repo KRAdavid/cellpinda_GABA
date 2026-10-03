@@ -1,5 +1,13 @@
 # Audit Report
 
+## Explicit Original-Source Action Recheck — 32b37a1 — 2026-10-04
+
+- 출처 카드에 `원문 보기`를 추가해 아이콘 의미를 추측하지 않고 PubMed 원문으로 이어지는 행동을 한눈에 인식하도록 보강했다. 이는 기존 연구 결과나 제품 경계를 바꾸지 않는 정보 구조 개선이다.
+- PR #145 검사, 로컬 typecheck/UI contract/127 tests/build, main workflow `37136765623`, Pages 배포·라이브 smoke·release status, 공개 validator와 320/390/1440px Playwright Chrome fallback이 통과했다. 공개 클릭 검증은 PubMed 새 탭 URL까지 확인했고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SOURCE-ACTION-20261004`, `E-PLAYWRIGHT-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-SOURCE-ACTION-20261004`.
+
 ## Source Reading Bridge Recheck — a8cc869 — 2026-10-04
 
 - 제목·설명만 있던 `출처 읽기` 구간을 네 가지 연구 읽기 질문과 실제 PubMed 원문 예시가 있는 편집형 브리지로 보강했다. 방문자는 연구 결과를 바로 단정하지 않고 대상·비교·관찰 결과·해석 범위를 순서대로 확인할 수 있다.
