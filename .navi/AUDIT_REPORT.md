@@ -1,5 +1,13 @@
 # Audit Report
 
+## Latest Public Release Recheck — d3ff9e3 — 2026-10-03
+
+- 연구 지도 5개 주제를 실제 선택 요소로 바꾸고, `인지·피부·근육·성장호르몬·면역`을 누르면 해당 상세 연구 카드로 이어지도록 연결했다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산이 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,439,994 <= 1,650,000` bytes였다.
+- PR #66 checks `37086888705`, `37086888733`과 main push run `37086967211`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 HTTP 200, candidate `d3ff9e3f27833f3719b76f0cc377468a23bcc421`, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL Chrome CDP는 390px·1440px에서 가로 폭·44px 컨트롤·연구 프로필·runtime errors `[]`를 확인했고, 390px에서 첫 지도 항목을 눌러 첫 상세 연구 카드로 이동하는 흐름을 캡처했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Latest Public Release Recheck — e514a37 — 2026-10-03
 
 - PR #64에서 기존 `지도 → 대상 → 결과 → 해석` 문장을 01–04 번호 노드와 연결선이 있는 읽기 레일로 정리했다. 정보 구조와 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
