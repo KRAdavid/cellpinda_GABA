@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-03 — 4604805
+
+- 전문가 영상 목록에서 현재 선택된 카드가 분명하지 않은 상태를 확인하고, 선택 카드에 `재생 중` 배지를 추가했다. 390px 로컬·라이브에서 선택 상태, autoplay iframe, 가로 폭과 runtime errors를 다시 확인했다.
+- PR #79 checks와 main workflow `37093519815`, live validator가 통과했다. 공개 데이터·연구 카피·제품 독립 경계와 teaser HOLD는 변하지 않았다.
+- 새 치명적 결함은 확인되지 않았고 결과는 `PASS_WITH_CONDITIONS`를 유지한다. Browser 플러그인 미사용으로 CDP fallback을 사용했으며 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-VIDEO-SELECTION-STATE`, `E-CDP-VIDEO-SELECTION-STATE`, `E-DEPLOY-PIPELINE-VIDEO-SELECTION-STATE`, `E-LIVE-PUBLIC-VIDEO-SELECTION-STATE`.
+
 ## Recheck — 2026-10-03 — 95c3830
 
 - 전문가 영상 선택 직후의 검은 빈 iframe 인상을 재현하고, iframe 로딩 중 상태 문구·오버레이를 추가해 사용자가 고장으로 오인할 가능성을 낮췄다. 로컬 390px에서는 로딩 상태, 라이브 390px에서는 autoplay iframe과 로드 완료 상태를 확인했다.

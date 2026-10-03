@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T03:19:58.377584Z",
+  "updated_at": "2026-10-03T03:37:11.884454Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -242,7 +242,10 @@
         "E-LIVE-PUBLIC-TABLET-HEADER",
         "E-LOCAL-BUILD-VIDEO-LOADING",
         "E-DEPLOY-PIPELINE-VIDEO-LOADING",
-        "E-LIVE-PUBLIC-VIDEO-LOADING"
+        "E-LIVE-PUBLIC-VIDEO-LOADING",
+        "E-LOCAL-BUILD-VIDEO-SELECTION-STATE",
+        "E-DEPLOY-PIPELINE-VIDEO-SELECTION-STATE",
+        "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
       ],
       "owner": "UX QA"
     },
@@ -823,7 +826,9 @@
           "E-CDP-TABLET-HEADER",
           "E-LIVE-PUBLIC-TABLET-HEADER",
           "E-CDP-VIDEO-LOADING",
-          "E-LIVE-PUBLIC-VIDEO-LOADING"
+          "E-LIVE-PUBLIC-VIDEO-LOADING",
+          "E-CDP-VIDEO-SELECTION-STATE",
+          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -857,7 +862,9 @@
           "E-CDP-TABLET-HEADER",
           "E-LIVE-PUBLIC-TABLET-HEADER",
           "E-CDP-VIDEO-LOADING",
-          "E-LIVE-PUBLIC-VIDEO-LOADING"
+          "E-LIVE-PUBLIC-VIDEO-LOADING",
+          "E-CDP-VIDEO-SELECTION-STATE",
+          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -866,7 +873,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T03:06:00Z"
+    "last_run_at": "2026-10-03T03:34:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -884,7 +891,9 @@
           "E-CDP-TABLET-HEADER",
           "E-LIVE-PUBLIC-TABLET-HEADER",
           "E-CDP-VIDEO-LOADING",
-          "E-LIVE-PUBLIC-VIDEO-LOADING"
+          "E-LIVE-PUBLIC-VIDEO-LOADING",
+          "E-CDP-VIDEO-SELECTION-STATE",
+          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -921,7 +930,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T03:17:30Z"
+    "last_run_at": "2026-10-03T03:34:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -1060,9 +1069,11 @@
           "E-LOCAL-BUILD-TABLET-HEADER",
           "E-DEPLOY-PIPELINE-TABLET-HEADER",
           "E-LIVE-PUBLIC-TABLET-HEADER",
-          "E-CDP-TABLET-HEADER"
+          "E-CDP-TABLET-HEADER",
+          "E-CDP-VIDEO-SELECTION-STATE",
+          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
         ],
-        "notes": "79eea1f 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더 컨트롤을 재확인"
+        "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태를 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -1167,7 +1178,9 @@
           "E-CDP-TABLET-HEADER",
           "E-LIVE-PUBLIC-TABLET-HEADER",
           "E-CDP-VIDEO-LOADING",
-          "E-LIVE-PUBLIC-VIDEO-LOADING"
+          "E-LIVE-PUBLIC-VIDEO-LOADING",
+          "E-CDP-VIDEO-SELECTION-STATE",
+          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락을 추가 확인"
       },
@@ -1219,7 +1232,9 @@
           "E-CDP-RECOVERY-NAV",
           "E-LIVE-PUBLIC-RECOVERY-NAV",
           "E-CDP-VIDEO-LOADING",
-          "E-LIVE-PUBLIC-VIDEO-LOADING"
+          "E-LIVE-PUBLIC-VIDEO-LOADING",
+          "E-CDP-VIDEO-SELECTION-STATE",
+          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
         ],
         "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태 확인"
       },
@@ -1288,7 +1303,10 @@
           "E-LIVE-PUBLIC-TABLET-HEADER",
           "E-LOCAL-BUILD-VIDEO-LOADING",
           "E-DEPLOY-PIPELINE-VIDEO-LOADING",
-          "E-LIVE-PUBLIC-VIDEO-LOADING"
+          "E-LIVE-PUBLIC-VIDEO-LOADING",
+          "E-LOCAL-BUILD-VIDEO-SELECTION-STATE",
+          "E-DEPLOY-PIPELINE-VIDEO-SELECTION-STATE",
+          "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·태블릿 헤더·전문가 영상 로딩 상태 보강 검증 통과"
       },
@@ -1536,6 +1554,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T03:19:58Z"
+    },
+    {
+      "id": "H-033",
+      "event": "전문가 영상 게시판에서 현재 선택된 영상에 `재생 중` 상태를 표시하도록 보완한 PR #79를 main에 병합했으며 390px 로컬·라이브 Chrome CDP와 Pages 배포 파이프라인을 재검증해 공개본을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T03:34:00Z"
     }
   ]
 }
