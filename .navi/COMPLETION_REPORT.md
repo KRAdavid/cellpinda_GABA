@@ -1,5 +1,13 @@
 # Completion Report
 
+## Source Reading Bridge Release Recheck — a8cc869 — 2026-10-04
+
+- `출처 읽기` 구간을 네 가지 연구 읽기 질문과 Yoto et al. 2012 PubMed 원문 예시가 연결된 편집형 브리지로 고도화했다. 결과만 소비하지 않고 연구 대상·비교·관찰 결과·해석 범위를 한 흐름으로 읽게 하는 개선이다.
+- 로컬 typecheck/UI contract/127 tests/build, PR #143 검사, main workflow `37135553445`, Pages 배포·라이브 smoke·release status와 공개 validator가 통과했다. 공개 320/390/1440px Playwright Chrome fallback에서 네 단계·원문 링크·가로 넘침 없음·메뉴/연구 지도/전문가 영상 선택 재생을 확인했다.
+- 공개 UI 후보는 `a8cc869b2c1537b2568b2f0e99c31adc3eae9353`이며, 제품 독립 과학 안내·기존 연구 데이터·출처 경계는 유지했다. 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 NAVI 상태는 `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-SOURCE-BRIDGE-20261004`, `E-PLAYWRIGHT-SOURCE-BRIDGE-20261004`, `E-DEPLOY-PIPELINE-SOURCE-BRIDGE-20261004`, `E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004`.
+
 ## NAVI 문서 병합 후 최신 공개본 동기화 — 6212511 — 2026-10-04
 
 - NAVI 문서 PR #141 병합 후 main workflow `37134462216`, Pages 배포, 라이브 smoke, release status와 공개 validator가 통과했다. 라이브 공개 candidate는 `621251166c2902a7ea2a8fae44b5230f97242ff9`다.
