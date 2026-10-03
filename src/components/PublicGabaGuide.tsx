@@ -844,6 +844,8 @@ export default function PublicGabaGuide() {
     const targetId = window.location.hash.slice(1);
     if (!targetId) return;
     let cancelled = false;
+    let layoutObserver: ResizeObserver | null = null;
+    let layoutObserverTimer = 0;
     const alignHashTarget = () => {
       if (cancelled || hashAlignmentCancelled.current) return;
       const target = document.getElementById(targetId);
@@ -855,13 +857,24 @@ export default function PublicGabaGuide() {
       root.style.scrollBehavior = previousScrollBehavior;
       window.dispatchEvent(new Event('scroll'));
     };
+    const alignWhenReady = () => alignHashTarget();
     alignHashTarget();
     const firstFrame = window.requestAnimationFrame(alignHashTarget);
-    const settleTimers = [180, 420, 780].map((delay) => window.setTimeout(alignHashTarget, delay));
+    const settleTimers = [180, 420, 780, 1200, 1800].map((delay) => window.setTimeout(alignHashTarget, delay));
+    window.addEventListener('load', alignWhenReady, { once: true });
+    document.fonts?.ready.then(alignWhenReady).catch(() => undefined);
+    if (typeof ResizeObserver !== 'undefined' && document.body) {
+      layoutObserver = new ResizeObserver(alignWhenReady);
+      layoutObserver.observe(document.body);
+      layoutObserverTimer = window.setTimeout(() => layoutObserver?.disconnect(), 2200);
+    }
     return () => {
       cancelled = true;
       window.cancelAnimationFrame(firstFrame);
       settleTimers.forEach((timer) => window.clearTimeout(timer));
+      window.removeEventListener('load', alignWhenReady);
+      if (layoutObserverTimer) window.clearTimeout(layoutObserverTimer);
+      layoutObserver?.disconnect();
     };
   }, []);
 
