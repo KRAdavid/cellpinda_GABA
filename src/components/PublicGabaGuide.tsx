@@ -760,8 +760,7 @@ export default function PublicGabaGuide() {
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
-  const activeChapterLookupIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
-  const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterLookupIndex)];
+  const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
 
@@ -801,19 +800,36 @@ export default function PublicGabaGuide() {
 
   useEffect(() => {
     if (!menuOpen) return;
-    requestAnimationFrame(() => document.querySelector<HTMLElement>('nav a')?.focus());
+    const getMenuFocusables = () => Array.from(document.querySelectorAll<HTMLElement>('#guide-primary-navigation a, #guide-primary-navigation button, .guide-menu-toggle')).filter((element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true' && element.getClientRects().length > 0);
+    requestAnimationFrame(() => document.querySelector<HTMLElement>('#guide-primary-navigation a')?.focus());
     const closeOnEscape = (event: globalThis.KeyboardEvent) => {
       if (event.key !== 'Escape') return;
       setMenuOpen(false);
       menuToggleRef.current?.focus();
     };
+    const keepFocusInsideMenu = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== 'Tab') return;
+      const focusables = getMenuFocusables();
+      if (focusables.length < 2) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
     const closeOnOutsidePointer = (event: PointerEvent) => {
       if (!headerRef.current?.contains(event.target as Node)) setMenuOpen(false);
     };
     document.addEventListener('keydown', closeOnEscape);
+    document.addEventListener('keydown', keepFocusInsideMenu);
     document.addEventListener('pointerdown', closeOnOutsidePointer);
     return () => {
       document.removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('keydown', keepFocusInsideMenu);
       document.removeEventListener('pointerdown', closeOnOutsidePointer);
     };
   }, [menuOpen]);
@@ -1057,12 +1073,12 @@ export default function PublicGabaGuide() {
       <header className="guide-header" ref={headerRef}>
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈"><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a>
         <nav id="guide-primary-navigation" className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
-          <a href="#recovery-break" aria-current={isNavCurrent('recovery-break') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('recovery-break'); }}>수면과 회복</a>
-          <a href="#history" aria-current={isNavCurrent('history') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견</a>
-          <a href="#basics" aria-current={isNavCurrent('basics') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('basics'); }}>GABA란</a>
-          <a href="#academic" aria-current={isNavCurrent('academic') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('academic'); }}>연구 지도</a>
-          <a href="#applications" aria-current={isNavCurrent('applications') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a>
-          <a href="#fermented-safety" aria-current={isNavCurrent('fermented-safety') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('fermented-safety'); }}>발효·안전</a>
+          <a href="#recovery-break" aria-current={isNavCurrent('recovery-break') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('recovery-break'); }}>수면과 회복</a>
+          <a href="#history" aria-current={isNavCurrent('history') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견</a>
+          <a href="#basics" aria-current={isNavCurrent('basics') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('basics'); }}>GABA란</a>
+          <a href="#academic" aria-current={isNavCurrent('academic') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('academic'); }}>연구 지도</a>
+          <a href="#applications" aria-current={isNavCurrent('applications') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a>
+          <a href="#fermented-safety" aria-current={isNavCurrent('fermented-safety') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('fermented-safety'); }}>발효·안전</a>
         </nav>
         <button ref={menuToggleRef} type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} title={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         <button type="button" className={`guide-reading-size-toggle${largeText ? ' is-active' : ''}`} aria-label={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} title={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} aria-pressed={largeText} onClick={toggleReadingSize}><Type size={15} aria-hidden="true" /><span>{largeText ? '기본 글씨' : '큰 글씨'}</span></button>
