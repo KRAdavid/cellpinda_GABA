@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Explicit Original-Source Action Red-Team Recheck — 32b37a1 — 2026-10-04
+
+- 아이콘만 있던 출처 카드의 다음 행동 불명확성을 `원문 보기` 텍스트 행동으로 보완했다. 공개 320/390/1440px에서 표시·가로 폭·오류를 확인했고 클릭 시 `https://pubmed.ncbi.nlm.nih.gov/22203366/` 새 탭으로 이동했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 이 변경은 연구 결과 문장·제품 독립 경계를 바꾸지 않는다. 자동화와 Chrome fallback만으로 Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SOURCE-ACTION-20261004`, `E-PLAYWRIGHT-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-SOURCE-ACTION-20261004`.
+
 ## Source Reading Bridge Red-Team Recheck — a8cc869 — 2026-10-04
 
 - 기존 출처 읽기 구간이 다음 행동을 안내하지 못하던 정보 구조 결함을 네 질문과 실제 원문 출처 카드로 보완했다. 320/390/1440px 공개 Playwright에서 네 단계·PubMed 링크·모바일 이동·영상 선택 재생·가로 폭을 확인했고 새 CRITICAL/MAJOR 결함은 확인하지 않았다.
