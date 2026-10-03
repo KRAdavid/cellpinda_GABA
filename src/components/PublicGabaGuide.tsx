@@ -93,6 +93,7 @@ type ResearchScaleStat = {
   label: string;
   detail: string;
   scale: number;
+  group: 'institution' | 'analysis';
   source: { label: string; url: string };
 };
 
@@ -450,7 +451,8 @@ const researchScaleStats: ResearchScaleStat[] = [
     value: '984',
     label: '하버드',
     detail: 'GABA 문헌 · PubMed',
-    scale: 8,
+    scale: 100,
+    group: 'institution',
     source: {
       label: 'PubMed 검색',
       url: 'https://pubmed.ncbi.nlm.nih.gov/?term=%28%28GABA%5BTitle%2FAbstract%5D%29+OR+%28%22gamma-aminobutyric+acid%22%5BTitle%2FAbstract%5D%29%29+AND+%28Harvard%5BAffiliation%5D+OR+%22Harvard+Medical+School%22%5BAffiliation%5D%29',
@@ -460,7 +462,8 @@ const researchScaleStats: ResearchScaleStat[] = [
     value: '557',
     label: '옥스퍼드',
     detail: 'GABA 문헌 · PubMed',
-    scale: 5,
+    scale: 57,
+    group: 'institution',
     source: {
       label: 'PubMed 검색',
       url: 'https://pubmed.ncbi.nlm.nih.gov/?term=%28%28GABA%5BTitle%2FAbstract%5D%29+OR+%28%22gamma-aminobutyric+acid%22%5BTitle%2FAbstract%5D%29%29+AND+%28Oxford%5BAffiliation%5D+OR+%22University+of+Oxford%22%5BAffiliation%5D%29',
@@ -471,12 +474,28 @@ const researchScaleStats: ResearchScaleStat[] = [
     label: 'GABA-A 수용체 · SCIE',
     detail: 'WoS Core Collection · 1999~2022년',
     scale: 100,
+    group: 'analysis',
     source: {
       label: 'GABA-A 연구 분석',
       url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10289248/',
     },
   },
 ];
+
+function ResearchScaleMetric({ stat, featured = false }: { stat: ResearchScaleStat; featured?: boolean }) {
+  return (
+    <article className={`guide-research-scale-metric${featured ? ' is-featured' : ''}`} aria-label={`${stat.label} ${stat.value}편 · ${stat.detail}`}>
+      {!featured ? <div className="guide-research-scale-bar" aria-hidden="true"><span style={{ '--guide-scale-height': `${stat.scale}%` } as CSSProperties} /></div> : null}
+      <div>
+        <strong>{stat.value}</strong>
+        <h4>{stat.label}</h4>
+        <p>{stat.detail}</p>
+        <a href={stat.source.url} target="_blank" rel="noopener noreferrer">{stat.source.label} <ExternalLink size={12} aria-hidden="true" /></a>
+      </div>
+      {featured ? <div className="guide-research-scale-feature-bar" aria-hidden="true"><span /></div> : null}
+    </article>
+  );
+}
 
 const readingChapters = [
   { id: 'history', label: '발견의 순간' },
@@ -1165,8 +1184,17 @@ export default function PublicGabaGuide() {
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <div className="guide-research-scale" aria-label="GABA 연구 규모">
               <div className="guide-research-scale-head"><div><p className="guide-section-number">연구 규모</p><h3>하나의 신호.<br />넓어진 연구.</h3></div><p>1950 → 지금</p></div>
-              <div className="guide-research-scale-grid">{researchScaleStats.map((stat) => <article key={stat.label} aria-label={`${stat.label} ${stat.value}편 · ${stat.detail}`}><div className="guide-research-scale-bar" aria-hidden="true"><span style={{ '--guide-scale-height': `${stat.scale}%` } as CSSProperties} /></div><div><strong>{stat.value}</strong><h4>{stat.label}</h4><p>{stat.detail}</p><a href={stat.source.url} target="_blank" rel="noopener noreferrer">{stat.source.label} <ExternalLink size={12} aria-hidden="true" /></a></div></article>)}</div>
-              <p className="guide-research-scale-caption">하버드·옥스퍼드 수치는 PubMed 검색 결과이며, SCIE 수치는 GABA-A 수용체 관련 공개 연구 분석에서 집계된 숫자입니다. 검색일은 2026년 9월 28일입니다.</p>
+              <div className="guide-research-scale-groups">
+                <section className="guide-research-scale-group" aria-labelledby="research-scale-institution-heading">
+                  <div className="guide-research-scale-group-head"><div><p>같은 검색 기준 안에서</p><h4 id="research-scale-institution-heading">기관별 GABA 문헌</h4></div><span>PubMed</span></div>
+                  <div className="guide-research-scale-grid">{researchScaleStats.filter((stat) => stat.group === 'institution').map((stat) => <ResearchScaleMetric key={stat.label} stat={stat} />)}</div>
+                </section>
+                <section className="guide-research-scale-feature" aria-labelledby="research-scale-analysis-heading">
+                  <div className="guide-research-scale-feature-head"><div><p>별도 공개 연구 분석</p><h4 id="research-scale-analysis-heading">GABA-A 수용체</h4></div><span>SCIE</span></div>
+                  {researchScaleStats.filter((stat) => stat.group === 'analysis').map((stat) => <ResearchScaleMetric key={stat.label} stat={stat} featured />)}
+                </section>
+              </div>
+              <p className="guide-research-scale-caption">하버드·옥스퍼드는 같은 PubMed 검색 기준에서 비교했습니다. SCIE 수치는 GABA-A 수용체 관련 WoS Core Collection 분석으로, 별도 연구 범위의 결과입니다. 검색일은 2026년 9월 28일입니다.</p>
               <p className="guide-history-quote">작은 분자 하나의 발견은<br /><strong>뇌가 균형을 만드는 방식을 읽는 새로운 언어</strong>가 되었습니다.</p>
             </div>
           </div>
