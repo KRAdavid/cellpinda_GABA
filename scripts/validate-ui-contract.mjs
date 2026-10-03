@@ -140,6 +140,8 @@ requireMatch(publicGuideStyles, /\.guide-reading-progress-track\{height:3px;back
 requireMatch(publicGuideStyles, /@media\(max-width:700px\)\{[\s\S]*?\.guide-reading-progress-meta\{width:[^}]*min-height:32px/, 'public GABA mobile reading progress must remain legible without wrapping');
 requireMatch(publicGuideStyles, /\.guide-reading-progress-meta strong\{font-size:13px\}/, 'public GABA reading progress chapter label must remain readable');
 requireMatch(publicGuideStyles, /@media \(max-width:700px\)\{[\s\S]*?\.guide-header nav\{top:70px/, 'public GABA mobile menu must begin below its 70px header');
+requireMatch(publicGuide, /const keepFocusInsideMenu = \(event: globalThis\.KeyboardEvent\) =>[\s\S]*?event\.key !== 'Tab'[\s\S]*?document\.addEventListener\('keydown', keepFocusInsideMenu\)/, 'public GABA mobile menu must keep keyboard focus inside the open menu');
+requireMatch(publicGuide, /aria-current=\{isNavCurrent\('history'\) \? 'location'/, 'public GABA navigation must expose the current reading location semantically');
 requireMatch(publicGuideStyles, /\.guide-library-filters\{grid-template-columns:1fr\}/, 'public GABA mobile research filters must remain one readable column');
 if (/대표 연구 보기|대표 논문 먼저 보기|궁금한 연구를\s*직접 확인해 보세요|href="#library"/.test(publicGuide)) fail('public GABA guide must keep research summaries in the reading flow instead of jump links');
 requireMatch(publicGuide, /guide-research-flow[\s\S]*어떻게 살펴봤나요\?[\s\S]*무엇이 달라졌나요\?[\s\S]*출처/, 'public GABA guide must show study method, observed result, and source in sequence');

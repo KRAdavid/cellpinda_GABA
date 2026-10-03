@@ -861,11 +861,11 @@
 
 /* v15 navigation orientation: make the active chapter visible without adding chrome. */
 .guide-header nav a{position:relative}
-.guide-header nav a[aria-current="page"]{color:var(--guide-teal-dark)}
-.guide-header nav a[aria-current="page"]:after{content:"";position:absolute;right:0;bottom:-8px;left:0;height:2px;border-radius:999px;background:var(--guide-teal)}
+.guide-header nav a[aria-current="location"]{color:var(--guide-teal-dark)}
+.guide-header nav a[aria-current="location"]:after{content:"";position:absolute;right:0;bottom:-8px;left:0;height:2px;border-radius:999px;background:var(--guide-teal)}
 @media(max-width:700px){
-  .guide-header nav a[aria-current="page"]{border-radius:9px;background:#eef8f8;color:var(--guide-teal-dark);font-weight:850}
-  .guide-header nav a[aria-current="page"]:after{right:auto;bottom:50%;left:0;width:3px;height:20px;transform:translateY(50%)}
+  .guide-header nav a[aria-current="location"]{border-radius:9px;background:#eef8f8;color:var(--guide-teal-dark);font-weight:850}
+  .guide-header nav a[aria-current="location"]:after{right:auto;bottom:50%;left:0;width:3px;height:20px;transform:translateY(50%)}
 }
 
 /* v18 reading control: let older readers enlarge explanatory copy without changing the editorial rhythm. */
