@@ -1407,7 +1407,31 @@ export default function PublicGabaGuide() {
           </div>
         </section>
 
-        <section className="guide-section guide-reading-note guide-story-section" id="reading-note" aria-labelledby="reading-note-heading"><div className="guide-container guide-reading-note-layout"><div><p className="guide-section-number">11 · 출처 읽기</p><h2 id="reading-note-heading">연구를 이해하는<br />마지막 단계</h2></div><div><p className="guide-reading-note-copy">각 연구 카드에서 연구 방법과 실제 관찰 결과를 읽은 뒤, 카드 아래 출처를 통해 원문으로 이어집니다.</p><div className="guide-reading-note-flow" aria-label="연구 읽는 순서"><span>연구 카드</span><i aria-hidden="true">→</i><span>원문 출처</span></div></div></div></section>
+        <section className="guide-section guide-reading-note guide-story-section" id="reading-note" aria-labelledby="reading-note-heading">
+          <div className="guide-container guide-reading-note-layout">
+            <div className="guide-reading-note-intro">
+              <p className="guide-section-number">11 · 출처 읽기</p>
+              <h2 id="reading-note-heading">연구를 이해하는<br />마지막 단계</h2>
+              <p className="guide-reading-note-copy">결과만 빠르게 보는 데서 멈추지 않습니다. 누가 참여했고, 무엇을 살폈고, 어떤 변화가 기록됐는지 순서대로 읽으면 연구의 의미가 더 선명해집니다.</p>
+              <div className="guide-reading-note-flow" aria-label="연구 읽는 순서"><span>연구 카드</span><i aria-hidden="true">→</i><span>원문 출처</span></div>
+            </div>
+            <div className="guide-reading-note-panel">
+              <div className="guide-reading-note-panel-head"><span>하나의 연구를 읽는 네 가지 질문</span><strong>정보의 흐름</strong></div>
+              <ol className="guide-reading-note-steps">
+                <li><span>01</span><div><strong>누구를 살폈나요?</strong><small>사람·동물·세포 중 연구 대상을 먼저 봅니다.</small></div></li>
+                <li><span>02</span><div><strong>어떻게 비교했나요?</strong><small>섭취량과 기간, 비교 조건을 확인합니다.</small></div></li>
+                <li><span>03</span><div><strong>무엇이 달라졌나요?</strong><small>연구에서 실제로 측정한 결과를 읽습니다.</small></div></li>
+                <li><span>04</span><div><strong>어디까지 알 수 있나요?</strong><small>측정한 결과와 해석의 범위를 구분합니다.</small></div></li>
+              </ol>
+              <a className="guide-reading-note-source" href={researchTopics[0].source.url} target="_blank" rel="noopener noreferrer">
+                <span className="guide-reading-note-source-kicker">예시 출처 · 사람 대상 연구</span>
+                <strong>{researchTopics[0].source.label}</strong>
+                <small>건강한 성인 63명 · 뇌파·활력 점수 · 무작위·위약 대조 교차시험</small>
+                <ExternalLink size={15} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </section>
 
         <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading">1950년의 작은 발견은<br />오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div><details className="guide-share-lines"><summary>사업자용 GABA 핵심 5문장 · 바로 복사하기</summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
       </main>
