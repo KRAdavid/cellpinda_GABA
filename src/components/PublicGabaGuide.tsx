@@ -534,6 +534,8 @@ const expertVideos: ExpertVideo[] = [
   { id: 'bQ0QQHpUzdI', title: '불면·우울감과 GABA 이야기', topic: '수면·기분', channel: 'dr밸런스' },
 ];
 
+const expertVideoTopics = ['전체', ...Array.from(new Set(expertVideos.map((video) => video.topic)))];
+
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
@@ -723,6 +725,7 @@ export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
   const [activeVideoId, setActiveVideoId] = useState(expertVideos[0].id);
+  const [activeVideoTopic, setActiveVideoTopic] = useState('전체');
   const [videoStarted, setVideoStarted] = useState(false);
   const [videoFrameReady, setVideoFrameReady] = useState(false);
   const [activeChapterId, setActiveChapterId] = useState<ActiveChapterId>('top');
@@ -745,6 +748,7 @@ export default function PublicGabaGuide() {
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
+  const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const activeChapterIndex = activeChapterId === 'recovery-break' ? 1 : readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapterLookupIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapter = activeChapterId === 'top' ? { label: '도입' } : activeChapterId === 'recovery-break' ? { label: '수면과 회복' } : readingChapters[Math.max(0, activeChapterLookupIndex)];
@@ -915,6 +919,16 @@ export default function PublicGabaGuide() {
       const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
       requestAnimationFrame(() => document.getElementById('expert-video-feature')?.scrollIntoView({ behavior, block: 'start' }));
     }
+  };
+
+  const selectExpertVideoTopic = (topic: string) => {
+    const nextVideos = topic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === topic);
+    setActiveVideoTopic(topic);
+    if (!nextVideos.some((video) => video.id === activeVideoId)) selectExpertVideo(nextVideos[0]?.id ?? expertVideos[0].id);
+    requestAnimationFrame(() => {
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      document.querySelector<HTMLElement>('.guide-video-filter.is-active')?.scrollIntoView({ behavior, block: 'nearest', inline: 'center' });
+    });
   };
 
   const moveRecoveryCard = (direction: -1 | 1) => {
@@ -1238,8 +1252,9 @@ export default function PublicGabaGuide() {
                 <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>선택 즉시 재생</span></div><h3>{activeVideo.title}</h3><p>{activeVideo.channel}</p><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a></div>
               </article>
                 <div className="guide-video-board" aria-label="전문가 영상 게시판">
-                <div className="guide-video-board-head"><span>전문가 영상</span><strong>{expertVideos.length}개 영상</strong></div>
-                <div className="guide-video-grid">{expertVideos.map((video, index) => <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} onClick={() => selectExpertVideo(video.id)}><span className="guide-video-card-thumb"><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" /><span className="guide-video-card-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span></span><span className="guide-video-card-copy"><span className="guide-video-card-copy-top"><span>{video.topic}</span>{activeVideo.id === video.id ? <em>재생 중</em> : null}</span><strong>{video.title}</strong><small>{video.channel}</small></span></button>)}</div>
+                <div className="guide-video-board-head"><span>전문가 영상</span><strong>{visibleExpertVideos.length}개 영상</strong></div>
+                <div className="guide-video-filters" role="group" aria-label="전문가 영상 주제 필터">{expertVideoTopics.map((topic) => { const count = topic === '전체' ? expertVideos.length : expertVideos.filter((video) => video.topic === topic).length; return <button type="button" className={`guide-video-filter${activeVideoTopic === topic ? ' is-active' : ''}`} aria-pressed={activeVideoTopic === topic} key={topic} onClick={() => selectExpertVideoTopic(topic)}>{topic}<span>{count}</span></button>; })}</div>
+                <div className="guide-video-grid">{visibleExpertVideos.map((video, index) => <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} onClick={() => selectExpertVideo(video.id)}><span className="guide-video-card-thumb"><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" /><span className="guide-video-card-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span></span><span className="guide-video-card-copy"><span className="guide-video-card-copy-top"><span>{video.topic}</span>{activeVideo.id === video.id ? <em>재생 중</em> : null}</span><strong>{video.title}</strong><small>{video.channel}</small></span></button>)}</div>
               </div>
             </div>
             <p className="guide-expert-note guide-video-gallery-note">각 채널에서 공개한 짧은 영상을 모았습니다. 선택한 영상은 이 페이지에서 바로 재생되며, 원문 링크도 함께 제공합니다.</p>

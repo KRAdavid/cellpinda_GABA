@@ -415,7 +415,7 @@
 
 /* v9 expert video board: one selected Shorts player plus a visual gallery of sources. */
 .guide-video-gallery-lead{max-width:70ch;margin-top:-8px;margin-bottom:28px}
-.guide-video-gallery{display:grid;grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);gap:16px;align-items:start}
+.guide-video-gallery{display:grid;grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);gap:16px;align-items:start;min-width:0}
 .guide-video-feature{display:grid;grid-template-columns:minmax(190px,.82fr) minmax(0,1fr);gap:19px;align-items:center;padding:17px;border-radius:22px;background:var(--guide-ink);box-shadow:0 18px 34px rgba(19,47,86,.12)}
 .guide-video-feature-media{position:relative;width:100%;aspect-ratio:9/16;overflow:hidden;border-radius:16px;background:#08182b}
 .guide-video-feature-media iframe{display:block;width:100%;height:100%;border:0;opacity:1;transition:opacity .22s ease}
@@ -437,9 +437,16 @@
 .guide-video-feature-copy p{margin:0;color:#bed1de;font-size:13px;line-height:1.6;letter-spacing:-.035em}
 .guide-video-feature-copy>a{display:inline-flex;align-items:center;gap:5px;margin-top:24px;color:#9ce0de;font-size:12px;font-weight:850;text-decoration:none}
 .guide-video-feature-copy>a:hover{text-decoration:underline;text-underline-offset:3px}
-.guide-video-board{padding:16px;border:1px solid #dbe9ef;border-radius:20px;background:#f7fbfd}
+.guide-video-board{min-width:0;padding:16px;border:1px solid #dbe9ef;border-radius:20px;background:#f7fbfd}
 .guide-video-board-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 3px 12px;color:#8aa2b1;font-size:11px;font-weight:900;letter-spacing:.16em}
 .guide-video-board-head strong{color:var(--guide-teal-dark);font-size:11px;letter-spacing:-.03em}
+.guide-video-filters{display:flex;flex-wrap:wrap;gap:7px;min-width:0;margin:0 3px 13px}
+.guide-video-filter{display:inline-flex;align-items:center;gap:5px;min-height:34px;padding:0 10px;border:1px solid #d4e5ea;border-radius:999px;background:#fff;color:#6b8495;font-size:11px;font-weight:850;letter-spacing:-.04em;white-space:nowrap;transition:border-color .18s ease,background .18s ease,color .18s ease,transform .18s ease}
+.guide-video-filter span{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#eef5f6;color:#8aa1ad;font-size:9px;font-weight:900}
+.guide-video-filter:hover,.guide-video-filter:focus-visible{border-color:#75c9ca;color:var(--guide-teal-dark);transform:translateY(-1px)}
+.guide-video-filter.is-active{border-color:#79cacc;background:#eaf8f8;color:var(--guide-teal-dark);box-shadow:0 4px 10px rgba(32,119,139,.08)}
+.guide-video-filter.is-active span{background:#cceeed;color:#147e82}
+.guide-video-filter:focus-visible{outline:3px solid rgba(18,154,163,.2);outline-offset:2px}
 .guide-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .guide-video-card{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;min-width:0;padding:9px;border:1px solid #dce9ef;border-radius:13px;background:#fff;color:var(--guide-ink);text-align:left;transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease}
 .guide-video-card:hover,.guide-video-card:focus-visible,.guide-video-card.is-active{border-color:#73c7c9;box-shadow:0 9px 18px rgba(32,119,139,.09);transform:translateY(-1px)}
@@ -468,6 +475,8 @@
   .guide-video-feature-copy h3{margin:14px 0 7px;font-size:22px}
   .guide-video-feature-copy>a{margin-top:16px}
   .guide-video-board{padding:13px;border-radius:17px}
+  .guide-video-filters{flex-wrap:nowrap;overflow-x:auto;margin:0 0 12px;padding:1px 2px 5px;scrollbar-width:thin;scrollbar-color:#b5d8dc transparent}
+  .guide-video-filter{flex:0 0 auto;min-height:40px;padding:0 12px;font-size:12px}
   .guide-video-grid{grid-template-columns:1fr;gap:8px}
   .guide-video-card{grid-template-columns:74px minmax(0,1fr);min-height:108px;padding:8px}
   .guide-video-card-copy strong{font-size:15px}
@@ -554,6 +563,7 @@
 }
 @media(prefers-reduced-motion:reduce){.guide-header-share,.guide-application-card,.guide-process-flow article,.guide-video-feature{box-shadow:none}}
 @media(prefers-reduced-motion:reduce){.guide-video-feature-loading svg{animation:none}}
+@media(prefers-reduced-motion:reduce){.guide-video-filter{transition:none}}
 
 /* v11 research scale: make the discovery line land with visible academic weight. */
 .guide-research-scale{position:relative;margin-top:48px;padding:35px 38px 31px;border-radius:25px;background:linear-gradient(135deg,#132f56 0%,#173f60 57%,#0b777d 100%);color:#fff;overflow:hidden;isolation:isolate;box-shadow:0 22px 42px rgba(19,47,86,.16)}
