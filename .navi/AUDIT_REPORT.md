@@ -1,5 +1,13 @@
 # Audit Report
 
+## Source Reading Bridge Recheck — a8cc869 — 2026-10-04
+
+- 제목·설명만 있던 `출처 읽기` 구간을 네 가지 연구 읽기 질문과 실제 PubMed 원문 예시가 있는 편집형 브리지로 보강했다. 방문자는 연구 결과를 바로 단정하지 않고 대상·비교·관찰 결과·해석 범위를 순서대로 확인할 수 있다.
+- PR #143 검사, 로컬 typecheck/UI contract/127 tests/build, main workflow `37135553445`, Pages 배포·라이브 smoke·release status, 공개 validator와 320/390/1440px Playwright Chrome fallback이 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SOURCE-BRIDGE-20261004`, `E-PLAYWRIGHT-SOURCE-BRIDGE-20261004`, `E-DEPLOY-PIPELINE-SOURCE-BRIDGE-20261004`, `E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004`.
+
 ## NAVI Documentation Sync Recheck — 6212511 — 2026-10-04
 
 - NAVI 문서 PR #141 병합 후 main workflow `37134462216`와 라이브 validator를 재확인했다. 문서 병합은 공개 UI·과학 카피·제품 경계를 변경하지 않았고, 정적 공개 candidate `6212511…`가 최신 main과 일치한다.

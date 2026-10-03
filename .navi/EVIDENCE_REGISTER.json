@@ -3198,6 +3198,50 @@
       "captured_at": "2026-10-03T15:48:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261004-NAVI-SYNC",
       "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SOURCE-BRIDGE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "출처 읽기 장을 제목·설명만 있는 중간 화면에서 연구를 읽는 네 가지 질문과 실제 원문 출처 예시를 연결하는 편집형 브리지로 고도화한 PR #143 후보의 로컬 검증이 통과했다. 과학 카피·제품 독립 경계·기존 연구 출처는 변경하지 않았다.",
+      "locator": "PR #143 candidate 6a3e39a; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157, CSS 95703, total assets 1471006; local Playwright Chrome fallback 320/390/1440px passed with four reading steps, PubMed source href, no horizontal overflow, and errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/143",
+      "captured_at": "2026-10-03T16:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-SOURCE-BRIDGE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-SOURCE-BRIDGE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본을 Chrome fallback으로 320px·390px·1440px에서 확인했다. 출처 읽기 제목은 고정 읽기 레일 아래에 도착했고, 네 단계 읽기 패널과 Yoto et al. 2012 원문 링크가 표시됐으며, 모바일 메뉴·연구 지도 이동·전문가 영상 선택 재생도 함께 오류 없이 동작했다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/; v38-source-bridge and v38-regression scripts; 320px headingTop 114.734 > railBottom 105, panelTop 425.078, panelBottom 1105.156, stepCount 4; 390px headingTop 115.094 > railBottom 105, panelTop 396.641, panelBottom 963.969, stepCount 4; 1440px headingTop 126.156 > railBottom 116, stepCount 4; document scrollWidth equals viewport at all widths; source href https://pubmed.ncbi.nlm.nih.gov/22203366/; mobile selected video iframe 1, active title `갱년기와 수면, GABA에 대한 질문`; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/143",
+      "captured_at": "2026-10-03T16:06:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-SOURCE-BRIDGE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SOURCE-BRIDGE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #143의 필수 검사가 통과했고 main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드에서 정상적으로 건너뛰었다.",
+      "locator": "PR #143 checks 37135483961 release-verify PASS and 37135483983 site-quality-verify PASS; merge commit a8cc869b2c1537b2568b2f0e99c31adc3eae9353; main workflow 37135553445 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37135553445",
+      "captured_at": "2026-10-03T16:06:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-SOURCE-BRIDGE",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답하고 최종 병합 SHA를 제공했으며, 네 단계 출처 읽기 브리지·원문 링크·정적 번들·공개 데이터·제품 독립 경계를 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha a8cc869b2c1537b2568b2f0e99c31adc3eae9353; generatedAt 2026-10-03T16:06:09.027Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T16:06:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261004-SOURCE-BRIDGE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
     }
   ]
 }

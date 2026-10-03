@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 출처 읽기 브리지 고도화 공개 배포: 2026-10-04 / candidate `a8cc869b2c1537b2568b2f0e99c31adc3eae9353`
+
+`출처 읽기`의 빈 연결 구간을 `누구를 살폈나요? → 어떻게 비교했나요? → 무엇이 달라졌나요? → 어디까지 알 수 있나요?`의 네 질문과 Yoto et al. 2012 PubMed 원문 예시로 보강했다. PR #143의 필수 검사, main workflow `37135553445`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했으며 공개 Playwright Chrome fallback 320/390/1440px에서 네 단계·원문 링크·가로 넘침 없음·핵심 메뉴/영상 상호작용을 확인했다. 과학 카피·제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-SOURCE-BRIDGE-20261004`, `E-PLAYWRIGHT-SOURCE-BRIDGE-20261004`, `E-DEPLOY-PIPELINE-SOURCE-BRIDGE-20261004`, `E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004`.
+
 ## NAVI 문서 병합 후 최신 공개 SHA 동기화: 2026-10-04 / candidate `621251166c2902a7ea2a8fae44b5230f97242ff9`
 
 NAVI 증거·감사·레드팀 문서 PR #141 병합 후 main workflow `37134462216`의 release-verify·worker-readiness·GitHub Pages 배포·라이브 smoke·release status가 성공했다. 라이브 validator는 문서 병합 후 공개 candidate `6212511…`, HTTP 200, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 재확인했다. 공개 UI·과학 카피·제품 정보는 변경하지 않았고 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LIVE-PUBLIC-NAVI-SYNC-20261004`.

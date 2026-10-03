@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Source Reading Bridge Red-Team Recheck — a8cc869 — 2026-10-04
+
+- 기존 출처 읽기 구간이 다음 행동을 안내하지 못하던 정보 구조 결함을 네 질문과 실제 원문 출처 카드로 보완했다. 320/390/1440px 공개 Playwright에서 네 단계·PubMed 링크·모바일 이동·영상 선택 재생·가로 폭을 확인했고 새 CRITICAL/MAJOR 결함은 확인하지 않았다.
+- 이 개선은 기존 연구 카피·제품 독립 경계를 바꾸지 않는다. 자동 검증과 공개 배포 검증이 통과했어도 Chrome fallback만으로 Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SOURCE-BRIDGE-20261004`, `E-PLAYWRIGHT-SOURCE-BRIDGE-20261004`, `E-DEPLOY-PIPELINE-SOURCE-BRIDGE-20261004`, `E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004`.
+
 ## Mobile Chart Readability and Long-Jump Navigation Red-Team Recheck — b778f23 — 2026-10-04
 
 - 모바일 차트의 작은 메타데이터가 고령 사용자의 비교 판단을 방해할 수 있었고, 초기 hash 정렬 타이머가 메뉴 이동 뒤 목적지에서 다시 맨 위로 돌릴 수 있었다. 글자 바닥값·수동 이동 취소를 추가한 뒤 320/390/1440px 공개 Playwright에서 차트와 장 이동을 재확인했으며 새 CRITICAL/MAJOR 결함은 확인하지 않았다.
