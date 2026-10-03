@@ -868,6 +868,9 @@
 }
 @media(prefers-reduced-motion:reduce){.guide-reading-size-toggle{transition:none}}
 
+/* v21 reading rail legibility: keep scrolled copy from bleeding through the progress strip. */
+.guide-reading-progress{background:#fff;isolation:isolate}
+
 /* v19 compact mobile header: preserve 44px touch targets on narrow phones. */
 @media(max-width:380px){
   .guide-header{gap:8px;padding-inline:12px}
