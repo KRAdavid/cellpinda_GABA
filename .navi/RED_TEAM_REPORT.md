@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Latest Red-Team Recheck — c6291f6 — 2026-10-03
+
+- 모바일 CSS가 작은 장 제목을 전역으로 숨겨 긴 페이지에서 현재 위치를 잃게 하던 가독성 결함을 PR #108에서 보완했다. 390px·320px 제목 표시와 1440px 데스크톱 보존, 레일과의 간격을 확인했으며 새 치명적 결함은 확인되지 않았다.
+- PR #108 checks, main `37111226511`, live validator, 390px 메뉴 열림·닫힘·스크롤 복원, 1440px 제목·히어로·헤더를 재확인했다. 새 과학·제품 주장은 추가되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 독해성은 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-LABELS`, `E-CDP-MOBILE-CHAPTER-LABELS`, `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-LABELS`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-LABELS`.
+
 ## Latest Red-Team Recheck — 2ae71ef — 2026-10-03
 
 - 모바일 장 진입점에서 sticky reading rail이 장 번호와 제목 첫 줄을 덮을 수 있던 가독성 결함을 PR #106의 110px section-entry spacing으로 보완했다. 정적 UI contract guard, 320/390px title clearance, 1440px desktop preservation을 확인했으며 새 치명적 결함은 확인되지 않았다.
