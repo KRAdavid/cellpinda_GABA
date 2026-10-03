@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 선택 영상 카드 직접 공유 고도화 공개 배포: 2026-10-04 / candidate `e709f2c`
+
+전문가 영상 선택 카드 안에 `이 영상 공유` 행동을 추가했다. 현재 영상의 제목·video 쿼리·`#expert-videos` 위치를 그대로 공유하도록 기존 chapter-aware payload를 연결하고, 모바일에서도 읽기 쉬운 dark-panel 버튼과 focus-visible 상태를 적용했다. PR #169, main workflow `37157666983`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 320/390/1440px에서 공유 버튼·toast·payload·포스터·진행 표시·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-DIRECT-VIDEO-SHARE-20261004`, `E-PLAYWRIGHT-DIRECT-VIDEO-SHARE-20261004`, `E-DEPLOY-PIPELINE-DIRECT-VIDEO-SHARE-20261004`, `E-LIVE-PUBLIC-DIRECT-VIDEO-SHARE-20261004`.
+
 ## 전문가 영상 공유·재진입 맥락 고도화 공개 배포: 2026-10-04 / candidate `68efaca`
 
 선택한 전문가 영상의 식별자를 `?video=...#expert-videos`에 보존하고, 공유 URL 재진입 시 같은 영상과 장 위치를 복원하도록 고도화했다. 브라우저 제목과 공유 문구도 현재 장·선택 영상에 맞춰 갱신하고 recovery heading의 접근성 문장을 보정했다. PR #167 merge `a1de959`, heartbeat PR #168 merge `68efaca`, main workflow `37156517433`, live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px에서 클릭·새로고침 복원·포스터/iframe 지연·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

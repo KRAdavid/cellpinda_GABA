@@ -1,5 +1,14 @@
 # Audit Report
 
+## 선택 영상 카드 직접 공유 고도화 감사 — e709f2c — 2026-10-04
+
+- 전문가 영상 선택 카드 안에 `이 영상 공유` 행동을 추가했다. 기존 URL 보존 로직을 재사용해 현재 영상 ID·장 위치·영상 제목을 공유 payload에 유지하고, 미디어 패널의 색·radius·focus-visible 규칙에 맞췄다.
+- 로컬 UI 계약·typecheck·127개 테스트·build가 통과했다. 공개 320·390·1440px Chrome fallback에서 버튼 표시, `공유 창을 열었어요.` 상태, 선택 영상 제목·포스터·진행 표시·가로 폭·오류 없음을 확인했다. 공유 payload URL은 `?view=guide&video=roEtojyk9_0#expert-videos`를 유지했다.
+- PR #169 merge `e709f2c`, main workflow `37157666983`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `e709f2c`는 HTTP 200·STATIC·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-DIRECT-VIDEO-SHARE-20261004`, `E-PLAYWRIGHT-DIRECT-VIDEO-SHARE-20261004`, `E-DEPLOY-PIPELINE-DIRECT-VIDEO-SHARE-20261004`, `E-LIVE-PUBLIC-DIRECT-VIDEO-SHARE-20261004`.
+
 ## 전문가 영상 공유 맥락 고도화 감사 — 68efaca — 2026-10-04
 
 - 선택 영상 ID를 `?video=...#expert-videos`에 보존하고 재진입 시 복원했다. 현재 장·선택 영상 제목을 브라우저 제목과 공유 payload에 연결해 공유받은 사람이 같은 맥락에서 읽도록 했다. recovery heading의 접근성 문장도 자연스럽게 보정했다.

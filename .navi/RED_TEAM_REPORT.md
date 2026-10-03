@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 선택 영상 카드 직접 공유 레드팀 재검증 — e709f2c — 2026-10-04
+
+- 320·390·1440px에서 선택 영상 카드 내부의 `이 영상 공유` 버튼을 직접 클릭하고 공유 payload를 가로채 확인했다. 버튼은 세 viewport에서 표시됐고, 제목은 선택 영상에 맞았으며 URL은 `video=roEtojyk9_0#expert-videos`를 보존했다.
+- 공유 후 상태 문구가 `공유 창을 열었어요.`로 표시됐고, 포스터·iframe 지연·진행 표시·가로 폭·콘솔/페이지 오류가 안정적이었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-DIRECT-VIDEO-SHARE-20261004`, `E-PLAYWRIGHT-DIRECT-VIDEO-SHARE-20261004`, `E-DEPLOY-PIPELINE-DIRECT-VIDEO-SHARE-20261004`, `E-LIVE-PUBLIC-DIRECT-VIDEO-SHARE-20261004`.
+
 ## 전문가 영상 공유 맥락 레드팀 재검증 — 68efaca — 2026-10-04
 
 - 320·390·1440px에서 `?video=roEtojyk9_0#expert-videos`로 직접 진입하고 새로고침을 반복해 선택 영상·장 제목·진행 표시·가로 폭을 공격적으로 확인했다. `잠이 안 올 때 GABA 이야기`가 복원됐고, 포스터는 유지되며 사용자가 재생하기 전 iframe은 생성되지 않았다.
