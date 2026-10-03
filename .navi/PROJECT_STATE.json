@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T10:17:37.243969Z",
+  "updated_at": "2026-10-03T10:43:00.396079Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1299,7 +1299,11 @@
           "E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003",
           "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
           "E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003",
-          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003"
+          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003",
+          "E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-CDP-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로를 재확인"
       },
@@ -1386,7 +1390,10 @@
           "E-CDP-EXPERT-VIDEO-BROWSING-20261003",
           "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
           "E-CDP-MOBILE-COMPARISON-20261003",
-          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003"
+          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003",
+          "E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-CDP-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환을 확인"
       },
@@ -1475,7 +1482,10 @@
           "E-CDP-EXPERT-VIDEO-BROWSING-20261003",
           "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
           "E-CDP-MOBILE-COMPARISON-20261003",
-          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003"
+          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003",
+          "E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-CDP-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환을 추가 확인"
       },
@@ -1555,7 +1565,10 @@
           "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
           "E-CDP-RESEARCH-MAP-ORIENTATION",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
-          "E-LIVE-PUBLIC-NAVI-MERGE-20261003"
+          "E-LIVE-PUBLIC-NAVI-MERGE-20261003",
+          "E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-CDP-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003"
         ],
         "notes": "390px·320px 가로 넘침 없음, 모바일 메뉴 열린 상태의 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환, 큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로 유지 확인"
       },
@@ -1674,7 +1687,10 @@
           "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
           "E-LOCAL-BUILD-MOBILE-COMPARISON-20261003",
           "E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003",
-          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003"
+          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003",
+          "E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
       },
@@ -1686,7 +1702,8 @@
           "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
           "E-CDP-RESEARCH-PRODUCT-FREE",
           "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
-          "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+          "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+          "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003"
         ],
         "notes": "제품 독립 과학 정보 경계와 연구 출처 연결 유지; 공개 연구 경로에 제품 CTA·view=products·SmartStore 연결 없음"
       },
@@ -1694,7 +1711,9 @@
         "criterion_id": "AC-007",
         "status": "PASS_WITH_CONDITIONS",
         "evidence_refs": [
-          "E-REDTEAM-REVIEW"
+          "E-REDTEAM-REVIEW",
+          "E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003",
+          "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003"
         ],
         "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음"
       }
@@ -2059,6 +2078,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T10:14:30Z"
+    },
+    {
+      "id": "H-052",
+      "event": "긴 연구 카드 구간에서 현재 주제를 잃지 않도록 sticky 읽기 레일에 활성 연구 결과 제목을 표시하고, PR #117을 main `77a3032`에 병합했다. 390px에서 연구 지도 피부 선택 후 `피부 연구 결과`·`research-skin`·card top 113px·document width 390px, 320px 단일 열, 1440px overflow false를 확인했고 main workflow 37116937264 전체 배포 게이트 성공 결과를 NAVI 증적에 추가했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T10:45:00Z"
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Audit Report
 
+## Sticky Research Rail Orientation — 77a3032 — 2026-10-03
+
+- 긴 연구 카드 구간에서 현재 읽는 주제를 잃지 않도록 sticky 읽기 레일에 활성 연구 결과 제목을 표시했다. 연구 지도에서 피부를 선택하면 `피부 연구 결과`와 `research-skin` 카드가 함께 활성화되며, 좁은 화면에서는 제목을 한 줄 말줄임으로 보호한다.
+- PR #117의 로컬 typecheck/UI contract/127 tests/build가 통과했고, main workflow `37116937264`의 release-verify·worker-readiness·Pages 배포·smoke-live·release-status가 성공했다. Worker는 정적 전용 모드라 건너뛰었다.
+- live validator candidate `77a30323d2e5097a0f2be092c013615b1ee2ddd6`, HTTP 200, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`, 내부 운영 스냅샷 제외, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. Chrome CDP fallback 390px에서 레일 `피부 연구 결과`, 카드 top `113px`, document width `390px`, overlay false를 확인했고 320px은 한 열, 1440px은 가로 넘침이 없었다.
+- 새 과학·제품 주장은 추가하지 않았다. Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했으며, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003`, `E-CDP-RESEARCH-RAIL-ORIENTATION-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003`, `E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003`.
+
 ## Mobile Research Comparison Polish — 4058bf6 — 2026-10-03
 
 - PR #115에서 연구 결과 비교 도표를 모바일에서 재구성했다. 390px에서는 비교 조건과 GABA 조건을 좌우로 나란히 보여주고, 320px에서는 한 열로 전환해 문구를 보존한다. 차트의 보조기기용 라벨에는 각 행의 두 조건별 관찰 문장을 포함했다.

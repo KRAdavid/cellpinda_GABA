@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 연구 읽기 방향성 고도화 공개 재검증: 2026-10-03 / candidate `77a30323d2e5097a0f2be092c013615b1ee2ddd6`
+
+긴 연구 카드 구간에서 sticky 읽기 레일이 현재 활성 연구 결과 제목을 함께 표시하도록 보완했다. 연구 지도에서 피부를 선택하면 `피부 연구 결과`와 `research-skin` 카드가 동기화되고, 좁은 화면에서는 제목이 한 줄 말줄임으로 보호된다. PR #117 checks, main workflow `37116937264`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003`, `E-CDP-RESEARCH-RAIL-ORIENTATION-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003`, `E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003`.
+
 ## 모바일 연구 비교 도표 고도화 공개 재검증: 2026-10-03 / candidate `4058bf61ed25d8fc95b3023f1187cdd78436cdb4`
 
 연구 결과 도표에서 비교 조건과 GABA 조건을 390px 모바일에서는 좌우로 나란히 배치하고, 320px에서는 한 열로 전환했다. 보조기기용 차트 라벨에도 각 지표의 조건별 관찰 문장을 포함했다. PR #115 checks, main workflow `37115590977`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-COMPARISON-20261003`, `E-CDP-MOBILE-COMPARISON-20261003`, `E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003`, `E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003`.

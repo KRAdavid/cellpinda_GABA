@@ -2670,6 +2670,50 @@
       "captured_at": "2026-10-03T10:14:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-MOBILE-COMPARISON",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "긴 연구 카드 구간을 읽을 때 sticky 읽기 레일이 현재 활성 연구 결과 제목을 함께 표시하도록 보완했다. 좁은 화면에서는 제목이 한 줄 말줄임으로 안전하게 유지되며, 과학 카피·제품 경계는 변경하지 않았다.",
+      "locator": "PR #117 candidate d6608163a86d2b1086d14b5e74d9c908634d4f63; pnpm install --frozen-lockfile PASS; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; static routes 11, files 70, initial JS 311157, CSS 95703, total assets 1455474; local Chrome CDP fallback 390px에서 연구 지도 피부 선택 후 active card `research-skin`, 읽기 레일 `피부 연구 결과`, card top 113px, header bottom 70px, document width 390px, overlay false; 320px lanes `178px`, 1440px document width `1425px`",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/117",
+      "captured_at": "2026-10-03T10:34:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RESEARCH-RAIL-ORIENTATION",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-RAIL-ORIENTATION-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 배포본을 Chrome CDP fallback으로 확인한 결과, 연구 지도에서 주제를 선택하면 sticky 읽기 레일이 해당 연구 결과 제목으로 동기화되고 도착 카드가 선택 상태를 유지했다. 모바일·데스크톱 가로 넘침과 오류 오버레이는 없었다.",
+      "locator": "temporary Chrome CDP fallback; live candidate 77a30323d2e5097a0f2be092c013615b1ee2ddd6 at https://kradavid.github.io/gaba_info/; 390px research map 피부 선택 -> rail `피부 연구 결과`, active card `research-skin`, card top 113px, header bottom 70px, document width 390px, overlay false; 320px document width 320px and comparison lanes `178px`; 1440px document width 1425px",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T10:42:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RESEARCH-RAIL-ORIENTATION",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 읽기 레일 방향성 보완 PR #117의 필수 검사를 통과했고 main 병합 후 정적 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #117 checks 37116870187 `release-verify` and 37116870175 `site-quality-verify` success; merge commit 77a30323d2e5097a0f2be092c013615b1ee2ddd6; main workflow 37116937264 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37116937264",
+      "captured_at": "2026-10-03T10:37:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RESEARCH-RAIL-ORIENTATION",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "활성 연구 제목 표시 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 공개 번들·데이터 경계·출처 정합성을 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 77a30323d2e5097a0f2be092c013615b1ee2ddd6; generatedAt 2026-10-03T10:36:37.149Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Chrome CDP fallback 390px research rail orientation confirmed",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T10:43:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-RAIL-ORIENTATION",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
     }
   ]
 }

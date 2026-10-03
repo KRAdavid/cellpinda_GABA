@@ -1,5 +1,13 @@
 # Completion Report
 
+## Research Reading Orientation Release Recheck — 77a3032 — 2026-10-03
+
+- 긴 연구 카드 구간의 sticky 읽기 레일이 현재 활성 연구 결과 제목을 보여주도록 고도화했다. 390px에서 지도 피부 선택 → `피부 연구 결과` 레일 → `research-skin` 카드 도착 흐름을 확인했고, 320px 한 열·1440px 데스크톱 레이아웃도 유지했다.
+- PR #117 checks, main workflow `37116937264`, Pages/live validator, 390/320/1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `77a30323d2e5097a0f2be092c013615b1ee2ddd6`이다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003`, `E-CDP-RESEARCH-RAIL-ORIENTATION-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003`, `E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003`.
+
 ## Mobile Research Comparison Release Recheck — 4058bf6 — 2026-10-03
 
 - 연구 결과 비교 도표의 모바일 정보 밀도를 고도화해 390px에서는 두 조건을 좌우로 비교하고, 320px에서는 한 열로 읽도록 적용했다. 공개 과학 카피·제품 경계는 유지했다.
