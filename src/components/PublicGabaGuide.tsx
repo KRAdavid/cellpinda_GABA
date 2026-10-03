@@ -240,7 +240,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: '머리를 많이 쓴 뒤, 두 그룹은 어떻게 달랐을까요?',
       summary: 'GABA를 섭취한 그룹은 뇌파와 활력 점수가 비교 그룹보다 덜 떨어졌습니다.',
-      note: '막대가 짧을수록 감소 폭이 작다는 뜻입니다.',
+      note: '막대 길이로 크기를 비교하지 않고, 두 조건에서 관찰된 변화 방향을 나란히 보여줍니다.',
       referenceLabel: '비교 캡슐',
       resultLabel: 'GABA 캡슐',
       rows: [
@@ -268,7 +268,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'comparison',
       title: 'GABA를 바른 피부는 어떻게 달라졌을까요?',
       summary: 'GABA를 바른 피부는 장벽이 더 빨리 회복됐고, 피부가 두꺼워지는 변화는 줄었습니다.',
-      note: '막대는 변화 방향을 보여줍니다.',
+      note: '정확한 수치를 비교하는 그래프가 아니라, 두 조건에서 관찰된 변화 방향을 보여줍니다.',
       referenceLabel: '비교 조건',
       resultLabel: 'GABA를 바른 조건',
       rows: [
@@ -366,7 +366,7 @@ const sleepResultTopic: Pick<ResearchTopic, 'id' | 'chart'> = {
     kind: 'comparison',
     title: '수면 연구 결과를 방향으로 비교',
     summary: 'GABA 섭취 기간에는 잠드는 시간이 더 짧고, 전체 비렘수면이 더 길었습니다.',
-    note: '숫자 대신 연구에서 확인된 변화 방향을 보여줍니다.',
+    note: '정확한 수치 대신, 연구에서 확인된 변화 방향을 두 조건으로 나누어 보여줍니다.',
     referenceLabel: '비교 캡슐',
     resultLabel: 'GABA 캡슐',
     rows: [
