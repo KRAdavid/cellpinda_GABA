@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — bf235ed — 2026-10-03
+
+- 기본 공개 GABA 안내서 entry만 선행 import하고, 대기 중에도 브랜드·히어로 리듬을 유지하는 반응형 loading shell을 추가했다. 다른 route는 lazy loading을 유지했고 과학 카피·제품 경계는 변경하지 않았다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 311,157, CSS 95,703, total 1,452,939. PR #104 checks `37108351783`·`37108351789`와 main `37108431389` release-verify/worker-readiness/Pages publish/smoke-live/release-status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `bf235edeeea780dd42d0261a5760f100cff2ba9d`, generatedAt `2026-10-03T08:04:35.204Z`, HTTP 200, 70 hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. Live CDP 390px 메뉴 열린 상태와 1440px 제목·내비게이션·히어로·가로 폭 1425를 확인했다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-GUIDE-LOADING-SHELL`, `E-CDP-GUIDE-LOADING-SHELL`, `E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL`, `E-LIVE-PUBLIC-GUIDE-LOADING-SHELL`.
+
 ## Latest Public Release Recheck — b9160e4 — 2026-10-03
 
 - 모바일 메뉴가 열린 상태에서 키보드 Tab·Shift+Tab 포커스를 메뉴 내부로 순환시키고 현재 읽는 장을 `location`으로 노출했다. 기존 시각 디자인·연구 카피·제품 경계는 유지했다.

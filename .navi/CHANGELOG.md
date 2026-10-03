@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 최신 공개 재검증: 2026-10-03 / candidate `bf235edeeea780dd42d0261a5760f100cff2ba9d`
+
+기본 공개 GABA 안내서 경로만 선행 import해 첫 상호작용을 앞당기고, 대기 중에도 동일한 헤더·히어로 리듬을 유지하는 branded loading shell을 추가했다. PR #104 checks `37108351783`·`37108351789`, main workflow `37108431389`, Pages 배포·라이브 smoke·release status, live validator, 390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-GUIDE-LOADING-SHELL`, `E-CDP-GUIDE-LOADING-SHELL`, `E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL`, `E-LIVE-PUBLIC-GUIDE-LOADING-SHELL`.
+
 최신 공개 재검증: 2026-10-03 / candidate `b9160e40fbca673134ca1563651a00d8dfdd615a`
 
 모바일 메뉴의 키보드 포커스가 배경으로 빠지지 않도록 Tab·Shift+Tab 순환을 추가하고, 현재 읽는 장을 `aria-current=location`으로 정리했다. PR #102 checks, main workflow `37106966171`, Pages 배포·라이브 smoke·release status, live validator, 390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-FOCUS-TRAP`, `E-CDP-MOBILE-FOCUS-TRAP`, `E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP`, `E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP`.

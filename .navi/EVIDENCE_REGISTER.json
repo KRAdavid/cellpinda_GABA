@@ -2395,6 +2395,50 @@
       "captured_at": "2026-10-03T07:40:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-MOBILE-FOCUS-TRAP",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-GUIDE-LOADING-SHELL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "기본 공개 GABA 안내서 경로의 첫 상호작용을 앞당기도록 guide entry만 선행 import하고, 대기 중에도 브랜드·히어로 리듬을 유지하는 반응형 loading shell을 추가했다. 과학 카피·제품 경계·연구 데이터는 변경하지 않았다.",
+      "locator": "PR #104 candidate 9030a9f; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run validate:ui-contract PASS; pnpm run build PASS; static routes 11, files 70; initial JS 311157, CSS 95703, total assets 1452939; local 390px loading shell screenshot and guide transition verified; local 390px menu open state expanded=true/backdrop=true/overflow hidden; local 1440px title/nav/hero rendered",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/104",
+      "captured_at": "2026-10-03T08:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-GUIDE-LOADING-SHELL",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-CDP-GUIDE-LOADING-SHELL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개본을 Chrome CDP fallback으로 확인한 결과, 390px에서 GABA 안내서가 가로 넘침 없이 렌더링되고 메뉴가 실제 열린 상태로 변했으며, 1440px에서는 데스크톱 내비게이션과 히어로가 유지됐다.",
+      "locator": "temporary Chrome CDP fallback; live candidate bf235edeeea780dd42d0261a5760f100cff2ba9d at https://kradavid.github.io/gaba_info/; 390px document width 390, guide rendered, menu click expanded=true/backdrop=true/overflow hidden; 1440px title `저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide`, nav display flex, hero present, document width 1425",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/104",
+      "captured_at": "2026-10-03T08:03:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-GUIDE-LOADING-SHELL",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "기본 공개 안내서 선행 import와 branded loading shell 보완 PR #104의 release-verify·site-quality-verify를 통과했고 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #104 checks 37108351783 and 37108351789 PASS; merge commit bf235edeeea780dd42d0261a5760f100cff2ba9d; main workflow 37108431389 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37108431389",
+      "captured_at": "2026-10-03T08:03:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-GUIDE-LOADING-SHELL",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "선행 import와 branded loading shell이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 공개 데이터 경계·정적 번들·연구 출처 정합성을 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha bf235edeeea780dd42d0261a5760f100cff2ba9d; generatedAt 2026-10-03T08:04:35.204Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px guide rendered and menu state changed, document width 390; live 1440px title/nav/hero rendered, document width 1425",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T08:05:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-GUIDE-LOADING-SHELL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — bf235ed — 2026-10-03
+
+- 기본 공개 GABA 안내서만 선행 import하고, 로딩 중에도 Apple-like 헤더·히어로 리듬을 보여주는 반응형 branded loading shell을 적용했다.
+- PR #104 checks, main `37108431389`, Pages/live validator, 390px·1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `bf235edeeea780dd42d0261a5760f100cff2ba9d`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-GUIDE-LOADING-SHELL`, `E-CDP-GUIDE-LOADING-SHELL`, `E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL`, `E-LIVE-PUBLIC-GUIDE-LOADING-SHELL`.
+
 ## Latest Release Recheck — b9160e4 — 2026-10-03
 
 - 모바일 메뉴 접근성을 고도화해 키보드 포커스 순환과 현재 읽는 위치 semantics를 추가했다.
