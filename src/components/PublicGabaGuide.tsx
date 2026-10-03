@@ -598,6 +598,12 @@ const validateVideoThumbnail = (event: SyntheticEvent<HTMLImageElement>, id: str
 
 const expertVideoTopics = ['전체', ...Array.from(new Set(expertVideos.map((video) => video.topic)))];
 
+const getInitialExpertVideoId = () => {
+  if (typeof window === 'undefined') return expertVideos[0].id;
+  const requestedId = new URLSearchParams(window.location.search).get('video');
+  return requestedId && expertVideos.some((video) => video.id === requestedId) ? requestedId : expertVideos[0].id;
+};
+
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
@@ -787,7 +793,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
 export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
-  const [activeVideoId, setActiveVideoId] = useState(expertVideos[0].id);
+  const [activeVideoId, setActiveVideoId] = useState(getInitialExpertVideoId);
   const [activeVideoTopic, setActiveVideoTopic] = useState('전체');
   const [videoStarted, setVideoStarted] = useState(false);
   const [videoFrameReady, setVideoFrameReady] = useState(false);
@@ -877,6 +883,12 @@ export default function PublicGabaGuide() {
       layoutObserver?.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    const chapterTitle = activeChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작되는 GABA' : activeReadingLabel;
+    const selectedVideoTitle = activeChapterId === 'expert-videos' ? ` · ${activeVideo.title}` : '';
+    document.title = `${chapterTitle}${selectedVideoTitle} | GABA Guide`;
+  }, [activeChapterId, activeReadingLabel, activeVideo.title]);
 
   useEffect(() => () => {
     if (shareStatusTimer.current !== null) window.clearTimeout(shareStatusTimer.current);
@@ -1047,6 +1059,14 @@ export default function PublicGabaGuide() {
 
   const selectExpertVideo = (id: string) => {
     const isNewVideo = id !== activeVideoId;
+    const selectedVideo = expertVideos.find((video) => video.id === id);
+    if (selectedVideo) {
+      const shareUrl = new URL(window.location.href);
+      shareUrl.searchParams.set('view', 'guide');
+      shareUrl.searchParams.set('video', selectedVideo.id);
+      shareUrl.hash = 'expert-videos';
+      window.history.replaceState(null, '', `${shareUrl.pathname}${shareUrl.search}${shareUrl.hash}`);
+    }
     if (isNewVideo) {
       setActiveVideoId(id);
       setVideoFrameReady(false);
@@ -1120,7 +1140,11 @@ export default function PublicGabaGuide() {
   };
 
   const sharePage = async () => {
-    const shareData = { title: '저속노화, 회복하는 밤에서 시작되는 GABA', text: '수면과 회복에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서', url: window.location.href };
+    const shareTitle = activeChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작되는 GABA' : `${activeReadingLabel} · GABA Guide`;
+    const shareText = activeChapterId === 'expert-videos'
+      ? `${activeVideo.title} 영상을 보며 GABA를 읽는 공개 안내서입니다.`
+      : `${activeReadingLabel}에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서입니다.`;
+    const shareData = { title: shareTitle, text: shareText, url: window.location.href };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
@@ -1274,7 +1298,7 @@ export default function PublicGabaGuide() {
             <div className="guide-recovery-break-head">
               <div>
                 <p className="guide-section-number">잠깐, 수면과 회복</p>
-                <h2 id="recovery-break-heading">GABA를 모르면<br />노화는 가속됩니다.</h2>
+                <h2 id="recovery-break-heading" aria-label="GABA를 모르면 노화는 가속됩니다.">GABA를 모르면<br />노화는 가속됩니다.</h2>
               </div>
               <p>잠은 단순히 멈추는 시간이 아닙니다.<br />뇌와 몸이 손상된 부분을 회복하고<br />쌓인 피로를 정리하는 시간입니다.</p>
             </div>
