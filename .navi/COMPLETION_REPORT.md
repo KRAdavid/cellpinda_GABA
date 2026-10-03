@@ -1,5 +1,13 @@
 # Completion Report
 
+## Final Public Recheck — 16fc5d4 — 2026-10-03
+
+- NAVI 문서 동기화 PR #111 병합과 main workflow `37113016531`의 release-verify·Pages 배포·라이브 smoke·release-status 성공을 확인했다.
+- 최종 공개 validator는 HTTP 200과 70개 번들 해시, 공개 데이터 경계를 확인했다. 공개 사이트는 `https://kradavid.github.io/gaba_info/`에서 유지된다.
+- 공개 배포 자동 게이트는 통과했지만 실제 브라우저·사용자·독립 과학·규제 감수는 남아 있으므로 NAVI 상태는 `USER_DECISION` / 완료 게이트 `NOT_READY`를 유지한다.
+
+증적: `E-LIVE-PUBLIC-NAVI-MERGE-20261003`.
+
 ## Latest Release Recheck — cbd2f8e — 2026-10-03
 
 - 연구 지도에서 선택한 주제가 상세 카드에서도 즉시 보이도록 활성 카드 강조와 선택 상태 동기화를 추가했다. 공개 과학 카피·제품 경계·연구 출처는 유지했다.
