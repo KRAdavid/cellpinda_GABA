@@ -65,6 +65,15 @@ function compactStudyType(value?: string, dose?: string): string {
   return value;
 }
 
+const studyConditions: Record<string, string> = {
+  'research-byun-2018': '발효 쌀배아 GABA 정제 300mg과 비교 정제를 4주 동안 살펴본 연구 조건이에요.',
+  'research-review-2020': '2020년 2월까지 나온 사람 대상 연구 14편의 조건을 모은 자료예요.',
+  'research-yoto-2012': 'GABA 100mg 캡슐 또는 비교용 캡슐을 한 번 먹고 30분 뒤 과제를 진행한 연구 조건이에요.',
+  'research-yamatsu-2016': 'GABA 캡슐을 1주 동안 먹은 수면 기록과 200mg을 한 번 먹은 혈액 검사를 나누어 살펴본 연구 조건이에요.',
+  'research-powers-2008': 'GABA 3g을 한 번 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 연구 조건이에요.',
+  'research-heba-2016': '손끝 자극 전후 뇌 속 GABA 신호와 감각 점수를 살펴본 관찰 연구 조건이에요.',
+};
+
 export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 한눈에', onOpen }: Props) {
   const [linkStatus,setLinkStatus]=useState('');
   const [manualLink,setManualLink]=useState('');
@@ -161,22 +170,18 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
       : metadata.consumerVisual
       ? metadata.consumerScope || metadata.consumerSummary || metadata.consumerFinding
       : metadata.consumerSummary || metadata.consumerFinding || metadata.consumerScope;
-    // The Powers card already shows the full product-boundary note before the
-    // disclosure panel. Keep the panel focused on the study condition so the
-    // same warning is not repeated twice in the consumer flow. The reviewed
-    // productApplicability field remains intact in the public data ledger.
-    const detailScope = claim.id === 'research-powers-2008'
-      ? 'GABA 3g을 한 번 먹고 90분 동안 혈액 속 성장호르몬을 살펴본 조건입니다.'
-      : metadata.productApplicability;
+    // Keep the reviewed productApplicability field in the public data ledger,
+    // but use a product-neutral study condition in this educational route.
+    const detailScope = studyConditions[claim.id] || '연구에서 살펴본 조건이에요.';
     return <article id={claim.id} className={`research-library-card${featured ? ` research-library-card-featured${resultVisualFirst ? ' research-library-card-featured--visual-first' : ''}` : ''}`} key={claim.id}>
       <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}${generalResearch ? ' research-library-kind--general' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{reviewOverview ? '사람 연구 여러 편을 모아 정리 · 2020년 2월까지' : compactStudyType(metadata.studyType, metadata.dose)}</p>
-      <p className="research-library-study-boundary">일반 GABA 연구에서 본 내용 · 셀핀다 제품 정보와는 따로 확인해요</p>
+      <p className="research-library-study-boundary">일반 GABA 연구에서 본 내용 · 연구 조건과 출처를 카드에서 확인해요</p>
       <h3>{reviewOverview ? '사람 연구 14편의 범위 살펴보기' : metadata.question || claim.topic}</h3>
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{reviewOverview ? '자료에서 다룬 내용' : findingFirst ? '사람 연구에서 관찰된 변화' : '이 연구에서 본 내용'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}
       {metadata.consumerDisclosure ? <p className="research-library-disclosure"><Info size={16} aria-hidden="true"/><span><strong>연구비·연구자 정보</strong>{metadata.consumerDisclosure}</span></p> : null}
       {featured && metadata.hopefulTakeaway ? <div className="research-library-next-step research-library-next-step--featured"><span className="research-library-next-step-mark" aria-hidden="true">+</span><div><h4>오늘 연결해 보기</h4><p>{metadata.hopefulTakeaway}</p></div></div> : null}
-      {claim.id === 'research-powers-2008' ? <p className="research-library-scope" role="note"><strong>이 연구가 보여주는 범위</strong>GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 연구에 사용한 3g은 셀핀다 제품 섭취량의 근거가 아니에요.</p> : null}
+      {claim.id === 'research-powers-2008' ? <p className="research-library-scope" role="note"><strong>이 연구가 보여주는 범위</strong>GABA 3g을 먹고 90분 동안 혈액 속 수치를 살펴본 자료예요. 성장이나 근육 발달 효과를 확인한 연구는 아니며, 연구에 사용한 3g은 이 연구 조건에서만 사용된 양이에요.</p> : null}
       <details className="research-detail" onToggle={event => {
         if (event.currentTarget.open) onOpen?.(claim.id);
       }}>
@@ -203,7 +208,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
     <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>각 카드에서 사람 연구의 결과와 조건을 함께 볼 수 있어요.</p></div></div>
-    <p className="research-library-evidence-note"><strong>먼저 확인해 주세요</strong>일반 GABA와 휴식에 관한 사람 연구를 쉬운 말로 정리했어요. 카드 안에서 논문 조건을 확인하고, 셀핀다 제품 정보는 제품 카드에서 따로 확인할 수 있어요.</p>
+    <p className="research-library-evidence-note"><strong>먼저 확인해 주세요</strong>일반 GABA와 휴식에 관한 사람 연구를 쉬운 말로 정리했어요. 카드 안에서 연구 조건과 출처를 확인할 수 있어요.</p>
     <div className="research-topic-cards" role="group" aria-label="궁금한 주제 고르기">{topicCards.map(({topic:cardTopic,label,detail,Icon})=>{
       const recordCount=`${studies.filter(claim=>claim.topic===cardTopic).length}건`;
       return <button type="button" className="research-topic-card" key={cardTopic} aria-label={`${label} · ${detail} · ${recordCount}`} aria-pressed={activeTopic===cardTopic} onClick={()=>{
