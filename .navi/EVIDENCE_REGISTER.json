@@ -2934,6 +2934,61 @@
       "captured_at": "2026-10-03T13:10:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RECOVERY-ANCHOR",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-RAIL-CUE-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 주제 필터의 모바일 연속 탐색 단서를 추가하고 터치 스크롤 스냅·오버스크롤 경계를 보완한 PR #130의 로컬 검증이 통과했다. typecheck·UI contract·127개 테스트·production build·정적 번들·성능 예산이 통과했으며 공개 카피·연구 결과·제품 경계는 변경하지 않았다.",
+      "locator": "PR #130 candidate 4d662fc; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; static routes 11, files 70; performance initial JS 311157, CSS 95703, total assets 1462399; v32 cue and scroll-snap contract guard passed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/130",
+      "captured_at": "2026-10-03T13:20:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-VIDEO-RAIL-CUE",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-VIDEO-RAIL-CUE-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 GitHub Pages를 Chrome fallback으로 390px·1440px에서 확인했다. 390px에서는 전문가 영상 주제 레일이 처음에 연속 탐색 단서를 보이고 끝까지 이동하면 단서가 사라졌으며, 두 번째 영상 카드를 선택하면 iframe과 선택 상태가 갱신됐다. 1440px에서는 레일이 한 화면에 들어왔다. 두 viewport 모두 가로 넘침·콘솔·페이지 오류가 없었다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/#expert-videos; 390px sectionTop 115.016, headingTop 239.016, document scrollWidth 390, filter scrollWidth/clientWidth 705/322, cue true -> end scrollLeft 383/cue false, cards 9, iframe 1, active title `갱년기와 수면, GABA에 대한 질문`; 1440px document scrollWidth 1440, iframe 1; errors []; screenshots live-v32-expert-390.png and live-v32-expert-1440.png",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/130",
+      "captured_at": "2026-10-03T13:38:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261003-VIDEO-RAIL-CUE",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-RAIL-CUE-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #130의 필수 검사가 통과했고, main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드로 건너뛰었다.",
+      "locator": "PR #130 checks 37126338048 release-verify PASS and 37126337966 site-quality-verify PASS; merge commit 2828e47401e2e1668b61519b0b6d00a06d34672a; main workflow 37126713484 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37126713484",
+      "captured_at": "2026-10-03T13:42:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-VIDEO-RAIL-CUE",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-RAIL-CUE-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 정적 번들·공개 데이터·제품 독립 경계를 유지했다. 실제 공개 URL에서 전문가 영상 모바일 탐색과 선택 재생을 재검증했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 5f7f1cdb0db9315ed39535ffb290160a98afedb9; generatedAt 2026-10-03T13:36:23.437Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T13:43:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-VIDEO-RAIL-CUE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-NAVI-TF-FRESHNESS-20261003",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "배포 전 NAVI freshness gate가 오래된 TF heartbeat로 중단된 뒤, 예약형 TF pulse 재실행이 safe heartbeat를 생성하고 보호된 heartbeat PR #131의 필수 검사·병합을 거쳐 최신 main 배포가 재개됐다.",
+      "locator": "initial main workflow 37126413860 freshness failure: heartbeat 491 minutes old, maximum 480; scheduled TF pulse rerun 37121039638 success with persist-heartbeat; heartbeat PR #131 checks 37126632751 release-verify PASS and 37126632749 site-quality-verify PASS; heartbeat merge commit 5f7f1cdb0db9315ed39535ffb290160a98afedb9; subsequent main workflow 37126713484 success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37126713484",
+      "captured_at": "2026-10-03T13:44:00Z",
+      "reviewer_id": "NAVI-AUTOMATION-QA-20261003-TF-FRESHNESS",
+      "claim_refs": ["C-001", "C-005", "C-007"]
     }
   ]
 }

@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 모바일 전문가 영상 탐색 단서 고도화 공개 재검증: 2026-10-03 / candidate `5f7f1cdb0db9315ed39535ffb290160a98afedb9`
+
+전문가 영상 주제 필터가 모바일에서 더 이어진다는 사실을 원형 화살표 단서로 명확히 표시하고, 가로 터치 스크롤 스냅과 오버스크롤 경계를 보완했다. PR #130의 release-verify·site-quality-verify와 main workflow `37126713484`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390px에서는 단서가 시작 시 보이고 끝에서 사라졌으며, 영상 카드 선택 시 iframe 재생과 선택 상태가 갱신됐다. 1440px에서는 필터가 한 화면에 들어왔다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 배포 전 stale TF heartbeat gate는 예약 pulse 재실행과 보호된 heartbeat PR #131 병합으로 갱신한 뒤 재배포했다. 증적: `E-LOCAL-BUILD-VIDEO-RAIL-CUE-20261003`, `E-PLAYWRIGHT-VIDEO-RAIL-CUE-20261003`, `E-DEPLOY-PIPELINE-VIDEO-RAIL-CUE-20261003`, `E-LIVE-PUBLIC-VIDEO-RAIL-CUE-20261003`, `E-NAVI-TF-FRESHNESS-20261003`.
+
 ## 수면·회복 앵커와 고정 읽기 레일 충돌 보완 공개 재검증: 2026-10-03 / candidate `27e9f6f643f939e1a99bb9fe540493e76afa0860`
 
 `#recovery-break`로 바로 진입하거나 메뉴에서 수면·회복으로 이동할 때 고정 읽기 레일이 장 제목을 가리지 않도록 `.guide-recovery-break`의 상단 여백 계약을 추가했다. PR #128 필수 검사와 main workflow `37124665367`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 공개 데이터 경계를 확인했고, 공개 Playwright Chrome 320/390/1440px에서 가로 넘침·런타임 오류가 없었으며 390/1440px 앵커 제목이 읽기 레일 아래에 도착했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-ANCHOR-20261003`, `E-PLAYWRIGHT-RECOVERY-ANCHOR-20261003`, `E-DEPLOY-PIPELINE-RECOVERY-ANCHOR-20261003`, `E-LIVE-PUBLIC-RECOVERY-ANCHOR-20261003`.
