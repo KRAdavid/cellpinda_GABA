@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — bed5bf3 — 2026-10-03
+
+- 연구 비교 도표는 보고되지 않은 수치를 시각적으로 만들어내지 않도록 1·2단계 상대 방향 신호로 보완했고, 조건명을 `비교 조건`·`GABA 섭취`로 중립화했다. 안내 문구는 신호 개수가 실제 효과 크기나 수치를 뜻하지 않는다고 명시한다.
+- 로컬 typecheck, UI contract, research copy, 127개 테스트, production build·정적 bundle·성능 예산이 통과했다. 정적 Pages 번들은 11개 라우트·70개 파일·초기 JS 309,865 bytes·CSS 92,953 bytes·전체 1,444,313 bytes였다.
+- PR #92 checks `37100682489`·`37100682442`와 main workflow `37100751730`의 release-verify·worker-readiness·Pages publish·smoke-live·release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다.
+- 라이브 validator는 candidate `bed5bf3245d489e74a79b33249bcdf9fba00668d`, generatedAt `2026-10-03T05:44:39.892Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal operations snapshots 제외, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. 라이브 390/1440px CDP에서 신호 표시·중립 라벨·가로 폭 390/1425·runtime errors `[]`를 확인했다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-QUALITATIVE-DIRECTION`, `E-CDP-QUALITATIVE-DIRECTION`, `E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION`, `E-LIVE-PUBLIC-QUALITATIVE-DIRECTION`.
+
 ## Latest Public Release Recheck — 0257636 — 2026-10-03
 
 - 연구 비교 도표는 정량 효과 크기가 보고되지 않은 연구에서 임의 막대 길이를 사용하지 않는다. 비교 조건은 같은 길이의 점선 리본, GABA 조건은 같은 길이의 실선 리본으로 표시하고, 카드 문구도 정확한 수치 비교가 아니라 관찰된 변화 방향을 보여준다는 점을 명시한다.

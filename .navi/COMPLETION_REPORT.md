@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — bed5bf3 — 2026-10-03
+
+- 공개 연구 결과 도표를 1·2단계 상대 방향 신호와 중립 조건명으로 고도화해, 보고되지 않은 정량 효과를 시각적으로 암시하지 않으면서 비교 방향을 빠르게 읽도록 했다.
+- PR #92 checks, main workflow `37100751730`, Pages 배포·라이브 validator, 390/320/1440px Chrome CDP fallback 검증이 통과했다. 공개 candidate는 `bed5bf3245d489e74a79b33249bcdf9fba00668d`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-QUALITATIVE-DIRECTION`, `E-CDP-QUALITATIVE-DIRECTION`, `E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION`, `E-LIVE-PUBLIC-QUALITATIVE-DIRECTION`.
+
 ## Latest Release Recheck — 0257636 — 2026-10-03
 
 - 공개 연구 결과 도표의 비교 리본을 정성적 방향 비교에 맞게 보완했다. 두 조건을 같은 길이로 유지하고 점선·실선으로 구분해, 보고되지 않은 효과 크기를 시각적으로 만들어내지 않도록 했다.

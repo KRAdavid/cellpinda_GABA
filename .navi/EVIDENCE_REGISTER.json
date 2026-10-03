@@ -2131,6 +2131,50 @@
       "captured_at": "2026-10-03T05:22:00Z",
       "reviewer_id": "NAVI-OPS-QA-20261003-TF-HEARTBEAT",
       "claim_refs": ["C-001", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-QUALITATIVE-DIRECTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 비교 도표의 동일 길이 리본을 상대 방향을 보여주는 1·2단계 신호로 보완하고, 조건명을 비교 조건·GABA 섭취로 중립화했으며 로컬 품질 검사를 통과했다.",
+      "locator": "PR #92 candidate 2723e0b; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm run validate:research-copy PASS; pnpm test -- --runInBand 127/127; pnpm run build PASS; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1444313; local CDP 390px, 320px large-text/menu, 1440px rendered the qualitative signal markers without overflow or runtime errors",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/92",
+      "captured_at": "2026-10-03T05:41:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-QUALITATIVE-DIRECTION",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-QUALITATIVE-DIRECTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 공개 후보를 Chrome CDP fallback으로 390px·1440px에서 확인한 결과, 비교 조건과 GABA 섭취 조건의 상대 방향 신호가 읽히고 모바일 가로 넘침과 runtime errors가 없었다.",
+      "locator": "temporary Chrome CDP fallback; local candidate 2723e0b at http://127.0.0.1:5190/ and live candidate bed5bf3245d489e74a79b33249bcdf9fba00668d at https://kradavid.github.io/gaba_info/; research-cognition; 390px comparison signals use is-more/is-less with equal 197px tracks, 320px large-text/menu scrollWidth 320, 390px document/body scrollWidth 390, 1440px document/body scrollWidth 1425, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T05:45:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-QUALITATIVE-DIRECTION",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "정성 방향 신호 보완 PR #92의 필수 검사를 통과했고 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #92 checks 37100682489 and 37100682442 PASS; merge commit bed5bf3245d489e74a79b33249bcdf9fba00668d; main workflow 37100751730 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37100751730",
+      "captured_at": "2026-10-03T05:44:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-QUALITATIVE-DIRECTION",
+      "claim_refs": ["C-001", "C-002", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "정성 방향 신호 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고 공개 번들·데이터 경계를 유지했으며 390px·1440px 라이브 화면에서 중립 조건명·신호 표시·가로 폭·runtime errors를 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha bed5bf3245d489e74a79b33249bcdf9fba00668d; generatedAt 2026-10-03T05:44:39.892Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px signal classes is-more/is-less with equal 197px tracks, document/body scrollWidth 390, errors []; live 1440px document/body scrollWidth 1425, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T05:45:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-QUALITATIVE-DIRECTION",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
     }
   ]
 }

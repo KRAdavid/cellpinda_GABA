@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T05:29:16.297671Z",
+  "updated_at": "2026-10-03T05:49:17.048588Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -191,7 +191,9 @@
         "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
         "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
         "E-LOCAL-BUILD-QUALITATIVE-COMPARISON",
-        "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON"
+        "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
+        "E-LOCAL-BUILD-QUALITATIVE-DIRECTION",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -265,7 +267,9 @@
         "E-CDP-RECOVERY-MAP-MOBILE",
         "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
         "E-CDP-QUALITATIVE-COMPARISON",
-        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+        "E-CDP-QUALITATIVE-DIRECTION",
+        "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION"
       ],
       "owner": "UX QA"
     },
@@ -446,7 +450,9 @@
         "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
         "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
         "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
-        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION",
+        "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION"
       ],
       "owner": "배포 QA"
     },
@@ -515,7 +521,9 @@
         "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
         "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
         "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
-        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION",
+        "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION"
       ],
       "owner": "운영 QA"
     },
@@ -643,7 +651,8 @@
         "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE",
         "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
         "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
-        "E-LOCAL-BUILD-QUALITATIVE-COMPARISON"
+        "E-LOCAL-BUILD-QUALITATIVE-COMPARISON",
+        "E-LOCAL-BUILD-QUALITATIVE-DIRECTION"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -691,7 +700,9 @@
         "E-CDP-RECOVERY-MAP-MOBILE",
         "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
         "E-CDP-QUALITATIVE-COMPARISON",
-        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+        "E-CDP-QUALITATIVE-DIRECTION",
+        "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -751,7 +762,9 @@
         "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
         "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
         "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
-        "E-NAVI-TF-HEARTBEAT-REFRESH"
+        "E-NAVI-TF-HEARTBEAT-REFRESH",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION",
+        "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -1008,7 +1021,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "6f681ee60bbc54c36abc9c0247ffded8e110c06bd9bdc2a2162019a115d26a2f",
+    "assessed_input_sha256": "6445b06f4cccd82f2b14382b3b3827019373180d9cb689ac654e39468ddb0009",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -1208,9 +1221,11 @@
           "E-CDP-RECOVERY-MAP-MOBILE",
           "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
           "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
-          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
+          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+          "E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION",
+          "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION"
         ],
-        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 동일 길이 조건 리본·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴를 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴를 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -1266,9 +1281,11 @@
           "E-CDP-RECOVERY-MAP-MOBILE",
           "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
           "E-CDP-QUALITATIVE-COMPARISON",
-          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
+          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+          "E-CDP-QUALITATIVE-DIRECTION",
+          "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION"
         ],
-        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 점선·실선 조건 구분·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락을 추가 확인"
+        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락을 추가 확인"
       },
       {
         "criterion_id": "AC-004",
@@ -1415,9 +1432,12 @@
           "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
           "E-LOCAL-BUILD-QUALITATIVE-COMPARISON",
           "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
-          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
+          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+          "E-LOCAL-BUILD-QUALITATIVE-DIRECTION",
+          "E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION",
+          "E-LIVE-PUBLIC-QUALITATIVE-DIRECTION"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·태블릿 헤더·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·태블릿 헤더·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -1708,6 +1728,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T05:23:30Z"
+    },
+    {
+      "id": "H-039",
+      "event": "정성 비교 도표의 동일 길이 리본을 상대 방향을 보여주는 1·2단계 신호로 보완하고 비교 조건·GABA 섭취 조건의 중립 라벨을 적용한 PR #92를 main에 병합했다. 최종 Pages 배포·라이브 validator·390/1440px Chrome CDP를 재검증하고 공개 UI·NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T05:45:00Z"
     }
   ]
 }
