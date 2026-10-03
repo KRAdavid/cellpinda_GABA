@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 모바일 연구 결과 카드 가독성 고도화 공개 배포: 2026-10-04 / candidate `7a6db416`
+
+320px·390px에서 연구 결과 카드가 가용 폭을 모두 사용하도록 보정해 도표 라벨의 불필요한 줄바꿈과 세로 밀도를 줄였다. 연구 문구·데이터·해석·제품 독립 경계는 변경하지 않았다. PR #151의 release-verify·site-quality-verify, main workflow `37140273727`의 정적 Pages 배포·라이브 smoke·release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback 320/390/1440px에서 카드 폭 280/350/1180px, 도표 폭 244/314/687px, 가로 넘침 없음·브라우저 오류 없음을 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004`, `E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004`, `E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004`.
+
 ## 장 진입 표시와 고정 읽기 바 겹침 보정 공개 배포: 2026-10-04 / candidate `b9f21d0ceba52e0d3ea4745d65232e3661ffd7ea`
 
 장 링크로 이동할 때 제목만 맞추던 기준을 장 헤더 전체로 바꿔 `06 · 연구의 확장` 같은 작은 장 표시가 고정 읽기 진행 바 뒤에 숨지 않도록 보완했다. PR #149의 필수 검사, main workflow `37139270708`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback 320/390/1440px에서 `#research` 직접 진입 시 장 표시·제목·진행 바 간격, 가로 넘침 없음, 브라우저 오류 없음을 확인했다. 공개 과학 카피·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-CHAPTER-ENTRY-20261004`, `E-PLAYWRIGHT-CHAPTER-ENTRY-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004`, `E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004`.

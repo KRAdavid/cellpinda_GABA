@@ -1,5 +1,13 @@
 # Audit Report
 
+## Mobile Research Card Width Audit — 7a6db416 — 2026-10-04
+
+- 연구 결과 카드의 모바일 좌우 여백이 320px에서 도표 문구를 조기에 줄바꿈시키고 카드 높이를 키우는 경미한 사용성 결함을 확인했다. 카드 내부 폭을 모바일 가용 폭으로 확장했으며 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 typecheck/UI contract/127 tests/build, PR #151 검사, main workflow `37140273727`, Pages 배포·라이브 smoke·release status와 공개 validator가 통과했다. 공개 Playwright Chrome fallback 320/390/1440px에서 카드·도표 폭 개선, 가로 넘침 없음, 브라우저 오류 없음을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004`, `E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004`, `E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004`.
+
 ## Chapter Entry Clearance Recheck — b9f21d0 — 2026-10-04
 
 - 장 진입 스크롤 기준을 제목 단일 요소에서 장 헤더 전체로 보정해 고정 읽기 진행 바와 작은 장 표시의 겹침을 해소했다. 320px·390px·1440px에서 `#research` 직접 진입 후 장 표시가 진행 바 아래에 노출되고 가로 넘침·브라우저 오류가 없었다.

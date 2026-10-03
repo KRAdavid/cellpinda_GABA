@@ -3374,6 +3374,50 @@
       "captured_at": "2026-10-03T17:10:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261004-CHAPTER-ENTRY",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 결과 카드가 가용 폭을 사용하도록 보정한 PR #151 후보의 로컬 검증이 통과했다. 연구 문구·데이터·해석은 바꾸지 않고 320px·390px에서 도표의 조기 줄바꿈을 줄였다.",
+      "locator": "PR #151 candidate d7be170; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback at 320/390/1440px: card width 280/350/1180, chart width 244/314/687, chart height 743/591/490, document scrollWidth equals viewport, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/151",
+      "captured_at": "2026-10-03T17:25:50Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-RESEARCH-CARD-WIDTH",
+      "claim_refs": ["C-001", "C-003", "C-004"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본을 Chrome fallback으로 320px·390px·1440px에서 확인했다. 연구 결과 카드가 모바일 가용 폭을 사용하고 도표 문구가 더 안정적으로 배치되며, 가로 넘침과 브라우저 오류가 없었다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/; v42-research-card.mjs; 320px card 280/chart 244/chart height 743; 390px card 350/chart 314/chart height 591; 1440px card 1180/chart 687/chart height 490; scrollWidth equals viewport at all widths; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/151",
+      "captured_at": "2026-10-03T17:25:50Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RESEARCH-CARD-WIDTH",
+      "claim_refs": ["C-002", "C-003", "C-004"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #151의 release-verify와 site-quality-verify가 통과했고 main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드에서 정상적으로 건너뛰었다.",
+      "locator": "PR #151 checks 37140194601 release-verify PASS and 37140194606 site-quality-verify PASS; merge commit 7a6db416a08d78a8d3bd31f4c66bca89f5c1b2c8; main workflow 37140273727 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37140273727",
+      "captured_at": "2026-10-03T17:25:50Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-CARD-WIDTH",
+      "claim_refs": ["C-001", "C-002", "C-005"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200으로 응답하고 main 병합 SHA를 제공했으며, 모바일 연구 결과 카드 폭 보정과 정적 공개 경계를 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 7a6db416a08d78a8d3bd31f4c66bca89f5c1b2c8; generatedAt 2026-10-03T17:23:21.953Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Playwright research-card-width results recorded in E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T17:25:50Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261004-RESEARCH-CARD-WIDTH",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005"]
     }
   ]
 }

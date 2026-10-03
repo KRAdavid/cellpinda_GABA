@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T17:10:00Z",
+  "updated_at": "2026-10-03T17:25:50Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -232,7 +232,9 @@
         "E-LOCAL-BUILD-VIDEO-FILTERS-20261004",
         "E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004",
         "E-LOCAL-BUILD-CHAPTER-ENTRY-20261004",
-        "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004"
+        "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004",
+        "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -359,7 +361,9 @@
         "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
         "E-LOCAL-BUILD-CHAPTER-ENTRY-20261004",
         "E-PLAYWRIGHT-CHAPTER-ENTRY-20261004",
-        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+        "E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
       ],
       "owner": "UX QA"
     },
@@ -401,7 +405,10 @@
         "E-LIVE-PUBLIC-SOURCE-ACTION-20261004",
         "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
         "E-LOCAL-BUILD-CHAPTER-ENTRY-20261004",
-        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+        "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
+        "E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
       ],
       "owner": "데이터 QA"
     },
@@ -561,7 +568,11 @@
         "E-LOCAL-BUILD-CHAPTER-ENTRY-20261004",
         "E-PLAYWRIGHT-CHAPTER-ENTRY-20261004",
         "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004",
-        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+        "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
+        "E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
       ],
       "owner": "QA"
     },
@@ -665,7 +676,9 @@
         "E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004",
         "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
         "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004",
-        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
       ],
       "owner": "배포 QA"
     },
@@ -762,7 +775,9 @@
         "E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004",
         "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
         "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004",
-        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+        "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
       ],
       "owner": "운영 QA"
     },
@@ -1531,9 +1546,13 @@
           "E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004",
           "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
           "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004",
-          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+          "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
+          "E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
         ],
-        "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리를 재확인"
+        "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리·모바일 연구 결과 카드 가용 폭을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -1640,9 +1659,13 @@
           "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
           "E-LOCAL-BUILD-CHAPTER-ENTRY-20261004",
           "E-PLAYWRIGHT-CHAPTER-ENTRY-20261004",
-          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+          "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
+          "E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
         ],
-        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·연구 규모 기관 비교와 별도 SCIE 분석 구분·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환을 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·연구 규모 기관 비교와 별도 SCIE 분석 구분·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환·연구 카드 가용 폭을 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -1754,9 +1777,13 @@
           "E-LIVE-PUBLIC-SOURCE-ACTION-20261004",
           "E-LOCAL-BUILD-VIDEO-FILTERS-20261004",
           "E-PLAYWRIGHT-VIDEO-FILTERS-20261004",
-          "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004"
+          "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
+          "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
+          "E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
         ],
-        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·연구 규모의 동일 PubMed 기준 기관 비교와 별도 SCIE 분석 블록·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환을 추가 확인"
+        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·연구 규모의 동일 PubMed 기준 기관 비교와 별도 SCIE 분석 블록·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환·모바일 연구 카드 폭 보정을 추가 확인"
       },
       {
         "criterion_id": "AC-004",
@@ -1993,9 +2020,12 @@
           "E-LOCAL-BUILD-CHAPTER-ENTRY-20261004",
           "E-PLAYWRIGHT-CHAPTER-ENTRY-20261004",
           "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004",
-          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+          "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭 보정 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -2014,9 +2044,10 @@
           "E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004",
           "E-LIVE-PUBLIC-SOURCE-ACTION-20261004",
           "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
-          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
         ],
-        "notes": "제품 독립 과학 정보 경계와 연구 출처 연결 유지; 공개 연구 경로에 제품 CTA·view=products·SmartStore 연결 없음"
+        "notes": "제품 독립 과학 정보 경계와 연구 출처 연결 유지; 공개 연구 경로에 제품 CTA·view=products·SmartStore 연결 없음; 이번 변경은 연구 카드 폭만 보정"
       },
       {
         "criterion_id": "AC-007",
@@ -2039,9 +2070,11 @@
           "E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004",
           "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
           "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004",
-          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004"
+          "E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004"
         ],
-        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음"
+        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 공개 연구 카드 폭 보정의 자동·대표 브라우저 검증은 통과"
       }
     ],
     "final_status": "NOT_READY"
@@ -2495,6 +2528,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T17:10:00Z"
+    },
+    {
+      "id": "H-065",
+      "event": "모바일 연구 결과 카드가 320px에서 불필요하게 좁아지던 문제를 PR #151에서 가용 폭 확장으로 보완했다. 로컬 typecheck·UI 계약·127개 테스트·build, 320/390/1440px 공개 Chrome fallback, main workflow `37140273727`, Pages 배포·라이브 smoke·release status와 live validator candidate `7a6db416`을 확인해 NAVI 증적을 갱신했다. 공개 과학 카피·제품 독립 경계는 변경하지 않았고 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 상태는 USER_DECISION으로 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T17:25:50Z"
     }
   ]
 }
