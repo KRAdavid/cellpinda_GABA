@@ -1153,3 +1153,8 @@
   .guide-reading-note-source small{font-size:13px;line-height:1.6}
   .guide-reading-note-source-action{margin-top:9px;font-size:13px}
 }
+
+/* v43 mobile definition card: reserve a clear footer zone for decorative motifs. */
+@media(max-width:700px){
+  .guide-definition-card{padding-bottom:86px}
+}
