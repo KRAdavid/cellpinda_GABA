@@ -415,8 +415,13 @@
 .guide-video-gallery-lead{max-width:70ch;margin-top:-8px;margin-bottom:28px}
 .guide-video-gallery{display:grid;grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);gap:16px;align-items:start}
 .guide-video-feature{display:grid;grid-template-columns:minmax(190px,.82fr) minmax(0,1fr);gap:19px;align-items:center;padding:17px;border-radius:22px;background:var(--guide-ink);box-shadow:0 18px 34px rgba(19,47,86,.12)}
-.guide-video-feature-media{width:100%;aspect-ratio:9/16;overflow:hidden;border-radius:16px;background:#08182b}
-.guide-video-feature-media iframe{display:block;width:100%;height:100%;border:0}
+.guide-video-feature-media{position:relative;width:100%;aspect-ratio:9/16;overflow:hidden;border-radius:16px;background:#08182b}
+.guide-video-feature-media iframe{display:block;width:100%;height:100%;border:0;opacity:1;transition:opacity .22s ease}
+.guide-video-feature-media.is-loading iframe{opacity:.18}
+.guide-video-feature-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:20px;color:#d6f0f0;background:rgba(8,24,43,.7);font-size:12px;font-weight:850;letter-spacing:-.04em;opacity:0;pointer-events:none;transition:opacity .22s ease}
+.guide-video-feature-media.is-loading .guide-video-feature-loading{opacity:1}
+.guide-video-feature-loading svg{animation:guide-video-loading-spin 1s linear infinite}
+@keyframes guide-video-loading-spin{to{transform:rotate(360deg)}}
 .guide-video-feature-poster{position:relative;display:block;width:100%;height:100%;padding:0;border:0;background:#08182b;color:#fff;text-align:left;overflow:hidden}
 .guide-video-feature-poster img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.82)}
 .guide-video-feature-poster-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,24,43,.08) 30%,rgba(8,24,43,.76) 100%)}
@@ -544,6 +549,7 @@
   .guide-application-card,.guide-process-flow article,.guide-research-detail-inline{border-radius:18px}
 }
 @media(prefers-reduced-motion:reduce){.guide-header-share,.guide-application-card,.guide-process-flow article,.guide-video-feature{box-shadow:none}}
+@media(prefers-reduced-motion:reduce){.guide-video-feature-loading svg{animation:none}}
 
 /* v11 research scale: make the discovery line land with visible academic weight. */
 .guide-research-scale{position:relative;margin-top:48px;padding:35px 38px 31px;border-radius:25px;background:linear-gradient(135deg,#132f56 0%,#173f60 57%,#0b777d 100%);color:#fff;overflow:hidden;isolation:isolate;box-shadow:0 22px 42px rgba(19,47,86,.16)}
