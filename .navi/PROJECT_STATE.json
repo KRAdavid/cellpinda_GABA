@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T19:17:35Z",
+  "updated_at": "2026-10-03T19:37:46Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -244,7 +244,9 @@
         "E-LOCAL-BUILD-VIDEO-THUMBNAIL-RESOLUTION-20261004",
         "E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-RESOLUTION-20261004",
         "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
-        "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004"
+        "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004",
+        "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
+        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -388,7 +390,10 @@
         "E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004",
         "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
         "E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004",
-        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+        "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
+        "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
       ],
       "owner": "UX QA"
     },
@@ -448,7 +453,10 @@
         "E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004",
         "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
         "E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004",
-        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+        "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
+        "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
       ],
       "owner": "데이터 QA"
     },
@@ -632,7 +640,11 @@
         "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
         "E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004",
-        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+        "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
+        "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
+        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
       ],
       "owner": "QA"
     },
@@ -748,7 +760,9 @@
         "E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-RESOLUTION-20261004",
         "E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004",
-        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
       ],
       "owner": "배포 QA"
     },
@@ -853,7 +867,9 @@
         "E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004",
         "E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004",
-        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
       ],
       "owner": "운영 QA"
     },
@@ -940,7 +956,11 @@
         "E-LOCAL-BUILD-CHART-NAV-20261004",
         "E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004",
         "E-DEPLOY-PIPELINE-CHART-NAV-20261004",
-        "E-LIVE-PUBLIC-CHART-NAV-20261004"
+        "E-LIVE-PUBLIC-CHART-NAV-20261004",
+        "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
+        "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
+        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
       ],
       "owner": "QA"
     },
@@ -967,7 +987,9 @@
         "E-LIVE-PUBLIC-NAVI-SYNC-20261004",
         "E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004",
         "E-LIVE-PUBLIC-SOURCE-ACTION-20261004",
-        "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004"
+        "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
+        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
       ],
       "owner": "운영자"
     }
@@ -1367,7 +1389,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T19:17:35Z"
+    "last_run_at": "2026-10-03T19:37:46Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1428,7 +1450,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T19:17:35Z"
+    "last_run_at": "2026-10-03T19:37:46Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -1646,9 +1668,11 @@
         "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
         "E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004",
-        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+        "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
         ],
-        "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리·모바일 연구 결과 카드 가용 폭·모바일 읽기 라벨 12px·가+/가− 읽기 조절을 재확인"
+        "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리·모바일 연구 결과 카드 가용 폭·모바일 읽기 라벨 12px·가+/가− 읽기 조절·직접 해시 진입 제목 정렬을 재확인"
       },
       {
         "criterion_id": "AC-002",
@@ -1764,9 +1788,11 @@
           "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004",
           "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
           "E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004",
-          "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+          "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+          "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
+          "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
         ],
-        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·연구 규모 기관 비교와 별도 SCIE 분석 구분·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환·연구 카드 가용 폭·모바일 읽기 라벨과 읽기 크기 조절을 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·연구 규모 기관 비교와 별도 SCIE 분석 구분·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환·연구 카드 가용 폭·모바일 읽기 라벨과 읽기 크기 조절·직접 해시 진입 제목 정렬을 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -1885,9 +1911,12 @@
           "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004",
           "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
           "E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004",
-          "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+          "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+          "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
+          "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
+          "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
         ],
-        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·연구 규모의 동일 PubMed 기준 기관 비교와 별도 SCIE 분석 블록·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환·모바일 연구 카드 폭·결과 방향 라벨 12px 보정을 추가 확인"
+        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·연구 규모의 동일 PubMed 기준 기관 비교와 별도 SCIE 분석 블록·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환·모바일 연구 카드 폭·결과 방향 라벨 12px 보정·직접 해시 진입 제목 정렬을 추가 확인"
       },
       {
         "criterion_id": "AC-004",
@@ -1989,9 +2018,11 @@
           "E-LIVE-PUBLIC-VIDEO-FILTERS-20261004",
           "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
           "E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004",
-          "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+          "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+          "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
+          "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
         ],
-        "notes": "390px·320px 가로 넘침 없음, 모바일 메뉴 열린 상태의 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환, 큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로·가+에서 가−로 바뀌는 읽기 도구를 유지 확인"
+        "notes": "390px·320px 가로 넘침 없음, 모바일 메뉴 열린 상태의 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환, 큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로·가+에서 가−로 바뀌는 읽기 도구·직접 해시 진입 제목 정렬을 유지 확인"
       },
       {
         "criterion_id": "AC-005",
@@ -2132,9 +2163,11 @@
           "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
           "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004",
           "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
-          "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004"
+          "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004",
+          "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
+          "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px 보정 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -2186,9 +2219,13 @@
           "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
           "E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004",
           "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004",
-          "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004"
+          "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
+          "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
+          "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
+          "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
+          "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
         ],
-        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 모바일 읽기 라벨·읽기 크기 조절의 자동·대표 브라우저 검증은 통과"
+        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 모바일 읽기 라벨·읽기 크기 조절·직접 해시 진입 정렬의 자동·대표 브라우저 검증은 통과"
       }
     ],
     "final_status": "NOT_READY"
@@ -2684,6 +2721,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T19:17:35Z"
+    },
+    {
+      "id": "H-071",
+      "event": "직접 해시 진입 시 제목이 늦게 정렬되던 문제를 PR #162에서 useLayoutEffect 초기 정렬과 180/420/780ms 안정화 재정렬로 보완했다. 로컬 typecheck·UI 계약·127개 테스트·build, 공개 390px #recovery-break/#research/#expert-videos direct hash Playwright에서 120ms 제목 정렬·진행 상태·가로 폭·브라우저 오류를 확인했고 main workflow 37148328986 및 live validator candidate 70d66b5를 확인해 NAVI 증적을 갱신했다. 공개 과학 카피·제품 독립 경계는 변경하지 않았으며 Safari/iOS/Android·실제 고령 사용자 독해성·독립 과학·규제 검토가 남아 USER_DECISION으로 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T19:37:46Z"
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Audit Report
 
+## Direct Hash Entry Alignment Audit — 70d66b5 — 2026-10-04
+
+- 직접 해시 진입(` #recovery-break`, `#research`, `#expert-videos`)에서 제목이 늦게 고정 읽기 레일에 맞춰지던 결함을 PR #162에서 `useLayoutEffect` 초기 정렬과 180/420/780ms 안정화 재정렬로 보완했다.
+- 로컬 typecheck·UI 계약·127개 테스트·build, 공개 390px Chrome fallback에서 세 해시의 제목 정렬·진행 상태·가로 폭·브라우저 오류를 확인했다. 각 제목은 120ms 시점에 읽기 레일 아래에 놓였고, 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+- PR #162 merge commit `70d66b5`, main workflow `37148328986`, Pages 배포·라이브 smoke·release status와 live validator가 통과했다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목이다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+
+증적: `E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004`, `E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004`, `E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004`, `E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004`.
+
 ## Mobile Reading Clarity Audit — 37737d2 — 2026-10-04
 
 - 모바일에서 읽기 기능에 직접 필요한 진행 상태·장 표시·연구 출처·결과 방향 라벨을 12px 기준으로 보정하고, 읽기 크기 조절 버튼에 보이는 `가+`/`가−` 표기를 추가했다. 장식용 숫자와 공개 연구 카피·제품 독립 경계는 변경하지 않았다.

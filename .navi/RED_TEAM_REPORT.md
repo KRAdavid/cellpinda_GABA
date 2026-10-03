@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Direct Hash Entry Alignment Red-Team Recheck — 70d66b5 — 2026-10-04
+
+- 390px 공개본에서 `#recovery-break`, `#research`, `#expert-videos`를 새로고침해도 장 제목이 고정 읽기 레일 아래에 놓이고, 진행 상태가 `보충 / 12`, `06 / 12`, `10 / 12`로 맞춰지는지 재현했다. 가로 넘침과 브라우저 오류는 없었다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 수정은 해시 진입 정렬 타이밍에 한정됐고, 연구 카피·출처·제품 독립 경계와 전문가 영상 흐름은 변경하지 않았다.
+- 잔여 위험은 동일하다. Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004`, `E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004`, `E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004`, `E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004`.
+
 ## Mobile Reading Clarity Red-Team Recheck — 37737d2 — 2026-10-04
 
 - 좁은 화면에서 기능 라벨이 장식 요소보다 작아질 수 있는 사용성 결함을 재검토했다. 320/390px 공개본에서 진행 상태·장 표시·연구 출처·결과 방향 라벨을 12px로 확인했고, 읽기 크기 버튼은 `가+`/`가−`로 상태를 시각적으로 드러냈다.
