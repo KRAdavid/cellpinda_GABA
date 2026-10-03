@@ -908,7 +908,10 @@ export default function PublicGabaGuide() {
       }
     };
     const closeOnOutsidePointer = (event: PointerEvent) => {
-      if (!headerRef.current?.contains(event.target as Node)) setMenuOpen(false);
+      if (!headerRef.current?.contains(event.target as Node)) {
+        setMenuOpen(false);
+        window.requestAnimationFrame(() => menuToggleRef.current?.focus());
+      }
     };
     document.addEventListener('keydown', closeOnEscape);
     document.addEventListener('keydown', keepFocusInsideMenu);
@@ -1013,12 +1016,14 @@ export default function PublicGabaGuide() {
 
   const scrollTo = (id: string, hash = id) => {
     hashAlignmentCancelled.current = true;
+    const restoreMenuFocus = menuOpen;
     setMenuOpen(false);
     const target = document.getElementById(id);
     const distance = target ? Math.abs(target.getBoundingClientRect().top) : 0;
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches || distance > window.innerHeight * 3 ? 'auto' : 'smooth';
     if (target) scrollGuideTo(target, behavior);
     window.history.replaceState(null, '', `#${hash}`);
+    if (restoreMenuFocus) window.requestAnimationFrame(() => menuToggleRef.current?.focus());
   };
 
   const isNavCurrent = (id: ReadingChapterId | 'recovery-break') => {
@@ -1172,7 +1177,7 @@ export default function PublicGabaGuide() {
           <div className="guide-reading-progress-meta" role="status" aria-live="polite" aria-atomic="true" aria-label={progressAriaLabel}><span aria-hidden="true">지금 읽는 중</span><strong aria-hidden="true">{activeReadingLabel}</strong><small aria-hidden="true">{progressCountLabel}</small></div>
         </div>
       </header>
-      {menuOpen ? <button type="button" className="guide-menu-backdrop" aria-label="메뉴 닫기" onClick={() => setMenuOpen(false)} /> : null}
+      {menuOpen ? <button type="button" className="guide-menu-backdrop" aria-label="메뉴 닫기" onClick={() => { setMenuOpen(false); window.requestAnimationFrame(() => menuToggleRef.current?.focus()); }} /> : null}
 
       <main id="guide-main">
         <section className="guide-hero guide-hero-story" id="top" aria-labelledby="guide-hero-heading" style={{ '--guide-hero-image': `url(${gabaNaturalHero})` } as CSSProperties}>
