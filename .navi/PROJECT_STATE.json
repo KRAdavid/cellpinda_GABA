@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T12:11:00Z",
+  "updated_at": "2026-10-03T12:35:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2182,6 +2182,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T12:11:00Z"
+    },
+    {
+      "id": "H-056",
+      "event": "320px에서 수면 연구 스택이 콘텐츠 최소폭 때문에 우측으로 밀리던 문제를 PR #126에서 보완했다. 320/390/1440px 로컬·공개 Playwright Chrome에서 수면 그리드와 문서 가로폭을 확인하고, 390px 메뉴·연구 지도·큰 글씨 상호작용, main workflow 37123264421, 라이브 validator candidate 81d9dbba를 재검증해 NAVI 증적을 갱신했다. 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 상태는 USER_DECISION으로 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T12:35:00Z"
     }
   ]
 }

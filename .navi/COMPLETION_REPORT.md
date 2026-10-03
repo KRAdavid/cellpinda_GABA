@@ -1,5 +1,13 @@
 # Completion Report
 
+## Narrow-phone Sleep Layout Release Recheck — 81d9dbb — 2026-10-03
+
+- 320px 협소 화면에서 수면 연구 카드가 화면 밖으로 밀리던 레이아웃 문제를 `min-width: 0`과 `minmax(0, 1fr)`로 보완했다. 공개 카피·제품 독립 경계와 연구 내용은 변경하지 않았다.
+- PR #126 필수 검사, 로컬 typecheck/UI contract/test/build, Playwright Chrome 320/390/1440px 레이아웃과 390px 상호작용, main workflow `37123264421`, Pages/live validator가 통과했다. 공개 UI 후보는 `81d9dbba61ec9080a58be8c5b0824843b0a13ed9`이다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android 대표 환경, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-SLEEP-20261003`, `E-PLAYWRIGHT-NARROW-SLEEP-20261003`, `E-DEPLOY-PIPELINE-NARROW-SLEEP-20261003`, `E-LIVE-PUBLIC-NARROW-SLEEP-20261003`.
+
 ## Hero Headline Rhythm and Highlight Release Recheck — f209269 — 2026-10-03
 
 - 데스크톱 히어로의 모바일 전용 줄바꿈·색상 상속 범위를 직계 제목 요소로 제한해 `GABA에서 읽습니다`를 한 문장으로 읽히게 했고, 모바일의 의도된 줄바꿈과 teal 강조는 유지했다. 공개 카피·제품 독립 경계는 변경하지 않았다.

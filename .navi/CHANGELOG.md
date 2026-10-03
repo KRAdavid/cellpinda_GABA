@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 좁은 모바일 수면 연구 레이아웃 고도화 공개 재검증: 2026-10-03 / candidate `81d9dbba61ec9080a58be8c5b0824843b0a13ed9`
+
+320px에서 수면 연구 카드가 콘텐츠 최소폭 때문에 우측으로 밀리던 문제를 `min-width: 0`과 `minmax(0, 1fr)`로 보완했다. 320/390/1440px 로컬·공개 Playwright Chrome에서 수면 그리드와 문서 가로폭을 확인했고, 390px 메뉴 이동·GABA란 앵커·큰 글씨 전환·연구 지도 선택도 재검증했다. PR #126 필수 검사와 main workflow `37123264421`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했으며, 라이브 validator는 HTTP 200·정적 번들·공개 데이터 경계를 확인했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-NARROW-SLEEP-20261003`, `E-PLAYWRIGHT-NARROW-SLEEP-20261003`, `E-DEPLOY-PIPELINE-NARROW-SLEEP-20261003`, `E-LIVE-PUBLIC-NARROW-SLEEP-20261003`.
+
 ## 히어로 제목 리듬·강조 색상 고도화 공개 재검증: 2026-10-03 / candidate `f2092694c7f3fb6e7ea940de828f1577769a6bf3`
 
 데스크톱에서 모바일 전용 줄바꿈 요소가 안쪽 문장까지 블록으로 만들던 선택자를 제목 직계 요소로 제한하고, `GABA에서 읽습니다`를 넓은 화면에서는 한 문장 단위로 묶었다. 모바일 줄바꿈·teal 강조, 320/390/1440px 헤더와 다음 장 진입은 유지했다. PR #124의 필수 검사, main workflow `37121944648`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, 라이브 validator가 성공했다. 로컬 Playwright 2개 상호작용 테스트와 공개 320/390/1440px 캡처를 확인했으며 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-HERO-RHYTHM-20261003`, `E-PLAYWRIGHT-HERO-RHYTHM-20261003`, `E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003`, `E-LIVE-PUBLIC-HERO-RHYTHM-20261003`.
