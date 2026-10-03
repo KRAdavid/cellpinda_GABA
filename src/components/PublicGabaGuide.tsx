@@ -520,7 +520,9 @@ const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, 
 const getGuideScrollTarget = (target: HTMLElement) => {
   if (!target.matches('.guide-story-section, .guide-recovery-break, .guide-final')) return target;
   const headingId = target.getAttribute('aria-labelledby');
-  return headingId ? document.getElementById(headingId) ?? target : target;
+  const heading = headingId ? document.getElementById(headingId) : null;
+  // Keep the chapter marker above the sticky reading rail when entering a chapter.
+  return heading?.closest<HTMLElement>('.guide-section-heading') ?? heading ?? target;
 };
 
 const getGuideScrollTop = (target: HTMLElement) => {
