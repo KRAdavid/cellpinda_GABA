@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — a0ee159 — 2026-10-03
+
+- 모바일 연구 카드에서 출처 라벨과 원문 링크가 붙어 읽히던 문제를 보완해 `출처 ·`와 PMID 링크를 분리했다. 연구 결과나 과학적 주장을 새로 추가하지 않았다.
+- PR #83 checks, main workflow `37095659387`, live validator, 390px Chrome CDP fallback 검증이 통과했다. 공개 후보는 `a0ee159235477ee24c2855251b2d17b21c0b317e`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL`, `E-CDP-RESEARCH-SOURCE-LABEL`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL`.
+
 ## Latest Release Recheck — 10aedca — 2026-10-03
 
 - 전문가 영상 카드에서 현재 재생 중인 동일 영상을 다시 선택해도 iframe이 다시 로딩 상태로 돌아가지 않도록 보완했다. 다른 영상을 선택할 때만 로딩 상태를 새로 시작하며, 모바일 선택 이동과 `재생 중` 상태는 유지한다.

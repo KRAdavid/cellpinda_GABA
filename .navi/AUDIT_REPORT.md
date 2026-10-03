@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — a0ee159 — 2026-10-03
+
+- PR #83에서 모바일 연구 카드의 `출처`와 원문 링크가 붙어 읽히던 가독성 결함을 보완했다. 출처 라벨을 `출처 ·`로 명확히 표시하고 작은 화면에서는 원문 링크를 다음 줄로 분리했다. 연구 카피·출처의 의미·제품 독립 경계는 변경하지 않았다.
+- 로컬 typecheck, UI contract, 127개 테스트, production build·정적 bundle·성능 예산이 통과했다. Pages 정적 번들은 11개 라우트·70개 파일·초기 JS 310,538 bytes·CSS 92,953 bytes·전체 1,444,403 bytes를 유지했다.
+- PR #83 checks와 main workflow `37095659387`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다. 과거 Git 이력의 local-path scanner annotation은 비차단 경고로 남았다.
+- 라이브 validator는 candidate `a0ee159235477ee24c2855251b2d17b21c0b317e`, generatedAt `2026-10-03T04:11:28.734Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL 390px Chrome CDP fallback에서 성장호르몬 연구 카드의 `출처 ·`와 PMID 원문 링크가 분리되어 표시되고, document/body scrollWidth 390·runtime errors `[]`를 확인했다. Browser 플러그인은 사용할 수 없어 CDP fallback으로 대체했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL`, `E-CDP-RESEARCH-SOURCE-LABEL`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL`.
+
 ## Latest Public Release Recheck — 10aedca — 2026-10-03
 
 - PR #81에서 이미 재생 중인 전문가 영상 카드를 다시 선택할 때 `videoFrameReady`를 불필요하게 초기화하던 예외를 보완했다. 다른 영상을 선택할 때만 iframe 로딩 상태를 초기화하고, 모바일에서는 기존처럼 플레이어 영역으로 이동한다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
