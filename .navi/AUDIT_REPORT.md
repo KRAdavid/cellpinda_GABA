@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 79eea1f — 2026-10-03
+
+- PR #75에서 701–860px 태블릿 구간의 전체 메뉴를 아이콘 메뉴로 전환해 헤더 컨트롤이 화면 밖으로 밀리던 결함을 보완했다. 44px 메뉴·읽기 크기·공유 컨트롤을 유지하고 768px·820px에서 메뉴를 열어도 가로 넘침이 없었다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build와 성능 예산이 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,442,606 <= 1,650,000` bytes였고 초기 JS 310,538 bytes·CSS 92,953 bytes였다.
+- PR #75 checks `37091618659`, `37091618584`와 main workflow `37091703892`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다. 과거 Git 이력의 local-path scanner annotation은 비차단 경고로 남았다.
+- 라이브 validator는 candidate `79eea1f08423f7d9f52021770310691b9f6e4db2`, generatedAt `2026-10-03T03:00:28.473Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL Chrome CDP fallback은 768px·820px에서 메뉴·큰 글씨·공유 버튼이 화면 안에 남고 runtime errors `[]`, 390px에서 `#recovery-break`·`수면과 회복 02 / 12`, 1440px에서 같은 진행 상태와 `aria-current="page"`를 확인했다. Browser 플러그인은 사용할 수 없어 CDP fallback으로 대체했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-TABLET-HEADER`, `E-CDP-TABLET-HEADER`, `E-DEPLOY-PIPELINE-TABLET-HEADER`, `E-LIVE-PUBLIC-TABLET-HEADER`.
+
 ## Latest Public Release Recheck — e5f1eab — 2026-10-03
 
 - PR #73에서 기존 `수면과 회복` 인터스티셜을 전역 메뉴의 첫 항목으로 연결했다. 읽기 진행 메타는 시각 요소를 중복 안내하지 않고 `role="status"`와 하나의 `aria-label`로 현재 장을 전달하며, 모바일 메뉴는 sticky 진행 바보다 위에 표시된다. 연구 카피·출처·제품 독립 경계는 변경하지 않았다.
