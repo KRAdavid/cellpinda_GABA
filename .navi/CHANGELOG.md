@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 수면·회복 앵커와 고정 읽기 레일 충돌 보완 공개 재검증: 2026-10-03 / candidate `27e9f6f643f939e1a99bb9fe540493e76afa0860`
+
+`#recovery-break`로 바로 진입하거나 메뉴에서 수면·회복으로 이동할 때 고정 읽기 레일이 장 제목을 가리지 않도록 `.guide-recovery-break`의 상단 여백 계약을 추가했다. PR #128 필수 검사와 main workflow `37124665367`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 공개 데이터 경계를 확인했고, 공개 Playwright Chrome 320/390/1440px에서 가로 넘침·런타임 오류가 없었으며 390/1440px 앵커 제목이 읽기 레일 아래에 도착했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-ANCHOR-20261003`, `E-PLAYWRIGHT-RECOVERY-ANCHOR-20261003`, `E-DEPLOY-PIPELINE-RECOVERY-ANCHOR-20261003`, `E-LIVE-PUBLIC-RECOVERY-ANCHOR-20261003`.
+
 ## 좁은 모바일 수면 연구 레이아웃 고도화 공개 재검증: 2026-10-03 / candidate `81d9dbba61ec9080a58be8c5b0824843b0a13ed9`
 
 320px에서 수면 연구 카드가 콘텐츠 최소폭 때문에 우측으로 밀리던 문제를 `min-width: 0`과 `minmax(0, 1fr)`로 보완했다. 320/390/1440px 로컬·공개 Playwright Chrome에서 수면 그리드와 문서 가로폭을 확인했고, 390px 메뉴 이동·GABA란 앵커·큰 글씨 전환·연구 지도 선택도 재검증했다. PR #126 필수 검사와 main workflow `37123264421`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했으며, 라이브 validator는 HTTP 200·정적 번들·공개 데이터 경계를 확인했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-NARROW-SLEEP-20261003`, `E-PLAYWRIGHT-NARROW-SLEEP-20261003`, `E-DEPLOY-PIPELINE-NARROW-SLEEP-20261003`, `E-LIVE-PUBLIC-NARROW-SLEEP-20261003`.
