@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — c6291f6 — 2026-10-03
+
+- 모바일에서 전역으로 숨겨지던 작은 장 제목을 다시 표시해 수면·회복, 연구 규모, 출처 읽기, 이야기 공유의 위치 단서를 복원했다. 과학 카피·제품 경계·연구 데이터는 변경하지 않았다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 311,157, CSS 95,703, total assets 1,453,225. PR #108 checks와 main `37111226511`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `c6291f6bd2c62e77529da767b1d2a985f4acaab5`, generatedAt `2026-10-03T08:54:53.143Z`, HTTP 200, 70 hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. 라이브 CDP 390px의 5개 작은 제목은 모두 `display:block`·14px로 표시됐고, 수면·회복 number top `109.5px`, heading top `133.5px`, final number top `109.9px`, rail bottom `105px`, document width `390px`를 확인했다. 메뉴 열림 `aria-expanded=true`·본문 스크롤 잠금·닫힘 복원과 1440px document width `1425px`도 확인했다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-LABELS`, `E-CDP-MOBILE-CHAPTER-LABELS`, `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-LABELS`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-LABELS`.
+
 ## Latest Public Release Recheck — 2ae71ef — 2026-10-03
 
 - 모바일 장 진입 시 고정 읽기 진행 레일이 장 번호·제목 첫 줄을 가리던 UI 결함을 PR #106의 110px 상단 여백과 정적 UI contract guard로 보완했다. 과학 카피·제품 경계·연구 데이터는 변경하지 않았다.

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — c6291f6 — 2026-10-03
+
+- 공개 GABA 안내서 모바일 화면에서 작은 장 제목을 복원해 긴 페이지의 위치 단서를 강화했다. 공개 과학 카피·제품 경계는 유지했다.
+- PR #108 checks, main `37111226511`, Pages/live validator, 320/390/1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `c6291f6bd2c62e77529da767b1d2a985f4acaab5`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-LABELS`, `E-CDP-MOBILE-CHAPTER-LABELS`, `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-LABELS`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-LABELS`.
+
 ## Latest Release Recheck — 2ae71ef — 2026-10-03
 
 - 공개 GABA 안내서의 모바일 장 진입점 제목이 고정 읽기 진행 레일에 가려지지 않도록 110px 상단 여백과 UI contract guard를 적용했다. 공개 과학 카피·제품 경계는 유지했다.
