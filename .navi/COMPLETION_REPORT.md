@@ -1,5 +1,12 @@
 # Completion Report
 
+## NAVI 문서 병합 후 최신 공개본 동기화 — 6212511 — 2026-10-04
+
+- NAVI 문서 PR #141 병합 후 main workflow `37134462216`, Pages 배포, 라이브 smoke, release status와 공개 validator가 통과했다. 라이브 공개 candidate는 `621251166c2902a7ea2a8fae44b5230f97242ff9`다.
+- 이번 동기화는 문서·증거 기록만 변경했으며 공개 UI, 과학 카피, 제품 독립 경계는 변경하지 않았다. 완료 게이트는 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LIVE-PUBLIC-NAVI-SYNC-20261004`.
+
 ## Mobile Chart Readability and Long-Jump Navigation Release Recheck — b778f23 — 2026-10-04
 
 - 모바일 연구 결과 도표의 비교 조건·연구 메타데이터를 읽기 쉽게 보정하고, 사용자의 긴 장 이동을 초기 hash 정렬 타이머가 되돌리지 않도록 보완했다. 공개 과학 카피·제품 독립 경계·연구 출처는 변경하지 않았다.

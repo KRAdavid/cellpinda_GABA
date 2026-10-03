@@ -1,5 +1,9 @@
 # Project Changelog
 
+## NAVI 문서 병합 후 최신 공개 SHA 동기화: 2026-10-04 / candidate `621251166c2902a7ea2a8fae44b5230f97242ff9`
+
+NAVI 증거·감사·레드팀 문서 PR #141 병합 후 main workflow `37134462216`의 release-verify·worker-readiness·GitHub Pages 배포·라이브 smoke·release status가 성공했다. 라이브 validator는 문서 병합 후 공개 candidate `6212511…`, HTTP 200, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 재확인했다. 공개 UI·과학 카피·제품 정보는 변경하지 않았고 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LIVE-PUBLIC-NAVI-SYNC-20261004`.
+
 ## 모바일 차트 가독성·긴 장 이동 충돌 보완 공개 재검증: 2026-10-04 / candidate `b778f23b65a67cf919171d212a9305927a34d0ff`
 
 모바일 연구 결과 도표의 비교 조건·연구 메타데이터에 가독성 바닥값을 적용하고, 초기 `#top` 정렬 타이머가 사용자의 긴 장 이동을 되돌리던 충돌을 수동 이동 시 취소하도록 보완했다. PR #140의 필수 검사와 main workflow `37133909361`의 release-verify·worker-readiness·GitHub Pages 배포·라이브 smoke·release status가 성공했으며 Worker는 정적 전용 모드로 건너뛰었다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 320/390/1440px에서 차트 폭·가로 넘침·연구 지도 장 이동·전문가 영상 선택 재생·브라우저 오류 없음을 재확인했다. 공개 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-CHART-NAV-20261004`, `E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004`, `E-DEPLOY-PIPELINE-CHART-NAV-20261004`, `E-LIVE-PUBLIC-CHART-NAV-20261004`.

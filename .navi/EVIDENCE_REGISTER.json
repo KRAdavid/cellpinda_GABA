@@ -3187,6 +3187,17 @@
       "captured_at": "2026-10-03T15:39:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261004-CHART-NAV",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NAVI-SYNC-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 증거·감사·레드팀 문서 PR #141 병합 후 공개 URL이 문서 병합 SHA로 다시 배포됐고, 코드 후보의 모바일 차트 가독성·긴 장 이동 개선을 포함한 정적 공개 경계를 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; main workflow 37134462216; page 200; runtimeMode STATIC; candidateSha 621251166c2902a7ea2a8fae44b5230f97242ff9; generatedAt 2026-10-03T15:47:45.611Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37134462216",
+      "captured_at": "2026-10-03T15:48:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261004-NAVI-SYNC",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-007"]
     }
   ]
 }

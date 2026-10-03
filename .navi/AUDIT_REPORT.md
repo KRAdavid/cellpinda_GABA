@@ -1,5 +1,13 @@
 # Audit Report
 
+## NAVI Documentation Sync Recheck — 6212511 — 2026-10-04
+
+- NAVI 문서 PR #141 병합 후 main workflow `37134462216`와 라이브 validator를 재확인했다. 문서 병합은 공개 UI·과학 카피·제품 경계를 변경하지 않았고, 정적 공개 candidate `6212511…`가 최신 main과 일치한다.
+- 기존 코드 개선의 모바일 차트 가독성·긴 장 이동 검증은 `E-LOCAL-BUILD-CHART-NAV-20261004` 및 `E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004`에 남아 있으며, 최신 공개 SHA 동기화는 `E-LIVE-PUBLIC-NAVI-SYNC-20261004`로 기록했다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LIVE-PUBLIC-NAVI-SYNC-20261004`.
+
 ## Mobile Chart Readability and Long-Jump Navigation Recheck — b778f23 — 2026-10-04
 
 - 모바일 연구 결과 도표의 비교 조건·연구 메타데이터에 작은 화면용 글자 바닥값을 적용했고, 사용자의 메뉴 이동 뒤 초기 hash 정렬이 다시 실행되던 충돌을 수동 이동 취소 ref로 보완했다. 제품 독립 과학 카피·출처·연구 데이터는 변경하지 않았다.

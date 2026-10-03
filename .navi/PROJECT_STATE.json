@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T15:39:00Z",
+  "updated_at": "2026-10-03T15:48:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -615,7 +615,8 @@
         "E-DEPLOY-PIPELINE-READING-NOTE-20261004",
         "E-LIVE-PUBLIC-READING-NOTE-20261004",
         "E-DEPLOY-PIPELINE-CHART-NAV-20261004",
-        "E-LIVE-PUBLIC-CHART-NAV-20261004"
+        "E-LIVE-PUBLIC-CHART-NAV-20261004",
+        "E-LIVE-PUBLIC-NAVI-SYNC-20261004"
       ],
       "owner": "배포 QA"
     },
@@ -703,7 +704,8 @@
         "E-DEPLOY-PIPELINE-READING-NOTE-20261004",
         "E-LIVE-PUBLIC-READING-NOTE-20261004",
         "E-DEPLOY-PIPELINE-CHART-NAV-20261004",
-        "E-LIVE-PUBLIC-CHART-NAV-20261004"
+        "E-LIVE-PUBLIC-CHART-NAV-20261004",
+        "E-LIVE-PUBLIC-NAVI-SYNC-20261004"
       ],
       "owner": "운영 QA"
     },
@@ -813,7 +815,8 @@
         "E-DEPLOY-PIPELINE-READING-NOTE-20261004",
         "E-LIVE-PUBLIC-READING-NOTE-20261004",
         "E-DEPLOY-PIPELINE-CHART-NAV-20261004",
-        "E-LIVE-PUBLIC-CHART-NAV-20261004"
+        "E-LIVE-PUBLIC-CHART-NAV-20261004",
+        "E-LIVE-PUBLIC-NAVI-SYNC-20261004"
       ],
       "owner": "운영자"
     }
@@ -1459,7 +1462,8 @@
           "E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003",
           "E-LIVE-PUBLIC-HERO-RHYTHM-20261003",
           "E-DEPLOY-PIPELINE-CHART-NAV-20261004",
-          "E-LIVE-PUBLIC-CHART-NAV-20261004"
+          "E-LIVE-PUBLIC-CHART-NAV-20261004",
+          "E-LIVE-PUBLIC-NAVI-SYNC-20261004"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리를 재확인"
       },
@@ -1558,7 +1562,8 @@
           "E-PLAYWRIGHT-HERO-RHYTHM-20261003",
           "E-LIVE-PUBLIC-HERO-RHYTHM-20261003",
           "E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004",
-          "E-LIVE-PUBLIC-CHART-NAV-20261004"
+          "E-LIVE-PUBLIC-CHART-NAV-20261004",
+          "E-LIVE-PUBLIC-NAVI-SYNC-20261004"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·연구 규모 기관 비교와 별도 SCIE 분석 구분·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환을 확인"
       },
@@ -1918,7 +1923,8 @@
           "E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003",
           "E-LIVE-PUBLIC-HERO-RHYTHM-20261003",
           "E-DEPLOY-PIPELINE-CHART-NAV-20261004",
-          "E-LIVE-PUBLIC-CHART-NAV-20261004"
+          "E-LIVE-PUBLIC-CHART-NAV-20261004",
+          "E-LIVE-PUBLIC-NAVI-SYNC-20261004"
         ],
         "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음"
       }
@@ -2339,6 +2345,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T15:39:00Z"
+    },
+    {
+      "id": "H-060",
+      "event": "NAVI 증거·감사·레드팀 문서 PR #141 병합 후 main workflow `37134462216`과 라이브 validator를 재확인해 최신 공개 candidate `6212511`을 NAVI 증거대장에 동기화했다. 문서 병합으로 공개 UI·과학 카피·제품 경계는 변경되지 않았으며 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 상태는 USER_DECISION으로 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T15:48:00Z"
     }
   ]
 }
