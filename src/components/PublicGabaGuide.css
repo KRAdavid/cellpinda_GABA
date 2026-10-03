@@ -123,9 +123,9 @@
 
 /* v3 consumer story: curiosity -> basics -> sleep -> research -> share */
 .guide-hero-story .guide-hero-copy{padding-top:16px}
-.guide-hero-story h1 span,.guide-hero-story h1 em{display:block}
-.guide-hero-story h1 span{font-size:.86em}
-.guide-hero-story h1 em{margin-top:10px}
+.guide-hero-story h1>span,.guide-hero-story h1>em{display:block}
+.guide-hero-story h1>span{font-size:.86em}
+.guide-hero-story h1>em{margin-top:10px}
 .guide-hero-story .guide-hero-body{max-width:48ch;font-size:17px;line-height:1.78}
 .guide-story-actions{display:grid;align-items:stretch;gap:10px;max-width:375px}
 .guide-story-actions button{width:100%;min-height:58px;justify-content:space-between;text-align:left}
@@ -159,7 +159,7 @@
 .guide-footer .guide-logo small{font-size:10px}
 @media(max-width:1100px){.guide-everyday-cards{grid-template-columns:repeat(3,1fr)}.guide-research-five{grid-template-columns:repeat(3,1fr)}.guide-growth-flow{grid-template-columns:repeat(3,1fr)}.guide-growth-arrow{display:none}.guide-library-filters{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:700px){
-  .guide-hero-story{padding:48px 20px 0}.guide-hero-story .guide-hero-copy{padding:0}.guide-hero-story h1{font-size:clamp(38px,10.7vw,48px);line-height:1.12}.guide-hero-story h1 span{font-size:.88em}.guide-hero-story h1 em{margin-top:8px}.guide-hero-story .guide-hero-body{display:block;margin-top:22px;font-size:16px;line-height:1.75}.guide-story-actions{max-width:none}.guide-story-actions button{min-height:58px;font-size:16px}.guide-section-lead{margin-top:-7px;margin-bottom:26px;font-size:16px;line-height:1.8}.guide-basics-three .guide-definition-card{min-height:0}.guide-everyday-cards{grid-template-columns:1fr;gap:10px}.guide-everyday-card{min-height:0;padding:20px 20px 22px}.guide-everyday-card .guide-topic-icon{margin-top:11px}.guide-everyday-card h3{margin:18px 0 6px;font-size:21px}.guide-everyday-card p{font-size:16px;line-height:1.65}.guide-sleep-grid{grid-template-columns:1fr;gap:12px}.guide-sleep-steps article{grid-template-columns:31px 1fr;padding:20px 18px;gap:12px}.guide-sleep-steps h3{font-size:19px}.guide-sleep-steps p{font-size:16px;line-height:1.75}.guide-compare-row{display:grid;gap:4px;padding:11px 0}.guide-compare-row strong{text-align:left;font-size:15px}.guide-sleep-visual{min-height:250px}.guide-sleep-visual strong{margin-bottom:28px;font-size:21px}.guide-research-five{grid-template-columns:1fr;gap:10px}.guide-research-five .guide-research-card{min-height:150px;padding:19px 20px}.guide-research-five .guide-research-glyph{position:absolute;right:28px;top:42px}.guide-research-five .guide-research-open{margin-top:18px}.guide-research-layout:has(.guide-research-five) .guide-research-detail{margin-top:12px}.guide-growth-flow{grid-template-columns:1fr;gap:8px;margin-top:20px}.guide-growth-step{min-height:0;padding:17px 18px}.guide-growth-step strong{margin-top:7px;font-size:17px}.guide-growth-arrow{display:block;top:auto;right:auto;bottom:-15px;left:50%;transform:translateX(-50%) rotate(90deg)}.guide-growth-note{padding:17px 18px;font-size:15px}.guide-expert-note{padding:18px;font-size:15px}.guide-library-filters{grid-template-columns:1fr 1fr;gap:9px;padding:13px}.guide-library-filters label{font-size:12px}.guide-library-filters select{min-height:52px;font-size:14px}.guide-library-list{grid-template-columns:1fr}.guide-library-card{padding:21px 19px}.guide-library-card h3{font-size:21px}.guide-library-card dd{font-size:15px;line-height:1.75}.guide-final{padding:76px 0 84px}.guide-final h2{font-size:39px;line-height:1.2}.guide-final-copy{font-size:16px;line-height:1.8}.guide-final-actions{grid-template-columns:1fr;gap:9px;margin-top:28px}.guide-final-actions button{min-height:58px}.guide-share-lines{margin-top:34px}.guide-share-lines>div{grid-template-columns:1fr}.guide-share-lines article{min-height:0;padding:17px}.guide-story-summary .guide-summary-grid p{font-size:16px}
+  .guide-hero-story{padding:48px 20px 0}.guide-hero-story .guide-hero-copy{padding:0}.guide-hero-story h1{font-size:clamp(38px,10.7vw,48px);line-height:1.12}.guide-hero-story h1>span{font-size:.88em}.guide-hero-story h1>em{margin-top:8px}.guide-hero-story .guide-hero-body{display:block;margin-top:22px;font-size:16px;line-height:1.75}.guide-story-actions{max-width:none}.guide-story-actions button{min-height:58px;font-size:16px}.guide-section-lead{margin-top:-7px;margin-bottom:26px;font-size:16px;line-height:1.8}.guide-basics-three .guide-definition-card{min-height:0}.guide-everyday-cards{grid-template-columns:1fr;gap:10px}.guide-everyday-card{min-height:0;padding:20px 20px 22px}.guide-everyday-card .guide-topic-icon{margin-top:11px}.guide-everyday-card h3{margin:18px 0 6px;font-size:21px}.guide-everyday-card p{font-size:16px;line-height:1.65}.guide-sleep-grid{grid-template-columns:1fr;gap:12px}.guide-sleep-steps article{grid-template-columns:31px 1fr;padding:20px 18px;gap:12px}.guide-sleep-steps h3{font-size:19px}.guide-sleep-steps p{font-size:16px;line-height:1.75}.guide-compare-row{display:grid;gap:4px;padding:11px 0}.guide-compare-row strong{text-align:left;font-size:15px}.guide-sleep-visual{min-height:250px}.guide-sleep-visual strong{margin-bottom:28px;font-size:21px}.guide-research-five{grid-template-columns:1fr;gap:10px}.guide-research-five .guide-research-card{min-height:150px;padding:19px 20px}.guide-research-five .guide-research-glyph{position:absolute;right:28px;top:42px}.guide-research-five .guide-research-open{margin-top:18px}.guide-research-layout:has(.guide-research-five) .guide-research-detail{margin-top:12px}.guide-growth-flow{grid-template-columns:1fr;gap:8px;margin-top:20px}.guide-growth-step{min-height:0;padding:17px 18px}.guide-growth-step strong{margin-top:7px;font-size:17px}.guide-growth-arrow{display:block;top:auto;right:auto;bottom:-15px;left:50%;transform:translateX(-50%) rotate(90deg)}.guide-growth-note{padding:17px 18px;font-size:15px}.guide-expert-note{padding:18px;font-size:15px}.guide-library-filters{grid-template-columns:1fr 1fr;gap:9px;padding:13px}.guide-library-filters label{font-size:12px}.guide-library-filters select{min-height:52px;font-size:14px}.guide-library-list{grid-template-columns:1fr}.guide-library-card{padding:21px 19px}.guide-library-card h3{font-size:21px}.guide-library-card dd{font-size:15px;line-height:1.75}.guide-final{padding:76px 0 84px}.guide-final h2{font-size:39px;line-height:1.2}.guide-final-copy{font-size:16px;line-height:1.8}.guide-final-actions{grid-template-columns:1fr;gap:9px;margin-top:28px}.guide-final-actions button{min-height:58px}.guide-share-lines{margin-top:34px}.guide-share-lines>div{grid-template-columns:1fr}.guide-share-lines article{min-height:0;padding:17px}.guide-story-summary .guide-summary-grid p{font-size:16px}
 }
 
 /* v4 mobile publication hardening: keep sticky navigation and reading controls stable. */
@@ -213,8 +213,8 @@
 .guide-mobile-break{display:none}
 .guide-hero-story{background:radial-gradient(circle at 78% 38%,#e9faf9 0%,rgba(233,250,249,.42) 18%,transparent 44%),linear-gradient(112deg,#fff 0%,#fff 45%,#f3fbfc 100%)}
 .guide-hero-kicker{margin:0;color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.22em;line-height:1.4}
-.guide-hero-story h1 span{font-size:.9em}
-.guide-hero-story h1 em{font-size:1.02em}
+.guide-hero-story h1>span{font-size:.9em}
+.guide-hero-story h1>em{font-size:1.02em}
 .guide-history{background:#f7fbfd}
 .guide-history-heading{margin-bottom:22px}
 .guide-history .guide-section-lead{max-width:66ch}
@@ -258,10 +258,10 @@
   .guide-hero-story{background:#fff}
   .guide-hero-kicker{font-size:10px}
   .guide-hero-story h1 .guide-mobile-break{display:inline}
-  .guide-hero-story h1 span,.guide-hero-story h1 em{max-width:100%;overflow-wrap:anywhere;word-break:keep-all}
+  .guide-hero-story h1>span,.guide-hero-story h1>em{max-width:100%;overflow-wrap:anywhere;word-break:keep-all}
   .guide-hero-story .guide-hero-body{overflow-wrap:anywhere}
-  .guide-hero-story h1 span{font-size:.92em}
-  .guide-hero-story h1 em{font-size:1em}
+  .guide-hero-story h1>span{font-size:.92em}
+  .guide-hero-story h1>em{font-size:1em}
   .guide-history-item{grid-template-columns:67px minmax(0,1fr);gap:14px;min-height:0}
   .guide-history-marker{font-size:13px}
   .guide-history-marker i{left:5px;top:27px;height:calc(100% - 5px)}
@@ -516,7 +516,7 @@
 .guide-hero-copy,.guide-hero-scroll{z-index:2}
 .guide-hero-copy{padding-top:58px}
 .guide-hero h1{max-width:720px;font-size:clamp(44px,4.7vw,68px);line-height:1.1}
-.guide-hero h1 span{display:block;color:var(--guide-ink)}
+.guide-hero h1>span{display:block;color:var(--guide-ink)}
 .guide-hero h1 em{display:block;margin-top:7px;color:var(--guide-teal-dark);letter-spacing:-.045em}
 .guide-hero-body{max-width:43ch;color:#5b7081;font-size:16px;line-height:1.82}
 .guide-hero-story .guide-rail{margin-top:27px;color:#708897;font-size:12px;line-height:1.65}
@@ -1013,8 +1013,8 @@
   .guide-reading-size-toggle svg,.gaba-guide .guide-header-share svg{display:block}
   .gaba-guide .guide-header-share{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:0;height:44px;margin:0;overflow:visible;clip:auto;white-space:normal;border:0;border-radius:12px;background:var(--guide-ink);color:#fff;font-size:0}
   .guide-hero-story h1{font-size:clamp(36px,10.25vw,40px);letter-spacing:-.095em;line-height:1.1}
-  .guide-hero-story h1 span{font-size:.92em}
-  .guide-hero-story h1 em{font-size:.98em;line-height:1.12}
+  .guide-hero-story h1>span{font-size:.92em}
+  .guide-hero-story h1>em{font-size:.98em;line-height:1.12}
 }
 
 /* v25 deep-link alignment: keep every chapter title below the sticky reading rail. */
@@ -1035,6 +1035,15 @@
   .guide-section-number{display:block}
   .guide-research-scale-head .guide-section-number{color:#89d2d1}
   .guide-final .guide-section-number{color:#81d0d1}
+}
+
+/* v29 hero rhythm: keep the highlighted sentence together on wide screens while preserving the mobile break. */
+.guide-hero-story h1>em .guide-hero-gaba-line{display:inline;white-space:nowrap}
+@media(min-width:701px){
+  .guide-hero-story h1>em{font-size:clamp(46px,4.15vw,62px);letter-spacing:-.06em}
+}
+@media(max-width:700px){
+  .guide-hero-story h1>em .guide-hero-gaba-line{white-space:normal}
 }
 
 /* v28 narrow header correction: restore the share control dimensions after the visually-hidden label rule. */
