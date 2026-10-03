@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 95c3830 — 2026-10-03
+
+- PR #77에서 전문가 영상 카드를 선택한 직후 검은 빈 iframe처럼 보이던 구간을 로딩 오버레이와 `영상을 불러오는 중` 상태로 보완했다. iframe `onLoad` 이후 오버레이가 사라지고, `prefers-reduced-motion`에서는 스피너를 정지한다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build·정적 bundle·성능 예산이 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,443,693 <= 1,650,000` bytes였고 초기 JS 310,538 bytes·CSS 92,953 bytes였다.
+- PR #77 checks `37092610225`, `37092610245`와 main workflow `37092613987`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 배포하지 않았다. 과거 Git 이력의 local-path scanner annotation은 비차단 경고로 남았다.
+- 라이브 validator는 candidate `95c3830984d09ee8baca62ebafacd3a0c8c3d715`, generatedAt `2026-10-03T03:16:47.323Z`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 공개 URL 390px Chrome CDP fallback에서 전문가 영상 선택 시 iframe autoplay URL·`aria-pressed=true`·가로 폭 390·runtime errors `[]`를 확인했고, 로컬에서는 로딩 상태가 표시되며 라이브에서는 iframe 로드 후 오버레이가 사라지는 것을 확인했다. Browser 플러그인은 사용할 수 없어 CDP fallback으로 대체했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-VIDEO-LOADING`, `E-CDP-VIDEO-LOADING`, `E-DEPLOY-PIPELINE-VIDEO-LOADING`, `E-LIVE-PUBLIC-VIDEO-LOADING`.
+
 ## Latest Public Release Recheck — 79eea1f — 2026-10-03
 
 - PR #75에서 701–860px 태블릿 구간의 전체 메뉴를 아이콘 메뉴로 전환해 헤더 컨트롤이 화면 밖으로 밀리던 결함을 보완했다. 44px 메뉴·읽기 크기·공유 컨트롤을 유지하고 768px·820px에서 메뉴를 열어도 가로 넘침이 없었다.
