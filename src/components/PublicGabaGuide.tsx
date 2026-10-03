@@ -839,10 +839,10 @@ export default function PublicGabaGuide() {
     ? progressChapters.findIndex((chapter) => chapter.id === 'academic') + 0.5
     : Math.max(0, activeProgressIndex + 1);
   const progressCountLabel = activeChapterId === 'recovery-break'
-    ? `보충 / ${String(progressChapterCount).padStart(2, '0')}`
+    ? `이어 읽기 / ${String(progressChapterCount).padStart(2, '0')}`
     : `${String(Math.max(0, activeProgressIndex + 1)).padStart(2, '0')} / ${String(progressChapterCount).padStart(2, '0')}`;
   const progressAriaLabel = activeChapterId === 'recovery-break'
-    ? `현재 읽는 장: ${activeReadingLabel}. 본문 사이 보충 읽기입니다. 전체 ${progressChapterCount}장.`
+    ? `현재 읽는 장: ${activeReadingLabel}. 본문 사이에 이어지는 설명입니다. 전체 ${progressChapterCount}장.`
     : `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장.`;
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
