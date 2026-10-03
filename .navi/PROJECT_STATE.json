@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T11:39:00Z",
+  "updated_at": "2026-10-03T12:11:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -210,7 +210,9 @@
         "E-LOCAL-BUILD-MOBILE-CHAPTER-LABELS",
         "E-LOCAL-BUILD-RESEARCH-SCALE-20261003",
         "E-LOCAL-BUILD-MOBILE-HERO-20261003",
-        "E-DEPLOY-PIPELINE-MOBILE-HERO-20261003"
+        "E-DEPLOY-PIPELINE-MOBILE-HERO-20261003",
+        "E-LOCAL-BUILD-HERO-RHYTHM-20261003",
+        "E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -308,7 +310,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003",
         "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
         "E-PLAYWRIGHT-MOBILE-HERO-20261003",
-        "E-LIVE-PUBLIC-MOBILE-HERO-20261003"
+        "E-LIVE-PUBLIC-MOBILE-HERO-20261003",
+        "E-PLAYWRIGHT-HERO-RHYTHM-20261003",
+        "E-LIVE-PUBLIC-HERO-RHYTHM-20261003"
       ],
       "owner": "UX QA"
     },
@@ -459,7 +463,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003",
         "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
         "E-LOCAL-BUILD-MOBILE-HERO-20261003",
-        "E-DEPLOY-PIPELINE-MOBILE-HERO-20261003"
+        "E-DEPLOY-PIPELINE-MOBILE-HERO-20261003",
+        "E-LOCAL-BUILD-HERO-RHYTHM-20261003",
+        "E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003"
       ],
       "owner": "QA"
     },
@@ -538,7 +544,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003",
         "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
         "E-DEPLOY-PIPELINE-MOBILE-HERO-20261003",
-        "E-LIVE-PUBLIC-MOBILE-HERO-20261003"
+        "E-LIVE-PUBLIC-MOBILE-HERO-20261003",
+        "E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003",
+        "E-LIVE-PUBLIC-HERO-RHYTHM-20261003"
       ],
       "owner": "배포 QA"
     },
@@ -1332,7 +1340,9 @@
           "E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003",
           "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
           "E-DEPLOY-PIPELINE-MOBILE-HERO-20261003",
-          "E-LIVE-PUBLIC-MOBILE-HERO-20261003"
+          "E-LIVE-PUBLIC-MOBILE-HERO-20261003",
+          "E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003",
+          "E-LIVE-PUBLIC-HERO-RHYTHM-20261003"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리를 재확인"
       },
@@ -1427,7 +1437,9 @@
           "E-CDP-RESEARCH-SCALE-20261003",
           "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
           "E-PLAYWRIGHT-MOBILE-HERO-20261003",
-          "E-LIVE-PUBLIC-MOBILE-HERO-20261003"
+          "E-LIVE-PUBLIC-MOBILE-HERO-20261003",
+          "E-PLAYWRIGHT-HERO-RHYTHM-20261003",
+          "E-LIVE-PUBLIC-HERO-RHYTHM-20261003"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·연구 규모 기관 비교와 별도 SCIE 분석 구분·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환을 확인"
       },
@@ -1526,7 +1538,10 @@
           "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
           "E-LOCAL-BUILD-MOBILE-HERO-20261003",
           "E-PLAYWRIGHT-MOBILE-HERO-20261003",
-          "E-LIVE-PUBLIC-MOBILE-HERO-20261003"
+          "E-LIVE-PUBLIC-MOBILE-HERO-20261003",
+          "E-LOCAL-BUILD-HERO-RHYTHM-20261003",
+          "E-PLAYWRIGHT-HERO-RHYTHM-20261003",
+          "E-LIVE-PUBLIC-HERO-RHYTHM-20261003"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·연구 규모의 동일 PubMed 기준 기관 비교와 별도 SCIE 분석 블록·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환을 추가 확인"
       },
@@ -1615,7 +1630,10 @@
           "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
           "E-LOCAL-BUILD-MOBILE-HERO-20261003",
           "E-DEPLOY-PIPELINE-MOBILE-HERO-20261003",
-          "E-LIVE-PUBLIC-MOBILE-HERO-20261003"
+          "E-LIVE-PUBLIC-MOBILE-HERO-20261003",
+          "E-LOCAL-BUILD-HERO-RHYTHM-20261003",
+          "E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003",
+          "E-LIVE-PUBLIC-HERO-RHYTHM-20261003"
         ],
         "notes": "390px·320px 가로 넘침 없음, 모바일 메뉴 열린 상태의 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환, 큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로 유지 확인"
       },
@@ -1769,7 +1787,9 @@
           "E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003",
           "E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003",
           "E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003",
-          "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003"
+          "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
+          "E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003",
+          "E-LIVE-PUBLIC-HERO-RHYTHM-20261003"
         ],
         "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음"
       }
@@ -2155,6 +2175,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T11:39:00Z"
+    },
+    {
+      "id": "H-055",
+      "event": "히어로 제목 안쪽의 모바일 전용 줄바꿈과 색상 상속이 데스크톱 문장 리듬을 깨던 문제를 PR #124에서 보완했다. 실제 Playwright Chrome 상호작용 2건, 390/320/1440px 공개 캡처, main workflow 37121944648, 라이브 validator의 candidate f2092694를 재검증하고 NAVI 증적을 갱신했다. 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 상태는 USER_DECISION으로 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T12:11:00Z"
     }
   ]
 }

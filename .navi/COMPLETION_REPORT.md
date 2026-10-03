@@ -1,5 +1,13 @@
 # Completion Report
 
+## Hero Headline Rhythm and Highlight Release Recheck — f209269 — 2026-10-03
+
+- 데스크톱 히어로의 모바일 전용 줄바꿈·색상 상속 범위를 직계 제목 요소로 제한해 `GABA에서 읽습니다`를 한 문장으로 읽히게 했고, 모바일의 의도된 줄바꿈과 teal 강조는 유지했다. 공개 카피·제품 독립 경계는 변경하지 않았다.
+- PR #124 필수 검사, 로컬 typecheck/UI contract/test/build, Playwright 390/1440px 상호작용 2건, main workflow `37121944648`, Pages/live validator, 공개 320/390/1440px 캡처가 통과했다. 공개 후보는 `f2092694c7f3fb6e7ea940de828f1577769a6bf3`이다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Safari/iOS/Android 대표 환경, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-HERO-RHYTHM-20261003`, `E-PLAYWRIGHT-HERO-RHYTHM-20261003`, `E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003`, `E-LIVE-PUBLIC-HERO-RHYTHM-20261003`.
+
 ## Mobile Hero and Narrow Header Release Recheck — badde8b — 2026-10-03
 
 - 모바일 히어로를 단일 열로 전환해 데스크톱 비주얼 트랙 때문에 제목이 잘리던 문제를 제거하고, 430px 이하에서 메뉴·큰 글씨·공유 컨트롤을 44px 아이콘 버튼으로 화면 안에 고정했다. 공개 카피·제품 독립 경계는 유지했다.
