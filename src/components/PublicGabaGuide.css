@@ -1161,3 +1161,19 @@
 @media(max-width:700px){
   .guide-definition-card{padding-bottom:86px}
 }
+
+/* v47 mobile reading clarity: keep functional labels readable without enlarging decorative numerals. */
+@media(max-width:700px){
+  .guide-section-number{font-size:12px}
+  .guide-reading-progress-meta>span,.guide-reading-progress-meta>small{font-size:12px}
+  .guide-recovery-card-footer{font-size:12px}
+  .guide-recovery-thread{font-size:12px}
+  .guide-research-detail-top,.guide-research-profile-kicker,.guide-research-profile span{font-size:12px}
+  .guide-research-source,.guide-study-source{font-size:12px}
+  .guide-video-board-head{font-size:12px}
+  .guide-video-filter span{font-size:10px}
+  .guide-video-card-copy small{font-size:12px}
+  .guide-outcome-lane-signal em{font-size:.86em}
+  .guide-reading-note-panel-head strong{font-size:12px}
+  .guide-header .guide-reading-size-toggle .guide-reading-size-mark{position:static;display:inline-flex;align-items:center;justify-content:center;width:auto;height:auto;min-width:22px;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal;border:0;font-size:14px;font-weight:900;letter-spacing:-.12em;line-height:1}
+}
