@@ -1099,6 +1099,18 @@
 /* v37 chart readability: give research labels a clear type floor on small screens. */
 .guide-research-detail-top{font-size:11px}
 .guide-evidence{font-size:11px;line-height:1.35}
+
+/* v49 editorial type rhythm: balance Korean headlines before the browser breaks them. */
+.guide-hero h1,
+.guide-section-heading h2,
+.guide-recovery-break-head h2,
+.guide-final h2,
+.guide-video-feature-copy h3,
+.guide-reading-note h2{ text-wrap:balance }
+
+/* v49 mobile media loading: keep below-the-fold video frames quiet until the reader reaches them. */
+.guide-video-feature-poster img,
+.guide-video-card-thumb img{content-visibility:auto}
 .guide-research-profile-kicker{font-size:11px}
 .guide-research-profile span{font-size:11px}
 @media(max-width:700px){
