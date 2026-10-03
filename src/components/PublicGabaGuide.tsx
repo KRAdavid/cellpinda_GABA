@@ -604,6 +604,13 @@ const getInitialExpertVideoId = () => {
   return requestedId && expertVideos.some((video) => video.id === requestedId) ? requestedId : expertVideos[0].id;
 };
 
+const researchTopicIdFromHash = (hash: string) => {
+  const targetId = hash.replace(/^#/, '');
+  return researchTopics.find((topic) => `research-${topic.id}` === targetId)?.id ?? null;
+};
+
+const getInitialResearchTopicId = () => typeof window === 'undefined' ? null : researchTopicIdFromHash(window.location.hash);
+
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
@@ -802,7 +809,7 @@ export default function PublicGabaGuide() {
   const [recoveryPaused, setRecoveryPaused] = useState(false);
   const [recoveryReducedMotion, setRecoveryReducedMotion] = useState(false);
   const [recoveryInView, setRecoveryInView] = useState(false);
-  const [activeResearchTopicId, setActiveResearchTopicId] = useState<string | null>(null);
+  const [activeResearchTopicId, setActiveResearchTopicId] = useState<string | null>(getInitialResearchTopicId);
   const [largeText, setLargeText] = useState(() => {
     try {
       return window.localStorage.getItem(readingSizeStorageKey) === 'large';
@@ -848,6 +855,7 @@ export default function PublicGabaGuide() {
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
     const targetId = window.location.hash.slice(1);
+    setActiveResearchTopicId(researchTopicIdFromHash(window.location.hash));
     if (!targetId) return;
     let cancelled = false;
     let layoutObserver: ResizeObserver | null = null;
@@ -882,6 +890,12 @@ export default function PublicGabaGuide() {
       if (layoutObserverTimer) window.clearTimeout(layoutObserverTimer);
       layoutObserver?.disconnect();
     };
+  }, []);
+
+  useEffect(() => {
+    const syncResearchTopicFromHash = () => setActiveResearchTopicId(researchTopicIdFromHash(window.location.hash));
+    window.addEventListener('hashchange', syncResearchTopicFromHash);
+    return () => window.removeEventListener('hashchange', syncResearchTopicFromHash);
   }, []);
 
   useEffect(() => {
