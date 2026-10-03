@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — 10aedca — 2026-10-03
+
+- 전문가 영상 카드에서 현재 재생 중인 동일 영상을 다시 선택해도 iframe이 다시 로딩 상태로 돌아가지 않도록 보완했다. 다른 영상을 선택할 때만 로딩 상태를 새로 시작하며, 모바일 선택 이동과 `재생 중` 상태는 유지한다.
+- PR #81 checks, main workflow `37094629598`, live validator, 390px Chrome CDP fallback 검증이 통과했다. 공개 후보는 `10aedcab10448e5341123234b6ce9979b068bc58`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-RESELECT`, `E-CDP-VIDEO-RESELECT`, `E-DEPLOY-PIPELINE-VIDEO-RESELECT`, `E-LIVE-PUBLIC-VIDEO-RESELECT`.
+
 ## Latest Release Recheck — 4604805 — 2026-10-03
 
 - 전문가 영상 게시판에서 현재 선택된 영상 카드에 `재생 중` 배지를 추가해 모바일에서도 플레이어와 목록의 연결을 즉시 이해할 수 있게 했다.
