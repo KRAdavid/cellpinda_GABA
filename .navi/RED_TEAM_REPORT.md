@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Expert Video Thumbnail Loading Red-Team Recheck — 8093615 — 2026-10-04
+
+- 모바일 전문가 영상 게시판의 일부 카드가 이미지 로딩 전 빈 표면으로 보이던 결함을 확인했고, 첫 4개 eager 로드와 `GABA VIDEO` 대체 표면으로 보완했다. 320/390/1440px 공개 Chrome fallback에서 첫 4개 썸네일 로드, 가로 넘침 없음, 브라우저 오류 없음을 확인했으며 새 CRITICAL/MAJOR 결함은 없었다.
+- `수면` 필터 선택 시 4개 카드로 줄고, `잠이 안 올 때 GABA 이야기` 선택 시 해당 YouTube iframe과 로딩 상태로 전환되는 실제 상호작용을 재확인했다. 영상 데이터·출처·제품 독립 경계는 변경하지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004`.
+
 ## Mobile Definition Card Motif Red-Team Recheck — 4e558ee — 2026-10-04
 
 - 320px에서 두 번째 기본 설명 카드의 달 장식이 본문 마지막 줄과 겹치던 결함을 확인했고, 모바일 카드 하단의 장식 전용 여백으로 보완했다. 320/390px 공개 Chrome fallback에서 본문-아이콘 간격 6px, 가로 넘침 없음, 브라우저 오류 없음을 확인했으며 새 CRITICAL/MAJOR 결함은 없었다.

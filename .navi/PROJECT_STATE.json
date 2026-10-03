@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T17:50:30Z",
+  "updated_at": "2026-10-03T18:07:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -236,7 +236,9 @@
         "E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004",
         "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
         "E-LOCAL-BUILD-DEFINITION-MOTIF-20261004",
-        "E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004"
+        "E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004",
+        "E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004",
+        "E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -368,7 +370,10 @@
         "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004",
         "E-LOCAL-BUILD-DEFINITION-MOTIF-20261004",
         "E-PLAYWRIGHT-DEFINITION-MOTIF-20261004",
-        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004"
+        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004",
+        "E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004",
+        "E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004",
+        "E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004"
       ],
       "owner": "UX QA"
     },
@@ -416,7 +421,10 @@
         "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004",
         "E-LOCAL-BUILD-DEFINITION-MOTIF-20261004",
         "E-PLAYWRIGHT-DEFINITION-MOTIF-20261004",
-        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004"
+        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004",
+        "E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004",
+        "E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004",
+        "E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004"
       ],
       "owner": "데이터 QA"
     },
@@ -584,7 +592,11 @@
         "E-LOCAL-BUILD-DEFINITION-MOTIF-20261004",
         "E-PLAYWRIGHT-DEFINITION-MOTIF-20261004",
         "E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004",
-        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004"
+        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004",
+        "E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004",
+        "E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004",
+        "E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004",
+        "E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004"
       ],
       "owner": "QA"
     },
@@ -692,7 +704,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
         "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004",
         "E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004",
-        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004"
+        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004",
+        "E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004",
+        "E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004"
       ],
       "owner": "배포 QA"
     },
@@ -793,7 +807,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004",
         "E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004",
         "E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004",
-        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004"
+        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004",
+        "E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004",
+        "E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004"
       ],
       "owner": "운영 QA"
     },
@@ -1570,7 +1586,11 @@
         "E-LOCAL-BUILD-DEFINITION-MOTIF-20261004",
         "E-PLAYWRIGHT-DEFINITION-MOTIF-20261004",
         "E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004",
-        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004"
+        "E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004",
+        "E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004",
+        "E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004",
+        "E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004",
+        "E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리·모바일 연구 결과 카드 가용 폭을 재확인"
       },
@@ -2564,6 +2584,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T17:50:30Z"
+    },
+    {
+      "id": "H-067",
+      "event": "전문가 영상 게시판의 일부 썸네일이 지연 로드 중 빈 박스로 보이던 결함을 PR #155에서 첫 4개 eager 로드와 `GABA VIDEO` 표지로 보완했다. 로컬 typecheck·UI 계약·127개 테스트·build, 320/390/1440px 공개 Chrome fallback, `수면` 필터 4개 카드·영상 선택·YouTube iframe 전환, main workflow `37142835851`, Pages 배포·라이브 smoke·release status와 live validator candidate `8093615c`를 확인해 NAVI 증적을 갱신했다. 공개 과학 카피·제품 독립 경계는 변경하지 않았고 외부 브라우저·실사용자·독립 과학·규제 검토가 남아 상태는 USER_DECISION으로 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T18:07:00Z"
     }
   ]
 }

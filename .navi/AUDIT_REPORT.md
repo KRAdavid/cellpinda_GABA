@@ -1,5 +1,13 @@
 # Audit Report
 
+## Expert Video Thumbnail Loading Audit — 8093615 — 2026-10-04
+
+- 모바일 전문가 영상 게시판에서 일부 lazy 썸네일이 초기 캡처 시 빈 연한 박스로 남아 시각적 완성도를 떨어뜨리는 경미한 결함을 확인했다. 첫 4개 이미지를 eager 로드하고 나머지는 lazy 로드로 유지했으며, 로딩 전에는 `GABA VIDEO` 표지를 노출하도록 보완했다.
+- 로컬·공개 Chrome fallback 320/390/1440px에서 가로 넘침·브라우저 오류 없음, 첫 4개 eager 로드, 9개 썸네일 구조, `수면` 필터 4개 카드, 카드 선택 후 YouTube iframe·로딩 상태 전환을 확인했다. PR #155와 main workflow `37142835851`, Pages·라이브 smoke·release status·live validator도 통과했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004`.
+
 ## Mobile Definition Card Motif Audit — 4e558ee — 2026-10-04
 
 - 320px 공개 화면에서 두 번째 GABA 기본 설명 카드의 달 아이콘이 본문과 시각적으로 겹치는 경미한 가독성 결함을 확인했다. 모바일 카드 하단에 장식 전용 여백을 추가해 본문과 아이콘 사이 6px 간격을 확보했다.
