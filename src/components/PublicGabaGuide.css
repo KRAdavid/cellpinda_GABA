@@ -856,6 +856,12 @@
   .guide-research .guide-rail li b{width:28px;height:28px;font-size:10px}
 }
 
+/* v28 research orientation: connect the selected map topic to the card now in view. */
+.guide-research-detail-inline{transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease}
+.guide-research-detail-inline.is-active{border-color:#8fd4d4;box-shadow:0 18px 38px rgba(18,126,137,.12),0 0 0 3px rgba(18,154,163,.08);transform:translateY(-2px)}
+.guide-research-detail-inline.is-active:before{width:6px;background:var(--guide-teal)}
+@media(prefers-reduced-motion:reduce){.guide-research-detail-inline{transition:none}.guide-research-detail-inline.is-active{transform:none}}
+
 /* v16 sticky header: clip overflow without creating a competing scroll container. */
 .gaba-guide{overflow:clip}
 
