@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T08:10:16.774956Z",
+  "updated_at": "2026-10-03T08:36:54.299280Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -205,7 +205,8 @@
         "E-LOCAL-BUILD-MOBILE-FOCUS-TRAP",
         "E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP",
         "E-LOCAL-BUILD-GUIDE-LOADING-SHELL",
-        "E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL"
+        "E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL",
+        "E-LOCAL-BUILD-RAIL-TITLE-CLEAR"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -293,7 +294,9 @@
         "E-CDP-MOBILE-FOCUS-TRAP",
         "E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP",
         "E-CDP-GUIDE-LOADING-SHELL",
-        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+        "E-CDP-RAIL-TITLE-CLEAR",
+        "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR"
       ],
       "owner": "UX QA"
     },
@@ -430,7 +433,11 @@
         "E-LOCAL-BUILD-GUIDE-LOADING-SHELL",
         "E-CDP-GUIDE-LOADING-SHELL",
         "E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL",
-        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+        "E-LOCAL-BUILD-RAIL-TITLE-CLEAR",
+        "E-CDP-RAIL-TITLE-CLEAR",
+        "E-DEPLOY-PIPELINE-RAIL-TITLE-CLEAR",
+        "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR"
       ],
       "owner": "QA"
     },
@@ -501,7 +508,9 @@
         "E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP",
         "E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP",
         "E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL",
-        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+        "E-DEPLOY-PIPELINE-RAIL-TITLE-CLEAR",
+        "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR"
       ],
       "owner": "배포 QA"
     },
@@ -711,7 +720,8 @@
         "E-LOCAL-BUILD-MOBILE-MENU-FOCUS",
         "E-LOCAL-BUILD-READING-RAIL-DEEPLINK",
         "E-LOCAL-BUILD-MOBILE-FOCUS-TRAP",
-        "E-LOCAL-BUILD-GUIDE-LOADING-SHELL"
+        "E-LOCAL-BUILD-GUIDE-LOADING-SHELL",
+        "E-LOCAL-BUILD-RAIL-TITLE-CLEAR"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -773,7 +783,9 @@
         "E-CDP-MOBILE-FOCUS-TRAP",
         "E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP",
         "E-CDP-GUIDE-LOADING-SHELL",
-        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+        "E-CDP-RAIL-TITLE-CLEAR",
+        "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -847,7 +859,9 @@
         "E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP",
         "E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP",
         "E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL",
-        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+        "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+        "E-DEPLOY-PIPELINE-RAIL-TITLE-CLEAR",
+        "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -1104,7 +1118,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "43565dcc6e38728d14c2854f8c93a55dfa360a618d591a2e0303e099832a45f7",
+    "assessed_input_sha256": "e18af0bad9e770bd0bc61febde9e51bf69221d5b684e66b9bc195d53dfa6e18b",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -1256,7 +1270,10 @@
           "E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP",
           "E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP",
           "E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL",
-          "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+          "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+          "E-LOCAL-BUILD-RAIL-TITLE-CLEAR",
+          "E-DEPLOY-PIPELINE-RAIL-TITLE-CLEAR",
+          "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로를 재확인"
       },
@@ -1329,7 +1346,10 @@
           "E-CDP-MOBILE-FOCUS-TRAP",
           "E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP",
           "E-CDP-GUIDE-LOADING-SHELL",
-          "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+          "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+          "E-LOCAL-BUILD-RAIL-TITLE-CLEAR",
+          "E-CDP-RAIL-TITLE-CLEAR",
+          "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환을 확인"
       },
@@ -1402,7 +1422,11 @@
           "E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP",
           "E-LOCAL-BUILD-GUIDE-LOADING-SHELL",
           "E-CDP-GUIDE-LOADING-SHELL",
-          "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL"
+          "E-LIVE-PUBLIC-GUIDE-LOADING-SHELL",
+          "E-LOCAL-BUILD-RAIL-TITLE-CLEAR",
+          "E-CDP-RAIL-TITLE-CLEAR",
+          "E-DEPLOY-PIPELINE-RAIL-TITLE-CLEAR",
+          "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환을 추가 확인"
       },
@@ -1931,6 +1955,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T08:06:00Z"
+    },
+    {
+      "id": "H-046",
+      "event": "모바일 장 진입점에서 고정 읽기 진행 레일이 장 번호와 제목 첫 줄을 덮던 문제를 110px 상단 여백과 UI contract guard로 보완한 PR #106을 main에 병합했다. 320/390/1440px Chrome CDP fallback, main workflow 37109900221, 라이브 validator를 재검증하고 NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T08:35:00Z"
     }
   ]
 }

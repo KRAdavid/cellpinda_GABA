@@ -2439,6 +2439,50 @@
       "captured_at": "2026-10-03T08:05:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-GUIDE-LOADING-SHELL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RAIL-TITLE-CLEAR",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 장 진입점에서 고정 읽기 진행 레일이 장 번호와 제목 첫 줄을 덮지 않도록 상단 여백을 보완하고 UI contract guard를 추가했다. 과학 카피·제품 경계·연구 데이터는 변경하지 않았다.",
+      "locator": "PR #106 candidate 73dd763; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; git diff --check PASS; static routes 11, files 70; initial JS 311157, CSS 95703, total assets 1453052; local Chrome CDP 320px and 390px chapter-entry number/title below reading rail with document width unchanged; 1440px hero/title preserved",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/106",
+      "captured_at": "2026-10-03T08:25:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-RAIL-TITLE-CLEAR",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-RAIL-TITLE-CLEAR",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 배포본을 Chrome CDP fallback으로 확인한 결과, 390px 장 진입점에서 장 번호와 제목이 읽기 진행 레일 아래에 완전히 표시되고 메뉴 열림·닫힘과 스크롤 잠금·복원이 정상 동작했다.",
+      "locator": "temporary Chrome CDP fallback; live candidate 2ae71ef1e1aa7c5ff71ca429197ad70c22dce3c1 at https://kradavid.github.io/gaba_info/; 390px exact expert-videos entry numberTop 110.1875px, headingTop 124.1875px, railBottom 105px, document scrollWidth 390; menu open expanded=true/overflow hidden and close restored open button/overflow visible; 1440px title `저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide`, hero present, header/nav links present, document scrollWidth 1425",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/106",
+      "captured_at": "2026-10-03T08:34:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-RAIL-TITLE-CLEAR",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RAIL-TITLE-CLEAR",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 장 제목 가림 보완 PR #106의 필수 검사를 통과했고 main 병합 후 Pages 배포·라이브 smoke·release status가 모두 성공했다.",
+      "locator": "PR #106 checks release-verify and site-quality-verify PASS; merge commit 2ae71ef1e1aa7c5ff71ca429197ad70c22dce3c1; main workflow 37109900221 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY; history privacy scanner annotation notes prior-revision paths only",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37109900221",
+      "captured_at": "2026-10-03T08:32:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-RAIL-TITLE-CLEAR",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RAIL-TITLE-CLEAR",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 장 제목 가림 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고, 공개 데이터 경계·정적 번들·연구 출처 정합성을 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 2ae71ef1e1aa7c5ff71ca429197ad70c22dce3c1; generatedAt 2026-10-03T08:30:58.048Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px exact expert-videos entry numberTop 110.1875px, headingTop 124.1875px, railBottom 105px, document scrollWidth 390; menu state changed and restored; live 1440px title/hero/header rendered, document scrollWidth 1425",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T08:35:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-RAIL-TITLE-CLEAR",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-007"]
     }
   ]
 }
