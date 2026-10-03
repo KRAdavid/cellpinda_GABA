@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T01:26:05.092717Z",
+  "updated_at": "2026-10-03T01:45:53.612295Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -989,7 +989,11 @@
           "E-DEPLOY-PIPELINE-HERO-SURFACE",
           "E-LIVE-PUBLIC-HERO-SURFACE",
           "E-DEPLOY-PIPELINE-RESEARCH-RAIL",
-          "E-LIVE-PUBLIC-RESEARCH-RAIL"
+          "E-LIVE-PUBLIC-RESEARCH-RAIL",
+          "E-LOCAL-BUILD-RESEARCH-MAP-NAV",
+          "E-DEPLOY-PIPELINE-RESEARCH-MAP-NAV",
+          "E-CDP-RESEARCH-MAP-NAV",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
         ],
         "notes": "e514a37 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·모바일 히어로·연구 읽기 레일을 재확인"
       },
@@ -1034,7 +1038,9 @@
           "E-CDP-HERO-SURFACE",
           "E-LIVE-PUBLIC-HERO-SURFACE",
           "E-CDP-RESEARCH-RAIL",
-          "E-LIVE-PUBLIC-RESEARCH-RAIL"
+          "E-LIVE-PUBLIC-RESEARCH-RAIL",
+          "E-CDP-RESEARCH-MAP-NAV",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·390/320/1440px 공유 버튼을 확인"
       },
@@ -1074,7 +1080,9 @@
           "E-CDP-HERO-SURFACE",
           "E-LIVE-PUBLIC-HERO-SURFACE",
           "E-CDP-RESEARCH-RAIL",
-          "E-LIVE-PUBLIC-RESEARCH-RAIL"
+          "E-LIVE-PUBLIC-RESEARCH-RAIL",
+          "E-CDP-RESEARCH-MAP-NAV",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일을 추가 확인"
       },
@@ -1114,7 +1122,9 @@
           "E-CDP-HERO-SURFACE",
           "E-LIVE-PUBLIC-HERO-SURFACE",
           "E-CDP-RESEARCH-RAIL",
-          "E-LIVE-PUBLIC-RESEARCH-RAIL"
+          "E-LIVE-PUBLIC-RESEARCH-RAIL",
+          "E-CDP-RESEARCH-MAP-NAV",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
         ],
         "notes": "390px·320px 가로 넘침 없음, 메뉴 열린 상태·큰 글씨·연구 지도·스크롤 진행 바·모바일 히어로·01–04 연구 읽기 레일 확인"
       },
@@ -1168,7 +1178,10 @@
           "E-LIVE-PUBLIC-HERO-SURFACE",
           "E-LOCAL-BUILD-RESEARCH-RAIL",
           "E-DEPLOY-PIPELINE-RESEARCH-RAIL",
-          "E-LIVE-PUBLIC-RESEARCH-RAIL"
+          "E-LIVE-PUBLIC-RESEARCH-RAIL",
+          "E-LOCAL-BUILD-RESEARCH-MAP-NAV",
+          "E-DEPLOY-PIPELINE-RESEARCH-MAP-NAV",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-NAV"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일 검증 통과"
       },
@@ -1367,6 +1380,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T01:22:18Z"
+    },
+    {
+      "id": "H-026",
+      "event": "연구 지도 5개 주제를 접근 가능한 선택 요소로 바꾸고 각 상세 연구 카드로 연결한 PR #66·main 배포·390/1440px 라이브 CDP·live validator를 재검증했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T01:41:03Z"
     }
   ]
 }

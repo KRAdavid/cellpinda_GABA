@@ -1,5 +1,11 @@
 # Completion Report
 
+## Latest Release Recheck — d3ff9e3 — 2026-10-03
+
+- 연구 지도 5개 항목을 키보드·터치로 선택할 수 있게 하고, 선택한 주제의 상세 연구 카드로 자연스럽게 이어지도록 고도화했다.
+- PR #66 checks, main push run `37086967211`, 라이브 validator, 390/1440px Chrome CDP 검증이 통과했다. 공개 후보는 `d3ff9e3f27833f3719b76f0cc377468a23bcc421`이다.
+- 자동 검증은 통과했지만 Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION`으로 유지한다.
+
 ## Latest Release Recheck — e514a37 — 2026-10-03
 
 - 연구 지도 아래의 읽기 순서를 01–04 시각 레일로 정리해 `지도 → 대상 → 결과 → 해석` 흐름을 한눈에 파악하도록 개선했다.
