@@ -1,5 +1,9 @@
 # Project Changelog
 
+## NAVI 기록 병합 후 공개본 동기화: 2026-10-03 / candidate `1d74ed2ae7ed4cc8b090c0f8f8e98dfb0bff3a81`
+
+PR #134로 앞선 읽기 진행표·직접 링크 고도화의 NAVI 증거대장을 main에 병합했다. 문서 병합 후 main workflow `37128765447`의 release-verify·worker-readiness·정적 Pages 배포·라이브 smoke·release status가 성공했고, 공개 validator는 candidate SHA `1d74ed2…`, HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 이번 기록은 문서·운영 증거 동기화이며 공개 화면의 과학 카피나 제품 광고는 변경하지 않았다. 증적: `E-DEPLOY-PIPELINE-NAVI-DOCS-20261003`, `E-LIVE-PUBLIC-NAVI-DOCS-20261003`.
+
 ## 읽기 진행표·직접 링크 정합성 고도화 공개 재검증: 2026-10-03 / candidate `33e8b6a57202c21826ec2ebf3ffcd8b55ee01466`
 
 읽기 진행표에서 실제 본문 12개 장과 수면·회복 보충 구간을 분리했다. 보충 구간은 `보충 / 12`, 마지막 공유 장은 `12 / 12`로 표시해 숫자와 본문 흐름을 일치시켰다. `#recovery-break`·`#final` 직접 링크는 이미지 레이아웃이 안정된 뒤 고정 읽기 레일 아래에 제목이 도착하도록 재정렬했다. PR #133의 release-verify·site-quality-verify, main workflow `37128146175`의 정적 Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390/1440px에서 진행표·직접 링크·전문가 영상 필터·영상 즉시 재생·가로폭·오류를 재확인했다. 공개 GABA 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 사용자 결정 대기(`USER_DECISION`)로 유지한다. 증적: `E-LOCAL-BUILD-READING-PROGRESS-20261003`, `E-PLAYWRIGHT-READING-PROGRESS-20261003`, `E-DEPLOY-PIPELINE-READING-PROGRESS-20261003`, `E-LIVE-PUBLIC-READING-PROGRESS-20261003`.
