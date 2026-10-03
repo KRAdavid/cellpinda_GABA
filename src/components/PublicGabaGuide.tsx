@@ -583,7 +583,10 @@ const expertVideos: ExpertVideo[] = [
 const videoThumbnailUrl = (id: string, fallback = false) => `https://i.ytimg.com/vi/${id}/${fallback ? 'hqdefault' : 'maxresdefault'}.jpg`;
 const fallbackVideoThumbnail = (event: SyntheticEvent<HTMLImageElement>, id: string) => {
   const image = event.currentTarget;
-  if (image.dataset.fallbackApplied === 'true') return;
+  if (image.dataset.fallbackApplied === 'true') {
+    image.classList.add('is-unavailable');
+    return;
+  }
   image.dataset.fallbackApplied = 'true';
   image.src = videoThumbnailUrl(id, true);
 };
