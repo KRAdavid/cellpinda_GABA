@@ -1,5 +1,15 @@
 # Audit Report
 
+## Latest Public Release Recheck — 9c2913d — 2026-10-03
+
+- 읽기 진행 레일의 실제 DOM 순서를 13장으로 정합화하고 수면·회복 프롤로그를 03/13으로 표시했다. 해시 링크와 모바일 전문가 영상 선택 이동은 sticky header·reading rail 아래에 도착하도록 보정했다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 309,865, CSS 92,953, total 1,448,297.
+- PR #100 checks와 main `37105696713`의 release-verify/worker-readiness/Pages publish/smoke-live/release-status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `9c2913db11440b10734345bc5bcba1d31161cc71`, generatedAt `2026-10-03T07:15:35.007Z`, HTTP 200, 70 hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. Live CDP 390px에서 해시 도착 위치·메뉴 열림/닫힘을, 1440px에서 데스크톱 내비게이션과 가로 폭 1425를 확인했다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-READING-RAIL-DEEPLINK`, `E-CDP-READING-RAIL-DEEPLINK`, `E-DEPLOY-PIPELINE-READING-RAIL-DEEPLINK`, `E-LIVE-PUBLIC-READING-RAIL-DEEPLINK`.
+
 ## Latest Public Release Recheck — 3d788e3 — 2026-10-03
 
 - 모바일·태블릿 메뉴가 열린 상태에서 배경을 분리하고 body 스크롤을 잠그며, 배경 버튼으로 닫을 수 있도록 보완했다. 닫은 뒤 `overflow: visible`과 메뉴 상태가 복원된다.
