@@ -2,6 +2,7 @@
 
 | Date | State / Change | Reason | Evidence or Decision | Owner |
 |---|---|---|---|---|
+| 2026-10-03 | 스크롤 중 읽기 진행 바를 불투명 레이어로 보정하고 `078d231`로 공개 배포 | 연구 결과 도표 위로 아래 콘텐츠가 비치는 현상을 제거해 모바일·데스크톱에서 읽기 안내와 연구 문장을 분리. PR #60 검사, main 배포·라이브 validator·320/390/1440px Chrome CDP 검증 통과 | E-LOCAL-BUILD-RAIL-LEGIBILITY, E-CDP-RAIL-LEGIBILITY, E-DEPLOY-PIPELINE-RAIL-LEGIBILITY, E-LIVE-PUBLIC-RAIL-LEGIBILITY | NAVI / QA |
 | 2026-10-03 | 연구 카드 앞에 `연구를 읽는 기준` 시각 키와 모바일 컨트롤 보조 설명을 추가하고 `89978ea`로 공개 배포 | 사람 대상 연구와 확장 연구 라벨을 먼저 설명해 결과 해석 부담을 낮춤. PR #58 검사, main 배포·라이브 validator·320/390/1440px Chrome CDP 검증 통과 | E-LOCAL-BUILD-RESEARCH-KEY, E-CDP-RESEARCH-KEY, E-DEPLOY-PIPELINE-RESEARCH-KEY, E-LIVE-PUBLIC-RESEARCH-KEY | NAVI / QA |
 | 2026-10-03 | 연구 결과 카드에 `핵심 결과 복사`와 브라우저 복사 대체 경로를 추가하고 `19a38ab`로 공개 배포 | 사업자가 관찰된 연구 결과 문장을 바로 재사용할 수 있게 보완. PR #55·#56 검사, main 배포·라이브 validator·390/1440px Chrome CDP 검증 통과 | E-LOCAL-BUILD-RESEARCH-SHARING, E-CDP-RESEARCH-SHARING, E-DEPLOY-PIPELINE-RESEARCH-SHARING, E-LIVE-PUBLIC-RESEARCH-SHARING | NAVI / QA |
 | 2026-10-03 | 연구 카드에 대상·방법·측정 프로필을 추가하고 `3f4a3e5`로 공개 배포 | 결과 그래프를 보기 전 연구 대상·방법·측정 항목을 한눈에 파악하도록 보완. PR #53 검사, main 배포·라이브 validator·390/1440px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-RESEARCH-PROFILE, E-CDP-RESEARCH-PROFILE, E-DEPLOY-PIPELINE-RESEARCH-PROFILE, E-LIVE-PUBLIC-RESEARCH-PROFILE | NAVI / QA |

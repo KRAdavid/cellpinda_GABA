@@ -1,5 +1,13 @@
 # Audit Report
 
+## Latest Public Release Recheck — 078d231 — 2026-10-03
+
+- PR #60은 스크롤 중 읽기 진행 바에 아래 연구 문장이 비치는 현상을 발견해 진행 바를 불투명 레이어로 보정했다. 헤더의 시각적 깊이는 유지하면서 연구 도표 위 텍스트 비침을 제거했다.
+- 로컬 `validate:ui-contract`, typecheck, 127개 테스트, production build와 성능 검사가 모두 통과했다. 정적 Pages 재현은 11개 라우트·70개 파일·`1,437,158 <= 1,650,000` bytes였다.
+- 최신 main push run `37082824190`은 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했고 Worker는 `STATIC_ONLY`라 배포하지 않았다. PR #60 checks `37082565225`, `37082565283`도 통과했다.
+- 라이브 validator는 HTTP 200, candidate `078d231b637fd4a2267d74b01cc304d025b88576`, 70 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, smartStoreOnly, removed750 및 provenance matched를 확인했다.
+- 390px 연구 도표·320px 좁은 화면·1440px 데스크톱 CDP에서 가로 넘침과 runtime errors `[]`를 확인했고, 메뉴·큰 글씨·연구 결과 복사 대체 안내를 다시 실행했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 OPEN이다.
+
 ## Latest Public Release Recheck — 89978ea — 2026-10-03
 
 - PR #58은 연구 카드 앞에 `연구를 읽는 기준` 시각 키를 추가해 `사람 대상 연구`와 `피부·성장 등 확장 연구` 라벨의 의미를 먼저 설명하고, 모바일 헤더 아이콘 컨트롤에 보조 title을 추가했다.
