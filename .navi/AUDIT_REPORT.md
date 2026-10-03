@@ -1,5 +1,14 @@
 # Audit Report
 
+## Latest Public Release Recheck — 2ae71ef — 2026-10-03
+
+- 모바일 장 진입 시 고정 읽기 진행 레일이 장 번호·제목 첫 줄을 가리던 UI 결함을 PR #106의 110px 상단 여백과 정적 UI contract guard로 보완했다. 과학 카피·제품 경계·연구 데이터는 변경하지 않았다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 311,157, CSS 95,703, total assets 1,453,052. PR #106 checks와 main `37109900221`의 release-verify, worker-readiness, Pages publish, smoke-live, release-status가 성공했다. Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `2ae71ef1e1aa7c5ff71ca429197ad70c22dce3c1`, HTTP 200, 70 hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. 라이브 CDP 390px exact entry는 number `110.19px`, heading `124.19px`, rail bottom `105px`, document width `390px`; 메뉴 열린 상태 `aria-expanded=true`·본문 스크롤 잠금·닫힘 복원; 1440px 제목·히어로·헤더/내비게이션·document width `1425px`를 확인했다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RAIL-TITLE-CLEAR`, `E-CDP-RAIL-TITLE-CLEAR`, `E-DEPLOY-PIPELINE-RAIL-TITLE-CLEAR`, `E-LIVE-PUBLIC-RAIL-TITLE-CLEAR`.
+
 ## Latest Public Release Recheck — bf235ed — 2026-10-03
 
 - 기본 공개 GABA 안내서 entry만 선행 import하고, 대기 중에도 브랜드·히어로 리듬을 유지하는 반응형 loading shell을 추가했다. 다른 route는 lazy loading을 유지했고 과학 카피·제품 경계는 변경하지 않았다.
