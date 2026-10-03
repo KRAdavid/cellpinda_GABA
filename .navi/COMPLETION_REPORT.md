@@ -1,5 +1,13 @@
 # Completion Report
 
+## Mobile Research Comparison Release Recheck — 4058bf6 — 2026-10-03
+
+- 연구 결과 비교 도표의 모바일 정보 밀도를 고도화해 390px에서는 두 조건을 좌우로 비교하고, 320px에서는 한 열로 읽도록 적용했다. 공개 과학 카피·제품 경계는 유지했다.
+- PR #115 checks, main workflow `37115590977`, Pages/live validator, 390px·320px·1440px Chrome CDP fallback 검증이 통과했다. 공개 UI candidate는 `4058bf61ed25d8fc95b3023f1187cdd78436cdb4`이다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-COMPARISON-20261003`, `E-CDP-MOBILE-COMPARISON-20261003`, `E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003`, `E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003`.
+
 ## Expert Video Gallery Release Recheck — 10a6192 — 2026-10-03
 
 - 전문가 영상 갤러리에 고해상도 썸네일, 안전한 대체 이미지, 모바일 필터 연속성 단서를 적용하고 PR #113을 main에 병합했다. 공개 과학 카피·제품 경계는 유지했다.

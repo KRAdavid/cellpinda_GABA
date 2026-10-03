@@ -1,5 +1,9 @@
 # Project Changelog
 
+## 모바일 연구 비교 도표 고도화 공개 재검증: 2026-10-03 / candidate `4058bf61ed25d8fc95b3023f1187cdd78436cdb4`
+
+연구 결과 도표에서 비교 조건과 GABA 조건을 390px 모바일에서는 좌우로 나란히 배치하고, 320px에서는 한 열로 전환했다. 보조기기용 차트 라벨에도 각 지표의 조건별 관찰 문장을 포함했다. PR #115 checks, main workflow `37115590977`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-COMPARISON-20261003`, `E-CDP-MOBILE-COMPARISON-20261003`, `E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003`, `E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003`.
+
 ## 전문가 영상 갤러리 고도화 공개 재검증: 2026-10-03 / candidate `10a61920df8bbcbe1b6f288a1d61425f48687800`
 
 전문가 영상 썸네일을 고해상도 우선·대체 이미지 경로로 보완하고, 모바일에서 다음 주제가 더 있음을 보여주는 필터 continuation cue를 추가했다. `연구 읽기` 선택 시 카드와 영상이 즉시 동기화되고, 필터 끝에서는 단서가 사라진다. PR #113 checks, main workflow `37114410997`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-EXPERT-VIDEO-BROWSING-20261003`, `E-CDP-EXPERT-VIDEO-BROWSING-20261003`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003`, `E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003`.
