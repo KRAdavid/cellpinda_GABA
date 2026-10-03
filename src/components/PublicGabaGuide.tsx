@@ -683,7 +683,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
       </div>
       <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div>
       {comparisonChart ? (
-        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. 비교 조건과 GABA 조건의 결과 방향 비교. ${comparisonChart.note}`}>
+        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. ${comparisonChart.rows.map((row) => `${row.label}: ${comparisonChart.referenceLabel} ${row.reference}, ${comparisonChart.resultLabel} ${row.result}`).join('. ')}. ${comparisonChart.note}`}>
           <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">변화 방향</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
           <div className="guide-outcome-comparison-list">
             {comparisonChart.rows.map((row) => {
