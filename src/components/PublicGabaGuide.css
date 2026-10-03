@@ -349,7 +349,8 @@
   .guide-container,.guide-section,.guide-section-heading h2{min-width:0;max-width:100%}
   .guide-section-heading h2{overflow-wrap:anywhere}
   .guide-research-flow{min-width:0;max-width:100%;width:100%}
-  .guide-research-detail-inline{min-width:0;max-width:100%;width:calc(100% - 20px)}
+  /* v42 research cards: use the full mobile reading width so chart labels do not wrap prematurely. */
+  .guide-research-detail-inline{min-width:0;max-width:100%;width:100%}
   .guide-outcome-chart{min-width:0;max-width:100%;width:100%}
   .guide-research-detail-inline{overflow:hidden}
   .guide-research-detail-top{flex-wrap:wrap;gap:6px 8px;min-width:0}
