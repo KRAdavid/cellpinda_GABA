@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Research Comparison Red-Team Recheck — 4058bf6 — 2026-10-03
+
+- 기존 모바일 비교 도표가 조건을 세로로 길게 쌓아 결과를 즉시 비교하기 어려웠던 점을 PR #115에서 보완했다. 390px 좌우 비교와 320px 한 열 fallback을 확인했으며, 두 상태 모두 가로 넘침과 오류 오버레이가 없었다.
+- 차트의 접근성 라벨이 제목과 주의 문장만 전달하던 범위를 넓혀 `잠드는 시간`과 `전체 비렘수면`의 조건별 관찰 결과를 포함했다. 새 과학 주장·제품 광고는 추가되지 않았다.
+- 새 치명적 결함은 확인되지 않았지만 Browser 플러그인, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 자동화·CDP만으로 닫을 수 없으므로 계속 `OPEN`이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-COMPARISON-20261003`, `E-CDP-MOBILE-COMPARISON-20261003`, `E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003`, `E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003`.
+
 ## Expert Video Gallery Red-Team Recheck — 10a6192 — 2026-10-03
 
 - 긴 주제 목록이 모바일에서 잘린 것처럼 보일 수 있던 탐색 단서를 PR #113에서 보완했다. 390px에서 오른쪽 continuation cue가 표시되고, 끝에 도달하면 사라지며, 고해상도 썸네일이 선택 영상과 일치하는지 확인했다.

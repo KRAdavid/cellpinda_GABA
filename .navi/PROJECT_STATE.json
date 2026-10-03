@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T09:57:11.504393Z",
+  "updated_at": "2026-10-03T10:17:37.243969Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1297,7 +1297,9 @@
           "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
           "E-LIVE-PUBLIC-NAVI-MERGE-20261003",
           "E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
+          "E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003",
+          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로를 재확인"
       },
@@ -1382,7 +1384,9 @@
           "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
           "E-LIVE-PUBLIC-NAVI-MERGE-20261003",
           "E-CDP-EXPERT-VIDEO-BROWSING-20261003",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
+          "E-CDP-MOBILE-COMPARISON-20261003",
+          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환을 확인"
       },
@@ -1469,7 +1473,9 @@
           "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
           "E-LIVE-PUBLIC-NAVI-MERGE-20261003",
           "E-CDP-EXPERT-VIDEO-BROWSING-20261003",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
+          "E-CDP-MOBILE-COMPARISON-20261003",
+          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환을 추가 확인"
       },
@@ -1665,7 +1671,10 @@
           "E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION",
           "E-LOCAL-BUILD-EXPERT-VIDEO-BROWSING-20261003",
           "E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003",
+          "E-LOCAL-BUILD-MOBILE-COMPARISON-20261003",
+          "E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003",
+          "E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
       },
@@ -2043,6 +2052,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T09:54:30Z"
+    },
+    {
+      "id": "H-051",
+      "event": "모바일 연구 결과 비교 도표에서 두 조건을 더 빠르게 비교할 수 있도록 PR #115를 main `4058bf6`에 병합했다. 390px 좌우 비교·320px 한 열 fallback·보조기기용 행별 결과 라벨을 로컬과 공개 URL에서 확인했고, main workflow 37115590977의 전체 배포 게이트 성공 결과를 NAVI 증적에 추가했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T10:14:30Z"
     }
   ]
 }

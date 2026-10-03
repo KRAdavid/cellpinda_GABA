@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Research Comparison Polish — 4058bf6 — 2026-10-03
+
+- PR #115에서 연구 결과 비교 도표를 모바일에서 재구성했다. 390px에서는 비교 조건과 GABA 조건을 좌우로 나란히 보여주고, 320px에서는 한 열로 전환해 문구를 보존한다. 차트의 보조기기용 라벨에는 각 행의 두 조건별 관찰 문장을 포함했다.
+- 로컬 typecheck/UI contract/127 tests/build/perf pass; 11 routes/70 files, initial JS 311,157, CSS 95,703, total assets 1,455,334. PR #115 checks와 main workflow `37115590977`의 release-verify·worker-readiness·Pages 배포·smoke-live·release-status가 성공했고 Worker는 `STATIC_ONLY`라 건너뛰었다.
+- live validator candidate `4058bf61ed25d8fc95b3023f1187cdd78436cdb4`, HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, internal ops excluded, `smartStoreOnly`, `removed750`, `provenance matched`. Chrome CDP fallback 390px에서 lanes `120.5px 120.5px`, chart height `603.84px`, document width `390px`; 320px에서 lanes `178px`, document width `320px`; 1440px document width는 `1425px`였다.
+- Browser 플러그인은 사용할 수 없어 Chrome CDP fallback으로 대체했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 계속 외부 검증 항목이며 자동화 결과를 그 완료로 확대하지 않는다.
+
+증적: `E-LOCAL-BUILD-MOBILE-COMPARISON-20261003`, `E-CDP-MOBILE-COMPARISON-20261003`, `E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003`, `E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003`.
+
 ## Expert Video Gallery Polish — 10a6192 — 2026-10-03
 
 - PR #113에서 전문가 영상 썸네일을 고해상도 우선·`hqdefault` 대체 경로로 보완하고, 모바일 주제 필터에 다음 항목 존재를 알려주는 연속성 단서를 추가했다. 과학 카피·제품 경계·선택 영상 즉시 재생은 변경하지 않았다.
