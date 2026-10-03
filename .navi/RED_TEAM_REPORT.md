@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Research Card Width Red-Team Recheck — 7a6db416 — 2026-10-04
+
+- 320px에서 연구 결과 카드가 필요 이상으로 좁아져 도표 조건 문구가 여러 줄로 꺾이던 결함을 확인했고, 320/390/1440px에서 모바일 가용 폭을 사용하는 보정 후 재검증했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 공개 연구 카피·제품 독립 경계·출처·연구 데이터는 변경하지 않았다. 공개 validator와 Chrome fallback에서 가로 넘침·브라우저 오류가 없었으며 카드 폭과 도표 폭이 개선됐다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004`, `E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004`, `E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004`.
+
 ## Chapter Entry Clearance Red-Team Recheck — b9f21d0 — 2026-10-04
 
 - 장 헤더 전체를 앵커로 삼아 `06 · 연구의 확장` 같은 작은 장 표시가 고정 읽기 진행 바와 겹치지 않도록 보완했다. 320px·390px·1440px에서 표시·제목·진행 바의 세로 관계와 가로 폭을 확인했으며 새 CRITICAL/MAJOR 결함은 확인되지 않았다.

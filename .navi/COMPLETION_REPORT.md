@@ -1,5 +1,13 @@
 # Completion Report
 
+## Mobile Research Card Width Release Recheck — 7a6db416 — 2026-10-04
+
+- 모바일 연구 결과 카드의 내부 폭을 가용 폭으로 보정해 320px·390px에서 도표 문구가 더 자연스럽게 읽히도록 고도화했다. 연구 문구·데이터·해석·출처와 제품 독립 경계는 그대로 유지했다.
+- 로컬 typecheck/UI contract/127 tests/build, PR #151 검사, main workflow `37140273727`, GitHub Pages 배포·라이브 smoke·release status, 공개 validator와 320/390/1440px Playwright Chrome fallback이 통과했다. 공개 candidate는 `7a6db416a08d78a8d3bd31f4c66bca89f5c1b2c8`이다.
+- 자동 검증과 공개 배포 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android 대표 환경, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 NAVI `USER_DECISION` / 완료 게이트 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004`, `E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004`, `E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004`.
+
 ## Chapter Entry Clearance Release Recheck — b9f21d0 — 2026-10-04
 
 - 장 진입 시 제목만 보이던 위치를 장 헤더 전체가 보이는 위치로 보정해 모바일에서도 `06 · 연구의 확장` 같은 장 표시와 제목을 함께 읽도록 고도화했다.
