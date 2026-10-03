@@ -1,5 +1,13 @@
 # Completion Report
 
+## Latest Release Recheck — 0257636 — 2026-10-03
+
+- 공개 연구 결과 도표의 비교 리본을 정성적 방향 비교에 맞게 보완했다. 두 조건을 같은 길이로 유지하고 점선·실선으로 구분해, 보고되지 않은 효과 크기를 시각적으로 만들어내지 않도록 했다.
+- PR #89 checks, TF heartbeat 복구 PR #90 checks, main workflow `37099561557`, 라이브 validator, 390px·1440px Chrome CDP fallback 검증이 통과했다. 공개 candidate는 `0257636233ae758a4bc6e90dac7c77e6fd42bc67`이다.
+- 자동 검증과 공개 배포 품질 게이트는 통과했지만 Browser 플러그인·Safari/iOS/Android, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS` / NAVI `USER_DECISION` / `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-QUALITATIVE-COMPARISON`, `E-CDP-QUALITATIVE-COMPARISON`, `E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON`, `E-LIVE-PUBLIC-QUALITATIVE-COMPARISON`, `E-NAVI-TF-HEARTBEAT-REFRESH`.
+
 ## Latest Release Recheck — 698f1fb — 2026-10-03
 
 - 모바일 수면·회복 카드 진행 맵을 7×2 전체 단계 표시로 고도화해 14개 카드의 흐름을 한눈에 확인하도록 했다. 320/390/1440px 렌더와 마지막 단계 선택, 자동 전환·일시정지 구조를 확인했다.

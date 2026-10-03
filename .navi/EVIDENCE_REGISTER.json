@@ -2076,6 +2076,61 @@
       "captured_at": "2026-10-03T04:57:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RECOVERY-MAP-MOBILE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-QUALITATIVE-COMPARISON",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 원문에 없는 효과 크기를 암시하던 비교 막대 길이를 제거하고, 비교 조건은 점선·GABA 조건은 실선의 동일 길이 시각 리본으로 표시하도록 보완했으며 로컬 품질 검사를 통과했다.",
+      "locator": "PR #89 candidate 1a4a4eb; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm run validate:research-copy PASS; pnpm test -- --runInBand 127/127; pnpm run build PASS; static routes 11, files 70; initial JS 309865, CSS 92953, total assets 1443832; qualitative comparison note explicitly states bar length is not a magnitude comparison",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/89",
+      "captured_at": "2026-10-03T05:13:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261003-QUALITATIVE-COMPARISON",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-CDP-QUALITATIVE-COMPARISON",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 390px·1440px Chrome CDP fallback에서 연구 비교 도표가 두 조건을 같은 길이로 표시하고 점선·실선으로 구분하며, 모바일 가로 넘침과 runtime errors가 없음을 확인했다.",
+      "locator": "temporary Chrome CDP fallback; live candidate 0257636233ae758a4bc6e90dac7c77e6fd42bc67 at https://kradavid.github.io/gaba_info/; research-cognition; 390px comparison tracks each measured 197px for reference/result, 390px document/body scrollWidth, 1440px document/body scrollWidth 1425, comparison note visible, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T05:23:30Z",
+      "reviewer_id": "NAVI-CDP-QA-20261003-QUALITATIVE-COMPARISON",
+      "claim_refs": ["C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "비교 도표 보완 PR #89의 필수 검사를 통과했고, stale TF heartbeat로 중단된 첫 main 시도를 보호된 heartbeat 갱신 PR #90으로 복구한 뒤 최종 Pages 배포 파이프라인 전체가 성공했다.",
+      "locator": "PR #89 checks 37099258471 and 37099258406 PASS; first main workflow 37099359755 stopped only at TF pulse freshness (heartbeat 484 minutes old); PR #90 checks 37099478278 and 37099478245 PASS; heartbeat merge 0257636233ae758a4bc6e90dac7c77e6fd42bc67; final main workflow 37099561557 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37099561557",
+      "captured_at": "2026-10-03T05:22:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261003-QUALITATIVE-COMPARISON",
+      "claim_refs": ["C-001", "C-002", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "비교 도표 보완이 반영된 최신 GitHub Pages 공개본이 HTTP 200으로 응답했고 공개 번들·데이터 경계를 유지했으며 390px·1440px 라이브 화면에서 조건 비교 표현과 가로 폭·런타임 오류를 재확인했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; candidateSha 0257636233ae758a4bc6e90dac7c77e6fd42bc67; generatedAt 2026-10-03T05:22:11.052Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live CDP 390px comparison bars equal width 197px with dashed reference and solid GABA lanes, document/body scrollWidth 390, errors []; live 1440px document/body scrollWidth 1425, errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T05:23:30Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261003-QUALITATIVE-COMPARISON",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-007"]
+    },
+    {
+      "id": "E-NAVI-TF-HEARTBEAT-REFRESH",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 배포 검증을 막은 484분 경과 TF heartbeat를 현재 main 기준으로 재생성하고 safe internal execution MET·freshness age 0분을 확인한 뒤 보호된 PR #90으로 병합했다.",
+      "locator": "pnpm run tf:pulse:heartbeat; pnpm run validate:tf-pulse-freshness returned status fresh, ageMinutes 0, maxAgeMinutes 480; PR #90 merged at 2026-10-03T05:21:25Z; final main release workflow 37099561557 passed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/90",
+      "captured_at": "2026-10-03T05:22:00Z",
+      "reviewer_id": "NAVI-OPS-QA-20261003-TF-HEARTBEAT",
+      "claim_refs": ["C-001", "C-007"]
     }
   ]
 }

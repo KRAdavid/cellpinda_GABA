@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T05:03:55.330323Z",
+  "updated_at": "2026-10-03T05:29:16.297671Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -189,7 +189,9 @@
         "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
         "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
         "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
-        "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE"
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
+        "E-LOCAL-BUILD-QUALITATIVE-COMPARISON",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -261,7 +263,9 @@
         "E-CDP-RESEARCH-PRODUCT-FREE",
         "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
         "E-CDP-RECOVERY-MAP-MOBILE",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+        "E-CDP-QUALITATIVE-COMPARISON",
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
       ],
       "owner": "UX QA"
     },
@@ -440,7 +444,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
         "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
         "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
       ],
       "owner": "배포 QA"
     },
@@ -507,7 +513,9 @@
         "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
         "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
         "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
       ],
       "owner": "운영 QA"
     },
@@ -634,7 +642,8 @@
         "E-LOCAL-BUILD-RESEARCH-RAIL",
         "E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE",
         "E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE",
-        "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE"
+        "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
+        "E-LOCAL-BUILD-QUALITATIVE-COMPARISON"
       ],
       "owner": "프런트엔드",
       "status": "DONE"
@@ -680,7 +689,9 @@
         "E-CDP-RESEARCH-PRODUCT-FREE",
         "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
         "E-CDP-RECOVERY-MAP-MOBILE",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+        "E-CDP-QUALITATIVE-COMPARISON",
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
       ],
       "owner": "UX QA",
       "status": "DONE_WITH_CONDITIONS"
@@ -737,7 +748,10 @@
         "E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE",
         "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
         "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
+        "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
+        "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON",
+        "E-NAVI-TF-HEARTBEAT-REFRESH"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -994,7 +1008,7 @@
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "e4fc8d0269bcabc72e1946c949f3ce9c1c48463acfa8190260cabe11cbd70b4c",
+    "assessed_input_sha256": "6f681ee60bbc54c36abc9c0247ffded8e110c06bd9bdc2a2162019a115d26a2f",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -1192,9 +1206,11 @@
           "E-CDP-TABLET-HEADER",
           "E-LIVE-PUBLIC-TABLET-HEADER",
           "E-CDP-RECOVERY-MAP-MOBILE",
-          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
+          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+          "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
+          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
         ],
-        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴를 확인"
+        "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 활성·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 동일 길이 조건 리본·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴를 확인"
       },
       {
         "criterion_id": "AC-003",
@@ -1248,9 +1264,11 @@
           "E-CDP-VIDEO-SELECTION-STATE",
           "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
           "E-CDP-RECOVERY-MAP-MOBILE",
-          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
+          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+          "E-CDP-QUALITATIVE-COMPARISON",
+          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
         ],
-        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고 연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락을 추가 확인"
+        "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 점선·실선 조건 구분·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락을 추가 확인"
       },
       {
         "criterion_id": "AC-004",
@@ -1394,9 +1412,12 @@
           "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
           "E-LOCAL-BUILD-RECOVERY-MAP-MOBILE",
           "E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE",
-          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE"
+          "E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE",
+          "E-LOCAL-BUILD-QUALITATIVE-COMPARISON",
+          "E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON",
+          "E-LIVE-PUBLIC-QUALITATIVE-COMPARISON"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·태블릿 헤더·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·연구 읽는 기준·진행 바·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 활성·수면과 회복 진행 맥락·태블릿 헤더·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로 보강 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -1680,6 +1701,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T04:57:00Z"
+    },
+    {
+      "id": "H-038",
+      "event": "연구 비교 도표에서 실제 수치처럼 보일 수 있던 임의 막대 길이를 제거하고 점선·실선의 동일 길이 조건 리본으로 보완한 PR #89를 main에 병합했다. stale TF heartbeat로 중단된 배포를 PR #90 heartbeat 갱신으로 복구한 뒤 최종 main 배포·라이브 validator·390/1440px Chrome CDP를 재검증하고 NAVI 증적을 갱신했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T05:23:30Z"
     }
   ]
 }

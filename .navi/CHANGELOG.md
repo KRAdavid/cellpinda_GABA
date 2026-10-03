@@ -1,5 +1,9 @@
 # Project Changelog
 
+최신 공개 재검증: 2026-10-03 / candidate `0257636233ae758a4bc6e90dac7c77e6fd42bc67`
+
+연구 결과 비교 도표에서 보고되지 않은 효과 크기를 암시하던 임의 막대 길이를 제거하고, 비교 조건은 점선 리본·GABA 조건은 실선 리본으로 같은 길이에 표시했다. PR #89의 타입체크·UI contract·research copy·127개 테스트·production build와 Pages 성능 예산, main 배포 workflow `37099561557`, 라이브 validator, 390/1440px Chrome CDP fallback을 통과했다. stale TF heartbeat로 한 차례 중단된 배포는 PR #90에서 heartbeat를 갱신해 복구했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-QUALITATIVE-COMPARISON`, `E-CDP-QUALITATIVE-COMPARISON`, `E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON`, `E-LIVE-PUBLIC-QUALITATIVE-COMPARISON`, `E-NAVI-TF-HEARTBEAT-REFRESH`.
+
 최신 공개 재검증: 2026-10-03 / candidate `698f1fbf93b960df38955fdb85ee223260df4cc7`
 
 모바일 수면·회복 카드 진행 맵을 가로 스크롤에서 7×2 전체 단계 표시로 바꿔 14개 카드의 흐름을 한눈에 읽도록 보완했다. PR #87 검사와 main 배포, 라이브 validator·320/390/1440px Chrome CDP fallback에서 전체 단계·마지막 카드 선택·가로 폭·runtime errors `[]`를 확인했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-MAP-MOBILE`, `E-CDP-RECOVERY-MAP-MOBILE`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE`, `E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE`.
