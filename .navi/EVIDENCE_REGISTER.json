@@ -3099,6 +3099,50 @@
       "captured_at": "2026-10-03T14:40:00Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-CHAPTER-DEEPLINK",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-READING-NOTE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "출처 읽기 장에 실제 h2 제목과 연구 카드에서 원문 출처로 이어지는 시각 흐름을 추가하고 aria-labelledby를 연결한 PR #138의 로컬 검증이 통과했다. 공개 과학 카피·제품 경계는 변경하지 않았다.",
+      "locator": "PR #138 candidate 10d190e; pnpm install --frozen-lockfile PASS; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; static routes 11, files 70; performance initial JS 311157, CSS 95703, total assets 1464484; reading-note heading, editorial layout, and source-flow guards passed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/138",
+      "captured_at": "2026-10-03T15:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-READING-NOTE",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-007"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-READING-NOTE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 GitHub Pages를 Playwright Chrome fallback으로 390px·1440px에서 확인했다. 출처 읽기 제목·연구 카드→원문 출처 흐름·13개 장 직접 링크·모바일 메뉴·전문가 영상 필터·선택 재생·가로 폭·브라우저 오류가 기준을 통과했다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/; 390px headingTop 114.734 > railBottom 105 and 1440px headingTop 125.984 > railBottom 116; reading-note count 11/12, label 출처 읽기; all 13 chapter deep links reached the intended heading with document scrollWidth equal to viewport; menu academic headingTop 115.140 and menu closed; filter cue true -> false at scrollLeft 383; iframe 1; active title `갱년기와 수면, GABA에 대한 질문`; errors []; screenshots v36-live-reading-note-390.png and v36-live-reading-note-1440.png",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/138",
+      "captured_at": "2026-10-03T15:02:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-READING-NOTE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-007"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-READING-NOTE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #138의 release-verify와 site-quality-verify를 통과했고 main 병합 후 정적 GitHub Pages 배포·라이브 smoke·release status가 성공했다. Worker는 정적 전용 모드에서 실행 대상이 아니었다.",
+      "locator": "PR #138 checks 37131524357 release-verify PASS and 37131524238 site-quality-verify PASS; merge commit 4379325e8773cbbea9ee1a9aee86ed02ac282bab; main workflow 37131613828 release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37131613828",
+      "captured_at": "2026-10-03T15:03:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-READING-NOTE",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-007"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-READING-NOTE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 HTTP 200과 병합 SHA를 제공했고 정적 배포 경계·공개 데이터·제품 독립 경계를 유지했다. 공개 출처 읽기 장과 전체 읽기 흐름을 라이브에서 재검증했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 4379325e8773cbbea9ee1a9aee86ed02ac282bab; generatedAt 2026-10-03T15:00:23.009Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Playwright reading-note and all-chapter results recorded in E-PLAYWRIGHT-READING-NOTE-20261004",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-03T15:04:00Z",
+      "reviewer_id": "NAVI-LIVE-QA-20261004-READING-NOTE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-005", "C-006", "C-007"]
     }
   ]
 }
