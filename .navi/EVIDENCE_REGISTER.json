@@ -6543,7 +6543,7 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본이 사업자용 공유 문장 개별 복사 상태 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
-      "locator": "EXPECTED_RELEASE_SHA=5aa9f05589d3878d0adc02cff01829198b29a344 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 5aa9f05589d3878d0adc02cff01829198b29a344; generatedAt 2026-10-04T14:08:26.634Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct clipboard runtime remains Browser/Playwright external validation",
+      "locator": "code release workflow 37208090180 passed; final NAVI docs sync workflow 37208345128 passed with release-verify 111454187635, worker-readiness 111454411195, deploy-pages 111454429928, smoke-live 111454477048 and release-status 111454518843; EXPECTED_RELEASE_SHA=df5c06aa3e75d2bfe4e471091b557050122d74dd pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha df5c06aa3e75d2bfe4e471091b557050122d74dd; generatedAt 2026-10-04T14:12:34.566Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct clipboard runtime remains Browser/Playwright external validation",
       "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#final",
       "captured_at": "2026-10-04T14:10:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-SHARE-LINE-COPY-ACK",
