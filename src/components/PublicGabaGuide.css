@@ -1304,6 +1304,11 @@
   .guide-header .guide-reading-size-toggle .guide-reading-size-mark{min-width:20px;font-size:13px}
 }
 
+/* v56 narrow-phone header clearance: reserve the full control rail beside the logo. */
+@media(min-width:381px) and (max-width:430px){
+  .guide-header .guide-logo{max-width:calc(100% - 184px)}
+}
+
 /* v49 mobile media focus: give the selected vertical expert video enough room to read without distorting its 9:16 frame. */
 @media(max-width:700px){
   .guide-video-feature-media{max-width:250px}
