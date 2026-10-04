@@ -906,10 +906,11 @@
 .guide-research-key>span{margin-left:auto;color:#9aaeba;font-size:11px;white-space:nowrap}
 @media(max-width:700px){
   .guide-research-key{display:block;margin:16px 0 24px;padding:14px 15px}
-  .guide-research-key>strong{display:block;margin-bottom:10px}
-  .guide-research-key ul{gap:8px 14px}
-  .guide-research-key li{font-size:12px}
-  .guide-research-key>span{display:block;margin-top:9px;font-size:11px;white-space:normal}
+  .guide-research-key>strong{display:block;margin-bottom:11px;font-size:13px}
+  .guide-research-key ul{display:grid;gap:8px}
+  .guide-research-key li{font-size:13px;line-height:1.45;white-space:normal}
+  .guide-research-key li i{width:9px;height:9px}
+  .guide-research-key>span{display:block;margin-top:11px;font-size:12px;line-height:1.55;white-space:normal}
 }
 
 /* v18 research reading rail: turn the existing order copy into a visual sequence. */
