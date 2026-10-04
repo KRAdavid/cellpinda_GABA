@@ -1,12 +1,12 @@
 # Completion Report
 
-## Current Release Recheck — 8ba4a76 — 2026-10-05
+## Current Release Recheck — 647df28 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·라이브 candidate: PASS.
 - AC-002 연구 확장 5개 영역 지도와 상세 카드의 모바일 주제 조작 가독성 계약: PASS.
 - AC-005 로컬 품질·빌드·성능 예산: PASS.
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
-- 공개본은 GitHub Pages에 배포되어 있고 `pnpm run validate:live-public`가 HTTP 200·STATIC·71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 공개본은 GitHub Pages에 배포되어 있고 NAVI 기록 동기화 시점 `pnpm run validate:live-public`가 candidate `647df28185305e61915254693a052a6bc86c6ac8`에 대해 HTTP 200·STATIC·71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다. UI 코드는 `8ba4a76`에서 배포됐다.
 - 완료 상태는 `NOT_READY`를 유지한다. Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수와 같은 외부 검증이 남아 있기 때문이다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-TOUCH-20261005`, `E-UI-CONTRACT-RESEARCH-MAP-TOUCH-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-TOUCH-20261005`, `E-LIVE-PUBLIC-RESEARCH-MAP-TOUCH-20261005`.

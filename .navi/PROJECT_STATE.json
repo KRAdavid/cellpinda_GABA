@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T16:30:56.476958Z",
+  "updated_at": "2026-10-04T16:35:49.876797Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -3829,7 +3829,7 @@
     },
     {
       "id": "H-137",
-      "event": "모바일 연구 확장 지도에서 70px 폭과 34px 아이콘이 고령 사용자의 주제 식별과 터치에 여유가 부족할 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #232에서 표준 모바일 주제 버튼을 80px·82px, 아이콘을 40px로 보강했으며 350px 이하에는 76px·78px·38px 축소 규칙을 명시했다. UI 계약에 v59 회귀 검사를 추가했고 PR #232 checks, main workflow `37216763700`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `8ba4a76ec8da1f3e00795b6ed4855c08755a990b`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 브라우저별 렌더·실기기 터치·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "event": "모바일 연구 확장 지도에서 70px 폭과 34px 아이콘이 고령 사용자의 주제 식별과 터치에 여유가 부족할 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #232에서 표준 모바일 주제 버튼을 80px·82px, 아이콘을 40px로 보강했으며 350px 이하에는 76px·78px·38px 축소 규칙을 명시했다. UI 계약에 v59 회귀 검사를 추가했고 PR #232 checks, main workflow `37216763700`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. 코드 배포 candidate `8ba4a76ec8da1f3e00795b6ed4855c08755a990b`와 NAVI 기록 동기화 시점 라이브 validator candidate `647df28185305e61915254693a052a6bc86c6ac8`는 모두 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 브라우저별 렌더·실기기 터치·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T16:27:14Z"

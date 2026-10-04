@@ -1,9 +1,9 @@
 # Project Changelog
 
-## 모바일 연구 확장 지도 터치·가독성 고도화 — 8ba4a76 — 2026-10-05
+## 모바일 연구 확장 지도 터치·가독성 고도화 — 647df28 — 2026-10-05
 
 - 모바일 연구 확장 지도의 주제 버튼을 표준 화면 80px·82px, 아이콘 40px로 넓히고 350px 이하에는 76px·78px·38px 규칙을 적용했다. v59 UI 계약 회귀 검사를 추가했다.
-- PR #232, main 배포 `37216763700`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- PR #232와 코드 배포 `37216763700`을 통과했고, NAVI 기록 동기화 시점 main candidate `647df28`의 라이브 공개 validator도 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
 - Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기 터치와 고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 `USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-TOUCH-20261005`, `E-UI-CONTRACT-RESEARCH-MAP-TOUCH-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-TOUCH-20261005`, `E-LIVE-PUBLIC-RESEARCH-MAP-TOUCH-20261005`.
