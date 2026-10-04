@@ -1447,6 +1447,11 @@ export default function PublicGabaGuide() {
               <p>잠은 단순히 멈추는 시간이 아닙니다.<br />뇌와 몸이 손상된 부분을 회복하고<br />쌓인 피로를 정리하는 시간입니다.</p>
             </div>
             <div ref={recoveryMapRef} className="guide-recovery-map" role="group" aria-label={`수면과 회복의 흐름 ${recoveryCards.length}단계`}>
+              <div className="guide-recovery-map-head" aria-live="polite">
+                <span>수면과 회복의 흐름</span>
+                <strong>현재 · {recoveryCard.eyebrow}</strong>
+                <em>{String(activeRecoveryCard + 1).padStart(2, '0')} / {String(recoveryCards.length).padStart(2, '0')}</em>
+              </div>
               {recoveryCards.map((card, index) => {
                 const Icon = recoveryIcons[index];
                 return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} data-recovery-index={index} aria-label={`${card.eyebrow} · ${index + 1}단계`} aria-controls="recovery-story-card" aria-current={index === activeRecoveryCard ? 'step' : undefined} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span><span className="guide-recovery-map-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></button>;
