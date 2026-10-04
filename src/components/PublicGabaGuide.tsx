@@ -867,6 +867,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
 export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
+  const [copiedResearchTopicId, setCopiedResearchTopicId] = useState<string | null>(null);
   const [activeVideoId, setActiveVideoId] = useState(getInitialExpertVideoId);
   const [activeVideoTopic, setActiveVideoTopic] = useState(getInitialExpertVideoTopic);
   const [videoStarted, setVideoStarted] = useState(hasInitialExpertVideo);
@@ -888,6 +889,7 @@ export default function PublicGabaGuide() {
   const headerRef = useRef<HTMLElement | null>(null);
   const menuToggleRef = useRef<HTMLButtonElement | null>(null);
   const shareStatusTimer = useRef<number | null>(null);
+  const copiedResearchTimer = useRef<number | null>(null);
   const hashAlignmentCancelled = useRef(false);
   const pendingChapterNavigation = useRef<{ id: ActiveChapterId; targetId: string } | null>(null);
   const chapterNavigationLockUntil = useRef(0);
@@ -1007,6 +1009,7 @@ export default function PublicGabaGuide() {
 
   useEffect(() => () => {
     if (shareStatusTimer.current !== null) window.clearTimeout(shareStatusTimer.current);
+    if (copiedResearchTimer.current !== null) window.clearTimeout(copiedResearchTimer.current);
   }, []);
 
   useEffect(() => {
@@ -1417,6 +1420,14 @@ export default function PublicGabaGuide() {
   const copyResearchMessage = async (topic: ResearchTopic) => {
     const text = formatResearchShareText(topic, getGuideShareUrl(`research-${topic.id}`));
     const copied = await writeClipboardText(text);
+    if (copied) {
+      setCopiedResearchTopicId(topic.id);
+      if (copiedResearchTimer.current !== null) window.clearTimeout(copiedResearchTimer.current);
+      copiedResearchTimer.current = window.setTimeout(() => {
+        setCopiedResearchTopicId(null);
+        copiedResearchTimer.current = null;
+      }, 2400);
+    }
     announceShareStatus(copied ? '연구 결과와 출처를 함께 복사했어요.' : '연구 결과를 선택해 활용해 보세요.');
   };
 
@@ -1628,7 +1639,7 @@ export default function PublicGabaGuide() {
               </ul>
               <span>카드 상단의 라벨은 연구 대상을 먼저 보여줍니다.</span>
             </div>
-            <div className="guide-research-flow">{researchTopics.map((topic, index) => { const nextTopic = researchTopics[index + 1]; return <article className={`guide-research-detail guide-research-detail-inline${activeResearchTopicId === topic.id ? ' is-active' : ''}`} id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchProfile profile={topic.profile} /><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding"><span>{topic.finding}</span><button type="button" className="guide-research-copy" onClick={() => void copyResearchMessage(topic)} aria-label={`${topic.title} 연구 결과와 출처 복사`}><Clipboard size={13} aria-hidden="true" /> 결과·출처 복사</button></dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span className="guide-research-source-label">출처 ·</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p>{nextTopic ? <button type="button" className="guide-research-next" onClick={() => { setActiveResearchTopicId(nextTopic.id); scrollTo(`research-${nextTopic.id}`); }} aria-label={`다음 연구로 이동: ${nextTopic.title}`}><span><small>다음 연구</small><strong>{nextTopic.title}</strong></span><ArrowRight size={18} aria-hidden="true" /></button> : null}</article>; })}</div>
+            <div className="guide-research-flow">{researchTopics.map((topic, index) => { const nextTopic = researchTopics[index + 1]; const isResearchCopied = copiedResearchTopicId === topic.id; return <article className={`guide-research-detail guide-research-detail-inline${activeResearchTopicId === topic.id ? ' is-active' : ''}`} id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchProfile profile={topic.profile} /><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding"><span>{topic.finding}</span><button type="button" className={`guide-research-copy${isResearchCopied ? ' is-copied' : ''}`} onClick={() => void copyResearchMessage(topic)} aria-label={`${topic.title} 연구 결과와 출처 ${isResearchCopied ? '복사 완료' : '복사'}`}><span className="guide-research-copy-icon" aria-hidden="true">{isResearchCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isResearchCopied ? '복사 완료' : '결과·출처 복사'}</button></dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span className="guide-research-source-label">출처 ·</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p>{nextTopic ? <button type="button" className="guide-research-next" onClick={() => { setActiveResearchTopicId(nextTopic.id); scrollTo(`research-${nextTopic.id}`); }} aria-label={`다음 연구로 이동: ${nextTopic.title}`}><span><small>다음 연구</small><strong>{nextTopic.title}</strong></span><ArrowRight size={18} aria-hidden="true" /></button> : null}</article>; })}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
             <div className="guide-research-handoff" aria-label="연구 결과에서 국내외 활용으로 이어지는 다음 읽기 흐름">
               <span className="guide-research-handoff-kicker">다음 장</span>
