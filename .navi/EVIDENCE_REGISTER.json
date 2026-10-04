@@ -242,6 +242,17 @@
         "E-LIVE-PUBLIC-NARROW-PHONE-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-032",
+      "statement": "모바일에서 전문가 영상을 선택하면 부드러운 스크롤 중에도 읽기 진행 문맥이 전문가 영상으로 유지되고, 즉시 공유해도 선택 영상의 제목·본문·딥링크가 보존된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-VIDEO-SHARE-20261004",
+        "E-PLAYWRIGHT-EXPERT-VIDEO-SHARE-20261004",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-SHARE-20261004",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5169,6 +5180,50 @@
       "captured_at": "2026-10-04T05:26:27Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-PHONE",
       "claim_refs": ["C-031"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-SHARE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 선택 직후의 읽기 문맥·공유 URL 보존 보완 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #196 source commit c8dd8f6; includes PR #194 merge 26b0073; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1483623 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/196",
+      "captured_at": "2026-10-04T05:48:11Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-EXPERT-VIDEO-SHARE",
+      "claim_refs": ["C-032"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-EXPERT-VIDEO-SHARE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 390px 모바일로 전문가 영상을 선택한 직후 공유해도 진행 라벨·공유 payload·영상 딥링크가 일치했고, 메뉴 포커스·큰 글씨·reduced-motion·1440px 가로폭도 통과했다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:4175; 390x844 isMobile/hasTouch and 1440x1000; 50ms after video selection before share; payload title `전문가 영상 · GABA Guide`, URL `?view=guide&video=Cnk0PGn9YBM#expert-videos`; progressLabel `전문가 영상`; checks 17/17; pageErrors []; consoleErrors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/196",
+      "captured_at": "2026-10-04T05:48:11Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-EXPERT-VIDEO-SHARE",
+      "claim_refs": ["C-032"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-SHARE-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 공유 문맥 보완 PR #194와 모바일 진행 문맥 보완 PR #196이 필수 검사를 통과해 main에 병합되었고, heartbeat 복구 PR #195 이후 fresh TF pulse·Pages·라이브 smoke·release status가 모두 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #194 merge 26b0073; heartbeat refresh PR #195 merge 7c6db5c; PR #196 merge 34c5b08; PR #196 checks release-verify 37180945658 and site-quality-verify 37180945678; main workflow 37181007734; release-verify, fresh TF pulse, build, deploy-pages, smoke-live and release-status success; deploy-worker skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37181007734",
+      "captured_at": "2026-10-04T05:52:11Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-EXPERT-VIDEO-SHARE",
+      "claim_refs": ["C-032"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 GitHub Pages 공개본에서 전문가 영상을 선택한 직후 공유해도 선택 영상 문맥·읽기 진행 라벨·딥링크가 일치하며, 모바일 접근성·가로폭·reduced-motion·데스크톱 공유 행동이 정상이다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 34c5b08b1d393860fcf4bc7e9fe5ed3e0571c945; generatedAt 2026-10-04T05:50:41.808Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback at 390x844 and 1440x1000: checks 17/17; payload URL `?view=guide&video=Cnk0PGn9YBM#expert-videos`; progressLabel `전문가 영상`; pageErrors []; consoleErrors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T05:52:11Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-SHARE",
+      "claim_refs": ["C-032"]
     }
   ]
 }

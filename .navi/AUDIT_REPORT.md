@@ -1,5 +1,14 @@
 # Audit Report
 
+## 전문가 영상 즉시 공유·진행 문맥 감사 — 34c5b08 — 2026-10-04
+
+- 전문가 영상 카드를 선택한 직후 50ms 뒤 헤더 공유를 실행해도 제목·본문·`?video=...#expert-videos` 딥링크가 선택 영상과 일치하는지 확인했다. PR #194에서 공유 문맥을 보정하고 PR #196에서 모바일 smooth scroll 중 읽기 진행 라벨을 `전문가 영상`으로 고정했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, Playwright Chromium fallback 390px·1440px 인터랙션 17/17, 공개 live validator HTTP 200·candidate 34c5b08·70개 번들 해시·공개 데이터 정합성을 확인했다. 메뉴 포커스 복귀·큰 글씨·reduced-motion·모바일 가로폭·데스크톱 공유도 통과했다.
+- 첫 main 배포 시 heartbeat가 481분으로 480분 허용치를 1분 초과해 정지했으나, 공식 heartbeat refresh PR #195가 필수 검사를 통과한 뒤 최종 main workflow 37181007734에서 fresh TF pulse·Pages·라이브 smoke·release status가 모두 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-SHARE-20261004, E-PLAYWRIGHT-EXPERT-VIDEO-SHARE-20261004, E-DEPLOY-PIPELINE-EXPERT-VIDEO-SHARE-20261004, E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004.
+
 ## NAVI 문서 동기화 후 최종 공개본 재감사 — cc312de — 2026-10-04
 
 - NAVI 문서 동기화 이후 최종 공개 candidate에서 live validator와 Playwright Chromium fallback을 재실행했다. 320·350·390·768·1440px × 11개 주요 장, 총 55개 조합을 통과했고 모든 조합에서 가로 넘침·페이지 오류·콘솔 오류가 없었다.

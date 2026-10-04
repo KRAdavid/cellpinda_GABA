@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 공유 경합·공개 재배포 레드팀 재검증 — 34c5b08 — 2026-10-04
+
+- 모바일 전문가 영상 선택 직후 공유할 때 smooth scroll이 이전 장 문맥을 덮어쓰는 경로를 재현하고, 선택 직후 읽기 장 고정과 공유 URL 문맥 재구성으로 보완했다. 최종 공개본에서 선택 영상·진행 라벨·공유 payload가 모두 `전문가 영상`으로 일치했다.
+- 390px·1440px Playwright Chromium fallback 17/17, 메뉴 포커스·큰 글씨·reduced-motion·가로폭·콘솔 오류 0건과 공개 candidate 34c5b08의 live validator를 확인했다. 영상 선택·공유 기능은 통과했지만 자동화 결과가 실제 브라우저·실기기 호환성을 대체하지는 않는다.
+- 첫 배포의 stale heartbeat 실패는 게이트 우회 없이 공식 heartbeat refresh PR #195로 복구했고, 최종 배포 workflow 37181007734의 fresh TF pulse·Pages·라이브 smoke·release status 성공을 확인했다. 기존 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-PLAYWRIGHT-EXPERT-VIDEO-SHARE-20261004, E-DEPLOY-PIPELINE-EXPERT-VIDEO-SHARE-20261004, E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004.
+
 ## NAVI 문서 동기화 후 최종 공개본 레드팀 재검증 — cc312de — 2026-10-04
 
 - 최종 공개 candidate에서 초소형 모바일 연구 카드와 주요 장 직접 진입을 다시 확인했다. 55개 조합 모두 가로폭·페이지 오류·콘솔 오류 기준을 통과했으며, 문서 동기화로 UI 자산이 변경되지 않았음을 확인했다.

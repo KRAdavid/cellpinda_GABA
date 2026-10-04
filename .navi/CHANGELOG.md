@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 전문가 영상 공유·모바일 진행 문맥 고도화 공개 배포: 2026-10-04 / candidate 34c5b08
+
+전문가 영상 선택 직후 공유해도 선택 영상 제목·본문·`?video=...#expert-videos` 딥링크가 유지되도록 보완하고, 모바일 부드러운 스크롤 중 읽기 진행 라벨이 `전문가 영상`과 일치하도록 고정했다. PR #194·#196, heartbeat refresh PR #195, main workflow 37181007734, Pages·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성·Playwright 390/1440px 인터랙션 17/17을 확인했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-SHARE-20261004, E-PLAYWRIGHT-EXPERT-VIDEO-SHARE-20261004, E-DEPLOY-PIPELINE-EXPERT-VIDEO-SHARE-20261004, E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004.
+
 ## 최종 NAVI 문서 동기화 공개 재검증: 2026-10-04 / candidate cc312de
 
 NAVI 문서 동기화 후 최종 공개 candidate에서 live validator와 Playwright Chromium fallback 55개 조합을 재실행했다. 320·350·390·768·1440px × 11개 주요 장에서 가로 넘침·페이지 오류·콘솔 오류가 0건이었고, 직전 UI 보정 candidate 91808af와 동일한 공개 화면이 유지됐다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
