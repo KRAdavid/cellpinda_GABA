@@ -664,6 +664,15 @@ const getGuideShareUrl = (hash = 'top') => {
   return url.toString();
 };
 
+const replaceGuideHistory = (hash: string, videoId?: string) => {
+  const url = new URL(window.location.href);
+  url.searchParams.set('view', 'guide');
+  if (videoId) url.searchParams.set('video', videoId);
+  else url.searchParams.delete('video');
+  url.hash = hash;
+  window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+};
+
 const formatResearchShareText = (topic: ResearchTopic, guideUrl: string) => [
   `[GABA ${topic.title} 연구]`,
   `연구 대상·방법: ${topic.study}`,
@@ -1266,7 +1275,7 @@ export default function PublicGabaGuide() {
       pendingChapterNavigation.current = null;
       chapterNavigationLockUntil.current = 0;
     }
-    window.history.replaceState(null, '', `#${hash}`);
+    replaceGuideHistory(hash);
     if (restoreMenuFocus) window.requestAnimationFrame(() => menuToggleRef.current?.focus());
   };
 
@@ -1282,11 +1291,7 @@ export default function PublicGabaGuide() {
     const isNewVideo = id !== activeVideoId;
     const selectedVideo = expertVideos.find((video) => video.id === id);
     if (selectedVideo) {
-      const shareUrl = new URL(window.location.href);
-      shareUrl.searchParams.set('view', 'guide');
-      shareUrl.searchParams.set('video', selectedVideo.id);
-      shareUrl.hash = 'expert-videos';
-      window.history.replaceState(null, '', `${shareUrl.pathname}${shareUrl.search}${shareUrl.hash}`);
+      replaceGuideHistory('expert-videos', selectedVideo.id);
     }
     if (isNewVideo) {
       setActiveVideoId(id);
