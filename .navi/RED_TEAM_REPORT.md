@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 초소형 모바일 회복 경로 공개 재검증 — 5bf2921 — 2026-10-04
+
+- 320px에서는 14단계 회복 경로가 6·6·2의 3행으로 표시되고 약 42.5px 단계 버튼을 확보했으며, 390px에서는 7·7 흐름을 유지했다. 가로 넘침과 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 결과는 PASS_WITH_CONDITIONS다. Browser 플러그인 부재로 Chrome DevTools fallback을 사용했으며 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성은 자동화만으로 닫을 수 없다. RT-001·RT-002·RT-003은 계속 OPEN이고 NAVI는 USER_DECISION / NOT_READY다.
+- 회복 경로 크기 보강은 화면 가독성과 터치 여유를 개선하지만, 실제 고령 사용자 이해도나 독립 과학·규제 감수를 대체하지 않는다.
+
+증적: `E-CDP-NARROW-RECOVERY-MAP-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004`.
+
 ## 태블릿 읽기 진행 레일 기준선 정렬 공개 재검증 — fc07f6f — 2026-10-04
 
 - 768px 공개 화면에서 헤더와 진행 레일이 모두 70px 기준선에 맞고, 390px에서도 같은 레일 구조가 유지됐다. 두 화면 모두 가로 넘침·page error·console error가 없었다.

@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 초소형 모바일 회복 경로 터치·가독성 보강 및 공개 재검증: 2026-10-04 / candidate 5bf2921
+
+320px 이하에서 수면·회복 14단계 지도가 지나치게 압축되지 않도록 6·6·2의 3행으로 재배치하고 단계 버튼·아이콘을 키웠다. 390px의 7·7 흐름은 유지했으며, PR #212·main workflow `37199796734`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 320px·390px 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261004`, `E-CDP-NARROW-RECOVERY-MAP-20261004`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004`.
+
 ## 태블릿 읽기 진행 레일 기준선 정렬 및 공개 재검증: 2026-10-04 / candidate fc07f6f
 
 701px·900px 태블릿에서 헤더 높이 70px과 읽기 진행 레일의 top을 맞춰 헤더 아래 기준선 오차를 제거했다. 공개 768px·390px Chrome DevTools fallback에서 진행 레일 정렬·가로폭·오류 기준을 확인했고, PR #211·main workflow `37198360203`·live validator HTTP 200·STATIC 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

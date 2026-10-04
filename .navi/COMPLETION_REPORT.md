@@ -1,5 +1,13 @@
 # Completion Report
 
+## 초소형 모바일 회복 경로 배포 품질 게이트 — 5bf2921 — 2026-10-04
+
+- 320px 이하에서 수면·회복 14단계 지도를 6·6·2의 3행으로 재배치하고 단계 버튼·아이콘을 키웠다. 390px 이상 흐름과 제품 독립 공개 경계는 유지했다.
+- PR #212 main 병합과 workflow `37199796734`의 release-verify·Pages·라이브 smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했다.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토와 로컬 사업 운영 게이트가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261004`, `E-CDP-NARROW-RECOVERY-MAP-20261004`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004`.
+
 ## 태블릿 읽기 진행 레일 기준선 정렬 배포 품질 게이트 — fc07f6f — 2026-10-04
 
 - 701px·900px 태블릿의 헤더와 읽기 진행 레일을 같은 70px 기준선에 맞췄다. 공개 768px·390px에서 읽기 진행·제품 독립 안내·가로폭·오류 기준을 재확인했다.

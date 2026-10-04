@@ -1,5 +1,13 @@
 # Audit Report
 
+## 초소형 모바일 회복 경로 터치·가독성 공개 재검증 — 5bf2921 — 2026-10-04
+
+- 320px에서 14단계 회복 경로가 7열에 압축되어 단계 버튼이 작아지는 리스크를 확인하고, 350px 이하를 6·6·2의 3행으로 재배치했다. 버튼 최소 폭은 약 42.5px, 아이콘은 38px로 보강했으며 390px은 기존 7·7 흐름을 유지했다.
+- PR #212의 UI 계약·typecheck·127개 테스트·production build·성능 예산, Chrome DevTools fallback 320px·390px의 가로폭·행 수·버튼 폭, main workflow `37199796734`의 정적 Pages 배포·라이브 smoke·release status를 확인했다. live validator candidate `5bf2921bfa513e1bd9ab62ef09e07935174124f0`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Browser 플러그인 부재로 Chrome DevTools fallback을 사용했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261004`, `E-CDP-NARROW-RECOVERY-MAP-20261004`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004`.
+
 ## 태블릿 읽기 진행 레일 기준선 정렬 공개 재검증 — fc07f6f — 2026-10-04
 
 - 701px·900px에서 헤더 높이 70px과 읽기 진행 레일의 top 값을 70px로 맞춰 헤더 아래 8px 기준선 오차를 제거했다. 공개 768px·390px에서 진행 레일·본문 흐름·제품 독립 안내가 유지됐고 scrollWidth와 clientWidth가 일치하며 page error·console error가 없었다.
