@@ -1472,7 +1472,7 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-research guide-story-section" id="research" aria-labelledby="research-heading">
           <div className="guide-container">
-            <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">06 · 연구의 확장</p><h2 id="research-heading">수면에서 시작해<br />다섯 영역으로 확장됩니다</h2></div><p>연구의 흐름을<br />살펴봅니다.</p></div>
+            <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">06 · 연구의 확장</p><h2 id="research-heading">수면에서 시작해<br />{' '}다섯 영역으로 확장됩니다</h2></div><p>연구의 흐름을<br />살펴봅니다.</p></div>
             <div className="guide-research-map" aria-label="GABA에서 다섯 연구 영역으로 확장되는 구조">
               <svg className="guide-research-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 43V22M57 50H78M56 56L77 77M44 56L23 77M43 50H22" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth=".65" strokeDasharray="1 2" /></svg>
               <div className="guide-research-orbit-core"><strong>GABA</strong></div>
