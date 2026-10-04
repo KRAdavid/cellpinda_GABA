@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T06:17:42Z",
+  "updated_at": "2026-10-04T06:22:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -299,7 +299,8 @@
         "E-LOCAL-BUILD-MOBILE-VIDEO-CONTEXT-20261004",
         "E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-VIDEO-CONTEXT-20261004",
-        "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004"
+        "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004",
+        "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1532,7 +1533,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T06:17:42Z"
+    "last_run_at": "2026-10-04T06:22:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1591,7 +1592,8 @@
           "E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004",
           "E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004",
           "E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004",
-          "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004"
+          "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004",
+          "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-20261004"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -1660,7 +1662,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T06:17:42Z"
+    "last_run_at": "2026-10-04T06:22:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3270,6 +3272,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T06:17:42Z"
+    },
+    {
+      "id": "H-105",
+      "event": "모바일 전문가 영상 정보 계층 보완과 NAVI 감사·레드팀·완료 문서 동기화 commit c8c230b를 공개 main에 반영했다. main workflow 37182530021의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, 최종 공개 candidate c8c230b에서 live validator HTTP 200·STATIC·공개 데이터 정합성을 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. UI 증적은 코드 candidate 0feb574에 연결되어 있고 문서 commit은 이를 공개본에 유지한 변경이다. 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T06:22:00Z"
     }
   ]
 }

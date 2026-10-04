@@ -5298,6 +5298,17 @@
       "captured_at": "2026-10-04T06:15:26Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-MOBILE-VIDEO-CONTEXT",
       "claim_refs": ["C-034"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 감사·레드팀·완료 보고서와 증적 레지스터 동기화 commit이 공개 main에 반영되었고, 정적 GitHub Pages 배포와 라이브 공개 검증이 성공했다. 제품 독립 공개 데이터와 모바일 전문가 영상 개선 상태는 유지된다.",
+      "locator": "NAVI docs sync commit c8c230b67e2732eba36985c3bef4a6091e2c8396; main workflow 37182530021; release-verify, worker-readiness, deploy-pages, smoke-live and release-status success; deploy-worker skipped; pnpm run validate:live-public page 200, runtimeMode STATIC, candidateSha c8c230b67e2732eba36985c3bef4a6091e2c8396, generatedAt 2026-10-04T06:21:34.718Z, bundleHashes 70, claims 12, masterRecords 6, products 1, sharePages 6, teaserPreview HOLD/publicUrl false, internalOpsSnapshots excluded, smartStoreOnly true, removed750 true, provenance matched",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37182530021",
+      "captured_at": "2026-10-04T06:21:34Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-DOCS-SYNC",
+      "claim_refs": ["C-034"]
     }
   ]
 }
