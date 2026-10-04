@@ -631,6 +631,17 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-TOUCH-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-068",
+      "statement": "연구 비교 도표의 각 지표는 두 조건의 세부 막대를 비교하기 전에 GABA 결과 요약을 먼저 보여 주어, 독자가 관찰된 방향을 한눈에 읽고 비교 근거를 이어서 확인할 수 있으며 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-OUTCOME-VERDICT-20261005",
+        "E-UI-CONTRACT-RESEARCH-OUTCOME-VERDICT-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-OUTCOME-VERDICT-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-OUTCOME-VERDICT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7098,6 +7109,50 @@
       "captured_at": "2026-10-04T16:32:20Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-MAP-TOUCH",
       "claim_refs": ["C-067"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-OUTCOME-VERDICT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 비교 도표의 각 행에 GABA 결과 요약을 먼저 표시하는 개선이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #233 source commit d031ea4; pnpm run validate:ui-contract PASS including v60 direct verdict guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1593966 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/233",
+      "captured_at": "2026-10-04T16:42:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RESEARCH-OUTCOME-VERDICT",
+      "claim_refs": ["C-068"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-OUTCOME-VERDICT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 각 연구 비교 행에 GABA 결과 요약과 row.result가 비교 레인보다 먼저 존재하는지 v60 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v60 assertion; guide-outcome-comparison-metric → guide-outcome-comparison-verdict → GABA 결과 → row.result; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/233",
+      "captured_at": "2026-10-04T16:42:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-OUTCOME-VERDICT",
+      "claim_refs": ["C-068"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-OUTCOME-VERDICT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 요약 선표시 PR #233이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #233 merge main commit 4036d0ddc109b00ddbbab9837f31b3f715596513; PR #233 release-verify 37217767522 job 111481683605 and site-quality-verify 37217767515 job 111481683692 successful; main workflow 37217858013 with release-verify 111481950368, worker-readiness 111482139249, deploy-pages 111482153545, smoke-live 111482191875 and release-status 111482232079 successful; deploy-worker 111482154360 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37217858013",
+      "captured_at": "2026-10-04T16:46:04Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-OUTCOME-VERDICT",
+      "claim_refs": ["C-068"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-OUTCOME-VERDICT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 연구 결과 요약 선표시 개선과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=4036d0ddc109b00ddbbab9837f31b3f715596513 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 4036d0ddc109b00ddbbab9837f31b3f715596513; generatedAt 2026-10-04T16:44:59.896Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T16:44:59Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-OUTCOME-VERDICT",
+      "claim_refs": ["C-068"]
     }
   ]
 }
