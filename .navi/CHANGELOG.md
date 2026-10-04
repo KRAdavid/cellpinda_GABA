@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 마지막 이야기 공유 장 시각 균형 공개 배포: 2026-10-04 / candidate `ec2a1bd`
+
+마지막 장 오른쪽의 과도한 빈 공간을 저채도 동심원 신호와 GABA 워터마크로 보완했다. 모바일에서는 그래픽을 낮은 대비로 배치해 핵심 문구를 우선하고, 데스크톱에서는 시작 장면의 자연·과학 톤을 마지막 장까지 연결한다. PR #182, main workflow `37168287853`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-FINAL-SIGNAL-20261004`, `E-PLAYWRIGHT-FINAL-SIGNAL-20261004`, `E-DEPLOY-PIPELINE-FINAL-SIGNAL-20261004`, `E-LIVE-PUBLIC-FINAL-SIGNAL-20261004`.
+
 ## 모바일 회복 카드 탐색 affordance 공개 배포: 2026-10-04 / candidate `8e22d51`
 
 수면·회복 보충 구간의 14단계 읽기 경로를 모바일에서 더 쉽게 찾도록 아이콘·번호 크기와 hover·focus-visible 상태를 보완했다. PR #181, main workflow `37167336445`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 390px Chrome fallback에서 14단계·가로 폭·마지막 카드 선택·자동 일시정지를 확인했으며, 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

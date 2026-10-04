@@ -1,5 +1,14 @@
 # Audit Report
 
+## 마지막 이야기 공유 장 시각 균형 감사 — ec2a1bd — 2026-10-04
+
+- 데스크톱 마지막 장에서 왼쪽 콘텐츠 뒤 오른쪽 공간이 비어 보이던 상태를 PR #182에서 보완했다. 저채도 동심원 신호와 GABA 워터마크를 추가해 첫 화면의 자연·과학 톤을 마지막 장까지 연결하되, 카피·공유 행동·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build가 통과했다. 공개 390px·1440px Chrome fallback에서 `이야기 공유 | GABA Guide`, 핵심 제목·본문·공유 버튼, viewport와 같은 문서 폭, 브라우저 오류 없음을 확인했다. 공개 390px 회복 카드의 focus-visible 3px 윤곽선과 14번째 카드 선택·자동 일시정지도 재확인했다.
+- PR #182 checks `37168218357`, `37168218356`과 main workflow `37168287853`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `ec2a1bd`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-FINAL-SIGNAL-20261004`, `E-PLAYWRIGHT-FINAL-SIGNAL-20261004`, `E-DEPLOY-PIPELINE-FINAL-SIGNAL-20261004`, `E-LIVE-PUBLIC-FINAL-SIGNAL-20261004`.
+
 ## 모바일 회복 카드 탐색 affordance 감사 — 8e22d51 — 2026-10-04
 
 - 수면·회복 보충 구간의 14단계 읽기 경로가 작은 아이콘으로 흩어져 다음 내용을 한눈에 찾기 어려운 상태를 PR #181에서 보완했다. 모바일 아이콘을 34px, 번호를 10px로 조정하고 hover·focus-visible 상태를 연결해 단계 선택성을 높였다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T01:16:15Z",
+  "updated_at": "2026-10-04T01:35:21Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2872,6 +2872,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T01:16:15Z"
+    },
+    {
+      "id": "H-089",
+      "event": "마지막 이야기 공유 장이 데스크톱에서 왼쪽 콘텐츠만 남아 시각적 무게가 한쪽으로 쏠리던 상태를 PR #182에서 보완했다. 저채도 동심원 신호와 GABA 워터마크를 추가하고 모바일에서는 낮은 대비·하단 배치로 축소해 핵심 제목·본문·공유 행동의 우선순위를 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px·1440px Chrome fallback의 페이지 정체성·비공백·가로 폭·오류·회복 카드 focus-visible 상호작용, PR #182 checks, main workflow 37168287853, live validator HTTP 200·STATIC·candidate ec2a1bd를 확인했다. 공개 과학 카피·출처·제품 독립 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T01:35:21Z"
     }
   ]
 }

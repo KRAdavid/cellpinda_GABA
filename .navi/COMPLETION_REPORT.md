@@ -1,5 +1,14 @@
 # Completion Report
 
+## Final Chapter Signal Release Gate — ec2a1bd — 2026-10-04
+
+- PR #182에서 마지막 이야기 공유 장의 데스크톱 시각 균형을 보완했다. 저채도 동심원 신호와 GABA 워터마크를 추가했으며, 모바일에서는 낮은 대비·하단 배치로 핵심 문구와 공유 행동을 우선했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px·1440px 마지막 장, 공개 390px 회복 카드 focus-visible 상호작용, PR checks, main workflow `37168287853`, Pages·라이브 smoke·release status·live validator candidate `ec2a1bd`가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-FINAL-SIGNAL-20261004`, `E-PLAYWRIGHT-FINAL-SIGNAL-20261004`, `E-DEPLOY-PIPELINE-FINAL-SIGNAL-20261004`, `E-LIVE-PUBLIC-FINAL-SIGNAL-20261004`.
+
 ## Recovery Map Affordance Release Gate — 8e22d51 — 2026-10-04
 
 - PR #181에서 모바일 수면·회복 보충 구간의 14단계 읽기 지도를 보강했다. 아이콘·번호를 더 선명하게 표시하고 focus-visible·선택 상태를 연결해 다음 카드를 찾는 흐름을 개선했다.
