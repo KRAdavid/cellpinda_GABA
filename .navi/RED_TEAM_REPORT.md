@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 터치 중 수면·회복 카드 읽기 흐름 레드팀 재검증 — e6802d3 — 2026-10-04
+
+- 390px touch context에서 카드를 누르고 3.4초 대기해도 1단계가 유지되는지, 손가락을 떼면 2단계로 자동 전환되는지 확인했다. 좌우 스와이프는 2단계로 이동하고 `다시 재생` 상태를 유지해 자동으로 다시 넘어가지 않는다.
+- 단계 표시·이미지·카드 하단 진행선·모바일 가로폭은 유지됐고 page error·console error는 없었다. 변경은 터치 입력 처리에 한정되어 연구 카피·수치·출처·제품 독립 경계를 변경하지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 결과는 PASS_WITH_CONDITIONS다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RECOVERY-TOUCH-20261004, E-PLAYWRIGHT-RECOVERY-TOUCH-20261004, E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004, E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004.
+
 ## 수면·회복 자동 카드 읽기 흐름 레드팀 재검증 — cbf05f6 — 2026-10-04
 
 - 자동 카드가 독자를 방해하지 않는지 확인했다. 기본 상태에서는 3초 후 1→2단계로 이동하고, 카드 영역에 포인터를 두거나 키보드 포커스를 둔 동안에는 현재 카드가 유지되며, 상호작용이 끝나면 자동 전환이 다시 시작된다. 직접 `잠시 멈춤`을 누른 경우에는 1단계가 유지된다.

@@ -1,5 +1,15 @@
 # Audit Report
 
+## 모바일 터치 중 수면·회복 카드 읽기 흐름 감사 — e6802d3 — 2026-10-04
+
+- 모바일에서 카드를 누르거나 스와이프하는 동안 3초 자동 전환이 계속될 수 있던 흐름을 확인하고, 터치 시작부터 종료까지 현재 단계를 유지하도록 보완했다. 손가락을 떼면 자동 전환을 재개하고, 좌우 스와이프는 다음 단계로 이동한 뒤 수동 일시정지 상태를 유지한다. touchcancel 복귀도 추가했다.
+- 카드 이미지·14단계 구조·연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며, 로컬·공개 390px touch context에서 touch hold·release·swipe·수동 정지·가로폭·콘솔 오류를 확인했다.
+- PR #192 checks 37178414875·37178414911, main workflow 37178489672의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 candidate e6802d3에서 HTTP 200·STATIC·공개 데이터 정합성을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RECOVERY-TOUCH-20261004, E-PLAYWRIGHT-RECOVERY-TOUCH-20261004, E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004, E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004.
+
 ## 수면·회복 자동 카드 읽기 흐름 감사 — cbf05f6 — 2026-10-04
 
 - 수면·회복 14단계 카드가 포인터나 키보드 포커스를 한 번만 받아도 영구 정지하던 흐름을 확인하고, 읽기 중 상호작용 일시정지와 사용자가 직접 누른 일시정지를 분리했다. 섹션을 벗어나면 3초 자동 전환을 재개하고, 사용자가 직접 정지한 경우에는 정지 상태를 유지한다.

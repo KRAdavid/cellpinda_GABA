@@ -1,5 +1,14 @@
 # Completion Report
 
+## 모바일 터치 중 수면·회복 카드 읽기 흐름 공개 배포 게이트 — e6802d3 — 2026-10-04
+
+- PR #192에서 터치 시작부터 종료까지 수면·회복 카드의 현재 단계를 유지하고, 손가락을 떼면 3초 자동 전환을 재개하도록 보완했다. 스와이프는 다음 단계로 이동한 뒤 수동 정지 상태를 유지한다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, 공개 390px touch context, PR checks, main workflow 37178489672, Pages·라이브 smoke·release status·live validator candidate e6802d3가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser HOLD/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 USER_DECISION / NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-RECOVERY-TOUCH-20261004, E-PLAYWRIGHT-RECOVERY-TOUCH-20261004, E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004, E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004.
+
 ## 수면·회복 자동 카드 읽기 흐름 공개 배포 게이트 — cbf05f6 — 2026-10-04
 
 - PR #191에서 수면·회복 14단계 카드의 상호작용 일시정지와 사용자 수동 일시정지를 분리했다. 읽기 중에는 현재 카드를 유지하고, 상호작용이 끝나면 3초 자동 전환을 재개하며 reduced-motion에서는 자동 전환을 끈다.

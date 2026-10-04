@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T04:43:04Z",
+  "updated_at": "2026-10-04T04:58:35Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -282,7 +282,11 @@
         "E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004",
         "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
         "E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004",
-        "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
+        "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004",
+        "E-LOCAL-BUILD-RECOVERY-TOUCH-20261004",
+        "E-PLAYWRIGHT-RECOVERY-TOUCH-20261004",
+        "E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004",
+        "E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -461,7 +465,11 @@
         "E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004",
         "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
         "E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004",
-        "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
+        "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004",
+        "E-LOCAL-BUILD-RECOVERY-TOUCH-20261004",
+        "E-PLAYWRIGHT-RECOVERY-TOUCH-20261004",
+        "E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004",
+        "E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004"
       ],
       "owner": "UX QA"
     },
@@ -1484,7 +1492,11 @@
           "E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004",
           "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
           "E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004",
-          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
+          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004",
+          "E-LOCAL-BUILD-RECOVERY-TOUCH-20261004",
+          "E-PLAYWRIGHT-RECOVERY-TOUCH-20261004",
+          "E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004",
+          "E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -1543,7 +1555,9 @@
           "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
           "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004",
           "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
-          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
+          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004",
+          "E-PLAYWRIGHT-RECOVERY-TOUCH-20261004",
+          "E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -1597,7 +1611,9 @@
           "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
           "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004",
           "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
-          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
+          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004",
+          "E-PLAYWRIGHT-RECOVERY-TOUCH-20261004",
+          "E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -3146,6 +3162,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T04:43:04Z"
+    },
+    {
+      "id": "H-099",
+      "event": "모바일에서 수면·회복 카드를 터치하는 동안 자동 전환이 계속될 수 있던 흐름을 PR #192에서 보완했다. 터치 시작부터 종료까지 현재 카드를 유지하고, 손가락을 떼면 3초 자동 전환을 재개하며, 좌우 스와이프는 다음 단계로 이동한 뒤 사용자가 직접 멈춘 상태를 유지한다. touchcancel 복귀도 추가했다. 로컬 typecheck·UI 계약·127개 테스트·production build와 성능 예산, 공개 390px Chrome fallback의 touch hold·release·swipe·수동 정지·가로폭·콘솔 오류를 확인했다. PR #192 checks 37178414875·37178414911, main workflow 37178489672, live candidate e6802d3와 정적 공개 데이터·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T04:58:35Z"
     }
   ]
 }

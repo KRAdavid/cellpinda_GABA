@@ -220,6 +220,17 @@
         "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-030",
+      "statement": "모바일에서 수면·회복 카드를 터치하는 동안 현재 단계가 유지되고, 손가락을 떼면 자동 전환이 재개되며, 좌우 스와이프는 다음 단계로 이동한 뒤 수동 일시정지 상태를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-TOUCH-20261004",
+        "E-PLAYWRIGHT-RECOVERY-TOUCH-20261004",
+        "E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004",
+        "E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5059,6 +5070,50 @@
       "captured_at": "2026-10-04T04:43:04Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RECOVERY-AUTOPLAY",
       "claim_refs": ["C-029"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-TOUCH-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 터치 중 카드 유지와 스와이프 후 수동 정지를 보완한 후보가 typecheck·UI 계약·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #192 source commit f7ab1e2; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1483213 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/192",
+      "captured_at": "2026-10-04T04:54:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-RECOVERY-TOUCH",
+      "claim_refs": ["C-030"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RECOVERY-TOUCH-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "390px touch context에서 카드를 누르고 있는 동안 단계가 유지되고, 손가락을 떼면 자동 전환이 재개되며, 좌우 스와이프는 다음 단계와 수동 정지 상태를 정확히 만든다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:4173/guide/?view=guide#recovery-break; 390x844 isMobile/hasTouch; touch hold 3.4s keeps card 1; release advances to card 2 after 3.4s; swipe 1→2 and toggle label 다시 재생; after 3.4s remains card 2; scrollWidth 390 = viewport 390; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/192",
+      "captured_at": "2026-10-04T04:54:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RECOVERY-TOUCH",
+      "claim_refs": ["C-030"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #192 검증이 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #192 merge main commit e6802d33995441910277de9a7861f34561ae224a; PR checks 37178414875 and 37178414911 successful; main workflow 37178489672; release-verify success, worker-readiness success, deploy-pages success, smoke-live success, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37178489672",
+      "captured_at": "2026-10-04T04:58:35Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RECOVERY-TOUCH",
+      "claim_refs": ["C-030"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 GitHub Pages 공개본에서 실제 touch context로 수면·회복 카드의 터치 유지·자동 재개·스와이프 후 수동 정지와 모바일 가로폭·콘솔 오류 기준을 재현했다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha e6802d33995441910277de9a7861f34561ae224a; generatedAt 2026-10-04T04:58:35.232Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback: 390x844 isMobile/hasTouch; touch hold keeps card 1; release reaches card 2; swipe reaches card 2 and label 다시 재생; after 3.4s remains card 2; title 수면과 회복 | GABA Guide; scrollWidth 390 = viewport 390; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#recovery-break",
+      "captured_at": "2026-10-04T04:58:35Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RECOVERY-TOUCH",
+      "claim_refs": ["C-030"]
     }
   ]
 }
