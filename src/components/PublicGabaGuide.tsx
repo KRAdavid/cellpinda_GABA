@@ -1521,7 +1521,7 @@ export default function PublicGabaGuide() {
       </header>
       {menuOpen ? <button type="button" className="guide-menu-backdrop" aria-label="메뉴 닫기" onClick={() => { setMenuOpen(false); window.requestAnimationFrame(() => menuToggleRef.current?.focus()); }} /> : null}
 
-      <main id="guide-main">
+      <main id="guide-main" tabIndex={-1}>
         <section className="guide-hero guide-hero-story" id="top" aria-labelledby="guide-hero-heading" style={{ '--guide-hero-image': `url(${gabaNaturalHero})` } as CSSProperties}>
           <div className="guide-hero-copy">
             <h1 id="guide-hero-heading"><span>저속노화,<br />회복하는 밤에서 시작됩니다</span><em>그 회복의 신호를<span className="guide-mobile-break"><br /></span>{' '}<span className="guide-hero-gaba-line">GABA에서<span className="guide-mobile-break"><br /></span>{' '}읽습니다</span></em></h1>
