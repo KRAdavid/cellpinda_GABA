@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — b3fcffb — 2026-10-05
+
+- 430px 이하 좁은 휴대폰에서 절대 위치 헤더 컨트롤이 가로 안전영역과 어긋날 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #245에서 메뉴·글자 크기·공유 버튼의 오른쪽 inset을 보정했다. 공유 완료 토스트에도 좌우 안전영역을 명시했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 UI 계약(v72), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1601035 bytes로 예산 안이다.
+- PR #245 필수 checks, main workflow 37229660026의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate b3fcffbc5acb5515e45facd579c44e3d34b9c53c는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-HEADER-SAFE-AREA-20261005, E-UI-CONTRACT-MOBILE-HEADER-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-MOBILE-HEADER-SAFE-AREA-20261005, E-LIVE-PUBLIC-MOBILE-HEADER-SAFE-AREA-20261005.
+
 ## Release Recheck — 06d737f — 2026-10-05
 
 - 모바일에서 공유·복사 완료 토스트가 iPhone 하단 홈 인디케이터와 겹칠 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #244에서 700px 이하 토스트의 오른쪽·하단·좌우 안전영역 기준을 보정했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

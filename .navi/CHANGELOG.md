@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 좁은 모바일 헤더 안전영역 보정 — b3fcffb — 2026-10-05
+
+- 430px 이하 휴대폰에서 메뉴·글자 크기·공유 버튼의 절대 위치를 오른쪽 안전영역 안으로 보정하고, 공유 완료 토스트의 좌우 안전영역도 명시했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #245와 main 배포 37229660026, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 헤더 정렬·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-HEADER-SAFE-AREA-20261005, E-UI-CONTRACT-MOBILE-HEADER-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-MOBILE-HEADER-SAFE-AREA-20261005, E-LIVE-PUBLIC-MOBILE-HEADER-SAFE-AREA-20261005.
+
 ## 공유 피드백 토스트 하단 안전영역 보정 — 06d737f — 2026-10-05
 
 - 모바일 공유·복사 완료 토스트가 iPhone 하단 홈 인디케이터와 겹치지 않도록 700px 이하에서 오른쪽·하단·좌우 안전영역을 반영했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

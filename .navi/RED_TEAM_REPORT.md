@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — b3fcffb
+
+- 공격 관점에서 확인한 실패 모드는 430px 이하 좁은 휴대폰의 절대 위치 헤더 컨트롤이 가로 안전영역 안쪽으로 이동하지 않아 메뉴·글자 크기·공유 조작이 가장자리와 겹칠 수 있는 것이었다. PR #245에서 오른쪽 안전영역을 컨트롤 간격을 보존한 채 반영하고, 공유 완료 토스트에는 좌우 안전영역을 명시했다.
+- UI 계약 v72, typecheck, 127개 테스트, production build, PR #245 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 헤더 정렬·안전영역 렌더와 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MOBILE-HEADER-SAFE-AREA-20261005, E-UI-CONTRACT-MOBILE-HEADER-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-MOBILE-HEADER-SAFE-AREA-20261005, E-LIVE-PUBLIC-MOBILE-HEADER-SAFE-AREA-20261005.
+
 ## Recheck — 2026-10-05 — 06d737f
 
 - 공격 관점에서 확인한 실패 모드는 모바일 공유·복사 완료 토스트가 하단 홈 인디케이터와 겹쳐 사용자가 복사·공유 결과를 확인하지 못할 수 있는 것이었다. PR #244에서 700px 이하 토스트에 하단·좌우 안전영역을 반영했다.
