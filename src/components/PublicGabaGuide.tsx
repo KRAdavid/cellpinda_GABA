@@ -1161,6 +1161,7 @@ export default function PublicGabaGuide() {
   const selectExpertVideo = (id: string) => {
     pendingChapterNavigation.current = null;
     chapterNavigationLockUntil.current = 0;
+    setActiveChapterId('expert-videos');
     const isNewVideo = id !== activeVideoId;
     const selectedVideo = expertVideos.find((video) => video.id === id);
     if (selectedVideo) {
@@ -1252,20 +1253,25 @@ export default function PublicGabaGuide() {
   };
 
   const sharePage = async () => {
-    const shareTitle = activeChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작되는 GABA' : `${activeReadingLabel} · GABA Guide`;
-    const shareText = activeChapterId === 'expert-videos'
+    const selectedVideoRoute = window.location.hash === '#expert-videos' && new URLSearchParams(window.location.search).has('video');
+    const shareChapterId = selectedVideoRoute ? 'expert-videos' : activeChapterId;
+    const shareReadingLabel = shareChapterId === 'expert-videos' && activeChapterId !== 'expert-videos'
+      ? readingChapters.find((chapter) => chapter.id === 'expert-videos')?.label ?? '전문가 영상'
+      : activeReadingLabel;
+    const shareTitle = shareChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작되는 GABA' : `${shareReadingLabel} · GABA Guide`;
+    const shareText = shareChapterId === 'expert-videos'
       ? `${activeVideo.title} 영상을 보며 GABA를 읽는 공개 안내서입니다.`
-      : `${activeReadingLabel}에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서입니다.`;
+      : `${shareReadingLabel}에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서입니다.`;
     const shareUrl = new URL(window.location.href);
     shareUrl.searchParams.set('view', 'guide');
-    if (activeChapterId === 'research' && activeResearchTopicId) {
+    if (shareChapterId === 'research' && activeResearchTopicId) {
       shareUrl.hash = `research-${activeResearchTopicId}`;
-    } else if (activeChapterId === 'top') {
+    } else if (shareChapterId === 'top') {
       shareUrl.searchParams.delete('video');
       shareUrl.hash = 'top';
     } else {
-      shareUrl.hash = activeChapterId;
-      if (activeChapterId === 'expert-videos') shareUrl.searchParams.set('video', activeVideo.id);
+      shareUrl.hash = shareChapterId;
+      if (shareChapterId === 'expert-videos') shareUrl.searchParams.set('video', activeVideo.id);
       else shareUrl.searchParams.delete('video');
     }
     const shareHref = shareUrl.toString();
