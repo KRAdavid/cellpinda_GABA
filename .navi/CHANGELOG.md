@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 수면과 회복 연결 문구 명료화 공개 배포: 2026-10-04 / candidate `eded7a9`
+
+상단 진행 레일의 모호한 `이어 읽기 / 12`를 소비자가 바로 이해할 수 있는 `다음 장으로 이어져요`로 정리했다. PR #177, main workflow `37164504662`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 문구·aria-label·제목·가로 폭·브라우저 오류를 확인했고 320px·1440px 대표 감사도 통과했다. 한 차례 YouTube iframe의 Chrome Permissions Policy 경고가 관찰됐으나 즉시 재실행에서 재현되지 않아 외부 iframe 잔여 검증으로 기록했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-INTERLUDE-COPY-20261004`, `E-PLAYWRIGHT-INTERLUDE-COPY-20261004`, `E-DEPLOY-PIPELINE-INTERLUDE-COPY-20261004`, `E-LIVE-PUBLIC-INTERLUDE-COPY-20261004`.
+
 ## 같은 페이지 해시 맥락 동기화 공개 배포: 2026-10-04 / candidate `a8689a3`
 
 같은 공개 안내서 안에서 해시가 바뀔 때 연구 선택과 이전 장 제목·진행 레일이 어긋날 수 있던 상태 경합을 보완했다. 공통 해시→장 변환기와 현재 해시가 아닌 초기 정렬 타이머 중단을 적용했다. PR #176, main workflow `37163479968`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 recovery-break→research-skin→expert-videos 이동, 제목·진행 레일·가로 폭·브라우저 오류 없음을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

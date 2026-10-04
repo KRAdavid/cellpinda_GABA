@@ -1,5 +1,14 @@
 # Completion Report
 
+## Interlude Copy Release Gate — eded7a9 — 2026-10-04
+
+- PR #177에서 수면과 회복 연결 구간의 상단 진행 문구를 `다음 장으로 이어져요`로 정리하고, 보조기기 안내와 공개 화면의 의미를 맞췄다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px Chrome fallback, 320px·1440px 대표 감사, PR checks, main workflow `37164504662`, Pages·라이브 smoke·release status·live validator candidate `eded7a9`가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`/public URL 없음, Smart Store only, removed750 유지.
+- 한 차례 YouTube iframe의 Chrome Permissions Policy `compute-pressure` 경고가 있었으나 즉시 재검증에서 재현되지 않았다. 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-INTERLUDE-COPY-20261004`, `E-PLAYWRIGHT-INTERLUDE-COPY-20261004`, `E-DEPLOY-PIPELINE-INTERLUDE-COPY-20261004`, `E-LIVE-PUBLIC-INTERLUDE-COPY-20261004`.
+
 ## Same-page Hash Context Release Gate — a8689a3 — 2026-10-04
 
 - PR #176에서 같은 페이지 해시 이동 시 장 제목·읽기 진행 레일·연구 선택 상태가 함께 바뀌도록 보완했다. 초기 진입 안정화 타이머는 새 해시를 덮어쓰지 않는다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 수면과 회복 연결 문구 명료화 레드팀 재검증 — eded7a9 — 2026-10-04
+
+- 공개 390px에서 `#recovery-break`에 직접 진입해 `다음 장으로 이어져요`가 상단 진행 레일에 표시되고, 제목·aria-label·가로 폭이 함께 유지되는지 확인했다. 320px과 1440px에서도 가로 넘침은 없었다.
+- 공개 전체 흐름에서 한 차례 YouTube iframe의 Chrome `compute-pressure` Permissions Policy 경고가 발생했지만, 같은 검증을 즉시 재실행한 결과 page/console errors가 없었다. 사이트 코드 오류가 아닌 외부 iframe 브라우저 경고로 분류하고, 영상 임베드 브라우저별 재검증 항목으로 남긴다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-INTERLUDE-COPY-20261004`, `E-PLAYWRIGHT-INTERLUDE-COPY-20261004`, `E-DEPLOY-PIPELINE-INTERLUDE-COPY-20261004`, `E-LIVE-PUBLIC-INTERLUDE-COPY-20261004`.
+
 ## 같은 페이지 해시 맥락 동기화 레드팀 재검증 — a8689a3 — 2026-10-04
 
 - 공개 390px에서 `recovery-break`에 진입한 뒤 같은 페이지 해시를 `research-skin`, `expert-videos`로 바꾸어 공격적으로 확인했다. 연구 선택·스크롤 위치·브라우저 제목·진행 레일이 각각 피부 연구·전문가 영상으로 함께 바뀌었다.

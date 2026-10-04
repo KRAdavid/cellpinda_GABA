@@ -90,6 +90,12 @@
       "statement": "같은 공개 안내서 안에서 브라우저 해시가 바뀌어도 읽기 장 제목·진행 레일·연구 선택 상태가 함께 이동하며, 초기 정렬 타이머가 새 공유 맥락을 덮어쓰지 않는다.",
       "evidence_refs": ["E-LOCAL-BUILD-HASH-CONTEXT-20261004", "E-PLAYWRIGHT-HASH-CONTEXT-20261004", "E-DEPLOY-PIPELINE-HASH-CONTEXT-20261004", "E-LIVE-PUBLIC-HASH-CONTEXT-20261004"],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-016",
+      "statement": "수면과 회복 연결 구간의 상단 진행 문구가 일반 독자에게 다음 장으로 이어지는 흐름을 자연스럽게 설명하며, 모바일 공개 화면과 보조기기 안내가 함께 정렬된다.",
+      "evidence_refs": ["E-LOCAL-BUILD-INTERLUDE-COPY-20261004", "E-PLAYWRIGHT-INTERLUDE-COPY-20261004", "E-DEPLOY-PIPELINE-INTERLUDE-COPY-20261004", "E-LIVE-PUBLIC-INTERLUDE-COPY-20261004"],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4302,6 +4308,50 @@
       "captured_at": "2026-10-03T23:59:54Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-HASH-CONTEXT",
       "claim_refs": ["C-015"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-INTERLUDE-COPY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면과 회복 연결 구간의 모호한 상단 진행 문구를 `다음 장으로 이어져요`로 정리한 코드가 UI 계약·typecheck·127개 테스트·production build를 통과했고, 로컬 390px Chrome fallback에서 문구·aria-label·가로 폭·오류 없음을 확인했다.",
+      "locator": "PR #177 candidate 2ab0a20; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback 390px #recovery-break visibleProgress 다음 장으로 이어져요, aria-label 현재 읽는 장: 수면과 회복. 본문 사이에 이어지는 설명입니다. 전체 12장., scrollWidth 390, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/177",
+      "captured_at": "2026-10-04T00:14:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-INTERLUDE-COPY",
+      "claim_refs": ["C-016"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-INTERLUDE-COPY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본 390px Chrome fallback의 수면과 회복 연결 구간에서 상단 진행 문구가 `다음 장으로 이어져요`로 표시되고, 제목·aria-label·가로 폭·브라우저 오류가 정상이다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/?view=guide#recovery-break; viewport 390x844; title 수면과 회복 | GABA Guide; visibleProgress 다음 장으로 이어져요; aria-label 현재 읽는 장: 수면과 회복. 본문 사이에 이어지는 설명입니다. 전체 12장.; scrollWidth 390 equals viewportWidth; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#recovery-break",
+      "captured_at": "2026-10-04T00:18:42Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-INTERLUDE-COPY",
+      "claim_refs": ["C-016"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-INTERLUDE-COPY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #177의 release-verify·site-quality-verify가 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify, worker-readiness, Pages, 라이브 smoke, release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #177 merge eded7a94cad0a2199544a68bbc38ec59157e9e6b; PR checks 37164416872 and 37164416820; main workflow 37164504662; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37164504662",
+      "captured_at": "2026-10-04T00:18:42Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-INTERLUDE-COPY",
+      "claim_refs": ["C-016"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-INTERLUDE-COPY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연결 구간 문구 보완이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate eded7a9를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha eded7a94cad0a2199544a68bbc38ec59157e9e6b; generatedAt 2026-10-04T00:18:42.543Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T00:18:42Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-INTERLUDE-COPY",
+      "claim_refs": ["C-016"]
     }
   ]
 }

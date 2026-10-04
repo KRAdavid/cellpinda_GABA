@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T23:59:54Z",
+  "updated_at": "2026-10-04T00:18:42Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2844,6 +2844,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T23:59:54Z"
+    },
+    {
+      "id": "H-085",
+      "event": "수면과 회복 연결 구간의 상단 진행 문구가 소비자에게 어색하게 읽히던 문제를 PR #177에서 `이어 읽기 / 12`에서 `다음 장으로 이어져요`로 보완했다. 보조기기 안내 문장과 모바일 공개 표시를 함께 확인했고, 로컬 UI 계약·typecheck·127개 테스트·production build, PR #177 checks, main workflow 37164504662, live validator HTTP 200·STATIC·candidate eded7a9를 확인했다. 공개 390px 전체 흐름은 재검증에서 통과했으며 한 차례 YouTube iframe의 Chrome Permissions Policy `compute-pressure` 콘솔 경고가 관찰되었으나 즉시 재실행에서 재현되지 않은 외부 iframe 경고로 분류했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T00:18:42Z"
     }
   ]
 }
