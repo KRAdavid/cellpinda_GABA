@@ -1,5 +1,13 @@
 # Completion Report
 
+## 공개 공유 카드 분리 배포 품질 게이트 — 0e93fb3 — 2026-10-05
+
+- 공개 root·guide·research 경로의 공유 미리보기를 제품·하루리듬 카드와 분리하고, GABA 공개 안내서 전용 1200×630 JPEG와 직접 안내서 런타임 메타데이터를 배포했다.
+- 로컬 UI contract·typecheck·127 tests·production build/performance, PR #227 checks, main workflow `37211921700`의 Pages·라이브 smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- 새 과학 주장이나 제품 광고는 추가하지 않았다. 기능·배포 완료는 확인했지만 소셜 크롤러 캐시 갱신, 실제 브라우저·실기기·고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증이 남아 있어 NAVI 상태는 USER_DECISION / NOT_READY, 결과는 PASS_WITH_CONDITIONS다.
+
+증적: `E-LOCAL-BUILD-SOCIAL-PREVIEW-20261005`, `E-UI-CONTRACT-SOCIAL-PREVIEW-20261005`, `E-DEPLOY-PIPELINE-SOCIAL-PREVIEW-20261005`, `E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005`.
+
 ## 큰 글씨 읽기 모드 가독성 강화 — 5f4f6c7 — 2026-10-04
 
 - 본문·연구 도표의 큰 글씨 모드를 desktop 12%, mobile 10% 확대하고, 모바일 도표 방향 문구가 확대 상태에서도 자연스럽게 읽히도록 줄바꿈을 반영했다.

@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 공개 공유 카드 분리 — 0e93fb3 — 2026-10-05
+
+- 확인된 결함은 공개 안내서 root·guide·research의 소셜 미리보기가 GABA 안내서보다 제품·하루리듬 카드로 인식될 수 있었던 점이다. 새 1200×630 JPEG와 정적·런타임 메타데이터 계약으로 경계를 보강했다.
+- PR #227 필수 checks, main workflow `37211921700`, Pages 배포, live smoke, release status와 공개 validator가 성공했다. 공유 카드 변경은 메타데이터·시각 자산 범위에 한정됐고 연구 수치·과학 주장은 변경하지 않았다.
+- 잔여 위험은 소셜 플랫폼별 캐시 갱신 시간, Browser 플러그인·Safari/iOS/Android 실기기 검증, 실제 고령 사용자 독해성, 독립 과학·규제 감수다. 카드 이미지가 제품 효능을 암시하지 않도록 `공개 과학 정보 · 제품과 무관한 GABA 안내서` 문구를 유지했다.
+- 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-SOCIAL-PREVIEW-20261005`, `E-UI-CONTRACT-SOCIAL-PREVIEW-20261005`, `E-DEPLOY-PIPELINE-SOCIAL-PREVIEW-20261005`, `E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005`.
+
 ## 큰 글씨 읽기 모드 가독성 강화 — 5f4f6c7 — 2026-10-04
 
 - 공격 관점에서 기존 확대 폭이 고령 사용자에게 충분한지와 모바일 도표 방향 문구가 확대 상태에서 잘리는지를 점검했다. 본문·연구 도표를 desktop 12%, mobile 10% 확대하고 방향 문구를 줄바꿈하도록 해 해당 실패 모드를 보완했다.

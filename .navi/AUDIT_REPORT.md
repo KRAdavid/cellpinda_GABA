@@ -1,5 +1,14 @@
 # Audit Report
 
+## 공개 공유 카드 분리 — 0e93fb3 — 2026-10-05
+
+- 기존 공개 root·guide·research 경로가 제품·하루리듬 공유 카드와 같은 미리보기 이미지를 사용해 GABA 공개 안내서의 첫 인상이 흐려지는 배포 결함을 확인했다. 제품과 무관한 1200×630 JPEG `gaba-guide-social-card.jpg`를 추가하고 정적 HTML·직접 안내서 런타임 메타데이터를 새 카드로 통일했다.
+- PR #227 필수 checks와 로컬 UI contract·typecheck·127 tests·production build/performance를 확인했다. main workflow `37211921700`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator candidate `0e93fb3dcd66adeedee681eac3f8dbcb5ddd520c`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했고 root/research Open Graph가 새 JPEG를 가리키는 것을 확인했다.
+- 새 과학 주장이나 제품 광고는 추가하지 않았다. Browser 플러그인과 Playwright가 없어 실제 브라우저·실기기·소셜 크롤러 캐시 갱신과 독립 과학·규제 감수는 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-SOCIAL-PREVIEW-20261005`, `E-UI-CONTRACT-SOCIAL-PREVIEW-20261005`, `E-DEPLOY-PIPELINE-SOCIAL-PREVIEW-20261005`, `E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005`.
+
 ## 큰 글씨 읽기 모드 가독성 강화 — 5f4f6c7 — 2026-10-04
 
 - 기존 큰 글씨 모드의 확대 폭이 실제 읽기 보조로 체감되기 어려운 점을 확인하고, 본문·연구 도표를 desktop 12%, mobile 10% 확대했다. 모바일 도표의 방향 문구는 확대 상태에서 자연스럽게 줄바꿈되도록 보정했다.

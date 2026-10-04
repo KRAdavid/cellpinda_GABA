@@ -599,6 +599,14 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI remains `USER_DECISION` / `INTERNAL_QA_READY_WITH_CONDITIONS`; open external-validation items remain open.
 # Change Log
 
+## v44 · GABA 공개 안내서 공유 카드 분리 — 0e93fb3 — 2026-10-05
+
+- 공개 root·guide·research 공유 미리보기를 제품·하루리듬 카드와 분리하고, 제품과 무관한 1200×630 JPEG `gaba-guide-social-card.jpg`를 적용했다.
+- 로컬 UI contract·typecheck·127 tests·production build/performance, PR #227 checks, main workflow `37211921700`, Pages·라이브 smoke·release status와 공개 validator를 통과했다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SOCIAL-PREVIEW-20261005`, `E-UI-CONTRACT-SOCIAL-PREVIEW-20261005`, `E-DEPLOY-PIPELINE-SOCIAL-PREVIEW-20261005`, `E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005`.
+
 ## v43 · 모바일 기본 카드 장식 겹침 보정 — 4e558ee — 2026-10-04
 
 - 320px 화면에서 GABA 기본 설명 카드의 달 아이콘이 본문 마지막 줄과 겹치던 가독성 결함을 확인하고, 모바일 카드에 장식 전용 하단 여백을 확보했다.
