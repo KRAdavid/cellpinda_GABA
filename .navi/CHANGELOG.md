@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 비교 연구 결과 미터 보강 공개 배포: 2026-10-04 / candidate 1cc9440
+
+연구 결과 카드의 작은 선 중심 표현을 5단계 질적 미터로 보강하고 `더 많이·덜 증가/감소` 문구를 함께 표시했다. 실제 효과 크기나 수치를 뜻하지 않는다는 안내는 유지했으며, PR #205·main workflow `37190962129`·Chrome DevTools fallback 390px·1440px·live validator HTTP 200·STATIC을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-QUALITATIVE-METER-20261004, E-CDP-QUALITATIVE-METER-20261004, E-DEPLOY-PIPELINE-QUALITATIVE-METER-20261004, E-LIVE-PUBLIC-QUALITATIVE-METER-20261004.
+
 ## 연구 확장 지도 시작점·딥링크 방향 보강 공개 배포: 2026-10-04 / candidate c747f67
 
 `06 · 연구의 확장`에 진입하면 첫 연구 영역인 `인지`가 기본 활성화되고, 특정 연구 딥링크를 열면 지도·상세 카드·읽기 진행명이 같은 주제를 가리키도록 보완했다. 연구 지도에서 상세 결과로 이어지는 방향이 분명해졌으며 모바일·데스크톱 레이아웃과 제품 독립 흐름은 유지했다. PR #204, main workflow `37189726191`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.

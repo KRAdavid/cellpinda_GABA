@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 비교 연구 결과 미터 보강 공개 배포 레드팀 재검증 — 1cc9440 — 2026-10-04
+
+- 390px·1440px에서 비교 카드의 조건별 질적 미터와 `더 많이·덜 증가/감소` 문구가 함께 보이고, 도표 하단의 비정량 비교 경계가 유지되는지 확인했다. 가로 넘침은 재현되지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다. 미터는 효과 크기를 뜻하지 않지만 실제 고령 사용자 이해도에 대한 정성 검증은 아직 없다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-CDP-QUALITATIVE-METER-20261004, E-LIVE-PUBLIC-QUALITATIVE-METER-20261004.
+
 ## 연구 확장 지도 시작점·딥링크 방향 보강 공개 배포 레드팀 재검증 — c747f67 — 2026-10-04
 
 - 390px·1440px에서 연구 지도 진입 시 `인지`가 활성화되고, `#research-skin` 딥링크에서는 피부 지도·카드·읽기 진행명이 일치하는지 확인했다. 가로 넘침·page error·console error는 재현되지 않았으며 지도와 상세 결과의 방향이 유지됐다.

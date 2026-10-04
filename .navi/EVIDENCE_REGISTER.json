@@ -350,6 +350,17 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-ENTRY-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-042",
+      "statement": "비교 연구 카드에 질적 강도 미터와 `더 많이·덜 증가/감소` 문구를 함께 표시해 비교 조건과 GABA 조건의 변화 방향을 한눈에 읽을 수 있으며, 실제 효과 크기나 수치로 오인하지 않도록 비정량 비교라는 설명을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-QUALITATIVE-METER-20261004",
+        "E-CDP-QUALITATIVE-METER-20261004",
+        "E-DEPLOY-PIPELINE-QUALITATIVE-METER-20261004",
+        "E-LIVE-PUBLIC-QUALITATIVE-METER-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5706,6 +5717,50 @@
       "captured_at": "2026-10-04T08:43:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-MAP-ENTRY",
       "claim_refs": ["C-041"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-QUALITATIVE-METER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "비교 연구 카드에 질적 강도 미터와 `더 많이·덜 증가/감소` 표시를 추가한 PR #205 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #205 source commit b318598; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1491620 bytes; release manifest 70 files; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/205",
+      "captured_at": "2026-10-04T08:59:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-QUALITATIVE-METER",
+      "claim_refs": ["C-042"]
+    },
+    {
+      "id": "E-CDP-QUALITATIVE-METER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome DevTools fallback에서 인지 연구 카드의 비교 도표에 `더 많이 감소`, `덜 감소`, `덜 증가`, `더 많이 증가` 문구와 질적 미터가 모바일·데스크톱에 표시됐다. 390px·1440px에서 가로 넘침이 없었다.",
+      "locator": "Chrome headless CDP fallback at https://kradavid.github.io/gaba_info/?view=guide#research-cognition; 390x844 and 1440x1000; chart label `변화 방향 비교`; chart signals `더 많이 감소`, `덜 감소`, `덜 증가`, `더 많이 증가`; scrollWidth=clientWidth (390 and 1425 CSS px); screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/205",
+      "captured_at": "2026-10-04T09:04:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261004-QUALITATIVE-METER",
+      "claim_refs": ["C-042"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-QUALITATIVE-METER-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "비교 연구 도표 보강 PR #205가 필수 검사를 통과해 main에 병합됐고 GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #205 merge main commit 1cc9440a99bcb71e09c307905b3a032cdb67a6f8; PR checks release-verify 37190891462 and site-quality-verify 37190891496 successful; main workflow 37190962129; release-verify 111402846562 success, worker-readiness 111403017381 success, deploy-pages 111403032052 success, smoke-live 111403077852 success, release-status 111403121341 success; deploy-worker 111403032731 skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37190962129",
+      "captured_at": "2026-10-04T09:05:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-QUALITATIVE-METER",
+      "claim_refs": ["C-042"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-QUALITATIVE-METER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 새 비교 도표 번들을 제공하고, 공개 데이터·정적 번들·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 1cc9440a99bcb71e09c307905b3a032cdb67a6f8; generatedAt 2026-10-04T09:05:10.127Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Live PublicGabaGuide bundle contains `guide-outcome-lane-meter`, `변화 방향 비교`, and `더 많이`; chart note keeps the non-quantitative comparison boundary.",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-04T09:06:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-QUALITATIVE-METER",
+      "claim_refs": ["C-042"]
     }
   ]
 }

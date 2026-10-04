@@ -1,5 +1,14 @@
 # Audit Report
 
+## 비교 연구 결과 미터 보강 공개 배포 감리 — 1cc9440 — 2026-10-04
+
+- 인지·피부·수면 비교 카드의 두 조건에 질적 미터를 추가하고 `더 많이 감소`, `덜 감소`, `더 많이 증가`, `덜 증가`를 함께 표시해 결과 방향을 먼저 읽도록 보완했다. 도표 하단의 비정량 비교 안내와 출처·연구 한계 문구는 유지됐다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Chrome DevTools fallback에서 공개 390px·1440px에 `변화 방향 비교`와 네 방향 문구가 표시됐고 scrollWidth와 clientWidth가 일치했다.
+- PR #205의 필수 검사와 main workflow `37190962129`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `1cc9440a99bcb71e09c307905b3a032cdb67a6f8`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Chrome DevTools fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-QUALITATIVE-METER-20261004, E-CDP-QUALITATIVE-METER-20261004, E-DEPLOY-PIPELINE-QUALITATIVE-METER-20261004, E-LIVE-PUBLIC-QUALITATIVE-METER-20261004.
+
 ## 연구 확장 지도 시작점·딥링크 방향 보강 공개 배포 감리 — c747f67 — 2026-10-04
 
 - `06 · 연구의 확장` 진입 시 첫 연구 영역인 인지를 기본 활성화해 중앙 GABA 지도와 첫 상세 카드의 시작점을 연결했다. `#research-skin` 딥링크에서는 피부 지도 항목·피부 연구 결과 카드·읽기 진행명이 함께 활성화되며 기존 연구 카드 이동 흐름은 유지됐다.
