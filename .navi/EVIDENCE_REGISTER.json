@@ -339,6 +339,17 @@
         "E-LIVE-PUBLIC-RECOVERY-MAP-STAGE-CUE-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-041",
+      "statement": "연구 확장 지도에 진입하면 첫 연구 영역인 인지가 기본 활성화되고, 특정 연구 딥링크를 열면 해당 연구 영역·상세 카드·읽기 진행명이 함께 활성화되어 지도에서 상세 결과로 이어지는 방향이 분명하다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-ENTRY-20261004",
+        "E-PLAYWRIGHT-RESEARCH-MAP-ENTRY-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ENTRY-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-ENTRY-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5651,6 +5662,50 @@
       "captured_at": "2026-10-04T08:25:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RECOVERY-MAP-STAGE-CUE",
       "claim_refs": ["C-040"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-ENTRY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 진입 시 첫 연구 영역을 기본 활성화하고 연구 딥링크 상태를 보존한 PR #204 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #204 source commit 3dc85a1; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1491670 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/204",
+      "captured_at": "2026-10-04T08:39:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-RESEARCH-MAP-ENTRY",
+      "claim_refs": ["C-041"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-MAP-ENTRY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 연구 지도 진입 시 `인지`가 활성화되고, `#research-skin` 딥링크에서는 `피부` 지도 항목·피부 연구 결과 카드·읽기 진행명이 함께 활성화됐다. 390px·1440px 화면 폭과 오류 기준도 통과했다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at https://kradavid.github.io/gaba_info/guide/?view=guide#research and #research-skin; 390x844 and 1440x1000; initial active map item `인지`, deep-link active map item/card/reading label `피부` / `피부 연구 결과`; map items=5; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/204",
+      "captured_at": "2026-10-04T08:42:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RESEARCH-MAP-ENTRY",
+      "claim_refs": ["C-041"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-ENTRY-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 시작점 보강 PR #204가 필수 검사를 통과해 main에 병합되었고, GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #204 merge main commit c747f67ab4cac2e452eb6024316d1e3af1b4a5b4; PR checks release-verify 37189645112 and site-quality-verify 37189645120 successful; main workflow 37189726191; release-verify 111399212279 success, worker-readiness 111399391416 success, deploy-pages 111399403350 success, smoke-live 111399467923 success, release-status 111399497102 success; deploy-worker 111399403521 skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37189726191",
+      "captured_at": "2026-10-04T08:44:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-MAP-ENTRY",
+      "claim_refs": ["C-041"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-ENTRY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 지도 진입 시 `인지` 기본 활성화와 `#research-skin` 딥링크의 `피부` 상태를 모바일·데스크톱에서 직접 재현했다. 공개 번들·화면 폭·오류 기준도 통과했다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha c747f67ab4cac2e452eb6024316d1e3af1b4a5b4; generatedAt 2026-10-04T08:42:15.238Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback at 390x844 and 1440x1000; initial active map `인지`; deep-link active map/card/reading label `피부` / `피부 연구 결과`; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#research",
+      "captured_at": "2026-10-04T08:43:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-MAP-ENTRY",
+      "claim_refs": ["C-041"]
     }
   ]
 }

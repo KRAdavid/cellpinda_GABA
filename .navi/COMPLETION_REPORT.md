@@ -1,5 +1,13 @@
 # Completion Report
 
+## 연구 확장 지도 시작점·딥링크 방향 배포 품질 게이트 — c747f67 — 2026-10-04
+
+- 연구 확장 장에 진입하면 인지 연구가 기본 활성화되고 특정 연구 딥링크에서는 지도·상세 카드·읽기 진행명이 동기화되도록 보완했다. 연구 지도의 첫 읽기 방향이 명확해졌으며 기존 제품 독립 안내와 연구 결과 표현은 유지됐다.
+- PR #204 main 병합과 workflow `37189726191`의 release-verify·Pages·라이브 smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했다.
+- 로컬 및 공개 Playwright Chromium fallback 390px·1440px에서 인지 기본 활성화·피부 딥링크 동기화·가로폭·오류 기준을 통과했다. 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-ENTRY-20261004, E-PLAYWRIGHT-RESEARCH-MAP-ENTRY-20261004, E-DEPLOY-PIPELINE-RESEARCH-MAP-ENTRY-20261004, E-LIVE-PUBLIC-RESEARCH-MAP-ENTRY-20261004.
+
 ## 수면·회복 14단계 현재 위치 표시 배포 품질 게이트 — 0641f60 — 2026-10-04
 
 - 수면과 회복 14단계 지도 위에 현재 단계명과 진행 번호를 추가해 첫 방문자가 아이콘 지도와 큰 카드를 연결해 읽도록 보완했다. 단계 선택 시 지도·카드·진행 번호가 동기화되고 기존 3초 자동 전환·제품 독립 안내는 유지됐다.

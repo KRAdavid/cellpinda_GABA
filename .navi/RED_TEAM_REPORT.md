@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 연구 확장 지도 시작점·딥링크 방향 보강 공개 배포 레드팀 재검증 — c747f67 — 2026-10-04
+
+- 390px·1440px에서 연구 지도 진입 시 `인지`가 활성화되고, `#research-skin` 딥링크에서는 피부 지도·카드·읽기 진행명이 일치하는지 확인했다. 가로 넘침·page error·console error는 재현되지 않았으며 지도와 상세 결과의 방향이 유지됐다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다. 자동화와 Chromium fallback만으로 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도를 닫을 수 없다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-RESEARCH-MAP-ENTRY-20261004, E-LIVE-PUBLIC-RESEARCH-MAP-ENTRY-20261004.
+
 ## 수면·회복 14단계 현재 위치 표시 공개 배포 레드팀 재검증 — 0641f60 — 2026-10-04
 
 - 390px·1440px에서 14단계 아이콘 지도 위 현재 단계명·진행 번호가 표시되고, 14번째 단계를 선택하면 지도 표식·카드 제목·`14 / 14`가 함께 바뀌는지 확인했다. 가로 넘침·page error·console error는 재현되지 않았으며 기존 자동 전환 카드 흐름도 유지됐다.

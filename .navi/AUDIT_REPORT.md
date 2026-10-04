@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 확장 지도 시작점·딥링크 방향 보강 공개 배포 감리 — c747f67 — 2026-10-04
+
+- `06 · 연구의 확장` 진입 시 첫 연구 영역인 인지를 기본 활성화해 중앙 GABA 지도와 첫 상세 카드의 시작점을 연결했다. `#research-skin` 딥링크에서는 피부 지도 항목·피부 연구 결과 카드·읽기 진행명이 함께 활성화되며 기존 연구 카드 이동 흐름은 유지됐다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Playwright Chromium fallback으로 최신 GitHub Pages 공개본 390px·1440px에서 인지 시작점, 피부 딥링크 동기화, 연구 영역 5개, 가로폭·page/console error 0건을 확인했다.
+- PR #204의 필수 검사와 main workflow `37189726191`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `c747f67ab4cac2e452eb6024316d1e3af1b4a5b4`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-ENTRY-20261004, E-PLAYWRIGHT-RESEARCH-MAP-ENTRY-20261004, E-DEPLOY-PIPELINE-RESEARCH-MAP-ENTRY-20261004, E-LIVE-PUBLIC-RESEARCH-MAP-ENTRY-20261004.
+
 ## 수면·회복 14단계 현재 위치 표시 공개 배포 감리 — 0641f60 — 2026-10-04
 
 - `잠깐, 수면과 회복`의 14단계 아이콘 지도 위에 현재 단계명과 `01 / 14` 진행 번호를 노출해 지도와 큰 카드의 연결을 보완했다. 자동 전환과 단계 클릭 시 현재 표식·카드 제목·진행 번호가 함께 갱신되며 기존 모바일·데스크톱 정보량과 제품 독립 문구는 유지됐다.

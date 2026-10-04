@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 연구 확장 지도 시작점·딥링크 방향 보강 공개 배포: 2026-10-04 / candidate c747f67
+
+`06 · 연구의 확장`에 진입하면 첫 연구 영역인 `인지`가 기본 활성화되고, 특정 연구 딥링크를 열면 지도·상세 카드·읽기 진행명이 같은 주제를 가리키도록 보완했다. 연구 지도에서 상세 결과로 이어지는 방향이 분명해졌으며 모바일·데스크톱 레이아웃과 제품 독립 흐름은 유지했다. PR #204, main workflow `37189726191`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-ENTRY-20261004, E-PLAYWRIGHT-RESEARCH-MAP-ENTRY-20261004, E-DEPLOY-PIPELINE-RESEARCH-MAP-ENTRY-20261004, E-LIVE-PUBLIC-RESEARCH-MAP-ENTRY-20261004.
+
 ## 수면·회복 14단계 현재 위치 표시 공개 배포: 2026-10-04 / candidate 0641f60
 
 수면과 회복 카드 지도 위에 현재 단계명과 진행 번호를 추가해 아이콘 지도와 자동 전환 카드의 연결을 강화했다. 단계 클릭 시 지도 표식·카드·진행 번호가 함께 바뀌며 기존 3초 자동 전환·모바일 우선 레이아웃·제품 독립 흐름은 유지했다. PR #203, main workflow `37188742301`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
