@@ -1183,6 +1183,7 @@
 /* v47 mobile reading clarity: keep functional labels readable without enlarging decorative numerals. */
 @media(max-width:700px){
   .guide-section-number{font-size:12px}
+  .guide-hero-kicker{font-size:12px;letter-spacing:.14em}
   .guide-reading-progress-meta>span,.guide-reading-progress-meta>small{font-size:12px}
   .guide-recovery-card-footer{font-size:12px}
   .guide-recovery-thread{font-size:12px}
@@ -1194,4 +1195,9 @@
   .guide-outcome-lane-signal em{font-size:.86em}
   .guide-reading-note-panel-head strong{font-size:12px}
   .guide-header .guide-reading-size-toggle .guide-reading-size-mark{position:static;display:inline-flex;align-items:center;justify-content:center;width:auto;height:auto;min-width:22px;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal;border:0;font-size:14px;font-weight:900;letter-spacing:-.12em;line-height:1}
+}
+
+/* v49 mobile media focus: give the selected vertical expert video enough room to read without distorting its 9:16 frame. */
+@media(max-width:700px){
+  .guide-video-feature-media{max-width:250px}
 }
