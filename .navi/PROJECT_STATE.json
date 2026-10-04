@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T04:22:02Z",
+  "updated_at": "2026-10-04T04:43:04Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -278,7 +278,11 @@
         "E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004",
         "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
         "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004",
-        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
+        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004",
+        "E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004",
+        "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
+        "E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004",
+        "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -453,7 +457,11 @@
         "E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004",
         "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
         "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004",
-        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
+        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004",
+        "E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004",
+        "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
+        "E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004",
+        "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
       ],
       "owner": "UX QA"
     },
@@ -1472,7 +1480,11 @@
           "E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004",
           "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
           "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004",
-          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
+          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004",
+          "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
+          "E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004",
+          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -1529,7 +1541,9 @@
           "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
           "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004",
           "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
-          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
+          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
+          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -1581,7 +1595,9 @@
           "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
           "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004",
           "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
-          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
+          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
+          "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -3123,6 +3139,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T04:22:02Z"
+    },
+    {
+      "id": "H-098",
+      "event": "수면·회복 14단계 카드가 포인터나 키보드 포커스를 한 번만 받아도 영구 정지하던 흐름을 PR #191에서 보완했다. 읽기 중 상호작용 일시정지와 사용자가 직접 누른 일시정지를 분리해, 상호작용이 끝나면 3초 자동 전환을 재개하고 수동 정지는 유지하도록 했다. prefers-reduced-motion 환경에서는 자동 전환을 끄고 상태 문구를 명시했다. 로컬 typecheck·UI 계약·127개 테스트·production build와 성능 예산, 공개 390px·1440px Chrome fallback의 자동 전환·hover/focus 일시정지·수동 정지·reduced-motion·가로 폭·콘솔 오류를 확인했다. PR #191 checks 37177692794·37177692743, main workflow 37177762069, live candidate cbf05f6와 정적 공개 데이터·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T04:43:04Z"
     }
   ]
 }

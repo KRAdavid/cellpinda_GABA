@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 수면·회복 자동 카드 읽기 흐름 레드팀 재검증 — cbf05f6 — 2026-10-04
+
+- 자동 카드가 독자를 방해하지 않는지 확인했다. 기본 상태에서는 3초 후 1→2단계로 이동하고, 카드 영역에 포인터를 두거나 키보드 포커스를 둔 동안에는 현재 카드가 유지되며, 상호작용이 끝나면 자동 전환이 다시 시작된다. 직접 `잠시 멈춤`을 누른 경우에는 1단계가 유지된다.
+- reduced-motion 설정에서는 카드가 자동 전환되지 않고 상태 문구가 명시된다. 390px·1440px에서 단계 표시·자연 이미지·카드 하단 진행선·다음 장 연결이 화면 안에 유지되며 page error·console error·모바일 가로 넘침은 없었다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 결과는 PASS_WITH_CONDITIONS다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004, E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004, E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004, E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004.
+
 ## 모바일 연구 결과 도표 보조문구 가독성 레드팀 재검증 — 43e5942 — 2026-10-04
 
 - 공개 320px·390px에서 연구 결과 도표의 비교 조건·GABA 조건, 감소 표기와 시각 요소 설명문이 읽히는지 확인했다. 768px·1440px에서도 도표 카드가 화면 안에 유지된다.

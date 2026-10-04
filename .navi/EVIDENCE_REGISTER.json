@@ -209,6 +209,17 @@
         "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-029",
+      "statement": "수면·회복 14단계 카드가 기본 상태에서 3초마다 전환되고, 포인터·키보드로 읽는 동안만 일시정지했다가 상호작용이 끝나면 재개되며, 사용자가 직접 누른 일시정지는 유지되고 reduced-motion 환경에서는 자동 전환을 끈다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004",
+        "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
+        "E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004",
+        "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5004,6 +5015,50 @@
       "captured_at": "2026-10-04T04:22:02Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-CHART-LEGIBILITY",
       "claim_refs": ["C-028"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "읽기 중 자동 카드 일시정지와 재생 흐름을 보완한 후보가 typecheck·UI 계약·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #191 source commit 825d2dd; pnpm run typecheck PASS; pnpm run validate:ui-contract PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1483144 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/191",
+      "captured_at": "2026-10-04T04:37:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-RECOVERY-AUTOPLAY",
+      "claim_refs": ["C-029"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 Chrome fallback에서 390px·1440px 수면·회복 카드의 자동 전환, hover·focus 상호작용 중지, 수동 일시정지, reduced-motion 상태, 가로 폭과 콘솔 오류 기준을 통과했다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:4173/guide/?view=guide#recovery-break; 390x844 and 1440x1000; auto 1→2 after 3.4s; hover holds 1 then resumes after leave; manual pause holds 1; reduced-motion holds 1 and announces 접근성을 위해 자동 전환 꺼짐; errors []; scrollWidth 390 = viewport 390",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/191",
+      "captured_at": "2026-10-04T04:37:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RECOVERY-AUTOPLAY",
+      "claim_refs": ["C-029"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #191 검증이 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #191 merge main commit cbf05f6f68dce62f64996a613796b7be195005e4; PR checks 37177692794 and 37177692743 successful; main workflow 37177762069; release-verify success, worker-readiness success, deploy-pages success, smoke-live success, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37177762069",
+      "captured_at": "2026-10-04T04:43:04Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RECOVERY-AUTOPLAY",
+      "claim_refs": ["C-029"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 GitHub Pages 공개본은 새 main candidate를 제공하며, 수면·회복 카드의 자동 전환·읽기 중지·수동 일시정지·reduced-motion과 모바일 레이아웃을 공개 URL에서 재현했다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha cbf05f6f68dce62f64996a613796b7be195005e4; generatedAt 2026-10-04T04:43:04.091Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback: 390x844 auto/hover/manual/reduced-motion, 1440x1000 desktop; errors []; scrollWidth 390 = viewport 390",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#recovery-break",
+      "captured_at": "2026-10-04T04:43:04Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RECOVERY-AUTOPLAY",
+      "claim_refs": ["C-029"]
     }
   ]
 }

@@ -1,5 +1,15 @@
 # Audit Report
 
+## 수면·회복 자동 카드 읽기 흐름 감사 — cbf05f6 — 2026-10-04
+
+- 수면·회복 14단계 카드가 포인터나 키보드 포커스를 한 번만 받아도 영구 정지하던 흐름을 확인하고, 읽기 중 상호작용 일시정지와 사용자가 직접 누른 일시정지를 분리했다. 섹션을 벗어나면 3초 자동 전환을 재개하고, 사용자가 직접 정지한 경우에는 정지 상태를 유지한다.
+- reduced-motion 환경에서는 자동 전환을 끄고 `접근성을 위해 자동 전환 꺼짐`을 표시한다. 카드 단계·자연 이미지 톤·연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 Chrome fallback 390px·1440px의 자동 전환·hover/focus 일시정지·수동 정지·reduced-motion·가로폭·콘솔 오류를 확인했다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했다.
+- PR #191 checks 37177692794·37177692743, main workflow 37177762069의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 candidate cbf05f6에서 HTTP 200·STATIC·공개 데이터 정합성을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004, E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004, E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004, E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004.
+
 ## 모바일 연구 결과 도표 보조문구 가독성 감사 — 43e5942 — 2026-10-04
 
 - 연구 결과 도표의 증가·감소 방향 표기와 시각 요소 설명문이 작은 보조문구로 남아 있던 상태를 확인하고, 모바일에서 방향 표기는 12.04px, 설명문은 12.6–13.02px로 키웠다. 320px 이하에서도 한 열 구조와 가로폭을 유지했다.

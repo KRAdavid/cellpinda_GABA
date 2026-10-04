@@ -1,5 +1,14 @@
 # Completion Report
 
+## 수면·회복 자동 카드 읽기 흐름 공개 배포 게이트 — cbf05f6 — 2026-10-04
+
+- PR #191에서 수면·회복 14단계 카드의 상호작용 일시정지와 사용자 수동 일시정지를 분리했다. 읽기 중에는 현재 카드를 유지하고, 상호작용이 끝나면 3초 자동 전환을 재개하며 reduced-motion에서는 자동 전환을 끈다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, 공개 390px·1440px Chrome fallback, PR checks, main workflow 37177762069, Pages·라이브 smoke·release status·live validator candidate cbf05f6가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser HOLD/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 USER_DECISION / NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004, E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004, E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004, E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004.
+
 ## 모바일 연구 결과 도표 보조문구 공개 배포 게이트 — 43e5942 — 2026-10-04
 
 - PR #190에서 연구 결과 도표의 모바일 증가·감소 방향 표기와 시각 요소 설명문을 키워, 320px·390px에서도 핵심 비교가 먼저 읽히도록 보완했다. 연구 수치·출처·제품 독립 경계는 유지했다.

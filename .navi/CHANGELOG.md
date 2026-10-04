@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 수면·회복 자동 카드 읽기 흐름 공개 배포: 2026-10-04 / candidate cbf05f6
+
+수면·회복 14단계 카드가 포인터나 키보드 포커스를 한 번만 받아도 영구 정지하던 흐름을 보완했다. 읽기 중 상호작용 일시정지와 사용자가 직접 누른 일시정지를 분리해, 상호작용이 끝나면 3초 자동 전환을 재개하고 수동 정지는 유지한다. reduced-motion 환경에서는 자동 전환을 끄고 상태 문구를 표시한다. PR #191, main workflow 37177762069, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004, E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004, E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004, E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004.
+
 ## 모바일 연구 결과 도표 보조문구 가독성 공개 배포: 2026-10-04 / candidate 43e5942
 
 연구 결과 도표의 모바일 증가·감소 방향 표기와 시각 요소 설명문을 키워 320px·390px에서도 핵심 비교가 먼저 읽히도록 보완했다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다. PR #190, main workflow 37176650203, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
