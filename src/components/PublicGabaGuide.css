@@ -1385,3 +1385,16 @@
   .guide-recovery-map{gap:12px 2px}
   .guide-recovery-map-icon{width:38px;height:38px}
 }
+
+/* v59 research map touch rhythm: keep the five mobile topic controls readable and easy to tap. */
+@media(max-width:700px){
+  .guide-research-map{min-height:320px}
+  .guide-research-map-item{width:80px;min-width:80px;min-height:82px;padding:9px 5px;touch-action:manipulation}
+  .guide-research-map-dot{width:40px;height:40px}
+}
+@media(max-width:350px){
+  .guide-research-map{min-height:310px}
+  .guide-research-map-item{width:76px;min-width:76px;min-height:78px;padding:8px 4px}
+  .guide-research-map-item strong{font-size:12px}
+  .guide-research-map-dot{width:38px;height:38px}
+}
