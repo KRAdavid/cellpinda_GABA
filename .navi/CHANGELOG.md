@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 전문가 영상 로딩 포스터 연속성 공개 배포: 2026-10-04 / candidate `44337e5`
+
+전문가 영상 선택 직후 어두운 빈 iframe처럼 보이던 순간을 보완했다. 같은 Shorts 썸네일을 9:16 프레임에 유지하고 로딩 상태만 겹쳐 보여, 실제 영상이 준비될 때까지 화면의 시각적 연속성을 지킨다. PR #179, main workflow `37166334839`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-LOADING-POSTER-20261004`, `E-PLAYWRIGHT-VIDEO-LOADING-POSTER-20261004`, `E-DEPLOY-PIPELINE-VIDEO-LOADING-POSTER-20261004`, `E-LIVE-PUBLIC-VIDEO-LOADING-POSTER-20261004`.
+
 ## 모바일 보조 문구·전문가 영상 영역 고도화 공개 배포: 2026-10-04 / candidate `a2a2d3f`
 
 320px 모바일 첫 화면의 보조 문구를 12px로 조정해 읽기성을 높이고, 전문가 세로 영상 선택 영역을 250x444px로 확장해 9:16 비율을 유지했다. PR #178, main workflow `37165443025`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 320px·390px Chrome fallback에서 가로 넘침·브라우저 오류 없이 문구와 영상 프레임을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

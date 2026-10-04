@@ -102,6 +102,12 @@
       "statement": "모바일 첫 화면의 보조 문구가 좁은 화면에서도 읽기 쉬운 크기로 표시되고, 선택한 전문가 세로 영상이 원본 비율을 유지하면서 더 충분한 시각 영역을 제공한다.",
       "evidence_refs": ["E-LOCAL-BUILD-MOBILE-LABEL-MEDIA-20261004", "E-PLAYWRIGHT-MOBILE-LABEL-MEDIA-20261004", "E-DEPLOY-PIPELINE-MOBILE-LABEL-MEDIA-20261004", "E-LIVE-PUBLIC-MOBILE-LABEL-MEDIA-20261004"],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-018",
+      "statement": "전문가 영상 선택 직후 iframe이 로딩되는 동안에도 선택한 Shorts 썸네일과 9:16 프레임이 유지되어 사용자가 빈 화면으로 인식하지 않으며, 영상 재생·공유 흐름과 모바일 가로 폭이 보존된다.",
+      "evidence_refs": ["E-LOCAL-BUILD-VIDEO-LOADING-POSTER-20261004", "E-PLAYWRIGHT-VIDEO-LOADING-POSTER-20261004", "E-DEPLOY-PIPELINE-VIDEO-LOADING-POSTER-20261004", "E-LIVE-PUBLIC-VIDEO-LOADING-POSTER-20261004"],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4402,6 +4408,50 @@
       "captured_at": "2026-10-04T00:36:43Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-MOBILE-LABEL-MEDIA",
       "claim_refs": ["C-017"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-LOADING-POSTER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 로딩 포스터 보완을 포함한 PR #179 후보가 UI 계약·typecheck·127개 테스트·production build를 통과했고, 로컬 390px Chrome fallback에서 선택 직후 포스터 유지·iframe opacity 0·9:16 프레임·가로 폭·브라우저 오류 없음을 확인했다.",
+      "locator": "PR #179 candidate 0129c66; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback 390px loadingPosterVisible true, loadingStatusVisible true, iframeOpacity 0, mediaWidth 250, mediaHeight 444.4375, iframeCount 1, scrollWidth 390, viewportWidth 390, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/179",
+      "captured_at": "2026-10-04T00:51:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-VIDEO-LOADING-POSTER",
+      "claim_refs": ["C-018"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-VIDEO-LOADING-POSTER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본 390px Chrome fallback에서 전문가 영상 선택 직후 기존 썸네일이 유지되고 로딩 상태가 표시되며, iframe은 보이지 않는 동안에도 250x444px 9:16 프레임을 유지한다. 전체 공개 흐름과 320px·390px·1440px 대표 감사도 통과했다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/?view=guide#expert-videos; viewport 390x844; title 전문가 영상 · GABA와 수면 리듬 | GABA Guide; loadingPosterVisible true; loadingStatusVisible true; iframeOpacity 0; mediaWidth 250; mediaHeight 444.4375; iframeCount 1; scrollWidth 390 equals viewportWidth; errors []; public-flow, editorial-sweep, narrow-audit 3 passed; publishing-audit 390 and 1440 passed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-04T00:57:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-VIDEO-LOADING-POSTER",
+      "claim_refs": ["C-018"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-LOADING-POSTER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #179의 release-verify·site-quality-verify가 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify, worker-readiness, Pages, 라이브 smoke, release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #179 merge 44337e5fed7e4af8952e21f7cea25b5f119b9174; PR checks 37166280901 and 37166280896; main workflow 37166334839; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37166334839",
+      "captured_at": "2026-10-04T00:54:38Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-VIDEO-LOADING-POSTER",
+      "claim_refs": ["C-018"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-LOADING-POSTER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "영상 로딩 포스터 보완이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate 44337e5를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 44337e5fed7e4af8952e21f7cea25b5f119b9174; generatedAt 2026-10-04T00:54:38.303Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T00:54:38Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-VIDEO-LOADING-POSTER",
+      "claim_refs": ["C-018"]
     }
   ]
 }

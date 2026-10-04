@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 로딩 포스터 연속성 레드팀 재검증 — 44337e5 — 2026-10-04
+
+- 공개 390px에서 전문가 영상을 선택한 직후 썸네일이 유지되고 로딩 문구가 표시되는지, 실제 iframe이 준비되면 영상으로 전환될 수 있는지 확인했다. 프레임은 250x444px의 9:16 비율이고 가로 넘침은 없었다.
+- 포스터를 로딩 상태의 시각적 바탕으로만 사용하고 영상 iframe이 준비된 뒤 제거하도록 제한해, 기존 재생·원문 링크·공유 흐름을 바꾸지 않았다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-LOADING-POSTER-20261004`, `E-PLAYWRIGHT-VIDEO-LOADING-POSTER-20261004`, `E-DEPLOY-PIPELINE-VIDEO-LOADING-POSTER-20261004`, `E-LIVE-PUBLIC-VIDEO-LOADING-POSTER-20261004`.
+
 ## 모바일 보조 문구·전문가 영상 영역 고도화 레드팀 재검증 — a2a2d3f — 2026-10-04
 
 - 공개 320px hero와 390px 전문가 영상 화면에서 작은 보조 문구가 12px로 읽히고, 선택한 세로 영상이 250x444px의 9:16 프레임으로 유지되는지 확인했다. 가로 넘침과 앱 오류는 없었다.

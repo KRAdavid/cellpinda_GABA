@@ -1,5 +1,14 @@
 # Audit Report
 
+## 전문가 영상 로딩 포스터 연속성 감사 — 44337e5 — 2026-10-04
+
+- 전문가 영상 선택 직후 iframe이 로딩되는 동안 어두운 빈 프레임처럼 보일 수 있던 상태를 확인해, 기존 Shorts 썸네일을 같은 9:16 프레임에 유지하고 로딩 상태만 위에 표시하도록 PR #179에서 보완했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build가 통과했다. 공개 390px Chrome fallback에서 포스터 유지·iframe opacity 0·250x444px·가로 폭·오류 없음을 확인했고, 공개 320px·390px·1440px 대표 감사와 연구→영상→공유 전체 흐름도 통과했다.
+- PR #179 checks `37166280901`, `37166280896`과 main workflow `37166334839`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `44337e5`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-LOADING-POSTER-20261004`, `E-PLAYWRIGHT-VIDEO-LOADING-POSTER-20261004`, `E-DEPLOY-PIPELINE-VIDEO-LOADING-POSTER-20261004`, `E-LIVE-PUBLIC-VIDEO-LOADING-POSTER-20261004`.
+
 ## 모바일 보조 문구·전문가 영상 영역 고도화 감사 — a2a2d3f — 2026-10-04
 
 - 320px 모바일 첫 화면에서 약하게 읽힐 수 있던 보조 문구의 크기를 12px로 보완하고, 선택한 전문가 세로 영상의 표시 폭을 250px로 확장했다. 영상은 9:16 비율(390px 화면에서 250x444px)을 유지해 찌그러짐 없이 읽기·시청 영역을 개선했다.
