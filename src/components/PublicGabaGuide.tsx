@@ -1162,15 +1162,28 @@ export default function PublicGabaGuide() {
   useEffect(() => {
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.guide-research-detail-inline'));
     if (!cards.length || !('IntersectionObserver' in window)) return;
+    let frame = 0;
+    let pendingTopicId: string | null = null;
     const observer = new IntersectionObserver((entries) => {
       const visibleCard = entries
         .filter((entry) => entry.isIntersecting)
         .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
       if (!visibleCard) return;
-      startTransition(() => setActiveResearchTopicId(visibleCard.target.id.replace(/^research-/, '')));
+      pendingTopicId = visibleCard.target.id.replace(/^research-/, '');
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const nextTopicId = pendingTopicId;
+        pendingTopicId = null;
+        if (!nextTopicId) return;
+        startTransition(() => setActiveResearchTopicId(nextTopicId));
+      });
     }, { rootMargin: '-28% 0px -42% 0px', threshold: [0.15, 0.35, 0.6] });
     cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
