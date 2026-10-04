@@ -828,6 +828,7 @@ export default function PublicGabaGuide() {
   const [activeChapterId, setActiveChapterId] = useState<ActiveChapterId>('top');
   const [activeRecoveryCard, setActiveRecoveryCard] = useState(0);
   const [recoveryPaused, setRecoveryPaused] = useState(false);
+  const [recoveryInteractionPaused, setRecoveryInteractionPaused] = useState(false);
   const [recoveryReducedMotion, setRecoveryReducedMotion] = useState(false);
   const [recoveryInView, setRecoveryInView] = useState(false);
   const [activeResearchTopicId, setActiveResearchTopicId] = useState<string | null>(getInitialResearchTopicId);
@@ -869,6 +870,12 @@ export default function PublicGabaGuide() {
     : `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장.`;
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
+  const recoveryIsPaused = recoveryPaused || recoveryInteractionPaused;
+  const recoveryPlaybackLabel = recoveryReducedMotion
+    ? '접근성을 위해 자동 전환 꺼짐'
+    : recoveryIsPaused
+      ? '일시정지'
+      : '3초마다 다음 카드';
 
   useLayoutEffect(() => {
     document.title = '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide';
@@ -1044,22 +1051,31 @@ export default function PublicGabaGuide() {
   useEffect(() => {
     const section = recoveryBreakRef.current;
     if (!section) return;
-    const pauseForReading = () => setRecoveryPaused(true);
-    section.addEventListener('focusin', pauseForReading);
-    section.addEventListener('pointerenter', pauseForReading);
+    const pauseForInteraction = () => setRecoveryInteractionPaused(true);
+    const resumeAfterFocus = (event: FocusEvent) => {
+      if (event.relatedTarget instanceof Node && section.contains(event.relatedTarget)) return;
+      setRecoveryInteractionPaused(false);
+    };
+    const resumeAfterPointer = () => setRecoveryInteractionPaused(false);
+    section.addEventListener('focusin', pauseForInteraction);
+    section.addEventListener('focusout', resumeAfterFocus);
+    section.addEventListener('pointerenter', pauseForInteraction);
+    section.addEventListener('pointerleave', resumeAfterPointer);
     return () => {
-      section.removeEventListener('focusin', pauseForReading);
-      section.removeEventListener('pointerenter', pauseForReading);
+      section.removeEventListener('focusin', pauseForInteraction);
+      section.removeEventListener('focusout', resumeAfterFocus);
+      section.removeEventListener('pointerenter', pauseForInteraction);
+      section.removeEventListener('pointerleave', resumeAfterPointer);
     };
   }, []);
 
   useEffect(() => {
-    if (recoveryPaused || recoveryReducedMotion || !recoveryInView) return;
+    if (recoveryPaused || recoveryInteractionPaused || recoveryReducedMotion || !recoveryInView) return;
     const intervalId = window.setInterval(() => {
       setActiveRecoveryCard((current) => (current + 1) % recoveryCards.length);
     }, 3000);
     return () => window.clearInterval(intervalId);
-  }, [recoveryPaused, recoveryReducedMotion, recoveryInView]);
+  }, [recoveryPaused, recoveryInteractionPaused, recoveryReducedMotion, recoveryInView]);
 
   useEffect(() => {
     const map = recoveryMapRef.current;
@@ -1408,7 +1424,7 @@ export default function PublicGabaGuide() {
                 return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} data-recovery-index={index} aria-label={`${card.eyebrow} · ${index + 1}단계`} aria-controls="recovery-story-card" aria-current={index === activeRecoveryCard ? 'step' : undefined} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span><span className="guide-recovery-map-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></button>;
               })}
             </div>
-            <div id="recovery-story-card" className={`guide-recovery-card is-${recoveryCard.tone}${recoveryPaused ? ' is-paused' : ''}`} role="group" aria-label={`수면과 회복 카드 ${activeRecoveryCard + 1} / ${recoveryCards.length}: ${recoveryCard.eyebrow}`} tabIndex={0} onKeyDown={handleRecoveryKeyDown} onTouchStart={handleRecoveryTouchStart} onTouchEnd={handleRecoveryTouchEnd}>
+            <div id="recovery-story-card" className={`guide-recovery-card is-${recoveryCard.tone}${recoveryIsPaused ? ' is-paused' : ''}`} role="group" aria-label={`수면과 회복 카드 ${activeRecoveryCard + 1} / ${recoveryCards.length}: ${recoveryCard.eyebrow}`} tabIndex={0} onKeyDown={handleRecoveryKeyDown} onTouchStart={handleRecoveryTouchStart} onTouchEnd={handleRecoveryTouchEnd}>
               <span className="sr-only" aria-live="polite">카드: {recoveryCard.eyebrow}, {activeRecoveryCard + 1}단계 / {recoveryCards.length}단계</span>
               <div className="guide-recovery-card-top">
                 <div className="guide-recovery-card-copy">
@@ -1420,12 +1436,12 @@ export default function PublicGabaGuide() {
               <div className="guide-recovery-card-footer">
                 <div className="guide-recovery-progress" aria-hidden="true"><i key={activeRecoveryCard} /></div>
                 <span>{String(activeRecoveryCard + 1).padStart(2, '0')} / {String(recoveryCards.length).padStart(2, '0')}</span>
-                <span>{recoveryPaused ? '일시정지' : '3초마다 다음 카드'}</span>
+                <span>{recoveryPlaybackLabel}</span>
               </div>
             </div>
             <div className="guide-recovery-controls" aria-label="수면과 회복 카드 조작">
               <button type="button" aria-label="이전 카드" onClick={() => moveRecoveryCard(-1)}><ChevronLeft size={17} aria-hidden="true" /></button>
-              <button type="button" className="guide-recovery-toggle" aria-pressed={recoveryPaused} onClick={() => setRecoveryPaused((paused) => !paused)}>{recoveryPaused ? <Play size={13} fill="currentColor" aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}<span>{recoveryPaused ? '다시 재생' : '잠시 멈춤'}</span></button>
+              <button type="button" className="guide-recovery-toggle" aria-pressed={recoveryPaused} onClick={() => { const nextPaused = !recoveryPaused; setRecoveryPaused(nextPaused); if (!nextPaused) setRecoveryInteractionPaused(false); }}>{recoveryPaused ? <Play size={13} fill="currentColor" aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}<span>{recoveryPaused ? '다시 재생' : '잠시 멈춤'}</span></button>
               <button type="button" aria-label="다음 카드" onClick={() => moveRecoveryCard(1)}><ChevronRight size={17} aria-hidden="true" /></button>
             </div>
             <p className="guide-recovery-thread"><span>GABA란</span><i>→</i><strong>수면과 회복</strong><i>→</i><span>GABA를 읽는 시작점</span></p>
