@@ -4,10 +4,11 @@
 
 - PR #185에서 원격 YouTube 썸네일이 응답하지 않아도 주제별 자연 이미지 fallback 포스터가 보이도록 보완하고, 실제 썸네일 우선 표시와 영상 선택·즉시 재생 흐름을 유지했다. 지원하지 않는 iframe `web-share` 권한 토큰도 제거했다.
 - 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px·1440px Chrome fallback, PR checks, main workflow `37171708026`, Pages·라이브 smoke·release status·live validator candidate `c97d2ac`가 연결됐다.
+- NAVI 문서 동기화 당시 live validator candidate `88c6efd`에서도 HTTP 200·STATIC·번들 70개와 공개 경계를 재확인했다.
 - 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`/public URL 없음, Smart Store only, removed750 유지.
 - 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
 
-증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`.
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-FINAL-20261004`.
 
 ## Research Comparison Direction Release Gate — 86891bc — 2026-10-04
 

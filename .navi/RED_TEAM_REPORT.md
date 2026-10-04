@@ -5,8 +5,9 @@
 - 공개 390px·1440px에서 원격 썸네일 fallback이 동일한 회색 화면이 아니라 기존 자연 이미지 톤의 주제별 포스터로 표시되는지 확인했다. `연구 읽기` 필터 선택 후 대표 영상 제목과 활성 카드가 함께 갱신됐다.
 - 가로 넘침·page error·console error는 없었다. 실제 YouTube 썸네일이 응답하는 경우 우선 표시하는 경로와 실패 시 fallback 경로를 유지하며, `web-share` 권한 토큰 제거는 영상 선택·즉시 재생·원문 링크·공유를 변경하지 않는다.
 - 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+- NAVI 문서 동기화 당시 live candidate `88c6efd`에서도 같은 공개 경계와 정적 번들을 재확인했지만, 외부 검증 조건은 변하지 않는다.
 
-증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`.
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-FINAL-20261004`.
 
 ## 연구 결과 비교 도표 방향성 레드팀 재검증 — 86891bc — 2026-10-04
 

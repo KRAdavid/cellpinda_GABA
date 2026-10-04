@@ -150,7 +150,8 @@
         "E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004",
         "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
         "E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004",
-        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004"
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-FINAL-20261004"
       ],
       "status": "SUPPORTED"
     }
@@ -4716,6 +4717,17 @@
       "source_uri": "https://kradavid.github.io/gaba_info/",
       "captured_at": "2026-10-04T02:40:02Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-POSTERS",
+      "claim_refs": ["C-023"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-FINAL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 문서 동기화 공개본은 HTTP 200과 candidate 88c6efd를 반환했고, 전문가 영상 fallback 포스터·정적 공개 데이터·제품 독립 경계를 유지했다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 88c6efd263f864e5d57a8ccfcccea5382a08f52e; generatedAt 2026-10-04T02:44:42.468Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; code release c97d2ac and NAVI docs release 88c6efd",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T02:44:42Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-POSTERS-FINAL",
       "claim_refs": ["C-023"]
     }
   ]

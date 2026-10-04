@@ -2,9 +2,9 @@
 
 ## 전문가 영상 fallback 포스터 공개 배포: 2026-10-04 / candidate `c97d2ac`
 
-원격 YouTube 썸네일이 응답하지 않을 때도 수면·자율신경·연구·GABA란 주제를 기존 자연 이미지 톤의 fallback 포스터로 구분하도록 보완했다. 실제 썸네일은 우선 사용하며, 필터·선택·즉시 재생·출처·공유 흐름은 유지했다. 영상 재생에 필요하지 않은 iframe `web-share` 권한 토큰을 제거해 콘솔 경고를 정리했다. PR #185, main workflow `37171708026`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+원격 YouTube 썸네일이 응답하지 않을 때도 수면·자율신경·연구·GABA란 주제를 기존 자연 이미지 톤의 fallback 포스터로 구분하도록 보완했다. 실제 썸네일은 우선 사용하며, 필터·선택·즉시 재생·출처·공유 흐름은 유지했다. 영상 재생에 필요하지 않은 iframe `web-share` 권한 토큰을 제거해 콘솔 경고를 정리했다. PR #185, main workflow `37171708026`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했고, NAVI 문서 동기화 당시 candidate `88c6efd`에서도 라이브 검증을 통과했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
 
-증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`.
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-FINAL-20261004`.
 
 ## 연구 결과 비교 도표 방향성 공개 배포: 2026-10-04 / candidate `86891bc`
 
