@@ -807,6 +807,17 @@
         "E-LIVE-PUBLIC-READING-PROGRESS-NUMBERING-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-084",
+      "statement": "공개 GABA 가이드의 장 이동과 전문가 영상 선택은 guide 경로 맥락을 유지하고, 다른 장으로 이동할 때 이전 영상 query를 정리하여 새로고침·공유 대상이 현재 읽기 위치와 일치하도록 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-GUIDE-ROUTE-CONTEXT-20261005",
+        "E-UI-CONTRACT-GUIDE-ROUTE-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-GUIDE-ROUTE-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-GUIDE-ROUTE-CONTEXT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7978,6 +7989,50 @@
       "captured_at": "2026-10-04T20:26:56Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-READING-PROGRESS-NUMBERING",
       "claim_refs": ["C-002", "C-003", "C-007", "C-083"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-GUIDE-ROUTE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "장 이동과 전문가 영상 선택의 URL 맥락을 공통 처리하는 v76이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #249 source commit 77b12e63eb3629d8bddb75e8c032f64045401e6f; pnpm run validate:ui-contract PASS including route-context guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1601296 bytes <= 1650000 budget; public export, product-independent copy and research source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/249",
+      "captured_at": "2026-10-04T20:37:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-GUIDE-ROUTE-CONTEXT",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-084"]
+    },
+    {
+      "id": "E-UI-CONTRACT-GUIDE-ROUTE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 guide 경로 유지, 장 이동 시 stale expert-video query 정리, 전문가 영상 선택 URL 보존을 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs route-context assertions; replaceGuideHistory keeps view=guide, clears video when moving to a chapter, and receives the selected video ID for expert-videos; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/249",
+      "captured_at": "2026-10-04T20:37:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-GUIDE-ROUTE-CONTEXT",
+      "claim_refs": ["C-003", "C-084"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-GUIDE-ROUTE-CONTEXT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "장·영상 URL 맥락 보정 PR #249가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #249 merge main commit bd2adafd5d1112f4f6cb0465a1f9c7e94a846454; PR #249 release-verify 37232828704 job 111525956262 and site-quality-verify 37232828674 job 111525955733 successful; main workflow 37232929565 with release-verify 111526258439, worker-readiness 111526484302, deploy-pages 111526507251, smoke-live 111526545850 and release-status 111526584328 successful; deploy-worker 111526507874 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37232929565",
+      "captured_at": "2026-10-04T20:39:21Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-GUIDE-ROUTE-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-084"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-GUIDE-ROUTE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 장·전문가 영상 URL 맥락 보정과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=bd2adafd5d1112f4f6cb0465a1f9c7e94a846454 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha bd2adafd5d1112f4f6cb0465a1f9c7e94a846454; generatedAt 2026-10-04T20:40:24.186Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-04T20:40:24Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-ROUTE-CONTEXT",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-084"]
     }
   ]
 }

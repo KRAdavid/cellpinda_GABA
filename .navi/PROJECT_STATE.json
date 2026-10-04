@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T20:27:00Z",
+  "updated_at": "2026-10-04T20:40:24Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1939,7 +1939,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T17:38:44Z"
+    "last_run_at": "2026-10-04T20:40:24Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2112,7 +2112,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T17:38:44Z"
+    "last_run_at": "2026-10-04T20:40:24Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4307,6 +4307,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T20:27:00Z"
+    },
+    {
+      "id": "H-154",
+      "event": "전문가 영상을 선택한 뒤 다른 장으로 이동하면 guide 경로와 선택 영상 query가 분리되어 새로고침·공유 대상이 현재 읽는 장과 어긋날 수 있는 잔여 흐름 리스크를 확인하고 PR #249에서 공통 guide 주소 갱신기를 적용했다. 장 이동은 view=guide를 유지하면서 이전 video query를 정리하고 전문가 영상 선택은 선택 ID를 보존하도록 보완했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았고 v76 UI 계약을 추가했다. PR #249 checks, main workflow 37232929565의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate bd2adafd5d1112f4f6cb0465a1f9c7e94a846454는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T20:40:24Z"
     }
   ]
 }

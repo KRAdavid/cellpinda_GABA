@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — bd2adafd
+
+- 공격 관점에서 확인한 실패 모드는 전문가 영상 query를 가진 상태에서 장 메뉴를 누르면 guide 경로와 선택 영상 맥락이 분리되어, 새로고침이나 공유 시 실제 읽는 장과 주소가 달라지는 것이었다. PR #249에서 공통 guide 주소 갱신기를 적용해 장 이동 시 이전 영상 query를 제거하고 전문가 영상 선택 시에는 선택 ID를 보존했다.
+- UI 계약 v76, typecheck, 127개 테스트, production build, PR #249 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 URL 상태 변화의 브라우저별 렌더·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-GUIDE-ROUTE-CONTEXT-20261005, E-UI-CONTRACT-GUIDE-ROUTE-CONTEXT-20261005, E-DEPLOY-PIPELINE-GUIDE-ROUTE-CONTEXT-20261005, E-LIVE-PUBLIC-GUIDE-ROUTE-CONTEXT-20261005.
+
 ## Recheck — 2026-10-05 — 7e9adf5
 
 - 공격 관점에서 확인한 실패 모드는 번호 없는 도입부가 본문 장 수에 포함되어 `01 · 발견`이 진행 레일에서 `02 / 13`으로 보이는 것이었다. PR #248에서 도입부를 `도입부`로 분리하고 본문 진행을 `01 / 12`로 정렬했다.
