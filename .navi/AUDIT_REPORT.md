@@ -1,5 +1,14 @@
 # Audit Report
 
+## 반응형 헤더 경계 보완 감사 — 25c55f9 — 2026-10-04
+
+- 861px에서 전체 내비게이션이 조기 전환되어 오른쪽 공유 버튼이 잘리던 실제 화면 결함을 확인했다. compact 헤더와 메뉴 배경의 상한을 900px로 연장해 861px·900px에서는 메뉴형, 920px 이상에서는 전체 내비게이션으로 안정적으로 전환되도록 보완했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, 공개 390px·861px·900px·920px·1440px Chrome fallback에서 hero·큰 글씨 토글·메뉴·메뉴 배경·공유 버튼 경계를 재확인했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- PR #189와 main workflow 37175326245의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 candidate 25c55f9에서 HTTP 200·STATIC·공개 데이터 정합성을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004, E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004, E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004, E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004.
+
 ## 태블릿 헤더 큰 글씨 조절 표식 감사 — 45a01bf — 2026-10-04
 
 - 701–860px 태블릿에서 빈 버튼처럼 보이던 큰 글씨 조절 버튼에 `가+` 표식을 복원했다. 접근성용 숨김 레이블과 44px 터치 영역은 유지했다.

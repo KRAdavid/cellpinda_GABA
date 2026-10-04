@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T03:40:55Z",
+  "updated_at": "2026-10-04T03:56:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -270,7 +270,11 @@
         "E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004",
         "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
         "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
-        "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004"
+        "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004",
+        "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
+        "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
+        "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
+        "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1452,7 +1456,11 @@
           "E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004",
           "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
           "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
-          "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004"
+          "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004",
+          "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
+          "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
+          "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
+          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -1503,7 +1511,11 @@
           "E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004",
           "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
           "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
-          "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004"
+          "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004",
+          "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
+          "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
+          "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
+          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -1549,7 +1561,11 @@
           "E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004",
           "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
           "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
-          "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004"
+          "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004",
+          "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
+          "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
+          "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
+          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -2168,9 +2184,13 @@
           "E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004",
           "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
           "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
-          "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004"
+          "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004",
+          "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
+          "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
+          "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
+          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
         ],
-        "notes": "390px·320px 가로 넘침 없음, 모바일 메뉴 열린 상태의 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환, 큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로·가+에서 가−로 바뀌는 읽기 도구·직접 해시 진입 제목 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생을 유지 확인"
+        "notes": "390px·320px 가로 넘침 없음, 모바일 메뉴 열린 상태의 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환, 큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·861/900px compact 헤더와 920px 전체 내비게이션 경계·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로·가+에서 가−로 바뀌는 읽기 도구·직접 해시 진입 제목 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생을 유지 확인"
       },
       {
         "criterion_id": "AC-005",
@@ -2239,6 +2259,10 @@
           "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
           "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
           "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004",
+          "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
+          "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
+          "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
+          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004",
           "E-LOCAL-BUILD-VIDEO-LOADING",
           "E-DEPLOY-PIPELINE-VIDEO-LOADING",
           "E-LIVE-PUBLIC-VIDEO-LOADING",
@@ -3065,6 +3089,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T03:40:55Z"
+    },
+    {
+      "id": "H-096",
+      "event": "861px에서 전체 내비게이션이 조기 전환되어 오른쪽 공유 버튼이 화면 끝에서 잘리던 실제 경계 결함을 PR #189에서 확인하고, compact 헤더와 메뉴 배경의 상한을 900px로 연장했다. 로컬 UI 계약·typecheck·127개 테스트·production build와 성능 예산, 공개 390px·861px·900px·920px·1440px Chrome fallback의 hero·큰 글씨 토글·메뉴·메뉴 배경·공유 버튼 경계·콘솔 오류를 확인했다. PR #189 checks, main workflow 37175326245, live candidate 25c55f9와 정적 공개 데이터·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T03:56:00Z"
     }
   ]
 }

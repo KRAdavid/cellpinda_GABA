@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 반응형 헤더 경계 레드팀 재검증 — 25c55f9 — 2026-10-04
+
+- 861px 공개 화면에서 잘리던 공유 버튼을 재현한 뒤 compact 헤더 상한을 900px로 연장했다. 공개 861px·900px에서는 메뉴와 배경 레이어가 함께 열리고, 920px·1440px에서는 전체 내비게이션이 화면 안에 유지된다.
+- 390px·861px·900px·920px·1440px에서 페이지 정체성·hero·큰 글씨 토글·가로 폭·공유 버튼 경계·콘솔 오류를 확인했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 결과는 PASS_WITH_CONDITIONS다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004, E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004, E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004, E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004.
+
 ## 태블릿 헤더 큰 글씨 조절 표식 레드팀 재검증 — 45a01bf — 2026-10-04
 
 - 공개 768px에서 큰 글씨 조절 버튼이 빈 외곽선이 아니라 `가+` 표식과 44px 터치 영역으로 보이는지 확인했고, 320px·390px·1440px에서도 기존 표식과 헤더 균형을 유지했다.

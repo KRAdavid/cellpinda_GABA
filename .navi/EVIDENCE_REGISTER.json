@@ -187,6 +187,17 @@
         "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-027",
+      "statement": "861px 경계에서 전체 내비게이션이 조기 전환되어 오른쪽 공유 버튼이 잘리던 문제가 compact 헤더를 900px까지 연장하면서 해소되고, 390px·861px·900px·920px·1440px에서 헤더 전환·메뉴·큰 글씨 조절·가로 폭·콘솔 오류 기준을 통과한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
+        "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
+        "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
+        "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4894,6 +4905,50 @@
       "captured_at": "2026-10-04T03:40:55Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-TABLET-READING-CONTROL",
       "claim_refs": ["C-026"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "861px에서 공유 버튼이 화면 끝에 잘리던 반응형 경계 결함을 compact 헤더와 메뉴 배경의 상한을 900px로 연장해 보완한 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #189 source commit c8cc2ec; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback 861px·900px·920px·940px·960px·980px·981px·1000px·1024px; shareRight stayed inside viewport; scrollWidth equals clientWidth; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/189",
+      "captured_at": "2026-10-04T03:49:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-TABLET-BREAKPOINT",
+      "claim_refs": ["C-027"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GitHub Pages 390px·861px·900px·920px·1440px Chrome fallback에서 hero·페이지 정체성·큰 글씨 토글·메뉴 열기와 메뉴 배경을 확인했고, 861px·900px의 compact 헤더와 920px의 전체 내비게이션 전환이 자연스럽다.",
+      "locator": "Playwright 1.62.1 Chrome fallback at https://kradavid.github.io/gaba_info/guide/?view=guide#top; boundary screenshots 861px·900px·920px·940px·960px·980px·981px·1000px·1024px; interaction audit 390px·861px·900px·920px·1440px; shareVisibleInViewport true; 390/861/900 menu navOpen true and backdrop true; 920/1440 desktop nav remains visible without menu; largeText toggled true; title `저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide`; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#top",
+      "captured_at": "2026-10-04T03:56:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-TABLET-BREAKPOINT",
+      "claim_refs": ["C-027"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #189의 release-verify·site-quality-verify가 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify, worker-readiness, Pages, 라이브 smoke, release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #189 squash merge main commit 25c55f960c9759d161910a9d73781382690ed126; PR checks all successful; main workflow 37175326245; release-verify success, worker-readiness success, deploy-pages success, smoke-live success, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37175326245",
+      "captured_at": "2026-10-04T03:56:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-TABLET-BREAKPOINT",
+      "claim_refs": ["C-027"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "반응형 헤더 경계 보완이 포함된 현재 GitHub Pages 공개본은 HTTP 200과 candidate 25c55f9를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 25c55f960c9759d161910a9d73781382690ed126; generatedAt 2026-10-04T03:53:42.589Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T03:56:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-TABLET-BREAKPOINT",
+      "claim_refs": ["C-027"]
     }
   ]
 }

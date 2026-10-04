@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 반응형 헤더 경계 보완 공개 배포: 2026-10-04 / candidate 25c55f9
+
+861px에서 전체 내비게이션이 너무 일찍 열리며 오른쪽 공유 버튼이 잘리던 문제를 확인하고, compact 헤더·메뉴 배경의 상한을 900px로 연장했다. PR #189, main workflow 37175326245, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004, E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004, E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004, E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004.
+
 ## 태블릿 헤더 큰 글씨 조절 표식 공개 배포: 2026-10-04 / candidate 45a01bf
 
 701–860px 태블릿 헤더에서 빈 버튼처럼 보이던 큰 글씨 조절 버튼에 `가+` 표식을 복원했다. PR #188, main workflow 37174574201, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.

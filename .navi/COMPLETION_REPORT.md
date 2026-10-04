@@ -1,5 +1,14 @@
 # Completion Report
 
+## 반응형 헤더 경계 공개 배포 게이트 — 25c55f9 — 2026-10-04
+
+- PR #189에서 861px 전환 시 잘리던 공유 버튼을 발견하고 compact 헤더·메뉴 배경을 900px까지 연장했다. 861px·900px는 터치 안전한 메뉴형 헤더, 920px 이상은 전체 내비게이션으로 유지된다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, 공개 390px·861px·900px·920px·1440px Chrome fallback, PR checks, main workflow 37175326245, Pages·라이브 smoke·release status·live validator candidate 25c55f9가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser HOLD/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 USER_DECISION / NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004, E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004, E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004, E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004.
+
 ## 태블릿 헤더 큰 글씨 조절 표식 공개 배포 게이트 — 45a01bf — 2026-10-04
 
 - PR #188에서 701–860px 태블릿 헤더의 빈 큰 글씨 조절 버튼을 `가+` 표식이 보이는 컨트롤로 보완했다. 접근성 레이블·44px 터치 영역과 기존 모바일·데스크톱 표현은 유지했다.
