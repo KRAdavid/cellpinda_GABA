@@ -1,5 +1,13 @@
 # Completion Report
 
+## 좁은 모바일 연구 결과 카드 가독성 보강 배포 품질 게이트 — 53a7c41 — 2026-10-04
+
+- 연구 결과 카드의 좁은 화면 라벨을 보정하고 350px 이하에서 지표명·결과값·방향 그래픽을 세 줄로 재배치해 320px에서도 읽기 순서를 분명하게 했다. 390px 레이아웃과 비정량 방향 안내·출처 연결은 유지했다.
+- PR #207·#208 main 병합과 workflow `37194121269`의 release-verify·Pages·라이브 smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했다.
+- Chrome DevTools fallback 320px·390px에서 지표명·결과값·방향 그래픽 순서·가로폭 일치·오류 기준을 통과했다. 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-NARROW-SIGNAL-LABEL-20261004, E-CDP-NARROW-SIGNAL-LABEL-20261004, E-DEPLOY-PIPELINE-NARROW-SIGNAL-LABEL-20261004, E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004.
+
 ## 성장·면역 연구 방향 그래픽 배포 품질 게이트 — 074822b — 2026-10-04
 
 - 성장호르몬·면역 연구 결과 카드에 상승·하강 방향 그래픽과 자연어 결과를 추가해 모바일에서도 방향을 빠르게 읽도록 보완했다. 실제 효과 크기나 수치로 해석하지 않도록 비정량 안내와 출처 연결을 유지했다.

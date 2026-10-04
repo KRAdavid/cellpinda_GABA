@@ -372,6 +372,17 @@
         "E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-044",
+      "statement": "320px·390px 모바일 연구 결과 카드에서 지표명·결과값·방향 그래픽이 의미 단위로 읽히고, 좁은 화면에서도 가로 넘침 없이 연구 결과 흐름을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-SIGNAL-LABEL-20261004",
+        "E-CDP-NARROW-SIGNAL-LABEL-20261004",
+        "E-DEPLOY-PIPELINE-NARROW-SIGNAL-LABEL-20261004",
+        "E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5816,6 +5827,50 @@
       "captured_at": "2026-10-04T09:33:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-DIRECTION-GRAPHIC",
       "claim_refs": ["C-043"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-SIGNAL-LABEL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 카드의 좁은 화면 라벨 보정 PR #207·#208 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 320px 이하에서는 지표명·결과값·방향 그래픽을 세 줄로 배치하고, 390px에서는 기존 두 줄 흐름을 유지한다.",
+      "locator": "PR #207 source commit eb681e7; PR #208 source commit 55e5c9c; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1493067 bytes; performance budgets PASS; CSS-only final delta",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/208",
+      "captured_at": "2026-10-04T09:48:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-NARROW-SIGNAL-LABEL",
+      "claim_refs": ["C-044"]
+    },
+    {
+      "id": "E-CDP-NARROW-SIGNAL-LABEL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome DevTools fallback에서 성장호르몬 연구 결과 카드의 지표명·결과값·방향 그래픽이 320px·390px에서 읽기 순서에 맞게 표시됐고, 가로 넘침과 런타임 오류가 없었다.",
+      "locator": "Chrome CDP fallback at https://kradavid.github.io/gaba_info/?view=guide&qa=stack-final#research-growth-hormone; 320x844 and 390x844; 320px layout shows label → result → direction graphic; 390px layout remains readable; scrollWidth=clientWidth (305/305 with scrollbar and 375/375 with scrollbar); page errors []; console errors []; screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/208",
+      "captured_at": "2026-10-04T10:07:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261004-NARROW-SIGNAL-LABEL",
+      "claim_refs": ["C-044"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-SIGNAL-LABEL-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 화면 연구 결과 라벨 보강 PR #207·#208이 필수 검사를 통과해 main에 병합됐고 GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #207 merge main commit 71001345afe89d42f5081c8840885539e4b21f6d; PR #208 merge main commit 53a7c4141725928b3d85b1fa59982bbe9f9b7a10; PR #208 checks release-verify 37194042429 and site-quality-verify 37194042433 successful; main workflow 37194121269; release-verify 111412303272, worker-readiness 111412492137, deploy-pages 111412507546, smoke-live 111412537923, release-status 111412575183 successful; deploy-worker 111412507868 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37194121269",
+      "captured_at": "2026-10-04T10:05:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-NARROW-SIGNAL-LABEL",
+      "claim_refs": ["C-044"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 320px 연구 결과 카드가 지표명·결과값·방향 그래픽 순서로 표시되고, 390px에서도 연구 카드가 유지된다. 공개 번들·제품 독립 경계·오류 기준도 통과했다.",
+      "locator": "EXPECTED_RELEASE_SHA=53a7c4141725928b3d85b1fa59982bbe9f9b7a10 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 53a7c4141725928b3d85b1fa59982bbe9f9b7a10; generatedAt 2026-10-04T10:04:20.015Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Chrome CDP live at 320x844 and 390x844; scrollWidth=clientWidth; errors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=stack-final#research-growth-hormone",
+      "captured_at": "2026-10-04T10:08:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-SIGNAL-LABEL",
+      "claim_refs": ["C-044"]
     }
   ]
 }

@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 좁은 모바일 연구 결과 카드 가독성 보강 공개 배포: 2026-10-04 / candidate 53a7c41
+
+320px에서 연구 결과 라벨이 임의의 글자 단위로 끊기지 않도록 기본 폭을 보정하고, 350px 이하에서는 `지표명 → 결과값 → 방향 그래픽`의 세 줄 구조로 재배치했다. 390px 흐름은 유지했으며, PR #207·#208, main workflow `37194121269`, Chrome DevTools fallback 320px·390px, live validator HTTP 200·STATIC을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: E-LOCAL-BUILD-NARROW-SIGNAL-LABEL-20261004, E-CDP-NARROW-SIGNAL-LABEL-20261004, E-DEPLOY-PIPELINE-NARROW-SIGNAL-LABEL-20261004, E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004.
+
 ## 성장·면역 연구 방향 그래픽 공개 배포: 2026-10-04 / candidate 074822b
 
 성장호르몬·면역 연구 카드의 결과 방향을 상승·하강 그래픽과 자연어 결과로 함께 표시해 모바일과 데스크톱에서 빠르게 읽도록 보강했다. 그래픽이 실제 효과 크기나 수치를 뜻하지 않는다는 안내를 유지했으며, PR #206·main workflow `37192302993`·Chrome DevTools fallback 390px·1440px·live validator HTTP 200·STATIC을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

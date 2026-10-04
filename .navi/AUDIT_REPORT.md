@@ -1,5 +1,14 @@
 # Audit Report
 
+## 좁은 모바일 연구 결과 카드 가독성 보강 공개 배포 감리 — 53a7c41 — 2026-10-04
+
+- 320px 이하 연구 결과 카드에서 지표명·결과값·방향 그래픽을 세 줄로 분리해 의미 단위가 끊기지 않도록 보완했고, 390px에서는 기존 두 줄 흐름을 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Chrome DevTools fallback에서 공개 320px·390px 연구 카드에 읽기 순서가 표시됐고 scrollWidth와 clientWidth가 일치했으며 page error·console error가 없었다.
+- PR #207·#208 필수 검사와 main workflow `37194121269`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `53a7c4141725928b3d85b1fa59982bbe9f9b7a10`은 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Chrome DevTools fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-NARROW-SIGNAL-LABEL-20261004, E-CDP-NARROW-SIGNAL-LABEL-20261004, E-DEPLOY-PIPELINE-NARROW-SIGNAL-LABEL-20261004, E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004.
+
 ## 성장·면역 연구 방향 그래픽 보강 공개 배포 감리 — 074822b — 2026-10-04
 
 - 성장호르몬 연구 카드 4개와 면역 연구 카드 3개에 상승·하강 방향 그래픽과 자연어 결과를 함께 표시해 결과를 빠르게 읽도록 보완했다. 그래픽은 효과 크기나 수치를 뜻하지 않으며 해당 안내를 차트 설명에 유지했다.

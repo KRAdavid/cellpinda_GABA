@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 좁은 모바일 연구 결과 카드 가독성 보강 공개 배포 레드팀 재검증 — 53a7c41 — 2026-10-04
+
+- 320px에서 연구 결과 카드가 지표명 → 결과값 → 방향 그래픽 순서로 분리되고, 390px에서도 카드 흐름과 방향 그래픽이 유지되는지 확인했다. 가로 넘침·page error·console error는 재현되지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다. 자동화와 Chromium fallback만으로 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도를 닫을 수 없다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-CDP-NARROW-SIGNAL-LABEL-20261004, E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004.
+
 ## 성장·면역 연구 방향 그래픽 보강 공개 배포 레드팀 재검증 — 074822b — 2026-10-04
 
 - 390px·1440px에서 성장호르몬 카드 4개와 면역 카드 3개의 상승·하강 방향 그래픽, 자연어 결과, 비정량 안내가 함께 보이고 가로 넘침은 재현되지 않았다.
