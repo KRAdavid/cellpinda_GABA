@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 수면·회복 도입부 내비게이션 정렬 — 85b1179 — 2026-10-05
+
+- 첫 화면 뒤의 수면·회복 설명 브리지에 안정적인 `#opening-bridge` 앵커를 추가하고, 헤더의 ‘수면과 회복’ 메뉴와 읽기 진행을 첫 설명 장으로 정렬했다. 도입부에서 뒤쪽 반복 카드로 건너뛰지 않고 자연스럽게 다음 장으로 이어지도록 보완했으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #246와 main 배포 37230507157, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 딥링크 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-OPENING-BRIDGE-NAV-20261005, E-UI-CONTRACT-OPENING-BRIDGE-NAV-20261005, E-DEPLOY-PIPELINE-OPENING-BRIDGE-NAV-20261005, E-LIVE-PUBLIC-OPENING-BRIDGE-NAV-20261005.
+
 ## 좁은 모바일 헤더 안전영역 보정 — b3fcffb — 2026-10-05
 
 - 430px 이하 휴대폰에서 메뉴·글자 크기·공유 버튼의 절대 위치를 오른쪽 안전영역 안으로 보정하고, 공유 완료 토스트의 좌우 안전영역도 명시했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

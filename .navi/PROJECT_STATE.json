@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T19:50:18Z",
+  "updated_at": "2026-10-04T20:03:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4286,6 +4286,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T19:50:18Z"
+    },
+    {
+      "id": "H-151",
+      "event": "첫 화면 뒤의 수면·회복 설명 브리지가 헤더의 ‘수면과 회복’ 메뉴에서 건너뛰어져 뒤쪽 반복 카드로 이동할 수 있는 잔여 흐름 리스크를 확인하고 PR #246에서 opening-bridge 앵커를 추가했다. 헤더 메뉴와 readingChapters를 첫 설명 브리지에 정렬해 도입부에서 자연스럽게 다음 장으로 이어지도록 보강했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았고 v73 UI 계약을 추가했다. PR #246 checks, main workflow `37230507157`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate `85b1179edca779d98682f77b15ef54a497305341`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser 플러그인과 Playwright, Safari/iOS/Android 실기기가 없어 실제 딥링크 렌더·실기기·고령 사용자 독해성은 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T20:03:00Z"
     }
   ]
 }

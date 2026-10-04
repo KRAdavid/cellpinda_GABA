@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 85b1179
+
+- 공격 관점에서 확인한 실패 모드는 헤더의 ‘수면과 회복’ 메뉴가 첫 설명 브리지를 건너뛰고 뒤쪽 반복 카드로 이동해 도입부의 맥락이 끊기는 것이었다. PR #246에서 첫 브리지의 안정적인 앵커와 읽기 진행 항목을 추가하고 메뉴 도착점을 같은 장으로 정렬했다.
+- UI 계약 v73, typecheck, 127개 테스트, production build, PR #246 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 딥링크 렌더·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-OPENING-BRIDGE-NAV-20261005, E-UI-CONTRACT-OPENING-BRIDGE-NAV-20261005, E-DEPLOY-PIPELINE-OPENING-BRIDGE-NAV-20261005, E-LIVE-PUBLIC-OPENING-BRIDGE-NAV-20261005.
+
 ## Recheck — 2026-10-05 — b3fcffb
 
 - 공격 관점에서 확인한 실패 모드는 430px 이하 좁은 휴대폰의 절대 위치 헤더 컨트롤이 가로 안전영역 안쪽으로 이동하지 않아 메뉴·글자 크기·공유 조작이 가장자리와 겹칠 수 있는 것이었다. PR #245에서 오른쪽 안전영역을 컨트롤 간격을 보존한 채 반영하고, 공유 완료 토스트에는 좌우 안전영역을 명시했다.

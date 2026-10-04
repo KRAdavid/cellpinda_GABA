@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 85b1179 — 2026-10-05
+
+- AC-003 첫 화면에서 수면·회복 설명 브리지로 이어지는 헤더 내비게이션과 읽기 진행: PASS_WITH_CONDITIONS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #246와 main 공개 배포 workflow 37230507157가 성공했고, 공개 URL validator가 candidate 85b1179edca779d98682f77b15ef54a497305341를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 완료 상태는 NOT_READY를 유지한다. Browser/Playwright, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-OPENING-BRIDGE-NAV-20261005, E-UI-CONTRACT-OPENING-BRIDGE-NAV-20261005, E-DEPLOY-PIPELINE-OPENING-BRIDGE-NAV-20261005, E-LIVE-PUBLIC-OPENING-BRIDGE-NAV-20261005.
+
 ## Current Release Recheck — b3fcffb — 2026-10-05
 
 - AC-004 좁은 휴대폰 헤더 컨트롤·공유 토스트의 가로 안전영역 보정: PASS_WITH_CONDITIONS.
