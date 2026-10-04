@@ -330,6 +330,9 @@
 .guide-outcome-comparison-metric{display:grid;gap:5px;min-width:0}
 .guide-outcome-comparison-metric>strong{color:#38566a;font-size:1em;line-height:1.35;letter-spacing:-.045em;word-break:keep-all}
 .guide-outcome-comparison-metric>small{color:#9bb1bc;font-size:.786em;font-weight:750;letter-spacing:-.02em}
+.guide-outcome-comparison-verdict{display:flex;align-items:flex-start;gap:5px;margin-top:1px;color:#126f73;font-size:.714em;font-weight:850;line-height:1.35;letter-spacing:-.04em}
+.guide-outcome-comparison-verdict i{flex:0 0 auto;color:var(--guide-teal-dark);font-style:normal;font-weight:900;white-space:nowrap}
+.guide-outcome-comparison-verdict b{min-width:0;font-weight:850;word-break:keep-all}
 .guide-outcome-lanes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;min-width:0}
 .guide-outcome-lane{display:grid;gap:7px;min-width:0;padding:11px 12px;border:1px solid #d9e8ec;border-radius:11px;background:#fff}
 .guide-outcome-lane.is-result{border-color:#a9dfe0;background:#f7ffff}
@@ -1384,6 +1387,11 @@
 @media(max-width:350px){
   .guide-recovery-map{gap:12px 2px}
   .guide-recovery-map-icon{width:38px;height:38px}
+}
+
+/* v60 comparison verdict: answer each research row before the reader compares the two lanes. */
+@media(max-width:700px){
+  .guide-outcome-comparison-verdict{font-size:.8em;line-height:1.4}
 }
 
 /* v59 research map touch rhythm: keep the five mobile topic controls readable and easy to tap. */
