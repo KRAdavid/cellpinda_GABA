@@ -973,6 +973,7 @@ export default function PublicGabaGuide() {
     if (!initialResearchTopicId && targetId === 'research') setActiveResearchTopicId(researchTopics[0].id);
     if (!targetId) return;
     let cancelled = false;
+    let hashDestinationFocused = false;
     let layoutObserver: ResizeObserver | null = null;
     let layoutObserverTimer = 0;
     const alignHashTarget = () => {
@@ -986,8 +987,18 @@ export default function PublicGabaGuide() {
       root.style.scrollBehavior = previousScrollBehavior;
       window.dispatchEvent(new Event('scroll'));
     };
-    const alignWhenReady = () => alignHashTarget();
+    const focusInitialResearchDestination = () => {
+      if (cancelled || hashDestinationFocused || !initialResearchTopicId || window.location.hash.slice(1) !== targetId) return;
+      if (!document.getElementById(`research-${initialResearchTopicId}`)) return;
+      hashDestinationFocused = true;
+      focusResearchCard(initialResearchTopicId);
+    };
+    const alignWhenReady = () => {
+      alignHashTarget();
+      focusInitialResearchDestination();
+    };
     alignHashTarget();
+    focusInitialResearchDestination();
     const firstFrame = window.requestAnimationFrame(alignHashTarget);
     const settleTimers = [180, 420, 780, 1200, 1800].map((delay) => window.setTimeout(alignHashTarget, delay));
     window.addEventListener('load', alignWhenReady, { once: true });
@@ -1026,6 +1037,7 @@ export default function PublicGabaGuide() {
           if (hashAlignmentCancelled.current) return;
           scrollGuideTo(target, 'auto');
           window.dispatchEvent(new Event('scroll'));
+          if (nextResearchTopicId) focusResearchCard(nextResearchTopicId);
         });
       });
     };
