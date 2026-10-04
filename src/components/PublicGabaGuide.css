@@ -379,13 +379,14 @@
   .guide-outcome-lane-top>strong{min-height:2.5em;font-size:.9em;line-height:1.35;text-align:left}
   .guide-outcome-lane-signal{min-height:19px;gap:4px}
   .guide-outcome-lane-signal svg{width:14px;height:14px}
-  .guide-outcome-lane-signal em{font-size:.67em}
+  /* v54 mobile chart legibility: keep direction words readable for older readers. */
+  .guide-outcome-lane-signal em{font-size:.786em}
   .guide-outcome-metric{min-height:116px;padding:12px}
   .guide-outcome-metric>strong{font-size:1.643em}
   .guide-outcome-metric-track{margin-top:13px}
   .guide-outcome-signals{grid-template-columns:1fr;gap:6px}
   .guide-outcome-signal-row{padding:10px}
-  .guide-outcome-chart-note{font-size:.857em}
+  .guide-outcome-chart-note{font-size:.93em;line-height:1.65}
 }
 @media(max-width:350px){
   .guide-outcome-lanes{grid-template-columns:1fr;gap:7px}
@@ -395,7 +396,8 @@
   .guide-outcome-lane-top>strong{min-height:0;font-size:.929em;text-align:right}
   .guide-outcome-lane-signal{min-height:20px}
   .guide-outcome-lane-signal svg{width:16px;height:16px}
-  .guide-outcome-lane-signal em{font-size:.714em}
+  .guide-outcome-lane-signal em{font-size:.786em}
+  .guide-outcome-chart-note{font-size:.9em}
 }
 
 /* v8 fermentation story: connect food science, process quality, and human safety records. */
