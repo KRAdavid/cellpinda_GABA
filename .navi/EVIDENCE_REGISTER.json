@@ -176,6 +176,17 @@
         "E-LIVE-PUBLIC-MOBILE-RESEARCH-LEGEND-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-026",
+      "statement": "701–860px 태블릿 헤더의 큰 글씨 조절 버튼이 빈 버튼으로 보이지 않고 가+ 표식을 유지하며, 320px·390px·768px·1440px에서 터치 영역·가로 폭·콘솔 오류 기준을 통과한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004",
+        "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
+        "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
+        "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4839,6 +4850,50 @@
       "captured_at": "2026-10-04T03:16:52Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-MOBILE-RESEARCH-LEGEND",
       "claim_refs": ["C-025"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 헤더 큰 글씨 조절 표식을 복원한 PR #188 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #188 source commit a4c74e4; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1482740 bytes; local Playwright Chrome fallback 320x780, 390x844, 768x900 and 1440x1000; `.guide-reading-size-mark` text 가+ and visible at all viewports; scrollWidth equals clientWidth; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/188",
+      "captured_at": "2026-10-04T03:40:55Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-TABLET-READING-CONTROL",
+      "claim_refs": ["C-026"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GitHub Pages 320px·390px·768px·1440px Chrome fallback에서 큰 글씨 조절 표식 가+가 실제로 표시되고, 페이지 정체성·가로 폭·직접 해시 진입·연구 선택 흐름을 확인했다.",
+      "locator": "Playwright 1.62.1 Chrome fallback at https://kradavid.github.io/gaba_info/guide/?view=guide#top; viewport 320x780, 390x844, 768x900 and 1440x1000; `.guide-reading-size-mark` text 가+, display flex/block, non-zero 22x14 or 24x24 box; scrollWidth equals clientWidth; title `저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide`; direct hashes recovery-break, research-cognition, research-skin and expert-videos remained below the sticky header; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#top",
+      "captured_at": "2026-10-04T03:40:55Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-TABLET-READING-CONTROL",
+      "claim_refs": ["C-026"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #188의 release-verify·site-quality-verify가 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify, worker-readiness, Pages, 라이브 smoke, release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #188 squash merge main commit 45a01bf706a8703f2136806284f6be162ad17f44; PR checks all successful; main workflow 37174574201; release-verify success, worker-readiness success, deploy-pages success, smoke-live success, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37174574201",
+      "captured_at": "2026-10-04T03:40:55Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-TABLET-READING-CONTROL",
+      "claim_refs": ["C-026"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 헤더 보완이 포함된 현재 GitHub Pages 공개본은 HTTP 200과 candidate 45a01bf를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 45a01bf706a8703f2136806284f6be162ad17f44; generatedAt 2026-10-04T03:37:44.511Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T03:40:55Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-TABLET-READING-CONTROL",
+      "claim_refs": ["C-026"]
     }
   ]
 }

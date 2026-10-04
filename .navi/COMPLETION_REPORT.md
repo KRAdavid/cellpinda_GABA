@@ -1,5 +1,14 @@
 # Completion Report
 
+## 태블릿 헤더 큰 글씨 조절 표식 공개 배포 게이트 — 45a01bf — 2026-10-04
+
+- PR #188에서 701–860px 태블릿 헤더의 빈 큰 글씨 조절 버튼을 `가+` 표식이 보이는 컨트롤로 보완했다. 접근성 레이블·44px 터치 영역과 기존 모바일·데스크톱 표현은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, 공개 320px·390px·768px·1440px Chrome fallback, PR checks, main workflow 37174574201, Pages·라이브 smoke·release status·live validator candidate 45a01bf가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser HOLD/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 USER_DECISION / NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004, E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004, E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004, E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004.
+
 ## 모바일 연구 기준 범례 가독성 공개 배포 게이트 — 746fd126 — 2026-10-04
 
 - PR #187에서 모바일 연구 기준 범례를 세로 흐름으로 정리하고, 연구 기준 제목·범례·설명 글자 크기를 13px·13px·12px로 조정했다. 연구 확장 제목의 줄바꿈 뒤 공백을 보존했으며, 기존 연구 내용·수치·출처·제품 독립 경계는 유지했다.

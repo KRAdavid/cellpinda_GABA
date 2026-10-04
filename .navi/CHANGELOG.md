@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 태블릿 헤더 큰 글씨 조절 표식 공개 배포: 2026-10-04 / candidate 45a01bf
+
+701–860px 태블릿 헤더에서 빈 버튼처럼 보이던 큰 글씨 조절 버튼에 `가+` 표식을 복원했다. PR #188, main workflow 37174574201, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004, E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004, E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004, E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004.
+
 ## 모바일 연구 기준 범례 가독성 공개 배포: 2026-10-04 / candidate 746fd126
 
 모바일 연구 기준 범례를 한 줄 압축에서 세로 흐름으로 정리하고, 연구 기준 제목·범례·설명 글자 크기를 13px·13px·12px로 조정했다. 연구 확장 제목의 줄바꿈 뒤 공백도 보존해 화면과 접근성 텍스트의 문장 흐름을 맞췄다. PR #187, main workflow 37173572877, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
