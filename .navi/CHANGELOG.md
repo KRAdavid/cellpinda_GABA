@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 연구 지도에 현재 읽는 주제 연결 — 5519791 — 2026-10-05
+
+- 연구 지도 중앙에 GABA를 유지하면서 현재 읽는 연구 주제를 함께 표시해 선택된 지도 항목과 상세 연구 카드의 관계를 한눈에 이해하도록 고도화했다.
+- v84 UI 계약, typecheck, 127개 테스트, production build와 성능 예산이 통과했고 PR #261 및 main 배포 37241358621의 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator는 candidate `551979122680c2bccfcbfbdf2b420abfb7194564`에 대해 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·smartStoreOnly·removed750·provenance matched를 확인했고, live guide bundle의 현재 주제 라벨도 확인했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser/Playwright와 Safari/iOS/Android 실기기가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MAP-CURRENT-20261005, E-UI-CONTRACT-MAP-CURRENT-20261005, E-DEPLOY-PIPELINE-MAP-CURRENT-20261005, E-LIVE-PUBLIC-MAP-CURRENT-20261005.
+
 ## 연구 결과를 먼저 읽는 카드 흐름 — efc6246 — 2026-10-05
 
 - 연구 카드 제목 바로 아래에 `결과 한 줄`을 배치해 모바일 방문자가 관찰된 결과를 먼저 이해하도록 고도화했다. 기존 도표 내부의 핵심 결과 요약은 중복 표시하지 않고 연구 구성·시각 도표·상세 조건·원문 출처로 이어지게 했다.

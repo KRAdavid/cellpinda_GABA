@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 5519791 — 2026-10-05
+
+- 연구 지도에서 선택 카드만 강조되고 지도 중심에는 현재 읽는 주제가 표시되지 않아 지도와 상세 카드의 연결을 즉시 이해하기 어려운 시각적 흐름 리스크를 확인하고 PR #261에서 GABA 중심 표시는 유지하면서 중앙에 현재 연구 주제 상태 라벨을 동기화했다.
+- 로컬 UI 계약(v84), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1604100 bytes로 예산 안이다.
+- PR #261 필수 checks, main workflow 37241358621의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 551979122680c2bccfcbfbdf2b420abfb7194564는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다. 실제 live PublicGabaGuide bundle에서도 현재 연구 주제 라벨을 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MAP-CURRENT-20261005, E-UI-CONTRACT-MAP-CURRENT-20261005, E-DEPLOY-PIPELINE-MAP-CURRENT-20261005, E-LIVE-PUBLIC-MAP-CURRENT-20261005.
+
 ## Release Recheck — efc6246 — 2026-10-05
 
 - 연구 결과 카드에서 핵심 결과가 연구 구성과 도표 뒤로 밀릴 수 있는 모바일 읽기 리스크를 확인하고 PR #259에서 카드 제목 바로 아래 `결과 한 줄`을 배치했다. 도표 내부 요약의 중복 표시는 제거하고 결과 한 줄 → 연구 구성 → 시각 도표 → 상세 조건 → 원문 출처 순서로 정리했다.
