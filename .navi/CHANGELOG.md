@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 스크롤 이벤트 프레임 배칭 — 7395768 — 2026-10-05
+
+- 연구 카드 IntersectionObserver 이벤트를 requestAnimationFrame 단위로 합치고, 최신 주제만 React startTransition으로 반영해 모바일 스크롤 중 상태 갱신 경쟁을 줄였다.
+- v87 UI 계약, typecheck, 127 tests, production build/performance, PR #267 checks, main workflow 37244243638, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-RAF-20261005, E-UI-CONTRACT-RAF-20261005, E-DEPLOY-PIPELINE-RAF-20261005, E-LIVE-PUBLIC-RAF-20261005.
+
 ## 연구 지도에 현재 읽는 주제 연결 — 5519791 — 2026-10-05
 
 - 연구 지도 중앙에 GABA를 유지하면서 현재 읽는 연구 주제를 함께 표시해 선택된 지도 항목과 상세 연구 카드의 관계를 한눈에 이해하도록 고도화했다.

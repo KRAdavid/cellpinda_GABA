@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 7395768
+
+- 공격 관점에서 확인한 실패 모드는 여러 IntersectionObserver 이벤트가 짧은 스크롤 구간에 몰릴 때 현재 연구 주제 상태 갱신이 반복되어 모바일 입력과 경쟁할 수 있는 것이었다. PR #267에서 pending topic을 requestAnimationFrame으로 합치고 React startTransition으로 비긴급 반영했다.
+- UI 계약 v87, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-RAF-20261005, E-UI-CONTRACT-RAF-20261005, E-DEPLOY-PIPELINE-RAF-20261005, E-LIVE-PUBLIC-RAF-20261005.
+
 ## Recheck — 2026-10-05 — 3007891
 
 - 공격 관점에서 확인한 실패 모드는 연구 카드 IntersectionObserver가 현재 주제 표시를 일반 업데이트로 갱신해 빠른 모바일 스크롤과 같은 프레임에서 경쟁할 수 있는 것이었다. PR #265에서 startTransition으로 비긴급 상태임을 명시했다.
