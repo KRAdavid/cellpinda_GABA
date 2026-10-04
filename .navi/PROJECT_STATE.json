@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T02:47:00Z",
+  "updated_at": "2026-10-04T03:02:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -258,7 +258,11 @@
         "E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004",
         "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
         "E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004",
-        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004"
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004",
+        "E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004",
+        "E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -417,7 +421,11 @@
         "E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004",
         "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
         "E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004",
-        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004"
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004",
+        "E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004",
+        "E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004"
       ],
       "owner": "UX QA"
     },
@@ -1416,7 +1424,11 @@
           "E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004",
           "E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004",
           "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004",
+          "E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004",
+          "E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -1455,7 +1467,11 @@
           "E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004",
           "E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004",
           "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004",
+          "E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004",
+          "E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -1489,7 +1505,11 @@
           "E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004",
           "E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004",
           "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004",
+          "E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004",
+          "E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -1982,7 +2002,11 @@
           "E-LOCAL-BUILD-RESEARCH-COMPARISON-DIRECTION-20261004",
           "E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004",
           "E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-DIRECTION-20261004",
-          "E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004"
+          "E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004",
+          "E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004",
+          "E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·연구 규모의 동일 PubMed 기준 기관 비교와 별도 SCIE 분석 블록·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환·모바일 연구 카드 폭·결과 방향 라벨 12px 보정·직접 해시 진입 제목 정렬을 추가 확인"
       },
@@ -2968,6 +2992,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T02:47:00Z"
+    },
+    {
+      "id": "H-093",
+      "event": "모바일 연구 지도 아래 읽는 순서가 한 줄로 압축되어 즉시 비교하기 어려웠던 상태를 PR #186에서 보완했다. 지도·대상·결과·해석의 4단계 시각 순서표로 재구성하고 모바일 본문을 13px, 번호 원형을 30px로 고정해 독해 우선순위를 높였다. 연구 내용·수치·출처·제품 독립 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build와 성능 예산, 공개 390px·1440px Chrome fallback의 페이지 정체성·비공백·가로 폭·콘솔 오류·큰 글씨 토글·전문가 연구 필터를 확인했고, PR #186 checks, main workflow 37172733343, live candidate 76b3adc를 확인했다. 새 CRITICAL/MAJOR 결함은 없었으며 Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T03:02:00Z"
     }
   ]
 }

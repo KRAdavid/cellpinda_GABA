@@ -1,5 +1,14 @@
 # Completion Report
 
+## 모바일 연구 읽기 순서 가독성 공개 배포 게이트 — 76b3adc — 2026-10-04
+
+- PR #186에서 모바일 연구 지도 아래의 읽는 순서를 지도·대상·결과·해석 4단계 시각 순서표로 보완했다. 모바일 13px 본문과 30px 번호 원형으로 시각적 비교성을 높였고, 기존 연구 내용·수치·출처·제품 독립 경계는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, 공개 390px·1440px Chrome fallback, PR checks, main workflow 37172733343, Pages·라이브 smoke·release status·live validator candidate 76b3adc가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser HOLD/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 USER_DECISION / NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004, E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004, E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004, E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004.
+
 ## Expert Video Poster Resilience Release Gate — c97d2ac — 2026-10-04
 
 - PR #185에서 원격 YouTube 썸네일이 응답하지 않아도 주제별 자연 이미지 fallback 포스터가 보이도록 보완하고, 실제 썸네일 우선 표시와 영상 선택·즉시 재생 흐름을 유지했다. 지원하지 않는 iframe `web-share` 권한 토큰도 제거했다.

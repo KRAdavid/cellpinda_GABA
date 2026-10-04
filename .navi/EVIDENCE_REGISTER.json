@@ -154,6 +154,17 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-FINAL-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-024",
+      "statement": "모바일 연구 지도 아래 읽는 순서가 지도·대상·결과·해석의 4단계 시각 순서표로 표시되어, 연구 카드를 어떤 순서로 읽어야 하는지 한눈에 이해할 수 있으며 기존 연구 내용·수치·출처는 그대로 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004",
+        "E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4729,6 +4740,50 @@
       "captured_at": "2026-10-04T02:44:42Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-POSTERS-FINAL",
       "claim_refs": ["C-023"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 지도의 읽는 순서를 지도·대상·결과·해석 4단계 시각 순서표로 보완한 PR #186 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #186 source; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1482304 bytes; local Playwright 1.62.1 Chrome fallback 390x844 and 1440x900; read-order steps 4; no horizontal overflow; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/186",
+      "captured_at": "2026-10-04T02:57:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-RESEARCH-READ-ORDER",
+      "claim_refs": ["C-024"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px·1440px Chrome fallback에서 연구 지도 제목이 읽기 레일 아래에 정렬되고, 4단계 순서표의 단계명과 390px 13px 글자 크기, 큰 글씨 토글, 전문가 영상 연구 읽기 필터를 확인했다.",
+      "locator": "temporary Playwright 1.62.1 with Chrome channel; public https://kradavid.github.io/gaba_info/guide/?view=guide#research; viewport 390x844 and 1440x900; readOrder labels 지도/대상/결과/해석; readOrder steps 4; 390px fontSize 13px; heading top 132px/151px; largeText true; after filter title `GABA 섭취 연구 읽기`, activeCards 1, filter aria-pressed true; scrollWidth equals viewportWidth; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#research",
+      "captured_at": "2026-10-04T03:00:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RESEARCH-READ-ORDER",
+      "claim_refs": ["C-024"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #186의 release-verify·site-quality-verify가 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify, worker-readiness, Pages, 라이브 smoke, release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #186 merge 76b3adc660b85a17ee592c789fd4eea7976548c1; PR checks 37172660265 and 37172660323; main workflow 37172733343; release-verify success, worker-readiness success, deploy-pages success, smoke-live success, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37172733343",
+      "captured_at": "2026-10-04T03:00:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-READ-ORDER",
+      "claim_refs": ["C-024"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 읽기 순서 보완이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate 76b3adc를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 76b3adc660b85a17ee592c789fd4eea7976548c1; generatedAt 2026-10-04T03:00:51.272Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T03:00:51Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-READ-ORDER",
+      "claim_refs": ["C-024"]
     }
   ]
 }
