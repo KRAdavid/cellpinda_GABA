@@ -1,5 +1,14 @@
 # Audit Report
 
+## 활용에서 발효와 안전으로 이어지는 편집 전환 공개 배포 감리 — 8d493d3 — 2026-10-04
+
+- 국내외 활용 마지막 카드 아래 `다음 장 · 활용은 만들어지는 과정에서 이어집니다 → 발효와 안전` 전환을 추가해 연구 → 활용 → 만들어지는 과정의 방향을 보완했다. 다음 장의 발효와 안전 제목이 이어져 긴 페이지의 편집 리듬이 끊기지 않는다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Playwright Chromium fallback으로 로컬과 GitHub Pages 공개본 390px·1440px에서 전환부, 다음 발효와 안전 제목, 기존 인지 → 피부 연구 카드 이동, 화면 폭·page/console error 0건을 확인했다.
+- PR #201의 필수 검사와 main workflow `37186666660`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `8d493d3aa3c7cbd69733b62966574688dfa9cd42`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-APPLICATION-FERMENTATION-HANDOFF-20261004, E-PLAYWRIGHT-APPLICATION-FERMENTATION-HANDOFF-20261004, E-DEPLOY-PIPELINE-APPLICATION-FERMENTATION-HANDOFF-20261004, E-LIVE-PUBLIC-APPLICATION-FERMENTATION-HANDOFF-20261004.
+
 ## 사업자용 GABA 공유 패키지 공개 배포 감리 — 02f8fac — 2026-10-04
 
 - 마지막 이야기 공유 장에 `사업자용 활용 자료` 안내를 먼저 노출하고, `사업자용 GABA 핵심 5문장 · 바로 복사하기` 표제와 5개 카드 펼치기·복사 흐름을 유지했다. 공개 과학 카피와 제품 독립 경계는 변경하지 않았다.

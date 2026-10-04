@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 활용에서 발효와 안전으로 이어지는 편집 전환 공개 배포: 2026-10-04 / candidate 8d493d3
+
+국내외 활용 카드 뒤에 `다음 장 · 활용은 만들어지는 과정에서 이어집니다 → 발효와 안전` 전환을 추가해 연구 → 활용 → 만들어지는 과정의 방향을 한 번에 읽도록 보완했다. PR #201과 main workflow `37186666660`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-APPLICATION-FERMENTATION-HANDOFF-20261004, E-PLAYWRIGHT-APPLICATION-FERMENTATION-HANDOFF-20261004, E-DEPLOY-PIPELINE-APPLICATION-FERMENTATION-HANDOFF-20261004, E-LIVE-PUBLIC-APPLICATION-FERMENTATION-HANDOFF-20261004.
+
 ## 사업자용 GABA 공유 패키지 공개 배포: 2026-10-04 / candidate 02f8fac
 
 마지막 이야기 공유 장에 사업자용 활용 자료 안내를 먼저 노출하고, 기존 검증 표제를 유지한 5문장 공유 패키지를 펼치기·복사할 수 있도록 고도화했다. 모바일·데스크톱에서 제품 독립 정보 흐름과 Apple 톤앤매너를 유지했으며 PR #200, main workflow 37185751209, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공유 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.

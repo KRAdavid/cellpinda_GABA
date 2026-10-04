@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 활용에서 발효와 안전으로 이어지는 편집 전환 레드팀 재검증 — 8d493d3 — 2026-10-04
+
+- 국내외 활용 장의 마지막 카드 다음에 편집 전환과 발효와 안전 장이 바로 이어지는지 390px·1440px에서 확인했다. 모바일은 줄바꿈 가능한 세로 흐름, 데스크톱은 수평 handoff로 표시되며 가로 넘침·page error·console error는 재현되지 않았다.
+- 기존 인지 연구 카드의 다음 연구 버튼 → 피부 연구 카드 이동도 재현해 새 전환이 기존 연구 탐색 흐름을 깨지 않음을 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다.
+- 자동화와 Chromium fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-APPLICATION-FERMENTATION-HANDOFF-20261004, E-LIVE-PUBLIC-APPLICATION-FERMENTATION-HANDOFF-20261004.
+
 ## 사업자용 GABA 공유 패키지 공개 배포 레드팀 재검증 — 02f8fac — 2026-10-04
 
 - 마지막 장에서 사업자용 안내가 접힌 details 안에만 남아 발견되지 않는 경로를 보완한 뒤, 모바일·데스크톱에서 안내 카드가 먼저 보이고 5개 공유 문장이 펼쳐지는지 확인했다. 기존 제품 독립 문구와 공유 표제는 유지됐다.

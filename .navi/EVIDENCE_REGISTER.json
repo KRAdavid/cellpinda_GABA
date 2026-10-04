@@ -306,6 +306,17 @@
         "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-BUSINESS-SHARE-KIT-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-038",
+      "statement": "국내외 활용 카드 뒤에 발효와 안전으로 이어지는 편집 전환을 추가해 연구 → 활용 → 만들어지는 과정의 순서가 모바일·데스크톱에서 자연스럽게 읽힌다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-APPLICATION-FERMENTATION-HANDOFF-20261004",
+        "E-PLAYWRIGHT-APPLICATION-FERMENTATION-HANDOFF-20261004",
+        "E-DEPLOY-PIPELINE-APPLICATION-FERMENTATION-HANDOFF-20261004",
+        "E-LIVE-PUBLIC-APPLICATION-FERMENTATION-HANDOFF-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5486,6 +5497,50 @@
       "captured_at": "2026-10-04T07:33:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-BUSINESS-SHARE-KIT-DOCS-SYNC",
       "claim_refs": ["C-037"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-APPLICATION-FERMENTATION-HANDOFF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "국내외 활용 카드 다음에 발효와 안전으로 이어지는 편집 전환을 추가한 PR #201 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #201 source commit 1c0a831; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1489254 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/201",
+      "captured_at": "2026-10-04T07:39:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-APPLICATION-FERMENTATION-HANDOFF",
+      "claim_refs": ["C-038"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-APPLICATION-FERMENTATION-HANDOFF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 국내외 활용 마지막 카드 아래 `다음 장 · 활용은 만들어지는 과정에서 이어집니다 → 발효와 안전` 전환이 보이고 다음 발효와 안전 장이 이어졌다. 기존 연구 카드 다음 이동도 유지됐으며 모바일·데스크톱 가로폭과 브라우저 오류가 안정적이었다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:4180/guide/?view=guide#applications; 390x844 and 1440x1000; handoff text `다음 장`, `활용은 만들어지는 과정에서 이어집니다`, `발효와 안전`; fermentation heading visible after handoff; click #research-cognition .guide-research-next reaches `피부 연구 결과`; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/201",
+      "captured_at": "2026-10-04T07:42:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-APPLICATION-FERMENTATION-HANDOFF",
+      "claim_refs": ["C-038"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-APPLICATION-FERMENTATION-HANDOFF-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 → 활용 → 발효와 안전 편집 전환 PR #201이 필수 검사를 통과해 main에 병합되었고, GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #201 merge main commit 8d493d3aa3c7cbd69733b62966574688dfa9cd42; PR checks release-verify 37186592744 and site-quality-verify 37186592731 successful; main workflow 37186666660; release-verify 111389924680 success, worker-readiness 111390105470 success, deploy-pages 111390121339 success, smoke-live 111390163426 success, release-status 111390193406 success; deploy-worker 111390121724 skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37186666660",
+      "captured_at": "2026-10-04T07:46:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-APPLICATION-FERMENTATION-HANDOFF",
+      "claim_refs": ["C-038"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-APPLICATION-FERMENTATION-HANDOFF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 국내외 활용 뒤 발효와 안전으로 이어지는 편집 전환을 390px·1440px에서 재현했으며, 화면 폭·페이지 오류·콘솔 오류 없이 다음 장이 자연스럽게 표시됐다. 기존 인지 → 피부 연구 카드 이동도 유지됐다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 8d493d3aa3c7cbd69733b62966574688dfa9cd42; generatedAt 2026-10-04T07:44:38.809Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback at 390x844 and 1440x1000; handoff text and fermentation heading visible; click #research-cognition .guide-research-next reaches `피부 연구 결과`; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#applications",
+      "captured_at": "2026-10-04T07:47:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-APPLICATION-FERMENTATION-HANDOFF",
+      "claim_refs": ["C-038"]
     }
   ]
 }
