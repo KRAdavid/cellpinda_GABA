@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T14:42:06Z",
+  "updated_at": "2026-10-04T14:51:28Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -367,7 +367,11 @@
         "E-LOCAL-BUILD-NARROW-HEADER-20261004",
         "E-UI-CONTRACT-NARROW-HEADER-20261004",
         "E-DEPLOY-PIPELINE-NARROW-HEADER-20261004",
-        "E-LIVE-PUBLIC-NARROW-HEADER-20261004"
+        "E-LIVE-PUBLIC-NARROW-HEADER-20261004",
+        "E-LOCAL-BUILD-LARGE-TEXT-20261004",
+        "E-UI-CONTRACT-LARGE-TEXT-20261004",
+        "E-DEPLOY-PIPELINE-LARGE-TEXT-20261004",
+        "E-LIVE-PUBLIC-LARGE-TEXT-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1649,7 +1653,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T14:42:06Z"
+    "last_run_at": "2026-10-04T14:51:28Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1778,7 +1782,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T14:42:06Z"
+    "last_run_at": "2026-10-04T14:51:28Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3659,6 +3663,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T14:42:06Z"
+    },
+    {
+      "id": "H-132",
+      "event": "기존 큰 글씨 모드의 확대 폭이 모바일·데스크톱 모두 실제 읽기 보조로 체감되기 어려운 수준임을 확인하고 PR #226에서 본문과 연구 도표를 desktop 12%, mobile 10% 확대하도록 보강했다. 확대 상태의 도표 방향 문구는 자연스럽게 줄바꿈해 연구 결과 비교를 방해하지 않도록 했다. PR #226 필수 checks, 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, main workflow `37210637085`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `5f4f6c7cd8d429da85e2f93f3beaf29571e437fa`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser 플러그인과 Playwright 부재로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증 항목으로 남겼고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T14:51:28Z"
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 큰 글씨 읽기 모드 가독성 강화 — 5f4f6c7 — 2026-10-04
+
+- 큰 글씨 모드를 본문·연구 도표 기준 desktop 12%, mobile 10% 확대 수준으로 보강하고, 모바일 방향 문구 줄바꿈을 추가했다.
+- PR #226, main 배포 `37210637085`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·70개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 가독성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-LARGE-TEXT-20261004`, `E-UI-CONTRACT-LARGE-TEXT-20261004`, `E-DEPLOY-PIPELINE-LARGE-TEXT-20261004`, `E-LIVE-PUBLIC-LARGE-TEXT-20261004`.
+
 ## 좁은 모바일 헤더 충돌 방지 — 5215ab5 — 2026-10-04
 
 - 381–430px 화면에서 로고와 고정 메뉴·큰 글씨·공유 컨트롤이 겹치지 않도록 헤더 폭을 보정했다.

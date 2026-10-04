@@ -554,6 +554,17 @@
         "E-LIVE-PUBLIC-NARROW-HEADER-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-061",
+      "statement": "큰 글씨 모드가 본문·연구 도표를 desktop 12%, mobile 10% 확대하고 확대 상태의 도표 방향 문구를 자연스럽게 줄바꿈해 고령 사용자의 읽기 보조를 강화하며, UI 계약이 이 기준을 회귀 점검한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-LARGE-TEXT-20261004",
+        "E-UI-CONTRACT-LARGE-TEXT-20261004",
+        "E-DEPLOY-PIPELINE-LARGE-TEXT-20261004",
+        "E-LIVE-PUBLIC-LARGE-TEXT-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6713,6 +6724,50 @@
       "captured_at": "2026-10-04T14:40:36Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-HEADER",
       "claim_refs": ["C-060"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-LARGE-TEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "큰 글씨 모드의 본문·연구 도표 확대와 모바일 도표 방향 문구 줄바꿈 보강 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #226 source commit c694744; pnpm run validate:ui-contract PASS including v-large-text size and chart-label wrapping guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1499872 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/226",
+      "captured_at": "2026-10-04T14:48:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-LARGE-TEXT",
+      "claim_refs": ["C-061"]
+    },
+    {
+      "id": "E-UI-CONTRACT-LARGE-TEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 큰 글씨 모드의 desktop 12%·mobile 10% 확대와 모바일 도표 방향 문구 줄바꿈 규칙을 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v-large-text assertion; desktop .guide-final-copy and .guide-outcome-chart 1.12em, mobile 1.10em, mobile .guide-outcome-lane-signal em white-space normal; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/226",
+      "captured_at": "2026-10-04T14:48:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261004-LARGE-TEXT",
+      "claim_refs": ["C-061"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-LARGE-TEXT-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "큰 글씨 읽기 보조 강화 PR #226이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #226 merge main commit 5f4f6c7cd8d429da85e2f93f3beaf29571e437fa; PR #226 site-quality-verify job 111460726321 and release-verify job 111460726448 successful; main workflow 37210637085 with release-verify 111460932304, worker-readiness 111461144918, deploy-pages 111461165305, smoke-live 111461207249 and release-status 111461245704 successful; deploy-worker 111461165660 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37210637085",
+      "captured_at": "2026-10-04T14:50:46Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-LARGE-TEXT",
+      "claim_refs": ["C-061"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-LARGE-TEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 큰 글씨 읽기 보조 강화 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "EXPECTED_RELEASE_SHA=5f4f6c7cd8d429da85e2f93f3beaf29571e437fa pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 5f4f6c7cd8d429da85e2f93f3beaf29571e437fa; generatedAt 2026-10-04T14:49:43.776Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct browser and real-device readability remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/",
+      "captured_at": "2026-10-04T14:49:43Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-LARGE-TEXT",
+      "claim_refs": ["C-061"]
     }
   ]
 }

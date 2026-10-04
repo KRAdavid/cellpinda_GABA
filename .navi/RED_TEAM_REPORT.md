@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 큰 글씨 읽기 모드 가독성 강화 — 5f4f6c7 — 2026-10-04
+
+- 공격 관점에서 기존 확대 폭이 고령 사용자에게 충분한지와 모바일 도표 방향 문구가 확대 상태에서 잘리는지를 점검했다. 본문·연구 도표를 desktop 12%, mobile 10% 확대하고 방향 문구를 줄바꿈하도록 해 해당 실패 모드를 보완했다.
+- 로컬 UI contract·typecheck·127 tests·production build/performance, PR #226 checks, main workflow `37210637085`의 Pages·라이브 smoke·release status를 모두 확인했다. Worker는 STATIC_ONLY이므로 실행하지 않았다.
+- 공개 URL validator는 candidate `5f4f6c7cd8d429da85e2f93f3beaf29571e437fa`, HTTP 200, STATIC, 70개 bundle hash, 12개 claim, 6개 master record, 6개 share page를 확인했다.
+- 브라우저 플러그인과 Playwright가 없어 실제 브라우저·실기기·고령 사용자 독해성은 확인 범위 밖이다. 결과는 PASS_WITH_CONDITIONS이며 NAVI 완료 게이트는 NOT_READY다.
+
+증적: `E-LOCAL-BUILD-LARGE-TEXT-20261004`, `E-UI-CONTRACT-LARGE-TEXT-20261004`, `E-DEPLOY-PIPELINE-LARGE-TEXT-20261004`, `E-LIVE-PUBLIC-LARGE-TEXT-20261004`.
+
 ## 좁은 모바일 헤더 충돌 방지 — 5215ab5 — 2026-10-04
 
 - 공격 관점에서 좁은 화면의 고정 컨트롤이 긴 로고와 겹쳐 메뉴 접근성과 브랜드 식별성을 동시에 해칠 수 있는 실패 모드를 확인했다. 381–430px 구간의 로고 폭을 컨트롤 레일보다 작게 제한하고 UI 계약으로 재발을 막았다.

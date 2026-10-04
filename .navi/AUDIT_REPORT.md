@@ -1,5 +1,14 @@
 # Audit Report
 
+## 큰 글씨 읽기 모드 가독성 강화 — 5f4f6c7 — 2026-10-04
+
+- 기존 큰 글씨 모드의 확대 폭이 실제 읽기 보조로 체감되기 어려운 점을 확인하고, 본문·연구 도표를 desktop 12%, mobile 10% 확대했다. 모바일 도표의 방향 문구는 확대 상태에서 자연스럽게 줄바꿈되도록 보정했다.
+- PR #226 필수 checks와 로컬 UI contract·typecheck·127 tests·production build/performance를 확인했다. main workflow `37210637085`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator candidate `5f4f6c7cd8d429da85e2f93f3beaf29571e437fa`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-LARGE-TEXT-20261004`, `E-UI-CONTRACT-LARGE-TEXT-20261004`, `E-DEPLOY-PIPELINE-LARGE-TEXT-20261004`, `E-LIVE-PUBLIC-LARGE-TEXT-20261004`.
+
 ## 좁은 모바일 헤더 충돌 방지 — 5215ab5 — 2026-10-04
 
 - 381–430px 화면에서 로고가 메뉴·큰 글씨·공유 컨트롤과 겹칠 수 있는 배치 위험을 확인했다. 컨트롤 레일을 고려한 로고 최대 폭을 적용하고, 해당 구간을 UI 계약으로 고정했다.
