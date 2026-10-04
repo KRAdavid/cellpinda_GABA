@@ -510,6 +510,17 @@
       "statement": "공개 배포 전 NAVI TF pulse freshness 게이트를 자동 점검하고, 만료된 heartbeat를 새 pulse 증거와 보호된 PR로 갱신한 뒤 Pages 공개 배포를 완료했다.",
       "evidence_refs": ["E-TF-PULSE-REFRESH-20261004"],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-057",
+      "statement": "사업자용 GABA 핵심 5문장 각각의 복사 액션은 성공 뒤 해당 문장 카드에 ‘복사 완료’를 표시하고 2.4초 후 원래 상태로 돌아가 모바일 공유 흐름을 명확하게 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-LINE-COPY-ACK-20261004",
+        "E-UI-CONTRACT-SHARE-LINE-COPY-ACK-20261004",
+        "E-DEPLOY-PIPELINE-SHARE-LINE-COPY-ACK-20261004",
+        "E-LIVE-PUBLIC-SHARE-LINE-COPY-ACK-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6493,6 +6504,50 @@
       "captured_at": "2026-10-04T13:55:00Z",
       "reviewer_id": "NAVI-GOVERNANCE-QA-20261004-TF-PULSE-REFRESH",
       "claim_refs": ["C-056"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-LINE-COPY-ACK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자용 공유 문장 카드의 개별 복사 성공 상태를 추가한 후보가 typecheck·UI 계약·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #222 source commit b7bbe5a; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run validate:ui-contract PASS including copiedMessageIndex, guide-share-line-copy and 복사 완료 guard; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1498386 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/222",
+      "captured_at": "2026-10-04T14:06:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-SHARE-LINE-COPY-ACK",
+      "claim_refs": ["C-057"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-LINE-COPY-ACK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 사업자용 개별 공유 문장의 복사 완료 상태와 2.4초 상태 복귀 구현을 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs business share line copy acknowledgement assertion; public guide source requires copyMessageKitLine, copiedMessageIndex, guide-share-line-copy, 복사 완료 and 문장 복사; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/222",
+      "captured_at": "2026-10-04T14:06:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261004-SHARE-LINE-COPY-ACK",
+      "claim_refs": ["C-057"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SHARE-LINE-COPY-ACK-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자용 공유 문장 개별 복사 상태 보강 PR #222가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #222 merge main commit 5aa9f05589d3878d0adc02cff01829198b29a344; PR #222 checks release-verify 37208021190 and site-quality-verify 37208021226 successful; main workflow 37208090180 with release-verify 111453420606, worker-readiness 111453652126, deploy-pages 111453666005, smoke-live 111453706323 and release-status 111453855990 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37208090180",
+      "captured_at": "2026-10-04T14:10:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-SHARE-LINE-COPY-ACK",
+      "claim_refs": ["C-057"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-LINE-COPY-ACK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 사업자용 공유 문장 개별 복사 상태 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=5aa9f05589d3878d0adc02cff01829198b29a344 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 5aa9f05589d3878d0adc02cff01829198b29a344; generatedAt 2026-10-04T14:08:26.634Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct clipboard runtime remains Browser/Playwright external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#final",
+      "captured_at": "2026-10-04T14:10:30Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-SHARE-LINE-COPY-ACK",
+      "claim_refs": ["C-057"]
     }
   ]
 }

@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 사업자용 공유 문장 개별 복사 상태 및 공개 재검증: 2026-10-04 / candidate 5aa9f05
+
+사업자용 GABA 핵심 5문장 카드에서 개별 문장을 복사하면 해당 카드만 `복사 완료`로 바뀌고 2.4초 뒤 원래 상태로 돌아오도록 고도화했다. PR #222 필수 checks, main workflow `37208090180`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드와 모바일 브라우저 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SHARE-LINE-COPY-ACK-20261004`, `E-UI-CONTRACT-SHARE-LINE-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-SHARE-LINE-COPY-ACK-20261004`, `E-LIVE-PUBLIC-SHARE-LINE-COPY-ACK-20261004`.
+
 ## 연구 카드 복사 완료 상태 및 TF freshness 복구: 2026-10-04 / candidate bb5e260
 
 연구 카드의 결과·출처 복사 성공을 카드별 ‘복사 완료’ 상태로 표시하도록 고도화했다. PR #220 checks와 로컬 검증을 통과했으며, 첫 배포 후보에서 확인된 487분 heartbeat freshness 문제는 공식 TF pulse run `37207031442`와 보호 PR #221로 갱신했다. main workflow `37207209603`와 live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드·모바일 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

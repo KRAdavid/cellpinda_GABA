@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T13:55:00Z",
+  "updated_at": "2026-10-04T14:10:30Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -351,7 +351,11 @@
         "E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004",
         "E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004",
         "E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004",
-        "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004"
+        "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004",
+        "E-LOCAL-BUILD-SHARE-LINE-COPY-ACK-20261004",
+        "E-UI-CONTRACT-SHARE-LINE-COPY-ACK-20261004",
+        "E-DEPLOY-PIPELINE-SHARE-LINE-COPY-ACK-20261004",
+        "E-LIVE-PUBLIC-SHARE-LINE-COPY-ACK-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1633,7 +1637,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T13:55:00Z"
+    "last_run_at": "2026-10-04T14:10:30Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1762,7 +1766,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T13:55:00Z"
+    "last_run_at": "2026-10-04T14:10:30Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3615,6 +3619,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T13:55:00Z"
+    },
+    {
+      "id": "H-128",
+      "event": "사업자용 GABA 핵심 5문장 카드에서 어떤 문장이 복사됐는지 즉시 알기 어려운 흐름을 확인하고 PR #222에서 개별 카드의 ‘복사 완료’ 상태·모바일 터치 영역·키보드 포커스 상태를 보강했다. PR #222 필수 checks, 로컬 typecheck·UI 계약·127개 테스트·production build·성능 예산, main workflow `37208090180`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `5aa9f05589d3878d0adc02cff01829198b29a344`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser 플러그인과 Playwright 부재로 실제 클립보드 권한과 실기기 공유 UI는 외부 검증 항목으로 남겼고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T14:10:30Z"
     }
   ]
 }
