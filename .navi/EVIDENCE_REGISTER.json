@@ -653,6 +653,17 @@
         "E-LIVE-PUBLIC-RESEARCH-VERDICT-READABILITY-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-070",
+      "statement": "연구 카드의 대상·방법·측정 정보와 차트 핵심 결과 라벨이 데스크톱·모바일에서 빠르게 읽히는 시각 계층으로 표시되며, 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-PROFILE-READABILITY-20261005",
+        "E-UI-CONTRACT-RESEARCH-PROFILE-READABILITY-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-PROFILE-READABILITY-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-PROFILE-READABILITY-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7208,6 +7219,50 @@
       "captured_at": "2026-10-04T17:05:11Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-VERDICT-READABILITY",
       "claim_refs": ["C-069"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-PROFILE-READABILITY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드의 대상·방법·측정 정보와 차트 핵심 결과 라벨을 더 빠르게 읽도록 한 v62 보강이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #235 source commit 54281b5c84712b8dee941b4095fe13b2b316a0f9; pnpm run validate:ui-contract PASS including v62 research profile readability guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1595253 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/235",
+      "captured_at": "2026-10-04T17:18:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RESEARCH-PROFILE-READABILITY",
+      "claim_refs": ["C-070"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-PROFILE-READABILITY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 카드의 대상·방법·측정 정보와 핵심 결과 라벨이 데스크톱·모바일에서 읽을 수 있는 크기와 간격으로 유지되는 v62 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v62 research scan rhythm assertion; desktop outcome label .857em, profile kicker 12px, profile value 13px; mobile outcome label .929em, profile kicker 13px, profile value 14px; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/235",
+      "captured_at": "2026-10-04T17:18:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-PROFILE-READABILITY",
+      "claim_refs": ["C-070"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-PROFILE-READABILITY-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 읽기 계층 보강 PR #235가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #235 merge main commit c5a60fe085e9b2e042eeaf89bc75e562fce09234; PR #235 release-verify 37219941492 job 111488060126 and site-quality-verify 37219941496 job 111488060038 successful; main workflow 37220018831 with release-verify 111488284416, worker-readiness 111488497014, deploy-pages 111488516298, smoke-live 111488567739 and release-status 111488609162 successful; deploy-worker 111488517226 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37220018831",
+      "captured_at": "2026-10-04T17:19:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-PROFILE-READABILITY",
+      "claim_refs": ["C-070"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-PROFILE-READABILITY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 연구 카드의 대상·방법·측정 정보와 핵심 결과 라벨 읽기 계층 보강 및 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=c5a60fe085e9b2e042eeaf89bc75e562fce09234 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha c5a60fe085e9b2e042eeaf89bc75e562fce09234; generatedAt 2026-10-04T17:19:38.691Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T17:19:38Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-PROFILE-READABILITY",
+      "claim_refs": ["C-070"]
     }
   ]
 }

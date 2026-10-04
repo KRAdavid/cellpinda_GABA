@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — c5a60fe — 2026-10-05
+
+- AC-003 연구 카드의 대상·방법·측정 정보와 차트 핵심 결과 라벨을 데스크톱·모바일에서 빠르게 읽히는 시각 계층으로 보강: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #235와 main 공개 배포 workflow 37220018831이 성공했고, 공개 URL validator가 candidate c5a60fe085e9b2e042eeaf89bc75e562fce09234를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 완료 상태는 NOT_READY를 유지한다. Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수와 같은 외부 검증이 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-RESEARCH-PROFILE-READABILITY-20261005, E-UI-CONTRACT-RESEARCH-PROFILE-READABILITY-20261005, E-DEPLOY-PIPELINE-RESEARCH-PROFILE-READABILITY-20261005, E-LIVE-PUBLIC-RESEARCH-PROFILE-READABILITY-20261005.
+
 ## Current Release Recheck — 1226c06 — 2026-10-05
 
 - AC-003 연구 결과 도표의 각 지표에 GABA 결과 요약을 먼저 보여 주고, 해당 요약을 비교 레인보다 읽기 쉽게 표시하는 읽기 순서·시각 계층: PASS.
