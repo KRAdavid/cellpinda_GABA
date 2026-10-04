@@ -76,7 +76,7 @@ const validatePublicMetadata = (html, path, expectedCanonical) => {
   assert.ok(metaContent(html, 'property', 'og:title'), `${path} Open Graph title is missing`);
   assert.ok(metaContent(html, 'property', 'og:description'), `${path} Open Graph description is missing`);
   const socialImage = metaContent(html, 'property', 'og:image');
-  assert.match(socialImage, /^https:\/\/[^/]+\/[^\s]+\/assets\/.+\.(?:png|webp|svg)$/i, `${path} Open Graph image is invalid`);
+  assert.match(socialImage, /^https:\/\/[^/]+\/[^\s]+\/assets\/.+\.(?:png|jpe?g|webp|svg)$/i, `${path} Open Graph image is invalid`);
   assert.ok(metaContent(html, 'property', 'og:image:alt').trim().length >= 12, `${path} Open Graph image alt text is missing`);
   assert.equal(metaContent(html, 'property', 'og:image:width'), '1200', `${path} Open Graph image width is invalid`);
   assert.equal(metaContent(html, 'property', 'og:image:height'), '630', `${path} Open Graph image height is invalid`);
@@ -295,11 +295,12 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.equal(canonicalHref(pageText), `${base}/`, 'live root canonical URL is invalid');
     assert.ok(metaContent(pageText, 'property', 'og:title'), 'live root is missing an Open Graph title');
     assert.ok(metaContent(pageText, 'property', 'og:description'), 'live root is missing an Open Graph description');
-    assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/social-card.png`, 'live root Open Graph image is invalid');
-    assert.equal(metaContent(pageText, 'property', 'og:image:type'), 'image/png', 'live root Open Graph image type is invalid');
+    assert.equal(metaContent(pageText, 'property', 'og:image'), `${base}/assets/gaba-guide-social-card.jpg`, 'live root Open Graph image is invalid');
+    assert.equal(metaContent(pageText, 'property', 'og:image:type'), 'image/jpeg', 'live root Open Graph image type is invalid');
     assert.equal(metaContent(pageText, 'property', 'og:image:width'), '1200', 'live root Open Graph image width is invalid');
     assert.equal(metaContent(pageText, 'property', 'og:image:height'), '630', 'live root Open Graph image height is invalid');
-    assert.equal(metaContent(researchPageText, 'property', 'og:image:type'), 'image/png', 'live research Open Graph image type is invalid');
+    assert.equal(metaContent(researchPageText, 'property', 'og:image'), `${base}/assets/gaba-guide-social-card.jpg`, 'live research Open Graph image is invalid');
+    assert.equal(metaContent(researchPageText, 'property', 'og:image:type'), 'image/jpeg', 'live research Open Graph image type is invalid');
     assert.equal(metaContent(researchPageText, 'property', 'og:image:width'), '1200', 'live research Open Graph image width is invalid');
     assert.equal(metaContent(researchPageText, 'property', 'og:image:height'), '630', 'live research Open Graph image height is invalid');
     assert.equal(metaContent(productSharePageText, 'property', 'og:image:type'), 'image/png', 'live product Open Graph image type is invalid');
