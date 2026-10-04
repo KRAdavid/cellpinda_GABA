@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 좁은 모바일 헤더 충돌 방지 — 5215ab5 — 2026-10-04
+
+- 381–430px 화면에서 로고와 고정 메뉴·큰 글씨·공유 컨트롤이 겹치지 않도록 헤더 폭을 보정했다.
+- PR #225, main 배포 `37210073919`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·70개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 레이아웃 검증은 외부 항목으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-NARROW-HEADER-20261004`, `E-UI-CONTRACT-NARROW-HEADER-20261004`, `E-DEPLOY-PIPELINE-NARROW-HEADER-20261004`, `E-LIVE-PUBLIC-NARROW-HEADER-20261004`.
+
 ## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
 
 - 연구 카드 출처를 `출처명`과 `원문 보기`로 분리하고 링크 전체에 44px 터치 영역·키보드 포커스 표시를 적용했다.

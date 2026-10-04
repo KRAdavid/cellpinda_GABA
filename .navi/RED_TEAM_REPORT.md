@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 좁은 모바일 헤더 충돌 방지 — 5215ab5 — 2026-10-04
+
+- 공격 관점에서 좁은 화면의 고정 컨트롤이 긴 로고와 겹쳐 메뉴 접근성과 브랜드 식별성을 동시에 해칠 수 있는 실패 모드를 확인했다. 381–430px 구간의 로고 폭을 컨트롤 레일보다 작게 제한하고 UI 계약으로 재발을 막았다.
+- 로컬 typecheck·UI contract·127 tests·production build/performance, PR #225 checks, main workflow `37210073919`의 Pages·라이브 smoke·release status를 모두 확인했다. Worker는 STATIC_ONLY이므로 실행하지 않았다.
+- 공개 URL validator는 candidate `5215ab5758e0e9e849ed634243e54c6e34c0e7cd`, HTTP 200, STATIC, 70개 bundle hash, 12개 claim, 6개 master record, 6개 share page를 확인했다.
+- 브라우저 플러그인과 Playwright가 없어 실제 모바일 레이아웃·터치·고령 사용자 사용성은 확인 범위 밖이다. 결과는 PASS_WITH_CONDITIONS이며 NAVI 완료 게이트는 NOT_READY다.
+
+증적: `E-LOCAL-BUILD-NARROW-HEADER-20261004`, `E-UI-CONTRACT-NARROW-HEADER-20261004`, `E-DEPLOY-PIPELINE-NARROW-HEADER-20261004`, `E-LIVE-PUBLIC-NARROW-HEADER-20261004`.
+
 ## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
 
 - 공격 관점에서 확인한 개선 지점은 연구 출처의 발견성이다. 출처명과 `원문 보기` 액션이 같은 카드 안에서 분리되어 있고, 링크 전체가 44px 터치 영역과 명시적 포커스 스타일을 갖는다.

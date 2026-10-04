@@ -1,5 +1,14 @@
 # Audit Report
 
+## 좁은 모바일 헤더 충돌 방지 — 5215ab5 — 2026-10-04
+
+- 381–430px 화면에서 로고가 메뉴·큰 글씨·공유 컨트롤과 겹칠 수 있는 배치 위험을 확인했다. 컨트롤 레일을 고려한 로고 최대 폭을 적용하고, 해당 구간을 UI 계약으로 고정했다.
+- PR #225 필수 checks와 로컬 typecheck·UI contract·127 tests·production build/performance를 확인했다. main workflow `37210073919`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator candidate `5215ab5758e0e9e849ed634243e54c6e34c0e7cd`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 381–430px 실기기 레이아웃·터치·고령 사용자 독해성은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-NARROW-HEADER-20261004`, `E-UI-CONTRACT-NARROW-HEADER-20261004`, `E-DEPLOY-PIPELINE-NARROW-HEADER-20261004`, `E-LIVE-PUBLIC-NARROW-HEADER-20261004`.
+
 ## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
 
 - 연구 카드의 출처를 작은 텍스트 링크 하나로 두지 않고, 출처명과 별도 `원문 보기` 액션을 한 행의 명확한 터치 영역으로 분리했다. 모바일 최소 44px 터치 높이와 키보드 `focus-visible` 표시를 적용해 사업자와 고령 사용자가 원문 진입점을 빠르게 찾을 수 있게 했다.

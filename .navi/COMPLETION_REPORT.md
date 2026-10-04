@@ -1,5 +1,13 @@
 # Completion Report
 
+## 좁은 모바일 헤더 충돌 방지 — 5215ab5 — 2026-10-04
+
+- 381–430px 모바일 헤더에서 로고가 우측 메뉴·큰 글씨·공유 버튼과 겹치지 않도록 폭을 보정했다. UI 계약에 해당 화면 폭 검사를 추가했다.
+- PR #225와 main 공개 배포 workflow `37210073919`이 성공했고, 공개 URL validator가 최신 merge commit `5215ab5758e0e9e849ed634243e54c6e34c0e7cd`를 HTTP 200 정적 사이트로 확인했다.
+- 기능·배포 완료는 확인했지만 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증이 남아 있어 NAVI 상태는 USER_DECISION / NOT_READY, 결과는 PASS_WITH_CONDITIONS다.
+
+증적: `E-LOCAL-BUILD-NARROW-HEADER-20261004`, `E-UI-CONTRACT-NARROW-HEADER-20261004`, `E-DEPLOY-PIPELINE-NARROW-HEADER-20261004`, `E-LIVE-PUBLIC-NARROW-HEADER-20261004`.
+
 ## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
 
 - 연구 카드마다 읽기 쉬운 출처명과 분리된 `원문 보기` 액션을 제공하도록 고도화했다. 모바일 터치 높이 44px, 키보드 포커스 표시, 긴 출처명 줄바꿈을 반영했다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T14:32:13Z",
+  "updated_at": "2026-10-04T14:42:06Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -363,7 +363,11 @@
         "E-LOCAL-BUILD-RESEARCH-SOURCE-ACTION-20261004",
         "E-UI-CONTRACT-RESEARCH-SOURCE-ACTION-20261004",
         "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-ACTION-20261004",
-        "E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004"
+        "E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004",
+        "E-LOCAL-BUILD-NARROW-HEADER-20261004",
+        "E-UI-CONTRACT-NARROW-HEADER-20261004",
+        "E-DEPLOY-PIPELINE-NARROW-HEADER-20261004",
+        "E-LIVE-PUBLIC-NARROW-HEADER-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1645,7 +1649,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T14:32:13Z"
+    "last_run_at": "2026-10-04T14:42:06Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1774,7 +1778,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T14:32:13Z"
+    "last_run_at": "2026-10-04T14:42:06Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3648,6 +3652,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T14:32:13Z"
+    },
+    {
+      "id": "H-131",
+      "event": "381–430px 좁은 모바일 화면에서 GABA Guide 로고가 메뉴·큰 글씨·공유 컨트롤 영역을 침범할 수 있는 헤더 배치 위험을 확인하고 PR #225에서 로고가 우측 컨트롤 레일을 침범하지 않도록 폭을 예약하는 CSS 보정과 UI 계약 검사를 추가했다. PR #225 필수 checks, 로컬 typecheck·UI 계약·127개 테스트·production build·성능 예산, main workflow `37210073919`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `5215ab5758e0e9e849ed634243e54c6e34c0e7cd`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser 플러그인과 Playwright 부재로 실제 381–430px 실기기 레이아웃·터치·고령 사용자 독해성은 외부 검증 항목으로 남겼고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T14:42:06Z"
     }
   ]
 }
