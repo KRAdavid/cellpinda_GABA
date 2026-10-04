@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 공개 사이트 전 구간 시각 감리 및 NAVI 동기화: 2026-10-04 / candidate 63bc6b1
+
+GitHub Pages 공개본의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px에서 직접 진입해 10개 캡처를 확인했다. 화면 폭·page error·console error 기준을 통과했고, 모바일 회복 카드·연구 지도·전문가 영상 gallery와 데스크톱 연구 지도·feature panel의 이미지 비율과 정보 계층이 안정적으로 유지됐다. 로컬 검증과 live validator도 재확인했으며 NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004.
+
 ## 전문가 영상 공유·모바일 진행 문맥 고도화 공개 배포: 2026-10-04 / candidate 34c5b08
 
 전문가 영상 선택 직후 공유해도 선택 영상 제목·본문·`?video=...#expert-videos` 딥링크가 유지되도록 보완하고, 모바일 부드러운 스크롤 중 읽기 진행 라벨이 `전문가 영상`과 일치하도록 고정했다. PR #194·#196, heartbeat refresh PR #195, main workflow 37181007734, Pages·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성·Playwright 390/1440px 인터랙션 17/17을 확인했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.

@@ -1,5 +1,14 @@
 # Audit Report
 
+## 공개 사이트 전 구간 시각 감리 — 63bc6b1 — 2026-10-04
+
+- 현재 GitHub Pages 공개본의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px에서 직접 진입해 확인했다. 10개 캡처 모두 화면 폭 안에 배치됐고, page error·console error가 없었다.
+- 모바일에서는 14단계 회복 카드, 연구 지도와 읽는 순서, 세로형 전문가 영상 갤러리를 확인했고 데스크톱에서는 연구 지도와 선택 영상 feature panel의 균형·이미지 비율·정보 계층을 확인했다. 첫 화면부터 마지막 공유 장까지 시각 톤이 일관되게 유지됐다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 live validator HTTP 200·STATIC·candidate `63bc6b1`·70개 번들 해시·공개 데이터 정합성을 재확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004.
+
 ## 전문가 영상 즉시 공유·진행 문맥 감사 — 34c5b08 — 2026-10-04
 
 - 전문가 영상 카드를 선택한 직후 50ms 뒤 헤더 공유를 실행해도 제목·본문·`?video=...#expert-videos` 딥링크가 선택 영상과 일치하는지 확인했다. PR #194에서 공유 문맥을 보정하고 PR #196에서 모바일 smooth scroll 중 읽기 진행 라벨을 `전문가 영상`으로 고정했다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 공개 사이트 전 구간 시각 레드팀 재검증 — 63bc6b1 — 2026-10-04
+
+- 390px·1440px에서 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 직접 열어 화면 폭·이미지 비율·카드 정보 계층을 확인했다. 10개 캡처 모두 page error·console error 없이 통과했다.
+- 모바일과 데스크톱 대표 폭의 일관성은 확인됐지만, Chromium fallback만으로 Safari/iOS/Android 실기기나 실제 고령 사용자 이해도를 보장할 수 없다. RT-001·RT-003은 계속 OPEN이며, 독립 과학·규제 감수인 RT-002도 닫지 않는다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004.
+
 ## 전문가 영상 공유 경합·공개 재배포 레드팀 재검증 — 34c5b08 — 2026-10-04
 
 - 모바일 전문가 영상 선택 직후 공유할 때 smooth scroll이 이전 장 문맥을 덮어쓰는 경로를 재현하고, 선택 직후 읽기 장 고정과 공유 URL 문맥 재구성으로 보완했다. 최종 공개본에서 선택 영상·진행 라벨·공유 payload가 모두 `전문가 영상`으로 일치했다.

@@ -1,5 +1,13 @@
 # Completion Report
 
+## 공개 사이트 전 구간 배포 품질 게이트 — 63bc6b1 — 2026-10-04
+
+- GitHub Pages 공개본에서 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px로 직접 감리했다. 10개 캡처 모두 가로 넘침·page error·console error가 없었고, 카드·도표·영상 갤러리·공유 장의 정보 계층과 자연 이미지 비율이 유지됐다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 live validator HTTP 200·STATIC·candidate `63bc6b1`·70개 번들 해시·제품 독립 공개 데이터 경계를 확인했다.
+- 공개 배포 품질 기준은 통과했지만 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004.
+
 ## 전문가 영상 공유·모바일 진행 문맥 공개 배포 게이트 — 34c5b08 — 2026-10-04
 
 - PR #194에서 영상 선택 직후 공유 URL이 이전 장 문맥을 갖는 경합을 제거하고, PR #196에서 모바일 smooth scroll 중 진행 라벨이 선택 영상과 일치하도록 보완했다. heartbeat refresh PR #195 이후 main workflow 37181007734가 fresh TF pulse·Pages·라이브 smoke·release status를 모두 통과했다.

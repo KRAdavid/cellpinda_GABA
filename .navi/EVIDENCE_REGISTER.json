@@ -253,6 +253,14 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-033",
+      "statement": "공개 안내서의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장이 모바일과 데스크톱 대표 폭에서 화면 안에 안정적으로 배치되고, 이미지·도표·카드의 정보 계층이 일관되게 유지된다.",
+      "evidence_refs": [
+        "E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5224,6 +5232,17 @@
       "captured_at": "2026-10-04T05:52:11Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-SHARE",
       "claim_refs": ["C-032"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 GitHub Pages 공개본의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 모바일과 데스크톱에서 시각 감리했으며, 대표 화면의 가로 넘침·페이지 오류·콘솔 오류 없이 제목·도표·영상 갤러리·공유 장의 흐름과 이미지 비율이 안정적으로 유지된다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at https://kradavid.github.io/gaba_info; 390x844 and 1440x1000; direct anchors #top, #recovery-break, #research, #expert-videos, #final; 10 screenshots; scrollWidth equals viewport for every check; pageErrors []; consoleErrors []; view_image visual review completed",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T06:02:22Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-VISUAL-PUBLISHING",
+      "claim_refs": ["C-033"]
     }
   ]
 }
