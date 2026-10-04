@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 1226c06 — 2026-10-05
+
+- 연구 비교 도표에서 핵심인 `GABA 결과` 요약이 작은 보조 라벨처럼 보이는 잔여 가독성 리스크를 확인하고, PR #234에서 결과 문구를 비교 레인보다 먼저 읽히는 크기·청록 기준선·옅은 배경 계층으로 보강했다. 수치·출처 데이터는 변경하지 않았다.
+- 로컬 UI 계약(v61), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1594464 bytes로 예산 안이다.
+- PR #234 필수 checks, main workflow `37219113458`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate `1226c0649618e5fa5fa231a49a082618ad035496`는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-VERDICT-READABILITY-20261005`, `E-UI-CONTRACT-RESEARCH-VERDICT-READABILITY-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-VERDICT-READABILITY-20261005`, `E-LIVE-PUBLIC-RESEARCH-VERDICT-READABILITY-20261005`.
+
 ## Release Recheck — 4036d0d — 2026-10-05
 
 - 연구 결과 비교 도표에서 독자가 두 조건의 막대를 먼저 대조해야 GABA 결과를 이해해야 하는 잔여 가독성 리스크를 확인하고, 각 지표 앞에 `GABA 결과` 요약을 먼저 표시하도록 보완했다. 수치·출처 데이터는 변경하지 않았다.

@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 1226c06
+
+- 공격 관점에서 확인한 실패 모드는 핵심 GABA 결과 문구가 비교 막대보다 작아 사용자가 먼저 읽지 못하는 것이었다. 결과 문구를 모바일·데스크톱에서 독립적으로 읽히는 크기와 시각 계층으로 보강하고 비교 레인은 근거로 유지했다.
+- UI 계약 v61, typecheck, 127개 테스트, production build, PR #234 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright가 현재 실행 환경에 없어 실제 브라우저·실기기·실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-VERDICT-READABILITY-20261005`, `E-UI-CONTRACT-RESEARCH-VERDICT-READABILITY-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-VERDICT-READABILITY-20261005`, `E-LIVE-PUBLIC-RESEARCH-VERDICT-READABILITY-20261005`.
+
 ## Recheck — 2026-10-05 — 4036d0d
 
 - 공격 관점에서 확인한 실패 모드는 연구 비교 도표를 읽을 때 사용자가 두 조건의 막대를 먼저 비교해야 GABA 결과의 방향을 파악할 수 있다는 점이었다. 각 지표에 `GABA 결과` 요약을 먼저 배치하고 두 조건 레인은 근거로 유지했다.

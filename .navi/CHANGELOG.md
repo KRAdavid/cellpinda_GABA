@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 결과 요약 가독성 고도화 — 1226c06 — 2026-10-05
+
+- 연구 비교 도표의 `GABA 결과` 요약을 모바일·데스크톱에서 첫 번째 읽기 단위로 확대하고 청록 기준선·옅은 배경으로 비교 레인과 분리했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #234와 main 배포 `37219113458`, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-VERDICT-READABILITY-20261005`, `E-UI-CONTRACT-RESEARCH-VERDICT-READABILITY-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-VERDICT-READABILITY-20261005`, `E-LIVE-PUBLIC-RESEARCH-VERDICT-READABILITY-20261005`.
+
 ## 연구 결과 도표 GABA 결과 선표시 — 4036d0d — 2026-10-05
 
 - 연구 비교 도표의 각 행에 `GABA 결과` 요약을 먼저 배치해, 독자가 결과 방향을 먼저 읽고 두 조건의 막대를 근거로 확인하도록 고도화했다. 연구 수치·출처 데이터는 변경하지 않았다.
