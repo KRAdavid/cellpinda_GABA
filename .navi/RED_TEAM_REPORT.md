@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 공유 링크 주제 필터 재검증 — 597bf37 — 2026-10-04
+
+- 유효한 전문가 영상 공유 링크가 선택 영상·초기 재생 상태뿐 아니라 해당 영상의 주제 필터까지 복원하도록 보강되었다. 직접 진입한 독자는 선택 영상과 관련 영상 목록을 한 화면의 같은 맥락에서 이해할 수 있다.
+- UI 계약·typecheck·127개 테스트·production build/성능 예산과 PR #218 checks, main workflow `37204949680`, live validator HTTP 200·STATIC를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 결과는 PASS_WITH_CONDITIONS다.
+- Browser 플러그인과 Playwright 부재로 실제 iframe 재생과 필터 전환은 브라우저 런타임에서 직접 증명하지 못했다. RT-001·RT-002·RT-003은 계속 OPEN이고 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004`.
+
 ## 전문가 영상 공유 링크 직접 재생 재검증 — 2305b5b — 2026-10-04
 
 - 유효한 전문가 영상 공유 링크가 선택 영상 ID와 초기 재생 상태를 함께 복원하도록 보강되었다. 사용자는 직접 진입 후 영상을 다시 선택하지 않고 바로 재생 흐름으로 들어간다.

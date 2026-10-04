@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T13:00:03Z",
+  "updated_at": "2026-10-04T13:16:10Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -339,7 +339,11 @@
         "E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004",
         "E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004",
         "E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004",
-        "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004"
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004",
+        "E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004",
+        "E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -818,7 +822,11 @@
           "E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004",
           "E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004",
           "E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004",
+          "E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004",
+          "E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004",
+          "E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004",
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004"
       ],
       "owner": "QA"
     },
@@ -1609,7 +1617,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T13:00:03Z"
+    "last_run_at": "2026-10-04T13:16:10Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1738,7 +1746,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T13:00:03Z"
+    "last_run_at": "2026-10-04T13:16:10Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -2581,7 +2589,11 @@
           "E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004",
           "E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004",
           "E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004",
+          "E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004",
+          "E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004",
+          "E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004",
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004"
          ],
          "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생·연구 비교 방향 그래프·320·350·390·768·1440px × 11개 주요 장 가로폭·페이지 오류 0건 검증 통과"
       },
@@ -2680,7 +2692,11 @@
             "E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004",
             "E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004",
             "E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004",
-            "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004"
+            "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004",
+            "E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004",
+            "E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004",
+            "E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004",
+            "E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004"
          ],
          "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 모바일 읽기 라벨·읽기 크기 조절·직접 해시 진입 정렬·메뉴 닫힘 후 토글 포커스 복귀·초소형 모바일 연구 카드 폭·320·350·390·768·1440px 주요 장 직접 진입의 자동 검증은 통과"
       }
@@ -3549,6 +3565,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T13:00:03Z"
+    },
+    {
+      "id": "H-125",
+      "event": "전문가 영상 공유 링크가 선택 영상과 초기 재생 상태를 복원한 뒤에도 전체 주제 목록을 보여주던 흐름을 확인하고, PR #218에서 유효한 `?video=` 쿼리의 주제 필터까지 초기화하도록 보강했다. 공유받은 독자는 선택 영상의 주제와 관련 영상 목록을 같은 맥락에서 바로 확인할 수 있다. PR #218 checks, main workflow `37204949680`, Pages·라이브 smoke·release status와 live validator candidate `597bf37c52c0336c4fccd326b3bb16af542ab887`의 HTTP 200·STATIC·공개 데이터 정합성을 확인했다. Browser 플러그인과 Playwright를 사용할 수 없어 실제 iframe 영상 재생과 필터 전환의 브라우저 런타임 검증은 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T13:16:10Z"
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Audit Report
 
+## 전문가 영상 공유 링크 주제 필터 재검증 — 597bf37 — 2026-10-04
+
+- 선택 영상과 초기 재생 상태를 복원한 공유 링크가 전체 영상 목록으로 열려 관련 맥락을 다시 찾아야 하는 흐름을 확인했다. PR #218에서 유효한 `?video=` 쿼리의 영상 주제를 초기 필터로 연결해, 선택 영상과 관련 영상 목록을 함께 보여주도록 보강했다.
+- 로컬 typecheck·UI contract·127 tests·build/perf, PR #218 checks, main workflow `37204949680`의 release-verify·worker-readiness·Pages·smoke-live·release-status를 확인했다. live validator candidate `597bf37c52c0336c4fccd326b3bb16af542ab887`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright를 사용할 수 없어 직접 iframe 재생과 필터 전환의 브라우저 런타임 증명은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004`.
+
 ## 전문가 영상 공유 링크 직접 재생 재검증 — 2305b5b — 2026-10-04
 
 - 유효한 `?video=` 공유 링크는 선택 영상 ID를 복원하지만 첫 진입에서 `videoStarted`가 false여서 한 번 더 눌러야 하는 흐름을 확인했다. PR #217에서 URL의 유효한 영상 ID를 초기 재생 상태로 연결하고 UI 계약 회귀 검사를 추가했다.

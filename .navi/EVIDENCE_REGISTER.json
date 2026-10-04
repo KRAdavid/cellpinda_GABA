@@ -471,6 +471,17 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-053",
+      "statement": "유효한 전문가 영상 공유 링크가 선택된 영상의 주제 필터까지 복원해, 직접 진입한 독자가 해당 영상의 맥락과 관련 영상 목록을 함께 확인할 수 있도록 보강되었다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004",
+        "E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6311,6 +6322,50 @@
       "captured_at": "2026-10-04T13:00:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-DEEPLINK",
       "claim_refs": ["C-052"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 공유 쿼리에서 선택 영상의 주제를 초기 필터로 복원하도록 보강한 후보가 typecheck·UI 계약·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #218 source commit 0fa716b; pnpm run validate:ui-contract PASS including topic-filter restore guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1495827 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/218",
+      "captured_at": "2026-10-04T13:11:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-EXPERT-VIDEO-CONTEXT",
+      "claim_refs": ["C-053"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 유효한 선택 영상 공유 URL의 주제 필터 초기화와 기존 직접 진입 재생 상태를 함께 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs topic-filter restore assertion; public guide source requires getInitialExpertVideoTopic and useState(getInitialExpertVideoTopic); command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/218",
+      "captured_at": "2026-10-04T13:11:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261004-EXPERT-VIDEO-CONTEXT",
+      "claim_refs": ["C-053"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 주제 필터 복원 PR #218이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #218 merge main commit 597bf37c52c0336c4fccd326b3bb16af542ab887; PR checks release-verify 37204849703 and site-quality-verify 37204849692 successful; main workflow 37204949680; release-verify 111444090744, worker-readiness 111444316405, deploy-pages 111444337870, smoke-live 111444408215, release-status 111444452611 successful; deploy-worker 111444338221 skipped by STATIC_ONLY; workflow annotation reports historical local-path matches only",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37204949680",
+      "captured_at": "2026-10-04T13:16:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-EXPERT-VIDEO-CONTEXT",
+      "claim_refs": ["C-053"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개 후보가 전문가 영상 주제 필터 복원 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=597bf37c52c0336c4fccd326b3bb16af542ab887 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 597bf37c52c0336c4fccd326b3bb16af542ab887; generatedAt 2026-10-04T13:16:10.226Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct video runtime remains Browser/Playwright external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&video=bQ0QQHpUzdI#expert-videos",
+      "captured_at": "2026-10-04T13:16:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-CONTEXT",
+      "claim_refs": ["C-053"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Completion Report
 
+## 전문가 영상 공유 링크 주제 필터 배포 품질 게이트 — 597bf37 — 2026-10-04
+
+- PR #218을 main에 병합하고, 유효한 `?video=` 링크가 선택 영상·초기 재생 상태·주제 필터를 함께 복원하도록 공개 사이트를 업데이트했다.
+- main workflow `37204949680`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- 완료 게이트는 닫지 않는다. Browser 플러그인과 Playwright 부재로 직접 영상 재생·필터 전환의 브라우저 런타임 검증, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토와 로컬 사업 운영 게이트가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004`.
+
 ## 전문가 영상 공유 링크 직접 재생 배포 품질 게이트 — 2305b5b — 2026-10-04
 
 - PR #217을 main에 병합하고, 유효한 `?video=` 링크가 선택 영상과 초기 재생 상태를 함께 복원하도록 공개 사이트를 업데이트했다. UI 계약 회귀 검사도 추가했다.

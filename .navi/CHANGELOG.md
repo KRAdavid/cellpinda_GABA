@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 전문가 영상 공유 링크 주제 필터 복원 및 공개 재검증: 2026-10-04 / candidate 597bf37
+
+유효한 `?video=` 공유 링크가 선택 영상의 초기 재생 상태와 주제 필터까지 복원하도록 보강했다. PR #218, main workflow `37204949680`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며, 브라우저 런타임 영상 재생과 필터 전환 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004`.
+
 ## 전문가 영상 공유 링크 직접 재생 및 배포 재검증: 2026-10-04 / candidate 2305b5b
 
 유효한 `?video=` 공유 링크가 선택 영상의 초기 재생 상태까지 복원하도록 보강했다. PR #217, main workflow `37203920793`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며, 브라우저 런타임 영상 재생 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
