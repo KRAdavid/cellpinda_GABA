@@ -1,6 +1,6 @@
 # Project Changelog
 
-## 공개 사이트 전 구간 시각 감리 및 NAVI 동기화: 2026-10-04 / candidate 63bc6b1
+## 공개 사이트 전 구간 시각 감리 및 NAVI 동기화: 2026-10-04 / candidate 66ec3c6
 
 GitHub Pages 공개본의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px에서 직접 진입해 10개 캡처를 확인했다. 화면 폭·page error·console error 기준을 통과했고, 모바일 회복 카드·연구 지도·전문가 영상 gallery와 데스크톱 연구 지도·feature panel의 이미지 비율과 정보 계층이 안정적으로 유지됐다. 로컬 검증과 live validator도 재확인했으며 NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
 

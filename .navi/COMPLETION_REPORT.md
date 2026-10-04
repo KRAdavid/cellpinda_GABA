@@ -1,6 +1,6 @@
 # Completion Report
 
-## 공개 사이트 전 구간 배포 품질 게이트 — 63bc6b1 — 2026-10-04
+## 공개 사이트 전 구간 배포 품질 게이트 — 66ec3c6 — 2026-10-04
 
 - GitHub Pages 공개본에서 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px로 직접 감리했다. 10개 캡처 모두 가로 넘침·page error·console error가 없었고, 카드·도표·영상 갤러리·공유 장의 정보 계층과 자연 이미지 비율이 유지됐다.
 - 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 live validator HTTP 200·STATIC·candidate `63bc6b1`·70개 번들 해시·제품 독립 공개 데이터 경계를 확인했다.

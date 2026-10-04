@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T06:02:22Z",
+  "updated_at": "2026-10-04T06:07:07Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1528,7 +1528,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T06:02:22Z"
+    "last_run_at": "2026-10-04T06:07:07Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1654,7 +1654,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T06:02:22Z"
+    "last_run_at": "2026-10-04T06:07:07Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3253,10 +3253,10 @@
     },
     {
       "id": "H-103",
-      "event": "현재 공개 candidate `63bc6b1`의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px에서 Playwright Chromium fallback으로 직접 진입해 시각 감리했다. 10개 캡처 모두 화면 폭을 넘지 않았고 page error·console error가 없었으며, 모바일 카드·연구 지도·전문가 영상 갤러리·마지막 공유 장의 이미지 비율과 정보 계층이 안정적으로 유지됐다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 live validator HTTP 200·STATIC·공개 데이터 정합성도 재확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "event": "현재 공개 candidate `66ec3c6`의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px에서 Playwright Chromium fallback으로 직접 진입해 시각 감리했다. 10개 캡처 모두 화면 폭을 넘지 않았고 page error·console error가 없었으며, 모바일 카드·연구 지도·전문가 영상 갤러리·마지막 공유 장의 이미지 비율과 정보 계층이 안정적으로 유지됐다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 live validator HTTP 200·STATIC·공개 데이터 정합성도 재확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
-      "recorded_at": "2026-10-04T06:02:22Z"
+      "recorded_at": "2026-10-04T06:07:07Z"
     }
   ]
 }
