@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 보조 문구·전문가 영상 영역 고도화 감사 — a2a2d3f — 2026-10-04
+
+- 320px 모바일 첫 화면에서 약하게 읽힐 수 있던 보조 문구의 크기를 12px로 보완하고, 선택한 전문가 세로 영상의 표시 폭을 250px로 확장했다. 영상은 9:16 비율(390px 화면에서 250x444px)을 유지해 찌그러짐 없이 읽기·시청 영역을 개선했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build가 통과했다. 공개 GitHub Pages 320px·390px Chrome fallback에서 kicker 12px, 영상 250x444px, viewport와 같은 가로 폭, 브라우저 오류 없음을 확인했다.
+- PR #178 checks `37165352762`, `37165352764`와 main workflow `37165443025`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `a2a2d3f`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-LABEL-MEDIA-20261004`, `E-PLAYWRIGHT-MOBILE-LABEL-MEDIA-20261004`, `E-DEPLOY-PIPELINE-MOBILE-LABEL-MEDIA-20261004`, `E-LIVE-PUBLIC-MOBILE-LABEL-MEDIA-20261004`.
+
 ## 수면과 회복 연결 문구 명료화 감사 — eded7a9 — 2026-10-04
 
 - 수면과 회복 연결 구간의 상단 진행 표시 `이어 읽기 / 12`가 독자에게 어색하게 읽히는 문제를 확인해 `다음 장으로 이어져요`로 보정했다. 보조기기 안내는 `본문 사이에 이어지는 설명입니다`로 유지해 화면 문구와 의미를 맞췄다.

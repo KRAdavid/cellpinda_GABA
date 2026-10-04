@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T00:18:42Z",
+  "updated_at": "2026-10-04T00:36:43Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2851,6 +2851,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T00:18:42Z"
+    },
+    {
+      "id": "H-086",
+      "event": "모바일 첫 화면의 작은 보조 문구가 좁은 화면에서 약하게 읽히고, 전문가 세로 영상 선택 화면의 미디어 폭이 다소 작던 상태를 PR #178에서 보완했다. 320px hero kicker를 12px로 올리고 390px 선택 영상 영역을 250x444px로 제한해 9:16 비율을 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build와 320px·390px Playwright Chrome fallback에서 가로 넘침·앱 오류가 없음을 확인했으며, PR #178 checks, main workflow 37165443025, live validator HTTP 200·STATIC·candidate a2a2d3f를 확인했다. 공개 과학 카피·출처·제품 독립 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T00:36:43Z"
     }
   ]
 }

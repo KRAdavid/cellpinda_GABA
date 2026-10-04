@@ -96,6 +96,12 @@
       "statement": "수면과 회복 연결 구간의 상단 진행 문구가 일반 독자에게 다음 장으로 이어지는 흐름을 자연스럽게 설명하며, 모바일 공개 화면과 보조기기 안내가 함께 정렬된다.",
       "evidence_refs": ["E-LOCAL-BUILD-INTERLUDE-COPY-20261004", "E-PLAYWRIGHT-INTERLUDE-COPY-20261004", "E-DEPLOY-PIPELINE-INTERLUDE-COPY-20261004", "E-LIVE-PUBLIC-INTERLUDE-COPY-20261004"],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-017",
+      "statement": "모바일 첫 화면의 보조 문구가 좁은 화면에서도 읽기 쉬운 크기로 표시되고, 선택한 전문가 세로 영상이 원본 비율을 유지하면서 더 충분한 시각 영역을 제공한다.",
+      "evidence_refs": ["E-LOCAL-BUILD-MOBILE-LABEL-MEDIA-20261004", "E-PLAYWRIGHT-MOBILE-LABEL-MEDIA-20261004", "E-DEPLOY-PIPELINE-MOBILE-LABEL-MEDIA-20261004", "E-LIVE-PUBLIC-MOBILE-LABEL-MEDIA-20261004"],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4352,6 +4358,50 @@
       "captured_at": "2026-10-04T00:18:42Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-INTERLUDE-COPY",
       "claim_refs": ["C-016"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-LABEL-MEDIA-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 보조 문구와 전문가 영상 미디어 폭을 보완한 PR #178 후보가 UI 계약·typecheck·127개 테스트·production build를 통과했고, 로컬 320px·390px Chrome fallback에서 문구 크기·영상 비율·가로 폭·브라우저 오류를 확인했다.",
+      "locator": "PR #178 candidate c6aa50d; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback 320px hero kicker font-size 12px, 390px expert video 250x444px, iframeCount 1, scrollWidth equals viewportWidth, errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/178",
+      "captured_at": "2026-10-04T00:34:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-MOBILE-LABEL-MEDIA",
+      "claim_refs": ["C-017"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-LABEL-MEDIA-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본 320px·390px Chrome fallback에서 모바일 보조 문구가 12px로 표시되고, 전문가 선택 영상이 250x444px의 9:16 프레임으로 표시되며, 가로 넘침과 앱 오류가 없다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/?view=guide; hero 320x844 title 저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide, kickerFontSize 12px, videoWidth 250, videoHeight 444, iframeCount 0, scrollWidth 320; expert 390x844 title 전문가 영상 · GABA와 수면 리듬 | GABA Guide, kickerFontSize 12px, videoWidth 250, videoHeight 444, iframeCount 1, scrollWidth 390; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-04T00:36:43Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-MOBILE-LABEL-MEDIA",
+      "claim_refs": ["C-017"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-LABEL-MEDIA-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #178의 release-verify·site-quality-verify가 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify, worker-readiness, Pages, 라이브 smoke, release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #178 merge a2a2d3f37ced672d900bee64b98992e06d2a3dd2; PR checks 37165352762 and 37165352764; main workflow 37165443025; release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37165443025",
+      "captured_at": "2026-10-04T00:36:43Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-MOBILE-LABEL-MEDIA",
+      "claim_refs": ["C-017"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-LABEL-MEDIA-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 퍼블리싱 보완이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate a2a2d3f를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha a2a2d3f37ced672d900bee64b98992e06d2a3dd2; generatedAt 2026-10-04T00:36:43.699Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T00:36:43Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-MOBILE-LABEL-MEDIA",
+      "claim_refs": ["C-017"]
     }
   ]
 }

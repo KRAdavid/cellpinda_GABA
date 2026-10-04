@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 보조 문구·전문가 영상 영역 고도화 레드팀 재검증 — a2a2d3f — 2026-10-04
+
+- 공개 320px hero와 390px 전문가 영상 화면에서 작은 보조 문구가 12px로 읽히고, 선택한 세로 영상이 250x444px의 9:16 프레임으로 유지되는지 확인했다. 가로 넘침과 앱 오류는 없었다.
+- 영상 확대는 프레임 비율을 바꾸지 않는 `max-width` 조정으로 제한해 이미지 찌그러짐 위험을 만들지 않았다. 320px hero, 390px expert, 연구·마지막 공유 흐름의 반복 검증에서 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-LABEL-MEDIA-20261004`, `E-PLAYWRIGHT-MOBILE-LABEL-MEDIA-20261004`, `E-DEPLOY-PIPELINE-MOBILE-LABEL-MEDIA-20261004`, `E-LIVE-PUBLIC-MOBILE-LABEL-MEDIA-20261004`.
+
 ## 수면과 회복 연결 문구 명료화 레드팀 재검증 — eded7a9 — 2026-10-04
 
 - 공개 390px에서 `#recovery-break`에 직접 진입해 `다음 장으로 이어져요`가 상단 진행 레일에 표시되고, 제목·aria-label·가로 폭이 함께 유지되는지 확인했다. 320px과 1440px에서도 가로 넘침은 없었다.

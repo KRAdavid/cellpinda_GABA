@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 모바일 보조 문구·전문가 영상 영역 고도화 공개 배포: 2026-10-04 / candidate `a2a2d3f`
+
+320px 모바일 첫 화면의 보조 문구를 12px로 조정해 읽기성을 높이고, 전문가 세로 영상 선택 영역을 250x444px로 확장해 9:16 비율을 유지했다. PR #178, main workflow `37165443025`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 320px·390px Chrome fallback에서 가로 넘침·브라우저 오류 없이 문구와 영상 프레임을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-LABEL-MEDIA-20261004`, `E-PLAYWRIGHT-MOBILE-LABEL-MEDIA-20261004`, `E-DEPLOY-PIPELINE-MOBILE-LABEL-MEDIA-20261004`, `E-LIVE-PUBLIC-MOBILE-LABEL-MEDIA-20261004`.
+
 ## 수면과 회복 연결 문구 명료화 공개 배포: 2026-10-04 / candidate `eded7a9`
 
 상단 진행 레일의 모호한 `이어 읽기 / 12`를 소비자가 바로 이해할 수 있는 `다음 장으로 이어져요`로 정리했다. PR #177, main workflow `37164504662`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 문구·aria-label·제목·가로 폭·브라우저 오류를 확인했고 320px·1440px 대표 감사도 통과했다. 한 차례 YouTube iframe의 Chrome Permissions Policy 경고가 관찰됐으나 즉시 재실행에서 재현되지 않아 외부 iframe 잔여 검증으로 기록했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

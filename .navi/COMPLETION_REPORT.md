@@ -1,5 +1,14 @@
 # Completion Report
 
+## Mobile Label and Media Release Gate — a2a2d3f — 2026-10-04
+
+- PR #178에서 320px 모바일 첫 화면의 보조 문구를 12px로 조정하고, 전문가 세로 영상 영역을 250x444px로 확장했다. 9:16 프레임은 유지되어 시각 비율을 손상하지 않는다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 320px·390px Chrome fallback, PR checks, main workflow `37165443025`, Pages·라이브 smoke·release status·live validator candidate `a2a2d3f`가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-LABEL-MEDIA-20261004`, `E-PLAYWRIGHT-MOBILE-LABEL-MEDIA-20261004`, `E-DEPLOY-PIPELINE-MOBILE-LABEL-MEDIA-20261004`, `E-LIVE-PUBLIC-MOBILE-LABEL-MEDIA-20261004`.
+
 ## Interlude Copy Release Gate — eded7a9 — 2026-10-04
 
 - PR #177에서 수면과 회복 연결 구간의 상단 진행 문구를 `다음 장으로 이어져요`로 정리하고, 보조기기 안내와 공개 화면의 의미를 맞췄다.
