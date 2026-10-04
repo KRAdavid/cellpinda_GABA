@@ -1227,6 +1227,7 @@ export default function PublicGabaGuide() {
   };
 
   const handleRecoveryTouchStart = (event: TouchEvent<HTMLElement>) => {
+    setRecoveryInteractionPaused(true);
     const touch = event.changedTouches[0];
     recoveryTouchStart.current = { x: touch.clientX, y: touch.clientY };
   };
@@ -1234,12 +1235,20 @@ export default function PublicGabaGuide() {
   const handleRecoveryTouchEnd = (event: TouchEvent<HTMLElement>) => {
     const start = recoveryTouchStart.current;
     recoveryTouchStart.current = null;
-    if (!start) return;
+    if (!start) {
+      setRecoveryInteractionPaused(false);
+      return;
+    }
     const touch = event.changedTouches[0];
     const deltaX = touch.clientX - start.x;
     const deltaY = touch.clientY - start.y;
-    if (Math.abs(deltaX) < 44 || Math.abs(deltaX) < Math.abs(deltaY) * 1.25) return;
-    moveRecoveryCard(deltaX < 0 ? 1 : -1);
+    if (Math.abs(deltaX) >= 44 && Math.abs(deltaX) >= Math.abs(deltaY) * 1.25) moveRecoveryCard(deltaX < 0 ? 1 : -1);
+    setRecoveryInteractionPaused(false);
+  };
+
+  const handleRecoveryTouchCancel = () => {
+    recoveryTouchStart.current = null;
+    setRecoveryInteractionPaused(false);
   };
 
   const sharePage = async () => {
@@ -1424,7 +1433,7 @@ export default function PublicGabaGuide() {
                 return <button key={card.eyebrow} type="button" className={`guide-recovery-map-step${index === activeRecoveryCard ? ' is-active' : ''}`} data-recovery-index={index} aria-label={`${card.eyebrow} · ${index + 1}단계`} aria-controls="recovery-story-card" aria-current={index === activeRecoveryCard ? 'step' : undefined} aria-pressed={index === activeRecoveryCard} onClick={() => selectRecoveryCard(index)}><span className="guide-recovery-map-icon"><Icon size={17} strokeWidth={1.8} aria-hidden="true" /></span><span className="guide-recovery-map-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></button>;
               })}
             </div>
-            <div id="recovery-story-card" className={`guide-recovery-card is-${recoveryCard.tone}${recoveryIsPaused ? ' is-paused' : ''}`} role="group" aria-label={`수면과 회복 카드 ${activeRecoveryCard + 1} / ${recoveryCards.length}: ${recoveryCard.eyebrow}`} tabIndex={0} onKeyDown={handleRecoveryKeyDown} onTouchStart={handleRecoveryTouchStart} onTouchEnd={handleRecoveryTouchEnd}>
+            <div id="recovery-story-card" className={`guide-recovery-card is-${recoveryCard.tone}${recoveryIsPaused ? ' is-paused' : ''}`} role="group" aria-label={`수면과 회복 카드 ${activeRecoveryCard + 1} / ${recoveryCards.length}: ${recoveryCard.eyebrow}`} tabIndex={0} onKeyDown={handleRecoveryKeyDown} onTouchStart={handleRecoveryTouchStart} onTouchEnd={handleRecoveryTouchEnd} onTouchCancel={handleRecoveryTouchCancel}>
               <span className="sr-only" aria-live="polite">카드: {recoveryCard.eyebrow}, {activeRecoveryCard + 1}단계 / {recoveryCards.length}단계</span>
               <div className="guide-recovery-card-top">
                 <div className="guide-recovery-card-copy">
