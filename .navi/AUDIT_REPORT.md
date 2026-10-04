@@ -1,5 +1,14 @@
 # Audit Report
 
+## 사업자용 GABA 공유 패키지 공개 배포 감리 — 02f8fac — 2026-10-04
+
+- 마지막 이야기 공유 장에 `사업자용 활용 자료` 안내를 먼저 노출하고, `사업자용 GABA 핵심 5문장 · 바로 복사하기` 표제와 5개 카드 펼치기·복사 흐름을 유지했다. 공개 과학 카피와 제품 독립 경계는 변경하지 않았다.
+- 로컬 공개 카피 검사·UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Playwright Chromium fallback으로 로컬과 GitHub Pages 공개본 390px·1440px에서 안내 카드 표시·details open·5개 카드·첫 문장 복사·가로폭·page/console error 0건을 확인했다.
+- main workflow `37185751209`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `02f8facb26e1c53e7184162801f60b2aaf8a34f6`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-BUSINESS-SHARE-KIT-20261004, E-PLAYWRIGHT-BUSINESS-SHARE-KIT-20261004, E-DEPLOY-PIPELINE-BUSINESS-SHARE-KIT-20261004, E-LIVE-PUBLIC-BUSINESS-SHARE-KIT-20261004.
+
 ## 모바일 전문가 영상 정보 계층 고도화 감리 — 0feb5743 — 2026-10-04
 
 - 700px 이하에서 선택된 전문가 영상의 제목·채널·공유 동작을 세로형 영상 프레임보다 먼저 배치해, 모바일 사용자가 무엇을 보고 있는지 먼저 이해하도록 보완했다. 데스크톱의 좌측 feature panel·우측 영상 보드 구조는 유지했다.

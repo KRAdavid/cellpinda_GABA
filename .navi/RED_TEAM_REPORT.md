@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 사업자용 GABA 공유 패키지 공개 배포 레드팀 재검증 — 02f8fac — 2026-10-04
+
+- 마지막 장에서 사업자용 안내가 접힌 details 안에만 남아 발견되지 않는 경로를 보완한 뒤, 모바일·데스크톱에서 안내 카드가 먼저 보이고 5개 공유 문장이 펼쳐지는지 확인했다. 기존 제품 독립 문구와 공유 표제는 유지됐다.
+- 첫 문장 복사 후 상태 안내, 390px·1440px 화면 폭, page error·console error 0건을 확인했으며 공개 candidate에서도 동일 흐름을 재현했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chromium fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001·RT-002·RT-003은 계속 OPEN이며 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-BUSINESS-SHARE-KIT-20261004, E-LIVE-PUBLIC-BUSINESS-SHARE-KIT-20261004.
+
 ## 모바일 전문가 영상 읽기 순서 레드팀 재검증 — 0feb5743 — 2026-10-04
 
 - 320·350·390px에서 선택된 영상의 제목·채널·공유 동작이 긴 세로형 영상보다 먼저 노출되는지, 1440px에서 데스크톱 정보 계층이 유지되는지 확인했다. 제목이 늦게 나타나거나 선택 문맥이 사라지는 경로는 재현되지 않았다.

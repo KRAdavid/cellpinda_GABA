@@ -294,6 +294,17 @@
         "E-LIVE-PUBLIC-RESEARCH-APPLICATION-HANDOFF-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-037",
+      "statement": "마지막 이야기 공유 장에서 사업자가 GABA의 기본 역할과 연구 흐름을 담은 5문장 공유 패키지를 먼저 발견하고, 펼치기·복사 동작으로 바로 활용할 수 있으며 모바일과 데스크톱에서 제품 독립 정보 흐름이 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-BUSINESS-SHARE-KIT-20261004",
+        "E-PLAYWRIGHT-BUSINESS-SHARE-KIT-20261004",
+        "E-DEPLOY-PIPELINE-BUSINESS-SHARE-KIT-20261004",
+        "E-LIVE-PUBLIC-BUSINESS-SHARE-KIT-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5419,6 +5430,50 @@
       "captured_at": "2026-10-04T07:11:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-APPLICATION-HANDOFF",
       "claim_refs": ["C-036"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-BUSINESS-SHARE-KIT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자용 GABA 5문장 공유 패키지 안내를 마지막 장에 노출한 PR #200 후보가 공개 카피 검사·UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #200 source commit 397d6bf; pnpm run validate:research-copy PASS; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1488663 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/200",
+      "captured_at": "2026-10-04T07:21:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-BUSINESS-SHARE-KIT",
+      "claim_refs": ["C-037"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-BUSINESS-SHARE-KIT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 마지막 공유 장의 사업자용 안내가 보이고, 공유 문장을 펼치면 5개 카드가 표시되며 첫 문장 복사 후 상태 안내가 유지됐다. 모바일·데스크톱 가로 넘침과 브라우저 오류는 없었다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:4180/guide/?view=guide#final; 390x844 and 1440x1000; guide-share-intro visible; summary text `사업자용 GABA 핵심 5문장 · 바로 복사하기`; details open=true; cards=5; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/200",
+      "captured_at": "2026-10-04T07:23:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-BUSINESS-SHARE-KIT",
+      "claim_refs": ["C-037"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-BUSINESS-SHARE-KIT-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자용 공유 패키지 보완 PR #200이 필수 검사를 통과해 main에 병합되었고, GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #200 merge main commit 02f8facb26e1c53e7184162801f60b2aaf8a34f6; PR checks release-verify 37185679014 and site-quality-verify 37185679071 successful; main workflow 37185751209; release-verify 111387172498, worker-readiness 111387284991, deploy-pages 111387296756, smoke-live 111387325115, release-status 111387358122 success; deploy-worker 111387297164 skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37185751209",
+      "captured_at": "2026-10-04T07:25:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-BUSINESS-SHARE-KIT",
+      "claim_refs": ["C-037"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-BUSINESS-SHARE-KIT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 사업자용 GABA 공유 패키지 안내가 표시되고, 공유 문장을 펼치면 5개 카드가 열리며 첫 문장 복사 상태가 확인됐다. 390px·1440px에서 화면 폭과 오류 기준이 안정적으로 유지된다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 02f8facb26e1c53e7184162801f60b2aaf8a34f6; generatedAt 2026-10-04T07:26:23.704Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback at 390x844 and 1440x1000; intro visible; details open=true; cards=5; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#final",
+      "captured_at": "2026-10-04T07:27:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-BUSINESS-SHARE-KIT",
+      "claim_refs": ["C-037"]
     }
   ]
 }

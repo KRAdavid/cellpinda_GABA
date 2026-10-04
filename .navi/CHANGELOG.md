@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 사업자용 GABA 공유 패키지 공개 배포: 2026-10-04 / candidate 02f8fac
+
+마지막 이야기 공유 장에 사업자용 활용 자료 안내를 먼저 노출하고, 기존 검증 표제를 유지한 5문장 공유 패키지를 펼치기·복사할 수 있도록 고도화했다. 모바일·데스크톱에서 제품 독립 정보 흐름과 Apple 톤앤매너를 유지했으며 PR #200, main workflow 37185751209, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공유 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-BUSINESS-SHARE-KIT-20261004, E-PLAYWRIGHT-BUSINESS-SHARE-KIT-20261004, E-DEPLOY-PIPELINE-BUSINESS-SHARE-KIT-20261004, E-LIVE-PUBLIC-BUSINESS-SHARE-KIT-20261004.
+
 ## 모바일 전문가 영상 정보 계층 고도화 공개 배포: 2026-10-04 / candidate 0feb5743
 
 700px 이하에서 선택 전문가 영상의 제목·채널·공유 동작을 세로형 영상 프레임보다 먼저 읽도록 보완했다. PR #197과 main workflow 37182224154, live validator HTTP 200·STATIC, Playwright Chromium fallback 320·350·390·1440px 선택 흐름을 확인했다. 9:16 비율·가로폭·오류 기준을 통과했으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
