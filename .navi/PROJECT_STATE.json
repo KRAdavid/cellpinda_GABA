@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T22:35:00Z",
+  "updated_at": "2026-10-04T22:50:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4370,6 +4370,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T22:35:00Z"
+    },
+    {
+      "id": "H-163",
+      "event": "연구 지도에서 선택 카드만 강조되고 지도 중심에는 현재 읽는 주제가 표시되지 않아 지도와 상세 카드의 연결을 즉시 이해하기 어려운 시각적 흐름 리스크를 확인하고 PR #261에서 GABA 중심 표시는 유지하면서 중앙에 현재 연구 주제 상태 라벨을 동기화했다. v84 UI 계약을 추가했고 PR #261 checks, main workflow `37241358621`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate `551979122680c2bccfcbfbdf2b420abfb7194564`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 실제 공개 PublicGabaGuide bundle에서도 현재 연구 주제 라벨을 확인했다. 연구 수치·출처 데이터·제품 독립 공개 경계는 변경하지 않았다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T22:50:00Z"
     }
   ]
 }
