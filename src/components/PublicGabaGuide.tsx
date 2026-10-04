@@ -618,6 +618,12 @@ const getInitialExpertVideoId = () => {
   return requestedId && expertVideos.some((video) => video.id === requestedId) ? requestedId : expertVideos[0].id;
 };
 
+const getInitialExpertVideoTopic = () => {
+  if (typeof window === 'undefined') return '전체';
+  const requestedId = new URLSearchParams(window.location.search).get('video');
+  return expertVideos.find((video) => video.id === requestedId)?.topic ?? '전체';
+};
+
 const hasInitialExpertVideo = () => {
   if (typeof window === 'undefined') return false;
   const requestedId = new URLSearchParams(window.location.search).get('video');
@@ -845,7 +851,7 @@ export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
   const [activeVideoId, setActiveVideoId] = useState(getInitialExpertVideoId);
-  const [activeVideoTopic, setActiveVideoTopic] = useState('전체');
+  const [activeVideoTopic, setActiveVideoTopic] = useState(getInitialExpertVideoTopic);
   const [videoStarted, setVideoStarted] = useState(hasInitialExpertVideo);
   const [videoFrameReady, setVideoFrameReady] = useState(false);
   const [activeChapterId, setActiveChapterId] = useState<ActiveChapterId>('top');
