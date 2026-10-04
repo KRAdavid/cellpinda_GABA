@@ -1346,6 +1346,9 @@
   .guide-recovery-map{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 5px}
   .guide-recovery-map-step{min-height:52px}
   .guide-recovery-map-icon{width:38px;height:38px}
+  /* Center the final two steps so the shortened third row reads as an intentional ending. */
+  .guide-recovery-map-step:nth-last-child(2){grid-column:3}
+  .guide-recovery-map-step:last-child{grid-column:4}
 }
 
 /* v53 research comparison: make relative direction visible before the reader parses the labels. */
