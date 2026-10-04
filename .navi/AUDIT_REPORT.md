@@ -1,5 +1,14 @@
 # Audit Report
 
+## 전문가 영상 fallback 포스터·콘솔 정리 감사 — c97d2ac — 2026-10-04
+
+- 원격 YouTube 썸네일이 응답하지 않을 때 동일한 기본 카드가 반복되던 문제를 주제별 자연 이미지 fallback 포스터로 보완했다. 실제 썸네일은 우선 사용하며, 수면·자율신경·연구·GABA란의 주제 구분과 Apple식 저밀도 시각 흐름을 유지한다.
+- iframe 재생에 필요하지 않은 `web-share` 권한 토큰을 제거했다. 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px·1440px Chrome fallback에서 fallback 포스터·연구 읽기 필터·대표 제목 변경·활성 카드 1개·가로 폭·콘솔·페이지 오류 없음을 확인했다.
+- PR #185 checks `37171642623`, `37171642620`과 main workflow `37171708026`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `c97d2ac`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`.
+
 ## 연구 결과 비교 도표 방향성 감사 — 86891bc — 2026-10-04
 
 - 연구 결과 카드의 비교 문구는 유지하면서, 비교 조건과 GABA 조건의 상대적 변화 방향을 막대 길이로 분리해 시각적 비교 단계를 추가했다. 막대는 실제 효과 크기가 아니라 방향 비교라는 기존 주석을 유지한다.

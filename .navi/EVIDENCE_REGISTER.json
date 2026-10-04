@@ -142,6 +142,17 @@
         "E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-023",
+      "statement": "전문가 영상 갤러리는 원격 YouTube 썸네일이 응답하지 않아도 기존 자연 이미지 톤의 주제별 fallback 포스터를 표시하고, 실제 썸네일이 응답하면 이를 우선 사용하며, 지원하지 않는 iframe 권한 토큰 없이도 필터·선택·즉시 재생 흐름을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004",
+        "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4662,6 +4673,50 @@
       "captured_at": "2026-10-04T02:22:56Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-COMPARISON-DIRECTION",
       "claim_refs": ["C-022"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 갤러리의 주제별 fallback 포스터와 iframe 권한 정리를 포함한 PR #185 후보가 UI 계약·typecheck·127개 테스트·production build를 통과했고, 로컬 390px·1440px에서 수면·연구·자율신경·GABA란 주제의 포스터와 필터 상태가 읽히며 가로 넘침과 브라우저 오류가 없음을 확인했다.",
+      "locator": "PR #185 candidate 0a8c84e5beeb282139525a0952f0e829b6ea4c43; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright 1.62.1 Chrome fallback 390x844 and 1440x900; expert video topic filter `연구 읽기` -> title `GABA 섭취 연구 읽기`, activeCards 1, aria-pressed true; scrollWidth equals viewportWidth; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/185",
+      "captured_at": "2026-10-04T02:37:30Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-EXPERT-VIDEO-POSTERS",
+      "claim_refs": ["C-023"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본 390px·1440px Chrome fallback에서 원격 썸네일이 응답하지 않는 카드도 주제별 자연 이미지 포스터를 표시하고, 전문가 영상 `연구 읽기` 필터 선택 후 대표 제목과 활성 카드가 갱신되며 문서 폭은 뷰포트와 같고 콘솔·페이지 오류가 없었다.",
+      "locator": "temporary Playwright 1.62.1 with Chrome channel; public https://kradavid.github.io/gaba_info/guide/?view=guide; viewport 390x844 and 1440x900; title after filter `전문가 영상 · GABA 섭취 연구 읽기 | GABA Guide`; filteredVideo `GABA 섭취 연구 읽기`; activeCards 1; filter aria-pressed true; scrollWidth equals viewportWidth; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#expert-videos",
+      "captured_at": "2026-10-04T02:40:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-EXPERT-VIDEO-POSTERS",
+      "claim_refs": ["C-023"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #185의 release-verify·site-quality-verify가 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify, worker-readiness, Pages, 라이브 smoke, release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #185 merge c97d2ac3f322cd8c28c33566b3dea48d476a5588; PR checks 37171642623 and 37171642620; main workflow 37171708026; release-verify success, worker-readiness success, deploy-pages success, smoke-live success, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37171708026",
+      "captured_at": "2026-10-04T02:42:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-EXPERT-VIDEO-POSTERS",
+      "claim_refs": ["C-023"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "주제별 전문가 영상 fallback 포스터 보완이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate c97d2ac를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha c97d2ac3f322cd8c28c33566b3dea48d476a5588; generatedAt 2026-10-04T02:40:02.624Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T02:40:02Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-POSTERS",
+      "claim_refs": ["C-023"]
     }
   ]
 }

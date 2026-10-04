@@ -1,5 +1,14 @@
 # Completion Report
 
+## Expert Video Poster Resilience Release Gate — c97d2ac — 2026-10-04
+
+- PR #185에서 원격 YouTube 썸네일이 응답하지 않아도 주제별 자연 이미지 fallback 포스터가 보이도록 보완하고, 실제 썸네일 우선 표시와 영상 선택·즉시 재생 흐름을 유지했다. 지원하지 않는 iframe `web-share` 권한 토큰도 제거했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px·1440px Chrome fallback, PR checks, main workflow `37171708026`, Pages·라이브 smoke·release status·live validator candidate `c97d2ac`가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`.
+
 ## Research Comparison Direction Release Gate — 86891bc — 2026-10-04
 
 - PR #184에서 연구 결과 도표의 상대 비교 막대가 같은 길이로 보이던 문제를 보완했다. 비교 조건과 GABA 조건의 변화 방향을 먼저 시각적으로 구분하고, 실제 효과 크기로 읽히지 않도록 기존 안내 문구를 유지했다.
