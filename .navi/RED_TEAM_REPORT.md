@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 전문가 영상 갤러리 레드팀 재검증 — a77c91c — 2026-10-04
+
+- 공개 390px에서 영상 카드가 썸네일 중심 2열로 보이고, 320px에서는 1열로 복귀하는지 확인했다. 1440px에서는 기존 2열 게시판과 선택 영상 패널을 유지하며, 두 번째 카드 선택 시 제목과 iframe 상태가 함께 바뀌었다.
+- 9개 썸네일 로드, 가로 넘침 없음, 선택 상태 1개, 앱 오류 없음으로 확인했다. 첫 320px 실행에서 외부 YouTube iframe의 `compute-pressure` Permissions Policy 경고가 관찰됐으나 즉시 재실행에서 재현되지 않아 사이트 코드 결함이 아닌 외부 임베드 브라우저 경고로 분류했다.
+- 카드 밀도 보정은 CSS에 한정되어 연구 수치·출처·제품 정보·영상 재생·공유 로직을 변경하지 않았다. Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 자동화로 닫을 수 없으며 RT-001·RT-002·RT-003은 계속 `OPEN`, 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004`, `E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004`, `E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004`.
+
 ## 마지막 이야기 공유 장 시각 균형 레드팀 재검증 — ec2a1bd — 2026-10-04
 
 - 공개 390px·1440px에서 마지막 장으로 이동해 동심원 신호와 GABA 워터마크가 제목·본문·공유 버튼의 대비와 읽기 순서를 침범하지 않는지 확인했다. 모바일에서는 그래픽이 하단·저대비로 남고 데스크톱에서는 오른쪽 빈 공간을 보완했으며, 가로 넘침과 브라우저 오류는 없었다.

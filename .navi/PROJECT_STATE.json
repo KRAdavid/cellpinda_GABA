@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T01:35:21Z",
+  "updated_at": "2026-10-04T01:57:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -246,7 +246,11 @@
         "E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004",
         "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
-        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004"
+        "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
+        "E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004",
+        "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
+        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004",
+        "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -393,7 +397,11 @@
         "E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004",
         "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
         "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
-        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004"
+        "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004",
+        "E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004",
+        "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
+        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004",
+        "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004"
       ],
       "owner": "UX QA"
     },
@@ -1342,7 +1350,9 @@
           "E-CDP-RESEARCH-SOURCE-LABEL",
           "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL",
           "E-CDP-RESEARCH-PRODUCT-FREE",
-          "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE"
+          "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
+          "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
+          "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -1393,7 +1403,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-03T19:59:00Z"
+    "last_run_at": "2026-10-04T01:57:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1416,6 +1426,8 @@
           "E-LIVE-PUBLIC-VIDEO-SELECTION-STATE",
           "E-CDP-VIDEO-RESELECT",
           "E-LIVE-PUBLIC-VIDEO-RESELECT",
+          "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
+          "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004",
           "E-CDP-RESEARCH-SOURCE-LABEL",
           "E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL"
         ],
@@ -1445,7 +1457,9 @@
         "evidence_refs": [
           "E-CDP-MOBILE",
           "E-REDTEAM-REVIEW",
-          "E-CDP-RECOVERY-NAV"
+          "E-CDP-RECOVERY-NAV",
+          "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
+          "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -1454,7 +1468,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-03T19:59:00Z"
+    "last_run_at": "2026-10-04T01:57:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -2036,9 +2050,13 @@
           "E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004",
           "E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004",
           "E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004",
-          "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004"
+          "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004",
+          "E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004",
+          "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
+          "E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004",
+          "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004"
         ],
-        "notes": "390px·320px 가로 넘침 없음, 모바일 메뉴 열린 상태의 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환, 큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로·가+에서 가−로 바뀌는 읽기 도구·직접 해시 진입 제목 정렬을 유지 확인"
+        "notes": "390px·320px 가로 넘침 없음, 모바일 메뉴 열린 상태의 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환, 큰 글씨·연구 지도·지도 클릭 후 현재 주제 활성 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12 진행 표시·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·768/820px 태블릿 헤더 컨트롤·전문가 영상 선택·로딩 상태·동일 영상 재선택·제품 CTA 없는 연구 경로·가+에서 가−로 바뀌는 읽기 도구·직접 해시 진입 제목 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생을 유지 확인"
       },
       {
         "criterion_id": "AC-005",
@@ -2185,9 +2203,13 @@
           "E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004",
           "E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004",
           "E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004",
-          "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004"
+          "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004",
+          "E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004",
+          "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
+          "E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004",
+          "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -2879,6 +2901,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T01:35:21Z"
+    },
+    {
+      "id": "H-090",
+      "event": "전문가 영상 게시판이 모바일에서 긴 텍스트 목록처럼 이어져 시각적 탐색성이 약하던 상태를 PR #183에서 보완했다. 390px에서는 썸네일 중심 2열 갤러리, 350px 이하에서는 기존 1열 카드로 반응하도록 정리하고, 제목·채널명·선택 상태를 읽기 좋은 밀도로 조정했다. 영상 선택·즉시 재생·출처·공유 흐름은 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 320px·390px·1440px Chrome fallback의 1열/2열 반응·썸네일 로드·카드 선택 후 제목 변경·iframe 생성·가로 폭을 확인했고, PR #183 checks, main workflow 37169365913, live validator HTTP 200·STATIC·candidate a77c91c를 확인했다. 320px 첫 공개 재실행에서 YouTube iframe의 compute-pressure Permissions Policy 경고가 한 차례 관찰됐으나 즉시 재실행에서 앱 오류는 재현되지 않았고 외부 iframe 브라우저 검증 항목으로 남겼다. 공개 과학 카피·출처·제품 독립 경계는 변경하지 않았으며 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T01:57:00Z"
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 전문가 영상 갤러리 감사 — a77c91c — 2026-10-04
+
+- 390px에서 전문가 영상 게시판을 썸네일 중심 2열 갤러리로 정리하고, 350px 이하에서는 1열 카드로 복귀하도록 반응형 밀도를 보완했다. 데스크톱 게시판과 선택 영상의 어두운 미디어 패널은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build와 공개 320px·390px·1440px Chrome fallback을 통과했다. 390px 2열, 320px 1열, 썸네일 9개 로드, 두 번째 카드 선택 후 제목 변경·iframe 생성, viewport와 같은 문서 폭을 확인했다.
+- PR #183 checks `37169283639`, `37169283651`과 main workflow `37169365913`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `a77c91c`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 320px 공개 첫 실행에서 YouTube iframe의 `compute-pressure` Permissions Policy 경고가 한 차례 있었으나 즉시 재실행에서 앱 오류는 없었다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004`, `E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004`, `E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004`.
+
 ## 마지막 이야기 공유 장 시각 균형 감사 — ec2a1bd — 2026-10-04
 
 - 데스크톱 마지막 장에서 왼쪽 콘텐츠 뒤 오른쪽 공간이 비어 보이던 상태를 PR #182에서 보완했다. 저채도 동심원 신호와 GABA 워터마크를 추가해 첫 화면의 자연·과학 톤을 마지막 장까지 연결하되, 카피·공유 행동·제품 독립 경계는 변경하지 않았다.

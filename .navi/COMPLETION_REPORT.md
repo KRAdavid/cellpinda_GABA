@@ -1,5 +1,14 @@
 # Completion Report
 
+## Mobile Expert Video Gallery Release Gate — a77c91c — 2026-10-04
+
+- PR #183에서 390px 모바일 전문가 영상 게시판을 썸네일 중심 2열 갤러리로 정리하고, 350px 이하에서는 1열 카드로 복귀하도록 보완했다. 제목·채널명·선택 상태의 가독성을 유지하면서 영상 선택·즉시 재생·출처·공유 흐름은 그대로 두었다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 320px·390px·1440px Chrome fallback, PR checks, main workflow `37169365913`, Pages·라이브 smoke·release status·live validator candidate `a77c91c`가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. 320px에서 관찰된 외부 YouTube `compute-pressure` 경고는 재실행에서 사라졌지만 브라우저별 iframe 검증을 남기며, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004`, `E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004`, `E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004`.
+
 ## Final Chapter Signal Release Gate — ec2a1bd — 2026-10-04
 
 - PR #182에서 마지막 이야기 공유 장의 데스크톱 시각 균형을 보완했다. 저채도 동심원 신호와 GABA 워터마크를 추가했으며, 모바일에서는 낮은 대비·하단 배치로 핵심 문구와 공유 행동을 우선했다.
