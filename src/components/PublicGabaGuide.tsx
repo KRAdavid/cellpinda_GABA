@@ -1112,6 +1112,8 @@ export default function PublicGabaGuide() {
     window.addEventListener('touchstart', stopFallback, { passive: true });
     window.addEventListener('pointerdown', stopFallback, { passive: true });
     window.addEventListener('keydown', stopFallback);
+    window.addEventListener('resize', alignSettledTarget);
+    window.visualViewport?.addEventListener('resize', alignSettledTarget);
     return () => {
       cancelled = true;
       timers.forEach((timer) => window.clearTimeout(timer));
@@ -1119,6 +1121,8 @@ export default function PublicGabaGuide() {
       window.removeEventListener('touchstart', stopFallback);
       window.removeEventListener('pointerdown', stopFallback);
       window.removeEventListener('keydown', stopFallback);
+      window.removeEventListener('resize', alignSettledTarget);
+      window.visualViewport?.removeEventListener('resize', alignSettledTarget);
     };
   }, []);
 
