@@ -240,7 +240,8 @@
 /* v6 discovery-led opening: history -> academic map -> applications. */
 .guide-mobile-break{display:none}
 .guide-hero-story{background:radial-gradient(circle at 78% 38%,#e9faf9 0%,rgba(233,250,249,.42) 18%,transparent 44%),linear-gradient(112deg,#fff 0%,#fff 45%,#f3fbfc 100%)}
-.guide-hero-kicker{margin:0;color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.22em;line-height:1.4}
+/* v51 minimal hero opening: let the primary headline carry the first viewport without a redundant pretitle. */
+.guide-hero-story h1{margin-top:0}
 .guide-hero-story h1>span{font-size:.9em}
 .guide-hero-story h1>em{font-size:1.02em}
 .guide-history{background:#f7fbfd}
@@ -284,7 +285,6 @@
 }
 @media(max-width:700px){
   .guide-hero-story{background:#fff}
-  .guide-hero-kicker{font-size:10px}
   .guide-hero-story h1 .guide-mobile-break{display:inline}
   .guide-hero-story h1>span,.guide-hero-story h1>em{max-width:100%;overflow-wrap:anywhere;word-break:keep-all}
   .guide-hero-story .guide-hero-body{overflow-wrap:anywhere}
@@ -1284,7 +1284,6 @@
 /* v47 mobile reading clarity: keep functional labels readable without enlarging decorative numerals. */
 @media(max-width:700px){
   .guide-section-number{font-size:12px}
-  .guide-hero-kicker{font-size:12px;letter-spacing:.14em}
   .guide-reading-progress-meta>span,.guide-reading-progress-meta>small{font-size:12px}
   .guide-recovery-card-footer{font-size:12px}
   .guide-recovery-thread{font-size:12px}
