@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
+
+- 공격 관점에서 확인한 개선 지점은 연구 출처의 발견성이다. 출처명과 `원문 보기` 액션이 같은 카드 안에서 분리되어 있고, 링크 전체가 44px 터치 영역과 명시적 포커스 스타일을 갖는다.
+- 로컬 typecheck·UI contract·127 tests·production build/performance, PR #224 checks, main workflow `37209426168`의 Pages·라이브 smoke·release status를 모두 확인했다. Worker는 STATIC_ONLY이므로 실행하지 않았다.
+- 공개 URL validator는 candidate `6248808a56db53bd1a5d5fb3b822f2d58a8fc3bf`, HTTP 200, STATIC, 70개 bundle hash, 12개 claim, 6개 master record, 6개 share page를 확인했다.
+- 브라우저 플러그인과 Playwright가 없어 실제 모바일 탭 동작, 외부 원문 로딩, 실기기·고령 사용자 사용성은 확인 범위 밖이다. 결과는 PASS_WITH_CONDITIONS이며 NAVI 완료 게이트는 NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-ACTION-20261004`, `E-UI-CONTRACT-RESEARCH-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004`.
+
 ## 사업자용 전체 공유 복사 상태 재검증 — 94bcd16 — 2026-10-04
 
 - 5문장 전체 복사 성공을 전역 토스트만으로 알리면 사업자가 버튼 상태를 다시 확인하기 어려운 실패 모드를 확인했다. PR #223에서 전체 복사 버튼 자체를 `복사 완료`로 표시하고 2.4초 후 원상태로 돌아가도록 보강했다.

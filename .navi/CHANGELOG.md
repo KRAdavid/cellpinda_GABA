@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
+
+- 연구 카드 출처를 `출처명`과 `원문 보기`로 분리하고 링크 전체에 44px 터치 영역·키보드 포커스 표시를 적용했다.
+- PR #224, main 배포 `37209426168`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·70개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 동작은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-ACTION-20261004`, `E-UI-CONTRACT-RESEARCH-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004`.
+
 ## 사업자용 전체 공유 복사 상태 및 공개 재검증: 2026-10-04 / candidate 94bcd16
 
 사업자용 GABA 핵심 5문장 전체 복사 버튼을 누르면 해당 버튼이 `복사 완료`로 바뀌고 2.4초 뒤 원래 상태로 돌아가도록 고도화했다. PR #223 checks, main workflow `37208889644`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드와 모바일 브라우저 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

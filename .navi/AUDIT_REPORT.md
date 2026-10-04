@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
+
+- 연구 카드의 출처를 작은 텍스트 링크 하나로 두지 않고, 출처명과 별도 `원문 보기` 액션을 한 행의 명확한 터치 영역으로 분리했다. 모바일 최소 44px 터치 높이와 키보드 `focus-visible` 표시를 적용해 사업자와 고령 사용자가 원문 진입점을 빠르게 찾을 수 있게 했다.
+- PR #224 필수 checks와 로컬 typecheck·UI contract·127 tests·production build/performance를 확인했다. main workflow `37209426168`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator candidate `6248808a56db53bd1a5d5fb3b822f2d58a8fc3bf`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 브라우저 원문 탭·모바일 실기기 터치·고령 사용자 독해성은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-ACTION-20261004`, `E-UI-CONTRACT-RESEARCH-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004`.
+
 ## 사업자용 전체 공유 복사 피드백 및 공개 재검증 — 94bcd16 — 2026-10-04
 
 - 사업자용 5문장 전체 복사 버튼이 전역 토스트에만 의존해 복사 성공을 버튼 자체에서 확인하기 어려운 흐름을 확인했다. PR #223에서 전체 복사 버튼도 `복사 완료` 상태, 모바일 터치 영역, 키보드 포커스 표시와 2.4초 후 자동 복귀를 적용해 개별 문장 카드와 일관되게 만들었다.

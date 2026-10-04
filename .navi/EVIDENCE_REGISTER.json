@@ -532,6 +532,17 @@
         "E-LIVE-PUBLIC-FULL-SHARE-COPY-ACK-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-059",
+      "statement": "연구 카드가 출처명을 읽기 쉽게 보여주고 44px 터치 영역의 별도 ‘원문 보기’ 액션과 키보드 포커스 표시를 제공해, 모바일에서 원문 출처를 더 쉽게 찾을 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SOURCE-ACTION-20261004",
+        "E-UI-CONTRACT-RESEARCH-SOURCE-ACTION-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-ACTION-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6603,6 +6614,50 @@
       "captured_at": "2026-10-04T14:21:20Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-FULL-SHARE-COPY-ACK",
       "claim_refs": ["C-058"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SOURCE-ACTION-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 출처명과 별도 원문 보기 액션을 추가한 후보가 typecheck·UI 계약·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #224 source commit d5f5695; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run validate:ui-contract PASS including readable source name, distinct guide-research-source-action and 원문 보기 guard; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1499665 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/224",
+      "captured_at": "2026-10-04T14:29:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-RESEARCH-SOURCE-ACTION",
+      "claim_refs": ["C-059"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SOURCE-ACTION-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 카드에 출처 URL·읽기 쉬운 출처명·별도 원문 보기 액션·원문 보기 문구가 함께 존재하는지 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs public research source action assertion; guide-research-source, topic.source.url, guide-research-source-name, guide-research-source-action and 원문 보기 guard; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/224",
+      "captured_at": "2026-10-04T14:29:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261004-RESEARCH-SOURCE-ACTION",
+      "claim_refs": ["C-059"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-SOURCE-ACTION-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 원문 보기 링크 가독성 보강 PR #224가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #224 merge main commit 6248808a56db53bd1a5d5fb3b822f2d58a8fc3bf; PR #224 checks release-verify 37209354520 and site-quality-verify 37209354543 successful; main workflow 37209426168 with release-verify 111457389072, worker-readiness 111457600865, deploy-pages 111457729374, smoke-live 111457767726 and release-status 111457807007 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37209426168",
+      "captured_at": "2026-10-04T14:30:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-SOURCE-ACTION",
+      "claim_refs": ["C-059"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 연구 카드 원문 보기 링크 가독성 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=6248808a56db53bd1a5d5fb3b822f2d58a8fc3bf pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 6248808a56db53bd1a5d5fb3b822f2d58a8fc3bf; generatedAt 2026-10-04T14:30:08.575Z; heroImage webp-ready; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct browser and real-device interaction remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-04T14:30:08Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-SOURCE-ACTION",
+      "claim_refs": ["C-059"]
     }
   ]
 }

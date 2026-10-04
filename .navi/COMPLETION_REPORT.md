@@ -1,5 +1,13 @@
 # Completion Report
 
+## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
+
+- 연구 카드마다 읽기 쉬운 출처명과 분리된 `원문 보기` 액션을 제공하도록 고도화했다. 모바일 터치 높이 44px, 키보드 포커스 표시, 긴 출처명 줄바꿈을 반영했다.
+- PR #224와 main 공개 배포 workflow `37209426168`이 성공했고, 공개 URL validator가 최신 merge commit `6248808a56db53bd1a5d5fb3b822f2d58a8fc3bf`를 HTTP 200 정적 사이트로 확인했다.
+- 기능·배포 완료는 확인했지만 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증이 남아 있어 NAVI 상태는 USER_DECISION / NOT_READY, 결과는 PASS_WITH_CONDITIONS다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-ACTION-20261004`, `E-UI-CONTRACT-RESEARCH-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004`.
+
 ## 사업자용 전체 공유 복사 피드백 배포 품질 게이트 — 94bcd16 — 2026-10-04
 
 - PR #223을 main에 병합하고 사업자용 GABA 핵심 5문장 전체 복사 성공을 버튼 자체의 `복사 완료` 상태로 표시하도록 공개 사이트를 업데이트했다. 개별 문장 복사와 동일한 모바일·키보드 피드백을 유지했다.
