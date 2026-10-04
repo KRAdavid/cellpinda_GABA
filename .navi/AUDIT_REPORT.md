@@ -1,5 +1,14 @@
 # Audit Report
 
+## 전문가 영상 모바일 터치 영역 고도화 — 0b5a2a1 — 2026-10-05
+
+- 전문가 영상 선택 공유 버튼과 주제 필터의 명시적 터치 높이를 44px 이상으로 통일해 모바일과 고령 사용자 탐색 부담을 줄였다. UI 계약에 v50 터치 타깃 회귀 검사를 추가했다.
+- PR #228 필수 checks와 로컬 UI contract·typecheck·127 tests·production build/performance를 확인했다. main workflow `37212827380`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator candidate `0b5a2a104ce4d8442e3210a0e12b1c8bbccaaaa9`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 브라우저·실기기 터치와 고령 사용자 독해성은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-VIDEO-CONTROLS-20261005`, `E-UI-CONTRACT-VIDEO-CONTROLS-20261005`, `E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005`, `E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005`.
+
 ## 공개 공유 카드 분리 — 0e93fb3 — 2026-10-05
 
 - 기존 공개 root·guide·research 경로가 제품·하루리듬 공유 카드와 같은 미리보기 이미지를 사용해 GABA 공개 안내서의 첫 인상이 흐려지는 배포 결함을 확인했다. 제품과 무관한 1200×630 JPEG `gaba-guide-social-card.jpg`를 추가하고 정적 HTML·직접 안내서 런타임 메타데이터를 새 카드로 통일했다.

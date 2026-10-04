@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 모바일 터치 영역 고도화 — 0b5a2a1 — 2026-10-05
+
+- 전문가 영상 선택 공유 버튼과 주제 필터를 44px 이상 터치 영역으로 통일하고 UI 계약 회귀 검사를 추가했다.
+- PR #228, main 배포 `37212827380`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 터치와 고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-VIDEO-CONTROLS-20261005`, `E-UI-CONTRACT-VIDEO-CONTROLS-20261005`, `E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005`, `E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005`.
+
 ## 큰 글씨 읽기 모드 가독성 강화 — 5f4f6c7 — 2026-10-04
 
 - 큰 글씨 모드를 본문·연구 도표 기준 desktop 12%, mobile 10% 확대 수준으로 보강하고, 모바일 방향 문구 줄바꿈을 추가했다.

@@ -1,5 +1,13 @@
 # Completion Report
 
+## 전문가 영상 모바일 터치 영역 배포 품질 게이트 — 0b5a2a1 — 2026-10-05
+
+- 전문가 영상 선택 공유 버튼과 주제 필터를 데스크톱·모바일 44px 이상 터치 영역으로 통일하고 UI 계약 회귀 검사를 추가했다.
+- PR #228과 main 공개 배포 workflow `37212827380`이 성공했고, 공개 URL validator가 최신 merge commit `0b5a2a104ce4d8442e3210a0e12b1c8bbccaaaa9`를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71개 번들·12개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- 기능·배포 완료는 확인했지만 실제 브라우저·실기기 터치·고령 사용자 독해성은 외부 검증이 남아 있어 NAVI 상태는 USER_DECISION / NOT_READY, 결과는 PASS_WITH_CONDITIONS다.
+
+증적: `E-LOCAL-BUILD-VIDEO-CONTROLS-20261005`, `E-UI-CONTRACT-VIDEO-CONTROLS-20261005`, `E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005`, `E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005`.
+
 ## 공개 공유 카드 분리 배포 품질 게이트 — 0e93fb3 — 2026-10-05
 
 - 공개 root·guide·research 경로의 공유 미리보기를 제품·하루리듬 카드와 분리하고, GABA 공개 안내서 전용 1200×630 JPEG와 직접 안내서 런타임 메타데이터를 배포했다.

@@ -576,6 +576,17 @@
         "E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-063",
+      "statement": "전문가 영상 선택 공유 버튼과 주제 필터가 데스크톱·모바일에서 44px 이상 터치 영역을 유지하고, UI 계약이 이 기준을 회귀 점검한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-VIDEO-CONTROLS-20261005",
+        "E-UI-CONTRACT-VIDEO-CONTROLS-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005",
+        "E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6823,6 +6834,50 @@
       "captured_at": "2026-10-04T15:12:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-SOCIAL-PREVIEW",
       "claim_refs": ["C-062"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-CONTROLS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 선택 공유 버튼과 주제 필터의 44px 터치 영역 보강 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #228 source commit b4ee299; pnpm run validate:ui-contract PASS including v50 expert video touch target guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1592434 bytes; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/228",
+      "captured_at": "2026-10-04T15:23:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-VIDEO-CONTROLS",
+      "claim_refs": ["C-063"]
+    },
+    {
+      "id": "E-UI-CONTRACT-VIDEO-CONTROLS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 전문가 영상 선택 공유 버튼과 주제 필터에 44px 이상 터치 영역이 유지되는지 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v50 expert video touch target assertion; guide-video-feature-share min-height 44px; guide-video-filter base and mobile min-height 44px; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/228",
+      "captured_at": "2026-10-04T15:23:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-VIDEO-CONTROLS",
+      "claim_refs": ["C-063"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 터치 영역 보강 PR #228이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #228 merge main commit 0b5a2a104ce4d8442e3210a0e12b1c8bbccaaaa9; PR #228 release-verify 37212731202 and site-quality-verify 37212731177 successful; main workflow 37212827380 with release-verify 111467281291, worker-readiness 111467493730, deploy-pages 111467510018, smoke-live 111467545915 and release-status 111467597553 successful; deploy-worker 111467510618 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37212827380",
+      "captured_at": "2026-10-04T15:24:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-VIDEO-CONTROLS",
+      "claim_refs": ["C-063"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 전문가 영상 터치 영역 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=0b5a2a104ce4d8442e3210a0e12b1c8bbccaaaa9 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 0b5a2a104ce4d8442e3210a0e12b1c8bbccaaaa9; generatedAt 2026-10-04T15:24:39.724Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device touch/readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-04T15:24:40Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-VIDEO-CONTROLS",
+      "claim_refs": ["C-063"]
     }
   ]
 }

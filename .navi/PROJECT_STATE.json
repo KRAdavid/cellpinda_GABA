@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T15:12:54Z",
+  "updated_at": "2026-10-04T15:24:40Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -375,7 +375,11 @@
         "E-LOCAL-BUILD-SOCIAL-PREVIEW-20261005",
         "E-UI-CONTRACT-SOCIAL-PREVIEW-20261005",
         "E-DEPLOY-PIPELINE-SOCIAL-PREVIEW-20261005",
-        "E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005"
+        "E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005",
+        "E-LOCAL-BUILD-VIDEO-CONTROLS-20261005",
+        "E-UI-CONTRACT-VIDEO-CONTROLS-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005",
+        "E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -571,7 +575,11 @@
         "E-LOCAL-BUILD-EXPERT-VIDEO-SHARE-20261004",
         "E-PLAYWRIGHT-EXPERT-VIDEO-SHARE-20261004",
         "E-DEPLOY-PIPELINE-EXPERT-VIDEO-SHARE-20261004",
-        "E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004"
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004",
+        "E-LOCAL-BUILD-VIDEO-CONTROLS-20261005",
+        "E-UI-CONTRACT-VIDEO-CONTROLS-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005",
+        "E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005"
       ],
       "owner": "UX QA"
     },
@@ -863,10 +871,14 @@
           "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004",
           "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004",
           "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004",
-          "E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004",
-          "E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004",
-          "E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004",
-          "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004"
+        "E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004",
+        "E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004",
+        "E-LOCAL-BUILD-VIDEO-CONTROLS-20261005",
+        "E-UI-CONTRACT-VIDEO-CONTROLS-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005",
+        "E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005"
       ],
       "owner": "QA"
     },
@@ -988,7 +1000,11 @@
         "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
         "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004",
         "E-DEPLOY-PIPELINE-SOCIAL-PREVIEW-20261005",
-        "E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005"
+        "E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005",
+        "E-LOCAL-BUILD-VIDEO-CONTROLS-20261005",
+        "E-UI-CONTRACT-VIDEO-CONTROLS-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005",
+        "E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -1097,7 +1113,11 @@
         "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
         "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004",
         "E-DEPLOY-PIPELINE-SOCIAL-PREVIEW-20261005",
-        "E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005"
+        "E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005",
+        "E-LOCAL-BUILD-VIDEO-CONTROLS-20261005",
+        "E-UI-CONTRACT-VIDEO-CONTROLS-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005",
+        "E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005"
       ],
       "owner": "운영 QA"
     },
@@ -1661,7 +1681,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T15:12:54Z"
+    "last_run_at": "2026-10-04T15:24:40Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1790,7 +1810,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T15:12:54Z"
+    "last_run_at": "2026-10-04T15:24:40Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3685,6 +3705,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T15:12:54Z"
+    },
+    {
+      "id": "H-134",
+      "event": "전문가 영상 영역에서 선택 영상 공유 버튼과 주제 필터의 명시적 터치 높이가 작아 모바일·고령 사용자 탐색에 불리할 수 있는 지점을 확인하고 PR #228에서 두 컨트롤을 44px 이상으로 통일했다. UI 계약에 v50 터치 타깃 회귀 검사를 추가했으며 PR #228 checks, 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, main workflow `37212827380`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `0b5a2a104ce4d8442e3210a0e12b1c8bbccaaaa9`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser 플러그인과 Playwright가 없어 실제 브라우저·실기기 터치와 고령 사용자 독해성은 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T15:24:40Z"
     }
   ]
 }

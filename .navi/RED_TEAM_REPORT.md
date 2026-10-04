@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 모바일 터치 영역 고도화 — 0b5a2a1 — 2026-10-05
+
+- 공격 관점에서 확인한 실패 모드는 전문가 영상의 선택 공유·주제 필터가 작은 명시적 높이로 남아 모바일·고령 사용자 탐색을 어렵게 만드는 것이었다. 두 컨트롤을 44px 이상으로 통일하고 UI 계약으로 재발을 막았다.
+- PR #228 checks, main workflow `37212827380`, Pages 배포, live smoke, release status와 공개 validator가 성공했다. Worker는 STATIC_ONLY이므로 실행하지 않았다.
+- 잔여 위험은 Browser 플러그인·Playwright 부재에 따른 실제 브라우저·실기기 터치, 고령 사용자 독해성, 독립 과학·규제 감수다. 결과는 PASS_WITH_CONDITIONS이며 NAVI 완료 게이트는 NOT_READY다.
+
+증적: `E-LOCAL-BUILD-VIDEO-CONTROLS-20261005`, `E-UI-CONTRACT-VIDEO-CONTROLS-20261005`, `E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005`, `E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005`.
+
 ## 공개 공유 카드 분리 — 0e93fb3 — 2026-10-05
 
 - 확인된 결함은 공개 안내서 root·guide·research의 소셜 미리보기가 GABA 안내서보다 제품·하루리듬 카드로 인식될 수 있었던 점이다. 새 1200×630 JPEG와 정적·런타임 메타데이터 계약으로 경계를 보강했다.
