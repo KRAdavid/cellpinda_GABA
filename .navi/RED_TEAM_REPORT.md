@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — efc6246
+
+- 공격 관점에서 확인한 실패 모드는 모바일 연구 카드가 연구 대상·방법·측정 항목과 도표를 먼저 노출해 방문자가 핵심 관찰 결과를 놓치거나 늦게 읽는 것이었다. PR #259에서 제목 바로 아래에 `결과 한 줄`을 두고, 도표의 요약 중복을 제거해 결과 우선 읽기 순서를 고정했다.
+- UI 계약 v83, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-RESULT-FIRST-20261005, E-UI-CONTRACT-RESULT-FIRST-20261005, E-DEPLOY-PIPELINE-RESULT-FIRST-20261005, E-LIVE-PUBLIC-RESULT-FIRST-20261005.
+
 ## Recheck — 2026-10-05 — e48acaa
 
 - 공격 관점에서 확인한 실패 모드는 시스템 reduced-motion 사용자가 영상 로딩 스피너·읽기 진행 전환·카드 전환의 시각 움직임을 계속 보는 것이었다. PR #257에서 전역 모션 비활성화 규칙을 추가해 이 경로를 닫았다.

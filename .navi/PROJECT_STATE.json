@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T22:18:36Z",
+  "updated_at": "2026-10-04T22:35:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4363,6 +4363,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T22:18:36Z"
+    },
+    {
+      "id": "H-162",
+      "event": "연구 카드에서 연구 구성과 도표를 먼저 읽느라 핵심 결과가 늦게 보일 수 있는 모바일 가독성 리스크를 확인하고 PR #259에서 카드 제목 바로 아래에 `결과 한 줄`을 배치했다. 도표 내부 요약의 중복 표시는 제거하고 결과 한 줄 → 연구 구성 → 시각 도표 → 상세 조건 → 원문 출처 순서로 정리했으며 v83 UI 계약을 추가했다. PR #259 checks, main workflow `37240376184`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `efc624679105d2665b94a887e4866429451c4478`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 연구 수치·출처 데이터·제품 독립 공개 경계는 변경하지 않았다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T22:35:00Z"
     }
   ]
 }
