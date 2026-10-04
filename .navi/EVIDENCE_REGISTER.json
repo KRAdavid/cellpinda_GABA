@@ -6086,9 +6086,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본에서 태블릿 읽기 진행 레일 정렬 보정과 제품 독립 공개 경계가 유지되고, 768px·390px 공개 화면의 정적 데이터·가로폭 검증을 통과했다.",
-      "locator": "EXPECTED_RELEASE_SHA=fc07f6f7a5895359183988b16acdc9209ed18ed5 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha fc07f6f7a5895359183988b16acdc9209ed18ed5; generatedAt 2026-10-04T11:20:41.275Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Chrome CDP live at 768x900 and 390x844; header height 70; progress top 70; scrollWidth=clientWidth; errors []; screenshot outside repository reviewed",
+      "locator": "EXPECTED_RELEASE_SHA=cda8b3f53c485cdc3284b1dd804531eee41d7286 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha cda8b3f53c485cdc3284b1dd804531eee41d7286; generatedAt 2026-10-04T11:29:33.812Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Chrome CDP live at 768x900 and 390x844; header height 70; progress top 70; scrollWidth=clientWidth; errors []; screenshot outside repository reviewed",
       "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=post-deploy-tablet",
-      "captured_at": "2026-10-04T11:23:00Z",
+      "captured_at": "2026-10-04T11:30:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-TABLET-PROGRESS-ALIGN",
       "claim_refs": ["C-048"]
     }

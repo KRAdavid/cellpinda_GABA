@@ -3455,7 +3455,7 @@
     },
     {
       "id": "H-120",
-      "event": "701px·900px 태블릿 헤더와 읽기 진행 레일 사이의 8px 기준선 오차를 PR #211에서 헤더 높이 70px에 맞춰 보정했다. 로컬 UI 계약·typecheck·127개 테스트·build·성능 예산, 공개 768px·390px Chrome CDP에서 진행 레일 top 70px·가로폭 일치·오류 부재, main workflow `37198360203`의 Pages 배포·라이브 smoke·release status와 live validator candidate `fc07f6f7`를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "event": "701px·900px 태블릿 헤더와 읽기 진행 레일 사이의 8px 기준선 오차를 PR #211에서 헤더 높이 70px에 맞춰 보정했다. 로컬 UI 계약·typecheck·127개 테스트·build·성능 예산, 공개 768px·390px Chrome CDP에서 진행 레일 top 70px·가로폭 일치·오류 부재, main workflow `37198360203`의 Pages 배포·라이브 smoke·release status와 code candidate `fc07f6f7`를 확인했다. 이후 NAVI 문서 동기화 commit `cda8b3f`의 정적 공개본에서도 live validator candidate `cda8b3f`와 동일한 공개 경계를 재확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T11:23:00Z"
