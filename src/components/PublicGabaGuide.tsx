@@ -1741,7 +1741,7 @@ export default function PublicGabaGuide() {
               </div>
             </div>
             <p className="guide-expert-note guide-video-gallery-note">각 채널에서 공개한 짧은 영상을 모았습니다. 선택한 영상은 이 페이지에서 바로 재생되며, 원문 링크도 함께 제공합니다.</p>
-            <div className="guide-expert-thread"><span>이어서 읽기</span><strong>수면 연구</strong><i>→</i><strong>연구 결과</strong><i>→</i><strong>출처 원문</strong></div>
+            <div className="guide-expert-thread" aria-label="전문가 영상 다음 읽기 흐름"><span>다음 장</span><strong>연구를 읽는 기준</strong><i>→</i><strong>원문 출처</strong></div>
           </div>
         </section>
 

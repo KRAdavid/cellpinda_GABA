@@ -213,6 +213,16 @@
 .guide-expert-thread span{color:var(--guide-teal-dark);font-weight:850}
 .guide-expert-thread strong{color:var(--guide-ink);font-size:15px}
 .guide-expert-thread i{color:#9ab4c0;font-style:normal}
+/* v66 expert-video handoff: keep the next reading step aligned with the actual story order. */
+.guide-expert-thread{border-radius:14px;background:#f7fbfd}
+.guide-expert-thread span{font-size:11px;font-weight:900;letter-spacing:.13em}
+.guide-expert-thread strong{letter-spacing:-.045em}
+@media(max-width:700px){
+  .guide-expert-thread{margin-top:20px;padding:16px 14px;gap:8px 10px;line-height:1.45}
+  .guide-expert-thread span{font-size:12px}
+  .guide-expert-thread strong{font-size:16px}
+  .guide-expert-thread i{font-size:14px}
+}
 .guide-reading-note{padding:38px 0;background:#f7fbfd}
 .guide-reading-note-layout{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);align-items:end;gap:40px}
 .guide-reading-note h2{margin:12px 0 0;color:var(--guide-ink);font-size:clamp(32px,3.8vw,51px);font-weight:850;letter-spacing:-.08em;line-height:1.18}

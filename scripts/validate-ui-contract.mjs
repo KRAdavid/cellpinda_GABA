@@ -49,6 +49,8 @@ requireMatch(publicGuide, /guide-research-scope-kicker[^>]*>연구 범위<\/span
 requireMatch(publicGuideStyles, /v64 scope context[\s\S]*?\.guide-research-detail-top\{[\s\S]*?grid-template-columns:auto auto minmax\(0,1fr\)[\s\S]*?\.guide-research-scope-kicker\{[\s\S]*?font-size:11px[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-research-detail-top\{[\s\S]*?grid-template-columns:1fr[\s\S]*?\.guide-research-scope-kicker\{[\s\S]*?font-size:12px/, 'public GABA research cards must keep the scope context row explicit and readable on desktop and mobile');
 requireMatch(publicGuide, /guide-research-map-guide|research-map-guide[\s\S]*?주제를 선택하면[\s\S]*?아래 연구 카드의 대상·결과·해석/, 'public GABA research map must explain that selecting a topic continues into the research card reading flow');
 requireMatch(publicGuideStyles, /v65 research map cue[\s\S]*?\.guide-research-map-cue\{[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-research-map-cue\{/, 'public GABA research map cue must remain readable on desktop and mobile');
+requireMatch(publicGuide, /guide-expert-thread[^>]*aria-label="전문가 영상 다음 읽기 흐름"[\s\S]*?다음 장[\s\S]*?연구를 읽는 기준[\s\S]*?원문 출처/, 'public GABA expert videos must hand off into the actual next reading step');
+requireMatch(publicGuideStyles, /v66 expert-video handoff[\s\S]*?\.guide-expert-thread\{[\s\S]*?border-radius:14px[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-expert-thread\{/, 'public GABA expert-video handoff must preserve the next-step rhythm on desktop and mobile');
 if (!existsSync(resolve(root, 'public/assets/gaba-guide-social-card.jpg'))) fail('the product-independent GABA guide social card asset is missing');
 const researchRouteStart = app.indexOf('if(researchView)return');
 const researchRouteEnd = app.indexOf('const linkContext');
