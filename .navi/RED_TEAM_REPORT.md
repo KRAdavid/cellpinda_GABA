@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 연구 결과 도표 보조문구 가독성 레드팀 재검증 — 43e5942 — 2026-10-04
+
+- 공개 320px·390px에서 연구 결과 도표의 비교 조건·GABA 조건, 감소 표기와 시각 요소 설명문이 읽히는지 확인했다. 768px·1440px에서도 도표 카드가 화면 안에 유지된다.
+- 연구 수치·출처·제품 독립 경계는 변경하지 않았고, 도표 설명문은 시각 요소가 실제 효과 크기를 뜻하지 않는다는 기존 안내를 유지한다. 가로 넘침·page error·console error는 없었다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 결과는 PASS_WITH_CONDITIONS다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004, E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004, E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004, E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004.
+
 ## 반응형 헤더 경계 레드팀 재검증 — 25c55f9 — 2026-10-04
 
 - 861px 공개 화면에서 잘리던 공유 버튼을 재현한 뒤 compact 헤더 상한을 900px로 연장했다. 공개 861px·900px에서는 메뉴와 배경 레이어가 함께 열리고, 920px·1440px에서는 전체 내비게이션이 화면 안에 유지된다.

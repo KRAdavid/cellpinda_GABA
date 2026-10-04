@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 연구 결과 도표 보조문구 가독성 감사 — 43e5942 — 2026-10-04
+
+- 연구 결과 도표의 증가·감소 방향 표기와 시각 요소 설명문이 작은 보조문구로 남아 있던 상태를 확인하고, 모바일에서 방향 표기는 12.04px, 설명문은 12.6–13.02px로 키웠다. 320px 이하에서도 한 열 구조와 가로폭을 유지했다.
+- 연구 수치·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·성능 예산, Chrome fallback 320px·390px·768px·1440px의 도표 렌더링·가로폭·페이지 오류를 확인했다.
+- PR #190과 main workflow 37176650203의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 candidate 43e5942에서 HTTP 200·STATIC·공개 데이터 정합성을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004, E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004, E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004, E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004.
+
 ## 반응형 헤더 경계 보완 감사 — 25c55f9 — 2026-10-04
 
 - 861px에서 전체 내비게이션이 조기 전환되어 오른쪽 공유 버튼이 잘리던 실제 화면 결함을 확인했다. compact 헤더와 메뉴 배경의 상한을 900px로 연장해 861px·900px에서는 메뉴형, 920px 이상에서는 전체 내비게이션으로 안정적으로 전환되도록 보완했다.

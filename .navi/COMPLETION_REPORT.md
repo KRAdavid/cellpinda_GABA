@@ -1,5 +1,14 @@
 # Completion Report
 
+## 모바일 연구 결과 도표 보조문구 공개 배포 게이트 — 43e5942 — 2026-10-04
+
+- PR #190에서 연구 결과 도표의 모바일 증가·감소 방향 표기와 시각 요소 설명문을 키워, 320px·390px에서도 핵심 비교가 먼저 읽히도록 보완했다. 연구 수치·출처·제품 독립 경계는 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산, 공개 320px·390px·768px·1440px Chrome fallback, PR checks, main workflow 37176650203, Pages·라이브 smoke·release status·live validator candidate 43e5942가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser HOLD/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 USER_DECISION / NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004, E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004, E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004, E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004.
+
 ## 반응형 헤더 경계 공개 배포 게이트 — 25c55f9 — 2026-10-04
 
 - PR #189에서 861px 전환 시 잘리던 공유 버튼을 발견하고 compact 헤더·메뉴 배경을 900px까지 연장했다. 861px·900px는 터치 안전한 메뉴형 헤더, 920px 이상은 전체 내비게이션으로 유지된다.

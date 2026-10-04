@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T03:56:00Z",
+  "updated_at": "2026-10-04T04:22:02Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -274,7 +274,11 @@
         "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
         "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
         "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
-        "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
+        "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004",
+        "E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004",
+        "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -445,7 +449,11 @@
         "E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004",
         "E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004",
         "E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004",
-        "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004"
+        "E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004",
+        "E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004",
+        "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
       ],
       "owner": "UX QA"
     },
@@ -1460,7 +1468,11 @@
           "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
           "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
           "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
-          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
+          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004",
+          "E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -1469,7 +1481,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T02:23:00Z"
+    "last_run_at": "2026-10-04T04:22:02Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1515,7 +1527,9 @@
           "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
           "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
           "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
-          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
+          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004",
+          "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -1565,7 +1579,9 @@
           "E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004",
           "E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004",
           "E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004",
-          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004"
+          "E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004",
+          "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -1574,7 +1590,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T02:23:00Z"
+    "last_run_at": "2026-10-04T04:22:02Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -2066,7 +2082,11 @@
           "E-LOCAL-BUILD-MOBILE-RESEARCH-LEGEND-20261004",
           "E-PLAYWRIGHT-MOBILE-RESEARCH-LEGEND-20261004",
           "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-LEGEND-20261004",
-          "E-LIVE-PUBLIC-MOBILE-RESEARCH-LEGEND-20261004"
+          "E-LIVE-PUBLIC-MOBILE-RESEARCH-LEGEND-20261004",
+          "E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·연구 규모의 동일 PubMed 기준 기관 비교와 별도 SCIE 분석 블록·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환·모바일 연구 카드 폭·결과 방향 라벨 12px 보정·직접 해시 진입 제목 정렬·모바일 연구 기준 범례 13px 세로 흐름을 추가 확인"
       },
@@ -3096,6 +3116,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T03:56:00Z"
+    },
+    {
+      "id": "H-097",
+      "event": "연구 결과 도표에서 모바일 보조문구가 작아 증가·감소 방향과 시각 요소 설명을 놓칠 수 있던 상태를 PR #190에서 보완했다. 모바일 방향 표기를 12.04px, 설명문을 12.6–13.02px로 키우면서 320px·390px·768px·1440px의 가로폭과 도표 구조를 유지했다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다. PR #190 checks 37176581372·37176581374, main workflow 37176650203, live candidate 43e5942와 정적 공개 데이터·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T04:22:02Z"
     }
   ]
 }
