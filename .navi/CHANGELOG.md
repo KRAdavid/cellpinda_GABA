@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 수면·회복 14단계 현재 위치 표시 공개 배포: 2026-10-04 / candidate 0641f60
+
+수면과 회복 카드 지도 위에 현재 단계명과 진행 번호를 추가해 아이콘 지도와 자동 전환 카드의 연결을 강화했다. 단계 클릭 시 지도 표식·카드·진행 번호가 함께 바뀌며 기존 3초 자동 전환·모바일 우선 레이아웃·제품 독립 흐름은 유지했다. PR #203, main workflow `37188742301`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RECOVERY-MAP-STAGE-CUE-20261004, E-PLAYWRIGHT-RECOVERY-MAP-STAGE-CUE-20261004, E-DEPLOY-PIPELINE-RECOVERY-MAP-STAGE-CUE-20261004, E-LIVE-PUBLIC-RECOVERY-MAP-STAGE-CUE-20261004.
+
 ## 사업자용 5문장 전체 복사 공개 배포: 2026-10-04 / candidate 58bbc70
 
 마지막 이야기 공유 장의 사업자용 활용 자료에 `전체 복사` 버튼을 추가해 GABA 핵심 5문장을 한 번에 가져갈 수 있도록 보완했다. 기존 문장별 복사와 제품 독립 문구를 유지했으며 PR #202, main workflow `37187761596`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공유 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.

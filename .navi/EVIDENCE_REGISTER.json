@@ -328,6 +328,17 @@
         "E-LIVE-PUBLIC-BUSINESS-COPY-ALL-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-040",
+      "statement": "수면과 회복 14단계 지도에 현재 단계명과 진행 번호를 함께 표시해 아이콘 지도와 자동 전환 카드의 연결이 모바일·데스크톱에서 한눈에 읽힌다. 단계 클릭 시 지도 표식·카드·진행 번호가 함께 갱신된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-MAP-STAGE-CUE-20261004",
+        "E-PLAYWRIGHT-RECOVERY-MAP-STAGE-CUE-20261004",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-STAGE-CUE-20261004",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-STAGE-CUE-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5596,6 +5607,50 @@
       "captured_at": "2026-10-04T08:08:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-BUSINESS-COPY-ALL",
       "claim_refs": ["C-039"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-MAP-STAGE-CUE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면과 회복 14단계 지도에 현재 단계명과 진행 번호를 추가한 PR #203 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #203 source commit 53919fe; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1491500 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/203",
+      "captured_at": "2026-10-04T08:16:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-RECOVERY-MAP-STAGE-CUE",
+      "claim_refs": ["C-040"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RECOVERY-MAP-STAGE-CUE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 수면과 회복 지도 위 현재 단계명·진행 번호가 390px·1440px에 표시되고, 14번째 단계를 클릭하면 지도 표식·카드 제목·14 / 14 진행 번호가 함께 갱신됐다. 가로폭과 page error·console error 0건도 유지됐다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at https://kradavid.github.io/gaba_info/guide/?view=guide#recovery-break; 390x844 and 1440x1000; map steps=14; mobile click step 14 -> map head `현재 · 14 · GABA를 읽는 시작점`, card title matches, progress `14 / 14`; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/203",
+      "captured_at": "2026-10-04T08:22:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RECOVERY-MAP-STAGE-CUE",
+      "claim_refs": ["C-040"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-MAP-STAGE-CUE-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면과 회복 단계 인식 보강 PR #203이 필수 검사를 통과해 main에 병합되었고, GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #203 merge main commit 0641f6036b7c0d64a187e8ce0f7d7fa457de2f36; PR checks release-verify 37188668451 and site-quality-verify 37188668414 successful; main workflow 37188742301; release-verify 111396240197 success, worker-readiness 111396436915 success, deploy-pages 111396454102 success, smoke-live 111396495452 success, release-status 111396527237 success; deploy-worker 111396454724 skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37188742301",
+      "captured_at": "2026-10-04T08:24:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RECOVERY-MAP-STAGE-CUE",
+      "claim_refs": ["C-040"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-MAP-STAGE-CUE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 수면과 회복 14단계 지도 위 현재 단계명·진행 번호를 모바일·데스크톱에서 확인하고, 14번째 단계 선택 시 현재 표식·카드·진행 번호가 함께 바뀌는 흐름을 재현했다. 공개 번들·화면 폭·오류 기준도 통과했다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 0641f6036b7c0d64a187e8ce0f7d7fa457de2f36; generatedAt 2026-10-04T08:24:06.337Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback at 390x844 and 1440x1000; map steps=14; map head and card selection state matched; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#recovery-break",
+      "captured_at": "2026-10-04T08:25:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RECOVERY-MAP-STAGE-CUE",
+      "claim_refs": ["C-040"]
     }
   ]
 }

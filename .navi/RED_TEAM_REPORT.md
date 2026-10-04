@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 수면·회복 14단계 현재 위치 표시 공개 배포 레드팀 재검증 — 0641f60 — 2026-10-04
+
+- 390px·1440px에서 14단계 아이콘 지도 위 현재 단계명·진행 번호가 표시되고, 14번째 단계를 선택하면 지도 표식·카드 제목·`14 / 14`가 함께 바뀌는지 확인했다. 가로 넘침·page error·console error는 재현되지 않았으며 기존 자동 전환 카드 흐름도 유지됐다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다. 자동화와 Chromium fallback만으로 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도를 닫을 수 없다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-RECOVERY-MAP-STAGE-CUE-20261004, E-LIVE-PUBLIC-RECOVERY-MAP-STAGE-CUE-20261004.
+
 ## 사업자용 5문장 전체 복사 공개 배포 레드팀 재검증 — 58bbc70 — 2026-10-04
 
 - 모바일·데스크톱에서 사업자용 활용 자료의 `전체 복사` 버튼이 발견되고, 클릭 뒤 성공 상태가 표시되는지 확인했다. 5개 문장 카드 펼치기와 기존 문장별 복사 흐름도 유지됐다.

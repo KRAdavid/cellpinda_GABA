@@ -1,5 +1,14 @@
 # Audit Report
 
+## 수면·회복 14단계 현재 위치 표시 공개 배포 감리 — 0641f60 — 2026-10-04
+
+- `잠깐, 수면과 회복`의 14단계 아이콘 지도 위에 현재 단계명과 `01 / 14` 진행 번호를 노출해 지도와 큰 카드의 연결을 보완했다. 자동 전환과 단계 클릭 시 현재 표식·카드 제목·진행 번호가 함께 갱신되며 기존 모바일·데스크톱 정보량과 제품 독립 문구는 유지됐다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Playwright Chromium fallback으로 최신 GitHub Pages 공개본 390px·1440px에서 14단계, 현재 단계 표시, 14번째 단계 선택 후 `현재 · 14 · GABA를 읽는 시작점`·`14 / 14` 동기화, 가로폭·page/console error 0건을 확인했다.
+- PR #203의 필수 검사와 main workflow `37188742301`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `0641f6036b7c0d64a187e8ce0f7d7fa457de2f36`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RECOVERY-MAP-STAGE-CUE-20261004, E-PLAYWRIGHT-RECOVERY-MAP-STAGE-CUE-20261004, E-DEPLOY-PIPELINE-RECOVERY-MAP-STAGE-CUE-20261004, E-LIVE-PUBLIC-RECOVERY-MAP-STAGE-CUE-20261004.
+
 ## 사업자용 5문장 전체 복사 공개 배포 감리 — 58bbc70 — 2026-10-04
 
 - 마지막 이야기 공유 장의 사업자용 활용 자료에 `전체 복사` 버튼을 노출해 핵심 5문장을 한 번에 가져가는 경로를 만들었다. 문장별 복사, 5개 카드 펼치기, 제품 독립 안내 문구는 그대로 유지했다.

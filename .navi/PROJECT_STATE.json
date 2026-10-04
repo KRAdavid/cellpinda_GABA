@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T08:09:00Z",
+  "updated_at": "2026-10-04T08:27:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1533,7 +1533,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T08:09:00Z"
+    "last_run_at": "2026-10-04T08:27:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1662,7 +1662,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T08:09:00Z"
+    "last_run_at": "2026-10-04T08:27:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3314,6 +3314,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T08:09:00Z"
+    },
+    {
+      "id": "H-112",
+      "event": "수면과 회복 14단계 지도 위에 현재 단계명과 진행 번호를 추가해 아이콘 지도와 자동 전환 카드의 연결을 보완했다. PR #203 merge `0641f60`와 main workflow `37188742301`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 HTTP 200·STATIC·candidate `0641f6036b7c0d64a187e8ce0f7d7fa457de2f36`·공개 데이터 정합성을 확인했다. Playwright Chromium fallback으로 공개 390px·1440px에서 현재 단계 표시, 14번째 단계 클릭 시 지도·카드·진행 번호 동기화, 가로폭·page error·console error 부재를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T08:27:00Z"
     }
   ]
 }

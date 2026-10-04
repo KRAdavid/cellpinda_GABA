@@ -1,5 +1,13 @@
 # Completion Report
 
+## 수면·회복 14단계 현재 위치 표시 배포 품질 게이트 — 0641f60 — 2026-10-04
+
+- 수면과 회복 14단계 지도 위에 현재 단계명과 진행 번호를 추가해 첫 방문자가 아이콘 지도와 큰 카드를 연결해 읽도록 보완했다. 단계 선택 시 지도·카드·진행 번호가 동기화되고 기존 3초 자동 전환·제품 독립 안내는 유지됐다.
+- PR #203 main 병합과 workflow `37188742301`의 release-verify·Pages·라이브 smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했다.
+- 로컬 및 공개 Playwright Chromium fallback 390px·1440px에서 현재 단계 표시·14번째 카드 선택·가로폭·오류 기준을 통과했다. 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RECOVERY-MAP-STAGE-CUE-20261004, E-PLAYWRIGHT-RECOVERY-MAP-STAGE-CUE-20261004, E-DEPLOY-PIPELINE-RECOVERY-MAP-STAGE-CUE-20261004, E-LIVE-PUBLIC-RECOVERY-MAP-STAGE-CUE-20261004.
+
 ## 사업자용 5문장 전체 복사 배포 품질 게이트 — 58bbc70 — 2026-10-04
 
 - 첫 목표인 사업자 활용성을 높이기 위해 마지막 이야기 공유 장에 5문장 전체 복사 버튼을 추가했다. 기존 문장별 복사·제품 독립 공개 과학 문구·구매 CTA 부재는 유지했다.
