@@ -934,6 +934,20 @@ export default function PublicGabaGuide() {
     const description = '수면과 회복의 관계부터 1950년 GABA 발견, 신경계 연구, 국내외 활용과 발효 GABA의 안전성 기록까지 쉽게 읽는 공개 안내서입니다.';
     const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = description;
+    const socialImage = new URL(`${import.meta.env.BASE_URL}assets/gaba-guide-social-card.jpg`, window.location.origin).toString();
+    const updateMeta = (selector: string, value: string) => {
+      const element = document.head.querySelector<HTMLMetaElement>(selector);
+      if (element) element.content = value;
+    };
+    updateMeta('meta[property="og:title"]', '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide');
+    updateMeta('meta[property="og:description"]', '수면과 회복에서 시작해 GABA의 발견과 연구 지도를 한 흐름으로 읽는 공개 안내서입니다.');
+    updateMeta('meta[property="og:image"]', socialImage);
+    updateMeta('meta[property="og:image:type"]', 'image/jpeg');
+    updateMeta('meta[property="og:image:alt"]', '수면·인지·피부·근육·성장 연구를 소개하는 GABA 공개 안내서');
+    updateMeta('meta[name="twitter:title"]', '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide');
+    updateMeta('meta[name="twitter:description"]', '수면과 회복에서 시작해 GABA의 발견과 연구 지도를 한 흐름으로 읽는 공개 안내서입니다.');
+    updateMeta('meta[name="twitter:image"]', socialImage);
+    updateMeta('meta[name="twitter:image:alt"]', '수면·인지·피부·근육·성장 연구를 소개하는 GABA 공개 안내서');
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
     const targetId = window.location.hash.slice(1);
