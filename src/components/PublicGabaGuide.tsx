@@ -1091,6 +1091,38 @@ export default function PublicGabaGuide() {
   }, []);
 
   useEffect(() => {
+    const targetId = window.location.hash.slice(1);
+    if (!targetId) return;
+
+    // Deep links can be restored before the lazy guide, fonts, and media have
+    // settled. Re-align a few times without interrupting a reader who starts
+    // interacting immediately after the page appears.
+    let cancelled = false;
+    let userInteracted = false;
+    const stopFallback = () => { userInteracted = true; };
+    const alignSettledTarget = () => {
+      if (cancelled || userInteracted || window.location.hash.slice(1) !== targetId) return;
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      scrollGuideTo(target, 'auto');
+      window.dispatchEvent(new Event('scroll'));
+    };
+    const timers = [0, 240, 700, 1400, 2600, 4200].map((delay) => window.setTimeout(alignSettledTarget, delay));
+    window.addEventListener('wheel', stopFallback, { passive: true });
+    window.addEventListener('touchstart', stopFallback, { passive: true });
+    window.addEventListener('pointerdown', stopFallback, { passive: true });
+    window.addEventListener('keydown', stopFallback);
+    return () => {
+      cancelled = true;
+      timers.forEach((timer) => window.clearTimeout(timer));
+      window.removeEventListener('wheel', stopFallback);
+      window.removeEventListener('touchstart', stopFallback);
+      window.removeEventListener('pointerdown', stopFallback);
+      window.removeEventListener('keydown', stopFallback);
+    };
+  }, []);
+
+  useEffect(() => {
     if (recoveryPaused || recoveryInteractionPaused || recoveryReducedMotion || !recoveryInView) return;
     const intervalId = window.setInterval(() => {
       setActiveRecoveryCard((current) => (current + 1) % recoveryCards.length);
