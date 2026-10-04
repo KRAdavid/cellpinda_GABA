@@ -884,6 +884,17 @@
         "E-RELEASE-STATUS-TF-PULSE-HEARTBEAT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-091",
+      "statement": "공개 GABA 안내서는 독자의 시스템 reduced-motion 설정을 전역으로 존중해 카드·읽기 진행·영상 로딩의 불필요한 시각 움직임과 smooth scrolling을 끌 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-REDUCED-MOTION-20261005",
+        "E-UI-CONTRACT-REDUCED-MOTION-20261005",
+        "E-DEPLOY-PIPELINE-REDUCED-MOTION-20261005",
+        "E-LIVE-PUBLIC-REDUCED-MOTION-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8363,6 +8374,50 @@
       "captured_at": "2026-10-04T22:03:44Z",
       "reviewer_id": "NAVI-RELEASE-STATUS-QA-20261005-TF-PULSE-HEARTBEAT",
       "claim_refs": ["C-001", "C-005", "C-090"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-REDUCED-MOTION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GABA 안내서의 전역 reduced-motion CSS와 v82 UI 계약이 타입체크·127개 테스트·production build·정적 성능 예산과 함께 통과했다.",
+      "locator": "PR #257 source commit 5c8fc07; pnpm run validate:ui-contract PASS including v82 reduced-motion guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1602625 bytes <= 1650000 budget; CSS disables animation, transition, and smooth scrolling under prefers-reduced-motion: reduce",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/257",
+      "captured_at": "2026-10-04T22:18:36Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-REDUCED-MOTION",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-091"]
+    },
+    {
+      "id": "E-UI-CONTRACT-REDUCED-MOTION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 prefers-reduced-motion 환경에서 공개 가이드의 모든 애니메이션·전환·smooth scrolling을 비활성화하는 v82 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v82 reduced-motion coverage assertion; public guide stylesheet contains @media(prefers-reduced-motion:reduce) with animation:none!important, transition:none!important, and scroll-behavior:auto!important; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/257",
+      "captured_at": "2026-10-04T22:18:36Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-REDUCED-MOTION",
+      "claim_refs": ["C-003", "C-091"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-REDUCED-MOTION-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모션 접근성 보정 PR #257이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #257 merge main commit e48acaa917d2063273757c12f715316ab585ecdb; PR checks release-verify 37239366916 job 111544771753 and site-quality-verify 37239367021 job 111544772148 successful; main workflow 37239457353 with release-verify 111545038739, worker-readiness 111545258710, deploy-pages 111545276102, smoke-live 111545312481 and release-status 111545353882 successful; deploy-worker 111545276386 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37239457353",
+      "captured_at": "2026-10-04T22:18:36Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-REDUCED-MOTION",
+      "claim_refs": ["C-001", "C-002", "C-091"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-REDUCED-MOTION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 전역 reduced-motion 보정과 기존 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=e48acaa917d2063273757c12f715316ab585ecdb pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha e48acaa917d2063273757c12f715316ab585ecdb; generatedAt 2026-10-04T22:18:36.012Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Browser/Playwright and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T22:18:36Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-REDUCED-MOTION",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-091"]
     }
   ]
 }

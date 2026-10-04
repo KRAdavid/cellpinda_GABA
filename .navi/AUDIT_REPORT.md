@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — e48acaa — 2026-10-05
+
+- 시스템 `prefers-reduced-motion: reduce`를 선택한 독자에게 일부 공개 가이드 모션이 남을 수 있는 접근성 리스크를 확인하고 PR #257에서 전역 애니메이션·전환·smooth scrolling 비활성화 규칙과 v82 UI 계약을 추가했다.
+- 로컬 UI 계약(v82), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1602625 bytes로 예산 안이다.
+- PR #257 필수 checks, main workflow 37239457353의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate e48acaa917d2063273757c12f715316ab585ecdb는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-REDUCED-MOTION-20261005, E-UI-CONTRACT-REDUCED-MOTION-20261005, E-DEPLOY-PIPELINE-REDUCED-MOTION-20261005, E-LIVE-PUBLIC-REDUCED-MOTION-20261005.
+
 ## Release Recheck — 7a111d8 — 2026-10-05
 
 - 보호된 main 배포 게이트가 요구하는 TF pulse freshness가 만료되어 직전 배포가 중단된 것을 확인했다. 공개 콘텐츠·연구 데이터와 무관한 heartbeat 시각만 PR #255에서 갱신했고, `stateChanged=false`, `safeExecution=MET`를 유지했다.

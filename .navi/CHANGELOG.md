@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 시스템 모션 선호 대응 — e48acaa — 2026-10-05
+
+- `prefers-reduced-motion: reduce` 사용자가 공개 GABA 안내서를 읽을 때 카드·읽기 진행·영상 로딩의 애니메이션과 smooth scrolling을 전역으로 끌 수 있도록 PR #257에서 v82 UI 계약과 CSS를 추가했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build와 성능 예산이 통과했고, PR #257 및 main 배포 37239457353의 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY 조건으로 건너뛰었다.
+- live validator는 candidate `e48acaa917d2063273757c12f715316ab585ecdb`에 대해 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·smartStoreOnly·removed750·provenance matched를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-REDUCED-MOTION-20261005, E-UI-CONTRACT-REDUCED-MOTION-20261005, E-DEPLOY-PIPELINE-REDUCED-MOTION-20261005, E-LIVE-PUBLIC-REDUCED-MOTION-20261005.
+
 ## 보호된 공개 배포 게이트 복구 — 7a111d8 — 2026-10-05
 
 - NAVI 자동 점검에서 TF pulse heartbeat 만료로 보호된 main 배포가 중단된 원인을 확인했다. 공개 콘텐츠와 연구 데이터에는 손대지 않고 heartbeat 시각만 PR #255에서 갱신했으며, freshness `ageMinutes=0 / maxAgeMinutes=480`, `stateChanged=false`, `safeExecution=MET`를 확인했다.

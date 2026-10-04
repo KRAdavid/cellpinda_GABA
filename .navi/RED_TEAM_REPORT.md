@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — e48acaa
+
+- 공격 관점에서 확인한 실패 모드는 시스템 reduced-motion 사용자가 영상 로딩 스피너·읽기 진행 전환·카드 전환의 시각 움직임을 계속 보는 것이었다. PR #257에서 전역 모션 비활성화 규칙을 추가해 이 경로를 닫았다.
+- UI 계약 v82, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-REDUCED-MOTION-20261005, E-UI-CONTRACT-REDUCED-MOTION-20261005, E-DEPLOY-PIPELINE-REDUCED-MOTION-20261005, E-LIVE-PUBLIC-REDUCED-MOTION-20261005.
+
 ## Recheck — 2026-10-05 — 7a111d8
 
 - 공격 관점에서 확인한 배포 실패 모드는 TF pulse heartbeat 만료로 보호된 main 배포가 실행되지 않는 것이었다. PR #255는 공개 콘텐츠를 건드리지 않고 heartbeat 시각만 갱신했으며 freshness 검증과 safe execution을 통과했다.

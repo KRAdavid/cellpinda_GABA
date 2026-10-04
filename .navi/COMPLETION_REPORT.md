@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — e48acaa — 2026-10-05
+
+- AC-004 모바일·키보드·보조기기 모션 선호 대응: PASS_WITH_CONDITIONS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #257과 main 공개 배포 workflow 37239457353이 성공했고, 공개 URL validator가 candidate e48acaa917d2063273757c12f715316ab585ecdb를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 전역 reduced-motion 보정은 시스템 설정에 따른 UI 동작만 변경했으며 연구 수치·출처·공개 카피·제품 데이터는 변경하지 않았다.
+- 완료 상태는 NOT_READY를 유지한다. Browser/Playwright, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-REDUCED-MOTION-20261005, E-UI-CONTRACT-REDUCED-MOTION-20261005, E-DEPLOY-PIPELINE-REDUCED-MOTION-20261005, E-LIVE-PUBLIC-REDUCED-MOTION-20261005.
+
 ## Current Release Recheck — 7a111d8 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 main candidate 일치: PASS.

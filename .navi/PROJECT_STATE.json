@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T22:03:44Z",
+  "updated_at": "2026-10-04T22:18:36Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4356,6 +4356,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T22:03:44Z"
+    },
+    {
+      "id": "H-161",
+      "event": "시스템 reduced-motion 설정을 사용한 독자가 공개 가이드의 카드·읽기 진행·영상 로딩 애니메이션과 smooth scrolling을 계속 경험할 수 있는 잔여 접근성 리스크를 확인하고 PR #257에서 전역 모션 비활성화 규칙과 v82 UI 계약을 추가했다. PR #257 checks, main workflow `37239457353`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `e48acaa917d2063273757c12f715316ab585ecdb`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 연구 수치·출처 데이터·공개 카피는 변경하지 않았다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T22:18:36Z"
     }
   ]
 }
