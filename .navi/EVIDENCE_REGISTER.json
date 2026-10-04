@@ -862,6 +862,17 @@
         "E-LIVE-PUBLIC-GUIDE-CHAPTER-FOCUS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-089",
+      "statement": "공개 GABA 가이드의 장 메뉴와 직접 장 딥링크는 시각적 정렬용 섹션 래퍼가 아니라 실제 장 제목을 읽기 시작점으로 사용해, 본문 장에서도 키보드·보조기기 사용자가 제목부터 내용을 이어갈 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-GUIDE-HEADING-FOCUS-20261005",
+        "E-UI-CONTRACT-GUIDE-HEADING-FOCUS-20261005",
+        "E-DEPLOY-PIPELINE-GUIDE-HEADING-FOCUS-20261005",
+        "E-LIVE-PUBLIC-GUIDE-HEADING-FOCUS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8253,6 +8264,50 @@
       "captured_at": "2026-10-04T21:38:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-CHAPTER-FOCUS",
       "claim_refs": ["C-002", "C-003", "C-007", "C-088"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-GUIDE-HEADING-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "시각적 스크롤 래퍼와 실제 읽기 제목 포커스를 분리한 v81이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.",
+      "locator": "PR #254 source commit b28ff1b; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1602449 bytes <= 1650000 budget; git diff --check PASS; getGuideFocusTarget resolves aria-labelledby to the actual h1/h2/h3 while getGuideScrollTarget retains the visual alignment wrapper; public export, product-independent copy and research source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/254",
+      "captured_at": "2026-10-04T21:51:23Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-GUIDE-HEADING-FOCUS",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-089"]
+    },
+    {
+      "id": "E-UI-CONTRACT-GUIDE-HEADING-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 장 포커스 handoff가 aria-labelledby로 실제 제목을 해석하고, `.guide-section-heading` 시각 래퍼를 포커스 대상으로 잘못 사용하지 않는지 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v81 heading-focus assertions; getGuideFocusTarget reads the named heading from aria-labelledby, falls back only to a focusable scroll target, and direct chapter entry plus menu navigation call it; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/254",
+      "captured_at": "2026-10-04T21:51:23Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-GUIDE-HEADING-FOCUS",
+      "claim_refs": ["C-003", "C-089"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-GUIDE-HEADING-FOCUS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 장 제목 포커스 보정 PR #254가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #254 merge main commit c9b3edabc6c11e4b0eae3a64479599dfed1bb077; PR #254 release-verify 37237594042 job 111539718389 and site-quality-verify 37237594043 job 111539718329 successful; main workflow 37237686704 with release-verify 111539983134, worker-readiness 111540209118, deploy-pages 111540226147, smoke-live 111540257652 and release-status 111540297105 successful; deploy-worker 111540227096 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37237686704",
+      "captured_at": "2026-10-04T21:51:23Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-GUIDE-HEADING-FOCUS",
+      "claim_refs": ["C-001", "C-002", "C-089"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-GUIDE-HEADING-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 실제 장 제목 포커스 보정과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=c9b3edabc6c11e4b0eae3a64479599dfed1bb077 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha c9b3edabc6c11e4b0eae3a64479599dfed1bb077; generatedAt 2026-10-04T21:51:23.480Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#history",
+      "captured_at": "2026-10-04T21:51:23Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-HEADING-FOCUS",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-089"]
     }
   ]
 }

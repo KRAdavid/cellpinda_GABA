@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T21:38:00Z",
+  "updated_at": "2026-10-04T21:51:23Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1939,7 +1939,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T21:38:00Z"
+    "last_run_at": "2026-10-04T21:51:23Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2112,7 +2112,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T21:38:00Z"
+    "last_run_at": "2026-10-04T21:51:23Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4342,6 +4342,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T21:38:00Z"
+    },
+    {
+      "id": "H-159",
+      "event": "장 스크롤 정렬용 `.guide-section-heading` 래퍼가 실제 포커스 대상으로 사용되어 history·GABA란·연구 지도 등 본문 장의 제목 포커스 handoff가 동작하지 않을 수 있는 잔여 접근성 리스크를 확인하고 PR #254에서 `getGuideFocusTarget`을 분리했다. `aria-labelledby`가 가리키는 실제 h1·h2·h3로 직접 진입·hash 변경·메뉴 이동 포커스를 연결하고, 시각 스크롤 정렬은 기존 래퍼를 유지했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았고 v81 UI 계약을 추가했다. PR #254 checks, main workflow `37237686704`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate `c9b3edabc6c11e4b0eae3a64479599dfed1bb077`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T21:51:23Z"
     }
   ]
 }
