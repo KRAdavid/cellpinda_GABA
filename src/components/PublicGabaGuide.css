@@ -944,6 +944,10 @@
 .guide-research-card-number{color:var(--guide-research-accent,#27a5aa);font-size:10px;font-weight:900;letter-spacing:.12em}
 .guide-research-detail-inline .guide-research-inline-heading .guide-research-glyph{width:62px;height:46px;margin:0;transform:scale(.74)}
 .guide-research-detail-inline .guide-research-inline-heading h3{min-width:0;font-size:25px;line-height:1.25;word-break:keep-all}
+/* v83 result-first research lead: answer the reader's main question before study metadata and chart detail. */
+.guide-research-result-lead{grid-column:1 / -1;display:grid;gap:6px;margin-top:14px;padding:13px 15px 14px;border-left:3px solid var(--guide-research-accent,#27a5aa);border-radius:0 13px 13px 0;background:rgba(255,255,255,.88)}
+.guide-research-result-lead>span{color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.08em;line-height:1.35}
+.guide-research-result-lead>strong{color:var(--guide-ink);font-size:16px;font-weight:850;line-height:1.55;letter-spacing:-.05em;word-break:keep-all}
 .guide-research-profile{grid-column:1;grid-row:3;display:grid;gap:8px;margin-top:23px}
 .guide-research-profile-kicker{margin:0 0 1px;color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:.12em;line-height:1.4}
 .guide-research-profile>div{display:grid;grid-template-columns:39px minmax(0,1fr);gap:8px;align-items:start;padding-bottom:8px;border-bottom:1px solid #d9e9ec}
@@ -970,6 +974,7 @@
   .guide-research-detail-inline .guide-research-inline-heading{display:flex;align-items:center;gap:10px;margin-top:22px}
   .guide-research-profile{margin-top:21px}
   .guide-research-detail-inline .guide-research-inline-heading .guide-research-glyph{flex:0 0 62px}
+  .guide-research-result-lead{margin-top:12px;padding:12px 14px 13px}
   .guide-research-detail-inline .guide-outcome-chart{margin:22px 0 23px}
   .guide-research-detail-inline dl{margin-top:0}
   .guide-research-detail-inline .guide-research-source{margin-top:22px}
@@ -980,6 +985,9 @@
   .guide-research-detail-inline .guide-research-inline-heading{gap:8px;margin-top:19px}
   .guide-research-detail-inline .guide-research-inline-heading .guide-research-glyph{display:flex;flex:0 0 43px;width:43px;height:35px;transform:scale(.58)}
   .guide-research-detail-inline .guide-research-inline-heading h3{font-size:22px;line-height:1.3}
+  .guide-research-result-lead{flex:0 0 100%;margin-top:10px;padding:12px 13px 13px}
+  .guide-research-result-lead>span{font-size:12px}
+  .guide-research-result-lead>strong{font-size:16px;line-height:1.58}
   .guide-research-profile{gap:0;margin:18px 0 1px;padding:11px 12px;border:1px solid #d8e8eb;border-radius:13px;background:rgba(255,255,255,.62)}
   .guide-research-profile>div{grid-template-columns:38px minmax(0,1fr);padding:8px 0;border-bottom:1px solid #e0edf0}
   .guide-research-profile span{font-size:10px}
