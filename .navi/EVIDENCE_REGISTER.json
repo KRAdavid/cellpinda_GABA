@@ -686,6 +686,17 @@
         "E-LIVE-PUBLIC-RESEARCH-SCOPE-CONTEXT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-073",
+      "statement": "연구 지도에서 주제를 선택하면 아래 연구 카드의 대상·결과·해석으로 이어지는 읽기 흐름이 명시되고, 모바일에서도 안내가 자연스럽게 줄바꿈되며, 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261005",
+        "E-UI-CONTRACT-RESEARCH-MAP-CUE-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-CUE-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-CUE-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7373,6 +7384,50 @@
       "captured_at": "2026-10-04T17:55:34Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-SCOPE-CONTEXT",
       "claim_refs": ["C-072"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 아래에 주제 선택 후 연구 카드로 이어지는 읽기 안내를 추가한 v65가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #238 source commit ea4d480; pnpm run validate:ui-contract PASS including v65 research map cue guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1598158 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/238",
+      "captured_at": "2026-10-04T18:07:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RESEARCH-MAP-CUE",
+      "claim_refs": ["C-073"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-MAP-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 지도 버튼과 하단 안내를 연결하고, 데스크톱·모바일에서 연구 카드로 이어지는 문장을 유지하는 v65 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v65 research map cue assertions; map buttons carry aria-describedby=research-map-guide; cue states 주제를 선택하면 and 아래 연구 카드의 대상·결과·해석; mobile cue layout is guarded; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/238",
+      "captured_at": "2026-10-04T18:07:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-MAP-CUE",
+      "claim_refs": ["C-073"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-CUE-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 읽기 안내 개선 PR #238이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #238 merge main commit 0e7836e6007b6bf16605c26386e5eaf57bcbb951; PR #238 release-verify 37223248502 job 111497624998 and site-quality-verify 37223248506 job 111497624787 successful; main workflow 37223345781 with release-verify 111497904907, worker-readiness 111498081654, deploy-pages 111498095758, smoke-live 111498137088 and release-status 111498184858 successful; deploy-worker 111498096417 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37223345781",
+      "captured_at": "2026-10-04T18:11:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-MAP-CUE",
+      "claim_refs": ["C-073"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 연구 지도에서 연구 카드로 이어지는 읽기 안내와 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=0e7836e6007b6bf16605c26386e5eaf57bcbb951 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 0e7836e6007b6bf16605c26386e5eaf57bcbb951; generatedAt 2026-10-04T18:10:47.037Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T18:10:47Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-MAP-CUE",
+      "claim_refs": ["C-073"]
     }
   ]
 }

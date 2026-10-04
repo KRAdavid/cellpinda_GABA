@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 0e7836e — 2026-10-05
+
+- 연구 지도 아래에 `주제를 선택하면` 안내를 추가하고 각 지도 버튼을 안내 문장과 연결해, 지도에서 연구 카드의 대상·결과·해석으로 이어지는 흐름을 즉시 이해할 수 있게 했다. 모바일에서는 안내 문장을 자연스럽게 줄바꿈했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- 로컬 UI 계약(v65), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1598158 bytes로 예산 안이다.
+- PR #238 필수 checks, main workflow 37223345781의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 0e7836e6007b6bf16605c26386e5eaf57bcbb951는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261005, E-UI-CONTRACT-RESEARCH-MAP-CUE-20261005, E-DEPLOY-PIPELINE-RESEARCH-MAP-CUE-20261005, E-LIVE-PUBLIC-RESEARCH-MAP-CUE-20261005.
+
 ## Release Recheck — 13004052 — 2026-10-05
 
 - 연구 카드 상단에 `연구 범위` 표식을 추가해 색상·대상 라벨의 의미를 즉시 구분하고, 모바일에서 범위·연구 대상·세부 영역을 단일 열로 배치했다. 연구 수치·출처 데이터는 변경하지 않았다.

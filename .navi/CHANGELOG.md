@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 지도에서 카드로 이어지는 읽기 흐름 — 0e7836e — 2026-10-05
+
+- 연구 지도 아래에 주제 선택 안내를 추가하고 지도 버튼과 안내 문장을 연결했다. 모바일에서는 문장이 자연스럽게 줄바꿈된다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #238과 main 배포 37223345781, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261005, E-UI-CONTRACT-RESEARCH-MAP-CUE-20261005, E-DEPLOY-PIPELINE-RESEARCH-MAP-CUE-20261005, E-LIVE-PUBLIC-RESEARCH-MAP-CUE-20261005.
+
 ## 연구 범위 맥락 표식 고도화 — 13004052 — 2026-10-05
 
 - 연구 카드 상단에 `연구 범위` 표식을 추가하고 모바일에서 범위·연구 대상·세부 영역을 안정적인 단일 열로 배치했다. 연구 수치·출처 데이터는 변경하지 않았다.
