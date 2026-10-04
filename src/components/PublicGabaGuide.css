@@ -1243,3 +1243,9 @@
   .guide-video-card-copy strong{min-height:0;display:block;margin-top:9px;-webkit-line-clamp:initial}
   .guide-video-card-copy small{min-height:0;margin-top:auto;display:block;-webkit-line-clamp:initial}
 }
+
+/* v53 research comparison: make relative direction visible before the reader parses the labels. */
+.guide-outcome-comparison-row.result-less .guide-outcome-lane.is-reference .guide-outcome-lane-signal:before,
+.guide-outcome-comparison-row.result-more .guide-outcome-lane.is-result .guide-outcome-lane-signal:before{transform:scaleX(.88);transform-origin:left center}
+.guide-outcome-comparison-row.result-less .guide-outcome-lane.is-result .guide-outcome-lane-signal:before,
+.guide-outcome-comparison-row.result-more .guide-outcome-lane.is-reference .guide-outcome-lane-signal:before{transform:scaleX(.48);transform-origin:left center}
