@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 카드 활성 주제 선택 안정화 — ee77f28 — 2026-10-05
+
+- 연구 카드별 최신 IntersectionObserver 상태를 누적해 현재 가장 많이 보이는 연구 카드를 활성 주제로 선택하고, 동일 주제의 중복 발행을 건너뛰도록 보완했다.
+- v88 UI 계약, typecheck, 127 tests, production build/performance, PR #269 checks, main workflow 37245122445, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-OBSERVER-STATE-20261005, E-UI-CONTRACT-OBSERVER-STATE-20261005, E-DEPLOY-PIPELINE-OBSERVER-STATE-20261005, E-LIVE-PUBLIC-OBSERVER-STATE-20261005.
+
 ## 연구 스크롤 이벤트 프레임 배칭 — 7395768 — 2026-10-05
 
 - 연구 카드 IntersectionObserver 이벤트를 requestAnimationFrame 단위로 합치고, 최신 주제만 React startTransition으로 반영해 모바일 스크롤 중 상태 갱신 경쟁을 줄였다.

@@ -950,6 +950,17 @@
         "E-LIVE-PUBLIC-RAF-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-097",
+      "statement": "공개 GABA 안내서는 연구 카드별 최신 교차 상태를 누적해 현재 화면에서 가장 많이 보이는 카드를 활성 연구 주제로 선택하고, 같은 주제의 중복 발행을 건너뛰어 스크롤 중 연구 지도와 상세 카드의 연결을 안정적으로 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-OBSERVER-STATE-20261005",
+        "E-UI-CONTRACT-OBSERVER-STATE-20261005",
+        "E-DEPLOY-PIPELINE-OBSERVER-STATE-20261005",
+        "E-LIVE-PUBLIC-OBSERVER-STATE-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8693,6 +8704,50 @@
       "captured_at": "2026-10-04T23:35:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RAF",
       "claim_refs": ["C-002", "C-003", "C-007", "C-096"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-OBSERVER-STATE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드별 최신 IntersectionObserver 상태를 누적해 가장 많이 보이는 연구 카드를 선택하고 중복 주제 발행을 건너뛰는 v88 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #269 source commit 243958e84223dd0dfabf43ac31df0707df9697ec; pnpm run validate:ui-contract PASS including v88 latest-entry observer guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1604402 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/269",
+      "captured_at": "2026-10-04T23:47:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-OBSERVER-STATE",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-097"]
+    },
+    {
+      "id": "E-UI-CONTRACT-OBSERVER-STATE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 카드별 최신 교차 상태를 Map으로 유지하고 가장 많이 보이는 카드를 선택하며 같은 주제의 중복 발행을 건너뛰는 v88 회귀 방지 조건을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v88 latest-entry observer assertion; latestEntries Map, per-entry updates, ratio selection, duplicate topic guard and cleanup are present; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/269",
+      "captured_at": "2026-10-04T23:47:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-OBSERVER-STATE",
+      "claim_refs": ["C-003", "C-097"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-OBSERVER-STATE-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 활성 주제 선택 안정화 PR #269가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #269 merge main commit ee77f2846932917ec1591b7e1ae4b985f57e1cde; PR checks release-verify 37245049724 job 111561171658 and site-quality-verify 37245049749 job 111561171754 successful; main workflow 37245122445 with release-verify 111561380779, worker-readiness 111561579703, deploy-pages 111561600317, smoke-live 111561636553 and release-status 111561669303 successful; deploy-worker 111561601059 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37245122445",
+      "captured_at": "2026-10-04T23:50:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-OBSERVER-STATE",
+      "claim_refs": ["C-001", "C-002", "C-097"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-OBSERVER-STATE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 연구 카드별 최신 교차 상태를 반영하는 활성 주제 선택 안정화를 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=ee77f2846932917ec1591b7e1ae4b985f57e1cde pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha ee77f2846932917ec1591b7e1ae4b985f57e1cde; generatedAt 2026-10-04T23:50:09.824Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Browser/Playwright and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T23:50:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-OBSERVER-STATE",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-097"]
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — ee77f28
+
+- 공격 관점에서 확인한 실패 모드는 IntersectionObserver 콜백에 포함된 일부 카드만 비교해 빠른 스크롤 중 활성 연구 주제가 흔들릴 수 있는 것이었다. PR #269에서 카드별 최신 상태를 누적하고 가장 높은 교차 비율을 가진 카드만 발행하도록 보완했다.
+- UI 계약 v88, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-OBSERVER-STATE-20261005, E-UI-CONTRACT-OBSERVER-STATE-20261005, E-DEPLOY-PIPELINE-OBSERVER-STATE-20261005, E-LIVE-PUBLIC-OBSERVER-STATE-20261005.
+
 ## Recheck — 2026-10-05 — 7395768
 
 - 공격 관점에서 확인한 실패 모드는 여러 IntersectionObserver 이벤트가 짧은 스크롤 구간에 몰릴 때 현재 연구 주제 상태 갱신이 반복되어 모바일 입력과 경쟁할 수 있는 것이었다. PR #267에서 pending topic을 requestAnimationFrame으로 합치고 React startTransition으로 비긴급 반영했다.
