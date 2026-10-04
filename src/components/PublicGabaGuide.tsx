@@ -630,7 +630,10 @@ const readingChapterIdFromHash = (hash: string): ActiveChapterId | null => {
   return readingChapters.some((chapter) => chapter.id === targetId) ? targetId as ReadingChapterId : null;
 };
 
-const getInitialResearchTopicId = () => typeof window === 'undefined' ? null : researchTopicIdFromHash(window.location.hash);
+const getInitialResearchTopicId = () => {
+  if (typeof window === 'undefined') return null;
+  return researchTopicIdFromHash(window.location.hash) ?? (window.location.hash === '#research' ? researchTopics[0].id : null);
+};
 
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
 const messageKit = [
@@ -885,7 +888,9 @@ export default function PublicGabaGuide() {
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
     const targetId = window.location.hash.slice(1);
+    const initialResearchTopicId = researchTopicIdFromHash(window.location.hash);
     setActiveResearchTopicId(researchTopicIdFromHash(window.location.hash));
+    if (!initialResearchTopicId && targetId === 'research') setActiveResearchTopicId(researchTopics[0].id);
     if (!targetId) return;
     let cancelled = false;
     let layoutObserver: ResizeObserver | null = null;
@@ -927,7 +932,9 @@ export default function PublicGabaGuide() {
     const syncReadingContextFromHash = () => {
       const targetId = window.location.hash.slice(1);
       const nextChapterId = readingChapterIdFromHash(window.location.hash);
+      const nextResearchTopicId = researchTopicIdFromHash(window.location.hash);
       setActiveResearchTopicId(researchTopicIdFromHash(window.location.hash));
+      if (!nextResearchTopicId && nextChapterId === 'research') setActiveResearchTopicId(researchTopics[0].id);
       if (!nextChapterId) return;
       hashAlignmentCancelled.current = false;
       setActiveChapterId(nextChapterId);
