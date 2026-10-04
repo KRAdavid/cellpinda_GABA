@@ -1447,3 +1447,21 @@
   .guide-research-profile span{font-size:12px;line-height:1.5}
   .guide-research-profile strong{font-size:14px;line-height:1.5}
 }
+
+/* v63 provenance rhythm: make study-scope labels readable before the result card. */
+.guide-research-detail-top{align-items:flex-start;gap:10px}
+.guide-research-detail-top .guide-evidence{
+  min-height:30px;
+  padding:6px 10px;
+  font-size:12px;
+  line-height:1.4;
+  letter-spacing:-.035em;
+  white-space:normal;
+  overflow-wrap:anywhere
+}
+.guide-research-detail-top>span{padding-top:7px;line-height:1.4}
+@media(max-width:700px){
+  .guide-research-detail-top{gap:7px 9px}
+  .guide-research-detail-top .guide-evidence{min-height:32px;font-size:13px;line-height:1.4}
+  .guide-research-detail-top>span{padding-top:7px;font-size:12px;line-height:1.45}
+}
