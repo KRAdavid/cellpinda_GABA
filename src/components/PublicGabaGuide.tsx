@@ -656,6 +656,23 @@ const messageKit = [
   '발효 GABA는 발효 원리와 품질 관리, 사람 대상 섭취 연구가 함께 쌓인 식품 연구 소재입니다.',
 ];
 
+const getGuideShareUrl = (hash = 'top') => {
+  const url = new URL(window.location.href);
+  url.search = '?view=guide';
+  url.hash = hash;
+  return url.toString();
+};
+
+const formatResearchShareText = (topic: ResearchTopic, guideUrl: string) => [
+  `[GABA ${topic.title} 연구]`,
+  `연구 대상·방법: ${topic.study}`,
+  `관찰된 결과: ${topic.finding}`,
+  `연구 범위: ${topic.interpretation}`,
+  `출처: ${topic.source.label}`,
+  topic.source.url,
+  `공개 안내서: ${guideUrl}`,
+].join('\n');
+
 const evidenceLabels: Record<EvidenceTone, { text: string; className: string }> = {
   established: { text: '기본 생리학', className: 'is-established' },
   human: { text: '사람 대상 연구', className: 'is-human' },
@@ -1397,8 +1414,14 @@ export default function PublicGabaGuide() {
     announceShareStatus(copied ? '문장을 복사했어요. 자유롭게 활용해 보세요.' : '문장을 선택해 활용해 보세요.');
   };
 
+  const copyResearchMessage = async (topic: ResearchTopic) => {
+    const text = formatResearchShareText(topic, getGuideShareUrl(`research-${topic.id}`));
+    const copied = await writeClipboardText(text);
+    announceShareStatus(copied ? '연구 결과와 출처를 함께 복사했어요.' : '연구 결과를 선택해 활용해 보세요.');
+  };
+
   const copyMessageKit = async () => {
-    const text = messageKit.map((message, index) => `${String(index + 1).padStart(2, '0')}. ${message}`).join('\n\n');
+    const text = `${messageKit.map((message, index) => `${String(index + 1).padStart(2, '0')}. ${message}`).join('\n\n')}\n\n공개 안내서: ${getGuideShareUrl('top')}`;
     const copied = await writeClipboardText(text);
     announceShareStatus(copied ? '5문장을 한 번에 복사했어요. 자유롭게 활용해 보세요.' : '문장을 선택해 활용해 보세요.');
   };
@@ -1605,7 +1628,7 @@ export default function PublicGabaGuide() {
               </ul>
               <span>카드 상단의 라벨은 연구 대상을 먼저 보여줍니다.</span>
             </div>
-            <div className="guide-research-flow">{researchTopics.map((topic, index) => { const nextTopic = researchTopics[index + 1]; return <article className={`guide-research-detail guide-research-detail-inline${activeResearchTopicId === topic.id ? ' is-active' : ''}`} id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchProfile profile={topic.profile} /><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding"><span>{topic.finding}</span><button type="button" className="guide-research-copy" onClick={() => void copyMessage(topic.finding)} aria-label={`${topic.title} 연구 핵심 결과 복사`}><Clipboard size={13} aria-hidden="true" /> 핵심 결과 복사</button></dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span className="guide-research-source-label">출처 ·</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p>{nextTopic ? <button type="button" className="guide-research-next" onClick={() => { setActiveResearchTopicId(nextTopic.id); scrollTo(`research-${nextTopic.id}`); }} aria-label={`다음 연구로 이동: ${nextTopic.title}`}><span><small>다음 연구</small><strong>{nextTopic.title}</strong></span><ArrowRight size={18} aria-hidden="true" /></button> : null}</article>; })}</div>
+            <div className="guide-research-flow">{researchTopics.map((topic, index) => { const nextTopic = researchTopics[index + 1]; return <article className={`guide-research-detail guide-research-detail-inline${activeResearchTopicId === topic.id ? ' is-active' : ''}`} id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchProfile profile={topic.profile} /><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding"><span>{topic.finding}</span><button type="button" className="guide-research-copy" onClick={() => void copyResearchMessage(topic)} aria-label={`${topic.title} 연구 결과와 출처 복사`}><Clipboard size={13} aria-hidden="true" /> 결과·출처 복사</button></dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span className="guide-research-source-label">출처 ·</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p>{nextTopic ? <button type="button" className="guide-research-next" onClick={() => { setActiveResearchTopicId(nextTopic.id); scrollTo(`research-${nextTopic.id}`); }} aria-label={`다음 연구로 이동: ${nextTopic.title}`}><span><small>다음 연구</small><strong>{nextTopic.title}</strong></span><ArrowRight size={18} aria-hidden="true" /></button> : null}</article>; })}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
             <div className="guide-research-handoff" aria-label="연구 결과에서 국내외 활용으로 이어지는 다음 읽기 흐름">
               <span className="guide-research-handoff-kicker">다음 장</span>
@@ -1696,7 +1719,7 @@ export default function PublicGabaGuide() {
           </div>
         </section>
 
-        <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading">1950년의 작은 발견은<br />오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div><div className="guide-share-intro" aria-label="사업자용 GABA 공유 문장 안내"><div><span>사업자용 활용 자료</span><strong>핵심 문장을 고르고, 그대로 공유하세요</strong><p>GABA의 기본 역할과 연구 흐름을 짧게 정리한 5문장입니다.</p></div><div className="guide-share-intro-actions"><b>5문장</b><button type="button" className="guide-share-copy-all" onClick={() => void copyMessageKit()}><Clipboard size={14} aria-hidden="true" /> 전체 복사</button></div></div><details className="guide-share-lines"><summary><span>사업자용 GABA 핵심 5문장 · 바로 복사하기</span><b>5개</b></summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => void copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
+        <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading">1950년의 작은 발견은<br />오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div><div className="guide-share-intro" aria-label="사업자용 GABA 공유 문장 안내"><div><span>사업자용 활용 자료</span><strong>핵심 문장을 고르고, 그대로 공유하세요</strong><p>GABA의 기본 역할과 연구 흐름을 짧게 정리한 5문장입니다. 전체 복사에는 공개 안내서 링크도 함께 붙습니다.</p></div><div className="guide-share-intro-actions"><b>5문장</b><button type="button" className="guide-share-copy-all" onClick={() => void copyMessageKit()}><Clipboard size={14} aria-hidden="true" /> 전체 복사</button></div></div><details className="guide-share-lines"><summary><span>사업자용 GABA 핵심 5문장 · 바로 복사하기</span><b>5개</b></summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => void copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
       </main>
 
       <footer className="guide-footer"><div className="guide-container guide-footer-grid"><a className="guide-logo" href="#top" onClick={() => scrollTo('top')}><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a><p>GABA를 쉽게 이해하고<br />자유롭게 공유하는 공개 안내서입니다.</p><div><a href="#history" onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견의 역사</a><a href="#applications" onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a><a href="#top" onClick={(event) => { event.preventDefault(); scrollTo('top'); }}>맨 위로 ↑</a></div></div><div className="guide-container guide-footer-bottom"><span>© 2026 GABA Guide</span><span>1950년, 뇌 속에서 발견된 신호</span></div></footer>
