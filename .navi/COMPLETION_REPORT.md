@@ -1,5 +1,13 @@
 # Completion Report
 
+## 첫 화면 히어로 문구 최소화 배포 품질 게이트 — 2e31d60 — 2026-10-05
+
+- 첫 화면의 중복 프리타이틀을 제거해 하나의 주 헤드라인에 시선을 모으고, 제목 시작 위치를 보정했다. UI 계약에 중복 프리타이틀 재유입 방어를 추가했다.
+- PR #229와 main 공개 배포 workflow `37213839261`이 성공했고, 공개 URL validator가 최신 merge commit `2e31d603630fe64d2c3ec16a30f180f475b20d92`를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71개 번들·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- 기능·배포 완료는 확인했지만 실제 브라우저·실기기 시각 검증과 고령 사용자 독해성은 외부 검증이 남아 있어 NAVI 상태는 USER_DECISION / NOT_READY, 결과는 PASS_WITH_CONDITIONS다.
+
+증적: `E-LOCAL-BUILD-MINIMAL-HERO-20261005`, `E-UI-CONTRACT-MINIMAL-HERO-20261005`, `E-DEPLOY-PIPELINE-MINIMAL-HERO-20261005`, `E-LIVE-PUBLIC-MINIMAL-HERO-20261005`.
+
 ## 전문가 영상 모바일 터치 영역 배포 품질 게이트 — 0b5a2a1 — 2026-10-05
 
 - 전문가 영상 선택 공유 버튼과 주제 필터를 데스크톱·모바일 44px 이상 터치 영역으로 통일하고 UI 계약 회귀 검사를 추가했다.

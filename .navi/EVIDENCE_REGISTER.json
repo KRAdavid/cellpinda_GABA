@@ -587,6 +587,17 @@
         "E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-064",
+      "statement": "GABA 공개 안내서 첫 화면이 중복 프리타이틀 없이 하나의 주 헤드라인에 집중되고, 모바일·데스크톱 제목 시작 위치와 UI 계약이 이를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MINIMAL-HERO-20261005",
+        "E-UI-CONTRACT-MINIMAL-HERO-20261005",
+        "E-DEPLOY-PIPELINE-MINIMAL-HERO-20261005",
+        "E-LIVE-PUBLIC-MINIMAL-HERO-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6878,6 +6889,50 @@
       "captured_at": "2026-10-04T15:24:40Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-VIDEO-CONTROLS",
       "claim_refs": ["C-063"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MINIMAL-HERO-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면 중복 프리타이틀 제거와 제목 시작 위치 보정 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #229 source commit 20ddbfe; pnpm run validate:ui-contract PASS including v51 minimal hero opening and redundant-kicker guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1592166 bytes; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/229",
+      "captured_at": "2026-10-04T15:39:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MINIMAL-HERO",
+      "claim_refs": ["C-064"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MINIMAL-HERO-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 첫 화면에 중복 프리타이틀이 다시 들어오지 않고 주 헤드라인 시작 위치 보정이 유지되는지 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v51 minimal hero opening assertions; guide-hero-kicker and 수면의 질 · 회복의 시간 absence guard; .guide-hero-story h1 margin-top 0 guard; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/229",
+      "captured_at": "2026-10-04T15:39:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MINIMAL-HERO",
+      "claim_refs": ["C-064"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MINIMAL-HERO-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면 히어로 문구 최소화 PR #229가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #229 merge main commit 2e31d603630fe64d2c3ec16a30f180f475b20d92; PR #229 release-verify 37213744935 and site-quality-verify 37213744924 successful; main workflow 37213839261 with release-verify 111470233089, worker-readiness 111470452242, deploy-pages 111470471408, smoke-live 111470518434 and release-status 111470563012 successful; deploy-worker 111470472084 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37213839261",
+      "captured_at": "2026-10-04T15:40:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MINIMAL-HERO",
+      "claim_refs": ["C-064"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MINIMAL-HERO-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 중복 프리타이틀 제거를 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=2e31d603630fe64d2c3ec16a30f180f475b20d92 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 2e31d603630fe64d2c3ec16a30f180f475b20d92; generatedAt 2026-10-04T15:40:43.793Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device visual readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#top",
+      "captured_at": "2026-10-04T15:40:44Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MINIMAL-HERO",
+      "claim_refs": ["C-064"]
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Audit Report
 
+## 첫 화면 히어로 문구 최소화 — 2e31d60 — 2026-10-05
+
+- 첫 화면의 `수면의 질 · 회복의 시간` 프리타이틀이 메인 헤드라인과 의미가 겹쳐 첫 시선 집중을 분산시키는 지점을 확인했다. 프리타이틀을 제거하고 주 헤드라인의 시작 위치를 0으로 보정했다.
+- PR #229 필수 checks와 로컬 UI contract·typecheck·127 tests·production build/performance를 확인했다. main workflow `37213839261`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator candidate `2e31d603630fe64d2c3ec16a30f180f475b20d92`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 브라우저·실기기 시각 검증과 고령 사용자 독해성은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-MINIMAL-HERO-20261005`, `E-UI-CONTRACT-MINIMAL-HERO-20261005`, `E-DEPLOY-PIPELINE-MINIMAL-HERO-20261005`, `E-LIVE-PUBLIC-MINIMAL-HERO-20261005`.
+
 ## 전문가 영상 모바일 터치 영역 고도화 — 0b5a2a1 — 2026-10-05
 
 - 전문가 영상 선택 공유 버튼과 주제 필터의 명시적 터치 높이를 44px 이상으로 통일해 모바일과 고령 사용자 탐색 부담을 줄였다. UI 계약에 v50 터치 타깃 회귀 검사를 추가했다.
