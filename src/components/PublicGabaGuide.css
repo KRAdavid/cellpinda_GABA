@@ -25,6 +25,12 @@
 .guide-research-detail dd{font-size:14px;line-height:1.75}
 .guide-research-summary{font-size:15px}
 .guide-research-reminder{font-size:14px}
+.guide-research-handoff{display:flex;align-items:center;gap:12px;margin-top:24px;padding:18px 20px;border-top:1px solid #dce9ef;border-bottom:1px solid #dce9ef;color:#7890a1;font-size:13px;line-height:1.45}
+.guide-research-handoff-kicker{color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.13em;white-space:nowrap}
+.guide-research-handoff strong{color:var(--guide-ink);font-size:16px;font-weight:850;letter-spacing:-.045em;white-space:nowrap}
+.guide-research-handoff-line{flex:1 1 auto;height:1px;background:#cfe1e7}
+.guide-research-handoff-next{color:var(--guide-teal-dark);font-weight:850;letter-spacing:-.03em;white-space:nowrap}
+.guide-research-handoff>svg{flex:0 0 auto;color:var(--guide-teal-dark)}
 .guide-footer-bottom{font-size:11px}
 
 /* v2 mobile-first Apple-style readability system */
@@ -97,6 +103,12 @@
   .guide-research-detail h3{margin:25px 0 14px;font-size:28px;line-height:1.28}
   .guide-research-detail dd{font-size:16px;line-height:1.75}
   .guide-research-reminder{padding:18px;font-size:15px;line-height:1.75}
+  .guide-research-handoff{align-items:flex-start;flex-wrap:wrap;gap:8px 10px;margin-top:18px;padding:16px 2px;font-size:14px}
+  .guide-research-handoff-kicker{font-size:12px}
+  .guide-research-handoff strong{font-size:17px}
+  .guide-research-handoff-line{flex-basis:100%;order:3}
+  .guide-research-handoff-next{order:4;font-size:15px}
+  .guide-research-handoff>svg{order:5;margin-top:1px}
   .guide-myth-card{grid-template-columns:1fr;border-radius:20px}
   .guide-myth-question{padding:30px 24px 26px}
   .guide-myth-question p{max-width:17ch;margin-top:20px;font-size:28px;line-height:1.3}
