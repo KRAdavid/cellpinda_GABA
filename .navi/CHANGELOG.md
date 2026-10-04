@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 본문으로 이동 포커스 보정 — b393393d — 2026-10-05
+
+- `본문으로 이동` 건너뛰기 링크의 `main#guide-main` 대상에 `tabIndex=-1`을 추가해, 키보드·보조기기 사용자가 본문 시작점으로 포커스를 이어갈 수 있도록 보완했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #250과 main 배포 37233770435, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-SKIP-FOCUS-20261005, E-UI-CONTRACT-GUIDE-SKIP-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-SKIP-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-SKIP-FOCUS-20261005.
+
 ## guide 경로 맥락 보존 — bd2adafd — 2026-10-05
 
 - 장 이동 시 `view=guide`를 유지하고 이전 전문가 영상 query를 정리하며, 전문가 영상 선택 시 선택 ID를 보존하도록 guide 주소 갱신을 공통 처리했다. 새로고침·공유가 현재 읽는 장과 같은 맥락을 가리키도록 보완했으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

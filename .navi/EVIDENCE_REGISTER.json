@@ -818,6 +818,17 @@
         "E-LIVE-PUBLIC-GUIDE-ROUTE-CONTEXT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-085",
+      "statement": "공개 GABA 가이드의 본문으로 이동 건너뛰기 링크는 키보드·보조기기 사용자가 main landmark에서 읽기를 이어갈 수 있도록 포커스 가능한 본문 시작점을 제공한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-GUIDE-SKIP-FOCUS-20261005",
+        "E-UI-CONTRACT-GUIDE-SKIP-FOCUS-20261005",
+        "E-DEPLOY-PIPELINE-GUIDE-SKIP-FOCUS-20261005",
+        "E-LIVE-PUBLIC-GUIDE-SKIP-FOCUS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8033,6 +8044,50 @@
       "captured_at": "2026-10-04T20:40:24Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-ROUTE-CONTEXT",
       "claim_refs": ["C-002", "C-003", "C-007", "C-084"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-GUIDE-SKIP-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "본문으로 이동 건너뛰기 링크의 대상 main landmark를 키보드 포커스 가능한 지점으로 보정한 v77이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.",
+      "locator": "PR #250 source commit 065b5a4; pnpm run validate:ui-contract PASS including skip-navigation focus target guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1601308 bytes <= 1650000 budget; git diff --check PASS; public export, product-independent copy and research source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/250",
+      "captured_at": "2026-10-04T20:45:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-GUIDE-SKIP-FOCUS",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-085"]
+    },
+    {
+      "id": "E-UI-CONTRACT-GUIDE-SKIP-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 본문으로 이동 링크가 id=guide-main인 main landmark를 가리키고 해당 main에 tabIndex=-1이 있어 키보드·보조기기 사용자가 본문 시작점으로 포커스를 이어갈 수 있는 v77 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v77 skip-navigation focus assertion; PublicGabaGuide renders <a className=\"guide-skip\" href=\"#guide-main\">본문으로 이동</a> and <main id=\"guide-main\" tabIndex={-1}>; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/250",
+      "captured_at": "2026-10-04T20:45:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-GUIDE-SKIP-FOCUS",
+      "claim_refs": ["C-003", "C-085"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-GUIDE-SKIP-FOCUS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "본문으로 이동 포커스 보정 PR #250이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #250 merge main commit b393393d44d829bf5b735d3218cc4c8cde34aaa1; PR #250 release-verify 37233671741 job 111528437302 and site-quality-verify 37233671862 job 111528437644 successful; main workflow 37233770435 with release-verify 111528721809, worker-readiness 111528947673, deploy-pages 111528962006, smoke-live 111529002868 and release-status 111529044198 successful; deploy-worker 111528962458 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37233770435",
+      "captured_at": "2026-10-04T20:53:35Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-GUIDE-SKIP-FOCUS",
+      "claim_refs": ["C-001", "C-002", "C-085"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-GUIDE-SKIP-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 본문으로 이동 포커스 보정과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=b393393d44d829bf5b735d3218cc4c8cde34aaa1 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha b393393d44d829bf5b735d3218cc4c8cde34aaa1; generatedAt 2026-10-04T20:53:23.486Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-04T20:53:23Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-SKIP-FOCUS",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-085"]
     }
   ]
 }

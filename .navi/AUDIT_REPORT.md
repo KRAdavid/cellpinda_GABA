@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — b393393d — 2026-10-05
+
+- 본문으로 이동 건너뛰기 링크의 대상 `main` landmark에 `tabIndex=-1`을 추가해, 키보드·보조기기 사용자가 본문 시작점에서 읽기를 이어갈 수 있도록 보완했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 UI 계약(v77), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1601308 bytes로 예산 안이다.
+- PR #250 필수 checks, main workflow 37233770435의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate b393393d44d829bf5b735d3218cc4c8cde34aaa1는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-SKIP-FOCUS-20261005, E-UI-CONTRACT-GUIDE-SKIP-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-SKIP-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-SKIP-FOCUS-20261005.
+
 ## Release Recheck — bd2adafd — 2026-10-05
 
 - 전문가 영상을 선택한 뒤 다른 장으로 이동하면 `view=guide`가 사라지고 이전 `video` query가 남아 새로고침·공유 대상이 현재 읽기 위치와 어긋날 수 있는 잔여 흐름 리스크를 확인하고 PR #249에서 guide 주소 갱신을 공통 처리했다. 장 이동은 guide 경로를 유지하면서 stale 영상 query를 정리하고, 전문가 영상 선택은 선택 ID를 보존하도록 보완했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
