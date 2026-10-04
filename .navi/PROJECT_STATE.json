@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T06:22:00Z",
+  "updated_at": "2026-10-04T06:54:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1533,7 +1533,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T06:22:00Z"
+    "last_run_at": "2026-10-04T06:54:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1662,7 +1662,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T06:22:00Z"
+    "last_run_at": "2026-10-04T06:54:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3279,6 +3279,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T06:22:00Z"
+    },
+    {
+      "id": "H-106",
+      "event": "연구 상세 카드 하단에 다음 연구 연결을 추가해 긴 모바일 읽기 흐름을 인지에서 피부·근육·성장호르몬·면역으로 이어지게 보완했다. PR #198 merge `087f88f`와 main workflow `37183426133`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 HTTP 200·STATIC·candidate `087f88f`·공개 데이터 정합성을 확인했다. Playwright Chromium fallback으로 390px·1440px에서 인지 카드의 다음 연구 버튼 → 피부 연구 카드 이동, sticky 읽기 레일 아래 정렬, 가로폭·page error·console error 부재를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T06:54:00Z"
     }
   ]
 }
