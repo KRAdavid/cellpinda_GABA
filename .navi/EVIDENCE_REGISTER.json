@@ -796,6 +796,17 @@
         "E-LIVE-PUBLIC-RECOVERY-CONTEXT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-083",
+      "statement": "읽기 진행은 번호 없는 수면·회복 도입부를 ‘도입부’로 표시하고 본문을 화면의 01–12 번호와 맞춰 01 / 12부터 진행하여, 긴 페이지의 진행 수와 장 제목을 일치시킨다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-READING-PROGRESS-NUMBERING-20261005",
+        "E-UI-CONTRACT-READING-PROGRESS-NUMBERING-20261005",
+        "E-DEPLOY-PIPELINE-READING-PROGRESS-NUMBERING-20261005",
+        "E-LIVE-PUBLIC-READING-PROGRESS-NUMBERING-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7923,6 +7934,50 @@
       "captured_at": "2026-10-04T20:15:24Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RECOVERY-CONTEXT",
       "claim_refs": ["C-002", "C-003", "C-007", "C-082"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-READING-PROGRESS-NUMBERING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "번호 없는 수면·회복 도입부를 진행 집계에서 분리하고 본문을 01 / 12부터 표시한 v75가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #248 source commit 048f3bc0b0a38bcafc13a794823f527090923b60; pnpm run validate:ui-contract PASS including v75 intro-progress numbering guards; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1601285 bytes <= 1650000 budget; git diff --check PASS; research numbers, source data, and product-independent copy unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/248",
+      "captured_at": "2026-10-04T20:25:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-READING-PROGRESS-NUMBERING",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-083"]
+    },
+    {
+      "id": "E-UI-CONTRACT-READING-PROGRESS-NUMBERING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 번호 없는 opening-bridge를 본문 진행 집계에서 제외하고 도입부 진행값·도입부 라벨·01 / 12 본문 순서를 유지하는 v75 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v75 reading-progress numbering assertions; progressChapters excludes recovery-break and opening-bridge; opening-bridge progressValue is 0.5 and progressCountLabel is ‘도입부’; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/248",
+      "captured_at": "2026-10-04T20:25:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-READING-PROGRESS-NUMBERING",
+      "claim_refs": ["C-003", "C-083"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-READING-PROGRESS-NUMBERING-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "읽기 진행 번호 정렬 PR #248이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #248 merge main commit 7e9adf5aa26eaae5430089fa3b10553a709d0f6e; PR #248 release-verify 37231992255 job 111523514051 and site-quality-verify 37231992224 job 111523514281 successful; main workflow 37232067717 with release-verify 111523728283, worker-readiness 111523938574, deploy-pages 111523960708, smoke-live 111523996397 and release-status 111524032521 successful; deploy-worker 111523961365 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37232067717",
+      "captured_at": "2026-10-04T20:27:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-READING-PROGRESS-NUMBERING",
+      "claim_refs": ["C-001", "C-002", "C-083"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-READING-PROGRESS-NUMBERING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 도입부·01 / 12 본문 진행 정렬과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=7e9adf5aa26eaae5430089fa3b10553a709d0f6e pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 7e9adf5aa26eaae5430089fa3b10553a709d0f6e; generatedAt 2026-10-04T20:26:56.435Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#opening-bridge",
+      "captured_at": "2026-10-04T20:26:56Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-READING-PROGRESS-NUMBERING",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-083"]
     }
   ]
 }

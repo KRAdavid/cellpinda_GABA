@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 7e9adf5 — 2026-10-05
+
+- 첫 수면·회복 도입부를 진행에 포함한 뒤 본문 시각 번호 `01 · 발견`과 진행 레일의 `02 / 13`이 어긋날 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #248에서 도입부를 번호 집계에서 분리했다. 도입부는 `도입부`, 본문은 `01 / 12`부터 표시되도록 정렬했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 UI 계약(v75), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1601285 bytes로 예산 안이다.
+- PR #248 필수 checks, main workflow 37232067717의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 7e9adf5aa26eaae5430089fa3b10553a709d0f6e는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-READING-PROGRESS-NUMBERING-20261005, E-UI-CONTRACT-READING-PROGRESS-NUMBERING-20261005, E-DEPLOY-PIPELINE-READING-PROGRESS-NUMBERING-20261005, E-LIVE-PUBLIC-READING-PROGRESS-NUMBERING-20261005.
+
 ## Release Recheck — 40c540b — 2026-10-05
 
 - 읽기 진행 표시에서 첫 도입부의 ‘수면과 회복’과 중간 자동 전환 설명 카드가 같은 이름으로 보여 현재 위치가 겹쳐 보이는 잔여 퍼블리싱 리스크를 확인하고 PR #247에서 중간 장을 ‘회복의 고리’로 구분했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

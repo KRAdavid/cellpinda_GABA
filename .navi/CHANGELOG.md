@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 읽기 진행 번호와 본문 번호 정렬 — 7e9adf5 — 2026-10-05
+
+- 번호 없는 수면·회복 도입부를 진행 집계에서 분리해 `도입부`로 표시하고, 본문 진행은 화면 번호와 맞춰 `01 / 12`부터 시작하도록 보완했다. 긴 페이지에서 진행 수와 장 제목이 어긋나지 않으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #248과 main 배포 37232067717, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 진행 레일 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-READING-PROGRESS-NUMBERING-20261005, E-UI-CONTRACT-READING-PROGRESS-NUMBERING-20261005, E-DEPLOY-PIPELINE-READING-PROGRESS-NUMBERING-20261005, E-LIVE-PUBLIC-READING-PROGRESS-NUMBERING-20261005.
+
 ## 읽기 진행의 회복 맥락 구분 — 40c540b — 2026-10-05
 
 - 첫 도입부의 ‘수면과 회복’과 중간 자동 전환 설명 카드가 같은 이름으로 표시되던 흐름을 보완해, 중간 장을 ‘회복의 고리’로 구분했다. 긴 페이지에서 현재 읽는 위치를 더 빠르게 파악할 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
