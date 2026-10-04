@@ -1583,3 +1583,6 @@
     .guide-header .guide-header-share{right:calc(12px + env(safe-area-inset-right))}
   }
 }
+
+/* v82 reduced-motion coverage: make every public-guide transition and loading animation respect the reader's system preference. */
+@media(prefers-reduced-motion:reduce){.gaba-guide *,.gaba-guide *::before,.gaba-guide *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
