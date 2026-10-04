@@ -514,7 +514,7 @@ const readingChapters = [
 ] as const;
 type ReadingChapterId = (typeof readingChapters)[number]['id'];
 type ActiveChapterId = ReadingChapterId | 'top';
-const progressChapters = readingChapters.filter((chapter) => chapter.id !== 'recovery-break');
+const progressChapters = readingChapters.filter((chapter) => chapter.id !== 'recovery-break' && chapter.id !== 'opening-bridge');
 const editorialNotice = '이 사이트는 특정 제품의 광고가 아니라, GABA에 관한 과학적 정보와 공개 연구를 알기 쉽게 소개하는 공개 안내서입니다.';
 
 const getGuideScrollTarget = (target: HTMLElement) => {
@@ -913,15 +913,21 @@ export default function PublicGabaGuide() {
     : activeChapter.label;
   const activeProgressIndex = progressChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const progressChapterCount = progressChapters.length;
-  const progressValue = activeChapterId === 'recovery-break'
-    ? progressChapters.findIndex((chapter) => chapter.id === 'academic') + 0.5
-    : Math.max(0, activeProgressIndex + 1);
-  const progressCountLabel = activeChapterId === 'recovery-break'
-    ? '다음 장으로 이어져요'
-    : `${String(Math.max(0, activeProgressIndex + 1)).padStart(2, '0')} / ${String(progressChapterCount).padStart(2, '0')}`;
-  const progressAriaLabel = activeChapterId === 'recovery-break'
-    ? `현재 읽는 장: ${activeReadingLabel}. 본문 사이에 이어지는 설명입니다. 전체 ${progressChapterCount}장.`
-    : `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장.`;
+  const progressValue = activeChapterId === 'opening-bridge'
+    ? 0.5
+    : activeChapterId === 'recovery-break'
+      ? progressChapters.findIndex((chapter) => chapter.id === 'academic') + 0.5
+      : Math.max(0, activeProgressIndex + 1);
+  const progressCountLabel = activeChapterId === 'opening-bridge'
+    ? '도입부'
+    : activeChapterId === 'recovery-break'
+      ? '다음 장으로 이어져요'
+      : `${String(Math.max(0, activeProgressIndex + 1)).padStart(2, '0')} / ${String(progressChapterCount).padStart(2, '0')}`;
+  const progressAriaLabel = activeChapterId === 'opening-bridge'
+    ? `현재 읽는 장: ${activeReadingLabel}. 본문을 여는 도입부입니다. 전체 ${progressChapterCount}장.`
+    : activeChapterId === 'recovery-break'
+      ? `현재 읽는 장: ${activeReadingLabel}. 본문 사이에 이어지는 설명입니다. 전체 ${progressChapterCount}장.`
+      : `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장.`;
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
   const recoveryIsPaused = recoveryPaused || recoveryInteractionPaused;
