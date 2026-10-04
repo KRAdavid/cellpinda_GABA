@@ -1,5 +1,14 @@
 # Audit Report
 
+## 성장·면역 연구 방향 그래픽 보강 공개 배포 감리 — 074822b — 2026-10-04
+
+- 성장호르몬 연구 카드 4개와 면역 연구 카드 3개에 상승·하강 방향 그래픽과 자연어 결과를 함께 표시해 결과를 빠르게 읽도록 보완했다. 그래픽은 효과 크기나 수치를 뜻하지 않으며 해당 안내를 차트 설명에 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Chrome DevTools fallback에서 공개 390px·1440px에 그래픽과 연구 결과 문구가 표시됐고 scrollWidth와 clientWidth가 일치했으며 page error·console error가 없었다.
+- PR #206 필수 검사와 main workflow `37192302993`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `074822b3ff2f0e90463950a48b7e9a89ca49cb14`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Chrome DevTools fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-DIRECTION-GRAPHIC-20261004, E-CDP-DIRECTION-GRAPHIC-20261004, E-DEPLOY-PIPELINE-DIRECTION-GRAPHIC-20261004, E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004.
+
 ## 비교 연구 결과 미터 보강 공개 배포 감리 — 1cc9440 — 2026-10-04
 
 - 인지·피부·수면 비교 카드의 두 조건에 질적 미터를 추가하고 `더 많이 감소`, `덜 감소`, `더 많이 증가`, `덜 증가`를 함께 표시해 결과 방향을 먼저 읽도록 보완했다. 도표 하단의 비정량 비교 안내와 출처·연구 한계 문구는 유지됐다.

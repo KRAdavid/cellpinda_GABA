@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 성장·면역 연구 방향 그래픽 공개 배포: 2026-10-04 / candidate 074822b
+
+성장호르몬·면역 연구 카드의 결과 방향을 상승·하강 그래픽과 자연어 결과로 함께 표시해 모바일과 데스크톱에서 빠르게 읽도록 보강했다. 그래픽이 실제 효과 크기나 수치를 뜻하지 않는다는 안내를 유지했으며, PR #206·main workflow `37192302993`·Chrome DevTools fallback 390px·1440px·live validator HTTP 200·STATIC을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: E-LOCAL-BUILD-DIRECTION-GRAPHIC-20261004, E-CDP-DIRECTION-GRAPHIC-20261004, E-DEPLOY-PIPELINE-DIRECTION-GRAPHIC-20261004, E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004.
+
 ## 비교 연구 결과 미터 보강 공개 배포: 2026-10-04 / candidate 1cc9440
 
 연구 결과 카드의 작은 선 중심 표현을 5단계 질적 미터로 보강하고 `더 많이·덜 증가/감소` 문구를 함께 표시했다. 실제 효과 크기나 수치를 뜻하지 않는다는 안내는 유지했으며, PR #205·main workflow `37190962129`·Chrome DevTools fallback 390px·1440px·live validator HTTP 200·STATIC을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.

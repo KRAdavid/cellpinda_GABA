@@ -361,6 +361,17 @@
         "E-LIVE-PUBLIC-QUALITATIVE-METER-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-043",
+      "statement": "성장호르몬·면역 연구 카드의 신호형 결과를 상승·하강 방향 그래픽과 자연어 결과로 함께 표시해 모바일·데스크톱에서 빠르게 읽을 수 있으며, 그래픽이 실제 효과 크기나 수치를 뜻하지 않는다는 경계를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-DIRECTION-GRAPHIC-20261004",
+        "E-CDP-DIRECTION-GRAPHIC-20261004",
+        "E-DEPLOY-PIPELINE-DIRECTION-GRAPHIC-20261004",
+        "E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5761,6 +5772,50 @@
       "captured_at": "2026-10-04T09:06:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-QUALITATIVE-METER",
       "claim_refs": ["C-042"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-DIRECTION-GRAPHIC-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "성장호르몬·면역 연구 카드에 상승·하강 방향 그래픽과 자연어 결과를 함께 표시하고, 그래픽이 실제 효과 크기나 수치를 뜻하지 않는다는 차트 안내를 유지한 변경이 로컬 품질 검사를 통과했다.",
+      "locator": "PR #206 source commit bf2e580; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1493002 bytes; release manifest 70 files; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/206",
+      "captured_at": "2026-10-04T09:30:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-DIRECTION-GRAPHIC",
+      "claim_refs": ["C-043"]
+    },
+    {
+      "id": "E-CDP-DIRECTION-GRAPHIC-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome DevTools fallback에서 성장호르몬 연구 카드 4개와 면역 연구 카드 3개의 상승·하강 방향 그래픽, 자연어 결과, 비정량 안내가 모바일·데스크톱에 표시됐고 가로 넘침·page error·console error가 없었다.",
+      "locator": "Chrome DevTools fallback at https://kradavid.github.io/gaba_info/?view=guide#research-growth-hormone and #research-immune; 390x844 and 1440x1000; growth graphics=4; immune graphics=3; active labels `성장호르몬 연구 결과`, `면역 연구 결과`; scrollWidth=clientWidth (390 and 1425 CSS px); pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/206",
+      "captured_at": "2026-10-04T09:31:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261004-DIRECTION-GRAPHIC",
+      "claim_refs": ["C-043"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-DIRECTION-GRAPHIC-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "상승·하강 방향 그래픽 보강 PR #206이 필수 검사를 통과해 main에 병합됐고 GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #206 merge main commit 074822b3ff2f0e90463950a48b7e9a89ca49cb14; PR checks release-verify 37192239802 and site-quality-verify 37192239820 successful; main workflow 37192302993; release-verify 111406883606, worker-readiness 111407078291, deploy-pages 111407094084, smoke-live 111407129392, release-status 111407160576 successful; deploy-worker 111407094244 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37192302993",
+      "captured_at": "2026-10-04T09:32:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-DIRECTION-GRAPHIC",
+      "claim_refs": ["C-043"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 성장호르몬·면역 방향 그래픽 번들을 제공하고 공개 데이터·정적 번들·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 074822b3ff2f0e90463950a48b7e9a89ca49cb14; generatedAt 2026-10-04T09:30:13.825Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview status HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live growth/immune chart strings and graphics verified",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-growth-hormone",
+      "captured_at": "2026-10-04T09:33:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-DIRECTION-GRAPHIC",
+      "claim_refs": ["C-043"]
     }
   ]
 }

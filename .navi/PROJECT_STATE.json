@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T09:07:00Z",
+  "updated_at": "2026-10-04T09:34:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -300,7 +300,10 @@
         "E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-VIDEO-CONTEXT-20261004",
         "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004",
-        "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-20261004"
+        "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-20261004",
+        "E-LOCAL-BUILD-DIRECTION-GRAPHIC-20261004",
+        "E-DEPLOY-PIPELINE-DIRECTION-GRAPHIC-20261004",
+        "E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -381,6 +384,8 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-FILTER",
         "E-CDP-RESEARCH-OUTCOME-DIRECTION",
         "E-LIVE-PUBLIC-RESEARCH-OUTCOME-DIRECTION",
+        "E-CDP-DIRECTION-GRAPHIC-20261004",
+        "E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004",
         "E-CDP-MOBILE-MENU-FOCUS",
         "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS",
         "E-CDP-READING-RAIL-DEEPLINK",
@@ -448,6 +453,9 @@
         "E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004",
         "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
         "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004",
+        "E-LOCAL-BUILD-DIRECTION-GRAPHIC-20261004",
+        "E-CDP-DIRECTION-GRAPHIC-20261004",
+        "E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004",
         "E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004",
         "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004",
@@ -741,6 +749,10 @@
         "E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004",
         "E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004",
         "E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004",
+        "E-LOCAL-BUILD-DIRECTION-GRAPHIC-20261004",
+        "E-CDP-DIRECTION-GRAPHIC-20261004",
+        "E-DEPLOY-PIPELINE-DIRECTION-GRAPHIC-20261004",
+        "E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004",
         "E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004",
         "E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004",
@@ -810,6 +822,8 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-FILTER",
         "E-DEPLOY-PIPELINE-RESEARCH-OUTCOME-DIRECTION",
         "E-LIVE-PUBLIC-RESEARCH-OUTCOME-DIRECTION",
+        "E-DEPLOY-PIPELINE-DIRECTION-GRAPHIC-20261004",
+        "E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS",
         "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS",
         "E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP",
@@ -1533,7 +1547,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T09:07:00Z"
+    "last_run_at": "2026-10-04T09:34:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1662,7 +1676,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T09:07:00Z"
+    "last_run_at": "2026-10-04T09:34:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3335,6 +3349,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T09:07:00Z"
+    },
+    {
+      "id": "H-115",
+      "event": "성장호르몬·면역 신호형 연구 카드에 상승·하강 방향 그래픽과 자연어 결과를 함께 표시해 비교 이해를 빠르게 보완했다. 그래픽이 실제 효과 크기나 수치를 뜻하지 않는다는 차트 설명을 유지했다. PR #206 merge `074822b3`와 main workflow `37192302993`의 필수 검사가 성공했고, live validator는 HTTP 200·STATIC·candidate `074822b3ff2f0e90463950a48b7e9a89ca49cb14`·공개 데이터 정합성을 확인했다. Chrome DevTools fallback 390px·1440px에서 성장호르몬 그래픽 4개·면역 그래픽 3개, 가로폭 일치, page error·console error 부재를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T09:34:00Z"
     }
   ]
 }
