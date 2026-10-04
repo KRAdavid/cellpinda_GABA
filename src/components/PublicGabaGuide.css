@@ -1003,13 +1003,13 @@
 
 /* v24 mobile menu focus: separate the open navigation from the reading surface. */
 .guide-menu-backdrop{display:none}
-@media(max-width:860px){
+@media(max-width:900px){
   .guide-menu-backdrop{display:block;position:fixed;z-index:19;inset:70px 0 0;border:0;background:rgba(14,37,61,.22);backdrop-filter:blur(2px);cursor:default}
   .guide-menu-backdrop:focus-visible{outline:3px solid rgba(22,143,149,.45);outline-offset:-3px}
 }
 
 /* v23 tablet header: collapse the full chapter row before controls are pushed off-canvas. */
-@media(min-width:701px) and (max-width:860px){
+@media(min-width:701px) and (max-width:900px){
   .guide-header{height:70px;gap:12px;padding-inline:22px}
   .guide-header nav{display:none;position:absolute;top:70px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;margin:0;padding:10px 22px 15px;border-bottom:1px solid var(--guide-line);background:#fff;box-shadow:0 11px 20px rgba(20,70,100,.08)}
   .guide-header nav.is-open{display:flex;z-index:22}
