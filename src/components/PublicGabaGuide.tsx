@@ -618,6 +618,12 @@ const getInitialExpertVideoId = () => {
   return requestedId && expertVideos.some((video) => video.id === requestedId) ? requestedId : expertVideos[0].id;
 };
 
+const hasInitialExpertVideo = () => {
+  if (typeof window === 'undefined') return false;
+  const requestedId = new URLSearchParams(window.location.search).get('video');
+  return Boolean(requestedId && expertVideos.some((video) => video.id === requestedId));
+};
+
 const researchTopicIdFromHash = (hash: string) => {
   const targetId = hash.replace(/^#/, '');
   return researchTopics.find((topic) => `research-${topic.id}` === targetId)?.id ?? null;
@@ -840,7 +846,7 @@ export default function PublicGabaGuide() {
   const [shareStatus, setShareStatus] = useState('');
   const [activeVideoId, setActiveVideoId] = useState(getInitialExpertVideoId);
   const [activeVideoTopic, setActiveVideoTopic] = useState('전체');
-  const [videoStarted, setVideoStarted] = useState(false);
+  const [videoStarted, setVideoStarted] = useState(hasInitialExpertVideo);
   const [videoFrameReady, setVideoFrameReady] = useState(false);
   const [activeChapterId, setActiveChapterId] = useState<ActiveChapterId>('top');
   const [activeRecoveryCard, setActiveRecoveryCard] = useState(0);
