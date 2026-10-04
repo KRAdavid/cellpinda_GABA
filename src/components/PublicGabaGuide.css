@@ -1537,3 +1537,18 @@
     .guide-story-section,.guide-final,.guide-recovery-break{scroll-margin-top:calc(112px + env(safe-area-inset-top))}
   }
 }
+
+/* v69 safe-area coverage: extend the mobile reading chrome to tablet widths and keyboard skip links. */
+@supports (padding: max(0px)) {
+  @media(max-width:900px){
+    .guide-skip{top:calc(8px + env(safe-area-inset-top))}
+    .guide-header{height:calc(70px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
+    .guide-reading-progress,.guide-header nav{top:calc(70px + env(safe-area-inset-top))}
+    .guide-header nav{padding-left:max(22px,env(safe-area-inset-left));padding-right:max(22px,env(safe-area-inset-right))}
+    .guide-menu-backdrop{inset:calc(70px + env(safe-area-inset-top)) 0 0}
+    .guide-story-section,.guide-final,.guide-recovery-break{scroll-margin-top:calc(126px + env(safe-area-inset-top))}
+  }
+  @media(max-width:700px){
+    .guide-story-section,.guide-final,.guide-recovery-break{scroll-margin-top:calc(112px + env(safe-area-inset-top))}
+  }
+}
