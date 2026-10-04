@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 직접 딥링크 포커스 보정 — 13cb639 — 2026-10-05
+
+- 연구 카드를 공유 URL로 직접 열거나 URL hash를 바꿀 때 선택 카드 제목으로 포커스를 이어가도록 보완했다. 공유 링크로 들어온 키보드·보조기기 사용자가 선택 연구의 제목·대상·결과를 바로 읽을 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #252와 main 배포 37235537953, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-UI-CONTRACT-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005.
+
 ## 연구 카드 포커스 흐름 보정 — 544ce7d — 2026-10-05
 
 - 연구 지도에서 주제를 고르거나 다음 연구로 이동하면 선택한 연구 카드로 포커스를 이어가도록 보완하고, 연구 카드 제목을 접근성 이름으로 연결했다. 키보드·보조기기 사용자가 대상·결과·해석을 바로 읽을 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

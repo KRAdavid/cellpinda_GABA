@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 13cb639
+
+- 공격 관점에서 확인한 실패 모드는 연구 공유 링크를 직접 열거나 hash를 변경해도 화면만 이동하고 카드 제목에 포커스가 도착하지 않아, 키보드·스크린리더 사용자가 선택 연구의 읽기 시작점을 즉시 알기 어려운 것이었다. PR #252에서 초기 딥링크와 hash 변경 모두 선택 카드로 포커스를 넘겼다.
+- UI 계약 v79, typecheck, 127개 테스트, production build, PR #252 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-UI-CONTRACT-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005.
+
 ## Recheck — 2026-10-05 — 544ce7d
 
 - 공격 관점에서 확인한 실패 모드는 연구 지도 버튼을 눌러 카드로 이동해도 포커스가 지도에 남아, 키보드·스크린리더 사용자가 선택한 연구의 제목과 결과를 바로 이어서 읽지 못하는 것이었다. PR #251에서 연구 카드에 `tabIndex=-1`과 고유 `aria-labelledby`를 추가하고 지도·다음 연구 이동 후 포커스를 카드로 넘겼다.

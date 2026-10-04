@@ -840,6 +840,17 @@
         "E-LIVE-PUBLIC-GUIDE-RESEARCH-FOCUS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-087",
+      "statement": "공개 GABA 연구 카드의 직접 연구 딥링크 진입과 URL hash 변경은 해당 연구 카드를 키보드·보조기기 사용자의 읽기 시작점으로 포커스해, 공유 링크로 진입해도 선택 연구의 제목·대상·결과를 바로 이어서 읽을 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005",
+        "E-UI-CONTRACT-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005",
+        "E-DEPLOY-PIPELINE-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005",
+        "E-LIVE-PUBLIC-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8143,6 +8154,50 @@
       "captured_at": "2026-10-04T21:06:58Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-RESEARCH-FOCUS",
       "claim_refs": ["C-002", "C-003", "C-007", "C-086"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 직접 딥링크와 hash 변경의 포커스 handoff를 보완한 v79가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.",
+      "locator": "PR #252 source commit 34146bf; pnpm run validate:ui-contract PASS including initial research deep-link and hashchange focus guards; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1601665 bytes <= 1650000 budget; git diff --check PASS; public export, product-independent copy and research source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/252",
+      "captured_at": "2026-10-04T21:19:05Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-GUIDE-RESEARCH-DEEPLINK-FOCUS",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-087"]
+    },
+    {
+      "id": "E-UI-CONTRACT-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 직접 연구 딥링크 초기 진입과 hash 변경 후 선택 카드에 focusResearchCard 포커스 handoff를 요구하는 v79 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v79 research-deep-link focus assertions; initial research deep-link path calls focusResearchCard(initialResearchTopicId) after target readiness; hashchange path calls focusResearchCard(nextResearchTopicId); command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/252",
+      "captured_at": "2026-10-04T21:19:05Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-GUIDE-RESEARCH-DEEPLINK-FOCUS",
+      "claim_refs": ["C-003", "C-087"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 직접 딥링크 포커스 보정 PR #252가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #252 merge main commit 13cb6399b3ef5314e95f75c2edd649fab0fd41f9; PR #252 release-verify 37235404175 job 111533382253 and site-quality-verify 37235404140 job 111533382076 successful; main workflow 37235537953 with release-verify 111533764898, worker-readiness 111533981797, deploy-pages 111533997740, smoke-live 111534044377 and release-status 111534083467 successful; deploy-worker 111533998049 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37235537953",
+      "captured_at": "2026-10-04T21:19:05Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-GUIDE-RESEARCH-DEEPLINK-FOCUS",
+      "claim_refs": ["C-001", "C-002", "C-087"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 연구 직접 딥링크·hash 변경의 카드 포커스 보정과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=13cb6399b3ef5314e95f75c2edd649fab0fd41f9 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 13cb6399b3ef5314e95f75c2edd649fab0fd41f9; generatedAt 2026-10-04T21:19:05.593Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-04T21:19:05Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-RESEARCH-DEEPLINK-FOCUS",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-087"]
     }
   ]
 }
