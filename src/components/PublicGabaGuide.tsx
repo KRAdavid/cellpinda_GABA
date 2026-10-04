@@ -1164,24 +1164,32 @@ export default function PublicGabaGuide() {
     if (!cards.length || !('IntersectionObserver' in window)) return;
     let frame = 0;
     let pendingTopicId: string | null = null;
+    let lastPublishedTopicId: string | null = null;
+    const latestEntries = new Map<Element, IntersectionObserverEntry>();
     const observer = new IntersectionObserver((entries) => {
-      const visibleCard = entries
+      entries.forEach((entry) => latestEntries.set(entry.target, entry));
+      const visibleCard = Array.from(latestEntries.values())
         .filter((entry) => entry.isIntersecting)
         .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
-      if (!visibleCard) return;
+      if (!visibleCard) {
+        pendingTopicId = null;
+        return;
+      }
       pendingTopicId = visibleCard.target.id.replace(/^research-/, '');
       if (frame) return;
       frame = window.requestAnimationFrame(() => {
         frame = 0;
         const nextTopicId = pendingTopicId;
         pendingTopicId = null;
-        if (!nextTopicId) return;
+        if (!nextTopicId || nextTopicId === lastPublishedTopicId) return;
+        lastPublishedTopicId = nextTopicId;
         startTransition(() => setActiveResearchTopicId(nextTopicId));
       });
     }, { rootMargin: '-28% 0px -42% 0px', threshold: [0.15, 0.35, 0.6] });
     cards.forEach((card) => observer.observe(card));
     return () => {
       observer.disconnect();
+      latestEntries.clear();
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, []);
