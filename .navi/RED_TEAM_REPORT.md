@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 연구 기준 범례 가독성 레드팀 재검증 — 746fd126 — 2026-10-04
+
+- 공개 390px·1440px에서 연구 기준 범례가 연구 읽는 순서표 다음에 명확한 세로 흐름으로 표시되고, 모바일 제목·범례·설명이 13px·13px·12px로 읽히는지 확인했다. 줄바꿈 뒤 제목 텍스트도 자연스러운 띄어쓰기를 유지했다.
+- 가로 넘침·page error·console error는 없었다. 피부 연구 지도를 선택하면 URL이 research-skin으로 바뀌고 해당 연구 카드가 활성화됐다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 결과는 PASS_WITH_CONDITIONS다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-LEGEND-20261004, E-PLAYWRIGHT-MOBILE-RESEARCH-LEGEND-20261004, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-LEGEND-20261004, E-LIVE-PUBLIC-MOBILE-RESEARCH-LEGEND-20261004.
+
 ## 모바일 연구 읽기 순서 가독성 레드팀 재검증 — 76b3adc — 2026-10-04
 
 - 공개 390px·1440px에서 연구 지도 아래 4단계 순서표가 지도·대상·결과·해석으로 분리되고, 모바일 본문 13px·번호 원형 30px이 적용되는지 확인했다. 연구 제목이 순서표 아래에 자연스럽게 이어지고, 큰 글씨 토글과 연구 읽기 영상 필터도 실제 상태로 변했다.

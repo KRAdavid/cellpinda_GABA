@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 연구 기준 범례 가독성 감사 — 746fd126 — 2026-10-04
+
+- 모바일 연구 기준 범례를 한 줄 압축에서 세로 흐름으로 정리하고, 연구 기준 제목·범례·설명 글자 크기를 13px·13px·12px로 조정했다. 연구 확장 제목의 줄바꿈 뒤 공백도 보존해 화면 텍스트와 접근성 텍스트가 같은 문장으로 읽힌다.
+- 연구 내용·수치·출처·제품 독립 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 390px·1440px Chrome fallback의 페이지 정체성·비공백·가로 폭·콘솔 오류·큰 글씨 토글·피부 연구 카드 선택을 확인했다.
+- PR #187 checks 37173502093, 37173502097과 main workflow 37173572877의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator는 candidate 746fd126에서 HTTP 200·STATIC·bundleHashes 70과 공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-LEGEND-20261004, E-PLAYWRIGHT-MOBILE-RESEARCH-LEGEND-20261004, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-LEGEND-20261004, E-LIVE-PUBLIC-MOBILE-RESEARCH-LEGEND-20261004.
+
 ## 모바일 연구 읽기 순서 가독성 감사 — 76b3adc — 2026-10-04
 
 - 모바일 연구 지도 아래의 압축된 한 줄 순서를 지도·대상·결과·해석 4단계 시각 순서표로 보완했다. 모바일 표기는 13px, 번호 원형은 30px로 조정해 고령 사용자도 다음 읽기 단계를 빠르게 찾도록 했다.

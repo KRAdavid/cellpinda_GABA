@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 모바일 연구 기준 범례 가독성 공개 배포: 2026-10-04 / candidate 746fd126
+
+모바일 연구 기준 범례를 한 줄 압축에서 세로 흐름으로 정리하고, 연구 기준 제목·범례·설명 글자 크기를 13px·13px·12px로 조정했다. 연구 확장 제목의 줄바꿈 뒤 공백도 보존해 화면과 접근성 텍스트의 문장 흐름을 맞췄다. PR #187, main workflow 37173572877, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-LEGEND-20261004, E-PLAYWRIGHT-MOBILE-RESEARCH-LEGEND-20261004, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-LEGEND-20261004, E-LIVE-PUBLIC-MOBILE-RESEARCH-LEGEND-20261004.
+
 ## 모바일 연구 읽기 순서 가독성 공개 배포: 2026-10-04 / candidate 76b3adc
 
 모바일 연구 지도 아래 한 줄로 압축되어 있던 읽는 순서를 지도·대상·결과·해석 4단계 시각 순서표로 정리했다. 모바일 본문은 13px, 번호 원형은 30px로 조정해 연구 카드를 어떤 순서로 읽는지 즉시 파악하도록 했으며, 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다. PR #186, main workflow 37172733343, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
