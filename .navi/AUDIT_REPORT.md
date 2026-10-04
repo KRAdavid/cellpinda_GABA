@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 84897891 — 2026-10-05
+
+- 전문가 영상 아래 안내의 실제 다음 단계가 수면 연구로 오해될 수 있는 잔여 퍼블리싱 리스크를 확인하고, PR #239에서 `다음 장 · 연구를 읽는 기준 → 원문 출처`로 실제 문서 흐름을 정렬했다. 모바일에서도 다음 읽기 안내의 크기·간격·줄바꿈을 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- 로컬 UI 계약(v66), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1598564 bytes로 예산 안이다.
+- PR #239 필수 checks, main workflow 37224127512의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 8489789124bb7880bcbd369566a981181b1d7ffe는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-HANDOFF-20261005, E-UI-CONTRACT-EXPERT-VIDEO-HANDOFF-20261005, E-DEPLOY-PIPELINE-EXPERT-VIDEO-HANDOFF-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-HANDOFF-20261005.
+
 ## Release Recheck — 0e7836e — 2026-10-05
 
 - 연구 지도 아래에 `주제를 선택하면` 안내를 추가하고 각 지도 버튼을 안내 문장과 연결해, 지도에서 연구 카드의 대상·결과·해석으로 이어지는 흐름을 즉시 이해할 수 있게 했다. 모바일에서는 안내 문장을 자연스럽게 줄바꿈했다. 연구 수치·출처 데이터는 변경하지 않았다.

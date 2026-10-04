@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 84897891 — 2026-10-05
+
+- AC-003 전문가 영상 다음의 읽기 흐름을 `연구를 읽는 기준 → 원문 출처`로 실제 페이지 순서와 일치시키고 모바일에서도 읽히는 안내 계층: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #239와 main 공개 배포 workflow 37224127512가 성공했고, 공개 URL validator가 candidate 8489789124bb7880bcbd369566a981181b1d7ffe를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 완료 상태는 NOT_READY를 유지한다. Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수와 같은 외부 검증이 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-HANDOFF-20261005, E-UI-CONTRACT-EXPERT-VIDEO-HANDOFF-20261005, E-DEPLOY-PIPELINE-EXPERT-VIDEO-HANDOFF-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-HANDOFF-20261005.
+
 ## Current Release Recheck — 0e7836e — 2026-10-05
 
 - AC-003 연구 지도에서 주제 선택 후 연구 카드의 대상·결과·해석으로 이어지는 안내와 모바일 줄바꿈: PASS.

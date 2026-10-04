@@ -697,6 +697,17 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-CUE-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-074",
+      "statement": "전문가 영상 아래의 다음 읽기 안내가 실제 페이지 흐름인 연구를 읽는 기준·원문 출처로 이어지고, 모바일에서도 다음 장·연구를 읽는 기준·원문 출처가 읽히며, 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-VIDEO-HANDOFF-20261005",
+        "E-UI-CONTRACT-EXPERT-VIDEO-HANDOFF-20261005",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-HANDOFF-20261005",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-HANDOFF-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7428,6 +7439,50 @@
       "captured_at": "2026-10-04T18:10:47Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-MAP-CUE",
       "claim_refs": ["C-073"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-HANDOFF-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 다음 읽기 안내를 실제 연구 읽기 순서와 맞춘 v66이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #239 source commit f877804; pnpm run validate:ui-contract PASS including v66 expert-video handoff guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1598564 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/239",
+      "captured_at": "2026-10-04T18:18:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-EXPERT-VIDEO-HANDOFF",
+      "claim_refs": ["C-074"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EXPERT-VIDEO-HANDOFF-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 전문가 영상 아래 안내를 실제 다음 장인 연구를 읽는 기준·원문 출처로 고정하고, 데스크톱·모바일의 시각 계층을 유지하는 v66 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v66 expert-video handoff assertions; guide-expert-thread aria-label and next-step states 다음 장, 연구를 읽는 기준, 원문 출처; desktop and max-width 700px styles guarded; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/239",
+      "captured_at": "2026-10-04T18:18:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-EXPERT-VIDEO-HANDOFF",
+      "claim_refs": ["C-074"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-HANDOFF-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 다음 읽기 흐름 개선 PR #239가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #239 merge main commit 8489789124bb7880bcbd369566a981181b1d7ffe; PR #239 release-verify 37224027032 job 111499874420 and site-quality-verify 37224027027 job 111499874017 successful; main workflow 37224127512 with release-verify 111500160278, worker-readiness 111500377804, deploy-pages 111500395051, smoke-live 111500433881 and release-status 111500483407 successful; deploy-worker 111500395664 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37224127512",
+      "captured_at": "2026-10-04T18:22:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-EXPERT-VIDEO-HANDOFF",
+      "claim_refs": ["C-074"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-HANDOFF-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 전문가 영상 다음의 실제 연구 읽기 흐름과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=8489789124bb7880bcbd369566a981181b1d7ffe pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 8489789124bb7880bcbd369566a981181b1d7ffe; generatedAt 2026-10-04T18:22:28.115Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#experts",
+      "captured_at": "2026-10-04T18:22:28Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EXPERT-VIDEO-HANDOFF",
+      "claim_refs": ["C-074"]
     }
   ]
 }
