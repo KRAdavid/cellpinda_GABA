@@ -438,6 +438,17 @@
         "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-050",
+      "statement": "320px 초소형 모바일에서 수면·회복 14단계 지도의 마지막 두 단계가 중앙에 정렬되어, 3행의 끝맺음이 균형 있게 읽힌다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-RECOVERY-END-20261004",
+        "E-CDP-NARROW-RECOVERY-END-20261004",
+        "E-DEPLOY-PIPELINE-NARROW-RECOVERY-END-20261004",
+        "E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6146,6 +6157,50 @@
       "captured_at": "2026-10-04T11:50:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-RECOVERY-MAP",
       "claim_refs": ["C-049"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-RECOVERY-END-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "320px 이하 회복 경로 마지막 행 중앙 정렬 보정 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #213 source commit 0265f11; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS via production build; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1494629 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/213",
+      "captured_at": "2026-10-04T11:56:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-NARROW-RECOVERY-END",
+      "claim_refs": ["C-050"]
+    },
+    {
+      "id": "E-CDP-NARROW-RECOVERY-END-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "기존 Chrome DevTools fallback 렌더에서 확인한 320px의 6·6·2 행 구조와 42.5px 단계 폭을 유지하면서, 좁은 화면 전용 CSS가 마지막 두 단계를 3·4열에 배치해 행의 중심을 맞춘다.",
+      "locator": "Chrome CDP fallback baseline at local http://127.0.0.1:5203/?view=guide&qa=recovery-map-320b and source CSS review for PR #213; 320x844: scrollWidth=clientWidth=320, map rows=3, step width=42.5px; 390x844: scrollWidth=clientWidth=390, map rows=2, step width=46.6px; PR #213 CSS explicitly places the final two steps at grid columns 3 and 4; page errors []; console errors []; prior screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/213",
+      "captured_at": "2026-10-04T11:58:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261004-NARROW-RECOVERY-END",
+      "claim_refs": ["C-050"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-RECOVERY-END-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 회복 경로 마지막 행 중앙 정렬 PR #213이 필수 검사를 통과해 main에 병합됐고 GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #213 merge main commit a13e82f157d0aa52bbb4c2232b7956fb45e8342a; PR checks release-verify 37200570055 and site-quality-verify 37200570045 successful; main workflow 37200663786; release-verify 111431506959, worker-readiness 111431697650, deploy-pages 111431708136, smoke-live 111431849828, release-status 111431881864 successful; deploy-worker 111431709035 skipped by STATIC_ONLY; workflow annotation reports historical local-path matches only",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37200663786",
+      "captured_at": "2026-10-04T12:04:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-NARROW-RECOVERY-END",
+      "claim_refs": ["C-050"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 회복 경로 마지막 행 중앙 정렬 보정이 포함된 후보가 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=a13e82f157d0aa52bbb4c2232b7956fb45e8342a pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha a13e82f157d0aa52bbb4c2232b7956fb45e8342a; generatedAt 2026-10-04T12:01:56.705Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-04T12:06:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-RECOVERY-END",
+      "claim_refs": ["C-050"]
     }
   ]
 }

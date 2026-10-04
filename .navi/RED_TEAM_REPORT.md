@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 초소형 모바일 회복 경로 마지막 행 공개 재검증 — a13e82f — 2026-10-04
+
+- 320px에서 14단계 경로의 마지막 두 단계가 3·4열에 중앙 정렬되어 6·6·2 흐름의 끝맺음이 균형 있게 보인다. 가로 넘침과 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 결과는 PASS_WITH_CONDITIONS다. Browser 플러그인 부재로 Chrome DevTools fallback 기준을 사용했으며 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성은 자동화만으로 닫을 수 없다. RT-001·RT-002·RT-003은 계속 OPEN이고 NAVI는 USER_DECISION / NOT_READY다.
+- 중앙 정렬은 시각적 완성도를 높이지만, 실제 사용자 이해도나 독립 과학·규제 감수를 대체하지 않는다.
+
+증적: `E-CDP-NARROW-RECOVERY-END-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004`.
+
 ## 초소형 모바일 회복 경로 공개 재검증 — 5bf2921 — 2026-10-04
 
 - 320px에서는 14단계 회복 경로가 6·6·2의 3행으로 표시되고 약 42.5px 단계 버튼을 확보했으며, 390px에서는 7·7 흐름을 유지했다. 가로 넘침과 새 CRITICAL/MAJOR 결함은 확인되지 않았다.

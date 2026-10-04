@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T11:50:00Z",
+  "updated_at": "2026-10-04T12:06:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -327,7 +327,11 @@
         "E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261004",
         "E-CDP-NARROW-RECOVERY-MAP-20261004",
         "E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261004",
-        "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004"
+        "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004",
+        "E-LOCAL-BUILD-NARROW-RECOVERY-END-20261004",
+        "E-CDP-NARROW-RECOVERY-END-20261004",
+        "E-DEPLOY-PIPELINE-NARROW-RECOVERY-END-20261004",
+        "E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -798,7 +802,9 @@
         "E-CDP-TABLET-PROGRESS-ALIGN-20261004",
         "E-LIVE-PUBLIC-TABLET-PROGRESS-ALIGN-20261004",
         "E-CDP-NARROW-RECOVERY-MAP-20261004",
-        "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004"
+        "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004",
+        "E-CDP-NARROW-RECOVERY-END-20261004",
+        "E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004"
       ],
       "owner": "QA"
     },
@@ -1589,7 +1595,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T11:50:00Z"
+    "last_run_at": "2026-10-04T12:06:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1718,7 +1724,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T11:50:00Z"
+    "last_run_at": "2026-10-04T12:06:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -2545,7 +2551,11 @@
             "E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261004",
             "E-CDP-NARROW-RECOVERY-MAP-20261004",
             "E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261004",
-            "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004"
+            "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004",
+            "E-LOCAL-BUILD-NARROW-RECOVERY-END-20261004",
+            "E-CDP-NARROW-RECOVERY-END-20261004",
+            "E-DEPLOY-PIPELINE-NARROW-RECOVERY-END-20261004",
+            "E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004"
          ],
          "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생·연구 비교 방향 그래프·320·350·390·768·1440px × 11개 주요 장 가로폭·페이지 오류 0건 검증 통과"
       },
@@ -2632,7 +2642,11 @@
             "E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261004",
             "E-CDP-NARROW-RECOVERY-MAP-20261004",
             "E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261004",
-            "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004"
+            "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004",
+            "E-LOCAL-BUILD-NARROW-RECOVERY-END-20261004",
+            "E-CDP-NARROW-RECOVERY-END-20261004",
+            "E-DEPLOY-PIPELINE-NARROW-RECOVERY-END-20261004",
+            "E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004"
          ],
          "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 모바일 읽기 라벨·읽기 크기 조절·직접 해시 진입 정렬·메뉴 닫힘 후 토글 포커스 복귀·초소형 모바일 연구 카드 폭·320·350·390·768·1440px 주요 장 직접 진입의 자동 검증은 통과"
       }
@@ -3480,6 +3494,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T11:50:00Z"
+    },
+    {
+      "id": "H-122",
+      "event": "320px 초소형 모바일 회복 지도에서 6·6·2의 마지막 두 단계가 왼쪽에 붙어 시각적 중심이 흐려지는 잔여 퍼블리싱 결함을 확인하고 PR #213에서 13·14단계를 3·4열에 중앙 배치했다. 기존 320px·390px 행 수와 터치 폭을 유지하면서 마지막 행의 끝맺음만 보정했다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #213 checks, main workflow `37200663786`, live validator candidate `a13e82f157d0aa52bbb4c2232b7956fb45e8342a`의 HTTP 200·STATIC·공개 데이터 정합성을 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T12:06:00Z"
     }
   ]
 }

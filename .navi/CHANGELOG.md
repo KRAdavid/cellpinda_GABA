@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 초소형 모바일 회복 경로 마지막 행 중앙 정렬 및 공개 재검증: 2026-10-04 / candidate a13e82f
+
+320px 이하에서 수면·회복 14단계 지도의 마지막 13·14단계를 3·4열에 중앙 배치해 6·6·2 경로의 시각적 끝맺음을 보완했다. 기존 행 수와 터치 폭, 390px 흐름은 유지했으며, PR #213·main workflow `37200663786`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 기준 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-RECOVERY-END-20261004`, `E-CDP-NARROW-RECOVERY-END-20261004`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-END-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004`.
+
 ## 초소형 모바일 회복 경로 터치·가독성 보강 및 공개 재검증: 2026-10-04 / candidate 5bf2921
 
 320px 이하에서 수면·회복 14단계 지도가 지나치게 압축되지 않도록 6·6·2의 3행으로 재배치하고 단계 버튼·아이콘을 키웠다. 390px의 7·7 흐름은 유지했으며, PR #212·main workflow `37199796734`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 320px·390px 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

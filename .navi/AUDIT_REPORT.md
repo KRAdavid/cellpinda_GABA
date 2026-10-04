@@ -1,5 +1,13 @@
 # Audit Report
 
+## 초소형 모바일 회복 경로 마지막 행 균형 보정 공개 재검증 — a13e82f — 2026-10-04
+
+- 320px 이하 회복 경로의 13·14단계가 왼쪽에 몰려 보이던 잔여 시각 결함을 확인하고, 마지막 두 단계를 3·4열에 중앙 배치했다. 6·6·2 행 구조와 단계 버튼 폭, 390px의 7·7 흐름은 유지했다.
+- PR #213의 UI 계약·typecheck·127개 테스트·production build·성능 예산과 main workflow `37200663786`의 정적 Pages 배포·라이브 smoke·release status를 확인했다. live validator candidate `a13e82f157d0aa52bbb4c2232b7956fb45e8342a`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Browser 플러그인 부재로 Chrome DevTools fallback 기준을 사용했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-NARROW-RECOVERY-END-20261004`, `E-CDP-NARROW-RECOVERY-END-20261004`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-END-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004`.
+
 ## 초소형 모바일 회복 경로 터치·가독성 공개 재검증 — 5bf2921 — 2026-10-04
 
 - 320px에서 14단계 회복 경로가 7열에 압축되어 단계 버튼이 작아지는 리스크를 확인하고, 350px 이하를 6·6·2의 3행으로 재배치했다. 버튼 최소 폭은 약 42.5px, 아이콘은 38px로 보강했으며 390px은 기존 7·7 흐름을 유지했다.
