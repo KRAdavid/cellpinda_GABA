@@ -1,5 +1,13 @@
 # Audit Report
 
+## NAVI 문서 동기화 후 최종 공개본 재감사 — cc312de — 2026-10-04
+
+- NAVI 문서 동기화 이후 최종 공개 candidate에서 live validator와 Playwright Chromium fallback을 재실행했다. 320·350·390·768·1440px × 11개 주요 장, 총 55개 조합을 통과했고 모든 조합에서 가로 넘침·페이지 오류·콘솔 오류가 없었다.
+- 최종 공개 candidate `cc312de`는 HTTP 200·정적 모드·70개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·Smart Store only·removed750·provenance 일치를 유지한다. UI 코드는 직전 보정 candidate `91808af`와 동일하다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LIVE-PUBLIC-NARROW-PHONE-20261004.
+
 ## 초소형 모바일 연구 카드 폭 및 공개본 전수 레이아웃 감사 — 91808af — 2026-10-04
 
 - 자동 전수 감리에서 320px 수면 연구 카드의 내부 두 번째 열이 콘텐츠의 고정 최소 폭을 물려 오른쪽 13px가 잘리는 결함을 확인하고, `minmax(0, 1fr)`와 내부 `min-width: 0`으로 보정했다.

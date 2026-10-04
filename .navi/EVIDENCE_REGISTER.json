@@ -5164,9 +5164,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "현재 GitHub Pages 공개본에서 5개 화면 폭과 11개 주요 장 직접 진입을 순회했으며, 320px 초소형 수면 연구 도표를 포함해 가로 넘침·페이지 오류·콘솔 오류가 없었다.",
-      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 91808af2f7e4e92e036c84470d23956f444f6975; generatedAt 2026-10-04T05:17:14.179Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback: 320·350·390·768·1440px × 11 anchors = 55 checks; every scrollWidth equals viewport; targetFound true; consoleErrors []; pageErrors []",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha cc312deab93d12a4df201e61bd929114eaa67983; generatedAt 2026-10-04T05:23:51.603Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback: 320·350·390·768·1440px × 11 anchors = 55 checks; every scrollWidth equals viewport; targetFound true; consoleErrors []; pageErrors []",
       "source_uri": "https://kradavid.github.io/gaba_info/",
-      "captured_at": "2026-10-04T05:19:41Z",
+      "captured_at": "2026-10-04T05:26:27Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-PHONE",
       "claim_refs": ["C-031"]
     }

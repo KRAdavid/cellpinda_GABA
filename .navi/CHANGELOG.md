@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 최종 NAVI 문서 동기화 공개 재검증: 2026-10-04 / candidate cc312de
+
+NAVI 문서 동기화 후 최종 공개 candidate에서 live validator와 Playwright Chromium fallback 55개 조합을 재실행했다. 320·350·390·768·1440px × 11개 주요 장에서 가로 넘침·페이지 오류·콘솔 오류가 0건이었고, 직전 UI 보정 candidate 91808af와 동일한 공개 화면이 유지됐다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LIVE-PUBLIC-NARROW-PHONE-20261004.
+
 ## 초소형 모바일 연구 카드 폭 보정 및 공개본 전수 감리: 2026-10-04 / candidate 91808af
 
 320px에서 수면 연구 도표가 내부 그리드의 고정 최소 폭으로 잘리던 문제를 확인하고, 카드의 두 번째 열을 축소 가능한 구조로 보정했다. PR #193, main workflow 37179404463, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. Playwright Chromium fallback의 320·350·390·768·1440px × 11개 주요 장 직접 진입 55개 조합에서 가로 넘침·페이지 오류·콘솔 오류가 0건이었고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
