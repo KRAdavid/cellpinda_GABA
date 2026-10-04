@@ -383,6 +383,16 @@
         "E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-045",
+      "statement": "전문가 영상 갤러리가 모바일·데스크톱에서 선택 즉시 재생 흐름, 주제 필터, 원본 채널 연결을 유지하며 공개 화면의 가로 넘침 없이 표시된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-VIDEO-GALLERY-QA-20261004",
+        "E-CDP-VIDEO-GALLERY-QA-20261004",
+        "E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5871,6 +5881,39 @@
       "captured_at": "2026-10-04T10:08:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-SIGNAL-LABEL",
       "claim_refs": ["C-044"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-GALLERY-QA-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 갤러리 포함 최신 코드 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #208 source commit 55e5c9c; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1493366 bytes; performance budgets PASS; CSS-only final delta",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/208",
+      "captured_at": "2026-10-04T10:28:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-VIDEO-GALLERY",
+      "claim_refs": ["C-045"]
+    },
+    {
+      "id": "E-CDP-VIDEO-GALLERY-QA-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome DevTools fallback에서 전문가 영상 갤러리의 선택 영상·주제 필터·썸네일 카드가 390px·1440px에 표시되고, 공개 화면의 가로 넘침과 런타임 오류가 없었다.",
+      "locator": "Chrome CDP fallback at https://kradavid.github.io/gaba_info/?view=guide#expert-videos; 390x844 and 1440x900; visible videos=9; 390px card grid width 149px with two columns; 1440px board card width 328px; active chapter `전문가 영상`; scrollWidth=clientWidth (375/375 and 1425/1425); page errors []; console errors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T10:25:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261004-VIDEO-GALLERY",
+      "claim_refs": ["C-045"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 전문가 영상 섹션과 주제별 영상 갤러리가 정상적으로 표시되고, 공개 데이터·제품 독립 경계·정적 배포 상태가 유지된다.",
+      "locator": "Chrome CDP live at https://kradavid.github.io/gaba_info/; public release candidate 32888f35e50c000b76a569dbe1aa1c865f350789; 390px·1440px video gallery review; latest `pnpm run validate:live-public` page 200, STATIC, candidateSha 32888f35e50c000b76a569dbe1aa1c865f350789, bundleHashes 70, claims 12, masterRecords 6, products 1, sharePages 6, teaserPreview HOLD/publicUrl false, internalOpsSnapshots excluded, smartStoreOnly true, removed750 true, provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/#expert-videos",
+      "captured_at": "2026-10-04T10:29:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-VIDEO-GALLERY",
+      "claim_refs": ["C-045"]
     }
   ]
 }

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T10:12:00Z",
+  "updated_at": "2026-10-04T10:30:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -307,7 +307,10 @@
         "E-LOCAL-BUILD-NARROW-SIGNAL-LABEL-20261004",
         "E-CDP-NARROW-SIGNAL-LABEL-20261004",
         "E-DEPLOY-PIPELINE-NARROW-SIGNAL-LABEL-20261004",
-        "E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004"
+        "E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004",
+        "E-LOCAL-BUILD-VIDEO-GALLERY-QA-20261004",
+        "E-CDP-VIDEO-GALLERY-QA-20261004",
+        "E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -766,7 +769,10 @@
         "E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004",
         "E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004",
         "E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004",
-        "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004"
+        "E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004",
+        "E-LOCAL-BUILD-VIDEO-GALLERY-QA-20261004",
+        "E-CDP-VIDEO-GALLERY-QA-20261004",
+        "E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004"
       ],
       "owner": "QA"
     },
@@ -1557,7 +1563,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T10:12:00Z"
+    "last_run_at": "2026-10-04T10:30:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1686,7 +1692,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T10:12:00Z"
+    "last_run_at": "2026-10-04T10:30:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3373,6 +3379,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T10:12:00Z"
+    },
+    {
+      "id": "H-117",
+      "event": "전문가 영상 갤러리의 모바일·데스크톱 공개 화면을 재점검했다. 390px에서 9개 영상·주제 필터·2열 카드가 정상 표시되고, 1440px에서도 선택 영상 영역과 갤러리 카드가 유지됐다. 두 화면 모두 가로 넘침·page error·console error가 없었고 최신 정적 공개본 live validator도 HTTP 200·STATIC·공개 데이터 정합성을 통과했다. 로컬 품질 검증은 UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했다. 별도 NAVI worktree에서 로컬 목표 감사는 공개 데이터 폴더가 없는 구조로 실행할 수 없어 코드 worktree에서 실행했으며, 공개 사이트와 무관한 로컬 자료·실주문·Worker 비밀 게이트는 계속 WAITING/VERIFYING으로 유지했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T10:30:00Z"
     }
   ]
 }

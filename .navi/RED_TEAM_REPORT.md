@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 갤러리 공개 화면 재검증 — 32888f3 — 2026-10-04
+
+- 390px·1440px에서 선택 영상·주제 필터·썸네일 카드·원본 링크의 정보 계층이 유지되고 가로 넘침·page error·console error는 재현되지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다. Chromium fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도와 영상별 권리·독립 과학 검토를 닫을 수 없다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-CDP-VIDEO-GALLERY-QA-20261004, E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004.
+
 ## 좁은 모바일 연구 결과 카드 가독성 보강 공개 배포 레드팀 재검증 — 53a7c41 — 2026-10-04
 
 - 320px에서 연구 결과 카드가 지표명 → 결과값 → 방향 그래픽 순서로 분리되고, 390px에서도 카드 흐름과 방향 그래픽이 유지되는지 확인했다. 가로 넘침·page error·console error는 재현되지 않았다.

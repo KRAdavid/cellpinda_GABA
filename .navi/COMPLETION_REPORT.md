@@ -1,5 +1,13 @@
 # Completion Report
 
+## 전문가 영상 갤러리 공개 화면 품질 게이트 — 32888f3 — 2026-10-04
+
+- 전문가 영상 9개와 주제 필터, 선택 즉시 재생 영역을 모바일·데스크톱 흐름으로 재점검했다. 390px에서는 2열 카드, 1440px에서는 선택 영상과 갤러리 병렬 구성이 유지됐다.
+- 최신 정적 공개본 live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했고 NAVI project-state validation은 PASS였다.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토와 로컬 사업 운영 게이트가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-VIDEO-GALLERY-QA-20261004, E-CDP-VIDEO-GALLERY-QA-20261004, E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004.
+
 ## 좁은 모바일 연구 결과 카드 가독성 보강 배포 품질 게이트 — 53a7c41 — 2026-10-04
 
 - 연구 결과 카드의 좁은 화면 라벨을 보정하고 350px 이하에서 지표명·결과값·방향 그래픽을 세 줄로 재배치해 320px에서도 읽기 순서를 분명하게 했다. 390px 레이아웃과 비정량 방향 안내·출처 연결은 유지했다.

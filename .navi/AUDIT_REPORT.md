@@ -1,5 +1,14 @@
 # Audit Report
 
+## 전문가 영상 갤러리 공개 화면 재점검 — 32888f3 — 2026-10-04
+
+- 390px에서 전문가 영상 9개, 주제 필터, 선택 상태와 2열 카드가 표시되고 1440px에서도 선택 영상 영역과 갤러리 카드가 유지됐다. 선택 영상은 기존 즉시 재생 흐름과 원본 YouTube 연결을 유지한다.
+- 최신 코드 후보는 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Chrome DevTools fallback에서 390px·1440px 모두 scrollWidth와 clientWidth가 일치했고 page error·console error가 없었다.
+- 최신 GitHub Pages 공개본 candidate `32888f35e50c000b76a569dbe1aa1c865f350789`의 live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. NAVI project-state validation도 PASS다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Chrome DevTools fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-VIDEO-GALLERY-QA-20261004, E-CDP-VIDEO-GALLERY-QA-20261004, E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004.
+
 ## 좁은 모바일 연구 결과 카드 가독성 보강 공개 배포 감리 — 53a7c41 — 2026-10-04
 
 - 320px 이하 연구 결과 카드에서 지표명·결과값·방향 그래픽을 세 줄로 분리해 의미 단위가 끊기지 않도록 보완했고, 390px에서는 기존 두 줄 흐름을 유지했다.
