@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T21:19:05Z",
+  "updated_at": "2026-10-04T21:38:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1939,7 +1939,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T21:19:05Z"
+    "last_run_at": "2026-10-04T21:38:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2112,7 +2112,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T21:19:05Z"
+    "last_run_at": "2026-10-04T21:38:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4335,6 +4335,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T21:19:05Z"
+    },
+    {
+      "id": "H-158",
+      "event": "일반 장 메뉴와 직접 장 딥링크가 화면만 이동하고 제목에 포커스를 넘기지 않아 키보드·보조기기 사용자가 선택 장의 읽기 시작점을 즉시 알기 어려운 잔여 접근성 리스크를 확인하고 PR #253에서 히어로·본문·회복·최종 장 제목을 프로그램 포커스 지점으로 보완했다. 메뉴 이동·hash 변경·직접 진입을 공통 제목 포커스 handoff로 연결했으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다. v80 UI 계약을 추가했고 PR #253 checks, main workflow `37236810722`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `d5450135891a6e871561d4a1fe97e1820ca88701`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T21:38:00Z"
     }
   ]
 }

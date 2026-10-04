@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — d545013 — 2026-10-05
+
+- 일반 장 메뉴·직접 장 딥링크가 화면만 이동하고 제목에 포커스를 남기지 않을 수 있는 잔여 접근성 리스크를 확인했다. PR #253에서 히어로·본문·회복·최종 장 제목을 프로그램 포커스 지점으로 만들고 메뉴 이동·hash 변경·직접 진입을 공통 제목 포커스 handoff로 연결했다.
+- 로컬 UI 계약(v80), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1602350 bytes로 예산 안이다.
+- PR #253 필수 checks, main workflow 37236810722의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate d5450135891a6e871561d4a1fe97e1820ca88701은 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-CHAPTER-FOCUS-20261005, E-UI-CONTRACT-GUIDE-CHAPTER-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-CHAPTER-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-CHAPTER-FOCUS-20261005.
+
 ## Release Recheck — 13cb639 — 2026-10-05
 
 - 연구 카드를 공유 URL로 직접 열거나 연구 hash를 바꿀 때 화면만 이동하고 포커스가 제목에 남지 않을 수 있는 잔여 접근성 리스크를 확인했다. PR #252에서 초기 연구 딥링크와 hash 변경 모두 선택 연구 카드로 포커스를 이어가도록 보완했다.

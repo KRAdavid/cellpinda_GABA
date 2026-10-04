@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 일반 장 제목 포커스 보정 — d545013 — 2026-10-05
+
+- 일반 장 메뉴와 직접 장 딥링크가 화면만 이동하고 읽기 시작점에 포커스를 넘기지 않던 잔여 접근성 리스크를 확인하고 PR #253에서 히어로·본문·회복·최종 장 제목에 프로그램 포커스 지점을 추가했다. 메뉴 이동·hash 변경·직접 진입을 공통 제목 포커스 handoff로 연결했으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #253 checks, main 배포 37236810722, Pages, 라이브 smoke, release status와 live validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-CHAPTER-FOCUS-20261005, E-UI-CONTRACT-GUIDE-CHAPTER-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-CHAPTER-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-CHAPTER-FOCUS-20261005.
+
 ## 연구 직접 딥링크 포커스 보정 — 13cb639 — 2026-10-05
 
 - 연구 카드를 공유 URL로 직접 열거나 URL hash를 바꿀 때 선택 카드 제목으로 포커스를 이어가도록 보완했다. 공유 링크로 들어온 키보드·보조기기 사용자가 선택 연구의 제목·대상·결과를 바로 읽을 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

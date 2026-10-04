@@ -851,6 +851,17 @@
         "E-LIVE-PUBLIC-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-088",
+      "statement": "공개 GABA 가이드의 일반 장 메뉴와 직접 장 딥링크는 선택한 장의 제목으로 포커스를 넘겨, 키보드·보조기기 사용자가 화면 이동 뒤 해당 장의 읽기 시작점을 바로 이어갈 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-GUIDE-CHAPTER-FOCUS-20261005",
+        "E-UI-CONTRACT-GUIDE-CHAPTER-FOCUS-20261005",
+        "E-DEPLOY-PIPELINE-GUIDE-CHAPTER-FOCUS-20261005",
+        "E-LIVE-PUBLIC-GUIDE-CHAPTER-FOCUS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8198,6 +8209,50 @@
       "captured_at": "2026-10-04T21:19:05Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-RESEARCH-DEEPLINK-FOCUS",
       "claim_refs": ["C-002", "C-003", "C-007", "C-087"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-GUIDE-CHAPTER-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "일반 장 메뉴·직접 장 딥링크의 읽기 시작점 포커스를 보완한 v80이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.",
+      "locator": "PR #253 source commit 52a3a3f; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1602350 bytes <= 1650000 budget; git diff --check PASS; getGuideScrollTarget includes .guide-hero and all named chapter headings accept tabIndex={-1}; public export, product-independent copy and research source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/253",
+      "captured_at": "2026-10-04T21:38:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-GUIDE-CHAPTER-FOCUS",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-088"]
+    },
+    {
+      "id": "E-UI-CONTRACT-GUIDE-CHAPTER-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 직접 장 딥링크, hash 변경, 메뉴 이동에서 named chapter heading으로 포커스를 넘기는 규칙과 히어로·본문·마지막 장 제목의 프로그램 포커스 지점을 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v80 chapter-focus assertions; focusInitialChapterDestination handles direct entry, hashchange focuses the resolved chapter target, scrollTo calls focusGuideDestination for chapter navigation, getGuideScrollTarget includes .guide-hero, and 15 named headings require tabIndex={-1}; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/253",
+      "captured_at": "2026-10-04T21:38:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-GUIDE-CHAPTER-FOCUS",
+      "claim_refs": ["C-003", "C-088"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-GUIDE-CHAPTER-FOCUS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "일반 장 포커스 보정 PR #253이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #253 merge main commit d5450135891a6e871561d4a1fe97e1820ca88701; PR #253 release-verify 37236738887 job 111537234393 and site-quality-verify 37236738877 job 111537234325 successful; main workflow 37236810722 with release-verify 111537447386, worker-readiness 111537689641, deploy-pages 111537704072, smoke-live 111537746472 and release-status 111537795714 successful; deploy-worker 111537705011 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37236810722",
+      "captured_at": "2026-10-04T21:38:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-GUIDE-CHAPTER-FOCUS",
+      "claim_refs": ["C-001", "C-002", "C-088"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-GUIDE-CHAPTER-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 일반 장 메뉴·직접 장 딥링크의 제목 포커스 보정과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=d5450135891a6e871561d4a1fe97e1820ca88701 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha d5450135891a6e871561d4a1fe97e1820ca88701; generatedAt 2026-10-04T21:37:57.674Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T21:38:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-CHAPTER-FOCUS",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-088"]
     }
   ]
 }
