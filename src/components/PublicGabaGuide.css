@@ -727,7 +727,9 @@
 .guide-recovery-break-head>p{margin:0;color:#6f8795;font-size:14px;line-height:1.75;letter-spacing:-.04em;text-align:right}
 .guide-recovery-map{display:grid;grid-template-columns:repeat(14,1fr);margin-bottom:22px}
 .guide-recovery-map-step{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;min-width:0;padding:0;border:0;background:transparent;color:#8aa0ac}
-.guide-recovery-map-icon{display:grid;place-items:center;width:35px;height:35px;border:1px solid #c6dadd;border-radius:50%}
+.guide-recovery-map-step:hover .guide-recovery-map-icon{border-color:#82cacc;background:rgba(255,255,255,.72);color:var(--guide-teal-dark)}
+.guide-recovery-map-step:focus-visible{outline:3px solid rgba(18,154,163,.22);outline-offset:5px;border-radius:12px}
+.guide-recovery-map-icon{display:grid;place-items:center;width:35px;height:35px;border:1px solid #c6dadd;border-radius:50%;transition:background .18s ease,border-color .18s ease,color .18s ease}
 .guide-recovery-map-step.is-active .guide-recovery-map-icon{background:var(--guide-teal-dark);color:#fff}
 .guide-recovery-map-number{color:#8aa0ac;font-size:9px;font-weight:900;letter-spacing:.08em;line-height:1}
 .guide-recovery-map-step.is-active .guide-recovery-map-number{color:var(--guide-teal-dark)}
@@ -785,7 +787,7 @@
 @media(prefers-reduced-motion:reduce){
   .guide-recovery-card{animation:none}
   .guide-recovery-progress i{animation:none}
-  .guide-recovery-controls button{transition:none}
+  .guide-recovery-controls button,.guide-recovery-map-icon{transition:none}
 }
 
 /* v15 editorial boundary: make the product-independent purpose explicit without interrupting the story. */
@@ -1201,4 +1203,11 @@
 /* v49 mobile media focus: give the selected vertical expert video enough room to read without distorting its 9:16 frame. */
 @media(max-width:700px){
   .guide-video-feature-media{max-width:250px}
+}
+
+/* v50 recovery map affordance: make the 14-step reading path easier to scan and operate. */
+@media(max-width:700px){
+  .guide-recovery-map{gap:12px 4px}
+  .guide-recovery-map-icon{width:34px;height:34px}
+  .guide-recovery-map-number{font-size:10px}
 }
