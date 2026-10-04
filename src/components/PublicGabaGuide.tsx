@@ -500,7 +500,7 @@ const readingChapters = [
   { id: 'opening-bridge', label: '수면과 회복' },
   { id: 'history', label: '발견의 순간' },
   { id: 'basics', label: 'GABA란' },
-  { id: 'recovery-break', label: '수면과 회복' },
+  { id: 'recovery-break', label: '회복의 고리' },
   { id: 'academic', label: '연구 지도' },
   { id: 'everyday', label: '일상의 순간' },
   { id: 'sleep', label: '수면 연구' },
