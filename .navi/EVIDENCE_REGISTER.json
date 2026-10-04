@@ -620,6 +620,17 @@
         "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-067",
+      "statement": "모바일 연구 확장 지도는 표준 화면에서 80px·82px 주제 버튼과 40px 아이콘, 350px 이하에서 76px·78px 주제 버튼과 38px 아이콘을 사용해 읽기·터치 여유를 보강하며, UI 계약이 이를 회귀 점검한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-TOUCH-20261005",
+        "E-UI-CONTRACT-RESEARCH-MAP-TOUCH-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-TOUCH-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-TOUCH-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7043,6 +7054,50 @@
       "captured_at": "2026-10-04T16:10:24Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RECOVERY-MAP-TOUCH",
       "claim_refs": ["C-066"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-TOUCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 확장 지도의 80px·82px 주제 버튼, 40px 아이콘 및 350px 이하 76px·78px·38px 보정 규칙이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #232 source commit 24f010c; pnpm run validate:ui-contract PASS including v59 research map touch rhythm guards; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1593338 bytes <= 1650000 budget; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/232",
+      "captured_at": "2026-10-04T16:20:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RESEARCH-MAP-TOUCH",
+      "claim_refs": ["C-067"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-MAP-TOUCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 모바일 연구 확장 지도의 표준·초소형 화면 주제 버튼 폭·높이·아이콘 크기·touch-action을 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v59 research map touch rhythm assertion; max-width 700px item 80px/82px and dot 40px; max-width 350px item 76px/78px and dot 38px; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/232",
+      "captured_at": "2026-10-04T16:20:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-MAP-TOUCH",
+      "claim_refs": ["C-067"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-TOUCH-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 확장 지도 보강 PR #232가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #232 merge main commit 8ba4a76ec8da1f3e00795b6ed4855c08755a990b; PR #232 release-verify 37216674906 and site-quality-verify 37216674797 successful; main workflow 37216763700 with release-verify 111478733596, worker-readiness 111478924364, deploy-pages 111478940625, smoke-live 111478974635 and release-status 111479010486 successful; deploy-worker 111478941225 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37216763700",
+      "captured_at": "2026-10-04T16:27:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-MAP-TOUCH",
+      "claim_refs": ["C-067"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-TOUCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 모바일 연구 확장 지도 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=8ba4a76ec8da1f3e00795b6ed4855c08755a990b pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 8ba4a76ec8da1f3e00795b6ed4855c08755a990b; generatedAt 2026-10-04T16:27:14.287Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device touch/readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T16:27:14Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-MAP-TOUCH",
+      "claim_refs": ["C-067"]
     }
   ]
 }

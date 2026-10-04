@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 8ba4a76
+
+- 공격 관점에서 확인한 실패 모드는 모바일 연구 확장 지도의 주제 버튼·아이콘이 작아 고령 사용자가 연구 영역을 식별하거나 누르기 어려워지는 것이었다. 표준 모바일 80px·82px 버튼과 40px 아이콘, 350px 이하 76px·78px·38px 보정으로 보완하고 v59 UI 계약을 추가했다.
+- UI 계약, typecheck, 127개 테스트, production build, PR #232 checks, main Pages 배포·라이브 smoke·release status가 통과했다. 라이브 validator도 candidate `8ba4a76ec8da1f3e00795b6ed4855c08755a990b`와 공개 데이터·제품 독립 경계를 일치 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright가 현재 실행 환경에 없어 실제 브라우저·실기기 터치와 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-TOUCH-20261005`, `E-UI-CONTRACT-RESEARCH-MAP-TOUCH-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-TOUCH-20261005`, `E-LIVE-PUBLIC-RESEARCH-MAP-TOUCH-20261005`.
+
 ## Recheck — 2026-10-05 — 3510d2c
 
 - 좁은 모바일에서 14단계 회복 지도가 7열로 압축되어 단계 식별과 조작 공간이 작아질 수 있는 잔여 결함을 확인했고, 6열·44px 최소 터치 영역·마지막 두 단계 중앙 정렬로 보완했다.
