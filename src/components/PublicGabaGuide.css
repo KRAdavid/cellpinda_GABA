@@ -610,6 +610,13 @@
   .guide-hero-story:before{inset:0 0 0 48%;background-position:center right}
   .guide-hero-story:after{inset:0 0 0 42%}
 }
+@media(min-width:701px) and (max-width:900px){
+  /* v56 tablet editorial bridge: keep the public-information boundary readable over the hero art. */
+  .guide-hero-story .guide-editorial-note,
+  .guide-hero-story .guide-rail{position:relative;z-index:3;max-width:340px;border-radius:12px;background:rgba(255,255,255,.9);box-shadow:0 8px 22px rgba(22,60,75,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .guide-hero-story .guide-editorial-note{padding:10px 13px 10px 11px}
+  .guide-hero-story .guide-rail{padding:8px 10px}
+}
 @media(max-width:700px){
   .guide-header{height:70px;padding-inline:20px}
   .guide-logo span{font-size:22px}
