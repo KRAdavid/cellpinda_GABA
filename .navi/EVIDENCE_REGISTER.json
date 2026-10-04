@@ -928,6 +928,17 @@
         "E-LIVE-PUBLIC-MEMO-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-095",
+      "statement": "공개 GABA 안내서는 연구 카드 스크롤 중 현재 주제 표시 갱신을 비긴급 transition으로 처리해 모바일 스크롤 입력을 우선하면서 지도 중앙 라벨과 활성 연구 카드 연결을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TRANSITION-20261005",
+        "E-UI-CONTRACT-TRANSITION-20261005",
+        "E-DEPLOY-PIPELINE-TRANSITION-20261005",
+        "E-LIVE-PUBLIC-TRANSITION-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8583,6 +8594,50 @@
       "captured_at": "2026-10-04T23:06:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MEMO",
       "claim_refs": ["C-002", "C-003", "C-007", "C-094"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TRANSITION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 스크롤 중 현재 주제 표시 갱신을 React startTransition으로 비긴급 처리하는 v86 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #265 source commit 684c7196b8765d3e30a82c0c8743a3ec552bd1f3; pnpm run validate:ui-contract PASS including v86 non-blocking research observer guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1604163 bytes <= 1650000 budget; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/265",
+      "captured_at": "2026-10-04T23:18:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-TRANSITION",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-095"]
+    },
+    {
+      "id": "E-UI-CONTRACT-TRANSITION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 카드 IntersectionObserver의 현재 주제 상태 갱신을 startTransition으로 감싸 스크롤 중 비차단 업데이트 경계를 유지하는지 v86 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v86 non-blocking research observer assertion; active research topic update calls startTransition; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/265",
+      "captured_at": "2026-10-04T23:18:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-TRANSITION",
+      "claim_refs": ["C-003", "C-095"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TRANSITION-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 스크롤 상태 업데이트 비차단 처리 PR #265가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #265 merge main commit 30078911bfd1838f9c2595d68f781520c9fc7b82; PR checks release-verify 37243201722 job 111555855440 and site-quality-verify 37243201732 job 111555855515 successful; main workflow 37243296161 with release-verify 111556133240, worker-readiness 111556331288, deploy-pages 111556347223, smoke-live 111556390567 and release-status 111556426751 successful; deploy-worker 111556347493 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37243296161",
+      "captured_at": "2026-10-04T23:20:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-TRANSITION",
+      "claim_refs": ["C-001", "C-002", "C-095"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TRANSITION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 연구 카드 스크롤 상태 업데이트 비차단 처리를 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=30078911bfd1838f9c2595d68f781520c9fc7b82 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 30078911bfd1838f9c2595d68f781520c9fc7b82; generatedAt 2026-10-04T23:19:44.467Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Browser/Playwright and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T23:20:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-TRANSITION",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-095"]
     }
   ]
 }

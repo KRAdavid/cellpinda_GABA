@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T23:06:00Z",
+  "updated_at": "2026-10-04T23:20:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1939,7 +1939,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T23:06:00Z"
+    "last_run_at": "2026-10-04T23:20:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2112,7 +2112,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T23:06:00Z"
+    "last_run_at": "2026-10-04T23:20:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3076,9 +3076,13 @@
         "E-LOCAL-BUILD-MEMO-20261005",
         "E-UI-CONTRACT-MEMO-20261005",
         "E-DEPLOY-PIPELINE-MEMO-20261005",
-        "E-LIVE-PUBLIC-MEMO-20261005"
+        "E-LIVE-PUBLIC-MEMO-20261005",
+        "E-LOCAL-BUILD-TRANSITION-20261005",
+        "E-UI-CONTRACT-TRANSITION-20261005",
+        "E-DEPLOY-PIPELINE-TRANSITION-20261005",
+        "E-LIVE-PUBLIC-TRANSITION-20261005"
         ],
-        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생·연구 비교 방향 그래프·각 도표 행의 GABA 결과 요약 선표시·연구 범위 표식·연구 지도 선택 안내·정적 연구 시각 요소 memo 보호·320·350·390·768·1440px × 11개 주요 장 가로폭·페이지 오류 0건 검증 통과"
+        "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생·연구 비교 방향 그래프·각 도표 행의 GABA 결과 요약 선표시·연구 범위 표식·연구 지도 선택 안내·정적 연구 시각 요소 memo 보호·스크롤 주제 갱신 transition 처리·320·350·390·768·1440px × 11개 주요 장 가로폭·페이지 오류 0건 검증 통과"
       },
       {
         "criterion_id": "AC-006",
@@ -3243,9 +3247,13 @@
         "E-LOCAL-BUILD-MEMO-20261005",
         "E-UI-CONTRACT-MEMO-20261005",
         "E-DEPLOY-PIPELINE-MEMO-20261005",
-        "E-LIVE-PUBLIC-MEMO-20261005"
+        "E-LIVE-PUBLIC-MEMO-20261005",
+        "E-LOCAL-BUILD-TRANSITION-20261005",
+        "E-UI-CONTRACT-TRANSITION-20261005",
+        "E-DEPLOY-PIPELINE-TRANSITION-20261005",
+        "E-LIVE-PUBLIC-TRANSITION-20261005"
         ],
-        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 모바일 읽기 라벨·읽기 크기 조절·직접 해시 진입 정렬·메뉴 닫힘 후 토글 포커스 복귀·초소형 모바일 연구 카드 폭·모바일 회복 지도 6열·단계 버튼 44px·연구 비교 도표 각 행의 GABA 결과 요약 선표시·연구 범위 표식·연구 지도 선택 안내·정적 연구 시각 요소 memo 보호·320·350·390·768·1440px 주요 장 직접 진입의 자동 검증은 통과"
+        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 모바일 읽기 라벨·읽기 크기 조절·직접 해시 진입 정렬·메뉴 닫힘 후 토글 포커스 복귀·초소형 모바일 연구 카드 폭·모바일 회복 지도 6열·단계 버튼 44px·연구 비교 도표 각 행의 GABA 결과 요약 선표시·연구 범위 표식·연구 지도 선택 안내·정적 연구 시각 요소 memo 보호·스크롤 주제 갱신 transition 처리·320·350·390·768·1440px 주요 장 직접 진입의 자동 검증은 통과"
       }
     ],
     "final_status": "NOT_READY"
@@ -4392,6 +4400,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T23:06:00Z"
+    },
+    {
+      "id": "H-165",
+      "event": "연구 카드 스크롤 중 현재 연구 주제 표시 갱신이 일반 우선순위로 실행되어 모바일 입력 반응을 방해할 수 있는 잔여 성능 리스크를 확인하고 PR #265에서 IntersectionObserver 기반 주제 갱신을 React startTransition으로 분리했다. v86 UI 계약을 추가했고 PR #265 checks, main workflow 37243296161의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate 30078911bfd1838f9c2595d68f781520c9fc7b82는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 연구 수치·출처 데이터·공개 카피·제품 독립 공개 경계는 변경하지 않았다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T23:20:00Z"
     }
   ]
 }
