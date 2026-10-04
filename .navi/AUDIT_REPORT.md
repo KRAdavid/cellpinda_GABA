@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 544ce7d — 2026-10-05
+
+- 연구 지도에서 주제를 선택하거나 다음 연구로 이동할 때 선택 카드에 포커스를 이어주고, 각 연구 카드에 고유한 접근성 이름을 부여했다. 키보드·보조기기 사용자가 카드의 대상·결과·해석을 바로 읽을 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 UI 계약(v78), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1601525 bytes로 예산 안이다.
+- PR #251 필수 checks, main workflow 37234697205의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 544ce7d3112a8f6a50e9813f85b1e421c4e41e4a는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-RESEARCH-FOCUS-20261005, E-UI-CONTRACT-GUIDE-RESEARCH-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-RESEARCH-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-RESEARCH-FOCUS-20261005.
+
 ## Release Recheck — b393393d — 2026-10-05
 
 - 본문으로 이동 건너뛰기 링크의 대상 `main` landmark에 `tabIndex=-1`을 추가해, 키보드·보조기기 사용자가 본문 시작점에서 읽기를 이어갈 수 있도록 보완했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

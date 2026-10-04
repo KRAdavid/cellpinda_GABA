@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 544ce7d
+
+- 공격 관점에서 확인한 실패 모드는 연구 지도 버튼을 눌러 카드로 이동해도 포커스가 지도에 남아, 키보드·스크린리더 사용자가 선택한 연구의 제목과 결과를 바로 이어서 읽지 못하는 것이었다. PR #251에서 연구 카드에 `tabIndex=-1`과 고유 `aria-labelledby`를 추가하고 지도·다음 연구 이동 후 포커스를 카드로 넘겼다.
+- UI 계약 v78, typecheck, 127개 테스트, production build, PR #251 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-GUIDE-RESEARCH-FOCUS-20261005, E-UI-CONTRACT-GUIDE-RESEARCH-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-RESEARCH-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-RESEARCH-FOCUS-20261005.
+
 ## Recheck — 2026-10-05 — b393393d
 
 - 공격 관점에서 확인한 실패 모드는 본문으로 이동 링크가 화면을 스크롤하더라도 대상 `main` landmark에 포커스를 넘기지 못해, 키보드·보조기기 사용자가 본문 읽기를 이어가기 어려운 것이었다. PR #250에서 `main#guide-main`에 `tabIndex=-1`을 추가해 포커스 기준을 보완했다.

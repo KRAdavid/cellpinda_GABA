@@ -829,6 +829,17 @@
         "E-LIVE-PUBLIC-GUIDE-SKIP-FOCUS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-086",
+      "statement": "공개 GABA 연구 지도에서 주제를 선택하거나 다음 연구로 이동하면 선택된 연구 카드가 명명된 읽기 시작점이 되어 키보드·보조기기 사용자가 대상·결과·해석을 바로 이어서 읽을 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-GUIDE-RESEARCH-FOCUS-20261005",
+        "E-UI-CONTRACT-GUIDE-RESEARCH-FOCUS-20261005",
+        "E-DEPLOY-PIPELINE-GUIDE-RESEARCH-FOCUS-20261005",
+        "E-LIVE-PUBLIC-GUIDE-RESEARCH-FOCUS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8088,6 +8099,50 @@
       "captured_at": "2026-10-04T20:53:23Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-SKIP-FOCUS",
       "claim_refs": ["C-002", "C-003", "C-007", "C-085"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-GUIDE-RESEARCH-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도·다음 연구 이동 뒤 선택된 연구 카드에 포커스를 이어주고 각 카드에 접근성 이름을 부여한 v78이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.",
+      "locator": "PR #251 source commit c833605; pnpm run validate:ui-contract PASS including research-card focus handoff guards; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1601525 bytes <= 1650000 budget; git diff --check PASS; public export, product-independent copy and research source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/251",
+      "captured_at": "2026-10-04T21:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-GUIDE-RESEARCH-FOCUS",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-086"]
+    },
+    {
+      "id": "E-UI-CONTRACT-GUIDE-RESEARCH-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 지도와 다음 연구 이동에 focusResearchCard 포커스 handoff를 요구하고, 각 연구 카드가 tabIndex=-1 및 고유 aria-labelledby 제목을 갖는 v78 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v78 research-card focus assertions; map selection and next-research action call focusResearchCard; article id research-{topic.id} has tabIndex={-1}, aria-labelledby research-{topic.id}-heading, and the h3 uses that id; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/251",
+      "captured_at": "2026-10-04T21:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-GUIDE-RESEARCH-FOCUS",
+      "claim_refs": ["C-003", "C-086"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-GUIDE-RESEARCH-FOCUS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 포커스 보정 PR #251이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #251 merge main commit 544ce7d3112a8f6a50e9813f85b1e421c4e41e4a; PR #251 release-verify 37234596412 job 111531080743 and site-quality-verify 37234596317 job 111531080534 successful; main workflow 37234697205 with release-verify 111531367090, worker-readiness 111531615386, deploy-pages 111531645241, smoke-live 111531687477 and release-status 111531736845 successful; deploy-worker 111531645675 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37234697205",
+      "captured_at": "2026-10-04T21:06:58Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-GUIDE-RESEARCH-FOCUS",
+      "claim_refs": ["C-001", "C-002", "C-086"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-GUIDE-RESEARCH-FOCUS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 연구 지도·다음 연구 이동의 카드 포커스 보정과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=544ce7d3112a8f6a50e9813f85b1e421c4e41e4a pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 544ce7d3112a8f6a50e9813f85b1e421c4e41e4a; generatedAt 2026-10-04T21:06:58.191Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-04T21:06:58Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-RESEARCH-FOCUS",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-086"]
     }
   ]
 }
