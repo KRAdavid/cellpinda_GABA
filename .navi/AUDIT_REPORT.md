@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 06d737f — 2026-10-05
+
+- 모바일에서 공유·복사 완료 토스트가 iPhone 하단 홈 인디케이터와 겹칠 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #244에서 700px 이하 토스트의 오른쪽·하단·좌우 안전영역 기준을 보정했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 UI 계약(v71), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1600691 bytes로 예산 안이다.
+- PR #244 필수 checks, main workflow 37228652043의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 06d737f09c3cf915b29a8f7b7ddc0208b9006d6e는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005, E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005, E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005.
+
 ## Release Recheck — 83715cc — 2026-10-05
 
 - 연구 확장 지도에서 개별 연구 카드로 이동할 때 고정 읽기 레일과 안전영역이 카드 제목·결과를 가릴 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #243에서 900px 이하와 700px 이하의 연구 카드 스크롤 기준을 각각 보정했다. 연구 수치·출처 데이터는 변경하지 않았다.

@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 06d737f — 2026-10-05
+
+- AC-004 모바일 공유·복사 완료 피드백의 하단 안전영역 보정: PASS_WITH_CONDITIONS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #244와 main 공개 배포 workflow 37228652043가 성공했고, 공개 URL validator가 candidate 06d737f09c3cf915b29a8f7b7ddc0208b9006d6e를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 완료 상태는 NOT_READY를 유지한다. Browser/Playwright, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005, E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005, E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005.
+
 ## Current Release Recheck — 83715cc — 2026-10-05
 
 - AC-003 연구 지도에서 개별 연구 카드로 이어지는 직접 이동과 연구 결과 읽기 기준: PASS_WITH_CONDITIONS.

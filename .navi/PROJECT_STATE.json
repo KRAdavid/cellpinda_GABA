@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T19:20:00Z",
+  "updated_at": "2026-10-04T19:35:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -439,7 +439,11 @@
         "E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005",
-        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005"
+        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+        "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1006,7 +1010,11 @@
         "E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005",
-        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005"
+        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+        "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005"
       ],
       "owner": "QA"
     },
@@ -1184,7 +1192,11 @@
         "E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005",
-        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005"
+        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+        "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -1914,7 +1926,11 @@
         "E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005",
-        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005"
+        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+        "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -2083,7 +2099,11 @@
         "E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005",
         "E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005",
-        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005"
+        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+        "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -4252,6 +4272,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T19:20:00Z"
+    },
+    {
+      "id": "H-149",
+      "event": "모바일에서 공유·복사 완료 토스트가 iPhone 하단 홈 인디케이터와 겹칠 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #244에서 700px 이하 토스트의 오른쪽·하단·좌우 안전영역 기준을 보정했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았고 v71 UI 계약을 추가했다. PR #244 checks, main workflow `37228652043`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate `06d737f09c3cf915b29a8f7b7ddc0208b9006d6e`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser 플러그인과 Playwright, Safari/iOS/Android 실기기가 없어 실제 토스트 위치·실기기 안전영역 렌더와 고령 사용자 독해성은 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T19:35:00Z"
     }
   ]
 }

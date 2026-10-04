@@ -752,6 +752,17 @@
         "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-079",
+      "statement": "모바일에서 공유·복사 완료 토스트가 하단 홈 인디케이터 안전영역을 피해 표시되어, 공유 결과를 가리지 않고 확인할 수 있으며 연구 수치·출처·제품 독립 경계는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
+        "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7703,6 +7714,50 @@
       "captured_at": "2026-10-04T19:18:31Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-ANCHOR-SAFE-AREA",
       "claim_refs": ["C-002", "C-003", "C-007", "C-078"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 공유·복사 완료 토스트에 하단 안전영역 여백을 추가한 v71이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #244 source commit 1822ff54263a09d14878606aea396bc7f12e1995; pnpm run validate:ui-contract PASS including v71 share-toast bottom safe-area guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1600691 bytes <= 1650000 budget; git diff --check PASS; research numbers, source data, and product-independent copy unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/244",
+      "captured_at": "2026-10-04T19:29:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-SHARE-TOAST-SAFE-AREA",
+      "claim_refs": ["C-003", "C-007", "C-079"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 700px 이하 모바일 공유 토스트에 오른쪽·하단·좌우 안전영역 기준을 적용하는 v71 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v71 mobile bottom safe-area assertion; max-width 700px .guide-share-toast right max(16px, env(safe-area-inset-right)); bottom calc(24px + env(safe-area-inset-bottom)); max-width min(420px, calc(100vw - 32px - env(safe-area-inset-left) - env(safe-area-inset-right))); command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/244",
+      "captured_at": "2026-10-04T19:29:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-SHARE-TOAST-SAFE-AREA",
+      "claim_refs": ["C-003", "C-079"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 토스트 하단 안전영역 보정 PR #244가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #244 merge main commit 06d737f09c3cf915b29a8f7b7ddc0208b9006d6e; PR #244 release-verify 37228572718 job 111513242927 and site-quality-verify 37228572709 job 111513242652 successful; main workflow 37228652043 with release-verify 111513476933, worker-readiness 111513693120, deploy-pages 111513709381, smoke-live 111513754277 and release-status 111513796599 successful; deploy-worker 111513709855 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37228652043",
+      "captured_at": "2026-10-04T19:33:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-SHARE-TOAST-SAFE-AREA",
+      "claim_refs": ["C-001", "C-002", "C-079"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 모바일 공유·복사 완료 토스트의 하단 안전영역 보정과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=06d737f09c3cf915b29a8f7b7ddc0208b9006d6e pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 06d737f09c3cf915b29a8f7b7ddc0208b9006d6e; generatedAt 2026-10-04T19:33:15.576Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-04T19:33:15Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-SHARE-TOAST-SAFE-AREA",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-079"]
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 06d737f
+
+- 공격 관점에서 확인한 실패 모드는 모바일 공유·복사 완료 토스트가 하단 홈 인디케이터와 겹쳐 사용자가 복사·공유 결과를 확인하지 못할 수 있는 것이었다. PR #244에서 700px 이하 토스트에 하단·좌우 안전영역을 반영했다.
+- UI 계약 v71, typecheck, 127개 테스트, production build, PR #244 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 토스트 정렬·안전영역 렌더와 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005, E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005, E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005.
+
 ## Recheck — 2026-10-05 — 83715cc
 
 - 공격 관점에서 확인한 실패 모드는 연구 지도에서 개별 카드를 선택했을 때 카드 상단이 고정 읽기 레일 아래에 도착하지 않아 연구 대상·결과가 가려질 수 있는 것이었다. PR #243에서 900px 이하와 700px 이하 연구 카드의 안전영역 스크롤 기준을 추가했다.
