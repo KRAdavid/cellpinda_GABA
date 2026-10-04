@@ -1,6 +1,6 @@
 # Completion Report
 
-## 전문가 영상 갤러리 공개 화면 품질 게이트 — 32888f3 — 2026-10-04
+## 전문가 영상 갤러리 공개 화면 품질 게이트 — 73b32d2 — 2026-10-04
 
 - 전문가 영상 9개와 주제 필터, 선택 즉시 재생 영역을 모바일·데스크톱 흐름으로 재점검했다. 390px에서는 2열 카드, 1440px에서는 선택 영상과 갤러리 병렬 구성이 유지됐다.
 - 최신 정적 공개본 live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했고 NAVI project-state validation은 PASS였다.

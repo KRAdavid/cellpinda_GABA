@@ -1,6 +1,6 @@
 # Red Team Report
 
-## 전문가 영상 갤러리 공개 화면 재검증 — 32888f3 — 2026-10-04
+## 전문가 영상 갤러리 공개 화면 재검증 — 73b32d2 — 2026-10-04
 
 - 390px·1440px에서 선택 영상·주제 필터·썸네일 카드·원본 링크의 정보 계층이 유지되고 가로 넘침·page error·console error는 재현되지 않았다.
 - 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다. Chromium fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도와 영상별 권리·독립 과학 검토를 닫을 수 없다.

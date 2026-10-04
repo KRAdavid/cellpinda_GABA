@@ -1,6 +1,6 @@
 # Project Changelog
 
-## 전문가 영상 갤러리 공개 화면 재점검 및 NAVI 동기화: 2026-10-04 / candidate 32888f3
+## 전문가 영상 갤러리 공개 화면 재점검 및 NAVI 동기화: 2026-10-04 / candidate 73b32d2
 
 전문가 영상 섹션의 9개 영상, 주제 필터, 선택 즉시 재생 영역을 390px·1440px에서 다시 점검했다. 모바일에서는 2열 카드가 안정적으로 유지되고 데스크톱에서는 선택 영상과 갤러리가 함께 보였으며, 최신 정적 공개본 live validator와 NAVI project-state validation을 통과했다. 로컬 목표 감사의 제품·주문·Worker 게이트는 공개 사이트와 분리된 WAITING/VERIFYING 상태로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 

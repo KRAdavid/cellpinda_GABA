@@ -390,6 +390,7 @@
       "evidence_refs": [
         "E-LOCAL-BUILD-VIDEO-GALLERY-QA-20261004",
         "E-CDP-VIDEO-GALLERY-QA-20261004",
+        "E-DEPLOY-PIPELINE-VIDEO-GALLERY-QA-20261004",
         "E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004"
       ],
       "status": "SUPPORTED"
@@ -5905,13 +5906,24 @@
       "claim_refs": ["C-045"]
     },
     {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-GALLERY-QA-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 영상 갤러리 감사 기록 동기화 commit `73b32d2`가 main에 반영됐고 GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "main workflow 37195468738; headSha 73b32d2f107f1da5d68da4e20c247ea3940f0452; release-verify 111416303369, worker-readiness 111416476808, deploy-pages 111416491117, smoke-live 111416522131, release-status 111416551897 successful; deploy-worker 111416492174 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37195468738",
+      "captured_at": "2026-10-04T10:33:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-VIDEO-GALLERY",
+      "claim_refs": ["C-045"]
+    },
+    {
       "id": "E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본에서 전문가 영상 섹션과 주제별 영상 갤러리가 정상적으로 표시되고, 공개 데이터·제품 독립 경계·정적 배포 상태가 유지된다.",
-      "locator": "Chrome CDP live at https://kradavid.github.io/gaba_info/; public release candidate 32888f35e50c000b76a569dbe1aa1c865f350789; 390px·1440px video gallery review; latest `pnpm run validate:live-public` page 200, STATIC, candidateSha 32888f35e50c000b76a569dbe1aa1c865f350789, bundleHashes 70, claims 12, masterRecords 6, products 1, sharePages 6, teaserPreview HOLD/publicUrl false, internalOpsSnapshots excluded, smartStoreOnly true, removed750 true, provenance matched",
+      "locator": "Chrome CDP live at https://kradavid.github.io/gaba_info/; public release candidate 73b32d2f107f1da5d68da4e20c247ea3940f0452; 390px·1440px video gallery review; latest `pnpm run validate:live-public` page 200, STATIC, candidateSha 73b32d2f107f1da5d68da4e20c247ea3940f0452, generatedAt 2026-10-04T10:29:18.025Z, bundleHashes 70, claims 12, masterRecords 6, products 1, sharePages 6, teaserPreview HOLD/publicUrl false, internalOpsSnapshots excluded, smartStoreOnly true, removed750 true, provenance matched",
       "source_uri": "https://kradavid.github.io/gaba_info/#expert-videos",
-      "captured_at": "2026-10-04T10:29:00Z",
+      "captured_at": "2026-10-04T10:34:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-VIDEO-GALLERY",
       "claim_refs": ["C-045"]
     }
