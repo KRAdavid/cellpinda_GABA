@@ -708,6 +708,17 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-HANDOFF-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-075",
+      "statement": "전문가 영상 선택 카드에 현재 영상의 주제·재생 상태·전체 순서가 한 줄의 메타 정보로 표시되고, 모바일에서도 선택 위치가 읽히며, 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-VIDEO-INDEX-20261005",
+        "E-UI-CONTRACT-EXPERT-VIDEO-INDEX-20261005",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-INDEX-20261005",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-INDEX-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7483,6 +7494,50 @@
       "captured_at": "2026-10-04T18:22:28Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EXPERT-VIDEO-HANDOFF",
       "claim_refs": ["C-074"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-INDEX-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 선택 카드에 현재 위치 메타 정보를 추가한 v67이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #240 source commit 0326d46; pnpm run validate:ui-contract PASS including v67 expert-video position guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1599042 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/240",
+      "captured_at": "2026-10-04T18:30:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-EXPERT-VIDEO-INDEX",
+      "claim_refs": ["C-075"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EXPERT-VIDEO-INDEX-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 전문가 영상 선택 카드에 현재 위치를 전체 영상 수와 함께 표시하고, 모바일에서 숫자 메타 정보가 유지되는 v67 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v67 expert-video position assertions; activeVideoIndex derived from expertVideos; guide-video-feature-index shows zero-padded position and total; tabular numeric styling and max-width 700px compact rule guarded; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/240",
+      "captured_at": "2026-10-04T18:30:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-EXPERT-VIDEO-INDEX",
+      "claim_refs": ["C-075"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-INDEX-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 위치 메타 정보 개선 PR #240이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #240 merge main commit 9131138aff6839851e6efdca4118a0bc9953fd66; PR #240 release-verify 37224846672 job 111502273709 and site-quality-verify 37224846682 job 111502273559 successful; main workflow 37224932902 with release-verify 111502536068, worker-readiness 111502767240, deploy-pages 111502781289, smoke-live 111502817050 and release-status 111502863349 successful; deploy-worker 111502782132 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37224932902",
+      "captured_at": "2026-10-04T18:35:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-EXPERT-VIDEO-INDEX",
+      "claim_refs": ["C-075"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-INDEX-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 전문가 영상 선택 위치 메타 정보와 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=9131138aff6839851e6efdca4118a0bc9953fd66 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 9131138aff6839851e6efdca4118a0bc9953fd66; generatedAt 2026-10-04T18:35:10.218Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-04T18:35:10Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EXPERT-VIDEO-INDEX",
+      "claim_refs": ["C-075"]
     }
   ]
 }

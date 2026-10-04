@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 갤러리 위치 메타 정보 — 9131138a — 2026-10-05
+
+- 전문가 영상 선택 카드에 주제·재생 상태·전체 순서를 `01 / 09` 형식으로 표시하고 모바일 표시를 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #240과 main 배포 37224932902, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-INDEX-20261005, E-UI-CONTRACT-EXPERT-VIDEO-INDEX-20261005, E-DEPLOY-PIPELINE-EXPERT-VIDEO-INDEX-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-INDEX-20261005.
+
 ## 전문가 영상 다음 읽기 흐름 정렬 — 84897891 — 2026-10-05
 
 - 전문가 영상 아래의 다음 읽기 안내를 실제 문서 순서인 `다음 장 · 연구를 읽는 기준 → 원문 출처`로 정렬하고 모바일 읽기 계층을 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.

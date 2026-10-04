@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 9131138a
+
+- 공격 관점에서 확인한 실패 모드는 전문가 영상 선택 카드가 전체 영상 중 현재 위치를 알려주지 않아, 갤러리에서 선택 상태를 빠르게 파악하기 어려운 것이었다. PR #240에서 주제·선택 즉시 재생·`01 / 09` 위치 정보를 한 줄로 정리하고 모바일 표시를 보강했다.
+- UI 계약 v67, typecheck, 127개 테스트, production build, PR #240 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright가 현재 실행 환경에 없어 실제 브라우저·실기기·실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-INDEX-20261005, E-UI-CONTRACT-EXPERT-VIDEO-INDEX-20261005, E-DEPLOY-PIPELINE-EXPERT-VIDEO-INDEX-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-INDEX-20261005.
+
 ## Recheck — 2026-10-05 — 84897891
 
 - 공격 관점에서 확인한 실패 모드는 전문가 영상 아래의 `이어서 읽기 → 수면 연구 → 연구 결과 → 출처 원문`이 실제 다음 섹션과 어긋나 독자를 잘못된 위치로 안내하는 것이었다. PR #239에서 `다음 장 · 연구를 읽는 기준 → 원문 출처`로 정렬하고 모바일 표시 계층을 보강했다.
