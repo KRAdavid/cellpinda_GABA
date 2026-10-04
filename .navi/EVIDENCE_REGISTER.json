@@ -917,6 +917,17 @@
         "E-LIVE-PUBLIC-MAP-CURRENT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-094",
+      "statement": "공개 GABA 안내서는 스크롤에 따라 현재 연구 주제가 갱신되어도 정적인 연구 glyph·구성 프로필·결과 도표를 메모이제이션해 모바일 연구 읽기 흐름의 불필요한 재렌더링을 줄인다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MEMO-20261005",
+        "E-UI-CONTRACT-MEMO-20261005",
+        "E-DEPLOY-PIPELINE-MEMO-20261005",
+        "E-LIVE-PUBLIC-MEMO-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8528,6 +8539,50 @@
       "captured_at": "2026-10-04T22:50:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MAP-CURRENT",
       "claim_refs": ["C-002", "C-003", "C-007", "C-093"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MEMO-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "스크롤로 현재 연구 주제가 바뀌는 공개 GABA 안내서에서 정적인 연구 glyph·연구 구성·결과 도표를 React memo로 보호하는 v85 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #263 source commit 06f49afc24886a23dde99d68a42d3fa4cc8ed908; pnpm run validate:ui-contract PASS including v85 memo guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1604140 bytes <= 1650000 budget; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/263",
+      "captured_at": "2026-10-04T23:03:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MEMO",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-094"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MEMO-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 현재 연구 주제 스크롤 갱신 때 정적인 연구 glyph·연구 구성·결과 도표가 memo 경계를 유지하는지 v85 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v85 memoization assertion; ResearchGlyph, ResearchProfile and ResearchOutcomeChart are declared with React memo; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/263",
+      "captured_at": "2026-10-04T23:03:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MEMO",
+      "claim_refs": ["C-003", "C-094"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MEMO-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 스크롤 렌더링 최적화 PR #263이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #263 merge main commit 8e1e3355605d9ca12c103beb7b447a7bd94194bd; PR checks release-verify 37242246353 job 111553121678 and site-quality-verify 37242246445 job 111553121488 successful; main workflow 37242328341 with release-verify 111553352874, worker-readiness 111553580092, deploy-pages 111553594168, smoke-live 111553640885 and release-status 111553678059 successful; deploy-worker 111553594572 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37242328341",
+      "captured_at": "2026-10-04T23:06:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MEMO",
+      "claim_refs": ["C-001", "C-002", "C-094"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MEMO-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 모바일 스크롤 렌더링 최적화가 포함된 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=8e1e3355605d9ca12c103beb7b447a7bd94194bd pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 8e1e3355605d9ca12c103beb7b447a7bd94194bd; generatedAt 2026-10-04T23:04:14.689Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Browser/Playwright and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T23:06:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MEMO",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-094"]
     }
   ]
 }
