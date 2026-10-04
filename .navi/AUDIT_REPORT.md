@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 큰 글씨 제어 라벨 보강 공개 재검증 — 37147625 — 2026-10-04
+
+- 390px에서는 `가+ 큰 글씨` 라벨이 메뉴·공유 버튼과 겹치지 않고 표시되며, 큰 글씨 전환 후 `가− 기본 글씨` 상태가 보인다. 320px에서는 헤더 폭을 보호하기 위해 컴팩트 `가+` 제어와 44px 터치 타깃을 유지한다.
+- PR #209 후보는 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Chrome DevTools fallback에서 로컬·공개 390px·320px의 scrollWidth와 clientWidth가 일치했고 page error·console error가 없었다.
+- PR #209 필수 검사와 main workflow `37196206238`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다. live validator candidate `37147625768f75483a23f90fd2074e32b77b8b04`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- 배포 workflow의 historical local-path annotation은 과거 revision 경로 탐지 알림이며 현재 검사 실패가 아니다. Browser 플러그인 부재로 Chrome DevTools fallback을 사용했고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-TYPE-CONTROL-20261004, E-CDP-MOBILE-TYPE-CONTROL-20261004, E-DEPLOY-PIPELINE-MOBILE-TYPE-CONTROL-20261004, E-LIVE-PUBLIC-MOBILE-TYPE-CONTROL-20261004.
+
 ## 전문가 영상 갤러리 공개 화면 재점검 — 73b32d2 — 2026-10-04
 
 - 390px에서 전문가 영상 9개, 주제 필터, 선택 상태와 2열 카드가 표시되고 1440px에서도 선택 영상 영역과 갤러리 카드가 유지됐다. 선택 영상은 기존 즉시 재생 흐름과 원본 YouTube 연결을 유지한다.

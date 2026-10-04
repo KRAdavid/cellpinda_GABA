@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 큰 글씨 제어 라벨 보강 공개 재검증 — 37147625 — 2026-10-04
+
+- 390px에서 큰 글씨 기능명이 표시되고 메뉴·공유 버튼과 충돌하지 않으며, 320px에서는 컴팩트 제어로 전환되어 가로 넘침이 재현되지 않았다. 큰 글씨 전환 후에도 헤더 폭과 상태 라벨이 유지됐다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다. Chrome DevTools fallback만으로 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도를 닫을 수 없다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다. 기능 라벨 개선은 화면 상태를 명확하게 했지만 독립 과학·규제 감수와 사용자 이해도 검증을 대체하지 않는다.
+
+증적: E-CDP-MOBILE-TYPE-CONTROL-20261004, E-LIVE-PUBLIC-MOBILE-TYPE-CONTROL-20261004.
+
 ## 전문가 영상 갤러리 공개 화면 재검증 — 73b32d2 — 2026-10-04
 
 - 390px·1440px에서 선택 영상·주제 필터·썸네일 카드·원본 링크의 정보 계층이 유지되고 가로 넘침·page error·console error는 재현되지 않았다.

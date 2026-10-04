@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 모바일 큰 글씨 제어 라벨 보강 및 공개 재검증: 2026-10-04 / candidate 37147625
+
+381px·430px 모바일 헤더에서 `가+ 큰 글씨` 기능명이 실제로 보이도록 읽기 크기 제어를 보강하고, 320px 이하에서는 컴팩트 44px 터치 타깃을 유지했다. 큰 글씨 전환 시 `가− 기본 글씨` 상태와 가로폭을 확인했으며, PR #209·main workflow `37196206238`·live validator HTTP 200·STATIC·Chrome DevTools fallback 390px·320px 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-MOBILE-TYPE-CONTROL-20261004, E-CDP-MOBILE-TYPE-CONTROL-20261004, E-DEPLOY-PIPELINE-MOBILE-TYPE-CONTROL-20261004, E-LIVE-PUBLIC-MOBILE-TYPE-CONTROL-20261004.
+
 ## 전문가 영상 갤러리 공개 화면 재점검 및 NAVI 동기화: 2026-10-04 / candidate 73b32d2
 
 전문가 영상 섹션의 9개 영상, 주제 필터, 선택 즉시 재생 영역을 390px·1440px에서 다시 점검했다. 모바일에서는 2열 카드가 안정적으로 유지되고 데스크톱에서는 선택 영상과 갤러리가 함께 보였으며, 최신 정적 공개본 live validator와 NAVI project-state validation을 통과했다. 로컬 목표 감사의 제품·주문·Worker 게이트는 공개 사이트와 분리된 WAITING/VERIFYING 상태로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

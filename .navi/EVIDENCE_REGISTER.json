@@ -394,6 +394,17 @@
         "E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-046",
+      "statement": "381px·430px 모바일 헤더에서 큰 글씨 기능명이 보이고, 320px 이하에서는 컴팩트 터치 타깃을 유지하며, 큰 글씨 전환 후에도 가로 넘침 없이 읽기 제어를 제공한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-TYPE-CONTROL-20261004",
+        "E-CDP-MOBILE-TYPE-CONTROL-20261004",
+        "E-DEPLOY-PIPELINE-MOBILE-TYPE-CONTROL-20261004",
+        "E-LIVE-PUBLIC-MOBILE-TYPE-CONTROL-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5926,6 +5937,50 @@
       "captured_at": "2026-10-04T10:34:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-VIDEO-GALLERY",
       "claim_refs": ["C-045"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-TYPE-CONTROL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "381px·430px 모바일 헤더에서 큰 글씨 기능명 라벨을 노출하고 320px 이하에서는 컴팩트 아이콘 레이아웃을 유지한 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #209 source commit 92ff2c9; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1493887 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/209",
+      "captured_at": "2026-10-04T10:20:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-MOBILE-TYPE-CONTROL",
+      "claim_refs": ["C-046"]
+    },
+    {
+      "id": "E-CDP-MOBILE-TYPE-CONTROL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome DevTools fallback에서 390px 모바일 헤더는 `가+ 큰 글씨` 라벨과 44px 메뉴·공유 터치 타깃을 보여주고, 320px에서는 컴팩트 `가+` 제어를 유지했다. 큰 글씨 전환 후에도 가로 넘침과 런타임 오류가 없었다.",
+      "locator": "Chrome CDP fallback at local candidate and https://kradavid.github.io/gaba_info/?view=guide; 390x844: type control x=239 width=72, menu x=187 width=44, share x=319 width=44; 320x844: type control x=197 width=44, menu x=145 width=44, share x=249 width=44; scrollWidth=clientWidth (375/375 and 305/305); large-text interaction at 390px changed label to `가− 기본 글씨` without overflow; page errors []; console errors []; screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/209",
+      "captured_at": "2026-10-04T10:35:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261004-MOBILE-TYPE-CONTROL",
+      "claim_refs": ["C-046"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-TYPE-CONTROL-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 큰 글씨 제어 라벨 보강 PR #209가 필수 검사를 통과해 main에 병합됐고 GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #209 merge main commit 37147625768f75483a23f90fd2074e32b77b8b04; PR checks release-verify 37196142894 and site-quality-verify 37196142846 successful; main workflow 37196206238; release-verify 111418509727, worker-readiness 111418661894, deploy-pages 111418675251, smoke-live 111418717415, release-status 111418746401 successful; deploy-worker 111418675437 skipped by STATIC_ONLY; workflow annotation reports historical local-path matches only",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37196206238",
+      "captured_at": "2026-10-04T10:42:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-MOBILE-TYPE-CONTROL",
+      "claim_refs": ["C-046"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-TYPE-CONTROL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에서 390px 큰 글씨 제어 라벨과 320px 컴팩트 제어가 각 화면 폭에 맞게 표시되고, 큰 글씨 상태에서도 모바일 헤더의 가로 넘침이 없다.",
+      "locator": "EXPECTED_RELEASE_SHA=37147625768f75483a23f90fd2074e32b77b8b04 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 37147625768f75483a23f90fd2074e32b77b8b04; generatedAt 2026-10-04T10:42:44.004Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Chrome CDP live at 390x844 and 320x844; scrollWidth=clientWidth; public large-text label `가− 기본 글씨`; errors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-04T10:44:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-MOBILE-TYPE-CONTROL",
+      "claim_refs": ["C-046"]
     }
   ]
 }
