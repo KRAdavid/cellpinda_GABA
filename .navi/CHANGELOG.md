@@ -851,6 +851,14 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI remains `USER_DECISION` / `INTERNAL_QA_READY_WITH_CONDITIONS`; open external-validation items remain open.
 # Change Log
 
+## v45 · 모바일 연구 스크롤 렌더링 최적화 — 8e1e335 — 2026-10-05
+
+- 현재 연구 주제 추적 중 정적인 연구 glyph·연구 구성·결과 도표를 React memo로 보호해 모바일 스크롤의 불필요한 재렌더링을 줄였다.
+- 로컬 UI contract·typecheck·127 tests·production build/performance, PR #263 checks, main workflow 37242328341, Pages·라이브 smoke·release status와 공개 validator를 통과했다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-MEMO-20261005, E-UI-CONTRACT-MEMO-20261005, E-DEPLOY-PIPELINE-MEMO-20261005, E-LIVE-PUBLIC-MEMO-20261005.
+
 ## v44 · GABA 공개 안내서 공유 카드 분리 — 0e93fb3 — 2026-10-05
 
 - 공개 root·guide·research 공유 미리보기를 제품·하루리듬 카드와 분리하고, 제품과 무관한 1200×630 JPEG `gaba-guide-social-card.jpg`를 적용했다.

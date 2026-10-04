@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 8e1e335 — 2026-10-05
+
+- 모바일 스크롤로 현재 연구 주제가 바뀔 때 전체 연구 시각 요소가 반복 렌더링될 수 있는 성능 리스크를 확인하고 PR #263에서 ResearchGlyph·ResearchProfile·ResearchOutcomeChart를 React memo로 보호했다.
+- 로컬 UI 계약(v85), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1604140 bytes로 예산 안이다.
+- PR #263 필수 checks, main workflow 37242328341의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 8e1e3355605d9ca12c103beb7b447a7bd94194bd는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MEMO-20261005, E-UI-CONTRACT-MEMO-20261005, E-DEPLOY-PIPELINE-MEMO-20261005, E-LIVE-PUBLIC-MEMO-20261005.
+
 ## Release Recheck — 5519791 — 2026-10-05
 
 - 연구 지도에서 선택 카드만 강조되고 지도 중심에는 현재 읽는 주제가 표시되지 않아 지도와 상세 카드의 연결을 즉시 이해하기 어려운 시각적 흐름 리스크를 확인하고 PR #261에서 GABA 중심 표시는 유지하면서 중앙에 현재 연구 주제 상태 라벨을 동기화했다.

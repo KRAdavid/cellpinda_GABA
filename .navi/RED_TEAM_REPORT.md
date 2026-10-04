@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 8e1e335
+
+- 공격 관점에서 확인한 실패 모드는 연구 지도 스크롤로 activeResearchTopicId가 바뀔 때 모든 정적 연구 glyph·프로필·도표가 다시 그려져 모바일 읽기 흐름이 무거워질 수 있는 것이었다. PR #263에서 세 정적 시각 컴포넌트를 memo 경계로 보호했다.
+- UI 계약 v85, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MEMO-20261005, E-UI-CONTRACT-MEMO-20261005, E-DEPLOY-PIPELINE-MEMO-20261005, E-LIVE-PUBLIC-MEMO-20261005.
+
 ## Recheck — 2026-10-05 — 5519791
 
 - 공격 관점에서 확인한 실패 모드는 연구 지도에서 활성 카드 테두리만 바뀌고 지도 중앙은 계속 GABA로 남아, 사용자가 선택한 주제와 아래 상세 카드의 연결을 놓치는 것이었다. PR #261에서 중앙에 현재 연구 주제 상태 라벨을 추가해 이 시각적 연결을 닫았다.
