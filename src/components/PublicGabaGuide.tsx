@@ -1538,6 +1538,13 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead">발효와 발아, 식품과 바이오 기술. GABA는 뇌 연구를 넘어 다양한 연구와 산업 현장에서 다뤄지고 있습니다.</p>
             <div className="guide-editorial-band guide-editorial-band-applications" style={{ '--guide-editorial-image': `url(${gabaApplicationsEditorial})` } as CSSProperties} role="img" aria-label="발아 곡물과 식품과학 연구 장면으로 표현한 국내외 활용 연구 이미지"><span><small>한국에서 세계로</small><strong>발효와 발아,<br />식품과 바이오 기술로</strong></span></div>
             <div className="guide-application-grid">{applicationCases.map((item) => <article className="guide-application-card" key={item.id}><div className="guide-application-top"><span className="guide-application-icon"><ApplicationIcon type={item.icon} /></span><span>{item.region}</span></div><h3>{item.title}</h3><p>{item.body}</p><strong>{item.detail}</strong><div className="guide-application-sources"><span>연구·공공자료</span>{item.sources.map((source) => <a href={source.url} target="_blank" rel="noopener noreferrer" key={source.url}>{source.label} <ExternalLink size={13} aria-hidden="true" /></a>)}</div></article>)}</div>
+            <div className="guide-research-handoff guide-application-handoff" aria-label="국내외 활용에서 발효와 안전으로 이어지는 다음 읽기 흐름">
+              <span className="guide-research-handoff-kicker">다음 장</span>
+              <strong>활용은 만들어지는 과정에서 이어집니다</strong>
+              <span className="guide-research-handoff-line" aria-hidden="true" />
+              <span className="guide-research-handoff-next">발효와 안전</span>
+              <ArrowRight size={17} aria-hidden="true" />
+            </div>
           </div>
         </section>
 

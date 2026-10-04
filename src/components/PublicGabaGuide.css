@@ -31,6 +31,7 @@
 .guide-research-handoff-line{flex:1 1 auto;height:1px;background:#cfe1e7}
 .guide-research-handoff-next{color:var(--guide-teal-dark);font-weight:850;letter-spacing:-.03em;white-space:nowrap}
 .guide-research-handoff>svg{flex:0 0 auto;color:var(--guide-teal-dark)}
+.guide-application-handoff{margin-top:30px}
 .guide-footer-bottom{font-size:11px}
 
 /* v2 mobile-first Apple-style readability system */
