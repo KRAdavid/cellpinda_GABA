@@ -449,6 +449,17 @@
         "E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-051",
+      "statement": "GABA 안내서의 공유·직접 진입 링크가 320px·390px 모바일에서 고정 헤더와 읽기 레일 아래에 정렬되고, 같은 페이지의 뷰포트 폭 변경 뒤에도 제목 위치가 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-DEEP-LINK-REALIGN-20261004",
+        "E-CDP-DEEP-LINK-REALIGN-20261004",
+        "E-DEPLOY-PIPELINE-DEEP-LINK-REALIGN-20261004",
+        "E-LIVE-PUBLIC-DEEP-LINK-REALIGN-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6201,6 +6212,50 @@
       "captured_at": "2026-10-04T12:06:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-RECOVERY-END",
       "claim_refs": ["C-050"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-DEEP-LINK-REALIGN-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유·직접 진입 링크 재정렬 보정 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #216 source commit 1645c70; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1495542 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/216",
+      "captured_at": "2026-10-04T12:32:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-DEEP-LINK-REALIGN",
+      "claim_refs": ["C-051"]
+    },
+    {
+      "id": "E-CDP-DEEP-LINK-REALIGN-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome DevTools fallback에서 320px·390px 공유 진입 제목이 헤더·읽기 레일 아래에 정렬되고, 320px에서 390px로 뷰포트를 바꿔도 같은 기준선이 유지되며 콘솔 오류가 없었다.",
+      "locator": "Chrome CDP fallback at local http://127.0.0.1:5205/?view=guide&qa=resize#final and public https://kradavid.github.io/gaba_info/?view=guide&qa=final-resize#final; 320x844 and 390x844: heading top 115.16/115.22px, header bottom 70px, reading rail bottom 105px, body width equals viewport; pre-fix baseline was 324px·325px; exceptions []; public share button produced visible toast; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=final-resize#final",
+      "captured_at": "2026-10-04T12:35:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261004-DEEP-LINK-REALIGN",
+      "claim_refs": ["C-051"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-DEEP-LINK-REALIGN-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유·직접 진입 정렬 PR #216이 필수 검사를 통과해 main에 병합됐고 GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #216 merge main commit cf893f8113236d4756211a1b8055a7a938bd6911; PR checks release-verify 37202545709 and site-quality-verify 37202545708 successful; main workflow 37202619125; release-verify 111437215122, worker-readiness 111437353236, deploy-pages 111437367067, smoke-live 111437402948, release-status 111437435126 successful; deploy-worker 111437367273 skipped by STATIC_ONLY; workflow annotation reports historical local-path matches only",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37202619125",
+      "captured_at": "2026-10-04T12:34:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-DEEP-LINK-REALIGN",
+      "claim_refs": ["C-051"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-DEEP-LINK-REALIGN-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 공유·직접 진입 정렬 보정이 포함된 후보가 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계와 공유 동작이 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=cf893f8113236d4756211a1b8055a7a938bd6911 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha cf893f8113236d4756211a1b8055a7a938bd6911; generatedAt 2026-10-04T12:35:52.004Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Chrome CDP public 320→390 resize and share toast verified",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=final-resize#final",
+      "captured_at": "2026-10-04T12:36:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-DEEP-LINK-REALIGN",
+      "claim_refs": ["C-051"]
     }
   ]
 }

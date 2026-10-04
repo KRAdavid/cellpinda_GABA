@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 공유·직접 진입 해시와 모바일 폭 변경 정렬 재검증 — cf893f8 — 2026-10-04
+
+- 320px·390px의 공유·직접 진입 링크에서 lazy 레이아웃이 안정된 뒤 제목을 다시 고정 헤더와 읽기 레일 아래로 정렬하고, 같은 페이지의 뷰포트 폭 변경에도 기준선을 재계산한다. 사용자 스크롤·터치·키보드 입력이 시작되면 대기 재정렬을 취소한다.
+- Chrome DevTools fallback 측정에서 두 폭의 제목 top이 약 115px, 읽기 레일 bottom이 105px로 유지되었고 가로 넘침·page error·console exception은 확인되지 않았다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 결과는 PASS_WITH_CONDITIONS다.
+- Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 자동화로 닫히지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-CDP-DEEP-LINK-REALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-REALIGN-20261004`.
+
 ## 초소형 모바일 회복 경로 마지막 행 공개 재검증 — a13e82f — 2026-10-04
 
 - 320px에서 14단계 경로의 마지막 두 단계가 3·4열에 중앙 정렬되어 6·6·2 흐름의 끝맺음이 균형 있게 보인다. 가로 넘침과 새 CRITICAL/MAJOR 결함은 확인되지 않았다.

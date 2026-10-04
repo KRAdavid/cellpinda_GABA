@@ -1,5 +1,13 @@
 # Audit Report
 
+## 공유·직접 진입 해시와 모바일 폭 변경 정렬 재검증 — cf893f8 — 2026-10-04
+
+- 공유 링크와 직접 진입 해시가 lazy 콘텐츠·폰트·미디어 정착 전에 계산되어, 320px·390px에서 제목이 고정 헤더와 읽기 레일보다 아래로 밀리는 결함을 확인했다. PR #214의 초기 해시 재정렬에 이어 PR #216에서 일정 시간 재정렬과 사용자 상호작용 취소, `resize`·`visualViewport.resize` 발생 시 재계산을 추가했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #216 checks, main workflow `37202619125`의 release-verify·worker-readiness·Pages·라이브 smoke·release status를 확인했다. live validator candidate `cf893f8113236d4756211a1b8055a7a938bd6911`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Chrome DevTools fallback에서 320px·390px 모두 제목 top 약 115px, 헤더 bottom 70px, 읽기 레일 bottom 105px로 정렬되었고 같은 페이지 320px→390px 폭 변경 뒤에도 기준선이 유지됐다. 공유 버튼은 공개 화면에서 취소 피드백 토스트를 표시했다. Browser 플러그인 부재로 이 방법을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-DEEP-LINK-REALIGN-20261004`, `E-CDP-DEEP-LINK-REALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-REALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-REALIGN-20261004`.
+
 ## 초소형 모바일 회복 경로 마지막 행 균형 보정 공개 재검증 — a13e82f — 2026-10-04
 
 - 320px 이하 회복 경로의 13·14단계가 왼쪽에 몰려 보이던 잔여 시각 결함을 확인하고, 마지막 두 단계를 3·4열에 중앙 배치했다. 6·6·2 행 구조와 단계 버튼 폭, 390px의 7·7 흐름은 유지했다.

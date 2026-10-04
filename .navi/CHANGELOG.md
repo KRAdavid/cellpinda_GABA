@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 공유·직접 진입 해시 재정렬과 뷰포트 변경 보강: 2026-10-04 / candidate cf893f8
+
+lazy 콘텐츠가 정착된 뒤 공유·직접 진입 제목을 고정 헤더·읽기 레일 아래로 재정렬하고, 320px→390px 같은 페이지 폭 변경에서도 기준선을 재계산하도록 보강했다. 사용자 입력 후 자동 재정렬을 취소해 읽기 흐름을 보호했으며, PR #216·main workflow `37202619125`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 320px·390px 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-DEEP-LINK-REALIGN-20261004`, `E-CDP-DEEP-LINK-REALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-REALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-REALIGN-20261004`.
+
 ## 초소형 모바일 회복 경로 마지막 행 중앙 정렬 및 공개 재검증: 2026-10-04 / candidate a13e82f
 
 320px 이하에서 수면·회복 14단계 지도의 마지막 13·14단계를 3·4열에 중앙 배치해 6·6·2 경로의 시각적 끝맺음을 보완했다. 기존 행 수와 터치 폭, 390px 흐름은 유지했으며, PR #213·main workflow `37200663786`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 기준 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

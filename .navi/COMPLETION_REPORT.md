@@ -1,5 +1,13 @@
 # Completion Report
 
+## 공유·직접 진입 해시와 모바일 폭 변경 배포 품질 게이트 — cf893f8 — 2026-10-04
+
+- 공유·직접 진입 링크가 lazy 콘텐츠 정착 뒤 고정 헤더·읽기 레일 아래에 놓이도록 재정렬하고, 320px→390px 뷰포트 변경에서도 제목 기준선을 다시 계산하도록 보강했다. 사용자 입력 후에는 자동 재정렬을 멈춘다.
+- PR #216 main 병합과 workflow `37202619125`의 release-verify·Pages·라이브 smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했고, Chrome DevTools fallback 320px·390px에서도 정렬과 공유 피드백을 확인했다.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토와 로컬 사업 운영 게이트가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-DEEP-LINK-REALIGN-20261004`, `E-CDP-DEEP-LINK-REALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-REALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-REALIGN-20261004`.
+
 ## 초소형 모바일 회복 경로 마지막 행 배포 품질 게이트 — a13e82f — 2026-10-04
 
 - 320px 이하에서 수면·회복 14단계 지도의 마지막 두 단계를 중앙 정렬해 6·6·2 경로의 시각적 리듬을 보완했다. 기존 터치 영역·390px 흐름·제품 독립 경계는 유지했다.
