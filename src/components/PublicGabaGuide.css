@@ -416,6 +416,10 @@
   .guide-outcome-lane-signal svg{width:16px;height:16px}
   .guide-outcome-lane-signal em{font-size:.786em}
   .guide-outcome-chart-note{font-size:.9em}
+  .guide-outcome-signal-row{grid-template-columns:1fr;grid-template-areas:"label" "value" "visual";gap:5px 0;padding:10px 11px}
+  .guide-outcome-signal-row>strong{justify-self:start}
+  .guide-outcome-signal-visual{justify-content:flex-start;margin-top:0}
+  .guide-outcome-signal-graphic{width:96px;height:24px}
 }
 
 /* v8 fermentation story: connect food science, process quality, and human safety records. */
