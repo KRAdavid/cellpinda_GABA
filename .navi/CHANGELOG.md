@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 사업자용 전체 공유 복사 상태 및 공개 재검증: 2026-10-04 / candidate 94bcd16
+
+사업자용 GABA 핵심 5문장 전체 복사 버튼을 누르면 해당 버튼이 `복사 완료`로 바뀌고 2.4초 뒤 원래 상태로 돌아가도록 고도화했다. PR #223 checks, main workflow `37208889644`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드와 모바일 브라우저 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-FULL-SHARE-COPY-ACK-20261004`, `E-UI-CONTRACT-FULL-SHARE-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-FULL-SHARE-COPY-ACK-20261004`, `E-LIVE-PUBLIC-FULL-SHARE-COPY-ACK-20261004`.
+
 ## 사업자용 공유 문장 개별 복사 상태 및 공개 재검증: 2026-10-04 / candidate 5aa9f05
 
 사업자용 GABA 핵심 5문장 카드에서 개별 문장을 복사하면 해당 카드만 `복사 완료`로 바뀌고 2.4초 뒤 원래 상태로 돌아오도록 고도화했다. PR #222 필수 checks, main workflow `37208090180`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드와 모바일 브라우저 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

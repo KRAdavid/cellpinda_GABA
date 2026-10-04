@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 사업자용 전체 공유 복사 상태 재검증 — 94bcd16 — 2026-10-04
+
+- 5문장 전체 복사 성공을 전역 토스트만으로 알리면 사업자가 버튼 상태를 다시 확인하기 어려운 실패 모드를 확인했다. PR #223에서 전체 복사 버튼 자체를 `복사 완료`로 표시하고 2.4초 후 원상태로 돌아가도록 보강했다.
+- PR #223 checks, 로컬 UI 계약·typecheck·127 tests·production build/performance, main workflow `37208889644`, live validator HTTP 200·STATIC를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인과 Playwright 부재로 실제 클립보드 권한·모바일 공유 UI는 직접 증명하지 못했으며 RT-001·RT-002·RT-003은 계속 OPEN이다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-FULL-SHARE-COPY-ACK-20261004`, `E-UI-CONTRACT-FULL-SHARE-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-FULL-SHARE-COPY-ACK-20261004`, `E-LIVE-PUBLIC-FULL-SHARE-COPY-ACK-20261004`.
+
 ## 사업자용 공유 문장 개별 복사 상태 재검증 — 5aa9f05 — 2026-10-04
 
 - 사업자용 공유 문장을 복사한 뒤 전역 토스트만으로는 처리된 문장을 구분하기 어렵다는 실패 모드를 확인했다. PR #222에서 선택한 카드만 `복사 완료`로 표시하고 2.4초 후 원상태로 돌아가도록 보강했다.

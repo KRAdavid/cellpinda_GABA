@@ -1,5 +1,14 @@
 # Audit Report
 
+## 사업자용 전체 공유 복사 피드백 및 공개 재검증 — 94bcd16 — 2026-10-04
+
+- 사업자용 5문장 전체 복사 버튼이 전역 토스트에만 의존해 복사 성공을 버튼 자체에서 확인하기 어려운 흐름을 확인했다. PR #223에서 전체 복사 버튼도 `복사 완료` 상태, 모바일 터치 영역, 키보드 포커스 표시와 2.4초 후 자동 복귀를 적용해 개별 문장 카드와 일관되게 만들었다.
+- 로컬 typecheck·UI contract·127 tests·production build/performance를 확인했다. PR #223 필수 checks와 main workflow `37208889644`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator candidate `94bcd1606e1521476e07f2057823517b6c8915ff`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 클립보드 권한·모바일 브라우저 공유 UI·실기기와 고령 사용자 독해성은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-FULL-SHARE-COPY-ACK-20261004`, `E-UI-CONTRACT-FULL-SHARE-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-FULL-SHARE-COPY-ACK-20261004`, `E-LIVE-PUBLIC-FULL-SHARE-COPY-ACK-20261004`.
+
 ## 사업자용 공유 문장 개별 복사 피드백 및 공개 재검증 — 5aa9f05 — 2026-10-04
 
 - 사업자용 GABA 핵심 5문장 카드에서 개별 문장을 복사한 뒤 어떤 카드가 처리됐는지 즉시 알기 어려운 흐름을 확인했다. PR #222에서 카드별 `복사 완료` 상태, 모바일 터치 영역, 키보드 포커스 표시와 2.4초 후 자동 복귀를 적용했다.
