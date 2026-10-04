@@ -1522,6 +1522,13 @@ export default function PublicGabaGuide() {
             </div>
             <div className="guide-research-flow">{researchTopics.map((topic, index) => { const nextTopic = researchTopics[index + 1]; return <article className={`guide-research-detail guide-research-detail-inline${activeResearchTopicId === topic.id ? ' is-active' : ''}`} id={`research-${topic.id}`} key={topic.id}><div className="guide-research-detail-top"><EvidenceBadge tone={topic.tone} label={topic.label} /><span>{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3>{topic.title} 연구 결과</h3></div><ResearchProfile profile={topic.profile} /><ResearchOutcomeChart topic={topic} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding"><span>{topic.finding}</span><button type="button" className="guide-research-copy" onClick={() => void copyMessage(topic.finding)} aria-label={`${topic.title} 연구 핵심 결과 복사`}><Clipboard size={13} aria-hidden="true" /> 핵심 결과 복사</button></dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span className="guide-research-source-label">출처 ·</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer">{topic.source.label} <ExternalLink size={13} aria-hidden="true" /></a></p>{nextTopic ? <button type="button" className="guide-research-next" onClick={() => { setActiveResearchTopicId(nextTopic.id); scrollTo(`research-${nextTopic.id}`); }} aria-label={`다음 연구로 이동: ${nextTopic.title}`}><span><small>다음 연구</small><strong>{nextTopic.title}</strong></span><ArrowRight size={18} aria-hidden="true" /></button> : null}</article>; })}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
+            <div className="guide-research-handoff" aria-label="연구 결과에서 국내외 활용으로 이어지는 다음 읽기 흐름">
+              <span className="guide-research-handoff-kicker">다음 장</span>
+              <strong>연구가 생활이 되는 장면</strong>
+              <span className="guide-research-handoff-line" aria-hidden="true" />
+              <span className="guide-research-handoff-next">국내외 활용</span>
+              <ArrowRight size={17} aria-hidden="true" />
+            </div>
           </div>
         </section>
 
