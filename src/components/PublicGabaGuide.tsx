@@ -525,6 +525,14 @@ const getGuideScrollTarget = (target: HTMLElement) => {
   return heading?.closest<HTMLElement>('.guide-section-heading') ?? heading ?? target;
 };
 
+const getGuideFocusTarget = (target: HTMLElement) => {
+  const headingId = target.getAttribute('aria-labelledby');
+  const heading = headingId ? document.getElementById(headingId) : null;
+  if (heading?.matches('h1, h2, h3, [tabindex]')) return heading;
+  const scrollTarget = getGuideScrollTarget(target);
+  return scrollTarget.matches('h1, h2, h3, [tabindex]') ? scrollTarget : null;
+};
+
 const getGuideScrollTop = (target: HTMLElement) => {
   const headerHeight = document.querySelector<HTMLElement>('.guide-header')?.getBoundingClientRect().height ?? 78;
   const readingRailHeight = document.querySelector<HTMLElement>('.guide-reading-progress')?.getBoundingClientRect().height ?? 0;
@@ -997,8 +1005,8 @@ export default function PublicGabaGuide() {
       if (cancelled || hashDestinationFocused || initialResearchTopicId || window.location.hash.slice(1) !== targetId) return;
       const target = document.getElementById(targetId);
       if (!target) return;
-      const focusTarget = getGuideScrollTarget(target);
-      if (!focusTarget.matches('h1, h2, h3, [tabindex]')) return;
+      const focusTarget = getGuideFocusTarget(target);
+      if (!focusTarget) return;
       hashDestinationFocused = true;
       window.requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }));
     };
@@ -1050,8 +1058,8 @@ export default function PublicGabaGuide() {
           window.dispatchEvent(new Event('scroll'));
           if (nextResearchTopicId) focusResearchCard(nextResearchTopicId);
           else {
-            const focusTarget = getGuideScrollTarget(target);
-            if (focusTarget.matches('h1, h2, h3, [tabindex]')) window.requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }));
+            const focusTarget = getGuideFocusTarget(target);
+            if (focusTarget) window.requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }));
           }
         });
       });
@@ -1356,8 +1364,8 @@ export default function PublicGabaGuide() {
   };
 
   const focusGuideDestination = (target: HTMLElement) => {
-    const focusTarget = getGuideScrollTarget(target);
-    if (!focusTarget.matches('h1, h2, h3, [tabindex]')) return;
+    const focusTarget = getGuideFocusTarget(target);
+    if (!focusTarget) return;
     window.requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }));
   };
 
