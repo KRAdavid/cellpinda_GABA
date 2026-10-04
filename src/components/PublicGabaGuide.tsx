@@ -1,4 +1,4 @@
-import { memo, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type SyntheticEvent, type TouchEvent } from 'react';
+import { memo, startTransition, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type SyntheticEvent, type TouchEvent } from 'react';
 import {
   ArrowDown,
   ArrowDownRight,
@@ -1167,7 +1167,7 @@ export default function PublicGabaGuide() {
         .filter((entry) => entry.isIntersecting)
         .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
       if (!visibleCard) return;
-      setActiveResearchTopicId(visibleCard.target.id.replace(/^research-/, ''));
+      startTransition(() => setActiveResearchTopicId(visibleCard.target.id.replace(/^research-/, '')));
     }, { rootMargin: '-28% 0px -42% 0px', threshold: [0.15, 0.35, 0.6] });
     cards.forEach((card) => observer.observe(card));
     return () => observer.disconnect();
