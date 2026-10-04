@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 연구 결과 공유 문맥 재검증 — 348f9b6 — 2026-10-04
+
+- 연구 카드에서 결과만 복사하면 대상·방법·출처가 빠져 공유 과정에서 의미가 축약될 수 있는 실패 모드를 확인했다. PR #219에서 연구 대상·방법, 관찰 결과, 연구 범위, 출처, 연구 딥링크를 하나의 복사 블록으로 묶고 사업자용 5문장 전체 복사에도 공개 안내서 링크를 추가했다.
+- UI 계약·typecheck·127개 테스트·production build/performance와 PR #219 checks, main workflow `37206009673`, live validator HTTP 200·STATIC를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 결과는 PASS_WITH_CONDITIONS다.
+- Browser 플러그인과 Playwright 부재로 실제 클립보드 권한·모바일 공유 UI는 브라우저 런타임에서 직접 증명하지 못했다. RT-001·RT-002·RT-003은 계속 OPEN이고 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004`, `E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004`.
+
 ## 전문가 영상 공유 링크 주제 필터 재검증 — 597bf37 — 2026-10-04
 
 - 유효한 전문가 영상 공유 링크가 선택 영상·초기 재생 상태뿐 아니라 해당 영상의 주제 필터까지 복원하도록 보강되었다. 직접 진입한 독자는 선택 영상과 관련 영상 목록을 한 화면의 같은 맥락에서 이해할 수 있다.

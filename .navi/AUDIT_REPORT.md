@@ -1,5 +1,13 @@
 # Audit Report
 
+## 연구 결과 공유 문맥 고도화 — 348f9b6 — 2026-10-04
+
+- 연구 카드의 결과 복사를 연구 대상·방법, 관찰 결과, 연구 범위, 원문 출처와 해당 연구 딥링크를 포함하는 공유 블록으로 보강했다. 사업자용 GABA 5문장 전체 복사에도 공개 안내서 링크를 추가했다.
+- 로컬 typecheck·UI contract·127 tests·production build/performance, PR #219 checks, main workflow `37206009673`의 release-verify·worker-readiness·Pages·smoke-live·release-status를 확인했다. live validator candidate `348f9b6083c050249fe03c63f2351b9506a4a345`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 클립보드 동작과 모바일 브라우저 공유 UI는 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004`, `E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004`.
+
 ## 전문가 영상 공유 링크 주제 필터 재검증 — 597bf37 — 2026-10-04
 
 - 선택 영상과 초기 재생 상태를 복원한 공유 링크가 전체 영상 목록으로 열려 관련 맥락을 다시 찾아야 하는 흐름을 확인했다. PR #218에서 유효한 `?video=` 쿼리의 영상 주제를 초기 필터로 연결해, 선택 영상과 관련 영상 목록을 함께 보여주도록 보강했다.

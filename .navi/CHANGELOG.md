@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 연구 결과 공유 문맥 보강 및 공개 재검증: 2026-10-04 / candidate 348f9b6
+
+연구 카드의 결과 복사를 연구 대상·방법, 관찰 결과, 연구 범위, 원문 출처와 해당 연구 딥링크를 포함하는 공유 블록으로 고도화했다. 사업자용 GABA 5문장 전체 복사에는 공개 안내서 링크를 추가했다. PR #219, main workflow `37206009673`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며 실제 클립보드와 모바일 공유 UI 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004`, `E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004`.
+
 ## 전문가 영상 공유 링크 주제 필터 복원 및 공개 재검증: 2026-10-04 / candidate 597bf37
 
 유효한 `?video=` 공유 링크가 선택 영상의 초기 재생 상태와 주제 필터까지 복원하도록 보강했다. PR #218, main workflow `37204949680`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며, 브라우저 런타임 영상 재생과 필터 전환 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

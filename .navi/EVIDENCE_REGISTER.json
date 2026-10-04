@@ -482,6 +482,17 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-054",
+      "statement": "연구 카드의 공유 기능이 연구 대상·방법, 관찰 결과, 연구 범위, 원문 출처와 해당 연구 딥링크를 함께 복사하고, 사업자용 5문장 묶음도 공개 안내서 링크를 포함한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004",
+        "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6366,6 +6377,50 @@
       "captured_at": "2026-10-04T13:16:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-CONTEXT",
       "claim_refs": ["C-053"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 공유 텍스트가 연구 대상·방법, 관찰된 결과, 연구 범위, 원문 출처와 연구 카드 딥링크를 함께 포함하고, 사업자용 5문장 묶음에도 공개 안내서 링크를 추가한 후보가 typecheck·UI 계약·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #219 source commit 0520124; pnpm run validate:ui-contract PASS including research share context and business guide link guards; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1496428 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/219",
+      "captured_at": "2026-10-04T13:30:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-RESEARCH-SHARE-CONTEXT",
+      "claim_refs": ["C-054"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 공유 텍스트의 출처·딥링크 포함과 사업자용 전체 복사의 공개 안내서 링크 포함을 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs research share context assertions; public guide source requires formatResearchShareText, copyResearchMessage and getGuideShareUrl('top') in copyMessageKit; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/219",
+      "captured_at": "2026-10-04T13:30:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261004-RESEARCH-SHARE-CONTEXT",
+      "claim_refs": ["C-054"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 공유 품질 보강 PR #219가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #219 merge main commit 348f9b6083c050249fe03c63f2351b9506a4a345; PR checks release-verify 37205912201 and site-quality-verify 37205912151 successful; main workflow 37206009673; release-verify 111447217940, worker-readiness 111447387372, deploy-pages 111447402276, smoke-live 111447444040, release-status 111447488197 successful; deploy-worker 111447402798 skipped by STATIC_ONLY; workflow annotation reports historical local-path matches only",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37206009673",
+      "captured_at": "2026-10-04T13:35:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-SHARE-CONTEXT",
+      "claim_refs": ["C-054"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개 후보가 연구 공유 문맥 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=348f9b6083c050249fe03c63f2351b9506a4a345 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 348f9b6083c050249fe03c63f2351b9506a4a345; generatedAt 2026-10-04T13:33:42.506Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct clipboard runtime remains Browser/Playwright external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-04T13:35:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-SHARE-CONTEXT",
+      "claim_refs": ["C-054"]
     }
   ]
 }
