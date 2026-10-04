@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 카드 직접 이동 안전영역 보정 — 83715cc — 2026-10-05
+
+- 연구 확장 지도에서 선택한 개별 연구 카드가 고정 읽기 레일 아래에 도착하도록 900px 이하 태블릿·모바일과 700px 이하 휴대폰의 스크롤 기준에 안전영역을 반영했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #243과 main 배포 37227713682, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 연구 카드 정렬·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005, E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005, E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005.
+
 ## 태블릿 폭 안전영역·키보드 진입 보정 — 80436662 — 2026-10-05
 
 - 701–900px 모바일·태블릿 폭까지 viewport 안전영역 처리를 확장하고, 건너뛰기 링크·고정 헤더·읽기 진행 표시·메뉴의 상하·좌우 여백과 장 이동 기준을 맞췄다. 연구 수치·출처 데이터는 변경하지 않았다.

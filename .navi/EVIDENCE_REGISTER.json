@@ -741,6 +741,17 @@
         "E-LIVE-PUBLIC-MOBILE-SAFE-AREA-TABLET-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-078",
+      "statement": "연구 확장 지도에서 선택한 개별 연구 카드가 태블릿·휴대폰 안전영역을 고려한 읽기 레일 아래에 정렬되어, 연구 대상·결과·해석을 가리지 않고 이어서 읽을 수 있으며 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+        "E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7648,6 +7659,50 @@
       "captured_at": "2026-10-04T19:03:13Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-SAFE-AREA-TABLET",
       "claim_refs": ["C-002", "C-003", "C-007", "C-077"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "개별 연구 카드의 모바일·태블릿 직접 이동에 안전영역 스크롤 기준을 추가한 v70이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #243 source commit b5a69cf691bd108575fb2c4c93977276b981bd1c; pnpm run validate:ui-contract PASS including v70 research deep-link safe-area guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1600428 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/243",
+      "captured_at": "2026-10-04T19:16:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RESEARCH-ANCHOR-SAFE-AREA",
+      "claim_refs": ["C-003", "C-007", "C-078"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 900px 이하 개별 연구 카드 직접 이동에 116px 안전영역 스크롤 기준을, 700px 이하에는 106px 기준을 적용하는 v70 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v70 research deep-link safe-area assertion; max-width 900px .guide-research-detail scroll-margin-top calc(116px + env(safe-area-inset-top)); max-width 700px override calc(106px + env(safe-area-inset-top)); command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/243",
+      "captured_at": "2026-10-04T19:16:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-ANCHOR-SAFE-AREA",
+      "claim_refs": ["C-003", "C-078"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "개별 연구 카드 직접 이동 보정 PR #243이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #243 merge main commit 83715cc9db72c90a401b4869497b549e8e404f04; PR #243 release-verify 37227615662 job 111510420399 and site-quality-verify 37227615708 job 111510420321 successful; main workflow 37227713682 with release-verify 111510704137, worker-readiness 111510915849, deploy-pages 111510931895, smoke-live 111510967310 and release-status 111511022331 successful; deploy-worker 111510932217 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37227713682",
+      "captured_at": "2026-10-04T19:19:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-ANCHOR-SAFE-AREA",
+      "claim_refs": ["C-001", "C-002", "C-078"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 개별 연구 카드 직접 이동의 안전영역 정렬과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=83715cc9db72c90a401b4869497b549e8e404f04 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 83715cc9db72c90a401b4869497b549e8e404f04; generatedAt 2026-10-04T19:18:31.837Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T19:18:31Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-ANCHOR-SAFE-AREA",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-078"]
     }
   ]
 }
