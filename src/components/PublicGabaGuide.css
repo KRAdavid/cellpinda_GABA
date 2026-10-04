@@ -1527,3 +1527,13 @@
   .guide-research-detail-top .guide-evidence{justify-self:start;max-width:100%;min-height:32px}
   .guide-research-detail-topic{font-size:13px;line-height:1.45!important}
 }
+
+/* v68 mobile safe area: keep the sticky reading chrome below iPhone sensor insets. */
+@supports (padding: max(0px)) {
+  @media(max-width:700px){
+    .guide-header{height:calc(70px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top)}
+    .guide-reading-progress,.guide-header nav{top:calc(70px + env(safe-area-inset-top))}
+    .guide-menu-backdrop{inset:calc(70px + env(safe-area-inset-top)) 0 0}
+    .guide-story-section,.guide-final,.guide-recovery-break{scroll-margin-top:calc(112px + env(safe-area-inset-top))}
+  }
+}
