@@ -1184,6 +1184,8 @@ export default function PublicGabaGuide() {
     }
     if (window.matchMedia('(max-width: 700px)').matches) {
       const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      pendingChapterNavigation.current = { id: 'expert-videos', targetId: 'expert-video-feature' };
+      chapterNavigationLockUntil.current = performance.now() + (behavior === 'smooth' ? 900 : 350);
       requestAnimationFrame(() => {
         const target = document.getElementById('expert-video-feature');
         if (target) window.scrollTo({ top: getGuideScrollTop(target), behavior });
