@@ -1054,8 +1054,8 @@
 .gaba-guide.is-large-text .guide-video-gallery-lead,
 .gaba-guide.is-large-text .guide-expert-note,
 .gaba-guide.is-large-text .guide-reading-note-copy,
-.gaba-guide.is-large-text .guide-final-copy{font-size:calc(1em * 1.08)}
-.gaba-guide.is-large-text .guide-outcome-chart{font-size:1.08em}
+.gaba-guide.is-large-text .guide-final-copy{font-size:calc(1em * 1.12)}
+.gaba-guide.is-large-text .guide-outcome-chart{font-size:1.12em}
 .gaba-guide.is-large-text .guide-summary-grid p{font-size:calc(1em * 1.08)}
 @media(max-width:700px){
   .guide-reading-size-toggle{min-height:44px;padding:0 9px;font-size:11px}
@@ -1074,8 +1074,9 @@
   .gaba-guide.is-large-text .guide-video-gallery-lead,
   .gaba-guide.is-large-text .guide-expert-note,
   .gaba-guide.is-large-text .guide-reading-note-copy,
-  .gaba-guide.is-large-text .guide-final-copy{font-size:calc(1em * 1.06)}
-  .gaba-guide.is-large-text .guide-outcome-chart{font-size:1.06em}
+  .gaba-guide.is-large-text .guide-final-copy{font-size:calc(1em * 1.10)}
+  .gaba-guide.is-large-text .guide-outcome-chart{font-size:1.10em}
+  .gaba-guide.is-large-text .guide-outcome-lane-signal em{white-space:normal;line-height:1.3}
 }
 @media(prefers-reduced-motion:reduce){.guide-reading-size-toggle,.guide-research-map-item,.guide-research-map-dot{transition:none}}
 
