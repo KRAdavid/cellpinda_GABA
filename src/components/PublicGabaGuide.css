@@ -533,6 +533,12 @@
   .guide-video-gallery-note{font-size:14px;line-height:1.75}
 }
 
+/* v60 mobile video context: expose the selected title before the tall 9:16 frame. */
+@media(max-width:700px){
+  .guide-video-feature-copy{grid-row:1;padding:4px 6px 15px;border-bottom:1px solid rgba(190,221,229,.2)}
+  .guide-video-feature-media{grid-row:2}
+}
+
 /* v10 natural editorial direction: one original art moment, quieter chrome, clearer reading rhythm. */
 .gaba-guide{--guide-ink:#152f4f;--guide-ink-soft:#536b80;--guide-teal:#168f95;--guide-teal-dark:#0c727a;--guide-sky:#f3f8fa;--guide-line:#dce7eb;background:#fff}
 .guide-header{height:78px;padding-inline:max(28px,calc((100vw - 1280px)/2));border-bottom-color:rgba(211,225,231,.78);background:rgba(255,255,255,.88);box-shadow:0 8px 28px rgba(24,57,77,.035)}
