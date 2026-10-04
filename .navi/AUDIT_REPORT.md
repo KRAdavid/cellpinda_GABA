@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 13004052 — 2026-10-05
+
+- 연구 카드 상단에 `연구 범위` 표식을 추가해 색상·대상 라벨의 의미를 즉시 구분하고, 모바일에서 범위·연구 대상·세부 영역을 단일 열로 배치했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- 로컬 UI 계약(v64), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1597027 bytes로 예산 안이다.
+- PR #237 필수 checks, main workflow 37222305395의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 13004052e50effcbf6d7011e04003e6ca0f0f23e는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SCOPE-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-SCOPE-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-SCOPE-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-SCOPE-CONTEXT-20261005.
+
 ## Release Recheck — af43e264 — 2026-10-05
 
 - 연구 카드 상단의 대상·방법·측정 연구 범위 라벨이 결과를 읽기 전에 충분히 보이지 않을 수 있는 잔여 가독성 리스크를 확인하고, PR #236에서 데스크톱·모바일의 provenance label 크기·간격·줄바꿈을 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.

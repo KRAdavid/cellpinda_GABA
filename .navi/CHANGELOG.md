@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 범위 맥락 표식 고도화 — 13004052 — 2026-10-05
+
+- 연구 카드 상단에 `연구 범위` 표식을 추가하고 모바일에서 범위·연구 대상·세부 영역을 안정적인 단일 열로 배치했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #237과 main 배포 37222305395, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SCOPE-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-SCOPE-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-SCOPE-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-SCOPE-CONTEXT-20261005.
+
 ## 연구 범위 라벨 가독성 고도화 — af43e264 — 2026-10-05
 
 - 연구 카드 상단의 대상·방법·측정 연구 범위 라벨을 결과보다 먼저 읽히도록 모바일·데스크톱 크기, 간격, 줄바꿈을 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.

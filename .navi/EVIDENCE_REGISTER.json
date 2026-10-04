@@ -675,6 +675,17 @@
         "E-LIVE-PUBLIC-RESEARCH-SCOPE-READABILITY-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-072",
+      "statement": "연구 카드 상단에 연구 범위 표식이 명시되고, 모바일에서 범위·연구 대상·세부 영역이 안정적으로 구분되며, 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SCOPE-CONTEXT-20261005",
+        "E-UI-CONTRACT-RESEARCH-SCOPE-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-SCOPE-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-SCOPE-CONTEXT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7318,6 +7329,50 @@
       "captured_at": "2026-10-04T17:38:44Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-SCOPE-READABILITY",
       "claim_refs": ["C-071"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SCOPE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 상단에 연구 범위 표식을 추가하고 모바일 범위·대상·영역 배치를 정리한 v64가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #237 source commit 0a9f280; pnpm run validate:ui-contract PASS including v64 scope context guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1597027 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/237",
+      "captured_at": "2026-10-04T17:51:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RESEARCH-SCOPE-CONTEXT",
+      "claim_refs": ["C-072"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SCOPE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 카드 상단의 연구 범위 표식과 모바일 단일 열 범위·대상·영역 배치를 v64 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v64 scope context assertion; desktop three-column context row and mobile one-column row with scope kicker 12px; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/237",
+      "captured_at": "2026-10-04T17:51:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-SCOPE-CONTEXT",
+      "claim_refs": ["C-072"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-SCOPE-CONTEXT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 범위 표식과 모바일 배치 개선 PR #237이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #237 merge main commit 13004052e50effcbf6d7011e04003e6ca0f0f23e; PR #237 release-verify 37222190599 job 111494599223 and site-quality-verify 37222190709 job 111494599470 successful; main workflow 37222305395 with release-verify 111494945846, worker-readiness 111495178310, deploy-pages 111495196943, smoke-live 111495238952 and release-status 111495281824 successful; deploy-worker 111495197548 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37222305395",
+      "captured_at": "2026-10-04T17:55:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-SCOPE-CONTEXT",
+      "claim_refs": ["C-072"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SCOPE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 연구 범위 표식과 모바일 연구 범위·대상·영역 배치 개선, 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=13004052e50effcbf6d7011e04003e6ca0f0f23e pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 13004052e50effcbf6d7011e04003e6ca0f0f23e; generatedAt 2026-10-04T17:55:34.977Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-04T17:55:34Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-SCOPE-CONTEXT",
+      "claim_refs": ["C-072"]
     }
   ]
 }
