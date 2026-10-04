@@ -1,5 +1,14 @@
 # Audit Report
 
+## 공유·연구 복사 버튼 모바일 터치 영역 명시 — ca65f61 — 2026-10-05
+
+- 사업자용 문장 복사·전체 복사·연구 결과 복사 동작의 개별 스타일에 남아 있던 34~36px 선언을 정리하고, 모바일 포함 최소 44px 터치 영역을 명시했다. UI 계약에 v52 회귀 검사를 추가했다.
+- PR #230 필수 checks, 로컬 UI contract·typecheck·127 tests·production build/performance를 확인했다. main workflow `37214622993`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator candidate `ca65f61af42522f51e7b20db1057c4bc71368529`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 브라우저·실기기 터치 및 고령 사용자 독해성은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-SHARE-CONTROLS-20261005`, `E-UI-CONTRACT-SHARE-CONTROLS-20261005`, `E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005`, `E-LIVE-PUBLIC-SHARE-CONTROLS-20261005`.
+
 ## 첫 화면 히어로 문구 최소화 — 2e31d60 — 2026-10-05
 
 - 첫 화면의 `수면의 질 · 회복의 시간` 프리타이틀이 메인 헤드라인과 의미가 겹쳐 첫 시선 집중을 분산시키는 지점을 확인했다. 프리타이틀을 제거하고 주 헤드라인의 시작 위치를 0으로 보정했다.

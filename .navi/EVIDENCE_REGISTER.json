@@ -598,6 +598,17 @@
         "E-LIVE-PUBLIC-MINIMAL-HERO-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-065",
+      "statement": "사업자용 핵심 문장 공유 버튼·전체 복사·연구 결과 복사 동작이 모바일에서 명시적 44px 터치 영역을 유지하고, UI 계약이 이 기준을 회귀 점검한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-CONTROLS-20261005",
+        "E-UI-CONTRACT-SHARE-CONTROLS-20261005",
+        "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
+        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6933,6 +6944,50 @@
       "captured_at": "2026-10-04T15:40:44Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MINIMAL-HERO",
       "claim_refs": ["C-064"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-CONTROLS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자용 문장 복사·전체 복사·연구 결과 복사 버튼의 44px 터치 영역 명시 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #230 source commit 76e74e1; pnpm run validate:ui-contract PASS including v52 share and research touch target guards; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1592381 bytes <= 1650000 budget; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/230",
+      "captured_at": "2026-10-04T15:50:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-SHARE-CONTROLS",
+      "claim_refs": ["C-065"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-CONTROLS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 사업자용 문장 복사·전체 복사·연구 결과 복사 버튼에 데스크톱·모바일 44px 터치 영역이 유지되는지 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v52 share and research touch target assertions; guide-share-line-copy, guide-share-copy-all and guide-research-copy min-height 44px including the max-width 700px rule; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/230",
+      "captured_at": "2026-10-04T15:50:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-SHARE-CONTROLS",
+      "claim_refs": ["C-065"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유·연구 복사 터치 영역 보강 PR #230이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #230 merge main commit ca65f61af42522f51e7b20db1057c4bc71368529; PR #230 site-quality-verify run 37214530066 and release-verify run 37214530004 successful; main workflow 37214622993 with release-verify 111472504540, worker-readiness 111472716503, deploy-pages 111472731470, smoke-live 111472875468 and release-status 111472919174 successful; deploy-worker 111472732023 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37214622993",
+      "captured_at": "2026-10-04T15:54:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-SHARE-CONTROLS",
+      "claim_refs": ["C-065"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 공유·연구 복사 터치 영역 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=ca65f61af42522f51e7b20db1057c4bc71368529 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha ca65f61af42522f51e7b20db1057c4bc71368529; generatedAt 2026-10-04T15:53:07.273Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device touch/readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#final",
+      "captured_at": "2026-10-04T15:54:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-SHARE-CONTROLS",
+      "claim_refs": ["C-065"]
     }
   ]
 }

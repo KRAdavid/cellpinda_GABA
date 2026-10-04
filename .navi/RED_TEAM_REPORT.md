@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 공유·연구 복사 버튼 모바일 터치 영역 명시 — ca65f61 — 2026-10-05
+
+- 공격 관점에서 확인한 실패 모드는 사업자용 공유 문장과 연구 결과 복사 동작의 개별 CSS 높이가 작게 남아 모바일·고령 사용자 조작을 어렵게 만드는 것이었다. 세 동작을 44px 이상으로 통일하고 UI 계약으로 재발을 막았다.
+- PR #230 checks, main workflow `37214622993`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했다. Worker는 STATIC_ONLY이므로 실행하지 않았다.
+- 잔여 위험은 Browser 플러그인·Playwright 부재에 따른 실제 브라우저·실기기 터치, 고령 사용자 독해성, 독립 과학·규제 감수다. 결과는 PASS_WITH_CONDITIONS이며 NAVI 완료 게이트는 NOT_READY다.
+
+증적: `E-LOCAL-BUILD-SHARE-CONTROLS-20261005`, `E-UI-CONTRACT-SHARE-CONTROLS-20261005`, `E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005`, `E-LIVE-PUBLIC-SHARE-CONTROLS-20261005`.
+
 ## 첫 화면 히어로 문구 최소화 — 2e31d60 — 2026-10-05
 
 - 공격 관점에서 확인한 실패 모드는 첫 화면의 프리타이틀과 메인 헤드라인이 같은 의미를 반복해 모바일 첫 시선에서 핵심 메시지의 대비를 낮추는 것이었다. 프리타이틀을 제거하고 제목 시작 위치를 보정했으며 UI 계약으로 재발을 막았다.
