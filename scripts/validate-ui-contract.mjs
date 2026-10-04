@@ -42,6 +42,7 @@ const notFoundHtml = await read('public/404.html');
 const deployWorkflow = await read('.github/workflows/deploy.yml');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
 const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
+requireMatch(publicGuideStyles, /v61 result-first chart hierarchy[\s\S]*?\.guide-outcome-comparison-verdict\{[\s\S]*?border-left:3px solid #26a6aa[\s\S]*?font-size:\.857em[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-outcome-comparison-verdict\{[\s\S]*?font-size:\.929em/, 'public GABA comparison charts must keep the direct GABA result visually readable on desktop and mobile');
 if (!existsSync(resolve(root, 'public/assets/gaba-guide-social-card.jpg'))) fail('the product-independent GABA guide social card asset is missing');
 const researchRouteStart = app.indexOf('if(researchView)return');
 const researchRouteEnd = app.indexOf('const linkContext');
