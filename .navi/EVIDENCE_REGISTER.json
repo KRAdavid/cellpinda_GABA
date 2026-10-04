@@ -302,7 +302,8 @@
         "E-LOCAL-BUILD-BUSINESS-SHARE-KIT-20261004",
         "E-PLAYWRIGHT-BUSINESS-SHARE-KIT-20261004",
         "E-DEPLOY-PIPELINE-BUSINESS-SHARE-KIT-20261004",
-        "E-LIVE-PUBLIC-BUSINESS-SHARE-KIT-20261004"
+        "E-LIVE-PUBLIC-BUSINESS-SHARE-KIT-20261004",
+        "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-BUSINESS-SHARE-KIT-20261004"
       ],
       "status": "SUPPORTED"
     }
@@ -5473,6 +5474,17 @@
       "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#final",
       "captured_at": "2026-10-04T07:27:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-BUSINESS-SHARE-KIT",
+      "claim_refs": ["C-037"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-BUSINESS-SHARE-KIT-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 증적 동기화 commit 이후에도 GitHub Pages 공개본의 사업자용 GABA 공유 패키지와 제품 독립 공개 데이터가 유지된다.",
+      "locator": "NAVI docs sync commit 96a304ac16e07cc97c4834e0e42dfea116a6038e; main workflow 37186050712; release-verify 111388058092, worker-readiness 111388259265, deploy-pages 111388276875, smoke-live 111388317561, release-status 111388357788 success; deploy-worker 111388277389 skipped; pnpm run validate:live-public page 200, runtimeMode STATIC, candidateSha 96a304ac16e07cc97c4834e0e42dfea116a6038e, generatedAt 2026-10-04T07:32:37.965Z, bundleHashes 70, claims 12, masterRecords 6, products 1, sharePages 6, teaserPreview HOLD/publicUrl false, internalOpsSnapshots excluded, smartStoreOnly true, removed750 true, provenance matched; UI code remains the merged PR #200 candidate",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37186050712",
+      "captured_at": "2026-10-04T07:33:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-BUSINESS-SHARE-KIT-DOCS-SYNC",
       "claim_refs": ["C-037"]
     }
   ]
