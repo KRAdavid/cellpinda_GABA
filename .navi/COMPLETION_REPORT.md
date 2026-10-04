@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — efc6246 — 2026-10-05
+
+- AC-003 연구 카드의 핵심 결과 선행 표시와 모바일 읽기 순서: PASS_WITH_CONDITIONS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #259와 main 공개 배포 workflow 37240376184가 성공했고, 공개 URL validator가 candidate efc624679105d2665b94a887e4866429451c4478을 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했고 live guide bundle에 `결과 한 줄`이 포함됐다.
+- 이번 변경은 연구 결과의 표시 순서와 중복 요약만 보완했으며 연구 수치·출처·공개 카피·제품 데이터는 변경하지 않았다.
+- 완료 상태는 NOT_READY를 유지한다. Browser/Playwright, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-RESULT-FIRST-20261005, E-UI-CONTRACT-RESULT-FIRST-20261005, E-DEPLOY-PIPELINE-RESULT-FIRST-20261005, E-LIVE-PUBLIC-RESULT-FIRST-20261005.
+
 ## Current Release Recheck — e48acaa — 2026-10-05
 
 - AC-004 모바일·키보드·보조기기 모션 선호 대응: PASS_WITH_CONDITIONS.

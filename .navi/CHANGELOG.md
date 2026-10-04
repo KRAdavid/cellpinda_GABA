@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 연구 결과를 먼저 읽는 카드 흐름 — efc6246 — 2026-10-05
+
+- 연구 카드 제목 바로 아래에 `결과 한 줄`을 배치해 모바일 방문자가 관찰된 결과를 먼저 이해하도록 고도화했다. 기존 도표 내부의 핵심 결과 요약은 중복 표시하지 않고 연구 구성·시각 도표·상세 조건·원문 출처로 이어지게 했다.
+- v83 UI 계약, typecheck, 127개 테스트, production build와 성능 예산이 통과했고 PR #259 및 main 배포 37240376184의 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator는 candidate `efc624679105d2665b94a887e4866429451c4478`에 대해 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·smartStoreOnly·removed750·provenance matched를 확인했고, live guide bundle의 `결과 한 줄`도 확인했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser/Playwright와 Safari/iOS/Android 실기기가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESULT-FIRST-20261005, E-UI-CONTRACT-RESULT-FIRST-20261005, E-DEPLOY-PIPELINE-RESULT-FIRST-20261005, E-LIVE-PUBLIC-RESULT-FIRST-20261005.
+
 ## 시스템 모션 선호 대응 — e48acaa — 2026-10-05
 
 - `prefers-reduced-motion: reduce` 사용자가 공개 GABA 안내서를 읽을 때 카드·읽기 진행·영상 로딩의 애니메이션과 smooth scrolling을 전역으로 끌 수 있도록 PR #257에서 v82 UI 계약과 CSS를 추가했다.
