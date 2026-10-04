@@ -659,7 +659,7 @@
 .guide-share-intro-actions>b{padding:8px 11px;border:1px solid rgba(160,224,221,.32);border-radius:999px;color:#a7e0de;font-size:12px;white-space:nowrap}
 .guide-share-copy-all{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:34px;padding:0 11px;border:1px solid rgba(145,219,217,.5);border-radius:10px;background:rgba(255,255,255,.1);color:#e4fbf8;font-size:11px;font-weight:850;letter-spacing:-.04em;white-space:nowrap;transition:background .18s ease,border-color .18s ease,transform .18s ease}
 .guide-share-copy-all:hover,.guide-share-copy-all:focus-visible{border-color:#9be4df;background:rgba(255,255,255,.18);transform:translateY(-1px)}
-.guide-share-copy-all:focus-visible{outline:3px solid rgba(131,222,217,.3);outline-offset:3px}
+.guide-share-copy-all:focus-visible{outline:3px solid rgba(131,222,217,.3);outline-offset:3px}.guide-share-copy-all.is-copied{border-color:#7bc7a5;background:rgba(109,207,158,.16);color:#c5f4d9}.guide-share-copy-all-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
 .guide-share-lines{margin-top:18px}
 .guide-share-lines summary{display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none}
 .guide-share-lines summary::-webkit-details-marker{display:none}
