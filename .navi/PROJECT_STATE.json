@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T13:35:00Z",
+  "updated_at": "2026-10-04T13:55:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -347,7 +347,11 @@
         "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004",
         "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004",
         "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004",
-        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004"
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004",
+        "E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004",
+        "E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -834,7 +838,11 @@
           "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004",
           "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004",
           "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004",
-          "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004"
+          "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004",
+          "E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004",
+          "E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004",
+          "E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004",
+          "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004"
       ],
       "owner": "QA"
     },
@@ -1625,7 +1633,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T13:35:00Z"
+    "last_run_at": "2026-10-04T13:55:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1754,7 +1762,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T13:35:00Z"
+    "last_run_at": "2026-10-04T13:55:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -2605,7 +2613,12 @@
            "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004",
            "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004",
            "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004",
-           "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004"
+           "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004",
+           "E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004",
+           "E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004",
+           "E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004",
+           "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004",
+           "E-TF-PULSE-REFRESH-20261004"
          ],
          "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생·연구 비교 방향 그래프·320·350·390·768·1440px × 11개 주요 장 가로폭·페이지 오류 0건 검증 통과"
       },
@@ -3595,6 +3608,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T13:35:00Z"
+    },
+    {
+      "id": "H-127",
+      "event": "연구 카드 복사 성공 뒤 카드 자체에서 ‘복사 완료’를 표시하도록 PR #220에서 보강했다. PR #220의 필수 검증은 통과했으며, 첫 main 배포 후보는 TF heartbeat가 487분으로 480분 freshness 제한을 7분 초과해 중단됐다. NAVI TF pulse run `37207031442`의 safe internal checks MET 증거로 heartbeat를 보호된 PR #221에서 갱신했고, PR #221 checks와 main workflow `37207209603`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `bb5e26036355650083eefe57cefc7cfd24993e9f`는 HTTP 200·STATIC·공개 데이터 정합성과 제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 직접 클립보드 실사용, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T13:55:00Z"
     }
   ]
 }

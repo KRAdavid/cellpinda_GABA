@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 카드 복사 완료 상태 및 TF freshness 복구 — bb5e260 — 2026-10-04
+
+- 연구 결과·출처 복사 성공 뒤 해당 카드 버튼이 2.4초 동안 ‘복사 완료’로 바뀌도록 보강해, 모바일 사업자가 실제 재사용 가능 상태를 즉시 확인하게 했다. 연구 내용·출처·제품 독립 경계는 변경하지 않았다.
+- PR #220 필수 checks와 로컬 typecheck·UI contract·127 tests·production build/performance를 확인했다. 첫 main 배포 run `37206894476`은 UI 실패가 아니라 TF heartbeat 487분/허용 480분 freshness 게이트로 중단됐다.
+- 공식 TF pulse run `37207031442`의 safe internal checks가 MET였고 heartbeat 갱신 PR #221이 필수 checks를 통과했다. main workflow `37207209603`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며, live validator candidate `bb5e26036355650083eefe57cefc7cfd24993e9f`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright가 없어 실제 클립보드 성공·모바일 공유 UI는 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004`, `E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004`, `E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004`, `E-TF-PULSE-REFRESH-20261004`.
+
 ## 연구 결과 공유 문맥 고도화 — 348f9b6 — 2026-10-04
 
 - 연구 카드의 결과 복사를 연구 대상·방법, 관찰 결과, 연구 범위, 원문 출처와 해당 연구 딥링크를 포함하는 공유 블록으로 보강했다. 사업자용 GABA 5문장 전체 복사에도 공개 안내서 링크를 추가했다.

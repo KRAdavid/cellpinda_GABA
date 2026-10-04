@@ -493,6 +493,23 @@
         "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-055",
+      "statement": "연구 카드의 결과·출처 복사 액션은 복사 성공 뒤 해당 카드에서 ‘복사 완료’를 직접 표시해 모바일 사업자 재사용 흐름을 명확하게 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004",
+        "E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004"
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "C-056",
+      "statement": "공개 배포 전 NAVI TF pulse freshness 게이트를 자동 점검하고, 만료된 heartbeat를 새 pulse 증거와 보호된 PR로 갱신한 뒤 Pages 공개 배포를 완료했다.",
+      "evidence_refs": ["E-TF-PULSE-REFRESH-20261004"],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6421,6 +6438,61 @@
       "captured_at": "2026-10-04T13:35:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-SHARE-CONTEXT",
       "claim_refs": ["C-054"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 복사 성공 상태를 카드별 ‘복사 완료’ 표시로 보강한 후보가 typecheck·UI 계약·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #220 source commit 771e89b; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run validate:ui-contract PASS including copiedResearchTopicId and 복사 완료 guard; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1496982 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/220",
+      "captured_at": "2026-10-04T13:46:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-RESEARCH-COPY-ACK",
+      "claim_refs": ["C-055"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 카드 복사 성공 상태와 ‘복사 완료’ 표시를 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs research copy acknowledgement assertion; public guide source requires copiedResearchTopicId, 복사 완료 and 결과·출처 복사; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/220",
+      "captured_at": "2026-10-04T13:46:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261004-RESEARCH-COPY-ACK",
+      "claim_refs": ["C-055"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 복사 완료 표시 보강 PR #220과 heartbeat freshness 복구 PR #221이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #220 merge main commit 1c9a48fcc9ec2f07853f96aa3f4eee5a118fdbaa; PR #220 checks release-verify 37206809798 and site-quality-verify 37206809785 successful; initial main workflow 37206894476 blocked only because heartbeat was 487 minutes old against 480-minute freshness; pulse run 37207031442 successful; PR #221 checks release-verify 37207126565 and site-quality-verify 37207126526 successful; PR #221 merge main commit bb5e26036355650083eefe57cefc7cfd24993e9f; final main workflow 37207209603 with release-verify 111450785285, worker-readiness 111450995778, deploy-pages 111451011868, smoke-live 111451044067 and release-status 111451079771 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37207209603",
+      "captured_at": "2026-10-04T13:55:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-COPY-ACK",
+      "claim_refs": ["C-055", "C-056"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개 후보가 연구 카드 복사 완료 표시 보강 커밋과 heartbeat 갱신을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=bb5e26036355650083eefe57cefc7cfd24993e9f pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha bb5e26036355650083eefe57cefc7cfd24993e9f; generatedAt 2026-10-04T13:54:00.080Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct clipboard runtime remains Browser/Playwright external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-04T13:55:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-COPY-ACK",
+      "claim_refs": ["C-055", "C-056"]
+    },
+    {
+      "id": "E-TF-PULSE-REFRESH-20261004",
+      "kind": "GOVERNANCE",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI TF pulse 수동 검증 run이 safe internal checks MET로 완료됐고, 487분으로 만료된 heartbeat를 2026-10-04T13:50:26.507Z pulse로 갱신하는 보호 PR #221을 거쳐 공개 배포 신선도 게이트를 복구했다.",
+      "locator": "TF decision pulse workflow 37207031442 success; artifact tf-pulse-37207031442 with safe-run status MET; local validate:tf-pulse-freshness ageMinutes 0/maxAgeMinutes 480; heartbeat source commit b6ce0b4; PR #221 merge bb5e26036355650083eefe57cefc7cfd24993e9f; final release workflow 37207209603 passed freshness and public deployment gates",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37207031442",
+      "captured_at": "2026-10-04T13:55:00Z",
+      "reviewer_id": "NAVI-GOVERNANCE-QA-20261004-TF-PULSE-REFRESH",
+      "claim_refs": ["C-056"]
     }
   ]
 }

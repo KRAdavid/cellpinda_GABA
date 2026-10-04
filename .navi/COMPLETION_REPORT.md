@@ -1,5 +1,13 @@
 # Completion Report
 
+## 연구 카드 복사 완료 상태 및 TF freshness 복구 배포 게이트 — bb5e260 — 2026-10-04
+
+- PR #220을 main에 병합하고 연구 카드의 결과·출처 복사 성공을 카드별 ‘복사 완료’ 상태로 표시하도록 공개 사이트를 업데이트했다. 사업자 공유 문구·출처·제품 독립 경계는 유지했다.
+- 첫 main 후보의 TF freshness 게이트가 heartbeat 487분/허용 480분으로 중단된 뒤, 공식 pulse run `37207031442`와 safe internal checks MET 증거를 사용해 보호 PR #221에서 heartbeat를 갱신했다. PR #221 병합 후 main workflow `37207209603`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다.
+- live validator는 candidate `bb5e26036355650083eefe57cefc7cfd24993e9f`, HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 완료 게이트는 닫지 않는다. Browser 플러그인/Playwright 부재로 실제 클립보드·모바일 공유 UI, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004`, `E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004`, `E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004`, `E-TF-PULSE-REFRESH-20261004`.
+
 ## 연구 결과 공유 문맥 배포 품질 게이트 — 348f9b6 — 2026-10-04
 
 - PR #219를 main에 병합하고, 연구 카드의 공유 결과에 연구 대상·방법·관찰 결과·연구 범위·원문 출처·해당 연구 딥링크를 포함하도록 공개 사이트를 업데이트했다. 사업자용 GABA 5문장 전체 복사에는 공개 안내서 링크를 포함했다.

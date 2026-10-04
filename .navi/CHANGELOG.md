@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 연구 카드 복사 완료 상태 및 TF freshness 복구: 2026-10-04 / candidate bb5e260
+
+연구 카드의 결과·출처 복사 성공을 카드별 ‘복사 완료’ 상태로 표시하도록 고도화했다. PR #220 checks와 로컬 검증을 통과했으며, 첫 배포 후보에서 확인된 487분 heartbeat freshness 문제는 공식 TF pulse run `37207031442`와 보호 PR #221로 갱신했다. main workflow `37207209603`와 live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드·모바일 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004`, `E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004`, `E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004`, `E-TF-PULSE-REFRESH-20261004`.
+
 ## 연구 결과 공유 문맥 보강 및 공개 재검증: 2026-10-04 / candidate 348f9b6
 
 연구 카드의 결과 복사를 연구 대상·방법, 관찰 결과, 연구 범위, 원문 출처와 해당 연구 딥링크를 포함하는 공유 블록으로 고도화했다. 사업자용 GABA 5문장 전체 복사에는 공개 안내서 링크를 추가했다. PR #219, main workflow `37206009673`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며 실제 클립보드와 모바일 공유 UI 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
