@@ -334,15 +334,14 @@
 .guide-outcome-lane-top>strong{min-height:2.65em;color:#38566a;font-size:.857em;font-weight:850;line-height:1.35;letter-spacing:-.045em;word-break:keep-all}
 .guide-outcome-lane.is-result .guide-outcome-lane-top>strong{color:#126f73}
 .guide-outcome-lane-signal{display:flex;align-items:center;gap:6px;min-height:22px;color:#91aebc}
-.guide-outcome-lane-signal:before{content:"";display:block;flex:1;height:2px;border-radius:999px;background:currentColor;opacity:.28}
 .guide-outcome-lane-signal svg{flex:0 0 auto}
-.guide-outcome-lane-signal em{font-size:.714em;font-style:normal;font-weight:900;letter-spacing:-.03em;white-space:nowrap}
-.guide-outcome-lane-signal.is-more{color:#5b9cab}
-.guide-outcome-lane-signal.is-more:before{opacity:.72}
-.guide-outcome-lane-signal.is-less:before{opacity:.2}
+.guide-outcome-lane-signal em{font-size:.714em;font-style:normal;font-weight:900;letter-spacing:-.04em;white-space:nowrap}
+.guide-outcome-lane-meter{display:flex;align-items:center;gap:2px;flex:1;min-width:34px;max-width:86px}
+.guide-outcome-lane-meter i{display:block;flex:1;height:6px;border-radius:999px;background:#dcecef}
+.guide-outcome-lane-signal.is-more .guide-outcome-lane-meter i{background:currentColor;opacity:.72}
+.guide-outcome-lane-signal.is-less .guide-outcome-lane-meter i:nth-child(-n+2){background:currentColor;opacity:.42}
 .guide-outcome-lane.is-result .guide-outcome-lane-signal{color:#158e98}
-.guide-outcome-lane.is-result .guide-outcome-lane-signal.is-less{color:#35aeb7}
-.guide-outcome-lane.is-result .guide-outcome-lane-signal.is-less:before{opacity:.4}
+.guide-outcome-lane.is-result .guide-outcome-lane-signal.is-less .guide-outcome-lane-meter i:nth-child(-n+2){opacity:.62}
 .guide-outcome-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
 .guide-outcome-metric{position:relative;min-height:122px;padding:13px 14px;border-radius:12px;background:linear-gradient(145deg,#effafa,#f8fcfc);overflow:hidden}
 .guide-outcome-metric:after{content:"";position:absolute;right:-5px;bottom:-13px;width:58px;height:58px;border:1px solid rgba(18,154,163,.2);border-radius:50%;pointer-events:none}
@@ -1318,7 +1317,4 @@
 }
 
 /* v53 research comparison: make relative direction visible before the reader parses the labels. */
-.guide-outcome-comparison-row.result-less .guide-outcome-lane.is-reference .guide-outcome-lane-signal:before,
-.guide-outcome-comparison-row.result-more .guide-outcome-lane.is-result .guide-outcome-lane-signal:before{transform:scaleX(.88);transform-origin:left center}
-.guide-outcome-comparison-row.result-less .guide-outcome-lane.is-result .guide-outcome-lane-signal:before,
-.guide-outcome-comparison-row.result-more .guide-outcome-lane.is-reference .guide-outcome-lane-signal:before{transform:scaleX(.48);transform-origin:left center}
+.guide-outcome-lane-meter i{transition:background .18s ease,opacity .18s ease}
