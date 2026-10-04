@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type SyntheticEvent, type TouchEvent } from 'react';
+import { memo, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type SyntheticEvent, type TouchEvent } from 'react';
 import {
   ArrowDown,
   ArrowDownRight,
@@ -769,7 +769,7 @@ function EvidenceBadge({ tone, label }: { tone: EvidenceTone; label?: string }) 
   return <span className={`guide-evidence ${evidence.className}`}><i aria-hidden="true" />{label || evidence.text}</span>;
 }
 
-function ResearchGlyph({ id }: { id: string }) {
+const ResearchGlyph = memo(function ResearchGlyph({ id }: { id: string }) {
   return (
     <div className={`guide-research-glyph glyph-${id}`} aria-hidden="true">
       {id === 'cognition' && <><span /><span /><span /><span /></>}
@@ -779,9 +779,9 @@ function ResearchGlyph({ id }: { id: string }) {
       {id === 'skin' && <><span /><span /></>}
     </div>
   );
-}
+});
 
-function ResearchProfile({ profile }: { profile: ResearchProfileData }) {
+const ResearchProfile = memo(function ResearchProfile({ profile }: { profile: ResearchProfileData }) {
   return (
     <div className="guide-research-profile" aria-label="연구 구성">
       <p className="guide-research-profile-kicker">연구 구성</p>
@@ -799,7 +799,7 @@ function ResearchProfile({ profile }: { profile: ResearchProfileData }) {
       </div>
     </div>
   );
-}
+});
 
 function OutcomeDirectionGraphic({ direction }: { direction: 'up' | 'down' }) {
   const path = direction === 'up'
@@ -814,7 +814,7 @@ function OutcomeDirectionGraphic({ direction }: { direction: 'up' | 'down' }) {
   );
 }
 
-function ResearchOutcomeChart({ topic, showSummary = true }: { topic: Pick<ResearchTopic, 'id' | 'chart'>; showSummary?: boolean }) {
+const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSummary = true }: { topic: Pick<ResearchTopic, 'id' | 'chart'>; showSummary?: boolean }) {
   const chartId = `research-chart-${topic.id}`;
   const comparisonChart = topic.chart.kind === 'comparison' ? topic.chart : null;
   return (
@@ -880,7 +880,7 @@ function ResearchOutcomeChart({ topic, showSummary = true }: { topic: Pick<Resea
       <p className="guide-outcome-chart-note"><span aria-hidden="true">↔</span>{topic.chart.note}</p>
     </figure>
   );
-}
+});
 
 export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
