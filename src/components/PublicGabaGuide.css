@@ -1211,3 +1211,13 @@
   .guide-recovery-map-icon{width:34px;height:34px}
   .guide-recovery-map-number{font-size:10px}
 }
+
+/* v51 closing signal: give the final chapter a quiet visual counterpart to the opening artwork. */
+.guide-final{position:relative;isolation:isolate;overflow:hidden}
+.guide-final:before{content:"";position:absolute;z-index:0;top:50%;right:-4vw;width:min(47vw,680px);aspect-ratio:1;border:1px solid rgba(137,222,218,.2);border-radius:50%;transform:translateY(-50%);box-shadow:0 0 0 42px rgba(137,222,218,.045),0 0 0 84px rgba(137,222,218,.03),0 0 0 126px rgba(137,222,218,.018);pointer-events:none}
+.guide-final:after{content:"GABA";position:absolute;z-index:0;right:-.06em;bottom:-.18em;color:rgba(126,222,217,.075);font-size:clamp(180px,25vw,370px);font-weight:900;letter-spacing:-.14em;line-height:.8;pointer-events:none}
+.guide-final .guide-container{position:relative;z-index:1}
+@media(max-width:700px){
+  .guide-final:before{top:70%;right:-62vw;width:120vw;opacity:.7}
+  .guide-final:after{right:-.12em;bottom:-.03em;font-size:145px;opacity:.75}
+}
