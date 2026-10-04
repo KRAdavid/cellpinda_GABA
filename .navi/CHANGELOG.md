@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 안전영역·읽기 레일 보정 — 74fc0300 — 2026-10-05
+
+- 공개 GABA 안내서 진입 메타에 viewport-fit=cover를 추가하고, iPhone 안전영역에 맞춰 고정 헤더·읽기 진행 표시·모바일 메뉴·장 이동 위치를 보정했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #241과 main 배포 37225805478, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 안전영역 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-SAFE-AREA-20261005, E-UI-CONTRACT-MOBILE-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-20261005, E-LIVE-PUBLIC-MOBILE-SAFE-AREA-20261005.
+
 ## 전문가 영상 갤러리 위치 메타 정보 — 9131138a — 2026-10-05
 
 - 전문가 영상 선택 카드에 주제·재생 상태·전체 순서를 `01 / 09` 형식으로 표시하고 모바일 표시를 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.

@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 74fc0300
+
+- 공격 관점에서 확인한 실패 모드는 iPhone 상단 안전영역이 고정 헤더·읽기 진행 표시·모바일 메뉴·장 이동 기준과 겹쳐 제목이나 메뉴가 가려질 수 있는 것이었다. PR #241에서 viewport-fit=cover와 env(safe-area-inset-top) 보정을 추가했다.
+- UI 계약 v68, typecheck, 127개 테스트, production build, PR #241 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 안전영역 렌더와 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MOBILE-SAFE-AREA-20261005, E-UI-CONTRACT-MOBILE-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-20261005, E-LIVE-PUBLIC-MOBILE-SAFE-AREA-20261005.
+
 ## Recheck — 2026-10-05 — 9131138a
 
 - 공격 관점에서 확인한 실패 모드는 전문가 영상 선택 카드가 전체 영상 중 현재 위치를 알려주지 않아, 갤러리에서 선택 상태를 빠르게 파악하기 어려운 것이었다. PR #240에서 주제·선택 즉시 재생·`01 / 09` 위치 정보를 한 줄로 정리하고 모바일 표시를 보강했다.

@@ -719,6 +719,17 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-INDEX-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-076",
+      "statement": "모바일 공개 안내서는 iPhone 안전영역을 고려해 고정 헤더·읽기 진행 표시·메뉴·장 이동 위치가 센서 영역과 겹치지 않도록 보정되었고, 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-SAFE-AREA-20261005",
+        "E-UI-CONTRACT-MOBILE-SAFE-AREA-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-20261005",
+        "E-LIVE-PUBLIC-MOBILE-SAFE-AREA-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7538,6 +7549,50 @@
       "captured_at": "2026-10-04T18:35:10Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EXPERT-VIDEO-INDEX",
       "claim_refs": ["C-075"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 공개 안내서에 viewport-fit=cover와 iPhone 안전영역 대응 CSS를 추가한 v68이 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #241 source commit 9596521; pnpm run validate:ui-contract PASS including viewport-fit and v68 safe-area guards; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1599460 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/241",
+      "captured_at": "2026-10-04T18:46:21Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-SAFE-AREA",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-076"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 모바일 진입의 viewport-fit=cover와 안전영역 대응 헤더·읽기 레일·메뉴·장 이동 위치 규칙을 v68 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v68 mobile safe-area assertions; index viewport-fit=cover; env(safe-area-inset-top) applied to guide header, reading progress, mobile nav, menu backdrop and chapter scroll margins; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/241",
+      "captured_at": "2026-10-04T18:46:21Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-SAFE-AREA",
+      "claim_refs": ["C-003", "C-007", "C-076"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 안전영역 보정 PR #241이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #241 merge main commit 74fc03003db5af9f4e58c5a3b6a5480240ceba62; PR #241 release-verify 37225712637 job 111504810984 and site-quality-verify 37225712639 job 111504811163 successful; main workflow 37225805478 with release-verify 111505085437, worker-readiness 111505318819, deploy-pages 111505446371, smoke-live 111505492901 and release-status 111505539983 successful; deploy-worker 111505447175 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37225805478",
+      "captured_at": "2026-10-04T18:51:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-SAFE-AREA",
+      "claim_refs": ["C-001", "C-002", "C-076"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-SAFE-AREA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 모바일 안전영역 대응 진입 메타와 읽기 흐름 보정이 반영되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=74fc03003db5af9f4e58c5a3b6a5480240ceba62 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 74fc03003db5af9f4e58c5a3b6a5480240ceba62; generatedAt 2026-10-04T18:48:49.883Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-04T18:48:49Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-SAFE-AREA",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-076"]
     }
   ]
 }

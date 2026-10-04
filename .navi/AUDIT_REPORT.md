@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 74fc0300 — 2026-10-05
+
+- iPhone 상단 센서 영역에서 고정 헤더·읽기 진행 표시·모바일 메뉴·장 이동 위치가 겹칠 수 있는 잔여 모바일 퍼블리싱 리스크를 확인하고 PR #241에서 viewport-fit=cover와 env(safe-area-inset-top) 기반 보정을 적용했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- 로컬 UI 계약(v68), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1599460 bytes로 예산 안이다.
+- PR #241 필수 checks, main workflow 37225805478의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 74fc03003db5af9f4e58c5a3b6a5480240ceba62는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-SAFE-AREA-20261005, E-UI-CONTRACT-MOBILE-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-20261005, E-LIVE-PUBLIC-MOBILE-SAFE-AREA-20261005.
+
 ## Release Recheck — 9131138a — 2026-10-05
 
 - 전문가 영상 선택 카드에서 현재 영상의 주제·재생 상태·전체 순서를 한 줄의 `01 / 09` 메타 정보로 정리해, 갤러리에서 현재 위치를 즉시 파악할 수 있게 했다. 모바일에서도 숫자 위치 정보가 유지된다. 연구 수치·출처 데이터는 변경하지 않았다.
