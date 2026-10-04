@@ -851,6 +851,14 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI remains `USER_DECISION` / `INTERNAL_QA_READY_WITH_CONDITIONS`; open external-validation items remain open.
 # Change Log
 
+## v46 · 연구 스크롤 상태 비차단 처리 — 3007891 — 2026-10-05
+
+- 연구 카드 IntersectionObserver의 현재 주제 표시 갱신을 React startTransition으로 분리해 모바일 스크롤 입력을 우선 처리했다.
+- 로컬 UI contract·typecheck·127 tests·production build/performance, PR #265 checks, main workflow 37243296161, Pages·라이브 smoke·release status와 공개 validator를 통과했다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-TRANSITION-20261005, E-UI-CONTRACT-TRANSITION-20261005, E-DEPLOY-PIPELINE-TRANSITION-20261005, E-LIVE-PUBLIC-TRANSITION-20261005.
+
 ## v45 · 모바일 연구 스크롤 렌더링 최적화 — 8e1e335 — 2026-10-05
 
 - 현재 연구 주제 추적 중 정적인 연구 glyph·연구 구성·결과 도표를 React memo로 보호해 모바일 스크롤의 불필요한 재렌더링을 줄였다.

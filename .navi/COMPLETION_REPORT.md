@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 3007891 — 2026-10-05
+
+- AC-003 연구 지도·상세 카드 연결을 유지하면서 스크롤 주제 갱신을 비차단 처리: PASS_WITH_CONDITIONS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #265와 main 공개 배포 workflow 37243296161이 성공했고, 공개 URL validator가 candidate 30078911bfd1838f9c2595d68f781520c9fc7b82를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 이번 변경은 연구 카드 현재 주제 상태 갱신을 비긴급 transition으로 처리했으며 연구 수치·출처·공개 카피·제품 데이터는 변경하지 않았다.
+- 완료 상태는 NOT_READY를 유지한다. Browser/Playwright, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-TRANSITION-20261005, E-UI-CONTRACT-TRANSITION-20261005, E-DEPLOY-PIPELINE-TRANSITION-20261005, E-LIVE-PUBLIC-TRANSITION-20261005.
+
 ## Current Release Recheck — 8e1e335 — 2026-10-05
 
 - AC-003 연구 지도·상세 카드의 현재 주제 연결 흐름과 연구 시각 요소 렌더링 최적화: PASS_WITH_CONDITIONS.

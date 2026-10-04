@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 3007891
+
+- 공격 관점에서 확인한 실패 모드는 연구 카드 IntersectionObserver가 현재 주제 표시를 일반 업데이트로 갱신해 빠른 모바일 스크롤과 같은 프레임에서 경쟁할 수 있는 것이었다. PR #265에서 startTransition으로 비긴급 상태임을 명시했다.
+- UI 계약 v86, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-TRANSITION-20261005, E-UI-CONTRACT-TRANSITION-20261005, E-DEPLOY-PIPELINE-TRANSITION-20261005, E-LIVE-PUBLIC-TRANSITION-20261005.
+
 ## Recheck — 2026-10-05 — 8e1e335
 
 - 공격 관점에서 확인한 실패 모드는 연구 지도 스크롤로 activeResearchTopicId가 바뀔 때 모든 정적 연구 glyph·프로필·도표가 다시 그려져 모바일 읽기 흐름이 무거워질 수 있는 것이었다. PR #263에서 세 정적 시각 컴포넌트를 memo 경계로 보호했다.
