@@ -730,6 +730,17 @@
         "E-LIVE-PUBLIC-MOBILE-SAFE-AREA-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-077",
+      "statement": "태블릿 폭까지 포함한 모바일 공개 안내서는 안전영역을 고려해 건너뛰기 링크·고정 헤더·읽기 진행 표시·메뉴 좌우 여백·장 이동 위치가 화면 가장자리와 겹치지 않도록 보정되었고, 연구 수치·출처 데이터는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-SAFE-AREA-TABLET-20261005",
+        "E-UI-CONTRACT-MOBILE-SAFE-AREA-TABLET-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-TABLET-20261005",
+        "E-LIVE-PUBLIC-MOBILE-SAFE-AREA-TABLET-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7593,6 +7604,50 @@
       "captured_at": "2026-10-04T18:48:49Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-SAFE-AREA",
       "claim_refs": ["C-002", "C-003", "C-007", "C-076"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-SAFE-AREA-TABLET-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 안전영역 처리를 701–900px 태블릿 폭과 키보드 건너뛰기 링크까지 확장한 v69가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #242 source commit 5030c6d373e4022310abffd00b8230abf50ca18d; pnpm run validate:ui-contract PASS including v69 tablet safe-area guards; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1600187 bytes <= 1650000 budget; git diff --check PASS; research numbers and source data unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/242",
+      "captured_at": "2026-10-04T19:02:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-SAFE-AREA-TABLET",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-077"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-SAFE-AREA-TABLET-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 900px 이하 모바일·태블릿 폭에서 건너뛰기 링크·헤더·메뉴의 안전영역 여백과 700px 이하 장 이동 위치 재정의를 v69 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v69 tablet safe-area assertions; max-width 900px guards skip-link top, header height/padding, reading progress and nav top, menu backdrop, nav left/right safe insets and chapter scroll margins; max-width 700px chapter scroll-margin override retained; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/242",
+      "captured_at": "2026-10-04T19:02:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-SAFE-AREA-TABLET",
+      "claim_refs": ["C-003", "C-007", "C-077"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-TABLET-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 폭 모바일 안전영역 보정 PR #242가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #242 merge main commit 80436662c1e26b397fca2253fe95d260e51f5dc2; PR #242 release-verify 37226622923 job 111507484869 and site-quality-verify 37226622991 job 111507484509 successful; main workflow 37226718498 with release-verify 111507762554, worker-readiness 111507990788, deploy-pages 111508005769, smoke-live 111508054961 and release-status 111508094808 successful; deploy-worker 111508006051 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37226718498",
+      "captured_at": "2026-10-04T19:04:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-SAFE-AREA-TABLET",
+      "claim_refs": ["C-001", "C-002", "C-077"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-SAFE-AREA-TABLET-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 태블릿 폭까지 확장된 모바일 안전영역 대응과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=80436662c1e26b397fca2253fe95d260e51f5dc2 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 80436662c1e26b397fca2253fe95d260e51f5dc2; generatedAt 2026-10-04T19:03:13.150Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-04T19:03:13Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-SAFE-AREA-TABLET",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-077"]
     }
   ]
 }

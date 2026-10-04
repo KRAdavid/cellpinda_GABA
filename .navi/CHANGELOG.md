@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 태블릿 폭 안전영역·키보드 진입 보정 — 80436662 — 2026-10-05
+
+- 701–900px 모바일·태블릿 폭까지 viewport 안전영역 처리를 확장하고, 건너뛰기 링크·고정 헤더·읽기 진행 표시·메뉴의 상하·좌우 여백과 장 이동 기준을 맞췄다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #242와 main 배포 37226718498, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 태블릿 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-SAFE-AREA-TABLET-20261005, E-UI-CONTRACT-MOBILE-SAFE-AREA-TABLET-20261005, E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-TABLET-20261005, E-LIVE-PUBLIC-MOBILE-SAFE-AREA-TABLET-20261005.
+
 ## 모바일 안전영역·읽기 레일 보정 — 74fc0300 — 2026-10-05
 
 - 공개 GABA 안내서 진입 메타에 viewport-fit=cover를 추가하고, iPhone 안전영역에 맞춰 고정 헤더·읽기 진행 표시·모바일 메뉴·장 이동 위치를 보정했다. 연구 수치·출처 데이터는 변경하지 않았다.

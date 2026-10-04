@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 80436662
+
+- 공격 관점에서 확인한 실패 모드는 701–900px 태블릿형 모바일 폭에서 헤더·메뉴·장 이동 기준과 안전영역, 키보드 건너뛰기 링크의 기준이 서로 달라 일부 콘텐츠가 가려질 수 있는 것이었다. PR #242에서 max-width 900px 안전영역 규칙과 메뉴 좌우 inset을 확장하고 700px 이하 장 이동 기준을 유지했다.
+- UI 계약 v69, typecheck, 127개 테스트, production build, PR #242 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 태블릿·안전영역 렌더와 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MOBILE-SAFE-AREA-TABLET-20261005, E-UI-CONTRACT-MOBILE-SAFE-AREA-TABLET-20261005, E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-TABLET-20261005, E-LIVE-PUBLIC-MOBILE-SAFE-AREA-TABLET-20261005.
+
 ## Recheck — 2026-10-05 — 74fc0300
 
 - 공격 관점에서 확인한 실패 모드는 iPhone 상단 안전영역이 고정 헤더·읽기 진행 표시·모바일 메뉴·장 이동 기준과 겹쳐 제목이나 메뉴가 가려질 수 있는 것이었다. PR #241에서 viewport-fit=cover와 env(safe-area-inset-top) 보정을 추가했다.
