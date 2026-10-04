@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T00:58:13Z",
+  "updated_at": "2026-10-04T01:16:15Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2865,6 +2865,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T00:58:13Z"
+    },
+    {
+      "id": "H-088",
+      "event": "모바일 수면·회복 보충 구간의 14단계 읽기 경로가 작게 흩어져 직관성이 약하던 상태를 PR #181에서 보완했다. 단계 아이콘·번호의 모바일 크기와 hover·focus-visible 상태를 조정해 다음 읽기 지점을 더 선명하게 만들고, 카드 선택 동작은 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px Chrome fallback의 14단계·가로 폭·마지막 카드 활성화·자동 일시정지, PR #181 checks, main workflow 37167336445, live validator HTTP 200·STATIC·candidate 8e22d51을 확인했다. 공개 과학 카피·출처·제품 독립 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T01:16:15Z"
     }
   ]
 }

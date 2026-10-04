@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 회복 카드 탐색 affordance 레드팀 재검증 — 8e22d51 — 2026-10-04
+
+- 공개 390px에서 `#recovery-break`에 직접 진입해 14개 단계가 두 줄의 읽기 경로로 보이고, 아이콘·번호가 화면 폭 안에 머무는지 확인했다. 마지막 단계를 클릭하면 카드 14/14가 활성화되고 자동 전환이 멈추며, 콘솔·페이지 오류는 없었다.
+- hover·focus-visible 스타일과 클릭 선택은 시각적 안내만 보강하고 카드 내용·자동 진행·다음 장 흐름은 유지한다. 320px·1440px 전체 대표 감사는 이전 공개 검증에서 통과했으며 이번 변경은 390px 모바일 지도 affordance에 한정된다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-AFFORDANCE-20261004`, `E-PLAYWRIGHT-RECOVERY-MAP-AFFORDANCE-20261004`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-AFFORDANCE-20261004`, `E-LIVE-PUBLIC-RECOVERY-MAP-AFFORDANCE-20261004`.
+
 ## 전문가 영상 로딩 포스터 연속성 레드팀 재검증 — 44337e5 — 2026-10-04
 
 - 공개 390px에서 전문가 영상을 선택한 직후 썸네일이 유지되고 로딩 문구가 표시되는지, 실제 iframe이 준비되면 영상으로 전환될 수 있는지 확인했다. 프레임은 250x444px의 9:16 비율이고 가로 넘침은 없었다.

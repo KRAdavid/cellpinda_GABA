@@ -1,5 +1,14 @@
 # Completion Report
 
+## Recovery Map Affordance Release Gate — 8e22d51 — 2026-10-04
+
+- PR #181에서 모바일 수면·회복 보충 구간의 14단계 읽기 지도를 보강했다. 아이콘·번호를 더 선명하게 표시하고 focus-visible·선택 상태를 연결해 다음 카드를 찾는 흐름을 개선했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px 회복 지도, PR checks, main workflow `37167336445`, Pages·라이브 smoke·release status·live validator candidate `8e22d51`이 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-AFFORDANCE-20261004`, `E-PLAYWRIGHT-RECOVERY-MAP-AFFORDANCE-20261004`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-AFFORDANCE-20261004`, `E-LIVE-PUBLIC-RECOVERY-MAP-AFFORDANCE-20261004`.
+
 ## Expert Video Loading Continuity Release Gate — 44337e5 — 2026-10-04
 
 - PR #179에서 전문가 영상 iframe 로딩 중에도 기존 Shorts 썸네일을 유지하고 로딩 상태를 겹쳐 표시하도록 보완했다. 선택 영상의 9:16 프레임과 기존 재생·공유 흐름은 유지된다.

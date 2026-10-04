@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 모바일 회복 카드 탐색 affordance 공개 배포: 2026-10-04 / candidate `8e22d51`
+
+수면·회복 보충 구간의 14단계 읽기 경로를 모바일에서 더 쉽게 찾도록 아이콘·번호 크기와 hover·focus-visible 상태를 보완했다. PR #181, main workflow `37167336445`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 390px Chrome fallback에서 14단계·가로 폭·마지막 카드 선택·자동 일시정지를 확인했으며, 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-AFFORDANCE-20261004`, `E-PLAYWRIGHT-RECOVERY-MAP-AFFORDANCE-20261004`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-AFFORDANCE-20261004`, `E-LIVE-PUBLIC-RECOVERY-MAP-AFFORDANCE-20261004`.
+
 ## 전문가 영상 로딩 포스터 연속성 공개 배포: 2026-10-04 / candidate `44337e5`
 
 전문가 영상 선택 직후 어두운 빈 iframe처럼 보이던 순간을 보완했다. 같은 Shorts 썸네일을 9:16 프레임에 유지하고 로딩 상태만 겹쳐 보여, 실제 영상이 준비될 때까지 화면의 시각적 연속성을 지킨다. PR #179, main workflow `37166334839`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.

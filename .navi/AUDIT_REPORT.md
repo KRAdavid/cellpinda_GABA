@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 회복 카드 탐색 affordance 감사 — 8e22d51 — 2026-10-04
+
+- 수면·회복 보충 구간의 14단계 읽기 경로가 작은 아이콘으로 흩어져 다음 내용을 한눈에 찾기 어려운 상태를 PR #181에서 보완했다. 모바일 아이콘을 34px, 번호를 10px로 조정하고 hover·focus-visible 상태를 연결해 단계 선택성을 높였다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build가 통과했다. 공개 390px Chrome fallback에서 14단계 지도, viewport와 같은 문서 폭, 마지막 단계 선택 후 `수면과 회복 카드 14 / 14: 14 · GABA를 읽는 시작점`, 자동 일시정지, 브라우저 오류 없음을 확인했다.
+- PR #181 checks `37167220741`, `37167220751`과 main workflow `37167336445`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `8e22d51`은 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-AFFORDANCE-20261004`, `E-PLAYWRIGHT-RECOVERY-MAP-AFFORDANCE-20261004`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-AFFORDANCE-20261004`, `E-LIVE-PUBLIC-RECOVERY-MAP-AFFORDANCE-20261004`.
+
 ## 전문가 영상 로딩 포스터 연속성 감사 — 44337e5 — 2026-10-04
 
 - 전문가 영상 선택 직후 iframe이 로딩되는 동안 어두운 빈 프레임처럼 보일 수 있던 상태를 확인해, 기존 Shorts 썸네일을 같은 9:16 프레임에 유지하고 로딩 상태만 위에 표시하도록 PR #179에서 보완했다.
