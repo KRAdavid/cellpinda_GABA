@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 공유 링크 직접 재생 재검증 — 2305b5b — 2026-10-04
+
+- 유효한 전문가 영상 공유 링크가 선택 영상 ID와 초기 재생 상태를 함께 복원하도록 보강되었다. 사용자는 직접 진입 후 영상을 다시 선택하지 않고 바로 재생 흐름으로 들어간다.
+- UI 계약·typecheck·127개 테스트·production build/성능 예산과 PR #217 checks, main workflow `37203920793`, live validator HTTP 200·STATIC를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 결과는 PASS_WITH_CONDITIONS다.
+- Browser 플러그인과 Playwright 부재로 실제 iframe 재생 여부는 브라우저 런타임에서 직접 증명하지 못했다. RT-001·RT-002·RT-003은 계속 OPEN이고 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004`.
+
 ## 공유·직접 진입 해시와 모바일 폭 변경 정렬 재검증 — cf893f8 — 2026-10-04
 
 - 320px·390px의 공유·직접 진입 링크에서 lazy 레이아웃이 안정된 뒤 제목을 다시 고정 헤더와 읽기 레일 아래로 정렬하고, 같은 페이지의 뷰포트 폭 변경에도 기준선을 재계산한다. 사용자 스크롤·터치·키보드 입력이 시작되면 대기 재정렬을 취소한다.

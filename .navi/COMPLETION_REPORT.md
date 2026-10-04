@@ -1,5 +1,13 @@
 # Completion Report
 
+## 전문가 영상 공유 링크 직접 재생 배포 품질 게이트 — 2305b5b — 2026-10-04
+
+- PR #217을 main에 병합하고, 유효한 `?video=` 링크가 선택 영상과 초기 재생 상태를 함께 복원하도록 공개 사이트를 업데이트했다. UI 계약 회귀 검사도 추가했다.
+- main workflow `37203920793`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- 완료 게이트는 닫지 않는다. Browser 플러그인과 Playwright 부재로 직접 영상 재생의 브라우저 런타임 검증, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토와 로컬 사업 운영 게이트가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004`.
+
 ## 공유·직접 진입 해시와 모바일 폭 변경 배포 품질 게이트 — cf893f8 — 2026-10-04
 
 - 공유·직접 진입 링크가 lazy 콘텐츠 정착 뒤 고정 헤더·읽기 레일 아래에 놓이도록 재정렬하고, 320px→390px 뷰포트 변경에서도 제목 기준선을 다시 계산하도록 보강했다. 사용자 입력 후에는 자동 재정렬을 멈춘다.

@@ -460,6 +460,17 @@
         "E-LIVE-PUBLIC-DEEP-LINK-REALIGN-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-052",
+      "statement": "유효한 전문가 영상 공유 링크가 선택된 영상의 정체성을 복원하고, 안내서에 직접 진입할 때 영상 재생 상태로 이어지도록 보강되었다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004",
+        "E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6256,6 +6267,50 @@
       "captured_at": "2026-10-04T12:36:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-DEEP-LINK-REALIGN",
       "claim_refs": ["C-051"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "유효한 전문가 영상 공유 쿼리를 첫 렌더에서 판별해 선택 영상 상태와 재생 상태를 함께 초기화하도록 보강한 후보가 typecheck·UI 계약·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #217 source commit b418cb6; pnpm run validate:ui-contract PASS including direct-entry playback guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1495679 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/217",
+      "captured_at": "2026-10-04T12:54:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-EXPERT-VIDEO-DEEPLINK",
+      "claim_refs": ["C-052"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 선택 영상 URL의 유효성 복원과 직접 진입 시 재생 상태 초기화를 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs direct-entry playback assertion; public guide source requires hasInitialExpertVideo and useState(hasInitialExpertVideo); command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/217",
+      "captured_at": "2026-10-04T12:54:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261004-EXPERT-VIDEO-DEEPLINK",
+      "claim_refs": ["C-052"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 직접 진입 재생 보강 PR #217이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #217 merge main commit 2305b5b6ce273063aaeeea357d3b535d74290ff3; PR checks release-verify 37203838506 and site-quality-verify 37203838497 successful; main workflow 37203920793; release-verify 111441061289, worker-readiness 111441199394, deploy-pages 111441215287, smoke-live 111441259580, release-status 111441301012 successful; deploy-worker 111441215796 skipped by STATIC_ONLY; workflow annotation reports historical local-path matches only",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37203920793",
+      "captured_at": "2026-10-04T12:59:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-EXPERT-VIDEO-DEEPLINK",
+      "claim_refs": ["C-052"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개 후보가 직접 진입 재생 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=2305b5b6ce273063aaeeea357d3b535d74290ff3 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 2305b5b6ce273063aaeeea357d3b535d74290ff3; generatedAt 2026-10-04T12:58:26.806Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct video runtime remains Browser/Playwright external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&video=RLAU1VWGsaI#expert-videos",
+      "captured_at": "2026-10-04T13:00:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-EXPERT-VIDEO-DEEPLINK",
+      "claim_refs": ["C-052"]
     }
   ]
 }

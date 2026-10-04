@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 전문가 영상 공유 링크 직접 재생 및 배포 재검증: 2026-10-04 / candidate 2305b5b
+
+유효한 `?video=` 공유 링크가 선택 영상의 초기 재생 상태까지 복원하도록 보강했다. PR #217, main workflow `37203920793`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며, 브라우저 런타임 영상 재생 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004`.
+
 ## 공유·직접 진입 해시 재정렬과 뷰포트 변경 보강: 2026-10-04 / candidate cf893f8
 
 lazy 콘텐츠가 정착된 뒤 공유·직접 진입 제목을 고정 헤더·읽기 레일 아래로 재정렬하고, 320px→390px 같은 페이지 폭 변경에서도 기준선을 재계산하도록 보강했다. 사용자 입력 후 자동 재정렬을 취소해 읽기 흐름을 보호했으며, PR #216·main workflow `37202619125`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 320px·390px 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

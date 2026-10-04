@@ -1,5 +1,13 @@
 # Audit Report
 
+## 전문가 영상 공유 링크 직접 재생 재검증 — 2305b5b — 2026-10-04
+
+- 유효한 `?video=` 공유 링크는 선택 영상 ID를 복원하지만 첫 진입에서 `videoStarted`가 false여서 한 번 더 눌러야 하는 흐름을 확인했다. PR #217에서 URL의 유효한 영상 ID를 초기 재생 상태로 연결하고 UI 계약 회귀 검사를 추가했다.
+- 로컬 typecheck·UI contract·127 tests·build/perf, PR #217 checks, main workflow `37203920793`의 release-verify·worker-readiness·Pages·smoke-live·release-status를 확인했다. live validator candidate `2305b5b6ce273063aaeeea357d3b535d74290ff3`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Browser 플러그인과 Playwright를 사용할 수 없어 직접 iframe 재생의 브라우저 런타임 증명은 외부 검증으로 남겼다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004`.
+
 ## 공유·직접 진입 해시와 모바일 폭 변경 정렬 재검증 — cf893f8 — 2026-10-04
 
 - 공유 링크와 직접 진입 해시가 lazy 콘텐츠·폰트·미디어 정착 전에 계산되어, 320px·390px에서 제목이 고정 헤더와 읽기 레일보다 아래로 밀리는 결함을 확인했다. PR #214의 초기 해시 재정렬에 이어 PR #216에서 일정 시간 재정렬과 사용자 상호작용 취소, `resize`·`visualViewport.resize` 발생 시 재계산을 추가했다.
