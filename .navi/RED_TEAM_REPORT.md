@@ -1,5 +1,12 @@
 # Red Team Report
 
+## 태블릿 읽기 진행 레일 기준선 정렬 공개 재검증 — fc07f6f — 2026-10-04
+
+- 768px 공개 화면에서 헤더와 진행 레일이 모두 70px 기준선에 맞고, 390px에서도 같은 레일 구조가 유지됐다. 두 화면 모두 가로 넘침·page error·console error가 없었다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 이번 보정은 레이아웃 정렬을 개선했을 뿐 Safari/iOS/Android·실제 고령 사용자·독립 과학·규제 검토를 대체하지 않는다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-CDP-TABLET-PROGRESS-ALIGN-20261004, E-LIVE-PUBLIC-TABLET-PROGRESS-ALIGN-20261004.
+
 ## 태블릿 히어로 공개 안내 패널 보강 공개 재검증 — c0b08ee — 2026-10-04
 
 - 768px·820px에서 자연 이미지 위에 있던 공개 안내 고지문과 읽기 레일이 반투명 패널로 분리되고, 패널 폭·가로폭·오류 기준이 유지됐다.

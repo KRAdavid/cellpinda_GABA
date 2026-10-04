@@ -1,5 +1,13 @@
 # Audit Report
 
+## 태블릿 읽기 진행 레일 기준선 정렬 공개 재검증 — fc07f6f — 2026-10-04
+
+- 701px·900px에서 헤더 높이 70px과 읽기 진행 레일의 top 값을 70px로 맞춰 헤더 아래 8px 기준선 오차를 제거했다. 공개 768px·390px에서 진행 레일·본문 흐름·제품 독립 안내가 유지됐고 scrollWidth와 clientWidth가 일치하며 page error·console error가 없었다.
+- PR #211 필수 검사와 main workflow `37198360203`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다. live validator candidate `fc07f6f7a5895359183988b16acdc9209ed18ed5`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Browser 플러그인 부재로 Chrome DevTools fallback을 사용했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-TABLET-PROGRESS-ALIGN-20261004, E-CDP-TABLET-PROGRESS-ALIGN-20261004, E-DEPLOY-PIPELINE-TABLET-PROGRESS-ALIGN-20261004, E-LIVE-PUBLIC-TABLET-PROGRESS-ALIGN-20261004.
+
 ## 태블릿 히어로 공개 안내 패널 보강 공개 재검증 — c0b08ee — 2026-10-04
 
 - 768px·820px에서 히어로의 제품 독립 과학 안내 고지문과 읽기 레일이 폭 340px 반투명 패널로 이미지와 분리되어 읽혔다. 두 화면의 document scrollWidth와 clientWidth가 일치했고 page error·console error가 없었다.

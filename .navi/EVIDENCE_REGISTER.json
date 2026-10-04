@@ -416,6 +416,17 @@
         "E-LIVE-PUBLIC-TABLET-HERO-DISCLOSURE-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-048",
+      "statement": "701px·900px 태블릿에서 헤더와 읽기 진행 레일이 같은 기준선에 정렬되고, 768px 공개 화면과 390px 모바일 화면에서 가로 넘침 없이 읽기 흐름을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TABLET-PROGRESS-ALIGN-20261004",
+        "E-CDP-TABLET-PROGRESS-ALIGN-20261004",
+        "E-DEPLOY-PIPELINE-TABLET-PROGRESS-ALIGN-20261004",
+        "E-LIVE-PUBLIC-TABLET-PROGRESS-ALIGN-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6036,6 +6047,50 @@
       "captured_at": "2026-10-04T11:08:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-TABLET-HERO-DISCLOSURE",
       "claim_refs": ["C-047"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TABLET-PROGRESS-ALIGN-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 헤더와 읽기 진행 레일 정렬 보정 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #211 source commit 52ace78; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1494329 bytes; performance budgets PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/211",
+      "captured_at": "2026-10-04T11:14:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-TABLET-PROGRESS-ALIGN",
+      "claim_refs": ["C-048"]
+    },
+    {
+      "id": "E-CDP-TABLET-PROGRESS-ALIGN-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome DevTools fallback에서 공개 768px 화면의 헤더 높이와 읽기 진행 레일이 각각 70px 기준선에 맞고, 390px 모바일에서도 레일이 헤더 바로 아래에 표시되며 두 화면 모두 가로 넘침과 런타임 오류가 없었다.",
+      "locator": "Chrome CDP live at https://kradavid.github.io/gaba_info/?view=guide&qa=post-deploy-tablet; 768x900: header height 70, progress top 70 and y 70 when visible, scrollWidth=clientWidth (768/768); 390x844: header height 70, progress top 70 and y 70, scrollWidth=clientWidth (390/390); page errors []; console errors []; screenshot outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T11:21:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261004-TABLET-PROGRESS-ALIGN",
+      "claim_refs": ["C-048"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TABLET-PROGRESS-ALIGN-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 읽기 진행 레일 정렬 보정 PR #211이 필수 검사를 통과해 main에 병합됐고 GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #211 merge main commit fc07f6f7a5895359183988b16acdc9209ed18ed5; PR checks release-verify 37198250663 and site-quality-verify 37198250667 successful; main workflow 37198360203; release-verify 111424772740, worker-readiness 111424965053, deploy-pages 111425076327, smoke-live 111425110052, release-status 111425157133 successful; deploy-worker 111425076977 skipped by STATIC_ONLY; workflow annotation reports historical local-path matches only",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37198360203",
+      "captured_at": "2026-10-04T11:22:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-TABLET-PROGRESS-ALIGN",
+      "claim_refs": ["C-048"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TABLET-PROGRESS-ALIGN-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 태블릿 읽기 진행 레일 정렬 보정과 제품 독립 공개 경계가 유지되고, 768px·390px 공개 화면의 정적 데이터·가로폭 검증을 통과했다.",
+      "locator": "EXPECTED_RELEASE_SHA=fc07f6f7a5895359183988b16acdc9209ed18ed5 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha fc07f6f7a5895359183988b16acdc9209ed18ed5; generatedAt 2026-10-04T11:20:41.275Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Chrome CDP live at 768x900 and 390x844; header height 70; progress top 70; scrollWidth=clientWidth; errors []; screenshot outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=post-deploy-tablet",
+      "captured_at": "2026-10-04T11:23:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-TABLET-PROGRESS-ALIGN",
+      "claim_refs": ["C-048"]
     }
   ]
 }

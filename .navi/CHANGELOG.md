@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 태블릿 읽기 진행 레일 기준선 정렬 및 공개 재검증: 2026-10-04 / candidate fc07f6f
+
+701px·900px 태블릿에서 헤더 높이 70px과 읽기 진행 레일의 top을 맞춰 헤더 아래 기준선 오차를 제거했다. 공개 768px·390px Chrome DevTools fallback에서 진행 레일 정렬·가로폭·오류 기준을 확인했고, PR #211·main workflow `37198360203`·live validator HTTP 200·STATIC 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-TABLET-PROGRESS-ALIGN-20261004, E-CDP-TABLET-PROGRESS-ALIGN-20261004, E-DEPLOY-PIPELINE-TABLET-PROGRESS-ALIGN-20261004, E-LIVE-PUBLIC-TABLET-PROGRESS-ALIGN-20261004.
+
 ## 태블릿 히어로 공개 안내 패널 보강 및 공개 재검증: 2026-10-04 / candidate c0b08ee
 
 701px·900px 태블릿에서 제품 독립 과학 안내 고지문과 읽기 레일이 자연 이미지 위에서 흐려지지 않도록 폭 340px 반투명 editorial panel과 blur를 적용했다. 768px·820px Chrome DevTools fallback에서 가로 넘침과 오류가 없었고, PR #210·main workflow `37197239653`·live validator HTTP 200·STATIC 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

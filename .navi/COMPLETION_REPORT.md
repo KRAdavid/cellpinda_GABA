@@ -1,5 +1,12 @@
 # Completion Report
 
+## 태블릿 읽기 진행 레일 기준선 정렬 배포 품질 게이트 — fc07f6f — 2026-10-04
+
+- 701px·900px 태블릿의 헤더와 읽기 진행 레일을 같은 70px 기준선에 맞췄다. 공개 768px·390px에서 읽기 진행·제품 독립 안내·가로폭·오류 기준을 재확인했다.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토와 로컬 사업 운영 게이트가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-TABLET-PROGRESS-ALIGN-20261004, E-CDP-TABLET-PROGRESS-ALIGN-20261004, E-DEPLOY-PIPELINE-TABLET-PROGRESS-ALIGN-20261004, E-LIVE-PUBLIC-TABLET-PROGRESS-ALIGN-20261004.
+
 ## 태블릿 히어로 공개 안내 패널 보강 배포 품질 게이트 — c0b08ee — 2026-10-04
 
 - 701px·900px에서 제품 독립 과학 안내와 읽기 레일을 폭 340px 반투명 패널로 분리해 자연 이미지 위에서도 정보 계층이 유지되도록 했다. 768px·820px 가로폭·오류 기준을 확인했다.
