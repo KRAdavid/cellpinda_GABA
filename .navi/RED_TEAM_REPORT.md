@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 같은 페이지 해시 맥락 동기화 레드팀 재검증 — a8689a3 — 2026-10-04
+
+- 공개 390px에서 `recovery-break`에 진입한 뒤 같은 페이지 해시를 `research-skin`, `expert-videos`로 바꾸어 공격적으로 확인했다. 연구 선택·스크롤 위치·브라우저 제목·진행 레일이 각각 피부 연구·전문가 영상으로 함께 바뀌었다.
+- 초기 정렬 타이머가 이전 해시로 되돌리는 경로를 차단했고, 연구 카드·영상·마지막 공유를 포함한 일반 모바일 흐름에서도 가로 폭은 viewport와 같고 page/console errors는 없었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-HASH-CONTEXT-20261004`, `E-PLAYWRIGHT-HASH-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-HASH-CONTEXT-20261004`, `E-LIVE-PUBLIC-HASH-CONTEXT-20261004`.
+
 ## 현재 장 이동 읽기 레일 동기화 레드팀 재검증 — a396ca8 — 2026-10-04
 
 - 공개 390px에서 모바일 메뉴로 연구 지도를 선택한 직후 제목·진행 레일이 `연구 지도 | GABA Guide`·`연구 지도 03 / 12`로 유지되는지 확인했다. 이후 연구 카드→전문가 영상→마지막 공유까지 이동해 이전 장 잠금이 남지 않는 경로를 재현했다.

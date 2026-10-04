@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-03T23:41:32Z",
+  "updated_at": "2026-10-03T23:59:54Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2837,6 +2837,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-03T23:41:32Z"
+    },
+    {
+      "id": "H-084",
+      "event": "같은 공개 안내서 안에서 해시가 바뀔 때 연구 선택만 바뀌고 이전 장 제목·진행 레일이 잠시 남을 수 있던 결함을 PR #176에서 보완했다. 해시→장 변환기를 메뉴 이동과 공유·딥링크 이동에 함께 사용하고, 초기 정렬 타이머는 현재 해시와 다르면 중단하도록 했다. 로컬 UI 계약·typecheck·127개 테스트·build, 공개 390px Chrome fallback의 recovery-break→research-skin→expert-videos 해시 이동과 전체 읽기 흐름, PR #176 checks, main workflow 37163479968, live validator HTTP 200·STATIC·candidate a8689a3를 확인했다. 공개 과학 카피·제품 독립 경계는 변경하지 않았으며 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재와 자동화 범위로 Safari/iOS/Android·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남아 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-03T23:59:54Z"
     }
   ]
 }

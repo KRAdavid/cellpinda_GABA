@@ -1,5 +1,14 @@
 # Audit Report
 
+## 같은 페이지 해시 맥락 동기화 감사 — a8689a3 — 2026-10-04
+
+- 같은 안내서 안에서 해시를 바꾸면 연구 선택은 바뀌는데 이전 장 제목·진행 레일이 남을 수 있던 경합을 확인했다. 해시→장 변환기를 공통화하고, 초기 해시 정렬 타이머가 현재 해시와 다르면 중단하도록 PR #176에서 보완했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build가 통과했다. 최종 GitHub Pages 공개본 390px Chrome fallback에서 `recovery-break → research-skin → expert-videos` 해시 이동 시 제목·진행 레일·피부 연구 선택·스크롤 위치가 함께 바뀌었고, 전체 읽기 흐름의 가로 넘침과 오류가 없었다.
+- PR #176 checks `37163412436`, `37163412451`과 main workflow `37163479968`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `a8689a3`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-HASH-CONTEXT-20261004`, `E-PLAYWRIGHT-HASH-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-HASH-CONTEXT-20261004`, `E-LIVE-PUBLIC-HASH-CONTEXT-20261004`.
+
 ## 현재 장 이동 읽기 레일 동기화 감사 — a396ca8 — 2026-10-04
 
 - 모바일 메뉴에서 목적지 장이 보이기 전까지 이전 장의 읽기 레일·브라우저 제목이 남던 상태 경합을 확인해, smooth scroll 중 목적지 장을 잠시 고정하고 직접 스크롤·연속 연구→영상 이동 시 잠금을 해제하도록 PR #174에서 보완했다.
