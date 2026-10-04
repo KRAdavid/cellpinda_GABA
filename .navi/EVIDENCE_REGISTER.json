@@ -231,6 +231,17 @@
         "E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-031",
+      "statement": "공개 안내서가 320·350·390·768·1440px에서 주요 11개 장에 직접 진입할 때 가로 넘침과 페이지 오류 없이 표시되며, 초소형 화면의 수면 연구 도표도 내부 콘텐츠 폭에 맞게 읽힌다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-PHONE-20261004",
+        "E-PLAYWRIGHT-NARROW-PHONE-20261004",
+        "E-DEPLOY-PIPELINE-NARROW-PHONE-20261004",
+        "E-LIVE-PUBLIC-NARROW-PHONE-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5114,6 +5125,50 @@
       "captured_at": "2026-10-04T04:58:35Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RECOVERY-TOUCH",
       "claim_refs": ["C-030"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-PHONE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 연구 카드의 내부 그리드 최소 폭을 보정한 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #193 source commit 9e247ba; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1483266 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/193",
+      "captured_at": "2026-10-04T05:12:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-NARROW-PHONE",
+      "claim_refs": ["C-031"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-NARROW-PHONE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 320·350·390·768·1440px와 11개 주요 장 직접 진입을 순회했으며, 가로 넘침·페이지 오류·콘솔 오류가 없었다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:4175; 5 viewports × 11 anchors = 55 checks; scrollWidth equals viewport for every check; targetFound true; consoleErrors []; pageErrors []; 320px sleep study chart fits its parent after minmax(0, 1fr) correction",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/193",
+      "captured_at": "2026-10-04T05:14:27Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-NARROW-PHONE",
+      "claim_refs": ["C-031"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-PHONE-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #193 검증이 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #193 merge main commit 91808af2f7e4e92e036c84470d23956f444f6975; PR checks release-verify run 37179340343 and site-quality-verify run 37179340339 successful; main workflow 37179404463; release-verify success, worker-readiness success, deploy-pages success, smoke-live success, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37179404463",
+      "captured_at": "2026-10-04T05:16:24Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-NARROW-PHONE",
+      "claim_refs": ["C-031"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-PHONE-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 GitHub Pages 공개본에서 5개 화면 폭과 11개 주요 장 직접 진입을 순회했으며, 320px 초소형 수면 연구 도표를 포함해 가로 넘침·페이지 오류·콘솔 오류가 없었다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 91808af2f7e4e92e036c84470d23956f444f6975; generatedAt 2026-10-04T05:17:14.179Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback: 320·350·390·768·1440px × 11 anchors = 55 checks; every scrollWidth equals viewport; targetFound true; consoleErrors []; pageErrors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T05:19:41Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-NARROW-PHONE",
+      "claim_refs": ["C-031"]
     }
   ]
 }

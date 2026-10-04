@@ -1,5 +1,15 @@
 # Audit Report
 
+## 초소형 모바일 연구 카드 폭 및 공개본 전수 레이아웃 감사 — 91808af — 2026-10-04
+
+- 자동 전수 감리에서 320px 수면 연구 카드의 내부 두 번째 열이 콘텐츠의 고정 최소 폭을 물려 오른쪽 13px가 잘리는 결함을 확인하고, `minmax(0, 1fr)`와 내부 `min-width: 0`으로 보정했다.
+- 연구 내용·수치·출처·제품 독립 경계·이미지 자산은 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며, 로컬과 공개 URL에서 320·350·390·768·1440px × 11개 주요 장 직접 진입, scrollWidth·targetFound·consoleErrors·pageErrors를 점검했다. 55개 조합 모두 가로 넘침·페이지 오류·콘솔 오류가 없었다.
+- PR #193 checks 37179340343·37179340339, main workflow 37179404463의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 candidate 91808af에서 HTTP 200·STATIC·공개 데이터 정합성을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-NARROW-PHONE-20261004, E-PLAYWRIGHT-NARROW-PHONE-20261004, E-DEPLOY-PIPELINE-NARROW-PHONE-20261004, E-LIVE-PUBLIC-NARROW-PHONE-20261004.
+
 ## 모바일 터치 중 수면·회복 카드 읽기 흐름 감사 — e6802d3 — 2026-10-04
 
 - 모바일에서 카드를 누르거나 스와이프하는 동안 3초 자동 전환이 계속될 수 있던 흐름을 확인하고, 터치 시작부터 종료까지 현재 단계를 유지하도록 보완했다. 손가락을 떼면 자동 전환을 재개하고, 좌우 스와이프는 다음 단계로 이동한 뒤 수동 일시정지 상태를 유지한다. touchcancel 복귀도 추가했다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 초소형 모바일 연구 카드 폭 및 공개본 전수 레이아웃 레드팀 재검증 — 91808af — 2026-10-04
+
+- 320px 공개 화면에서 수면 연구 도표의 오른쪽 잘림을 재현한 뒤, 내부 그리드가 부모 폭 안에서 축소되도록 보정했다. 350·390·768·1440px와 11개 주요 장 직접 진입에서도 동일 문제가 재현되지 않았다.
+- 55개 자동 조합의 targetFound·scrollWidth·페이지 오류·콘솔 오류가 모두 기준을 통과했고, 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 결과는 PASS_WITH_CONDITIONS다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-NARROW-PHONE-20261004, E-PLAYWRIGHT-NARROW-PHONE-20261004, E-DEPLOY-PIPELINE-NARROW-PHONE-20261004, E-LIVE-PUBLIC-NARROW-PHONE-20261004.
+
 ## 모바일 터치 중 수면·회복 카드 읽기 흐름 레드팀 재검증 — e6802d3 — 2026-10-04
 
 - 390px touch context에서 카드를 누르고 3.4초 대기해도 1단계가 유지되는지, 손가락을 떼면 2단계로 자동 전환되는지 확인했다. 좌우 스와이프는 2단계로 이동하고 `다시 재생` 상태를 유지해 자동으로 다시 넘어가지 않는다.

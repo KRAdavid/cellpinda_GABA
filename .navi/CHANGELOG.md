@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 초소형 모바일 연구 카드 폭 보정 및 공개본 전수 감리: 2026-10-04 / candidate 91808af
+
+320px에서 수면 연구 도표가 내부 그리드의 고정 최소 폭으로 잘리던 문제를 확인하고, 카드의 두 번째 열을 축소 가능한 구조로 보정했다. PR #193, main workflow 37179404463, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. Playwright Chromium fallback의 320·350·390·768·1440px × 11개 주요 장 직접 진입 55개 조합에서 가로 넘침·페이지 오류·콘솔 오류가 0건이었고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-NARROW-PHONE-20261004, E-PLAYWRIGHT-NARROW-PHONE-20261004, E-DEPLOY-PIPELINE-NARROW-PHONE-20261004, E-LIVE-PUBLIC-NARROW-PHONE-20261004.
+
 ## 모바일 터치 중 수면·회복 카드 읽기 흐름 공개 배포: 2026-10-04 / candidate e6802d3
 
 모바일에서 수면·회복 카드를 누르거나 스와이프하는 동안 자동 전환이 계속될 수 있던 흐름을 보완했다. 터치 시작부터 종료까지 현재 단계를 유지하고, 손가락을 떼면 3초 자동 전환을 재개하며, 좌우 스와이프는 다음 단계로 이동한 뒤 수동 정지 상태를 유지한다. PR #192, main workflow 37178489672, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
