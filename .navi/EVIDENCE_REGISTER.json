@@ -785,6 +785,17 @@
         "E-LIVE-PUBLIC-OPENING-BRIDGE-NAV-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-082",
+      "statement": "읽기 진행 표시는 첫 도입부의 ‘수면과 회복’과 중간 자동 전환 설명을 ‘회복의 고리’로 구분하여 긴 페이지에서 현재 위치를 직관적으로 이해하도록 하며, 연구 수치·출처·제품 독립 경계는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-CONTEXT-20261005",
+        "E-UI-CONTRACT-RECOVERY-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-RECOVERY-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-RECOVERY-CONTEXT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -7868,6 +7879,50 @@
       "captured_at": "2026-10-04T20:02:35Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-OPENING-BRIDGE-NAV",
       "claim_refs": ["C-002", "C-003", "C-007", "C-081"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "읽기 진행에서 첫 수면·회복 도입부와 중간 자동 전환 설명을 서로 다른 명칭으로 구분한 v74가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다. 연구 수치·출처 데이터는 변경하지 않았다.",
+      "locator": "PR #247 source commit 58069b37a4c3e3ec06e5f7864d2099ff11458679; pnpm run validate:ui-contract PASS including v74 recovery-context distinction guard; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1601102 bytes <= 1650000 budget; git diff --check PASS; research numbers, source data, and product-independent copy unchanged",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/247",
+      "captured_at": "2026-10-04T20:12:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RECOVERY-CONTEXT",
+      "claim_refs": ["C-001", "C-003", "C-007", "C-082"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RECOVERY-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 첫 ‘수면과 회복’ 장과 중간 ‘회복의 고리’ 장을 별도 명칭으로 유지하는 v74 회귀 방지 규칙을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v74 recovery-context assertion; readingChapters keeps opening-bridge label ‘수면과 회복’ and recovery-break label ‘회복의 고리’; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/247",
+      "captured_at": "2026-10-04T20:12:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RECOVERY-CONTEXT",
+      "claim_refs": ["C-003", "C-082"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-CONTEXT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "읽기 진행 명칭 구분 PR #247이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #247 merge main commit 40c540b119088972ef6b180fd95b54b4931551a8; PR #247 release-verify 37231196625 job 111520999023 and site-quality-verify 37231196637 job 111520998942 successful; main workflow 37231321693 with release-verify 111521368095, worker-readiness 111521644652, deploy-pages 111521665750, smoke-live 111521716889 and release-status 111521771874 successful; deploy-worker 111521666063 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37231321693",
+      "captured_at": "2026-10-04T20:16:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RECOVERY-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-082"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본에 읽기 진행의 ‘수면과 회복’·‘회복의 고리’ 구분과 제품 독립 공개 경계가 포함되어 있음을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=40c540b119088972ef6b180fd95b54b4931551a8 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 40c540b119088972ef6b180fd95b54b4931551a8; generatedAt 2026-10-04T20:15:24.172Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#recovery-break",
+      "captured_at": "2026-10-04T20:15:24Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RECOVERY-CONTEXT",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-082"]
     }
   ]
 }

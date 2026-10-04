@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 40c540b
+
+- 공격 관점에서 확인한 실패 모드는 첫 도입부와 중간 자동 전환 카드가 모두 ‘수면과 회복’으로 표시되어 사용자가 읽기 진행의 현재 위치를 구분하기 어려운 것이었다. PR #247에서 중간 카드를 ‘회복의 고리’로 명확히 분리했다.
+- UI 계약 v74, typecheck, 127개 테스트, production build, PR #247 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 연구 수치·출처 데이터와 제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인하지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 읽기 레일 렌더·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-RECOVERY-CONTEXT-20261005, E-UI-CONTRACT-RECOVERY-CONTEXT-20261005, E-DEPLOY-PIPELINE-RECOVERY-CONTEXT-20261005, E-LIVE-PUBLIC-RECOVERY-CONTEXT-20261005.
+
 ## Recheck — 2026-10-05 — 85b1179
 
 - 공격 관점에서 확인한 실패 모드는 헤더의 ‘수면과 회복’ 메뉴가 첫 설명 브리지를 건너뛰고 뒤쪽 반복 카드로 이동해 도입부의 맥락이 끊기는 것이었다. PR #246에서 첫 브리지의 안정적인 앵커와 읽기 진행 항목을 추가하고 메뉴 도착점을 같은 장으로 정렬했다.

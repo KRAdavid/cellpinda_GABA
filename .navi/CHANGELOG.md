@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 읽기 진행의 회복 맥락 구분 — 40c540b — 2026-10-05
+
+- 첫 도입부의 ‘수면과 회복’과 중간 자동 전환 설명 카드가 같은 이름으로 표시되던 흐름을 보완해, 중간 장을 ‘회복의 고리’로 구분했다. 긴 페이지에서 현재 읽는 위치를 더 빠르게 파악할 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #247와 main 배포 37231321693, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 읽기 레일 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RECOVERY-CONTEXT-20261005, E-UI-CONTRACT-RECOVERY-CONTEXT-20261005, E-DEPLOY-PIPELINE-RECOVERY-CONTEXT-20261005, E-LIVE-PUBLIC-RECOVERY-CONTEXT-20261005.
+
 ## 수면·회복 도입부 내비게이션 정렬 — 85b1179 — 2026-10-05
 
 - 첫 화면 뒤의 수면·회복 설명 브리지에 안정적인 `#opening-bridge` 앵커를 추가하고, 헤더의 ‘수면과 회복’ 메뉴와 읽기 진행을 첫 설명 장으로 정렬했다. 도입부에서 뒤쪽 반복 카드로 건너뛰지 않고 자연스럽게 다음 장으로 이어지도록 보완했으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
