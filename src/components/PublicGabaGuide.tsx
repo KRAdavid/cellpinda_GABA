@@ -323,7 +323,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'signals',
       title: '생쥐에서 달라진 성장 관련 지표',
       summary: '청소년기 생쥐에서 몸길이와 성장호르몬 관련 수치에 차이가 나타났습니다.',
-      note: '청소년기 생쥐 연구에서 어떤 변화가 나타났는지 정리했습니다.',
+      note: '청소년기 생쥐 연구에서 나타난 변화 방향을 정리했습니다. 선은 실제 효과 크기나 수치를 뜻하지 않습니다.',
       rows: [
         { label: '수컷의 몸길이', value: '더 길었습니다', direction: 'up' },
         { label: '수컷의 체지방 지표', value: '더 낮았습니다', direction: 'down' },
@@ -351,7 +351,7 @@ const researchTopics: ResearchTopic[] = [
       kind: 'signals',
       title: '긴장되는 상황에서 달라진 신호',
       summary: 'GABA를 섭취한 뒤 알파파와 침 속 IgA는 더 높았고, 베타파는 더 낮았습니다.',
-      note: '섭취 뒤 뇌파와 침 속 면역 관련 지표에서 나타난 변화를 정리했습니다.',
+      note: '섭취 뒤 뇌파와 침 속 면역 관련 지표에서 나타난 변화 방향을 정리했습니다. 선은 실제 효과 크기나 수치를 뜻하지 않습니다.',
       rows: [
         { label: '알파파', value: '증가했습니다', direction: 'up' },
         { label: '베타파', value: '감소했습니다', direction: 'down' },
@@ -754,6 +754,19 @@ function ResearchProfile({ profile }: { profile: ResearchProfileData }) {
   );
 }
 
+function OutcomeDirectionGraphic({ direction }: { direction: 'up' | 'down' }) {
+  const path = direction === 'up'
+    ? 'M4 22 C17 22 24 18 34 15 S52 9 67 5'
+    : 'M4 5 C17 5 24 9 34 12 S52 18 67 22';
+  const arrow = direction === 'up' ? 'M59 7 L67 5 L65 13' : 'M59 20 L67 22 L65 14';
+  return (
+    <svg className={`guide-outcome-signal-graphic is-${direction}`} viewBox="0 0 72 28" aria-hidden="true">
+      <path d={path} fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" />
+      <path d={arrow} fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'chart'> }) {
   const chartId = `research-chart-${topic.id}`;
   const comparisonChart = topic.chart.kind === 'comparison' ? topic.chart : null;
@@ -808,6 +821,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
           {topic.chart.rows.map((row) => (
             <div className="guide-outcome-signal-row" key={row.label}>
               <span>{row.label}</span>
+              <span className={`guide-outcome-signal-visual is-${row.direction}`} aria-hidden="true"><OutcomeDirectionGraphic direction={row.direction} /></span>
               <strong className={`is-${row.direction}`}>
                 {row.direction === 'up' ? <ArrowUpRight size={15} aria-hidden="true" /> : <ArrowDownRight size={15} aria-hidden="true" />}
                 {row.value}
