@@ -761,7 +761,7 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
     <figure className={`guide-outcome-chart guide-outcome-chart-${topic.chart.kind}`} aria-labelledby={`${chartId}-title`}>
       <div className="guide-outcome-chart-head">
         <figcaption id={`${chartId}-title`}>{topic.chart.title}</figcaption>
-        <span>연구 결과 한눈에</span>
+        <span>{comparisonChart ? '변화 방향 비교' : '연구 결과 한눈에'}</span>
       </div>
       <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div>
       {comparisonChart ? (
@@ -778,11 +778,11 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
                   <div className="guide-outcome-lanes">
                     <div className="guide-outcome-lane is-reference">
                       <div className="guide-outcome-lane-top"><span>{comparisonChart.referenceLabel}</span><strong>{row.reference}</strong></div>
-                      <span className={`guide-outcome-lane-signal is-${referenceSignal} is-direction-${row.direction}`} aria-hidden="true"><DirectionIcon size={16} strokeWidth={2.2} /><em>{row.direction === 'up' ? '증가' : '감소'}</em></span>
+                      <span className={`guide-outcome-lane-signal is-${referenceSignal} is-direction-${row.direction}`} aria-hidden="true"><span className="guide-outcome-lane-meter">{Array.from({ length: 5 }, (_, index) => <i key={index} />)}</span><DirectionIcon size={16} strokeWidth={2.2} /><em>{referenceSignal === 'more' ? '더 많이' : '덜'} {row.direction === 'up' ? '증가' : '감소'}</em></span>
                     </div>
                     <div className="guide-outcome-lane is-result">
                       <div className="guide-outcome-lane-top"><span>{comparisonChart.resultLabel}</span><strong>{row.result}</strong></div>
-                      <span className={`guide-outcome-lane-signal is-${resultSignal} is-direction-${row.direction}`} aria-hidden="true"><DirectionIcon size={16} strokeWidth={2.2} /><em>{row.direction === 'up' ? '증가' : '감소'}</em></span>
+                      <span className={`guide-outcome-lane-signal is-${resultSignal} is-direction-${row.direction}`} aria-hidden="true"><span className="guide-outcome-lane-meter">{Array.from({ length: 5 }, (_, index) => <i key={index} />)}</span><DirectionIcon size={16} strokeWidth={2.2} /><em>{resultSignal === 'more' ? '더 많이' : '덜'} {row.direction === 'up' ? '증가' : '감소'}</em></span>
                     </div>
                   </div>
                 </div>
