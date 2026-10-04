@@ -1,5 +1,14 @@
 # Audit Report
 
+## 태블릿 히어로 공개 안내 패널 보강 공개 재검증 — c0b08ee — 2026-10-04
+
+- 768px·820px에서 히어로의 제품 독립 과학 안내 고지문과 읽기 레일이 폭 340px 반투명 패널로 이미지와 분리되어 읽혔다. 두 화면의 document scrollWidth와 clientWidth가 일치했고 page error·console error가 없었다.
+- PR #210 후보는 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. 태블릿 전용 media query로 모바일·데스크톱 레이아웃과 공개 과학 흐름은 유지했다.
+- PR #210 필수 검사와 main workflow `37197239653`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다. live validator candidate `c0b08ee23a7d9d12a30491587b39d5a17fe2f8ae`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다.
+- 배포 workflow의 historical local-path annotation은 과거 revision 경로 탐지 알림이며 현재 검사 실패가 아니다. Browser 플러그인 부재로 Chrome DevTools fallback을 사용했고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-TABLET-HERO-DISCLOSURE-20261004, E-CDP-TABLET-HERO-DISCLOSURE-20261004, E-DEPLOY-PIPELINE-TABLET-HERO-DISCLOSURE-20261004, E-LIVE-PUBLIC-TABLET-HERO-DISCLOSURE-20261004.
+
 ## 모바일 큰 글씨 제어 라벨 보강 공개 재검증 — 37147625 — 2026-10-04
 
 - 390px에서는 `가+ 큰 글씨` 라벨이 메뉴·공유 버튼과 겹치지 않고 표시되며, 큰 글씨 전환 후 `가− 기본 글씨` 상태가 보인다. 320px에서는 헤더 폭을 보호하기 위해 컴팩트 `가+` 제어와 44px 터치 타깃을 유지한다.

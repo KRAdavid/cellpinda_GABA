@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 태블릿 히어로 공개 안내 패널 보강 및 공개 재검증: 2026-10-04 / candidate c0b08ee
+
+701px·900px 태블릿에서 제품 독립 과학 안내 고지문과 읽기 레일이 자연 이미지 위에서 흐려지지 않도록 폭 340px 반투명 editorial panel과 blur를 적용했다. 768px·820px Chrome DevTools fallback에서 가로 넘침과 오류가 없었고, PR #210·main workflow `37197239653`·live validator HTTP 200·STATIC 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-TABLET-HERO-DISCLOSURE-20261004, E-CDP-TABLET-HERO-DISCLOSURE-20261004, E-DEPLOY-PIPELINE-TABLET-HERO-DISCLOSURE-20261004, E-LIVE-PUBLIC-TABLET-HERO-DISCLOSURE-20261004.
+
 ## 모바일 큰 글씨 제어 라벨 보강 및 공개 재검증: 2026-10-04 / candidate 37147625
 
 381px·430px 모바일 헤더에서 `가+ 큰 글씨` 기능명이 실제로 보이도록 읽기 크기 제어를 보강하고, 320px 이하에서는 컴팩트 44px 터치 타깃을 유지했다. 큰 글씨 전환 시 `가− 기본 글씨` 상태와 가로폭을 확인했으며, PR #209·main workflow `37196206238`·live validator HTTP 200·STATIC·Chrome DevTools fallback 390px·320px 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 태블릿 히어로 공개 안내 패널 보강 공개 재검증 — c0b08ee — 2026-10-04
+
+- 768px·820px에서 자연 이미지 위에 있던 공개 안내 고지문과 읽기 레일이 반투명 패널로 분리되고, 패널 폭·가로폭·오류 기준이 유지됐다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았고 결과는 PASS_WITH_CONDITIONS다. Chrome DevTools fallback만으로 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도를 닫을 수 없다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다. 패널 보강은 시각적 가독성을 높였지만 독립 과학·규제 감수와 실제 사용자 이해도 검증을 대체하지 않는다.
+
+증적: E-CDP-TABLET-HERO-DISCLOSURE-20261004, E-LIVE-PUBLIC-TABLET-HERO-DISCLOSURE-20261004.
+
 ## 모바일 큰 글씨 제어 라벨 보강 공개 재검증 — 37147625 — 2026-10-04
 
 - 390px에서 큰 글씨 기능명이 표시되고 메뉴·공유 버튼과 충돌하지 않으며, 320px에서는 컴팩트 제어로 전환되어 가로 넘침이 재현되지 않았다. 큰 글씨 전환 후에도 헤더 폭과 상태 라벨이 유지됐다.

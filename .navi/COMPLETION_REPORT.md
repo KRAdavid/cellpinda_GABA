@@ -1,5 +1,13 @@
 # Completion Report
 
+## 태블릿 히어로 공개 안내 패널 보강 배포 품질 게이트 — c0b08ee — 2026-10-04
+
+- 701px·900px에서 제품 독립 과학 안내와 읽기 레일을 폭 340px 반투명 패널로 분리해 자연 이미지 위에서도 정보 계층이 유지되도록 했다. 768px·820px 가로폭·오류 기준을 확인했다.
+- PR #210 main 병합과 workflow `37197239653`의 release-verify·Pages·라이브 smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했다.
+- 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토와 로컬 사업 운영 게이트가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-TABLET-HERO-DISCLOSURE-20261004, E-CDP-TABLET-HERO-DISCLOSURE-20261004, E-DEPLOY-PIPELINE-TABLET-HERO-DISCLOSURE-20261004, E-LIVE-PUBLIC-TABLET-HERO-DISCLOSURE-20261004.
+
 ## 모바일 큰 글씨 제어 라벨 보강 배포 품질 게이트 — 37147625 — 2026-10-04
 
 - 381px·430px에서 큰 글씨 제어 이름을 노출하고 320px 이하에서 컴팩트 터치 타깃을 유지해 모바일 헤더의 기능 식별성을 높였다. 큰 글씨 전환, 가로폭, 오류 기준을 로컬·공개 390px·320px에서 확인했다.
