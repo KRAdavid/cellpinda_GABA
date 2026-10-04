@@ -497,6 +497,7 @@ function ResearchScaleMetric({ stat, featured = false }: { stat: ResearchScaleSt
 }
 
 const readingChapters = [
+  { id: 'opening-bridge', label: '수면과 회복' },
   { id: 'history', label: '발견의 순간' },
   { id: 'basics', label: 'GABA란' },
   { id: 'recovery-break', label: '수면과 회복' },
@@ -1492,7 +1493,7 @@ export default function PublicGabaGuide() {
       <header className="guide-header" ref={headerRef}>
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈"><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a>
         <nav id="guide-primary-navigation" className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
-          <a href="#recovery-break" aria-current={isNavCurrent('recovery-break') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('recovery-break'); }}>수면과 회복</a>
+          <a href="#opening-bridge" aria-current={isNavCurrent('opening-bridge') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('opening-bridge'); }}>수면과 회복</a>
           <a href="#history" aria-current={isNavCurrent('history') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견</a>
           <a href="#basics" aria-current={isNavCurrent('basics') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('basics'); }}>GABA란</a>
           <a href="#academic" aria-current={isNavCurrent('academic') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('academic'); }}>연구 지도</a>
@@ -1521,7 +1522,7 @@ export default function PublicGabaGuide() {
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
         </section>
 
-        <section className="guide-opening-bridge guide-story-section" aria-labelledby="opening-bridge-heading">
+        <section className="guide-opening-bridge guide-story-section" id="opening-bridge" aria-labelledby="opening-bridge-heading">
           <div className="guide-container">
             <div className="guide-opening-bridge-head">
               <div>
