@@ -131,6 +131,17 @@
         "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-022",
+      "statement": "연구 결과 도표는 비교 조건과 GABA 조건의 상대적 변화 방향을 서로 다른 막대 길이로 보여주어, 문장을 읽기 전에도 어느 쪽 변화가 더 큰지 파악할 수 있으며 실제 효과 크기로 오인하지 않도록 방향 비교 안내를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-COMPARISON-DIRECTION-20261004",
+        "E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-DIRECTION-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -4607,6 +4618,50 @@
       "captured_at": "2026-10-04T01:54:07Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-MOBILE-VIDEO-GALLERY",
       "claim_refs": ["C-021"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-COMPARISON-DIRECTION-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 비교 도표의 상대 방향 시각화를 보완한 PR #184 후보가 UI 계약·typecheck·127개 테스트·production build를 통과했고, 390px·1440px에서 비교 조건과 GABA 조건의 막대 길이가 방향에 맞게 달라지며 가로 넘침과 브라우저 오류가 없음을 확인했다.",
+      "locator": "PR #184 candidate 5e126bcf4bafc4fc3665588883beb2925161dd89; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; local Playwright Chrome fallback 390x844 and 1440x900; result-less transforms reference 0.88/result 0.48; result-more transforms reference 0.48/result 0.88; chart widths 314px/687px; scrollWidth equals viewportWidth; errors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/184",
+      "captured_at": "2026-10-04T02:19:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261004-RESEARCH-COMPARISON-DIRECTION",
+      "claim_refs": ["C-022"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본 390px·1440px Chrome fallback에서 연구 결과 비교 도표가 비교 조건과 GABA 조건의 상대 방향을 서로 다른 막대 길이로 표시하고, 연구 지도에서 피부 카드를 선택하면 해당 카드와 지도가 활성화된다. 가로 넘침과 페이지·콘솔 오류는 없었다.",
+      "locator": "temporary Playwright 1.63.0 with Chrome channel; public https://kradavid.github.io/gaba_info/?view=guide; viewport 390x844 and 1440x900; title `인지 연구 결과 | GABA Guide`; transforms result-less reference 0.88/result 0.48 and result-more reference 0.48/result 0.88; scrollWidth equals viewportWidth; click `피부 연구 카드로 이동` -> selectedSkin true, activeMap `피부`; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-04T02:23:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RESEARCH-COMPARISON-DIRECTION",
+      "claim_refs": ["C-022"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-DIRECTION-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #184의 release-verify·site-quality-verify가 통과한 뒤 main에 병합되었고, 공개 배포 파이프라인의 release-verify, worker-readiness, Pages, 라이브 smoke, release status가 성공했다. Worker 배포는 STATIC_ONLY 조건에서 건너뛰었다.",
+      "locator": "PR #184 merge 86891bc6f0c2e347371d4ae7dcbf5a0f33179dc8; PR checks 37170724624 and 37170724660; main workflow 37170799368; release-verify success, worker-readiness success, deploy-pages success, smoke-live success, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37170799368",
+      "captured_at": "2026-10-04T02:21:20Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-COMPARISON-DIRECTION",
+      "claim_refs": ["C-022"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 비교 도표 보완이 포함된 최종 GitHub Pages 공개본은 HTTP 200과 candidate 86891bc를 반환하고, 정적 공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 86891bc6f0c2e347371d4ae7dcbf5a0f33179dc8; generatedAt 2026-10-04T02:22:56.062Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T02:22:56Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-COMPARISON-DIRECTION",
+      "claim_refs": ["C-022"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 연구 결과 비교 도표 방향성 레드팀 재검증 — 86891bc — 2026-10-04
+
+- 공개 390px·1440px에서 비교 조건과 GABA 조건의 막대 길이가 결과 방향에 따라 달라지는지 확인했다. `result-less`와 `result-more`가 서로 반대 방향으로 표시되고, 도표 주석은 시각 요소가 실제 효과 크기나 수치를 뜻하지 않는다는 경계를 유지한다.
+- 연구 지도에서 피부 카드를 선택했을 때 지도와 상세 카드가 함께 활성화됐고, 가로 넘침·page error·console error는 없었다. CSS-only 변경으로 연구 수치·출처·제품 정보·영상·공유 로직은 건드리지 않았다.
+- 자동화와 Chrome fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 `OPEN`이며 결과는 `PASS_WITH_CONDITIONS`다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004`.
+
 ## 모바일 전문가 영상 갤러리 레드팀 재검증 — a77c91c — 2026-10-04
 
 - 공개 390px에서 영상 카드가 썸네일 중심 2열로 보이고, 320px에서는 1열로 복귀하는지 확인했다. 1440px에서는 기존 2열 게시판과 선택 영상 패널을 유지하며, 두 번째 카드 선택 시 제목과 iframe 상태가 함께 바뀌었다.

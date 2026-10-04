@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 결과 비교 도표 방향성 감사 — 86891bc — 2026-10-04
+
+- 연구 결과 카드의 비교 문구는 유지하면서, 비교 조건과 GABA 조건의 상대적 변화 방향을 막대 길이로 분리해 시각적 비교 단계를 추가했다. 막대는 실제 효과 크기가 아니라 방향 비교라는 기존 주석을 유지한다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build를 통과했다. 공개 390px·1440px Chrome fallback에서 `result-less`는 비교 조건 0.88·GABA 조건 0.48, `result-more`는 비교 조건 0.48·GABA 조건 0.88의 변환을 확인했고, viewport와 같은 문서 폭·브라우저 오류 없음·연구 지도 피부 선택을 재확인했다.
+- PR #184 checks `37170724624`, `37170724660`과 main workflow `37170799368`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `86891bc`는 HTTP 200·STATIC·bundleHashes 70·공개 데이터·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목이다. 결과는 `PASS_WITH_CONDITIONS`, NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004`.
+
 ## 모바일 전문가 영상 갤러리 감사 — a77c91c — 2026-10-04
 
 - 390px에서 전문가 영상 게시판을 썸네일 중심 2열 갤러리로 정리하고, 350px 이하에서는 1열 카드로 복귀하도록 반응형 밀도를 보완했다. 데스크톱 게시판과 선택 영상의 어두운 미디어 패널은 유지했다.

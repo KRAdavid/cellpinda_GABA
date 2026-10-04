@@ -1,5 +1,14 @@
 # Completion Report
 
+## Research Comparison Direction Release Gate — 86891bc — 2026-10-04
+
+- PR #184에서 연구 결과 도표의 상대 비교 막대가 같은 길이로 보이던 문제를 보완했다. 비교 조건과 GABA 조건의 변화 방향을 먼저 시각적으로 구분하고, 실제 효과 크기로 읽히지 않도록 기존 안내 문구를 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, 공개 390px·1440px Chrome fallback, PR checks, main workflow `37170799368`, Pages·라이브 smoke·release status·live validator candidate `86891bc`가 연결됐다.
+- 배포 기준선은 통과했다: 라이브 HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 1개 product, 6개 share page, teaser `HOLD`/public URL 없음, Smart Store only, removed750 유지.
+- 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 review가 남아 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004`.
+
 ## Mobile Expert Video Gallery Release Gate — a77c91c — 2026-10-04
 
 - PR #183에서 390px 모바일 전문가 영상 게시판을 썸네일 중심 2열 갤러리로 정리하고, 350px 이하에서는 1열 카드로 복귀하도록 보완했다. 제목·채널명·선택 상태의 가독성을 유지하면서 영상 선택·즉시 재생·출처·공유 흐름은 그대로 두었다.

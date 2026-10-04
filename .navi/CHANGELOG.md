@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 연구 결과 비교 도표 방향성 공개 배포: 2026-10-04 / candidate `86891bc`
+
+연구 결과 카드의 비교 조건과 GABA 조건이 문구를 다시 읽지 않아도 구분되도록 상대 방향 막대 길이를 보완했다. 실제 효과 크기로 오인하지 않도록 방향 비교 주석은 유지했으며 연구 수치·출처·제품 독립 경계는 변경하지 않았다. PR #184, main workflow `37170799368`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004`.
+
 ## 모바일 전문가 영상 썸네일 갤러리 공개 배포: 2026-10-04 / candidate `a77c91c`
 
 전문가 영상 게시판을 390px 모바일에서 썸네일 중심 2열 갤러리로 정리하고, 350px 이하에서는 1열로 복귀하도록 보완했다. 제목·채널명·선택 상태의 밀도를 조정해 긴 목록보다 시각적으로 빠르게 탐색하도록 했으며, 영상 선택·즉시 재생·출처·공유 흐름은 유지했다. PR #183, main workflow `37169365913`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
