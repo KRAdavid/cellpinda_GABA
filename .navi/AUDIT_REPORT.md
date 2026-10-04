@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 전문가 영상 정보 계층 고도화 감리 — 0feb5743 — 2026-10-04
+
+- 700px 이하에서 선택된 전문가 영상의 제목·채널·공유 동작을 세로형 영상 프레임보다 먼저 배치해, 모바일 사용자가 무엇을 보고 있는지 먼저 이해하도록 보완했다. 데스크톱의 좌측 feature panel·우측 영상 보드 구조는 유지했다.
+- 로컬 production build·UI contract·typecheck·127개 테스트·성능 예산을 통과했다. Playwright Chromium fallback으로 320·350·390·1440px을 확인했고, 선택 후 제목 표시·9:16 영상 비율·가로 넘침 없음·page/console error 0건을 확인했다.
+- GitHub Pages 공개 candidate `0feb5743dc81fe0f46c75972c8a1eb358ae25996`의 live validator HTTP 200·STATIC·공개 데이터 정합성과 live Playwright 390·1440px 선택 흐름을 재확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-CONTEXT-20261004, E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004, E-DEPLOY-PIPELINE-MOBILE-VIDEO-CONTEXT-20261004, E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004.
+
 ## 공개 사이트 전 구간 시각 감리 — 66ec3c6 — 2026-10-04
 
 - 현재 GitHub Pages 공개본의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px에서 직접 진입해 확인했다. 10개 캡처 모두 화면 폭 안에 배치됐고, page error·console error가 없었다.

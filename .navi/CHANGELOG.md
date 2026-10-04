@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 모바일 전문가 영상 정보 계층 고도화 공개 배포: 2026-10-04 / candidate 0feb5743
+
+700px 이하에서 선택 전문가 영상의 제목·채널·공유 동작을 세로형 영상 프레임보다 먼저 읽도록 보완했다. PR #197과 main workflow 37182224154, live validator HTTP 200·STATIC, Playwright Chromium fallback 320·350·390·1440px 선택 흐름을 확인했다. 9:16 비율·가로폭·오류 기준을 통과했으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-CONTEXT-20261004, E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004, E-DEPLOY-PIPELINE-MOBILE-VIDEO-CONTEXT-20261004, E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004.
+
 ## 공개 사이트 전 구간 시각 감리 및 NAVI 동기화: 2026-10-04 / candidate 66ec3c6
 
 GitHub Pages 공개본의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px에서 직접 진입해 10개 캡처를 확인했다. 화면 폭·page error·console error 기준을 통과했고, 모바일 회복 카드·연구 지도·전문가 영상 gallery와 데스크톱 연구 지도·feature panel의 이미지 비율과 정보 계층이 안정적으로 유지됐다. 로컬 검증과 live validator도 재확인했으며 NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.

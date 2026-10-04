@@ -261,6 +261,17 @@
         "E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-034",
+      "statement": "모바일 전문가 영상 선택 화면에서 선택한 영상의 제목·채널·공유 행동이 세로 영상 프레임보다 먼저 읽히고, 320·350·390px에서도 화면 폭 안에 유지되며, 선택·진행 상태는 데스크톱과 일치한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-VIDEO-CONTEXT-20261004",
+        "E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004",
+        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-CONTEXT-20261004",
+        "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5243,6 +5254,50 @@
       "captured_at": "2026-10-04T06:07:07Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-VISUAL-PUBLISHING",
       "claim_refs": ["C-033"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-VIDEO-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 전문가 영상 선택 정보의 노출 순서를 보완한 PR #197 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #197 source commit 5640eb2; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1483789 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/197",
+      "captured_at": "2026-10-04T06:12:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-MOBILE-VIDEO-CONTEXT",
+      "claim_refs": ["C-034"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 320·350·390·1440px 전문가 영상 장을 확인했으며, 좁은 화면에서도 선택 영상 제목이 영상 프레임보다 먼저 보이고 선택 후 제목·활성 카드·전문가 영상 진행 라벨이 일치했다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:4178/guide/?view=guide#expert-videos; 320·350·390·1440px; 320/350 narrow-width checks and 390/1440 selection checks; 9:16 media frame preserved; titleVisible true after stable scroll; scrollWidth equals viewport; pageErrors []; consoleErrors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/197",
+      "captured_at": "2026-10-04T06:12:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-MOBILE-VIDEO-CONTEXT",
+      "claim_refs": ["C-034"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-VIDEO-CONTEXT-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 전문가 영상 정보 순서 보완 PR #197이 필수 검사를 통과해 main에 병합되었고, Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #197 merge main commit 0feb5743dc81fe0f46c75972c8a1eb358ae25996; PR checks release-verify 37182159349 and site-quality-verify 37182159273 successful; main workflow 37182224154; release-verify, worker-readiness, deploy-pages, smoke-live and release-status success; deploy-worker skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37182224154",
+      "captured_at": "2026-10-04T06:15:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-MOBILE-VIDEO-CONTEXT",
+      "claim_refs": ["C-034"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 390px·1440px 전문가 영상 선택 흐름을 안정 상태까지 재현했으며, 선택 영상 제목·활성 카드·전문가 영상 진행 라벨이 일치하고 가로 넘침·page error·console error가 없었다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 0feb5743dc81fe0f46c75972c8a1eb358ae25996; generatedAt 2026-10-04T06:15:26.579Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback at 390x844 and 1440x1000 after 900ms stable scroll: selected title `갱년기와 수면, GABA에 대한 질문`, activeCards 1, progress `전문가 영상`, titleVisible true, scrollWidth equals viewport, pageErrors [], consoleErrors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#expert-videos",
+      "captured_at": "2026-10-04T06:15:26Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-MOBILE-VIDEO-CONTEXT",
+      "claim_refs": ["C-034"]
     }
   ]
 }

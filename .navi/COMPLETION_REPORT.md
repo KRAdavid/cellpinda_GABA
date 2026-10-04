@@ -1,5 +1,13 @@
 # Completion Report
 
+## 모바일 전문가 영상 정보 계층 배포 품질 게이트 — 0feb5743 — 2026-10-04
+
+- PR #197의 모바일 보정이 main에 병합되고 GitHub Pages 공개본에 반영됐다. 700px 이하에서 제목·채널·공유 동작을 영상 프레임 앞에 배치했으며, 데스크톱 레이아웃은 유지했다.
+- UI contract·typecheck·127개 테스트·production build·성능 예산과 배포 workflow 37182224154의 release verify·Pages·live smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·candidate `0feb5743dc81fe0f46c75972c8a1eb358ae25996`·12개 claim·6개 master record·제품 독립 경계를 확인했다.
+- Playwright Chromium fallback 320·350·390·1440px에서 선택 제목 표시·9:16 비율·가로 넘침 없음·오류 0건을 확인했다. 완료 게이트는 닫지 않는다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-CONTEXT-20261004, E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004, E-DEPLOY-PIPELINE-MOBILE-VIDEO-CONTEXT-20261004, E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004.
+
 ## 공개 사이트 전 구간 배포 품질 게이트 — 66ec3c6 — 2026-10-04
 
 - GitHub Pages 공개본에서 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px로 직접 감리했다. 10개 캡처 모두 가로 넘침·page error·console error가 없었고, 카드·도표·영상 갤러리·공유 장의 정보 계층과 자연 이미지 비율이 유지됐다.

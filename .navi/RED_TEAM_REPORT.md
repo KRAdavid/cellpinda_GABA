@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 전문가 영상 읽기 순서 레드팀 재검증 — 0feb5743 — 2026-10-04
+
+- 320·350·390px에서 선택된 영상의 제목·채널·공유 동작이 긴 세로형 영상보다 먼저 노출되는지, 1440px에서 데스크톱 정보 계층이 유지되는지 확인했다. 제목이 늦게 나타나거나 선택 문맥이 사라지는 경로는 재현되지 않았다.
+- 9:16 영상 비율, viewport 폭 일치, page/console error 0건을 확인했다. live 공개본에서도 두 번째 영상을 선택한 뒤 제목 `갱년기와 수면, GABA에 대한 질문`, active card 1, 진행 라벨 `전문가 영상`이 일치했다.
+- 자동화는 Chromium fallback 범위의 검증이다. Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 대체하지 않으므로 RT-001·RT-002·RT-003은 계속 OPEN이다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004, E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004.
+
 ## 공개 사이트 전 구간 시각 레드팀 재검증 — 63bc6b1 — 2026-10-04
 
 - 390px·1440px에서 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 직접 열어 화면 폭·이미지 비율·카드 정보 계층을 확인했다. 10개 캡처 모두 page error·console error 없이 통과했다.
