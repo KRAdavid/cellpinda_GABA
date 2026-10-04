@@ -873,6 +873,17 @@
         "E-LIVE-PUBLIC-GUIDE-HEADING-FOCUS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-090",
+      "statement": "공개 GABA 안내서의 최신 main 공개본은 보호된 TF pulse freshness 게이트를 통과한 정적 Pages 배포로 라이브 validator와 일치한다.",
+      "evidence_refs": [
+        "E-LOCAL-TF-PULSE-HEARTBEAT-20261005",
+        "E-DEPLOY-PIPELINE-TF-PULSE-HEARTBEAT-20261005",
+        "E-LIVE-PUBLIC-TF-PULSE-HEARTBEAT-20261005",
+        "E-RELEASE-STATUS-TF-PULSE-HEARTBEAT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8308,6 +8319,50 @@
       "captured_at": "2026-10-04T21:51:23Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-GUIDE-HEADING-FOCUS",
       "claim_refs": ["C-002", "C-003", "C-007", "C-089"]
+    },
+    {
+      "id": "E-LOCAL-TF-PULSE-HEARTBEAT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "보호된 main 배포 게이트가 요구하는 TF pulse heartbeat를 내부 데이터만 갱신해 freshness 기준 안으로 복구했고 safe execution은 MET로 유지했다.",
+      "locator": "pnpm run tf:pulse:heartbeat; pnpm run validate:tf-pulse-freshness; generatedAt 2026-10-04T21:57:34.311Z; ageMinutes 0; maxAgeMinutes 480; stateChanged false; safeExecution MET",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/255",
+      "captured_at": "2026-10-04T22:03:44Z",
+      "reviewer_id": "NAVI-LOCAL-RELEASE-QA-20261005-TF-PULSE-HEARTBEAT",
+      "claim_refs": ["C-001", "C-005", "C-090"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TF-PULSE-HEARTBEAT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "TF pulse heartbeat 전용 PR #255가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #255 merge main commit 7a111d831fecfa42e74c0947ca4f40238c912e37; PR checks release-verify 37238222436 job 111541517526 and site-quality-verify 37238222422 job 111541517682 successful; main workflow 37238318730 with release-verify 111541792719, worker-readiness 111541999269, deploy-pages 111542014879, smoke-live 111542085932 and release-status 111542136528 successful; deploy-worker 111542015124 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37238318730",
+      "captured_at": "2026-10-04T22:03:44Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-TF-PULSE-HEARTBEAT",
+      "claim_refs": ["C-001", "C-002", "C-090"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TF-PULSE-HEARTBEAT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 TF pulse freshness 게이트를 거친 최신 main 후보와 일치하고, 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=7a111d831fecfa42e74c0947ca4f40238c912e37 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 7a111d831fecfa42e74c0947ca4f40238c912e37; generatedAt 2026-10-04T22:01:10.750Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-04T22:03:44Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-TF-PULSE-HEARTBEAT",
+      "claim_refs": ["C-002", "C-007", "C-090"]
+    },
+    {
+      "id": "E-RELEASE-STATUS-TF-PULSE-HEARTBEAT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개 배포의 release status packet 생성·검증이 성공했고, 정적 공개본의 복구 정보가 업로드됐다.",
+      "locator": "main workflow 37238318730 release-status job 111542136528; Publish release mode, Generate release recovery packet, Validate release recovery packet, Upload release status packet all successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37238318730",
+      "captured_at": "2026-10-04T22:03:44Z",
+      "reviewer_id": "NAVI-RELEASE-STATUS-QA-20261005-TF-PULSE-HEARTBEAT",
+      "claim_refs": ["C-001", "C-005", "C-090"]
     }
   ]
 }

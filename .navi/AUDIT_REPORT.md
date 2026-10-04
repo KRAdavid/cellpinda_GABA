@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 7a111d8 — 2026-10-05
+
+- 보호된 main 배포 게이트가 요구하는 TF pulse freshness가 만료되어 직전 배포가 중단된 것을 확인했다. 공개 콘텐츠·연구 데이터와 무관한 heartbeat 시각만 PR #255에서 갱신했고, `stateChanged=false`, `safeExecution=MET`를 유지했다.
+- TF pulse freshness 검증은 `ageMinutes=0`, `maxAgeMinutes=480`으로 통과했다. PR #255의 `release-verify`·`site-quality-verify`와 main workflow 37238318730의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 7a111d831fecfa42e74c0947ca4f40238c912e37은 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- heartbeat 갱신은 내부 배포 게이트 기록만 보완했으며 연구 수치·출처 데이터·공개 카피는 변경하지 않았다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-TF-PULSE-HEARTBEAT-20261005, E-DEPLOY-PIPELINE-TF-PULSE-HEARTBEAT-20261005, E-LIVE-PUBLIC-TF-PULSE-HEARTBEAT-20261005, E-RELEASE-STATUS-TF-PULSE-HEARTBEAT-20261005.
+
 ## Release Recheck — c9b3eda — 2026-10-05
 
 - 시각적 스크롤용 장 래퍼와 실제 읽기 포커스가 같다고 가정해 본문 장 제목 포커스가 누락될 수 있는 잔여 접근성 리스크를 확인했다. PR #254에서 `getGuideFocusTarget`을 분리해 `aria-labelledby`가 가리키는 실제 제목을 포커스 대상으로 사용하도록 보완했다.

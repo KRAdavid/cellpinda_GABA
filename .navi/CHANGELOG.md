@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 보호된 공개 배포 게이트 복구 — 7a111d8 — 2026-10-05
+
+- NAVI 자동 점검에서 TF pulse heartbeat 만료로 보호된 main 배포가 중단된 원인을 확인했다. 공개 콘텐츠와 연구 데이터에는 손대지 않고 heartbeat 시각만 PR #255에서 갱신했으며, freshness `ageMinutes=0 / maxAgeMinutes=480`, `stateChanged=false`, `safeExecution=MET`를 확인했다.
+- PR #255 checks, main 배포 37238318730의 Pages publish·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY 조건으로 건너뛰었다.
+- live validator는 최신 candidate `7a111d831fecfa42e74c0947ca4f40238c912e37`에 대해 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·smartStoreOnly·removed750·provenance matched를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-TF-PULSE-HEARTBEAT-20261005, E-DEPLOY-PIPELINE-TF-PULSE-HEARTBEAT-20261005, E-LIVE-PUBLIC-TF-PULSE-HEARTBEAT-20261005, E-RELEASE-STATUS-TF-PULSE-HEARTBEAT-20261005.
+
 ## 실제 장 제목 포커스 보정 — c9b3eda — 2026-10-05
 
 - 시각적 스크롤 정렬용 `.guide-section-heading` 래퍼가 실제 읽기 포커스 대상으로 사용되어 본문 장 제목으로 포커스가 이어지지 않을 수 있는 잔여 접근성 리스크를 확인하고 PR #254에서 `getGuideFocusTarget`을 분리했다. 직접 진입·hash 변경·메뉴 이동은 `aria-labelledby`가 가리키는 실제 제목으로 포커스하고, 시각 정렬은 기존 래퍼를 유지했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.

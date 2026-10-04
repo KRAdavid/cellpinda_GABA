@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 7a111d8
+
+- 공격 관점에서 확인한 배포 실패 모드는 TF pulse heartbeat 만료로 보호된 main 배포가 실행되지 않는 것이었다. PR #255는 공개 콘텐츠를 건드리지 않고 heartbeat 시각만 갱신했으며 freshness 검증과 safe execution을 통과했다.
+- PR #255 필수 checks, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 최신 공개본은 candidate 7a111d831fecfa42e74c0947ca4f40238c912e37, HTTP 200, STATIC, 71 bundle hashes, 제품 독립 공개 경계를 유지한다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 실제 브라우저·실기기 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-TF-PULSE-HEARTBEAT-20261005, E-DEPLOY-PIPELINE-TF-PULSE-HEARTBEAT-20261005, E-LIVE-PUBLIC-TF-PULSE-HEARTBEAT-20261005, E-RELEASE-STATUS-TF-PULSE-HEARTBEAT-20261005.
+
 ## Recheck — 2026-10-05 — c9b3eda
 
 - 공격 관점에서 확인한 실패 모드는 스크롤을 맞추기 위한 `.guide-section-heading` 래퍼가 포커스 대상으로 선택되어 history·GABA란·연구 지도 같은 본문 장에서 제목부터 읽기가 이어지지 않는 것이었다. PR #254에서 실제 `aria-labelledby` 제목을 포커스하는 `getGuideFocusTarget`을 분리했다.

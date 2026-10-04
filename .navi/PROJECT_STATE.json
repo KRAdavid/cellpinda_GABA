@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T21:51:23Z",
+  "updated_at": "2026-10-04T22:03:44Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4349,6 +4349,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T21:51:23Z"
+    },
+    {
+      "id": "H-160",
+      "event": "보호된 main 배포 게이트의 TF pulse freshness 만료로 배포가 일시 중단된 것을 확인하고, 공개 콘텐츠와 무관한 heartbeat 시각만 PR #255에서 갱신했다. PR #255의 필수 검사를 통과해 main commit `7a111d831fecfa42e74c0947ca4f40238c912e37`로 병합했고, Pages 정적 배포·라이브 smoke·release status와 라이브 validator를 재확인했다. 최신 공개본은 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계·provenance matched를 유지한다. 연구 수치·출처 데이터·공개 카피는 변경하지 않았다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T22:03:44Z"
     }
   ]
 }
