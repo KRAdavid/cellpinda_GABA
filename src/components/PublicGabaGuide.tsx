@@ -1478,7 +1478,7 @@ export default function PublicGabaGuide() {
               <div className="guide-research-orbit-core"><strong>GABA</strong></div>
               {researchTopics.map((topic) => <button type="button" className={`guide-research-map-item${activeResearchTopicId === topic.id ? ' is-active' : ''}`} key={topic.id} onClick={() => { setActiveResearchTopicId(topic.id); scrollTo(`research-${topic.id}`); }} aria-current={activeResearchTopicId === topic.id ? 'true' : undefined} aria-label={`${topic.title} 연구 카드로 이동`}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><span><strong>{topic.title}</strong></span></button>)}
             </div>
-            <div className="guide-rail"><b>읽는 순서</b><ol><li><b>01</b>{' '}지도</li><li><b>02</b>{' '}대상</li><li><b>03</b>{' '}결과</li><li><b>04</b>{' '}해석</li></ol></div>
+            <div className="guide-rail guide-research-read-order"><b>읽는 순서</b><ol><li><b>01</b><span>지도</span></li><li><b>02</b><span>대상</span></li><li><b>03</b><span>결과</span></li><li><b>04</b><span>해석</span></li></ol></div>
             <div className="guide-research-key" aria-label="연구 카드 표시 기준">
               <strong>연구를 읽는 기준</strong>
               <ul>

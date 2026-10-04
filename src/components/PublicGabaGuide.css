@@ -920,13 +920,13 @@
 .guide-research .guide-rail li+li:before{content:"→";margin-right:5px;color:#9bc3ca;font-size:13px;font-weight:700}
 .guide-research .guide-rail li b{display:inline-grid;place-items:center;width:25px;height:25px;border:1px solid #a9dfe0;border-radius:50%;background:#f5ffff;color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:0}
 @media(max-width:700px){
-  .guide-research .guide-rail{display:block;margin:0 0 22px;padding:0 0 16px}
-  .guide-research .guide-rail> b{display:block;margin-bottom:12px}
-  .guide-research .guide-rail ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
-  .guide-research .guide-rail li{display:grid;justify-items:center;gap:5px;font-size:11px;line-height:1.35;text-align:center;white-space:normal}
-  .guide-research .guide-rail li+li:before{content:"";position:absolute;left:-4px;width:8px;height:1px;margin:0;background:#b7dadd}
+  .guide-research .guide-rail{display:grid;gap:10px;margin:19px 0 22px;padding:15px 0 14px;border-top:1px solid #d8e8ee;border-bottom:1px solid #d8e8ee}
+  .guide-research .guide-rail> b{display:block;margin:0;font-size:14px;letter-spacing:-.04em}
+  .guide-research .guide-rail ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;align-items:start}
+  .guide-research .guide-rail li{display:grid;justify-items:center;gap:5px;font-size:13px;line-height:1.25;text-align:center;white-space:normal;letter-spacing:-.05em}
+  .guide-research .guide-rail li+li:before{content:none}
   .guide-research .guide-rail li{position:relative}
-  .guide-research .guide-rail li b{width:28px;height:28px;font-size:10px}
+  .guide-research .guide-rail li b{width:30px;height:30px;font-size:11px}
 }
 
 /* v28 research orientation: connect the selected map topic to the card now in view. */
