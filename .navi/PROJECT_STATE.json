@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T15:59:16.369070Z",
+  "updated_at": "2026-10-04T16:16:43.933017Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -387,7 +387,11 @@
         "E-LOCAL-BUILD-SHARE-CONTROLS-20261005",
         "E-UI-CONTRACT-SHARE-CONTROLS-20261005",
         "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
-        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
+        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005",
+        "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+        "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -902,7 +906,11 @@
         "E-LOCAL-BUILD-SHARE-CONTROLS-20261005",
         "E-UI-CONTRACT-SHARE-CONTROLS-20261005",
         "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
-        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
+        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005",
+        "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+        "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
       ],
       "owner": "QA"
     },
@@ -1034,7 +1042,11 @@
         "E-LOCAL-BUILD-SHARE-CONTROLS-20261005",
         "E-UI-CONTRACT-SHARE-CONTROLS-20261005",
         "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
-        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
+        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005",
+        "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+        "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -1153,7 +1165,11 @@
         "E-LOCAL-BUILD-SHARE-CONTROLS-20261005",
         "E-UI-CONTRACT-SHARE-CONTROLS-20261005",
         "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
-        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
+        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005",
+        "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+        "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
       ],
       "owner": "운영 QA"
     },
@@ -1489,7 +1505,11 @@
         "E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003",
         "E-LIVE-PUBLIC-RESEARCH-SCALE-20261003",
         "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
-        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
+        "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005",
+        "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+        "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
       ],
       "owner": "배포 QA",
       "status": "DONE"
@@ -1725,7 +1745,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T15:54:00Z"
+    "last_run_at": "2026-10-04T16:10:24Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1854,11 +1874,11 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T15:54:00Z"
+    "last_run_at": "2026-10-04T16:10:24Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
-    "assessed_input_sha256": "a961cb1e60580a7c52549321f033a0db549e6c298d0b512f865604819b6af219",
+    "assessed_input_sha256": "2fa05ded2b3dbab4d677e4d198806e76a9d605acaae1b39365bad369e308a29f",
     "detected_domains": [
       "FINANCIAL",
       "LEGAL",
@@ -2718,7 +2738,11 @@
           "E-LOCAL-BUILD-SHARE-CONTROLS-20261005",
           "E-UI-CONTRACT-SHARE-CONTROLS-20261005",
           "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
-          "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
+          "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005",
+          "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+          "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+          "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생·연구 비교 방향 그래프·320·350·390·768·1440px × 11개 주요 장 가로폭·페이지 오류 0건 검증 통과"
       },
@@ -2829,9 +2853,13 @@
           "E-LOCAL-BUILD-SHARE-CONTROLS-20261005",
           "E-UI-CONTRACT-SHARE-CONTROLS-20261005",
           "E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005",
-          "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
+          "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005",
+          "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+          "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+          "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
         ],
-        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 모바일 읽기 라벨·읽기 크기 조절·직접 해시 진입 정렬·메뉴 닫힘 후 토글 포커스 복귀·초소형 모바일 연구 카드 폭·320·350·390·768·1440px 주요 장 직접 진입의 자동 검증은 통과"
+        "notes": "감사·레드팀은 분리됐으나 외부 검증은 남음; 모바일 읽기 라벨·읽기 크기 조절·직접 해시 진입 정렬·메뉴 닫힘 후 토글 포커스 복귀·초소형 모바일 연구 카드 폭·모바일 회복 지도 6열·단계 버튼 44px·320·350·390·768·1440px 주요 장 직접 진입의 자동 검증은 통과"
       }
     ],
     "final_status": "NOT_READY"
@@ -3775,6 +3803,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T15:40:44Z"
+    },
+    {
+      "id": "H-136",
+      "event": "모바일 수면·회복 14단계 지도가 7열로 압축될 때 단계 식별과 터치 공간이 작아질 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #231에서 6열 구조, 단계 버튼 최소 44px, 13·14단계 중앙 정렬을 명시했다. PR #231 checks, 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, main workflow `37215720425`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate `3510d2c546cbc99981d76fc15b72a4f7d8d2a6c2`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 브라우저별 렌더·실기기 터치·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T16:10:24Z"
     }
   ]
 }

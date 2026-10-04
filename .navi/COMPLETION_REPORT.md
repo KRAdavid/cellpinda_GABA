@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 3510d2c — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·라이브 candidate: PASS.
+- AC-002 모바일 회복 지도 구조와 단계 조작 계약: PASS.
+- AC-005 로컬 품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- 공개본은 GitHub Pages에 배포되어 있고 `pnpm run validate:live-public`가 HTTP 200·STATIC·71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 완료 상태는 `NOT_READY`를 유지한다. Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수와 같은 외부 검증이 남아 있기 때문이다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005`, `E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005`, `E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005`.
+
 ## 공유·연구 복사 버튼 모바일 터치 영역 배포 품질 게이트 — ca65f61 — 2026-10-05
 
 - 사업자용 문장 복사·전체 복사·연구 결과 복사 동작을 데스크톱·모바일 44px 이상 터치 영역으로 명시하고 UI 계약 회귀 검사를 추가했다.

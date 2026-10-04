@@ -609,6 +609,17 @@
         "E-LIVE-PUBLIC-SHARE-CONTROLS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-066",
+      "statement": "수면과 회복 14단계 모바일 지도는 6열 정보 구조와 44px 최소 터치 영역으로 단계 식별과 조작 공간을 보강했으며, UI 계약이 이를 회귀 점검한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+        "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -6988,6 +6999,50 @@
       "captured_at": "2026-10-04T15:54:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-SHARE-CONTROLS",
       "claim_refs": ["C-065"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 수면·회복 단계 지도의 6열 재배치와 44px 최소 터치 영역 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #231 source commit 109169d; pnpm run validate:ui-contract PASS including v58 recovery path guards; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1592881 bytes <= 1650000 budget; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/231",
+      "captured_at": "2026-10-04T16:08:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RECOVERY-MAP-TOUCH",
+      "claim_refs": ["C-066"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 모바일 수면·회복 단계 지도를 6열로 유지하고 각 단계 버튼의 최소 44px 터치 영역과 마지막 두 단계의 중앙 정렬을 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v58 recovery path assertion; .guide-recovery-map six-column mobile grid; .guide-recovery-map-step min-width/min-height 44px; final two steps centered; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/231",
+      "captured_at": "2026-10-04T16:08:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RECOVERY-MAP-TOUCH",
+      "claim_refs": ["C-066"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 회복 지도 보강 PR #231이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #231 merge main commit 3510d2c546cbc99981d76fc15b72a4f7d8d2a6c2; PR #231 release-verify 37215636644 and site-quality-verify 37215636732 successful; main workflow 37215720425 with release-verify 111475698788, worker-readiness 111475914289, deploy-pages 111475929526, smoke-live 111475977323 and release-status 111476024276 successful; deploy-worker 111475929967 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37215720425",
+      "captured_at": "2026-10-04T16:10:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RECOVERY-MAP-TOUCH",
+      "claim_refs": ["C-066"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본이 모바일 회복 지도 보강 커밋을 포함한 HTTP 200 정적 공개본으로 제공되고, 공개 데이터·제품 독립 경계가 유지된다.",
+      "locator": "EXPECTED_RELEASE_SHA=3510d2c546cbc99981d76fc15b72a4f7d8d2a6c2 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 3510d2c546cbc99981d76fc15b72a4f7d8d2a6c2; generatedAt 2026-10-04T16:10:24.080Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; browser and real-device touch/readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#recovery-break",
+      "captured_at": "2026-10-04T16:10:24Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RECOVERY-MAP-TOUCH",
+      "claim_refs": ["C-066"]
     }
   ]
 }

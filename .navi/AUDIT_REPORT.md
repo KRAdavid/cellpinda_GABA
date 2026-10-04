@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 3510d2c — 2026-10-05
+
+- 모바일 수면·회복 14단계 지도의 7열 압축 리스크를 보완하기 위해 6열 정보 구조와 최소 44px 단계 터치 영역을 적용했고, 13·14단계는 중앙 정렬했다.
+- 로컬 UI 계약(v58), typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1592881 bytes로 예산 안이다.
+- PR #231 필수 checks, main workflow `37215720425`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator는 candidate `3510d2c546cbc99981d76fc15b72a4f7d8d2a6c2`, HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 자동 검증은 통과했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005`, `E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005`, `E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005`.
+
 ## 공유·연구 복사 버튼 모바일 터치 영역 명시 — ca65f61 — 2026-10-05
 
 - 사업자용 문장 복사·전체 복사·연구 결과 복사 동작의 개별 스타일에 남아 있던 34~36px 선언을 정리하고, 모바일 포함 최소 44px 터치 영역을 명시했다. UI 계약에 v52 회귀 검사를 추가했다.

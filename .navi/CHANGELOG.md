@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 회복 지도 정보 구조 고도화 — 3510d2c — 2026-10-05
+
+- 수면·회복 14단계 모바일 지도를 6열로 재배치하고 단계 버튼에 최소 44px 터치 영역을 명시했다. 13·14단계는 중앙 정렬해 경로의 끝맺음을 보완했다.
+- PR #231, main 배포 `37215720425`, 라이브 공개 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기 터치와 고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005`, `E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005`, `E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005`.
+
 ## 공유·연구 복사 버튼 모바일 터치 영역 고도화 — ca65f61 — 2026-10-05
 
 - 사업자용 문장 복사·전체 복사·연구 결과 복사 동작을 44px 이상 터치 영역으로 명시하고 v52 UI 계약 회귀 검사를 추가했다.
