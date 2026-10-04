@@ -1,5 +1,13 @@
 # Completion Report
 
+## 사업자용 5문장 전체 복사 배포 품질 게이트 — 58bbc70 — 2026-10-04
+
+- 첫 목표인 사업자 활용성을 높이기 위해 마지막 이야기 공유 장에 5문장 전체 복사 버튼을 추가했다. 기존 문장별 복사·제품 독립 공개 과학 문구·구매 CTA 부재는 유지했다.
+- PR #202 main 병합과 workflow `37187761596`의 release-verify·Pages·라이브 smoke·release status가 성공했다. live validator는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·teaser HOLD·Smart Store only·제품 독립 경계를 확인했다.
+- 로컬 및 공개 Playwright Chromium fallback 390px·1440px에서 버튼 표시·216자 복사 결과·성공 상태·5개 카드·기존 연구 다음 이동·가로폭·오류 기준을 통과했다. 완료 게이트는 닫지 않는다. Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토가 남아 NAVI 상태는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-BUSINESS-COPY-ALL-20261004, E-PLAYWRIGHT-BUSINESS-COPY-ALL-20261004, E-DEPLOY-PIPELINE-BUSINESS-COPY-ALL-20261004, E-LIVE-PUBLIC-BUSINESS-COPY-ALL-20261004.
+
 ## 연구 → 활용 → 발효와 안전 편집 흐름 배포 품질 게이트 — 8d493d3 — 2026-10-04
 
 - 국내외 활용 카드 뒤에 `활용은 만들어지는 과정에서 이어집니다` 전환과 `발효와 안전` 다음 장을 연결해 공개 안내서의 후반 읽기 흐름을 보강했다. 제품 광고·구매 CTA·새로운 효능 주장은 추가하지 않았다.

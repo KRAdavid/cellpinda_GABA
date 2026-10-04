@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 사업자용 5문장 전체 복사 공개 배포 레드팀 재검증 — 58bbc70 — 2026-10-04
+
+- 모바일·데스크톱에서 사업자용 활용 자료의 `전체 복사` 버튼이 발견되고, 클릭 뒤 성공 상태가 표시되는지 확인했다. 5개 문장 카드 펼치기와 기존 문장별 복사 흐름도 유지됐다.
+- 390px·1440px에서 가로 넘침·page error·console error는 재현되지 않았고, 기존 인지 연구 카드의 다음 연구 → 피부 연구 이동도 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았으며 결과는 PASS_WITH_CONDITIONS다.
+- 자동화와 Chromium fallback만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수를 닫을 수 없다. RT-001·RT-002·RT-003은 계속 OPEN이며 NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-BUSINESS-COPY-ALL-20261004, E-LIVE-PUBLIC-BUSINESS-COPY-ALL-20261004.
+
 ## 활용에서 발효와 안전으로 이어지는 편집 전환 레드팀 재검증 — 8d493d3 — 2026-10-04
 
 - 국내외 활용 장의 마지막 카드 다음에 편집 전환과 발효와 안전 장이 바로 이어지는지 390px·1440px에서 확인했다. 모바일은 줄바꿈 가능한 세로 흐름, 데스크톱은 수평 handoff로 표시되며 가로 넘침·page error·console error는 재현되지 않았다.

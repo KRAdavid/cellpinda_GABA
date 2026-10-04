@@ -317,6 +317,17 @@
         "E-LIVE-PUBLIC-APPLICATION-FERMENTATION-HANDOFF-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-039",
+      "statement": "마지막 이야기 공유 장에서 사업자가 GABA 핵심 5문장을 한 번에 복사할 수 있고, 모바일·데스크톱에서 제품 독립 공유 흐름과 기존 문장별 복사·연구 다음 이동이 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-BUSINESS-COPY-ALL-20261004",
+        "E-PLAYWRIGHT-BUSINESS-COPY-ALL-20261004",
+        "E-DEPLOY-PIPELINE-BUSINESS-COPY-ALL-20261004",
+        "E-LIVE-PUBLIC-BUSINESS-COPY-ALL-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5541,6 +5552,50 @@
       "captured_at": "2026-10-04T07:47:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-APPLICATION-FERMENTATION-HANDOFF",
       "claim_refs": ["C-038"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-BUSINESS-COPY-ALL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자용 GABA 5문장 전체 복사 버튼을 추가한 PR #202 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #202 source commit 511d9ea; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1490562 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/202",
+      "captured_at": "2026-10-04T08:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-BUSINESS-COPY-ALL",
+      "claim_refs": ["C-039"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-BUSINESS-COPY-ALL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 사업자용 GABA 5문장 전체 복사 버튼이 모바일·데스크톱에 표시되고, 클릭 후 `5문장을 한 번에 복사했어요` 상태와 5개 문장 카드가 확인됐다. 기존 인지 → 피부 연구 이동, 가로폭, page error·console error 0건도 유지됐다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:5186/guide/?view=guide#final; 390x844 and 1440x1000; `.guide-share-copy-all` visible; toast `5문장을 한 번에 복사했어요. 자유롭게 활용해 보세요.`; details open=true; cards=5; click #research-cognition .guide-research-next reaches `피부 연구 결과`; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/202",
+      "captured_at": "2026-10-04T08:01:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-BUSINESS-COPY-ALL",
+      "claim_refs": ["C-039"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-BUSINESS-COPY-ALL-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자용 GABA 5문장 전체 복사 PR #202가 필수 검사를 통과해 main에 병합되었고, GitHub Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #202 merge main commit 58bbc7036281b7bdfa855f3672fe589527d716b0; PR checks release-verify 37187679085 and site-quality-verify 37187679067 successful; main workflow 37187761596; release-verify 111393264249 success, worker-readiness 111393448853 success, deploy-pages 111393462067 success, smoke-live 111393497598 success, release-status 111393627416 success; deploy-worker 111393462484 skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37187761596",
+      "captured_at": "2026-10-04T08:07:29Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-BUSINESS-COPY-ALL",
+      "claim_refs": ["C-039"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-BUSINESS-COPY-ALL-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 사업자용 GABA 5문장 전체 복사를 모바일·데스크톱에서 직접 실행했다. 버튼 표시, 216자 복사 결과, 성공 상태, 5개 카드, 기존 연구 이동, 화면 폭과 오류 기준이 모두 확인됐다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 58bbc7036281b7bdfa855f3672fe589527d716b0; generatedAt 2026-10-04T08:05:47.029Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback at 390x844 and 1440x1000; copy button visible; copiedLength 216; toast success; details open=true; cards=5; click #research-cognition .guide-research-next reaches `피부 연구 결과`; scrollWidth equals viewport; pageErrors []; consoleErrors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#final",
+      "captured_at": "2026-10-04T08:08:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-BUSINESS-COPY-ALL",
+      "claim_refs": ["C-039"]
     }
   ]
 }

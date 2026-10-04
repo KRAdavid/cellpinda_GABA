@@ -1,5 +1,11 @@
 # Project Changelog
 
+## 사업자용 5문장 전체 복사 공개 배포: 2026-10-04 / candidate 58bbc70
+
+마지막 이야기 공유 장의 사업자용 활용 자료에 `전체 복사` 버튼을 추가해 GABA 핵심 5문장을 한 번에 가져갈 수 있도록 보완했다. 기존 문장별 복사와 제품 독립 문구를 유지했으며 PR #202, main workflow `37187761596`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공유 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-BUSINESS-COPY-ALL-20261004, E-PLAYWRIGHT-BUSINESS-COPY-ALL-20261004, E-DEPLOY-PIPELINE-BUSINESS-COPY-ALL-20261004, E-LIVE-PUBLIC-BUSINESS-COPY-ALL-20261004.
+
 ## 활용에서 발효와 안전으로 이어지는 편집 전환 공개 배포: 2026-10-04 / candidate 8d493d3
 
 국내외 활용 카드 뒤에 `다음 장 · 활용은 만들어지는 과정에서 이어집니다 → 발효와 안전` 전환을 추가해 연구 → 활용 → 만들어지는 과정의 방향을 한 번에 읽도록 보완했다. PR #201과 main workflow `37186666660`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.

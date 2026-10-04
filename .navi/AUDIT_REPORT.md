@@ -1,5 +1,14 @@
 # Audit Report
 
+## 사업자용 5문장 전체 복사 공개 배포 감리 — 58bbc70 — 2026-10-04
+
+- 마지막 이야기 공유 장의 사업자용 활용 자료에 `전체 복사` 버튼을 노출해 핵심 5문장을 한 번에 가져가는 경로를 만들었다. 문장별 복사, 5개 카드 펼치기, 제품 독립 안내 문구는 그대로 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. Playwright Chromium fallback으로 로컬과 GitHub Pages 공개본 390px·1440px에서 버튼 표시·복사 성공 상태·5개 카드·기존 인지 → 피부 연구 카드 이동·화면 폭·page/console error 0건을 확인했다. 라이브 복사 결과는 216자로 확인됐다.
+- PR #202의 필수 검사와 main workflow `37187761596`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator candidate `58bbc7036281b7bdfa855f3672fe589527d716b0`는 HTTP 200·STATIC·70개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 남긴다. 결과는 PASS_WITH_CONDITIONS, NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-BUSINESS-COPY-ALL-20261004, E-PLAYWRIGHT-BUSINESS-COPY-ALL-20261004, E-DEPLOY-PIPELINE-BUSINESS-COPY-ALL-20261004, E-LIVE-PUBLIC-BUSINESS-COPY-ALL-20261004.
+
 ## 활용에서 발효와 안전으로 이어지는 편집 전환 공개 배포 감리 — 8d493d3 — 2026-10-04
 
 - 국내외 활용 마지막 카드 아래 `다음 장 · 활용은 만들어지는 과정에서 이어집니다 → 발효와 안전` 전환을 추가해 연구 → 활용 → 만들어지는 과정의 방향을 보완했다. 다음 장의 발효와 안전 제목이 이어져 긴 페이지의 편집 리듬이 끊기지 않는다.

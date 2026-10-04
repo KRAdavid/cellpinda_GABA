@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-04T07:49:00Z",
+  "updated_at": "2026-10-04T08:09:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1533,7 +1533,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-04T07:49:00Z"
+    "last_run_at": "2026-10-04T08:09:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -1662,7 +1662,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-04T07:49:00Z"
+    "last_run_at": "2026-10-04T08:09:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -3307,6 +3307,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-04T07:49:00Z"
+    },
+    {
+      "id": "H-111",
+      "event": "마지막 이야기 공유 장에 사업자용 GABA 5문장 `전체 복사`를 추가해 첫 목표인 자료 활용의 마지막 행동을 한 번에 끝낼 수 있도록 보완했다. PR #202 merge `58bbc70`와 main workflow `37187761596`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고, live validator는 HTTP 200·STATIC·candidate `58bbc70`·공개 데이터 정합성을 확인했다. Playwright Chromium fallback으로 로컬과 공개 390px·1440px에서 전체 복사 버튼, 복사 성공 상태, 5개 카드, 기존 인지 → 피부 연구 카드 이동, 가로폭·page error·console error 부재를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았고 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 검증 항목으로 남겼다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-04T08:09:00Z"
     }
   ]
 }
