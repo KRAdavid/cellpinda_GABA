@@ -283,6 +283,17 @@
         "E-LIVE-PUBLIC-RESEARCH-READING-FLOW-20261004"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-036",
+      "statement": "연구 결과 카드가 끝난 뒤 국내외 활용 장으로 이어지는 편집 전환을 추가해 연구 결과에서 실제 활용 사례로 넘어가는 방향이 모바일과 데스크톱에서 한눈에 읽힌다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-APPLICATION-HANDOFF-20261004",
+        "E-PLAYWRIGHT-RESEARCH-APPLICATION-HANDOFF-20261004",
+        "E-DEPLOY-PIPELINE-RESEARCH-APPLICATION-HANDOFF-20261004",
+        "E-LIVE-PUBLIC-RESEARCH-APPLICATION-HANDOFF-20261004"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -5364,6 +5375,50 @@
       "captured_at": "2026-10-04T06:54:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-READING-FLOW",
       "claim_refs": ["C-035"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-APPLICATION-HANDOFF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 장과 국내외 활용 장 사이에 편집 전환을 추가한 PR #199 후보가 UI 계약·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "PR #199 source commit 240090a; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1486700 bytes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/199",
+      "captured_at": "2026-10-04T07:05:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261004-RESEARCH-APPLICATION-HANDOFF",
+      "claim_refs": ["C-036"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-APPLICATION-HANDOFF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback에서 연구 카드 마지막의 다음 장 전환이 모바일에서는 두 줄 편집 흐름으로, 데스크톱에서는 수평 handoff로 표시되고 기존 인지 → 피부 연구 카드 이동도 유지됐다.",
+      "locator": "Playwright Chromium fallback (Browser plugin unavailable) at http://127.0.0.1:4180/guide/?view=guide#research; 390x844 and 1440x1000; handoff text includes `연구가 생활이 되는 장면` and `국내외 활용`; scrollWidth equals viewport; click #research-cognition .guide-research-next reaches `피부 연구 결과` at 113px mobile / 125px desktop; pageErrors []; consoleErrors []",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/199",
+      "captured_at": "2026-10-04T07:05:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261004-RESEARCH-APPLICATION-HANDOFF",
+      "claim_refs": ["C-036"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-APPLICATION-HANDOFF-20261004",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과에서 국내외 활용으로 이어지는 편집 전환 PR #199가 필수 검사를 통과해 main에 병합되었고, 최신 커밋의 Pages 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #199 merge main commit 55109fde1aba3e67e64313d03f6bba16a70d446d; PR checks release-verify 37184882110 and site-quality-verify 37184882098 successful; main workflow 37184937468; release-verify 111384791109 success, worker-readiness 111384965933 success, deploy-pages 111384985356 success, smoke-live 111385022819 success, release-status 111385051052 success; deploy-worker skipped",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37184937468",
+      "captured_at": "2026-10-04T07:10:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261004-RESEARCH-APPLICATION-HANDOFF",
+      "claim_refs": ["C-036"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-APPLICATION-HANDOFF-20261004",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 결과 카드 아래 국내외 활용 전환부를 확인하고, 기존 연구 카드 다음 이동을 390px·1440px에서 재현했으며, 화면 폭·페이지 오류·콘솔 오류 없이 흐름이 유지됐다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 55109fde1aba3e67e64313d03f6bba16a70d446d; generatedAt 2026-10-04T07:10:29.466Z; bundleHashes 70; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched. Playwright live Chrome fallback at 390x844 and 1440x1000; handoff visible with `연구가 생활이 되는 장면` and `국내외 활용`; click #research-cognition .guide-research-next reaches `피부 연구 결과` at 113px mobile / 125px desktop; scrollWidth equals viewport; pageErrors []; consoleErrors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/guide/?view=guide#research",
+      "captured_at": "2026-10-04T07:11:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261004-RESEARCH-APPLICATION-HANDOFF",
+      "claim_refs": ["C-036"]
     }
   ]
 }
