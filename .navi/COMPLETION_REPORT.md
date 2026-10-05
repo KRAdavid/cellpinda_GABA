@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 7eef131 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #271과 main 공개 배포 workflow 37245784203이 성공했고, 공개 URL validator가 candidate 7eef1314d6aab545383153573a9cbbb021c6db00를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 이번 변경은 전문가 영상·썸네일 외부 미디어 연결 힌트를 진입 HTML에 추가하고 기존 지연 로딩을 보존했으며 연구 수치·출처·공개 카피·제품 데이터는 변경하지 않았다.
+- 완료 상태는 NOT_READY를 유지한다. 실제 브라우저 네트워크 waterfall, Browser/Playwright, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-MEDIA-HINTS-20261005, E-UI-CONTRACT-MEDIA-HINTS-20261005, E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005, E-LIVE-PUBLIC-MEDIA-HINTS-20261005.
+
 ## Current Release Recheck — ee77f28 — 2026-10-05
 
 - AC-003 연구 지도·상세 카드 연결을 유지하면서 카드별 최신 교차 상태로 활성 주제 선택을 안정화: PASS_WITH_CONDITIONS.

@@ -961,6 +961,17 @@
         "E-LIVE-PUBLIC-OBSERVER-STATE-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-098",
+      "statement": "공개 GABA 안내서는 YouTube 썸네일·영상 도메인에 가벼운 연결 힌트를 제공하면서 기존 지연 로딩을 유지해 모바일에서 전문가 영상이 선택될 때의 외부 미디어 연결 준비를 개선한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MEDIA-HINTS-20261005",
+        "E-UI-CONTRACT-MEDIA-HINTS-20261005",
+        "E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005",
+        "E-LIVE-PUBLIC-MEDIA-HINTS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8748,6 +8759,50 @@
       "captured_at": "2026-10-04T23:50:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-OBSERVER-STATE",
       "claim_refs": ["C-002", "C-003", "C-007", "C-097"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MEDIA-HINTS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 진입 HTML에 YouTube 썸네일 preconnect와 영상·썸네일 DNS prefetch를 추가하고 기존 지연 로딩을 유지한 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #271 source commit 58d62dd; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1604402 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/271",
+      "captured_at": "2026-10-04T23:58:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MEDIA-HINTS",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-098"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MEDIA-HINTS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 YouTube 썸네일·영상 도메인의 연결 힌트가 진입 HTML에 유지되는지 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs media-origin hint assertion; i.ytimg.com preconnect, i.ytimg.com DNS prefetch and www.youtube.com DNS prefetch are required; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/271",
+      "captured_at": "2026-10-04T23:58:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MEDIA-HINTS",
+      "claim_refs": ["C-003", "C-098"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "외부 미디어 연결 힌트 PR #271이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #271 merge main commit 7eef1314d6aab545383153573a9cbbb021c6db00; PR checks release-verify 37245708485 job 111563079661 and site-quality-verify 37245708575 job 111563080030 successful; main workflow 37245784203 with release-verify 111563296967, worker-readiness 111563489795, deploy-pages 111563506873, smoke-live 111563562184 and release-status 111563607182 successful; deploy-worker 111563507319 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37245784203",
+      "captured_at": "2026-10-05T00:02:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MEDIA-HINTS",
+      "claim_refs": ["C-001", "C-002", "C-098"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MEDIA-HINTS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 외부 미디어 연결 힌트를 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=7eef1314d6aab545383153573a9cbbb021c6db00 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 7eef1314d6aab545383153573a9cbbb021c6db00; generatedAt 2026-10-05T00:01:22.227Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Browser/Playwright and real-device readability remain external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-05T00:02:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MEDIA-HINTS",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-098"]
     }
   ]
 }

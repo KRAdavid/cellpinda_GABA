@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 7eef131 — 2026-10-05
+
+- 전문가 영상·썸네일이 선택될 때 외부 미디어 연결 준비가 늦어질 수 있는 모바일 로딩 리스크를 확인하고 PR #271에서 `i.ytimg.com` preconnect와 `i.ytimg.com`·`www.youtube.com` DNS prefetch를 진입 HTML에 추가했다. 기존 썸네일·iframe 지연 로딩은 유지했다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1604402 bytes로 예산 안이다.
+- PR #271 필수 checks, main workflow 37245784203의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 7eef1314d6aab545383153573a9cbbb021c6db00는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 연결 힌트의 정적 계약과 배포 정합성은 확인했지만 실제 브라우저 네트워크 waterfall, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MEDIA-HINTS-20261005, E-UI-CONTRACT-MEDIA-HINTS-20261005, E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005, E-LIVE-PUBLIC-MEDIA-HINTS-20261005.
+
 ## Release Recheck — ee77f28 — 2026-10-05
 
 - 연구 카드별 최신 IntersectionObserver 상태를 누적하지 않아 빠른 스크롤에서 현재 주제가 이번 콜백의 일부 항목에 좌우될 수 있는 잔여 흐름 리스크를 확인하고 PR #269에서 최신 상태 Map과 중복 발행 방지를 적용했다.

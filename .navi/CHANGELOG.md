@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 외부 미디어 연결 품질 고도화 — 7eef131 — 2026-10-05
+
+- 공개 GABA 안내서 진입 HTML에 YouTube 썸네일 preconnect와 영상·썸네일 DNS prefetch를 추가해 전문가 영상 선택 흐름의 연결 준비를 보완했다.
+- 기존 lazy loading과 제품 독립 공개 경계는 유지했다. UI 계약·typecheck·127 tests·production build/performance, PR #271 checks, main workflow 37245784203, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저 네트워크 waterfall과 대표 실기기 검증은 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MEDIA-HINTS-20261005, E-UI-CONTRACT-MEDIA-HINTS-20261005, E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005, E-LIVE-PUBLIC-MEDIA-HINTS-20261005.
+
 ## 연구 카드 활성 주제 선택 안정화 — ee77f28 — 2026-10-05
 
 - 연구 카드별 최신 IntersectionObserver 상태를 누적해 현재 가장 많이 보이는 연구 카드를 활성 주제로 선택하고, 동일 주제의 중복 발행을 건너뛰도록 보완했다.

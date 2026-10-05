@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 7eef131
+
+- 공격 관점에서 확인한 실패 모드는 전문가 영상·썸네일의 외부 연결이 첫 선택 시점에 준비되지 않아 모바일 네트워크 상태에 따라 영상 갤러리 반응이 늦어질 수 있는 것이었다. PR #271에서 미디어 origin 연결 힌트를 추가하고 기존 lazy loading을 유지했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 실제 브라우저 네트워크 waterfall, Browser/Playwright, Safari/iOS/Android 실기기가 현재 실행 환경에 없어 연결시간 개선의 실측과 브라우저별 동작은 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MEDIA-HINTS-20261005, E-UI-CONTRACT-MEDIA-HINTS-20261005, E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005, E-LIVE-PUBLIC-MEDIA-HINTS-20261005.
+
 ## Recheck — 2026-10-05 — ee77f28
 
 - 공격 관점에서 확인한 실패 모드는 IntersectionObserver 콜백에 포함된 일부 카드만 비교해 빠른 스크롤 중 활성 연구 주제가 흔들릴 수 있는 것이었다. PR #269에서 카드별 최신 상태를 누적하고 가장 높은 교차 비율을 가진 카드만 발행하도록 보완했다.
