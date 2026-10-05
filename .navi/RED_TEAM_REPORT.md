@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Final Public Evidence Recheck — 2026-10-05 — 791450b
+
+- 공격 관점에서 NAVI 문서 병합 이후 최종 공개본의 320·390·1440px 연구 도표, 가로 폭, GABA 결과 강조, runtime 오류와 공개 validator 상태를 다시 확인했다. 새 CRITICAL/MAJOR 결함은 없었다.
+- 공개 candidate `791450bc6e929ddd6597ee9084a47750682262d4`는 HTTP 200·STATIC을 반환했고, 두 비교 조건은 lane width 96·131·195px로 나란히 표시됐다. document scrollWidth 320·390·1425로 가로 넘침은 없었다.
+- 대표 Chrome CDP 렌더만으로 전체 브라우저·실기기를 보장할 수 없으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-DEPLOY-PIPELINE-NAVI-SYNC-20261006, E-LIVE-PUBLIC-NAVI-SYNC-20261006.
+
 ## Recheck — 2026-10-05 — 0acdb90
 
 - 공격 관점에서 320·390px 연구 결과 도표의 비교 조건·GABA 섭취 조건이 같은 행에 함께 보이는지, 좁은 화면 가로 넘침, GABA 결과 강조, 방향 문구, 1440px 데스크톱 회귀와 runtime 오류를 확인했다. 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.

@@ -1467,7 +1467,9 @@
         "E-LOCAL-BUILD-MOBILE-RESEARCH-COMPARISON-20261006",
         "E-UI-CONTRACT-MOBILE-RESEARCH-COMPARISON-20261006",
         "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-COMPARISON-20261006",
-        "E-LIVE-PUBLIC-MOBILE-RESEARCH-COMPARISON-20261006"
+        "E-LIVE-PUBLIC-MOBILE-RESEARCH-COMPARISON-20261006",
+        "E-DEPLOY-PIPELINE-NAVI-SYNC-20261006",
+        "E-LIVE-PUBLIC-NAVI-SYNC-20261006"
       ],
       "status": "SUPPORTED"
     }
@@ -11225,6 +11227,28 @@
       "source_uri": "https://kradavid.github.io/gaba_info/?qa=research-card-public-20261006-390#research-cognition",
       "captured_at": "2026-10-05T14:48:43Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-RESEARCH-COMPARISON",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-144"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NAVI-SYNC-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 감사·레드팀·증거 문서가 포함된 main commit 791450b가 최종 공개 배포 파이프라인을 통과했다.",
+      "locator": "PR #360 merged; main commit 791450bc6e929ddd6597ee9084a47750682262d4; workflow 37328933408; release-verify 111826750642, worker-readiness 111827300254, deploy-pages 111827335173, smoke-live 111827480586 and release-status 111827591713 successful; deploy-worker 111827336520 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37328933408",
+      "captured_at": "2026-10-05T14:59:53Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-FINAL-PUBLIC-EVIDENCE",
+      "claim_refs": ["C-001", "C-002", "C-144"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NAVI-SYNC-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main 공개본은 NAVI 동기화 이후에도 HTTP 200·STATIC·제품 독립 경계를 유지하고, 모바일 연구 결과 도표의 두 조건 나란히 비교와 GABA 결과 강조를 그대로 렌더링한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 791450bc6e929ddd6597ee9084a47750682262d4; generatedAt 2026-10-05T14:58:36Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 320·390·1440px reported scrollWidth 320/390/1425, lane widths 96/131/195, chart heights 845/765/456, GABA result accent and errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=research-card-public-20261006-390#research-cognition",
+      "captured_at": "2026-10-05T14:58:36Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-FINAL-PUBLIC-EVIDENCE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-144"]
     }
   ]

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T14:55:01.854015Z",
+  "updated_at": "2026-10-05T15:01:53.884397Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5004,6 +5004,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T14:53:41Z"
+    },
+    {
+      "id": "H-215",
+      "event": "NAVI 감사·레드팀·증거 문서를 main에 병합한 뒤 최종 공개 배포를 다시 실행했다. main commit 791450bc6e929ddd6597ee9084a47750682262d4의 workflow 37328933408에서 release-verify·Pages·라이브 smoke·release-status가 성공했고, 공개 validator는 HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·제품 독립 경계를 확인했다. Chrome CDP fallback 공개 320·390·1440px 연구 도표 QA에서 두 조건 나란히 표시, lane width 96·131·195, chart height 845·765·456, scrollWidth 320·390·1425와 runtimeErrors 0을 재확인했다. 새 CRITICAL/MAJOR 결함은 없었고 결과를 최종 공개·배포 증적 두 건으로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T15:00:40Z"
     }
   ]
 }

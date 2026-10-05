@@ -1,5 +1,13 @@
 # Audit Report
 
+## Final Public Evidence Recheck — 791450b — 2026-10-05
+
+- NAVI 감사·레드팀·증거 문서를 main에 병합한 최종 공개 candidate를 다시 확인했다. workflow `37328933408`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 validator는 HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·1개 product·6개 share page·teaser HOLD를 확인했다. Chrome CDP fallback 공개 320·390·1440px 연구 도표 QA에서도 두 조건 나란히 표시, lane width 96·131·195, chart height 845·765·456, scrollWidth 320·390·1425, runtime 오류 없음을 재확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-DEPLOY-PIPELINE-NAVI-SYNC-20261006, E-LIVE-PUBLIC-NAVI-SYNC-20261006.
+
 ## Mobile Research Comparison Chart Recheck — 0acdb90 — 2026-10-05
 
 - 좁은 모바일 연구 결과 도표에서 비교 조건과 GABA 섭취 조건이 세로로 쌓여 한 지표를 이해하는 데 스크롤이 길어지던 잔여 리스크를 확인하고, PR #359에서 두 조건을 같은 행의 두 칸으로 나란히 배치했다. GABA 결과 칸의 청록색 강조·방향 문구·측정 지표는 유지했다.
