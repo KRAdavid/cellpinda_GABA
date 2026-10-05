@@ -1329,6 +1329,17 @@
         "E-LIVE-PUBLIC-EDITORIAL-HANDOFF-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-132",
+      "statement": "큰 글씨 모드는 연구 결과 한 줄·연구 구성·출처 행동을 하나의 읽기 순서로 확대하고, 390px·1440px 공개 화면에서 가로 넘침 없이 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-LARGE-TEXT-RESEARCH-20261005",
+        "E-UI-CONTRACT-LARGE-TEXT-RESEARCH-20261005",
+        "E-DEPLOY-PIPELINE-LARGE-TEXT-RESEARCH-20261005",
+        "E-LIVE-PUBLIC-LARGE-TEXT-RESEARCH-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10546,6 +10557,50 @@
       "captured_at": "2026-10-05T10:28:38Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EDITORIAL-HANDOFF",
       "claim_refs": ["C-002", "C-003", "C-131"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-LARGE-TEXT-RESEARCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 main commit의 production build는 큰 글씨 연구 가독성 보정을 포함해 11개 정적 경로·71개 배포 파일·성능 예산 검사를 통과했다.",
+      "locator": "pnpm run build; candidateSha 82c58611da0e603f50f864155da31db701f4b018; routes 11; files 71; total assets 1618786 <= 1650000; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; validate-ui-contract, release manifest, static bundle and performance passed",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\dist",
+      "captured_at": "2026-10-05T10:47:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-LARGE-TEXT-RESEARCH",
+      "claim_refs": ["C-001", "C-002", "C-132"]
+    },
+    {
+      "id": "E-UI-CONTRACT-LARGE-TEXT-RESEARCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 큰 글씨 모드에서 연구 결과 한 줄·연구 구성·출처 행동의 증대 규칙이 유지되는지 검사한다.",
+      "locator": "pnpm run validate:ui-contract; status ok; v113 large-text research context assertion covers result lead 17.6px, study profile 14px/15px mobile and source action 12px",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-05T10:40:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-LARGE-TEXT-RESEARCH",
+      "claim_refs": ["C-003", "C-132"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-LARGE-TEXT-RESEARCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "큰 글씨 연구 가독성 보정 commit 82c5861이 main 공개 파이프라인에서 release-verify·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "main commit 82c58611da0e603f50f864155da31db701f4b018; workflow 37298550597; release-verify 111725512847, worker-readiness 111725871505, deploy-pages 111725901495, smoke-live 111725982995 and release-status 111726063897 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37298550597",
+      "captured_at": "2026-10-05T10:47:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-LARGE-TEXT-RESEARCH",
+      "claim_refs": ["C-001", "C-002", "C-132"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-LARGE-TEXT-RESEARCH-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본의 큰 글씨 모드는 390px·1440px에서 연구 결과 한 줄을 17.6px, 연구 구성 값을 15px/14px, 출처 행동을 12px로 표시하고 가로 넘침과 runtimeErrors 없이 연구·공유 화면을 유지한다.",
+      "locator": "cache-disabled Chrome CDP fallback at https://kradavid.github.io/gaba_info/?qa=large-text-{390|1440}-20261005; large-text true after control click; research card top 176px/210px; leadFont 17.6px; profileFont 15px/14px; sourceFont 12px; final copy 17.6px/17.92px; scrollWidth 390/1425; overflow []; runtimeErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=large-text-390-20261005",
+      "captured_at": "2026-10-05T10:47:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-LARGE-TEXT-RESEARCH",
+      "claim_refs": ["C-002", "C-003", "C-132"]
     }
   ]
 }
