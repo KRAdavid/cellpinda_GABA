@@ -1831,3 +1831,15 @@
   .guide-outcome-comparison-head>span.is-result{grid-area:result;justify-self:start}
   .guide-outcome-comparison-head>span:not(:first-child){min-width:0;justify-content:flex-start;white-space:nowrap;word-break:keep-all;overflow-wrap:normal;line-height:1.35}
 }
+
+/* v113 large-text research context: enlarge the answer-first result, study profile, and source action together so older readers do not lose the evidence trail after the chart. */
+.gaba-guide.is-large-text .guide-research-result-lead>strong{font-size:17.6px;line-height:1.6}
+.gaba-guide.is-large-text .guide-research-profile strong{font-size:14px;line-height:1.55}
+.gaba-guide.is-large-text .guide-research-source{font-size:13px}
+.gaba-guide.is-large-text .guide-research-source-action{font-size:12px}
+@media(max-width:700px){
+  .gaba-guide.is-large-text .guide-research-result-lead>strong{font-size:17.6px;line-height:1.62}
+  .gaba-guide.is-large-text .guide-research-profile strong{font-size:15px;line-height:1.55}
+  .gaba-guide.is-large-text .guide-research-source{font-size:13px;line-height:1.6}
+  .gaba-guide.is-large-text .guide-research-source-action{font-size:12px}
+}
