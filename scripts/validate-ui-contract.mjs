@@ -235,6 +235,10 @@ requireMatch(publicGuideStyles, /\.guide-recovery-thread-arrow\{flex:0 0 auto;co
 requireMatch(publicGuide, /guide-reading-note-flow-arrow/, 'source-reading flow must use the shared arrow icon component');
 requireMatch(publicGuideStyles, /\.guide-reading-note-flow-arrow\{flex:0 0 auto;color:#9bb6c2\}/, 'source-reading flow arrow must keep the quiet editorial connector treatment');
 requireMatch(publicGuideStyles, /\.guide-research \.guide-rail li\+li:before\{content:"";display:inline-block;flex:0 0 6px;width:6px;height:6px/, 'research reading rail must use a non-text chevron connector');
+requireMatch(publicGuide, /guide-hero-route-list[\s\S]*?수면과 회복[\s\S]*?GABA의 발견[\s\S]*?연구 지도[\s\S]*?활용 사례[\s\S]*?sr-only/, 'public GABA hero reading route must expose a semantic reading sequence with an accessible label');
+requireMatch(publicGuideStyles, /\.guide-hero-route-list li\+li:before\{content:"";display:inline-block;width:6px;height:6px/, 'public GABA hero reading route must use the same non-text chevron connector language');
+requireMatch(publicGuide, /guide-research-scale-range[\s\S]*?1950[\s\S]*?지금[\s\S]*?1950년부터 현재까지/, 'public GABA research scale must expose the time range without a text arrow dependency');
+requireMatch(publicGuideStyles, /\.guide-research-scale-range i:after\{content:""[\s\S]*?transform:rotate\(45deg\)/, 'public GABA research scale time range must use a visual chevron connector');
 if (/\.guide-expert-thread i\{/.test(publicGuideStyles)) fail('expert video handoff must not retain the retired text-arrow style');
 requireMatch(publicGuideStyles, /v37 chart readability[\s\S]*?\.guide-section-number\{font-size:11px[\s\S]*?\.guide-outcome-lane-top>strong\{font-size:\.94em\}/, 'public GABA result charts must keep comparison labels and research metadata above the mobile readability floor');
 requireMatch(publicGuide, /guide-reading-size-mark[\s\S]*?largeText \? '−' : '\+'/, 'public GABA reading-size control must expose a visible Korean size cue alongside its accessible label');
