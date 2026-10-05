@@ -233,7 +233,7 @@
 .guide-reading-note-copy{max-width:70ch;margin:0;color:#637d91;font-size:15px;line-height:1.8;letter-spacing:-.035em}
 .guide-reading-note-flow{display:flex;align-items:center;gap:11px;margin-top:20px;padding-top:15px;border-top:1px solid #d8e8ee;color:#7791a2;font-size:13px;font-weight:750}
 .guide-reading-note-flow span:first-child,.guide-reading-note-flow span:last-child{color:var(--guide-teal-dark);font-weight:850}
-.guide-reading-note-flow i{color:#9bb6c2;font-style:normal}
+.guide-reading-note-flow-arrow{flex:0 0 auto;color:#9bb6c2}
 .guide-final-actions{grid-template-columns:minmax(0,390px)}
 @media(max-width:700px){
   .guide-rail{display:block;margin-top:25px}
@@ -895,7 +895,7 @@
 .guide-recovery-thread{display:flex;align-items:center;justify-content:center;gap:11px;margin:25px 0 0;color:#87a0ac;font-size:11px;letter-spacing:-.02em}
 .guide-recovery-thread span{color:var(--guide-teal-dark);font-weight:850}
 .guide-recovery-thread strong{color:var(--guide-ink);font-weight:850}
-.guide-recovery-thread i{color:#9bb7c0;font-style:normal}
+.guide-recovery-thread-arrow{flex:0 0 auto;color:#9bb7c0}
 @keyframes guide-recovery-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes guide-recovery-card-in{from{opacity:.55;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:700px){

@@ -230,6 +230,10 @@ requireMatch(publicGuideStyles, /h1\[tabindex="-1"\]:focus-visible[\s\S]*?h2\[ta
 requireMatch(publicGuideStyles, /v108 chapter entry rhythm[\s\S]*?\.guide-section\.guide-story-section\{padding-top:72px\}[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-section\.guide-story-section\{padding-top:58px\}/, 'public GABA chapter entry must avoid duplicating the sticky-header clearance with an oversized top gap');
 requireMatch(publicGuide, /guide-expert-thread-arrow/, 'expert video to source handoff must use the shared arrow icon component');
 requireMatch(publicGuideStyles, /\.guide-expert-thread-arrow\{flex:0 0 auto;color:#9ab4c0\}/, 'expert video to source handoff arrow must keep the editorial connector treatment');
+requireMatch(publicGuide, /guide-recovery-thread-arrow/, 'recovery chapter thread must use the shared arrow icon component');
+requireMatch(publicGuideStyles, /\.guide-recovery-thread-arrow\{flex:0 0 auto;color:#9bb7c0\}/, 'recovery chapter thread arrow must keep the quiet editorial connector treatment');
+requireMatch(publicGuide, /guide-reading-note-flow-arrow/, 'source-reading flow must use the shared arrow icon component');
+requireMatch(publicGuideStyles, /\.guide-reading-note-flow-arrow\{flex:0 0 auto;color:#9bb6c2\}/, 'source-reading flow arrow must keep the quiet editorial connector treatment');
 requireMatch(publicGuideStyles, /v37 chart readability[\s\S]*?\.guide-section-number\{font-size:11px[\s\S]*?\.guide-outcome-lane-top>strong\{font-size:\.94em\}/, 'public GABA result charts must keep comparison labels and research metadata above the mobile readability floor');
 requireMatch(publicGuide, /guide-reading-size-mark[\s\S]*?largeText \? '−' : '\+'/, 'public GABA reading-size control must expose a visible Korean size cue alongside its accessible label');
 requireMatch(publicGuideStyles, /v47 mobile reading clarity[\s\S]*?\.guide-header \.guide-reading-size-toggle \.guide-reading-size-mark\{[\s\S]*?clip:auto/, 'public GABA mobile reading-size cue must remain visible after the shared visually-hidden label rules');
