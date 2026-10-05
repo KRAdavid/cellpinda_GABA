@@ -1877,7 +1877,7 @@ export default function PublicGabaGuide() {
               </div>
             </div>
             <p className="guide-expert-note guide-video-gallery-note">각 채널에서 공개한 짧은 영상을 모았습니다. 선택한 영상은 이 페이지에서 바로 재생되며, 원문 링크도 함께 제공합니다.</p>
-            <button type="button" className="guide-expert-thread" aria-label="전문가 영상 다음 읽기 흐름" onClick={() => scrollTo('reading-note')}><span>다음 장</span><strong>연구를 읽는 기준</strong><i aria-hidden="true">→</i><strong>원문 출처</strong></button>
+            <button type="button" className="guide-expert-thread" aria-label="전문가 영상 다음 읽기 흐름" onClick={() => scrollTo('reading-note')}><span>다음 장</span><strong>연구를 읽는 기준</strong><ArrowRight className="guide-expert-thread-arrow" size={17} aria-hidden="true" /><strong>원문 출처</strong></button>
           </div>
         </section>
 
