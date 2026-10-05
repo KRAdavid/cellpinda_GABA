@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T22:29:08.178719Z",
+  "updated_at": "2026-10-05T22:46:14.149848Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5187,6 +5187,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T22:25:00Z"
+    },
+    {
+      "id": "H-238",
+      "event": "v129에서 전문가 영상 게시판의 초기 선택 카드가 실제 재생 전인데도 `재생 중`으로 표시되고 썸네일의 `선택 후 재생`과 충돌하던 상태를 보완했다. 카드 상태를 `선택됨`·`준비 중`·`재생 중`으로 분리하고 aria-label도 같은 lifecycle로 맞췄다. 390px·1440px 로컬 및 공개 Playwright Chromium fallback에서 첫 카드 `선택됨`, 두 번째 선택 직후 `준비 중`, iframe load 후 `재생 중`, iframe 1개·가로폭 일치·runtime errors 0을 확인했다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했고 PR #399는 main `a5e3f72`로 병합됐다. main workflow `37384062137`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 공개 validator는 candidate `a5e3f72fce5f8a2dbe681ef98d0698f5989a4986`·HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-160과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T22:45:00Z"
     }
   ]
 }

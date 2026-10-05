@@ -1648,6 +1648,18 @@
         "E-LIVE-PUBLIC-RESEARCH-SUBPROGRESS-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-160",
+      "statement": "전문가 영상 게시판의 선택 상태가 실제 재생 lifecycle과 일치하도록 초기 선택·영상 준비·재생 상태를 구분해 표시하고, 390px·1440px 공개 화면에서 두 번째 영상을 선택하면 `선택됨`·`준비 중`·`재생 중`으로 순차 갱신된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-VIDEO-STATE-20261006",
+        "E-UI-CONTRACT-VIDEO-STATE-20261006",
+        "E-PLAYWRIGHT-VIDEO-STATE-20261006",
+        "E-DEPLOY-PIPELINE-VIDEO-STATE-20261006",
+        "E-LIVE-PUBLIC-VIDEO-STATE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12167,6 +12179,58 @@
       "captured_at": "2026-10-05T22:25:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-SUBPROGRESS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-159"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 상태 문구 개선 commit 5c57e10이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 5c57e10387713e61889f7349231e7f6d9c3fd331; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1631124 <= 1650000",
+      "captured_at": "2026-10-05T22:40:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-VIDEO-STATE",
+      "claim_refs": ["C-001", "C-003", "C-160"]
+    },
+    {
+      "id": "E-UI-CONTRACT-VIDEO-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 전문가 영상 카드의 선택됨·준비 중·재생 중 상태와 각 상태에 맞는 접근성 이름을 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v129 expert video state assertion for getExpertVideoState, current selection/loading/playing labels and videoState.badge; status ok; events 14",
+      "captured_at": "2026-10-05T22:40:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-VIDEO-STATE",
+      "claim_refs": ["C-160"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-VIDEO-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback으로 로컬 공개 안내서에서 전문가 영상 상태가 선택됨·준비 중·재생 중으로 순차 전환되고 iframe과 가로폭이 유지되는지 확인했다.",
+      "locator": "temporary Playwright script outside repository at http://127.0.0.1:4191/?view=guide#expert-videos and public https://kradavid.github.io/gaba_info/?view=guide#expert-videos; 390/1440px initial first card `선택됨`, second card click `준비 중`, after iframe load `재생 중`; aria-labels matched each state; iframe count 1; document scrollWidth equals viewport; runtime errors 0; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T22:43:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-VIDEO-STATE",
+      "claim_refs": ["C-003", "C-004", "C-160"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 상태 개선 PR #399가 필수 검사를 통과해 main merge commit a5e3f72로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #399; code commit 5c57e10387713e61889f7349231e7f6d9c3fd331; main merge commit a5e3f72fce5f8a2dbe681ef98d0698f5989a4986; main workflow 37384062137; release-verify 112012885920, worker-readiness 112013195958, deploy-pages 112013257981, smoke-live 112013336842 and release-status 112013401592 successful; deploy-worker 112013258639 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37384062137",
+      "captured_at": "2026-10-05T22:44:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-VIDEO-STATE",
+      "claim_refs": ["C-001", "C-002", "C-160"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 전문가 영상 카드의 초기 선택·준비·재생 상태와 접근성 이름이 실제 iframe lifecycle과 일치한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha a5e3f72fce5f8a2dbe681ef98d0698f5989a4986; generatedAt 2026-10-05T22:42:18.860Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; public Playwright Chromium fallback 390/1440: first card `선택됨`, second card -> `준비 중` -> `재생 중`, iframe count 1, matching aria-labels, document scrollWidth equals viewport, errors []; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=video-state-public-20261006#expert-videos",
+      "captured_at": "2026-10-05T22:45:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-VIDEO-STATE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-160"]
     }
   ]
 }

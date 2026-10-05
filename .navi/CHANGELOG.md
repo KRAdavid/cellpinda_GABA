@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 선택 상태 정합성·공개 배포 — a5e3f72 — 2026-10-06
+
+- 전문가 영상 카드의 초기 `재생 중` 과대표시를 제거하고 `선택됨`·`준비 중`·`재생 중`의 세 상태를 실제 iframe lifecycle과 맞췄다.
+- 각 카드의 접근성 이름도 같은 상태를 전달하며, 선택 즉시 재생 흐름과 390·1440px 반응형 레이아웃은 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 390·1440px 공개 상호작용 검증을 통과했고 PR #399가 main `a5e3f72`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+
+증적: E-LOCAL-BUILD-VIDEO-STATE-20261006, E-UI-CONTRACT-VIDEO-STATE-20261006, E-PLAYWRIGHT-VIDEO-STATE-20261006, E-DEPLOY-PIPELINE-VIDEO-STATE-20261006, E-LIVE-PUBLIC-VIDEO-STATE-20261006.
+
 ## 연구 구간 내부 진행 표시·공개 배포 — cea481f — 2026-10-06
 
 - 연구 지도 상단에 전체 장 진행과 연구 내부 순서를 함께 표시해, 긴 연구 카드 구간에서도 현재 위치를 바로 읽을 수 있게 했다. 세 번째 주제 선택 시 `06 / 12 · 연구 03 / 05`로 갱신된다.

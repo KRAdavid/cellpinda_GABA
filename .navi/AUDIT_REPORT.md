@@ -1,5 +1,14 @@
 # Audit Report
 
+## Expert Video Selection State Clarity — a5e3f72 — 2026-10-06
+
+- v129에서 전문가 영상 게시판의 초기 선택 카드가 실제 재생 전인데도 `재생 중`으로 보이던 상태 불일치를 수정했다. 카드 상태와 접근성 이름을 `선택됨`·`준비 중`·`재생 중`으로 실제 iframe lifecycle에 맞췄다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. Playwright Chromium fallback 로컬·공개 390px·1440px에서 첫 카드 `선택됨`, 두 번째 영상 선택 직후 `준비 중`, iframe load 후 `재생 중`, iframe 1개·가로폭 일치·runtime errors 0을 확인했다.
+- PR #399는 main `a5e3f72`로 병합되었고 workflow `37384062137`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `a5e3f72fce5f8a2dbe681ef98d0698f5989a4986`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-VIDEO-STATE-20261006, E-UI-CONTRACT-VIDEO-STATE-20261006, E-PLAYWRIGHT-VIDEO-STATE-20261006, E-DEPLOY-PIPELINE-VIDEO-STATE-20261006, E-LIVE-PUBLIC-VIDEO-STATE-20261006.
+
 ## Research Subprogress Reading Rail — cea481f — 2026-10-06
 
 - v128에서 연구 지도 구간의 상단 진행 표시가 전체 장 번호만 보여 현재 연구 위치를 즉시 알기 어려운 문제를 보완했다. 연구 구간에서는 전체 흐름과 연구 내부 순서를 함께 표시해 `06 / 12 · 연구 03 / 05`처럼 읽는 위치를 한 줄로 확인할 수 있다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Expert Video Selection State Clarity — 2026-10-06 — a5e3f72
+
+- 공격 관점에서 초기 전문가 영상 카드의 표시 상태, 두 번째 카드 선택 직후의 준비 상태, iframe load 이후의 재생 상태와 aria-label을 390px·1440px에서 대조했다.
+- `선택됨` → `준비 중` → `재생 중`이 순서대로 일치했고 iframe 1개·document scrollWidth·runtime errors 0을 확인했다. 기존의 초기 `재생 중` 과대표시와 썸네일 `선택 후 재생`의 충돌은 제거됐다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser 플러그인 부재로 Chromium fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-VIDEO-STATE-20261006, E-LIVE-PUBLIC-VIDEO-STATE-20261006, E-DEPLOY-PIPELINE-VIDEO-STATE-20261006.
+
 ## Research Subprogress Reading Rail — 2026-10-06 — cea481f
 
 - 공격 관점에서 연구 지도에 직접 진입한 뒤 320px·390px·1440px에서 전체 장 번호와 연구 내부 순서가 함께 보이는지, 세 번째 지도 항목 선택이 진행 표시·live status·활성 카드와 일치하는지 확인했다.
