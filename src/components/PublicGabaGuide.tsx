@@ -1820,11 +1820,18 @@ export default function PublicGabaGuide() {
             </div>
             <div className="guide-fermented-steps">{fermentedSafetySteps.map((step) => <article className="guide-fermented-step" key={step.number}><div className="guide-fermented-step-top"><span className="guide-fermented-step-number">{step.number}</span><span className="guide-fermented-step-icon"><FermentedSafetyIcon type={step.icon} /></span><span>{step.eyebrow}</span></div><h3>{step.title}</h3><p>{step.body}</p><a href={step.source.url} target="_blank" rel="noopener noreferrer">{step.source.label} <ExternalLink size={13} aria-hidden="true" /></a></article>)}</div>
             <p className="guide-fermented-note"><Check size={16} aria-hidden="true" /> 발효 GABA의 안전성은 발효했다는 사실만으로 판단하는 것이 아니라, 균주·공정·최종 원료·사람 대상 연구가 함께 쌓인 공개 기록으로 살펴볼 수 있습니다.</p>
+            <div className="guide-research-handoff guide-fermentation-handoff" aria-label="발효와 안전에서 성장 연구로 이어지는 다음 읽기 흐름">
+              <span className="guide-research-handoff-kicker">다음 장</span>
+              <strong>식품 연구에서 몸의 신호로</strong>
+              <span className="guide-research-handoff-line" aria-hidden="true" />
+              <span className="guide-research-handoff-next">성장 연구</span>
+              <ArrowRight size={17} aria-hidden="true" />
+            </div>
           </div>
         </section>
 
         <section className="guide-section guide-growth-story guide-story-section" id="growth" aria-labelledby="growth-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · 성장 연구</p><h2 id="growth-heading" tabIndex={-1}>성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞서 본 근육·성장호르몬 연구에서는 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 살폈습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p></div>
+          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · 성장 연구</p><h2 id="growth-heading" tabIndex={-1}>성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞서 본 근육·성장호르몬 연구에서는 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 살폈습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p><div className="guide-research-handoff guide-growth-handoff" aria-label="성장 연구에서 전문가 영상으로 이어지는 다음 읽기 흐름"><span className="guide-research-handoff-kicker">다음 장</span><strong>연구를 설명하는 목소리로</strong><span className="guide-research-handoff-line" aria-hidden="true" /><span className="guide-research-handoff-next">전문가 영상</span><ArrowRight size={17} aria-hidden="true" /></div></div>
         </section>
 
         <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
