@@ -1921,6 +1921,6 @@
 .guide-hero-story .guide-hero-scroll:focus-visible{border-color:rgba(18,154,163,.72);outline:3px solid rgba(18,154,163,.24);outline-offset:4px;color:var(--guide-teal-dark)}
 @media(prefers-reduced-motion:reduce){.guide-hero-story .guide-hero-scroll{transition:none}}
 
-/* v120 research map scale cue: give the central node's five-area summary a readable hierarchy on small screens. */
+/* v121 research map mobile cue floor: keep the five-area summary readable on narrow phones for older readers. */
 .guide-research-orbit-core small{color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:-.03em;line-height:1.2;white-space:nowrap}
-@media(max-width:700px){.guide-research-orbit-core small{font-size:9px}}
+@media(max-width:700px){.guide-research-orbit-core small{font-size:10px}}
