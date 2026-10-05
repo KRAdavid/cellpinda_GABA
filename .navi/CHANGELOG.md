@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 하단 콘텐츠 점진 렌더링 고도화 — 98c59eb — 2026-10-05
+
+- 국내외 활용·발효·성장·전문가 영상·출처·공유 섹션에 `content-visibility:auto`와 예약 높이를 적용해 장문의 공개 안내서가 하단 콘텐츠를 필요한 시점에 렌더링하도록 보완했다.
+- 연구 카드의 IntersectionObserver 기반 활성 주제 연결과 제품 독립 공개 경계는 유지했다. UI 계약·typecheck·127 tests·production build/performance, PR #273 checks, main workflow 37246552896, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저 성능 trace와 대표 실기기 검증은 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005, E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005, E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005, E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005.
+
 ## 외부 미디어 연결 품질 고도화 — 7eef131 — 2026-10-05
 
 - 공개 GABA 안내서 진입 HTML에 YouTube 썸네일 preconnect와 영상·썸네일 DNS prefetch를 추가해 전문가 영상 선택 흐름의 연결 준비를 보완했다.
