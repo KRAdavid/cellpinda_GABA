@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 2c1bca9
+
+- 공격 관점에서 모바일 줄바꿈 전용 요소가 사라지는 태블릿·데스크톱 조건을 확인했고, 발견 섹션 제목이 `이름도없었습니다`로 붙는 실패 모드를 재현했다. PR #331에서 공백을 요소 밖으로 이동해 보정했다.
+- 공개 390·768·1440px Chrome CDP fallback에서 `처음에는 이름도 없었습니다. 다만, 뇌 속에 있었습니다.`가 동일하게 읽히고 가로 넘침·이름 없는 컨트롤·누락 alt·누락 iframe title·중복 ID·heading jump·runtimeErrors가 없었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 대표 Chrome 렌더 확인이지 전체 브라우저·실기기 보장은 아니다. Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-HISTORY-HEADING-SPACING-20261005, E-UI-CONTRACT-HISTORY-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-HISTORY-HEADING-SPACING-20261005, E-LIVE-PUBLIC-HISTORY-HEADING-SPACING-20261005.
+
 ## Recheck — 2026-10-05 — 9c1a5cf
 
 - 공격 관점에서 첫 화면 H1과 장 제목의 줄바꿈을 제거·복사·보조기기 읽기 상황에 적용했을 때 `저속노화,회복하는`, `시작됩니다그`, `넘어여러`처럼 단어가 붙는 실패 모드를 확인했다. PR #328·#329에서 의미 있는 JSX 공백과 정적 제목 공백을 보존하고 UI 계약으로 회귀를 고정했다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T09:13:00Z",
+  "updated_at": "2026-10-05T09:36:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T09:13:00Z"
+    "last_run_at": "2026-10-05T09:36:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2307,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T09:13:00Z"
+    "last_run_at": "2026-10-05T09:36:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4878,6 +4878,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T09:13:00Z"
+    },
+    {
+      "id": "H-197",
+      "event": "태블릿·데스크톱에서 발견 섹션 제목이 `이름도없었습니다`로 붙어 읽힐 수 있는 실제 반응형 한국어 퍼블리싱 결함을 확인했다. PR #331에서 모바일 줄바꿈 전용 span 밖으로 공백을 이동하고 UI 계약에 발견 제목 경계 회귀 검사를 추가했다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했고 PR #331 checks와 main workflow 37290461697의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. 최신 live candidate 2c1bca9eacd16149debff1a580155996b335987e는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 유지한다. 캐시를 비활성화한 Chrome CDP fallback 공개 390·768·1440px에서 발견 제목의 textContent 공백과 scrollWidth 390·753·1425, 접근성 기본 점검·runtimeErrors 0을 확인했다. 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T09:36:00Z"
     }
   ]
 }

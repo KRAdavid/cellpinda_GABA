@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 발견 제목 반응형 공백 감리·보강 — 2c1bca9 — 2026-10-05
+
+- 태블릿·데스크톱에서 모바일 줄바꿈 전용 요소가 숨겨질 때 `처음에는 이름도없었습니다`로 붙어 보이는 실제 한국어 퍼블리싱 결함을 확인했다. 공백을 줄바꿈 요소 밖으로 이동하고 UI 계약에 발견 제목 전용 회귀 조건을 추가했다.
+- PR #331 checks와 main workflow `37290461697`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다. 최신 공개 candidate `2c1bca9eacd16149debff1a580155996b335987e`는 HTTP 200, STATIC, 12 claims, 6 research records, 1 product, 6 share pages, teaser HOLD를 제공한다.
+- 캐시를 비활성화한 Chrome CDP 공개 390·768·1440px에서 발견 제목의 자연스러운 textContent, scrollWidth 390·753·1425, 접근성 기본 점검과 runtimeErrors 0을 확인했다. 연구 수치·출처·공개 카피 의미·제품 독립 경계는 변경하지 않았다.
+
+증적: E-LOCAL-BUILD-HISTORY-HEADING-SPACING-20261005, E-UI-CONTRACT-HISTORY-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-HISTORY-HEADING-SPACING-20261005, E-LIVE-PUBLIC-HISTORY-HEADING-SPACING-20261005.
+
 ## 공개 한국어 제목 공백 감리·보강 — 9c1a5cf — 2026-10-05
 
 - 자동 한글 감리에서 줄바꿈 경계의 공백이 사라져 `저속노화,회복하는`, `시작됩니다그`, `넘어여러`처럼 읽힐 수 있는 실제 제목 결함을 확인했다. PR #328에서 장 제목을, PR #329에서 첫 화면 H1과 정적 no-script 제목을 보정하고 UI 계약에 제목 공백 회귀 조건을 추가했다.
