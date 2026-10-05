@@ -1115,6 +1115,17 @@
         "E-LIVE-PUBLIC-RESEARCH-VIDEO-DESTINATION-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-112",
+      "statement": "공개 GABA 안내서의 모바일 연구 지도는 명명된 선택 그룹으로 전달되고 각 연구 주제의 선택 상태를 보조기기에 노출하며, 중심의 현재 주제 문구는 기본 11px·큰 글씨 12px로 표시된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261005",
+        "E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9518,6 +9529,50 @@
       "captured_at": "2026-10-05T03:36:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-VIDEO-DESTINATION",
       "claim_refs": ["C-002", "C-003", "C-111"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도를 명명된 선택 그룹으로 노출하고 모바일 현재 주제 문구를 보강한 v103 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #299 source commit 1af93ba; pnpm run validate:ui-contract PASS including v103 research-map-context assertions; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1609965 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/299",
+      "captured_at": "2026-10-05T03:47:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-112"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구 지도 group 역할, 연구 주제 aria-pressed 선택 상태, 모바일 현재 주제 문구의 v103 읽기 크기와 큰 글씨 변형을 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v103 assertions; PublicGabaGuide.tsx gives guide-research-map role=group and topic buttons aria-pressed; PublicGabaGuide.css sets the compact-orbit active topic to 11px on mobile and 12px in large-text mode; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/299",
+      "captured_at": "2026-10-05T03:47:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-003", "C-112"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 지도 맥락 PR #299가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #299 merge main commit 594352e3c39b3eb15aee6095d4245cabaa5272d8; PR checks release-verify 37260886688 and site-quality-verify 37260886673 successful; main workflow 37260971979 with release-verify 111607935368, worker-readiness 111608170470, deploy-pages 111608193136, smoke-live 111608233104 and release-status 111608271764 successful; deploy-worker 111608193684 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37260971979",
+      "captured_at": "2026-10-05T03:51:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-112"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 모바일 연구 지도 맥락 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=594352e3c39b3eb15aee6095d4245cabaa5272d8 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 594352e3c39b3eb15aee6095d4245cabaa5272d8; generatedAt 2026-10-05T03:50:43.910Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-05T03:51:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-002", "C-003", "C-112"]
     }
   ]
 }

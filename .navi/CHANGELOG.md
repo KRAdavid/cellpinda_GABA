@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 연구 지도 맥락·가독성 고도화 — 594352e — 2026-10-05
+
+- 연구 지도를 명명된 선택 그룹으로 노출하고 주제 버튼에 선택 상태를 추가했다. 모바일 중심 현재 주제 문구는 11px, 큰 글씨 모드에서는 12px로 표시한다.
+- 연구 수치·출처·공개 카피·제품 독립 공개 경계는 유지했다. UI 계약 v103·typecheck·127개 테스트·production build/performance, PR #299 checks, main workflow 37260971979, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261005.
+
 ## 연구·영상 선택 대상 연결 고도화 — 4b30428 — 2026-10-05
 
 - 연구 확장 지도 버튼이 `research-flow` 명명 영역으로 이동·초점을 연결하고, 전문가 영상 카드가 대표 영상 영역을 `aria-controls`로 명시하도록 보강했다. 선택·포커스 상태도 시각적으로 구분했다.

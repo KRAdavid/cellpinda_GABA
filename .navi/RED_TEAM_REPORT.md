@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 594352e
+
+- 공격 관점에서 확인한 실패 모드는 모바일 연구 지도에서 중심의 현재 주제가 너무 작게 표시되고, 지도 선택이 보조기기에 일반 장식 영역처럼 전달되어 현재 선택과 다음 연구 카드의 관계를 잃는 것이었다. PR #299에서 지도에 명명된 group 역할과 주제별 `aria-pressed` 상태를 추가하고 모바일 현재 주제 문구를 확대했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 다만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 환경에서 증명하지 않았으므로 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261005.
+
 ## Recheck — 2026-10-05 — 4b30428
 
 - 공격 관점에서 확인한 실패 모드는 연구 지도나 전문가 영상 카드를 선택해도 보조기기가 실제로 갱신되는 연구 결과·대표 영상 영역을 명시적으로 알지 못해, 화면의 선택 상태와 읽기 목적지가 분리되는 것이었다. PR #297에서 연구 선택을 `research-flow` 명명 영역에, 영상 선택을 `expert-video-feature` 대상에 연결하고 선택·포커스 윤곽을 추가했다.

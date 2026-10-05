@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T03:39:19.060150Z",
+  "updated_at": "2026-10-05T03:53:21.600985Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4691,6 +4691,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T03:36:00Z"
+    },
+    {
+      "id": "H-182",
+      "event": "모바일 연구 지도 중심의 현재 주제 문구가 9px까지 축소되어 고령 독자가 선택한 연구 맥락을 빠르게 읽기 어려울 수 있고, 지도 자체가 보조기기에서 하나의 선택 그룹으로 전달되지 않을 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #299에서 연구 지도를 명명된 group으로 고정하고 주제 버튼에 aria-pressed 선택 상태를 추가했으며, 모바일 중심의 현재 주제 문구를 11px로, 큰 글씨 모드에서는 12px로 보강했다. 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다. v103 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #299 checks, main workflow 37260971979의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 live validator candidate 594352e3c39b3eb15aee6095d4245cabaa5272d8는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. NAVI 로컬 감사는 IN_PROGRESS_WITH_GATES·local checks WAITING·auditFailed false·publicExportChanged false를 유지한다. 브라우저 자동화와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T03:51:00Z"
     }
   ]
 }
