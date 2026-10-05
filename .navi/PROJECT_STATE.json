@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T07:01:00.000000Z",
+  "updated_at": "2026-10-05T07:24:00.000000Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2111,7 +2111,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T07:01:00Z"
+    "last_run_at": "2026-10-05T07:24:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2291,7 +2291,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T07:01:00Z"
+    "last_run_at": "2026-10-05T07:24:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4827,6 +4827,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T07:01:00Z"
+    },
+    {
+      "id": "H-192",
+      "event": "1440px 데스크톱 hero 사진 위의 '아래로 읽기' 안내가 배경과 충분히 분리되지 않아 긴 안내서의 다음 읽기 방향이 약하게 보일 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #320에서 701px 이상 hero 읽기 안내를 반투명 흰색 pill·테두리·그림자·blur로 보강하고 UI 계약에 v109 대비 조건을 추가했다. 모바일 안내·연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다. PR #320 checks와 main workflow 37277241941의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 live candidate 22265413532d4264cb9640070a677aebbe66dbf7은 HTTP 200·STATIC·12개 공개 claim·6개 연구 record·제품 독립 경계를 확인했다. 캐시를 비활성화한 Chrome CDP fallback 공개 1440px에서 안내의 border/background/backdrop-filter와 scrollWidth=1425를, 390px에서 모바일 안내와 scrollWidth=390을 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T07:24:00Z"
     }
   ]
 }

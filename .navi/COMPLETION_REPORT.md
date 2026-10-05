@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 2226541 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-002 데스크톱·모바일 hero 읽기 안내와 가로 폭 안정성: PASS.
+- AC-005 UI 계약·typecheck·규칙/API 테스트·production build·성능 예산·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #320과 main 공개 배포 workflow `37277241941`가 성공했고, 공개 manifest는 candidate `22265413532d4264cb9640070a677aebbe66dbf7`, HTTP 200, STATIC, 12 claims, 6 research, 1 product, teaser HOLD를 확인했다.
+- 캐시 비활성화 Chrome CDP fallback 공개 1440px에서 데스크톱 안내의 대비 분리와 `scrollWidth=1425`, 390px에서 모바일 안내와 `scrollWidth=390`을 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 브라우저 전체 조합, 대표 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-DESKTOP-READING-CUE-20261005, E-UI-CONTRACT-DESKTOP-READING-CUE-20261005, E-DEPLOY-PIPELINE-DESKTOP-READING-CUE-20261005, E-LIVE-PUBLIC-DESKTOP-READING-CUE-20261005.
+
 ## Current Release Recheck — 2c7433b — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

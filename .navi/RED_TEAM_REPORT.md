@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 2226541
+
+- 공격 관점에서 확인한 실패 모드는 1440px 데스크톱 hero 사진 위의 `아래로 읽기` 안내가 낮은 대비로 묻혀 방문자가 긴 안내서의 다음 장면을 놓치는 것이었다. PR #320에서 701px 이상 안내를 pill·테두리·그림자·blur로 분리하고 v109 UI 계약으로 회귀를 고정했다.
+- PR #320 checks와 main Pages 배포·라이브 smoke·release status가 통과했다. 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 캐시 비활성화 Chrome CDP fallback 공개 1440px에서 `border`, `rgba(255,255,255,.72)` 배경, `blur(8px)`, `scrollWidth=1425`를 확인했고 390px에서는 모바일 안내와 `scrollWidth=390`을 확인했다. 다만 이는 대표 렌더 확인이지 전체 브라우저·실기기 보장은 아니다. Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-DESKTOP-READING-CUE-20261005, E-UI-CONTRACT-DESKTOP-READING-CUE-20261005, E-DEPLOY-PIPELINE-DESKTOP-READING-CUE-20261005, E-LIVE-PUBLIC-DESKTOP-READING-CUE-20261005.
+
 ## Recheck — 2026-10-05 — 2c7433b
 
 - 공격 관점에서 381–430px에서 메뉴 아이콘과 이름이 표시된 읽기 크기 버튼이 겹쳐 헤더의 조작 의미가 흐려지는 실패 모드를 확인했다. PR #318에서 메뉴 오프셋을 보정해 컨트롤 사이 12px 간격을 고정했다.
