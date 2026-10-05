@@ -1741,3 +1741,22 @@
   .guide-reading-note-steps li>span{background:#fff}
   .guide-reading-note-source{padding-right:15px}
 }
+
+/* v105 mobile research card layout: keep the study title and result lead in a readable vertical rhythm. */
+@media(max-width:900px){
+  .gaba-guide .guide-research-detail-inline .guide-research-inline-heading{
+    display:grid;
+    grid-template-columns:24px 62px minmax(0,1fr);
+    align-items:center;
+    gap:10px;
+  }
+  .gaba-guide .guide-research-detail-inline .guide-research-inline-heading h3{min-width:0;overflow-wrap:break-word}
+  .gaba-guide .guide-research-detail-inline .guide-research-result-lead{grid-column:1 / -1;flex:none}
+}
+@media(max-width:700px){
+  .gaba-guide .guide-research-detail-inline .guide-research-inline-heading{
+    grid-template-columns:24px minmax(0,43px) minmax(0,1fr);
+    gap:8px;
+  }
+  .gaba-guide .guide-research-detail-inline .guide-research-result-lead{grid-column:1 / -1;width:100%}
+}
