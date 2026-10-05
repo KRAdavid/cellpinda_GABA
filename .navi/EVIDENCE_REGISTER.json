@@ -1508,6 +1508,16 @@
         "E-LIVE-PUBLIC-READING-SIZE-LABEL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-148",
+      "statement": "첫 화면의 `3분 읽기 시작` 컨트롤은 사진 위에서도 또렷한 최소 40px 터치 영역과 키보드 초점 표시를 제공하며, 선택 시 수면과 회복 도입부로 자연스럽게 이어진다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-HERO-CUE-CONTRAST-20261006",
+        "E-UI-CONTRACT-HERO-CUE-CONTRAST-20261006",
+        "E-CDP-HERO-CUE-CONTRAST-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11444,6 +11454,36 @@
       "captured_at": "2026-10-05T16:35:56Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-READING-SIZE-LABEL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-147"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-HERO-CUE-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면 읽기 진입 컨트롤의 대비·터치 영역 보정 commit 7d0f71e가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 7d0f71e7a525dfbfffcd2404294fd58597d622e6; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1627086 <= 1650000",
+      "captured_at": "2026-10-06T02:00:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-HERO-CUE-CONTRAST",
+      "claim_refs": ["C-001", "C-003", "C-146", "C-148"]
+    },
+    {
+      "id": "E-UI-CONTRACT-HERO-CUE-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 회귀 검사가 첫 화면 읽기 진입 컨트롤에 최소 40px 터치 영역·사진 위 대비·호버·키보드 초점·축소 모션 대응이 유지되는지 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v118 hero reading start cue assertion; status ok; events 14",
+      "captured_at": "2026-10-06T02:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-HERO-CUE-CONTRAST",
+      "claim_refs": ["C-148"]
+    },
+    {
+      "id": "E-CDP-HERO-CUE-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 Chrome CDP fallback에서 390px·1440px 첫 화면 컨트롤의 표시·크기·이동 동작과 가로 폭을 확인했다.",
+      "locator": "temporary Chrome CDP script outside repository at http://127.0.0.1:4191; 390px: button visible, text 3분 읽기 시작, buttonWidth 142, scrollWidth 390, click hash #opening-bridge, openingTop 16; 1440px: button visible, buttonWidth 146, scrollWidth 1425, click hash #opening-bridge, openingTop 8; runtime errors []",
+      "captured_at": "2026-10-06T02:00:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261006-HERO-CUE-CONTRAST",
+      "claim_refs": ["C-148"]
     }
   ]
 }

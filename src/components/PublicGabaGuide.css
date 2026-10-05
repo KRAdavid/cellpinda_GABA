@@ -1915,8 +1915,8 @@
   .gaba-guide.is-large-text .guide-research-source-action{font-size:12px}
 }
 
-/* v117 hero reading start cue: turn the first scroll signal into a single, low-friction entry action. */
-.guide-hero-story .guide-hero-scroll{border:0;background:transparent;font:inherit;cursor:pointer}
-.guide-hero-story .guide-hero-scroll:hover,.guide-hero-story .guide-hero-scroll:focus-visible{color:var(--guide-teal-dark)}
-.guide-hero-story .guide-hero-scroll:focus-visible{outline:3px solid rgba(18,154,163,.24);outline-offset:5px}
+/* v118 hero reading start cue: keep the first reading action visible over photography without adding visual weight. */
+.guide-hero-story .guide-hero-scroll{min-height:40px;padding:7px 14px;border:1px solid rgba(113,170,178,.38);border-radius:999px;background:rgba(255,255,255,.82);box-shadow:0 7px 18px rgba(28,83,99,.08);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:inherit;cursor:pointer;color:#3e6873;transition:color .2s ease,border-color .2s ease,background-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.guide-hero-story .guide-hero-scroll:hover{border-color:rgba(18,154,163,.58);background:rgba(255,255,255,.94);box-shadow:0 9px 22px rgba(28,83,99,.12);color:var(--guide-teal-dark);transform:translateX(-50%) translateY(-1px)}
+.guide-hero-story .guide-hero-scroll:focus-visible{border-color:rgba(18,154,163,.72);outline:3px solid rgba(18,154,163,.24);outline-offset:4px;color:var(--guide-teal-dark)}
 @media(prefers-reduced-motion:reduce){.guide-hero-story .guide-hero-scroll{transition:none}}
