@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T04:31:01.106451Z",
+  "updated_at": "2026-10-05T04:46:00.000000Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4712,6 +4712,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T04:28:00Z"
+    },
+    {
+      "id": "H-185",
+      "event": "연구 규모 카드의 984·557·12,124 수치가 동일한 검색 범위처럼 읽힐 수 있는 비교 경계 리스크를 확인했다. PR #305에서 큰 수치보다 먼저 하버드·옥스퍼드의 동일 PubMed 검색과 GABA-A 수용체의 별도 SCIE 분석을 색상·라벨로 분리하고, 모바일에서는 두 범위 안내를 세로로 쌓았다. 연구 수치·연구 원문·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #305 checks, main workflow 37264643742의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 live candidate 31fcd55abdab529653c8d19539b3e88ef651a33a는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. NAVI 로컬 감사는 IN_PROGRESS_WITH_GATES·local checks WAITING·auditFailed false·publicExportChanged false를 유지한다. 실제 브라우저 캡처와 Safari/iOS/Android 실기기, 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T04:46:00Z"
     }
   ]
 }

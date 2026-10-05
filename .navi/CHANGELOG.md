@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 연구 규모 비교 기준·모바일 오독 방지 고도화 — 31fcd55 — 2026-10-05
+
+- 연구 규모 카드의 큰 수치보다 먼저 `같은 검색 기준 · 하버드 · 옥스퍼드 · PubMed`와 `별도 연구 분석 · GABA-A 수용체 · SCIE`를 시각적 범위 레일로 표시했다. 모바일에서는 두 범위를 세로로 쌓아 숫자 비교 전에 연구 범위를 읽도록 보강했다.
+- 연구 수치·연구 원문·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #305 checks, main workflow 37264643742의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 공개본은 candidate `31fcd55abdab529653c8d19539b3e88ef651a33a`, HTTP 200, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SCALE-SCOPE-20261005, E-UI-CONTRACT-RESEARCH-SCALE-SCOPE-20261005, E-DEPLOY-PIPELINE-RESEARCH-SCALE-SCOPE-20261005, E-LIVE-PUBLIC-RESEARCH-SCALE-SCOPE-20261005.
+
 ## 모바일 첫 화면 읽기 방향·회복 브리지 문장 고도화 — 5ebcfaa — 2026-10-05
 
 - 모바일 hero 하단에 긴 공개 안내서가 아래로 이어진다는 '아래로 읽기' 큐를 표시하고, 화살표 모션은 사용자의 reduced-motion 설정에서 자동으로 멈춘다.

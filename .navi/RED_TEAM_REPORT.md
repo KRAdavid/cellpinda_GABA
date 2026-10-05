@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 31fcd55
+
+- 공격 관점에서 확인한 실패 모드는 연구 규모 카드의 984·557·12,124가 동일한 모집단·검색 범위의 숫자처럼 읽혀 기관별 PubMed 검색과 별도 SCIE 분석의 의미가 흐려지는 것이었다. PR #305에서 숫자보다 먼저 두 범위를 색상·라벨로 분리하고 모바일에서는 세로 순서를 유지했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status가 통과했다. 연구 원문·공개 수치·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 다만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 현재 환경에서 증명하지 않았으므로 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SCALE-SCOPE-20261005, E-UI-CONTRACT-RESEARCH-SCALE-SCOPE-20261005, E-DEPLOY-PIPELINE-RESEARCH-SCALE-SCOPE-20261005, E-LIVE-PUBLIC-RESEARCH-SCALE-SCOPE-20261005.
+
 ## Recheck — 2026-10-05 — 5ebcfaa
 
 - 공격 관점에서 확인한 실패 모드는 모바일 독자가 hero에서 어디로 읽어야 하는지 즉시 알기 어렵고, 회복 브리지의 작은 제목이 '잠깐'이라는 삽입어로 장문의 편집 흐름을 끊는 것이었다. PR #303에서 아래로 읽기 큐와 자연스러운 연결 제목을 추가했다.

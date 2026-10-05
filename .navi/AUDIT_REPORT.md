@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 31fcd55 — 2026-10-05
+
+- 연구 규모 카드에서 하버드·옥스퍼드의 동일 PubMed 검색과 GABA-A 수용체의 별도 SCIE 분석이 큰 숫자만으로 한 비교처럼 읽힐 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #305에서 숫자보다 앞에 비교 범위 레일을 추가하고 모바일에서는 범위를 세로로 쌓았다.
+- 연구 수치·연구 원문·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했고 초기 JS 311199 bytes, 초기 CSS 95703 bytes, 전체 assets 1612265 bytes로 예산 안이다.
+- PR #305 checks와 main workflow 37264643742의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다. 공개 candidate `31fcd55abdab529653c8d19539b3e88ef651a33a`는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, 제품 독립 경계를 유지했다.
+- 정적 계약·배포 정합성은 확인했지만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SCALE-SCOPE-20261005, E-UI-CONTRACT-RESEARCH-SCALE-SCOPE-20261005, E-DEPLOY-PIPELINE-RESEARCH-SCALE-SCOPE-20261005, E-LIVE-PUBLIC-RESEARCH-SCALE-SCOPE-20261005.
+
 ## Release Recheck — 5ebcfaa — 2026-10-05
 
 - 모바일 첫 화면에서 긴 안내서가 아래로 이어진다는 시각적 방향이 약하고 회복 브리지의 작은 제목이 어색하게 끊기던 퍼블리싱 리스크를 확인했다. PR #303에서 hero 하단 읽기 큐와 reduced-motion 모션 차단을 추가하고, 작은 제목을 '수면과 회복의 연결'로 정리했다.
