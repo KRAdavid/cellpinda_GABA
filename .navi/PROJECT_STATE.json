@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T00:15:00Z",
+  "updated_at": "2026-10-05T00:26:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -451,7 +451,11 @@
         "E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005",
         "E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005",
         "E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005",
-        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005"
+        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005",
+        "E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005",
+        "E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005",
+        "E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005",
+        "E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1030,7 +1034,11 @@
         "E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005",
         "E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005",
         "E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005",
-        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005"
+        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005",
+        "E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005",
+        "E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005",
+        "E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005",
+        "E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005"
       ],
       "owner": "QA"
     },
@@ -1220,7 +1228,11 @@
         "E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005",
         "E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005",
         "E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005",
-        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005"
+        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005",
+        "E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005",
+        "E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005",
+        "E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005",
+        "E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -1963,7 +1975,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T00:15:00Z"
+    "last_run_at": "2026-10-05T00:26:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2136,7 +2148,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T00:15:00Z"
+    "last_run_at": "2026-10-05T00:26:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4475,6 +4487,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T00:15:00Z"
+    },
+    {
+      "id": "H-170",
+      "event": "한글 제목이 모바일 폭에서 어색하게 끊기거나 본문 설명이 불필요하게 분절될 수 있는 잔여 편집 리스크를 확인하고 PR #275에서 지원 브라우저의 디스플레이 제목에 text-wrap:balance, 주요 본문 설명에 text-wrap:pretty를 적용해 타이포그래피 계약으로 고정했다. 연구 수치·출처 데이터·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #275 checks, main workflow 37247369428의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate 0d4981dd42fd3b394d5a35db28fbfc3c13b3399d는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T00:26:00Z"
     }
   ]
 }

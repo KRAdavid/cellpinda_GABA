@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 한글 타이포그래피 리듬 고도화 — 0d4981d — 2026-10-05
+
+- 주요 한글 디스플레이 제목에 지원 브라우저의 `text-wrap:balance`, 주요 본문 설명에 `text-wrap:pretty`를 적용해 모바일 편집 리듬을 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #275 checks, main workflow 37247369428, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저/대표 실기기와 고령 사용자 독해성 검증은 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005, E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005, E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005, E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005.
+
 ## 모바일 하단 콘텐츠 점진 렌더링 고도화 — 98c59eb — 2026-10-05
 
 - 국내외 활용·발효·성장·전문가 영상·출처·공유 섹션에 `content-visibility:auto`와 예약 높이를 적용해 장문의 공개 안내서가 하단 콘텐츠를 필요한 시점에 렌더링하도록 보완했다.

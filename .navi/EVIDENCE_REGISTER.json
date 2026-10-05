@@ -983,6 +983,17 @@
         "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-100",
+      "statement": "공개 GABA 안내서는 주요 한글 디스플레이 제목에 균형 줄바꿈을, 주요 본문 설명에 자연스러운 줄바꿈을 지원하는 타이포그래피 규칙을 적용하고 이를 UI 계약으로 고정한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005",
+        "E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005",
+        "E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005",
+        "E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8858,6 +8869,50 @@
       "captured_at": "2026-10-05T00:13:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-PROGRESSIVE-PUBLISHING",
       "claim_refs": ["C-002", "C-003", "C-007", "C-099"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "한글 디스플레이 제목의 균형 줄바꿈과 본문 설명의 자연스러운 줄바꿈을 지원하는 v91 타이포그래피 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #275 source commit 586c7d3; pnpm run validate:ui-contract PASS including v91 editorial typography guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1605221 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/275",
+      "captured_at": "2026-10-05T00:22:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-TYPOGRAPHY-WRAP",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-100"]
+    },
+    {
+      "id": "E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 주요 제목에 text-wrap:balance, 주요 본문 설명에 text-wrap:pretty 규칙이 유지되는지 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v91 editorial typography assertion; guide hero/section/final/history/research/video headings require text-wrap:balance where supported; hero/section/final/reading/growth/fermented body copy require text-wrap:pretty where supported; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/275",
+      "captured_at": "2026-10-05T00:22:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-TYPOGRAPHY-WRAP",
+      "claim_refs": ["C-003", "C-100"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "한글 타이포그래피 보정 PR #275가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #275 merge main commit 0d4981dd42fd3b394d5a35db28fbfc3c13b3399d; PR checks release-verify 37247285419 job 111567552733 and site-quality-verify 37247285434 job 111567552573 successful; main workflow 37247369428 with release-verify 111567799966, worker-readiness 111568045675, deploy-pages 111568062351, smoke-live 111568098176 and release-status 111568151136 successful; deploy-worker 111568062933 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37247369428",
+      "captured_at": "2026-10-05T00:25:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-TYPOGRAPHY-WRAP",
+      "claim_refs": ["C-001", "C-002", "C-100"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 한글 타이포그래피 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=0d4981dd42fd3b394d5a35db28fbfc3c13b3399d pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 0d4981dd42fd3b394d5a35db28fbfc3c13b3399d; generatedAt 2026-10-05T00:25:04.953Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#top",
+      "captured_at": "2026-10-05T00:25:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-TYPOGRAPHY-WRAP",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-100"]
     }
   ]
 }
