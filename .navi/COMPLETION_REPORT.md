@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 85ec17f — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #307과 main 공개 배포 workflow `37266107250`이 성공했고, 공개 URL의 candidate `85ec17fc17b7816096e98b1b995b1b1d5f72953b`가 HTTP 200 정적 사이트로 확인됐다. 공개 번들은 71개 파일이며 제품 독립 안내 문구와 발효·안전→성장 연구→전문가 영상 handoff를 포함한다.
+- 이번 변경은 연구 수치·출처·공개 카피·제품 경계를 바꾸지 않고 긴 모바일 읽기 흐름의 다음 장면을 명시했다. Chrome CDP fallback으로 390px·1440px 공개 렌더의 가로 넘침 없음을 확인했다.
+- NAVI 로컬 감사는 오류 없이 대기 게이트를 분리해 기록했다. 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 실제 브라우저 전체 조합, 대표 실기기, 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-EDITORIAL-HANDOFFS-20261005, E-UI-CONTRACT-EDITORIAL-HANDOFFS-20261005, E-DEPLOY-PIPELINE-EDITORIAL-HANDOFFS-20261005, E-LIVE-PUBLIC-EDITORIAL-HANDOFFS-20261005.
+
 ## Current Release Recheck — 31fcd55 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
