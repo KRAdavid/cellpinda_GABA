@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T09:36:00Z",
+  "updated_at": "2026-10-05T09:44:25Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T09:36:00Z"
+    "last_run_at": "2026-10-05T09:44:25Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2307,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T09:36:00Z"
+    "last_run_at": "2026-10-05T09:44:25Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4885,6 +4885,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T09:36:00Z"
+    },
+    {
+      "id": "H-198",
+      "event": "공개 280·300·320·360·390px 헤더와 모바일 메뉴를 키보드 관점에서 재감리했다. 좁은 폭 모두 로고·메뉴·글씨 크기·공유 컨트롤이 겹치지 않고 44px 이상 터치 영역과 뷰포트 일치 scrollWidth를 유지했으며, 390px에서 메뉴 열기 후 첫 링크 포커스·Tab 포커스 트랩·Escape 닫힘·메뉴 토글 포커스 복귀를 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 공개 연구 수치·출처·카피·제품 독립 경계는 변경하지 않았고, 이 결과를 C-128과 두 라이브 QA 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T09:44:25Z"
     }
   ]
 }

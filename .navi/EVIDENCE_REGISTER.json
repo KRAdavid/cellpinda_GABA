@@ -1291,6 +1291,15 @@
         "E-LIVE-PUBLIC-HISTORY-HEADING-SPACING-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-128",
+      "statement": "공개 GABA 안내서의 좁은 모바일 헤더는 280·300·320·360·390px에서 컨트롤을 겹치지 않게 배치하고 각 터치 영역을 44px 이상 유지하며, 메뉴는 키보드 포커스를 내부에 가두고 Escape로 닫은 뒤 토글로 포커스를 돌려보낸다.",
+      "evidence_refs": [
+        "E-LIVE-PUBLIC-NARROW-HEADER-KEYBOARD-20261005",
+        "E-LIVE-PUBLIC-MOBILE-MENU-KEYBOARD-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10398,6 +10407,28 @@
       "captured_at": "2026-10-05T09:36:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-HISTORY-HEADING-SPACING",
       "claim_refs": ["C-002", "C-003", "C-127"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-HEADER-KEYBOARD-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본의 280·300·320·360·390px 헤더에서 로고·메뉴·글씨 크기·공유 컨트롤이 겹치지 않고 모두 44px 이상 터치 영역을 유지하며 가로 넘침이 없다.",
+      "locator": "cache-disabled Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?view=guide&qa=header-{width}-20261005; viewports 280/300/320/360/390; overlap false, targets below 44px empty, scrollWidth equal to 280/300/320/360/390, runtimeErrors 0; controls retained accessible labels for menu, reading size and page share",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=header-390-20261005",
+      "captured_at": "2026-10-05T09:44:25Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-NARROW-HEADER-KEYBOARD",
+      "claim_refs": ["C-002", "C-003", "C-128"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-MENU-KEYBOARD-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px 모바일 메뉴를 키보드로 열면 첫 링크로 포커스가 이동하고 Tab 순환이 메뉴·토글 안에 머물며, Escape로 메뉴가 닫히고 메뉴 토글로 포커스가 복귀한다.",
+      "locator": "cache-disabled Chrome CDP fallback at https://kradavid.github.io/gaba_info/?view=guide&qa=keyboard-390-20261005; title and hero content loaded; menu opened with aria-expanded=true and nav is-open; eight Tab steps remained in navigation links or menu toggle; Escape returned aria-expanded=false, nav closed and active element label `메뉴 열기`; scrollWidth 390 and no runtime errors",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=keyboard-390-20261005",
+      "captured_at": "2026-10-05T09:44:25Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-MENU-KEYBOARD",
+      "claim_refs": ["C-003", "C-128"]
     }
   ]
 }
