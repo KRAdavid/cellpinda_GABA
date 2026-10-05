@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 장면 맥락 문구 고도화 — b98df10 — 2026-10-05
+
+- 700px 이하 화면에서 각 섹션 제목 아래의 짧은 보조 맥락 문구를 복원해 제목·장면·다음 내용의 연결을 보강했다.
+- 28ch·13px·행간 1.7 규칙과 v93 UI 계약을 추가했다. 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다.
+- UI 계약·typecheck·127 tests·production build/performance, PR #279 checks, main workflow 37248925292, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005, E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005, E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005, E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005.
+
 ## 읽기 진행 문맥 접근성 고도화 — 13450f2 — 2026-10-05
 
 - 화면용 읽기 진행 메타와 보조기기용 현재 장·연구 문맥을 분리하고, 별도 `role=status` 라이브 안내를 추가했다.

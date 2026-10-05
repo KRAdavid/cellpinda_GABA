@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — b98df10 — 2026-10-05
+
+- 모바일에서 장 제목만 남아 장면의 의미와 다음 내용이 끊겨 보일 수 있는 편집 리스크를 확인하고 PR #279에서 700px 이하 화면의 섹션 제목 아래에 짧은 보조 맥락 문구를 복원했다. 문구는 28ch 이내·13px·행간 1.7로 제한해 정보량을 늘리지 않고 흐름만 보강했다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1605454 bytes로 예산 안이다.
+- PR #279 필수 checks, main workflow 37248925292의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate b98df102dda6a54ac2fd2d570d6f0248e7c465b3는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 모바일 맥락 문구의 정적 계약·배포 정합성은 확인했지만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005, E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005, E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005, E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005.
+
 ## Release Recheck — 13450f2 — 2026-10-05
 
 - 읽기 진행 표시의 화면용 메타와 보조기기용 라이브 문맥이 같은 status 영역에 섞여 전달될 수 있는 접근성 리스크를 확인하고 PR #277에서 시각 메타를 `aria-hidden`으로 분리한 뒤 현재 장·연구 문맥을 별도 `role=status` 라이브 영역으로 제공했다.

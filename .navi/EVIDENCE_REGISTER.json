@@ -1005,6 +1005,17 @@
         "E-LIVE-PUBLIC-READING-LIVE-CONTEXT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-102",
+      "statement": "공개 GABA 안내서는 모바일에서 각 장 제목 아래의 짧은 편집 맥락 문구를 유지해 제목·장면·다음 내용의 연결을 한 번에 읽을 수 있도록 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005",
+        "E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8968,6 +8979,50 @@
       "captured_at": "2026-10-05T00:38:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-READING-LIVE-CONTEXT",
       "claim_refs": ["C-002", "C-003", "C-007", "C-101"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 장 제목 아래의 짧은 편집 맥락 문구를 다시 노출한 v93 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #279 source commit c15edef; pnpm run validate:ui-contract PASS including v93 mobile chapter context guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1605454 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/279",
+      "captured_at": "2026-10-05T00:46:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-CHAPTER-CONTEXT",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-102"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 700px 이하 모바일에서 각 섹션 제목의 보조 맥락 문구를 표시하고 읽기 쉬운 크기·행간을 유지하는 구조를 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v93 mobile chapter context assertion; .gaba-guide .guide-section-heading>p uses display:block, max-width:28ch, font-size:13px and line-height:1.7 inside @media(max-width:700px); command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/279",
+      "captured_at": "2026-10-05T00:46:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-CHAPTER-CONTEXT",
+      "claim_refs": ["C-003", "C-102"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 장 맥락 문구 PR #279가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #279 merge main commit b98df102dda6a54ac2fd2d570d6f0248e7c465b3; PR checks release-verify 37248839138 job 111572090516 and site-quality-verify 37248839230 job 111572090932 successful; main workflow 37248925292 with release-verify 111572347400, worker-readiness 111572560119, deploy-pages 111572575415, smoke-live 111572608142 and release-status 111572641667 successful; deploy-worker 111572576583 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37248925292",
+      "captured_at": "2026-10-05T00:49:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-CHAPTER-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-102"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 모바일 장 맥락 문구 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=b98df102dda6a54ac2fd2d570d6f0248e7c465b3 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha b98df102dda6a54ac2fd2d570d6f0248e7c465b3; generatedAt 2026-10-05T00:49:20.376Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#top",
+      "captured_at": "2026-10-05T00:49:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-CHAPTER-CONTEXT",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-102"]
     }
   ]
 }
