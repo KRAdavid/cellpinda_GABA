@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T18:08:05.382133Z",
+  "updated_at": "2026-10-05T18:36:11.055218Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -503,7 +503,12 @@
         "E-LOCAL-BUILD-RESEARCH-MAP-SCALE-LEGIBILITY-20261006",
         "E-UI-CONTRACT-RESEARCH-MAP-SCALE-LEGIBILITY-20261006",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-SCALE-LEGIBILITY-20261006",
-        "E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-LEGIBILITY-20261006"
+        "E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-LEGIBILITY-20261006",
+        "E-LOCAL-BUILD-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+        "E-UI-CONTRACT-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+        "E-CDP-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -5119,6 +5124,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T18:12:00Z"
+    },
+    {
+      "id": "H-229",
+      "event": "모바일 연구 지도 중심의 `5개 연구 영역` 보조 문구가 여전히 작게 인식될 수 있는 잔여 가독성 리스크를 줄이기 위해 모바일도 10px 읽기 하한으로 올렸다. PR #380과 main commit fb874662의 release-verify·Pages 배포·라이브 smoke·release status가 성공했고, 공개 validator는 candidate fb87466241c67311cbd990228acf48fab7f65068에서 HTTP 200·STATIC·71개 bundle hash를 확인했다. Chrome CDP fallback 공개 390·1440px에서 10px·900 weight·청록 계산 스타일, scrollWidth 390·1425, 인지 영역 선택 후 카드 포커스·스크롤, runtimeErrors 0을 확인했다. 새 CRITICAL/MAJOR 결함은 없으며 C-152와 다섯 증거를 등록했다. 브라우저 범위·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 기존 외부 검증 항목으로 남긴다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T18:29:04Z"
     }
   ]
 }
