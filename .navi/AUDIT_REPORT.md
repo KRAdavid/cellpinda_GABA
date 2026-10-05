@@ -1,5 +1,14 @@
 # Audit Report
 
+## Research Chart Reading Legend Recheck — 859bb59 — 2026-10-05
+
+- 비교형 연구 결과 도표 하단의 반복된 긴 설명을 `읽는 법` 시각 범례로 정리했다. 변화 방향, 두 조건의 상대 비교, 그림 크기와 실제 효과 크기의 구분을 짧은 키로 보여 주고, 차트 전체 설명은 접근성 레이블로 보존했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #362의 release-verify와 main workflow `37333111161`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `859bb59f901eb038f6152f5b89749616a3532aac`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claims·6개 master records·1개 product·6개 share pages·teaser HOLD를 유지한다. Chrome CDP fallback 공개 320·390·1440px에서 범례 폭 216·286·649, 범례 높이 128·89·55, scrollWidth 320·390·1425, runtime 오류 없음을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-CHART-LEGEND-20261006, E-UI-CONTRACT-RESEARCH-CHART-LEGEND-20261006, E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-20261006, E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-20261006.
+
 ## Final Public Evidence Recheck — 791450b — 2026-10-05
 
 - NAVI 감사·레드팀·증거 문서를 main에 병합한 최종 공개 candidate를 다시 확인했다. workflow `37328933408`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.

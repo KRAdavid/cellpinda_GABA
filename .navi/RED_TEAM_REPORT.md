@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 859bb59
+
+- 공격 관점에서 비교형 연구 도표의 읽는 법 범례가 모바일에서 겹치거나 잘리는지, 1440px에서 과도하게 작아지거나 차트와 충돌하는지, 전체 도표 설명이 사라지지 않는지 확인했다. 320·390·1440px에서 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.
+- 공개 candidate `859bb59f901eb038f6152f5b89749616a3532aac`의 document scrollWidth는 320·390·1425px으로 viewport를 넘지 않았다. 범례는 모바일에서 각각 2줄·1줄로 자연스럽게 배치되고 데스크톱에서는 한 줄로 표시됐으며 runtimeErrors는 0이었다.
+- 대표 Chrome CDP 렌더만으로 전체 브라우저·실기기를 보장할 수 없으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-20261006.
+
 ## Final Public Evidence Recheck — 2026-10-05 — 791450b
 
 - 공격 관점에서 NAVI 문서 병합 이후 최종 공개본의 320·390·1440px 연구 도표, 가로 폭, GABA 결과 강조, runtime 오류와 공개 validator 상태를 다시 확인했다. 새 CRITICAL/MAJOR 결함은 없었다.

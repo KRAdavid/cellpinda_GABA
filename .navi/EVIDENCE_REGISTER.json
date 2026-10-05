@@ -1472,6 +1472,17 @@
         "E-LIVE-PUBLIC-NAVI-SYNC-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-145",
+      "statement": "비교형 연구 결과 도표는 반복되던 긴 설명 대신 읽는 법 시각 범례로 변화 방향·두 조건의 상대 비교·그림 크기와 실제 효과 크기의 구분을 보여 주며, 전체 차트 설명은 접근성 레이블로 보존한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-CHART-LEGEND-20261006",
+        "E-UI-CONTRACT-RESEARCH-CHART-LEGEND-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11250,6 +11261,48 @@
       "captured_at": "2026-10-05T14:58:36Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-FINAL-PUBLIC-EVIDENCE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-144"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-CHART-LEGEND-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "비교형 연구 결과 도표의 반복 설명을 읽는 법 시각 범례로 정리한 보정이 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1626103 <= 1650000; Chrome CDP fallback local 320·390·1440px reported scrollWidth 320/390/1425, note heights 128/89/55, keyCount 2",
+      "captured_at": "2026-10-05T15:31:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261005-RESEARCH-CHART-LEGEND",
+      "claim_refs": ["C-001", "C-003", "C-145"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-CHART-LEGEND-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "비교형 연구 결과 도표가 짧은 읽는 법 범례와 모바일용 줄바꿈을 제공하고, 기존 차트 전체 설명을 접근성 레이블로 보존하는지 UI 계약 회귀 검사가 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v116 visual comparison legend; guide-outcome-chart-note-visual; grid-template-areas desktop/mobile; accessible chart note label; status ok; events 14",
+      "captured_at": "2026-10-05T15:31:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-CHART-LEGEND",
+      "claim_refs": ["C-003", "C-145"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 도표 읽는 법 범례 보정 commit 444e7ac가 PR #362 검증 후 main commit 859bb59로 병합되고, 공개 배포 파이프라인이 성공했다.",
+      "locator": "PR #362; code commit 444e7ac54d3863c6a6ce5344a6264c3bb3ec6d83; main commit 859bb59f901eb038f6152f5b89749616a3532aac; workflow 37333111161; release-verify 111840963356, worker-readiness 111841589286, deploy-pages 111841639328, smoke-live 111841789285 and release-status 111841900936 successful; deploy-worker 111841668766 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37333111161",
+      "captured_at": "2026-10-05T15:31:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-CHART-LEGEND",
+      "claim_refs": ["C-001", "C-002", "C-145"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 320·390px에서 연구 도표 읽는 법 범례를 자연스럽게 줄바꿈하고, 1440px에서는 같은 범례를 한 줄로 표시하며 가로 넘침과 runtime 오류가 없다. 차트 전체 설명은 접근성 레이블로 남아 있다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 859bb59f901eb038f6152f5b89749616a3532aac; generatedAt 2026-10-05T15:29:35.650Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 320·390·1440px reported scrollWidth 320/390/1425, note widths 216/286/649, note heights 128/89/55, keyCount 2, errors []; screenshots C:/Users/computer/AppData/Local/Temp/gaba-chart-legend-public-320-20261006.png, gaba-chart-legend-public-390-20261006.png, gaba-chart-legend-public-1440-20261006.png",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=chart-legend-public-390-20261006#research-cognition",
+      "captured_at": "2026-10-05T15:31:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-CHART-LEGEND",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-145"]
     }
   ]
 }
