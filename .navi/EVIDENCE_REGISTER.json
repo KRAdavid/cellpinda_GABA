@@ -1170,6 +1170,17 @@
         "E-LIVE-PUBLIC-EDITORIAL-HANDOFFS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-117",
+      "statement": "공개 GABA 안내서의 모바일 연구 결과 카드는 제목과 결과 한 줄을 겹침 없이 세로로 읽히게 배치하고, 연구 구성과 비교 도표로 자연스럽게 이어진다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+        "E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+        "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9793,6 +9804,50 @@
       "captured_at": "2026-10-05T05:08:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EDITORIAL-HANDOFFS",
       "claim_refs": ["C-002", "C-003", "C-116"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 결과 카드의 제목이 좁은 열로 찌그러지거나 결과 요약과 겹치던 레이아웃을 grid 기반으로 보정한 PR #309 source commit이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #309 source commit de141b07bb7436401712992b7660b9e10680716c; pnpm run validate:ui-contract PASS including v105 mobile research card layout assertion; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1613967 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/309",
+      "captured_at": "2026-10-05T05:22:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-RESEARCH-CARD-LAYOUT",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-117"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 모바일 연구 결과 카드의 제목·결과 한 줄을 grid로 분리하고 결과를 제목 아래 전체 폭에 배치하는 구조를 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v105 assertion; src/components/PublicGabaGuide.css uses mobile grid-template-columns and guide-research-result-lead grid-column: 1 / -1; Chrome CDP local preview at 390px confirmed heading display grid, title width 231px, result lead below title, scrollWidth 390px",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/309",
+      "captured_at": "2026-10-05T05:23:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-RESEARCH-CARD-LAYOUT",
+      "claim_refs": ["C-003", "C-117"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 결과 카드 레이아웃 보정 PR #309가 필수 검사를 통과해 main commit fb3d19c6에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #309 merge main commit fb3d19c64e54f238d32d859c5d63a39898889250; PR checks release-verify 37267747880 and site-quality-verify 37267747838 successful; main workflow 37267840225 with release-verify 111628303710, worker-readiness 111628554140, deploy-pages 111628585832, smoke-live 111628626966 and release-status 111628683389 successful; deploy-worker 111628586713 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37267840225",
+      "captured_at": "2026-10-05T05:30:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-RESEARCH-CARD-LAYOUT",
+      "claim_refs": ["C-001", "C-002", "C-117"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 모바일 연구 결과 카드 레이아웃 보정을 포함한 main 후보와 일치하고 390px 공개 렌더에서 제목·결과 요약이 겹치지 않으며 가로 넘침이 없음을 확인했다.",
+      "locator": "release-manifest.json HTTP 200; candidateSha fb3d19c64e54f238d32d859c5d63a39898889250; runtimeMode STATIC; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; Chrome CDP fallback at public URL 390px confirmed title '인지 연구 결과', heading display grid, title width 231px, result lead below title, scrollWidth 390px; 1440px local and public-source parity render confirmed the result lead remains below the title",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=research-card-live-fixed#research-cognition",
+      "captured_at": "2026-10-05T05:32:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-RESEARCH-CARD-LAYOUT",
+      "claim_refs": ["C-002", "C-003", "C-117"]
     }
   ]
 }

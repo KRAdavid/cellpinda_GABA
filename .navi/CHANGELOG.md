@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 연구 결과 카드 레이아웃 보정 — fb3d19c — 2026-10-05
+
+- 실제 공개 390px 렌더에서 `인지 연구 결과` 제목이 좁은 열로 세로 찌그러지고 `결과 한 줄`이 제목 옆에서 겹치던 결함을 확인했다. 모바일 연구 카드 헤더를 grid로 재배치하고 결과 요약을 제목 아래 전체 폭에 배치했다.
+- 연구 구성·비교 도표·연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. PR #309 checks와 main workflow `37267840225`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `fb3d19c64e54f238d32d859c5d63a39898889250`은 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records를 제공한다. Chrome CDP fallback으로 공개 390px에서 제목·결과 요약 비겹침과 가로 넘침 없음, 1440px 정렬을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005.
+
 ## 발효·안전·성장·전문가 영상 장면 전환 고도화 — 85ec17f — 2026-10-05
 
 - 발효·안전 섹션 뒤에 `식품 연구에서 몸의 신호로 → 성장 연구`, 성장 연구 뒤에 `연구를 설명하는 목소리로 → 전문가 영상` handoff를 추가해 모바일 긴 읽기 흐름을 명시했다.

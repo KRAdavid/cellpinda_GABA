@@ -1,5 +1,17 @@
 # Completion Report
 
+## Current Release Recheck — fb3d19c — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-002 연구 상세 카드와 결과 도표의 모바일 읽기 순서: PASS.
+- AC-003 연구 결과 비교·출처 연결: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #309와 main 공개 배포 workflow `37267840225`가 성공했고, 공개 URL의 candidate `fb3d19c64e54f238d32d859c5d63a39898889250`가 HTTP 200 정적 사이트로 확인됐다. 공개 번들은 71개 파일이며 390px 연구 결과 카드에서 제목과 결과 요약이 겹치지 않는다.
+- NAVI 로컬 감사는 오류 없이 대기 게이트를 분리해 기록했다. 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 실제 브라우저 전체 조합, 대표 실기기, 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005.
+
 ## Current Release Recheck — 85ec17f — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
