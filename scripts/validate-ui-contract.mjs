@@ -511,6 +511,7 @@ requireMatch(publicGuide, /guide-video-filters-wrap"><div className="guide-video
 requireMatch(publicGuideStyles, /v40 video topic filters[\s\S]*?\.guide-video-filters-wrap\{overflow:visible\}/, 'mobile expert video topic filters must remain fully visible and avoid hidden horizontal scrolling');
 requireMatch(publicGuide, /guide-hero-scroll/, 'public guide hero must expose the continuous reading cue');
 requireMatch(publicGuideStyles, /v104 mobile reading cue[\s\S]*?guide-hero-story \.guide-hero-scroll\{[^}]*display:flex/, 'mobile public guide hero must show a visible reading cue before the first swipe');
+requireMatch(publicGuideStyles, /v106 mobile reading cue contrast[\s\S]*?guide-hero-story \.guide-hero-scroll\{[^}]*border:1px solid[^}]*background:rgba\(255,255,255,\.78\)/, 'mobile public guide reading cue must remain legible over the photographic hero surface');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:guide-mobile-scroll-cue/, 'mobile reading cue must use a restrained directional motion');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:none}/, 'mobile reading cue must respect reduced-motion preferences');
 requireMatch(publicGuide, /<p className="guide-section-number">수면과 회복의 연결<\/p>/, 'recovery bridge label must read as a natural chapter connection');
