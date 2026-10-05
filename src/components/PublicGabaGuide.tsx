@@ -1646,6 +1646,10 @@ export default function PublicGabaGuide() {
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <div className="guide-research-scale" aria-label="GABA 연구 규모">
               <div className="guide-research-scale-head"><div><p className="guide-section-number">연구 규모</p><h3>하나의 신호.<br />넓어진 연구.</h3></div><p>1950 → 지금</p></div>
+              <div className="guide-research-scale-reading" role="note" aria-label="연구 수치를 읽는 기준">
+                <span className="is-shared"><i aria-hidden="true" /><strong>같은 검색 기준</strong><em>하버드 · 옥스퍼드 · PubMed</em></span>
+                <span className="is-separate"><i aria-hidden="true" /><strong>별도 연구 분석</strong><em>GABA-A 수용체 · SCIE</em></span>
+              </div>
               <div className="guide-research-scale-groups">
                 <section className="guide-research-scale-group" aria-labelledby="research-scale-institution-heading">
                   <div className="guide-research-scale-group-head"><div><p>같은 검색 기준 안에서</p><h4 id="research-scale-institution-heading">기관별 GABA 문헌</h4></div><span>PubMed</span></div>
