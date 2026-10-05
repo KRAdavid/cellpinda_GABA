@@ -1589,6 +1589,17 @@
         "E-DEPLOY-PIPELINE-ULTRA-NARROW-HEADER-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-155",
+      "statement": "모바일 전문가 영상 주제 필터는 한 줄 가로 스크롤을 유지하면서 오른쪽 시각적 이어짐 표시를 제공해 다음 주제를 발견하게 하고, 320px에서 마지막 주제 선택과 기존 터치·가로폭 안정성이 함께 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-20261006",
+        "E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-20261006",
+        "E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-20261006",
+        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11859,6 +11870,47 @@
       "captured_at": "2026-10-05T20:20:00Z",
       "reviewer_id": "NAVI-DEPLOY-QA-20261006-ULTRA-NARROW-HEADER",
       "claim_refs": ["C-001", "C-002", "C-154"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 전문가 영상 필터 이어짐 표시 보강 commit 3decc89가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 3decc89; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1629045 <= 1650000",
+      "captured_at": "2026-10-05T20:38:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-MOBILE-VIDEO-FILTER-CUE",
+      "claim_refs": ["C-001", "C-003", "C-155"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 모바일 전문가 영상 필터의 가로 rail과 v124 시각적 이어짐 표시 회귀 방지를 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v124 mobile video filter continuation cue assertion; status ok; events 14",
+      "captured_at": "2026-10-05T20:38:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-MOBILE-VIDEO-FILTER-CUE",
+      "claim_refs": ["C-155"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback으로 로컬 320px 전문가 영상 필터 rail의 이어짐 표시·끝까지 스크롤·마지막 주제 선택을 확인했다.",
+      "locator": "temporary Playwright script outside repository at http://127.0.0.1:4191/?view=guide#expert-videos; filter wrapper width 256 and scrollWidth 711; cue computed display flex; maxScroll 455 reached; `수면·기분 주제 · 1개 영상` aria-pressed became true; runtime errors []; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T20:39:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-MOBILE-VIDEO-FILTER-CUE",
+      "claim_refs": ["C-003", "C-004", "C-155"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 필터 이어짐 표시 PR #387이 main merge commit c61c535로 병합되었고 최신 main 배포 run은 새 candidate를 대상으로 pending 상태다. 공개 URL은 아직 이전 candidate를 제공한다.",
+      "locator": "PR #387; code commit 3decc898646923dac2050ff0a5b8ae148188ee7c; main merge commit c61c5352885626f89eb37355942e80be5617faf7; main workflow 37371457391 status pending with no jobs at capture; superseded PR workflows 37371196867 and 37371197054 cancelled; live validator candidate ffd7c2e1f99fd2806e87274ab9200f948d0fc5fe, page 200, STATIC, 71 bundle hashes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37371457391",
+      "captured_at": "2026-10-05T20:45:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-MOBILE-VIDEO-FILTER-CUE",
+      "claim_refs": ["C-001", "C-002", "C-155"]
     }
   ]
 }

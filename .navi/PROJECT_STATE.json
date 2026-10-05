@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T20:25:36.218479Z",
+  "updated_at": "2026-10-05T20:47:36.641761Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5145,6 +5145,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T20:20:00Z"
+    },
+    {
+      "id": "H-232",
+      "event": "모바일 전문가 영상 주제 필터가 320px에서 첫 3개만 보이고 다음 주제의 존재가 약하게 전달되던 상태를 확인해, v124에서 rail 오른쪽에 gradient와 ChevronRight 이어짐 표시를 추가했다. 필터 rail의 가로 스크롤과 44px 터치 영역·영상 선택 흐름은 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Playwright Chromium fallback 320px에서 cue 표시, maxScroll 도달, 마지막 `수면·기분` 주제 선택·aria-pressed=true·runtime errors 0을 확인했다. PR #387은 main c61c535로 병합됐지만 최신 main 배포 run 37371457391은 아직 pending이며 공개 validator는 이전 candidate ffd7c2e를 반환한다. 새 CRITICAL/MAJOR 결함은 없고 C-155와 네 증거를 등록한다. 공개 반영·라이브 재검증은 다음 게이트로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T20:45:00Z"
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — c61c535 — 2026-10-06
+
+- AC-003/AC-004 모바일 전문가 영상 필터 발견성·가로폭·선택 흐름: PASS. 320px에서 cue 표시, rail 끝 도달, `수면·기분` 선택과 aria-pressed=true, runtime errors 0을 확인했다.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산: PASS.
+- AC-001 새 main candidate의 공개 URL·Pages 배포·라이브 smoke: PENDING. main workflow `37371457391`은 아직 pending이고 공개 validator candidate는 이전 `ffd7c2e`다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-20261006.
+
 ## Current Release Recheck — 27445e9 — 2026-10-06
 
 - AC-004 로컬 초소형 모바일 헤더의 메뉴·읽기 크기 버튼 간격, 가로폭, 320px 토글: PASS. 280·300·320·350·390·1440px에서 overlap 없음과 viewport 일치 scrollWidth를 확인했다.

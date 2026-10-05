@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 전문가 영상 필터 이어짐 표시·main 병합 — c61c535 — 2026-10-06
+
+- 320px에서 첫 3개 주제만 보이던 전문가 영상 필터 rail에 오른쪽 gradient·ChevronRight 시각 단서를 추가했다. 가로 스크롤, 44px 터치 영역, 선택 즉시 재생 흐름과 공개 과학 카피·제품 독립 경계는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 320px 상호작용 검증을 통과했고 PR #387이 main `c61c535`로 병합되었다.
+- 최신 main 배포 run `37371457391`은 기록 시점 pending, 공개 validator는 이전 candidate `ffd7c2e`다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-20261006.
+
 ## 초소형 모바일 헤더 터치 충돌 보정·PR 검증 완료 — 27445e9 — 2026-10-06
 
 - 280·300·320·350px에서 겹치던 메뉴 버튼과 읽기 크기 버튼을 8px 간격으로 분리했다. 390px 이상 레이아웃과 글자 크기 토글 의미는 유지했다.

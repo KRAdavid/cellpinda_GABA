@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Expert Video Filter Continuation Cue — 2026-10-06 — c61c535
+
+- 공격 관점에서 320px 전문가 영상 필터 rail의 첫 화면 발견성을 확인했다. 기존에는 `전체·수면·연구 읽기`만 노출되고 다음 주제 신호가 약했지만, v124 이후 오른쪽 gradient·ChevronRight가 추가되고 7개 주제·가로 스크롤·44px 터치 영역·끝 주제 선택이 유지된다.
+- 로컬 Playwright에서 rail 끝 도달과 `수면·기분` 필터 활성화를 재현했으며 runtime errors는 0이었다. 새 CRITICAL/MAJOR 결함은 없다.
+- 공개 검증은 의도적으로 보수적으로 기록한다. main run `37371457391`이 pending이고 공개 validator는 이전 candidate `ffd7c2e`를 반환하므로, 이번 cue의 라이브 반영을 주장하지 않는다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도와 함께 공개 배포 후 라이브 재현을 OPEN으로 유지한다.
+
+증적: E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-20261006.
+
 ## Ultra-Narrow Header Clearance — 2026-10-06 — 27445e9
 
 - 공격 관점에서 280·300·320·350px 헤더의 메뉴·읽기 크기 컨트롤 터치 영역을 비교해 8px overlap을 재현했다. v123 수정 후 네 폭 모두 overlap 없음, scrollWidth 일치, 320px 토글 상태와 runtime errors 0을 확인했다.

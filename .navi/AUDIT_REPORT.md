@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Expert Video Filter Continuation Cue — c61c535 — 2026-10-06
+
+- 320px 화면에서 전문가 영상 주제 필터가 7개 주제 중 첫 3개만 보이고 추가 주제의 존재가 얇은 스크롤바에 의존하던 잔여 발견성 리스크를 확인했다. v124에서 높이와 문구를 늘리지 않고 오른쪽 gradient와 ChevronRight 시각 단서를 추가했으며, 한 줄 가로 스크롤과 44px 터치 영역은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. Playwright Chromium fallback 로컬 320px에서 wrapper 256px·scrollWidth 711px·cue display flex·끝까지 scrollLeft 455/maxScroll 455·마지막 주제 선택 aria-pressed=true·runtime errors 0을 확인했다.
+- PR #387은 main `c61c535`로 병합되었고 최신 main deploy run `37371457391`은 기록 시점 `pending`이다. 공개 validator는 기존 candidate `ffd7c2e`를 반환하며, 새 cue의 공개 반영은 아직 확인하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 없다. 공개 URL의 새 bundle 반영, 라이브 모바일 재검증, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 다음 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-20261006.
+
 ## Ultra-Narrow Header Clearance — 27445e9 — 2026-10-06
 
 - 280·300·320·350px에서 메뉴 버튼과 읽기 크기 버튼이 8px 겹치던 잔여 터치 충돌을 정밀 점검으로 확인하고, v123 전용 간격 규칙으로 두 컨트롤 사이에 8px 여백을 확보했다. 390px 이상 레이아웃과 읽기 크기 라벨은 유지했다.
