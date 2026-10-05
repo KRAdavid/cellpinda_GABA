@@ -942,11 +942,12 @@ export default function PublicGabaGuide() {
   const activeVideoIndex = Math.max(0, expertVideos.findIndex((video) => video.id === activeVideo.id));
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const getExpertVideoState = (videoId: string) => {
-    if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, className: '' };
-    if (!videoStarted) return { label: '현재 선택됨', badge: '선택됨', className: 'is-selected' };
-    if (!videoFrameReady) return { label: '영상 준비 중', badge: '준비 중', className: 'is-loading' };
-    return { label: '현재 재생 중', badge: '재생 중', className: 'is-playing' };
+    if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, featureLabel: '선택하면 바로 재생', className: '' };
+    if (!videoStarted) return { label: '현재 선택됨', badge: '선택됨', featureLabel: '선택하면 바로 재생', className: 'is-selected' };
+    if (!videoFrameReady) return { label: '영상 준비 중', badge: '준비 중', featureLabel: '준비 중', className: 'is-loading' };
+    return { label: '현재 재생 중', badge: '재생 중', featureLabel: '재생 중', className: 'is-playing' };
   };
+  const activeExpertVideoState = getExpertVideoState(activeVideo.id);
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
   const activeResearchTopic = researchTopics.find((topic) => topic.id === activeResearchTopicId);
@@ -1938,7 +1939,7 @@ export default function PublicGabaGuide() {
                     <span className="guide-video-feature-poster-play"><Play size={20} fill="currentColor" aria-hidden="true" /><strong>영상 재생</strong></span>
                   </button>}
                 </div>
-                <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>선택 즉시 재생</span><span className="guide-video-feature-index" aria-label={`전체 ${expertVideos.length}개 중 ${activeVideoIndex + 1}번째`}>{String(activeVideoIndex + 1).padStart(2, '0')} / {String(expertVideos.length).padStart(2, '0')}</span></div><h3 id="expert-video-title">{activeVideo.title}</h3><p>{activeVideo.channel}</p><div className="guide-video-feature-actions"><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a><button type="button" className="guide-video-feature-share" onClick={() => void sharePage()}><Share2 size={14} aria-hidden="true" /> 이 영상 공유</button></div></div>
+                <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>{activeExpertVideoState.featureLabel}</span><span className="guide-video-feature-index" aria-label={`전체 ${expertVideos.length}개 중 ${activeVideoIndex + 1}번째`}>{String(activeVideoIndex + 1).padStart(2, '0')} / {String(expertVideos.length).padStart(2, '0')}</span></div><h3 id="expert-video-title">{activeVideo.title}</h3><p>{activeVideo.channel}</p><div className="guide-video-feature-actions"><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a><button type="button" className="guide-video-feature-share" onClick={() => void sharePage()}><Share2 size={14} aria-hidden="true" /> 이 영상 공유</button></div></div>
               </article>
                 <div className="guide-video-board" aria-label="전문가 영상 게시판">
                 <div className="guide-video-board-head"><span>전문가 영상 <em>{activeVideoTopic === '전체' ? '전체 주제' : activeVideoTopic}</em></span><strong>{visibleExpertVideos.length}개 영상</strong><span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{activeVideoTopic === '전체' ? '전체 주제' : `${activeVideoTopic} 주제`}에서 {visibleExpertVideos.length}개 영상이 표시됩니다. 현재 선택한 영상은 {activeVideo.title}입니다.</span></div>
