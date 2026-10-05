@@ -1406,6 +1406,17 @@
         "E-LIVE-PUBLIC-EDITORIAL-ARROW-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-139",
+      "statement": "GABA 안내서의 회복 흐름과 출처 읽기 흐름은 텍스트 화살표 대신 동일한 SVG ArrowRight 연결부를 사용해 모바일과 데스크톱에서 읽기 순서의 시각 언어를 일관되게 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-FLOW-ARROWS-20261005",
+        "E-UI-CONTRACT-FLOW-ARROWS-20261005",
+        "E-DEPLOY-PIPELINE-FLOW-ARROWS-20261005",
+        "E-LIVE-PUBLIC-FLOW-ARROWS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10931,6 +10942,48 @@
       "captured_at": "2026-10-05T12:48:07Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EDITORIAL-ARROW",
       "claim_refs": ["C-002", "C-003", "C-138"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-FLOW-ARROWS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "회복 흐름과 출처 읽기 흐름의 SVG 연결부 고도화가 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1620791 <= 1650000",
+      "captured_at": "2026-10-05T13:06:08Z",
+      "reviewer_id": "NAVI-QA-GABA-20261005-FLOW-ARROWS",
+      "claim_refs": ["C-001", "C-003", "C-139"]
+    },
+    {
+      "id": "E-UI-CONTRACT-FLOW-ARROWS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "회복 장 연결부와 출처 읽기 연결부가 shared ArrowRight 컴포넌트와 editorial connector 스타일을 사용하는지 UI 계약 회귀 검사가 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; guide-recovery-thread-arrow; guide-reading-note-flow-arrow; status ok; events 14",
+      "captured_at": "2026-10-05T13:06:08Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-FLOW-ARROWS",
+      "claim_refs": ["C-003", "C-139"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-FLOW-ARROWS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "flow connector 아이콘 통일 commit 36e50d7가 main 공개 파이프라인에서 release-verify·Worker readiness·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "PR #352; main commit d98abddcd16da10ea29d1832582138b4ff7fa82e; workflow 37314128121; release-verify 111776473678, worker-readiness 111776889474, deploy-pages 111776919706, smoke-live 111777008438 and release-status 111777124904 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37314128121",
+      "captured_at": "2026-10-05T13:06:08Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-FLOW-ARROWS",
+      "claim_refs": ["C-001", "C-002", "C-139"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-FLOW-ARROWS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 390px·1440px에서 회복 흐름과 출처 읽기 흐름을 SVG 화살표로 렌더링하고, 기존 장 handoff 이동·가로 폭·runtime 오류를 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha d98abddcd16da10ea29d1832582138b4ff7fa82e; bundleHashes 71; claims 12; masterRecords 6; sharePages 6; provenance matched; Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?qa=handoff-live-d98abdd-390-20261005 reported expertArrow svg, scrollWidth 390, handoff targetTop 57/57/-33, active chapters 국내외 활용·발효·안전·출처 읽기 and errors []; 1440px reported expertArrow svg, scrollWidth 1425, targetTop 54/54/19 and errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=handoff-live-d98abdd-390-20261005",
+      "captured_at": "2026-10-05T13:06:08Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-FLOW-ARROWS",
+      "claim_refs": ["C-002", "C-003", "C-139"]
     }
   ]
 }
