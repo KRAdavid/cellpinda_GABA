@@ -1137,6 +1137,17 @@
         "E-LIVE-PUBLIC-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-114",
+      "statement": "모바일 GABA 공개 안내서는 첫 화면 하단에 다음 읽기 방향을 보여주고, 회복 브리지의 제목 흐름을 자연스럽게 표시하며, 사용자의 모션 설정을 존중한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-READING-CUE-20261005",
+        "E-UI-CONTRACT-MOBILE-READING-CUE-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261005",
+        "E-LIVE-PUBLIC-MOBILE-READING-CUE-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9628,6 +9639,50 @@
       "captured_at": "2026-10-05T04:08:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-PUBLIC-GUIDE-CONTENT-BOUNDARY",
       "claim_refs": ["C-002", "C-003", "C-113"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-READING-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 공개 안내서 hero 하단 읽기 큐와 자연스러운 회복 브리지 제목, reduced-motion 모션 차단을 포함한 PR #303 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #303 source commit 59c0c39; pnpm run validate:ui-contract PASS including v104 mobile reading cue and reduced-motion assertions; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1610564 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/303",
+      "captured_at": "2026-10-05T04:24:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-READING-CUE",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-114"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-READING-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 모바일 hero 읽기 큐의 표시·방향 모션·reduced-motion 차단과 회복 브리지 제목 흐름을 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v104 assertions; PublicGabaGuide.css shows guide-hero-story .guide-hero-scroll on mobile and disables its animation under prefers-reduced-motion; PublicGabaGuide.tsx uses the label '수면과 회복의 연결'; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/303",
+      "captured_at": "2026-10-05T04:24:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-READING-CUE",
+      "claim_refs": ["C-003", "C-114"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 읽기 큐 보정 PR #303이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #303 merge main commit 5ebcfaa906f03a8b8b0755bb9dd1a0b780643458; PR checks release-verify 37263445277 and site-quality-verify 37263445444 successful; main workflow 37263567643 with release-verify 111615588392, worker-readiness 111615800718, deploy-pages 111615820951, smoke-live 111615881984 and release-status 111615925488 successful; deploy-worker 111615821977 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37263567643",
+      "captured_at": "2026-10-05T04:27:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-READING-CUE",
+      "claim_refs": ["C-001", "C-002", "C-114"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-READING-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 모바일 읽기 큐와 자연스러운 회복 브리지 제목 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=5ebcfaa906f03a8b8b0755bb9dd1a0b780643458 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 5ebcfaa906f03a8b8b0755bb9dd1a0b780643458; generatedAt 2026-10-05T04:27:53.342Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-05T04:28:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-READING-CUE",
+      "claim_refs": ["C-002", "C-003", "C-114"]
     }
   ]
 }
