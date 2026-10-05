@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T10:08:30Z",
+  "updated_at": "2026-10-05T10:28:38Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T10:08:30Z"
+    "last_run_at": "2026-10-05T10:28:38Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2307,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T09:44:25Z"
+    "last_run_at": "2026-10-05T10:28:38Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4906,6 +4906,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T10:08:30Z"
+    },
+    {
+      "id": "H-201",
+      "event": "장 사이의 다음 읽기 안내를 실제 버튼으로 고도화했다. 연구→국내외 활용→발효·안전→성장 연구→전문가 영상→출처 읽기 연결을 390px·1440px 공개본에서 확인했고, 각 handoff의 접근 가능한 이름·고정 헤더 아래 도착 위치·가로 넘침 없음·runtimeErrors 0을 확인했다. UI 계약·production build·배포·라이브 smoke가 통과했으며 새 CRITICAL/MAJOR 결함은 없었다. 결과를 C-131과 네 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T10:28:38Z"
     }
   ]
 }

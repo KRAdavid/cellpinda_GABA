@@ -1318,6 +1318,17 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-FLOW-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-131",
+      "statement": "공개 GABA 안내서의 장 사이 다음 읽기 안내는 시각적 장식에 머물지 않고, 390px·1440px에서 국내외 활용·발효와 안전·성장 연구·전문가 영상·출처 읽기로 실제 이어지며 고정 헤더 아래 다음 장을 정렬한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EDITORIAL-HANDOFF-20261005",
+        "E-UI-CONTRACT-EDITORIAL-HANDOFF-20261005",
+        "E-DEPLOY-PIPELINE-EDITORIAL-HANDOFF-20261005",
+        "E-LIVE-PUBLIC-EDITORIAL-HANDOFF-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10491,6 +10502,50 @@
       "captured_at": "2026-10-05T09:58:13Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EXPERT-VIDEO-FLOW",
       "claim_refs": ["C-002", "C-006", "C-130"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EDITORIAL-HANDOFF-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 production build는 장 연결 인터랙션을 포함해 성공했고, 11개 정적 경로·71개 배포 파일·성능 예산 검사를 통과했다.",
+      "locator": "pnpm run build; typecheck and validate-ui-contract passed; Vite 1808 modules transformed; candidateSha c86c9e8bf69653e15ec9a6c9a007df141bb3c97f; routes 11; files 71; total assets 1618108 <= 1650000; initial JS 311199 <= 380000; initial CSS 95703 <= 110000",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\dist",
+      "captured_at": "2026-10-05T10:28:38Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-EDITORIAL-HANDOFF",
+      "claim_refs": ["C-001", "C-002", "C-131"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EDITORIAL-HANDOFF-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 연구 장 handoff와 전문가 영상 다음 읽기 control이 실제 scrollTo 연결을 유지하는지 검사한다.",
+      "locator": "pnpm run validate:ui-contract; status ok; public GABA research handoff must continue into domestic and global applications; public GABA expert-video handoff must be an actionable reading control",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-05T10:28:38Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-EDITORIAL-HANDOFF",
+      "claim_refs": ["C-003", "C-131"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EDITORIAL-HANDOFF-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "editorial handoff 변경이 main 공개 파이프라인에서 release-verify·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "main commit c86c9e8bf69653e15ec9a6c9a007df141bb3c97f; release-verify, worker-readiness, deploy-pages, smoke-live and release-status successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37296467807",
+      "captured_at": "2026-10-05T10:27:27Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-EDITORIAL-HANDOFF",
+      "claim_refs": ["C-001", "C-002", "C-131"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EDITORIAL-HANDOFF-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본의 390px·1440px 다음 읽기 안내 5개는 모두 접근 가능한 버튼으로 표시되고, 연구→국내외 활용→발효·안전→출처 읽기 이동 시 hash·현재 장·도착 위치가 함께 갱신되며 가로 넘침과 runtimeErrors가 없다.",
+      "locator": "cache-disabled Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?qa=handoff-{390|1440}-20261005; 390px and 1440px scrollWidth 390/1425; five actionable labels; min action height 93px/59px; research click produced #applications active `국내외 활용` targetTop 5/8; application click produced #fermented-safety active `발효·안전` targetTop 5/8; expert thread click produced #reading-note active `출처 읽기` targetTop -33/-3; runtimeErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=handoff-390-20261005",
+      "captured_at": "2026-10-05T10:28:38Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EDITORIAL-HANDOFF",
+      "claim_refs": ["C-002", "C-003", "C-131"]
     }
   ]
 }
