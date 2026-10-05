@@ -1625,6 +1625,13 @@
   }
 }
 
+/* v108 narrow header spacing: keep the named reading-size action clear of the menu icon. */
+@supports (padding: max(0px)) {
+  @media(min-width:381px) and (max-width:430px){
+    .guide-header .guide-menu-toggle{right:calc(148px + env(safe-area-inset-right))}
+  }
+}
+
 /* v82 reduced-motion coverage: make every public-guide transition and loading animation respect the reader's system preference. */
 @media(prefers-reduced-motion:reduce){.gaba-guide *,.gaba-guide *::before,.gaba-guide *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
