@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 초소형 모바일 헤더 터치 충돌 보정·PR 검증 완료 — 27445e9 — 2026-10-06
+
+- 280·300·320·350px에서 겹치던 메뉴 버튼과 읽기 크기 버튼을 8px 간격으로 분리했다. 390px 이상 레이아웃과 글자 크기 토글 의미는 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Playwright 280·300·320·350·390·1440px 검증, PR #385의 release-verify·site-quality-verify가 성공했다.
+- PR #385는 main `27445e9`로 병합되었지만 main 공개 배포 run은 후처리 queue로 취소되어 공개 URL의 새 candidate 반영은 아직 대기 중이다. 현재 공개본은 이전 candidate `ffd7c2e`다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-ULTRA-NARROW-HEADER-20261006, E-UI-CONTRACT-ULTRA-NARROW-HEADER-20261006, E-PLAYWRIGHT-ULTRA-NARROW-HEADER-20261006, E-DEPLOY-PIPELINE-ULTRA-NARROW-HEADER-20261006.
+
 ## 초소형 모바일 읽기 크기 조절 라벨 보강·공개 배포 — ffd7c2e — 2026-10-06
 
 - 320px 이하 헤더에서 `가+ 글자`·`가− 기본`을 사용해 읽기 크기 기능을 한눈에 이해하도록 보강했다. 390px 이상은 기존 전체 라벨을 유지했다.

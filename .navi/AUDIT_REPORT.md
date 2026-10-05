@@ -1,5 +1,14 @@
 # Audit Report
 
+## Ultra-Narrow Header Clearance — 27445e9 — 2026-10-06
+
+- 280·300·320·350px에서 메뉴 버튼과 읽기 크기 버튼이 8px 겹치던 잔여 터치 충돌을 정밀 점검으로 확인하고, v123 전용 간격 규칙으로 두 컨트롤 사이에 8px 여백을 확보했다. 390px 이상 레이아웃과 읽기 크기 라벨은 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. Playwright Chromium fallback 로컬 280·300·320·350·390·1440px에서 overlap 없음·viewport와 같은 scrollWidth·320px 토글 상태·runtime errors 0을 확인했다.
+- PR #385의 release-verify와 site-quality-verify는 성공했고 main merge commit은 `27445e9`다. main 공개 배포 run은 runner 후처리 queue로 취소되어 새 공개 candidate 반영은 아직 확인하지 못했다. 현재 공개 validator candidate는 이전 `ffd7c2e`다.
+- 새 CRITICAL/MAJOR 결함은 없다. 공개 URL의 새 CSS 반영, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 다음 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-ULTRA-NARROW-HEADER-20261006, E-UI-CONTRACT-ULTRA-NARROW-HEADER-20261006, E-PLAYWRIGHT-ULTRA-NARROW-HEADER-20261006, E-DEPLOY-PIPELINE-ULTRA-NARROW-HEADER-20261006.
+
 ## Compact Mobile Reading Control — ffd7c2e — 2026-10-06
 
 - 320px 초소형 화면에서 읽기 크기 버튼이 `가+ 글자`·`가− 기본`으로 보이도록 보강했다. 390px 이상에서는 기존 `글자 크게`·`기본 크기` 라벨을 유지하며, 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.

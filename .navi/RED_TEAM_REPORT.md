@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Ultra-Narrow Header Clearance — 2026-10-06 — 27445e9
+
+- 공격 관점에서 280·300·320·350px 헤더의 메뉴·읽기 크기 컨트롤 터치 영역을 비교해 8px overlap을 재현했다. v123 수정 후 네 폭 모두 overlap 없음, scrollWidth 일치, 320px 토글 상태와 runtime errors 0을 확인했다.
+- PR #385의 필수 PR 검증은 성공했지만 main 공개 배포 run은 후처리 queue 때문에 취소되었고, 공개 validator는 새 CSS가 아닌 이전 candidate `ffd7c2e`를 반환했다. 따라서 이번 수정의 라이브 공개 반영은 아직 주장하지 않는다.
+- 새 CRITICAL/MAJOR 결함은 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도와 함께 공개 배포 후 초소형 헤더 라이브 재현을 OPEN으로 유지한다.
+
+증적: E-PLAYWRIGHT-ULTRA-NARROW-HEADER-20261006, E-DEPLOY-PIPELINE-ULTRA-NARROW-HEADER-20261006.
+
 ## Compact Mobile Reading Control — 2026-10-06 — ffd7c2e
 
 - 공격 관점에서 320px 헤더의 읽기 크기 버튼 의미 노출, 터치 가능한 폭, 글자 크기 전환, 390·1440px 기존 라벨 보존, 가로 넘침과 콘솔 오류를 확인했다.

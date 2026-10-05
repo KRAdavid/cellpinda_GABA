@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T19:35:02.303401Z",
+  "updated_at": "2026-10-05T20:25:36.218479Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5138,6 +5138,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T19:34:00Z"
+    },
+    {
+      "id": "H-231",
+      "event": "초소형 모바일 헤더 정밀 점검에서 280·300·320·350px의 메뉴 버튼과 읽기 크기 버튼이 8px 겹치는 잔여 터치 충돌을 발견하고, v123에서 메뉴 위치를 조정해 두 컨트롤 사이에 8px 간격을 확보했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Playwright Chromium fallback 280·300·320·350·390·1440px를 통과했으며 320px 토글·scrollWidth·runtime errors 0을 재현했다. PR #385와 main merge commit 27445e9의 필수 PR 검증은 성공했지만 main 공개 배포 workflow는 runner 후처리 queue로 아직 새 공개 candidate를 반영하지 못했다. 공개 validator는 기존 candidate ffd7c2e를 확인했으며 새 CRITICAL/MAJOR 결함은 없다. C-154와 네 증거를 등록하고 공개 배포·라이브 재검증을 다음 게이트로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T20:20:00Z"
     }
   ]
 }

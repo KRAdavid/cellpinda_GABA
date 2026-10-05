@@ -1578,6 +1578,17 @@
         "E-LIVE-PUBLIC-READING-CONTROL-COMPACT-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-154",
+      "statement": "280~350px 초소형 모바일에서 메뉴 버튼과 읽기 크기 버튼 사이에 8px 간격을 확보해 터치 영역 충돌을 제거하고, 390px 이상 레이아웃과 글자 크기 토글은 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-ULTRA-NARROW-HEADER-20261006",
+        "E-UI-CONTRACT-ULTRA-NARROW-HEADER-20261006",
+        "E-PLAYWRIGHT-ULTRA-NARROW-HEADER-20261006",
+        "E-DEPLOY-PIPELINE-ULTRA-NARROW-HEADER-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11807,6 +11818,47 @@
       "captured_at": "2026-10-05T19:34:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-READING-CONTROL-COMPACT",
       "claim_refs": ["C-001", "C-002", "C-003", "C-153"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-ULTRA-NARROW-HEADER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 헤더 간격 보정 commit ff2c861이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit ff2c861; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1628412 <= 1650000",
+      "captured_at": "2026-10-05T20:05:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-ULTRA-NARROW-HEADER",
+      "claim_refs": ["C-001", "C-003", "C-154"]
+    },
+    {
+      "id": "E-UI-CONTRACT-ULTRA-NARROW-HEADER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 초소형 모바일 헤더의 메뉴·읽기 크기 컨트롤 간격 규칙과 기존 읽기 크기 라벨 회귀 방지를 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v123 compact header clearance assertion; status ok; events 14",
+      "captured_at": "2026-10-05T20:05:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-ULTRA-NARROW-HEADER",
+      "claim_refs": ["C-154"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-ULTRA-NARROW-HEADER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback으로 로컬 280·300·320·350·390·1440px에서 헤더 컨트롤의 터치 영역 충돌·가로폭·320px 글자 크기 토글을 확인했다.",
+      "locator": "temporary Playwright script outside repository at http://127.0.0.1:4191; 280/300/320/350px: menu·reading control gap 8px, overlaps [], scrollWidth equals viewport; 320px click -> aria-pressed true, root is-large-text, scrollWidth 320, runtime errors []; 390px: gap 12px; 1440px: desktop controls unchanged; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T20:06:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-ULTRA-NARROW-HEADER",
+      "claim_refs": ["C-003", "C-004", "C-154"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-ULTRA-NARROW-HEADER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 헤더 간격 보정 PR #385가 release-verify와 site-quality-verify 필수 검사를 통과해 main commit 27445e9로 병합되었다. main 공개 배포 workflow는 새 candidate 27445e9에서 Pages 배포 전 대기·취소 상태로 남아 공개 반영은 별도 검증 대기다.",
+      "locator": "PR #385; code commit ff2c8614338672577740bd293a5c92b86d9b461b; main merge commit 27445e9408c64f0c9bc882876b958bb4f42cb7e7; PR workflow 37368000839 release-verify success and 37367795246 site-quality-verify success; main workflow 37368468270 was cancelled while queued at release-status; manual main workflow 37368990674 was cancelled while pending",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37368000839",
+      "captured_at": "2026-10-05T20:20:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-ULTRA-NARROW-HEADER",
+      "claim_refs": ["C-001", "C-002", "C-154"]
     }
   ]
 }
