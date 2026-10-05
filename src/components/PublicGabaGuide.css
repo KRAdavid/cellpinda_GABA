@@ -1862,6 +1862,36 @@
   .gaba-guide .guide-video-filter{scroll-snap-align:start}
 }
 
+/* v124 mobile video filter continuation cue: make the horizontal topic rail discoverable without adding copy or height. */
+@media(max-width:700px){
+  .gaba-guide .guide-video-filters-wrap:after{
+    content:"";
+    position:absolute;
+    z-index:2;
+    top:0;
+    right:0;
+    width:38px;
+    height:44px;
+    border-radius:0 10px 10px 0;
+    background:linear-gradient(90deg,rgba(247,251,253,0),#f7fbfd 78%);
+    pointer-events:none;
+  }
+  .gaba-guide .guide-video-filters-cue{
+    position:absolute;
+    z-index:3;
+    top:14px;
+    right:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--guide-teal-dark);
+    pointer-events:none;
+  }
+}
+@media(min-width:701px){
+  .gaba-guide .guide-video-filters-cue{display:none}
+}
+
 /* v96 mobile editorial handoff: keep the current scene and next chapter in a calm, deliberate reading order. */
 @media(max-width:430px){
   .guide-research-handoff{
