@@ -1,5 +1,14 @@
 # Audit Report
 
+## Research Reading Rail Recheck — 96333a6 — 2026-10-05
+
+- 연구 읽기 레일의 텍스트 화살표 잔존을 데스크톱 CSS chevron으로 보정하고, 모바일에서는 장식 연결부를 숨겨 좁은 화면의 정보량을 정리했다. 390px 공개 화면에서는 연구 순서가 카드와 함께 자연스럽게 이어지고, 1440px에서는 3개의 chevron이 `지도 → 대상 → 결과 → 해석` 순서를 시각적으로 보조한다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #354 checks와 main workflow `37316142968`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `96333a63e4fd295485724c52586bf1b151fa85da`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claims·6개 master records·1개 product·6개 share pages·teaser HOLD를 유지한다. Chrome CDP fallback 공개 390·1440px에서 연구 레일·handoff 이동·scrollWidth 390·1425·runtimeErrors 0을 확인했고 새 CRITICAL/MAJOR 결함은 없었다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. Browser 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-RAIL-20261005, E-UI-CONTRACT-RESEARCH-RAIL-20261005, E-DEPLOY-PIPELINE-RESEARCH-RAIL-20261005, E-LIVE-PUBLIC-RESEARCH-RAIL-20261005.
+
 ## Editorial Flow Connector Recheck — d98abdd — 2026-10-05
 
 - 회복 장의 다음 읽기 흐름과 출처 읽기 장의 연구 카드 → 원문 출처 흐름을 390px·1440px에서 재감리했다. 두 연결부 모두 shared SVG ArrowRight와 editorial connector 스타일로 표시되어 텍스트 화살표와 아이콘 화살표가 섞이지 않는다.

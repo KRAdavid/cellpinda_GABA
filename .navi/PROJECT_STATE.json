@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T12:48:07Z",
+  "updated_at": "2026-10-05T13:27:17Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4969,6 +4969,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T13:06:08Z"
+    },
+    {
+      "id": "H-210",
+      "event": "연구 읽기 레일에서 남아 있던 텍스트 화살표를 데스크톱 CSS chevron 연결부로 통일하고 모바일에서는 연결 장식을 숨겨 연구 대상·결과·해석 순서를 더 빠르게 읽도록 보정했다. PR #354의 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, main workflow 37316142968의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 최신 공개 candidate 96333a63e4fd295485724c52586bf1b151fa85da는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·1개 product·6개 share page·제품 독립 경계를 유지한다. Chrome CDP fallback 공개 390px·1440px에서 연구 레일 연결부, 연구→국내외 활용→발효·안전→출처 읽기 handoff의 도착 위치, scrollWidth 390·1425, runtimeErrors 0을 확인했고 새 CRITICAL/MAJOR 결함은 없었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지한다. 결과를 C-140과 네 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T13:27:17Z"
     }
   ]
 }

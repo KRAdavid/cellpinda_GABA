@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 읽기 레일 연결부 정리 — 96333a6 — 2026-10-05
+
+- 연구 읽기 레일의 텍스트 화살표를 데스크톱 CSS chevron으로 바꾸고 모바일에서는 연결 장식을 숨겨 카드와 문장을 먼저 읽게 했다. 기존 연구 handoff, 연구 내용, 출처, 제품 독립 공개 경계는 변경하지 않았다.
+- PR #354 checks와 main workflow `37316142968`의 Pages 배포·라이브 smoke·release status가 성공했고, 공개 390·1440px에서 연구 레일과 장 사이 handoff 이동·오류·가로 폭을 재검증했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-RAIL-20261005, E-UI-CONTRACT-RESEARCH-RAIL-20261005, E-DEPLOY-PIPELINE-RESEARCH-RAIL-20261005, E-LIVE-PUBLIC-RESEARCH-RAIL-20261005.
+
 ## 회복·출처 읽기 연결부 아이콘 통일 — d98abdd — 2026-10-05
 
 - 회복 장의 `GABA란 → 수면과 회복 → GABA를 읽는 시작점`과 출처 읽기 장의 `연구 카드 → 원문 출처` 연결부를 shared SVG ArrowRight로 통일했다. 모바일·데스크톱에서 읽기 방향과 기존 handoff 이동은 그대로 유지했다.

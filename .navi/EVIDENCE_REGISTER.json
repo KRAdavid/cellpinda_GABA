@@ -1417,6 +1417,17 @@
         "E-LIVE-PUBLIC-FLOW-ARROWS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-140",
+      "statement": "GABA 안내서의 연구 읽기 레일은 데스크톱에서 텍스트 화살표 대신 가벼운 CSS chevron 연결부를 사용하고 모바일에서는 연결 장식을 숨겨 390px·1440px에서 연구 순서를 빠르게 읽게 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-RAIL-20261005",
+        "E-UI-CONTRACT-RESEARCH-RAIL-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-RAIL-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-RAIL-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10984,6 +10995,48 @@
       "captured_at": "2026-10-05T13:06:08Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-FLOW-ARROWS",
       "claim_refs": ["C-002", "C-003", "C-139"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-RAIL-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 읽기 레일의 CSS chevron 연결부와 모바일 연결 장식 숨김 보정이 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1621040 <= 1650000",
+      "captured_at": "2026-10-05T13:27:17Z",
+      "reviewer_id": "NAVI-QA-GABA-20261005-RESEARCH-RAIL",
+      "claim_refs": ["C-001", "C-003", "C-140"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-RAIL-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 읽기 레일이 데스크톱 CSS chevron 규칙을 사용하고 모바일에서는 장식 연결부를 숨기며 이전 retired selector가 남지 않는지 UI 계약 회귀 검사가 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; research rail non-text chevron; mobile connector visibility none; no retired guide-expert-thread i selector; status ok; events 16",
+      "captured_at": "2026-10-05T13:27:17Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-RAIL",
+      "claim_refs": ["C-003", "C-140"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-RAIL-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "research rail chevron commit b0727ce가 main 공개 파이프라인에서 release-verify·Worker readiness·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "PR #354; main commit 96333a63e4fd295485724c52586bf1b151fa85da; workflow 37316142968; release-verify 111783258891, worker-readiness 111783719345, deploy-pages 111783795275, smoke-live 111784082840 and release-status 111784173237 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37316142968",
+      "captured_at": "2026-10-05T13:27:17Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-140"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-RAIL-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 390px·1440px에서 연구 읽기 레일을 각각 모바일 무장식·데스크톱 CSS chevron으로 렌더링하고, 연구→국내외 활용→발효·안전→출처 읽기 handoff 이동과 가로 폭·runtime 오류를 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 96333a63e4fd295485724c52586bf1b151fa85da; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; provenance matched; Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?qa=handoff-live-96333a6-390-20261005 reported scrollWidth 390, handoff targetTop 57/57/-33, active chapters 국내외 활용·발효·안전·출처 읽기, expertArrow svg and errors []; 1440px reported scrollWidth 1425, targetTop 54/54/19 and errors []; research rail connectors 3, mobile pseudo content none, desktop pseudo content empty with width 6px and 45deg transform",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=flow-chevron-live-96333a6-390-20261005#research",
+      "captured_at": "2026-10-05T13:27:17Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-140"]
     }
   ]
 }

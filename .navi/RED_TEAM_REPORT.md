@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 96333a6
+
+- 공격 관점에서 연구 읽기 레일의 텍스트 화살표 잔존, 모바일 연결 장식 과밀, 데스크톱 chevron 누락, 연구 handoff 이동 실패, 가로 넘침, runtime 오류를 390px·1440px에서 확인했다. 해당 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.
+- 390px에서는 research rail pseudo content가 `none`이고 scrollWidth가 390px이며, 1440px에서는 연결부 3개가 6px CSS chevron으로 표시되고 scrollWidth가 1425px이다. 연구→국내외 활용→발효·안전→출처 읽기 이동은 현재 장·hash·도착 위치를 함께 갱신했다.
+- 연구 카피·수치·제품 독립 공개 경계는 변경되지 않았다. 대표 Chrome CDP 렌더만으로 전체 브라우저·실기기를 보장하지 않으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-RESEARCH-RAIL-20261005.
+
 ## Recheck — 2026-10-05 — d98abdd
 
 - 공격 관점에서 회복 장의 연결 흐름과 출처 읽기 장의 연구 카드 → 원문 출처 연결부를 390px·1440px에서 확인했다. 텍스트 화살표 잔존, SVG 누락, handoff 이동 실패, 가로 넘침, runtime 오류는 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.
