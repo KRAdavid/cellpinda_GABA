@@ -1515,7 +1515,9 @@
       "evidence_refs": [
         "E-LOCAL-BUILD-HERO-CUE-CONTRAST-20261006",
         "E-UI-CONTRACT-HERO-CUE-CONTRAST-20261006",
-        "E-CDP-HERO-CUE-CONTRAST-20261006"
+        "E-CDP-HERO-CUE-CONTRAST-20261006",
+        "E-DEPLOY-PIPELINE-HERO-CUE-CONTRAST-20261006",
+        "E-LIVE-PUBLIC-HERO-CUE-CONTRAST-20261006"
       ],
       "status": "SUPPORTED"
     }
@@ -11484,6 +11486,28 @@
       "captured_at": "2026-10-06T02:00:00Z",
       "reviewer_id": "NAVI-CDP-QA-20261006-HERO-CUE-CONTRAST",
       "claim_refs": ["C-148"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-HERO-CUE-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면 읽기 진입 컨트롤 보강 PR #371이 필수 검사를 통과해 main commit 1180808로 병합되었고, 정적 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #371; code commit 58c4289; docs commit f908363; main commit 1180808ae0b50d1f79518f8a6be71f389a7faa56; workflow 37343898286; release-verify 111877541053, worker-readiness 111878091063, deploy-pages 111878136476, smoke-live 111878237755 and release-status 111878338085 successful; deploy-worker 111878137677 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37343898286",
+      "captured_at": "2026-10-05T16:52:47Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-HERO-CUE-CONTRAST",
+      "claim_refs": ["C-001", "C-002", "C-146", "C-148"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HERO-CUE-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본의 첫 화면 읽기 진입 컨트롤은 390px·1440px에서 표시되고, 선택 시 수면과 회복 도입부와 읽기 진행 레일로 정확히 이어진다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 1180808ae0b50d1f79518f8a6be71f389a7faa56; generatedAt 2026-10-05T16:51:32.116Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: button visible, text 3분 읽기 시작, buttonWidth 142, scrollWidth 390, click hash #opening-bridge, openingTop 16, progress synced; 1440px: button visible, buttonWidth 146, scrollWidth 1425, click hash #opening-bridge, openingTop 8, progress synced; errors []; screenshot reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=hero-start-public-390",
+      "captured_at": "2026-10-05T16:54:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-HERO-CUE-CONTRAST",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-146", "C-148"]
     }
   ]
 }

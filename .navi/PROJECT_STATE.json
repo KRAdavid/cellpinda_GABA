@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T16:36:42.285056Z",
+  "updated_at": "2026-10-05T16:55:08.777420Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5053,6 +5053,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T02:00:00Z"
+    },
+    {
+      "id": "H-222",
+      "event": "첫 화면 읽기 진입 컨트롤 보강 PR #371이 필수 검사를 통과해 main commit 1180808로 병합되었고, workflow 37343898286의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 번들 해시를 확인했으며, Chrome CDP fallback 공개 390·1440px에서 버튼 표시·도입부 이동·읽기 진행 레일 동기화를 재현했다. 새 CRITICAL/MAJOR 결함은 없고 C-148과 배포·라이브 증거를 갱신했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T02:54:00Z"
     }
   ]
 }

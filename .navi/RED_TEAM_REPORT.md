@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Public Recheck — 2026-10-06 — 1180808
+
+- 공격 관점에서 사진 위 읽기 진입 컨트롤의 가독성, 최소 터치 영역, 키보드 초점, 모바일 가로 넘침, 클릭 후 목적지 정렬을 확인했다.
+- 공개 390·1440px에서 버튼 표시·가로 폭·`#opening-bridge` 이동·읽기 진행 레일 동기화·runtime 오류 0을 재현했고 새 CRITICAL/MAJOR 결함은 없었다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-CDP-HERO-CUE-CONTRAST-20261006, E-LIVE-PUBLIC-HERO-CUE-CONTRAST-20261006.
+
 ## Public Recheck — 2026-10-06 — 589055e
 
 - 공개 390·1440px에서 글자 크기 조절의 초기·토글 후 문구, aria-pressed, 가+/가− 신호, 가로 폭과 runtime 오류를 확인했다.
