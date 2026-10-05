@@ -520,6 +520,8 @@
 .guide-video-feature-share:focus-visible{outline:3px solid rgba(131,222,217,.28);outline-offset:3px}
 .guide-video-board{min-width:0;padding:16px;border:1px solid #dbe9ef;border-radius:20px;background:#f7fbfd}
 .guide-video-board-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 3px 12px;color:#8aa2b1;font-size:11px;font-weight:900;letter-spacing:.16em}
+.guide-video-board-head>span:first-child{display:inline-flex;align-items:center;flex-wrap:wrap;gap:7px;min-width:0}
+.guide-video-board-head em{display:inline-flex;align-items:center;min-height:22px;padding:0 7px;border:1px solid #cfe5e8;border-radius:999px;background:#fff;color:var(--guide-teal-dark);font-size:10px;font-style:normal;letter-spacing:-.03em;white-space:nowrap}
 .guide-video-board-head strong{color:var(--guide-teal-dark);font-size:11px;letter-spacing:-.03em}
 .guide-video-filters-wrap{position:relative;min-width:0}
 .guide-video-filters{display:flex;flex-wrap:wrap;gap:7px;min-width:0;margin:0 3px 13px}
