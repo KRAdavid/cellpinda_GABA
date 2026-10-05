@@ -1,5 +1,14 @@
 # Audit Report
 
+## Editorial Flow Connector Recheck — d98abdd — 2026-10-05
+
+- 회복 장의 다음 읽기 흐름과 출처 읽기 장의 연구 카드 → 원문 출처 흐름을 390px·1440px에서 재감리했다. 두 연결부 모두 shared SVG ArrowRight와 editorial connector 스타일로 표시되어 텍스트 화살표와 아이콘 화살표가 섞이지 않는다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #352 checks와 main workflow `37314128121`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `d98abddcd16da10ea29d1832582138b4ff7fa82e`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claims·6개 master records·6개 share pages·teaser HOLD를 유지한다. Chrome CDP fallback 공개 390·1440px에서 expertArrow `svg`, handoff 이동, scrollWidth 390·1425, runtimeErrors 0을 확인했으며 새 CRITICAL/MAJOR 결함은 없었다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. Browser 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-FLOW-ARROWS-20261005, E-UI-CONTRACT-FLOW-ARROWS-20261005, E-DEPLOY-PIPELINE-FLOW-ARROWS-20261005, E-LIVE-PUBLIC-FLOW-ARROWS-20261005.
+
 ## Editorial Connector Recheck — 62ad947 — 2026-10-05
 
 - 전문가 영상에서 출처 읽기로 이어지는 마지막 읽기 연결부를 공개 390px·1440px에서 재감리했다. 기존 텍스트 화살표 대신 shared SVG ArrowRight가 렌더링되고, 국내외 활용·발효·안전·출처 읽기 handoff가 현재 장 → 다음 장 순서로 이동했다.

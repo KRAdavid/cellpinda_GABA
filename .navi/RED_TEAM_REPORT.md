@@ -1,5 +1,12 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — d98abdd
+
+- 공격 관점에서 회복 장의 연결 흐름과 출처 읽기 장의 연구 카드 → 원문 출처 연결부를 390px·1440px에서 확인했다. 텍스트 화살표 잔존, SVG 누락, handoff 이동 실패, 가로 넘침, runtime 오류는 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.
+- 연구 카피·수치·제품 독립 공개 경계는 변경되지 않았다. 대표 Chrome CDP 렌더만으로 전체 브라우저·실기기를 보장하지 않으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-FLOW-ARROWS-20261005.
+
 ## Recheck — 2026-10-05 — 62ad947
 
 - 전문가 영상 다음 읽기 연결부를 390px·1440px에서 공격적으로 확인했다. SVG 화살표가 표시되고, 국내외 활용·발효·안전·출처 읽기 handoff의 해시와 현재 장 표시가 함께 갱신되며 scrollWidth는 390·1425px으로 유지됐다.

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 회복·출처 읽기 연결부 아이콘 통일 — d98abdd — 2026-10-05
+
+- 회복 장의 `GABA란 → 수면과 회복 → GABA를 읽는 시작점`과 출처 읽기 장의 `연구 카드 → 원문 출처` 연결부를 shared SVG ArrowRight로 통일했다. 모바일·데스크톱에서 읽기 방향과 기존 handoff 이동은 그대로 유지했다.
+- PR #352 checks와 main workflow `37314128121`의 Pages 배포·라이브 smoke·release status가 성공했고, 라이브 validator는 HTTP 200·STATIC·공개 데이터 정합성을 확인했다. 공개 390·1440px handoff 이동과 오류·가로 폭을 재검증했다.
+- 연구 수치·출처·카피·제품 독립 경계는 변경하지 않았으며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-FLOW-ARROWS-20261005, E-UI-CONTRACT-FLOW-ARROWS-20261005, E-DEPLOY-PIPELINE-FLOW-ARROWS-20261005, E-LIVE-PUBLIC-FLOW-ARROWS-20261005.
+
 ## 전문가 영상 → 출처 읽기 연결부 아이콘 통일 — 62ad947 — 2026-10-05
 
 - 전문가 영상 다음 읽기 연결부의 텍스트 화살표를 기존 화면 체계와 같은 SVG ArrowRight 아이콘으로 통일했다. 모바일·데스크톱에서 다음 읽기 방향과 터치 가능한 연결부는 그대로 유지했다.
