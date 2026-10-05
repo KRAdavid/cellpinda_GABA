@@ -536,6 +536,8 @@ requireMatch(indexHtml, /<title>저속노화, 회복하는 밤에서 시작됩�
 requireMatch(indexHtml, /<meta property="og:title" content="저속노화, 회복하는 밤에서 시작됩니다 \| GABA Guide" \/>/, 'public GABA Open Graph title must match the completed hero sentence');
 requireMatch(publicGuide, /document\.title = '저속노화, 회복하는 밤에서 시작됩니다 \| GABA Guide';/, 'public GABA runtime title must match the completed hero sentence');
 requireMatch(publicGuide, /const shareTitle = shareChapterId === 'top' \? '저속노화, 회복하는 밤에서 시작됩니다' :/, 'top-level GABA shares must use the completed hero sentence');
+requireMatch(publicGuide, /activeChapterId === 'research' && activeResearchTopic[\s\S]*?activeChapterId === 'reading-note'[\s\S]*?updateMeta\('meta\[property="og:title"\]', pageTitle\)[\s\S]*?updateMeta\('meta\[name="twitter:title"\]', pageTitle\)/, 'public GABA contextual chapters must update share metadata with the selected research or video context');
+requireMatch(publicGuide, /const pageDescription = activeChapterId[\s\S]*?updateMeta\('meta\[property="og:description"\]', pageDescription\)[\s\S]*?updateMeta\('meta\[name="twitter:description"\]', pageDescription\)/, 'public GABA contextual chapters must update the shared description with the selected context');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:guide-mobile-scroll-cue/, 'mobile reading cue must use a restrained directional motion');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:none}/, 'mobile reading cue must respect reduced-motion preferences');
 requireMatch(publicGuide, /<p className="guide-section-number">수면과 회복의 연결<\/p>/, 'recovery bridge label must read as a natural chapter connection');

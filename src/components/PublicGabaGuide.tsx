@@ -1078,10 +1078,35 @@ export default function PublicGabaGuide() {
   }, []);
 
   useEffect(() => {
-    const chapterTitle = activeChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작됩니다' : activeReadingLabel;
+    const chapterTitle = activeChapterId === 'top'
+      ? '저속노화, 회복하는 밤에서 시작됩니다'
+      : activeChapterId === 'research' && activeResearchTopic
+        ? `${activeResearchTopic.title} 연구 결과`
+        : activeChapterId === 'reading-note'
+          ? `${sourceReadingTopic.title} 연구 출처 읽기`
+          : activeReadingLabel;
     const selectedVideoTitle = activeChapterId === 'expert-videos' ? ` · ${activeVideo.title}` : '';
-    document.title = `${chapterTitle}${selectedVideoTitle} | GABA Guide`;
-  }, [activeChapterId, activeReadingLabel, activeVideo.title]);
+    const pageTitle = `${chapterTitle}${selectedVideoTitle} | GABA Guide`;
+    const pageDescription = activeChapterId === 'top'
+      ? '수면과 회복의 관계부터 1950년 GABA 발견, 신경계 연구, 국내외 활용과 발효 GABA의 안전성 기록까지 쉽게 읽는 공개 안내서입니다.'
+      : activeChapterId === 'research' && activeResearchTopic
+        ? `${activeResearchTopic.title} 연구의 대상·관찰 결과·출처를 쉽게 읽는 공개 GABA 안내서입니다.`
+        : activeChapterId === 'reading-note'
+          ? `${sourceReadingTopic.title} 연구의 대상·측정 항목·출처를 읽는 공개 GABA 안내서입니다.`
+          : activeChapterId === 'expert-videos'
+            ? `${activeVideo.title} 등 전문가 영상과 함께 GABA 연구 흐름을 읽는 공개 안내서입니다.`
+            : `${activeReadingLabel}에서 GABA의 발견과 연구 흐름을 읽는 공개 안내서입니다.`;
+    document.title = pageTitle;
+    const updateMeta = (selector: string, value: string) => {
+      const element = document.head.querySelector<HTMLMetaElement>(selector);
+      if (element) element.content = value;
+    };
+    updateMeta('meta[name="description"]', pageDescription);
+    updateMeta('meta[property="og:title"]', pageTitle);
+    updateMeta('meta[property="og:description"]', pageDescription);
+    updateMeta('meta[name="twitter:title"]', pageTitle);
+    updateMeta('meta[name="twitter:description"]', pageDescription);
+  }, [activeChapterId, activeReadingLabel, activeResearchTopic?.id, activeVideo.title, sourceReadingTopic.title]);
 
   useEffect(() => () => {
     if (shareStatusTimer.current !== null) window.clearTimeout(shareStatusTimer.current);
