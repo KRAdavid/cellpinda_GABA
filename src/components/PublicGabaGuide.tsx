@@ -941,6 +941,12 @@ export default function PublicGabaGuide() {
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const activeVideoIndex = Math.max(0, expertVideos.findIndex((video) => video.id === activeVideo.id));
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
+  const getExpertVideoState = (videoId: string) => {
+    if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, className: '' };
+    if (!videoStarted) return { label: '현재 선택됨', badge: '선택됨', className: 'is-selected' };
+    if (!videoFrameReady) return { label: '영상 준비 중', badge: '준비 중', className: 'is-loading' };
+    return { label: '현재 재생 중', badge: '재생 중', className: 'is-playing' };
+  };
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
   const activeResearchTopic = researchTopics.find((topic) => topic.id === activeResearchTopicId);
@@ -1937,7 +1943,7 @@ export default function PublicGabaGuide() {
                 <div className="guide-video-board" aria-label="전문가 영상 게시판">
                 <div className="guide-video-board-head"><span>전문가 영상 <em>{activeVideoTopic === '전체' ? '전체 주제' : activeVideoTopic}</em></span><strong>{visibleExpertVideos.length}개 영상</strong><span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{activeVideoTopic === '전체' ? '전체 주제' : `${activeVideoTopic} 주제`}에서 {visibleExpertVideos.length}개 영상이 표시됩니다. 현재 선택한 영상은 {activeVideo.title}입니다.</span></div>
                 <div ref={videoFilterRailRef} className={`guide-video-filters-wrap${videoFilterRailAtEnd ? ' is-at-end' : ''}`} role="region" aria-label="전문가 영상 주제 필터. 좌우로 이동할 수 있습니다."><div className="guide-video-filters" role="group" aria-label="전문가 영상 주제 필터">{expertVideoTopics.map((topic) => { const count = topic === '전체' ? expertVideos.length : expertVideos.filter((video) => video.topic === topic).length; return <button type="button" className={`guide-video-filter${activeVideoTopic === topic ? ' is-active' : ''}`} aria-label={`${topic === '전체' ? '전체 주제' : `${topic} 주제`} · ${count}개 영상`} aria-pressed={activeVideoTopic === topic} aria-controls="expert-video-list" key={topic} onClick={() => selectExpertVideoTopic(topic)}>{topic}<span aria-hidden="true">{count}</span></button>; })}</div><span className={`guide-video-filters-cue${videoFilterRailAtEnd ? ' is-hidden' : ''}`} aria-hidden="true"><ChevronRight size={15} strokeWidth={2.4} /></span></div>
-                <div className="guide-video-grid" id="expert-video-list">{visibleExpertVideos.map((video, index) => <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} aria-controls="expert-video-feature" aria-label={`${video.topic} · ${video.title} · ${video.channel}${activeVideo.id === video.id ? ' · 현재 재생 중' : ' · 영상 선택'}`} onClick={() => selectExpertVideo(video.id)}>
+                <div className="guide-video-grid" id="expert-video-list">{visibleExpertVideos.map((video, index) => { const videoState = getExpertVideoState(video.id); return <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} aria-controls="expert-video-feature" aria-label={`${video.topic} · ${video.title} · ${video.channel} · ${videoState.label}`} onClick={() => selectExpertVideo(video.id)}>
                   <span className="guide-video-card-thumb">
                     <span className={`guide-video-card-thumb-placeholder is-${videoPosterTone(video.topic)}`} style={{ '--guide-video-poster': `url(${videoPosterImage(video.topic)})`, '--guide-video-poster-position': videoPosterPosition(index) } as CSSProperties} aria-hidden="true">
                       <small>GABA · {video.topic} · {String(index + 1).padStart(2, '0')}</small>
@@ -1947,8 +1953,8 @@ export default function PublicGabaGuide() {
                     <img src={videoThumbnailUrl(video.id)} onError={(event) => fallbackVideoThumbnail(event, video.id)} onLoad={(event) => validateVideoThumbnail(event, video.id)} alt="" loading="lazy" fetchPriority="low" decoding="async" />
                     <span className="guide-video-card-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span>
                   </span>
-                  <span className="guide-video-card-copy"><span className="guide-video-card-copy-top"><span>{video.topic}</span>{activeVideo.id === video.id ? <em>재생 중</em> : null}</span><strong>{video.title}</strong><small>{video.channel}</small></span>
-                </button>)}</div>
+                  <span className="guide-video-card-copy"><span className="guide-video-card-copy-top"><span>{video.topic}</span>{videoState.badge ? <em className={videoState.className}>{videoState.badge}</em> : null}</span><strong>{video.title}</strong><small>{video.channel}</small></span>
+                </button>; })}</div>
               </div>
             </div>
             <p className="guide-expert-note guide-video-gallery-note">각 채널에서 공개한 짧은 영상을 모았습니다. 선택한 영상은 이 페이지에서 바로 재생되며, 원문 링크도 함께 제공합니다.</p>
