@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 726fe8a8 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-004 280·300·320·360·390px 헤더·큰 글씨 모드·390px 전문가 영상 선택·390·768·1024·1440px 장 직접 진입: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #324와 main 공개 배포 workflow `37282401884`가 성공했고, 공개 manifest는 candidate `726fe8a85f5729c780d5da21dee36f4fa86d6412`, HTTP 200, STATIC, 12 claims, 6 research, 1 product, teaser HOLD를 확인했다. v111 읽기 레일은 전환 중 opacity 1·흰색 표면을 유지한다.
+- NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-READING-RAIL-OPAQUE-20261005, E-UI-CONTRACT-READING-RAIL-OPAQUE-20261005, E-DEPLOY-PIPELINE-READING-RAIL-OPAQUE-20261005, E-LIVE-PUBLIC-READING-RAIL-OPAQUE-20261005.
+
 ## Current Release Recheck — 2ca5a8a — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
