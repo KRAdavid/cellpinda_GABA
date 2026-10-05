@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T12:23:48Z",
+  "updated_at": "2026-10-05T12:48:07Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4955,6 +4955,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T12:23:48Z"
+    },
+    {
+      "id": "H-208",
+      "event": "전문가 영상에서 연구 읽기·원문 출처로 넘어가는 handoff의 텍스트 화살표가 다른 화면의 SVG 아이콘 체계와 달라 보이는 잔여 퍼블리싱 리스크를 확인했다. PR #350에서 ArrowRight SVG와 editorial connector 스타일로 통일하고 UI 계약에 아이콘·스타일 회귀 검사를 추가했다. 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #350 checks, main workflow 37311934178의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 live candidate 62ad9474ab2ffaf3d3a3b20b22d853e48450a74a는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Chrome CDP fallback 공개 390px·1440px에서 expertArrow svg, 국내외 활용·발효·안전·출처 읽기 handoff 이동, scrollWidth 390·1425, runtimeErrors 0을 확인했으며 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지하고 결과를 C-138과 네 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T12:48:07Z"
     }
   ]
 }

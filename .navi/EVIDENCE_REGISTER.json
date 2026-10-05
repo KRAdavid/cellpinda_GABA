@@ -1395,6 +1395,17 @@
         "E-LIVE-PUBLIC-CHAPTER-ENTRY-RHYTHM-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-138",
+      "statement": "전문가 영상에서 연구 읽기·원문 출처로 이어지는 editorial handoff는 기존 아이콘 체계의 SVG 화살표로 통일되어 390px·1440px에서 같은 읽기 흐름과 터치 가능한 연결부를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EDITORIAL-ARROW-20261005",
+        "E-UI-CONTRACT-EDITORIAL-ARROW-20261005",
+        "E-DEPLOY-PIPELINE-EDITORIAL-ARROW-20261005",
+        "E-LIVE-PUBLIC-EDITORIAL-ARROW-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10876,6 +10887,50 @@
       "captured_at": "2026-10-05T12:23:48Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-CHAPTER-ENTRY-RHYTHM",
       "claim_refs": ["C-002", "C-003", "C-137"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EDITORIAL-ARROW-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 다음 읽기 연결부의 텍스트 화살표를 shared ArrowRight SVG 아이콘으로 교체하고 UI 계약을 추가한 변경이 로컬 검증을 통과했다.",
+      "locator": "commit 940970a; pnpm run validate:ui-contract status ok; pnpm run typecheck status ok; pnpm test 127/127; pnpm run build status ok; Chrome CDP fallback local 390px·1440px handoff flow reported expertThread true, expertArrow svg, scrollWidth 390/1425 and errors []",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\src\\components\\PublicGabaGuide.tsx",
+      "captured_at": "2026-10-05T12:43:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-EDITORIAL-ARROW",
+      "claim_refs": ["C-001", "C-003", "C-138"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EDITORIAL-ARROW-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 전문가 영상 다음 읽기 연결부가 shared SVG 화살표와 editorial connector 스타일을 계속 사용하는지 회귀 검사한다.",
+      "locator": "pnpm run validate:ui-contract; status ok; scripts/validate-ui-contract.mjs guards guide-expert-thread-arrow in PublicGabaGuide.tsx and its connector treatment in PublicGabaGuide.css",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-05T12:43:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-EDITORIAL-ARROW",
+      "claim_refs": ["C-003", "C-138"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EDITORIAL-ARROW-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "editorial handoff 아이콘 통일 commit 940970a가 main 공개 파이프라인에서 release-verify·Worker readiness·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "main commit 62ad9474ab2ffaf3d3a3b20b22d853e48450a74a; workflow 37311934178; release-verify 111769186098, worker-readiness 111769694082, deploy-pages 111769731621, smoke-live 111769838366 and release-status 111769936890 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37311934178",
+      "captured_at": "2026-10-05T12:48:07Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-EDITORIAL-ARROW",
+      "claim_refs": ["C-001", "C-002", "C-138"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EDITORIAL-ARROW-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본은 390px·1440px에서 전문가 영상 다음 읽기 연결부를 SVG 화살표로 렌더링하고, 국내외 활용·발효 안전·출처 읽기 handoff 이동과 가로 폭·runtime 오류를 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 62ad9474ab2ffaf3d3a3b20b22d853e48450a74a; bundleHashes 71; claims 12; masterRecords 6; sharePages 6; provenance matched; Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?qa=handoff-live-62ad947-390-20261005 reported expertArrow svg, scrollWidth 390, handoff targetTop 57/57/-33, active chapters 국내외 활용·발효·안전·출처 읽기 and errors []; 1440px reported expertArrow svg, scrollWidth 1425, targetTop 54/54/19 and errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=handoff-live-62ad947-390-20261005",
+      "captured_at": "2026-10-05T12:48:07Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EDITORIAL-ARROW",
+      "claim_refs": ["C-002", "C-003", "C-138"]
     }
   ]
 }
