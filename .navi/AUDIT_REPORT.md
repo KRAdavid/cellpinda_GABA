@@ -1,5 +1,13 @@
 # Audit Report
 
+## Release Recheck — 2eb17a7 — 2026-10-05
+
+- 연구 지도 → 상세 카드 → 다음 연구, 마지막 공유 장 직접 링크, 사업자용 5문장 복사, 전문가 영상 선택 재생을 공개 390px에서 실제 사용 순서로 재감리했다.
+- 연구 지도 선택 후 `피부 연구 결과`와 다음 `근육 연구 결과`가 읽기 레일 아래에 정렬됐고, 직접 `#final` 진입은 `이야기 공유`, `12 / 12`와 제목 맥락을 복원했다. 실제 마우스 이벤트 복사는 `복사 완료` 및 성공 상태를 표시했다.
+- UI 상태·가로 폭·포커스·iframe·브라우저 오류를 확인했으며 새 CRITICAL/MAJOR 결함은 없었다. 브라우저 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했고, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LIVE-PUBLIC-RESEARCH-FLOW-20261005, E-LIVE-PUBLIC-DIRECT-FINAL-CONTEXT-20261005, E-LIVE-PUBLIC-TRUSTED-SHARE-COPY-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-FLOW-20261005.
+
 ## Release Recheck — 8605724 — 2026-10-05
 
 - 좁은 모바일 헤더의 280·300·320·360·390px 배치와 390px 메뉴의 키보드 흐름을 공개 URL에서 재감리했다. 각 컨트롤은 겹치지 않고 44px 이상 터치 영역을 유지했으며, 메뉴 포커스 트랩·Escape 닫힘·토글 복귀가 확인됐다.
