@@ -658,7 +658,10 @@
   .guide-hero-story .guide-editorial-note{margin-top:16px;padding:10px 12px 10px 11px}
   .guide-hero-story .guide-rail{max-width:30ch;margin-top:10px;padding:9px 10px;color:#536d7d;font-size:13px;line-height:1.65}
   .guide-hero-story .guide-rail span{margin-right:4px}
-  .guide-hero-scroll{display:none}
+  /* v104 mobile reading cue: make the continuous story visible before the first swipe. */
+  .guide-hero-story .guide-hero-scroll{position:relative;left:auto;bottom:auto;display:flex;justify-content:center;gap:7px;margin:22px 0 0;padding-top:13px;border-top:1px solid rgba(145,191,197,.34);color:#6f8b94;font-size:12px;letter-spacing:-.03em;transform:none;z-index:3}
+  .guide-hero-story .guide-hero-scroll svg{animation:guide-mobile-scroll-cue 1.8s ease-in-out infinite}
+  @keyframes guide-mobile-scroll-cue{0%,100%{transform:translateY(0);opacity:.68}50%{transform:translateY(4px);opacity:1}}
   .guide-summary-grid{min-height:0}
   .guide-section{padding-block:75px}
   .guide-section-heading h2{max-width:100%;font-size:clamp(33px,8.9vw,41px);word-break:keep-all;overflow-wrap:break-word}
@@ -669,6 +672,7 @@
 }
 @media(prefers-reduced-motion:reduce){.guide-header-share,.guide-application-card,.guide-process-flow article,.guide-video-feature{box-shadow:none}}
 @media(prefers-reduced-motion:reduce){.guide-video-feature-loading svg{animation:none}}
+@media(prefers-reduced-motion:reduce){.guide-hero-story .guide-hero-scroll svg{animation:none}}
 @media(prefers-reduced-motion:reduce){.guide-video-filter{transition:none}}
 
 /* v14 share kit: make one-tap business reuse visible before the copy details. */
