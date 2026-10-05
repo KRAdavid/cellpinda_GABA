@@ -1692,3 +1692,13 @@
   .guide-expert-thread i{grid-column:3;grid-row:1;align-self:center}
   .guide-expert-thread strong:last-child{grid-column:2/4;grid-row:2;margin-top:2px;padding-top:8px;border-top:1px solid #dce9ef;line-height:1.35}
 }
+
+/* v97 mobile source-reading rail: connect the four questions into one calm editorial sequence. */
+.guide-reading-note-source{padding-right:18px}
+@media(max-width:700px){
+  .guide-reading-note-steps{position:relative}
+  .guide-reading-note-steps:before{content:"";position:absolute;top:15px;bottom:15px;left:14px;width:1px;background:#cfe6e7;pointer-events:none}
+  .guide-reading-note-steps li{position:relative;z-index:1}
+  .guide-reading-note-steps li>span{background:#fff}
+  .guide-reading-note-source{padding-right:15px}
+}
