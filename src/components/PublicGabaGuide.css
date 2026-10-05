@@ -1319,6 +1319,8 @@
 .guide-reading-note-flow i{color:#9bb6c2;font-style:normal}
 .guide-reading-note-panel{min-width:0;padding:25px 26px 24px;border:1px solid #d6e7eb;border-radius:24px;background:#fff;box-shadow:0 16px 34px rgba(23,72,92,.06)}
 .guide-reading-note-panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding-bottom:16px;border-bottom:1px solid #e2edf0;color:#6c8796;font-size:12px;font-weight:850;letter-spacing:-.025em}
+.guide-reading-note-panel-title{display:grid;min-width:0;gap:4px}
+.guide-reading-note-context{display:block;min-width:0;color:var(--guide-teal-dark);font-size:11px;font-weight:900;line-height:1.45;letter-spacing:-.035em;overflow-wrap:anywhere}
 .guide-reading-note-panel-head strong{color:var(--guide-teal-dark);font-size:11px;letter-spacing:.13em}
 .guide-reading-note-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;margin:0;padding:0;list-style:none}
 .guide-reading-note-steps li{display:flex;align-items:flex-start;gap:12px;min-width:0;padding:18px 0 17px;border-bottom:1px solid #e3eef1}
@@ -1341,7 +1343,9 @@
   .guide-reading-note-copy{max-width:none;margin-top:20px;font-size:16px;line-height:1.8}
   .guide-reading-note-flow{margin-top:24px}
   .guide-reading-note-panel{margin-top:26px;padding:19px 17px 18px;border-radius:20px}
-  .guide-reading-note-panel-head{align-items:flex-start;display:block;padding-bottom:13px;font-size:14px;line-height:1.45}
+   .guide-reading-note-panel-head{align-items:flex-start;display:block;padding-bottom:13px;font-size:14px;line-height:1.45}
+   .guide-reading-note-panel-title{gap:5px}
+   .guide-reading-note-context{font-size:12px;line-height:1.5}
   .guide-reading-note-panel-head strong{display:block;margin-top:5px;font-size:11px}
   .guide-reading-note-steps{display:block}
   .guide-reading-note-steps li{padding:16px 0 15px}

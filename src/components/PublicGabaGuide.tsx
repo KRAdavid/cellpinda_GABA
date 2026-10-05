@@ -1890,7 +1890,7 @@ export default function PublicGabaGuide() {
               <div className="guide-reading-note-flow" aria-label="연구 읽는 순서"><span>연구 카드</span><i aria-hidden="true">→</i><span>원문 출처</span></div>
             </div>
             <div className="guide-reading-note-panel">
-              <div className="guide-reading-note-panel-head"><span>하나의 연구를 읽는 네 가지 질문</span><strong>정보의 흐름</strong></div>
+              <div className="guide-reading-note-panel-head"><div className="guide-reading-note-panel-title"><span>하나의 연구를 읽는 네 가지 질문</span><small className="guide-reading-note-context">{sourceReadingLabel}</small></div><strong>정보의 흐름</strong></div>
               <ol className="guide-reading-note-steps">
                 <li><span>01</span><div><strong>누구를 살폈나요?</strong><small>사람·동물·세포 중 연구 대상을 먼저 봅니다.</small></div></li>
                 <li><span>02</span><div><strong>어떻게 비교했나요?</strong><small>섭취량과 기간, 비교 조건을 확인합니다.</small></div></li>
