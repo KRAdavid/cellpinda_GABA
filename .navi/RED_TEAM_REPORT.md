@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Public Recheck — 2026-10-06 — 0b69600
+
+- 공격 관점에서 모바일·데스크톱 전문가 영상 갤러리의 카드 선택, 주제 필터, 자동 재생 iframe, 포커스 이동, 가로 넘침과 콘솔 오류를 확인했다.
+- 공개 390·1440px에서 9개 카드와 필터가 표시되고, 두 번째 카드 선택 후 feature 영역 포커스·선택 상태·`autoplay=1&mute=1&playsinline=1` iframe이 갱신되며 runtime 오류 0이었다. 새 CRITICAL/MAJOR 결함은 없다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-EXPERT-VIDEO-INTERACTION-20261006.
+
 ## Public Recheck — 2026-10-06 — b73e086
 
 - 공격 관점에서 연구 지도 중심 문구의 모바일 축소·겹침, 지도와 연구 카드의 순서, hero route의 잘못된 HTML 중첩, 콘솔 오류를 점검했다.

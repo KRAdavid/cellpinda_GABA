@@ -1532,6 +1532,14 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-150",
+      "statement": "전문가 영상 갤러리는 390px·1440px에서 주제 필터와 9개 영상 카드를 읽기 흐름 안에 제공하며, 카드를 선택하면 선택 상태·현재 위치·자동 재생 iframe·포커스가 함께 갱신된다.",
+      "evidence_refs": [
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-INTERACTION-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11572,6 +11580,17 @@
       "captured_at": "2026-10-05T17:21:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-SCALE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-149"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-INTERACTION-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본의 전문가 영상 갤러리는 390px·1440px에서 9개 카드와 주제 필터를 표시하고, 두 번째 카드를 선택하면 선택 영상 제목·현재 재생 상태·자동 재생 iframe·포커스가 갱신되며 가로 넘침과 콘솔 오류가 없다.",
+      "locator": "Chrome CDP fallback at https://kradavid.github.io/gaba_info/#expert-videos; 390px and 1440px; initial cards 9; active topic `전체`; second card selection produced `갱년기와 수면, GABA에 대한 질문`, selected card aria-pressed=true, focused element `expert-video-feature`, iframe src with `autoplay=1&mute=1&playsinline=1`, scrollWidth 390/1425 and errors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/#expert-videos",
+      "captured_at": "2026-10-05T17:35:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-VIDEO-INTERACTION",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-150"]
     }
   ]
 }

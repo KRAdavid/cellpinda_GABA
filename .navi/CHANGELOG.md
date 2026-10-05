@@ -1,5 +1,12 @@
 # Project Changelog
 
+## NAVI 공개 재점검·전문가 영상 흐름 확인 — 0b69600 — 2026-10-06
+
+- 공개 390·1440px에서 전문가 영상 9개 카드와 주제 필터를 확인하고, 카드 선택 시 선택 영상·자동 재생 iframe·포커스가 함께 갱신되는지 재현했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산·live validator·NAVI 상태·risk-control 점검을 모두 통과했다. 새 CRITICAL/MAJOR 결함은 없다.
+
+증적: E-LIVE-PUBLIC-EXPERT-VIDEO-INTERACTION-20261006.
+
 ## 연구 지도 고도화·공개 배포 완료 — b73e086 — 2026-10-06
 
 - `06 · 연구의 확장` 중심 원에 `5개 연구 영역`을 표시해 지도 규모를 한눈에 이해하도록 보강했다.

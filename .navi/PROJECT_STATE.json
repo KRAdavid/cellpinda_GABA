@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T17:22:57.978808Z",
+  "updated_at": "2026-10-05T17:35:21.513122Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5081,6 +5081,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T17:21:00Z"
+    },
+    {
+      "id": "H-226",
+      "event": "NAVI 공개 재점검에서 전문가 영상 갤러리를 390px·1440px 실제 공개 주소로 조작 확인했다. 9개 카드·주제 필터·두 번째 카드 선택·선택 상태·자동 재생 iframe·feature 포커스·가로 폭·콘솔 오류 0을 재현했으며 새 CRITICAL/MAJOR 결함은 없었다. pnpm run validate:ui-contract·typecheck·127개 테스트·production build·정적 번들·성능 예산·live validator·NAVI project-state·risk-control 점검도 성공했다. 결과를 C-150과 라이브 증적으로 등록한다. 공개 사이트는 유지하고, 브라우저 범위·실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 기존 외부 검증 항목으로 남긴다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T17:35:35Z"
     }
   ]
 }
