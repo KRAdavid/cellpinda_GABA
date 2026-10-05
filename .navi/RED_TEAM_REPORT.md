@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — a18561f
+
+- 공격 관점에서 확인한 실패 모드는 390px 모바일 연구 비교 도표의 세 칸 범례가 `GABA를 바른 조건`을 음절 단위로 끊어 조건과 결과 막대의 의미 연결을 약하게 만드는 것이었다. PR #326에서 모바일 범례를 세로 순서로 분리하고 조건명을 한 줄로 유지했다.
+- 로컬·공개 390px에서 `변화 방향`, `비교 조건`, `GABA를 바른 조건`이 각각 독립된 줄에 표시되고 가로 넘침과 런타임 오류가 없었으며, 1440px의 좌우 비교 도표는 유지됐다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 이는 대표 Chrome CDP 확인이지 전체 브라우저·실기기 보장이 아니다. Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 계속 OPEN이며 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도와 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-COMPARISON-LEGEND-20261005, E-UI-CONTRACT-MOBILE-COMPARISON-LEGEND-20261005, E-DEPLOY-PIPELINE-MOBILE-COMPARISON-LEGEND-20261005, E-LIVE-PUBLIC-MOBILE-COMPARISON-LEGEND-20261005.
+
 ## Recheck — 2026-10-05 — 726fe8a8
 
 - 공격 관점에서 확인한 실패 모드는 읽기 진행 레일이 나타나는 찰나에 히어로 사진이 레일의 위치 안내 문구에 비쳐 대비가 약해지는 것이었다. PR #324에서 opacity 전환을 transform 전환으로 바꿔 불투명한 흰색 위치 표면을 즉시 노출했다.

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 연구 비교 범례 흐름 보강 — a18561f — 2026-10-05
+
+- 390px 공개 렌더에서 조건명이 음절 단위로 깨지는 문제를 확인하고, 430px 이하 연구 도표 범례를 `변화 방향 → 비교 조건 → GABA 조건`의 세로 순서로 재배치했다. 조건명은 한 줄로 유지해 아래 결과 막대와 자연스럽게 연결된다.
+- UI 계약 v112·typecheck·127개 테스트·production build·성능 예산과 모바일·데스크톱 CDP 렌더 QA를 통과했다. PR #326과 main workflow `37284733229`의 Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `a18561f8b00a6f808e8ee858c9e833089537f3e4`는 HTTP 200, STATIC, 12 claims, 6 research records, 1 product, teaser HOLD를 제공한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-COMPARISON-LEGEND-20261005, E-UI-CONTRACT-MOBILE-COMPARISON-LEGEND-20261005, E-DEPLOY-PIPELINE-MOBILE-COMPARISON-LEGEND-20261005, E-LIVE-PUBLIC-MOBILE-COMPARISON-LEGEND-20261005.
+
 ## 읽기 진행 레일 전환 가독성 보강 — 726fe8a — 2026-10-05
 
 - 상단 읽기 진행 레일의 opacity 전환을 제거하고 transform만 전환해 히어로 사진이 위치 안내 문구에 비치는 순간을 없앴다. 기존의 읽기 진행·고정 헤더·reduced-motion 동작은 유지했다.
