@@ -1453,18 +1453,27 @@ export default function PublicGabaGuide() {
 
   const sharePage = async () => {
     const selectedVideoRoute = window.location.hash === '#expert-videos' && new URLSearchParams(window.location.search).has('video');
-    const shareChapterId = selectedVideoRoute ? 'expert-videos' : activeChapterId;
-    const shareReadingLabel = shareChapterId === 'expert-videos' && activeChapterId !== 'expert-videos'
-      ? readingChapters.find((chapter) => chapter.id === 'expert-videos')?.label ?? '전문가 영상'
-      : activeReadingLabel;
+    // Preserve the research context while the reader moves from a study card into the source-reading note.
+    // Farther chapters intentionally keep their own share destination instead of carrying stale research state.
+    const shareResearchTopic = !selectedVideoRoute && (activeChapterId === 'research' || activeChapterId === 'reading-note')
+      ? activeResearchTopic
+      : null;
+    const shareChapterId = selectedVideoRoute ? 'expert-videos' : shareResearchTopic ? 'research' : activeChapterId;
+    const shareReadingLabel = shareResearchTopic
+      ? `${shareResearchTopic.title} 연구`
+      : shareChapterId === 'expert-videos' && activeChapterId !== 'expert-videos'
+        ? readingChapters.find((chapter) => chapter.id === 'expert-videos')?.label ?? '전문가 영상'
+        : activeReadingLabel;
     const shareTitle = shareChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작되는 GABA' : `${shareReadingLabel} · GABA Guide`;
-    const shareText = shareChapterId === 'expert-videos'
-      ? `${activeVideo.title} 영상을 보며 GABA를 읽는 공개 안내서입니다.`
-      : `${shareReadingLabel}에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서입니다.`;
+    const shareText = shareResearchTopic
+      ? `${shareResearchTopic.title} 연구의 관찰 결과와 출처를 읽는 공개 GABA 안내서입니다.`
+      : shareChapterId === 'expert-videos'
+        ? `${activeVideo.title} 영상을 보며 GABA를 읽는 공개 안내서입니다.`
+        : `${shareReadingLabel}에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서입니다.`;
     const shareUrl = new URL(window.location.href);
     shareUrl.searchParams.set('view', 'guide');
-    if (shareChapterId === 'research' && activeResearchTopicId) {
-      shareUrl.hash = `research-${activeResearchTopicId}`;
+    if (shareResearchTopic) {
+      shareUrl.hash = `research-${shareResearchTopic.id}`;
     } else if (shareChapterId === 'top') {
       shareUrl.searchParams.delete('video');
       shareUrl.hash = 'top';
