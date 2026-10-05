@@ -1485,6 +1485,17 @@
         "E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-FINAL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-146",
+      "statement": "첫 화면의 3분 읽기 시작 컨트롤은 수면과 회복 도입부로 자연스럽게 이어지고, 고정 읽기 진행 레일은 목적지 장과 동기화된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-HERO-READING-START-20261006",
+        "E-UI-CONTRACT-HERO-READING-START-20261006",
+        "E-DEPLOY-PIPELINE-HERO-READING-START-20261006",
+        "E-LIVE-PUBLIC-HERO-READING-START-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11327,6 +11338,48 @@
       "captured_at": "2026-10-05T15:46:16Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-CHART-LEGEND-FINAL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-145"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-HERO-READING-START-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면의 3분 읽기 시작 컨트롤과 수면·회복 도입부 연결 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 1938261781c520fe8bed1b47f91fb39a0857f7b9; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1626660 <= 1650000; Chrome CDP fallback local 390/1440px reported button role BUTTON, text 3분 읽기 시작, scrollWidth 390/1425, click hash #opening-bridge, openingTop 16/8 and synced progress label",
+      "captured_at": "2026-10-06T01:14:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-HERO-READING-START",
+      "claim_refs": ["C-001", "C-003", "C-146"]
+    },
+    {
+      "id": "E-UI-CONTRACT-HERO-READING-START-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면의 읽기 안내가 접근 가능한 버튼으로 다음 장을 호출하고, hover·focus 스타일과 UI 계약 회귀 검사가 유지되는지 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; hero scroll cue requires button, scrollTo('opening-bridge'), 3분 읽기 시작, v117 hero reading start cue hover/focus treatment; status ok; events 14",
+      "captured_at": "2026-10-06T01:14:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-HERO-READING-START",
+      "claim_refs": ["C-146"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-HERO-READING-START-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면 읽기 시작 보정 commit 1938261이 PR #367 검증을 통과하고 main 공개 배포 파이프라인을 성공적으로 통과했다.",
+      "locator": "PR #367; code commit 1938261781c520fe8bed1b47f91fb39a0857f7b9; main commit d59349199a50c7f2662238ab822495118f087f4a; workflow 37338231096; release-verify 111858350015, worker-readiness 111858951254, deploy-pages 111859013415, smoke-live 111859113558 and release-status 111859248109 successful; deploy-worker 111859014544 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37338231096",
+      "captured_at": "2026-10-06T01:08:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-HERO-READING-START",
+      "claim_refs": ["C-001", "C-002", "C-146"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HERO-READING-START-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 첫 화면에 3분 읽기 시작 버튼을 표시하고, 클릭 시 수면과 회복 도입부를 고정 읽기 레일 아래에 정렬하며, 전체 공개 흐름에 runtime 오류와 가로 넘침이 없다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha d59349199a50c7f2662238ab822495118f087f4a; generatedAt 2026-10-05T16:07:38.084Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390/1440px reported button role BUTTON, text 3분 읽기 시작, scrollWidth 390/1425, click hash #opening-bridge, openingTop 16/8, synced progress label; full public section audit pageHeight 34426/22352 with errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=hero-start-public-390",
+      "captured_at": "2026-10-06T01:10:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-HERO-READING-START",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-146"]
     }
   ]
 }

@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — d593491 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 UI 배포 후보: PASS.
+- AC-004 390·1440px 첫 화면의 `3분 읽기 시작` 행동, `#opening-bridge` 직접 이동, 진행 레일 동기화, 가로 넘침·runtimeErrors 0: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- PR #367과 main 공개 배포 workflow `37338231096`이 성공했고 공개 candidate `d59349199a50c7f2662238ab822495118f087f4a`는 HTTP 200·STATIC을 유지한다. C-146과 네 증거를 등록했다.
+- NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-HERO-READING-START-20261006, E-UI-CONTRACT-HERO-READING-START-20261006, E-DEPLOY-PIPELINE-HERO-READING-START-20261006, E-LIVE-PUBLIC-HERO-READING-START-20261006.
+
 ## Current Release Recheck — 012e531 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

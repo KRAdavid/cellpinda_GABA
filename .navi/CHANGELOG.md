@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 첫 화면 3분 읽기 시작 흐름 고도화 — d593491 — 2026-10-05
+
+- 첫 화면의 수동 `아래로 읽기` 안내를 실제 `3분 읽기 시작` 버튼으로 바꾸고, 클릭하면 `수면과 회복` 도입부로 바로 이어지도록 보강했다. 고정 읽기 진행 레일도 도착 장과 동기화된다.
+- 로컬·공개 Chrome CDP fallback 390·1440px에서 버튼 표시·포커스·클릭·해시 이동·진행 레일 동기화와 가로 넘침·runtime 오류 없음을 확인했다.
+- PR #367과 main workflow `37338231096`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-HERO-READING-START-20261006, E-UI-CONTRACT-HERO-READING-START-20261006, E-DEPLOY-PIPELINE-HERO-READING-START-20261006, E-LIVE-PUBLIC-HERO-READING-START-20261006.
+
 ## 최종 공개 배포·NAVI 증거 고정 — 012e531 — 2026-10-05
 
 - 저장소 개인정보 보호 보정까지 포함한 최종 main commit을 다시 배포하고 전체 release workflow 성공을 확보했다. release-verify·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.

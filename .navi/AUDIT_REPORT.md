@@ -1,5 +1,13 @@
 # Audit Report
 
+## Hero Reading Start Recheck — d593491 — 2026-10-05
+
+- 첫 화면의 `3분 읽기 시작` 버튼을 확인했다. 390·1440px에서 버튼이 보이고, 클릭하면 `#opening-bridge`로 이동하며 고정 읽기 진행 레일이 `수면과 회복` 장과 맞춰진다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build와 공개 workflow `37338231096`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200·STATIC을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재로 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-HERO-READING-START-20261006, E-UI-CONTRACT-HERO-READING-START-20261006, E-DEPLOY-PIPELINE-HERO-READING-START-20261006, E-LIVE-PUBLIC-HERO-READING-START-20261006.
+
 ## Final Public Evidence Recheck — 012e531 — 2026-10-05
 
 - 저장소 개인정보 보호 보정까지 포함한 최종 main commit을 공개 배포하고 workflow `37335287439` 전체 성공을 확보했다. release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
