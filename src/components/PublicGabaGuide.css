@@ -1607,3 +1607,26 @@
     contain-intrinsic-size:900px
   }
 }
+
+/* v91 editorial typography: keep Korean display lines balanced and body copy naturally grouped. */
+@supports (text-wrap:balance){
+  .gaba-guide .guide-hero h1,
+  .gaba-guide .guide-section-heading h2,
+  .gaba-guide .guide-final h2,
+  .gaba-guide .guide-reading-note h2,
+  .gaba-guide .guide-history-copy h3,
+  .gaba-guide .guide-research-inline-heading h3,
+  .gaba-guide .guide-video-feature-copy h3{
+    text-wrap:balance
+  }
+}
+@supports (text-wrap:pretty){
+  .gaba-guide .guide-hero-body,
+  .gaba-guide .guide-section-lead,
+  .gaba-guide .guide-final-copy,
+  .gaba-guide .guide-reading-note-copy,
+  .gaba-guide .guide-growth-note,
+  .gaba-guide .guide-fermented-note{
+    text-wrap:pretty
+  }
+}
