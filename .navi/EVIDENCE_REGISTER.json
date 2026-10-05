@@ -1608,7 +1608,8 @@
         "E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
         "E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
         "E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
-        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006"
+        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+        "E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-CUE-STATE-20261006"
       ],
       "status": "SUPPORTED"
     }
@@ -11963,6 +11964,17 @@
       "captured_at": "2026-10-05T21:11:00Z",
       "reviewer_id": "NAVI-DEPLOY-QA-20261006-MOBILE-VIDEO-FILTER-CUE-STATE",
       "claim_refs": ["C-001", "C-002", "C-156"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 모바일 전문가 영상 필터 cue 상태 보강이 반영되었고, 320px에서 시작 cue 표시·끝 cue 숨김·시작점 복원·마지막 주제 선택과 가로폭 안정성을 확인했다.",
+      "locator": "pnpm exec node scripts/validate-live-public.mjs; page 200; runtimeMode STATIC; candidateSha 16f3fec3403545098ed9e74a8ce058f75d59b9ce; generatedAt 2026-10-05T21:15:22.699Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Playwright Chromium fallback public 320px: wrapper width 256, scrollWidth 711, maxScroll 455, start cue display flex/opacity 1/visible, end scrollLeft 455 atEnd true cue class is-hidden/opacity 0/visibility hidden, restored start cue opacity 1/visible, `수면·기분 주제 · 1개 영상` aria-pressed true, document scrollWidth 320, runtime errors []; deploy-pages 111980640548 and smoke-live 111982600087 successful; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-05T21:25:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MOBILE-VIDEO-FILTER-CUE-STATE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-156"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Live Public Recheck — 2026-10-06 — 16f3fec
+
+- 공개 320px에서 시작 cue가 보이고 rail 끝에서는 숨겨지며, 시작점 복귀 후 다시 표시되는 상태를 확인했다. 마지막 `수면·기분` 주제 선택, document scrollWidth 320, runtime errors 0도 확인했다.
+- 공개 validator의 candidate는 `16f3fec3403545098ed9e74a8ce058f75d59b9ce`로 main과 일치하고, deploy-pages·smoke-live는 성공했다. release-status queue는 운영 상태로 별도 표시한다.
+- 새 CRITICAL/MAJOR 결함은 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
 ## Mobile Expert Video Filter Cue State — 2026-10-06 — cdbc6f3
 
 - 공격 관점에서 320px rail 시작·끝·복귀 상태를 비교했다. v125 이후 시작점에서는 다음 주제 cue가 보이고, 끝점에서는 cue가 숨겨지며, 다시 시작점으로 돌아오면 복원된다. 마지막 `수면·기분` 선택, 44px 터치 영역, scrollWidth 320, runtime errors 0을 확인했다.

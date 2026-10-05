@@ -1,5 +1,14 @@
 # Completion Report
 
+## Live Public Release Recheck — 16f3fec — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `16f3fec3403545098ed9e74a8ce058f75d59b9ce`와 71개 bundle hash를 확인했고, deploy-pages·smoke-live가 성공했다.
+- AC-003/AC-004 공개 모바일 전문가 영상 필터 cue 상태·가로폭·선택 흐름: PASS. 320px에서 시작 표시·끝 숨김·복원·마지막 주제 선택·aria-pressed=true·scrollWidth 320·runtime errors 0을 확인했다.
+- AC-005 release-verify·Worker gate·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. release-status는 기록 시점 queue 대기다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
 ## Current Release Recheck — cdbc6f3 — 2026-10-06
 
 - AC-003/AC-004 모바일 전문가 영상 필터 cue 상태·가로폭·선택 흐름: PASS. 로컬 320px에서 시작 표시, 끝 숨김, 시작 복원, `수면·기분` 선택과 aria-pressed=true, runtime errors 0을 확인했다.

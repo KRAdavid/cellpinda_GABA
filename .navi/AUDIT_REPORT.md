@@ -1,5 +1,14 @@
 # Audit Report
 
+## Live Public Recheck — 16f3fec — 2026-10-06
+
+- v125 상태 보강이 GitHub Pages 공개본에 반영되었다. 공개 validator는 HTTP 200·STATIC·candidate `16f3fec3403545098ed9e74a8ce058f75d59b9ce`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·제품 독립 경계를 확인했다.
+- 공개 Playwright Chromium fallback 320px에서 전문가 영상 필터 wrapper 256px·scrollWidth 711px·maxScroll 455px, 시작 cue 표시·끝 cue 숨김·시작점 복원, 마지막 `수면·기분` 선택 aria-pressed=true, document scrollWidth 320, runtime errors 0을 확인했다. 화면 캡처도 별도 검토했다.
+- deploy-pages `111980640548`와 smoke-live `111982600087`은 성공했다. release-status `111982772244`는 기록 시점 runner queue에 남아 있으나 라이브 공개 검증에는 영향이 없다.
+- 새 CRITICAL/MAJOR 결함은 없다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 다음 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
 ## Mobile Expert Video Filter Cue State — cdbc6f3 — 2026-10-06
 
 - 320px에서 전문가 영상 필터의 이어짐 표시가 rail 끝에서도 남아 더 읽을 내용이 있는 것처럼 보일 수 있는 잔여 발견성 리스크를 확인했다. v125에서 실제 rail 위치를 감시해 시작점에서는 cue를 표시하고 끝점에서는 숨기며, 다시 시작점으로 돌아오면 복원하도록 보강했다. 44px 터치 영역·수평 rail·마지막 주제 선택은 유지했다.

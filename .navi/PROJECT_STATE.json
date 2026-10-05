@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T21:12:57.543221Z",
+  "updated_at": "2026-10-05T21:25:57.382657Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5159,6 +5159,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T21:11:00Z"
+    },
+    {
+      "id": "H-234",
+      "event": "v125 상태 보강이 main `16f3fec`으로 공개 배포된 뒤, 공개 validator에서 candidate `16f3fec3403545098ed9e74a8ce058f75d59b9ce`·HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 공개 Playwright Chromium fallback 320px에서 시작 cue 표시·끝 cue 숨김·시작점 복원·마지막 `수면·기분` 주제 선택·aria-pressed=true·document scrollWidth 320·runtime errors 0을 재현했고 deploy-pages와 smoke-live는 성공했다. 새 CRITICAL/MAJOR 결함은 없으며 C-156과 라이브 증거를 등록한다. release-status job은 runner queue에 남아 있어 별도로 표시하고, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 항목으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T21:25:00Z"
     }
   ]
 }
