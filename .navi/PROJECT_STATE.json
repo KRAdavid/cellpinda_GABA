@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T14:32:15.052456Z",
+  "updated_at": "2026-10-05T14:55:01.854015Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4997,6 +4997,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T14:30:43Z"
+    },
+    {
+      "id": "H-214",
+      "event": "좁은 모바일 연구 결과 도표에서 비교 조건과 GABA 섭취 조건이 세로로 쌓여 한 지표를 이해하는 데 스크롤이 길어지던 잔여 퍼블리싱 리스크를 확인하고, PR #359에서 두 조건을 같은 행의 두 칸으로 나란히 배치했다. GABA 결과 칸의 청록색 강조·방향 문구·측정 지표는 유지했으며 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #359 release-verify, main workflow 37327605045의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 최신 공개 candidate 0acdb90a43dd9dbbab0b2618efd63ec79bc5e3b1는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·1개 product·6개 share page·teaser HOLD를 유지한다. Chrome CDP fallback 공개 320·390·1440px에서 lane width 96·131·195, chart height 845·765·456, scrollWidth 320·390·1425, runtimeErrors 0과 GABA 결과 강조를 확인했고 새 CRITICAL/MAJOR 결함은 없었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지한다. 결과를 C-144와 네 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T14:53:41Z"
     }
   ]
 }
