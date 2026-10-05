@@ -522,7 +522,7 @@ requireMatch(publicGuideStyles, /v106 mobile reading cue contrast[\s\S]*?guide-h
 requireMatch(publicGuideStyles, /v107 narrow phone chart header[\s\S]*?@media\(max-width:430px\)[\s\S]*?guide-outcome-comparison-head\{[^}]*grid-template-columns:minmax\(66px,\.64fr\)[\s\S]*?guide-outcome-comparison-head>span:not\(:first-child\)\{[^}]*white-space:normal/, 'narrow-phone research comparison headers must wrap inside the 320px reading frame');
 requireMatch(publicGuideStyles, /v112 mobile comparison legend[\s\S]*?grid-template-areas:"axis" "reference" "result"[\s\S]*?guide-outcome-comparison-head>span:not\(:first-child\)\{[^}]*white-space:nowrap;word-break:keep-all/, 'mobile research comparison legends must separate the axis from readable condition labels');
 for (const marker of [
-  /저속노화,<br \/>\{' '\}\s*회복하는 밤에서 시작됩니다<\/span>\{' '\}\s*<em>그 회복의 신호를/,
+  /저속노화,<br \/>\{' '\}\s*회복하는 밤에서 시작됩니다\.<\/span>\{' '\}\s*<em>그 회복의 신호를/,
   /잠은 멈춤이 아니라,<br \/>\{' '\}\s*회복이 시작되는 시간입니다/,
   /처음에는 이름도<span className="guide-mobile-break"><br \/><\/span>\{' '\}\s*없었습니다\./,
   /GABA는 연구실을 넘어<br \/>\{' '\}\s*여러 분야로 이어지고 있습니다/,
