@@ -1749,7 +1749,7 @@ export default function PublicGabaGuide() {
               <button type="button" className="guide-recovery-toggle" aria-pressed={recoveryPaused} onClick={() => { const nextPaused = !recoveryPaused; setRecoveryPaused(nextPaused); if (!nextPaused) setRecoveryInteractionPaused(false); }}>{recoveryPaused ? <Play size={13} fill="currentColor" aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}<span>{recoveryPaused ? '다시 재생' : '잠시 멈춤'}</span></button>
               <button type="button" aria-label="다음 카드" onClick={() => moveRecoveryCard(1)}><ChevronRight size={17} aria-hidden="true" /></button>
             </div>
-            <p className="guide-recovery-thread"><span>GABA란</span><i>→</i><strong>수면과 회복</strong><i>→</i><span>GABA를 읽는 시작점</span></p>
+            <p className="guide-recovery-thread"><span>GABA란</span><ArrowRight className="guide-recovery-thread-arrow" size={14} aria-hidden="true" /><strong>수면과 회복</strong><ArrowRight className="guide-recovery-thread-arrow" size={14} aria-hidden="true" /><span>GABA를 읽는 시작점</span></p>
             <div className="guide-recovery-next">
               <p className="guide-recovery-next-kicker">그다음</p>
               <h3>GABA의 연구 지도로</h3>
@@ -1887,7 +1887,7 @@ export default function PublicGabaGuide() {
               <p className="guide-section-number">11 · 출처 읽기</p>
               <h2 id="reading-note-heading" tabIndex={-1}>연구를 이해하는<br />{' '}마지막 단계</h2>
               <p className="guide-reading-note-copy">결과만 빠르게 보는 데서 멈추지 않습니다. 누가 참여했고, 무엇을 살폈고, 어떤 변화가 기록됐는지 순서대로 읽으면 연구의 의미가 더 선명해집니다.</p>
-              <div className="guide-reading-note-flow" aria-label="연구 읽는 순서"><span>연구 카드</span><i aria-hidden="true">→</i><span>원문 출처</span></div>
+              <div className="guide-reading-note-flow" aria-label="연구 읽는 순서"><span>연구 카드</span><ArrowRight className="guide-reading-note-flow-arrow" size={15} aria-hidden="true" /><span>원문 출처</span></div>
             </div>
             <div className="guide-reading-note-panel">
               <div className="guide-reading-note-panel-head"><div className="guide-reading-note-panel-title"><span>하나의 연구를 읽는 네 가지 질문</span><small className="guide-reading-note-context">{sourceReadingLabel}</small></div><strong>정보의 흐름</strong></div>
