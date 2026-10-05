@@ -1,5 +1,14 @@
 # Audit Report
 
+## Public Release Recheck — fb874662 — 2026-10-06
+
+- 연구 지도 중심의 `5개 연구 영역` 보조 문구를 모바일에서도 10px·900 weight·청록 강조로 유지하도록 보정해 작은 화면에서의 읽기 하한을 높였다. 기존 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- PR #380과 main workflow `37355788429`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 모두 성공했다. 공개 validator는 candidate `fb87466241c67311cbd990228acf48fab7f65068`에서 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- 공개 Chrome CDP fallback 390·1440px에서 계산 스타일 10px·900 weight·청록 색상, scrollWidth 390·1425, 인지 영역 선택 후 카드 포커스·스크롤, runtime console errors 0을 확인했다. 320·350·390·768·1440px 반응형 사전 점검에서도 가로 넘침이 없었다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser 플러그인 부재로 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-UI-CONTRACT-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-CDP-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006.
+
 ## Public Release Recheck — 8a6260f — 2026-10-06
 
 - 연구 지도 중심의 `5개 연구 영역` 보조 문구가 모바일에서 작게 인식될 수 있던 잔여 가독성 리스크를 보정했다. 데스크톱은 10px, 모바일은 9px, weight 900과 청록 강조를 사용해 중심 원의 규모 안내를 연구 지도와 같은 시각 계층으로 맞췄다.

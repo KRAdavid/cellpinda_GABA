@@ -1554,6 +1554,18 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-LEGIBILITY-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-152",
+      "statement": "연구 지도 중심의 `5개 연구 영역` 보조 문구는 모바일·데스크톱 모두 10px·900 weight·청록 강조로 표시되며, 320·350·390·768·1440px에서 가로 넘침 없이 연구 영역 선택과 상세 카드 연결이 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+        "E-UI-CONTRACT-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+        "E-CDP-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11679,6 +11691,58 @@
       "captured_at": "2026-10-06T18:10:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-SCALE-LEGIBILITY",
       "claim_refs": ["C-001", "C-002", "C-003", "C-151"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 중심 보조 문구의 모바일 10px 읽기 하한 보강 commit 8bb654d가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 8bb654d; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1627402 <= 1650000",
+      "captured_at": "2026-10-05T18:20:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-RESEARCH-MAP-MOBILE-CUE-FLOOR",
+      "claim_refs": ["C-001", "C-003", "C-152"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 연구 지도 중심 보조 문구를 데스크톱·모바일 모두 10px·900 weight·청록 강조로 고정하는 회귀 방지를 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v121 research map mobile cue floor assertion; status ok; events 14",
+      "captured_at": "2026-10-05T18:20:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-MAP-MOBILE-CUE-FLOOR",
+      "claim_refs": ["C-152"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 Chrome CDP fallback에서 390px·1440px 연구 지도 중심 보조 문구의 10px 계산 스타일과 연구 영역 선택 후 카드 포커스·스크롤 흐름을 확인했다.",
+      "locator": "temporary Chrome CDP scripts outside repository at http://127.0.0.1:4191; 390px: cueFont 10px, cueWeight 900, cueColor rgb(12, 114, 122), core 96x96, scrollWidth 390, selected cognition, aria-pressed true, focusedId research-cognition, cardTop 113, errors []; 1440px: cueFont 10px, cueWeight 900, cueColor rgb(12, 114, 122), core 142x142, scrollWidth 1425, selected cognition, aria-pressed true, focusedId research-cognition, cardTop 124, errors []; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T18:22:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261006-RESEARCH-MAP-MOBILE-CUE-FLOOR",
+      "claim_refs": ["C-152"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 중심 보조 문구의 모바일 읽기 하한 보강 PR #380이 필수 검사를 통과해 main commit fb874662로 병합되었고, 정적 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #380; code commit 8bb654d; main merge commit fb87466241c67311cbd990228acf48fab7f65068; workflow 37355788429; release-verify 111917723575, worker-readiness 111918529299, deploy-pages 111918580221, smoke-live 111918673606 and release-status 111918778101 successful; deploy-worker 111918581325 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37355788429",
+      "captured_at": "2026-10-05T18:26:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-MAP-MOBILE-CUE-FLOOR",
+      "claim_refs": ["C-001", "C-002", "C-152"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 모바일·데스크톱 연구 지도 중심 보조 문구를 10px로 표시하고, 가로 넘침 없이 연구 영역 선택 시 상세 카드 포커스·스크롤 흐름을 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha fb87466241c67311cbd990228acf48fab7f65068; generatedAt 2026-10-05T18:26:49.640Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: cueFont 10px, cueWeight 900, cueColor rgb(12, 114, 122), core 96x96, scrollWidth 390, selected cognition, aria-pressed true, focusedId research-cognition, cardTop 115, errors []; 1440px: cueFont 10px, cueWeight 900, cueColor rgb(12, 114, 122), core 142x142, scrollWidth 1425, selected cognition, aria-pressed true, focusedId research-cognition, cardTop 126, errors []; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/#research",
+      "captured_at": "2026-10-05T18:29:04Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-MOBILE-CUE-FLOOR",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-152"]
     }
   ]
 }

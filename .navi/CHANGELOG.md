@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 지도 모바일 읽기 하한 보정·공개 배포 완료 — fb874662 — 2026-10-06
+
+- 연구 지도 중심의 `5개 연구 영역` 보조 문구를 모바일·데스크톱 10px·900 weight·청록 강조로 통일해 작은 화면에서도 규모 안내를 빠르게 읽도록 보정했다.
+- PR #380과 main workflow `37355788429`의 release-verify·Pages 배포·라이브 smoke·release status가 성공했고, 공개 validator는 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- 공개 Chrome CDP 390·1440px에서 10px 계산 스타일·가로 폭·인지 연구 영역 선택 후 카드 포커스·스크롤·runtime errors 0을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-UI-CONTRACT-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-CDP-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006.
+
 ## 연구 지도 중심 보조 문구 고도화·공개 배포 완료 — 8a6260f — 2026-10-06
 
 - 연구 지도 중심의 `5개 연구 영역` 보조 문구를 모바일 9px·데스크톱 10px·900 weight·청록 강조로 보강해 나이가 있는 방문자도 지도 규모를 빠르게 읽도록 정리했다.
