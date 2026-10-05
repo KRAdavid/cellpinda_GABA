@@ -1875,6 +1875,7 @@
     border-radius:0 10px 10px 0;
     background:linear-gradient(90deg,rgba(247,251,253,0),#f7fbfd 78%);
     pointer-events:none;
+    transition:opacity .18s ease,visibility .18s ease;
   }
   .gaba-guide .guide-video-filters-cue{
     position:absolute;
@@ -1886,6 +1887,12 @@
     justify-content:center;
     color:var(--guide-teal-dark);
     pointer-events:none;
+    transition:opacity .18s ease,visibility .18s ease;
+  }
+  .gaba-guide .guide-video-filters-wrap.is-at-end:after,
+  .gaba-guide .guide-video-filters-cue.is-hidden{
+    opacity:0;
+    visibility:hidden;
   }
 }
 @media(min-width:701px){

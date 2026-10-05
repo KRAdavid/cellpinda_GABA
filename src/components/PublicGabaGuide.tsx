@@ -901,6 +901,7 @@ export default function PublicGabaGuide() {
   const [messageKitCopied, setMessageKitCopied] = useState(false);
   const [activeVideoId, setActiveVideoId] = useState(getInitialExpertVideoId);
   const [activeVideoTopic, setActiveVideoTopic] = useState(getInitialExpertVideoTopic);
+  const [videoFilterRailAtEnd, setVideoFilterRailAtEnd] = useState(false);
   const [videoStarted, setVideoStarted] = useState(hasInitialExpertVideo);
   const [videoFrameReady, setVideoFrameReady] = useState(false);
   const [activeChapterId, setActiveChapterId] = useState<ActiveChapterId>('top');
@@ -930,6 +931,7 @@ export default function PublicGabaGuide() {
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const videoFeatureRef = useRef<HTMLElement | null>(null);
+  const videoFilterRailRef = useRef<HTMLDivElement | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const activeVideoIndex = Math.max(0, expertVideos.findIndex((video) => video.id === activeVideo.id));
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
@@ -1140,6 +1142,24 @@ export default function PublicGabaGuide() {
     syncReducedMotion();
     mediaQuery.addEventListener?.('change', syncReducedMotion);
     return () => mediaQuery.removeEventListener?.('change', syncReducedMotion);
+  }, []);
+
+  useEffect(() => {
+    const rail = videoFilterRailRef.current;
+    if (!rail) return;
+    const syncRailCue = () => {
+      const hasOverflow = rail.scrollWidth - rail.clientWidth > 2;
+      const reachedEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+      setVideoFilterRailAtEnd(!hasOverflow || reachedEnd);
+    };
+    syncRailCue();
+    rail.addEventListener('scroll', syncRailCue, { passive: true });
+    const resizeObserver = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(syncRailCue);
+    resizeObserver?.observe(rail);
+    return () => {
+      rail.removeEventListener('scroll', syncRailCue);
+      resizeObserver?.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -1887,7 +1907,7 @@ export default function PublicGabaGuide() {
               </article>
                 <div className="guide-video-board" aria-label="전문가 영상 게시판">
                 <div className="guide-video-board-head"><span>전문가 영상 <em>{activeVideoTopic === '전체' ? '전체 주제' : activeVideoTopic}</em></span><strong>{visibleExpertVideos.length}개 영상</strong><span className="sr-only" role="status" aria-live="polite" aria-atomic="true">{activeVideoTopic === '전체' ? '전체 주제' : `${activeVideoTopic} 주제`}에서 {visibleExpertVideos.length}개 영상이 표시됩니다. 현재 선택한 영상은 {activeVideo.title}입니다.</span></div>
-                <div className="guide-video-filters-wrap"><div className="guide-video-filters" role="group" aria-label="전문가 영상 주제 필터">{expertVideoTopics.map((topic) => { const count = topic === '전체' ? expertVideos.length : expertVideos.filter((video) => video.topic === topic).length; return <button type="button" className={`guide-video-filter${activeVideoTopic === topic ? ' is-active' : ''}`} aria-label={`${topic === '전체' ? '전체 주제' : `${topic} 주제`} · ${count}개 영상`} aria-pressed={activeVideoTopic === topic} aria-controls="expert-video-list" key={topic} onClick={() => selectExpertVideoTopic(topic)}>{topic}<span aria-hidden="true">{count}</span></button>; })}</div><span className="guide-video-filters-cue" aria-hidden="true"><ChevronRight size={15} strokeWidth={2.4} /></span></div>
+                <div ref={videoFilterRailRef} className={`guide-video-filters-wrap${videoFilterRailAtEnd ? ' is-at-end' : ''}`}><div className="guide-video-filters" role="group" aria-label="전문가 영상 주제 필터">{expertVideoTopics.map((topic) => { const count = topic === '전체' ? expertVideos.length : expertVideos.filter((video) => video.topic === topic).length; return <button type="button" className={`guide-video-filter${activeVideoTopic === topic ? ' is-active' : ''}`} aria-label={`${topic === '전체' ? '전체 주제' : `${topic} 주제`} · ${count}개 영상`} aria-pressed={activeVideoTopic === topic} aria-controls="expert-video-list" key={topic} onClick={() => selectExpertVideoTopic(topic)}>{topic}<span aria-hidden="true">{count}</span></button>; })}</div><span className={`guide-video-filters-cue${videoFilterRailAtEnd ? ' is-hidden' : ''}`} aria-hidden="true"><ChevronRight size={15} strokeWidth={2.4} /></span></div>
                 <div className="guide-video-grid" id="expert-video-list">{visibleExpertVideos.map((video) => <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} aria-controls="expert-video-feature" aria-label={`${video.topic} · ${video.title} · ${video.channel}${activeVideo.id === video.id ? ' · 현재 재생 중' : ' · 영상 선택'}`} onClick={() => selectExpertVideo(video.id)}><span className="guide-video-card-thumb"><span className={`guide-video-card-thumb-placeholder is-${videoPosterTone(video.topic)}`} style={{ '--guide-video-poster': `url(${videoPosterImage(video.topic)})` } as CSSProperties} aria-hidden="true"><small>GABA · {video.topic}</small><strong>공개 영상</strong><em>영상 미리보기</em></span><img src={videoThumbnailUrl(video.id)} onError={(event) => fallbackVideoThumbnail(event, video.id)} onLoad={(event) => validateVideoThumbnail(event, video.id)} alt="" loading="lazy" fetchPriority="low" decoding="async" /><span className="guide-video-card-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span></span><span className="guide-video-card-copy"><span className="guide-video-card-copy-top"><span>{video.topic}</span>{activeVideo.id === video.id ? <em>재생 중</em> : null}</span><strong>{video.title}</strong><small>{video.channel}</small></span></button>)}</div>
               </div>
             </div>
