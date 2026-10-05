@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 4143e45 — 2026-10-05
+
+- 연구 카드를 읽은 뒤 출처 읽기 패널이 첫 연구로 고정되어 다른 주제의 대상·측정 항목·설계와 원문 출처가 어긋나 보일 수 있는 흐름 리스크를 확인하고 PR #289에서 `activeResearchTopic`을 출처 읽기 패널과 동기화했다. 직접 출처 읽기 진입은 인지 연구를 기본으로 유지하고, 연구 선택 후에는 선택된 연구의 출처·대상·측정 항목·설계를 보여 준다. 연구 수치·출처 데이터·공개 카피·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1607759 bytes로 예산 안이다.
+- PR #289 필수 checks, main workflow 37254552858의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 4143e45fb6b19f8f1b8adc77712c9f7f1bde85cf는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 출처 읽기 동기화의 정적 계약·배포 정합성은 확인했지만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005, E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005, E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005, E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005.
+
 ## Release Recheck — 7c409a1 — 2026-10-05
 
 - 모바일 출처 읽기 패널의 네 가지 질문이 단순 목록으로 보여 연구를 읽는 순서와 원문 출처로 넘어가는 흐름이 약해질 수 있는 편집 리스크를 확인하고 PR #287에서 번호를 하나의 세로 읽기 레일로 연결했다. 원문 출처 카드의 우측 여백을 줄여 긴 한글 출처명이 자연스럽게 읽히도록 보정했다. 연구 수치·출처 데이터·공개 카피·제품 독립 경계는 변경하지 않았다.
