@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 공개 배포·라이브 검증 완료 — 589055e — 2026-10-06
+
+- PR #369에서 글자 크기 조절 문구 보정이 검증·병합되었고 main workflow `37341643727`의 Pages 배포·라이브 smoke·release status가 성공했다.
+- 공개 validator는 HTTP 200·STATIC·71개 bundle hash를 확인했다. 공개 Chrome CDP 390·1440px에서 `글자 크게`·`기본 크기`, aria 상태, 가로 폭 안정성을 확인했다.
+- NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Browser 플러그인 부재, 실기기·실제 사용자 독해성·독립 과학/규제 감수는 외부 조건으로 남긴다.
+
+증적: E-DEPLOY-PIPELINE-READING-SIZE-LABEL-20261006, E-LIVE-PUBLIC-READING-SIZE-LABEL-20261006.
+
 ## 모바일 읽기 크기 조절 문구 고도화 — 1daf71b — 2026-10-06
 
 - 모바일 헤더의 `큰 글씨`·`기본 글씨`를 `글자 크게`·`기본 크기`로 바꿔, 버튼을 누르면 일어나는 행동이 즉시 읽히도록 정리했다.

@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 589055e — 2026-10-06
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-004 390·1440px 글자 크기 조절 문구·토글 상태·가로 폭·runtime 안정성: PASS.
+- AC-005 PR 검증·UI 계약·typecheck·127개 테스트·production build·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- 공개 candidate `589055e10aad8e53d879e1217e8ac540072986e8`는 HTTP 200·STATIC·71개 bundle hash를 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-DEPLOY-PIPELINE-READING-SIZE-LABEL-20261006, E-LIVE-PUBLIC-READING-SIZE-LABEL-20261006.
+
 ## Current Release Recheck — 1daf71b — 2026-10-06
 
 - AC-004 모바일 헤더의 글자 크기 조절 문구·토글 상태·가로 폭: PASS locally.

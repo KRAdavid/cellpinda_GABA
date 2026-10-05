@@ -1,5 +1,12 @@
 # Red Team Report
 
+## Public Recheck — 2026-10-06 — 589055e
+
+- 공개 390·1440px에서 글자 크기 조절의 초기·토글 후 문구, aria-pressed, 가+/가− 신호, 가로 폭과 runtime 오류를 확인했다.
+- 공개 배포 후에도 새 CRITICAL/MAJOR 결함은 재현되지 않았다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-READING-SIZE-LABEL-20261006.
+
 ## Recheck — 2026-10-06 — 1daf71b
 
 - 공격 관점에서 `글자 크게`·`기본 크기` 문구가 모바일 헤더에서 잘리거나 기존 가+/가− 신호와 충돌하는지, 토글 후 가로 폭이 늘어나는지 확인했다.

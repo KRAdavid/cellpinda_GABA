@@ -1504,7 +1504,8 @@
         "E-LOCAL-BUILD-READING-SIZE-LABEL-20261006",
         "E-UI-CONTRACT-READING-SIZE-LABEL-20261006",
         "E-CDP-READING-SIZE-LABEL-20261006",
-        "E-DEPLOY-PIPELINE-READING-SIZE-LABEL-20261006"
+        "E-DEPLOY-PIPELINE-READING-SIZE-LABEL-20261006",
+        "E-LIVE-PUBLIC-READING-SIZE-LABEL-20261006"
       ],
       "status": "SUPPORTED"
     }
@@ -11425,12 +11426,24 @@
     {
       "id": "E-DEPLOY-PIPELINE-READING-SIZE-LABEL-20261006",
       "kind": "TEST",
-      "status": "PENDING",
-      "statement": "글자 크기 조절 문구 보정 commit 1daf71b을 PR 검증 후 main에 병합하고 공개 배포 workflow를 통과시키는 단계다.",
-      "locator": "pending PR and main deployment workflow after user-visible code change",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "글자 크기 조절 문구 보정 commit 1daf71b이 PR #369 검증을 통과하고 main commit 589055e로 병합된 뒤 공개 배포 workflow를 성공적으로 통과했다.",
+      "locator": "PR #369; code commit 1daf71b6c93a004bcdc4031c5a06c212b8908f40; main commit 589055e10aad8e53d879e1217e8ac540072986e8; workflow 37341643727; release-verify 111869908781, worker-readiness 111870442871, deploy-pages 111870485052, smoke-live 111870578643 and release-status 111870674369 successful; deploy-worker 111870486314 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37341643727",
       "captured_at": "2026-10-05T16:28:00Z",
       "reviewer_id": "NAVI-DEPLOY-QA-20261006-READING-SIZE-LABEL",
       "claim_refs": ["C-001", "C-002", "C-147"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-READING-SIZE-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 글자 크기 조절 문구가 `글자 크게`·`기본 크기`로 표시되고, 실제 토글 상태·접근성 라벨·가로 폭이 모바일과 데스크톱에서 유지된다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 589055e10aad8e53d879e1217e8ac540072986e8; generatedAt 2026-10-05T16:33:42.506Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: `기본 크기` -> `글자 크게`, aria-label `기본 크기로 보기` -> `글자 크게 보기`, aria-pressed true -> false, mark 가− -> 가+, scrollWidth 390; 1440px reverse toggle, scrollWidth 1425; errors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=reading-label-390",
+      "captured_at": "2026-10-05T16:35:56Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-READING-SIZE-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-147"]
     }
   ]
 }

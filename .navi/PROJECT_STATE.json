@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T16:29:43.411403Z",
+  "updated_at": "2026-10-05T16:36:42.285056Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5039,6 +5039,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T16:28:00Z"
+    },
+    {
+      "id": "H-220",
+      "event": "글자 크기 조절 문구 보정 PR #369가 검증을 통과해 main commit 589055e로 병합되었고, workflow 37341643727의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 번들 해시를 확인했으며, Chrome CDP fallback 공개 390·1440px에서 `글자 크게`·`기본 크기` 문구와 aria 상태·가로 폭을 재현했다. 새 CRITICAL/MAJOR 결함은 없고, C-147과 공개 배포 증거를 갱신했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T16:35:56Z"
     }
   ]
 }
