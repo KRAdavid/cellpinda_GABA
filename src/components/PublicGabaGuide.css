@@ -1643,6 +1643,11 @@
 .gaba-guide .guide-video-board-head{letter-spacing:-.035em}
 .gaba-guide .guide-video-board-head>strong{letter-spacing:-.045em;white-space:nowrap}
 
+/* v102 reading relations: make map selections and media choices resolve to explicit destinations. */
+.gaba-guide .guide-research-detail-inline:focus-visible{outline:3px solid rgba(18,154,163,.28);outline-offset:5px}
+.gaba-guide .guide-video-card[aria-pressed="true"]{outline:2px solid rgba(18,154,163,.22);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.gaba-guide .guide-research-detail-inline:focus-visible{outline-offset:3px}}
+
 /* v93 mobile chapter context: keep each section's concise editorial cue visible on small screens. */
 @media(max-width:700px){
   .gaba-guide .guide-section-heading>p{
