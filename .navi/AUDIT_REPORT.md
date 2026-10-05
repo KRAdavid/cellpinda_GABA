@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Research Comparison Chart Recheck — 0acdb90 — 2026-10-05
+
+- 좁은 모바일 연구 결과 도표에서 비교 조건과 GABA 섭취 조건이 세로로 쌓여 한 지표를 이해하는 데 스크롤이 길어지던 잔여 리스크를 확인하고, PR #359에서 두 조건을 같은 행의 두 칸으로 나란히 배치했다. GABA 결과 칸의 청록색 강조·방향 문구·측정 지표는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #359 release-verify와 main workflow `37327605045`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `0acdb90a43dd9dbbab0b2618efd63ec79bc5e3b1`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claims·6개 master records·1개 product·6개 share pages·teaser HOLD를 유지한다. Chrome CDP fallback 공개 320·390·1440px에서 lane width 96·131·195, chart height 845·765·456, scrollWidth 320·390·1425와 runtime 오류 없음을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-COMPARISON-20261006, E-UI-CONTRACT-MOBILE-RESEARCH-COMPARISON-20261006, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-COMPARISON-20261006, E-LIVE-PUBLIC-MOBILE-RESEARCH-COMPARISON-20261006.
+
 ## Full Public Flow Recheck — 7c7e772 — 2026-10-05
 
 - 도입·수면과 회복·GABA란·연구 지도·국내외 활용·발효와 안전·전문가 영상·출처 읽기·이야기 공유의 주요 장을 390px와 1440px 공개 화면에서 순서대로 재검증했다. 모바일 제목, 선행 카드, 연구 출처, 공유 자료가 고정 읽기 레일 아래에서 읽혔고 전문가 영상 주제 레일과 선택 즉시 재생도 유지됐다.

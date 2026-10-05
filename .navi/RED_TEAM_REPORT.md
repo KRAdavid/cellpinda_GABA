@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 0acdb90
+
+- 공격 관점에서 320·390px 연구 결과 도표의 비교 조건·GABA 섭취 조건이 같은 행에 함께 보이는지, 좁은 화면 가로 넘침, GABA 결과 강조, 방향 문구, 1440px 데스크톱 회귀와 runtime 오류를 확인했다. 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.
+- 공개 결과는 320px lane width 96px, 390px lane width 131px, 1440px lane width 195px였으며 document scrollWidth는 320·390·1425로 viewport를 넘지 않았다. 도표 높이는 845·765·456px로 확인되어 기존 세로 적층보다 짧아졌고 두 조건의 직접 비교가 유지됐다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경되지 않았다. 대표 Chrome CDP 렌더만으로 전체 브라우저·실기기를 보장할 수 없으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-MOBILE-RESEARCH-COMPARISON-20261006.
+
 ## Full Public Flow Recheck — 2026-10-05 — 7c7e772
 
 - 공격 관점에서 390px·1440px의 도입부터 공유까지 장별 진입, 고정 읽기 레일과 제목 간 간격, 연구 카드·출처·공유 영역의 화면 폭, 전문가 영상 필터 선택과 즉시 재생을 확인했다. 새 CRITICAL/MAJOR 결함과 runtime 오류는 재현되지 않았다.

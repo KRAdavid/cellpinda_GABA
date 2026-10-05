@@ -1459,6 +1459,17 @@
         "E-LIVE-PUBLIC-FULL-FLOW-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-144",
+      "statement": "좁은 모바일 연구 결과 도표는 비교 조건과 GABA 섭취 조건을 같은 행의 두 칸으로 나란히 보여 주고, GABA 결과 칸의 색상·강조·방향 문구를 유지해 한눈에 비교할 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-RESEARCH-COMPARISON-20261006",
+        "E-UI-CONTRACT-MOBILE-RESEARCH-COMPARISON-20261006",
+        "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-COMPARISON-20261006",
+        "E-LIVE-PUBLIC-MOBILE-RESEARCH-COMPARISON-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11173,6 +11184,48 @@
       "captured_at": "2026-10-05T14:30:43Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-FULL-FLOW",
       "claim_refs": ["C-001", "C-002", "C-003", "C-143"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-RESEARCH-COMPARISON-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 연구 결과 비교 도표 보정이 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1623701 <= 1650000; Chrome CDP fallback local 320·390·1440px",
+      "captured_at": "2026-10-05T14:51:48Z",
+      "reviewer_id": "NAVI-QA-GABA-20261005-MOBILE-RESEARCH-COMPARISON",
+      "claim_refs": ["C-001", "C-003", "C-144"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-RESEARCH-COMPARISON-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 결과 도표가 좁은 화면에서도 두 조건을 한눈에 비교하도록 두 칸을 유지하고, 읽기 쉬운 라벨과 GABA 결과 강조를 보존하는지 UI 계약 회귀 검사가 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v115 narrow comparison chart; grid-template-columns repeat(2,minmax(0,1fr)); status ok; events 14",
+      "captured_at": "2026-10-05T14:51:48Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-RESEARCH-COMPARISON",
+      "claim_refs": ["C-003", "C-144"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-COMPARISON-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 결과 비교 도표 보정 commit f8c5882가 PR #359 검증 후 main commit 0acdb90으로 병합되고, 최종 공개 배포 파이프라인이 성공했다.",
+      "locator": "PR #359; code commit f8c5882; main commit 0acdb90a43dd9dbbab0b2618efd63ec79bc5e3b1; workflow 37327605045; release-verify 111822221202, worker-readiness 111822747995, deploy-pages 111822788146, smoke-live 111822916013 and release-status 111823079381 successful; deploy-worker 111822789548 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37327605045",
+      "captured_at": "2026-10-05T14:48:43Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-RESEARCH-COMPARISON",
+      "claim_refs": ["C-001", "C-002", "C-144"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-RESEARCH-COMPARISON-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 320·390px에서 비교 조건과 GABA 섭취 조건을 나란히 렌더링하고, GABA 결과 칸의 강조와 방향 문구를 유지하며 가로 넘침 없이 표시한다. 1440px 데스크톱 구성도 유지된다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 0acdb90a43dd9dbbab0b2618efd63ec79bc5e3b1; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 320·390·1440px reported scrollWidth 320/390/1425, lane widths 96/131/195, row heights 236/220/144, chart heights 845/765/456, GABA result accent and errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=research-card-public-20261006-390#research-cognition",
+      "captured_at": "2026-10-05T14:48:43Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-RESEARCH-COMPARISON",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-144"]
     }
   ]
 }

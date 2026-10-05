@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 연구 결과 비교 도표 고도화 및 공개 재검증 — 0acdb90 — 2026-10-05
+
+- 좁은 화면에서 비교 조건과 GABA 섭취 조건을 세로로 읽어야 했던 연구 결과 도표를 같은 행의 두 칸 비교 구조로 바꿨다. GABA 결과 칸의 색상 강조, 방향 문구, 측정 지표는 유지해 연구 결과를 빠르게 비교할 수 있다.
+- PR #359 release-verify와 main workflow `37327605045`의 공개 배포가 성공했다. 최신 공개 candidate는 HTTP 200·STATIC·제품 독립 경계를 유지한다.
+- 공개 320·390·1440px에서 두 조건 나란히 표시, 가로 폭, 도표 높이, GABA 결과 강조, runtime 오류 없음을 재검증했다. NAVI 증적·감리·레드팀을 동기화했으며 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-COMPARISON-20261006, E-UI-CONTRACT-MOBILE-RESEARCH-COMPARISON-20261006, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-COMPARISON-20261006, E-LIVE-PUBLIC-MOBILE-RESEARCH-COMPARISON-20261006.
+
 ## 전체 공개 흐름 재검증 및 NAVI 증적 동기화 — 7c7e772 — 2026-10-05
 
 - 도입부터 수면·회복, GABA란, 연구 지도, 활용, 발효·안전, 전문가 영상, 출처 읽기, 마지막 공유까지 390px·1440px 공개 화면을 다시 확인했다. 가로 넘침·runtime 오류·고정 읽기 레일과 제목의 충돌은 없었고, 기존 모바일 영상 레일 개선도 유지됐다.
