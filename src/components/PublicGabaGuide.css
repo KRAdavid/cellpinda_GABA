@@ -1921,6 +1921,6 @@
 .guide-hero-story .guide-hero-scroll:focus-visible{border-color:rgba(18,154,163,.72);outline:3px solid rgba(18,154,163,.24);outline-offset:4px;color:var(--guide-teal-dark)}
 @media(prefers-reduced-motion:reduce){.guide-hero-story .guide-hero-scroll{transition:none}}
 
-/* v119 research map orientation cue: show the map scale inside the central node before a topic is selected. */
-.guide-research-orbit-core small{color:#7fa2ad;font-size:9px;font-weight:850;letter-spacing:-.03em;line-height:1.2;white-space:nowrap}
-@media(max-width:700px){.guide-research-orbit-core small{font-size:8px}}
+/* v120 research map scale cue: give the central node's five-area summary a readable hierarchy on small screens. */
+.guide-research-orbit-core small{color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:-.03em;line-height:1.2;white-space:nowrap}
+@media(max-width:700px){.guide-research-orbit-core small{font-size:9px}}
