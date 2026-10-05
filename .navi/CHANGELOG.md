@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 읽기 진행 레일 전환 가독성 보강 — 726fe8a — 2026-10-05
+
+- 상단 읽기 진행 레일의 opacity 전환을 제거하고 transform만 전환해 히어로 사진이 위치 안내 문구에 비치는 순간을 없앴다. 기존의 읽기 진행·고정 헤더·reduced-motion 동작은 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #324의 main 배포 workflow `37282401884`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 로컬 280·300·320·360·390px 헤더 및 큰 글씨 모드, 공개 390·768·1024·1440px 장 직접 진입, 390px 전문가 영상 선택·즉시 재생을 재검증했다. 공개 candidate `726fe8a85f5729c780d5da21dee36f4fa86d6412`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-READING-RAIL-OPAQUE-20261005, E-UI-CONTRACT-READING-RAIL-OPAQUE-20261005, E-DEPLOY-PIPELINE-READING-RAIL-OPAQUE-20261005, E-LIVE-PUBLIC-READING-RAIL-OPAQUE-20261005.
+
 ## 장문 안내서 지연 렌더링 스크롤 안정화 — 2ca5a8a — 2026-10-05
 
 - `content-visibility:auto` 하위 장에 v110 반응형 `contain-intrinsic-size`를 적용해 실제 카드·영상·공유 영역이 처음 렌더링될 때 다음 콘텐츠가 밀리던 현상을 줄였다. 모바일·태블릿·데스크톱 예약값을 분리했다.

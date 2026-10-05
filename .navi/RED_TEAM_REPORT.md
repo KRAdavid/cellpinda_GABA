@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 726fe8a8
+
+- 공격 관점에서 확인한 실패 모드는 읽기 진행 레일이 나타나는 찰나에 히어로 사진이 레일의 위치 안내 문구에 비쳐 대비가 약해지는 것이었다. PR #324에서 opacity 전환을 transform 전환으로 바꿔 불투명한 흰색 위치 표면을 즉시 노출했다.
+- 280·300·320·360·390px 헤더, 큰 글씨 모드, 390px 전문가 영상 선택·즉시 재생, 390·768·1024·1440px 장 직접 진입을 재검증했고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 공개 Pages candidate `726fe8a85f5729c780d5da21dee36f4fa86d6412`와 라이브 smoke가 성공했지만 대표 Chrome CDP 확인만으로 전체 브라우저·실기기를 보장할 수 없다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LOCAL-BUILD-READING-RAIL-OPAQUE-20261005, E-UI-CONTRACT-READING-RAIL-OPAQUE-20261005, E-DEPLOY-PIPELINE-READING-RAIL-OPAQUE-20261005, E-LIVE-PUBLIC-READING-RAIL-OPAQUE-20261005.
+
 ## Recheck — 2026-10-05 — 2ca5a8a
 
 - 공격 관점에서 확인한 실패 모드는 지연 렌더링 하위 장을 처음 열 때 실제 콘텐츠 높이가 예약값보다 커져 현재 읽는 장면과 다음 장면의 위치가 갑자기 바뀌는 것이었다. PR #322에서 모바일·태블릿·데스크톱 폭별 예약 높이를 분리해 이 실패 모드를 보정했다.

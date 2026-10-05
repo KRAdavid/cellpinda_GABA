@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T07:54:09Z",
+  "updated_at": "2026-10-05T08:17:34Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1970,7 +1970,11 @@
           "E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005",
           "E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005",
           "E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005",
-          "E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005"
+          "E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005",
+          "E-LOCAL-BUILD-READING-RAIL-OPAQUE-20261005",
+          "E-UI-CONTRACT-READING-RAIL-OPAQUE-20261005",
+          "E-DEPLOY-PIPELINE-READING-RAIL-OPAQUE-20261005",
+          "E-LIVE-PUBLIC-READING-RAIL-OPAQUE-20261005"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -2115,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T07:54:09Z"
+    "last_run_at": "2026-10-05T08:17:34Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2181,7 +2185,11 @@
           "E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005",
           "E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005",
           "E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005",
-          "E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005"
+          "E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005",
+          "E-LOCAL-BUILD-READING-RAIL-OPAQUE-20261005",
+          "E-UI-CONTRACT-READING-RAIL-OPAQUE-20261005",
+          "E-DEPLOY-PIPELINE-READING-RAIL-OPAQUE-20261005",
+          "E-LIVE-PUBLIC-READING-RAIL-OPAQUE-20261005"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -2299,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T07:54:09Z"
+    "last_run_at": "2026-10-05T08:17:34Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4849,6 +4857,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T07:54:09Z"
+    },
+    {
+      "id": "H-194",
+      "event": "상단 읽기 진행 레일이 나타나는 전환 순간 히어로 사진이 보조 문구에 비쳐 위치 안내의 대비가 약해지는 잔여 퍼블리싱 리스크를 확인했다. PR #324에서 v111 레일을 opacity가 아닌 transform만 전환하도록 보정해 불투명한 흰색 위치 안내 표면을 즉시 유지했다. 280·300·320·360·390px 헤더, 큰 글씨 모드, 390px 전문가 영상 선택·즉시 재생, 390·768·1024·1440px 장 직접 진입을 재검증했다. 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다. PR #324 checks와 main workflow 37282401884의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 live candidate 726fe8a85f5729c780d5da21dee36f4fa86d6412는 HTTP 200·STATIC·12개 공개 claim·6개 연구 record·제품 독립 공개 경계를 유지했다. Worker는 STATIC_ONLY로 건너뛰었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T08:17:34Z"
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 726fe8a8 — 2026-10-05
+
+- 280–1440px Chrome CDP 시각 점검에서 상단 읽기 진행 레일이 나타나는 전환 순간 히어로 이미지가 보조 문구에 비치는 잔여 가독성 리스크를 확인했다. PR #324에서 v111 레일의 opacity 전환을 제거하고 transform만 전환하도록 보정해 불투명한 흰색 표면을 즉시 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 280·300·320·360·390px 헤더는 겹침 없음·44px 터치 영역·가로 넘침 없음·런타임 오류 없음으로 확인했고, 큰 글씨 모드도 유지했다. 390px 전문가 영상 선택은 즉시 iframe 재생·포커스 이동·가로 폭 390px을 유지했다.
+- PR #324 checks와 main workflow `37282401884`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했다. Worker는 STATIC_ONLY로 건너뛰었다. 공개 manifest candidate `726fe8a85f5729c780d5da21dee36f4fa86d6412`는 HTTP 200, STATIC, 12 공개 claims, 6 research records, 1 product, teaser HOLD를 유지한다.
+- 캐시를 비활성화한 Chrome CDP fallback 공개 390·768·1024·1440px에서 연구·전문가 영상·마지막 장 직접 진입이 고정 헤더·읽기 레일 아래에 정렬되고 `scrollWidth`는 390·753·1009·1425px이었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-READING-RAIL-OPAQUE-20261005, E-UI-CONTRACT-READING-RAIL-OPAQUE-20261005, E-DEPLOY-PIPELINE-READING-RAIL-OPAQUE-20261005, E-LIVE-PUBLIC-READING-RAIL-OPAQUE-20261005.
+
 ## Release Recheck — 2ca5a8a — 2026-10-05
 
 - 장문 공개 안내서의 `content-visibility:auto` 하위 장이 초기 900px 예약값과 실제 카드·영상·공유 영역의 높이가 달라 처음 깊은 장면을 방문할 때 다음 장면이 밀리는 퍼블리싱 리스크를 확인했다. PR #322에서 v110 화면 폭별 `contain-intrinsic-size` 예약 높이를 적용했다.
