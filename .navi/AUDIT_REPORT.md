@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — a18561f — 2026-10-05
+
+- 390px 모바일 연구 비교 도표에서 `GABA를 바른 조건` 범례가 세 칸 헤더 안에서 음절 단위로 깨지는 잔여 인포그래픽 리스크를 확인했다. PR #326에서 430px 이하 범례를 `변화 방향 → 비교 조건 → GABA 조건`의 세로 읽기 순서로 재배치하고 조건명을 한 줄로 보존했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. Chrome CDP 로컬 390·320·280px에서 범례 세 항목이 각각 한 줄로 표시되고 `scrollWidth`가 뷰포트와 일치했으며, 메뉴·큰 글씨·연구 카드 상호작용 회귀도 런타임 오류 없이 통과했다.
+- PR #326 checks와 main workflow `37284733229`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했다. Worker는 STATIC_ONLY로 건너뛰었다. 공개 manifest candidate `a18561f8b00a6f808e8ee858c9e833089537f3e4`는 HTTP 200, STATIC, 12 공개 claims, 6 research records, 1 product, teaser HOLD를 유지한다.
+- 캐시를 비활성화한 Chrome CDP fallback 공개 390px에서 세 범례가 온전히 세로 표시되고 `scrollWidth=390`, 1440px에서 기존 좌우 비교 도표와 `scrollWidth=1425`를 확인했다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-COMPARISON-LEGEND-20261005, E-UI-CONTRACT-MOBILE-COMPARISON-LEGEND-20261005, E-DEPLOY-PIPELINE-MOBILE-COMPARISON-LEGEND-20261005, E-LIVE-PUBLIC-MOBILE-COMPARISON-LEGEND-20261005.
+
 ## Release Recheck — 726fe8a8 — 2026-10-05
 
 - 280–1440px Chrome CDP 시각 점검에서 상단 읽기 진행 레일이 나타나는 전환 순간 히어로 이미지가 보조 문구에 비치는 잔여 가독성 리스크를 확인했다. PR #324에서 v111 레일의 opacity 전환을 제거하고 transform만 전환하도록 보정해 불투명한 흰색 표면을 즉시 유지했다.

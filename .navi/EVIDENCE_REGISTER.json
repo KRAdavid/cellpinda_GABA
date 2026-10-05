@@ -1258,6 +1258,17 @@
         "E-LIVE-PUBLIC-READING-RAIL-OPAQUE-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-125",
+      "statement": "공개 GABA 안내서의 모바일 연구 비교 도표는 변화 방향·비교 조건·GABA 조건을 세로 범례로 분리해 조건명이 끊기지 않고, 결과 막대와 자연스럽게 이어지는 비교 흐름을 제공한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-COMPARISON-LEGEND-20261005",
+        "E-UI-CONTRACT-MOBILE-COMPARISON-LEGEND-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-COMPARISON-LEGEND-20261005",
+        "E-LIVE-PUBLIC-MOBILE-COMPARISON-LEGEND-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10233,6 +10244,50 @@
       "captured_at": "2026-10-05T08:17:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-READING-RAIL-OPAQUE",
       "claim_refs": ["C-002", "C-003", "C-124"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-COMPARISON-LEGEND-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 비교 도표 범례의 세로 읽기 구조 보강 PR #326 source commit이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #326 source commit 6c9635c; pnpm run validate:ui-contract PASS including v112 mobile comparison legend assertion; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1617337 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/326",
+      "captured_at": "2026-10-05T08:30:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-COMPARISON-LEGEND",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-125"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-COMPARISON-LEGEND-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 430px 이하 연구 비교 도표 범례를 변화 방향·비교 조건·GABA 조건의 세로 순서와 온전한 조건명으로 유지하도록 v112 회귀 방지 조건을 고정한다.",
+      "locator": "scripts/validate-ui-contract.mjs v112 assertion; PublicGabaGuide.css @media(max-width:430px) uses one-column grid areas axis/reference/result, white-space:nowrap and word-break:keep-all; Chrome CDP local at 390/320/280px reported each comparison heading label as one line, scrollWidth equal to viewport and no runtime errors",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/326",
+      "captured_at": "2026-10-05T08:29:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-COMPARISON-LEGEND",
+      "claim_refs": ["C-003", "C-125"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-COMPARISON-LEGEND-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 비교 도표 범례 보강 PR #326이 필수 검사를 통과해 main commit a18561f에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #326 merge main commit a18561f8b00a6f808e8ee858c9e833089537f3e4; PR checks release-verify 37284599137 and site-quality-verify 37284599146 successful; main workflow 37284733229 with release-verify 111680812949, worker-readiness 111681444733, deploy-pages 111681474415, smoke-live 111681560421 and release-status 111681621564 successful; deploy-worker 111681476084 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37284733229",
+      "captured_at": "2026-10-05T08:40:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-COMPARISON-LEGEND",
+      "claim_refs": ["C-001", "C-002", "C-125"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-COMPARISON-LEGEND-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 최신 main 후보와 일치하고, 캐시를 비활성화한 Chrome CDP fallback 공개 390px 연구 카드에서 변화 방향·비교 조건·GABA 조건이 세로로 온전히 표시되며 1440px의 기존 좌우 비교 도표도 유지된다.",
+      "locator": "validate:live-public HTTP 200; candidateSha a18561f8b00a6f808e8ee858c9e833089537f3e4; generatedAt 2026-10-05T08:38:36.475Z; runtimeMode STATIC; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?view=guide&qa=research-card-audit-{width}-20261005 at 390px reported the labels as single-line vertical legend items and scrollWidth 390 with no runtime errors; 1440px reported the desktop comparison chart and scrollWidth 1425 with no runtime errors",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=research-card-audit-390-20261005",
+      "captured_at": "2026-10-05T08:42:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-COMPARISON-LEGEND",
+      "claim_refs": ["C-002", "C-003", "C-125"]
     }
   ]
 }
