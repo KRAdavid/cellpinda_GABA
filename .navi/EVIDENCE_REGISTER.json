@@ -1060,6 +1060,17 @@
         "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-107",
+      "statement": "공개 GABA 안내서의 출처 읽기 패널은 연구 카드에서 선택되거나 현재 읽힌 연구를 따라 출처·연구 대상·측정 항목·연구 설계를 보여 주고, 직접 출처 읽기 진입에서는 인지 연구를 기본 예시로 사용한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005",
+        "E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005",
+        "E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005",
+        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9243,6 +9254,50 @@
       "captured_at": "2026-10-05T01:58:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-SOURCE-RAIL",
       "claim_refs": ["C-002", "C-003", "C-106"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드를 읽은 뒤 출처 읽기 패널이 현재 연구의 출처·대상·측정 항목·설계로 이어지는 v98 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #289 source commit 8f3ded3744afcf5776e9334731889cda3a3e2201; pnpm run validate:ui-contract PASS including v98 contextual source-reading assertion; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1607759 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/289",
+      "captured_at": "2026-10-05T02:18:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-CONTEXTUAL-SOURCE",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-107"]
+    },
+    {
+      "id": "E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 출처 읽기 패널이 activeResearchTopic을 기본 연구로 fallback하고 source·subject·measured·design을 동기화하는 구조를 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v98 contextual source-reading assertion; PublicGabaGuide.tsx uses sourceReadingTopic = activeResearchTopic ?? researchTopics[0], sourceReadingLabel, sourceReadingTopic.source.url/label/profile.subject/profile.measured/profile.design; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/289",
+      "captured_at": "2026-10-05T02:18:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-CONTEXTUAL-SOURCE",
+      "claim_refs": ["C-003", "C-107"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 선택과 출처 읽기 흐름 PR #289가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #289 merge main commit 4143e45fb6b19f8f1b8adc77712c9f7f1bde85cf; PR checks release-verify 37254449296 job 111588445387 and site-quality-verify 37254449271 job 111588445341 successful; main workflow 37254552858 with release-verify 111588744048, worker-readiness 111588994966, deploy-pages 111589011604, smoke-live 111589053069 and release-status 111589104019 successful; deploy-worker 111589012339 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37254552858",
+      "captured_at": "2026-10-05T02:18:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-CONTEXTUAL-SOURCE",
+      "claim_refs": ["C-001", "C-002", "C-107"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 선택 연구와 출처 읽기 패널의 동기화 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=4143e45fb6b19f8f1b8adc77712c9f7f1bde85cf pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 4143e45fb6b19f8f1b8adc77712c9f7f1bde85cf; generatedAt 2026-10-05T02:14:37.248Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#reading-note",
+      "captured_at": "2026-10-05T02:18:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-CONTEXTUAL-SOURCE",
+      "claim_refs": ["C-002", "C-003", "C-107"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 선택과 출처 읽기 연결 고도화 — 4143e45 — 2026-10-05
+
+- 연구 카드에서 주제를 선택하면 출처 읽기 패널도 선택된 연구의 출처·대상·측정 항목·연구 설계로 이어지도록 보강했다. 직접 출처 읽기 진입은 인지 연구를 기본 예시로 유지한다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #289 checks, main workflow 37254552858, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005, E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005, E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005, E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005.
+
 ## 모바일 출처 읽기 레일 고도화 — 7c409a1 — 2026-10-05
 
 - 모바일 출처 읽기 패널의 네 가지 질문을 번호가 연결된 세로 레일로 정리하고 원문 출처 카드의 불필요한 우측 여백을 줄여 연구 읽기 순서와 출처 전환을 빠르게 파악하도록 보강했다.

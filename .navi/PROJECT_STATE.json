@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T02:01:31.124838Z",
+  "updated_at": "2026-10-05T02:20:30.252715Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -479,7 +479,11 @@
         "E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005",
         "E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005",
-        "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005"
+        "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005",
+        "E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005",
+        "E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005",
+        "E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005",
+        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1086,7 +1090,11 @@
         "E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005",
         "E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005",
-        "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005"
+        "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005",
+        "E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005",
+        "E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005",
+        "E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005",
+        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005"
       ],
       "owner": "QA"
     },
@@ -1304,7 +1312,11 @@
         "E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005",
         "E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005",
-        "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005"
+        "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005",
+        "E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005",
+        "E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005",
+        "E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005",
+        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -4608,6 +4620,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T01:58:00Z"
+    },
+    {
+      "id": "H-177",
+      "event": "연구 카드를 읽은 뒤 출처 읽기 패널이 첫 연구로 고정되어 다른 주제의 대상·측정 항목·설계와 원문 출처가 어긋나 보일 수 있는 흐름 리스크를 확인하고 PR #289에서 activeResearchTopic을 출처 읽기 패널과 동기화했다. 직접 출처 읽기 진입은 인지 연구를 기본으로 유지하고, 연구 선택 후에는 선택된 연구의 source·subject·measured·design을 보여 준다. v98 UI 계약으로 동기화 구조를 고정했으며 연구 수치·출처 데이터·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #289 checks, main workflow 37254552858의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate 4143e45fb6b19f8f1b8adc77712c9f7f1bde85cf는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. 브라우저 자동화와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T02:18:00Z"
     }
   ]
 }
