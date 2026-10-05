@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 2ca5a8a — 2026-10-05
+
+- 장문 공개 안내서의 `content-visibility:auto` 하위 장이 초기 900px 예약값과 실제 카드·영상·공유 영역의 높이가 달라 처음 깊은 장면을 방문할 때 다음 장면이 밀리는 퍼블리싱 리스크를 확인했다. PR #322에서 v110 화면 폭별 `contain-intrinsic-size` 예약 높이를 적용했다.
+- 로컬 Chrome CDP fallback 레이아웃 감사에서 390·768·1024·1440px을 순차 방문했다. 방문 전·후 섹션 위치 차이는 모바일 1–5px의 반올림·스크롤 앵커링, 768px 1px, 1024px·1440px 0px로 확인됐고, `scrollWidth`는 각각 390·753·1009·1425px이었다.
+- PR #322 checks와 main workflow `37280003369`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했다. Worker는 STATIC_ONLY로 건너뛰었다. 공개 manifest candidate `2ca5a8a264321c7d9fa16e0fe2cb63a5aed4694f`는 HTTP 200, STATIC, 12 공개 claims, 6 research records, 1 product, teaser HOLD를 유지한다.
+- 캐시를 비활성화한 Chrome CDP fallback 공개 390·768·1024·1440px에서 `#research-skin`, `#expert-videos`, `#final` 직접 진입이 고정 헤더·읽기 레일 아래에 정렬되고 가로 넘침이 없음을 확인했다. 브라우저 플러그인이 연결되지 않아 CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005, E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005, E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005, E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005.
+
 ## Release Recheck — 2226541 — 2026-10-05
 
 - 1440px 데스크톱 hero 사진 위의 `아래로 읽기` 안내가 배경과 충분히 분리되지 않아 긴 안내서의 다음 읽기 방향이 약하게 보일 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #320에서 701px 이상 안내를 반투명 흰색 pill·테두리·그림자·blur로 보강하고 v109 UI 계약을 추가했다.

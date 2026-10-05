@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 2ca5a8a — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-002 390·768·1024·1440px 장문 안내서의 지연 렌더링 후 섹션 위치·직접 진입·가로 폭 안정성: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #322와 main 공개 배포 workflow `37280003369`가 성공했고, 공개 manifest는 candidate `2ca5a8a264321c7d9fa16e0fe2cb63a5aed4694f`, HTTP 200, STATIC, 12 claims, 6 research, 1 product, teaser HOLD를 확인했다.
+- v110 반응형 예약 높이로 로컬 깊은 스크롤 위치 차이는 모바일 1–5px, 768px 1px, 1024px·1440px 0px로 정리됐다. 공개 URL에서 세 주요 직접 진입과 가로 폭도 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005, E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005, E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005, E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005.
+
 ## Current Release Recheck — 2226541 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

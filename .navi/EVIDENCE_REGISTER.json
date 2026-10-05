@@ -1236,6 +1236,17 @@
         "E-LIVE-PUBLIC-DESKTOP-READING-CUE-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-123",
+      "statement": "공개 GABA 안내서의 지연 렌더링 하위 장은 화면 폭별 예약 높이로 처음 장면 진입 시 발생하던 깊은 스크롤 레이아웃 점프를 줄이고, 390·768·1024·1440px에서 직접 진입 정렬과 가로 폭 안정성을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005",
+        "E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005",
+        "E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005",
+        "E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10123,6 +10134,50 @@
       "captured_at": "2026-10-05T07:24:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-DESKTOP-READING-CUE",
       "claim_refs": ["C-002", "C-003", "C-122"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GABA 안내서 하위 장의 v110 반응형 지연 렌더링 예약 높이 보강이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #322 source commit 20e04b4; pnpm run validate:ui-contract PASS including v110 responsive intrinsic-size assertions; pnpm run typecheck PASS; pnpm test -- --run PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1616716 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/322",
+      "captured_at": "2026-10-05T07:46:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-DEFERRED-CHAPTER-STABILITY",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-123"]
+    },
+    {
+      "id": "E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 모바일·태블릿·데스크톱 폭별 하위 장 intrinsic-size 예약 높이를 v110 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v110 assertion; PublicGabaGuide.css reserves section-specific values for max-width:700px, 701–899px, 900–1199px and 1200px+; Chrome CDP local layout audit at 390/768/1024/1440px reports mobile 1–5px rounding/scroll anchoring only, 768px 1px, 1024px/1440px 0px; scrollWidth 390/753/1009/1425; command result PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/322",
+      "captured_at": "2026-10-05T07:47:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-DEFERRED-CHAPTER-STABILITY",
+      "claim_refs": ["C-003", "C-123"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "장문 안내서 스크롤 안정화 PR #322가 main commit 2ca5a8a에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #322 merge main commit 2ca5a8a264321c7d9fa16e0fe2cb63a5aed4694f; main workflow 37280003369 with release-verify 111665622030, worker-readiness 111666003358, deploy-pages 111666055213, smoke-live 111666119620 and release-status 111666192910 successful; deploy-worker 111666055849 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37280003369",
+      "captured_at": "2026-10-05T07:52:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-DEFERRED-CHAPTER-STABILITY",
+      "claim_refs": ["C-001", "C-002", "C-123"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 최신 main 후보와 일치하고, 캐시를 비활성화한 Chrome CDP fallback 공개 렌더에서 390·768·1024·1440px의 연구·전문가 영상·마지막 장 직접 진입이 헤더 아래에 정렬되며 가로 넘침이 없다.",
+      "locator": "release-manifest.json HTTP 200; candidateSha 2ca5a8a264321c7d9fa16e0fe2cb63a5aed4694f; generatedAt 2026-10-05T07:51:31.442Z; runtimeMode STATIC; counts claims 12, research 6, products 1, reviews 1; teaser HOLD/publicUrl false; Chrome CDP fallback at public URL https://kradavid.github.io/gaba_info/?view=guide&qa=anchor-audit-{width}-20261005 with Network.clearBrowserCache and Network.setCacheDisabled at 390/768/1024/1440px verified #research-skin, #expert-videos and #final heading tops 115–253px below the fixed header/reading rail; document scrollWidth 390/753/1009/1425; local before/after section-position audit reported <=5px mobile rounding/scroll anchoring, 1px at 768px and 0px at 1024/1440px",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=anchor-audit-390-20261005",
+      "captured_at": "2026-10-05T07:53:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-DEFERRED-CHAPTER-STABILITY",
+      "claim_refs": ["C-002", "C-003", "C-123"]
     }
   ]
 }

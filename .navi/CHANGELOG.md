@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 장문 안내서 지연 렌더링 스크롤 안정화 — 2ca5a8a — 2026-10-05
+
+- `content-visibility:auto` 하위 장에 v110 반응형 `contain-intrinsic-size`를 적용해 실제 카드·영상·공유 영역이 처음 렌더링될 때 다음 콘텐츠가 밀리던 현상을 줄였다. 모바일·태블릿·데스크톱 예약값을 분리했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #322의 main 배포 workflow `37280003369`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 로컬 390·768·1024·1440px 레이아웃 감사에서 방문 전·후 위치 차이는 모바일 1–5px, 768px 1px, 1024px·1440px 0px였고, 공개 URL 직접 진입과 가로 폭 안정성도 확인했다. 공개 candidate `2ca5a8a264321c7d9fa16e0fe2cb63a5aed4694f`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005, E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005, E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005, E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005.
+
 ## 데스크톱 hero 읽기 안내 대비 보강 — 2226541 — 2026-10-05
 
 - 701px 이상 사진 위에 놓인 `아래로 읽기` 안내를 반투명 흰색 pill·테두리·그림자·blur로 분리해 데스크톱 첫 화면의 다음 읽기 방향을 빠르게 인식할 수 있게 했다. 모바일 안내와 기존 콘텐츠·연구 데이터는 유지했다.

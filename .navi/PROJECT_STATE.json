@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T07:24:00.000000Z",
+  "updated_at": "2026-10-05T07:54:09Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1966,7 +1966,11 @@
           "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
           "E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005",
           "E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005",
-          "E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005"
+          "E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005",
+          "E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005",
+          "E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005",
+          "E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005",
+          "E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -2111,7 +2115,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T07:24:00Z"
+    "last_run_at": "2026-10-05T07:54:09Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2173,7 +2177,11 @@
           "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004",
           "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-20261004",
           "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
-          "E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005"
+          "E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005",
+          "E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005",
+          "E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005",
+          "E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005",
+          "E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -2291,7 +2299,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T07:24:00Z"
+    "last_run_at": "2026-10-05T07:54:09Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4834,6 +4842,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T07:24:00Z"
+    },
+    {
+      "id": "H-193",
+      "event": "공개 GABA 안내서의 content-visibility 지연 장이 초기 900px 예약값과 실제 카드·영상·공유 영역의 높이 차이로 깊은 스크롤 진입 시 다음 장면을 밀어내는 잔여 퍼블리싱 리스크를 확인했다. PR #322에서 v110 화면 폭별 contain-intrinsic-size 예약 높이를 모바일·태블릿·데스크톱으로 분리했다. 로컬 Chrome CDP fallback 390·768·1024·1440px 감사에서 방문 전·후 위치 차이는 모바일 1–5px 반올림·스크롤 앵커링, 768px 1px, 1024px·1440px 0px였고 scrollWidth는 390·753·1009·1425px이었다. PR #322 checks와 main workflow 37280003369의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live candidate 2ca5a8a264321c7d9fa16e0fe2cb63a5aed4694f는 HTTP 200·STATIC·12개 공개 claim·6개 연구 record·제품 독립 경계를 유지했다. 공개 URL에서 390·768·1024·1440px 연구·전문가 영상·마지막 장 직접 진입 정렬과 가로 폭 안정성도 확인했다. 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T07:54:09Z"
     }
   ]
 }
