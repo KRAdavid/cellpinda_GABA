@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 0d4981d
+
+- 공격 관점에서 확인한 실패 모드는 한글 제목이 좁은 모바일 폭에서 불균형하게 끊기거나 본문 설명이 짧은 구간마다 과도하게 분절되어 읽기 리듬을 해칠 수 있는 것이었다. PR #275에서 지원 브라우저의 제목 균형 줄바꿈과 본문 자연스러운 줄바꿈을 CSS 계약으로 고정했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 실제 렌더 결과를 확인하는 Browser/Playwright와 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 브라우저별 줄바꿈·실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005, E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005, E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005, E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005.
+
 ## Recheck — 2026-10-05 — 98c59eb
 
 - 공격 관점에서 확인한 실패 모드는 긴 안내서의 하단 영상·출처·공유 섹션까지 초기 계산에 참여해 모바일 첫 화면과 긴 스크롤 반응을 무겁게 만들 수 있는 것이었다. PR #273에서 화면 근처까지 하단 섹션을 점진 렌더링하고 예약 높이를 제공했으며 연구 활성 주제 감지 영역은 제외했다.

@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 0d4981d — 2026-10-05
+
+- 한글 제목이 모바일 폭에서 어색하게 끊기거나 본문 설명이 불필요하게 분절될 수 있는 편집 리스크를 확인하고 PR #275에서 지원 브라우저의 주요 디스플레이 제목에 `text-wrap:balance`, 주요 본문 설명에 `text-wrap:pretty`를 적용했다. 연구 카드·공개 카피·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1605221 bytes로 예산 안이다.
+- PR #275 필수 checks, main workflow 37247369428의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 0d4981dd42fd3b394d5a35db28fbfc3c13b3399d는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 타이포그래피 규칙·정적 배포 정합성은 확인했지만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005, E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005, E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005, E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005.
+
 ## Release Recheck — 98c59eb — 2026-10-05
 
 - 장문의 공개 안내서에서 아직 읽지 않은 하단 편집 섹션이 모바일 첫 화면 계산에 참여할 수 있는 퍼블리싱 성능 리스크를 확인하고 PR #273에서 국내외 활용·발효·성장·전문가 영상·출처·공유 섹션에 `content-visibility:auto`와 `contain-intrinsic-size:900px`를 적용했다. 연구 카드의 활성 주제 IntersectionObserver 영역은 제외했다.
