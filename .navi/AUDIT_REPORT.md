@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 2226541 — 2026-10-05
+
+- 1440px 데스크톱 hero 사진 위의 `아래로 읽기` 안내가 배경과 충분히 분리되지 않아 긴 안내서의 다음 읽기 방향이 약하게 보일 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #320에서 701px 이상 안내를 반투명 흰색 pill·테두리·그림자·blur로 보강하고 v109 UI 계약을 추가했다.
+- PR #320의 필수 검사와 main workflow `37277241941`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `22265413532d4264cb9640070a677aebbe66dbf7`은 HTTP 200, STATIC, 12 공개 claims, 6 research records, 1 product, teaser HOLD를 유지한다. 캐시를 비활성화한 Chrome CDP fallback 공개 1440px에서 안내의 테두리·반투명 배경·blur와 `scrollWidth=1425`를, 390px에서 모바일 안내와 `scrollWidth=390`을 확인했다.
+- 정적 계약·배포 정합성·대표 데스크톱·모바일 렌더는 확인했지만 브라우저 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-DESKTOP-READING-CUE-20261005, E-UI-CONTRACT-DESKTOP-READING-CUE-20261005, E-DEPLOY-PIPELINE-DESKTOP-READING-CUE-20261005, E-LIVE-PUBLIC-DESKTOP-READING-CUE-20261005.
+
 ## Release Recheck — 2c7433b — 2026-10-05
 
 - 381–430px 모바일 헤더에서 메뉴 아이콘이 이름이 표시된 읽기 크기 버튼과 겹쳐 보이는 실제 렌더 결함을 확인했다. PR #318에서 v108 간격 규칙으로 메뉴를 읽기 크기 버튼 왼쪽에 12px 간격으로 배치했다.

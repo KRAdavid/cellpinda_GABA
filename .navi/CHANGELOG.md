@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 데스크톱 hero 읽기 안내 대비 보강 — 2226541 — 2026-10-05
+
+- 701px 이상 사진 위에 놓인 `아래로 읽기` 안내를 반투명 흰색 pill·테두리·그림자·blur로 분리해 데스크톱 첫 화면의 다음 읽기 방향을 빠르게 인식할 수 있게 했다. 모바일 안내와 기존 콘텐츠·연구 데이터는 유지했다.
+- PR #320의 필수 검사와 main 배포 workflow `37277241941`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `22265413532d4264cb9640070a677aebbe66dbf7`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다. Chrome CDP fallback 공개 1440px에서 데스크톱 안내 스타일과 `scrollWidth=1425`, 390px에서 모바일 안내와 `scrollWidth=390`을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-DESKTOP-READING-CUE-20261005, E-UI-CONTRACT-DESKTOP-READING-CUE-20261005, E-DEPLOY-PIPELINE-DESKTOP-READING-CUE-20261005, E-LIVE-PUBLIC-DESKTOP-READING-CUE-20261005.
+
 ## 모바일 헤더 컨트롤 간격 보정 — 2c7433b — 2026-10-05
 
 - 381–430px에서 메뉴 아이콘과 이름이 표시된 읽기 크기 버튼이 겹치던 문제를 v108 간격 규칙으로 보정했다. 320–350px 아이콘형 헤더와 390px의 `가− 기본 글씨` 표시는 유지했다.

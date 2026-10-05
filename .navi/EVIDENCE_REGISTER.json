@@ -1225,6 +1225,17 @@
         "E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-122",
+      "statement": "공개 GABA 안내서의 데스크톱 hero '아래로 읽기' 안내는 사진 배경 위에서 테두리·반투명 배경·그림자로 분리되어 읽히고, 모바일 안내와 가로 폭 안정성을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-DESKTOP-READING-CUE-20261005",
+        "E-UI-CONTRACT-DESKTOP-READING-CUE-20261005",
+        "E-DEPLOY-PIPELINE-DESKTOP-READING-CUE-20261005",
+        "E-LIVE-PUBLIC-DESKTOP-READING-CUE-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10068,6 +10079,50 @@
       "captured_at": "2026-10-05T07:01:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-NARROW-HEADER-SPACING",
       "claim_refs": ["C-002", "C-003", "C-121"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-DESKTOP-READING-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "데스크톱 hero의 '아래로 읽기' 안내를 사진 배경에서 분리하는 v109 스타일과 UI 계약 보강이 PR #320의 typecheck·규칙/API 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #320 source commit 2db42f9; scripts/validate-ui-contract.mjs v109 assertion PASS; GitHub Actions PR runs 37277098052 release-verify and 37277098180 site-quality-verify successful; production build 1808 modules, initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1615129 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/320",
+      "captured_at": "2026-10-05T07:19:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-DESKTOP-READING-CUE",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-122"]
+    },
+    {
+      "id": "E-UI-CONTRACT-DESKTOP-READING-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 701px 이상에서 hero 읽기 안내의 v109 테두리·반투명 배경·blur 조건을 회귀 방지 규칙으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v109 assertion; PublicGabaGuide.css @media(min-width:701px) applies border:1px solid rgba(113,170,178,.32), background:rgba(255,255,255,.72), backdrop-filter:blur(8px); command result PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/320",
+      "captured_at": "2026-10-05T07:19:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-DESKTOP-READING-CUE",
+      "claim_refs": ["C-003", "C-122"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-DESKTOP-READING-CUE-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "데스크톱 hero 읽기 안내 보강 PR #320이 main commit 2226541에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #320 merge main commit 22265413532d4264cb9640070a677aebbe66dbf7; main workflow 37277241941 with release-verify 111656880631, worker-readiness 111657222661, deploy-pages 111657262906, smoke-live 111657338104 and release-status 111657413140 successful; deploy-worker 111657264046 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37277241941",
+      "captured_at": "2026-10-05T07:23:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-DESKTOP-READING-CUE",
+      "claim_refs": ["C-001", "C-002", "C-122"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-DESKTOP-READING-CUE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 최신 main candidate와 일치하고, 캐시를 비활성화한 Chrome CDP fallback 공개 렌더에서 1440px 데스크톱 읽기 안내가 사진 위에서 분리되어 보이며 390px 모바일 안내와 가로 폭 안정성을 유지한다.",
+      "locator": "release-manifest.json HTTP 200; candidateSha 22265413532d4264cb9640070a677aebbe66dbf7; generatedAt 2026-10-05T07:21:58.276Z; runtimeMode STATIC; counts claims 12, research 6, products 1, reviews 1; teaser HOLD/publicUrl false; Chrome CDP fallback at public URL https://kradavid.github.io/gaba_info/?qa=desktop-cue-debug-20261005 with Network.clearBrowserCache and Network.setCacheDisabled at 1440px reported scrollWidth 1425 and cue border 1px solid rgba(113,170,178,.32), background rgba(255,255,255,.72), backdrop-filter blur(8px); at 390px scrollWidth 390 and mobile cue rendered; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=desktop-cue-debug-20261005",
+      "captured_at": "2026-10-05T07:24:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-DESKTOP-READING-CUE",
+      "claim_refs": ["C-002", "C-003", "C-122"]
     }
   ]
 }
