@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 전문가 영상 필터 접근성·overscroll 고도화 — 7fff775 — 2026-10-06
+
+- 모바일 전문가 영상 필터 rail에 보조공학용 region과 좌우 이동 안내를 추가하고, 수평 overscroll 전파를 제한했다. 44px 터치 영역·시작/끝/복귀 cue·마지막 주제 선택과 공개 과학 카피·제품 독립 경계는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 320px 상호작용 검증을 통과했고 PR #392가 main `7fff775`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+- 공개 320px에서 region/aria-label·contain·cue 상태·`수면·기분` 선택·scrollWidth 320·runtime errors 0을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-A11Y-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-A11Y-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-A11Y-20261006.
+
 ## 모바일 전문가 영상 필터 cue 상태·공개 라이브 검증 — 16f3fec — 2026-10-06
 
 - v125 상태 보강과 NAVI 감사기록이 main `16f3fec`으로 공개 배포되었다. 공개 validator candidate가 main과 일치하고 71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.

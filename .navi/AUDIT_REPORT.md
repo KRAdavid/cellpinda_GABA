@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Video Filter Accessibility Hardening — 7fff775 — 2026-10-06
+
+- v126에서 모바일 전문가 영상 필터 rail에 `role=region`과 좌우 이동 안내 라벨을 부여하고, 수평 `overscroll-behavior-x: contain`으로 페이지와의 스크롤 전파를 제한했다. 기존 44px 터치 영역·시작 cue 표시·끝 cue 숨김·시작점 복원·마지막 주제 선택은 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. Playwright Chromium fallback 로컬·공개 320px에서 region 의미·aria-label·overscroll `contain`·7개 44px 필터·끝 cue 숨김·복귀 cue 표시·`수면·기분` 선택·document scrollWidth 320·runtime errors 0을 확인했다.
+- PR #392는 main `7fff775`로 병합되었고 workflow `37377603302`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `7fff775a6735c85f0ae7ff2362bf3604d19085d0`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-A11Y-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-A11Y-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-A11Y-20261006.
+
 ## Live Public Recheck — 16f3fec — 2026-10-06
 
 - v125 상태 보강이 GitHub Pages 공개본에 반영되었다. 공개 validator는 HTTP 200·STATIC·candidate `16f3fec3403545098ed9e74a8ce058f75d59b9ce`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·제품 독립 경계를 확인했다.

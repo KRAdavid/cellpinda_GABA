@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — 7fff775 — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `7fff775a6735c85f0ae7ff2362bf3604d19085d0`와 71개 bundle hash를 확인했다.
+- AC-003/AC-004 모바일 전문가 영상 필터 접근성 의미·overscroll·cue 상태·가로폭·선택 흐름: PASS. 320px에서 region/aria-label·contain·44px 필터·끝 숨김·복귀 표시·마지막 주제 선택·aria-pressed=true·scrollWidth 320·runtime errors 0을 확인했다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. workflow `37377603302`의 Pages·라이브 smoke·release-status도 성공했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-A11Y-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-A11Y-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-A11Y-20261006.
+
 ## Live Public Release Recheck — 16f3fec — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `16f3fec3403545098ed9e74a8ce058f75d59b9ce`와 71개 bundle hash를 확인했고, deploy-pages·smoke-live가 성공했다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Video Filter Accessibility Hardening — 2026-10-06 — 7fff775
+
+- 공격 관점에서 320px 모바일 rail의 보조공학 의미, 좌우 이동 안내, 수평 overscroll, 44px 터치 영역, 시작·끝·복귀 cue와 마지막 주제 선택을 비교했다. region/aria-label과 `contain`이 공개 로컬·라이브에서 일치하고 document scrollWidth는 320으로 유지됐다.
+- 새 CRITICAL/MAJOR 결함은 없다. 다만 Browser 플러그인 부재로 Chromium fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다.
+- 공개 validator는 main code candidate `7fff775a6735c85f0ae7ff2362bf3604d19085d0`를 반환했고, Pages 배포·라이브 smoke·release-status는 성공했다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-A11Y-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-A11Y-20261006.
+
 ## Live Public Recheck — 2026-10-06 — 16f3fec
 
 - 공개 320px에서 시작 cue가 보이고 rail 끝에서는 숨겨지며, 시작점 복귀 후 다시 표시되는 상태를 확인했다. 마지막 `수면·기분` 주제 선택, document scrollWidth 320, runtime errors 0도 확인했다.

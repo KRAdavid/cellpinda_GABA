@@ -1612,6 +1612,18 @@
         "E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-CUE-STATE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-157",
+      "statement": "모바일 전문가 영상 주제 필터 rail은 보조공학에 좌우 이동 가능성을 알리고, 수평 overscroll 전파를 제한하며, 44px 터치 영역·시작/끝 cue 상태·마지막 주제 선택을 320px에서 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-A11Y-20261006",
+        "E-UI-CONTRACT-MOBILE-VIDEO-FILTER-A11Y-20261006",
+        "E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-A11Y-20261006",
+        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-A11Y-20261006",
+        "E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-A11Y-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11975,6 +11987,58 @@
       "captured_at": "2026-10-05T21:25:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MOBILE-VIDEO-FILTER-CUE-STATE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-156"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 전문가 영상 필터 rail 접근성·overscroll 보강 commit d29f722가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit d29f722bc1e0b8aa801b7c93a24f0f4a0fc6508f; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311200; initial CSS 95703; total assets 1629841 <= 1650000",
+      "captured_at": "2026-10-05T21:40:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-MOBILE-VIDEO-FILTER-A11Y",
+      "claim_refs": ["C-001", "C-003", "C-157"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-VIDEO-FILTER-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 모바일 전문가 영상 필터 rail의 region·좌우 이동 안내·overscroll containment와 stateful cue 회귀 방지를 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v126 mobile video filter accessibility region/aria-label and overscroll-behavior-x assertions; stale wrap-layout assertion removed; status ok; events 16",
+      "captured_at": "2026-10-05T21:40:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-MOBILE-VIDEO-FILTER-A11Y",
+      "claim_refs": ["C-157"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback으로 로컬 320px 전문가 영상 필터 rail의 보조공학 의미·overscroll·44px 터치 영역·끝 cue 숨김·시작 cue 복원·마지막 주제 선택을 확인했다.",
+      "locator": "temporary Playwright script outside repository at http://127.0.0.1:4191/?view=guide#expert-videos; wrapper role region; aria-label `전문가 영상 주제 필터. 좌우로 이동할 수 있습니다.`; overscrollBehaviorX contain; seven filter controls 44px high; maxScroll 455 reached and cue hidden; scroll restored to 0 and cue visible; `수면·기분 주제 · 1개 영상` aria-pressed true; document scrollWidth 320; runtime errors []; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T21:42:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-MOBILE-VIDEO-FILTER-A11Y",
+      "claim_refs": ["C-003", "C-004", "C-157"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 필터 접근성·overscroll 보강 PR #392가 필수 검사를 통과해 main merge commit 7fff775로 병합되었고, Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #392; code commit d29f722bc1e0b8aa801b7c93a24f0f4a0fc6508f; main merge commit 7fff775a6735c85f0ae7ff2362bf3604d19085d0; main workflow 37377603302; release-verify 111990777857, worker-readiness 111991278679, deploy-pages 111991337581, smoke-live 111991425351 and release-status 111991528938 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37377603302",
+      "captured_at": "2026-10-05T21:43:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-MOBILE-VIDEO-FILTER-A11Y",
+      "claim_refs": ["C-001", "C-002", "C-157"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 모바일 전문가 영상 필터 rail의 보조공학 의미·overscroll·상태별 cue와 선택 흐름을 확인했으며 공개 번들·데이터·제품 독립 경계가 유지된다.",
+      "locator": "pnpm exec node scripts/validate-live-public.mjs; page 200; runtimeMode STATIC; candidateSha 7fff775a6735c85f0ae7ff2362bf3604d19085d0; generatedAt 2026-10-05T21:43:10.526Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Playwright Chromium fallback public 320px: wrapper role region; aria-label `전문가 영상 주제 필터. 좌우로 이동할 수 있습니다.`; overscrollBehaviorX contain; seven 44px filter controls; maxScroll 455 and end cue hidden; scroll restored to 0 and cue visible; `수면·기분 주제 · 1개 영상` aria-pressed true; document scrollWidth 320; runtime errors []; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-05T21:46:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MOBILE-VIDEO-FILTER-A11Y",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-157"]
     }
   ]
 }

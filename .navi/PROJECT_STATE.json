@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T21:25:57.382657Z",
+  "updated_at": "2026-10-05T21:48:15.335239Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5166,6 +5166,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T21:25:00Z"
+    },
+    {
+      "id": "H-235",
+      "event": "v126에서 모바일 전문가 영상 필터 rail에 좌우 이동 가능성을 보조공학에 알리는 region과 44px 터치 영역을 유지하는 접근성 의미를 추가하고, 수평 overscroll 전파를 제한했다. 시작 cue 표시·끝 cue 숨김·시작점 복원·마지막 `수면·기분` 선택은 유지되며, 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Playwright Chromium fallback 320px 의미·상태·가로폭 검증이 성공했다. PR #392는 main `7fff775`로 병합되었고 workflow `37377603302`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `7fff775a6735c85f0ae7ff2362bf3604d19085d0`·HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-157과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T21:46:00Z"
     }
   ]
 }
