@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 030f43a
+
+- 공격 관점에서 확인한 실패 모드는 320px 폭에서 연구 비교 도표의 GABA 조건 레이블이 한 줄 고정으로 화면 밖으로 밀려나 비교 의미를 즉시 읽을 수 없게 되는 것이었다. PR #316에서 좁은 화면의 도표 헤더를 grid로 바꾸고 레이블 줄바꿈을 고정했다.
+- UI 계약·typecheck·127개 테스트·production build·Pages 배포·라이브 smoke·release status가 통과했다. 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 캐시 비활성화 Chrome CDP fallback 공개 320·350·390·768px에서 overflowCount `0`과 뷰포트별 scrollWidth 일치를 확인했다. 다만 이는 대표 렌더 확인이지 전체 브라우저·실기기 보장은 아니다. Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-NARROW-CHART-HEADER-20261005, E-UI-CONTRACT-NARROW-CHART-HEADER-20261005, E-DEPLOY-PIPELINE-NARROW-CHART-HEADER-20261005, E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005.
+
 ## Recheck — 2026-10-05 — 80bd0f2
 
 - 공격 관점에서 확인한 실패 모드는 모바일 hero 사진 위의 `아래로 읽기` 안내가 낮은 대비로 묻혀 방문자가 긴 안내서의 다음 장면을 놓치는 것이었다. PR #313에서 흰색 pill·테두리·그림자로 안내를 분리하고 UI 계약으로 회귀를 고정했다.

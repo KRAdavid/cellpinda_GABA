@@ -1203,6 +1203,17 @@
         "E-LIVE-PUBLIC-MOBILE-READING-CUE-CONTRAST-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-120",
+      "statement": "공개 GABA 안내서의 연구 비교 도표는 320px 좁은 화면에서도 비교 조건과 GABA 조건 레이블을 도표 안에서 줄바꿈해 보여 주며 화면 밖으로 밀려나지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-CHART-HEADER-20261005",
+        "E-UI-CONTRACT-NARROW-CHART-HEADER-20261005",
+        "E-DEPLOY-PIPELINE-NARROW-CHART-HEADER-20261005",
+        "E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9958,6 +9969,50 @@
       "captured_at": "2026-10-05T06:18:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-READING-CUE-CONTRAST",
       "claim_refs": ["C-002", "C-003", "C-119"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-CHART-HEADER-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "320px 좁은 모바일 연구 비교 도표의 조건 레이블이 도표 안에서 줄바꿈하도록 보완한 PR #316 source commit이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #316 source commit ed36ff872227b71da09e87e06c2705a6cc52173e; pnpm run validate:ui-contract PASS including v107 narrow phone chart header assertion; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1614707 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/316",
+      "captured_at": "2026-10-05T06:30:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-NARROW-CHART-HEADER",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-120"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-CHART-HEADER-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 430px 이하 연구 비교 도표의 레이블 줄바꿈과 320px 읽기 프레임 내부 배치를 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs v107 assertion; PublicGabaGuide.css @media(max-width:430px) comparison header uses minmax columns, min-width:0, white-space:normal and overflow-wrap:anywhere; Chrome CDP local preview at 320px confirmed comparison header children right edge <= 320px",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/316",
+      "captured_at": "2026-10-05T06:30:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-NARROW-CHART-HEADER",
+      "claim_refs": ["C-003", "C-120"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-CHART-HEADER-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 연구 비교 도표 레이블 보완 PR #316이 필수 검사를 통과해 main commit 030f43a6에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #316 merge main commit 030f43a6b481a22311803c3e9d4d39c196cab23e; PR checks release-verify 37273093930 and site-quality-verify 37273093926 successful; main workflow 37273248778 with release-verify 111644578608, worker-readiness 111644886142, deploy-pages 111644908771, smoke-live 111644962008 and release-status 111645012326 successful; deploy-worker 111644908818 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37273248778",
+      "captured_at": "2026-10-05T06:38:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-NARROW-CHART-HEADER",
+      "claim_refs": ["C-001", "C-002", "C-120"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 최신 main 후보와 일치하고, 캐시를 비활성화한 Chrome CDP fallback 공개 렌더에서 320·350·390·768px 연구 비교 도표의 레이블이 화면 밖으로 밀려나지 않음을 확인했다.",
+      "locator": "release-manifest.json HTTP 200; candidateSha 030f43a6b481a22311803c3e9d4d39c196cab23e; generatedAt 2026-10-05T06:37:06.272Z; runtimeMode STATIC; counts claims 12, research 6, products 1, reviews 1; teaser HOLD/publicUrl false; Chrome CDP fallback at public URL https://kradavid.github.io/gaba_info/?qa=layout-audit-{width}-20261005 with Network.clearBrowserCache and Network.setCacheDisabled at 320/350/390/768x844 confirmed document scrollWidth equals viewport and overflowCount 0 for every width",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=layout-audit-320-20261005",
+      "captured_at": "2026-10-05T06:43:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-NARROW-CHART-HEADER",
+      "claim_refs": ["C-002", "C-003", "C-120"]
     }
   ]
 }

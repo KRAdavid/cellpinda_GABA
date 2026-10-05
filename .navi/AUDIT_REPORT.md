@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 030f43a — 2026-10-05
+
+- 320px 좁은 모바일 연구 비교 도표에서 비교 조건·GABA 조건 레이블이 한 줄 고정으로 화면 밖으로 밀려나는 실제 렌더 결함을 확인했다. PR #316에서 430px 이하 도표 헤더를 grid로 재배치하고 레이블의 최소 폭·줄바꿈·overflow-wrap을 보강했으며 UI 계약에 v107 회귀 조건을 추가했다.
+- PR #316의 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. main workflow `37273248778`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `030f43a6b481a22311803c3e9d4d39c196cab23e`는 HTTP 200, STATIC, 12 공개 claims, 6 research records, 1 product, teaser HOLD를 유지한다. 캐시를 비활성화한 Chrome CDP fallback 공개 320·350·390·768px에서 각 뷰포트의 `scrollWidth`와 일치하고 overflowCount `0`을 확인했다.
+- 정적 계약·배포 정합성·대표 모바일 렌더는 확인했지만 브라우저 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-NARROW-CHART-HEADER-20261005, E-UI-CONTRACT-NARROW-CHART-HEADER-20261005, E-DEPLOY-PIPELINE-NARROW-CHART-HEADER-20261005, E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005.
+
 ## Release Recheck — 80bd0f2 — 2026-10-05
 
 - 모바일 hero 사진 위의 `아래로 읽기` 안내가 배경과 섞여 첫 화면의 다음 읽기 방향을 약하게 전달할 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #313에서 안내를 반투명 흰색 pill·테두리·그림자로 보강하고 UI 계약에 대비 조건을 추가했다.
