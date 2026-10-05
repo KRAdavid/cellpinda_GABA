@@ -1159,6 +1159,17 @@
         "E-LIVE-PUBLIC-RESEARCH-SCALE-SCOPE-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-116",
+      "statement": "공개 GABA 안내서의 발효·안전 섹션은 성장 연구로, 성장 연구는 전문가 영상으로 이어지는 장면 전환을 모바일·데스크톱에서 유지하며 제품 독립 과학 안내 문구를 보존한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EDITORIAL-HANDOFFS-20261005",
+        "E-UI-CONTRACT-EDITORIAL-HANDOFFS-20261005",
+        "E-DEPLOY-PIPELINE-EDITORIAL-HANDOFFS-20261005",
+        "E-LIVE-PUBLIC-EDITORIAL-HANDOFFS-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9738,6 +9749,50 @@
       "captured_at": "2026-10-05T04:43:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-SCALE-SCOPE",
       "claim_refs": ["C-002", "C-003", "C-115"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EDITORIAL-HANDOFFS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "발효·안전 다음에 성장 연구, 성장 연구 다음에 전문가 영상으로 이어지는 명시적 장면 전환을 추가한 PR #307이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #307 source commit 5ef7263; pnpm run validate:ui-contract PASS including editorial handoff assertion; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1613308 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/307",
+      "captured_at": "2026-10-05T04:55:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-EDITORIAL-HANDOFFS",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-116"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EDITORIAL-HANDOFFS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 발효·안전→성장 연구→전문가 영상 장면 전환의 DOM 순서와 명명된 handoff 클래스 존재를 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs editorial handoff assertion; PublicGabaGuide.tsx contains guide-fermentation-handoff and guide-growth-handoff in story order; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/307",
+      "captured_at": "2026-10-05T04:55:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-EDITORIAL-HANDOFFS",
+      "claim_refs": ["C-003", "C-116"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EDITORIAL-HANDOFFS-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "장면 전환 보강 PR #307이 필수 검사를 통과해 main commit 85ec17fc에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #307 merge main commit 85ec17fc17b7816096e98b1b995b1b1d5f72953b; PR checks release-verify 37266000414 and site-quality-verify 37266000371 successful; main workflow 37266107250 with release-verify 111623179510, worker-readiness 111623428300, deploy-pages 111623452391, smoke-live 111623502597 and release-status 111623559744 successful; deploy-worker 111623453505 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37266107250",
+      "captured_at": "2026-10-05T05:06:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-EDITORIAL-HANDOFFS",
+      "claim_refs": ["C-001", "C-002", "C-116"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EDITORIAL-HANDOFFS-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 PR #307의 장면 전환 보강을 포함한 최신 main 후보와 일치하고 제품 독립 공개 경계를 유지함을 live smoke, 제한시간 공개 번들 확인, Chrome CDP 렌더링 확인이 확인했다.",
+      "locator": "main workflow smoke-live 111623502597 successful; targeted public check with 15s request timeout: page 200, candidateSha 85ec17fc17b7816096e98b1b995b1b1d5f72953b, release manifest bundleCount 71, public JS contains guide-fermentation-handoff, 식품 연구에서 몸의 신호로, guide-growth-handoff, 연구를 설명하는 목소리로, and product-independent notice; Chrome CDP fallback at public URL confirmed 390px and 1440px scrollWidth without overflow with both handoff elements present",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=post-deploy-390#fermented-safety",
+      "captured_at": "2026-10-05T05:08:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-EDITORIAL-HANDOFFS",
+      "claim_refs": ["C-002", "C-003", "C-116"]
     }
   ]
 }

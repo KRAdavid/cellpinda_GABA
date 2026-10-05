@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 85ec17f — 2026-10-05
+
+- 발효·안전 다음 장면과 성장 연구 다음 장면이 암묵적으로 끊기던 편집 리스크를 확인하고 PR #307에서 두 handoff를 추가했다. 모바일은 현재 장면·구분선·다음 장면 순서로 읽히고 데스크톱은 한 줄의 editorial rail로 읽힌다.
+- UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. PR #307 checks와 main workflow `37266107250`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `85ec17fc17b7816096e98b1b995b1b1d5f72953b`는 HTTP 200, STATIC, 71 bundle hashes와 제품 독립 공개 경계를 유지했다. Chrome CDP fallback 공개 렌더에서 390px·1440px 모두 가로 넘침이 없고 두 handoff 요소가 존재했다.
+- 정적 계약·배포 정합성은 확인했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-EDITORIAL-HANDOFFS-20261005, E-UI-CONTRACT-EDITORIAL-HANDOFFS-20261005, E-DEPLOY-PIPELINE-EDITORIAL-HANDOFFS-20261005, E-LIVE-PUBLIC-EDITORIAL-HANDOFFS-20261005.
+
 ## Release Recheck — 31fcd55 — 2026-10-05
 
 - 연구 규모 카드에서 하버드·옥스퍼드의 동일 PubMed 검색과 GABA-A 수용체의 별도 SCIE 분석이 큰 숫자만으로 한 비교처럼 읽힐 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #305에서 숫자보다 앞에 비교 범위 레일을 추가하고 모바일에서는 범위를 세로로 쌓았다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T04:46:00.000000Z",
+  "updated_at": "2026-10-05T05:08:40.000000Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2095,7 +2095,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T00:39:00Z"
+    "last_run_at": "2026-10-05T05:08:40Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2268,7 +2268,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T00:39:00Z"
+    "last_run_at": "2026-10-05T05:08:40Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4719,6 +4719,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T04:46:00Z"
+    },
+    {
+      "id": "H-186",
+      "event": "발효·안전에서 성장 연구로, 성장 연구에서 전문가 영상으로 넘어갈 때 다음 읽기 장면이 암묵적이던 잔여 편집 리스크를 확인하고 PR #307에서 모바일·데스크톱 공통 장면 전환 카드를 추가했다. 발효·안전 데이터, 연구 수치·출처, 제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #307 checks, main workflow 37266107250의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 live candidate 85ec17fc17b7816096e98b1b995b1b1d5f72953b는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Chrome CDP fallback으로 공개 URL의 390px·1440px 가로 넘침 없음과 두 handoff 요소 존재를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. NAVI 로컬 감사는 IN_PROGRESS_WITH_GATES·local checks WAITING·auditFailed false·publicExportChanged false를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T05:08:40Z"
     }
   ]
 }

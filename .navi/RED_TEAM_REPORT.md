@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 85ec17f
+
+- 공격 관점에서 확인한 실패 모드는 발효·안전에서 성장 연구, 성장 연구에서 전문가 영상으로 넘어갈 때 다음 읽기 장면이 암묵적으로 남아 긴 모바일 페이지의 맥락이 끊기는 것이었다. PR #307에서 두 handoff를 추가해 현재 장면과 다음 장면을 같은 시각 레일로 연결했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status가 통과했다. 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 다만 Chrome CDP fallback은 대표 렌더 확인이지 전체 브라우저·실기기 보장이 아니다. Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-EDITORIAL-HANDOFFS-20261005, E-UI-CONTRACT-EDITORIAL-HANDOFFS-20261005, E-DEPLOY-PIPELINE-EDITORIAL-HANDOFFS-20261005, E-LIVE-PUBLIC-EDITORIAL-HANDOFFS-20261005.
+
 ## Recheck — 2026-10-05 — 31fcd55
 
 - 공격 관점에서 확인한 실패 모드는 연구 규모 카드의 984·557·12,124가 동일한 모집단·검색 범위의 숫자처럼 읽혀 기관별 PubMed 검색과 별도 SCIE 분석의 의미가 흐려지는 것이었다. PR #305에서 숫자보다 먼저 두 범위를 색상·라벨로 분리하고 모바일에서는 세로 순서를 유지했다.

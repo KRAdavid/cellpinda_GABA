@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 발효·안전·성장·전문가 영상 장면 전환 고도화 — 85ec17f — 2026-10-05
+
+- 발효·안전 섹션 뒤에 `식품 연구에서 몸의 신호로 → 성장 연구`, 성장 연구 뒤에 `연구를 설명하는 목소리로 → 전문가 영상` handoff를 추가해 모바일 긴 읽기 흐름을 명시했다.
+- 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다. PR #307 checks와 main workflow `37266107250`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `85ec17fc17b7816096e98b1b995b1b1d5f72953b`는 HTTP 200, 71 bundle hashes, 제품 독립 안내 문구와 두 handoff 문구를 확인했다. Chrome CDP fallback으로 공개 URL의 390px·1440px 가로 넘침 없음과 두 handoff 요소를 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-EDITORIAL-HANDOFFS-20261005, E-UI-CONTRACT-EDITORIAL-HANDOFFS-20261005, E-DEPLOY-PIPELINE-EDITORIAL-HANDOFFS-20261005, E-LIVE-PUBLIC-EDITORIAL-HANDOFFS-20261005.
+
 ## 연구 규모 비교 기준·모바일 오독 방지 고도화 — 31fcd55 — 2026-10-05
 
 - 연구 규모 카드의 큰 수치보다 먼저 `같은 검색 기준 · 하버드 · 옥스퍼드 · PubMed`와 `별도 연구 분석 · GABA-A 수용체 · SCIE`를 시각적 범위 레일로 표시했다. 모바일에서는 두 범위를 세로로 쌓아 숫자 비교 전에 연구 범위를 읽도록 보강했다.
