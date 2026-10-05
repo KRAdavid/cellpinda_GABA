@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 메뉴 장면 이동 안정화 — 21a34c7 — 2026-10-05
+
+- 공개 390px 실제 흐름에서 메뉴를 연 뒤 `발견`을 선택해도 body 스크롤 잠금과 smooth scroll 경합으로 화면이 이동하지 않던 결함을 확인했다. 메뉴 선택 시에는 즉시 이동하도록 보정해 메뉴 닫힘과 장면 정렬을 한 번의 동작으로 맞췄다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했고, PR #311 checks와 main workflow `37269235739`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 `validate:live-public`은 candidate `21a34c7964a72c5fbb48eedba972a10da419f22c`, HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages를 확인했다. Chrome CDP fallback 공개 390px에서 메뉴 열기→발견 선택 후 `scrollY=1660`, 제목 top `132.1px`, 가로 넘침 `0`을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-MENU-NAVIGATION-20261005, E-UI-CONTRACT-MOBILE-MENU-NAVIGATION-20261005, E-DEPLOY-PIPELINE-MOBILE-MENU-NAVIGATION-20261005, E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005.
+
 ## 모바일 연구 결과 카드 레이아웃 보정 — fb3d19c — 2026-10-05
 
 - 실제 공개 390px 렌더에서 `인지 연구 결과` 제목이 좁은 열로 세로 찌그러지고 `결과 한 줄`이 제목 옆에서 겹치던 결함을 확인했다. 모바일 연구 카드 헤더를 grid로 재배치하고 결과 요약을 제목 아래 전체 폭에 배치했다.

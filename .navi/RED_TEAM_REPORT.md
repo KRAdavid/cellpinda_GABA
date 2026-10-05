@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 21a34c7
+
+- 공격 관점에서 확인한 실패 모드는 모바일 메뉴를 연 뒤 `발견` 장면을 선택할 때 body 스크롤 잠금 해제와 smooth scroll이 경합해 메뉴만 닫히고 화면이 현재 위치에 남는 것이었다. PR #311에서 메뉴 선택은 즉시 정렬하도록 보정했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status가 통과했다. 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Chrome CDP fallback 공개 390px에서 메뉴 열기→발견 선택 후 메뉴 닫힘, `scrollY=1660`, 제목 top `132.1px`, body overflow 해제, 가로 넘침 없음이 확인됐다. 다만 이는 대표 렌더 확인이지 전체 브라우저·실기기 보장은 아니다. Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MOBILE-MENU-NAVIGATION-20261005, E-UI-CONTRACT-MOBILE-MENU-NAVIGATION-20261005, E-DEPLOY-PIPELINE-MOBILE-MENU-NAVIGATION-20261005, E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005.
+
 ## Recheck — 2026-10-05 — fb3d19c
 
 - 공격 관점에서 확인한 실패 모드는 모바일 연구 결과 카드의 제목과 직접 결과가 한 행에서 폭을 다투어 제목이 세로로 찌그러지고, 독자가 연구 결과를 즉시 비교하기 어려워지는 것이었다. PR #309에서 제목과 결과 요약을 세로 리듬으로 분리했다.
