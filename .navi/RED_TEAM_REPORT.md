@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — b98df10
+
+- 공격 관점에서 확인한 실패 모드는 모바일에서 섹션 제목 아래의 짧은 보조 맥락이 사라져 장면의 의미와 다음 내용이 단절되어 보이는 것이었다. PR #279에서 700px 이하 화면에 해당 문구를 복원하고 폭·글자 크기·행간을 UI 계약으로 고정했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 실행 환경에서 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005, E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005, E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005, E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005.
+
 ## Recheck — 2026-10-05 — 13450f2
 
 - 공격 관점에서 확인한 실패 모드는 읽기 진행 표시가 시각용 메타와 보조기기용 status 역할을 동시에 맡아, 화면에 보이지 않는 현재 장·연구 문맥이 안정적으로 읽히지 않을 수 있는 것이었다. PR #277에서 두 표현을 분리하고 별도 라이브 안내를 추가했다.
