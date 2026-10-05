@@ -1671,3 +1671,24 @@
   .guide-outcome-lane-top>strong{min-height:0;font-size:.929em;text-align:right}
   .guide-outcome-lane.is-result{box-shadow:inset 3px 0 0 #26a6aa}
 }
+
+/* v96 mobile editorial handoff: keep the current scene and next chapter in a calm, deliberate reading order. */
+@media(max-width:430px){
+  .guide-research-handoff{
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    align-items:center;
+    gap:7px 10px;
+    padding:15px 2px 16px;
+  }
+  .guide-research-handoff-kicker{grid-column:1;grid-row:1;align-self:start;padding-top:2px}
+  .guide-research-handoff strong{grid-column:2;grid-row:1;min-width:0;white-space:normal;font-size:16px;line-height:1.35}
+  .guide-research-handoff-line{grid-column:1/-1;grid-row:2;width:100%;margin:2px 0 1px}
+  .guide-research-handoff-next{grid-column:1;grid-row:3;white-space:normal;font-size:15px;line-height:1.35}
+  .guide-research-handoff>svg{grid-column:2;grid-row:3;justify-self:end;margin-top:1px}
+  .guide-expert-thread{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:7px 10px}
+  .guide-expert-thread span:first-child{grid-column:1;grid-row:1;align-self:start;padding-top:2px}
+  .guide-expert-thread strong:first-of-type{grid-column:2;grid-row:1;min-width:0;line-height:1.35}
+  .guide-expert-thread i{grid-column:3;grid-row:1;align-self:center}
+  .guide-expert-thread strong:last-child{grid-column:2/4;grid-row:2;margin-top:2px;padding-top:8px;border-top:1px solid #dce9ef;line-height:1.35}
+}
