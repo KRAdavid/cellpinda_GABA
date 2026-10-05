@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 헤더 컨트롤 간격 보정 — 2c7433b — 2026-10-05
+
+- 381–430px에서 메뉴 아이콘과 이름이 표시된 읽기 크기 버튼이 겹치던 문제를 v108 간격 규칙으로 보정했다. 320–350px 아이콘형 헤더와 390px의 `가− 기본 글씨` 표시는 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #318의 main 배포 workflow `37275123302`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `2c7433b144ef1930e7b7a21c744dd468d751e431`은 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다. 캐시 비활성화 Chrome CDP fallback 공개 320·350·381·390·430px에서 세 헤더 컨트롤의 겹침 0건과 가로 폭 일치를 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-NARROW-HEADER-SPACING-20261005, E-UI-CONTRACT-NARROW-HEADER-SPACING-20261005, E-DEPLOY-PIPELINE-NARROW-HEADER-SPACING-20261005, E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005.
+
 ## 좁은 모바일 연구 도표 레이블 보정 — 030f43a — 2026-10-05
 
 - 320px 폭에서 연구 비교 도표의 비교 조건·GABA 조건 레이블이 화면 밖으로 밀려나던 문제를 확인하고, 430px 이하에서 도표 헤더를 grid로 전환해 자연스럽게 줄바꿈되도록 보정했다.

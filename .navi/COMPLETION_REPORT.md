@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 2c7433b — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-002 320·350·381·390·430px 모바일 헤더 컨트롤 간격과 가로 폭: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #318과 main 공개 배포 workflow `37275123302`가 성공했고, 공개 manifest는 candidate `2c7433b144ef1930e7b7a21c744dd468d751e431`, HTTP 200, STATIC, 12 claims, 6 research, 1 product, teaser HOLD를 확인했다.
+- 캐시 비활성화 Chrome CDP fallback 공개 320·350·381·390·430px에서 헤더 세 컨트롤의 겹침 0건과 각 뷰포트 가로 폭 유지를 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 브라우저 전체 조합, 대표 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-NARROW-HEADER-SPACING-20261005, E-UI-CONTRACT-NARROW-HEADER-SPACING-20261005, E-DEPLOY-PIPELINE-NARROW-HEADER-SPACING-20261005, E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005.
+
 ## Current Release Recheck — 030f43a — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
