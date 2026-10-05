@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 출처 읽기 레일 고도화 — 7c409a1 — 2026-10-05
+
+- 모바일 출처 읽기 패널의 네 가지 질문을 번호가 연결된 세로 레일로 정리하고 원문 출처 카드의 불필요한 우측 여백을 줄여 연구 읽기 순서와 출처 전환을 빠르게 파악하도록 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #287 checks, main workflow 37253350843, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI 공식 `validate_project_state.py`와 `assess_risk_controls.py`도 통과했으며, 상태 전이는 `RED_TEAM → USER_DECISION`, 완료 게이트는 `NOT_READY`로 정합화했다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005, E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005, E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005, E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005.
+
 ## 모바일 장면 전환 리듬 고도화 — 3904b39 — 2026-10-05
 
 - 430px 이하에서 연구·국내외 활용 handoff를 현재 맥락 → 구분선 → 다음 장면으로, 전문가 영상 handoff를 다음 기준 → 원문 출처 순서로 정렬해 링크 이동 없이 자연스러운 읽기 흐름을 보강했다.

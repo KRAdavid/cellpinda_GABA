@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 7c409a1 — 2026-10-05
+
+- 모바일 출처 읽기 패널의 네 가지 질문이 단순 목록으로 보여 연구를 읽는 순서와 원문 출처로 넘어가는 흐름이 약해질 수 있는 편집 리스크를 확인하고 PR #287에서 번호를 하나의 세로 읽기 레일로 연결했다. 원문 출처 카드의 우측 여백을 줄여 긴 한글 출처명이 자연스럽게 읽히도록 보정했다. 연구 수치·출처 데이터·공개 카피·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1607672 bytes로 예산 안이다.
+- PR #287 필수 checks, main workflow 37253350843의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 7c409a1e6aa80cf0bebc462fbce8741b284a79d4는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 출처 읽기 레일의 정적 계약·배포 정합성은 확인했지만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005, E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005, E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005, E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005.
+
 ## Release Recheck — 3904b39 — 2026-10-05
 
 - 좁은 모바일에서 연구·국내외 활용·전문가 영상의 다음 장면 연결부가 flex 줄바꿈에 따라 현재 맥락과 다음 읽을 장면의 순서가 흐려질 수 있는 편집 리스크를 확인하고 PR #285에서 430px 이하 화면을 현재 맥락 → 구분선 → 다음 장면의 grid 리듬으로 정리했다. 연구 수치·출처 데이터·공개 카피·제품 독립 경계는 변경하지 않았다.

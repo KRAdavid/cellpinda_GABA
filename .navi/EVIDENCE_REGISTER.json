@@ -1049,6 +1049,17 @@
         "E-LIVE-PUBLIC-MOBILE-HANDOFF-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-106",
+      "statement": "공개 GABA 안내서의 모바일 출처 읽기 패널은 네 가지 질문을 하나의 세로 읽기 레일로 연결하고 원문 출처 카드의 한글 읽기 폭을 보존한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005",
+        "E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005",
+        "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9188,6 +9199,50 @@
       "captured_at": "2026-10-05T01:45:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-HANDOFF",
       "claim_refs": ["C-002", "C-003", "C-105"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 출처 읽기 질문을 세로 읽기 레일로 연결하고 원문 출처 카드의 우측 여백을 조정한 v97 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #287 source commit dc258ae; pnpm run validate:ui-contract PASS including v97 mobile source-reading rail guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1607672 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/287",
+      "captured_at": "2026-10-05T01:58:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-SOURCE-RAIL",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-106"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 모바일 출처 읽기 패널에 세로 연결선·번호 위계·원문 출처 카드의 읽기 폭 보존 규칙을 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v97 mobile source-reading rail assertion; .guide-reading-note-steps uses a relative container with a connected :before rail at left:14px and #cfe6e7, step numbers preserve a white reading surface, and .guide-reading-note-source uses padding-right:18px with a 15px mobile override; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/287",
+      "captured_at": "2026-10-05T01:58:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-SOURCE-RAIL",
+      "claim_refs": ["C-003", "C-106"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 출처 읽기 흐름 PR #287이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #287 merge main commit 7c409a1e6aa80cf0bebc462fbce8741b284a79d4; PR checks release-verify 37253259054 job 111585047995 and site-quality-verify 37253258975 job 111585047763 successful; main workflow 37253350843 with release-verify 111585307030, worker-readiness 111585487394, deploy-pages 111585503230, smoke-live 111585539881 and release-status 111585575571 successful; deploy-worker 111585503869 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37253350843",
+      "captured_at": "2026-10-05T01:58:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-SOURCE-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-106"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 모바일 출처 읽기 레일 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=7c409a1e6aa80cf0bebc462fbce8741b284a79d4 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 7c409a1e6aa80cf0bebc462fbce8741b284a79d4; generatedAt 2026-10-05T01:56:38.800Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#reading-note",
+      "captured_at": "2026-10-05T01:58:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-SOURCE-RAIL",
+      "claim_refs": ["C-002", "C-003", "C-106"]
     }
   ]
 }

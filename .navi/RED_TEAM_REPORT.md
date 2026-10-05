@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 7c409a1
+
+- 공격 관점에서 확인한 실패 모드는 모바일 출처 읽기 패널의 네 가지 질문이 독립 목록으로 보여 “누구를 살폈는가 → 어떻게 비교했는가 → 무엇이 달라졌는가 → 어디까지 알 수 있는가”의 순서가 빠르게 보이지 않는 것이었다. PR #287에서 번호를 연결하는 세로 레일과 흰색 번호 표면을 적용하고, 원문 출처 카드의 가로 읽기 폭을 보강했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 실행 환경에서 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005, E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005, E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005, E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005.
+
 ## Recheck — 2026-10-05 — 3904b39
 
 - 공격 관점에서 확인한 실패 모드는 좁은 화면에서 “다음 장” 연결부의 flex 줄바꿈이 문장 순서를 흐려 연구·활용·전문가 영상 사이의 다음 읽기 장면을 즉시 파악하기 어렵게 만드는 것이었다. PR #285에서 연구·활용 handoff를 현재 맥락·구분선·다음 장면의 grid로, 전문가 영상 handoff를 현재 장·다음 기준·원문 출처의 순서로 재배치했다.
