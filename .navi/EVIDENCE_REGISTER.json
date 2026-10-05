@@ -1520,6 +1520,16 @@
         "E-LIVE-PUBLIC-HERO-CUE-CONTRAST-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-149",
+      "statement": "연구 확장 지도 중심에 `5개 연구 영역` 규모가 표시되고, hero 읽기 순서는 유효한 HTML 흐름 콘텐츠로 렌더링되어 390px·1440px 콘솔 오류 없이 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-SCALE-20261006",
+        "E-UI-CONTRACT-RESEARCH-MAP-SCALE-20261006",
+        "E-CDP-RESEARCH-MAP-SCALE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11508,6 +11518,36 @@
       "captured_at": "2026-10-05T16:59:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-HERO-CUE-CONTRAST",
       "claim_refs": ["C-001", "C-002", "C-003", "C-146", "C-148"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-SCALE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 중심 규모와 hero 경로의 HTML 중첩을 보정한 commit bbaf4b9가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit bbaf4b9e87bdf57b7cd7504ca9fef5db37c17446; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1627385 <= 1650000",
+      "captured_at": "2026-10-05T17:14:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-RESEARCH-MAP-SCALE",
+      "claim_refs": ["C-001", "C-003", "C-149"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-MAP-SCALE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 연구 지도 중심의 `5개 연구 영역` 표시와 hero 읽기 경로의 유효한 div·ol 중첩을 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v119 research map orientation cue and valid hero-route nesting assertions; status ok; events 14",
+      "captured_at": "2026-10-05T17:14:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-MAP-SCALE",
+      "claim_refs": ["C-149"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-MAP-SCALE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 Chrome CDP fallback에서 390px·1440px 연구 지도 중심 문구·다섯 topic 버튼·가로 폭·콘솔 오류를 확인했다.",
+      "locator": "temporary Chrome CDP script outside repository at http://127.0.0.1:4191; 390px: coreText `GABA 연구의 중심 5개 연구 영역`, aria label includes `다섯 연구 영역`, topicButtons 5, mapHeight 320, scrollWidth 390, console errors []; 1440px: same core scale cue, topicButtons 5, mapHeight 428, scrollWidth 1425, console errors []",
+      "captured_at": "2026-10-05T17:14:00Z",
+      "reviewer_id": "NAVI-CDP-QA-20261006-RESEARCH-MAP-SCALE",
+      "claim_refs": ["C-149"]
     }
   ]
 }

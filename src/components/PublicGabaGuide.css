@@ -1920,3 +1920,7 @@
 .guide-hero-story .guide-hero-scroll:hover{border-color:rgba(18,154,163,.58);background:rgba(255,255,255,.94);box-shadow:0 9px 22px rgba(28,83,99,.12);color:var(--guide-teal-dark);transform:translateX(-50%) translateY(-1px)}
 .guide-hero-story .guide-hero-scroll:focus-visible{border-color:rgba(18,154,163,.72);outline:3px solid rgba(18,154,163,.24);outline-offset:4px;color:var(--guide-teal-dark)}
 @media(prefers-reduced-motion:reduce){.guide-hero-story .guide-hero-scroll{transition:none}}
+
+/* v119 research map orientation cue: show the map scale inside the central node before a topic is selected. */
+.guide-research-orbit-core small{color:#7fa2ad;font-size:9px;font-weight:850;letter-spacing:-.03em;line-height:1.2;white-space:nowrap}
+@media(max-width:700px){.guide-research-orbit-core small{font-size:8px}}

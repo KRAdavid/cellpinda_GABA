@@ -1650,11 +1650,11 @@ export default function PublicGabaGuide() {
             <h1 id="guide-hero-heading" tabIndex={-1}><span>저속노화,<br />{' '}회복하는 밤에서 시작됩니다.</span>{' '}<em>그 회복의 신호를<span className="guide-mobile-break"><br /></span>{' '}<span className="guide-hero-gaba-line">GABA에서<span className="guide-mobile-break"><br /></span>{' '}읽습니다</span></em></h1>
             <p className="guide-hero-body">낮에는 몸과 뇌가 에너지를 사용합니다. 밤이 되면 몸은 회복에 필요한 과정으로 전환됩니다.</p>
             <p className="guide-editorial-note">{editorialNotice}</p>
-            <p className="guide-rail guide-hero-route">
+            <div className="guide-rail guide-hero-route">
               <span className="guide-hero-route-label" aria-hidden="true">3분 읽기</span>
               <ol className="guide-hero-route-list" aria-hidden="true"><li>수면과 회복</li><li>GABA의 발견</li><li>GABA란</li><li>연구 지도</li><li>활용 사례</li></ol>
               <span className="sr-only">3분 읽기: 수면과 회복, GABA의 발견, GABA란, 연구 지도, 활용 사례</span>
-            </p>
+            </div>
           </div>
           <NeuronNetwork />
           <button type="button" className="guide-hero-scroll" onClick={() => scrollTo('opening-bridge')} aria-label="수면과 회복부터 3분 읽기 시작"><ArrowDown size={16} aria-hidden="true" /> <span>3분 읽기 시작</span></button>
@@ -1811,7 +1811,7 @@ export default function PublicGabaGuide() {
             <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">06 · 연구의 확장</p><h2 id="research-heading" tabIndex={-1}>수면에서 시작해<br />{' '}다섯 영역으로 확장됩니다</h2></div><p>연구의 흐름을<br /> 살펴봅니다.</p></div>
             <div className="guide-research-map" role="group" aria-label="GABA에서 다섯 연구 영역으로 확장되는 구조">
               <svg className="guide-research-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 43V22M57 50H78M56 56L77 77M44 56L23 77M43 50H22" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth=".65" strokeDasharray="1 2" /></svg>
-              <div className="guide-research-orbit-core" aria-label={activeResearchTopic ? `현재 읽는 연구: ${activeResearchTopic.title}` : 'GABA 연구 지도의 중심'}><strong>GABA</strong><span>{activeResearchTopic ? `현재 · ${activeResearchTopic.title}` : '연구의 중심'}</span></div>
+              <div className="guide-research-orbit-core" aria-label={activeResearchTopic ? `현재 읽는 연구: ${activeResearchTopic.title}, 다섯 연구 영역` : 'GABA 연구 지도의 중심, 다섯 연구 영역'}><strong>GABA</strong><span>{activeResearchTopic ? `현재 · ${activeResearchTopic.title}` : '연구의 중심'}</span><small>5개 연구 영역</small></div>
               {researchTopics.map((topic) => <button type="button" className={`guide-research-map-item${activeResearchTopicId === topic.id ? ' is-active' : ''}`} key={topic.id} onClick={() => { setActiveResearchTopicId(topic.id); scrollTo(`research-${topic.id}`); focusResearchCard(topic.id); }} aria-current={activeResearchTopicId === topic.id ? 'true' : undefined} aria-pressed={activeResearchTopicId === topic.id} aria-describedby="research-map-guide" aria-controls="research-flow" aria-label={`${topic.title} 연구 카드로 이동`}><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><span><strong>{topic.title}</strong></span></button>)}
             </div>
             <div className="guide-research-map-cue" id="research-map-guide"><ArrowDown size={15} aria-hidden="true" /><p><strong>주제를 선택하면</strong><span>아래 연구 카드의 대상·결과·해석으로 바로 이어집니다.</span></p></div>

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T17:01:18.288255Z",
+  "updated_at": "2026-10-05T17:16:11.761266Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5067,6 +5067,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T03:00:00Z"
+    },
+    {
+      "id": "H-224",
+      "event": "연구 확장 지도 중심에 `5개 연구 영역` 규모를 표시하고, hero 읽기 경로의 p 안에 ol이 들어가던 잘못된 HTML 중첩을 div로 보정했다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 로컬 Chrome CDP 390·1440px의 지도 표시·가로 폭·콘솔 오류 0을 확인했다. 공개 배포는 PR 검증 이후 진행한다. 새 CRITICAL/MAJOR 결함은 없으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-149와 세 로컬 증거를 등록했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T17:14:00Z"
     }
   ]
 }
