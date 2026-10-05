@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 → 출처 읽기 연결부 아이콘 통일 — 62ad947 — 2026-10-05
+
+- 전문가 영상 다음 읽기 연결부의 텍스트 화살표를 기존 화면 체계와 같은 SVG ArrowRight 아이콘으로 통일했다. 모바일·데스크톱에서 다음 읽기 방향과 터치 가능한 연결부는 그대로 유지했다.
+- PR #350 checks와 main workflow `37311934178`의 Pages 배포·라이브 smoke·release status가 성공했고, 라이브 validator는 HTTP 200·STATIC·공개 데이터 정합성을 확인했다. 공개 390·1440px handoff 이동과 오류·가로 폭을 재검증했다.
+- 연구 수치·출처·카피·제품 독립 경계는 변경하지 않았으며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-EDITORIAL-ARROW-20261005, E-UI-CONTRACT-EDITORIAL-ARROW-20261005, E-DEPLOY-PIPELINE-EDITORIAL-ARROW-20261005, E-LIVE-PUBLIC-EDITORIAL-ARROW-20261005.
+
 ## 공개 연구·공유 핵심 흐름 재감리 — 2eb17a7 — 2026-10-05
 
 - 공개 390px에서 연구 지도 5개 주제와 연구 출처 5개를 확인하고, 피부 주제 선택 → 피부 연구 결과 → 다음 연구(근육) 순서가 읽기 레일 아래에 이어지는 흐름을 재검증했다.
