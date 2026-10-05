@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T09:58:13Z",
+  "updated_at": "2026-10-05T10:08:30Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T09:58:13Z"
+    "last_run_at": "2026-10-05T10:08:30Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -4899,6 +4899,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T09:58:13Z"
+    },
+    {
+      "id": "H-200",
+      "event": "최신 공개 배포본에서 390px 연구 지도→피부→근육 흐름, #final 직접 진입·12/12 복원, 사업자용 5문장 실제 복사 완료를 재확인했다. 연구 카드와 공유 화면은 가로 넘침 없이 유지됐고 runtimeErrors는 0이었다. 새 CRITICAL/MAJOR 결함은 없었으며 공개 UI와 연구 내용은 변경하지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T10:08:30Z"
     }
   ]
 }

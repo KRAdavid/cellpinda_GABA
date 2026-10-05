@@ -10455,7 +10455,7 @@
       "statement": "공개 390px에서 연구 지도 5개 주제와 연구 출처 5개가 표시되고, 피부 주제 선택은 피부 연구 결과 카드로 연결되며 다음 연구 이동은 근육 연구 결과 카드로 이어진다. 두 도착 화면 모두 읽기 레일 아래에 정렬되고 scrollWidth는 390이다.",
       "locator": "cache-disabled Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?qa=public-flow-audit-20261005; initial mapItems 5, sourceLinks 5, scrollWidth 390; map click label `피부 연구 카드로 이동` produced active heading `피부 연구 결과`, mapActive 1, activeTop 113, scrollY 16272; next research click produced active heading `근육 연구 결과`, activeTop 113, scrollWidth 390; runtimeErrors 0",
       "source_uri": "https://kradavid.github.io/gaba_info/?qa=public-flow-audit-20261005",
-      "captured_at": "2026-10-05T09:58:13Z",
+      "captured_at": "2026-10-05T10:08:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-FLOW",
       "claim_refs": ["C-002", "C-003", "C-129"]
     },
@@ -10466,7 +10466,7 @@
       "statement": "공개 `#final` 직접 링크는 마지막 공유 장을 고정 헤더 아래에 정렬하고 브라우저 제목을 `이야기 공유 | GABA Guide`, 읽기 진행을 `12 / 12`로 복원한다.",
       "locator": "cache-disabled Chrome CDP fallback direct URL https://kradavid.github.io/gaba_info/?qa=public-flow-direct-final-20261005#final; hash `#final`; active chapter `이야기 공유`; progress `12 / 12`; final heading top 115px; section top -25px; scrollY 33902; scrollWidth 390; runtimeErrors 0",
       "source_uri": "https://kradavid.github.io/gaba_info/?qa=public-flow-direct-final-20261005#final",
-      "captured_at": "2026-10-05T09:58:13Z",
+      "captured_at": "2026-10-05T10:08:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-DIRECT-FINAL-CONTEXT",
       "claim_refs": ["C-002", "C-007", "C-129"]
     },
@@ -10477,7 +10477,7 @@
       "statement": "공개 390px 마지막 공유 장에서 사업자용 5문장 전체 복사 버튼을 실제 마우스 이벤트로 누르면 버튼이 `복사 완료`로 바뀌고 `5문장을 한 번에 복사했어요. 자유롭게 활용해 보세요.` 상태 안내가 표시된다.",
       "locator": "cache-disabled Chrome CDP fallback at https://kradavid.github.io/gaba_info/?qa=public-flow-direct-final-20261005#final; trusted Input.dispatchMouseEvent click on `.guide-share-copy-all` returned copyLabel `복사 완료`, status `5문장을 한 번에 복사했어요. 자유롭게 활용해 보세요.`, five share articles remained open, scrollWidth 390 and runtimeErrors 0",
       "source_uri": "https://kradavid.github.io/gaba_info/?qa=public-flow-direct-final-20261005#final",
-      "captured_at": "2026-10-05T09:58:13Z",
+      "captured_at": "2026-10-05T10:08:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-TRUSTED-SHARE-COPY",
       "claim_refs": ["C-003", "C-129"]
     },
