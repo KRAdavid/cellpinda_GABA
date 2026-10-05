@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 21a34c7 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-004 390px 메뉴에서 장면 선택 후 메뉴 닫힘·즉시 이동·가로 넘침 없음: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #311과 main 공개 배포 workflow `37269235739`가 성공했고, 공개 URL candidate `21a34c7964a72c5fbb48eedba972a10da419f22c`가 HTTP 200 정적 사이트로 확인됐다. Chrome CDP fallback 공개 390px에서 메뉴 열기→발견 선택 후 메뉴가 닫히고 제목 top `132.1px`, 가로 넘침 `0`으로 정렬됐다.
+- NAVI 로컬 감사는 오류 없이 새 증적을 연결했다. 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 실제 브라우저 전체 조합, 대표 실기기, 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-MOBILE-MENU-NAVIGATION-20261005, E-UI-CONTRACT-MOBILE-MENU-NAVIGATION-20261005, E-DEPLOY-PIPELINE-MOBILE-MENU-NAVIGATION-20261005, E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005.
+
 ## Current Release Recheck — fb3d19c — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

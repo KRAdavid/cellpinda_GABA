@@ -1181,6 +1181,17 @@
         "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-118",
+      "statement": "공개 GABA 안내서의 모바일 상단 메뉴에서 장면을 선택하면 메뉴가 닫히고 선택한 장면의 제목이 읽기 레일 아래에 즉시 정렬되며 가로 넘침이 없다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-MENU-NAVIGATION-20261005",
+        "E-UI-CONTRACT-MOBILE-MENU-NAVIGATION-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-MENU-NAVIGATION-20261005",
+        "E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9848,6 +9859,50 @@
       "captured_at": "2026-10-05T05:32:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-RESEARCH-CARD-LAYOUT",
       "claim_refs": ["C-002", "C-003", "C-117"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-MENU-NAVIGATION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 메뉴 선택 시 body 스크롤 잠금 해제와 부드러운 스크롤이 경합하지 않도록 메뉴가 열려 있던 경우 즉시 이동하는 로컬 구현이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #311 source commit 29d93c2c6b9922784058d69ead499f3b5867e625; pnpm run validate:ui-contract PASS including mobile menu immediate-scroll assertion; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1613970 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/311",
+      "captured_at": "2026-10-05T05:42:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-MENU-NAVIGATION",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-118"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-MENU-NAVIGATION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 메뉴가 열린 상태에서 장면을 선택할 때 즉시 스크롤 조건을 유지해 body 스크롤 잠금 경합의 회귀를 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs assertion; src/components/PublicGabaGuide.tsx scrollTo uses restoreMenuFocus || prefers-reduced-motion for immediate behavior; Chrome CDP local preview at 390px confirmed menu is-open before selection and closed after selection",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/311",
+      "captured_at": "2026-10-05T05:43:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-MENU-NAVIGATION",
+      "claim_refs": ["C-004", "C-118"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-MENU-NAVIGATION-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 메뉴 장면 이동 안정화 PR #311이 필수 검사를 통과해 main commit 21a34c79에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #311 merge main commit 21a34c7964a72c5fbb48eedba972a10da419f22c; PR checks release-verify 37269139668 and site-quality-verify 37269139679 successful; main workflow 37269235739 with release-verify 111632480244, worker-readiness 111632739134, deploy-pages 111632756420, smoke-live 111632804751 and release-status 111632857439 successful; deploy-worker 111632757083 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37269235739",
+      "captured_at": "2026-10-05T05:48:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-MENU-NAVIGATION",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-118"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 모바일 메뉴 장면 이동 보정을 포함한 main 후보와 일치하고 390px 공개 렌더에서 메뉴 열기→발견 선택 후 메뉴가 닫히며 발견 제목이 읽기 레일 아래에 정렬되고 가로 넘침이 없음을 확인했다.",
+      "locator": "validate:live-public HTTP 200; candidateSha 21a34c7964a72c5fbb48eedba972a10da419f22c; generatedAt 2026-10-05T05:47:01.435Z; runtimeMode STATIC; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; Chrome CDP fallback at public URL 390px confirmed menu is-open before selection, menu closed after selection, scrollY 1660, history heading top 132.1px, body overflow cleared, scrollWidth 390px",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=menu-fixed-public-20261005&cache=29d93c2#history",
+      "captured_at": "2026-10-05T05:50:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-MENU-NAVIGATION",
+      "claim_refs": ["C-002", "C-004", "C-118"]
     }
   ]
 }
