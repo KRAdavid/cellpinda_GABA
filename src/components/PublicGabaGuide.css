@@ -1299,7 +1299,7 @@
   .guide-recovery-break{scroll-margin-top:112px}
 }
 
-/* v40 video topic filters: keep every mobile topic visible for immediate scanning. */
+/* v40 video topic filters: preserve a comfortable 44px control baseline before the compact v114 rail override. */
 .guide-video-filter-cue{display:none}
 @media(max-width:700px){
   .guide-video-filters-wrap{overflow:visible}
@@ -1802,6 +1802,28 @@
   .guide-outcome-lane-top>span{font-size:.786em;flex:0 0 auto}
   .guide-outcome-lane-top>strong{min-height:0;font-size:.929em;text-align:right}
   .guide-outcome-lane.is-result{box-shadow:inset 3px 0 0 #26a6aa}
+}
+
+/* v114 mobile video board: keep the topic rail in one calm scan line instead of stacking a tall pill wall. */
+@media(max-width:700px){
+  .gaba-guide .guide-video-filters-wrap{
+    overflow-x:auto;
+    overflow-y:hidden;
+    margin:0 -2px 12px;
+    padding:0 2px 7px;
+    scrollbar-color:#9acfd0 transparent;
+    scrollbar-width:thin;
+    -webkit-overflow-scrolling:touch;
+  }
+  .gaba-guide .guide-video-filters{
+    flex-wrap:nowrap;
+    width:max-content;
+    min-width:100%;
+    margin:0;
+    padding:1px 0 0;
+    scroll-snap-type:x proximity;
+  }
+  .gaba-guide .guide-video-filter{scroll-snap-align:start}
 }
 
 /* v96 mobile editorial handoff: keep the current scene and next chapter in a calm, deliberate reading order. */
