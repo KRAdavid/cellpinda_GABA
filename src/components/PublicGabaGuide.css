@@ -1648,6 +1648,16 @@
 .gaba-guide .guide-video-card[aria-pressed="true"]{outline:2px solid rgba(18,154,163,.22);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){.gaba-guide .guide-research-detail-inline:focus-visible{outline-offset:3px}}
 
+/* v103 mobile research map context: keep the active topic readable inside the compact orbit. */
+@media(max-width:700px){
+  .gaba-guide .guide-research-orbit-core span{max-width:12ch;font-size:11px;line-height:1.4;letter-spacing:-.03em}
+}
+@media(max-width:350px){
+  .gaba-guide .guide-research-orbit-core span{max-width:10ch;font-size:11px}
+}
+.gaba-guide.is-large-text .guide-research-orbit-core span{font-size:11px}
+@media(max-width:700px){.gaba-guide.is-large-text .guide-research-orbit-core span{font-size:12px}}
+
 /* v93 mobile chapter context: keep each section's concise editorial cue visible on small screens. */
 @media(max-width:700px){
   .gaba-guide .guide-section-heading>p{
