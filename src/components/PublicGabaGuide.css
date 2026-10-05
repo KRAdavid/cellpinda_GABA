@@ -1914,3 +1914,9 @@
   .gaba-guide.is-large-text .guide-research-source{font-size:13px;line-height:1.6}
   .gaba-guide.is-large-text .guide-research-source-action{font-size:12px}
 }
+
+/* v117 hero reading start cue: turn the first scroll signal into a single, low-friction entry action. */
+.guide-hero-story .guide-hero-scroll{border:0;background:transparent;font:inherit;cursor:pointer}
+.guide-hero-story .guide-hero-scroll:hover,.guide-hero-story .guide-hero-scroll:focus-visible{color:var(--guide-teal-dark)}
+.guide-hero-story .guide-hero-scroll:focus-visible{outline:3px solid rgba(18,154,163,.24);outline-offset:5px}
+@media(prefers-reduced-motion:reduce){.guide-hero-story .guide-hero-scroll{transition:none}}

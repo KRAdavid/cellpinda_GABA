@@ -1657,7 +1657,7 @@ export default function PublicGabaGuide() {
             </p>
           </div>
           <NeuronNetwork />
-          <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
+          <button type="button" className="guide-hero-scroll" onClick={() => scrollTo('opening-bridge')} aria-label="수면과 회복부터 3분 읽기 시작"><ArrowDown size={16} aria-hidden="true" /> <span>3분 읽기 시작</span></button>
         </section>
 
         <section className="guide-opening-bridge guide-story-section" id="opening-bridge" aria-labelledby="opening-bridge-heading">
