@@ -1794,7 +1794,7 @@ export default function PublicGabaGuide() {
               <div className="guide-recovery-card-footer">
                 <div className="guide-recovery-progress" aria-hidden="true"><i key={activeRecoveryCard} /></div>
                 <span>{String(activeRecoveryCard + 1).padStart(2, '0')} / {String(recoveryCards.length).padStart(2, '0')}</span>
-                <span className="guide-recovery-playback-status">{recoveryPlaybackLabel}</span>
+                <span className="guide-recovery-playback-status" aria-live="polite" aria-atomic="true">{recoveryPlaybackLabel}</span>
               </div>
             </div>
             <div className="guide-recovery-controls" aria-label="수면과 회복 카드 조작">
