@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Full Public Flow Recheck — 2026-10-05 — 7c7e772
+
+- 공격 관점에서 390px·1440px의 도입부터 공유까지 장별 진입, 고정 읽기 레일과 제목 간 간격, 연구 카드·출처·공유 영역의 화면 폭, 전문가 영상 필터 선택과 즉시 재생을 확인했다. 새 CRITICAL/MAJOR 결함과 runtime 오류는 재현되지 않았다.
+- 390px와 1440px 모두 document scrollWidth가 viewport보다 커지지 않았고, 출처 읽기와 마지막 공유 구간도 콘텐츠가 고정 레일에 가려지지 않았다. 320·350·390px 전문가 영상 선택 흐름의 마지막 주제·제목·활성 카드·iframe·44px 공유 버튼도 기존 증적과 일치했다.
+- 대표 Chrome CDP 렌더만으로 전체 브라우저·실기기를 보장할 수 없으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LOCAL-BUILD-FULL-FLOW-20261005, E-LIVE-PUBLIC-FULL-FLOW-20261005.
+
 ## Recheck — 2026-10-05 — a37adcb
 
 - 공격 관점에서 전문가 영상 주제 필터의 모바일 다중 줄 쌓임, 가로 레일 도달성, 44px 터치 영역, 마지막 주제 선택 후 제목·활성 카드·autoplay iframe 동기화, 가로 넘침, runtime 오류를 320·350·390px에서 확인했다. 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.

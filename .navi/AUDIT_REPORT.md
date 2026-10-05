@@ -1,5 +1,13 @@
 # Audit Report
 
+## Full Public Flow Recheck — 7c7e772 — 2026-10-05
+
+- 도입·수면과 회복·GABA란·연구 지도·국내외 활용·발효와 안전·전문가 영상·출처 읽기·이야기 공유의 주요 장을 390px와 1440px 공개 화면에서 순서대로 재검증했다. 모바일 제목, 선행 카드, 연구 출처, 공유 자료가 고정 읽기 레일 아래에서 읽혔고 전문가 영상 주제 레일과 선택 즉시 재생도 유지됐다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, 공개 validator HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·1개 product·6개 share page·teaser HOLD를 확인했다. Chrome CDP fallback section QA의 scrollWidth는 390/1425였고 runtime 오류는 없었다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-FULL-FLOW-20261005, E-LIVE-PUBLIC-FULL-FLOW-20261005.
+
 ## Mobile Expert Video Filter Rail Recheck — a37adcb — 2026-10-05
 
 - 전문가 영상 주제 필터가 좁은 모바일에서 여러 줄로 쌓여 선택 영상까지의 첫 시선이 길어지던 잔여 퍼블리싱 리스크를 확인하고, PR #356에서 44px 터치 높이를 유지한 한 줄 수평 레일로 정리했다. 주제 전체를 가로로 탐색할 수 있으며 영상 카드·즉시 재생·다음 읽기 흐름은 변경하지 않았다.

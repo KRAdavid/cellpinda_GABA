@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T14:13:36.754880Z",
+  "updated_at": "2026-10-05T14:32:15.052456Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4990,6 +4990,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T14:09:12Z"
+    },
+    {
+      "id": "H-213",
+      "event": "도입·수면과 회복·GABA란·연구 지도·활용·발효와 안전·전문가 영상·출처 읽기·이야기 공유의 공개 흐름을 390px와 1440px에서 재검증했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 공개 validator HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 확인했고, Chrome CDP fallback section QA에서 scrollWidth 390/1425와 runtimeErrors 0을 확인했다. 전문가 영상 선택 흐름은 320·350·390px에서 기존 증적과 일치했으며 새 CRITICAL/MAJOR 결함은 없었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지한다. 결과를 C-143과 두 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T14:30:43Z"
     }
   ]
 }

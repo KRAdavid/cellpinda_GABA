@@ -1450,6 +1450,15 @@
         "E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-RAIL-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-143",
+      "statement": "공개 GABA 안내서의 도입·수면과 회복·GABA란·연구 지도·활용·발효·안전·전문가 영상·출처 읽기·공유 흐름은 390px와 1440px에서 고정 읽기 레일 아래 제목을 유지하고 가로 넘침 없이 이어진다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-FULL-FLOW-20261005",
+        "E-LIVE-PUBLIC-FULL-FLOW-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11143,6 +11152,27 @@
       "captured_at": "2026-10-05T14:09:12Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-VIDEO-FILTER-RAIL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-142"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-FULL-FLOW-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 안내서 전체 흐름 후보가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1623335 <= 1650000; pnpm run validate:ops-docs; pnpm run validate:goal; pnpm run validate:tf-pulse-freshness",
+      "captured_at": "2026-10-05T14:30:43Z",
+      "reviewer_id": "NAVI-QA-GABA-20261005-FULL-FLOW",
+      "claim_refs": ["C-001", "C-003", "C-143"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-FULL-FLOW-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 390px와 1440px에서 도입부터 공유까지 주요 장을 가로 넘침 없이 렌더링하고, 제목·선행 카드·출처·공유 영역이 고정 읽기 레일을 침범하지 않으며 runtime 오류가 없다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 7c7e772be28430a01938bc6eeea05722a0ebd65f; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; Chrome CDP fallback public 390px·1440px section QA for #top, #opening-bridge, #basics, #reading-note, #applications, #fermented-safety, #expert-videos, #final reported scrollWidth 390/1425, heading positions 115/126 or lower, section content visible, video selection flow still passed at 320/350/390, and errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=sections-cb35802-390-final-20261005#final",
+      "captured_at": "2026-10-05T14:30:43Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-FULL-FLOW",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-143"]
     }
   ]
 }
