@@ -1,12 +1,12 @@
 # Audit Report
 
-## Public Release Recheck — 0b69600 — 2026-10-06
+## Public Release Recheck — 8724f4c — 2026-10-06
 
 - 최신 GitHub Pages 공개본에서 전문가 영상 갤러리의 9개 카드·주제 필터·선택 즉시 재생 흐름을 390·1440px로 재현했다. 두 번째 카드 선택 후 제목·선택 상태·자동 재생 iframe·feature 포커스가 갱신되고, scrollWidth 390·1425와 runtime console errors 0을 유지했다.
-- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산·live validator·NAVI project-state·risk-control 점검이 모두 PASS했다. 새 CRITICAL/MAJOR 결함은 없다.
+- PR #376과 main workflow `37350034212`의 release-verify·Pages 배포·라이브 smoke·release status가 성공했다. 배포 후 live validator·Chrome CDP 재점검까지 포함해 새 CRITICAL/MAJOR 결함은 없다.
 - Browser 플러그인 부재로 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
 
-증적: E-LIVE-PUBLIC-EXPERT-VIDEO-INTERACTION-20261006.
+증적: E-DEPLOY-PIPELINE-EXPERT-VIDEO-INTERACTION-20261006, E-LIVE-PUBLIC-EXPERT-VIDEO-POSTDEPLOY-20261006.
 
 ## Public Release Recheck — b73e086 — 2026-10-06
 

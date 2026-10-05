@@ -1537,7 +1537,9 @@
       "id": "C-150",
       "statement": "전문가 영상 갤러리는 390px·1440px에서 주제 필터와 9개 영상 카드를 읽기 흐름 안에 제공하며, 카드를 선택하면 선택 상태·현재 위치·자동 재생 iframe·포커스가 함께 갱신된다.",
       "evidence_refs": [
-        "E-LIVE-PUBLIC-EXPERT-VIDEO-INTERACTION-20261006"
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-INTERACTION-20261006",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-INTERACTION-20261006",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTDEPLOY-20261006"
       ],
       "status": "SUPPORTED"
     }
@@ -11590,6 +11592,28 @@
       "source_uri": "https://kradavid.github.io/gaba_info/#expert-videos",
       "captured_at": "2026-10-05T17:35:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-VIDEO-INTERACTION",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-150"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-INTERACTION-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 라이브 재점검 기록 PR #376이 필수 검사를 통과해 main commit 8724f4c로 병합되었고, 정적 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #376; docs commit 80065e8; main merge commit 8724f4cb2fe036f1ea227bb1c75826a70dffb13e; workflow 37350034212; release-verify 111898270560, worker-readiness 111898805716, deploy-pages 111898841162, smoke-live 111898953204 and release-status 111899044418 successful; deploy-worker 111898842692 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37350034212",
+      "captured_at": "2026-10-05T17:39:14Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-EXPERT-VIDEO-INTERACTION",
+      "claim_refs": ["C-001", "C-002", "C-150"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTDEPLOY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main commit 8724f4c 공개본은 HTTP 200·STATIC·71개 bundle hash와 제품 독립 경계를 유지하며, 배포 후 390px·1440px 전문가 영상 선택 재생을 다시 통과했다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 8724f4cb2fe036f1ea227bb1c75826a70dffb13e; generatedAt 2026-10-05T17:40:18.070Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390/1440px after deploy reported 9 cards, second-card title `갱년기와 수면, GABA에 대한 질문`, selected card aria-pressed=true, focused element `expert-video-feature`, iframe src with `autoplay=1&mute=1&playsinline=1`, scrollWidth 390/1425 and errors []; screenshots outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/#expert-videos",
+      "captured_at": "2026-10-05T17:42:33Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-VIDEO-POSTDEPLOY",
       "claim_refs": ["C-001", "C-002", "C-003", "C-150"]
     }
   ]

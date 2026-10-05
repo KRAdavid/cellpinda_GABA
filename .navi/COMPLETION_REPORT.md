@@ -1,14 +1,14 @@
 # Completion Report
 
-## Current Release Recheck — 0b69600 — 2026-10-06
+## Current Release Recheck — 8724f4c — 2026-10-06
 
 - AC-001 공개 URL·정적 번들·현재 배포 후보: PASS.
 - AC-004 390·1440px 전문가 영상 카드·필터·선택 즉시 재생·포커스·가로 폭·runtime console errors: PASS.
-- AC-005 UI 계약·typecheck·127개 테스트·production build·Pages 공개본·live validator·NAVI project-state·risk-control: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·Pages 공개본·배포 후 live validator·NAVI project-state·risk-control: PASS.
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
-- 공개 candidate `0b69600b01e68f4b97f52c6e5d462a95bc97cd29`는 HTTP 200·STATIC·71개 bundle hash를 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+- 공개 candidate `8724f4cb2fe036f1ea227bb1c75826a70dffb13e`는 HTTP 200·STATIC·71개 bundle hash를 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
-증적: E-LIVE-PUBLIC-EXPERT-VIDEO-INTERACTION-20261006.
+증적: E-DEPLOY-PIPELINE-EXPERT-VIDEO-INTERACTION-20261006, E-LIVE-PUBLIC-EXPERT-VIDEO-POSTDEPLOY-20261006.
 
 ## Current Release Recheck — b73e086 — 2026-10-06
 
