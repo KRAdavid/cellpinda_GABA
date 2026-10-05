@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — 1daf71b — 2026-10-06
+
+- AC-004 모바일 헤더의 글자 크기 조절 문구·토글 상태·가로 폭: PASS locally.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- 공개 배포와 live validator는 후속 PR 검증 이후 확인해야 한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-READING-SIZE-LABEL-20261006, E-UI-CONTRACT-READING-SIZE-LABEL-20261006, E-CDP-READING-SIZE-LABEL-20261006, E-DEPLOY-PIPELINE-READING-SIZE-LABEL-20261006.
+
 ## Current Release Recheck — d593491 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 UI 배포 후보: PASS.

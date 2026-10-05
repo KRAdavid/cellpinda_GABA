@@ -1616,7 +1616,7 @@ export default function PublicGabaGuide() {
   const toggleReadingSize = () => {
     const next = !largeText;
     setLargeText(next);
-    announceShareStatus(next ? '큰 글씨로 표시합니다.' : '기본 글씨로 표시합니다.');
+    announceShareStatus(next ? '글자를 크게 표시합니다.' : '기본 크기로 표시합니다.');
   };
 
   return (
@@ -1634,7 +1634,7 @@ export default function PublicGabaGuide() {
           <a href="#fermented-safety" aria-current={isNavCurrent('fermented-safety') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('fermented-safety'); }}>발효·안전</a>
         </nav>
         <button ref={menuToggleRef} type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} title={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
-        <button type="button" className={`guide-reading-size-toggle${largeText ? ' is-active' : ''}`} aria-label={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} title={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} aria-pressed={largeText} onClick={toggleReadingSize}><span className="guide-reading-size-mark" aria-hidden="true">가{largeText ? '−' : '+'}</span><span>{largeText ? '기본 글씨' : '큰 글씨'}</span></button>
+          <button type="button" className={`guide-reading-size-toggle${largeText ? ' is-active' : ''}`} aria-label={largeText ? '기본 크기로 보기' : '글자 크게 보기'} title={largeText ? '기본 크기로 보기' : '글자 크게 보기'} aria-pressed={largeText} onClick={toggleReadingSize}><span className="guide-reading-size-mark" aria-hidden="true">가{largeText ? '−' : '+'}</span><span>{largeText ? '기본 크기' : '글자 크게'}</span></button>
         <button type="button" className="guide-header-share" aria-label="페이지 공유하기" title="페이지 공유하기" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`}>
           <div className="guide-reading-progress-track" role="progressbar" aria-label="읽기 진행" aria-valuemin={0} aria-valuemax={progressChapterCount} aria-valuenow={progressValue}><span aria-hidden="true" style={{ width: `${(progressValue / progressChapterCount) * 100}%` }} /></div>
