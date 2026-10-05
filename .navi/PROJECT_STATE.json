@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T08:45:00Z",
+  "updated_at": "2026-10-05T09:13:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T08:45:00Z"
+    "last_run_at": "2026-10-05T09:13:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2307,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T08:45:00Z"
+    "last_run_at": "2026-10-05T09:13:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4871,6 +4871,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T08:45:00Z"
+    },
+    {
+      "id": "H-196",
+      "event": "공개 GABA 안내서의 첫 화면과 장 제목에서 줄바꿈 경계의 공백이 사라져 `저속노화,회복하는`·`시작됩니다그`·`넘어여러`처럼 읽힐 수 있는 실제 한국어 퍼블리싱 결함을 확인했다. PR #328에서 장 제목 공백을, PR #329에서 첫 화면 H1과 정적 no-script 제목 공백을 보정하고 UI 계약에 제목 경계 회귀 검사를 추가했다. 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했고 PR #328 main workflow 37287592876과 PR #329 main workflow 37288363450의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. 최종 live candidate 9c1a5cf0200a46f8505ce471f0c67f46c27a1724는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 유지한다. 캐시를 비활성화한 Chrome CDP fallback 공개 320·390·768·1024·1440px에서 H1·14개 H2의 textContent가 자연스러운 공백을 보존하고 scrollWidth가 320·390·753·1009·1425px으로 각 뷰포트 레이아웃과 일치하며 runtimeErrors 0을 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T09:13:00Z"
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 9c1a5cf
+
+- 공격 관점에서 첫 화면 H1과 장 제목의 줄바꿈을 제거·복사·보조기기 읽기 상황에 적용했을 때 `저속노화,회복하는`, `시작됩니다그`, `넘어여러`처럼 단어가 붙는 실패 모드를 확인했다. PR #328·#329에서 의미 있는 JSX 공백과 정적 제목 공백을 보존하고 UI 계약으로 회귀를 고정했다.
+- 캐시를 비활성화한 Chrome CDP fallback 공개 320·390·768·1024·1440px에서 H1과 14개 H2의 자연스러운 textContent, 각 뷰포트와 일치하는 scrollWidth, runtimeErrors 0을 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 대표 Chrome 렌더 확인이지 전체 브라우저·실기기 보장은 아니다. Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-KOREAN-HEADING-SPACING-20261005, E-UI-CONTRACT-KOREAN-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-KOREAN-HEADING-SPACING-20261005, E-LIVE-PUBLIC-KOREAN-HEADING-SPACING-20261005.
+
 ## Recheck — 2026-10-05 — a18561f
 
 - 공격 관점에서 확인한 실패 모드는 390px 모바일 연구 비교 도표의 세 칸 범례가 `GABA를 바른 조건`을 음절 단위로 끊어 조건과 결과 막대의 의미 연결을 약하게 만드는 것이었다. PR #326에서 모바일 범례를 세로 순서로 분리하고 조건명을 한 줄로 유지했다.
