@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recovery Playback Status Accessibility — 2026-10-06 — 0880c55
+
+- 공격 관점에서 320px·390px·1440px 공개 수면·회복 카드의 시각 상태와 보조공학 상태를 대조했다. 초기에는 `자동 진행 · 3초마다`, 토글 클릭 후에는 `일시정지`로 바뀌며 `aria-live="polite"`·`aria-atomic="true"`가 두 상태에 모두 유지된다.
+- 세 폭 모두 document scrollWidth가 viewport와 같고 page errors 0·console errors 0이었다. `GABA를 모르면 노화는 가속됩니다.` 제목과 14단계 흐름도 유지된다. 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-PLAYWRIGHT-RECOVERY-STATUS-A11Y-20261006`, `E-LIVE-PUBLIC-RECOVERY-STATUS-A11Y-20261006`, `E-DEPLOY-PIPELINE-RECOVERY-STATUS-A11Y-20261006`.
+
 ## Recovery Autoplay Status Clarity — 2026-10-07 — befeea5
 
 - 공격 관점에서 320px·390px·1440px 공개 수면·회복 카드의 상태 문구와 조작 결과를 대조했다. 자동 상태는 `자동 진행 · 3초마다`, 토글 클릭 후에는 `일시정지`로 바뀌고, `GABA를 모르면 노화는 가속됩니다.` 제목과 14단계 경로가 유지된다.

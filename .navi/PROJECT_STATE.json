@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T23:36:03.068191Z",
+  "updated_at": "2026-10-05T23:57:00.206834Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5208,6 +5208,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T23:34:00Z"
+    },
+    {
+      "id": "H-241",
+      "event": "v132에서 수면·회복 14단계 카드의 상태 영역에 `aria-live=polite`·`aria-atomic=true`를 추가해 `자동 진행 · 3초마다`·`일시정지`·`사용자 진행` 변화가 화면낭독기에도 한 문장으로 전달되도록 보강했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 공개 Playwright Chromium fallback 320·390·1440px에서 상태 속성·토글 전환·제목·가로폭·page/console errors 0을 재현했다. PR #405는 main `0880c55`로 병합됐고 workflow `37390751297`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 site-quality `37390559874`가 성공했다. 공개 validator는 candidate `0880c55b1de66bffeeb0d9d86fd97f51ed660d23`·HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-163과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T23:53:00Z"
     }
   ]
 }

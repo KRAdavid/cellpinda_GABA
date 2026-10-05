@@ -1,5 +1,14 @@
 # Audit Report
 
+## Recovery Playback Status Accessibility — 0880c55 — 2026-10-06
+
+- 수면·회복 14단계 카드의 자동 진행 상태를 화면에서도 `자동 진행 · 3초마다`·`일시정지`로 구분하고, 상태 영역에 `aria-live="polite"`·`aria-atomic="true"`를 부여해 화면낭독기가 상태 변화를 한 문장으로 읽도록 보강했다. 모션 감소 환경의 `사용자 진행` 상태와 기존 수동 토글 흐름은 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 공개 Playwright Chromium fallback 320px·390px·1440px에서 초기 상태, 토글 후 상태, 제목, `aria-live`·`aria-atomic`, viewport와 동일한 scrollWidth, page errors 0·console errors 0을 확인했다.
+- PR #405는 main `0880c55`로 병합되었고 workflow `37390751297`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 site-quality workflow `37390559874`가 성공했다. 공개 validator는 candidate `0880c55b1de66bffeeb0d9d86fd97f51ed660d23`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-STATUS-A11Y-20261006`, `E-UI-CONTRACT-RECOVERY-STATUS-A11Y-20261006`, `E-PLAYWRIGHT-RECOVERY-STATUS-A11Y-20261006`, `E-DEPLOY-PIPELINE-RECOVERY-STATUS-A11Y-20261006`, `E-LIVE-PUBLIC-RECOVERY-STATUS-A11Y-20261006`.
+
 ## Recovery Autoplay Status Clarity — befeea5 — 2026-10-07
 
 - 수면·회복 14단계 카드의 자동 진행 상태 문구를 `자동 진행 · 3초마다`로 정리하고, 사용자가 멈추면 `일시정지`, 모션 감소 환경에서는 `사용자 진행`으로 즉시 구분되도록 보강했다. 작은 상태 문구도 별도 굵기로 읽히게 해 고령 사용자의 현재 동작 인지를 돕는다.

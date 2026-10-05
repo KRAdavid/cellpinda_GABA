@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 회복 상태 접근성 전달·공개 배포 — 0880c55 — 2026-10-06
+
+- 수면·회복 카드의 `자동 진행 · 3초마다`·`일시정지`·`사용자 진행` 상태가 화면뿐 아니라 화면낭독기에도 자연스럽게 전달되도록 `aria-live="polite"`·`aria-atomic="true"`를 추가했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 공개 상호작용 검증을 통과했고 PR #405가 main `0880c55`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-STATUS-A11Y-20261006`, `E-UI-CONTRACT-RECOVERY-STATUS-A11Y-20261006`, `E-PLAYWRIGHT-RECOVERY-STATUS-A11Y-20261006`, `E-DEPLOY-PIPELINE-RECOVERY-STATUS-A11Y-20261006`, `E-LIVE-PUBLIC-RECOVERY-STATUS-A11Y-20261006`.
+
 ## 수면·회복 자동 진행 상태 가독성·공개 배포 — befeea5 — 2026-10-07
 
 - 수면·회복 카드의 현재 동작을 `자동 진행 · 3초마다`·`일시정지`·`사용자 진행`으로 짧고 명확하게 표시하고, 상태 문구의 시각적 우선순위를 높였다.

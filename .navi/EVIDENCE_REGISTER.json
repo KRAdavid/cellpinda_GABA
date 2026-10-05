@@ -1684,6 +1684,18 @@
         "E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-LABEL-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-163",
+      "statement": "수면·회복 카드의 자동 진행·일시정지·사용자 진행 상태가 시각 문구와 `aria-live=polite`·`aria-atomic=true` 보조공학 안내로 함께 전달된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-STATUS-A11Y-20261006",
+        "E-UI-CONTRACT-RECOVERY-STATUS-A11Y-20261006",
+        "E-PLAYWRIGHT-RECOVERY-STATUS-A11Y-20261006",
+        "E-DEPLOY-PIPELINE-RECOVERY-STATUS-A11Y-20261006",
+        "E-LIVE-PUBLIC-RECOVERY-STATUS-A11Y-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12359,6 +12371,58 @@
       "captured_at": "2026-10-05T23:34:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-RECOVERY-AUTOPLAY-LABEL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-162"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-STATUS-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면·회복 상태 접근성 보강 commit d267b28이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit d267b28; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1631444 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-05T23:40:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-RECOVERY-STATUS-A11Y",
+      "claim_refs": ["C-001", "C-003", "C-163"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RECOVERY-STATUS-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 수면·회복 상태 문구와 상태 영역의 `aria-live=polite`·`aria-atomic=true` 접근성 계약을 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; recoveryPlaybackLabel assertions for `사용자 진행`, `일시정지`, `자동 진행 · 3초마다`; guide-recovery-playback-status with aria-live=polite and aria-atomic=true; status ok; events 14",
+      "captured_at": "2026-10-05T23:40:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RECOVERY-STATUS-A11Y",
+      "claim_refs": ["C-163"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RECOVERY-STATUS-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GitHub Pages에서 수면·회복 상태 문구와 보조공학 속성이 세 화면 폭에서 실제로 갱신되는지 확인했다.",
+      "locator": "temporary Playwright Chromium fallback script outside repository; public https://kradavid.github.io/gaba_info/?view=guide&qa=recovery-status-a11y-20261006#recovery-break; 320/390/1440px initial `자동 진행 · 3초마다`, `잠시 멈춤` click -> `일시정지`, aria-live=polite, aria-atomic=true, heading `GABA를 모르면 노화는 가속됩니다.`, document scrollWidth equals viewport, page errors 0, console error messages 0; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T23:53:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-RECOVERY-STATUS-A11Y",
+      "claim_refs": ["C-003", "C-004", "C-163"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-STATUS-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면·회복 상태 접근성 개선 PR #405가 필수 검사를 통과해 main merge commit 0880c55로 병합되었고 Pages 배포·라이브 smoke·release-status·site-quality가 성공했다.",
+      "locator": "PR #405; code commit d267b28; main merge commit 0880c55b1de66bffeeb0d9d86fd97f51ed660d23; main workflow 37390751297; site-quality workflow 37390559874; release-verify 112034977266, worker-readiness 112035367700, deploy-pages 112035389843, smoke-live 112035441643 and release-status 112035511747 successful; deploy-worker 112035390696 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37390751297",
+      "captured_at": "2026-10-05T23:50:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RECOVERY-STATUS-A11Y",
+      "claim_refs": ["C-001", "C-002", "C-163"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-STATUS-A11Y-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 수면·회복 상태의 시각·보조공학 전달과 공개 구조 품질이 main candidate와 일치한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 0880c55b1de66bffeeb0d9d86fd97f51ed660d23; generatedAt 2026-10-05T23:51:25.946Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 320/390/1440px initial `자동 진행 · 3초마다`, click -> `일시정지`, aria-live=polite, aria-atomic=true, scrollWidth equals viewport, page errors 0, console errors 0; structural audit missing internal links 0, duplicate IDs 0, missing alt 0, broken aria-controls 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=recovery-status-a11y-20261006#recovery-break",
+      "captured_at": "2026-10-05T23:53:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RECOVERY-STATUS-A11Y",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-163"]
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — 0880c55 — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `0880c55b1de66bffeeb0d9d86fd97f51ed660d23`와 71개 bundle hash를 확인했다.
+- AC-002/AC-003 수면·회복 카드의 자동 진행 상태·수동 일시정지·보조공학 상태 전달: PASS. 공개 320px·390px·1440px에서 `자동 진행 · 3초마다` → `일시정지` 전환, `aria-live="polite"`·`aria-atomic="true"`, 제목, 14단계 경로, viewport와 동일한 scrollWidth, page errors·console errors 0을 확인했다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. workflow `37390751297`의 Pages·라이브 smoke·release-status와 site-quality `37390559874`도 성공했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-STATUS-A11Y-20261006`, `E-UI-CONTRACT-RECOVERY-STATUS-A11Y-20261006`, `E-PLAYWRIGHT-RECOVERY-STATUS-A11Y-20261006`, `E-DEPLOY-PIPELINE-RECOVERY-STATUS-A11Y-20261006`, `E-LIVE-PUBLIC-RECOVERY-STATUS-A11Y-20261006`.
+
 ## Current Release Recheck — befeea5 — 2026-10-07
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `befeea5590f11218ab7b9932a4dde06004bc8f57`와 71개 bundle hash를 확인했다.
