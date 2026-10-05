@@ -877,7 +877,18 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
           ))}
         </div>
       ) : null}
-      <p className="guide-outcome-chart-note"><span aria-hidden="true">↔</span>{topic.chart.note}</p>
+      {comparisonChart ? (
+        <p className="guide-outcome-chart-note guide-outcome-chart-note-visual" aria-label={comparisonChart.note}>
+          <strong className="guide-outcome-chart-note-label">읽는 법</strong>
+          <span className="guide-outcome-chart-note-keys">
+            <span className="guide-outcome-chart-note-key is-direction"><ArrowUpRight size={13} strokeWidth={2.2} aria-hidden="true" /><ArrowDownRight size={13} strokeWidth={2.2} aria-hidden="true" />변화 방향</span>
+            <span className="guide-outcome-chart-note-key is-compare"><i aria-hidden="true" />두 조건의 상대 비교</span>
+          </span>
+          <small className="guide-outcome-chart-note-limit">그림 크기 ≠ 실제 효과 크기</small>
+        </p>
+      ) : (
+        <p className="guide-outcome-chart-note"><span aria-hidden="true">↔</span>{topic.chart.note}</p>
+      )}
     </figure>
   );
 });
