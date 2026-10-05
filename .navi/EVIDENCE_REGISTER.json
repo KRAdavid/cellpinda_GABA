@@ -1126,6 +1126,17 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-113",
+      "statement": "공개 GABA 안내서·개인 계정·로컬 운영 경로는 제품·주문용 공용 콘텐츠를 불필요하게 먼저 요청하지 않고, 연구·제품·공유·챌린지 경로에서만 기존 공용 콘텐츠 로딩을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005",
+        "E-UI-CONTRACT-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005",
+        "E-DEPLOY-PIPELINE-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005",
+        "E-LIVE-PUBLIC-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9573,6 +9584,50 @@
       "captured_at": "2026-10-05T03:51:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-MAP-CONTEXT",
       "claim_refs": ["C-002", "C-003", "C-112"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GABA 안내서 경로에서 공용 제품·주문 콘텐츠 요청을 건너뛰고 비가이드 경로의 콘텐츠 로딩을 유지하는 PR #301 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #301 source commit 2ff9fea; pnpm run validate:ui-contract PASS including public-guide content-boundary assertion; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1610007 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/301",
+      "captured_at": "2026-10-05T04:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-PUBLIC-GUIDE-CONTENT-BOUNDARY",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-113"]
+    },
+    {
+      "id": "E-UI-CONTRACT-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 guide·account·local admin·operations 경로의 공용 콘텐츠 요청 차단과 연구·제품·공유·챌린지 경로의 기존 로딩 계약 보존을 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs public-guide content-boundary assertion; src/App.tsx derives shouldLoadContent from guide/account/admin/operations view flags and short-circuits those requests; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/301",
+      "captured_at": "2026-10-05T04:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-PUBLIC-GUIDE-CONTENT-BOUNDARY",
+      "claim_refs": ["C-003", "C-113"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 안내서 콘텐츠 경계 PR #301이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #301 merge main commit 72f3cd986633974a46aca460eaa23e3c05ccce11; PR checks release-verify and site-quality-verify successful; main workflow 37262103043 with release-verify 111611278053, worker-readiness 111611478784, deploy-pages 111611495121, smoke-live 111611537780 and release-status 111611587028 successful; deploy-worker 111611495889 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37262103043",
+      "captured_at": "2026-10-05T04:07:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-PUBLIC-GUIDE-CONTENT-BOUNDARY",
+      "claim_refs": ["C-001", "C-002", "C-113"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 공개 안내서 콘텐츠 경계 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=72f3cd986633974a46aca460eaa23e3c05ccce11 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 72f3cd986633974a46aca460eaa23e3c05ccce11; generatedAt 2026-10-05T04:07:36.396Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-05T04:08:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-PUBLIC-GUIDE-CONTENT-BOUNDARY",
+      "claim_refs": ["C-002", "C-003", "C-113"]
     }
   ]
 }

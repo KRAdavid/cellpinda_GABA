@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 72f3cd9
+
+- 공격 관점에서 확인한 실패 모드는 공개 GABA 안내서에 제품·주문용 콘텐츠 요청이 먼저 발생해 첫 화면 네트워크 비용이 늘고, 제품 독립 안내서가 공용 상거래 데이터에 불필요하게 결합되는 것이었다. PR #301에서 guide·account·local admin·operations 경로를 분리하고, 필요한 연구·제품·공유·챌린지 경로의 로딩은 유지했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 다만 실제 네트워크 waterfall·브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 환경에서 증명하지 않았으므로 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-UI-CONTRACT-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-DEPLOY-PIPELINE-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-LIVE-PUBLIC-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005.
+
 ## Recheck — 2026-10-05 — 594352e
 
 - 공격 관점에서 확인한 실패 모드는 모바일 연구 지도에서 중심의 현재 주제가 너무 작게 표시되고, 지도 선택이 보조기기에 일반 장식 영역처럼 전달되어 현재 선택과 다음 연구 카드의 관계를 잃는 것이었다. PR #299에서 지도에 명명된 group 역할과 주제별 `aria-pressed` 상태를 추가하고 모바일 현재 주제 문구를 확대했다.
