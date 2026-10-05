@@ -1340,6 +1340,17 @@
         "E-LIVE-PUBLIC-LARGE-TEXT-RESEARCH-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-133",
+      "statement": "첫 화면의 핵심 문장은 `저속노화, 회복하는 밤에서 시작됩니다. 그 회복의 신호를 GABA에서 읽습니다`로 문장부호와 줄바꿈 경계를 유지해 390px·1440px 공개 화면에서 자연스럽게 읽힌다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-HERO-PUNCTUATION-20261005",
+        "E-UI-CONTRACT-HERO-PUNCTUATION-20261005",
+        "E-DEPLOY-PIPELINE-HERO-PUNCTUATION-20261005",
+        "E-LIVE-PUBLIC-HERO-PUNCTUATION-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10601,6 +10612,50 @@
       "captured_at": "2026-10-05T10:47:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-LARGE-TEXT-RESEARCH",
       "claim_refs": ["C-002", "C-003", "C-132"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-HERO-PUNCTUATION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 main commit의 production build는 첫 화면 문장부호 보정을 포함해 11개 정적 경로·71개 배포 파일·성능 예산 검사를 통과했다.",
+      "locator": "pnpm run build; candidateSha b463980df2d9e9ff702e93c6e96e9fe4d6f7035e; routes 11; files 71; total assets 1618787 <= 1650000; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; validate-ui-contract, release manifest, static bundle and performance passed",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\dist",
+      "captured_at": "2026-10-05T11:03:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-HERO-PUNCTUATION",
+      "claim_refs": ["C-001", "C-002", "C-133"]
+    },
+    {
+      "id": "E-UI-CONTRACT-HERO-PUNCTUATION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 첫 화면 H1의 문장부호와 줄바꿈 경계를 회귀 검사한다.",
+      "locator": "pnpm run validate:ui-contract; status ok; hero heading marker now requires `회복하는 밤에서 시작됩니다.` before the second sentence",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-05T10:40:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-HERO-PUNCTUATION",
+      "claim_refs": ["C-003", "C-133"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-HERO-PUNCTUATION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면 문장부호 보정 commit b463980이 main 공개 파이프라인에서 release-verify·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "main commit b463980df2d9e9ff702e93c6e96e9fe4d6f7035e; workflow 37300208043; release-verify 111730863542, worker-readiness 111731300027, deploy-pages 111731331628, smoke-live 111731498030 and release-status 111731579609 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37300208043",
+      "captured_at": "2026-10-05T11:03:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-HERO-PUNCTUATION",
+      "claim_refs": ["C-001", "C-002", "C-133"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HERO-PUNCTUATION-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본의 첫 화면 H1은 390px·1440px 모두 `저속노화, 회복하는 밤에서 시작됩니다. 그 회복의 신호를 GABA에서 읽습니다`로 읽히며, 가로 넘침과 runtimeErrors가 없다.",
+      "locator": "cache-disabled Chrome CDP fallback at https://kradavid.github.io/gaba_info/?qa=hero-punctuation-{390|1440}-20261005; title `저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide`; H1 textContent contains the period after `시작됩니다`; sections 17; buttons 64; scrollWidth 390/1425; research map/cards 5/5; final active `이야기 공유`; runtimeErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=hero-punctuation-390-20261005",
+      "captured_at": "2026-10-05T11:04:06Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-HERO-PUNCTUATION",
+      "claim_refs": ["C-002", "C-003", "C-133"]
     }
   ]
 }

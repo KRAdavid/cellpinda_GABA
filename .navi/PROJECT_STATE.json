@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T10:48:04Z",
+  "updated_at": "2026-10-05T11:04:06Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T10:48:04Z"
+    "last_run_at": "2026-10-05T11:04:06Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2307,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T10:48:04Z"
+    "last_run_at": "2026-10-05T11:04:06Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4920,6 +4920,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T10:48:04Z"
+    },
+    {
+      "id": "H-203",
+      "event": "첫 화면의 핵심 문장에 빠져 있던 문장부호를 보정해 `회복하는 밤에서 시작됩니다. 그 회복의 신호를 GABA에서 읽습니다`로 자연스러운 두 문장 흐름을 만들었다. 390px·1440px 공개본에서 H1 textContent·가로 폭·연구 지도 5개·연구 카드 5개·마지막 이야기 공유 장·runtimeErrors 0을 확인했고 UI 계약·production build·배포·라이브 smoke가 통과했다. 새 CRITICAL/MAJOR 결함은 없었으며 실제 사용자 독해성·브라우저 플러그인 부재·Safari/iOS/Android 실기기·독립 과학·규제 감수는 기존 외부 검증 항목으로 유지한다. 결과를 C-133과 네 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T11:04:06Z"
     }
   ]
 }
