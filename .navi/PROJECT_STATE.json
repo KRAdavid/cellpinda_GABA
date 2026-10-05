@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T21:48:15.335239Z",
+  "updated_at": "2026-10-05T22:06:24.717697Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5173,6 +5173,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T21:46:00Z"
+    },
+    {
+      "id": "H-236",
+      "event": "v127에서 전문가 영상 gallery의 원격 썸네일이 지연되거나 unavailable해도 각 카드가 제목·주제·회차를 표시하도록 editorial fallback poster를 보강하고, 카드별 이미지 crop을 달리했다. 390px·1440px 로컬 및 공개 Playwright Chromium fallback에서 첫 네 카드의 poster identity·crop variation·가로폭 안정성, 두 번째 영상 선택 후 aria-pressed=true·feature title·iframe title을 확인했다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #394는 main `d228a3d`로 병합되었고 workflow `37379778619`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `d228a3df717136cfe3ab27c5ef092d2ea62bf320`·HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-158과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T22:04:00Z"
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Audit Report
 
+## Expert Video Editorial Fallback Posters — d228a3d — 2026-10-06
+
+- v127에서 원격 YouTube 썸네일이 지연되거나 unavailable한 경우에도 전문가 영상 gallery가 각 영상의 제목·주제·회차를 poster 안에 표시하도록 보강했다. 카드마다 자연 이미지 crop을 달리해 같은 주제 영상이 반복적으로 보이는 인상을 줄였고, 기존 선택 즉시 재생·공유 흐름은 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. Playwright Chromium fallback 로컬·공개 390px·1440px에서 첫 네 카드의 poster identity와 crop variation, document scrollWidth, 두 번째 카드 선택 후 `aria-pressed=true`·feature title·iframe title·runtime errors 0을 확인했다.
+- PR #394는 main `d228a3d`로 병합되었고 workflow `37379778619`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `d228a3df717136cfe3ab27c5ef092d2ea62bf320`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FALLBACK-POSTER-20261006.
+
 ## Mobile Video Filter Accessibility Hardening — 7fff775 — 2026-10-06
 
 - v126에서 모바일 전문가 영상 필터 rail에 `role=region`과 좌우 이동 안내 라벨을 부여하고, 수평 `overscroll-behavior-x: contain`으로 페이지와의 스크롤 전파를 제한했다. 기존 44px 터치 영역·시작 cue 표시·끝 cue 숨김·시작점 복원·마지막 주제 선택은 유지했다.

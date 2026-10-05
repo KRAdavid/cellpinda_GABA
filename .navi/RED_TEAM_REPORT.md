@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Expert Video Editorial Fallback Posters — 2026-10-06 — d228a3d
+
+- 공격 관점에서 원격 썸네일을 차단한 390px·1440px 공개 화면을 확인했다. 첫 네 카드가 제목·주제·회차를 잃지 않고, crop position이 달라지며, 두 번째 카드 선택이 feature title·iframe title·aria-pressed 상태를 함께 갱신했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다.
+- 공개 validator는 main candidate `d228a3df717136cfe3ab27c5ef092d2ea62bf320`를 반환했고 Pages 배포·라이브 smoke·release-status는 성공했다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FALLBACK-POSTER-20261006.
+
 ## Mobile Video Filter Accessibility Hardening — 2026-10-06 — 7fff775
 
 - 공격 관점에서 320px 모바일 rail의 보조공학 의미, 좌우 이동 안내, 수평 overscroll, 44px 터치 영역, 시작·끝·복귀 cue와 마지막 주제 선택을 비교했다. region/aria-label과 `contain`이 공개 로컬·라이브에서 일치하고 document scrollWidth는 320으로 유지됐다.

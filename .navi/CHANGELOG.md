@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 fallback poster 고도화·공개 배포 — d228a3d — 2026-10-06
+
+- 원격 썸네일이 unavailable해도 전문가 영상 poster 안에서 제목·주제·회차가 보이도록 보강하고, 카드별 이미지 crop을 달리했다. 갤러리의 editorial 톤과 선택 즉시 재생·공유 흐름은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 390px·1440px 검증을 통과했고 PR #394가 main `d228a3d`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+- 공개 390px·1440px에서 두 번째 영상 선택 후 포스터·feature title·iframe title·aria-pressed=true·가로폭 안정성을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FALLBACK-POSTER-20261006.
+
 ## 모바일 전문가 영상 필터 접근성·overscroll 고도화 — 7fff775 — 2026-10-06
 
 - 모바일 전문가 영상 필터 rail에 보조공학용 region과 좌우 이동 안내를 추가하고, 수평 overscroll 전파를 제한했다. 44px 터치 영역·시작/끝/복귀 cue·마지막 주제 선택과 공개 과학 카피·제품 독립 경계는 유지했다.

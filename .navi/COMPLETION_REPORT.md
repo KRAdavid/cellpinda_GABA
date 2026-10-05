@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — d228a3d — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `d228a3df717136cfe3ab27c5ef092d2ea62bf320`와 71개 bundle hash를 확인했다.
+- AC-003/AC-004 전문가 영상 fallback poster identity·crop variation·가로폭·선택 흐름: PASS. 공개 390px·1440px에서 첫 네 카드의 제목·주제·회차·crop, 두 번째 영상 선택·aria-pressed=true·feature title·iframe title·scrollWidth 390/1440·runtime errors 0을 확인했다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. workflow `37379778619`의 Pages·라이브 smoke·release-status도 성공했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FALLBACK-POSTER-20261006.
+
 ## Current Release Recheck — 7fff775 — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `7fff775a6735c85f0ae7ff2362bf3604d19085d0`와 71개 bundle hash를 확인했다.

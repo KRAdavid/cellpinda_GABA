@@ -1624,6 +1624,18 @@
         "E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-A11Y-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-158",
+      "statement": "전문가 영상 gallery의 원격 썸네일이 지연되거나 unavailable한 경우에도 각 카드가 영상 제목·주제·회차를 editorial poster로 식별하고, 카드별 이미지 crop을 달리한다. 390px·1440px에서 가로폭과 영상 선택 흐름은 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+        "E-UI-CONTRACT-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+        "E-PLAYWRIGHT-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+        "E-LIVE-PUBLIC-MOBILE-VIDEO-FALLBACK-POSTER-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12039,6 +12051,58 @@
       "captured_at": "2026-10-05T21:46:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MOBILE-VIDEO-FILTER-A11Y",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-157"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 fallback poster 개선 commit 49a2d72가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 49a2d72674d7f4d8626fdfc9754de5d060077536; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1630254 <= 1650000",
+      "captured_at": "2026-10-05T21:57:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-MOBILE-VIDEO-FALLBACK-POSTER",
+      "claim_refs": ["C-001", "C-003", "C-158"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 fallback poster의 카드별 crop variation과 원격 썸네일 unavailable 상태의 제목 식별 보존을 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v127 expert-video fallback poster title/sequence and videoPosterPosition assertions; status ok; events 16",
+      "captured_at": "2026-10-05T21:57:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-MOBILE-VIDEO-FALLBACK-POSTER",
+      "claim_refs": ["C-158"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback으로 로컬 390px·1440px에서 원격 thumbnail을 차단한 fallback poster의 제목·주제·회차·crop variation과 영상 선택 흐름을 확인했다.",
+      "locator": "temporary Playwright script outside repository at http://127.0.0.1:4191/?view=guide#expert-videos; 390/1440px: first four poster titles and metadata visible; crop positions 42% 46%, 50% 52%, 58% 58%, 42% 46%; document scrollWidth equals viewport; second card click -> aria-pressed true, feature title `갱년기와 수면, GABA에 대한 질문`, iframe title and YouTube embed present; runtime errors 0 in interaction script; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T21:59:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-MOBILE-VIDEO-FALLBACK-POSTER",
+      "claim_refs": ["C-003", "C-004", "C-158"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 fallback poster 개선 PR #394가 필수 검사를 통과해 main merge commit d228a3d로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #394; code commit 49a2d72674d7f4d8626fdfc9754de5d060077536; main merge commit d228a3df717136cfe3ab27c5ef092d2ea62bf320; main workflow 37379778619; release-verify 111998454290, worker-readiness 111998961430, deploy-pages 111998993051, smoke-live 111999085094 and release-status 111999168556 successful; deploy-worker 111998993471 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37379778619",
+      "captured_at": "2026-10-05T22:02:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-MOBILE-VIDEO-FALLBACK-POSTER",
+      "claim_refs": ["C-001", "C-002", "C-158"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-VIDEO-FALLBACK-POSTER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 원격 thumbnail이 없어도 전문가 영상 poster가 제목·주제·회차를 표시하고, 390px·1440px에서 두 번째 영상 선택과 iframe 상태·가로폭 안정성을 확인했다.",
+      "locator": "pnpm exec node scripts/validate-live-public.mjs; page 200; runtimeMode STATIC; candidateSha d228a3df717136cfe3ab27c5ef092d2ea62bf320; generatedAt 2026-10-05T22:02:47.342Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Playwright Chromium fallback public with i.ytimg.com and YouTube embed routes blocked: 390/1440px first four poster titles/metadata/crop positions visible, second card -> aria-pressed true, feature title and iframe title updated, document scrollWidth 390/1440, errors []; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=video-poster-20261006#expert-videos",
+      "captured_at": "2026-10-05T22:03:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MOBILE-VIDEO-FALLBACK-POSTER",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-158"]
     }
   ]
 }
