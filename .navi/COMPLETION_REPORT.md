@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — 27445e9 — 2026-10-06
+
+- AC-004 로컬 초소형 모바일 헤더의 메뉴·읽기 크기 버튼 간격, 가로폭, 320px 토글: PASS. 280·300·320·350·390·1440px에서 overlap 없음과 viewport 일치 scrollWidth를 확인했다.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 PR #385 필수 검증: PASS.
+- AC-001 새 main candidate의 공개 URL·Pages 배포·라이브 smoke: PENDING. main workflow는 runner 후처리 queue로 취소되었고, 현재 공개 validator candidate는 이전 `ffd7c2e`다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-ULTRA-NARROW-HEADER-20261006, E-UI-CONTRACT-ULTRA-NARROW-HEADER-20261006, E-PLAYWRIGHT-ULTRA-NARROW-HEADER-20261006, E-DEPLOY-PIPELINE-ULTRA-NARROW-HEADER-20261006.
+
 ## Current Release Recheck — ffd7c2e — 2026-10-06
 
 - AC-001 공개 URL·정적 번들·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·12개 claim·6개 master record·1개 product·6개 share page·teaser HOLD를 확인했다.
