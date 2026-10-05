@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 수면·회복 자동 진행 상태 가독성·공개 배포 — befeea5 — 2026-10-07
+
+- 수면·회복 카드의 현재 동작을 `자동 진행 · 3초마다`·`일시정지`·`사용자 진행`으로 짧고 명확하게 표시하고, 상태 문구의 시각적 우선순위를 높였다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 공개 상호작용 검증을 통과했고 PR #403이 main `befeea5`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-UI-CONTRACT-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-PLAYWRIGHT-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-LABEL-20261007`.
+
 ## 전문가 영상 feature 상태 동기화·공개 배포 — 28ff210 — 2026-10-07
 
 - 전문가 영상 feature 메타를 카드 상태와 연결해 `선택하면 바로 재생`·`준비 중`·`재생 중`을 실제 iframe lifecycle에 맞춰 표시했다.

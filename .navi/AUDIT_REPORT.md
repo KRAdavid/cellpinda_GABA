@@ -1,5 +1,14 @@
 # Audit Report
 
+## Recovery Autoplay Status Clarity — befeea5 — 2026-10-07
+
+- 수면·회복 14단계 카드의 자동 진행 상태 문구를 `자동 진행 · 3초마다`로 정리하고, 사용자가 멈추면 `일시정지`, 모션 감소 환경에서는 `사용자 진행`으로 즉시 구분되도록 보강했다. 작은 상태 문구도 별도 굵기로 읽히게 해 고령 사용자의 현재 동작 인지를 돕는다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 공개 Playwright Chromium fallback 320px·390px·1440px에서 초기 상태 `자동 진행 · 3초마다`, `잠시 멈춤` 클릭 후 `일시정지`, 제목 `GABA를 모르면 노화는 가속됩니다.`, viewport와 동일한 scrollWidth, page errors 0·console errors 0을 확인했다.
+- PR #403은 main `befeea5`로 병합되었고 workflow `37388830638`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 site-quality workflow `37388682654`가 성공했다. 공개 validator는 candidate `befeea5590f11218ab7b9932a4dde06004bc8f57`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-UI-CONTRACT-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-PLAYWRIGHT-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-LABEL-20261007`.
+
 ## Expert Video Feature State Synchronization — 28ff210 — 2026-10-07
 
 - v130에서 전문가 영상 feature 영역의 상태 문구가 초기 선택 상태에서도 고정되어 카드 lifecycle과 어긋나던 문제를 보완했다. feature 메타를 `선택하면 바로 재생`·`준비 중`·`재생 중`으로 연결해 카드 badge와 같은 상태를 읽도록 했다.

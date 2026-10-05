@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recovery Autoplay Status Clarity — 2026-10-07 — befeea5
+
+- 공격 관점에서 320px·390px·1440px 공개 수면·회복 카드의 상태 문구와 조작 결과를 대조했다. 자동 상태는 `자동 진행 · 3초마다`, 토글 클릭 후에는 `일시정지`로 바뀌고, `GABA를 모르면 노화는 가속됩니다.` 제목과 14단계 경로가 유지된다.
+- 세 폭 모두 document scrollWidth가 viewport와 같았고 page errors 0·console error 0이었다. 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-PLAYWRIGHT-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-LABEL-20261007`.
+
 ## Expert Video Feature State Synchronization — 2026-10-07 — 28ff210
 
 - 공격 관점에서 390px·1440px 공개 전문가 영상 화면의 feature 메타, 선택 카드 badge, iframe lifecycle을 대조했다. 초기에는 `선택하면 바로 재생`, 두 번째 카드 선택 직후에는 `준비 중`, iframe 준비 후에는 feature와 카드 모두 `재생 중`으로 일치했다.
