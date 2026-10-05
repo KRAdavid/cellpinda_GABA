@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Public Recheck — 2026-10-06 — 8a6260f
+
+- 공격 관점에서 연구 지도 중심 보조 문구의 모바일 축소·색 대비·중심 원과의 충돌, 연구 영역 선택 후 카드 포커스·스크롤, 가로 넘침과 콘솔 오류를 확인했다.
+- 공개 390px에서 보조 문구는 9px·900 weight·청록으로 계산되고, 1440px에서는 10px·900 weight·같은 토큰으로 계산됐다. 인지 영역 선택 후 `aria-pressed=true`, `research-cognition` 포커스와 도착 카드가 확인됐으며 scrollWidth는 390·1425, runtime errors는 0이었다. 새 CRITICAL/MAJOR 결함은 없다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-CDP-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-LEGIBILITY-20261006.
+
 ## Public Recheck — 2026-10-06 — 8724f4c
 
 - 공격 관점에서 모바일·데스크톱 전문가 영상 갤러리의 카드 선택, 주제 필터, 자동 재생 iframe, 포커스 이동, 가로 넘침과 콘솔 오류를 확인했다.

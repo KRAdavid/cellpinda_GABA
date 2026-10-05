@@ -1,5 +1,14 @@
 # Audit Report
 
+## Public Release Recheck — 8a6260f — 2026-10-06
+
+- 연구 지도 중심의 `5개 연구 영역` 보조 문구가 모바일에서 작게 인식될 수 있던 잔여 가독성 리스크를 보정했다. 데스크톱은 10px, 모바일은 9px, weight 900과 청록 강조를 사용해 중심 원의 규모 안내를 연구 지도와 같은 시각 계층으로 맞췄다.
+- PR #378과 main workflow `37352455204`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 모두 성공했다. 공개 validator는 candidate `8a6260f4342be4979cf28d4c7f3ae46f6f67b0a6`에서 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- 공개 Chrome CDP fallback 390·1440px에서 계산 스타일·scrollWidth 390·1425·인지 연구 영역 선택 후 카드 포커스·스크롤·콘솔 오류 0을 확인했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser 플러그인 부재로 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-UI-CONTRACT-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-CDP-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-DEPLOY-PIPELINE-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-LEGIBILITY-20261006.
+
 ## Public Release Recheck — 8724f4c — 2026-10-06
 
 - 최신 GitHub Pages 공개본에서 전문가 영상 갤러리의 9개 카드·주제 필터·선택 즉시 재생 흐름을 390·1440px로 재현했다. 두 번째 카드 선택 후 제목·선택 상태·자동 재생 iframe·feature 포커스가 갱신되고, scrollWidth 390·1425와 runtime console errors 0을 유지했다.

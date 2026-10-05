@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 지도 중심 보조 문구 고도화·공개 배포 완료 — 8a6260f — 2026-10-06
+
+- 연구 지도 중심의 `5개 연구 영역` 보조 문구를 모바일 9px·데스크톱 10px·900 weight·청록 강조로 보강해 나이가 있는 방문자도 지도 규모를 빠르게 읽도록 정리했다.
+- PR #378과 main workflow `37352455204`의 release-verify·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- 공개 Chrome CDP 390·1440px에서 계산 스타일·가로 폭·인지 연구 영역 선택 후 카드 포커스·스크롤·runtime errors 0을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-UI-CONTRACT-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-CDP-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-DEPLOY-PIPELINE-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-LEGIBILITY-20261006.
+
 ## NAVI 공개 재점검·전문가 영상 흐름 확인 — 8724f4c — 2026-10-06
 
 - 공개 390·1440px에서 전문가 영상 9개 카드와 주제 필터를 확인하고, 카드 선택 시 선택 영상·자동 재생 iframe·포커스가 함께 갱신되는지 재현했다.
