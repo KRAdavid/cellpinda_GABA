@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T02:20:30.252715Z",
+  "updated_at": "2026-10-05T02:35:50.229170Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -483,7 +483,11 @@
         "E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005",
         "E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005",
         "E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005",
-        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005"
+        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005",
+        "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1094,7 +1098,11 @@
         "E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005",
         "E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005",
         "E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005",
-        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005"
+        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005",
+        "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005"
       ],
       "owner": "QA"
     },
@@ -1316,7 +1324,11 @@
         "E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005",
         "E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005",
         "E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005",
-        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005"
+        "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005",
+        "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -4627,6 +4639,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T02:18:00Z"
+    },
+    {
+      "id": "H-178",
+      "event": "연구 카드를 읽은 뒤 출처 읽기 장면에서 공유하면 선택한 연구의 제목·관찰 결과·딥링크가 유지되지 않고 일반 출처 읽기 장으로 공유될 수 있는 맥락 손실 리스크를 확인하고 PR #291에서 research·reading-note 장면의 공유 대상을 선택 연구로 연결했다. 연구 선택 공유는 research-{id} 해시와 연구별 제목·관찰 결과 문장을 사용하고, 전문가 영상과 다른 장의 공유 목적지는 기존대로 유지한다. v99 UI 계약으로 공유 경계를 고정했으며 연구 수치·출처 데이터·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #291 checks, main workflow 37255772910의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate efb3f20540f88c0909e89826238c7d70f9c7ab50는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. 브라우저 자동화와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T02:35:00Z"
     }
   ]
 }

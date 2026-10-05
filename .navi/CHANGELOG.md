@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 선택 연구 공유 맥락 고도화 — efb3f20 — 2026-10-05
+
+- 연구 카드나 출처 읽기 장면에서 공유하면 선택한 연구의 제목·관찰 결과·`research-{id}` 딥링크가 유지되도록 보강했다. 전문가 영상과 다른 장의 공유 목적지는 그대로 유지한다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #291 checks, main workflow 37255772910, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005.
+
 ## 연구 선택과 출처 읽기 연결 고도화 — 4143e45 — 2026-10-05
 
 - 연구 카드에서 주제를 선택하면 출처 읽기 패널도 선택된 연구의 출처·대상·측정 항목·연구 설계로 이어지도록 보강했다. 직접 출처 읽기 진입은 인지 연구를 기본 예시로 유지한다.
