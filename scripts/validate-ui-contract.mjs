@@ -518,6 +518,15 @@ requireMatch(publicGuideStyles, /v104 mobile reading cue[\s\S]*?guide-hero-story
 requireMatch(publicGuideStyles, /v106 mobile reading cue contrast[\s\S]*?guide-hero-story \.guide-hero-scroll\{[^}]*border:1px solid[^}]*background:rgba\(255,255,255,\.78\)/, 'mobile public guide reading cue must remain legible over the photographic hero surface');
 requireMatch(publicGuideStyles, /v107 narrow phone chart header[\s\S]*?@media\(max-width:430px\)[\s\S]*?guide-outcome-comparison-head\{[^}]*grid-template-columns:minmax\(66px,\.64fr\)[\s\S]*?guide-outcome-comparison-head>span:not\(:first-child\)\{[^}]*white-space:normal/, 'narrow-phone research comparison headers must wrap inside the 320px reading frame');
 requireMatch(publicGuideStyles, /v112 mobile comparison legend[\s\S]*?grid-template-areas:"axis" "reference" "result"[\s\S]*?guide-outcome-comparison-head>span:not\(:first-child\)\{[^}]*white-space:nowrap;word-break:keep-all/, 'mobile research comparison legends must separate the axis from readable condition labels');
+for (const marker of [
+  /잠은 멈춤이 아니라,<br \/>\{' '\}\s*회복이 시작되는 시간입니다/,
+  /GABA는 연구실을 넘어<br \/>\{' '\}\s*여러 분야로 이어지고 있습니다/,
+  /발효는 GABA를<br \/>\{' '\}\s*식품의 언어로 바꾸었습니다/,
+  /성장호르몬 연구는<br \/>\{' '\}\s*키 성장과 어떻게 연결될까요\?/,
+  /의사와 과학자들은<br \/>\{' '\}\s*GABA를 어떻게 설명할까요\?/,
+  /연구를 이해하는<br \/>\{' '\}\s*마지막 단계/,
+  /1950년의 작은 발견은<br \/>\{' '\}\s*오늘의 연구 지도가 되었습니다/,
+]) requireMatch(publicGuide, marker, `public guide heading must preserve a semantic word boundary around line breaks: ${marker}`);
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:guide-mobile-scroll-cue/, 'mobile reading cue must use a restrained directional motion');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:none}/, 'mobile reading cue must respect reduced-motion preferences');
 requireMatch(publicGuide, /<p className="guide-section-number">수면과 회복의 연결<\/p>/, 'recovery bridge label must read as a natural chapter connection');
