@@ -1226,6 +1226,21 @@
   .guide-final{padding-top:110px}
 }
 
+/* v108 chapter entry rhythm: scroll-margin already clears the sticky header, so avoid a second oversized top gap. */
+@media(min-width:701px){
+  .guide-section.guide-story-section{padding-top:72px}
+  .guide-final{padding-top:72px}
+}
+@media(max-width:700px){
+  .guide-section.guide-story-section{padding-top:58px}
+  .guide-final{padding-top:58px}
+}
+
+/* Programmatic chapter focus supports screen-reader navigation without drawing a box around editorial headings. */
+.gaba-guide h1[tabindex="-1"]:focus-visible,
+.gaba-guide h2[tabindex="-1"]:focus-visible,
+.gaba-guide h3[tabindex="-1"]:focus-visible{outline:0}
+
 /* v27 mobile chapter labels: keep the small editorial landmarks visible on narrow screens. */
 @media(max-width:700px){
   .guide-section-number{display:block}
