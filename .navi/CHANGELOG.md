@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 최종 공개 증적 재검증 및 NAVI 상태 동기화 — 791450b — 2026-10-05
+
+- NAVI 감사·레드팀·증거 문서를 main에 병합하고 최종 공개 배포를 완료했다. workflow `37328933408`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator와 320·390·1440px 연구 도표 QA에서 HTTP 200·STATIC, 두 조건 나란히 비교, GABA 결과 강조, 가로 폭, runtime 오류 없음을 재확인했다.
+- 최종 공개 증적을 NAVI에 추가했으며 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 실기기·브라우저 전체 조합·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-DEPLOY-PIPELINE-NAVI-SYNC-20261006, E-LIVE-PUBLIC-NAVI-SYNC-20261006.
+
 ## 모바일 연구 결과 비교 도표 고도화 및 공개 재검증 — 0acdb90 — 2026-10-05
 
 - 좁은 화면에서 비교 조건과 GABA 섭취 조건을 세로로 읽어야 했던 연구 결과 도표를 같은 행의 두 칸 비교 구조로 바꿨다. GABA 결과 칸의 색상 강조, 방향 문구, 측정 지표는 유지해 연구 결과를 빠르게 비교할 수 있다.
