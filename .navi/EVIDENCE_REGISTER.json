@@ -1660,6 +1660,18 @@
         "E-LIVE-PUBLIC-VIDEO-STATE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-161",
+      "statement": "전문가 영상 feature 영역의 메타 상태가 실제 재생 lifecycle과 일치해 초기에는 `선택하면 바로 재생`, 선택 직후에는 `준비 중`, iframe 준비 후에는 `재생 중`으로 갱신되고, 선택 카드의 badge와 같은 상태를 전달한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-VIDEO-FEATURE-STATE-20261007",
+        "E-UI-CONTRACT-VIDEO-FEATURE-STATE-20261007",
+        "E-PLAYWRIGHT-VIDEO-FEATURE-STATE-20261007",
+        "E-DEPLOY-PIPELINE-VIDEO-FEATURE-STATE-20261007",
+        "E-LIVE-PUBLIC-VIDEO-FEATURE-STATE-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12231,6 +12243,58 @@
       "captured_at": "2026-10-05T22:45:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-VIDEO-STATE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-160"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-FEATURE-STATE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 feature 메타 상태 동기화 commit 789c675가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 789c67534d246a63dad121399ca53aebbf3dd571; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1631265 <= 1650000; candidateSha 28ff210aedeb2c0e26f138a8541806622e241764",
+      "captured_at": "2026-10-05T23:00:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261007-VIDEO-FEATURE-STATE",
+      "claim_refs": ["C-001", "C-003", "C-161"]
+    },
+    {
+      "id": "E-UI-CONTRACT-VIDEO-FEATURE-STATE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 feature 메타의 초기·준비·재생 문구와 카드 상태 문구가 같은 lifecycle을 사용하는지 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; getExpertVideoState featureLabel assertions for `선택하면 바로 재생`, `준비 중`, `재생 중`; status ok; events 14",
+      "captured_at": "2026-10-05T23:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-VIDEO-FEATURE-STATE",
+      "claim_refs": ["C-161"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-VIDEO-FEATURE-STATE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GitHub Pages에서 전문가 영상 feature 메타가 선택하면 바로 재생·준비 중·재생 중으로 순차 전환되고 선택 카드 badge와 일치하는지 확인했다.",
+      "locator": "temporary Playwright Chromium fallback script outside repository; public https://kradavid.github.io/gaba_info/?view=guide&qa=feature-state-final-20261007#expert-videos; 390/1440px initial feature meta `선택하면 바로 재생`, second video click after 260ms `준비 중`, after 1900ms `재생 중`, card badge `재생 중`, iframe count 1, document scrollWidth equals viewport, page errors 0, console error messages 0; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T23:04:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261007-VIDEO-FEATURE-STATE",
+      "claim_refs": ["C-003", "C-004", "C-161"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-FEATURE-STATE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 feature 메타 상태 동기화 PR #401이 필수 검사를 통과해 main merge commit 28ff210으로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #401; code commit 789c67534d246a63dad121399ca53aebbf3dd571; main merge commit 28ff210aedeb2c0e26f138a8541806622e241764; main workflow 37385885986; site-quality workflow 37385689961; release-verify 112018939344, worker-readiness 112019314131, deploy-pages 112019547300, smoke-live 112019619907 and release-status 112019718048 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37385885986",
+      "captured_at": "2026-10-05T23:01:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-VIDEO-FEATURE-STATE",
+      "claim_refs": ["C-001", "C-002", "C-161"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-FEATURE-STATE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 전문가 영상 feature 메타와 선택 카드 badge가 실제 iframe lifecycle과 일치한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 28ff210aedeb2c0e26f138a8541806622e241764; generatedAt 2026-10-05T23:00:38.877Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; public Playwright Chromium fallback 390/1440px initial `선택하면 바로 재생`, second video -> `준비 중` -> `재생 중`, card badge `재생 중`, iframe count 1, document scrollWidth equals viewport, page errors 0, console error messages 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=feature-state-final-20261007#expert-videos",
+      "captured_at": "2026-10-05T23:05:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-VIDEO-FEATURE-STATE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-161"]
     }
   ]
 }

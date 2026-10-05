@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T22:46:14.149848Z",
+  "updated_at": "2026-10-05T23:09:56.722322Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5194,6 +5194,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T22:45:00Z"
+    },
+    {
+      "id": "H-239",
+      "event": "v130에서 전문가 영상 feature 영역의 메타 문구가 초기 선택 상태에서도 항상 `선택 즉시 재생`으로 고정되어 카드의 `선택하면 바로 재생`·`준비 중`·`재생 중` lifecycle과 어긋나던 문제를 보완했다. feature 메타도 실제 상태에 맞춰 `선택하면 바로 재생`·`준비 중`·`재생 중`으로 갱신되도록 맞췄다. 공개 Playwright Chromium fallback 390px·1440px에서 두 번째 영상 선택 후 feature 메타가 `준비 중`을 거쳐 `재생 중`으로 바뀌고 카드 badge도 `재생 중`으로 일치하며 iframe 1개·가로폭 일치·page errors 0·console error 0을 확인했다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했고 PR #401은 main `28ff210`으로 병합됐다. main workflow `37385885986`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status와 site-quality workflow `37385689961`이 성공했고 공개 validator는 candidate `28ff210aedeb2c0e26f138a8541806622e241764`·HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-161과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T23:05:00Z"
     }
   ]
 }

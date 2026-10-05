@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 feature 상태 동기화·공개 배포 — 28ff210 — 2026-10-07
+
+- 전문가 영상 feature 메타를 카드 상태와 연결해 `선택하면 바로 재생`·`준비 중`·`재생 중`을 실제 iframe lifecycle에 맞춰 표시했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 390px·1440px 공개 상호작용 검증을 통과했고 PR #401이 main `28ff210`으로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FEATURE-STATE-20261007`, `E-UI-CONTRACT-VIDEO-FEATURE-STATE-20261007`, `E-PLAYWRIGHT-VIDEO-FEATURE-STATE-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-STATE-20261007`, `E-LIVE-PUBLIC-VIDEO-FEATURE-STATE-20261007`.
+
 ## 전문가 영상 선택 상태 정합성·공개 배포 — a5e3f72 — 2026-10-06
 
 - 전문가 영상 카드의 초기 `재생 중` 과대표시를 제거하고 `선택됨`·`준비 중`·`재생 중`의 세 상태를 실제 iframe lifecycle과 맞췄다.

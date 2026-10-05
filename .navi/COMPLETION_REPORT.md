@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — 28ff210 — 2026-10-07
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `28ff210aedeb2c0e26f138a8541806622e241764`와 71개 bundle hash를 확인했다.
+- AC-003/AC-004 전문가 영상 feature 메타·카드 badge·선택 lifecycle: PASS. 공개 390px·1440px에서 초기 `선택하면 바로 재생`, 두 번째 영상 선택 후 `준비 중`을 거쳐 `재생 중`으로 갱신되고 카드 badge·iframe·가로폭·page errors·console errors 0을 확인했다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. workflow `37385885986`의 Pages·라이브 smoke·release-status와 site-quality `37385689961`도 성공했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FEATURE-STATE-20261007`, `E-UI-CONTRACT-VIDEO-FEATURE-STATE-20261007`, `E-PLAYWRIGHT-VIDEO-FEATURE-STATE-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-STATE-20261007`, `E-LIVE-PUBLIC-VIDEO-FEATURE-STATE-20261007`.
+
 ## Current Release Recheck — a5e3f72 — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `a5e3f72fce5f8a2dbe681ef98d0698f5989a4986`와 71개 bundle hash를 확인했다.

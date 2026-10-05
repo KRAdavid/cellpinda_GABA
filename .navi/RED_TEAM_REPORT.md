@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Expert Video Feature State Synchronization — 2026-10-07 — 28ff210
+
+- 공격 관점에서 390px·1440px 공개 전문가 영상 화면의 feature 메타, 선택 카드 badge, iframe lifecycle을 대조했다. 초기에는 `선택하면 바로 재생`, 두 번째 카드 선택 직후에는 `준비 중`, iframe 준비 후에는 feature와 카드 모두 `재생 중`으로 일치했다.
+- iframe 1개·document scrollWidth·page errors 0·console error 0을 확인했고, 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-PLAYWRIGHT-VIDEO-FEATURE-STATE-20261007`, `E-LIVE-PUBLIC-VIDEO-FEATURE-STATE-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-STATE-20261007`.
+
 ## Expert Video Selection State Clarity — 2026-10-06 — a5e3f72
 
 - 공격 관점에서 초기 전문가 영상 카드의 표시 상태, 두 번째 카드 선택 직후의 준비 상태, iframe load 이후의 재생 상태와 aria-label을 390px·1440px에서 대조했다.

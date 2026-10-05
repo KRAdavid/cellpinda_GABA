@@ -1,5 +1,14 @@
 # Audit Report
 
+## Expert Video Feature State Synchronization — 28ff210 — 2026-10-07
+
+- v130에서 전문가 영상 feature 영역의 상태 문구가 초기 선택 상태에서도 고정되어 카드 lifecycle과 어긋나던 문제를 보완했다. feature 메타를 `선택하면 바로 재생`·`준비 중`·`재생 중`으로 연결해 카드 badge와 같은 상태를 읽도록 했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 공개 Playwright Chromium fallback 390px·1440px에서 두 번째 영상 선택 후 feature 메타가 `준비 중`을 거쳐 `재생 중`으로 바뀌고 카드 badge도 `재생 중`으로 일치했으며 iframe 1개·가로폭 일치·page errors 0·console error 0을 확인했다.
+- PR #401은 main `28ff210`으로 병합되었고 workflow `37385885986`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status와 site-quality workflow `37385689961`이 성공했다. 공개 validator는 candidate `28ff210aedeb2c0e26f138a8541806622e241764`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FEATURE-STATE-20261007`, `E-UI-CONTRACT-VIDEO-FEATURE-STATE-20261007`, `E-PLAYWRIGHT-VIDEO-FEATURE-STATE-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-STATE-20261007`, `E-LIVE-PUBLIC-VIDEO-FEATURE-STATE-20261007`.
+
 ## Expert Video Selection State Clarity — a5e3f72 — 2026-10-06
 
 - v129에서 전문가 영상 게시판의 초기 선택 카드가 실제 재생 전인데도 `재생 중`으로 보이던 상태 불일치를 수정했다. 카드 상태와 접근성 이름을 `선택됨`·`준비 중`·`재생 중`으로 실제 iframe lifecycle에 맞췄다.
