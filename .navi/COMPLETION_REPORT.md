@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — cdbc6f3 — 2026-10-06
+
+- AC-003/AC-004 모바일 전문가 영상 필터 cue 상태·가로폭·선택 흐름: PASS. 로컬 320px에서 시작 표시, 끝 숨김, 시작 복원, `수면·기분` 선택과 aria-pressed=true, runtime errors 0을 확인했다.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산: PASS.
+- AC-001 새 main candidate의 공개 URL·Pages 배포·라이브 smoke: PENDING. workflow `37373171340`의 release-verify는 성공했지만 worker-readiness가 runner queue에서 대기 중이며 공개 validator candidate는 이전 `ffd7c2e`다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
 ## Current Release Recheck — c61c535 — 2026-10-06
 
 - AC-003/AC-004 모바일 전문가 영상 필터 발견성·가로폭·선택 흐름: PASS. 320px에서 cue 표시, rail 끝 도달, `수면·기분` 선택과 aria-pressed=true, runtime errors 0을 확인했다.

@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Expert Video Filter Cue State — cdbc6f3 — 2026-10-06
+
+- 320px에서 전문가 영상 필터의 이어짐 표시가 rail 끝에서도 남아 더 읽을 내용이 있는 것처럼 보일 수 있는 잔여 발견성 리스크를 확인했다. v125에서 실제 rail 위치를 감시해 시작점에서는 cue를 표시하고 끝점에서는 숨기며, 다시 시작점으로 돌아오면 복원하도록 보강했다. 44px 터치 영역·수평 rail·마지막 주제 선택은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. Playwright Chromium fallback 로컬 320px에서 시작 cue 표시·끝 cue 숨김·복귀 cue 복원·`수면·기분` 선택·aria-pressed=true·document scrollWidth 320·runtime errors 0을 확인했다.
+- PR #389는 main `cdbc6f3`으로 병합되었고 workflow `37373171340`의 release-verify는 성공했지만 worker-readiness `111975675081`이 runner queue에서 대기 중이다. 공개 validator는 이전 candidate `ffd7c2e`를 반환하므로 이번 상태 보강의 공개 반영은 아직 확인하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 없다. 공개 URL의 새 bundle 반영, 라이브 모바일 재검증, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 다음 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
 ## Mobile Expert Video Filter Continuation Cue — c61c535 — 2026-10-06
 
 - 320px 화면에서 전문가 영상 주제 필터가 7개 주제 중 첫 3개만 보이고 추가 주제의 존재가 얇은 스크롤바에 의존하던 잔여 발견성 리스크를 확인했다. v124에서 높이와 문구를 늘리지 않고 오른쪽 gradient와 ChevronRight 시각 단서를 추가했으며, 한 줄 가로 스크롤과 44px 터치 영역은 유지했다.

@@ -1600,6 +1600,17 @@
         "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-156",
+      "statement": "모바일 전문가 영상 주제 필터의 이어짐 표시는 rail 시작점에서는 다음 주제를 안내하고, 끝까지 읽은 뒤에는 자동으로 사라지며, 다시 시작점으로 돌아오면 복원된다. 320px에서 수평 탐색·44px 터치 영역·마지막 주제 선택은 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+        "E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+        "E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+        "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11911,6 +11922,47 @@
       "captured_at": "2026-10-05T20:45:00Z",
       "reviewer_id": "NAVI-DEPLOY-QA-20261006-MOBILE-VIDEO-FILTER-CUE",
       "claim_refs": ["C-001", "C-002", "C-155"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 전문가 영상 필터 이어짐 표시의 시작·끝 상태 보강 commit 11727e0가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 11727e0a760e870fcf93491e99ed6e8b42727058; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1629712 <= 1650000",
+      "captured_at": "2026-10-05T21:11:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-MOBILE-VIDEO-FILTER-CUE-STATE",
+      "claim_refs": ["C-001", "C-003", "C-156"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 모바일 전문가 영상 필터의 stateful cue, rail 끝 상태 숨김, 다시 시작점에서의 복원 규칙을 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v125 stateful mobile video filter continuation cue assertion; status ok; events 14",
+      "captured_at": "2026-10-05T21:11:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-MOBILE-VIDEO-FILTER-CUE-STATE",
+      "claim_refs": ["C-156"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback으로 로컬 320px 전문가 영상 필터 rail의 시작점 cue 표시, 끝점 cue 숨김, 시작점 복원, 마지막 주제 선택과 가로폭 안정성을 확인했다.",
+      "locator": "temporary Playwright script outside repository at http://127.0.0.1:4191/?view=guide#expert-videos; wrapper width 256, scrollWidth 711, maxScroll 455; start cue display flex/opacity 1/visible; end cue class is-hidden/opacity 0/visibility hidden; return-to-start cue display flex/opacity 1/visible; `수면·기분 주제 · 1개 영상` aria-pressed true; document scrollWidth 320; runtime errors []; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T21:11:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-MOBILE-VIDEO-FILTER-CUE-STATE",
+      "claim_refs": ["C-003", "C-004", "C-156"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 필터 cue 상태 보강 PR #389가 main merge commit cdbc6f3으로 병합되었고, 최신 main 배포 run은 release-verify를 성공했으나 worker-readiness가 GitHub Actions runner queue에서 대기 중이다. 공개 URL은 아직 이전 candidate를 제공한다.",
+      "locator": "PR #389; code commit 11727e0a760e870fcf93491e99ed6e8b42727058; main merge commit cdbc6f3f638dd4fe481548f0d8c0e3ccfccbcde2; main workflow 37373171340; release-verify 111975226324 success; worker-readiness 111975675081 queued; deploy-pages and smoke-live not started; live validator candidate ffd7c2e1f99fd2806e87274ab9200f948d0fc5fe, page 200, STATIC, 71 bundle hashes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37373171340",
+      "captured_at": "2026-10-05T21:11:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-MOBILE-VIDEO-FILTER-CUE-STATE",
+      "claim_refs": ["C-001", "C-002", "C-156"]
     }
   ]
 }

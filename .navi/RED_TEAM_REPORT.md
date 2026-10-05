@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Expert Video Filter Cue State — 2026-10-06 — cdbc6f3
+
+- 공격 관점에서 320px rail 시작·끝·복귀 상태를 비교했다. v125 이후 시작점에서는 다음 주제 cue가 보이고, 끝점에서는 cue가 숨겨지며, 다시 시작점으로 돌아오면 복원된다. 마지막 `수면·기분` 선택, 44px 터치 영역, scrollWidth 320, runtime errors 0을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 다만 공개 validator는 이전 candidate `ffd7c2e`이고 main workflow `37373171340`은 worker-readiness runner queue에서 대기 중이므로, 이번 상태 보강이 공개본에 반영됐다고 주장하지 않는다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도와 공개 배포 후 라이브 재현을 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
 ## Mobile Expert Video Filter Continuation Cue — 2026-10-06 — c61c535
 
 - 공격 관점에서 320px 전문가 영상 필터 rail의 첫 화면 발견성을 확인했다. 기존에는 `전체·수면·연구 읽기`만 노출되고 다음 주제 신호가 약했지만, v124 이후 오른쪽 gradient·ChevronRight가 추가되고 7개 주제·가로 스크롤·44px 터치 영역·끝 주제 선택이 유지된다.

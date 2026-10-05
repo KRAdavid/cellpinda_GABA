@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T20:47:36.641761Z",
+  "updated_at": "2026-10-05T21:12:57.543221Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5152,6 +5152,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T20:45:00Z"
+    },
+    {
+      "id": "H-233",
+      "event": "모바일 전문가 영상 필터의 이어짐 표시가 rail 끝에서도 남아 독자가 더 읽을 내용이 있는 것으로 오해할 수 있는 잔여 퍼블리싱 리스크를 확인하고, v125에서 실제 scrollLeft·scrollWidth·clientWidth를 감시해 시작점에서는 cue를 보여주고 끝점에서는 숨기며 다시 시작점으로 돌아오면 복원하도록 보강했다. 44px 터치 영역·수평 rail·마지막 주제 선택은 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Playwright Chromium fallback 320px에서 시작/끝/복귀 cue 상태, 마지막 `수면·기분` 주제 선택·aria-pressed=true·runtime errors 0을 확인했다. PR #389는 main cdbc6f3으로 병합됐고 main workflow 37373171340의 release-verify는 성공했지만 worker-readiness가 runner queue에 대기 중이며 공개 validator는 이전 candidate ffd7c2e를 반환한다. 새 CRITICAL/MAJOR 결함은 없고 C-156과 네 증거를 등록한다. 공개 반영·라이브 재검증은 다음 게이트로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T21:11:00Z"
     }
   ]
 }

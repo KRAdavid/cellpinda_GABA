@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 전문가 영상 필터 cue 끝 상태 보정·main 병합 — cdbc6f3 — 2026-10-06
+
+- 320px 전문가 영상 필터 rail의 이어짐 표시를 실제 스크롤 상태와 연결했다. 시작점에서는 다음 주제를 안내하고 끝점에서는 숨기며, 다시 시작점으로 돌아오면 복원한다. 가로 스크롤, 44px 터치 영역, 선택 즉시 재생 흐름과 공개 과학 카피·제품 독립 경계는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 시작/끝/복귀 상호작용 검증을 통과했고 PR #389가 main `cdbc6f3`으로 병합되었다.
+- main workflow `37373171340`은 release-verify 성공 후 worker-readiness runner queue에서 대기 중이며 공개 validator는 이전 candidate `ffd7c2e`다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
 ## 모바일 전문가 영상 필터 이어짐 표시·main 병합 — c61c535 — 2026-10-06
 
 - 320px에서 첫 3개 주제만 보이던 전문가 영상 필터 rail에 오른쪽 gradient·ChevronRight 시각 단서를 추가했다. 가로 스크롤, 44px 터치 영역, 선택 즉시 재생 흐름과 공개 과학 카피·제품 독립 경계는 유지했다.
