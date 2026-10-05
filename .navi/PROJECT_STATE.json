@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "USER_DECISION",
-  "updated_at": "2026-10-05T00:50:00Z",
+  "updated_at": "2026-10-05T01:10:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -463,7 +463,11 @@
         "E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005",
         "E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005",
+        "E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1054,7 +1058,11 @@
         "E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005",
         "E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005",
+        "E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005"
       ],
       "owner": "QA"
     },
@@ -1256,7 +1264,11 @@
         "E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005",
         "E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005",
+        "E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -4532,6 +4544,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T00:50:00Z"
+    },
+    {
+      "id": "H-173",
+      "event": "모바일에서 각 장 제목 아래의 짧은 맥락 문구가 복원됐지만 13px·긴 행간·시각적 구분 부족으로 고령 독자가 장면의 의미를 빠르게 잡기 어려울 수 있는 잔여 편집 리스크를 확인하고 PR #281에서 14px 읽기 크기·26ch 폭·1.65 행간·좌측 포인트 라인을 적용했다. v94 UI 계약으로 스타일을 고정했으며 연구 수치·출처 데이터·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #281 checks, main workflow 37250175467의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate de91cbb35dbc1c7c58451c13d0ad10398851f822는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T01:10:00Z"
     }
   ]
 }

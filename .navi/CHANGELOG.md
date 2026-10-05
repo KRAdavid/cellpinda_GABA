@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 장면 맥락 가독성 고도화 — de91cbb — 2026-10-05
+
+- 모바일 장 제목 아래의 짧은 맥락 문구를 14px·26ch·행간 1.65로 정리하고 좌측 포인트 라인을 추가해 장면의 의미와 다음 내용의 연결을 빠르게 읽도록 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #281 checks, main workflow 37250175467, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005, E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005, E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005, E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005.
+
 ## 모바일 장면 맥락 문구 고도화 — b98df10 — 2026-10-05
 
 - 700px 이하 화면에서 각 섹션 제목 아래의 짧은 보조 맥락 문구를 복원해 제목·장면·다음 내용의 연결을 보강했다.
