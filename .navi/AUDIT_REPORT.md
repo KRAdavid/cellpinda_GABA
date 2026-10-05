@@ -1,5 +1,16 @@
 # Audit Report
 
+## Release Recheck — 5ebcfaa — 2026-10-05
+
+- 모바일 첫 화면에서 긴 안내서가 아래로 이어진다는 시각적 방향이 약하고 회복 브리지의 작은 제목이 어색하게 끊기던 퍼블리싱 리스크를 확인했다. PR #303에서 hero 하단 읽기 큐와 reduced-motion 모션 차단을 추가하고, 작은 제목을 '수면과 회복의 연결'로 정리했다.
+- 연구 수치·출처·공개 카피·즉시 재생·공유 URL·제품 독립 공개 경계는 변경하지 않았다. NAVI 로컬 감사는 개인정보나 주문 행 없이 `IN_PROGRESS_WITH_GATES`, local checks `WAITING`, `auditFailed=false`, `publicExportChanged=false`를 유지했다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311199 bytes, 초기 CSS 95703 bytes, 전체 assets 1610564 bytes로 예산 안이다.
+- PR #303 checks와 main workflow 37263567643의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 5ebcfaa906f03a8b8b0755bb9dd1a0b780643458은 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 정적 계약·배포 정합성은 확인했지만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-20261005.
+
 ## Release Recheck — 72f3cd9 — 2026-10-05
 
 - 공개 GABA 안내서가 제품·주문 콘텐츠를 사용하지 않는데도 앱 셸에서 공용 콘텐츠를 먼저 요청하던 성능·경계 리스크를 확인하고, PR #301에서 guide·account·local admin·operations 경로의 공용 콘텐츠 로딩을 차단했다. 연구·제품·공유·챌린지 경로는 기존 로딩을 유지했다.

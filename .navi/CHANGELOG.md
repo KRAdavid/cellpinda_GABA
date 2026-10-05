@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 첫 화면 읽기 방향·회복 브리지 문장 고도화 — 5ebcfaa — 2026-10-05
+
+- 모바일 hero 하단에 긴 공개 안내서가 아래로 이어진다는 '아래로 읽기' 큐를 표시하고, 화살표 모션은 사용자의 reduced-motion 설정에서 자동으로 멈춘다.
+- 회복 브리지의 작은 제목을 '수면과 회복의 연결'로 정리해 큰 제목과 본문 사이의 흐름을 자연스럽게 맞췄다. 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build/performance, PR #303 checks, main workflow 37263567643, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-20261005.
+
 ## 공개 안내서 콘텐츠 경계·시작 성능 고도화 — 72f3cd9 — 2026-10-05
 
 - 공개 GABA 안내서·개인 계정·로컬 운영 경로가 제품·주문용 공용 콘텐츠를 불필요하게 먼저 요청하지 않도록 분리하고, 연구·제품·공유·챌린지 경로의 기존 콘텐츠 로딩은 유지했다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 5ebcfaa
+
+- 공격 관점에서 확인한 실패 모드는 모바일 독자가 hero에서 어디로 읽어야 하는지 즉시 알기 어렵고, 회복 브리지의 작은 제목이 '잠깐'이라는 삽입어로 장문의 편집 흐름을 끊는 것이었다. PR #303에서 아래로 읽기 큐와 자연스러운 연결 제목을 추가했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. reduced-motion 차단도 계약으로 확인했고 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 다만 실제 네트워크 waterfall·브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 환경에서 증명하지 않았으므로 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-20261005.
+
 ## Recheck — 2026-10-05 — 72f3cd9
 
 - 공격 관점에서 확인한 실패 모드는 공개 GABA 안내서에 제품·주문용 콘텐츠 요청이 먼저 발생해 첫 화면 네트워크 비용이 늘고, 제품 독립 안내서가 공용 상거래 데이터에 불필요하게 결합되는 것이었다. PR #301에서 guide·account·local admin·operations 경로를 분리하고, 필요한 연구·제품·공유·챌린지 경로의 로딩은 유지했다.
