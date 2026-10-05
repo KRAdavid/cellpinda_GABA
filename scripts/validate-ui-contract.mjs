@@ -512,6 +512,7 @@ requireMatch(publicGuideStyles, /v40 video topic filters[\s\S]*?\.guide-video-fi
 requireMatch(publicGuide, /guide-hero-scroll/, 'public guide hero must expose the continuous reading cue');
 requireMatch(publicGuideStyles, /v104 mobile reading cue[\s\S]*?guide-hero-story \.guide-hero-scroll\{[^}]*display:flex/, 'mobile public guide hero must show a visible reading cue before the first swipe');
 requireMatch(publicGuideStyles, /v106 mobile reading cue contrast[\s\S]*?guide-hero-story \.guide-hero-scroll\{[^}]*border:1px solid[^}]*background:rgba\(255,255,255,\.78\)/, 'mobile public guide reading cue must remain legible over the photographic hero surface');
+requireMatch(publicGuideStyles, /v107 narrow phone chart header[\s\S]*?@media\(max-width:430px\)[\s\S]*?guide-outcome-comparison-head\{[^}]*grid-template-columns:minmax\(66px,\.64fr\)[\s\S]*?guide-outcome-comparison-head>span:not\(:first-child\)\{[^}]*white-space:normal/, 'narrow-phone research comparison headers must wrap inside the 320px reading frame');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:guide-mobile-scroll-cue/, 'mobile reading cue must use a restrained directional motion');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:none}/, 'mobile reading cue must respect reduced-motion preferences');
 requireMatch(publicGuide, /<p className="guide-section-number">수면과 회복의 연결<\/p>/, 'recovery bridge label must read as a natural chapter connection');
