@@ -504,6 +504,11 @@ requireMatch(publicGuide, /academicFields[\s\S]*신경계의 균형[\s\S]*몸 �
 requireMatch(publicGuide, /applicationCases[\s\S]*발효식품과 유산균[\s\S]*발아현미와 기능성 식품[\s\S]*곡류·빵·유제품·음료/, 'public GABA guide must expose Korea, Japan and global application examples');
 requireMatch(publicGuide, /guide-video-filters-wrap"><div className="guide-video-filters"[\s\S]*?role="group" aria-label="전문가 영상 주제 필터"[\s\S]*?expertVideoTopics.map/, 'mobile expert video topic filters must render as a complete visible group');
 requireMatch(publicGuideStyles, /v40 video topic filters[\s\S]*?\.guide-video-filters-wrap\{overflow:visible\}/, 'mobile expert video topic filters must remain fully visible and avoid hidden horizontal scrolling');
+requireMatch(publicGuide, /guide-hero-scroll/, 'public guide hero must expose the continuous reading cue');
+requireMatch(publicGuideStyles, /v104 mobile reading cue[\s\S]*?guide-hero-story \.guide-hero-scroll\{[^}]*display:flex/, 'mobile public guide hero must show a visible reading cue before the first swipe');
+requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:guide-mobile-scroll-cue/, 'mobile reading cue must use a restrained directional motion');
+requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:none}/, 'mobile reading cue must respect reduced-motion preferences');
+requireMatch(publicGuide, /<p className="guide-section-number">수면과 회복의 연결<\/p>/, 'recovery bridge label must read as a natural chapter connection');
 if (/셀핀다 가바|셀핀다 완제품|스마트스토어/.test(publicGuide)) fail('public GABA guide must remain product-free');
 if (/https:\/\/smartstore\.naver\.com\/cellpinda\/products\/4701017202|REVIEW_DIALOG|스마트스토어/.test(indexHtml)) fail('root public story must not expose product or review CTAs');
 requireMatch(indexHtml, /<link rel="icon" type="image\/svg\+xml" href="\.\/favicon\.svg"\s*\/>/, 'favicon must resolve under the GitHub Pages subpath');

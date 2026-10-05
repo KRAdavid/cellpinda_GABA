@@ -1682,7 +1682,7 @@ export default function PublicGabaGuide() {
           <div className="guide-container">
             <div className="guide-recovery-break-head">
               <div>
-                <p className="guide-section-number">잠깐, 수면과 회복</p>
+                <p className="guide-section-number">수면과 회복의 연결</p>
                 <h2 id="recovery-break-heading" aria-label="GABA를 모르면 노화는 가속됩니다." tabIndex={-1}>GABA를 모르면<br />노화는 가속됩니다.</h2>
               </div>
               <p>잠은 단순히 멈추는 시간이 아닙니다.<br />뇌와 몸이 손상된 부분을 회복하고<br />쌓인 피로를 정리하는 시간입니다.</p>
