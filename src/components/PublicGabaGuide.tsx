@@ -1328,7 +1328,9 @@ export default function PublicGabaGuide() {
     if (nextChapterId) setActiveChapterId(nextChapterId);
     const target = document.getElementById(id);
     const distance = target ? Math.abs(target.getBoundingClientRect().top) : 0;
-    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches || distance > window.innerHeight * 3 ? 'auto' : 'smooth';
+    // Menu selection should land immediately after the scroll lock is released.
+    // A smooth scroll can be cancelled by the mobile menu's body overflow cleanup.
+    const behavior = restoreMenuFocus || window.matchMedia('(prefers-reduced-motion: reduce)').matches || distance > window.innerHeight * 3 ? 'auto' : 'smooth';
     if (target && nextChapterId) {
       pendingChapterNavigation.current = { id: nextChapterId, targetId: id };
       chapterNavigationLockUntil.current = performance.now() + (behavior === 'smooth' ? 900 : 350);
