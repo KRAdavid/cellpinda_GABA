@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 02ad4cc
+
+- 공격 관점에서 확인한 실패 모드는 전문가 영상 주제를 바꾼 뒤 화면의 현재 필터·표시 수·대표 영상과 보조기기 안내가 서로 분리되는 것이었다. PR #293에서 현재 주제 pill, 영상 수, polite live 상태, 완전한 filter/card accessible names를 연결했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 다만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 환경에서 증명하지 않았으므로 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005, E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005, E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005, E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005.
+
 ## Recheck — 2026-10-05 — efb3f20
 
 - 공격 관점에서 확인한 실패 모드는 연구 카드나 출처 읽기 장면에서 공유할 때 화면의 선택 연구와 공유 링크·제목·문장이 분리되어, 수신자가 일반 출처 읽기 장으로 이동하는 것이었다. PR #291에서 `research`·`reading-note` 장면의 선택 연구를 `research-{id}` 딥링크와 연구별 공유 문장에 연결하고, 영상·다른 장의 분기는 보존했다.

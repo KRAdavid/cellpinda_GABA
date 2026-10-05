@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 02ad4cc — 2026-10-05
+
+- 전문가 영상 갤러리의 주제 필터를 바꿔도 현재 주제·표시 영상 수·선택 영상이 보조기기에 즉시 전달되지 않을 수 있는 맥락 손실 리스크를 확인했다. PR #293에서 주제 pill, 영상 수, polite live 상태 안내, 필터·영상 카드의 완전한 접근 가능한 이름을 추가했다. 기존 즉시 재생·공유 URL·제품 독립 공개 경계는 유지했다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1608845 bytes로 예산 안이다.
+- PR #293 필수 checks, main workflow 37257033514의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 02ad4ccf8f83560f858b89d3ed3cd214d6e46800는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 정적 계약·배포 정합성은 확인했지만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005, E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005, E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005, E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005.
+
 ## Release Recheck — efb3f20 — 2026-10-05
 
 - 연구 카드를 읽은 뒤 출처 읽기 장면에서 공유하면 선택한 연구의 제목·관찰 결과·딥링크가 유지되지 않고 일반 출처 읽기 장으로 공유될 수 있는 맥락 손실 리스크를 확인하고 PR #291에서 `research`·`reading-note` 장면의 공유 대상을 선택 연구로 연결했다. 연구 선택 공유는 `research-{id}` 해시와 연구별 제목·관찰 결과 문장을 사용하고, 전문가 영상과 다른 장의 공유 목적지는 기존대로 유지한다. 연구 수치·출처 데이터·공개 카피·제품 독립 경계는 변경하지 않았다.

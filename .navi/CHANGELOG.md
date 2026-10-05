@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 필터 맥락 고도화 — 02ad4cc — 2026-10-05
+
+- 전문가 영상 갤러리에서 현재 주제 pill·표시 영상 수·선택 영상 상태를 함께 보여주고, 보조기기용 live 안내와 완전한 필터·영상 카드 접근 이름을 추가했다.
+- 즉시 재생·영상 공유·제품 독립 공개 경계는 유지했다. UI 계약·typecheck·127개 테스트·production build/performance, PR #293 checks, main workflow 37257033514, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005, E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005, E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005, E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005.
+
 ## 선택 연구 공유 맥락 고도화 — efb3f20 — 2026-10-05
 
 - 연구 카드나 출처 읽기 장면에서 공유하면 선택한 연구의 제목·관찰 결과·`research-{id}` 딥링크가 유지되도록 보강했다. 전문가 영상과 다른 장의 공유 목적지는 그대로 유지한다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T02:35:50.229170Z",
+  "updated_at": "2026-10-05T02:58:46.043976Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -487,7 +487,11 @@
         "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005",
         "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005",
+        "E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1102,7 +1106,11 @@
         "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005",
         "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005",
+        "E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005"
       ],
       "owner": "QA"
     },
@@ -1328,7 +1336,11 @@
         "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005",
         "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005",
+        "E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -4646,6 +4658,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T02:35:00Z"
+    },
+    {
+      "id": "H-179",
+      "event": "전문가 영상 갤러리에서 주제 필터를 바꿔도 현재 주제·표시 영상 수·선택 영상이 보조기기에 명확히 전달되지 않을 수 있는 맥락 손실 리스크를 확인하고 PR #293에서 주제 pill, 영상 수, live 상태 안내와 완전한 필터·영상 카드 접근 이름을 추가했다. 기존 즉시 재생·공유 URL·제품 독립 공개 경계는 유지했다. v100 UI 계약으로 상태 안내 구조를 고정했으며 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #293 checks, main workflow 37257033514의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. live validator candidate 02ad4ccf8f83560f858b89d3ed3cd214d6e46800는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. 브라우저 자동화와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T02:54:00Z"
     }
   ]
 }

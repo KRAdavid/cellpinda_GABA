@@ -1082,6 +1082,17 @@
         "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-109",
+      "statement": "공개 GABA 안내서 전문가 영상 갤러리는 선택 주제·표시 영상 수·현재 선택 영상을 시각·보조기기 상태로 함께 안내하고, 필터·영상 카드에 완전한 접근 가능한 이름을 제공한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005",
+        "E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9353,6 +9364,50 @@
       "captured_at": "2026-10-05T02:35:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-SHARE-CONTEXT",
       "claim_refs": ["C-002", "C-003", "C-108"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 갤러리의 현재 주제·표시 영상 수·선택 영상 안내와 완전한 접근 가능한 이름을 추가한 v100 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #293 source commit 17f9b2e256fa12ffc863911d3a04e9ef6ba5f7d3; pnpm run validate:ui-contract PASS including v100 video-filter-context assertions; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1608845 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/293",
+      "captured_at": "2026-10-05T02:49:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-VIDEO-FILTER-CONTEXT",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-109"]
+    },
+    {
+      "id": "E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 전문가 영상 갤러리의 현재 주제·영상 수·선택 영상 live 상태, 주제별 접근 가능한 이름, 영상 카드의 완전한 선택 이름을 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v100 video-filter-context assertions; PublicGabaGuide.tsx exposes activeVideoTopic, visibleExpertVideos.length, activeVideo.title through a polite status, labels each filter with topic/count, and labels each video card with topic/title/channel/selection state; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/293",
+      "captured_at": "2026-10-05T02:49:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-VIDEO-FILTER-CONTEXT",
+      "claim_refs": ["C-003", "C-109"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 필터 맥락 PR #293이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #293 merge main commit 02ad4ccf8f83560f858b89d3ed3cd214d6e46800; PR checks release-verify 37256934065 job 111595934080 and site-quality-verify 37256934164 job 111595934157 successful; main workflow 37257033514 with release-verify 111596232800, worker-readiness 111596478204, deploy-pages 111596491666, smoke-live 111596538538 and release-status 111596575984 successful; deploy-worker 111596492441 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37257033514",
+      "captured_at": "2026-10-05T02:54:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-VIDEO-FILTER-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-109"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 전문가 영상 필터 맥락 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=02ad4ccf8f83560f858b89d3ed3cd214d6e46800 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 02ad4ccf8f83560f858b89d3ed3cd214d6e46800; generatedAt 2026-10-05T02:52:30.618Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-05T02:54:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-VIDEO-FILTER-CONTEXT",
+      "claim_refs": ["C-002", "C-003", "C-109"]
     }
   ]
 }
