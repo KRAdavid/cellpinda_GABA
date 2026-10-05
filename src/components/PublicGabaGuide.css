@@ -1630,3 +1630,17 @@
     text-wrap:pretty
   }
 }
+
+/* v93 mobile chapter context: keep each section's concise editorial cue visible on small screens. */
+@media(max-width:700px){
+  .gaba-guide .guide-section-heading>p{
+    display:block;
+    max-width:28ch;
+    margin:13px 0 0;
+    color:#718895;
+    font-size:13px;
+    line-height:1.7;
+    letter-spacing:-.035em;
+    text-align:left;
+  }
+}
