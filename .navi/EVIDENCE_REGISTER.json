@@ -1636,6 +1636,18 @@
         "E-LIVE-PUBLIC-MOBILE-VIDEO-FALLBACK-POSTER-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-159",
+      "statement": "연구 지도 구간의 상단 읽기 진행 표시가 전체 장 번호와 현재 연구 영역의 내부 순서를 함께 보여 주며, 320px·390px·1440px에서 세 번째 연구를 선택하면 `06 / 12 · 연구 03 / 05`로 갱신된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SUBPROGRESS-20261006",
+        "E-UI-CONTRACT-RESEARCH-SUBPROGRESS-20261006",
+        "E-PLAYWRIGHT-RESEARCH-SUBPROGRESS-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-SUBPROGRESS-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-SUBPROGRESS-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12103,6 +12115,58 @@
       "captured_at": "2026-10-05T22:03:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MOBILE-VIDEO-FALLBACK-POSTER",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-158"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SUBPROGRESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 내부 진행 표시 개선 commit 583f1a3가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 583f1a3abdc515f88b880466e3e1499953856611; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1630628 <= 1650000",
+      "captured_at": "2026-10-05T22:20:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-RESEARCH-SUBPROGRESS",
+      "claim_refs": ["C-001", "C-003", "C-159"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SUBPROGRESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 연구 구간의 전체 장 진행값·연구 내부 위치값과 320px 이하에서 줄바꿈 없이 유지되는 진행 표시를 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v128 research context assertion for activeResearchTopicIndex and progress label; progress meta small white-space nowrap; status ok; events 14",
+      "captured_at": "2026-10-05T22:20:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-SUBPROGRESS",
+      "claim_refs": ["C-159"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-SUBPROGRESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback으로 로컬·공개 연구 지도에서 320px·390px·1440px 진행 표시와 세 번째 주제 선택 상태를 확인했다.",
+      "locator": "temporary Playwright script outside repository at http://127.0.0.1:4191/?qa=research-progress-20261006#research and public https://kradavid.github.io/gaba_info/?qa=research-progress-public-20261006#research; before `06 / 12 · 연구 01 / 05`, third map item click -> `06 / 12 · 연구 03 / 05`, live status names third research, active topic `근육`, document scrollWidth equals viewport for 320/390/1440, runtime errors 0; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T22:22:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-RESEARCH-SUBPROGRESS",
+      "claim_refs": ["C-003", "C-004", "C-159"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-SUBPROGRESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 내부 진행 표시 개선 PR #397이 필수 검사를 통과해 main merge commit cea481f로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #397; code commit 583f1a3abdc515f88b880466e3e1499953856611; main merge commit cea481fc08ec48cc2dee0c98594904cef6771851; main workflow 37382053311; release-verify 112006218067, worker-readiness 112006679936, deploy-pages 112006715951, smoke-live 112006798004 and release-status 112006883519 successful; deploy-worker 112006716465 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37382053311",
+      "captured_at": "2026-10-05T22:24:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-SUBPROGRESS",
+      "claim_refs": ["C-001", "C-002", "C-159"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SUBPROGRESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 지도 상단 진행 표시가 전체 장 번호와 연구 내부 순서를 함께 표시하고, 세 번째 주제 선택 후 공개 상태가 갱신된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha cea481fc08ec48cc2dee0c98594904cef6771851; generatedAt 2026-10-05T22:23:34.848Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; public Playwright Chromium fallback 320/390/1440: `06 / 12 · 연구 01 / 05` -> third map click -> `06 / 12 · 연구 03 / 05`, active `근육`, runtime errors 0, document scrollWidth equals viewport",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=research-progress-public-20261006#research",
+      "captured_at": "2026-10-05T22:25:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-SUBPROGRESS",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-159"]
     }
   ]
 }

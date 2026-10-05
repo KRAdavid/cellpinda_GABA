@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — cea481f — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `cea481fc08ec48cc2dee0c98594904cef6771851`와 71개 bundle hash를 확인했다.
+- AC-003/AC-004 연구 내부 진행 표시·주제 선택·가로폭·상태 전달: PASS. 공개 320px·390px·1440px에서 `06 / 12 · 연구 01 / 05`가 시작되고 세 번째 주제 선택 후 `06 / 12 · 연구 03 / 05`·활성 `근육`·live status·scrollWidth 일치·runtime errors 0을 확인했다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. workflow `37382053311`의 Pages·라이브 smoke·release-status도 성공했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SUBPROGRESS-20261006, E-UI-CONTRACT-RESEARCH-SUBPROGRESS-20261006, E-PLAYWRIGHT-RESEARCH-SUBPROGRESS-20261006, E-DEPLOY-PIPELINE-RESEARCH-SUBPROGRESS-20261006, E-LIVE-PUBLIC-RESEARCH-SUBPROGRESS-20261006.
+
 ## Current Release Recheck — d228a3d — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `d228a3df717136cfe3ab27c5ef092d2ea62bf320`와 71개 bundle hash를 확인했다.

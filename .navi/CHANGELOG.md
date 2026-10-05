@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 구간 내부 진행 표시·공개 배포 — cea481f — 2026-10-06
+
+- 연구 지도 상단에 전체 장 진행과 연구 내부 순서를 함께 표시해, 긴 연구 카드 구간에서도 현재 위치를 바로 읽을 수 있게 했다. 세 번째 주제 선택 시 `06 / 12 · 연구 03 / 05`로 갱신된다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 상호작용 검증을 통과했고 PR #397이 main `cea481f`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+- 공개본에서 초기·선택 후 진행값, live status, 활성 연구, 가로폭 안정성과 runtime errors 0을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SUBPROGRESS-20261006, E-UI-CONTRACT-RESEARCH-SUBPROGRESS-20261006, E-PLAYWRIGHT-RESEARCH-SUBPROGRESS-20261006, E-DEPLOY-PIPELINE-RESEARCH-SUBPROGRESS-20261006, E-LIVE-PUBLIC-RESEARCH-SUBPROGRESS-20261006.
+
 ## 전문가 영상 fallback poster 고도화·공개 배포 — d228a3d — 2026-10-06
 
 - 원격 썸네일이 unavailable해도 전문가 영상 poster 안에서 제목·주제·회차가 보이도록 보강하고, 카드별 이미지 crop을 달리했다. 갤러리의 editorial 톤과 선택 즉시 재생·공유 흐름은 유지했다.

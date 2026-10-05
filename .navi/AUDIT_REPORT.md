@@ -1,5 +1,14 @@
 # Audit Report
 
+## Research Subprogress Reading Rail — cea481f — 2026-10-06
+
+- v128에서 연구 지도 구간의 상단 진행 표시가 전체 장 번호만 보여 현재 연구 위치를 즉시 알기 어려운 문제를 보완했다. 연구 구간에서는 전체 흐름과 연구 내부 순서를 함께 표시해 `06 / 12 · 연구 03 / 05`처럼 읽는 위치를 한 줄로 확인할 수 있다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. Playwright Chromium fallback 로컬·공개 320px·390px·1440px에서 초기 `연구 01 / 05`, 세 번째 지도 주제 선택 후 `연구 03 / 05`, live status·활성 `근육`·가로폭·runtime errors 0을 확인했다.
+- PR #397은 main `cea481f`로 병합되었고 workflow `37382053311`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `cea481fc08ec48cc2dee0c98594904cef6771851`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SUBPROGRESS-20261006, E-UI-CONTRACT-RESEARCH-SUBPROGRESS-20261006, E-PLAYWRIGHT-RESEARCH-SUBPROGRESS-20261006, E-DEPLOY-PIPELINE-RESEARCH-SUBPROGRESS-20261006, E-LIVE-PUBLIC-RESEARCH-SUBPROGRESS-20261006.
+
 ## Expert Video Editorial Fallback Posters — d228a3d — 2026-10-06
 
 - v127에서 원격 YouTube 썸네일이 지연되거나 unavailable한 경우에도 전문가 영상 gallery가 각 영상의 제목·주제·회차를 poster 안에 표시하도록 보강했다. 카드마다 자연 이미지 crop을 달리해 같은 주제 영상이 반복적으로 보이는 인상을 줄였고, 기존 선택 즉시 재생·공유 흐름은 유지했다.

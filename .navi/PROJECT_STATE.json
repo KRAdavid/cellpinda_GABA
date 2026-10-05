@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T22:06:24.717697Z",
+  "updated_at": "2026-10-05T22:29:08.178719Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5180,6 +5180,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T22:04:00Z"
+    },
+    {
+      "id": "H-237",
+      "event": "v128에서 연구 지도 구간의 상단 읽기 진행 표시가 전체 장 번호만 보여 현재 연구 위치를 즉시 알기 어려운 문제를 보완했다. 연구 구간에서는 `06 / 12 · 연구 01 / 05`처럼 전체 흐름과 연구 내부 순서를 함께 표시하고, 세 번째 지도 주제 선택 후 `06 / 12 · 연구 03 / 05`로 갱신되도록 했다. 320px·390px·1440px 로컬 및 공개 Playwright Chromium fallback에서 진행값·live status·활성 `근육` 주제·가로폭·runtime errors 0을 확인했다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했고 PR #397은 main `cea481f`로 병합됐다. main workflow `37382053311`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 공개 validator는 candidate `cea481fc08ec48cc2dee0c98594904cef6771851`·HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-159와 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T22:25:00Z"
     }
   ]
 }

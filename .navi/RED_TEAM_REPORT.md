@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Research Subprogress Reading Rail — 2026-10-06 — cea481f
+
+- 공격 관점에서 연구 지도에 직접 진입한 뒤 320px·390px·1440px에서 전체 장 번호와 연구 내부 순서가 함께 보이는지, 세 번째 지도 항목 선택이 진행 표시·live status·활성 카드와 일치하는지 확인했다.
+- `06 / 12 · 연구 01 / 05`에서 세 번째 주제 선택 후 `06 / 12 · 연구 03 / 05`로 갱신되고, 활성 주제는 `근육`, document scrollWidth는 각 viewport와 같으며 runtime errors는 0이었다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser 플러그인 부재로 Chromium fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-PLAYWRIGHT-RESEARCH-SUBPROGRESS-20261006, E-LIVE-PUBLIC-RESEARCH-SUBPROGRESS-20261006, E-DEPLOY-PIPELINE-RESEARCH-SUBPROGRESS-20261006.
+
 ## Expert Video Editorial Fallback Posters — 2026-10-06 — d228a3d
 
 - 공격 관점에서 원격 썸네일을 차단한 390px·1440px 공개 화면을 확인했다. 첫 네 카드가 제목·주제·회차를 잃지 않고, crop position이 달라지며, 두 번째 카드 선택이 feature title·iframe title·aria-pressed 상태를 함께 갱신했다.
