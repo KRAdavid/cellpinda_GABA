@@ -1651,6 +1651,38 @@
     content-visibility:auto;
     contain-intrinsic-size:900px
   }
+
+  /* v110 progressive publishing stability: reserve each deferred chapter near its rendered editorial height to prevent deep-scroll jumps. */
+  .gaba-guide .guide-applications{contain-intrinsic-size:1185px}
+  .gaba-guide .guide-fermented-safety{contain-intrinsic-size:1101px}
+  .gaba-guide .guide-growth-story{contain-intrinsic-size:600px}
+  .gaba-guide .guide-expert-videos{contain-intrinsic-size:1310px}
+  .gaba-guide .guide-reading-note{contain-intrinsic-size:439px}
+  .gaba-guide .guide-final{contain-intrinsic-size:692px}
+  @media(max-width:700px){
+    .gaba-guide .guide-applications{contain-intrinsic-size:2082px}
+    .gaba-guide .guide-fermented-safety{contain-intrinsic-size:1940px}
+    .gaba-guide .guide-growth-story{contain-intrinsic-size:1204px}
+    .gaba-guide .guide-expert-videos{contain-intrinsic-size:2905px}
+    .gaba-guide .guide-reading-note{contain-intrinsic-size:953px}
+    .gaba-guide .guide-final{contain-intrinsic-size:824px}
+  }
+  @media(min-width:701px) and (max-width:899px){
+    .gaba-guide .guide-applications{contain-intrinsic-size:1609px}
+    .gaba-guide .guide-fermented-safety{contain-intrinsic-size:1335px}
+    .gaba-guide .guide-growth-story{contain-intrinsic-size:736px}
+    .gaba-guide .guide-expert-videos{contain-intrinsic-size:1746px}
+    .gaba-guide .guide-reading-note{contain-intrinsic-size:543px}
+    .gaba-guide .guide-final{contain-intrinsic-size:628px}
+  }
+  @media(min-width:900px) and (max-width:1199px){
+    .gaba-guide .guide-applications{contain-intrinsic-size:1525px}
+    .gaba-guide .guide-fermented-safety{contain-intrinsic-size:1194px}
+    .gaba-guide .guide-growth-story{contain-intrinsic-size:717px}
+    .gaba-guide .guide-expert-videos{contain-intrinsic-size:1775px}
+    .gaba-guide .guide-reading-note{contain-intrinsic-size:479px}
+    .gaba-guide .guide-final{contain-intrinsic-size:653px}
+  }
 }
 
 /* v91 editorial typography: keep Korean display lines balanced and body copy naturally grouped. */
