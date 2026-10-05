@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 2eb17a7 — 2026-10-05
+
+- AC-002·AC-003 연구 지도·상세 연구 결과·출처 연결 흐름: PASS.
+- AC-004 390px 연구 지도 선택·다음 연구 이동·`#final` 직접 링크·가로 폭 안정성: PASS.
+- AC-005 전문가 영상 9개 선택 즉시 재생, 사업자용 5문장 실제 복사 상태, runtimeErrors 0: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- 연구 수치·출처·카피·제품 독립 공개 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 전체 브라우저·실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있기 때문이다.
+
+증적: E-LIVE-PUBLIC-RESEARCH-FLOW-20261005, E-LIVE-PUBLIC-DIRECT-FINAL-CONTEXT-20261005, E-LIVE-PUBLIC-TRUSTED-SHARE-COPY-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-FLOW-20261005.
+
 ## Current Release Recheck — 8605724 — 2026-10-05
 
 - AC-004 좁은 모바일 헤더 280·300·320·360·390px 충돌 없음·44px 터치 영역·가로 폭 안정성 및 390px 키보드 메뉴 흐름: PASS.

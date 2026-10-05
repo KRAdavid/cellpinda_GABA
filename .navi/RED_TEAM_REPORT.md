@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 2eb17a7
+
+- 공격 관점에서 연구 지도 선택, 다음 연구 이동, `#final` 직접 진입, 사업자용 전체 복사, 전문가 영상 선택·자동 재생을 390px 공개 화면에서 실행했다. 연구 카드·읽기 레일·진행 수·복사 완료·iframe 상태가 서로 어긋나는 실패는 재현되지 않았다.
+- 가로폭 390px, runtimeErrors 0, 직접 진입 제목 위치 115px, `12 / 12`, 연구 카드 도착 113px을 확인했다. 새 CRITICAL/MAJOR 결함은 없었다.
+- Chrome CDP 대표 렌더만으로 전체 브라우저·실기기를 보장하지 않는다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-RESEARCH-FLOW-20261005, E-LIVE-PUBLIC-DIRECT-FINAL-CONTEXT-20261005, E-LIVE-PUBLIC-TRUSTED-SHARE-COPY-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-FLOW-20261005.
+
 ## Recheck — 2026-10-05 — 8605724
 
 - 공격 관점에서 280·300·320·360·390px의 헤더 폭 경계와 모바일 메뉴 키보드 순환을 확인했다. 컨트롤 충돌, 44px 미만 터치 영역, 가로 넘침, 포커스 이탈, Escape 후 포커스 분실은 재현되지 않았다.

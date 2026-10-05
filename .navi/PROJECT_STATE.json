@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T09:44:25Z",
+  "updated_at": "2026-10-05T09:58:13Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T09:44:25Z"
+    "last_run_at": "2026-10-05T09:58:13Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -4892,6 +4892,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T09:44:25Z"
+    },
+    {
+      "id": "H-199",
+      "event": "공개 390px 핵심 사용자 흐름을 재감리했다. 연구 지도에서 피부를 선택해 피부 연구 결과 카드로 이동하고 다음 연구인 근육 카드로 이어지는 흐름, #final 직접 진입 시 이야기 공유·12/12 복원, 사업자용 5문장 실제 복사 완료, 전문가 영상 선택 즉시 재생을 확인했다. 새 CRITICAL/MAJOR 결함은 없었고 결과를 C-129·C-130과 네 라이브 QA 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T09:58:13Z"
     }
   ]
 }
