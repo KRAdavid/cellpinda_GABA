@@ -1,5 +1,13 @@
 # Audit Report
 
+## Release Recheck — 8605724 — 2026-10-05
+
+- 좁은 모바일 헤더의 280·300·320·360·390px 배치와 390px 메뉴의 키보드 흐름을 공개 URL에서 재감리했다. 각 컨트롤은 겹치지 않고 44px 이상 터치 영역을 유지했으며, 메뉴 포커스 트랩·Escape 닫힘·토글 복귀가 확인됐다.
+- 공개 캐시 비활성화 Chrome CDP fallback에서 모든 폭의 scrollWidth가 뷰포트와 일치했고 runtimeErrors 0이었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 브라우저 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LIVE-PUBLIC-NARROW-HEADER-KEYBOARD-20261005, E-LIVE-PUBLIC-MOBILE-MENU-KEYBOARD-20261005.
+
 ## Release Recheck — 2c1bca9 — 2026-10-05
 
 - 태블릿·데스크톱에서 모바일 전용 줄바꿈 span이 숨겨지며 발견 섹션 제목의 공백이 사라지는 잔여 한국어 퍼블리싱 리스크를 확인했다. PR #331에서 공백을 span 밖으로 보정하고 UI 계약에 전용 회귀 검사를 추가했다.
