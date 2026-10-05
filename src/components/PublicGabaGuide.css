@@ -1631,6 +1631,12 @@
   }
 }
 
+@supports (text-wrap:pretty){
+  .gaba-guide .guide-section-heading>p{
+    text-wrap:pretty
+  }
+}
+
 /* v93 mobile chapter context: keep each section's concise editorial cue visible on small screens. */
 @media(max-width:700px){
   .gaba-guide .guide-section-heading>p{
@@ -1642,5 +1648,16 @@
     line-height:1.7;
     letter-spacing:-.035em;
     text-align:left;
+  }
+}
+
+/* v94 mobile chapter context floor: give the short editorial cue a clearer reading priority for older readers. */
+@media(max-width:700px){
+  .gaba-guide .guide-section-heading>p{
+    max-width:26ch;
+    padding-left:11px;
+    border-left:2px solid #b9dfe1;
+    font-size:14px;
+    line-height:1.65;
   }
 }
