@@ -11726,10 +11726,10 @@
       "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
-      "statement": "연구 지도 중심 보조 문구의 모바일 읽기 하한 보강 PR #380이 필수 검사를 통과해 main commit fb874662로 병합되었고, 정적 Pages 배포·라이브 smoke·release status가 성공했다.",
-      "locator": "PR #380; code commit 8bb654d; main merge commit fb87466241c67311cbd990228acf48fab7f65068; workflow 37355788429; release-verify 111917723575, worker-readiness 111918529299, deploy-pages 111918580221, smoke-live 111918673606 and release-status 111918778101 successful; deploy-worker 111918581325 skipped by STATIC_ONLY",
-      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37355788429",
-      "captured_at": "2026-10-05T18:26:00Z",
+      "statement": "연구 지도 중심 보조 문구 보강 PR #380이 필수 검사를 통과해 main commit fb874662로 병합되었고, NAVI 증적 PR #381과 최종 main commit f54bae6의 정적 Pages 배포·라이브 smoke·release status까지 성공했다.",
+      "locator": "PR #380; code commit 8bb654d; code main merge commit fb87466241c67311cbd990228acf48fab7f65068; code workflow 37355788429; PR #381; final docs main merge commit f54bae600ce55ab6a2439bbd337eb26fc1949a1d; final workflow 37357450324; release-verify 111923349956, worker-readiness 111923909979, deploy-pages 111923980005, smoke-live 111924078985 and release-status 111924206046 successful; deploy-worker 111923980228 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37357450324",
+      "captured_at": "2026-10-05T18:38:14Z",
       "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-MAP-MOBILE-CUE-FLOOR",
       "claim_refs": ["C-001", "C-002", "C-152"]
     },
@@ -11738,9 +11738,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본은 모바일·데스크톱 연구 지도 중심 보조 문구를 10px로 표시하고, 가로 넘침 없이 연구 영역 선택 시 상세 카드 포커스·스크롤 흐름을 유지한다.",
-      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha fb87466241c67311cbd990228acf48fab7f65068; generatedAt 2026-10-05T18:26:49.640Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: cueFont 10px, cueWeight 900, cueColor rgb(12, 114, 122), core 96x96, scrollWidth 390, selected cognition, aria-pressed true, focusedId research-cognition, cardTop 115, errors []; 1440px: cueFont 10px, cueWeight 900, cueColor rgb(12, 114, 122), core 142x142, scrollWidth 1425, selected cognition, aria-pressed true, focusedId research-cognition, cardTop 126, errors []; screenshots reviewed outside repository",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha f54bae600ce55ab6a2439bbd337eb26fc1949a1d; generatedAt 2026-10-05T18:39:20.990Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: cueFont 10px, cueWeight 900, cueColor rgb(12, 114, 122), core 96x96, scrollWidth 390, selected cognition, aria-pressed true, focusedId research-cognition, cardTop 115, errors []; 1440px: cueFont 10px, cueWeight 900, cueColor rgb(12, 114, 122), core 142x142, scrollWidth 1425, selected cognition, aria-pressed true, focusedId research-cognition, cardTop 126, errors []; screenshots reviewed outside repository",
       "source_uri": "https://kradavid.github.io/gaba_info/#research",
-      "captured_at": "2026-10-05T18:29:04Z",
+      "captured_at": "2026-10-05T18:41:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-MOBILE-CUE-FLOOR",
       "claim_refs": ["C-001", "C-002", "C-003", "C-152"]
     }

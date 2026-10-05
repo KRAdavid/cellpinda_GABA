@@ -1,5 +1,13 @@
 # Audit Report
 
+## Final Public Manifest Sync — f54bae6 — 2026-10-06
+
+- NAVI 증적 PR #381 병합 뒤 최종 공개 manifest candidate가 `f54bae600ce55ab6a2439bbd337eb26fc1949a1d`로 갱신된 것을 확인했다. 코드 변경은 PR #380의 `fb874662`에 포함되어 있으며, 문서 병합은 공개 기능·연구 카피·제품 독립 경계를 변경하지 않았다.
+- 최종 공개 validator는 HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·1개 product·6개 share page·teaser HOLD를 확인했다. 공개 Chrome CDP fallback 390·1440px의 연구 지도 10px cue·선택 카드 흐름·scrollWidth 390·1425·runtime errors 0도 재확인했다.
+- 새 CRITICAL/MAJOR 결함은 없으며 Browser 플러그인 부재, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006.
+
 ## Public Release Recheck — fb874662 — 2026-10-06
 
 - 연구 지도 중심의 `5개 연구 영역` 보조 문구를 모바일에서도 10px·900 weight·청록 강조로 유지하도록 보정해 작은 화면에서의 읽기 하한을 높였다. 기존 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.

@@ -1,5 +1,15 @@
 # Completion Report
 
+## Final Public Manifest Recheck — f54bae6 — 2026-10-06
+
+- AC-001 최종 공개 URL·정적 번들·manifest candidate: PASS.
+- AC-004 최종 공개 390·1440px 연구 지도 중심 10px 읽기 하한·선택 카드 흐름·가로 폭·runtime console errors: PASS.
+- AC-005 문서 병합 후 메인 release-verify·Pages 배포·라이브 smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- 최종 공개 candidate `f54bae600ce55ab6a2439bbd337eb26fc1949a1d`는 HTTP 200·STATIC·71개 bundle hash를 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006.
+
 ## Current Release Recheck — fb874662 — 2026-10-06
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

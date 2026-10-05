@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 최종 공개 manifest·NAVI 증적 동기화 — f54bae6 — 2026-10-06
+
+- NAVI 증적 PR #381 병합 후 최종 공개 candidate가 `f54bae600ce55ab6a2439bbd337eb26fc1949a1d`로 갱신된 것을 확인했다.
+- 공개 validator와 Chrome CDP fallback을 다시 실행해 연구 지도 10px cue, 카드 연결, 가로 폭, runtime errors 0을 재확인했다. 공개 기능·연구 카피·제품 독립 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006.
+
 ## 연구 지도 모바일 읽기 하한 보정·공개 배포 완료 — fb874662 — 2026-10-06
 
 - 연구 지도 중심의 `5개 연구 영역` 보조 문구를 모바일·데스크톱 10px·900 weight·청록 강조로 통일해 작은 화면에서도 규모 안내를 빠르게 읽도록 보정했다.
