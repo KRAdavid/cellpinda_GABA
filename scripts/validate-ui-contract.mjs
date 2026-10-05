@@ -532,6 +532,10 @@ for (const marker of [
   /연구를 이해하는<br \/>\{' '\}\s*마지막 단계/,
   /1950년의 작은 발견은<br \/>\{' '\}\s*오늘의 연구 지도가 되었습니다/,
 ]) requireMatch(publicGuide, marker, `public guide heading must preserve a semantic word boundary around line breaks: ${marker}`);
+requireMatch(indexHtml, /<title>저속노화, 회복하는 밤에서 시작됩니다 \| GABA Guide<\/title>/, 'public GABA document title must match the completed hero sentence');
+requireMatch(indexHtml, /<meta property="og:title" content="저속노화, 회복하는 밤에서 시작됩니다 \| GABA Guide" \/>/, 'public GABA Open Graph title must match the completed hero sentence');
+requireMatch(publicGuide, /document\.title = '저속노화, 회복하는 밤에서 시작됩니다 \| GABA Guide';/, 'public GABA runtime title must match the completed hero sentence');
+requireMatch(publicGuide, /const shareTitle = shareChapterId === 'top' \? '저속노화, 회복하는 밤에서 시작됩니다' :/, 'top-level GABA shares must use the completed hero sentence');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:guide-mobile-scroll-cue/, 'mobile reading cue must use a restrained directional motion');
 requireMatch(publicGuideStyles, /guide-hero-story \.guide-hero-scroll svg\{animation:none}/, 'mobile reading cue must respect reduced-motion preferences');
 requireMatch(publicGuide, /<p className="guide-section-number">수면과 회복의 연결<\/p>/, 'recovery bridge label must read as a natural chapter connection');

@@ -961,7 +961,7 @@ export default function PublicGabaGuide() {
       : '3초마다 다음 카드';
 
   useLayoutEffect(() => {
-    document.title = '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide';
+    document.title = '저속노화, 회복하는 밤에서 시작됩니다 | GABA Guide';
     const description = '수면과 회복의 관계부터 1950년 GABA 발견, 신경계 연구, 국내외 활용과 발효 GABA의 안전성 기록까지 쉽게 읽는 공개 안내서입니다.';
     const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = description;
@@ -970,12 +970,12 @@ export default function PublicGabaGuide() {
       const element = document.head.querySelector<HTMLMetaElement>(selector);
       if (element) element.content = value;
     };
-    updateMeta('meta[property="og:title"]', '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide');
+    updateMeta('meta[property="og:title"]', '저속노화, 회복하는 밤에서 시작됩니다 | GABA Guide');
     updateMeta('meta[property="og:description"]', '수면과 회복에서 시작해 GABA의 발견과 연구 지도를 한 흐름으로 읽는 공개 안내서입니다.');
     updateMeta('meta[property="og:image"]', socialImage);
     updateMeta('meta[property="og:image:type"]', 'image/jpeg');
     updateMeta('meta[property="og:image:alt"]', '수면·인지·피부·근육·성장 연구를 소개하는 GABA 공개 안내서');
-    updateMeta('meta[name="twitter:title"]', '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide');
+    updateMeta('meta[name="twitter:title"]', '저속노화, 회복하는 밤에서 시작됩니다 | GABA Guide');
     updateMeta('meta[name="twitter:description"]', '수면과 회복에서 시작해 GABA의 발견과 연구 지도를 한 흐름으로 읽는 공개 안내서입니다.');
     updateMeta('meta[name="twitter:image"]', socialImage);
     updateMeta('meta[name="twitter:image:alt"]', '수면·인지·피부·근육·성장 연구를 소개하는 GABA 공개 안내서');
@@ -1078,7 +1078,7 @@ export default function PublicGabaGuide() {
   }, []);
 
   useEffect(() => {
-    const chapterTitle = activeChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작되는 GABA' : activeReadingLabel;
+    const chapterTitle = activeChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작됩니다' : activeReadingLabel;
     const selectedVideoTitle = activeChapterId === 'expert-videos' ? ` · ${activeVideo.title}` : '';
     document.title = `${chapterTitle}${selectedVideoTitle} | GABA Guide`;
   }, [activeChapterId, activeReadingLabel, activeVideo.title]);
@@ -1466,7 +1466,7 @@ export default function PublicGabaGuide() {
       : shareChapterId === 'expert-videos' && activeChapterId !== 'expert-videos'
         ? readingChapters.find((chapter) => chapter.id === 'expert-videos')?.label ?? '전문가 영상'
         : activeReadingLabel;
-    const shareTitle = shareChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작되는 GABA' : `${shareReadingLabel} · GABA Guide`;
+    const shareTitle = shareChapterId === 'top' ? '저속노화, 회복하는 밤에서 시작됩니다' : `${shareReadingLabel} · GABA Guide`;
     const shareText = shareResearchTopic
       ? `${shareResearchTopic.title} 연구의 관찰 결과와 출처를 읽는 공개 GABA 안내서입니다.`
       : shareChapterId === 'expert-videos'
