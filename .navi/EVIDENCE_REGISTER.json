@@ -11298,7 +11298,7 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본은 320·390px에서 연구 도표 읽는 법 범례를 자연스럽게 줄바꿈하고, 1440px에서는 같은 범례를 한 줄로 표시하며 가로 넘침과 runtime 오류가 없다. 차트 전체 설명은 접근성 레이블로 남아 있다.",
-      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 859bb59f901eb038f6152f5b89749616a3532aac; generatedAt 2026-10-05T15:29:35.650Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 320·390·1440px reported scrollWidth 320/390/1425, note widths 216/286/649, note heights 128/89/55, keyCount 2, errors []; screenshots C:/Users/computer/AppData/Local/Temp/gaba-chart-legend-public-320-20261006.png, gaba-chart-legend-public-390-20261006.png, gaba-chart-legend-public-1440-20261006.png",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 859bb59f901eb038f6152f5b89749616a3532aac; generatedAt 2026-10-05T15:29:35.650Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 320·390·1440px reported scrollWidth 320/390/1425, note widths 216/286/649, note heights 128/89/55, keyCount 2, errors []; PNG captures were saved outside the repository for visual review and are not tracked",
       "source_uri": "https://kradavid.github.io/gaba_info/?qa=chart-legend-public-390-20261006#research-cognition",
       "captured_at": "2026-10-05T15:31:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-CHART-LEGEND",
