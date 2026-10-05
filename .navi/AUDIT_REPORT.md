@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 13450f2 — 2026-10-05
+
+- 읽기 진행 표시의 화면용 메타와 보조기기용 라이브 문맥이 같은 status 영역에 섞여 전달될 수 있는 접근성 리스크를 확인하고 PR #277에서 시각 메타를 `aria-hidden`으로 분리한 뒤 현재 장·연구 문맥을 별도 `role=status` 라이브 영역으로 제공했다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1605263 bytes로 예산 안이다.
+- PR #277 필수 checks, main workflow 37248181705의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 13450f232c0b75ea337c05aa6fbb3cb53ef0ae3f는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 접근성 구조·정적 배포 정합성은 확인했지만 실제 스크린리더 조합, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-READING-LIVE-CONTEXT-20261005, E-UI-CONTRACT-READING-LIVE-CONTEXT-20261005, E-DEPLOY-PIPELINE-READING-LIVE-CONTEXT-20261005, E-LIVE-PUBLIC-READING-LIVE-CONTEXT-20261005.
+
 ## Release Recheck — 0d4981d — 2026-10-05
 
 - 한글 제목이 모바일 폭에서 어색하게 끊기거나 본문 설명이 불필요하게 분절될 수 있는 편집 리스크를 확인하고 PR #275에서 지원 브라우저의 주요 디스플레이 제목에 `text-wrap:balance`, 주요 본문 설명에 `text-wrap:pretty`를 적용했다. 연구 카드·공개 카피·제품 독립 경계는 변경하지 않았다.

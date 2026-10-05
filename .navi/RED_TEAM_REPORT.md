@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 13450f2
+
+- 공격 관점에서 확인한 실패 모드는 읽기 진행 표시가 시각용 메타와 보조기기용 status 역할을 동시에 맡아, 화면에 보이지 않는 현재 장·연구 문맥이 안정적으로 읽히지 않을 수 있는 것이었다. PR #277에서 두 표현을 분리하고 별도 라이브 안내를 추가했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 실제 스크린리더·브라우저 조합과 Safari/iOS/Android 실기기가 현재 실행 환경에 없어 보조기기별 동작과 실제 고령 사용자 이해도는 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-READING-LIVE-CONTEXT-20261005, E-UI-CONTRACT-READING-LIVE-CONTEXT-20261005, E-DEPLOY-PIPELINE-READING-LIVE-CONTEXT-20261005, E-LIVE-PUBLIC-READING-LIVE-CONTEXT-20261005.
+
 ## Recheck — 2026-10-05 — 0d4981d
 
 - 공격 관점에서 확인한 실패 모드는 한글 제목이 좁은 모바일 폭에서 불균형하게 끊기거나 본문 설명이 짧은 구간마다 과도하게 분절되어 읽기 리듬을 해칠 수 있는 것이었다. PR #275에서 지원 브라우저의 제목 균형 줄바꿈과 본문 자연스러운 줄바꿈을 CSS 계약으로 고정했다.

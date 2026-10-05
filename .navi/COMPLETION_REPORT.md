@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 13450f2 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #277과 main 공개 배포 workflow 37248181705가 성공했고, 공개 URL validator가 candidate 13450f232c0b75ea337c05aa6fbb3cb53ef0ae3f를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 이번 변경은 읽기 진행 표시의 보조기기용 라이브 문맥을 별도 status 영역으로 분리하고 UI 계약으로 고정했으며 연구 수치·출처·공개 카피·제품 데이터는 변경하지 않았다.
+- 완료 상태는 NOT_READY를 유지한다. 실제 스크린리더 조합, Browser/Playwright, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-READING-LIVE-CONTEXT-20261005, E-UI-CONTRACT-READING-LIVE-CONTEXT-20261005, E-DEPLOY-PIPELINE-READING-LIVE-CONTEXT-20261005, E-LIVE-PUBLIC-READING-LIVE-CONTEXT-20261005.
+
 ## Current Release Recheck — 0d4981d — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

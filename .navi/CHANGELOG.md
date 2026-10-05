@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 읽기 진행 문맥 접근성 고도화 — 13450f2 — 2026-10-05
+
+- 화면용 읽기 진행 메타와 보조기기용 현재 장·연구 문맥을 분리하고, 별도 `role=status` 라이브 안내를 추가했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #277 checks, main workflow 37248181705, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 스크린리더 조합·대표 실기기·고령 사용자 독해성 검증은 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-READING-LIVE-CONTEXT-20261005, E-UI-CONTRACT-READING-LIVE-CONTEXT-20261005, E-DEPLOY-PIPELINE-READING-LIVE-CONTEXT-20261005, E-LIVE-PUBLIC-READING-LIVE-CONTEXT-20261005.
+
 ## 한글 타이포그래피 리듬 고도화 — 0d4981d — 2026-10-05
 
 - 주요 한글 디스플레이 제목에 지원 브라우저의 `text-wrap:balance`, 주요 본문 설명에 `text-wrap:pretty`를 적용해 모바일 편집 리듬을 보강했다.
