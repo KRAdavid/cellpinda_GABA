@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — fb3d19c — 2026-10-05
+
+- 모바일 연구 결과 카드의 제목과 결과 한 줄이 같은 flex 행에서 폭을 경쟁해 제목이 세로로 찌그러지고 요약이 옆에서 겹치는 실제 공개 렌더 결함을 확인했다. PR #309에서 카드 헤더를 grid로 보정해 제목을 읽을 수 있는 폭으로 유지하고 결과 요약을 제목 아래 전체 폭에 배치했다.
+- UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. PR #309 checks와 main workflow `37267840225`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `fb3d19c64e54f238d32d859c5d63a39898889250`는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records를 유지한다. Chrome CDP fallback 공개 렌더에서 390px 결과 카드의 제목·결과 요약 비겹침과 가로 넘침 없음, 1440px 정렬을 확인했다.
+- 정적 계약·배포 정합성은 확인했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005.
+
 ## Release Recheck — 85ec17f — 2026-10-05
 
 - 발효·안전 다음 장면과 성장 연구 다음 장면이 암묵적으로 끊기던 편집 리스크를 확인하고 PR #307에서 두 handoff를 추가했다. 모바일은 현재 장면·구분선·다음 장면 순서로 읽히고 데스크톱은 한 줄의 editorial rail로 읽힌다.

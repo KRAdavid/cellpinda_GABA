@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T05:08:40.000000Z",
+  "updated_at": "2026-10-05T05:34:00.000000Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1958,7 +1958,8 @@
           "E-CDP-RESEARCH-PRODUCT-FREE",
           "E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE",
           "E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004",
-          "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004"
+          "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004",
+          "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -2086,7 +2087,11 @@
           "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
           "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
           "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
-          "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005"
+          "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005",
+          "E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
         ],
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
@@ -2095,7 +2100,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T05:08:40Z"
+    "last_run_at": "2026-10-05T05:34:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2155,7 +2160,8 @@
           "E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004",
           "E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004",
           "E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004",
-          "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-20261004"
+          "E-LIVE-PUBLIC-NAVI-DOCS-SYNC-20261004",
+          "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
         ],
         "impact": "라이브에서 폰트·sticky·이미지 차이가 생길 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 검증 또는 미검증 범위 표시",
@@ -2259,7 +2265,11 @@
           "E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005",
           "E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005",
           "E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005",
-          "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005"
+          "E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005",
+          "E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
         ],
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
@@ -2268,7 +2278,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T05:08:40Z"
+    "last_run_at": "2026-10-05T05:34:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -2496,7 +2506,9 @@
           "E-LOCAL-BUILD-EXPERT-VIDEO-SHARE-20261004",
           "E-PLAYWRIGHT-EXPERT-VIDEO-SHARE-20261004",
           "E-DEPLOY-PIPELINE-EXPERT-VIDEO-SHARE-20261004",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004",
+          "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리·모바일 연구 결과 카드 가용 폭·모바일 읽기 라벨 12px·가+/가− 읽기 조절·직접 해시 진입 제목 정렬을 재확인"
       },
@@ -2632,7 +2644,10 @@
           "E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004",
           "E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004",
           "E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004",
-          "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004"
+          "E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004",
+          "E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
         ],
         "notes": "연구 영역 5개·상세 카드 5개와 대상·방법·측정 프로필·연구 읽는 기준·모바일 히어로·01–04 연구 읽기 레일·지도 클릭 후 현재 주제 및 상세 카드 시각 강조·수면과 회복 02 / 12·연구 지도 03 / 12·연구 비교 도표의 상대 방향 신호·연구 규모 기관 비교와 별도 SCIE 분석 구분·390/320/1440px 공유 버튼·768/820px 태블릿 메뉴·모바일 메뉴 포커스 순환·연구 카드 가용 폭·모바일 읽기 라벨과 읽기 크기 조절·직접 해시 진입 제목 정렬을 확인"
       },
@@ -2816,7 +2831,11 @@
           "E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005",
           "E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005",
           "E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005",
-          "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005"
+          "E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005",
+          "E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
         ],
         "notes": "도표 카드에서 연구 구성·비교 조건·GABA 조건·핵심 결과·출처를 확인하고, 정성 비교 도표의 상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·관찰된 결과 문장 복사·상단 진행 바 비침 제거·연구 규모의 동일 PubMed 기준 기관 비교와 별도 SCIE 분석 블록·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·모바일 메뉴 포커스 순환·모바일 연구 카드 폭·결과 방향 라벨 12px 보정·직접 해시 진입 제목 정렬·모바일 연구 기준 범례 13px 세로 흐름·연구 범위 표식과 모바일 단일 열 맥락·연구 지도에서 카드로 이어지는 선택 안내를 추가 확인"
       },
@@ -3244,7 +3263,9 @@
           "E-LOCAL-BUILD-OBSERVER-STATE-20261005",
           "E-UI-CONTRACT-OBSERVER-STATE-20261005",
           "E-DEPLOY-PIPELINE-OBSERVER-STATE-20261005",
-          "E-LIVE-PUBLIC-OBSERVER-STATE-20261005"
+          "E-LIVE-PUBLIC-OBSERVER-STATE-20261005",
+          "E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
+          "E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005"
         ],
         "notes": "타입체크·127개 테스트·공개 검사·Pages 성능 예산·연구 프로필 레이아웃·연구 결과 공유·정성 비교 도표·상대 방향 1·2단계 신호·중립 조건명·연구 읽는 기준·진행 바·연구 규모 기관 비교와 별도 SCIE 분석·모바일 히어로·01–04 연구 읽기 레일·현재 연구 주제 및 선택 카드 시각 강조·수면과 회복 진행 맥락·태블릿 헤더·모바일 메뉴 배경 분리·스크롤 잠금·닫힘 복원·Tab/Shift+Tab 포커스 순환·전문가 영상 로딩·동일 영상 재선택·제품 독립 연구 경로·모바일 연구 카드 폭·읽기 라벨 12px·직접 해시 진입 정렬·390px 2열 썸네일 갤러리·320px 1열 복귀·선택 즉시 재생·연구 비교 방향 그래프·각 도표 행의 GABA 결과 요약 선표시·연구 범위 표식·연구 지도 선택 안내·정적 연구 시각 요소 memo 보호·스크롤 주제 갱신 transition 처리·320·350·390·768·1440px × 11개 주요 장 가로폭·페이지 오류 0건 검증 통과"
       },
@@ -4726,6 +4747,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T05:08:40Z"
+    },
+    {
+      "id": "H-187",
+      "event": "모바일 연구 결과 카드에서 제목이 좁은 열로 세로 찌그러지고 결과 한 줄이 제목 옆에서 겹쳐 보이는 실제 공개 렌더 결함을 확인했다. PR #309에서 모바일 연구 카드 헤더를 grid로 재배치해 제목을 읽을 수 있는 폭으로 유지하고, 결과 한 줄을 제목 아래 전체 폭에 배치했다. 연구 구성·비교 도표·연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #309 checks, main workflow 37267840225의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 live candidate fb3d19c64e54f238d32d859c5d63a39898889250은 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·제품 독립 경계를 확인했다. Chrome CDP fallback으로 로컬·공개 390px 렌더에서 제목과 결과 요약이 겹치지 않고 가로 넘침이 없음을 확인했으며 1440px 정렬도 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. NAVI 로컬 감사는 IN_PROGRESS_WITH_GATES·local checks WAITING·auditFailed false·publicExportChanged false를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T05:34:00Z"
     }
   ]
 }
