@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T03:15:38.422962Z",
+  "updated_at": "2026-10-05T03:39:19.060150Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4684,6 +4684,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T03:14:00Z"
+    },
+    {
+      "id": "H-181",
+      "event": "연구 확장 지도에서 주제를 선택해도 시각적으로만 연구 카드로 이동하고 보조기기에는 선택 대상이 명시되지 않을 수 있으며, 전문가 영상 카드의 선택도 대표 영상 영역과의 관계가 암묵적일 수 있는 잔여 읽기 연결 리스크를 확인했다. PR #297에서 연구 주제 버튼에 research-flow aria-controls를 추가하고 연구 결과 영역을 명명된 region으로 고정했으며, 전문가 영상 카드에도 대표 영상 영역 aria-controls를 명시하고 선택·포커스 상태의 시각적 구분을 보강했다. 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다. v102 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #297 checks, main workflow 37259915121의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 live validator candidate 4b30428ce6cb048373b1f7d03eb36ce674234a55는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. NAVI 로컬 감사는 IN_PROGRESS_WITH_GATES·local checks WAITING·auditFailed false·publicExportChanged false를 유지한다. 브라우저 자동화와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T03:36:00Z"
     }
   ]
 }
