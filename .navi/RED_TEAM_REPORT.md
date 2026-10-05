@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 4b30428
+
+- 공격 관점에서 확인한 실패 모드는 연구 지도나 전문가 영상 카드를 선택해도 보조기기가 실제로 갱신되는 연구 결과·대표 영상 영역을 명시적으로 알지 못해, 화면의 선택 상태와 읽기 목적지가 분리되는 것이었다. PR #297에서 연구 선택을 `research-flow` 명명 영역에, 영상 선택을 `expert-video-feature` 대상에 연결하고 선택·포커스 윤곽을 추가했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 다만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 환경에서 증명하지 않았으므로 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-RESEARCH-VIDEO-DESTINATION-20261005, E-UI-CONTRACT-RESEARCH-VIDEO-DESTINATION-20261005, E-DEPLOY-PIPELINE-RESEARCH-VIDEO-DESTINATION-20261005, E-LIVE-PUBLIC-RESEARCH-VIDEO-DESTINATION-20261005.
+
 ## Recheck — 2026-10-05 — a796f3d
 
 - 공격 관점에서 확인한 실패 모드는 한국어 전문가 영상 게시판 헤더가 영문식 자간으로 벌어져 주제와 영상 수의 관계를 한 번에 읽기 어렵고, 필터가 업데이트하는 영상 목록이 보조기기에 명시되지 않는 것이었다. PR #295에서 헤더 자간을 줄이고 필터-목록 `aria-controls` 연결을 추가했다.

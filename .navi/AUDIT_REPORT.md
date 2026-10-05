@@ -1,5 +1,16 @@
 # Audit Report
 
+## Release Recheck — 4b30428 — 2026-10-05
+
+- 연구 확장 지도와 전문가 영상 갤러리에서 선택 동작이 시각적으로는 이동·재생되지만 보조기기에는 연결된 읽기 대상이 명시되지 않을 수 있는 잔여 읽기 연결 리스크를 확인했다. PR #297에서 연구 주제 버튼에 `aria-controls=research-flow`를 추가하고 연구 결과 영역을 명명된 `region`으로 고정했으며, 전문가 영상 카드에도 대표 영상 영역 연결을 명시하고 선택·포커스 상태를 시각적으로 구분했다.
+- 연구 수치·출처·공개 카피·즉시 재생·공유 URL·제품 독립 공개 경계는 변경하지 않았다. 빈 로컬 주문 입력 매니페스트에도 개인정보나 주문 행을 추가하지 않았고, NAVI 로컬 감사는 `IN_PROGRESS_WITH_GATES`, local checks `WAITING`, `auditFailed=false`, `publicExportChanged=false`를 유지했다.
+- 로컬 UI 계약 v102, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1609520 bytes로 예산 안이다.
+- PR #297 checks, main workflow 37259915121의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 4b30428ce6cb048373b1f7d03eb36ce674234a55는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 정적 계약·배포 정합성은 확인했지만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-VIDEO-DESTINATION-20261005, E-UI-CONTRACT-RESEARCH-VIDEO-DESTINATION-20261005, E-DEPLOY-PIPELINE-RESEARCH-VIDEO-DESTINATION-20261005, E-LIVE-PUBLIC-RESEARCH-VIDEO-DESTINATION-20261005.
+
 ## Release Recheck — a796f3d — 2026-10-05
 
 - 전문가 영상 게시판의 한국어 헤더에 영문식 자간이 남아 주제와 영상 수가 벌어져 보일 수 있는 퍼블리싱 리스크를 확인했다. PR #295에서 한국어 자간을 자연스럽게 보정하고, 각 주제 필터가 연결되는 영상 목록을 `aria-controls`로 명시했다. 기존 주제 pill·영상 수·live 상태·즉시 재생·공유 URL·제품 독립 공개 경계는 유지했다.
