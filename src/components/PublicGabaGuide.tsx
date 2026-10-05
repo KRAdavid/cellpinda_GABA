@@ -925,6 +925,12 @@ export default function PublicGabaGuide() {
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
   const activeResearchTopic = researchTopics.find((topic) => topic.id === activeResearchTopicId);
+  // Keep the final source-reading example connected to the research card the reader just saw.
+  // The first card remains the calm default for a direct visit to the reading note.
+  const sourceReadingTopic = activeResearchTopic ?? researchTopics[0];
+  const sourceReadingLabel = activeResearchTopic
+    ? `현재 읽는 연구 · ${sourceReadingTopic.title}`
+    : `예시 출처 · ${sourceReadingTopic.title} 연구`;
   const activeReadingLabel = activeChapterId === 'research' && activeResearchTopic
     ? `${activeResearchTopic.title} 연구 결과`
     : activeChapter.label;
@@ -1844,10 +1850,10 @@ export default function PublicGabaGuide() {
                 <li><span>03</span><div><strong>무엇이 달라졌나요?</strong><small>연구에서 실제로 측정한 결과를 읽습니다.</small></div></li>
                 <li><span>04</span><div><strong>어디까지 알 수 있나요?</strong><small>측정한 결과와 해석의 범위를 구분합니다.</small></div></li>
               </ol>
-              <a className="guide-reading-note-source" href={researchTopics[0].source.url} target="_blank" rel="noopener noreferrer">
-                <span className="guide-reading-note-source-kicker">예시 출처 · 사람 대상 연구</span>
-                <strong>{researchTopics[0].source.label}</strong>
-                <small>건강한 성인 63명 · 뇌파·활력 점수 · 무작위·위약 대조 교차시험</small>
+              <a className="guide-reading-note-source" href={sourceReadingTopic.source.url} target="_blank" rel="noopener noreferrer">
+                <span className="guide-reading-note-source-kicker">{sourceReadingLabel}</span>
+                <strong>{sourceReadingTopic.source.label}</strong>
+                <small>대상 · {sourceReadingTopic.profile.subject}<br />측정 · {sourceReadingTopic.profile.measured}<br />설계 · {sourceReadingTopic.profile.design}</small>
                 <span className="guide-reading-note-source-action">원문 보기 <ExternalLink size={14} aria-hidden="true" /></span>
               </a>
             </div>
