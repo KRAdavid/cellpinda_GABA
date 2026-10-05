@@ -10711,6 +10711,50 @@
       "captured_at": "2026-10-05T11:22:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-PUBLIC-TITLE",
       "claim_refs": ["C-002", "C-003", "C-134"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CONTEXTUAL-SHARE-METADATA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main commit 6860f48의 production build는 연구·영상·출처 읽기 맥락의 공유 메타데이터 보정을 포함해 11개 정적 경로·71개 배포 파일·성능 예산 검사를 통과했다.",
+      "locator": "pnpm run build; candidateSha 6860f48e7d1fb153367cda3a8df590b569595fb7; routes 11; files 71; total assets 1619765 <= 1650000; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; validate-ui-contract, release manifest, static bundle and performance passed",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\dist",
+      "captured_at": "2026-10-05T11:47:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-CONTEXTUAL-SHARE-METADATA",
+      "claim_refs": ["C-001", "C-002", "C-135"]
+    },
+    {
+      "id": "E-UI-CONTRACT-CONTEXTUAL-SHARE-METADATA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 연구·출처 읽기·전문가 영상 맥락을 선택했을 때 document title과 OG/Twitter 제목·설명이 해당 주제로 갱신되는지 회귀 검사한다.",
+      "locator": "pnpm run validate:ui-contract; status ok; scripts/validate-ui-contract.mjs guards selected research/reading-note/video context metadata updates and context pageDescription updates for og:title, og:description, twitter:title and twitter:description",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-05T11:47:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-CONTEXTUAL-SHARE-METADATA",
+      "claim_refs": ["C-003", "C-135"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CONTEXTUAL-SHARE-METADATA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 맥락 메타데이터 보정 commit 6860f48이 main 공개 파이프라인에서 release-verify·Worker readiness·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "main commit 6860f48e7d1fb153367cda3a8df590b569595fb7; workflow 37304324009; release-verify 111744232587, worker-readiness 111744848798, deploy-pages 111744891549, smoke-live 111744977386 and release-status 111745051154 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37304324009",
+      "captured_at": "2026-10-05T11:40:55Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-CONTEXTUAL-SHARE-METADATA",
+      "claim_refs": ["C-001", "C-002", "C-135"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CONTEXTUAL-SHARE-METADATA-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본은 연구·전문가 영상·출처 읽기 화면에서 선택한 맥락을 브라우저 제목·description·OG·Twitter 메타데이터에 반영하고, 390px에서 가로 넘침과 runtimeErrors 없이 렌더링된다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 6860f48e7d1fb153367cda3a8df590b569595fb7; bundleHashes 71; claims 12; masterRecords 6; sharePages 6; provenance matched; Chrome CDP fallback at public URLs contextual-meta-research-live-20261005, contextual-meta-video-live-20261005 and contextual-meta-reading-live-20261005 reported `피부 연구 결과 | GABA Guide`, `전문가 영상 · 갱년기와 수면, GABA에 대한 질문 | GABA Guide`, `인지 연구 출처 읽기 | GABA Guide` with matching description/OG/Twitter values; scrollWidth 390, innerWidth 390, readyState complete and errors [] for all three; screenshots captured outside repository and visually reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=contextual-meta-research-live-20261005#research-skin",
+      "captured_at": "2026-10-05T11:40:55Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-CONTEXTUAL-SHARE-METADATA",
+      "claim_refs": ["C-002", "C-003", "C-135"]
     }
   ]
 }

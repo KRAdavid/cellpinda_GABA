@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T11:23:28Z",
+  "updated_at": "2026-10-05T11:47:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T11:23:28Z"
+    "last_run_at": "2026-10-05T11:47:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2307,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T11:23:28Z"
+    "last_run_at": "2026-10-05T11:47:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4934,6 +4934,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T11:23:28Z"
+    },
+    {
+      "id": "H-205",
+      "event": "연구 결과·출처 읽기·전문가 영상 화면을 자유롭게 공유할 때 공개 루트의 제목과 설명이 항상 첫 화면 일반 문구로 남아 선택한 연구 맥락이 미리보기에 이어지지 않는 퍼블리싱 리스크를 확인했다. PR #344에서 연구·출처·영상 선택 상태에 맞춰 document title과 description, OG·Twitter title/description을 함께 갱신하도록 보정하고 UI 계약에 맥락 메타데이터 회귀 검사를 추가했다. 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #344 checks, main workflow 37304324009의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 live candidate 6860f48e7d1fb153367cda3a8df590b569595fb7은 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Chrome CDP fallback 공개 390px에서 피부 연구·전문가 영상·인지 출처 읽기 직접 진입의 제목·description·OG·Twitter 값이 선택 맥락과 일치하고 scrollWidth 390·readyState complete·runtimeErrors 0을 확인했으며 화면 캡처를 별도 검토했다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지하고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. 결과를 C-135와 네 증거로 등록했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T11:47:00Z"
     }
   ]
 }
