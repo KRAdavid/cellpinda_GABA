@@ -1,5 +1,14 @@
 # Audit Report
 
+## Hero Reading Route Recheck — 88f9382 — 2026-10-05
+
+- 첫 화면의 `3분 읽기` 경로를 의미 있는 순서 목록으로 바꾸고, 모바일에서는 두 줄·데스크톱에서는 한 줄로 정리했다. 연구 규모 카드의 `1950 → 지금` 표현도 CSS chevron 시간축으로 통일해 텍스트 화살표와 연구 레일의 시각 언어가 섞이지 않는다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #355 checks와 main workflow `37319119945`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `88f93822af73a4f6652a0b5e8b6710dc5fade9c1`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claims·6개 master records·1개 product·6개 share pages·teaser HOLD를 유지한다. Chrome CDP fallback 공개 390·1440px에서 첫 화면 경로 항목의 겹침 없음, 시간축 chevron, scrollWidth 390·1425, 발견 장 직접 진입, runtimeErrors 0을 확인했고 새 CRITICAL/MAJOR 결함은 없었다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. Browser 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-HERO-READING-ROUTE-20261005, E-UI-CONTRACT-HERO-READING-ROUTE-20261005, E-DEPLOY-PIPELINE-HERO-READING-ROUTE-20261005, E-LIVE-PUBLIC-HERO-READING-ROUTE-20261005.
+
 ## Research Reading Rail Recheck — 96333a6 — 2026-10-05
 
 - 연구 읽기 레일의 텍스트 화살표 잔존을 데스크톱 CSS chevron으로 보정하고, 모바일에서는 장식 연결부를 숨겨 좁은 화면의 정보량을 정리했다. 390px 공개 화면에서는 연구 순서가 카드와 함께 자연스럽게 이어지고, 1440px에서는 3개의 chevron이 `지도 → 대상 → 결과 → 해석` 순서를 시각적으로 보조한다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 88f9382
+
+- 공격 관점에서 첫 화면 읽기 경로의 모바일 줄바꿈, 데스크톱 한 줄 정렬, chevron 누락·겹침, 발견 장 시간축의 연결부 누락, 가로 넘침, runtime 오류를 390px·1440px에서 확인했다. 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.
+- 390px 경로 항목은 두 줄로 분리되지만 각 항목이 서로 겹치지 않고, 1440px에서는 한 줄로 유지된다. `#history` 직접 진입에서도 scrollWidth 390·1425와 시간축 CSS chevron이 유지됐다.
+- 연구 카피·수치·제품 독립 공개 경계는 변경되지 않았다. 대표 Chrome CDP 렌더만으로 전체 브라우저·실기기를 보장하지 않으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-HERO-READING-ROUTE-20261005.
+
 ## Recheck — 2026-10-05 — 96333a6
 
 - 공격 관점에서 연구 읽기 레일의 텍스트 화살표 잔존, 모바일 연결 장식 과밀, 데스크톱 chevron 누락, 연구 handoff 이동 실패, 가로 넘침, runtime 오류를 390px·1440px에서 확인했다. 해당 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.

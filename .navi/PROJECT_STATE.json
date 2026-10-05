@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T13:27:17Z",
+  "updated_at": "2026-10-05T13:47:25Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -4976,6 +4976,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T13:27:17Z"
+    },
+    {
+      "id": "H-211",
+      "event": "첫 화면의 3분 읽기 경로와 발견 장의 1950년부터 현재까지 시간축에 남아 있던 텍스트 화살표를 의미 있는 순서 목록과 CSS chevron 연결부로 보정했다. PR #355의 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, main workflow 37319119945의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 최신 공개 candidate 88f93822af73a4f6652a0b5e8b6710dc5fade9c1는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·1개 product·6개 share page·제품 독립 경계를 유지한다. Chrome CDP fallback 공개 390px·1440px에서 첫 화면 경로의 줄바꿈·chevron·가로 폭, 발견 장 직접 진입과 시간축 연결부·runtimeErrors 0을 확인했고 새 CRITICAL/MAJOR 결함은 없었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지한다. 결과를 C-141과 네 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T13:47:25Z"
     }
   ]
 }

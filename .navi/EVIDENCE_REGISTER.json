@@ -1428,6 +1428,17 @@
         "E-LIVE-PUBLIC-RESEARCH-RAIL-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-141",
+      "statement": "GABA 안내서의 첫 화면 읽기 경로와 발견 장의 연구 시간축은 텍스트 화살표 대신 의미 있는 순서 목록과 CSS chevron 연결부를 사용해 모바일과 데스크톱에서 같은 편집 언어로 읽힌다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-HERO-READING-ROUTE-20261005",
+        "E-UI-CONTRACT-HERO-READING-ROUTE-20261005",
+        "E-DEPLOY-PIPELINE-HERO-READING-ROUTE-20261005",
+        "E-LIVE-PUBLIC-HERO-READING-ROUTE-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11037,6 +11048,48 @@
       "captured_at": "2026-10-05T13:27:17Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-RAIL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-140"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-HERO-READING-ROUTE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면 읽기 경로와 연구 규모 시간축의 시각 연결부 보정이 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1622918 <= 1650000",
+      "captured_at": "2026-10-05T13:47:25Z",
+      "reviewer_id": "NAVI-QA-GABA-20261005-HERO-READING-ROUTE",
+      "claim_refs": ["C-001", "C-003", "C-141"]
+    },
+    {
+      "id": "E-UI-CONTRACT-HERO-READING-ROUTE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "첫 화면 경로가 접근 가능한 순서 목록·sr-only 설명·비텍스트 chevron을 사용하고, 연구 규모 시간축도 시각 chevron을 사용하는지 UI 계약 회귀 검사가 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; hero route semantic list; hero route chevron; research scale time-range chevron; status ok; events 18",
+      "captured_at": "2026-10-05T13:47:25Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-HERO-READING-ROUTE",
+      "claim_refs": ["C-003", "C-141"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-HERO-READING-ROUTE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "hero reading route visual refinement commit 40fe6dd가 PR #355 검증과 main 공개 파이프라인에서 성공했다.",
+      "locator": "PR #355; PR candidate 40fe6dd91b3550bcbda1db846cde1dbf9cdaeaf3; main commit 88f93822af73a4f6652a0b5e8b6710dc5fade9c1; workflow 37319119945; release-verify 111793361399, worker-readiness 111793743316, deploy-pages 111793782298, smoke-live 111793876251 and release-status 111793990346 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37319119945",
+      "captured_at": "2026-10-05T13:47:25Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-HERO-READING-ROUTE",
+      "claim_refs": ["C-001", "C-002", "C-141"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HERO-READING-ROUTE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 390px·1440px에서 첫 화면 읽기 경로를 각각 두 줄·한 줄로 안정적으로 렌더링하고, 발견 장의 1950년부터 현재까지 시간축을 CSS chevron으로 표시하며 가로 폭·runtime 오류를 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 88f93822af73a4f6652a0b5e8b6710dc5fade9c1; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; provenance matched; Chrome CDP fallback public 390px·1440px route visual QA reported scrollWidth 390/1425, route items without overlap, route pseudo content empty with 45deg transform, research-scale connector pseudo content empty with 45deg transform, titles correct, and errors []; direct #history entry preserved the same widths and time-range connector",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=route-visual-88f9382-390-top-20261005",
+      "captured_at": "2026-10-05T13:47:25Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-HERO-READING-ROUTE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-141"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 첫 화면 읽기 경로 시각 언어 통일 — 88f9382 — 2026-10-05
+
+- 첫 화면의 `3분 읽기`를 의미 있는 순서 목록과 CSS chevron으로 정리하고, 연구 규모의 `1950 → 지금` 텍스트 연결을 시각 시간축으로 보정했다. 모바일·데스크톱에서 같은 읽기 순서를 유지하면서 첫 화면의 인지 부담을 줄였다.
+- PR #355 checks와 main workflow `37319119945`의 Pages 배포·라이브 smoke·release status가 성공했고, 공개 390·1440px에서 경로 항목·발견 장 직접 진입·오류·가로 폭을 재검증했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-HERO-READING-ROUTE-20261005, E-UI-CONTRACT-HERO-READING-ROUTE-20261005, E-DEPLOY-PIPELINE-HERO-READING-ROUTE-20261005, E-LIVE-PUBLIC-HERO-READING-ROUTE-20261005.
+
 ## 연구 읽기 레일 연결부 정리 — 96333a6 — 2026-10-05
 
 - 연구 읽기 레일의 텍스트 화살표를 데스크톱 CSS chevron으로 바꾸고 모바일에서는 연결 장식을 숨겨 카드와 문장을 먼저 읽게 했다. 기존 연구 handoff, 연구 내용, 출처, 제품 독립 공개 경계는 변경하지 않았다.
