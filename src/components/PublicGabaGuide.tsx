@@ -1786,13 +1786,13 @@ export default function PublicGabaGuide() {
             </div>
             <div id="research-flow" className="guide-research-flow" role="region" aria-label="선택한 주제의 연구 결과 카드">{researchTopics.map((topic, index) => { const nextTopic = researchTopics[index + 1]; const isResearchCopied = copiedResearchTopicId === topic.id; return <article className={`guide-research-detail guide-research-detail-inline${activeResearchTopicId === topic.id ? ' is-active' : ''}`} id={`research-${topic.id}`} key={topic.id} tabIndex={-1} aria-labelledby={`research-${topic.id}-heading`}><div className="guide-research-detail-top"><span className="guide-research-scope-kicker">연구 범위</span><EvidenceBadge tone={topic.tone} label={topic.label} /><span className="guide-research-detail-topic">{topic.english}</span></div><div className="guide-research-inline-heading"><span className="guide-research-card-number">0{index + 1}</span><ResearchGlyph id={topic.id} /><h3 id={`research-${topic.id}-heading`}>{topic.title} 연구 결과</h3><div className="guide-research-result-lead"><span>결과 한 줄</span><strong>{topic.chart.summary}</strong></div></div><ResearchProfile profile={topic.profile} /><ResearchOutcomeChart topic={topic} showSummary={false} /><dl><div><dt>어떻게 살펴봤나요?</dt><dd>{topic.study}</dd></div><div><dt>무엇이 달라졌나요?</dt><dd className="guide-research-finding"><span>{topic.finding}</span><button type="button" className={`guide-research-copy${isResearchCopied ? ' is-copied' : ''}`} onClick={() => void copyResearchMessage(topic)} aria-label={`${topic.title} 연구 결과와 출처 ${isResearchCopied ? '복사 완료' : '복사'}`}><span className="guide-research-copy-icon" aria-hidden="true">{isResearchCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isResearchCopied ? '복사 완료' : '결과·출처 복사'}</button></dd></div><div><dt>이 연구에서 알 수 있는 것</dt><dd>{topic.interpretation}</dd></div></dl><p className="guide-research-source"><span className="guide-research-source-label">출처 ·</span><a href={topic.source.url} target="_blank" rel="noopener noreferrer"><span className="guide-research-source-name">{topic.source.label}</span><span className="guide-research-source-action">원문 보기 <ExternalLink size={13} aria-hidden="true" /></span></a></p>{nextTopic ? <button type="button" className="guide-research-next" onClick={() => { setActiveResearchTopicId(nextTopic.id); scrollTo(`research-${nextTopic.id}`); focusResearchCard(nextTopic.id); }} aria-label={`다음 연구로 이동: ${nextTopic.title}`}><span><small>다음 연구</small><strong>{nextTopic.title}</strong></span><ArrowRight size={18} aria-hidden="true" /></button> : null}</article>; })}</div>
             <p className="guide-research-reminder"><span>연구 결과를 먼저 읽고, 각 카드 아래 출처에서 원문으로 이어집니다.</span></p>
-            <div className="guide-research-handoff" aria-label="연구 결과에서 국내외 활용으로 이어지는 다음 읽기 흐름">
+            <button type="button" className="guide-research-handoff" aria-label="국내외 활용으로 이어서 읽기" onClick={() => scrollTo('applications')}>
               <span className="guide-research-handoff-kicker">다음 장</span>
               <strong>연구가 생활이 되는 장면</strong>
               <span className="guide-research-handoff-line" aria-hidden="true" />
               <span className="guide-research-handoff-next">국내외 활용</span>
               <ArrowRight size={17} aria-hidden="true" />
-            </div>
+            </button>
           </div>
         </section>
 
@@ -1802,13 +1802,13 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead">발효와 발아, 식품과 바이오 기술. GABA는 뇌 연구를 넘어 다양한 연구와 산업 현장에서 다뤄지고 있습니다.</p>
             <div className="guide-editorial-band guide-editorial-band-applications" style={{ '--guide-editorial-image': `url(${gabaApplicationsEditorial})` } as CSSProperties} role="img" aria-label="발아 곡물과 식품과학 연구 장면으로 표현한 국내외 활용 연구 이미지"><span><small>한국에서 세계로</small><strong>발효와 발아,<br />식품과 바이오 기술로</strong></span></div>
             <div className="guide-application-grid">{applicationCases.map((item) => <article className="guide-application-card" key={item.id}><div className="guide-application-top"><span className="guide-application-icon"><ApplicationIcon type={item.icon} /></span><span>{item.region}</span></div><h3>{item.title}</h3><p>{item.body}</p><strong>{item.detail}</strong><div className="guide-application-sources"><span>연구·공공자료</span>{item.sources.map((source) => <a href={source.url} target="_blank" rel="noopener noreferrer" key={source.url}>{source.label} <ExternalLink size={13} aria-hidden="true" /></a>)}</div></article>)}</div>
-            <div className="guide-research-handoff guide-application-handoff" aria-label="국내외 활용에서 발효와 안전으로 이어지는 다음 읽기 흐름">
+            <button type="button" className="guide-research-handoff guide-application-handoff" aria-label="발효와 안전으로 이어서 읽기" onClick={() => scrollTo('fermented-safety')}>
               <span className="guide-research-handoff-kicker">다음 장</span>
               <strong>활용은 만들어지는 과정에서 이어집니다</strong>
               <span className="guide-research-handoff-line" aria-hidden="true" />
               <span className="guide-research-handoff-next">발효와 안전</span>
               <ArrowRight size={17} aria-hidden="true" />
-            </div>
+            </button>
           </div>
         </section>
 
@@ -1822,18 +1822,18 @@ export default function PublicGabaGuide() {
             </div>
             <div className="guide-fermented-steps">{fermentedSafetySteps.map((step) => <article className="guide-fermented-step" key={step.number}><div className="guide-fermented-step-top"><span className="guide-fermented-step-number">{step.number}</span><span className="guide-fermented-step-icon"><FermentedSafetyIcon type={step.icon} /></span><span>{step.eyebrow}</span></div><h3>{step.title}</h3><p>{step.body}</p><a href={step.source.url} target="_blank" rel="noopener noreferrer">{step.source.label} <ExternalLink size={13} aria-hidden="true" /></a></article>)}</div>
             <p className="guide-fermented-note"><Check size={16} aria-hidden="true" /> 발효 GABA의 안전성은 발효했다는 사실만으로 판단하는 것이 아니라, 균주·공정·최종 원료·사람 대상 연구가 함께 쌓인 공개 기록으로 살펴볼 수 있습니다.</p>
-            <div className="guide-research-handoff guide-fermentation-handoff" aria-label="발효와 안전에서 성장 연구로 이어지는 다음 읽기 흐름">
+            <button type="button" className="guide-research-handoff guide-fermentation-handoff" aria-label="성장 연구로 이어서 읽기" onClick={() => scrollTo('growth')}>
               <span className="guide-research-handoff-kicker">다음 장</span>
               <strong>식품 연구에서 몸의 신호로</strong>
               <span className="guide-research-handoff-line" aria-hidden="true" />
               <span className="guide-research-handoff-next">성장 연구</span>
               <ArrowRight size={17} aria-hidden="true" />
-            </div>
+            </button>
           </div>
         </section>
 
         <section className="guide-section guide-growth-story guide-story-section" id="growth" aria-labelledby="growth-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · 성장 연구</p><h2 id="growth-heading" tabIndex={-1}>성장호르몬 연구는<br />{' '}키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br /> 연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞서 본 근육·성장호르몬 연구에서는 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 살폈습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p><div className="guide-research-handoff guide-growth-handoff" aria-label="성장 연구에서 전문가 영상으로 이어지는 다음 읽기 흐름"><span className="guide-research-handoff-kicker">다음 장</span><strong>연구를 설명하는 목소리로</strong><span className="guide-research-handoff-line" aria-hidden="true" /><span className="guide-research-handoff-next">전문가 영상</span><ArrowRight size={17} aria-hidden="true" /></div></div>
+          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · 성장 연구</p><h2 id="growth-heading" tabIndex={-1}>성장호르몬 연구는<br />{' '}키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br /> 연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞서 본 근육·성장호르몬 연구에서는 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 살폈습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p><button type="button" className="guide-research-handoff guide-growth-handoff" aria-label="전문가 영상으로 이어서 읽기" onClick={() => scrollTo('expert-videos')}><span className="guide-research-handoff-kicker">다음 장</span><strong>연구를 설명하는 목소리로</strong><span className="guide-research-handoff-line" aria-hidden="true" /><span className="guide-research-handoff-next">전문가 영상</span><ArrowRight size={17} aria-hidden="true" /></button></div>
         </section>
 
         <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
@@ -1852,7 +1852,7 @@ export default function PublicGabaGuide() {
               </div>
             </div>
             <p className="guide-expert-note guide-video-gallery-note">각 채널에서 공개한 짧은 영상을 모았습니다. 선택한 영상은 이 페이지에서 바로 재생되며, 원문 링크도 함께 제공합니다.</p>
-            <div className="guide-expert-thread" aria-label="전문가 영상 다음 읽기 흐름"><span>다음 장</span><strong>연구를 읽는 기준</strong><i>→</i><strong>원문 출처</strong></div>
+            <button type="button" className="guide-expert-thread" aria-label="전문가 영상 다음 읽기 흐름" onClick={() => scrollTo('reading-note')}><span>다음 장</span><strong>연구를 읽는 기준</strong><i aria-hidden="true">→</i><strong>원문 출처</strong></button>
           </div>
         </section>
 

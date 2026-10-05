@@ -29,7 +29,9 @@
 .guide-research-detail dd{font-size:14px;line-height:1.75}
 .guide-research-summary{font-size:15px}
 .guide-research-reminder{font-size:14px}
-.guide-research-handoff{display:flex;align-items:center;gap:12px;margin-top:24px;padding:18px 20px;border-top:1px solid #dce9ef;border-bottom:1px solid #dce9ef;color:#7890a1;font-size:13px;line-height:1.45}
+.guide-research-handoff{display:flex;align-items:center;gap:12px;width:100%;margin-top:24px;padding:18px 20px;border:0;border-top:1px solid #dce9ef;border-bottom:1px solid #dce9ef;background:transparent;color:#7890a1;font:inherit;font-size:13px;line-height:1.45;text-align:left;cursor:pointer;transition:background-color .2s ease,border-color .2s ease}
+.guide-research-handoff:hover{background:#f7fbfd;border-top-color:#b9d9e0;border-bottom-color:#b9d9e0}
+.guide-research-handoff:focus-visible{outline:3px solid rgba(29,160,169,.35);outline-offset:4px;border-radius:10px}
 .guide-research-handoff-kicker{color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.13em;white-space:nowrap}
 .guide-research-handoff strong{color:var(--guide-ink);font-size:16px;font-weight:850;letter-spacing:-.045em;white-space:nowrap}
 .guide-research-handoff-line{flex:1 1 auto;height:1px;background:#cfe1e7}
@@ -209,12 +211,14 @@
 .guide-study-source a:hover{text-decoration:underline;text-underline-offset:3px}
 .guide-result-line{display:block;margin-top:13px;color:var(--guide-ink);font-size:15px;line-height:1.7;letter-spacing:-.035em}
 .guide-research-reminder{display:block}
-.guide-expert-thread{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:22px;padding:18px 20px;border-top:1px solid #dce9ef;border-bottom:1px solid #dce9ef;color:#7890a1;font-size:13px}
+.guide-expert-thread{display:flex;align-items:center;flex-wrap:wrap;gap:12px;width:100%;margin-top:22px;padding:18px 20px;border:1px solid #dce9ef;color:#7890a1;background:#f7fbfd;font:inherit;font-size:13px;text-align:left;cursor:pointer;transition:background-color .2s ease,border-color .2s ease;}
+.guide-expert-thread:hover{background:#eef8fa;border-color:#b9d9e0}
+.guide-expert-thread:focus-visible{outline:3px solid rgba(29,160,169,.35);outline-offset:4px}
 .guide-expert-thread span{color:var(--guide-teal-dark);font-weight:850}
 .guide-expert-thread strong{color:var(--guide-ink);font-size:15px}
 .guide-expert-thread i{color:#9ab4c0;font-style:normal}
 /* v66 expert-video handoff: keep the next reading step aligned with the actual story order. */
-.guide-expert-thread{border-radius:14px;background:#f7fbfd}
+.guide-expert-thread{border-radius:14px}
 .guide-expert-thread span{font-size:11px;font-weight:900;letter-spacing:.13em}
 .guide-expert-thread strong{letter-spacing:-.045em}
 @media(max-width:700px){

@@ -86,6 +86,8 @@ requireMatch(publicGuide, /<a href="#opening-bridge"[\s\S]*?scrollTo\('opening-b
 requireMatch(publicGuide, /<section className="guide-opening-bridge guide-story-section" id="opening-bridge"/, 'public GABA opening sleep-and-recovery bridge must have a stable deep-link anchor');
 requireMatch(publicGuideStyles, /v65 research map cue[\s\S]*?\.guide-research-map-cue\{[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-research-map-cue\{/, 'public GABA research map cue must remain readable on desktop and mobile');
 requireMatch(publicGuide, /guide-expert-thread[^>]*aria-label="전문가 영상 다음 읽기 흐름"[\s\S]*?다음 장[\s\S]*?연구를 읽는 기준[\s\S]*?원문 출처/, 'public GABA expert videos must hand off into the actual next reading step');
+requireMatch(publicGuide, /<button type="button" className="guide-research-handoff"[^>]*onClick=\{\(\) => scrollTo\('applications'\)\}/, 'public GABA research handoff must continue into domestic and global applications');
+requireMatch(publicGuide, /<button type="button" className="guide-expert-thread"[^>]*onClick=\{\(\) => scrollTo\('reading-note'\)\}/, 'public GABA expert-video handoff must be an actionable reading control');
 requireMatch(publicGuideStyles, /v66 expert-video handoff[\s\S]*?\.guide-expert-thread\{[\s\S]*?border-radius:14px[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-expert-thread\{/, 'public GABA expert-video handoff must preserve the next-step rhythm on desktop and mobile');
 if (!existsSync(resolve(root, 'public/assets/gaba-guide-social-card.jpg'))) fail('the product-independent GABA guide social card asset is missing');
 const researchRouteStart = app.indexOf('if(researchView)return');
