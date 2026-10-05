@@ -1384,6 +1384,17 @@
         "E-LIVE-PUBLIC-SOURCE-READING-CONTEXT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-137",
+      "statement": "공개 GABA 안내서의 장 진입은 고정 읽기 진행바와 중복되던 상단 여백을 줄여 390px·1440px에서 장 제목을 더 빠르게 읽게 하고, 프로그램 포커스는 스크린리더 이동을 유지하면서 편집용 제목 테두리를 표시하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-CHAPTER-ENTRY-RHYTHM-20261005",
+        "E-UI-CONTRACT-CHAPTER-ENTRY-RHYTHM-20261005",
+        "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-RHYTHM-20261005",
+        "E-LIVE-PUBLIC-CHAPTER-ENTRY-RHYTHM-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10821,6 +10832,50 @@
       "captured_at": "2026-10-05T12:05:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-SOURCE-READING-CONTEXT",
       "claim_refs": ["C-002", "C-003", "C-136"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CHAPTER-ENTRY-RHYTHM-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main commit 871ad39의 production build는 장 진입 여백·프로그램 포커스 표현 보정을 포함해 11개 정적 경로·71개 배포 파일·성능 예산 검사를 통과했다.",
+      "locator": "PR #348 checks; pnpm run validate:ui-contract, pnpm run typecheck, pnpm test (127/127), git diff --check and pnpm run build passed; routes 11; files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1620566 <= 1650000; static bundle, release manifest and performance passed",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\dist",
+      "captured_at": "2026-10-05T12:23:48Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-CHAPTER-ENTRY-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-137"]
+    },
+    {
+      "id": "E-UI-CONTRACT-CHAPTER-ENTRY-RHYTHM-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 장 진입 여백 보정과 프로그램 포커스 제목 테두리 제거 규칙이 유지되는지 회귀 검사한다.",
+      "locator": "pnpm run validate:ui-contract; status ok; scripts/validate-ui-contract.mjs guards v108 chapter entry rhythm padding values and h1/h2/h3 tabindex -1 focus-visible outline reset",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-05T12:23:48Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-CHAPTER-ENTRY-RHYTHM",
+      "claim_refs": ["C-003", "C-137"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CHAPTER-ENTRY-RHYTHM-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "장 진입 리듬 보정 commit 871ad39가 main 공개 파이프라인에서 release-verify·Worker readiness·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "main commit 871ad39daa6d7ee58e325db37e850dddde3e4083; workflow 37309131819; release-verify 111759950756, worker-readiness 111760355076, deploy-pages 111760386353, smoke-live 111760473088 and release-status 111760557724 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37309131819",
+      "captured_at": "2026-10-05T12:23:48Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-CHAPTER-ENTRY-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-137"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CHAPTER-ENTRY-RHYTHM-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본은 연구 지도 장 직접 진입에서 390px·1440px 모두 제목을 읽기 진행바 아래에 배치하고, 모바일 프로그램 포커스의 편집용 테두리를 숨기며 가로 넘침과 runtime 오류 없이 렌더링된다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 871ad39daa6d7ee58e325db37e850dddde3e4083; bundleHashes 71; claims 12; masterRecords 6; sharePages 6; provenance matched; Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?view=guide&qa=chapter-entry-live-871ad39-20261005#academic reported title `연구 지도 | GABA Guide`, heading top 258px at 390px and 319px at 1440px, rail bottom 105px/116px, outlineStyle none at active 390px heading, scrollWidth 390/1425 with innerWidth 390/1440, readyState complete and runtimeErrors []; screenshots captured outside repository and visually reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=chapter-entry-live-871ad39-20261005#academic",
+      "captured_at": "2026-10-05T12:23:48Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-CHAPTER-ENTRY-RHYTHM",
+      "claim_refs": ["C-002", "C-003", "C-137"]
     }
   ]
 }

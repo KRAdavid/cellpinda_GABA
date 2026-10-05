@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T12:05:00Z",
+  "updated_at": "2026-10-05T12:23:48Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T12:05:00Z"
+    "last_run_at": "2026-10-05T12:23:48Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2307,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T12:05:00Z"
+    "last_run_at": "2026-10-05T12:23:48Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4948,6 +4948,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T12:05:00Z"
+    },
+    {
+      "id": "H-207",
+      "event": "공개 장 직접 진입에서 고정 읽기 진행바의 헤더 여백과 장 자체의 상단 여백이 중복되어 모바일 제목이 화면 아래로 밀리고, 프로그램 포커스가 편집용 제목 테두리를 그리는 퍼블리싱 리스크를 확인했다. PR #348에서 데스크톱 장 상단 여백을 72px, 모바일을 58px로 정리하고 h1·h2·h3 tabindex=-1 포커스의 시각 테두리를 제거했으며 UI 계약에 두 규칙을 추가했다. 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #348 checks, main workflow 37309131819의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 live candidate 871ad39daa6d7ee58e325db37e850dddde3e4083는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Chrome CDP fallback 공개 390px·1440px 연구 지도 직접 진입에서 제목 top이 258px·319px, 진행바 bottom이 105px·116px로 확인되었고 모바일 active heading의 outlineStyle은 none, scrollWidth는 390·1425, readyState complete·runtimeErrors 0이었다. 화면 캡처를 별도 검토했으며 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지하고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 결과를 C-137과 네 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T12:23:48Z"
     }
   ]
 }
