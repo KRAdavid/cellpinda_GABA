@@ -1,5 +1,14 @@
 # Audit Report
 
+## Compact Mobile Reading Control — ffd7c2e — 2026-10-06
+
+- 320px 초소형 화면에서 읽기 크기 버튼이 `가+ 글자`·`가− 기본`으로 보이도록 보강했다. 390px 이상에서는 기존 `글자 크게`·`기본 크기` 라벨을 유지하며, 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build와 Playwright Chromium fallback 320·390·1440px 검증을 통과했다. 320px 토글 후 `aria-pressed=true`, `is-large-text`, `가− 기본`, document width 320px, runtime errors 0을 확인했다.
+- PR #383 병합 후 main workflow `37363196125`에서 release-verify·worker-readiness·Pages 배포·라이브 smoke가 성공했고, 공개 validator는 candidate `ffd7c2e1f99fd2806e87274ab9200f948d0fc5fe`의 HTTP 200·STATIC·71개 bundle hash를 확인했다. release-status job은 기록 시점에 queue 대기 상태로 남아 별도 표시했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-READING-CONTROL-COMPACT-20261006, E-UI-CONTRACT-READING-CONTROL-COMPACT-20261006, E-PLAYWRIGHT-READING-CONTROL-COMPACT-20261006, E-DEPLOY-PIPELINE-READING-CONTROL-COMPACT-20261006, E-LIVE-PUBLIC-READING-CONTROL-COMPACT-20261006.
+
 ## Final Public Manifest Sync — f54bae6 — 2026-10-06
 
 - NAVI 증적 PR #381 병합 뒤 최종 공개 manifest candidate가 `f54bae600ce55ab6a2439bbd337eb26fc1949a1d`로 갱신된 것을 확인했다. 코드 변경은 PR #380의 `fb874662`에 포함되어 있으며, 문서 병합은 공개 기능·연구 카피·제품 독립 경계를 변경하지 않았다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T18:42:24.771878Z",
+  "updated_at": "2026-10-05T19:35:02.303401Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5131,6 +5131,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T18:29:04Z"
+    },
+    {
+      "id": "H-230",
+      "event": "320px 초소형 모바일에서 읽기 크기 버튼이 `가+`만 보여 기능 의미가 약해지는 잔여 가독성 리스크를 확인하고, `가+ 글자`·`가− 기본` compact label을 추가했다. 390px 이상은 기존 전체 라벨을 유지하며 320·390·1440px 실제 공개 화면에서 가로 넘침 없이 동작하고, 320px 토글 후 aria-pressed=true·is-large-text·`가− 기본`·콘솔 오류 0을 재현했다. PR #383과 main merge commit ffd7c2e의 release-verify·Pages 배포·라이브 smoke가 성공했고, 공개 validator는 candidate ffd7c2e1f99fd2806e87274ab9200f948d0fc5fe에서 HTTP 200·STATIC·71개 bundle hash를 확인했다. 새 CRITICAL/MAJOR 결함은 없으며 C-153과 다섯 증거를 등록했다. release-status job은 기록 시점에 GitHub Actions queue에 남아 있어 별도로 표시했으며, Safari/iOS/Android·실제 고령 사용자 독해성·독립 과학·규제 감수는 기존 외부 검증 항목으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T19:34:00Z"
     }
   ]
 }

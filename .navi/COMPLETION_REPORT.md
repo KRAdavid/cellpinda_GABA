@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — ffd7c2e — 2026-10-06
+
+- AC-001 공개 URL·정적 번들·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·12개 claim·6개 master record·1개 product·6개 share page·teaser HOLD를 확인했다.
+- AC-004 320·390·1440px 읽기 크기 버튼의 명시적 라벨, 320px 토글, 가로 폭, runtime console errors: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·Pages 배포·라이브 smoke: PASS. release-status job은 기록 시점 GitHub Actions queue 대기였다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-READING-CONTROL-COMPACT-20261006, E-UI-CONTRACT-READING-CONTROL-COMPACT-20261006, E-PLAYWRIGHT-READING-CONTROL-COMPACT-20261006, E-DEPLOY-PIPELINE-READING-CONTROL-COMPACT-20261006, E-LIVE-PUBLIC-READING-CONTROL-COMPACT-20261006.
+
 ## Final Public Manifest Recheck — f54bae6 — 2026-10-06
 
 - AC-001 최종 공개 URL·정적 번들·manifest candidate: PASS.

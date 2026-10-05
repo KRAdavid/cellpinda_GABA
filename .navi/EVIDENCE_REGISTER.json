@@ -1566,6 +1566,18 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-153",
+      "statement": "320px 초소형 모바일에서도 읽기 크기 조절 버튼이 `가+ 글자`와 `가− 기본`으로 의미를 드러내며, 390px 이상에서는 기존 읽기 라벨을 유지하고 글자 크기 전환·가로폭 안정성이 함께 동작한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-READING-CONTROL-COMPACT-20261006",
+        "E-UI-CONTRACT-READING-CONTROL-COMPACT-20261006",
+        "E-PLAYWRIGHT-READING-CONTROL-COMPACT-20261006",
+        "E-DEPLOY-PIPELINE-READING-CONTROL-COMPACT-20261006",
+        "E-LIVE-PUBLIC-READING-CONTROL-COMPACT-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -11743,6 +11755,58 @@
       "captured_at": "2026-10-05T18:41:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-MOBILE-CUE-FLOOR",
       "claim_refs": ["C-001", "C-002", "C-003", "C-152"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-READING-CONTROL-COMPACT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 읽기 크기 버튼 보강 commit 9db9b0b가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 9db9b0b; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1628276 <= 1650000",
+      "captured_at": "2026-10-05T19:10:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-READING-CONTROL-COMPACT",
+      "claim_refs": ["C-001", "C-003", "C-153"]
+    },
+    {
+      "id": "E-UI-CONTRACT-READING-CONTROL-COMPACT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 좁은 화면에서 읽기 크기 버튼에 명시적 compact label을 유지하는 회귀 방지를 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; v122 compact reading control assertion; status ok; events 14",
+      "captured_at": "2026-10-05T19:10:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-READING-CONTROL-COMPACT",
+      "claim_refs": ["C-153"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-READING-CONTROL-COMPACT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Playwright Chromium fallback으로 로컬 320·390·1440px의 읽기 크기 버튼과 320px 토글 상호작용을 확인했다.",
+      "locator": "temporary Playwright script outside repository at http://127.0.0.1:4191/#research-cognition; 320px: control width 60, compact label visible, document scrollWidth 320, click -> aria-pressed true, root is-large-text, `가− 기본`, errors []; 390px: width 72, full label visible, scrollWidth 390; 1440px: width 114.1875, full label visible, scrollWidth 1440; screenshots reviewed outside repository",
+      "captured_at": "2026-10-05T19:12:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-READING-CONTROL-COMPACT",
+      "claim_refs": ["C-003", "C-004", "C-153"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-READING-CONTROL-COMPACT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 읽기 크기 버튼 보강 PR #383이 필수 검사를 통과해 main commit ffd7c2e으로 병합되었고, 정적 Pages 배포와 라이브 smoke가 성공했다.",
+      "locator": "PR #383; code commit 9db9b0b6c35674988e6cda81dbf3966e8b32c493; main merge commit ffd7c2e1f99fd2806e87274ab9200f948d0fc5fe; PR workflow 37361878888; main workflow 37363196125; release-verify 111942386420, worker-readiness 111942901049, deploy-pages 111942962650 and smoke-live 111943101240 successful; deploy-worker 111942964342 skipped by STATIC_ONLY; release-status job remained queued when captured",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37363196125",
+      "captured_at": "2026-10-05T19:32:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-READING-CONTROL-COMPACT",
+      "claim_refs": ["C-001", "C-002", "C-153"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-READING-CONTROL-COMPACT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 읽기 크기 버튼의 초소형 모바일 라벨과 글자 크기 전환을 확인했으며, 공개 번들·데이터·라우트 정합성이 유지된다.",
+      "locator": "pnpm exec node scripts/validate-live-public.mjs; page 200; runtimeMode STATIC; candidateSha ffd7c2e1f99fd2806e87274ab9200f948d0fc5fe; generatedAt 2026-10-05T19:26:02.736Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Playwright Chromium fallback public 320px: compact label visible, width 60, scrollWidth 320, click -> aria-pressed true, root is-large-text, `가− 기본`, errors []; 390px: width 72, full label visible, scrollWidth 390; 1440px: width 114.1875, full label visible, scrollWidth 1440; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/#research-cognition",
+      "captured_at": "2026-10-05T19:34:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-READING-CONTROL-COMPACT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-153"]
     }
   ]
 }
