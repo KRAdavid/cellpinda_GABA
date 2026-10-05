@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 2ca5a8a
+
+- 공격 관점에서 확인한 실패 모드는 지연 렌더링 하위 장을 처음 열 때 실제 콘텐츠 높이가 예약값보다 커져 현재 읽는 장면과 다음 장면의 위치가 갑자기 바뀌는 것이었다. PR #322에서 모바일·태블릿·데스크톱 폭별 예약 높이를 분리해 이 실패 모드를 보정했다.
+- 로컬 CDP 감사는 390·768·1024·1440px에서 방문 전·후 위치 차이를 각각 모바일 1–5px, 768px 1px, 1024px·1440px 0px로 확인했으며 390·768·1024·1440px의 가로 넘침도 없었다. 공개 URL 직접 진입도 동일 폭에서 연구·전문가 영상·마지막 장의 헤더 아래 정렬을 유지했다.
+- 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 확인되지 않았지만 Chrome 대표 렌더만으로 모든 브라우저·실기기를 보장할 수 없으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005, E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005, E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005, E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005.
+
 ## Recheck — 2026-10-05 — 2226541
 
 - 공격 관점에서 확인한 실패 모드는 1440px 데스크톱 hero 사진 위의 `아래로 읽기` 안내가 낮은 대비로 묻혀 방문자가 긴 안내서의 다음 장면을 놓치는 것이었다. PR #320에서 701px 이상 안내를 pill·테두리·그림자·blur로 분리하고 v109 UI 계약으로 회귀를 고정했다.
