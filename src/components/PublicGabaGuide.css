@@ -216,7 +216,7 @@
 .guide-expert-thread:focus-visible{outline:3px solid rgba(29,160,169,.35);outline-offset:4px}
 .guide-expert-thread span{color:var(--guide-teal-dark);font-weight:850}
 .guide-expert-thread strong{color:var(--guide-ink);font-size:15px}
-.guide-expert-thread i{color:#9ab4c0;font-style:normal}
+.guide-expert-thread-arrow{flex:0 0 auto;color:#9ab4c0}
 /* v66 expert-video handoff: keep the next reading step aligned with the actual story order. */
 .guide-expert-thread{border-radius:14px}
 .guide-expert-thread span{font-size:11px;font-weight:900;letter-spacing:.13em}
