@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 2c7433b — 2026-10-05
+
+- 381–430px 모바일 헤더에서 메뉴 아이콘이 이름이 표시된 읽기 크기 버튼과 겹쳐 보이는 실제 렌더 결함을 확인했다. PR #318에서 v108 간격 규칙으로 메뉴를 읽기 크기 버튼 왼쪽에 12px 간격으로 배치했다.
+- PR #318의 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. main workflow `37275123302`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `2c7433b144ef1930e7b7a21c744dd468d751e431`은 HTTP 200, STATIC, 12 공개 claims, 6 research records, 1 product, teaser HOLD를 유지한다. 캐시를 비활성화한 Chrome CDP fallback 공개 320·350·381·390·430px에서 헤더 컨트롤 겹침 0건과 각 뷰포트 `scrollWidth` 일치를 확인했다.
+- 정적 계약·배포 정합성·대표 모바일 렌더는 확인했지만 브라우저 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-NARROW-HEADER-SPACING-20261005, E-UI-CONTRACT-NARROW-HEADER-SPACING-20261005, E-DEPLOY-PIPELINE-NARROW-HEADER-SPACING-20261005, E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005.
+
 ## Release Recheck — 030f43a — 2026-10-05
 
 - 320px 좁은 모바일 연구 비교 도표에서 비교 조건·GABA 조건 레이블이 한 줄 고정으로 화면 밖으로 밀려나는 실제 렌더 결함을 확인했다. PR #316에서 430px 이하 도표 헤더를 grid로 재배치하고 레이블의 최소 폭·줄바꿈·overflow-wrap을 보강했으며 UI 계약에 v107 회귀 조건을 추가했다.

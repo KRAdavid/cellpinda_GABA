@@ -1214,6 +1214,17 @@
         "E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-121",
+      "statement": "공개 GABA 안내서의 381–430px 모바일 헤더는 메뉴 아이콘, 읽기 크기 버튼, 공유 버튼을 서로 겹치지 않게 배치하고 320–430px에서 가로 넘침이 없다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-HEADER-SPACING-20261005",
+        "E-UI-CONTRACT-NARROW-HEADER-SPACING-20261005",
+        "E-DEPLOY-PIPELINE-NARROW-HEADER-SPACING-20261005",
+        "E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10013,6 +10024,50 @@
       "captured_at": "2026-10-05T06:43:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-NARROW-CHART-HEADER",
       "claim_refs": ["C-002", "C-003", "C-120"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-HEADER-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "381–430px 모바일 헤더의 메뉴 아이콘과 이름이 표시된 읽기 크기 버튼 사이 간격을 보정한 PR #318 source commit이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #318 source commit 0d4d7f4; pnpm run validate:ui-contract PASS including v108 narrow header spacing assertion; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1614864 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/318",
+      "captured_at": "2026-10-05T06:55:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-NARROW-HEADER-SPACING",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-121"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-HEADER-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 381–430px에서 이름이 표시되는 읽기 크기 버튼과 메뉴 아이콘 사이의 12px 이상 간격을 v108 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v108 assertion; PublicGabaGuide.css @supports padding max plus @media(min-width:381px) and (max-width:430px) sets .guide-header .guide-menu-toggle right:calc(148px + env(safe-area-inset-right)) while the 72px reading-size control stays right:calc(64px + env(safe-area-inset-right)); command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/318",
+      "captured_at": "2026-10-05T06:55:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-NARROW-HEADER-SPACING",
+      "claim_refs": ["C-003", "C-121"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-HEADER-SPACING-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "헤더 컨트롤 간격 보정 PR #318이 필수 검사를 통과해 main commit 2c7433b1에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #318 merge main commit 2c7433b144ef1930e7b7a21c744dd468d751e431; PR checks release-verify 37275007439 and site-quality-verify 37275007421 successful; main workflow 37275123302 with release-verify 111650348681, worker-readiness 111650663457, deploy-pages 111650690236, smoke-live 111650748229 and release-status 111650805135 successful; deploy-worker 111650691858 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37275123302",
+      "captured_at": "2026-10-05T06:59:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-NARROW-HEADER-SPACING",
+      "claim_refs": ["C-001", "C-002", "C-121"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 최신 main 후보와 일치하고, 캐시를 비활성화한 Chrome CDP fallback 공개 렌더에서 320·350·381·390·430px 헤더 컨트롤이 서로 겹치지 않으며 화면 밖으로 밀려나지 않음을 확인했다.",
+      "locator": "release-manifest.json HTTP 200; candidateSha 2c7433b144ef1930e7b7a21c744dd468d751e431; generatedAt 2026-10-05T06:59:00.801Z; runtimeMode STATIC; counts claims 12, research 6, products 1, reviews 1; teaser HOLD/publicUrl false; Chrome CDP fallback at public URL https://kradavid.github.io/gaba_info/?qa=header-spacing-live-20261005 with Network.clearBrowserCache and Network.setCacheDisabled at 320/350/381/390/430x844 confirmed document scrollWidth equals viewport and overlapPairs=[]; at 390px menu 198–242, reading-size 254–326, share 334–378 with 12px gaps; screenshot outside repository reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=header-spacing-live-20261005",
+      "captured_at": "2026-10-05T07:01:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-NARROW-HEADER-SPACING",
+      "claim_refs": ["C-002", "C-003", "C-121"]
     }
   ]
 }

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T06:43:00.000000Z",
+  "updated_at": "2026-10-05T07:01:00.000000Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -1965,7 +1965,8 @@
           "E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004",
           "E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005",
           "E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005",
-          "E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005"
+          "E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005",
+          "E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005"
         ],
         "impact": "브라우저별 시각 차이가 남을 수 있다.",
         "required_action": "Safari/iOS/Android 대표 환경 추가 확인",
@@ -2110,7 +2111,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T06:43:00Z"
+    "last_run_at": "2026-10-05T07:01:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2290,7 +2291,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T06:43:00Z"
+    "last_run_at": "2026-10-05T07:01:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -2528,7 +2529,11 @@
           "E-LOCAL-BUILD-NARROW-CHART-HEADER-20261005",
           "E-UI-CONTRACT-NARROW-CHART-HEADER-20261005",
           "E-DEPLOY-PIPELINE-NARROW-CHART-HEADER-20261005",
-          "E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005"
+          "E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005",
+          "E-LOCAL-BUILD-NARROW-HEADER-SPACING-20261005",
+          "E-UI-CONTRACT-NARROW-HEADER-SPACING-20261005",
+          "E-DEPLOY-PIPELINE-NARROW-HEADER-SPACING-20261005",
+          "E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005"
         ],
         "notes": "최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·연구 프로필·지도 현재 주제 활성·선택 카드 시각 강조·전역 메뉴의 수면과 회복 진입·수면과 회복 02 / 12 진행 맥락·768/820px 태블릿 헤더·전문가 영상 선택 상태·모바일 메뉴 포커스 순환·제품 독립 연구 경로·연구 규모 비교 기준 분리·모바일 연구 결과 카드 가용 폭·모바일 읽기 라벨 12px·가+/가− 읽기 조절·직접 해시 진입 제목 정렬을 재확인"
       },
@@ -4815,6 +4820,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T06:43:00Z"
+    },
+    {
+      "id": "H-191",
+      "event": "381–430px 모바일 헤더에서 메뉴 아이콘이 이름이 표시된 읽기 크기 버튼과 겹쳐 보이는 실제 공개 렌더 결함을 확인했다. PR #318에서 v108 간격 규칙으로 메뉴를 148px 오른쪽 오프셋에 배치해 읽기 크기 버튼과 12px 간격을 확보했다. 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #318 checks, main workflow 37275123302의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 live candidate 2c7433b144ef1930e7b7a21c744dd468d751e431은 HTTP 200·STATIC·12개 공개 claim·6개 research record·제품 독립 경계를 확인했다. 캐시를 비활성화한 Chrome CDP fallback 공개 320·350·381·390·430px에서 헤더 컨트롤 겹침 0건과 각 뷰포트 scrollWidth 일치를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T07:01:00Z"
     }
   ]
 }
