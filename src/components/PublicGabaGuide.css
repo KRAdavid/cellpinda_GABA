@@ -1845,6 +1845,7 @@
   .gaba-guide .guide-video-filters-wrap{
     overflow-x:auto;
     overflow-y:hidden;
+    overscroll-behavior-x:contain;
     margin:0 -2px 12px;
     padding:0 2px 7px;
     scrollbar-color:#9acfd0 transparent;
