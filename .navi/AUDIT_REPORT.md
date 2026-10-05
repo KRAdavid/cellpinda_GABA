@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 9c1a5cf — 2026-10-05
+
+- 첫 화면 H1과 장 제목의 줄바꿈 경계에서 한국어 단어가 붙어 보이거나 텍스트 구조에서 공백이 사라지는 잔여 퍼블리싱 리스크를 확인했다. PR #328에서 장 제목을, PR #329에서 H1·정적 no-script 제목을 명시적 공백으로 보정하고 UI 계약에 회귀 검사를 추가했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #328 main workflow `37287592876`과 PR #329 main workflow `37288363450`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 manifest candidate `9c1a5cf0200a46f8505ce471f0c67f46c27a1724`는 HTTP 200, STATIC, 12 공개 claims, 6 research records, 1 product, 6 share pages, teaser HOLD를 유지한다. 캐시를 비활성화한 Chrome CDP fallback 공개 320·390·768·1024·1440px에서 H1과 14개 H2의 textContent가 자연스러운 공백을 보존하고 scrollWidth가 320·390·753·1009·1425px으로 일치하며 runtimeErrors 0을 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. 브라우저 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-KOREAN-HEADING-SPACING-20261005, E-UI-CONTRACT-KOREAN-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-KOREAN-HEADING-SPACING-20261005, E-LIVE-PUBLIC-KOREAN-HEADING-SPACING-20261005.
+
 ## Release Recheck — a18561f — 2026-10-05
 
 - 390px 모바일 연구 비교 도표에서 `GABA를 바른 조건` 범례가 세 칸 헤더 안에서 음절 단위로 깨지는 잔여 인포그래픽 리스크를 확인했다. PR #326에서 430px 이하 범례를 `변화 방향 → 비교 조건 → GABA 조건`의 세로 읽기 순서로 재배치하고 조건명을 한 줄로 보존했다.

@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 공개 한국어 제목 공백 감리·보강 — 9c1a5cf — 2026-10-05
+
+- 자동 한글 감리에서 줄바꿈 경계의 공백이 사라져 `저속노화,회복하는`, `시작됩니다그`, `넘어여러`처럼 읽힐 수 있는 실제 제목 결함을 확인했다. PR #328에서 장 제목을, PR #329에서 첫 화면 H1과 정적 no-script 제목을 보정하고 UI 계약에 제목 공백 회귀 조건을 추가했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #328 main workflow `37287592876`과 PR #329 main workflow `37288363450`의 Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 최종 공개 candidate `9c1a5cf0200a46f8505ce471f0c67f46c27a1724`는 HTTP 200, STATIC, 12 claims, 6 research records, 1 product, 6 share pages, teaser HOLD를 제공한다. 캐시를 비활성화한 Chrome CDP 공개 320·390·768·1024·1440px에서 H1·14개 H2의 textContent 공백, 각 폭의 scrollWidth 일치, runtimeErrors 0을 확인했다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-KOREAN-HEADING-SPACING-20261005, E-UI-CONTRACT-KOREAN-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-KOREAN-HEADING-SPACING-20261005, E-LIVE-PUBLIC-KOREAN-HEADING-SPACING-20261005.
+
 ## 모바일 연구 비교 범례 흐름 보강 — a18561f — 2026-10-05
 
 - 390px 공개 렌더에서 조건명이 음절 단위로 깨지는 문제를 확인하고, 430px 이하 연구 도표 범례를 `변화 방향 → 비교 조건 → GABA 조건`의 세로 순서로 재배치했다. 조건명은 한 줄로 유지해 아래 결과 막대와 자연스럽게 연결된다.

@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 9c1a5cf — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-004 320·390·768·1024·1440px 장 제목·첫 화면 H1의 자연스러운 공백, 가로 폭 안정성·runtimeErrors 0: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #328·#329와 main 공개 배포 workflow `37287592876`·`37288363450`이 성공했고, 최종 공개 manifest는 candidate `9c1a5cf0200a46f8505ce471f0c67f46c27a1724`, HTTP 200, STATIC, 12 claims, 6 research, 1 product, 6 share pages, teaser HOLD를 확인했다. 첫 화면 H1과 14개 H2의 textContent가 자연스러운 한국어 공백을 보존하고, 공개 CDP responsive audit의 scrollWidth는 320·390·753·1009·1425px이었다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-KOREAN-HEADING-SPACING-20261005, E-UI-CONTRACT-KOREAN-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-KOREAN-HEADING-SPACING-20261005, E-LIVE-PUBLIC-KOREAN-HEADING-SPACING-20261005.
+
 ## Current Release Recheck — a18561f — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

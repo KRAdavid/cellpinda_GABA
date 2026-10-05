@@ -1269,6 +1269,17 @@
         "E-LIVE-PUBLIC-MOBILE-COMPARISON-LEGEND-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-126",
+      "statement": "공개 GABA 안내서의 첫 화면과 장 제목은 줄바꿈 경계에서도 단어 사이 공백을 보존해 화면·텍스트 구조·보조기기에서 자연스러운 한국어 문장으로 읽힌다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-KOREAN-HEADING-SPACING-20261005",
+        "E-UI-CONTRACT-KOREAN-HEADING-SPACING-20261005",
+        "E-DEPLOY-PIPELINE-KOREAN-HEADING-SPACING-20261005",
+        "E-LIVE-PUBLIC-KOREAN-HEADING-SPACING-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10288,6 +10299,50 @@
       "captured_at": "2026-10-05T08:42:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-COMPARISON-LEGEND",
       "claim_refs": ["C-002", "C-003", "C-125"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-KOREAN-HEADING-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GABA 안내서의 한국어 제목 공백 보정 PR #328·#329가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #328 source commit 517cda8 and PR #329 source commit 2c6786c; pnpm run validate:ui-contract PASS including heading word-boundary assertions; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS with 1808 modules, initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1617409 bytes <= 1650000 budget; 11 static routes and 71 release files; release manifest, public artifacts and static bundle validation PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/329",
+      "captured_at": "2026-10-05T09:01:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-KOREAN-HEADING-SPACING",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-126"]
+    },
+    {
+      "id": "E-UI-CONTRACT-KOREAN-HEADING-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 첫 화면 H1과 주요 장 H2의 줄바꿈 경계에 의미 있는 공백을 유지하도록 회귀 방지 조건을 고정한다.",
+      "locator": "scripts/validate-ui-contract.mjs heading word-boundary assertions; PublicGabaGuide.tsx uses explicit JSX spaces after semantic br boundaries for the hero H1 and chapter headings; Chrome CDP local heading audit reported natural textContent for H1 and 14 H2 headings with no runtime errors",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/329",
+      "captured_at": "2026-10-05T09:02:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-KOREAN-HEADING-SPACING",
+      "claim_refs": ["C-003", "C-126"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-KOREAN-HEADING-SPACING-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "한국어 제목 공백 보정 PR #328·#329가 필수 검사를 통과해 main commit 9c1a5cf에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #328 merge main commit 0a8bce17fb1330cb07d8e0866a83c19818b9c513; main workflow 37287592876 with release-verify 111690093576, worker-readiness 111690503743, deploy-pages 111690543691, smoke-live 111690637300 and release-status 111690705427 successful; PR #329 merge main commit 9c1a5cf0200a46f8505ce471f0c67f46c27a1724; main workflow 37288363450 with release-verify 111692613860, worker-readiness 111693067606, deploy-pages 111693111568, smoke-live 111693199607 and release-status 111693293933 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37288363450",
+      "captured_at": "2026-10-05T09:11:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-KOREAN-HEADING-SPACING",
+      "claim_refs": ["C-001", "C-002", "C-126"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-KOREAN-HEADING-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 main commit 9c1a5cf와 일치하고, 첫 화면 H1과 14개 장 H2가 자연스러운 공백을 유지하며 320·390·768·1024·1440px에서 가로 넘침 없이 렌더된다.",
+      "locator": "validate:live-public HTTP 200; candidateSha 9c1a5cf0200a46f8505ce471f0c67f46c27a1724; generatedAt 2026-10-05T09:12:09.398Z; runtimeMode STATIC; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; cache-disabled Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?view=guide&qa=hero-spacing-20261005-unique reported H1 textContent `저속노화, 회복하는 밤에서 시작됩니다 그 회복의 신호를 GABA에서 읽습니다`, all chapter H2 textContent with natural word boundaries, runtimeErrors 0; responsive audit reported scrollWidth 320/390/753/1009/1425 equal to viewport layout widths and runtimeErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=hero-spacing-20261005-unique",
+      "captured_at": "2026-10-05T09:13:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-KOREAN-HEADING-SPACING",
+      "claim_refs": ["C-002", "C-003", "C-126"]
     }
   ]
 }
