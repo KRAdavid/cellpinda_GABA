@@ -1594,3 +1594,16 @@
 
 /* v82 reduced-motion coverage: make every public-guide transition and loading animation respect the reader's system preference. */
 @media(prefers-reduced-motion:reduce){.gaba-guide *,.gaba-guide *::before,.gaba-guide *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* v90 progressive publishing: defer below-fold editorial surfaces without touching the active research observer. */
+@supports (content-visibility:auto){
+  .gaba-guide .guide-applications,
+  .gaba-guide .guide-fermented-safety,
+  .gaba-guide .guide-growth-story,
+  .gaba-guide .guide-expert-videos,
+  .gaba-guide .guide-reading-note,
+  .gaba-guide .guide-final{
+    content-visibility:auto;
+    contain-intrinsic-size:900px
+  }
+}
