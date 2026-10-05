@@ -914,6 +914,7 @@
 .guide-recovery-card-eyebrow{max-width:100%;margin:0 0 24px;color:#a9e4e0;font-size:18px;font-weight:850;letter-spacing:-.045em;line-height:1.4;word-break:keep-all;overflow-wrap:anywhere}
 .guide-recovery-card-copy>p:last-child{max-width:47ch;margin:0;color:#d1e3e8;font-size:16px;line-height:1.85;letter-spacing:-.04em}
 .guide-recovery-card-footer{position:relative;z-index:1;display:grid;grid-template-columns:minmax(120px,1fr) auto auto;align-items:center;gap:13px;margin-top:28px;color:#a9d3d7;font-size:11px;letter-spacing:.03em}
+.guide-recovery-playback-status{font-weight:780;white-space:nowrap}
 .guide-recovery-progress{height:3px;border-radius:999px;background:rgba(223,247,248,.2);overflow:hidden}
 .guide-recovery-progress i{display:block;width:100%;height:100%;border-radius:inherit;background:#9ce5e0;transform-origin:left center;animation:guide-recovery-progress 3s linear both}
 .guide-recovery-card.is-paused .guide-recovery-progress i{animation-play-state:paused}
@@ -948,6 +949,7 @@
   .guide-recovery-card-eyebrow{margin-bottom:19px;font-size:16px;line-height:1.45}
   .guide-recovery-card-copy>p:last-child{font-size:16px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
   .guide-recovery-card-footer{grid-template-columns:minmax(0,1fr) auto;gap:9px;margin-top:25px;font-size:10px}
+  .guide-recovery-playback-status{font-weight:800}
   .guide-recovery-card-footer span:last-child{grid-column:1/-1}
   .guide-recovery-controls{margin-top:13px}
   .guide-recovery-thread{gap:7px;margin-top:22px;font-size:10px}

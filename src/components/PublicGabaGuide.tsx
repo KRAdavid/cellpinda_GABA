@@ -986,10 +986,10 @@ export default function PublicGabaGuide() {
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
   const recoveryIsPaused = recoveryPaused || recoveryInteractionPaused;
   const recoveryPlaybackLabel = recoveryReducedMotion
-    ? '접근성을 위해 자동 전환 꺼짐'
+    ? '사용자 진행'
     : recoveryIsPaused
       ? '일시정지'
-      : '3초마다 다음 카드';
+      : '자동 진행 · 3초마다';
 
   useLayoutEffect(() => {
     document.title = '저속노화, 회복하는 밤에서 시작됩니다 | GABA Guide';
@@ -1794,7 +1794,7 @@ export default function PublicGabaGuide() {
               <div className="guide-recovery-card-footer">
                 <div className="guide-recovery-progress" aria-hidden="true"><i key={activeRecoveryCard} /></div>
                 <span>{String(activeRecoveryCard + 1).padStart(2, '0')} / {String(recoveryCards.length).padStart(2, '0')}</span>
-                <span>{recoveryPlaybackLabel}</span>
+                <span className="guide-recovery-playback-status">{recoveryPlaybackLabel}</span>
               </div>
             </div>
             <div className="guide-recovery-controls" aria-label="수면과 회복 카드 조작">
