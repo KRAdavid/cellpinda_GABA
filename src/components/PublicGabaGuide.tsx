@@ -1585,7 +1585,8 @@ export default function PublicGabaGuide() {
         <button type="button" className="guide-header-share" aria-label="페이지 공유하기" title="페이지 공유하기" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`}>
           <div className="guide-reading-progress-track" role="progressbar" aria-label="읽기 진행" aria-valuemin={0} aria-valuemax={progressChapterCount} aria-valuenow={progressValue}><span aria-hidden="true" style={{ width: `${(progressValue / progressChapterCount) * 100}%` }} /></div>
-          <div className="guide-reading-progress-meta" role="status" aria-live="polite" aria-atomic="true" aria-label={progressAriaLabel}><span aria-hidden="true">지금 읽는 중</span><strong aria-hidden="true">{activeReadingLabel}</strong><small aria-hidden="true">{progressCountLabel}</small></div>
+          <div className="guide-reading-progress-meta" aria-hidden="true"><span>지금 읽는 중</span><strong>{activeReadingLabel}</strong><small>{progressCountLabel}</small></div>
+          <span className="guide-reading-progress-live sr-only" role="status" aria-live="polite" aria-atomic="true" aria-hidden={activeChapterId === 'top'}>{progressAriaLabel}</span>
         </div>
       </header>
       {menuOpen ? <button type="button" className="guide-menu-backdrop" aria-label="메뉴 닫기" onClick={() => { setMenuOpen(false); window.requestAnimationFrame(() => menuToggleRef.current?.focus()); }} /> : null}
