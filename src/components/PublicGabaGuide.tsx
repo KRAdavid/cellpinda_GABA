@@ -944,6 +944,7 @@ export default function PublicGabaGuide() {
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
   const activeResearchTopic = researchTopics.find((topic) => topic.id === activeResearchTopicId);
+  const activeResearchTopicIndex = activeResearchTopic ? researchTopics.findIndex((topic) => topic.id === activeResearchTopic.id) : -1;
   // Keep the final source-reading example connected to the research card the reader just saw.
   // The first card remains the calm default for a direct visit to the reading note.
   const sourceReadingTopic = activeResearchTopic ?? researchTopics[0];
@@ -964,12 +965,16 @@ export default function PublicGabaGuide() {
     ? '도입부'
     : activeChapterId === 'recovery-break'
       ? '다음 장으로 이어져요'
+      : activeChapterId === 'research' && activeResearchTopicIndex >= 0
+        ? `${String(Math.max(0, activeProgressIndex + 1)).padStart(2, '0')} / ${String(progressChapterCount).padStart(2, '0')} · 연구 ${String(activeResearchTopicIndex + 1).padStart(2, '0')} / ${String(researchTopics.length).padStart(2, '0')}`
       : `${String(Math.max(0, activeProgressIndex + 1)).padStart(2, '0')} / ${String(progressChapterCount).padStart(2, '0')}`;
   const progressAriaLabel = activeChapterId === 'opening-bridge'
     ? `현재 읽는 장: ${activeReadingLabel}. 본문을 여는 도입부입니다. 전체 ${progressChapterCount}장.`
     : activeChapterId === 'recovery-break'
       ? `현재 읽는 장: ${activeReadingLabel}. 본문 사이에 이어지는 설명입니다. 전체 ${progressChapterCount}장.`
-      : `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장.`;
+      : activeChapterId === 'research' && activeResearchTopicIndex >= 0
+        ? `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장, 연구 영역 ${activeResearchTopicIndex + 1}번째 중 ${researchTopics.length}개.`
+        : `현재 읽는 장: ${activeReadingLabel}. 전체 ${progressChapterCount}장 중 ${Math.max(0, activeProgressIndex + 1)}장.`;
   const recoveryCard = recoveryCards[activeRecoveryCard];
   const recoveryArtPosition = `${recoveryCard.artIndex % 2 ? '100%' : '0%'} ${Math.floor(recoveryCard.artIndex / 2) * 25}%`;
   const recoveryIsPaused = recoveryPaused || recoveryInteractionPaused;
