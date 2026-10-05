@@ -823,7 +823,7 @@
 }
 
 /* v13 reading polish: keep the long-form story oriented without adding another navigation layer. */
-.guide-reading-progress{position:fixed;top:78px;left:0;right:0;z-index:19;display:grid;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:0 8px 18px rgba(21,47,79,.06);opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .25s ease,transform .25s ease}
+.guide-reading-progress{position:fixed;top:78px;left:0;right:0;z-index:19;display:grid;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:0 8px 18px rgba(21,47,79,.06);opacity:0;pointer-events:none;transform:translateY(-8px);transition:transform .25s ease}
 .guide-reading-progress.is-visible{opacity:1;transform:translateY(0)}
 .guide-reading-progress-track{height:3px;background:#dfecef}
 .guide-reading-progress-track span{display:block;height:100%;background:var(--guide-teal);transition:width .35s ease}
@@ -1154,6 +1154,7 @@
 @media(prefers-reduced-motion:reduce){.guide-reading-size-toggle,.guide-research-map-item,.guide-research-map-dot{transition:none}}
 
 /* v21 reading rail legibility: keep scrolled copy from bleeding through the progress strip. */
+/* v111 reading rail transition: reveal the opaque location surface immediately so hero imagery never bleeds through its copy during the slide-in. */
 .guide-reading-progress{background:#fff;isolation:isolate}
 
 /* v22 mobile menu layer: keep the chapter menu above the sticky reading context. */
