@@ -1639,7 +1639,11 @@ export default function PublicGabaGuide() {
             <h1 id="guide-hero-heading" tabIndex={-1}><span>저속노화,<br />{' '}회복하는 밤에서 시작됩니다.</span>{' '}<em>그 회복의 신호를<span className="guide-mobile-break"><br /></span>{' '}<span className="guide-hero-gaba-line">GABA에서<span className="guide-mobile-break"><br /></span>{' '}읽습니다</span></em></h1>
             <p className="guide-hero-body">낮에는 몸과 뇌가 에너지를 사용합니다. 밤이 되면 몸은 회복에 필요한 과정으로 전환됩니다.</p>
             <p className="guide-editorial-note">{editorialNotice}</p>
-            <p className="guide-rail"><span>3분 읽기</span> 수면과 회복 → GABA의 발견 → GABA란 → 연구 지도 → 활용 사례</p>
+            <p className="guide-rail guide-hero-route">
+              <span className="guide-hero-route-label" aria-hidden="true">3분 읽기</span>
+              <ol className="guide-hero-route-list" aria-hidden="true"><li>수면과 회복</li><li>GABA의 발견</li><li>GABA란</li><li>연구 지도</li><li>활용 사례</li></ol>
+              <span className="sr-only">3분 읽기: 수면과 회복, GABA의 발견, GABA란, 연구 지도, 활용 사례</span>
+            </p>
           </div>
           <NeuronNetwork />
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
@@ -1672,7 +1676,7 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead">유진 로버츠와 샘 프랭클은 당시의 분석 기술로 뇌 조직을 들여다보다가, 다른 조직에서는 거의 보이지 않는 물질을 발견했습니다. 그 물질이 바로 GABA였습니다.</p>
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <div className="guide-research-scale" aria-label="GABA 연구 규모">
-              <div className="guide-research-scale-head"><div><p className="guide-section-number">연구 규모</p><h3>하나의 신호.<br />{' '}넓어진 연구.</h3></div><p>1950 → 지금</p></div>
+              <div className="guide-research-scale-head"><div><p className="guide-section-number">연구 규모</p><h3>하나의 신호.<br />{' '}넓어진 연구.</h3></div><p className="guide-research-scale-range" aria-label="1950년부터 현재까지"><span aria-hidden="true">1950</span><i aria-hidden="true" /><span aria-hidden="true">지금</span><span className="sr-only">1950년부터 현재까지</span></p></div>
               <div className="guide-research-scale-reading" role="note" aria-label="연구 수치를 읽는 기준">
                 <span className="is-shared"><i aria-hidden="true" /><strong>같은 검색 기준</strong><em>하버드 · 옥스퍼드 · PubMed</em></span>
                 <span className="is-separate"><i aria-hidden="true" /><strong>별도 연구 분석</strong><em>GABA-A 수용체 · SCIE</em></span>
