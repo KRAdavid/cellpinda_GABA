@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "USER_DECISION",
-  "updated_at": "2026-10-05T01:10:00Z",
+  "updated_at": "2026-10-05T01:28:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -467,7 +467,11 @@
         "E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005",
         "E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005",
-        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005"
+        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-LOCAL-BUILD-NARROW-COMPARISON-20261005",
+        "E-UI-CONTRACT-NARROW-COMPARISON-20261005",
+        "E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005",
+        "E-LIVE-PUBLIC-NARROW-COMPARISON-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1062,7 +1066,11 @@
         "E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005",
         "E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005",
-        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005"
+        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-LOCAL-BUILD-NARROW-COMPARISON-20261005",
+        "E-UI-CONTRACT-NARROW-COMPARISON-20261005",
+        "E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005",
+        "E-LIVE-PUBLIC-NARROW-COMPARISON-20261005"
       ],
       "owner": "QA"
     },
@@ -1268,7 +1276,11 @@
         "E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005",
         "E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005",
         "E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005",
-        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005"
+        "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005",
+        "E-LOCAL-BUILD-NARROW-COMPARISON-20261005",
+        "E-UI-CONTRACT-NARROW-COMPARISON-20261005",
+        "E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005",
+        "E-LIVE-PUBLIC-NARROW-COMPARISON-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -4551,6 +4563,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T01:10:00Z"
+    },
+    {
+      "id": "H-174",
+      "event": "430px 이하 휴대폰에서 연구 결과 비교 레인이 좌우로 압축되어 비교 조건과 GABA 결과를 한눈에 대조하기 어려울 수 있는 잔여 인포그래픽 리스크를 확인하고 PR #283에서 두 레인을 한 열로 세로 배치하고 GABA 결과 레인에 좌측 teal 표식을 추가했다. v95 UI 계약으로 좁은 모바일 비교 순서를 고정했으며 연구 수치·출처 데이터·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #283 checks, main workflow 37251345872의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate b343def175eb3d65b3ee844c4cb14a2e4ba9f2ea는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T01:28:00Z"
     }
   ]
 }

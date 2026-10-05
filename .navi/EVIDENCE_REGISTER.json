@@ -1027,6 +1027,17 @@
         "E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-104",
+      "statement": "공개 GABA 안내서의 좁은 휴대폰 연구 결과 비교 그래프는 430px 이하에서 비교 조건과 GABA 결과를 한 줄씩 세로로 배치하고 GABA 결과에 시각 표식을 유지해 직관적 비교를 돕는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-COMPARISON-20261005",
+        "E-UI-CONTRACT-NARROW-COMPARISON-20261005",
+        "E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005",
+        "E-LIVE-PUBLIC-NARROW-COMPARISON-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9078,6 +9089,50 @@
       "captured_at": "2026-10-05T01:10:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-CONTEXT-FLOOR",
       "claim_refs": ["C-002", "C-003", "C-007", "C-103"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-COMPARISON-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "430px 이하 휴대폰에서 연구 결과 비교 레인을 세로 읽기 순서로 정리하고 GABA 결과 표식을 추가한 v95 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #283 source commit d7ccdad; pnpm run validate:ui-contract PASS including v95 narrow-phone comparison guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1606109 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/283",
+      "captured_at": "2026-10-05T01:28:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-NARROW-COMPARISON",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-104"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-COMPARISON-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 430px 이하 휴대폰에서 연구 결과 비교 레인을 한 열로 배치하고 GABA 결과 레인에 시각 표식을 유지하는 구조를 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v95 narrow-phone comparison reading sequence assertion; .guide-outcome-lanes uses grid-template-columns:1fr inside @media(max-width:430px) and .guide-outcome-lane.is-result keeps box-shadow:inset 3px 0 0 #26a6aa; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/283",
+      "captured_at": "2026-10-05T01:28:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-NARROW-COMPARISON",
+      "claim_refs": ["C-003", "C-104"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 연구 비교 흐름 PR #283이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #283 merge main commit b343def175eb3d65b3ee844c4cb14a2e4ba9f2ea; PR checks release-verify 37251249298 job 111579167591 and site-quality-verify 37251249282 job 111579167794 successful; main workflow 37251345872 with release-verify 111579443849, worker-readiness 111579670397, deploy-pages 111579695866, smoke-live 111579739755 and release-status 111579778160 successful; deploy-worker 111579696485 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37251345872",
+      "captured_at": "2026-10-05T01:28:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-NARROW-COMPARISON",
+      "claim_refs": ["C-001", "C-002", "C-104"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-COMPARISON-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 좁은 휴대폰 연구 비교 흐름 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=b343def175eb3d65b3ee844c4cb14a2e4ba9f2ea pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha b343def175eb3d65b3ee844c4cb14a2e4ba9f2ea; generatedAt 2026-10-05T01:26:06.082Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research",
+      "captured_at": "2026-10-05T01:28:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-NARROW-COMPARISON",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-104"]
     }
   ]
 }
