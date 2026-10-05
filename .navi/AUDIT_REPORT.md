@@ -1,5 +1,16 @@
 # Audit Report
 
+## Release Recheck — a796f3d — 2026-10-05
+
+- 전문가 영상 게시판의 한국어 헤더에 영문식 자간이 남아 주제와 영상 수가 벌어져 보일 수 있는 퍼블리싱 리스크를 확인했다. PR #295에서 한국어 자간을 자연스럽게 보정하고, 각 주제 필터가 연결되는 영상 목록을 `aria-controls`로 명시했다. 기존 주제 pill·영상 수·live 상태·즉시 재생·공유 URL·제품 독립 공개 경계는 유지했다.
+- 빈 로컬 주문 입력 매니페스트에는 개인정보나 주문 행을 추가하지 않고 목표 ID·빈 입력 배열 계약만 복구했다. NAVI 로컬 감사는 `IN_PROGRESS_WITH_GATES`, local checks `WAITING`, `auditFailed=false`, `publicExportChanged=false`로 정상 분류됐다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1609025 bytes로 예산 안이다.
+- PR #295 필수 checks, main workflow 37258419309의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate a796f3d595acf7ebd5bad70ad8896d0e086116ec는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 정적 계약·배포 정합성은 확인했지만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005, E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005, E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005, E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005.
+
 ## Release Recheck — 02ad4cc — 2026-10-05
 
 - 전문가 영상 갤러리의 주제 필터를 바꿔도 현재 주제·표시 영상 수·선택 영상이 보조기기에 즉시 전달되지 않을 수 있는 맥락 손실 리스크를 확인했다. PR #293에서 주제 pill, 영상 수, polite live 상태 안내, 필터·영상 카드의 완전한 접근 가능한 이름을 추가했다. 기존 즉시 재생·공유 URL·제품 독립 공개 경계는 유지했다.

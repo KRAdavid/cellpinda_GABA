@@ -1093,6 +1093,17 @@
         "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-110",
+      "statement": "공개 GABA 안내서 전문가 영상 게시판은 한국어 헤더를 자연스러운 자간으로 표시하고, 각 주제 필터가 연결된 영상 목록을 명시하며, 빈 로컬 주문 입력 매니페스트는 개인정보 없이 NAVI 감사에서 대기 게이트로 분류된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9408,6 +9419,50 @@
       "captured_at": "2026-10-05T02:54:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-VIDEO-FILTER-CONTEXT",
       "claim_refs": ["C-002", "C-003", "C-109"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "한국어 전문가 영상 게시판 헤더 자간과 필터-목록 접근성 연결, 빈 로컬 주문 입력 매니페스트 계약을 추가한 v101 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #295 source commit aea04df327cf085e33780e2eab6e1d2e1413660b; pnpm run validate:ui-contract PASS including v101 filter-list assertion; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run audit:goal:local:json PASS with overallStatus IN_PROGRESS_WITH_GATES, local checks WAITING, auditFailed false, publicExportChanged false; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1609025 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/295",
+      "captured_at": "2026-10-05T03:10:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-KOREAN-VIDEO-BOARD-TYPE",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-110"]
+    },
+    {
+      "id": "E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 전문가 영상 게시판의 한국어 헤더 가독성 보정과 주제 필터의 expert-video-list 연결을 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v101 assertion; PublicGabaGuide.css applies Korean-friendly negative letter-spacing to guide-video-board-head, PublicGabaGuide.tsx gives each topic filter aria-controls=expert-video-list, and command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/295",
+      "captured_at": "2026-10-05T03:10:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-KOREAN-VIDEO-BOARD-TYPE",
+      "claim_refs": ["C-003", "C-110"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "한국어 영상 게시판 가독성 보정 PR #295가 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #295 merge main commit a796f3d595acf7ebd5bad70ad8896d0e086116ec; PR checks release-verify 37258307939 job 111599967680 and site-quality-verify 37258307841 job 111599967171 successful; main workflow 37258419309 with release-verify 111600280165, worker-readiness 111600549089, deploy-pages 111600566405, smoke-live 111600611351 and release-status 111600657467 successful; deploy-worker 111600567253 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37258419309",
+      "captured_at": "2026-10-05T03:14:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-KOREAN-VIDEO-BOARD-TYPE",
+      "claim_refs": ["C-001", "C-002", "C-110"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 한국어 영상 게시판 가독성 보정과 NAVI 매니페스트 계약 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=a796f3d595acf7ebd5bad70ad8896d0e086116ec pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha a796f3d595acf7ebd5bad70ad8896d0e086116ec; generatedAt 2026-10-05T03:12:29.975Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-05T03:14:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-KOREAN-VIDEO-BOARD-TYPE",
+      "claim_refs": ["C-002", "C-003", "C-110"]
     }
   ]
 }

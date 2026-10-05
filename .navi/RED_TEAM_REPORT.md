@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — a796f3d
+
+- 공격 관점에서 확인한 실패 모드는 한국어 전문가 영상 게시판 헤더가 영문식 자간으로 벌어져 주제와 영상 수의 관계를 한 번에 읽기 어렵고, 필터가 업데이트하는 영상 목록이 보조기기에 명시되지 않는 것이었다. PR #295에서 헤더 자간을 줄이고 필터-목록 `aria-controls` 연결을 추가했다.
+- 빈 로컬 주문 입력 매니페스트의 계약도 복구했지만 실제 주문 자료를 추가하거나 공개 export에 포함하지 않았다. UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 다만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 환경에서 증명하지 않았으므로 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005, E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005, E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005, E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005.
+
 ## Recheck — 2026-10-05 — 02ad4cc
 
 - 공격 관점에서 확인한 실패 모드는 전문가 영상 주제를 바꾼 뒤 화면의 현재 필터·표시 수·대표 영상과 보조기기 안내가 서로 분리되는 것이었다. PR #293에서 현재 주제 pill, 영상 수, polite live 상태, 완전한 filter/card accessible names를 연결했다.

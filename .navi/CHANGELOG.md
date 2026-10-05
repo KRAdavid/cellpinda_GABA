@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 전문가 영상 게시판 한국어 가독성 고도화 — a796f3d — 2026-10-05
+
+- 전문가 영상 게시판 헤더의 한국어 자간을 자연스럽게 조정하고, 주제 필터가 영상 목록을 제어한다는 관계를 `aria-controls`로 명시했다.
+- 빈 로컬 주문 입력 매니페스트의 목표 ID·배열 계약을 복구해 NAVI 로컬 감사가 오류가 아닌 WAITING 게이트로 분류되도록 했다. 주문 데이터·개인정보·공개 export는 추가하지 않았다.
+- 즉시 재생·영상 공유·연구 출처·제품 독립 공개 경계는 유지했다. UI 계약·typecheck·127개 테스트·production build/performance, PR #295 checks, main workflow 37258419309, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005, E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005, E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005, E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005.
+
 ## 전문가 영상 필터 맥락 고도화 — 02ad4cc — 2026-10-05
 
 - 전문가 영상 갤러리에서 현재 주제 pill·표시 영상 수·선택 영상 상태를 함께 보여주고, 보조기기용 live 안내와 완전한 필터·영상 카드 접근 이름을 추가했다.

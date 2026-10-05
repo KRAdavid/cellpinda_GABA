@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T02:58:46.043976Z",
+  "updated_at": "2026-10-05T03:15:38.422962Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -491,7 +491,11 @@
         "E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005",
         "E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005",
+        "E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1110,7 +1114,11 @@
         "E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005",
         "E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005",
+        "E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005"
       ],
       "owner": "QA"
     },
@@ -1340,7 +1348,11 @@
         "E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005",
         "E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005",
         "E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005",
-        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005"
+        "E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005",
+        "E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005",
+        "E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -4665,6 +4677,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T02:54:00Z"
+    },
+    {
+      "id": "H-180",
+      "event": "전문가 영상 게시판의 한국어 헤더에 영문식 자간이 남아 주제·영상 수가 벌어져 읽기 리듬이 흐려질 수 있는 잔여 퍼블리싱 리스크를 확인하고 PR #295에서 한국어 자간과 영상 수 표시를 자연스럽게 보정했다. 주제 필터에는 연결되는 영상 목록을 aria-controls로 명시했고, 기존 주제 pill·영상 수·live 안내·즉시 재생·공유 URL·제품 독립 공개 경계는 유지했다. 같은 PR에서 빈 로컬 주문 입력 매니페스트의 목표 ID·배열 계약을 복구해 개인정보 입력 없이 NAVI 로컬 감사가 INVALID가 아닌 WAITING으로 분류되도록 했다. v101 UI 계약으로 필터-목록 연결을 고정했으며 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #295 checks, main workflow 37258419309의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. 라이브 validator candidate a796f3d595acf7ebd5bad70ad8896d0e086116ec는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Worker는 STATIC_ONLY로 건너뛰었다. NAVI 로컬 감사는 IN_PROGRESS_WITH_GATES·local checks WAITING·auditFailed false·publicExportChanged false로 정리됐다. 브라우저 자동화와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T03:14:00Z"
     }
   ]
 }
