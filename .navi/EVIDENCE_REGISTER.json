@@ -1362,6 +1362,28 @@
         "E-LIVE-PUBLIC-PUBLIC-TITLE-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-135",
+      "statement": "공개 GABA 안내서는 연구·전문가 영상·출처 읽기 화면에서 선택한 맥락을 브라우저 제목과 description·OG·Twitter 메타데이터에 반영해 공유 미리보기의 주제 연결을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-CONTEXTUAL-SHARE-METADATA-20261005",
+        "E-UI-CONTRACT-CONTEXTUAL-SHARE-METADATA-20261005",
+        "E-DEPLOY-PIPELINE-CONTEXTUAL-SHARE-METADATA-20261005",
+        "E-LIVE-PUBLIC-CONTEXTUAL-SHARE-METADATA-20261005"
+      ],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "C-136",
+      "statement": "공개 GABA 안내서의 출처 읽기 패널은 네 가지 연구 읽기 질문보다 먼저 현재 읽는 연구 맥락을 보여 주어 연구 카드·읽는 기준·원문 출처의 연결을 390px·1440px에서 자연스럽게 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SOURCE-READING-CONTEXT-20261005",
+        "E-UI-CONTRACT-SOURCE-READING-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-SOURCE-READING-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-SOURCE-READING-CONTEXT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10755,6 +10777,50 @@
       "captured_at": "2026-10-05T11:40:55Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-CONTEXTUAL-SHARE-METADATA",
       "claim_refs": ["C-002", "C-003", "C-135"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SOURCE-READING-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main commit 164bcc6의 production build는 출처 읽기 패널의 연구 맥락 보정을 포함해 11개 정적 경로·71개 배포 파일·성능 예산 검사를 통과했다.",
+      "locator": "PR #346 checks; pnpm run validate:ui-contract, pnpm run typecheck, pnpm test (127/127), git diff --check and pnpm run build passed; routes 11; files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1620244 <= 1650000; static bundle, release manifest and performance passed",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\dist",
+      "captured_at": "2026-10-05T12:03:30Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-SOURCE-READING-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-136"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SOURCE-READING-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 출처 읽기 패널의 네 가지 질문보다 먼저 sourceReadingLabel 맥락을 표시하고 모바일·데스크톱에서 읽을 수 있는 스타일을 유지하는지 회귀 검사한다.",
+      "locator": "pnpm run validate:ui-contract; status ok; scripts/validate-ui-contract.mjs guards guide-reading-note-panel-title, guide-reading-note-context and sourceReadingLabel in PublicGabaGuide.tsx plus readable CSS rules in PublicGabaGuide.css",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-05T12:03:30Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-SOURCE-READING-CONTEXT",
+      "claim_refs": ["C-003", "C-136"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SOURCE-READING-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "출처 읽기 패널 맥락 보정 commit 164bcc6이 main 공개 파이프라인에서 release-verify·Worker readiness·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "main commit 164bcc6a0b12a94e52497fd7e6988059f559e4ea; workflow 37306932402; release-verify 111752756212, worker-readiness 111753085126, deploy-pages 111753112531, smoke-live 111753179853 and release-status 111753289255 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37306932402",
+      "captured_at": "2026-10-05T12:05:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-SOURCE-READING-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-136"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SOURCE-READING-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본의 출처 읽기 패널은 네 가지 질문보다 먼저 `예시 출처 · 인지 연구` 맥락을 표시하고 390px·1440px에서 가로 넘침과 runtime 오류 없이 렌더링된다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 164bcc6a0b12a94e52497fd7e6988059f559e4ea; bundleHashes 71; claims 12; masterRecords 6; sharePages 6; provenance matched; Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?view=guide&qa=source-context-live-20261005#reading-note reported title `인지 연구 출처 읽기 | GABA Guide`, context `예시 출처 · 인지 연구` before the four-question steps, scrollWidth=innerWidth 390/390 and 1425/1440, readyState complete and runtimeErrors []; screenshots captured outside repository and visually reviewed",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=source-context-live-20261005#reading-note",
+      "captured_at": "2026-10-05T12:05:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-SOURCE-READING-CONTEXT",
+      "claim_refs": ["C-002", "C-003", "C-136"]
     }
   ]
 }

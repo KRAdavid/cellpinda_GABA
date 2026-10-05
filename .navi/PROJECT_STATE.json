@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T11:47:00Z",
+  "updated_at": "2026-10-05T12:05:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2119,7 +2119,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T11:47:00Z"
+    "last_run_at": "2026-10-05T12:05:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2307,7 +2307,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T11:47:00Z"
+    "last_run_at": "2026-10-05T12:05:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4941,6 +4941,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T11:47:00Z"
+    },
+    {
+      "id": "H-206",
+      "event": "출처 읽기 패널에서 연구 맥락이 네 가지 질문과 원문 출처 카드 사이에 늦게 나타나는 정보 연결 리스크를 확인했다. PR #346에서 `sourceReadingLabel`을 네 가지 질문보다 먼저 표시하도록 패널 헤더를 보강하고, UI 계약에 제목·맥락 레이블·가독성 스타일 회귀 검사를 추가했다. 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #346 checks, main workflow 37306932402의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 live candidate 164bcc6a0b12a94e52497fd7e6988059f559e4ea는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. Chrome CDP fallback 공개 390px·1440px에서 `예시 출처 · 인지 연구`가 네 가지 질문보다 먼저 보이고 scrollWidth 390/1425·readyState complete·runtimeErrors 0을 확인했으며 화면 캡처를 별도 검토했다. 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지하고 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 이전 증거에 참조만 남아 있던 C-135 claim을 복원하고 이번 결과를 C-136과 네 증거로 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T12:05:00Z"
     }
   ]
 }
