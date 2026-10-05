@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T00:03:00Z",
+  "updated_at": "2026-10-05T00:15:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -447,7 +447,11 @@
         "E-LOCAL-BUILD-MEDIA-HINTS-20261005",
         "E-UI-CONTRACT-MEDIA-HINTS-20261005",
         "E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005",
-        "E-LIVE-PUBLIC-MEDIA-HINTS-20261005"
+        "E-LIVE-PUBLIC-MEDIA-HINTS-20261005",
+        "E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005",
+        "E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005",
+        "E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005",
+        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -1022,7 +1026,11 @@
         "E-LOCAL-BUILD-MEDIA-HINTS-20261005",
         "E-UI-CONTRACT-MEDIA-HINTS-20261005",
         "E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005",
-        "E-LIVE-PUBLIC-MEDIA-HINTS-20261005"
+        "E-LIVE-PUBLIC-MEDIA-HINTS-20261005",
+        "E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005",
+        "E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005",
+        "E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005",
+        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005"
       ],
       "owner": "QA"
     },
@@ -1208,7 +1216,11 @@
         "E-LOCAL-BUILD-MEDIA-HINTS-20261005",
         "E-UI-CONTRACT-MEDIA-HINTS-20261005",
         "E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005",
-        "E-LIVE-PUBLIC-MEDIA-HINTS-20261005"
+        "E-LIVE-PUBLIC-MEDIA-HINTS-20261005",
+        "E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005",
+        "E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005",
+        "E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005",
+        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005"
       ],
       "owner": "배포 QA"
     },
@@ -1951,7 +1963,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T00:03:00Z"
+    "last_run_at": "2026-10-05T00:15:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2124,7 +2136,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T00:03:00Z"
+    "last_run_at": "2026-10-05T00:15:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -4456,6 +4468,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T00:03:00Z"
+    },
+    {
+      "id": "H-169",
+      "event": "긴 공개 안내서의 하단 편집 섹션이 모바일 첫 화면 계산에 함께 참여해 첫 렌더링과 긴 스크롤의 부담이 커질 수 있는 잔여 퍼블리싱 성능 리스크를 확인하고 PR #273에서 국내외 활용·발효·성장·전문가 영상·출처·공유 섹션에 content-visibility auto와 contain-intrinsic-size를 적용했다. 연구 카드의 IntersectionObserver 기반 활성 주제 감지 영역은 제외했다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #273 checks, main workflow 37246552896의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했으며 live validator candidate 98c59eb3a683a2f5dd51093ede4efe7a78f6ebfc는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다. 연구 수치·출처 데이터·공개 카피·제품 독립 공개 경계는 변경하지 않았다. Browser/Playwright, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 항목으로 남겼고, 새 CRITICAL/MAJOR 결함은 확인되지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T00:15:00Z"
     }
   ]
 }

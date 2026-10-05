@@ -972,6 +972,17 @@
         "E-LIVE-PUBLIC-MEDIA-HINTS-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-099",
+      "statement": "공개 GABA 안내서는 국내외 활용·발효·성장·전문가 영상·출처·공유처럼 하단에 위치한 긴 편집 섹션을 화면 근처에서 점진적으로 렌더링하고 예약 높이를 제공해 모바일 첫 화면과 긴 스크롤의 계산 부담을 줄이며, 연구 카드의 활성 주제 감지 영역은 그대로 보존한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005",
+        "E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005",
+        "E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005",
+        "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -8803,6 +8814,50 @@
       "captured_at": "2026-10-05T00:02:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MEDIA-HINTS",
       "claim_refs": ["C-002", "C-003", "C-007", "C-098"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "하단 편집 섹션을 content-visibility auto로 점진 렌더링하고 contain-intrinsic-size로 예약하는 v90 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #273 source commit 4ccb0e4; pnpm run validate:ui-contract PASS including v90 progressive publishing guard; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1604682 bytes <= 1650000 budget; 11 static routes and 71 release files; research IntersectionObserver area excluded; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/273",
+      "captured_at": "2026-10-05T00:10:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-PROGRESSIVE-PUBLISHING",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-099"]
+    },
+    {
+      "id": "E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 하단 편집 섹션의 점진 렌더링과 예약 높이 규칙을 확인하고 연구 활성 주제 감지 영역을 변경하지 않았음을 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v90 progressive publishing assertion; guide-applications, guide-fermented-safety, guide-growth-story, guide-expert-videos, guide-reading-note and guide-final require content-visibility:auto and contain-intrinsic-size:900px; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/273",
+      "captured_at": "2026-10-05T00:10:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-PROGRESSIVE-PUBLISHING",
+      "claim_refs": ["C-003", "C-099"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 하단 콘텐츠 점진 렌더링 PR #273이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #273 merge main commit 98c59eb3a683a2f5dd51093ede4efe7a78f6ebfc; PR checks release-verify 37246472187 job 111565261967 and site-quality-verify 37246472261 job 111565262128 successful; main workflow 37246552896 with release-verify 111565489076, worker-readiness 111565727908, deploy-pages 111565748299, smoke-live 111565795163 and release-status 111565838535 successful; deploy-worker 111565749084 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37246552896",
+      "captured_at": "2026-10-05T00:13:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-PROGRESSIVE-PUBLISHING",
+      "claim_refs": ["C-001", "C-002", "C-099"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 하단 콘텐츠 점진 렌더링을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=98c59eb3a683a2f5dd51093ede4efe7a78f6ebfc pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 98c59eb3a683a2f5dd51093ede4efe7a78f6ebfc; generatedAt 2026-10-05T00:13:00.314Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#applications",
+      "captured_at": "2026-10-05T00:13:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-PROGRESSIVE-PUBLISHING",
+      "claim_refs": ["C-002", "C-003", "C-007", "C-099"]
     }
   ]
 }

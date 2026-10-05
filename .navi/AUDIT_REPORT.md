@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — 98c59eb — 2026-10-05
+
+- 장문의 공개 안내서에서 아직 읽지 않은 하단 편집 섹션이 모바일 첫 화면 계산에 참여할 수 있는 퍼블리싱 성능 리스크를 확인하고 PR #273에서 국내외 활용·발효·성장·전문가 영상·출처·공유 섹션에 `content-visibility:auto`와 `contain-intrinsic-size:900px`를 적용했다. 연구 카드의 활성 주제 IntersectionObserver 영역은 제외했다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1604682 bytes로 예산 안이다.
+- PR #273 필수 checks, main workflow 37246552896의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 98c59eb3a683a2f5dd51093ede4efe7a78f6ebfc는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 정적 계약과 라이브 배포 정합성은 확인했지만 실제 브라우저의 렌더 지연·스크롤 체감 측정, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005, E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005, E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005, E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005.
+
 ## Release Recheck — 7eef131 — 2026-10-05
 
 - 전문가 영상·썸네일이 선택될 때 외부 미디어 연결 준비가 늦어질 수 있는 모바일 로딩 리스크를 확인하고 PR #271에서 `i.ytimg.com` preconnect와 `i.ytimg.com`·`www.youtube.com` DNS prefetch를 진입 HTML에 추가했다. 기존 썸네일·iframe 지연 로딩은 유지했다.
