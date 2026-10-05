@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 공개 안내서 콘텐츠 경계·시작 성능 고도화 — 72f3cd9 — 2026-10-05
+
+- 공개 GABA 안내서·개인 계정·로컬 운영 경로가 제품·주문용 공용 콘텐츠를 불필요하게 먼저 요청하지 않도록 분리하고, 연구·제품·공유·챌린지 경로의 기존 콘텐츠 로딩은 유지했다.
+- 공개 연구 수치·출처·카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build/performance, PR #301 checks, main workflow 37262103043, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-UI-CONTRACT-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-DEPLOY-PIPELINE-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-LIVE-PUBLIC-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005.
+
 ## 모바일 연구 지도 맥락·가독성 고도화 — 594352e — 2026-10-05
 
 - 연구 지도를 명명된 선택 그룹으로 노출하고 주제 버튼에 선택 상태를 추가했다. 모바일 중심 현재 주제 문구는 11px, 큰 글씨 모드에서는 12px로 표시한다.
