@@ -1639,6 +1639,10 @@
   }
 }
 
+/* v101 Korean video-board type: keep the compact header natural while preserving the topic pill. */
+.gaba-guide .guide-video-board-head{letter-spacing:-.035em}
+.gaba-guide .guide-video-board-head>strong{letter-spacing:-.045em;white-space:nowrap}
+
 /* v93 mobile chapter context: keep each section's concise editorial cue visible on small screens. */
 @media(max-width:700px){
   .gaba-guide .guide-section-heading>p{
