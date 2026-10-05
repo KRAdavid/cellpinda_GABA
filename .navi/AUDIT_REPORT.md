@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — de91cbb — 2026-10-05
+
+- 모바일에서 복원된 장 맥락 문구가 13px·긴 행간·시각적 구분 부족으로 고령 독자에게 약하게 보일 수 있는 편집 리스크를 확인하고 PR #281에서 14px·26ch·행간 1.65·좌측 포인트 라인으로 읽기 우선순위를 보강했다. 연구 수치·출처 데이터·공개 카피·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1605695 bytes로 예산 안이다.
+- PR #281 필수 checks, main workflow 37250175467의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate de91cbb35dbc1c7c58451c13d0ad10398851f822는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 모바일 맥락 문구의 정적 계약·배포 정합성은 확인했지만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005, E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005, E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005, E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005.
+
 ## Release Recheck — b98df10 — 2026-10-05
 
 - 모바일에서 장 제목만 남아 장면의 의미와 다음 내용이 끊겨 보일 수 있는 편집 리스크를 확인하고 PR #279에서 700px 이하 화면의 섹션 제목 아래에 짧은 보조 맥락 문구를 복원했다. 문구는 28ch 이내·13px·행간 1.7로 제한해 정보량을 늘리지 않고 흐름만 보강했다.
