@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 80bd0f2 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-004 390px 모바일 첫 화면에서 읽기 안내 표시·큰 글씨 토글·가로 넘침 없음: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #313 merge `76dc972d`와 heartbeat PR #314 merge `80bd0f22` 이후 main workflow `37271282282`가 성공했다. 공개 manifest는 candidate `80bd0f223dcf75e10b63ac13d7115135e845a8cb`, HTTP 200, STATIC, 12 claims, 6 research, 1 product, teaser HOLD를 확인했다.
+- Chrome CDP fallback 공개 390×844에서 `아래로 읽기` pill의 대비·테두리·색상과 큰 글씨 토글 후 `scrollWidth=390px`를 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 브라우저 전체 조합, 대표 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-CONTRAST-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-CONTRAST-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-CONTRAST-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-CONTRAST-20261005.
+
 ## Current Release Recheck — 21a34c7 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

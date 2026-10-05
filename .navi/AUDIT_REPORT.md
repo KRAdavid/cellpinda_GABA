@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 80bd0f2 — 2026-10-05
+
+- 모바일 hero 사진 위의 `아래로 읽기` 안내가 배경과 섞여 첫 화면의 다음 읽기 방향을 약하게 전달할 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #313에서 안내를 반투명 흰색 pill·테두리·그림자로 보강하고 UI 계약에 대비 조건을 추가했다.
+- PR #313의 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. TF heartbeat 자동 PR 생성 제한으로 초기 배포가 신선도 게이트에서 대기했지만, PR #314를 보호된 메인에 반영한 뒤 최종 workflow `37271282282`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `80bd0f223dcf75e10b63ac13d7115135e845a8cb`는 HTTP 200, STATIC, 12 공개 claims, 6 연구 records, 1 product, teaser HOLD를 유지한다. Chrome CDP fallback 공개 390×844에서 `아래로 읽기`가 `rgba(255,255,255,.78)` pill과 테두리로 표시되고, 큰 글씨 토글 뒤에도 `scrollWidth=390px`를 확인했다.
+- 정적 계약·배포 정합성·대표 모바일 렌더는 확인했지만 브라우저 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-CONTRAST-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-CONTRAST-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-CONTRAST-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-CONTRAST-20261005.
+
 ## Release Recheck — 21a34c7 — 2026-10-05
 
 - 모바일 공개 메뉴에서 장면을 선택해도 body 스크롤 잠금과 smooth scroll이 경합해 `발견` 섹션으로 이동하지 않는 실제 사용 흐름 결함을 확인했다. PR #311에서 메뉴가 열려 있던 경우 즉시 스크롤을 사용하도록 보정하고 UI 계약에 회귀 조건을 추가했다.

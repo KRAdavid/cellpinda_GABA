@@ -1192,6 +1192,17 @@
         "E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-119",
+      "statement": "공개 GABA 안내서의 모바일 첫 화면은 사진 위에서도 '아래로 읽기' 안내를 선명하게 보여 주고, 큰 글씨 모드에서도 가로 넘침 없이 다음 읽기 흐름을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-READING-CUE-CONTRAST-20261005",
+        "E-UI-CONTRACT-MOBILE-READING-CUE-CONTRAST-20261005",
+        "E-DEPLOY-PIPELINE-MOBILE-READING-CUE-CONTRAST-20261005",
+        "E-LIVE-PUBLIC-MOBILE-READING-CUE-CONTRAST-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9903,6 +9914,50 @@
       "captured_at": "2026-10-05T05:50:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-MENU-NAVIGATION",
       "claim_refs": ["C-002", "C-004", "C-118"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-READING-CUE-CONTRAST-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 hero 사진 위의 읽기 안내 대비를 보강한 PR #313 source commit이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #313 source commit ac9e30ae8fddc648210ecf493099e8c5ad97ee1c; pnpm run validate:ui-contract PASS including v106 mobile reading cue contrast assertion; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1614042 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/313",
+      "captured_at": "2026-10-05T05:58:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-MOBILE-READING-CUE-CONTRAST",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-119"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-READING-CUE-CONTRAST-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 모바일 hero 사진 위 읽기 안내를 pill·테두리·불투명 배경으로 유지해 일반 글씨와 큰 글씨 모드에서 다음 읽기 신호가 흐려지지 않도록 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs v106 assertion; PublicGabaGuide.css mobile .guide-hero-story .guide-hero-scroll uses border 1px solid rgba(113,170,178,.38), background rgba(255,255,255,.78), relative layout; Chrome CDP local preview at 390px confirmed scrollWidth 390px in normal and large-text states",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/313",
+      "captured_at": "2026-10-05T05:58:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-MOBILE-READING-CUE-CONTRAST",
+      "claim_refs": ["C-003", "C-119"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-READING-CUE-CONTRAST-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 읽기 안내 대비 보강 PR #313이 필수 검사를 통과해 main에 병합됐고, heartbeat 갱신 PR #314를 거쳐 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #313 merge main commit 76dc972d6f31edc4b06d601f26d9d55352154021; PR checks release-verify 37270720913 and site-quality-verify 37270720892 successful; initial main workflow 37270849297 was correctly held by stale TF pulse; heartbeat PR #314 merged as 80bd0f223dcf75e10b63ac13d7115135e845a8cb; final main workflow 37271282282 with release-verify 111638619586, worker-readiness 111638928787, deploy-pages 111638955435, smoke-live 111639017343 and release-status 111639078603 successful; deploy-worker 111638956583 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37271282282",
+      "captured_at": "2026-10-05T06:15:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-MOBILE-READING-CUE-CONTRAST",
+      "claim_refs": ["C-001", "C-002", "C-119"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-READING-CUE-CONTRAST-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 최신 main 후보와 일치하고, 390px 모바일 화면에서 사진 위 '아래로 읽기' 안내가 선명하게 표시되며 큰 글씨 토글 후에도 가로 넘침이 없음을 Chrome CDP fallback으로 확인했다.",
+      "locator": "release-manifest.json HTTP 200; candidateSha 80bd0f223dcf75e10b63ac13d7115135e845a8cb; generatedAt 2026-10-05T06:13:50.329Z; runtimeMode STATIC; counts claims 12, research 6, products 1, reviews 1; teaser HOLD/publicUrl false; Chrome CDP fallback at public URL https://kradavid.github.io/gaba_info/?qa=mobile-reading-cue-20261005 with 390x844 confirmed cue '아래로 읽기', background rgba(255,255,255,.78), border 1px solid rgba(113,170,178,.38), color rgb(62,104,115), scrollWidth 390px; large text toggle changed to '가−기본 글씨' and preserved scrollWidth 390px; visual screenshot was captured as a local QA artifact and is not included in the public repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=mobile-reading-cue-20261005",
+      "captured_at": "2026-10-05T06:18:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-MOBILE-READING-CUE-CONTRAST",
+      "claim_refs": ["C-002", "C-003", "C-119"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — 80bd0f2
+
+- 공격 관점에서 확인한 실패 모드는 모바일 hero 사진 위의 `아래로 읽기` 안내가 낮은 대비로 묻혀 방문자가 긴 안내서의 다음 장면을 놓치는 것이었다. PR #313에서 흰색 pill·테두리·그림자로 안내를 분리하고 UI 계약으로 회귀를 고정했다.
+- UI 계약·typecheck·127개 테스트·production build·Pages 배포·라이브 smoke·release status가 통과했다. 초기 배포가 오래된 TF heartbeat 때문에 중단된 것은 보호 게이트가 정상 작동한 결과이며, PR #314 반영 후 최종 배포가 성공했다. 공개 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- Chrome CDP fallback 공개 390px에서 안내 문구·대비·큰 글씨 토글·가로 넘침 없음이 확인됐다. 다만 대표 렌더는 전체 브라우저·실기기 보장이 아니므로 Safari/iOS/Android, 실제 고령 사용자 이해도, 독립 과학·규제 감수는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-CONTRAST-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-CONTRAST-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-CONTRAST-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-CONTRAST-20261005.
+
 ## Recheck — 2026-10-05 — 21a34c7
 
 - 공격 관점에서 확인한 실패 모드는 모바일 메뉴를 연 뒤 `발견` 장면을 선택할 때 body 스크롤 잠금 해제와 smooth scroll이 경합해 메뉴만 닫히고 화면이 현재 위치에 남는 것이었다. PR #311에서 메뉴 선택은 즉시 정렬하도록 보정했다.
