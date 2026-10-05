@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 초소형 모바일 읽기 크기 조절 라벨 보강·공개 배포 — ffd7c2e — 2026-10-06
+
+- 320px 이하 헤더에서 `가+ 글자`·`가− 기본`을 사용해 읽기 크기 기능을 한눈에 이해하도록 보강했다. 390px 이상은 기존 전체 라벨을 유지했다.
+- PR #383과 main workflow `37363196125`의 코드 검증·Pages 배포·라이브 smoke가 성공했고, 공개 validator에서 candidate `ffd7c2e1f99fd2806e87274ab9200f948d0fc5fe`, 71개 bundle hash, HTTP 200, STATIC, 공개 데이터 정합성을 확인했다. release-status는 기록 시점 queue 대기였다.
+- 연구 카피·과학 주장·제품 CTA는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-READING-CONTROL-COMPACT-20261006, E-UI-CONTRACT-READING-CONTROL-COMPACT-20261006, E-PLAYWRIGHT-READING-CONTROL-COMPACT-20261006, E-DEPLOY-PIPELINE-READING-CONTROL-COMPACT-20261006, E-LIVE-PUBLIC-READING-CONTROL-COMPACT-20261006.
+
 ## 최종 공개 manifest·NAVI 증적 동기화 — f54bae6 — 2026-10-06
 
 - NAVI 증적 PR #381 병합 후 최종 공개 candidate가 `f54bae600ce55ab6a2439bbd337eb26fc1949a1d`로 갱신된 것을 확인했다.

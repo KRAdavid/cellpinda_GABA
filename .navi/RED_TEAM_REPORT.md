@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Compact Mobile Reading Control — 2026-10-06 — ffd7c2e
+
+- 공격 관점에서 320px 헤더의 읽기 크기 버튼 의미 노출, 터치 가능한 폭, 글자 크기 전환, 390·1440px 기존 라벨 보존, 가로 넘침과 콘솔 오류를 확인했다.
+- 공개 320px에서 `가+ 글자`가 보이고 클릭 후 `가− 기본`, `aria-pressed=true`, `is-large-text`, scrollWidth 320이 유지됐다. 공개 390·1440px에서는 전체 라벨과 scrollWidth 390·1440이 유지됐다. 새 CRITICAL/MAJOR 결함은 없다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다. release-status job은 기록 시점에 queue 대기 상태였다.
+
+증적: E-PLAYWRIGHT-READING-CONTROL-COMPACT-20261006, E-LIVE-PUBLIC-READING-CONTROL-COMPACT-20261006.
+
 ## Final Public Recheck — 2026-10-06 — f54bae6
 
 - 최종 manifest candidate `f54bae600ce55ab6a2439bbd337eb26fc1949a1d` 공개본에서 연구 지도 중심 10px cue, 연구 영역 선택 후 카드 포커스·스크롤, 모바일·데스크톱 가로폭을 다시 확인했다.
