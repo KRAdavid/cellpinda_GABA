@@ -1,9 +1,9 @@
 # Project Changelog
 
-## 공개 배포·라이브 검증 완료 — 1180808 — 2026-10-06
+## 공개 배포·라이브 검증 완료 — f1cd671 — 2026-10-06
 
 - 첫 화면의 `3분 읽기 시작` 컨트롤을 사진 위에서도 읽히는 최소 40px 터치 영역으로 보강하고, 키보드 초점·호버·축소 모션 대응을 유지했다.
-- PR #371과 main workflow `37343898286`의 release-verify·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- PR #371의 코드 배포와 PR #372의 NAVI 증적 정리가 main workflow `37344810577`까지 성공했다. 공개 validator는 최신 candidate `f1cd67136368c26fb7d2a12af25a010a3cff735b`에서 HTTP 200·STATIC·71개 bundle hash를 확인했다.
 - 공개 Chrome CDP 390·1440px에서 버튼 표시, `#opening-bridge` 이동, 읽기 진행 레일 동기화, scrollWidth 390·1425를 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: E-DEPLOY-PIPELINE-HERO-CUE-CONTRAST-20261006, E-LIVE-PUBLIC-HERO-CUE-CONTRAST-20261006.

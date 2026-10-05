@@ -11451,9 +11451,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본에서 글자 크기 조절 문구가 `글자 크게`·`기본 크기`로 표시되고, 실제 토글 상태·접근성 라벨·가로 폭이 모바일과 데스크톱에서 유지된다.",
-      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 589055e10aad8e53d879e1217e8ac540072986e8; generatedAt 2026-10-05T16:33:42.506Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: `기본 크기` -> `글자 크게`, aria-label `기본 크기로 보기` -> `글자 크게 보기`, aria-pressed true -> false, mark 가− -> 가+, scrollWidth 390; 1440px reverse toggle, scrollWidth 1425; errors []; screenshots outside repository reviewed",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha f1cd67136368c26fb7d2a12af25a010a3cff735b; generatedAt 2026-10-05T16:58:33.118Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: `기본 크기` -> `글자 크게`, aria-label `기본 크기로 보기` -> `글자 크게 보기`, aria-pressed true -> false, mark 가− -> 가+, scrollWidth 390; 1440px reverse toggle, scrollWidth 1425; errors []; screenshots outside repository reviewed",
       "source_uri": "https://kradavid.github.io/gaba_info/?qa=reading-label-390",
-      "captured_at": "2026-10-05T16:35:56Z",
+      "captured_at": "2026-10-05T16:59:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-READING-SIZE-LABEL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-147"]
     },
@@ -11503,9 +11503,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본의 첫 화면 읽기 진입 컨트롤은 390px·1440px에서 표시되고, 선택 시 수면과 회복 도입부와 읽기 진행 레일로 정확히 이어진다.",
-      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 1180808ae0b50d1f79518f8a6be71f389a7faa56; generatedAt 2026-10-05T16:51:32.116Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: button visible, text 3분 읽기 시작, buttonWidth 142, scrollWidth 390, click hash #opening-bridge, openingTop 16, progress synced; 1440px: button visible, buttonWidth 146, scrollWidth 1425, click hash #opening-bridge, openingTop 8, progress synced; errors []; screenshot reviewed outside repository",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha f1cd67136368c26fb7d2a12af25a010a3cff735b; generatedAt 2026-10-05T16:58:33.118Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: button visible, text 3분 읽기 시작, buttonWidth 142, scrollWidth 390, click hash #opening-bridge, openingTop 16, progress synced; 1440px: button visible, buttonWidth 146, scrollWidth 1425, click hash #opening-bridge, openingTop 8, progress synced; errors []; screenshot reviewed outside repository",
       "source_uri": "https://kradavid.github.io/gaba_info/?qa=hero-start-public-390",
-      "captured_at": "2026-10-05T16:54:00Z",
+      "captured_at": "2026-10-05T16:59:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-HERO-CUE-CONTRAST",
       "claim_refs": ["C-001", "C-002", "C-003", "C-146", "C-148"]
     }

@@ -1,8 +1,8 @@
 # Audit Report
 
-## Public Release Recheck — 1180808 — 2026-10-06
+## Public Release Recheck — f1cd671 — 2026-10-06
 
-- PR #371과 main workflow `37343898286`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- PR #371 코드 배포와 PR #372 증적 정리가 main workflow `37344810577`의 release-verify·worker-readiness·Pages·라이브 smoke·release status까지 성공했다. 공개 validator는 candidate `f1cd67136368c26fb7d2a12af25a010a3cff735b`에서 HTTP 200·STATIC·71개 bundle hash를 확인했다.
 - 첫 화면 읽기 진입 컨트롤은 공개 390·1440px에서 표시되고, 클릭 시 `#opening-bridge`와 읽기 진행 레일로 정렬된다. 새 CRITICAL/MAJOR 결함은 없다.
 - Browser 플러그인 부재로 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
 

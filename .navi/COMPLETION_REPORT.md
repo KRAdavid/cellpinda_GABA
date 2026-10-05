@@ -1,12 +1,12 @@
 # Completion Report
 
-## Current Release Recheck — 1180808 — 2026-10-06
+## Current Release Recheck — f1cd671 — 2026-10-06
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
 - AC-004 390·1440px 첫 화면 읽기 진입 컨트롤·도입부 이동·읽기 진행 레일·가로 폭·runtime 안정성: PASS.
 - AC-005 PR 검증·UI 계약·typecheck·127개 테스트·production build·Pages 배포·live smoke·release status: PASS.
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
-- 공개 candidate `1180808ae0b50d1f79518f8a6be71f389a7faa56`는 HTTP 200·STATIC·71개 bundle hash를 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+- 공개 candidate `f1cd67136368c26fb7d2a12af25a010a3cff735b`는 HTTP 200·STATIC·71개 bundle hash를 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: E-DEPLOY-PIPELINE-HERO-CUE-CONTRAST-20261006, E-LIVE-PUBLIC-HERO-CUE-CONTRAST-20261006.
 
