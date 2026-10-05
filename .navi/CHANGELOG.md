@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 hero 읽기 안내 대비 보강 — 80bd0f2 — 2026-10-05
+
+- 사진 위에 놓인 `아래로 읽기` 안내를 반투명 흰색 pill·테두리·그림자로 분리해 첫 화면의 다음 읽기 방향을 빠르게 인식할 수 있게 했다.
+- PR #313의 필수 검사 통과 후 TF heartbeat 신선도 게이트가 자동 PR 생성 제한으로 대기했으나, PR #314를 보호된 메인에 반영해 최종 Pages 배포·라이브 smoke·release status를 성공시켰다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `80bd0f223dcf75e10b63ac13d7115135e845a8cb`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다. Chrome CDP fallback 공개 390×844에서 안내 대비와 큰 글씨 토글 후 가로 넘침 없음을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-CONTRAST-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-CONTRAST-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-CONTRAST-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-CONTRAST-20261005.
+
 ## 모바일 메뉴 장면 이동 안정화 — 21a34c7 — 2026-10-05
 
 - 공개 390px 실제 흐름에서 메뉴를 연 뒤 `발견`을 선택해도 body 스크롤 잠금과 smooth scroll 경합으로 화면이 이동하지 않던 결함을 확인했다. 메뉴 선택 시에는 즉시 이동하도록 보정해 메뉴 닫힘과 장면 정렬을 한 번의 동작으로 맞췄다.
