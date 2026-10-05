@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Public Recheck — 2026-10-06 — b73e086
+
+- 공격 관점에서 연구 지도 중심 문구의 모바일 축소·겹침, 지도와 연구 카드의 순서, hero route의 잘못된 HTML 중첩, 콘솔 오류를 점검했다.
+- 공개 390·1440px에서 `5개 연구 영역`, 다섯 topic 버튼, 읽는 순서, scrollWidth 390·1425, runtime console errors 0을 재현했고 새 CRITICAL/MAJOR 결함은 없었다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-CDP-RESEARCH-MAP-SCALE-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-20261006.
+
 ## Public Recheck — 2026-10-06 — f1cd671
 
 - 공격 관점에서 사진 위 읽기 진입 컨트롤의 가독성, 최소 터치 영역, 키보드 초점, 모바일 가로 넘침, 클릭 후 목적지 정렬을 확인했다.

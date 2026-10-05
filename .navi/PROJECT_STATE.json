@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T17:16:11.761266Z",
+  "updated_at": "2026-10-05T17:22:57.978808Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5074,6 +5074,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T17:14:00Z"
+    },
+    {
+      "id": "H-225",
+      "event": "연구 지도 중심 보강과 hero HTML 중첩 수정 PR #374가 검증을 통과해 main commit b73e086으로 병합되었고, workflow 37347460556의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 번들 해시를 확인했으며, Chrome CDP fallback 공개 390·1440px에서 `5개 연구 영역`·다섯 topic 버튼·읽는 순서·콘솔 오류 0을 재현했다. 새 CRITICAL/MAJOR 결함은 없고 C-149와 공개 배포 증거를 갱신했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T17:21:00Z"
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 지도 고도화·공개 배포 완료 — b73e086 — 2026-10-06
+
+- `06 · 연구의 확장` 중심 원에 `5개 연구 영역`을 표시해 지도 규모를 한눈에 이해하도록 보강했다.
+- hero 읽기 경로의 잘못된 `<p><ol>` 중첩을 유효한 흐름 콘텐츠로 바꿔 hydration 콘솔 오류를 제거했다.
+- PR #374와 main workflow `37347460556`의 release-verify·Pages 배포·라이브 smoke·release status가 성공했다. 공개 390·1440px에서 지도·읽는 순서·가로 폭·콘솔 오류 0을 확인했다.
+
+증적: E-DEPLOY-PIPELINE-RESEARCH-MAP-SCALE-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-20261006.
+
 ## 공개 배포·라이브 검증 완료 — f1cd671 — 2026-10-06
 
 - 첫 화면의 `3분 읽기 시작` 컨트롤을 사진 위에서도 읽히는 최소 40px 터치 영역으로 보강하고, 키보드 초점·호버·축소 모션 대응을 유지했다.

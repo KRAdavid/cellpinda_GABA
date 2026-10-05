@@ -1527,7 +1527,9 @@
       "evidence_refs": [
         "E-LOCAL-BUILD-RESEARCH-MAP-SCALE-20261006",
         "E-UI-CONTRACT-RESEARCH-MAP-SCALE-20261006",
-        "E-CDP-RESEARCH-MAP-SCALE-20261006"
+        "E-CDP-RESEARCH-MAP-SCALE-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-SCALE-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-20261006"
       ],
       "status": "SUPPORTED"
     }
@@ -11548,6 +11550,28 @@
       "captured_at": "2026-10-05T17:14:00Z",
       "reviewer_id": "NAVI-CDP-QA-20261006-RESEARCH-MAP-SCALE",
       "claim_refs": ["C-149"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-SCALE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 중심 보강과 hero HTML 중첩 수정 PR #374가 필수 검사를 통과해 main commit b73e086으로 병합되었고, 정적 Pages 배포·라이브 smoke·release status가 성공했다.",
+      "locator": "PR #374; code commit bbaf4b9e87bdf57b7cd7504ca9fef5db37c17446; docs commit 4b25bc7; main commit b73e086f1cf110542f57c417d3962c56e3f631de; workflow 37347460556; release-verify 111889543524, worker-readiness 111890090180, deploy-pages 111890133242, smoke-live 111890249671 and release-status 111890356840 successful; deploy-worker 111890134636 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37347460556",
+      "captured_at": "2026-10-05T17:20:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-MAP-SCALE",
+      "claim_refs": ["C-001", "C-002", "C-149"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본의 연구 지도 중심에 `5개 연구 영역`이 표시되고, 390px·1440px에서 콘솔 오류 없이 지도·읽는 순서·연구 카드 흐름이 유지된다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha b73e086f1cf110542f57c417d3962c56e3f631de; generatedAt 2026-10-05T17:19:41.748Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 390px: coreText `GABA 연구의 중심 5개 연구 영역`, aria label includes `다섯 연구 영역`, topicButtons 5, mapTop 246, mapHeight 320, scrollWidth 390, errors []; 1440px: same core scale cue, topicButtons 5, mapTop 121, mapHeight 428, scrollWidth 1425, errors []; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=research-map-390",
+      "captured_at": "2026-10-05T17:21:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-SCALE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-149"]
     }
   ]
 }
