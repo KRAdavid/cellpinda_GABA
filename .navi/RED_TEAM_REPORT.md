@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — a37adcb
+
+- 공격 관점에서 전문가 영상 주제 필터의 모바일 다중 줄 쌓임, 가로 레일 도달성, 44px 터치 영역, 마지막 주제 선택 후 제목·활성 카드·autoplay iframe 동기화, 가로 넘침, runtime 오류를 320·350·390px에서 확인했다. 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.
+- 수평 rail은 wrapper clientWidth 256·286·326px, content scrollWidth 711px, 끝 도달 scrollLeft 455·425·385px으로 확인되었고 필터 레일 높이는 45px이었다. 선택 후 `불면·우울감과 GABA 이야기`, active card 1, iframe 1이 함께 갱신됐다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경되지 않았다. 대표 Chrome CDP 렌더만으로 전체 브라우저·실기기를 보장하지 않으므로 RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이며 PASS_WITH_CONDITIONS를 유지한다.
+
+증적: E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-RAIL-20261005.
+
 ## Recheck — 2026-10-05 — 88f9382
 
 - 공격 관점에서 첫 화면 읽기 경로의 모바일 줄바꿈, 데스크톱 한 줄 정렬, chevron 누락·겹침, 발견 장 시간축의 연결부 누락, 가로 넘침, runtime 오류를 390px·1440px에서 확인했다. 결함은 재현되지 않았고 새 CRITICAL/MAJOR 결함은 없었다.

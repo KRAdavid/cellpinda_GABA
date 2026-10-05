@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Expert Video Filter Rail Recheck — a37adcb — 2026-10-05
+
+- 전문가 영상 주제 필터가 좁은 모바일에서 여러 줄로 쌓여 선택 영상까지의 첫 시선이 길어지던 잔여 퍼블리싱 리스크를 확인하고, PR #356에서 44px 터치 높이를 유지한 한 줄 수평 레일로 정리했다. 주제 전체를 가로로 탐색할 수 있으며 영상 카드·즉시 재생·다음 읽기 흐름은 변경하지 않았다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #356 checks와 heartbeat PR #357 병합 후 main workflow `37322259867`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `a37adcb370ec1f04e3fe2d61073b773defe6647f`는 HTTP 200·STATIC·71개 번들 해시·12개 공개 claims·6개 master records·1개 product·6개 share pages·teaser HOLD를 유지한다. Chrome CDP fallback 공개 320·350·390px에서 필터 높이 45px, 수평 rail 끝 도달, 마지막 주제 선택 후 제목·활성 카드·autoplay iframe, 사업자 공유 버튼 44px, scrollWidth 320·350·390, runtimeErrors 0을 확인했고 새 CRITICAL/MAJOR 결함은 없었다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. Browser 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-RAIL-20261005, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-RAIL-20261005, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-RAIL-20261005, E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-RAIL-20261005.
+
 ## Hero Reading Route Recheck — 88f9382 — 2026-10-05
 
 - 첫 화면의 `3분 읽기` 경로를 의미 있는 순서 목록으로 바꾸고, 모바일에서는 두 줄·데스크톱에서는 한 줄로 정리했다. 연구 규모 카드의 `1950 → 지금` 표현도 CSS chevron 시간축으로 통일해 텍스트 화살표와 연구 레일의 시각 언어가 섞이지 않는다.

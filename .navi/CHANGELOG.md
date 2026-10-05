@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 전문가 영상 주제 레일 정리 — a37adcb — 2026-10-05
+
+- 320·350·390px에서 여러 줄로 쌓이던 전문가 영상 주제 필터를 한 줄 수평 레일로 정리해, 첫 영상과 선택 상태가 더 빨리 보이도록 했다. 모든 주제는 가로 탐색으로 접근할 수 있고 44px 터치 높이·영상 선택 즉시 재생·원문 링크·공유 흐름은 유지했다.
+- PR #356 checks와 heartbeat PR #357 병합 후 main workflow `37322259867`의 Pages 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 최신 공개 candidate `a37adcb370ec1f04e3fe2d61073b773defe6647f`는 HTTP 200, STATIC, 12 claims, 6 research records, 1 product, 6 share pages, teaser HOLD를 제공한다. 공개 320·350·390px에서 주제 레일·영상 선택·iframe·가로 폭을 재검증했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-RAIL-20261005, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-RAIL-20261005, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-RAIL-20261005, E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-RAIL-20261005.
+
 ## 첫 화면 읽기 경로 시각 언어 통일 — 88f9382 — 2026-10-05
 
 - 첫 화면의 `3분 읽기`를 의미 있는 순서 목록과 CSS chevron으로 정리하고, 연구 규모의 `1950 → 지금` 텍스트 연결을 시각 시간축으로 보정했다. 모바일·데스크톱에서 같은 읽기 순서를 유지하면서 첫 화면의 인지 부담을 줄였다.
