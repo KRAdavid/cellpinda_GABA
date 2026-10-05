@@ -1,5 +1,14 @@
 # Audit Report
 
+## Release Recheck — 2c1bca9 — 2026-10-05
+
+- 태블릿·데스크톱에서 모바일 전용 줄바꿈 span이 숨겨지며 발견 섹션 제목의 공백이 사라지는 잔여 한국어 퍼블리싱 리스크를 확인했다. PR #331에서 공백을 span 밖으로 보정하고 UI 계약에 전용 회귀 검사를 추가했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #331 checks와 main workflow `37290461697`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 모두 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 manifest candidate `2c1bca9eacd16149debff1a580155996b335987e`는 HTTP 200, STATIC, 12 공개 claims, 6 research records, 1 product, 6 share pages, teaser HOLD를 유지한다. 캐시를 비활성화한 Chrome CDP fallback 공개 390·768·1440px에서 발견 제목의 자연스러운 textContent, scrollWidth 390·753·1425, 접근성 기본 검사와 runtimeErrors 0을 확인했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. 브라우저 플러그인이 연결되지 않아 Chrome CDP fallback을 사용했으며 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-HISTORY-HEADING-SPACING-20261005, E-UI-CONTRACT-HISTORY-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-HISTORY-HEADING-SPACING-20261005, E-LIVE-PUBLIC-HISTORY-HEADING-SPACING-20261005.
+
 ## Release Recheck — 9c1a5cf — 2026-10-05
 
 - 첫 화면 H1과 장 제목의 줄바꿈 경계에서 한국어 단어가 붙어 보이거나 텍스트 구조에서 공백이 사라지는 잔여 퍼블리싱 리스크를 확인했다. PR #328에서 장 제목을, PR #329에서 H1·정적 no-script 제목을 명시적 공백으로 보정하고 UI 계약에 회귀 검사를 추가했다.

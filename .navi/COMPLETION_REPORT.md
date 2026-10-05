@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 2c1bca9 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-004 390·768·1440px 발견 섹션 제목의 자연스러운 공백, 가로 폭 안정성, 접근성 기본 점검·runtimeErrors 0: PASS.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산·Pages 배포·live smoke·release status: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #331과 main 공개 배포 workflow `37290461697`이 성공했고, 최종 공개 manifest는 candidate `2c1bca9eacd16149debff1a580155996b335987e`, HTTP 200, STATIC, 12 claims, 6 research, 1 product, 6 share pages, teaser HOLD를 확인했다. 발견 제목은 모바일 전용 줄바꿈이 숨겨지는 태블릿·데스크톱에서도 자연스러운 한국어 공백을 보존한다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-HISTORY-HEADING-SPACING-20261005, E-UI-CONTRACT-HISTORY-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-HISTORY-HEADING-SPACING-20261005, E-LIVE-PUBLIC-HISTORY-HEADING-SPACING-20261005.
+
 ## Current Release Recheck — 9c1a5cf — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

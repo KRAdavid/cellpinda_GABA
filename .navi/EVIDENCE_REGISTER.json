@@ -1280,6 +1280,17 @@
         "E-LIVE-PUBLIC-KOREAN-HEADING-SPACING-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-127",
+      "statement": "공개 GABA 안내서의 발견 섹션 제목은 모바일 줄바꿈 전용 요소가 숨겨지는 태블릿·데스크톱에서도 `처음에는 이름도 없었습니다`로 자연스럽게 읽힌다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-HISTORY-HEADING-SPACING-20261005",
+        "E-UI-CONTRACT-HISTORY-HEADING-SPACING-20261005",
+        "E-DEPLOY-PIPELINE-HISTORY-HEADING-SPACING-20261005",
+        "E-LIVE-PUBLIC-HISTORY-HEADING-SPACING-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10343,6 +10354,50 @@
       "captured_at": "2026-10-05T09:13:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-KOREAN-HEADING-SPACING",
       "claim_refs": ["C-002", "C-003", "C-126"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-HISTORY-HEADING-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "발견 섹션 제목의 반응형 줄바꿈 공백 보정 PR #331 source가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #331 source commit 8daed56; pnpm run validate:ui-contract PASS with discovery-heading boundary assertion; pnpm run typecheck PASS; pnpm test PASS 127/127; pnpm run build PASS with 1808 modules, initial JS 311199 bytes, initial CSS 95703 bytes, total assets 1617406 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/331",
+      "captured_at": "2026-10-05T09:26:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-HISTORY-HEADING-SPACING",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-127"]
+    },
+    {
+      "id": "E-UI-CONTRACT-HISTORY-HEADING-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 모바일 줄바꿈 전용 span 안에 공백을 두지 않고 span 밖에 명시해 태블릿·데스크톱에서도 발견 제목 단어 경계를 유지하도록 회귀 방지 조건을 고정한다.",
+      "locator": "scripts/validate-ui-contract.mjs discovery heading assertion; PublicGabaGuide.tsx renders `처음에는 이름도<span className=\"guide-mobile-break\"><br /></span>{' '}없었습니다.`; Chrome CDP accessibility audit at 390/768/1440px reports the same natural H2 text, no unnamed controls, missing alt, iframe title or duplicate IDs, and no heading jumps",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/331",
+      "captured_at": "2026-10-05T09:32:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-HISTORY-HEADING-SPACING",
+      "claim_refs": ["C-003", "C-127"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-HISTORY-HEADING-SPACING-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "발견 섹션 제목 공백 보정 PR #331이 필수 검사를 통과해 main commit 2c1bca9에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #331 merge main commit 2c1bca9eacd16149debff1a580155996b335987e; main workflow 37290461697 with release-verify 111699405203, worker-readiness 111699865612, deploy-pages 111699896841, smoke-live 111700025306 and release-status 111700104834 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37290461697",
+      "captured_at": "2026-10-05T09:34:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-HISTORY-HEADING-SPACING",
+      "claim_refs": ["C-001", "C-002", "C-127"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HISTORY-HEADING-SPACING-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 main commit 2c1bca9와 일치하고, 공개 390·768·1440px Chrome CDP fallback에서 발견 섹션 제목이 모두 `처음에는 이름도 없었습니다. 다만, 뇌 속에 있었습니다.`로 읽히며 가로 넘침·이름 없는 컨트롤·누락 alt·누락 iframe title·중복 ID·heading jump가 없다.",
+      "locator": "validate:live-public HTTP 200; candidateSha 2c1bca9eacd16149debff1a580155996b335987e; generatedAt 2026-10-05T09:31:22.823Z; runtimeMode STATIC; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; cache-disabled Chrome CDP accessibility audit at 390/768/1440px reports history heading text with preserved space and scrollWidth 390/753/1425 with runtimeErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=a11y-1440-20261005",
+      "captured_at": "2026-10-05T09:36:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-HISTORY-HEADING-SPACING",
+      "claim_refs": ["C-002", "C-003", "C-127"]
     }
   ]
 }
