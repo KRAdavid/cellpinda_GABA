@@ -157,6 +157,7 @@ export default function App(){
  const guideView = requestedView === 'guide' || currentPath === '/guide/' || (currentPath === '/' && !requestedView && !sharedRhythmId && !challengeInvite);
  const isProductView = requestedView === 'products' || currentPath === '/products/';
  const adminView = import.meta.env.DEV && isLocalHost && (requestedView === 'admin' || currentPath === '/admin');
+ const shouldLoadContent = !guideView && !accountView && !adminView && !operationsView;
  useEffect(()=>{
   if(!researchView)return;
   // Research-only layout rules should not add ~36 kB to the homepage CSS.
@@ -164,7 +165,19 @@ export default function App(){
   // cards resolve, while the shared shell stays immediately interactive.
   void import('./components/research-route.css');
  },[researchView]);
- useEffect(()=>{const c=new AbortController();setLoading(true);setError(false);loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));return()=>c.abort()},[retryKey]);
+ useEffect(()=>{
+  if(!shouldLoadContent){
+   setContent(null);
+   setLoading(false);
+   setError(false);
+   return;
+  }
+  const c=new AbortController();
+  setLoading(true);
+  setError(false);
+  loadContent(c.signal).then(setContent).catch(e=>{if(e.name!=='AbortError')setError(true)}).finally(()=>setLoading(false));
+  return()=>c.abort();
+ },[retryKey,shouldLoadContent]);
  useEffect(()=>{
   const value=rhythmIdFromUrl(new URL(location.href));
   const type=value ? resultTypes[value] : null;
