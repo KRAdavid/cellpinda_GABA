@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 좁은 모바일 연구 도표 레이블 보정 — 030f43a — 2026-10-05
+
+- 320px 폭에서 연구 비교 도표의 비교 조건·GABA 조건 레이블이 화면 밖으로 밀려나던 문제를 확인하고, 430px 이하에서 도표 헤더를 grid로 전환해 자연스럽게 줄바꿈되도록 보정했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #316의 main 배포 workflow `37273248778`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `030f43a6b481a22311803c3e9d4d39c196cab23e`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다. 캐시 비활성화 Chrome CDP fallback 공개 320·350·390·768px에서 overflowCount 0을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-NARROW-CHART-HEADER-20261005, E-UI-CONTRACT-NARROW-CHART-HEADER-20261005, E-DEPLOY-PIPELINE-NARROW-CHART-HEADER-20261005, E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005.
+
 ## 모바일 hero 읽기 안내 대비 보강 — 80bd0f2 — 2026-10-05
 
 - 사진 위에 놓인 `아래로 읽기` 안내를 반투명 흰색 pill·테두리·그림자로 분리해 첫 화면의 다음 읽기 방향을 빠르게 인식할 수 있게 했다.
