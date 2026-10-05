@@ -1071,6 +1071,17 @@
         "E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-108",
+      "statement": "공개 GABA 안내서에서 연구 카드 또는 출처 읽기 장면을 공유하면 선택된 연구의 제목·관찰 결과·research-{id} 딥링크가 유지되고, 다른 장·전문가 영상 공유 목적지는 그대로 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005",
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -9298,6 +9309,50 @@
       "captured_at": "2026-10-05T02:18:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-CONTEXTUAL-SOURCE",
       "claim_refs": ["C-002", "C-003", "C-107"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드·출처 읽기 장면의 선택 연구 공유 맥락 보존 v99 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #291 source commit 6ea58cfe85fcd608339d2f1f17915b07092db643; pnpm run validate:ui-contract PASS including v99 contextual research-share assertion; pnpm run typecheck PASS; pnpm test -- --runInBand PASS 127/127; pnpm run build PASS; 1808 modules; initial JS 311157 bytes, initial CSS 95703 bytes, total assets 1607925 bytes <= 1650000 budget; 11 static routes and 71 release files; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/291",
+      "captured_at": "2026-10-05T02:35:00Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-RESEARCH-SHARE-CONTEXT",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-108"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약 검사가 연구·출처 읽기 장면에서 선택 연구를 research-{id} 공유 해시와 연구별 제목·관찰 결과 문장으로 보존하고 영상·다른 장 공유 분기를 유지하는 구조를 회귀 방지 조건으로 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs v99 contextual research-share assertion; PublicGabaGuide.tsx derives shareResearchTopic for research or reading-note, uses topic-specific shareReadingLabel/shareText, and writes shareUrl.hash = research-${shareResearchTopic.id}; command result status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/291",
+      "captured_at": "2026-10-05T02:35:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-RESEARCH-SHARE-CONTEXT",
+      "claim_refs": ["C-003", "C-108"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 선택 공유 맥락 PR #291이 필수 검사를 통과해 main에 병합됐고 Pages 정적 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.",
+      "locator": "PR #291 merge main commit efb3f20540f88c0909e89826238c7d70f9c7ab50; PR checks release-verify 37255678391 job 111592103841 and site-quality-verify 37255678357 job 111592103823 successful; main workflow 37255772910 with release-verify 111592393977, worker-readiness 111592629846, deploy-pages 111592651346, smoke-live 111592697523 and release-status 111592749824 successful; deploy-worker 111592652167 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37255772910",
+      "captured_at": "2026-10-05T02:35:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-SHARE-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-108"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본이 선택 연구 공유 맥락 보정을 포함한 최신 main 후보와 일치하고 기존 제품 독립 공개 경계를 유지함을 라이브 validator가 확인했다.",
+      "locator": "EXPECTED_RELEASE_SHA=efb3f20540f88c0909e89826238c7d70f9c7ab50 pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha efb3f20540f88c0909e89826238c7d70f9c7ab50; generatedAt 2026-10-05T02:32:57.768Z; heroImage webp-ready; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; visual device QA remains external validation",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-05T02:35:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-SHARE-CONTEXT",
+      "claim_refs": ["C-002", "C-003", "C-108"]
     }
   ]
 }

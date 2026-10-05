@@ -1,5 +1,17 @@
 # Completion Report
 
+## Current Release Recheck — efb3f20 — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #291과 main 공개 배포 workflow 37255772910이 성공했고, 공개 URL validator가 candidate efb3f20540f88c0909e89826238c7d70f9c7ab50를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 이번 변경은 연구 또는 출처 읽기 장면에서 선택 연구의 제목·관찰 결과·`research-{id}` 딥링크를 공유하도록 보강했으며 연구 수치·출처·공개 카피·제품 데이터는 변경하지 않았다. 전문가 영상과 다른 장의 공유 목적지도 유지했다.
+- NAVI 공식 구조 검증과 risk-control assessment는 PASS이며, 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+- 완료 상태는 NOT_READY를 유지한다. 실제 브라우저 상호작용 캡처, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005.
+
 ## Current Release Recheck — 4143e45 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

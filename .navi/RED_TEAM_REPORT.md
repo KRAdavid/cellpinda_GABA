@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — efb3f20
+
+- 공격 관점에서 확인한 실패 모드는 연구 카드나 출처 읽기 장면에서 공유할 때 화면의 선택 연구와 공유 링크·제목·문장이 분리되어, 수신자가 일반 출처 읽기 장으로 이동하는 것이었다. PR #291에서 `research`·`reading-note` 장면의 선택 연구를 `research-{id}` 딥링크와 연구별 공유 문장에 연결하고, 영상·다른 장의 분기는 보존했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 실행 환경에서 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005.
+
 ## Recheck — 2026-10-05 — 4143e45
 
 - 공격 관점에서 확인한 실패 모드는 연구 카드를 선택한 뒤에도 출처 읽기 패널이 첫 연구에 고정되어 대상·측정 항목·설계와 원문 출처가 선택된 연구와 어긋나 보이는 것이었다. PR #289에서 `activeResearchTopic`을 출처 읽기 패널에 연결하고, 직접 진입 시에만 인지 연구를 기본 예시로 사용하도록 보정했다.
