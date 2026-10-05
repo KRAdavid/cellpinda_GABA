@@ -1,5 +1,16 @@
 # Completion Report
 
+## Current Release Recheck — 594352e — 2026-10-05
+
+- AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.
+- AC-005 로컬 UI 계약·품질·빌드·성능 예산: PASS.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS.
+- PR #299와 main 공개 배포 workflow 37260971979가 성공했고, 공개 URL validator가 candidate 594352e3c39b3eb15aee6095d4245cabaa5272d8를 HTTP 200 정적 사이트로 확인했다. 공개 검증은 71 bundle hashes·12 claims·6 master records·6 share pages·제품 독립 경계를 확인했다.
+- 이번 변경은 모바일 연구 지도의 선택 semantics와 중심 현재 주제 문구의 가독성을 보강했다. 연구 수치·출처·공개 카피·즉시 재생·공유 URL·제품 경계는 변경하지 않았다.
+- NAVI 로컬 감사는 오류 없이 대기 게이트를 분리해 기록했다. 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 실제 브라우저 상호작용, 대표 실기기, 고령 사용자 독해성, 독립 과학·규제 감수가 남아 있기 때문이다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261005.
+
 ## Current Release Recheck — 4b30428 — 2026-10-05
 
 - AC-001 공개 URL·정적 번들·최신 배포 후보: PASS.

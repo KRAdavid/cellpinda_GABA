@@ -1,5 +1,16 @@
 # Audit Report
 
+## Release Recheck — 594352e — 2026-10-05
+
+- 모바일 연구 지도 중심의 현재 주제 문구가 9px까지 축소되어 고령 독자의 빠른 방향 파악을 방해할 수 있고, 지도 자체가 보조기기에 하나의 선택 그룹으로 전달되지 않을 수 있는 잔여 퍼블리싱 리스크를 확인했다. PR #299에서 연구 지도를 named `group`으로 고정하고 각 주제 버튼에 `aria-pressed` 선택 상태를 추가했으며, 중심 현재 주제 문구를 모바일 11px·큰 글씨 모드 12px로 보강했다.
+- 연구 수치·출처·공개 카피·즉시 재생·공유 URL·제품 독립 공개 경계는 변경하지 않았다. NAVI 로컬 감사도 개인정보나 주문 행 없이 `IN_PROGRESS_WITH_GATES`, local checks `WAITING`, `auditFailed=false`, `publicExportChanged=false`를 유지했다.
+- 로컬 UI 계약 v103, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1609965 bytes로 예산 안이다.
+- PR #299 checks, main workflow 37260971979의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate 594352e3c39b3eb15aee6095d4245cabaa5272d8는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 정적 계약·배포 정합성은 확인했지만 실제 브라우저 상호작용 캡처, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261005.
+
 ## Release Recheck — 4b30428 — 2026-10-05
 
 - 연구 확장 지도와 전문가 영상 갤러리에서 선택 동작이 시각적으로는 이동·재생되지만 보조기기에는 연결된 읽기 대상이 명시되지 않을 수 있는 잔여 읽기 연결 리스크를 확인했다. PR #297에서 연구 주제 버튼에 `aria-controls=research-flow`를 추가하고 연구 결과 영역을 명명된 `region`으로 고정했으며, 전문가 영상 카드에도 대표 영상 영역 연결을 명시하고 선택·포커스 상태를 시각적으로 구분했다.
