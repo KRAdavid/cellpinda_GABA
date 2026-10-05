@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T15:35:43.989840Z",
+  "updated_at": "2026-10-05T15:49:19.821153Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5018,6 +5018,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T15:31:00Z"
+    },
+    {
+      "id": "H-217",
+      "event": "저장소 개인정보 보호 보정까지 포함한 최종 main commit 012e531 공개 배포를 다시 실행해 전체 workflow 성공을 확보했다. workflow 37335287439의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다. 최종 공개 candidate 012e5318cb45c5af734e5d83b0b79e654f0f6665는 HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·1개 product·6개 share page·teaser HOLD를 유지한다. Chrome CDP fallback 공개 320·390·1440px에서 읽는 법 범례의 폭 216·286·649, 높이 128·89·55, scrollWidth 320·390·1425, keyCount 2와 runtimeErrors 0을 재확인했고, 390px·1440px 전체 섹션 감사도 오류 없이 통과했다. 새 CRITICAL/MAJOR 결함은 없었으며 브라우저 플러그인 부재와 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 기존 외부 검증 항목으로 유지한다. 결과를 최종 배포·라이브 증거 두 건으로 추가 등록했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-05T15:46:16Z"
     }
   ]
 }

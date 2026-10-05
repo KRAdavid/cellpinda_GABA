@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 최종 공개 배포·NAVI 증거 고정 — 012e531 — 2026-10-05
+
+- 저장소 개인정보 보호 보정까지 포함한 최종 main commit을 다시 배포하고 전체 release workflow 성공을 확보했다. release-verify·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- 최종 공개 candidate `012e5318cb45c5af734e5d83b0b79e654f0f6665`는 HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 유지한다. 공개 320·390·1440px 연구 도표 범례와 390·1440px 전체 흐름을 재검증했고 오류·가로 넘침은 없었다.
+- NAVI 최종 라이브 증거를 추가했으며 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-FINAL-20261006, E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-FINAL-20261006.
+
 ## 연구 결과 도표 읽는 법 범례 고도화 및 공개 재검증 — 859bb59 — 2026-10-05
 
 - 비교형 연구 도표 하단의 긴 반복 설명을 `읽는 법` 시각 범례로 바꿔 변화 방향·두 조건의 상대 비교·그림 크기와 실제 효과 크기의 차이를 빠르게 읽도록 했다. 차트 전체 설명은 접근성 레이블로 보존했다.

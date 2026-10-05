@@ -1480,7 +1480,9 @@
         "E-LOCAL-BUILD-RESEARCH-CHART-LEGEND-20261006",
         "E-UI-CONTRACT-RESEARCH-CHART-LEGEND-20261006",
         "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-20261006",
-        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-20261006"
+        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-FINAL-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-FINAL-20261006"
       ],
       "status": "SUPPORTED"
     }
@@ -11302,6 +11304,28 @@
       "source_uri": "https://kradavid.github.io/gaba_info/?qa=chart-legend-public-390-20261006#research-cognition",
       "captured_at": "2026-10-05T15:31:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-CHART-LEGEND",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-145"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-FINAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "저장소 개인정보 보호 보정까지 포함한 main commit 012e531이 최종 공개 배포 workflow를 전체 성공으로 통과했다.",
+      "locator": "main commit 012e5318cb45c5af734e5d83b0b79e654f0f6665; workflow 37335287439; release-verify 111848408040, worker-readiness 111848959786, deploy-pages 111848996280, smoke-live 111849095379 and release-status 111849214198 successful; deploy-worker 111848997479 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37335287439",
+      "captured_at": "2026-10-05T15:46:16Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-RESEARCH-CHART-LEGEND-FINAL",
+      "claim_refs": ["C-001", "C-002", "C-145"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-FINAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main 공개본은 320·390px에서 읽는 법 범례를 자연스럽게 줄바꿈하고 1440px에서 한 줄로 표시하며, 연구 도표 전체 설명과 가로 폭·runtime 안정성을 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 012e5318cb45c5af734e5d83b0b79e654f0f6665; generatedAt 2026-10-05T15:45:45.662Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; Chrome CDP fallback public 320·390·1440px reported scrollWidth 320/390/1425, note widths 216/286/649, note heights 128/89/55, keyCount 2, errors []; full public section audit 390px pageHeight 34417 and 1440px pageHeight 22352 with runtime errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=chart-legend-public-390-20261006#research-cognition",
+      "captured_at": "2026-10-05T15:46:16Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-RESEARCH-CHART-LEGEND-FINAL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-145"]
     }
   ]
