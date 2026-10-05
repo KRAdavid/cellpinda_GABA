@@ -1351,6 +1351,17 @@
         "E-LIVE-PUBLIC-HERO-PUNCTUATION-20261005"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-134",
+      "statement": "공개 GABA 안내서의 브라우저 탭·OG·Twitter·상단 공유 제목이 첫 화면의 완성된 도입 문장 `저속노화, 회복하는 밤에서 시작됩니다`와 일치하며, 390px·1440px 공개 화면의 본문 흐름과 가로 폭을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PUBLIC-TITLE-20261005",
+        "E-UI-CONTRACT-PUBLIC-TITLE-20261005",
+        "E-DEPLOY-PIPELINE-PUBLIC-TITLE-20261005",
+        "E-LIVE-PUBLIC-PUBLIC-TITLE-20261005"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -10656,6 +10667,50 @@
       "captured_at": "2026-10-05T11:04:06Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-HERO-PUNCTUATION",
       "claim_refs": ["C-002", "C-003", "C-133"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PUBLIC-TITLE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main commit 5e45c5e의 production build는 공개 제목 정렬을 포함해 11개 정적 경로·71개 배포 파일·성능 예산 검사를 통과했다.",
+      "locator": "pnpm run build; candidateSha 5e45c5ec3617458cca2db6568b861222f6d0f130; routes 11; files 71; total assets 1618777 <= 1650000; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; validate-ui-contract, release manifest, static bundle and performance passed",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\dist",
+      "captured_at": "2026-10-05T11:23:28Z",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-20261005-PUBLIC-TITLE",
+      "claim_refs": ["C-001", "C-002", "C-134"]
+    },
+    {
+      "id": "E-UI-CONTRACT-PUBLIC-TITLE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 공개 문서 title·OG title·런타임 title·상단 공유 title이 완성된 첫 화면 문장과 일치하는지 회귀 검사한다.",
+      "locator": "pnpm run validate:ui-contract; status ok; index.html and PublicGabaGuide.tsx title/share assertions require `저속노화, 회복하는 밤에서 시작됩니다 | GABA Guide` and top-level share title `저속노화, 회복하는 밤에서 시작됩니다`",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\셀핀다가바-v37-20261004\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-05T11:23:28Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261005-PUBLIC-TITLE",
+      "claim_refs": ["C-003", "C-134"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PUBLIC-TITLE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 제목 정렬 commit 5e45c5e가 main 공개 파이프라인에서 release-verify·Worker readiness·Pages 배포·라이브 smoke·release-status까지 성공했다.",
+      "locator": "main commit 5e45c5ec3617458cca2db6568b861222f6d0f130; workflow 37302156072; release-verify 111737179001, worker-readiness 111737624645, deploy-pages 111737659010, smoke-live 111737734793 and release-status 111737809788 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37302156072",
+      "captured_at": "2026-10-05T11:22:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261005-PUBLIC-TITLE",
+      "claim_refs": ["C-001", "C-002", "C-134"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-PUBLIC-TITLE-20261005",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages 공개본은 HTTP 200·STATIC·71개 번들 해시를 유지하고, 390px·1440px에서 브라우저 제목·OG·Twitter 제목이 `저속노화, 회복하는 밤에서 시작됩니다 | GABA Guide`, 상단 공유 payload 제목이 `저속노화, 회복하는 밤에서 시작됩니다`로 표시되며 H1·연구 지도·연구 카드·이야기 공유 장과 가로 폭·runtimeErrors 0을 유지한다.",
+      "locator": "pnpm run validate:live-public; page 200; runtimeMode STATIC; candidateSha 5e45c5ec3617458cca2db6568b861222f6d0f130; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; provenance matched; cache-disabled Chrome CDP fallback public URL https://kradavid.github.io/gaba_info/?qa=hero-punctuation-{390|1440}-20261005; title/meta values matched; H1 textContent `저속노화, 회복하는 밤에서 시작됩니다. 그 회복의 신호를 GABA에서 읽습니다`; sections 17; buttons 64; research map/cards 5/5; final active `이야기 공유`; scrollWidth 390/1425; runtimeErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=hero-punctuation-390-20261005",
+      "captured_at": "2026-10-05T11:22:30Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261005-PUBLIC-TITLE",
+      "claim_refs": ["C-002", "C-003", "C-134"]
     }
   ]
 }
