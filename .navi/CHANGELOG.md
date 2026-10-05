@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 좁은 모바일 연구 비교 흐름 고도화 — b343def — 2026-10-05
+
+- 430px 이하 휴대폰에서 연구 결과 비교 조건과 GABA 결과를 한 줄씩 세로로 읽도록 정리하고, GABA 결과 레인에 좌측 teal 표식을 추가해 핵심 차이를 빠르게 파악하도록 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #283 checks, main workflow 37251345872, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-NARROW-COMPARISON-20261005, E-UI-CONTRACT-NARROW-COMPARISON-20261005, E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005, E-LIVE-PUBLIC-NARROW-COMPARISON-20261005.
+
 ## 모바일 장면 맥락 가독성 고도화 — de91cbb — 2026-10-05
 
 - 모바일 장 제목 아래의 짧은 맥락 문구를 14px·26ch·행간 1.65로 정리하고 좌측 포인트 라인을 추가해 장면의 의미와 다음 내용의 연결을 빠르게 읽도록 보강했다.

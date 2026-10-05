@@ -1,5 +1,15 @@
 # Audit Report
 
+## Release Recheck — b343def — 2026-10-05
+
+- 430px 이하 휴대폰에서 연구 결과 비교 레인이 좌우로 압축되어 비교 조건과 GABA 결과를 한눈에 대조하기 어려울 수 있는 인포그래픽 리스크를 확인하고 PR #283에서 두 레인을 세로 순서로 배치하고 GABA 결과에 좌측 teal 표식을 추가했다. 연구 수치·출처 데이터·공개 카피·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI 계약, typecheck, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 1808 modules, 초기 JS 311157 bytes, 초기 CSS 95703 bytes, 전체 assets 1606109 bytes로 예산 안이다.
+- PR #283 필수 checks, main workflow 37251345872의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 validator candidate b343def175eb3d65b3ee844c4cb14a2e4ba9f2ea는 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- 좁은 모바일 비교 레인의 정적 계약·배포 정합성은 확인했지만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-NARROW-COMPARISON-20261005, E-UI-CONTRACT-NARROW-COMPARISON-20261005, E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005, E-LIVE-PUBLIC-NARROW-COMPARISON-20261005.
+
 ## Release Recheck — de91cbb — 2026-10-05
 
 - 모바일에서 복원된 장 맥락 문구가 13px·긴 행간·시각적 구분 부족으로 고령 독자에게 약하게 보일 수 있는 편집 리스크를 확인하고 PR #281에서 14px·26ch·행간 1.65·좌측 포인트 라인으로 읽기 우선순위를 보강했다. 연구 수치·출처 데이터·공개 카피·제품 독립 경계는 변경하지 않았다.

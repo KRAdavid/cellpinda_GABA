@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Recheck — 2026-10-05 — b343def
+
+- 공격 관점에서 확인한 실패 모드는 좁은 휴대폰 연구 카드에서 비교 조건과 GABA 결과가 좌우로 압축되어 시선이 오갈 때 핵심 차이를 놓칠 수 있는 것이었다. PR #283에서 두 레인을 한 열로 세로 배치하고 GABA 결과에 좌측 teal 표식을 적용해 읽기 순서를 명확히 했다.
+- UI 계약, typecheck, 127개 테스트, production build, main Pages 배포·라이브 smoke·release status와 라이브 validator가 통과했다. 공개 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 실제 브라우저 렌더 결과, Safari/iOS/Android 실기기, 실제 고령 사용자 이해도는 현재 실행 환경에서 증명하지 않았으므로 결과는 PASS_WITH_CONDITIONS를 유지한다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 사용자 이해도는 계속 OPEN이다.
+
+증적: E-LOCAL-BUILD-NARROW-COMPARISON-20261005, E-UI-CONTRACT-NARROW-COMPARISON-20261005, E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005, E-LIVE-PUBLIC-NARROW-COMPARISON-20261005.
+
 ## Recheck — 2026-10-05 — de91cbb
 
 - 공격 관점에서 확인한 실패 모드는 모바일 장 맥락 문구가 복원됐어도 작은 글자·긴 행간·본문과의 약한 구분 때문에 장면의 의미를 빠르게 놓칠 수 있는 것이었다. PR #281에서 14px 읽기 크기, 26ch 폭, 1.65 행간, 좌측 포인트 라인을 적용해 시각 위계를 보강했다.
