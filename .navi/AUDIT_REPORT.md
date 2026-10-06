@@ -1,5 +1,13 @@
 # Audit Report
 
+## 인쇄·PDF 공유 퍼블리싱 배포 완료 — main ab096d1 — 2026-10-07
+
+- PR #527을 병합하고 main workflow `37532761509`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다. 공개 validator는 HTTP 200, merge candidate `ab096d1`, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, provenance `matched`를 확인했다.
+- 공개 Chrome print media 390·1440px에서 실제 top-level `print.css`가 적용되고 document width가 viewport와 같으며 헤더·진행바·영상 보드·복구 조작부는 숨겨지고 본문 섹션 13개가 렌더된다. 제품 독립 공개 경계는 유지됐다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. 원격 Chrome fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-PRINT-PUBLISHING-20261007`, `E-UI-CONTRACT-PRINT-PUBLISHING-20261007`, `E-CDP-PRINT-PUBLISHING-20261007`, `E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007`, `E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007`.
+
 ## 인쇄·PDF 공유 퍼블리싱 레이어 — working tree — 2026-10-07
 
 - 사업자가 공개 안내서를 인쇄하거나 PDF로 공유할 때 화면 전용 헤더·진행바·영상·복구 조작부가 문서 흐름을 방해할 수 있는 잔여 퍼블리싱 리스크를 확인했다. v163 인쇄 미디어 규칙으로 A4 여백, 본문 섹션 리듬, 카드 분할 방지, 연구 출처 URL 표시를 추가했다.

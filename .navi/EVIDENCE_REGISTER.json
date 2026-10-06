@@ -16118,8 +16118,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "PR과 main 공개 배포 파이프라인이 인쇄·PDF 공유 레이어 변경의 최종 커밋에서 모두 성공했다.",
-      "locator": "pending until PR merge; release-verify, worker-readiness, deploy-pages, smoke-live and release-status must all be success",
-      "captured_at": "2026-10-07T01:00:00Z",
+      "locator": "PR #527 https://github.com/KRAdavid/gaba_info/pull/527; release-verify 37532555727 and site-quality-verify 37532555736 success; merge bb1356b77172583efc0af9ec90049c6fa77c3f03 into main as ab096d1f7a20fbc2b3d925f048f60f85ab0e0fa8; main workflow 37532761509; release-verify 112506009044; worker-readiness 112506517890; deploy-pages 112506567704; deploy-worker skipped static 112506568232; smoke-live 112506644690; release-status 112506725646; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37532761509",
+      "captured_at": "2026-10-07T01:18:04Z",
       "reviewer_id": "NAVI-DEPLOY-QA-20261007-PRINT-PUBLISHING",
       "claim_refs": ["C-001", "C-002", "C-005", "C-221"]
     },
@@ -16128,9 +16129,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최종 공개 GitHub Pages에서 인쇄·PDF 공유 레이어가 배포된 뒤 공개 안내서의 화면 흐름과 제품 독립 공개 경계를 유지한다.",
-      "locator": "pending until public deployment; HTTP 200, public validator, static bundle hashes and live Chrome fallback must be rechecked after the merge",
-      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=print-audit-20261007",
-      "captured_at": "2026-10-07T01:00:00Z",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=print-audit-20261007&cachebust=bb1356b; HTTP 200; validate:live-public candidateSha ab096d1f7a20fbc2b3d925f048f60f85ab0e0fa8, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched; remote Chrome CDP fallback with print media at 390px and 1440px confirms documentWidth equals viewport, header none, readingProgress none, videoBoard none, recoveryControls none, visibleSections 13; screenshots inspected with view_image; product-independent boundary matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=print-audit-20261007&cachebust=bb1356b",
+      "captured_at": "2026-10-07T01:18:04Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-PRINT-PUBLISHING",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-221"]
     }
