@@ -2446,3 +2446,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007`, `E-CDP-TABLET-APPLICATION-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007`.
+
+## Current Release Recheck — 55aa1b4 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. PR #532가 main에 병합됐고 workflow `37539036705`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 validator가 candidate `55aa1b483531176bd4eba3f32fc47925ee6ff61a`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 전문가 영상·태블릿 반응형: PASS. 공개 768px에서 9개 영상 카드가 1열로 읽히고 마지막 카드 오른쪽 빈 공간이 제거됐다. 공개 390px에서는 2열 썸네일 갤러리, 1440px에서는 기존 데스크톱 갤러리가 유지됐다.
+- AC-005 배포 게이트: PASS. UI contract·typecheck·127개 테스트·production build·Pages 번들·성능 예산, PR #532 required checks와 main workflow `37539036705`가 성공했다. remote Pages 성능 총량은 `1,649,937 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 전문가 영상 카드의 반응형 정보 배치에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007`, `E-CDP-TABLET-VIDEO-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007`.

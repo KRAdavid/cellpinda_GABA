@@ -2705,3 +2705,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007`, `E-CDP-TABLET-APPLICATION-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007`.
+
+## 태블릿 전문가 영상 보드 리듬·공개 배포 — 55aa1b4 — 2026-10-07
+
+- 감사 finding: 701–1100px에서 9개 전문가 영상 카드가 2열로 배치되어 마지막 카드가 왼쪽에 홀로 남고 오른쪽에 큰 빈 공간이 생겼다. 영상 선택·필터를 유지하면서도 한눈에 읽는 흐름이 약해질 수 있었다.
+- 보정: 태블릿 영상 보드를 1열로 정렬하고, 390px 모바일 2열 썸네일 갤러리와 1440px 데스크톱 영상 갤러리는 유지했다.
+- Recheck: 로컬 UI contract·typecheck·127개 테스트·production build·Pages 번들·성능 예산, PR #532, main workflow `37539036705`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status, 공개 validator candidate `55aa1b4`, Chrome Playwright 390·768·1440px 시각 점검이 성공했다.
+- 공개 경계: 영상 보드 정보 배치만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007`, `E-CDP-TABLET-VIDEO-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007`.
