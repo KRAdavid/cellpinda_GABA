@@ -1827,6 +1827,20 @@
   }
 }
 
+/* v152 narrow-phone layout stability: disable deferred chapter measurement where
+   compact Korean wrapping can exceed the intrinsic placeholder before a deep jump. */
+@media(max-width:380px){
+  .gaba-guide .guide-applications,
+  .gaba-guide .guide-fermented-safety,
+  .gaba-guide .guide-growth-story,
+  .gaba-guide .guide-expert-videos,
+  .gaba-guide .guide-reading-note,
+  .gaba-guide .guide-final{
+    content-visibility:visible;
+    contain-intrinsic-size:none;
+  }
+}
+
 /* v91 editorial typography: keep Korean display lines balanced and body copy naturally grouped. */
 @supports (text-wrap:balance){
   .gaba-guide .guide-hero h1,
