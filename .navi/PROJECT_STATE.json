@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T09:26:39Z",
+  "updated_at": "2026-10-06T09:45:47Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T09:26:39Z"
+    "last_run_at": "2026-10-06T09:45:47Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T09:26:39Z"
+    "last_run_at": "2026-10-06T09:45:47Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5411,6 +5411,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T09:26:39Z"
+    },
+    {
+      "id": "H-270",
+      "event": "인지·수면 비교 도표에서 결과 요약은 `GABA 그룹`인데 조건 레인만 `GABA 섭취`로 표시되어 같은 대상을 서로 다른 이름으로 읽게 하는 잔여 문구 불일치를 확인했다. 두 비교 도표의 visible resultLabel을 `GABA 그룹`으로 통일하고 연구 수치·내용·출처·접근성 설명·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 Chrome CDP fallback 390px에서 두 비교 레인·결과 요약의 `GABA 그룹` 일치, 이전 라벨 부재, 가로 넘침·page/console errors 0을 확인했다. PR #461은 main merge `81c91d2`로 병합되었고 workflow `37444743950`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `81c91d2b96c1e8057a81272cda1cff8d2b7fe1a0`·HTTP 200·STATIC·71개 bundle hash·공개 데이터 정합성·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-192와 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T09:45:47Z"
     }
   ]
 }

@@ -1639,3 +1639,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 상단 카피·연구 내용·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-COMPARISON-VERDICT-20261006`, `E-UI-CONTRACT-COMPARISON-VERDICT-20261006`, `E-CDP-COMPARISON-VERDICT-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006`, `E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006`.
+
+## 비교 도표 GABA 조건명 일관화·공개 배포 — 81c91d2 — 2026-10-06
+
+- 인지·수면 비교 도표의 결과 요약과 조건 레인을 모두 `GABA 그룹`으로 통일해 모바일 독자가 같은 대상을 같은 이름으로 비교하도록 다듬었다.
+- PR #461, main workflow `37444743950`, Pages·라이브 smoke·release-status와 공개 validator candidate `81c91d2`가 성공했다. Chrome CDP fallback 390x844 deep link에서 두 비교 레인·결과 요약·가로폭·page/console errors 0을 확인했다.
+- 연구 내용·수치·출처·접근성 설명·상단 카피·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006`.

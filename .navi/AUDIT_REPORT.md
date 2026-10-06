@@ -2385,6 +2385,16 @@
 
 증적: `E-LOCAL-BUILD-COMPARISON-VERDICT-20261006`, `E-UI-CONTRACT-COMPARISON-VERDICT-20261006`, `E-CDP-COMPARISON-VERDICT-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006`, `E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006`.
 
+## Current Release Recheck — 81c91d2 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `81c91d2b96c1e8057a81272cda1cff8d2b7fe1a0`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-003/AC-004 비교 도표 문구 일관성: PASS. 390px cognition deep link에서 결과 요약과 두 비교 레인이 모두 `GABA 그룹`으로 표시되고, 해당 도표의 `GABA 섭취` 혼용 표기는 사라졌으며 document/body scrollWidth 375px(390px viewport의 세로 스크롤바 제외 콘텐츠 폭), page/console errors 0을 확인했다.
+- AC-005 배포 게이트: PASS. PR #461의 release-verify·site-quality-verify, main workflow `37444743950`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산도 통과했다.
+- AC-006 연구 내용·수치·출처·제품 독립 경계: PASS. 이번 변경은 인지·수면 비교 도표의 visible resultLabel만 통일했으며 연구 내용·해석·출처·접근성 설명·상단 카피는 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.
