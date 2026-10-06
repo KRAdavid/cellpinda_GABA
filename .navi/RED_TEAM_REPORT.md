@@ -1912,3 +1912,12 @@
 - 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-ACADEMIC-MAP-SEQUENCE-20261006`, `E-CDP-ACADEMIC-MAP-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-MAP-SEQUENCE-20261006`, `E-LIVE-PUBLIC-ACADEMIC-MAP-SEQUENCE-20261006`.
+
+## 일상 속 GABA 카드 순서·공개 배포 — 2026-10-06 — df90375
+
+- 공격 관점에서 일상 카드 5장을 연속으로 읽을 때 현재 카드와 전체 카드 수를 바로 파악할 수 있는지 확인했다. 모바일·데스크톱 모두 `01 / 05`–`05 / 05`가 유지되고 카드 폭과 섹션 정렬이 안정적이다.
+- 카드 문구·과학 정보·출처·제품 독립 공개 경계는 변경되지 않았고, UI 계약·배포 workflow·라이브 validator가 공개 SHA와 일치한다. 새 CRITICAL/MAJOR 결함은 없다.
+- 순서 표식은 시각적 탐색성을 높이지만 실제 고령 사용자 이해도나 Safari/iOS/Android 실기기 동작을 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-EVERYDAY-CARD-SEQUENCE-20261006`, `E-CDP-EVERYDAY-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EVERYDAY-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006`.
