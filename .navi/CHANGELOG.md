@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 초협폭 연구 결과 도표 가독성 보정·공개 배포 — ad52246 — 2026-10-07
+
+- 280px 이하 초소형 모바일에서 연구 결과 비교 조건 카드를 세로로 쌓고 결과 문구를 카드 폭 전체에 표시해 `더 많이 줄었습니다`·`덜 줄었습니다`와 방향 신호를 순서대로 읽도록 보정했다. 320px은 동일한 읽기 구조를 사용하고 390px·태블릿·데스크톱 구성은 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #520 최종 checks, main workflow `37519850528`, Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 280·320·390px 검증을 통과했다. 원격 성능 예산의 환경별 72-byte 초과는 CSS 중복을 제거해 최종 통과시켰다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-ULTRA-NARROW-CHART-20261007`, `E-UI-CONTRACT-ULTRA-NARROW-CHART-20261007`, `E-CDP-ULTRA-NARROW-CHART-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-CHART-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-CHART-20261007`.
+
 ## 섹션 직접 진입 앵커 가독성 보정·공개 배포 — 075b919 — 2026-10-06
 
 - 메뉴·공유 링크로 연구 지도에 직접 진입할 때 고정 헤더와 읽기 진행바가 제목을 가리지 않도록 데스크톱·태블릿 126px, 모바일 116px의 반응형 앵커 여백을 추가했다.

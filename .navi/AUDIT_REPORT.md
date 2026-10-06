@@ -1,5 +1,14 @@
 # Audit Report
 
+## 초협폭 연구 결과 도표 가독성 보정·공개 배포 — ad52246 — 2026-10-07
+
+- 독립 감사 관점에서 280px 이하 초소형 모바일에서 비교 조건과 GABA 조건이 좁은 2열 카드 안에 갇혀 `더 많이 줄었습니다`·`덜 줄었습니다`가 세로로 끊기거나 방향 신호와 한눈에 비교되지 않는 잔여 가독성 리스크를 확인했다. v162에서 조건 레인을 세로로 쌓고 각 결과 문구가 카드 폭 전체를 사용하도록 보정했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했으며, 로컬 총 자산은 1,649,463 bytes로 예산 안이다. PR #520의 최종 release-verify·site-quality-verify와 main workflow `37519850528`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 Chrome CDP fallback에서 280·320·390px의 차트 조건 카드·결과 문구·방향 신호를 확인했다. document width는 각 viewport와 같고 phrase/lane DOM overflow는 모두 false였다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. Browser fallback은 실제 Safari/iOS/Android 실기기와 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 게이트를 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-ULTRA-NARROW-CHART-20261007`, `E-UI-CONTRACT-ULTRA-NARROW-CHART-20261007`, `E-CDP-ULTRA-NARROW-CHART-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-CHART-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-CHART-20261007`.
+
 ## 섹션 직접 진입 앵커 가독성 보정·공개 배포 — 075b919 — 2026-10-06
 
 - 독립 감사 관점에서 메뉴·공유 링크로 연구 지도에 직접 진입할 때 고정 헤더와 읽기 진행바가 제목을 가릴 수 있는 잔여 리스크를 재점검했다. v160에서 데스크톱·태블릿 앵커 여백을 126px, 모바일을 116px로 보정해 제목과 진행바 사이에 읽기 공간을 확보했다.

@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — ad52246 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37519850528`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.
+- AC-003/AC-004 초협폭 연구 결과 도표·반응형: PASS. 280·320px에서는 조건 카드를 세로로 쌓아 결과 문구가 카드 폭 전체에 표시되고, 390px에서는 기존 비교 구조를 유지했다. 세 폭 모두 document width가 viewport와 같고 phrase/lane DOM overflow가 false다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #520의 최종 필수 검사, main 공개 배포 파이프라인이 성공했다. 로컬 초기 JS 311,199 bytes, CSS 95,703 bytes, 총 자산 1,649,463 bytes가 예산 안에 있다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 카피·수치·출처·공개 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-ULTRA-NARROW-CHART-20261007`, `E-UI-CONTRACT-ULTRA-NARROW-CHART-20261007`, `E-CDP-ULTRA-NARROW-CHART-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-CHART-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-CHART-20261007`.
+
 ## Current Release Recheck — 075b919 — 2026-10-06
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37517088317`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.
