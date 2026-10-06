@@ -2535,3 +2535,13 @@
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006`.
+
+## 모바일 첫 화면 hero 가독성·최종 공개 배포 — fb603a48 — 2026-10-07
+
+- Red-team finding: 390·350px에서 첫 화면 강조 문구가 화면 폭에 따라 줄바꿈 기회를 명시적으로 갖지 않아 마지막 글자 잘림 여부를 반복 확인해야 하는 잔여 읽기 리스크가 있었다.
+- 보정: `GABA에서<wbr /> 읽습니다`로 표준 줄바꿈 기회를 추가하고 중간 폭 공유 컨트롤의 중복 선언을 줄였다. 폭이 충분한 공개 화면에서는 자연스럽게 한 줄을 유지하며, 모든 검증 폭에서 문장 전체가 표시된다.
+- Recheck: 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #498, main workflow `37487864715`, 공개 validator candidate `fb603a48dbffc5fdb6da2732487c2f759749b408`, Chrome CDP fallback 390·350·1440px에서 hero·공유 라벨·가로폭·runtime/console/http errors 0을 확인했다.
+- 공개 과학 카피·수치·출처·제품 독립 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.

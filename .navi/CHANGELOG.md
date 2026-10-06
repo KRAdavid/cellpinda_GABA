@@ -1764,3 +1764,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #494, main workflow `37482350132`, 공개 validator candidate `a6c8c6e`, Chrome CDP 390·380·351·350px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006`.
+
+## 모바일 첫 화면 hero 줄바꿈 기회·공개 배포 — 2026-10-07 — fb603a48
+
+- `GABA에서<wbr /> 읽습니다`를 적용해 좁은 화면에서도 의미 단위 줄바꿈 기회를 제공하고, 실제 공개 390·350px에서 문장 전체가 가로폭 안에 표시되는 것을 확인했다.
+- 1440px 제목 흐름, 모바일 공유 라벨, 연구 카피·수치·출처·제품 독립 공개 경계는 유지했다.
+- 로컬 성능 예산 `1,649,468 bytes <= 1,650,000`, PR #498, main workflow `37487864715`, 공개 validator candidate `fb603a48`, Chrome CDP 390·350·1440px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.
