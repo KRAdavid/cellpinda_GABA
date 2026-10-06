@@ -2336,3 +2336,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007`, `E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007`, `E-CDP-TABLET-GROWTH-FLOW-20261007`, `E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007`, `E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007`.
+
+## Current Release Recheck — 0f7adb6 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. PR #514가 main에 병합됐고 workflow `37511444066`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 URL은 HTTP 200이다.
+- AC-003/AC-004 태블릿 공유 발견성·반응형: PASS. 공개 390·701·768·900·1440px에서 `공유하기` 라벨, 44px 터치 높이, 701–900px 78px 레일, 가로폭 초과 없음이 확인됐다.
+- AC-005 배포 게이트: PASS. UI contract·typecheck·127개 테스트·Pages 번들·성능 예산, PR #514 required checks와 main workflow `37511444066`이 성공했다. 최종 local Pages 자산 총량은 `1,649,679 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 태블릿 헤더 공유 라벨과 UI 계약에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-TABLET-SHARE-LABEL-20261007`, `E-UI-CONTRACT-TABLET-SHARE-LABEL-20261007`, `E-CDP-TABLET-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-TABLET-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007`.
