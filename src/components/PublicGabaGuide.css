@@ -1854,7 +1854,7 @@
 
 /* v158 tablet share cue: keep the high-value sharing action named for readers who do not infer icon-only controls. */
 @media(min-width:701px) and (max-width:900px){
-  .gaba-guide .guide-header-share{flex:0 0 78px;width:78px;min-width:78px;height:44px;padding:0 9px;justify-content:center;gap:4px;font-size:11px;white-space:nowrap}
+  .gaba-guide .guide-header-share{flex:0 0 78px;width:78px;min-width:78px;height:44px;padding:0 9px;justify-content:center;gap:4px;font-size:11px}
 }
 
 /* v91 editorial typography: keep Korean display lines balanced and body copy naturally grouped. */
