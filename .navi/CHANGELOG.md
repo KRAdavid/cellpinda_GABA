@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 큰 글자 읽기 모드·모바일 공개 재점검 — main 829c5fb — 2026-10-07
+
+- 320·390·768px 큰 글자 모드에서 회복 14단계·연구 지도·전문가 영상·공유 화면을 다시 점검했다. 본문 가로폭은 viewport와 일치했고 보이는 한국어 문장 잘림과 런타임 오류는 없었다.
+- 장식용 overflow와 `sr-only` 내부 폭 차이를 실제 본문 overflow와 구분해 기록했다. 가시적 결함이 없어 공개 UI 코드는 유지했다.
+- UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-LARGE-TEXT-AUDIT-20261007`, `E-UI-CONTRACT-LARGE-TEXT-AUDIT-20261007`, `E-CDP-LARGE-TEXT-AUDIT-20261007`, `E-LIVE-PUBLIC-LARGE-TEXT-AUDIT-20261007`.
+
 ## 전문가 영상 필터 카운트 가독성 보정·공개 배포 — b028897 — 2026-10-07
 
 - 전문가 영상 필터의 숫자 카운트를 `9편`·`4편`처럼 단위와 함께 표시해 모바일·데스크톱에서 주제별 자료량을 즉시 읽도록 고도화했다. 접근성 이름·선택 영상 즉시 재생·연구 내용은 유지했다.

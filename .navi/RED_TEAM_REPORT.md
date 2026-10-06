@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 큰 글자 읽기 모드·모바일 공개 재점검 — main 829c5fb — 2026-10-07
+
+- 공격 관점에서 큰 글자 모드가 카드 내부 문구를 늘리면서 회복 카드·연구 지도·전문가 영상의 화면 폭을 밀어내거나, 장식용 overflow가 실제 정보 잘림으로 오인되는 실패 모드를 점검했다. 320·390·768px에서 보이는 문장·버튼·연구 흐름을 확인했다.
+- 세 폭 모두 document width가 viewport와 같고 runtime·console errors는 0이었다. 내부 scrollWidth 차이는 원형 장식·배경 이미지와 `sr-only` 노드에서만 발견됐으며, visible text clipping은 없었다. 새 CRITICAL/MAJOR 결함은 없다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Chrome fallback이 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-LARGE-TEXT-AUDIT-20261007`, `E-CDP-LARGE-TEXT-AUDIT-20261007`, `E-LIVE-PUBLIC-LARGE-TEXT-AUDIT-20261007`.
+
 ## 전문가 영상 필터 카운트 가독성 보정·공개 배포 — 2026-10-07 — b028897
 
 - 공격 관점에서 숫자만 표시된 전문가 영상 필터가 영상 자료량을 오해하게 하거나, 390px에서 카운트 단위가 잘리고 필터 선택 후 재생 흐름이 끊기는 실패 모드를 점검했다. `전체 9편`·`수면 4편` 등 단위가 포함된 레이블과 선택 영상 feature focus·iframe 재생을 확인했다.

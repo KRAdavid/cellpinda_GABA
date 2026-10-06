@@ -1,5 +1,14 @@
 # Audit Report
 
+## 큰 글자 읽기 모드·모바일 공개 재점검 — main 829c5fb — 2026-10-07
+
+- 독립 감사 관점에서 큰 글자 모드가 실제 본문을 잘라내거나 320px 이하 화면의 읽기 폭을 밀어내는 실패 모드를 재점검했다. 320·390·768px에서 회복 14단계, 연구 지도, 전문가 영상, 마지막 공유 화면을 시각적으로 확인했고 본문 문장과 주요 조작 요소는 화면 안에 유지됐다.
+- document width는 각 viewport와 같고 runtime·console errors는 0이었다. 자동 DOM overflow 목록에 잡힌 항목은 원형·배경 이미지용 의도적 장식 영역과 `sr-only` 접근성 텍스트로, 화면에 보이는 한국어 본문 잘림으로 이어지지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다. 초기 JS 311,199 bytes·CSS 95,703 bytes·총 자산 1,649,381 bytes·최대 자산 311,199 bytes가 예산 안에 있다. 이번 재점검에서 가시적 코드 결함은 없어 공개 UI는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. Chrome fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 게이트를 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-LARGE-TEXT-AUDIT-20261007`, `E-UI-CONTRACT-LARGE-TEXT-AUDIT-20261007`, `E-CDP-LARGE-TEXT-AUDIT-20261007`, `E-LIVE-PUBLIC-LARGE-TEXT-AUDIT-20261007`.
+
 ## 전문가 영상 필터 카운트 가독성 보정·공개 배포 — b028897 — 2026-10-07
 
 - 독립 감사 관점에서 전문가 영상 필터가 숫자만 보여 모바일·데스크톱에서 자료량의 단위를 즉시 파악하기 어려운 잔여 가독성 리스크를 확인했다. 화면상 카운트를 `전체 9편`·`수면 4편`처럼 영상 단위와 함께 표시하고, 접근성 이름의 `개 영상` 의미는 유지했다.

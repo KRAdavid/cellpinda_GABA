@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T20:27:00Z",
+  "updated_at": "2026-10-07T00:00:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5619,6 +5619,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T20:27:00Z"
+    },
+    {
+      "id": "H-298",
+      "event": "큰 글자 읽기 모드에서 장식용 원형·배경 요소와 스크린리더 전용 텍스트가 내부 scrollWidth를 만들 수 있는 잔여 QA 오탐 가능성을 재점검했다. 320·390·768px 공개 화면을 시각적으로 확인한 결과 실제 본문 문장 잘림과 문서 가로폭 초과는 없었고, 회복 14단계 흐름·연구 지도·전문가 영상·마지막 공유 화면이 자연스럽게 이어졌다. 코드 수정이 필요한 가시적 결함은 발견되지 않아 공개 UI는 유지하고, 큰 글자 모드 검증 결과를 C-220과 네 증거로 기록한다. 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산이 통과했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다. 새 CRITICAL/MAJOR 코드 결함은 없고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T00:00:00Z"
     }
   ]
 }

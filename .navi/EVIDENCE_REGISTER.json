@@ -2364,6 +2364,17 @@
         "E-LIVE-PUBLIC-VIDEO-FILTER-COUNT-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-220",
+      "statement": "큰 글자 읽기 모드가 320·390·768px 공개 화면에서 본문 문장을 잘라내지 않고, 문서 가로폭을 각 viewport와 일치시킨다. 장식용 배경·원형 요소와 스크린리더 전용 텍스트의 내부 scrollWidth는 시각 본문 overflow와 구분한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-LARGE-TEXT-AUDIT-20261007",
+        "E-UI-CONTRACT-LARGE-TEXT-AUDIT-20261007",
+        "E-CDP-LARGE-TEXT-AUDIT-20261007",
+        "E-LIVE-PUBLIC-LARGE-TEXT-AUDIT-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16016,6 +16027,48 @@
       "captured_at": "2026-10-06T20:27:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-VIDEO-FILTER-COUNT",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-219"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-LARGE-TEXT-AUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "큰 글자 읽기 모드 공개 재점검이 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+      "locator": "local main 829c5fb; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test -- --runInBand 127 passed; pnpm run build; validate:performance status ok; initial JS 311199, initial CSS 95703, total assets 1649381, largest 311199",
+      "captured_at": "2026-10-07T00:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-LARGE-TEXT",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-220"]
+    },
+    {
+      "id": "E-UI-CONTRACT-LARGE-TEXT-AUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 큰 글자 읽기 모드의 공개 조작 라벨·연구 결과 확대·모바일 방향 문구 줄바꿈·접근성 진행 안내 계약을 계속 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; reading-size control, v113 large-text research context, mobile chart direction labels, skip-link and live reading progress contracts; validate:ui-contract status ok",
+      "captured_at": "2026-10-07T00:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-LARGE-TEXT",
+      "claim_refs": ["C-004", "C-007", "C-220"]
+    },
+    {
+      "id": "E-CDP-LARGE-TEXT-AUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback에서 큰 글자 읽기 모드의 320·390·768px 주요 진입 화면을 확인했고 document width가 각 viewport와 같으며 runtime·console errors가 없었다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=large-text-audit-20261007#recovery-break; localStorage gaba-guide-reading-size-v1=large; 320·390·768px recovery/research/expert/final screenshots inspected with view_image; visible Korean copy remained within the reading frame; internal overflow matches intentional decorative pseudo-elements or sr-only nodes, not visible text clipping; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=large-text-audit-20261007#recovery-break",
+      "captured_at": "2026-10-07T00:00:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-LARGE-TEXT",
+      "claim_refs": ["C-003", "C-004", "C-220"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-LARGE-TEXT-AUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 큰 글자 읽기 모드가 제품 독립 공개 경계·모바일 읽기 흐름·주요 장의 본문 가독성을 유지한다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=large-text-audit-20261007; HTTP 200; Chrome CDP fallback 320·390·768px confirms largeText=true, document width equal to viewport, recovery 14-step visual, research map, expert video board and final share surface render without visible text clipping; product-independent public boundary matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=large-text-audit-20261007",
+      "captured_at": "2026-10-07T00:00:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-LARGE-TEXT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-220"]
     }
   ]
 }
