@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 모바일 회복 브리지 진입 리듬 보정·공개 배포 — 2026-10-07 — 9731c29
+
+- 공격 관점에서 회복 브리지의 상단 공백이 다른 장보다 커서 제목이 늦게 나타나고, 모바일에서 14단계 흐름·일러스트가 화면 밖으로 밀리는 실패 모드를 점검했다. 공통 모바일 여백을 58px로 통합한 뒤 공개 390px에서 제목 top 270, 문서 폭 390, 14단계와 일러스트가 이어지는 구성을 확인했다.
+- 1440px 히어로·연구 지도 렌더도 확인했고 새 CRITICAL/MAJOR 결함은 없다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- Chrome fallback이 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도·독립 과학·규제 감수를 대신하지 않으므로 RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-CDP-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-LIVE-PUBLIC-RECOVERY-BRIDGE-RHYTHM-20261007`.
+
 ## 초협폭 연구 결과 도표 가독성 보정·공개 배포 — 2026-10-07 — ad52246
 
 - 공격 관점에서 280px·320px·390px에서 좁은 조건 카드가 결과 문구를 잘라 의미를 약화시키거나 방향 신호와 섞는 실패 모드를 점검했다. 280px 이하에서는 비교 조건과 GABA 조건을 세로로 쌓고 결과 문구와 방향 신호를 각각 분리해, 두 문구가 카드 폭 전체에서 읽히도록 했다.
