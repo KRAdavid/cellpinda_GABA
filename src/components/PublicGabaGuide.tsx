@@ -1887,7 +1887,7 @@ export default function PublicGabaGuide() {
             <div className="guide-section-heading"><div><p className="guide-section-number">03 · 연구 지도</p><h2 id="academic-heading" tabIndex={-1}>GABA 연구는<br />{' '}한 분야에 머물지 않았습니다</h2></div><p>하나의 신호에서<br />넓은 학술 지도로</p></div>
             <p className="guide-section-lead">신경세포의 활동을 조절하는 기본 원리에서 출발한 GABA 연구는 수면과 집중, 감각과 움직임, 그리고 몸 전체의 다양한 연구 영역으로 뻗어 나갔습니다.</p>
             <div className="guide-editorial-band guide-editorial-band-academic" style={{ '--guide-editorial-image': `url(${gabaNaturalHero})` } as CSSProperties} role="img" aria-label="물과 돌, 잎의 자연 질감으로 표현한 GABA 연구 지도 이미지"><span><small>신호에서 몸 전체로</small><strong>하나의 신호가<br />넓은 연구 지도가 되었습니다</strong></span></div>
-            <div className="guide-academic-map">{academicFields.map((field, index) => <article key={field.title}><span>0{index + 1}</span><div><h3>{field.title}</h3><p>{field.body}</p></div></article>)}</div>
+            <div className="guide-academic-map">{academicFields.map((field, index) => <article key={field.title}><span aria-label={`${index + 1}번째 연구 영역 중 ${academicFields.length}개`}>{String(index + 1).padStart(2, '0')} / {String(academicFields.length).padStart(2, '0')}</span><div><h3>{field.title}</h3><p>{field.body}</p></div></article>)}</div>
             <p className="guide-academic-caption"><FlaskConical size={17} aria-hidden="true" /> 기초 신경과학에서 사람 연구, 피부·근육·성장·면역 연구까지</p>
           </div>
         </section>
