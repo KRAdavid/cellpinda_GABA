@@ -14646,9 +14646,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본에 일상 속 GABA 카드 5개 순서 표시가 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
-      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T11:46:25.917Z; page 200; runtimeMode STATIC; candidateSha df90375ade5323334b79ef13e25fd2cba173981d; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·1440px screenshots show all five markers and page/console errors 0; everyday copy, sources, data and product boundary unchanged",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T11:51:35.764Z; page 200; runtimeMode STATIC; candidateSha f8cd6b5ce780e9f36eec75260e2a2772b281ac16; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·1440px screenshots show all five markers and page/console errors 0; everyday copy, sources, data and product boundary unchanged",
       "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=everyday-card-audit-public-20261006#everyday",
-      "captured_at": "2026-10-06T11:51:00Z",
+      "captured_at": "2026-10-06T11:55:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EVERYDAY-CARD-SEQUENCE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-198"]
     }
