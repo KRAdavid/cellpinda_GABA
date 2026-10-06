@@ -2425,6 +2425,15 @@
 
 증적: `E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006`, `E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006`, `E-CDP-MID-NARROW-TYPE-CONTROL-20261006`, `E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006`, `E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006`.
 
+## 연구 결과 카드 순번·공개 배포 — 9ee09d8 — 2026-10-06
+
+- Red-team finding: 긴 연구 결과 흐름에서 카드 안의 현재 위치와 전체 연구 수가 상단 진행 레일에만 보여, 사용자가 카드 자체만 보고는 순서를 즉시 파악하기 어려운 작은 가독성 리스크가 있었다. 연구 카드 제목에 `01 / 05` 형식의 순번 표식을 추가했다.
+- Recheck: 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 Chrome CDP fallback 390px 직접 링크에서 인지 `01 / 05`, 피부 `02 / 05`, 진행 레일 정합성, 앵커 정렬, pageWidth 390을 확인했다. 연구 내용·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- PR #469와 main workflow `37455647902`, 공개 validator candidate `9ee09d8`·HTTP 200·71개 bundle hash·provenance matched가 성공했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CARD-MARKER-20261006`, `E-UI-CONTRACT-RESEARCH-CARD-MARKER-20261006`, `E-CDP-RESEARCH-CARD-MARKER-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-MARKER-20261006`, `E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.

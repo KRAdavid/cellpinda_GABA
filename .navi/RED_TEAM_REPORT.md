@@ -1894,3 +1894,12 @@
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006`, `E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006`, `E-CDP-MID-NARROW-TYPE-CONTROL-20261006`, `E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006`, `E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006`.
+
+## 연구 결과 카드 순번·공개 배포 — 2026-10-06 — 9ee09d8
+
+- 공격 관점에서 긴 연구 섹션을 카드 단위로 읽을 때 현재 카드와 전체 카드 수를 빠르게 파악할 수 있는지 확인했다. 인지 `01 / 05`, 피부 `02 / 05`가 카드 제목과 상단 연구 진행 레일에 일치해 표시되며 390px 직접 링크에서도 앵커가 레일 아래에 정렬된다.
+- 연구 결과·수치·출처·제품 독립 공개 경계는 변경되지 않았고, UI 계약·배포 workflow·라이브 validator가 공개 SHA와 일치한다. 새 CRITICAL/MAJOR 결함은 없다.
+- 표시 순번은 화면 가독성 개선을 증명하지만 실제 고령 사용자 이해도나 Safari/iOS/Android 실기기 동작을 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-RESEARCH-CARD-MARKER-20261006`, `E-CDP-RESEARCH-CARD-MARKER-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-MARKER-20261006`, `E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006`.

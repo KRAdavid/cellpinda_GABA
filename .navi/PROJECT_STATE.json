@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T09:45:47Z",
+  "updated_at": "2026-10-06T11:23:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5439,6 +5439,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T11:01:00Z"
+    },
+    {
+      "id": "H-274",
+      "event": "긴 연구 결과 흐름에서 현재 위치를 즉시 읽을 수 있도록 연구 카드 제목에 `01 / 05`, `02 / 05` 순번 표식을 추가하고 카드 헤더 폭·자간을 모바일에 맞게 보정했다. 연구 문구·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #469, main merge `9ee09d8`, workflow `37455647902`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status, 공개 validator candidate `9ee09d8721b75bf875e28fe18476a0c63de1bd25`, 공개 Chrome CDP fallback 390px 직접 링크에서 인지 `01 / 05`·피부 `02 / 05`·진행 레일 정합성·가로폭을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-196과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T11:23:00Z"
     }
   ]
 }
