@@ -501,7 +501,6 @@
   .guide-fermented-note{font-size:14px;line-height:1.75}
 }
 
-/* v9 expert video board: one selected Shorts player plus a visual gallery of sources. */
 .guide-video-gallery-lead{max-width:70ch;margin-top:-8px;margin-bottom:28px}
 .guide-video-gallery{display:grid;grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);gap:16px;align-items:start;min-width:0}
 .guide-video-feature{display:grid;grid-template-columns:minmax(190px,.82fr) minmax(0,1fr);gap:19px;align-items:center;padding:17px;border-radius:22px;background:var(--guide-ink);box-shadow:0 18px 34px rgba(19,47,86,.12)}
@@ -582,20 +581,19 @@
   .guide-video-gallery{grid-template-columns:1fr}
   .guide-video-feature{grid-template-columns:minmax(220px,.55fr) minmax(0,1fr)}
   .guide-video-feature-media{max-width:280px}
+  .guide-video-grid{grid-template-columns:1fr}
 }
 @media(max-width:700px){
   .guide-video-gallery-lead{margin-top:-7px;margin-bottom:22px;font-size:16px;line-height:1.8}
   .guide-video-gallery{grid-template-columns:1fr;gap:12px}
   .guide-video-feature{grid-template-columns:1fr;gap:13px;padding:12px;border-radius:19px}
   .guide-video-feature-media{max-width:230px;margin:0 auto;border-radius:14px}
-  .guide-video-feature-copy{padding:2px 6px 7px}
   .guide-video-feature-copy h3{margin:14px 0 7px;font-size:22px}
   .guide-video-feature-actions{align-items:flex-start;margin-top:16px}
   .guide-video-feature-actions>a{line-height:1.55}
   .guide-video-board{padding:13px;border-radius:17px}
   .guide-video-filters{flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:1px 2px 2px}
   .guide-video-filter{flex:0 0 auto;min-height:44px;padding:0 12px;font-size:12px}
-  .guide-video-grid{grid-template-columns:1fr;gap:8px}
   .guide-video-card{grid-template-columns:74px minmax(0,1fr);min-height:108px;padding:8px}
   .guide-video-card-copy strong{font-size:15px}
   .guide-video-card-copy small{font-size:11px}
