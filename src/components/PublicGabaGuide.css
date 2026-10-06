@@ -728,6 +728,9 @@
   .guide-outcome-comparison-head>span:not(:first-child){gap:4px}
 }
 
+/* v125 chart semantics: make the non-numeric comparison key legible for older readers. */
+.guide-outcome-chart-note-limit{color:#6f8795;font-size:12px;line-height:1.5}
+
 /* v14 share kit: make one-tap business reuse visible before the copy details. */
 .guide-share-intro{display:flex;align-items:center;justify-content:space-between;gap:22px;max-width:790px;margin-top:34px;padding:20px 22px;border:1px solid rgba(145,219,217,.28);border-radius:17px;background:linear-gradient(105deg,rgba(18,154,163,.2),rgba(255,255,255,.055));box-shadow:0 12px 28px rgba(3,20,39,.12)}
 .guide-share-intro>div{display:grid;gap:5px}

@@ -831,8 +831,8 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
       </div>
       {showSummary ? <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div> : null}
       {comparisonChart ? (
-        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. ${comparisonChart.rows.map((row) => `${row.label}: ${comparisonChart.referenceLabel} ${row.reference}, ${comparisonChart.resultLabel} ${row.result}`).join('. ')}. ${comparisonChart.note}`}>
-          <div className="guide-outcome-comparison-guide" aria-hidden="true"><span className="guide-outcome-comparison-guide-mark">↔</span><span className="guide-outcome-comparison-guide-copy"><strong>두 조건을 나란히 비교</strong><small>막대가 짧을수록 변화가 작습니다</small></span></div>
+        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. ${comparisonChart.rows.map((row) => `${row.label}: ${comparisonChart.referenceLabel} ${row.reference}, ${comparisonChart.resultLabel} ${row.result}`).join('. ')}. ${comparisonChart.note}. 막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다.`}>
+          <div className="guide-outcome-comparison-guide" aria-hidden="true"><span className="guide-outcome-comparison-guide-mark">↔</span><span className="guide-outcome-comparison-guide-copy"><strong>두 조건을 나란히 비교</strong><small>막대는 두 조건의 변화폭을 비교해 보여줍니다</small></span></div>
           <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">변화 방향</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
           <div className="guide-outcome-comparison-list">
             {comparisonChart.rows.map((row) => {
@@ -891,7 +891,7 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
             <span className="guide-outcome-chart-note-key is-direction"><ArrowUpRight size={13} strokeWidth={2.2} aria-hidden="true" /><ArrowDownRight size={13} strokeWidth={2.2} aria-hidden="true" />변화 방향</span>
             <span className="guide-outcome-chart-note-key is-compare"><i aria-hidden="true" />두 조건의 상대 비교</span>
           </span>
-          <small className="guide-outcome-chart-note-limit">그림 크기 ≠ 실제 효과 크기</small>
+          <small className="guide-outcome-chart-note-limit">막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다.</small>
         </p>
       ) : (
         <p className="guide-outcome-chart-note"><span aria-hidden="true">↔</span>{topic.chart.note}</p>
