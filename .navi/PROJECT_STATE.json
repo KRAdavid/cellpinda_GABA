@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T14:58:24Z",
+  "updated_at": "2026-10-06T15:32:48Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5516,6 +5516,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T14:58:24Z"
+    },
+    {
+      "id": "H-285",
+      "event": "모바일 첫 화면의 강조 문구가 폭에 따라 마지막 글자가 잘리거나 줄바꿈 의도가 불명확해질 수 있는 잔여 읽기 리스크를 확인했다. 표준 wbr 줄바꿈 기회를 적용하고 중간 폭 공유 컨트롤의 중복 CSS를 줄여 390·350px에서 'GABA에서 읽습니다'가 화면 안에 완전히 표시되도록 보정했으며 1440px 제목 흐름과 모바일 가로폭을 유지했다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #498, main merge fb603a4, workflow 37487864715의 release-verify·Pages·라이브 smoke·release-status, 공개 validator candidate fb603a48dbffc5fdb6da2732487c2f759749b408, 공개 Chrome CDP fallback 390·350·1440px에서 hero·공유 라벨·가로폭·오류 0을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-207과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T15:32:48Z"
     }
   ]
 }

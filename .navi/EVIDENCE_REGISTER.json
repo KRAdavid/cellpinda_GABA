@@ -2208,6 +2208,18 @@
         "E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-207",
+      "statement": "390·350px 모바일 첫 화면의 강조 문구에 표준 wbr 줄바꿈 기회를 적용해 'GABA에서 읽습니다'가 화면 폭 안에서 완전히 표시되도록 하고, 1440px에서도 제목 흐름과 가로폭 정합을 유지한다. 연구·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007",
+        "E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007",
+        "E-CDP-MOBILE-HERO-LINE-BREAK-20261007",
+        "E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007",
+        "E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15171,6 +15183,59 @@
       "captured_at": "2026-10-06T14:58:24Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MEDIUM-PHONE-SHARE-LABEL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-206"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 첫 화면 강조 문구의 wbr 보정과 공유 컨트롤 경량화가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "local workspace; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; pnpm run validate:performance; Vite 1809 modules; static routes 11; release files 72; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1649468 <= 1650000; largest asset 311199 <= 380000; local HEAD 20534a23bcbdca8cebe95ecbb78fba07a0123761",
+      "captured_at": "2026-10-06T15:32:48Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-MOBILE-HERO-LINE-BREAK",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-207"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 모바일 hero 문구의 표준 wbr 마커와 351–430px 공유 버튼 폭 60px을 확인하며, 350px 이하 compact rail과 1440px 제목 흐름을 보존한다.",
+      "locator": "src/components/PublicGabaGuide.tsx guide-hero-gaba-line uses GABA에서<wbr /> 읽습니다; src/components/PublicGabaGuide.css v154 medium-phone header order; scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T15:32:48Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-MOBILE-HERO-LINE-BREAK",
+      "claim_refs": ["C-001", "C-003", "C-207"]
+    },
+    {
+      "id": "E-CDP-MOBILE-HERO-LINE-BREAK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback으로 공개본을 390·350·1440px에서 확인했으며 hero 문구는 각 화면 폭 안에 완전히 표시되고 모바일 공유 라벨과 데스크톱 공유 컨트롤이 노출되며 가로 넘침이 없다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?qa=mobile-hero-line-break-live-20261007; 390px documentWidth=390/scrollWidth=390, heroLine=GABA에서 읽습니다, lineRect left20/right370/width350/height44, lineOverflow=false, shareLabel=공유하기; 350px documentWidth=350/scrollWidth=350, lineRect left20/right330/width310/height40, lineOverflow=false, shareLabel=공유하기; 1440px documentWidth=1425/scrollWidth=1425, lineOverflow=false; runtimeErrors=0; consoleErrors=0; httpFailures=0; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=mobile-hero-line-break-live-20261007",
+      "captured_at": "2026-10-06T15:31:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-MOBILE-HERO-LINE-BREAK",
+      "claim_refs": ["C-003", "C-004", "C-207"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 hero 문구 보정 PR #498이 필수 검사를 통과해 main merge fb603a4로 병합됐고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #498; main merge commit fb603a48dbffc5fdb6da2732487c2f759749b408; PR release-verify run 37487627154 job 112351711166 successful; site-quality-verify run 37487627197 job 112351711194 successful; main workflow 37487864715; release-verify 112352543035; worker-readiness 112353223751; deploy-pages 112353282889; deploy-worker skipped by STATIC_ONLY; smoke-live 112353405851; release-status 112353540045; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37487864715",
+      "captured_at": "2026-10-06T15:32:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-MOBILE-HERO-LINE-BREAK",
+      "claim_refs": ["C-001", "C-002", "C-207"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 모바일 hero 문구·공유 컨트롤 보정이 반영됐고 HTTP 200·정적 번들·공개 데이터·제품 독립 경계·라이브 provenance가 일치한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T15:30:05.955Z; page 200; runtimeMode STATIC; candidateSha fb603a48dbffc5fdb6da2732487c2f759749b408; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390·350·1440px hero/header audit page/console/http errors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=mobile-hero-line-break-live-20261007",
+      "captured_at": "2026-10-06T15:32:48Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-MOBILE-HERO-LINE-BREAK",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-207"]
     }
   ]
 }

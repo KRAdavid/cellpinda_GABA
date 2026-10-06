@@ -1997,3 +1997,13 @@
 - 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006`.
+
+## Red-team recheck — 모바일 첫 화면 hero — fb603a48 — 2026-10-07
+
+- Finding: 좁은 모바일 화면에서 강조 문구의 자연스러운 줄바꿈 기회와 실제 표시 폭을 다시 확인할 필요가 있었다.
+- Repair: 표준 `wbr`를 적용해 의미 단위 줄바꿈 기회를 제공하고, 390·350px에서는 한 줄로 완전히 표시되는 실제 결과를 확인했다. 1440px 제목 흐름과 공유 컨트롤도 유지된다.
+- Evidence: 로컬·UI 계약·배포·라이브 validator·Chrome CDP fallback 390·350·1440px 검사에서 body/scroll width 정합, hero line overflow false, 공유 라벨, page/console/http errors 0.
+- Boundary: 이번 변경은 UI·번들 최적화에 한정된다. 과학적 효능·제품 적용성·규제 적합성을 새로 주장하지 않는다.
+- Residual: 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도와 Safari/iOS/Android 실기기 동작을 대신하지 않는다. teaser preview는 `HOLD`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.

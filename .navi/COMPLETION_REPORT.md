@@ -2254,3 +2254,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006`.
+
+## Current Release Recheck — fb603a48 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `fb603a48dbffc5fdb6da2732487c2f759749b408`·HTTP 200·STATIC·72개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 모바일 첫 화면·반응형: PASS. 390·350px의 hero 문구가 화면 안에 완전히 표시되고 공유 라벨·헤더 조작이 유지되며, 1440px 제목 흐름도 유지된다. 세 폭 모두 document width와 scroll width가 일치하고 hero line overflow가 없다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #498, main workflow `37487864715`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 hero 줄바꿈 기회와 모바일 헤더 번들 최적화만 다뤘으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.
