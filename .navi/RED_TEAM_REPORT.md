@@ -1772,3 +1772,9 @@
 ## Result Notes
 
 치명적 결함은 발견하지 않았지만, 위 조건을 해결하기 전 `COMPLETED`로 표시하지 않는다.
+
+## Recheck — 2026-10-06 — 8a6eeb6
+
+- 인지 연구 비교 도표의 `GABA 결과` 라벨을 `GABA를 섭취한 그룹의 변화`로 바꿔 소비자 문장 흐름을 보정했다. 연구 수치·결과·해석·출처·제품 독립 경계는 바뀌지 않았다.
+- PR #434, main workflow `37418115559`, 공개 validator와 Chromium fallback 390·1440px 검증이 성공했고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
