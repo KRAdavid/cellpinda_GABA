@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 9731c29 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37523587127`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.
+- AC-004 모바일 반응형·읽기 흐름: PASS. 공개 390px에서 회복 브리지 제목 top 270, document width 390, 읽기 레일 top 70·height 35를 확인했고 14단계 흐름과 회복 일러스트가 이어졌다. 1440px 히어로·연구 지도 렌더도 확인했다.
+- AC-005 배포 게이트: PASS. UI contract·Pages 동등 정적 번들·성능 예산이 통과했고 총 자산은 1,649,961 bytes다. PR #522 release-verify·site-quality-verify와 main 배포 파이프라인의 필수 검사가 성공했다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 카피·수치·출처·공개 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-UI-CONTRACT-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-CDP-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-LIVE-PUBLIC-RECOVERY-BRIDGE-RHYTHM-20261007`.
+
 ## Current Release Recheck — ad52246 — 2026-10-07
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37519850528`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.

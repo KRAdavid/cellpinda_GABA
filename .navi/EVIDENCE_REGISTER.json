@@ -2340,6 +2340,18 @@
         "E-LIVE-PUBLIC-ULTRA-NARROW-CHART-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-218",
+      "statement": "모바일 회복 브리지의 장 제목이 다른 장과 같은 진입 리듬으로 표시되어 불필요한 상단 공백이 줄고, 공개 390px에서 회복 흐름·14단계 지도·일러스트가 한 화면의 읽기 순서로 이어진다. 1440px에서도 히어로·연구 지도 레이아웃과 가로폭이 유지되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-BRIDGE-RHYTHM-20261007",
+        "E-UI-CONTRACT-RECOVERY-BRIDGE-RHYTHM-20261007",
+        "E-CDP-RECOVERY-BRIDGE-RHYTHM-20261007",
+        "E-DEPLOY-PIPELINE-RECOVERY-BRIDGE-RHYTHM-20261007",
+        "E-LIVE-PUBLIC-RECOVERY-BRIDGE-RHYTHM-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15886,6 +15898,59 @@
       "captured_at": "2026-10-06T19:36:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-ULTRA-NARROW-CHART",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-217"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-BRIDGE-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 회복 브리지 여백 정리가 UI 계약과 Pages 동등 로컬 빌드·정적 번들·성능 예산을 통과한다.",
+      "locator": "local main merge 9731c29 with code commit 7fe2056; pnpm run validate:ui-contract status ok; VITE_BASE_PATH=/gaba_info/ Pages-equivalent vite build and release manifest status ok; validate:performance -- dist-pages initial JS 311654, initial CSS 95703, total assets 1649961, largest 311654, status ok",
+      "captured_at": "2026-10-06T20:13:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-RECOVERY-BRIDGE-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-218"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RECOVERY-BRIDGE-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 모바일 장 진입 여백을 공통 58px로 유지해 회복 브리지·일반 장·마지막 장의 제목 리듬을 같은 규칙으로 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v26 mobile title clearance; .guide-section.guide-story-section,.guide-recovery-break,.guide-final{padding-top:58px}; v108 desktop chapter entry remains 72px; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T20:13:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-RECOVERY-BRIDGE-RHYTHM",
+      "claim_refs": ["C-004", "C-005", "C-218"]
+    },
+    {
+      "id": "E-CDP-RECOVERY-BRIDGE-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 Chrome CDP fallback에서 회복 브리지 제목이 읽기 레일 아래에 정렬되고 모바일 문서 폭이 안정적이다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&surfaceAudit=20261007&cachebust=163#recovery-break; 390px document width 390, section top 184, heading top 270 and height 88, rail top 70 and height 35; research heading top 263, expert heading top 263, final heading top 272; 1440px document width 1425 with hero and research renders captured; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&surfaceAudit=20261007&cachebust=163#recovery-break",
+      "captured_at": "2026-10-06T20:13:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-RECOVERY-BRIDGE-RHYTHM",
+      "claim_refs": ["C-003", "C-004", "C-218"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-BRIDGE-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #522과 main 공개 배포 파이프라인이 회복 브리지 리듬 변경의 최종 커밋에서 모두 성공했다.",
+      "locator": "PR #522 https://github.com/KRAdavid/gaba_info/pull/522; release-verify 37523394258 job 112474190774 success; site-quality-verify 37523394111 job 112474189983 success; merge 9731c291c3dd1f612d84fcdeed65f0457cc69f02; main workflow 37523587127; release-verify 112477279094; worker-readiness 112477829896; deploy-pages 112477861505; deploy-worker skipped static 112477862766; smoke-live 112477961164; release-status 112478057625; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37523587127",
+      "captured_at": "2026-10-06T20:12:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-RECOVERY-BRIDGE-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-218"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-BRIDGE-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 회복 브리지 제목·14단계 흐름·일러스트가 모바일에서 자연스럽게 이어지고 데스크톱 히어로·연구 지도 레이아웃과 제품 독립 공개 경계가 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&surfaceAudit=20261007&cachebust=163; HTTP 200 via main workflow 37523587127 deploy-pages and smoke-live; Chrome CDP fallback 390px shows heading `GABA를 모르면 노화는 가속됩니다.` at top 270, 14-step flow and recovery illustration, document width 390; 1440px hero screenshot and research screenshot inspected; product-independent public boundary matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&surfaceAudit=20261007&cachebust=163",
+      "captured_at": "2026-10-06T20:13:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-RECOVERY-BRIDGE-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-218"]
     }
   ]
 }
