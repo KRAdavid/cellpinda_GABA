@@ -1,5 +1,14 @@
 # Audit Report
 
+## Source Reading to Story Sharing — 84fd53b — 2026-10-06
+
+- 연구 원문을 읽은 뒤 마지막 공유 장으로 바로 이어지는 `연구를 읽는 기준에서 공유 가능한 이야기로` 내부 전환 카드를 추가했다. 외부 링크로 흐름을 끊지 않고 기존 `scrollTo('final')`·헤딩 포커스 전달을 사용한다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 공개 Playwright Chromium fallback 390px·1440px에서 카드 표시, 클릭 후 `#final`, `final-heading` 포커스, viewport와 동일한 scrollWidth, page errors 0·console errors 0을 확인했다.
+- PR #409는 main `84fd53b`로 병합되었고 workflow `37395031732`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 site-quality workflow `37394904797`이 성공했다. 공개 validator는 candidate `84fd53bfc9d4c02673f4797839ad79d7ad7c52b3`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-READING-HANDOFF-20261006`, `E-UI-CONTRACT-READING-HANDOFF-20261006`, `E-PLAYWRIGHT-READING-HANDOFF-20261006`, `E-DEPLOY-PIPELINE-READING-HANDOFF-20261006`, `E-LIVE-PUBLIC-READING-HANDOFF-20261006`.
+
 ## Opening Bridge Chapter Handoff — 658eb99 — 2026-10-06
 
 - 수면·회복 도입부 마지막에 `회복의 균형에서 GABA의 발견으로` 내부 전환 카드를 추가했다. 외부 페이지로 흐름을 끊지 않고 기존 `scrollTo('history')`·헤딩 포커스 전달을 사용해 다음 장으로 자연스럽게 이어진다.

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 원문에서 이야기 공유로 이어지는 내부 전환 — 84fd53b — 2026-10-06
+
+- 연구 원문을 읽은 뒤 외부 링크 없이 `연구를 읽는 기준에서 공유 가능한 이야기로` 전환하는 카드를 추가해 공개 안내서의 마지막 편집 흐름을 완성했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 390·1440px 공개 상호작용 검증을 통과했고 PR #409가 main `84fd53b`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-READING-HANDOFF-20261006`, `E-UI-CONTRACT-READING-HANDOFF-20261006`, `E-PLAYWRIGHT-READING-HANDOFF-20261006`, `E-DEPLOY-PIPELINE-READING-HANDOFF-20261006`, `E-LIVE-PUBLIC-READING-HANDOFF-20261006`.
+
 ## 수면·회복에서 GABA 발견으로 이어지는 내부 전환 — 658eb99 — 2026-10-06
 
 - 수면·회복 도입부에 `회복의 균형에서 GABA의 발견으로` 전환 카드를 추가해 외부 링크 없이 다음 장으로 자연스럽게 이어지도록 했다.

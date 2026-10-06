@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Source Reading to Story Sharing — 2026-10-06 — 84fd53b
+
+- 공격 관점에서 연구 원문 읽기 장의 마지막 전환 카드를 확인했다. 카드에는 외부 링크가 없고 `scrollTo('final')`로 이야기 공유 장을 열며, 클릭 뒤 `final-heading`에 포커스가 도착한다.
+- 390px·1440px 공개 화면에서 전환 카드가 표시되고 `#final`·헤딩 가시성·viewport와 동일한 scrollWidth·page errors 0·console errors 0을 확인했다. 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-PLAYWRIGHT-READING-HANDOFF-20261006`, `E-LIVE-PUBLIC-READING-HANDOFF-20261006`, `E-DEPLOY-PIPELINE-READING-HANDOFF-20261006`.
+
 ## Opening Bridge Chapter Handoff — 2026-10-06 — 658eb99
 
 - 공격 관점에서 수면·회복 도입부의 다음 장 카드를 확인했다. 카드에는 외부 링크가 없고 `scrollTo('history')`로 GABA 발견 장을 열며, 클릭 뒤 `history-heading`에 포커스가 도착한다.
