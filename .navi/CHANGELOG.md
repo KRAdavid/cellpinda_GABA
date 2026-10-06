@@ -1920,3 +1920,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007`, `E-CDP-TABLET-VIDEO-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007`.
+
+## 태블릿 학술 연구 지도 리듬·공개 배포 — 8926b4e — 2026-10-07
+
+- 701–1100px 학술 연구 영역 5개 카드를 1열로 정렬해 3+2 배치의 오른쪽 빈 공간을 제거했다.
+- 390px 모바일 1열과 1440px 데스크톱 5열은 유지했다. PR #534, main workflow `37541239081`, 공개 validator candidate `8926b4e`, 390·768·1440px 시각 점검이 성공했다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.

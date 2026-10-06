@@ -2168,3 +2168,12 @@
 - 이 검증은 Chrome Playwright fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007`, `E-CDP-TABLET-VIDEO-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007`.
+
+## Red-team recheck — 태블릿 학술 연구 지도 리듬 — 2026-10-07 — 8926b4e
+
+- 공격 관점에서 701–1100px 3+2 학술 연구 지도 배치의 마지막 두 카드가 첫 줄과 다른 리듬으로 떨어지고 오른쪽 빈 공간을 만들어, 사업자·고령 사용자의 5개 연구 영역 스캔을 끊는 경로를 확인했다.
+- 학술 연구 영역 카드를 태블릿 1열로 보정하고 390px 모바일 1열·1440px 데스크톱 5열을 유지했다. 공개 390·768·1440px에서 카드 폭·순서·가로폭 정합을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았으며 새 CRITICAL/MAJOR 결함은 없다. 기존 RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 이 검증은 Chrome Playwright fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.

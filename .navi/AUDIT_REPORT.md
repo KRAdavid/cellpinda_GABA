@@ -2715,3 +2715,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007`, `E-CDP-TABLET-VIDEO-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007`.
+
+## 태블릿 학술 연구 지도 리듬·공개 배포 — 8926b4e — 2026-10-07
+
+- 감사 finding: 701–1100px에서 5개 학술 연구 영역 카드가 3+2로 배치되어 두 번째 줄 오른쪽에 큰 빈 공간이 남고, 연구 영역을 순서대로 읽는 흐름이 끊길 수 있었다.
+- 보정: 학술 연구 지도를 태블릿 1열로 정렬하고, 390px 모바일 1열·1440px 데스크톱 5열은 유지했다.
+- Recheck: 로컬 UI contract·typecheck·127개 테스트·production build·Pages 번들·성능 예산, PR #534, main workflow `37541239081`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status, 공개 validator candidate `8926b4e`, Chrome Playwright 390·768·1440px 시각 점검이 성공했다.
+- 공개 경계: 학술 연구 영역 카드의 반응형 배치만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.

@@ -2458,3 +2458,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007`, `E-CDP-TABLET-VIDEO-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007`.
+
+## Current Release Recheck — 8926b4e — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. PR #534가 main에 병합됐고 workflow `37541239081`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 validator가 candidate `8926b4e10e43dca547ccf35a002d740553be474e`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 학술 연구 지도·태블릿 반응형: PASS. 공개 768px에서 5개 연구 영역 카드가 1열로 읽히고 두 번째 줄 오른쪽 빈 공간이 제거됐다. 공개 390px에서는 1열, 1440px에서는 기존 5열 지도가 유지됐다.
+- AC-005 배포 게이트: PASS. UI contract·typecheck·127개 테스트·production build·Pages 번들·성능 예산, PR #534 required checks와 main workflow `37541239081`가 성공했다. remote Pages 성능 총량은 `1,649,901 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 학술 연구 지도 카드의 반응형 정보 배치에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T22:19:34.335110Z",
+  "updated_at": "2026-10-06T22:39:09.116275Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2143,7 +2143,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T22:13:30Z"
+    "last_run_at": "2026-10-06T22:34:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2345,7 +2345,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T22:13:30Z"
+    "last_run_at": "2026-10-06T22:34:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5676,6 +5676,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T22:13:30Z"
+    },
+    {
+      "id": "H-302",
+      "event": "701–1100px 태블릿 학술 연구 지도에서 5개 카드가 3+2로 배치되어 두 번째 줄 오른쪽 빈 공간을 만드는 잔여 퍼블리싱 리스크를 확인했다. 학술 연구 지도를 태블릿 1열로 보정하고 390px 모바일 1열·1440px 데스크톱 5열을 유지했다. 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #534, main 배포·라이브 검증, 공개 390·768·1440px 시각 점검을 재확인했으며 C-225와 다섯 증거를 등록한다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없고 teaser preview는 HOLD이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T22:34:00Z"
     }
   ]
 }
