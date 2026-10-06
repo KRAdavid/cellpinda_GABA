@@ -1,5 +1,13 @@
 # Completion Report
 
+## 공개 surface·초소형 모바일 재검증 — e2f9920 — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `e2f992033415efbcde7ae4b119ce44006e49651e`·71개 bundle hash·제품 독립 경계를 확인했다.
+- AC-003/AC-004/AC-005 모바일 중심 읽기 경험: PASS_WITH_CONDITIONS. 280px에서 연구 지도·활성 카드·도표가 viewport 안에 배치되고, 390px·1440px에서 히어로·연구·전문가·공유 surface·5문장 복사 흐름·접근성 기본 계약·오류 0을 재현했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남는다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-SURFACE-AUDIT-20261006`, `E-ACCESSIBILITY-PUBLIC-AUDIT-20261006`, `E-PLAYWRIGHT-NARROW-AUDIT-20261006`, `E-PLAYWRIGHT-SURFACE-AUDIT-20261006`, `E-LIVE-PUBLIC-RECHECK-20261006`.
+
 ## Current Release Recheck — 0e5c611 — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `0e5c611ae1b4c8ab0737c9e3bf5b51c4b08145b7`와 71개 bundle hash를 확인했다.

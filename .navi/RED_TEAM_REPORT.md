@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 공개 surface·초소형 모바일 재감리 — 2026-10-06 — e2f9920
+
+- 공격 관점에서 280px에서 헤더·진행 rail·연구 지도·연구 카드·도표가 잘리거나, 선택 후 카드가 고정 rail 아래에 가려지는지 확인했다. 활성 `근육` 카드가 상단에 정렬되고 도표·12개 시각 lane·document scrollWidth 280px·page errors 0을 유지했다.
+- 390px·1440px에서 히어로·연구 지도·전문가 영상·이야기 공유의 제목과 상태 흐름, 5개 사업자용 공유 문장, 이름 있는 상호작용, 이미지 alt, 외부 링크 rel을 대조했다. 새 CRITICAL/MAJOR 결함은 없다.
+- 전문가 영상 필터 rail과 장식용 수면 궤도의 요소 경계가 viewport 밖으로 확장되는 것은 내부 수평 탐색·장식 의도이며 문서 자체의 `scrollWidth`를 늘리지 않는다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-ACCESSIBILITY-PUBLIC-AUDIT-20261006`, `E-PLAYWRIGHT-NARROW-AUDIT-20261006`, `E-PLAYWRIGHT-SURFACE-AUDIT-20261006`, `E-LIVE-PUBLIC-RECHECK-20261006`.
+
 ## Research Comparison Reading Cue — 2026-10-06 — 3339309
 
 - 공격 관점에서 독자가 비교 도표의 두 조건과 막대 길이의 의미를 한 번에 파악하지 못하는 오독 경로를 점검했다. 도표 상단에 비교 기준과 읽기 안내를 배치했으며, 연구 수치·출처·해석은 변경하지 않았다.

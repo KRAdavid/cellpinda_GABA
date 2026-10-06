@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T03:05:00Z",
+  "updated_at": "2026-10-06T03:25:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5264,6 +5264,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T03:05:00Z"
+    },
+    {
+      "id": "H-249",
+      "event": "공개 surface와 초소형 모바일을 재감리해 280px 연구 지도·활성 연구 카드·도표의 viewport 내 배치, 390px·1440px 접근성 기본 계약·히어로·연구·전문가 영상·이야기 공유 흐름, live validator의 HTTP 200·STATIC·candidate e2f9920 정합성을 확인했다. 새 CRITICAL/MAJOR 결함은 없어 코드는 변경하지 않고 감사·레드팀·완료 보고서와 C-171 및 다섯 증거를 등록했다. 전문가 영상 필터 rail과 장식용 수면 궤도의 내부 overflow는 의도된 surface로 기록했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T03:25:00Z"
     }
   ]
 }

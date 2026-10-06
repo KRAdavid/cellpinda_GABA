@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 공개 surface·초소형 모바일 재감리·NAVI 동기화 — e2f9920 — 2026-10-06
+
+- 280px·390px·1440px 공개 surface를 다시 점검해 연구 지도·연구 카드·도표·전문가 영상·이야기 공유 흐름과 가로폭·접근성 기본 계약을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없어 코드는 불필요하게 변경하지 않고, 감리·레드팀·완료 보고서와 증적 레지스터를 최신 공개본 기준으로 동기화했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-SURFACE-AUDIT-20261006`, `E-ACCESSIBILITY-PUBLIC-AUDIT-20261006`, `E-PLAYWRIGHT-NARROW-AUDIT-20261006`, `E-PLAYWRIGHT-SURFACE-AUDIT-20261006`, `E-LIVE-PUBLIC-RECHECK-20261006`.
+
 ## 연구 지도 선택 상태 안내·공개 배포 — 0e5c611 — 2026-10-06
 
 - 연구 지도 선택 후 현재 주제와 연구 카드의 관계를 한 줄 안내로 갱신한다.

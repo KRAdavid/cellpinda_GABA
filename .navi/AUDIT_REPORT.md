@@ -1,5 +1,14 @@
 # Audit Report
 
+## 공개 surface·초소형 모바일 재감리 — e2f9920 — 2026-10-06
+
+- 현재 공개본의 첫 화면·연구 지도·전문가 영상·이야기 공유 surface를 재감리하고, 초소형 280px까지 연구 지도·연구 카드·도표가 viewport 안에 읽히는지 확인했다. 280px에서 연구 지도 240px, 활성 연구 카드 240px, 선택 도표 204px로 배치되고 `document.scrollWidth`는 280px이었다.
+- 390px·1440px 공개본에서 main·header·nav·footer 랜드마크, 이름 있는 버튼·링크, 이미지 alt, 외부 링크 rel, 히어로·연구·전문가·공유 surface와 5문장 복사 자료를 확인했다. 공개 validator는 HTTP 200·STATIC·candidate `e2f992033415efbcde7ae4b119ce44006e49651e`·71개 bundle hash·제품 독립 공개 경계를 유지했다.
+- 현재 코드 기준의 UI 계약·목표·계획·외부 게이트·거버넌스·운영 문서 검사도 통과했다. 새 코드 수정이 필요한 CRITICAL/MAJOR 결함은 발견되지 않았으며, 의도된 전문가 영상 필터 rail과 장식용 수면 궤도만 내부 overflow surface로 기록했다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-SURFACE-AUDIT-20261006`, `E-ACCESSIBILITY-PUBLIC-AUDIT-20261006`, `E-PLAYWRIGHT-NARROW-AUDIT-20261006`, `E-PLAYWRIGHT-SURFACE-AUDIT-20261006`, `E-LIVE-PUBLIC-RECHECK-20261006`.
+
 ## Research Comparison Reading Cue — 3339309 — 2026-10-06
 
 - 연구 결과 비교 도표에서 독자가 먼저 확인해야 하는 비교 기준과 막대 길이의 의미를 도표 상단에 추가했다. 새 수치나 효과 해석을 만들지 않고 `두 조건을 나란히 비교`와 `막대가 짧을수록 변화가 작습니다`라는 읽기 안내만 보강했다.

@@ -1780,6 +1780,18 @@
         "E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-171",
+      "statement": "공개 안내서의 첫 화면·연구 지도·전문가 영상·이야기 공유 흐름은 초소형 모바일부터 데스크톱까지 화면 폭과 접근성 기본 계약을 유지하며, 선택·공유·출처 읽기가 한 흐름으로 이어진다.",
+      "evidence_refs": [
+        "E-LOCAL-SURFACE-AUDIT-20261006",
+        "E-ACCESSIBILITY-PUBLIC-AUDIT-20261006",
+        "E-PLAYWRIGHT-NARROW-AUDIT-20261006",
+        "E-PLAYWRIGHT-SURFACE-AUDIT-20261006",
+        "E-LIVE-PUBLIC-RECHECK-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12875,6 +12887,60 @@
       "captured_at": "2026-10-06T03:04:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-CHART-CUE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-170"]
+    },
+    {
+      "id": "E-LOCAL-SURFACE-AUDIT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 main 공개 안내서의 UI 계약·목표·계획·외부 게이트·거버넌스·운영 문서 검사가 모두 통과해, 퍼블리싱 변경을 추가하지 않아도 되는 기준선과 잔여 외부 게이트를 분리했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run validate:goal; pnpm run validate:plan; pnpm run validate:external-gate-evidence; pnpm run validate:governance; pnpm run validate:ops-docs; all exit code 0",
+      "captured_at": "2026-10-06T03:20:30Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-PUBLIC-SURFACE",
+      "claim_refs": ["C-001", "C-171"]
+    },
+    {
+      "id": "E-ACCESSIBILITY-PUBLIC-AUDIT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 390px·1440px에서 main·header·nav·footer 랜드마크, 이름 있는 버튼·링크, alt가 있는 이미지, rel이 있는 외부 링크, page errors 0을 유지했다.",
+      "locator": "Playwright Chromium fallback; qa-accessibility-audit-20261007.mjs; https://kradavid.github.io/gaba_info/?view=guide; 390/1440px; unnamedButtons 0; unnamedLinks 0; missingAlt 0; externalLinksWithoutRel 0; pageErrors 0; document scrollWidth equals viewport",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=accessibility-audit-20261006#top",
+      "captured_at": "2026-10-06T03:21:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-PUBLIC-ACCESSIBILITY",
+      "claim_refs": ["C-003", "C-004", "C-171"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-NARROW-AUDIT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 280px 공개본에서 연구 지도와 연구 카드가 viewport 안에 배치되고, 연구 주제 선택 후 활성 카드·도표·12개 시각 lane·상단 읽기 레일 정렬·오류 없는 렌더링이 유지됐다.",
+      "locator": "Playwright Chromium fallback; qa-narrow-gaba-20261007.mjs; 280px; research map width 240; research card width 240; selected chart width 204; active `근육`; cardTop 115; 12 outcome lanes; document scrollWidth 280; page errors 0; screenshots reviewed outside repository; internal expert filter rail and decorative sleep orbit are intentional overflow surfaces with document width unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=narrow-audit-20261006#research",
+      "captured_at": "2026-10-06T03:22:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-NARROW-MOBILE",
+      "claim_refs": ["C-003", "C-004", "C-171"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-SURFACE-AUDIT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개본의 히어로·연구 지도·전문가 영상·이야기 공유 surface가 390px·1440px에서 제목·진행 레일·선택 흐름·공유 자료·오류 없는 렌더링을 유지했다.",
+      "locator": "Playwright Chromium fallback; qa-public-surface-audit-20261007.mjs and qa-final-share-audit-20261007.mjs; 390/1440px; hero/research/expert/final headings present; research and expert deep-link states present; final share kit exposes 5 copy buttons; document scrollWidth equals viewport; pageErrors 0; consoleErrors 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=surface-audit-20261006#top",
+      "captured_at": "2026-10-06T03:23:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-PUBLIC-SURFACE",
+      "claim_refs": ["C-003", "C-004", "C-171"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECHECK-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 HTTP 200·STATIC·release manifest·제품 독립 공개 데이터·공유 페이지·teaser HOLD 경계를 유지하며 라이브 재검증을 통과했다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha e2f992033415efbcde7ae4b119ce44006e49651e; generatedAt 2026-10-06T03:12:11.130Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance matched",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions",
+      "captured_at": "2026-10-06T03:24:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-PUBLIC-SURFACE",
+      "claim_refs": ["C-001", "C-002", "C-171"]
     }
   ]
 }
