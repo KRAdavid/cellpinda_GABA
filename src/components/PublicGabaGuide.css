@@ -1043,8 +1043,8 @@
 .guide-research-detail-inline:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--guide-research-accent,#27a5aa)}
 .guide-research-detail-inline:nth-child(1){--guide-research-accent:#2f9da8}.guide-research-detail-inline:nth-child(2){--guide-research-accent:#d38a8f}.guide-research-detail-inline:nth-child(3){--guide-research-accent:#e49a82}.guide-research-detail-inline:nth-child(4){--guide-research-accent:#73a8c4}.guide-research-detail-inline:nth-child(5){--guide-research-accent:#72b7bd}
 .guide-research-detail-inline .guide-research-detail-top{grid-column:1 / -1;padding-bottom:16px;border-bottom:1px solid #d4e7ea}
-.guide-research-detail-inline .guide-research-inline-heading{grid-column:1;grid-row:2;display:grid;grid-template-columns:24px 62px minmax(0,1fr);align-items:center;gap:10px;margin-top:27px}
-.guide-research-card-number{color:var(--guide-research-accent,#27a5aa);font-size:10px;font-weight:900;letter-spacing:.12em}
+.guide-research-detail-inline .guide-research-inline-heading{grid-column:1;grid-row:2;display:grid;grid-template-columns:36px 62px minmax(0,1fr);align-items:center;gap:10px;margin-top:27px}
+.guide-research-card-number{color:var(--guide-research-accent,#27a5aa);font-size:10px;font-weight:900;letter-spacing:.08em;line-height:1.25;white-space:nowrap}
 .guide-research-detail-inline .guide-research-inline-heading .guide-research-glyph{width:62px;height:46px;margin:0;transform:scale(.74)}
 .guide-research-detail-inline .guide-research-inline-heading h3{min-width:0;font-size:25px;line-height:1.25;word-break:keep-all}
 /* v83 result-first research lead: answer the reader's main question before study metadata and chart detail. */
@@ -2125,6 +2125,11 @@
   background:
     radial-gradient(circle at 50% 50%,rgba(222,249,248,.76) 0 2px,transparent 2px 42px),
     linear-gradient(180deg,#fff 0%,#fbfeff 100%);
+}
+
+/* v149 research card order marker: expose the current card and total research count inside each result card. */
+@media(max-width:700px){
+  .guide-research-card-number{font-size:10px;letter-spacing:.04em}
 }
 .guide-research-map::before{
   content:"";
