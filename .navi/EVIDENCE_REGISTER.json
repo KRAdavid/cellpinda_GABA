@@ -2410,6 +2410,18 @@
         "E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-224",
+      "statement": "701–1100px 태블릿 구간의 전문가 영상 보드는 9개 영상을 한 열로 읽혀 마지막 카드가 빈 공간 옆에 홀로 남지 않으며, 390px 모바일 2열 썸네일과 1440px 데스크톱 영상 갤러리 구조는 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007",
+        "E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007",
+        "E-CDP-TABLET-VIDEO-RHYTHM-20261007",
+        "E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007",
+        "E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16253,6 +16265,59 @@
       "captured_at": "2026-10-06T21:55:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-TABLET-APPLICATION-RHYTHM",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-223"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 전문가 영상 보드의 1열 보정이 UI 계약·typecheck·127개 테스트·production build·Pages 정적 번들·성능 예산을 통과한다.",
+      "locator": "local main 55aa1b4; pnpm run validate:ui-contract status ok; pnpm test 127 passed; pnpm run build status ok; validate:performance initial JS 311199, initial CSS 95703, total assets 1649416, largest 311199; .guide-video-grid is one column through 1100px and the later max-width:700px mobile rule retains two columns",
+      "captured_at": "2026-10-06T22:05:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-TABLET-VIDEO-RHYTHM",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-224"]
+    },
+    {
+      "id": "E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 태블릿 영상 보드의 1열 읽기 리듬과 모바일 2열·제품 독립 공개 구조를 유지한 상태로 통과한다.",
+      "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.css max-width:1100px tablet rule plus later max-width:700px mobile override; validate:ui-contract status ok; research copy, source and product boundary contracts unchanged",
+      "captured_at": "2026-10-06T22:05:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-TABLET-VIDEO-RHYTHM",
+      "claim_refs": ["C-004", "C-006", "C-224"]
+    },
+    {
+      "id": "E-CDP-TABLET-VIDEO-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome Playwright 시각 점검에서 768px 영상 카드 9장이 모두 한 열로 읽히고, 390px 모바일은 2열 썸네일 갤러리를 유지한다.",
+      "locator": "local http://127.0.0.1:5173/gaba_info/?view=guide&qa=publishing-surfaces-local; Chrome Playwright screenshots inspected with view_image at 390·768·1440px; 768px shows nine full-width horizontal cards with no trailing right-side void; 390px keeps the visual two-column thumbnail board; next handoff remains visible",
+      "source_uri": "http://127.0.0.1:5173/gaba_info/?view=guide&qa=publishing-surfaces-local-768",
+      "captured_at": "2026-10-06T22:06:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-TABLET-VIDEO-RHYTHM",
+      "claim_refs": ["C-003", "C-004", "C-224"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR과 main 공개 배포 파이프라인이 태블릿 전문가 영상 보드 리듬 보정의 최종 커밋에서 모두 성공했다.",
+      "locator": "PR #532 https://github.com/KRAdavid/gaba_info/pull/532; release-verify run 37538858713 job 112526627084 and site-quality-verify run 37538858743 job 112526626696 success; merge 55aa1b483531176bd4eba3f32fc47925ee6ff61a; main workflow 37539036705; release-verify 112527241023; worker-readiness 112527730864; deploy-pages 112527764754; deploy-worker skipped static; smoke-live 112527838131; release-status 112527918048; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37539036705",
+      "captured_at": "2026-10-06T22:13:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-TABLET-VIDEO-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-224"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 태블릿 전문가 영상 보드의 1열 배열, 모바일 2열 갤러리, 제품 독립 공개 경계가 배포 후에도 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-surfaces-20261007; validate:live-public HTTP 200 candidateSha 55aa1b483531176bd4eba3f32fc47925ee6ff61a, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched; Chrome Playwright screenshots inspected at 390·768·1440px show tablet one-column video cards, mobile two-column thumbnails and unchanged desktop gallery",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-surfaces-20261007",
+      "captured_at": "2026-10-06T22:13:30Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-TABLET-VIDEO-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-224"]
     }
   ]
 }

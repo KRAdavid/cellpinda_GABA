@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T21:55:00.000000Z",
+  "updated_at": "2026-10-06T22:19:34.335110Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2143,7 +2143,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T21:35:15Z"
+    "last_run_at": "2026-10-06T22:13:30Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2345,7 +2345,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T21:35:15Z"
+    "last_run_at": "2026-10-06T22:13:30Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5669,6 +5669,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T21:55:00Z"
+    },
+    {
+      "id": "H-301",
+      "event": "701–1100px 태블릿 전문가 영상 보드에서 9번째 카드가 2열의 왼쪽에 홀로 남아 오른쪽 빈 공간을 만드는 잔여 퍼블리싱 리스크를 확인했다. 영상 보드를 태블릿 1열로 보정하고 390px 모바일 2열 썸네일·1440px 데스크톱 갤러리를 유지했다. 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #532, main 배포·라이브 검증, 공개 390·768·1440px 시각 점검을 재확인했으며 C-224와 다섯 증거를 등록한다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없고 teaser preview는 HOLD이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T22:13:30Z"
     }
   ]
 }

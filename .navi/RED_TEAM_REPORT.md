@@ -2159,3 +2159,12 @@
 - 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007`, `E-CDP-TABLET-APPLICATION-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007`.
+
+## Red-team recheck — 태블릿 전문가 영상 보드 리듬 — 2026-10-07 — 55aa1b4
+
+- 공격 관점에서 701–1100px 2열 영상 갤러리의 마지막 9번째 카드가 왼쪽에 홀로 남아 오른쪽 빈 공간을 만들고, 사업자·고령 사용자의 영상 목록 스캔을 끊는 경로를 확인했다.
+- 태블릿 영상 카드를 1열로 보정하고 390px 모바일 2열·1440px 데스크톱 갤러리를 유지했다. 공개 390·768·1440px에서 카드 9장, 선택 상태, 다음 장 handoff와 가로폭 정합을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았으며 새 CRITICAL/MAJOR 결함은 없다. 기존 RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 이 검증은 Chrome Playwright fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007`, `E-CDP-TABLET-VIDEO-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007`.
