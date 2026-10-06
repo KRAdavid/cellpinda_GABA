@@ -288,7 +288,7 @@
 .guide-academic-map{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:36px}
 .guide-academic-map article{display:flex;flex-direction:column;min-height:196px;padding:20px 18px;border-top:3px solid #a8dfe0;background:#f7fbfc}
 .guide-academic-map article:nth-child(2){border-top-color:#79c7cc}.guide-academic-map article:nth-child(3){border-top-color:#4fb0b9}.guide-academic-map article:nth-child(4){border-top-color:#2c9ba6}.guide-academic-map article:nth-child(5){border-top-color:#157f8b}
-.guide-academic-map article>span{color:#91acb8;font-size:10px;font-weight:900;letter-spacing:.12em}
+.guide-academic-map article>span{color:#668894;font-size:10px;font-weight:900;letter-spacing:.06em;line-height:1.25;white-space:nowrap}
 .guide-academic-map h3{margin:28px 0 9px;color:var(--guide-ink);font-size:18px;letter-spacing:-.06em;line-height:1.35}
 .guide-academic-map p{margin:0;color:#6c8598;font-size:13px;line-height:1.72;letter-spacing:-.035em}
 .guide-academic-caption{display:flex;align-items:center;gap:8px;margin:20px 0 0;color:var(--guide-teal-dark);font-size:13px;font-weight:800;letter-spacing:-.03em}
