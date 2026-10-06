@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 초협폭 연구 결과 도표 가독성 보정·공개 배포 — 2026-10-07 — ad52246
+
+- 공격 관점에서 280px·320px·390px에서 좁은 조건 카드가 결과 문구를 잘라 의미를 약화시키거나 방향 신호와 섞는 실패 모드를 점검했다. 280px 이하에서는 비교 조건과 GABA 조건을 세로로 쌓고 결과 문구와 방향 신호를 각각 분리해, 두 문구가 카드 폭 전체에서 읽히도록 했다.
+- 공개 CDP에서 280·320·390px 모두 document width가 viewport와 같고 네 개 결과 phrase와 네 개 condition lane의 DOM overflow가 false였다. 공개 화면 캡처에서도 `더 많이 줄었습니다`·`덜 줄었습니다`가 잘리지 않고 조건별 방향 신호가 아래에 독립적으로 표시됐다. 새 CRITICAL/MAJOR 결함은 없다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Chrome fallback이 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도·독립 과학·규제 감수를 대신하지 않으므로 RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-ULTRA-NARROW-CHART-20261007`, `E-CDP-ULTRA-NARROW-CHART-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-CHART-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-CHART-20261007`.
+
 ## 섹션 직접 진입 앵커 가독성 보정·공개 배포 — 2026-10-06 — 075b919
 
 - 공격 관점에서 모바일·태블릿·데스크톱의 `#academic` 직접 진입 시 연구 지도 제목이 고정 헤더나 읽기 진행바에 가려지는지 확인했다. v160의 116px/126px 반응형 앵커 여백 뒤 390·768·1440px 모두 제목이 진행바 아래에서 시작했다.

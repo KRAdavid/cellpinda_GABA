@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T18:56:00Z",
+  "updated_at": "2026-10-06T19:37:17Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T19:14:00Z"
+    "last_run_at": "2026-10-06T19:37:17Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T19:14:00Z"
+    "last_run_at": "2026-10-06T19:37:17Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5598,6 +5598,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T19:14:00Z"
+    },
+    {
+      "id": "H-295",
+      "event": "280px 이하 초소형 모바일 연구 결과 도표에서 비교 조건과 GABA 조건이 좁은 2열 카드 안에 갇혀 결과 문구가 세로로 끊기거나 방향 신호와 한눈에 비교되지 않는 잔여 가독성 리스크를 확인했다. v162에서 350px 이하 조건 레인을 1열로 쌓고 각 결과 문구를 카드 폭 전체로 확장해 `더 많이 줄었습니다`·`덜 줄었습니다`와 변화 방향을 순서대로 읽도록 보정했다. 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #520, main merge `ad52246`, main workflow `37519850528`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 280·320·390px에서 document width와 phrase/lane overflow를 확인했다. 원격 성능 예산의 환경별 72-byte 초과는 중복 CSS 제거로 해결했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-217과 다섯 증거를 등록한다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T19:37:17Z"
     }
   ]
 }

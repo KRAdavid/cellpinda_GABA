@@ -2328,6 +2328,18 @@
         "E-LIVE-PUBLIC-ANCHOR-READABILITY-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-217",
+      "statement": "280px 이하 초소형 모바일 연구 결과 도표에서 비교 조건과 GABA 조건이 세로로 쌓이고 각 결과 문구가 카드 폭 전체를 사용해 `더 많이 줄었습니다`·`덜 줄었습니다`와 변화 방향을 순서대로 읽을 수 있다. 320·390px에서도 가로폭 초과 없이 연구 결과를 읽을 수 있으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-ULTRA-NARROW-CHART-20261007",
+        "E-UI-CONTRACT-ULTRA-NARROW-CHART-20261007",
+        "E-CDP-ULTRA-NARROW-CHART-20261007",
+        "E-DEPLOY-PIPELINE-ULTRA-NARROW-CHART-20261007",
+        "E-LIVE-PUBLIC-ULTRA-NARROW-CHART-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15821,6 +15833,59 @@
       "captured_at": "2026-10-06T19:14:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-ANCHOR-READABILITY",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-216"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-ULTRA-NARROW-CHART-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초협폭 연구 결과 도표 가독성 보정이 UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과한다.",
+      "locator": "local branch codex/narrow-chart-legibility-20261007 final 2a29709; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test -- --runInBand 127 passed; pnpm run build; validate:performance status ok; initial JS 311199, initial CSS 95703, total assets 1649463, largest 311199",
+      "captured_at": "2026-10-06T19:29:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-ULTRA-NARROW-CHART",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-217"]
+    },
+    {
+      "id": "E-UI-CONTRACT-ULTRA-NARROW-CHART-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 350px 이하 비교 도표에서 조건 레인을 1열로 쌓고 결과 문구를 전체 레인 폭으로 표시하는 v162 회귀 규칙을 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v162 ultra-narrow comparison cards; @media(max-width:350px); .guide-outcome-lanes grid-template-columns minmax(0,1fr); .guide-outcome-lane-top full-width grid; result phrase width 100% with overflow-wrap; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T19:29:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-ULTRA-NARROW-CHART",
+      "claim_refs": ["C-004", "C-005", "C-217"]
+    },
+    {
+      "id": "E-CDP-ULTRA-NARROW-CHART-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback에서 공개 초협폭 연구 결과 도표의 문구와 조건 카드가 잘리지 않고 가로폭이 안정적이다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&narrowChartQa=162&cachebust=ad52246#research-cognition; 280px chart width 204, lane layout 138px, document width 280, phrase/lane overflow false; 320px chart width 244, lane layout 178px, document width 320, phrase/lane overflow false; 390px chart width 314, lane layout 111px, document width 390, phrase/lane overflow false; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&narrowChartQa=162&cachebust=ad52246#research-cognition",
+      "captured_at": "2026-10-06T19:36:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-ULTRA-NARROW-CHART",
+      "claim_refs": ["C-003", "C-004", "C-217"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-ULTRA-NARROW-CHART-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #520 필수 검사와 main 공개 배포 파이프라인이 초협폭 연구 결과 도표 변경의 최종 커밋에서 모두 성공했다.",
+      "locator": "PR #520 https://github.com/KRAdavid/gaba_info/pull/520; final release-verify 37519641805 and site-quality-verify 37519641728 success; final merge ad52246d9ff65871ab183f5b27ceeb7614fccdeb; main workflow 37519850528; release-verify 112462160092; worker-readiness 112462770862; deploy-pages 112462817612; deploy-worker skipped static 112462818845; smoke-live 112462921062; release-status 112463004460; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37519850528",
+      "captured_at": "2026-10-06T19:36:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-ULTRA-NARROW-CHART",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-217"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-ULTRA-NARROW-CHART-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 280·320·390px 연구 결과 도표의 비교 조건과 GABA 조건이 읽기 순서를 유지하고 제품 독립 공개 경계가 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&narrowChartQa=162&cachebust=ad52246#research-cognition; HTTP 200 via main workflow 37519850528 Pages smoke; Chrome CDP fallback 280·320·390px shows full-width result phrases `더 많이 줄었습니다`·`덜 줄었습니다`, separated direction cues, document width equal to viewport, phrase/lane DOM overflow false; product-independent public boundary matched; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&narrowChartQa=162&cachebust=ad52246#research-cognition",
+      "captured_at": "2026-10-06T19:36:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-ULTRA-NARROW-CHART",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-217"]
     }
   ]
 }
