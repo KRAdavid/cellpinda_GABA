@@ -1716,6 +1716,13 @@ export default function PublicGabaGuide() {
               <BookOpen size={18} aria-hidden="true" />
               <p><strong>매슈 워커는 『우리는 왜 잠을 자야 할까』에서</strong> 잠을 단순한 휴식이 아니라 뇌와 몸이 건강을 유지하는 데 필요한 중요한 생리 과정으로 설명합니다.<small>참고 도서 · 매슈 워커, 『우리는 왜 잠을 자야 할까』, 열린책들</small></p>
             </div>
+            <button type="button" className="guide-research-handoff guide-opening-bridge-handoff" aria-label="GABA의 발견으로 이어서 읽기" onClick={() => scrollTo('history')}>
+              <span className="guide-research-handoff-kicker">다음 장</span>
+              <strong>회복의 균형에서 GABA의 발견으로</strong>
+              <span className="guide-research-handoff-line" aria-hidden="true" />
+              <span className="guide-research-handoff-next">GABA의 발견</span>
+              <ArrowRight size={17} aria-hidden="true" />
+            </button>
           </div>
         </section>
 
