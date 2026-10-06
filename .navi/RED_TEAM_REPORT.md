@@ -1779,6 +1779,12 @@
 - PR #434, main workflow `37418115559`, 공개 validator와 Chromium fallback 390·1440px 검증이 성공했고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
+## Recheck — 2026-10-06 — 06013ba
+
+- 초소형 모바일 헤더의 읽기 크기 조절 `글자` 라벨과 크기 표식을 키워 고령 사용자가 기능을 더 쉽게 인지하도록 보정했다. 280·320·390·1440px 공개 Chromium fallback에서 컨트롤 폭·가로폭·page/console errors 0을 확인했고 새 CRITICAL/MAJOR 코드 결함은 발견하지 않았다.
+- stale TF pulse로 멈춘 최초 main run은 heartbeat 전용 PR #441과 최종 workflow `37423305842`로 복구됐으며, 외부 공개 데이터·연구 카피는 변경하지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
 ## Recheck — 2026-10-06 — 83dc4e5a
 
 - 280px에서 비교 도표 결과 라벨이 오른쪽으로 잘리던 반응형 결함을 확인하고, 350px 이하에서 자연어 라벨을 두 줄로 감싸도록 보정했다. 320·390·1440px 구조와 연구 내용은 유지했다.

@@ -1559,3 +1559,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #438과 main workflow `37420961105`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008`, `E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008`, `E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008`.
+
+## 초소형 모바일 읽기 조절 가독성 보정·공개 배포 — 06013ba — 2026-10-06
+
+- 280·320px 헤더의 `글자` 라벨을 11px, 크기 표식을 14px로 키워 고령 사용자도 읽기 조절 기능을 바로 알아볼 수 있게 했다. 컨트롤 폭과 390·1440px 구성은 유지했다.
+- PR #440 코드 보정과 heartbeat 전용 PR #441을 보호된 main 절차로 병합했으며, 최종 main workflow `37423305842`의 fresh TF pulse·Pages·라이브 smoke·release-status와 공개 validator가 성공했다.
+- 제품 독립 과학 정보 경계·연구 수치·출처·공개 데이터는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-COMPACT-READING-20261008`, `E-UI-CONTRACT-COMPACT-READING-20261008`, `E-PLAYWRIGHT-COMPACT-READING-20261008`, `E-DEPLOY-PIPELINE-COMPACT-READING-20261008`, `E-LIVE-PUBLIC-COMPACT-READING-20261008`.

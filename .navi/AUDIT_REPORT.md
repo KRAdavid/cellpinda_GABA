@@ -2300,3 +2300,13 @@
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008`, `E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008`, `E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008`.
+
+## Current Release Recheck — 06013ba — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `06013ba08af184913ac36a1f4fa9d692153dfd63`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-002/AC-003 초소형 모바일 읽기 조절 가독성: PASS. 280·320px에서 `글자` 라벨 11px·크기 표식 14px·컨트롤 폭 60px, 390px에서 기존 72px, 1440px에서 기존 114.1875px 구성이 유지되며 모든 폭에서 document/body scrollWidth가 viewport와 같다.
+- AC-005 배포 게이트: PASS. PR #440·#441 검사, main workflow `37423305842`의 release-verify·fresh TF pulse·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다. 최초 main run `37423001085`의 stale TF pulse 중단은 공식 heartbeat PR #441로 복구했다.
+- AC-006 제품 독립 과학 정보 경계와 연구 수치·출처: PASS. 이번 변경은 헤더 읽기 조절 가독성만 보정했고 연구 수치·해석·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-COMPACT-READING-20261008`, `E-UI-CONTRACT-COMPACT-READING-20261008`, `E-PLAYWRIGHT-COMPACT-READING-20261008`, `E-DEPLOY-PIPELINE-COMPACT-READING-20261008`, `E-LIVE-PUBLIC-COMPACT-READING-20261008`.

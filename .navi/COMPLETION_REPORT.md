@@ -1993,3 +1993,12 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008`, `E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008`, `E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008`.
+
+## Current Release Recheck — 06013ba — 2026-10-06
+
+- 초소형 모바일 읽기 조절 컨트롤의 `글자` 라벨과 크기 표식을 확대해 280·320px에서도 기능 의미가 더 빠르게 읽히도록 보정했다. 390·1440px 헤더 구성은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #440·#441, main workflow `37423305842`, Pages·라이브 smoke·release-status와 공개 validator·Chromium fallback 280·320·390·1440px 검증이 성공했다.
+- 공개 데이터는 12 claims·6 master records·6 share pages·teaser HOLD·internal operations snapshot 제외·Smart Store only·750 제거·provenance matched 상태를 유지한다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다.
+- 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다.
+
+증적: `E-LOCAL-BUILD-COMPACT-READING-20261008`, `E-UI-CONTRACT-COMPACT-READING-20261008`, `E-PLAYWRIGHT-COMPACT-READING-20261008`, `E-DEPLOY-PIPELINE-COMPACT-READING-20261008`, `E-LIVE-PUBLIC-COMPACT-READING-20261008`.
