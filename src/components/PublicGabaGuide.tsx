@@ -662,9 +662,9 @@ const readingChapterIdFromHash = (hash: string): ActiveChapterId | null => {
 
 const getInitialResearchTopicId = () => {
   if (typeof window === 'undefined') return null;
-  // Keep the research map moving on first entry: the first topic is the quiet default,
-  // while a shared card hash still takes precedence and opens the requested topic.
-  return researchTopicIdFromHash(window.location.hash) ?? researchTopics[0].id;
+  // A chapter-level research hash starts at the map. A shared card hash alone
+  // may restore a selected topic on the first render.
+  return researchTopicIdFromHash(window.location.hash);
 };
 
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
