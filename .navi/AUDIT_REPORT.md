@@ -1,5 +1,13 @@
 # Audit Report
 
+## 공유 API 실패 회복·정적 품질 재감사 — working tree — 2026-10-07
+
+- 공유 흐름에서 `navigator.share()`의 모든 예외를 사용자 취소로 표시하면 Safari·Android·임베디드 브라우저의 정책 또는 payload 실패 뒤 공유가 끝난 것처럼 보일 수 있는 잔여 UX 리스크를 확인했다.
+- `AbortError`만 취소로 처리하고 그 외 실패는 링크 복사 fallback으로 회복하도록 보정했다. UI contract가 이 분기와 `writeClipboardText(shareHref)` 호출을 회귀 점검하며, typecheck·127개 테스트·production build·정적 번들·성능 예산도 통과했다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. 공개 main 배포 후 실제 Web Share 지원 브라우저에서 공유 실패·복사 회복을 재검증해야 하며, 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SHARE-RECOVERY-20261007`, `E-UI-CONTRACT-SHARE-RECOVERY-20261007`.
+
 ## 공개 surface 자동 재점검·NAVI 동기화 — main 1083e3f — 2026-10-07
 
 - 현재 공개 URL을 320·390·768·1440px에서 다시 렌더링해 document width 정합성, 중복 ID, 빈 조작 요소, runtime/console errors를 점검했다. 네 폭 모두 가로 넘침·중복 ID·빈 조작 요소·콘솔 오류가 없었다.

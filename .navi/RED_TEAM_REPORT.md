@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 공유 API 예외 오분류·링크 회복 경로 — working tree — 2026-10-07
+
+- 공격 관점에서 Web Share가 존재하지만 브라우저 정책·권한·payload 문제로 거절되는 경우를 사용자 취소로 오인해 사업자와 소비자가 공유 링크를 잃는 실패 모드를 확인했다.
+- `AbortError`는 실제 취소로 남기고, 그 밖의 예외는 링크 복사를 시도하도록 보정했다. UI contract와 build evidence를 재실행했으며 새 CRITICAL/MAJOR 결함은 없다.
+- 실제 Safari·Android·임베디드 Web Share 실패 환경과 공개 main 배포 후 동작은 아직 검증하지 않았다. 기존 RT-001·RT-002·RT-003과 teaser `HOLD`는 유지하며 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SHARE-RECOVERY-20261007`, `E-UI-CONTRACT-SHARE-RECOVERY-20261007`.
+
 ## 공개 surface 자동 공격 재점검·NAVI 동기화 — main 1083e3f — 2026-10-07
 
 - 모바일·태블릿·데스크톱 대표 폭에서 실제 본문 overflow와 장식용 썸네일 alt를 구분해 점검했다. 메뉴 상태 전환, 포커스 복귀, 전문가 영상 해시 진입 제목 가림 여부에서 새 CRITICAL/MAJOR 결함은 없었다.

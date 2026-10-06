@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 공유 API 실패 회복·공개 안내서 품질 보강 — working tree — 2026-10-07
+
+- 공개 안내서의 공유 API가 사용자 취소와 브라우저 정책·권한·payload 실패를 구분하도록 보완했다. 사용자가 취소한 경우에는 취소 상태를 유지하고, 회복 가능한 실패에서는 동일한 링크 복사 fallback을 시도한다.
+- `pnpm run validate:ui-contract`, `pnpm run typecheck`, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311,199 bytes·CSS 95,703 bytes·총 자산 1,649,565 bytes로 예산 안이다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 보호된 main 공개 배포와 실제 모바일 공유 API 환경 검증은 후속 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-SHARE-RECOVERY-20261007`, `E-UI-CONTRACT-SHARE-RECOVERY-20261007`.
+
 ## 공개 surface 자동 재점검·NAVI 동기화 — main 1083e3f — 2026-10-07
 
 - 320·390·768·1440px 공개 화면과 전문가 영상 해시 진입을 재감리하고 가로폭·중복 ID·빈 조작 요소·runtime/console errors 0을 확인했다. 모바일 메뉴의 열림·ESC 닫힘·포커스 복귀도 확인했다.

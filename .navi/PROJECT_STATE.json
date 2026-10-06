@@ -5704,6 +5704,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T23:36:00Z"
+    },
+    {
+      "id": "H-306",
+      "event": "Web Share API가 존재하지만 브라우저 정책·권한·payload 문제로 거절되는 경우를 사용자가 직접 취소한 것으로 오인해 공유 흐름이 끊길 수 있는 잔여 UX 리스크를 확인했다. AbortError만 취소로 처리하고 그 밖의 실패는 링크 복사 fallback으로 회복하도록 보정했으며 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 재실행했다. C-228과 두 증거를 등록한다. 공개 main 배포 후 실제 Web Share 지원 브라우저·모바일 실기기 재검증은 후속 게이트로 남기고 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T08:51:00+09:00"
     }
   ]
 }

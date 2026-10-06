@@ -620,6 +620,7 @@ requireMatch(indexHtml, /<title>저속노화, 회복하는 밤에서 시작됩�
 requireMatch(indexHtml, /<meta property="og:title" content="저속노화, 회복하는 밤에서 시작됩니다 \| GABA Guide" \/>/, 'public GABA Open Graph title must match the completed hero sentence');
 requireMatch(publicGuide, /document\.title = '저속노화, 회복하는 밤에서 시작됩니다 \| GABA Guide';/, 'public GABA runtime title must match the completed hero sentence');
 requireMatch(publicGuide, /const shareTitle = shareChapterId === 'top' \? '저속노화, 회복하는 밤에서 시작됩니다' :/, 'top-level GABA shares must use the completed hero sentence');
+requireMatch(publicGuide, /navigator\.share\)[\s\S]*?error instanceof DOMException && error\.name === 'AbortError'[\s\S]*?const copied = await writeClipboardText\(shareHref\)/, 'public GABA sharing must distinguish user cancellation from recoverable Web Share failures and copy the link when possible');
 requireMatch(publicGuide, /activeChapterId === 'research' && activeResearchTopic[\s\S]*?activeChapterId === 'reading-note'[\s\S]*?updateMeta\('meta\[property="og:title"\]', pageTitle\)[\s\S]*?updateMeta\('meta\[name="twitter:title"\]', pageTitle\)/, 'public GABA contextual chapters must update share metadata with the selected research or video context');
 requireMatch(publicGuide, /setActiveResearchTopicId\(initialResearchTopicId\);/, 'research chapter deep links must keep the map neutral until a research card is selected');
 requireMatch(publicGuide, /setActiveResearchTopicId\(nextResearchTopicId\);/, 'research hash navigation must not invent a selected card when landing on the map');

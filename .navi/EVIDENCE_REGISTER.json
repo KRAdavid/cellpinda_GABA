@@ -2458,6 +2458,15 @@
         "E-LIVE-PUBLIC-PRINT-FLOW-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-228",
+      "statement": "GABA 안내서의 공유 기능은 사용자가 직접 공유를 취소한 경우와 브라우저 정책·권한 등으로 공유 API가 실패한 경우를 구분하며, 회복 가능한 실패에서는 링크 복사를 시도한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-RECOVERY-20261007",
+        "E-UI-CONTRACT-SHARE-RECOVERY-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16513,6 +16522,26 @@
       "captured_at": "2026-10-06T23:36:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-PRINT-FLOW",
       "claim_refs": ["C-001", "C-003", "C-004", "C-006", "C-227"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-RECOVERY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 실패 회복 보정이 typecheck·UI 계약·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+      "locator": "local branch codex/navi-public-release-audit-20261008; pnpm run typecheck; pnpm run validate:ui-contract; pnpm test (127 pass); pnpm run build; validate:performance initial JS 311199, initial CSS 95703, total assets 1649565 <= 1650000",
+      "captured_at": "2026-10-07T08:51:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-SHARE-RECOVERY",
+      "claim_refs": ["C-001", "C-005", "C-006", "C-228"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-RECOVERY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 사용자 취소와 회복 가능한 Web Share 실패를 구분하고 링크 복사 fallback을 요구한다.",
+      "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.tsx sharePage; DOMException AbortError branch preserves cancellation feedback, non-abort failures call writeClipboardText(shareHref), validate:ui-contract status ok",
+      "captured_at": "2026-10-07T08:51:00+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-SHARE-RECOVERY",
+      "claim_refs": ["C-006", "C-228"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Current Work Recheck — share API recovery — working tree — 2026-10-07
+
+- AC-003/AC-006: PASS_WITH_CONDITIONS. 공개 안내서 공유 흐름은 선택한 장·연구·영상 URL을 유지하면서 사용자 취소와 회복 가능한 Web Share 실패를 구분하고, 후자의 경우 링크 복사를 시도한다.
+- AC-005: PASS. UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 초기 JS 311,199 bytes·CSS 95,703 bytes·총 자산 1,649,565 bytes다.
+- 공개 main 배포 후 실제 Web Share 지원 브라우저·모바일 실기기 확인이 남아 있으므로 Final Status는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+
+증적: `E-LOCAL-BUILD-SHARE-RECOVERY-20261007`, `E-UI-CONTRACT-SHARE-RECOVERY-20261007`.
+
 ## Current Release Recheck — public surface audit — main 1083e3f — 2026-10-07
 
 - AC-001/AC-004: PASS. 라이브 validator는 HTTP 200·candidate `1083e3f6b0669d1770e8db6bbff4ffc7425ac38b`·73개 bundle hash·제품 독립 경계를 확인했다. 320·390·768·1440px에서 document width가 viewport와 같고, 390px 메뉴 상호작용과 전문가 영상 해시 진입 정렬이 정상이다.

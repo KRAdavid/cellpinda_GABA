@@ -1608,19 +1608,22 @@ export default function PublicGabaGuide() {
     }
     const shareHref = shareUrl.toString();
     const shareData = { title: shareTitle, text: shareText, url: shareHref };
-    try {
-      if (navigator.share) {
+    if (navigator.share) {
+      try {
         await navigator.share(shareData);
         announceShareStatus('공유 창을 열었어요.');
-      } else if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(shareHref);
-        announceShareStatus('링크를 복사했어요. 자유롭게 공유해 보세요.');
-      } else {
-        announceShareStatus('주소창의 링크를 복사해 자유롭게 공유해 보세요.');
+        return;
+      } catch (error) {
+        // Keep deliberate cancellation separate; other Web Share failures
+        // recover through the same copy-link path as desktop browsers.
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          announceShareStatus('공유를 취소했어요.');
+          return;
+        }
       }
-    } catch {
-      announceShareStatus('공유를 취소했어요.');
     }
+    const copied = await writeClipboardText(shareHref);
+    announceShareStatus(copied ? '링크를 복사했어요. 자유롭게 공유해 보세요.' : '공유 창을 열지 못했어요. 주소창의 링크를 복사해 공유해 보세요.');
   };
 
   const writeClipboardText = async (text: string) => {
