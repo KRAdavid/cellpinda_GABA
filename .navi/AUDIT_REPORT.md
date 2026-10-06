@@ -81,6 +81,16 @@
 
 증적: `E-LOCAL-BUILD-GABA-PROCESS-20261006`, `E-UI-CONTRACT-GABA-PROCESS-20261006`, `E-PLAYWRIGHT-GABA-PROCESS-20261006`, `E-DEPLOY-PIPELINE-GABA-PROCESS-20261006`, `E-LIVE-PUBLIC-GABA-PROCESS-20261006`.
 
+## Current Release Recheck — 8a6eeb6 — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `8a6eeb6b03314a34450fa9f35860d60718d9ace1`·71개 bundle hash를 확인했다.
+- AC-003/AC-004 연구 결과 비교 도표의 문장 흐름과 모바일 가독성: PASS. 인지 연구 도표의 행별 라벨이 `GABA를 섭취한 그룹의 변화`로 표시되고, 390px·1440px에서 제목·결과·가로폭·page/console errors 0을 확인했다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. PR #434와 main workflow `37418115559`의 필수 검증·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 과학 정보 경계와 연구 수치·출처: PASS. 이번 변경은 어색한 결과 라벨만 자연스럽게 보정했으며 연구 수치·해석·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-CHART-VERDICT-20261006`, `E-UI-CONTRACT-CHART-VERDICT-20261006`, `E-PLAYWRIGHT-CHART-VERDICT-20261006`, `E-DEPLOY-PIPELINE-CHART-VERDICT-20261006`, `E-LIVE-PUBLIC-CHART-VERDICT-20261006`.
+
 ## Research Topic Selection Context — 0e5c611 — 2026-10-06
 
 - 연구 지도에서 주제를 선택한 뒤 현재 선택 상태와 아래 연구 카드의 읽기 순서가 화면낭독기와 시각 흐름 모두에서 이어지지 않던 잔여 맥락 문제를 확인하고, 선택 안내를 `role=status`·`aria-live=polite`·`aria-atomic=true`로 연결했다. 화면의 정보량은 늘리지 않고, 선택 전 안내와 선택 후 안내를 자연스럽게 교체한다.

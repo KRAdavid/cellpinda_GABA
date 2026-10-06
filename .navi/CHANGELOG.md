@@ -1535,3 +1535,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #422, main workflow `37410404149`, Pages·라이브 smoke·release-status와 공개 validator가 모두 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-GABA-PROCESS-20261006`, `E-UI-CONTRACT-GABA-PROCESS-20261006`, `E-PLAYWRIGHT-GABA-PROCESS-20261006`, `E-DEPLOY-PIPELINE-GABA-PROCESS-20261006`, `E-LIVE-PUBLIC-GABA-PROCESS-20261006`.
+
+## 연구 결과 도표 결과 라벨 자연어 보정·공개 배포 — 8a6eeb6 — 2026-10-06
+
+- 비교 도표의 `GABA 결과` 라벨을 `GABA를 섭취한 그룹의 변화`로 바꿔 측정 항목·비교 조건·관찰된 결과가 한 문장 흐름으로 읽히게 보정했다.
+- 연구 수치·결과·해석·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 390·1440px 렌더링 검증을 통과했다.
+- PR #434와 main workflow `37418115559`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-CHART-VERDICT-20261006`, `E-UI-CONTRACT-CHART-VERDICT-20261006`, `E-PLAYWRIGHT-CHART-VERDICT-20261006`, `E-DEPLOY-PIPELINE-CHART-VERDICT-20261006`, `E-LIVE-PUBLIC-CHART-VERDICT-20261006`.

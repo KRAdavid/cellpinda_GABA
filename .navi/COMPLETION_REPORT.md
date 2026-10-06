@@ -1950,6 +1950,14 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - Recommended Next Actions: 외부 검토 증거와 대표 실기기 QA를 등록한 뒤 동일 gate를 재실행.
 - Deployment Follow-up: main 배포 run `37077676557`가 통과했고, Pages 배포·라이브 smoke test·release status를 확인했다. 공개 URL의 runtime candidate SHA는 `3f4a3e552978721ccc72187ae85a89af05174d5f`이다.
 - Final Status: INTERNAL_QA_READY_WITH_CONDITIONS; NAVI 상태는 USER_DECISION. 외부 과학·규제 감수, Safari/iOS/Android 대표 환경, 실제 고령 사용자 테스트는 완료로 표시하지 않는다.
+
+## Current Release Recheck — 8a6eeb6 — 2026-10-06
+
+- 연구 결과 비교 도표의 행별 라벨을 `GABA를 섭취한 그룹의 변화`로 정리해 소비자가 결과 문장을 자연스럽게 읽도록 보완했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #434 필수 검사, main workflow `37418115559`, Pages·라이브 smoke·release-status, 공개 validator와 390·1440px Chromium fallback이 모두 통과했다.
+- 공개 데이터는 12 claims·6 master records·6 share pages·teaser HOLD·internal operations snapshot 제외·Smart Store only·750 제거·provenance matched 상태를 유지한다.
+- 연구 수치·출처·제품 독립 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-179와 다섯 증거를 등록했다.
+- 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다.
 ## Current Release Recheck — 3339309 — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `3339309c8565f874843b757afa5f843206bd2df3`·71개 bundle hash를 확인했다.
