@@ -842,7 +842,7 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
               const DirectionIcon = row.direction === 'up' ? ArrowUpRight : ArrowDownRight;
               return (
                 <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
-                  <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong><span className="guide-outcome-comparison-verdict"><i>GABA 결과</i><b>{row.result}</b></span></div>
+                  <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong><span className="guide-outcome-comparison-verdict"><i>GABA를 섭취한 그룹의 변화</i><b>{row.result}</b></span></div>
                   <div className="guide-outcome-lanes">
                     <div className="guide-outcome-lane is-reference">
                       <div className="guide-outcome-lane-top"><span>{comparisonChart.referenceLabel}</span><strong>{row.reference}</strong></div>
