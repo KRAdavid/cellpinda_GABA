@@ -1850,6 +1850,18 @@
         "E-LIVE-PUBLIC-CHART-SEMANTICS-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-177",
+      "statement": "연구 결과 비교 도표의 첫 열을 측정 항목으로 명확히 하고 좌우 비교 아이콘을 사용해 모바일·데스크톱에서 측정 항목과 두 조건의 관계를 더 빠르게 읽게 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-CHART-AXIS-20261006",
+        "E-UI-CONTRACT-CHART-AXIS-20261006",
+        "E-PLAYWRIGHT-CHART-AXIS-20261006",
+        "E-DEPLOY-PIPELINE-CHART-AXIS-20261006",
+        "E-LIVE-PUBLIC-CHART-AXIS-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13244,6 +13256,59 @@
       "captured_at": "2026-10-06T04:40:21Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-CHART-SEMANTICS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-176"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CHART-AXIS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 비교 도표의 첫 열을 측정 항목으로 명확히 하고 좌우 비교 아이콘을 적용한 코드가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 85ba0745bf20717265bd880d86f1c3d05a009b0c; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1641786 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T04:53:30Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-CHART-AXIS",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-177"]
+    },
+    {
+      "id": "E-UI-CONTRACT-CHART-AXIS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 비교 도표의 첫 열 `측정 항목`과 좌우 비교 아이콘을 고정해 축 의미와 시각 체계가 흐려지는 회귀를 막는다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.tsx `guide-outcome-comparison-axis` contains `측정 항목`; `guide-outcome-comparison-guide-mark` uses `ArrowLeftRight`; status ok",
+      "captured_at": "2026-10-06T04:53:30Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-CHART-AXIS",
+      "claim_refs": ["C-001", "C-177"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-CHART-AXIS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬·공개 Chromium fallback에서 390px·1440px 비교 도표의 `측정 항목` 축·좌우 비교 아이콘·기존 읽기 안내를 확인했고, 가로폭과 페이지·콘솔 오류가 없다.",
+      "locator": "Playwright Chromium fallback; local 390/1440px and public 390/1440px; axis `측정 항목`; guide `두 조건을 나란히 비교`; three comparison icons; document scrollWidth equals viewport; pageErrors 0; consoleErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&release=e0bfac#research-cognition",
+      "captured_at": "2026-10-06T04:52:43Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-CHART-AXIS",
+      "claim_refs": ["C-003", "C-004", "C-177"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CHART-AXIS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 도표 축 의미 보정 PR #430이 필수 검사를 통과해 main merge commit e0bfacdf로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #430; code commit 85ba0745bf20717265bd880d86f1c3d05a009b0c; main merge commit e0bfacdfaee78eea287e32bef32e968995a87423; main workflow 37415721382; release-verify 112113781520; worker-readiness 112114016170; deploy-pages 112114044463; deploy-worker 112114044990 skipped by STATIC_ONLY; smoke-live 112114101278; release-status 112114149284; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37415721382",
+      "captured_at": "2026-10-06T04:53:30Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-CHART-AXIS",
+      "claim_refs": ["C-001", "C-002", "C-177"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CHART-AXIS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 결과 비교 도표의 `측정 항목` 축과 좌우 비교 아이콘이 390px·1440px에 반영되고 제품 독립 공개 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T04:52:43.448Z; page 200; runtimeMode STATIC; candidateSha e0bfacdfaee78eea287e32bef32e968995a87423; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Playwright 390/1440 exact `측정 항목` axis, three comparison icons, document scrollWidth equals viewport, pageErrors 0, consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&release=e0bfac#research-cognition",
+      "captured_at": "2026-10-06T04:53:30Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-CHART-AXIS",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-177"]
     }
   ]
 }

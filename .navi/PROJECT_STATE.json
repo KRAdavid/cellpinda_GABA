@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T04:40:21Z",
+  "updated_at": "2026-10-06T04:53:30Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5306,6 +5306,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T04:40:21Z"
+    },
+    {
+      "id": "H-255",
+      "event": "연구 결과 비교 도표의 첫 열을 `측정 항목`으로 명확히 바꾸고 좌우 비교 아이콘을 적용해, `뇌파 변화`·`활력 점수`와 두 조건의 관계를 모바일·데스크톱에서 더 빠르게 읽도록 보정했다. 연구 결과·수치·해석·공개 데이터는 변경하지 않았다. PR #430은 main `e0bfacdf`로 병합되었고 workflow `37415721382`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `e0bfacdfaee78eea287e32bef32e968995a87423`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했고, 공개 Chromium fallback 390·1440px에서 `측정 항목`·비교 아이콘·가로폭·page/console errors 0을 재확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-177과 다섯 증거를 등록한다. 외부 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T04:53:30Z"
     }
   ]
 }

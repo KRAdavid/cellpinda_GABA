@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 결과 도표 축 의미·공개 배포 — e0bfacdf — 2026-10-06
+
+- 비교 도표의 첫 열을 `측정 항목`으로 바꾸어 측정 대상과 두 조건을 바로 구분하게 하고, 좌우 비교 아이콘으로 정보 시각 체계를 통일했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright Chromium fallback·Pages·라이브 smoke·release-status·live validator를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-CHART-AXIS-20261006`, `E-UI-CONTRACT-CHART-AXIS-20261006`, `E-PLAYWRIGHT-CHART-AXIS-20261006`, `E-DEPLOY-PIPELINE-CHART-AXIS-20261006`, `E-LIVE-PUBLIC-CHART-AXIS-20261006`.
+
 ## 연구 결과 도표 의미 보정·공개 배포 — a3ccd609 — 2026-10-06
 
 - 비교 도표의 막대 설명을 변화 방향·상대적 차이 중심으로 바꾸고, 실제 측정값이 아닌 이해용 도식이라는 문구를 추가했다.

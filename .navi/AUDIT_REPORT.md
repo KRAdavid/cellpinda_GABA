@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 결과 도표 축 의미·공개 배포 — e0bfacdf — 2026-10-06
+
+- 비교 도표의 첫 열을 `변화 방향`에서 `측정 항목`으로 바꾸어 `뇌파 변화`·`활력 점수`가 무엇을 가리키는지 바로 읽히게 했고, 비교 안내의 `↔` 글리프를 좌우 비교 아이콘으로 통일했다. 연구 결과·수치·해석은 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 로컬 390·1440px, 공개 390·1440px Chromium fallback에서 축 라벨·아이콘·가로폭·page/console errors 0을 확인했고 캡처는 `view_image`로 검토했다.
+- PR #430이 main `e0bfacdfaee78eea287e32bef32e968995a87423`로 병합되었고 workflow `37415721382`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-CHART-AXIS-20261006`, `E-UI-CONTRACT-CHART-AXIS-20261006`, `E-PLAYWRIGHT-CHART-AXIS-20261006`, `E-DEPLOY-PIPELINE-CHART-AXIS-20261006`, `E-LIVE-PUBLIC-CHART-AXIS-20261006`.
+
 ## 연구 결과 도표 의미 보정·공개 배포 — a3ccd609 — 2026-10-06
 
 - 비교 도표 상단을 `막대는 두 조건의 변화폭을 비교해 보여줍니다`로 바꾸고, 하단에 `막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다`를 추가했다. 연구 결과·수치·해석은 변경하지 않았다.
