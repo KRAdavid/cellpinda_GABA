@@ -1807,3 +1807,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007`, `E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007`, `E-CDP-MEDIUM-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007`.
+
+## 공유 피드백의 다음 장 가림 방지·공개 배포 — 7669136 — 2026-10-07
+
+- 공유 직후에는 확인 토스트를 보여주고, 독자가 32px 이상 스크롤하면 즉시 닫아 다음 장의 제목·본문을 가리지 않게 했다.
+- 390px·1440px 실제 공개 화면과 연구·전문가 영상·마지막 장 이동을 재검증했다. PR #510과 main workflow `37504028167`이 성공했다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SHARE-DISMISS-20261007`, `E-UI-CONTRACT-SHARE-DISMISS-20261007`, `E-CDP-SHARE-DISMISS-20261007`, `E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007`, `E-LIVE-PUBLIC-SHARE-DISMISS-20261007`.

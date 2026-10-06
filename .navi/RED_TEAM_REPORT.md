@@ -2045,3 +2045,12 @@
 - 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007`, `E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007`, `E-CDP-MEDIUM-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007`.
+
+## Red-team recheck — 공유 피드백의 다음 장 가림 — 2026-10-07 — 7669136
+
+- 공격 관점에서 공유 직후 고정 토스트가 독자가 스크롤해 다음 장으로 이동하는 순간에도 남아 핵심 제목이나 본문을 가릴 수 있는 경로를 확인했다.
+- 32px 이상 스크롤하면 토스트를 즉시 해제하고, 공유 직후의 확인 피드백과 기존 safe-area·공유 레일은 유지했다. 공개 390px에서 표시 전·스크롤 후 숨김, 연구·전문가 영상·마지막 장 제목, document width 390, errors `[]`를 확인했다.
+- 이번 변경은 읽기 흐름과 공유 피드백에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았다. 새 CRITICAL/MAJOR 결함은 없다. RT-001·RT-002·RT-003은 계속 OPEN이며 teaser preview는 `HOLD`다.
+- 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SHARE-DISMISS-20261007`, `E-UI-CONTRACT-SHARE-DISMISS-20261007`, `E-CDP-SHARE-DISMISS-20261007`, `E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007`, `E-LIVE-PUBLIC-SHARE-DISMISS-20261007`.

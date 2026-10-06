@@ -2268,6 +2268,18 @@
         "E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-212",
+      "statement": "공유 확인 토스트가 공유 직후에는 표시되고 독자가 32px 이상 스크롤해 다음 장으로 이동하면 즉시 사라져 전문가 영상·마지막 메시지를 가리지 않는다. 390px·1440px에서 공유 interaction, 다음 장 이동, 연구·전문가 영상·마지막 장의 가로폭과 오류 0을 확인했으며 공개 과학 카피·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-DISMISS-20261007",
+        "E-UI-CONTRACT-SHARE-DISMISS-20261007",
+        "E-CDP-SHARE-DISMISS-20261007",
+        "E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007",
+        "E-LIVE-PUBLIC-SHARE-DISMISS-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15496,6 +15508,59 @@
       "captured_at": "2026-10-06T17:15:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-MEDIUM-SHARE-LABEL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-211"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-DISMISS-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 토스트 스크롤 해제 보정 코드가 UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과한다.",
+      "locator": "local commit 23667c8; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 passed; pnpm run build; candidateSha 23667c8887f920a49c67ec27fdbf74d668f7a35a; dist performance initial JS 311199, CSS 95703, total 1648979, largest 311199; final build status ok",
+      "captured_at": "2026-10-06T17:35:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261007-SHARE-DISMISS",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-212"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-DISMISS-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 공유 상태의 시작 위치를 기록하고 32px 이상 스크롤 시 피드백을 닫는 회귀 규칙과 기존 safe-area·중간 폭 공유 라벨 레일을 함께 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; shareStatusStartY + dismissShareStatusOnScroll listener + passive scroll handler + announceShareStatus scroll baseline; v154 medium-phone rail remains required; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T17:35:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-SHARE-DISMISS",
+      "claim_refs": ["C-004", "C-005", "C-211", "C-212"]
+    },
+    {
+      "id": "E-CDP-SHARE-DISMISS-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback local에서 공유 토스트가 표시된 뒤 스크롤로 해제되고 연구·전문가 영상·마지막 장이 정상적으로 읽힌다.",
+      "locator": "Chrome CDP fallback local http://127.0.0.1:5173/?view=guide and public cache-busted URL; 390px: toast visible immediately after share attempt, false after scrollTo(120), research/expert/final headings present, documentWidth 390, missing visible images=[], errors=[]; 1440px: documentWidth 1425 with scrollbar and hero headings present; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=7669136b",
+      "captured_at": "2026-10-06T17:35:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-SHARE-DISMISS",
+      "claim_refs": ["C-003", "C-004", "C-212"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #510 required checks and final main deployment pipeline all success.",
+      "locator": "PR #510 https://github.com/KRAdavid/gaba_info/pull/510; release-verify 37503859713 and site-quality-verify 37503859430 success; final merge 76691361a7c7e1118365c22a88987eaf67f3ebef; main workflow 37504028167; release-verify 112407991093; worker-readiness 112408646554; deploy-pages 112408696326; deploy-worker skipped static; smoke-live 112409034310; release-status 112409133914; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37504028167",
+      "captured_at": "2026-10-06T17:35:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-SHARE-DISMISS",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-212"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-DISMISS-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "final public GitHub Pages 7669136 live deployment dismisses share feedback when the reader navigates and preserves the product-independent guide boundary.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&cachebust=7669136b; main workflow 37504028167 deploy-pages and smoke-live success; Chrome CDP fallback 390px: share toast visible before navigation and hidden after 120px scroll, research/expert/final headings present, documentWidth 390, errors=[]; 1440px hero headings present and documentWidth 1425; product-independent boundary matched; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=7669136b",
+      "captured_at": "2026-10-06T17:35:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-SHARE-DISMISS",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-212"]
     }
   ]
 }

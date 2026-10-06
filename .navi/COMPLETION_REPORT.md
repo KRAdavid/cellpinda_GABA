@@ -2313,3 +2313,14 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 증적: `E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007`, `E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007`, `E-CDP-MEDIUM-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007`.
+
+## Current Release Recheck — 7669136 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. PR #510이 main에 병합됐고 workflow `37504028167`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-003/AC-004 공유 피드백·읽기 흐름·반응형: PASS. 공개 390px에서 공유 직후 토스트가 표시되고 120px 스크롤 후 숨겨지며 연구·전문가 영상·마지막 장 제목이 보인다. document width는 390이고 errors `[]`다. 1440px에서도 hero와 핵심 제목이 정합했다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #510과 main workflow `37504028167`가 성공했다. 정적 자산 총량은 `1,648,979 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 공유 피드백 자동 해제만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+증적: `E-LOCAL-BUILD-SHARE-DISMISS-20261007`, `E-UI-CONTRACT-SHARE-DISMISS-20261007`, `E-CDP-SHARE-DISMISS-20261007`, `E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007`, `E-LIVE-PUBLIC-SHARE-DISMISS-20261007`.

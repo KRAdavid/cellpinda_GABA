@@ -2586,3 +2586,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007`, `E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007`, `E-CDP-MEDIUM-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007`.
+
+## 공유 피드백의 다음 장 가림 방지·공개 배포 — 7669136 — 2026-10-07
+
+- 독립 감사 관점에서 공유 확인 토스트가 4.2초 고정되어 사용자가 즉시 다음 장으로 이동할 때 전문가 영상·마지막 메시지 일부를 가릴 수 있는 잔여 UX 리스크를 확인했다.
+- 공유 직후에는 기존 피드백을 유지하고, 독자가 32px 이상 스크롤하면 토스트를 닫도록 보정했다. 기존 safe-area와 중간 폭 `공유하기` 라벨·350px 이하 아이콘 레일은 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #510, main workflow `37504028167`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 cache-busted 390·1440px에서 토스트 표시·스크롤 후 해제·연구·전문가 영상·마지막 장 제목·가로폭·오류 0을 확인했다.
+- 공개 과학 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SHARE-DISMISS-20261007`, `E-UI-CONTRACT-SHARE-DISMISS-20261007`, `E-CDP-SHARE-DISMISS-20261007`, `E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007`, `E-LIVE-PUBLIC-SHARE-DISMISS-20261007`.
