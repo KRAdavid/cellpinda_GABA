@@ -2103,3 +2103,45 @@
   .guide-sleep-chart-step .guide-outcome-chart{width:calc(100% + 43px);max-width:none;margin-left:-43px}
   .guide-sleep-chart-step .guide-outcome-comparison-guide-copy strong{white-space:normal;overflow-wrap:anywhere}
 }
+
+/* v148 research map atmosphere: give the five-area map a quiet scientific centre without adding copy. */
+.guide-research-map{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(222,249,248,.76) 0 2px,transparent 2px 42px),
+    linear-gradient(180deg,#fff 0%,#fbfeff 100%);
+}
+.guide-research-map::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:50%;
+  left:50%;
+  width:min(36%,420px);
+  aspect-ratio:1;
+  border:1px solid rgba(132,200,204,.2);
+  border-radius:50%;
+  box-shadow:0 0 0 26px rgba(132,200,204,.055),0 0 0 52px rgba(132,200,204,.035);
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.guide-research-map::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:50%;
+  left:50%;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#76c7ca;
+  box-shadow:0 0 0 7px rgba(118,199,202,.1),0 0 20px rgba(118,199,202,.18);
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.guide-research-orbit-core{
+  box-shadow:0 0 0 12px rgba(255,255,255,.72),0 0 30px rgba(18,154,163,.1);
+}
+@media(max-width:700px){
+  .guide-research-map::before{width:56%;box-shadow:0 0 0 18px rgba(132,200,204,.055),0 0 0 36px rgba(132,200,204,.035)}
+  .guide-research-orbit-core{box-shadow:0 0 0 8px rgba(255,255,255,.72),0 0 23px rgba(18,154,163,.1)}
+}
