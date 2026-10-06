@@ -2347,6 +2347,16 @@
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006`, `E-CDP-RESEARCH-MAP-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006`.
 
+## Current Release Recheck — 65eed515 — 2026-10-06
+
+- AC-001 공개 URL·Pages·candidate 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `65eed5159bfde50dec7087d26441186390e59dc6`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-002/AC-003 연구 지도 첫 진입 흐름: PASS. 390px에서 첫 진입 시 `인지`가 기본 선택되고 `현재 선택 · 인지`와 `06 / 12 · 연구 01 / 05`가 보이며, `피부` 선택 시 `피부 연구 결과`·`#research-skin`·`06 / 12 · 연구 02 / 05`로 연결된다.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #453 및 main workflow `37435517535`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 연구 수치·출처·제품 독립 경계: PASS. 이번 변경은 연구 지도의 기본 선택·탐색 흐름과 계약 검사만 보정했으며 카피·수치·출처·제품 경계는 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006`, `E-CDP-RESEARCH-MAP-FIRST-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.

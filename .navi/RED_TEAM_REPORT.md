@@ -1828,3 +1828,11 @@
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006`, `E-CDP-RESEARCH-MAP-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006`.
+
+## Recheck — 2026-10-06 — 65eed515
+
+- Red-team finding: 연구 지도는 시각적으로 정리됐지만 첫 진입에서 활성 주제가 없어 다음 읽을 카드가 즉시 지정되지 않는 작은 흐름 단절이 있었다. 첫 연구 주제 `인지`를 기본 선택으로 연결하고, 공유 해시는 계속 우선하도록 보정했다.
+- Recheck: local/public 390px Chrome CDP fallback; default `인지`, `피부` 선택 후 card/hash/progress synchronization, document/body scrollWidth 390px, page/console errors 0; no science/copy/product changes.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006`, `E-CDP-RESEARCH-MAP-FIRST-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006`.

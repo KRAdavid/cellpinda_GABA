@@ -1607,3 +1607,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006`, `E-CDP-RESEARCH-MAP-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006`.
+
+## 연구 지도 첫 주제 연결·공개 배포 — 65eed515 — 2026-10-06
+
+- 연구 지도 첫 진입에서 `인지`를 기본 선택해 지도에서 첫 연구 카드로 바로 이어지는 흐름을 만들었다. 공유된 연구 카드 해시는 계속 우선한다.
+- PR #453, main workflow 37435517535, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 390px 검증을 완료했다.
+- 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006`, `E-CDP-RESEARCH-MAP-FIRST-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006`.
