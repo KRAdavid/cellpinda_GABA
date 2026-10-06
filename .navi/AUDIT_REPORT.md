@@ -2443,6 +2443,15 @@
 
 증적: `E-LOCAL-BUILD-ACADEMIC-MAP-SEQUENCE-20261006`, `E-UI-CONTRACT-ACADEMIC-MAP-SEQUENCE-20261006`, `E-CDP-ACADEMIC-MAP-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-MAP-SEQUENCE-20261006`, `E-LIVE-PUBLIC-ACADEMIC-MAP-SEQUENCE-20261006`.
 
+## 일상 속 GABA 카드 순서·공개 배포 — df90375 — 2026-10-06
+
+- Red-team finding: 일상 속 GABA 카드가 `01`–`05`만 보여 긴 흐름에서 현재 장면과 전체 장면 수를 한 번 더 해석해야 하는 작은 가독성 리스크가 있었다. 카드 표식을 `01 / 05`부터 `05 / 05`까지 명시하고 번호 대비·줄바꿈을 보정했다.
+- Recheck: 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 Chrome CDP fallback 390·1440px에서 5개 순서 표식, 카드 폭, pageWidth, page/console errors 0을 확인했다. 카드 문구·과학 정보·출처·제품 독립 공개 경계는 변경하지 않았다.
+- PR #473과 main workflow `37458317176`, 공개 validator candidate `df90375`·HTTP 200·71개 bundle hash·provenance matched가 성공했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EVERYDAY-CARD-SEQUENCE-20261006`, `E-UI-CONTRACT-EVERYDAY-CARD-SEQUENCE-20261006`, `E-CDP-EVERYDAY-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EVERYDAY-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.

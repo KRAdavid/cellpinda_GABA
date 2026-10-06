@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 일상 속 GABA 카드 순서 표식·공개 배포 — df90375 — 2026-10-06
+
+- 일상 속 GABA 5개 카드에 `01 / 05`–`05 / 05` 순서 표식을 적용해 모바일·데스크톱에서 일상 흐름을 빠르게 읽도록 했다. 카드 문구·과학 정보·출처·제품 독립 공개 경계는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산·PR #473·main Pages·라이브 smoke·release-status·공개 validator·Chrome CDP fallback 390·1440px 검증을 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-EVERYDAY-CARD-SEQUENCE-20261006`, `E-UI-CONTRACT-EVERYDAY-CARD-SEQUENCE-20261006`, `E-CDP-EVERYDAY-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EVERYDAY-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006`.
+
 ## 연구 지도 영역 순서 표식·공개 배포 — a66d8e5 — 2026-10-06
 
 - 연구 지도 5개 학술 영역 카드에 `01 / 05`–`05 / 05` 순서 표식을 추가해 모바일·데스크톱에서 연구 확장 흐름을 빠르게 읽도록 했다. 학술 내용·수치·출처·제품 독립 공개 경계는 변경하지 않았다.

@@ -2100,6 +2100,18 @@
         "E-LIVE-PUBLIC-ACADEMIC-MAP-SEQUENCE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-198",
+      "statement": "일상 속 GABA 5개 카드에 `01 / 05`부터 `05 / 05`까지 현재 장면과 전체 장면 수를 표시해 모바일·데스크톱에서 일상 흐름을 빠르게 읽을 수 있게 하며, 카드 문구·과학 정보·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EVERYDAY-CARD-SEQUENCE-20261006",
+        "E-UI-CONTRACT-EVERYDAY-CARD-SEQUENCE-20261006",
+        "E-CDP-EVERYDAY-CARD-SEQUENCE-20261006",
+        "E-DEPLOY-PIPELINE-EVERYDAY-CARD-SEQUENCE-20261006",
+        "E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14586,6 +14598,59 @@
       "captured_at": "2026-10-06T11:36:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-ACADEMIC-MAP-SEQUENCE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-197"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EVERYDAY-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "일상 속 GABA 카드 순서 표식 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "code commit 0aed20b; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1647492 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T11:41:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-EVERYDAY-CARD-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-198"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EVERYDAY-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "일상 속 GABA 5개 카드에 `01 / 05`부터 `05 / 05`까지 순서를 노출하고 번호 라벨을 한 줄로 읽히도록 보정했으며 기존 문구·접근성 구조를 유지하도록 UI 계약을 확인했다.",
+      "locator": "src/components/PublicGabaGuide.tsx everydayTopics.map; aria-label `${index + 1}번째 일상 장면 중 ${everydayTopics.length}개`; src/components/PublicGabaGuide.css .guide-everyday-number; font-size 10px; color #668894; white-space nowrap; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T11:41:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-EVERYDAY-CARD-SEQUENCE",
+      "claim_refs": ["C-001", "C-003", "C-198"]
+    },
+    {
+      "id": "E-CDP-EVERYDAY-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 390px·1440px 일상 카드 직접 링크를 확인했으며 5개 순서 표식, 카드 폭, 섹션 정렬과 page/console 오류 상태가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=everyday-card-audit-public-20261006#everyday; viewports 390x844 and 1440x900; markers [`01 / 05`, `02 / 05`, `03 / 05`, `04 / 05`, `05 / 05`]; pageWidth 390 and 1425; card widths 350px mobile and 228px desktop; pageErrors 0; consoleErrors 0; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-everyday-cards-390.png and C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-everyday-cards-1440.png inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=everyday-card-audit-public-20261006#everyday",
+      "captured_at": "2026-10-06T11:47:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-EVERYDAY-CARD-SEQUENCE",
+      "claim_refs": ["C-003", "C-004", "C-198"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EVERYDAY-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "일상 속 GABA 카드 순서 보정 PR #473이 필수 검사를 통과해 main merge commit df90375로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #473; code commit 0aed20b; PR release-verify run 37458146120 job 112250730029 successful; site-quality-verify run 37458146543 job 112250729904 successful; main merge commit df90375ade5323334b79ef13e25fd2cba173981d; workflow_dispatch run 37458317176; release-verify 112251919921; worker-readiness 112252412994; deploy-pages 112252440180; deploy-worker 112252441993 skipped by STATIC_ONLY; smoke-live 112252657445; release-status 112252740064; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37458317176",
+      "captured_at": "2026-10-06T11:51:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-EVERYDAY-CARD-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-198"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 일상 속 GABA 카드 5개 순서 표시가 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T11:46:25.917Z; page 200; runtimeMode STATIC; candidateSha df90375ade5323334b79ef13e25fd2cba173981d; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·1440px screenshots show all five markers and page/console errors 0; everyday copy, sources, data and product boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=everyday-card-audit-public-20261006#everyday",
+      "captured_at": "2026-10-06T11:51:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EVERYDAY-CARD-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-198"]
     }
   ]
 }

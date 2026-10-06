@@ -2154,3 +2154,13 @@ Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI `USER_DECISION`; 완료 
 - Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-ACADEMIC-MAP-SEQUENCE-20261006`, `E-UI-CONTRACT-ACADEMIC-MAP-SEQUENCE-20261006`, `E-CDP-ACADEMIC-MAP-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-MAP-SEQUENCE-20261006`, `E-LIVE-PUBLIC-ACADEMIC-MAP-SEQUENCE-20261006`.
+
+## Current Release Recheck — df90375 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `df90375ade5323334b79ef13e25fd2cba173981d`·HTTP 200·STATIC·71개 bundle hash·provenance `matched`를 확인했다.
+- AC-003/AC-004 일상 카드 흐름·반응형: PASS. 390·1440px 직접 링크에서 5개 카드가 `01 / 05`부터 `05 / 05`까지 표시되고, 모바일 카드 폭 350px·데스크톱 카드 폭 228px과 pageWidth가 유지되며 page/console errors 0이다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #473, main workflow `37458317176`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 카드 문구·과학 정보·출처·제품 독립 공개 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-EVERYDAY-CARD-SEQUENCE-20261006`, `E-UI-CONTRACT-EVERYDAY-CARD-SEQUENCE-20261006`, `E-CDP-EVERYDAY-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EVERYDAY-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006`.
