@@ -1860,3 +1860,11 @@
 - PR #459, main workflow `37442415197`, 공개 validator candidate `449d65a`·HTTP 200·71 bundle hashes가 성공했다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-COMPARISON-VERDICT-20261006`, `E-UI-CONTRACT-COMPARISON-VERDICT-20261006`, `E-CDP-COMPARISON-VERDICT-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006`, `E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006`.
+
+## Recheck — 2026-10-06 — 81c91d2
+
+- Red-team finding: 비교 도표의 결과 요약은 `GABA 그룹`인데 조건 레인은 `GABA 섭취`로 표시되어 모바일 독자가 같은 대상을 한 번 더 해석해야 했다. 인지·수면 비교 도표의 조건 레인과 결과 요약을 `GABA 그룹`으로 통일했다.
+- Recheck: 공개 Chrome CDP fallback 390x844 deep link에서 두 비교 레인과 결과 요약에 `GABA 그룹`이 표시되고 `GABA 섭취`는 해당 도표에서 사라졌으며 document/body scrollWidth 375px, page/console errors 0을 확인했다. 연구 내용·수치·출처·접근성 설명·제품 독립 경계는 변경하지 않았다.
+- PR #461, main workflow `37444743950`, 공개 validator candidate `81c91d2`·HTTP 200·71 bundle hashes가 성공했다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006`.

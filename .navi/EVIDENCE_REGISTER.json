@@ -2028,6 +2028,18 @@
         "E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-192",
+      "statement": "인지·수면 비교 도표는 비교 조건명과 결과 요약의 GABA 대상을 `GABA 그룹`으로 통일해 모바일에서 같은 대상을 같은 이름으로 읽게 하며, 연구 내용·수치·출처는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006",
+        "E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006",
+        "E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006",
+        "E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006",
+        "E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14196,6 +14208,59 @@
       "captured_at": "2026-10-06T09:24:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-COMPARISON-VERDICT",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-191"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "인지·수면 비교 도표 조건명 일관성 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 8b32d75; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1645590 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T09:40:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-COMPARISON-LABEL-CONSISTENCY",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-192"]
+    },
+    {
+      "id": "E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "인지·수면 비교 도표의 visible resultLabel을 `GABA 그룹`으로 통일하고, 기존 요약·결과·출처·접근성 chart description 구조를 유지하도록 UI 계약을 확인했다.",
+      "locator": "src/components/PublicGabaGuide.tsx; cognition.chart.resultLabel `GABA 그룹`; sleepResultTopic.chart.resultLabel `GABA 그룹`; scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T09:40:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-COMPARISON-LABEL-CONSISTENCY",
+      "claim_refs": ["C-001", "C-003", "C-192"]
+    },
+    {
+      "id": "E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 최종 공개 390px cognition deep link를 확인했으며 두 비교 레인과 결과 요약이 모두 `GABA 그룹`으로 읽히고 이전 `GABA 섭취` 라벨은 해당 도표에 없으며 가로 넘침과 페이지·콘솔 오류가 없었다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=comparison-label-final-20261006#research-cognition; viewport 390x844; contentWidth 375; document/body scrollWidth 375; chart text contains `비교 조건`, `GABA 그룹`, `뇌파 변화`, `활력 점수`, `덜 줄었습니다`; `GABA 섭취` absent; pageErrors 0; consoleErrors 0; screenshot inspected with view_image at C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-comparison-consistency-390.png",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=comparison-label-final-20261006#research-cognition",
+      "captured_at": "2026-10-06T09:43:01Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-COMPARISON-LABEL-CONSISTENCY",
+      "claim_refs": ["C-003", "C-004", "C-192"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "비교 도표 조건명 일관성 보정 PR #461이 필수 검사를 통과해 main merge commit 81c91d2로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #461; code commit 8b32d75; PR checks release-verify 112206296682 and site-quality-verify 112206297449 successful; main merge commit 81c91d2b96c1e8057a81272cda1cff8d2b7fe1a0; main workflow 37444743950; release-verify 112206743808; worker-readiness 112207263588; deploy-pages 112207305989; deploy-worker 112207307729 skipped by STATIC_ONLY; smoke-live 112207404105; release-status 112207478051; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37444743950",
+      "captured_at": "2026-10-06T09:43:01Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-COMPARISON-LABEL-CONSISTENCY",
+      "claim_refs": ["C-001", "C-002", "C-192"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본에서 인지·수면 비교 도표의 GABA 조건명이 일관되게 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T09:43:01.133Z; page 200; runtimeMode STATIC; candidateSha 81c91d2b96c1e8057a81272cda1cff8d2b7fe1a0; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px comparison screenshot shows `GABA 그룹` in both lanes and no `GABA 섭취` label; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=comparison-label-final-20261006#research-cognition",
+      "captured_at": "2026-10-06T09:43:01Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-COMPARISON-LABEL-CONSISTENCY",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-192"]
     }
   ]
 }
