@@ -1720,6 +1720,18 @@
         "E-LIVE-PUBLIC-READING-HANDOFF-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-166",
+      "statement": "연구 원문 읽기에서 이야기 공유로 이어지는 내부 전환은 데스크톱 editorial grid 전체 폭 안에서 목적지 라벨과 화살표를 안정적으로 정렬하고, 모바일에서는 2행 흐름을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-READING-GRID-20261006",
+        "E-UI-CONTRACT-READING-GRID-20261006",
+        "E-PLAYWRIGHT-READING-GRID-20261006",
+        "E-DEPLOY-PIPELINE-READING-GRID-20261006",
+        "E-LIVE-PUBLIC-READING-GRID-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12551,6 +12563,58 @@
       "captured_at": "2026-10-06T00:40:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-READING-HANDOFF",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-165"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-READING-GRID-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 원문·이야기 공유 전환의 전체 editorial grid 정렬과 회귀 방지 UI 계약이 포함된 공개 사이트 빌드가 기준을 통과했다.",
+      "locator": "commit c399c4793f6d89d7af17ed4d6ccd9b44af9db42f; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1632643 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T01:05:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-READING-GRID",
+      "claim_refs": ["C-001", "C-003", "C-166"]
+    },
+    {
+      "id": "E-UI-CONTRACT-READING-GRID-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 연구 원문·이야기 공유 전환의 내부 이동과 desktop editorial grid 전체폭 정렬 계약을 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; guide-reading-note-handoff scrollTo('final') assertion; v133 source-to-share bridge style assertion for grid-column:1/-1; status ok",
+      "captured_at": "2026-10-06T01:05:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-READING-GRID",
+      "claim_refs": ["C-166"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-READING-GRID-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 GitHub Pages에서 전환 버튼 내부 폭과 콘텐츠 폭이 모바일·데스크톱에서 일치하고, 클릭하면 이야기 공유 장으로 이동한다.",
+      "locator": "temporary Playwright Chromium fallback script outside repository; public https://kradavid.github.io/gaba_info/?view=guide&qa=reading-handoff-grid-live-final-20261006#reading-note; 390px button width 350/clientWidth 350/scrollWidth 350, 1440px width 1180/clientWidth 1180/scrollWidth 1180; click -> hash #final, activeElement final-heading, heading visible, document scrollWidth equals viewport, page errors 0, console error messages 0; screenshots reviewed outside repository",
+      "captured_at": "2026-10-06T01:03:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-READING-GRID",
+      "claim_refs": ["C-003", "C-004", "C-166"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-READING-GRID-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 원문 전환 그리드 정렬 PR #411이 필수 검사를 통과해 main merge commit 9f0ec68로 병합되었고 Pages 배포·라이브 smoke·release-status·site-quality가 성공했다.",
+      "locator": "PR #411; code commit c399c4793f6d89d7af17ed4d6ccd9b44af9db42f; main merge commit 9f0ec68c8acc8c5ee6246cb0e262a95db5e68d3b; main workflow 37397023527; site-quality workflow 37396881307; release-verify 112055297934, worker-readiness 112055659551, deploy-pages 112055691002, smoke-live 112055786990 and release-status 112055857506 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37397023527",
+      "captured_at": "2026-10-06T01:08:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-READING-GRID",
+      "claim_refs": ["C-001", "C-002", "C-166"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-READING-GRID-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 원문·이야기 공유 전환이 모바일·데스크톱에서 안정적으로 정렬되고 이야기 공유 장으로 정상 이동한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 9f0ec68c8acc8c5ee6246cb0e262a95db5e68d3b; generatedAt 2026-10-06T01:02:18.495Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 390/1440px button bounds matched client/scroll width, click -> hash #final, activeElement final-heading, heading visible, document scrollWidth equals viewport, page errors 0, console error messages 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=reading-handoff-grid-live-final-20261006#reading-note",
+      "captured_at": "2026-10-06T01:03:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-READING-GRID",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-166"]
     }
   ]
 }

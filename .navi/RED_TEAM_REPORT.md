@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Source-to-Share Grid Alignment — 2026-10-06 — 9f0ec68
+
+- 공격 관점에서 연구 원문 읽기 장의 전환 띠가 데스크톱 전체 편집 그리드 안에 있고 `이야기 공유` 라벨과 화살표가 버튼 영역을 벗어나지 않는지 확인했다. 모바일 390px에서는 기존 2행 구조를 유지한다.
+- 390px·1440px 공개 화면에서 버튼 폭과 내부 콘텐츠 폭이 일치하고, 클릭 뒤 `#final`·`final-heading` 포커스·viewport와 동일한 scrollWidth·page errors 0·console errors 0을 확인했다. 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-PLAYWRIGHT-READING-GRID-20261006`, `E-LIVE-PUBLIC-READING-GRID-20261006`, `E-DEPLOY-PIPELINE-READING-GRID-20261006`.
+
 ## Source Reading to Story Sharing — 2026-10-06 — 84fd53b
 
 - 공격 관점에서 연구 원문 읽기 장의 마지막 전환 카드를 확인했다. 카드에는 외부 링크가 없고 `scrollTo('final')`로 이야기 공유 장을 열며, 클릭 뒤 `final-heading`에 포커스가 도착한다.

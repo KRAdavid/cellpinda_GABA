@@ -1,5 +1,13 @@
 # Completion Report
 
+## Current Release Recheck — 9f0ec68 — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `9f0ec68c8acc8c5ee6246cb0e262a95db5e68d3b`와 71개 bundle hash를 확인했다.
+- AC-004/AC-005 연구 원문 읽기에서 이야기 공유로 이어지는 전환 띠의 데스크톱 전체폭 정렬: PASS. 공개 390px·1440px에서 버튼 내부 정렬·가로폭·클릭 후 `#final`·`final-heading` 포커스·page errors·console errors 0을 확인했다. UI 계약·typecheck·127개 테스트·production build·성능 예산도 통과했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-READING-GRID-20261006`, `E-UI-CONTRACT-READING-GRID-20261006`, `E-PLAYWRIGHT-READING-GRID-20261006`, `E-DEPLOY-PIPELINE-READING-GRID-20261006`, `E-LIVE-PUBLIC-READING-GRID-20261006`.
+
 ## Current Release Recheck — 84fd53b — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `84fd53bfc9d4c02673f4797839ad79d7ad7c52b3`와 71개 bundle hash를 확인했다.

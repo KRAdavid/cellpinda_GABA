@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 원문·이야기 공유 전환 그리드 정렬 — 9f0ec68 — 2026-10-06
+
+- 데스크톱에서 연구 원문 마지막 전환의 목적지 라벨과 화살표가 왼쪽 열 폭을 넘어갈 수 있던 문제를 보완해 전체 editorial grid 안에서 정렬했다.
+- 모바일 390px의 2행 흐름은 유지했으며, UI 계약·typecheck·127개 테스트·production build·Playwright 390·1440px 공개 상호작용 검증을 통과했다. PR #411이 main `9f0ec68`로 병합되었고 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-READING-GRID-20261006`, `E-UI-CONTRACT-READING-GRID-20261006`, `E-PLAYWRIGHT-READING-GRID-20261006`, `E-DEPLOY-PIPELINE-READING-GRID-20261006`, `E-LIVE-PUBLIC-READING-GRID-20261006`.
+
 ## 연구 원문에서 이야기 공유로 이어지는 내부 전환 — 84fd53b — 2026-10-06
 
 - 연구 원문을 읽은 뒤 외부 링크 없이 `연구를 읽는 기준에서 공유 가능한 이야기로` 전환하는 카드를 추가해 공개 안내서의 마지막 편집 흐름을 완성했다.

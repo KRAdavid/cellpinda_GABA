@@ -1,5 +1,14 @@
 # Audit Report
 
+## Source-to-Share Grid Alignment — 9f0ec68 — 2026-10-06
+
+- 데스크톱에서 연구 원문 읽기 장의 마지막 `이야기 공유` 전환이 왼쪽 열을 넘어 보일 수 있던 편집 정렬 문제를 확인하고, 전환 띠를 전체 editorial grid로 확장했다. 모바일에서는 기존 2행 구조를 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 공개 Playwright Chromium fallback 390px·1440px에서 버튼 폭과 내부 콘텐츠 폭이 일치하고, 클릭 후 `#final`, `final-heading` 포커스, viewport와 동일한 scrollWidth, page errors 0·console errors 0을 확인했다.
+- PR #411은 main `9f0ec68`로 병합되었고 workflow `37397023527`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 site-quality workflow `37396881307`이 성공했다. 공개 validator는 candidate `9f0ec68c8acc8c5ee6246cb0e262a95db5e68d3b`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-READING-GRID-20261006`, `E-UI-CONTRACT-READING-GRID-20261006`, `E-PLAYWRIGHT-READING-GRID-20261006`, `E-DEPLOY-PIPELINE-READING-GRID-20261006`, `E-LIVE-PUBLIC-READING-GRID-20261006`.
+
 ## Source Reading to Story Sharing — 84fd53b — 2026-10-06
 
 - 연구 원문을 읽은 뒤 마지막 공유 장으로 바로 이어지는 `연구를 읽는 기준에서 공유 가능한 이야기로` 내부 전환 카드를 추가했다. 외부 링크로 흐름을 끊지 않고 기존 `scrollTo('final')`·헤딩 포커스 전달을 사용한다.
