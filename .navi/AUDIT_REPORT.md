@@ -2415,6 +2415,16 @@
 
 증적: `E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006`.
 
+## Current Release Recheck — fc61732 — 2026-10-06
+
+- AC-001: PASS — live validator 200, candidate `fc617329e60bdf4f155e1c0c4bc273833bd36447`, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal operations snapshot excluded, Smart Store only, 750 removed, provenance matched.
+- AC-003/AC-004: PASS — 351–380px 공개 모바일 헤더에서 `가+ 글자` 라벨과 60x44px 읽기 조절 버튼을 표시하고, 메뉴·공유 44px 컨트롤과 겹치지 않으며 큰 글씨 전환 후 `가− 기본` 상태가 유지된다. Chrome CDP fallback 360px에서 document scrollWidth 360, page errors 0을 확인했다.
+- AC-005: PASS — UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #467, 재시작한 main workflow `37453296672`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006: PASS — 이번 변경은 중간 폭 헤더의 읽기 조절 기능명과 배치만 보정했으며 연구 내용·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·고령 사용자·독립 과학·규제 검토는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006`, `E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006`, `E-CDP-MID-NARROW-TYPE-CONTROL-20261006`, `E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006`, `E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.
