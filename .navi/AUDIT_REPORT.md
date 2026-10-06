@@ -1,5 +1,14 @@
 # Audit Report
 
+## Opening Bridge Chapter Handoff — 658eb99 — 2026-10-06
+
+- 수면·회복 도입부 마지막에 `회복의 균형에서 GABA의 발견으로` 내부 전환 카드를 추가했다. 외부 페이지로 흐름을 끊지 않고 기존 `scrollTo('history')`·헤딩 포커스 전달을 사용해 다음 장으로 자연스럽게 이어진다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 로컬 Playwright Chromium fallback 390px·1440px에서 카드 표시, 클릭 후 `#history`, `history-heading` 포커스, viewport와 동일한 scrollWidth, page errors 0·console errors 0을 확인했다.
+- PR #407은 main `658eb99`로 병합되었고 workflow `37393189113`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `658eb99672fcf8031d7c82b606a4aa0a5eb28a31`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다. 공개 Playwright Chromium fallback 390px·1440px에서도 같은 클릭 이동과 포커스를 재현했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-OPENING-HANDOFF-20261006`, `E-UI-CONTRACT-OPENING-HANDOFF-20261006`, `E-PLAYWRIGHT-OPENING-HANDOFF-20261006`, `E-DEPLOY-PIPELINE-OPENING-HANDOFF-20261006`, `E-LIVE-PUBLIC-OPENING-HANDOFF-20261006`.
+
 ## Recovery Playback Status Accessibility — 0880c55 — 2026-10-06
 
 - 수면·회복 14단계 카드의 자동 진행 상태를 화면에서도 `자동 진행 · 3초마다`·`일시정지`로 구분하고, 상태 영역에 `aria-live="polite"`·`aria-atomic="true"`를 부여해 화면낭독기가 상태 변화를 한 문장으로 읽도록 보강했다. 모션 감소 환경의 `사용자 진행` 상태와 기존 수동 토글 흐름은 유지했다.

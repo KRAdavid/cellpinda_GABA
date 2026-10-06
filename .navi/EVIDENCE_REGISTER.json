@@ -1696,6 +1696,18 @@
         "E-LIVE-PUBLIC-RECOVERY-STATUS-A11Y-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-164",
+      "statement": "수면·회복 도입부는 외부 링크 없이 `회복의 균형에서 GABA의 발견으로` 이어지는 내부 전환 카드를 제공하고, 선택하면 `#history`와 GABA 발견 장 헤딩으로 이동한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-OPENING-HANDOFF-20261006",
+        "E-UI-CONTRACT-OPENING-HANDOFF-20261006",
+        "E-PLAYWRIGHT-OPENING-HANDOFF-20261006",
+        "E-DEPLOY-PIPELINE-OPENING-HANDOFF-20261006",
+        "E-LIVE-PUBLIC-OPENING-HANDOFF-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12423,6 +12435,58 @@
       "captured_at": "2026-10-05T23:53:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RECOVERY-STATUS-A11Y",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-163"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-OPENING-HANDOFF-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면·회복 도입부에서 GABA 발견 장으로 이어지는 내부 전환 카드와 회귀 방지 UI 계약이 포함된 공개 사이트 빌드가 기준을 통과했다.",
+      "locator": "commit e6a29aa; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1631982 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T00:12:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261006-OPENING-HANDOFF",
+      "claim_refs": ["C-001", "C-003", "C-164"]
+    },
+    {
+      "id": "E-UI-CONTRACT-OPENING-HANDOFF-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 수면·회복 도입부의 내부 전환 카드가 history 장으로 이동하고 회복·발견 문구를 유지하는지 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; guide-opening-bridge-handoff assertion; `scrollTo('history')`; `회복의 균형에서 GABA의 발견으로`; `GABA의 발견`; status ok",
+      "captured_at": "2026-10-06T00:12:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-OPENING-HANDOFF",
+      "claim_refs": ["C-164"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-OPENING-HANDOFF-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 대표 화면에서 수면·회복 도입부의 다음 장 카드를 실제로 클릭하면 GABA 발견 장으로 이동하고 헤딩 포커스가 도착한다.",
+      "locator": "temporary Playwright Chromium fallback script outside repository; local http://127.0.0.1:4191/?view=guide&qa=opening-handoff-20261006#opening-bridge; 390/1440px handoff visible, click -> hash #history, activeElement history-heading, heading visible, document scrollWidth equals viewport, page errors 0, console error messages 0; screenshots reviewed outside repository",
+      "captured_at": "2026-10-06T00:14:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-OPENING-HANDOFF",
+      "claim_refs": ["C-003", "C-004", "C-164"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-OPENING-HANDOFF-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면·회복 도입부 전환 카드 개선 PR #407이 필수 검사를 통과해 main merge commit 658eb99로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #407; code commit e6a29aa; main merge commit 658eb99672fcf8031d7c82b606a4aa0a5eb28a31; main workflow 37393189113; release-verify 112042855497, worker-readiness 112043213596, deploy-pages 112043241905, smoke-live 112043302016 and release-status 112043359943 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37393189113",
+      "captured_at": "2026-10-06T00:19:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-OPENING-HANDOFF",
+      "claim_refs": ["C-001", "C-002", "C-164"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-OPENING-HANDOFF-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 수면·회복 도입부의 내부 전환 카드가 모바일·데스크톱에서 읽히고 GABA 발견 장으로 정상 이동한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 658eb99672fcf8031d7c82b606a4aa0a5eb28a31; generatedAt 2026-10-06T00:18:11.264Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 390/1440px handoff visible, click -> hash #history, activeElement history-heading, heading visible, document scrollWidth equals viewport, page errors 0, console error messages 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=opening-handoff-live-20261006#opening-bridge",
+      "captured_at": "2026-10-06T00:19:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-OPENING-HANDOFF",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-164"]
     }
   ]
 }

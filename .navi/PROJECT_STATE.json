@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-05T23:57:00.206834Z",
+  "updated_at": "2026-10-06T00:20:45.290114Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-05T12:23:48Z"
+    "last_run_at": "2026-10-06T00:19:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-05T12:23:48Z"
+    "last_run_at": "2026-10-06T00:19:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5215,6 +5215,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-05T23:53:00Z"
+    },
+    {
+      "id": "H-242",
+      "event": "수면·회복 도입부의 편집적 공백을 보완하기 위해 `회복의 균형에서 GABA의 발견으로` 내부 전환 카드를 추가했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 390px·1440px Playwright Chromium fallback에서 카드 표시·클릭 후 `#history`·`history-heading` 포커스·가로폭·page/console errors 0을 확인했다. PR #407은 main `658eb99`로 병합됐고 workflow `37393189113`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `658eb99672fcf8031d7c82b606a4aa0a5eb28a31`·HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 확인했고, 공개 Playwright에서도 같은 이동을 재현했다. 새 CRITICAL/MAJOR 결함은 없고 C-164와 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T00:20:45Z"
     }
   ]
 }

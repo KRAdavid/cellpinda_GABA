@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 수면·회복에서 GABA 발견으로 이어지는 내부 전환 — 658eb99 — 2026-10-06
+
+- 수면·회복 도입부에 `회복의 균형에서 GABA의 발견으로` 전환 카드를 추가해 외부 링크 없이 다음 장으로 자연스럽게 이어지도록 했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 390·1440px 공개 상호작용 검증을 통과했고 PR #407이 main `658eb99`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-OPENING-HANDOFF-20261006`, `E-UI-CONTRACT-OPENING-HANDOFF-20261006`, `E-PLAYWRIGHT-OPENING-HANDOFF-20261006`, `E-DEPLOY-PIPELINE-OPENING-HANDOFF-20261006`, `E-LIVE-PUBLIC-OPENING-HANDOFF-20261006`.
+
 ## 회복 상태 접근성 전달·공개 배포 — 0880c55 — 2026-10-06
 
 - 수면·회복 카드의 `자동 진행 · 3초마다`·`일시정지`·`사용자 진행` 상태가 화면뿐 아니라 화면낭독기에도 자연스럽게 전달되도록 `aria-live="polite"`·`aria-atomic="true"`를 추가했다.

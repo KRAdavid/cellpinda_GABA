@@ -1,5 +1,13 @@
 # Completion Report
 
+## Current Release Recheck — 658eb99 — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `658eb99672fcf8031d7c82b606a4aa0a5eb28a31`와 71개 bundle hash를 확인했다.
+- AC-004/AC-005 수면·회복 도입부의 내부 전환 카드: PASS. 390px·1440px 공개 화면에서 `회복의 균형에서 GABA의 발견으로`를 표시하고, 클릭 후 `#history`·`history-heading` 포커스·가로폭·page errors·console errors 0을 확인했다. UI 계약·typecheck·127개 테스트·production build·성능 예산도 통과했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-OPENING-HANDOFF-20261006`, `E-UI-CONTRACT-OPENING-HANDOFF-20261006`, `E-PLAYWRIGHT-OPENING-HANDOFF-20261006`, `E-DEPLOY-PIPELINE-OPENING-HANDOFF-20261006`, `E-LIVE-PUBLIC-OPENING-HANDOFF-20261006`.
+
 ## Current Release Recheck — 0880c55 — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `0880c55b1de66bffeeb0d9d86fd97f51ed660d23`와 71개 bundle hash를 확인했다.
