@@ -2102,3 +2102,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·고령 사용자·독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006`.
+
+## Current Release Recheck — de96345 — 2026-10-06
+
+- AC-001: PASS — live validator 200, candidate `de963459940fd475b2802180d485523caa4c0b3b`, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal operations snapshot excluded, Smart Store only, 750 removed, provenance matched.
+- AC-003/AC-004: PASS — 국내외 활용 카드에 `01 / 03`, `02 / 03`, `03 / 03`이 보이며 390·1440px에서 이미지·제목·본문의 계층과 폭이 유지된다. `#applications` 다음 장 이동은 `#fermented-safety`로 확인되며 page/console errors 0이다.
+- AC-005: PASS — UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #463, main workflow `37447228688`의 필수 배포 검사가 성공했다.
+- AC-006: PASS — 이번 변경은 국내외 활용 카드의 편집 순서 표식과 스타일만 추가했으며 연구 카피·수치·출처·접근성 설명·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·고령 사용자·독립 과학·규제 검토는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-APPLICATION-FLOW-INDEX-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-INDEX-20261006`, `E-CDP-APPLICATION-FLOW-INDEX-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-INDEX-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-INDEX-20261006`.

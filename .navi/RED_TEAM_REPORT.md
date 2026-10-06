@@ -1868,3 +1868,11 @@
 - PR #461, main workflow `37444743950`, 공개 validator candidate `81c91d2`·HTTP 200·71 bundle hashes가 성공했다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006`.
+
+## Recheck — 2026-10-06 — de96345
+
+- Red-team finding: 국내외 활용 카드에는 지역·분야 정보가 있었지만 카드 간 순서가 시각적으로 명시되지 않아 모바일에서 국내·일본·세계의 흐름을 한 번 더 해석해야 했다. 카드 상단에 `01 / 03`, `02 / 03`, `03 / 03` 표식을 추가했다.
+- Recheck: 공개 Chrome CDP fallback 390x844·1440x900에서 세 표식, 이미지·본문 계층, document/body scrollWidth 375·1425px, page/console errors 0을 확인했다. 활용 다음 장 버튼은 `#applications`에서 `#fermented-safety`로 이동했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- PR #463, main workflow `37447228688`, 공개 validator candidate `de96345`·HTTP 200·71 bundle hashes가 성공했다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-APPLICATION-FLOW-INDEX-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-INDEX-20261006`, `E-CDP-APPLICATION-FLOW-INDEX-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-INDEX-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-INDEX-20261006`.
