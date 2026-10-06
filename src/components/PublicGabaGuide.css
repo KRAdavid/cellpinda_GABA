@@ -1296,19 +1296,13 @@
 
 /* v26 mobile title clearance: keep every chapter heading below the sticky reading rail at section entry. */
 @media(max-width:700px){
-  .guide-section.guide-story-section{padding-top:110px}
-  .guide-recovery-break{padding-top:110px}
-  .guide-final{padding-top:110px}
+  .guide-section.guide-story-section,.guide-recovery-break,.guide-final{padding-top:58px}
 }
 
 /* v108 chapter entry rhythm: scroll-margin already clears the sticky header, so avoid a second oversized top gap. */
 @media(min-width:701px){
   .guide-section.guide-story-section{padding-top:72px}
   .guide-final{padding-top:72px}
-}
-@media(max-width:700px){
-  .guide-section.guide-story-section{padding-top:58px}
-  .guide-final{padding-top:58px}
 }
 
 /* Programmatic chapter focus supports screen-reader navigation without drawing a box around editorial headings. */
