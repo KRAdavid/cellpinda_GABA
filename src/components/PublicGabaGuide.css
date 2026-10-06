@@ -2228,14 +2228,10 @@
 .guide-section,.guide-balance-band,.guide-sources{scroll-margin-top:126px}
 @media(max-width:700px){.guide-section,.guide-balance-band,.guide-sources{scroll-margin-top:116px}}
 
-/* v161 ultra-narrow comparison cards: give the result phrase the full lane width before the direction cue. */
-@media(max-width:350px){
-  .guide-outcome-lane-top{display:grid;gap:5px;align-items:start}
-  .guide-outcome-lane-top>strong{min-width:0;width:100%;text-align:left;overflow-wrap:break-word}
-}
 /* v162 ultra-narrow comparison cards: stack both conditions so older readers can compare full phrases without clipping. */
 @media(max-width:350px){
   .guide-outcome-lanes{grid-template-columns:minmax(0,1fr);gap:8px}
-  .guide-outcome-lane-top{grid-template-columns:minmax(0,1fr);width:100%;min-width:0}
+  .guide-outcome-lane-top{display:grid;grid-template-columns:minmax(0,1fr);gap:5px;align-items:start;width:100%;min-width:0}
   .guide-outcome-lane-top>span,.guide-outcome-lane-top>strong{display:block;min-width:0;width:100%;max-width:100%;text-align:left}
+  .guide-outcome-lane-top>strong{overflow-wrap:break-word}
 }
