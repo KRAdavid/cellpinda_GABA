@@ -2695,3 +2695,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-SHARE-LABEL-20261007`, `E-UI-CONTRACT-TABLET-SHARE-LABEL-20261007`, `E-CDP-TABLET-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-TABLET-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007`.
+
+## 태블릿 국내외 활용 카드 리듬·공개 배포 — 988c020 — 2026-10-07
+
+- 감사 finding: 701–1100px에서 3장 카드가 2열·2열/1장으로 배치되어 마지막 카드 오른쪽에 큰 빈 공간이 남고, 사업자·고령 사용자의 세 사례 읽기 흐름이 끊길 수 있었다.
+- 보정: 국내외 활용 카드를 701–1100px 태블릿 1열, 모바일 1열, 1101px 이상 데스크톱 3열로 정렬하고 카드 높이를 자연스럽게 조정했다.
+- Recheck: PR #530 required checks, main workflow `37536776591`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status, 공개 validator candidate `988c020`, Chrome CDP fallback 390·768·1440px에서 카드 배열·다음 장 handoff·가로폭을 확인했다.
+- 공개 경계: 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007`, `E-CDP-TABLET-APPLICATION-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007`.

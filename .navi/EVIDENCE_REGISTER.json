@@ -2398,6 +2398,18 @@
         "E-LIVE-PUBLIC-SURFACE-AUDIT-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-223",
+      "statement": "701–1100px 태블릿 구간의 국내외 활용 사례 3장은 한 열로 읽혀 마지막 카드 오른쪽의 큰 빈 공간 없이 자연스러운 다음 장 연결을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007",
+        "E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007",
+        "E-CDP-TABLET-APPLICATION-RHYTHM-20261007",
+        "E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007",
+        "E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16188,6 +16200,59 @@
       "captured_at": "2026-10-06T21:35:15Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-PUBLIC-SURFACE-AUDIT",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-222"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 카드 리듬 보정이 UI 계약과 Pages 번들 성능 검사를 통과한다.",
+      "locator": "local main 988c020; pnpm run validate:ui-contract status ok; Vite Pages build with /gaba_info/ base; validate:performance total assets 1649674, largest 311269; tablet applications grid uses one column through 1100px and cards have natural height",
+      "captured_at": "2026-10-06T21:49:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-TABLET-APPLICATION-RHYTHM",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-223"]
+    },
+    {
+      "id": "E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 제품 독립 경계와 반응형 공개 안내서 구조를 유지한 상태에서 태블릿 카드 스타일 변경을 통과시킨다.",
+      "locator": "scripts/validate-ui-contract.mjs; status ok after PR #530 merge; no research copy, source, product boundary or interaction contract changed",
+      "captured_at": "2026-10-06T21:49:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-TABLET-APPLICATION-RHYTHM",
+      "claim_refs": ["C-004", "C-006", "C-223"]
+    },
+    {
+      "id": "E-CDP-TABLET-APPLICATION-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 화면을 390·768·1440px에서 시각 점검했고 국내외 활용 카드는 모바일 1열, 태블릿 1열, 데스크톱 3열로 읽힌다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-surfaces-20261007; Chrome CDP fallback screenshots inspected with view_image at 390·768·1440px; 768px shows three full-width cards with no trailing right-side void; next handoff remains visible",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-surfaces-20261007",
+      "captured_at": "2026-10-06T21:52:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-TABLET-APPLICATION-RHYTHM",
+      "claim_refs": ["C-003", "C-004", "C-223"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #530과 main 공개 배포 파이프라인이 태블릿 카드 리듬 보정의 최종 커밋에서 모두 성공했다.",
+      "locator": "PR #530 https://github.com/KRAdavid/gaba_info/pull/530; release-verify 37536632285 and site-quality-verify 37536632430 success; merge 988c0201755be798598bf06c3ef2a9631a69e078; main workflow 37536776591; release-verify 112519701897; worker-readiness 112520273610; deploy-pages 112520303939; deploy-worker skipped static; smoke-live 112520390871; release-status 112520478854; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37536776591",
+      "captured_at": "2026-10-06T21:54:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-TABLET-APPLICATION-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-223"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 태블릿 국내외 활용 카드 배열과 제품 독립 공개 경계가 배포 후에도 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-surfaces-20261007; validate:live-public HTTP 200 candidateSha 988c0201755be798598bf06c3ef2a9631a69e078, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched; Chrome CDP fallback screenshots at 390·768·1440px match the deployed card rhythm",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-surfaces-20261007",
+      "captured_at": "2026-10-06T21:55:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-TABLET-APPLICATION-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-223"]
     }
   ]
 }
