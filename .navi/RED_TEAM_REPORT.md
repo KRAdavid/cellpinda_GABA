@@ -1836,3 +1836,11 @@
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006`, `E-CDP-RESEARCH-MAP-FIRST-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006`.
+
+## Recheck — 2026-10-06 — 4c370795
+
+- Red-team finding: 대규모 Git history에서 privacy audit 자체가 `ENOBUFS`로 중단될 수 있던 운영 도구 결함을 확인했다. stdout pipe 대신 저장소 밖 임시 파일로 처리하고, 감사 종료 후 삭제하도록 rework했다.
+- Recheck: `node --check`, `pnpm run audit:history-privacy` exit 0, main release workflow의 history privacy test·reachable history review 성공, 공개 validator candidate `4c370795`·HTTP 200·71 bundle hashes 확인. 실제 매칭 값은 계속 출력하지 않는다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.

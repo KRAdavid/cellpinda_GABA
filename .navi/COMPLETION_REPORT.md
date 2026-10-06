@@ -2063,3 +2063,12 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI `USER_DECISION / NOT_READY`.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006`, `E-CDP-RESEARCH-MAP-FIRST-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006`.
+
+## Current Release Recheck — 4c370795 — 2026-10-06
+
+- AC-001: PASS — 공개 validator 200, candidate `4c3707955a0517e4f7a140591d257275069e683d`, 71개 bundle hashes, 공개 데이터 정합성 일치.
+- AC-005: PASS — 이력 privacy audit의 `ENOBUFS` 재현성 결함을 수정했고, PR #455 및 main workflow `37437900625`의 필수 검사가 성공했다. 로컬 typecheck·127개 테스트·production build·성능 예산도 통과했다.
+- AC-006: PASS — 이번 변경은 NAVI 이력 감사 도구만 수정했으며 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·고령 사용자·독립 과학·규제 검증은 남아 있다. NAVI `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.

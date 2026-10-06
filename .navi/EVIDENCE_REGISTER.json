@@ -1994,6 +1994,16 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-189",
+      "statement": "NAVI 이력 개인정보 감사는 대규모 reachable Git history에서도 프로세스 출력 버퍼 초과 없이 재현되며, 기존처럼 매칭된 경로 수만 공개하고 실제 로컬 경로 값은 출력하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-HISTORY-AUDIT-STREAM-20261006",
+        "E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006",
+        "E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14024,6 +14034,38 @@
       "captured_at": "2026-10-06T08:24:35Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-FIRST",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-188"]
+    },
+    {
+      "id": "E-LOCAL-HISTORY-AUDIT-STREAM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "이력 개인정보 감사가 reachable Git history의 cat-file payload를 임시 파일로 처리해 Node ENOBUFS 없이 완료됐고, 14개 과거 경로의 매칭 수만 경고로 출력했다.",
+      "locator": "commit 0cb47a2; node --check scripts/audit-history-privacy.mjs; pnpm run audit:history-privacy exit 0; output retained path-count warning and omitted matched values; private temporary batch file cleaned after scan",
+      "captured_at": "2026-10-06T08:41:30Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-HISTORY-AUDIT",
+      "claim_refs": ["C-001", "C-005", "C-189"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "이력 개인정보 감사 보정 PR #455가 필수 검사를 통과해 main merge commit 4c37079로 병합되었고, main release workflow의 history privacy test와 reachable history review가 성공했다.",
+      "locator": "PR #455; code commit 0cb47a231e84ef6da7531215e3104cbc0014cb83; PR checks release-verify and site-quality successful; main merge commit 4c3707955a0517e4f7a140591d257275069e683d; main workflow 37437900625; release-verify 112184147496; worker-readiness 112184599279; deploy-pages 112184630571; smoke-live 112184711755; release-status 112184808191; deploy-worker skipped by STATIC_ONLY; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37437900625",
+      "captured_at": "2026-10-06T08:43:21Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-HISTORY-AUDIT",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-189"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "이력 개인정보 감사 보정이 반영된 GitHub Pages 공개본이 HTTP 200으로 응답했고, candidate SHA·71개 번들·공개 데이터 정합성·제품 독립 경계를 유지했다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T08:43:21.744Z; page 200; runtimeMode STATIC; candidateSha 4c3707955a0517e4f7a140591d257275069e683d; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-06T08:43:21Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-HISTORY-AUDIT",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-189"]
     }
   ]
 }

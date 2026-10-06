@@ -2357,6 +2357,14 @@
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006`, `E-CDP-RESEARCH-MAP-FIRST-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006`.
 
+## Current Governance Recheck — 4c370795 — 2026-10-06
+
+- AC-005 자동 검증 재현성: PASS. 이력 개인정보 감사가 `git cat-file --batch` stdout pipe의 `ENOBUFS` 결함 없이 reachable history를 끝까지 검사했고, 로컬 경고는 14개 과거 경로 수만 표시했다.
+- 공개 사이트·연구 카피·수치·출처·제품 독립 경계는 변경되지 않았다. PR #455의 release-verify·site-quality, main workflow의 history privacy test·reachable history review·Pages·라이브 smoke·release-status가 성공했다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.

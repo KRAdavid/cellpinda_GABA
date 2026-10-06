@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T08:24:35Z",
+  "updated_at": "2026-10-06T08:43:21Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T08:24:35Z"
+    "last_run_at": "2026-10-06T08:43:21Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T08:24:35Z"
+    "last_run_at": "2026-10-06T08:43:21Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5390,6 +5390,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T08:24:35Z"
+    },
+    {
+      "id": "H-267",
+      "event": "NAVI 이력 개인정보 감사가 대규모 reachable Git history에서 `git cat-file --batch` 출력 버퍼 초과로 중단되는 자동검증 결함을 확인하고, payload를 저장소 밖 임시 파일로 처리하도록 보정했다. 매칭된 과거 경로 수만 경고하고 실제 로컬 경로 값은 출력하지 않으며 임시 파일은 감사 종료 후 삭제한다. 로컬 `node --check`·`pnpm run audit:history-privacy`·typecheck·127개 테스트·production build가 통과했고 PR #455, main workflow `37437900625`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-189와 세 증거를 등록한다. 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T08:43:21Z"
     }
   ]
 }

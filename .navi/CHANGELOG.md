@@ -1615,3 +1615,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006`, `E-CDP-RESEARCH-MAP-FIRST-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006`.
+
+## NAVI 이력 개인정보 감사 재현성 보정·공개 배포 — 4c370795 — 2026-10-06
+
+- 대규모 reachable Git history에서 `git cat-file --batch` stdout pipe가 `ENOBUFS`로 중단되던 자동검증 결함을 보정했다. payload는 저장소 밖 임시 파일로 처리하고 감사 종료 후 삭제하며, 기존처럼 매칭된 경로 수만 경고한다.
+- PR #455, main workflow `37437900625`, Pages·라이브 smoke·release-status와 공개 validator candidate `4c370795`가 성공했다. 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남아 있다.
+
+증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.
