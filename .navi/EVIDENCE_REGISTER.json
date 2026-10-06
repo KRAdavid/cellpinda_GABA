@@ -2124,6 +2124,18 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-CARD-SEQUENCE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-200",
+      "statement": "연구 지도 섹션에 첫 화면과 구분되는 전용 자연 편집 비주얼을 적용해 하나의 GABA 신호가 넓은 연구 지도로 확장되는 흐름을 모바일·데스크톱에서 즉시 이해할 수 있게 하며, 기존 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-ACADEMIC-EDITORIAL-VISUAL-20261006",
+        "E-UI-CONTRACT-ACADEMIC-EDITORIAL-VISUAL-20261006",
+        "E-CDP-ACADEMIC-EDITORIAL-VISUAL-20261006",
+        "E-DEPLOY-PIPELINE-ACADEMIC-EDITORIAL-VISUAL-20261006",
+        "E-LIVE-PUBLIC-ACADEMIC-EDITORIAL-VISUAL-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14716,6 +14728,59 @@
       "captured_at": "2026-10-06T12:05:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-VIDEO-CARD-SEQUENCE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-199"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-ACADEMIC-EDITORIAL-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 전용 자연 편집 비주얼 적용이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "code commit 47b329f54e5ef365f91c1e6b4e6028948f57fa7; pnpm run validate:ui-contract; pnpm run validate:research-copy; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1809 modules; static routes 11; release files 72; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1647201 <= 1650000; largest 311199 <= 380000; academic image 1200x514, 38896 bytes",
+      "captured_at": "2026-10-06T12:17:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-ACADEMIC-EDITORIAL-VISUAL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-200"]
+    },
+    {
+      "id": "E-UI-CONTRACT-ACADEMIC-EDITORIAL-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 섹션이 첫 화면과 다른 전용 자연 이미지를 사용하고, 이미지 위 텍스트 대비·모바일 크롭·데스크톱 크롭·5개 학술 카드 연결을 UI 계약으로 유지한다.",
+      "locator": "src/components/PublicGabaGuide.tsx imports gabaAcademicEditorial and uses it in .guide-editorial-band-academic; src/assets/gaba-academic-editorial-q55.webp is 1200x514 and 38896 bytes; existing .guide-editorial-band overlay/crop rules remain; pnpm run validate:ui-contract status ok; research copy and public claim data unchanged",
+      "captured_at": "2026-10-06T12:17:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-ACADEMIC-EDITORIAL-VISUAL",
+      "claim_refs": ["C-001", "C-003", "C-200"]
+    },
+    {
+      "id": "E-CDP-ACADEMIC-EDITORIAL-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 연구 지도 직접 링크를 390px·1440px에서 확인했으며 전용 이미지·5개 카드·가로폭·page/console errors가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=academic-editorial-public-20261006#academic; viewports 390x844 and 1440x900; pageWidth 390 and 1425; band boxes mobile 350x210 and desktop 1180x270; background image /assets/gaba-academic-editorial-q55-DBNpj_dE.webp; academic cards 5; pageErrors 0; consoleErrors 0; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-academic-editorial-public-390.png and C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-academic-editorial-public-1440.png inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=academic-editorial-public-20261006#academic",
+      "captured_at": "2026-10-06T12:24:56Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-ACADEMIC-EDITORIAL-VISUAL",
+      "claim_refs": ["C-003", "C-004", "C-200"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-ACADEMIC-EDITORIAL-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 전용 비주얼 PR #478이 필수 검사를 통과해 main merge commit 813fd3a으로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #478; code commit 47b329f54e5ef365f91c1e6b4e6028948f57fa7; PR release-verify run 37462320565 job 112264690643 successful; site-quality-verify run 37462320660 job 112264690743 successful; main merge commit 813fd3a864e788548110863741a14ec018295d7e; workflow_dispatch run 37462523495; release-verify 112265637149; worker-readiness 112266079741; deploy-pages 112266135103; deploy-worker 112266132592 skipped by STATIC_ONLY; smoke-live 112266471238; release-status 112266580866; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37462523495",
+      "captured_at": "2026-10-06T12:22:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-ACADEMIC-EDITORIAL-VISUAL",
+      "claim_refs": ["C-001", "C-002", "C-200"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-ACADEMIC-EDITORIAL-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 연구 지도 전용 비주얼이 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T12:21:53.013Z; page 200; runtimeMode STATIC; candidateSha 813fd3a864e788548110863741a14ec018295d7e; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·1440px screenshots show dedicated academic image, five cards, page/console errors 0; research copy, sources, data and product boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=academic-editorial-public-20261006#academic",
+      "captured_at": "2026-10-06T12:25:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-ACADEMIC-EDITORIAL-VISUAL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-200"]
     }
   ]
 }

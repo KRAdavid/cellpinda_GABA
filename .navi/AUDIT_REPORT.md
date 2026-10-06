@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 지도 전용 편집 비주얼·공개 배포 — 2026-10-06 — 813fd3a
+
+- 독립 감사 관점에서 연구 지도 섹션의 이미지 서사가 첫 화면과 반복되지 않고, `하나의 신호가 넓은 연구 지도가 되었습니다`라는 전환을 모바일·데스크톱에서 즉시 읽을 수 있는지 확인했다. 전용 물 흐름 이미지, 좌측 텍스트 대비, 5개 학술 카드가 안정적으로 연결된다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경되지 않았고, 새 비주얼과 기존 이미지 압축으로 정적 자산 예산을 유지했다. UI 계약·배포 workflow·라이브 validator가 공개 SHA와 일치하며 새 CRITICAL/MAJOR 결함은 없다.
+- 공개 Chrome CDP fallback에서 390·1440px의 band 폭·높이·5개 카드·page/console errors 0을 확인했다. 실제 고령 사용자 이해도, Safari/iOS/Android 실기기, 독립 과학·규제 감수는 Chromium 검증으로 대체하지 않는다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-UI-CONTRACT-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-CDP-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-LIVE-PUBLIC-ACADEMIC-EDITORIAL-VISUAL-20261006`.
+
 ## 수면 비교 도표 문구·공개 배포 — 9e7b9321 — 2026-10-06
 
 - 수면 비교 도표의 제목을 `수면 연구, 두 조건은 어떻게 달랐을까요?`로, 보조 라벨을 `두 조건 비교`로 바꾸어 일반 독자가 비교 기준을 먼저 이해하게 했다. 연구 수치·결과·해석·출처는 변경하지 않았다.

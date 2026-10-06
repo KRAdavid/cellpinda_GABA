@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 813fd3a — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `813fd3a864e788548110863741a14ec018295d7e`·HTTP 200·STATIC·72개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-003/AC-004 연구 지도 시각 흐름·반응형: PASS. 전용 자연 편집 비주얼이 390px에서 350×210px, 1440px에서 1180×270px로 표시되고 5개 학술 카드가 이어지며 page/console errors 0이다.
+- AC-005 배포 게이트: PASS. UI 계약·research copy·typecheck·127개 테스트·production build와 PR #478·main workflow의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 초기 JS 311,199 bytes, CSS 95,703 bytes, 총 자산 1,647,201 bytes가 예산 안에 있다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 카피·수치·출처·공개 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-UI-CONTRACT-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-CDP-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-LIVE-PUBLIC-ACADEMIC-EDITORIAL-VISUAL-20261006`.
+
 ## Current Release Recheck — 9e7b9321 — 2026-10-06
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `9e7b93210afe85fc39616ed6575887692dd95254`·HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
