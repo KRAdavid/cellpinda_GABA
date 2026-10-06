@@ -2061,3 +2061,9 @@
   .guide-gaba-process-node strong{font-size:21px}
   .guide-gaba-process-source strong{overflow-wrap:anywhere}
 }
+
+/* v143 narrow-phone chart verdict: let the plain-language result label wrap instead of clipping at 280px. */
+@media(max-width:350px){
+  .guide-outcome-comparison-verdict{display:grid;gap:1px}
+  .guide-outcome-comparison-verdict i{white-space:normal;max-width:100%}
+}
