@@ -2067,3 +2067,9 @@
   .guide-outcome-comparison-verdict{display:grid;gap:1px}
   .guide-outcome-comparison-verdict i{white-space:normal;max-width:100%}
 }
+
+/* v144 narrow-phone sleep chart: give the embedded result chart the full study-card width instead of the numbered text column. */
+@media(max-width:350px){
+  .guide-sleep-chart-step .guide-outcome-chart{width:calc(100% + 43px);max-width:none;margin-left:-43px}
+  .guide-sleep-chart-step .guide-outcome-comparison-guide-copy strong{white-space:normal;overflow-wrap:anywhere}
+}
