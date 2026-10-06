@@ -2018,3 +2018,43 @@
 /* v121 research map mobile cue floor: keep the five-area summary readable on narrow phones for older readers. */
 .guide-research-orbit-core small{color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:-.03em;line-height:1.2;white-space:nowrap}
 @media(max-width:700px){.guide-research-orbit-core small{font-size:10px}}
+
+/* v137 GABA process story: turn the basic synthesis-to-signal explanation into one calm, scannable visual sequence. */
+.guide-gaba-process{padding:88px 0 96px;background:#f4fbfc;border-top:1px solid #e0eef1;border-bottom:1px solid #e0eef1}
+.guide-gaba-process .guide-section-heading{margin-bottom:20px}
+.guide-gaba-process .guide-section-lead{max-width:58ch;margin:0;color:#617b8f;font-size:16px;line-height:1.8;letter-spacing:-.035em}
+.guide-gaba-process-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:34px 0 18px;padding:0;list-style:none}
+.guide-gaba-process-flow>li{position:relative;min-height:278px;padding:24px 23px 22px;border:1px solid #d4e8ec;border-radius:17px;background:#fff;box-shadow:0 10px 24px rgba(24,86,105,.045)}
+.guide-gaba-process-flow>li:not(:last-child)::after{content:"→";position:absolute;z-index:2;top:50%;right:-25px;color:#75b8c0;font-size:25px;font-weight:700;transform:translateY(-50%)}
+.guide-gaba-process-step{display:flex;align-items:center;justify-content:center;width:31px;height:31px;border-radius:50%;background:#e4f6f6;color:var(--guide-teal-dark);font-size:10px;font-weight:900;letter-spacing:.04em}
+.guide-gaba-process-node{display:flex;align-items:center;justify-content:center;gap:8px;width:max-content;min-height:66px;margin:24px 0 22px;padding:0 18px;border:1px solid #b9e2e3;border-radius:16px;background:#f5ffff;color:var(--guide-teal-dark)}
+.guide-gaba-process-node span{color:#89a8b3;font-size:11px;font-weight:800;letter-spacing:.06em}
+.guide-gaba-process-node strong{font-size:23px;letter-spacing:-.07em;line-height:1}
+.guide-gaba-process-node.is-glutamate{border-color:#e6d5b8;background:#fffbf2;color:#a96f24}
+.guide-gaba-process-node.is-gaba{box-shadow:0 0 0 6px rgba(18,154,163,.08)}
+.guide-gaba-process-node.is-signal{border-color:#c8ddec;background:#f5f9fd;color:#276d92}
+.guide-gaba-process-flow h3{margin:0 0 9px;color:var(--guide-ink);font-size:20px;letter-spacing:-.06em;line-height:1.35}
+.guide-gaba-process-flow p{max-width:30ch;margin:0;color:#6b8497;font-size:14px;line-height:1.75;letter-spacing:-.035em}
+.guide-gaba-process-source{display:flex;align-items:center;gap:11px;padding:16px 18px;border-top:1px solid #cfe5e9;border-bottom:1px solid #cfe5e9;color:#6c8796;font-size:13px;line-height:1.55}
+.guide-gaba-process-source>span{color:var(--guide-teal-dark);font-size:11px;font-weight:900;letter-spacing:.08em;white-space:nowrap}
+.guide-gaba-process-source strong{color:var(--guide-ink);font-size:14px;letter-spacing:-.04em}
+.guide-gaba-process-source a{display:inline-flex;align-items:center;gap:4px;margin-left:auto;color:var(--guide-teal-dark);font-size:11px;font-weight:850;text-decoration:none;white-space:nowrap}
+.guide-gaba-process-source a:hover{text-decoration:underline;text-underline-offset:4px}
+.guide-gaba-process-source a:focus-visible{outline:3px solid rgba(18,154,163,.25);outline-offset:3px;border-radius:4px}
+@media(max-width:700px){
+  .guide-gaba-process{padding:68px 0 74px}
+  .guide-gaba-process .guide-section-lead{font-size:15px;line-height:1.75}
+  .guide-gaba-process-flow{grid-template-columns:1fr;gap:27px;margin-top:27px}
+  .guide-gaba-process-flow>li{min-height:0;padding:20px 19px 21px}
+  .guide-gaba-process-flow>li:not(:last-child)::after{content:"↓";top:auto;right:50%;bottom:-29px;font-size:22px;transform:translateX(50%)}
+  .guide-gaba-process-node{margin:19px 0 17px}
+  .guide-gaba-process-flow h3{font-size:19px}
+  .guide-gaba-process-flow p{max-width:none;font-size:15px;line-height:1.7}
+  .guide-gaba-process-source{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 9px;padding:14px 2px;font-size:13px}
+  .guide-gaba-process-source strong{font-size:14px}
+  .guide-gaba-process-source a{grid-column:1 / -1;margin:3px 0 0}
+}
+@media(max-width:350px){
+  .guide-gaba-process-node strong{font-size:21px}
+  .guide-gaba-process-source strong{overflow-wrap:anywhere}
+}

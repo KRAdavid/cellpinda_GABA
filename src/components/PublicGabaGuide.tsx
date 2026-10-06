@@ -1770,6 +1770,44 @@ export default function PublicGabaGuide() {
           </div>
         </section>
 
+        <section className="guide-gaba-process guide-story-section" aria-labelledby="gaba-process-heading">
+          <div className="guide-container">
+            <div className="guide-section-heading guide-gaba-process-heading">
+              <div>
+                <p className="guide-section-number">GABA의 기본 원리</p>
+                <h2 id="gaba-process-heading" tabIndex={-1}>GABA는 어떻게<br />{' '}신호를 조절할까요?</h2>
+              </div>
+              <p>복잡한 대사 경로 대신<br />세 단계로 읽어보세요.</p>
+            </div>
+            <p className="guide-section-lead">GABA가 만들어지고 신경세포 사이에서 작용하는 흐름을 간단히 보면, 왜 ‘조절의 신호’라고 부르는지 이해하기 쉬워집니다.</p>
+            <ol className="guide-gaba-process-flow" aria-label="GABA가 만들어지고 작용하는 세 단계">
+              <li>
+                <span className="guide-gaba-process-step">01</span>
+                <div className="guide-gaba-process-node is-glutamate" aria-hidden="true"><span>재료</span><strong>글루탐산</strong></div>
+                <h3>GABA의 재료가 준비됩니다</h3>
+                <p>신경세포 안에서 GABA의 재료가 되는 글루탐산이 준비됩니다.</p>
+              </li>
+              <li>
+                <span className="guide-gaba-process-step">02</span>
+                <div className="guide-gaba-process-node is-gaba" aria-hidden="true"><span>생성</span><strong>GABA</strong></div>
+                <h3>글루탐산이 GABA로 바뀝니다</h3>
+                <p>효소의 작용으로 글루탐산이 GABA로 바뀌고, 신경세포 안에 저장됩니다.</p>
+              </li>
+              <li>
+                <span className="guide-gaba-process-step">03</span>
+                <div className="guide-gaba-process-node is-signal" aria-hidden="true"><span>작용</span><strong>신호 조절</strong></div>
+                <h3>필요한 순간 신호를 조절합니다</h3>
+                <p>GABA가 필요한 순간 방출되면 신경세포의 활동을 낮추는 방향으로 신호를 조절합니다.</p>
+              </li>
+            </ol>
+            <div className="guide-gaba-process-source">
+              <span>핵심 흐름</span>
+              <strong>글루탐산 → GABA 생성 → 신경 활동 조절</strong>
+              <a href="https://www.ncbi.nlm.nih.gov/books/NBK11084/" target="_blank" rel="noopener noreferrer">출처 · NCBI Bookshelf <ExternalLink size={13} aria-hidden="true" /></a>
+            </div>
+          </div>
+        </section>
+
         <aside ref={recoveryBreakRef} className="guide-recovery-break" id="recovery-break" aria-labelledby="recovery-break-heading">
           <div className="guide-container">
             <div className="guide-recovery-break-head">
