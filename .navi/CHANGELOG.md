@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 결과 카드 순번 표식·공개 배포 — 9ee09d8 — 2026-10-06
+
+- 긴 연구 흐름에서 카드 자체만 읽어도 위치를 알 수 있도록 연구 카드에 `01 / 05`, `02 / 05` 순번 표식을 추가했다. 연구 문구·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산·PR #469·main Pages·라이브 smoke·release-status·공개 validator·Chrome CDP fallback 390px 직접 링크를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CARD-MARKER-20261006`, `E-UI-CONTRACT-RESEARCH-CARD-MARKER-20261006`, `E-CDP-RESEARCH-CARD-MARKER-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-MARKER-20261006`, `E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006`.
+
 ## 수면 비교 도표 문구·공개 배포 — 9e7b9321 — 2026-10-06
 
 - 수면 비교 도표 제목을 질문형 문장으로, 보조 라벨을 `두 조건 비교`로 정리해 비교 기준을 먼저 읽게 했다. 연구 수치·해석·출처는 유지했다.

@@ -2134,3 +2134,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI `USER_DECISION`; 완료 게이트 `NOT_READY`.
 
 증적: `E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006`, `E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006`, `E-CDP-MID-NARROW-TYPE-CONTROL-20261006`, `E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006`, `E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006`.
+
+## Current Release Recheck — 9ee09d8 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `9ee09d8721b75bf875e28fe18476a0c63de1bd25`·HTTP 200·STATIC·71개 bundle hash·provenance `matched`를 확인했다.
+- AC-003/AC-004 연구 카드 흐름·반응형: PASS. 390px 직접 링크에서 인지 카드 `01 / 05`, 피부 카드 `02 / 05`가 상단 연구 진행값과 일치하고, 앵커가 sticky 진행 레일 아래에 정렬되며 pageWidth가 390으로 유지된다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #469, main workflow `37455647902`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 내용·출처·제품 독립 공개 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CARD-MARKER-20261006`, `E-UI-CONTRACT-RESEARCH-CARD-MARKER-20261006`, `E-CDP-RESEARCH-CARD-MARKER-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-MARKER-20261006`, `E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006`.

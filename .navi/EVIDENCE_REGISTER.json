@@ -2076,6 +2076,18 @@
         "E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-196",
+      "statement": "연구 결과 카드 안에 `01 / 05`, `02 / 05`처럼 현재 카드와 전체 연구 수를 함께 표시해 긴 연구 흐름에서도 위치를 즉시 이해할 수 있게 하며, 연구 문구·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-CARD-MARKER-20261006",
+        "E-UI-CONTRACT-RESEARCH-CARD-MARKER-20261006",
+        "E-CDP-RESEARCH-CARD-MARKER-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-CARD-MARKER-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14456,6 +14468,59 @@
       "captured_at": "2026-10-06T11:00:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MID-NARROW-TYPE-CONTROL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-195"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-CARD-MARKER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 카드 순번·전체 개수 표시 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 278cf6f; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1647175 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T11:10:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-RESEARCH-CARD-MARKER",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-196"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-CARD-MARKER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 제목에 `현재 순번 / 전체 연구 수`를 노출하고 모바일에서 줄바꿈 없이 읽히도록 폭·자간을 조정했으며 기존 접근성·연구 내용 구조를 유지하도록 UI 계약을 확인했다.",
+      "locator": "src/components/PublicGabaGuide.tsx researchTopics.map; aria-label `${index + 1}번째 연구 카드 중 ${researchTopics.length}개`; src/components/PublicGabaGuide.css .guide-research-inline-heading grid-template-columns 36px 62px minmax(0,1fr); .guide-research-card-number white-space nowrap; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T11:10:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-CARD-MARKER",
+      "claim_refs": ["C-001", "C-003", "C-196"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-CARD-MARKER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 390px 직접 링크를 확인했으며 인지·피부 연구 카드의 순번, 진행 레일 정합성, 앵커 정렬과 가로폭이 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=deeplink-audit-20261006-v149#research-cognition and #research-skin; viewport 390x844; cognition cardMarker `01 / 05`, skin cardMarker `02 / 05`; progress rail `연구 01 / 05` and `연구 02 / 05`; pageWidth 390; headings/card anchors remain below the rail; screenshot C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-deeplink-research-cognition-390.png inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=deeplink-audit-20261006-v149#research-cognition",
+      "captured_at": "2026-10-06T11:20:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-RESEARCH-CARD-MARKER",
+      "claim_refs": ["C-003", "C-004", "C-196"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-CARD-MARKER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 순번 보정 PR #469가 필수 검사를 통과해 main merge commit 9ee09d8로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #469; code commit 278cf6f; PR release-verify run 37455506749 job 112242001591 successful; site-quality-verify run 37455506816 job 112242001732 successful; main merge commit 9ee09d8721b75bf875e28fe18476a0c63de1bd25; workflow_dispatch run 37455647902; release-verify 112242665096; worker-readiness 112243102560; deploy-pages 112243132033; deploy-worker 112243132804 skipped by STATIC_ONLY; smoke-live 112243316785; release-status 112243405758; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37455647902",
+      "captured_at": "2026-10-06T11:23:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-CARD-MARKER",
+      "claim_refs": ["C-001", "C-002", "C-196"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 연구 카드 순번 표시가 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T11:21:05.638Z; page 200; runtimeMode STATIC; candidateSha 9ee09d8721b75bf875e28fe18476a0c63de1bd25; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px direct-link audit shows cognition `01 / 05` and skin `02 / 05`; research copy, sources, data and product boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=deeplink-audit-20261006-v149#research-cognition",
+      "captured_at": "2026-10-06T11:23:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-CARD-MARKER",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-196"]
     }
   ]
 }
