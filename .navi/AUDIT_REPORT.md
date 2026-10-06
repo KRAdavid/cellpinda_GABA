@@ -2320,3 +2320,9 @@
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-READING-20261008`, `E-UI-CONTRACT-TABLET-READING-20261008`, `E-PLAYWRIGHT-TABLET-READING-20261008`, `E-DEPLOY-PIPELINE-TABLET-READING-20261008`, `E-LIVE-PUBLIC-TABLET-READING-20261008`.
+
+## Current Release Recheck — 550b4eb — 2026-10-06
+
+- 390px 공개 모바일에서 히어로의 `GABA에서 읽습니다` 강조 문구 잘림과 헤더의 `글자 크게`·공유 버튼 충돌을 확인하고, 381–430px에 압축 읽기 레일과 폭 내 줄바꿈을 적용했다. 768px 태블릿과 1024px 데스크톱 전환은 유지했다.
+- PR #445, main workflow `37426950620`, 공개 validator와 Chrome CDP fallback 390·768·1024px 검증이 성공했고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.

@@ -1575,3 +1575,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-TABLET-READING-20261008`, `E-UI-CONTRACT-TABLET-READING-20261008`, `E-PLAYWRIGHT-TABLET-READING-20261008`, `E-DEPLOY-PIPELINE-TABLET-READING-20261008`, `E-LIVE-PUBLIC-TABLET-READING-20261008`.
+
+## 모바일 히어로·헤더 레일 반응형 보정·공개 배포 — 550b4eb — 2026-10-06
+
+- 390px에서 잘리던 `GABA에서 읽습니다` 강조 문구를 폭 안에서 자연스럽게 표시하고, 헤더의 읽기 크기 명칭과 공유 버튼 충돌을 제거했다. 768px 태블릿 압축 레일과 1024px 데스크톱 라벨은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #445, main workflow `37426950620`, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 390·768·1024px 감리를 완료했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-RAIL-20261006`, `E-UI-CONTRACT-MOBILE-HERO-RAIL-20261006`, `E-CDP-MOBILE-HERO-RAIL-20261006`, `E-DEPLOY-PIPELINE-MOBILE-HERO-RAIL-20261006`, `E-LIVE-PUBLIC-MOBILE-HERO-RAIL-20261006`.
