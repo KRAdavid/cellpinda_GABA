@@ -2513,3 +2513,13 @@
 - Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006`, `E-CDP-RESEARCH-MAP-CONTEXT-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006`.
+
+## 연구 지도 첫 렌더 중립화 — d450e98 — 2026-10-06
+
+- Red-team follow-up: 지도 상태를 effect에서 중립으로 바꾼 뒤에도 첫 렌더 초기값에 첫 연구 fallback이 남아 있을 수 있는 구현 리스크를 확인했다.
+- 보정: `getInitialResearchTopicId`가 chapter-level hash에서는 `null`을 반환하고, 연구 카드 hash가 있을 때만 요청된 연구 주제를 첫 렌더부터 복원하도록 정리했다.
+- Recheck: 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #488, main workflow `37476812066`, 공개 validator candidate `d450e98`, 공개 Chrome CDP fallback 390px에서 `selectedNodes=0`, `firstCardActive=false`, 지도 중심 `GABA 연구의 중심`, 인지 선택 뒤 URL·rail·`aria-pressed`·`is-active`, page/console/http errors 0을 확인했다.
+- 공개 과학 카피·수치·출처·제품 독립 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-CDP-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`.

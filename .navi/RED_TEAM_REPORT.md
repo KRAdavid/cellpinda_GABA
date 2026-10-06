@@ -1976,3 +1976,13 @@
 - 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006`, `E-CDP-RESEARCH-MAP-CONTEXT-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006`.
+
+## 연구 지도 첫 렌더 중립화 — 2026-10-06 — d450e98
+
+- 공격 관점에서 chapter-level `#research` 진입 순간에 첫 카드가 기본 선택되는 초기 상태가 남아 있는지 재검토했다. `getInitialResearchTopicId`의 첫 주제 fallback을 제거한 뒤 첫 렌더에서 선택 노드 0개, 인지 카드 active false, 중심 문구 `GABA 연구의 중심`을 확인했다.
+- 공유 카드 hash 또는 지도 노드를 선택하면 인지 연구 카드 URL·읽기 레일·`aria-pressed`·카드 active가 함께 갱신된다. 지도와 카드의 선택 맥락이 첫 화면부터 분리된다.
+- 공개 화면의 연구 카피·수치·출처·제품 독립 경계는 바뀌지 않았고 page/console/http errors 0이다. 새 CRITICAL/MAJOR 결함은 없다.
+- 이 검증은 Chrome CDP fallback 390px 증거이며 실제 고령 사용자 이해도, Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-CDP-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`.

@@ -1747,3 +1747,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #486, main workflow `37474843826`, 공개 validator candidate `7fe6a4d`, 공개 Chrome CDP 390px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006`, `E-CDP-RESEARCH-MAP-CONTEXT-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006`.
+
+## 연구 지도 첫 렌더 중립화·공개 배포 — d450e98 — 2026-10-06
+
+- 연구 지도 chapter-level 진입 시 첫 렌더부터 선택 연구를 만들지 않도록 초기 topic fallback을 제거했다.
+- 공유 카드 hash와 지도 노드 선택에서는 기존 연구 카드 맥락·URL·읽기 레일·선택 상태를 그대로 복원한다.
+- PR #488, main workflow `37476812066`, 공개 validator candidate `d450e98`, 공개 Chrome CDP 390px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-CDP-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`.
