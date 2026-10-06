@@ -2032,7 +2032,7 @@ export default function PublicGabaGuide() {
                 <div className="guide-video-grid" id="expert-video-list">{visibleExpertVideos.map((video, index) => { const videoState = getExpertVideoState(video.id); const videoNumber = expertVideos.findIndex((candidate) => candidate.id === video.id) + 1; return <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} aria-controls="expert-video-feature" aria-label={`${video.topic} · ${video.title} · ${video.channel} · ${videoState.label}`} onClick={() => selectExpertVideo(video.id)}>
                   <span className="guide-video-card-thumb">
                     <span className={`guide-video-card-thumb-placeholder is-${videoPosterTone(video.topic)}`} style={{ '--guide-video-poster': `url(${videoPosterImage(video.topic)})`, '--guide-video-poster-position': videoPosterPosition(index) } as CSSProperties} aria-hidden="true">
-                      <small>GABA · {video.topic} · {String(index + 1).padStart(2, '0')}</small>
+                      <small>GABA · {video.topic} · {String(videoNumber).padStart(2, '0')}</small>
                       <strong>{video.title}</strong>
                       <em>선택 후 재생</em>
                     </span>
