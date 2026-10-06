@@ -1255,6 +1255,12 @@
   .gaba-guide .guide-header-share{font-size:0}
 }
 
+/* v155 */
+@media(min-width:701px) and (max-width:1100px){
+  .guide-growth-arrow{display:block}
+  .guide-growth-step:nth-child(3n) .guide-growth-arrow{display:none}
+}
+
 /* v19 compact mobile header: preserve 44px touch targets on narrow phones. */
 @media(max-width:380px){
   .guide-header{gap:8px;padding-inline:12px}
@@ -1839,6 +1845,11 @@
     content-visibility:visible;
     contain-intrinsic-size:none;
   }
+}
+
+/* v156 */
+@media(min-width:701px) and (max-width:1199px){
+  .gaba-guide section{content-visibility:visible}
 }
 
 /* v91 editorial typography: keep Korean display lines balanced and body copy naturally grouped. */
