@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 연구 결과 도표 의미 보정 — 2026-10-06 — a3ccd609
+
+- 공격 관점에서 새 안내가 막대 길이를 실제 측정값이나 효과 크기로 오인하게 만들지 않고, 변화 방향과 조건 간 상대 비교로 읽히는지 확인했다. 280·390·768·1440px 로컬 및 390·1440px 공개 렌더에서 문구·범례·카드 폭과 오류 상태는 안정적이었다.
+- 접근성 계약은 도표의 보조 설명과 `aria-label`에 같은 의미 경계를 반영했고, 제품 독립 공개 데이터와 teaser `HOLD`를 유지했다. 새 CRITICAL/MAJOR 결함은 없다.
+- 실제 실기기·고령 사용자 이해도·독립 과학·규제 감수는 Chromium 화면 검증으로 대체하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-PLAYWRIGHT-CHART-SEMANTICS-20261006`, `E-DEPLOY-PIPELINE-CHART-SEMANTICS-20261006`, `E-LIVE-PUBLIC-CHART-SEMANTICS-20261006`.
+
 ## 모바일 히어로 문장 리듬 보정 — 2026-10-06 — 68e2c8b
 
 - 공격 관점에서 강제 줄바꿈 제거가 280·320px에서 문장 클리핑·가로 넘침을 만들지 않고, 390px에서 한 줄 흐름과 1440px 데스크톱 구성을 유지하는지 확인했다. document scrollWidth는 각 viewport와 같고 page/console errors는 0이었다.

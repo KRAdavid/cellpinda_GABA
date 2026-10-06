@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T04:25:00Z",
+  "updated_at": "2026-10-06T04:40:21Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5299,6 +5299,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T04:25:00Z"
+    },
+    {
+      "id": "H-254",
+      "event": "연구 결과 비교 도표의 막대 설명을 `두 조건의 변화폭을 비교해 보여줍니다`로 바꾸고, `변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다`라는 읽기 기준을 추가했다. 연구 결과나 수치를 새로 만들지 않고, 비교 도표가 실제 측정값처럼 읽히지 않도록 의미를 명확히 했다. PR #428은 main `a3ccd609`로 병합되었고 workflow `37414574920`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `a3ccd6091146f0a9a76e60597e1b39b9211f2ddd`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했고, Chromium fallback 공개 390·1440px에서 새 문구·가로폭·page/console errors 0을 재확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-176과 다섯 증거를 등록한다. 외부 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T04:40:21Z"
     }
   ]
 }

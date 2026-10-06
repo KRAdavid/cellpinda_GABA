@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — a3ccd609 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `a3ccd6091146f0a9a76e60597e1b39b9211f2ddd`·HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-002/AC-004 연구 도표 읽기 흐름: PASS. 비교 도표가 변화 방향·상대적 차이·실제 측정값이 아닌 도식이라는 구분을 390·1440px 공개 화면에서 명확히 표시하며 가로폭과 런타임 오류 없이 렌더링됐다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build와 main workflow의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 공개 데이터 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-CHART-SEMANTICS-20261006`, `E-UI-CONTRACT-CHART-SEMANTICS-20261006`, `E-PLAYWRIGHT-CHART-SEMANTICS-20261006`, `E-DEPLOY-PIPELINE-CHART-SEMANTICS-20261006`, `E-LIVE-PUBLIC-CHART-SEMANTICS-20261006`.
+
 ## Current Release Recheck — 68e2c8b — 2026-10-06
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `68e2c8b5cbab13f4438c975b1ce118b2cec8308a`·HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.

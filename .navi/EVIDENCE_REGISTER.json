@@ -1838,6 +1838,18 @@
         "E-LIVE-PUBLIC-HERO-LINE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-176",
+      "statement": "연구 결과 비교 도표가 변화 방향과 상대적 차이를 먼저 설명하고, 시각 막대가 실제 측정값이 아니라 이해를 위한 도식임을 명시해 모바일·데스크톱에서 결과를 더 직관적으로 읽게 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-CHART-SEMANTICS-20261006",
+        "E-UI-CONTRACT-CHART-SEMANTICS-20261006",
+        "E-PLAYWRIGHT-CHART-SEMANTICS-20261006",
+        "E-DEPLOY-PIPELINE-CHART-SEMANTICS-20261006",
+        "E-LIVE-PUBLIC-CHART-SEMANTICS-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13179,6 +13191,59 @@
       "captured_at": "2026-10-06T04:25:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-HERO-LINE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-175"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CHART-SEMANTICS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 비교 도표의 의미 안내 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "PR #428 code commit 23cc129ac45078c1c31d3ec27c107f520ca2209d; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1641525 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T04:40:21Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-CHART-SEMANTICS",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-176"]
+    },
+    {
+      "id": "E-UI-CONTRACT-CHART-SEMANTICS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 비교 도표의 변화폭 안내와 실제 측정값이 아닌 도식이라는 설명을 고정해 의미가 흐려지는 회귀를 막는다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.tsx comparison guide and accessible chart label; v125 chart semantics rule; status ok",
+      "captured_at": "2026-10-06T04:40:21Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-CHART-SEMANTICS",
+      "claim_refs": ["C-001", "C-176"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-CHART-SEMANTICS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 Chromium fallback에서 280·390·768·1440px 비교 도표의 안내 문구·범례·가로폭을 확인했고, 공개본 390·1440px에서도 동일 문구와 오류 없는 렌더링을 재확인했다.",
+      "locator": "Playwright Chromium fallback; local 280/390/768/1440px and public 390/1440px; guide `막대는 두 조건의 변화폭을 비교해 보여줍니다`; limit `막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다.`; document scrollWidth equals viewport; pageErrors 0; consoleErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=chart-semantics-20261006#research-cognition",
+      "captured_at": "2026-10-06T04:38:04Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-CHART-SEMANTICS",
+      "claim_refs": ["C-003", "C-004", "C-176"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CHART-SEMANTICS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 도표 의미 보정 PR #428이 필수 검사를 통과해 main merge commit a3ccd609로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #428; code commit 23cc129ac45078c1c31d3ec27c107f520ca2209d; main merge commit a3ccd6091146f0a9a76e60597e1b39b9211f2ddd; main workflow 37414574920; release-verify 112110237494; worker-readiness 112110471176; deploy-pages 112110497618; deploy-worker 112110498158 skipped by STATIC_ONLY; smoke-live 112110548389; release-status 112110598410; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37414574920",
+      "captured_at": "2026-10-06T04:40:21Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-CHART-SEMANTICS",
+      "claim_refs": ["C-001", "C-002", "C-176"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CHART-SEMANTICS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 결과 비교 도표의 새 읽기 안내가 390px·1440px에 반영되고 제품 독립 공개 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T04:38:04.797Z; page 200; runtimeMode STATIC; candidateSha a3ccd6091146f0a9a76e60597e1b39b9211f2ddd; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Playwright 390/1440 exact chart guidance and limit copy, document scrollWidth equals viewport, pageErrors 0, consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=live-chart-semantics-20261006#research-cognition",
+      "captured_at": "2026-10-06T04:40:21Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-CHART-SEMANTICS",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-176"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 결과 도표 의미 보정·공개 배포 — a3ccd609 — 2026-10-06
+
+- 비교 도표의 막대 설명을 변화 방향·상대적 차이 중심으로 바꾸고, 실제 측정값이 아닌 이해용 도식이라는 문구를 추가했다.
+- 도표 의미 회귀를 UI 계약에 고정하고, 280·390·768·1440px 로컬 및 390·1440px 공개 Chromium fallback에서 문구·가로폭·오류 상태를 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-CHART-SEMANTICS-20261006`, `E-UI-CONTRACT-CHART-SEMANTICS-20261006`, `E-PLAYWRIGHT-CHART-SEMANTICS-20261006`, `E-DEPLOY-PIPELINE-CHART-SEMANTICS-20261006`, `E-LIVE-PUBLIC-CHART-SEMANTICS-20261006`.
+
 ## 모바일 히어로 문장 리듬 보정·공개 배포 — 68e2c8b — 2026-10-06
 
 - `GABA에서 읽습니다`의 모바일 강제 줄바꿈을 제거해 280·320px에서는 자연스러운 두 줄, 390px에서는 한 줄로 읽히도록 보정했다.

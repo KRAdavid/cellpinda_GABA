@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 결과 도표 의미 보정·공개 배포 — a3ccd609 — 2026-10-06
+
+- 비교 도표 상단을 `막대는 두 조건의 변화폭을 비교해 보여줍니다`로 바꾸고, 하단에 `막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다`를 추가했다. 연구 결과·수치·해석은 변경하지 않았다.
+- 로컬 Chromium fallback 280·390·768·1440px과 공개 390·1440px에서 도표 안내 문구·범례·조건 카드·가로폭을 확인했고 page/console errors는 0이었다. 캡처는 `view_image`로 검토했다.
+- PR #428이 main `a3ccd6091146f0a9a76e60597e1b39b9211f2ddd`로 병합되었고 workflow `37414574920`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-CHART-SEMANTICS-20261006`, `E-UI-CONTRACT-CHART-SEMANTICS-20261006`, `E-PLAYWRIGHT-CHART-SEMANTICS-20261006`, `E-DEPLOY-PIPELINE-CHART-SEMANTICS-20261006`, `E-LIVE-PUBLIC-CHART-SEMANTICS-20261006`.
+
 ## 모바일 히어로 문장 리듬 보정·공개 배포 — 68e2c8b — 2026-10-06
 
 - 모바일 히어로에서 `GABA에서`와 `읽습니다`를 강제로 나누던 줄바꿈을 제거해 280·320px에서는 폭에 맞는 자연스러운 두 줄, 390px에서는 한 줄로 읽히게 보정했다. 카피·의미·제품 독립 경계는 변경하지 않았다.
