@@ -244,7 +244,7 @@ const researchTopics: ResearchTopic[] = [
       summary: 'GABA를 섭취한 그룹은 뇌파와 활력 점수가 비교 그룹보다 덜 떨어졌습니다.',
       note: '화살표는 지표의 증가·감소 방향을, 문구는 두 조건 사이의 상대적인 차이를 보여줍니다. 시각 요소의 크기는 실제 효과 크기나 수치를 뜻하지 않습니다.',
       referenceLabel: '비교 조건',
-      resultLabel: 'GABA 섭취',
+      resultLabel: 'GABA 그룹',
       rows: [
         { label: '뇌파 변화', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less', direction: 'down' },
         { label: '활력 점수', reference: '더 많이 줄었습니다', result: '덜 줄었습니다', visual: 'result-less', direction: 'down' },
@@ -370,7 +370,7 @@ const sleepResultTopic: Pick<ResearchTopic, 'id' | 'chart'> = {
     summary: 'GABA 섭취 기간에는 잠드는 시간이 더 짧고, 전체 비렘수면이 더 길었습니다.',
     note: '화살표는 지표의 증가·감소 방향을, 문구는 두 조건 사이의 상대적인 차이를 보여줍니다. 시각 요소의 크기는 실제 효과 크기나 수치를 뜻하지 않습니다.',
     referenceLabel: '비교 조건',
-    resultLabel: 'GABA 섭취',
+    resultLabel: 'GABA 그룹',
     rows: [
       { label: '잠드는 시간', reference: '더 길었습니다', result: '더 짧았습니다', visual: 'result-less', direction: 'down' },
       { label: '전체 비렘수면', reference: '더 짧았습니다', result: '더 길었습니다', visual: 'result-more', direction: 'up' },
