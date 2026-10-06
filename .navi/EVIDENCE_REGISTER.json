@@ -1934,6 +1934,18 @@
         "E-LIVE-PUBLIC-TABLET-READING-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-184",
+      "statement": "381–430px 모바일 공개본에서 히어로의 `GABA에서 읽습니다` 문구가 화면 안에 완전히 표시되고, 읽기 크기 조절 기능이 공유 버튼과 겹치지 않으며 768px 태블릿·1024px 데스크톱 전환이 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-HERO-RAIL-20261006",
+        "E-UI-CONTRACT-MOBILE-HERO-RAIL-20261006",
+        "E-CDP-MOBILE-HERO-RAIL-20261006",
+        "E-DEPLOY-PIPELINE-MOBILE-HERO-RAIL-20261006",
+        "E-LIVE-PUBLIC-MOBILE-HERO-RAIL-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13699,6 +13711,59 @@
       "captured_at": "2026-10-06T06:40:37Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-TABLET-READING",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-183"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-HERO-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 히어로와 헤더 레일 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit ce73c6659ebadb1eb14b68f78c62a0074ccbc8b4; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1643753 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T07:00:58Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-MOBILE-HERO-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-184"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-HERO-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 381–430px에서 긴 읽기 크기 명칭을 숨기고 `글자` 압축 라벨을 표시하며, 모바일 히어로 강조 문구를 화면 폭 안에서 흐르게 해 헤더 충돌과 문구 잘림 회귀를 막는다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.css v147 mobile hero and header rail; 381–430px guide-reading-size-label display:none; compact label display:inline; max-width:100%; white-space:normal; status ok",
+      "captured_at": "2026-10-06T07:00:58Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-MOBILE-HERO-RAIL",
+      "claim_refs": ["C-001", "C-184"]
+    },
+    {
+      "id": "E-CDP-MOBILE-HERO-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 390·768·1024px를 확인했으며, 390px 히어로 강조 문구가 335px 안에 들어오고 `가+ 글자`와 공유 버튼이 분리되며 태블릿·데스크톱 전환과 오류 없는 렌더링이 유지된다.",
+      "locator": "Chrome CDP fallback; public 390/768/1024px; 390 hero line display block, width 335px, right 355px; reading toggle width 72px, compact label visible, full label hidden, share button left 319px/right 363px; 768 compact rail preserved; 1024 full `글자 크게` label restored; body/guide scrollWidth below viewport client width because of scrollbar and no horizontal overflow; pageErrors 0; consoleErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=release-mobile-hero-390",
+      "captured_at": "2026-10-06T07:00:58Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-MOBILE-HERO-RAIL",
+      "claim_refs": ["C-003", "C-004", "C-184"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-HERO-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 히어로·헤더 레일 보정 PR #445가 필수 검사를 통과해 main merge commit 550b4eb로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #445; code commit ce73c6659ebadb1eb14b68f78c62a0074ccbc8b4; PR workflows 37426810174 and 37426810081 successful; main merge commit 550b4eb71f91015245ab52d4d287f376e8b70c9d; main workflow 37426950620; release-verify 112148676151; worker-readiness 112149095490; deploy-pages 112149188894; deploy-worker 112149189775 skipped by STATIC_ONLY; smoke-live 112149377147; release-status 112149438769; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37426950620",
+      "captured_at": "2026-10-06T07:00:58Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-MOBILE-HERO-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-184"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-HERO-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 모바일 히어로 강조 문구와 헤더 읽기 레일 보정이 390px에 반영되고 768px 태블릿·1024px 데스크톱 구성이 유지되며, 제품 독립 공개 경계·가로폭·오류 없는 렌더링이 확인된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T07:00:58.413Z; page 200; runtimeMode STATIC; candidateSha 550b4eb71f91015245ab52d4d287f376e8b70c9d; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP fallback 390/768/1024 measurements and screenshot inspection; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=release-mobile-hero-390",
+      "captured_at": "2026-10-06T07:00:58Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MOBILE-HERO-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-184"]
     }
   ]
 }

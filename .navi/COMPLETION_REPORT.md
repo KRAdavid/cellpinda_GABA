@@ -2011,3 +2011,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다.
 
 증적: `E-LOCAL-BUILD-TABLET-READING-20261008`, `E-UI-CONTRACT-TABLET-READING-20261008`, `E-PLAYWRIGHT-TABLET-READING-20261008`, `E-DEPLOY-PIPELINE-TABLET-READING-20261008`, `E-LIVE-PUBLIC-TABLET-READING-20261008`.
+
+## Current Release Recheck — 550b4eb — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `550b4eb71f91015245ab52d4d287f376e8b70c9d`와 71개 bundle hash를 확인했다.
+- AC-003/AC-004 모바일 첫 화면·헤더 가독성: PASS. 390px에서 `GABA에서 읽습니다` 강조 문구가 화면 안에 표시되고 `가+ 글자` 읽기 레일과 공유 버튼이 분리되며, 768px 태블릿·1024px 데스크톱 전환이 유지된다. page/console errors 0을 확인했다.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #445 및 main workflow의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 수치·출처·공개 카피는 변경하지 않았고 teaser `HOLD`를 유지한다. 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-RAIL-20261006`, `E-UI-CONTRACT-MOBILE-HERO-RAIL-20261006`, `E-CDP-MOBILE-HERO-RAIL-20261006`, `E-DEPLOY-PIPELINE-MOBILE-HERO-RAIL-20261006`, `E-LIVE-PUBLIC-MOBILE-HERO-RAIL-20261006`.
