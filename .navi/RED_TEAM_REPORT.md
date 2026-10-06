@@ -2186,3 +2186,11 @@
 - Chrome Playwright fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 이해도·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.
+## Red-team recheck — 인쇄·PDF 지연 렌더링 — 2026-10-07
+
+- 공격 관점에서 인쇄 미디어가 화면 전용 `content-visibility:auto` 예약 높이를 그대로 사용하면 사업자용 PDF에 빈 섹션과 긴 공백이 남는 경로를 확인했다.
+- 인쇄 시 여섯 개 지연 섹션을 `content-visibility:visible`로 전환하고 intrinsic size를 해제했다. 화면 전용 헤더·읽기 진행바·영상 게시판·공유 조작부는 숨기고 출처 URL 14개를 유지했다.
+- 로컬 production preview의 인쇄 미디어에서 숨김 chrome 0개, 지연 섹션 6개 실제 높이, 문서 폭 1440px, 오류 없는 렌더를 확인했으며 새 CRITICAL/MAJOR 결함은 없다.
+- 보호된 main 배포 후 공개 Pages의 실제 인쇄 스타일 응답·computed style·PDF 렌더를 재검증해야 한다. 기존 RT-001·RT-002·RT-003과 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
+
+증적: `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.

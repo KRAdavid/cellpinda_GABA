@@ -2482,3 +2482,12 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.
+## Current Release Recheck — 인쇄·PDF 지연 렌더링 — 2026-10-07
+
+- AC-003/AC-006 인쇄·PDF 활용성: LOCAL PASS. `public/print.css`가 화면용 지연 렌더링을 인쇄 시 펼치고, 화면 전용 조작부를 숨기며, 연구 출처 URL 14개를 유지한다.
+- AC-005 로컬 품질 게이트: PASS. UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Chrome Playwright 인쇄 미디어 검증이 성공했다. 문서 높이는 `21049px → 19401px`로 줄었다.
+- 공개 Pages 배포 후 live print stylesheet·computed style·PDF screenshot 재검증은 PENDING이다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.

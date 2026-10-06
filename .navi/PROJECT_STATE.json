@@ -5690,6 +5690,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T23:12:00Z"
+    },
+    {
+      "id": "H-304",
+      "event": "사업자 공유용 인쇄·PDF 렌더에서 화면용 지연 렌더링이 빈 여백으로 남을 수 있는 잔여 퍼블리싱 리스크를 확인했다. public/print.css에 인쇄 시 지연 섹션을 실제 표시하도록 보정해 6개 섹션의 문서 높이를 복원하고, 화면 전용 헤더·진행바·영상 게시판·공유 조작부 숨김과 출처 URL 14개 노출을 유지했다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Chrome Playwright 인쇄 미디어 렌더를 통과했으며 C-227과 다섯 증거를 등록한다. 보호된 main PR·공개 Pages 재검증은 후속 배포 게이트로 남긴다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T02:00:00Z"
     }
   ]
 }

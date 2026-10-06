@@ -2446,6 +2446,18 @@
         "E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-227",
+      "statement": "사업자 공유용 인쇄·PDF 출력은 화면 전용 조작부를 숨기고 지연 렌더링 섹션을 실제 문서로 펼치며, 연구 출처 URL을 인쇄물에 함께 제공한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PRINT-FLOW-20261008",
+        "E-UI-CONTRACT-PRINT-FLOW-20261008",
+        "E-CDP-PRINT-FLOW-20261008",
+        "E-DEPLOY-PIPELINE-PRINT-FLOW-20261008",
+        "E-LIVE-PUBLIC-PRINT-FLOW-20261008"
+      ],
+      "status": "PENDING"
     }
   ],
   "evidence": [
@@ -16448,6 +16460,58 @@
       "captured_at": "2026-10-06T23:12:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-NARROW-EXPERT-HERO",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-226"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PRINT-FLOW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "인쇄·PDF 전용 스타일 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+      "locator": "local branch codex/navi-public-release-audit-20261008; public/print.css; pnpm run validate:ui-contract status ok; pnpm run typecheck status ok; pnpm run build status ok; validate:performance initial JS 311199, initial CSS 95703, total assets 1649418 <= 1650000; print-only CSS is outside the app asset budget",
+      "captured_at": "2026-10-07T02:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-PRINT-FLOW",
+      "claim_refs": ["C-001", "C-005", "C-006", "C-227"]
+    },
+    {
+      "id": "E-UI-CONTRACT-PRINT-FLOW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "인쇄용 UI 계약이 지연 렌더링 섹션을 강제 표시하고 화면 전용 헤더·진행바·영상 게시판·공유 조작부를 숨기며 출처 URL 표시 규칙을 유지한다.",
+      "locator": "public/print.css @media print; content-visibility:visible!important and contain-intrinsic-size:none!important for deferred chapters; print-only screen chrome display:none!important; source-link ::after URL rule; scripts/validate-ui-contract.mjs status ok",
+      "captured_at": "2026-10-07T02:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261008-PRINT-FLOW",
+      "claim_refs": ["C-004", "C-006", "C-227"]
+    },
+    {
+      "id": "E-CDP-PRINT-FLOW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome Playwright 인쇄 미디어 렌더에서 화면 전용 조작부가 보이지 않고, 6개 지연 섹션이 실제 높이로 렌더되며 연구 출처 링크 14개가 유지된다.",
+      "locator": "local production preview http://127.0.0.1:4175/gaba_info/guide/?qa=print-audit-local-20261008 with public/print.css applied; page.emulateMedia({media:'print'}); visibleScreenChrome []; deferred chapters contentVisibility visible and heights applications 1189.688, fermented 1104.906, growth 614.344, expert 455.031, reading 572.422, final 634.031; sourceLinkCount 14; documentWidth 1440; print screenshot inspected with view_image; blank deferred bands removed",
+      "source_uri": "http://127.0.0.1:4175/gaba_info/guide/?qa=print-audit-local-20261008",
+      "captured_at": "2026-10-07T02:00:00Z",
+      "reviewer_id": "NAVI-CHROME-PLAYWRIGHT-QA-20261008-PRINT-FLOW",
+      "claim_refs": ["C-003", "C-004", "C-227"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PRINT-FLOW-20261008",
+      "kind": "TEST",
+      "status": "PENDING",
+      "statement": "인쇄용 공개 안내서 보정은 기존 정적 공개 배포·제품 독립·성능 게이트와 함께 재배포된다.",
+      "locator": "pending next protected-main PR and release workflow; static GitHub Pages remains the deployment target; no Worker deployment is required for this print-only surface",
+      "captured_at": "2026-10-07T02:00:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261008-PRINT-FLOW",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-227"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-PRINT-FLOW-20261008",
+      "kind": "TEST",
+      "status": "PENDING",
+      "statement": "공개 GitHub Pages에서 인쇄·PDF 전용 지연 렌더링 보정과 출처 URL 노출을 배포 후 재확인한다.",
+      "locator": "pending public deployment of the print-only change; live HTTP 200, print stylesheet response, media-print computed styles, source URL pseudo-elements and PDF screenshot remain required",
+      "source_uri": "https://kradavid.github.io/gaba_info/print.css",
+      "captured_at": "2026-10-07T02:00:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-PRINT-FLOW",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-006", "C-227"]
     }
   ]
 }

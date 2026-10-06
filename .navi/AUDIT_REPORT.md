@@ -2734,3 +2734,11 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - 결과는 `PASS_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다.
 
 증적: `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.
+## 인쇄·PDF 지연 렌더링 보정 — 2026-10-07
+
+- 사업자 공유용 인쇄·PDF 출력에서 화면 성능을 위한 `content-visibility:auto`가 빈 여백으로 남을 수 있는 잔여 리스크를 확인했다.
+- `public/print.css`에서 여섯 개 지연 섹션을 인쇄 시 실제 표시하도록 보정하고, 화면 전용 헤더·진행바·영상 게시판·공유 조작부는 숨긴 채 연구 출처 URL을 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Chrome Playwright 인쇄 미디어 렌더가 통과했다. 로컬 인쇄 문서 높이는 `21049px → 19401px`, 출처 링크는 14개로 확인됐다.
+- 공개 배포 후 실제 Pages 인쇄 렌더 재검증이 남아 있으며, 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+
+증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.

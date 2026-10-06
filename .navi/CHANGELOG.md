@@ -1937,3 +1937,10 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`를 유지한다.
 
 증적: `C-226`, `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.
+## 2026-10-07 — 인쇄·PDF 지연 렌더링 보정
+
+- `public/print.css`에서 지연 렌더링 섹션을 인쇄 시 실제 문서로 펼쳐 사업자용 PDF의 빈 여백을 제거했다.
+- 화면 전용 헤더·진행바·영상 게시판·공유 조작부는 숨기고, 연구 출처 URL 14개는 인쇄물에 유지한다.
+- 로컬 인쇄 미디어 렌더와 전체 build를 통과했다. 공개 Pages 재배포·라이브 인쇄 검증은 다음 배포 게이트에서 수행한다.
+
+증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
