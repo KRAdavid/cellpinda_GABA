@@ -2062,6 +2062,12 @@
   .guide-gaba-process-source strong{overflow-wrap:anywhere}
 }
 
+/* v145 compact reading control: enlarge the narrow-phone text-size label for older readers without widening the header rail. */
+@media(max-width:350px){
+  .guide-header .guide-reading-size-toggle .guide-reading-size-compact-label{font-size:11px;letter-spacing:-.08em}
+  .guide-header .guide-reading-size-toggle .guide-reading-size-mark{font-size:14px}
+}
+
 /* v143 narrow-phone chart verdict: let the plain-language result label wrap instead of clipping at 280px. */
 @media(max-width:350px){
   .guide-outcome-comparison-verdict{display:grid;gap:1px}
