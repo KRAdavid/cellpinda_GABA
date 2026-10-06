@@ -1948,3 +1948,12 @@
 - 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-CDP-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CARD-SEQUENCE-20261006`.
+
+## 모바일 연구 비교 도표 재감사 — e2ef8f0 — 2026-10-06
+
+- Red-team finding: 기존 비교 도표는 모바일에서 각 조건 카드와 GABA 결과 문구가 반복되어 한 지표의 결론을 읽는 데 세로 이동이 필요했다. 351–700px 구간에서 결과 요약 띠와 비교·GABA 컴팩트 레인을 한 행 단위로 재배치했다.
+- Recheck: 공개 Chrome CDP fallback 390x844·1440x900에서 인지 연구 카드 5개, chartHeight 661.265625px·482.53125px, pageWidth 390·1425, runtime/console/http errors 0을 확인했다. 데스크톱 도표의 조건별 막대·읽는 법·실제 측정값이 아닌 방향 도식 설명은 유지된다.
+- PR #482와 main workflow `37467358386`, 공개 validator candidate `e2ef8f0`가 성공했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- 컴팩트 도표 검증은 시각 스캔성의 증거이며 실제 고령 사용자 이해도나 Safari/iOS/Android 실기기 동작을 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006`, `E-CDP-RESEARCH-COMPARISON-SCAN-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006`.
