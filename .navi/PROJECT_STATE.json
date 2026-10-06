@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T12:08:00Z",
+  "updated_at": "2026-10-06T12:25:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5467,6 +5467,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T12:08:00Z"
+    },
+    {
+      "id": "H-278",
+      "event": "연구 지도 섹션이 첫 화면 자연 이미지에 의존해 시각적 서사가 반복되는 리스크를 줄이기 위해 연구 지도 전용 자연 편집 비주얼을 적용했다. 모바일·데스크톱에서 이미지 크롭·텍스트 대비·5개 학술 카드 연결을 확인했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 이미지와 기존 편집 이미지를 화면 최대 크기에 맞게 압축해 정적 자산 예산을 1,647,201로 유지했다. 로컬 typecheck·127개 테스트·production build·UI contract·research copy, PR #478, main merge 813fd3a, workflow 37462523495, 공개 validator candidate 813fd3a, Chrome CDP 390·1440px에서 공개 이미지·오류 없는 렌더링을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-200과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T12:25:00Z"
     }
   ]
 }

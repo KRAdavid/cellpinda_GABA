@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 연구 지도 전용 편집 비주얼·공개 배포 — 2026-10-06 — 813fd3a
+
+- 공격 관점에서 연구 지도 전용 비주얼이 첫 화면과 구분되고, 모바일에서는 이미지·문구·다음 카드가 끊기지 않으며 데스크톱에서는 이미지와 5개 카드가 한 시퀀스로 읽히는지 확인했다. 390·1440px 공개 렌더에서 이미지 크롭, 텍스트 대비, 카드 폭과 순서가 안정적이었다.
+- 연구 카피·수치·출처·제품 독립 경계는 변경되지 않았고, 전용 이미지 URL·UI 계약·배포 workflow·라이브 validator가 공개 SHA와 일치한다. 새 CRITICAL/MAJOR 결함은 없다.
+- 새 편집 비주얼은 시각적 탐색성을 높이는 증거지만 실제 고령 사용자 이해도, Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-CDP-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-LIVE-PUBLIC-ACADEMIC-EDITORIAL-VISUAL-20261006`.
+
 ## 수면 비교 도표 문구·공개 배포 — 2026-10-06 — 9e7b9321
 
 - 공격 관점에서 질문형 제목과 `두 조건 비교` 라벨이 `비교 조건`·`GABA 섭취`·`측정 항목`의 관계를 빠르게 전달하는지 확인했다. 390·1440px 공개 렌더에서 새 문구와 기존 시각 비교 구조가 안정적이었다.

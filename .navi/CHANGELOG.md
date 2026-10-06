@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 연구 지도 전용 편집 비주얼·공개 배포 — 813fd3a — 2026-10-06
+
+- 연구 지도 섹션에 첫 화면과 구분되는 잔잔한 물의 흐름 기반 전용 자연 편집 비주얼을 적용해 `하나의 신호 → 넓은 학술 연구 지도` 전환을 한 화면에서 이해하도록 고도화했다. 모바일 350×210px, 데스크톱 1180×270px에서 텍스트 대비와 이미지 크롭을 확인했다.
+- 연구 카피·수치·출처·5개 학술 카드·제품 독립 공개 경계는 변경하지 않았다. 새 이미지는 1200×514px·38,896 bytes이며 기존 편집 이미지도 화면 최대 크기에 맞게 압축해 정적 자산 총량을 1,647,201 bytes로 유지했다.
+- PR #478, main workflow `37462523495`, Pages·라이브 smoke·release-status·공개 validator candidate `813fd3a`와 Chrome CDP fallback 390·1440px 검증을 통과했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-UI-CONTRACT-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-CDP-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-LIVE-PUBLIC-ACADEMIC-EDITORIAL-VISUAL-20261006`.
+
 ## 전문가 영상 카드 순서 표식·공개 배포 — a84d6f0 — 2026-10-06
 
 - 전문가 영상 갤러리 9개 카드에 `01 / 09`–`09 / 09` 순서 표식을 추가해 모바일·데스크톱에서 현재 영상과 전체 영상 수를 바로 읽도록 했다. 주제 필터에서도 전체 컬렉션 순서를 유지하며 카드 선택 즉시 재생, 영상 제목·출처·제품 독립 공개 경계는 변경하지 않았다.
