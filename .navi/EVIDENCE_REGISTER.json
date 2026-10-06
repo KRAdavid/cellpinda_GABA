@@ -1970,6 +1970,18 @@
         "E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-187",
+      "statement": "연구 지도에서 GABA 중심과 다섯 연구 영역의 관계가 모바일·데스크톱에서 동심원과 중심 신호로 읽히며, 선택 주제와 연구 카드 흐름을 한눈에 이해할 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006",
+        "E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006",
+        "E-CDP-RESEARCH-MAP-RHYTHM-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13894,6 +13906,59 @@
       "captured_at": "2026-10-06T07:42:33Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-TOPIC-RAIL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-186"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 시각 리듬 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit c6833da5bdc81a701994215e8630dd519e36dba6; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1645396 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T08:01:34Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-RESEARCH-MAP-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-187"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 중심·동심원·중심 신호가 기존 연구 지도 DOM과 접근성·반응형 계약을 유지하며 시각 보정으로만 추가되었다.",
+      "locator": "src/components/PublicGabaGuide.css; .guide-research-map::before; .guide-research-map::after; .guide-research-orbit-core; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T08:01:34Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-MAP-RHYTHM",
+      "claim_refs": ["C-001", "C-003", "C-187"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-MAP-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 로컬 280·390·1440px과 공개 390px 연구 지도 화면을 확인했으며, 지도 중심·선택 노드·연구 흐름·가로폭·오류 없는 렌더링을 확인했다.",
+      "locator": "Chrome CDP fallback; local http://127.0.0.1:5173/?view=guide&qa=map-rhythm-local-20261006#research; public https://kradavid.github.io/gaba_info/?view=guide&qa=post-deploy-map-20261006#research; viewport 280x844/390x844/1440x1000; local/public document scrollWidth 280/390/1425/390 respectively; active chapter 연구; progress 06 / 12 · 연구 01 / 05; public researchHeading x20..370 y132..211; pageErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=post-deploy-map-20261006#research",
+      "captured_at": "2026-10-06T08:01:34Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-RESEARCH-MAP-RHYTHM",
+      "claim_refs": ["C-003", "C-004", "C-187"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 시각 리듬 PR #451이 필수 검사를 통과해 main merge commit 39cb1c9로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #451; code commit c6833da5bdc81a701994215e8630dd519e36dba6; PR checks release-verify and site-quality successful; main merge commit 39cb1c9b5a6a2fb2fa7cace0217ae78db4945f2a; main workflow 37433290064; release-verify 112168951703; worker-readiness 112169285377; deploy-pages 112169311516; deploy-worker 112169312372 skipped by STATIC_ONLY; smoke-live 112169391745; release-status 112169483395; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37433290064",
+      "captured_at": "2026-10-06T08:01:34Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-MAP-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-187"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 지도 중심 리듬 보정이 반영되고, 71개 번들·공개 데이터 정합성·제품 독립 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T08:01:34.778Z; page 200; runtimeMode STATIC; candidateSha 39cb1c9b5a6a2fb2fa7cace0217ae78db4945f2a; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px research screenshot and metrics; document scrollWidth 390; pageErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=post-deploy-map-20261006#research",
+      "captured_at": "2026-10-06T08:01:34Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-187"]
     }
   ]
 }

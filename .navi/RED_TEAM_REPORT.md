@@ -1820,3 +1820,11 @@
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006`, `E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006`, `E-CDP-EXPERT-TOPIC-RAIL-20261006`, `E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006`, `E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006`.
+
+## Recheck — 2026-10-06 — 39cb1c9
+
+- Red-team finding: 이전 연구 지도는 연결선은 명확했지만 중심과 확장 구조의 시각적 위계가 약해, 넓은 화면에서 빈 공간으로 읽힐 수 있었다. 저위험 CSS 보정으로 동심원·중심 신호·배경 리듬을 추가했다.
+- Recheck: 280·390·1440px local and 390px public Chrome CDP fallback; document/body scrollWidth matched viewport; page/console errors 0; no science/copy/product changes.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006`, `E-CDP-RESEARCH-MAP-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006`.

@@ -2041,3 +2041,14 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - AC-007 Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 외부 브라우저·실기기·고령 사용자·독립 과학·규제 검증은 남아 있다.
 
 증적: `E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006`, `E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006`, `E-CDP-EXPERT-TOPIC-RAIL-20261006`, `E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006`, `E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006`.
+
+## Current Release Recheck — 39cb1c9 — 2026-10-06
+
+- AC-001: PASS — live validator 200, candidate 39cb1c9b5a6a2fb2fa7cace0217ae78db4945f2a, 71 bundle hashes.
+- AC-002/AC-003: PASS — research map visual hierarchy verified at 280/390/1440; selected topic and reading progress preserved.
+- AC-004/AC-005: PASS — no overflow at tested widths; UI contract/typecheck/127 tests/build/performance and main workflow succeeded.
+- AC-006: PASS — no research/product/copy boundary changes.
+- AC-007: PASS_WITH_CONDITIONS — external browser/device, older-reader, independent science/regulatory review remain open.
+- Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI `USER_DECISION / NOT_READY`.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006`, `E-CDP-RESEARCH-MAP-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006`.

@@ -1599,3 +1599,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006`, `E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006`, `E-CDP-EXPERT-TOPIC-RAIL-20261006`, `E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006`, `E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006`.
+
+## 연구 지도 시각 리듬 보정·공개 배포 — 39cb1c9 — 2026-10-06
+
+- GABA 연구 지도에 저대비 동심원과 중심 신호를 추가해 다섯 연구 영역의 관계를 모바일·데스크톱에서 더 빠르게 읽도록 정리했다.
+- PR #451, main workflow 37433290064, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 280·390·1440px 검증을 완료했다.
+- 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006`, `E-CDP-RESEARCH-MAP-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006`.
