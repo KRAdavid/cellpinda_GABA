@@ -2072,3 +2072,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·고령 사용자·독립 과학·규제 검증은 남아 있다. NAVI `USER_DECISION / NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.
+
+## Current Release Recheck — 86c869ed — 2026-10-06
+
+- AC-001: PASS — 공개 validator 200, candidate `86c869ed743546b325e01c6da91c4f42391e9dd8`, 71개 bundle hashes, 공개 데이터 정합성 일치.
+- AC-002/AC-003/AC-004: PASS — 280px에서는 연구 주제명 `인지`와 진행 수치가 한눈에 읽히고 390·768·1440px에서도 지도·연구 카드·가로폭이 유지된다. 접근성 전체 라벨과 live announcement도 유지된다.
+- AC-005: PASS — UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #457 및 main workflow `37439945690`의 필수 배포 검사가 성공했다.
+- AC-006: PASS — 이번 변경은 연구 읽기 레일의 좁은 폭 표시 방식만 보정했으며 연구 수치·출처·공개 카피·제품 독립 경계는 변경하지 않았다.
+- AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·고령 사용자·독립 과학·규제 검토는 남아 있다. Final Status는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006`, `E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006`, `E-CDP-NARROW-RESEARCH-LABEL-20261006`, `E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006`, `E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006`.

@@ -1623,3 +1623,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남아 있다.
 
 증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.
+
+## 초소형 모바일 연구 읽기 레일 가독성 보정·공개 배포 — 86c869ed — 2026-10-06
+
+- 350px 이하에서 진행 레일의 긴 연구 라벨을 현재 주제명으로 압축해 280px에서도 `읽는 중 인지`와 진행 수치를 한눈에 읽도록 보정했다. 접근성 aria-label과 live announcement에는 전체 연구 라벨을 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #457, main workflow `37439945690`, Pages·라이브 smoke·release-status 및 공개 validator·Chrome CDP fallback 280·390·768·1440px 감리를 완료했다.
+- 연구 수치·결과·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006`, `E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006`, `E-CDP-NARROW-RESEARCH-LABEL-20261006`, `E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006`, `E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006`.
