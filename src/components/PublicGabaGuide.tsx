@@ -1895,7 +1895,7 @@ export default function PublicGabaGuide() {
         <section className="guide-section guide-everyday guide-story-section" id="everyday" aria-labelledby="everyday-heading">
           <div className="guide-container">
             <div className="guide-section-heading"><div><p className="guide-section-number">04 · 일상 속 GABA</p><h2 id="everyday-heading" tabIndex={-1}>우리는 매일 GABA의<br />{' '}조절 속에서 살아갑니다</h2></div><p>논문보다 먼저,<br />일상의 순간으로 이해해 보세요.</p></div>
-            <div className="guide-everyday-cards">{everydayTopics.map((topic, index) => <article className="guide-everyday-card" key={topic.id}><span className="guide-everyday-number">0{index + 1}</span><span className="guide-topic-icon"><TopicIcon type={topic.icon} /></span><h3>{topic.title}</h3><p>{topic.body}</p></article>)}</div>
+            <div className="guide-everyday-cards">{everydayTopics.map((topic, index) => <article className="guide-everyday-card" key={topic.id}><span className="guide-everyday-number" aria-label={`${index + 1}번째 일상 장면 중 ${everydayTopics.length}개`}>{String(index + 1).padStart(2, '0')} / {String(everydayTopics.length).padStart(2, '0')}</span><span className="guide-topic-icon"><TopicIcon type={topic.icon} /></span><h3>{topic.title}</h3><p>{topic.body}</p></article>)}</div>
           </div>
         </section>
 
