@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T13:31:00Z",
+  "updated_at": "2026-10-06T14:05:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T09:45:47Z"
+    "last_run_at": "2026-10-06T14:05:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T09:45:47Z"
+    "last_run_at": "2026-10-06T14:05:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5495,6 +5495,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T13:31:00Z"
+    },
+    {
+      "id": "H-282",
+      "event": "연구 지도 상단에 진입했을 때 첫 연구 카드가 자동 선택된 것처럼 보여 지도 단계와 카드 단계의 읽기 레일이 어긋나는 잔여 UX 리스크를 확인했다. 연구 chapter-level hash에서는 activeResearchTopicId를 중립(null)으로 유지하고, 지도 노드 선택·연구 카드 진입·공유 카드 해시에서는 선택 맥락을 복원하도록 보정했다. 로컬 UI contract·typecheck·127개 테스트·production build, PR #486, main merge 7fe6a4d, workflow 37474843826, 공개 validator candidate 7fe6a4d, 공개 Chrome CDP 390px에서 지도 rail·map core·인지 카드 선택·URL·aria-pressed·card active와 오류 0을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-204와 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T14:05:00Z"
     }
   ]
 }

@@ -1739,3 +1739,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #484, main workflow `37471094112`, 공개 validator candidate `7d81419`, 공개 Chrome CDP 390·350·1440px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006`.
+
+## 연구 지도 맥락 정렬·공개 배포 — 7fe6a4d — 2026-10-06
+
+- 연구 지도에 직접 진입했을 때 첫 연구 카드가 자동 선택된 것처럼 보이던 레일을 중립 상태로 정렬했다.
+- 지도 노드 선택·연구 카드 진입·공유 카드 해시에서만 선택 연구 맥락이 표시되도록 해, `다섯 연구 영역`과 `인지 연구 결과`의 읽기 상태를 구분했다.
+- PR #486, main workflow `37474843826`, 공개 validator candidate `7fe6a4d`, 공개 Chrome CDP 390px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006`, `E-CDP-RESEARCH-MAP-CONTEXT-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006`.

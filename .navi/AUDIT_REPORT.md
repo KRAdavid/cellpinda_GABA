@@ -2503,3 +2503,13 @@
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.
 - PR #447, main workflow `37429369421`, 공개 validator와 Chrome CDP fallback 280px 검증이 성공했고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+## 연구 지도 맥락 정렬 — 7fe6a4d — 2026-10-06
+
+- Red-team finding: `#research`로 직접 진입했을 때 첫 연구 카드가 자동 선택된 것처럼 보여 지도 장과 카드 장의 읽기 레일이 어긋나는 잔여 UX 리스크가 있었다.
+- 보정: 연구 지도 chapter-level hash에서는 선택 연구를 만들지 않고, 지도 노드 선택·연구 카드 진입·공유 카드 해시에서만 선택 연구 맥락을 표시하도록 상태 복원 경로를 정렬했다.
+- Recheck: 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #486, main workflow `37474843826`, 공개 validator candidate `7fe6a4d`, 공개 Chrome CDP fallback 390px에서 지도 레일 `다섯 연구 영역 / 06 / 12`, 지도 중심 `GABA 연구의 중심`, 인지 카드 선택 후 `인지 연구 결과 / 연구 01 / 05`, URL·`aria-pressed`·`is-active`, page/console/http errors 0을 확인했다.
+- 공개 과학 카피·수치·출처·제품 독립 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006`, `E-CDP-RESEARCH-MAP-CONTEXT-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006`.

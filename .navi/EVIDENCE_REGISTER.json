@@ -2172,6 +2172,18 @@
         "E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-204",
+      "statement": "연구 지도에 진입했을 때 첫 연구 카드가 자동 선택된 것처럼 보이던 모바일 읽기 레일을 중립 상태로 정렬하고, 사용자가 지도 노드를 선택하거나 연구 카드에 진입한 뒤에만 인지·피부 등 연구 카드 맥락을 표시한다. 연구 카드 해시 복원·선택 URL·제품 독립 공개 경계는 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261006",
+        "E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006",
+        "E-CDP-RESEARCH-MAP-CONTEXT-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14976,6 +14988,59 @@
       "captured_at": "2026-10-06T13:31:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-VIDEO-MID-MOBILE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-203"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 중립 맥락 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "code commit 4b61fb6; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1809 modules; static routes 11; release files 72; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1649284 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T14:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-204"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 chapter-level hash가 첫 연구를 자동 선택하지 않고, 지도 선택과 카드 진입 이후에만 연구 카드 맥락을 표시하도록 UI 계약에 등록됐다.",
+      "locator": "src/components/PublicGabaGuide.tsx setActiveResearchTopicId(initialResearchTopicId); setActiveResearchTopicId(nextResearchTopicId); scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T14:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-001", "C-003", "C-204"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-MAP-CONTEXT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 로컬 production preview와 공개본의 연구 지도 및 인지 연구 카드 deep-link를 390px에서 확인했다. 지도 진입 시 rail은 다섯 연구 영역/06·12, map core는 연구의 중심이며 인지 노드 선택 뒤 rail은 인지 연구 결과/연구 01·05로 갱신되고 card active·aria-pressed·URL이 일치했다.",
+      "locator": "Chrome CDP fallback; local production preview and public https://kradavid.github.io/gaba_info/?qa=research-map-context-public-20261006#research; viewport 390x844; direct research rail=다섯 연구 영역; progress=06 / 12; map core=GABA 연구의 중심; selected research URL hash=research-cognition; rail=인지 연구 결과; aria-pressed=true; cardActive=true; cardTop=113; runtimeErrors=0; consoleErrors=0; httpFailures=0; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=research-map-context-public-20261006",
+      "captured_at": "2026-10-06T14:03:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-003", "C-004", "C-204"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 맥락 보정 PR #486이 필수 검사를 통과해 main merge commit 7fe6a4d로 병합됐고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #486; remote code commit fcf64a125bcfcb434b5127e39bc13127a382b04e; PR release-verify run 37474634258 job 112306727662 successful; site-quality-verify run 37474634384 job 112306727919 successful; main merge commit 7fe6a4d260419a704e68c43c92276da3852bba82; workflow 37474843826; release-verify 112307452675; worker-readiness 112308067319; deploy-pages 112308113099; deploy-worker skipped by STATIC_ONLY; smoke-live 112308250687; release-status 112308380594; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37474843826",
+      "captured_at": "2026-10-06T14:05:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-204"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 연구 지도 중립 맥락 보정이 반영됐고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T13:57:47.237Z; page 200; runtimeMode STATIC; candidateSha 7fe6a4d260419a704e68c43c92276da3852bba82; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px #research neutral rail=다섯 연구 영역/06·12, map core=GABA 연구의 중심, #research-cognition selected rail=인지 연구 결과/연구 01·05, aria-pressed=true, cardActive=true, page/console/http errors 0; research copy, sources, data and product boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=research-map-context-public-20261006",
+      "captured_at": "2026-10-06T14:05:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-CONTEXT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-204"]
     }
   ]
 }

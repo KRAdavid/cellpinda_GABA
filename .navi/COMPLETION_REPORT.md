@@ -2218,3 +2218,15 @@ Final Status: `NOT_READY`; NAVI `USER_DECISION`.
 Final Status: `NOT_READY`; NAVI `USER_DECISION`.
 
 증적: `E-LOCAL-BUILD-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006`.
+
+## Current Release Recheck — 7fe6a4d — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `7fe6a4d260419a704e68c43c92276da3852bba82`·HTTP 200·STATIC·72개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 연구 지도·카드 맥락: PASS. `#research`는 첫 카드를 자동 선택하지 않고 `다섯 연구 영역 / 06 / 12`로 시작하며, 인지 노드 선택 뒤에만 `인지 연구 결과 / 연구 01 / 05`와 카드 active 상태를 표시한다. 390px에서 URL·`aria-pressed`·카드 active·page/console/http errors 0을 확인했다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #486, main workflow `37474843826`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 연구 지도 선택 맥락만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006`, `E-CDP-RESEARCH-MAP-CONTEXT-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006`.

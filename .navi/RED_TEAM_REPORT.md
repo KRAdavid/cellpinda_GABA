@@ -1966,3 +1966,13 @@
 - 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006`.
+
+## 연구 지도 중립 맥락 — 2026-10-06 — 7fe6a4d
+
+- 공격 관점에서 `#research` chapter-level deep link가 첫 연구 카드를 암묵적으로 고른 것처럼 표시되는지 확인했다. 보정 후 지도 화면은 `다섯 연구 영역 / 06 / 12`와 `GABA 연구의 중심`을 표시하고 선택 노드는 없다.
+- 인지 노드를 선택하면 URL이 `#research-cognition`으로 바뀌고 읽기 레일이 `인지 연구 결과 / 06 / 12 · 연구 01 / 05`, 선택 버튼 `aria-pressed=true`, 카드 `is-active`로 함께 갱신된다. 지도 단계와 카드 단계의 맥락이 분리된다.
+- 공개 화면의 연구 카피·수치·출처·제품 독립 경계는 바뀌지 않았고 page/console/http errors 0이다. 새 CRITICAL/MAJOR 결함은 없다.
+- 이 검증은 Chrome CDP fallback 390px 증거이며 실제 고령 사용자 이해도, Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006`, `E-CDP-RESEARCH-MAP-CONTEXT-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006`.
