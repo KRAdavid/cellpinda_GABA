@@ -1663,3 +1663,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006`.
+
+## 중간 폭 모바일 읽기 조절 라벨·공개 배포 — fc61732 — 2026-10-06
+
+- 351–380px에서 읽기 크기 조절 기능을 `가+ 글자`로 명시하고 메뉴·공유 버튼과의 간격을 재배치했다.
+- PR #467, main merge `fc61732`, 재시작 workflow `37453296672`, Pages·라이브 smoke·release-status와 공개 validator candidate `fc61732`가 성공했다.
+- 360px 공개 Chrome CDP fallback에서 큰 글씨 전환과 가로폭·페이지 오류 0을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006`, `E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006`, `E-CDP-MID-NARROW-TYPE-CONTROL-20261006`, `E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006`, `E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006`.

@@ -1885,3 +1885,12 @@
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006`.
+
+## Recheck — 2026-10-06 — fc61732
+
+- Red-team finding: 351–380px 모바일 헤더에서 읽기 크기 조절 기능이 아이콘만 남아 고령 독자에게 의미가 즉시 전달되지 않는 가독성 잔여 리스크가 있었다. 해당 폭에만 `가+ 글자` compact label과 60x44px 컨트롤을 적용하고 메뉴·공유 버튼과의 간격을 재배치했다.
+- Recheck: 공개 Chrome CDP fallback 360px에서 `가+ 글자` 표시, 메뉴·공유 비충돌, 큰 글씨 전환에 따른 `aria-pressed`·라벨 상태 변경, document scrollWidth 360, page errors 0을 확인했다. 연구 내용·수치·출처·제품 독립 경계는 변경하지 않았다.
+- PR #467, main merge `fc61732`, 재시작 workflow `37453296672`, 공개 validator candidate `fc61732`·HTTP 200·71 bundle hashes가 성공했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006`, `E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006`, `E-CDP-MID-NARROW-TYPE-CONTROL-20261006`, `E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006`, `E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006`.

@@ -2064,6 +2064,18 @@
         "E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-195",
+      "statement": "351–380px 모바일 헤더에서도 읽기 크기 조절 기능을 `가+ 글자`로 표시해 고령 독자가 기능 의미를 즉시 파악하게 하며, 44px 터치 영역·메뉴·공유 버튼 배치와 280·390px 기존 대응을 유지한다. 연구 내용·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006",
+        "E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006",
+        "E-CDP-MID-NARROW-TYPE-CONTROL-20261006",
+        "E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006",
+        "E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14391,6 +14403,59 @@
       "captured_at": "2026-10-06T10:31:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-APPLICATION-FLOW-MARKER-CONTRAST",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-194"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "351–380px 중간 폭 읽기 조절 기능명 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.css v148 mid-narrow type control; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1646909 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T10:43:46Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-MID-NARROW-TYPE-CONTROL",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-195"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "351–380px 헤더의 읽기 크기 조절 버튼에 시각적 `가+ 글자` 라벨을 추가하고 44px 메뉴·읽기·공유 터치 영역, 접근성 라벨·pressed 상태, 기존 폭별 규칙을 유지하도록 UI 계약을 확인했다.",
+      "locator": "src/components/PublicGabaGuide.css @media(min-width:351px) and (max-width:380px); src/components/PublicGabaGuide.tsx guide-reading-size-toggle and compact label; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T10:43:46Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-MID-NARROW-TYPE-CONTROL",
+      "claim_refs": ["C-001", "C-003", "C-195"]
+    },
+    {
+      "id": "E-CDP-MID-NARROW-TYPE-CONTROL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 360px 헤더를 확인했으며 `가+ 글자` 라벨, 60x44px 읽기 조절 버튼, 44px 메뉴·공유 버튼, 큰 글씨 전환 상태와 가로폭·페이지 오류가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=mid-narrow-header-public-20261006#top; viewport 360x844; initial toggle rect x236..296 y12.5..56.5, menu x184..228, share x304..348; document.scrollWidth 360; pageErrors 0; click changes largeText false→true, aria-pressed false→true, aria-label `기본 크기로 보기`; screenshot C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-mid-narrow-header-360.png inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=mid-narrow-header-public-20261006#top",
+      "captured_at": "2026-10-06T10:59:25Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-MID-NARROW-TYPE-CONTROL",
+      "claim_refs": ["C-003", "C-004", "C-195"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "중간 폭 읽기 조절 보정 PR #467이 필수 검사를 통과해 main merge commit fc61732로 병합되었고 재시작한 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #467; code commit 7f90375; PR release-verify run 37451818897 job 112229929273 successful; site-quality-verify run 37451818916 job 112229929034 successful; main merge commit fc617329e60bdf4f155e1c0c4bc273833bd36447; initial main workflow 37451997512 was canceled after a 10-minute github-pages environment wait; workflow_dispatch rerun 37453296672; release-verify 112234744128; worker-readiness 112235211536; deploy-pages 112235238199; deploy-worker 112235238789 skipped by STATIC_ONLY; smoke-live 112235311803; release-status 112235415395; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37453296672",
+      "captured_at": "2026-10-06T11:01:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-MID-NARROW-TYPE-CONTROL",
+      "claim_refs": ["C-001", "C-002", "C-195"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 351–380px 모바일 읽기 조절 라벨 보정이 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T10:59:25.489Z; page 200; runtimeMode STATIC; candidateSha fc617329e60bdf4f155e1c0c4bc273833bd36447; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 360x844 screenshot shows `가+ 글자`, 60x44px control, no header collision, document.scrollWidth 360, pageErrors 0, click state changes to `가− 기본`; research copy, sources, data and product boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=mid-narrow-header-public-20261006#top",
+      "captured_at": "2026-10-06T11:00:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MID-NARROW-TYPE-CONTROL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-195"]
     }
   ]
 }
