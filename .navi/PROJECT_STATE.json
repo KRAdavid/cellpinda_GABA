@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T00:00:00Z",
+  "updated_at": "2026-10-07T01:00:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5626,6 +5626,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T00:00:00Z"
+    },
+    {
+      "id": "H-299",
+      "event": "사업자 공유용 인쇄·PDF 출력에서 화면 전용 헤더·진행바·영상·복구 조작부가 남아 문서성이 약해지는 잔여 퍼블리싱 리스크를 확인했다. v163 인쇄 미디어 규칙으로 A4 여백, 본문 섹션 흐름, 카드 분할 방지, 연구 출처 URL 표시를 추가하고 로컬 production preview 390·1440px에서 문서 폭·인쇄 전용 숨김 상태·본문 렌더를 확인했다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산은 통과했으며 C-221과 다섯 증거를 등록한다. PR·main 공개 배포·공개 URL 재검증은 후속 배포 게이트로 남긴다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다. 새 CRITICAL/MAJOR 결함은 없고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T01:00:00Z"
     }
   ]
 }

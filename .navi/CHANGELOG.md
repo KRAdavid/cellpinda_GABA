@@ -1,5 +1,12 @@
 # Project Changelog
 
+## 인쇄·PDF 공유 퍼블리싱 레이어 — 2026-10-07 — working tree
+
+- 사업자가 공개 안내서를 출력·PDF로 보관·공유할 때도 읽기 흐름이 유지되도록 A4 인쇄 미디어, 화면 전용 요소 숨김, 주요 표면 분할 방지, 연구 출처 URL 노출을 추가했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Chrome print media 390·1440px 검증을 통과했다. PR·main 배포와 공개 URL 재검증 전 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-PRINT-PUBLISHING-20261007`, `E-UI-CONTRACT-PRINT-PUBLISHING-20261007`, `E-CDP-PRINT-PUBLISHING-20261007`, `E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007`, `E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007`.
+
 ## 큰 글자 읽기 모드·모바일 공개 재점검 — main 829c5fb — 2026-10-07
 
 - 320·390·768px 큰 글자 모드에서 회복 14단계·연구 지도·전문가 영상·공유 화면을 다시 점검했다. 본문 가로폭은 viewport와 일치했고 보이는 한국어 문장 잘림과 런타임 오류는 없었다.
