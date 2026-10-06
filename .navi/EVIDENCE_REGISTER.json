@@ -2244,6 +2244,18 @@
         "E-LIVE-PUBLIC-VIDEO-ORDER-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-210",
+      "statement": "380px 이하 좁은 모바일에서 지연 렌더링 장을 실제 높이로 확정해, 연구·전문가 영상·마지막 장으로 깊게 이동할 때 제목과 첫 콘텐츠가 재배치되지 않는다. 320px·380px 레이아웃과 전문가 영상 handoff를 공개 URL에서 확인했으며 연구 카피·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007",
+        "E-UI-CONTRACT-NARROW-DEEP-LINK-20261007",
+        "E-CDP-NARROW-DEEP-LINK-20261007",
+        "E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007",
+        "E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15366,6 +15378,59 @@
       "captured_at": "2026-10-06T16:27:03Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-VIDEO-ORDER",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-209"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 장 이동 안정화가 UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과한다.",
+      "locator": "local commit ebdfb07; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 passed; pnpm run build; dist performance initial JS 311199, CSS 95703, total 1648563, largest 311199; final build status ok",
+      "captured_at": "2026-10-06T16:52:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261007-NARROW-DEEP-LINK",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-210"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-DEEP-LINK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 380px 이하에서 지연 렌더링 장을 실제 높이로 렌더링해 깊은 이동 뒤 레이아웃 점프를 방지하도록 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v152 narrow-phone layout stability contract requires @media(max-width:380px) chapter content-visibility:visible and contain-intrinsic-size:none for applications, fermented-safety, growth-story, expert-videos, reading-note, final; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T16:52:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-NARROW-DEEP-LINK",
+      "claim_refs": ["C-004", "C-005", "C-210"]
+    },
+    {
+      "id": "E-CDP-NARROW-DEEP-LINK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback 320px·380px에서 연구·전문가 영상·마지막 장의 깊은 이동과 전문가 영상 handoff가 안정적이다.",
+      "locator": "Chrome CDP fallback; local http://127.0.0.1:5173/?view=guide; 320px and 380px section audit: documentWidth equals viewport width, targetTop 184 for research/expert-videos/final, errors=[]; actual .guide-growth-handoff click at 320px: expert video title and first video card visible with documentWidth 320 and errors=[]; screenshots outside repository inspected with view_image",
+      "source_uri": "http://127.0.0.1:5173/?view=guide#expert-videos",
+      "captured_at": "2026-10-06T16:52:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-NARROW-DEEP-LINK",
+      "claim_refs": ["C-003", "C-004", "C-210"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #505 required checks and final main deployment pipeline all success.",
+      "locator": "PR #505 https://github.com/KRAdavid/gaba_info/pull/505; release-verify 37498777943 and site-quality-verify 37498777949 success; final merge 08693372bc18e68a513b05200c0f7ddb7d525ab3; main workflow 37498997965; release-verify 112390827053; worker-readiness 112391263038; deploy-pages 112391314428; deploy-worker skipped static; smoke-live 112391413590; release-status 112391560349; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37498997965",
+      "captured_at": "2026-10-06T16:52:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-NARROW-DEEP-LINK",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-210"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "final public GitHub Pages 0869337 live deployment passes 320px deep-navigation and expert-video handoff validation; product-independent boundary remains matched.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide; main workflow 37498997965 smoke-live success; Chrome CDP fallback 320px: documentWidth 320, research/expert-videos/final absolute positions stable at 15793/33816/38110, targetTop 184, errors=[]; actual expert-video handoff renders title and first video card; screenshot outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#expert-videos",
+      "captured_at": "2026-10-06T16:52:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-NARROW-DEEP-LINK",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-210"]
     }
   ]
 }

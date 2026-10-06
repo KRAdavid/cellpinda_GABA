@@ -2290,3 +2290,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-VIDEO-ORDER-20261007`, `E-UI-CONTRACT-VIDEO-ORDER-20261007`, `E-CDP-VIDEO-ORDER-20261007`, `E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007`, `E-LIVE-PUBLIC-VIDEO-ORDER-20261007`.
+
+## Current Release Recheck — 0869337 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. PR #505가 main에 병합됐고 workflow `37498997965`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-003/AC-004 좁은 모바일 깊은 이동·반응형: PASS. 공개 320px에서 연구·전문가 영상·마지막 장이 각각 절대 위치 15793·33816·38110에 안정적으로 도착하며 targetTop 184, document width 320, errors `[]`다. 전문가 영상 handoff 버튼도 제목·첫 영상 카드까지 연결된다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #505, main workflow `37498997965`가 성공했다. 정적 자산 총량은 `1,648,563 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 좁은 모바일 렌더링 안정성에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007`, `E-UI-CONTRACT-NARROW-DEEP-LINK-20261007`, `E-CDP-NARROW-DEEP-LINK-20261007`, `E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007`, `E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007`.

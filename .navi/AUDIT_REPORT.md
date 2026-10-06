@@ -2566,3 +2566,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-VIDEO-ORDER-20261007`, `E-UI-CONTRACT-VIDEO-ORDER-20261007`, `E-CDP-VIDEO-ORDER-20261007`, `E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007`, `E-LIVE-PUBLIC-VIDEO-ORDER-20261007`.
+
+## 좁은 모바일 깊은 이동 안정성·공개 배포 — 0869337 — 2026-10-07
+
+- 독립 감사 관점에서 320px·360px 화면의 지연 렌더링 실제 높이와 한국어 줄바꿈 때문에 연구·전문가 영상·마지막 장의 절대 위치가 깊은 이동 뒤 바뀌는 리스크를 확인했다.
+- 380px 이하에서 `content-visibility` 지연을 해제해 실제 높이를 첫 렌더부터 확정하고, UI 계약에 해당 회귀 조건을 추가했다. 320px·380px의 연구·전문가 영상·마지막 장 제목 도착, document width, 오류 0과 전문가 영상 handoff를 다시 확인했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #505, main workflow `37498997965`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 Pages 320px에서도 동일 결과를 확인했다.
+- 공개 과학 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007`, `E-UI-CONTRACT-NARROW-DEEP-LINK-20261007`, `E-CDP-NARROW-DEEP-LINK-20261007`, `E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007`, `E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007`.

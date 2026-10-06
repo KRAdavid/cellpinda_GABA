@@ -2027,3 +2027,12 @@
 - Residual: 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도, Safari/iOS/Android 실기기, 독립 과학·규제 감수를 대신하지 않는다. teaser preview는 `HOLD`다.
 
 증적: `E-LOCAL-BUILD-VIDEO-ORDER-20261007`, `E-UI-CONTRACT-VIDEO-ORDER-20261007`, `E-CDP-VIDEO-ORDER-20261007`, `E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007`, `E-LIVE-PUBLIC-VIDEO-ORDER-20261007`.
+
+## Red-team recheck — 좁은 모바일 깊은 이동 — 2026-10-07 — 0869337
+
+- 공격 관점에서 320px·360px에서 아래쪽 chapter의 intrinsic placeholder가 실제 한국어 줄바꿈 높이보다 작아, 장 이동 직후 연구·전문가 영상·마지막 장이 수백 px 재배치되는 경로를 확인했다.
+- 380px 이하에서는 지연 렌더링을 실제 높이로 전환하고 UI 계약을 추가했다. 공개 320px에서 연구·전문가 영상·마지막 장 targetTop 184, documentWidth 320, errors `[]`, 전문가 영상 handoff 후 제목·첫 카드 표시를 확인했다.
+- 기존 영상·연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았으며 새 CRITICAL/MAJOR 결함은 없다. 기존 RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도와 Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007`, `E-UI-CONTRACT-NARROW-DEEP-LINK-20261007`, `E-CDP-NARROW-DEEP-LINK-20261007`, `E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007`, `E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007`.

@@ -1789,3 +1789,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #503, main workflow `37495381996`, 공개 validator candidate `f2241eb`, Chrome CDP 390px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-VIDEO-ORDER-20261007`, `E-UI-CONTRACT-VIDEO-ORDER-20261007`, `E-CDP-VIDEO-ORDER-20261007`, `E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007`, `E-LIVE-PUBLIC-VIDEO-ORDER-20261007`.
+
+## 좁은 모바일 깊은 이동 안정화·공개 배포 — 0869337 — 2026-10-07
+
+- 380px 이하에서 지연 렌더링 장의 실제 높이를 확정해 연구·전문가 영상·마지막 장으로 이동할 때 레이아웃 점프를 제거했다.
+- UI 계약에 좁은 화면 회귀 조건을 추가하고 320px·380px 로컬, 320px 공개 URL의 깊은 이동·전문가 영상 handoff를 확인했다.
+- PR #505, main workflow `37498997965`, 공개 Pages 배포와 라이브 smoke가 성공했다. 정적 자산 총량은 `1,648,563 bytes`다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007`, `E-UI-CONTRACT-NARROW-DEEP-LINK-20261007`, `E-CDP-NARROW-DEEP-LINK-20261007`, `E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007`, `E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007`.
