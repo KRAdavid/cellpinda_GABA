@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 443e85b — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37514564656`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.
+- AC-003/AC-004 연구 결과 도표·반응형: PASS. 390px에서 조건 카드 내부의 결과 문구와 변화 방향 표시가 분리되고, 768·1440px에서는 두 조건 비교 구조가 유지되며 document width가 각각 375·753·1425px 안에 머문다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산 및 PR #516의 release-verify·site-quality 검사가 성공했다. 로컬 전체 자산은 1,648,894 bytes로 예산 안에 있다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 카피·수치·출처·공개 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHART-LANE-20261007`, `E-UI-CONTRACT-MOBILE-CHART-LANE-20261007`, `E-CDP-MOBILE-CHART-LANE-20261007`, `E-DEPLOY-PIPELINE-MOBILE-CHART-LANE-20261007`, `E-LIVE-PUBLIC-MOBILE-CHART-LANE-20261007`.
+
 ## Current Release Recheck — f785d7d — 2026-10-06
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `f785d7dc11be2c806d17ec757d5416ddeda0c9d5`·HTTP 200·STATIC·72개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.

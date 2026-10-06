@@ -2304,6 +2304,18 @@
         "E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-215",
+      "statement": "351–430px 모바일 연구 결과 도표에서 비교 조건과 GABA 조건이 나란히 유지되면서 각 조건 카드 내부는 세로로 정렬되어 결과 문구와 변화 방향 표시가 겹치지 않는다. 공개 390·768·1440px에서 가로폭 초과 없이 연구 결과를 읽을 수 있으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-CHART-LANE-20261007",
+        "E-UI-CONTRACT-MOBILE-CHART-LANE-20261007",
+        "E-CDP-MOBILE-CHART-LANE-20261007",
+        "E-DEPLOY-PIPELINE-MOBILE-CHART-LANE-20261007",
+        "E-LIVE-PUBLIC-MOBILE-CHART-LANE-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15691,6 +15703,59 @@
       "captured_at": "2026-10-06T18:31:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-TABLET-SHARE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-214"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-CHART-LANE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 결과 차트의 조건 카드 내부 세로 정렬 보정이 UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과한다.",
+      "locator": "local main 443e85b; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 passed; pnpm run build; pnpm run validate:performance -- dist; initial JS 311199, initial CSS 95703, total assets 1648894, largest 311199; status ok",
+      "captured_at": "2026-10-06T18:56:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261007-MOBILE-CHART-LANE",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-215"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-CHART-LANE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 351–430px 비교 차트에서 각 조건 lane을 `top`·`signal` 세로 영역으로 배치하고 결과 문구의 최소 높이를 해제해 겹침 회귀를 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v159 narrow comparison cards; @media(min-width:351px) and (max-width:430px); grid-template-areas `top` `signal`; .guide-outcome-lane-top>strong min-height:0; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T18:56:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-MOBILE-CHART-LANE",
+      "claim_refs": ["C-004", "C-005", "C-215"]
+    },
+    {
+      "id": "E-CDP-MOBILE-CHART-LANE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback에서 모바일 비교 차트의 결과 문구와 변화 방향 표시가 서로 겹치지 않고, 390·768·1440px에서 읽기 레일과 가로폭이 안정적이다.",
+      "locator": "public cache-busted https://kradavid.github.io/gaba_info/?view=guide&cachebust=443e85b#research-cognition; 390px chart top 82, row lanes top/signal rects separated, document width 375; 768px chart top 82 and document width 753; 1440px chart top 82 and document width 1425; console events=[] and exceptions=[]; screenshot outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=443e85b#research-cognition",
+      "captured_at": "2026-10-06T18:56:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-MOBILE-CHART-LANE",
+      "claim_refs": ["C-003", "C-004", "C-215"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-CHART-LANE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #516 required checks와 main 공개 배포 파이프라인이 최종 커밋에서 모두 성공했다.",
+      "locator": "PR #516 https://github.com/KRAdavid/gaba_info/pull/516; release-verify 37514346821 and site-quality-verify 37514346762 success; final merge 443e85b0c64e0d236741a43b093df00328762106; main workflow 37514564656; release-verify 112444045025; worker-readiness 112444603016; deploy-pages 112444641207; deploy-worker skipped static; smoke-live 112444768851; release-status 112444875125; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37514564656",
+      "captured_at": "2026-10-06T18:56:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-MOBILE-CHART-LANE",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-215"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-CHART-LANE-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 모바일 연구 결과 차트의 비교 조건과 GABA 조건이 나란히 보이고 내부 표시가 겹치지 않으며 제품 독립 공개 경계가 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&cachebust=443e85b#research-cognition; HTTP 200 via Pages smoke; main workflow 37514564656 deploy-pages and smoke-live success; Chrome CDP fallback 390px chart screenshot shows `비교 조건`·`GABA 그룹` lanes, `더 많이 줄었습니다`·`덜 줄었습니다` result phrases, separated direction cues, document width 375; 768px and 1440px chart checks preserve the desktop comparison layout; product-independent public boundary matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=443e85b#research-cognition",
+      "captured_at": "2026-10-06T18:56:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-MOBILE-CHART-LANE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-215"]
     }
   ]
 }
