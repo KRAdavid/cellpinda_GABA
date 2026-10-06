@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T08:01:34Z",
+  "updated_at": "2026-10-06T08:24:35Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T08:01:34Z"
+    "last_run_at": "2026-10-06T08:24:35Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T08:01:34Z"
+    "last_run_at": "2026-10-06T08:24:35Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5383,6 +5383,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T08:01:34Z"
+    },
+    {
+      "id": "H-266",
+      "event": "연구 지도 첫 진입의 흐름 단절을 줄이기 위해 첫 연구 주제인 `인지`를 기본 선택 상태로 연결했다. 공유된 연구 카드 해시는 계속 우선하며, 모바일 390px에서 기본 `인지` 표시와 `피부` 선택 시 연구 카드·해시·진행 레일 갱신을 확인했다. 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #453, main workflow `37435517535`, Pages·라이브 smoke·release-status, 공개 validator와 Chrome CDP fallback 390px 검증이 통과했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-188과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T08:24:35Z"
     }
   ]
 }

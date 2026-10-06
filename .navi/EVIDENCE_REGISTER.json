@@ -1982,6 +1982,18 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-188",
+      "statement": "연구 지도 첫 진입에서 인지 주제가 기본 선택되고, 선택 주제의 연구 카드·해시·진행 레일이 자연스럽게 연결된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006",
+        "E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006",
+        "E-CDP-RESEARCH-MAP-FIRST-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13959,6 +13971,59 @@
       "captured_at": "2026-10-06T08:01:34Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-RHYTHM",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-187"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 첫 주제 기본 선택 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 058e5cd; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1645354 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T08:24:35Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-RESEARCH-MAP-FIRST",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-188"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 연구 지도 첫 진입에서 인지 주제를 기본 선택하고, 공유된 연구 카드 해시가 기본값보다 우선하도록 코드에 고정되어 있다.",
+      "locator": "src/components/PublicGabaGuide.tsx; getInitialResearchTopicId; setActiveResearchTopicId(initialResearchTopicId ?? researchTopics[0].id); setActiveResearchTopicId(nextResearchTopicId ?? researchTopics[0].id); scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T08:24:35Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-MAP-FIRST",
+      "claim_refs": ["C-001", "C-003", "C-188"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-MAP-FIRST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 로컬·공개 390px 연구 지도를 확인했으며, 첫 진입 인지 선택과 피부 주제 선택에 따른 카드·해시·진행 레일 연결을 확인했다.",
+      "locator": "Chrome CDP fallback; local http://127.0.0.1:5173/?view=guide&qa=polish-audit-20261006; public https://kradavid.github.io/gaba_info/?view=guide&qa=polish-audit-20261006; viewport 390x844; initial public screenshot shows `현재 · 인지`, `현재 선택 · 인지`, `06 / 12 · 연구 01 / 05`; clicking `피부` yields activeMap `피부`, activeCard `피부 연구 결과`, hash `#research-skin`, progress `06 / 12 · 연구 02 / 05`, document/body scrollWidth 390; pageErrors 0; consoleErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=polish-audit-20261006#research",
+      "captured_at": "2026-10-06T08:24:35Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-RESEARCH-MAP-FIRST",
+      "claim_refs": ["C-003", "C-004", "C-188"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 첫 주제 기본 선택 PR #453이 필수 검사를 통과해 main merge commit 65eed515로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #453; code commit 058e5cd; PR checks release-verify and site-quality successful; main merge commit 65eed5159bfde50dec7087d26441186390e59dc6; main workflow 37435517535; release-verify 112176239607; worker-readiness 112176714598; deploy-pages 112176752392; deploy-worker 112176753608 skipped by STATIC_ONLY; smoke-live 112176851257; release-status 112176948740; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37435517535",
+      "captured_at": "2026-10-06T08:24:35Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-MAP-FIRST",
+      "claim_refs": ["C-001", "C-002", "C-188"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 지도 기본 선택과 주제별 카드 연결이 반영되고, 공개 데이터 정합성·제품 독립 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "node scripts/validate-live-public.mjs https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T08:22:10.048Z; page 200; runtimeMode STATIC; candidateSha 65eed5159bfde50dec7087d26441186390e59dc6; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px screenshot shows default `인지` and post-click `피부` card/hash/progress; document/body scrollWidth 390; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=polish-audit-20261006#research",
+      "captured_at": "2026-10-06T08:24:35Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-FIRST",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-188"]
     }
   ]
 }
