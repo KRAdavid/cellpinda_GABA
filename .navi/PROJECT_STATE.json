@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T07:24:43Z",
+  "updated_at": "2026-10-06T07:42:33Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T07:24:43Z"
+    "last_run_at": "2026-10-06T07:42:33Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T07:24:43Z"
+    "last_run_at": "2026-10-06T07:42:33Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5369,6 +5369,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T07:24:43Z"
+    },
+    {
+      "id": "H-264",
+      "event": "모바일 전문가 영상 주제 레일을 재감리해, 공유 링크로 특정 주제가 바로 열릴 때 선택된 주제 칩이 화면 밖에 남을 수 있는 탐색 결함을 확인했다. `activeVideoTopic` 변경 시 선택 칩을 가로 레일 안으로 자동 정렬하도록 보정했으며, 축소 모션 설정과 기존 레일 끝 감지를 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #449, main workflow `37431243216`, Pages·라이브 smoke·release-status, 공개 validator와 Chrome CDP fallback 390px deep link 검증이 통과했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-186과 다섯 증거를 등록한다. 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T07:42:33Z"
     }
   ]
 }

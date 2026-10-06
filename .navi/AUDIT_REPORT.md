@@ -2327,6 +2327,16 @@
 - PR #445, main workflow `37426950620`, 공개 validator와 Chrome CDP fallback 390·768·1024px 검증이 성공했고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
+## Current Release Recheck — 32612fe — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `32612fefb6c022ef80ef32609abf08b7ad43254d`와 71개 bundle hash를 확인했다.
+- AC-003/AC-004 모바일 전문가 영상 흐름: PASS. 390px 공유 deep link에서 `수용체` 주제 칩이 가로 레일 안으로 자동 정렬되고 선택 영상 `GABA 수용체와 수면`, 원본 링크·공유 버튼이 함께 표시되며 document scrollWidth 390px을 유지했다.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #449 및 main workflow `37431243216`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 과학 정보 경계와 연구 수치·출처: PASS. 이번 변경은 선택 주제의 모바일 가시성만 보정했으며 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006`, `E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006`, `E-CDP-EXPERT-TOPIC-RAIL-20261006`, `E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006`, `E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.
