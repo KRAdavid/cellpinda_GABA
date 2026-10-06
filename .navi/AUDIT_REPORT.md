@@ -18,6 +18,15 @@
 
 증적: `E-LOCAL-BUILD-RESEARCH-CHART-CUE-20261006`, `E-UI-CONTRACT-RESEARCH-CHART-CUE-20261006`, `E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006`, `E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006`.
 
+## GABA 기본 원리 3단계 인포그래픽·공개 배포 — 8da328d — 2026-10-06
+
+- GABA 기본 설명 직후에 `글루탐산 → GABA 생성 → 신경 활동 조절`을 세 카드와 연결 화살표로 배치해, 처음 방문한 사람도 생성·작용의 흐름을 글보다 먼저 읽도록 보강했다. NCBI Bookshelf 출처 링크를 카드 하단에 연결했고 제품·효능·구매 문구는 추가하지 않았다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했다. Playwright Chromium fallback 320·390·768·1440px에서 모바일 1열·태블릿/데스크톱 3열, viewport와 동일한 document scrollWidth, page errors 0·console errors 0을 확인하고 캡처를 검토했다.
+- PR #422의 `release-verify`·`site-quality-verify`가 성공해 main merge `8da328d112d40554ae41308df660ef1f7c9d781b`로 반영되었다. main workflow `37410404149`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 `deploy-worker`는 STATIC_ONLY로 건너뛰었다. 라이브 validator는 HTTP 200·STATIC·candidate `8da328d112d40554ae41308df660ef1f7c9d781b`·71개 bundle hash·제품 독립 공개 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-GABA-PROCESS-20261006`, `E-UI-CONTRACT-GABA-PROCESS-20261006`, `E-PLAYWRIGHT-GABA-PROCESS-20261006`, `E-DEPLOY-PIPELINE-GABA-PROCESS-20261006`, `E-LIVE-PUBLIC-GABA-PROCESS-20261006`.
+
 ## Research Topic Selection Context — 0e5c611 — 2026-10-06
 
 - 연구 지도에서 주제를 선택한 뒤 현재 선택 상태와 아래 연구 카드의 읽기 순서가 화면낭독기와 시각 흐름 모두에서 이어지지 않던 잔여 맥락 문제를 확인하고, 선택 안내를 `role=status`·`aria-live=polite`·`aria-atomic=true`로 연결했다. 화면의 정보량은 늘리지 않고, 선택 전 안내와 선택 후 안내를 자연스럽게 교체한다.

@@ -1479,3 +1479,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 수치·출처·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-CHART-CUE-20261006`, `E-UI-CONTRACT-RESEARCH-CHART-CUE-20261006`, `E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006`, `E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006`.
+
+## GABA 기본 원리 3단계 인포그래픽·공개 배포 — 8da328d — 2026-10-06
+
+- GABA 기본 설명 다음에 `글루탐산 → GABA 생성 → 신경 활동 조절` 3단계 인포그래픽을 추가해 소비자가 생성과 작용의 관계를 시각적으로 이해하도록 고도화했다.
+- 모바일 1열·태블릿/데스크톱 3열 반응형, NCBI 출처 링크, 320·390·768·1440px·공개 URL 감리를 완료했다. 제품 독립 공개 정보 경계와 연구 카피는 유지했다.
+- PR #422, main workflow `37410404149`, Pages·라이브 smoke·release-status와 공개 validator가 모두 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-GABA-PROCESS-20261006`, `E-UI-CONTRACT-GABA-PROCESS-20261006`, `E-PLAYWRIGHT-GABA-PROCESS-20261006`, `E-DEPLOY-PIPELINE-GABA-PROCESS-20261006`, `E-LIVE-PUBLIC-GABA-PROCESS-20261006`.

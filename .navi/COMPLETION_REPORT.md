@@ -1897,3 +1897,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-CHART-CUE-20261006`, `E-UI-CONTRACT-RESEARCH-CHART-CUE-20261006`, `E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006`, `E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006`.
+
+## Current Release Recheck — 8da328d — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `8da328d112d40554ae41308df660ef1f7c9d781b`와 71개 bundle hash를 확인했다.
+- AC-002/AC-004 기본 과학 설명의 이해 흐름과 모바일 가독성: PASS. GABA 기본 설명 직후 글루탐산→GABA 생성→신경 활동 조절 3단계 카드가 표시되고, 320·390px에서는 1열, 768·1440px에서는 3열로 전환된다. NCBI 출처 링크·가로폭·page/console errors 0을 확인했다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. PR #422와 main workflow `37410404149`의 필수 검증·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 과학 정보 경계와 출처 연결: PASS. 기본 원리 설명은 일반 생리학 정보와 NCBI 출처로만 구성했으며 제품 CTA·구매 유도·효능 주장 추가는 없다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-GABA-PROCESS-20261006`, `E-UI-CONTRACT-GABA-PROCESS-20261006`, `E-PLAYWRIGHT-GABA-PROCESS-20261006`, `E-DEPLOY-PIPELINE-GABA-PROCESS-20261006`, `E-LIVE-PUBLIC-GABA-PROCESS-20261006`.

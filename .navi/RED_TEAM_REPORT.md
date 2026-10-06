@@ -17,6 +17,14 @@
 
 증적: `E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006`, `E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006`.
 
+## GABA 기본 원리 3단계 인포그래픽·공개 배포 — 2026-10-06 — 8da328d
+
+- 공격 관점에서 기본 원리 설명이 긴 문장에 묻히거나 모바일 카드가 잘리는지 확인했다. `글루탐산 → GABA 생성 → 신경 활동 조절`이 데스크톱에서는 3열, 모바일에서는 1열과 연결 화살표로 표시되고, 320·390·768·1440px에서 document scrollWidth가 viewport와 같았다.
+- 각 카드의 생성·작용 문구와 NCBI 출처 링크가 함께 표시되고, 페이지 오류·콘솔 오류가 0이었다. 새 수치·효능 단정·제품 연결은 추가되지 않았다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser 플러그인 부재로 Chromium fallback을 사용했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-PLAYWRIGHT-GABA-PROCESS-20261006`, `E-LIVE-PUBLIC-GABA-PROCESS-20261006`, `E-DEPLOY-PIPELINE-GABA-PROCESS-20261006`.
+
 ## Research Topic Selection Context — 2026-10-06 — 0e5c611
 
 - 공격 관점에서 연구 지도 선택 후 사용자가 현재 선택 주제와 다음 연구 카드의 관계를 놓치거나, 보조기기가 상태 변화를 받지 못하는지 확인했다. 선택 전·후 안내가 한 영역에서 교체되고, `role=status`·`aria-live=polite`·`aria-atomic=true`가 유지되며, 390px·1440px에서 선택 카드 제목이 고정 읽기 레일 아래에 가려지지 않았다.

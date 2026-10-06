@@ -1792,6 +1792,18 @@
         "E-LIVE-PUBLIC-RECHECK-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-172",
+      "statement": "GABA 기본 설명 뒤에 글루탐산→GABA 생성→신경 활동 조절 3단계 인포그래픽과 NCBI 출처가 이어져, 처음 보는 사람도 기본 생리 흐름을 모바일·데스크톱에서 빠르게 이해할 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-GABA-PROCESS-20261006",
+        "E-UI-CONTRACT-GABA-PROCESS-20261006",
+        "E-PLAYWRIGHT-GABA-PROCESS-20261006",
+        "E-DEPLOY-PIPELINE-GABA-PROCESS-20261006",
+        "E-LIVE-PUBLIC-GABA-PROCESS-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12941,6 +12953,59 @@
       "captured_at": "2026-10-06T03:24:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-PUBLIC-SURFACE",
       "claim_refs": ["C-001", "C-002", "C-171"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-GABA-PROCESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GABA 기본 설명 뒤에 글루탐산→GABA 생성→신경 활동 조절 3단계 인포그래픽을 추가한 코드가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 8aae327; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1641335 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T03:42:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-PROCESS-STORY",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-172"]
+    },
+    {
+      "id": "E-UI-CONTRACT-GABA-PROCESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 GABA 기본 원리 3단계의 글루탐산·GABA·신호 조절 텍스트와 NCBI 출처 링크, 데스크톱 3열·모바일 1열 반응형 규칙을 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v137 GABA process story assertions; three-step source link assertion; `.guide-gaba-process-flow` desktop `repeat(3,minmax(0,1fr))`; max-width 700px mobile `grid-template-columns:1fr`; status ok",
+      "captured_at": "2026-10-06T03:42:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-GABA-PROCESS-STORY",
+      "claim_refs": ["C-001", "C-172"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-GABA-PROCESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GABA 기본 원리 3단계 인포그래픽이 로컬 320·390·768·1440px에서 모바일 1열·태블릿/데스크톱 3열로 표시되고 카드·출처·가로폭·오류 상태가 안정적이다.",
+      "locator": "Playwright Chromium fallback; local http://127.0.0.1:5173/?view=guide; 320/390/768/1440px; labels `GABA의 재료가 준비됩니다`, `글루탐산이 GABA로 바뀝니다`, `필요한 순간 신호를 조절합니다`; NCBI href present; document scrollWidth equals viewport; page errors 0; console errors 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=local-gaba-process-20261006#basics",
+      "captured_at": "2026-10-06T03:38:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-GABA-PROCESS-STORY",
+      "claim_refs": ["C-003", "C-004", "C-172"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-GABA-PROCESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GABA 기본 원리 3단계 인포그래픽 PR #422가 필수 검사를 통과해 main merge commit 8da328d로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #422; code commit 8aae327; PR release-verify workflow 37410286428 job 112096972268; PR site-quality workflow 37410286250 job 112096971513; main workflow 37410404149; release-verify 112097334592, worker-readiness 112097543917, deploy-pages 112097713088, smoke-live 112098012782 and release-status 112098075556 successful; deploy-worker 112097713459 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37410404149",
+      "captured_at": "2026-10-06T03:50:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-GABA-PROCESS-STORY",
+      "claim_refs": ["C-001", "C-002", "C-172"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-GABA-PROCESS-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 GABA 기본 원리 3단계 카드와 NCBI 출처가 390px·1440px에 반영되고 제품 독립 공개 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 8da328d112d40554ae41308df660ef1f7c9d781b; generatedAt 2026-10-06T03:45:12.434Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 390/1440px found three process cards and NCBI href, document scrollWidth equals viewport, page errors 0, console errors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=live-gaba-process-20261006#basics",
+      "captured_at": "2026-10-06T03:51:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-GABA-PROCESS-STORY",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-172"]
     }
   ]
 }

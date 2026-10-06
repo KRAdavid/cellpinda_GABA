@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T03:25:00Z",
+  "updated_at": "2026-10-06T03:51:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T02:32:00Z"
+    "last_run_at": "2026-10-06T03:51:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T02:32:00Z"
+    "last_run_at": "2026-10-06T03:51:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5271,6 +5271,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T03:25:00Z"
+    },
+    {
+      "id": "H-250",
+      "event": "GABA 기본 설명 뒤에 글루탐산→GABA 생성→신경 활동 조절 3단계 인포그래픽을 추가하고, 카드 간 연결 화살표·모바일 1열·태블릿/데스크톱 3열·NCBI 출처 링크를 반영했다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 Playwright Chromium fallback 320·390·768·1440px의 카드 흐름·가로폭·page/console errors 0을 확인했다. PR #422는 main `8da328d`로 병합되었고 workflow `37410404149`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 PR 품질 검사가 성공했다. 공개 validator는 candidate `8da328d112d40554ae41308df660ef1f7c9d781b`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-172와 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T03:51:00Z"
     }
   ]
 }
