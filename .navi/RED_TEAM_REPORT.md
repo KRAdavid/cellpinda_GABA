@@ -1852,3 +1852,11 @@
 - PR #457과 main workflow `37439945690`, 공개 validator candidate `86c869ed`·HTTP 200·71 bundle hashes가 성공했다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006`, `E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006`, `E-CDP-NARROW-RESEARCH-LABEL-20261006`, `E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006`, `E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006`.
+
+## Recheck — 2026-10-06 — 449d65a
+
+- Red-team finding: 긴 `GABA를 섭취한 그룹의 변화` 라벨이 390px 비교 도표 안에서 핵심 결과보다 시선을 끌고 반복되어, 일반 소비자가 두 조건의 차이를 빠르게 읽기 어려웠다. 시각 라벨을 `GABA 그룹`으로 줄이고 `뇌파 변화`·`활력 점수`·`비교 조건`과 결과 요약의 위계를 유지했다.
+- Recheck: 공개 Chrome CDP fallback 390x844 deep link에서 `GABA 그룹`·`비교 조건`·`덜 줄었습니다`가 표시되고 긴 라벨은 없으며 document/body scrollWidth 375px, page/console errors 0을 확인했다. 연구 수치·출처·접근성 설명·제품 독립 경계는 변경하지 않았다.
+- PR #459, main workflow `37442415197`, 공개 validator candidate `449d65a`·HTTP 200·71 bundle hashes가 성공했다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-COMPARISON-VERDICT-20261006`, `E-UI-CONTRACT-COMPARISON-VERDICT-20261006`, `E-CDP-COMPARISON-VERDICT-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006`, `E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006`.

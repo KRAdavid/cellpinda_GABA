@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T09:05:43Z",
+  "updated_at": "2026-10-06T09:26:39Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T09:05:43Z"
+    "last_run_at": "2026-10-06T09:26:39Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T09:05:43Z"
+    "last_run_at": "2026-10-06T09:26:39Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5404,6 +5404,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T09:05:43Z"
+    },
+    {
+      "id": "H-269",
+      "event": "모바일 연구 비교 도표에서 반복되던 긴 `GABA를 섭취한 그룹의 변화` 라벨을 `GABA 그룹`으로 줄여 측정 항목·두 조건·핵심 결과가 한눈에 읽히도록 보정했다. 연구 수치·출처·접근성 설명·제품 독립 공개 경계·상단 카피는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 공개 Chrome CDP fallback 390px deep link에서 `GABA 그룹`, 긴 라벨 부재, 가로 넘침 없음, page/console errors 0을 확인했다. PR #459는 main merge `449d65a`로 병합되었고 workflow `37442415197`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `449d65afa7d24ada9f2c7bdc40357d0518db833a`·HTTP 200·STATIC·71개 bundle hash·공개 데이터 정합성·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-191과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T09:26:39Z"
     }
   ]
 }

@@ -2016,6 +2016,18 @@
         "E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-191",
+      "statement": "모바일 연구 비교 도표는 반복되던 긴 결과 라벨을 `GABA 그룹`으로 줄여 측정 항목·핵심 결과·두 조건 비교를 한눈에 읽게 하며, 연구 수치·출처·접근성 설명은 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-COMPARISON-VERDICT-20261006",
+        "E-UI-CONTRACT-COMPARISON-VERDICT-20261006",
+        "E-CDP-COMPARISON-VERDICT-20261006",
+        "E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006",
+        "E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14131,6 +14143,59 @@
       "captured_at": "2026-10-06T09:05:43Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-NARROW-RESEARCH-LABEL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-190"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-COMPARISON-VERDICT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 비교 도표 라벨 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 26eebfa; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1645590 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T09:10:55Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-COMPARISON-VERDICT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-191"]
+    },
+    {
+      "id": "E-UI-CONTRACT-COMPARISON-VERDICT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "비교 도표의 시각 결과 라벨을 `GABA 그룹`으로 줄이고 기존 연구 결과·출처·읽는 법 구조를 유지하도록 UI 계약을 고정했다.",
+      "locator": "src/components/PublicGabaGuide.tsx; comparison outcome summary label `GABA 그룹`; scripts/validate-ui-contract.mjs; comparison label contract updated; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T09:10:55Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-COMPARISON-VERDICT",
+      "claim_refs": ["C-001", "C-003", "C-191"]
+    },
+    {
+      "id": "E-CDP-COMPARISON-VERDICT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 390px 연구 비교 deep link를 확인했으며, 도표에 `GABA 그룹`이 표시되고 긴 반복 라벨은 사라졌으며 가로 넘침과 페이지·콘솔 오류가 없었다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=comparison-verdict-public-20261006#research-cognition; viewport 390x844; document/body scrollWidth 375 (vertical scrollbar 제외 콘텐츠 폭); chart text contains `뇌파 변화`, `활력 점수`, `GABA 그룹`, `비교 조건`; long label absent; pageErrors 0; consoleErrors 0; screenshot inspected with view_image at C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-comparison-390.png",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=comparison-verdict-public-20261006#research-cognition",
+      "captured_at": "2026-10-06T09:24:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-COMPARISON-VERDICT",
+      "claim_refs": ["C-003", "C-004", "C-191"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 비교 도표 라벨 보정 PR #459가 필수 검사를 통과해 main merge commit 449d65a로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #459; code commit 26eebfa; PR checks release-verify 112198514664 and site-quality-verify 112198515414 successful; main merge commit 449d65afa7d24ada9f2c7bdc40357d0518db833a; main workflow 37442415197; release-verify 112199105445; worker-readiness 112199449600; deploy-pages 112199493049; deploy-worker 112199493930 skipped by STATIC_ONLY; smoke-live 112199582584; release-status 112199657846; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37442415197",
+      "captured_at": "2026-10-06T09:22:29Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-COMPARISON-VERDICT",
+      "claim_refs": ["C-001", "C-002", "C-191"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 모바일 비교 도표 라벨 보정이 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T09:22:29.474Z; page 200; runtimeMode STATIC; candidateSha 449d65afa7d24ada9f2c7bdc40357d0518db833a; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px comparison screenshot shows `GABA 그룹` and no long label; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=comparison-verdict-public-20261006#research-cognition",
+      "captured_at": "2026-10-06T09:24:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-COMPARISON-VERDICT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-191"]
     }
   ]
 }

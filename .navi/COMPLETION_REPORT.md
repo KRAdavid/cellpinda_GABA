@@ -2082,3 +2082,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·고령 사용자·독립 과학·규제 검토는 남아 있다. Final Status는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006`, `E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006`, `E-CDP-NARROW-RESEARCH-LABEL-20261006`, `E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006`, `E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006`.
+
+## Current Release Recheck — 449d65a — 2026-10-06
+
+- AC-001: PASS — live validator 200, candidate `449d65afa7d24ada9f2c7bdc40357d0518db833a`, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal operations snapshot excluded, Smart Store only, 750 removed, provenance matched.
+- AC-003/AC-004: PASS — 390px cognition research deep link에서 비교 도표가 `뇌파 변화`·`활력 점수`·`GABA 그룹`·`비교 조건` 순서로 읽히며, 긴 라벨을 제거하고 실제 결과 요약·읽는 법을 유지했다. Chrome CDP fallback에서 page/console errors 0을 확인했다.
+- AC-005: PASS — UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #459, main workflow `37442415197`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006: PASS — 연구 수치·결과·해석·출처·접근성 설명·제품 독립 공개 경계와 상단 카피는 변경하지 않았다.
+- AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·고령 사용자·독립 과학·규제 감수는 남아 있다. 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-COMPARISON-VERDICT-20261006`, `E-UI-CONTRACT-COMPARISON-VERDICT-20261006`, `E-CDP-COMPARISON-VERDICT-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006`, `E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006`.
