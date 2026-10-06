@@ -2220,6 +2220,18 @@
         "E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-208",
+      "statement": "390px 전문가 영상 선택 카드의 상태 문구를 '선택 후 재생'으로 정돈하고 선택·준비·재생 상태를 한 줄 메타 레일로 유지해, 영상 선택 뒤 제목·상태·포커스가 함께 갱신된다. 영상 출처·연구·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007",
+        "E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007",
+        "E-CDP-VIDEO-STATE-RAIL-20261007",
+        "E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007",
+        "E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15236,6 +15248,59 @@
       "captured_at": "2026-10-06T15:32:48Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-MOBILE-HERO-LINE-BREAK",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-207"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 코드가 전문가 영상 상태 레일과 정적 번들 예산을 통과한다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm run build; pnpm run validate:performance -- dist-pages; local commit 841961ae6c924d89e7e339d5ea3e40e357240f88; dist-pages initial JS 311269, CSS 95703, total 1648499, largest 311269; final class-only markup restoration was rechecked by typecheck/UI contract and remote site-quality",
+      "captured_at": "2026-10-06T16:07:56Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261007-VIDEO-STATE-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-208"]
+    },
+    {
+      "id": "E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 전문가 영상 상태 라벨·상태 클래스와 선택 후 재생 문구를 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.tsx .guide-video-feature-state; labels 선택 후 재생/준비 중/재생 중; validate:ui-contract passed",
+      "captured_at": "2026-10-06T16:07:56Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-VIDEO-STATE-RAIL",
+      "claim_refs": ["C-004", "C-005", "C-208"]
+    },
+    {
+      "id": "E-CDP-VIDEO-STATE-RAIL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback 공개 390px interaction에서 선택 후 재생 → 준비 중, active pressed, focus restore, width alignment, errors 0을 확인했다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?qa=video-interaction-20261007#expert-videos; before featureState=선택 후 재생, featureTitle=GABA와 수면 리듬; after activePressed=true, featureState=준비 중, featureTitle=갱년기와 수면, GABA에 대한 질문, focus=expert-video-feature, scrollWidth=390, viewportWidth=390; section audit 390·1440px headings present and errors=[]; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=video-interaction-20261007#expert-videos",
+      "captured_at": "2026-10-06T16:07:56Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-VIDEO-STATE-RAIL",
+      "claim_refs": ["C-003", "C-004", "C-208"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #500/#501 required checks and final main pipeline all success.",
+      "locator": "PR #500 https://github.com/KRAdavid/gaba_info/pull/500; final PR release run 37490870613 / release-verify 112362949355 success; site quality 37490870623 / 112362945144 success; PR #501 https://github.com/KRAdavid/gaba_info/pull/501; release 37491700982 / release-verify 112365800103 success; site-quality 37491701014 / 112365799253 success; final merge d17014d6d7baad43a53e39953a397f32307488e9; main workflow 37491933306; release-verify 112366595369; worker-readiness 112367199502; deploy-pages 112367238272; deploy-worker 112367238567 skipped static; smoke-live 112368084363; release-status 112368248984; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37491933306",
+      "captured_at": "2026-10-06T16:07:56Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-VIDEO-STATE-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-208"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "final public GitHub Pages d17014d6 live validator 200 and public video state interaction success; product independent boundary matched.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T15:59:19.594Z; page 200; runtimeMode STATIC; candidateSha d17014d6d7baad43a53e39953a397f32307488e9; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP interaction state transition and section audit at 390·1440px; document widths 390/390 and 1425/1425; headings present; errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=video-interaction-20261007#expert-videos",
+      "captured_at": "2026-10-06T16:07:56Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-VIDEO-STATE-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-208"]
     }
   ]
 }

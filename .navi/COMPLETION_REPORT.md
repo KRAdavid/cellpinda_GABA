@@ -2266,3 +2266,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.
+
+## Current Release Recheck — d17014d6 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `d17014d6d7baad43a53e39953a397f32307488e9`·HTTP 200·STATIC·72개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 전문가 영상 선택·모바일 반응형: PASS. 390px에서 메타 레일이 `수면 · 선택 후 재생 · 01 / 09`로 읽히며 두 번째 카드 선택 뒤 `준비 중`·제목 갱신·`aria-pressed=true`·feature 포커스 복귀가 확인됐다. 390px 문서 폭은 `390/390`, 데스크톱은 `1425/1425`로 정합했다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·production build·성능 예산, PR #500/#501, main workflow `37491933306`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 최종 정적 자산 총량은 `1,648,499 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 전문가 영상 상태 표시·선택 피드백·정적 스타일 정리에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007`, `E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007`, `E-CDP-VIDEO-STATE-RAIL-20261007`, `E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007`, `E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007`.

@@ -2007,3 +2007,13 @@
 - Residual: 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도와 Safari/iOS/Android 실기기 동작을 대신하지 않는다. teaser preview는 `HOLD`다.
 
 증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.
+
+## Red-team recheck — 전문가 영상 선택 상태 레일 — d17014d6 — 2026-10-07
+
+- Finding: 모바일 영상 카드의 상태 문구가 길어 상태·순서·선택 제목을 연속해서 읽기 어렵게 보일 수 있었다.
+- Repair: 상태를 `선택 후 재생`·`준비 중`·`재생 중`으로 통일하고 상태 전용 클래스를 유지했다. 두 번째 카드를 선택하면 `aria-pressed=true`, 상태 `준비 중`, 제목 갱신, feature 카드 포커스 복귀가 함께 일어난다.
+- Recheck: 공개 Chrome CDP fallback 390px interaction에서 `선택 후 재생 → 준비 중`, `scrollWidth=390`, `viewportWidth=390`, focus `expert-video-feature`, runtime/console/http errors 0을 확인했다. 390·1440px 섹션 점검에서 연구·영상·회복 제목이 존재하고 document width가 정합했다.
+- Boundary: 영상 UI와 읽기 흐름만 보정했으며 GABA 효능·제품 적용성·규제 적합성을 새로 주장하지 않는다.
+- Residual: 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도, Safari/iOS/Android 실기기, 독립 과학·규제 감수를 대신하지 않는다. teaser preview는 `HOLD`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007`, `E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007`, `E-CDP-VIDEO-STATE-RAIL-20261007`, `E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007`, `E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007`.
