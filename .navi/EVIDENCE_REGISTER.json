@@ -1804,6 +1804,18 @@
         "E-LIVE-PUBLIC-GABA-PROCESS-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-173",
+      "statement": "최신 main 공개 배포본은 자동 품질 점검·연구 도표·전문가 영상 선택 재생·제품 독립 공개 데이터·정적 번들 경계를 다시 통과해, 현재 공개 URL 상태를 재현 가능한 기준으로 확인할 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PUBLIC-RECHECK-20261006",
+        "E-NAVI-GATES-PUBLIC-RECHECK-20261006",
+        "E-PLAYWRIGHT-VIDEO-RECHECK-20261006",
+        "E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261006",
+        "E-LIVE-PUBLIC-PUBLIC-RECHECK-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13006,6 +13018,59 @@
       "captured_at": "2026-10-06T03:51:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-GABA-PROCESS-STORY",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-172"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PUBLIC-RECHECK-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 main 기준 공개 퍼블리싱 번들이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 다시 통과했다.",
+      "locator": "main 2515212345f30236f4f8603de8f27b7fbd932e5d; pnpm run build; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1641335 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T04:02:50Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-PUBLIC-RECHECK",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-173"]
+    },
+    {
+      "id": "E-NAVI-GATES-PUBLIC-RECHECK-20261006",
+      "kind": "GOVERNANCE",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 목표·계획·외부 게이트·공개 데이터·거버넌스·운영 문서 검사가 모두 통과했고, 외부 검증 대기 상태는 닫히지 않은 채 보존됐다.",
+      "locator": "pnpm run validate:goal; pnpm run validate:plan; pnpm run validate:external-gate-evidence; pnpm run validate:public; pnpm run validate:governance; pnpm run validate:ops-docs; all exit code 0; external pending B2 VERIFYING, B3 WAITING, E1 WAITING; teaser HOLD; smartStoreOnly=true; removed750=true; provenance=matched",
+      "captured_at": "2026-10-06T04:02:50Z",
+      "reviewer_id": "NAVI-GOVERNANCE-QA-GABA-20261006-PUBLIC-RECHECK",
+      "claim_refs": ["C-001", "C-002", "C-173"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-VIDEO-RECHECK-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개본에서 전문가 영상 카드를 선택하면 선택 영상 제목·포커스·autoplay iframe으로 이어지고, 320·390·768·1440px에서 document scrollWidth가 viewport와 일치하며 오류가 없다.",
+      "locator": "Playwright Chromium fallback; C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-video-audit-20261006.mjs; 320/390/768/1440px; selected `갱년기와 수면, GABA에 대한 질문`; iframe `https://www.youtube.com/embed/Cnk0PGn9YBM?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`; focus `guide-video-feature`; document scrollWidth equals viewport; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=public-video-recheck-20261006#expert-videos",
+      "captured_at": "2026-10-06T04:01:40Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-VIDEO-RECHECK",
+      "claim_refs": ["C-003", "C-004", "C-173"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 문서 동기화 이후 main workflow가 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 성공적으로 완료했고 정적 모드 worker 배포는 조건에 따라 건너뛰었다.",
+      "locator": "main workflow 37411243511; release-verify 112099927942; worker-readiness 112100166750; deploy-pages 112100190236; deploy-worker 112100190978 skipped by STATIC_ONLY; smoke-live 112100244364; release-status 112100298916; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37411243511",
+      "captured_at": "2026-10-06T03:59:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-PUBLIC-RECHECK",
+      "claim_refs": ["C-001", "C-002", "C-173"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-PUBLIC-RECHECK-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 HTTP 200·STATIC·제품 독립 공개 데이터·공유 페이지·teaser HOLD·번들 정합성을 유지하며 라이브 재검증을 통과했다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 2515212345f30236f4f8603de8f27b7fbd932e5d; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37411243511",
+      "captured_at": "2026-10-06T04:02:50Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-PUBLIC-RECHECK",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-173"]
     }
   ]
 }

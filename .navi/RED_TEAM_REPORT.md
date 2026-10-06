@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 공개 배포 품질 자동 재점검 — 2026-10-06 — 2515212
+
+- 공격 관점에서 최신 main 공개본의 배포 SHA·정적 번들·연구 데이터 경계·전문가 영상 선택 재생을 다시 대조했다. 320·390·768·1440px 모두 document scrollWidth가 viewport를 넘지 않았고, 선택 뒤 `guide-video-feature` 포커스와 `autoplay=1` iframe이 확인되며 page/console errors는 0이었다.
+- `teaser=HOLD`, internal operations snapshot 제외, Smart Store only, 750 제거, provenance 일치 상태가 유지되어 공개 과학 안내와 내부 운영·제품 판매 경계가 섞이지 않았다.
+- 새 CRITICAL/MAJOR 코드 결함은 없지만, Chrome fallback이 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도를 대신하지는 않는다. RT-001·RT-002·RT-003과 독립 과학·규제 감수 조건은 계속 OPEN으로 둔다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-RECHECK-20261006`, `E-NAVI-GATES-PUBLIC-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-RECHECK-20261006`, `E-LIVE-PUBLIC-PUBLIC-RECHECK-20261006`.
+
 ## 공개 surface·초소형 모바일 재감리 — 2026-10-06 — e2f9920
 
 - 공격 관점에서 280px에서 헤더·진행 rail·연구 지도·연구 카드·도표가 잘리거나, 선택 후 카드가 고정 rail 아래에 가려지는지 확인했다. 활성 `근육` 카드가 상단에 정렬되고 도표·12개 시각 lane·document scrollWidth 280px·page errors 0을 유지했다.

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 공개 배포 품질 자동 재점검·NAVI 동기화 — 2515212 — 2026-10-06
+
+- 최신 main 공개본에서 목표·계획·외부 게이트·공개 데이터·거버넌스·운영 문서·UI 계약·typecheck·127개 테스트·production build를 자동 재실행했다.
+- 320·390·768·1440px 전문가 영상 선택 재생에서 autoplay iframe·feature 포커스·가로폭·page/console errors 0을 재확인했고, live validator는 HTTP 200·STATIC·제품 독립 공개 경계를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-RECHECK-20261006`, `E-NAVI-GATES-PUBLIC-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-RECHECK-20261006`, `E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261006`, `E-LIVE-PUBLIC-PUBLIC-RECHECK-20261006`.
+
 ## 공개 surface·초소형 모바일 재감리·NAVI 동기화 — e2f9920 — 2026-10-06
 
 - 280px·390px·1440px 공개 surface를 다시 점검해 연구 지도·연구 카드·도표·전문가 영상·이야기 공유 흐름과 가로폭·접근성 기본 계약을 확인했다.

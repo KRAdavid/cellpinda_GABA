@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T03:51:00Z",
+  "updated_at": "2026-10-06T04:02:50Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5278,6 +5278,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T03:51:00Z"
+    },
+    {
+      "id": "H-251",
+      "event": "최신 main 공개본을 NAVI 기준으로 자동 재점검했다. UI 계약·목표·계획·외부 게이트·공개 데이터·거버넌스·운영 문서·typecheck·127개 테스트·production build가 통과했고, 공개 320·390·768·1440px 전문가 영상 선택 재생에서 autoplay iframe·포커스·가로폭·page/console errors 0을 확인했다. 라이브 validator는 candidate `2515212345f30236f4f8603de8f27b7fbd932e5d`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-173과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T04:02:50Z"
     }
   ]
 }

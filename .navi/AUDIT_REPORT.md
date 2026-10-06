@@ -1,5 +1,14 @@
 # Audit Report
 
+## 공개 배포 품질 자동 재점검·NAVI 동기화 — 2515212 — 2026-10-06
+
+- 최신 main 공개본을 기준으로 UI 계약·목표·계획·외부 게이트·공개 데이터·거버넌스·운영 문서·typecheck·127개 테스트·production build를 다시 실행했고 모두 통과했다. 정적 번들은 71개 파일이며 초기 JS 311199, 초기 CSS 95703, 전체 자산 1641335로 성능 예산 안에 있다.
+- Playwright Chromium fallback으로 320·390·768·1440px 전문가 영상 선택 흐름을 재확인했다. 카드 선택 뒤 선택 영상 제목·feature 포커스·`autoplay=1` iframe이 연결되고, 네 화면 폭에서 document scrollWidth가 viewport와 같으며 page/console errors가 0이었다.
+- 공개 validator는 HTTP 200·STATIC·candidate `2515212345f30236f4f8603de8f27b7fbd932e5d`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·teaser `HOLD`·internal operations snapshot 제외·Smart Store only·750 제거·provenance 일치를 확인했다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-RECHECK-20261006`, `E-NAVI-GATES-PUBLIC-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-RECHECK-20261006`, `E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261006`, `E-LIVE-PUBLIC-PUBLIC-RECHECK-20261006`.
+
 ## 공개 surface·초소형 모바일 재감리 — e2f9920 — 2026-10-06
 
 - 현재 공개본의 첫 화면·연구 지도·전문가 영상·이야기 공유 surface를 재감리하고, 초소형 280px까지 연구 지도·연구 카드·도표가 viewport 안에 읽히는지 확인했다. 280px에서 연구 지도 240px, 활성 연구 카드 240px, 선택 도표 204px로 배치되고 `document.scrollWidth`는 280px이었다.

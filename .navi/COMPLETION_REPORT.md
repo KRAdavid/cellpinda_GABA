@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 2515212 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `2515212345f30236f4f8603de8f27b7fbd932e5d`·71개 bundle hash·12개 claim·6개 master record·6개 share page를 확인했다.
+- AC-002/AC-003/AC-004 연구 지도·연구 결과 도표·모바일 흐름: PASS. 기존 연구 결과·출처·제품 독립 경계와 반응형 폭을 유지한 채 자동 UI 계약 및 공개 데이터 검사를 통과했다.
+- AC-005 자동 품질 기준: PASS. 목표·계획·외부 게이트·공개 데이터·거버넌스·운영 문서·typecheck·127개 테스트·production build가 통과했고 정적 성능 예산도 유지됐다.
+- AC-006/AC-007 제품 독립 과학 정보 경계와 감사·레드팀 분리: PASS_WITH_CONDITIONS. teaser `HOLD`와 내부 운영 데이터 제외를 유지하며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다. 외부 검증이 없다는 이유로 완료로 표시하지 않는다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-RECHECK-20261006`, `E-NAVI-GATES-PUBLIC-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-RECHECK-20261006`, `E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261006`, `E-LIVE-PUBLIC-PUBLIC-RECHECK-20261006`.
+
 ## 공개 surface·초소형 모바일 재검증 — e2f9920 — 2026-10-06
 
 - AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `e2f992033415efbcde7ae4b119ce44006e49651e`·71개 bundle hash·제품 독립 경계를 확인했다.
