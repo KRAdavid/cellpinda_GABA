@@ -1798,3 +1798,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007`, `E-UI-CONTRACT-NARROW-DEEP-LINK-20261007`, `E-CDP-NARROW-DEEP-LINK-20261007`, `E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007`, `E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007`.
+
+## 중간 폭 모바일 공유 라벨·공개 배포 — 7997fd5 — 2026-10-07
+
+- 351–430px에서 공유 버튼을 아이콘+`공유하기`로 보이게 하고 safe-area 간격을 재조정했다.
+- 350px 이하 아이콘 레일과 390px 실제 공유 토스트·가로폭 정합을 유지했다.
+- PR #507, main workflow `37501337335`, 공개 cache-busted 390·351·350px 검증이 성공했다. 정적 자산 총량은 `1,648,675 bytes`다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007`, `E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007`, `E-CDP-MEDIUM-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007`.

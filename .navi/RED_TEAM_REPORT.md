@@ -2036,3 +2036,12 @@
 - 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도와 Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007`, `E-UI-CONTRACT-NARROW-DEEP-LINK-20261007`, `E-CDP-NARROW-DEEP-LINK-20261007`, `E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007`, `E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007`.
+
+## Red-team recheck — 중간 폭 모바일 공유 라벨 — 2026-10-07 — 7997fd5
+
+- 공격 관점에서 351–430px에서 공유 기능을 아이콘만으로 노출해 처음 방문자가 기능 의미를 즉시 파악하지 못하는 경로를 확인했다.
+- 72px `공유하기` 레일과 safe-area 컨트롤 간격을 적용하고, 350px 이하에서는 아이콘 레일을 유지했다. 공개 390·351·350px에서 document width 정합, 390px 공유 토스트, errors `[]`를 확인했다.
+- 이번 변경은 UI 발견성과 반응형 레일에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았다. 새 CRITICAL/MAJOR 결함은 없다. RT-001·RT-002·RT-003은 계속 OPEN이며 teaser preview는 `HOLD`다.
+- 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007`, `E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007`, `E-CDP-MEDIUM-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007`.

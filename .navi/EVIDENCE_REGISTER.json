@@ -2256,6 +2256,18 @@
         "E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-211",
+      "statement": "351–430px 중간 폭 모바일에서 공유 버튼이 아이콘과 `공유하기` 라벨을 함께 표시해 기능 발견성을 보완하고, 메뉴·읽기 크기·공유 컨트롤의 safe-area 간격과 350px 이하 컴팩트 레일을 유지한다. 390px 공유 interaction은 토스트와 가로폭 정합을 확인했으며 연구 카피·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007",
+        "E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007",
+        "E-CDP-MEDIUM-SHARE-LABEL-20261007",
+        "E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007",
+        "E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15431,6 +15443,59 @@
       "captured_at": "2026-10-06T16:52:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-NARROW-DEEP-LINK",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-210"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "중간 폭 공유 라벨 보정 코드가 UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과한다.",
+      "locator": "local commit 92ecbcf; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 passed; pnpm run build; dist performance initial JS 311199, CSS 95703, total 1648675, largest 311199; candidateSha 92ecbcf184f40abcd5e41a7172efd6d45a8c6f62; final build status ok",
+      "captured_at": "2026-10-06T17:15:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261007-MEDIUM-SHARE-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-211"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 351–430px 중간 폭에서 공유 라벨·safe-area 컨트롤 간격을 유지하고 350px 이하에서 컴팩트 아이콘 레일로 전환하는 규칙을 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v154 medium-phone header order requires menu right calc(168px + env(safe-area-inset-right)), reading-size right calc(92px + env(safe-area-inset-right)), share width 72px, font-size 11px, gap 4px, white-space nowrap; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T17:15:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-MEDIUM-SHARE-LABEL",
+      "claim_refs": ["C-004", "C-005", "C-211"]
+    },
+    {
+      "id": "E-CDP-MEDIUM-SHARE-LABEL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback local에서 390px·351px 공유 라벨과 350px 컴팩트 레일, 실제 공유 interaction이 정상이다.",
+      "locator": "Chrome CDP fallback local http://127.0.0.1:5173/?view=guide and public cache-busted URL; 390px: menu 44px, reading 72px, share 72px, documentWidth 390, toast visible after share click, errors=[]; 351px: menu 44px, reading 60px, share 72px, documentWidth 351, errors=[]; 350px: share 44px icon rail, documentWidth 350, errors=[]; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=7997fd5",
+      "captured_at": "2026-10-06T17:15:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-MEDIUM-SHARE-LABEL",
+      "claim_refs": ["C-003", "C-004", "C-211"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #507 required checks and final main deployment pipeline all success.",
+      "locator": "PR #507 https://github.com/KRAdavid/gaba_info/pull/507; release-verify 37501138535 and site-quality-verify 37501138652 success; final merge 7997fd55fd2dbb23c6900fb05a99332b0cf20b17; main workflow 37501337335; release-verify 112398819160; worker-readiness 112399351015; deploy-pages 112399399840; deploy-worker skipped static; smoke-live 112399495950; release-status 112399631594; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37501337335",
+      "captured_at": "2026-10-06T17:15:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-MEDIUM-SHARE-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-211"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "final public GitHub Pages 7997fd5 live deployment exposes the medium-phone share label and preserves the compact narrow rail; product-independent boundary remains matched.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&cachebust=7997fd5; main workflow 37501337335 smoke-live success; Chrome CDP fallback: 390px and 351px show visible `공유하기` with control widths 72px and document widths 390/351; 350px keeps 44px icon rail and document width 350; 390px share click shows `공유를 취소했어요.` toast; errors=[]; remote CSS asset `PublicGabaGuide-izxQIrDv.css` contains width:72px;font-size:11px;gap:4px;white-space:nowrap; product-independent boundary matched; screenshot outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=7997fd5",
+      "captured_at": "2026-10-06T17:15:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-MEDIUM-SHARE-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-211"]
     }
   ]
 }

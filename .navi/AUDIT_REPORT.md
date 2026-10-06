@@ -2576,3 +2576,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007`, `E-UI-CONTRACT-NARROW-DEEP-LINK-20261007`, `E-CDP-NARROW-DEEP-LINK-20261007`, `E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007`, `E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007`.
+
+## 중간 폭 모바일 공유 라벨·공개 배포 — 7997fd5 — 2026-10-07
+
+- 독립 감사 관점에서 351–430px 중간 폭 모바일에서 공유 버튼이 접근성 이름만 있고 화면에서는 아이콘만 보이는 발견성 회귀를 확인했다.
+- v154에서 공유 라벨을 72px 레일로 복원하고 safe-area를 고려해 메뉴·읽기 크기·공유 버튼을 재배치했다. 350px 이하 아이콘 레일은 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #507, main workflow `37501337335`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 cache-busted 390·351·350px에서 라벨·컨트롤 폭·가로폭·공유 토스트·오류 0을 확인했다.
+- 공개 과학 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007`, `E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007`, `E-CDP-MEDIUM-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007`.
