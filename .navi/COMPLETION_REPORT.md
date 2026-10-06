@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — print/PDF publishing deployed — main ab096d1 — 2026-10-07
+
+- AC-001/AC-003/AC-004: PASS. PR #527 병합 후 main workflow `37532761509`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 공개 URL은 HTTP 200이다. 원격 390·1440px print media에서 `print.css`가 적용되어 화면 전용 크롬이 숨겨지고 본문 13개 섹션이 유지된다.
+- AC-005: PASS. UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했고 공개 번들은 73개 hash로 검증됐다. 로컬 총 자산은 1,649,478 bytes다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. 연구 출처 URL·제품 독립 경계·teaser `HOLD`를 유지했다. 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-PRINT-PUBLISHING-20261007`, `E-UI-CONTRACT-PRINT-PUBLISHING-20261007`, `E-CDP-PRINT-PUBLISHING-20261007`, `E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007`, `E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007`.
+
 ## Current Release Recheck — print/PDF publishing — 2026-10-07
 
 - AC-003/AC-004: PASS. 공개 안내서 인쇄 미디어에서 A4 여백과 본문 흐름을 적용하고 화면 전용 헤더·진행바·영상 보드·복구 조작부를 숨겼다. 로컬 production preview 390·1440px에서 document width가 viewport와 같고 본문 섹션 13개가 렌더된다.

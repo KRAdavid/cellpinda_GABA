@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 인쇄·PDF 공유 퍼블리싱 배포 후 공격 재점검 — main ab096d1 — 2026-10-07
+
+- 공개 배포 후 print media를 다시 적용해 화면 전용 헤더·진행바·영상 보드·복구 조작부가 인쇄본에 남는지, 390·1440px에서 문서 폭이 밀리는지 점검했다. 실제 공개 `print.css` 적용 결과 `header=none`, `readingProgress=none`, `videoBoard=none`, `recoveryControls=none`, visible sections 13으로 확인됐다.
+- main workflow `37532761509`의 Pages 배포·라이브 smoke·release-status와 공개 validator가 성공했고 새 CRITICAL/MAJOR 결함은 없다. 과거 이력의 local-path scanner annotation 13건은 기존 reachable history 기록으로 현재 공개 번들에 포함되지 않았다.
+- Chrome fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 RT-001·RT-002·RT-003은 계속 OPEN이다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-PRINT-PUBLISHING-20261007`, `E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007`, `E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007`.
+
 ## 인쇄·PDF 공유 퍼블리싱 레이어 — 2026-10-07 — working tree
 
 - 공격 관점에서 사업자용 인쇄본이 화면 전용 조작부를 그대로 남겨 본문을 분절하거나, A4 폭에서 카드가 중간 분할되어 출처가 다음 페이지로 밀리는 실패 모드를 점검했다. v163에서 헤더·진행바·영상 보드·복구 조작부를 숨기고 주요 편집 표면의 분할을 줄였으며 연구 출처 링크를 인쇄용 URL로 노출했다.

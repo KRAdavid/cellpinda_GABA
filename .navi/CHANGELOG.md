@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 인쇄·PDF 공유 퍼블리싱 공개 배포 완료 — main ab096d1 — 2026-10-07
+
+- PR #527을 main에 병합하고 GitHub Pages 공개 배포를 완료했다. release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했고 공개 validator가 73개 bundle hash와 제품 독립 경계를 확인했다.
+- 공개 390·1440px print media에서 화면 전용 헤더·진행바·영상 보드·복구 조작부가 숨겨지고 본문 섹션이 유지된다. 사업자용 인쇄·PDF 공유 경로를 실제 공개 URL에서 검증했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실기기·고령 사용자·독립 과학·규제 감수는 외부 검증 항목이다.
+
+증적: `E-LOCAL-BUILD-PRINT-PUBLISHING-20261007`, `E-UI-CONTRACT-PRINT-PUBLISHING-20261007`, `E-CDP-PRINT-PUBLISHING-20261007`, `E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007`, `E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007`.
+
 ## 인쇄·PDF 공유 퍼블리싱 레이어 — 2026-10-07 — working tree
 
 - 사업자가 공개 안내서를 출력·PDF로 보관·공유할 때도 읽기 흐름이 유지되도록 A4 인쇄 미디어, 화면 전용 요소 숨김, 주요 표면 분할 방지, 연구 출처 URL 노출을 추가했다.
