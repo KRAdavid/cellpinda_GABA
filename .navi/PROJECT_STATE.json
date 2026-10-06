@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T05:56:17Z",
+  "updated_at": "2026-10-06T06:22:52Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T03:51:00Z"
+    "last_run_at": "2026-10-06T06:22:52Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T03:51:00Z"
+    "last_run_at": "2026-10-06T06:22:52Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5341,6 +5341,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T05:56:17Z"
+    },
+    {
+      "id": "H-260",
+      "event": "초소형 모바일에서 고령 사용자도 읽기 조절 기능을 바로 알아볼 수 있도록 280·320px 헤더의 `글자` 라벨을 11px, 크기 표식을 14px로 키우되 컨트롤 폭과 헤더 배치는 유지했다. 390·1440px 구성은 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #440과 heartbeat 복구 PR #441, main workflow `37423305842`, Pages·라이브 smoke·release-status, 공개 validator와 Chromium fallback 280·320·390·1440px 검증이 통과했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-182와 다섯 증거를 등록한다. 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T06:22:52Z"
     }
   ]
 }

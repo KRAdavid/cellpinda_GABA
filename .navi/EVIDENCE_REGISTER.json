@@ -1910,6 +1910,18 @@
         "E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-182",
+      "statement": "280·320px 초소형 모바일 헤더의 읽기 크기 조절 라벨과 크기 표식이 더 잘 읽히면서도 컨트롤 폭·페이지 가로폭·390·1440px 구성이 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-COMPACT-READING-20261008",
+        "E-UI-CONTRACT-COMPACT-READING-20261008",
+        "E-PLAYWRIGHT-COMPACT-READING-20261008",
+        "E-DEPLOY-PIPELINE-COMPACT-READING-20261008",
+        "E-LIVE-PUBLIC-COMPACT-READING-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13569,6 +13581,59 @@
       "captured_at": "2026-10-06T05:56:17Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-SLEEP-CHART-NARROW",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-181"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-COMPACT-READING-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 읽기 크기 컨트롤 가독성 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 7e064ea76d7171aad26eac3b0bbb6286b747a8ca; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1642458 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T06:22:52Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-COMPACT-READING",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-182"]
+    },
+    {
+      "id": "E-UI-CONTRACT-COMPACT-READING-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 350px 이하 읽기 크기 컨트롤의 좁은 헤더 레일은 유지하면서 `글자` 라벨을 11px, 크기 표식을 14px로 고정해 초소형 화면 가독성 회귀를 막는다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.css v145 compact reading control; `.guide-header .guide-reading-size-compact-label{font-size:11px}`; `.guide-header .guide-reading-size-mark{font-size:14px}`; status ok",
+      "captured_at": "2026-10-06T06:22:52Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261008-COMPACT-READING",
+      "claim_refs": ["C-001", "C-182"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-COMPACT-READING-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개본 Chromium fallback에서 280·320px 읽기 조절 라벨과 크기 표식이 커지고, 390·1440px 기존 구성이 유지되며 모든 폭에서 가로 넘침과 페이지·콘솔 오류가 없다.",
+      "locator": "Playwright Chromium fallback; public 280/320/390/1440px; 280/320 label font 11px, label width 18.484375px, mark font 14px, toggle width 60px; 390 label hidden, mark font 13px, toggle width 72px; 1440 label hidden, mark font 16px, toggle width 114.1875px; document/body scrollWidth equals viewport at every width; pageErrors 0; consoleErrors 0; hero hash `#opening-bridge` heading top 115.265625px with header bottom 70px; expert selection iframe autoplay URL for `Cnk0PGn9YBM`; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=compact-reading-280",
+      "captured_at": "2026-10-06T06:22:52Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261008-COMPACT-READING",
+      "claim_refs": ["C-003", "C-004", "C-182"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-COMPACT-READING-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 읽기 조절 보정 PR #440과 heartbeat 복구 PR #441이 보호된 main 절차를 통과했고, 최신 main 배포의 freshness·Pages·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #440 code commit 7e064ea76d7171aad26eac3b0bbb6286b747a8ca; PR workflows 37422857500 and 37422857552 successful; initial main workflow 37423001085 correctly held at stale TF pulse; heartbeat PR #441 checks 37423198736 and 37423198762 successful; heartbeat merge commit 06013ba08af184913ac36a1f4fa9d692153dfd63; final main workflow 37423305842; release-verify 112137276739, worker-readiness 112137634497, deploy-pages 112137656984, deploy-worker 112137658330 skipped by STATIC_ONLY, smoke-live 112137730848, release-status 112137808942; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37423305842",
+      "captured_at": "2026-10-06T06:22:52Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261008-COMPACT-READING",
+      "claim_refs": ["C-001", "C-002", "C-182"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-COMPACT-READING-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 초소형 모바일 읽기 조절 보정이 280·320px에 반영되고 390·1440px 기존 구성과 제품 독립 공개 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T06:22:52.033Z; page 200; runtimeMode STATIC; candidateSha 06013ba08af184913ac36a1f4fa9d692153dfd63; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Playwright 280/320/390/1440 exact control metrics, document/body scrollWidth equals viewport at every width, pageErrors 0, consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=compact-reading-280",
+      "captured_at": "2026-10-06T06:22:52Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-COMPACT-READING",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-182"]
     }
   ]
 }
