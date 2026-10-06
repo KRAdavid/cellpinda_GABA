@@ -1182,6 +1182,27 @@ export default function PublicGabaGuide() {
     };
   }, []);
 
+  // Keep a shared or newly selected topic visible inside the horizontal mobile rail.
+  // This preserves the selected-state context when a deep link opens a later topic.
+  useEffect(() => {
+    const rail = videoFilterRailRef.current;
+    if (!rail) return;
+    const activeFilter = rail.querySelector<HTMLElement>('.guide-video-filter.is-active');
+    if (!activeFilter) return;
+    const frame = window.requestAnimationFrame(() => {
+      const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      const targetScrollLeft = Math.max(0, Math.min(
+        maxScrollLeft,
+        activeFilter.offsetLeft - Math.max(0, (rail.clientWidth - activeFilter.offsetWidth) / 2),
+      ));
+      rail.scrollTo({
+        left: targetScrollLeft,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [activeVideoTopic]);
+
   useEffect(() => {
     if (!menuOpen) return;
     const getMenuFocusables = () => Array.from(document.querySelectorAll<HTMLElement>('#guide-primary-navigation a, #guide-primary-navigation button, .guide-menu-toggle')).filter((element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true' && element.getClientRects().length > 0);
