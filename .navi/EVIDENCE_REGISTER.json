@@ -2112,6 +2112,18 @@
         "E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-199",
+      "statement": "전문가 영상 게시판 썸네일에 전체 9개 영상 기준 `01 / 09`부터 `09 / 09`까지 순서를 표시해 모바일·데스크톱에서 영상 흐름과 현재 위치를 즉시 이해할 수 있게 하며, 주제 필터에서도 전체 컬렉션 순서를 유지한다. 영상 제목·출처·자동재생 동작·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+        "E-UI-CONTRACT-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+        "E-CDP-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-CARD-SEQUENCE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14651,6 +14663,59 @@
       "captured_at": "2026-10-06T11:55:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EVERYDAY-CARD-SEQUENCE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-198"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 카드 순서 표식 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "code commit 376b9ab40bb2e4748614ca8dc6eb77f6d26540e3; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1648082 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T12:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-EXPERT-VIDEO-CARD-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-199"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 9개 카드에 전체 컬렉션 기준 `01 / 09`부터 `09 / 09`까지 순서를 노출하고 필터에서도 전역 순서를 유지하도록 UI 계약을 확인했다.",
+      "locator": "src/components/PublicGabaGuide.tsx expertVideos.map; videoNumber = expertVideos.findIndex(candidate => candidate.id === video.id) + 1; .guide-video-card-order; `String(videoNumber).padStart(2, '0') / String(expertVideos.length).padStart(2, '0')`; src/components/PublicGabaGuide.css .guide-video-card-order; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T12:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-EXPERT-VIDEO-CARD-SEQUENCE",
+      "claim_refs": ["C-001", "C-003", "C-199"]
+    },
+    {
+      "id": "E-CDP-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 390px·1440px 전문가 영상 직접 링크를 확인했으며 9개 순서 표식, 필터 전역 순서, 카드 선택 자동재생과 page/console 오류 상태가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=expert-card-audit-public-20261006; viewports 390x844 and 1440x900; markers [`01 / 09`, `02 / 09`, `03 / 09`, `04 / 09`, `05 / 09`, `06 / 09`, `07 / 09`, `08 / 09`, `09 / 09`]; `수면` filter markers [`01 / 09`, `02 / 09`, `03 / 09`, `04 / 09`]; pageWidth 390 and 1425; marker boxes 45x20; second-card iframe `https://www.youtube.com/embed/Cnk0PGn9YBM?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`; pageErrors 0; consoleErrors 0; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-expert-cards-390.png and C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-expert-cards-1440.png inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=expert-card-audit-public-20261006",
+      "captured_at": "2026-10-06T12:05:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-EXPERT-VIDEO-CARD-SEQUENCE",
+      "claim_refs": ["C-003", "C-004", "C-199"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 카드 순서 표식 PR #476이 필수 검사를 통과해 main merge commit a84d6f0으로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #476; code commit 376b9ab40bb2e4748614ca8dc6eb77f6d26540e3; PR release-verify run 37460361551 job 112258117614 successful; site-quality-verify run 37460361619 job 112258117095 successful; main merge commit a84d6f0467c72793ffe5fbe7483305ee63bd9982; workflow_dispatch run 37460547815; release-verify 112258949474; worker-readiness 112259414780; deploy-pages 112259452895; deploy-worker 112259454356 skipped by STATIC_ONLY; smoke-live 112259531759; release-status 112259610738; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37460547815",
+      "captured_at": "2026-10-06T12:05:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-EXPERT-VIDEO-CARD-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-199"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-CARD-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 전문가 영상 9개 전체 순서 표시가 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T12:04:48.394Z; page 200; runtimeMode STATIC; candidateSha a84d6f0467c72793ffe5fbe7483305ee63bd9982; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·1440px screenshots show all nine markers, `수면` filter preserves global order, second-card autoplay iframe works, and page/console errors 0; video copy, sources, data and product boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=expert-card-audit-public-20261006",
+      "captured_at": "2026-10-06T12:05:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-VIDEO-CARD-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-199"]
     }
   ]
 }
