@@ -2405,6 +2405,16 @@
 
 증적: `E-LOCAL-BUILD-APPLICATION-FLOW-INDEX-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-INDEX-20261006`, `E-CDP-APPLICATION-FLOW-INDEX-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-INDEX-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-INDEX-20261006`.
 
+## Current Release Recheck — 8201ad4 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `8201ad40ca47fb60123575baa23f626d5a2c41a9`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-003/AC-004 국내외 활용 카드 가독성: PASS. `01 / 03`, `02 / 03`, `03 / 03` 순서 표식의 크기·대비를 강화했으며 390·1440px에서 카드 흐름과 콘텐츠 폭이 유지된다. page/console errors 0을 확인했다.
+- AC-005 배포 게이트: PASS. PR #465의 release-verify·site-quality-verify, main workflow `37449714953`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산도 통과했다.
+- AC-006 연구 내용·출처·제품 독립 경계: PASS. 이번 변경은 순서 표식의 시각적 크기·대비만 보정했으며 연구 카피·수치·출처·접근성 설명·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.

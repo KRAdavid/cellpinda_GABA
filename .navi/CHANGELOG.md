@@ -1655,3 +1655,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-APPLICATION-FLOW-INDEX-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-INDEX-20261006`, `E-CDP-APPLICATION-FLOW-INDEX-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-INDEX-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-INDEX-20261006`.
+
+## 국내외 활용 카드 순서 표식 대비·공개 배포 — 8201ad4 — 2026-10-06
+
+- 국내·일본·세계 활용 카드의 `01 / 03`, `02 / 03`, `03 / 03` 표식을 11px·800 weight·강화된 대비로 보정해 모바일과 데스크톱에서 흐름을 더 빠르게 읽도록 고도화했다.
+- PR #465, main workflow `37449714953`, Pages·라이브 smoke·release-status와 공개 validator candidate `8201ad4`가 성공했다. Chrome CDP fallback 390x844·1440x900에서 표식·가로폭·page/console errors 0을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006`.
