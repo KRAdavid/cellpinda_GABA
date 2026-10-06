@@ -1,5 +1,14 @@
 # Audit Report
 
+## Cross-Width Research Evidence Rhythm — 009839b — 2026-10-06
+
+- 연구 규모 도표의 큰 수치와 검색 범위·출처 링크·설명문이 화면 폭에 따라 서로 다른 크기로 읽히던 잔여 편집 문제를 확인하고, v135에서 데스크톱·태블릿·모바일의 보조 근거 텍스트를 12px·1.65 line-height로 통일했다. 숫자·근거·출처가 같은 읽기 순서로 이어진다.
+- `validate:ui-contract`·typecheck·127개 테스트·production build가 통과했다. 로컬 Playwright Chromium fallback 320px·390px·1440px에서 도표 폭과 document scrollWidth가 각 viewport에 맞고, caption·검색 범위·출처·feature metadata가 모두 12px이며 page errors 0·console errors 0을 확인했다. 공개 390px·1440px에서도 같은 계산값과 화면을 재현했다. 연구 원문에서 이야기 공유로 이어지는 카드도 공개 390px에서 `#final`·`final-heading` 포커스·가로폭·오류 0을 재확인했다.
+- PR #415는 main `009839b915b730f6c02e0a36ec307990ed6dd2fc`로 병합되었고 workflow `37400104725`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `009839b915b730f6c02e0a36ec307990ed6dd2fc`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-PLAYWRIGHT-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-EVIDENCE-RHYTHM-20261006`.
+
 ## Mobile Research Evidence Readability — b716f5d — 2026-10-06
 
 - 모바일 연구 규모 도표에서 큰 수치와 함께 읽어야 하는 검색 범위·출처 링크·설명문이 작게 보이던 편집 품질 문제를 확인하고, 700px 이하에서 보조 근거 텍스트를 12px·1.65~1.7 line-height로 올렸다. 큰 수치·연구 범위·출처가 같은 화면에서 이어져 읽히도록 했다.

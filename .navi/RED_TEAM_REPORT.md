@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Cross-Width Research Evidence Rhythm — 2026-10-06 — 009839b
+
+- 공격 관점에서 320px·390px·1440px 연구 규모 도표의 숫자·검색 기준·출처·설명문이 폭별로 달라져 독자가 근거를 놓치거나, 작은 글자가 화면에서 사실상 사라지는지 확인했다. v135 이후 네 종류의 보조 근거 텍스트가 모든 폭에서 12px로 계산되고, 문서 가로폭은 viewport와 일치한다.
+- 공개 390px·1440px에서 도표를 실제 화면에 배치해 캡처했으며, 12px 기준·도표 폭·page errors 0·console errors 0을 재현했다. 같은 공개본에서 연구 원문 전환 카드 클릭 후 `#final`·`final-heading` 포커스·가로폭·오류 0도 확인했다. 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-PLAYWRIGHT-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-RHYTHM-20261006`.
+
 ## Mobile Research Evidence Readability — 2026-10-06 — b716f5d
 
 - 공격 관점에서 320px·390px·1440px 연구 규모 도표의 큰 수치, 검색 범위, 출처 링크, 하단 설명이 서로 다른 읽기 우선순위를 만들거나 잘리는지 대조했다. 700px 이하에서는 근거 텍스트가 12px로 유지되고 document scrollWidth가 viewport와 같았다.

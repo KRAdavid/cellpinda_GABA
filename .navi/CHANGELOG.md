@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 근거 텍스트 cross-width 통일·공개 배포 — 009839b — 2026-10-06
+
+- 연구 규모 도표의 검색 범위·출처 링크·설명문·feature metadata를 데스크톱·태블릿·모바일에서 12px 기준으로 통일해 큰 수치와 근거가 한 흐름으로 읽히도록 고도화했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 및 공개 390·1440px 검증을 통과했고 PR #415가 main `009839b`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-PLAYWRIGHT-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-EVIDENCE-RHYTHM-20261006`.
+
 ## 모바일 연구 근거 텍스트 가독성 보정·공개 배포 — b716f5d — 2026-10-06
 
 - 연구 규모 도표의 검색 범위·출처 링크·하단 설명을 모바일 12px 기준으로 올려 큰 수치와 근거가 한 화면에서 함께 읽히도록 보정했다.

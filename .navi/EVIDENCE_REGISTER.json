@@ -1744,6 +1744,18 @@
         "E-LIVE-PUBLIC-RESEARCH-EVIDENCE-FLOOR-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-168",
+      "statement": "연구 규모 도표는 데스크톱·태블릿·모바일에서 검색 범위·출처 링크·설명문을 12px 기준으로 보여 주어 큰 수치와 근거를 같은 읽기 체계로 제공한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-EVIDENCE-RHYTHM-20261006",
+        "E-UI-CONTRACT-RESEARCH-EVIDENCE-RHYTHM-20261006",
+        "E-PLAYWRIGHT-RESEARCH-EVIDENCE-RHYTHM-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-RHYTHM-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-EVIDENCE-RHYTHM-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12680,6 +12692,59 @@
       "captured_at": "2026-10-06T01:22:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-EVIDENCE-FLOOR",
       "claim_refs": ["C-001", "C-002", "C-003", "C-167"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-EVIDENCE-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 규모 도표의 근거 텍스트 cross-width 통일 코드가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 4440da61ff7be3c43318c2fc081277e090adebc2; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1633261 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T01:31:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-RESEARCH-EVIDENCE-RHYTHM",
+      "claim_refs": ["C-001", "C-003", "C-168"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-EVIDENCE-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 연구 규모 도표의 보조 근거 텍스트를 데스크톱·태블릿·모바일 12px 기준으로 유지하도록 회귀 방지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v135 cross-width evidence rhythm assertion; `.gaba-guide .guide-research-scale-grid p/a`; feature metadata/source selectors; font-size 12px; line-height 1.65; status ok",
+      "captured_at": "2026-10-06T01:31:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-EVIDENCE-RHYTHM",
+      "claim_refs": ["C-001", "C-168"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-EVIDENCE-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 연구 규모 도표가 390px·1440px에서 큰 수치와 근거를 함께 렌더하고, 연구 원문 전환 카드가 이야기 공유 장으로 정상 이동한다.",
+      "locator": "Playwright Chromium fallback; public 390/1440px research-scale viewport screenshots; caption/search-scope/source/feature metadata font-size 12px and line-height 19.8px; root widths 350/1180; document scrollWidth equals viewport; handoff 390px width 350; click -> hash #final, activeElement final-heading, headingTop 157; page errors 0; console error messages 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=final-public-v135-research-20261006#history",
+      "captured_at": "2026-10-06T01:40:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-RESEARCH-EVIDENCE-RHYTHM",
+      "claim_refs": ["C-003", "C-004", "C-168"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 근거 텍스트 cross-width 보정 PR #415가 필수 검사를 통과해 main merge commit 009839b로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #415; code commit 4440da61ff7be3c43318c2fc081277e090adebc2; main merge commit 009839b915b730f6c02e0a36ec307990ed6dd2fc; PR release-verify workflow 37399969428 job 112064730948; PR site-quality workflow 37399969420 job 112064730769; main workflow 37400104725; release-verify 112065141349, worker-readiness 112065447189, deploy-pages 112065475201, smoke-live 112065524989 and release-status 112065593104 successful; deploy-worker 112065476196 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37400104725",
+      "captured_at": "2026-10-06T01:40:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-EVIDENCE-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-168"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-EVIDENCE-RHYTHM-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 규모 도표의 근거 텍스트 cross-width 기준과 연구 원문→이야기 공유 흐름이 안정적으로 반영되었다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 009839b915b730f6c02e0a36ec307990ed6dd2fc; generatedAt 2026-10-06T01:38:30.507Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 390/1440px caption/search-scope/source/feature metadata 12px, root widths 350/1180, document scrollWidth equals viewport, page errors 0, console error messages 0; 390px handoff width 350 and click -> hash #final, activeElement final-heading, heading visible; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=final-public-v135-20261006#history",
+      "captured_at": "2026-10-06T01:40:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-EVIDENCE-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-168"]
     }
   ]
 }
