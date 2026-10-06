@@ -2229,3 +2229,12 @@
   .guide-header .guide-reading-size-toggle{right:calc(92px + env(safe-area-inset-right))}
   .guide-header .guide-header-share{width:72px;font-size:11px;gap:4px;white-space:nowrap}
 }
+
+/* v159 narrow comparison cards: keep each condition readable without letting the direction cue overlap the result phrase. */
+@media(min-width:351px) and (max-width:430px){
+  .guide-outcome-lane{grid-template-columns:1fr;grid-template-areas:"top" "signal";align-items:start;gap:7px}
+  .guide-outcome-lane-top{width:100%}
+  .guide-outcome-lane-top>strong{min-height:0}
+  .guide-outcome-lane-signal{justify-content:flex-start}
+  .guide-outcome-lane-meter{max-width:none}
+}
