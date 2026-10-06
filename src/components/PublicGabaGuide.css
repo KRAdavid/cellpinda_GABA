@@ -1335,7 +1335,6 @@
 
 /* v29 hero rhythm: keep the highlighted sentence together on wide screens while preserving the mobile break. */
 .guide-hero-story h1>em .guide-hero-gaba-line{display:inline;white-space:nowrap}
-.guide-hero-gaba-break{display:none}
 @media(min-width:701px){
   .guide-hero-story h1>em{font-size:clamp(46px,4.15vw,62px);letter-spacing:-.06em}
 }
@@ -1353,7 +1352,7 @@
   .guide-header .guide-header-share{right:12px}
   .guide-header .guide-reading-size-toggle span{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .guide-header .guide-reading-size-toggle svg,.guide-header .guide-header-share svg{display:block}
-  .guide-header .guide-header-share{overflow:visible;clip:auto;white-space:normal;border:0;border-radius:12px;background:var(--guide-ink);color:#fff;font-size:0}
+  .guide-header .guide-header-share{clip:auto;white-space:normal;border:0;border-radius:12px;background:var(--guide-ink);color:#fff;font-size:0}
 }
 
 /* v122 compact reading control: keep the text-size action explicit at 320px without growing the header. */
@@ -2214,15 +2213,5 @@
 @media(min-width:351px) and (max-width:430px){
   .guide-header .guide-menu-toggle{right:156px}
   .guide-header .guide-reading-size-toggle{right:80px}
-  .guide-header .guide-header-share{width:60px;font-size:11px}
-}
-
-/* v155 mobile hero line balance: keep the highlighted GABA sentence fully visible on 351–430px phones. */
-@media(min-width:351px) and (max-width:430px){
-  .guide-hero-story h1>em .guide-hero-gaba-line{font-size:clamp(37px,10vw,44px);letter-spacing:-.11em}
-}
-
-/* v156 mobile hero line break: split the highlighted sentence at a meaning boundary so Korean text never clips at the viewport edge. */
-@media(max-width:430px){
-  .guide-hero-story h1>em .guide-hero-gaba-break{display:inline}
+  .guide-header .guide-header-share{width:60px}
 }
