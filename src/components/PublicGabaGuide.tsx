@@ -965,6 +965,9 @@ export default function PublicGabaGuide() {
   const activeReadingLabel = activeChapterId === 'research' && activeResearchTopic
     ? `${activeResearchTopic.title} 연구 결과`
     : activeChapter.label;
+  const activeReadingCompactLabel = activeChapterId === 'research' && activeResearchTopic
+    ? activeResearchTopic.title
+    : activeReadingLabel;
   const activeProgressIndex = progressChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const progressChapterCount = progressChapters.length;
   const progressValue = activeChapterId === 'opening-bridge'
@@ -1699,7 +1702,7 @@ export default function PublicGabaGuide() {
         <button type="button" className="guide-header-share" aria-label="페이지 공유하기" title="페이지 공유하기" onClick={sharePage}><Share2 size={16} aria-hidden="true" /> 공유하기</button>
         <div className={`guide-reading-progress${activeChapterId === 'top' ? '' : ' is-visible'}`}>
           <div className="guide-reading-progress-track" role="progressbar" aria-label="읽기 진행" aria-valuemin={0} aria-valuemax={progressChapterCount} aria-valuenow={progressValue}><span aria-hidden="true" style={{ width: `${(progressValue / progressChapterCount) * 100}%` }} /></div>
-          <div className="guide-reading-progress-meta" aria-hidden="true"><span>지금 읽는 중</span><strong>{activeReadingLabel}</strong><small>{progressCountLabel}</small></div>
+          <div className="guide-reading-progress-meta" aria-hidden="true"><span>지금 읽는 중</span><strong aria-label={activeReadingLabel}><span className="guide-reading-progress-label-full">{activeReadingLabel}</span><span className="guide-reading-progress-label-compact">{activeReadingCompactLabel}</span></strong><small>{progressCountLabel}</small></div>
           <span className="guide-reading-progress-live sr-only" role="status" aria-live="polite" aria-atomic="true" aria-hidden={activeChapterId === 'top'}>{progressAriaLabel}</span>
         </div>
       </header>
