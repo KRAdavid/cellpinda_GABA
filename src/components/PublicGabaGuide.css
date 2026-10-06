@@ -821,6 +821,18 @@
   .guide-research-scale-feature .guide-research-scale-metric a{display:flex;width:max-content;margin-top:8px}
 }
 
+/* v134 mobile evidence floor: keep the search scope and source links readable beside the large counts. */
+@media(max-width:700px){
+  .gaba-guide .guide-research-scale-grid p,
+  .gaba-guide .guide-research-scale-grid a,
+  .gaba-guide .guide-research-scale-feature .guide-research-scale-metric p,
+  .gaba-guide .guide-research-scale-feature .guide-research-scale-metric a{
+    font-size:12px;
+    line-height:1.65;
+  }
+  .gaba-guide .guide-research-scale-caption{font-size:12px;line-height:1.7}
+}
+
 /* v14 research scale scope rail: clarify the comparison boundary before the headline numbers. */
 .guide-research-scale-reading{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:18px}
 .guide-research-scale-reading span{display:grid;grid-template-columns:8px minmax(0,auto) minmax(0,1fr);align-items:center;gap:8px;min-width:0;padding:10px 12px;border:1px solid rgba(224,247,248,.16);border-radius:12px;background:rgba(224,247,248,.08)}
