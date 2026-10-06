@@ -1366,6 +1366,15 @@
   .guide-reading-size-toggle .guide-reading-size-mark{font-size:13px;letter-spacing:-.1em}
 }
 
+/* v153 medium-phone header clarity: name the share action where the header has room, while keeping the ultra-narrow icon rail compact. */
+@media(min-width:351px) and (max-width:430px){
+  .guide-header .guide-logo{max-width:calc(100% - 216px - env(safe-area-inset-right))}
+  .guide-header .guide-menu-toggle{right:calc(156px + env(safe-area-inset-right))}
+  .guide-header .guide-reading-size-toggle{right:calc(80px + env(safe-area-inset-right))}
+  .guide-header .guide-header-share{right:calc(12px + env(safe-area-inset-right));width:60px;min-width:60px;flex-basis:60px;padding:0 8px;gap:4px;font-size:11px;white-space:nowrap}
+  .guide-header .guide-header-share svg{display:block;width:14px;height:14px}
+}
+
 /* v30 narrow-phone sleep layout: let the study stack shrink to the viewport instead of inheriting a content minimum. */
 .guide-sleep-grid,
 .guide-sleep-steps,
@@ -2207,4 +2216,13 @@
   .guide-video-feature-actions{align-items:flex-start;margin-top:auto}
   .guide-video-feature-actions>a{font-size:11px;line-height:1.45}
   .guide-video-feature-share{width:100%;min-height:42px;padding:0 9px;font-size:11px}
+}
+
+/* v154 medium-phone header order: apply the named share rail after the legacy narrow-header overrides. */
+@media(min-width:351px) and (max-width:430px){
+  .guide-header .guide-logo{max-width:calc(100% - 216px - env(safe-area-inset-right))}
+  .guide-header .guide-menu-toggle{right:calc(156px + env(safe-area-inset-right))}
+  .guide-header .guide-reading-size-toggle{right:calc(80px + env(safe-area-inset-right))}
+  .guide-header .guide-header-share{right:calc(12px + env(safe-area-inset-right));width:60px;min-width:60px;flex-basis:60px;padding:0 8px;gap:4px;font-size:11px;white-space:nowrap}
+  .guide-header .guide-header-share svg{display:block;width:14px;height:14px}
 }
