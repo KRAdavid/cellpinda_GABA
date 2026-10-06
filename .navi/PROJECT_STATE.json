@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T05:22:26Z",
+  "updated_at": "2026-10-06T05:39:11Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5327,6 +5327,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T05:22:26Z"
+    },
+    {
+      "id": "H-258",
+      "event": "280px 초소형 모바일에서 `GABA를 섭취한 그룹의 변화` 라벨이 한 줄 고정으로 잘리던 반응형 결함을 확인하고, 350px 이하에서 결과 라벨을 자연스럽게 두 줄로 흐르게 보정했다. 320·390·1440px의 기존 비교 도표 구조는 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 공개 Chromium fallback 280·320·390·1440px에서 라벨 줄바꿈·viewport와 동일한 document scrollWidth·page/console errors 0을 재현했다. PR #436은 main `83dc4e5a`로 병합되었고 workflow `37419534993`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `83dc4e5a19d3895ec42437ccd11a87fb4801f894`·HTTP 200·STATIC·71개 bundle hash를 확인했고, 새 CRITICAL/MAJOR 코드 결함은 없다. C-180과 다섯 증거를 등록한다. 외부 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T05:39:11Z"
     }
   ]
 }
