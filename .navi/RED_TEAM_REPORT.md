@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 수면·회복 도입 리듬 인포그래픽·공개 배포 — 2026-10-06 — f785d7d
+
+- 공격 관점에서 280px 초소형 모바일·390px 모바일·1440px 데스크톱에서 낮→밤→회복 연결선이 카드·헤더·본문과 충돌하지 않고, 도입부가 이미지 없이도 시각적으로 이해되는지 확인했다. 세 폭에서 흐름과 가로폭이 안정적이었다.
+- 기존 수면 카피·참고 도서·출처·제품 독립 경계는 변경되지 않았고, UI 계약·배포 workflow·라이브 validator가 공개 SHA와 일치한다. 새 CRITICAL/MAJOR 결함은 없다.
+- 인포그래픽은 시각적 탐색성을 높이는 증거지만 실제 고령 사용자 이해도, Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-OPENING-RHYTHM-VISUAL-20261006`, `E-CDP-OPENING-RHYTHM-VISUAL-20261006`, `E-DEPLOY-PIPELINE-OPENING-RHYTHM-VISUAL-20261006`, `E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006`.
+
 ## 연구 지도 전용 편집 비주얼·공개 배포 — 2026-10-06 — 813fd3a
 
 - 공격 관점에서 연구 지도 전용 비주얼이 첫 화면과 구분되고, 모바일에서는 이미지·문구·다음 카드가 끊기지 않으며 데스크톱에서는 이미지와 5개 카드가 한 시퀀스로 읽히는지 확인했다. 390·1440px 공개 렌더에서 이미지 크롭, 텍스트 대비, 카드 폭과 순서가 안정적이었다.

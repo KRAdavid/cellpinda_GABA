@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 수면·회복 도입 리듬 인포그래픽·공개 배포 — f785d7d — 2026-10-06
+
+- 첫 도입부에 `낮 · 활동 → 밤 · 수면 → 다음 날 · 회복` 3단계 인포그래픽을 추가해 텍스트와 카드 사이의 하루 흐름을 한눈에 읽도록 고도화했다. 280px·390px·1440px에서 연결선, 아이콘, 카드 흐름과 줄바꿈을 확인했다.
+- 기존 수면 카피·매슈 워커 참고·연구 출처·제품 독립 공개 경계는 변경하지 않았다. 수면 편집 이미지를 16,334 bytes로 재압축해 총 정적 자산을 1,649,422 bytes로 유지했다.
+- PR #480, main workflow `37464418012`, Pages·라이브 smoke·release-status·공개 validator candidate `f785d7d`와 Chrome CDP fallback 390·1440px 검증을 통과했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-OPENING-RHYTHM-VISUAL-20261006`, `E-UI-CONTRACT-OPENING-RHYTHM-VISUAL-20261006`, `E-CDP-OPENING-RHYTHM-VISUAL-20261006`, `E-DEPLOY-PIPELINE-OPENING-RHYTHM-VISUAL-20261006`, `E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006`.
+
 ## 연구 지도 전용 편집 비주얼·공개 배포 — 813fd3a — 2026-10-06
 
 - 연구 지도 섹션에 첫 화면과 구분되는 잔잔한 물의 흐름 기반 전용 자연 편집 비주얼을 적용해 `하나의 신호 → 넓은 학술 연구 지도` 전환을 한 화면에서 이해하도록 고도화했다. 모바일 350×210px, 데스크톱 1180×270px에서 텍스트 대비와 이미지 크롭을 확인했다.
