@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T12:25:00Z",
+  "updated_at": "2026-10-06T12:42:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5474,6 +5474,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T12:25:00Z"
+    },
+    {
+      "id": "H-279",
+      "event": "첫 번째 수면·회복 도입부가 카드와 설명문 중심으로 읽혀 하루의 흐름을 즉시 잡기 어려운 잔여 시각 리스크를 확인했다. 낮·활동 → 밤·수면 → 다음 날·회복 3단계 인포그래픽을 추가하고 280px·390px·1440px에서 연결선·아이콘·텍스트 크기·카드 흐름을 확인했다. 기존 수면 카피·매슈 워커 참고·GABA 연구 독립 공개 경계는 변경하지 않았고, 기존 수면 편집 이미지를 16,334 bytes로 재압축해 정적 자산 총량을 1,649,422로 유지했다. 로컬 typecheck·127개 테스트·production build·UI contract, PR #480, main merge f785d7d, workflow 37464418012, 공개 validator candidate f785d7d, 공개 Chrome CDP 390·1440px의 runtime/console/http errors 0을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-201과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T12:42:00Z"
     }
   ]
 }

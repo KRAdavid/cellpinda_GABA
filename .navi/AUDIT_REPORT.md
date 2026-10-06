@@ -1,5 +1,14 @@
 # Audit Report
 
+## 수면·회복 도입 리듬 인포그래픽·공개 배포 — 2026-10-06 — f785d7d
+
+- 독립 감사 관점에서 첫 장면이 긴 설명문을 먼저 해석하지 않아도 낮의 활동, 밤의 수면, 다음 날 회복의 순서를 즉시 읽게 되는지 확인했다. 모바일과 데스크톱 모두 3단계 아이콘·연결선·기존 3개 카드가 하나의 시퀀스로 이어진다.
+- 수면 카피·참고 도서·출처·제품 독립 공개 경계는 변경되지 않았고, 수면 편집 이미지 재압축으로 정적 자산 예산을 유지했다. UI 계약·배포 workflow·라이브 validator가 공개 SHA와 일치하며 새 CRITICAL/MAJOR 결함은 없다.
+- 공개 Chrome CDP fallback에서 390·1440px의 도입부·카드·가로폭·runtime/console/http errors 0을 확인했다. 실제 고령 사용자 이해도, Safari/iOS/Android 실기기, 독립 과학·규제 감수는 Chromium 검증으로 대체하지 않는다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-OPENING-RHYTHM-VISUAL-20261006`, `E-UI-CONTRACT-OPENING-RHYTHM-VISUAL-20261006`, `E-CDP-OPENING-RHYTHM-VISUAL-20261006`, `E-DEPLOY-PIPELINE-OPENING-RHYTHM-VISUAL-20261006`, `E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006`.
+
 ## 연구 지도 전용 편집 비주얼·공개 배포 — 2026-10-06 — 813fd3a
 
 - 독립 감사 관점에서 연구 지도 섹션의 이미지 서사가 첫 화면과 반복되지 않고, `하나의 신호가 넓은 연구 지도가 되었습니다`라는 전환을 모바일·데스크톱에서 즉시 읽을 수 있는지 확인했다. 전용 물 흐름 이미지, 좌측 텍스트 대비, 5개 학술 카드가 안정적으로 연결된다.

@@ -2136,6 +2136,18 @@
         "E-LIVE-PUBLIC-ACADEMIC-EDITORIAL-VISUAL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-201",
+      "statement": "첫 번째 수면·회복 도입부에 낮→밤→다음 날 회복 3단계 인포그래픽을 추가해 텍스트만 읽지 않고 하루의 흐름을 한눈에 이해하게 하며, 기존 수면 카피·매슈 워커 참고·GABA 연구 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-OPENING-RHYTHM-VISUAL-20261006",
+        "E-UI-CONTRACT-OPENING-RHYTHM-VISUAL-20261006",
+        "E-CDP-OPENING-RHYTHM-VISUAL-20261006",
+        "E-DEPLOY-PIPELINE-OPENING-RHYTHM-VISUAL-20261006",
+        "E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14781,6 +14793,59 @@
       "captured_at": "2026-10-06T12:25:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-ACADEMIC-EDITORIAL-VISUAL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-200"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-OPENING-RHYTHM-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면·회복 도입부 3단계 인포그래픽 적용이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "code commit 6768ab2c05465d382069e59e453ccbc7c4cbef79; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1809 modules; static routes 11; release files 72; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1649422 <= 1650000; largest 311199 <= 380000; sleep editorial asset 16334 bytes",
+      "captured_at": "2026-10-06T12:35:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-OPENING-RHYTHM-VISUAL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-201"]
+    },
+    {
+      "id": "E-UI-CONTRACT-OPENING-RHYTHM-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면·회복 도입부가 낮·활동, 밤·수면, 다음 날·회복을 시각적 연결선과 아이콘으로 표시하고, 데스크톱·모바일 레이아웃과 접근성 이름을 UI 계약으로 유지한다.",
+      "locator": "src/components/PublicGabaGuide.tsx guide-opening-bridge-visual; Sun, Moon, Sparkles icons; role=img aria-label=낮의 활동, 밤의 수면, 회복으로 이어지는 하루의 리듬; src/components/PublicGabaGuide.css v150 opening rhythm visual; desktop five-column and max-width 700px compact three-phase layout; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T12:35:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-OPENING-RHYTHM-VISUAL",
+      "claim_refs": ["C-001", "C-003", "C-201"]
+    },
+    {
+      "id": "E-CDP-OPENING-RHYTHM-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 도입부를 390px·1440px에서 확인했으며 3단계 인포그래픽, 카드 흐름, 가로폭과 런타임 오류 상태가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-section-audit-20261006; cache-disabled reload with localStorage reset; viewports 390x844 and 1440x900; pageWidth 390 and 1425; opening bridge screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-opening-bridge-390-final.png and C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-opening-bridge-1440-final.png inspected with view_image; runtimeErrors 0; consoleErrors 0; httpFailures 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-section-audit-20261006",
+      "captured_at": "2026-10-06T12:41:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-OPENING-RHYTHM-VISUAL",
+      "claim_refs": ["C-003", "C-004", "C-201"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-OPENING-RHYTHM-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "도입부 3단계 인포그래픽 PR #480이 필수 검사를 통과해 main merge commit f785d7d으로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #480; code commit 6768ab2c05465d382069e59e453ccbc7c4cbef79; PR release-verify run 37464249448 job 112271158786 successful; site-quality-verify run 37464249447 job 112271158796 successful; main merge commit f785d7dc11be2c806d17ec757d5416ddeda0c9d5; workflow_dispatch run 37464418012; release-verify 112271931880; worker-readiness 112272459993; deploy-pages 112272497650; deploy-worker 112272498129 skipped by STATIC_ONLY; smoke-live 112272597503; release-status 112272697321; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37464418012",
+      "captured_at": "2026-10-06T12:39:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-OPENING-RHYTHM-VISUAL",
+      "claim_refs": ["C-001", "C-002", "C-201"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 낮·밤·회복 인포그래픽이 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T12:37:34.913Z; page 200; runtimeMode STATIC; candidateSha f785d7dc11be2c806d17ec757d5416ddeda0c9d5; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·1440px screenshots show the day-to-night-to-recovery visual, cards, page/console/http errors 0; product-independent copy and boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-section-audit-20261006",
+      "captured_at": "2026-10-06T12:42:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-OPENING-RHYTHM-VISUAL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-201"]
     }
   ]
 }
