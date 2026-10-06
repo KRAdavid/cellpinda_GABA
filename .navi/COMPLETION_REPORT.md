@@ -2206,3 +2206,15 @@ Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI `USER_DECISION`; 완료 
 Final Status: `NOT_READY`; NAVI `USER_DECISION`.
 
 증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-SCAN-20261006`, `E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006`, `E-CDP-RESEARCH-COMPARISON-SCAN-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006`.
+
+## Current Release Recheck — 7d81419 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `7d8141987b580e9987012f0fe628527d96ac0975`·HTTP 200·STATIC·72개 bundle hash·12개 claim·6개 master record·6개 share page·provenance `matched`를 확인했다.
+- AC-003/AC-004 전문가 영상 흐름·반응형: PASS. 390px에서 플레이어와 선택 정보가 좌우로 함께 보이고 350px에서는 세로 흐름, 1440px에서는 기존 갤러리가 유지된다. 두 번째 카드 선택 시 iframe 자동재생 URL과 선택 상태가 갱신되며 page/console/http errors 0이다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #484, main workflow `37471094112`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006: PASS. 이번 변경은 전문가 영상 카드의 반응형 배치만 보정했으며 영상 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007: PASS_WITH_CONDITIONS. teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006`.

@@ -1731,3 +1731,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006`, `E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006`, `E-CDP-MID-NARROW-TYPE-CONTROL-20261006`, `E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006`, `E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006`.
+
+## 전문가 영상 중간 모바일 프레임 고도화·공개 배포 — 7d81419 — 2026-10-06
+
+- 351–700px에서 세로형 영상 플레이어와 선택 영상 제목·출처·공유 동작을 좌우 한 단위로 배치해 모바일에서 영상과 맥락을 함께 읽도록 보정했다.
+- 350px 이하의 세로 흐름과 1440px 데스크톱 갤러리는 유지했으며, 선택 영상 자동재생·URL 상태·영상 데이터·제품 독립 공개 경계는 변경하지 않았다.
+- PR #484, main workflow `37471094112`, 공개 validator candidate `7d81419`, 공개 Chrome CDP 390·350·1440px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006`.

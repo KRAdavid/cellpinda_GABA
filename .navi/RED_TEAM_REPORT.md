@@ -1957,3 +1957,12 @@
 - 컴팩트 도표 검증은 시각 스캔성의 증거이며 실제 고령 사용자 이해도나 Safari/iOS/Android 실기기 동작을 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006`, `E-CDP-RESEARCH-COMPARISON-SCAN-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006`.
+
+## 전문가 영상 중간 모바일 프레임 — 2026-10-06 — 7d81419
+
+- 공격 관점에서 351–700px 전문가 영상 카드의 플레이어·제목·출처·공유 동작을 한 화면에서 읽을 수 있는지 확인했다. 중간 폭은 좌우 한 단위로, 350px 이하는 기존 세로 흐름으로 유지되며 1440px 데스크톱 갤러리도 보존된다.
+- 두 번째 영상 선택 시 선택 상태·URL·YouTube iframe 자동재생이 함께 갱신되고, 공개 화면에서 page/console/http errors 0이다. 영상 콘텐츠·출처·제품 독립 공개 경계는 바뀌지 않았다. 새 CRITICAL/MAJOR 결함은 없다.
+- 이번 점검은 Chrome CDP fallback 증거이며 실제 고령 사용자 이해도와 Safari/iOS/Android 실기기 동작을 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006`.
