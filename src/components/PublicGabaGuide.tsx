@@ -1993,6 +1993,13 @@ export default function PublicGabaGuide() {
                 <span className="guide-reading-note-source-action">원문 보기 <ExternalLink size={14} aria-hidden="true" /></span>
               </a>
             </div>
+            <button type="button" className="guide-research-handoff guide-reading-note-handoff" aria-label="GABA 이야기 공유로 이어서 읽기" onClick={() => scrollTo('final')}>
+              <span className="guide-research-handoff-kicker">다음 장</span>
+              <strong>연구를 읽는 기준에서 공유 가능한 이야기로</strong>
+              <span className="guide-research-handoff-line" aria-hidden="true" />
+              <span className="guide-research-handoff-next">이야기 공유</span>
+              <ArrowRight size={17} aria-hidden="true" />
+            </button>
           </div>
         </section>
 

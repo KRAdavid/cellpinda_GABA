@@ -91,6 +91,7 @@ requireMatch(publicGuide, /const progressCountLabel = activeChapterId === 'openi
 requireMatch(publicGuide, /<a href="#opening-bridge"[\s\S]*?scrollTo\('opening-bridge'\)[\s\S]*?>수면과 회복<\/a>/, 'public GABA navigation must land on the first sleep-and-recovery explanation');
 requireMatch(publicGuide, /<section className="guide-opening-bridge guide-story-section" id="opening-bridge"/, 'public GABA opening sleep-and-recovery bridge must have a stable deep-link anchor');
 requireMatch(publicGuide, /guide-opening-bridge-handoff[\s\S]*?scrollTo\('history'\)[\s\S]*?회복의 균형에서 GABA의 발견으로[\s\S]*?GABA의 발견/, 'public GABA opening bridge must hand off naturally into the discovery chapter');
+requireMatch(publicGuide, /guide-reading-note-handoff[\s\S]*?scrollTo\('final'\)[\s\S]*?연구를 읽는 기준에서 공유 가능한 이야기로[\s\S]*?이야기 공유/, 'public GABA source-reading chapter must hand off naturally into the share chapter');
 requireMatch(publicGuideStyles, /v65 research map cue[\s\S]*?\.guide-research-map-cue\{[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-research-map-cue\{/, 'public GABA research map cue must remain readable on desktop and mobile');
 requireMatch(publicGuide, /guide-expert-thread[^>]*aria-label="전문가 영상 다음 읽기 흐름"[\s\S]*?다음 장[\s\S]*?연구를 읽는 기준[\s\S]*?원문 출처/, 'public GABA expert videos must hand off into the actual next reading step');
 requireMatch(publicGuide, /<button type="button" className="guide-research-handoff"[^>]*onClick=\{\(\) => scrollTo\('applications'\)\}/, 'public GABA research handoff must continue into domestic and global applications');

@@ -1395,6 +1395,7 @@
 .guide-reading-note-source small{grid-column:1/-1;color:#708a99;font-size:12px;line-height:1.55;letter-spacing:-.035em}
 .guide-reading-note-source-action{grid-column:1/-1;display:inline-flex;align-items:center;justify-self:end;gap:5px;margin-top:8px;color:var(--guide-teal-dark);font-size:12px;font-weight:900;line-height:1.4;letter-spacing:-.03em}
 .guide-reading-note-source-action svg{flex:0 0 auto}
+.guide-reading-note-handoff{margin-top:34px}
 @media(max-width:700px){
   .guide-section.guide-reading-note{padding-top:110px;padding-bottom:78px}
   .guide-reading-note-layout{display:block}
@@ -1414,6 +1415,7 @@
   .guide-reading-note-source strong{font-size:16px}
   .guide-reading-note-source small{font-size:13px;line-height:1.6}
   .guide-reading-note-source-action{margin-top:9px;font-size:13px}
+  .guide-reading-note-handoff{margin-top:24px}
 }
 
 /* v43 mobile definition card: reserve a clear footer zone for decorative motifs. */
