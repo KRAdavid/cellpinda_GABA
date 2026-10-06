@@ -2556,3 +2556,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007`, `E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007`, `E-CDP-VIDEO-STATE-RAIL-20261007`, `E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007`, `E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007`.
+
+## 전문가 영상 필터 순번 정합성 — f2241eb — 2026-10-07
+
+- 감사 finding: 주제 필터에서 카드 우측 순번은 전체 9개 기준인데, 썸네일 내부 순번은 필터 기준으로 다시 시작해 같은 영상의 위치를 다르게 읽게 하는 잔여 UX 리스크가 있었다.
+- 보정: 포스터 fallback 내부 순번을 전체 `videoNumber` 기준으로 통일하고, 기존 카드별 포스터 크롭 변화와 영상 출처는 유지했다. `연구 읽기` 필터의 GABA 섭취 연구 읽기는 `05`·`05 / 09`로 같은 위치를 보여준다.
+- Recheck: 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #503, main merge `f2241eb`, main workflow `37495381996`, 공개 validator candidate `f2241eb`, Chrome CDP fallback 390px에서 필터·순번·가로폭·errors 0을 확인했다.
+- 공개 경계: 이번 변경은 전문가 영상 게시판의 시각적 순서 표식에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-ORDER-20261007`, `E-UI-CONTRACT-VIDEO-ORDER-20261007`, `E-CDP-VIDEO-ORDER-20261007`, `E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007`, `E-LIVE-PUBLIC-VIDEO-ORDER-20261007`.

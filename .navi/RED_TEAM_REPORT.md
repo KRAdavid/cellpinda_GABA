@@ -2017,3 +2017,13 @@
 - Residual: 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도, Safari/iOS/Android 실기기, 독립 과학·규제 감수를 대신하지 않는다. teaser preview는 `HOLD`다.
 
 증적: `E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007`, `E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007`, `E-CDP-VIDEO-STATE-RAIL-20261007`, `E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007`, `E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007`.
+
+## Red-team recheck — 전문가 영상 필터 순번 — f2241eb — 2026-10-07
+
+- Finding: 필터된 카드의 썸네일 내부 번호와 전체 컬렉션 순서 번호가 달라 같은 영상을 두 개의 위치로 읽을 수 있었다.
+- Repair: fallback 포스터의 번호를 전체 9개 영상 배열에서 계산하는 `videoNumber`로 통일하고 UI 계약 검사를 추가했다.
+- Recheck: 공개 390px에서 `연구 읽기` 선택 후 포스터 `GABA · 연구 읽기 · 05`, 카드 순번 `05 / 09`, 표시 영상 1개, document width `390/390`, errors `[]`를 확인했다.
+- Boundary: 순번과 표시 일관성만 보정했으며 과학적 효능·제품 적용성·규제 적합성을 새로 주장하지 않는다.
+- Residual: 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도, Safari/iOS/Android 실기기, 독립 과학·규제 감수를 대신하지 않는다. teaser preview는 `HOLD`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-ORDER-20261007`, `E-UI-CONTRACT-VIDEO-ORDER-20261007`, `E-CDP-VIDEO-ORDER-20261007`, `E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007`, `E-LIVE-PUBLIC-VIDEO-ORDER-20261007`.

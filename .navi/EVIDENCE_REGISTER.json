@@ -2232,6 +2232,18 @@
         "E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-209",
+      "statement": "전문가 영상 주제 필터에서 포스터 안 순번과 카드 순번을 전체 9개 컬렉션 기준으로 통일해, 연구 읽기 필터에서도 GABA 섭취 연구 읽기가 `05`·`05 / 09`로 같은 위치를 보여준다. 기존 포스터 크롭·영상 출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-VIDEO-ORDER-20261007",
+        "E-UI-CONTRACT-VIDEO-ORDER-20261007",
+        "E-CDP-VIDEO-ORDER-20261007",
+        "E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007",
+        "E-LIVE-PUBLIC-VIDEO-ORDER-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15301,6 +15313,59 @@
       "captured_at": "2026-10-06T16:07:56Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-VIDEO-STATE-RAIL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-208"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-ORDER-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "필터 순번 보정 코드가 타입체크·UI 계약·production build·성능 예산을 통과한다.",
+      "locator": "local commit 1180f33d8fcfdd1556490d9a5079b4b266fda6b4; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 passed; pnpm run build; dist performance initial JS 311199, CSS 95703, total 1648293, largest 311199; final build status ok",
+      "captured_at": "2026-10-06T16:27:03Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261007-VIDEO-ORDER",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-209"]
+    },
+    {
+      "id": "E-UI-CONTRACT-VIDEO-ORDER-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 전문가 영상 포스터 내부 순번을 전체 컬렉션 기준으로 유지하도록 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; poster fallback label uses String(videoNumber).padStart(2, '0'); existing per-card videoPosterPosition(index) crop variation preserved; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T16:27:03Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-VIDEO-ORDER",
+      "claim_refs": ["C-004", "C-005", "C-209"]
+    },
+    {
+      "id": "E-CDP-VIDEO-ORDER-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback 390px에서 연구 읽기 필터의 포스터 순번과 전체 카드 순번이 일치하고 가로폭·오류가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?qa=video-filter-sequence-20261007#expert-videos; after activeTopic=연구 읽기1, visibleCount=1, order=05 / 09, posterLabel=GABA · 연구 읽기 · 05, title=GABA 섭취 연구 읽기, documentWidth=390, scrollWidth=390, errors=[]; screenshot outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=video-filter-sequence-20261007#expert-videos",
+      "captured_at": "2026-10-06T16:27:03Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-VIDEO-ORDER",
+      "claim_refs": ["C-003", "C-004", "C-209"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #503 required checks and final main deployment pipeline all success.",
+      "locator": "PR #503 https://github.com/KRAdavid/gaba_info/pull/503; release run 37495168207 / release-verify 112377731721 success; site-quality run 37495168272 / site-quality-verify 112377733892 success; final merge f2241eb98301a4f4a06a2df9b0b153bccd8aa913; main workflow 37495381996; release-verify 112378456329; worker-readiness 112379029026; deploy-pages 112379077056; deploy-worker 112379077162 skipped static; smoke-live 112379247242; release-status 112379414279; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37495381996",
+      "captured_at": "2026-10-06T16:27:03Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-VIDEO-ORDER",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-209"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-ORDER-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "final public GitHub Pages f2241eb live validator 200 and filtered video order interaction success; product independent boundary matched.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T16:24:59.315Z; page 200; runtimeMode STATIC; candidateSha f2241eb98301a4f4a06a2df9b0b153bccd8aa913; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px research-reading filter reports posterLabel GABA · 연구 읽기 · 05 and order 05 / 09, document width 390/390, errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=video-filter-sequence-20261007#expert-videos",
+      "captured_at": "2026-10-06T16:27:03Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-VIDEO-ORDER",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-209"]
     }
   ]
 }

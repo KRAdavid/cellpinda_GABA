@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T16:07:56Z",
+  "updated_at": "2026-10-06T16:27:03Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5530,6 +5530,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T16:07:56Z"
+    },
+    {
+      "id": "H-287",
+      "event": "전문가 영상 주제 필터에서 포스터 안 순번이 필터 기준으로 다시 시작해 전체 컬렉션 순서 표식과 어긋나는 잔여 UX 리스크를 확인했다. 포스터 내부 순번을 전체 9개 영상 기준으로 통일하고 UI 계약에 해당 규칙을 추가했다. 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #503, main merge f2241eb, main workflow 37495381996의 release-verify·Pages·라이브 smoke·release-status, 공개 validator candidate f2241eb, 공개 Chrome CDP fallback 390px에서 연구 읽기 필터의 `05`·`05 / 09` 정합성·가로폭·errors 0을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-209와 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T16:27:03Z"
     }
   ]
 }
