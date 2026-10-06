@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T21:42:52.289902Z",
+  "updated_at": "2026-10-06T21:55:00.000000Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5662,6 +5662,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T01:00:00Z"
+    },
+    {
+      "id": "H-300",
+      "event": "701–1100px 태블릿에서 국내외 활용 카드 3장의 마지막 카드 오른쪽 빈 공간이 읽기 흐름을 끊는 잔여 퍼블리싱 리스크를 확인했다. 활용 카드를 태블릿 1열·모바일 1열·데스크톱 3열로 보정하고 390·768·1440px 공개 화면, UI 계약, PR #530, main 배포·라이브 검증을 재확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며 C-223과 다섯 증거를 등록한다. teaser preview는 HOLD이고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T21:55:00Z"
     }
   ]
 }

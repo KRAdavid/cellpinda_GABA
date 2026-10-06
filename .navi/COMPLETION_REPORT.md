@@ -2434,3 +2434,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-TABLET-SHARE-LABEL-20261007`, `E-UI-CONTRACT-TABLET-SHARE-LABEL-20261007`, `E-CDP-TABLET-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-TABLET-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007`.
+
+## Current Release Recheck — 988c020 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37536776591`의 Pages 배포·라이브 smoke·release-status가 성공했고 공개 validator가 candidate `988c0201755be798598bf06c3ef2a9631a69e078`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 태블릿 정보 배치·반응형: PASS. 공개 390·768·1440px에서 국내외 활용 카드가 모바일·태블릿 1열, 데스크톱 3열로 읽히고 768px 마지막 카드 오른쪽 빈 공간과 다음 장 handoff의 끊김이 제거됐다.
+- AC-005 배포 게이트: PASS. PR #530 required checks와 main workflow의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 로컬 Pages 성능 예산은 `1,649,674 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 태블릿 카드 배치와 높이 보정에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007`, `E-CDP-TABLET-APPLICATION-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007`.

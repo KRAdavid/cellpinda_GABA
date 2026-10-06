@@ -2150,3 +2150,12 @@
 - 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-SHARE-LABEL-20261007`, `E-UI-CONTRACT-TABLET-SHARE-LABEL-20261007`, `E-CDP-TABLET-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-TABLET-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007`.
+
+## Red-team recheck — 태블릿 국내외 활용 카드 리듬 — 2026-10-07 — 988c020
+
+- 공격 관점에서 701–1100px의 2열 3장 배치가 마지막 카드 오른쪽에 큰 빈 공간을 만들고 사례 간 우선순위를 흐릴 수 있는 경로를 확인했다.
+- 태블릿 카드를 1열로 보정하고 모바일 1열·데스크톱 3열을 유지했다. 공개 390·768·1440px에서 카드 전체 문장, 출처, 다음 장 handoff와 문서 가로폭 정합을 확인했다.
+- 이번 변경은 반응형 정보 배치에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았다. 새 CRITICAL/MAJOR 결함은 없다. 기존 RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007`, `E-CDP-TABLET-APPLICATION-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007`.
