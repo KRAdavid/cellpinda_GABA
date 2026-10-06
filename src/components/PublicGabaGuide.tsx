@@ -1023,7 +1023,9 @@ export default function PublicGabaGuide() {
     if (canonical) canonical.href = window.location.href.split('?')[0].split('#')[0];
     const targetId = window.location.hash.slice(1);
     const initialResearchTopicId = researchTopicIdFromHash(window.location.hash);
-    setActiveResearchTopicId(initialResearchTopicId ?? researchTopics[0].id);
+    // The research map is a chapter in its own right. Do not preselect the
+    // first card until the reader enters a card or explicitly chooses a node.
+    setActiveResearchTopicId(initialResearchTopicId);
     if (!targetId) return;
     let cancelled = false;
     let hashDestinationFocused = false;
@@ -1088,7 +1090,9 @@ export default function PublicGabaGuide() {
       const targetId = window.location.hash.slice(1);
       const nextChapterId = readingChapterIdFromHash(window.location.hash);
       const nextResearchTopicId = researchTopicIdFromHash(window.location.hash);
-      setActiveResearchTopicId(nextResearchTopicId ?? researchTopics[0].id);
+      // Keep the map neutral on a chapter-level hash; card context starts
+      // only when a research card is selected or enters the reading window.
+      setActiveResearchTopicId(nextResearchTopicId);
       if (!nextChapterId) return;
       hashAlignmentCancelled.current = false;
       setActiveChapterId(nextChapterId);
