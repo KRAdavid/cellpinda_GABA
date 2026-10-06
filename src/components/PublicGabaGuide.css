@@ -291,7 +291,7 @@
 .guide-application-sources a{display:flex;align-items:flex-start;gap:5px;color:var(--guide-teal-dark);font-size:12px;font-weight:800;line-height:1.5;text-decoration:none}
 .guide-application-sources a:hover{text-decoration:underline;text-underline-offset:3px}
 @media(max-width:1100px){
-  .guide-academic-map{grid-template-columns:repeat(3,1fr)}
+  .guide-academic-map{grid-template-columns:1fr}
   .guide-application-grid{grid-template-columns:1fr}
 }
 @media(max-width:700px){
