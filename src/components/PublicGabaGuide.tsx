@@ -933,6 +933,7 @@ export default function PublicGabaGuide() {
   const headerRef = useRef<HTMLElement | null>(null);
   const menuToggleRef = useRef<HTMLButtonElement | null>(null);
   const shareStatusTimer = useRef<number | null>(null);
+  const shareStatusStartY = useRef(0);
   const copiedResearchTimer = useRef<number | null>(null);
   const copiedMessageTimer = useRef<number | null>(null);
   const messageKitCopiedTimer = useRef<number | null>(null);
@@ -1149,6 +1150,20 @@ export default function PublicGabaGuide() {
     updateMeta('meta[name="twitter:title"]', pageTitle);
     updateMeta('meta[name="twitter:description"]', pageDescription);
   }, [activeChapterId, activeReadingLabel, activeResearchTopic?.id, activeVideo.title, sourceReadingTopic.title]);
+
+  useEffect(() => {
+    if (!shareStatus) return;
+    const dismissShareStatusOnScroll = () => {
+      if (Math.abs(window.scrollY - shareStatusStartY.current) < 32) return;
+      if (shareStatusTimer.current !== null) {
+        window.clearTimeout(shareStatusTimer.current);
+        shareStatusTimer.current = null;
+      }
+      setShareStatus('');
+    };
+    window.addEventListener('scroll', dismissShareStatusOnScroll, { passive: true });
+    return () => window.removeEventListener('scroll', dismissShareStatusOnScroll);
+  }, [shareStatus]);
 
   useEffect(() => () => {
     if (shareStatusTimer.current !== null) window.clearTimeout(shareStatusTimer.current);
@@ -1516,6 +1531,7 @@ export default function PublicGabaGuide() {
 
   const announceShareStatus = (message: string) => {
     if (shareStatusTimer.current !== null) window.clearTimeout(shareStatusTimer.current);
+    shareStatusStartY.current = window.scrollY;
     setShareStatus(message);
     shareStatusTimer.current = window.setTimeout(() => {
       setShareStatus('');
