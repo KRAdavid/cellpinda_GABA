@@ -2177,3 +2177,12 @@
 - 이 검증은 Chrome Playwright fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.
+
+## Red-team recheck — 좁은 모바일 전문가 영상 히어로 — 2026-10-07 — 4d128fa
+
+- 공격 관점에서 320px에서 전문가 영상 포스터와 설명이 세로로 분리되어 첫 화면의 영상 의미·제목·공유 동작을 한 번에 파악하기 어려운 경로를 확인했다.
+- 350px 이하를 포스터·영상 정체성 2열 컴팩트 카드로 보정하고, 390px·768px·1440px의 기존 갤러리 리듬을 보존했다. 320·350·390px 선택 전환에서 active card 1개·iframe 1개·오류 0·문서 가로폭 일치를 확인했다.
+- 이번 변경은 반응형 정보 배치에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았다. 새 CRITICAL/MAJOR 결함은 없다. 기존 RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- Chrome Playwright fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 이해도·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.

@@ -1928,3 +1928,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.
+
+## 2026-10-07 — 좁은 모바일 전문가 영상 히어로·공개 배포 재검증
+
+- 320px에서 포스터와 설명이 한 화면에 함께 읽히도록 350px 이하 전문가 영상 feature를 2열 컴팩트 카드로 보정했다.
+- PR #536의 성능 예산 초과를 CSS 중복·불필요 선언 정리로 해소하고, PR #537에서 NAVI TF heartbeat freshness를 갱신했다.
+- main workflow `37545095666`과 공개 validator candidate `4d128fa`가 성공했으며, 공개 320·390·768·1440px Playwright 점검에서 오류와 가로폭 초과가 없었다.
+- 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`를 유지한다.
+
+증적: `C-226`, `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.

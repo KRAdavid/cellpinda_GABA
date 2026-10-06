@@ -2470,3 +2470,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.
+
+## Current Release Recheck — 4d128fa — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37545095666`의 release-verify·fresh TF pulse·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 공개 validator가 candidate `4d128fa1ca6cda9f4a2f5c3ee1463aa829703b8c`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 좁은 모바일 전문가 영상·반응형: PASS. 320·350px 컴팩트 카드에서 포스터와 영상 설명이 함께 보이고 390px·768px·1440px 영상 흐름과 document width 정합을 유지했다. 선택 영상 전환·iframe 로딩·공유 버튼은 정상이다.
+- AC-005 배포 게이트: PASS. PR #536·#537 required checks, local build·UI contract·typecheck·Pages 번들·성능 예산, main workflow의 freshness·Pages·라이브 smoke·release status가 성공했다. 최종 local Pages 자산 총량은 `1,649,418 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 전문가 영상의 초소형 모바일 정보 배치와 NAVI heartbeat freshness 기록에 한정되며 공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.

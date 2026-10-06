@@ -2434,6 +2434,18 @@
         "E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-226",
+      "statement": "320–350px 초소형 모바일에서도 선택한 전문가 영상의 포스터·주제·제목·채널·공유 동작이 한 카드 안에 함께 보이며, 390px·768px·1440px의 기존 영상 흐름과 가로폭 안정성은 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008",
+        "E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008",
+        "E-CDP-NARROW-EXPERT-HERO-20261008",
+        "E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008",
+        "E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16383,6 +16395,59 @@
       "captured_at": "2026-10-06T22:34:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-TABLET-ACADEMIC-MAP-RHYTHM",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-225"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 전문가 영상 히어로 보정이 전체 공개 검증·typecheck·production build·정적 번들·성능 예산을 통과한다.",
+      "locator": "local branch 8701464; pnpm run build; validate:ui-contract status ok; validate:performance initial JS 311199, initial CSS 95703, total assets 1649418 <= 1650000; 320·350px compact grid rule and 351–700px/390px layout rules remain intact",
+      "captured_at": "2026-10-06T23:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-NARROW-EXPERT-HERO",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-226"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 좁은 모바일 전문가 영상 카드의 동시 노출·가로폭 안정성·접근성 경계를 유지한 상태로 통과한다.",
+      "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.css max-width:350px compact feature rule; existing max-width:700px and min-width:351px video rules preserved; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T23:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261008-NARROW-EXPERT-HERO",
+      "claim_refs": ["C-004", "C-006", "C-226"]
+    },
+    {
+      "id": "E-CDP-NARROW-EXPERT-HERO-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome Playwright 시각·상호작용 점검에서 320·350·390px 전문가 영상 카드가 가로로 넘치지 않고 선택 영상 전환과 iframe 로딩 상태가 정상이다.",
+      "locator": "local http://127.0.0.1:4173/?view=guide&qa=expert-interaction-20261008#expert-videos; Chrome Playwright compare metrics: 320 feature 280x291.781, media 104x184.875, copy 139x267.781; 350 feature 310x242.391, media 104x184.875, copy 169x218.391; 390 feature 350x268.016, media 137.266x244.016, copy 174.734x244.016; document scrollWidth equals clientWidth and errors []; selecting card 2 changed title, activeCards 1, iframeCount 1, playerBusy true",
+      "source_uri": "http://127.0.0.1:4173/?view=guide&qa=expert-interaction-20261008#expert-videos",
+      "captured_at": "2026-10-06T23:02:00Z",
+      "reviewer_id": "NAVI-CHROME-PLAYWRIGHT-QA-20261008-NARROW-EXPERT-HERO",
+      "claim_refs": ["C-003", "C-004", "C-226"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 전문가 영상 보정의 PR·main 공개 배포 파이프라인이 성능 예산 재검증과 freshness heartbeat 복구를 포함해 모두 성공했다.",
+      "locator": "PR #536 https://github.com/KRAdavid/gaba_info/pull/536; release-verify run 37544465702 and site-quality-verify run 37544465590 success; merge 2e16fe1; freshness heartbeat PR #537 https://github.com/KRAdavid/gaba_info/pull/537 merged 4d128fa; final main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37545095666: release-verify 112547082825, worker-readiness 112547448430, deploy-pages 112547472851, smoke-live 112547572216, release-status 112547634949 all success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37545095666",
+      "captured_at": "2026-10-06T23:12:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261008-NARROW-EXPERT-HERO",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-226"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 320·390·768·1440px 전문가 영상 흐름이 가로폭 초과 없이 유지되고, 제품 독립 공개 경계와 라이브 데이터 정합성이 보존된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-audit-20261008; validate:live-public HTTP 200 candidateSha 4d128fa1ca6cda9f4a2f5c3ee1463aa829703b8c, STATIC, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched; live Chrome Playwright audit at 320·390·768·1440px reported errors [] and overflow false; 320/390 compact feature metrics and 768/1440 preserved gallery layouts; live 320 screenshot inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=publishing-audit-20261008-320#expert-videos",
+      "captured_at": "2026-10-06T23:12:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-NARROW-EXPERT-HERO",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-226"]
     }
   ]
 }

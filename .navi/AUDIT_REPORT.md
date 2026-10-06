@@ -2725,3 +2725,12 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.
+
+## 좁은 모바일 전문가 영상 히어로·공개 배포 재감사 — 4d128fa — 2026-10-07
+
+- 320px에서 선택한 전문가 영상의 포스터가 설명 영역 아래로 밀려 첫 화면에서 영상 정체성과 제목을 함께 읽기 어려운 잔여 퍼블리싱 리스크를 확인했다.
+- 350px 이하를 104px 포스터와 설명을 나란히 보여주는 컴팩트 카드로 보정하고, 351–700px 중간 폭·390px 모바일·768px 태블릿·1440px 데스크톱 영상 갤러리는 유지했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 전체 build와 성능 예산(1,649,418 bytes), PR #536 required checks, freshness heartbeat PR #537, main workflow `37545095666`의 release-verify·fresh TF pulse·Pages·라이브 smoke·release-status, 공개 candidate `4d128fa`를 확인했다. 공개 320·390·768·1440px Playwright audit에서 오류와 문서 가로폭 초과는 없었고, 영상 선택 전환도 정상이다.
+- 결과는 `PASS_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.

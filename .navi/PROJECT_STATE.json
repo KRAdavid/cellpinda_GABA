@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T22:39:09.116275Z",
+  "updated_at": "2026-10-06T23:18:22.085071Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2143,7 +2143,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T22:34:00Z"
+    "last_run_at": "2026-10-06T23:12:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2345,7 +2345,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T22:34:00Z"
+    "last_run_at": "2026-10-06T23:12:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5683,6 +5683,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T22:34:00Z"
+    },
+    {
+      "id": "H-303",
+      "event": "320px 초소형 모바일에서 전문가 영상 카드가 세로로 밀려 첫 화면에서 포스터와 설명을 함께 읽기 어려운 잔여 퍼블리싱 리스크를 확인했다. 350px 이하를 포스터·영상 정체성 2열 컴팩트 카드로 보정하고 351–700px·390px·768px·1440px 기존 흐름을 유지했다. 로컬 build·UI contract·성능 예산, PR #536 required checks, freshness heartbeat PR #537, main workflow 37545095666의 release-verify·fresh TF pulse·Pages·라이브 smoke·release-status, 공개 validator candidate 4d128fa와 320·390·768·1440px Playwright 라이브 점검을 재확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-226과 다섯 증거를 등록한다. teaser preview는 HOLD이고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T23:12:00Z"
     }
   ]
 }
