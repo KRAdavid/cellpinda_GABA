@@ -2211,9 +2211,7 @@
 
 /* v154 medium-phone header order: apply the named share rail after the legacy narrow-header overrides. */
 @media(min-width:351px) and (max-width:430px){
-  .guide-header .guide-logo{max-width:calc(100% - 216px - env(safe-area-inset-right))}
-  .guide-header .guide-menu-toggle{right:calc(156px + env(safe-area-inset-right))}
-  .guide-header .guide-reading-size-toggle{right:calc(80px + env(safe-area-inset-right))}
-  .guide-header .guide-header-share{right:calc(12px + env(safe-area-inset-right));width:60px;min-width:60px;flex-basis:60px;padding:0 8px;gap:4px;font-size:11px;white-space:nowrap}
-  .guide-header .guide-header-share svg{display:block;width:14px;height:14px}
+  .guide-header .guide-menu-toggle{right:156px}
+  .guide-header .guide-reading-size-toggle{right:80px}
+  .guide-header .guide-header-share{width:60px;font-size:11px}
 }

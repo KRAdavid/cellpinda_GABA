@@ -73,5 +73,7 @@ const manifest = {
   checks,
   fileHashes,
 };
-await writeFile(resolve(outputDirectory, 'release-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+// The manifest is a machine-verified public integrity artifact, not a human-facing page.
+// Keep its schema readable after parsing while avoiding indentation overhead in the static bundle.
+await writeFile(resolve(outputDirectory, 'release-manifest.json'), `${JSON.stringify(manifest)}\n`, 'utf8');
 console.log(JSON.stringify({directory: outputDirectory, candidateSha, runtimeMode, routes: routePaths.length, files: Object.keys(fileHashes).length, checks, status: 'ok'}));
