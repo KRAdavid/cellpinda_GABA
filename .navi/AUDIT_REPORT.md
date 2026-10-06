@@ -2545,3 +2545,14 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.
+
+## 전문가 영상 상태 레일 정돈·공개 배포 — d17014d6 — 2026-10-07
+
+- 감사 finding: 모바일 전문가 영상 선택 카드의 상태 문구가 길어 선택 제목·출처·순서를 한 번에 스캔하는 흐름을 끊을 수 있는 잔여 UX 리스크가 있었다.
+- 보정: 상태 문구를 `선택 후 재생`·`준비 중`·`재생 중`으로 정돈하고 `.guide-video-feature-state` 클래스를 보존해 390px에서 주제·상태·순서가 한 줄 메타 레일로 읽히도록 했다. 카드 선택 뒤 제목·상태·`aria-pressed`·포커스가 함께 갱신된다.
+- Recheck: 로컬 UI contract·typecheck·production build·성능 예산, PR #500/#501, main merge `d17014d6`, main workflow `37491933306`, 공개 validator candidate `d17014d6`, Chrome CDP fallback 390·1440px 및 두 번째 영상 선택 interaction에서 상태·focus·document width·errors 0을 확인했다.
+- 배포 품질: 첫 PR 검사에서 정적 자산 총량이 예산보다 103 bytes 초과했으나 사용하지 않는 메시지 카드 스타일을 제거한 뒤 재검사에서 `1,648,499 bytes <= 1,650,000`으로 회복했다. 시각적 동작 손실은 없으며 final class-only markup 복원은 UI contract·typecheck·원격 site-quality로 재확인했다.
+- 공개 경계: 영상 출처·연구 카피·수치·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007`, `E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007`, `E-CDP-VIDEO-STATE-RAIL-20261007`, `E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007`, `E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007`.

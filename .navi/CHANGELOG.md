@@ -1772,3 +1772,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 로컬 성능 예산 `1,649,468 bytes <= 1,650,000`, PR #498, main workflow `37487864715`, 공개 validator candidate `fb603a48`, Chrome CDP 390·350·1440px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.
+
+## 전문가 영상 상태 레일·공개 배포 — d17014d6 — 2026-10-07
+
+- 전문가 영상 카드의 상태 문구를 `선택 후 재생`·`준비 중`·`재생 중`으로 정돈하고 상태 클래스를 유지해 모바일 메타 레일의 한 줄 가독성을 보강했다.
+- 카드 선택 시 제목·상태·`aria-pressed`·포커스가 함께 갱신되는 흐름을 공개 390px에서 확인했다.
+- PR #500/#501과 main workflow `37491933306`이 성공했고 공개 validator가 candidate `d17014d6`·HTTP 200·provenance `matched`를 확인했다. 최종 정적 자산 총량은 `1,648,499 bytes`다.
+- 영상·연구 출처와 제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007`, `E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007`, `E-CDP-VIDEO-STATE-RAIL-20261007`, `E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007`, `E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007`.
