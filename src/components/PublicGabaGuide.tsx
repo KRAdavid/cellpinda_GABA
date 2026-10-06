@@ -24,6 +24,7 @@ import {
   ShieldCheck,
   Sparkles,
   Sprout,
+  Sun,
   X,
 } from 'lucide-react';
 import gabaFermentationEditorial from '../assets/gaba-fermentation-editorial-q55.webp';
@@ -1733,6 +1734,14 @@ export default function PublicGabaGuide() {
                 <h2 id="opening-bridge-heading" tabIndex={-1}>잠은 멈춤이 아니라,<br />{' '}회복이 시작되는 시간입니다</h2>
               </div>
               <p>잠의 역할을 이해하면<br />GABA를 읽는 이유가 보입니다.</p>
+            </div>
+            <div className="guide-opening-bridge-visual" role="img" aria-label="낮의 활동, 밤의 수면, 회복으로 이어지는 하루의 리듬">
+              <span className="guide-opening-bridge-visual-line" aria-hidden="true" />
+              <div className="guide-opening-bridge-phase is-day"><span className="guide-opening-bridge-phase-icon" aria-hidden="true"><Sun size={19} strokeWidth={1.8} /></span><span><small>낮</small><strong>활동</strong></span></div>
+              <ArrowRight className="guide-opening-bridge-phase-arrow" size={17} aria-hidden="true" />
+              <div className="guide-opening-bridge-phase is-night"><span className="guide-opening-bridge-phase-icon" aria-hidden="true"><Moon size={19} strokeWidth={1.8} /></span><span><small>밤</small><strong>수면</strong></span></div>
+              <ArrowRight className="guide-opening-bridge-phase-arrow" size={17} aria-hidden="true" />
+              <div className="guide-opening-bridge-phase is-recovery"><span className="guide-opening-bridge-phase-icon" aria-hidden="true"><Sparkles size={19} strokeWidth={1.8} /></span><span><small>다음 날</small><strong>회복</strong></span></div>
             </div>
             <div className="guide-opening-bridge-grid">
               <article><span>01</span><div><h3>낮에는 움직입니다</h3><p>뇌와 몸은 움직이며 에너지를 쓰고, 하루의 정보를 받아들입니다.</p></div></article>
