@@ -948,8 +948,8 @@ export default function PublicGabaGuide() {
   const activeVideoIndex = Math.max(0, expertVideos.findIndex((video) => video.id === activeVideo.id));
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const getExpertVideoState = (videoId: string) => {
-    if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, featureLabel: '선택하면 바로 재생', className: '' };
-    if (!videoStarted) return { label: '현재 선택됨', badge: '선택됨', featureLabel: '선택하면 바로 재생', className: 'is-selected' };
+    if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, featureLabel: '선택 후 재생', className: '' };
+    if (!videoStarted) return { label: '현재 선택됨', badge: '선택됨', featureLabel: '선택 후 재생', className: 'is-selected' };
     if (!videoFrameReady) return { label: '영상 준비 중', badge: '준비 중', featureLabel: '준비 중', className: 'is-loading' };
     return { label: '현재 재생 중', badge: '재생 중', featureLabel: '재생 중', className: 'is-playing' };
   };
