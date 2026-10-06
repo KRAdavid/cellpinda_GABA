@@ -2422,6 +2422,18 @@
         "E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-225",
+      "statement": "701–1100px 태블릿 구간의 학술 연구 지도 5개 카드는 한 열로 읽혀 두 번째 줄 오른쪽의 큰 빈 공간 없이 연구 영역을 순서대로 보여주며, 390px 모바일 1열과 1440px 데스크톱 5열은 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+        "E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+        "E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+        "E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+        "E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16318,6 +16330,59 @@
       "captured_at": "2026-10-06T22:13:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-TABLET-VIDEO-RHYTHM",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-224"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 학술 연구 지도 1열 보정이 UI 계약·typecheck·127개 테스트·production build·Pages 정적 번들·성능 예산을 통과한다.",
+      "locator": "local main 8926b4e; pnpm run validate:ui-contract status ok; pnpm test 127 passed; pnpm run build status ok; validate:performance initial JS 311199, initial CSS 95703, total assets 1649380, largest 311199; .guide-academic-map is one column through 1100px and the existing mobile one-column and desktop five-column rules remain",
+      "captured_at": "2026-10-06T22:28:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-TABLET-ACADEMIC-MAP-RHYTHM",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-225"]
+    },
+    {
+      "id": "E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 UI 계약이 태블릿 학술 연구 지도 1열 리듬과 모바일·데스크톱 연구 영역 구조를 유지한 상태로 통과한다.",
+      "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.css max-width:1100px academic map rule; existing max-width:700px one-column rule and desktop five-column rule unchanged; validate:ui-contract status ok; research copy, source and product boundary contracts unchanged",
+      "captured_at": "2026-10-06T22:28:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-TABLET-ACADEMIC-MAP-RHYTHM",
+      "claim_refs": ["C-004", "C-006", "C-225"]
+    },
+    {
+      "id": "E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome Playwright 시각 점검에서 768px 학술 연구 영역 카드 5장이 한 열로 정렬되고, 390px 1열·1440px 5열을 유지한다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=academic-tablet-live; Chrome Playwright screenshots inspected with view_image at 390·768·1440px; card metrics are 768px gridColumns 704px with five equal-width cards, 390px gridColumns 350px, 1440px gridColumns 228px repeated five times; map scrollWidth equals clientWidth at each width",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=academic-tablet-live-768",
+      "captured_at": "2026-10-06T22:34:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-TABLET-ACADEMIC-MAP-RHYTHM",
+      "claim_refs": ["C-003", "C-004", "C-225"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR과 main 공개 배포 파이프라인이 태블릿 학술 연구 지도 리듬 보정의 최종 커밋에서 모두 성공했다.",
+      "locator": "PR #534 https://github.com/KRAdavid/gaba_info/pull/534; release-verify run 37541075452 job 112533940113 and site-quality-verify run 37541075395 job 112533939898 success; merge 8926b4e10e43dca547ccf35a002d740553be474e; main workflow 37541239081; release-verify 112534487379; worker-readiness 112534927630; deploy-pages 112534968140; deploy-worker skipped static; smoke-live 112535053292; release-status 112535129038; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37541239081",
+      "captured_at": "2026-10-06T22:33:50Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-TABLET-ACADEMIC-MAP-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-225"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 태블릿 학술 연구 지도 1열 배열, 모바일·데스크톱 카드 구조, 제품 독립 공개 경계가 배포 후에도 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=academic-tablet-live; validate:live-public HTTP 200 candidateSha 8926b4e10e43dca547ccf35a002d740553be474e, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched; Chrome Playwright screenshots inspected at 390·768·1440px show tablet one-column academic cards, mobile one-column cards and unchanged desktop five-column map",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=academic-tablet-live",
+      "captured_at": "2026-10-06T22:34:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-TABLET-ACADEMIC-MAP-RHYTHM",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-225"]
     }
   ]
 }
