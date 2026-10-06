@@ -1464,3 +1464,10 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-DEFINITION-MOTIF-20261004`, `E-PLAYWRIGHT-DEFINITION-MOTIF-20261004`, `E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004`, `E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004`.
+## 연구 결과 비교 도표 읽기 안내·공개 배포 — 3339309 — 2026-10-06
+
+- 연구 결과 도표 상단에 `두 조건을 나란히 비교`와 `막대가 짧을수록 변화가 작습니다`를 추가해 소비자가 비교 기준과 시각 요소를 먼저 이해하도록 보강했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, Playwright Chromium fallback 320·390·1440px, PR #419, main workflow `37407044715`, Pages·라이브 smoke·release-status와 live validator를 통과했다.
+- 연구 수치·출처·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CHART-CUE-20261006`, `E-UI-CONTRACT-RESEARCH-CHART-CUE-20261006`, `E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006`, `E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006`.

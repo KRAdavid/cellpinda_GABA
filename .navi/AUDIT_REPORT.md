@@ -1,5 +1,14 @@
 # Audit Report
 
+## Research Comparison Reading Cue — 3339309 — 2026-10-06
+
+- 연구 결과 비교 도표에서 독자가 먼저 확인해야 하는 비교 기준과 막대 길이의 의미를 도표 상단에 추가했다. 새 수치나 효과 해석을 만들지 않고 `두 조건을 나란히 비교`와 `막대가 짧을수록 변화가 작습니다`라는 읽기 안내만 보강했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build를 통과했고, Playwright Chromium fallback 320px·390px·1440px에서 안내 문구가 표시되며 도표 폭과 document scrollWidth가 viewport와 일치하고 page/console errors 0을 확인했다. 캡처로 모바일 두 줄 배치와 데스크톱 한 줄 배치를 검토했다.
+- PR #419의 `release-verify`·`site-quality-verify`가 성공해 main merge `3339309`로 반영되었다. workflow `37407044715`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고, live validator는 HTTP 200·STATIC·candidate `3339309c8565f874843b757afa5f843206bd2df3`·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CHART-CUE-20261006`, `E-UI-CONTRACT-RESEARCH-CHART-CUE-20261006`, `E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006`, `E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006`.
+
 ## Research Topic Selection Context — 0e5c611 — 2026-10-06
 
 - 연구 지도에서 주제를 선택한 뒤 현재 선택 상태와 아래 연구 카드의 읽기 순서가 화면낭독기와 시각 흐름 모두에서 이어지지 않던 잔여 맥락 문제를 확인하고, 선택 안내를 `role=status`·`aria-live=polite`·`aria-atomic=true`로 연결했다. 화면의 정보량은 늘리지 않고, 선택 전 안내와 선택 후 안내를 자연스럽게 교체한다.

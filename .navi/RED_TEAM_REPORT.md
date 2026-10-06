@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Research Comparison Reading Cue — 2026-10-06 — 3339309
+
+- 공격 관점에서 독자가 비교 도표의 두 조건과 막대 길이의 의미를 한 번에 파악하지 못하는 오독 경로를 점검했다. 도표 상단에 비교 기준과 읽기 안내를 배치했으며, 연구 수치·출처·해석은 변경하지 않았다.
+- 320px·390px·1440px 공개본에서 안내 문구가 각각 모바일 두 줄·데스크톱 한 줄로 표시되고, 네 개 비교 lane·GABA 결과 강조·document scrollWidth·page/console errors 0이 일치했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser 플러그인 부재로 Chromium fallback을 사용했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006`, `E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006`.
+
 ## Research Topic Selection Context — 2026-10-06 — 0e5c611
 
 - 공격 관점에서 연구 지도 선택 후 사용자가 현재 선택 주제와 다음 연구 카드의 관계를 놓치거나, 보조기기가 상태 변화를 받지 못하는지 확인했다. 선택 전·후 안내가 한 영역에서 교체되고, `role=status`·`aria-live=polite`·`aria-atomic=true`가 유지되며, 390px·1440px에서 선택 카드 제목이 고정 읽기 레일 아래에 가려지지 않았다.

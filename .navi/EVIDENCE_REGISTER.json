@@ -1768,6 +1768,18 @@
         "E-LIVE-PUBLIC-RESEARCH-SELECTION-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-170",
+      "statement": "연구 결과 비교 도표는 두 조건과 막대 길이의 읽는 법을 먼저 안내해 모바일·데스크톱에서 결과 비교를 한눈에 이해하도록 돕는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-CHART-CUE-20261006",
+        "E-UI-CONTRACT-RESEARCH-CHART-CUE-20261006",
+        "E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12810,6 +12822,59 @@
       "captured_at": "2026-10-06T02:32:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-SELECTION",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-169"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-CHART-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 비교 도표 읽기 안내 보강 코드가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 4c446ccfaa33416e5840ad4be3685e70e9a0f717; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1634967 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T03:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-RESEARCH-CHART-CUE",
+      "claim_refs": ["C-001", "C-003", "C-170"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-CHART-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 비교 도표가 비교 기준과 막대 길이 안내를 먼저 표시하도록 UI 계약 검사가 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; comparison guide assertions for guide-outcome-comparison-guide, guide-outcome-comparison-guide-mark, guide-outcome-comparison-guide-copy and narrow-mobile media rule; status ok",
+      "captured_at": "2026-10-06T03:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-CHART-CUE",
+      "claim_refs": ["C-001", "C-170"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 연구 결과 비교 도표의 읽기 안내가 모바일·데스크톱에서 보이고 비교 lane·가로폭·오류 상태가 안정적이다.",
+      "locator": "Playwright Chromium fallback; local http://127.0.0.1:4173/?view=guide#research; 320/390/1440px; cue visible with `두 조건을 나란히 비교` and `막대가 짧을수록 변화가 작습니다`; chart widths 216/286/649; four comparison lanes; document scrollWidth 320/390/1440; page errors 0; console errors 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=local-research-chart-cue-20261006#research",
+      "captured_at": "2026-10-06T03:01:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-RESEARCH-CHART-CUE",
+      "claim_refs": ["C-003", "C-004", "C-170"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 결과 비교 도표 읽기 안내 PR #419가 필수 검사를 통과해 main merge commit 3339309로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #419; code commit 4c446ccfaa33416e5840ad4be3685e70e9a0f717; PR release-verify workflow 37406853035 job 112086220494; PR site-quality workflow 37406853043 job 112086220035; main workflow 37407044715; release-verify 112086799326, worker-readiness 112087119079, deploy-pages 112087147530, smoke-live 112087220052 and release-status 112087289211 successful; deploy-worker 112087148000 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37407044715",
+      "captured_at": "2026-10-06T03:04:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-CHART-CUE",
+      "claim_refs": ["C-001", "C-002", "C-170"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 결과 비교 도표의 읽기 안내가 320px·390px·1440px에 표시되고 네 개 비교 lane·제품 독립 공개 경계·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 3339309c8565f874843b757afa5f843206bd2df3; generatedAt 2026-10-06T03:03:09.487Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 320/390/1440px cue visible, chart widths 216/286/649, four comparison lanes, document scrollWidth equals viewport, page errors 0, console errors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=research-chart-cue-live-20261006#research",
+      "captured_at": "2026-10-06T03:04:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-CHART-CUE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-170"]
     }
   ]
 }
