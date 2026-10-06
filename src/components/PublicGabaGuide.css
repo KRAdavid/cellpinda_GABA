@@ -2224,3 +2224,6 @@
   .guide-outcome-lane{grid-template-columns:1fr;grid-template-areas:"top" "signal";align-items:start;gap:7px}
   .guide-outcome-lane-top>strong{min-height:0}
 }
+/* v160 deep-link readability: leave the sticky header and reading rail above chapter headings. */
+.guide-section,.guide-balance-band,.guide-sources{scroll-margin-top:126px}
+@media(max-width:700px){.guide-section,.guide-balance-band,.guide-sources{scroll-margin-top:116px}}
