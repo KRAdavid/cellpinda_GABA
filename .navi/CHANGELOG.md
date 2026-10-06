@@ -1583,3 +1583,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-MOBILE-HERO-RAIL-20261006`, `E-UI-CONTRACT-MOBILE-HERO-RAIL-20261006`, `E-CDP-MOBILE-HERO-RAIL-20261006`, `E-DEPLOY-PIPELINE-MOBILE-HERO-RAIL-20261006`, `E-LIVE-PUBLIC-MOBILE-HERO-RAIL-20261006`.
+
+## 초소형 모바일 진행 레일 한 줄 보정·공개 배포 — 9b6df19 — 2026-10-06
+
+- 280–350px에서 고정 진행 레일의 `지금 읽는 중` 문구가 두 줄로 깨지지 않도록 시각 문구를 `읽는 중`으로 압축했다. 접근성 live announcement와 390px 이상 표기는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #447, main workflow `37429369421`, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 280px 감리를 완료했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-READING-RAIL-20261006`, `E-UI-CONTRACT-NARROW-READING-RAIL-20261006`, `E-CDP-NARROW-READING-RAIL-20261006`, `E-DEPLOY-PIPELINE-NARROW-READING-RAIL-20261006`, `E-LIVE-PUBLIC-NARROW-READING-RAIL-20261006`.

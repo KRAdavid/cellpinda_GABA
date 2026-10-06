@@ -2021,3 +2021,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-MOBILE-HERO-RAIL-20261006`, `E-UI-CONTRACT-MOBILE-HERO-RAIL-20261006`, `E-CDP-MOBILE-HERO-RAIL-20261006`, `E-DEPLOY-PIPELINE-MOBILE-HERO-RAIL-20261006`, `E-LIVE-PUBLIC-MOBILE-HERO-RAIL-20261006`.
+
+## Current Release Recheck — 9b6df19 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `9b6df192005919f4cfbb610c2797317a30311543`와 71개 bundle hash를 확인했다.
+- AC-003/AC-004 초소형 모바일 진행 레일: PASS. 280px에서 `읽는 중`이 한 줄로 표시되고 현재 장 제목·진행 수치가 함께 읽히며, 390px 이상 표기와 접근성 live announcement가 유지된다. document scrollWidth 280px, page/console errors 0을 확인했다.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #447 및 main workflow의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 수치·출처·공개 카피는 변경하지 않았고 teaser `HOLD`를 유지한다. 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-READING-RAIL-20261006`, `E-UI-CONTRACT-NARROW-READING-RAIL-20261006`, `E-CDP-NARROW-READING-RAIL-20261006`, `E-DEPLOY-PIPELINE-NARROW-READING-RAIL-20261006`, `E-LIVE-PUBLIC-NARROW-READING-RAIL-20261006`.

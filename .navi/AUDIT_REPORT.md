@@ -2326,3 +2326,9 @@
 - 390px 공개 모바일에서 히어로의 `GABA에서 읽습니다` 강조 문구 잘림과 헤더의 `글자 크게`·공유 버튼 충돌을 확인하고, 381–430px에 압축 읽기 레일과 폭 내 줄바꿈을 적용했다. 768px 태블릿과 1024px 데스크톱 전환은 유지했다.
 - PR #445, main workflow `37426950620`, 공개 validator와 Chrome CDP fallback 390·768·1024px 검증이 성공했고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+## Current Release Recheck — 9b6df19 — 2026-10-06
+
+- 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.
+- PR #447, main workflow `37429369421`, 공개 validator와 Chrome CDP fallback 280px 검증이 성공했고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
