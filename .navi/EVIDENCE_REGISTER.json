@@ -2088,6 +2088,18 @@
         "E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-197",
+      "statement": "연구 지도에 포함된 5개 학술 영역 카드에 `01 / 05`부터 `05 / 05`까지 전체 순서를 표시해 모바일·데스크톱에서 연구 확장의 흐름을 즉시 이해할 수 있게 하며, 학술 내용·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-ACADEMIC-MAP-SEQUENCE-20261006",
+        "E-UI-CONTRACT-ACADEMIC-MAP-SEQUENCE-20261006",
+        "E-CDP-ACADEMIC-MAP-SEQUENCE-20261006",
+        "E-DEPLOY-PIPELINE-ACADEMIC-MAP-SEQUENCE-20261006",
+        "E-LIVE-PUBLIC-ACADEMIC-MAP-SEQUENCE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14521,6 +14533,59 @@
       "captured_at": "2026-10-06T11:23:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-CARD-MARKER",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-196"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-ACADEMIC-MAP-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 학술 영역 순서 표식 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit f4baa05; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1647333 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T11:29:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-ACADEMIC-MAP-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-197"]
+    },
+    {
+      "id": "E-UI-CONTRACT-ACADEMIC-MAP-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 5개 카드에 `01 / 05`부터 `05 / 05`까지 순서를 노출하고 라벨을 줄바꿈 없이 읽히도록 보정했으며 기존 학술 내용과 접근성 구조를 유지하도록 UI 계약을 확인했다.",
+      "locator": "src/components/PublicGabaGuide.tsx academicFields.map; aria-label `${index + 1}번째 연구 영역 중 ${academicFields.length}개`; src/components/PublicGabaGuide.css .guide-academic-map article > span; font-size 10px; color #668894; white-space nowrap; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T11:29:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-ACADEMIC-MAP-SEQUENCE",
+      "claim_refs": ["C-001", "C-003", "C-197"]
+    },
+    {
+      "id": "E-CDP-ACADEMIC-MAP-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 390px·1440px 연구 지도 직접 링크를 확인했으며 5개 순서 표식, 카드 폭, 섹션 정렬과 page/console 오류 상태가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=academic-map-audit-public-20261006#academic; viewports 390x844 and 1440x900; markers [`01 / 05`, `02 / 05`, `03 / 05`, `04 / 05`, `05 / 05`]; pageWidth 390 and 1425; card widths 350px mobile and 228px desktop; pageErrors 0; consoleErrors 0; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-academic-map-390.png and C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-academic-map-1440.png inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=academic-map-audit-public-20261006#academic",
+      "captured_at": "2026-10-06T11:33:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-ACADEMIC-MAP-SEQUENCE",
+      "claim_refs": ["C-003", "C-004", "C-197"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-ACADEMIC-MAP-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 순서 표식 PR #471가 필수 검사를 통과해 main merge commit a66d8e5로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #471; code commit f4baa05; PR release-verify run 37456843482 job 112246429952 successful; site-quality-verify run 37456843650 job 112246431233 successful; main merge commit a66d8e55bf3d115c082027bd8c1f69e8ffe7b2bb; workflow_dispatch run 37457022682; release-verify 112247207652; worker-readiness 112247557129; deploy-pages 112247767475; smoke-live 112247870741; release-status 112247960364; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37457022682",
+      "captured_at": "2026-10-06T11:36:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-ACADEMIC-MAP-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-197"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-ACADEMIC-MAP-SEQUENCE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 연구 지도 5개 영역의 전체 순서 표시가 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T11:33:15.891Z; page 200; runtimeMode STATIC; candidateSha a66d8e55bf3d115c082027bd8c1f69e8ffe7b2bb; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·1440px screenshots show all five markers; academic copy, sources, data and product boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=academic-map-audit-public-20261006#academic",
+      "captured_at": "2026-10-06T11:36:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-ACADEMIC-MAP-SEQUENCE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-197"]
     }
   ]
 }

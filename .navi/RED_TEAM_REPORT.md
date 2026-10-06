@@ -1903,3 +1903,12 @@
 - 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-RESEARCH-CARD-MARKER-20261006`, `E-CDP-RESEARCH-CARD-MARKER-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-MARKER-20261006`, `E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006`.
+
+## 연구 지도 영역 순서·공개 배포 — 2026-10-06 — a66d8e5
+
+- 공격 관점에서 연구 지도 카드 5개를 처음부터 끝까지 읽을 때 전체 순서가 즉시 보이는지 확인했다. 모바일·데스크톱 모두 `01 / 05`–`05 / 05`가 유지되고 카드 폭과 상단 진행 레일이 충돌하지 않는다.
+- 학술 내용·수치·출처·제품 독립 공개 경계는 변경되지 않았고, UI 계약·배포 workflow·라이브 validator가 공개 SHA와 일치한다. 새 CRITICAL/MAJOR 결함은 없다.
+- 순서 표식은 시각적 탐색성을 높이지만 실제 고령 사용자 이해도나 Safari/iOS/Android 실기기 동작을 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-ACADEMIC-MAP-SEQUENCE-20261006`, `E-CDP-ACADEMIC-MAP-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-MAP-SEQUENCE-20261006`, `E-LIVE-PUBLIC-ACADEMIC-MAP-SEQUENCE-20261006`.
