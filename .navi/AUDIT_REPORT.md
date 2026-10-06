@@ -2606,3 +2606,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007`, `E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007`, `E-CDP-TABLET-GROWTH-FLOW-20261007`, `E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007`, `E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007`.
+
+## 태블릿 공유 라벨 발견성·공개 배포 — 0f7adb6 — 2026-10-07
+
+- 감사 finding: 701–900px 태블릿 헤더에서 공유 버튼이 접근성 이름만 `공유하기`로 유지되고 화면에는 아이콘만 보여, 고령 사용자와 사업자가 공유 기능을 즉시 발견하기 어려운 잔여 UX 리스크가 있었다.
+- 보정: v158에서 기존 아이콘과 함께 `공유하기` 라벨을 78px 레일에 표시하고 44px 터치 높이를 유지했다. 390px 모바일과 1440px 데스크톱 레이아웃은 변경하지 않았다.
+- Recheck: 로컬 UI contract·typecheck·127개 테스트·Pages 번들·성능 예산, PR #514, main merge `0f7adb6`, main workflow `37511444066`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 390·701·768·900·1440px에서 라벨·터치 폭·가로폭·오류 없는 렌더링을 확인했다. 첫 원격 Pages 예산 15 bytes 초과는 중복 선언 제거 후 최종 검증에서 통과했다.
+- 공개 경계: 공유 컨트롤 발견성만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-SHARE-LABEL-20261007`, `E-UI-CONTRACT-TABLET-SHARE-LABEL-20261007`, `E-CDP-TABLET-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-TABLET-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007`.

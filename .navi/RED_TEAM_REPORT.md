@@ -2063,3 +2063,12 @@
 - 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도와 Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007`, `E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007`, `E-CDP-TABLET-GROWTH-FLOW-20261007`, `E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007`, `E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007`.
+
+## Red-team recheck — 태블릿 공유 라벨 발견성 — 2026-10-07 — 0f7adb6
+
+- 공격 관점에서 701–900px 태블릿에서 공유 기능이 아이콘만으로 노출되어 처음 방문자가 의미를 즉시 파악하지 못하는 경로를 확인했다.
+- 78px `공유하기` 레일과 기존 Share2 아이콘을 함께 표시하고 44px 터치 높이를 유지했다. 공개 390·701·768·900·1440px에서 라벨·컨트롤 폭·가로폭 정합을 확인했다.
+- 이번 변경은 UI 발견성과 반응형 헤더에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았다. 새 CRITICAL/MAJOR 결함은 없다. RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-SHARE-LABEL-20261007`, `E-UI-CONTRACT-TABLET-SHARE-LABEL-20261007`, `E-CDP-TABLET-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-TABLET-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007`.

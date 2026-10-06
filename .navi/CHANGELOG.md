@@ -1824,3 +1824,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007`, `E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007`, `E-CDP-TABLET-GROWTH-FLOW-20261007`, `E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007`, `E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007`.
+
+## 태블릿 공유 라벨·공개 배포 — 0f7adb6 — 2026-10-07
+
+- 701–900px 태블릿 헤더에서 아이콘 전용 공유 버튼을 아이콘+`공유하기` 라벨로 보이게 해, 고령 사용자와 사업자가 공유 기능을 바로 발견할 수 있도록 했다.
+- 44px 터치 높이, 78px 태블릿 레일, 390px 모바일·1440px 데스크톱 레이아웃을 유지했다. UI 계약에 v158 회귀 검사를 추가했다.
+- PR #514 required checks, main workflow `37511444066`, 공개 Pages 배포와 라이브 smoke, 공개 Chrome CDP 390·701·768·900·1440px 검증이 성공했다. 최종 local Pages 자산 총량은 `1,649,679 bytes`다. 첫 원격 15-byte 예산 초과는 중복 선언 제거 후 재검증에서 해소했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-SHARE-LABEL-20261007`, `E-UI-CONTRACT-TABLET-SHARE-LABEL-20261007`, `E-CDP-TABLET-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-TABLET-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007`.
