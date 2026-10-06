@@ -1447,6 +1447,17 @@
 .guide-reading-note-source small{grid-column:1/-1;color:#708a99;font-size:12px;line-height:1.55;letter-spacing:-.035em}
 .guide-reading-note-source-action{grid-column:1/-1;display:inline-flex;align-items:center;justify-self:end;gap:5px;margin-top:8px;color:var(--guide-teal-dark);font-size:12px;font-weight:900;line-height:1.4;letter-spacing:-.03em}
 .guide-reading-note-source-action svg{flex:0 0 auto}
+/* v151 mobile comparison scan: keep the measured item, two conditions, and GABA verdict in one compact reading unit. */
+@media(min-width:351px) and (max-width:700px){
+  .guide-outcome-comparison-row{gap:8px;padding:12px 9px 10px;background:#f6fbfc}
+  .guide-outcome-comparison-verdict{display:inline-flex;align-items:flex-start;width:max-content;margin-top:2px;padding:4px 7px;border-left:2px solid #26a6aa;border-radius:0 7px 7px 0;background:#e8f8f8;color:#126f73;font-size:.82em}
+  .guide-outcome-lane{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"top signal";align-items:center;gap:8px;padding:8px 9px;border-radius:9px}
+  .guide-outcome-lane-top{grid-area:top}
+  .guide-outcome-lane-top>strong{min-height:0;font-size:.85em}
+  .guide-outcome-lane-signal{grid-area:signal;justify-content:flex-end}
+  .guide-outcome-lane-meter{max-width:56px}
+  .guide-outcome-lane-signal em{font-size:.82em}
+}
 /* v133 source-to-share bridge: span the editorial grid so the destination label never escapes the button box. */
 .guide-reading-note-handoff{grid-column:1/-1;margin-top:34px}
 @media(max-width:700px){
