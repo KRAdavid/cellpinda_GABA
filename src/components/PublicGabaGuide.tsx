@@ -2,6 +2,7 @@ import { memo, startTransition, useEffect, useLayoutEffect, useRef, useState, ty
 import {
   ArrowDown,
   ArrowDownRight,
+  ArrowLeftRight,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
@@ -832,8 +833,8 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
       {showSummary ? <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div> : null}
       {comparisonChart ? (
         <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. ${comparisonChart.rows.map((row) => `${row.label}: ${comparisonChart.referenceLabel} ${row.reference}, ${comparisonChart.resultLabel} ${row.result}`).join('. ')}. ${comparisonChart.note}. 막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다.`}>
-          <div className="guide-outcome-comparison-guide" aria-hidden="true"><span className="guide-outcome-comparison-guide-mark">↔</span><span className="guide-outcome-comparison-guide-copy"><strong>두 조건을 나란히 비교</strong><small>막대는 두 조건의 변화폭을 비교해 보여줍니다</small></span></div>
-          <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">변화 방향</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
+          <div className="guide-outcome-comparison-guide" aria-hidden="true"><span className="guide-outcome-comparison-guide-mark"><ArrowLeftRight size={14} strokeWidth={2.4} /></span><span className="guide-outcome-comparison-guide-copy"><strong>두 조건을 나란히 비교</strong><small>막대는 두 조건의 변화폭을 비교해 보여줍니다</small></span></div>
+          <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">측정 항목</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
           <div className="guide-outcome-comparison-list">
             {comparisonChart.rows.map((row) => {
               const referenceSignal = row.visual === 'result-less' ? 'more' : 'less';
@@ -894,7 +895,7 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
           <small className="guide-outcome-chart-note-limit">막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다.</small>
         </p>
       ) : (
-        <p className="guide-outcome-chart-note"><span aria-hidden="true">↔</span>{topic.chart.note}</p>
+        <p className="guide-outcome-chart-note"><ArrowLeftRight size={17} strokeWidth={2.2} aria-hidden="true" />{topic.chart.note}</p>
       )}
     </figure>
   );
