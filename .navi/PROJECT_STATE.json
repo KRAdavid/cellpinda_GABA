@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T04:09:52Z",
+  "updated_at": "2026-10-06T04:25:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5292,6 +5292,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T04:09:52Z"
+    },
+    {
+      "id": "H-253",
+      "event": "모바일 히어로의 GABA에서 읽습니다 강제 줄바꿈을 제거해 280·320px에서는 폭에 맞는 자연스러운 두 줄, 390px에서는 한 줄, 1440px에서는 기존 데스크톱 구성을 유지하도록 보정했다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Playwright Chromium fallback 로컬·공개 280·320·390·1440px의 line rect·가로폭·page/console errors 0을 확인했다. PR #426은 main `68e2c8b`로 병합되었고 workflow `37413417733`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `68e2c8b5cbab13f4438c975b1ce118b2cec8308a`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-175와 다섯 증거를 등록한다. 외부 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T04:25:00Z"
     }
   ]
 }

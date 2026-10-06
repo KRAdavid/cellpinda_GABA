@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 히어로 문장 리듬 보정·공개 배포 — 68e2c8b — 2026-10-06
+
+- `GABA에서 읽습니다`의 모바일 강제 줄바꿈을 제거해 280·320px에서는 자연스러운 두 줄, 390px에서는 한 줄로 읽히도록 보정했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright Chromium fallback·Pages·라이브 smoke·release-status·live validator를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-HERO-LINE-20261006`, `E-UI-CONTRACT-HERO-LINE-20261006`, `E-PLAYWRIGHT-HERO-LINE-20261006`, `E-DEPLOY-PIPELINE-HERO-LINE-20261006`, `E-LIVE-PUBLIC-HERO-LINE-20261006`.
+
 ## 최종 라이브 SHA 정합성 재확인·NAVI 동기화 — 449fb2d — 2026-10-06
 
 - NAVI 문서 동기화 이후 Pages가 최종 main SHA `449fb2d`를 제공하는지 다시 확인했다.

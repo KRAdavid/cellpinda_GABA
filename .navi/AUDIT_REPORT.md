@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 히어로 문장 리듬 보정·공개 배포 — 68e2c8b — 2026-10-06
+
+- 모바일 히어로에서 `GABA에서`와 `읽습니다`를 강제로 나누던 줄바꿈을 제거해 280·320px에서는 폭에 맞는 자연스러운 두 줄, 390px에서는 한 줄로 읽히게 보정했다. 카피·의미·제품 독립 경계는 변경하지 않았다.
+- 로컬·공개 Playwright Chromium fallback 280·320·390·1440px에서 line rect, 다음 수면·회복 장면, document scrollWidth와 page/console errors 0을 확인하고 캡처를 `view_image`로 검토했다. Browser/IAB 도구가 없어 Chromium fallback을 사용했다.
+- PR #426이 main `68e2c8b5cbab13f4438c975b1ce118b2cec8308a`로 병합되었고 workflow `37413417733`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-HERO-LINE-20261006`, `E-UI-CONTRACT-HERO-LINE-20261006`, `E-PLAYWRIGHT-HERO-LINE-20261006`, `E-DEPLOY-PIPELINE-HERO-LINE-20261006`, `E-LIVE-PUBLIC-HERO-LINE-20261006`.
+
 ## 최종 라이브 SHA 정합성 재확인 — 449fb2d — 2026-10-06
 
 - NAVI 문서 동기화 이후 main SHA `449fb2d23285f1b971667aea698b80374e14d9e2`가 실제 GitHub Pages 공개본에 반영됐는지 재확인했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·teaser `HOLD`·내부 운영 snapshot 제외·Smart Store only·750 제거·provenance 일치를 확인했다.

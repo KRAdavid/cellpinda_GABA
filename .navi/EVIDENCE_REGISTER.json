@@ -1826,6 +1826,18 @@
         "E-DEPLOY-PIPELINE-FINAL-RECHECK-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-175",
+      "statement": "모바일 히어로의 `GABA에서 읽습니다` 문장이 강제 줄바꿈 없이 화면 폭에 맞춰 자연스럽게 흐르고, 280·390·1440px 공개본에서 헤드라인·다음 장면·가로폭이 안정적으로 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-HERO-LINE-20261006",
+        "E-UI-CONTRACT-HERO-LINE-20261006",
+        "E-PLAYWRIGHT-HERO-LINE-20261006",
+        "E-DEPLOY-PIPELINE-HERO-LINE-20261006",
+        "E-LIVE-PUBLIC-HERO-LINE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13114,6 +13126,59 @@
       "captured_at": "2026-10-06T04:09:52Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-FINAL-RECHECK",
       "claim_refs": ["C-001", "C-002", "C-174"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-HERO-LINE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 히어로 강제 줄바꿈 제거 코드가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 360383f; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1641255 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T04:02:50Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-HERO-LINE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-175"]
+    },
+    {
+      "id": "E-UI-CONTRACT-HERO-LINE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 `GABA에서 읽습니다` 문장 구조를 고정해 모바일 강제 줄바꿈이 다시 삽입되는 회귀를 막는다.",
+      "locator": "scripts/validate-ui-contract.mjs; public guide copy marker `<span className=\"guide-hero-gaba-line\">GABA에서 읽습니다</span>`; status ok",
+      "captured_at": "2026-10-06T04:02:50Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-HERO-LINE",
+      "claim_refs": ["C-001", "C-175"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-HERO-LINE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬·공개 Chromium fallback에서 280·320·390·1440px 히어로 줄바꿈과 가로폭을 확인했으며 페이지·콘솔 오류가 없다.",
+      "locator": "Playwright Chromium fallback; local and public `?qa=hero-break-20261006`; 280/320/390/1440px; 280/320 lineRects two natural lines, 390 lineRects one line, 1440 desktop line; document scrollWidth equals viewport; pageErrors 0; consoleErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=hero-break-live-20261006#top",
+      "captured_at": "2026-10-06T04:23:49Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-HERO-LINE",
+      "claim_refs": ["C-003", "C-004", "C-175"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-HERO-LINE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 히어로 줄바꿈 보정 PR #426이 필수 검사를 통과해 main merge commit 68e2c8b로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #426; code commit 360383fc4aef8789a328b977bb70fc9c89ca765a; main merge commit 68e2c8b5cbab13f4438c975b1ce118b2cec8308a; main workflow 37413417733; release-verify 112106679763; worker-readiness 112107020811; deploy-pages 112107039527; deploy-worker 112107040015 skipped by STATIC_ONLY; smoke-live 112107098088; release-status 112107149917; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37413417733",
+      "captured_at": "2026-10-06T04:25:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-HERO-LINE",
+      "claim_refs": ["C-001", "C-002", "C-175"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HERO-LINE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 모바일 히어로 `GABA에서 읽습니다`가 390px에서는 한 줄, 280px에서는 자연스러운 두 줄로 표시되고 1440px 데스크톱 구성·공개 데이터 경계가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T04:23:49.890Z; page 200; runtimeMode STATIC; candidateSha 68e2c8b5cbab13f4438c975b1ce118b2cec8308a; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; Playwright public 280/390/1440 document scrollWidth equals viewport, pageErrors 0, consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=hero-break-live-20261006#top",
+      "captured_at": "2026-10-06T04:25:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-HERO-LINE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-175"]
     }
   ]
 }
