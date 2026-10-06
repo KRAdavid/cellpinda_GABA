@@ -2316,6 +2316,18 @@
         "E-LIVE-PUBLIC-MOBILE-CHART-LANE-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-216",
+      "statement": "공개 GitHub Pages의 장·섹션 링크로 직접 진입해도 고정 헤더와 읽기 진행바가 연구 지도 제목을 가리지 않도록 반응형 앵커 여백이 적용된다. 공개 390·768·1440px에서 제목이 진행바 아래에 온전히 보이고 가로폭 초과 없이 이어서 읽을 수 있으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-ANCHOR-READABILITY-20261007",
+        "E-UI-CONTRACT-ANCHOR-READABILITY-20261007",
+        "E-CDP-ANCHOR-READABILITY-20261007",
+        "E-DEPLOY-PIPELINE-ANCHOR-READABILITY-20261007",
+        "E-LIVE-PUBLIC-ANCHOR-READABILITY-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15756,6 +15768,59 @@
       "captured_at": "2026-10-06T18:56:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-MOBILE-CHART-LANE",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-215"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-ANCHOR-READABILITY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "섹션 직접 진입 앵커 여백 보정이 UI 계약·타입체크·127개 테스트·production build·성능 예산을 통과한다.",
+      "locator": "local branch codex/anchor-readability-20261007 af91d73; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 passed; pnpm run build; validate:performance status ok; initial JS 311199, initial CSS 95703, total assets 1649067, largest 311199",
+      "captured_at": "2026-10-06T19:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-ANCHOR-READABILITY",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-216"]
+    },
+    {
+      "id": "E-UI-CONTRACT-ANCHOR-READABILITY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약 검사가 앵커 여백 보정 이후 공개 안내서의 기존 반응형·접근성·공유 계약을 회귀 없이 통과시킨다.",
+      "locator": "scripts/validate-ui-contract.mjs; v160 deep-link readability override; guide section anchor contract retained; status ok; sections main/rhythm/story/fermentation/products/reviews/research; accessibility skip-link/landmarks/alt-text/reduced-motion; responsive mobile/tablet-navigation/tablet-hero-contrast",
+      "captured_at": "2026-10-06T19:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-ANCHOR-READABILITY",
+      "claim_refs": ["C-004", "C-005", "C-216"]
+    },
+    {
+      "id": "E-CDP-ANCHOR-READABILITY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 Chrome CDP fallback에서 연구 지도 앵커 진입 후 제목이 고정 헤더와 읽기 진행바에 가리지 않고 390·768·1440px에서 가로폭이 안정적이다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&anchorQa=160&cachebust=075b919#academic; 390px scrollMarginTop 116px, headingTop 131, railBottom 105; 768px scrollMarginTop 126px, headingTop 143, railBottom 108; 1440px scrollMarginTop 126px, headingTop 151, railBottom 116; coveredByHeader=false, coveredByRail=false, overflow=false; screenshots reviewed with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&anchorQa=160&cachebust=075b919#academic",
+      "captured_at": "2026-10-06T19:14:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-ANCHOR-READABILITY",
+      "claim_refs": ["C-003", "C-004", "C-216"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-ANCHOR-READABILITY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #518 필수 검사와 main 공개 배포 파이프라인이 앵커 가독성 변경의 최종 커밋에서 모두 성공했다.",
+      "locator": "PR #518 https://github.com/KRAdavid/gaba_info/pull/518; release-verify 37516917544 and site-quality-verify 37516917549 success; final merge 075b9193e1ec7c89df049c9533a22d492769143f; main workflow 37517088317; release-verify 112452702665; worker-readiness 112453294893; deploy-pages 112453344595; deploy-worker skipped static 112453345344; smoke-live 112453456326; release-status 112453540772; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37517088317",
+      "captured_at": "2026-10-06T19:14:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-ANCHOR-READABILITY",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-216"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-ANCHOR-READABILITY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 섹션 직접 진입 시 연구 지도 제목이 헤더·진행바 아래에 온전히 보이고 모바일·태블릿·데스크톱 가로폭이 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&anchorQa=160&cachebust=075b919#academic; HTTP 200 via Pages smoke; main workflow 37517088317 deploy-pages and smoke-live success; Chrome CDP fallback 390·768·1440px verified heading not covered by header or rail, document width equals viewport, no runtime/console errors; product-independent public boundary matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&anchorQa=160&cachebust=075b919#academic",
+      "captured_at": "2026-10-06T19:14:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-ANCHOR-READABILITY",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-216"]
     }
   ]
 }

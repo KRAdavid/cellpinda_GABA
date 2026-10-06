@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — 075b919 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37517088317`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.
+- AC-003/AC-004 섹션 직접 진입·반응형: PASS. 390px에서 앵커 여백 116px, 768·1440px에서 126px을 적용해 연구 지도 제목이 고정 헤더·읽기 진행바에 가리지 않으며, 세 폭 모두 document width가 viewport 안에 머문다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산 및 PR #518의 release-verify·site-quality 검사가 성공했다. 로컬 전체 자산은 1,649,067 bytes로 예산 안에 있다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 카피·수치·출처·공개 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-ANCHOR-READABILITY-20261007`, `E-UI-CONTRACT-ANCHOR-READABILITY-20261007`, `E-CDP-ANCHOR-READABILITY-20261007`, `E-DEPLOY-PIPELINE-ANCHOR-READABILITY-20261007`, `E-LIVE-PUBLIC-ANCHOR-READABILITY-20261007`.
+
 ## Current Release Recheck — 443e85b — 2026-10-06
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37514564656`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.
