@@ -2491,3 +2491,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+## Current Release Recheck — aa4ea2f — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 공개 validator가 candidate `aa4ea2f147ac4997844221ed3c2c64ba86bdcc20`와 HTTP 200을 확인했다.
+- AC-003/AC-006 인쇄·PDF: PASS. 공개 print.css·인쇄 미디어 계산값·출처 URL 14개·화면 전용 chrome 0개·지연 섹션 6개 실제 렌더를 확인했다.
+- AC-005 배포 게이트: PASS. PR #539와 main workflow `37547332906`의 필수 검증 및 공개 Pages 배포가 성공했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. teaser `HOLD`와 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 조건을 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.

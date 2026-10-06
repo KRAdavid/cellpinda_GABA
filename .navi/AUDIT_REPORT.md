@@ -2742,3 +2742,11 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - 공개 배포 후 실제 Pages 인쇄 렌더 재검증이 남아 있으며, 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+## 인쇄·PDF 공개 배포 재검증 — aa4ea2f — 2026-10-07
+
+- AC-001 공개 URL·Pages 정합성: PASS. main workflow `37547332906`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 validator가 candidate `aa4ea2f147ac4997844221ed3c2c64ba86bdcc20`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-006 인쇄·PDF 활용성: PASS. 공개 `print.css`가 HTTP 200 CSS로 제공되며, 인쇄 미디어에서 화면 전용 chrome 0개, 지연 섹션 6개 실제 표시, 출처 링크 14개, 문서 폭 1440px을 확인했다. 인쇄 미리보기 이미지도 검수했다.
+- AC-005 배포 게이트: PASS. PR #539 required checks, main release-verify·fresh TF pulse·Pages·라이브 smoke·release-status가 성공했다. 정적 사이트 성능 예산과 연구·제품 독립 경계도 유지됐다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.

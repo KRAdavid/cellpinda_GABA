@@ -5697,6 +5697,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T02:00:00Z"
+    },
+    {
+      "id": "H-305",
+      "event": "인쇄·PDF 지연 렌더링 보정의 공개 배포 후 검증을 완료했다. PR #539와 main workflow 37547332906의 release-verify·Pages·라이브 smoke·release-status가 성공했고, 공개 candidate aa4ea2f에서 print.css HTTP 200, 인쇄 화면 전용 chrome 0개, 지연 섹션 6개 실제 렌더, 출처 URL 14개, 문서 폭 1440px을 확인했다. C-227과 다섯 증거를 SUPPORTED/INDEPENDENTLY_CONFIRMED로 갱신했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며 teaser HOLD, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T23:36:00Z"
     }
   ]
 }

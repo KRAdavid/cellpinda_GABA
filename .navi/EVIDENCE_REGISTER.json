@@ -2457,7 +2457,7 @@
         "E-DEPLOY-PIPELINE-PRINT-FLOW-20261008",
         "E-LIVE-PUBLIC-PRINT-FLOW-20261008"
       ],
-      "status": "PENDING"
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16495,21 +16495,22 @@
     {
       "id": "E-DEPLOY-PIPELINE-PRINT-FLOW-20261008",
       "kind": "TEST",
-      "status": "PENDING",
+      "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "인쇄용 공개 안내서 보정은 기존 정적 공개 배포·제품 독립·성능 게이트와 함께 재배포된다.",
-      "locator": "pending next protected-main PR and release workflow; static GitHub Pages remains the deployment target; no Worker deployment is required for this print-only surface",
-      "captured_at": "2026-10-07T02:00:00Z",
+      "locator": "PR #539 https://github.com/KRAdavid/gaba_info/pull/539; release-verify and site-quality-verify passed; squash merge aa4ea2f147ac4997844221ed3c2c64ba86bdcc20; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37547332906: release-verify 112554352762, worker-readiness 112554646275, deploy-pages 112554672938, smoke-live 112554739003, release-status 112554799542 all success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37547332906",
+      "captured_at": "2026-10-06T23:36:00Z",
       "reviewer_id": "NAVI-DEPLOY-QA-20261008-PRINT-FLOW",
       "claim_refs": ["C-001", "C-002", "C-005", "C-227"]
     },
     {
       "id": "E-LIVE-PUBLIC-PRINT-FLOW-20261008",
       "kind": "TEST",
-      "status": "PENDING",
-      "statement": "공개 GitHub Pages에서 인쇄·PDF 전용 지연 렌더링 보정과 출처 URL 노출을 배포 후 재확인한다.",
-      "locator": "pending public deployment of the print-only change; live HTTP 200, print stylesheet response, media-print computed styles, source URL pseudo-elements and PDF screenshot remain required",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 인쇄·PDF 전용 지연 렌더링 보정과 출처 URL 노출이 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=print-final-20261008; validate:live-public HTTP 200 candidateSha aa4ea2f147ac4997844221ed3c2c64ba86bdcc20, STATIC, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched; print.css HTTP 200 text/css; Chrome Playwright media-print visibleScreenChrome [], six deferred chapters contentVisibility visible, sourceLinkCount 14, sourceUrlsRendered 14, documentWidth 1440, videoFeature display none; live print screenshot inspected with view_image",
       "source_uri": "https://kradavid.github.io/gaba_info/print.css",
-      "captured_at": "2026-10-07T02:00:00Z",
+      "captured_at": "2026-10-06T23:36:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-PRINT-FLOW",
       "claim_refs": ["C-001", "C-003", "C-004", "C-006", "C-227"]
     }
