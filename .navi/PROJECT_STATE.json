@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T08:43:21Z",
+  "updated_at": "2026-10-06T09:05:43Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T08:43:21Z"
+    "last_run_at": "2026-10-06T09:05:43Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T08:43:21Z"
+    "last_run_at": "2026-10-06T09:05:43Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5397,6 +5397,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T08:43:21Z"
+    },
+    {
+      "id": "H-268",
+      "event": "초소형 모바일 연구 읽기 레일에서 전체 문구가 잘려 현재 연구 주제와 진행 수치를 함께 읽기 어려운 잔여 가독성 결함을 확인하고, 350px 이하에서 시각 라벨을 현재 주제명으로 압축했다. 접근성 aria-label과 live announcement에는 전체 연구 라벨을 유지해 정보 손실을 막았다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 공개 Chrome CDP fallback 280·390·768·1440px 검증에서 가로 넘침·page/console errors 0을 확인했다. PR #457은 main `86c869ed`로 병합되었고 workflow `37439945690`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `86c869ed743546b325e01c6da91c4f42391e9dd8`·HTTP 200·STATIC·71개 bundle hash·공개 데이터 정합성·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-190과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T09:05:43Z"
     }
   ]
 }

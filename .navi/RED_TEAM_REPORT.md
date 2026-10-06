@@ -1844,3 +1844,11 @@
 - 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.
+
+## Recheck — 2026-10-06 — 86c869ed
+
+- Red-team finding: 280px 연구 화면에서 진행 레일의 전체 연구 라벨이 말줄임되어 현재 주제와 수치가 즉시 읽히지 않는 작은 가독성 리스크가 있었다. 350px 이하에서만 시각 라벨을 현재 주제명으로 압축하고, 전체 문구는 aria-label과 live announcement에 남겼다.
+- Recheck: 공개 Chrome CDP fallback 280·390·768·1440px에서 `인지`, 진행 수치, `인지 연구 결과`가 표시되고 document/body scrollWidth 280·390·753·1425px, page/console errors 0을 확인했다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다.
+- PR #457과 main workflow `37439945690`, 공개 validator candidate `86c869ed`·HTTP 200·71 bundle hashes가 성공했다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006`, `E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006`, `E-CDP-NARROW-RESEARCH-LABEL-20261006`, `E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006`, `E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006`.

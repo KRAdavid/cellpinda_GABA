@@ -2004,6 +2004,18 @@
         "E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-190",
+      "statement": "초소형 모바일 연구 읽기 레일은 350px 이하에서 전체 연구 라벨 대신 현재 주제명을 시각적으로 보여 주어 진행 정보와 연구 주제를 한눈에 읽게 하며, 접근성용 live announcement에는 전체 문구를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006",
+        "E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006",
+        "E-CDP-NARROW-RESEARCH-LABEL-20261006",
+        "E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006",
+        "E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14066,6 +14078,59 @@
       "captured_at": "2026-10-06T08:43:21Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-HISTORY-AUDIT",
       "claim_refs": ["C-001", "C-002", "C-005", "C-189"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 연구 읽기 레일 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit ce820a7; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1645613 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T08:58:30Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-NARROW-RESEARCH-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-190"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "350px 이하에서는 연구 읽기 레일의 시각 라벨을 주제명으로 바꾸고, 전체 연구 라벨은 aria-label과 live announcement에 유지하도록 UI 계약을 고정했다.",
+      "locator": "src/components/PublicGabaGuide.tsx; activeReadingCompactLabel; guide-reading-progress-label-full; guide-reading-progress-label-compact; src/components/PublicGabaGuide.css; @media(max-width:350px); scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T08:58:30Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-NARROW-RESEARCH-LABEL",
+      "claim_refs": ["C-001", "C-003", "C-190"]
+    },
+    {
+      "id": "E-CDP-NARROW-RESEARCH-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 280·390·768·1440px을 확인했으며 280px에서도 연구 주제 `인지`, 진행 수치, 연구 카드가 한눈에 표시되고 가로 넘침과 페이지·콘솔 오류가 없었다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=continuation-public-20261006#research; viewport 280x1000/390x1000/768x1000/1440x1000; document/body scrollWidth 280/390/753/1425; active `인지`; card `인지 연구 결과`; pageErrors 0; consoleErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=continuation-public-20261006#research",
+      "captured_at": "2026-10-06T09:05:43Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-NARROW-RESEARCH-LABEL",
+      "claim_refs": ["C-003", "C-004", "C-190"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 연구 읽기 레일 보정 PR #457이 필수 검사를 통과해 main merge commit 86c869e로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #457; code commit ce820a7; PR checks release-verify and site-quality successful; main merge commit 86c869ed743546b325e01c6da91c4f42391e9dd8; main workflow 37439945690; release-verify 112190952463; worker-readiness 112191507365; deploy-pages 112191545145; deploy-worker skipped by STATIC_ONLY; smoke-live 112191790681; release-status 112192023964; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37439945690",
+      "captured_at": "2026-10-06T09:03:26Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-NARROW-RESEARCH-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-190"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 초소형 연구 읽기 레일 보정이 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T09:01:25.115Z; page 200; runtimeMode STATIC; candidateSha 86c869ed743546b325e01c6da91c4f42391e9dd8; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 280·390·768·1440px screenshots and metrics; 280px reading rail shows `읽는 중 인지`; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=continuation-public-20261006#research",
+      "captured_at": "2026-10-06T09:05:43Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-NARROW-RESEARCH-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-190"]
     }
   ]
 }

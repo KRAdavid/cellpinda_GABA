@@ -2365,6 +2365,16 @@
 
 증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.
 
+## Current Release Recheck — 86c869ed — 2026-10-06
+
+- AC-001 공개 URL·Pages·candidate 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `86c869ed743546b325e01c6da91c4f42391e9dd8`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-003/AC-004 초소형 모바일 연구 읽기 레일: PASS. 280px에서 전체 연구 라벨 대신 현재 주제명 `인지`가 진행 수치와 함께 보이며, 390·768·1440px에서도 가로 넘침 없이 연구 지도·카드 흐름이 유지된다. document/body scrollWidth는 280·390·753·1425px이고 page/console errors는 0이다. 접근성용 전체 라벨과 live announcement는 유지했다.
+- AC-005 UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #457 및 main workflow `37439945690`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 연구 수치·출처·제품 독립 경계: PASS. 이번 변경은 좁은 화면의 시각 라벨과 접근성 연결만 보정했으며 연구 내용·카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006`, `E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006`, `E-CDP-NARROW-RESEARCH-LABEL-20261006`, `E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006`, `E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006`.
+
 ## Current Release Recheck — 9b6df19 — 2026-10-06
 
 - 280–350px 초소형 모바일 진행 레일에서 `지금 읽는 중`이 두 줄로 깨지던 반응형 결함을 확인하고, 해당 폭에서만 `읽는 중`으로 압축했다. 현재 장 제목·진행 수치·접근성 live announcement와 390px 이상 표기는 유지했다.
