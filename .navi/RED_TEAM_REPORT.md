@@ -1921,3 +1921,12 @@
 - 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-EVERYDAY-CARD-SEQUENCE-20261006`, `E-CDP-EVERYDAY-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EVERYDAY-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006`.
+
+## 전문가 영상 카드 순서·공개 배포 — 2026-10-06 — a84d6f0
+
+- 공격 관점에서 전문가 영상 갤러리를 처음부터 끝까지 읽을 때 현재 영상과 전체 영상 수를 한 번에 파악할 수 있는지 확인했다. 모바일·데스크톱 모두 `01 / 09`–`09 / 09`가 유지되고 `수면` 필터에서도 원래 컬렉션 순서가 유지된다.
+- 카드 선택 즉시 재생, 제목·출처 표시, 필터 결과, 공개 정적 번들 및 제품 독립 경계를 확인했으며 새 CRITICAL/MAJOR 결함은 없다.
+- 순서 표식과 CDP 검증은 시각적 탐색성을 높이는 증거지만 실제 고령 사용자 이해도, Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-CDP-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CARD-SEQUENCE-20261006`.
