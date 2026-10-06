@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 모바일 연구 비교 도표 겹침 보정·공개 배포 — 2026-10-06 — 443e85b
+
+- 공격 관점에서 390px에서 조건 카드의 결과 문구와 방향 신호가 겹쳐 의미가 합쳐지거나 잘리는지 확인했다. 두 조건 레인은 한 줄 비교를 유지하고, 각 레인 내부는 결과 문구 다음에 방향 신호가 오는 세로 구조로 분리되어 겹침이 해소됐다. 768·1440px에서는 기존 학술형 2열 구조를 유지한다.
+- 연구 결과·수치·출처·제품 독립 공개 경계는 변경하지 않았고 UI 계약·배포 workflow·라이브 validator가 새 공개 SHA와 일치한다. 새 CRITICAL/MAJOR 결함은 없다.
+- 시각 검증은 Chrome CDP fallback으로 수행했다. 실제 실기기·고령 사용자 이해도·독립 과학·규제 감수는 Chromium 화면 검증으로 대체하지 않으며 RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-MOBILE-CHART-LANE-20261007`, `E-CDP-MOBILE-CHART-LANE-20261007`, `E-DEPLOY-PIPELINE-MOBILE-CHART-LANE-20261007`, `E-LIVE-PUBLIC-MOBILE-CHART-LANE-20261007`.
+
 ## 수면·회복 도입 리듬 인포그래픽·공개 배포 — 2026-10-06 — f785d7d
 
 - 공격 관점에서 280px 초소형 모바일·390px 모바일·1440px 데스크톱에서 낮→밤→회복 연결선이 카드·헤더·본문과 충돌하지 않고, 도입부가 이미지 없이도 시각적으로 이해되는지 확인했다. 세 폭에서 흐름과 가로폭이 안정적이었다.

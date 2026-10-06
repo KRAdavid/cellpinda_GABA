@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T18:31:00Z",
+  "updated_at": "2026-10-06T18:56:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T18:31:00Z"
+    "last_run_at": "2026-10-06T18:56:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T18:31:00Z"
+    "last_run_at": "2026-10-06T18:56:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5584,6 +5584,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T18:31:00Z"
+    },
+    {
+      "id": "H-293",
+      "event": "390px 공개 연구 결과 도표에서 비교 조건과 GABA 조건의 내부 변화 표시가 결과 문구와 겹칠 수 있는 잔여 가독성 리스크를 확인했다. v159에서 351–430px 조건 카드 내부를 `결과 문구 → 변화 방향` 세로 흐름으로 재배치하고, 두 조건 카드는 계속 나란히 유지했다. 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #516, main merge `443e85b`, main workflow `37514564656`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 390·768·1440px에서 lane 내부 rect 분리·가로폭·오류 없는 렌더링을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-215와 다섯 증거를 등록한다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T18:56:00Z"
     }
   ]
 }

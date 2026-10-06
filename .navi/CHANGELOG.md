@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 연구 비교 도표 겹침 보정·공개 배포 — 443e85b — 2026-10-06
+
+- 351–430px 모바일 연구 결과 도표에서 비교 조건과 GABA 조건을 나란히 유지하면서 각 조건 카드 내부를 `결과 문구 → 변화 방향` 순서로 세로 정렬해 겹침을 제거했다. 데스크톱·태블릿 비교 구조와 연구 내용은 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #516, main workflow `37514564656`, Pages·라이브 smoke·release-status·공개 Chrome CDP fallback 390·768·1440px 검증을 통과했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHART-LANE-20261007`, `E-UI-CONTRACT-MOBILE-CHART-LANE-20261007`, `E-CDP-MOBILE-CHART-LANE-20261007`, `E-DEPLOY-PIPELINE-MOBILE-CHART-LANE-20261007`, `E-LIVE-PUBLIC-MOBILE-CHART-LANE-20261007`.
+
 ## 수면·회복 도입 리듬 인포그래픽·공개 배포 — f785d7d — 2026-10-06
 
 - 첫 도입부에 `낮 · 활동 → 밤 · 수면 → 다음 날 · 회복` 3단계 인포그래픽을 추가해 텍스트와 카드 사이의 하루 흐름을 한눈에 읽도록 고도화했다. 280px·390px·1440px에서 연결선, 아이콘, 카드 흐름과 줄바꿈을 확인했다.
