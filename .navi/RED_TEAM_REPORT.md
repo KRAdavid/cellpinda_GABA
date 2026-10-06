@@ -1812,3 +1812,11 @@
 
 - 390px 히어로 강조 문구와 헤더 읽기 크기 명칭의 충돌을 보정했으며 390·768·1024px에서 폭 내 렌더링과 page/console errors 0을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 발견되지 않았다.
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+## Recheck — 2026-10-06 — 32612fe
+
+- 모바일 전문가 영상 공유 링크에서 선택 주제가 레일 밖에 남는 탐색 리스크를 확인했고, `activeVideoTopic` 변경 시 선택 칩을 레일 안으로 자동 정렬하는 보정으로 rework했다.
+- 공개 Chrome CDP fallback 390px에서 `수용체` 칩의 레일 내 위치, 선택 영상·원본 링크·공유 버튼·가로폭 390px·page/console errors 0을 재확인했다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006`, `E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006`, `E-CDP-EXPERT-TOPIC-RAIL-20261006`, `E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006`, `E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006`.

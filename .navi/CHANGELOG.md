@@ -1591,3 +1591,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-NARROW-READING-RAIL-20261006`, `E-UI-CONTRACT-NARROW-READING-RAIL-20261006`, `E-CDP-NARROW-READING-RAIL-20261006`, `E-DEPLOY-PIPELINE-NARROW-READING-RAIL-20261006`, `E-LIVE-PUBLIC-NARROW-READING-RAIL-20261006`.
+
+## 전문가 영상 주제 레일 공유 링크 맥락 보정·공개 배포 — 32612fe — 2026-10-06
+
+- 390px 모바일에서 공유 링크로 특정 전문가 영상 주제가 열릴 때 선택된 주제 칩이 화면 밖에 남지 않도록 가로 레일 안으로 자동 정렬했다.
+- PR #449, main workflow `37431243216`, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 390px 검증이 성공했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006`, `E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006`, `E-CDP-EXPERT-TOPIC-RAIL-20261006`, `E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006`, `E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006`.

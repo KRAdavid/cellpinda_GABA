@@ -1958,6 +1958,18 @@
         "E-LIVE-PUBLIC-NARROW-READING-RAIL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-186",
+      "statement": "390px 모바일에서 전문가 영상 공유 링크로 특정 주제가 열리면 선택된 주제 칩이 가로 레일 안으로 자동 정렬되어 선택 영상의 주제 맥락을 함께 읽을 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006",
+        "E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006",
+        "E-CDP-EXPERT-TOPIC-RAIL-20261006",
+        "E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006",
+        "E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13829,6 +13841,59 @@
       "captured_at": "2026-10-06T07:24:43Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-NARROW-READING-RAIL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-185"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 주제 레일 자동 정렬 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 19ef7d30a51770e254b0af28959bd5f26afed53c; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311200 <= 380000; initial CSS 95703 <= 110000; total assets 1644454 <= 1650000; largest asset 311200 <= 380000",
+      "captured_at": "2026-10-06T07:42:33Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-EXPERT-TOPIC-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-186"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 주제 변경 시 선택 필터를 가로 레일의 보이는 영역으로 이동하고, reduced-motion 설정을 존중하는 UI 동작이 코드에 고정되어 있다.",
+      "locator": "src/components/PublicGabaGuide.tsx; activeVideoTopic effect; videoFilterRailRef; rail.scrollTo; prefers-reduced-motion; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T07:42:33Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-EXPERT-TOPIC-RAIL",
+      "claim_refs": ["C-001", "C-003", "C-186"]
+    },
+    {
+      "id": "E-CDP-EXPERT-TOPIC-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 390px 전문가 영상 deep link를 확인했으며 선택된 `수용체` 칩이 레일 안에 보이고 선택 영상·영상 원본 링크·공유 버튼이 함께 표시된다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=professional-audit-20261006&video=vnocd9ZVJj0#expert-videos; viewport 390x844; document.scrollWidth 390; filter rail scrollWidth 711/clientWidth 326/scrollLeft 385; active `수용체` chip left 152/right 241; selected title `GABA 수용체와 수면`; thumbnail naturalWidth 1280; pageErrors 0; consoleErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=professional-audit-20261006&video=vnocd9ZVJj0#expert-videos",
+      "captured_at": "2026-10-06T07:42:33Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-EXPERT-TOPIC-RAIL",
+      "claim_refs": ["C-003", "C-004", "C-186"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 주제 레일 보정 PR #449가 필수 검사를 통과해 main merge commit 32612fe로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #449; code commit 19ef7d30a51770e254b0af28959bd5f26afed53c; PR checks release-verify and site-quality successful; main merge commit 32612fefb6c022ef80ef32609abf08b7ad43254d; main workflow 37431243216; release-verify 112162361949; worker-readiness 112162784152; deploy-pages 112163159274; deploy-worker 112163159956 skipped by STATIC_ONLY; smoke-live 112163239700; release-status 112163321773; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37431243216",
+      "captured_at": "2026-10-06T07:42:33Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-EXPERT-TOPIC-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-186"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 전문가 영상 공유 링크의 선택 주제 자동 정렬이 반영되고, 71개 번들·공개 데이터 정합성·제품 독립 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T07:42:33.923Z; page 200; runtimeMode STATIC; candidateSha 32612fefb6c022ef80ef32609abf08b7ad43254d; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px deep-link screenshot and metrics; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=professional-audit-20261006&video=vnocd9ZVJj0#expert-videos",
+      "captured_at": "2026-10-06T07:42:33Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-TOPIC-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-186"]
     }
   ]
 }
