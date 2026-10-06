@@ -1,5 +1,14 @@
 # Audit Report
 
+## 공개 surface 자동 재점검·NAVI 동기화 — main 1083e3f — 2026-10-07
+
+- 현재 공개 URL을 320·390·768·1440px에서 다시 렌더링해 document width 정합성, 중복 ID, 빈 조작 요소, runtime/console errors를 점검했다. 네 폭 모두 가로 넘침·중복 ID·빈 조작 요소·콘솔 오류가 없었다.
+- 390px 메뉴에서 `aria-expanded=false → true → false`, ESC 닫힘, 메뉴 토글 포커스 복귀를 확인했다. `#expert-videos` 직접 진입은 390px heading top 131.67px·읽기 레일 bottom 105px, 1440px heading top 150.67px·읽기 레일 bottom 116px로 제목이 고정 UI 아래에 배치된다.
+- 영상 썸네일의 빈 alt 9개는 버튼에 영상 제목·채널·상태가 접근성 이름으로 제공되고 이미지가 장식용 `aria-hidden`인 구조로 판정했다. 제품 독립 공개 경계와 라이브 validator 정합성은 유지됐다. 새 CRITICAL/MAJOR 결함은 없다.
+- 외부 Safari/iOS/Android·실제 고령 사용자 독해성·독립 과학·규제 감수는 여전히 미완료다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-SURFACE-AUDIT-20261007`, `E-ACCESSIBILITY-PUBLIC-SURFACE-AUDIT-20261007`, `E-DEEPLINK-PUBLIC-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-SURFACE-AUDIT-20261007`.
+
 ## 인쇄·PDF 공유 퍼블리싱 배포 완료 — main ab096d1 — 2026-10-07
 
 - PR #527을 병합하고 main workflow `37532761509`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다. 공개 validator는 HTTP 200, merge candidate `ab096d1`, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, provenance `matched`를 확인했다.

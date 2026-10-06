@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 공개 surface 자동 공격 재점검·NAVI 동기화 — main 1083e3f — 2026-10-07
+
+- 모바일·태블릿·데스크톱 대표 폭에서 실제 본문 overflow와 장식용 썸네일 alt를 구분해 점검했다. 메뉴 상태 전환, 포커스 복귀, 전문가 영상 해시 진입 제목 가림 여부에서 새 CRITICAL/MAJOR 결함은 없었다.
+- 빈 alt 썸네일은 영상 카드 버튼의 접근성 이름이 제목·채널·현재 상태를 제공하고 이미지가 장식용인 구조로 확인했다. 자동화가 고령 사용자 실독해, 브라우저 전체 조합, 과학·규제 적합성을 대체하지 않는다는 조건은 유지한다.
+- RT-001·RT-002·RT-003은 계속 OPEN이며 이번 재점검 관찰은 `RT-004 CLOSED`로 기록했다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-ACCESSIBILITY-PUBLIC-SURFACE-AUDIT-20261007`, `E-DEEPLINK-PUBLIC-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-SURFACE-AUDIT-20261007`.
+
 ## 인쇄·PDF 공유 퍼블리싱 배포 후 공격 재점검 — main ab096d1 — 2026-10-07
 
 - 공개 배포 후 print media를 다시 적용해 화면 전용 헤더·진행바·영상 보드·복구 조작부가 인쇄본에 남는지, 390·1440px에서 문서 폭이 밀리는지 점검했다. 실제 공개 `print.css` 적용 결과 `header=none`, `readingProgress=none`, `videoBoard=none`, `recoveryControls=none`, visible sections 13으로 확인됐다.

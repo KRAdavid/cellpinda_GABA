@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T01:18:04Z",
+  "updated_at": "2026-10-06T21:37:41.329374Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2124,11 +2124,26 @@
         "impact": "현재 구현은 목표 화면에서 usable하다.",
         "required_action": "변경 시 동일 QA 재실행",
         "owner": "프런트엔드"
+      },
+      {
+        "id": "AUD-004",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "현재 main 공개본을 320·390·768·1440px에서 재감리한 결과 가로 넘침·중복 ID·빈 조작 요소·runtime/console 오류가 없고, 모바일 메뉴 열림·ESC 닫힘·토글 포커스 복귀와 전문가 영상 해시 진입 제목 여백이 정상이다. 영상 썸네일의 빈 alt는 버튼 접근성 이름을 보조하는 장식 이미지로 확인했다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-PUBLIC-SURFACE-AUDIT-20261007",
+          "E-ACCESSIBILITY-PUBLIC-SURFACE-AUDIT-20261007",
+          "E-DEEPLINK-PUBLIC-SURFACE-AUDIT-20261007",
+          "E-LIVE-PUBLIC-SURFACE-AUDIT-20261007"
+        ],
+        "impact": "대표 공개 화면의 시각·상호작용 회귀가 확인되지 않았다.",
+        "required_action": "화면·카피 변경 시 동일 4폭 및 해시 진입 QA 재실행",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T20:13:00Z"
+    "last_run_at": "2026-10-06T21:35:15Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2312,11 +2327,25 @@
         "impact": "한번에 읽히는가의 실제 검증이 부족하다.",
         "required_action": "3~5명 사용성 테스트 또는 읽기 시간·이해도 측정",
         "owner": "UX QA"
+      },
+      {
+        "id": "RT-004",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공개 surface 재점검에서 시각 본문·조작 요소·해시 진입 정렬의 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. 썸네일의 빈 alt는 영상 버튼의 제목·채널·상태 접근성 이름이 존재하는 장식 이미지로 분류했다.",
+        "evidence_refs": [
+          "E-ACCESSIBILITY-PUBLIC-SURFACE-AUDIT-20261007",
+          "E-DEEPLINK-PUBLIC-SURFACE-AUDIT-20261007",
+          "E-LIVE-PUBLIC-SURFACE-AUDIT-20261007"
+        ],
+        "impact": "이번 공개본에서 새 공격 가능한 화면 회귀는 관찰되지 않았다.",
+        "required_action": "Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "레드팀"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T20:13:00Z"
+    "last_run_at": "2026-10-06T21:35:15Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5633,13 +5662,6 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T01:00:00Z"
-    },
-    {
-      "id": "H-300",
-      "event": "인쇄·PDF 공유 퍼블리싱 레이어를 PR #527로 병합하고 main 공개 배포까지 완료했다. release-verify·worker-readiness·Pages 배포·라이브 smoke·release-status가 모두 성공했으며 공개 validator에서 merge commit ab096d1, HTTP 200, 73개 bundle hash, claims 12, masterRecords 6, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched를 확인했다. 원격 Chrome print media 390·1440px에서도 문서 폭이 viewport와 같고 헤더·진행바·영상 보드·복구 조작부가 숨겨지며 본문 13개 섹션이 렌더된다. 새 CRITICAL/MAJOR 결함은 없고 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
-      "from_status": "USER_DECISION",
-      "to_status": "USER_DECISION",
-      "recorded_at": "2026-10-07T01:18:04Z"
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 공개 surface 자동 재점검·NAVI 동기화 — main 1083e3f — 2026-10-07
+
+- 320·390·768·1440px 공개 화면과 전문가 영상 해시 진입을 재감리하고 가로폭·중복 ID·빈 조작 요소·runtime/console errors 0을 확인했다. 모바일 메뉴의 열림·ESC 닫힘·포커스 복귀도 확인했다.
+- 영상 썸네일 빈 alt 9개는 버튼 접근성 이름이 제목·채널·상태를 제공하는 장식 이미지로 분류했으며 공개 코드는 불필요하게 변경하지 않았다.
+- UI contract·typecheck·127개 테스트·production build·라이브 validator가 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-SURFACE-AUDIT-20261007`, `E-ACCESSIBILITY-PUBLIC-SURFACE-AUDIT-20261007`, `E-DEEPLINK-PUBLIC-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-SURFACE-AUDIT-20261007`.
+
 ## 인쇄·PDF 공유 퍼블리싱 공개 배포 완료 — main ab096d1 — 2026-10-07
 
 - PR #527을 main에 병합하고 GitHub Pages 공개 배포를 완료했다. release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했고 공개 validator가 73개 bundle hash와 제품 독립 경계를 확인했다.

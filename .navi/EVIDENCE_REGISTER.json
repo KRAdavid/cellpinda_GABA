@@ -2387,6 +2387,17 @@
         "E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-222",
+      "statement": "최종 공개 GitHub Pages는 320·390·768·1440px에서 가로 넘침·중복 ID·빈 조작 요소·런타임/콘솔 오류 없이 렌더되며, 모바일 메뉴의 열림·ESC 닫힘·토글 포커스 복귀와 전문가 영상 해시 진입의 제목 여백이 유지된다. 영상 썸네일의 빈 alt는 버튼의 영상 제목·채널·상태가 이미 접근성 이름으로 제공되는 장식 이미지다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PUBLIC-SURFACE-AUDIT-20261007",
+        "E-ACCESSIBILITY-PUBLIC-SURFACE-AUDIT-20261007",
+        "E-DEEPLINK-PUBLIC-SURFACE-AUDIT-20261007",
+        "E-LIVE-PUBLIC-SURFACE-AUDIT-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16134,6 +16145,49 @@
       "captured_at": "2026-10-07T01:18:04Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-PRINT-PUBLISHING",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-221"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PUBLIC-SURFACE-AUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "현재 main 공개본의 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산·라이브 공개 validator가 모두 통과한다.",
+      "locator": "local main 1083e3f; pnpm run validate:ui-contract status ok; pnpm run typecheck status ok; pnpm test 127 passed; pnpm run build status ok; validate:performance initial JS 311199, initial CSS 95703, total assets 1649478, largest 311199; pnpm run validate:live-public candidateSha 1083e3f6b0669d1770e8db6bbff4ffc7425ac38b, HTTP 200, bundleHashes 73, claims 12, masterRecords 6, products 1, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched",
+      "captured_at": "2026-10-06T21:25:49Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-PUBLIC-SURFACE-AUDIT",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-222"]
+    },
+    {
+      "id": "E-ACCESSIBILITY-PUBLIC-SURFACE-AUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 Chrome CDP fallback의 320·390·768·1440px 기본 화면은 가로 넘침·중복 ID·빈 조작 요소·콘솔 오류 없이 렌더되며, 모바일 메뉴가 실제 열림·ESC 닫힘·토글 포커스 복귀를 수행한다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=render-20261007; widths 320, 390, 768, 1440; document scrollWidth equals viewport at every width; duplicateIds 0; blankControls 0; consoleErrors []; interaction 390px menu aria-expanded false -> true -> false, nav hidden after Escape, focus returns to guide-menu-toggle; thumbnail alt review distinguishes aria-hidden decorative images from button accessible names",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=render-20261007-390",
+      "captured_at": "2026-10-06T21:28:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-PUBLIC-SURFACE-AUDIT",
+      "claim_refs": ["C-003", "C-004", "C-222"]
+    },
+    {
+      "id": "E-DEEPLINK-PUBLIC-SURFACE-AUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 해시로 직접 진입하면 모바일·데스크톱 제목이 고정 헤더와 읽기 진행 레일 아래에서 시작한다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=scroll-20261007#expert-videos; 390px heading top 131.67, reading rail bottom 105; 1440px heading top 150.67, reading rail bottom 116; document width stable; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=scroll-20261007#expert-videos",
+      "captured_at": "2026-10-06T21:31:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-DEEPLINK-SURFACE-AUDIT",
+      "claim_refs": ["C-003", "C-004", "C-222"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SURFACE-AUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages의 현재 main candidate에서 모바일·태블릿·데스크톱 표면, 제품 독립 공개 경계와 전문가 영상 직접 진입 흐름이 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=render-20261007; live validator HTTP 200 candidateSha 1083e3f6b0669d1770e8db6bbff4ffc7425ac38b with 73 bundle hashes and matched provenance; Chrome CDP fallback 320·390·768·1440px; product-independent public boundary matched; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=render-20261007",
+      "captured_at": "2026-10-06T21:35:15Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-PUBLIC-SURFACE-AUDIT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-222"]
     }
   ]
 }
