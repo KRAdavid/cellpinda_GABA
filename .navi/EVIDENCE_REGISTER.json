@@ -2375,6 +2375,18 @@
         "E-LIVE-PUBLIC-LARGE-TEXT-AUDIT-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-221",
+      "statement": "공개 GABA 안내서는 인쇄·PDF 공유에서도 화면 전용 조작부를 숨기고 A4 문서 흐름과 본문 출처 표시를 유지한다. 로컬 390·1440px 인쇄 미디어에서 문서 폭은 viewport 안에 있고 헤더·진행바·영상 보드·복구 조작부가 숨겨진다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PRINT-PUBLISHING-20261007",
+        "E-UI-CONTRACT-PRINT-PUBLISHING-20261007",
+        "E-CDP-PRINT-PUBLISHING-20261007",
+        "E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007",
+        "E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16069,6 +16081,58 @@
       "captured_at": "2026-10-07T00:00:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-LARGE-TEXT",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-220"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PRINT-PUBLISHING-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "인쇄·PDF 공유 레이어가 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+      "locator": "local main working tree before merge; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test -- --runInBand 127 passed; pnpm run build; validate:performance status ok; initial JS 311199, initial CSS 95703, total assets 1649478, largest 311199; print.css is served as a top-level static print-only stylesheet outside assets",
+      "captured_at": "2026-10-07T01:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-PRINT-PUBLISHING",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-221"]
+    },
+    {
+      "id": "E-UI-CONTRACT-PRINT-PUBLISHING-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 A4 인쇄 규칙, 화면 전용 크롬 숨김, 카드 분할 방지, 연구 출처 URL 노출을 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; v163 print publishing contract in src/components/PublicGabaGuide.css; validate:ui-contract status ok",
+      "captured_at": "2026-10-07T01:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-PRINT-PUBLISHING",
+      "claim_refs": ["C-004", "C-005", "C-221"]
+    },
+    {
+      "id": "E-CDP-PRINT-PUBLISHING-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 production preview의 print media에서 390·1440px 문서 폭이 안정적이고 헤더·진행바·영상 보드·복구 조작부가 숨겨진다.",
+      "locator": "local http://127.0.0.1:4173/?view=guide&qa=print-audit-20261007; Chrome CDP fallback with emulated print media at 390px and 1440px; documentWidth equals viewport; header none; readingProgress none; videoBoard none; recoveryControls none; visibleSections 13; screenshots inspected with view_image; source pseudo URL contract present where source links render",
+      "source_uri": "http://127.0.0.1:4173/?view=guide&qa=print-audit-20261007",
+      "captured_at": "2026-10-07T01:00:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-PRINT-PUBLISHING",
+      "claim_refs": ["C-003", "C-004", "C-221"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR과 main 공개 배포 파이프라인이 인쇄·PDF 공유 레이어 변경의 최종 커밋에서 모두 성공했다.",
+      "locator": "pending until PR merge; release-verify, worker-readiness, deploy-pages, smoke-live and release-status must all be success",
+      "captured_at": "2026-10-07T01:00:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-PRINT-PUBLISHING",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-221"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 인쇄·PDF 공유 레이어가 배포된 뒤 공개 안내서의 화면 흐름과 제품 독립 공개 경계를 유지한다.",
+      "locator": "pending until public deployment; HTTP 200, public validator, static bundle hashes and live Chrome fallback must be rechecked after the merge",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=print-audit-20261007",
+      "captured_at": "2026-10-07T01:00:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-PRINT-PUBLISHING",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-221"]
     }
   ]
 }

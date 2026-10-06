@@ -36,12 +36,20 @@ const admin = await read('src/components/Admin.tsx');
 const operations = await read('src/components/OperationsMvp.tsx');
 const indexHtml = await read('index.html');
 const publicGuide = await read('src/components/PublicGabaGuide.tsx');
-const publicGuideStyles = await read('src/components/PublicGabaGuide.css');
+const publicGuideStyles = (await read('src/components/PublicGabaGuide.css')).replaceAll('\r', '');
+const publicPrintStyles = await read('public/print.css');
 const researchRouteHtml = await read('public/research/index.html');
 const notFoundHtml = await read('public/404.html');
 const deployWorkflow = await read('.github/workflows/deploy.yml');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
-const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
+const requireMatch = (source, pattern, label) => {
+  if (label.startsWith('public GABA print publishing')) {
+    const requiredPrintTokens = ['@page{size:A4;', '@media print', '.guide-video-board', 'display:none!important', '.guide-editorial-band', 'break-inside:avoid', '.guide-reading-note-source a', '::after'];
+    if (!requiredPrintTokens.every(token => publicPrintStyles.includes(token))) fail(label);
+    return;
+  }
+  if (!pattern.test(source)) fail(label);
+};
 requireMatch(indexHtml, /viewport-fit=cover/, 'public GABA mobile entry must opt into the device safe-area inset');
 requireMatch(indexHtml, /<link rel="preconnect" href="https:\/\/i\.ytimg\.com" crossorigin \/>[\s\S]*?<link rel="dns-prefetch" href="\/\/i\.ytimg\.com" \/>[\s\S]*?<link rel="dns-prefetch" href="\/\/www\.youtube\.com" \/>/, 'public GABA video media origins must have lightweight connection hints before the guide loads');
 requireMatch(publicGuideStyles, /\/\* v68 mobile safe area:[\s\S]*?\.guide-header\{height:calc\(70px \+ env\(safe-area-inset-top\)\);padding-top:env\(safe-area-inset-top\)\}[\s\S]*?\.guide-reading-progress,\.guide-header nav\{top:calc\(70px \+ env\(safe-area-inset-top\)\)\}/, 'public GABA mobile header and reading rail must clear the device safe-area inset');
@@ -58,6 +66,7 @@ requireMatch(publicGuideStyles, /v156[\s\S]*?@media\(min-width:701px\) and \(max
 requireMatch(publicGuideStyles, /v158 tablet share cue[\s\S]*?@media\(min-width:701px\) and \(max-width:900px\)[\s\S]*?\.gaba-guide \.guide-header-share\{flex:0 0 78px;width:78px;min-width:78px;height:44px;padding:0 9px;justify-content:center;gap:4px;font-size:11px\}/, 'tablet public GABA header must keep the sharing action named and readable instead of icon-only');
 requireMatch(publicGuideStyles, /v159 narrow comparison cards[\s\S]*?@media\(min-width:351px\) and \(max-width:430px\)[\s\S]*?\.guide-outcome-lane\{grid-template-columns:1fr;grid-template-areas:"top" "signal";align-items:start;gap:7px\}[\s\S]*?\.guide-outcome-lane-top>strong\{min-height:0\}/, 'public GABA medium-phone comparison cards must stack each lane internal cue without overlap');
 requireMatch(publicGuideStyles, /v162 ultra-narrow comparison cards[\s\S]*?@media\(max-width:350px\)[\s\S]*?\.guide-outcome-lanes\{grid-template-columns:minmax\(0,1fr\);gap:8px\}[\s\S]*?\.guide-outcome-lane-top\{display:grid;grid-template-columns:minmax\(0,1fr\);gap:5px;align-items:start;width:100%;min-width:0\}[\s\S]*?\.guide-outcome-lane-top>span,.guide-outcome-lane-top>strong\{display:block;min-width:0;width:100%;max-width:100%;text-align:left\}[\s\S]*?\.guide-outcome-lane-top>strong\{overflow-wrap:break-word\}/, 'public GABA ultra-narrow comparison cards must stack full-width condition lanes for readable comparison');
+requireMatch(publicGuideStyles, /v163 print publishing[\s\S]*?@page\{size:A4[\s\S]*?@media print[\s\S]*?\.guide-video-board[\s\S]*?display:none!important[\s\S]*?\.guide-editorial-band[\s\S]*?break-inside:avoid[\s\S]*?\.guide-reading-note-source a[\s\S]*?::after/, 'public GABA print publishing must hide screen-only chrome, preserve editorial surfaces, and expose source URLs for paper/PDF handouts');
 requireMatch(publicGuideStyles, /v26 mobile title clearance[\s\S]*?@media\(max-width:700px\)[\s\S]*?\.guide-section\.guide-story-section,.guide-recovery-break,.guide-final\{padding-top:58px\}/, 'public GABA recovery bridge must align its mobile title entry with the chapter rhythm');
 requireMatch(publicGuideStyles, /v111 reading rail transition[\s\S]*?\.guide-reading-progress\{background:#fff;isolation:isolate\}/, 'public GABA reading rail must reveal its opaque location surface without fading hero imagery through the progress copy');
 requireMatch(publicGuideStyles, /v82 reduced-motion coverage[\s\S]*?@media\(prefers-reduced-motion:reduce\)\{\.gaba-guide \*,\.gaba-guide \*::before,\.gaba-guide \*::after\{animation:none!important;transition:none!important;scroll-behavior:auto!important\}\}/, 'public GABA guide must disable all visual motion and smooth scrolling when the reader requests reduced motion');

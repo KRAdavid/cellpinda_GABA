@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 인쇄·PDF 공유 퍼블리싱 레이어 — 2026-10-07 — working tree
+
+- 공격 관점에서 사업자용 인쇄본이 화면 전용 조작부를 그대로 남겨 본문을 분절하거나, A4 폭에서 카드가 중간 분할되어 출처가 다음 페이지로 밀리는 실패 모드를 점검했다. v163에서 헤더·진행바·영상 보드·복구 조작부를 숨기고 주요 편집 표면의 분할을 줄였으며 연구 출처 링크를 인쇄용 URL로 노출했다.
+- 390·1440px print media에서 document width가 각 viewport와 같고 `header=none`, `readingProgress=none`, `videoBoard=none`, `recoveryControls=none`, visible sections 13을 확인했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Chrome 인쇄 fallback은 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수를 대신하지 않으므로 RT-001·RT-002·RT-003은 계속 OPEN이다. PR·main 공개 배포 후 실제 URL 재검증이 남아 있다.
+
+증적: `E-UI-CONTRACT-PRINT-PUBLISHING-20261007`, `E-CDP-PRINT-PUBLISHING-20261007`, `E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007`, `E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007`.
+
 ## 큰 글자 읽기 모드·모바일 공개 재점검 — main 829c5fb — 2026-10-07
 
 - 공격 관점에서 큰 글자 모드가 카드 내부 문구를 늘리면서 회복 카드·연구 지도·전문가 영상의 화면 폭을 밀어내거나, 장식용 overflow가 실제 정보 잘림으로 오인되는 실패 모드를 점검했다. 320·390·768px에서 보이는 문장·버튼·연구 흐름을 확인했다.

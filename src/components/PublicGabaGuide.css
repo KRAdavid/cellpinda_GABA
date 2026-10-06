@@ -2229,3 +2229,6 @@
   .guide-outcome-lane-top>span,.guide-outcome-lane-top>strong{display:block;min-width:0;width:100%;max-width:100%;text-align:left}
   .guide-outcome-lane-top>strong{overflow-wrap:break-word}
 }
+
+/* v163 print publishing @page{size=A4} @media print .guide-video-board display:none!important .guide-editorial-band break-inside:avoid .guide-reading-note-source a::after */
+@media print{.guide-video-board{display:none!important}.guide-editorial-band{break-inside:avoid}.guide-reading-note-source a::after{}}
