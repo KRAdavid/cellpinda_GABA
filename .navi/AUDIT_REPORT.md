@@ -2523,3 +2523,15 @@
 - Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-CDP-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`.
+
+## 중간 폭 모바일 공유 라벨·정적 번들 — a6c8c6e — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `a6c8c6e7dccbfc80e9f189d502ba43714e650ee0`·HTTP 200·STATIC·72개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 모바일 헤더 발견성·반응형: PASS. 390·380·351px에서는 `공유하기` 라벨이 표시되고 메뉴·글자 크기·공유 버튼이 겹치지 않으며, 350px에서는 기존 아이콘 레일로 압축된다. 네 폭 모두 body width와 scroll width가 viewport와 같고 runtime/console/http errors 0이다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #494, main workflow `37482350132`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 헤더 발견성과 공개 manifest 압축만 다뤘으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006`.

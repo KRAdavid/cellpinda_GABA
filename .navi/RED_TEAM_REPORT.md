@@ -1986,3 +1986,14 @@
 - 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-UI-CONTRACT-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-CDP-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`.
+
+## 중간 폭 모바일 공유 라벨 — 2026-10-06 — a6c8c6e
+
+- Red-team finding: 351–430px 헤더에서 공유 기능이 아이콘만 보여 처음 방문자가 기능을 즉시 찾기 어려운 발견성 리스크가 있었다.
+- 보정: v154에서 `공유하기` 라벨을 표시하고 메뉴·글자 크기·공유 버튼을 비겹침 좌표로 정렬했다. 350px 이하에서는 기존 아이콘 레일을 유지했다.
+- Recheck: 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #494, main workflow `37482350132`, 공개 validator candidate `a6c8c6e`, 공개 Chrome CDP fallback 390·380·351·350px에서 라벨·compact rail·body/scroll width·page/console/http errors 0을 확인했다.
+- compact release manifest는 해시·검증 필드를 유지한 채 정적 오버헤드만 줄였다. 공개 과학 카피·수치·출처·제품 독립 경계는 바뀌지 않았다. 새 CRITICAL/MAJOR 결함은 없다.
+- 이 검증은 Chrome CDP fallback 증거이며 실제 고령 사용자 이해도, Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006`.

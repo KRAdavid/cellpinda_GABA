@@ -2196,6 +2196,18 @@
         "E-LIVE-PUBLIC-RESEARCH-MAP-INITIAL-NEUTRAL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-206",
+      "statement": "351–430px 모바일 헤더에서 공유 기능을 아이콘만으로 추측하지 않도록 '공유하기' 라벨을 표시하고, 280–350px 초소형 화면은 기존 아이콘 레일을 유지해 메뉴·글자 크기·공유 조작의 간격과 본문 가로폭을 보존한다. 연구·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MEDIUM-PHONE-SHARE-LABEL-20261006",
+        "E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006",
+        "E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006",
+        "E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006",
+        "E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15106,6 +15118,59 @@
       "captured_at": "2026-10-06T14:13:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-MAP-INITIAL-NEUTRAL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-205"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MEDIUM-PHONE-SHARE-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "중간 폭 모바일 공유 라벨 보정과 compact release manifest 변경이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "local workspace; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1809 modules; static routes 11; release files 72; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1649478 <= 1650000; largest asset 311199 <= 380000; local HEAD bc2167526e61d3480cbac41827280b634ebb3882",
+      "captured_at": "2026-10-06T14:58:24Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-MEDIUM-PHONE-SHARE-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-206"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "351–430px에서는 공유 버튼에 '공유하기' 라벨을 함께 표시하고, 350px 이하에서는 기존 아이콘 레일을 유지하도록 헤더 좌표·UI 계약을 정렬했다.",
+      "locator": "src/components/PublicGabaGuide.css v154 medium-phone header order; scripts/validate-ui-contract.mjs; scripts/generate-release-manifest.mjs compact integrity artifact; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T14:58:24Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-MEDIUM-PHONE-SHARE-LABEL",
+      "claim_refs": ["C-001", "C-003", "C-206"]
+    },
+    {
+      "id": "E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback으로 공개본의 390·380·351·350px 헤더를 확인했으며 중간 폭에서는 '공유하기'가 보이고 350px에서는 아이콘형 레일로 압축된다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?qa=medium-phone-share-live-20261006#top; 390px share x318/right378/width60/text 공유하기, menu x190/right234, size x238/right310; 380px share x308/right368/width60, menu x180/right224, size x240/right300; 351px share x279/right339/width60, menu x151/right195, size x211/right271; 350px share x294/right338/width44/icon rail; all share/menu/size overlaps false, bodyWidth=viewport, scrollWidth=viewport, runtimeErrors=0; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=medium-phone-share-live-20261006",
+      "captured_at": "2026-10-06T14:55:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-MEDIUM-PHONE-SHARE-LABEL",
+      "claim_refs": ["C-003", "C-004", "C-206"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "중간 폭 모바일 공유 라벨·번들 경량화 PR #494가 main merge a6c8c6e로 병합됐고 필수 release-verify·Pages·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #494; main merge commit a6c8c6e7dccbfc80e9f189d502ba43714e650ee0; workflow 37482350132; release-verify 112333468543; worker-readiness 112334293134; deploy-pages 112334354014; deploy-worker skipped by STATIC_ONLY; smoke-live 112335819013; release-status 112335923147; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37482350132",
+      "captured_at": "2026-10-06T14:58:24Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-MEDIUM-PHONE-SHARE-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-206"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 공유 라벨·성능 최적화가 반영됐고 HTTP 200·정적 번들·공개 데이터·제품 독립 경계·라이브 provenance가 일치한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T14:52:02.798Z; page 200; runtimeMode STATIC; candidateSha a6c8c6e7dccbfc80e9f189d502ba43714e650ee0; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390·380·351·350px labels/compact rail and errors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?qa=medium-phone-share-live-20261006",
+      "captured_at": "2026-10-06T14:58:24Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MEDIUM-PHONE-SHARE-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-206"]
     }
   ]
 }

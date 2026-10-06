@@ -1755,3 +1755,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #488, main workflow `37476812066`, 공개 validator candidate `d450e98`, 공개 Chrome CDP 390px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-CDP-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`.
+
+## 중간 폭 모바일 공유 라벨·공개 배포 — a6c8c6e — 2026-10-06
+
+- 351–430px 모바일 헤더에서 공유 기능을 `공유하기`로 읽을 수 있게 표시하고 메뉴·글자 크기·공유 버튼 간격을 분리했다.
+- 350px 이하에서는 기존 아이콘 레일을 유지해 초소형 화면의 가로폭과 터치 구조를 보존했다.
+- release manifest를 compact JSON으로 생성해 공개 정적 자산 예산 여유를 확보했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- PR #494, main workflow `37482350132`, 공개 validator candidate `a6c8c6e`, Chrome CDP 390·380·351·350px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006`.
