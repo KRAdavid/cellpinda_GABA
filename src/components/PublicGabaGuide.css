@@ -8,9 +8,6 @@
 .guide-share-toast.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
 @media(max-width:700px){.guide-share-toast{right:20px;bottom:calc(16px + env(safe-area-inset-bottom));left:20px;max-width:none;text-align:center}}
 @media(prefers-reduced-motion:reduce){.guide-share-toast{transition:none}}
-.guide-message-card p small{display:block;margin-top:7px;color:#748da0;font-size:12px;font-weight:500;line-height:1.55}
-.guide-message-card a{width:max-content;margin-top:auto;color:var(--guide-teal-dark);font-size:12px;font-weight:850;text-decoration:none}
-.guide-message-card a:hover{text-decoration:underline;text-underline-offset:4px}
 .guide-research-source{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:15px;border-top:1px solid #d6e8ec;color:#7890a1;font-size:11px}
 .guide-research-source-label{color:#7890a1;font-weight:800;white-space:nowrap}
 .guide-research-source a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;min-height:44px;padding:7px 10px 7px 12px;border:1px solid #cfe6e7;border-radius:10px;background:#f4fbfb;color:var(--guide-teal-dark);font-weight:800;text-decoration:none}
@@ -44,9 +41,6 @@
 .gaba-guide{background:#fff;color:#132f56;font-size:16px}
 .gaba-guide button,.gaba-guide a{min-height:44px}
 .guide-hero{background:#fff}
-.guide-message-kit{background:#f3f9fc;border-radius:32px 32px 0 0}
-.guide-message-card{border-color:#e4edf2;box-shadow:0 10px 28px rgba(19,47,86,.05)}
-.guide-message-card p{font-weight:750}
 @media(max-width:700px){
   .guide-container{width:min(calc(100% - 40px),560px)}
   .guide-header{height:70px;padding:0 20px}
@@ -70,15 +64,6 @@
   .guide-summary-label{display:block;margin-bottom:10px;font-size:16px}
   .guide-summary-grid p{font-size:18px;line-height:1.72}
   .guide-summary-mark{display:none}
-  .guide-message-kit{padding:64px 0 72px;border-radius:32px 32px 0 0}
-  .guide-message-head{display:block;margin-bottom:28px}
-  .guide-message-head h2{font-size:35px;line-height:1.2;letter-spacing:-.085em}
-  .guide-message-head>p{margin-top:16px;font-size:17px;line-height:1.7}
-  .guide-message-grid{grid-template-columns:1fr;gap:12px}
-  .guide-message-card{min-height:0;padding:22px 20px;border:0;border-radius:20px;background:#fff;box-shadow:0 8px 24px rgba(19,47,86,.05)}
-  .guide-message-card>span{width:32px;height:32px;font-size:12px}
-  .guide-message-card p{margin:19px 0 20px;font-size:18px;line-height:1.6;letter-spacing:-.055em}
-  .guide-message-card button{min-height:30px;font-size:14px}
   .guide-section{padding:76px 0}
   .guide-section-heading{display:block;margin-bottom:32px}
   .guide-section-number,.guide-section-heading>p{display:none}
@@ -137,7 +122,6 @@
   .guide-hero{background:#fff}
   .guide-hero h1{letter-spacing:-.09em}
   .guide-hero-question{max-width:25ch}
-  .guide-message-kit{padding-top:92px;padding-bottom:92px}
 }
 
 /* v3 consumer story: curiosity -> basics -> sleep -> research -> share */
@@ -544,8 +528,7 @@
 .guide-video-feature-poster:focus-visible{outline:3px solid #83ded9;outline-offset:-4px}
 .guide-video-feature-copy{min-width:0;color:#fff}
 .guide-video-feature-meta{display:flex;align-items:center;gap:8px;color:#8edbda;font-size:10px;font-weight:850;letter-spacing:.12em}
-.guide-video-feature-meta span+span{color:#87a7b9}
-.guide-video-feature-meta .guide-video-feature-state{white-space:nowrap;letter-spacing:-.04em}
+.guide-video-feature-meta span+span{color:#87a7b9;white-space:nowrap;letter-spacing:-.04em}
 .guide-video-feature-meta .guide-video-feature-index{margin-left:auto;color:#b9e6e2;font-variant-numeric:tabular-nums;letter-spacing:.1em;white-space:nowrap}
 .guide-video-feature-copy h3{margin:19px 0 9px;font-size:24px;letter-spacing:-.07em;line-height:1.3}
 .guide-video-feature-copy p{margin:0;color:#bed1de;font-size:13px;line-height:1.6;letter-spacing:-.035em}
