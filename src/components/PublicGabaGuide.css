@@ -2068,6 +2068,15 @@
   .guide-header .guide-reading-size-toggle .guide-reading-size-mark{font-size:14px}
 }
 
+/* v146 tablet reading control: name the text-size action before the full desktop navigation returns. */
+@media(min-width:701px) and (max-width:900px){
+  .guide-header .guide-reading-size-toggle{width:72px;min-width:72px;flex-basis:72px;padding:0 8px;gap:4px}
+  .guide-header .guide-reading-size-toggle>span:not(.guide-reading-size-mark){position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:nowrap;border:0;font-size:11px;line-height:1}
+  .guide-header .guide-reading-size-toggle .guide-reading-size-label{display:none}
+  .guide-header .guide-reading-size-toggle .guide-reading-size-compact-label{display:inline;color:inherit;font-size:11px;font-weight:850;letter-spacing:-.07em}
+  .guide-header .guide-reading-size-toggle .guide-reading-size-mark{min-width:20px;font-size:13px;letter-spacing:-.1em}
+}
+
 /* v143 narrow-phone chart verdict: let the plain-language result label wrap instead of clipping at 280px. */
 @media(max-width:350px){
   .guide-outcome-comparison-verdict{display:grid;gap:1px}
