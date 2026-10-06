@@ -1946,6 +1946,18 @@
         "E-LIVE-PUBLIC-MOBILE-HERO-RAIL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-185",
+      "statement": "280–350px 모바일 공개본의 고정 진행 레일이 `읽는 중`을 한 줄로 표시해 현재 장 제목과 진행 수치를 함께 읽게 하며, 접근성용 전체 안내와 390px 이상 표기를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-READING-RAIL-20261006",
+        "E-UI-CONTRACT-NARROW-READING-RAIL-20261006",
+        "E-CDP-NARROW-READING-RAIL-20261006",
+        "E-DEPLOY-PIPELINE-NARROW-READING-RAIL-20261006",
+        "E-LIVE-PUBLIC-NARROW-READING-RAIL-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13764,6 +13776,59 @@
       "captured_at": "2026-10-06T07:00:58Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-MOBILE-HERO-RAIL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-184"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-READING-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 진행 레일 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 328931cda0d894bb771e6fa9c13478525be2ab65; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1644005 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T07:24:43Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-NARROW-READING-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-185"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-READING-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 280–350px에서 진행 레일의 시각 문구를 `읽는 중`으로 한 줄 압축하고 390px 이상 원래 표기를 유지하며, live announcement는 별도 접근성 노드로 보존한다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.css v148 narrow reading rail; max-width:350px; guide-reading-progress-meta>span font-size:0/white-space:nowrap; ::after content `읽는 중`; status ok",
+      "captured_at": "2026-10-06T07:24:43Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-NARROW-READING-RAIL",
+      "claim_refs": ["C-001", "C-185"]
+    },
+    {
+      "id": "E-CDP-NARROW-READING-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 공개 280px 연구 지도 deep link를 확인했으며 진행 레일이 한 줄로 표시되고 가로 넘침이 없다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=release-reading-rail-280#research; viewport 280x800; document.scrollWidth 280; rail text source `지금 읽는 중`, computed font-size 0px with pseudo content `읽는 중` at 10px, white-space nowrap, rail box 29x10; active chapter `인지 연구 결과`; screenshot inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=release-reading-rail-280#research",
+      "captured_at": "2026-10-06T07:24:43Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-NARROW-READING-RAIL",
+      "claim_refs": ["C-003", "C-004", "C-185"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-READING-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 진행 레일 보정 PR #447이 필수 검사를 통과해 main merge commit 9b6df19로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #447; code commit 328931cda0d894bb771e6fa9c13478525be2ab65; PR workflows 37429235522 and 37429235553 successful; main merge commit 9b6df192005919f4cfbb610c2797317a30311543; main workflow 37429369421; release-verify 112156353643; worker-readiness 112156801468; deploy-pages 112156836610; deploy-worker 112156837785 skipped by STATIC_ONLY; smoke-live 112156927738; release-status 112157000240; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37429369421",
+      "captured_at": "2026-10-06T07:24:43Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-NARROW-READING-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-185"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-READING-RAIL-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 280px 진행 레일 보정과 제품 독립 공개 경계가 반영되고, 71개 번들·공개 데이터 정합성·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T07:24:43.055Z; page 200; runtimeMode STATIC; candidateSha 9b6df192005919f4cfbb610c2797317a30311543; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 280px screenshot and metrics; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=release-reading-rail-280#research",
+      "captured_at": "2026-10-06T07:24:43Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-NARROW-READING-RAIL",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-185"]
     }
   ]
 }
