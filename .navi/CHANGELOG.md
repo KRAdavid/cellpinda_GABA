@@ -1815,3 +1815,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-SHARE-DISMISS-20261007`, `E-UI-CONTRACT-SHARE-DISMISS-20261007`, `E-CDP-SHARE-DISMISS-20261007`, `E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007`, `E-LIVE-PUBLIC-SHARE-DISMISS-20261007`.
+
+## 태블릿 성장 연구 흐름·공개 배포 — 20a4713 — 2026-10-07
+
+- 701–1100px 3열 성장 연구 흐름에서 행간 연결을 보강하고 3번째 카드의 행 끝 연결은 숨겼다.
+- 성장 연구 6단계를 `list/listitem`으로 노출하고 701–1199px 직접 해시 이동 전 실제 섹션 높이를 확보했다.
+- PR #512, main workflow `37508721569`, 공개 390·768·1440px Chrome CDP fallback 검증을 완료했다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007`, `E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007`, `E-CDP-TABLET-GROWTH-FLOW-20261007`, `E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007`, `E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007`.

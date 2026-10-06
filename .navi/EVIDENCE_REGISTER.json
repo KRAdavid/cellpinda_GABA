@@ -2280,6 +2280,18 @@
         "E-LIVE-PUBLIC-SHARE-DISMISS-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-213",
+      "statement": "701–1100px 태블릿에서 성장 연구 6단계가 3×2 흐름과 행간 연결로 읽히고, 성장 흐름은 list/listitem으로 노출된다. 701–1199px에서 실제 섹션 높이를 먼저 확보해 #growth 직접 진입 시 읽기 레일과 제목이 충돌하지 않으며, 공개 390·768·1440px에서 전문가 영상·마지막 장·가로폭을 함께 확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007",
+        "E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007",
+        "E-CDP-TABLET-GROWTH-FLOW-20261007",
+        "E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007",
+        "E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15561,6 +15573,59 @@
       "captured_at": "2026-10-06T17:35:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-SHARE-DISMISS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-212"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "태블릿 성장 연구 흐름 보강 코드가 UI 계약·타입체크·127개 테스트·정적 Pages 번들·성능 예산을 통과한다.",
+      "locator": "local main 20a4713; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 passed; pnpm exec vite build --base /gaba_info/ --outDir dist-pages; validate:release-manifest; check-public-artifacts; validate:static-bundle; validate:performance; final local dist-pages initial JS 311269, CSS 95703, total assets 1649489, largest 311269; final status ok",
+      "captured_at": "2026-10-06T18:10:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261007-TABLET-GROWTH",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-213"]
+    },
+    {
+      "id": "E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 성장 연구 6단계를 list/listitem으로 노출하고 701–1100px에서 행간 연결을 유지하며 701–1199px에서 직접 해시 이동 전 실제 섹션 높이를 측정하도록 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; growth flow role=list, aria-label=성장 연구 6단계, six role=listitem children; v155 tablet connector rules display:block except every third card; v156 tablet section content-visibility:visible; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T18:10:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-TABLET-GROWTH",
+      "claim_refs": ["C-004", "C-005", "C-213"]
+    },
+    {
+      "id": "E-CDP-TABLET-GROWTH-FLOW-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback에서 공개 성장 연구 직접 진입과 세 폭의 반응형 흐름이 읽기 레일과 충돌하지 않는다.",
+      "locator": "public cache-busted https://kradavid.github.io/gaba_info/?view=guide&cachebust=ad6af53#growth; 768px: document width 768, growth headingTop 143 and railBottom 108, list/listitem semantics, connector displays block/block/none/block/block, expert headingTop 1070, final headingTop 3728, missing visible images=[]; 390px: document width 390, growth headingTop 259 and railBottom 105, expert headingTop 1596, final headingTop 5091, missing images=[]; 1440px: document width 1440, growth headingTop 319 and railBottom 116, expert headingTop 1110, final headingTop 3513, missing images=[]; screenshot outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=ad6af53#growth",
+      "captured_at": "2026-10-06T18:10:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-TABLET-GROWTH",
+      "claim_refs": ["C-003", "C-004", "C-213"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #512 required checks와 main 공개 배포 파이프라인이 모두 성공했다.",
+      "locator": "PR #512 https://github.com/KRAdavid/gaba_info/pull/512; release-verify 37508519406 and site-quality-verify 37508519421 success; final merge 20a4713a4abf0cf00c313424fb8a4a64f17e7ea2; main workflow 37508721569; release-verify 112423965008; worker-readiness 112424577695; deploy-pages 112424627656; deploy-worker skipped static; smoke-live 112424728341; release-status 112424861336; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37508721569",
+      "captured_at": "2026-10-06T18:10:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-TABLET-GROWTH",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-213"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 태블릿 성장 연구 흐름과 직접 진입 안정성이 확인되며 제품 독립 공개 경계가 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&cachebust=ad6af53; HTTP 200; main workflow 37508721569 deploy-pages and smoke-live success; Chrome CDP fallback 768px screenshot shows sticky reading rail, growth heading, 3x2 six-step path, row connectors, growth note and expert handoff; 390px and 1440px public checks show no horizontal overflow and expected chapter headings; product-independent public boundary matched; screenshot outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=ad6af53#growth",
+      "captured_at": "2026-10-06T18:10:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-TABLET-GROWTH",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-213"]
     }
   ]
 }

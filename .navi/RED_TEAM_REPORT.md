@@ -2054,3 +2054,12 @@
 - 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도·Safari/iOS/Android 실기기·독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-SHARE-DISMISS-20261007`, `E-UI-CONTRACT-SHARE-DISMISS-20261007`, `E-CDP-SHARE-DISMISS-20261007`, `E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007`, `E-LIVE-PUBLIC-SHARE-DISMISS-20261007`.
+
+## Red-team recheck — 태블릿 성장 연구 흐름·직접 진입 — 2026-10-07 — 20a4713
+
+- 공격 관점에서 701–1100px 3열 성장 흐름의 행 끝을 넘어가는 연결선과, 701–1199px 지연 렌더링 장의 실제 높이보다 이른 해시 이동 경로를 확인했다.
+- 같은 행의 연결만 표시하고 3번째 카드의 연결은 숨겼으며, 성장 경로를 list/listitem으로 명시하고 태블릿 섹션을 실제 높이로 렌더링했다. 공개 768px에서 `#growth`의 headingTop 143, railBottom 108, connector `block/block/none/block/block`을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 바뀌지 않았으며 새 CRITICAL/MAJOR 결함은 없다. 기존 RT-001·RT-002·RT-003은 계속 OPEN이고 teaser preview는 `HOLD`다.
+- 이 검증은 Chrome CDP fallback이며 실제 고령 사용자 이해도와 Safari/iOS/Android 실기기 동작, 독립 과학·규제 감수를 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007`, `E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007`, `E-CDP-TABLET-GROWTH-FLOW-20261007`, `E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007`, `E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007`.

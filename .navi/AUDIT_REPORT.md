@@ -2596,3 +2596,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - Residual: teaser preview는 `HOLD`이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-SHARE-DISMISS-20261007`, `E-UI-CONTRACT-SHARE-DISMISS-20261007`, `E-CDP-SHARE-DISMISS-20261007`, `E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007`, `E-LIVE-PUBLIC-SHARE-DISMISS-20261007`.
+
+## 태블릿 성장 연구 흐름·직접 진입 안정화 — 20a4713 — 2026-10-07
+
+- 감사 finding: 701–1100px에서 성장 연구 6단계가 3열로 재배치될 때 행간 연결 화살표가 사라지고, 701–1199px에서 지연 렌더링 장의 intrinsic 높이가 직접 해시 진입 위치를 흔들 수 있었다.
+- 보정: 태블릿에서 같은 행 연결만 복원하고 행 끝 화살표는 숨겼으며, 성장 흐름을 `list/listitem`으로 노출했다. 태블릿·컴팩트 노트북은 실제 섹션 높이를 먼저 확정하도록 했다.
+- Recheck: 로컬 UI contract·typecheck·127개 테스트·Pages 번들·성능 예산, PR #512, main workflow `37508721569`의 release-verify·Pages·라이브 smoke·release-status, 공개 HTTP 200, Chrome CDP fallback 390·768·1440px에서 성장 제목·전문가 영상·마지막 장·가로폭과 768px 연결 화살표를 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Residual: teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007`, `E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007`, `E-CDP-TABLET-GROWTH-FLOW-20261007`, `E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007`, `E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007`.

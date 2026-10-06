@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T17:35:00Z",
+  "updated_at": "2026-10-06T18:10:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T14:13:00Z"
+    "last_run_at": "2026-10-06T18:10:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T14:13:00Z"
+    "last_run_at": "2026-10-06T18:10:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5558,6 +5558,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T17:35:00Z"
+    },
+    {
+      "id": "H-291",
+      "event": "701–1199px 태블릿·컴팩트 노트북에서 성장 연구 6단계의 행간 연결과 직접 진입 안정성을 재점검했다. v155에서 3열 태블릿의 같은 행 연결 화살표를 복원하고 성장 흐름을 list/listitem으로 노출했다. v156에서 태블릿 섹션을 직접 측정하도록 해 공개 768px #growth 진입 시 headingTop 143, reading rail bottom 108을 확인했으며 390·1440px에서도 전문가 영상·마지막 장 제목과 가로폭 정합을 확인했다. 로컬 UI contract·typecheck·127개 테스트·Pages 번들·성능 예산, PR #512, main merge 20a4713, main workflow 37508721569의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-213과 다섯 증거를 등록한다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T18:10:00Z"
     }
   ]
 }
