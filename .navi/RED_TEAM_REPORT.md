@@ -1876,3 +1876,12 @@
 - PR #463, main workflow `37447228688`, 공개 validator candidate `de96345`·HTTP 200·71 bundle hashes가 성공했다. RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이며 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
 증적: `E-LOCAL-BUILD-APPLICATION-FLOW-INDEX-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-INDEX-20261006`, `E-CDP-APPLICATION-FLOW-INDEX-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-INDEX-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-INDEX-20261006`.
+
+## Recheck — 2026-10-06 — 8201ad4
+
+- Red-team finding: 국내외 활용 카드의 순서 표식이 기능에 비해 작고 낮은 대비로 보여 고령 독자가 국내·일본·세계 흐름을 즉시 인지하기 어려웠다. `.guide-application-order`의 글자 크기·굵기·색 대비를 강화해 rework했다.
+- Recheck: 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 공개 Chrome CDP fallback 390·1440px에서 강화된 표식, 카드 흐름, 가로폭, page/console errors 0을 확인했다. 연구 내용·수치·출처·제품 독립 경계는 변경하지 않았다.
+- PR #465와 main workflow `37449714953`, 공개 validator candidate `8201ad4`·HTTP 200·71 bundle hashes가 성공했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
+
+증적: `E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006`.

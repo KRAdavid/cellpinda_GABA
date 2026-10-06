@@ -2052,6 +2052,18 @@
         "E-LIVE-PUBLIC-APPLICATION-FLOW-INDEX-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-194",
+      "statement": "국내외 활용 카드의 `01 / 03`, `02 / 03`, `03 / 03` 순서 표식 대비를 강화해 고령 독자도 카드 흐름을 더 빠르게 인지하도록 보정하며, 카드 문구·출처·수치·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+        "E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+        "E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+        "E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+        "E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14326,6 +14338,59 @@
       "captured_at": "2026-10-06T10:08:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-APPLICATION-FLOW-INDEX",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-193"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "국내외 활용 카드 순서 표식 대비 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "main 36d4a7c plus working-tree marker-contrast patch; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1645908 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T10:20:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-APPLICATION-FLOW-MARKER-CONTRAST",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-194"]
+    },
+    {
+      "id": "E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "국내외 활용 카드 순서 표식의 글자 크기·대비·숫자 위계를 강화하고 기존 카드 문구·출처·접근성 구조를 유지하도록 UI 계약을 확인했다.",
+      "locator": "src/components/PublicGabaGuide.css .guide-application-order; font-size 11px; font-weight 800; color #668894; src/components/PublicGabaGuide.tsx applicationCases.map index; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T10:20:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-APPLICATION-FLOW-MARKER-CONTRAST",
+      "claim_refs": ["C-001", "C-003", "C-194"]
+    },
+    {
+      "id": "E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구가 없어 Chrome CDP fallback으로 공개 390px·1440px 활용 화면을 확인했으며 순서 표식 대비 보정, 카드 흐름, 가로폭과 페이지·콘솔 오류 상태가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=application-flow-marker-contrast-20261006#applications; 390x844 and 1440x900; document/body scrollWidth 390/1425; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-marker-390.png and C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-marker-1440.png inspected with view_image; order labels [`01 / 03`, `02 / 03`, `03 / 03`]; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=application-flow-marker-contrast-20261006#applications",
+      "captured_at": "2026-10-06T10:28:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-APPLICATION-FLOW-MARKER-CONTRAST",
+      "claim_refs": ["C-003", "C-004", "C-194"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "활용 카드 순서 표식 대비 보정 PR #465가 필수 검사를 통과해 main merge commit 8201ad4로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #465; code commit 44b7457; PR checks release-verify 112222622727 and site-quality-verify 112222622605 successful; main workflow 37449714953; release-verify 112223046623; worker-readiness 112223380723; deploy-pages 112223415148; deploy-worker 112223416415 skipped by STATIC_ONLY; smoke-live 112223669447; release-status 112223755342; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37449714953",
+      "captured_at": "2026-10-06T10:31:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-APPLICATION-FLOW-MARKER-CONTRAST",
+      "claim_refs": ["C-001", "C-002", "C-194"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 국내·일본·세계 활용 카드의 순서 표식 대비 보정이 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T10:26:32.318Z; page 200; runtimeMode STATIC; candidateSha 8201ad40ca47fb60123575baa23f626d5a2c41a9; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390x844 and 1440x900 screenshots show readable `01 / 03`, `02 / 03`, `03 / 03`; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=application-flow-marker-contrast-20261006#applications",
+      "captured_at": "2026-10-06T10:31:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-APPLICATION-FLOW-MARKER-CONTRAST",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-194"]
     }
   ]
 }
