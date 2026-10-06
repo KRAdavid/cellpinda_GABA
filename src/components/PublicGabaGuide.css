@@ -833,6 +833,15 @@
   .gaba-guide .guide-research-scale-caption{font-size:12px;line-height:1.7}
 }
 
+/* v135 cross-width evidence rhythm: keep the supporting evidence type consistent with the mobile reading floor. */
+.gaba-guide .guide-research-scale-grid p,
+.gaba-guide .guide-research-scale-grid a,
+.gaba-guide .guide-research-scale-feature .guide-research-scale-metric p,
+.gaba-guide .guide-research-scale-feature .guide-research-scale-metric a{
+  font-size:12px;
+  line-height:1.65;
+}
+
 /* v14 research scale scope rail: clarify the comparison boundary before the headline numbers. */
 .guide-research-scale-reading{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:18px}
 .guide-research-scale-reading span{display:grid;grid-template-columns:8px minmax(0,auto) minmax(0,1fr);align-items:center;gap:8px;min-width:0;padding:10px 12px;border:1px solid rgba(224,247,248,.16);border-radius:12px;background:rgba(224,247,248,.08)}
