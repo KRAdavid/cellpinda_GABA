@@ -366,7 +366,7 @@ const sleepResultTopic: Pick<ResearchTopic, 'id' | 'chart'> = {
   id: 'sleep-result',
   chart: {
     kind: 'comparison',
-    title: '수면 연구 결과를 방향으로 비교',
+    title: '수면 연구, 두 조건은 어떻게 달랐을까요?',
     summary: 'GABA 섭취 기간에는 잠드는 시간이 더 짧고, 전체 비렘수면이 더 길었습니다.',
     note: '화살표는 지표의 증가·감소 방향을, 문구는 두 조건 사이의 상대적인 차이를 보여줍니다. 시각 요소의 크기는 실제 효과 크기나 수치를 뜻하지 않습니다.',
     referenceLabel: '비교 조건',
@@ -828,7 +828,7 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
     <figure className={`guide-outcome-chart guide-outcome-chart-${topic.chart.kind}`} aria-labelledby={`${chartId}-title`}>
       <div className="guide-outcome-chart-head">
         <figcaption id={`${chartId}-title`}>{topic.chart.title}</figcaption>
-        <span>{comparisonChart ? '변화 방향 비교' : '연구 결과 한눈에'}</span>
+        <span>{comparisonChart ? '두 조건 비교' : '연구 결과 한눈에'}</span>
       </div>
       {showSummary ? <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div> : null}
       {comparisonChart ? (
