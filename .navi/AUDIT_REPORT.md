@@ -1,5 +1,14 @@
 # Audit Report
 
+## 섹션 직접 진입 앵커 가독성 보정·공개 배포 — 075b919 — 2026-10-06
+
+- 독립 감사 관점에서 메뉴·공유 링크로 연구 지도에 직접 진입할 때 고정 헤더와 읽기 진행바가 제목을 가릴 수 있는 잔여 리스크를 재점검했다. v160에서 데스크톱·태블릿 앵커 여백을 126px, 모바일을 116px로 보정해 제목과 진행바 사이에 읽기 공간을 확보했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, 공개 390·768·1440px에서 연구 지도 직접 진입 후 제목 비겹침·가로폭·오류 없는 렌더링을 확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- PR #518과 main workflow `37517088317`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 site-quality 검사가 성공했다. 새 CRITICAL/MAJOR 코드 결함은 없다.
+- Browser 플러그인이 없어 Chrome CDP fallback을 사용했다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 게이트로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-ANCHOR-READABILITY-20261007`, `E-UI-CONTRACT-ANCHOR-READABILITY-20261007`, `E-CDP-ANCHOR-READABILITY-20261007`, `E-DEPLOY-PIPELINE-ANCHOR-READABILITY-20261007`, `E-LIVE-PUBLIC-ANCHOR-READABILITY-20261007`.
+
 ## 모바일 연구 비교 도표 겹침 보정·공개 배포 — 443e85b — 2026-10-06
 
 - 독립 감사 관점에서 390px 모바일 연구 결과 도표를 재점검했다. 비교 조건과 GABA 조건은 나란히 유지하면서 각 카드 안의 결과 문구와 변화 방향 표시를 세로로 분리해, `더 많이 줄었습니다`·`덜 줄었습니다`와 방향 신호가 겹치지 않는다.

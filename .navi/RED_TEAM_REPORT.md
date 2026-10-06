@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 섹션 직접 진입 앵커 가독성 보정·공개 배포 — 2026-10-06 — 075b919
+
+- 공격 관점에서 모바일·태블릿·데스크톱의 `#academic` 직접 진입 시 연구 지도 제목이 고정 헤더나 읽기 진행바에 가려지는지 확인했다. v160의 116px/126px 반응형 앵커 여백 뒤 390·768·1440px 모두 제목이 진행바 아래에서 시작했다.
+- 가로폭 초과와 runtime/console 오류는 확인되지 않았고, 연구 카피·수치·출처·제품 독립 공개 경계는 변경되지 않았다. 새 CRITICAL/MAJOR 결함은 없다.
+- 시각 검증은 Chrome CDP fallback으로 수행했다. 실제 실기기·고령 사용자 이해도·독립 과학·규제 감수는 Chromium 화면 검증으로 대체하지 않으며 RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-ANCHOR-READABILITY-20261007`, `E-CDP-ANCHOR-READABILITY-20261007`, `E-DEPLOY-PIPELINE-ANCHOR-READABILITY-20261007`, `E-LIVE-PUBLIC-ANCHOR-READABILITY-20261007`.
+
 ## 모바일 연구 비교 도표 겹침 보정·공개 배포 — 2026-10-06 — 443e85b
 
 - 공격 관점에서 390px에서 조건 카드의 결과 문구와 방향 신호가 겹쳐 의미가 합쳐지거나 잘리는지 확인했다. 두 조건 레인은 한 줄 비교를 유지하고, 각 레인 내부는 결과 문구 다음에 방향 신호가 오는 세로 구조로 분리되어 겹침이 해소됐다. 768·1440px에서는 기존 학술형 2열 구조를 유지한다.
