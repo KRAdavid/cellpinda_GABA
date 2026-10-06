@@ -1816,6 +1816,16 @@
         "E-LIVE-PUBLIC-PUBLIC-RECHECK-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-174",
+      "statement": "NAVI 문서 재동기화 후 공개 URL이 최종 main SHA까지 갱신되었고, 정적 공개 데이터 경계와 전문가 영상 선택 재생이 동일한 반응형 검증 기준으로 유지된다.",
+      "evidence_refs": [
+        "E-LIVE-PUBLIC-FINAL-RECHECK-20261006",
+        "E-PLAYWRIGHT-VIDEO-FINAL-RECHECK-20261006",
+        "E-DEPLOY-PIPELINE-FINAL-RECHECK-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13071,6 +13081,39 @@
       "captured_at": "2026-10-06T04:02:50Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-PUBLIC-RECHECK",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-173"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-FINAL-RECHECK-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main SHA 449fb2d의 release-verify·Pages 배포·라이브 smoke·release-status가 성공해 NAVI 문서 동기화가 공개 배포까지 이어졌다.",
+      "locator": "main workflow 37412297917; headSha 449fb2d23285f1b971667aea698b80374e14d9e2; release-verify 112103203173 success; worker-readiness 112103534835 success; deploy-pages 112103556553 success; deploy-worker 112103557794 skipped by STATIC_ONLY; smoke-live 112103609856 success; release-status 112103674257 success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37412297917",
+      "captured_at": "2026-10-06T04:09:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-FINAL-RECHECK",
+      "claim_refs": ["C-001", "C-002", "C-174"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-VIDEO-FINAL-RECHECK-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개본에서 전문가 영상 선택 재생이 320·390·768·1440px 모두 유지되고, 선택 영상 iframe·feature 포커스·가로폭·오류 없는 렌더링이 확인됐다.",
+      "locator": "Playwright Chromium fallback; C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-video-audit-20261006.mjs; candidate 449fb2d; 320/390/768/1440px; selected `갱년기와 수면, GABA에 대한 질문`; iframe includes `autoplay=1&mute=1&playsinline=1`; focus `guide-video-feature`; document scrollWidth 320/390/768/1440; pageErrors 0; consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=public-video-final-recheck-20261006#expert-videos",
+      "captured_at": "2026-10-06T04:09:52Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-VIDEO-FINAL-RECHECK",
+      "claim_refs": ["C-003", "C-004", "C-174"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-FINAL-RECHECK-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본이 main SHA 449fb2d를 제공하며 HTTP 200·STATIC·제품 독립 공개 데이터·공유 페이지·teaser HOLD·번들 정합성을 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T04:09:52.966Z; page 200; runtimeMode STATIC; candidateSha 449fb2d23285f1b971667aea698b80374e14d9e2; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37412297917",
+      "captured_at": "2026-10-06T04:09:52Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-FINAL-RECHECK",
+      "claim_refs": ["C-001", "C-002", "C-174"]
     }
   ]
 }

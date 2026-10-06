@@ -1,5 +1,14 @@
 # Audit Report
 
+## 최종 라이브 SHA 정합성 재확인 — 449fb2d — 2026-10-06
+
+- NAVI 문서 동기화 이후 main SHA `449fb2d23285f1b971667aea698b80374e14d9e2`가 실제 GitHub Pages 공개본에 반영됐는지 재확인했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·teaser `HOLD`·내부 운영 snapshot 제외·Smart Store only·750 제거·provenance 일치를 확인했다.
+- Playwright Chromium fallback 320·390·768·1440px에서 전문가 영상 선택 후 선택 영상·`autoplay=1` iframe·feature 포커스·viewport와 동일한 document scrollWidth·page/console errors 0을 재확인했다.
+- 배포 workflow의 release-verify·Pages·라이브 smoke·release-status가 성공했고, static-only 조건으로 Worker 배포만 건너뛰었다. 새 CRITICAL/MAJOR 코드 결함은 없다.
+- 외부 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 여전히 외부 검증이다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-FINAL-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-FINAL-RECHECK-20261006`, `E-LIVE-PUBLIC-FINAL-RECHECK-20261006`.
+
 ## 공개 배포 품질 자동 재점검·NAVI 동기화 — 2515212 — 2026-10-06
 
 - 최신 main 공개본을 기준으로 UI 계약·목표·계획·외부 게이트·공개 데이터·거버넌스·운영 문서·typecheck·127개 테스트·production build를 다시 실행했고 모두 통과했다. 정적 번들은 71개 파일이며 초기 JS 311199, 초기 CSS 95703, 전체 자산 1641335로 성능 예산 안에 있다.

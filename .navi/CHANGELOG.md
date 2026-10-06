@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 최종 라이브 SHA 정합성 재확인·NAVI 동기화 — 449fb2d — 2026-10-06
+
+- NAVI 문서 동기화 이후 Pages가 최종 main SHA `449fb2d`를 제공하는지 다시 확인했다.
+- 공개 validator·배포 workflow·전문가 영상 선택 재생을 320·390·768·1440px에서 재검증했고, 제품 독립 공개 데이터 경계와 teaser `HOLD`를 유지했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-DEPLOY-PIPELINE-FINAL-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-FINAL-RECHECK-20261006`, `E-LIVE-PUBLIC-FINAL-RECHECK-20261006`.
+
 ## 공개 배포 품질 자동 재점검·NAVI 동기화 — 2515212 — 2026-10-06
 
 - 최신 main 공개본에서 목표·계획·외부 게이트·공개 데이터·거버넌스·운영 문서·UI 계약·typecheck·127개 테스트·production build를 자동 재실행했다.

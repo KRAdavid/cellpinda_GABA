@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 최종 라이브 SHA 정합성 재확인 — 2026-10-06 — 449fb2d
+
+- main SHA `449fb2d`가 Pages에 반영된 뒤 공개 validator·배포 workflow·전문가 영상 선택 재생을 다시 대조했다. 320·390·768·1440px 모두 가로 넘침과 런타임 오류가 없고, 선택 후 `autoplay=1` iframe과 feature 포커스가 확인됐다.
+- teaser `HOLD`, 내부 운영 snapshot 제외, Smart Store only, 750 제거, provenance 일치 상태가 유지되어 공개 안내서의 제품 독립 경계가 유지됐다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. 브라우저 fallback·화면폭 검증은 실기기와 실제 고령 사용자 테스트를 대신하지 않으므로 RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-FINAL-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-FINAL-RECHECK-20261006`, `E-LIVE-PUBLIC-FINAL-RECHECK-20261006`.
+
 ## 공개 배포 품질 자동 재점검 — 2026-10-06 — 2515212
 
 - 공격 관점에서 최신 main 공개본의 배포 SHA·정적 번들·연구 데이터 경계·전문가 영상 선택 재생을 다시 대조했다. 320·390·768·1440px 모두 document scrollWidth가 viewport를 넘지 않았고, 선택 뒤 `guide-video-feature` 포커스와 `autoplay=1` iframe이 확인되며 page/console errors는 0이었다.

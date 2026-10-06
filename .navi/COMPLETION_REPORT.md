@@ -1,5 +1,15 @@
 # Completion Report
 
+## Final Live Recheck — 449fb2d — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 최종 공개 validator가 candidate `449fb2d23285f1b971667aea698b80374e14d9e2`·HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-002/AC-003/AC-004 연구·도표·반응형 흐름: PASS. 기존 연구·출처·제품 독립 경계와 화면폭을 유지했고, 전문가 영상 선택 재생은 320·390·768·1440px에서 iframe·포커스·가로폭·오류 없는 렌더링을 통과했다.
+- AC-005 배포 게이트: PASS. main workflow의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 STATIC_ONLY 조건에 따라 배포하지 않았다.
+- AC-006/AC-007 경계·감사: PASS_WITH_CONDITIONS. teaser `HOLD`와 내부 운영 데이터 제외를 유지하며 외부 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-DEPLOY-PIPELINE-FINAL-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-FINAL-RECHECK-20261006`, `E-LIVE-PUBLIC-FINAL-RECHECK-20261006`.
+
 ## Current Release Recheck — 2515212 — 2026-10-06
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `2515212345f30236f4f8603de8f27b7fbd932e5d`·71개 bundle hash·12개 claim·6개 master record·6개 share page를 확인했다.

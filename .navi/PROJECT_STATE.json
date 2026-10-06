@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T04:02:50Z",
+  "updated_at": "2026-10-06T04:09:52Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5285,6 +5285,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T04:02:50Z"
+    },
+    {
+      "id": "H-252",
+      "event": "NAVI 문서 재동기화 이후 main SHA `449fb2d23285f1b971667aea698b80374e14d9e2`의 Pages 배포·라이브 smoke·release-status를 확인했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·internal operations snapshot 제외·Smart Store only·750 제거·provenance 일치를 확인했고, Playwright Chromium fallback은 320·390·768·1440px 전문가 영상 선택 재생·autoplay iframe·feature 포커스·가로폭·page/console errors 0을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-174와 세 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T04:09:52Z"
     }
   ]
 }
