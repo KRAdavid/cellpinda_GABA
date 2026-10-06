@@ -2352,6 +2352,18 @@
         "E-LIVE-PUBLIC-RECOVERY-BRIDGE-RHYTHM-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-219",
+      "statement": "전문가 영상 주제 필터의 화면상 카운트가 숫자만이 아니라 `9편`·`4편`처럼 영상 단위를 함께 표시해 모바일·데스크톱에서 주제별 자료량을 즉시 이해할 수 있다. 390px에서 필터 레일 가로폭과 선택 후 즉시 재생 흐름이 유지되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-VIDEO-FILTER-COUNT-20261007",
+        "E-UI-CONTRACT-VIDEO-FILTER-COUNT-20261007",
+        "E-CDP-VIDEO-FILTER-COUNT-20261007",
+        "E-DEPLOY-PIPELINE-VIDEO-FILTER-COUNT-20261007",
+        "E-LIVE-PUBLIC-VIDEO-FILTER-COUNT-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -15951,6 +15963,59 @@
       "captured_at": "2026-10-06T20:13:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-RECOVERY-BRIDGE-RHYTHM",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-218"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-VIDEO-FILTER-COUNT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 필터 카운트 단위 개선이 UI 계약·타입체크·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+      "locator": "local main merge b028897 with code commit c39962d; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test -- --runInBand 127 passed; pnpm run build; validate:performance status ok; initial JS 311199, initial CSS 95703, total assets 1649381, largest 311199",
+      "captured_at": "2026-10-06T20:27:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-VIDEO-FILTER-COUNT",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-005", "C-219"]
+    },
+    {
+      "id": "E-UI-CONTRACT-VIDEO-FILTER-COUNT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 전문가 영상 필터의 접근성 이름과 화면상 `편` 단위 표시를 함께 유지하도록 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; guide-video-filter visible count contract `<span aria-hidden=\"true\">{count}편</span>`; accessible name remains `${count}개 영상`; validate:ui-contract status ok",
+      "captured_at": "2026-10-06T20:27:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-VIDEO-FILTER-COUNT",
+      "claim_refs": ["C-004", "C-005", "C-219"]
+    },
+    {
+      "id": "E-CDP-VIDEO-FILTER-COUNT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 Chrome CDP fallback에서 전문가 영상 필터의 영상 단위 카운트와 선택 후 즉시 재생이 모바일·데스크톱에서 안정적이다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&cachebust=b028897#expert-videos; 390px filters `전체9편`, `수면4편`, `연구 읽기1편`, `GABA란1편`, `자율신경1편`, `수용체1편`, `수면·기분1편`, scrollWidth 390; 1440px same visible count units, scrollWidth 1425; selecting a different card preserves feature focus and starts iframe `https://www.youtube.com/embed/Cnk0PGn9YBM?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`; errors []",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=b028897#expert-videos",
+      "captured_at": "2026-10-06T20:27:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-VIDEO-FILTER-COUNT",
+      "claim_refs": ["C-003", "C-004", "C-219"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-VIDEO-FILTER-COUNT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #524와 main 공개 배포 파이프라인이 전문가 영상 필터 카운트 개선의 최종 커밋에서 모두 성공했다.",
+      "locator": "PR #524 https://github.com/KRAdavid/gaba_info/pull/524; release-verify 37525955526 job 112482893766 success; site-quality-verify 37525954798 job 112482891345 success; merge b02889766d5742cb3c3d7be6cbe4eba6b8fbc5c8; main workflow 37526178585; release-verify 112483639746; worker-readiness 112484229642; deploy-pages 112484276330; deploy-worker skipped static 112484277018; smoke-live 112484375333; release-status 112484475137; all required jobs success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37526178585",
+      "captured_at": "2026-10-06T20:26:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-VIDEO-FILTER-COUNT",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-219"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-VIDEO-FILTER-COUNT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages에서 전문가 영상 필터가 `편` 단위 카운트를 표시하고 선택 영상 즉시 재생·제품 독립 공개 경계를 유지한다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&cachebust=b028897#expert-videos; HTTP 200 via main workflow 37526178585 deploy-pages and smoke-live; Chrome CDP fallback 390·1440px shows visible `전체9편`/`수면4편` labels, document width remains stable, selected card moves focus to feature and loads the YouTube iframe; product-independent public boundary matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&cachebust=b028897#expert-videos",
+      "captured_at": "2026-10-06T20:27:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-VIDEO-FILTER-COUNT",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-219"]
     }
   ]
 }

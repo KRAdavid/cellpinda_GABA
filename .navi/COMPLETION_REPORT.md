@@ -1,5 +1,15 @@
 # Completion Report
 
+## Current Release Recheck — b028897 — 2026-10-07
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37526178585`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.
+- AC-003/AC-004 전문가 영상 필터·반응형: PASS. 공개 390px·1440px에서 `전체 9편`·`수면 4편` 등 영상 단위 카운트가 보이고, 필터 선택 후 feature focus와 YouTube iframe 즉시 재생·가로폭 안정성을 확인했다.
+- AC-005 배포 게이트: PASS. UI contract·typecheck·127개 테스트·production build·성능 예산, PR #524 필수 검사와 main 공개 배포 파이프라인이 성공했다. 초기 JS 311,199 bytes, CSS 95,703 bytes, 총 자산 1,649,381 bytes가 예산 안에 있다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 연구 카피·수치·출처·공개 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FILTER-COUNT-20261007`, `E-UI-CONTRACT-VIDEO-FILTER-COUNT-20261007`, `E-CDP-VIDEO-FILTER-COUNT-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FILTER-COUNT-20261007`, `E-LIVE-PUBLIC-VIDEO-FILTER-COUNT-20261007`.
+
 ## Current Release Recheck — 9731c29 — 2026-10-07
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. main workflow `37523587127`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200으로 확인됐다.

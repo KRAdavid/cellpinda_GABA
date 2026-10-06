@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T20:13:00Z",
+  "updated_at": "2026-10-06T20:27:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5612,6 +5612,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T20:13:00Z"
+    },
+    {
+      "id": "H-297",
+      "event": "전문가 영상 주제 필터의 숫자 카운트만으로는 영상 자료량을 즉시 이해하기 어려운 잔여 정보 전달 리스크를 확인했다. 화면상 카운트를 `9편`·`4편`처럼 영상 단위와 함께 표시하고 접근성 이름의 `개 영상` 의미는 유지했다. 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #524, main merge `b028897`, main workflow `37526178585`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 390·1440px에서 `전체9편`·`수면4편` 표시·가로폭·필터 선택 후 YouTube iframe 즉시 재생·오류 없음을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-219와 다섯 증거를 등록한다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T20:27:00Z"
     }
   ]
 }

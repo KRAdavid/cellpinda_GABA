@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 필터 카운트 가독성 보정·공개 배포 — b028897 — 2026-10-07
+
+- 전문가 영상 필터의 숫자 카운트를 `9편`·`4편`처럼 단위와 함께 표시해 모바일·데스크톱에서 주제별 자료량을 즉시 읽도록 고도화했다. 접근성 이름·선택 영상 즉시 재생·연구 내용은 유지했다.
+- UI contract·typecheck·127개 테스트·production build·성능 예산, PR #524, main workflow `37526178585`, Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 390·1440px 검증을 통과했다. 초기 JS 311,199 bytes, CSS 95,703 bytes, 총 자산 1,649,381 bytes다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FILTER-COUNT-20261007`, `E-UI-CONTRACT-VIDEO-FILTER-COUNT-20261007`, `E-CDP-VIDEO-FILTER-COUNT-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FILTER-COUNT-20261007`, `E-LIVE-PUBLIC-VIDEO-FILTER-COUNT-20261007`.
+
 ## 모바일 회복 브리지 진입 리듬 보정·공개 배포 — 9731c29 — 2026-10-07
 
 - 모바일 회복 브리지의 중복 상단 여백을 제거하고 공통 58px 진입 규칙으로 통합해 `GABA를 모르면 노화는 가속됩니다.` 제목이 다른 장과 같은 리듬으로 시작하도록 고도화했다. 14단계 흐름·회복 일러스트·연구 내용은 유지했다.

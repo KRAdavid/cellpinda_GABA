@@ -1,5 +1,14 @@
 # Audit Report
 
+## 전문가 영상 필터 카운트 가독성 보정·공개 배포 — b028897 — 2026-10-07
+
+- 독립 감사 관점에서 전문가 영상 필터가 숫자만 보여 모바일·데스크톱에서 자료량의 단위를 즉시 파악하기 어려운 잔여 가독성 리스크를 확인했다. 화면상 카운트를 `전체 9편`·`수면 4편`처럼 영상 단위와 함께 표시하고, 접근성 이름의 `개 영상` 의미는 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했고, 초기 JS 311,199 bytes·CSS 95,703 bytes·총 자산 1,649,381 bytes·최대 자산 311,199 bytes가 예산 안에 있다. PR #524와 main workflow `37526178585`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다.
+- 공개 Chrome CDP fallback에서 390px·1440px의 `편` 단위 카운트, 필터 선택 후 feature focus와 YouTube iframe 즉시 재생, 가로폭 안정성·runtime/console errors 0을 확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. Chrome fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 게이트를 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FILTER-COUNT-20261007`, `E-UI-CONTRACT-VIDEO-FILTER-COUNT-20261007`, `E-CDP-VIDEO-FILTER-COUNT-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FILTER-COUNT-20261007`, `E-LIVE-PUBLIC-VIDEO-FILTER-COUNT-20261007`.
+
 ## 모바일 회복 브리지 진입 리듬 보정·공개 배포 — 9731c29 — 2026-10-07
 
 - 독립 감사 관점에서 모바일 회복 브리지의 제목 앞 공백이 다른 장보다 커서 읽기 흐름이 끊기는 잔여 가독성 리스크를 확인했다. 모바일 장 진입 여백을 공통 58px 규칙으로 통합해 `GABA를 모르면 노화는 가속됩니다.` 제목이 연구·전문가 장과 같은 리듬으로 시작하도록 보정했다.

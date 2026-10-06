@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 전문가 영상 필터 카운트 가독성 보정·공개 배포 — 2026-10-07 — b028897
+
+- 공격 관점에서 숫자만 표시된 전문가 영상 필터가 영상 자료량을 오해하게 하거나, 390px에서 카운트 단위가 잘리고 필터 선택 후 재생 흐름이 끊기는 실패 모드를 점검했다. `전체 9편`·`수면 4편` 등 단위가 포함된 레이블과 선택 영상 feature focus·iframe 재생을 확인했다.
+- 공개 390px·1440px에서 document width가 안정적이고 필터 레일 overflow·runtime/console 오류가 없었다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며 새 CRITICAL/MAJOR 결함은 없다.
+- Chrome fallback이 Safari/iOS/Android 실기기와 실제 고령 사용자 이해도·독립 과학·규제 감수를 대신하지 않으므로 RT-001·RT-002·RT-003은 계속 OPEN이다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-VIDEO-FILTER-COUNT-20261007`, `E-CDP-VIDEO-FILTER-COUNT-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FILTER-COUNT-20261007`, `E-LIVE-PUBLIC-VIDEO-FILTER-COUNT-20261007`.
+
 ## 모바일 회복 브리지 진입 리듬 보정·공개 배포 — 2026-10-07 — 9731c29
 
 - 공격 관점에서 회복 브리지의 상단 공백이 다른 장보다 커서 제목이 늦게 나타나고, 모바일에서 14단계 흐름·일러스트가 화면 밖으로 밀리는 실패 모드를 점검했다. 공통 모바일 여백을 58px로 통합한 뒤 공개 390px에서 제목 top 270, 문서 폭 390, 14단계와 일러스트가 이어지는 구성을 확인했다.
