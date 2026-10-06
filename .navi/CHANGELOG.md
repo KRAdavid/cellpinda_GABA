@@ -1631,3 +1631,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 수치·결과·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006`, `E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006`, `E-CDP-NARROW-RESEARCH-LABEL-20261006`, `E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006`, `E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006`.
+
+## 모바일 연구 비교 도표 결과 라벨 간결화·공개 배포 — 449d65a — 2026-10-06
+
+- 반복되던 `GABA를 섭취한 그룹의 변화` 라벨을 `GABA 그룹`으로 줄여 `뇌파 변화`·`활력 점수`와 `비교 조건`을 한눈에 대조하도록 고도화했다. `덜 줄었습니다`, `더 많이 줄었습니다`, 읽는 법, 연구 수치·출처·접근성 설명은 유지했다.
+- PR #459, main workflow `37442415197`, Pages·라이브 smoke·release-status와 공개 validator candidate `449d65a`가 성공했다. Chrome CDP fallback 390x844 deep link에서 가로 넘침·page/console errors 0과 실제 공개 화면을 확인했다.
+- 상단 카피·연구 내용·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-COMPARISON-VERDICT-20261006`, `E-UI-CONTRACT-COMPARISON-VERDICT-20261006`, `E-CDP-COMPARISON-VERDICT-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006`, `E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006`.
