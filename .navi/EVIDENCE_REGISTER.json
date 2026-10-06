@@ -2148,6 +2148,18 @@
         "E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-202",
+      "statement": "연구 결과 비교 도표의 모바일 스캔성을 높이기 위해 351–700px 구간에서 측정 항목·비교 조건·GABA 결과를 한 단위로 압축하고, GABA 결과 요약 띠를 강조한다. 연구 문구·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-COMPARISON-SCAN-20261006",
+        "E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006",
+        "E-CDP-RESEARCH-COMPARISON-SCAN-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14846,6 +14858,59 @@
       "captured_at": "2026-10-06T12:42:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-OPENING-RHYTHM-VISUAL",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-201"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-COMPARISON-SCAN-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 비교 도표 컴팩트 스캔 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "code commit d9f8f37; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1809 modules; static routes 11; release files 72; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1648578 <= 1650000; largest 311199 <= 380000; applications editorial asset 30073 bytes",
+      "captured_at": "2026-10-06T13:00:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-RESEARCH-COMPARISON-SCAN",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-202"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "351–700px 모바일 비교 도표가 측정 항목·비교 조건·GABA 결과를 한 단위로 유지하고 GABA 결과 요약 띠와 조건별 컴팩트 레인을 표시하도록 UI 계약에 등록되었다.",
+      "locator": "src/components/PublicGabaGuide.css v151 mobile comparison scan; .guide-outcome-comparison-row; .guide-outcome-comparison-verdict; .guide-outcome-lane grid-template-areas top signal; scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T13:00:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-COMPARISON-SCAN",
+      "claim_refs": ["C-001", "C-003", "C-202"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-COMPARISON-SCAN-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback으로 최신 공개 연구 결과 카드를 390px·1440px에서 확인했으며 모바일 컴팩트 비교 레인, 데스크톱 비교 도표, 가로폭과 브라우저 오류 상태가 정상이다.",
+      "locator": "Chrome CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&qa=research-audit-20261006; cache-disabled reload with localStorage reset; #research-cognition; viewports 390x844 and 1440x900; cards 5; chartHeight 661.265625px at 390 and 482.53125px at 1440; pageWidth 390 and 1425; temporary QA screenshots outside the repository inspected with view_image; runtimeErrors 0; consoleErrors 0; httpFailures 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=research-audit-20261006",
+      "captured_at": "2026-10-06T13:02:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-RESEARCH-COMPARISON-SCAN",
+      "claim_refs": ["C-003", "C-004", "C-202"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 비교 도표 보정 PR #482가 필수 검사를 통과해 main merge commit e2ef8f0으로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #482; code commit d9f8f37; PR release-verify run 37467193959 job 112281096917 successful; site-quality-verify run 37467194029 job 112281097210 successful; main merge commit e2ef8f06b415c7747d991ab1575be0721c456b1e; workflow_dispatch run 37467358386; release-verify 112281899060; worker-readiness 112282528740; deploy-pages 112282570649; deploy-worker skipped by STATIC_ONLY; smoke-live 112283166581; release-status 112283316722; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37467358386",
+      "captured_at": "2026-10-06T13:01:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-COMPARISON-SCAN",
+      "claim_refs": ["C-001", "C-002", "C-202"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 모바일 연구 비교 도표 컴팩트 스캔 보정이 반영되었고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T13:01:33.638Z; page 200; runtimeMode STATIC; candidateSha e2ef8f06b415c7747d991ab1575be0721c456b1e; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·1440px screenshots show the compact comparison lanes and desktop comparison chart, page/console/http errors 0; product-independent copy and boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=research-audit-20261006",
+      "captured_at": "2026-10-06T13:03:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-COMPARISON-SCAN",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-202"]
     }
   ]
 }

@@ -9,6 +9,16 @@
 
 증적: `E-LOCAL-BUILD-OPENING-RHYTHM-VISUAL-20261006`, `E-UI-CONTRACT-OPENING-RHYTHM-VISUAL-20261006`, `E-CDP-OPENING-RHYTHM-VISUAL-20261006`, `E-DEPLOY-PIPELINE-OPENING-RHYTHM-VISUAL-20261006`, `E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006`.
 
+## Current Release Recheck — e2ef8f0 — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `e2ef8f06b415c7747d991ab1575be0721c456b1e`·72개 bundle hash·12개 공개 claim·6개 master record·6개 share page·provenance `matched`를 확인했다.
+- AC-003/AC-004 연구 비교 도표 가독성·반응형: PASS. 공개 Chrome CDP fallback 390x844에서 GABA 결과 요약 띠와 조건별 컴팩트 레인이 표시되고, 1440x900에서는 기존 2열 학술 도표가 유지된다. 콘텐츠 폭은 각각 390·1425px이며 runtime/console/http errors는 0이다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #482의 release-verify·site-quality-verify, main workflow `37467358386`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- AC-006 연구 내용·출처·제품 독립 경계: PASS. 이번 변경은 도표의 모바일 레이아웃과 응용 사례 이미지 압축만 보정했으며 연구 내용·수치·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀과 잔여 게이트: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 게이트로 유지한다. Final Status는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-SCAN-20261006`, `E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006`, `E-CDP-RESEARCH-COMPARISON-SCAN-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006`.
+
 ## 연구 지도 전용 편집 비주얼·공개 배포 — 2026-10-06 — 813fd3a
 
 - 독립 감사 관점에서 연구 지도 섹션의 이미지 서사가 첫 화면과 반복되지 않고, `하나의 신호가 넓은 연구 지도가 되었습니다`라는 전환을 모바일·데스크톱에서 즉시 읽을 수 있는지 확인했다. 전용 물 흐름 이미지, 좌측 텍스트 대비, 5개 학술 카드가 안정적으로 연결된다.

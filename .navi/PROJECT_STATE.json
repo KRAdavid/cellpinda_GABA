@@ -5481,6 +5481,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T12:42:00Z"
+    },
+    {
+      "id": "H-280",
+      "event": "모바일 연구 비교 도표에서 지표별 조건 카드와 GABA 결과 문구가 반복되어 한눈에 결론을 잡기 어려운 잔여 가독성 리스크를 확인했다. 351–700px에서 GABA 결과 요약 띠와 비교 조건·GABA 조건 컴팩트 레인을 적용하고, 응용 사례 이미지를 30,073 bytes로 재압축해 정적 자산 총량 1,648,578을 유지했다. 로컬 UI contract·typecheck·127개 테스트·production build, PR #482, main merge e2ef8f0, workflow 37467358386, 공개 validator candidate e2ef8f0, 공개 Chrome CDP 390·1440px의 runtime/console/http errors 0을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-202와 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T13:03:00Z"
     }
   ]
 }

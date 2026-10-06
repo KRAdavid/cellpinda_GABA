@@ -9,6 +9,15 @@
 
 증적: `E-LOCAL-BUILD-OPENING-RHYTHM-VISUAL-20261006`, `E-UI-CONTRACT-OPENING-RHYTHM-VISUAL-20261006`, `E-CDP-OPENING-RHYTHM-VISUAL-20261006`, `E-DEPLOY-PIPELINE-OPENING-RHYTHM-VISUAL-20261006`, `E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006`.
 
+## 모바일 연구 비교 도표 컴팩트 스캔·공개 배포 — e2ef8f0 — 2026-10-06
+
+- 연구 결과 도표의 모바일 반복을 줄이고, `측정 항목 → 비교 조건 → GABA 결과`를 한 단위로 읽도록 351–700px 컴팩트 레인을 적용했다. GABA 결과는 별도 요약 띠로 먼저 보이며, 데스크톱 학술형 도표는 유지된다.
+- 응용 사례 이미지를 재압축해 총 공개 자산 1,648,578 bytes로 성능 예산 안에 유지했다.
+- PR #482, main workflow `37467358386`, Pages·라이브 smoke·release-status와 공개 validator candidate `e2ef8f0`·HTTP 200·Chrome CDP fallback 390·1440px 검증이 성공했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-SCAN-20261006`, `E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006`, `E-CDP-RESEARCH-COMPARISON-SCAN-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006`.
+
 ## 연구 지도 전용 편집 비주얼·공개 배포 — 813fd3a — 2026-10-06
 
 - 연구 지도 섹션에 첫 화면과 구분되는 잔잔한 물의 흐름 기반 전용 자연 편집 비주얼을 적용해 `하나의 신호 → 넓은 학술 연구 지도` 전환을 한 화면에서 이해하도록 고도화했다. 모바일 350×210px, 데스크톱 1180×270px에서 텍스트 대비와 이미지 크롭을 확인했다.

@@ -2194,3 +2194,15 @@ Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI `USER_DECISION`; 완료 
 - Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `E-LOCAL-BUILD-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-UI-CONTRACT-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-CDP-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CARD-SEQUENCE-20261006`.
+
+## Current Release Recheck — e2ef8f0 — 2026-10-06
+
+- AC-001: PASS — live validator HTTP 200, candidate `e2ef8f06b415c7747d991ab1575be0721c456b1e`, 72 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser `HOLD`, internal operations snapshot excluded, Smart Store only, provenance matched.
+- AC-003/AC-004: PASS — 390px 연구 결과 카드에서 GABA 결과 요약 띠와 두 조건 레인이 한 번에 보이고 1440px에서는 기존 비교 도표가 유지된다. 두 공개 화면의 body width는 viewport와 일치하며 오류 0이다.
+- AC-005: PASS — UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #482, main workflow `37467358386`의 필수 배포 검사가 성공했다.
+- AC-006: PASS — 이번 변경은 모바일 도표 배치와 이미지 압축만 보정했으며 연구 내용·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007: PASS_WITH_CONDITIONS — 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 외부 게이트로 남아 있다.
+
+Final Status: `NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-SCAN-20261006`, `E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006`, `E-CDP-RESEARCH-COMPARISON-SCAN-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006`.
