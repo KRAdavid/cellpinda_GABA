@@ -2355,6 +2355,15 @@
 - PR #445, main workflow `37426950620`, 공개 validator와 Chrome CDP fallback 390·768·1024px 검증이 성공했고 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
 - RT-001 브라우저 범위, RT-002 과학·규제 감수, RT-003 실제 고령 사용자 이해도는 계속 OPEN이다. 결과는 `PASS_WITH_CONDITIONS`를 유지한다.
 
+## 전문가 영상 중간 모바일 프레임 — 7d81419 — 2026-10-06
+
+- Red-team finding: 351–700px에서 세로형 전문가 영상 플레이어와 선택 영상의 제목·출처·공유 동작이 위아래로 분리되어, 무엇을 보고 있는지와 재생 대상을 한 번 더 찾아야 하는 잔여 스캔 리스크가 있었다. 플레이어와 선택 정보를 좌우 한 단위로 배치하고 350px 이하에서는 기존 세로 흐름을 유지했다.
+- Recheck: 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산과 공개 Chrome CDP fallback 390·350·1440px에서 중간 폭 좌우 배치·초소형 세로 흐름·데스크톱 갤러리, 두 번째 영상 iframe 자동재생, page/console/http errors 0을 확인했다. 영상 데이터·제목·출처·제품 독립 공개 경계는 변경하지 않았다.
+- PR #484와 main workflow `37471094112`, 공개 validator candidate `7d8141987b580e9987012f0fe628527d96ac0975`·HTTP 200·72개 bundle hash·provenance matched가 성공했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. teaser preview는 `HOLD`이며 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006`.
+
 ## Current Release Recheck — 32612fe — 2026-10-06
 
 - AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator는 HTTP 200·STATIC·candidate `32612fefb6c022ef80ef32609abf08b7ad43254d`와 71개 bundle hash를 확인했다.

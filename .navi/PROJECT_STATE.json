@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T12:42:00Z",
+  "updated_at": "2026-10-06T13:31:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5488,6 +5488,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T13:03:00Z"
+    },
+    {
+      "id": "H-281",
+      "event": "351–700px 모바일 전문가 영상 카드에서 제목·출처·공유 동작을 먼저 읽은 뒤 플레이어를 찾아야 하는 잔여 스캔 리스크를 확인했다. v152에서 세로형 플레이어와 선택 영상 정보를 좌우 한 단위로 배치하고 350px 이하에서는 기존 세로 흐름을 유지했다. 로컬 UI contract·typecheck·127개 테스트·production build, PR #484, main merge 7d81419, workflow 37471094112, 공개 validator candidate 7d81419, 공개 Chrome CDP 390·350·1440px에서 플레이어·선택 정보 정합·두 번째 영상 iframe 자동재생·가로폭·runtime/console/http errors 0을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-203과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T13:31:00Z"
     }
   ]
 }

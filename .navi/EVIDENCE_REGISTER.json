@@ -2160,6 +2160,18 @@
         "E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-203",
+      "statement": "전문가 영상 카드의 351–700px 모바일 스캔성을 높이기 위해 세로형 플레이어와 선택 영상의 제목·출처·공유 동작을 한 화면에 배치하고, 350px 이하에서는 기존 세로 흐름을 유지한다. 영상 데이터·출처·자동재생 동작·제품 독립 공개 경계는 변경하지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-VIDEO-MID-MOBILE-20261006",
+        "E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006",
+        "E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006",
+        "E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006",
+        "E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -14911,6 +14923,59 @@
       "captured_at": "2026-10-06T13:03:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-COMPARISON-SCAN",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-202"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-VIDEO-MID-MOBILE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "351–700px 전문가 영상 카드 반응형 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "code commit 8c17494; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1809 modules; static routes 11; release files 72; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1649302 <= 1650000; largest 311199 <= 380000",
+      "captured_at": "2026-10-06T13:20:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-EXPERT-VIDEO-MID-MOBILE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-203"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "351–700px 모바일 전문가 영상 카드가 플레이어와 선택 영상 정보를 한 단위로 배치하고 350px 이하 기존 세로 흐름을 유지하도록 UI 계약에 등록됐다.",
+      "locator": "src/components/PublicGabaGuide.css v152 mid-mobile expert video frame; .guide-video-feature grid-template-columns minmax(126px,.44fr) minmax(0,.56fr); .guide-video-feature-media grid-column:1; .guide-video-feature-copy grid-column:2; scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract status ok",
+      "captured_at": "2026-10-06T13:20:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-EXPERT-VIDEO-MID-MOBILE",
+      "claim_refs": ["C-001", "C-003", "C-203"]
+    },
+    {
+      "id": "E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser/IAB 도구를 사용할 수 없어 Chrome CDP fallback으로 로컬 production preview와 공개본의 전문가 영상 카드를 390px·350px·1440px에서 확인했다. 390px에서 플레이어와 선택 정보가 나란히 보이고 350px은 세로 흐름, 1440px은 기존 좌우 갤러리를 유지하며 두 번째 영상 선택 시 자동재생 iframe과 URL 상태가 갱신됐다.",
+      "locator": "Chrome CDP fallback; local production preview and public https://kradavid.github.io/gaba_info/?view=guide&qa=expert-video-mid-mobile-20261006#expert-videos; viewports 390x844, 350x800, 1440x900; bodyWidth 390/350/1425; sectionHeight 2501.609375/2739.640625/1484.65625; runtimeErrors 0; consoleErrors 0; httpFailures 0; second-card selection selected=true; URL query video=Cnk0PGn9YBM; iframe autoplay=1 mute=1 playsinline=1; screenshots outside repository inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=expert-video-mid-mobile-20261006#expert-videos",
+      "captured_at": "2026-10-06T13:31:00Z",
+      "reviewer_id": "NAVI-CHROME-CDP-QA-20261006-EXPERT-VIDEO-MID-MOBILE",
+      "claim_refs": ["C-003", "C-004", "C-203"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 모바일 프레임 보정 PR #484가 필수 검사를 통과해 main merge commit 7d81419로 병합됐고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #484; remote code commit 408fd8d6c4bed9f1cbfd1dc61ad20229175ca5d9; PR release-verify run 37470880749 job 112293725824 successful; site-quality-verify run 37470880630 job 112293724449 successful; main merge commit 7d8141987b580e9987012f0fe628527d96ac0975; workflow 37471094112; release-verify 112294471746; worker-readiness 112295088111; deploy-pages 112295142210; deploy-worker skipped by STATIC_ONLY; smoke-live 112295258343; release-status 112295358390; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37471094112",
+      "captured_at": "2026-10-06T13:28:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-EXPERT-VIDEO-MID-MOBILE",
+      "claim_refs": ["C-001", "C-002", "C-203"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에 351–700px 전문가 영상 카드 보정이 반영됐고 HTTP 200·공개 데이터 정합성·제품 독립 경계·정적 번들·라이브 provenance 일치가 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T13:29:45.857Z; page 200; runtimeMode STATIC; candidateSha 7d8141987b580e9987012f0fe628527d96ac0975; bundleHashes 72; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Chrome CDP 390px·350px·1440px screenshots show side-by-side mid-mobile player, narrow-phone stack, desktop gallery; public second-card selection updated iframe autoplay URL; page/console/http errors 0; video copy, sources, data and product boundary unchanged",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=expert-video-mid-mobile-20261006#expert-videos",
+      "captured_at": "2026-10-06T13:31:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-EXPERT-VIDEO-MID-MOBILE",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-203"]
     }
   ]
 }
