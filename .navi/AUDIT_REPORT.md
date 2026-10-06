@@ -2290,3 +2290,13 @@
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-CHART-NARROW-20261008`, `E-UI-CONTRACT-CHART-NARROW-20261008`, `E-PLAYWRIGHT-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-CHART-NARROW-20261008`.
+
+## Current Release Recheck — e80cd52b — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `e80cd52b28efc20c245eacd28c099bf3bd7e99b1`·71개 bundle hash를 확인했다.
+- AC-003/AC-004 초소형 모바일 수면 연구 도표의 전체 폭과 문장 흐름: PASS. 280px에서 번호가 붙은 본문 열 안에 갇히던 도표를 연구 카드 전체 폭으로 펼쳤고, 비교 안내 제목을 줄바꿈했다. 280·320·390·1440px에서 도표 clientWidth와 scrollWidth가 일치하며 document scrollWidth가 viewport와 같고 page/console errors 0이다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. PR #438과 main workflow `37420961105`의 필수 검증·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 과학 정보 경계와 연구 수치·출처: PASS. 이번 변경은 수면 도표의 반응형 배치와 줄바꿈만 보정했으며 연구 수치·해석·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008`, `E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008`, `E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008`.

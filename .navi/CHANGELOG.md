@@ -1551,3 +1551,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #436과 main workflow `37419534993`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-CHART-NARROW-20261008`, `E-UI-CONTRACT-CHART-NARROW-20261008`, `E-PLAYWRIGHT-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-CHART-NARROW-20261008`.
+
+## 초소형 모바일 수면 연구 도표 전체 폭 보정·공개 배포 — e80cd52b — 2026-10-06
+
+- 280px에서 번호가 붙은 본문 열에 갇혀 일부가 잘릴 수 있던 수면 연구 도표를 연구 카드 전체 폭으로 펼치고, 비교 안내 제목을 줄바꿈하도록 보정했다.
+- 연구 수치·결과·해석·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 280·320·390·1440px 렌더링 검증을 통과했다.
+- PR #438과 main workflow `37420961105`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008`, `E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008`, `E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008`.

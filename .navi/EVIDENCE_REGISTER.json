@@ -1898,6 +1898,18 @@
         "E-LIVE-PUBLIC-CHART-NARROW-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-181",
+      "statement": "280px 초소형 모바일에서도 수면 연구 비교 도표가 번호가 붙은 본문 열에 갇히지 않고 연구 카드 전체 폭에서 읽히며, 비교 안내와 조건 카드가 잘리지 않는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008",
+        "E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008",
+        "E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008",
+        "E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008",
+        "E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13504,6 +13516,59 @@
       "captured_at": "2026-10-06T05:39:11Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-CHART-NARROW",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-180"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면 연구 도표의 초소형 모바일 전체 폭 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 6eb6390ccca1ca5820cab25129ad07d71a6267b8; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1642240 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T05:56:17Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-SLEEP-CHART-NARROW",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-181"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 350px 이하 수면 연구 카드에서 임베디드 도표를 전체 카드 폭으로 펼치고 비교 안내의 긴 제목을 줄바꿈하도록 고정해 초소형 화면 clipping 회귀를 막는다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.tsx guide-sleep-chart-step; PublicGabaGuide.css v144 narrow-phone sleep chart; `.guide-sleep-chart-step .guide-outcome-chart{width:calc(100% + 43px)}`; `.guide-sleep-chart-step .guide-outcome-comparison-guide-copy strong{white-space:normal}`; status ok",
+      "captured_at": "2026-10-06T05:56:17Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261008-SLEEP-CHART-NARROW",
+      "claim_refs": ["C-001", "C-181"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬·공개 Chromium fallback에서 280·320·390·1440px 수면 비교 도표가 연구 카드 폭에 맞고 모든 폭에서 가로 넘침과 페이지·콘솔 오류가 없다.",
+      "locator": "Playwright Chromium fallback; local/public 280/320/390/1440px; sleep chart clientWidth/scrollWidth respectively 200/200, 240/240, 267/267, 592/592; document scrollWidth equals viewport at every width; pageErrors 0; consoleErrors 0; public 280px chart screenshot inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&release=e80cd52b28efc20c245eacd28c099bf3bd7e99b1#research-cognition",
+      "captured_at": "2026-10-06T05:56:17Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261008-SLEEP-CHART-NARROW",
+      "claim_refs": ["C-003", "C-004", "C-181"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 수면 도표 보정 PR #438이 필수 검사를 통과해 main merge commit e80cd52b로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #438; code commit 6eb6390ccca1ca5820cab25129ad07d71a6267b8; PR release workflow 37420825250 success; PR site-quality workflow 37420825107 success; main merge commit e80cd52b28efc20c245eacd28c099bf3bd7e99b1; main workflow 37420961105; release-verify 112129978100; worker-readiness 112130295769; deploy-pages 112130321449; deploy-worker 112130322622 skipped by STATIC_ONLY; smoke-live 112130373833; release-status 112130424072; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37420961105",
+      "captured_at": "2026-10-06T05:56:17Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261008-SLEEP-CHART-NARROW",
+      "claim_refs": ["C-001", "C-002", "C-181"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 수면 연구 비교 도표의 전체 폭 보정이 280·320·390·1440px에 반영되고 제품 독립 공개 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T05:56:17.185Z; page 200; runtimeMode STATIC; candidateSha e80cd52b28efc20c245eacd28c099bf3bd7e99b1; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Playwright 280/320/390/1440 sleep chart widths matched scroll widths, document scrollWidth equals viewport, pageErrors 0, consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&release=e80cd52b28efc20c245eacd28c099bf3bd7e99b1#research-cognition",
+      "captured_at": "2026-10-06T05:56:17Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-SLEEP-CHART-NARROW",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-181"]
     }
   ]
 }
