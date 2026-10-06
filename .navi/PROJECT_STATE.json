@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T04:53:30Z",
+  "updated_at": "2026-10-06T05:08:10Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5313,6 +5313,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T04:53:30Z"
+    },
+    {
+      "id": "H-256",
+      "event": "수면 연구 비교 도표의 제목을 `수면 연구, 두 조건은 어떻게 달랐을까요?`로, 보조 라벨을 `두 조건 비교`로 정리해 소비자가 도표의 비교 기준을 바로 이해하도록 보정했다. 연구 수치·결과·해석·출처·제품 독립 공개 경계는 변경하지 않았다. PR #432는 main `9e7b9321`로 병합되었고 workflow `37416957354`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status와 site-quality workflow `37416820136`이 성공했다. 공개 validator는 candidate `9e7b93210afe85fc39616ed6575887692dd95254`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했고, 공개 Chromium fallback 390·1440px에서 새 제목·`두 조건 비교`·`측정 항목`·가로폭·page/console errors 0을 재확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-178과 다섯 증거를 등록한다. 외부 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T05:08:10Z"
     }
   ]
 }

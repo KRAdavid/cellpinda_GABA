@@ -1,5 +1,14 @@
 # Audit Report
 
+## 수면 비교 도표 문구·공개 배포 — 9e7b9321 — 2026-10-06
+
+- 수면 비교 도표의 제목을 `수면 연구, 두 조건은 어떻게 달랐을까요?`로, 보조 라벨을 `두 조건 비교`로 바꾸어 일반 독자가 비교 기준을 먼저 이해하게 했다. 연구 수치·결과·해석·출처는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 공개 390·1440px Chromium fallback에서 새 제목·라벨·`측정 항목`·가로폭·page/console errors 0을 확인했고 캡처는 `view_image`로 검토했다.
+- PR #432가 main `9e7b93210afe85fc39616ed6575887692dd95254`로 병합되었고 workflow `37416957354`의 release-verify·Pages·라이브 smoke·release-status와 site-quality workflow `37416820136`이 성공했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 경계를 확인했다.
+- 새 CRITICAL/MAJOR 코드 결함은 없다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SLEEP-COPY-20261006`, `E-UI-CONTRACT-SLEEP-COPY-20261006`, `E-PLAYWRIGHT-SLEEP-COPY-20261006`, `E-DEPLOY-PIPELINE-SLEEP-COPY-20261006`, `E-LIVE-PUBLIC-SLEEP-COPY-20261006`.
+
 ## 연구 결과 도표 축 의미·공개 배포 — e0bfacdf — 2026-10-06
 
 - 비교 도표의 첫 열을 `변화 방향`에서 `측정 항목`으로 바꾸어 `뇌파 변화`·`활력 점수`가 무엇을 가리키는지 바로 읽히게 했고, 비교 안내의 `↔` 글리프를 좌우 비교 아이콘으로 통일했다. 연구 결과·수치·해석은 변경하지 않았다.

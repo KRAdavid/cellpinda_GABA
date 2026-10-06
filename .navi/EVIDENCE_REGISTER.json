@@ -1862,6 +1862,18 @@
         "E-LIVE-PUBLIC-CHART-AXIS-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-178",
+      "statement": "수면 연구 비교 도표의 제목과 보조 라벨을 소비자가 바로 이해할 수 있는 질문형 문장과 두 조건 비교로 정리해, 연구 수치·해석·출처를 바꾸지 않고 읽기 흐름을 자연스럽게 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SLEEP-COPY-20261006",
+        "E-UI-CONTRACT-SLEEP-COPY-20261006",
+        "E-PLAYWRIGHT-SLEEP-COPY-20261006",
+        "E-DEPLOY-PIPELINE-SLEEP-COPY-20261006",
+        "E-LIVE-PUBLIC-SLEEP-COPY-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13309,6 +13321,59 @@
       "captured_at": "2026-10-06T04:53:30Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-CHART-AXIS",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-177"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SLEEP-COPY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면 비교 도표 문구 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit 8a1dd99499bde3a1044737c6901ecba7f2dc3c2f; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1641795 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T05:08:10Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-SLEEP-COPY",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-178"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SLEEP-COPY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 수면 비교 도표의 질문형 제목과 `두 조건 비교` 보조 라벨을 고정해 어색한 비교 문구가 회귀하지 않도록 한다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.tsx sleepResultTopic title `수면 연구, 두 조건은 어떻게 달랐을까요?`; comparison chart head `두 조건 비교`; status ok",
+      "captured_at": "2026-10-06T05:08:10Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-SLEEP-COPY",
+      "claim_refs": ["C-001", "C-178"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-SLEEP-COPY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬·공개 Chromium fallback에서 390px·1440px 수면 도표의 질문형 제목·`두 조건 비교`·`측정 항목`을 확인했고, 가로폭과 페이지·콘솔 오류가 없다.",
+      "locator": "Playwright Chromium fallback; local and public 390/1440px; title `수면 연구, 두 조건은 어떻게 달랐을까요?`; head `두 조건 비교`; axis `측정 항목`; document scrollWidth equals viewport; pageErrors 0; consoleErrors 0; screenshots inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&release=9e7b93210afe85fc39616ed6575887692dd95254#sleep",
+      "captured_at": "2026-10-06T05:08:10Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-SLEEP-COPY",
+      "claim_refs": ["C-003", "C-004", "C-178"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SLEEP-COPY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "수면 비교 도표 문구 보정 PR #432가 필수 검사를 통과해 main merge commit 9e7b9321로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #432; code commit 8a1dd99499bde3a1044737c6901ecba7f2dc3c2f; main merge commit 9e7b93210afe85fc39616ed6575887692dd95254; main workflow 37416957354; release-verify 112117567484; worker-readiness 112117852101; deploy-pages 112117870233; deploy-worker 112117871289 skipped by STATIC_ONLY; smoke-live 112117934902; release-status 112117984001; site-quality workflow 37416820136 job 112117151056; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37416957354",
+      "captured_at": "2026-10-06T05:08:10Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-SLEEP-COPY",
+      "claim_refs": ["C-001", "C-002", "C-178"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SLEEP-COPY-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 수면 비교 도표의 질문형 제목·`두 조건 비교`·`측정 항목`이 390px·1440px에 반영되고 제품 독립 공개 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T05:08:10.395Z; page 200; runtimeMode STATIC; candidateSha 9e7b93210afe85fc39616ed6575887692dd95254; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Playwright 390/1440 exact title, head, axis, document scrollWidth equals viewport, pageErrors 0, consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&release=9e7b93210afe85fc39616ed6575887692dd95254#sleep",
+      "captured_at": "2026-10-06T05:08:10Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-SLEEP-COPY",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-178"]
     }
   ]
 }
