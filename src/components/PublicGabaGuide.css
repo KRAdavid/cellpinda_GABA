@@ -2088,6 +2088,17 @@
   .guide-header .guide-reading-size-toggle .guide-reading-size-mark{font-size:14px}
 }
 
+/* v148 mid-narrow type control: keep the text-size action named on 351–380px phones. */
+@media(min-width:351px) and (max-width:380px){
+  .guide-header .guide-logo{max-width:calc(100% - 180px)}
+  .guide-header .guide-menu-toggle{right:calc(132px + env(safe-area-inset-right))}
+  .guide-header .guide-reading-size-toggle{right:calc(64px + env(safe-area-inset-right));width:60px;min-width:60px;flex-basis:60px;padding:0 4px;gap:3px}
+  .guide-header .guide-reading-size-toggle>span:not(.guide-reading-size-mark){position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:nowrap;border:0;line-height:1}
+  .guide-header .guide-reading-size-toggle .guide-reading-size-label{display:none}
+  .guide-header .guide-reading-size-toggle .guide-reading-size-compact-label{position:static;display:inline;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;color:inherit;font-size:11px;font-weight:850;letter-spacing:-.08em;line-height:1;white-space:nowrap;border:0}
+  .guide-header .guide-reading-size-toggle .guide-reading-size-mark{font-size:14px;letter-spacing:-.1em}
+}
+
 /* v146 tablet reading control: name the text-size action before the full desktop navigation returns. */
 @media(min-width:701px) and (max-width:900px){
   .guide-header .guide-reading-size-toggle{width:72px;min-width:72px;flex-basis:72px;padding:0 8px;gap:4px}
