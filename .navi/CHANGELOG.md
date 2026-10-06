@@ -1647,3 +1647,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 내용·수치·출처·접근성 설명·상단 카피·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006`.
+
+## 국내외 활용 카드 흐름 표식·공개 배포 — de96345 — 2026-10-06
+
+- 국내·일본·세계 활용 카드 상단에 `01 / 03`, `02 / 03`, `03 / 03` 순서 표식을 추가해 한 흐름으로 읽히도록 고도화했다.
+- PR #463, main workflow `37447228688`, Pages·라이브 smoke·release-status와 공개 validator candidate `de96345`가 성공했다. Chrome CDP fallback 390x844·1440x900에서 순서 표식·가로폭·다음 장 이동·page/console errors 0을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-APPLICATION-FLOW-INDEX-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-INDEX-20261006`, `E-CDP-APPLICATION-FLOW-INDEX-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-INDEX-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-INDEX-20261006`.

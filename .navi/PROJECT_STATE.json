@@ -5418,6 +5418,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T09:45:47Z"
+    },
+    {
+      "id": "H-271",
+      "event": "국내외 활용 카드가 각각 독립 카드로 보여 국내·일본·세계 사례의 편집 흐름이 즉시 잡히지 않는 잔여 시각 위계를 확인했다. 카드 상단에 `01 / 03`, `02 / 03`, `03 / 03` 순서 표식을 추가했으며 연구 카피·출처·수치·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 Chrome CDP fallback 390·1440px에서 세 순서 표식, 가로폭, page/console errors 0과 `#applications`에서 `#fermented-safety`로 이어지는 핵심 이동을 확인했다. PR #463은 main merge `de96345`로 병합되었고 workflow `37447228688`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `de963459940fd475b2802180d485523caa4c0b3b`·HTTP 200·STATIC·71개 bundle hash·공개 데이터 정합성·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-193과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T10:08:00Z"
     }
   ]
 }
