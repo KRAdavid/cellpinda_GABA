@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Research Topic Selection Context — 2026-10-06 — 0e5c611
+
+- 공격 관점에서 연구 지도 선택 후 사용자가 현재 선택 주제와 다음 연구 카드의 관계를 놓치거나, 보조기기가 상태 변화를 받지 못하는지 확인했다. 선택 전·후 안내가 한 영역에서 교체되고, `role=status`·`aria-live=polite`·`aria-atomic=true`가 유지되며, 390px·1440px에서 선택 카드 제목이 고정 읽기 레일 아래에 가려지지 않았다.
+- 공개 흐름에서 390px·1440px 모두 근육 선택 → `근육 연구 결과` 카드 → 출처·progress label로 이어졌고 document scrollWidth는 viewport와 같았으며 page errors 0이었다. 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-PLAYWRIGHT-RESEARCH-SELECTION-20261006`, `E-LIVE-PUBLIC-RESEARCH-SELECTION-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-SELECTION-20261006`.
+
 ## Cross-Width Research Evidence Rhythm — 2026-10-06 — 009839b
 
 - 공격 관점에서 320px·390px·1440px 연구 규모 도표의 숫자·검색 기준·출처·설명문이 폭별로 달라져 독자가 근거를 놓치거나, 작은 글자가 화면에서 사실상 사라지는지 확인했다. v135 이후 네 종류의 보조 근거 텍스트가 모든 폭에서 12px로 계산되고, 문서 가로폭은 viewport와 일치한다.

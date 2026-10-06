@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T01:41:00Z",
+  "updated_at": "2026-10-06T02:32:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T01:41:00Z"
+    "last_run_at": "2026-10-06T02:32:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T01:41:00Z"
+    "last_run_at": "2026-10-06T02:32:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5250,6 +5250,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T01:41:00Z"
+    },
+    {
+      "id": "H-247",
+      "event": "연구 지도에서 주제를 선택한 뒤 현재 선택 상태와 연구 카드의 연결이 보조기기와 시각 흐름에서 함께 전달되도록 선택 안내를 status live-region으로 보강했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 로컬·공개 Chromium fallback 390px·1440px에서 `현재 선택 · 근육`, `근육 연구 결과`, 출처·progress label·research-muscle 포커스·viewport와 동일한 document scrollWidth·page/console errors 0을 확인했다. PR #417은 main `0e5c611`로 병합됐고 workflow `37404491845`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `0e5c611ae1b4c8ab0737c9e3bf5b51c4b08145b7`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-169와 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T02:32:00Z"
     }
   ]
 }

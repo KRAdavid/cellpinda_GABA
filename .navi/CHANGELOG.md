@@ -1,5 +1,12 @@
 # Project Changelog
 
+## 연구 지도 선택 상태 안내·공개 배포 — 0e5c611 — 2026-10-06
+
+- 연구 지도 선택 후 현재 주제와 연구 카드의 관계를 한 줄 안내로 갱신한다.
+- 선택 안내를 `role=status`·`aria-live=polite`·`aria-atomic=true`로 연결해 보조기기에도 상태 변화를 전달한다.
+- PR #417, main workflow `37404491845`, 공개 validator HTTP 200·STATIC·candidate `0e5c611ae1b4c8ab0737c9e3bf5b51c4b08145b7`.
+- 상태: `USER_DECISION`; 완료 게이트: `NOT_READY`.
+
 ## 연구 근거 텍스트 cross-width 통일·공개 배포 — 009839b — 2026-10-06
 
 - 연구 규모 도표의 검색 범위·출처 링크·설명문·feature metadata를 데스크톱·태블릿·모바일에서 12px 기준으로 통일해 큰 수치와 근거가 한 흐름으로 읽히도록 고도화했다.

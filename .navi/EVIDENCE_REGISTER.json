@@ -1756,6 +1756,18 @@
         "E-LIVE-PUBLIC-RESEARCH-EVIDENCE-RHYTHM-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-169",
+      "statement": "연구 지도는 주제를 선택하면 현재 선택 상태와 해당 연구 카드의 대상·결과·해석 흐름을 시각·보조기기 안내로 이어 준다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SELECTION-20261006",
+        "E-UI-CONTRACT-RESEARCH-SELECTION-20261006",
+        "E-PLAYWRIGHT-RESEARCH-SELECTION-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-SELECTION-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-SELECTION-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12745,6 +12757,59 @@
       "captured_at": "2026-10-06T01:40:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-EVIDENCE-RHYTHM",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-168"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SELECTION-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 선택 상태 안내 보강 코드가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit 77493039627efa265830cf36031803f5fb957077; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199; initial CSS 95703; total assets 1633431 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T02:20:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261006-RESEARCH-SELECTION",
+      "claim_refs": ["C-001", "C-003", "C-169"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SELECTION-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 선택 안내가 status live-region과 연구 카드 이동 계약을 유지하도록 UI 계약 검사가 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; research map item aria-describedby/aria-controls/aria-pressed assertions; research map cue role=status, aria-live=polite, aria-atomic=true; status ok",
+      "captured_at": "2026-10-06T02:20:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-SELECTION",
+      "claim_refs": ["C-001", "C-169"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-SELECTION-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 연구 지도 선택 흐름이 모바일·데스크톱에서 선택 안내·활성 카드·포커스·고정 읽기 레일·가로폭을 안정적으로 유지했다.",
+      "locator": "Playwright Chromium fallback; local http://127.0.0.1:5173/?view=guide#research; 390/1440px; click third map item -> cue `현재 선택 · 근육`, aria-live polite, active `근육`, focus research-muscle, headingTop 251.5/235.4, railBottom 105/116, scrollWidth 390/1440, page errors 0, console errors 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=local-research-selection-20261006#research",
+      "captured_at": "2026-10-06T02:25:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-RESEARCH-SELECTION",
+      "claim_refs": ["C-003", "C-004", "C-169"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-SELECTION-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 선택 상태 안내 PR #417이 필수 검사를 통과해 main merge commit 0e5c611로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #417; code commit 77493039627efa265830cf36031803f5fb957077; main merge commit 0e5c611ae1b4c8ab0737c9e3bf5b51c4b08145b7; PR release-verify workflow 37404360500 job 112078488330; PR site-quality workflow 37404360507 job 112078488115; main workflow 37404491845; release-verify 112078894543, worker-readiness 112079253385, deploy-pages 112079277168, smoke-live 112079760171 and release-status 112079802850 successful; deploy-worker 112079278229 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37404491845",
+      "captured_at": "2026-10-06T02:32:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-SELECTION",
+      "claim_refs": ["C-001", "C-002", "C-169"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SELECTION-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 지도 주제 선택이 근육 연구 카드·출처·progress label로 이어지고 모바일·데스크톱 가로폭과 제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha 0e5c611ae1b4c8ab0737c9e3bf5b51c4b08145b7; generatedAt 2026-10-06T02:31:55.923Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 390/1440px click third map item -> active `근육`, card `근육 연구 결과`, source `Powers et al. 2008 · PMID 18091016`, progress `06 / 12 · 연구 03 / 05`, cardTop 113/124, document scrollWidth 390/1440, page errors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=research-selection-live-20261006#research",
+      "captured_at": "2026-10-06T02:32:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-SELECTION",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-169"]
     }
   ]
 }

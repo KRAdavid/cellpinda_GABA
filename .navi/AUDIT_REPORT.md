@@ -1,5 +1,14 @@
 # Audit Report
 
+## Research Topic Selection Context — 0e5c611 — 2026-10-06
+
+- 연구 지도에서 주제를 선택한 뒤 현재 선택 상태와 아래 연구 카드의 읽기 순서가 화면낭독기와 시각 흐름 모두에서 이어지지 않던 잔여 맥락 문제를 확인하고, 선택 안내를 `role=status`·`aria-live=polite`·`aria-atomic=true`로 연결했다. 화면의 정보량은 늘리지 않고, 선택 전 안내와 선택 후 안내를 자연스럽게 교체한다.
+- `validate:ui-contract`·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 로컬 Chromium fallback 390px·1440px에서 `현재 선택 · 근육` 안내, active map item, `research-muscle` 포커스, 고정 읽기 레일 하단보다 낮은 제목 위치, viewport와 동일한 document scrollWidth, page/console errors 0을 확인했다. 공개 Chromium fallback에서도 두 폭에서 근육 연구 카드·출처·progress label·가로폭·오류 0을 재현했다.
+- PR #417은 main `0e5c611ae1b4c8ab0737c9e3bf5b51c4b08145b7`로 병합되었고 workflow `37404491845`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `0e5c611ae1b4c8ab0737c9e3bf5b51c4b08145b7`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SELECTION-20261006`, `E-UI-CONTRACT-RESEARCH-SELECTION-20261006`, `E-PLAYWRIGHT-RESEARCH-SELECTION-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-SELECTION-20261006`, `E-LIVE-PUBLIC-RESEARCH-SELECTION-20261006`.
+
 ## Cross-Width Research Evidence Rhythm — 009839b — 2026-10-06
 
 - 연구 규모 도표의 큰 수치와 검색 범위·출처 링크·설명문이 화면 폭에 따라 서로 다른 크기로 읽히던 잔여 편집 문제를 확인하고, v135에서 데스크톱·태블릿·모바일의 보조 근거 텍스트를 12px·1.65 line-height로 통일했다. 숫자·근거·출처가 같은 읽기 순서로 이어진다.
