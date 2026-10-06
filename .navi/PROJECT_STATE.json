@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T05:39:11Z",
+  "updated_at": "2026-10-06T05:56:17Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5334,6 +5334,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T05:39:11Z"
+    },
+    {
+      "id": "H-259",
+      "event": "280px 초소형 모바일에서 수면 연구 도표가 번호가 붙은 본문 열에 갇혀 비교 안내와 조건 카드 일부가 잘릴 수 있던 별도 반응형 결함을 확인하고, 수면 도표를 연구 카드 전체 폭으로 펼치며 비교 안내를 자연스럽게 줄바꿈하도록 보정했다. 320·390·1440px의 기존 도표 구조는 유지했다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 공개 Chromium fallback 280·320·390·1440px에서 수면 도표 clientWidth와 scrollWidth 일치·document scrollWidth와 viewport 일치·page/console errors 0을 재현했다. PR #438은 main merge `e80cd52b`로 병합되었고 workflow `37420961105`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `e80cd52b28efc20c245eacd28c099bf3bd7e99b1`·HTTP 200·STATIC·71개 bundle hash를 확인했고, 새 CRITICAL/MAJOR 코드 결함은 없다. C-181과 다섯 증거를 등록한다. 외부 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T05:56:17Z"
     }
   ]
 }

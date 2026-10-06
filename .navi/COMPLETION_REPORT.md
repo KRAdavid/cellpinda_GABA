@@ -1983,3 +1983,13 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 공개 데이터는 12 claims·6 master records·6 share pages·teaser HOLD·internal operations snapshot 제외·Smart Store only·750 제거·provenance matched 상태를 유지한다.
 - 연구 수치·출처·제품 독립 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-180과 다섯 증거를 등록했다.
 - 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다.
+
+## Current Release Recheck — e80cd52b — 2026-10-06
+
+- AC-001 공개 URL·Pages candidate·라이브 정합성: PASS. 공개 validator가 candidate `e80cd52b28efc20c245eacd28c099bf3bd7e99b1`·HTTP 200·STATIC·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-003/AC-004 수면 도표 읽기 흐름·반응형: PASS. 280px에서 도표가 번호 열을 벗어나 연구 카드 전체 폭으로 표시되고, 비교 안내 문구와 조건 카드가 잘리지 않는다. 320·390·1440px에서도 도표 폭·가로폭·page/console errors 0을 확인했다.
+- AC-005 배포 게이트: PASS. UI 계약·typecheck·127개 테스트·production build와 main workflow의 release-verify·Pages·라이브 smoke·release-status 및 PR 품질 검사가 성공했다.
+- AC-006/AC-007 제품 독립 경계와 감사·레드팀: PASS_WITH_CONDITIONS. 공개 데이터 경계와 teaser `HOLD`를 유지하며 실기기·고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008`, `E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008`, `E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008`.
