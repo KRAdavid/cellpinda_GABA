@@ -2002,3 +2002,12 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다.
 
 증적: `E-LOCAL-BUILD-COMPACT-READING-20261008`, `E-UI-CONTRACT-COMPACT-READING-20261008`, `E-PLAYWRIGHT-COMPACT-READING-20261008`, `E-DEPLOY-PIPELINE-COMPACT-READING-20261008`, `E-LIVE-PUBLIC-COMPACT-READING-20261008`.
+
+## Current Release Recheck — bd8717b — 2026-10-06
+
+- 태블릿 헤더에서 `가+ 글자`를 함께 표시해 읽기 크기 조절 기능을 즉시 이해할 수 있도록 보완했다. 701·768·820·900px의 44px 터치 영역·72px 컨트롤 폭과 1024px 데스크톱 전환을 확인했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #443 필수 검사, main workflow `37424970431`, Pages·라이브 smoke·release-status와 공개 validator·Chrome fallback이 모두 통과했다.
+- 공개 데이터는 12 claims·6 master records·6 share pages·teaser HOLD·internal operations snapshot 제외·Smart Store only·750 제거·provenance matched 상태를 유지한다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다.
+- 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다.
+
+증적: `E-LOCAL-BUILD-TABLET-READING-20261008`, `E-UI-CONTRACT-TABLET-READING-20261008`, `E-PLAYWRIGHT-TABLET-READING-20261008`, `E-DEPLOY-PIPELINE-TABLET-READING-20261008`, `E-LIVE-PUBLIC-TABLET-READING-20261008`.

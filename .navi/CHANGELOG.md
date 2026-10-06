@@ -1567,3 +1567,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 제품 독립 과학 정보 경계·연구 수치·출처·공개 데이터는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-COMPACT-READING-20261008`, `E-UI-CONTRACT-COMPACT-READING-20261008`, `E-PLAYWRIGHT-COMPACT-READING-20261008`, `E-DEPLOY-PIPELINE-COMPACT-READING-20261008`, `E-LIVE-PUBLIC-COMPACT-READING-20261008`.
+
+## 태블릿 읽기 조절 기능 명칭 보강·공개 배포 — bd8717b — 2026-10-06
+
+- 701–900px 태블릿 헤더에서 `가+` 아이콘 옆에 `글자` 라벨을 표시해 고령 사용자도 읽기 크기 조절 기능을 바로 이해하도록 보강했다. 44px 터치 영역·72px 컨트롤 폭과 1024px 이상 데스크톱 헤더 전환은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #443, main workflow `37424970431`, Pages·라이브 smoke·release-status와 공개 validator·Chrome fallback 701·768·820·900·1024px 감리를 완료했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-READING-20261008`, `E-UI-CONTRACT-TABLET-READING-20261008`, `E-PLAYWRIGHT-TABLET-READING-20261008`, `E-DEPLOY-PIPELINE-TABLET-READING-20261008`, `E-LIVE-PUBLIC-TABLET-READING-20261008`.

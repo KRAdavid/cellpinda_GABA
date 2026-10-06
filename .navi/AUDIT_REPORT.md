@@ -2310,3 +2310,13 @@
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-COMPACT-READING-20261008`, `E-UI-CONTRACT-COMPACT-READING-20261008`, `E-PLAYWRIGHT-COMPACT-READING-20261008`, `E-DEPLOY-PIPELINE-COMPACT-READING-20261008`, `E-LIVE-PUBLIC-COMPACT-READING-20261008`.
+
+## Current Release Recheck — bd8717b — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `bd8717b921e18a2a014f73af4344edee552e2dbd`·71개 bundle hash·12개 공개 claim·6개 master record·6개 share page를 확인했다.
+- AC-002/AC-004 태블릿 읽기 조절 가독성: PASS. 701·768·820·900px에서 `가+ 글자`가 표시되고 44px 터치 영역과 72px 컨트롤 폭을 유지하며, 큰 글씨 전환 후 `가− 기본`으로 바뀐다. 1024px에서는 기존 데스크톱 헤더로 전환되고 모든 폭에서 가로 넘침·페이지 오류가 없다.
+- AC-005 배포 게이트: PASS. PR #443의 UI 계약·typecheck·127개 테스트·production build·성능 예산, main workflow `37424970431`의 release-verify·fresh TF pulse·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- AC-006 제품 독립 과학 정보 경계와 연구 수치·출처: PASS. 이번 변경은 태블릿 헤더에서 읽기 크기 조절 기능의 명칭을 보강한 UI 변경이며 연구 수치·해석·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-TABLET-READING-20261008`, `E-UI-CONTRACT-TABLET-READING-20261008`, `E-PLAYWRIGHT-TABLET-READING-20261008`, `E-DEPLOY-PIPELINE-TABLET-READING-20261008`, `E-LIVE-PUBLIC-TABLET-READING-20261008`.
