@@ -2280,3 +2280,13 @@
 - GitHub Actions `37030197880`의 `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했고 `deploy-worker`는 STATIC_ONLY 조건으로 건너뛰었다.
 - 라이브 validator는 candidate `b0183b85cb3c88c57dc81373ab82c75887882406`, generatedAt `2026-10-02T15:55:00.193Z`, HTTP 200, 73 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance 일치를 확인했다.
 - 과거 Git 기록의 local-path 패턴 12건은 CI 경고로 남지만 현재 공개 번들에는 포함되지 않는다. Safari/iOS/Android 실기기, 고령 사용자 실제 독해성, 독립 과학·규제 감수의 잔여 조건은 계속 OPEN으로 유지한다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+## Current Release Recheck — 83dc4e5a — 2026-10-06
+
+- AC-001 공개 URL·Pages 배포·라이브 smoke·candidate 정합성: PASS. 공개 validator가 HTTP 200·STATIC·candidate `83dc4e5a19d3895ec42437ccd11a87fb4801f894`·71개 bundle hash를 확인했다.
+- AC-003/AC-004 초소형 모바일 연구 도표의 문장 흐름과 반응형 가독성: PASS. 280·320px에서 `GABA를 섭취한 그룹의 변화` 라벨이 두 줄로 흐르고, 390·1440px 기존 도표 구조가 유지되며 모든 폭에서 document scrollWidth와 viewport가 일치하고 page/console errors 0이다.
+- AC-005 release-verify·worker-readiness·UI 계약·typecheck·127개 테스트·production build·성능 예산: PASS. PR #436과 main workflow `37419534993`의 필수 검증·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 과학 정보 경계와 연구 수치·출처: PASS. 이번 변경은 초소형 화면에서 라벨 줄바꿈만 보정했으며 연구 수치·해석·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-CHART-NARROW-20261008`, `E-UI-CONTRACT-CHART-NARROW-20261008`, `E-PLAYWRIGHT-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-CHART-NARROW-20261008`.

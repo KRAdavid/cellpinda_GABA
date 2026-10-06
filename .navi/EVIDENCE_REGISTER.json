@@ -1886,6 +1886,18 @@
         "E-LIVE-PUBLIC-CHART-VERDICT-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-180",
+      "statement": "280px 초소형 모바일에서도 연구 결과 비교 도표의 자연어 결과 라벨이 잘리지 않고 두 줄로 흐르며, 320·390·1440px에서는 기존 비교 구조와 가독성이 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-CHART-NARROW-20261008",
+        "E-UI-CONTRACT-CHART-NARROW-20261008",
+        "E-PLAYWRIGHT-CHART-NARROW-20261008",
+        "E-DEPLOY-PIPELINE-CHART-NARROW-20261008",
+        "E-LIVE-PUBLIC-CHART-NARROW-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -13439,6 +13451,59 @@
       "captured_at": "2026-10-06T05:22:26Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-CHART-VERDICT",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-179"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 비교 도표 줄바꿈 보정이 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "working-tree commit b87e60084668f7e2e3bcb4d3752c457663c962c4; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; Vite 1808 modules; static routes 11; release files 71; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1641968 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T05:39:11Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-CHART-NARROW",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-180"]
+    },
+    {
+      "id": "E-UI-CONTRACT-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 350px 이하 비교 도표에서 결과 라벨을 grid와 normal white-space로 감싸도록 고정해 초소형 화면의 텍스트 clipping 회귀를 막는다.",
+      "locator": "scripts/validate-ui-contract.mjs; PublicGabaGuide.css v143 narrow-phone chart verdict; `.guide-outcome-comparison-verdict{display:grid}`; `.guide-outcome-comparison-verdict i{white-space:normal}`; status ok",
+      "captured_at": "2026-10-06T05:39:11Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261008-CHART-NARROW",
+      "claim_refs": ["C-001", "C-180"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬·공개 Chromium fallback에서 280·320·390·1440px 비교 도표의 결과 라벨 줄바꿈과 조건 비교를 확인했고 모든 폭에서 가로 넘침과 페이지·콘솔 오류가 없다.",
+      "locator": "Playwright Chromium fallback; local/public 280/320/390/1440px; verdict `GABA를 섭취한 그룹의 변화`; 280/320 verdict height 49.3125px; 390 height 32.84375px; document scrollWidth equals viewport at every width; pageErrors 0; consoleErrors 0; 280px screenshot inspected with view_image",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&release=83dc4e5a19d3895ec42437ccd11a87fb4801f894#research-cognition",
+      "captured_at": "2026-10-06T05:39:11Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261008-CHART-NARROW",
+      "claim_refs": ["C-003", "C-004", "C-180"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 도표 줄바꿈 보정 PR #436이 필수 검사를 통과해 main merge commit 83dc4e5a로 병합되었고 Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #436; code commit b87e60084668f7e2e3bcb4d3752c457663c962c4; main merge commit 83dc4e5a19d3895ec42437ccd11a87fb4801f894; main workflow 37419534993; release-verify 112125569324; worker-readiness 112125811675; deploy-pages 112125832392; deploy-worker 112125833074 skipped by STATIC_ONLY; smoke-live 112125885360; release-status 112125949182; site-quality workflow 37419401757 job 112125153464; all required jobs successful",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37419534993",
+      "captured_at": "2026-10-06T05:39:11Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261008-CHART-NARROW",
+      "claim_refs": ["C-001", "C-002", "C-180"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CHART-NARROW-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 인지 연구 비교 도표의 결과 라벨이 280·320·390·1440px에 반영되고 제품 독립 공개 경계·가로폭·오류 없는 렌더링이 유지된다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; generatedAt 2026-10-06T05:39:11.933Z; page 200; runtimeMode STATIC; candidateSha 83dc4e5a19d3895ec42437ccd11a87fb4801f894; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly=true; removed750=true; provenance=matched; public Playwright 280/320/390/1440 exact verdict and head, document scrollWidth equals viewport at every width, pageErrors 0, consoleErrors 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&release=83dc4e5a19d3895ec42437ccd11a87fb4801f894#research-cognition",
+      "captured_at": "2026-10-06T05:39:11Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-CHART-NARROW",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-180"]
     }
   ]
 }

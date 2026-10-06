@@ -1975,3 +1975,11 @@ GABA 공개 안내서를 모바일 중심·제품 독립적·출처 연결형 �
 - AC-007 감사·레드팀 분리와 잔여 위험 기록: PASS_WITH_CONDITIONS. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-GABA-PROCESS-20261006`, `E-UI-CONTRACT-GABA-PROCESS-20261006`, `E-PLAYWRIGHT-GABA-PROCESS-20261006`, `E-DEPLOY-PIPELINE-GABA-PROCESS-20261006`, `E-LIVE-PUBLIC-GABA-PROCESS-20261006`.
+
+## Current Release Recheck — 83dc4e5a — 2026-10-06
+
+- 280px 초소형 모바일 비교 도표에서 결과 라벨이 잘리지 않고 두 줄로 흐르도록 보완했다. 320·390·1440px에서는 기존 조건 비교 구조와 결과 문구가 유지된다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #436 필수 검사, main workflow `37419534993`, Pages·라이브 smoke·release-status, 공개 validator와 280·320·390·1440px Chromium fallback이 모두 통과했다.
+- 공개 데이터는 12 claims·6 master records·6 share pages·teaser HOLD·internal operations snapshot 제외·Smart Store only·750 제거·provenance matched 상태를 유지한다.
+- 연구 수치·출처·제품 독립 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 없으며 C-180과 다섯 증거를 등록했다.
+- 최종 상태는 `INTERNAL_QA_READY_WITH_CONDITIONS`; NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다.

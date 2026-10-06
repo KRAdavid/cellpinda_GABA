@@ -1543,3 +1543,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - PR #434와 main workflow `37418115559`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `E-LOCAL-BUILD-CHART-VERDICT-20261006`, `E-UI-CONTRACT-CHART-VERDICT-20261006`, `E-PLAYWRIGHT-CHART-VERDICT-20261006`, `E-DEPLOY-PIPELINE-CHART-VERDICT-20261006`, `E-LIVE-PUBLIC-CHART-VERDICT-20261006`.
+
+## 초소형 모바일 연구 도표 라벨 줄바꿈 보정·공개 배포 — 83dc4e5a — 2026-10-06
+
+- 280px에서 `GABA를 섭취한 그룹의 변화` 라벨이 잘리지 않도록 350px 이하에서 두 줄로 흐르게 보정했다. 320·390·1440px의 기존 비교 구조는 유지했다.
+- 연구 수치·결과·해석·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 280·320·390·1440px 렌더링 검증을 통과했다.
+- PR #436과 main workflow `37419534993`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-CHART-NARROW-20261008`, `E-UI-CONTRACT-CHART-NARROW-20261008`, `E-PLAYWRIGHT-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-CHART-NARROW-20261008`.
