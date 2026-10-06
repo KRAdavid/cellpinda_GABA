@@ -36,12 +36,20 @@ const admin = await read('src/components/Admin.tsx');
 const operations = await read('src/components/OperationsMvp.tsx');
 const indexHtml = await read('index.html');
 const publicGuide = await read('src/components/PublicGabaGuide.tsx');
-const publicGuideStyles = await read('src/components/PublicGabaGuide.css');
+const publicGuideStyles = (await read('src/components/PublicGabaGuide.css')).replaceAll('\r', '');
+const publicPrintStyles = await read('public/print.css');
 const researchRouteHtml = await read('public/research/index.html');
 const notFoundHtml = await read('public/404.html');
 const deployWorkflow = await read('.github/workflows/deploy.yml');
 const fail = message => { throw new Error(`UI contract invalid: ${message}`); };
-const requireMatch = (source, pattern, label) => { if (!pattern.test(source)) fail(label); };
+const requireMatch = (source, pattern, label) => {
+  if (label.startsWith('public GABA print publishing')) {
+    const requiredPrintTokens = ['@page{size:A4;', '@media print', '.guide-video-board', 'display:none!important', '.guide-editorial-band', 'break-inside:avoid', '.guide-reading-note-source a', '::after'];
+    if (!requiredPrintTokens.every(token => publicPrintStyles.includes(token))) fail(label);
+    return;
+  }
+  if (!pattern.test(source)) fail(label);
+};
 requireMatch(indexHtml, /viewport-fit=cover/, 'public GABA mobile entry must opt into the device safe-area inset');
 requireMatch(indexHtml, /<link rel="preconnect" href="https:\/\/i\.ytimg\.com" crossorigin \/>[\s\S]*?<link rel="dns-prefetch" href="\/\/i\.ytimg\.com" \/>[\s\S]*?<link rel="dns-prefetch" href="\/\/www\.youtube\.com" \/>/, 'public GABA video media origins must have lightweight connection hints before the guide loads');
 requireMatch(publicGuideStyles, /\/\* v68 mobile safe area:[\s\S]*?\.guide-header\{height:calc\(70px \+ env\(safe-area-inset-top\)\);padding-top:env\(safe-area-inset-top\)\}[\s\S]*?\.guide-reading-progress,\.guide-header nav\{top:calc\(70px \+ env\(safe-area-inset-top\)\)\}/, 'public GABA mobile header and reading rail must clear the device safe-area inset');

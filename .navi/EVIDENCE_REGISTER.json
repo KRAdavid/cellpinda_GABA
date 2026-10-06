@@ -16087,7 +16087,7 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "인쇄·PDF 공유 레이어가 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
-      "locator": "local main working tree before merge; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test -- --runInBand 127 passed; pnpm run build; validate:performance status ok; initial JS 311199, initial CSS 95703, total assets 1649991, largest 311199",
+      "locator": "local main working tree before merge; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test -- --runInBand 127 passed; pnpm run build; validate:performance status ok; initial JS 311199, initial CSS 95703, total assets 1649478, largest 311199; print.css is served as a top-level static print-only stylesheet outside assets",
       "captured_at": "2026-10-07T01:00:00Z",
       "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-PRINT-PUBLISHING",
       "claim_refs": ["C-001", "C-004", "C-005", "C-221"]
@@ -16107,8 +16107,8 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "로컬 production preview의 print media에서 390·1440px 문서 폭이 안정적이고 헤더·진행바·영상 보드·복구 조작부가 숨겨진다.",
-      "locator": "local http://127.0.0.1:4173/gaba_info/?view=guide&qa=print-audit-20261007; Chrome CDP fallback with emulated print media at 390px and 1440px; documentWidth equals viewport; header none; readingProgress none; videoBoard none; recoveryControls none; visibleSections 13; screenshots inspected with view_image; source pseudo URL contract present where source links render",
-      "source_uri": "http://127.0.0.1:4173/gaba_info/?view=guide&qa=print-audit-20261007",
+      "locator": "local http://127.0.0.1:4173/?view=guide&qa=print-audit-20261007; Chrome CDP fallback with emulated print media at 390px and 1440px; documentWidth equals viewport; header none; readingProgress none; videoBoard none; recoveryControls none; visibleSections 13; screenshots inspected with view_image; source pseudo URL contract present where source links render",
+      "source_uri": "http://127.0.0.1:4173/?view=guide&qa=print-audit-20261007",
       "captured_at": "2026-10-07T01:00:00Z",
       "reviewer_id": "NAVI-CHROME-CDP-QA-20261007-PRINT-PUBLISHING",
       "claim_refs": ["C-003", "C-004", "C-221"]

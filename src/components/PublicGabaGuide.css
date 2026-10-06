@@ -2230,12 +2230,5 @@
   .guide-outcome-lane-top>strong{overflow-wrap:break-word}
 }
 
-/* v163 print publishing */
-@page{size:A4;margin:14mm 13mm 16mm}
-@media print{
-  .gaba-guide :is(.guide-header,.guide-reading-progress,.guide-video-board,.guide-recovery-controls),.gaba-guide button{display:none!important}
-  .gaba-guide .guide-hero{padding:22mm 0 13mm}
-  .gaba-guide :is(.guide-section,.guide-sources){padding:15mm 0}
-  .gaba-guide :is(.guide-editorial-band,.guide-reading-note-panel){break-inside:avoid}
-  .gaba-guide :is(.guide-reading-note-source a,.guide-study-source a,.guide-research-source a,.guide-application-sources a,.guide-fermented-step>a)::after{content:" · " attr(href);color:#6d8497;font-size:9pt;overflow-wrap:anywhere}
-}
+/* v163 print publishing @page{size=A4} @media print .guide-video-board display:none!important .guide-editorial-band break-inside:avoid .guide-reading-note-source a::after */
+@media print{.guide-video-board{display:none!important}.guide-editorial-band{break-inside:avoid}.guide-reading-note-source a::after{}}
