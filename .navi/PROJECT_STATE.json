@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-06T01:08:00Z",
+  "updated_at": "2026-10-06T01:23:00Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2128,7 +2128,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T01:08:00Z"
+    "last_run_at": "2026-10-06T01:23:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2316,7 +2316,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T01:08:00Z"
+    "last_run_at": "2026-10-06T01:23:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5236,6 +5236,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-06T01:08:00Z"
+    },
+    {
+      "id": "H-245",
+      "event": "모바일 연구 규모 도표에서 큰 수치와 함께 읽어야 하는 검색 범위·출처 링크·설명문이 작게 보이던 편집 품질 문제를 확인하고, 700px 이하에서 보조 근거 텍스트를 12px·1.65~1.7 line-height로 올렸다. 로컬 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Playwright Chromium fallback 320px·390px·1440px에서 document scrollWidth·12px 기준·page/console errors 0을 확인했고, 공개 390px·1440px에서도 같은 결과를 재현했다. PR #413은 main `b716f5d`로 병합됐고 workflow `37398646295`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 site-quality `37398539152`가 성공했다. 공개 validator는 candidate `b716f5d39e33e73e933b2b40228b0b021ff01763`·HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 C-167과 다섯 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-06T01:23:00Z"
     }
   ]
 }

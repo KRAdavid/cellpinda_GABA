@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 연구 근거 텍스트 가독성 보정·공개 배포 — b716f5d — 2026-10-06
+
+- 연구 규모 도표의 검색 범위·출처 링크·하단 설명을 모바일 12px 기준으로 올려 큰 수치와 근거가 한 화면에서 함께 읽히도록 보정했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 검증을 통과했고 PR #413이 main `b716f5d`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-UI-CONTRACT-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-PLAYWRIGHT-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-LIVE-PUBLIC-RESEARCH-EVIDENCE-FLOOR-20261006`.
+
 ## 연구 원문·이야기 공유 전환 그리드 정렬 — 9f0ec68 — 2026-10-06
 
 - 데스크톱에서 연구 원문 마지막 전환의 목적지 라벨과 화살표가 왼쪽 열 폭을 넘어갈 수 있던 문제를 보완해 전체 editorial grid 안에서 정렬했다.

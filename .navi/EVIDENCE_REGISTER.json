@@ -1732,6 +1732,18 @@
         "E-LIVE-PUBLIC-READING-GRID-20261006"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-167",
+      "statement": "연구 규모 도표는 모바일에서 검색 범위·출처 링크·설명문을 12px 기준으로 보여 주어 큰 수치와 근거를 함께 읽을 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-EVIDENCE-FLOOR-20261006",
+        "E-UI-CONTRACT-RESEARCH-EVIDENCE-FLOOR-20261006",
+        "E-PLAYWRIGHT-RESEARCH-EVIDENCE-FLOOR-20261006",
+        "E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-FLOOR-20261006",
+        "E-LIVE-PUBLIC-RESEARCH-EVIDENCE-FLOOR-20261006"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -12615,6 +12627,59 @@
       "captured_at": "2026-10-06T01:03:00Z",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-READING-GRID",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-166"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-EVIDENCE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 규모 도표 가독성 보정 코드가 UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했다.",
+      "locator": "commit b5e75e1c8932c46d6c621b475b9043f1a48b2a0c; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test; pnpm run build; tests 127 pass 127 fail 0; initial JS 311199 <= 380000; initial CSS 95703 <= 110000; total assets 1633001 <= 1650000; largest asset 311199 <= 380000",
+      "captured_at": "2026-10-06T01:18:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-20261006-RESEARCH-EVIDENCE-FLOOR",
+      "claim_refs": ["C-001", "C-003", "C-167"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-EVIDENCE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 규모 도표의 12px 근거 텍스트 규칙이 UI 계약에 등록되고 검증되었다.",
+      "locator": "scripts/validate-ui-contract.mjs; v134 mobile evidence floor assertion; pnpm run validate:ui-contract; status ok",
+      "captured_at": "2026-10-06T01:17:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-20261006-RESEARCH-EVIDENCE-FLOOR",
+      "claim_refs": ["C-001", "C-167"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-RESEARCH-EVIDENCE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬·공개 연구 규모 도표가 320px·390px·1440px에서 가로 넘침 없이 렌더되고 모바일 근거 텍스트가 12px로 계산된다.",
+      "locator": "Playwright Chromium fallback; local 320/390/1440px and public 390/1440px; mobile caption/search-scope/source font-size 12px; document scrollWidth equals viewport; page errors 0; console error messages 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=research-scale-v134-live-20261006#history",
+      "captured_at": "2026-10-06T01:22:00Z",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261006-RESEARCH-EVIDENCE-FLOOR",
+      "claim_refs": ["C-003", "C-167"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 근거 텍스트 보정 PR #413이 필수 검사를 통과해 main merge commit b716f5d로 병합되었고 Pages 배포·라이브 smoke·release-status·site-quality가 성공했다.",
+      "locator": "PR #413; code commit b5e75e1c8932c46d6c621b475b9043f1a48b2a0c; main merge commit b716f5d39e33e73e933b2b40228b0b021ff01763; main workflow 37398646295; site-quality workflow 37398539152; release-verify 112060534772, worker-readiness 112060888118, deploy-pages 112060915983, smoke-live 112060978329 and release-status 112061043413 successful; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37398646295",
+      "captured_at": "2026-10-06T01:23:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261006-RESEARCH-EVIDENCE-FLOOR",
+      "claim_refs": ["C-001", "C-002", "C-167"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-EVIDENCE-FLOOR-20261006",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 연구 규모 도표의 모바일 근거 텍스트 기준과 데스크톱·모바일 가로폭이 안정적으로 반영되었다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page 200; runtimeMode STATIC; candidateSha b716f5d39e33e73e933b2b40228b0b021ff01763; generatedAt 2026-10-06T01:21:24.325Z; bundleHashes 71; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 390/1440px research-scale document scrollWidth equals viewport, mobile caption/search-scope/source 12px, page errors 0, console error messages 0; screenshots reviewed outside repository",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=research-scale-v134-live-20261006#history",
+      "captured_at": "2026-10-06T01:22:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261006-RESEARCH-EVIDENCE-FLOOR",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-167"]
     }
   ]
 }

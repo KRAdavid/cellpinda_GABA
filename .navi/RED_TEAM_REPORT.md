@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Mobile Research Evidence Readability — 2026-10-06 — b716f5d
+
+- 공격 관점에서 320px·390px·1440px 연구 규모 도표의 큰 수치, 검색 범위, 출처 링크, 하단 설명이 서로 다른 읽기 우선순위를 만들거나 잘리는지 대조했다. 700px 이하에서는 근거 텍스트가 12px로 유지되고 document scrollWidth가 viewport와 같았다.
+- 공개 390px·1440px에서 12px 기준·도표 폭·page errors 0·console errors 0을 재현했다. 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Chromium fallback을 사용했다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 RT-001·RT-002·RT-003 OPEN으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-PLAYWRIGHT-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-LIVE-PUBLIC-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-FLOOR-20261006`.
+
 ## Source-to-Share Grid Alignment — 2026-10-06 — 9f0ec68
 
 - 공격 관점에서 연구 원문 읽기 장의 전환 띠가 데스크톱 전체 편집 그리드 안에 있고 `이야기 공유` 라벨과 화살표가 버튼 영역을 벗어나지 않는지 확인했다. 모바일 390px에서는 기존 2행 구조를 유지한다.

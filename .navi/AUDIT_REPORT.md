@@ -1,5 +1,14 @@
 # Audit Report
 
+## Mobile Research Evidence Readability — b716f5d — 2026-10-06
+
+- 모바일 연구 규모 도표에서 큰 수치와 함께 읽어야 하는 검색 범위·출처 링크·설명문이 작게 보이던 편집 품질 문제를 확인하고, 700px 이하에서 보조 근거 텍스트를 12px·1.65~1.7 line-height로 올렸다. 큰 수치·연구 범위·출처가 같은 화면에서 이어져 읽히도록 했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 로컬 Playwright Chromium fallback 320px·390px·1440px에서 document scrollWidth가 viewport와 같고, 모바일 도표의 caption·검색 범위·출처 링크가 12px이며 page errors 0·console errors 0을 확인했다. 공개본 390px·1440px에서도 같은 계산값을 확인했다.
+- PR #413은 main `b716f5d`로 병합되었고 workflow `37398646295`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 및 site-quality workflow `37398539152`가 성공했다. 공개 validator는 candidate `b716f5d39e33e73e933b2b40228b0b021ff01763`·HTTP 200·STATIC·71개 bundle hash·제품 독립 공개 데이터를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재로 Playwright Chromium fallback을 사용했으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-UI-CONTRACT-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-PLAYWRIGHT-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-LIVE-PUBLIC-RESEARCH-EVIDENCE-FLOOR-20261006`.
+
 ## Source-to-Share Grid Alignment — 9f0ec68 — 2026-10-06
 
 - 데스크톱에서 연구 원문 읽기 장의 마지막 `이야기 공유` 전환이 왼쪽 열을 넘어 보일 수 있던 편집 정렬 문제를 확인하고, 전환 띠를 전체 editorial grid로 확장했다. 모바일에서는 기존 2행 구조를 유지했다.
