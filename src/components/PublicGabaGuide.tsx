@@ -832,6 +832,7 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
       {showSummary ? <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div> : null}
       {comparisonChart ? (
         <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. ${comparisonChart.rows.map((row) => `${row.label}: ${comparisonChart.referenceLabel} ${row.reference}, ${comparisonChart.resultLabel} ${row.result}`).join('. ')}. ${comparisonChart.note}`}>
+          <div className="guide-outcome-comparison-guide" aria-hidden="true"><span className="guide-outcome-comparison-guide-mark">↔</span><span className="guide-outcome-comparison-guide-copy"><strong>두 조건을 나란히 비교</strong><small>막대가 짧을수록 변화가 작습니다</small></span></div>
           <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">변화 방향</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
           <div className="guide-outcome-comparison-list">
             {comparisonChart.rows.map((row) => {

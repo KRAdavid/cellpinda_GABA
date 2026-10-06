@@ -351,6 +351,11 @@
 .guide-outcome-comparison-head>span.is-result{color:var(--guide-teal-dark)}
 .guide-outcome-comparison-head i{display:block;width:7px;height:7px;border-radius:50%;background:#b7d1da}
 .guide-outcome-comparison-head .is-result i{background:#26a6aa}
+.guide-outcome-comparison-guide{display:flex;align-items:center;gap:8px;margin:-3px 0 10px;padding:8px 10px;border:1px solid #d9eff0;border-radius:11px;background:linear-gradient(105deg,#f0fbfb 0%,#fbfefe 100%)}
+.guide-outcome-comparison-guide-mark{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:#dff5f4;color:var(--guide-teal-dark);font-size:16px;font-weight:900;line-height:1}
+.guide-outcome-comparison-guide-copy{display:flex;align-items:baseline;gap:8px;min-width:0;line-height:1.35}
+.guide-outcome-comparison-guide-copy strong{color:var(--guide-teal-dark);font-size:.857em;font-weight:900;letter-spacing:-.035em;white-space:nowrap}
+.guide-outcome-comparison-guide-copy small{color:#6f8b98;font-size:.786em;font-weight:750;letter-spacing:-.025em;word-break:keep-all}
 .guide-outcome-comparison-list{display:grid;gap:9px}
 .guide-outcome-comparison-row{display:grid;grid-template-columns:minmax(110px,.7fr) minmax(0,1.3fr);gap:12px;align-items:center;padding:14px 12px;border-radius:14px;background:#f6fbfc}
 .guide-outcome-comparison-metric{display:grid;gap:5px;min-width:0}
@@ -403,6 +408,7 @@
 .guide-outcome-chart-note-key svg{color:var(--guide-teal-dark);flex:0 0 auto}
 .guide-outcome-chart-note-key.is-compare i{display:block;width:6px;height:6px;border-radius:50%;background:#26a6aa;box-shadow:0 0 0 3px #e6f6f6;flex:0 0 auto}
 .guide-outcome-chart-note-limit{grid-area:limit;color:#8aa0aa;font-size:11px;line-height:1.45;letter-spacing:-.035em}
+@media(max-width:560px){.guide-outcome-comparison-guide{align-items:flex-start;margin:-2px 0 9px;padding:8px 9px}.guide-outcome-comparison-guide-copy{display:grid;gap:2px;align-items:start}.guide-outcome-comparison-guide-copy strong{font-size:.9em}.guide-outcome-comparison-guide-copy small{font-size:.82em;line-height:1.4}}
 @media(max-width:700px){
   .gaba-guide{width:100%;max-width:100vw;overflow-x:hidden}
   .guide-container,.guide-section,.guide-section-heading h2{min-width:0;max-width:100%}
