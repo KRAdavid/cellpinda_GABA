@@ -2459,8 +2459,8 @@
       ],
       "status": "SUPPORTED"
     },
-    {
-      "id": "C-228",
+  {
+    "id": "C-228",
       "statement": "GABA 안내서의 공유 기능은 사용자가 직접 공유를 취소한 경우와 브라우저 정책·권한 등으로 공유 API가 실패한 경우를 구분하며, 회복 가능한 실패에서는 링크 복사를 시도한다.",
       "evidence_refs": [
         "E-LOCAL-BUILD-SHARE-RECOVERY-20261007",
@@ -2469,7 +2469,17 @@
         "E-DEPLOY-PIPELINE-SHARE-RECOVERY-20261007",
         "E-LIVE-PUBLIC-SHARE-RECOVERY-20261007"
       ],
-      "status": "SUPPORTED"
+    "status": "SUPPORTED"
+  },
+  {
+    "id": "C-229",
+    "statement": "06·연구의 확장 화면은 연구 지도 아래의 기존 전환 영역에서 선택 전 대표 결과를 먼저 보여주고, 바로 이어지는 연구 카드 흐름으로 연결해 모바일 첫 읽기 흐름을 짧게 만든다. 연구 카피·수치·출처·제품 독립 공개 경계는 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-RESEARCH-PREVIEW-20261008",
+      "E-UI-CONTRACT-RESEARCH-PREVIEW-20261008",
+      "E-STATIC-BUNDLE-RESEARCH-PREVIEW-20261008"
+    ],
+    "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -16567,8 +16577,8 @@
       "reviewer_id": "NAVI-DEPLOY-QA-20261007-SHARE-RECOVERY",
       "claim_refs": ["C-001", "C-002", "C-005", "C-228"]
     },
-    {
-      "id": "E-LIVE-PUBLIC-SHARE-RECOVERY-20261007",
+  {
+    "id": "E-LIVE-PUBLIC-SHARE-RECOVERY-20261007",
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최종 공개 GitHub Pages 번들에 Web Share 취소 분기와 회복 가능한 실패의 링크 복사 fallback이 반영되고 공개 데이터 경계가 유지된다.",
@@ -16576,7 +16586,37 @@
       "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
       "captured_at": "2026-10-07T09:04:00+09:00",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-SHARE-RECOVERY",
-      "claim_refs": ["C-001", "C-003", "C-006", "C-228"]
-    }
-  ]
+    "claim_refs": ["C-001", "C-003", "C-006", "C-228"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-RESEARCH-PREVIEW-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 지도 대표 결과 미리보기 보정이 typecheck·UI 계약·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+    "locator": "working tree based on HEAD d8964b6 before final commit; pnpm run typecheck; pnpm run validate:ui-contract; pnpm test (127 pass); pnpm run build; validate:performance initial JS 311199, initial CSS 95703, total assets 1649406 <= 1650000; no research copy, source or product-boundary validator changes",
+    "captured_at": "2026-10-07T09:31:16+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-RESEARCH-PREVIEW",
+    "claim_refs": ["C-001", "C-005", "C-229"]
+  },
+  {
+    "id": "E-UI-CONTRACT-RESEARCH-PREVIEW-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "공개 UI 계약이 연구 지도 전환 영역에 대표 결과 요약을 먼저 보여주고 읽기 순서·연구 카드로 이어지는 흐름을 요구한다.",
+    "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.tsx research-map-guide, researchPreviewTopic.chart.summary, guide-research-read-order, 대표 결과부터 읽기; pnpm run validate:ui-contract status ok",
+    "captured_at": "2026-10-07T09:31:16+09:00",
+    "reviewer_id": "NAVI-UI-CONTRACT-QA-20261008-RESEARCH-PREVIEW",
+    "claim_refs": ["C-005", "C-229"]
+  },
+  {
+    "id": "E-STATIC-BUNDLE-RESEARCH-PREVIEW-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "GitHub Pages와 동일한 정적 base path로 생성한 연구 대표 결과 미리보기 번들이 공개 라우트·정적 무결성·성능 예산을 통과한다.",
+    "locator": "working tree Pages-style build based on HEAD d8964b6 before final commit; release manifest runtimeMode static, routes 11, files 73; validate:release-manifest status ok; validate:static-bundle status ok; validate:performance initial JS 311269, initial CSS 95703, total assets 1649610 <= 1650000; public deployment and live candidate are not claimed by this evidence",
+    "captured_at": "2026-10-07T09:31:16+09:00",
+    "reviewer_id": "NAVI-PAGES-BUNDLE-QA-20261008-RESEARCH-PREVIEW",
+    "claim_refs": ["C-001", "C-005", "C-229"]
+  }
+]
 }

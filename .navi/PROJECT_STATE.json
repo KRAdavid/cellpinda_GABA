@@ -5718,6 +5718,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T09:04:00+09:00"
+    },
+    {
+      "id": "H-308",
+      "event": "06·연구의 확장 첫 화면에서 연구 지도와 연구 결과가 분리되어 모바일 독자가 결과를 보기 위해 추가로 탐색해야 하는 잔여 정보 전달 리스크를 확인했다. 원격 release-verify가 정적 자산 예산을 481 bytes 초과한 뒤, 별도 버튼을 늘리지 않고 연구 지도 아래 기존 전환 영역에 현재 선택 결과 또는 인지 대표 결과의 요약을 직접 넣어 바로 이어지는 연구 카드 흐름으로 정리했다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했으며 Pages-style 총 자산은 1,649,610 bytes로 1,650,000 bytes 예산 안이다. 새 CRITICAL/MAJOR 코드 결함은 없고 C-229와 세 증거를 등록한다. 아직 공개 main 배포·라이브 URL·브라우저 신규 시각 캡처는 이 기록에 포함하지 않는다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T09:31:16+09:00"
     }
   ]
 }

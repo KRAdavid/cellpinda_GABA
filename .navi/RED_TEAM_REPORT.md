@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 06·연구의 확장 대표 결과 선행 노출 공격 재점검 — working tree — 2026-10-07
+
+- 공격 관점에서 연구 지도를 눌러야만 결과를 볼 수 있던 흐름이 모바일 독자의 이탈·탐색 비용을 만들 수 있음을 확인했다. 별도 이동 CTA를 늘리지 않고 지도 바로 아래 전환 영역에 대표 결과 요약을 직접 노출해 연구 카드가 자연스럽게 이어지도록 보정했다. 첫 원격 후보의 정적 자산 예산 초과도 확인 후 줄였다.
+- 결과 요약은 기존 `chart.summary`와 기존 스타일을 사용하므로 별도 연구 주장·수치·출처를 만들지 않는다. UI contract·typecheck·127개 테스트·production build·정적 무결성·성능 예산은 통과했고 새 CRITICAL/MAJOR 결함은 없다.
+- 남은 리스크는 공개 main 배포 후 라이브 URL 확인, 새 브라우저 시각 QA, 실제 고령 사용자 독해성, Safari/iOS/Android 실기기·독립 과학·규제 감수다. RT-001·RT-002·RT-003 및 teaser `HOLD`는 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-PREVIEW-20261008`, `E-UI-CONTRACT-RESEARCH-PREVIEW-20261008`, `E-STATIC-BUNDLE-RESEARCH-PREVIEW-20261008`.
+
 ## 공유 API 회복 보정·공개 배포 공격 재점검 — main 93fa62f — 2026-10-07
 
 - 첫 배포 후보가 성능 예산을 86 bytes 초과해 차단된 경로를 포함해, 보정 뒤에도 Web Share 취소·정책 실패·링크 복사 회복의 의미가 바뀌지 않는지 재점검했다.

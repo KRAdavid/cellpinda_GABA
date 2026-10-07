@@ -1,5 +1,13 @@
 # Audit Report
 
+## 06·연구의 확장 대표 결과 선행 노출·로컬 재감사 — working tree — 2026-10-07
+
+- 06장 연구 지도 아래의 기존 전환 영역에서 인지 대표 결과를 즉시 보여주고, 별도 링크 없이 바로 이어지는 읽기 순서·연구 카드 흐름으로 보강했다. 첫 원격 후보가 정적 자산 예산을 481 bytes 초과해 별도 CTA를 줄이고 같은 정보 구조 안에서 해결했다.
+- `pnpm run validate:ui-contract`, `pnpm run typecheck`, 127개 테스트, Pages-style production build, 정적 bundle·release manifest·성능 예산을 통과했다. 초기 JS 311,269 bytes·CSS 95,703 bytes·총 자산 1,649,610 bytes다.
+- 새 CRITICAL/MAJOR 결함은 없다. 이 기록은 working tree 검증이며 공개 main 배포·라이브 URL·신규 브라우저 시각 캡처를 주장하지 않는다. 연구 카피·수치·출처·제품 독립 공개 경계는 유지했다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-PREVIEW-20261008`, `E-UI-CONTRACT-RESEARCH-PREVIEW-20261008`, `E-STATIC-BUNDLE-RESEARCH-PREVIEW-20261008`.
+
 ## 공유 API 회복 보정·공개 배포 재감사 — main 93fa62f — 2026-10-07
 
 - 첫 공개 후보 `45cb2ce`는 Pages 성능 예산을 86 bytes 초과해 release-verify에서 중단됐다. 기능 의미를 바꾸지 않고 외부 try/catch를 줄인 `47f1cf8`로 재작업해 Pages-style 번들 1,649,664 bytes와 원격 release-verify를 통과시켰다.
