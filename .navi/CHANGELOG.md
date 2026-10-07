@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 초소형 모바일 연구 도표 줄바꿈 및 공개 재검증 — d9e223bf — 2026-10-08
+
+- 280px 이하 연구 결과 도표에서 비교 안내 문구와 긴 조건명이 카드 폭을 넘어갈 수 있던 잔여 가독성 문제를 확인하고, 안내 문구 자연 줄바꿈·조건명 단어 단위 줄바꿈·좁은 숫자 지표 크기 보정을 적용했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·Vite production build·정적 bundle·성능 예산이 성공했고 최종 로컬 총 자산은 1,649,411바이트였다. PR #634·#635 보호검사와 main workflow `37684187205`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY에 따라 건너뛰었다.
+- 공개 validator는 candidate SHA `d9e223bf343879d35a1a9c32aa76dec39ebdc546`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. Chrome CDP fallback 280·1440px에서 페이지 가로폭과 연구·수면 도표의 내부 가로폭 정합성, 390px 대표 흐름을 재확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-277`, `E-LOCAL-BUILD-NARROW-CHART-WRAP-20261008`, `E-UI-CONTRACT-NARROW-CHART-WRAP-20261008`, `E-CDP-NARROW-CHART-WRAP-20261008`, `E-DEPLOY-PIPELINE-NARROW-CHART-WRAP-20261008`, `E-LIVE-PUBLIC-NARROW-CHART-WRAP-20261008`, `E-NAVI-STATE-NARROW-CHART-WRAP-20261008`.
+
 ## 연구 규모 기준일 노출 및 공개 배포 — 01fab451 — 2026-10-08
 
 - 연구 규모의 큰 수치 가까이에 `기준일 2026.09.28`을 추가해 문헌 숫자의 시점을 한눈에 확인하도록 고도화했다. 하버드·옥스퍼드 PubMed 비교와 GABA-A SCIE 분석의 수치·출처·범위는 유지했다.

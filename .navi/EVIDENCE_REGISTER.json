@@ -3027,6 +3027,19 @@
         "E-NAVI-STATE-RESEARCH-SCALE-DATE-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-277",
+      "statement": "초소형 모바일 연구 도표는 비교 안내·조건명·숫자 지표를 카드 내부에서 자연스럽게 줄바꿈해 연구 결과를 잘림 없이 비교하도록 하고, 연구 내용·출처·제품 독립 경계를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-CHART-WRAP-20261008",
+        "E-UI-CONTRACT-NARROW-CHART-WRAP-20261008",
+        "E-CDP-NARROW-CHART-WRAP-20261008",
+        "E-DEPLOY-PIPELINE-NARROW-CHART-WRAP-20261008",
+        "E-LIVE-PUBLIC-NARROW-CHART-WRAP-20261008",
+        "E-NAVI-STATE-NARROW-CHART-WRAP-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -19635,6 +19648,69 @@
       "captured_at": "2026-10-08T05:18:51+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-SCALE-DATE",
       "claim_refs": ["C-276"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-CHART-WRAP-20261008",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 연구 도표 줄바꿈 보정이 포함된 공개 안내서는 UI 계약·TypeScript 타입체크·Vite production build·정적 bundle·성능 예산을 통과했다.",
+      "locator": "local worktree C:\\Users\\computer\\Documents\\ChatGPT\\gaba-next-premium-audit-20261008; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm run build PASS; initial JS 311405 bytes; initial CSS 95703 bytes; total assets 1649411 bytes; performance budget PASS",
+      "captured_at": "2026-10-08T05:43:22+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-NARROW-CHART-WRAP",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-277"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-CHART-WRAP-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약과 좁은 화면 CSS가 연구 도표 안내 문구·긴 조건명·숫자 지표를 카드 안에서 줄바꿈하도록 고정하고 기존 수면 도표 계약을 유지한다.",
+      "locator": "scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract -> status ok; narrow-phone comparison cue wrapping, lane label word-break, and compact metric typography rules present",
+      "captured_at": "2026-10-08T05:43:22+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-NARROW-CHART-WRAP",
+      "claim_refs": ["C-277"]
+    },
+    {
+      "id": "E-CDP-NARROW-CHART-WRAP-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin unavailable 상태에서 Chrome CDP fallback으로 공개 280·1440px 도표와 390px 전체 읽기 흐름의 가로폭·런타임 오류를 확인했다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; 280px pageWidth/scrollWidth=280/280, research chart clientWidth/scrollWidth=202/202, sleep chart=200/200; 1440px pageWidth/scrollWidth=1425/1425, research chart=685/685, sleep chart=592/592; 390px direct chapter audit 14/14 with pageWidth/scrollWidth=390/390 and errors=[]; screenshot C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-local-research-chart-280.png",
+      "captured_at": "2026-10-08T05:43:22+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-NARROW-CHART-WRAP",
+      "claim_refs": ["C-004", "C-277"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-CHART-WRAP-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "초소형 모바일 도표 보정 PR #634·#635가 보호검사를 통과해 main에 병합됐고 GitHub Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #634 https://github.com/KRAdavid/gaba_info/pull/634 merge SHA 34a31fc947ebfb18036fcd09c522f36debea28ac; PR #635 https://github.com/KRAdavid/gaba_info/pull/635 merge SHA d9e223bf343879d35a1a9c32aa76dec39ebdc546; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37684187205: release-verify 113007634856 success; worker-readiness 113008269152 success; deploy-pages 113008306195 success; smoke-live 113008422448 success; release-status 113008523837 success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37684187205",
+      "captured_at": "2026-10-08T05:43:22+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-NARROW-CHART-WRAP",
+      "claim_refs": ["C-001", "C-005", "C-277"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-CHART-WRAP-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 초소형 모바일 도표 줄바꿈 보정을 반영하면서 정적 bundle·연구 데이터·공유 페이지·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha d9e223bf343879d35a1a9c32aa76dec39ebdc546; generatedAt 2026-10-07T20:44:42.146Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T05:43:22+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-NARROW-CHART-WRAP",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-006", "C-277"]
+    },
+    {
+      "id": "E-NAVI-STATE-NARROW-CHART-WRAP-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 초소형 모바일 도표 보정의 로컬 계약·CDP 공개 검증·PR·main 배포·live validator를 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "main d9e223bf343879d35a1a9c32aa76dec39ebdc546; pnpm run validate:live-public -> page 200, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T05:43:22+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-NARROW-CHART-WRAP",
+      "claim_refs": ["C-277"]
     }
   ]
 }
