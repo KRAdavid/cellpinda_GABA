@@ -19403,9 +19403,9 @@
       "kind": "DEPLOYMENT",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "연구 범위 범례 보정 PR #626이 보호검사를 통과해 main에 병합됐고 main Pages 배포·라이브 smoke·release-status가 성공했다.",
-      "locator": "PR #626 https://github.com/KRAdavid/gaba_info/pull/626; merge SHA 9178983059cdce763d3ec47925f0cb7c201080e5; PR checks Verify and deploy + Verify consumer site success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37670864607: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
-      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37670864607",
-      "captured_at": "2026-10-08T04:03:47+09:00",
+      "locator": "UI PR #626 https://github.com/KRAdavid/gaba_info/pull/626 merge SHA 9178983059cdce763d3ec47925f0cb7c201080e5; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37670864607 release-verify·worker-readiness·deploy-pages·smoke-live·release-status success; NAVI docs PR #627 https://github.com/KRAdavid/gaba_info/pull/627 merge SHA b0687e81e4558fb33294106992bc5dcf12c51ccb; latest main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37671979488 release-verify·worker-readiness·deploy-pages·smoke-live·release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37671979488",
+      "captured_at": "2026-10-08T04:08:57+09:00",
       "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
       "claim_refs": ["C-001", "C-005", "C-273"]
     },
@@ -19414,9 +19414,9 @@
       "kind": "TEST",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최신 GitHub Pages 공개본은 연구 범위 범례 문구와 ARIA 라벨을 반영하면서 정적 bundle·연구 데이터·공유 페이지·제품 독립 경계를 유지한다.",
-      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha 9178983059cdce763d3ec47925f0cb7c201080e5; generatedAt 2026-10-07T19:00:12.570Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; CDP DOM text + ariaLabel + pageWidth/scrollWidth 390/390 + errors=[]",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha b0687e81e4558fb33294106992bc5dcf12c51ccb; generatedAt 2026-10-07T19:07:23.647Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; CDP DOM text + ariaLabel + pageWidth/scrollWidth 390/390 + errors=[]",
       "source_uri": "https://kradavid.github.io/gaba_info/",
-      "captured_at": "2026-10-08T04:03:47+09:00",
+      "captured_at": "2026-10-08T04:08:57+09:00",
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
       "claim_refs": ["C-001", "C-002", "C-004", "C-006", "C-273"]
     },
@@ -19425,9 +19425,9 @@
       "kind": "AUDIT",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "NAVI 자동 점검 기록이 연구 범위 범례의 로컬 계약 검증·CDP 공개 검증·PR·main 배포·live validator를 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
-      "locator": "PR #626 merge SHA 9178983059cdce763d3ec47925f0cb7c201080e5; main workflow 37670864607 success; pnpm run validate:live-public -> candidateSha 9178983059cdce763d3ec47925f0cb7c201080e5; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "locator": "UI PR #626 merge SHA 9178983059cdce763d3ec47925f0cb7c201080e5; NAVI docs PR #627 merge SHA b0687e81e4558fb33294106992bc5dcf12c51ccb; latest main workflow 37671979488 success; pnpm run validate:live-public -> candidateSha b0687e81e4558fb33294106992bc5dcf12c51ccb; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
       "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
-      "captured_at": "2026-10-08T04:03:47+09:00",
+      "captured_at": "2026-10-08T04:08:57+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
       "claim_refs": ["C-273"]
     }
