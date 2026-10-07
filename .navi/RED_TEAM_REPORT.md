@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 연구 지도 범위 라벨·공개 배포 공격 재점검 — main 49f289cf — 2026-10-08
+
+- 공격 관점에서 다섯 연구 지도 주제의 범위 라벨이 실제 DOM에 표시되는지, 390px 가로폭·runtime error·첫 주제 선택과 상세 카드 포커스가 깨지지 않는지 확인했다. `사람 대상 연구`와 `동물·세포 연구`가 주제별로 유지되고 pageWidth=scrollWidth=390, errors=[]였다.
+- 로컬 UI contract·typecheck·127개 테스트·Pages 성능·PR #629 보호검사·main Pages 배포·라이브 smoke·release-status가 성공했으며, 성능 예산 초과 후보는 기존 분류 라벨 재사용과 불필요한 markup 축소 후 통과했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser plugin 부재에 따른 Chrome CDP fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않는다. 이 조건과 teaser `HOLD`는 계속 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-CDP-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-LABELS-20261008`.
+
 ## 연구 범위 범례 명료화 및 NAVI 동기화 — 공개 배포 공격 재점검 — main b0687e81 — 2026-10-08
 
 - 공격 관점에서 새 범례가 실제 DOM·ARIA·390px 렌더에 반영되는지, 가로폭 초과·runtime error·연구 지도 선택 회귀가 없는지 확인했다. `사람 대상 연구`와 `동물·세포 연구` 문구가 유지되고 pageWidth=scrollWidth=390, errors=[]였다.
