@@ -949,10 +949,10 @@ export default function PublicGabaGuide() {
   const activeVideoIndex = Math.max(0, expertVideos.findIndex((video) => video.id === activeVideo.id));
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const getExpertVideoState = (videoId: string) => {
-    if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, featureLabel: '선택 후 재생', className: '' };
-    if (!videoStarted) return { label: '현재 선택됨', badge: '선택됨', featureLabel: '선택 후 재생', className: 'is-selected' };
-    if (!videoFrameReady) return { label: '영상 준비 중', badge: '준비 중', featureLabel: '준비 중', className: 'is-loading' };
-    return { label: '현재 재생 중', badge: '재생 중', featureLabel: '재생 중', className: 'is-playing' };
+    if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, featureLabel: '선택 후 재생', cardLabel: '선택 후 재생', className: '' };
+    if (!videoStarted) return { label: '현재 선택됨', badge: '선택됨', featureLabel: '선택 후 재생', cardLabel: '영상 재생', className: 'is-selected' };
+    if (!videoFrameReady) return { label: '영상 준비 중', badge: '준비 중', featureLabel: '준비 중', cardLabel: '불러오는 중', className: 'is-loading' };
+    return { label: '현재 재생 중', badge: '재생 중', featureLabel: '재생 중', cardLabel: '재생 중', className: 'is-playing' };
   };
   const activeExpertVideoState = getExpertVideoState(activeVideo.id);
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
@@ -2060,7 +2060,7 @@ export default function PublicGabaGuide() {
                     <span className={`guide-video-card-thumb-placeholder is-${videoPosterTone(video.topic)}`} style={{ '--guide-video-poster': `url(${videoPosterImage(video.topic)})`, '--guide-video-poster-position': videoPosterPosition(index) } as CSSProperties} aria-hidden="true">
                       <small>GABA · {video.topic} · {String(videoNumber).padStart(2, '0')}</small>
                       <strong>{video.title}</strong>
-                      <em>선택 후 재생</em>
+                      <em>{videoState.cardLabel}</em>
                     </span>
                     <img src={videoThumbnailUrl(video.id)} onError={(event) => fallbackVideoThumbnail(event, video.id)} onLoad={(event) => validateVideoThumbnail(event, video.id)} alt="" loading="lazy" fetchPriority="low" decoding="async" />
                     <span className="guide-video-card-order" aria-hidden="true">{String(videoNumber).padStart(2, '0')} / {String(expertVideos.length).padStart(2, '0')}</span>
