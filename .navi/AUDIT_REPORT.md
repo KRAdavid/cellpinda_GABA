@@ -3410,3 +3410,11 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-285`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-PR-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-CDP-LIVE-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
+
+## NAVI 최종 동기화 — 3241558c — 2026-10-08
+
+- 문서-only PR #652 병합 후 main workflow `37701731921`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped였다.
+- 공개 validator는 최종 candidate `3241558c4d6f821292d53a3153a2cbdda1de7a8e`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며, NAVI 상태 `USER_DECISION`과 완료 게이트 `NOT_READY`를 유지한다.
+
+증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
