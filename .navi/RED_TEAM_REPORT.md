@@ -2505,3 +2505,12 @@
 - 이번 결과는 Chrome headless/CDP fallback과 GitHub Pages smoke 범위다. Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증은 확인 범위를 넘어가므로 완료로 확대하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-CDP-NARROW-COMPARISON-20261007`, `E-LIVE-PUBLIC-NARROW-COMPARISON-20261007`, `E-NAVI-STATE-NARROW-COMPARISON-20261007`.
+
+## Red-team recheck — 좁은 모바일 회복 흐름 헤더 — c24de966 — 2026-10-07
+
+- 공격 관점에서 280px 회복 장의 `수면과 회복의 흐름` 라벨이 두 줄로 꺾여 현재 단계와 전체 단계 수를 한 번에 읽기 어려운 경로를 확인했다. 350px 이하에서 제목·현재 카드·단계 수를 grid 한 줄 스캔 레일로 정렬하고, 실제 적용되지 않던 중복 회복 지도 CSS를 제거했다.
+- 공개 280px에서 `수면과 회복의 흐름 · 현재 · 01 · 낮의 활동 · 01 / 14`가 한 줄로 읽혔고, 280·390px 큰 글씨 모드에서 회복·연구·출처·공유 장의 document 가로폭은 viewport와 일치했다. 실제 390px 메뉴·연구 지도 선택·공유 fallback 토스트도 재현했다.
+- 첫 PR 성능 검사는 Pages 총 자산 `1,650,296 bytes`로 296바이트 초과했지만 중복 CSS 제거 후 최종 보호 검사와 main 배포가 통과했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 Safari/iOS/Android 실기기·실제 고령 사용자 승인으로 확대하지 않는다. teaser `HOLD`, 외부 YouTube 프레임, 독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.

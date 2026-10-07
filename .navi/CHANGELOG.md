@@ -2240,3 +2240,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수 조건을 유지한다.
 
 증적: `C-259`, `E-LOCAL-BUILD-MOBILE-GROWTH-PATH-20261007`, `E-CDP-MOBILE-GROWTH-PATH-20261007`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-PATH-20261007`, `E-LIVE-PUBLIC-MOBILE-GROWTH-PATH-20261007`, `E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007`.
+
+## 2026-10-07 — 좁은 모바일 회복 흐름 헤더 정렬 — c24de966
+
+- 280px 이하에서 회복 흐름의 제목·현재 카드·전체 단계 수가 한 줄로 읽히도록 grid 스캔 레일을 추가했다. 390px 큰 글씨 모드와 데스크톱 레이아웃은 유지했다.
+- 실제 적용되지 않던 중복 회복 지도 CSS를 정리해 Pages 총 자산을 성능 한도 안으로 낮췄다. 첫 후보 `1,650,296 bytes` 실패 후 최종 로컬 `1,649,327 bytes`로 통과했다.
+- PR #602, main workflow `37625896969`, 공개 validator merge SHA `c24de9661cb9fb457ffcc12d3d26bf1671c3936f`, Chrome CDP 280·390px 감리를 기록했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재에 따른 CDP fallback, 실기기·실사용자·독립 과학·규제 검증 조건을 유지한다.
+
+증적: `C-260`, `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007`, `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.

@@ -2916,6 +2916,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-259`, `E-LOCAL-BUILD-MOBILE-GROWTH-PATH-20261007`, `E-CDP-MOBILE-GROWTH-PATH-20261007`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-PATH-20261007`, `E-LIVE-PUBLIC-MOBILE-GROWTH-PATH-20261007`, `E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007`.
 
+## Current Release Recheck — c24de966 — 좁은 모바일 회복 흐름 헤더 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #602 병합 후 main workflow `37625896969`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 merge SHA `c24de9661cb9fb457ffcc12d3d26bf1671c3936f`·HTTP 200·STATIC·73개 bundle hash·12개 claims·6개 master records·6개 share pages·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- AC-003/AC-004 모바일 독해·반응형: PASS. 280px에서 회복 흐름의 제목·현재 카드·전체 단계 수가 한 줄로 정렬되고, 280·390px 큰 글씨 모드의 회복·연구·출처·공유 장은 가로 넘침 없이 유지되었다. 390px 실제 메뉴·연구 지도 선택·공유 fallback도 재현했다.
+- AC-005 배포 게이트: PASS. 첫 PR 후보의 Pages 성능 한도 초과 `1,650,296 > 1,650,000`을 중복 CSS 제거로 해소했으며, 최종 로컬 총 자산은 `1,649,327 bytes`다. 최종 PR 보호 검사와 main 정적 공개 배포·라이브 smoke·release-status가 통과했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 좁은 모바일 회복 지도 헤더와 중복 CSS만 조정했으며 공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없지만 Browser plugin 부재에 따른 Chrome CDP fallback, teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-260`, `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007`, `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.
+
 ## 공개 배포 핵심 화면·상호작용 자동 재감리 — b7f0bbb — 2026-10-07
 
 - AC-001 공개 URL·라이브 정합성: PASS. 코드 기준선 `b7f0bbb`와 문서-only PR #594 병합 SHA `f6a934d10ac08720be717e07bd86ea02513b24b9`가 연결된 뒤 `pnpm run validate:live-public`가 HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

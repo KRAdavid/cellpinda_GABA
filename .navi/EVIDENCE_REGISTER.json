@@ -2827,6 +2827,18 @@
         "E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-260",
+      "statement": "280px 이하 좁은 모바일에서 수면과 회복 흐름의 제목·현재 단계·전체 단계 수가 한 줄 스캔 레일로 정렬되고, 390px 큰 글씨 모드와 연구·출처·공유 장의 가로폭 및 읽기 구조가 유지되었다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007",
+        "E-CDP-NARROW-RECOVERY-MAP-20261007",
+        "E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007",
+        "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007",
+        "E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -18391,6 +18403,58 @@
       "captured_at": "2026-10-07T21:39:17+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-GROWTH-PATH",
       "claim_refs": ["C-259"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 회복 흐름 헤더 정렬 보정과 중복 CSS 정리 후 로컬 자동 게이트와 생산 번들이 통과했다.",
+      "locator": "src/components/PublicGabaGuide.css v176; pnpm run typecheck; pnpm run validate:ui-contract; pnpm test -> 127 passed; pnpm run build -> validate:static-bundle 11 routes/73 files; validate:performance total 1649327 <= 1650000; git diff --check -> pass",
+      "captured_at": "2026-10-07T22:10:54+09:00",
+      "reviewer_id": "NAVI-QA-GABA-20261007-NARROW-RECOVERY-MAP",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-260"]
+    },
+    {
+      "id": "E-CDP-NARROW-RECOVERY-MAP-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback 공개 점검에서 280px 회복 흐름 헤더가 한 줄로 읽히고, 280·390px 큰 글씨 모드의 회복·연구·출처·공유 장에 가로 넘침과 넘치는 조작부가 없었다.",
+      "locator": "Browser plugin unavailable; Chrome CDP fallback; public https://kradavid.github.io/gaba_info/; C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-large-text-qa.mjs; viewports 280x900 and 390x844; large=true; document scrollWidth matched viewport; overflowingControls=[]; interaction QA 390px menu·research navigation·research topic selection·share fallback·console errors=[]",
+      "captured_at": "2026-10-07T22:10:54+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261007-NARROW-RECOVERY-MAP",
+      "claim_refs": ["C-002", "C-003", "C-004", "C-260"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "좁은 모바일 회복 흐름 헤더 보정 release가 성능 예산 보정 후 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+      "locator": "PR #602 https://github.com/KRAdavid/gaba_info/pull/602; first release-verify 37625223563 failed only at Pages performance total 1650296 > 1650000; redundant recovery-map rules removed in bb03472; final PR release-verify 37625674907 and site-quality-verify 37625674906 success; merge c24de9661cb9fb457ffcc12d3d26bf1671c3936f; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37625896969: release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37625896969",
+      "captured_at": "2026-10-07T22:10:54+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-NARROW-RECOVERY-MAP",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-260"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본에서 280px 회복 흐름 상단 정보가 한 줄로 정렬되고, 390px 실제 메뉴·연구 지도·공유 fallback과 제품 독립 공개 경계가 유지된다.",
+      "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=c24de9661cb9fb457ffcc12d3d26bf1671c3936f; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha c24de9661cb9fb457ffcc12d3d26bf1671c3936f; generatedAt 2026-10-07T13:07:14.190Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP 280/390px large-text document scrollWidth matched viewport and interaction errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-07T22:10:54+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-NARROW-RECOVERY-MAP",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-260"]
+    },
+    {
+      "id": "E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 공개 배포 감리 기록이 좁은 모바일 회복 흐름 헤더 보정의 로컬 검증·성능 보정·배포·라이브 확인을 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 외부 검증 잔여 조건을 함께 기록한다.",
+      "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; PR #602 merge c24de9661cb9fb457ffcc12d3d26bf1671c3936f; main workflow 37625896969 all release jobs success; .navi/PROJECT_STATE.json H-345; .navi/EVIDENCE_REGISTER.json C-260 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+      "captured_at": "2026-10-07T22:10:54+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-NARROW-RECOVERY-MAP",
+      "claim_refs": ["C-260"]
     }
   ]
 }

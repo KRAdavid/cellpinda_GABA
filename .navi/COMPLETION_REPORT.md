@@ -2882,3 +2882,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-259`, `E-LOCAL-BUILD-MOBILE-GROWTH-PATH-20261007`, `E-CDP-MOBILE-GROWTH-PATH-20261007`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-PATH-20261007`, `E-LIVE-PUBLIC-MOBILE-GROWTH-PATH-20261007`, `E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007`.
+
+## Current Release Recheck — c24de966 — 좁은 모바일 회복 흐름 헤더 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #602 병합 후 main workflow `37625896969`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 공개 validator가 HTTP 200·STATIC·73개 bundle hash·12개 claims·6개 master records·6개 share pages·`teaser HOLD`·`provenance matched`를 확인했다.
+- AC-003/AC-004 모바일 독해·반응형: PASS. 280px에서 회복 흐름 상단의 제목·현재 단계·전체 단계 수가 한 줄로 정렬되었고, 280·390px 큰 글씨 모드에서 회복·연구·출처·공유 장의 document 가로폭은 viewport와 일치했다. 390px 메뉴·연구 지도 선택·공유 fallback과 console error 0을 확인했다.
+- AC-005 자동 게이트: PASS. 첫 Pages 후보의 총 자산 `1,650,296 bytes` 초과는 중복 CSS 제거 후 최종 PR 보호 검사에서 해소되었고, 로컬 총 자산은 `1,649,327 bytes`다.
+- AC-006 제품 독립 경계: PASS. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없지만 Browser plugin 부재에 따른 Chrome headless/CDP fallback, teaser `HOLD`, 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 계속 OPEN이다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-260`, `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007`, `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.
