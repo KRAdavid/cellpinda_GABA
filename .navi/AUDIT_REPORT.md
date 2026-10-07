@@ -2933,6 +2933,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-248`, `E-LOCAL-BUILD-MOBILE-SHARE-KIT-20261007`, `E-CDP-MOBILE-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007`, `E-NAVI-STATE-MOBILE-SHARE-KIT-20261007`.
 
+## 출처 읽기 연결 문구 한국어 줄바꿈 보정 — 공개 배포 확인 — 341beb5 — 2026-10-07
+
+- 390px에서 `연구를 읽는 기준에서 공유 가능한 이야기로`의 조사 `로`가 다음 줄에 홀로 남는 잔여 퍼블리싱 리스크를 확인했다. 430px 이하 모바일 handoff 제목에 `word-break: keep-all`을 적용해 단어와 조사가 함께 이동하도록 보정했다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산이 통과했다. PR #582 required checks와 main workflow `37592004973`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고, 공개 validator는 merge SHA `341beb544580f2da9a18a5eeb2b2f97d1ddf8653`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `provenance=matched`를 확인했다.
+- 공개 320·390px Chrome headless/CDP fallback에서 직접 `#reading-note` 진입과 연결부를 확인했다. 390px은 `공유 가능한 / 이야기로`, 320px은 `공유 / 가능한 이야기로`로 자연스럽게 읽히며 가로폭이 유지된다. 새 CRITICAL/MAJOR 결함은 없다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-249`, `E-LOCAL-BUILD-KOREAN-HANDOFF-20261007`, `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`, `E-NAVI-STATE-KOREAN-HANDOFF-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

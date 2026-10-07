@@ -2698,6 +2698,18 @@
       "E-NAVI-STATE-MOBILE-SHARE-KIT-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-249",
+    "statement": "출처 읽기에서 이야기 공유로 이어지는 모바일 연결 문구가 320·390px에서 조사와 단어를 자연스럽게 묶어 표시되며, `이야기로`가 고립되지 않는다. 직접 #reading-note 흐름과 공개 정적 데이터·제품 독립 경계를 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-KOREAN-HANDOFF-20261007",
+      "E-CDP-KOREAN-HANDOFF-20261007",
+      "E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007",
+      "E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007",
+      "E-NAVI-STATE-KOREAN-HANDOFF-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17721,6 +17733,58 @@
     "captured_at": "2026-10-07T16:52:20+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-SHARE-KIT",
     "claim_refs": ["C-248"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-KOREAN-HANDOFF-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 연결 문구의 한국어 단어 단위 줄바꿈 보정 후 로컬 UI 계약·타입·테스트·production build·정적 bundle·성능 예산이 통과했다.",
+    "locator": "working tree candidate 17a934a67841902e71047c5fdf5ebcf5bdfdc5eb before protected PR; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127/127 pass; pnpm run build; validate:release-manifest; check-public-artifacts; validate:static-bundle; validate:performance; total assets 1648116 <= 1650000; largest asset 311405 <= 380000; git diff --check",
+    "captured_at": "2026-10-07T17:15:00+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-KOREAN-HANDOFF",
+    "claim_refs": ["C-001", "C-003", "C-249"]
+  },
+  {
+    "id": "E-CDP-KOREAN-HANDOFF-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Browser plugin을 사용할 수 없어 Chrome headless/CDP fallback으로 로컬·공개 320·390px의 직접 #reading-note와 연결부를 확인했다. `연구를 읽는 기준에서 공유 가능한 이야기로`가 단어 단위로 읽히고 document 폭이 viewport와 일치한다.",
+    "locator": "Browser plugin unavailable; Chrome headless/CDP fallback; local and public 390px/320px direct #reading-note; scrollWidth/clientWidth 390/390 and 320/320; handoff screenshots captured outside repository at selector `.guide-reading-note-handoff`; 390px renders `연구를 읽는 기준에서 공유 가능한` / `이야기로`, 320px renders `연구를 읽는 기준에서 공유` / `가능한 이야기로`; heading remains visible below the reading rail",
+    "captured_at": "2026-10-07T17:15:00+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-KOREAN-HANDOFF",
+    "claim_refs": ["C-003", "C-004", "C-249"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "한국어 연결 문구 줄바꿈 보정 release가 PR 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #582 https://github.com/KRAdavid/gaba_info/pull/582; PR checks release-verify run 37591858434 success and site-quality-verify run 37591858505 success; squash merge 341beb544580f2da9a18a5eeb2b2f97d1ddf8653; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37592004973: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37592004973",
+    "captured_at": "2026-10-07T17:15:00+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-KOREAN-HANDOFF",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-249"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "한국어 연결 문구 줄바꿈 보정 release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=341beb544580f2da9a18a5eeb2b2f97d1ddf8653; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 341beb544580f2da9a18a5eeb2b2f97d1ddf8653; generatedAt 2026-10-07T08:11:34.377Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T17:15:00+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-KOREAN-HANDOFF",
+    "claim_refs": ["C-001", "C-002", "C-249"]
+  },
+  {
+    "id": "E-NAVI-STATE-KOREAN-HANDOFF-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 한국어 연결 문구 보정의 공개 배포 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-333; .navi/EVIDENCE_REGISTER.json C-249 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T17:15:00+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-KOREAN-HANDOFF",
+    "claim_refs": ["C-249"]
   }
 ]
 }

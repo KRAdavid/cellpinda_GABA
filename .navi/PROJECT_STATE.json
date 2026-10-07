@@ -5893,6 +5893,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T16:52:20+09:00"
+    },
+    {
+      "id": "H-333",
+      "event": "NAVI 자동 공개 배포 감리에서 출처 읽기와 이야기 공유 사이의 연결 문구 `연구를 읽는 기준에서 공유 가능한 이야기로`가 390px에서 조사 `로`만 다음 줄에 남아 자연스러운 흐름을 끊는 잔여 퍼블리싱 리스크를 확인했다. 430px 이하 모바일 연결 문구에 `word-break: keep-all`을 적용해 단어와 조사가 함께 이동하도록 보정했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산을 통과했고, 보호된 PR #582와 main workflow `37592004973`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 merge SHA `341beb544580f2da9a18a5eeb2b2f97d1ddf8653`·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome headless/CDP fallback 320·390px에서 직접 `#reading-note` 진입과 연결부를 재현했으며 390px은 `공유 가능한 / 이야기로`, 320px은 `공유 / 가능한 이야기로`로 읽혔다. 새 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-249와 다섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T17:15:00+09:00"
     }
   ]
 }

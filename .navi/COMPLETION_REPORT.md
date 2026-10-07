@@ -2744,3 +2744,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-248`, `E-LOCAL-BUILD-MOBILE-SHARE-KIT-20261007`, `E-CDP-MOBILE-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007`, `E-NAVI-STATE-MOBILE-SHARE-KIT-20261007`.
+
+## Current Release Recheck — 341beb5 — 출처 읽기 연결부 한국어 가독성 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. main workflow `37592004973`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 공개 validator가 candidate `341beb544580f2da9a18a5eeb2b2f97d1ddf8653`, HTTP 200, STATIC, 73개 bundle hash, 12개 claim, 6개 master record, 6개 share page, teaser `HOLD`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 읽기 흐름·반응형: PASS. 320·390px 직접 `#reading-note` 진입에서 연결 제목의 단어·조사가 함께 줄바꿈되고 document 폭이 viewport와 일치한다.
+- AC-005 배포 게이트: PASS. UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산과 PR #582 보호 검사가 통과했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 모바일 handoff 한국어 줄바꿈에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재에 따른 Chrome headless/CDP fallback, teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-249`, `E-LOCAL-BUILD-KOREAN-HANDOFF-20261007`, `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`, `E-NAVI-STATE-KOREAN-HANDOFF-20261007`.

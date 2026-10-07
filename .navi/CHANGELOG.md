@@ -2138,3 +2138,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`와 외부 검증 조건을 유지한다.
 
 증적: `C-248`, `E-LOCAL-BUILD-MOBILE-SHARE-KIT-20261007`, `E-CDP-MOBILE-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007`, `E-NAVI-STATE-MOBILE-SHARE-KIT-20261007`.
+
+## 2026-10-07 — 출처 읽기 연결부 한국어 줄바꿈 보정 — 341beb5
+
+- 390px에서 연결 제목의 조사 `로`가 단독 줄로 남는 잔여 리스크를 확인하고 430px 이하에 `word-break: keep-all`을 적용했다. 320px·390px 모두 단어 단위로 자연스럽게 읽힌다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #582와 main workflow `37592004973`의 Pages 배포·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 merge SHA `341beb544580f2da9a18a5eeb2b2f97d1ddf8653`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `provenance=matched`를 확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`와 외부 검증 조건을 유지한다.
+
+증적: `C-249`, `E-LOCAL-BUILD-KOREAN-HANDOFF-20261007`, `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`, `E-NAVI-STATE-KOREAN-HANDOFF-20261007`.

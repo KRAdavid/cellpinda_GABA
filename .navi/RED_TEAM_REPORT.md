@@ -2415,3 +2415,12 @@
 - 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-CDP-MOBILE-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007`.
+
+## Red-team recheck — 출처 읽기 연결부 한국어 줄바꿈 — 341beb5 — 2026-10-07
+
+- 공격 관점에서 320·390px에서 연결 제목의 조사 `로`가 단독 줄로 떨어져 문장 리듬을 끊는 경로를 재현했다. 모바일 handoff 제목에 `word-break: keep-all`을 적용해 단어 단위 줄바꿈으로 보정했다.
+- 공개 390px과 320px에서 직접 `#reading-note` 진입 후 연결부를 캡처했다. 390px은 `연구를 읽는 기준에서 공유 가능한 / 이야기로`, 320px은 `연구를 읽는 기준에서 공유 / 가능한 이야기로`로 표시되고 document 폭은 각각 viewport와 일치했다.
+- 새 CRITICAL/MAJOR 결함은 없다. PR #582와 main workflow `37592004973`, 공개 validator candidate `341beb544580f2da9a18a5eeb2b2f97d1ddf8653`를 확인했다. Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 실기기·실제 사용자 승인으로 확대하지 않는다.
+- 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`.
