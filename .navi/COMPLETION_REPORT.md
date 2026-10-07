@@ -2930,3 +2930,11 @@ Final Status: `NOT_READY`; 사용자 승인 전 자동 완료 처리하지 않�
 - 이번 회차는 NAVI 기록만 갱신했으며 완료 게이트는 `NOT_READY`를 유지한다. 실기기·실사용자·독립 과학·규제 검토는 외부 조건으로 남긴다.
 
 증적: `C-264`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007`, `E-LIVE-PUBLIC-FINAL-REAUDIT-20261007`, `E-NAVI-STATE-FINAL-REAUDIT-20261007`.
+
+## Completion gate recheck — 모바일 전문가 영상 필터 cue — 2026-10-08
+
+- 모바일 주제 필터의 수평 continuation cue를 보완하고 280·390px CDP에서 원형 안내·가로폭 일치·영상 선택→iframe 재생을 확인했다. 공개 URL도 merge SHA `74549db11dc9ce37c794b1524739afbe68d75f96`와 정합성을 유지한다.
+- PR #610 코드 병합과 PR #611 heartbeat 병합 후 main workflow `37645030445`의 정적 Pages 배포·라이브 smoke·release-status가 성공했다. 공개 validator는 HTTP 200·73개 bundle hash·12개 claims·6개 master records·6개 share pages·teaser `HOLD`를 확인했다.
+- 코드·배포 기준은 통과했지만 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-265`, `E-LOCAL-BUILD-MOBILE-FILTER-CUE-20261008`, `E-CDP-MOBILE-FILTER-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-FILTER-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-FILTER-CUE-20261008`, `E-NAVI-STATE-MOBILE-FILTER-CUE-20261008`.

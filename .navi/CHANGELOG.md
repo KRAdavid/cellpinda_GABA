@@ -2283,3 +2283,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 공개 390px 전문가 영상 선택·재생·다음 카드 선택과 runtime error 0을 재현했다. 기능 코드와 연구 콘텐츠는 변경하지 않았으며 상태는 `USER_DECISION / NOT_READY`를 유지한다.
 
 증적: `C-264`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007`, `E-LIVE-PUBLIC-FINAL-REAUDIT-20261007`, `E-NAVI-STATE-FINAL-REAUDIT-20261007`.
+
+## 2026-10-08 — 모바일 전문가 영상 필터 cue 보완 및 공개 배포 재검증 — f947daf2
+
+- 280·390px에서 전문가 영상 주제 필터의 수평 continuation cue를 원형 안내로 보완했다. 기존 필터 레일·선택·YouTube 재생 흐름과 제품 독립 공개 경계는 유지했다.
+- 첫 후보의 Pages 성능 예산 초과를 줄인 뒤 PR #610을 병합했고, stale TF pulse를 공식 pulse와 heartbeat PR #611로 갱신한 후 main workflow `37645030445`의 release-verify·Pages·라이브 smoke·release-status를 성공시켰다.
+- 공개 validator candidate SHA `74549db11dc9ce37c794b1524739afbe68d75f96`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-265`, `E-LOCAL-BUILD-MOBILE-FILTER-CUE-20261008`, `E-CDP-MOBILE-FILTER-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-FILTER-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-FILTER-CUE-20261008`, `E-NAVI-STATE-MOBILE-FILTER-CUE-20261008`.

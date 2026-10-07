@@ -2547,3 +2547,11 @@
 - Chrome CDP fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건은 유지한다.
 
 증적: `C-264`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007`, `E-LIVE-PUBLIC-FINAL-REAUDIT-20261007`, `E-NAVI-STATE-FINAL-REAUDIT-20261007`.
+
+## Red-team final recheck — 모바일 전문가 영상 필터 cue — f947daf2 — 2026-10-08
+
+- 공격 관점에서 280·390px 주제 필터의 오른쪽 cue가 수평 이동 가능성을 가리거나 필터 조작을 막는지 확인했다. 원형 cue는 24px로 표시되고 document 가로폭은 viewport와 일치했으며, 390px 두 번째 카드 선택 후 iframe 재생과 선택 상태는 유지됐다.
+- 첫 후보의 Pages 성능 예산 초과를 그대로 통과시키지 않고 shadow·transition·color·flex 정렬 오버헤드를 줄인 후 PR 보호 검사와 main 배포를 재실행했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
+
+증적: `C-265`, `E-CDP-MOBILE-FILTER-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-FILTER-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-FILTER-CUE-20261008`, `E-NAVI-STATE-MOBILE-FILTER-CUE-20261008`.
