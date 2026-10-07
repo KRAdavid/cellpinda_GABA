@@ -14,7 +14,6 @@ import {
   ExternalLink,
   FlaskConical,
   Globe2,
-  LoaderCircle,
   Menu,
   Moon,
   Network,
@@ -924,6 +923,7 @@ export default function PublicGabaGuide() {
   const [videoFilterRailAtEnd, setVideoFilterRailAtEnd] = useState(false);
   const [videoStarted, setVideoStarted] = useState(hasInitialExpertVideo);
   const [videoFrameReady, setVideoFrameReady] = useState(false);
+  const [videoTimedOut, setVideoTimedOut] = useState(false);
   const [activeChapterId, setActiveChapterId] = useState<ActiveChapterId>('top');
   const [activeRecoveryCard, setActiveRecoveryCard] = useState(0);
   const [recoveryPaused, setRecoveryPaused] = useState(false);
@@ -959,6 +959,7 @@ export default function PublicGabaGuide() {
   const getExpertVideoState = (videoId: string) => {
     if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, featureLabel: '선택 후 재생', cardLabel: '선택 후 재생', className: '' };
     if (!videoStarted) return { label: '현재 선택됨', badge: '선택됨', featureLabel: '선택 후 재생', cardLabel: '영상 재생', className: 'is-selected' };
+    if (videoTimedOut) return { label: '재생 지연', badge: '지연', featureLabel: '재생 지연', cardLabel: '지연', className: '' };
     if (!videoFrameReady) return { label: '영상 준비 중', badge: '준비 중', featureLabel: '준비 중', cardLabel: '불러오는 중', className: 'is-loading' };
     return { label: '현재 재생 중', badge: '재생 중', featureLabel: '재생 중', cardLabel: '재생 중', className: 'is-playing' };
   };
@@ -1188,6 +1189,12 @@ export default function PublicGabaGuide() {
       // Private browsing and embedded contexts may deny storage; the toggle still works for this visit.
     }
   }, [largeText]);
+
+  useEffect(() => {
+    if (!videoStarted || videoFrameReady || videoTimedOut) return;
+    const timeout = window.setTimeout(() => setVideoTimedOut(true), 6000);
+    return () => window.clearTimeout(timeout);
+  }, [videoFrameReady, videoTimedOut, videoStarted]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -1509,12 +1516,14 @@ export default function PublicGabaGuide() {
     if (isNewVideo) {
       setActiveVideoId(id);
       setVideoFrameReady(false);
+      setVideoTimedOut(false);
       setVideoStarted(true);
-    } else if (!videoStarted) {
+    } else if (!videoStarted || videoTimedOut) {
       setVideoFrameReady(false);
+      setVideoTimedOut(false);
       setVideoStarted(true);
     }
-    if (isNewVideo || !videoStarted) {
+    if (isNewVideo || !videoStarted || videoTimedOut) {
       window.requestAnimationFrame(() => videoFeatureRef.current?.focus({ preventScroll: true }));
     }
     if (window.matchMedia('(max-width: 700px)').matches) {
@@ -1539,6 +1548,8 @@ export default function PublicGabaGuide() {
       document.getElementById(`research-${id}`)?.focus({ preventScroll: true });
     });
   };
+
+  const retryExpertVideo = () => selectExpertVideo(activeVideo.id);
 
   const selectResearchTopic = (id: string) => {
     setActiveResearchTopicId(id);
@@ -2060,16 +2071,23 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead guide-video-gallery-lead">의사와 과학자들이 공개한 짧은 영상을 수면, GABA의 기본 역할, 자율신경, 연구 읽기 주제로 나누어 모았습니다.</p>
             <div className="guide-video-gallery">
               <article ref={videoFeatureRef} className="guide-video-feature" id="expert-video-feature" tabIndex={-1} aria-labelledby="expert-video-title" aria-live="polite">
-                <div className={`guide-video-feature-media${videoStarted && !videoFrameReady ? ' is-loading' : ''}`} aria-busy={videoStarted && !videoFrameReady}>
+                <div className={`guide-video-feature-media${videoStarted && !videoFrameReady ? ' is-loading' : ''}`}>
                   {videoStarted ? <>
                     <span className={`guide-video-feature-fallback is-${videoPosterTone(activeVideo.topic)}`} style={{ '--guide-video-poster': `url(${videoPosterImage(activeVideo.topic)})`, '--guide-video-poster-position': videoPosterPosition(activeVideoIndex) } as CSSProperties} aria-hidden="true">
                       <small>GABA · {activeVideo.topic} · {String(activeVideoIndex + 1).padStart(2, '0')}</small>
                       <strong>{activeVideo.title}</strong>
                     </span>
                     {!videoFrameReady ? <img className="guide-video-feature-loading-poster" src={videoThumbnailUrl(activeVideo.id)} onError={(event) => fallbackVideoThumbnail(event, activeVideo.id)} onLoad={(event) => validateVideoThumbnail(event, activeVideo.id)} alt="" aria-hidden="true" decoding="async" /> : null}
-                    <iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" onLoad={() => setVideoFrameReady(true)} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-                    <span className="guide-video-feature-loading" role="status"><LoaderCircle size={18} aria-hidden="true" /> 영상을 불러오는 중</span>
-                  </> : <button type="button" className="guide-video-feature-poster" onClick={() => { setVideoFrameReady(false); setVideoStarted(true); }} aria-label={`${activeVideo.title} 영상 재생`}>
+                    <iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" onLoad={() => { setVideoFrameReady(true); setVideoTimedOut(false); }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                    <span className="guide-video-feature-loading" role="status">
+                      {videoTimedOut ? <>
+                        <span>
+                          <a className="guide-video-feature-share" href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 보기</a>
+                          <button className="guide-video-feature-share" type="button" onClick={retryExpertVideo}>↻ 다시 시도</button>
+                        </span>
+                      </> : <>영상을 불러오는 중</>}
+                    </span>
+                  </> : <button type="button" className="guide-video-feature-poster" onClick={retryExpertVideo} aria-label={`${activeVideo.title} 영상 재생`}>
                     <span className={`guide-video-feature-fallback is-${videoPosterTone(activeVideo.topic)}`} style={{ '--guide-video-poster': `url(${videoPosterImage(activeVideo.topic)})`, '--guide-video-poster-position': videoPosterPosition(activeVideoIndex) } as CSSProperties} aria-hidden="true">
                       <small>GABA · {activeVideo.topic} · {String(activeVideoIndex + 1).padStart(2, '0')}</small>
                       <strong>{activeVideo.title}</strong>
