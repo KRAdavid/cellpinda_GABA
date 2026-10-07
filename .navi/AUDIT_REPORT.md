@@ -3378,3 +3378,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-283`, `E-PR-NAVI-INTERACTION-REAUDIT-20261008`, `E-DEPLOY-PIPELINE-NAVI-INTERACTION-REAUDIT-20261008`, `E-LIVE-PUBLIC-NAVI-INTERACTION-REAUDIT-20261008`, `E-NAVI-STATE-NAVI-INTERACTION-REAUDIT-20261008`.
+
+## 연구 지도 큰 글자 범위 라벨 보정 — 93372da4 — 2026-10-08
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #648 병합 후 main workflow `37698489905`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped였다. 공개 validator가 merge candidate `93372da4b520fabbe4bcd721392c09917d72a5bf`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 큰 글자·모바일 가독성: PASS. 연구 지도 보조 범위 라벨을 큰 글자 모드에서 10px에서 11px로 확대했다. 공개 Chrome CDP fallback 280·390px에서 5개 라벨 모두 computed `11px`, 지도 내부 배치, pageWidth/scrollWidth `280/280`·`390/390`, 이름 없는 버튼 0개, runtime error 0건을 확인했다. 메뉴·큰 글자 전환·연구 주제 선택·전문가 영상 자동재생·회복 카드 3초 전환·일시정지도 공개 URL에서 재현했다.
+- AC-005 자동 게이트: PASS. UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·release manifest·Pages 성능·라이브 smoke가 통과했다. 로컬 총 자산은 `1,649,477 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 연구 지도 보조 라벨의 큰 글자 가독성 보정에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-284`, `E-LOCAL-BUILD-RESEARCH-MAP-LABEL-20261008`, `E-PR-RESEARCH-MAP-LABEL-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-LABEL-20261008`, `E-CDP-LIVE-RESEARCH-MAP-LABEL-20261008`, `E-CDP-LIVE-INTERACTION-RESEARCH-MAP-LABEL-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-LABEL-20261008`.

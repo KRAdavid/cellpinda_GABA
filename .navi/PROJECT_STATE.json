@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T07:29:36+09:00",
+  "updated_at": "2026-10-08T07:53:12+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6520,6 +6520,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T07:29:36+09:00"
+    },
+    {
+      "id": "H-371",
+      "event": "NAVI 자동 공개 배포 점검에서 연구 지도 큰 글자 모드의 보조 범위 라벨을 10px에서 11px로 보정한 PR #648 병합과 공개 배포를 확인했다. main merge SHA 93372da4b520fabbe4bcd721392c09917d72a5bf와 Pages 공개 candidate가 일치했고 main workflow 37698489905의 release-verify 113055980724·worker-readiness 113056438776·deploy-pages 113056462619·smoke-live 113056555592·release-status 113056628520이 성공했으며 deploy-worker 113056463989은 STATIC_ONLY로 skipped였다. 공개 validator는 HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 280·390px Chrome CDP fallback에서 다섯 라벨의 computed font-size 11px·지도 내부 배치·pageWidth/scrollWidth 일치·runtime errors=[]를 확인했고 메뉴·큰 글자 토글·연구 카드·전문가 영상·3초 회복 카드 상호작용도 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-284와 여섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T07:53:12+09:00"
     }
   ]
 }

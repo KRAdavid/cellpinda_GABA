@@ -3112,6 +3112,19 @@
         "E-NAVI-STATE-INTERACTION-REAUDIT-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-284",
+      "statement": "큰 글자 모드의 연구 지도 보조 범위 라벨은 280·390px에서 11px로 표시되고 지도 내부에 배치되어 연구 대상 범위를 더 쉽게 파악할 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-LABEL-20261008",
+        "E-PR-RESEARCH-MAP-LABEL-20261008",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-LABEL-20261008",
+        "E-CDP-LIVE-RESEARCH-MAP-LABEL-20261008",
+        "E-CDP-LIVE-INTERACTION-RESEARCH-MAP-LABEL-20261008",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-LABEL-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -20149,6 +20162,71 @@
       "captured_at": "2026-10-08T07:29:36+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-INTERACTION-REAUDIT",
       "claim_refs": ["C-283"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-LABEL-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 큰 글자 범위 라벨 보정 후 로컬 자동 품질 게이트가 통과했다.",
+      "locator": "pnpm run build -> repository privacy, goal, research copy, UI contract, governance, ops docs, typecheck, static bundle, release manifest, artifacts, performance all passed; total assets 1649477 bytes; pnpm run typecheck exit 0; pnpm test -> 127 pass, 0 fail; git diff --check passed",
+      "captured_at": "2026-10-08T07:42:00+09:00",
+      "reviewer_id": "NAVI-QA-GABA-20261008-RESEARCH-MAP-LABEL",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-284"]
+    },
+    {
+      "id": "E-PR-RESEARCH-MAP-LABEL-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "큰 글자 연구 지도 범위 라벨 보정 PR #648은 보호 검사를 통과하고 main에 병합됐다.",
+      "locator": "PR #648 https://github.com/KRAdavid/gaba_info/pull/648; head b1e9467457bf041e40e29bc6b3595d2754c828ae; release-verify 113055439943 success; site-quality-verify 113055441043 success; merge SHA 93372da4b520fabbe4bcd721392c09917d72a5bf",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/648",
+      "captured_at": "2026-10-08T07:48:25+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-MAP-LABEL",
+      "claim_refs": ["C-005", "C-284"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-LABEL-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #648 merge 후 main Pages 배포·라이브 smoke·release-status가 모두 성공했다.",
+      "locator": "main workflow 37698489905: release-verify 113055980724 success; worker-readiness 113056438776 success; deploy-pages 113056462619 success; smoke-live 113056555592 success; release-status 113056628520 success; deploy-worker 113056463989 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37698489905",
+      "captured_at": "2026-10-08T07:50:56+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-MAP-LABEL",
+      "claim_refs": ["C-001", "C-005", "C-284"]
+    },
+    {
+      "id": "E-CDP-LIVE-RESEARCH-MAP-LABEL-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 URL의 Chrome CDP fallback 큰 글자 모드에서 연구 지도 범위 라벨이 11px로 보이고 280·390px 지도 내부에 배치됐다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; localStorage gaba-guide-reading-size-v1=large; widths 280, 390; scope labels computed font-size 11px; pageWidth/scrollWidth=280/280 and 390/390; five map nodes inside map; namedButtons=0; errors=[]; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-large-live-label-280-research.png, gaba-large-live-label-390-research.png",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T07:52:31+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-RESEARCH-MAP-LABEL",
+      "claim_refs": ["C-004", "C-284"]
+    },
+    {
+      "id": "E-CDP-LIVE-INTERACTION-RESEARCH-MAP-LABEL-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 URL에서 핵심 모바일 상호작용을 재현하고 큰 글자 토글 상태를 원상 복귀했다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; 390px Chrome CDP fallback; menu opened/closed; largeText toggled from true to false and restored true; skin topic selected with aria-pressed=true, active detail=true, focus=research-skin, hash=#research-skin; expert video selected with iframe autoplay=1; recovery card changed after 3400ms and pause control returned aria-pressed=true / 다시 재생; reduced-motion=false; runtime errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T07:53:12+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-RESEARCH-MAP-LABEL-INTERACTION",
+      "claim_refs": ["C-003", "C-004", "C-284"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-LABEL-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "큰 글자 연구 지도 보정 배포 후 GitHub Pages 공개본은 main merge SHA와 일치하고 정적 공개 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha 93372da4b520fabbe4bcd721392c09917d72a5bf; generatedAt 2026-10-07T22:49:39.620Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T07:53:12+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-RESEARCH-MAP-LABEL",
+      "claim_refs": ["C-001", "C-002", "C-006", "C-284"]
     }
   ]
 }
