@@ -2163,3 +2163,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, 외부 검증 조건을 유지한다.
 
 증적: `C-251`, `E-LOCAL-BUILD-COMPACT-SHARE-20261007`, `E-CDP-COMPACT-SHARE-20261007`, `E-DEPLOY-PIPELINE-COMPACT-SHARE-20261007`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261007`, `E-NAVI-STATE-COMPACT-SHARE-20261007`.
+
+## 2026-10-07 — 초소형 전문가 영상 메타데이터 보정 — 9e9e0d3
+
+- NAVI 공개 배포 감리에서 280px 전문가 영상 카드의 순번이 주제·재생 상태와 한 줄에 고정되어 카드 밖으로 넘어갈 수 있는 잔여 리스크를 확인했다. 350px 이하에서 메타 정보가 자연스럽게 줄바꿈되도록 보정하고 순번의 자동 여백을 해제했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산, PR #587 보호 검사와 main Pages 배포·라이브 smoke·release-status가 성공했다. 공개 280·320·360·390·430·1440px에서 영상 선택→iframe·재생 상태→수면 필터 4개 카드 표시를 확인했다.
+- 공개 validator는 merge SHA `9e9e0d35a0db4255c5151d09411706ec482d8717`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `provenance=matched`를 확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재에 따른 fallback, YouTube 외부 프레임·실기기·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-252`, `E-LOCAL-BUILD-ULTRA-NARROW-VIDEO-META-20261007`, `E-CDP-ULTRA-NARROW-VIDEO-META-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-VIDEO-META-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007`, `E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007`.
