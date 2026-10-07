@@ -2473,3 +2473,11 @@
 - 이번 결과는 Chrome 기반 자동 검증과 GitHub Pages smoke 범위다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 확인 범위를 넘어가므로 완료로 확대하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007`, `E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007`, `E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007`, `E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007`.
+
+## Red-team recheck — 공개 핵심 화면·상호작용 — b7f0bbb — 2026-10-07
+
+- 공격 관점에서 320·390·768·1440px 직접 진입과 390px 메뉴 열림·포커스 이동·`#academic` 이동·연구 지도 선택·공유 fallback 토스트를 재현했다. document 가로폭은 viewport와 일치했고 읽기 진행 레일 아래에 장 제목과 연구 카드가 안착했다.
+- 히어로·수면과 회복·발견·인지 연구 카드·출처 읽기·마지막 공유 화면에서 잘림·겹침·빈 상태는 재현되지 않았다. 공유 API가 열리지 않는 headless 조건에서도 안내 토스트로 사용자 상태가 바뀌었다.
+- 새 CRITICAL/MAJOR 결함은 없다. 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 실기기·실제 사용자 승인으로 확대하지 않으며, teaser `HOLD`와 외부 브라우저·실기기·독립 과학·규제 검토 조건은 유지한다.
+
+증적: `E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007`, `E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007`, `E-NAVI-STATE-PUBLISHING-RECHECK-20261007`.

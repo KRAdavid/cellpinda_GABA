@@ -2779,6 +2779,17 @@
       "E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-256",
+    "statement": "최신 공개본은 320·390·768·1440px 핵심 장 직접 진입과 390px 메뉴·연구 지도·공유 상호작용 재감리에서 읽기 진행 레일·연구 결과 카드·출처 읽기·마지막 공유 흐름의 가로폭과 상태 변경을 유지하며, 자동 게이트와 live validator가 통과한다. 이번 회차에는 기능 코드·공개 연구 카피·수치·출처·제품 독립 경계를 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-PUBLISHING-RECHECK-20261007",
+      "E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007",
+      "E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007",
+      "E-NAVI-STATE-PUBLISHING-RECHECK-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -18136,6 +18147,47 @@
     "captured_at": "2026-10-07T19:42:50+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-CROSS-BROWSER-SURFACE",
     "claim_refs": ["C-255"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-PUBLISHING-RECHECK-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 공개 기준 코드에서 UI 계약·연구 카피·타입체크·127개 테스트·production build·정적 번들·성능 예산이 모두 통과했으며, 이번 회차는 코드 수정 없이 공개본 유지로 판정했다.",
+    "locator": "pnpm run validate:ui-contract -> ok; pnpm run validate:research-copy -> status ok; pnpm run typecheck -> pass; pnpm test -> 127 pass/0 fail; pnpm run build -> pass; validate:static-bundle -> 73 files; validate:performance -> total assets 1,649,431 bytes <= 1,650,000; git diff --check -> pass",
+    "captured_at": "2026-10-07T20:04:06+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-PUBLISHING-RECHECK",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-256"]
+  },
+  {
+    "id": "E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Chrome headless/CDP fallback으로 390px 공개 안내서에서 메뉴 열림·포커스 이동·연구 지도 이동·연구 카드 선택·공유 fallback 토스트를 재현했으며, document 가로폭은 viewport와 일치했다.",
+    "locator": "local http://127.0.0.1:5173/; width 390; menu aria-expanded=true and first focus href #opening-bridge; #academic navigation -> hash #academic and active nav 연구 지도; research map selection -> 인지/research-cognition; header share -> fallback toast visible; document scrollWidth=390",
+    "captured_at": "2026-10-07T20:04:06+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-INTERACTION-PUBLISHING-RECHECK",
+    "claim_refs": ["C-003", "C-004", "C-256"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "GitHub Pages 공개본은 최신 문서 병합 SHA와 일치하며 HTTP 200, 정적 bundle hash 73개, claim 12개, master record 6개, share page 6개, teaser HOLD, 제품 독립 공개 경계를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=b7f0bbb834d0a3d070432fed4b73f747513408fb; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha b7f0bbb834d0a3d070432fed4b73f747513408fb; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T20:04:06+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-PUBLISHING-RECHECK",
+    "claim_refs": ["C-001", "C-002", "C-006", "C-256"]
+  },
+  {
+    "id": "E-NAVI-STATE-PUBLISHING-RECHECK-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register·감사·레드팀 기록이 이번 공개 표면 재감리 결과를 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 외부 검증 잔여 조건을 함께 기록한다.",
+    "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; .navi/PROJECT_STATE.json AUD-007/RT-007/H-340; .navi/EVIDENCE_REGISTER.json C-256 and four evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T20:04:06+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PUBLISHING-RECHECK",
+    "claim_refs": ["C-256"]
   }
 ]
 }

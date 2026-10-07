@@ -2888,6 +2888,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
 
+## 공개 배포 핵심 화면·상호작용 자동 재감리 — b7f0bbb — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. `pnpm run validate:live-public`가 candidate `b7f0bbb834d0a3d070432fed4b73f747513408fb`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 전문 퍼블리싱·상호작용: PASS. Chrome headless/CDP fallback에서 320·390·768·1440px 핵심 장을 직접 열고 히어로·수면과 회복·발견·인지 연구 카드·출처 읽기·마지막 공유 화면을 확인했다. 390px에서는 메뉴 열림·포커스 이동·`#academic` 이동·연구 지도 `인지` 선택·공유 fallback 토스트를 실제 상태 변경으로 재현했으며 document 가로폭은 viewport와 일치했다.
+- AC-005 자동 게이트: PASS. UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 검사가 통과했고 총 자산은 `1,649,431 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 회차에는 기능 코드·공개 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다. teaser `HOLD`와 내부 운영 스냅샷 비공개 경계를 유지한다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin 부재에 따른 Chrome headless/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-256`, `E-LOCAL-BUILD-PUBLISHING-RECHECK-20261007`, `E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007`, `E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007`, `E-NAVI-STATE-PUBLISHING-RECHECK-20261007`.
+
 ## 공개 푸터 아이콘·번들 여유 재감리 — 60e90d4 — 2026-10-07
 
 - AC-001 공개 URL·Pages 정합성: PASS. PR #572와 main workflow `37580070352`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 merge SHA `60e90d451bdfad3ea99bd7f0d2714230f98ef499`와 동일한 candidate를 확인했다.

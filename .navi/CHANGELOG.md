@@ -2197,3 +2197,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·수치·출처·제품 독립 공개 경계·teaser `HOLD`는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 외부 조건으로 남긴다.
 
 증적: `C-255`, `E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007`, `E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007`, `E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007`, `E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007`.
+
+## 2026-10-07 — 공개 핵심 화면·상호작용 자동 재감리 — b7f0bbb
+
+- 320·390·768·1440px 핵심 장 직접 진입과 390px 실제 메뉴·연구 지도·공유 흐름을 재점검했다. 히어로·수면과 회복·발견·인지 연구 카드·출처 읽기·마지막 공유 화면에 잘림·겹침이 없었고 document 가로폭은 viewport와 일치했다.
+- UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 검사가 통과했으며 총 자산은 `1,649,431 bytes / 1,650,000 bytes`다. 기능 코드·공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 공개 validator는 candidate `b7f0bbb834d0a3d070432fed4b73f747513408fb`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며, NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재에 따른 Chrome headless/CDP fallback, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-256`, `E-LOCAL-BUILD-PUBLISHING-RECHECK-20261007`, `E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007`, `E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007`, `E-NAVI-STATE-PUBLISHING-RECHECK-20261007`.
