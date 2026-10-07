@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 전문가 영상→출처 읽기 연결 리듬 보정 — working tree — 2026-10-07
+
+- 전문가 영상 장을 읽은 뒤 `11 · 출처 읽기`로 넘어갈 때 모바일 상단 여백이 과도해 다음 내용이 끊겨 보이는 잔여 퍼블리싱 리스크를 확인했다.
+- 700px 이하에서 출처 읽기 장의 상단·하단 여백을 `72px·64px`로 조정해 제목, 연구를 읽는 네 가지 질문, 원문 출처 패널이 한 흐름으로 이어지도록 했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산과 Chrome CDP fallback 390px 직접 진입·메뉴·연구 지도·공유 상호작용을 재검증했다. 공개 main 배포는 이 working-tree 보정의 후속 게이트다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-HANDOFF-20261007`, `E-CDP-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007`.
+
 ## 공개 연구 라우트 고도화 — 공개 배포 확인 — final manifest 25d8ff3 — 2026-10-07
 
 - 연구 페이지를 메인 안내서와 같은 프리미엄 네이비·틸 톤으로 맞추고, `사람 연구의 결과를 한눈에 읽습니다`를 중심으로 결과·연구 조건·출처가 바로 이어지는 흐름을 만들었다.

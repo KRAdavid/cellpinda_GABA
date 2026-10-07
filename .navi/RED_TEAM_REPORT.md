@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 전문가 영상→출처 읽기 연결 리듬 공격 재점검 — working tree — 2026-10-07
+
+- 공격 관점에서 전문가 영상 장이 끝난 뒤 출처 읽기 장의 빈 공간이 독자를 이탈시키거나, 제목이 읽기 진행 레일과 겹칠 수 있는지 확인했다. 모바일 출처 읽기 장의 상단·하단 여백을 `72px·64px`로 줄였고, 390px 직접 진입에서 제목·연구 읽기 질문·원문 출처 패널이 순서대로 보였다.
+- 390px CDP fallback에서 document 폭은 viewport와 같고 메뉴·연구 지도 선택·공유 fallback 상호작용이 기존대로 동작했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser 플러그인 부재에 따른 Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-HANDOFF-20261007`, `E-CDP-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007`.
+
 ## 공개 연구 라우트 시각·문구 공격 재점검 — final manifest 25d8ff3 — 2026-10-07
 
 - 연구 페이지가 메인 안내서와 분리된 별도 도구처럼 보이거나, 결과 전에 안내 문구가 과도하게 앞서고, 비교 조건 문장이 어색해 읽기를 멈추게 하는지 공격적으로 확인했다. 네이비·틸 브랜드 계층, `사람 연구의 결과를 한눈에 읽습니다`, 결과·연구 조건·출처 순서, 자연스러운 비교 문구가 390px 공개 화면에서 한 흐름으로 읽혔다.

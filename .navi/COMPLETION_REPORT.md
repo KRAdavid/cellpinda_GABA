@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Work Recheck — mobile chapter handoff rhythm — working tree — 2026-10-07
+
+- AC-003/AC-004: `PASS_WITH_CONDITIONS`. 전문가 영상에서 출처 읽기로 이어지는 모바일 여백을 보정했고, 390px CDP fallback에서 `11 · 출처 읽기` 제목·네 가지 연구 질문·원문 출처 패널이 읽기 레일 아래에 이어지는 것을 확인했다.
+- AC-005: `PASS`. UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산이 통과했다. 390px 메뉴·연구 지도 선택·공유 fallback과 document 가로폭도 재확인했다.
+- AC-006/AC-007: `PASS_WITH_CONDITIONS`. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 공개 main 배포·Worker 운영 비밀값·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-HANDOFF-20261007`, `E-CDP-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007`.
+
 ## Current Public Deployment Recheck — research route — final manifest 25d8ff3 — 2026-10-07
 
 - AC-001/AC-004/AC-005: PASS. 최종 main workflow `37569095235`의 release-verify·Pages publish·라이브 smoke·release-status가 성공했고, 공개 manifest는 HTTP 200·candidate SHA `25d8ff3a29b47ef9dc76a73a4e26ae27e6b6163d`·bundle hash 73개·정적 모드·teaser `HOLD`를 확인한다.

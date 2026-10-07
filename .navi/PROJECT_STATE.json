@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T20:39:00+09:00",
+  "updated_at": "2026-10-07T21:05:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6074,6 +6074,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T20:39:00+09:00"
+    },
+    {
+      "id": "H-342",
+      "event": "NAVI 자동 공개 배포 점검에서 전문가 영상 장과 출처 읽기 장 사이의 모바일 상단 여백이 독해 흐름을 끊어 보이는 잔여 퍼블리싱 리스크를 확인하고 보정했다. 700px 이하 출처 읽기 장의 상단·하단 여백을 72px·64px로 조정했으며, 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산과 Chrome CDP fallback 390px에서 출처 읽기 제목·연구 질문·원문 출처 패널, 메뉴·연구 지도·공유 상호작용, 가로폭 0건을 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 공개 main 배포·Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-258과 세 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T21:05:00+09:00"
     }
   ]
 }
