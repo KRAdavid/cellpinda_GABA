@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T19:06:40+09:00",
+  "updated_at": "2026-10-07T19:19:16+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2139,11 +2139,26 @@
         "impact": "대표 공개 화면의 시각·상호작용 회귀가 확인되지 않았다.",
         "required_action": "화면·카피 변경 시 동일 4폭 및 해시 진입 QA 재실행",
         "owner": "QA"
+      },
+      {
+        "id": "AUD-005",
+      "severity": "OBSERVATION",
+      "status": "CLOSED",
+      "statement": "최신 main 공개본을 320·390·768·1440px에서 다시 점검했다. 320px은 academic·reading-note·expert-videos·final 직접 진입, 390·768·1440px은 top과 주요 장 직접 진입을 확인했으며, 확인 화면의 document 가로폭은 viewport와 일치했다. 히어로·연구 지도·출처 읽기 카드·전문가 영상·마지막 공유 화면의 잘림과 겹침은 재현되지 않았고 신규 CRITICAL/MAJOR 코드 결함도 없었다. UI contract·research copy·typecheck·127개 테스트·성능 예산과 공개 validator가 모두 통과했으며, 기능 코드·공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007",
+        "E-CDP-PUBLISHING-SURFACE-AUDIT-20261007",
+        "E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007",
+        "E-NAVI-STATE-PUBLISHING-AUDIT-20261007"
+      ],
+      "impact": "현재 공개 화면은 전문 퍼블리싱 기준의 대표 반응형·읽기 흐름에서 안정적으로 보인다.",
+      "required_action": "다음 코드·카피 변경 시 동일 4폭·핵심 해시 진입·공개 validator QA 재실행",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T10:06:40Z"
+    "last_run_at": "2026-10-07T10:19:16Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2341,11 +2356,25 @@
         "impact": "이번 공개본에서 새 공격 가능한 화면 회귀는 관찰되지 않았다.",
         "required_action": "Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
         "owner": "레드팀"
+      },
+      {
+        "id": "RT-005",
+      "severity": "OBSERVATION",
+      "status": "CLOSED",
+      "statement": "공개 표면 재점검에서 좁은 모바일·태블릿·데스크톱의 핵심 장 직접 진입, 가로폭, 화면 카드 읽기 순서에 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Chrome headless/CDP fallback 중심 결과이므로 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건으로 유지한다.",
+      "evidence_refs": [
+        "E-CDP-PUBLISHING-SURFACE-AUDIT-20261007",
+        "E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007",
+        "E-NAVI-STATE-PUBLISHING-AUDIT-20261007"
+      ],
+      "impact": "이번 공개본에서 새 공격 가능한 화면 회귀는 관찰되지 않았다.",
+      "required_action": "외부 브라우저·실기기·실사용자·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "레드팀"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T10:06:40Z"
+    "last_run_at": "2026-10-07T10:19:16Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5928,6 +5957,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T19:06:40+09:00"
+    },
+    {
+      "id": "H-338",
+      "event": "NAVI 자동 공개 배포 재감리에서 최신 main 공개본을 320·390·768·1440px로 확인했다. 핵심 장 직접 진입 화면의 document 가로폭은 viewport와 일치했고, 히어로·연구 지도·출처 읽기·전문가 영상·마지막 공유 화면의 잘림·겹침과 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 로컬 UI contract·research copy·typecheck·127개 테스트·성능 예산과 공개 validator candidate `f320f5dfa4964770c306f3b643f5eedd6f363743`·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 기능 코드·공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았고, C-254와 네 증거를 등록한다. Browser plugin 부재에 따른 Chrome headless/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T19:19:16+09:00"
     }
   ]
 }

@@ -2989,6 +2989,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-253`, `E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007`.
 
+## Current Release Recheck — f320f5d — 공개 표면·반응형 고도화 재감리 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 공개 validator가 candidate `f320f5dfa4964770c306f3b643f5eedd6f363743`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 전문 퍼블리싱·반응형: PASS. 320px은 `#academic`·`#reading-note`·`#expert-videos`·`#final`, 390·768·1440px은 `#top`과 주요 장을 직접 진입시켰다. 확인 화면의 document 가로폭은 viewport와 일치했고 히어로·연구 지도·출처 읽기 카드·전문가 영상·마지막 공유 화면에서 잘림·겹침이 재현되지 않았다.
+- AC-005 자동 게이트: PASS. UI contract·research copy·typecheck·127개 테스트·정적 성능 예산이 통과했고 총 자산은 `1,649,388 bytes`다. 이번 재감리에는 코드 변경이 필요하지 않았다.
+- AC-006 제품 독립 경계: PASS. 기능 코드·공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없지만 Browser plugin 부재에 따른 Chrome headless/CDP fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-254`, `E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007`, `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

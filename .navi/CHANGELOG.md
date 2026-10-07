@@ -2181,3 +2181,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재와 외부 브라우저·실기기·독립 과학·규제 검토 조건을 유지한다.
 
 증적: `C-253`, `E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007`.
+
+## 2026-10-07 — 공개 표면·반응형 고도화 재감리 — f320f5d
+
+- 320·390·768·1440px에서 주요 장 직접 진입을 다시 점검하고, document 가로폭 일치·히어로·연구 지도·출처 읽기·전문가 영상·공유 화면의 잘림·겹침 없음으로 확인했다.
+- UI contract·research copy·typecheck·127개 테스트·성능 예산과 최신 공개 validator가 통과했다. 총 자산은 `1,649,388 bytes`이며 기능 코드·공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 신규 CRITICAL/MAJOR 결함은 없고, 이번 회차는 코드 수정 없이 공개본 유지로 기록했다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`, 실기기·실사용자·독립 과학·규제 외부 검증 조건을 유지한다.
+
+증적: `C-254`, `E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007`, `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.

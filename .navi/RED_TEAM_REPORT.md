@@ -2457,3 +2457,11 @@
 - 새 CRITICAL/MAJOR 결함은 없다. 다만 Browser plugin 부재에 따른 Chrome headless/CDP fallback, YouTube 외부 프레임의 실제 네트워크·브라우저별 차이, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`.
+
+## Red-team recheck — 공개 표면·반응형 고도화 — f320f5d — 2026-10-07
+
+- 공격 관점에서 320·390·768·1440px의 핵심 장 직접 진입을 재현했다. 확인 화면의 document `scrollWidth`는 viewport와 일치했고, 히어로·연구 지도·출처 읽기·전문가 영상·마지막 공유 화면에서 잘림·겹침이나 빈 조작 요소는 재현되지 않았다.
+- 이번 감리에서 신규 CRITICAL/MAJOR 결함은 없다. 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며, teaser `HOLD`와 외부 YouTube 프레임 의존성은 유지된다.
+- Chrome headless/CDP fallback 결과를 Safari/iOS/Android 실기기·실제 고령 사용자 승인으로 확대하지 않는다. 독립 과학·규제 감수와 실제 사용성 평가는 외부 검증 조건으로 계속 OPEN이다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.
