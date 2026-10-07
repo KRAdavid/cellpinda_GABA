@@ -1021,7 +1021,7 @@
 .guide-research-profile>div:last-child{padding-bottom:0;border-bottom:0}
 .guide-research-profile span{color:#91a8b4;font-size:10px;font-weight:900;letter-spacing:.08em;line-height:1.45}
 .guide-research-profile strong{color:#39596c;font-size:12px;font-weight:800;line-height:1.48;letter-spacing:-.045em;overflow-wrap:anywhere}
-.guide-research-detail-inline .guide-outcome-chart{grid-column:2;grid-row:2 / span 3;align-self:start;margin:27px 0 0;border-color:#d4e7ea;background:rgba(255,255,255,.82);box-shadow:0 13px 28px rgba(23,72,92,.06)}
+.guide-research-detail-inline .guide-outcome-chart{grid-column:2;grid-row:2 / span 3;align-self:start;margin:27px 0 0;border-color:#d4e7ea;background:rgba(255,255,255,.82);box-shadow:0 13px 28px rgba(23,72,92,.06);position:sticky;top:132px}
 .guide-research-detail-inline dl{grid-column:1;grid-row:4;align-self:start;margin-top:25px}
 .guide-research-detail-inline .guide-research-source{grid-column:1 / -1;grid-row:5;margin-top:24px}
 .guide-research-detail-inline .guide-research-finding{display:grid;gap:12px;padding-left:11px;border-left:2px solid var(--guide-research-accent,#27a5aa)}
@@ -1042,7 +1042,7 @@
   .guide-research-profile{margin-top:21px}
   .guide-research-detail-inline .guide-research-inline-heading .guide-research-glyph{flex:0 0 62px}
   .guide-research-result-lead{margin-top:12px;padding:12px 14px 13px}
-  .guide-research-detail-inline .guide-outcome-chart{margin:22px 0 23px}
+  .guide-research-detail-inline .guide-outcome-chart{margin:22px 0 23px;position:static}
   .guide-research-detail-inline dl{margin-top:0}
   .guide-research-detail-inline .guide-research-source{margin-top:22px}
 }
