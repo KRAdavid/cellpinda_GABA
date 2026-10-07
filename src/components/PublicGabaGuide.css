@@ -1900,6 +1900,12 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    width:24px;
+    height:24px;
+    border:1px solid #c4e2e4;
+    border-radius:50%;
+    background:#fff;
+    box-shadow:0 2px 8px rgba(20,87,108,.08);
     color:var(--guide-teal-dark);
     pointer-events:none;
     transition:opacity .18s ease,visibility .18s ease;
