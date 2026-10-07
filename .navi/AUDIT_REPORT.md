@@ -2890,7 +2890,7 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 ## 공개 배포 핵심 화면·상호작용 자동 재감리 — b7f0bbb — 2026-10-07
 
-- AC-001 공개 URL·라이브 정합성: PASS. `pnpm run validate:live-public`가 candidate `b7f0bbb834d0a3d070432fed4b73f747513408fb`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-001 공개 URL·라이브 정합성: PASS. 코드 기준선 `b7f0bbb`와 문서-only PR #594 병합 SHA `f6a934d10ac08720be717e07bd86ea02513b24b9`가 연결된 뒤 `pnpm run validate:live-public`가 HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
 - AC-003/AC-004 전문 퍼블리싱·상호작용: PASS. Chrome headless/CDP fallback에서 320·390·768·1440px 핵심 장을 직접 열고 히어로·수면과 회복·발견·인지 연구 카드·출처 읽기·마지막 공유 화면을 확인했다. 390px에서는 메뉴 열림·포커스 이동·`#academic` 이동·연구 지도 `인지` 선택·공유 fallback 토스트를 실제 상태 변경으로 재현했으며 document 가로폭은 viewport와 일치했다.
 - AC-005 자동 게이트: PASS. UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 검사가 통과했고 총 자산은 `1,649,431 bytes / 1,650,000 bytes`다.
 - AC-006 제품 독립 경계: PASS. 이번 회차에는 기능 코드·공개 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다. teaser `HOLD`와 내부 운영 스냅샷 비공개 경계를 유지한다.

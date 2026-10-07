@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T20:04:06+09:00",
+  "updated_at": "2026-10-07T20:14:19+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2188,7 +2188,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T11:04:06Z"
+    "last_run_at": "2026-10-07T11:14:19Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2433,7 +2433,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T11:04:06Z"
+    "last_run_at": "2026-10-07T11:14:19Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -6030,6 +6030,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T19:42:50+09:00"
+    },
+    {
+      "id": "H-340",
+      "event": "NAVI 자동 공개 배포 재감리에서 320·390·768·1440px 핵심 장 직접 진입과 390px 메뉴·연구 지도·공유 상호작용을 확인했다. 메뉴 열림·포커스 이동·연구 카드 선택·공유 fallback 토스트가 실제 상태를 변경했고 document 가로폭은 viewport와 일치했다. 로컬 UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·성능 검사가 통과했으며, 문서-only PR #594 병합 후 main workflow `37612397732`와 공개 validator가 최종 SHA `f6a934d10ac08720be717e07bd86ea02513b24b9`를 확인했다. 기능 코드·공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재, teaser HOLD, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-256과 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T20:14:19+09:00"
     }
   ]
 }
