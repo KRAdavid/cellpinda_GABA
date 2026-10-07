@@ -2647,3 +2647,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+
+## Current Release Recheck — 23739cb — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. main workflow `37570786455`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 validator가 candidate `23739cb0158a9fff1b93ff4979cd76419e6b0eb8`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 연구 도표·반응형: PASS. 공개 1440px에서 긴 연구 설명과 결과 도표가 sticky 읽기 레일로 함께 유지되고, 390px에서는 도표가 정적 순서로 표시된다. 피부 연구 카드 선택·포커스·활성 카드와 가로폭 정합을 확인했다.
+- AC-005 배포 게이트: PASS. PR #565 required checks, main release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. local Pages 성능 총량은 `1,649,669 bytes <= 1,650,000`이다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 연구 결과 도표의 읽기 위치와 반응형 흐름에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, Browser plugin 부재에 따른 Chromium fallback, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-240`, `E-LOCAL-BUILD-RESEARCH-CHART-STICKY-20261007`, `E-PLAYWRIGHT-RESEARCH-CHART-STICKY-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-STICKY-20261007`, `E-LIVE-PUBLIC-RESEARCH-CHART-STICKY-20261007`.

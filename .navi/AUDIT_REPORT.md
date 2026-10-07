@@ -24,6 +24,15 @@
 
 증적: `E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261007`, `E-UI-CONTRACT-RESEARCH-MAP-CUE-20261007`, `E-PLAYWRIGHT-RESEARCH-MAP-CUE-20261007`.
 
+## 연구 결과 도표 읽기 레일 고정 — 공개 배포 확인 — main 23739cb — 2026-10-07
+
+- 독립 감사 관점에서 긴 연구 카드의 좌측 설명을 스크롤할 때 우측 결과 도표가 상단에만 남아 비교 맥락이 끊길 수 있는 경로를 확인했다.
+- 1101px 이상에서 결과 도표를 `position: sticky; top: 132px`로 고정하고 900px 이하에서는 `position: static`으로 복원했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 Pages-style build·성능 예산, PR #565 required checks, main workflow `37570786455`, 공개 validator candidate `23739cb0158a9fff1b93ff4979cd76419e6b0eb8`·HTTP 200, 공개 390·1440px Playwright Chromium fallback을 재확인했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Residual: teaser `HOLD`, Browser plugin 부재에 따른 Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CHART-STICKY-20261007`, `E-PLAYWRIGHT-RESEARCH-CHART-STICKY-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-STICKY-20261007`, `E-LIVE-PUBLIC-RESEARCH-CHART-STICKY-20261007`.
+
 ## 좁은 화면 읽기 조절 라벨 — 공개 배포 확인 — main d035807 — 2026-10-07
 
 - PR #555 병합 후 main workflow `37563485033`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했고, deploy-worker는 정적 공개 모드의 정책대로 skip되었다.

@@ -2594,6 +2594,17 @@
       "E-LIVE-PUBLIC-RESEARCH-ROUTE-FINAL-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-240",
+    "statement": "연구 상세 카드의 데스크톱 결과 도표가 긴 연구 설명을 읽는 동안 상단 읽기 레일에 고정되고, 900px 이하 모바일·태블릿에서는 기존 정적 순서로 표시된다. 390px·1440px에서 연구 대상·결과·출처·가로폭·오류 상태를 확인했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-RESEARCH-CHART-STICKY-20261007",
+      "E-PLAYWRIGHT-RESEARCH-CHART-STICKY-20261007",
+      "E-DEPLOY-PIPELINE-RESEARCH-CHART-STICKY-20261007",
+      "E-LIVE-PUBLIC-RESEARCH-CHART-STICKY-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17190,6 +17201,48 @@
     "captured_at": "2026-10-07T12:58:30+09:00",
     "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-RESEARCH-FINAL",
     "claim_refs": ["C-001", "C-002", "C-239"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-RESEARCH-CHART-STICKY-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 결과 도표 읽기 레일의 데스크톱 고정 보정이 Pages-style production build와 성능 예산을 통과한다.",
+    "locator": "branch codex/research-chart-sticky-20261007; pnpm exec vite build --base /gaba_info/ --outDir dist-pages; validate:performance initial JS 311475, initial CSS 95703, total assets 1649669 <= 1650000; git diff --check passed",
+    "captured_at": "2026-10-07T13:13:45+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-RESEARCH-CHART-STICKY",
+    "claim_refs": ["C-001", "C-005", "C-240"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-RESEARCH-CHART-STICKY-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "공개 GitHub Pages에서 연구 주제 선택과 결과 도표의 반응형 고정 동작이 오류 없이 재현된다.",
+    "locator": "Browser plugin unavailable; Playwright Chromium fallback against https://kradavid.github.io/gaba_info/; viewports 390x1000 and 1440x1000; HTTP 200; document scrollWidth matched viewport; clicking 피부 연구 카드로 이동 produced focus research-skin and one active research card; computed chart position was static at 390px and sticky at 1440px; page errors 0; console errors 0; screenshots stored outside repository",
+    "captured_at": "2026-10-07T13:20:00+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-RESEARCH-CHART-STICKY",
+    "claim_refs": ["C-003", "C-006", "C-240"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-RESEARCH-CHART-STICKY-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 결과 도표 고정 보정이 PR 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #565 https://github.com/KRAdavid/gaba_info/pull/565; squash merge 23739cb0158a9fff1b93ff4979cd76419e6b0eb8; workflow https://github.com/KRAdavid/gaba_info/actions/runs/37570786455: release-verify 112628687626 success; worker-readiness 112629018457 success; deploy-pages 112629037678 success; smoke-live 112629099667 success; release-status 112629150100 success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37570786455",
+    "captured_at": "2026-10-07T13:19:00+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-RESEARCH-CHART-STICKY",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-240"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-RESEARCH-CHART-STICKY-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 GitHub Pages 공개본이 연구 결과 도표 고정 보정의 main release SHA와 일치하고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=23739cb0158a9fff1b93ff4979cd76419e6b0eb8; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 23739cb0158a9fff1b93ff4979cd76419e6b0eb8; generatedAt 2026-10-07T04:19:02.696Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T13:19:02+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-RESEARCH-CHART-STICKY",
+    "claim_refs": ["C-001", "C-002", "C-240"]
   }
 ]
 }

@@ -2087,3 +2087,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - C-227을 `SUPPORTED`, 배포·라이브 증거를 `INDEPENDENTLY_CONFIRMED`로 갱신했다.
 
 증적: `C-227`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+
+## 연구 결과 도표 읽기 레일 고정·공개 배포 — 23739cb — 2026-10-07
+
+- 긴 연구 상세 카드를 읽는 동안 데스크톱 결과 도표가 상단에 남아 비교 맥락이 끊길 수 있는 잔여 퍼블리싱 리스크를 확인했다.
+- 1101px 이상에서는 결과 도표를 sticky 읽기 레일로 고정하고, 900px 이하 모바일·태블릿에서는 기존 정적 카드 흐름을 유지했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 Pages-style 성능 예산은 `1,649,669 bytes <= 1,650,000`이며 PR #565와 main workflow `37570786455`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `23739cb0158a9fff1b93ff4979cd76419e6b0eb8`, HTTP 200, STATIC, bundle hash 73개, teaser `HOLD`, provenance `matched`를 확인했다.
+- 공개 390·1440px Playwright Chromium fallback에서 가로폭·오류·피부 연구 카드 선택을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `C-240`, `E-LOCAL-BUILD-RESEARCH-CHART-STICKY-20261007`, `E-PLAYWRIGHT-RESEARCH-CHART-STICKY-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-STICKY-20261007`, `E-LIVE-PUBLIC-RESEARCH-CHART-STICKY-20261007`.
