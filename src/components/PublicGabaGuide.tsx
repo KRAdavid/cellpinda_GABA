@@ -443,7 +443,7 @@ const applicationCases: ApplicationCase[] = [
     body: '세계 식품과학 연구에서는 유산균 발효로 곡류, 빵, 유제품, 음료 등에 GABA를 더하는 방법을 연구합니다.',
     detail: 'GABA는 뇌 연구의 물질에서 식품공학과 발효기술의 연구 소재로도 이어집니다.',
     icon: 'globe',
-    sources: [{ label: 'Food & Function · LAB 발효와 GABA 응용 리뷰', url: 'https://pubs.rsc.org/ga/content/articlelanding/2023/fo/d2fo03936b' }],
+    sources: [{ label: 'Food & Function · LAB 발효와 GABA 응용 리뷰', url: 'https://doi.org/10.1039/D2FO03936B' }],
   },
 ];
 
