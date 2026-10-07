@@ -2953,6 +2953,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-250`, `E-CDP-RESPONSIVE-AUDIT-20261007`, `E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007`, `E-DEPLOY-PIPELINE-RESPONSIVE-AUDIT-20261007`, `E-NAVI-STATE-RESPONSIVE-AUDIT-20261007`.
 
+## 좁은 모바일 공유 컨트롤 라벨 보정 — 공개 배포 확인 — c249e113 — 2026-10-07
+
+- AC-001 공개 정합성: PASS. 공개 validator가 candidate `c249e113cfe3bcf7e6fe5b63098b6e612d1309c1`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 모바일 가독성·공유성: PASS. 280·320px에서 공유 아이콘 옆에 `공유` 라벨을 표시하고 351·390px에서는 기존 `공유하기`를 유지했다. 네 폭 모두 document 폭이 viewport와 일치하며 280px에서 공유 버튼 실제 클릭 후 fallback 토스트를 확인했다. 접근성 이름 `페이지 공유하기`는 유지했다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산과 PR #585 보호 검사가 통과했다.
+- AC-006 제품 독립 경계: PASS. 헤더 공유 라벨과 폭만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome headless/CDP fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-251`, `E-LOCAL-BUILD-COMPACT-SHARE-20261007`, `E-CDP-COMPACT-SHARE-20261007`, `E-DEPLOY-PIPELINE-COMPACT-SHARE-20261007`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261007`, `E-NAVI-STATE-COMPACT-SHARE-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

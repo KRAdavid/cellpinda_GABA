@@ -2721,6 +2721,18 @@
       "E-NAVI-STATE-RESPONSIVE-AUDIT-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-251",
+    "statement": "280·320px 좁은 모바일 헤더의 공유 버튼이 아이콘과 `공유` 라벨로 표시되고, 351·390px에서는 기존 `공유하기` 라벨을 유지한다. 네 폭 모두 document 폭이 viewport와 일치하며 접근성 이름 `페이지 공유하기`와 공유 fallback 토스트를 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-COMPACT-SHARE-20261007",
+      "E-CDP-COMPACT-SHARE-20261007",
+      "E-DEPLOY-PIPELINE-COMPACT-SHARE-20261007",
+      "E-LIVE-PUBLIC-COMPACT-SHARE-20261007",
+      "E-NAVI-STATE-COMPACT-SHARE-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17838,6 +17850,58 @@
     "captured_at": "2026-10-07T17:45:00+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-RESPONSIVE-AUDIT",
     "claim_refs": ["C-250"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-COMPACT-SHARE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "좁은 모바일 공유 라벨 보정 후 로컬 UI 계약·타입체크·127개 테스트·production build·정적 bundle·성능 예산이 통과했다.",
+    "locator": "working tree candidate 1679cbeba30b4ef073b2a858cf6a6bce04e01759 before protected PR; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127/127 pass; pnpm run build; validate:release-manifest; check-public-artifacts; validate:static-bundle; validate:performance; initial JS 311405 <= 380000; initial CSS 95703 <= 110000; total assets 1648711 <= 1650000; largest asset 311405 <= 380000; git diff --check",
+    "captured_at": "2026-10-07T17:50:00+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-COMPACT-SHARE",
+    "claim_refs": ["C-001", "C-003", "C-251"]
+  },
+  {
+    "id": "E-CDP-COMPACT-SHARE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Browser plugin을 사용할 수 없어 Chrome headless/CDP fallback으로 로컬·공개 280·320·351·390px 헤더를 확인했다. 280·320px은 `공유`, 351·390px은 `공유하기`를 표시하고 네 폭에서 document scrollWidth가 viewport와 일치했다. 280px 공유 버튼을 실제 클릭해 `공유 창을 열지 못했어요. 주소창의 링크를 복사해 공유해 보세요.` fallback 토스트를 확인했다.",
+    "locator": "Browser plugin unavailable; Chrome headless/CDP fallback; public https://kradavid.github.io/gaba_info/guide/?view=guide; widths 280/320/351/390; scrollWidth/clientWidth 280/280, 320/320, 351/351, 390/390; header share aria-label `페이지 공유하기`; screenshots captured outside repository at C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-header-share-public-20261007-shots",
+    "captured_at": "2026-10-07T17:50:00+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-COMPACT-SHARE",
+    "claim_refs": ["C-003", "C-004", "C-251"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-COMPACT-SHARE-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "좁은 모바일 공유 라벨 보정 release가 보호된 main 배포 파이프라인을 통과했다.",
+    "locator": "PR #585 https://github.com/KRAdavid/gaba_info/pull/585; PR checks release-verify run 37595863224 success and site-quality-verify run 37595863197 success; squash merge c249e113cfe3bcf7e6fe5b63098b6e612d1309c1; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37596060494: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37596060494",
+    "captured_at": "2026-10-07T17:50:00+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-COMPACT-SHARE",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-251"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-COMPACT-SHARE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "좁은 모바일 공유 라벨 보정 release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=c249e113cfe3bcf7e6fe5b63098b6e612d1309c1; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha c249e113cfe3bcf7e6fe5b63098b6e612d1309c1; generatedAt 2026-10-07T08:48:00.533Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T17:50:00+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-COMPACT-SHARE",
+    "claim_refs": ["C-001", "C-002", "C-251"]
+  },
+  {
+    "id": "E-NAVI-STATE-COMPACT-SHARE-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 좁은 모바일 공유 라벨 보정의 공개 배포 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-335; .navi/EVIDENCE_REGISTER.json C-251 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T17:50:00+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-COMPACT-SHARE",
+    "claim_refs": ["C-251"]
   }
 ]
 }

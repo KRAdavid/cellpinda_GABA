@@ -2432,3 +2432,11 @@
 - 새 CRITICAL/MAJOR 결함은 없다. 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 실기기·실제 사용자 승인으로 확대하지 않으며, teaser `HOLD`와 외부 검증 조건은 유지한다.
 
 증적: `E-CDP-RESPONSIVE-AUDIT-20261007`, `E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007`.
+
+## Red-team recheck — 좁은 모바일 공유 기능 발견성 — c249e113 — 2026-10-07
+
+- 공격 관점에서 280·320px 헤더의 공유 버튼이 아이콘만 남아 기능을 즉시 이해하기 어려운 경로를 확인했다. 350px 이하에서 아이콘과 짧은 `공유` 라벨을 함께 표시하고, 351·390px의 기존 `공유하기` 라벨은 보존했다.
+- 280px 실제 클릭에서 공유 API fallback 토스트가 표시됐고, 280·320·351·390px document 폭은 viewport와 일치했다. 접근성 이름은 `페이지 공유하기`로 유지됐다.
+- 새 CRITICAL/MAJOR 결함은 없다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며 Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 실기기·실제 사용자 승인으로 확대하지 않는다. teaser `HOLD`와 외부 검증 조건은 유지한다.
+
+증적: `E-CDP-COMPACT-SHARE-20261007`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261007`.
