@@ -2744,3 +2744,10 @@
 - 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았고, Chrome CDP fallback의 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 한계와 `USER_DECISION / NOT_READY`를 유지한다.
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
+
+## Red-team final public provenance sync — d45dfba9 — 2026-10-08
+
+- PR #653 병합 후 Pages 배포·라이브 smoke·release-status와 최신 공개 candidate 일치를 확인했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았고, Chrome CDP fallback의 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 한계와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.

@@ -20312,9 +20312,9 @@
       "kind": "AUDIT",
       "status": "INDEPENDENTLY_CONFIRMED",
       "statement": "최종 NAVI 기록은 일반 모드 연구 지도 범위 라벨 보정 PR·최신 Pages 배포·라이브 validator를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
-      "locator": "main 3241558c4d6f821292d53a3153a2cbdda1de7a8e; PR #652 merge; main workflow 37701731921 success; pnpm run validate:live-public -> page 200, candidateSha 3241558c4d6f821292d53a3153a2cbdda1de7a8e, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "locator": "main d45dfba970374d64eda699061e250915e58befa0; PR #653 merge; main workflow 37702257470 success; pnpm run validate:live-public -> page 200, candidateSha d45dfba970374d64eda699061e250915e58befa0, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
       "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
-      "captured_at": "2026-10-08T08:23:54+09:00",
+      "captured_at": "2026-10-08T08:29:04+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-MAP-SCOPE-BASELINE-FINAL-SYNC",
       "claim_refs": ["C-285"]
     }
