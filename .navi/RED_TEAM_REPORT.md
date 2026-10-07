@@ -2745,6 +2745,15 @@
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
 
+## Red-team recheck — 연구 지도 범위 라벨 12px — a1abe50e — 2026-10-08
+
+- 공격 관점에서 280·390px 일반·큰 글자 모드의 연구 지도 5개 주제와 `사람 대상 연구`·`동물·세포 연구` 라벨을 확인했다. 다섯 라벨 모두 computed `12px`이고 라벨·아이콘·중앙 GABA가 지도 내부에 유지되며 page/scroll width는 각 viewport와 일치했다.
+- 공개 공유 버튼은 390px에서 `role=status`·`aria-live=polite` 안내를 표시하고 약 6.5초 후 숨겼다. 공개 validator·Pages smoke·release-status는 최신 main candidate와 일치한다.
+- PR #655의 첫 main 실행은 코드 결함이 아니라 491분 경과한 TF heartbeat로 실패했다. snapshot을 변경하지 않은 heartbeat 갱신 PR #656 후 재실행은 release-verify·Pages·smoke·release-status 성공으로 회복됐다. 새 CRITICAL/MAJOR 결함은 없다.
+- Chrome Playwright/CDP fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
+
+증적: `C-286`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-CDP-LIVE-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-12PX-20261008`.
+
 ## Red-team final public provenance sync — d45dfba9 — 2026-10-08
 
 - PR #653 병합 후 Pages 배포·라이브 smoke·release-status와 최신 공개 candidate 일치를 확인했다. 신규 CRITICAL/MAJOR 결함은 없다.

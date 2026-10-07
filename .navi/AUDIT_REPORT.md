@@ -3426,3 +3426,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며, NAVI 상태 `USER_DECISION`과 완료 게이트 `NOT_READY`를 유지한다.
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
+
+## 연구 지도 범위 라벨 12px 보정 — a1abe50e — 2026-10-08
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #655 merge SHA `24c78b3ba4d46eacd30f1e8c1c4bdd89c9f6c5c7` 이후 heartbeat 신선도 게이트가 오래되어 한 차례 중단됐으나, 동일 snapshot의 운영 heartbeat 갱신 PR #656 merge SHA `a1abe50e8fa90b6ecf02f5fc04bf37ce5f0c2554` 후 main workflow `37704194129`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 candidate `a1abe50e8fa90b6ecf02f5fc04bf37ce5f0c2554`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 모바일·큰 글자 가독성: PASS. 연구 지도 보조 범위 라벨을 일반 모드와 큰 글자 모드에서 11px에서 12px로 확대했다. 공개 280·390px에서 5개 라벨 모두 computed `12px`, 지도 내부 배치, pageWidth/scrollWidth `280/280`·`390/390`을 확인했다. 공개 공유 안내는 모바일에서 `role=status`·`aria-live=polite`로 노출된 뒤 자동으로 사라졌다.
+- AC-005 자동 게이트: PASS. 로컬 `pnpm run build`, `pnpm test` 127 pass / 0 fail, PR 보호검사, Pages 배포, 라이브 smoke, release-status가 통과했다. Worker는 `STATIC_ONLY`에 따라 실행하지 않았다. 첫 배포 시 실패한 원인은 코드가 아니라 TF heartbeat 491분 경과였으며, 내부 heartbeat 갱신 후 재검증에서 해소됐다.
+- AC-006 제품 독립 경계: PASS. 이번 코드 변경은 연구 지도 보조 라벨의 가독성 보정에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 공개 validator의 제품 750 제거·Smart Store 단일 경계·teaser HOLD도 유지된다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome Playwright/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-286`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-PR-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-CDP-LIVE-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-12PX-20261008`.

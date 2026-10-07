@@ -3139,6 +3139,19 @@
         "E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-286",
+      "statement": "일반 모드와 큰 글자 모드의 연구 지도 보조 범위 라벨은 280·390px에서 모두 12px로 표시되고 지도 내부에 배치되어 연구 대상 범위를 더 쉽게 파악할 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-12PX-20261008",
+        "E-PR-RESEARCH-MAP-SCOPE-12PX-20261008",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-12PX-20261008",
+        "E-CDP-LIVE-RESEARCH-MAP-SCOPE-12PX-20261008",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-12PX-20261008",
+        "E-NAVI-STATE-RESEARCH-MAP-SCOPE-12PX-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -20317,6 +20330,71 @@
       "captured_at": "2026-10-08T08:29:04+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-MAP-SCOPE-BASELINE-FINAL-SYNC",
       "claim_refs": ["C-285"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-12PX-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 범위 라벨을 12px로 보정한 로컬 품질 게이트가 통과했다.",
+      "locator": "pnpm run build -> repository privacy, goal, research copy, UI contract, governance, ops docs, typecheck, static bundle, release manifest, artifacts, performance all passed; total assets 1649477 bytes; pnpm test -> 127 pass, 0 fail; git diff --check passed; local 280·390px normal/large map audit -> computed font-size 12px and all nodes inside map",
+      "captured_at": "2026-10-08T08:40:00+09:00",
+      "reviewer_id": "NAVI-QA-GABA-20261008-RESEARCH-MAP-SCOPE-12PX",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-286"]
+    },
+    {
+      "id": "E-PR-RESEARCH-MAP-SCOPE-12PX-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 범위 라벨 12px 보정 PR #655는 보호 검사를 통과하고 main에 병합됐다.",
+      "locator": "PR #655 https://github.com/KRAdavid/gaba_info/pull/655; head ed79bb37b1b9c891e5e11d594e34c98362818abd; release-verify success; site-quality-verify success; merge SHA 24c78b3ba4d46eacd30f1e8c1c4bdd89c9f6c5c7",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/655",
+      "captured_at": "2026-10-08T08:42:57+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-MAP-SCOPE-12PX",
+      "claim_refs": ["C-005", "C-286"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-12PX-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main merge 후 Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책에 따라 skipped됐다.",
+      "locator": "main workflow 37704194129: release-verify 113074544676 success; worker-readiness 113074947865 success; deploy-pages 113074973554 success; deploy-worker 113074974560 skipped by STATIC_ONLY; smoke-live 113075039635 success; release-status 113075102887 success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37704194129",
+      "captured_at": "2026-10-08T08:48:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-MAP-SCOPE-12PX",
+      "claim_refs": ["C-001", "C-005", "C-286"]
+    },
+    {
+      "id": "E-CDP-LIVE-RESEARCH-MAP-SCOPE-12PX-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 URL의 Chrome Playwright fallback 일반·큰 글자 모드에서 연구 지도 범위 라벨이 12px로 보이고 280·390px 지도 내부에 배치됐다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; normal and large modes; widths 280, 390; five scope labels computed font-size 12px in every case; pageWidth/scrollWidth=280/280 and 390/390; all map nodes inside map; errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T08:49:00+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-RESEARCH-MAP-SCOPE-12PX",
+      "claim_refs": ["C-004", "C-286"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-12PX-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "12px 연구 지도 보정 배포 후 GitHub Pages 공개본은 main merge SHA와 일치하고 정적 공개 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha a1abe50e8fa90b6ecf02f5fc04bf37ce5f0c2554; generatedAt 2026-10-07T23:48:11.170Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T08:49:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-RESEARCH-MAP-SCOPE-12PX",
+      "claim_refs": ["C-001", "C-002", "C-006", "C-286"]
+    },
+    {
+      "id": "E-NAVI-STATE-RESEARCH-MAP-SCOPE-12PX-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 NAVI 기록은 연구 지도 12px 보정 PR·Pages 배포·라이브 validator를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "main a1abe50e8fa90b6ecf02f5fc04bf37ce5f0c2554; PR #655 merge SHA 24c78b3ba4d46eacd30f1e8c1c4bdd89c9f6c5c7; main workflow 37704194129 success; pnpm run validate:live-public -> page 200, candidateSha a1abe50e8fa90b6ecf02f5fc04bf37ce5f0c2554, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T08:50:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-MAP-SCOPE-12PX-FINAL-SYNC",
+      "claim_refs": ["C-286"]
     }
   ]
 }
