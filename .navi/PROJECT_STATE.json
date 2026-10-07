@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T07:53:12+09:00",
+  "updated_at": "2026-10-08T07:58:54+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6527,6 +6527,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T07:53:12+09:00"
+    },
+    {
+      "id": "H-372",
+      "event": "NAVI 최종 동기화 점검에서 문서-only PR #649 병합 후 main merge SHA 9afc8dd4b2be8cb4fecff6d3794eb44c426c983b와 Pages 공개 candidate가 일치하는 것을 확인했다. main workflow 37699268106의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 STATIC_ONLY로 skipped였다. 공개 validator는 HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. NAVI 감사·레드팀·PROJECT_STATE·증거 레지스터에 C-284의 연구 지도 큰 글자 라벨 보정 근거를 연결했고, 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-284와 최종 NAVI 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T07:58:54+09:00"
     }
   ]
 }
