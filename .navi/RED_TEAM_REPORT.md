@@ -1,5 +1,12 @@
 # Red Team Report
 
+## NAVI 문서 기록 최종 동기화 공격 재점검 — main 96218e16 — 2026-10-08
+
+- 문서-only 병합이 기능 번들·공개 연구 데이터·제품 독립 경계를 바꾸거나 이전 연구 지도 증적과 다른 candidate를 게시하는지 확인했다. merge SHA와 live candidate가 일치했고 공개 validator·Pages smoke·release-status가 모두 성공했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 문서 병합은 기능 코드를 변경하지 않았으며, teaser `HOLD`·`USER_DECISION / NOT_READY`와 Chrome CDP fallback의 한계는 유지된다.
+
+증적: `C-282`, `E-PR-NAVI-FINAL-SYNC-20261008`, `E-DEPLOY-PIPELINE-NAVI-FINAL-SYNC-20261008`, `E-LIVE-PUBLIC-NAVI-FINAL-SYNC-20261008`, `E-NAVI-STATE-NAVI-FINAL-SYNC-20261008`.
+
 ## 좁은 모바일 연구 지도·큰 글자 모드 공격 재점검 — main 774fbc50 — 2026-10-08
 
 - 공격 관점에서 280·390px 큰 글자 모드 연구 지도의 오른쪽·왼쪽 항목이 화면 경계를 밀어내거나 긴 범위 라벨을 잘라내는지 확인했다. `minmax(0, 1fr)` 보완 후 5개 항목 모두 도표 내부에 남았고, 두 폭 모두 `pageWidth/scrollWidth`가 viewport와 같았다.

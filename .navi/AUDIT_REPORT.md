@@ -1,5 +1,13 @@
 # Audit Report
 
+## NAVI 문서 기록 최종 동기화 — main 96218e16 — 2026-10-08
+
+- 문서-only PR #644 병합 후 main merge SHA `96218e1667181ec2d064146e9b1e10e628d02267`와 GitHub Pages 공개 candidate가 일치했다. main workflow `37693604219`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 STATIC_ONLY 정책으로 skipped다.
+- 최종 live validator는 HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 문서 병합으로 기능 코드·연구 카피·수치·출처·제품 독립 경계는 변경되지 않았다.
+- 최종 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다. 신규 CRITICAL/MAJOR 결함은 없으며 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 남는다.
+
+증적: `C-282`, `E-PR-NAVI-FINAL-SYNC-20261008`, `E-DEPLOY-PIPELINE-NAVI-FINAL-SYNC-20261008`, `E-LIVE-PUBLIC-NAVI-FINAL-SYNC-20261008`, `E-NAVI-STATE-NAVI-FINAL-SYNC-20261008`.
+
 ## 좁은 모바일 연구 지도·큰 글자 모드 보완 및 공개 배포 재검증 — main 774fbc50 — 2026-10-08
 
 - 280·390px 큰 글자 모드에서 연구 지도 5개 항목의 Grid 최소 콘텐츠 폭이 가장자리 열을 밀어낼 수 있는 잔여 리스크를 확인하고, 3열 트랙을 `minmax(0, 1fr)`로 보완했다. 변경은 연구 지도 레이아웃에 한정되며 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.

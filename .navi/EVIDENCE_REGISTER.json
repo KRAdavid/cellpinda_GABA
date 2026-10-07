@@ -3094,7 +3094,11 @@
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-NARROW-20261008",
         "E-LIVE-PUBLIC-RESEARCH-MAP-NARROW-20261008",
         "E-CDP-LIVE-RESEARCH-MAP-NARROW-20261008",
-        "E-NAVI-STATE-RESEARCH-MAP-NARROW-20261008"
+        "E-NAVI-STATE-RESEARCH-MAP-NARROW-20261008",
+        "E-PR-NAVI-FINAL-SYNC-20261008",
+        "E-DEPLOY-PIPELINE-NAVI-FINAL-SYNC-20261008",
+        "E-LIVE-PUBLIC-NAVI-FINAL-SYNC-20261008",
+        "E-NAVI-STATE-NAVI-FINAL-SYNC-20261008"
       ],
       "status": "SUPPORTED"
     }
@@ -20001,6 +20005,50 @@
       "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
       "captured_at": "2026-10-08T06:58:54+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-MAP-NARROW",
+      "claim_refs": ["C-282"]
+    },
+    {
+      "id": "E-PR-NAVI-FINAL-SYNC-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 증거·감사·레드팀 기록을 최신 main에 연결한 문서-only PR #644가 보호 검사를 통과하고 병합됐다.",
+      "locator": "PR #644 https://github.com/KRAdavid/gaba_info/pull/644; head 713a4f5d24481e0361d30882bfc1995d03d212d2; release-verify 113038947603 success; site-quality-verify 113038947801 success; merge SHA 96218e1667181ec2d064146e9b1e10e628d02267",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/644",
+      "captured_at": "2026-10-08T07:02:58+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-FINAL-SYNC",
+      "claim_refs": ["C-005", "C-282"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NAVI-FINAL-SYNC-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 NAVI 문서 동기화 main merge 후 Pages 배포·라이브 smoke·release-status가 모두 성공했다.",
+      "locator": "main workflow 37693604219: release-verify 113039598957 success; worker-readiness 113040127247 success; deploy-pages 113040158156 success; smoke-live 113040232852 success; release-status 113040322623 success; deploy-worker 113040159646 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37693604219",
+      "captured_at": "2026-10-08T07:05:41+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-FINAL-SYNC",
+      "claim_refs": ["C-001", "C-005", "C-282"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NAVI-FINAL-SYNC-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 문서 동기화 배포 후 공개 GitHub Pages candidate가 main merge SHA와 일치하고 정적 공개 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha 96218e1667181ec2d064146e9b1e10e628d02267; generatedAt 2026-10-07T22:04:14.723Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T07:05:41+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-FINAL-SYNC",
+      "claim_refs": ["C-001", "C-002", "C-006", "C-282"]
+    },
+    {
+      "id": "E-NAVI-STATE-NAVI-FINAL-SYNC-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 NAVI state·audit·red-team 기록은 최종 main merge·배포·라이브 validator를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "main 96218e1667181ec2d064146e9b1e10e628d02267; workflow 37693604219 success; pnpm run validate:live-public -> page 200, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T07:05:41+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-FINAL-SYNC",
       "claim_refs": ["C-282"]
     }
   ]
