@@ -2465,3 +2465,11 @@
 - Chrome headless/CDP fallback 결과를 Safari/iOS/Android 실기기·실제 고령 사용자 승인으로 확대하지 않는다. 독립 과학·규제 감수와 실제 사용성 평가는 외부 검증 조건으로 계속 OPEN이다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.
+
+## Red-team recheck — 모바일 브라우저 호환성 퍼블리싱 보완 — 5fedb836 — 2026-10-07
+
+- 공격 관점에서 텍스트 자동 확대와 반투명 sticky header의 브라우저별 렌더링 차이를 점검했다. CSS fallback 보완 후 PR·main 자동 검증과 공개 live validator는 모두 통과했고 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다.
+- 헤딩 균형 규칙은 유지하면서 중복 선택자만 줄였으며, 연구 카피·수치·출처·제품 독립 공개 경계와 teaser `HOLD`는 변경하지 않았다. Pages-style 총 자산은 `1,649,635 bytes`다.
+- 이번 결과는 Chrome 기반 자동 검증과 GitHub Pages smoke 범위다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 확인 범위를 넘어가므로 완료로 확대하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007`, `E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007`, `E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007`, `E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007`.

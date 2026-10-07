@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T19:19:16+09:00",
+  "updated_at": "2026-10-07T19:42:50+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2154,11 +2154,26 @@
       "impact": "현재 공개 화면은 전문 퍼블리싱 기준의 대표 반응형·읽기 흐름에서 안정적으로 보인다.",
       "required_action": "다음 코드·카피 변경 시 동일 4폭·핵심 해시 진입·공개 validator QA 재실행",
         "owner": "QA"
+      },
+      {
+        "id": "AUD-006",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "모바일 텍스트 자동 확대 방지와 헤더 블러의 브라우저 호환 보완을 적용한 최신 main 공개본에 대해 UI contract·typecheck·127개 테스트·production build·Pages 성능·정적 번들·라이브 smoke를 재실행했다. 신규 CRITICAL/MAJOR 결함과 공개 연구·제품 경계 회귀는 확인되지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007",
+          "E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007",
+          "E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007",
+          "E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007"
+        ],
+        "impact": "모바일 브라우저별 텍스트 크기·frosted header 차이로 인한 공개 화면 변동 위험을 줄였다.",
+        "required_action": "다음 CSS·카피 변경 시 동일 UI contract·Pages 성능·공개 validator와 실기기 검증을 재실행",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T10:19:16Z"
+    "last_run_at": "2026-10-07T10:42:50Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2370,11 +2385,26 @@
       "impact": "이번 공개본에서 새 공격 가능한 화면 회귀는 관찰되지 않았다.",
       "required_action": "외부 브라우저·실기기·실사용자·독립 과학·규제 검증은 계속 OPEN",
         "owner": "레드팀"
+      },
+      {
+        "id": "RT-006",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "CSS 호환성 보완 release의 자동·라이브 검증에서 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다. 다만 Chrome 기반 자동 검증만으로 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수를 확정할 수 없으므로 외부 검증 조건은 계속 OPEN이다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007",
+          "E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007",
+          "E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007",
+          "E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007"
+        ],
+        "impact": "이번 release에서 자동 검증 가능한 공개 화면 회귀는 관찰되지 않았다.",
+        "required_action": "Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "레드팀"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T10:19:16Z"
+    "last_run_at": "2026-10-07T10:42:50Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5964,6 +5994,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T19:19:16+09:00"
+    },
+    {
+      "id": "H-339",
+      "event": "NAVI 자동 공개 배포 고도화에서 모바일 브라우저의 텍스트 자동 확대와 frosted header 렌더링 차이를 줄이기 위해 `text-size-adjust`·`-webkit-text-size-adjust`와 헤더 `-webkit-backdrop-filter` fallback을 적용했다. 헤딩 균형 규칙은 후속 supports 블록과 중복되는 선택자만 줄여 유지했고 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다. 로컬 Pages-style 성능은 1,649,635 bytes로 1,650,000 bytes 예산 안이며, PR #592 required checks와 main workflow `37608893903`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 merge SHA `5fedb836401de9469a4d86ae9b7403303b0961b7`·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 Chrome 자동 검증 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-255와 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T19:42:50+09:00"
     }
   ]
 }

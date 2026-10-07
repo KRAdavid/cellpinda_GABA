@@ -2768,6 +2768,17 @@
       "E-NAVI-STATE-PUBLISHING-AUDIT-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-255",
+    "statement": "모바일 브라우저의 텍스트 자동 확대와 frosted header 렌더링 차이를 줄인 최신 공개본이 보호된 PR·main 배포·라이브 검증을 통과했으며, 연구 카피·수치·출처·제품 독립 공개 경계와 teaser HOLD를 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007",
+      "E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007",
+      "E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007",
+      "E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -18083,6 +18094,48 @@
     "captured_at": "2026-10-07T19:19:16+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PUBLISHING-SURFACE",
     "claim_refs": ["C-254"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 브라우저 텍스트 자동 확대 방지와 헤더 블러 fallback 보완 후 UI contract·typecheck·production build·정적 번들·Pages 성능 예산이 통과했다.",
+    "locator": "candidate a6be0f25a1675d4d48ab95497ce933044f2ab32e before protected merge; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test; pnpm run build; Pages-style vite build --base /gaba_info/; generate:release-manifest; validate:static-bundle; validate:performance; Pages-style total assets 1,649,635 bytes <= 1,650,000; git diff --check",
+    "captured_at": "2026-10-07T19:42:50+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-CROSS-BROWSER-SURFACE",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-255"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 브라우저 호환성 보완 release가 보호된 PR 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #592 https://github.com/KRAdavid/gaba_info/pull/592; PR release-verify run 37608712167 success; site-quality-verify run 37608712161 success; merge 5fedb836401de9469a4d86ae9b7403303b0961b7; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37608893903: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37608893903",
+    "captured_at": "2026-10-07T19:42:50+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-CROSS-BROWSER-SURFACE",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-255"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "호환성 보완 release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=5fedb836401de9469a4d86ae9b7403303b0961b7; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 5fedb836401de9469a4d86ae9b7403303b0961b7; generatedAt 2026-10-07T10:40:39.844Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T19:42:50+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-CROSS-BROWSER-SURFACE",
+    "claim_refs": ["C-001", "C-002", "C-006", "C-255"]
+  },
+  {
+    "id": "E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register·감사·레드팀 기록이 호환성 보완 release의 공개 배포 결과를 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 외부 검증 잔여 조건을 함께 기록한다.",
+    "locator": "NAVI validate_project_state.py; pnpm run validate:governance; pnpm run validate:ops-docs; .navi/PROJECT_STATE.json AUD-006/RT-006/H-339; .navi/EVIDENCE_REGISTER.json C-255 and four evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T19:42:50+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-CROSS-BROWSER-SURFACE",
+    "claim_refs": ["C-255"]
   }
 ]
 }
