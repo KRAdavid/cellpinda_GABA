@@ -2710,3 +2710,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-245`, `E-LOCAL-BUILD-FOOTER-ICON-20261007`, `E-PLAYWRIGHT-FOOTER-ICON-20261007`, `E-DEPLOY-PIPELINE-FOOTER-ICON-20261007`, `E-LIVE-PUBLIC-FOOTER-ICON-20261007`, `E-NAVI-STATE-FOOTER-ICON-20261007`.
+
+## Current Release Recheck — 7d059e8 — 모바일 장 이동 정합성 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. GitHub Pages 공개 URL은 [kradavid.github.io/gaba_info](https://kradavid.github.io/gaba_info/)이며 공개 manifest candidate가 main merge SHA `7d059e8f0def64d1c289a89b37cc59d15bd16acb`와 일치한다. HTTP 200·STATIC·bundle hash 73개·12 claims·6 master records·6 share pages·`teaser HOLD`·`provenance matched`를 확인했다.
+- AC-003/AC-004 모바일 탐색·가독성: PASS. 긴 장 메뉴 이동이 sticky 읽기 레일 아래에서 시작하고, 지연 렌더링 이후에도 목적지 제목과 키보드 포커스가 유지된다. 390·768·1440px 및 직접 해시 진입에서 가로폭·오류 상태가 정상이다.
+- AC-005 배포 게이트: PASS. PR #574의 required checks와 main workflow `37583630664`의 release-verify·Pages·smoke-live·release-status가 성공했다. local build와 정적 bundle 성능 예산도 통과했다.
+- AC-006 제품 독립 경계: PASS. 변경은 내비게이션과 읽기 위치 보정이며 공개 연구 카피·수치·출처·제품 독립 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없지만 Browser plugin 부재, teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다. 공개 사이트의 자동·정적 배포 품질은 이번 릴리스까지 확인했지만 남은 외부 검증과 사용자 최종 판단을 완료로 위장하지 않는다.
+
+증적: `C-246`, `E-LOCAL-BUILD-CHAPTER-NAV-20261007`, `E-PLAYWRIGHT-CHAPTER-NAV-20261007`, `E-DEPLOY-PIPELINE-CHAPTER-NAV-20261007`, `E-LIVE-PUBLIC-CHAPTER-NAV-20261007`, `E-NAVI-STATE-CHAPTER-NAV-20261007`.

@@ -2388,3 +2388,12 @@
 - 새 CRITICAL/MAJOR 결함은 없다. teaser `HOLD`, 과거 이력 local-path 경고, Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
 
 증적: `E-LOCAL-BUILD-FOOTER-ICON-20261007`, `E-PLAYWRIGHT-FOOTER-ICON-20261007`, `E-LIVE-PUBLIC-FOOTER-ICON-20261007`.
+
+## Red-team recheck — 모바일 긴 장 이동·sticky 읽기 레일 — 7d059e8 — 2026-10-07
+
+- 공격 관점에서 모바일 메뉴가 긴 장으로 이동한 뒤 URL만 바뀌고 실제 목적지 제목은 화면에 나타나지 않는 경로를 재현했다. 원인은 `content-visibility:auto` 지연 렌더링과 sticky 읽기 레일이 목적지 geometry 측정·포커스 시점과 겹치는 것이었다.
+- 목적지 섹션 geometry fallback, 메뉴 닫힘 후 double `requestAnimationFrame` 스크롤, 지연 레이아웃 공개 후 auto 재정렬, 지연 포커스를 적용했다. 390px에서 `발효·안전` 제목은 sticky 레일 아래에 표시되고 `fermented-safety-heading` 포커스가 복귀했으며 768·1440px에서도 같은 정합성을 확인했다.
+- 직접 `#research`·`#expert-videos`·`#top` 진입과 390·768·1440px 가로폭을 확인했다. document scrollWidth는 viewport와 일치했고 page error·console error는 0이었다. 새 CRITICAL/MAJOR 결함은 없다.
+- PR #574와 main workflow `37583630664`가 성공했고 live validator candidate가 merge SHA와 일치했다. teaser `HOLD`, Browser plugin 부재에 따른 Playwright Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
+
+증적: `E-PLAYWRIGHT-CHAPTER-NAV-20261007`, `E-LIVE-PUBLIC-CHAPTER-NAV-20261007`.

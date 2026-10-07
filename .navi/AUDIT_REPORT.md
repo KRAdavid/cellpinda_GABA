@@ -2900,6 +2900,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-245`, `E-LOCAL-BUILD-FOOTER-ICON-20261007`, `E-PLAYWRIGHT-FOOTER-ICON-20261007`, `E-DEPLOY-PIPELINE-FOOTER-ICON-20261007`, `E-LIVE-PUBLIC-FOOTER-ICON-20261007`, `E-NAVI-STATE-FOOTER-ICON-20261007`.
 
+## Current Release Recheck — 7d059e8 — 모바일 장 이동 정합성 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #574가 main에 병합되었고 workflow `37583630664`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator가 candidate `7d059e8f0def64d1c289a89b37cc59d15bd16acb`·HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 모바일 읽기 흐름: PASS. `content-visibility:auto`로 지연되는 긴 장의 geometry를 보정하고 메뉴 닫힘·레이아웃 공개 후 sticky 읽기 레일 아래로 스크롤을 재정렬했다. 390·768·1440px에서 `발효·안전` 메뉴 이동 후 제목과 포커스가 보이고, 직접 `#research`·`#expert-videos`·`#top` 진입도 재현되었다. 가로 넘침·page error·console error는 0이다.
+- AC-005 배포 게이트: PASS. UI contract·typecheck·127개 테스트·Pages-style build·release manifest·정적 bundle·성능 예산과 PR #574 보호 검사 및 main 공개 파이프라인이 성공했다. 초기 JS `311,475 bytes`, 초기 CSS `95,703 bytes`, 총 자산 `1,647,909 bytes`로 예산 안에 있다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 모바일 장 이동·포커스·sticky 읽기 위치 보정에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다. Browser plugin 부재에 따른 Playwright Chromium fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-246`, `E-LOCAL-BUILD-CHAPTER-NAV-20261007`, `E-PLAYWRIGHT-CHAPTER-NAV-20261007`, `E-DEPLOY-PIPELINE-CHAPTER-NAV-20261007`, `E-LIVE-PUBLIC-CHAPTER-NAV-20261007`, `E-NAVI-STATE-CHAPTER-NAV-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

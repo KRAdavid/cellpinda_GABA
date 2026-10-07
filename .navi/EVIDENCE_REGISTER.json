@@ -2662,6 +2662,18 @@
       "E-NAVI-STATE-FOOTER-ICON-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-246",
+    "statement": "긴 장으로 이동하는 모바일 메뉴와 직접 해시 진입이 sticky 읽기 레일에 가려지지 않고 목적지 제목·포커스를 유지하도록 보정되었으며, 390·768·1440px에서 가로 넘침·page error·console error 없이 공개된다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-CHAPTER-NAV-20261007",
+      "E-PLAYWRIGHT-CHAPTER-NAV-20261007",
+      "E-DEPLOY-PIPELINE-CHAPTER-NAV-20261007",
+      "E-LIVE-PUBLIC-CHAPTER-NAV-20261007",
+      "E-NAVI-STATE-CHAPTER-NAV-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17529,6 +17541,58 @@
     "captured_at": "2026-10-07T15:19:30+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-FOOTER-ICON",
     "claim_refs": ["C-245"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-CHAPTER-NAV-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 장 이동 보정 후 로컬 공개 빌드·정적 무결성·성능·NAVI 자동 검사가 통과했다.",
+    "locator": "main base 60e90d451bdfad3ea99bd7f0d2714230f98ef499; pnpm run typecheck; pnpm test 127/127 pass; pnpm run validate:ui-contract; Pages-style Vite build; validate:release-manifest; check-public-artifacts; validate:static-bundle; validate:performance; initial JS 311475 <= 380000; initial CSS 95703 <= 110000; total assets 1647909 <= 1650000; largest asset 311475 <= 380000; git diff --check",
+    "captured_at": "2026-10-07T15:53:58+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-CHAPTER-NAV",
+    "claim_refs": ["C-005", "C-246"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-CHAPTER-NAV-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Chromium fallback에서 모바일 메뉴·직접 해시 진입·sticky 읽기 레일 아래 목적지 정렬과 포커스 복귀를 확인했다.",
+    "locator": "Browser plugin unavailable; Playwright Chromium fallback against local Pages-style build at /gaba_info/; 390px menu `발효·안전` -> `?view=guide#fermented-safety`, section top 57, heading top 131, focus fermented-safety-heading; 768px section top 46, heading top 143; 1440px section top 54, heading top 151; direct #research, #expert-videos, #top also aligned; scrollWidth equals viewport and page/console errors 0; screenshot captured outside repository",
+    "captured_at": "2026-10-07T15:53:58+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-CHAPTER-NAV",
+    "claim_refs": ["C-003", "C-246"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-CHAPTER-NAV-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 장 이동 보정 release가 PR 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #574 https://github.com/KRAdavid/gaba_info/pull/574; squash merge 7d059e8f0def64d1c289a89b37cc59d15bd16acb; PR checks release-verify run 37583506921 success and site-quality-verify run 37583506796 success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37583630664: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37583630664",
+    "captured_at": "2026-10-07T15:53:58+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-CHAPTER-NAV",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-246"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-CHAPTER-NAV-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 장 이동 보정 release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=7d059e8f0def64d1c289a89b37cc59d15bd16acb; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 7d059e8f0def64d1c289a89b37cc59d15bd16acb; generatedAt 2026-10-07T06:50:19.433Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T15:53:58+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-CHAPTER-NAV",
+    "claim_refs": ["C-001", "C-002", "C-246"]
+  },
+  {
+    "id": "E-NAVI-STATE-CHAPTER-NAV-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 모바일 장 이동 보정의 공개 배포 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-330; .navi/EVIDENCE_REGISTER.json C-246 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T15:53:58+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-CHAPTER-NAV",
+    "claim_refs": ["C-246"]
   }
 ]
 }
