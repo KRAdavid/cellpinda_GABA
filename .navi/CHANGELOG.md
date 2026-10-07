@@ -2155,3 +2155,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 최종 공개 validator와 NAVI 상태를 재확인했다. `USER_DECISION / NOT_READY`, teaser `HOLD`, 외부 브라우저·실기기·실사용자·독립 과학·규제 검토 조건을 유지한다.
 
 증적: `C-250`, `E-CDP-RESPONSIVE-AUDIT-20261007`, `E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007`, `E-DEPLOY-PIPELINE-RESPONSIVE-AUDIT-20261007`, `E-NAVI-STATE-RESPONSIVE-AUDIT-20261007`.
+
+## 2026-10-07 — 좁은 모바일 공유 컨트롤 라벨 보정 — c249e113
+
+- 280·320px에서 아이콘만 보이던 헤더 공유 기능에 `공유` 라벨을 추가해 기능 발견성을 높였다. 351·390px의 `공유하기`, 접근성 이름, 공유 fallback 동작은 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #585 보호 검사와 main Pages 배포·라이브 smoke·release-status가 성공했다. 공개 280·320·351·390px에서 라벨·가로폭·실제 공유 fallback 토스트를 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, 외부 검증 조건을 유지한다.
+
+증적: `C-251`, `E-LOCAL-BUILD-COMPACT-SHARE-20261007`, `E-CDP-COMPACT-SHARE-20261007`, `E-DEPLOY-PIPELINE-COMPACT-SHARE-20261007`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261007`, `E-NAVI-STATE-COMPACT-SHARE-20261007`.
