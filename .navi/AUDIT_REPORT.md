@@ -1,5 +1,15 @@
 # Audit Report
 
+## 좁은 모바일 연구 지도·큰 글자 모드 보완 및 공개 배포 재검증 — main 774fbc50 — 2026-10-08
+
+- 280·390px 큰 글자 모드에서 연구 지도 5개 항목의 Grid 최소 콘텐츠 폭이 가장자리 열을 밀어낼 수 있는 잔여 리스크를 확인하고, 3열 트랙을 `minmax(0, 1fr)`로 보완했다. 변경은 연구 지도 레이아웃에 한정되며 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 production build는 총 자산 `1,649,416 bytes / 1,650,000 bytes`, UI contract·typecheck·127개 테스트·정적 bundle·release manifest·성능 예산·NAVI state validation을 통과했다. Pages base-path 성능 검사는 `1,649,620 bytes`로 통과했다.
+- PR #643 보호 검사와 main workflow `37692783826`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 merge candidate `774fbc507f979cea42865d340cb014e677ccb771`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다.
+- 실제 공개 Chrome CDP fallback 280·390px 큰 글자 연구 지도에서 5개 항목이 도표 안에 배치되고 `pageWidth/scrollWidth=280/280`, `390/390`, `errors=[]`, 이름 없는 버튼 0개였다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다.
+
+증적: `C-282`, `E-LOCAL-BUILD-RESEARCH-MAP-NARROW-20261008`, `E-PR-RESEARCH-MAP-NARROW-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-NARROW-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-NARROW-20261008`, `E-CDP-LIVE-RESEARCH-MAP-NARROW-20261008`, `E-NAVI-STATE-RESEARCH-MAP-NARROW-20261008`.
+
 ## 1440px 데스크톱 직접 진입 시각 감리 — main a576f740 — 2026-10-08
 
 - 공개 `https://kradavid.github.io/gaba_info/`를 1440px·1000px로 열고 `#top`·`#academic`·`#research`·`#expert-videos`·`#final`을 직접 진입했다. 장 제목의 실제 bounding box는 각각 헤더 아래에 위치했고, 대표 장 모두 `pageWidth/scrollWidth=1425/1425`, `errors=[]`였다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 좁은 모바일 연구 지도·큰 글자 모드 공격 재점검 — main 774fbc50 — 2026-10-08
+
+- 공격 관점에서 280·390px 큰 글자 모드 연구 지도의 오른쪽·왼쪽 항목이 화면 경계를 밀어내거나 긴 범위 라벨을 잘라내는지 확인했다. `minmax(0, 1fr)` 보완 후 5개 항목 모두 도표 내부에 남았고, 두 폭 모두 `pageWidth/scrollWidth`가 viewport와 같았다.
+- 공개 live CDP에서 이름 없는 버튼 0개·runtime error 0건·연구 지도 항목의 내부 폭 정합성을 재현했다. 새 CRITICAL/MAJOR 결함은 없다.
+- PR #643은 성능 예산 초과 후보를 그대로 병합하지 않고 중복 폭 선언을 제거한 뒤 보호 검사를 통과했고, main Pages 배포·라이브 validator도 성공했다. Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증을 대신하지 않는다. teaser `HOLD`와 `USER_DECISION / NOT_READY` 상태는 유지한다.
+
+증적: `C-282`, `E-PR-RESEARCH-MAP-NARROW-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-NARROW-20261008`, `E-CDP-LIVE-RESEARCH-MAP-NARROW-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-NARROW-20261008`, `E-NAVI-STATE-RESEARCH-MAP-NARROW-20261008`.
+
 ## 1440px 데스크톱 시각 공격 재점검 — main a576f740 — 2026-10-08
 
 - 공격 관점에서 대표 장 해시 진입 직후 sticky 헤더가 제목을 가리거나, 이전 화면의 잘못된 scroll position이 공개 UX 결함처럼 보이게 하는지 확인했다. 실제 공개 화면은 제목 top `126~151px`, 헤더 bottom `78px`로 분리됐고 pageWidth/scrollWidth `1425/1425`, runtime error 0이었다.
