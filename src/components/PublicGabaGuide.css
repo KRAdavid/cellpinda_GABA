@@ -1846,7 +1846,7 @@
   .guide-outcome-lane{padding:10px 9px}
   .guide-outcome-lane-top{display:grid;gap:4px}
   .guide-outcome-lane-top>span{font-size:.7em;line-height:1.2}
-  .guide-outcome-lane-top>strong{min-height:3.1em;font-size:.8em;line-height:1.35;text-align:left}
+  .guide-outcome-lane-top>strong{min-height:3.1em;font-size:.8em;line-height:1.35;text-align:left;word-break:break-word}
   .guide-outcome-lane.is-result{box-shadow:inset 3px 0 0 #26a6aa}
   .guide-outcome-lane-signal{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"icon text" "meter meter";gap:4px 5px;align-items:center}
   .guide-outcome-lane-signal svg{grid-area:icon}
