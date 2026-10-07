@@ -2792,3 +2792,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-252`, `E-LOCAL-BUILD-ULTRA-NARROW-VIDEO-META-20261007`, `E-CDP-ULTRA-NARROW-VIDEO-META-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-VIDEO-META-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007`, `E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007`.
+
+## Current Release Recheck — 560d9afe — 전문가 영상 지연 fallback — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #589 보호 검사와 main workflow `37604557572`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 공개 validator candidate가 `560d9afe6e0acbd257e9fb058a87078c06d76ac6`와 일치한다.
+- AC-003/AC-004 영상 흐름·반응형: PASS. 공개 280px에서 외부 iframe 지연 fallback의 `재생 지연`, 원본 보기, 다시 시도와 재생 준비 복귀를 확인했고 document 폭은 viewport와 일치했다.
+- AC-005 배포 게이트: PASS. typecheck·UI contract·127개 테스트·production build·정적 bundle·release manifest·성능 예산을 통과했으며 local total assets는 `1,649,388 bytes`다.
+- AC-006 제품 독립 경계: PASS. 공개 연구 카피·수치·출처·제품 독립 경계·teaser `HOLD`는 유지됐다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없다. 외부 브라우저·실기기·실제 사용자·독립 과학·규제 검토 조건은 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-253`, `E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007`.

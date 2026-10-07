@@ -2977,6 +2977,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-252`, `E-LOCAL-BUILD-ULTRA-NARROW-VIDEO-META-20261007`, `E-CDP-ULTRA-NARROW-VIDEO-META-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-VIDEO-META-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007`, `E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007`.
 
+## Current Release Recheck — 560d9afe — 전문가 영상 지연 fallback — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. main workflow `37604557572`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 merge SHA `560d9afe6e0acbd257e9fb058a87078c06d76ac6`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 전문가 영상·모바일: PASS. 외부 iframe 준비 지연을 재현한 Chrome headless/CDP fallback 280px에서 `재생 지연`, YouTube 원본 보기, 다시 시도, 다시 시도 후 `준비 중` 복귀를 확인했다. document 폭은 280/280이고 console error는 0이었다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산과 PR #589 보호 검사가 통과했다. 로컬 최종 total assets는 `1,649,388 bytes`다.
+- AC-006 제품 독립 경계: PASS. 외부 영상 로딩 상태와 회복 조작만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계와 teaser `HOLD`는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재에 따른 Chrome headless/CDP fallback, YouTube 외부 프레임, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-253`, `E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

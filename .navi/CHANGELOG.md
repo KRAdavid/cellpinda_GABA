@@ -2172,3 +2172,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재에 따른 fallback, YouTube 외부 프레임·실기기·독립 과학·규제 검토 조건을 유지한다.
 
 증적: `C-252`, `E-LOCAL-BUILD-ULTRA-NARROW-VIDEO-META-20261007`, `E-CDP-ULTRA-NARROW-VIDEO-META-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-VIDEO-META-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007`, `E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007`.
+
+## 2026-10-07 — 전문가 영상 지연 fallback 보정 — 560d9afe
+
+- 외부 YouTube iframe이 늦게 준비될 때 무한 로딩에 머물던 잔여 리스크를 확인하고, 6초 후 `재생 지연` 상태에서 YouTube 원본 보기와 다시 시도 조작을 제공하도록 보정했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산, PR #589 보호 검사와 main workflow `37604557572`의 Pages 배포·라이브 smoke·release-status가 성공했다. 로컬 total assets는 `1,649,388 bytes`다.
+- 공개 validator는 merge SHA `560d9afe6e0acbd257e9fb058a87078c06d76ac6`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `provenance=matched`를 확인했다. 공개 280px CDP fallback에서 지연 상태·원본 보기·재시도·준비 상태 복귀·가로폭 0·console error 0을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재와 외부 브라우저·실기기·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-253`, `E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007`.
