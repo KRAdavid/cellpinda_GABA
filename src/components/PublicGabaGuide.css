@@ -2189,3 +2189,12 @@
 
 @media(max-width:350px){.guide-video-feature{grid-template-columns:104px 1fr;align-items:start}.guide-video-feature-copy{grid-column:2}}
 .guide-footer-back-icon{display:inline-block;margin-left:4px;vertical-align:-.2em;transform:rotate(180deg)}
+
+/* v172 narrow-phone share label: make the compact header action readable without widening the rail. */
+.guide-header-share-compact{display:none}
+@media(max-width:350px){
+  .guide-header .guide-header-share{width:52px;min-width:52px;flex-basis:52px;padding:0 4px;gap:3px;font-size:10px;white-space:nowrap}
+  .guide-header .guide-header-share svg{width:14px;height:14px}
+  .guide-header .guide-header-share-label{display:none}
+  .guide-header .guide-header-share-compact{display:inline;font-size:10px;font-weight:850;letter-spacing:-.08em;line-height:1}
+}
