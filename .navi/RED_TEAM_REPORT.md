@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 공개본 전체 흐름·직접 진입·반응형 공격 재점검 — main a2909f0 — 2026-10-08
+
+- 공격 관점에서 280·320·390·768·1440px의 가로 넘침, 깨진 이미지, 중복 id, 이름 없는 버튼·링크, 페이지/콘솔 오류를 확인했으나 재현되지 않았다.
+- 핵심 장 해시 직접 진입 후 읽기 레일이 제목을 가리는지, 영상 공유 URL이 다른 영상으로 복원되는지, 영상 선택 후 iframe이 생성되는지 확인했다. 모든 직접 진입 제목은 레일 아래에 정렬됐고, 선택 영상은 `autoplay=1&mute=1&playsinline=1` iframe으로 복원됐다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Playwright Chromium fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않는다. 이 조건과 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-PLAYWRIGHT-PUBLIC-DEEP-AUDIT-20261008`, `E-LIVE-PUBLIC-DEEP-AUDIT-20261008`, `E-NAVI-STATE-PUBLIC-DEEP-AUDIT-20261008`.
+
 ## 모바일 전문가 영상 제목 줄바꿈 — 공개 배포 공격 재점검 — main 9e447b5 — 2026-10-08
 
 - 공격 관점에서 320·390px 전문가 영상 카드의 한국어 제목이 글자 중간에서 끊기거나 카드 경계를 넘는지 확인했다. `잠이 안 올 때 GABA 이야기`가 자연스러운 줄 단위로 표시되고, 320·390px 모두 가로폭 초과와 runtime error가 없었다.

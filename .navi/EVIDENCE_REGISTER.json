@@ -2954,6 +2954,17 @@
         "E-NAVI-STATE-MOBILE-VIDEO-TITLE-WRAP-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-271",
+      "statement": "최신 공개 GABA 안내서는 280·320·390·768·1440px에서 가로폭을 유지하고, 여섯 핵심 장 직접 진입과 전문가 영상 공유·자동 재생 경로가 읽기 레일 아래의 자연스러운 흐름으로 작동한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-PUBLIC-DEEP-AUDIT-20261008",
+        "E-PLAYWRIGHT-PUBLIC-DEEP-AUDIT-20261008",
+        "E-LIVE-PUBLIC-DEEP-AUDIT-20261008",
+        "E-NAVI-STATE-PUBLIC-DEEP-AUDIT-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -19199,6 +19210,64 @@
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-MOBILE-VIDEO-TITLE-WRAP",
       "claim_refs": [
         "C-270"
+      ]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PUBLIC-DEEP-AUDIT-20261008",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 안내서의 TypeScript 타입체크·Vite production build·127개 테스트와 UI contract·research copy·governance·ops docs·external gate·goal audit가 통과했다.",
+      "locator": "local worktree C:\\Users\\computer\\Documents\\ChatGPT\\gaba-next-premium-audit-20261008; pnpm exec tsc -b; pnpm exec vite build exit code 0; pnpm test tests 127, pass 127, fail 0; validate:ui-contract·validate:research-copy·validate:governance·validate:ops-docs·validate:external-gate-evidence·validate:goal·audit:goal passed",
+      "captured_at": "2026-10-08T03:23:28+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-PUBLIC-DEEP-AUDIT",
+      "claim_refs": [
+        "C-001",
+        "C-003",
+        "C-005",
+        "C-271"
+      ]
+    },
+    {
+      "id": "E-PLAYWRIGHT-PUBLIC-DEEP-AUDIT-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin unavailable 상태에서 Playwright Chromium fallback으로 280·320·390·768·1440px 공개 화면과 여섯 핵심 장 직접 진입, 전문가 영상 공유·자동 재생 경로를 확인했다. 모든 폭에서 pageWidth와 scrollWidth가 viewport와 같고 깨진 이미지·중복 id·이름 없는 버튼·링크·runtime error가 없었다.",
+      "locator": "public target https://kradavid.github.io/gaba_info/?qa=deep-audit; Playwright Chromium fallback; widths 280·320·390·768·1440; each pageWidth=viewport, scrollWidth=viewport, brokenImages=0, runtimeErrors=[]; deep hashes #academic/#research/#growth/#expert-videos/#reading-note/#final at 390px placed heading below reading rail; ?view=guide&video=roEtojyk9_0#expert-videos restored ‘잠이 안 올 때 GABA 이야기’ and iframe autoplay=1&mute=1&playsinline=1; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-direct-research-stable-20261008.png, gaba-direct-expert-videos-stable-20261008.png, gaba-direct-final-stable-20261008.png",
+      "captured_at": "2026-10-08T03:20:00+09:00",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261008-PUBLIC-DEEP-AUDIT",
+      "claim_refs": [
+        "C-004",
+        "C-271"
+      ]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-DEEP-AUDIT-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 HTTP 200과 main merge SHA 정합성을 유지했고, 정적 bundle·연구 데이터·공유 페이지·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha a2909f073dc1d41a433a0ed4c761bba4227c39d8; generatedAt 2026-10-07T18:09:10.659Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T03:23:28+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-PUBLIC-DEEP-AUDIT",
+      "claim_refs": [
+        "C-001",
+        "C-002",
+        "C-004",
+        "C-006",
+        "C-271"
+      ]
+    },
+    {
+      "id": "E-NAVI-STATE-PUBLIC-DEEP-AUDIT-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 공개본 전체 흐름·직접 진입·반응형·전문가 영상 공유 경로의 로컬 검증과 라이브 공개 검증을 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "base main a2909f073dc1d41a433a0ed4c761bba4227c39d8; pnpm run validate:live-public -> page 200, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; pnpm run validate:tf-pulse-workflow -> ok; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T03:23:28+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-PUBLIC-DEEP-AUDIT",
+      "claim_refs": [
+        "C-271"
       ]
     }
   ]

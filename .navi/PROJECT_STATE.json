@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T03:04:00+09:00",
+  "updated_at": "2026-10-08T03:23:28+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2262,11 +2262,26 @@
         "impact": "초소형 모바일에서도 전문가 영상 제목이 의미 단위로 읽히고 카드 선택 흐름을 방해하지 않는다.",
         "required_action": "다음 영상 카드 제목·한국어 줄바꿈·반응형 CSS 변경 시 320·390px 실제 렌더와 영상 선택 상태를 함께 재검증",
         "owner": "QA"
+      },
+      {
+        "id": "AUD-013",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "최신 공개본을 280·320·390·768·1440px에서 재감리하고 여섯 핵심 장 해시 직접 진입, 전문가 영상 공유·자동 재생 경로를 확인했다. 모든 폭에서 viewport 가로폭·조작부·이미지·runtime 안정성이 유지됐으며 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-PUBLIC-DEEP-AUDIT-20261008",
+          "E-PLAYWRIGHT-PUBLIC-DEEP-AUDIT-20261008",
+          "E-LIVE-PUBLIC-DEEP-AUDIT-20261008",
+          "E-NAVI-STATE-PUBLIC-DEEP-AUDIT-20261008"
+        ],
+        "impact": "방문자가 모바일·데스크톱 어느 폭에서든 장 직접 진입과 영상 공유 흐름을 끊김 없이 이어갈 수 있다.",
+        "required_action": "다음 장 구조·해시 라우트·영상 공유 URL·반응형 CSS 변경 시 280·320·390·768·1440px과 직접 진입을 함께 재검증",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T18:04:00Z"
+    "last_run_at": "2026-10-07T18:23:28Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2574,6 +2589,20 @@
           "E-NAVI-STATE-MOBILE-VIDEO-TITLE-WRAP-20261008"
         ],
         "impact": "초소형 화면에서 영상 제목을 잘못 끊어 읽거나 카드 선택 흐름이 깨지는 회귀를 방지한다.",
+        "required_action": "Playwright Chromium fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
+        "owner": "레드팀"
+      },
+      {
+        "id": "RT-013",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 280·320·390·768·1440px의 가로폭·깨진 이미지·중복 id·이름 없는 조작부·runtime error와 여섯 핵심 장 직접 진입·전문가 영상 공유 복원을 확인했다. 신규 CRITICAL/MAJOR 결함은 재현되지 않았다.",
+        "evidence_refs": [
+          "E-PLAYWRIGHT-PUBLIC-DEEP-AUDIT-20261008",
+          "E-LIVE-PUBLIC-DEEP-AUDIT-20261008",
+          "E-NAVI-STATE-PUBLIC-DEEP-AUDIT-20261008"
+        ],
+        "impact": "대표 Chromium 환경에서 레이아웃·직접 진입·영상 공유 경로의 회귀를 조기에 잡고 공개 품질 기준을 유지한다.",
         "required_action": "Playwright Chromium fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
         "owner": "레드팀"
       }
@@ -6289,6 +6318,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T03:04:00+09:00"
+    },
+    {
+      "id": "H-356",
+      "event": "NAVI 자동 공개 배포 점검에서 최신 공개본의 280·320·390·768·1440px 전체 흐름, 여섯 핵심 장 해시 직접 진입, 전문가 영상 공유·자동 재생 경로를 재감리했다. 모든 폭에서 document width=viewport, 깨진 이미지·중복 id·이름 없는 버튼·링크·runtime error 0건을 확인했고, 공유 URL은 선택 영상을 복원했다. 로컬 typecheck·Vite production build·127개 테스트와 UI contract·research copy·governance·ops docs·external gate·goal audit, 공개 validator candidate SHA a2909f073dc1d41a433a0ed4c761bba4227c39d8·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 경계를 확인했다. 기능 코드·공개 연구 카피·수치·출처는 변경하지 않았고 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-271과 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T03:23:28+09:00"
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — public deep audit — main a2909f0 — 2026-10-08
+
+- AC-001/AC-004/AC-005: `PASS`. 로컬 typecheck·Vite production build·127개 테스트와 UI contract·governance·ops docs·goal/external gate 검사가 통과했고, 공개 validator가 main SHA 정합성·HTTP 200·정적 bundle을 확인했다.
+- AC-003: `PASS_WITH_CONDITIONS`. 280·320·390·768·1440px에서 document 폭이 viewport와 같고, 여섯 핵심 장 직접 진입·전문가 영상 공유 경로·선택 영상 자동 재생을 확인했다. 자동화 범위는 대표 Chromium 환경에 한정된다.
+- AC-006/AC-007: `PASS_WITH_CONDITIONS`. 제품 독립 과학 정보 경계·연구 카피·수치·출처는 유지됐다. Worker는 `STATIC_ONLY`로 실행하지 않으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-DEEP-AUDIT-20261008`, `E-PLAYWRIGHT-PUBLIC-DEEP-AUDIT-20261008`, `E-LIVE-PUBLIC-DEEP-AUDIT-20261008`, `E-NAVI-STATE-PUBLIC-DEEP-AUDIT-20261008`.
+
 ## Current Public Deployment Recheck — mobile expert-video title wrapping — main 9e447b5 — 2026-10-08
 
 - AC-001/AC-004/AC-005: `PASS`. PR #621 보호 검사와 main workflow `37663407212`의 Pages publish·라이브 smoke·release-status가 성공했고 공개 validator가 main SHA 정합성·정적 번들을 확인했다. 로컬 127개 테스트와 성능 예산도 통과했다.

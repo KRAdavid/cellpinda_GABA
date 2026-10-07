@@ -1,5 +1,14 @@
 # Audit Report
 
+## 공개본 전체 흐름·직접 진입·반응형 재감리 — main a2909f0 — 2026-10-08
+
+- 최신 공개본을 280·320·390·768·1440px에서 재감리했다. 모든 폭에서 document width가 viewport와 일치하고, 깨진 이미지·중복 id·이름 없는 조작부·페이지/콘솔 오류가 확인되지 않았다.
+- `#academic`, `#research`, `#growth`, `#expert-videos`, `#reading-note`, `#final` 직접 진입은 각 장 제목을 읽기 진행 레일 아래로 정렬했다. `?view=guide&video=roEtojyk9_0#expert-videos` 공유 경로는 선택 영상·자동 재생 iframe을 복원했고, 280·320·390·768·1440px에서 두 번째 영상 선택도 동일하게 작동했다.
+- 로컬 typecheck·Vite production build·127개 테스트와 UI contract·research copy·governance·ops docs·external gate·goal audit가 통과했다. 공개 validator는 candidate SHA `a2909f073dc1d41a433a0ed4c761bba4227c39d8`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다.
+- 이번 회차에 재현 가능한 CRITICAL/MAJOR 기능 결함은 없어 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다. Browser plugin 부재에 따른 Playwright Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 후속 조건으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-DEEP-AUDIT-20261008`, `E-PLAYWRIGHT-PUBLIC-DEEP-AUDIT-20261008`, `E-LIVE-PUBLIC-DEEP-AUDIT-20261008`, `E-NAVI-STATE-PUBLIC-DEEP-AUDIT-20261008`.
+
 ## 모바일 전문가 영상 제목 줄바꿈 — 공개 배포 확인 — main 9e447b5 — 2026-10-08
 
 - 320px 이하 전문가 영상 카드에서 한국어 제목이 글자 중간에서 끊기는 잔여 가독성 리스크를 확인하고, 단어 단위 줄바꿈 규칙으로 보완했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
