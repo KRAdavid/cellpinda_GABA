@@ -2568,6 +2568,18 @@
       "E-PLAYWRIGHT-RESEARCH-MAP-CUE-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-238",
+    "statement": "전문가 영상 게시판의 카드 보조 문구가 실제 선택·로딩·재생 상태와 동기화되어, 영상을 고른 직후 자동 재생되는 과정을 사용자가 한눈에 이해할 수 있다. 영상 출처·연구 카피·제품 독립 경계는 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-EXPERT-VIDEO-STATE-20261007",
+      "E-UI-CONTRACT-EXPERT-VIDEO-STATE-20261007",
+      "E-PLAYWRIGHT-EXPERT-VIDEO-STATE-20261007",
+      "E-DEPLOY-PIPELINE-EXPERT-VIDEO-STATE-20261007",
+      "E-LIVE-PUBLIC-EXPERT-VIDEO-STATE-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17038,6 +17050,58 @@
     "captured_at": "2026-10-07T12:20:00+09:00",
     "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-RESEARCH-MAP-CUE",
     "claim_refs": ["C-003", "C-006", "C-237"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-EXPERT-VIDEO-STATE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "전문가 영상 상태 보조 문구 변경이 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+    "locator": "commit a216e4e; pnpm run validate:ui-contract status ok; pnpm run typecheck status ok; pnpm test 127 pass; pnpm run build and follow-up validate:release-manifest/validate:artifacts/validate:static-bundle/validate:performance status ok; release manifest candidateSha b7f786121d59b223599a9db3f54fdb409d6cc5d4 before commit, runtimeMode static, routes 11, files 73; performance initial JS 311199, initial CSS 95703, total assets 1647451 <= 1650000",
+    "captured_at": "2026-10-07T12:18:00+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-EXPERT-VIDEO-STATE",
+    "claim_refs": ["C-001", "C-005", "C-238"]
+  },
+  {
+    "id": "E-UI-CONTRACT-EXPERT-VIDEO-STATE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "UI 계약이 전문가 영상 카드의 선택·불러오는 중·재생 중 상태를 실제 보조 문구와 함께 유지한다.",
+    "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.tsx getExpertVideoState and guide-video-card-thumb-placeholder; cardLabel values `선택 후 재생`, `영상 재생`, `불러오는 중`, `재생 중`; pnpm run validate:ui-contract status ok",
+    "captured_at": "2026-10-07T12:18:00+09:00",
+    "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261007-EXPERT-VIDEO-STATE",
+    "claim_refs": ["C-005", "C-238"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-EXPERT-VIDEO-STATE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Playwright Chromium fallback에서 모바일 전문가 영상 선택이 실제 재생 상태와 카드 보조 문구를 함께 갱신한다.",
+    "locator": "Browser plugin unavailable; local Playwright Chromium fallback against http://127.0.0.1:4180/#expert-videos and public https://kradavid.github.io/gaba_info/#expert-videos; viewport 390x844; initial active card label `영상 재생`; selecting the second card produced `불러오는 중` then after iframe load `재생 중`, feature state `재생 중`, iframe src containing Cnk0PGn9YBM?autoplay=1&mute=1&playsinline=1, one aria-pressed active card, active title `갱년기와 수면, GABA에 대한 질문`, scrollWidth 390 equals clientWidth, page errors 0 and console errors 0; screenshot stored outside repository",
+    "captured_at": "2026-10-07T12:16:19+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-EXPERT-VIDEO-STATE",
+    "claim_refs": ["C-003", "C-006", "C-238"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-EXPERT-VIDEO-STATE-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "전문가 영상 상태 표기 보정이 PR 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #558 https://github.com/KRAdavid/gaba_info/pull/558; squash merge 2e6ab07c632469c095c25611213f274483133d8f; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37565907302: release-verify 112613438338 success; worker-readiness 112613684290 success; deploy-pages 112613708861 success; smoke-live 112613768731 success; release-status 112613825790 success; deploy-worker 112613709763 skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37565907302",
+    "captured_at": "2026-10-07T12:16:19+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-EXPERT-VIDEO-STATE",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-238"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-EXPERT-VIDEO-STATE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 GitHub Pages 공개본이 전문가 영상 상태 표기 보정 release SHA와 일치하고 정적 공개 데이터·제품 독립 경계·teaser HOLD가 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=2e6ab07c632469c095c25611213f274483133d8f; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 2e6ab07c632469c095c25611213f274483133d8f; generatedAt 2026-10-07T03:16:19.461Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T12:16:19+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-EXPERT-VIDEO-STATE",
+    "claim_refs": ["C-001", "C-002", "C-238"]
   }
 ]
 }

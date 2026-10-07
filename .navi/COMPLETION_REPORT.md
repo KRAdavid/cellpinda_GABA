@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — expert video state labels — main 2e6ab07 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. PR #558과 main workflow `37565907302`의 release-verify·Pages publish·라이브 smoke·release-status가 성공했고 공개 validator가 HTTP 200 및 candidate SHA 일치를 확인했다.
+- AC-003: PASS_WITH_CONDITIONS. 영상 카드 상태가 `선택 후 재생 → 불러오는 중 → 재생 중`으로 실제 재생 상태와 동기화됐다. 공개 390px Playwright Chromium fallback에서 두 번째 영상 선택 후 자동재생 iframe·활성 카드 1개·가로 넘침 없음·page/console error 0을 확인했다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. 영상 출처·연구 카피·제품 독립 경계는 변경하지 않았다. Worker 운영 비밀값, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-STATE-20261007`, `E-UI-CONTRACT-EXPERT-VIDEO-STATE-20261007`, `E-PLAYWRIGHT-EXPERT-VIDEO-STATE-20261007`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-STATE-20261007`, `E-LIVE-PUBLIC-EXPERT-VIDEO-STATE-20261007`.
+
 ## Current Work Recheck — research map continuation cue — working tree — 2026-10-07
 
 - AC-002/AC-003/AC-004: PASS_WITH_CONDITIONS. 연구 지도 초기 상태에 대표 결과·연구 범위·주제 선택 후 상세 카드 연결 문구가 표시되고, 피부 주제 선택은 활성 카드와 포커스로 이어졌다. 320·390·768·1440px에서 가로 넘침과 실행 오류가 없었다.

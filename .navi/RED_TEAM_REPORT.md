@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 상태 표기 공격 재점검 — 공개 배포 확인 — main 2e6ab07 — 2026-10-07
+
+- 영상 선택 시 자동 재생은 시작되지만 카드 문구가 고정되어 상태를 잘못 읽게 만드는지 공격적으로 확인했다. 두 번째 영상을 선택한 뒤 카드가 `불러오는 중`, iframe 준비 후 `재생 중`으로 바뀌고 상단 플레이어 상태도 `재생 중`으로 일치했다.
+- 390px에서 활성 카드가 하나만 남고 `autoplay=1` iframe이 생성되며 document 폭이 viewport와 일치했다. page error·console error는 0건이고 새 CRITICAL/MAJOR 결함은 없다.
+- PR #558과 main workflow `37565907302` 및 공개 validator는 최종 공개 SHA `2e6ab07c632469c095c25611213f274483133d8f`를 확인했다. 실기기·고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-PLAYWRIGHT-EXPERT-VIDEO-STATE-20261007`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-STATE-20261007`, `E-LIVE-PUBLIC-EXPERT-VIDEO-STATE-20261007`.
+
 ## 연구 지도 선택 연결 문구 공격 재점검 — working tree — 2026-10-07
 
 - 처음 방문자가 연구 지도 노드와 상세 카드의 관계를 놓칠 수 있는지, 보강 문구가 연구 결과를 과장하거나 시각 밀도를 해치지 않는지 공격적으로 확인했다. 초기 상태는 대표 결과·연구 범위·선택 안내를 순서대로 보여주고, 피부 선택은 `현재 선택 · 피부`·활성 카드·포커스로 이어졌다.

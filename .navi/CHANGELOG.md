@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 재생 상태 표기 — 공개 배포 확인 — main 2e6ab07 — 2026-10-07
+
+- 전문가 영상 카드의 상태 문구를 실제 재생 상태와 동기화했다. 선택 전 `선택 후 재생`, 선택 직후 `불러오는 중`, 재생 완료 후 `재생 중`으로 바뀐다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산과 390px 공개 Playwright 검증을 통과했다. PR #558과 main workflow `37565907302`의 Pages 배포·라이브 smoke도 성공했다.
+- 영상 출처·연구 카피·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-STATE-20261007`, `E-UI-CONTRACT-EXPERT-VIDEO-STATE-20261007`, `E-PLAYWRIGHT-EXPERT-VIDEO-STATE-20261007`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-STATE-20261007`, `E-LIVE-PUBLIC-EXPERT-VIDEO-STATE-20261007`.
+
 ## 연구 지도 선택 연결 문구 — working tree — 2026-10-07
 
 - 연구 지도 아래 초기 안내에 `주제를 고르면 해당 카드로 이어집니다`를 추가해, 대표 결과와 상세 연구 카드의 연결을 한 번에 읽도록 했다.

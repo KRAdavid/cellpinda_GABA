@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T12:20:00+09:00",
+  "updated_at": "2026-10-07T12:25:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2143,7 +2143,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T03:20:00Z"
+    "last_run_at": "2026-10-07T03:25:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2345,7 +2345,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T03:20:00Z"
+    "last_run_at": "2026-10-07T03:25:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5809,6 +5809,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T12:20:00+09:00"
+    },
+    {
+      "id": "H-321",
+      "event": "전문가 영상 게시판에서 영상을 선택하면 실제로는 자동 재생되지만 카드 보조 문구가 계속 `선택 후 재생`으로 남아 현재 상태를 오해할 수 있는 잔여 퍼블리싱 리스크를 확인했다. 선택·불러오는 중·재생 중 상태에 맞는 카드 문구를 연결하고 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산을 통과시켰다. 390px Playwright Chromium fallback에서 두 번째 영상 선택 후 `불러오는 중`에서 `재생 중`으로 전환되고 autoplay iframe·활성 카드·가로폭·오류 상태를 확인했으며, PR #558과 main workflow 37565907302 및 공개 validator가 최종 SHA 2e6ab07c632469c095c25611213f274483133d8f를 확인했다. 공개 main 배포·라이브 URL은 반영됐고 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T12:25:00+09:00"
     }
   ]
 }

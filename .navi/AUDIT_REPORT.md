@@ -1,5 +1,13 @@
 # Audit Report
 
+## 전문가 영상 재생 상태 문구 동기화 — 공개 배포 확인 — main 2e6ab07 — 2026-10-07
+
+- 전문가 영상 카드의 보조 문구를 실제 상태와 연결했다. 선택 전에는 `선택 후 재생`, 선택 직후에는 `불러오는 중`, iframe이 준비되면 `재생 중`으로 표시되어, 카드와 상단 플레이어의 상태가 같은 언어로 읽힌다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산을 통과했다. 390px Playwright Chromium fallback에서 두 번째 영상 선택 후 자동재생 iframe과 `불러오는 중 → 재생 중` 전환, 활성 카드 1개, 가로 넘침 없음, page/console error 0을 확인했다.
+- PR #558과 main workflow `37565907302`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. 새 CRITICAL/MAJOR 결함은 없다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 후속 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-STATE-20261007`, `E-UI-CONTRACT-EXPERT-VIDEO-STATE-20261007`, `E-PLAYWRIGHT-EXPERT-VIDEO-STATE-20261007`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-STATE-20261007`, `E-LIVE-PUBLIC-EXPERT-VIDEO-STATE-20261007`.
+
 ## 연구 지도 선택 연결 문구 — working tree — 2026-10-07
 
 - 연구 지도에서 대표 결과를 먼저 보여주는 초기 상태에 `주제를 고르면 해당 카드로 이어집니다`를 추가해, 지도 노드 선택과 아래 상세 카드의 관계를 한 문장으로 연결했다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다.
