@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — research result transition band deployed — main 8538063 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. PR #546 병합 후 main workflow `37555128673`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200이다. 공개 validator는 candidate `8538063bd2cfd6b15eb8cf67f2c6944e87e4891b`·bundle hash 73개·제품 독립 경계를 확인했다.
+- AC-003: PASS_WITH_CONDITIONS. 공개 CSS에서 연구 결과 전환 밴드가 반영되고, 공개 JS에서 `대표 결과부터 읽기`와 연구 읽기 레일을 확인했다. 기존 연구 카드 흐름과 별도 링크 없는 읽기 순서는 유지된다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. teaser `HOLD`, 공개 연구 데이터 경계, 제품 독립 경계는 유지됐다. 신규 브라우저 시각 캡처·Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-BAND-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-BAND-20261008`.
+
 ## Current Work Recheck — research result transition band — working tree — 2026-10-07
 
 - AC-003/AC-004: PASS_WITH_CONDITIONS. 06장 연구 지도와 대표 결과 사이의 기존 전환 영역을 연한 증거 밴드로 보정해 모바일·데스크톱에서 다음 연구 카드로 이어지는 흐름을 구분했다. 별도 링크 이동·새 연구 주장·새 데이터는 추가하지 않았다.

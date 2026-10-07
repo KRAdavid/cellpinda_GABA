@@ -1,5 +1,13 @@
 # Audit Report
 
+## 06·연구의 확장 결과 전환 밴드·공개 배포 후 재감사 — main 8538063 — 2026-10-07
+
+- PR #546 병합 후 main workflow `37555128673`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다. 공개 validator는 HTTP 200·candidate `8538063bd2cfd6b15eb8cf67f2c6944e87e4891b`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 공개 `PublicGabaGuide` CSS에서 연구 결과 전환 밴드 선택자를 확인하고, 공개 JS에서 `대표 결과부터 읽기`와 `guide-research-read-order`를 재확인했다. 별도 카피·수치·출처·제품 데이터는 추가되지 않았다.
+- 새 CRITICAL/MAJOR 결함은 없다. 이번 라이브 확인은 정적 번들·validator 기반이며 신규 브라우저 시각 캡처와 Safari/iOS/Android·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-BAND-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-BAND-20261008`.
+
 ## 06·연구의 확장 결과 전환 밴드·로컬 재감사 — working tree — 2026-10-07
 
 - 연구 지도 아래 대표 결과가 시작되는 기존 전환 영역이 얇은 선처럼 보여 지도·결과·다음 연구 카드의 관계가 약하게 보이는 잔여 퍼블리싱 리스크를 보정했다. 새 카피·수치·출처·데이터를 추가하지 않고 연한 배경·테두리·강조 색만 적용해 하나의 증거 전환 밴드로 읽히게 했다.

@@ -2489,7 +2489,9 @@
     "evidence_refs": [
       "E-LOCAL-BUILD-RESEARCH-CUE-BAND-20261008",
       "E-UI-CONTRACT-RESEARCH-CUE-BAND-20261008",
-      "E-STATIC-BUNDLE-RESEARCH-CUE-BAND-20261008"
+      "E-STATIC-BUNDLE-RESEARCH-CUE-BAND-20261008",
+      "E-DEPLOY-PIPELINE-RESEARCH-CUE-BAND-20261008",
+      "E-LIVE-PUBLIC-RESEARCH-CUE-BAND-20261008"
     ],
     "status": "SUPPORTED"
   }
@@ -16681,6 +16683,28 @@
     "captured_at": "2026-10-07T10:05:00+09:00",
     "reviewer_id": "NAVI-PAGES-BUNDLE-QA-20261008-RESEARCH-CUE-BAND",
     "claim_refs": ["C-001", "C-005", "C-230"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-RESEARCH-CUE-BAND-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 결과 전환 밴드 보정이 PR 검사와 main 정적 공개 배포 파이프라인을 모두 통과했다.",
+    "locator": "PR #546 https://github.com/KRAdavid/gaba_info/pull/546; PR release-verify run 37554986175/job 112579030567 success and site-quality-verify run 37554986165/job 112579030651 success; squash merge 8538063bd2cfd6b15eb8cf67f2c6944e87e4891b; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37555128673: release-verify 112579482796, worker-readiness 112579866965, deploy-pages 112579891452, smoke-live 112579944737, release-status 112579996711 all success; deploy-worker 112579892437 skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37555128673",
+    "captured_at": "2026-10-07T10:15:00+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-20261008-RESEARCH-CUE-BAND",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-230"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-RESEARCH-CUE-BAND-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 공개 GitHub Pages 번들에 연구 결과 전환 밴드가 반영되고, 공개 데이터·제품 독립 경계·정적 배포 정합성이 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=8538063bd2cfd6b15eb8cf67f2c6944e87e4891b; HTTP 200; candidateSha 8538063bd2cfd6b15eb8cf67f2c6944e87e4891b; STATIC; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public asset assets/PublicGabaGuide-elHDFBPh.css HTTP 200 includes guide-research-map-cue; public asset assets/PublicGabaGuide-BAuBcN27.js HTTP 200 includes guide-research-read-order and representative-result copy; no fresh browser screenshot claimed",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T10:15:00+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-RESEARCH-CUE-BAND",
+    "claim_refs": ["C-001", "C-003", "C-006", "C-230"]
   }
 ]
 }

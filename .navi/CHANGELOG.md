@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 06·연구의 확장 결과 전환 밴드·공개 배포 완료 — main 8538063 — 2026-10-07
+
+- PR #546을 병합하고 main workflow `37555128673`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `8538063bd2cfd6b15eb8cf67f2c6944e87e4891b`, bundle hash 73개, 제품 독립 경계를 확인했다.
+- 공개 CSS에서 연구 결과 전환 밴드가 반영되고 공개 JS에서 `대표 결과부터 읽기`와 연구 읽기 레일이 유지됨을 재확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 신규 브라우저 시각 QA·실기기·고령 사용자·독립 과학·규제 감수는 외부 검증 항목으로 남는다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-BAND-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-BAND-20261008`.
+
 ## 06·연구의 확장 결과 전환 밴드 고도화 — working tree — 2026-10-07
 
 - 연구 지도와 대표 결과 사이의 기존 전환 영역을 얇은 구분선에서 연한 배경·테두리·강조 색을 가진 증거 전환 밴드로 보정해 모바일과 데스크톱에서 다음 연구 카드로 이어지는 흐름을 더 쉽게 구분하도록 했다.
