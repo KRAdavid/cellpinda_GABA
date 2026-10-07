@@ -1,5 +1,13 @@
 # Audit Report
 
+## 모바일 전문가 영상→출처 읽기 연결 리듬 — working tree — 2026-10-07
+
+- 전문가 영상 마지막 카드와 `11 · 출처 읽기` 사이의 모바일 여백이 정보 흐름을 끊어 보이는지 감리했다. 700px 이하 출처 읽기 장의 상단·하단 여백을 `72px·64px`로 보정해 다음 제목과 질문 패널이 이전 장의 handoff와 가깝게 이어지도록 했다.
+- 로컬 production build·UI contract·typecheck·127개 테스트·정적 bundle·성능 예산을 통과했고, Chrome CDP fallback 390px에서 출처 읽기 제목·연구 질문·원문 출처 패널을 확인했다. document 가로폭은 viewport와 일치했으며 page/console 오류는 없었다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며 공개 main 배포·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 후속 조건으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-HANDOFF-20261007`, `E-CDP-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007`.
+
 ## 공개 연구 라우트 고도화 — 공개 배포 확인 — code 9c3f174 / final manifest 25d8ff3 — 2026-10-07
 
 - `/research/`를 메인 안내서와 같은 네이비·틸 시각 언어로 정리하고, 제목·증거 안내·연구 카드·출처 연결을 결과 우선 읽기 흐름으로 맞췄다. `먼저 확인해 주세요`처럼 흐름을 끊던 문구와 어색한 비교 표현은 자연스러운 한국어로 교체했으며 연구 수치·출처·제품 독립 경계는 변경하지 않았다.

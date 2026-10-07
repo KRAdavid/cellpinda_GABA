@@ -2791,9 +2791,9 @@
     ],
     "status": "SUPPORTED"
   },
-  {
-    "id": "C-257",
-    "statement": "320px 이하 모바일 연구 결과 도표에서 비교 조건과 GABA 그룹이 같은 시야에 유지되고, GABA 결과 강조·변화 방향·상대 비교 범례를 한 번에 읽을 수 있다. 로컬·PR·main Pages 검증과 공개 live validator가 통과했으며 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
+    {
+      "id": "C-257",
+      "statement": "320px 이하 모바일 연구 결과 도표에서 비교 조건과 GABA 그룹이 같은 시야에 유지되고, GABA 결과 강조·변화 방향·상대 비교 범례를 한 번에 읽을 수 있다. 로컬·PR·main Pages 검증과 공개 live validator가 통과했으며 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
     "evidence_refs": [
       "E-LOCAL-BUILD-NARROW-COMPARISON-20261007",
       "E-CDP-NARROW-COMPARISON-20261007",
@@ -2801,9 +2801,19 @@
       "E-LIVE-PUBLIC-NARROW-COMPARISON-20261007",
       "E-NAVI-STATE-NARROW-COMPARISON-20261007"
     ],
-    "status": "SUPPORTED"
-  }
-],
+      "status": "SUPPORTED"
+    },
+    {
+      "id": "C-258",
+      "statement": "모바일 전문가 영상에서 출처 읽기로 넘어가는 장면의 상단 여백이 연속 독해를 방해하지 않도록 정리되었고, 390px 직접 진입에서 제목·출처 질문·원문 연결이 읽기 레일 아래에 안정적으로 이어진다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-CHAPTER-HANDOFF-20261007",
+        "E-CDP-MOBILE-CHAPTER-HANDOFF-20261007",
+        "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007"
+      ],
+      "status": "SUPPORTED"
+    }
+  ],
   "evidence": [
     {
       "id": "E-USER-AUTO-UPDATE",
@@ -18252,6 +18262,36 @@
     "captured_at": "2026-10-07T20:39:00+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-NARROW-COMPARISON",
     "claim_refs": ["C-257"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-MOBILE-CHAPTER-HANDOFF-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 출처 읽기 장면의 연속 독해 여백 보정 후 UI contract·typecheck·production build·정적 번들·성능 예산이 통과했다.",
+    "locator": "src/components/PublicGabaGuide.css v174 mobile chapter handoff; pnpm run validate:ui-contract -> ok; pnpm run typecheck -> pass; pnpm run build -> pass; validate:static-bundle -> 11 routes/73 files; validate:performance -> initial JS 311405, initial CSS 95703, total assets 1648916 <= 1650000; git diff --check -> pass",
+    "captured_at": "2026-10-07T21:05:00+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
+    "claim_refs": ["C-001", "C-003", "C-005", "C-258"]
+  },
+  {
+    "id": "E-CDP-MOBILE-CHAPTER-HANDOFF-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Chrome headless/CDP fallback으로 390px 전문가 영상 이후 출처 읽기 장면을 직접 열어 제목·연구 읽기 질문·원문 출처 패널을 확인했고, 가로 넘침과 deep-entry 오류가 없었다.",
+    "locator": "Browser plugin unavailable; Chrome CDP fallback; local http://127.0.0.1:5173/; viewport 390x844; #reading-note screenshot outside repository `gaba-deep-reading-note.png`; document scrollWidth=390; after #reading-note direct entry sectionTop -0.34, headingTop 109.45, progressBottom 105; academic direct entry headingTop 131.89; final direct entry headingTop 273; page/console errors []",
+    "captured_at": "2026-10-07T21:05:00+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
+    "claim_refs": ["C-003", "C-004", "C-258"]
+  },
+  {
+    "id": "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register·감사·레드팀 기록이 모바일 장면 연결 보정의 로컬 검증을 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 공개 배포 전 조건을 함께 기록한다.",
+    "locator": "NAVI validate_project_state.py; pnpm run validate:governance; pnpm run validate:ops-docs; .navi/EVIDENCE_REGISTER.json C-258 and three evidence records; status USER_DECISION; completion gate NOT_READY; public deployment remains pending for this code change",
+    "captured_at": "2026-10-07T21:05:00+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
+    "claim_refs": ["C-258"]
   }
 ]
 }
