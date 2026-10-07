@@ -1838,7 +1838,7 @@ export default function PublicGabaGuide() {
             <p className="guide-section-lead">유진 로버츠와 샘 프랭클은 당시의 분석 기술로 뇌 조직을 들여다보다가, 다른 조직에서는 거의 보이지 않는 물질을 발견했습니다. 그 물질이 바로 GABA였습니다.</p>
             <div className="guide-history-timeline">{historyMilestones.map((milestone, index) => <article className="guide-history-item" key={milestone.year}><div className="guide-history-marker"><span>{milestone.year}</span>{index < historyMilestones.length - 1 ? <i aria-hidden="true" /> : null}</div><div className="guide-history-copy"><h3>{milestone.title}</h3><p>{milestone.body}</p><a className="guide-study-source" href={milestone.source.url} target="_blank" rel="noopener noreferrer">{milestone.source.label} <ExternalLink size={13} aria-hidden="true" /></a></div></article>)}</div>
             <div className="guide-research-scale" aria-label="GABA 연구 규모">
-              <div className="guide-research-scale-head"><div><p className="guide-section-number">연구 규모</p><h3>하나의 신호.<br />{' '}넓어진 연구.</h3></div><p className="guide-research-scale-range" aria-label="1950년부터 현재까지"><span aria-hidden="true">1950</span><i aria-hidden="true" /><span aria-hidden="true">지금</span><span className="sr-only">1950년부터 현재까지</span></p></div>
+              <div className="guide-research-scale-head"><div><p className="guide-section-number">연구 규모</p><h3>하나의 신호.<br />{' '}넓어진 연구.</h3></div><p className="guide-research-scale-range"><span>1950</span><i aria-hidden="true" /><span>지금</span><time dateTime="2026-09-28">기준일 2026.09.28</time></p></div>
               <div className="guide-research-scale-reading" role="note" aria-label="연구 수치를 읽는 기준">
                 <span className="is-shared"><i aria-hidden="true" /><strong>같은 검색 기준</strong><em>하버드 · 옥스퍼드 · PubMed</em></span>
                 <span className="is-separate"><i aria-hidden="true" /><strong>별도 연구 분석</strong><em>GABA-A 수용체 · SCIE</em></span>
@@ -1853,7 +1853,7 @@ export default function PublicGabaGuide() {
                   {researchScaleStats.filter((stat) => stat.group === 'analysis').map((stat) => <ResearchScaleMetric key={stat.label} stat={stat} featured />)}
                 </section>
               </div>
-              <p className="guide-research-scale-caption">하버드·옥스퍼드는 같은 PubMed 검색 기준에서 비교했습니다. SCIE 수치는 GABA-A 수용체 관련 WoS Core Collection 분석으로, 별도 연구 범위의 결과입니다. 검색일은 2026년 9월 28일입니다.</p>
+              <p className="guide-research-scale-caption">하버드·옥스퍼드는 같은 PubMed 검색 기준에서 비교했습니다. SCIE 수치는 GABA-A 수용체 관련 WoS Core Collection 분석으로, 별도 연구 범위의 결과입니다.</p>
               <p className="guide-history-quote">작은 분자 하나의 발견은<br /><strong>뇌가 균형을 만드는 방식을 읽는 새로운 언어</strong>가 되었습니다.</p>
             </div>
           </div>

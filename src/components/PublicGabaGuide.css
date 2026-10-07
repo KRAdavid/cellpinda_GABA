@@ -2160,6 +2160,7 @@
 /* v163 print publishing: hide the video board and keep editorial imagery together on paper. */
 @media print{.guide-video-board{display:none!important}.guide-editorial-band{break-inside:avoid}}
 
+
 @media(max-width:350px){.guide-video-feature{grid-template-columns:104px 1fr;align-items:start}.guide-video-feature-copy{grid-column:2}}
 .guide-footer-back-icon{display:inline-block;margin-left:4px;vertical-align:-.2em;transform:rotate(180deg)}
 
