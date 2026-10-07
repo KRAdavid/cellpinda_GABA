@@ -2249,3 +2249,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재에 따른 CDP fallback, 실기기·실사용자·독립 과학·규제 검증 조건을 유지한다.
 
 증적: `C-260`, `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007`, `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.
+
+## 2026-10-07 — 인쇄·PDF 첫 히어로 여백 보정 — eb0dcf3
+
+- 공개 인쇄/PDF에서 첫 히어로 제목이 종이 왼쪽 끝에 붙던 문제를 확인하고 `public/print.css`에 A4 좌우 여백을 적용했다. 화면 레이아웃과 공개 연구 내용은 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산, PR #604와 main workflow `37628653269`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. 로컬 총 자산은 `1,649,327 bytes / 1,650,000 bytes`다.
+- 공개 validator는 merge SHA `eb0dcf3f20ffba47b5df55feadce5ff7a8664a3f`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 인쇄 미디어는 14개 장·14개 출처 링크·화면 전용 조작부 숨김·문서 폭 `1425/1425`를 확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재에 따른 Chrome CDP fallback, 실기기·실사용자·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-261`, `E-LOCAL-BUILD-PRINT-HERO-MARGIN-20261007`, `E-CDP-PRINT-HERO-MARGIN-20261007`, `E-DEPLOY-PIPELINE-PRINT-HERO-MARGIN-20261007`, `E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007`, `E-NAVI-STATE-PRINT-HERO-MARGIN-20261007`.

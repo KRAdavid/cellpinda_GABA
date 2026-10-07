@@ -2928,6 +2928,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-260`, `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007`, `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.
 
+## Current Release Recheck — eb0dcf3 — 인쇄·PDF 히어로 여백 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. main workflow `37628653269`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 candidate `eb0dcf3f20ffba47b5df55feadce5ff7a8664a3f`·HTTP 200·STATIC·73개 bundle hash·12개 claims·6개 master records·6개 share pages·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance matched`를 확인했다.
+- AC-003/AC-004 인쇄 활용성·반응형: PASS. 공개 인쇄 미디어에서 `print.css`가 로드되고, 첫 히어로 제목이 A4 좌우 여백 안에 배치되며 화면 전용 헤더·진행 레일·영상 보드·회복 조작부·마지막 액션이 숨겨졌다. 14개 장은 표시되고 14개 출처 링크가 남았으며 document `scrollWidth/clientWidth`는 `1425/1425`였다.
+- AC-005 자동 게이트: PASS. typecheck·UI contract·127개 테스트·production build·정적 bundle·성능 예산, PR #604 required checks와 main 배포·라이브 smoke·release-status가 통과했다. 로컬 Pages-style 총 자산은 `1,649,327 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 인쇄 레이아웃만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없지만 Browser plugin 부재에 따른 Chrome CDP fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-261`, `E-LOCAL-BUILD-PRINT-HERO-MARGIN-20261007`, `E-CDP-PRINT-HERO-MARGIN-20261007`, `E-DEPLOY-PIPELINE-PRINT-HERO-MARGIN-20261007`, `E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007`, `E-NAVI-STATE-PRINT-HERO-MARGIN-20261007`.
+
 ## 공개 배포 핵심 화면·상호작용 자동 재감리 — b7f0bbb — 2026-10-07
 
 - AC-001 공개 URL·라이브 정합성: PASS. 코드 기준선 `b7f0bbb`와 문서-only PR #594 병합 SHA `f6a934d10ac08720be717e07bd86ea02513b24b9`가 연결된 뒤 `pnpm run validate:live-public`가 HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
