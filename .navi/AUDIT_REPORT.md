@@ -2904,6 +2904,16 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
 
+## Audit recheck — 최종 공유 장의 인쇄·PDF action — bd0a33a / main 6bb3663 — 2026-10-07
+
+- 최종 공유 장에 `GABA 이야기 공유하기`와 `인쇄 · PDF 저장`을 추가했다. 모바일에서는 세로 스택으로 읽히고 데스크톱에서는 2열로 정렬되며, 인쇄 미디어에서는 화면 전용 action이 숨겨진다.
+- 로컬 typecheck·UI contract·127개 테스트·production build·정적 bundle·성능 예산을 통과했다. GitHub runner의 초기 번들 초과 3회는 중복 아이콘과 중복 라벨 markup을 줄여 최종 PR 보호 검사에서 해소했다.
+- PR #606의 `release-verify 37633763482`·`site-quality-verify 37633763391`, main workflow `37634042762`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 merge SHA `6bb366388ef62775a96c8a69353fdca7b4b203c0`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 공개 Chrome CDP fallback 390·1440px에서 두 action과 print 호출·가로폭을 재현했고, 인쇄 미디어에서 14개 장·14개 출처 링크·화면 전용 action 숨김을 확인했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- Browser plugin 부재에 따른 CDP fallback, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토, teaser `HOLD`는 외부 잔여 조건으로 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-262`, `E-LOCAL-BUILD-PRINT-ACTION-20261007`, `E-CDP-PRINT-ACTION-20261007`, `E-DEPLOY-PIPELINE-PRINT-ACTION-20261007`, `E-LIVE-PUBLIC-PRINT-ACTION-20261007`, `E-NAVI-STATE-PRINT-ACTION-20261007`.
+
 ## Current Release Recheck — 3cef5f36 — 모바일 성장 연구 흐름 — 2026-10-07
 
 - AC-001 공개 URL·라이브 정합성: PASS. PR #600 병합 후 main workflow `37622082343`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 candidate `3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c`·HTTP 200·STATIC·73개 bundle hash·12개 claims·6개 master records·6개 share pages·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
