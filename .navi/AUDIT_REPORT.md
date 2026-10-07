@@ -1,5 +1,13 @@
 # Audit Report
 
+## 모바일 성장 연구 장 진입 여백 — 공개 배포 확인 — main bcb82a2 — 2026-10-08
+
+- 351·430px 모바일에서 `09 · 성장 연구`의 시작점이 읽기 진행 레일과 가까워 보일 수 있는 잔여 리스크를 확인하고 상단 여백을 보완했다. 280·320·390px handoff와 `#growth` 직접 진입에서 장 번호·제목·연구 경로가 레일 아래에 이어졌고 document 가로폭은 viewport와 같았다.
+- 로컬 production build·127개 테스트·정적 bundle·성능 예산을 통과했다. PR #613과 main workflow `37650139724`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했고, 공개 validator는 merge SHA `bcb82a2fd53171aa7dbb6aba3aa1e74a3dea1045`, HTTP 200, bundle hash 73개, 제품 독립 경계와 teaser `HOLD`를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 후속 조건으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-GROWTH-ENTRY-20261008`, `E-CDP-MOBILE-GROWTH-ENTRY-20261008`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-ENTRY-20261008`, `E-LIVE-PUBLIC-MOBILE-GROWTH-ENTRY-20261008`, `E-NAVI-STATE-MOBILE-GROWTH-ENTRY-20261008`.
+
 ## 모바일 전문가 영상→출처 읽기 연결 리듬 — 공개 배포 확인 — main 2de2735 — 2026-10-07
 
 - PR #598 보호 검사와 main workflow `37618834702`의 release-verify·Pages publish·라이브 smoke·release-status가 성공했다. 공개 manifest는 candidate SHA `2de2735fec56c36839216ce580c7298f87cf09c5`, HTTP 200, 정적 bundle hash 73개와 제품 독립 공개 경계를 확인한다.

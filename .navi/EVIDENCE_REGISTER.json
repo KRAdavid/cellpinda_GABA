@@ -2896,6 +2896,18 @@
       "E-NAVI-STATE-MOBILE-FILTER-CUE-20261008"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-266",
+    "statement": "모바일 성장 연구 장의 진입 여백을 351·430px 구간에서 보완해 읽기 진행 레일 아래에 장 번호·제목·연구 경로가 안정적으로 이어지도록 했고, 정적 번들·공개 배포·라이브 모바일 검증·NAVI 자동 점검을 모두 통과했다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-MOBILE-GROWTH-ENTRY-20261008",
+      "E-CDP-MOBILE-GROWTH-ENTRY-20261008",
+      "E-DEPLOY-PIPELINE-MOBILE-GROWTH-ENTRY-20261008",
+      "E-LIVE-PUBLIC-MOBILE-GROWTH-ENTRY-20261008",
+      "E-NAVI-STATE-MOBILE-GROWTH-ENTRY-20261008"
+    ],
+    "status": "SUPPORTED"
   }
   ],
   "evidence": [
@@ -18805,6 +18817,79 @@
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-MOBILE-FILTER-CUE",
       "claim_refs": [
         "C-265"
+      ]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-GROWTH-ENTRY-20261008",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 성장 연구 장 진입 여백 보정본이 Pages용 정적 번들·manifest·artifact·static route·performance 검사를 통과했다.",
+      "locator": "local worktree C:\\Users\\computer\\Documents\\ChatGPT\\gaba-growth-heading-20261008; pnpm run build; dist-pages total assets 1,649,456 bytes; initial JS 311,405 bytes; initial CSS 95,703 bytes; pnpm test 127 passed; release manifest·privacy·goal·research·UI·governance·TF pulse 검증 통과",
+      "captured_at": "2026-10-08T01:15:52+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-MOBILE-GROWTH-ENTRY",
+      "claim_refs": [
+        "C-001",
+        "C-005",
+        "C-266"
+      ]
+    },
+    {
+      "id": "E-CDP-MOBILE-GROWTH-ENTRY-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback에서 280·320·390px 성장 연구 장 handoff와 #growth deep-link의 장 번호·제목이 읽기 진행 레일 아래에 놓였고 document 가로폭은 viewport와 같으며 runtime error는 없었다.",
+      "locator": "Browser plugin unavailable; Chrome CDP fallback; local script C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-local-growth-navigation-qa.mjs; 280px handoff numberTop=108.5, railBottom=105, scrollWidth=280, deepLink targetTop=187.5; 320px handoff numberTop=111.71875, railBottom=105, scrollWidth=320, deepLink targetTop=187.71875; 390px handoff numberTop=114.78125, railBottom=97, scrollWidth=390, deepLink targetTop=187.78125; runtimeErrors=[]",
+      "captured_at": "2026-10-08T01:15:52+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-MOBILE-GROWTH-ENTRY",
+      "claim_refs": [
+        "C-004",
+        "C-006",
+        "C-266"
+      ]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-GROWTH-ENTRY-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 성장 연구 진입 보정 PR #613이 보호 검사를 통과해 main에 병합되었고, 정적 Pages 배포·라이브 smoke·release-status가 모두 성공했다.",
+      "locator": "PR #613 https://github.com/KRAdavid/gaba_info/pull/613; final head 3277207; merge SHA bcb82a2fd53171aa7dbb6aba3aa1e74a3dea1045; PR release-verify 37649888046 success; PR site-quality-verify 37649887970 success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37650139724: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37650139724",
+      "captured_at": "2026-10-08T01:15:52+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-MOBILE-GROWTH-ENTRY",
+      "claim_refs": [
+        "C-001",
+        "C-005",
+        "C-266"
+      ]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-GROWTH-ENTRY-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 HTTP 200과 merge SHA 정합성을 유지했고, 성장 연구 장의 390px handoff·deep-link가 읽기 레일 아래에서 안정적으로 표시되며 가로폭 초과와 runtime error가 없었다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha bcb82a2fd53171aa7dbb6aba3aa1e74a3dea1045; generatedAt 2026-10-07T16:12:45.686Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Chrome CDP fallback 390x844 handoff numberTop=115.28125, railBottom=105, scrollWidth=390, deepLink numberTop=246.28125, runtimeErrors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T01:15:52+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-MOBILE-GROWTH-ENTRY",
+      "claim_refs": [
+        "C-001",
+        "C-002",
+        "C-004",
+        "C-006",
+        "C-266"
+      ]
+    },
+    {
+      "id": "E-NAVI-STATE-MOBILE-GROWTH-ENTRY-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 모바일 성장 연구 진입 보정의 로컬 build·CDP·PR·main 배포·라이브 QA를 연결하고, 제품 독립 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "PR #613 https://github.com/KRAdavid/gaba_info/pull/613; main deployment workflow https://github.com/KRAdavid/gaba_info/actions/runs/37650139724 success; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; pnpm run validate:tf-pulse-workflow -> ok; status USER_DECISION; completion gate NOT_READY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37650139724",
+      "captured_at": "2026-10-08T01:15:52+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-MOBILE-GROWTH-ENTRY",
+      "claim_refs": [
+        "C-266"
       ]
     }
   ]

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T00:39:31+09:00",
+  "updated_at": "2026-10-08T01:15:52+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6137,6 +6137,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T00:39:31+09:00"
+    },
+    {
+      "id": "H-351",
+      "event": "NAVI 자동 공개 배포 점검에서 351·430px 모바일 성장 연구 장의 시작점이 읽기 진행 레일과 가까워 장 번호·제목·연구 경로가 압축되어 보일 수 있는 잔여 퍼블리싱 리스크를 확인하고 보완했다. 해당 구간에 20px 상단 breathing room을 추가해 280·320·390px handoff와 #growth deep-link의 제목 위치를 다시 측정했으며, 가로폭 초과와 runtime error는 없었다. 로컬 production build는 총 자산 1,649,456바이트로 성능 예산을 통과했고 127개 테스트가 성공했다. PR #613의 release-verify·site-quality-verify와 main workflow 37650139724의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY에 따라 실행하지 않았다. 공개 validator는 candidate SHA bcb82a2fd53171aa7dbb6aba3aa1e74a3dea1045·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 신규 CRITICAL/MAJOR 결함은 없고 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-266과 다섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T01:15:52+09:00"
     }
   ]
 }

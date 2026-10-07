@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 성장 연구 장 진입 여백 — 공개 배포 공격 재점검 — main bcb82a2 — 2026-10-08
+
+- 280·320·390px에서 성장 연구 장으로 넘어갈 때 읽기 레일이 장 번호·제목을 가리거나, `#growth` 직접 진입 후 제목이 화면 밖으로 밀리는지 공격적으로 확인했다. 보정된 상단 여백과 handoff 위치가 라이브에 유지됐고 document 가로폭은 viewport와 같았다.
+- 로컬 build·127개 테스트·Pages release gate와 main 배포 후 공개 validator를 재확인했다. 새 CRITICAL/MAJOR 결함과 runtime error는 없었다.
+- Browser 플러그인 부재에 따른 Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-GROWTH-ENTRY-20261008`, `E-CDP-MOBILE-GROWTH-ENTRY-20261008`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-ENTRY-20261008`, `E-LIVE-PUBLIC-MOBILE-GROWTH-ENTRY-20261008`, `E-NAVI-STATE-MOBILE-GROWTH-ENTRY-20261008`.
+
 ## 모바일 전문가 영상→출처 읽기 연결 리듬 — 공개 배포 공격 재점검 — main 2de2735 — 2026-10-07
 
 - 공개 배포 후 390px에서 영상 장과 출처 읽기 장 사이의 빈 공간이 다시 커졌는지, 제목이 읽기 레일과 겹치는지, 원문 출처 패널이 화면 밖으로 밀리는지 공격적으로 확인했다. 보정된 여백과 순서가 라이브에 유지됐다.

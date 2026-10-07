@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — mobile growth chapter entry — main bcb82a2 — 2026-10-08
+
+- AC-001/AC-004/AC-005: `PASS`. PR #613과 main workflow `37650139724`의 보호 검사·Pages publish·라이브 smoke·release-status가 성공했고, 공개 validator가 main SHA 정합성과 정적 번들을 확인했다.
+- AC-003: `PASS_WITH_CONDITIONS`. 공개 390px에서 성장 연구 장 handoff와 `#growth` 직접 진입의 장 번호·제목이 읽기 레일 아래에 이어졌으며, 280·320px에서도 document 가로폭 초과가 없었다.
+- AC-006/AC-007: `PASS_WITH_CONDITIONS`. 제품 독립 과학 정보 경계·연구 카피·수치·출처는 유지됐다. Worker는 `STATIC_ONLY`로 실행하지 않으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-MOBILE-GROWTH-ENTRY-20261008`, `E-CDP-MOBILE-GROWTH-ENTRY-20261008`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-ENTRY-20261008`, `E-LIVE-PUBLIC-MOBILE-GROWTH-ENTRY-20261008`, `E-NAVI-STATE-MOBILE-GROWTH-ENTRY-20261008`.
+
 ## Current Public Deployment Recheck — mobile chapter handoff rhythm — main 2de2735 — 2026-10-07
 
 - AC-001/AC-004/AC-005: `PASS`. PR #598과 main workflow `37618834702`의 보호 검사·Pages publish·라이브 smoke·release-status가 성공했고, 공개 validator가 main SHA 일치와 정적 번들을 확인했다.

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 성장 연구 장 진입 여백 — 공개 배포 확인 — main bcb82a2 — 2026-10-08
+
+- PR #613의 보호 검사와 main workflow `37650139724`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 실행하지 않았다.
+- 공개 validator는 HTTP 200·candidate SHA `bcb82a2fd53171aa7dbb6aba3aa1e74a3dea1045`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 공개 390px Chrome CDP fallback에서 성장 연구 handoff와 `#growth` 직접 진입의 제목 위치, 가로폭 초과 0건, runtime error 0건을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-GROWTH-ENTRY-20261008`, `E-CDP-MOBILE-GROWTH-ENTRY-20261008`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-ENTRY-20261008`, `E-LIVE-PUBLIC-MOBILE-GROWTH-ENTRY-20261008`, `E-NAVI-STATE-MOBILE-GROWTH-ENTRY-20261008`.
+
 ## 모바일 전문가 영상→출처 읽기 연결 리듬 — 공개 배포 확인 — main 2de2735 — 2026-10-07
 
 - PR #598의 모든 보호 검사가 통과하고 main workflow `37618834702`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 실행하지 않았다.
