@@ -1,5 +1,13 @@
 # Audit Report
 
+## NAVI 재점검 문서 최종 배포 확인 — main 6ffbeb0 — 2026-10-07
+
+- PR #553 병합 후 main workflow `37561870841`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 모두 성공했다. deploy-worker는 정적 공개 모드의 정책대로 skip되었다.
+- 최종 `validate:live-public`는 HTTP 200·candidate `6ffbeb0295fa36ead390ff3fafa480df2a670d7d`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. reachable history scanner의 기존 13개 경로 annotation은 매칭값을 노출하지 않는 이력 알림이며 현재 공개 번들 데이터와 별개다. 실기기·고령 사용자·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-FINAL-20261007`.
+
 ## NAVI 자동 공개본 재점검 — main 1334348 — 2026-10-07
 
 - 최신 main `13343484e0850ac5b38c81add64a2625aa8b17a2`를 기준으로 로컬 typecheck·UI contract·127개 테스트·production build·정적 bundle·release manifest·성능 예산을 재실행했다. Pages-style 총 자산은 1,647,283 bytes로 1,650,000 bytes 예산 안이며 release manifest는 11개 route·73개 파일을 확인했다.

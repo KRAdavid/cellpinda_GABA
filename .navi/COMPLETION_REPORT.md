@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — main 6ffbeb0 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. PR #553 병합 후 main pipeline의 release-verify·Pages publish·라이브 smoke·release-status가 성공했고 공개 validator의 candidate SHA가 최종 main과 일치한다.
+- AC-003: PASS_WITH_CONDITIONS. 앞선 공개 Chromium fallback에서 검증한 모바일·데스크톱 화면과 상호작용 기록이 최종 정적 bundle에 유지된다. 이번 배포는 NAVI 문서-only 변경이다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. 제품 독립 경계·teaser `HOLD`는 유지된다. Worker 운영 비밀값, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-DEPLOY-PIPELINE-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-FINAL-20261007`.
+
 ## Current Public Recheck — main 1334348 — 2026-10-07
 
 - AC-001/AC-004/AC-005: PASS. 최신 main 기준 로컬 품질 게이트와 Pages-style 정적 bundle이 통과했고, 공개 validator가 HTTP 200·candidate SHA 일치·bundle hash 73개·공개 데이터 정합성을 확인했다.

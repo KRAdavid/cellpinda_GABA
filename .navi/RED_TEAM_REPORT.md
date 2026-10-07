@@ -1,5 +1,13 @@
 # Red Team Report
 
+## NAVI 재점검 문서 최종 배포 공격 재확인 — main 6ffbeb0 — 2026-10-07
+
+- 문서-only PR 병합 뒤 공개 SHA가 실제 Pages 배포로 바뀌었는지, 공개 데이터 경계·teaser `HOLD`·제품 독립 흐름이 유지되는지 공격적으로 재확인했다. main pipeline과 live validator가 모두 일치했다.
+- 새 CRITICAL/MAJOR 결함은 없고, 과거 reachable history annotation은 현재 public bundle 노출 증거가 아니다. RT-001·RT-002·RT-003과 Browser 플러그인 부재, 실기기·고령 사용자·독립 과학·규제 감수 OPEN 상태는 유지한다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-FINAL-20261007`.
+
 ## NAVI 자동 공개본 공격 재점검 — main 1334348 — 2026-10-07
 
 - 공격 관점에서 최신 공개본의 대표 진입·연구 주제 선택·전문가 영상 선택·공유 장을 390px와 1440px에서 다시 확인했다. 연구 지도에서 피부를 선택하면 결과 전환 밴드의 주제·대상 범위와 활성 연구 카드가 함께 바뀌고, 전문가 영상 선택은 선택 카드 하나와 제목을 갱신한다.

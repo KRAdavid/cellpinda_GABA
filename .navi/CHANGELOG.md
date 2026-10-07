@@ -1,5 +1,13 @@
 # Project Changelog
 
+## NAVI 재점검 문서 최종 공개 배포 확인 — main 6ffbeb0 — 2026-10-07
+
+- PR #553을 병합하고 main workflow `37561870841`의 release-verify·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 최종 candidate `6ffbeb0295fa36ead390ff3fafa480df2a670d7d`와 bundle hash 73개를 확인했다.
+- 공개 데이터 12 claims·6 master records·6 share pages·제품 독립 경계·teaser `HOLD`가 유지됐다. 사이트 코드와 연구 카피는 변경하지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Worker 운영 비밀값과 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 남아 있다.
+
+증적: `E-DEPLOY-PIPELINE-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-FINAL-20261007`.
+
 ## NAVI 자동 공개본 재점검 — main 1334348 — 2026-10-07
 
 - 최신 main 공개본을 로컬 품질 게이트·Pages-style 정적 bundle·라이브 validator·공개 Playwright Chromium fallback으로 재점검했다. 390px·1440px에서 히어로·연구·전문가 영상·공유 장과 연구 주제 선택 흐름을 확인했고, 새 CRITICAL/MAJOR 결함은 없었다.

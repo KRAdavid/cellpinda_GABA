@@ -2530,6 +2530,15 @@
       "E-LIVE-PUBLIC-NAVI-RECHECK-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-234",
+    "statement": "NAVI 재점검 문서 업데이트가 실제 main 배포 workflow와 공개 live manifest까지 통과해, 최종 공개 SHA `6ffbeb0295fa36ead390ff3fafa480df2a670d7d`와 정적 공개 품질 기록이 일치한다. 외부 검증 게이트는 계속 별도 상태로 유지한다.",
+    "evidence_refs": [
+      "E-DEPLOY-PIPELINE-NAVI-RECHECK-20261007",
+      "E-LIVE-PUBLIC-NAVI-RECHECK-FINAL-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -16896,6 +16905,28 @@
     "captured_at": "2026-10-07T11:21:00+09:00",
     "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-PUBLIC-RECHECK",
     "claim_refs": ["C-001", "C-002", "C-233"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-NAVI-RECHECK-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI 공개본 재점검 문서가 main 정적 공개 배포 파이프라인과 live smoke를 통과했다.",
+    "locator": "main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37561870841; headSha 6ffbeb0295fa36ead390ff3fafa480df2a670d7d; release-verify 112600733332 success; worker-readiness 112601091390 success; deploy-pages 112601120532 success; smoke-live 112601183974 success; release-status 112601235362 success; deploy-worker skipped by STATIC_ONLY; reachable-history scanner annotation reports 13 prior-revision local-path patterns without exposing matched values.",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37561870841",
+    "captured_at": "2026-10-07T11:27:28+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-PUBLIC-RECHECK",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-234"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-NAVI-RECHECK-FINAL-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 GitHub Pages 공개 manifest가 main 병합 SHA와 일치하고, 정적 공개 데이터·제품 독립 경계·teaser HOLD가 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=6ffbeb0295fa36ead390ff3fafa480df2a670d7d; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 6ffbeb0295fa36ead390ff3fafa480df2a670d7d; generatedAt 2026-10-07T02:26:12.319Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched.",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T11:27:28+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-FINAL-RECHECK",
+    "claim_refs": ["C-001", "C-002", "C-234"]
   }
 ]
 }
