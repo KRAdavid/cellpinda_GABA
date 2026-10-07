@@ -2904,6 +2904,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
 
+## 공개 배포 자동 재감리 — 모바일 전문가 영상 필터 cue — 2026-10-08
+
+- 280·390px 전문가 영상 주제 필터의 오른쪽 수평 탐색 cue를 24px 원형 안내로 보완했다. 280·320·390·1440px 핵심 장에서 document 가로폭은 viewport와 일치했고 390px 영상 선택·재생·다음 카드 선택은 정상이다.
+- 첫 Pages 후보는 GitHub runner 기준 성능 예산 73바이트 초과로 보류했으며, 비필수 shadow·transition·color와 flex 정렬을 줄인 최종 PR #610이 보호 검사를 통과했다. main workflow `37645030445`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- stale TF pulse로 한 차례 배포가 보류되었으나 공식 pulse `37644428458`과 heartbeat PR #611을 보호된 main에 반영한 뒤 재배포가 성공했다. 공개 validator는 SHA `74549db11dc9ce37c794b1524739afbe68d75f96`, HTTP 200, 73개 bundle hash, 12개 claims, 6개 master records, 6개 share pages, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 제품 독립 공개 경계·연구 카피·수치·출처는 변경하지 않았고, Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 외부 조건으로 유지한다. 상태는 `USER_DECISION / NOT_READY`다.
+
+증적: `C-265`, `E-LOCAL-BUILD-MOBILE-FILTER-CUE-20261008`, `E-CDP-MOBILE-FILTER-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-FILTER-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-FILTER-CUE-20261008`, `E-NAVI-STATE-MOBILE-FILTER-CUE-20261008`.
+
 ## Audit recheck — 최종 공유 장의 인쇄·PDF action — bd0a33a / main 6bb3663 — 2026-10-07
 
 - 최종 공유 장에 `GABA 이야기 공유하기`와 `인쇄 · PDF 저장`을 추가했다. 모바일에서는 세로 스택으로 읽히고 데스크톱에서는 2열로 정렬되며, 인쇄 미디어에서는 화면 전용 action이 숨겨진다.
