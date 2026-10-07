@@ -2204,3 +2204,8 @@
   .guide-video-feature-meta{flex-wrap:wrap;gap:4px 6px;white-space:normal}
   .guide-video-feature-meta .guide-video-feature-index{margin-left:0}
 }
+
+/* v174 expert-video resilience: make a slow or blocked external player recoverable. */
+.guide-video-feature-loading.is-timeout{align-items:flex-start;justify-content:flex-end;padding:18px;pointer-events:auto}
+.guide-video-feature-loading-actions{display:flex;flex-wrap:wrap;gap:6px}
+.guide-video-feature-loading-actions .guide-video-feature-share{min-height:36px;padding:0 9px}
