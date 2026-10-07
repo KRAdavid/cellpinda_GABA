@@ -541,7 +541,15 @@ const getGuideScrollTop = (target: HTMLElement) => {
   const readingRailHeight = document.querySelector<HTMLElement>('.guide-reading-progress')?.getBoundingClientRect().height ?? 0;
   const offset = headerHeight + readingRailHeight + 10;
   const anchor = getGuideScrollTarget(target);
-  return Math.max(0, anchor.getBoundingClientRect().top + window.scrollY - offset);
+  const targetRect = target.getBoundingClientRect();
+  const anchorRect = anchor.getBoundingClientRect();
+  // A content-visibility:auto section can expose the section's geometry while
+  // its heading wrapper still reports an origin-sized rectangle. Use the
+  // section itself until the heading becomes measurable.
+  const anchorIsUnmeasurable = anchorRect.width === 0 || anchorRect.height === 0;
+  const anchorIsOutsideTarget = anchorRect.bottom < targetRect.top - 1 || anchorRect.top > targetRect.bottom + 1;
+  const anchorTop = anchorIsUnmeasurable || anchorIsOutsideTarget ? targetRect.top : anchorRect.top;
+  return Math.max(0, anchorTop + window.scrollY - offset);
 };
 
 const scrollGuideTo = (target: HTMLElement, behavior: ScrollBehavior) => {
@@ -1456,12 +1464,30 @@ export default function PublicGabaGuide() {
     if (target && nextChapterId) {
       pendingChapterNavigation.current = { id: nextChapterId, targetId: id };
       chapterNavigationLockUntil.current = performance.now() + (behavior === 'smooth' ? 900 : 350);
-      scrollGuideTo(target, behavior);
     } else {
       pendingChapterNavigation.current = null;
       chapterNavigationLockUntil.current = 0;
     }
     replaceGuideHistory(hash);
+    if (target && nextChapterId) {
+      // Closing the mobile menu restores body scrolling in an effect. Schedule
+      // the destination scroll after that cleanup so the menu cannot reset it
+      // back to the page origin.
+      const scrollToDestination = () => {
+        scrollGuideTo(target, behavior);
+        if (behavior === 'auto') {
+          // The first jump exposes a content-visibility section. Re-measure
+          // once its heading is laid out so the sticky reading rail cannot
+          // cover the first line of the chapter title.
+          window.requestAnimationFrame(() => window.requestAnimationFrame(() => scrollGuideTo(target, 'auto')));
+        }
+      };
+      if (restoreMenuFocus) {
+        window.requestAnimationFrame(() => window.requestAnimationFrame(scrollToDestination));
+      } else {
+        scrollToDestination();
+      }
+    }
     if (target && nextChapterId) focusGuideDestination(target);
     else if (restoreMenuFocus) window.requestAnimationFrame(() => menuToggleRef.current?.focus());
   };
@@ -1523,7 +1549,10 @@ export default function PublicGabaGuide() {
   const focusGuideDestination = (target: HTMLElement) => {
     const focusTarget = getGuideFocusTarget(target);
     if (!focusTarget) return;
-    window.requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }));
+    // Sections use content-visibility for long-page performance. Wait for the
+    // destination scroll to expose the heading before focusing it, otherwise a
+    // skipped heading can pull the viewport back to the page origin.
+    window.requestAnimationFrame(() => window.requestAnimationFrame(() => window.requestAnimationFrame(() => focusTarget.focus({ preventScroll: true }))));
   };
 
   const moveRecoveryCard = (direction: -1 | 1) => {
