@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 발효 활용 연구 출처 DOI 정규화 및 공개 배포 — 2857bf9 — 2026-10-08
+
+- 발효 활용 사례의 지역형 RSC 경로를 표준 DOI로 교체해 원문 출처의 재현성을 높였다. 연구 카피·수치·라벨·제품 독립 경계는 변경하지 않았다.
+- 로컬 typecheck·Vite build·127개 테스트, PR #624 보호검사, main workflow `37668072311`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·candidate SHA `2857bf93c3663b0a07401d2602c97bfdbd24ee98`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 390·1440px에서 DOI href와 연구 지도 선택 흐름을 재현했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-272`, `E-LOCAL-BUILD-SOURCE-DOI-20261008`, `E-PLAYWRIGHT-SOURCE-DOI-20261008`, `E-DEPLOY-PIPELINE-SOURCE-DOI-20261008`, `E-LIVE-PUBLIC-SOURCE-DOI-20261008`, `E-NAVI-STATE-SOURCE-DOI-20261008`.
+
 ## 공개본 전체 흐름·직접 진입·반응형 재감리 — a2909f0 — 2026-10-08
 
 - 기능 코드와 공개 연구 카피를 변경하지 않고 280·320·390·768·1440px, 여섯 핵심 장 해시 직접 진입, 전문가 영상 공유·자동 재생 경로를 재검증했다.

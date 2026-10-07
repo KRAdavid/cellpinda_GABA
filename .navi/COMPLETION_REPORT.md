@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — canonical source DOI — main 2857bf9 — 2026-10-08
+
+- AC-001/AC-004/AC-005: `PASS`. PR #624 보호검사, main release workflow, Pages publish·라이브 smoke·release-status와 로컬 typecheck·Vite build·127개 테스트가 통과했다.
+- AC-003: `PASS_WITH_CONDITIONS`. 발효 활용 출처가 표준 DOI로 공개되고, 390·1440px에서 DOI href·가로폭·연구 지도 선택·콘솔 상태를 확인했다. 자동화 범위는 대표 Chromium 환경에 한정된다.
+- AC-006/AC-007: `PASS_WITH_CONDITIONS`. 제품 독립 과학 정보 경계·연구 카피·수치·출처 라벨은 유지됐다. Worker는 `STATIC_ONLY`로 실행하지 않으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-SOURCE-DOI-20261008`, `E-PLAYWRIGHT-SOURCE-DOI-20261008`, `E-DEPLOY-PIPELINE-SOURCE-DOI-20261008`, `E-LIVE-PUBLIC-SOURCE-DOI-20261008`, `E-NAVI-STATE-SOURCE-DOI-20261008`.
+
 ## Current Public Deployment Recheck — public deep audit — main a2909f0 — 2026-10-08
 
 - AC-001/AC-004/AC-005: `PASS`. 로컬 typecheck·Vite production build·127개 테스트와 UI contract·governance·ops docs·goal/external gate 검사가 통과했고, 공개 validator가 main SHA 정합성·HTTP 200·정적 bundle을 확인했다.

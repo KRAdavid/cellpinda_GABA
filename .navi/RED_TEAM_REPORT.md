@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 발효 활용 연구 출처 DOI 정규화 — 공개 배포 공격 재점검 — main 2857bf9 — 2026-10-08
+
+- 공격 관점에서 발효 활용 카드의 원문 링크가 지역 경로에 의존하거나, DOI 정규화 후 카드·출처·연구 흐름이 깨지는지 확인했다. 공개 390·1440px에서 DOI href가 정확히 유지되고 가로폭·콘솔 오류가 없었다.
+- 연구 지도에서 `인지` 카드를 선택하면 `#research-cognition`으로 이동하고 선택 카드가 읽기 레일 아래에 포커스되었다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser plugin 부재에 따른 Playwright Chromium fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않는다. 이 조건과 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-PLAYWRIGHT-SOURCE-DOI-20261008`, `E-DEPLOY-PIPELINE-SOURCE-DOI-20261008`, `E-LIVE-PUBLIC-SOURCE-DOI-20261008`, `E-NAVI-STATE-SOURCE-DOI-20261008`.
+
 ## 공개본 전체 흐름·직접 진입·반응형 공격 재점검 — main a2909f0 — 2026-10-08
 
 - 공격 관점에서 280·320·390·768·1440px의 가로 넘침, 깨진 이미지, 중복 id, 이름 없는 버튼·링크, 페이지/콘솔 오류를 확인했으나 재현되지 않았다.

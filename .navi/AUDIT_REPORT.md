@@ -1,5 +1,14 @@
 # Audit Report
 
+## 발효 활용 연구 출처 DOI 정규화 — 공개 배포 확인 — main 2857bf9 — 2026-10-08
+
+- 발효 활용 사례의 지역형 RSC URL을 논문 내용과 라벨은 유지한 채 표준 DOI `https://doi.org/10.1039/D2FO03936B`로 정규화했다. Crossref DOI 조회는 HTTP 200과 동일한 논문 제목을 반환했다.
+- 로컬 typecheck·Vite production build·127개 테스트·research copy 검사가 통과했다. PR #624와 main workflow `37668072311`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, deploy-worker는 `STATIC_ONLY` 정책으로 건너뛰었다.
+- 공개 validator는 merge SHA `2857bf93c3663b0a07401d2602c97bfdbd24ee98`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다. 공개 390·1440px에서 DOI href, 가로폭 정합성, 연구 지도 선택, runtime error 0건을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Playwright Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 후속 조건으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SOURCE-DOI-20261008`, `E-PLAYWRIGHT-SOURCE-DOI-20261008`, `E-DEPLOY-PIPELINE-SOURCE-DOI-20261008`, `E-LIVE-PUBLIC-SOURCE-DOI-20261008`, `E-NAVI-STATE-SOURCE-DOI-20261008`.
+
 ## 공개본 전체 흐름·직접 진입·반응형 재감리 — main a2909f0 — 2026-10-08
 
 - 최신 공개본을 280·320·390·768·1440px에서 재감리했다. 모든 폭에서 document width가 viewport와 일치하고, 깨진 이미지·중복 id·이름 없는 조작부·페이지/콘솔 오류가 확인되지 않았다.
