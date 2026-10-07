@@ -1455,13 +1455,6 @@
   .guide-video-feature-media{max-width:250px}
 }
 
-/* v50 recovery map affordance: make the 14-step reading path easier to scan and operate. */
-@media(max-width:700px){
-  .guide-recovery-map{gap:12px 4px}
-  .guide-recovery-map-icon{width:34px;height:34px}
-  .guide-recovery-map-number{font-size:10px}
-}
-
 /* v51 closing signal: give the final chapter a quiet visual counterpart to the opening artwork. */
 .guide-final{position:relative;isolation:isolate;overflow:hidden}
 .guide-final:before{content:"";position:absolute;z-index:0;top:50%;right:-4vw;width:min(47vw,680px);aspect-ratio:1;border:1px solid rgba(137,222,218,.2);border-radius:50%;transform:translateY(-50%);box-shadow:0 0 0 42px rgba(137,222,218,.045),0 0 0 84px rgba(137,222,218,.03),0 0 0 126px rgba(137,222,218,.018);pointer-events:none}
@@ -1492,16 +1485,6 @@
   .guide-video-card-copy{padding:3px 1px 2px}
   .guide-video-card-copy strong{min-height:0;display:block;margin-top:9px;-webkit-line-clamp:initial}
   .guide-video-card-copy small{min-height:0;margin-top:auto;display:block;-webkit-line-clamp:initial}
-}
-
-/* v57 narrow-phone recovery map: preserve a comfortable touch target for the 14-step path. */
-@media(max-width:350px){
-  .guide-recovery-map{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px 5px}
-  .guide-recovery-map-step{min-height:52px}
-  .guide-recovery-map-icon{width:38px;height:38px}
-  /* Center the final two steps so the shortened third row reads as an intentional ending. */
-  .guide-recovery-map-step:nth-last-child(2){grid-column:3}
-  .guide-recovery-map-step:last-child{grid-column:4}
 }
 
 /* v53 research comparison: make relative direction visible before the reader parses the labels. */
