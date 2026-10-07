@@ -1436,6 +1436,12 @@
   .guide-hero-story h1>em .guide-hero-gaba-line{display:block;max-width:100%;white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
 }
 
+/* v169 mobile hero completion: give the highlighted GABA line a deliberate break instead of clipping its final Korean word. */
+.guide-mobile-gaba-break{display:none}
+@media(max-width:700px){
+  .guide-mobile-gaba-break{display:inline}
+}
+
 /* v148 narrow reading rail: keep the progress cue on one calm line at 280–350px. */
 @media(max-width:350px){
   .guide-reading-progress-meta>span{font-size:0;letter-spacing:0;line-height:1;white-space:nowrap}
