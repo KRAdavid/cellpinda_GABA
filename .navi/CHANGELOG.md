@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 좁은 화면 글자 조절 라벨 고도화 — working tree — 2026-10-07
+
+- 320px 이하 모바일 헤더의 축약 표기를 `가+ 글자`에서 `가+ 크게`로 바꿔, 나이 있는 사용자가 버튼 의미를 즉시 읽도록 했다. 큰 글자 상태의 `가− 기본`, 접근 가능한 전체 라벨, 저장 동작은 유지했다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산·320·390·768·1440px Playwright Chromium fallback을 통과했다. 메뉴 포커스와 선택 전문가 영상 `autoplay=1`도 재확인했다.
+- 공개 main 배포 후 라이브 재검증은 후속 게이트다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-HEADER-READING-LABEL-20261007`, `E-UI-CONTRACT-HEADER-READING-LABEL-20261007`, `E-PLAYWRIGHT-HEADER-READING-LABEL-20261007`.
+
 ## NAVI 재점검 문서 최종 공개 배포 확인 — main 6ffbeb0 — 2026-10-07
 
 - PR #553을 병합하고 main workflow `37561870841`의 release-verify·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 최종 candidate `6ffbeb0295fa36ead390ff3fafa480df2a670d7d`와 bundle hash 73개를 확인했다.

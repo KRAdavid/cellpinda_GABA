@@ -1,5 +1,13 @@
 # Completion Report
 
+## Current Work Recheck — narrow-phone reading label — working tree — 2026-10-07
+
+- AC-004/AC-005: PASS_WITH_CONDITIONS. 320px 이하 글자 크기 조절 라벨을 `가+ 크게`로 보정하고, UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산·Playwright Chromium fallback 320·390·768·1440px 검증을 통과했다.
+- AC-003/AC-006: PASS_WITH_CONDITIONS. 연구 카피·수치·출처·제품 독립 경계와 핵심 영상 선택 재생은 유지됐다. 공개 main 배포 및 라이브 URL은 아직 이 보정 기록으로 검증하지 않았다.
+- 공개 main 배포·Worker 운영 비밀값·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 완료로 표시하지 않는다. Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-HEADER-READING-LABEL-20261007`, `E-UI-CONTRACT-HEADER-READING-LABEL-20261007`, `E-PLAYWRIGHT-HEADER-READING-LABEL-20261007`.
+
 ## Current Public Deployment Recheck — main 6ffbeb0 — 2026-10-07
 
 - AC-001/AC-004/AC-005: PASS. PR #553 병합 후 main pipeline의 release-verify·Pages publish·라이브 smoke·release-status가 성공했고 공개 validator의 candidate SHA가 최종 main과 일치한다.

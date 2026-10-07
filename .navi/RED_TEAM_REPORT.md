@@ -1,5 +1,13 @@
 # Red Team Report
 
+## NAVI 좁은 화면 읽기 조절 라벨 공격 재점검 — working tree — 2026-10-07
+
+- 320px·390px 헤더에서 글자 크기 조절 버튼이 아이콘만 남거나 축약 문구가 잘려 행동을 오해하게 만들 수 있는지 공격적으로 확인했다. `가+ 크게`가 표시되고, 큰 글자 모드에서는 `가− 기본`으로 바뀌며 접근 가능한 전체 라벨은 유지됐다.
+- 320·390·768·1440px에서 document 폭이 viewport와 일치했고 page error·console error가 없었다. 메뉴는 첫 항목으로 포커스를 이동했고 두 번째 전문가 영상은 활성 카드 하나와 `autoplay=1` iframe으로 전환됐다. 새 CRITICAL/MAJOR 결함은 없다.
+- 공개 main 배포 후 라이브 확인, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 OPEN이다. RT-001·RT-002·RT-003과 teaser `HOLD`는 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-HEADER-READING-LABEL-20261007`, `E-UI-CONTRACT-HEADER-READING-LABEL-20261007`, `E-PLAYWRIGHT-HEADER-READING-LABEL-20261007`.
+
 ## NAVI 재점검 문서 최종 배포 공격 재확인 — main 6ffbeb0 — 2026-10-07
 
 - 문서-only PR 병합 뒤 공개 SHA가 실제 Pages 배포로 바뀌었는지, 공개 데이터 경계·teaser `HOLD`·제품 독립 흐름이 유지되는지 공격적으로 재확인했다. main pipeline과 live validator가 모두 일치했다.

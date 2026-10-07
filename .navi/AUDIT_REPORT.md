@@ -1,5 +1,13 @@
 # Audit Report
 
+## NAVI 좁은 화면 읽기 조절 라벨 보정 — working tree — 2026-10-07
+
+- 320px 이하에서 `가+ 글자`가 축약되어 행동 의미가 약해지는 잔여 가독성 리스크를 확인하고, 모바일 축약 라벨을 `가+ 크게`로 보정했다. 접근 가능한 전체 라벨 `글자 크게 보기`, 큰 글자 모드, 연구 카피·수치·출처·제품 독립 경계는 유지했다.
+- UI contract·typecheck·127개 테스트·Pages-style production build·정적 bundle·release manifest·성능 예산을 통과했다. 초기 JS 311,199 bytes·초기 CSS 95,703 bytes·전체 자산 1,647,283 bytes다. Playwright Chromium fallback 320·390·768·1440px에서 가로 넘침·page error·console error가 없었고, 메뉴 포커스와 선택 영상 autoplay 흐름을 재현했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 공개 main 배포·라이브 URL·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 후속 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-HEADER-READING-LABEL-20261007`, `E-UI-CONTRACT-HEADER-READING-LABEL-20261007`, `E-PLAYWRIGHT-HEADER-READING-LABEL-20261007`.
+
 ## NAVI 재점검 문서 최종 배포 확인 — main 6ffbeb0 — 2026-10-07
 
 - PR #553 병합 후 main workflow `37561870841`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 모두 성공했다. deploy-worker는 정적 공개 모드의 정책대로 skip되었다.

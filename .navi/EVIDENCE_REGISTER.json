@@ -2539,6 +2539,16 @@
       "E-LIVE-PUBLIC-NAVI-RECHECK-FINAL-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-235",
+    "statement": "320px 이하 좁은 화면의 글자 크기 조절 컨트롤이 `가+ 크게`로 명확하게 표시되고, 큰 글자 모드에서도 가로 넘침 없이 메뉴·영상 선택 흐름이 유지된다. 공개 main 배포 후 라이브 검증은 별도 게이트로 남긴다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-HEADER-READING-LABEL-20261007",
+      "E-UI-CONTRACT-HEADER-READING-LABEL-20261007",
+      "E-PLAYWRIGHT-HEADER-READING-LABEL-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -16927,6 +16937,36 @@
     "captured_at": "2026-10-07T11:27:28+09:00",
     "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-FINAL-RECHECK",
     "claim_refs": ["C-001", "C-002", "C-234"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-HEADER-READING-LABEL-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "좁은 화면용 글자 크기 조절 문구 보정이 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+    "locator": "branch codex/guide-header-readable-20261007 based on main df06e67; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass); pnpm run build; release manifest candidateSha df06e67af66dd701b5510b674a09625c954bc75a, runtimeMode static, routes 11, files 73; validate:performance initial JS 311199, initial CSS 95703, total assets 1647283 <= 1650000",
+    "captured_at": "2026-10-07T11:42:22+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-HEADER-READING-LABEL",
+    "claim_refs": ["C-001", "C-005", "C-235"]
+  },
+  {
+    "id": "E-UI-CONTRACT-HEADER-READING-LABEL-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "UI 계약이 좁은 화면용 글자 크기 조절 컨트롤의 한국어 축약 라벨과 접근 가능한 전체 라벨을 함께 유지한다.",
+    "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.tsx guide-reading-size-compact-label; compact label `크게`; accessible label `글자 크게 보기`; pnpm run validate:ui-contract status ok",
+    "captured_at": "2026-10-07T11:42:22+09:00",
+    "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261007-HEADER-READING-LABEL",
+    "claim_refs": ["C-005", "C-235"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-HEADER-READING-LABEL-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Playwright Chromium fallback에서 320·390·768·1440px에 `가+ 크게`가 표시되고, 큰 글자 전환 후 가로 넘침 없이 메뉴 포커스와 선택 영상 autoplay 흐름이 유지된다.",
+    "locator": "Browser plugin unavailable; local Playwright Chromium fallback against http://127.0.0.1:4180; 320x900, 390x900, 768x900, 1440x900; compact control text `가+ 크게`; large-text aria-pressed true and scrollWidth matched viewport at all widths; menu open focused first navigation link; second expert video produced one active card and iframe src containing Cnk0PGn9YBM?autoplay=1; page errors 0; console errors 0; screenshots stored outside repository",
+    "captured_at": "2026-10-07T11:42:22+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-HEADER-READING-LABEL",
+    "claim_refs": ["C-003", "C-006", "C-235"]
   }
 ]
 }

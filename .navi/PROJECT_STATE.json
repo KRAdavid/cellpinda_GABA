@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T11:27:28+09:00",
+  "updated_at": "2026-10-07T11:42:22+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2143,7 +2143,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T02:27:28Z"
+    "last_run_at": "2026-10-07T02:42:22Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2345,7 +2345,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T02:27:28Z"
+    "last_run_at": "2026-10-07T02:42:22Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5788,6 +5788,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T11:27:28+09:00"
+    },
+    {
+      "id": "H-318",
+      "event": "320px 이하 모바일 헤더에서 `가+ 글자`가 축약되어 행동 의미가 약해지는 잔여 가독성 리스크를 확인했다. 축약 라벨을 `가+ 크게`로 보정하고 큰 글자 모드의 `가− 기본`, 접근 가능한 전체 라벨, 저장 동작은 유지했다. UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산을 통과했고, Playwright Chromium fallback 320·390·768·1440px에서 가로 넘침·page error·console error가 없었으며 메뉴 포커스와 선택 영상 autoplay를 재현했다. 새 CRITICAL/MAJOR 결함은 없다. C-235와 세 로컬 증거를 등록하며 공개 main 배포·라이브 URL·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T11:42:22+09:00"
     }
   ]
 }
