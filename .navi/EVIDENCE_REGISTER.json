@@ -2908,6 +2908,18 @@
       "E-NAVI-STATE-MOBILE-GROWTH-ENTRY-20261008"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-267",
+    "statement": "대형 글자 모드의 전문가 영상 주제 필터를 320·390px에서 모든 주제가 보이는 다중 행으로 전환하고, 일반 모드의 수평 탐색은 유지했다. 로컬·공개 Playwright 검증, PR 보호 검사, main Pages 배포와 라이브 smoke를 모두 통과했다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008",
+      "E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008",
+      "E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008",
+      "E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008",
+      "E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008"
+    ],
+    "status": "SUPPORTED"
   }
   ],
   "evidence": [
@@ -18890,6 +18902,77 @@
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-MOBILE-GROWTH-ENTRY",
       "claim_refs": [
         "C-266"
+      ]
+    },
+    {
+      "id": "E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "대형 글자 모드 전문가 영상 주제 필터 보정본이 로컬 정적 번들·manifest·artifact·static route·performance 검사를 통과했고 127개 테스트가 성공했다.",
+      "locator": "local worktree C:\\Users\\computer\\Documents\\ChatGPT\\gaba-large-text-video-20261008; pnpm run build; total assets 1,649,405 bytes; initial JS 311,405 bytes; initial CSS 95,703 bytes; pnpm test 127 passed; validate:ui-contract·validate:governance·validate:ops-docs·validate:tf-pulse-workflow·validate:static-bundle·validate:performance passed",
+      "captured_at": "2026-10-08T01:49:06+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-LARGE-TEXT-VIDEO",
+      "claim_refs": [
+        "C-005",
+        "C-267"
+      ]
+    },
+    {
+      "id": "E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin unavailable 상태에서 Playwright Chromium fallback으로 320·390·768px 대형 글자 모드의 전문가 영상 주제 7개가 각각 4·3·2행으로 감싸지고, 페이지 가로폭 초과와 runtime error가 없음을 확인했다. 일반 모드는 기존 수평 레일과 continuation cue를 유지했다.",
+      "locator": "public target https://kradavid.github.io/gaba_info/?view=guide; Playwright Chromium fallback; 320px largeText=true rows=4 buttons=7 wrapScrollWidth/clientWidth=256/256 pageScrollWidth=320 cue opacity=0 visibility=hidden; 390px rows=3 wrapScrollWidth/clientWidth=326/326 pageScrollWidth=390 cue opacity=0 visibility=hidden; 768px rows=2 pageScrollWidth=768; normal 320·390px wrap overflow=auto filter scrollWidth/clientWidth=743/743 cue visible; runtimeErrors=[]; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-large-text-320-20261008.png and gaba-public-large-text-390-20261008.png",
+      "captured_at": "2026-10-08T01:47:00+09:00",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261008-LARGE-TEXT-VIDEO",
+      "claim_refs": [
+        "C-004",
+        "C-267"
+      ]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "대형 글자 모드 전문가 영상 필터 보정 PR #615가 성능 예산 재검증 후 보호 검사를 통과해 main에 병합되었고, 정적 Pages 배포·라이브 smoke·release-status가 모두 성공했다.",
+      "locator": "PR #615 https://github.com/KRAdavid/gaba_info/pull/615; final head 0df48ba12c51c6ced2ea4421feee88536f23130e; merge SHA 9533748ea1af24173e3867acd6e2ca9da413965c; final PR release-verify 37653630405 success; site-quality-verify 37653630373 success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37653847202: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37653847202",
+      "captured_at": "2026-10-08T01:49:06+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-LARGE-TEXT-VIDEO",
+      "claim_refs": [
+        "C-001",
+        "C-005",
+        "C-267"
+      ]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 HTTP 200과 merge SHA 정합성을 유지했고, 대형 글자 모드의 320·390·768px 전문가 영상 주제 필터와 일반 모드 수평 레일이 공개 주소에서 정상 동작했다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha 9533748ea1af24173e3867acd6e2ca9da413965c; generatedAt 2026-10-07T16:41:03.897Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Playwright 320·390·768px large-text metrics and normal-mode rail metrics above; runtimeErrors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T01:49:06+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-LARGE-TEXT-VIDEO",
+      "claim_refs": [
+        "C-001",
+        "C-002",
+        "C-004",
+        "C-006",
+        "C-267"
+      ]
+    },
+    {
+      "id": "E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 대형 글자 모드 전문가 영상 필터의 로컬 build·Playwright·PR·main 배포·라이브 QA를 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "PR #615 https://github.com/KRAdavid/gaba_info/pull/615; main deployment workflow https://github.com/KRAdavid/gaba_info/actions/runs/37653847202 success; pnpm run validate:live-public -> candidateSha 9533748ea1af24173e3867acd6e2ca9da413965c; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37653847202",
+      "captured_at": "2026-10-08T01:49:06+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-LARGE-TEXT-VIDEO",
+      "claim_refs": [
+        "C-267"
       ]
     }
   ]

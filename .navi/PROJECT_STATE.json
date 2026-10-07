@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T01:15:52+09:00",
+  "updated_at": "2026-10-08T01:49:06+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2200,11 +2200,27 @@
         "impact": "초소형 모바일에서도 연구 결과의 직접 비교 시선이 끊기지 않는다.",
         "required_action": "다음 연구 도표·반응형 CSS 변경 시 320·390px 시각 검수와 전체 성능 예산을 재실행",
         "owner": "QA"
+      },
+      {
+        "id": "AUD-009",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "대형 글자 모드의 전문가 영상 주제 필터를 320·390px에서 4·3행으로 감싸 모든 7개 주제를 한 번에 표시하도록 보완했고, 768px에서는 2행으로 읽혔다. 일반 모드의 수평 레일·continuation cue는 유지되며 로컬 build·PR·main Pages·라이브 Playwright 검증에서 신규 CRITICAL/MAJOR 결함과 가로폭 초과가 확인되지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008",
+          "E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008",
+          "E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008",
+          "E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008",
+          "E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008"
+        ],
+        "impact": "큰 글자 모드에서 주제 선택지를 가로 스크롤로 추측하지 않고 한 화면에서 파악할 수 있다.",
+        "required_action": "다음 영상 주제·읽기 크기·반응형 CSS 변경 시 320·390·768px과 일반 모드 수평 레일을 함께 재검증",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T13:10:54Z"
+    "last_run_at": "2026-10-07T16:49:06Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2459,11 +2475,25 @@
         "impact": "가장 좁은 공개 화면에서도 비교 도표가 공격적인 읽기 조건에서 무너지지 않는다.",
         "required_action": "Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
         "owner": "레드팀"
+      },
+      {
+        "id": "RT-009",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 320·390·768px 대형 글자 모드와 일반 모드 전문가 영상 필터를 확인했다. 대형 글자 모드의 7개 주제는 각각 4·3·2행으로 화면 안에 유지되고 cue는 숨겨지며, 일반 모드는 수평 레일과 cue가 유지된다. document 가로폭은 viewport와 같고 runtime error는 없었다.",
+        "evidence_refs": [
+          "E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008",
+          "E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008",
+          "E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008"
+        ],
+        "impact": "이번 공개본에서 큰 글자 모드의 주제 필터가 잘리거나 일반 모드의 수평 탐색이 사라지는 회귀는 관찰되지 않았다.",
+        "required_action": "Chrome Playwright fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
+        "owner": "레드팀"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T13:10:54Z"
+    "last_run_at": "2026-10-07T16:49:06Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -6144,6 +6174,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T01:15:52+09:00"
+    },
+    {
+      "id": "H-352",
+      "event": "NAVI 자동 공개 배포 점검에서 320·390px 대형 글자 모드의 전문가 영상 주제 필터가 수평 레일 안에서 일부만 보이는 잔여 가독성 리스크를 확인하고 보완했다. 대형 글자 모드에서는 7개 주제를 4·3행으로 감싸고 768px에서는 2행으로 정리했으며, 일반 모드의 수평 탐색과 continuation cue는 유지했다. 로컬 production build는 총 자산 1,649,405바이트로 성능 예산을 통과했고 127개 테스트가 성공했다. PR #615의 최종 release-verify·site-quality-verify와 main workflow 37653847202의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY에 따라 실행하지 않았다. 공개 validator는 merge SHA 9533748ea1af24173e3867acd6e2ca9da413965c·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Playwright Chromium fallback 320·390·768px에서 largeText rows 4·3·2, pageScrollWidth=viewport, cue hidden, runtimeErrors=[]를 확인했다. 신규 CRITICAL/MAJOR 결함은 없고 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-267과 다섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T01:49:06+09:00"
     }
   ]
 }

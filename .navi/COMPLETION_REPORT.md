@@ -2947,3 +2947,11 @@ Final Status: `NOT_READY`; 사용자 승인 전 자동 완료 처리하지 않�
 - 코드·배포 기준은 통과했지만 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건이다.
 
 증적: `C-265`, `E-LOCAL-BUILD-MOBILE-FILTER-CUE-20261008`, `E-CDP-MOBILE-FILTER-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-FILTER-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-FILTER-CUE-20261008`, `E-NAVI-STATE-MOBILE-FILTER-CUE-20261008`.
+
+## Completion gate recheck — 대형 글자 모드 전문가 영상 필터 — 2026-10-08
+
+- 320·390px 대형 글자 모드에서 전문가 영상 주제 7개가 각각 4·3행으로 모두 표시되고, 768px에서는 2행으로 표시된다. 일반 모드의 수평 레일과 continuation cue는 유지된다.
+- PR #615 보호 검사와 main workflow `37653847202`의 정적 Pages 배포·라이브 smoke·release-status가 성공했다. 공개 validator는 merge SHA `9533748ea1af24173e3867acd6e2ca9da413965c`, HTTP 200, 73개 bundle hash, 12개 claims, 6개 master records, 6개 share pages를 확인했다.
+- 코드·배포 기준은 통과했지만 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-267`, `E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.

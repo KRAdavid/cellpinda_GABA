@@ -2912,6 +2912,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
 
+## Current Release Recheck — 9533748e — 대형 글자 모드 전문가 영상 필터 — 2026-10-08
+
+- AC-001 공개 URL·Pages 정합성: PASS. PR #615와 main workflow `37653847202`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 merge SHA `9533748ea1af24173e3867acd6e2ca9da413965c`, HTTP 200, STATIC, 73개 bundle hash를 확인했다.
+- AC-003/AC-004 읽기·반응형: PASS. 320·390px 대형 글자 모드에서 7개 주제 필터가 4·3행으로 모두 보이고 768px에서는 2행으로 읽힌다. 일반 모드는 기존 수평 레일·cue를 유지하며 모든 확인 화면의 document 가로폭은 viewport와 일치했다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 검사가 통과했고 총 자산은 `1,649,405 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 전문가 영상 필터의 읽기 방식만 보완했으며 공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재에 따른 Playwright fallback, teaser `HOLD`, 외부 브라우저·실기기·실사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-267`, `E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.
+
 ## 공개 배포 자동 재감리 — 모바일 전문가 영상 필터 cue — 2026-10-08
 
 - 280·390px 전문가 영상 주제 필터의 오른쪽 수평 탐색 cue를 24px 원형 안내로 보완했다. 280·320·390·1440px 핵심 장에서 document 가로폭은 viewport와 일치했고 390px 영상 선택·재생·다음 카드 선택은 정상이다.

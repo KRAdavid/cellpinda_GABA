@@ -2563,3 +2563,11 @@
 - Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
 
 증적: `C-265`, `E-CDP-MOBILE-FILTER-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-FILTER-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-FILTER-CUE-20261008`, `E-NAVI-STATE-MOBILE-FILTER-CUE-20261008`.
+
+## Red-team final recheck — 대형 글자 모드 전문가 영상 필터 — 9533748e — 2026-10-08
+
+- 공격 관점에서 320·390·768px 대형 글자 모드와 일반 모드 전문가 영상 필터를 확인했다. 대형 글자 모드의 7개 주제는 4·3·2행으로 화면 안에 유지되고 cue는 숨겨지며, 일반 모드는 수평 레일과 cue가 유지됐다.
+- document 가로폭은 viewport와 같고 runtime error는 0건이었다. 새 CRITICAL/MAJOR 결함은 없으며, 제품 독립 연구 카피·수치·출처 경계는 변경하지 않았다.
+- Chrome Playwright fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 독해성 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
+
+증적: `C-267`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.

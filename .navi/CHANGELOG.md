@@ -2299,3 +2299,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 공개 validator candidate SHA `74549db11dc9ce37c794b1524739afbe68d75f96`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
 
 증적: `C-265`, `E-LOCAL-BUILD-MOBILE-FILTER-CUE-20261008`, `E-CDP-MOBILE-FILTER-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-FILTER-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-FILTER-CUE-20261008`, `E-NAVI-STATE-MOBILE-FILTER-CUE-20261008`.
+
+## 2026-10-08 — 대형 글자 모드 전문가 영상 주제 필터 보완 및 공개 배포 재검증 — 9533748e
+
+- 320·390px 대형 글자 모드에서 전문가 영상 주제 7개를 각각 4·3행으로 모두 보이게 하고, 768px에서는 2행으로 정리했다. 일반 모드의 수평 레일과 continuation cue는 유지했다.
+- 로컬 `pnpm run build` 총 자산은 `1,649,405 bytes`로 성능 예산을 통과했고 `pnpm test` 127개가 성공했다. PR #615 최종 보호 검사와 main workflow `37653847202`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- 공개 validator는 merge SHA `9533748ea1af24173e3867acd6e2ca9da413965c`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 Playwright fallback 320·390·768px에서도 가로폭 초과와 runtime error가 없었다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-267`, `E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.
