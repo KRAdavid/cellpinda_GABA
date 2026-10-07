@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 공유 API 회복 보정·공개 배포 완료 — main 93fa62f — 2026-10-07
+
+- 첫 PR 후보 `45cb2ce`에서 Pages 성능 예산이 `1,650,086 > 1,650,000`으로 86 bytes 초과해 배포가 중단됐다. 공유 회복 동작은 유지하면서 불필요한 외부 예외 래퍼를 줄여 `47f1cf8`로 재검증했고, PR·main release-verify가 통과했다.
+- PR #541 병합 후 main workflow `37549529638`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `93fa62f`·73개 bundle hash·제품 독립 경계를 확인했다.
+- 공개 번들에서 사용자 취소용 `AbortError` 분기와 회복 가능한 실패의 링크 복사 fallback을 확인했다. 실제 Web Share를 제공하는 Safari·Android·임베디드 환경의 실기기 동작은 외부 검증 항목으로 남긴다.
+
+증적: `E-LOCAL-PAGES-SHARE-RECOVERY-20261007`, `E-DEPLOY-PIPELINE-SHARE-RECOVERY-20261007`, `E-LIVE-PUBLIC-SHARE-RECOVERY-20261007`.
+
 ## 공유 API 실패 회복·공개 안내서 품질 보강 — working tree — 2026-10-07
 
 - 공개 안내서의 공유 API가 사용자 취소와 브라우저 정책·권한·payload 실패를 구분하도록 보완했다. 사용자가 취소한 경우에는 취소 상태를 유지하고, 회복 가능한 실패에서는 동일한 링크 복사 fallback을 시도한다.

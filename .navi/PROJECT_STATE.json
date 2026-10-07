@@ -5711,6 +5711,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T08:51:00+09:00"
+    },
+    {
+      "id": "H-307",
+      "event": "공유 회복 보정의 첫 Pages 후보 45cb2ce가 전체 정적 자산 1,650,086 bytes로 1,650,000 bytes 예산을 86 bytes 초과해 release-verify에서 중단됐다. 외부 try/catch를 줄인 47f1cf8로 재작업해 Pages-style 번들 1,649,664 bytes와 PR 검사·main workflow 37549529638의 release-verify·Pages·라이브 smoke·release-status를 통과시켰고 공개 candidate 93fa62f에 AbortError 분기와 링크 복사 fallback이 반영된 것을 확인했다. C-228과 다섯 증거를 공개 배포 후 상태로 갱신한다. 실제 Web Share 지원 브라우저·모바일 실기기와 Safari·Android·임베디드 실패 재현은 후속 외부 검증으로 유지하며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T09:04:00+09:00"
     }
   ]
 }

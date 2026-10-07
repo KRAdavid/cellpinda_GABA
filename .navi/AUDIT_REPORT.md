@@ -1,5 +1,13 @@
 # Audit Report
 
+## 공유 API 회복 보정·공개 배포 재감사 — main 93fa62f — 2026-10-07
+
+- 첫 공개 후보 `45cb2ce`는 Pages 성능 예산을 86 bytes 초과해 release-verify에서 중단됐다. 기능 의미를 바꾸지 않고 외부 try/catch를 줄인 `47f1cf8`로 재작업해 Pages-style 번들 1,649,664 bytes와 원격 release-verify를 통과시켰다.
+- PR #541의 release-verify·site-quality-verify, main workflow `37549529638`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 candidate `93fa62f`의 번들에서 `AbortError` 분기와 링크 복사 fallback을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 실제 Web Share 실패를 일으키는 브라우저·모바일 실기기 검증은 남아 있으므로 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-PAGES-SHARE-RECOVERY-20261007`, `E-DEPLOY-PIPELINE-SHARE-RECOVERY-20261007`, `E-LIVE-PUBLIC-SHARE-RECOVERY-20261007`.
+
 ## 공유 API 실패 회복·정적 품질 재감사 — working tree — 2026-10-07
 
 - 공유 흐름에서 `navigator.share()`의 모든 예외를 사용자 취소로 표시하면 Safari·Android·임베디드 브라우저의 정책 또는 payload 실패 뒤 공유가 끝난 것처럼 보일 수 있는 잔여 UX 리스크를 확인했다.

@@ -1,5 +1,13 @@
 # Completion Report
 
+## Current Release Recheck — share API recovery deployed — main 93fa62f — 2026-10-07
+
+- AC-001/AC-005: PASS. PR #541 병합 후 main workflow `37549529638`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 validator는 HTTP 200·candidate `93fa62f101259bcfeb2b7947431337b482114dbf`·73개 bundle hash를 확인했다. 첫 후보의 86 bytes 예산 초과는 재작업 후 해소됐다.
+- AC-003/AC-006: PASS_WITH_CONDITIONS. 공개 번들에 공유 API `AbortError` 분기와 링크 복사 fallback이 반영되고, claims 12·master records 6·share pages 6·teaser `HOLD`·제품 독립 경계가 유지됐다.
+- 실제 Web Share 지원 브라우저·모바일 실기기와 고령 사용자 이해도·독립 과학·규제 감수는 완료로 표시하지 않는다. Final Status는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-PAGES-SHARE-RECOVERY-20261007`, `E-DEPLOY-PIPELINE-SHARE-RECOVERY-20261007`, `E-LIVE-PUBLIC-SHARE-RECOVERY-20261007`.
+
 ## Current Work Recheck — share API recovery — working tree — 2026-10-07
 
 - AC-003/AC-006: PASS_WITH_CONDITIONS. 공개 안내서 공유 흐름은 선택한 장·연구·영상 URL을 유지하면서 사용자 취소와 회복 가능한 Web Share 실패를 구분하고, 후자의 경우 링크 복사를 시도한다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 공유 API 회복 보정·공개 배포 공격 재점검 — main 93fa62f — 2026-10-07
+
+- 첫 배포 후보가 성능 예산을 86 bytes 초과해 차단된 경로를 포함해, 보정 뒤에도 Web Share 취소·정책 실패·링크 복사 회복의 의미가 바뀌지 않는지 재점검했다.
+- PR·main 필수 검사가 통과했고 공개 bundle에서 `AbortError`와 링크 복사 fallback을 확인했다. 새 CRITICAL/MAJOR 결함은 없다.
+- 공개 번들 확인은 정적·소스 수준이며 실제 Safari·Android·임베디드 Web Share의 실패 재현은 아직 하지 않았다. 기존 RT-001·RT-002·RT-003과 teaser `HOLD`는 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-PAGES-SHARE-RECOVERY-20261007`, `E-DEPLOY-PIPELINE-SHARE-RECOVERY-20261007`, `E-LIVE-PUBLIC-SHARE-RECOVERY-20261007`.
+
 ## 공유 API 예외 오분류·링크 회복 경로 — working tree — 2026-10-07
 
 - 공격 관점에서 Web Share가 존재하지만 브라우저 정책·권한·payload 문제로 거절되는 경우를 사용자 취소로 오인해 사업자와 소비자가 공유 링크를 잃는 실패 모드를 확인했다.

@@ -2464,7 +2464,10 @@
       "statement": "GABA 안내서의 공유 기능은 사용자가 직접 공유를 취소한 경우와 브라우저 정책·권한 등으로 공유 API가 실패한 경우를 구분하며, 회복 가능한 실패에서는 링크 복사를 시도한다.",
       "evidence_refs": [
         "E-LOCAL-BUILD-SHARE-RECOVERY-20261007",
-        "E-UI-CONTRACT-SHARE-RECOVERY-20261007"
+        "E-UI-CONTRACT-SHARE-RECOVERY-20261007",
+        "E-LOCAL-PAGES-SHARE-RECOVERY-20261007",
+        "E-DEPLOY-PIPELINE-SHARE-RECOVERY-20261007",
+        "E-LIVE-PUBLIC-SHARE-RECOVERY-20261007"
       ],
       "status": "SUPPORTED"
     }
@@ -16542,6 +16545,38 @@
       "captured_at": "2026-10-07T08:51:00+09:00",
       "reviewer_id": "NAVI-UI-CONTRACT-QA-20261007-SHARE-RECOVERY",
       "claim_refs": ["C-006", "C-228"]
+    },
+    {
+      "id": "E-LOCAL-PAGES-SHARE-RECOVERY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "GitHub Pages와 동일한 base path로 만든 정적 배포 번들이 공유 회복 보정 후 성능 예산을 통과한다.",
+      "locator": "VITE_BASE_PATH=/gaba_info/ pnpm exec vite build --base /gaba_info/ --outDir dist-pages; release manifest routes 11/files 73; validate:static-bundle status ok; validate:performance initial JS 311269, initial CSS 95703, total assets 1649664 <= 1650000; first candidate 45cb2ce exceeded 1650086 and was reworked before release",
+      "captured_at": "2026-10-07T09:00:00+09:00",
+      "reviewer_id": "NAVI-PAGES-BUNDLE-QA-20261007-SHARE-RECOVERY",
+      "claim_refs": ["C-001", "C-005", "C-228"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-SHARE-RECOVERY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 회복 보정이 PR 검사와 main 정적 공개 배포 파이프라인을 모두 통과했다.",
+      "locator": "PR #541 https://github.com/KRAdavid/gaba_info/pull/541; PR release-verify run 37549402206/job 112561037026 success and site-quality-verify run 37549402202/job 112561036621 success; squash merge 93fa62f101259bcfeb2b7947431337b482114dbf; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37549529638: release-verify 112561455870, worker-readiness 112562488815, deploy-pages 112562512121, smoke-live 112562568080, release-status 112562626375 all success; deploy-worker 112562512720 skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37549529638",
+      "captured_at": "2026-10-07T09:04:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-20261007-SHARE-RECOVERY",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-228"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-RECOVERY-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 GitHub Pages 번들에 Web Share 취소 분기와 회복 가능한 실패의 링크 복사 fallback이 반영되고 공개 데이터 경계가 유지된다.",
+      "locator": "public https://kradavid.github.io/gaba_info/?view=guide&qa=share-recovery-live-20261007; validate:live-public HTTP 200 candidateSha 93fa62f101259bcfeb2b7947431337b482114dbf, STATIC, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD, smartStoreOnly true, removed750 true, provenance matched; release-manifest generatedAt 2026-10-07T00:02:40.942Z; public asset PublicGabaGuide-B6ixXlG5.js HTTP 200, AbortError and link-copy fallback strings present",
+      "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+      "captured_at": "2026-10-07T09:04:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261007-SHARE-RECOVERY",
+      "claim_refs": ["C-001", "C-003", "C-006", "C-228"]
     }
   ]
 }
