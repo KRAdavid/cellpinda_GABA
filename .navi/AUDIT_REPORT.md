@@ -1,5 +1,13 @@
 # Audit Report
 
+## 06·연구의 확장 결과 전환 밴드·로컬 재감사 — working tree — 2026-10-07
+
+- 연구 지도 아래 대표 결과가 시작되는 기존 전환 영역이 얇은 선처럼 보여 지도·결과·다음 연구 카드의 관계가 약하게 보이는 잔여 퍼블리싱 리스크를 보정했다. 새 카피·수치·출처·데이터를 추가하지 않고 연한 배경·테두리·강조 색만 적용해 하나의 증거 전환 밴드로 읽히게 했다.
+- `pnpm run validate:ui-contract`, `pnpm run typecheck`, 127개 테스트, production build, 정적 bundle·release manifest·성능 예산을 통과했다. 초기 JS 311,199 bytes·CSS 95,703 bytes·총 자산 1,649,433 bytes다.
+- 새 CRITICAL/MAJOR 결함은 없다. 이 기록은 working tree 검증이며 공개 main 배포·라이브 URL·신규 브라우저 시각 캡처를 주장하지 않는다. 연구 카피·수치·출처·제품 독립 공개 경계는 유지했다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-BAND-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-BAND-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-BAND-20261008`.
+
 ## 06·연구의 확장 대표 결과 선행 노출·공개 배포 후 재감사 — main 5238808 — 2026-10-07
 
 - PR #544 병합 후 main workflow `37553497930`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다. 공개 validator는 HTTP 200·candidate `523880887ece2a91916d66db57c8265de702cd0a`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 06·연구의 확장 결과 전환 밴드 공격 재점검 — working tree — 2026-10-07
+
+- 공격 관점에서 지도 아래 결과 전환 영역이 단순한 구분선처럼 보이면 모바일 독자가 연구 지도와 실제 결과를 같은 층위로 오해하거나 다음 카드로 시선을 옮기기 어렵다는 리스크를 확인했다. 기존 문구·차트·출처를 유지하고 연한 배경·테두리·강조 색으로 전환 밴드를 분리했다.
+- UI contract·typecheck·127개 테스트·production build·정적 무결성·성능 예산은 통과했고 새 CRITICAL/MAJOR 결함은 없다. 제품 독립 공개 경계와 연구 정보의 의미는 변하지 않는다.
+- 공개 main 배포 후 라이브 URL·신규 브라우저 시각 QA·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 아직 OPEN이다. RT-001·RT-002·RT-003과 teaser `HOLD`는 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-BAND-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-BAND-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-BAND-20261008`.
+
 ## 06·연구의 확장 대표 결과 선행 노출·공개 배포 공격 재점검 — main 5238808 — 2026-10-07
 
 - 공개 후보에서 지도 아래 대표 결과가 먼저 보이고 연구 읽기 레일과 카드 흐름으로 이어지는지 확인했다. 정적 validator·공개 번들 문자열·main 배포 파이프라인이 모두 일치했으며 새 CRITICAL/MAJOR 결함은 없다.

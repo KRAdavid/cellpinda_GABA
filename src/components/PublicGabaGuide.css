@@ -1106,7 +1106,7 @@
 @media(max-width:700px){.guide-research-map{min-height:300px}.guide-research-orbit-core{width:96px;height:96px;gap:3px}.guide-research-orbit-core strong{font-size:22px}.guide-research-orbit-core span{font-size:9px;line-height:1.3}.guide-research-map-item{width:70px;min-width:70px;padding:7px 4px}.guide-research-map-item strong{font-size:13px}.guide-research-map-dot{width:34px;height:34px}}
 
 /* v65 research map cue: make the map-to-card transition explicit without adding a jump link. */
-.guide-research-map-cue{display:flex;align-items:center;justify-content:center;gap:9px;margin:-5px 0 24px;padding:12px 15px;border-bottom:1px solid #dcebed;color:#78909f;font-size:12px;line-height:1.5;letter-spacing:-.03em}
+.guide-research-map-cue{display:flex;align-items:center;justify-content:center;gap:9px;margin:-5px 0 24px;padding:12px 15px;border:1px solid #dcebed;background:#f8fcfc;color:var(--guide-teal-dark);font-size:12px;line-height:1.5;letter-spacing:-.03em}
 .guide-research-map-cue>svg{flex:0 0 auto;color:var(--guide-teal-dark)}
 .guide-research-map-cue p{display:flex;align-items:baseline;flex-wrap:wrap;justify-content:center;gap:6px;margin:0;text-align:center}
 .guide-research-map-cue strong{color:var(--guide-ink);font-weight:900}

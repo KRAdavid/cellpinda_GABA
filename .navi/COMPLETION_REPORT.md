@@ -1,5 +1,13 @@
 # Completion Report
 
+## Current Work Recheck — research result transition band — working tree — 2026-10-07
+
+- AC-003/AC-004: PASS_WITH_CONDITIONS. 06장 연구 지도와 대표 결과 사이의 기존 전환 영역을 연한 증거 밴드로 보정해 모바일·데스크톱에서 다음 연구 카드로 이어지는 흐름을 구분했다. 별도 링크 이동·새 연구 주장·새 데이터는 추가하지 않았다.
+- AC-005: PASS. UI contract·typecheck·127개 테스트·Pages-style production build·정적 bundle·release manifest·성능 예산이 통과했다. 초기 JS 311,199 bytes·CSS 95,703 bytes·총 자산 1,649,433 bytes다.
+- 공개 main 배포·라이브 URL·신규 브라우저 시각 캡처는 아직 이 작업 기록으로 검증하지 않았다. 연구 카피·수치·출처·제품 독립 경계는 유지했고 새 CRITICAL/MAJOR 결함은 없다. Final Status는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-BAND-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-BAND-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-BAND-20261008`.
+
 ## Current Release Recheck — research representative result preview deployed — main 5238808 — 2026-10-07
 
 - AC-001/AC-004/AC-005: PASS. PR #544 병합 후 main workflow `37553497930`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200이다. 공개 validator는 candidate `523880887ece2a91916d66db57c8265de702cd0a`·bundle hash 73개·제품 독립 경계를 확인했다.

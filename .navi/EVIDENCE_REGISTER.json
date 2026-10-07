@@ -2482,8 +2482,18 @@
       "E-LIVE-PUBLIC-RESEARCH-PREVIEW-20261008"
     ],
     "status": "SUPPORTED"
-    }
-  ],
+  },
+  {
+    "id": "C-230",
+    "statement": "06·연구의 확장 지도와 대표 결과 사이의 전환 영역은 별도 이동 없이 연구 읽기 흐름을 구분해 보여주며, 모바일·데스크톱에서 다음 결과로 시선을 자연스럽게 이어준다. 연구 카피·수치·출처·제품 독립 공개 경계는 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-RESEARCH-CUE-BAND-20261008",
+      "E-UI-CONTRACT-RESEARCH-CUE-BAND-20261008",
+      "E-STATIC-BUNDLE-RESEARCH-CUE-BAND-20261008"
+    ],
+    "status": "SUPPORTED"
+  }
+],
   "evidence": [
     {
       "id": "E-USER-AUTO-UPDATE",
@@ -16641,6 +16651,36 @@
     "captured_at": "2026-10-07T09:47:38+09:00",
     "reviewer_id": "NAVI-DEPLOY-QA-20261008-RESEARCH-PREVIEW",
     "claim_refs": ["C-001", "C-002", "C-005", "C-229"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-RESEARCH-CUE-BAND-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 결과 전환 밴드 시각 보정이 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+    "locator": "working tree based on HEAD 107194e before final commit; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass); pnpm run build; validate:performance initial JS 311199, initial CSS 95703, total assets 1649433 <= 1650000; research copy, data, source and product boundary validators unchanged",
+    "captured_at": "2026-10-07T10:05:00+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-RESEARCH-CUE-BAND",
+    "claim_refs": ["C-001", "C-005", "C-230"]
+  },
+  {
+    "id": "E-UI-CONTRACT-RESEARCH-CUE-BAND-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "공개 UI 계약이 연구 결과 전환 영역을 연한 배경·테두리·강조 색을 가진 독립 증거 전환 밴드로 유지하도록 요구한다.",
+    "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.css .guide-research-map-cue; border:1px solid #dcebed; background:#f8fcfc; color:var(--guide-teal-dark); pnpm run validate:ui-contract status ok",
+    "captured_at": "2026-10-07T10:05:00+09:00",
+    "reviewer_id": "NAVI-UI-CONTRACT-QA-20261008-RESEARCH-CUE-BAND",
+    "claim_refs": ["C-005", "C-230"]
+  },
+  {
+    "id": "E-STATIC-BUNDLE-RESEARCH-CUE-BAND-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "GitHub Pages와 동일한 정적 base path로 생성한 연구 결과 전환 밴드 번들이 공개 라우트·정적 무결성·성능 예산을 통과한다.",
+    "locator": "VITE_BASE_PATH=/gaba_info/ Pages-style build based on HEAD 107194e before final commit; release manifest runtimeMode static, routes 11, files 73; validate:release-manifest status ok; validate:static-bundle status ok; validate:performance initial JS 311269, initial CSS 95703, total assets 1649637 <= 1650000; public deployment and live candidate are not claimed by this evidence",
+    "captured_at": "2026-10-07T10:05:00+09:00",
+    "reviewer_id": "NAVI-PAGES-BUNDLE-QA-20261008-RESEARCH-CUE-BAND",
+    "claim_refs": ["C-001", "C-005", "C-230"]
   }
 ]
 }
