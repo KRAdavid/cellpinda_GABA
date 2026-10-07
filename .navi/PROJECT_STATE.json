@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T23:13:55+09:00",
+  "updated_at": "2026-10-07T23:39:20+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6116,6 +6116,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T23:13:55+09:00"
+    },
+    {
+      "id": "H-348",
+      "event": "NAVI 자동 공개 배포 재감리에서 접근성·큰 글자 모드·초소형 모바일·전문가 영상 재생 흐름을 다시 확인했다. 280·320·390·768·1440px에서 document 가로폭이 viewport와 일치했고, heading jump·이름 없는 조작부·대체텍스트 누락·iframe title 누락·중복 id가 없었다. 큰 글자 모드에서도 본문 가독성과 조작 영역이 유지되었으며, 390px 전문가 영상은 포스터 선택 후 iframe 재생과 두 번째 카드 선택 상태를 재현했다. 최신 공개 validator는 main 공개본 HTTP 200·candidate SHA ec29f7cf3910d1b379f6cb8c37f18e4c1981331c·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 이번 회차에는 재현 가능한 CRITICAL/MAJOR UI 결함이 없어 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았고, 안정성·번들 예산을 보존하기 위해 코드 패치는 만들지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-263과 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T23:39:20+09:00"
     }
   ]
 }

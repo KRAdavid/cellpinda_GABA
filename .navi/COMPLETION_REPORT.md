@@ -2914,3 +2914,11 @@ Final Status: `NOT_READY`; 사용자 승인 전 자동 완료 처리하지 않�
 - 이번 변경으로 코드·배포 기준은 통과했지만 완료 게이트는 `NOT_READY`를 유지한다. 실제 Safari/iOS/Android 조합, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 자동화 범위를 넘어선 외부 검증 조건이다.
 
 증적: `C-262`, `E-LOCAL-BUILD-PRINT-ACTION-20261007`, `E-CDP-PRINT-ACTION-20261007`, `E-DEPLOY-PIPELINE-PRINT-ACTION-20261007`, `E-LIVE-PUBLIC-PRINT-ACTION-20261007`, `E-NAVI-STATE-PRINT-ACTION-20261007`.
+
+## Completion gate recheck — 접근성·영상·초소형 모바일 재감리 — 2026-10-07
+
+- 최신 공개본 validator는 candidate `ec29f7cf3910d1b379f6cb8c37f18e4c1981331c`, HTTP 200, 정적 번들 73개 hash, 공개 claims 12개, master records 6개, share pages 6개를 확인했다.
+- Chrome CDP fallback에서 280·320·390·768·1440px 가로폭, 280·390px 큰 글자 모드, 390px 전문가 영상 포스터 선택→iframe 재생→다음 카드 선택을 확인했다. 접근성 누락과 runtime error는 재현되지 않았다.
+- 재현 가능한 CRITICAL/MAJOR UI 결함이 없어 이번 회차 기능 코드 변경은 보류했다. 완료 게이트는 `NOT_READY`이며, 실기기·실사용자·독립 과학·규제 검토는 외부 조건으로 남긴다.
+
+증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.

@@ -2863,6 +2863,17 @@
       "E-NAVI-STATE-PRINT-ACTION-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-263",
+    "statement": "NAVI 자동 재감리에서 공개본의 접근성·큰 글자 모드·초소형 모바일·전문가 영상 재생 흐름이 현재 공개 배포 기준을 통과했고, 재현 가능한 CRITICAL/MAJOR UI 결함은 확인되지 않았다.",
+    "evidence_refs": [
+      "E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007",
+      "E-CDP-PUBLIC-EXPERT-VIDEO-20261007",
+      "E-LIVE-PUBLIC-RECHECK-20261007",
+      "E-NAVI-STATE-PUBLIC-REAUDIT-20261007"
+    ],
+    "status": "SUPPORTED"
   }
   ],
   "evidence": [
@@ -18604,6 +18615,59 @@
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PRINT-ACTION",
       "claim_refs": [
         "C-262"
+      ]
+    },
+    {
+      "id": "E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개본 Chrome CDP fallback에서 390·768·1440px 접근성 점검과 280·390px 큰 글자 점검을 통과했다. heading jump·이름 없는 조작부·이미지 대체텍스트 누락·iframe title 누락·중복 id가 없었고, document 가로폭과 큰 글자 화면의 조작 영역이 viewport 안에 유지되었다.",
+      "locator": "Browser plugin unavailable; Chrome CDP fallback; C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-accessibility-audit-20261005.mjs and gaba-large-text-qa.mjs; widths 280, 390, 768, 1440; headingJumps=[]; unnamedControls=[]; missingImageAlt=[]; missingIframeTitle=[]; duplicateIds=[]; overflowingControls=[]; scrollWidth matched viewport",
+      "captured_at": "2026-10-07T23:39:20+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261007-A11Y-LARGE-TEXT",
+      "claim_refs": [
+        "C-004",
+        "C-263"
+      ]
+    },
+    {
+      "id": "E-CDP-PUBLIC-EXPERT-VIDEO-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px 전문가 영상 장에서 포스터 선택 후 YouTube iframe이 autoplay·mute·playsinline 조건으로 생성되고, 두 번째 영상 카드 선택 후 선택 상태와 iframe이 유지되었다. runtime error와 document 가로 넘침은 없었다.",
+      "locator": "Browser plugin unavailable; Chrome CDP fallback; node C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-live-expert-interaction-qa.mjs https://kradavid.github.io/gaba_info/; 390x844; iframe=true; src includes autoplay=1&mute=1&playsinline=1; selected=갱년기와 수면, GABA에 대한 질문; runtimeErrors=[]; scrollWidth=390",
+      "captured_at": "2026-10-07T23:39:20+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261007-EXPERT-VIDEO",
+      "claim_refs": [
+        "C-006",
+        "C-263"
+      ]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECHECK-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 HTTP 200으로 응답했고, 공개 릴리스 SHA·정적 번들·공개 데이터 정합성이 일치했다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha ec29f7cf3910d1b379f6cb8c37f18e4c1981331c; generatedAt 2026-10-07T14:23:25.914Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-07T23:39:20+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-RECHECK",
+      "claim_refs": [
+        "C-001",
+        "C-002",
+        "C-263"
+      ]
+    },
+    {
+      "id": "E-NAVI-STATE-PUBLIC-REAUDIT-20261007",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 공개 배포 재감리 기록이 접근성·큰 글자·초소형 모바일·전문가 영상 상호작용·라이브 정합성을 연결하고, 코드 패치가 필요하지 않았던 판단과 외부 검증 잔여 조건을 함께 기록한다.",
+      "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; pnpm run validate:tf-pulse-workflow -> ok; pnpm run audit:goal -> IN_PROGRESS_WITH_GATES; .navi/PROJECT_STATE.json H-348; .navi/EVIDENCE_REGISTER.json C-263 and four evidence records; status USER_DECISION; completion gate NOT_READY",
+      "captured_at": "2026-10-07T23:39:20+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PUBLIC-REAUDIT",
+      "claim_refs": [
+        "C-263"
       ]
     }
   ]

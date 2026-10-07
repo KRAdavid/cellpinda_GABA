@@ -2267,3 +2267,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Browser plugin 부재에 따른 CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토·teaser `HOLD`를 외부 조건으로 남긴다.
 
 증적: `C-262`, `E-LOCAL-BUILD-PRINT-ACTION-20261007`, `E-CDP-PRINT-ACTION-20261007`, `E-DEPLOY-PIPELINE-PRINT-ACTION-20261007`, `E-LIVE-PUBLIC-PRINT-ACTION-20261007`, `E-NAVI-STATE-PRINT-ACTION-20261007`.
+
+## 2026-10-07 — 공개 배포 접근성·영상·초소형 모바일 재감리 — ec29f7cf
+
+- 280·320·390·768·1440px 반응형과 280·390px 큰 글자 모드를 재확인했다. document 가로폭은 viewport와 일치했고 접근성 누락·runtime error·전문가 영상 카드 넘침은 재현되지 않았다.
+- 공개 390px에서 영상 포스터 선택 후 iframe 재생과 두 번째 카드 선택 상태를 확인했다. 라이브 validator는 HTTP 200·candidate SHA `ec29f7cf3910d1b379f6cb8c37f18e4c1981331c`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다.
+- 재현 가능한 UI 결함이 없어 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않고 NAVI 증적만 갱신했다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.

@@ -2531,3 +2531,11 @@
 - Browser plugin 부재에 따른 Chrome CDP fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `C-262`, `E-CDP-PRINT-ACTION-20261007`, `E-DEPLOY-PIPELINE-PRINT-ACTION-20261007`, `E-LIVE-PUBLIC-PRINT-ACTION-20261007`, `E-NAVI-STATE-PRINT-ACTION-20261007`.
+
+## Red-team recheck — 접근성·영상·초소형 모바일 — ec29f7cf — 2026-10-07
+
+- 공격 관점에서 280px 헤더·전문가 영상 카드·주제 필터, 390px 영상 선택·재생, 큰 글자 모드, 768·1440px 핵심 화면을 점검했다. document 가로 넘침·조작부 잘림·heading jump·이름 없는 조작부·iframe title 누락은 재현되지 않았다.
+- 390px에서 포스터를 선택하면 `autoplay=1&mute=1&playsinline=1` iframe이 생성되고, 두 번째 카드를 선택하면 선택 상태가 하나로 유지됐다. runtime error는 0건이었다.
+- 새 CRITICAL/MAJOR 결함은 없다. 코드 패치는 만들지 않았으며, Chrome CDP fallback을 Safari/iOS/Android 실기기나 실제 고령 사용자 검증으로 확대하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건은 유지한다.
+
+증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.

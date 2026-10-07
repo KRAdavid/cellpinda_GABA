@@ -2914,6 +2914,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-262`, `E-LOCAL-BUILD-PRINT-ACTION-20261007`, `E-CDP-PRINT-ACTION-20261007`, `E-DEPLOY-PIPELINE-PRINT-ACTION-20261007`, `E-LIVE-PUBLIC-PRINT-ACTION-20261007`, `E-NAVI-STATE-PRINT-ACTION-20261007`.
 
+## Current Release Recheck — ec29f7cf — 접근성·영상·초소형 모바일 재감리 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 공개 validator가 main 공개본 candidate `ec29f7cf3910d1b379f6cb8c37f18e4c1981331c`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 접근성·반응형·전문가 영상: PASS. 280·320·390·768·1440px에서 document 가로폭이 viewport와 일치했다. heading jump·이름 없는 조작부·이미지 대체텍스트 누락·iframe title 누락·중복 id가 없었고, 큰 글자 모드의 본문과 조작 영역도 화면 안에 유지됐다. 390px에서 포스터 선택 후 iframe 재생과 두 번째 영상 카드 선택 상태를 재현했다.
+- AC-005 자동 게이트: PASS. `validate:governance`, `validate:ops-docs`, `validate:tf-pulse-workflow`, `audit:goal`이 통과했다. 이번 회차는 재현 가능한 UI 결함이 없어 기능 코드를 변경하지 않았고, 기존 production build·127개 테스트·정적 번들·성능 게이트는 C-262 릴리스 증적으로 유지했다.
+- AC-006 제품 독립 경계: PASS. 연구 카피·수치·출처·제품 독립 공개 경계와 teaser `HOLD`를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없으며, Browser plugin 부재에 따른 Chrome CDP fallback, YouTube 외부 프레임, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다. 이번 회차에는 코드 패치를 만들지 않고 NAVI 증적만 갱신했다.
+
+증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.
+
 ## Current Release Recheck — 3cef5f36 — 모바일 성장 연구 흐름 — 2026-10-07
 
 - AC-001 공개 URL·라이브 정합성: PASS. PR #600 병합 후 main workflow `37622082343`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 candidate `3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c`·HTTP 200·STATIC·73개 bundle hash·12개 claims·6개 master records·6개 share pages·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
