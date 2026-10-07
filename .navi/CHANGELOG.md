@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 모바일 전문가 영상→출처 읽기 연결 리듬 — 공개 배포 확인 — main 2de2735 — 2026-10-07
+
+- PR #598의 모든 보호 검사가 통과하고 main workflow `37618834702`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 실행하지 않았다.
+- 공개 validator는 HTTP 200·candidate SHA `2de2735fec56c36839216ce580c7298f87cf09c5`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 공개 390px CDP에서 출처 읽기 제목·연구 질문·원문 출처 패널이 읽기 레일 아래에 이어지고, 메뉴·연구 지도·공유 fallback과 가로폭 0건을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-HANDOFF-20261007`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007`.
+
 ## 모바일 전문가 영상→출처 읽기 연결 리듬 보정 — working tree — 2026-10-07
 
 - 전문가 영상 장을 읽은 뒤 `11 · 출처 읽기`로 넘어갈 때 모바일 상단 여백이 과도해 다음 내용이 끊겨 보이는 잔여 퍼블리싱 리스크를 확인했다.

@@ -2809,7 +2809,10 @@
       "evidence_refs": [
         "E-LOCAL-BUILD-MOBILE-CHAPTER-HANDOFF-20261007",
         "E-CDP-MOBILE-CHAPTER-HANDOFF-20261007",
-        "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007"
+        "E-DEPLOY-PIPELINE-MOBILE-CHAPTER-HANDOFF-20261007",
+        "E-LIVE-PUBLIC-MOBILE-CHAPTER-HANDOFF-20261007",
+        "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007",
+        "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007"
       ],
       "status": "SUPPORTED"
     }
@@ -18290,6 +18293,38 @@
     "statement": "NAVI project state와 evidence register·감사·레드팀 기록이 모바일 장면 연결 보정의 로컬 검증을 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 공개 배포 전 조건을 함께 기록한다.",
     "locator": "NAVI validate_project_state.py; pnpm run validate:governance; pnpm run validate:ops-docs; .navi/EVIDENCE_REGISTER.json C-258 and three evidence records; status USER_DECISION; completion gate NOT_READY; public deployment remains pending for this code change",
     "captured_at": "2026-10-07T21:05:00+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
+    "claim_refs": ["C-258"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-MOBILE-CHAPTER-HANDOFF-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 출처 읽기 연결 리듬 보정 release가 PR 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #598 https://github.com/KRAdavid/gaba_info/pull/598; PR release-verify run 37618599866 success; site-quality-verify run 37618599848 success; merge 2de2735fec56c36839216ce580c7298f87cf09c5; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37618834702: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37618834702",
+    "captured_at": "2026-10-07T21:08:46+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-258"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-MOBILE-CHAPTER-HANDOFF-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 GitHub Pages 공개본에서 390px 출처 읽기 장의 제목·연구 질문·원문 출처 패널이 읽기 레일 아래에 이어지고, 메뉴·연구 지도 선택·공유 fallback과 제품 독립 공개 경계가 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=2de2735fec56c36839216ce580c7298f87cf09c5; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 2de2735fec56c36839216ce580c7298f87cf09c5; generatedAt 2026-10-07T12:08:46.833Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP 390px document scrollWidth=390 and interaction errors=[]",
+    "source_uri": "https://kradavid.github.io/gaba_info/",
+    "captured_at": "2026-10-07T21:08:46+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
+    "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-258"]
+  },
+  {
+    "id": "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register·감사·레드팀 기록이 모바일 장면 연결 보정의 공개 배포·라이브 검증까지 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 외부 검증 잔여 조건을 함께 기록한다.",
+    "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; PR #598 merge 2de2735fec56c36839216ce580c7298f87cf09c5; main workflow 37618834702 all release jobs success; .navi/PROJECT_STATE.json H-343; .navi/EVIDENCE_REGISTER.json C-258 and six evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T21:08:46+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
     "claim_refs": ["C-258"]
   }
