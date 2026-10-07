@@ -2707,3 +2707,10 @@
 - 이번 회차에는 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다. Chrome CDP fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 독해성 검증을 대신하지 않으며, teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
 
 증적: `C-283`, `E-CDP-LIVE-MULTICHAPTER-LARGE-TEXT-20261008`, `E-CDP-LIVE-INTERACTION-REAUDIT-20261008`, `E-LIVE-PUBLIC-INTERACTION-REAUDIT-20261008`, `E-NAVI-STATE-INTERACTION-REAUDIT-20261008`.
+
+## Red-team final sync — 3f7fa299 — 2026-10-08
+
+- PR #646의 NAVI 문서 동기화 병합 후 main 배포 workflow의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 성공과 최종 공개 candidate 일치를 확인했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았고, Chrome CDP fallback의 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 한계와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-283`, `E-PR-NAVI-INTERACTION-REAUDIT-20261008`, `E-DEPLOY-PIPELINE-NAVI-INTERACTION-REAUDIT-20261008`, `E-LIVE-PUBLIC-NAVI-INTERACTION-REAUDIT-20261008`, `E-NAVI-STATE-NAVI-INTERACTION-REAUDIT-20261008`.

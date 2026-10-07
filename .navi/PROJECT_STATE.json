@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T07:21:52+09:00",
+  "updated_at": "2026-10-08T07:29:36+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2331,7 +2331,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T22:21:52Z"
+    "last_run_at": "2026-10-07T22:29:36Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -6513,6 +6513,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T07:21:52+09:00"
+    },
+    {
+      "id": "H-370",
+      "event": "NAVI 상호작용·대형 글자 재감리 문서 PR #646 병합 후 최종 main merge SHA 3f7fa299b6e6392c22a1e238bbd20dd654ff1ae2와 Pages 공개 candidate가 일치하는 것을 확인했다. main workflow 37696265479의 release-verify 113048644216·worker-readiness 113049011768·deploy-pages 113049038284·smoke-live 113049127670·release-status 113049200164가 성공했고 deploy-worker 113049039516은 STATIC_ONLY로 skipped였다. 공개 validator는 HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 최종 동기화는 NAVI provenance만 갱신했으며 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 신규 CRITICAL/MAJOR 결함은 없고 Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-283과 네 최종 동기화 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T07:29:36+09:00"
     }
   ]
 }
