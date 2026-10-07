@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — research scale search date — main 01fab451 — 2026-10-08
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 연구 규모 큰 수치 옆에 기준일을 노출했고, UI contract·typecheck·127개 테스트·정적 bundle·성능 예산·PR #632 보호검사·main Pages 배포·라이브 smoke·release-status·공개 validator가 통과했다. 공개 390px CDP에서 기준일 텍스트와 가로폭 정합성을 확인했다.
+- AC-006: `PASS`. 동일 PubMed 비교와 별도 GABA-A SCIE 분석의 범위·출처·제품 독립 과학 정보 경계를 유지했으며, 변경은 연구 숫자의 읽기 맥락을 보강하는 데 한정했다.
+- AC-007: `PASS_WITH_CONDITIONS`. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-276`, `E-LOCAL-BUILD-RESEARCH-SCALE-DATE-20261008`, `E-UI-CONTRACT-RESEARCH-SCALE-DATE-20261008`, `E-CDP-RESEARCH-SCALE-DATE-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-DATE-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCALE-DATE-20261008`, `E-NAVI-STATE-RESEARCH-SCALE-DATE-20261008`.
+
 ## 전문가 영상 공개 장 반응형·직접 진입 재감리 — main a6cead44 — 2026-10-08
 
 - AC-001/AC-002/AC-003/AC-004/AC-005: `PASS`. 전문가 영상 장을 280·320·390·1440px에서 확인했고, 재생 전 포스터·선택 게시판·주제 필터·9개 카드·선택 영상 정보와 마지막 `연구를 읽는 기준 / 원문 출처` 연결이 자연스럽게 이어졌다.

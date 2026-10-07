@@ -3014,6 +3014,19 @@
         "E-NAVI-STATE-EXPERT-VIDEO-PUBLISHING-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-276",
+      "statement": "연구 규모 시각화는 큰 수치 가까이에 검색 기준일을 함께 표시하고, 기관별 PubMed 비교와 별도 GABA-A SCIE 분석의 구분을 유지해 공개 문헌 숫자를 출처 범위와 함께 읽게 한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SCALE-DATE-20261008",
+        "E-UI-CONTRACT-RESEARCH-SCALE-DATE-20261008",
+        "E-CDP-RESEARCH-SCALE-DATE-20261008",
+        "E-DEPLOY-PIPELINE-RESEARCH-SCALE-DATE-20261008",
+        "E-LIVE-PUBLIC-RESEARCH-SCALE-DATE-20261008",
+        "E-NAVI-STATE-RESEARCH-SCALE-DATE-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -19559,6 +19572,69 @@
       "captured_at": "2026-10-08T04:47:00+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-EXPERT-VIDEO-PUBLISHING",
       "claim_refs": ["C-275"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SCALE-DATE-20261008",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 규모 큰 수치 가까이에 기준일을 표시하고 기관별 PubMed와 별도 GABA-A SCIE 분석 범위를 유지한 공개 안내서가 UI 계약·TypeScript 타입체크·127개 테스트·Vite production build·성능 예산을 통과했다.",
+      "locator": "local worktree C:\\Users\\computer\\Documents\\ChatGPT\\gaba-next-premium-audit-20261008; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test 127 pass 0 fail; pnpm run build PASS; initial JS 311405 bytes; initial CSS 95703 bytes; total assets 1649346 bytes; performance budget PASS",
+      "captured_at": "2026-10-08T05:18:51+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-RESEARCH-SCALE-DATE",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-276"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SCALE-DATE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약이 연구 규모의 기준일 time 요소와 1950년부터 지금까지의 읽기 순서를 고정해 큰 수치의 검색 시점을 숨기지 않도록 했다.",
+      "locator": "scripts/validate-ui-contract.mjs research-scale date assertion; pnpm run validate:ui-contract -> status ok; visible time dateTime=2026-09-28 and accessible text 기준일 2026.09.28",
+      "captured_at": "2026-10-08T05:18:51+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-RESEARCH-SCALE-DATE",
+      "claim_refs": ["C-276"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-SCALE-DATE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin unavailable 상태에서 Chrome CDP fallback으로 공개 390px 연구 규모의 기준일·연구 범위 구분·가로폭·runtime 오류를 확인했다.",
+      "locator": "CDP target https://kradavid.github.io/gaba_info/?qa=history-scale#history; text includes 1950 / 지금 / 기준일 2026.09.28 and same-search PubMed versus separate GABA-A SCIE labels; pageWidth/scrollWidth=390/390; errors=[]; screenshot C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-live-history-scale-390.png",
+      "captured_at": "2026-10-08T05:18:51+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-RESEARCH-SCALE-DATE",
+      "claim_refs": ["C-004", "C-276"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-SCALE-DATE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 규모 기준일 보정 PR #632가 보호검사를 통과해 main에 병합됐고 GitHub Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #632 https://github.com/KRAdavid/gaba_info/pull/632 merge SHA 01fab45151b7631ccf88f342629ccd5387ee4b24; PR release-verify 37680454669 success; site-quality-verify 37680454619 success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37680629352: release-verify 112995421386 success; worker-readiness 112995883195 success; deploy-pages 112995929838 success; smoke-live 112996038585 success; release-status 112996130025 success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37680629352",
+      "captured_at": "2026-10-08T05:18:51+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-SCALE-DATE",
+      "claim_refs": ["C-001", "C-005", "C-276"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SCALE-DATE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 연구 규모 기준일과 출처 범위 구분을 반영하면서 정적 bundle·연구 데이터·공유 페이지·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha 01fab45151b7631ccf88f342629ccd5387ee4b24; generatedAt 2026-10-07T20:16:22.328Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Chrome CDP 390px text includes 기준일 2026.09.28, pageWidth/scrollWidth=390/390, errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T05:18:51+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-RESEARCH-SCALE-DATE",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-006", "C-276"]
+    },
+    {
+      "id": "E-NAVI-STATE-RESEARCH-SCALE-DATE-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 연구 규모 기준일 표시의 로컬 계약 검증·CDP 공개 검증·PR·main 배포·live validator를 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "main 01fab45151b7631ccf88f342629ccd5387ee4b24; pnpm run validate:live-public -> page 200, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T05:18:51+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-SCALE-DATE",
+      "claim_refs": ["C-276"]
     }
   ]
 }

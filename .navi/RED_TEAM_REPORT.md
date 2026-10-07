@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 연구 규모 기준일 노출 및 공개 배포 공격 재점검 — main 01fab451 — 2026-10-08
+
+- 공격 관점에서 큰 문헌 수치가 최신성·검색 범위 없이 효과처럼 오인되는지 확인했다. `1950 → 지금 · 기준일 2026.09.28`이 수치와 같은 시각 흐름에 표시되고, `같은 검색 기준`과 `별도 연구 분석` 범례가 유지됐다.
+- 공개 390px CDP에서 기준일 텍스트가 실제 DOM에 존재하고 pageWidth/scrollWidth가 390/390이며 runtime errors=[]였다. 연구 수치·출처·제품 독립 경계는 변경되지 않았다.
+- 새 CRITICAL/MAJOR 결함은 없다. Chrome CDP fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으며 이 조건과 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-RESEARCH-SCALE-DATE-20261008`, `E-CDP-RESEARCH-SCALE-DATE-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCALE-DATE-20261008`, `E-NAVI-STATE-RESEARCH-SCALE-DATE-20261008`.
+
 ## 전문가 영상 공개 장 반응형·직접 진입 공격 재점검 — main a6cead44 — 2026-10-08
 
 - 공격 관점에서 280·320·390·1440px에서 재생 전 안내가 빈 화면처럼 보이는지, 카드·필터가 화면 밖으로 밀리는지, 마지막 영상 뒤 출처 읽기 handoff가 끊기는지 확인했다. 9개 카드와 선택 게시판이 표시되고, 하단에서 `연구를 읽는 기준 / 원문 출처`가 이어졌다.

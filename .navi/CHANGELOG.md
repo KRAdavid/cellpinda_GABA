@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 규모 기준일 노출 및 공개 배포 — 01fab451 — 2026-10-08
+
+- 연구 규모의 큰 수치 가까이에 `기준일 2026.09.28`을 추가해 문헌 숫자의 시점을 한눈에 확인하도록 고도화했다. 하버드·옥스퍼드 PubMed 비교와 GABA-A SCIE 분석의 수치·출처·범위는 유지했다.
+- UI contract·typecheck·127개 테스트·Vite build·정적 bundle·성능 예산, PR #632 보호검사, main workflow `37680629352`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 HTTP 200·candidate SHA `01fab45151b7631ccf88f342629ccd5387ee4b24`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다.
+- 공개 390px Chrome CDP에서 기준일 표시와 가로폭 정합성, runtime error 0건을 확인했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-276`, `E-LOCAL-BUILD-RESEARCH-SCALE-DATE-20261008`, `E-UI-CONTRACT-RESEARCH-SCALE-DATE-20261008`, `E-CDP-RESEARCH-SCALE-DATE-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-DATE-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCALE-DATE-20261008`, `E-NAVI-STATE-RESEARCH-SCALE-DATE-20261008`.
+
 ## 전문가 영상 공개 장 반응형·직접 진입 재감리 — a6cead44 — 2026-10-08
 
 - 전문가 영상 장을 280·320·390·1440px에서 시각 검수하고, 재생 전 포스터·선택 게시판·주제 필터·9개 카드·출처 읽기 handoff를 확인했다. 모든 대표 폭에서 가로폭 정합성과 runtime error 0건을 확인했다.
