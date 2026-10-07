@@ -1,5 +1,14 @@
 # Audit Report
 
+## 1440px 데스크톱 직접 진입 시각 감리 — main a576f740 — 2026-10-08
+
+- 공개 `https://kradavid.github.io/gaba_info/`를 1440px·1000px로 열고 `#top`·`#academic`·`#research`·`#expert-videos`·`#final`을 직접 진입했다. 장 제목의 실제 bounding box는 각각 헤더 아래에 위치했고, 대표 장 모두 `pageWidth/scrollWidth=1425/1425`, `errors=[]`였다.
+- 시각 감리 포인트는 ① 히어로의 텍스트·자연 이미지 분할 ② 연구 지도 중심축과 5개 주제 ③ 연구 결과 도표의 비교 구조 ④ 전문가 영상 선택 보드 ⑤ 마지막 공유·인쇄 handoff다. 다섯 화면에서 색상 토큰·테두리·라운드·아이콘·타이포그래피 계층이 일관되며, 기존 캡처에서 보인 제목 잘림은 진입 위치를 잘못 저장한 캡처 아티팩트로 판정했다.
+- 로컬 기준 UI contract·typecheck·127개 테스트·NAVI project-state validation은 이전 main 보호검사와 함께 유효하며, 이번 회차에 기능 코드·연구 카피·수치·출처는 변경하지 않았다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다. Chrome CDP fallback은 Browser plugin 부재에 따른 대체 검증이며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않는다.
+
+증적: `C-281`, `E-CDP-DESKTOP-VISUAL-AUDIT-20261008`, `E-LIVE-PUBLIC-DESKTOP-AUDIT-20261008`, `E-NAVI-STATE-DESKTOP-AUDIT-20261008`.
+
 ## 병합 후 최종 공개 SHA 정합성 확인 — main 4cc90945 — 2026-10-08
 
 - PR #639 병합 후 main 배포 workflow `37689497347`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 모두 PASS였다. 정적 사이트 정책에 따라 deploy-worker는 skipped다.

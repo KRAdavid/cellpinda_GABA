@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 1440px 데스크톱 시각 공격 재점검 — main a576f740 — 2026-10-08
+
+- 공격 관점에서 대표 장 해시 진입 직후 sticky 헤더가 제목을 가리거나, 이전 화면의 잘못된 scroll position이 공개 UX 결함처럼 보이게 하는지 확인했다. 실제 공개 화면은 제목 top `126~151px`, 헤더 bottom `78px`로 분리됐고 pageWidth/scrollWidth `1425/1425`, runtime error 0이었다.
+- 히어로·연구 지도·연구 카드·영상 보드·최종 공유 화면에서 색상·이미지 프레임·카드 경계·버튼 아이콘·본문 대비를 확인했다. 새 CRITICAL/MAJOR 결함은 없고, 이전 캡처의 잘림은 캡처 시점의 진입 위치 문제였다.
+- 이번 감리는 공개 기능을 수정하지 않았으며 제품 독립 연구 경계·출처·teaser `HOLD`를 유지한다. Chrome CDP fallback 결과는 실기기·실사용자·독립 과학·규제 검증의 대체가 아니다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-281`, `E-CDP-DESKTOP-VISUAL-AUDIT-20261008`, `E-LIVE-PUBLIC-DESKTOP-AUDIT-20261008`, `E-NAVI-STATE-DESKTOP-AUDIT-20261008`.
+
 ## 병합 후 최종 공개 SHA 공격 재점검 — main 4cc90945 — 2026-10-08
 
 - 배포 직후 공개 validator가 반환한 candidate SHA가 main merge SHA와 다른 stale Pages 산출물을 가리키는지 확인했다. candidate `4cc90945bdb84fe97d9f64bd10d797ab09d5b65c`가 merge SHA와 일치했고 HTTP 200으로 응답했다.

@@ -6485,6 +6485,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T06:29:55+09:00"
+    },
+    {
+      "id": "H-366",
+      "event": "NAVI 자동 공개 배포 점검에서 공개 1440px의 top·academic·research·expert-videos·final 직접 진입을 시각 감리했다. 제목은 헤더 아래에 안정적으로 배치됐고 pageWidth/scrollWidth는 1425/1425, runtime errors=[]였다. 히어로·연구 지도·연구 도표·전문가 영상·최종 공유의 색상·컨테이너·간격·아이콘·타이포그래피 계층이 일관됐으며, 이전 캡처의 제목 잘림은 실제 공개 결함이 아닌 캡처 진입 위치 아티팩트로 판정했다. 기능 코드·연구 카피·수치·출처는 변경하지 않았고 신규 CRITICAL/MAJOR 결함은 없다. 공개 validator는 main candidate SHA a576f74014022fb073e6f28bb7dd083e54402603·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 유지한다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-281과 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T06:36:55+09:00"
     }
   ]
 }

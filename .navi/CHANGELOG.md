@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 1440px 데스크톱 직접 진입 시각 감리 — a576f740 — 2026-10-08
+
+- 공개 1440px에서 첫 화면·연구 지도·연구 상세·전문가 영상·최종 공유 장을 해시로 직접 열어 sticky 헤더 아래 제목 위치와 장 진입 흐름을 확인했다. 대표 장 모두 제목이 헤더 아래에 안정적으로 배치되고 가로폭은 `1425/1425`, runtime error는 0이었다.
+- 다섯 가지 시각 포인트(히어로 이미지와 타이포그래피, 연구 지도, 결과 도표, 전문가 영상 보드, 마지막 공유 화면)를 비교 감리했다. 색상·컨테이너·간격·아이콘 계열이 하나의 디자인 시스템으로 유지되고, 모바일 보정이 데스크톱 레이아웃을 훼손하지 않았다.
+- 재현 가능한 CRITICAL/MAJOR 시각 결함이 없어 기능 코드·연구 카피·수치·출처를 변경하지 않고 NAVI 감리 증적만 추가했다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-281`, `E-CDP-DESKTOP-VISUAL-AUDIT-20261008`, `E-LIVE-PUBLIC-DESKTOP-AUDIT-20261008`, `E-NAVI-STATE-DESKTOP-AUDIT-20261008`.
+
 ## 병합 후 최종 공개 SHA 정합성 확인 — 4cc90945 — 2026-10-08
 
 - NAVI 감사 문서 PR #639 병합 후 main workflow `37689497347`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 모두 성공했다. deploy-worker는 정적 공개 모드에 따라 건너뛰었다.

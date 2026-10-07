@@ -3074,6 +3074,16 @@
         "E-NAVI-STATE-PUBLIC-REAUDIT-FINAL-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-281",
+      "statement": "공개 1440px 직접 진입은 헤더 아래 제목 위치·섹션 흐름·가로폭을 안정적으로 유지하고, 히어로·연구 지도·결과 도표·전문가 영상·최종 공유의 전문 퍼블리싱 계층이 일관된다.",
+      "evidence_refs": [
+        "E-CDP-DESKTOP-VISUAL-AUDIT-20261008",
+        "E-LIVE-PUBLIC-DESKTOP-AUDIT-20261008",
+        "E-NAVI-STATE-DESKTOP-AUDIT-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -19883,6 +19893,38 @@
       "captured_at": "2026-10-08T06:29:55+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-PUBLIC-REAUDIT-FINAL",
       "claim_refs": ["C-280"]
+    },
+    {
+      "id": "E-CDP-DESKTOP-VISUAL-AUDIT-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin unavailable 상태에서 Chrome CDP fallback으로 공개 1440px 대표 장의 직접 진입·제목 위치·가로폭·runtime error를 확인했다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; width 1440, height 1000; hashes #top, #academic, #research, #expert-videos, #final; pageWidth/scrollWidth=1425/1425; header bottom=78px; heading top=126~151px; errors=[]; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-desktop-top-1440.png, gaba-desktop-academic-1440.png, gaba-desktop-research-1440.png, gaba-desktop-expert-videos-1440.png, gaba-desktop-final-1440.png",
+      "captured_at": "2026-10-08T06:36:55+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-DESKTOP-VISUAL-AUDIT",
+      "claim_refs": ["C-004", "C-281"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-DESKTOP-AUDIT-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "1440px 시각 감리 대상과 동일한 최신 GitHub Pages 공개본은 정적 bundle·연구 데이터·공유 페이지·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha a576f74014022fb073e6f28bb7dd083e54402603; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T06:36:55+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-DESKTOP-VISUAL-AUDIT",
+      "claim_refs": ["C-001", "C-002", "C-006", "C-281"]
+    },
+    {
+      "id": "E-NAVI-STATE-DESKTOP-AUDIT-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 데스크톱 시각 감리 기록은 1440px 직접 진입·스크린샷·라이브 validator를 연결하고, 제품 독립 경계와 외부 검증 잔여 조건을 유지한다.",
+      "locator": "main a576f74014022fb073e6f28bb7dd083e54402603; pnpm run validate:live-public -> page 200, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T06:36:55+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-DESKTOP-VISUAL-AUDIT",
+      "claim_refs": ["C-281"]
     }
   ]
 }
