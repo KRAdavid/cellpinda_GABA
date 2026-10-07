@@ -2816,3 +2816,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-254`, `E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007`, `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.
+
+## Current Release Recheck — 5fedb836 — 모바일 브라우저 호환성 퍼블리싱 보완 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #592 required checks와 main workflow `37608893903`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 공개 validator는 merge SHA `5fedb836401de9469a4d86ae9b7403303b0961b7`·HTTP 200·STATIC·73개 bundle hash·12개 claims·6개 master records·6개 share pages·teaser `HOLD`를 확인했다.
+- AC-003/AC-004 가독성·반응형: PASS. 모바일 텍스트 자동 확대 방지와 헤더 블러 vendor fallback을 적용했으며, 기존 연구 결과 도표·전문가 영상·공유 흐름의 구조와 가로폭 계약은 유지했다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·127개 테스트·production build·정적 bundle·Pages 성능 예산을 통과했고 Pages-style 총 자산은 `1,649,635 bytes`다.
+- AC-006 제품 독립 경계: PASS. 공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없지만 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN이다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-255`, `E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007`, `E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007`, `E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007`, `E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007`.

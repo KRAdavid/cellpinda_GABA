@@ -2189,3 +2189,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없고, 이번 회차는 코드 수정 없이 공개본 유지로 기록했다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`, 실기기·실사용자·독립 과학·규제 외부 검증 조건을 유지한다.
 
 증적: `C-254`, `E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007`, `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.
+
+## 2026-10-07 — 모바일 브라우저 호환성 퍼블리싱 보완 — 5fedb836
+
+- `text-size-adjust`·`-webkit-text-size-adjust`로 모바일 브라우저의 텍스트 자동 확대 차이를 줄이고, 헤더 `-webkit-backdrop-filter` fallback을 추가했다. 이미 후속 supports 블록에서 적용되는 헤딩 균형 선택자는 중복만 정리했다.
+- 로컬·Pages-style 성능과 PR #592 보호 검사, main workflow `37608893903`, 공개 live validator가 통과했다. Pages-style 총 자산은 `1,649,635 bytes / 1,650,000 bytes`다.
+- 연구 카피·수치·출처·제품 독립 공개 경계·teaser `HOLD`는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 외부 조건으로 남긴다.
+
+증적: `C-255`, `E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007`, `E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007`, `E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007`, `E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007`.

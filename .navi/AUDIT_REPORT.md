@@ -3001,6 +3001,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-254`, `E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007`, `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.
 
+## Current Release Recheck — 5fedb836 — 모바일 브라우저 호환성 퍼블리싱 보완 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #592의 required checks와 main workflow `37608893903`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 merge SHA `5fedb836401de9469a4d86ae9b7403303b0961b7`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개를 확인했다.
+- AC-003/AC-004 모바일 퍼블리싱: PASS. `text-size-adjust`·`-webkit-text-size-adjust`와 헤더 `-webkit-backdrop-filter` fallback을 추가해 모바일 브라우저별 텍스트 자동 확대·frosted header 차이를 줄였다. 헤딩 균형 규칙은 유지하면서 중복 선택자만 정리했고, 콘텐츠 화면·연구 결과 도표·공유 흐름의 구조는 변경하지 않았다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·127개 테스트·production build·정적 bundle·Pages 성능 예산이 통과했다. Pages-style 총 자산은 `1,649,635 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 공개 연구 카피·수치·출처·제품 독립 공개 경계·teaser `HOLD`는 유지됐다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chrome 자동 검증 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-255`, `E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007`, `E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007`, `E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007`, `E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
