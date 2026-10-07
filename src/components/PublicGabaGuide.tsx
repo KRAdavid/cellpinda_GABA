@@ -1210,7 +1210,7 @@ export default function PublicGabaGuide() {
     const syncRailCue = () => {
       const hasOverflow = rail.scrollWidth - rail.clientWidth > 2;
       const reachedEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
-      setVideoFilterRailAtEnd(!hasOverflow || reachedEnd);
+      setVideoFilterRailAtEnd(largeText || !hasOverflow || reachedEnd);
     };
     syncRailCue();
     rail.addEventListener('scroll', syncRailCue, { passive: true });
@@ -1220,7 +1220,7 @@ export default function PublicGabaGuide() {
       rail.removeEventListener('scroll', syncRailCue);
       resizeObserver?.disconnect();
     };
-  }, []);
+  }, [largeText]);
 
   // Keep a shared or newly selected topic visible inside the horizontal mobile rail.
   // This preserves the selected-state context when a deep link opens a later topic.

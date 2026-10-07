@@ -1862,8 +1862,6 @@
     overscroll-behavior-x:contain;
     margin:0 -2px 12px;
     padding:0 2px 7px;
-    scrollbar-color:#9acfd0 transparent;
-    scrollbar-width:thin;
     -webkit-overflow-scrolling:touch;
   }
   .gaba-guide .guide-video-filters{
@@ -1872,9 +1870,7 @@
     min-width:100%;
     margin:0;
     padding:1px 0 0;
-    scroll-snap-type:x proximity;
   }
-  .gaba-guide .guide-video-filter{scroll-snap-align:start}
 }
 
 /* v124 mobile video filter continuation cue: make the horizontal topic rail discoverable without adding copy or height. */
@@ -2209,3 +2205,6 @@
   .guide-recovery-map-head strong{min-width:0;max-width:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .guide-recovery-map-head em{min-width:auto}
 }
+
+/* v177 large-text video topics: show every topic without a clipped horizontal rail. */
+@media(max-width:700px){.is-large-text .guide-video-filters{flex-wrap:wrap;width:100%}}
