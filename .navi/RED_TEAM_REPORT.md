@@ -2397,3 +2397,12 @@
 - PR #574와 main workflow `37583630664`가 성공했고 live validator candidate가 merge SHA와 일치했다. teaser `HOLD`, Browser plugin 부재에 따른 Playwright Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
 
 증적: `E-PLAYWRIGHT-CHAPTER-NAV-20261007`, `E-LIVE-PUBLIC-CHAPTER-NAV-20261007`.
+
+## Red-team recheck — 모바일 히어로 강조 문구 잘림 — c4e27ab — 2026-10-07
+
+- 공격 관점에서 390px 공개 첫 화면의 강조 문구가 오른쪽에서 잘려 `GABA` 메시지가 완결되지 않는 경로를 확인했다.
+- 모바일 전용 줄바꿈을 적용해 320·390px에서 `GABA에서`와 `읽습니다`가 자연스럽게 이어지도록 보정했고, 768·1440px에서는 기존 한 줄 강조를 유지했다. 로컬·공개 대표 화면에서 새 가로 넘침이나 제목 잘림은 관찰되지 않았다.
+- PR #577과 main workflow `37586165558`, 공개 validator candidate `c4e27ab043c92ee9ca6aeab8b827f4b93144334b`가 성공했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser plugin은 사용할 수 없어 Chrome headless fallback으로 확인했으며, 이 결과를 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수 승인으로 확대하지 않는다. 기존 RT-001·RT-002·RT-003과 teaser `HOLD`는 유지한다.
+
+증적: `E-CHROME-MOBILE-HERO-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-20261007`.

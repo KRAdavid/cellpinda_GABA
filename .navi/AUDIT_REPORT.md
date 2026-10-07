@@ -2912,6 +2912,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-246`, `E-LOCAL-BUILD-CHAPTER-NAV-20261007`, `E-PLAYWRIGHT-CHAPTER-NAV-20261007`, `E-DEPLOY-PIPELINE-CHAPTER-NAV-20261007`, `E-LIVE-PUBLIC-CHAPTER-NAV-20261007`, `E-NAVI-STATE-CHAPTER-NAV-20261007`.
 
+## 공개 모바일 히어로 잘림 보정·재배포 — c4e27ab — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 보호된 PR #577 병합 후 main workflow `37586165558`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, freshness 회복은 보호된 PR #578로 처리했다. 공개 validator가 candidate `c4e27ab043c92ee9ca6aeab8b827f4b93144334b`·HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·provenance `matched`를 확인했다.
+- AC-003/AC-004 모바일 읽기·시각 완결성: PASS. 390px 공개 히어로에서 우측이 잘리던 강조 문구에 모바일 전용 줄바꿈을 적용해 `GABA에서 읽습니다` 전체가 보이도록 했고, 320·390px 로컬 및 390·768·1440px 공개 화면을 확인했다. 768·1440px의 한 줄 강조와 가로폭 흐름은 유지된다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·127개 테스트·Pages-style build·release manifest·정적 bundle·성능 검사가 통과했다. 초기 JS `311,475 bytes`, 초기 CSS `95,703 bytes`, 총 자산 `1,648,075 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 모바일 히어로 줄바꿈과 가독성 보정에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다. `smartStoreOnly=true`, `removed750=true`, `internalOpsSnapshots=excluded`를 유지한다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재에 따른 Chrome headless fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-247`, `E-LOCAL-BUILD-MOBILE-HERO-20261007`, `E-CHROME-MOBILE-HERO-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-20261007`, `E-NAVI-STATE-MOBILE-HERO-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

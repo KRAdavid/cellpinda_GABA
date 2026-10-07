@@ -2722,3 +2722,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다. 공개 사이트의 자동·정적 배포 품질은 이번 릴리스까지 확인했지만 남은 외부 검증과 사용자 최종 판단을 완료로 위장하지 않는다.
 
 증적: `C-246`, `E-LOCAL-BUILD-CHAPTER-NAV-20261007`, `E-PLAYWRIGHT-CHAPTER-NAV-20261007`, `E-DEPLOY-PIPELINE-CHAPTER-NAV-20261007`, `E-LIVE-PUBLIC-CHAPTER-NAV-20261007`, `E-NAVI-STATE-CHAPTER-NAV-20261007`.
+
+## Current Release Recheck — c4e27ab — 모바일 히어로 완결성 — 2026-10-07
+
+- 공개 390px 첫 화면에서 잘리던 강조 문구를 모바일 전용 줄바꿈으로 보정했고, 320·390px 전체 문구와 768·1440px 한 줄 레이아웃을 확인했다.
+- PR #577 보호 검사와 main workflow `37586165558`의 release-verify·Pages·smoke-live·release-status가 성공했으며, 공개 validator는 merge SHA `c4e27ab043c92ee9ca6aeab8b827f4b93144334b`와 HTTP 200·정적 번들·공개 데이터 정합성을 확인했다. stale TF pulse는 보호된 PR #578 회복 절차로 해결했다.
+- 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재와 실기기·실사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-247`, `E-LOCAL-BUILD-MOBILE-HERO-20261007`, `E-CHROME-MOBILE-HERO-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-20261007`, `E-NAVI-STATE-MOBILE-HERO-20261007`.

@@ -2674,6 +2674,18 @@
       "E-NAVI-STATE-CHAPTER-NAV-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-247",
+    "statement": "모바일 히어로의 강조 문구가 320·390px에서 잘리지 않고 전체가 보이도록 의도적으로 줄바꿈되었으며, 768·1440px의 한 줄 강조와 공개 정적 데이터·연구 카피·출처·제품 독립 경계를 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-MOBILE-HERO-20261007",
+      "E-CHROME-MOBILE-HERO-20261007",
+      "E-DEPLOY-PIPELINE-MOBILE-HERO-20261007",
+      "E-LIVE-PUBLIC-MOBILE-HERO-20261007",
+      "E-NAVI-STATE-MOBILE-HERO-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17593,6 +17605,58 @@
     "captured_at": "2026-10-07T15:53:58+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-CHAPTER-NAV",
     "claim_refs": ["C-246"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-MOBILE-HERO-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 히어로 줄바꿈 보정 후 로컬 공개 빌드·정적 무결성·성능 검사가 통과했다.",
+    "locator": "main base 4fe2e44b5266f435f134cb86f3f111245f2c6c4c; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127/127 pass; Pages-style Vite build; validate:release-manifest; check-public-artifacts; validate:static-bundle; validate:performance; initial JS 311475 <= 380000; initial CSS 95703 <= 110000; total assets 1648075 <= 1650000; largest asset 311475 <= 380000; git diff --check",
+    "captured_at": "2026-10-07T16:20:02+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-MOBILE-HERO",
+    "claim_refs": ["C-005", "C-247"]
+  },
+  {
+    "id": "E-CHROME-MOBILE-HERO-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Browser plugin을 사용할 수 없어 Chrome headless fallback으로 로컬·공개 화면을 320·390·768·1440px에서 시각 점검했으며, 모바일 히어로 강조 문구의 잘림 없이 의도된 줄바꿈과 데스크톱 한 줄 레이아웃을 확인했다.",
+    "locator": "Chrome headless fallback; local screenshots at C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-local-hero-20261007\\hero-320.png, hero-390.png, hero-768.png, hero-1440.png; public screenshots at C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-public-hero-fix-20261007\\guide-390.png, guide-768.png, guide-1440.png; visual inspection confirmed full `GABA에서 읽습니다` text at 320/390px and one-line treatment at 768/1440px; screenshots kept outside repository",
+    "captured_at": "2026-10-07T16:20:02+09:00",
+    "reviewer_id": "NAVI-CHROME-FALLBACK-QA-GABA-20261007-MOBILE-HERO",
+    "claim_refs": ["C-003", "C-247"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-MOBILE-HERO-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 히어로 줄바꿈 보정 release가 보호된 PR 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #577 https://github.com/KRAdavid/gaba_info/pull/577; squash merge c4e27ab043c92ee9ca6aeab8b827f4b93144334b; PR checks release-verify and site-quality-verify success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37586165558: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY; stale TF pulse was recovered through protected PR #578 https://github.com/KRAdavid/gaba_info/pull/578",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37586165558",
+    "captured_at": "2026-10-07T16:20:02+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-MOBILE-HERO",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-247"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-MOBILE-HERO-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 히어로 줄바꿈 보정 release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=c4e27ab043c92ee9ca6aeab8b827f4b93144334b; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha c4e27ab043c92ee9ca6aeab8b827f4b93144334b; generatedAt 2026-10-07T07:15:54.613Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T16:20:02+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-MOBILE-HERO",
+    "claim_refs": ["C-001", "C-002", "C-247"]
+  },
+  {
+    "id": "E-NAVI-STATE-MOBILE-HERO-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 모바일 히어로 줄바꿈 보정의 공개 배포 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-331; .navi/EVIDENCE_REGISTER.json C-247 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T16:20:02+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-HERO",
+    "claim_refs": ["C-247"]
   }
 ]
 }

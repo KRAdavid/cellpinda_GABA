@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T15:53:58+09:00",
+  "updated_at": "2026-10-07T16:20:02+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2143,7 +2143,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T03:25:00Z"
+    "last_run_at": "2026-10-07T07:20:02Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2345,7 +2345,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T03:25:00Z"
+    "last_run_at": "2026-10-07T07:20:02Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5879,6 +5879,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T15:53:58+09:00"
+    },
+    {
+      "id": "H-331",
+      "event": "최신 공개본의 390px 히어로에서 강조 문구 `GABA에서 읽습니다`가 우측에서 잘려 첫 메시지를 완결해 읽기 어려운 잔여 퍼블리싱 리스크를 NAVI 자동 점검에서 확인하고 보정했다. 모바일 전용 의도적 줄바꿈으로 320·390px에서 문구 전체를 보이게 했고 768·1440px의 한 줄 강조는 유지했다. 로컬 UI contract·typecheck·127개 테스트·Pages-style build·release manifest·정적 bundle·성능 예산을 통과했으며 Chrome headless fallback 공개 화면 390·768·1440px과 로컬 320·390·768·1440px에서 잘림 없는 제목과 전체 화면 흐름을 확인했다. PR #577 및 main workflow `37586165558`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, freshness 회복을 위한 보호된 PR #578 병합 후 공개 validator는 merge SHA `c4e27ab043c92ee9ca6aeab8b827f4b93144334b`·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았고 새 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-247과 다섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T16:20:02+09:00"
     }
   ]
 }
