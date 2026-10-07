@@ -2477,7 +2477,9 @@
     "evidence_refs": [
       "E-LOCAL-BUILD-RESEARCH-PREVIEW-20261008",
       "E-UI-CONTRACT-RESEARCH-PREVIEW-20261008",
-      "E-STATIC-BUNDLE-RESEARCH-PREVIEW-20261008"
+      "E-STATIC-BUNDLE-RESEARCH-PREVIEW-20261008",
+      "E-DEPLOY-PIPELINE-RESEARCH-PREVIEW-20261008",
+      "E-LIVE-PUBLIC-RESEARCH-PREVIEW-20261008"
     ],
     "status": "SUPPORTED"
     }
@@ -16617,6 +16619,28 @@
     "captured_at": "2026-10-07T09:31:16+09:00",
     "reviewer_id": "NAVI-PAGES-BUNDLE-QA-20261008-RESEARCH-PREVIEW",
     "claim_refs": ["C-001", "C-005", "C-229"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-RESEARCH-PREVIEW-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 공개 GitHub Pages 번들에 연구 지도 아래 대표 결과 선행 노출과 연구 카드 읽기 흐름이 반영되고, 공개 데이터·제품 독립 경계·정적 배포 정합성이 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=523880887ece2a91916d66db57c8265de702cd0a; HTTP 200; candidateSha 523880887ece2a91916d66db57c8265de702cd0a; STATIC; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public asset assets/PublicGabaGuide-CzN1XnKu.js HTTP 200 and includes `대표 결과부터 읽기` and `guide-research-read-order`; no fresh browser screenshot claimed",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T09:47:38+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-RESEARCH-PREVIEW",
+    "claim_refs": ["C-001", "C-003", "C-006", "C-229"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-RESEARCH-PREVIEW-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "대표 결과 선행 노출 보정이 PR 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #544 https://github.com/KRAdavid/gaba_info/pull/544; PR release-verify run 37553343385/job 112573755584 success and site-quality-verify run 37553343397/job 112573755582 success; squash merge 523880887ece2a91916d66db57c8265de702cd0a; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37553497930: release-verify 112574243047, worker-readiness 112574603170, deploy-pages 112574629317, smoke-live 112574688932, release-status 112574766224 all success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37553497930",
+    "captured_at": "2026-10-07T09:47:38+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-20261008-RESEARCH-PREVIEW",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-229"]
   }
 ]
 }

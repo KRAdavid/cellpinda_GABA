@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 06·연구의 확장 대표 결과 선행 노출·공개 배포 완료 — main 5238808 — 2026-10-07
+
+- PR #544를 병합하고 main workflow `37553497930`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `523880887ece2a91916d66db57c8265de702cd0a`, bundle hash 73개, 제품 독립 경계를 확인했다.
+- 공개 번들에서 `대표 결과부터 읽기`와 연구 읽기 레일을 확인했다. 지도 아래 대표 결과가 별도 이동 없이 연구 카드 흐름으로 이어진다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 신규 브라우저 시각 QA·실기기·고령 사용자·독립 과학·규제 감수는 외부 검증 항목이다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-PREVIEW-20261008`, `E-LIVE-PUBLIC-RESEARCH-PREVIEW-20261008`.
+
 ## 06·연구의 확장 대표 결과 선행 노출 — working tree — 2026-10-07
 
 - 연구 지도 아래의 기존 전환 영역에 선택 전에는 인지 대표 결과, 선택 후에는 선택한 결과의 요약을 먼저 노출하고 별도 링크 없이 상세 카드로 이어지게 했다. 모바일에서 지도와 연구 결과가 한 흐름으로 읽힌다.

@@ -5725,6 +5725,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T09:31:16+09:00"
+    },
+    {
+      "id": "H-309",
+      "event": "대표 결과 선행 노출 보정의 공개 배포 후 검증을 완료했다. PR #544와 main merge `5238808`, main workflow `37553497930`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 HTTP 200·candidate `523880887ece2a91916d66db57c8265de702cd0a`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 PublicGabaGuide 번들에서 `대표 결과부터 읽기`와 연구 읽기 레일 표식을 확인했다. C-229와 라이브 증거를 SUPPORTED/INDEPENDENTLY_CONFIRMED로 갱신한다. 새 CRITICAL/MAJOR 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·신규 브라우저 시각 캡처는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T09:47:38+09:00"
     }
   ]
 }

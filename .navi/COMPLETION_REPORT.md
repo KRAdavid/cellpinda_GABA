@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — research representative result preview deployed — main 5238808 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. PR #544 병합 후 main workflow `37553497930`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200이다. 공개 validator는 candidate `523880887ece2a91916d66db57c8265de702cd0a`·bundle hash 73개·제품 독립 경계를 확인했다.
+- AC-003: PASS_WITH_CONDITIONS. 공개 번들에서 `대표 결과부터 읽기`와 연구 읽기 레일을 확인했다. 연구 지도 아래 대표 결과가 바로 이어지는 연구 카드 흐름으로 연결된다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. teaser `HOLD`, 공개 연구 데이터 경계, 제품 독립 경계는 유지됐다. 신규 브라우저 시각 캡처·Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-PREVIEW-20261008`, `E-LIVE-PUBLIC-RESEARCH-PREVIEW-20261008`.
+
 ## Current Work Recheck — research representative result preview — working tree — 2026-10-07
 
 - AC-003/AC-004: PASS_WITH_CONDITIONS. 06장 연구 지도 아래의 기존 전환 영역에 대표 결과 요약을 넣어 모바일에서 결과를 먼저 읽고 바로 이어지는 연구 카드 흐름을 만들었다. 별도 링크 이동은 추가하지 않았다.

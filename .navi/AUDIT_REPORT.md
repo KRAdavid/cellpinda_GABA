@@ -1,5 +1,13 @@
 # Audit Report
 
+## 06·연구의 확장 대표 결과 선행 노출·공개 배포 후 재감사 — main 5238808 — 2026-10-07
+
+- PR #544 병합 후 main workflow `37553497930`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다. 공개 validator는 HTTP 200·candidate `523880887ece2a91916d66db57c8265de702cd0a`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 공개 `PublicGabaGuide` 번들에서 `대표 결과부터 읽기`와 `guide-research-read-order`를 확인해 연구 지도 아래 대표 결과가 먼저 읽히고 연구 카드 흐름으로 이어지는 보정이 반영됐음을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 이번 라이브 확인은 정적 번들·validator 기반이며 신규 브라우저 시각 캡처와 Safari/iOS/Android·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-PREVIEW-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-PREVIEW-20261008`, `E-LIVE-PUBLIC-RESEARCH-PREVIEW-20261008`.
+
 ## 06·연구의 확장 대표 결과 선행 노출·로컬 재감사 — working tree — 2026-10-07
 
 - 06장 연구 지도 아래의 기존 전환 영역에서 인지 대표 결과를 즉시 보여주고, 별도 링크 없이 바로 이어지는 읽기 순서·연구 카드 흐름으로 보강했다. 첫 원격 후보가 정적 자산 예산을 481 bytes 초과해 별도 CTA를 줄이고 같은 정보 구조 안에서 해결했다.
