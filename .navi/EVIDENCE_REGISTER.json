@@ -2494,6 +2494,17 @@
       "E-LIVE-PUBLIC-RESEARCH-CUE-BAND-20261008"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-231",
+    "statement": "06·연구의 확장 지도 아래 대표 결과 전환 밴드는 headline과 실제 관찰 결과를 분리해 보여주며, 390px·1440px에서 연구 카드로 이어지는 읽기 흐름과 가독성을 유지한다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않는다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-RESEARCH-CUE-HIERARCHY-20261008",
+      "E-UI-CONTRACT-RESEARCH-CUE-HIERARCHY-20261008",
+      "E-PLAYWRIGHT-RESEARCH-CUE-HIERARCHY-20261008",
+      "E-STATIC-BUNDLE-RESEARCH-CUE-HIERARCHY-20261008"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -16705,6 +16716,46 @@
     "captured_at": "2026-10-07T10:15:00+09:00",
     "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-RESEARCH-CUE-BAND",
     "claim_refs": ["C-001", "C-003", "C-006", "C-230"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-RESEARCH-CUE-HIERARCHY-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 결과 전환 밴드의 두 줄 읽기 계층 보정이 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과한다.",
+    "locator": "working tree based on HEAD 017d48c before final commit; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass); pnpm run build; validate:performance initial JS 311199, initial CSS 95703, total assets 1649473 <= 1650000; research copy, data, source and product boundary validators unchanged",
+    "captured_at": "2026-10-07T10:18:47+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-RESEARCH-CUE-HIERARCHY",
+    "claim_refs": ["C-001", "C-005", "C-231"]
+  },
+  {
+    "id": "E-UI-CONTRACT-RESEARCH-CUE-HIERARCHY-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "공개 UI 계약이 연구 결과 전환 영역을 headline과 관찰 결과의 별도 읽기 줄로 유지하고 모바일·데스크톱의 읽기 폭을 보호한다.",
+    "locator": "scripts/validate-ui-contract.mjs; src/components/PublicGabaGuide.css .guide-research-map-cue; v166 research result cue hierarchy; p display:grid; max-width:74ch; mobile padding 12px 14px; pnpm run validate:ui-contract status ok",
+    "captured_at": "2026-10-07T10:18:47+09:00",
+    "reviewer_id": "NAVI-UI-CONTRACT-QA-20261008-RESEARCH-CUE-HIERARCHY",
+    "claim_refs": ["C-005", "C-231"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-RESEARCH-CUE-HIERARCHY-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Playwright Chromium fallback 렌더에서 연구 결과 전환 밴드가 모바일·데스크톱에서 두 줄로 읽히고 가로 넘침이나 실행 오류가 없다.",
+    "locator": "local Playwright Chromium fallback because Browser plugin was unavailable; URL http://127.0.0.1:5173/?view=guide#research; viewports 390x900 and 1440x900; cue headline/result rendered as separate boxes; document scrollWidth matched viewport width; page errors 0; console errors 0; screenshots stored outside repository",
+    "captured_at": "2026-10-07T10:18:47+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-20261008-RESEARCH-CUE-HIERARCHY",
+    "claim_refs": ["C-003", "C-006", "C-231"]
+  },
+  {
+    "id": "E-STATIC-BUNDLE-RESEARCH-CUE-HIERARCHY-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "GitHub Pages와 동일한 정적 base path로 생성한 연구 결과 전환 밴드 번들이 공개 라우트·정적 무결성·성능 예산을 통과한다.",
+    "locator": "VITE_BASE_PATH=/gaba_info/ Pages-style build based on HEAD 017d48c before final commit; release manifest runtimeMode static, routes 11, files 73; validate:release-manifest status ok; validate:static-bundle status ok; validate:performance initial JS 311199, initial CSS 95703, total assets 1649473 <= 1650000; public deployment and live candidate are not claimed by this evidence",
+    "captured_at": "2026-10-07T10:18:47+09:00",
+    "reviewer_id": "NAVI-PAGES-BUNDLE-QA-20261008-RESEARCH-CUE-HIERARCHY",
+    "claim_refs": ["C-001", "C-005", "C-231"]
   }
 ]
 }

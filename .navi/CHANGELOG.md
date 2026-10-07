@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 06·연구 결과 전환 문구 계층 고도화 — working tree — 2026-10-07
+
+- 연구 지도 아래 전환 밴드의 `대표 결과부터 읽기`와 실제 관찰 결과를 두 줄로 분리해 모바일·데스크톱에서 결과를 더 빠르게 읽도록 했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- UI contract·typecheck·127개 테스트·production build·정적 번들·release manifest·성능 예산을 통과했고, Playwright Chromium fallback 390px·1440px에서 가로 넘침·page error·console error가 없었다. Pages-style 총 자산은 1,649,473 bytes로 예산 안이다.
+- 공개 main 배포와 라이브 재검증은 후속 게이트이며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-HIERARCHY-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-HIERARCHY-20261008`, `E-PLAYWRIGHT-RESEARCH-CUE-HIERARCHY-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-HIERARCHY-20261008`.
+
 ## 06·연구의 확장 결과 전환 밴드·공개 배포 완료 — main 8538063 — 2026-10-07
 
 - PR #546을 병합하고 main workflow `37555128673`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `8538063bd2cfd6b15eb8cf67f2c6944e87e4891b`, bundle hash 73개, 제품 독립 경계를 확인했다.

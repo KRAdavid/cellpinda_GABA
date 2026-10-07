@@ -1,5 +1,13 @@
 # Audit Report
 
+## 06·연구 결과 전환 문구 계층·로컬 재감사 — working tree — 2026-10-07
+
+- 연구 지도 아래 전환 밴드에서 데스크톱 문구가 한 줄로 붙어 결과를 빠르게 구분하기 어려운 잔여 퍼블리싱 리스크를 확인했다. 기존 문구·도표·출처는 유지하고 `대표 결과부터 읽기`와 실제 관찰 결과를 별도 줄로 분리해 연구 카드로 이어지는 시선을 정리했다.
+- `pnpm run validate:ui-contract`, `pnpm run typecheck`, 127개 테스트, production build, 정적 bundle·release manifest·성능 예산이 통과했다. 초기 JS 311,199 bytes·CSS 95,703 bytes·총 자산 1,649,473 bytes다.
+- Browser 플러그인 부재로 Playwright Chromium fallback을 사용해 390px·1440px을 확인했다. 전환 밴드 두 줄 계층, viewport와 동일한 scrollWidth, page errors 0·console errors 0을 확인했다. 새 CRITICAL/MAJOR 결함은 없으며 공개 main 배포·라이브 URL은 후속 게이트다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-HIERARCHY-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-HIERARCHY-20261008`, `E-PLAYWRIGHT-RESEARCH-CUE-HIERARCHY-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-HIERARCHY-20261008`.
+
 ## 06·연구의 확장 결과 전환 밴드·공개 배포 후 재감사 — main 8538063 — 2026-10-07
 
 - PR #546 병합 후 main workflow `37555128673`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다. 공개 validator는 HTTP 200·candidate `8538063bd2cfd6b15eb8cf67f2c6944e87e4891b`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
