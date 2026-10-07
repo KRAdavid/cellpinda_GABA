@@ -2096,3 +2096,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 공개 390·1440px Playwright Chromium fallback에서 가로폭·오류·피부 연구 카드 선택을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `C-240`, `E-LOCAL-BUILD-RESEARCH-CHART-STICKY-20261007`, `E-PLAYWRIGHT-RESEARCH-CHART-STICKY-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-STICKY-20261007`, `E-LIVE-PUBLIC-RESEARCH-CHART-STICKY-20261007`.
+
+## 2026-10-07 — 공개 배포 다중 화면 자동 재감리 — 2de8c650
+
+- 최신 main 공개본을 NAVI 기준으로 다시 점검했다. 로컬 typecheck·UI contract·research copy·127개 테스트·production build·정적 bundle·release manifest·성능 예산이 통과했고 Pages-style 총 자산은 `1,649,465 bytes <= 1,650,000`이다.
+- 공개 320·390·768·1440px에서 HTTP 200·히어로·헤더·가로폭 정합·page/console error 0을 확인했다. 390px에서는 메뉴 열림, 글자 크기 토글, 피부 연구 카드 포커스, 두 번째 전문가 영상 선택 후 `재생 중` 상태를 실제로 재현했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
+
+증적: `C-241`, `E-LOCAL-BUILD-NAVI-PUBLIC-AUDIT-20261007`, `E-PLAYWRIGHT-NAVI-PUBLIC-AUDIT-20261007`, `E-DEPLOY-PIPELINE-NAVI-PUBLIC-AUDIT-20261007`, `E-LIVE-PUBLIC-NAVI-PUBLIC-AUDIT-20261007`, `E-NAVI-STATE-PUBLIC-AUDIT-20261007`.

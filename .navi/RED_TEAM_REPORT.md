@@ -2337,6 +2337,15 @@
 - 보호된 main 배포 후 공개 Pages의 실제 인쇄 스타일 응답·computed style·PDF 렌더를 재검증해야 한다. 기존 RT-001·RT-002·RT-003과 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
 
 증적: `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+
+## Red-team recheck — 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
+
+- 공격 관점에서 320·390·768·1440px 공개 화면의 가로 넘침, 헤더 조작부, 메뉴 열림, 큰 글자 모드, 연구 주제 포커스, 영상 자동 재생 상태를 재현했다.
+- 모든 공개 viewport에서 document scrollWidth가 viewport와 같았고 page error·console error는 0이었다. 390px에서 피부 카드 focus=`research-skin`, 전문가 영상 iframe 1개, feature state=`재생 중`을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
+- Browser plugin은 사용할 수 없어 Playwright Chromium fallback으로 검증했으며, 이 결과를 실기기·실제 사용자 독해성 승인으로 확대하지 않는다.
+
+증적: `E-PLAYWRIGHT-NAVI-PUBLIC-AUDIT-20261007`, `E-LIVE-PUBLIC-NAVI-PUBLIC-AUDIT-20261007`.
 ## Red-team recheck — 인쇄·PDF 공개 배포 — aa4ea2f — 2026-10-07
 
 - 공개 배포 후 print stylesheet가 누락되거나 screen-only chrome이 다시 나타나는 경로를 공격적으로 확인했다.

@@ -2659,3 +2659,14 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-240`, `E-LOCAL-BUILD-RESEARCH-CHART-STICKY-20261007`, `E-PLAYWRIGHT-RESEARCH-CHART-STICKY-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-STICKY-20261007`, `E-LIVE-PUBLIC-RESEARCH-CHART-STICKY-20261007`.
+
+## Current Release Recheck — 2de8c650 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 최신 main SHA와 GitHub Pages manifest가 일치하고 HTTP 200·STATIC·73개 bundle hash·제품 독립 경계를 확인했다.
+- AC-003/AC-004 읽기·반응형: PASS. 320·390·768·1440px 가로폭 정합과 390px 메뉴·큰 글자·연구 카드·전문가 영상 흐름을 확인했다.
+- AC-005 배포 게이트: PASS. typecheck·UI contract·research copy·127개 테스트·production build·정적 bundle·release manifest·성능 검사가 모두 통과했다.
+- AC-006/AC-007 경계·감사: PASS_WITH_CONDITIONS. 이번 재감리는 공개 품질 점검과 기록 동기화이며 과학적·규제적 승인으로 확대하지 않는다. teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 조건을 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-241`, `E-LOCAL-BUILD-NAVI-PUBLIC-AUDIT-20261007`, `E-PLAYWRIGHT-NAVI-PUBLIC-AUDIT-20261007`, `E-DEPLOY-PIPELINE-NAVI-PUBLIC-AUDIT-20261007`, `E-LIVE-PUBLIC-NAVI-PUBLIC-AUDIT-20261007`, `E-NAVI-STATE-PUBLIC-AUDIT-20261007`.
