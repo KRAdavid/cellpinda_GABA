@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T20:14:19+09:00",
+  "updated_at": "2026-10-07T20:39:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2184,11 +2184,27 @@
         "impact": "현재 공개 화면의 핵심 읽기 흐름과 상호작용 정합성이 자동·라이브 검증으로 다시 연결됐다.",
         "required_action": "다음 화면·카피 변경 시 동일 4폭·핵심 해시·실제 상호작용·공개 validator 재실행",
         "owner": "QA"
+      },
+      {
+        "id": "AUD-008",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "초소형 모바일 연구 결과 도표를 재감리한 결과 320px에서도 비교 조건과 GABA 그룹이 같은 화면에 유지되고, GABA 결과 강조·변화 방향·상대 비교 범례가 한 번에 읽힌다. 로컬·PR·main Pages·라이브 검증을 통과했으며 신규 CRITICAL/MAJOR 결함과 공개 연구·제품 경계 회귀는 확인되지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-NARROW-COMPARISON-20261007",
+          "E-CDP-NARROW-COMPARISON-20261007",
+          "E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261007",
+          "E-LIVE-PUBLIC-NARROW-COMPARISON-20261007",
+          "E-NAVI-STATE-NARROW-COMPARISON-20261007"
+        ],
+        "impact": "초소형 모바일에서도 연구 결과의 직접 비교 시선이 끊기지 않는다.",
+        "required_action": "다음 연구 도표·반응형 CSS 변경 시 320·390px 시각 검수와 전체 성능 예산을 재실행",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T11:14:19Z"
+    "last_run_at": "2026-10-07T11:39:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2429,11 +2445,25 @@
         "impact": "이번 재감리에서 자동 검증 가능한 공개 화면 회귀는 관찰되지 않았다.",
         "required_action": "Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
         "owner": "레드팀"
+      },
+      {
+        "id": "RT-008",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 320px 연구 결과 도표의 비교 조건·GABA 그룹·변화 방향·범례를 직접 재현했으며 가로 넘침과 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다. Chrome headless/CDP fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 완료로 확대하지 않는다.",
+        "evidence_refs": [
+          "E-CDP-NARROW-COMPARISON-20261007",
+          "E-LIVE-PUBLIC-NARROW-COMPARISON-20261007",
+          "E-NAVI-STATE-NARROW-COMPARISON-20261007"
+        ],
+        "impact": "가장 좁은 공개 화면에서도 비교 도표가 공격적인 읽기 조건에서 무너지지 않는다.",
+        "required_action": "Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "레드팀"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T11:14:19Z"
+    "last_run_at": "2026-10-07T11:39:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -6037,6 +6067,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T20:14:19+09:00"
+    },
+    {
+      "id": "H-341",
+      "event": "NAVI 자동 공개 배포 점검에서 320px 연구 결과 도표의 비교 시선이 세로로 끊기는 잔여 퍼블리싱 리스크를 확인하고 보정했다. 320px 이하에서도 비교 조건과 GABA 그룹을 같은 화면에 유지하고, GABA 결과 강조·변화 방향·상대 비교 범례를 한 번에 읽도록 좁은 화면 CSS를 재배치했다. 로컬 UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·성능 예산 1,648,820 bytes, PR #596 보호 검사, main workflow `37615469457`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status, 공개 validator merge SHA `d39a4f0ee187cad5b12ab1f2da9470f0f9552d27`·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았고 신규 CRITICAL/MAJOR 결함은 없다. Chrome headless/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-257과 다섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T20:39:00+09:00"
     }
   ]
 }

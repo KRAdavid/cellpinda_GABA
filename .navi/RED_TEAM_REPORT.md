@@ -2481,3 +2481,11 @@
 - 새 CRITICAL/MAJOR 결함은 없다. 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 실기기·실제 사용자 승인으로 확대하지 않으며, teaser `HOLD`와 외부 브라우저·실기기·독립 과학·규제 검토 조건은 유지한다.
 
 증적: `E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007`, `E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007`, `E-NAVI-STATE-PUBLISHING-RECHECK-20261007`.
+
+## Red-team recheck — d39a4f0 — 초소형 모바일 비교 도표 — 2026-10-07
+
+- 공격 관점에서 320px 연구 결과 도표를 직접 열어 비교 조건·GABA 그룹·변화 방향 막대·읽는 법 범례를 확인했다. 두 조건은 같은 시야에 남았고 document 가로폭은 viewport와 일치했으며 가로 넘침은 재현되지 않았다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았고, PR 보호 검사·main Pages 배포·라이브 validator가 모두 통과했다.
+- 이번 결과는 Chrome headless/CDP fallback과 GitHub Pages smoke 범위다. Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검증은 확인 범위를 넘어가므로 완료로 확대하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-NARROW-COMPARISON-20261007`, `E-LIVE-PUBLIC-NARROW-COMPARISON-20261007`, `E-NAVI-STATE-NARROW-COMPARISON-20261007`.
