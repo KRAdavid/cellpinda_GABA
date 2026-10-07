@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T21:05:00+09:00",
+  "updated_at": "2026-10-07T21:08:46+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6081,6 +6081,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T21:05:00+09:00"
+    },
+    {
+      "id": "H-343",
+      "event": "모바일 전문가 영상→출처 읽기 연결 리듬 보정이 PR #598 보호 검사와 main workflow 37618834702를 통과해 공개되었다. 공개 validator는 merge SHA 2de2735fec56c36839216ce580c7298f87cf09c5·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 공개 경계를 확인했다. 공개 390px Chrome CDP fallback에서 출처 읽기 제목·연구 질문·원문 출처 패널, 메뉴·연구 지도·공유 fallback, 가로폭 0건을 재확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-258에 배포·라이브·NAVI 공개 증거를 추가했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T21:08:46+09:00"
     }
   ]
 }

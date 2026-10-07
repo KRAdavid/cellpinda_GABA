@@ -1,5 +1,13 @@
 # Audit Report
 
+## 모바일 전문가 영상→출처 읽기 연결 리듬 — 공개 배포 확인 — main 2de2735 — 2026-10-07
+
+- PR #598 보호 검사와 main workflow `37618834702`의 release-verify·Pages publish·라이브 smoke·release-status가 성공했다. 공개 manifest는 candidate SHA `2de2735fec56c36839216ce580c7298f87cf09c5`, HTTP 200, 정적 bundle hash 73개와 제품 독립 공개 경계를 확인한다.
+- 공개 390px CDP에서 전문가 영상 다음에 출처 읽기 제목·연구 질문·원문 출처 패널이 자연스럽게 이어졌고 document 가로폭은 viewport와 같았다. 메뉴·연구 지도 선택·공유 fallback도 실제 상태로 변경됐다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser 플러그인 부재에 따른 Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 후속 조건으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-HANDOFF-20261007`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007`.
+
 ## 모바일 전문가 영상→출처 읽기 연결 리듬 — working tree — 2026-10-07
 
 - 전문가 영상 마지막 카드와 `11 · 출처 읽기` 사이의 모바일 여백이 정보 흐름을 끊어 보이는지 감리했다. 700px 이하 출처 읽기 장의 상단·하단 여백을 `72px·64px`로 보정해 다음 제목과 질문 패널이 이전 장의 handoff와 가깝게 이어지도록 했다.

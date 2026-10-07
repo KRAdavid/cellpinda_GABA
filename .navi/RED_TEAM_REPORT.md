@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 전문가 영상→출처 읽기 연결 리듬 — 공개 배포 공격 재점검 — main 2de2735 — 2026-10-07
+
+- 공개 배포 후 390px에서 영상 장과 출처 읽기 장 사이의 빈 공간이 다시 커졌는지, 제목이 읽기 레일과 겹치는지, 원문 출처 패널이 화면 밖으로 밀리는지 공격적으로 확인했다. 보정된 여백과 순서가 라이브에 유지됐다.
+- 공개 manifest·Pages smoke·CDP fallback·상호작용 점검에서 HTTP 200, 가로폭 초과 0건, 메뉴·연구 지도·공유 fallback의 상태 변경을 확인했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser 플러그인 부재에 따른 Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-HANDOFF-20261007`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007`.
+
 ## 모바일 전문가 영상→출처 읽기 연결 리듬 공격 재점검 — working tree — 2026-10-07
 
 - 공격 관점에서 전문가 영상 장이 끝난 뒤 출처 읽기 장의 빈 공간이 독자를 이탈시키거나, 제목이 읽기 진행 레일과 겹칠 수 있는지 확인했다. 모바일 출처 읽기 장의 상단·하단 여백을 `72px·64px`로 줄였고, 390px 직접 진입에서 제목·연구 읽기 질문·원문 출처 패널이 순서대로 보였다.
