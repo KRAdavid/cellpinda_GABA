@@ -2828,18 +2828,30 @@
       ],
       "status": "SUPPORTED"
     },
-    {
-      "id": "C-260",
-      "statement": "280px 이하 좁은 모바일에서 수면과 회복 흐름의 제목·현재 단계·전체 단계 수가 한 줄 스캔 레일로 정렬되고, 390px 큰 글씨 모드와 연구·출처·공유 장의 가로폭 및 읽기 구조가 유지되었다.",
+  {
+    "id": "C-260",
+    "statement": "280px 이하 좁은 모바일에서 수면과 회복 흐름의 제목·현재 단계·전체 단계 수가 한 줄 스캔 레일로 정렬되고, 390px 큰 글씨 모드와 연구·출처·공유 장의 가로폭 및 읽기 구조가 유지되었다.",
       "evidence_refs": [
         "E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007",
         "E-CDP-NARROW-RECOVERY-MAP-20261007",
         "E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007",
         "E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007",
         "E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007"
-      ],
-      "status": "SUPPORTED"
-    }
+    ],
+    "status": "SUPPORTED"
+  },
+  {
+    "id": "C-261",
+    "statement": "인쇄·PDF 출력에서 첫 히어로 제목이 A4 좌우 여백 안에 안정적으로 배치되고, 화면 전용 조작부는 숨겨지며 14개 장·14개 출처 링크·전체 읽기 구조가 유지된다. 공개 릴리스 정합성과 로컬 성능 게이트도 함께 통과했다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-PRINT-HERO-MARGIN-20261007",
+      "E-CDP-PRINT-HERO-MARGIN-20261007",
+      "E-DEPLOY-PIPELINE-PRINT-HERO-MARGIN-20261007",
+      "E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007",
+      "E-NAVI-STATE-PRINT-HERO-MARGIN-20261007"
+    ],
+    "status": "SUPPORTED"
+  }
   ],
   "evidence": [
     {
@@ -18446,7 +18458,7 @@
       "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-NARROW-RECOVERY-MAP",
       "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-260"]
     },
-    {
+  {
       "id": "E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007",
       "kind": "AUDIT",
       "status": "INDEPENDENTLY_CONFIRMED",
@@ -18455,6 +18467,58 @@
       "captured_at": "2026-10-07T22:10:54+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-NARROW-RECOVERY-MAP",
       "claim_refs": ["C-260"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PRINT-HERO-MARGIN-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "인쇄·PDF 첫 페이지 히어로가 A4 좌우 여백을 존중하도록 보정한 뒤 로컬 자동 게이트와 생산 번들이 통과했다.",
+      "locator": "public/print.css hero padding corrected to 22mm 13mm 13mm; pnpm run typecheck; pnpm run validate:ui-contract; pnpm test -> 127 passed; pnpm run build; pnpm run validate:performance -- dist -> total 1649327 <= 1650000; git diff --check -> pass",
+      "captured_at": "2026-10-07T22:32:07+09:00",
+      "reviewer_id": "NAVI-QA-GABA-20261007-PRINT-HERO-MARGIN",
+      "claim_refs": ["C-001", "C-005", "C-261"]
+    },
+    {
+      "id": "E-CDP-PRINT-HERO-MARGIN-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback 공개 인쇄 미디어 점검에서 히어로 제목이 종이 좌우 여백 안에 배치되고 화면 전용 조작부가 숨겨지며, 전체 문서·출처 구조가 유지되었다.",
+      "locator": "Browser plugin unavailable; Chrome CDP fallback; node C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-live-print-audit.mjs https://kradavid.github.io/gaba_info/; print media true; print stylesheet loaded with 2 rules; viewport 1440; scrollWidth/clientWidth 1425/1425; documentHeight 20844; 14 sections display block; sourceLinks 14; iframes 0; captured screenshot C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-live-print-audit-1440.png",
+      "captured_at": "2026-10-07T22:32:07+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261007-PRINT-HERO-MARGIN",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-261"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PRINT-HERO-MARGIN-20261007",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "인쇄·PDF 히어로 여백 보정 release가 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+      "locator": "PR #604 https://github.com/KRAdavid/gaba_info/pull/604; merge eb0dcf3f20ffba47b5df55feadce5ff7a8664a3f; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37628653269: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37628653269",
+      "captured_at": "2026-10-07T22:32:07+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-PRINT-HERO-MARGIN",
+      "claim_refs": ["C-001", "C-005", "C-261"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본에서 릴리스 SHA·공개 데이터 정합성이 일치하고, 인쇄 미디어의 히어로 여백·14개 장·14개 출처 링크·화면 전용 조작부 숨김이 확인되었다.",
+      "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=eb0dcf3f20ffba47b5df55feadce5ff7a8664a3f; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha eb0dcf3f20ffba47b5df55feadce5ff7a8664a3f; generatedAt 2026-10-07T13:28:50.343Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP print media true; scrollWidth/clientWidth 1425/1425; sectionCount 14; sourceLinks 14; iframes 0",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-07T22:32:07+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-PRINT-HERO-MARGIN",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-006", "C-261"]
+    },
+    {
+      "id": "E-NAVI-STATE-PRINT-HERO-MARGIN-20261007",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 공개 배포 감리 기록이 인쇄·PDF 히어로 여백 보정의 로컬 검증·배포·라이브 인쇄 미디어 확인을 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 외부 검증 잔여 조건을 함께 기록한다.",
+      "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; PR #604 merge eb0dcf3f20ffba47b5df55feadce5ff7a8664a3f; main workflow 37628653269 all release jobs success; .navi/PROJECT_STATE.json H-346; .navi/EVIDENCE_REGISTER.json C-261 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+      "captured_at": "2026-10-07T22:32:07+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PRINT-HERO-MARGIN",
+      "claim_refs": ["C-261"]
     }
   ]
 }

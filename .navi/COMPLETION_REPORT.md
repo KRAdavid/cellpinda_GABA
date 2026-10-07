@@ -2894,3 +2894,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-260`, `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007`, `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.
+
+## Completion Gate Recheck — eb0dcf3 — 인쇄·PDF 히어로 여백 — 2026-10-07
+
+- AC-001 공개 배포: PASS. PR #604 merge `eb0dcf3f20ffba47b5df55feadce5ff7a8664a3f`, main workflow `37628653269`, 공개 HTTP 200과 candidate SHA 정합성을 확인했다.
+- AC-003/AC-004 정보 경험: PASS. 공개 인쇄 미디어에서 14개 장·14개 출처 링크가 유지되고, 화면 전용 조작부는 숨겨지며, 1440px 인쇄 문서의 가로폭은 `1425/1425`로 일치한다.
+- AC-005 자동 게이트: PASS. typecheck·UI contract·127개 테스트·build·static bundle·performance·PR 보호 검사·Pages 배포·live smoke·release-status가 통과했다.
+- AC-006 제품 독립 경계: PASS. 인쇄 레이아웃 보정만 반영했고 제품 광고·구매 CTA·연구 카피·수치·출처는 변경하지 않았다.
+- AC-007 잔여 조건: PASS_WITH_CONDITIONS. Chrome CDP fallback 범위만 확인했으며 Browser plugin·Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토·teaser `HOLD`는 여전히 외부 또는 사용자 결정 조건이다.
+
+Final Status: `NOT_READY`; 사용자 승인 전 자동 완료 처리하지 않는다.
+
+증적: `C-261`, `E-LOCAL-BUILD-PRINT-HERO-MARGIN-20261007`, `E-CDP-PRINT-HERO-MARGIN-20261007`, `E-DEPLOY-PIPELINE-PRINT-HERO-MARGIN-20261007`, `E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007`, `E-NAVI-STATE-PRINT-HERO-MARGIN-20261007`.

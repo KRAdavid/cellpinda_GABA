@@ -2514,3 +2514,11 @@
 - Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 Safari/iOS/Android 실기기·실제 고령 사용자 승인으로 확대하지 않는다. teaser `HOLD`, 외부 YouTube 프레임, 독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.
+
+## Red-team recheck — 인쇄·PDF 히어로 여백 — eb0dcf3 — 2026-10-07
+
+- 공격 관점에서 공개 인쇄 미디어의 첫 페이지를 확인해 히어로 제목이 종이 가장자리에 붙는 기존 결함이 해소되었는지 검증했다. `print.css`가 실제 로드되고 제목이 A4 좌우 여백 안에 배치되었으며, 14개 장·14개 출처 링크·전체 문서 흐름은 유지되었다.
+- 화면 전용 헤더·진행 레일·영상 보드·회복 조작부·마지막 액션은 인쇄에서 숨겨졌고, `scrollWidth/clientWidth=1425/1425`, iframe 0개로 가로 넘침과 외부 프레임 의존이 인쇄 결과에 전이되지 않았다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며, Browser plugin 부재에 따른 Chrome CDP fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-PRINT-HERO-MARGIN-20261007`, `E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007`, `E-NAVI-STATE-PRINT-HERO-MARGIN-20261007`.
