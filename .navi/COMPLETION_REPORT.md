@@ -2840,3 +2840,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-256`, `E-LOCAL-BUILD-PUBLISHING-RECHECK-20261007`, `E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007`, `E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007`, `E-NAVI-STATE-PUBLISHING-RECHECK-20261007`.
+
+## Current Release Recheck — d39a4f0 — 초소형 모바일 비교 도표 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. main workflow `37615469457`와 공개 validator가 merge SHA `d39a4f0ee187cad5b12ab1f2da9470f0f9552d27`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 모바일 연구 도표: PASS. 320px에서도 비교 조건과 GABA 그룹을 나란히 보고 결과 강조·변화 방향·상대 비교 범례를 읽을 수 있으며, 390px과 함께 가로 넘침 없이 동작한다.
+- AC-005 배포 게이트: PASS. PR #596 required checks와 main release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 로컬 성능 예산은 `1,648,820 bytes`다.
+- AC-006 제품 독립 경계: PASS. 공개 연구 카피·수치·출처·제품 독립 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없지만 Chrome headless/CDP fallback, teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 계속 남는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-257`, `E-LOCAL-BUILD-NARROW-COMPARISON-20261007`, `E-CDP-NARROW-COMPARISON-20261007`, `E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261007`, `E-LIVE-PUBLIC-NARROW-COMPARISON-20261007`, `E-NAVI-STATE-NARROW-COMPARISON-20261007`.

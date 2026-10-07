@@ -2206,3 +2206,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없으며, NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재에 따른 Chrome headless/CDP fallback, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건을 유지한다.
 
 증적: `C-256`, `E-LOCAL-BUILD-PUBLISHING-RECHECK-20261007`, `E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007`, `E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007`, `E-NAVI-STATE-PUBLISHING-RECHECK-20261007`.
+
+## 2026-10-07 — 320px 연구 결과 비교 도표 보정 — d39a4f0
+
+- 320px 이하에서도 비교 조건과 GABA 그룹을 같은 시야에 유지하도록 결과 도표를 재배치했다. GABA 결과 강조·변화 방향 막대·상대 비교 범례의 정보 순서는 유지했다.
+- UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·성능 예산을 통과했고 로컬 총 자산은 `1,648,820 bytes`다. PR #596과 main workflow `37615469457`의 공개 배포·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 merge SHA `d39a4f0ee187cad5b12ab1f2da9470f0f9552d27`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Chrome headless/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증 조건을 외부 검증으로 남긴다.
+
+증적: `C-257`, `E-LOCAL-BUILD-NARROW-COMPARISON-20261007`, `E-CDP-NARROW-COMPARISON-20261007`, `E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261007`, `E-LIVE-PUBLIC-NARROW-COMPARISON-20261007`, `E-NAVI-STATE-NARROW-COMPARISON-20261007`.
