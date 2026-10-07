@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 최신 main 공개본 통합 공격 재점검 — main 6b402228 — 2026-10-08
+
+- 공격 관점에서 390px의 14개 장을 직접 열어 해시 진입이 본문을 숨기거나 제목을 sticky rail 아래에 가리는지, 긴 연구·발효·영상·공유 콘텐츠가 document 폭을 넓히는지 확인했다. 모든 장에서 `pageWidth/scrollWidth=390/390`, 제목 위치 정상, `errors=[]`였다.
+- 연구 도표의 비교 조건·GABA 조건·결과 방향·출처 흐름, 전문가 영상 포스터→선택→재생 게시판, 최종 공유·인쇄 handoff가 실제 DOM 흐름에 남아 있었다. 이름 없는 조작부·새 CRITICAL/MAJOR 결함은 재현되지 않았다.
+- 최신 live validator와 로컬 자동 게이트가 main 공개본과 일치함을 확인했다. 기능 코드·연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않는다. teaser `HOLD`와 외부 검증 조건은 OPEN이며 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-279`, `E-CDP-PUBLIC-14-CHAPTER-REAUDIT-20261008`, `E-LIVE-PUBLIC-REAUDIT-20261008`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261008`.
+
 ## 모바일 읽기 크기 버튼 가독성 공격 재점검 — main e963b2b1 — 2026-10-08
 
 - 공격 관점에서 280·320·351·390·430·768px 헤더의 읽기 크기 표시가 기호와 텍스트를 분리해 오독을 유발하는지 확인했다. `가 크게`와 `가 기본`이 두 상태에서 실제 표시됐고, 44px 터치 영역·ARIA action label·가로폭 정합성이 유지됐다.

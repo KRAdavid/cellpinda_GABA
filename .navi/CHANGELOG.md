@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 최신 main 공개본 통합 재감리 및 NAVI 자동 업데이트 — 6b402228 — 2026-10-08
+
+- 최신 main 공개본을 390px에서 14개 장(`#top`부터 `#final`)으로 직접 열어 제목 위치, 장 간 흐름, 가로폭, 런타임 오류를 재감리했다. 모든 장에서 `pageWidth/scrollWidth=390/390`, `errors=[]`를 확인했고, 모바일 헤더의 메뉴·읽기 크기·공유 조작과 연구 지도·전문가 영상·마지막 공유 화면이 한 흐름으로 유지됐다.
+- 로컬 UI contract·typecheck·127개 테스트·governance·ops-docs·live validator·Vite production build가 성공했다. 최종 정적 자산은 `1,649,396 bytes / 1,650,000 bytes`, initial JS `311,405 bytes`, initial CSS `95,703 bytes`다.
+- 공개 validator는 candidate SHA `6b402228d4ebb7d1d6555958fa46c2c04f934168`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 이번 회차에 재현 가능한 CRITICAL/MAJOR 결함은 없어 기능 코드·연구 카피·수치·출처를 변경하지 않고 NAVI 증적만 갱신했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 외부 검증 조건이다.
+
+증적: `C-279`, `E-LOCAL-BUILD-PUBLIC-REAUDIT-20261008`, `E-CDP-PUBLIC-14-CHAPTER-REAUDIT-20261008`, `E-LIVE-PUBLIC-REAUDIT-20261008`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261008`.
+
 ## 모바일 읽기 크기 버튼 가독성 보정 및 공개 배포 — e963b2b1 — 2026-10-08
 
 - 모바일 헤더의 `가+ 크게`·`가− 기본` 표시가 기호처럼 읽힐 수 있는 잔여 가독성 리스크를 확인하고, 표시 마크를 `가`로 단순화해 `가 크게`·`가 기본`으로 읽히도록 보정했다. ARIA 라벨·44px 터치 영역·대형 글자 상태·제품 독립 공개 경계는 유지했다.

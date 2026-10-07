@@ -6471,6 +6471,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T06:14:03+09:00"
+    },
+    {
+      "id": "H-364",
+      "event": "NAVI 자동 공개 배포 점검에서 최신 main 공개본의 390px 14개 장 직접 진입을 통합 재감리했다. 모든 장에서 제목 위치·본문 시작·가로폭을 확인했고 pageWidth/scrollWidth는 390/390, runtime errors=[]였다. 연구 지도·연구 결과 도표·출처 읽기·전문가 영상·최종 공유 handoff가 한 흐름으로 유지되며 신규 CRITICAL/MAJOR 결함은 없었다. 로컬 UI contract·typecheck·127개 테스트·governance·ops-docs·live validator·production build가 성공했고 정적 자산은 1,649,396바이트였다. 공개 validator는 candidate SHA 6b402228d4ebb7d1d6555958fa46c2c04f934168·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 기능 코드·연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-279와 다섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T06:23:11+09:00"
     }
   ]
 }

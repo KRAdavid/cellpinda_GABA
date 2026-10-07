@@ -1,5 +1,15 @@
 # Audit Report
 
+## 최신 main 공개본 통합 재감리 및 NAVI 자동 업데이트 — main 6b402228 — 2026-10-08
+
+- 390px 공개 URL에서 14개 장을 직접 진입해 첫 제목 위치·본문 시작·장 높이·가로폭·런타임 오류를 확인했다. `#top`·`#opening-bridge`·`#history`·`#basics`·`#academic`·`#everyday`·`#sleep`·`#research`·`#applications`·`#fermented-safety`·`#growth`·`#expert-videos`·`#reading-note`·`#final` 모두 `pageWidth/scrollWidth=390/390`, `errors=[]`였다.
+- 연구 지도는 5개 영역과 사람·동물·세포 범위 라벨을 유지했고, 연구 결과 도표·출처 읽기·전문가 영상·최종 공유 handoff가 자연스럽게 이어졌다. 공개 화면에서는 제품 구매·상담 CTA가 과학 안내 흐름을 대체하지 않았다.
+- 자동 게이트는 UI contract·typecheck·127개 테스트·governance·ops-docs·live validator·production build가 모두 PASS였다. 정적 자산은 `1,649,396 bytes / 1,650,000 bytes`로 예산 안이다.
+- 공개 validator는 candidate SHA `6b402228d4ebb7d1d6555958fa46c2c04f934168`, page 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다. Browser plugin 부재에 따른 Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으며, 해당 조건은 완료 게이트에 남겨 둔다.
+
+증적: `C-279`, `E-LOCAL-BUILD-PUBLIC-REAUDIT-20261008`, `E-CDP-PUBLIC-14-CHAPTER-REAUDIT-20261008`, `E-LIVE-PUBLIC-REAUDIT-20261008`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261008`.
+
 ## 모바일 읽기 크기 버튼 가독성 보정 및 공개 배포 — main e963b2b1 — 2026-10-08
 
 - 280·320·351·390·430·768px 공개 헤더를 재감리한 결과 `가+ 크게`·`가− 기본`의 기호가 동작을 방해할 수 있는 잔여 가독성 리스크를 확인했다. 표시 마크를 `가`로 단순화해 기본 상태는 `가 크게`, 대형 글자 상태는 `가 기본`으로 읽히도록 보완했으며 ARIA action label·44px touch target·상태 전환은 유지했다.
