@@ -1897,12 +1897,14 @@
     z-index:3;
     top:14px;
     right:6px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:var(--guide-teal-dark);
+    display:grid;
+    place-items:center;
+    width:24px;
+    height:24px;
+    border:1px solid #c4e2e4;
+    border-radius:50%;
+    background:#fff;
     pointer-events:none;
-    transition:opacity .18s ease,visibility .18s ease;
   }
   .gaba-guide .guide-video-filters-wrap.is-at-end:after,
   .gaba-guide .guide-video-filters-cue.is-hidden{
