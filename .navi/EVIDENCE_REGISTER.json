@@ -3101,6 +3101,17 @@
         "E-NAVI-STATE-NAVI-FINAL-SYNC-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-283",
+      "statement": "최신 공개본은 대형 글자·반응형 화면과 핵심 상호작용을 실제 공개 URL에서 재현하며, 연구 카드·전문가 영상·수면 회복 카드가 한 흐름으로 이어진다.",
+      "evidence_refs": [
+        "E-CDP-LIVE-MULTICHAPTER-LARGE-TEXT-20261008",
+        "E-CDP-LIVE-INTERACTION-REAUDIT-20261008",
+        "E-LIVE-PUBLIC-INTERACTION-REAUDIT-20261008",
+        "E-NAVI-STATE-INTERACTION-REAUDIT-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -20050,6 +20061,50 @@
       "captured_at": "2026-10-08T07:05:41+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-FINAL-SYNC",
       "claim_refs": ["C-282"]
+    },
+    {
+      "id": "E-CDP-LIVE-MULTICHAPTER-LARGE-TEXT-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 URL의 Chrome CDP fallback에서 280·390px 대형 글자 주요 장과 768·1440px 연구 지도를 연속 확인했으며 가로 넘침·이름 없는 버튼·runtime error가 없었다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; localStorage gaba-guide-reading-size-v1=large; chapters top, applications, fermented-safety, growth, expert-videos, final at 280/390px and research at 768/1440px; pageWidth/scrollWidth matched each viewport; namedButtons=0; errors=[]; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-large-live-280-top.png, gaba-large-live-280-applications.png, gaba-large-live-280-fermented-safety.png, gaba-large-live-280-growth.png, gaba-large-live-280-expert-videos.png, gaba-large-live-280-final.png, gaba-large-live-390-applications.png, gaba-large-live-390-fermented-safety.png, gaba-large-live-390-growth.png, gaba-large-live-390-expert-videos.png, gaba-large-live-390-final.png, gaba-large-live-768-research.png, gaba-large-live-1440-research.png",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T07:21:52+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-MULTICHAPTER-LARGE-TEXT",
+      "claim_refs": ["C-002", "C-003", "C-004", "C-283"]
+    },
+    {
+      "id": "E-CDP-LIVE-INTERACTION-REAUDIT-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 URL에서 메뉴·큰 글자·연구 지도·전문가 영상·수면 회복 카드의 상태 변경을 재현했다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; 390px Chrome CDP fallback; menu opened/closed; largeText toggled and restored; skin topic selected with aria-pressed=true, active detail=true, focus=research-skin, hash=#research-skin; expert video selected with title GABA의 기본 역할 and iframe autoplay=1, mute=1, playsinline=1; recovery card changed after 3400ms and pause control changed to aria-pressed=true / 다시 재생; runtime errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T07:21:52+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-INTERACTION-REAUDIT",
+      "claim_refs": ["C-003", "C-004", "C-283"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-INTERACTION-REAUDIT-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "상호작용 재감리 대상 공개본은 최신 main candidate와 일치하고 정적 공개 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha c0ff46f910c4009cbcdd5d3870238541b6dc89b4; generatedAt 2026-10-07T22:09:27.045Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T07:21:52+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-INTERACTION-REAUDIT",
+      "claim_refs": ["C-001", "C-002", "C-006", "C-283"]
+    },
+    {
+      "id": "E-NAVI-STATE-INTERACTION-REAUDIT-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 NAVI 기록은 공개 상호작용·대형 글자 재감리와 공개 validator를 연결하고 USER_DECISION/NOT_READY 및 외부 검증 조건을 유지한다.",
+      "locator": "main c0ff46f910c4009cbcdd5d3870238541b6dc89b4; pnpm run validate:live-public -> page 200, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; Chrome CDP interaction re-audit passed; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T07:21:52+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-INTERACTION-REAUDIT",
+      "claim_refs": ["C-283"]
     }
   ]
 }

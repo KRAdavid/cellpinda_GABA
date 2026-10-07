@@ -2699,3 +2699,11 @@
 - Chrome Playwright fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 독해성 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
 
 증적: `C-268`, `E-LIVE-PUBLIC-ARIA-FINAL-20261008`, `E-NAVI-STATE-ARIA-FINAL-20261008`.
+
+## Red-team final recheck — 상호작용·대형 글자 공개 흐름 — c0ff46f — 2026-10-08
+
+- 공격 관점에서 280·390px 대형 글자 모드의 top·활용·발효·성장·전문가·최종 장과 768·1440px 연구 지도를 확인했다. document 가로폭은 각 viewport와 같았고, 연구 지도·카드 이미지·성장 경로·전문가 영상 게시판·최종 공유 화면에 잘림·겹침·runtime error가 없었다.
+- 실제 상태 변경으로 메뉴 열림·닫힘, 글자 크기 전환, 피부 연구 카드 선택 후 `#research-skin` 포커스, 전문가 영상 `autoplay=1` iframe, 회복 카드 3초 자동 전환과 일시정지를 재현했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 이번 회차에는 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다. Chrome CDP fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 독해성 검증을 대신하지 않으며, teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
+
+증적: `C-283`, `E-CDP-LIVE-MULTICHAPTER-LARGE-TEXT-20261008`, `E-CDP-LIVE-INTERACTION-REAUDIT-20261008`, `E-LIVE-PUBLIC-INTERACTION-REAUDIT-20261008`, `E-NAVI-STATE-INTERACTION-REAUDIT-20261008`.

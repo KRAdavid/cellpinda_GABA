@@ -3346,6 +3346,7 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-244`, `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007`.
+
 ## 인쇄·PDF 공개 배포 재검증 — aa4ea2f — 2026-10-07
 
 - AC-001 공개 URL·Pages 정합성: PASS. main workflow `37547332906`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 validator가 candidate `aa4ea2f147ac4997844221ed3c2c64ba86bdcc20`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.
@@ -3354,3 +3355,16 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+
+## 공개 배포 상호작용·대형 글자 재감리 — c0ff46f — 2026-10-08
+
+- AC-001 공개 URL·라이브 정합성: PASS. 공개 validator가 candidate `c0ff46f910c4009cbcdd5d3870238541b6dc89b4`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-002/AC-003/AC-004 소비자 흐름·반응형: PASS. 공개 Chrome CDP fallback 대형 글자 모드에서 280·390px의 top·활용·발효·성장·전문가·최종 장, 768·1440px 연구 지도를 재감리했다. 각 대표 화면의 document width는 viewport와 일치했고 연구 지도 5개 항목, 카드 이미지, 연구 결과 흐름, 전문가 영상 게시판, 최종 공유 화면에서 잘림·겹침·runtime error가 재현되지 않았다.
+- AC-004 상호작용: PASS. 390px에서 메뉴 열림·닫힘, 큰 글자 전환, 피부 연구 주제 선택 후 `#research-skin` 카드 활성화·포커스·스크롤, 전문가 영상 선택 후 `autoplay=1` iframe, 수면·회복 카드 3초 전환과 일시정지를 실제 상태 변경으로 재현했다.
+- AC-005 자동 게이트: PASS_WITH_EXISTING_RELEASE. 이번 회차는 기능 코드를 변경하지 않았고, 최신 main의 기존 보호 검사·정적 번들·성능 증적을 유지한다. `validate:ui-contract`, `validate:research-copy`, `validate:static-bundle`, `validate:live-public`, `audit:goal`은 현재 공개본 기준으로 재실행했다.
+- AC-006 제품 독립 경계: PASS. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없지만 Browser plugin 부재에 따른 Chrome CDP fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-283`, `E-CDP-LIVE-MULTICHAPTER-LARGE-TEXT-20261008`, `E-CDP-LIVE-INTERACTION-REAUDIT-20261008`, `E-LIVE-PUBLIC-INTERACTION-REAUDIT-20261008`, `E-NAVI-STATE-INTERACTION-REAUDIT-20261008`.

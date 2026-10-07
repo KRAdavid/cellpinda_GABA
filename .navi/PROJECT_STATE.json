@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T07:05:41+09:00",
+  "updated_at": "2026-10-08T07:21:52+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2331,7 +2331,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T22:05:41Z"
+    "last_run_at": "2026-10-07T22:21:52Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -6506,6 +6506,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T07:05:41+09:00"
+    },
+    {
+      "id": "H-369",
+      "event": "NAVI 자동 공개 배포 점검에서 최신 공개본의 대형 글자·반응형 화면과 핵심 상호작용을 재감리했다. 280·390px top·활용·발효·성장·전문가·최종 장과 768·1440px 연구 지도를 확인했고 각 화면의 document 가로폭이 viewport와 일치하며 잘림·겹침·runtime error가 없었다. 390px에서 메뉴 열림·닫힘, 큰 글자 전환, 피부 연구 주제 선택 후 #research-skin 카드 활성화·포커스·스크롤, 전문가 영상 autoplay=1 iframe, 수면·회복 카드 3초 전환과 일시정지를 재현했다. 공개 validator는 candidate SHA c0ff46f910c4009cbcdd5d3870238541b6dc89b4·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 이번 회차에는 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았고 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-283과 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T07:21:52+09:00"
     }
   ]
 }
