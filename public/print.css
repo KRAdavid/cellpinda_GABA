@@ -4,7 +4,7 @@
   /* Screen-only deferred rendering must not leave blank reserved bands in a paper/PDF handout. */
   .gaba-guide :is(.guide-applications,.guide-fermented-safety,.guide-growth-story,.guide-expert-videos,.guide-reading-note,.guide-final){content-visibility:visible!important;contain-intrinsic-size:none!important}
   .gaba-guide :is(.guide-header,.guide-reading-progress,.guide-skip,.guide-share-toast,.guide-menu-backdrop,.guide-menu-toggle,.guide-reading-size-toggle,.guide-header-share,.guide-hero-scroll,.guide-neuron-visual,.guide-recovery-controls,.guide-video-board,.guide-video-feature,.guide-expert-thread,.guide-research-handoff,.guide-final-actions,.guide-share-intro-actions,.guide-research-copy){display:none!important}
-  .gaba-guide .guide-hero{display:block;min-height:0;padding:22mm 0 13mm;background:#fff}
+  .gaba-guide .guide-hero{display:block;min-height:0;padding:22mm 13mm 13mm;background:#fff}
   .gaba-guide .guide-hero-copy{max-width:150mm;padding:0}
   .gaba-guide .guide-hero h1{font-size:35pt;line-height:1.1}
   .gaba-guide :is(.guide-hero-body,.guide-editorial-note){max-width:125mm}
