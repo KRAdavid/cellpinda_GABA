@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 연구 범위 범례 명료화 및 공개 배포 — 91789830 — 2026-10-08
+
+- 연구 지도 범례를 `사람 대상 연구`와 `동물·세포 연구`로 명확히 나누고, 카드 상단에서 대상·방법·측정 항목을 먼저 확인하도록 안내했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·Vite build·성능 예산, PR #626 보호검사, main workflow `37670864607`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·candidate SHA `9178983059cdce763d3ec47925f0cb7c201080e5`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 390px CDP에서 문구·ARIA 라벨·pageWidth/scrollWidth 390/390·errors=[]를 확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-273`, `E-LOCAL-BUILD-RESEARCH-SCOPE-LEGEND-20261008`, `E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008`, `E-CDP-RESEARCH-SCOPE-LEGEND-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008`, `E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008`.
+
 ## 발효 활용 연구 출처 DOI 정규화 및 공개 배포 — 2857bf9 — 2026-10-08
 
 - 발효 활용 사례의 지역형 RSC 경로를 표준 DOI로 교체해 원문 출처의 재현성을 높였다. 연구 카피·수치·라벨·제품 독립 경계는 변경하지 않았다.
