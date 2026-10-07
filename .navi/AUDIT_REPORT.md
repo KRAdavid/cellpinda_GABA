@@ -2888,6 +2888,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
 
+## 공개 푸터 아이콘·번들 여유 재감리 — 60e90d4 — 2026-10-07
+
+- AC-001 공개 URL·Pages 정합성: PASS. PR #572와 main workflow `37580070352`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 merge SHA `60e90d451bdfad3ea99bd7f0d2714230f98ef499`와 동일한 candidate를 확인했다.
+- AC-003/AC-004 소비자 흐름·반응형: PASS. 푸터 `맨 위로`는 기존 번들 아이콘을 재사용해 사이트 아이콘 언어와 맞췄고, 320·390·1440px에서 문서 폭·아이콘 회전·맨 위로 포커스 복귀·오류 상태를 재현했다.
+- AC-005 자동 게이트: PASS. typecheck·127개 테스트·UI contract·Pages-style build·release manifest·정적 bundle·성능 검사가 통과했다. 총 자산은 `1,647,536 bytes`, 초기 JS `311,475 bytes`, 초기 CSS `95,703 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 푸터 시각 일관성과 미사용 레거시 스타일 정리만 포함하며 연구 카피·수치·출처·제품 독립 경계를 변경하지 않았다. 공개 validator의 `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`도 유지된다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재에 따른 Playwright Chromium fallback, 과거 이력의 local-path 경고, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 외부 검증으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-245`, `E-LOCAL-BUILD-FOOTER-ICON-20261007`, `E-PLAYWRIGHT-FOOTER-ICON-20261007`, `E-DEPLOY-PIPELINE-FOOTER-ICON-20261007`, `E-LIVE-PUBLIC-FOOTER-ICON-20261007`, `E-NAVI-STATE-FOOTER-ICON-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

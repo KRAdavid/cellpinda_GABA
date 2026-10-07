@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T14:43:00+09:00",
+  "updated_at": "2026-10-07T15:19:30+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5865,6 +5865,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T14:43:00+09:00"
+    },
+    {
+      "id": "H-329",
+      "event": "공개 푸터의 `맨 위로` 텍스트 화살표가 사이트의 아이콘 언어와 달라 보이는 잔여 퍼블리싱 리스크를 NAVI 자동 점검에서 확인하고, 이미 번들된 `ArrowDown` 아이콘을 180도 회전해 재사용하도록 보정했다. 사용하지 않는 레거시 스타일을 정리하고 모바일 UI contract 규칙은 유지했으며, 로컬 Pages-style 빌드 성능 예산(총 자산 1,647,536 bytes), Playwright Chromium fallback 320·390·1440px, PR #572, main workflow 37580070352, 공개 validator candidate 60e90d451bdfad3ea99bd7f0d2714230f98ef499를 확인했다. 새 CRITICAL/MAJOR 결함은 없고 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-245와 다섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T15:19:30+09:00"
     }
   ]
 }

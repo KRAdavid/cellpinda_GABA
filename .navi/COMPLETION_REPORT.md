@@ -2698,3 +2698,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - 최종 상태는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다. 공개 사이트의 자동·정적 배포 품질을 확인했지만 외부 검증과 사용자 최종 판단을 완료로 위장하지 않는다.
 
 증적: `C-244`, `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007`.
+
+## Current Release Recheck — 60e90d4 — 푸터 아이콘·공개 품질 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. GitHub Pages 공개 URL은 [kradavid.github.io/gaba_info](https://kradavid.github.io/gaba_info/)이며 공개 manifest candidate가 main merge SHA `60e90d451bdfad3ea99bd7f0d2714230f98ef499`와 일치한다.
+- AC-003/AC-004 읽기·반응형: PASS. 푸터 아이콘 언어를 통일했고 320·390·1440px에서 가로폭·아이콘 회전·맨 위로 이동·포커스 복귀·오류 상태를 확인했다.
+- AC-005 배포 게이트: PASS. PR #572, main workflow `37580070352`, typecheck·127개 테스트·UI contract·Pages-style build·release manifest·정적 bundle·성능 검사가 통과했다. 총 자산은 `1,647,536 bytes`다.
+- AC-006 제품 독립 경계: PASS. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았고, 정적 공개 데이터 12 claims·6 master records·6 share pages·`teaser HOLD`를 유지했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없지만 Browser plugin 부재에 따른 Chromium fallback, teaser `HOLD`, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-245`, `E-LOCAL-BUILD-FOOTER-ICON-20261007`, `E-PLAYWRIGHT-FOOTER-ICON-20261007`, `E-DEPLOY-PIPELINE-FOOTER-ICON-20261007`, `E-LIVE-PUBLIC-FOOTER-ICON-20261007`, `E-NAVI-STATE-FOOTER-ICON-20261007`.

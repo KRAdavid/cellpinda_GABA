@@ -2650,6 +2650,18 @@
       "E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-245",
+    "statement": "공개 푸터의 `맨 위로` 동작이 사이트의 아이콘 언어와 맞도록 기존 번들 아이콘을 재사용해 보정되었고, 사용하지 않는 레거시 스타일을 정리한 뒤 Pages 총 자산 예산 안에서 유지된다. 320·390·1440px 반응형·포커스 복귀·오류 상태와 main 공개 manifest 정합성을 확인했으며 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-FOOTER-ICON-20261007",
+      "E-PLAYWRIGHT-FOOTER-ICON-20261007",
+      "E-DEPLOY-PIPELINE-FOOTER-ICON-20261007",
+      "E-LIVE-PUBLIC-FOOTER-ICON-20261007",
+      "E-NAVI-STATE-FOOTER-ICON-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17465,6 +17477,58 @@
     "captured_at": "2026-10-07T14:43:00+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-EDGE-STATE-AUDIT-FINAL",
     "claim_refs": ["C-244"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-FOOTER-ICON-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "푸터 아이콘 보정과 레거시 스타일 정리 후 로컬 공개 빌드·정적 번들·성능·NAVI 자동 검사가 통과했다.",
+    "locator": "main base 60e90d451bdfad3ea99bd7f0d2714230f98ef499; pnpm run typecheck; pnpm test 127/127 pass; pnpm run validate:ui-contract; Pages-style Vite build; validate:release-manifest; check-public-artifacts; validate:static-bundle; validate:performance; initial JS 311475 <= 380000; initial CSS 95703 <= 110000; total assets 1647536 <= 1650000; largest asset 311475 <= 380000; git diff --check",
+    "captured_at": "2026-10-07T15:19:30+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-FOOTER-ICON",
+    "claim_refs": ["C-005", "C-245"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-FOOTER-ICON-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 Pages-style 산출물을 Playwright Chromium fallback으로 320·390·1440px에서 확인했으며 푸터 아이콘 회전·가로폭·맨 위로 포커스 복귀가 정상이다.",
+    "locator": "Browser plugin unavailable; Playwright Chromium fallback against local Pages-style build at /gaba_info/; HTTP 200; document scrollWidth equals viewport at 320/390/1440; `.guide-footer-back-icon` computed transform matrix(-1, 0, 0, -1, 0, 0); clicking footer `맨 위로` returns #top and focus `guide-hero-heading`; page/console errors 0",
+    "captured_at": "2026-10-07T15:19:30+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-FOOTER-ICON",
+    "claim_refs": ["C-003", "C-245"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-FOOTER-ICON-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "푸터 아이콘 보정 release가 PR 보호 검사 후 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #572 https://github.com/KRAdavid/gaba_info/pull/572; squash merge 60e90d451bdfad3ea99bd7f0d2714230f98ef499; PR checks release-verify run 37579938904 success and site-quality-verify run 37579938884 success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37580070352: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY; prior-history local-path annotation is a warning only",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37580070352",
+    "captured_at": "2026-10-07T15:19:30+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-FOOTER-ICON",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-245"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-FOOTER-ICON-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "푸터 아이콘 보정 release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=60e90d451bdfad3ea99bd7f0d2714230f98ef499; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 60e90d451bdfad3ea99bd7f0d2714230f98ef499; generatedAt 2026-10-07T06:11:29.222Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T15:19:30+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-FOOTER-ICON",
+    "claim_refs": ["C-001", "C-002", "C-245"]
+  },
+  {
+    "id": "E-NAVI-STATE-FOOTER-ICON-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 푸터 아이콘·번들 예산 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-329; .navi/EVIDENCE_REGISTER.json C-245 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T15:19:30+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-FOOTER-ICON",
+    "claim_refs": ["C-245"]
   }
 ]
 }

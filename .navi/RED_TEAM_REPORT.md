@@ -2379,3 +2379,12 @@
 - 과거 이력의 local-path 경고는 저장소 history scanner의 경고로 기록했으며 현재 배포 실패로 해석하지 않는다. 외부 브라우저·실기기·실사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
 
 증적: `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`.
+
+## Red-team recheck — 푸터 아이콘·공개 번들 예산 — 60e90d4 — 2026-10-07
+
+- 공격 관점에서 320·390·1440px의 푸터 `맨 위로` 링크가 텍스트 화살표와 다른 시각 언어로 보이는 경로, 가로 넘침, 클릭 후 포커스 복귀, 배포 번들 예산 초과 경로를 재현했다.
+- 기존 `ArrowDown` 아이콘을 180도 회전해 재사용하고 사용하지 않는 레거시 스타일을 정리했다. 모바일 UI contract를 유지한 상태에서 총 자산 `1,647,536 bytes`로 Pages 예산을 통과했다.
+- Playwright Chromium fallback 결과 HTTP 200, document scrollWidth=viewport, 아이콘 transform `matrix(-1, 0, 0, -1, 0, 0)`, `#top`, `guide-hero-heading`, page/console error 0을 320·390·1440px에서 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. teaser `HOLD`, 과거 이력 local-path 경고, Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
+
+증적: `E-LOCAL-BUILD-FOOTER-ICON-20261007`, `E-PLAYWRIGHT-FOOTER-ICON-20261007`, `E-LIVE-PUBLIC-FOOTER-ICON-20261007`.
