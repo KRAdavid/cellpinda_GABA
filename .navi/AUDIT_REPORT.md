@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 지도 범위 라벨·공개 배포 재감리 — main 49f289cf — 2026-10-08
+
+- 연구 지도 각 주제 아래에 `사람 대상 연구` 또는 `동물·세포 연구`를 직접 표시해, 카드 선택 전에도 연구 범위를 비교할 수 있도록 보완했다. 기존 UI contract 분류를 재사용해 모바일 표시를 단순하게 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산이 통과했다. 로컬 총 자산은 1,649,596바이트, GitHub Pages base-path bundle은 1,649,680바이트였다. PR #629의 release-verify·site-quality-verify와 main workflow `37675112086`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- 공개 validator는 current candidate SHA `49f289cf98a6d51a8fadae7a0e7867a46eeae52c`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다. 공개 390px Chrome CDP에서 다섯 주제의 범위 라벨, 첫 주제 선택, 상세 카드 포커스, pageWidth/scrollWidth 390/390, errors=[]를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-274`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-UI-CONTRACT-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-CDP-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-LABELS-20261008`.
+
 ## 연구 범위 범례 명료화 및 NAVI 동기화 — 공개 배포 확인 — main b0687e81 — 2026-10-08
 
 - 연구 지도 범례의 주제 중심 표현을 사람 대상 연구와 동물·세포 연구의 범위 구분으로 보완하고, 카드 상단에서 대상·방법·측정 항목을 먼저 확인하도록 했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.

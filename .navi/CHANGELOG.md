@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 연구 지도 범위 라벨·공개 배포 — 49f289cf — 2026-10-08
+
+- 연구 지도 다섯 주제 아래에 `사람 대상 연구` 또는 `동물·세포 연구`를 표시해 범위를 선택 전부터 읽도록 고도화했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·Vite build·성능 예산과 PR #629 보호검사가 성공했다. main workflow `37675112086`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status도 성공했다.
+- 공개 validator는 HTTP 200·current candidate SHA `49f289cf98a6d51a8fadae7a0e7867a46eeae52c`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 390px CDP에서 범위 라벨·연구 지도 선택·상세 카드 포커스·가로폭 정합성을 재현했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-274`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-UI-CONTRACT-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-CDP-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-LABELS-20261008`.
+
 ## 연구 범위 범례 명료화 및 NAVI 기록 동기화 — b0687e81 — 2026-10-08
 
 - 연구 지도 범례를 `사람 대상 연구`와 `동물·세포 연구`로 명확히 나누고, 카드 상단에서 대상·방법·측정 항목을 먼저 확인하도록 안내했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.

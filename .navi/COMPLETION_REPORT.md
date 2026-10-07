@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — research map scope labels — main 49f289cf — 2026-10-08
+
+- AC-001/AC-002/AC-003/AC-004/AC-005: `PASS`. 로컬 UI contract·typecheck·127개 테스트·정적 bundle·성능 예산, PR #629 보호검사, main Pages 배포·라이브 smoke·release-status와 공개 validator가 통과했다. 연구 지도 각 주제에 범위 라벨이 표시되고 390px에서 선택 후 상세 카드 포커스가 이동한다.
+- AC-006: `PASS`. 제품 독립 과학 정보 경계·연구 카피·수치·출처 라벨은 유지됐고 이번 변경은 연구 범위의 즉시 가독성만 보완했다.
+- AC-007: `PASS_WITH_CONDITIONS`. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-274`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-UI-CONTRACT-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-CDP-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-LABELS-20261008`.
+
 ## Current Public Deployment Recheck — research-scope legend and NAVI sync — main b0687e81 — 2026-10-08
 
 - AC-001/AC-002/AC-003/AC-004/AC-005: `PASS` 또는 기존 조건부 통과 상태를 유지한다. 연구 지도 범례가 사람 대상 연구와 동물·세포 연구를 구분하고, current candidate SHA `b0687e81e4558fb33294106992bc5dcf12c51ccb` 공개 390px에서 텍스트·ARIA·가로폭·runtime 오류가 정합성을 유지한다.
