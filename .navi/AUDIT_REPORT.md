@@ -1,5 +1,14 @@
 # Audit Report
 
+## 전문가 영상 공개 장 반응형·직접 진입 재감리 — main a6cead44 — 2026-10-08
+
+- 전문가 영상 장을 280·320·390·1440px에서 다시 감리했다. 재생 전 포스터, 선택 게시판, 주제 필터, 9개 영상 카드, 선택 영상 정보가 모바일과 데스크톱에서 한 흐름으로 유지됐다.
+- 공개 390px 하단에서 마지막 영상 카드 다음에 `연구를 읽는 기준`과 `원문 출처` handoff가 바로 이어졌고, 280·320·390px는 pageWidth/scrollWidth가 각각 280/280·320/320·390/390, 1440px는 1425/1425로 확인됐다. 네 폭 모두 runtime error는 없었다.
+- 로컬 typecheck·127개 테스트·live validator·governance·ops docs 검사가 통과했다. 라이브 validator는 candidate SHA `a6cead44c38964204c480f9e626b64bdeb6cc9c5`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 기능 코드·연구 카피·수치·출처는 변경하지 않고 NAVI 증적만 최신 공개본에 동기화했다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-275`, `E-LOCAL-BUILD-EXPERT-VIDEO-PUBLISHING-20261008`, `E-CDP-EXPERT-VIDEO-PUBLISHING-20261008`, `E-LIVE-PUBLIC-EXPERT-VIDEO-PUBLISHING-20261008`, `E-NAVI-STATE-EXPERT-VIDEO-PUBLISHING-20261008`.
+
 ## 연구 지도 범위 라벨·공개 배포 재감리 — main 49f289cf — 2026-10-08
 
 - 연구 지도 각 주제 아래에 `사람 대상 연구` 또는 `동물·세포 연구`를 직접 표시해, 카드 선택 전에도 연구 범위를 비교할 수 있도록 보완했다. 기존 UI contract 분류를 재사용해 모바일 표시를 단순하게 유지했다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T04:35:05+09:00",
+  "updated_at": "2026-10-08T04:47:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6443,6 +6443,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T04:35:05+09:00"
+    },
+    {
+      "id": "H-360",
+      "event": "NAVI 자동 공개 배포 점검에서 전문가 영상 장을 280·320·390·1440px 대표 폭으로 재감리했다. 재생 전 포스터·선택 게시판·주제 필터·선택 영상 정보·마지막 ‘연구를 읽는 기준 / 원문 출처’ handoff가 한 흐름으로 유지되고, 모든 대표 폭에서 document 가로폭이 viewport와 같거나 데스크톱 스크롤바 차이만 있었으며 runtime error는 없었다. 공개 live validator는 main candidate SHA a6cead44c38964204c480f9e626b64bdeb6cc9c5·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 공개 경계를 확인했다. 이번 회차에는 재현 가능한 CRITICAL/MAJOR 결함이 없어 기능 코드·연구 카피·수치·출처를 변경하지 않고, NAVI 증적만 최신 공개본에 동기화했다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-275와 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T04:47:00+09:00"
     }
   ]
 }
