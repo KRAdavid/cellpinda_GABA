@@ -1,8 +1,8 @@
 # Completion Report
 
-## Current Public Deployment Recheck — research-scope legend — main 91789830 — 2026-10-08
+## Current Public Deployment Recheck — research-scope legend and NAVI sync — main b0687e81 — 2026-10-08
 
-- AC-001/AC-002/AC-003/AC-004/AC-005: `PASS` 또는 기존 조건부 통과 상태를 유지한다. 연구 지도 범례가 사람 대상 연구와 동물·세포 연구를 구분하고, 공개 390px에서 텍스트·ARIA·가로폭·runtime 오류가 정합성을 유지한다.
+- AC-001/AC-002/AC-003/AC-004/AC-005: `PASS` 또는 기존 조건부 통과 상태를 유지한다. 연구 지도 범례가 사람 대상 연구와 동물·세포 연구를 구분하고, current candidate SHA `b0687e81e4558fb33294106992bc5dcf12c51ccb` 공개 390px에서 텍스트·ARIA·가로폭·runtime 오류가 정합성을 유지한다.
 - AC-006: `PASS`. 제품 독립 과학 정보 경계·연구 카피·수치·출처 라벨은 유지됐고 이번 변경은 연구 읽기 안내만 보완했다.
 - AC-007: `PASS_WITH_CONDITIONS`. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
 - Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.

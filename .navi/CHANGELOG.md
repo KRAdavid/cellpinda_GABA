@@ -1,10 +1,10 @@
 # Project Changelog
 
-## 연구 범위 범례 명료화 및 공개 배포 — 91789830 — 2026-10-08
+## 연구 범위 범례 명료화 및 NAVI 기록 동기화 — b0687e81 — 2026-10-08
 
 - 연구 지도 범례를 `사람 대상 연구`와 `동물·세포 연구`로 명확히 나누고, 카드 상단에서 대상·방법·측정 항목을 먼저 확인하도록 안내했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
-- 로컬 UI contract·typecheck·127개 테스트·Vite build·성능 예산, PR #626 보호검사, main workflow `37670864607`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
-- 공개 validator는 HTTP 200·candidate SHA `9178983059cdce763d3ec47925f0cb7c201080e5`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 390px CDP에서 문구·ARIA 라벨·pageWidth/scrollWidth 390/390·errors=[]를 확인했다.
+- 로컬 UI contract·typecheck·127개 테스트·Vite build·성능 예산, UI PR #626 보호검사와 main workflow `37670864607`가 성공했다. NAVI 기록 PR #627도 보호검사를 통과해 `b0687e81`로 병합됐고 main workflow `37671979488`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·current candidate SHA `b0687e81e4558fb33294106992bc5dcf12c51ccb`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 390px CDP에서 문구·ARIA 라벨·pageWidth/scrollWidth 390/390·errors=[]를 확인했다.
 - NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
 
 증적: `C-273`, `E-LOCAL-BUILD-RESEARCH-SCOPE-LEGEND-20261008`, `E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008`, `E-CDP-RESEARCH-SCOPE-LEGEND-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008`, `E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008`.
