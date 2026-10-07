@@ -2208,3 +2208,6 @@
 
 /* v177 large-text video topics: show every topic without a clipped horizontal rail. */
 @media(max-width:700px){.is-large-text .guide-video-filters{flex-wrap:wrap;width:100%}}
+
+/* v178 research map scope labels: show the evidence group before selection. */
+.guide-research-map-item small{display:block;color:#7693a3;font-size:10px;line-height:1.25}
