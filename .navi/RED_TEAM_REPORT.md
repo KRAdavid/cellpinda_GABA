@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 06·연구 대상 연결 라인 공격 재점검 — working tree — 2026-10-07
+
+- 공격 관점에서 지도 아래 대표 결과만 보이면 모바일 독자가 결과가 누구·무엇을 대상으로 한 것인지 놓칠 수 있다는 잔여 리스크를 확인했다. 새 주장이나 수치를 추가하지 않고 기존 연구 카드의 범위 라벨을 결과 요약 아래에 배치했다.
+- 390px·1440px에서 대상·연구 범위가 결과의 보조 계층으로 읽혔고, 피부 주제 선택 시 `현재 선택 · 피부`와 `생쥐 피부·사람 피부 세포 실험`이 함께 갱신됐다. 가로 넘침·page error·console error는 없으며 새 CRITICAL/MAJOR 결함은 없다.
+- 공개 main 배포 후 라이브 번들 확인, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 OPEN이다. RT-001·RT-002·RT-003 및 teaser `HOLD`는 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-SCOPE-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-SCOPE-20261008`, `E-PLAYWRIGHT-RESEARCH-CUE-SCOPE-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-SCOPE-20261008`.
+
 ## 06·연구 결과 전환 문구 계층·공개 배포 공격 재점검 — main e997683 — 2026-10-07
 
 - 공개 후보에서 전환 밴드가 headline과 실제 관찰 결과를 별도 계층으로 전달하는지 공격 관점에서 확인했다. 공개 CSS·JS 표식과 라이브 390px·1440px 렌더가 일치했고 연구 카피·도표·출처·제품 독립 경계는 변하지 않았다.

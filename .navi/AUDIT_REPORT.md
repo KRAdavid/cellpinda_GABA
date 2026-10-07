@@ -1,5 +1,13 @@
 # Audit Report
 
+## 06·연구 대상 연결 라인·로컬 재감사 — working tree — 2026-10-07
+
+- 연구 지도 아래 대표 결과를 읽은 직후 연구 대상이 무엇인지 즉시 연결되지 않는 잔여 정보 전달 리스크를 확인했다. 기존 연구 카드의 검증된 범위 라벨을 결과 요약 아래에 한 줄로 재사용해 `대표 결과 → 관찰 결과 → 대상·연구 범위` 계층을 만들었다.
+- UI contract·typecheck·127개 테스트·Pages-style production build·정적 bundle·release manifest·성능 예산을 통과했다. Playwright Chromium fallback 390px·1440px에서 결과·범위 라인이 읽혔고, 피부 주제 선택 시 범위 라벨과 활성 카드가 함께 갱신되며 가로 넘침·page error·console error가 없었다.
+- 새 CRITICAL/MAJOR 결함은 없다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 공개 main 배포·라이브 URL·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 후속 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-SCOPE-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-SCOPE-20261008`, `E-PLAYWRIGHT-RESEARCH-CUE-SCOPE-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-SCOPE-20261008`.
+
 ## 06·연구 결과 전환 문구 계층·공개 배포 후 재감사 — main e997683 — 2026-10-07
 
 - PR #549를 최신 main 기준으로 병합하고 main workflow `37557233295`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 성공을 확인했다. 공개 validator는 candidate `e99768344c18286b8edf8d46e4c6a08f9a6b3f42`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다.

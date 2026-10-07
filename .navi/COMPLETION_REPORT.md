@@ -1,5 +1,13 @@
 # Completion Report
 
+## Current Work Recheck — research cue scope line — working tree — 2026-10-07
+
+- AC-003/AC-004: PASS_WITH_CONDITIONS. 연구 지도 아래 대표 결과에 기존 연구 카드의 대상·연구 범위 라인을 추가해 `결과 → 대상` 연결을 보강했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-005: PASS. UI contract·typecheck·127개 테스트·Pages-style production build·정적 bundle·release manifest·성능 예산·Playwright Chromium fallback 390px·1440px 상호작용 감리를 통과했다. 초기 JS 311,269 bytes·CSS 95,703 bytes·총 자산 1,647,487 bytes다.
+- 공개 main 배포·라이브 URL은 아직 이 작업 기록으로 검증하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다. Final Status는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-SCOPE-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-SCOPE-20261008`, `E-PLAYWRIGHT-RESEARCH-CUE-SCOPE-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-SCOPE-20261008`.
+
 ## Current Release Recheck — research result cue hierarchy deployed — main e997683 — 2026-10-07
 
 - AC-001/AC-004/AC-005: PASS. PR #549 검사와 main workflow `37557233295`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200이다. 공개 validator는 candidate `e99768344c18286b8edf8d46e4c6a08f9a6b3f42`와 73개 bundle hash를 확인했다.

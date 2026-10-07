@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T10:32:05+09:00",
+  "updated_at": "2026-10-07T10:49:04+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5760,6 +5760,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T10:32:05+09:00"
+    },
+    {
+      "id": "H-314",
+      "event": "연구 지도 아래 대표 결과를 읽은 직후 연구 대상이 무엇인지 연결되지 않는 잔여 정보 전달 리스크를 확인했다. 기존 연구 카드의 검증된 범위 라벨을 재사용해 전환 밴드에 대상·연구 범위 한 줄을 추가했고, 새 연구 주장·수치·출처·제품 광고는 만들지 않았다. UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했으며 Playwright Chromium fallback 390px·1440px에서 대표 결과·범위 라인이 읽히고, 피부 주제 선택 시 범위 라벨이 갱신되며 가로 넘침·page error·console error가 없었다. C-232와 네 로컬 증거를 등록한다. 아직 공개 main 배포·라이브 URL 검증은 이 기록에 포함하지 않는다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T10:49:04+09:00"
     }
   ]
 }

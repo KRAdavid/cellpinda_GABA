@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 06·연구 대상 연결 라인 고도화 — working tree — 2026-10-07
+
+- 연구 지도 아래 결과 요약에 기존 연구 카드의 대상·연구 범위 라인을 추가해 `대표 결과 → 관찰 결과 → 대상·연구 범위` 순서를 한눈에 읽도록 했다. 새 연구 주장·수치·출처·제품 광고는 추가하지 않았다.
+- UI contract·typecheck·127개 테스트·Pages-style production build·정적 bundle·release manifest·성능 예산과 Playwright Chromium fallback 390px·1440px 상호작용 감리를 통과했다. Pages-style 총 자산은 1,647,487 bytes로 1,650,000 bytes 예산 안이다. 실제 화면에서 사용하지 않는 구형 모바일 레이아웃 재정의도 정리했다.
+- 공개 main 배포와 라이브 재검증은 후속 게이트이며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. teaser `HOLD`, 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-SCOPE-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-SCOPE-20261008`, `E-PLAYWRIGHT-RESEARCH-CUE-SCOPE-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-SCOPE-20261008`.
+
 ## 06·연구 결과 전환 문구 계층·공개 배포 완료 — main e997683 — 2026-10-07
 
 - PR #549를 병합하고 main workflow `37557233295`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `e99768344c18286b8edf8d46e4c6a08f9a6b3f42`, bundle hash 73개, 제품 독립 경계를 확인했다.
