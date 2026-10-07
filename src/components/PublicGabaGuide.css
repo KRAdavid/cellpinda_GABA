@@ -2205,3 +2205,15 @@
 .gaba-guide .guide-header{
   -webkit-backdrop-filter:blur(16px);
 }
+
+/* v175 mobile growth path: turn the six research cards into one readable visual sequence. */
+@media(max-width:700px){
+  .guide-growth-flow{position:relative;padding-left:0}
+  .guide-growth-flow:before{content:"";position:absolute;top:31px;bottom:31px;left:18px;width:1px;background:linear-gradient(180deg,rgba(18,154,163,.16),rgba(18,154,163,.52) 45%,rgba(18,154,163,.16));pointer-events:none}
+  .guide-growth-step{z-index:1;padding:18px 18px 18px 62px}
+  .guide-growth-step>span{position:absolute;top:15px;left:0;display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(18,154,163,.28);border-radius:50%;background:#fff;color:var(--guide-teal-dark);font-size:10px;letter-spacing:.08em;box-shadow:0 3px 12px rgba(21,82,106,.08)}
+  .guide-growth-step strong{margin-top:0}
+  .guide-growth-step:last-child{border-color:rgba(18,154,163,.34);background:linear-gradient(135deg,#fff,#f1fbfb)}
+  .guide-growth-step:last-child strong{color:var(--guide-teal-dark)}
+  .guide-growth-arrow{left:7px;transform:translateX(0) rotate(90deg)}
+}
