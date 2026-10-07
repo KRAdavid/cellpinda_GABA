@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T01:49:06+09:00",
+  "updated_at": "2026-10-08T02:10:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2216,11 +2216,25 @@
         "impact": "큰 글자 모드에서 주제 선택지를 가로 스크롤로 추측하지 않고 한 화면에서 파악할 수 있다.",
         "required_action": "다음 영상 주제·읽기 크기·반응형 CSS 변경 시 320·390·768px과 일반 모드 수평 레일을 함께 재검증",
         "owner": "QA"
+      },
+      {
+        "id": "AUD-010",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "최신 공개본에서 일반 모드와 대형 글자 모드 전문가 영상 주제 필터의 보조기술 안내를 실제 레이아웃과 대조했다. 일반 모드는 좌우 이동 문구와 수평 레일을 유지하고, 대형 글자 모드는 수평 이동 문구 없이 320px 4행·390px 3행으로 모든 7개 주제를 표시했다. 페이지 가로폭은 viewport와 같고 runtime error는 없었다.",
+        "evidence_refs": [
+          "E-LIVE-PUBLIC-ARIA-FINAL-20261008",
+          "E-DEPLOY-PIPELINE-ARIA-FINAL-20261008",
+          "E-NAVI-STATE-ARIA-FINAL-20261008"
+        ],
+        "impact": "큰 글자 모드 사용자가 수평 이동을 추측하지 않고 모든 전문가 영상 주제를 보조기술 안내와 함께 이해할 수 있다.",
+        "required_action": "다음 영상 주제·읽기 크기·ARIA 문구·반응형 CSS 변경 시 320·390·768px과 일반 모드 수평 레일을 함께 재검증",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T16:49:06Z"
+    "last_run_at": "2026-10-07T17:10:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2489,11 +2503,24 @@
         "impact": "이번 공개본에서 큰 글자 모드의 주제 필터가 잘리거나 일반 모드의 수평 탐색이 사라지는 회귀는 관찰되지 않았다.",
         "required_action": "Chrome Playwright fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
         "owner": "레드팀"
+      },
+      {
+        "id": "RT-010",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 320·390px 일반 모드와 대형 글자 모드의 전문가 영상 필터 안내를 확인했다. 일반 모드 aria-label은 수평 이동 가능성을 설명하고, 대형 글자 모드 aria-label은 모든 주제가 표시되는 현재 상태를 정확히 설명한다. 두 폭 모두 document 가로폭은 viewport와 같고 runtime error는 없었다.",
+        "evidence_refs": [
+          "E-LIVE-PUBLIC-ARIA-FINAL-20261008",
+          "E-NAVI-STATE-ARIA-FINAL-20261008"
+        ],
+        "impact": "레이아웃과 보조기술 안내가 어긋나 일부 주제가 숨겨져 있다고 오해할 수 있는 회귀를 방지한다.",
+        "required_action": "Chrome Playwright fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
+        "owner": "레드팀"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T16:49:06Z"
+    "last_run_at": "2026-10-07T17:10:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -6181,6 +6208,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T01:49:06+09:00"
+    },
+    {
+      "id": "H-353",
+      "event": "NAVI 자동 공개 배포 점검에서 큰 글자 모드 전문가 영상 주제 필터의 정적 ARIA 문구가 실제 다중 행 레이아웃을 설명하지 못하는 잔여 접근성 리스크를 확인하고 보완했다. 일반 모드는 수평 이동 안내를 유지하고, 큰 글자 모드는 ‘전문가 영상 주제 필터’로 동기화했다. PR #617의 보호 검사와 main workflow 37656210734, NAVI 문서 PR #616의 main workflow 37656611634가 성공했으며, 공개 validator는 candidate SHA de117829713614249c7e7ee09381df4461dd13e4·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Playwright Chromium fallback 320·390px에서 일반/큰 글자 ARIA 문구, 4·3행 배치, pageScrollWidth=viewport, large cue hidden, runtimeErrors=[]를 확인했다. 신규 CRITICAL/MAJOR 결함은 없고 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-268과 세 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T02:10:00+09:00"
     }
   ]
 }

@@ -2924,6 +2924,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-267`, `E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.
 
+## Current Public Recheck — ARIA 안내와 대형 글자 영상 필터 — de11782 — 2026-10-08
+
+- AC-001 공개 URL·라이브 정합성: PASS. NAVI 문서 병합 후 main workflow `37656611634`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 candidate SHA `de117829713614249c7e7ee09381df4461dd13e4`·HTTP 200·STATIC·73개 bundle hash를 확인했다.
+- AC-003/AC-004 소비자 흐름·반응형: PASS. 320·390px 일반 모드에서는 전문가 영상 필터가 수평 이동 안내를 제공하고, 대형 글자 모드에서는 모든 7개 주제가 각각 4·3행으로 표시된다. 두 모드 모두 document 가로폭은 viewport와 같고 runtime/console error는 없었다.
+- AC-005 배포 게이트: PASS. 공개 데이터 12 claims·6 master records·6 share pages, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. PR #617 코드 보정과 PR #616 NAVI 문서 병합 이후 Pages 배포·라이브 smoke가 모두 성공했다.
+- AC-006 제품 독립 경계: PASS. 이번 회차는 ARIA 안내와 NAVI 증적만 보정했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재에 따른 Playwright Chromium fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-268`, `E-LIVE-PUBLIC-ARIA-FINAL-20261008`, `E-DEPLOY-PIPELINE-ARIA-FINAL-20261008`, `E-NAVI-STATE-ARIA-FINAL-20261008`.
+
 ## 공개 배포 자동 재감리 — 모바일 전문가 영상 필터 cue — 2026-10-08
 
 - 280·390px 전문가 영상 주제 필터의 오른쪽 수평 탐색 cue를 24px 원형 안내로 보완했다. 280·320·390·1440px 핵심 장에서 document 가로폭은 viewport와 일치했고 390px 영상 선택·재생·다음 카드 선택은 정상이다.

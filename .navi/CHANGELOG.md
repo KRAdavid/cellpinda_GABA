@@ -2308,3 +2308,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
 
 증적: `C-267`, `E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.
+
+## 2026-10-08 — 대형 글자 전문가 영상 필터 ARIA 정합성 보완 및 공개 재검증 — de11782
+
+- 큰 글자 모드의 전문가 영상 필터가 실제로는 모든 7개 주제를 여러 행에 표시하는데도 보조기술 안내가 수평 이동을 암시하던 불일치를 보정했다. 일반 모드는 기존 수평 레일 안내를 유지했다.
+- PR #617의 코드 보정과 PR #616의 NAVI 문서 병합 이후 main workflow `37656611634`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- 공개 validator는 candidate SHA `de117829713614249c7e7ee09381df4461dd13e4`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 Playwright fallback 320·390px에서 일반/큰 글자 ARIA 문구, 4·3행 배치, pageScrollWidth=viewport, large cue hidden, runtimeErrors=[]를 재현했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-268`, `E-LIVE-PUBLIC-ARIA-FINAL-20261008`, `E-DEPLOY-PIPELINE-ARIA-FINAL-20261008`, `E-NAVI-STATE-ARIA-FINAL-20261008`.

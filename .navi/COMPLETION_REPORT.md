@@ -2955,3 +2955,11 @@ Final Status: `NOT_READY`; 사용자 승인 전 자동 완료 처리하지 않�
 - 코드·배포 기준은 통과했지만 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건이다.
 
 증적: `C-267`, `E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.
+
+## Completion gate recheck — ARIA 안내와 대형 글자 영상 필터 — 2026-10-08
+
+- 최신 공개본에서 일반 모드의 수평 이동 안내와 대형 글자 모드의 다중 행 표시 안내가 실제 화면 상태와 일치했다. 320px은 4행, 390px은 3행으로 7개 주제가 모두 읽혔고, 두 폭의 page scroll width는 viewport와 같았다.
+- PR #617 코드 보정과 PR #616 NAVI 문서 병합 이후 main workflow `37656611634`의 정적 Pages 배포·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate SHA `de117829713614249c7e7ee09381df4461dd13e4`, HTTP 200, 73개 bundle hash, 12개 claims, 6개 master records, 6개 share pages, teaser `HOLD`를 확인했다.
+- 자동화·대표 Chrome 검증 기준은 통과했지만 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-268`, `E-LIVE-PUBLIC-ARIA-FINAL-20261008`, `E-DEPLOY-PIPELINE-ARIA-FINAL-20261008`, `E-NAVI-STATE-ARIA-FINAL-20261008`.

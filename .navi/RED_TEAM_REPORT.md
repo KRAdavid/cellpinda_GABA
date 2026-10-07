@@ -2571,3 +2571,11 @@
 - Chrome Playwright fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 독해성 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
 
 증적: `C-267`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.
+
+## Red-team final recheck — 대형 글자 전문가 영상 필터 ARIA 정합성 — de11782 — 2026-10-08
+
+- 공격 관점에서 320·390px 일반 모드와 대형 글자 모드의 주제 필터 안내를 비교했다. 일반 모드는 “좌우로 이동할 수 있습니다” 안내와 수평 레일을 유지하고, 대형 글자 모드는 같은 문구를 제거해 7개 주제가 4·3행으로 모두 표시되는 상태를 정확히 설명한다.
+- 두 폭 모두 document 가로폭은 viewport와 같고 runtime error는 0건이었다. 새 CRITICAL/MAJOR 결함은 없으며, 이번 보정은 접근성 안내와 NAVI 기록에 한정되어 연구 카피·수치·출처 경계는 변하지 않았다.
+- Chrome Playwright fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 독해성 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태는 유지한다.
+
+증적: `C-268`, `E-LIVE-PUBLIC-ARIA-FINAL-20261008`, `E-NAVI-STATE-ARIA-FINAL-20261008`.

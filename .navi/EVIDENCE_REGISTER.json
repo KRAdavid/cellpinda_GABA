@@ -2920,6 +2920,16 @@
       "E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-268",
+    "statement": "최신 main 공개본에서 일반 모드와 대형 글자 모드의 전문가 영상 주제 필터 보조기술 안내가 실제 표시 상태와 일치하고, 320·390px에서 가로폭 초과와 runtime error 없이 읽힌다.",
+    "evidence_refs": [
+      "E-LIVE-PUBLIC-ARIA-FINAL-20261008",
+      "E-DEPLOY-PIPELINE-ARIA-FINAL-20261008",
+      "E-NAVI-STATE-ARIA-FINAL-20261008"
+    ],
+    "status": "SUPPORTED"
   }
   ],
   "evidence": [
@@ -18973,6 +18983,50 @@
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-LARGE-TEXT-VIDEO",
       "claim_refs": [
         "C-267"
+      ]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-ARIA-FINAL-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본에서 일반 모드의 전문가 영상 필터는 좌우 이동 안내를 제공하고, 대형 글자 모드에서는 모든 주제를 행으로 표시하면서 보조기술 안내를 수평 이동 문구 없이 제공한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha de117829713614249c7e7ee09381df4461dd13e4; generatedAt 2026-10-07T17:08:17.753Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; smartStoreOnly=true; removed750=true; provenance matched; public Playwright Chromium fallback 320px normal aria=전문가 영상 주제 필터. 좌우로 이동할 수 있습니다., large aria=전문가 영상 주제 필터, large rows=4, pageScrollWidth=viewport, normal rail scrollWidth/clientWidth=743/743, large rail scrollWidth/clientWidth=252/252, large cue class=is-hidden, runtimeErrors=[]; 390px large rows=3, pageScrollWidth=viewport, normal rail scrollWidth/clientWidth=743/743, large rail scrollWidth/clientWidth=322/322, large cue class=is-hidden, runtimeErrors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T02:10:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-ARIA-FINAL",
+      "claim_refs": [
+        "C-001",
+        "C-002",
+        "C-004",
+        "C-268"
+      ]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-ARIA-FINAL-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "큰 글자 모드 전문가 영상 필터의 보조기술 안내 보정 PR #617이 보호 검사를 통과해 main에 병합되었고, 코드 병합 배포와 NAVI 문서 병합 배포의 정적 Pages·라이브 smoke·release-status가 모두 성공했다.",
+      "locator": "PR #617 https://github.com/KRAdavid/gaba_info/pull/617; merge SHA 0b462857230792fead0153f8b784d8d756beabbf; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37656210734 success; NAVI docs PR #616 https://github.com/KRAdavid/gaba_info/pull/616; docs merge SHA de117829713614249c7e7ee09381df4461dd13e4; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37656611634 success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37656611634",
+      "captured_at": "2026-10-08T02:10:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-ARIA-FINAL",
+      "claim_refs": [
+        "C-001",
+        "C-005",
+        "C-268"
+      ]
+    },
+    {
+      "id": "E-NAVI-STATE-ARIA-FINAL-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 큰 글자 모드 전문가 영상 필터의 ARIA 문구 보정과 공개 320·390px 재검증을 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "PR #617 code merge; PR #616 NAVI docs merge; main deployment workflow 37656611634 success; pnpm run validate:live-public candidateSha de117829713614249c7e7ee09381df4461dd13e4; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37656611634",
+      "captured_at": "2026-10-08T02:10:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-ARIA-FINAL",
+      "claim_refs": [
+        "C-268"
       ]
     }
   ]
