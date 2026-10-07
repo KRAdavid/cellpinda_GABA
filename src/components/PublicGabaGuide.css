@@ -2140,6 +2140,7 @@
   .guide-header .guide-menu-toggle{right:calc(168px + env(safe-area-inset-right))}
   .guide-header .guide-reading-size-toggle{right:calc(92px + env(safe-area-inset-right))}
   .guide-header .guide-header-share{width:72px;font-size:11px;gap:4px;white-space:nowrap}
+  .guide-growth-story{padding-top:78px}
 }
 
 /* v159 narrow comparison cards */
