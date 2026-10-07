@@ -2617,6 +2617,18 @@
       "E-NAVI-STATE-PUBLIC-AUDIT-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-242",
+    "statement": "사업자용 GABA 핵심 5문장이 공개 가이드의 화면·인쇄·PDF 공유 흐름에 연결된다. 화면에서는 기존 접기·문장 복사 동작을 유지하고, 인쇄 모드에서는 접힌 details 안의 5개 문장 카드와 본문을 표시하며 복사 버튼을 숨긴다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-PRINT-SHARE-KIT-20261007",
+      "E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007",
+      "E-DEPLOY-PIPELINE-PRINT-SHARE-KIT-20261007",
+      "E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007",
+      "E-NAVI-STATE-PRINT-SHARE-KIT-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17307,6 +17319,58 @@
     "captured_at": "2026-10-07T13:44:18+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PUBLIC-AUDIT",
     "claim_refs": ["C-241"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-PRINT-SHARE-KIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "사업자용 GABA 공유 문장 인쇄·PDF 보정이 자동 품질 게이트와 로컬 인쇄 미디어 회귀검증을 통과한다.",
+    "locator": "pnpm run typecheck; pnpm test 127 pass; pnpm run build; pnpm run validate:repo-privacy; validate:release-manifest/validate:artifacts/validate:static-bundle/validate:performance status ok; performance initial JS 311405, initial CSS 95703, total assets 1649465 <= 1650000; 390px print media regression with closed details rendered 5 article texts, print body width 350 and height 425.515625, copy buttons display none, page/console errors 0; git diff --check passed",
+    "captured_at": "2026-10-07T14:11:48+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-PRINT-SHARE-KIT",
+    "claim_refs": ["C-001", "C-005", "C-242"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "공개 GitHub Pages에서 화면 동작을 유지하면서 인쇄 모드에 사업자용 5문장 카드가 표시된다.",
+    "locator": "Browser plugin unavailable; Playwright Chromium fallback against https://kradavid.github.io/gaba_info/; public viewports 320x900, 390x844, 768x900, 1440x900 returned HTTP 200 with print.css loaded, scrollWidth equal to viewport, page/console errors 0; at 390px screen details remained closed with 5 cards; print media kept details visible at width 350, rendered all 5 card texts and hid all copy buttons; screenshot captured outside repository",
+    "captured_at": "2026-10-07T14:11:48+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-PRINT-SHARE-KIT",
+    "claim_refs": ["C-003", "C-006", "C-242"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-PRINT-SHARE-KIT-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "사업자용 GABA 인쇄·PDF 공유 보정이 PR 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #568 https://github.com/KRAdavid/gaba_info/pull/568; squash merge f391710024d67181271a21098d41d2b0639aa295; workflow https://github.com/KRAdavid/gaba_info/actions/runs/37574734151: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37574734151",
+    "captured_at": "2026-10-07T14:11:48+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-PRINT-SHARE-KIT",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-242"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 GitHub Pages 공개본이 main release SHA와 일치하고 공개 인쇄·PDF 공유 문장·정적 공개 데이터·제품 독립 경계를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=f391710024d67181271a21098d41d2b0639aa295; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha f391710024d67181271a21098d41d2b0639aa295; generatedAt 2026-10-07T05:08:13.782Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public print media rendered 5 share cards",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T14:11:48+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-PRINT-SHARE-KIT",
+    "claim_refs": ["C-001", "C-002", "C-242"]
+  },
+  {
+    "id": "E-NAVI-STATE-PRINT-SHARE-KIT-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 인쇄·PDF 공유 보정의 공개 배포 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-326; .navi/EVIDENCE_REGISTER.json C-242 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T14:11:48+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PRINT-SHARE-KIT",
+    "claim_refs": ["C-242"]
   }
 ]
 }

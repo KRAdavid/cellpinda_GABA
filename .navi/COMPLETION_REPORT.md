@@ -2670,3 +2670,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-241`, `E-LOCAL-BUILD-NAVI-PUBLIC-AUDIT-20261007`, `E-PLAYWRIGHT-NAVI-PUBLIC-AUDIT-20261007`, `E-DEPLOY-PIPELINE-NAVI-PUBLIC-AUDIT-20261007`, `E-LIVE-PUBLIC-NAVI-PUBLIC-AUDIT-20261007`, `E-NAVI-STATE-PUBLIC-AUDIT-20261007`.
+
+## Current Release Recheck — f3917100 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 공개 validator가 candidate `f391710024d67181271a21098d41d2b0639aa295`와 HTTP 200, STATIC, bundle hash 73개를 확인했다.
+- AC-003/AC-006 사업자 공유·제품 독립 경계: PASS. 인쇄 media에서 사업자용 GABA 핵심 5문장과 카드 본문을 표시하고 복사 버튼을 숨겼으며 화면 UI와 연구 카피·수치·출처·제품 독립 경계는 유지했다.
+- AC-004 반응형·인쇄: PASS. 공개 320·390·768·1440px에서 가로폭과 오류 상태가 정상이고, 390px 인쇄에서 5개 카드가 모두 표시됐다.
+- AC-005 배포 게이트: PASS. PR #568 및 main workflow `37574734151`의 release-verify·worker-readiness·Pages·smoke-live·release-status가 성공했다. 정적 자산 성능 예산도 통과했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. teaser `HOLD`, Browser plugin 부재에 따른 Chromium fallback, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건을 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-242`, `E-LOCAL-BUILD-PRINT-SHARE-KIT-20261007`, `E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-PRINT-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007`, `E-NAVI-STATE-PRINT-SHARE-KIT-20261007`.

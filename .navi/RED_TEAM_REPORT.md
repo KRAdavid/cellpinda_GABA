@@ -2353,3 +2353,12 @@
 - 새 CRITICAL/MAJOR 결함은 없다. 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
 
 증적: `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+
+## Red-team recheck — 사업자용 핵심 5문장 인쇄·PDF 공유 — f3917100 — 2026-10-07
+
+- 공격 관점에서 접힌 `details`의 본문이 인쇄 DOM에서 빠져 사업자가 PDF로 공유할 핵심 5문장이 제목만 남는 경로를 확인했다.
+- `print.css`의 print-only 규칙으로 summary·5개 카드·본문을 강제 표시하고 복사 버튼을 숨겼다. 화면에서는 details가 닫힌 상태와 기존 복사 동작을 유지했다.
+- 공개 390px 인쇄 media에서 details width 350, body width 350·height 425.515625, 5개 카드 텍스트와 오류 0을 확인했고, 320·768·1440px도 HTTP 200·가로폭 일치를 통과했다. 새 CRITICAL/MAJOR 결함은 없다.
+- 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. Browser plugin은 사용할 수 없어 Playwright Chromium fallback으로 검증했다.
+
+증적: `E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007`.

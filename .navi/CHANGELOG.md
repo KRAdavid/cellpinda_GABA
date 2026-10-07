@@ -2104,3 +2104,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
 
 증적: `C-241`, `E-LOCAL-BUILD-NAVI-PUBLIC-AUDIT-20261007`, `E-PLAYWRIGHT-NAVI-PUBLIC-AUDIT-20261007`, `E-DEPLOY-PIPELINE-NAVI-PUBLIC-AUDIT-20261007`, `E-LIVE-PUBLIC-NAVI-PUBLIC-AUDIT-20261007`, `E-NAVI-STATE-PUBLIC-AUDIT-20261007`.
+
+## 2026-10-07 — 사업자용 핵심 5문장 인쇄·PDF 공유 보정 — f3917100
+
+- 인쇄·PDF에서 접힌 `details` 내부가 누락되어 제목만 남을 수 있는 잔여 리스크를 확인했다.
+- `public/print.css`에서 사업자용 GABA 핵심 5문장과 카드 본문을 인쇄 시 표시하고 복사 버튼은 숨겼다. 화면의 접기·문장 복사 동작과 연구 카피·수치·출처·제품 독립 경계는 유지했다.
+- PR #568과 main workflow `37574734151`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했고, 공개 validator가 candidate `f391710024d67181271a21098d41d2b0639aa295`를 확인했다. 공개 320·390·768·1440px에서도 가로폭과 오류가 없었으며 390px 인쇄 모드에서 5개 카드가 렌더링됐다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
+
+증적: `C-242`, `E-LOCAL-BUILD-PRINT-SHARE-KIT-20261007`, `E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-PRINT-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007`, `E-NAVI-STATE-PRINT-SHARE-KIT-20261007`.
