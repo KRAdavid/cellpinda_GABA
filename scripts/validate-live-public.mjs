@@ -213,8 +213,8 @@ for (let attempt = 1; attempt <= 12; attempt += 1) {
     assert.match(guidePageText, /1950년, 뇌 속에서 발견된 신호/,'live guide route must identify its discovery-led guide content');
     assert.match(guidePageText, /view=guide/, 'live guide route must hand off to its interactive guide');
     assert.equal(canonicalHref(researchPageText), `${base}/research/`, 'live research route must have its own canonical URL');
-    assert.match(researchPageText, /property="og:title" content="사람을 대상으로 한 GABA 연구를 쉽게 보기"/, 'live research route must identify itself as an educational page');
-    assert.ok(researchPageText.includes('일반 GABA 연구를 쉬운 말로 정리했어요. 연구마다 먹은 양과 조건이 다를 수 있어요.'), 'live research page must identify its general GABA educational scope');
+    assert.match(researchPageText, /property="og:title" content="사람 연구의 결과를 한눈에 읽습니다"/, 'live research route must identify itself as an educational page');
+    assert.ok(researchPageText.includes('GABA 사람 연구를 결과·조건·출처 순서로 정리한 공개 안내서입니다.'), 'live research page must identify its general GABA educational scope');
     assert.match(researchPageText, /view=research/, 'live research route must hand off to its separate reading view');
     assert.ok(researchPageText.includes('잠: 성인 10명이 하루 GABA 100mg 캡슐과 비교 캡슐을 각각 1주 동안 먹고, 잠드는 시간과 수면 기록을 살펴본 연구예요.') && researchPageText.includes('머리를 많이 쓴 뒤: 성인 63명이 GABA 100mg과 비교 캡슐을 한 번씩 먹고, 뇌파와 활력 점수를 비교한 연구예요.') && researchPageText.includes('카드마다 누가 참여했고 무엇을 살펴봤는지 먼저 보여드려요.') && !/성장호르몬|근육 발달|GABA 3g|운동 경험이 있는 남성|손끝 감각|14편|300mg|4주/.test(researchPageText), 'live research fallback must keep only the focused sleep and mental-task research summary');
     assert.ok(!researchPageText.includes(approvedSmartStoreUrl), 'research preview must not send readers directly to the product purchase page');
