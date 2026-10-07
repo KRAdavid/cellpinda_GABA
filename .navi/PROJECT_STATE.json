@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T05:43:22+09:00",
+  "updated_at": "2026-10-08T06:14:03+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6464,6 +6464,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T05:43:22+09:00"
+    },
+    {
+      "id": "H-363",
+      "event": "NAVI 자동 공개 배포 점검에서 280·320·351·390·430·768px 모바일 헤더의 `가+ 크게`·`가− 기본` 표시가 기호처럼 읽힐 수 있는 잔여 가독성 리스크를 확인하고, 표시 마크를 `가`로 단순화해 `가 크게`·`가 기본`으로 읽히도록 보완했다. ARIA action label·44px 터치 영역·대형 글자 상태·제품 독립 공개 경계는 유지했다. 로컬 UI contract·typecheck·production build·정적 bundle·성능 예산이 성공했고 총 자산은 1,649,396바이트였다. PR #637의 release-verify·site-quality-verify와 main workflow 37687487406의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY에 따라 실행하지 않았다. 공개 validator는 candidate SHA e963b2b13295bf2567a70e586e640b4206de4e5f·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome CDP fallback에서 각 폭의 가로폭·읽기 크기 상태 전환·runtime errors=[]를 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-278과 여섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T06:14:03+09:00"
     }
   ]
 }

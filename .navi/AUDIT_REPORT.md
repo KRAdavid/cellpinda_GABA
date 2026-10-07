@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 읽기 크기 버튼 가독성 보정 및 공개 배포 — main e963b2b1 — 2026-10-08
+
+- 280·320·351·390·430·768px 공개 헤더를 재감리한 결과 `가+ 크게`·`가− 기본`의 기호가 동작을 방해할 수 있는 잔여 가독성 리스크를 확인했다. 표시 마크를 `가`로 단순화해 기본 상태는 `가 크게`, 대형 글자 상태는 `가 기본`으로 읽히도록 보완했으며 ARIA action label·44px touch target·상태 전환은 유지했다.
+- 로컬 `pnpm run validate:ui-contract`, `pnpm run typecheck`, `pnpm run build`가 성공했고 총 자산은 `1,649,396 bytes / 1,650,000 bytes`였다. PR #637의 release-verify·site-quality-verify와 main workflow `37687487406`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 STATIC_ONLY 정책으로 건너뛰었다.
+- 공개 validator는 candidate SHA `e963b2b13295bf2567a70e586e640b4206de4e5f`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다. Chrome CDP fallback 공개 화면에서 pageWidth/scrollWidth는 280/280·320/320·351/351·390/390·430/430·768/768(브라우저 스크롤바 제외 753/753)였고 runtime errors=[]였다. 390px에서 읽기 크기 버튼 클릭 후 `aria-pressed=false`, `글자 크게 보기`, `largeText=false` 전환을 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 외부 검증 조건으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-278`, `E-LOCAL-BUILD-MOBILE-READING-CUE-20261008`, `E-UI-CONTRACT-MOBILE-READING-CUE-20261008`, `E-CDP-MOBILE-READING-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-READING-CUE-20261008`, `E-NAVI-STATE-MOBILE-READING-CUE-20261008`.
+
 ## 초소형 모바일 연구 도표 줄바꿈 및 공개 재검증 — main d9e223bf — 2026-10-08
 
 - 280px 공개 화면의 연구 결과 도표를 공격적으로 점검해 비교 안내 문구가 한 줄 고정으로 잘릴 수 있는 문제와 `GABA를 바른 조건` 같은 긴 조건명이 카드 폭을 넘을 수 있는 문제를 확인했다. 안내 문구·조건명 줄바꿈과 좁은 숫자 지표 타이포그래피를 보완해 카드 내부에서 읽히도록 했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
