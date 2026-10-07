@@ -2121,3 +2121,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 새 CRITICAL/MAJOR 결함은 발견되지 않아 기능 코드는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
 
 증적: `C-243`, `E-LOCAL-EDGE-STATE-AUDIT-20261007`, `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-20261007`.
+
+## 2026-10-07 — 공개 배포 정합성 최종 확인 — abc51324
+
+- 직접 진입·공유 상태 재감리 기록을 PR #570으로 보호된 `main`에 병합했다. `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했다.
+- 공개 validator는 merge SHA `abc51324c26f596667100c3017c0c4b7ca49a4c1`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `C-244`, `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007`.

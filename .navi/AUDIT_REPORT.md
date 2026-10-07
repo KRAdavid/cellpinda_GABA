@@ -2923,6 +2923,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-243`, `E-LOCAL-EDGE-STATE-AUDIT-20261007`, `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-20261007`.
+
+## Current Release Recheck — abc51324 — 최종 공개 정합성 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #570 병합 후 main workflow `37577523048`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 merge SHA `abc51324c26f596667100c3017c0c4b7ca49a4c1`와 동일한 candidate를 확인했다.
+- AC-003/AC-004 소비자 흐름·반응형: PASS. 이전 재감리의 직접 해시·공유·복사·320·390·768px 검증 기록이 main 배포에 연결되며, 기능 코드 변경은 없었다.
+- AC-005 배포 게이트: PASS. 정적 공개 데이터 12 claims·6 master records·6 share pages, bundle hash 73개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 NAVI 감사 기록만 추가했으며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없으며 과거 이력 경고, Browser plugin 부재에 따른 Playwright fallback, teaser `HOLD`, 외부 브라우저·실기기·실사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-244`, `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007`.
 ## 인쇄·PDF 공개 배포 재검증 — aa4ea2f — 2026-10-07
 
 - AC-001 공개 URL·Pages 정합성: PASS. main workflow `37547332906`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 validator가 candidate `aa4ea2f147ac4997844221ed3c2c64ba86bdcc20`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.

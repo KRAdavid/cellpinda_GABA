@@ -2690,3 +2690,11 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - 최종 상태는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다. 이는 공개 사이트가 미완성이라는 뜻이 아니라, 남은 외부 검증과 사용자 최종 판단을 완료로 위장하지 않는 상태다.
 
 증적: `C-243`, `E-LOCAL-EDGE-STATE-AUDIT-20261007`, `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-20261007`.
+
+## Current Release Recheck — abc51324 — 2026-10-07
+
+- NAVI 직접 상태 재감리 기록은 보호된 `main`에 병합됐고 공개 배포 workflow와 live validator가 merge SHA 정합성을 확인했다.
+- AC-001·AC-003·AC-004·AC-005·AC-006은 PASS다. AC-007은 PASS_WITH_CONDITIONS로, 외부 브라우저·실기기·실사용자 독해성·독립 과학·규제 검토는 완료로 표시하지 않는다.
+- 최종 상태는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다. 공개 사이트의 자동·정적 배포 품질을 확인했지만 외부 검증과 사용자 최종 판단을 완료로 위장하지 않는다.
+
+증적: `C-244`, `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007`.

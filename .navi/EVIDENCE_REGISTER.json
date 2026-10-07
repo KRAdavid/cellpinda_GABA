@@ -2640,6 +2640,16 @@
       "E-NAVI-STATE-EDGE-STATE-AUDIT-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-244",
+    "statement": "직접 진입·공유 상태 재감리 기록이 보호된 main에 병합되고 정적 공개 배포·라이브 smoke·release-status를 통과했으며, 최종 공개 manifest가 병합 SHA와 일치한다. 기능 코드와 공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
+    "evidence_refs": [
+      "E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007",
+      "E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007",
+      "E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17423,6 +17433,38 @@
     "captured_at": "2026-10-07T14:28:00+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-EDGE-STATE-AUDIT",
     "claim_refs": ["C-243"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "직접 진입·공유 상태 재감리 기록이 PR 보호 검사 후 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #570 https://github.com/KRAdavid/gaba_info/pull/570; squash merge abc51324c26f596667100c3017c0c4b7ca49a4c1; workflow https://github.com/KRAdavid/gaba_info/actions/runs/37577523048: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY; prior-history local-path annotation is a warning only",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37577523048",
+    "captured_at": "2026-10-07T14:43:00+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-EDGE-STATE-AUDIT",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-244"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 문서 감사 release 후 GitHub Pages 공개본이 main merge SHA와 일치하고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=abc51324c26f596667100c3017c0c4b7ca49a4c1; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha abc51324c26f596667100c3017c0c4b7ca49a4c1; generatedAt 2026-10-07T05:42:09.039Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T14:43:00+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-EDGE-STATE-AUDIT-FINAL",
+    "claim_refs": ["C-001", "C-002", "C-244"]
+  },
+  {
+    "id": "E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 최종 main 배포 정합성까지 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-328; .navi/EVIDENCE_REGISTER.json C-244 and three final evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T14:43:00+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-EDGE-STATE-AUDIT-FINAL",
+    "claim_refs": ["C-244"]
   }
 ]
 }

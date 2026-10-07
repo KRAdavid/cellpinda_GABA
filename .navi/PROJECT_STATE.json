@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T14:28:00+09:00",
+  "updated_at": "2026-10-07T14:43:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5858,6 +5858,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T14:28:00+09:00"
+    },
+    {
+      "id": "H-328",
+      "event": "직접 진입·공유 상태 재감리 기록을 PR #570으로 보호된 main에 병합했다. merge `abc51324c26f596667100c3017c0c4b7ca49a4c1`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 동일 candidate SHA·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. C-244와 최종 배포·라이브·NAVI 상태 증거를 등록하며 기능 코드·공개 연구 카피·제품 독립 경계는 변경하지 않았다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T14:43:00+09:00"
     }
   ]
 }

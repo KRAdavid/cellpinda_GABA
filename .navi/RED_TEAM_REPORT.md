@@ -2371,3 +2371,11 @@
 - Browser plugin은 사용할 수 없어 Playwright Chromium fallback으로 검증했으며, 이 결과를 실기기·실제 사용자 독해성 승인으로 확대하지 않는다.
 
 증적: `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`.
+
+## Red-team recheck — 최종 공개 배포 정합성 — abc51324 — 2026-10-07
+
+- PR #570 병합 후 release-verify·Pages·라이브 smoke·release-status를 다시 확인하고, 공개 manifest SHA가 merge SHA와 일치하는지 검증했다.
+- 정적 공개 데이터·제품 독립 경계·teaser `HOLD`가 유지됐으며 기능 코드 변경은 없었다. 새 CRITICAL/MAJOR 결함은 없다.
+- 과거 이력의 local-path 경고는 저장소 history scanner의 경고로 기록했으며 현재 배포 실패로 해석하지 않는다. 외부 브라우저·실기기·실사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
+
+증적: `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`.
