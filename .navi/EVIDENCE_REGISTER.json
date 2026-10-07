@@ -3126,6 +3126,18 @@
         "E-NAVI-STATE-RESEARCH-MAP-LABEL-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-285",
+      "statement": "일반 모드와 큰 글자 모드의 연구 지도 보조 범위 라벨은 280·390px에서 모두 11px로 표시되고 지도 내부에 배치되어 연구 대상 범위를 바로 파악할 수 있다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+        "E-PR-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+        "E-CDP-LIVE-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-BASELINE-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -20239,6 +20251,60 @@
       "captured_at": "2026-10-08T07:58:54+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-MAP-LABEL-FINAL-SYNC",
       "claim_refs": ["C-284"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "일반 모드 연구 지도 범위 라벨 보정 후 로컬 자동 품질 게이트가 통과했다.",
+      "locator": "pnpm run build -> repository privacy, goal, research copy, UI contract, governance, ops docs, typecheck, static bundle, release manifest, artifacts, performance all passed; total assets 1649477 bytes; pnpm test -> 127 pass, 0 fail; git diff --check passed",
+      "captured_at": "2026-10-08T08:17:24+09:00",
+      "reviewer_id": "NAVI-QA-GABA-20261008-RESEARCH-MAP-SCOPE-BASELINE",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-285"]
+    },
+    {
+      "id": "E-PR-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 일반 모드 범위 라벨 보정 PR #651은 보호 검사를 통과하고 main에 병합됐다.",
+      "locator": "PR #651 https://github.com/KRAdavid/gaba_info/pull/651; head e005b07c9cb500bd5863f30af18dc74cc0545728; release-verify success; site-quality-verify success; merge SHA f70e48961931cd3faad1ad32976f50cc457f7daa",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/651",
+      "captured_at": "2026-10-08T08:17:24+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-MAP-SCOPE-BASELINE",
+      "claim_refs": ["C-005", "C-285"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #651 merge 후 main Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책에 따라 skipped됐다.",
+      "locator": "main workflow 37701087150: release-verify 113064427963 success; worker-readiness 113064887961 success; deploy-pages 113064920753 success; deploy-worker 113064921034 skipped by STATIC_ONLY; smoke-live 113064990051 success; release-status 113065068497 success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37701087150",
+      "captured_at": "2026-10-08T08:17:24+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-MAP-SCOPE-BASELINE",
+      "claim_refs": ["C-001", "C-005", "C-285"]
+    },
+    {
+      "id": "E-CDP-LIVE-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "실제 공개 URL의 Chrome CDP fallback 일반·큰 글자 모드에서 연구 지도 범위 라벨이 11px로 보이고 280·390px 지도 내부에 배치됐다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; normal and large modes; widths 280, 390; five scope labels computed font-size 11px in every case; pageWidth/scrollWidth=280/280 and 390/390; all map nodes inside map; runtime errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T08:17:24+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-RESEARCH-MAP-SCOPE-BASELINE",
+      "claim_refs": ["C-004", "C-285"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-BASELINE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "일반 모드 연구 지도 범위 라벨 보정 배포 후 GitHub Pages 공개본은 main merge SHA와 일치하고 정적 공개 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha f70e48961931cd3faad1ad32976f50cc457f7daa; generatedAt 2026-10-07T23:15:27.433Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T08:17:24+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-RESEARCH-MAP-SCOPE-BASELINE",
+      "claim_refs": ["C-001", "C-002", "C-006", "C-285"]
     }
   ]
 }

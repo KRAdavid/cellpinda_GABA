@@ -3398,3 +3398,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 - 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며, NAVI 상태 `USER_DECISION`과 완료 게이트 `NOT_READY`를 유지했다.
 
 증적: `C-284`, `E-NAVI-STATE-RESEARCH-MAP-LABEL-20261008`.
+
+## 연구 지도 일반 모드 범위 라벨 보정 — f70e4896 — 2026-10-08
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #651 병합 후 main workflow `37701087150`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped였다. 공개 validator가 merge candidate `f70e48961931cd3faad1ad32976f50cc457f7daa`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 모바일 가독성: PASS. 연구 지도 보조 범위 라벨의 기본값을 10px에서 11px로 확대해 일반 모드와 큰 글자 모드의 기준을 맞췄다. 공개 Chrome CDP fallback 280·390px에서 두 모드의 다섯 라벨 모두 computed `11px`, 지도 내부 배치, pageWidth/scrollWidth `280/280`·`390/390`, runtime error 0건을 확인했다.
+- AC-005 자동 게이트: PASS. PR 보호 검사와 main workflow의 release-verify·Pages·라이브 smoke·release-status가 통과했다. 로컬 production build·정적 bundle·성능 예산과 127개 테스트도 통과했으며 총 자산은 `1,649,477 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 연구 지도 범위 라벨의 기본 가독성 보정에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-285`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-PR-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-CDP-LIVE-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-BASELINE-20261008`.

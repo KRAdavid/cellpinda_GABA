@@ -2729,3 +2729,11 @@
 - 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았고, Chrome CDP fallback의 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 한계와 `USER_DECISION / NOT_READY`를 유지한다.
 
 증적: `C-284`, `E-NAVI-STATE-RESEARCH-MAP-LABEL-20261008`.
+
+## Red-team recheck — 일반 모드 연구 지도 범위 라벨 — f70e4896 — 2026-10-08
+
+- 공격 관점에서 280·390px 일반·큰 글자 모드 연구 지도의 5개 주제와 `사람 대상 연구`·`동물·세포 연구` 범위 라벨을 확인했다. computed font-size는 모두 `11px`이고 라벨·아이콘·중앙 GABA가 지도 내부에 유지되며 page/scroll width는 각 viewport와 일치했다.
+- 공개 URL의 Pages 배포와 live smoke가 성공했고 공개 validator candidate는 main merge SHA와 일치했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 이번 CSS 보정은 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않는다. Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성 검증을 대신하지 않으며, teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태를 유지한다.
+
+증적: `C-285`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-CDP-LIVE-RESEARCH-MAP-SCOPE-BASELINE-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
