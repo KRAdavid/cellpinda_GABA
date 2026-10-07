@@ -2580,6 +2580,18 @@
       "E-LIVE-PUBLIC-EXPERT-VIDEO-STATE-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-239",
+    "statement": "최신 공개 연구 라우트가 결과 우선 읽기 흐름과 프리미엄 GABA 안내서의 시각 언어를 유지하고, 자연스러운 한국어·정적 메타데이터·출처 연결·모바일 가로폭 기준을 통과했다. 기존 연구 수치와 제품 독립 경계는 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-RESEARCH-ROUTE-20261007",
+      "E-UI-CONTRACT-RESEARCH-ROUTE-20261007",
+      "E-PLAYWRIGHT-RESEARCH-ROUTE-20261007",
+      "E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007",
+      "E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17102,6 +17114,58 @@
     "captured_at": "2026-10-07T12:16:19+09:00",
     "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-EXPERT-VIDEO-STATE",
     "claim_refs": ["C-001", "C-002", "C-238"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-RESEARCH-ROUTE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "공개 연구 라우트의 결과 우선 카피·출처 연결·시각 parity 보정이 연구 카피·UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산 기준을 통과한다.",
+    "locator": "main release 9c3f174; pnpm run validate:research-copy; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 pass; pnpm run build; release-verify follow-up passed; route metadata and static fallback were regenerated for /research/; public asset budget remained within 1,650,000 bytes",
+    "captured_at": "2026-10-07T12:51:37+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-RESEARCH-ROUTE",
+    "claim_refs": ["C-001", "C-005", "C-239"]
+  },
+  {
+    "id": "E-UI-CONTRACT-RESEARCH-ROUTE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "UI 계약이 연구 라우트의 프리미엄 브랜드·결과 우선 제목·자연스러운 읽는 기준·검색·주제 선택·출처 연결 문구를 유지한다.",
+    "locator": "scripts/validate-ui-contract.mjs; scripts/validate-research-copy.mjs; src/components/ResearchLibrary.tsx; src/components/research-route.css; research route copy uses `사람 연구의 결과를 한눈에 읽습니다`, `결과와 연구 조건을 함께 읽어요`, and `연구 내용 찾기`; pnpm run validate:ui-contract and pnpm run validate:research-copy status ok",
+    "captured_at": "2026-10-07T12:51:37+09:00",
+    "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261007-RESEARCH-ROUTE",
+    "claim_refs": ["C-005", "C-239"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-RESEARCH-ROUTE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Playwright Chromium fallback에서 공개 연구 라우트가 390px에서 읽기 쉬운 결과 우선 화면으로 렌더되고, 새 메타데이터·증거 안내·연구 카드·비교 문구가 표시되며 가로 넘침과 실행 오류가 없다.",
+    "locator": "Browser plugin unavailable; Playwright Chromium fallback against https://kradavid.github.io/gaba_info/?view=research&release=9c3f174; viewport 390x844; title `사람 연구의 결과를 한눈에 읽습니다 | 뇌와 우리`; heading `사람 연구의 결과를 한눈에 읽습니다`; brand `뇌와 우리 / GABA를 쉽게 읽는 공개 안내서`; evidence note and comparison wording present; scrollWidth 390 equals clientWidth; page errors 0; console errors 0; screenshot captured outside repository",
+    "captured_at": "2026-10-07T12:51:37+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-RESEARCH-ROUTE",
+    "claim_refs": ["C-003", "C-006", "C-239"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 라우트 고도화와 라이브 검증 계약 보정이 PR 병합 후 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #560 research route polish; PR #561 asset budget repair; PR #562 live metadata contract; final main 9c3f17477c8b5aae835493510104c1cf95186030; workflow https://github.com/KRAdavid/gaba_info/actions/runs/37568431731: release-verify 112621387638 success; worker-readiness 112621720128 success; deploy-pages 112621737560 success; smoke-live 112621785414 success; release-status 112621839382 success; deploy-worker 112621738324 skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37568431731",
+    "captured_at": "2026-10-07T12:51:37+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-RESEARCH-ROUTE",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-239"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 GitHub Pages 공개본이 main release SHA와 일치하고 연구 라우트의 결과 우선 메타데이터·정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 9c3f17477c8b5aae835493510104c1cf95186030; generatedAt 2026-10-07T03:49:13.078Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T12:51:37+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-RESEARCH-ROUTE",
+    "claim_refs": ["C-001", "C-002", "C-239"]
   }
 ]
 }

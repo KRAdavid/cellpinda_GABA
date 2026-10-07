@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — research route — main 9c3f174 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. main workflow `37568431731`의 release-verify·Pages publish·라이브 smoke·release-status가 성공했고, 공개 manifest는 HTTP 200·candidate SHA `9c3f17477c8b5aae835493510104c1cf95186030`·bundle hash 73개·정적 모드·teaser `HOLD`를 확인한다.
+- AC-003: PASS_WITH_CONDITIONS. 연구 라우트가 결과·연구 조건·출처 순서로 읽히며, 공개 390px Chromium fallback에서 새 제목·증거 안내·연구 카드·비교 문구·가로폭·오류 상태를 확인했다. 메인 안내서와 네이비·틸 시각 언어가 맞고 정적 fallback 메타데이터도 일치한다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. 제품 독립 과학 정보 경계와 기존 연구 수치·출처는 유지됐다. Worker는 STATIC_ONLY로 실행하지 않으며, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-ROUTE-20261007`, `E-UI-CONTRACT-RESEARCH-ROUTE-20261007`, `E-PLAYWRIGHT-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007`.
+
 ## Current Public Deployment Recheck — expert video state labels — main 2e6ab07 — 2026-10-07
 
 - AC-001/AC-004/AC-005: PASS. PR #558과 main workflow `37565907302`의 release-verify·Pages publish·라이브 smoke·release-status가 성공했고 공개 validator가 HTTP 200 및 candidate SHA 일치를 확인했다.
