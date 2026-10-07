@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T04:47:00+09:00",
+  "updated_at": "2026-10-08T05:18:51+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6450,6 +6450,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T04:47:00+09:00"
+    },
+    {
+      "id": "H-361",
+      "event": "NAVI 자동 공개 배포 점검에서 연구 규모의 984·557·12,124 대형 수치가 검색 시점 없이 읽힐 수 있는 잔여 출판 가독성 리스크를 확인하고, 큰 수치와 같은 행에 기준일 2026.09.28을 표시하도록 보완했다. 기관별 하버드·옥스퍼드 PubMed 비교와 별도 GABA-A 수용체 SCIE 분석의 범위·수치·출처는 변경하지 않았다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산이 성공했고, 로컬 총 자산은 1,649,346바이트였다. PR #632의 release-verify·site-quality-verify와 main workflow 37680629352의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY에 따라 실행하지 않았다. 공개 validator는 candidate SHA 01fab45151b7631ccf88f342629ccd5387ee4b24·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 경계를 확인했다. 공개 390px Chrome CDP fallback에서 기준일 텍스트·가로폭 390/390·runtime errors=[]를 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-276과 여섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T05:18:51+09:00"
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 규모 기준일 노출 및 공개 배포 재감리 — main 01fab451 — 2026-10-08
+
+- 연구 규모의 큰 수치 옆에 `기준일 2026.09.28`을 노출해, 984·557·12,124가 언제의 어떤 검색·분석 결과인지 첫 시선에서 읽히도록 보완했다. 하버드·옥스퍼드의 동일 PubMed 검색과 별도 GABA-A 수용체 SCIE 분석의 범위·수치·출처는 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·Vite production build·정적 bundle·성능 예산이 통과했다. 로컬 총 자산은 1,649,346바이트였고, PR #632의 release-verify·site-quality-verify 및 main workflow `37680629352`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 `STATIC_ONLY` 정책으로 건너뛰었다.
+- 공개 validator는 candidate SHA `01fab45151b7631ccf88f342629ccd5387ee4b24`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다. 공개 390px Chrome CDP fallback에서 기준일 텍스트, pageWidth/scrollWidth 390/390, errors=[]를 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 외부 검증 조건으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-276`, `E-LOCAL-BUILD-RESEARCH-SCALE-DATE-20261008`, `E-UI-CONTRACT-RESEARCH-SCALE-DATE-20261008`, `E-CDP-RESEARCH-SCALE-DATE-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-DATE-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCALE-DATE-20261008`, `E-NAVI-STATE-RESEARCH-SCALE-DATE-20261008`.
+
 ## 전문가 영상 공개 장 반응형·직접 진입 재감리 — main a6cead44 — 2026-10-08
 
 - 전문가 영상 장을 280·320·390·1440px에서 다시 감리했다. 재생 전 포스터, 선택 게시판, 주제 필터, 9개 영상 카드, 선택 영상 정보가 모바일과 데스크톱에서 한 흐름으로 유지됐다.
