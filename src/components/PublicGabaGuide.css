@@ -380,7 +380,7 @@
   /* v54 mobile chart legibility: keep direction words readable for older readers. */
   .guide-outcome-lane-signal em{font-size:.786em}
   .guide-outcome-metric{min-height:116px;padding:12px}
-  .guide-outcome-metric>strong{font-size:1.643em}
+  .guide-outcome-metric>strong{font-size:1.45em}
   .guide-outcome-metric-track{margin-top:13px}
   .guide-outcome-signals{grid-template-columns:1fr;gap:6px}
   .guide-outcome-signal-row{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"label value" "visual visual";gap:6px 8px;padding:10px}
@@ -2070,6 +2070,7 @@
 @media(max-width:350px){
   .guide-sleep-chart-step .guide-outcome-chart{width:calc(100% + 43px);max-width:none;margin-left:-43px}
   .guide-sleep-chart-step .guide-outcome-comparison-guide-copy strong{white-space:normal;overflow-wrap:anywhere}
+  .guide-outcome-comparison-guide-copy strong{white-space:normal;overflow-wrap:anywhere}
 }
 
 /* v148 research map atmosphere: give the five-area map a quiet scientific centre without adding copy. */
