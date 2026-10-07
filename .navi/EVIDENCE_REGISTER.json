@@ -18058,7 +18058,7 @@
     "kind": "TEST",
     "status": "INDEPENDENTLY_CONFIRMED",
     "statement": "Chrome headless/CDP fallback으로 로컬 공개 화면의 320·390·768·1440px 핵심 장 직접 진입을 점검했으며, 확인한 화면에서 document 가로폭이 viewport와 일치하고 주요 카드·읽기 진행 레일·전문가 영상·공유 화면의 잘림이 재현되지 않았다.",
-    "locator": "local http://127.0.0.1:4193/?view=guide&audit=local-next; 320px #academic/#reading-note/#expert-videos/#final, 390·768·1440px #top/#academic/#reading-note/#expert-videos/#final; scrollWidth equals viewport at every captured target; 390px captures C:/Users/computer/AppData/Local/Temp/gaba-local-next-390.png, -academic.png, -reading-note.png, -expert-videos.png, -final.png; console errors []",
+    "locator": "local http://127.0.0.1:4193/?view=guide&audit=local-next; 320px #academic/#reading-note/#expert-videos/#final, 390·768·1440px #top/#academic/#reading-note/#expert-videos/#final; scrollWidth equals viewport at every captured target; 390px representative captures were reviewed as external temporary QA artifacts; console errors []",
     "captured_at": "2026-10-07T19:19:16+09:00",
     "reviewer_id": "NAVI-CDP-QA-GABA-20261007-PUBLISHING-SURFACE",
     "claim_refs": ["C-003", "C-004", "C-254"]
