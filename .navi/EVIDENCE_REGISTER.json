@@ -18216,7 +18216,7 @@
     "kind": "TEST",
     "status": "INDEPENDENTLY_CONFIRMED",
     "statement": "Chrome headless/CDP fallback으로 320px 연구 결과 도표를 직접 열어 비교 조건과 GABA 그룹의 나란한 카드·변화 방향 막대·GABA 결과 강조·읽는 법 범례를 확인했으며 가로 넘침은 없었다.",
-    "locator": "local http://127.0.0.1:5173/#research-cognition; viewport 320x1400; screenshot C:/Users/computer/AppData/Local/Temp/gaba-cognition-chart-320-compact.png; chart comparison lanes remain two columns; document scrollWidth=320; chart height 829.96875; 390px counterpart was also captured without overflow",
+    "locator": "local http://127.0.0.1:5173/#research-cognition; viewport 320x1400; temporary screenshot artifact `gaba-cognition-chart-320-compact.png` outside the repository; chart comparison lanes remain two columns; document scrollWidth=320; chart height 829.96875; 390px counterpart was also captured without overflow",
     "captured_at": "2026-10-07T20:39:00+09:00",
     "reviewer_id": "NAVI-CDP-QA-GABA-20261007-NARROW-COMPARISON",
     "claim_refs": ["C-003", "C-004", "C-257"]
