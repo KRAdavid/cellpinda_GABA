@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Recheck — main 1334348 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. 최신 main 기준 로컬 품질 게이트와 Pages-style 정적 bundle이 통과했고, 공개 validator가 HTTP 200·candidate SHA 일치·bundle hash 73개·공개 데이터 정합성을 확인했다.
+- AC-003: PASS_WITH_CONDITIONS. 공개 Playwright Chromium fallback 390px·1440px에서 히어로·연구 지도·피부 주제 선택·전문가 영상 선택·마지막 공유 장을 재현했고 가로 넘침·page error·console error가 없었다. Browser 플러그인은 unavailable 상태라 fallback을 사용했다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. 제품 독립 경계와 teaser `HOLD`는 유지된다. Worker 운영 비밀값, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-NAVI-PUBLIC-RECHECK-20261007`, `E-PLAYWRIGHT-PUBLIC-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-20261007`.
+
 ## Current Release Recheck — research cue scope line deployed — main af936c7 — 2026-10-07
 
 - AC-001/AC-004/AC-005: PASS. PR #551 검사와 main workflow `37560044899`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200이다. 공개 validator는 candidate `af936c72c3b6140488b27d6a390809201ec99d25`와 73개 bundle hash를 확인했다.

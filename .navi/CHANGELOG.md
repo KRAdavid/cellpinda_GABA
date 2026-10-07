@@ -1,5 +1,13 @@
 # Project Changelog
 
+## NAVI 자동 공개본 재점검 — main 1334348 — 2026-10-07
+
+- 최신 main 공개본을 로컬 품질 게이트·Pages-style 정적 bundle·라이브 validator·공개 Playwright Chromium fallback으로 재점검했다. 390px·1440px에서 히어로·연구·전문가 영상·공유 장과 연구 주제 선택 흐름을 확인했고, 새 CRITICAL/MAJOR 결함은 없었다.
+- Pages-style 총 자산은 1,647,283 bytes, route 11개, bundle file 73개다. 공개 candidate SHA는 `13343484e0850ac5b38c81add64a2625aa8b17a2`로 최신 main과 일치한다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. teaser `HOLD`, Worker 운영 비밀값, 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 남아 있다.
+
+증적: `E-LOCAL-BUILD-NAVI-PUBLIC-RECHECK-20261007`, `E-PLAYWRIGHT-PUBLIC-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-20261007`.
+
 ## 06·연구 대상 연결 라인·공개 배포 완료 — main af936c7 — 2026-10-07
 
 - PR #551을 병합하고 main workflow `37560044899`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `af936c72c3b6140488b27d6a390809201ec99d25`, bundle hash 73개, 제품 독립 경계를 확인했다.

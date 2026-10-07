@@ -1,5 +1,13 @@
 # Audit Report
 
+## NAVI 자동 공개본 재점검 — main 1334348 — 2026-10-07
+
+- 최신 main `13343484e0850ac5b38c81add64a2625aa8b17a2`를 기준으로 로컬 typecheck·UI contract·127개 테스트·production build·정적 bundle·release manifest·성능 예산을 재실행했다. Pages-style 총 자산은 1,647,283 bytes로 1,650,000 bytes 예산 안이며 release manifest는 11개 route·73개 파일을 확인했다.
+- `validate:live-public`는 HTTP 200·candidate SHA 일치·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다. Playwright Chromium fallback 공개 재현에서 390px·1440px의 히어로·연구·전문가 영상·공유 장을 확인하고 피부 연구 선택 갱신도 재현했다. Browser 플러그인은 현재 사용할 수 없어 fallback을 사용했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Cloudflare Worker 비밀값 미설정은 정적 GitHub Pages 공개와 별개의 운영 게이트로 `WAITING` 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NAVI-PUBLIC-RECHECK-20261007`, `E-PLAYWRIGHT-PUBLIC-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-20261007`.
+
 ## 06·연구 대상 연결 라인·공개 배포 후 재감사 — main af936c7 — 2026-10-07
 
 - PR #551과 main workflow `37560044899`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다. 공개 validator는 HTTP 200·candidate `af936c72c3b6140488b27d6a390809201ec99d25`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.

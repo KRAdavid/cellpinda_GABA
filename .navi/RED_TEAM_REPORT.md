@@ -1,5 +1,13 @@
 # Red Team Report
 
+## NAVI 자동 공개본 공격 재점검 — main 1334348 — 2026-10-07
+
+- 공격 관점에서 최신 공개본의 대표 진입·연구 주제 선택·전문가 영상 선택·공유 장을 390px와 1440px에서 다시 확인했다. 연구 지도에서 피부를 선택하면 결과 전환 밴드의 주제·대상 범위와 활성 연구 카드가 함께 바뀌고, 전문가 영상 선택은 선택 카드 하나와 제목을 갱신한다.
+- 로컬·라이브 validator와 Playwright Chromium fallback에서 viewport와 document 폭이 일치하고 page error·console error가 없었다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser 플러그인 부재와 fallback의 한계는 기록한다.
+- RT-001·RT-002·RT-003과 teaser `HOLD`는 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 OPEN이며 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NAVI-PUBLIC-RECHECK-20261007`, `E-PLAYWRIGHT-PUBLIC-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-20261007`.
+
 ## 06·연구 대상 연결 라인·공개 배포 공격 재점검 — main af936c7 — 2026-10-07
 
 - 공개 후보에서 결과와 연구 대상이 분리되어 보이는 리스크를 다시 공격적으로 확인했다. 결과 요약 아래에 기존 카드의 대상·연구 범위 라인을 두었고, 라이브 390px·1440px에서 `대표 결과 → 관찰 결과 → 대상·연구 범위` 순서가 유지됐다.

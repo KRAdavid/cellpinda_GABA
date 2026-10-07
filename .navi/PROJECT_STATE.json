@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T11:05:30+09:00",
+  "updated_at": "2026-10-07T11:21:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2143,7 +2143,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-06T23:12:00Z"
+    "last_run_at": "2026-10-07T02:21:00Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2345,7 +2345,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-06T23:12:00Z"
+    "last_run_at": "2026-10-07T02:21:00Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5774,6 +5774,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T11:05:30+09:00"
+    },
+    {
+      "id": "H-316",
+      "event": "최신 main `13343484` 공개본에 대해 NAVI 자동 재점검을 실행했다. 로컬 typecheck·UI contract·127개 테스트·production build·정적 bundle·release manifest·성능 예산이 통과했고, 공개 validator는 HTTP 200·candidate `13343484e0850ac5b38c81add64a2625aa8b17a2`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 경계를 확인했다. 공개 Playwright Chromium fallback 390px·1440px에서 히어로·연구·전문가 영상·공유 장과 피부 주제 선택을 재현했으며 가로 넘침·page error·console error가 없었다. 새 CRITICAL/MAJOR 결함은 없고 C-233과 세 재점검 증거를 등록한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T11:21:00+09:00"
     }
   ]
 }
