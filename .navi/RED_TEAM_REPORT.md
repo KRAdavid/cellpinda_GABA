@@ -2424,3 +2424,11 @@
 - 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`.
+
+## Red-team recheck — 공개 반응형 다중 폭·내부 스크롤 구분 — 최종 공개본 — 2026-10-07
+
+- 공격 관점에서 공개 360·390·430·768·1440px의 `#top`·`#research`·`#reading-note`·`#final` 직접 진입을 재현했다. 모든 폭에서 document `scrollWidth`가 viewport와 일치했고, 대표 캡처에서 헤더·히어로·출처 읽기 카드·다음 장 연결부의 잘림과 겹침은 없었다.
+- 모바일 전문가 영상 주제 필터가 요소 단위로 viewport 밖까지 이어지는 것은 `overflow-x:auto`로 설계된 내부 탐색 레일이며 document 폭을 확장하지 않는다. 페이지 전체 가로 넘침 결함으로 오판해 수정하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 없다. 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 실기기·실제 사용자 승인으로 확대하지 않으며, teaser `HOLD`와 외부 검증 조건은 유지한다.
+
+증적: `E-CDP-RESPONSIVE-AUDIT-20261007`, `E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007`.

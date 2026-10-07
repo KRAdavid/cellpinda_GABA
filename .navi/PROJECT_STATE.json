@@ -5900,6 +5900,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T17:15:00+09:00"
+    },
+    {
+      "id": "H-334",
+      "event": "NAVI 자동 공개 배포 반응형 재감리에서 360·390·430·768·1440px의 top·research·reading-note·final 직접 진입을 점검했다. 모든 viewport에서 document scrollWidth가 viewport와 일치했고, 모바일 전문가 영상 주제 필터의 가로 확장은 의도된 overflow-x 스크롤 레일로 확인되어 페이지 넘침 결함으로 분류하지 않았다. 360·430·1440px 대표 화면 캡처에서 헤더·히어로·출처 읽기 카드·다음 장 연결부의 잘림과 겹침이 없었으며 390px 연결 문구는 `연구를 읽는 기준에서 공유 가능한 / 이야기로`로 유지됐다. 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재에 따른 Chrome headless/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-250과 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T17:45:00+09:00"
     }
   ]
 }

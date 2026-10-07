@@ -2710,6 +2710,17 @@
       "E-NAVI-STATE-KOREAN-HANDOFF-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-250",
+    "statement": "공개 반응형 핵심 장이 360·390·430·768·1440px에서 직접 진입해 viewport 폭 안에 표시되고, 모바일 전문가 영상 필터의 가로 레일은 의도된 내부 스크롤로 구분된다. 대표 화면에서 헤더·히어로·출처 읽기 카드·다음 장 연결부의 잘림과 겹침이 없으며 연구 카피·수치·출처·제품 독립 경계를 유지한다.",
+    "evidence_refs": [
+      "E-CDP-RESPONSIVE-AUDIT-20261007",
+      "E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007",
+      "E-DEPLOY-PIPELINE-RESPONSIVE-AUDIT-20261007",
+      "E-NAVI-STATE-RESPONSIVE-AUDIT-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17785,6 +17796,48 @@
     "captured_at": "2026-10-07T17:15:00+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-KOREAN-HANDOFF",
     "claim_refs": ["C-249"]
+  },
+  {
+    "id": "E-CDP-RESPONSIVE-AUDIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Browser plugin을 사용할 수 없어 Chrome headless/CDP fallback으로 공개 360·390·430·768·1440px에서 top·research·reading-note·final을 직접 해시 진입해 반응형 geometry를 점검했다. 모든 viewport에서 document scrollWidth가 viewport와 일치했고 대표 캡처에서 헤더·히어로·출처 읽기 카드·다음 장 연결부의 잘림과 겹침이 없었다. 모바일 전문가 영상 필터는 의도된 내부 가로 스크롤 레일이었다.",
+    "locator": "Chrome headless/CDP fallback; public https://kradavid.github.io/gaba_info/guide/?view=guide&v=responsive-audit; widths 360/390/430/768/1440; direct hashes #top #research #reading-note #final; scrollWidth/clientWidth 360/360, 390/390, 430/430, 753/753, 1425/1425; screenshots captured outside repository at C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-responsive-audit-20261007",
+    "captured_at": "2026-10-07T17:45:00+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-RESPONSIVE-AUDIT",
+    "claim_refs": ["C-003", "C-004", "C-250"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 GitHub Pages 공개본에서 반응형 재감리 대상이 최신 공개 manifest와 연결되고, 정적 공개 데이터·제품 독립 경계·teaser HOLD가 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=5fa5cf54635782a23291a3dcfc5659a2b528c95f3; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 5fa5cf54635782a23291a3dcfc5659a2b528c95f3; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T17:45:00+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-RESPONSIVE-AUDIT",
+    "claim_refs": ["C-001", "C-002", "C-250"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-RESPONSIVE-AUDIT-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "반응형 재감리 기준으로 삼은 문서-only NAVI release가 보호된 main 배포 파이프라인을 통과했다.",
+    "locator": "main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37592897460: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY; final candidate SHA 5fa5cf54635782a23291a3dcfc5659a2b528c95f3",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37592897460",
+    "captured_at": "2026-10-07T17:45:00+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-RESPONSIVE-AUDIT",
+    "claim_refs": ["C-001", "C-005", "C-250"]
+  },
+  {
+    "id": "E-NAVI-STATE-RESPONSIVE-AUDIT-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 공개 반응형 재감리 결과를 연결하고, 새 코드 결함이 없다는 판단과 사용자 결정 상태·완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-334; .navi/EVIDENCE_REGISTER.json C-250 and four evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T17:45:00+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-RESPONSIVE-AUDIT",
+    "claim_refs": ["C-250"]
   }
 ]
 }

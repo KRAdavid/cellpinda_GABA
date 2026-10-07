@@ -2756,3 +2756,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-249`, `E-LOCAL-BUILD-KOREAN-HANDOFF-20261007`, `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`, `E-NAVI-STATE-KOREAN-HANDOFF-20261007`.
+
+## Current Release Recheck — 5fa5cf5 — 공개 반응형 다중 폭 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 최종 GitHub Pages 공개본 candidate `5fa5cf54635782a23291a3dcfc5659a2b528c95f3`가 HTTP 200·STATIC·73개 bundle hash·12 claims·6 master records·6 share pages·`teaser HOLD`·`provenance matched`와 일치한다.
+- AC-003/AC-004 반응형·직접 진입: PASS. `#top`·`#research`·`#reading-note`·`#final`을 360·390·430·768·1440px에서 직접 열었고 document 폭이 viewport와 일치했다. 모바일 영상 필터의 요소 폭은 의도된 내부 가로 스크롤 레일로 확인했다. 360·430·1440px 대표 화면에서 주요 카드의 잘림·겹침이 없었다.
+- AC-005 배포 게이트: PASS. 문서-only NAVI release의 `release-verify`·`worker-readiness`·`deploy-pages`·`smoke-live`·`release-status`가 성공했다.
+- AC-006 제품 독립 경계: PASS. 기능 코드·공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없지만 Browser plugin 부재에 따른 fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-250`, `E-CDP-RESPONSIVE-AUDIT-20261007`, `E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007`, `E-DEPLOY-PIPELINE-RESPONSIVE-AUDIT-20261007`, `E-NAVI-STATE-RESPONSIVE-AUDIT-20261007`.

@@ -2942,6 +2942,17 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-249`, `E-LOCAL-BUILD-KOREAN-HANDOFF-20261007`, `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`, `E-NAVI-STATE-KOREAN-HANDOFF-20261007`.
 
+## 공개 배포 반응형 다중 폭 재감리 — 최종 공개본 — 2026-10-07
+
+- AC-001 공개 정합성: PASS. 최종 공개 manifest candidate `5fa5cf54635782a23291a3dcfc5659a2b528c95f3`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 반응형·읽기 흐름: PASS. 공개 `#top`·`#research`·`#reading-note`·`#final`을 360·390·430·768·1440px에서 직접 진입했다. document `scrollWidth`는 각 viewport와 일치했고 360·430·1440px 대표 캡처에서 헤더·히어로·출처 읽기 카드·다음 장 연결부의 잘림과 겹침이 없었다. 모바일 전문가 영상 필터의 넓은 요소는 페이지를 밀어내는 넘침이 아니라 의도된 내부 가로 스크롤 레일이었다.
+- AC-006 제품 독립 경계: PASS. 이번 점검은 레이아웃·반응형 표시 검증만 수행했으며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 발견되지 않았다. Browser plugin 부재에 따른 Chrome headless/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-250`, `E-CDP-RESPONSIVE-AUDIT-20261007`, `E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007`, `E-DEPLOY-PIPELINE-RESPONSIVE-AUDIT-20261007`, `E-NAVI-STATE-RESPONSIVE-AUDIT-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

@@ -2147,3 +2147,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`와 외부 검증 조건을 유지한다.
 
 증적: `C-249`, `E-LOCAL-BUILD-KOREAN-HANDOFF-20261007`, `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`, `E-NAVI-STATE-KOREAN-HANDOFF-20261007`.
+
+## 2026-10-07 — 공개 반응형 다중 폭 자동 재감리 — 5fa5cf5
+
+- 공개 360·390·430·768·1440px에서 `#top`·`#research`·`#reading-note`·`#final`을 직접 진입시켜 document 폭과 핵심 화면을 점검했다. 주요 화면의 잘림·겹침은 없었다.
+- 모바일 전문가 영상 필터는 페이지 넘침이 아닌 의도된 내부 가로 스크롤 레일로 확인했다. 새 기능 코드나 연구 카피는 변경하지 않았다.
+- 최종 공개 validator와 NAVI 상태를 재확인했다. `USER_DECISION / NOT_READY`, teaser `HOLD`, 외부 브라우저·실기기·실사용자·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-250`, `E-CDP-RESPONSIVE-AUDIT-20261007`, `E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007`, `E-DEPLOY-PIPELINE-RESPONSIVE-AUDIT-20261007`, `E-NAVI-STATE-RESPONSIVE-AUDIT-20261007`.
