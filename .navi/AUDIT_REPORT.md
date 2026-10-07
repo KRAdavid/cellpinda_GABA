@@ -2911,6 +2911,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-242`, `E-LOCAL-BUILD-PRINT-SHARE-KIT-20261007`, `E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-PRINT-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007`, `E-NAVI-STATE-PRINT-SHARE-KIT-20261007`.
+
+## Current Release Recheck — 42be0181 — 직접 진입·공유 경계 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 공개 validator가 candidate `42be0181c5ad0cfef839b34f9a4d9a74472fd660`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 소비자 흐름·반응형: PASS. `#research`·연구 주제 해시·전문가 영상 해시가 의도한 위치와 선택 상태로 열리고, 320·390·768px에서 가로폭·page/console error가 정상이다. 공유 알림과 사업자용 5문장 전체 복사도 실제 상태 변경을 재현했다.
+- AC-005 자동 게이트: PASS. typecheck·127개 테스트·production build·정적 bundle·release manifest·성능·개인정보·NAVI 검사가 통과했다. 총 자산은 `1,649,465 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 재감리는 공개 UX 경계 검증이며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재에 따른 Playwright Chromium fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-243`, `E-LOCAL-EDGE-STATE-AUDIT-20261007`, `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-20261007`.
 ## 인쇄·PDF 공개 배포 재검증 — aa4ea2f — 2026-10-07
 
 - AC-001 공개 URL·Pages 정합성: PASS. main workflow `37547332906`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 validator가 candidate `aa4ea2f147ac4997844221ed3c2c64ba86bdcc20`·HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·teaser `HOLD`·provenance `matched`를 확인했다.

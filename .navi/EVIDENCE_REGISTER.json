@@ -2629,6 +2629,17 @@
       "E-NAVI-STATE-PRINT-SHARE-KIT-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-243",
+    "statement": "최신 공개본에서 직접 해시 진입·연구 카드 선택·전문가 영상 선택·공유 알림·사업자용 5문장 복사·큰 글자 모드·반응형 경계가 자동·브라우저 검증으로 재현되며, 새 CRITICAL/MAJOR 결함이 없어 공개 코드를 불필요하게 흔들지 않고 유지할 근거를 확보했다.",
+    "evidence_refs": [
+      "E-LOCAL-EDGE-STATE-AUDIT-20261007",
+      "E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007",
+      "E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007",
+      "E-NAVI-STATE-EDGE-STATE-AUDIT-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17371,6 +17382,47 @@
     "captured_at": "2026-10-07T14:11:48+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PRINT-SHARE-KIT",
     "claim_refs": ["C-242"]
+  },
+  {
+    "id": "E-LOCAL-EDGE-STATE-AUDIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 공개 코드 기준의 자동 품질 게이트가 typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산·NAVI 검사를 통과하고, 공개 연구·제품 독립 경계를 유지한다.",
+    "locator": "main public base 42be0181c5ad0cfef839b34f9a4d9a74472fd660; pnpm run typecheck; pnpm test 127 pass; pnpm run build; pnpm run validate:repo-privacy; pnpm run validate:goal; pnpm run validate:plan; pnpm run validate:research-copy; pnpm run validate:ui-contract; pnpm run validate:ops-docs; pnpm run validate:governance; NAVI validate_project_state.py -> PASS; validate:performance initial JS 311405, initial CSS 95703, total assets 1649465 <= 1650000",
+    "captured_at": "2026-10-07T14:28:00+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-EDGE-STATE-AUDIT",
+    "claim_refs": ["C-001", "C-005", "C-243"]
+  },
+  {
+    "id": "E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "공개 GitHub Pages에서 직접 해시 진입·연구 카드 포커스·전문가 영상 선택·공유 알림·사업자용 5문장 복사와 반응형 경계를 실제로 재현했다.",
+    "locator": "Browser plugin unavailable; Playwright Chromium fallback against https://kradavid.github.io/gaba_info/; direct #research focused research-heading with no forced card selection, #research-cognition and #research-skin focused the selected card below the reading rail, ?video=RLAU1VWGsaI#expert-videos selected the requested video with feature state `재생 중`; 320·390·768px had document scrollWidth equal to viewport and page/console errors 0; share toast and business 5-line copy toast changed state; screenshots stored outside repository",
+    "captured_at": "2026-10-07T14:28:00+09:00",
+    "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-EDGE-STATE-AUDIT",
+    "claim_refs": ["C-003", "C-006", "C-243"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 GitHub Pages 공개본이 main release SHA와 일치하고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 42be0181c5ad0cfef839b34f9a4d9a74472fd660; generatedAt 2026-10-07T05:17:57.642Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T14:28:00+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-EDGE-STATE-AUDIT",
+    "claim_refs": ["C-001", "C-002", "C-243"]
+  },
+  {
+    "id": "E-NAVI-STATE-EDGE-STATE-AUDIT-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 직접 진입·공유·복사 경계 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-327; .navi/EVIDENCE_REGISTER.json C-243 and four evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T14:28:00+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-EDGE-STATE-AUDIT",
+    "claim_refs": ["C-243"]
   }
 ]
 }

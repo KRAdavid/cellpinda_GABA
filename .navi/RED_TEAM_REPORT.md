@@ -2362,3 +2362,12 @@
 - 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. Browser plugin은 사용할 수 없어 Playwright Chromium fallback으로 검증했다.
 
 증적: `E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007`.
+
+## Red-team recheck — 직접 진입·공유 상태·반응형 경계 — 42be0181 — 2026-10-07
+
+- 공격 관점에서 직접 해시 진입, 연구 카드 활성 상태, 전문가 영상 선택 상태, 공유 알림, 사업자용 5문장 복사, 320·390·768px 가로폭을 재현했다.
+- 연구 제목과 카드가 고정 읽기 진행 레일에 가려지지 않았고, 문서 폭은 각 viewport와 일치했으며 page error·console error는 0이었다. 공유·복사 알림은 실제 상태 변경 후 표시되고 스크롤 시 사라졌다.
+- 새 CRITICAL/MAJOR 결함은 없다. 기능 코드는 변경하지 않고 공개본을 유지한다. 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다.
+- Browser plugin은 사용할 수 없어 Playwright Chromium fallback으로 검증했으며, 이 결과를 실기기·실제 사용자 독해성 승인으로 확대하지 않는다.
+
+증적: `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`.

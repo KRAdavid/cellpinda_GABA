@@ -2682,3 +2682,11 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-242`, `E-LOCAL-BUILD-PRINT-SHARE-KIT-20261007`, `E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-PRINT-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007`, `E-NAVI-STATE-PRINT-SHARE-KIT-20261007`.
+
+## Current Release Recheck — 42be0181 — 2026-10-07
+
+- 공개본의 직접 진입·공유·복사·반응형 경계는 PASS다. 기능 코드는 변경하지 않았고, 최신 live release SHA `42be0181c5ad0cfef839b34f9a4d9a74472fd660`와 정적 공개 데이터 경계를 재확인했다.
+- AC-005 자동 게이트와 AC-007 레드팀은 PASS_WITH_CONDITIONS다. 새 CRITICAL/MAJOR 결함은 없지만 Browser plugin 부재, 실기기·실사용자 독해성, 독립 과학·규제 감수는 아직 외부 조건이다.
+- 최종 상태는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다. 이는 공개 사이트가 미완성이라는 뜻이 아니라, 남은 외부 검증과 사용자 최종 판단을 완료로 위장하지 않는 상태다.
+
+증적: `C-243`, `E-LOCAL-EDGE-STATE-AUDIT-20261007`, `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-20261007`.

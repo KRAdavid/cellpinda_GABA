@@ -2113,3 +2113,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
 
 증적: `C-242`, `E-LOCAL-BUILD-PRINT-SHARE-KIT-20261007`, `E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-PRINT-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007`, `E-NAVI-STATE-PRINT-SHARE-KIT-20261007`.
+
+## 2026-10-07 — 공개 배포 경계 상태 자동 재감리 — 42be0181
+
+- 최신 공개본을 직접 해시·공유·복사·반응형 경계 관점에서 다시 점검했다. `#research`는 연구 지도로, 연구 주제 해시는 해당 상세 카드로, 전문가 영상 해시는 선택 영상으로 진입했으며 읽기 진행 레일 아래에서 제목과 카드가 가려지지 않았다.
+- 320·390·768px에서 가로 넘침과 page/console error가 없었고, 공유 알림·사업자용 5문장 복사·큰 글자 모드의 실제 상태 변경을 재현했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 발견되지 않아 기능 코드는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
+
+증적: `C-243`, `E-LOCAL-EDGE-STATE-AUDIT-20261007`, `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-20261007`.
