@@ -465,7 +465,7 @@
 .guide-video-feature-loading-poster{position:absolute;inset:0;z-index:1;display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.76) brightness(.62);transition:opacity .22s ease}
 .guide-video-feature-media.is-loading iframe{opacity:0}
 .guide-video-feature-loading{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;gap:8px;padding:20px;color:#d6f0f0;background:linear-gradient(180deg,rgba(8,24,43,.18),rgba(8,24,43,.62));font-size:12px;font-weight:850;letter-spacing:-.04em;opacity:0;pointer-events:none;transition:opacity .22s ease}
-.guide-video-feature-media.is-loading .guide-video-feature-loading{opacity:1}
+.guide-video-feature-media.is-loading .guide-video-feature-loading{opacity:1;pointer-events:auto}
 .guide-video-feature-loading svg{animation:guide-video-loading-spin 1s linear infinite}
 @keyframes guide-video-loading-spin{to{transform:rotate(360deg)}}
 .guide-video-feature-poster{position:relative;display:block;width:100%;height:100%;padding:0;border:0;background:#08182b;color:#fff;text-align:left;overflow:hidden}
@@ -2204,8 +2204,3 @@
   .guide-video-feature-meta{flex-wrap:wrap;gap:4px 6px;white-space:normal}
   .guide-video-feature-meta .guide-video-feature-index{margin-left:0}
 }
-
-/* v174 expert-video resilience: make a slow or blocked external player recoverable. */
-.guide-video-feature-loading.is-timeout{align-items:flex-start;justify-content:flex-end;padding:18px;pointer-events:auto}
-.guide-video-feature-loading-actions{display:flex;flex-wrap:wrap;gap:6px}
-.guide-video-feature-loading-actions .guide-video-feature-share{min-height:36px;padding:0 9px}
