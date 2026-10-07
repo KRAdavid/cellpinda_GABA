@@ -81,7 +81,7 @@ if (outputDirectory.endsWith('dist-pages')) {
   }
 }
 const researchHtml = await readFile(resolve(outputDirectory, 'research/index.html'), 'utf8');
-assert.ok(researchHtml.includes('사람을 대상으로 한 GABA 연구를 쉽게 보기'), 'research route must identify its educational purpose');
+assert.ok(researchHtml.includes('사람 연구의 결과를 한눈에 읽습니다'), 'research route must identify its educational purpose');
 const productHtml = await readFile(resolve(outputDirectory, 'products/index.html'), 'utf8');
 assert.ok(productHtml.includes('셀핀다 가바 1500 · 30포 구성 보기'), 'product route must identify the approved product');
 assert.ok(productHtml.includes('4701017202#REVIEW_DIALOG'), 'product route must preserve the direct SmartStore review destination');

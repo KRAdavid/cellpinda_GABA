@@ -110,7 +110,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   const topicCards = [
     {topic:'잠', label:'잠', detail:'잠드는 시간과 수면을 본 연구', Icon:Moon},
     {topic:'스트레스·잠', label:'스트레스와 잠', detail:'스트레스와 잠을 본 연구', Icon:Activity},
-    {topic:'뇌파·과제', label:'머리를 많이 쓴 뒤', detail:'머리를 많이 쓴 뒤 뇌 신호', Icon:Brain},
+    {topic:'뇌파·과제', label:'머리를 많이 쓴 뒤', detail:'뇌파와 활력 기록', Icon:Brain},
     {topic:'운동', label:'쉬었을 때·운동했을 때', detail:'혈액 속 성장호르몬을 살펴본 연구', Icon:Dumbbell},
     {topic:'뇌·손끝 연습', label:'손끝 감각', detail:'손끝 자극과 뇌 신호', Icon:Hand},
   ].filter(card => topics.includes(card.topic));
@@ -175,7 +175,7 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
     const detailScope = studyConditions[claim.id] || '연구에서 살펴본 조건이에요.';
     return <article id={claim.id} className={`research-library-card${featured ? ` research-library-card-featured${resultVisualFirst ? ' research-library-card-featured--visual-first' : ''}` : ''}`} key={claim.id}>
       <p className={`research-library-kind${nonIngestionStudy ? ' research-library-kind--non-ingestion' : ''}${generalResearch ? ' research-library-kind--general' : ''}`}><span className="research-library-kind-mark" aria-hidden="true" />{reviewOverview ? '사람 연구 여러 편을 모아 정리 · 2020년 2월까지' : compactStudyType(metadata.studyType, metadata.dose)}</p>
-      <p className="research-library-study-boundary">일반 GABA 연구에서 본 내용 · 연구 조건과 출처를 카드에서 확인해요</p>
+      <p className="research-library-study-boundary">일반 GABA 연구에서 본 내용 · 결과와 연구 조건을 함께 읽어요</p>
       <h3>{reviewOverview ? '사람 연구 14편의 범위 살펴보기' : metadata.question || claim.topic}</h3>
       {takeaway ? <p className={`research-library-consumer-summary${findingFirst ? ' research-library-consumer-finding' : ''}`}><strong>{reviewOverview ? '자료에서 다룬 내용' : findingFirst ? '사람 연구에서 관찰된 변화' : '이 연구에서 본 내용'}</strong>{takeaway}</p> : null}
       {metadata.consumerVisual ? <StudyInsightVisual visual={metadata.consumerVisual}/> : null}
@@ -207,9 +207,9 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
   }
 
   return <section id="research" className="section wrap research research-library" aria-label="연구를 쉬운 말로 보기">
-    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>각 카드에서 사람 연구의 결과와 조건을 함께 볼 수 있어요.</p></div></div>
-    <p className="research-library-evidence-note"><strong>먼저 확인해 주세요</strong>일반 GABA와 휴식에 관한 사람 연구를 쉬운 말로 정리했어요. 카드 안에서 연구 조건과 출처를 확인할 수 있어요.</p>
-    <div className="research-topic-cards" role="group" aria-label="궁금한 주제 고르기">{topicCards.map(({topic:cardTopic,label,detail,Icon})=>{
+    <div className="section-head research-library-head"><div><h2 id="research-title">{sectionTitle}</h2><p>결과를 먼저 보고, 카드 안에서 연구 조건과 출처를 이어서 읽어요.</p></div></div>
+    <p className="research-library-evidence-note"><strong>이 페이지의 읽는 기준</strong>일반 GABA 연구를 결과·연구 조건·출처 순서로 정리했습니다. 카드 안에서 연구 조건과 출처를 함께 읽을 수 있어요.</p>
+    <div className="research-topic-cards" role="group" aria-label="연구 주제 고르기">{topicCards.map(({topic:cardTopic,label,detail,Icon})=>{
       const recordCount=`${studies.filter(claim=>claim.topic===cardTopic).length}건`;
       return <button type="button" className="research-topic-card" key={cardTopic} aria-label={`${label} · ${detail} · ${recordCount}`} aria-pressed={activeTopic===cardTopic} onClick={()=>{
         const nextTopic = activeTopic === cardTopic ? '' : cardTopic;
@@ -219,10 +219,10 @@ export default function ResearchLibrary({ claims, sectionTitle = 'GABA 연구 �
     })}</div>
     {featuredStudy ? renderStudy(featuredStudy, true) : null}
     <details className="research-library-browse" id="research-library-browse" ref={browseRef}>
-      <summary><span><Search size={18} aria-hidden="true"/> 주제별로 다른 연구 찾기</span><small>{Math.max(0, visibleStudies.length - 1)}편 더 보기</small></summary>
+      <summary><span><Search size={18} aria-hidden="true"/> 다른 연구 더 읽기</span><small>{Math.max(0, visibleStudies.length - 1)}편 더 보기</small></summary>
       {studies.length > 0 ? <>
-      <div className="research-library-controls" role="search" aria-label="연구를 주제별로 찾기">
-        <label htmlFor="research-search">궁금한 내용 찾기<input id="research-search" type="search" aria-label="연구 내용 검색" value={query} onChange={event => setQuery(event.target.value)} placeholder="잠·스트레스·뇌파·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
+      <div className="research-library-controls" role="search" aria-label="연구 주제별로 찾기">
+        <label htmlFor="research-search">연구 내용 찾기<input id="research-search" type="search" aria-label="연구 내용 검색" value={query} onChange={event => setQuery(event.target.value)} placeholder="잠·스트레스·뇌파·운동으로 찾아보세요" aria-describedby="research-search-help" /></label>
         <label htmlFor="research-topic">주제 고르기<select id="research-topic" value={activeTopic} onChange={event => setTopic(event.target.value)}><option value="">모든 주제</option>{topics.map(item => <option value={item} key={item}>{item}</option>)}</select></label>
         <details className="research-method-filter" open={showMethodFilter || Boolean(activeType)} onToggle={event => setShowMethodFilter(event.currentTarget.open)}>
           <summary>연구 방법 {activeType ? '선택됨' : '더보기'}</summary>
