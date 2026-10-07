@@ -2258,3 +2258,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재에 따른 Chrome CDP fallback, 실기기·실사용자·독립 과학·규제 검토 조건을 유지한다.
 
 증적: `C-261`, `E-LOCAL-BUILD-PRINT-HERO-MARGIN-20261007`, `E-CDP-PRINT-HERO-MARGIN-20261007`, `E-DEPLOY-PIPELINE-PRINT-HERO-MARGIN-20261007`, `E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007`, `E-NAVI-STATE-PRINT-HERO-MARGIN-20261007`.
+
+## 2026-10-07 — 최종 공유 장 인쇄·PDF action 공개 보완 — 6bb3663
+
+- 사업자가 공개 안내서를 바로 공유하거나 PDF로 보관할 수 있도록 최종 공유 장에 `GABA 이야기 공유하기`와 `인쇄 · PDF 저장`을 추가했다. 모바일은 세로 스택, 데스크톱은 2열, 인쇄 미디어는 화면 전용 action 숨김으로 정리했다.
+- 로컬 typecheck·UI contract·127개 테스트·build·정적 bundle·성능 예산, PR #606 보호 검사, main workflow `37634042762`, 공개 validator·390px interaction·1440px print audit가 모두 통과했다. 최종 로컬 총 자산은 `1,649,439 bytes / 1,650,000 bytes`다.
+- 초기 PR 후보의 Pages 성능 초과는 중복 아이콘·라벨 markup을 줄여 재검증에서 해소했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Browser plugin 부재에 따른 CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토·teaser `HOLD`를 외부 조건으로 남긴다.
+
+증적: `C-262`, `E-LOCAL-BUILD-PRINT-ACTION-20261007`, `E-CDP-PRINT-ACTION-20261007`, `E-DEPLOY-PIPELINE-PRINT-ACTION-20261007`, `E-LIVE-PUBLIC-PRINT-ACTION-20261007`, `E-NAVI-STATE-PRINT-ACTION-20261007`.

@@ -2522,3 +2522,12 @@
 - 신규 CRITICAL/MAJOR 결함은 없다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며, Browser plugin 부재에 따른 Chrome CDP fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-CDP-PRINT-HERO-MARGIN-20261007`, `E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007`, `E-NAVI-STATE-PRINT-HERO-MARGIN-20261007`.
+
+## Red-team recheck — 최종 공유 장의 인쇄·PDF action — 6bb3663 — 2026-10-07
+
+- 공격 관점에서 모바일 action이 좁은 화면에서 줄바꿈·가로 넘침을 만들거나, 인쇄용 문서에 화면 전용 조작부를 끌고 들어오는지 확인했다. 390px·1440px 공개 URL에서 `printCalled=true`, document 폭 일치, 인쇄 미디어 `finalActions=display:none`을 재현했다.
+- 인쇄 점검은 14개 장과 14개 출처 링크, iframe 0개, print stylesheet 2개 규칙을 확인했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 번들 예산 경계에서 실패한 초기 후보를 그대로 통과시키지 않고, 중복 아이콘·라벨 markup을 제거한 뒤 PR 보호 검사를 재실행해 통과했다.
+- Browser plugin 부재에 따른 Chrome CDP fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-262`, `E-CDP-PRINT-ACTION-20261007`, `E-DEPLOY-PIPELINE-PRINT-ACTION-20261007`, `E-LIVE-PUBLIC-PRINT-ACTION-20261007`, `E-NAVI-STATE-PRINT-ACTION-20261007`.

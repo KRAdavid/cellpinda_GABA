@@ -2851,6 +2851,18 @@
       "E-NAVI-STATE-PRINT-HERO-MARGIN-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-262",
+    "statement": "최종 공유 장에서 GABA 이야기 공유와 인쇄·PDF 저장을 한 흐름의 보조 action으로 제공하며, 모바일에서는 두 조작이 세로로 읽히고 데스크톱에서는 균형 있게 정렬된다. 인쇄 미디어에서는 해당 조작부가 숨겨지고 공개 안내서의 전체 읽기 구조가 유지된다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-PRINT-ACTION-20261007",
+      "E-CDP-PRINT-ACTION-20261007",
+      "E-DEPLOY-PIPELINE-PRINT-ACTION-20261007",
+      "E-LIVE-PUBLIC-PRINT-ACTION-20261007",
+      "E-NAVI-STATE-PRINT-ACTION-20261007"
+    ],
+    "status": "SUPPORTED"
   }
   ],
   "evidence": [
@@ -18519,6 +18531,80 @@
       "captured_at": "2026-10-07T22:32:07+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PRINT-HERO-MARGIN",
       "claim_refs": ["C-261"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-PRINT-ACTION-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공유 장의 인쇄·PDF 저장 action을 추가한 production bundle이 로컬 자동 게이트를 통과했고, 모바일·데스크톱 action 레이아웃과 정적 산출물 성능 예산을 유지했다.",
+      "locator": "final branch bd0a33a; pnpm run typecheck; pnpm run validate:ui-contract; pnpm test -> 127 passed; pnpm run build; pnpm run validate:performance -- dist -> total 1649439 <= 1650000; git diff --check -> pass",
+      "captured_at": "2026-10-07T23:13:55+09:00",
+      "reviewer_id": "NAVI-QA-GABA-20261007-PRINT-ACTION",
+      "claim_refs": [
+        "C-001",
+        "C-004",
+        "C-005",
+        "C-262"
+      ]
+    },
+    {
+      "id": "E-CDP-PRINT-ACTION-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback 공개 상호작용 점검에서 390px과 1440px 모두 GABA 이야기 공유·인쇄·PDF 저장 action이 노출되고, 인쇄 action 호출·화면 폭·최종 제목이 정상 확인되었다.",
+      "locator": "Browser plugin unavailable; Chrome CDP fallback; node C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-print-action-qa.mjs https://kradavid.github.io/gaba_info/; 390x844 and 1440x1000; buttons [GABA 이야기 공유하기, 인쇄 · PDF 저장]; printCalled=true; scrollWidth/clientWidth=390/390 and 1425/1425; errors=[]; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-print-action-390.png and gaba-print-action-1440.png",
+      "captured_at": "2026-10-07T23:13:55+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261007-PRINT-ACTION",
+      "claim_refs": [
+        "C-002",
+        "C-004",
+        "C-262"
+      ]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PRINT-ACTION-20261007",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공유 action release가 성능 예산 보정 후 PR 보호 검사와 main 정적 공개 배포 파이프라인을 모두 통과했다.",
+      "locator": "PR #606 https://github.com/KRAdavid/gaba_info/pull/606; final release-verify 37633763482 and site-quality-verify 37633763391 success; merge main SHA 6bb366388ef62775a96c8a69353fdca7b4b203c0; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37634042762: release-verify, worker-readiness, deploy-pages, smoke-live, release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37634042762",
+      "captured_at": "2026-10-07T23:13:55+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-PRINT-ACTION",
+      "claim_refs": [
+        "C-001",
+        "C-005",
+        "C-262"
+      ]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-PRINT-ACTION-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본에서 릴리스 SHA·공개 데이터 정합성이 일치하고, 390px 메뉴·연구 지도·공유 흐름과 인쇄·PDF action이 실제 공개 URL에서 동작했다.",
+      "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=6bb366388ef62775a96c8a69353fdca7b4b203c0; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 6bb366388ef62775a96c8a69353fdca7b4b203c0; generatedAt 2026-10-07T14:08:26.317Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public interaction QA 390px errors=[]; print action QA 390/1440 printCalled=true; public print audit media=true, sectionCount=14, sourceLinks=14, iframes=0, screen-only finalActions hidden",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-07T23:13:55+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-PRINT-ACTION",
+      "claim_refs": [
+        "C-001",
+        "C-002",
+        "C-003",
+        "C-004",
+        "C-006",
+        "C-262"
+      ]
+    },
+    {
+      "id": "E-NAVI-STATE-PRINT-ACTION-20261007",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 공개 배포 감리 기록이 최종 공유 action의 로컬 검증·번들 예산 보정·배포·라이브 상호작용·인쇄 미디어 확인을 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 외부 검증 잔여 조건을 함께 기록한다.",
+      "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; PR #606 merge main SHA 6bb366388ef62775a96c8a69353fdca7b4b203c0; main workflow 37634042762 all release jobs success; .navi/PROJECT_STATE.json H-347; .navi/EVIDENCE_REGISTER.json C-262 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+      "captured_at": "2026-10-07T23:13:55+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PRINT-ACTION",
+      "claim_refs": [
+        "C-262"
+      ]
     }
   ]
 }
