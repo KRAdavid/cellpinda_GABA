@@ -2965,6 +2965,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-251`, `E-LOCAL-BUILD-COMPACT-SHARE-20261007`, `E-CDP-COMPACT-SHARE-20261007`, `E-DEPLOY-PIPELINE-COMPACT-SHARE-20261007`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261007`, `E-NAVI-STATE-COMPACT-SHARE-20261007`.
 
+## Current Release Recheck — 9e9e0d3 — 초소형 전문가 영상 메타데이터 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. main workflow `37599175190`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 공개 validator가 candidate `9e9e0d35a0db4255c5151d09411706ec482d8717`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개를 확인했다.
+- AC-003/AC-004 전문가 영상 흐름·반응형: PASS. 280·320·360·390·430·1440px에서 전문가 영상 장을 직접 열고 포스터 선택→iframe·`재생 중` 상태→`수면` 필터→4개 카드 표시를 재현했다. 350px 이하에서는 영상 순번이 메타 정보 아래로 자연스럽게 줄바꿈되며 카드 밖으로 나가지 않고, 페이지 document 폭은 각 viewport와 일치했다. 필터 폭 확장은 의도된 내부 가로 스크롤 레일로 확인했다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능·개인정보 검사가 통과했고 initial JS 311,405 bytes, initial CSS 95,703 bytes, total assets 1,648,875 bytes로 예산 안에 있다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 초소형 모바일 전문가 영상 메타데이터 줄바꿈에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계와 teaser `HOLD`를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 코드 결함은 없으며 Browser plugin 부재에 따른 Chrome headless/CDP fallback, YouTube 외부 프레임 로딩, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-252`, `E-LOCAL-BUILD-ULTRA-NARROW-VIDEO-META-20261007`, `E-CDP-ULTRA-NARROW-VIDEO-META-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-VIDEO-META-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007`, `E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

@@ -2733,6 +2733,18 @@
       "E-NAVI-STATE-COMPACT-SHARE-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-252",
+    "statement": "전문가 영상 장의 선택·재생·주제 필터 흐름이 공개 280·320·360·390·430·1440px에서 유지되고, 350px 이하에서는 영상 순번이 카드 안에서 자연스럽게 줄바꿈된다. 페이지 전체 가로폭·제품 독립 공개 경계·teaser HOLD를 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-ULTRA-NARROW-VIDEO-META-20261007",
+      "E-CDP-ULTRA-NARROW-VIDEO-META-20261007",
+      "E-DEPLOY-PIPELINE-ULTRA-NARROW-VIDEO-META-20261007",
+      "E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007",
+      "E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17902,6 +17914,58 @@
     "captured_at": "2026-10-07T17:50:00+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-COMPACT-SHARE",
     "claim_refs": ["C-251"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-ULTRA-NARROW-VIDEO-META-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "초소형 전문가 영상 메타데이터 보정 후 로컬 UI 계약·타입체크·127개 테스트·production build·정적 bundle·성능 예산이 통과했다.",
+    "locator": "working tree after v173 CSS patch before protected PR; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127/127 pass; pnpm run build; validate:release-manifest; check-public-artifacts; validate:static-bundle; validate:performance; initial JS 311405 <= 380000; initial CSS 95703 <= 110000; total assets 1648875 <= 1650000; largest asset 311405 <= 380000; git diff --check",
+    "captured_at": "2026-10-07T18:10:00+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-ULTRA-NARROW-VIDEO-META",
+    "claim_refs": ["C-001", "C-003", "C-004", "C-252"]
+  },
+  {
+    "id": "E-CDP-ULTRA-NARROW-VIDEO-META-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Browser plugin을 사용할 수 없어 Chrome headless/CDP fallback으로 로컬·공개 전문가 영상 장을 280·320·360·390·430·1440px에서 직접 점검했다. 350px 이하에서는 영상 주제·재생 상태·순번이 카드 안에서 줄바꿈되고, 영상 포스터 선택 후 iframe·재생 상태가 생성되며 `수면` 필터 선택 후 4개 카드가 표시됐다. 페이지 document scrollWidth는 각 viewport와 일치했고 필터 레일의 폭 확장은 내부 가로 스크롤로 한정됐다.",
+    "locator": "Browser plugin unavailable; Chrome headless/CDP fallback; public https://kradavid.github.io/gaba_info/?view=guide&v=video-audit#expert-videos; widths 280/320/360/390/430/1440; selection -> iframe -> playback state -> 수면 filter flow; screenshots captured outside repository at C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-video-public-final-20261007-shots",
+    "captured_at": "2026-10-07T18:17:00+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-ULTRA-NARROW-VIDEO-META",
+    "claim_refs": ["C-003", "C-004", "C-252"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-ULTRA-NARROW-VIDEO-META-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "초소형 전문가 영상 메타데이터 보정 release가 보호된 main 배포 파이프라인을 통과했다.",
+    "locator": "PR #587 https://github.com/KRAdavid/gaba_info/pull/587; PR checks release-verify run 37598988339 success and site-quality-verify run 37598988265 success; merge 9e9e0d35a0db4255c5151d09411706ec482d8717; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37599175190: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37599175190",
+    "captured_at": "2026-10-07T18:20:00+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-ULTRA-NARROW-VIDEO-META",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-252"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "초소형 전문가 영상 메타데이터 보정 release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=9e9e0d35a0db4255c5151d09411706ec482d8717; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 9e9e0d35a0db4255c5151d09411706ec482d8717; generatedAt 2026-10-07T09:15:06.610Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T18:20:00+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-ULTRA-NARROW-VIDEO-META",
+    "claim_refs": ["C-001", "C-002", "C-252"]
+  },
+  {
+    "id": "E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 초소형 전문가 영상 메타데이터 보정의 공개 배포 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-336; .navi/EVIDENCE_REGISTER.json C-252 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T18:20:00+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-ULTRA-NARROW-VIDEO-META",
+    "claim_refs": ["C-252"]
   }
 ]
 }

@@ -2440,3 +2440,12 @@
 - 새 CRITICAL/MAJOR 결함은 없다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았으며 Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 실기기·실제 사용자 승인으로 확대하지 않는다. teaser `HOLD`와 외부 검증 조건은 유지한다.
 
 증적: `E-CDP-COMPACT-SHARE-20261007`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261007`.
+
+## Red-team recheck — 초소형 전문가 영상 메타데이터 — 9e9e0d3 — 2026-10-07
+
+- 공격 관점에서 280px 전문가 영상 카드의 주제·재생 상태·순번이 한 줄에 고정되어 순번이 카드 오른쪽으로 약 24px 넘어갈 수 있는 경로를 확인했다. 350px 이하에서 메타 정보를 줄바꿈하고 순번의 자동 여백을 해제해 카드 내부에 맞췄다.
+- 공개 280·320·360·390·430·1440px에서 문서 가로폭은 viewport와 일치했다. 영상 포스터 선택 후 iframe과 `재생 중` 상태가 생성됐고 `수면` 필터 선택 후 4개 카드가 표시됐다. 필터 레일의 요소 단위 가로 확장은 의도된 내부 스크롤이다.
+- 새 CRITICAL/MAJOR 결함은 없다. PR #587과 main workflow `37599175190`, 공개 validator candidate `9e9e0d35a0db4255c5151d09411706ec482d8717`를 확인했다. Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 Safari/iOS/Android 실기기·실제 고령 사용자 승인으로 확대하지 않는다.
+- 기존 RT-001·RT-002·RT-003, teaser `HOLD`, YouTube 외부 프레임 의존성, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-ULTRA-NARROW-VIDEO-META-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007`.
