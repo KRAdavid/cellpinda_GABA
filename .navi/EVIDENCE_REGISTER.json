@@ -2542,11 +2542,20 @@
   },
   {
     "id": "C-235",
-    "statement": "320px 이하 좁은 화면의 글자 크기 조절 컨트롤이 `가+ 크게`로 명확하게 표시되고, 큰 글자 모드에서도 가로 넘침 없이 메뉴·영상 선택 흐름이 유지된다. 공개 main 배포 후 라이브 검증은 별도 게이트로 남긴다.",
+    "statement": "320px 이하 좁은 화면의 글자 크기 조절 컨트롤이 `가+ 크게`로 명확하게 표시되고, 큰 글자 모드에서도 가로 넘침 없이 메뉴·영상 선택 흐름이 유지된다.",
     "evidence_refs": [
       "E-LOCAL-BUILD-HEADER-READING-LABEL-20261007",
       "E-UI-CONTRACT-HEADER-READING-LABEL-20261007",
       "E-PLAYWRIGHT-HEADER-READING-LABEL-20261007"
+    ],
+    "status": "SUPPORTED"
+  },
+  {
+    "id": "C-236",
+    "statement": "좁은 화면 글자 크기 조절 라벨 보정이 PR 검사와 main 정적 공개 배포를 통과했고, 최신 GitHub Pages 공개 manifest에서 코드 release SHA `d035807ad96cf9368279eb3d42a12b728f6d2881`와 정적 공개 데이터 경계가 확인된다. Worker는 STATIC_ONLY 정책에 따라 배포하지 않는다.",
+    "evidence_refs": [
+      "E-DEPLOY-PIPELINE-HEADER-READING-LABEL-20261007",
+      "E-LIVE-PUBLIC-HEADER-READING-LABEL-20261007"
     ],
     "status": "SUPPORTED"
   }
@@ -16967,6 +16976,28 @@
     "captured_at": "2026-10-07T11:42:22+09:00",
     "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261007-HEADER-READING-LABEL",
     "claim_refs": ["C-003", "C-006", "C-235"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-HEADER-READING-LABEL-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "좁은 화면 글자 크기 조절 라벨 보정이 PR 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #555 https://github.com/KRAdavid/gaba_info/pull/555; squash merge d035807ad96cf9368279eb3d42a12b728f6d2881; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37563485033: release-verify 112605823873 success; worker-readiness 112606155565 success; deploy-pages 112606179582 success; smoke-live 112606237094 success; release-status 112606306763 success; deploy-worker 112606180283 skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37563485033",
+    "captured_at": "2026-10-07T11:46:20+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-HEADER-READING-LABEL",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-236"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-HEADER-READING-LABEL-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 GitHub Pages 공개 manifest가 좁은 화면 글자 크기 조절 라벨 보정 release SHA와 일치하고, 정적 공개 데이터·제품 독립 경계·teaser HOLD가 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=d035807ad96cf9368279eb3d42a12b728f6d2881; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha d035807ad96cf9368279eb3d42a12b728f6d2881; generatedAt 2026-10-07T02:46:20.447Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched.",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T11:46:20+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-HEADER-READING-LABEL",
+    "claim_refs": ["C-001", "C-002", "C-235", "C-236"]
   }
 ]
 }

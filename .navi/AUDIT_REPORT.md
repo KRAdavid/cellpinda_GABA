@@ -1,5 +1,13 @@
 # Audit Report
 
+## 좁은 화면 읽기 조절 라벨 — 공개 배포 확인 — main d035807 — 2026-10-07
+
+- PR #555 병합 후 main workflow `37563485033`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했고, deploy-worker는 정적 공개 모드의 정책대로 skip되었다.
+- 최종 `validate:live-public`는 HTTP 200·candidate `d035807ad96cf9368279eb3d42a12b728f6d2881`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다. `가+ 크게` 라벨 보정이 공개본에 반영됐다.
+- 새 CRITICAL/MAJOR 결함은 없다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-HEADER-READING-LABEL-20261007`, `E-LIVE-PUBLIC-HEADER-READING-LABEL-20261007`.
+
 ## NAVI 좁은 화면 읽기 조절 라벨 보정 — working tree — 2026-10-07
 
 - 320px 이하에서 `가+ 글자`가 축약되어 행동 의미가 약해지는 잔여 가독성 리스크를 확인하고, 모바일 축약 라벨을 `가+ 크게`로 보정했다. 접근 가능한 전체 라벨 `글자 크게 보기`, 큰 글자 모드, 연구 카피·수치·출처·제품 독립 경계는 유지했다.

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 좁은 화면 글자 조절 라벨 — 공개 배포 확인 — main d035807 — 2026-10-07
+
+- PR #555와 main workflow `37563485033`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. deploy-worker는 `STATIC_ONLY`로 skip되었다.
+- 공개 validator는 HTTP 200·candidate `d035807ad96cf9368279eb3d42a12b728f6d2881`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다. 모바일 헤더의 `가+ 크게`가 공개본에 반영됐다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Worker 운영 비밀값과 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 남아 있다.
+
+증적: `E-DEPLOY-PIPELINE-HEADER-READING-LABEL-20261007`, `E-LIVE-PUBLIC-HEADER-READING-LABEL-20261007`.
+
 ## 좁은 화면 글자 조절 라벨 고도화 — working tree — 2026-10-07
 
 - 320px 이하 모바일 헤더의 축약 표기를 `가+ 글자`에서 `가+ 크게`로 바꿔, 나이 있는 사용자가 버튼 의미를 즉시 읽도록 했다. 큰 글자 상태의 `가− 기본`, 접근 가능한 전체 라벨, 저장 동작은 유지했다.

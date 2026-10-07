@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T11:42:22+09:00",
+  "updated_at": "2026-10-07T11:48:19+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2143,7 +2143,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T02:42:22Z"
+    "last_run_at": "2026-10-07T02:48:19Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2345,7 +2345,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T02:42:22Z"
+    "last_run_at": "2026-10-07T02:48:19Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -5795,6 +5795,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T11:42:22+09:00"
+    },
+    {
+      "id": "H-319",
+      "event": "좁은 화면 글자 크기 조절 라벨 보정의 공개 배포 후 검증을 완료했다. PR #555와 main workflow `37563485033`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 STATIC_ONLY로 skip되었다. 공개 validator는 HTTP 200·candidate `d035807ad96cf9368279eb3d42a12b728f6d2881`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 경계를 확인했다. `가+ 크게` 보정은 최신 공개본에 반영되었으며, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T11:48:19+09:00"
     }
   ]
 }

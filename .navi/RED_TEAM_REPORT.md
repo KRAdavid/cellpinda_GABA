@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 좁은 화면 읽기 조절 라벨 — 공개 배포 공격 재확인 — main d035807 — 2026-10-07
+
+- PR #555와 main workflow `37563485033`이 성공하고 공개 validator가 main SHA와 일치하는지, `가+ 크게` 보정·제품 독립 경계·teaser `HOLD`가 유지되는지 다시 공격적으로 확인했다. Pages 공개와 라이브 smoke는 성공했고 deploy-worker는 STATIC_ONLY로 skip되었다.
+- 새 CRITICAL/MAJOR 결함은 없으며 공개 manifest는 HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개를 제공한다. RT-001·RT-002·RT-003과 실기기·고령 사용자·독립 과학·규제 감수 OPEN 상태는 유지한다.
+- 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-HEADER-READING-LABEL-20261007`, `E-LIVE-PUBLIC-HEADER-READING-LABEL-20261007`.
+
 ## NAVI 좁은 화면 읽기 조절 라벨 공격 재점검 — working tree — 2026-10-07
 
 - 320px·390px 헤더에서 글자 크기 조절 버튼이 아이콘만 남거나 축약 문구가 잘려 행동을 오해하게 만들 수 있는지 공격적으로 확인했다. `가+ 크게`가 표시되고, 큰 글자 모드에서는 `가− 기본`으로 바뀌며 접근 가능한 전체 라벨은 유지됐다.

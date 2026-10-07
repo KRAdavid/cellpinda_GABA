@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — narrow-phone reading label — main d035807 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. PR #555와 main workflow `37563485033`의 release-verify·Pages publish·라이브 smoke·release-status가 성공했고 공개 validator가 candidate SHA 일치를 확인했다.
+- AC-003: PASS_WITH_CONDITIONS. 최신 공개본에 `가+ 크게` 라벨 보정이 반영되었고, 앞선 320·390·768·1440px Playwright Chromium fallback에서 가로 넘침·page error·console error 없이 메뉴 포커스와 선택 영상 재생을 확인했다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. 제품 독립 경계·teaser `HOLD`는 유지된다. Worker 운영 비밀값, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-DEPLOY-PIPELINE-HEADER-READING-LABEL-20261007`, `E-LIVE-PUBLIC-HEADER-READING-LABEL-20261007`.
+
 ## Current Work Recheck — narrow-phone reading label — working tree — 2026-10-07
 
 - AC-004/AC-005: PASS_WITH_CONDITIONS. 320px 이하 글자 크기 조절 라벨을 `가+ 크게`로 보정하고, UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산·Playwright Chromium fallback 320·390·768·1440px 검증을 통과했다.
