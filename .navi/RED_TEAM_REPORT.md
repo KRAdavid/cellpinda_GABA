@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 전문가 영상 제목 줄바꿈 — 공개 배포 공격 재점검 — main 9e447b5 — 2026-10-08
+
+- 공격 관점에서 320·390px 전문가 영상 카드의 한국어 제목이 글자 중간에서 끊기거나 카드 경계를 넘는지 확인했다. `잠이 안 올 때 GABA 이야기`가 자연스러운 줄 단위로 표시되고, 320·390px 모두 가로폭 초과와 runtime error가 없었다.
+- 같은 화면에서 카드를 선택하면 선택 상태가 바뀌고 `autoplay=1&mute=1&playsinline=1` YouTube iframe이 생성됐다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser plugin 부재에 따른 Playwright Chromium fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않는다. 이 조건과 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-PLAYWRIGHT-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-LIVE-PUBLIC-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-NAVI-STATE-MOBILE-VIDEO-TITLE-WRAP-20261008`.
+
 ## 모바일 연구 결과 도표 타이포그래피 — 공개 배포 공격 재점검 — main dbdd396 — 2026-10-08
 
 - 공격 관점에서 320·390px 차트의 확대된 비교 문구가 카드 경계를 넘거나 줄바꿈으로 두 조건의 비교를 끊는지 확인했다. 비교 조건·GABA 그룹·관찰 결과가 읽히고 chart overflow와 runtime error는 없었다.

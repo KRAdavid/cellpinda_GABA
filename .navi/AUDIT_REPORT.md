@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 전문가 영상 제목 줄바꿈 — 공개 배포 확인 — main 9e447b5 — 2026-10-08
+
+- 320px 이하 전문가 영상 카드에서 한국어 제목이 글자 중간에서 끊기는 잔여 가독성 리스크를 확인하고, 단어 단위 줄바꿈 규칙으로 보완했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 production build 총 자산 `1,649,451 bytes`, initial JS `311,405 bytes`, initial CSS `95,703 bytes`, `pnpm test` 127개, UI contract·research copy·정적 bundle·release manifest·성능 예산이 통과했다. PR #621 보호 검사와 main workflow `37663407212`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- 공개 validator는 merge SHA `9e447b5cddbad5d419c6dd301ebebcc8ac9f9e33`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다. Playwright Chromium fallback 320·390px에서 제목 줄바꿈·영상 선택 후 autoplay iframe·page width=viewport·runtime error 0건을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 후속 조건으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-PLAYWRIGHT-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-DEPLOY-PIPELINE-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-LIVE-PUBLIC-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-NAVI-STATE-MOBILE-VIDEO-TITLE-WRAP-20261008`.
+
 ## 모바일 연구 결과 도표 타이포그래피 — 공개 배포 확인 — main dbdd396 — 2026-10-08
 
 - 모바일 연구 결과 도표의 비교 조건·GABA 그룹·관찰 결과가 작게 보여 직관적 비교가 약해지는 리스크를 확인하고 공통 차트 타이포그래피를 보완했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.

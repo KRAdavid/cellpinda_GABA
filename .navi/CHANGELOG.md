@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 전문가 영상 제목 줄바꿈 보완 및 공개 배포 재검증 — 9e447b5 — 2026-10-08
+
+- 320px 이하 전문가 영상 카드의 한국어 제목이 글자 중간에서 끊기지 않도록 단어 단위 줄바꿈을 적용했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 총 자산 `1,649,451 bytes`, `pnpm test` 127개, PR #621 보호 검사와 main workflow `37663407212`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·candidate SHA `9e447b5cddbad5d419c6dd301ebebcc8ac9f9e33`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 320·390px Chromium fallback에서 제목 줄바꿈, 영상 선택 후 autoplay iframe, 가로폭 초과 0건, runtime error 0건을 확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-270`, `E-LOCAL-BUILD-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-PLAYWRIGHT-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-DEPLOY-PIPELINE-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-LIVE-PUBLIC-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-NAVI-STATE-MOBILE-VIDEO-TITLE-WRAP-20261008`.
+
 ## 모바일 연구 결과 도표 타이포그래피 보완 및 공개 배포 재검증 — dbdd396 — 2026-10-08
 
 - 모바일 연구 결과 도표의 비교 조건·GABA 그룹·관찰 결과를 더 빠르게 읽도록 공통 차트 타이포그래피를 보완했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
