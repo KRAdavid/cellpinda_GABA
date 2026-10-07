@@ -2216,3 +2216,11 @@
   .guide-growth-step:last-child{border-color:rgba(18,154,163,.34);background:#f1fbfb}
   .guide-growth-arrow{left:7px;transform:translateX(0) rotate(90deg)}
 }
+
+/* v176 narrow-phone recovery map: keep the path label, active card, and count on one scan line. */
+@media(max-width:350px){
+  .guide-recovery-map-head{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px}
+  .guide-recovery-map-head>span{white-space:nowrap}
+  .guide-recovery-map-head strong{min-width:0;max-width:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .guide-recovery-map-head em{min-width:auto}
+}
