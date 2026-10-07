@@ -2129,3 +2129,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
 
 증적: `C-244`, `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007`.
+
+## 2026-10-07 — 사업자용 공유 카드 모바일 가독성 보정 — ddda08f
+
+- 390px에서 제목이 복사 조작부에 눌려 어색하게 줄바꿈되는 잔여 리스크를 확인하고, 제목·설명 전체 폭과 다음 행 조작부 구조로 보정했다. 350px 이하에서는 제목 크기만 한 단계 줄였다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산을 통과했고, PR #580과 main workflow `37589452401`의 Pages 배포·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 merge SHA `ddda08f146b0f2a6ba2acb83c571ead84f71f40a`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `provenance=matched`를 확인했다. 공개 320·390px Chrome headless/CDP fallback에서 직접 `#final`과 공유 카드 읽기 순서를 재현했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`와 외부 검증 조건을 유지한다.
+
+증적: `C-248`, `E-LOCAL-BUILD-MOBILE-SHARE-KIT-20261007`, `E-CDP-MOBILE-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007`, `E-NAVI-STATE-MOBILE-SHARE-KIT-20261007`.

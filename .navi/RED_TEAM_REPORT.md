@@ -2406,3 +2406,12 @@
 - Browser plugin은 사용할 수 없어 Chrome headless fallback으로 확인했으며, 이 결과를 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수 승인으로 확대하지 않는다. 기존 RT-001·RT-002·RT-003과 teaser `HOLD`는 유지한다.
 
 증적: `E-CHROME-MOBILE-HERO-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-20261007`.
+
+## Red-team recheck — 사업자용 공유 카드 모바일 읽기 순서 — ddda08f — 2026-10-07
+
+- 공격 관점에서 320·390px에서 제목과 `전체 복사` 조작부가 같은 행에 경쟁해 제목이 잘리거나 마지막 단어가 분리되는 경로를 재현했다. 제목·설명 전체 폭과 조작부 다음 행 배치로 보정하고, 350px 이하에서만 제목을 한 단계 축소했다.
+- 공개 390px에서 제목·설명·5문장 라벨·전체 복사 버튼이 순서대로 표시되고, 320px에서도 document scrollWidth가 viewport와 일치했다. 직접 `#final` 진입은 sticky 읽기 레일 아래에 안착했다. `전체 복사` 클릭은 headless 클립보드 제한에서 안내 토스트 fallback으로 상태가 변경됐다.
+- 새 CRITICAL/MAJOR 결함은 없다. PR #580과 main workflow `37589452401`, 공개 validator candidate `ddda08f146b0f2a6ba2acb83c571ead84f71f40a`를 확인했다. Browser plugin 부재에 따른 Chrome headless/CDP fallback 결과를 실기기·실제 사용자 승인으로 확대하지 않는다.
+- 기존 RT-001·RT-002·RT-003, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-MOBILE-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007`.

@@ -2924,6 +2924,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-247`, `E-LOCAL-BUILD-MOBILE-HERO-20261007`, `E-CHROME-MOBILE-HERO-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-20261007`, `E-NAVI-STATE-MOBILE-HERO-20261007`.
 
+## 사업자용 공유 카드 모바일 가독성 보정 — 공개 배포 확인 — ddda08f — 2026-10-07
+
+- 390px에서 사업자용 공유 카드 제목이 복사 조작부와 같은 행에서 압축되어 마지막 단어가 어색하게 갈리는 잔여 퍼블리싱 리스크를 확인했다. 제목·설명은 전체 폭으로 읽고 복사 조작부는 다음 행에서 조작하도록 재배치했으며, 350px 이하에서는 제목 크기만 한 단계 조정했다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산이 통과했다. PR #580 required checks, main workflow `37589452401`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했고, 공개 validator는 merge SHA `ddda08f146b0f2a6ba2acb83c571ead84f71f40a`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `provenance=matched`를 확인했다.
+- 공개 320·390px Chrome headless/CDP fallback에서 직접 `#final` 진입·가로폭·공유 카드 읽기 순서를 확인했고, 390px `전체 복사` 클릭 후 클립보드 권한이 없는 환경의 fallback 토스트를 확인했다. 새 CRITICAL/MAJOR 결함은 없다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-248`, `E-LOCAL-BUILD-MOBILE-SHARE-KIT-20261007`, `E-CDP-MOBILE-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007`, `E-NAVI-STATE-MOBILE-SHARE-KIT-20261007`.
+
 ## 공개 배포 다중 화면 자동 재감리 — 2de8c650 — 2026-10-07
 
 - AC-001 공개 정합성: PASS. 공개 validator가 candidate `2de8c650ad89e94879ddc20c036666adc4913d30`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

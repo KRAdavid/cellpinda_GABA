@@ -5886,6 +5886,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T16:20:02+09:00"
+    },
+    {
+      "id": "H-332",
+      "event": "NAVI 자동 공개 배포 점검에서 390px 공유 카드의 제목이 우측 복사 조작부에 눌려 어색하게 줄바꿈되고, 320px에서는 마지막 단어가 분리되는 잔여 퍼블리싱 리스크를 확인했다. 모바일 공유 인트로를 제목·설명 전체 폭의 editorial block으로 재배치하고 복사 조작부를 다음 행으로 내렸으며, 350px 이하에서는 제목 크기만 한 단계 줄였다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산을 통과했고, 보호된 PR #580과 main workflow `37589452401`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 merge SHA `ddda08f146b0f2a6ba2acb83c571ead84f71f40a`·HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome headless/CDP fallback 320·390px에서 직접 `#final` 진입·가로폭·공유 카드 읽기 순서를 확인했고, 390px `전체 복사` 클릭은 클립보드 권한이 없는 환경에서 안내 토스트 fallback으로 상태 변경을 확인했다. 새 CRITICAL/MAJOR 코드 결함은 없다. Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-248과 다섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T16:52:20+09:00"
     }
   ]
 }

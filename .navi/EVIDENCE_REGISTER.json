@@ -2686,6 +2686,18 @@
       "E-NAVI-STATE-MOBILE-HERO-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-248",
+    "statement": "사업자용 공유 카드가 모바일에서 제목·설명·복사 조작부의 순서로 읽히고, 조작부가 제목을 압축하지 않는다. 320·390px에서 가로 넘침 없이 공개되며 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-MOBILE-SHARE-KIT-20261007",
+      "E-CDP-MOBILE-SHARE-KIT-20261007",
+      "E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007",
+      "E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007",
+      "E-NAVI-STATE-MOBILE-SHARE-KIT-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17657,6 +17669,58 @@
     "captured_at": "2026-10-07T16:20:02+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-HERO",
     "claim_refs": ["C-247"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-MOBILE-SHARE-KIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 사업자 공유 카드의 제목·설명·복사 조작부 재배치와 320px 전용 글자 보정 후 로컬 UI 계약·타입·테스트·production build·정적 bundle·성능 예산이 통과했다.",
+    "locator": "working tree CSS patch before protected PR; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127/127 pass; pnpm run build; validate:release-manifest; check-public-artifacts; validate:static-bundle; validate:performance; initial JS 311405 <= 380000; initial CSS 95703 <= 110000; total assets 1648096 <= 1650000; largest asset 311405 <= 380000; git diff --check",
+    "captured_at": "2026-10-07T16:52:20+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-MOBILE-SHARE-KIT",
+    "claim_refs": ["C-001", "C-003", "C-248"]
+  },
+  {
+    "id": "E-CDP-MOBILE-SHARE-KIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Browser plugin을 사용할 수 없어 Chrome headless/CDP fallback으로 로컬·공개 320·390px을 확인했다. 공유 카드 제목이 조작부에 눌리지 않고 전체 폭을 사용하며 직접 #final 진입이 읽기 레일 아래에 안착한다. 390px에서 전체 복사 클릭 후 fallback 토스트가 표시됐다.",
+    "locator": "Browser plugin unavailable; Chrome headless/CDP fallback; local 320px scrollWidth=320/clientWidth=320, targetTop=25.75, headingTop=114.546875; public 390px scrollWidth=390/clientWidth=390, targetTop=26.203125, headingTop=115; public 320px scrollWidth=320/clientWidth=320, targetTop=25.75, headingTop=114.546875; 390px button aria `5문장 전체 복사`, fallback toast `문장을 선택해 활용해 보세요.`; screenshots captured outside repository",
+    "captured_at": "2026-10-07T16:52:20+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-MOBILE-SHARE-KIT",
+    "claim_refs": ["C-003", "C-004", "C-248"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 사업자 공유 카드 보정 release가 PR 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #580 https://github.com/KRAdavid/gaba_info/pull/580; PR checks release-verify run 37589277626 success and site-quality-verify run 37589277677 success; squash merge ddda08f146b0f2a6ba2acb83c571ead84f71f40a; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37589452401: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37589452401",
+    "captured_at": "2026-10-07T16:52:20+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-MOBILE-SHARE-KIT",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-248"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "모바일 사업자 공유 카드 보정 release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=ddda08f146b0f2a6ba2acb83c571ead84f71f40a; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha ddda08f146b0f2a6ba2acb83c571ead84f71f40a; generatedAt 2026-10-07T07:47:54.297Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T16:52:20+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-MOBILE-SHARE-KIT",
+    "claim_refs": ["C-001", "C-002", "C-248"]
+  },
+  {
+    "id": "E-NAVI-STATE-MOBILE-SHARE-KIT-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 모바일 사업자 공유 카드 보정의 공개 배포 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-332; .navi/EVIDENCE_REGISTER.json C-248 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T16:52:20+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-SHARE-KIT",
+    "claim_refs": ["C-248"]
   }
 ]
 }
