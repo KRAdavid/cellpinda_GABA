@@ -1328,10 +1328,7 @@
 /* v49 editorial type rhythm: balance Korean headlines before the browser breaks them. */
 .guide-hero h1,
 .guide-section-heading h2,
-.guide-recovery-break-head h2,
-.guide-final h2,
-.guide-video-feature-copy h3,
-.guide-reading-note h2{ text-wrap:balance }
+.guide-final h2{ text-wrap:balance }
 
 /* v49 mobile media loading: keep below-the-fold video frames quiet until the reader reaches them. */
 .guide-video-feature-poster img,
@@ -2203,4 +2200,13 @@
 @media(max-width:350px){
   .guide-video-feature-meta{flex-wrap:wrap;gap:4px 6px;white-space:normal}
   .guide-video-feature-meta .guide-video-feature-index{margin-left:0}
+}
+
+/* v174 cross-browser editorial surface: keep iOS text metrics and the frosted header stable. */
+.gaba-guide{
+  text-size-adjust:100%;
+  -webkit-text-size-adjust:100%;
+}
+.gaba-guide .guide-header{
+  -webkit-backdrop-filter:blur(16px);
 }
