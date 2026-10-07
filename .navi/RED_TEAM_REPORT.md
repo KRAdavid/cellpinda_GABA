@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 연구 결과 도표 타이포그래피 — 공개 배포 공격 재점검 — main dbdd396 — 2026-10-08
+
+- 공격 관점에서 320·390px 차트의 확대된 비교 문구가 카드 경계를 넘거나 줄바꿈으로 두 조건의 비교를 끊는지 확인했다. 비교 조건·GABA 그룹·관찰 결과가 읽히고 chart overflow와 runtime error는 없었다.
+- PR #619 보호 검사와 main workflow `37661235646`의 Pages 배포·라이브 smoke·release-status가 성공했고, 공개 validator가 SHA 정합성·HTTP 200·정적 bundle 73개를 확인했다. 새 CRITICAL/MAJOR 결함은 없다.
+- Playwright Chromium fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않는다. 이 조건과 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-PLAYWRIGHT-MOBILE-CHART-TYPE-20261008`, `E-LIVE-PUBLIC-MOBILE-CHART-TYPE-20261008`, `E-NAVI-STATE-MOBILE-CHART-TYPE-20261008`.
+
 ## 모바일 성장 연구 장 진입 여백 — 공개 배포 공격 재점검 — main bcb82a2 — 2026-10-08
 
 - 280·320·390px에서 성장 연구 장으로 넘어갈 때 읽기 레일이 장 번호·제목을 가리거나, `#growth` 직접 진입 후 제목이 화면 밖으로 밀리는지 공격적으로 확인했다. 보정된 상단 여백과 handoff 위치가 라이브에 유지됐고 document 가로폭은 viewport와 같았다.

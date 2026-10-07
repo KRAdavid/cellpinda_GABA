@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 연구 결과 도표 타이포그래피 보완 및 공개 배포 재검증 — dbdd396 — 2026-10-08
+
+- 모바일 연구 결과 도표의 비교 조건·GABA 그룹·관찰 결과를 더 빠르게 읽도록 공통 차트 타이포그래피를 보완했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 총 자산 `1,649,406 bytes`, 127개 테스트, PR #619 보호 검사와 main workflow `37661235646`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·candidate SHA `dbdd396c9dfc2ac67c9d76f03b5e4e29fb381574`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 320·390px Playwright fallback에서 차트 라벨 약 14px, 가로폭 초과 0건, runtime error 0건을 확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-269`, `E-LOCAL-BUILD-MOBILE-CHART-TYPE-20261008`, `E-PLAYWRIGHT-MOBILE-CHART-TYPE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-CHART-TYPE-20261008`, `E-LIVE-PUBLIC-MOBILE-CHART-TYPE-20261008`, `E-NAVI-STATE-MOBILE-CHART-TYPE-20261008`.
+
 ## 모바일 성장 연구 장 진입 여백 — 공개 배포 확인 — main bcb82a2 — 2026-10-08
 
 - PR #613의 보호 검사와 main workflow `37650139724`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 실행하지 않았다.

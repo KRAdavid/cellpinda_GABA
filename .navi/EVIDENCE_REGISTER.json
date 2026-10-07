@@ -2930,6 +2930,18 @@
       "E-NAVI-STATE-ARIA-FINAL-20261008"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-269",
+    "statement": "모바일 연구 결과 도표의 비교 조건·GABA 그룹·관찰 결과가 320·390px에서 기존보다 큰 타이포그래피로 표시되고, 공개 Pages 배포와 라이브 검증이 정합성을 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-MOBILE-CHART-TYPE-20261008",
+      "E-PLAYWRIGHT-MOBILE-CHART-TYPE-20261008",
+      "E-DEPLOY-PIPELINE-MOBILE-CHART-TYPE-20261008",
+      "E-LIVE-PUBLIC-MOBILE-CHART-TYPE-20261008",
+      "E-NAVI-STATE-MOBILE-CHART-TYPE-20261008"
+    ],
+    "status": "SUPPORTED"
   }
   ],
   "evidence": [
@@ -19027,6 +19039,81 @@
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-ARIA-FINAL",
       "claim_refs": [
         "C-268"
+      ]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-CHART-TYPE-20261008",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 결과 도표의 비교 타이포그래피 보정본이 UI contract·typecheck·정적 bundle·release manifest·성능 예산 검사를 통과했고 전체 테스트 127개가 성공했다.",
+      "locator": "local worktree C:\\Users\\computer\\Documents\\ChatGPT\\gaba-next-premium-audit-20261008; pnpm run build; total assets 1,649,406 bytes; initial JS 311,405 bytes; initial CSS 95,703 bytes; pnpm test 127 passed; validate:ui-contract·validate:static-bundle·validate:performance passed",
+      "captured_at": "2026-10-08T02:43:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-MOBILE-CHART-TYPE",
+      "claim_refs": [
+        "C-001",
+        "C-003",
+        "C-005",
+        "C-269"
+      ]
+    },
+    {
+      "id": "E-PLAYWRIGHT-MOBILE-CHART-TYPE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin unavailable 상태에서 Playwright Chromium fallback으로 공개 차트를 320·390px에서 확인했다. 비교 조건·GABA 그룹·관찰 결과가 약 14px로 표시되고 chart scrollWidth/clientWidth가 각각 216/216, 286/286이며 page width가 viewport와 같고 runtime error가 없었다.",
+      "locator": "public target https://kradavid.github.io/gaba_info/?view=guide&qa=chart-legibility-live; Playwright Chromium fallback; 320px labels 14px·chartHeight 612·pageWidth/viewport 320/320; 390px labels 14px·chartHeight 523·pageWidth/viewport 390/390; chart overflow 216/216 and 286/286; runtimeErrors=[]; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-chart-legibility-live-320-20261008.png and gaba-chart-legibility-live-390-20261008.png",
+      "captured_at": "2026-10-08T02:43:00+09:00",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261008-MOBILE-CHART-TYPE",
+      "claim_refs": [
+        "C-003",
+        "C-004",
+        "C-269"
+      ]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-CHART-TYPE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 연구 차트 타이포그래피 보정 PR #619가 보호 검사를 통과해 main에 병합되었고 정적 Pages 배포·라이브 smoke·release-status가 모두 성공했다.",
+      "locator": "PR #619 https://github.com/KRAdavid/gaba_info/pull/619; merge SHA dbdd396c9dfc2ac67c9d76f03b5e4e29fb381574; PR release-verify 37661009772 success; site-quality-verify 37661009829 success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37661235646: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37661235646",
+      "captured_at": "2026-10-08T02:43:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-MOBILE-CHART-TYPE",
+      "claim_refs": [
+        "C-001",
+        "C-005",
+        "C-269"
+      ]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-CHART-TYPE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 HTTP 200과 merge SHA 정합성을 유지했고, 모바일 연구 차트의 비교 라벨 확대가 공개 주소에서 반영되었다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha dbdd396c9dfc2ac67c9d76f03b5e4e29fb381574; generatedAt 2026-10-07T17:44:11.907Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Playwright chart metrics above; runtimeErrors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T02:43:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-MOBILE-CHART-TYPE",
+      "claim_refs": [
+        "C-001",
+        "C-002",
+        "C-003",
+        "C-004",
+        "C-006",
+        "C-269"
+      ]
+    },
+    {
+      "id": "E-NAVI-STATE-MOBILE-CHART-TYPE-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 모바일 연구 차트의 로컬 build·Playwright·PR·main 배포·라이브 QA를 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "PR #619 merge SHA dbdd396c9dfc2ac67c9d76f03b5e4e29fb381574; main deployment workflow 37661235646 success; pnpm run validate:live-public -> candidateSha dbdd396c9dfc2ac67c9d76f03b5e4e29fb381574; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; pnpm run validate:tf-pulse-workflow -> ok; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37661235646",
+      "captured_at": "2026-10-08T02:43:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-MOBILE-CHART-TYPE",
+      "claim_refs": [
+        "C-269"
       ]
     }
   ]

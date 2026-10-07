@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Public Deployment Recheck — mobile research chart typography — main dbdd396 — 2026-10-08
+
+- AC-001/AC-004/AC-005: `PASS`. PR #619 보호 검사와 main workflow `37661235646`의 Pages publish·라이브 smoke·release-status가 성공했고 공개 validator가 main SHA 정합성·정적 번들을 확인했다. 로컬 127개 테스트와 성능 예산도 통과했다.
+- AC-003: `PASS_WITH_CONDITIONS`. 공개 320·390px에서 비교 조건·GABA 그룹·관찰 결과가 약 14px로 표시되고 chart overflow가 없었다. 시각적 비교 가능성은 개선됐으나 자동화 범위는 대표 Chromium 환경에 한정된다.
+- AC-006/AC-007: `PASS_WITH_CONDITIONS`. 제품 독립 과학 정보 경계·연구 카피·수치·출처는 유지됐다. Worker는 `STATIC_ONLY`로 실행하지 않으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHART-TYPE-20261008`, `E-PLAYWRIGHT-MOBILE-CHART-TYPE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-CHART-TYPE-20261008`, `E-LIVE-PUBLIC-MOBILE-CHART-TYPE-20261008`, `E-NAVI-STATE-MOBILE-CHART-TYPE-20261008`.
+
 ## Current Public Deployment Recheck — mobile growth chapter entry — main bcb82a2 — 2026-10-08
 
 - AC-001/AC-004/AC-005: `PASS`. PR #613과 main workflow `37650139724`의 보호 검사·Pages publish·라이브 smoke·release-status가 성공했고, 공개 validator가 main SHA 정합성과 정적 번들을 확인했다.

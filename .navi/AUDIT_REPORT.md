@@ -1,5 +1,14 @@
 # Audit Report
 
+## 모바일 연구 결과 도표 타이포그래피 — 공개 배포 확인 — main dbdd396 — 2026-10-08
+
+- 모바일 연구 결과 도표의 비교 조건·GABA 그룹·관찰 결과가 작게 보여 직관적 비교가 약해지는 리스크를 확인하고 공통 차트 타이포그래피를 보완했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 production build 총 자산 `1,649,406 bytes`, `pnpm test` 127개, UI contract·typecheck·정적 bundle·release manifest·성능 예산이 통과했다. PR #619의 release-verify·site-quality-verify와 main workflow `37661235646`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- 공개 validator는 merge SHA `dbdd396c9dfc2ac67c9d76f03b5e4e29fb381574`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다. Playwright Chromium fallback 320·390px에서 차트 라벨 약 14px, page width=viewport, chart overflow 0건, runtime error 0건을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수와 teaser `HOLD`는 후속 조건으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHART-TYPE-20261008`, `E-PLAYWRIGHT-MOBILE-CHART-TYPE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-CHART-TYPE-20261008`, `E-LIVE-PUBLIC-MOBILE-CHART-TYPE-20261008`, `E-NAVI-STATE-MOBILE-CHART-TYPE-20261008`.
+
 ## 모바일 성장 연구 장 진입 여백 — 공개 배포 확인 — main bcb82a2 — 2026-10-08
 
 - 351·430px 모바일에서 `09 · 성장 연구`의 시작점이 읽기 진행 레일과 가까워 보일 수 있는 잔여 리스크를 확인하고 상단 여백을 보완했다. 280·320·390px handoff와 `#growth` 직접 진입에서 장 번호·제목·연구 경로가 레일 아래에 이어졌고 document 가로폭은 viewport와 같았다.
