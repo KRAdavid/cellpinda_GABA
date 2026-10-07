@@ -2831,7 +2831,7 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 ## Current Release Recheck — b7f0bbb — 핵심 화면·상호작용 자동 재감리 — 2026-10-07
 
-- AC-001 공개 URL·라이브 정합성: PASS. 공개 validator가 candidate `b7f0bbb834d0a3d070432fed4b73f747513408fb`, HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·`teaser HOLD`·`provenance matched`를 확인했다.
+- AC-001 공개 URL·라이브 정합성: PASS. 코드 기준선 `b7f0bbb`와 문서-only PR #594 병합 SHA `f6a934d10ac08720be717e07bd86ea02513b24b9`가 연결된 뒤 공개 validator가 HTTP 200·STATIC·73개 bundle hash·12개 claim·6개 master record·6개 share page·`teaser HOLD`·`provenance matched`를 확인했다.
 - AC-003/AC-004 전문 퍼블리싱·직접 진입: PASS. 320·390·768·1440px에서 주요 장을 직접 열었고 390px에서 메뉴·포커스·`#academic` 이동·연구 카드 선택·공유 fallback 토스트의 실제 상태 변경을 확인했다. document 가로폭은 viewport와 일치했다.
 - AC-005 배포 게이트: PASS. UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산이 통과했고 총 자산은 `1,649,431 bytes`다.
 - AC-006 제품 독립 경계: PASS. 기능 코드·공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
