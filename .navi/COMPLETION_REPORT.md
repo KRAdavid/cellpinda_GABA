@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — research result cue hierarchy deployed — main e997683 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. PR #549 검사와 main workflow `37557233295`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200이다. 공개 validator는 candidate `e99768344c18286b8edf8d46e4c6a08f9a6b3f42`와 73개 bundle hash를 확인했다.
+- AC-003: PASS_WITH_CONDITIONS. 공개 CSS에 대표 결과와 실제 관찰 결과의 두 줄 계층이 반영되고, 공개 JS에 연구 읽기 레일·대표 결과 문구가 유지된다. 라이브 390px·1440px 렌더에서 가로 넘침과 실행 오류가 없다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. teaser `HOLD`, 공개 연구 데이터 경계, 제품 독립 경계는 유지됐다. 실기기·실제 고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-HIERARCHY-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-HIERARCHY-20261008`.
+
 ## Current Work Recheck — research result cue hierarchy — working tree — 2026-10-07
 
 - AC-003/AC-004: PASS_WITH_CONDITIONS. 06장 연구 지도 아래 전환 밴드에서 `대표 결과부터 읽기`와 실제 관찰 결과를 별도 줄로 보여 주어 모바일·데스크톱의 연구 읽기 흐름을 보정했다. 새 연구 주장·수치·출처·제품 광고는 추가하지 않았다.

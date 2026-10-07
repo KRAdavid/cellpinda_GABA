@@ -1,5 +1,13 @@
 # Audit Report
 
+## 06·연구 결과 전환 문구 계층·공개 배포 후 재감사 — main e997683 — 2026-10-07
+
+- PR #549를 최신 main 기준으로 병합하고 main workflow `37557233295`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status 성공을 확인했다. 공개 validator는 candidate `e99768344c18286b8edf8d46e4c6a08f9a6b3f42`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다.
+- 공개 CSS에서 `max-width:74ch` 계층 스타일, 공개 JS에서 `대표 결과부터 읽기`와 `guide-research-read-order`를 확인했다. 라이브 Playwright Chromium fallback 390px·1440px에서도 두 줄 전환 밴드, viewport와 동일한 scrollWidth, page errors 0·console errors 0을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-HIERARCHY-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-HIERARCHY-20261008`.
+
 ## 06·연구 결과 전환 문구 계층·로컬 재감사 — working tree — 2026-10-07
 
 - 연구 지도 아래 전환 밴드에서 데스크톱 문구가 한 줄로 붙어 결과를 빠르게 구분하기 어려운 잔여 퍼블리싱 리스크를 확인했다. 기존 문구·도표·출처는 유지하고 `대표 결과부터 읽기`와 실제 관찰 결과를 별도 줄로 분리해 연구 카드로 이어지는 시선을 정리했다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 06·연구 결과 전환 문구 계층·공개 배포 공격 재점검 — main e997683 — 2026-10-07
+
+- 공개 후보에서 전환 밴드가 headline과 실제 관찰 결과를 별도 계층으로 전달하는지 공격 관점에서 확인했다. 공개 CSS·JS 표식과 라이브 390px·1440px 렌더가 일치했고 연구 카피·도표·출처·제품 독립 경계는 변하지 않았다.
+- PR·main release pipeline, Pages smoke, live validator 모두 성공했고 새 CRITICAL/MAJOR 결함은 없다. 정적 번들의 과거 reachable history 경로 13건 annotation은 기존 이력 스캐너 알림이며 현재 공개 번들 값은 노출하지 않는다.
+- Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 OPEN이다. RT-001·RT-002·RT-003 및 teaser `HOLD`는 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-HIERARCHY-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-HIERARCHY-20261008`.
+
 ## 06·연구 결과 전환 문구 계층 공격 재점검 — working tree — 2026-10-07
 
 - 공격 관점에서 지도·대표 결과·연구 카드가 같은 시각적 층위로 읽히면 고령·모바일 독자가 결과의 핵심을 놓칠 수 있는 잔여 리스크를 확인했다. 전환 밴드의 기존 데이터와 문구를 유지한 채 headline과 관찰 결과를 두 줄로 분리해 정보 우선순위를 명확히 했다.

@@ -2502,7 +2502,9 @@
       "E-LOCAL-BUILD-RESEARCH-CUE-HIERARCHY-20261008",
       "E-UI-CONTRACT-RESEARCH-CUE-HIERARCHY-20261008",
       "E-PLAYWRIGHT-RESEARCH-CUE-HIERARCHY-20261008",
-      "E-STATIC-BUNDLE-RESEARCH-CUE-HIERARCHY-20261008"
+      "E-STATIC-BUNDLE-RESEARCH-CUE-HIERARCHY-20261008",
+      "E-DEPLOY-PIPELINE-RESEARCH-CUE-HIERARCHY-20261008",
+      "E-LIVE-PUBLIC-RESEARCH-CUE-HIERARCHY-20261008"
     ],
     "status": "SUPPORTED"
   }
@@ -16756,6 +16758,28 @@
     "captured_at": "2026-10-07T10:18:47+09:00",
     "reviewer_id": "NAVI-PAGES-BUNDLE-QA-20261008-RESEARCH-CUE-HIERARCHY",
     "claim_refs": ["C-001", "C-005", "C-231"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-RESEARCH-CUE-HIERARCHY-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 결과 전환 문구 계층 보정이 PR 검사와 main 정적 공개 배포 파이프라인을 모두 통과했다.",
+    "locator": "PR #549 https://github.com/KRAdavid/gaba_info/pull/549; PR release-verify run 37557114722/job 112585777276 success and site-quality-verify run 37557114667/job 112585776823 success; squash merge e99768344c18286b8edf8d46e4c6a08f9a6b3f42; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37557233295: release-verify 112586159000, worker-readiness 112586535262, deploy-pages 112586557538, smoke-live 112586606066, release-status 112586655467 all success; deploy-worker 112586558022 skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37557233295",
+    "captured_at": "2026-10-07T10:32:05+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-20261008-RESEARCH-CUE-HIERARCHY",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-231"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-RESEARCH-CUE-HIERARCHY-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 공개 GitHub Pages 번들에 연구 결과 전환 문구 계층 보정이 반영되고, 공개 데이터·제품 독립 경계·정적 배포 정합성이 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=e99768344c18286b8edf8d46e4c6a08f9a6b3f42; HTTP 200; candidateSha e99768344c18286b8edf8d46e4c6a08f9a6b3f42; STATIC; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public CSS assets/PublicGabaGuide-y6Xgkzfy.css HTTP 200, 187605 bytes, contains max-width:74ch; public JS assets/PublicGabaGuide-Bpt6vsMt.js HTTP 200, 98189 bytes, contains guide-research-read-order and representative-result copy; live Playwright Chromium fallback at 390px and 1440px showed separate cue lines, viewport-matched scrollWidth, page errors 0 and console errors 0",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T10:32:05+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-RESEARCH-CUE-HIERARCHY",
+    "claim_refs": ["C-001", "C-003", "C-006", "C-231"]
   }
 ]
 }

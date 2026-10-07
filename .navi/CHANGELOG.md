@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 06·연구 결과 전환 문구 계층·공개 배포 완료 — main e997683 — 2026-10-07
+
+- PR #549를 병합하고 main workflow `37557233295`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `e99768344c18286b8edf8d46e4c6a08f9a6b3f42`, bundle hash 73개, 제품 독립 경계를 확인했다.
+- 라이브 CSS에 두 줄 결과 계층, JS에 연구 읽기 레일과 대표 결과 표식이 반영됐고 390px·1440px Playwright fallback 시각 점검에서 가로 넘침·page error·console error가 없었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 실기기·실제 고령 사용자·독립 과학·규제 감수와 teaser `HOLD`는 외부/운영 게이트로 남는다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-HIERARCHY-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-HIERARCHY-20261008`.
+
 ## 06·연구 결과 전환 문구 계층 고도화 — working tree — 2026-10-07
 
 - 연구 지도 아래 전환 밴드의 `대표 결과부터 읽기`와 실제 관찰 결과를 두 줄로 분리해 모바일·데스크톱에서 결과를 더 빠르게 읽도록 했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
