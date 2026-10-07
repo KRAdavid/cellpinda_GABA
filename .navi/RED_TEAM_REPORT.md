@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 초소형 모바일 연구 도표 줄바꿈 공격 재점검 — main d9e223bf — 2026-10-08
+
+- 공격 관점에서 280px 연구 도표의 비교 안내 문구·조건명·숫자 지표가 카드 경계를 침범하거나 문장을 잘라낼 수 있는지 확인했다. 보정 후 연구 도표와 수면 도표의 내부 가로폭은 각각 `202/202`, `200/200`으로 맞았고, 1440px도 `685/685`, `592/592`로 유지됐다.
+- 280·1440px 대표 장과 390px 전체 14개 장에서 pageWidth/scrollWidth 정합성과 runtime errors=[]를 확인했다. 이름 없는 버튼·이미지 대체텍스트 누락·중복 id도 재현되지 않았다. 공개 연구 결과·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 없다. Chrome CDP fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으며 teaser `HOLD`와 외부 검증 조건은 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-277`, `E-CDP-NARROW-CHART-WRAP-20261008`, `E-LIVE-PUBLIC-NARROW-CHART-WRAP-20261008`, `E-NAVI-STATE-NARROW-CHART-WRAP-20261008`.
+
 ## 연구 규모 기준일 노출 및 공개 배포 공격 재점검 — main 01fab451 — 2026-10-08
 
 - 공격 관점에서 큰 문헌 수치가 최신성·검색 범위 없이 효과처럼 오인되는지 확인했다. `1950 → 지금 · 기준일 2026.09.28`이 수치와 같은 시각 흐름에 표시되고, `같은 검색 기준`과 `별도 연구 분석` 범례가 유지됐다.

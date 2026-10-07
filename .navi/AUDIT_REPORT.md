@@ -1,5 +1,14 @@
 # Audit Report
 
+## 초소형 모바일 연구 도표 줄바꿈 및 공개 재검증 — main d9e223bf — 2026-10-08
+
+- 280px 공개 화면의 연구 결과 도표를 공격적으로 점검해 비교 안내 문구가 한 줄 고정으로 잘릴 수 있는 문제와 `GABA를 바른 조건` 같은 긴 조건명이 카드 폭을 넘을 수 있는 문제를 확인했다. 안내 문구·조건명 줄바꿈과 좁은 숫자 지표 타이포그래피를 보완해 카드 내부에서 읽히도록 했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 `pnpm run validate:ui-contract`, `pnpm run typecheck`, `pnpm run build`가 성공했고 총 자산은 `1,649,411 bytes / 1,650,000 bytes`였다. PR #634·#635 보호검사와 main workflow `37684187205`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 STATIC_ONLY 정책으로 건너뛰었다.
+- 공개 validator는 candidate SHA `d9e223bf343879d35a1a9c32aa76dec39ebdc546`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다. Chrome CDP fallback에서 280px은 pageWidth/scrollWidth `280/280`, 연구 도표 `202/202`, 수면 도표 `200/200`; 1440px은 pageWidth/scrollWidth `1425/1425`, 연구 도표 `685/685`, 수면 도표 `592/592`였고 runtime errors=[]였다. 390px 전체 14개 장도 해시 직접 진입·제목 위치·본문 흐름·가로폭을 통과했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 외부 검증 조건으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-277`, `E-LOCAL-BUILD-NARROW-CHART-WRAP-20261008`, `E-UI-CONTRACT-NARROW-CHART-WRAP-20261008`, `E-CDP-NARROW-CHART-WRAP-20261008`, `E-DEPLOY-PIPELINE-NARROW-CHART-WRAP-20261008`, `E-LIVE-PUBLIC-NARROW-CHART-WRAP-20261008`, `E-NAVI-STATE-NARROW-CHART-WRAP-20261008`.
+
 ## 연구 규모 기준일 노출 및 공개 배포 재감리 — main 01fab451 — 2026-10-08
 
 - 연구 규모의 큰 수치 옆에 `기준일 2026.09.28`을 노출해, 984·557·12,124가 언제의 어떤 검색·분석 결과인지 첫 시선에서 읽히도록 보완했다. 하버드·옥스퍼드의 동일 PubMed 검색과 별도 GABA-A 수용체 SCIE 분석의 범위·수치·출처는 변경하지 않았다.
