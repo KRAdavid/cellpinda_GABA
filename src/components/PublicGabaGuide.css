@@ -2198,3 +2198,9 @@
   .guide-header .guide-header-share-label{display:none}
   .guide-header .guide-header-share-compact{display:inline;font-size:10px;font-weight:850;letter-spacing:-.08em;line-height:1}
 }
+
+/* v173 ultra-narrow video meta: let the topic, state, and order breathe inside the compact player. */
+@media(max-width:350px){
+  .guide-video-feature-meta{flex-wrap:wrap;gap:4px 6px;white-space:normal}
+  .guide-video-feature-meta .guide-video-feature-index{margin-left:0}
+}
