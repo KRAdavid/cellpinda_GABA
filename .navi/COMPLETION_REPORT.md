@@ -2922,3 +2922,11 @@ Final Status: `NOT_READY`; 사용자 승인 전 자동 완료 처리하지 않�
 - 재현 가능한 CRITICAL/MAJOR UI 결함이 없어 이번 회차 기능 코드 변경은 보류했다. 완료 게이트는 `NOT_READY`이며, 실기기·실사용자·독립 과학·규제 검토는 외부 조건으로 남긴다.
 
 증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.
+
+## Completion gate recheck — NAVI 문서-only 병합 후 최종 공개본 — 2026-10-07
+
+- PR #608은 보호 검사 통과 후 main에 병합되었고, main workflow `37639573788`의 정적 Pages 배포·라이브 smoke·release-status가 성공했다.
+- 최종 공개 validator는 merge SHA `1a54a7d7f812175d313463725e20eb6e9b50cca0`, HTTP 200, 73개 bundle hash, 12개 claims, 6개 master records, 6개 share pages를 확인했다. 390px 전문가 영상 선택→재생→다음 카드 선택도 정상이다.
+- 이번 회차는 NAVI 기록만 갱신했으며 완료 게이트는 `NOT_READY`를 유지한다. 실기기·실사용자·독립 과학·규제 검토는 외부 조건으로 남긴다.
+
+증적: `C-264`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007`, `E-LIVE-PUBLIC-FINAL-REAUDIT-20261007`, `E-NAVI-STATE-FINAL-REAUDIT-20261007`.

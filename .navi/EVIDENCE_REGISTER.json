@@ -2874,6 +2874,16 @@
       "E-NAVI-STATE-PUBLIC-REAUDIT-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-264",
+    "statement": "NAVI 재감리 문서-only 업데이트가 main에 병합되었고, 최종 GitHub Pages 공개본의 SHA·배포 workflow·전문가 영상 상호작용이 다시 정합성 확인되었다.",
+    "evidence_refs": [
+      "E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007",
+      "E-LIVE-PUBLIC-FINAL-REAUDIT-20261007",
+      "E-NAVI-STATE-FINAL-REAUDIT-20261007"
+    ],
+    "status": "SUPPORTED"
   }
   ],
   "evidence": [
@@ -18668,6 +18678,48 @@
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PUBLIC-REAUDIT",
       "claim_refs": [
         "C-263"
+      ]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 문서-only 업데이트 PR #608이 보호 검사를 통과해 main에 병합되었고, 정적 Pages 공개 배포 workflow의 검증·배포·라이브 smoke·release-status가 모두 성공했다.",
+      "locator": "PR #608 https://github.com/KRAdavid/gaba_info/pull/608; merge SHA 1a54a7d7f812175d313463725e20eb6e9b50cca0; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37639573788: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37639573788",
+      "captured_at": "2026-10-07T23:50:09+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-FINAL-REAUDIT",
+      "claim_refs": [
+        "C-001",
+        "C-005",
+        "C-264"
+      ]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-FINAL-REAUDIT-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본에서 merge SHA·공개 데이터 정합성이 일치했고, 390px 전문가 영상의 포스터 선택→iframe 재생→두 번째 영상 선택과 runtime error 0이 확인되었다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha 1a54a7d7f812175d313463725e20eb6e9b50cca0; generatedAt 2026-10-07T14:47:49.269Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; Chrome CDP 390x844 iframe=true; src includes autoplay=1&mute=1&playsinline=1; selected=갱년기와 수면, GABA에 대한 질문; runtimeErrors=[]; scrollWidth=390",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-07T23:50:09+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-FINAL-REAUDIT",
+      "claim_refs": [
+        "C-002",
+        "C-006",
+        "C-264"
+      ]
+    },
+    {
+      "id": "E-NAVI-STATE-FINAL-REAUDIT-20261007",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 최종 재감리 기록이 문서-only 병합·main 배포·라이브 validator·전문가 영상 상호작용을 최종 SHA에 연결하고, 완료 게이트와 외부 검증 잔여 조건을 유지한다.",
+      "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; pnpm run validate:tf-pulse-workflow -> ok; pnpm run audit:goal -> IN_PROGRESS_WITH_GATES; PR #608 merged; main workflow 37639573788 success; .navi/PROJECT_STATE.json H-349; .navi/EVIDENCE_REGISTER.json C-264 and three evidence records; status USER_DECISION; completion gate NOT_READY",
+      "captured_at": "2026-10-07T23:50:09+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-FINAL-REAUDIT",
+      "claim_refs": [
+        "C-264"
       ]
     }
   ]

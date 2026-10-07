@@ -2539,3 +2539,11 @@
 - 새 CRITICAL/MAJOR 결함은 없다. 코드 패치는 만들지 않았으며, Chrome CDP fallback을 Safari/iOS/Android 실기기나 실제 고령 사용자 검증으로 확대하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건은 유지한다.
 
 증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.
+
+## Red-team final recheck — NAVI 문서-only 병합 후 공개본 — 1a54a7d7 — 2026-10-07
+
+- 공격 관점에서 최종 390px 전문가 영상의 포스터 선택·iframe 재생·다음 카드 선택과 runtime error를 다시 확인했다. iframe은 `autoplay=1&mute=1&playsinline=1`로 생성되었고 선택 상태는 하나로 유지되었다.
+- main workflow와 공개 validator의 최종 SHA가 일치했으며, 새 CRITICAL/MAJOR 결함은 없다. 이번 변경은 NAVI 문서 기록에 한정되어 기능 코드·공개 연구 경계는 변하지 않았다.
+- Chrome CDP fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 검증을 대신하지 않는다. teaser `HOLD`, 독립 과학·규제 검토 조건은 유지한다.
+
+증적: `C-264`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007`, `E-LIVE-PUBLIC-FINAL-REAUDIT-20261007`, `E-NAVI-STATE-FINAL-REAUDIT-20261007`.

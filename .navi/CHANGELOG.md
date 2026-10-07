@@ -2275,3 +2275,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 재현 가능한 UI 결함이 없어 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않고 NAVI 증적만 갱신했다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
 
 증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.
+
+## 2026-10-07 — NAVI 문서-only 병합 후 최종 공개 정합성 — 1a54a7d7
+
+- PR #608을 main에 병합하고 workflow `37639573788`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status 성공을 확인했다.
+- 최종 공개 validator는 SHA `1a54a7d7f812175d313463725e20eb6e9b50cca0`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개를 확인했다.
+- 공개 390px 전문가 영상 선택·재생·다음 카드 선택과 runtime error 0을 재현했다. 기능 코드와 연구 콘텐츠는 변경하지 않았으며 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-264`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007`, `E-LIVE-PUBLIC-FINAL-REAUDIT-20261007`, `E-NAVI-STATE-FINAL-REAUDIT-20261007`.

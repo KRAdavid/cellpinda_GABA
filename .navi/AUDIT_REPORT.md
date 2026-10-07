@@ -2926,6 +2926,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다. 이번 회차�
 
 증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.
 
+## Final Release Recheck — 1a54a7d7 — NAVI 문서-only 병합 후 공개 정합성 — 2026-10-07
+
+- AC-001 공개 배포: PASS. PR #608 병합 후 main workflow `37639573788`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 merge SHA `1a54a7d7f812175d313463725e20eb6e9b50cca0`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 라이브 상호작용: PASS. 최종 공개 390px에서 전문가 영상 포스터 선택 후 `autoplay=1&mute=1&playsinline=1` iframe이 생성되고, 두 번째 카드 선택 상태가 유지되었으며 runtime error는 0건이었다.
+- AC-005 자동 게이트: PASS. 이번 병합은 NAVI 문서-only 업데이트이며 PR 보호 검사와 main 배포 workflow가 통과했다. 기존 production build·127개 테스트·정적 번들·성능 예산은 C-263 릴리스 증적으로 유지한다.
+- AC-006 제품 독립 경계: PASS. 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-264`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007`, `E-LIVE-PUBLIC-FINAL-REAUDIT-20261007`, `E-NAVI-STATE-FINAL-REAUDIT-20261007`.
+
 ## Current Release Recheck — 3cef5f36 — 모바일 성장 연구 흐름 — 2026-10-07
 
 - AC-001 공개 URL·라이브 정합성: PASS. PR #600 병합 후 main workflow `37622082343`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 candidate `3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c`·HTTP 200·STATIC·73개 bundle hash·12개 claims·6개 master records·6개 share pages·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
