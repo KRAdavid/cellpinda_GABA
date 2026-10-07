@@ -1482,7 +1482,7 @@
   .guide-video-card{display:grid;grid-template-columns:74px minmax(0,1fr);min-height:108px;padding:8px}
   .guide-video-card-thumb{aspect-ratio:9/14}
   .guide-video-card-copy{padding:3px 1px 2px}
-  .guide-video-card-copy strong{min-height:0;display:block;margin-top:9px;-webkit-line-clamp:initial}
+  .guide-video-card-copy strong{min-height:0;display:block;margin-top:9px;word-break:keep-all;overflow-wrap:break-word;-webkit-line-clamp:initial}
   .guide-video-card-copy small{min-height:0;margin-top:auto;display:block;-webkit-line-clamp:initial}
 }
 
