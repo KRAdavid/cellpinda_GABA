@@ -19,7 +19,6 @@ import {
   Network,
   Pause,
   Play,
-  Printer,
   Share2,
   ShieldCheck,
   Sparkles,
@@ -27,6 +26,7 @@ import {
   Sun,
   X,
 } from 'lucide-react';
+const Printer = BookOpen;
 import gabaFermentationEditorial from '../assets/gaba-fermentation-editorial-q55.webp';
 import gabaApplicationsEditorial from '../assets/gaba-applications-editorial-q55.jpg';
 import gabaAcademicEditorial from '../assets/gaba-academic-editorial-q55.webp';
