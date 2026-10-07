@@ -2804,3 +2804,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-253`, `E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007`.
+
+## Current Release Recheck — f320f5d — 공개 표면·반응형 고도화 재감리 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. 공개 validator candidate `f320f5dfa4964770c306f3b643f5eedd6f363743`가 HTTP 200·STATIC·73개 bundle hash·12 claims·6 master records·6 share pages·`teaser HOLD`·`provenance matched`와 일치한다.
+- AC-003/AC-004 반응형·읽기 흐름: PASS. 320px과 390·768·1440px의 주요 직접 진입 화면에서 가로폭이 일치하고, 히어로·연구 지도·출처 읽기·전문가 영상·공유 흐름의 잘림·겹침이 재현되지 않았다.
+- AC-005 배포 게이트: PASS. UI contract·research copy·typecheck·127개 테스트·성능 예산과 최신 main 공개 검증이 통과했다. 이번 재감리는 코드 변경 없이 공개본 유지로 처리했다.
+- AC-006 제품 독립 경계: PASS. 공개 연구 카피·수치·출처·제품 독립 경계를 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없지만 Chrome headless/CDP fallback, teaser `HOLD`, 실기기·실제 사용자·독립 과학·규제 검증 조건은 완료로 표시하지 않는다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-254`, `E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007`, `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.

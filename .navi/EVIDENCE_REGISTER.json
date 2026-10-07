@@ -2757,6 +2757,17 @@
       "E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-254",
+    "statement": "최신 공개본은 320·390·768·1440px 주요 장 직접 진입에서 document 가로폭과 viewport가 일치하고, 히어로·연구 지도·출처 읽기·전문가 영상·공유 흐름의 잘림·겹침 없이 공개되며, 자동 품질 게이트와 live validator가 통과한다. 기능 코드·공개 연구 카피·수치·출처·제품 독립 경계는 이번 재감리에서 변경하지 않았다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007",
+      "E-CDP-PUBLISHING-SURFACE-AUDIT-20261007",
+      "E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007",
+      "E-NAVI-STATE-PUBLISHING-AUDIT-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -18031,6 +18042,47 @@
     "captured_at": "2026-10-07T19:06:40+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-VIDEO-TIMEOUT-FALLBACK",
     "claim_refs": ["C-253"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최신 공개 기준 코드에서 UI 계약·연구 카피·타입체크·127개 테스트·성능 예산 검사가 모두 통과하고, 이번 시각 감리로 인한 코드 수정 없이 현재 배포본을 유지할 수 있다.",
+    "locator": "pnpm run validate:ui-contract -> ok; pnpm run validate:research-copy -> status ok; pnpm run typecheck -> pass; pnpm test -> 127 pass/0 fail; pnpm run validate:performance -- dist -> total assets 1,649,388 bytes, status ok; git diff --check -> pass",
+    "captured_at": "2026-10-07T19:19:16+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PUBLISHING-SURFACE",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-254"]
+  },
+  {
+    "id": "E-CDP-PUBLISHING-SURFACE-AUDIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Chrome headless/CDP fallback으로 로컬 공개 화면의 320·390·768·1440px 핵심 장 직접 진입을 점검했으며, 확인한 화면에서 document 가로폭이 viewport와 일치하고 주요 카드·읽기 진행 레일·전문가 영상·공유 화면의 잘림이 재현되지 않았다.",
+    "locator": "local http://127.0.0.1:4193/?view=guide&audit=local-next; 320px #academic/#reading-note/#expert-videos/#final, 390·768·1440px #top/#academic/#reading-note/#expert-videos/#final; scrollWidth equals viewport at every captured target; 390px captures C:/Users/computer/AppData/Local/Temp/gaba-local-next-390.png, -academic.png, -reading-note.png, -expert-videos.png, -final.png; console errors []",
+    "captured_at": "2026-10-07T19:19:16+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-PUBLISHING-SURFACE",
+    "claim_refs": ["C-003", "C-004", "C-254"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "GitHub Pages 공개본은 최신 문서 병합 SHA와 일치하며 HTTP 200, 정적 bundle hash 73개, claim 12개, master record 6개, share page 6개, teaser HOLD, 제품 독립 공개 경계를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=f320f5dfa4964770c306f3b643f5eedd6f363743; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha f320f5dfa4964770c306f3b643f5eedd6f363743; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T19:19:16+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-PUBLISHING-REAUDIT",
+    "claim_refs": ["C-001", "C-002", "C-006", "C-254"]
+  },
+  {
+    "id": "E-NAVI-STATE-PUBLISHING-AUDIT-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state·evidence register·감사·레드팀 기록이 이번 공개 표면 재감리 결과를 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 외부 검증 잔여 조건을 함께 기록한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; pnpm run validate:governance -> PASS; pnpm run validate:ops-docs -> PASS; .navi/PROJECT_STATE.json AUD-005/RT-005/H-338; .navi/EVIDENCE_REGISTER.json C-254 and four evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T19:19:16+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-PUBLISHING-SURFACE",
+    "claim_refs": ["C-254"]
   }
 ]
 }
