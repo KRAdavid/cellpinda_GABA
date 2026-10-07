@@ -2209,5 +2209,5 @@
 
 @media(max-width:700px){.is-large-text .guide-video-filters{flex-wrap:wrap;width:100%}}
 
-.guide-research-map-item small{display:block;color:#7693a3;font-size:11px;line-height:1.25}
-.is-large-text .guide-research-map-item small{font-size:11px}
+.guide-research-map-item small{display:block;color:#7693a3;font-size:12px;line-height:1.25}
+.is-large-text .guide-research-map-item small{font-size:12px}
