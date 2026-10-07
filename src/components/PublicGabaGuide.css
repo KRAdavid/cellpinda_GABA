@@ -394,14 +394,6 @@
   .guide-outcome-chart-note-limit{font-size:11px}
 }
 @media(max-width:350px){
-  .guide-outcome-lanes{grid-template-columns:1fr;gap:7px}
-  .guide-outcome-lane{padding:11px 12px}
-  .guide-outcome-lane-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-  .guide-outcome-lane-top>span{font-size:.786em;flex:0 0 auto}
-  .guide-outcome-lane-top>strong{min-height:0;font-size:.929em;text-align:right}
-  .guide-outcome-lane-signal{min-height:20px}
-  .guide-outcome-lane-signal svg{width:16px;height:16px}
-  .guide-outcome-lane-signal em{font-size:.786em}
   .guide-outcome-chart-note{font-size:.9em}
   .guide-outcome-signal-row{grid-template-columns:1fr;grid-template-areas:"label" "value" "visual";gap:5px 0;padding:10px 11px}
   .guide-outcome-signal-row>strong{justify-self:start}
@@ -2173,18 +2165,13 @@
 .guide-section{scroll-margin-top:126px}
 @media(max-width:700px){.guide-section{scroll-margin-top:116px}}
 
-/* v173 ultra-narrow comparison chart: keep both conditions in one glance at 320px. */
+/* v173 320px comparison: keep both conditions in one glance. */
 @media(max-width:350px){
-  .guide-outcome-lanes{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
   .guide-outcome-lane{padding:9px 7px}
-  .guide-outcome-lane-top{display:grid;gap:4px}
-  .guide-outcome-lane-top>span{font-size:.68em;line-height:1.2}
-  .guide-outcome-lane-top>strong{min-height:3.1em;font-size:.78em;line-height:1.35;text-align:left}
-  .guide-outcome-lane.is-result{box-shadow:inset 3px 0 0 #26a6aa}
-  .guide-outcome-lane-signal{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"icon text" "meter meter";gap:4px 5px;align-items:center}
-  .guide-outcome-lane-signal svg{grid-area:icon}
-  .guide-outcome-lane-signal em{grid-area:text;min-width:0;font-size:.66em;line-height:1.25;white-space:normal}
-  .guide-outcome-lane-meter{grid-area:meter;width:100%;max-width:none}
+  .guide-outcome-lane-top>span{font-size:.68em}
+  .guide-outcome-lane-top>strong{font-size:.78em}
+  .guide-outcome-lane-signal{grid-template-columns:auto 1fr}
+  .guide-outcome-lane-signal em{font-size:.66em}
 }
 
 /* v163 print publishing: hide the video board and keep editorial imagery together on paper. */
