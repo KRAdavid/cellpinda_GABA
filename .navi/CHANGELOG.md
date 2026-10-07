@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 06·연구 대상 연결 라인·공개 배포 완료 — main af936c7 — 2026-10-07
+
+- PR #551을 병합하고 main workflow `37560044899`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `af936c72c3b6140488b27d6a390809201ec99d25`, bundle hash 73개, 제품 독립 경계를 확인했다.
+- 라이브 연구 지도 아래에 대표 결과와 대상·연구 범위가 함께 표시되고, 피부 주제 선택 시 범위 라벨과 활성 카드가 갱신된다. 390px·1440px Playwright fallback에서 가로 넘침·page error·console error가 없었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. teaser `HOLD`, 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 유지한다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-SCOPE-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-SCOPE-20261008`.
+
 ## 06·연구 대상 연결 라인 고도화 — working tree — 2026-10-07
 
 - 연구 지도 아래 결과 요약에 기존 연구 카드의 대상·연구 범위 라인을 추가해 `대표 결과 → 관찰 결과 → 대상·연구 범위` 순서를 한눈에 읽도록 했다. 새 연구 주장·수치·출처·제품 광고는 추가하지 않았다.

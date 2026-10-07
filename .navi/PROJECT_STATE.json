@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T10:49:04+09:00",
+  "updated_at": "2026-10-07T11:05:30+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5767,6 +5767,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T10:49:04+09:00"
+    },
+    {
+      "id": "H-315",
+      "event": "연구 대상 연결 라인 보강의 공개 배포 후 검증을 완료했다. PR #551의 release-verify·site-quality-verify가 성공했고 squash merge `af936c72c3b6140488b27d6a390809201ec99d25`, main workflow `37560044899`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 모두 성공했다. 공개 validator는 HTTP 200·candidate `af936c72c3b6140488b27d6a390809201ec99d25`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 라이브 390px·1440px Playwright Chromium fallback에서 결과·범위 라인이 표시되고 피부 주제 선택 시 범위 라벨과 활성 카드가 갱신되며 가로 넘침·page error·console error가 없었다. C-232와 배포·라이브 증거를 SUPPORTED/INDEPENDENTLY_CONFIRMED로 갱신한다. 새 CRITICAL/MAJOR 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T11:05:30+09:00"
     }
   ]
 }

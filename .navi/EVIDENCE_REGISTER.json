@@ -2515,7 +2515,9 @@
       "E-LOCAL-BUILD-RESEARCH-CUE-SCOPE-20261008",
       "E-UI-CONTRACT-RESEARCH-CUE-SCOPE-20261008",
       "E-PLAYWRIGHT-RESEARCH-CUE-SCOPE-20261008",
-      "E-STATIC-BUNDLE-RESEARCH-CUE-SCOPE-20261008"
+      "E-STATIC-BUNDLE-RESEARCH-CUE-SCOPE-20261008",
+      "E-DEPLOY-PIPELINE-RESEARCH-CUE-SCOPE-20261008",
+      "E-LIVE-PUBLIC-RESEARCH-CUE-SCOPE-20261008"
     ],
     "status": "SUPPORTED"
   }
@@ -16831,6 +16833,28 @@
     "captured_at": "2026-10-07T10:49:04+09:00",
     "reviewer_id": "NAVI-PAGES-BUNDLE-QA-20261008-RESEARCH-CUE-SCOPE",
     "claim_refs": ["C-001", "C-005", "C-232"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-RESEARCH-CUE-SCOPE-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "연구 결과 전환 밴드의 대상·연구 범위 라인 보강이 PR 검사와 main 정적 공개 배포 파이프라인을 모두 통과했다.",
+    "locator": "PR #551 https://github.com/KRAdavid/gaba_info/pull/551; PR release-verify run 37559927895/job 112594649216 success and site-quality-verify run 37559927878/job 112594649218 success; squash merge af936c72c3b6140488b27d6a390809201ec99d25; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37560044899: release-verify 112595013616, worker-readiness 112595304451, deploy-pages 112595331256, smoke-live 112595395873, release-status 112595459909 all success; deploy-worker 112595332509 skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37560044899",
+    "captured_at": "2026-10-07T11:05:30+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-20261008-RESEARCH-CUE-SCOPE",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-232"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-RESEARCH-CUE-SCOPE-20261008",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 공개 GitHub Pages 번들에 연구 결과와 대상·연구 범위 연결 라인이 반영되고, 공개 데이터·제품 독립 경계·정적 배포 정합성이 유지된다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=af936c72c3b6140488b27d6a390809201ec99d25; HTTP 200; candidateSha af936c72c3b6140488b27d6a390809201ec99d25; STATIC; generatedAt 2026-10-07T02:03:25.644Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public assets/PublicGabaGuide-Jy_rgF1F.css and assets/PublicGabaGuide-CHEQK8jI.js; live Playwright Chromium fallback at 390px and 1440px showed 대표 결과부터 읽기, 사람 63명 · 비교 연구, 피부 selection scope 생쥐 피부·사람 피부 세포 실험, active card true, viewport-matched scrollWidth, page errors 0 and console errors 0",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T11:05:30+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-20261008-RESEARCH-CUE-SCOPE",
+    "claim_refs": ["C-001", "C-003", "C-006", "C-232"]
   }
 ]
 }

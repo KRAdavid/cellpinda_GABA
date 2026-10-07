@@ -1,5 +1,14 @@
 # Completion Report
 
+## Current Release Recheck — research cue scope line deployed — main af936c7 — 2026-10-07
+
+- AC-001/AC-004/AC-005: PASS. PR #551 검사와 main workflow `37560044899`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 공개 URL은 HTTP 200이다. 공개 validator는 candidate `af936c72c3b6140488b27d6a390809201ec99d25`와 73개 bundle hash를 확인했다.
+- AC-003: PASS_WITH_CONDITIONS. 공개 연구 지도 아래 대표 결과와 대상·연구 범위 라인이 연결되고, 라이브 390px·1440px에서 연구 카드로 이어지는 흐름과 피부 주제 선택 갱신이 확인됐다.
+- AC-006/AC-007: PASS_WITH_CONDITIONS. teaser `HOLD`, 공개 연구 데이터 경계, 제품 독립 경계는 유지됐다. 실기기·실제 고령 사용자·독립 과학·규제 감수는 완료로 표시하지 않는다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-SCOPE-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-SCOPE-20261008`.
+
 ## Current Work Recheck — research cue scope line — working tree — 2026-10-07
 
 - AC-003/AC-004: PASS_WITH_CONDITIONS. 연구 지도 아래 대표 결과에 기존 연구 카드의 대상·연구 범위 라인을 추가해 `결과 → 대상` 연결을 보강했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.

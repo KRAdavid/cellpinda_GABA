@@ -1,5 +1,13 @@
 # Audit Report
 
+## 06·연구 대상 연결 라인·공개 배포 후 재감사 — main af936c7 — 2026-10-07
+
+- PR #551과 main workflow `37560044899`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했다. 공개 validator는 HTTP 200·candidate `af936c72c3b6140488b27d6a390809201ec99d25`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 공개 CSS `PublicGabaGuide-Jy_rgF1F.css`와 JS `PublicGabaGuide-CHEQK8jI.js`에 범위 라인이 반영됐고, 라이브 390px·1440px에서 대표 결과·연구 대상이 읽혔다. 피부 주제 선택 시 범위 라벨과 활성 카드가 함께 갱신되며 가로 넘침·page error·console error가 없었다.
+- 새 CRITICAL/MAJOR 결함은 없다. teaser `HOLD`, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-SCOPE-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-SCOPE-20261008`.
+
 ## 06·연구 대상 연결 라인·로컬 재감사 — working tree — 2026-10-07
 
 - 연구 지도 아래 대표 결과를 읽은 직후 연구 대상이 무엇인지 즉시 연결되지 않는 잔여 정보 전달 리스크를 확인했다. 기존 연구 카드의 검증된 범위 라벨을 결과 요약 아래에 한 줄로 재사용해 `대표 결과 → 관찰 결과 → 대상·연구 범위` 계층을 만들었다.
