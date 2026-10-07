@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-07T12:51:37+09:00",
+  "updated_at": "2026-10-07T12:58:30+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -5823,6 +5823,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-07T12:51:37+09:00"
+    },
+    {
+      "id": "H-323",
+      "event": "NAVI 문서-only PR #563 병합 후 최종 공개 manifest가 문서 병합 SHA `25d8ff3a29b47ef9dc76a73a4e26ae27e6b6163d`로 갱신된 것을 확인했다. main workflow `37569095235`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator는 HTTP 200·정적 모드·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 재확인했다. `/research/` 직접 fallback도 HTTP 200과 새 제목을 제공한다. 기존 연구 수치·출처·제품 독립 경계는 변경하지 않았고 새 CRITICAL/MAJOR 결함은 없다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-239에 최종 배포·라이브 증거를 추가했다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-07T12:58:30+09:00"
     }
   ]
 }

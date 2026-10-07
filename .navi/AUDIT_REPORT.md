@@ -1,12 +1,12 @@
 # Audit Report
 
-## 공개 연구 라우트 고도화 — 공개 배포 확인 — main 9c3f174 — 2026-10-07
+## 공개 연구 라우트 고도화 — 공개 배포 확인 — code 9c3f174 / final manifest 25d8ff3 — 2026-10-07
 
 - `/research/`를 메인 안내서와 같은 네이비·틸 시각 언어로 정리하고, 제목·증거 안내·연구 카드·출처 연결을 결과 우선 읽기 흐름으로 맞췄다. `먼저 확인해 주세요`처럼 흐름을 끊던 문구와 어색한 비교 표현은 자연스러운 한국어로 교체했으며 연구 수치·출처·제품 독립 경계는 변경하지 않았다.
 - UI contract·research copy·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. 390px Playwright Chromium fallback에서 새 title·heading·brand·증거 안내·연구 카드·비교 문구가 표시되고 document 폭이 viewport와 일치했으며 page/console error는 0이었다.
-- PR #560·#561·#562 병합 후 main workflow `37568431731`의 release-verify·Pages publish·라이브 smoke·release-status가 성공했다. 공개 manifest는 main `9c3f174`·HTTP 200·73개 bundle hash·제품 독립 경계·teaser `HOLD`를 확인한다. 새 CRITICAL/MAJOR 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 후속 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+- PR #560·#561·#562의 코드 고도화와 PR #563의 NAVI 문서 동기화가 main에 반영됐다. 코드 release `9c3f174`와 최종 manifest `25d8ff3` 모두 release-verify·Pages publish·라이브 smoke·release-status를 통과했고, 공개 manifest는 HTTP 200·73개 bundle hash·제품 독립 경계·teaser `HOLD`를 확인한다. 새 CRITICAL/MAJOR 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 후속 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
-증적: `E-LOCAL-BUILD-RESEARCH-ROUTE-20261007`, `E-UI-CONTRACT-RESEARCH-ROUTE-20261007`, `E-PLAYWRIGHT-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007`.
+증적: `E-LOCAL-BUILD-RESEARCH-ROUTE-20261007`, `E-UI-CONTRACT-RESEARCH-ROUTE-20261007`, `E-PLAYWRIGHT-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-NAVI-RESEARCH-FINAL-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-FINAL-20261007`.
 
 ## 전문가 영상 재생 상태 문구 동기화 — 공개 배포 확인 — main 2e6ab07 — 2026-10-07
 

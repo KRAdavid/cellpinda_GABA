@@ -2589,7 +2589,9 @@
       "E-UI-CONTRACT-RESEARCH-ROUTE-20261007",
       "E-PLAYWRIGHT-RESEARCH-ROUTE-20261007",
       "E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007",
-      "E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007"
+      "E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007",
+      "E-DEPLOY-PIPELINE-NAVI-RESEARCH-FINAL-20261007",
+      "E-LIVE-PUBLIC-RESEARCH-ROUTE-FINAL-20261007"
     ],
     "status": "SUPPORTED"
   }
@@ -17161,10 +17163,32 @@
     "kind": "TEST",
     "status": "INDEPENDENTLY_CONFIRMED",
     "statement": "최신 GitHub Pages 공개본이 main release SHA와 일치하고 연구 라우트의 결과 우선 메타데이터·정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
-    "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 9c3f17477c8b5aae835493510104c1cf95186030; generatedAt 2026-10-07T03:49:13.078Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
+    "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 25d8ff3a29b47ef9dc76a73a4e26ae27e6b6163d; generatedAt 2026-10-07T03:57:50.415Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched",
     "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
     "captured_at": "2026-10-07T12:51:37+09:00",
     "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-RESEARCH-ROUTE",
+    "claim_refs": ["C-001", "C-002", "C-239"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-NAVI-RESEARCH-FINAL-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI 최종 문서 동기화가 보호 검사 후 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #563 merge `25d8ff3a29b47ef9dc76a73a4e26ae27e6b6163d`; workflow https://github.com/KRAdavid/gaba_info/actions/runs/37569095235: release-verify 112623453760 success; worker-readiness 112623745483 success; deploy-pages 112623764253 success; smoke-live 112623810447 success; release-status 112623854209 success; deploy-worker 112623765035 skipped by STATIC_ONLY; prior-revision privacy annotation is a warning only",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37569095235",
+    "captured_at": "2026-10-07T12:58:30+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-RESEARCH-FINAL",
+    "claim_refs": ["C-001", "C-002", "C-239"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-RESEARCH-ROUTE-FINAL-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "최종 문서 동기화 후 GitHub Pages 공개본이 최신 public manifest와 일치하고 연구 라우트·정적 데이터·제품 독립 경계를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=25d8ff3a29b47ef9dc76a73a4e26ae27e6b6163d; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 25d8ff3a29b47ef9dc76a73a4e26ae27e6b6163d; generatedAt 2026-10-07T03:57:50.415Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaser HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; direct /research/ fallback HTTP 200 with updated title",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T12:58:30+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-RESEARCH-FINAL",
     "claim_refs": ["C-001", "C-002", "C-239"]
   }
 ]

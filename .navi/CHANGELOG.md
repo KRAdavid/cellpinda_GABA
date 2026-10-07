@@ -1,12 +1,12 @@
 # Project Changelog
 
-## 공개 연구 라우트 고도화 — 공개 배포 확인 — main 9c3f174 — 2026-10-07
+## 공개 연구 라우트 고도화 — 공개 배포 확인 — final manifest 25d8ff3 — 2026-10-07
 
 - 연구 페이지를 메인 안내서와 같은 프리미엄 네이비·틸 톤으로 맞추고, `사람 연구의 결과를 한눈에 읽습니다`를 중심으로 결과·연구 조건·출처가 바로 이어지는 흐름을 만들었다.
 - `먼저 확인해 주세요`와 어색한 비교 표현을 자연스러운 한국어로 보정하고, 정적 메타데이터·모바일 가로폭·연구 카드·출처 안내를 함께 검증했다. 공개 390px 화면에서 오류와 가로 넘침이 없었다.
-- PR #560·#561·#562와 main workflow `37568431731`이 성공했다. 공개 candidate SHA `9c3f17477c8b5aae835493510104c1cf95186030`, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`를 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+- PR #560·#561·#562의 코드 고도화와 PR #563의 NAVI 문서 동기화가 성공했다. 최종 main workflow `37569095235`와 공개 candidate SHA `25d8ff3a29b47ef9dc76a73a4e26ae27e6b6163d`, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`를 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
-증적: `E-LOCAL-BUILD-RESEARCH-ROUTE-20261007`, `E-UI-CONTRACT-RESEARCH-ROUTE-20261007`, `E-PLAYWRIGHT-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007`.
+증적: `E-LOCAL-BUILD-RESEARCH-ROUTE-20261007`, `E-UI-CONTRACT-RESEARCH-ROUTE-20261007`, `E-PLAYWRIGHT-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-NAVI-RESEARCH-FINAL-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-FINAL-20261007`.
 
 ## 전문가 영상 재생 상태 표기 — 공개 배포 확인 — main 2e6ab07 — 2026-10-07
 

@@ -1,12 +1,12 @@
 # Red Team Report
 
-## 공개 연구 라우트 시각·문구 공격 재점검 — main 9c3f174 — 2026-10-07
+## 공개 연구 라우트 시각·문구 공격 재점검 — final manifest 25d8ff3 — 2026-10-07
 
 - 연구 페이지가 메인 안내서와 분리된 별도 도구처럼 보이거나, 결과 전에 안내 문구가 과도하게 앞서고, 비교 조건 문장이 어색해 읽기를 멈추게 하는지 공격적으로 확인했다. 네이비·틸 브랜드 계층, `사람 연구의 결과를 한눈에 읽습니다`, 결과·연구 조건·출처 순서, 자연스러운 비교 문구가 390px 공개 화면에서 한 흐름으로 읽혔다.
 - 공개 URL에서 새 title·heading·증거 안내·연구 카드·출처 흐름을 확인했고, static fallback `/research/`도 같은 메타데이터를 제공했다. 390px에서 document 폭은 viewport와 같았고 page error·console error는 0건이었다. 새 CRITICAL/MAJOR 결함은 없다.
-- Browser 플러그인 부재로 Chromium fallback을 사용했다. RT-001·RT-002·RT-003, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수와 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+- Browser 플러그인 부재로 Chromium fallback을 사용했다. 최종 manifest `25d8ff3`와 라이브 validator를 재확인했으며, RT-001·RT-002·RT-003, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수와 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
-증적: `E-PLAYWRIGHT-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007`.
+증적: `E-PLAYWRIGHT-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-NAVI-RESEARCH-FINAL-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-FINAL-20261007`.
 
 ## 전문가 영상 상태 표기 공격 재점검 — 공개 배포 확인 — main 2e6ab07 — 2026-10-07
 
