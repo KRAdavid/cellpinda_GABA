@@ -1,5 +1,13 @@
 # Audit Report
 
+## 연구 지도 선택 연결 문구 — working tree — 2026-10-07
+
+- 연구 지도에서 대표 결과를 먼저 보여주는 초기 상태에 `주제를 고르면 해당 카드로 이어집니다`를 추가해, 지도 노드 선택과 아래 상세 카드의 관계를 한 문장으로 연결했다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다.
+- UI contract·typecheck·127개 테스트·Pages-style production build·정적 bundle·성능 예산을 통과했다. Playwright Chromium fallback 320·390·768·1440px에서 가로 넘침·page error·console error가 없었고, 390px 피부 주제 선택 후 활성 카드 포커스를 재현했다.
+- 새 CRITICAL/MAJOR 결함은 없다. 공개 main 배포·라이브 URL·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 후속 외부 검증으로 남긴다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261007`, `E-UI-CONTRACT-RESEARCH-MAP-CUE-20261007`, `E-PLAYWRIGHT-RESEARCH-MAP-CUE-20261007`.
+
 ## 좁은 화면 읽기 조절 라벨 — 공개 배포 확인 — main d035807 — 2026-10-07
 
 - PR #555 병합 후 main workflow `37563485033`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했고, deploy-worker는 정적 공개 모드의 정책대로 skip되었다.

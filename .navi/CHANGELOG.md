@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 연구 지도 선택 연결 문구 — working tree — 2026-10-07
+
+- 연구 지도 아래 초기 안내에 `주제를 고르면 해당 카드로 이어집니다`를 추가해, 대표 결과와 상세 연구 카드의 연결을 한 번에 읽도록 했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. UI contract·typecheck·127개 테스트·production build·성능 예산과 320·390·768·1440px Playwright Chromium fallback을 통과했다.
+- 공개 main 배포 후 라이브 재검증은 후속 게이트다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261007`, `E-UI-CONTRACT-RESEARCH-MAP-CUE-20261007`, `E-PLAYWRIGHT-RESEARCH-MAP-CUE-20261007`.
+
 ## 좁은 화면 글자 조절 라벨 — 공개 배포 확인 — main d035807 — 2026-10-07
 
 - PR #555와 main workflow `37563485033`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. deploy-worker는 `STATIC_ONLY`로 skip되었다.

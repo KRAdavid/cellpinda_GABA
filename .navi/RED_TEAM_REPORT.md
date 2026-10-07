@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 연구 지도 선택 연결 문구 공격 재점검 — working tree — 2026-10-07
+
+- 처음 방문자가 연구 지도 노드와 상세 카드의 관계를 놓칠 수 있는지, 보강 문구가 연구 결과를 과장하거나 시각 밀도를 해치지 않는지 공격적으로 확인했다. 초기 상태는 대표 결과·연구 범위·선택 안내를 순서대로 보여주고, 피부 선택은 `현재 선택 · 피부`·활성 카드·포커스로 이어졌다.
+- 320·390·768·1440px에서 viewport와 document 폭이 일치했고 page error·console error가 없었다. 새 CRITICAL/MAJOR 결함은 없다.
+- 공개 main 배포 후 라이브 확인, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 OPEN이다. RT-001·RT-002·RT-003과 teaser `HOLD`는 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261007`, `E-UI-CONTRACT-RESEARCH-MAP-CUE-20261007`, `E-PLAYWRIGHT-RESEARCH-MAP-CUE-20261007`.
+
 ## 좁은 화면 읽기 조절 라벨 — 공개 배포 공격 재확인 — main d035807 — 2026-10-07
 
 - PR #555와 main workflow `37563485033`이 성공하고 공개 validator가 main SHA와 일치하는지, `가+ 크게` 보정·제품 독립 경계·teaser `HOLD`가 유지되는지 다시 공격적으로 확인했다. Pages 공개와 라이브 smoke는 성공했고 deploy-worker는 STATIC_ONLY로 skip되었다.
