@@ -3040,6 +3040,19 @@
         "E-NAVI-STATE-NARROW-CHART-WRAP-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-278",
+      "statement": "모바일 읽기 크기 조절 버튼은 기호 대신 ‘가 크게’·‘가 기본’이라는 자연스러운 표시를 사용하고, 두 상태의 실제 전환·ARIA 라벨·터치 영역·가로폭 정합성을 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-READING-CUE-20261008",
+        "E-UI-CONTRACT-MOBILE-READING-CUE-20261008",
+        "E-CDP-MOBILE-READING-CUE-20261008",
+        "E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261008",
+        "E-LIVE-PUBLIC-MOBILE-READING-CUE-20261008",
+        "E-NAVI-STATE-MOBILE-READING-CUE-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -19711,6 +19724,69 @@
       "captured_at": "2026-10-08T05:43:22+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-NARROW-CHART-WRAP",
       "claim_refs": ["C-277"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-READING-CUE-20261008",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 읽기 크기 표시를 ‘가 크게’·‘가 기본’으로 단순화한 공개 안내서가 UI 계약·TypeScript 타입체크·Vite production build·정적 bundle·성능 예산을 통과했다.",
+      "locator": "local worktree C:\\Users\\computer\\Documents\\ChatGPT\\gaba-next-premium-audit-20261008; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm run build PASS; initial JS 311405 bytes; initial CSS 95703 bytes; total assets 1649396 bytes; performance budget PASS",
+      "captured_at": "2026-10-08T06:14:03+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-MOBILE-READING-CUE",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-278"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MOBILE-READING-CUE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약은 모바일 읽기 크기 조절 버튼의 한국어 마크·compact action label·ARIA action label·터치 영역을 유지하면서 기호 의존 표시를 제거한다.",
+      "locator": "src/components/PublicGabaGuide.tsx; src/components/PublicGabaGuide.css; scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract -> status ok; mark text 가; compact labels 기본/크게; action labels 기본 크기로 보기/글자 크게 보기",
+      "captured_at": "2026-10-08T06:14:03+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-MOBILE-READING-CUE",
+      "claim_refs": ["C-278"]
+    },
+    {
+      "id": "E-CDP-MOBILE-READING-CUE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin unavailable 상태에서 Chrome CDP fallback으로 공개 헤더의 읽기 크기 표시·두 상태 전환·터치 영역·가로폭·runtime 오류를 확인했다.",
+      "locator": "public target https://kradavid.github.io/gaba_info; widths 280/320/351/390/430/768; page clientWidth/scrollWidth 280/280, 320/320, 351/351, 390/390, 430/430, 768 viewport with document 753/753 scrollbar difference; reading button 60/72x44; 390px initial aria-pressed=true text 가/기본 then click aria-label 글자 크게 보기, aria-pressed=false, largeText=false, pageWidth/scrollWidth=390/390; errors=[]; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-header-280.png and gaba-header-390.png",
+      "captured_at": "2026-10-08T06:14:03+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-MOBILE-READING-CUE",
+      "claim_refs": ["C-004", "C-278"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 읽기 크기 표시 보정 PR #637이 보호검사를 통과해 main에 병합됐고 GitHub Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #637 https://github.com/KRAdavid/gaba_info/pull/637 merge SHA e963b2b13295bf2567a70e586e640b4206de4e5f; PR release-verify run 37687302776 success; site-quality-verify run 37687302807 success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37687487406: release-verify 113018940426 success; worker-readiness 113019519447 success; deploy-pages 113019550813 success; smoke-live 113019636425 success; release-status 113019749049 success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37687487406",
+      "captured_at": "2026-10-08T06:14:03+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-MOBILE-READING-CUE",
+      "claim_refs": ["C-001", "C-005", "C-278"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-READING-CUE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 모바일 읽기 크기 표시 보정을 반영하면서 정적 bundle·연구 데이터·공유 페이지·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha e963b2b13295bf2567a70e586e640b4206de4e5f; generatedAt 2026-10-07T21:11:37.609Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; public Chrome CDP header audit completed",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T06:14:03+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-MOBILE-READING-CUE",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-006", "C-278"]
+    },
+    {
+      "id": "E-NAVI-STATE-MOBILE-READING-CUE-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 모바일 읽기 크기 표시의 로컬 계약 검증·CDP 상태 전환·PR·main 배포·live validator를 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "main e963b2b13295bf2567a70e586e640b4206de4e5f; pnpm run validate:live-public -> page 200, bundleHashes 73, claims 12, masterRecords 6, sharePages 6, teaser HOLD; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T06:14:03+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-MOBILE-READING-CUE",
+      "claim_refs": ["C-278"]
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 모바일 읽기 크기 버튼 가독성 보정 및 공개 배포 — e963b2b1 — 2026-10-08
+
+- 모바일 헤더의 `가+ 크게`·`가− 기본` 표시가 기호처럼 읽힐 수 있는 잔여 가독성 리스크를 확인하고, 표시 마크를 `가`로 단순화해 `가 크게`·`가 기본`으로 읽히도록 보정했다. ARIA 라벨·44px 터치 영역·대형 글자 상태·제품 독립 공개 경계는 유지했다.
+- 로컬 UI contract·typecheck·Vite production build·정적 bundle·성능 예산이 통과했고 최종 로컬 총 자산은 1,649,396바이트였다. PR #637의 release-verify·site-quality-verify와 main workflow `37687487406`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY에 따라 건너뛰었다.
+- 공개 validator는 candidate SHA `e963b2b13295bf2567a70e586e640b4206de4e5f`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. Chrome CDP fallback 280·320·351·390·430·768px에서 가로폭과 읽기 크기 토글 상태 변경을 재현했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-278`, `E-LOCAL-BUILD-MOBILE-READING-CUE-20261008`, `E-UI-CONTRACT-MOBILE-READING-CUE-20261008`, `E-CDP-MOBILE-READING-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-READING-CUE-20261008`, `E-NAVI-STATE-MOBILE-READING-CUE-20261008`.
+
 ## 초소형 모바일 연구 도표 줄바꿈 및 공개 재검증 — d9e223bf — 2026-10-08
 
 - 280px 이하 연구 결과 도표에서 비교 안내 문구와 긴 조건명이 카드 폭을 넘어갈 수 있던 잔여 가독성 문제를 확인하고, 안내 문구 자연 줄바꿈·조건명 단어 단위 줄바꿈·좁은 숫자 지표 크기 보정을 적용했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.

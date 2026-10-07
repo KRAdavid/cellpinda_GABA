@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 모바일 읽기 크기 버튼 가독성 공격 재점검 — main e963b2b1 — 2026-10-08
+
+- 공격 관점에서 280·320·351·390·430·768px 헤더의 읽기 크기 표시가 기호와 텍스트를 분리해 오독을 유발하는지 확인했다. `가 크게`와 `가 기본`이 두 상태에서 실제 표시됐고, 44px 터치 영역·ARIA action label·가로폭 정합성이 유지됐다.
+- 390px에서 읽기 크기 버튼을 실제 클릭해 대형 글자 상태와 `aria-pressed`가 함께 변경되는 것을 재현했다. 각 폭의 document 가로폭은 viewport와 같았고 runtime error는 없었다.
+- 새 CRITICAL/MAJOR 결함은 없다. Chrome CDP fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으며 teaser `HOLD`와 외부 검증 조건은 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-278`, `E-CDP-MOBILE-READING-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-READING-CUE-20261008`, `E-NAVI-STATE-MOBILE-READING-CUE-20261008`.
+
 ## 초소형 모바일 연구 도표 줄바꿈 공격 재점검 — main d9e223bf — 2026-10-08
 
 - 공격 관점에서 280px 연구 도표의 비교 안내 문구·조건명·숫자 지표가 카드 경계를 침범하거나 문장을 잘라낼 수 있는지 확인했다. 보정 후 연구 도표와 수면 도표의 내부 가로폭은 각각 `202/202`, `200/200`으로 맞았고, 1440px도 `685/685`, `592/592`로 유지됐다.
