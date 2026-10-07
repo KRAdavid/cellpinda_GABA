@@ -1,5 +1,14 @@
 # Completion Report
 
+## 전문가 영상 공개 장 반응형·직접 진입 재감리 — main a6cead44 — 2026-10-08
+
+- AC-001/AC-002/AC-003/AC-004/AC-005: `PASS`. 전문가 영상 장을 280·320·390·1440px에서 확인했고, 재생 전 포스터·선택 게시판·주제 필터·9개 카드·선택 영상 정보와 마지막 `연구를 읽는 기준 / 원문 출처` 연결이 자연스럽게 이어졌다.
+- AC-006: `PASS`. 공개 390px 하단 handoff, 대표 폭 가로폭 정합성, runtime error 0건과 live validator의 HTTP 200·bundle hash 73개·제품 독립 경계를 확인했다. 이번 회차에는 기능 코드·연구 카피·수치·출처를 변경하지 않았다.
+- AC-007: `PASS_WITH_CONDITIONS`. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수와 teaser `HOLD`는 외부 검증·사용자 결정 조건으로 남아 있다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-275`, `E-LOCAL-BUILD-EXPERT-VIDEO-PUBLISHING-20261008`, `E-CDP-EXPERT-VIDEO-PUBLISHING-20261008`, `E-LIVE-PUBLIC-EXPERT-VIDEO-PUBLISHING-20261008`, `E-NAVI-STATE-EXPERT-VIDEO-PUBLISHING-20261008`.
+
 ## Current Public Deployment Recheck — research map scope labels — main 49f289cf — 2026-10-08
 
 - AC-001/AC-002/AC-003/AC-004/AC-005: `PASS`. 로컬 UI contract·typecheck·127개 테스트·정적 bundle·성능 예산, PR #629 보호검사, main Pages 배포·라이브 smoke·release-status와 공개 validator가 통과했다. 연구 지도 각 주제에 범위 라벨이 표시되고 390px에서 선택 후 상세 카드 포커스가 이동한다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 전문가 영상 공개 장 반응형·직접 진입 공격 재점검 — main a6cead44 — 2026-10-08
+
+- 공격 관점에서 280·320·390·1440px에서 재생 전 안내가 빈 화면처럼 보이는지, 카드·필터가 화면 밖으로 밀리는지, 마지막 영상 뒤 출처 읽기 handoff가 끊기는지 확인했다. 9개 카드와 선택 게시판이 표시되고, 하단에서 `연구를 읽는 기준 / 원문 출처`가 이어졌다.
+- 280·320·390px의 pageWidth/scrollWidth는 viewport와 같았고 1440px는 스크롤바 차이만 있었으며, 네 폭 모두 runtime error는 없었다. 실제 영상 iframe은 선택 전에는 0개로 유지되어 자동 네트워크 부하를 만들지 않는다.
+- 새 CRITICAL/MAJOR 결함은 없다. Chrome CDP fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으며 이 조건과 teaser `HOLD`는 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-EXPERT-VIDEO-PUBLISHING-20261008`, `E-LIVE-PUBLIC-EXPERT-VIDEO-PUBLISHING-20261008`, `E-NAVI-STATE-EXPERT-VIDEO-PUBLISHING-20261008`.
+
 ## 연구 지도 범위 라벨·공개 배포 공격 재점검 — main 49f289cf — 2026-10-08
 
 - 공격 관점에서 다섯 연구 지도 주제의 범위 라벨이 실제 DOM에 표시되는지, 390px 가로폭·runtime error·첫 주제 선택과 상세 카드 포커스가 깨지지 않는지 확인했다. `사람 대상 연구`와 `동물·세포 연구`가 주제별로 유지되고 pageWidth=scrollWidth=390, errors=[]였다.

@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 전문가 영상 공개 장 반응형·직접 진입 재감리 — a6cead44 — 2026-10-08
+
+- 전문가 영상 장을 280·320·390·1440px에서 시각 검수하고, 재생 전 포스터·선택 게시판·주제 필터·9개 카드·출처 읽기 handoff를 확인했다. 모든 대표 폭에서 가로폭 정합성과 runtime error 0건을 확인했다.
+- 라이브 validator는 HTTP 200·candidate SHA `a6cead44c38964204c480f9e626b64bdeb6cc9c5`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 이번 회차에는 기능 코드·연구 카피·수치·출처를 변경하지 않고 NAVI 기록만 최신화했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-275`, `E-LOCAL-BUILD-EXPERT-VIDEO-PUBLISHING-20261008`, `E-CDP-EXPERT-VIDEO-PUBLISHING-20261008`, `E-LIVE-PUBLIC-EXPERT-VIDEO-PUBLISHING-20261008`, `E-NAVI-STATE-EXPERT-VIDEO-PUBLISHING-20261008`.
+
 ## 연구 지도 범위 라벨·공개 배포 — 49f289cf — 2026-10-08
 
 - 연구 지도 다섯 주제 아래에 `사람 대상 연구` 또는 `동물·세포 연구`를 표시해 범위를 선택 전부터 읽도록 고도화했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
