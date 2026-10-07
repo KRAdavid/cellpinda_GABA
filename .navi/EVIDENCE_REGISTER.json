@@ -2745,6 +2745,18 @@
       "E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007"
     ],
     "status": "SUPPORTED"
+  },
+  {
+    "id": "C-253",
+    "statement": "전문가 영상 외부 임베드가 6초 이상 준비되지 않을 때 공개 플레이어가 무한 로딩에 머물지 않고 `재생 지연` 상태와 YouTube 원본 보기·다시 시도 조작을 제공하며, 공개 280px에서 다시 시도 후 준비 상태로 복귀한다. 페이지 가로폭·제품 독립 공개 경계·teaser HOLD를 유지한다.",
+    "evidence_refs": [
+      "E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007",
+      "E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007",
+      "E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007",
+      "E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007",
+      "E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007"
+    ],
+    "status": "SUPPORTED"
   }
 ],
   "evidence": [
@@ -17966,6 +17978,59 @@
     "captured_at": "2026-10-07T18:20:00+09:00",
     "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-ULTRA-NARROW-VIDEO-META",
     "claim_refs": ["C-252"]
+  },
+  {
+    "id": "E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "전문가 YouTube 임베드 지연 fallback 보정 후 로컬 UI 계약·타입체크·127개 테스트·production build·release manifest·성능 예산이 통과했다.",
+    "locator": "working tree commit 7a34603861156bb899cfde8de368818757f84273 before protected merge; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127/127 pass; pnpm exec vite build; rewrite-public-origin; generate:release-manifest; validate:performance; initial JS 311405 <= 380000; initial CSS 95703 <= 110000; total assets 1649388 <= 1650000; largest asset 311405 <= 380000; git diff --check",
+    "captured_at": "2026-10-07T19:06:40+09:00",
+    "reviewer_id": "NAVI-LOCAL-QA-GABA-20261007-VIDEO-TIMEOUT-FALLBACK",
+    "claim_refs": ["C-001", "C-003", "C-004", "C-253"]
+  },
+  {
+    "id": "E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "Browser plugin을 사용할 수 없어 Chrome headless/CDP fallback으로 로컬·공개 전문가 영상 지연 상태를 280px에서 재현했다. `재생 지연` 상태에서 YouTube 원본 보기와 다시 시도 조작이 보이고, 다시 시도 후 iframe과 `준비 중` 상태로 복귀했으며 가로 넘침과 콘솔 오류가 없었다.",
+    "locator": "Browser plugin unavailable; Chrome headless/CDP fallback; local and public https://kradavid.github.io/gaba_info/?view=guide&audit=live-final#expert-videos; viewport 280x900; iframe load event suppressed in the test harness to reproduce an external-frame delay; document scrollWidth/clientWidth 280/280; state `재생 지연`; original link and retry button present; after retry iframe present and state `준비 중`; console errors []",
+    "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audit=live-final#expert-videos",
+    "captured_at": "2026-10-07T19:06:40+09:00",
+    "reviewer_id": "NAVI-CDP-QA-GABA-20261007-VIDEO-TIMEOUT-FALLBACK",
+    "claim_refs": ["C-003", "C-004", "C-253"]
+  },
+  {
+    "id": "E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007",
+    "kind": "DEPLOYMENT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "전문가 영상 지연 fallback release가 PR 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+    "locator": "PR #589 https://github.com/KRAdavid/gaba_info/pull/589; PR checks release-verify run 37604317264 success and site-quality-verify run 37604317287 success; merge 560d9afe6e0acbd257e9fb058a87078c06d76ac6; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37604557572: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+    "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37604557572",
+    "captured_at": "2026-10-07T19:06:40+09:00",
+    "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-VIDEO-TIMEOUT-FALLBACK",
+    "claim_refs": ["C-001", "C-002", "C-005", "C-253"]
+  },
+  {
+    "id": "E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007",
+    "kind": "TEST",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "전문가 영상 지연 fallback release가 GitHub Pages 공개본에 반영되었고 정적 공개 데이터·제품 독립 경계·teaser HOLD를 유지한다.",
+    "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=560d9afe6e0acbd257e9fb058a87078c06d76ac6; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 560d9afe6e0acbd257e9fb058a87078c06d76ac6; generatedAt 2026-10-07T10:03:13.678Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP 280px fallback state `재생 지연`, original link and retry button present, overflow 0, console errors []",
+    "source_uri": "https://kradavid.github.io/gaba_info/release-manifest.json",
+    "captured_at": "2026-10-07T19:06:40+09:00",
+    "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-VIDEO-TIMEOUT-FALLBACK",
+    "claim_refs": ["C-001", "C-002", "C-253"]
+  },
+  {
+    "id": "E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007",
+    "kind": "AUDIT",
+    "status": "INDEPENDENTLY_CONFIRMED",
+    "statement": "NAVI project state와 evidence register가 전문가 영상 지연 fallback의 공개 배포 재감리 결과를 연결하고, 사용자 결정 상태와 완료 게이트를 과장 없이 유지한다.",
+    "locator": "NAVI validate_project_state.py -> PASS; .navi/PROJECT_STATE.json H-337; .navi/EVIDENCE_REGISTER.json C-253 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+    "captured_at": "2026-10-07T19:06:40+09:00",
+    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-VIDEO-TIMEOUT-FALLBACK",
+    "claim_refs": ["C-253"]
   }
 ]
 }

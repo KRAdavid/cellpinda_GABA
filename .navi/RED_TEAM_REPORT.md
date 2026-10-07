@@ -2449,3 +2449,11 @@
 - 기존 RT-001·RT-002·RT-003, teaser `HOLD`, YouTube 외부 프레임 의존성, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
 
 증적: `E-CDP-ULTRA-NARROW-VIDEO-META-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007`.
+
+## Red-team recheck — 외부 전문가 영상 임베드 지연 — 560d9afe — 2026-10-07
+
+- 공격 관점에서 YouTube iframe이 준비되지 않은 상태가 무한 로딩으로 고착되는 경로를 재현했다. 6초 timeout fallback을 적용해 `재생 지연`과 YouTube 원본 보기·다시 시도 조작을 제공하도록 보정했다.
+- 공개 280px에서 지연 조건을 재현한 결과 document `scrollWidth/clientWidth`는 280/280이고, 다시 시도 후 iframe과 `준비 중` 상태가 복귀했으며 console error는 0이었다. 원본 링크는 외부 YouTube로만 연결되고 제품·구매 CTA는 추가되지 않았다.
+- 새 CRITICAL/MAJOR 결함은 없다. 다만 Browser plugin 부재에 따른 Chrome headless/CDP fallback, YouTube 외부 프레임의 실제 네트워크·브라우저별 차이, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토 조건은 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`.
