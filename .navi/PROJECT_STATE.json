@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T03:43:57+09:00",
+  "updated_at": "2026-10-08T04:03:47+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2293,11 +2293,28 @@
         "impact": "사업자와 소비자가 발효 활용 연구의 원문 출처를 지역 경로 오류 없이 표준 DOI로 재현할 수 있다.",
         "required_action": "다음 연구 출처·URL·공개 카드 변경 시 DOI/원문 응답, 390·1440px href, build·Pages·live validator를 함께 재검증",
         "owner": "QA"
+      },
+      {
+        "id": "AUD-015",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "연구 지도 범례가 연구 범위를 피부·성장 같은 주제 분류가 아니라 사람 대상 연구와 동물·세포 연구로 명확히 구분하도록 보정되었고, 카드 상단에서 대상·방법·측정 항목을 먼저 확인하도록 안내한다. 로컬 contract·typecheck·127 tests·production build·performance, PR #626, main deployment, live DOM/render check passed; no new CRITICAL/MAJOR defect.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-CDP-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008"
+        ],
+        "impact": "일반 독자가 연구 지도와 카드 결과를 읽을 때 근거 범위를 먼저 구분할 수 있다.",
+        "required_action": "다음 연구 지도·범례·카드 범위 문구 변경 시 UI contract·390px CDP·live validator를 함께 재검증",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-07T18:43:57Z"
+    "last_run_at": "2026-10-07T19:03:47Z"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2636,11 +2653,27 @@
         "impact": "출처 URL 정규화가 연구 카드의 신뢰성·반응형·상호작용 회귀를 만들지 않도록 방지한다.",
         "required_action": "Playwright Chromium fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
         "owner": "레드팀"
+      },
+      {
+        "id": "RT-015",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 새 연구 범위 범례가 실제 DOM·ARIA·390px 렌더에 반영되는지, 가로폭 초과·runtime error·연구 지도 선택 회귀가 없는지 확인했다. 사람 대상 연구·동물·세포 연구 문구가 유지되고 pageWidth=scrollWidth=390, errors=[]; no CRITICAL/MAJOR.",
+        "evidence_refs": [
+          "E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-CDP-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008",
+          "E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008"
+        ],
+        "impact": "연구 범위 안내가 시각·보조기술·모바일 폭에서 서로 어긋나는 회귀를 줄인다.",
+        "required_action": "다음 범례/연구 카드 변경 시 390px CDP와 연구 지도 선택 흐름 재검증",
+        "owner": "Red Team"
       }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-07T18:04:00Z"
+    "last_run_at": "2026-10-07T19:03:47Z"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -6363,6 +6396,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T03:43:57+09:00"
+    },
+    {
+      "id": "H-358",
+      "event": "NAVI 자동 공개 배포 점검에서 연구 지도 범례의 ‘피부·성장 등 확장 연구’ 표현이 사람·동물·세포 연구 범위를 즉시 구분하기 어렵다는 잔여 가독성 리스크를 확인하고 ‘사람 대상 연구’·‘동물·세포 연구’와 ‘대상·방법·측정 항목’ 안내로 보완했다. PR #626 merge SHA 9178983059cdce763d3ec47925f0cb7c201080e5, main workflow 37670864607 release-verify·worker-readiness·deploy-pages·smoke-live·release-status success, 공개 validator candidate SHA 9178983059cdce763d3ec47925f0cb7c201080e5 page 200 bundle hash 73 claims 12 master 6 share 6 teaser HOLD smartStoreOnly true removed750 true provenance matched, public 390px CDP DOM text/ARIA/page width/runtime errors confirmed. 신규 CRITICAL/MAJOR 결함 없음. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지하며 NAVI 상태 USER_DECISION, 완료 게이트 NOT_READY다. C-273와 여섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T04:03:47+09:00"
     }
   ]
 }

@@ -2977,6 +2977,19 @@
         "E-NAVI-STATE-SOURCE-DOI-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-273",
+      "statement": "연구 지도 범례가 사람 대상 연구와 동물·세포 연구를 구분하고, 카드 상단에서 대상·방법·측정 항목을 먼저 확인하도록 안내해 일반 독자의 연구 범위 이해를 돕는다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SCOPE-LEGEND-20261008",
+        "E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008",
+        "E-CDP-RESEARCH-SCOPE-LEGEND-20261008",
+        "E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008",
+        "E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008",
+        "E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -19354,6 +19367,69 @@
       "claim_refs": [
         "C-272"
       ]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SCOPE-LEGEND-20261008",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 지도 범례의 사람 대상 연구·동물·세포 연구 구분과 카드 읽기 안내를 추가한 공개 안내서가 UI 계약·TypeScript 타입체크·Vite production build·127개 테스트·성능 예산을 통과했다.",
+      "locator": "local worktree C:\\Users\\computer\\Documents\\ChatGPT\\gaba-next-premium-audit-20261008; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test 127 pass 0 fail; pnpm run build PASS; initial JS 311405 bytes; initial CSS 95703 bytes; total assets 1649421 bytes; performance budget PASS",
+      "captured_at": "2026-10-08T04:03:47+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
+      "claim_refs": ["C-001", "C-003", "C-005", "C-273"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI 계약에 연구 범위 범례 문구를 고정해 사람·동물·세포 연구 구분과 대상·방법·측정 항목 안내가 다시 흐려지지 않도록 했다.",
+      "locator": "scripts/validate-ui-contract.mjs new research scope legend assertion; pnpm run validate:ui-contract -> status ok",
+      "captured_at": "2026-10-08T04:03:47+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
+      "claim_refs": ["C-273"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-SCOPE-LEGEND-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin unavailable 상태에서 Chrome CDP fallback으로 공개 390px 연구 지도 범례의 실제 텍스트·ARIA 라벨·가로폭·runtime 오류를 확인했다.",
+      "locator": "CDP target https://kradavid.github.io/gaba_info/?qa=scope-legend-live#research; 390px text='연구 범위를 먼저 보세요 / 사람 대상 연구 / 동물·세포 연구 / 카드 상단에서 대상·방법·측정 항목을 먼저 확인합니다.'; ariaLabel='연구 범위 범례'; pageWidth/scrollWidth=390/390; errors=[]; screenshot C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-next-research.png (local render evidence)",
+      "captured_at": "2026-10-08T04:03:47+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
+      "claim_refs": ["C-004", "C-273"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 범위 범례 보정 PR #626이 보호검사를 통과해 main에 병합됐고 main Pages 배포·라이브 smoke·release-status가 성공했다.",
+      "locator": "PR #626 https://github.com/KRAdavid/gaba_info/pull/626; merge SHA 9178983059cdce763d3ec47925f0cb7c201080e5; PR checks Verify and deploy + Verify consumer site success; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37670864607: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37670864607",
+      "captured_at": "2026-10-08T04:03:47+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
+      "claim_refs": ["C-001", "C-005", "C-273"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 GitHub Pages 공개본은 연구 범위 범례 문구와 ARIA 라벨을 반영하면서 정적 bundle·연구 데이터·공유 페이지·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; runtimeMode STATIC; candidateSha 9178983059cdce763d3ec47925f0cb7c201080e5; generatedAt 2026-10-07T19:00:12.570Z; page 200; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; CDP DOM text + ariaLabel + pageWidth/scrollWidth 390/390 + errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-08T04:03:47+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
+      "claim_refs": ["C-001", "C-002", "C-004", "C-006", "C-273"]
+    },
+    {
+      "id": "E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 자동 점검 기록이 연구 범위 범례의 로컬 계약 검증·CDP 공개 검증·PR·main 배포·live validator를 연결하고, 제품 독립 공개 경계·teaser HOLD·외부 검증 잔여 조건을 유지한다.",
+      "locator": "PR #626 merge SHA 9178983059cdce763d3ec47925f0cb7c201080e5; main workflow 37670864607 success; pnpm run validate:live-public -> candidateSha 9178983059cdce763d3ec47925f0cb7c201080e5; pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T04:03:47+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-SCOPE-LEGEND",
+      "claim_refs": ["C-273"]
     }
   ]
 }

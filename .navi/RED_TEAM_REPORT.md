@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 연구 범위 범례 명료화 — 공개 배포 공격 재점검 — main 91789830 — 2026-10-08
+
+- 공격 관점에서 새 범례가 실제 DOM·ARIA·390px 렌더에 반영되는지, 가로폭 초과·runtime error·연구 지도 선택 회귀가 없는지 확인했다. `사람 대상 연구`와 `동물·세포 연구` 문구가 유지되고 pageWidth=scrollWidth=390, errors=[]였다.
+- 로컬 UI contract·127개 테스트·production build·PR #626 보호검사·main Pages 배포·라이브 smoke가 성공했으며, 연구 지도 선택 흐름과 제품 독립 공개 경계도 유지됐다. 새 CRITICAL/MAJOR 결함은 없다.
+- Browser plugin 부재에 따른 Chrome CDP fallback은 Safari/iOS/Android 실기기와 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않는다. 이 조건과 teaser `HOLD`는 계속 OPEN으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008`, `E-CDP-RESEARCH-SCOPE-LEGEND-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008`, `E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008`.
+
 ## 발효 활용 연구 출처 DOI 정규화 — 공개 배포 공격 재점검 — main 2857bf9 — 2026-10-08
 
 - 공격 관점에서 발효 활용 카드의 원문 링크가 지역 경로에 의존하거나, DOI 정규화 후 카드·출처·연구 흐름이 깨지는지 확인했다. 공개 390·1440px에서 DOI href가 정확히 유지되고 가로폭·콘솔 오류가 없었다.

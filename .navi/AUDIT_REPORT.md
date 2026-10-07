@@ -1,5 +1,14 @@
 # Audit Report
 
+## 연구 범위 범례 명료화 — 공개 배포 확인 — main 91789830 — 2026-10-08
+
+- 연구 지도 범례의 주제 중심 표현을 사람 대상 연구와 동물·세포 연구의 범위 구분으로 보완하고, 카드 상단에서 대상·방법·측정 항목을 먼저 확인하도록 했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·Vite production build·127개 테스트·성능 예산이 통과했다. PR #626과 main workflow `37670864607`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- 공개 validator는 candidate SHA `9178983059cdce763d3ec47925f0cb7c201080e5`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, 제품 독립 경계를 확인했다. 공개 390px CDP에서 범례 텍스트·ARIA 라벨·가로폭 390/390·runtime errors=[]를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SCOPE-LEGEND-20261008`, `E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008`, `E-CDP-RESEARCH-SCOPE-LEGEND-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008`, `E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008`.
+
 ## 발효 활용 연구 출처 DOI 정규화 — 공개 배포 확인 — main 2857bf9 — 2026-10-08
 
 - 발효 활용 사례의 지역형 RSC URL을 논문 내용과 라벨은 유지한 채 표준 DOI `https://doi.org/10.1039/D2FO03936B`로 정규화했다. Crossref DOI 조회는 HTTP 200과 동일한 논문 제목을 반환했다.
