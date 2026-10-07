@@ -6478,6 +6478,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T06:23:11+09:00"
+    },
+    {
+      "id": "H-365",
+      "event": "NAVI 자동 공개 배포 점검에서 PR #639 병합 후 main workflow 37689497347의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status 성공을 확인했다. 배포 후 live validator candidate SHA 4cc90945bdb84fe97d9f64bd10d797ab09d5b65c가 main merge SHA와 일치했고 HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 유지했다. 이번 문서-only 병합으로 기능 코드·연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다. 신규 CRITICAL/MAJOR 결함은 없으며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-280과 네 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T06:29:55+09:00"
     }
   ]
 }

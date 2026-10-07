@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 병합 후 최종 공개 SHA 정합성 확인 — 4cc90945 — 2026-10-08
+
+- NAVI 감사 문서 PR #639 병합 후 main workflow `37689497347`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 모두 성공했다. deploy-worker는 정적 공개 모드에 따라 건너뛰었다.
+- 병합 후 `pnpm run validate:live-public https://kradavid.github.io/gaba_info`를 다시 실행해 공개 candidate SHA `4cc90945bdb84fe97d9f64bd10d797ab09d5b65c`와 main merge SHA가 일치함을 확인했다. HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`다.
+- 이번 회차의 공개 기능·연구 카피·수치·출처 변경은 없으며, 최종 공개본의 NAVI 감사 정합성만 갱신했다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-280`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-FINAL-20261008`, `E-LIVE-PUBLIC-REAUDIT-FINAL-20261008`, `E-NAVI-STATE-PUBLIC-REAUDIT-FINAL-20261008`.
+
 ## 최신 main 공개본 통합 재감리 및 NAVI 자동 업데이트 — 6b402228 — 2026-10-08
 
 - 최신 main 공개본을 390px에서 14개 장(`#top`부터 `#final`)으로 직접 열어 제목 위치, 장 간 흐름, 가로폭, 런타임 오류를 재감리했다. 모든 장에서 `pageWidth/scrollWidth=390/390`, `errors=[]`를 확인했고, 모바일 헤더의 메뉴·읽기 크기·공유 조작과 연구 지도·전문가 영상·마지막 공유 화면이 한 흐름으로 유지됐다.

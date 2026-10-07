@@ -1,5 +1,13 @@
 # Audit Report
 
+## 병합 후 최종 공개 SHA 정합성 확인 — main 4cc90945 — 2026-10-08
+
+- PR #639 병합 후 main 배포 workflow `37689497347`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 모두 PASS였다. 정적 사이트 정책에 따라 deploy-worker는 skipped다.
+- 배포 후 라이브 validator는 candidate SHA `4cc90945bdb84fe97d9f64bd10d797ab09d5b65c`를 반환해 main merge SHA와 공개본이 일치함을 확인했다. 공개 URL은 HTTP 200이며 bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 유지한다.
+- 기능 코드·연구 카피·수치·출처는 변경하지 않았다. 최종 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다. 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 남는다.
+
+증적: `C-280`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-FINAL-20261008`, `E-LIVE-PUBLIC-REAUDIT-FINAL-20261008`, `E-NAVI-STATE-PUBLIC-REAUDIT-FINAL-20261008`.
+
 ## 최신 main 공개본 통합 재감리 및 NAVI 자동 업데이트 — main 6b402228 — 2026-10-08
 
 - 390px 공개 URL에서 14개 장을 직접 진입해 첫 제목 위치·본문 시작·장 높이·가로폭·런타임 오류를 확인했다. `#top`·`#opening-bridge`·`#history`·`#basics`·`#academic`·`#everyday`·`#sleep`·`#research`·`#applications`·`#fermented-safety`·`#growth`·`#expert-videos`·`#reading-note`·`#final` 모두 `pageWidth/scrollWidth=390/390`, `errors=[]`였다.

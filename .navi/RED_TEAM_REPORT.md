@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 병합 후 최종 공개 SHA 공격 재점검 — main 4cc90945 — 2026-10-08
+
+- 배포 직후 공개 validator가 반환한 candidate SHA가 main merge SHA와 다른 stale Pages 산출물을 가리키는지 확인했다. candidate `4cc90945bdb84fe97d9f64bd10d797ab09d5b65c`가 merge SHA와 일치했고 HTTP 200으로 응답했다.
+- 정적 bundle·연구 데이터·공유 페이지·제품 독립 공개 경계와 `teaser HOLD`가 유지되며, 이번 문서-only 병합으로 기능 코드·연구 카피·수치·출처가 변하지 않았다. 새 CRITICAL/MAJOR 결함은 없다.
+- 라이브 validator와 배포 smoke는 공개 정합성을 증명하지만 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않는다. 상태는 `PASS_WITH_CONDITIONS / USER_DECISION / NOT_READY`다.
+
+증적: `C-280`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-FINAL-20261008`, `E-LIVE-PUBLIC-REAUDIT-FINAL-20261008`, `E-NAVI-STATE-PUBLIC-REAUDIT-FINAL-20261008`.
+
 ## 최신 main 공개본 통합 공격 재점검 — main 6b402228 — 2026-10-08
 
 - 공격 관점에서 390px의 14개 장을 직접 열어 해시 진입이 본문을 숨기거나 제목을 sticky rail 아래에 가리는지, 긴 연구·발효·영상·공유 콘텐츠가 document 폭을 넓히는지 확인했다. 모든 장에서 `pageWidth/scrollWidth=390/390`, 제목 위치 정상, `errors=[]`였다.
