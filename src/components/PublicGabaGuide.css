@@ -394,14 +394,6 @@
   .guide-outcome-chart-note-limit{font-size:11px}
 }
 @media(max-width:350px){
-  .guide-outcome-lanes{grid-template-columns:1fr;gap:7px}
-  .guide-outcome-lane{padding:11px 12px}
-  .guide-outcome-lane-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-  .guide-outcome-lane-top>span{font-size:.786em;flex:0 0 auto}
-  .guide-outcome-lane-top>strong{min-height:0;font-size:.929em;text-align:right}
-  .guide-outcome-lane-signal{min-height:20px}
-  .guide-outcome-lane-signal svg{width:16px;height:16px}
-  .guide-outcome-lane-signal em{font-size:.786em}
   .guide-outcome-chart-note{font-size:.9em}
   .guide-outcome-signal-row{grid-template-columns:1fr;grid-template-areas:"label" "value" "visual";gap:5px 0;padding:10px 11px}
   .guide-outcome-signal-row>strong{justify-self:start}
@@ -2173,12 +2165,13 @@
 .guide-section{scroll-margin-top:126px}
 @media(max-width:700px){.guide-section{scroll-margin-top:116px}}
 
-/* v162 ultra-narrow comparison cards */
+/* v173 320px comparison: keep both conditions in one glance. */
 @media(max-width:350px){
-  .guide-outcome-lanes{grid-template-columns:minmax(0,1fr);gap:8px}
-  .guide-outcome-lane-top{display:grid;grid-template-columns:minmax(0,1fr);gap:5px;align-items:start;width:100%;min-width:0}
-  .guide-outcome-lane-top>span,.guide-outcome-lane-top>strong{display:block;min-width:0;width:100%;max-width:100%;text-align:left}
-  .guide-outcome-lane-top>strong{overflow-wrap:break-word}
+  .guide-outcome-lane{padding:9px 7px}
+  .guide-outcome-lane-top>span{font-size:.68em}
+  .guide-outcome-lane-top>strong{font-size:.78em}
+  .guide-outcome-lane-signal{grid-template-columns:auto 1fr}
+  .guide-outcome-lane-signal em{font-size:.66em}
 }
 
 /* v163 print publishing: hide the video board and keep editorial imagery together on paper. */
