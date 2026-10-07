@@ -2231,3 +2231,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Chrome headless/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증 조건을 외부 검증으로 남긴다.
 
 증적: `C-257`, `E-LOCAL-BUILD-NARROW-COMPARISON-20261007`, `E-CDP-NARROW-COMPARISON-20261007`, `E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261007`, `E-LIVE-PUBLIC-NARROW-COMPARISON-20261007`, `E-NAVI-STATE-NARROW-COMPARISON-20261007`.
+
+## 2026-10-07 — 모바일 성장 연구 흐름 인포그래픽 — 3cef5f36
+
+- 성장 연구 6단계를 모바일에서 번호 노드·세로 연결선·단계 화살표가 있는 하나의 시각적 경로로 재구성하고 마지막 `어린이 연구`를 도착점으로 강조했다. 데스크톱 가로 흐름과 연구 카피·수치·출처·제품 독립 경계는 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산을 통과했다. 첫 Pages 후보는 전체 자산 `1,650,213 bytes`로 한도를 213바이트 초과했으나, 비필수 장식 효과를 줄인 최종 후보는 로컬 `1,649,449 bytes`였고 PR #600과 main workflow `37622082343`이 성공했다.
+- 공개 validator는 merge SHA `3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 Chrome CDP fallback 390px에서 성장 연구 흐름·메뉴·연구 지도·공유 fallback·가로폭 0건·console error 0을 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수 조건을 유지한다.
+
+증적: `C-259`, `E-LOCAL-BUILD-MOBILE-GROWTH-PATH-20261007`, `E-CDP-MOBILE-GROWTH-PATH-20261007`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-PATH-20261007`, `E-LIVE-PUBLIC-MOBILE-GROWTH-PATH-20261007`, `E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007`.

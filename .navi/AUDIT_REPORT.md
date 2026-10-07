@@ -2904,6 +2904,18 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
 
+## Current Release Recheck — 3cef5f36 — 모바일 성장 연구 흐름 — 2026-10-07
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #600 병합 후 main workflow `37622082343`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고, 공개 validator가 candidate `3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c`·HTTP 200·STATIC·73개 bundle hash·12개 claims·6개 master records·6개 share pages·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- AC-003/AC-004 모바일 정보시각화: PASS. 390px 성장 연구 장에서 6단계가 번호 노드·세로 연결선·화살표가 있는 하나의 흐름으로 읽히고, 마지막 `어린이 연구`가 도착점으로 강조된다. 1440px에서는 기존 가로 카드 흐름이 유지되며 document scrollWidth는 viewport와 일치했다.
+- AC-005 자동 게이트: PASS. 최종 PR release-verify·site-quality-verify와 main 배포 게이트가 통과했다. 로컬 Pages-style 성능은 `1,649,449 bytes / 1,650,000 bytes`이며, 첫 후보의 213바이트 초과는 비필수 장식 효과를 줄여 보정했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 모바일 성장 연구 흐름의 시각적 구조만 보완했으며 공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 새 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재에 따른 Chrome headless/CDP fallback, teaser `HOLD`, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건은 계속 외부 검증으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-259`, `E-LOCAL-BUILD-MOBILE-GROWTH-PATH-20261007`, `E-CDP-MOBILE-GROWTH-PATH-20261007`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-PATH-20261007`, `E-LIVE-PUBLIC-MOBILE-GROWTH-PATH-20261007`, `E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007`.
+
 ## 공개 배포 핵심 화면·상호작용 자동 재감리 — b7f0bbb — 2026-10-07
 
 - AC-001 공개 URL·라이브 정합성: PASS. 코드 기준선 `b7f0bbb`와 문서-only PR #594 병합 SHA `f6a934d10ac08720be717e07bd86ea02513b24b9`가 연결된 뒤 `pnpm run validate:live-public`가 HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.

@@ -2815,6 +2815,18 @@
         "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-259",
+      "statement": "모바일 성장 연구 흐름이 여섯 개의 독립 카드가 아니라 번호·연결선·화살표가 있는 하나의 세로 인포그래픽으로 읽히며, 마지막 어린이 연구 단계가 도착점으로 구분된다. 데스크톱 가로 흐름과 연구 카피·수치·출처·제품 독립 공개 경계는 유지되었다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-GROWTH-PATH-20261007",
+        "E-CDP-MOBILE-GROWTH-PATH-20261007",
+        "E-DEPLOY-PIPELINE-MOBILE-GROWTH-PATH-20261007",
+        "E-LIVE-PUBLIC-MOBILE-GROWTH-PATH-20261007",
+        "E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -18318,15 +18330,67 @@
     "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
     "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-258"]
   },
-  {
-    "id": "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007",
-    "kind": "AUDIT",
+    {
+      "id": "E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007",
+      "kind": "AUDIT",
     "status": "INDEPENDENTLY_CONFIRMED",
     "statement": "NAVI project state와 evidence register·감사·레드팀 기록이 모바일 장면 연결 보정의 공개 배포·라이브 검증까지 연결하고, 신규 CRITICAL/MAJOR 결함 없음과 외부 검증 잔여 조건을 함께 기록한다.",
     "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; PR #598 merge 2de2735fec56c36839216ce580c7298f87cf09c5; main workflow 37618834702 all release jobs success; .navi/PROJECT_STATE.json H-343; .navi/EVIDENCE_REGISTER.json C-258 and six evidence records; status USER_DECISION; completion gate NOT_READY",
     "captured_at": "2026-10-07T21:08:46+09:00",
-    "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
-    "claim_refs": ["C-258"]
-  }
-]
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-CHAPTER-HANDOFF",
+      "claim_refs": ["C-258"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-GROWTH-PATH-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "모바일 성장 연구 6단계의 번호 노드·세로 연결선·단계 화살표·최종 단계 강조를 적용한 뒤 로컬 자동 게이트와 생산 번들이 통과했다.",
+      "locator": "pnpm run typecheck; pnpm run validate:ui-contract; pnpm test -> 127 passed; pnpm run build -> performance total 1649449 <= 1650000; local CDP 390px/1440px growth screenshots",
+      "captured_at": "2026-10-07T21:39:17+09:00",
+      "reviewer_id": "NAVI-QA-GABA-20261007-MOBILE-GROWTH-PATH",
+      "claim_refs": ["C-001", "C-004", "C-005", "C-259"]
+    },
+    {
+      "id": "E-CDP-MOBILE-GROWTH-PATH-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback 공개 점검에서 390px 성장 연구 장의 여섯 단계가 세로 흐름으로 렌더링되고, 1440px에서는 기존 가로 카드 흐름이 유지되었다.",
+      "locator": "C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-target-screens.mjs https://kradavid.github.io/gaba_info/; 390px and 1440px screenshots; interaction QA width 390, scrollWidth 390, errors []",
+      "captured_at": "2026-10-07T21:39:17+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261007-MOBILE-GROWTH-PATH",
+      "claim_refs": ["C-002", "C-004", "C-259"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-MOBILE-GROWTH-PATH-20261007",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "성장 연구 모바일 인포그래픽 보정 release가 보호 검사와 main 정적 공개 배포 파이프라인을 통과했다.",
+      "locator": "PR #600 https://github.com/KRAdavid/gaba_info/pull/600; initial performance budget failure 37621128027 corrected by removing non-essential decoration; final PR run 37621879757 success; merge 3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c; main workflow https://github.com/KRAdavid/gaba_info/actions/runs/37622082343: release-verify success; worker-readiness success; deploy-pages success; smoke-live success; release-status success; deploy-worker skipped by STATIC_ONLY",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37622082343",
+      "captured_at": "2026-10-07T21:39:17+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261007-MOBILE-GROWTH-PATH",
+      "claim_refs": ["C-001", "C-002", "C-005", "C-259"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MOBILE-GROWTH-PATH-20261007",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 GitHub Pages 공개본에서 390px 성장 연구 장의 세로 인포그래픽과 마지막 단계 강조가 반영되고, 메뉴·연구 지도 선택·공유 fallback·제품 독립 공개 경계가 유지된다.",
+      "locator": "pnpm run validate:live-public with EXPECTED_RELEASE_SHA=3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c; base https://kradavid.github.io/gaba_info; HTTP 200; runtimeMode STATIC; candidateSha 3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c; generatedAt 2026-10-07T12:36:23.421Z; bundleHashes 73; claims 12; masterRecords 6; products 1; sharePages 6; teaserPreview HOLD/publicUrl false; internalOpsSnapshots excluded; smartStoreOnly true; removed750 true; provenance matched; live Chrome CDP 390px document scrollWidth=390 and interaction errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-07T21:39:17+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261007-MOBILE-GROWTH-PATH",
+      "claim_refs": ["C-001", "C-002", "C-003", "C-004", "C-006", "C-259"]
+    },
+    {
+      "id": "E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 공개 배포 감리 기록이 성장 연구 모바일 시각화 보정의 로컬 검증·배포·라이브 확인과 초기 성능 한도 실패 및 보정 이력을 함께 기록한다.",
+      "locator": "pnpm run validate:governance -> ok; pnpm run validate:ops-docs -> ok; PR #600 merge 3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c; main workflow 37622082343 all release jobs success; .navi/PROJECT_STATE.json H-344; .navi/EVIDENCE_REGISTER.json C-259 and five evidence records; status USER_DECISION; completion gate NOT_READY",
+      "captured_at": "2026-10-07T21:39:17+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261007-MOBILE-GROWTH-PATH",
+      "claim_refs": ["C-259"]
+    }
+  ]
 }
