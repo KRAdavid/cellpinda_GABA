@@ -2745,6 +2745,14 @@
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
 
+## Red-team public surface recheck — 6d5c8a49 — 2026-10-08
+
+- 공격 관점에서 280·390·1440px의 13개 핵심 장 직접 진입을 재현했다. 제목은 sticky header와 읽기 진행 레일 아래에 정렬됐고, document 가로폭은 viewport와 같았으며 runtime error는 0건이었다.
+- 390·1440px 대표 표면에서 히어로·연구 결과·전문가 영상·최종 공유 화면의 잘림·겹침·이름 없는 조작부는 재현되지 않았다. 전문가 영상 썸네일은 초기 지연 로딩 뒤 10개 모두 표시됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 다만 Chrome Playwright fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으며, teaser `HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-288`, `E-PLAYWRIGHT-PUBLIC-DEEPLINK-AUDIT-20261008`, `E-PLAYWRIGHT-PUBLIC-SURFACE-VISUAL-20261008`, `E-PLAYWRIGHT-PUBLIC-VIDEO-LOAD-20261008`, `E-LIVE-PUBLIC-SURFACE-AUDIT-20261008`, `E-LIVE-PUBLIC-DEEPLINK-AUDIT-20261008`, `E-NAVI-STATE-PUBLIC-SURFACE-AUDIT-20261008`.
+
 ## Red-team recheck — 연구 지도 범위 라벨 12px — a1abe50e — 2026-10-08
 
 - 공격 관점에서 280·390px 일반·큰 글자 모드의 연구 지도 5개 주제와 `사람 대상 연구`·`동물·세포 연구` 라벨을 확인했다. 다섯 라벨 모두 computed `12px`이고 라벨·아이콘·중앙 GABA가 지도 내부에 유지되며 page/scroll width는 각 viewport와 일치했다.

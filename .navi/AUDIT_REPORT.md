@@ -3450,3 +3450,14 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-287`, `E-LOCAL-BUILD-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-PR-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-CDP-LIVE-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-LIVE-PUBLIC-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-NAVI-STATE-RESEARCH-CHART-RESULT-FIRST-20261008`.
+
+## 공개 표면·직접 진입 재감리 — 6d5c8a49 — 2026-10-08
+
+- AC-001 공개 정합성: PASS. `pnpm run validate:live-public`가 최신 Pages candidate `6d5c8a4985018ace8acb52e27487b6811222338f`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-004 모바일·직접 진입: PASS. 실제 공개 URL의 Chrome Playwright fallback 280·390·1440px에서 13개 핵심 장의 해시 진입 제목이 sticky header와 읽기 진행 레일 아래에 정렬되고, `bodyOverflow=false`, `errors=[]`였다.
+- AC-002/AC-006 공개 표면: PASS. 390·1440px 대표 스크린샷에서 히어로·연구 결과·전문가 영상·최종 공유 흐름의 잘림·겹침·이름 없는 조작부가 관찰되지 않았고, 전문가 영상 썸네일 10개는 2.5초 대기 후 모두 로드됐다. 정적 제품 독립 경계와 연구 출처 흐름은 유지됐다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다. Chrome Playwright fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 해당 검증 조건은 계속 OPEN이다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-288`, `E-PLAYWRIGHT-PUBLIC-DEEPLINK-AUDIT-20261008`, `E-PLAYWRIGHT-PUBLIC-SURFACE-VISUAL-20261008`, `E-PLAYWRIGHT-PUBLIC-VIDEO-LOAD-20261008`, `E-LIVE-PUBLIC-SURFACE-AUDIT-20261008`, `E-LIVE-PUBLIC-DEEPLINK-AUDIT-20261008`, `E-NAVI-STATE-PUBLIC-SURFACE-AUDIT-20261008`.
