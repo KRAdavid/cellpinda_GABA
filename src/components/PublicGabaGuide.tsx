@@ -695,6 +695,8 @@ const getGuideShareUrl = (hash = 'top') => {
 
 const formatMessageKitText = (message: string, index: number, withGuide = false) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}` : ''}${withGuide ? `\n\n공개 안내서: ${getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
 
+const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${indices.map(index => `${String(index + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getGuideShareUrl('top')}` : ''}`;
+
 const replaceGuideHistory = (hash: string, videoId?: string) => {
   const url = new URL(window.location.href);
   url.searchParams.set('view', 'guide');
@@ -1738,7 +1740,7 @@ export default function PublicGabaGuide() {
   const copyMessageKit = async () => {
     const recommendedIndices = getRecommendedMessageIndices();
     const audienceLabel = messageKitAudienceLabels[activeMessageAudienceMask] ?? '공개 자료';
-    const text = `[GABA 공개 자료 · ${audienceLabel}]\n\n${recommendedIndices.map(index => `${String(index + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}\n\n공개 안내서: ${getGuideShareUrl('top')}`;
+    const text = formatMessageKitBundle(recommendedIndices, audienceLabel);
     const copied = await writeClipboardText(text);
     if (copied) {
       setMessageKitCopied('recommended');
@@ -1749,6 +1751,29 @@ export default function PublicGabaGuide() {
       }, 2400);
     }
     announceShareStatus(copied ? `${recommendedIndices.length}개 추천 자료를 복사했어요.` : '자료를 선택해 활용해 보세요.');
+  };
+
+  const shareMessageKit = async () => {
+    const recommendedIndices = getRecommendedMessageIndices();
+    const audienceLabel = messageKitAudienceLabels[activeMessageAudienceMask] ?? '공개 자료';
+    const shareUrl = getGuideShareUrl('top');
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `GABA 공개 자료 · ${audienceLabel}`,
+          text: formatMessageKitBundle(recommendedIndices, audienceLabel, false),
+          url: shareUrl,
+        });
+        announceShareStatus(`${recommendedIndices.length}개 추천 자료를 공유했어요.`);
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          announceShareStatus('공유를 취소했어요.');
+          return;
+        }
+      }
+    }
+    await copyMessageKit();
   };
 
   const copyAllMessageKit = async () => {
@@ -2201,8 +2226,8 @@ export default function PublicGabaGuide() {
               <button type="button" className="guide-quiet-button" onClick={() => window.print()}>인쇄 · PDF 저장 <ArrowRight size={17} aria-hidden="true" /></button>
             </div>
             <div className="guide-share-intro" aria-label={`${activeMessageAudienceLabel} GABA 공유 자료 안내`}>
-              <div><span className="guide-share-intro-kicker">{activeMessageAudienceLabel} 공유 자료</span><strong>필요한 자료만 골라 전달하세요</strong><p>전달 대상에 맞는 추천 자료가 먼저 표시됩니다. 문장 하나 또는 전체 자료를 바로 복사할 수 있습니다.</p></div>
-              <div className="guide-share-intro-actions"><label className="guide-share-audience"><span>전달 대상</span><select value={activeMessageAudienceMask} aria-label="자료 대상" onChange={e => setActiveMessageAudienceMask(+e.target.value)}><option value={21}>소비자</option><option value={31}>사업자</option><option value={15}>교육</option></select></label><div className="guide-share-copy-actions"><button type="button" className={`guide-share-copy-all${messageKitCopied === 'recommended' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'recommended' ? '추천 자료 복사 완료' : '추천 자료 복사'} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied === 'recommended' ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied === 'recommended' ? '복사 완료' : `추천 ${recommendedMessageCount}개 복사`}</button><button type="button" className={`guide-share-copy-all guide-share-copy-all-secondary${messageKitCopied === 'all' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'all' ? '전체 자료 복사 완료' : '전체 5개 자료 복사'} onClick={() => void copyAllMessageKit()}>{messageKitCopied === 'all' ? '복사 완료' : '전체 5개'}</button></div></div>
+              <div><span className="guide-share-intro-kicker">{activeMessageAudienceLabel} 공유 자료</span><strong>필요한 자료만 골라 전달하세요</strong><p>전달 대상에 맞는 추천 자료가 먼저 표시됩니다. 바로 공유하거나 문장 하나 또는 전체 자료를 복사할 수 있습니다.</p></div>
+              <div className="guide-share-intro-actions"><label className="guide-share-audience"><span>전달 대상</span><select value={activeMessageAudienceMask} aria-label="자료 대상" onChange={e => setActiveMessageAudienceMask(+e.target.value)}><option value={21}>소비자</option><option value={31}>사업자</option><option value={15}>교육</option></select></label><div className="guide-share-copy-actions"><button type="button" className="guide-share-copy-all guide-share-share" aria-label={`추천 ${recommendedMessageCount}개 자료 공유`} onClick={() => void shareMessageKit()}><Share2 size={14} aria-hidden="true" />추천 공유</button><button type="button" className={`guide-share-copy-all${messageKitCopied === 'recommended' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'recommended' ? '추천 자료 복사 완료' : '추천 자료 복사'} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied === 'recommended' ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied === 'recommended' ? '복사 완료' : `추천 ${recommendedMessageCount}개 복사`}</button><button type="button" className={`guide-share-copy-all guide-share-copy-all-secondary${messageKitCopied === 'all' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'all' ? '전체 자료 복사 완료' : '전체 5개 자료 복사'} onClick={() => void copyAllMessageKit()}>{messageKitCopied === 'all' ? '복사 완료' : '전체 5개'}</button></div></div>
             </div>
             <details open className="guide-share-lines">
               <summary><span>{activeMessageAudienceLabel} GABA 공유 자료 · 바로 복사하기</span><b>5개 전체</b></summary>
