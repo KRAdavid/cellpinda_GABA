@@ -2303,6 +2303,7 @@ export default function PublicGabaGuide() {
               <div className="guide-share-intro-actions">{selectedMessageIndices.map(index => <button key={index} className="guide-share-copy-all" type="button" onClick={() => toggleMessageSelection(index)}>{messageKitLabels[index]} ×</button>)}</div>
             </div>
             <div className="guide-share-flow" role="list" aria-label="자료 전달 순서"><div className="guide-share-flow-step" role="listitem"><strong>01</strong><span>대상 선택</span></div><ArrowRight className="guide-share-flow-arrow" size={15} aria-hidden="true" /><div className="guide-share-flow-step" role="listitem"><strong>02</strong><span>자료 {selectedMessageCount}개 선택</span></div><ArrowRight className="guide-share-flow-arrow" size={15} aria-hidden="true" /><div className="guide-share-flow-step" role="listitem"><strong>03</strong><span>공유 또는 복사</span></div></div>
+            <small className="guide-share-card-use" aria-live="polite">전달할 내용 · {selectedMessageIndices.map(i => messageKitLabels[i]).join(' · ')}</small>
             <details className="guide-share-lines">
               <summary>공유 내용 미리보기 <b>{selectedMessageCount}개 문장</b></summary>
               <div>{selectedMessageIndices.map(index => <article key={index}><span>{messageKitLabels[index]}</span><p>{messageKit[index]}{messageKitSources[index] ? <><br /><span>출처 · {messageKitSources[index]}</span></> : null}</p></article>)}</div>
