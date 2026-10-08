@@ -684,7 +684,6 @@ const messageKit = [
 ];
 const messageKitLabels = ['기본 소개', '신경계 역할', '연구의 확장', '사람 연구 결과', '발효·안전 연구'];
 const messageKitSources: (string | null)[] = [null, null, null, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
-const messageKitAudiences = [[0, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3]];
 
 const getGuideShareUrl = (hash = 'top') => {
   const url = new URL(window.location.href);
@@ -929,7 +928,7 @@ export default function PublicGabaGuide() {
   const [copiedResearchTopicId, setCopiedResearchTopicId] = useState<string | null>(null);
   const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
   const [messageKitCopied, setMessageKitCopied] = useState(false);
-  const [activeMessageAudience, setActiveMessageAudience] = useState(0);
+  const [activeMessageAudienceMask, setActiveMessageAudienceMask] = useState(21);
   const [activeVideoId, setActiveVideoId] = useState(getInitialExpertVideoId);
   const [activeVideoTopic, setActiveVideoTopic] = useState(getInitialExpertVideoTopic);
   const [videoFilterRailAtEnd, setVideoFilterRailAtEnd] = useState(false);
@@ -967,7 +966,6 @@ export default function PublicGabaGuide() {
   const videoFilterRailRef = useRef<HTMLDivElement | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
   const activeVideoIndex = Math.max(0, expertVideos.findIndex((video) => video.id === activeVideo.id));
-  const activeMessageAudienceIndexes = messageKitAudiences[activeMessageAudience];
   const visibleExpertVideos = activeVideoTopic === '전체' ? expertVideos : expertVideos.filter((video) => video.topic === activeVideoTopic);
   const getExpertVideoState = (videoId: string) => {
     if (videoId !== activeVideo.id) return { label: '영상 선택', badge: null, featureLabel: '선택 후 재생', cardLabel: '선택 후 재생', className: '' };
@@ -2180,12 +2178,12 @@ export default function PublicGabaGuide() {
               <button type="button" className="guide-quiet-button" onClick={() => window.print()}>인쇄 · PDF 저장 <ArrowRight size={17} aria-hidden="true" /></button>
             </div>
             <div className="guide-share-intro" aria-label="사업자용 GABA 공유 자료 안내">
-              <div><span>사업자용 자료</span><strong>필요한 자료를 골라 전달하세요</strong><p>소개·사람 연구·발효 연구를 한 화면에서 확인하고 문장별로 복사하세요.</p></div>
-              <div className="guide-share-intro-actions"><select className="guide-share-copy-all" value={activeMessageAudience} aria-label="공유 대상" onChange={(event) => setActiveMessageAudience(Number(event.target.value))}><option value={0}>소비자에게</option><option value={1}>다른 사업자에게</option><option value={2}>교육·상담 자료</option></select><b>5개 자료</b><button type="button" className={`guide-share-copy-all${messageKitCopied ? ' is-copied' : ''}`} aria-label={messageKitCopied ? '전체 복사 완료' : '전체 복사'} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied ? '복사 완료' : '전체 복사'}</button></div>
+              <div><span>사업자용 자료</span><strong>필요한 자료를 골라 전달하세요</strong><p>핵심 자료를 확인하고 문장별로 복사하세요.</p></div>
+              <div className="guide-share-intro-actions"><select className="guide-share-copy-all" value={activeMessageAudienceMask} aria-label="공유 대상" onChange={(event) => setActiveMessageAudienceMask(Number(event.target.value))}><option value={21}>소비자에게</option><option value={31}>다른 사업자에게</option><option value={15}>교육·상담 자료</option></select><b>5개 자료</b><button type="button" className={`guide-share-copy-all${messageKitCopied ? ' is-copied' : ''}`} aria-label={messageKitCopied ? '전체 복사 완료' : '전체 복사'} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied ? '복사 완료' : '전체 복사'}</button></div>
             </div>
             <details open className="guide-share-lines">
               <summary><span>사업자용 GABA 공유 자료 · 바로 복사하기</span><b>5개</b></summary>
-              <div>{messageKit.map((message, index) => { const isMessageCopied = copiedMessageIndex === index; const isRecommended = activeMessageAudienceIndexes.includes(index); return <article key={message} className={isRecommended ? 'is-recommended' : undefined}><span>{messageKitLabels[index]}</span><p>{message}{messageKitSources[index] ? <><br /><small>출처 · {messageKitSources[index]}</small></> : null}</p><button type="button" className={`guide-share-line-copy${isMessageCopied ? ' is-copied' : ''}`} aria-label={`${messageKitLabels[index]} ${isMessageCopied ? '복사 완료' : '복사'}`} onClick={() => void copyMessageKitLine(message, index)}><span className="guide-share-line-copy-icon" aria-hidden="true">{isMessageCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isMessageCopied ? '복사 완료' : '문장 복사'}</button></article>; })}</div>
+              <div>{messageKit.map((message, index) => { const isMessageCopied = copiedMessageIndex === index; const isRecommended = activeMessageAudienceMask & (1 << index); return <article key={message} className={isRecommended ? 'is-recommended' : undefined}><span>{messageKitLabels[index]}</span><p>{message}{messageKitSources[index] ? <><br /><small>출처 · {messageKitSources[index]}</small></> : null}</p><button type="button" className={`guide-share-line-copy${isMessageCopied ? ' is-copied' : ''}`} aria-label={`${messageKitLabels[index]} ${isMessageCopied ? '복사 완료' : '복사'}`} onClick={() => void copyMessageKitLine(message, index)}><span className="guide-share-line-copy-icon" aria-hidden="true">{isMessageCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isMessageCopied ? '복사 완료' : '문장 복사'}</button></article>; })}</div>
             </details>
           </div>
         </section>
