@@ -3461,3 +3461,13 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-288`, `E-PLAYWRIGHT-PUBLIC-DEEPLINK-AUDIT-20261008`, `E-PLAYWRIGHT-PUBLIC-SURFACE-VISUAL-20261008`, `E-PLAYWRIGHT-PUBLIC-VIDEO-LOAD-20261008`, `E-LIVE-PUBLIC-SURFACE-AUDIT-20261008`, `E-LIVE-PUBLIC-DEEPLINK-AUDIT-20261008`, `E-NAVI-STATE-PUBLIC-SURFACE-AUDIT-20261008`.
+
+## 공개 표면 재감리 최종 배포 동기화 — 33c50766 — 2026-10-08
+
+- AC-001 공개 배포: PASS. PR #660 병합 후 main workflow `37708551501`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 라이브 정합성: PASS. 최종 candidate `33c507666fca2878413f22a382501467b3cc4aca`에서 HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 재확인했다.
+- AC-004/AC-007: PASS_WITH_CONDITIONS. 직접 진입·표면 시각 점검·전문가 영상 썸네일 결과는 앞선 C-288과 일치한다. 기능 코드·연구 카피·수치·출처·제품 독립 경계는 변경되지 않았고, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 계속 외부 조건이다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-289`, `E-DEPLOY-PIPELINE-PUBLIC-SURFACE-FINAL-20261008`, `E-LIVE-PUBLIC-FINAL-SURFACE-20261008`, `E-NAVI-STATE-PUBLIC-SURFACE-FINAL-20261008`.

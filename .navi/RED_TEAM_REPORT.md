@@ -2753,6 +2753,14 @@
 
 증적: `C-288`, `E-PLAYWRIGHT-PUBLIC-DEEPLINK-AUDIT-20261008`, `E-PLAYWRIGHT-PUBLIC-SURFACE-VISUAL-20261008`, `E-PLAYWRIGHT-PUBLIC-VIDEO-LOAD-20261008`, `E-LIVE-PUBLIC-SURFACE-AUDIT-20261008`, `E-LIVE-PUBLIC-DEEPLINK-AUDIT-20261008`, `E-NAVI-STATE-PUBLIC-SURFACE-AUDIT-20261008`.
 
+## Red-team final public deployment sync — 33c50766 — 2026-10-08
+
+- PR #660 병합 후 Pages 배포·라이브 smoke·release-status와 최종 공개 candidate 일치를 확인했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 최종 live 재검증에서도 280·390·1440px 직접 진입 제목, 가로폭, 전문가 영상 썸네일 10개 로딩 결과가 앞선 표면 재감리와 일치했다.
+- 문서-only 동기화로 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경되지 않았다. Chrome fallback의 외부 브라우저·실기기·실제 고령 사용자·독립 과학·규제 검토 한계와 teaser `HOLD`, `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-289`, `E-DEPLOY-PIPELINE-PUBLIC-SURFACE-FINAL-20261008`, `E-LIVE-PUBLIC-FINAL-SURFACE-20261008`, `E-NAVI-STATE-PUBLIC-SURFACE-FINAL-20261008`.
+
 ## Red-team recheck — 연구 지도 범위 라벨 12px — a1abe50e — 2026-10-08
 
 - 공격 관점에서 280·390px 일반·큰 글자 모드의 연구 지도 5개 주제와 `사람 대상 연구`·`동물·세포 연구` 라벨을 확인했다. 다섯 라벨 모두 computed `12px`이고 라벨·아이콘·중앙 GABA가 지도 내부에 유지되며 page/scroll width는 각 viewport와 일치했다.

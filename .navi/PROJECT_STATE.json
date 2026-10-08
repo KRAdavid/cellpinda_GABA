@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T09:33:16+09:00",
+  "updated_at": "2026-10-08T09:38:55+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2344,6 +2344,20 @@
         "impact": "모바일·데스크톱에서 방문자가 장 제목과 공개 표면을 안정적으로 읽고 전문가 영상을 선택할 수 있는 상태를 재확인했다.",
         "required_action": "다음 공개 표면·해시 진입·영상 썸네일 변경 시 280·390·1440px Playwright와 live validator를 함께 재검증",
         "owner": "QA"
+      },
+      {
+        "id": "AUD-018",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공개 표면 재감리 문서 병합 후 main Pages 배포·라이브 smoke·release-status와 최종 candidate 정합성을 재확인했고, 신규 CRITICAL/MAJOR 결함은 없었다.",
+        "evidence_refs": [
+          "E-DEPLOY-PIPELINE-PUBLIC-SURFACE-FINAL-20261008",
+          "E-LIVE-PUBLIC-FINAL-SURFACE-20261008",
+          "E-NAVI-STATE-PUBLIC-SURFACE-FINAL-20261008"
+        ],
+        "impact": "NAVI 기록과 실제 공개 candidate가 배포 후에도 일치해 공개 품질 판단을 재현할 수 있다.",
+        "required_action": "다음 NAVI 문서-only 공개 동기화 후에도 main candidate·Pages·live validator·표면 재감리를 최종 연결",
+        "owner": "QA"
       }
     ],
     "independent_from_execution": true,
@@ -2735,6 +2749,20 @@
         ],
         "impact": "대표 Chromium 환경에서 공개 화면·직접 진입·영상 갤러리의 회귀를 조기에 잡았다.",
         "required_action": "Chrome fallback 범위 밖인 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "Red Team"
+      },
+      {
+        "id": "RT-018",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 문서-only NAVI 동기화 후 최종 공개 candidate·Pages·라이브 smoke·직접 진입·영상 썸네일 결과의 불일치를 재현하지 못했으며 신규 CRITICAL/MAJOR 결함은 없다.",
+        "evidence_refs": [
+          "E-DEPLOY-PIPELINE-PUBLIC-SURFACE-FINAL-20261008",
+          "E-LIVE-PUBLIC-FINAL-SURFACE-20261008",
+          "E-NAVI-STATE-PUBLIC-SURFACE-FINAL-20261008"
+        ],
+        "impact": "공개 배포 직후 provenance가 어긋나는 회귀를 조기에 차단한다.",
+        "required_action": "Chrome fallback의 외부 브라우저·실기기·실사용자·독립 과학·규제 검증 한계는 계속 OPEN",
         "owner": "Red Team"
       }
     ],
@@ -6610,6 +6638,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T09:33:16+09:00"
+    },
+    {
+      "id": "H-379",
+      "event": "NAVI 공개 표면 재감리 문서-only 동기화 PR #660 병합 후 main merge SHA 33c507666fca2878413f22a382501467b3cc4aca와 Pages 공개 candidate가 일치하는 것을 확인했다. main workflow 37708551501의 release-verify 113088685137·worker-readiness 113089102836·deploy-pages 113089125758·smoke-live 113089284641·release-status 113089374638가 성공했고 deploy-worker 113089126751은 STATIC_ONLY로 skipped됐다. 공개 validator는 최종 candidate에 대해 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했으며, 공개 280·390·1440px 직접 진입과 영상 썸네일 10개 로딩도 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계와 NAVI 상태 USER_DECISION·완료 게이트 NOT_READY를 유지한다. C-289와 최종 동기화 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T09:38:55+09:00"
     }
   ]
 }
