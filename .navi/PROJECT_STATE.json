@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-09T05:03:33+09:00",
+  "updated_at": "2026-10-09T05:44:05+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2422,11 +2422,28 @@
       "impact": "모바일에서 연구 범위를 빠르게 스캔하면서도 상세 연구 조건을 보조기술 이름으로 잃지 않는다.",
       "required_action": "다음 연구 지도 라벨·모바일 breakpoint 변경 시 280·390·1440px 또는 최소 390px과 라이브 검증을 재실행",
       "owner": "QA"
+    },
+    {
+      "id": "AUD-023",
+      "severity": "OBSERVATION",
+      "status": "CLOSED",
+      "statement": "전문가 영상이 본문뿐 아니라 모바일 메뉴에서도 연구 지도보다 먼저 발견되는지, 사업자 선택 자료 미리보기가 390px에서 즉시 해제되는지 확인했다. 실제 DOM·메뉴 현재 위치·자동 닫힘·가로폭·공개 candidate가 일치했고 신규 CRITICAL/MAJOR 결함은 없다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NAV-EXPERT-20261009",
+        "E-UI-CONTRACT-NAV-EXPERT-20261009",
+        "E-DEPLOY-NAV-EXPERT-20261009",
+        "E-CDP-LIVE-NAV-EXPERT-20261009",
+        "E-LIVE-PUBLIC-NAV-EXPERT-20261009",
+        "E-NAVI-STATE-NAV-EXPERT-20261009"
+      ],
+      "impact": "방문자가 GABA 기본 개념 다음 전문가 설명을 거쳐 연구 지도로 확장하고, 사업자는 전달 전 자료 범위를 확인할 수 있다.",
+      "required_action": "다음 메뉴·읽기 순서·공유 보드 정보 우선순위 변경 시 390px 메뉴 이동·선택 해제·live validator를 함께 재검증",
+      "owner": "QA"
     }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-08T06:55:16Z"
+    "last_run_at": "2026-10-09T05:44:05+09:00"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2890,11 +2907,27 @@
       "impact": "연구 범위 축약이 실제 연구 조건을 숨기거나 지도 선택 흐름을 끊는 회귀를 방지한다.",
       "required_action": "다음 라벨·접근성 이름·연구 지도 상호작용 변경 시 390px 실제 렌더와 선택 흐름을 재검증; Safari/iOS/Android·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
       "owner": "Red Team"
+    },
+    {
+      "id": "RT-023",
+      "severity": "OBSERVATION",
+      "status": "CLOSED",
+      "statement": "공격 관점에서 메뉴와 본문의 전문가 영상 선행 순서 불일치, 메뉴 선택 후 닫힘 실패, 390px 자료 미리보기 해제와 가로 넘침 회귀를 확인했다. 신규 CRITICAL/MAJOR 결함은 재현되지 않았다.",
+      "evidence_refs": [
+        "E-UI-CONTRACT-NAV-EXPERT-20261009",
+        "E-DEPLOY-NAV-EXPERT-20261009",
+        "E-CDP-LIVE-NAV-EXPERT-20261009",
+        "E-LIVE-PUBLIC-NAV-EXPERT-20261009",
+        "E-NAVI-STATE-NAV-EXPERT-20261009"
+      ],
+      "impact": "모바일 메뉴 탐색과 사업자 전달 범위 확인이 서로 다른 순서나 상태를 보여주는 회귀를 조기에 차단한다.",
+      "required_action": "Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
+      "owner": "Red Team"
     }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-08T06:55:16Z"
+    "last_run_at": "2026-10-09T05:44:05+09:00"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -6967,6 +7000,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-09T05:03:33+09:00"
+    },
+    {
+      "id": "H-408",
+      "event": "NAVI 자동 공개 배포 점검에서 본문에만 있던 전문가 영상 선행 흐름을 모바일 메뉴에서도 바로 찾을 수 있도록 `전문가 영상` 바로가기를 `연구 지도` 앞에 노출했다. 사업자 공유 보드에는 선택 자료 미리보기를 추가해 `전달할 자료 · 2개`와 개별 해제 상태를 즉시 보여준다. 기존 발견·자료 모음 경로·현재 위치 표시·제품 독립 경계·출처·선택형 공유는 유지했다. 로컬 UI contract·typecheck·pnpm test 127 pass·GitHub Pages base-path 정적 번들·성능 예산을 통과했고 PR #722 required checks와 main merge SHA f56e4a8427549dd37b4a708e1af8b0fe917c7e88의 workflow 37840979076 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY로 skipped됐다. 공개 validator는 HTTP 200·STATIC·candidate SHA f56e4a8427549dd37b4a708e1af8b0fe917c7e88·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome CDP fallback 390px에서 메뉴 링크·전문가 영상 활성 상태·메뉴 자동 닫힘·전문가 영상→연구 지도 순서·선택 2개→1개 해제·scrollWidth 390을 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-317과 관련 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-09T05:44:05+09:00"
     }
   ]
 }

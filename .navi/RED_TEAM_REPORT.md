@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 전문가 영상 메뉴 선행 및 선택 자료 미리보기 — f56e4a84 — 2026-10-09
+
+- 공격 초점은 본문과 상단 메뉴의 순서가 어긋나 전문가 영상을 찾기 어렵거나, 사업자가 실제 전달 범위를 다시 해석해야 하는지였다.
+- 공개 390px에서 `GABA란 → 전문가 영상 → 연구 지도`가 실제 DOM과 메뉴에 함께 나타났고, 메뉴에서 전문가 영상을 선택하면 `#expert-videos`로 이동·메뉴 자동 닫힘·현재 위치 표시가 유지됐다. `scrollWidth=390`이며 `materials=24` 보드의 미리보기 칩 해제로 `선택 2개 → 선택 1개`가 확인됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 자동 QA로 대체하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-317`, `E-CDP-LIVE-NAV-EXPERT-20261009`, `E-LIVE-PUBLIC-NAV-EXPERT-20261009`, `E-NAVI-STATE-NAV-EXPERT-20261009`.
+
 ## Red-team recheck — 개별 공유 카드와 안내서 링크 범위 — 3dbd06d6 — 2026-10-09
 
 - 공격 초점은 개별 카드 복사 시 현재 선택된 다른 카드 묶음이 링크에 남아, 수신자가 복사된 문장과 다른 자료를 보게 되는 맥락 손실이었다.

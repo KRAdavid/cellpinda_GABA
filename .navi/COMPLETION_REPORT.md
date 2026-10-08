@@ -1,5 +1,13 @@
 # Completion Report
 
+## 전문가 영상 메뉴 노출 및 선택 자료 미리보기 공개 배포 — 2026-10-09
+
+- 구현·검토: 본문 순서는 기존의 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`로 유지하고, 모바일 메뉴에도 전문가 영상 바로가기를 연구 지도보다 앞에 추가했다. 사업자 공유 보드에는 전달 전 선택 자료 칩 미리보기를 두어 현재 자료를 한눈에 확인하고 개별 해제할 수 있게 했다.
+- 검증: PR #722 merge SHA `f56e4a8427549dd37b4a708e1af8b0fe917c7e88`, main workflow `37840979076`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 cache-disabled Chrome CDP fallback을 확인했다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 build·성능 예산·라이브 smoke가 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 모바일 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-317`, `E-LOCAL-BUILD-NAV-EXPERT-20261009`, `E-UI-CONTRACT-NAV-EXPERT-20261009`, `E-PR-NAV-EXPERT-20261009`, `E-DEPLOY-NAV-EXPERT-20261009`, `E-CDP-LIVE-NAV-EXPERT-20261009`, `E-LIVE-PUBLIC-NAV-EXPERT-20261009`, `E-NAVI-STATE-NAV-EXPERT-20261009`.
+
 ## 개별 공유 자료 링크 범위 정합성 보정 및 공개 배포 — 2026-10-09
 
 - 구현·검토: 사업자 공유 보드의 개별 `문장 복사`가 현재 선택 묶음이 아니라 실제 복사한 카드 하나를 가리키도록 `materials` 범위를 보정했다. 선택되지 않은 카드도 복사한 문장과 동일한 자료로 다시 열리며, 묶음 공유·전체 복사·출처·전문가 영상 03 → 연구 지도 04 흐름은 유지된다.

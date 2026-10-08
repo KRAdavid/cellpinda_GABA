@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-10-09 — 전문가 영상 메뉴 선행 노출 및 선택 자료 미리보기 공개 배포
+
+- 본문에 이미 적용된 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서를 모바일 메뉴에서도 발견할 수 있도록 `전문가 영상` 바로가기를 `연구 지도`보다 앞에 노출했다. 메뉴 선택 후 자동 닫힘·현재 위치 표시·가로폭 안전을 유지했다.
+- 사업자 공유 보드의 `materials=24` 상태에서 `전달할 자료 · 2개`와 `사람 연구 결과 ×`·`발효·안전 연구 ×` 미리보기를 제공하고, 칩을 누르면 선택 범위가 즉시 `1개`로 갱신된다.
+- 로컬 UI contract·typecheck·`pnpm test` 127 pass를 통과했고 `/gaba_info/` base-path 정적 번들은 전체 1,649,623바이트로 성능 예산을 통과했다. PR #722 required checks와 main workflow `37840979076`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.
+- 공개 validator는 HTTP 200·`candidateSha=f56e4a8427549dd37b4a708e1af8b0fe917c7e88`·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 공개 Chrome CDP fallback 390px에서 메뉴·전문가 영상 선행·선택 해제·가로폭 일치를 재현했다.
+- Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-317`, `E-LOCAL-BUILD-NAV-EXPERT-20261009`, `E-UI-CONTRACT-NAV-EXPERT-20261009`, `E-PR-NAV-EXPERT-20261009`, `E-DEPLOY-NAV-EXPERT-20261009`, `E-CDP-LIVE-NAV-EXPERT-20261009`, `E-LIVE-PUBLIC-NAV-EXPERT-20261009`, `E-NAVI-STATE-NAV-EXPERT-20261009`.
+
 ## 2026-10-09 — 전문가 영상 선행 흐름 검토 및 선택형 공유 자료 공개 배포
 
 - 사용자 요청을 검토한 결과, 현재 공개 읽기 흐름은 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`로 이미 구성되어 있었다. 이 순서를 공개 소스·진행 레일·다음 장 안내에 유지하고, UI contract에 회귀 검사를 추가했다.
