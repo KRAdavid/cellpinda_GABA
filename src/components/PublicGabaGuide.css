@@ -671,10 +671,6 @@
   .guide-share-copy-all{min-height:36px;padding-inline:10px}
   .guide-share-lines{margin-top:14px}
 }
-@media(max-width:350px){
-  .guide-share-intro strong{font-size:15px;letter-spacing:-.06em}
-}
-
 /* v11 research scale: make the discovery line land with visible academic weight. */
 .guide-research-scale{position:relative;margin-top:48px;padding:35px 38px 31px;border-radius:25px;background:linear-gradient(135deg,#132f56 0%,#173f60 57%,#0b777d 100%);color:#fff;overflow:hidden;isolation:isolate;box-shadow:0 22px 42px rgba(19,47,86,.16)}
 .guide-research-scale:after{content:"GABA";position:absolute;z-index:-1;right:-22px;bottom:-48px;color:rgba(255,255,255,.065);font-size:176px;font-weight:900;letter-spacing:-.12em;line-height:1}
@@ -788,8 +784,7 @@
 .guide-share-flow-arrow{color:#8ed9d7;opacity:.8}
 .guide-share-selection-status{display:grid;gap:5px;max-width:790px;margin-top:10px;padding:12px 14px;border:1px solid rgba(145,219,217,.2);border-radius:12px;background:rgba(255,255,255,.045)}
 .guide-share-selection-status>span{color:#8ed9d7;font-size:11px;font-weight:900;letter-spacing:.08em}
-.guide-share-selected-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-.guide-share-selected-chip{min-height:30px;padding:0 9px;border-radius:999px;background:rgba(18,154,163,.16)}
+.guide-share-selected-chips{display:flex;flex-wrap:wrap;gap:6px}.guide-share-selected-chip{padding:0 9px;border-radius:999px;background:#129aa326}
 .guide-share-selection-status>small{color:#a9c5d0;font-size:11px;line-height:1.5;letter-spacing:-.025em}
 .guide-share-card-source{color:#b7e9e5;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:700px){
@@ -803,8 +798,6 @@
   .guide-share-flow{grid-template-columns:1fr;gap:4px;margin-top:12px}
   .guide-share-flow-step{min-height:40px;padding:7px 11px}
   .guide-share-flow-arrow{justify-self:center;transform:rotate(90deg)}
-  .guide-share-selection-status{padding:11px 13px}
-  .guide-share-selected-chips{margin-top:4px}
 }
 @media(max-width:350px){
   .guide-share-copy-actions{grid-template-columns:minmax(0,1fr) auto}
