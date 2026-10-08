@@ -683,6 +683,7 @@ const messageKit = [
   fermentedSafetySteps[2].body,
 ];
 const messageKitLabels = ['기본 소개', '신경계 역할', '연구의 확장', '사람 연구 결과', '발효·안전 연구'];
+const messageKitUseCases = ['처음 설명을 시작할 때', 'GABA의 역할을 설명할 때', '연구 범위를 보여줄 때', '사람 대상 결과를 전할 때', '발효·안전 자료를 덧붙일 때'];
 const messageKitSources: (string | null)[] = [null, null, null, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
 const messageKitAudienceLabels: Record<number, string> = { 21: '소비자용', 31: '사업자용', 15: '교육용' };
 const validMessageAudienceMasks = new Set([21, 31, 15]);
@@ -2248,7 +2249,7 @@ export default function PublicGabaGuide() {
             </div>
             <details open className="guide-share-lines">
               <summary><span>{activeMessageAudienceLabel} GABA 자료</span><b>5개 전체</b></summary>
-              <div>{messageKit.map((message, index) => { const isMessageCopied = copiedMessageIndex === index; const isRecommended = Boolean(activeMessageAudienceMask & (1 << index)); return <article key={message} className={isRecommended ? 'is-rec' : undefined} aria-label={`${messageKitLabels[index]}${isRecommended ? ' · 추천 자료' : ''}`}><div className="guide-share-card-head"><span>{messageKitLabels[index]}</span>{isRecommended ? <b>추천</b> : <small>전체 자료</small>}</div><p>{message}{messageKitSources[index] ? <><br /><small>출처 · {messageKitSources[index]}</small></> : null}</p><button type="button" className={`guide-share-line-copy${isMessageCopied ? ' is-copied' : ''}`} aria-label={`${messageKitLabels[index]} ${isMessageCopied ? '복사 완료' : '복사'}`} onClick={() => void copyMessageKitLine(message, index)}><span className="guide-share-line-copy-icon" aria-hidden="true">{isMessageCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isMessageCopied ? '복사 완료' : '문장 복사'}</button></article>; })}</div>
+              <div>{messageKit.map((message, index) => { const isMessageCopied = copiedMessageIndex === index; const isRecommended = Boolean(activeMessageAudienceMask & (1 << index)); return <article key={message} className={isRecommended ? 'is-rec' : undefined} aria-label={`${messageKitLabels[index]} · ${messageKitUseCases[index]}${isRecommended ? ' · 추천 자료' : ''}`}><div className="guide-share-card-head"><span>{messageKitLabels[index]}</span>{isRecommended ? <b>추천</b> : <small>전체 자료</small>}</div><small className="guide-share-card-use">{messageKitUseCases[index]}</small><p>{message}{messageKitSources[index] ? <><br /><small>출처 · {messageKitSources[index]}</small></> : null}</p><button type="button" className={`guide-share-line-copy${isMessageCopied ? ' is-copied' : ''}`} aria-label={`${messageKitLabels[index]} ${isMessageCopied ? '복사 완료' : '복사'}`} onClick={() => void copyMessageKitLine(message, index)}><span className="guide-share-line-copy-icon" aria-hidden="true">{isMessageCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isMessageCopied ? '복사 완료' : '문장 복사'}</button></article>; })}</div>
             </details>
           </div>
         </section>

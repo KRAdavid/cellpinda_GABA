@@ -782,6 +782,7 @@
 .guide-share-card-head>span{color:#90d6d6;font-size:11px;font-weight:850;line-height:1.35}
 .guide-share-card-head>b{padding:4px 7px;border:1px solid rgba(145,219,217,.42);border-radius:999px;color:#b9f0ec;font-size:10px;font-weight:900;line-height:1;white-space:nowrap}
 .guide-share-card-head>small{color:#8caab9;font-size:10px;line-height:1;white-space:nowrap}
+.guide-share-card-use{display:block;margin-top:9px;color:#c3dfe5;font-size:12px;font-weight:750;line-height:1.45;letter-spacing:-.03em}
 .guide-share-lines article.is-rec{background:linear-gradient(180deg,rgba(37,177,178,.14),rgba(255,255,255,.06));box-shadow:inset 0 2px 0 rgba(145,219,217,.55)}
 @media(max-width:700px){
   .guide-share-intro-actions{display:grid!important;grid-template-columns:minmax(0,1fr);align-items:stretch;gap:12px}
