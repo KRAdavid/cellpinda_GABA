@@ -2761,6 +2761,14 @@
 
 증적: `C-292`, `E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008`, `E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008`, `E-NAVI-STATE-NARROW-HEADER-FLEX-20261008`.
 
+## Red-team recheck — 모바일 연구 지도 라벨 — 77d14844 — 2026-10-08
+
+- 공격 관점에서 공개 390px 연구 지도 범위 라벨의 줄바꿈·가로 넘침·접근성 이름 불일치와 주제 선택 회귀를 확인했다. 표시 라벨은 `사람 연구`·`동물·세포`로 한 줄 유지되고, 버튼 접근성 이름에는 `사람 63명 · 비교 연구` 같은 전체 연구 범위가 보존된다.
+- 공개 390px에서 pageWidth/scrollWidth `390/390`, 라벨 높이 `15px`, runtime error 0을 확인했으며 두 번째 주제 선택 후 active card는 `research-skin`으로 연결됐다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 이번 변경은 연구 지도 표시 라벨·접근성 이름·UI contract에 한정되어 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않는다. Chrome Playwright fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-293`, `E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008`, `E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008`.
+
 ## Red-team recheck — 수면과 회복 14단계 모바일 균형 — 5094bf25 — 2026-10-08
 
 - 공격 관점에서 280·390·1440px 회복 지도 행 배열과 단계 선택을 확인했다. 280px은 6+6+2, 390px은 7+7, 데스크톱은 14열로 유지되고 마지막 단계가 화면 안에서 선택되며 최종 카드 문구로 연결된다.
