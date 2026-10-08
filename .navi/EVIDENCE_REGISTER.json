@@ -3253,6 +3253,20 @@
         "E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-295",
+      "statement": "사업자용 공유 자료 보드가 공개 안내서 마지막 장에 즉시 펼쳐지고, 기본 소개·신경계 역할·연구의 확장·사람 연구 결과·발효·안전 연구를 카드별로 보여주며, source-backed card copy includes source and deep link on candidate 4804d623964cca76d4ceb45134a63fbc6d664edf.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-BUSINESS-SHARE-20261008",
+        "E-UI-CONTRACT-BUSINESS-SHARE-20261008",
+        "E-CDP-BUSINESS-SHARE-20261008",
+        "E-PR-BUSINESS-SHARE-20261008",
+        "E-DEPLOY-PIPELINE-BUSINESS-SHARE-20261008",
+        "E-LIVE-PUBLIC-BUSINESS-SHARE-20261008",
+        "E-NAVI-STATE-BUSINESS-SHARE-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -20990,6 +21004,83 @@
       "captured_at": "2026-10-08T15:55:16+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-LARGE-TEXT-EVIDENCE",
       "claim_refs": ["C-294"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-BUSINESS-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자용 공유 자료 보드 변경이 로컬 UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·성능 예산을 통과했다.",
+      "locator": "local commit 6d039786; pnpm run validate:ui-contract -> status=ok; pnpm run validate:research-copy -> status=ok; pnpm run build -> total assets 1649437/1650000, initial JS 311405, initial CSS 95703; pnpm run typecheck; pnpm test -> 127 passed",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\gaba-next-premium-audit-20261008",
+      "captured_at": "2026-10-08T16:37:17+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-BUSINESS-SHARE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-295"]
+    },
+    {
+      "id": "E-UI-CONTRACT-BUSINESS-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 즉시 펼쳐지는 5개 사업자용 자료, 라벨, 출처 provenance 및 공개 안내서 deep-link가 포함된 개별·전체 복사를 검사하고 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; messageKitLabels; details open; formatMessageKitText; validate:ui-contract status=ok",
+      "source_uri": "C:\\Users\\computer\\Documents\\ChatGPT\\gaba-next-premium-audit-20261008\\scripts\\validate-ui-contract.mjs",
+      "captured_at": "2026-10-08T16:37:17+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-BUSINESS-SHARE",
+      "claim_refs": ["C-004", "C-295"]
+    },
+    {
+      "id": "E-CDP-BUSINESS-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome headless fallback에서 390px·1440px 상단 시각 표면에 레이아웃 문제가 없고, 마지막 DOM에 5개 공유 자료 카드·라벨·출처·복사 버튼이 노출됐다.",
+      "locator": "Chrome headless fallback; screenshots C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-business-top-mobile.png and C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-business-top-desktop.png; local dump DOM final section contained details[open], 5 labeled articles, Yoto/Byun source labels; Browser plugin unavailable",
+      "source_uri": "C:\\Users\\computer\\AppData\\Local\\Temp\\gaba-business-top-mobile.png",
+      "captured_at": "2026-10-08T16:37:17+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-BUSINESS-SHARE",
+      "claim_refs": ["C-001", "C-004", "C-295"]
+    },
+    {
+      "id": "E-PR-BUSINESS-SHARE-20261008",
+      "kind": "REVIEW",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #673은 release-verify와 site-quality-verify 필수 검사를 통과한 뒤 main에 병합됐다.",
+      "locator": "PR #673; release-verify run 37743885982 pass; site-quality-verify run 37743885920 pass; merge SHA 4804d623964cca76d4ceb45134a63fbc6d664edf",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/673",
+      "captured_at": "2026-10-08T07:32:09Z",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261008-BUSINESS-SHARE",
+      "claim_refs": ["C-001", "C-005", "C-295"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-BUSINESS-SHARE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main merge SHA 4804d623964cca76d4ceb45134a63fbc6d664edf의 정적 Pages 배포 workflow가 release-verify·worker-readiness·deploy-pages·smoke-live·release-status 성공으로 완료됐고 Worker는 STATIC_ONLY로 skipped됐다.",
+      "locator": "main workflow 37744034563: release-verify 113201170175; worker-readiness 113201620792; deploy-pages 113201658506; deploy-worker 113201659824 skipped STATIC_ONLY; smoke-live 113201737613; release-status 113201801251",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37744034563",
+      "captured_at": "2026-10-08T07:33:20Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-BUSINESS-SHARE",
+      "claim_refs": ["C-001", "C-005", "C-295"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-BUSINESS-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 정적 배포가 현재 candidate와 일치하고 사업자용 공유 자료 보드·사람 연구 결과·Yoto·Byun 출처가 공개 번들에 포함돼 있다.",
+      "locator": "https://kradavid.github.io/gaba_info/?view=guide; validate-live-public page=200 candidateSha=4804d623964cca76d4ceb45134a63fbc6d664edf bundleHashes=73 claims=12 masterRecords=6 sharePages=6 teaser=HOLD smartStoreOnly=true removed750=true provenance=matched; fetched live PublicGabaGuide-BEw5HDRy.js contains 사업자용 GABA 공유 자료, 사람 연구 결과, Yoto et al. 2012, Byun et al. 2018",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-08T16:37:17+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-BUSINESS-SHARE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-295"]
+    },
+    {
+      "id": "E-NAVI-STATE-BUSINESS-SHARE-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록은 사업자용 공유 보드의 로컬·contract·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY 및 외부 검증 조건을 유지한다.",
+      "locator": "main 4804d623964cca76d4ceb45134a63fbc6d664edf; PR #673; workflow 37744034563; live candidate matched; DEC-005; status USER_DECISION; completion gate NOT_READY; Chrome fallback; Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T16:37:17+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-BUSINESS-SHARE",
+      "claim_refs": ["C-295"]
     }
   ]
 }

@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-08 — 사업자용 공유 자료 보드 고도화 및 공개 배포
+
+- 마지막 공유 장을 즉시 펼쳐지는 5개 카드 보드로 바꿔 기본 소개·신경계 역할·연구의 확장·사람 연구 결과·발효·안전 연구를 사업자가 선택해 전달할 수 있게 했다.
+- 연구 카드에는 Yoto/Byun PMID 출처를 표시하고 개별·전체 복사에 출처와 공개 안내서 deep link를 넣었다. 제품 CTA는 추가하지 않았다.
+- PR #673 및 merge SHA `4804d623964cca76d4ceb45134a63fbc6d664edf`, workflow `37744034563`, 라이브 validator가 성공했다. 로컬 총 자산은 `1,649,437 / 1,650,000 bytes`, 테스트는 127개 통과했다.
+- NAVI는 외부 실기기·독해성·독립 과학·규제 감수 조건 때문에 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-295`, `E-LOCAL-BUILD-BUSINESS-SHARE-20261008`, `E-UI-CONTRACT-BUSINESS-SHARE-20261008`, `E-CDP-BUSINESS-SHARE-20261008`, `E-PR-BUSINESS-SHARE-20261008`, `E-DEPLOY-PIPELINE-BUSINESS-SHARE-20261008`, `E-LIVE-PUBLIC-BUSINESS-SHARE-20261008`, `E-NAVI-STATE-BUSINESS-SHARE-20261008`.
+
 ## 2026-10-08 — 연구 지도 범위 라벨 한 줄 가독성 보정 및 공개 재검증
 
 - 모바일 연구 지도에서 `사람 대상 연구`·`동물·세포 연구`가 어절 단위로 끊겨 읽히던 문제를 `사람 연구`·`동물·세포` 한 줄 표시로 정리했다. 상세 연구 범위는 접근성 이름에 보존해 시각적 단순화와 정보의 정확한 전달을 함께 유지했다.
