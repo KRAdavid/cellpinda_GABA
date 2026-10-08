@@ -344,7 +344,7 @@ if (/발효가바가 무엇인지\s*\d+초/.test(app)) fail('teaser copy must no
 requireMatch(indexHtml, /<noscript[\s>]/i, 'static no-script fallback is missing');
 requireMatch(indexHtml, /1950년, 뇌 속에서 한 신호가 발견됐습니다[\s\S]*그 이름은 GABA였습니다/, 'static no-script fallback must use the discovery-led story title');
 requireMatch(indexHtml, /유진 로버츠와 샘 프랭클[\s\S]*GABA/, 'static no-script fallback must name the discovery researchers');
-requireMatch(indexHtml, /읽는 순서[\s\S]*발견의 순간[\s\S]*연구 지도[\s\S]*국내외 활용 사례[\s\S]*논문 출처/, 'static no-script fallback must preserve the discovery-led reading order');
+requireMatch(indexHtml, /읽는 순서[\s\S]*발견의 순간[\s\S]*GABA란[\s\S]*전문가 영상[\s\S]*연구 지도[\s\S]*국내외 활용 사례[\s\S]*논문 출처/, 'static no-script fallback must preserve the discovery-led reading order with expert videos before the research map');
 requireMatch(publicGuide, /historyMilestones[\s\S]*Roberts & Frankel[\s\S]*PMID 14794689/, 'public GABA guide must lead with the 1950 Roberts and Frankel discovery');
 requireMatch(publicGuide, /academicFields[\s\S]*신경계의 균형[\s\S]*몸 전체로 넓어지는 연구/, 'public GABA guide must expose the broad academic research map');
 requireMatch(publicGuide, /applicationCases[\s\S]*발효식품과 유산균[\s\S]*발아현미와 기능성 식품[\s\S]*곡류·빵·유제품·음료/, 'public GABA guide must expose Korea, Japan and global application examples');
