@@ -5,6 +5,7 @@
 - AC-003/AC-004: PASS_WITH_CONDITIONS. 공유 보드에 소비자·사업자·교육 대상 선택을 추가했고, 선택 대상의 추천 카드만 강조하면서 5개 전체 카드·개별 복사·전체 복사를 계속 노출한다. 사람 연구·발효 연구 카드의 출처와 제품 독립 흐름은 유지한다.
 - AC-005 자동 게이트: PASS. UI contract·typecheck·`pnpm test` 127 pass·Pages 경로 production build·정적 bundle·release manifest·성능 예산이 통과했다. Pages-style 총 자산은 `1,649,657 / 1,650,000 bytes`, initial JS `311,475`, initial CSS `95,703`이다.
 - AC-001 공개 배포: PASS. PR #675의 `release-verify`·`site-quality-verify`가 통과했고, heartbeat 신선도 만료를 PR #676으로 갱신한 뒤 main merge SHA `417db68ed27c631f1fad3d7c36193b1f27574c52`의 workflow `37749598234`에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 STATIC_ONLY로 skipped됐다.
+- 최종 NAVI 문서 sync: PASS. 문서-only PR #677이 required checks를 통과해 main `1b6fdc422c678f015fe10df648e59b166e7a682f`로 병합됐고 workflow `37750454485`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 다시 성공했다. 최종 live validator candidate도 `1b6fdc422c678f015fe10df648e59b166e7a682f`와 일치했으며 기능 코드·공개 데이터는 변경되지 않았다.
 - AC-006 제품 독립 경계: PASS. 대상 선택과 추천 강조만 추가했고 제품 CTA·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
 - AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 라이브 validator는 HTTP 200·candidate SHA 일치·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. Chrome CDP fallback 390px에서 초기 추천 3개, 사업자 대상 전환 후 추천 5개, 카드 5개 유지, 가로폭 `390/390`을 확인했다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
 - `Final Status: NOT_READY`; NAVI `USER_DECISION`.
