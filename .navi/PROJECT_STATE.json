@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-02T21:26:53.282185Z",
+  "updated_at": "2026-10-08T11:19:38.000Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -167,7 +167,8 @@
         "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
         "E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE",
-        "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE"
+        "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
+        "E-LOCAL-BUILD-SHARE-SELECTION-STATE"
       ],
       "owner": "프런트엔드 QA"
     },
@@ -204,7 +205,11 @@
         "E-CDP-RESEARCH-MAP-ICONS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-CDP-RESEARCH-READING-SEQUENCE",
-        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+        "E-LOCAL-BUILD-MOBILE-HERO-FLOW",
+        "E-CDP-SHARE-KIT-FOLLOWUP",
+        "E-LOCAL-BUILD-SHARE-SELECTION",
+        "E-LOCAL-BUILD-SHARE-SELECTION-STATE"
       ],
       "owner": "UX QA"
     },
@@ -313,7 +318,8 @@
         "E-LOCAL-BUILD-READING-SIZE",
         "E-LOCAL-BUILD-COMPACT-HEADER",
         "E-LOCAL-BUILD-RESEARCH-MAP-ICONS",
-        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS"
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
+        "E-LOCAL-BUILD-SHARE-SELECTION-STATE"
       ],
       "owner": "QA"
     },
@@ -348,7 +354,10 @@
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
-        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+        "E-LOCAL-BUILD-MOBILE-HERO-FLOW",
+        "E-LOCAL-BUILD-SHARE-SELECTION",
+        "E-LOCAL-BUILD-SHARE-SELECTION-STATE"
       ],
       "owner": "배포 QA"
     },
@@ -397,7 +406,8 @@
         "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
-        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+        "E-NAVI-STATE-SCHEMA-MIGRATION"
       ],
       "owner": "운영 QA"
     },
@@ -463,7 +473,10 @@
         "E-CDP-RESEARCH-MAP-ICONS",
         "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
         "E-CDP-RESEARCH-READING-SEQUENCE",
-        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+        "E-LOCAL-BUILD-MOBILE-HERO-FLOW",
+        "E-LOCAL-BUILD-SHARE-SELECTION",
+        "E-LOCAL-BUILD-SHARE-SELECTION-STATE"
       ],
       "owner": "QA"
     },
@@ -875,8 +888,9 @@
           "E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS",
           "E-LIVE-PUBLIC-RESEARCH-MAP-ICONS",
           "E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE",
-          "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
-          "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE"
+        "E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE",
+        "E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE",
+        "E-NAVI-STATE-SCHEMA-MIGRATION"
         ],
         "notes": "34807cb 최신 main 배포가 완료됐고 라이브 200·정적 번들·공개 데이터 정합성·차트 큰 글씨 체계를 재확인"
       },
@@ -1007,7 +1021,450 @@
     ],
     "final_status": "NOT_READY"
   },
-  "change_control": [],
+  "change_control": [
+    {
+      "id": "CC-20261008-SHARE-KIT-V2",
+      "type": "SCOPE_REFINEMENT",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "기존 접힌 공유 문장을 11 · 공유 키트로 확장하고 사업자·소비자 대상 전환, 연구 앵커, 개별·전체 복사, 대상별 공유를 제공한다.",
+      "reason": "사업자와 소비자가 GABA 정보를 읽고 출처와 함께 공유할 수 있는 흐름으로 공개 안내서를 고도화한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "사업자와 소비자가 GABA 정보를 읽고 출처와 함께 공유할 수 있는 흐름으로 공개 안내서를 고도화한다.",
+      "decision": "기존 접힌 공유 문장을 11 · 공유 키트로 확장하고 사업자·소비자 대상 전환, 연구 앵커, 개별·전체 복사, 대상별 공유를 제공한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-KIT-V2",
+        "E-CDP-SHARE-KIT-V2"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-EXPERT-FIRST",
+      "type": "READING_FLOW_REFINEMENT",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "02 · GABA란 다음에 03 · 전문가 영상을 배치하고 academic 이후 장을 04부터 순차 재번호화한다.",
+      "reason": "전문가 영상이 연구 지도보다 먼저 보여야 소비자가 연구 확장을 쉽게 이해할 수 있는지 검토하고 반영한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "전문가 영상이 연구 지도보다 먼저 보여야 소비자가 연구 확장을 쉽게 이해할 수 있는지 검토하고 반영한다.",
+      "decision": "02 · GABA란 다음에 03 · 전문가 영상을 배치하고 academic 이후 장을 04부터 순차 재번호화한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-EXPERT-FIRST",
+        "E-CHROME-EXPERT-FIRST"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-MOBILE-HEADER",
+      "type": "RESPONSIVE_USABILITY_REFINEMENT",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "700px 이하 헤더에서 메뉴·읽기 크기·공유를 고정 위치의 44px 컨트롤로 배치하고 읽기 크기 텍스트는 보조기기용으로 유지한다.",
+      "reason": "모바일 환경에서 핵심 탐색·읽기 크기·사업자 공유 동작을 한 화면에 보존한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "모바일 환경에서 핵심 탐색·읽기 크기·사업자 공유 동작을 한 화면에 보존한다.",
+      "decision": "700px 이하 헤더에서 메뉴·읽기 크기·공유를 고정 위치의 44px 컨트롤로 배치하고 읽기 크기 텍스트는 보조기기용으로 유지한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-HEADER"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SOURCE-LABEL",
+      "type": "SHARE_KIT_SOURCE_CLARITY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "공유 카드의 공통 `관련 연구 보기` 문구를 제거하고 각 카드 데이터의 출처 라벨을 그대로 노출한다.",
+      "reason": "사업자가 공유 카드를 볼 때 문장과 연결 출처의 성격을 즉시 구분할 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "사업자가 공유 카드를 볼 때 문장과 연결 출처의 성격을 즉시 구분할 수 있게 한다.",
+      "decision": "공유 카드의 공통 `관련 연구 보기` 문구를 제거하고 각 카드 데이터의 출처 라벨을 그대로 노출한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SOURCE-LABEL"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-CARD-SOURCE-COPY",
+      "type": "SHARE_KIT_EVIDENCE_HANDOFF",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "개별 카드 복사 버튼이 기존 전체 번들 포맷을 카드 하나에 적용해 문장·출처 라벨·공개 페이지 주소를 함께 복사한다.",
+      "reason": "공유 키트에서 개별 문장만 선택해도 출처와 공개 정보로 이어지는 전달물을 만들 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "공유 키트에서 개별 문장만 선택해도 출처와 공개 정보로 이어지는 전달물을 만들 수 있게 한다.",
+      "decision": "개별 카드 복사 버튼이 기존 전체 번들 포맷을 카드 하나에 적용해 문장·출처 라벨·공개 페이지 주소를 함께 복사한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-CARD-SOURCE-COPY"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-METADATA",
+      "type": "SHARE_PREVIEW_CLARITY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "메인과 가이드 정적 페이지의 description·OG·Twitter·구조화 데이터를 제품과 무관한 공개 과학 안내서 문구로 통일한다.",
+      "reason": "사업자나 소비자가 메신저·SNS로 공개 안내서 링크를 받을 때 제품 광고와 과학 정보 안내를 구분할 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "사업자나 소비자가 메신저·SNS로 공개 안내서 링크를 받을 때 제품 광고와 과학 정보 안내를 구분할 수 있게 한다.",
+      "decision": "메인과 가이드 정적 페이지의 description·OG·Twitter·구조화 데이터를 제품과 무관한 공개 과학 안내서 문구로 통일한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-METADATA"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-LANDING",
+      "type": "SHARE_DESTINATION_REFINEMENT",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "공유 묶음 URL을 `/guide/`로 만들고 정적 가이드 리다이렉트를 `?view=guide#reading-note`로 연결한다.",
+      "reason": "공유받은 사용자가 전달된 자료와 출처를 바로 확인할 수 있도록 공유 링크의 도착 지점을 개선한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "공유받은 사용자가 전달된 자료와 출처를 바로 확인할 수 있도록 공유 링크의 도착 지점을 개선한다.",
+      "decision": "공유 묶음 URL을 `/guide/`로 만들고 정적 가이드 리다이렉트를 `?view=guide#reading-note`로 연결한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-LANDING"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-A11Y",
+      "type": "SHARE_AUDIENCE_ACCESSIBILITY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "공유 대상 전환을 선택 그룹으로 표현하고 각 버튼의 현재 상태를 aria-pressed로 전달한다.",
+      "reason": "사업자·소비자 공유 대상을 보조기기가 정확히 이해하고 선택할 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "사업자·소비자 공유 대상을 보조기기가 정확히 이해하고 선택할 수 있게 한다.",
+      "decision": "공유 대상 전환을 선택 그룹으로 표현하고 각 버튼의 현재 상태를 aria-pressed로 전달한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-A11Y"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-BUSINESS-RESEARCH-CARDS",
+      "type": "BUSINESS_EVIDENCE_SUMMARY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "사업자용 5문장 중 인지·수면 카드를 공개 연구 결과 문장으로 구성하고 각각 `#research-cognition`, `#sleep`에 연결한다.",
+      "reason": "사업자가 GABA를 설명할 때 대표 사람 연구 결과와 출처를 짧은 공유 카드로 전달할 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자",
+      "request": "사업자가 GABA를 설명할 때 대표 사람 연구 결과와 출처를 짧은 공유 카드로 전달할 수 있게 한다.",
+      "decision": "사업자용 5문장 중 인지·수면 카드를 공개 연구 결과 문장으로 구성하고 각각 `#research-cognition`, `#sleep`에 연결한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-BUSINESS-RESEARCH-CARDS"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-KIT-NAV",
+      "type": "BUSINESS_ACCESSIBILITY_SUMMARY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "상단 주 메뉴에 `공유 키트`를 추가하고 `#reading-note`로 직접 이동하게 한다.",
+      "reason": "사업자가 공개 안내서에 처음 들어와도 공유 자료를 빠르게 찾고 전달할 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "사업자가 공개 안내서에 처음 들어와도 공유 자료를 빠르게 찾고 전달할 수 있게 한다.",
+      "decision": "상단 주 메뉴에 `공유 키트`를 추가하고 `#reading-note`로 직접 이동하게 한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-KIT-NAV"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-KIT-COPY",
+      "type": "BUSINESS_COPY_SUMMARY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "사업자용 공유 키트 설명을 `설명에 필요한 문장과 연구 출처를 한곳에 모았습니다.`로 간결하게 정리한다.",
+      "reason": "사업자가 공유 키트를 열었을 때 얻을 수 있는 정보와 활용 목적을 한 번에 이해하게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "사업자가 공유 키트를 열었을 때 얻을 수 있는 정보와 활용 목적을 한 번에 이해하게 한다.",
+      "decision": "사업자용 공유 키트 설명을 `설명에 필요한 문장과 연구 출처를 한곳에 모았습니다.`로 간결하게 정리한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-KIT-COPY"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-KIT-PAPER-SOURCE",
+      "type": "BUSINESS_EVIDENCE_HANDOFF",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "인지·수면 사업자 카드에 원문 정보를 연결하고 `buildShareBundle`의 카드·전체 복사 결과에 `원문:` 라인을 포함한다.",
+      "reason": "사업자가 연구 카드 문장을 복사·공유할 때 요약과 PubMed 원문을 함께 전달할 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "사업자가 연구 카드 문장을 복사·공유할 때 요약과 PubMed 원문을 함께 전달할 수 있게 한다.",
+      "decision": "인지·수면 사업자 카드에 원문 정보를 연결하고 `buildShareBundle`의 카드·전체 복사 결과에 `원문:` 라인을 포함한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-KIT-PAPER-SOURCE"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-AUDIENCE-URL",
+      "type": "SHARE_FLOW_SUMMARY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "`audience=consumer`를 공유 URL에 포함하고, 공개 가이드 초기 상태가 query를 읽어 소비자용 키트를 복원하도록 한다.",
+      "reason": "사업자·소비자용 공유 묶음이 받는 사람에게도 같은 대상 화면으로 열리게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "사업자·소비자용 공유 묶음이 받는 사람에게도 같은 대상 화면으로 열리게 한다.",
+      "decision": "`audience=consumer`를 공유 URL에 포함하고, 공개 가이드 초기 상태가 query를 읽어 소비자용 키트를 복원하도록 한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-AUDIENCE-URL"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-READABILITY",
+      "type": "SHARE_KIT_READABILITY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "공유 키트 카드를 데스크톱 3열·태블릿 2열·모바일 1열로 배치하고 공개 검증에 반영한다.",
+      "reason": "사업자와 큰 글씨 사용자가 공유 키트 카드를 더 쉽게 읽도록 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "사업자와 큰 글씨 사용자가 공유 키트 카드를 더 쉽게 읽도록 한다.",
+      "decision": "공유 키트 카드를 데스크톱 3열·태블릿 2열·모바일 1열로 배치하고 공개 검증에 반영한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-READABILITY"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-AUDIENCE-ALL",
+      "type": "SHARE_FLOW_SUMMARY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "페이지 공유와 클립보드 fallback 모두 buildGuideUrl()을 사용해 선택된 대상 query를 보존한다.",
+      "reason": "상단·마지막 페이지 공유도 현재 사업자·소비자 대상 상태를 유지하도록 통일한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "상단·마지막 페이지 공유도 현재 사업자·소비자 대상 상태를 유지하도록 통일한다.",
+      "decision": "페이지 공유와 클립보드 fallback 모두 buildGuideUrl()을 사용해 선택된 대상 query를 보존한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-AUDIENCE-ALL"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-PAPER-SOURCE",
+      "type": "SHARE_KIT_SOURCE_VISIBILITY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "인지·수면 카드의 출처 링크를 원문명·연도·PMID가 보이는 원문 링크로 표시하고, 일반 카드의 내부 섹션 링크는 유지한다.",
+      "reason": "사업자용 연구 공유 카드에서 논문 출처를 복사하기 전에도 바로 확인할 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "사업자용 연구 공유 카드에서 논문 출처를 복사하기 전에도 바로 확인할 수 있게 한다.",
+      "decision": "인지·수면 카드의 출처 링크를 원문명·연도·PMID가 보이는 원문 링크로 표시하고, 일반 카드의 내부 섹션 링크는 유지한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-PAPER-SOURCE"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-AUDIENCE-ADDRESS",
+      "type": "SHARE_FLOW_SUMMARY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "사업자·소비자 선택 시 `/guide/?audience=business|consumer`로 history.replaceState를 실행하고, 정적 가이드 착지는 공유 키트로 유지한다.",
+      "reason": "공유 대상 선택 상태를 주소창에도 남겨 주소 복사만으로 같은 대상 화면을 전달한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "공유 대상 선택 상태를 주소창에도 남겨 주소 복사만으로 같은 대상 화면을 전달한다.",
+      "decision": "사업자·소비자 선택 시 `/guide/?audience=business|consumer`로 history.replaceState를 실행하고, 정적 가이드 착지는 공유 키트로 유지한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-AUDIENCE-ADDRESS"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-MOBILE-HERO-FLOW",
+      "type": "MOBILE_READABILITY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "700px 이하에서 히어로 grid를 단일 블록 흐름으로 전환해 숨은 420px 보조 열이 콘텐츠 폭을 점유하지 않도록 한다.",
+      "reason": "390px 모바일 첫 화면에서 히어로 제목이 잘리지 않고 한 번에 읽히도록 보완한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "390px 모바일 첫 화면에서 히어로 제목이 잘리지 않고 한 번에 읽히도록 보완한다.",
+      "decision": "700px 이하에서 히어로 grid를 단일 블록 흐름으로 전환해 숨은 420px 보조 열이 콘텐츠 폭을 점유하지 않도록 한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-MOBILE-HERO-FLOW"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-SELECTION",
+      "type": "SHARE_KIT_COMPOSITION",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "공유 키트 카드마다 기본 선택 체크박스를 제공하고, 선택된 카드만 묶음 복사·공유에 포함한다. 개별 카드 복사와 원문 링크는 유지한다.",
+      "reason": "사업자가 공유할 카드만 골라 다른 사업자나 소비자에게 맞춤형 자료로 전달할 수 있게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "사업자가 공유할 카드만 골라 다른 사업자나 소비자에게 맞춤형 자료로 전달할 수 있게 한다.",
+      "decision": "공유 키트 카드마다 기본 선택 체크박스를 제공하고, 선택된 카드만 묶음 복사·공유에 포함한다. 개별 카드 복사와 원문 링크는 유지한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-SELECTION"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    },
+    {
+      "id": "CC-20261008-SHARE-SELECTION-STATE",
+      "type": "SHARE_KIT_STATE_CLARITY",
+      "classification": "REQUIRED_FOR_GOAL",
+      "change": "카드 체크 상태를 React 상태로 관리하고 공유 키트 설명 옆에 선택 수를 표시하며, 사업자·소비자 전환 시 해당 대상의 모든 카드를 다시 선택한다.",
+      "reason": "사업자가 공유 키트를 조합할 때 현재 선택한 카드 수를 즉시 확인하고, 화면과 실제 복사·공유 대상이 어긋나지 않게 한다.",
+      "impact": "공개 안내서의 사업자 공유 흐름과 검증 가능한 품질 기준에 반영되는 변경입니다.",
+      "rework_cost": "중간: 기존 공개 흐름·출처 연결·배포 검증을 다시 확인해야 합니다.",
+      "affected_deliverables": ["공개 배포용 GABA 안내서 및 품질 검증 패킷"],
+      "affected_timeline": "현재 공개 배포 품질 고도화 주기 내 반영",
+      "required_decision": "현재 사용자 승인",
+      "approval_authority": "현재 사용자·NAVI",
+      "request": "사업자가 공유 키트를 조합할 때 현재 선택한 카드 수를 즉시 확인하고, 화면과 실제 복사·공유 대상이 어긋나지 않게 한다.",
+      "decision": "카드 체크 상태를 React 상태로 관리하고 공유 키트 설명 옆에 선택 수를 표시하며, 사업자·소비자 전환 시 해당 대상의 모든 카드를 다시 선택한다.",
+      "status": "APPROVED",
+      "approval_status": "APPROVED_BY_USER",
+      "authority": "현재 사용자·NAVI",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-SELECTION-STATE"
+      ],
+      "deployment_status": "NOT_DEPLOYED"
+    }
+  ],
   "history": [
     {
       "id": "H-001",

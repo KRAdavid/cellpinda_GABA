@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   CircleHelp,
+  Copy,
   ExternalLink,
   FlaskConical,
   Globe2,
@@ -110,6 +111,23 @@ type ExpertVideo = {
   title: string;
   topic: string;
   channel: string;
+};
+
+type ShareAudience = 'business' | 'consumer';
+
+type ShareKitCard = {
+  kicker: string;
+  title: string;
+  copy: string;
+  source: { label: string; href: string };
+  paper?: { label: string; url: string };
+};
+
+type ShareKit = {
+  label: string;
+  title: string;
+  description: string;
+  cards: ShareKitCard[];
 };
 
 const everydayTopics: EverydayTopic[] = [
@@ -342,6 +360,8 @@ const sleepResultTopic: Pick<ResearchTopic, 'id' | 'chart'> = {
   },
 };
 
+const sleepStudySource = { label: 'Yamatsu et al. 2016 · PMID 30263304', url: 'https://pubmed.ncbi.nlm.nih.gov/30263304/' };
+
 const historyMilestones: HistoryMilestone[] = [
   {
     year: '1950',
@@ -440,6 +460,7 @@ const researchScaleStats: ResearchScaleStat[] = [
 const readingChapters = [
   { id: 'history', label: '발견의 순간' },
   { id: 'basics', label: 'GABA란' },
+  { id: 'expert-videos', label: '전문가 영상' },
   { id: 'academic', label: '연구 지도' },
   { id: 'everyday', label: '일상의 순간' },
   { id: 'sleep', label: '수면 연구' },
@@ -447,8 +468,7 @@ const readingChapters = [
   { id: 'applications', label: '국내외 활용' },
   { id: 'fermented-safety', label: '발효·안전' },
   { id: 'growth', label: '성장 연구' },
-  { id: 'expert-videos', label: '전문가 영상' },
-  { id: 'reading-note', label: '출처 읽기' },
+  { id: 'reading-note', label: '공유 키트' },
   { id: 'final', label: '공유하기' },
 ] as const;
 type ReadingChapterId = (typeof readingChapters)[number]['id'];
@@ -497,11 +517,41 @@ const expertVideos: ExpertVideo[] = [
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
-  'GABA는 신경세포의 활동 균형을 조절하는 핵심 신호입니다.',
-  'GABA는 수면·긴장·집중·감각·운동과 연결됩니다.',
   'GABA 연구는 피부·인지·근육·성장·면역으로 확장되고 있습니다.',
   '발효 GABA는 발효 원리와 품질 관리, 사람 대상 섭취 연구가 함께 쌓인 식품 연구 소재입니다.',
 ];
+
+const shareAudienceOptions: { id: ShareAudience; label: string; detail: string }[] = [
+  { id: 'business', label: '사업자에게', detail: '핵심 문장 + 출처' },
+  { id: 'consumer', label: '소비자에게', detail: '쉽고 짧은 설명' },
+];
+
+const shareKits: Record<ShareAudience, ShareKit> = {
+  business: {
+    label: '사업자용 GABA 핵심 5문장 · 복사하기',
+    title: '설명 자료로 쓰는 5문장',
+    description: '설명 문장과 연구 출처를 모았습니다.',
+    cards: [
+      { kicker: '01 · 기본 정의', title: 'GABA는 무엇인가', copy: messageKit[0], source: { label: 'GABA란 보기', href: '#basics' } },
+      { kicker: '02 · 사람 연구', title: '머리를 많이 쓴 뒤의 변화', copy: researchTopics[0].finding, source: { label: '인지 연구 보기', href: '#research-cognition' }, paper: researchTopics[0].source },
+      { kicker: '03 · 수면 연구', title: '잠드는 시간과 수면 단계', copy: '사람 대상 수면 연구에서 GABA 섭취 기간에는 잠드는 시간이 짧고, 전체 비렘수면이 길게 기록됐습니다.', source: { label: '수면 연구 보기', href: '#sleep' }, paper: sleepStudySource },
+      { kicker: '04 · 연구 확장', title: '어디까지 연구됐나', copy: messageKit[1], source: { label: '연구 지도 보기', href: '#research' } },
+      { kicker: '05 · 식품 연구', title: '발효 GABA를 읽는 법', copy: messageKit[2], source: { label: '발효·안전 보기', href: '#fermented-safety' } },
+    ],
+  },
+  consumer: {
+    label: '소비자에게 보내는 GABA 요약',
+    title: '처음 듣는 사람에게 건네는 5문장',
+    description: 'GABA가 무엇이며 일상과 연구에서 어떻게 다뤄지는지 쉽게 설명합니다.',
+    cards: [
+      { kicker: '01 · 한 문장', title: 'GABA는 몸속 신호입니다', copy: 'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.', source: { label: 'GABA란 보기', href: '#basics' } },
+      { kicker: '02 · 하는 일', title: '신경 신호를 조절합니다', copy: 'GABA는 신경세포의 활동이 지나치게 커지지 않도록 조절하는 데 관여합니다.', source: { label: '기본 역할 보기', href: '#basics' } },
+      { kicker: '03 · 일상 속 순간', title: '잠과 집중에도 연결됩니다', copy: '수면, 긴장, 집중, 감각과 움직임을 다루는 신경회로에서 GABA가 연구됩니다.', source: { label: '일상 속 GABA 보기', href: '#everyday' } },
+      { kicker: '04 · 넓어진 질문', title: '연구 영역이 넓어졌습니다', copy: 'GABA 연구는 뇌를 넘어 피부, 인지, 근육, 성장호르몬과 면역으로 확장되고 있습니다.', source: { label: '연구 지도 보기', href: '#research' } },
+      { kicker: '05 · 발효와 기록', title: '식품 연구로도 이어집니다', copy: '발효 GABA는 발효 원리와 품질, 사람 대상 섭취 연구를 함께 살펴보는 식품 연구 소재입니다.', source: { label: '발효·안전 보기', href: '#fermented-safety' } },
+    ],
+  },
+};
 
 const evidenceLabels: Record<EvidenceTone, { text: string; className: string }> = {
   established: { text: '기본 생리학', className: 'is-established' },
@@ -658,6 +708,8 @@ function ResearchOutcomeChart({ topic }: { topic: Pick<ResearchTopic, 'id' | 'ch
 export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
+  const [shareAudience, setAudience] = useState<ShareAudience>(() => location.search.includes('audience=consumer') ? 'consumer' : 'business');
+  const [selectedShareIndexes, setSelectedShareIndexes] = useState(() => shareKits.business.cards.map((_, index) => index));
   const [activeVideoId, setActiveVideoId] = useState(expertVideos[0].id);
   const [videoStarted, setVideoStarted] = useState(false);
   const [activeChapterId, setActiveChapterId] = useState<ActiveChapterId>('top');
@@ -679,6 +731,7 @@ export default function PublicGabaGuide() {
   const recoveryMapRef = useRef<HTMLDivElement | null>(null);
   const recoveryTouchStart = useRef<{ x: number; y: number } | null>(null);
   const activeVideo = expertVideos.find((video) => video.id === activeVideoId) ?? expertVideos[0];
+  const activeShareKit = shareKits[shareAudience];
   const activeChapterIndex = readingChapters.findIndex((chapter) => chapter.id === activeChapterId);
   const activeChapter = activeChapterId === 'top' ? { label: '도입' } : readingChapters[Math.max(0, activeChapterIndex)];
   const recoveryCard = recoveryCards[activeRecoveryCard];
@@ -686,7 +739,7 @@ export default function PublicGabaGuide() {
 
   useEffect(() => {
     document.title = '저속노화, 회복하는 밤에서 시작되는 GABA | GABA Guide';
-    const description = '수면과 회복의 관계부터 1950년 GABA 발견, 신경계 연구, 국내외 활용과 발효 GABA의 안전성 기록까지 쉽게 읽는 공개 안내서입니다.';
+    const description = 'GABA의 발견·연구·활용·출처를 쉽게 읽는 제품과 무관한 공개 과학 안내서입니다.';
     const meta = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
     if (meta) meta.content = description;
     const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
@@ -870,13 +923,13 @@ export default function PublicGabaGuide() {
   };
 
   const sharePage = async () => {
-    const shareData = { title: '저속노화, 회복하는 밤에서 시작되는 GABA', text: '수면과 회복에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서', url: window.location.href };
+    const shareData = { title: '저속노화, 회복하는 밤에서 시작되는 GABA', text: '수면과 회복에서 시작해 GABA의 발견과 연구 지도를 읽는 공개 안내서', url: buildGuideUrl() };
     try {
       if (navigator.share) {
         await navigator.share(shareData);
         announceShareStatus('공유 창을 열었어요.');
       } else if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(window.location.href);
+        await navigator.clipboard.writeText(buildGuideUrl());
         announceShareStatus('링크를 복사했어요. 자유롭게 공유해 보세요.');
       } else {
         announceShareStatus('주소창의 링크를 복사해 자유롭게 공유해 보세요.');
@@ -893,9 +946,74 @@ export default function PublicGabaGuide() {
     }
     try {
       await navigator.clipboard.writeText(message);
-      announceShareStatus('문장을 복사했어요. 자유롭게 활용해 보세요.');
+      announceShareStatus('카드와 출처를 복사했어요.');
     } catch {
       announceShareStatus('문장을 선택해 활용해 보세요.');
+    }
+  };
+
+  const getSelectedShareCards = () => activeShareKit.cards.filter((_, index) => selectedShareIndexes.includes(index));
+
+  const toggleShareCard = (index: number) => {
+    const next = selectedShareIndexes.includes(index)
+      ? selectedShareIndexes.filter((selected) => selected !== index)
+      : [...selectedShareIndexes, index].sort((a, b) => a - b);
+    setSelectedShareIndexes(next);
+    announceShareStatus(`${next.length}개 카드를 모았어요.`);
+  };
+
+  const buildGuideUrl = (hash = '') => new URL(`guide/${shareAudience === 'consumer' ? '?audience=consumer' : ''}${hash}`, location.href).toString();
+
+  const buildShareBundle = (cards = activeShareKit.cards) => {
+    const sourceUrl = (href: string) => new URL(href, window.location.href).toString();
+    return [
+      activeShareKit.label,
+      activeShareKit.description,
+      '',
+      ...cards.map((card, index) => `${String(index + 1).padStart(2, '0')} · ${card.title}\n${card.copy}\n${card.source.label}: ${sourceUrl(card.source.href)}${card.paper ? `\n원문: ${card.paper.label} ${card.paper.url}` : ''}`),
+      '',
+      `GABA: ${buildGuideUrl(cards.length === 1 ? cards[0].source.href : '')}`,
+    ].join('\n\n');
+  };
+
+  const copyShareBundle = async () => {
+    const cards = getSelectedShareCards();
+    if (!cards.length) {
+      announceShareStatus('먼저 공유할 카드를 선택해 주세요.');
+      return;
+    }
+    const bundle = buildShareBundle(cards);
+    if (!navigator.clipboard?.writeText) {
+      announceShareStatus('문장을 길게 눌러 선택한 뒤 복사해 보세요.');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(bundle);
+      announceShareStatus(`${cards.length}개 문장과 출처를 한 번에 복사했어요.`);
+    } catch {
+      announceShareStatus('전체 문장을 선택해 활용해 보세요.');
+    }
+  };
+
+  const shareShareBundle = async () => {
+    const cards = getSelectedShareCards();
+    if (!cards.length) {
+      announceShareStatus('먼저 공유할 카드를 선택해 주세요.');
+      return;
+    }
+    const bundle = buildShareBundle(cards);
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: activeShareKit.title, text: bundle, url: buildGuideUrl() });
+        announceShareStatus('선택한 공유 묶음을 보냈어요.');
+      } else if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(bundle);
+        announceShareStatus('공유 기능이 없어 전체 묶음을 복사했어요.');
+      } else {
+        announceShareStatus('문장을 길게 눌러 선택한 뒤 공유해 보세요.');
+      }
+    } catch {
+      announceShareStatus('공유를 취소했어요.');
     }
   };
 
@@ -917,6 +1035,7 @@ export default function PublicGabaGuide() {
           <a href="#academic" aria-current={isNavCurrent('academic') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('academic'); }}>연구 지도</a>
           <a href="#applications" aria-current={isNavCurrent('applications') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a>
           <a href="#fermented-safety" aria-current={isNavCurrent('fermented-safety') ? 'page' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('fermented-safety'); }}>발효·안전</a>
+          <a href="#reading-note" onClick={() => setMenuOpen(!1)}>공유 키트</a>
         </nav>
         <button ref={menuToggleRef} type="button" className="guide-menu-toggle" aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'} aria-expanded={menuOpen} aria-controls="guide-primary-navigation" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
         <button type="button" className={`guide-reading-size-toggle${largeText ? ' is-active' : ''}`} aria-label={largeText ? '기본 글씨로 보기' : '큰 글씨로 보기'} aria-pressed={largeText} onClick={toggleReadingSize}><Type size={15} aria-hidden="true" /><span>{largeText ? '기본 글씨' : '큰 글씨'}</span></button>
@@ -934,7 +1053,7 @@ export default function PublicGabaGuide() {
             <h1 id="guide-hero-heading"><span>저속노화,<br />회복하는 밤에서 시작됩니다</span><em>그 회복의 신호를<span className="guide-mobile-break"><br /></span>{' '}GABA에서 읽습니다</em></h1>
             <p className="guide-hero-body">낮에는 몸과 뇌가 에너지를 사용합니다. 밤이 되면 몸은 회복에 필요한 과정으로 전환됩니다.</p>
             <p className="guide-editorial-note">{editorialNotice}</p>
-            <p className="guide-reading-sequence"><span>3분 읽기</span> 수면과 회복 → GABA의 발견 → GABA란 → 연구 지도 → 활용 사례</p>
+            <p className="guide-reading-sequence"><span>3분 읽기</span> 수면과 회복 → GABA의 발견 → GABA란 → 전문가 영상 → 연구 지도 → 활용 사례</p>
           </div>
           <NeuronNetwork />
           <div className="guide-hero-scroll" aria-hidden="true"><ArrowDown size={16} /> 아래로 읽기</div>
@@ -1029,15 +1148,34 @@ export default function PublicGabaGuide() {
             <p className="guide-recovery-thread"><span>GABA란</span><i>→</i><strong>수면과 회복</strong><i>→</i><span>GABA를 읽는 시작점</span></p>
             <div className="guide-recovery-next">
               <p className="guide-recovery-next-kicker">그다음</p>
-              <h3>GABA의 연구 지도로</h3>
-              <p>수면과 회복에서 시작한 질문은 신경계의 균형, 집중, 감각, 피부, 근육과 성장 연구로 이어집니다.</p>
+              <h3>GABA를 전문가의 언어로</h3>
+              <p>수면과 회복에서 시작한 질문을 전문가의 설명으로 듣고, 이어지는 연구 지도로 확장해 봅니다.</p>
             </div>
           </div>
         </aside>
 
+        <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
+          <div className="guide-container">
+            <div className="guide-section-heading"><div><p className="guide-section-number">03 · 전문가 영상</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>관심 있는 영상을 고르면<br />바로 재생됩니다.</p></div>
+            <p className="guide-section-lead guide-video-gallery-lead">GABA의 기본 역할과 수면을 중심으로, 의사와 과학자들이 공개한 짧은 설명을 먼저 들어봅니다.</p>
+            <div className="guide-video-gallery">
+              <article className="guide-video-feature" id="expert-video-feature" aria-live="polite">
+                <div className="guide-video-feature-media">{videoStarted ? <iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /> : <button type="button" className="guide-video-feature-poster" onClick={() => setVideoStarted(true)} aria-label={`${activeVideo.title} 영상 재생`}><img src={`https://i.ytimg.com/vi/${activeVideo.id}/hqdefault.jpg`} alt={`${activeVideo.title} 영상 썸네일`} fetchPriority="high" decoding="async" /><span className="guide-video-feature-poster-shade" aria-hidden="true" /><span className="guide-video-feature-poster-play"><Play size={20} fill="currentColor" aria-hidden="true" /><strong>영상 재생</strong></span></button>}</div>
+                <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>선택 즉시 재생</span></div><h3>{activeVideo.title}</h3><p>{activeVideo.channel}</p><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a></div>
+              </article>
+              <div className="guide-video-board" aria-label="전문가 영상 게시판">
+                <div className="guide-video-board-head"><span>전문가 영상</span><strong>{expertVideos.length}개 영상</strong></div>
+                <div className="guide-video-grid">{expertVideos.map((video, index) => <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} onClick={() => selectExpertVideo(video.id)}><span className="guide-video-card-thumb"><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" /><span className="guide-video-card-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span></span><span className="guide-video-card-copy"><span>{video.topic}</span><strong>{video.title}</strong><small>{video.channel}</small></span></button>)}</div>
+              </div>
+            </div>
+            <p className="guide-expert-note guide-video-gallery-note">각 채널에서 공개한 짧은 영상을 모았습니다. 선택한 영상은 이 페이지에서 바로 재생되며, 원문 링크도 함께 제공합니다.</p>
+            <div className="guide-expert-thread"><span>이어서 읽기</span><strong>연구 지도</strong><i>→</i><strong>수면 연구</strong><i>→</i><strong>출처 원문</strong></div>
+          </div>
+        </section>
+
         <section className="guide-section guide-academic guide-story-section" id="academic" aria-labelledby="academic-heading">
           <div className="guide-container">
-            <div className="guide-section-heading"><div><p className="guide-section-number">03 · 연구 지도</p><h2 id="academic-heading">GABA 연구는<br />한 분야에 머물지 않았습니다</h2></div><p>하나의 신호에서<br />넓은 학술 지도로</p></div>
+            <div className="guide-section-heading"><div><p className="guide-section-number">04 · 연구 지도</p><h2 id="academic-heading">GABA 연구는<br />한 분야에 머물지 않았습니다</h2></div><p>하나의 신호에서<br />넓은 학술 지도로</p></div>
             <p className="guide-section-lead">신경세포의 활동을 조절하는 기본 원리에서 출발한 GABA 연구는 수면과 집중, 감각과 움직임, 그리고 몸 전체의 다양한 연구 영역으로 뻗어 나갔습니다.</p>
             <div className="guide-editorial-band guide-editorial-band-academic" style={{ '--guide-editorial-image': `url(${gabaNaturalHero})` } as CSSProperties} role="img" aria-label="물과 돌, 잎의 자연 질감으로 표현한 GABA 연구 지도 이미지"><span><small>신호에서 몸 전체로</small><strong>하나의 신호가<br />넓은 연구 지도가 되었습니다</strong></span></div>
             <div className="guide-academic-map">{academicFields.map((field, index) => <article key={field.title}><span>0{index + 1}</span><div><h3>{field.title}</h3><p>{field.body}</p></div></article>)}</div>
@@ -1047,20 +1185,20 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-everyday guide-story-section" id="everyday" aria-labelledby="everyday-heading">
           <div className="guide-container">
-            <div className="guide-section-heading"><div><p className="guide-section-number">04 · 일상 속 GABA</p><h2 id="everyday-heading">우리는 매일 GABA의<br />조절 속에서 살아갑니다</h2></div><p>논문보다 먼저,<br />일상의 순간으로 이해해 보세요.</p></div>
+            <div className="guide-section-heading"><div><p className="guide-section-number">05 · 일상 속 GABA</p><h2 id="everyday-heading">우리는 매일 GABA의<br />조절 속에서 살아갑니다</h2></div><p>논문보다 먼저,<br />일상의 순간으로 이해해 보세요.</p></div>
             <div className="guide-everyday-cards">{everydayTopics.map((topic, index) => <article className="guide-everyday-card" key={topic.id}><span className="guide-everyday-number">0{index + 1}</span><span className="guide-topic-icon"><TopicIcon type={topic.icon} /></span><h3>{topic.title}</h3><p>{topic.body}</p></article>)}</div>
           </div>
         </section>
 
         <section className="guide-section guide-sleep-story guide-story-section" id="sleep" aria-labelledby="sleep-heading">
           <div className="guide-container">
-            <div className="guide-section-heading"><div><p className="guide-section-number">05 · 수면 연구</p><h2 id="sleep-heading">GABA가 가장 먼저 주목받은 분야, 수면</h2></div><p>수면 연구부터<br />GABA를 이해해 보세요.</p></div>
+            <div className="guide-section-heading"><div><p className="guide-section-number">06 · 수면 연구</p><h2 id="sleep-heading">GABA가 가장 먼저 주목받은 분야, 수면</h2></div><p>수면 연구부터<br />GABA를 이해해 보세요.</p></div>
             <p className="guide-section-lead">GABA와 수면이 어떻게 연결되는지, 전문가 설명과 사람 대상 연구를 함께 살펴봅니다.</p>
             <div className="guide-sleep-grid">
               <div className="guide-sleep-steps">
                 <article><span>01</span><div><h3>잠들고 깨는 과정과 GABA</h3><p>잠들려면 깨어 있게 하는 신경 신호가 낮아져야 합니다. GABA 신호는 잠이 시작되고 이어지는 과정과 관련이 있습니다.</p></div></article>
-              <article><span>02</span><div><h3>사람 대상 수면 연구</h3><p>수면의 질이 낮았던 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 섭취한 무작위·위약 대조 교차시험입니다.</p><strong className="guide-result-line">GABA를 섭취한 기간에는 잠드는 시간이 더 짧았고, 전체 비렘수면은 더 길었습니다.</strong><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
-              <article><span>03</span><div><h3>실제로 달라진 수면 기록</h3><ResearchOutcomeChart topic={sleepResultTopic} /><p className="guide-study-source">출처 · <a href="https://pubmed.ncbi.nlm.nih.gov/30263304/" target="_blank" rel="noopener noreferrer">Yamatsu et al. 2016 · PMID 30263304 <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
+              <article><span>02</span><div><h3>사람 대상 수면 연구</h3><p>수면의 질이 낮았던 성인 16명이 GABA 100mg 캡슐과 대조 캡슐을 각각 1주씩 섭취한 무작위·위약 대조 교차시험입니다.</p><strong className="guide-result-line">GABA를 섭취한 기간에는 잠드는 시간이 더 짧았고, 전체 비렘수면은 더 길었습니다.</strong><p className="guide-study-source">출처 · <a href={sleepStudySource.url} target="_blank" rel="noopener noreferrer">{sleepStudySource.label} <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
+              <article><span>03</span><div><h3>실제로 달라진 수면 기록</h3><ResearchOutcomeChart topic={sleepResultTopic} /><p className="guide-study-source">출처 · <a href={sleepStudySource.url} target="_blank" rel="noopener noreferrer">{sleepStudySource.label} <ExternalLink size={13} aria-hidden="true" /></a></p></div></article>
                 <article><span>04</span><div><h3>몸의 리듬과 연구 결과</h3><div className="guide-compare-row"><span>몸에서 일어나는 일</span><strong>GABA와 수면 리듬의 관계</strong></div><div className="guide-compare-row"><span>사람 대상 연구에서 본 변화</span><strong>잠드는 시간·전체 비렘수면</strong></div></div></article>
               </div>
               <div className="guide-sleep-visual" style={{ '--guide-sleep-image': `url(${gabaSleepEditorial})` } as CSSProperties} aria-label="잔잔한 물결과 달빛으로 표현한 수면 연구 이미지" role="img"><div className="guide-sleep-wave"><i /><i /><i /><i /><i /><i /></div><span className="guide-sleep-orbit guide-sleep-orbit-one" /><span className="guide-sleep-orbit guide-sleep-orbit-two" /><strong>잠들기 전<br />신경 신호의 리듬</strong></div>
@@ -1070,7 +1208,7 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-research guide-story-section" id="research" aria-labelledby="research-heading">
           <div className="guide-container">
-            <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">06 · 연구의 확장</p><h2 id="research-heading">수면에서 시작해<br />다섯 영역으로 확장됩니다</h2></div><p>연구의 흐름을<br />살펴봅니다.</p></div>
+            <div className="guide-section-heading guide-section-heading-wide"><div><p className="guide-section-number">07 · 연구의 확장</p><h2 id="research-heading">수면에서 시작해<br />다섯 영역으로 확장됩니다</h2></div><p>연구의 흐름을<br />살펴봅니다.</p></div>
             <div className="guide-research-map" aria-label="GABA에서 다섯 연구 영역으로 확장되는 구조">
               <svg className="guide-research-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 43V22M57 50H78M56 56L77 77M44 56L23 77M43 50H22" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth=".65" strokeDasharray="1 2" /></svg>
               <div className="guide-research-orbit-core"><strong>GABA</strong></div>
@@ -1084,7 +1222,7 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-applications guide-story-section" id="applications" aria-labelledby="applications-heading">
           <div className="guide-container">
-            <div className="guide-section-heading"><div><p className="guide-section-number">07 · 국내외 활용</p><h2 id="applications-heading">GABA는 연구실을 넘어<br />여러 분야로 이어지고 있습니다</h2></div><p>국내외 활용 사례를<br />한 흐름으로 살펴봅니다.</p></div>
+            <div className="guide-section-heading"><div><p className="guide-section-number">08 · 국내외 활용</p><h2 id="applications-heading">GABA는 연구실을 넘어<br />여러 분야로 이어지고 있습니다</h2></div><p>국내외 활용 사례를<br />한 흐름으로 살펴봅니다.</p></div>
             <p className="guide-section-lead">발효와 발아, 식품과 바이오 기술. GABA는 뇌 연구를 넘어 다양한 연구와 산업 현장에서 다뤄지고 있습니다.</p>
             <div className="guide-editorial-band guide-editorial-band-applications" style={{ '--guide-editorial-image': `url(${gabaApplicationsEditorial})` } as CSSProperties} role="img" aria-label="발아 곡물과 식품과학 연구 장면으로 표현한 국내외 활용 연구 이미지"><span><small>한국에서 세계로</small><strong>발효와 발아,<br />식품과 바이오 기술로</strong></span></div>
             <div className="guide-application-grid">{applicationCases.map((item) => <article className="guide-application-card" key={item.id}><div className="guide-application-top"><span className="guide-application-icon"><ApplicationIcon type={item.icon} /></span><span>{item.region}</span></div><h3>{item.title}</h3><p>{item.body}</p><strong>{item.detail}</strong><div className="guide-application-sources"><span>연구·공공자료</span>{item.sources.map((source) => <a href={source.url} target="_blank" rel="noopener noreferrer" key={source.url}>{source.label} <ExternalLink size={13} aria-hidden="true" /></a>)}</div></article>)}</div>
@@ -1093,7 +1231,7 @@ export default function PublicGabaGuide() {
 
         <section className="guide-section guide-fermented-safety guide-story-section" id="fermented-safety" aria-labelledby="fermented-safety-heading">
           <div className="guide-container">
-            <div className="guide-section-heading guide-fermented-heading"><div><p className="guide-section-number">08 · 발효와 안전</p><h2 id="fermented-safety-heading">발효는 GABA를<br />식품의 언어로 바꾸었습니다</h2></div><p>발효의 시작부터<br />안전성 기록까지</p></div>
+            <div className="guide-section-heading guide-fermented-heading"><div><p className="guide-section-number">09 · 발효와 안전</p><h2 id="fermented-safety-heading">발효는 GABA를<br />식품의 언어로 바꾸었습니다</h2></div><p>발효의 시작부터<br />안전성 기록까지</p></div>
             <div className="guide-editorial-band guide-editorial-band-fermentation" style={{ '--guide-editorial-image': `url(${gabaFermentationEditorial})` } as CSSProperties} role="img" aria-label="발효 용기와 발아 곡물로 표현한 발효 GABA 연구 이미지"><span><small>발효에서 기록으로</small><strong>자연의 발효가<br />공개된 기록이 되기까지</strong></span></div>
             <div className="guide-fermented-intro">
               <div className="guide-fermented-statement"><span className="guide-fermented-seal"><ShieldCheck aria-hidden="true" /></span><p><strong>하나의 신호가<br />식탁 위의 연구가 되기까지</strong><span>발효 원리 · 공정과 품질 · 사람 대상 연구</span></p></div>
@@ -1105,31 +1243,42 @@ export default function PublicGabaGuide() {
         </section>
 
         <section className="guide-section guide-growth-story guide-story-section" id="growth" aria-labelledby="growth-heading">
-          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">09 · 성장 연구</p><h2 id="growth-heading">성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞서 본 근육·성장호르몬 연구에서는 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 살폈습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p></div>
+          <div className="guide-container"><div className="guide-section-heading"><div><p className="guide-section-number">10 · 성장 연구</p><h2 id="growth-heading">성장호르몬 연구는<br />키 성장과 어떻게 연결될까요?</h2></div><p>하나의 결론보다<br />연구가 이어지는 경로를 봅니다.</p></div><p className="guide-section-lead">GABA 연구가 성장 관련 질문으로 이어지는 과정을 한 줄씩 살펴볼 수 있습니다.</p><div className="guide-growth-flow">{growthSteps.map((step, index) => <div className="guide-growth-step" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < growthSteps.length - 1 ? <ArrowRight className="guide-growth-arrow" aria-hidden="true" /> : null}</div>)}</div><p className="guide-growth-note">앞서 본 근육·성장호르몬 연구에서는 혈액 속 호르몬과 청소년기 생쥐의 몸길이 변화를 살폈습니다. 이 결과는 성장 연구가 신경 조절에서 호르몬과 성장 지표로 이어지는 경로를 보여줍니다.</p></div>
         </section>
 
-        <section className="guide-section guide-expert-videos guide-story-section" id="expert-videos" aria-labelledby="expert-heading">
+        <section className="guide-section guide-reading-note guide-share-kit-section guide-story-section" id="reading-note" aria-labelledby="share-kit-heading">
           <div className="guide-container">
-            <div className="guide-section-heading"><div><p className="guide-section-number">10 · 전문가 영상</p><h2 id="expert-heading">의사와 과학자들은<br />GABA를 어떻게 설명할까요?</h2></div><p>관심 있는 영상을 고르면<br />바로 재생됩니다.</p></div>
-            <p className="guide-section-lead guide-video-gallery-lead">의사와 과학자들이 공개한 짧은 영상을 수면, GABA의 기본 역할, 자율신경, 연구 읽기 주제로 나누어 모았습니다.</p>
-            <div className="guide-video-gallery">
-              <article className="guide-video-feature" id="expert-video-feature" aria-live="polite">
-                <div className="guide-video-feature-media">{videoStarted ? <iframe key={activeVideo.id} title={`${activeVideo.title} · ${activeVideo.channel}`} src={`https://www.youtube.com/embed/${activeVideo.id}?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1`} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /> : <button type="button" className="guide-video-feature-poster" onClick={() => setVideoStarted(true)} aria-label={`${activeVideo.title} 영상 재생`}><img src={`https://i.ytimg.com/vi/${activeVideo.id}/hqdefault.jpg`} alt={`${activeVideo.title} 영상 썸네일`} fetchPriority="high" decoding="async" /><span className="guide-video-feature-poster-shade" aria-hidden="true" /><span className="guide-video-feature-poster-play"><Play size={20} fill="currentColor" aria-hidden="true" /><strong>영상 재생</strong></span></button>}</div>
-                <div className="guide-video-feature-copy"><div className="guide-video-feature-meta"><span>{activeVideo.topic}</span><span>선택 즉시 재생</span></div><h3>{activeVideo.title}</h3><p>{activeVideo.channel}</p><a href={`https://www.youtube.com/shorts/${activeVideo.id}`} target="_blank" rel="noopener noreferrer">YouTube에서 원본 보기 <ExternalLink size={14} aria-hidden="true" /></a></div>
-              </article>
-              <div className="guide-video-board" aria-label="전문가 영상 게시판">
-                <div className="guide-video-board-head"><span>전문가 영상</span><strong>{expertVideos.length}개 영상</strong></div>
-                <div className="guide-video-grid">{expertVideos.map((video, index) => <button type="button" className={`guide-video-card${activeVideo.id === video.id ? ' is-active' : ''}`} key={video.id} aria-pressed={activeVideo.id === video.id} onClick={() => selectExpertVideo(video.id)}><span className="guide-video-card-thumb"><img src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" /><span className="guide-video-card-play"><Play size={14} fill="currentColor" aria-hidden="true" /></span></span><span className="guide-video-card-copy"><span>{video.topic}</span><strong>{video.title}</strong><small>{video.channel}</small></span></button>)}</div>
+            <div className="guide-share-kit-head">
+              <div>
+                <p className="guide-section-number">11 · 공유 키트</p>
+                <h2 id="share-kit-heading">필요한 사람에게,<br />필요한 만큼 공유하세요</h2>
               </div>
+              <p>사업자용 설명 문장과<br />연구로 이어지는 출처를 한곳에 모았습니다.</p>
             </div>
-            <p className="guide-expert-note guide-video-gallery-note">각 채널에서 공개한 짧은 영상을 모았습니다. 선택한 영상은 이 페이지에서 바로 재생되며, 원문 링크도 함께 제공합니다.</p>
-            <div className="guide-expert-thread"><span>이어서 읽기</span><strong>수면 연구</strong><i>→</i><strong>연구 결과</strong><i>→</i><strong>출처 원문</strong></div>
+            <div className="guide-share-kit-panel">
+              <div className="guide-share-audience" role="group" aria-label="공유 대상 선택">
+                {shareAudienceOptions.map((option) => <button aria-pressed={shareAudience === option.id} key={option.id} onClick={() => { setAudience(option.id); setSelectedShareIndexes(shareKits[option.id].cards.map((_, index) => index)); history.replaceState(null,'',`guide/?audience=${option.id}`); }}><strong>{option.label}</strong><span>{option.detail}</span></button>)}
+              </div>
+              <div className="guide-share-kit-summary">
+                <div>
+                  <p className="guide-share-kit-label">{activeShareKit.label}</p>
+                  <h3>{activeShareKit.title}</h3>
+                  <p aria-live="polite">{activeShareKit.description} · {selectedShareIndexes.length}개 카드 선택</p>
+                </div>
+                <div className="guide-share-kit-actions">
+                  <button type="button" className="guide-primary-button" onClick={copyShareBundle}><Copy size={16} aria-hidden="true" /> 선택 카드 복사</button>
+                  <button type="button" className="guide-quiet-button" onClick={shareShareBundle}><Share2 size={16} aria-hidden="true" /> 선택 카드 공유</button>
+                </div>
+              </div>
+              <div className="guide-share-kit-grid">
+                {activeShareKit.cards.map((card, index) => { const paper = card.paper; return <article className="guide-share-kit-card" key={`${shareAudience}-${card.title}`}><div className="guide-share-kit-card-top"><span>{String(index + 1).padStart(2, '0')}</span><small>{card.kicker}</small><input type="checkbox" className="guide-share-card-select" checked={selectedShareIndexes.includes(index)} aria-label={`${card.title} 공유 선택`} onChange={() => toggleShareCard(index)} /></div><h4>{card.title}</h4><p>{card.copy}</p><div className="guide-share-kit-card-bottom"><a href={paper?.url||card.source.href}>{paper ? `원문·${paper.label}` : card.source.label}</a><button type="button" onClick={() => copyMessage(buildShareBundle([card]))}>카드+출처 복사</button></div></article>; })}
+              </div>
+              <p className="guide-share-kit-note"><Check size={16} aria-hidden="true" /> 체크한 카드만 묶어 공유할 수 있습니다. 제품 광고가 아닌 GABA 공개 과학 안내서입니다.</p>
+            </div>
           </div>
         </section>
 
-        <section className="guide-section guide-reading-note guide-story-section" id="reading-note" aria-label="연구 읽는 순서"><div className="guide-container"><p className="guide-section-number">11 · 출처 읽기</p><p className="guide-reading-note-copy">각 연구 카드에서 연구 방법과 실제 관찰 결과를 읽은 뒤, 카드 아래 출처를 통해 원문으로 이어집니다.</p></div></section>
-
-        <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading">1950년의 작은 발견은<br />오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div><details className="guide-share-lines"><summary>사업자용 GABA 핵심 5문장 · 바로 복사하기</summary><div>{messageKit.map((message, index) => <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" onClick={() => copyMessage(message)}>문장 복사</button></article>)}</div></details></div></section>
+        <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading">1950년의 작은 발견은<br />오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button></div></div></section>
       </main>
 
       <footer className="guide-footer"><div className="guide-container guide-footer-grid"><a className="guide-logo" href="#top" onClick={() => scrollTo('top')}><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a><p>GABA를 쉽게 이해하고<br />자유롭게 공유하는 공개 안내서입니다.</p><div><a href="#history">발견의 역사</a><a href="#applications">활용 사례</a><a href="#top">맨 위로 ↑</a></div></div><div className="guide-container guide-footer-bottom"><span>© 2026 GABA Guide</span><span>1950년, 뇌 속에서 발견된 신호</span></div></footer>

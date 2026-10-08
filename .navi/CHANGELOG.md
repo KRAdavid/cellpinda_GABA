@@ -2,6 +2,16 @@
 
 | Date | State / Change | Reason | Evidence or Decision | Owner |
 |---|---|---|---|---|
+| 2026-10-08 | 상단 주 메뉴에 `공유 키트` 바로가기를 추가 | 사업자가 공개 안내서의 긴 흐름을 다시 탐색하지 않고 설명 문장·출처·복사 기능으로 바로 이동하도록 개선 | DEC-014, E-LOCAL-BUILD-SHARE-KIT-NAV | NAVI / QA |
+| 2026-10-08 | 사업자용 공유 키트 설명을 목적 중심의 짧은 문장으로 정리 | 문장을 읽는 순간 공유 키트의 구성과 활용 목적을 이해하도록 개선 | DEC-015, E-LOCAL-BUILD-SHARE-KIT-COPY | NAVI / QA |
+| 2026-10-08 | 인지·수면 공유 카드의 복사·공유 결과에 PubMed 원문 라인을 추가 | 사업자가 연구 요약과 원문 출처를 함께 전달하도록 개선 | DEC-016, E-LOCAL-BUILD-SHARE-KIT-PAPER-SOURCE | NAVI / QA |
+| 2026-10-08 | 공유 URL에 사업자·소비자 대상 상태를 보존 | 소비자용 묶음을 받은 사람도 동일한 소비자용 설명 화면에서 시작하도록 개선 | DEC-017, E-LOCAL-BUILD-SHARE-AUDIENCE-URL | NAVI / QA |
+| 2026-10-08 | 모바일 상단 `공유 키트` 앵커의 메뉴 닫힘을 보완 | 공유 키트 도착 시 모바일 메뉴가 닫혀 자료를 바로 읽고 복사하도록 보완 | DEC-018, E-LOCAL-BUILD-SHARE-NAV-MOBILE | NAVI / QA |
+| 2026-10-08 | 사업자용 공유 키트 설명을 짧게 정리 | 중복되는 위치 표현을 줄여 첫 시선의 목적 이해와 번들 성능을 함께 유지 | DEC-019, E-LOCAL-BUILD-SHARE-NAV-MOBILE | NAVI / QA |
+| 2026-10-08 | 카드별 복사 완료 피드백을 구체화 | 사업자가 카드와 출처가 함께 복사됐는지 즉시 확인하도록 보완 | DEC-020, E-LOCAL-BUILD-SHARE-NAV-MOBILE | NAVI / QA |
+| 2026-10-08 | 공유 키트 카드 열 수를 읽기 중심으로 재배치 | 데스크톱 3열·태블릿 2열·모바일 1열로 카드 폭을 넓혀 사업자와 큰 글씨 사용자의 가독성을 보완 | DEC-021, E-LOCAL-BUILD-SHARE-READABILITY | NAVI / QA |
+| 2026-10-08 | 개별 카드 공유를 해당 주제 본문으로 연결 | 카드 하나를 전달받은 사람도 대상별 안내서 상태를 유지한 채 관련 공개 섹션에서 바로 읽도록 보완 | DEC-022, E-LOCAL-BUILD-SHARE-DEEP-LINK | NAVI / QA |
+| 2026-10-08 | 모든 페이지 공유 진입점의 대상 URL을 통일 | 상단·마지막 공유에서도 사업자·소비자 선택 상태가 유지되도록 보완 | DEC-023, E-LOCAL-BUILD-SHARE-AUDIENCE-ALL | NAVI / QA |
 | 2026-10-03 | 연구 지도에서 상세 카드로 이어지는 `지도 → 대상 → 결과 → 해석` 읽기 순서를 추가하고 기능 변경 `79432de`·최종 공개본 `ca20d1e`로 반영 | 별도 이동 링크 없이 연구 지도 다음에 대상·결과·해석 카드를 바로 보여줘 연구 흐름을 자연스럽게 연결. PR #38 품질 검사, heartbeat PR #39, NAVI 문서 PR #40, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE, E-CDP-RESEARCH-READING-SEQUENCE, E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE, E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE | NAVI / QA |
 | 2026-10-03 | 연구 확장 지도에 의미 기반 아이콘을 적용하고 `713627f`로 공개 배포 | 인지·피부·근육·성장호르몬·면역을 동일한 구조 안에서 빠르게 구분하도록 선형 아이콘을 추가. PR #37 필수 검사, main 배포, 라이브 validator, 1440/390px Chrome CDP 시각 검증을 통과 | E-LOCAL-BUILD-RESEARCH-MAP-ICONS, E-CDP-RESEARCH-MAP-ICONS, E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS, E-LIVE-PUBLIC-RESEARCH-MAP-ICONS | NAVI / QA |
 | 2026-10-03 | 연구 결과 도표의 큰 글씨 모드를 차트 전체 글자 체계로 정리하고 `34807cb`로 공개 배포 | 비교 조건·측정값·막대 설명·신호·주석이 큰 글씨 선택과 함께 일관되게 확대되도록 보완하고, 320/360/390px 모바일 QA·라이브 validator·Pages 배포를 재확인 | E-LOCAL-BUILD-LARGE-TEXT-CHART-TYPE, E-CDP-LARGE-TEXT-CHART-TYPE, E-DEPLOY-PIPELINE-LARGE-TEXT-CHART-TYPE, E-LIVE-PUBLIC-LARGE-TEXT-CHART-TYPE | NAVI / QA |
@@ -32,6 +42,22 @@
 | 2026-10-02 | 모바일 섹션 장 제목을 다시 표시해 긴 페이지의 읽기 위치를 즉시 인지하도록 보완 | 작은 장표와 큰 제목의 위계 복원 | d7bf1cb, E-RELEASE-D7 | NAVI / QA |
 | 2026-10-02 | 연구 비교 도표에 `변화 방향` 축과 짧은 막대 설명을 추가하고 Pages 성능 예산을 통과하도록 정리해 재배포 | 모바일에서 비교 결과를 한눈에 읽고 공개 번들 예산을 안정적으로 지키도록 보완 | c13be36, E-RELEASE-C13 | NAVI / QA |
 | 2026-10-02 | 읽기 진행 표시를 실제 본문 장 번호와 맞추고, Pages 성능 초과를 압축 보정한 뒤 재배포 | 긴 모바일 안내서에서 현재 위치를 `07 / 12`처럼 즉시 이해하고 공개 배포 게이트를 통과시키도록 보완 | 1f56cb6, E-LOCAL-BUILD-PROGRESS, E-CDP-NAVIGATION-PROGRESS, E-DEPLOY-PIPELINE-PROGRESS, E-LIVE-PUBLIC-PROGRESS | NAVI / QA |
+| 2026-10-08 | `11 · 공유 키트`를 사업자·소비자 대상별 카드 5개, 연구 앵커, 개별·전체 복사, 공유 동작으로 고도화 | 사업자 설명 자료 활용성과 소비자 공유 흐름을 같은 페이지에서 강화 | E-LOCAL-BUILD-SHARE-KIT-V2, E-CDP-SHARE-KIT-V2 | NAVI / QA |
+| 2026-10-08 | `10 · 전문가 영상`을 `03 · 전문가 영상`으로 앞당기고 연구 지도 이후 장 번호와 도입 읽기 순서를 재정렬 | 기본 개념 → 전문가 설명 → 연구 지도의 인지 흐름을 구현하고 진행 표시 정합성을 유지 | E-LOCAL-BUILD-EXPERT-FIRST, E-CHROME-EXPERT-FIRST | NAVI / QA |
+| 2026-10-08 | 모바일 헤더를 컴팩트 고정형 컨트롤로 보완 | 700px 이하에서 메뉴·읽기 크기·공유 버튼을 각각 44px 조작 영역으로 유지해 핵심 탐색과 사업자 공유를 보존 | E-LOCAL-BUILD-MOBILE-HEADER | NAVI / QA |
+| 2026-10-08 | 공유 키트 카드의 출처 연결 문구를 카드별 라벨로 개선 | 사업자가 `GABA란`, `일상 속 GABA`, `연구 지도`, `발효·안전` 중 어떤 정보로 이어지는지 카드에서 바로 확인하도록 보완 | E-LOCAL-BUILD-SOURCE-LABEL | NAVI / QA |
+| 2026-10-08 | 공유 키트의 개별 카드 복사를 출처 포함 자료 카드 복사로 개선 | 문장 하나만 전달해도 카드 출처 라벨과 공개 페이지 주소가 함께 복사되도록 기존 전체 공유 번들 로직을 재사용 | E-LOCAL-BUILD-CARD-SOURCE-COPY | NAVI / QA |
+| 2026-10-08 | 메인·가이드 링크 미리보기의 공개 과학 정체성을 통일 | 정적 description·Open Graph·Twitter·구조화 데이터에 제품과 무관한 공개 과학 안내서 설명을 반영 | E-LOCAL-BUILD-SHARE-METADATA | NAVI / QA |
+| 2026-10-08 | 공유 묶음의 도착 링크를 공유 키트 직행으로 개선 | 전체 묶음·개별 카드 복사의 공개 안내서 URL을 `/guide/`로 연결하고 해당 경로가 `#reading-note` 공유 키트로 이어지도록 보완 | E-LOCAL-BUILD-SHARE-LANDING | NAVI / QA |
+| 2026-10-08 | 공유 대상 전환의 접근성 의미를 정리 | 사업자·소비자 전환을 tablist가 아닌 선택 그룹으로 표현하고 `aria-pressed`로 선택 상태를 전달 | E-LOCAL-BUILD-SHARE-A11Y | NAVI / QA |
+| 2026-10-08 | 사업자용 공유 5문장에 대표 사람 연구를 연결 | 인지·수면의 공개 연구 결과를 요약 카드에 포함하고 연구 상세 카드와 원문으로 바로 이어지도록 보완 | E-LOCAL-BUILD-BUSINESS-RESEARCH-CARDS | NAVI / QA |
+| 2026-10-08 | 사업자용 연구 카드에 원문 출처를 직접 표시 | 인지·수면 카드가 카드 안에서 논문명·연도·PMID를 보여 주고 해당 원문 URL로 연결되도록 보완 | E-LOCAL-BUILD-SHARE-PAPER-SOURCE | NAVI / QA |
+| 2026-10-08 | 공유 대상 선택 상태를 주소에도 반영 | 사업자·소비자 버튼을 선택하면 `/guide/?audience=...`로 갱신되어 주소창 복사만으로 같은 공유 대상 화면을 전달하도록 보완 | E-LOCAL-BUILD-SHARE-AUDIENCE-ADDRESS | NAVI / QA |
+| 2026-10-08 | 390px 모바일 히어로를 단일 흐름으로 보정 | 숨은 보조 grid 열 때문에 첫 제목이 오른쪽에서 잘리던 문제를 모바일 `display:block`으로 제거하고, 전체 production build·성능 예산을 재검증 | E-LOCAL-BUILD-MOBILE-HERO-FLOW | NAVI / QA |
+| 2026-10-08 | 공유 키트 390px·1440px 후속 렌더 감리 | 사업자용 5개 카드의 원문 출처, 복사 버튼, 390px 카드 폭과 1440px 3열 구조를 Chrome CDP로 재확인 | E-CDP-SHARE-KIT-FOLLOWUP | NAVI / QA |
+| 2026-10-08 | 공유 키트에 선택형 묶음 공유를 추가 | 카드별 체크박스로 필요한 문장만 모아 복사·공유하고, 원문 링크·모바일 1열·데스크톱 3열·성능 예산을 유지 | E-LOCAL-BUILD-SHARE-SELECTION | NAVI / QA |
+| 2026-10-08 | 공유 키트 카드 선택을 React 상태와 선택 수 표시로 안정화 | DOM 직접 조회 대신 화면·복사·공유가 같은 선택 상태를 사용하고 대상 전환 시 5개 카드 선택을 복원 | E-LOCAL-BUILD-SHARE-SELECTION-STATE | NAVI / QA |
+| 2026-10-08 | NAVI 변경 이력의 구형 메타데이터를 보존형으로 현재 검증기와 정합화 | 기존 요청·결정·승인 기록은 유지하고 구조 검증에 필요한 분류·영향·산출물·승인 주체 필드를 보완해 `validate_project_state.py` 통과 | E-NAVI-STATE-SCHEMA-MIGRATION | NAVI / QA |
 
 Record lifecycle transitions, approved changes, rework, and meaningful evidence updates. Do not use this file to erase history.
 # 2026-10-02 · Public deployment verification follow-up

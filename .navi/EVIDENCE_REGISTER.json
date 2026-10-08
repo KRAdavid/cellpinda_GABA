@@ -1133,6 +1133,266 @@
       "captured_at": "2026-10-02T21:24:47Z",
       "reviewer_id": "NAVI-LIVE-QA-20261003-RESEARCH-READING-SEQUENCE",
       "claim_refs": ["C-002", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-KIT-V2",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "사업자·소비자 공유 키트와 연구 앵커를 추가한 공개 안내서가 타입체크·공개 카피 검증·127개 테스트·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "pnpm run typecheck; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649934 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T08:58:14Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-KIT",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-CDP-SHARE-KIT-V2",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "로컬 Chrome CDP에서 390px·1440px 공유 키트를 렌더하고 사업자 기본 선택·소비자 전환·5개 카드·연구 앵커·가로 넘침 부재를 확인했다.",
+      "locator": "temporary Chrome CDP visual audit outside the repository; local http://127.0.0.1:5178/?view=guide; mobile width 390 scrollWidth 390; audience switched business -> consumer; cards 5; anchors #basics/#everyday/#research/#fermented-safety; desktop width 1440 scrollWidth 1425; runtimeErrors []",
+      "captured_at": "2026-10-08T08:58:14Z",
+      "reviewer_id": "NAVI-QA-CDP-20261008-SHARE-KIT",
+      "claim_refs": ["C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-EXPERT-FIRST",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "전문가 영상을 03장으로 앞당기고 이후 장 번호·읽기 배열·도입 순서를 재정렬한 공개 안내서가 타입체크·공개 카피 검증·127개 테스트·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "pnpm run typecheck; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649934 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:12:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-EXPERT-FIRST",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-CHROME-EXPERT-FIRST",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "로컬 Chrome headless 렌더에서 섹션 순서가 `top → history → basics → expert-videos → academic → everyday → sleep → research → applications → fermented-safety → growth → reading-note → final`로 확인되고, 도입 읽기 문구에 `GABA란 → 전문가 영상 → 연구 지도 → 활용 사례`가 표시됐다.",
+      "locator": "temporary Chrome headless DOM and screenshot audit outside the repository; local http://127.0.0.1:5178/?view=guide; mobile 390x844 and desktop 1440x900 captures; expert-videos index precedes academic; no runtime errors reported by headless render",
+      "captured_at": "2026-10-08T09:12:00Z",
+      "reviewer_id": "NAVI-QA-CDP-20261008-EXPERT-FIRST",
+      "claim_refs": ["C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-HEADER",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "700px 이하 모바일 헤더에 메뉴·읽기 크기·공유 컨트롤을 각각 44px 조작 영역으로 고정한 공개 안내서가 타입체크·공개 카피 검증·127개 테스트·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.css mobile media block; pnpm run build; routes 11; validate:performance total 1649981 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:25:36Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-MOBILE-HEADER",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SOURCE-LABEL",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "공유 키트 카드가 공통 링크 문구 대신 카드별 출처 라벨을 직접 노출하고, 사업자·소비자 공유 묶음과 출처 연결을 유지한 공개 안내서가 공개 카피 검증·타입체크·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx share kit card render uses card.source.label; pnpm run build; validate:research-copy status ok; routes 11; validate:performance total 1649976 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:31:38Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SOURCE-LABEL",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CARD-SOURCE-COPY",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "공유 키트의 개별 카드 복사가 기존 출처 포함 번들 포맷을 카드 하나에 적용하고 `카드+출처 복사` 동작을 제공하는 공개 안내서가 공개 카피 검증·타입체크·127개 테스트·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx buildShareBundle([card]) and 카드+출처 복사; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649986 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:33:13Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-CARD-SOURCE-COPY",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-METADATA",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "메인·가이드 정적 공유 페이지가 제품과 무관한 공개 과학 안내서 설명을 description·Open Graph·Twitter·구조화 데이터에 일관되게 노출하고, 공개 카피 검증·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "index.html and public/guide/index.html metadata; pnpm run build; routes 11; validate:static-bundle status ok; validate:performance total 1649925 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:35:20Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-METADATA",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-LANDING",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "전체·개별 공유 묶음이 `/guide/` 공개 경로를 사용하고 정적 가이드가 `?view=guide#reading-note` 공유 키트로 연결되는 공개 안내서가 공개 카피 검증·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx new URL('guide/', window.location.href); public/guide/index.html redirect hash fallback; pnpm run build; routes 11; validate:static-bundle status ok; validate:performance total 1649955 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:36:52Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-LANDING",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-A11Y",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "사업자·소비자 공유 대상 선택을 role=group과 aria-pressed로 표현한 공개 안내서가 공개 카피 검증·타입체크·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx guide-share-audience uses role=group and aria-pressed; pnpm run build; routes 11; validate:performance total 1649941 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:38:15Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-A11Y",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-BUSINESS-RESEARCH-CARDS",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "사업자용 공유 5문장에 인지·수면 대표 사람 연구 결과와 연구 카드 연결을 포함하고 기존 승인 연구 문장을 재사용한 공개 안내서가 공개 카피 검증·타입체크·production build·정적 라우트·Pages 성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx business share cards use researchTopics[0].finding, #research-cognition and #sleep; pnpm run build; routes 11; validate:performance total 1649967 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:40:48Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-BUSINESS-RESEARCH-CARDS",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-KIT-NAV",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "상단 주 메뉴에서 `공유 키트`를 선택하면 사업자·소비자용 설명 문장, 출처 연결, 개별·전체 복사와 공유 기능이 있는 `#reading-note`로 바로 이동하도록 보완한 공개 안내서가 공개 문구 검증·127개 테스트·production build·정적 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx primary navigation native href=\"#reading-note\"; 390px Chrome headless dump-dom confirmed share-kit nav, five business cards and #research-cognition/#sleep anchors; scripts/validate-research-copy.mjs direct share-kit navigation assertion; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649988 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:49:19Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-KIT-NAV",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-KIT-COPY",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "사업자용 공유 키트의 설명을 목적 중심의 짧은 문장으로 정리한 공개 안내서가 공개 문구 검증·127개 테스트·production build·정적 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx business share kit description; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649941 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:53:07Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-KIT-COPY",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-KIT-PAPER-SOURCE",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "인지·수면 사업자 카드의 복사·공유 결과에 PubMed 원문 라인을 추가한 공개 안내서가 공개 문구 검증·127개 테스트·production build·정적 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx ShareKitCard.paper, sleepStudySource and buildShareBundle `원문:` line; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649991 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:55:56Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-KIT-PAPER-SOURCE",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-AUDIENCE-URL",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "사업자·소비자 공유 URL에 대상 상태를 보존하고 `audience=consumer`를 도착 화면에서 복원하는 공개 안내서가 공개 문구 검증·127개 테스트·production build·정적 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx location.search audience initialization, buildGuideUrl and audience=consumer URL; public/guide/index.html redirect preserves query parameters; pnpm run validate:research-copy; pnpm test 127/127; guide-query-preservation=ok; pnpm run build; routes 11; validate:performance total 1649989 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T09:59:12Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-AUDIENCE-URL",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-NAV-MOBILE",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "모바일 상단 공유 키트 앵커가 클릭 시 메뉴를 닫고, 카드 복사 완료 피드백이 카드와 출처를 명시하는 공개 안내서가 공개 문구 검증·127개 테스트·production build·정적 11개 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx share-kit navigation onClick setMenuOpen, business share kit description and card copy feedback; scripts/validate-research-copy.mjs share-kit contract; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649973 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T10:13:18Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-NAV-MOBILE",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-READABILITY",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "공유 키트 카드를 데스크톱 3열·태블릿 2열·모바일 1열로 재배치해 읽기 폭을 넓힌 공개 안내서가 공개 문구 검증·127개 테스트·production build·정적 11개 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.css guide-share-kit-grid responsive columns; scripts/validate-research-copy.mjs readability contract; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649973 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T10:14:52Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-READABILITY",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-DEEP-LINK",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "개별 공유 카드가 사업자·소비자 대상 상태를 유지하면서 해당 공개 섹션 앵커로 이동하도록 개선된 안내서가 390px Chrome DOM·공개 문구 검증·127개 테스트·production build·정적 11개 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx buildGuideUrl hash parameter and single-card source anchor; public/guide/index.html query/hash-preserving redirect; scripts/validate-research-copy.mjs deep-link contract; Chrome headless 390px `/guide/?audience=consumer#research-cognition` DOM confirmed guide identity, `id=research-cognition` and consumer `aria-pressed=true`; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649996 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T10:20:26Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-DEEP-LINK",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-AUDIENCE-ALL",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "상단·마지막 페이지 공유도 사업자·소비자 대상 상태를 유지하도록 통일된 공개 안내서가 공개 문구 검증·127개 테스트·production build·정적 11개 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx sharePage uses buildGuideUrl() for navigator.share and clipboard; scripts/validate-research-copy.mjs page-share contract; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649962 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T10:42:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-AUDIENCE-ALL",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-PAPER-SOURCE",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "사업자용 인지·수면 공유 카드가 카드 안에서 논문 원문명·연도·PMID를 표시하고 해당 원문 URL로 연결하며, 일반 공유 카드는 기존 내부 섹션 앵커를 유지하는 공개 안내서가 390px Chrome headless DOM·공개 문구 검증·타입검사·127개 테스트·production build·정적 11개 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx ShareKitCard paper branch; scripts/validate-research-copy.mjs visible paper-source contract; Chrome headless 390px DOM confirmed 사업자용 GABA 핵심 5문장, 원문·Yoto et al. 2012 · PMID 22203366, 원문·Yamatsu et al. 2016 · PMID 30263304, internal anchors for non-paper cards; pnpm run validate:research-copy; pnpm run typecheck; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649974 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T10:45:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-PAPER-SOURCE",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-AUDIENCE-ADDRESS",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "공유 키트의 사업자·소비자 선택이 주소 대상 query와 함께 전달되도록 보완된 안내서가 consumer query 진입 DOM·공개 문구 검증·타입검사·127개 테스트·production build·정적 11개 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx share audience buttons setAudience and history.replaceState to `/guide/?audience=${option.id}`; public/guide/index.html preserves audience query and defaults the landing hash to reading-note; Chrome headless 390px DOM for `?view=guide&audience=consumer` confirmed 소비자에게 aria-pressed=true and 소비자에게 보내는 GABA 요약; pnpm run validate:research-copy; pnpm run typecheck; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649993 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T10:46:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-AUDIENCE-ADDRESS",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MOBILE-HERO-FLOW",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "390px 모바일에서 숨은 420px 보조 grid 열로 인해 잘리던 히어로 제목을 단일 블록 흐름으로 보완한 공개 안내서가 Chrome CDP 상호작용·가로 넘침 검사·공개 카피 검증·127개 테스트·production build·정적 11개 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.css 700px mobile `.guide-hero{display:block}` and mobile emphasis sizing; Chrome CDP 390px confirmed hero display block, document/body scrollWidth 390, hero width 350, header controls within 20..378, business audience click updated `/guide/?audience=business` and rendered 사업자용 GABA 핵심 5문장; 1440px confirmed hero display grid, 5 share cards in 3 columns, document scrollWidth 1425; pnpm run validate:research-copy; pnpm test 127/127; pnpm run build; routes 11; validate:performance total 1649995 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T10:55:00Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-MOBILE-HERO-FLOW",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-CDP-SHARE-KIT-FOLLOWUP",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "사업자용 공유 키트가 390px에서 출처와 복사 동작을 포함한 5개 카드로 읽히고, 1440px에서 3열 정보 구조를 유지하는지 Chrome CDP로 재확인했다.",
+      "locator": "Chrome CDP fallback on local preview `http://127.0.0.1:4402/?view=guide&audience=business`: 390px document/body scrollWidth 390; share panel width 350; action buttons 152x52; five cards width 322 with visible titles and source labels `원문·Yoto et al. 2012 · PMID 22203366`, `원문·Yamatsu et al. 2016 · PMID 30263304`; 1440px hero display grid, five cards width 372 in three columns, document scrollWidth 1425; no runtime error observed; Browser plugin unavailable so Chrome CDP fallback was used.",
+      "captured_at": "2026-10-08T10:57:29Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-KIT-FOLLOWUP",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-SELECTION",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "공유 키트 카드별 선택으로 필요한 문장만 묶어 복사·공유하도록 고도화한 공개 안내서가 공개 카피 검증·타입검사·127개 테스트·production build·정적 11개 라우트·성능 예산을 통과했다.",
+      "locator": "src/components/PublicGabaGuide.tsx `getSelectedShareCards`, `selectedShareIndexes`, controlled checkbox labels, selected-card copy/share actions; src/components/PublicGabaGuide.css compact checkbox layout; Chrome CDP fallback on local preview `http://127.0.0.1:4404/?view=guide&audience=business` at 390px confirmed five checked cards, one checkbox toggle reduced checked count 5 to 4, document scrollWidth 390, consumer switch updated URL to `/guide/?audience=consumer` and reset five cards; 1440px confirmed five cards width 372 in a 3-column grid and document scrollWidth 1425; pnpm run validate:research-copy; pnpm run typecheck; pnpm test 127/127; pnpm run build; validate:performance total 1649805 <= 1650000; candidateSha bc59b8c85620b93a12483ee50edf11cb8d3603da",
+      "captured_at": "2026-10-08T11:15:35Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-SELECTION",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-SELECTION-STATE",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "공유 키트가 카드 선택을 React 상태로 관리하고 선택 수를 화면에 표시하며, 사업자·소비자 대상 전환 시 해당 대상의 5개 카드를 다시 선택 상태로 복원한다.",
+      "locator": "src/components/PublicGabaGuide.tsx `selectedShareIndexes`, `checked={selectedShareIndexes.includes(index)}`, `toggleShareCard`, and the live `개 카드 선택` summary; Chrome CDP fallback on local preview `http://127.0.0.1:4404/?view=guide&audience=business`: 390px document scrollWidth 390, five cards width 322, five checked cards, one toggle changed checked count 5 to 4 and summary from `5개 카드 선택` to `4개 카드 선택`; consumer switch updated URL to `/guide/?audience=consumer`, restored five checked cards and consumer summary; 1440px confirmed five cards width 372 in a three-column grid and document scrollWidth 1425; no runtime error observed; pnpm run validate:research-copy; pnpm run typecheck; pnpm test 127/127; pnpm run build; validate:performance total 1649805 <= 1650000; mobile and desktop screenshots reviewed with view_image.",
+      "captured_at": "2026-10-08T11:15:35.000Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-SHARE-SELECTION-STATE",
+      "claim_refs": ["C-001", "C-003"]
+    },
+    {
+      "id": "E-NAVI-STATE-SCHEMA-MIGRATION",
+      "kind": "TEST",
+      "status": "SUPPORTED",
+      "statement": "기존 NAVI 변경 이력의 내용을 보존한 채 현재 검증기가 요구하는 구조 필드를 보완했고, 프로젝트 상태 구조 검증이 통과했다.",
+      "locator": "`.navi/PROJECT_STATE.json` change_control 20개 항목에 classification·change·reason·impact·rework_cost·affected_deliverables·affected_timeline·required_decision·approval_authority를 추가하고 기존 type·request·decision·approval_status·authority를 유지; NAVI 0.1.5 `validate_project_state.py` 실행 결과 `NAVI project-state validation: PASS`.",
+      "captured_at": "2026-10-08T11:19:38.000Z",
+      "reviewer_id": "NAVI-QA-GABA-20261008-STATE-SCHEMA",
+      "claim_refs": ["C-003"]
     }
   ]
 }
