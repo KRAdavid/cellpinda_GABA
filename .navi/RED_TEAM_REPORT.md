@@ -1,5 +1,23 @@
 # Red Team Report
 
+## 전체 자료 복사 라벨 명확성 공격 재점검 — main 979df2fa — 2026-10-09
+
+- 공격 초점은 좁은 화면에서 전체 복사 액션이 카드 수와 동작을 혼동시키는지, 긴 라벨이 추천 공유 버튼을 밀어내는지, 사업자·소비자 추천과 전문가 영상 흐름이 회귀하는지였다.
+- 390px 공개 화면에서는 `추천 공유`·`추천 3개 복사`·`전체 복사`, 320px에서도 동일한 컴팩트 라벨이 확인됐다. 두 폭 모두 `scrollWidth=viewport`, runtime errors 0, 사업자 추천 5개·소비자 추천 3개·카드 5개였다.
+- 실제 DOM 순서는 `03 · 전문가 영상 → 04 · 연구 지도`이며 다음 장 handoff 클릭 후 연구 지도 제목이 상단에 도착했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- PR #697과 main workflow `37796602199`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android·실사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-305`, `E-UI-CONTRACT-FULL-COPY-LABEL-20261009`, `E-CDP-FULL-COPY-LABEL-20261009`, `E-PR-FULL-COPY-LABEL-20261009`, `E-DEPLOY-FULL-COPY-LABEL-20261009`, `E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009`, `E-NAVI-STATE-FULL-COPY-LABEL-20261009`.
+
+## 전체 자료 복사 라벨 명확성 공격 재점검 — main 979df2fa — 2026-10-09
+
+- 공격 초점은 좁은 화면에서 전체 복사 액션이 카드 수와 동작을 혼동시키는지, 긴 라벨이 추천 공유 버튼을 밀어내는지, 사업자·소비자 추천과 전문가 영상 흐름이 회귀하는지였다.
+- 390px 공개 화면에서는 `추천 공유`·`추천 3개 복사`·`전체 복사`, 320px에서도 동일한 컴팩트 라벨이 확인됐다. 두 폭 모두 `scrollWidth=viewport`, runtime errors 0, 사업자 추천 5개·소비자 추천 3개·카드 5개였다.
+- 실제 DOM 순서는 `03 · 전문가 영상 → 04 · 연구 지도`이며 다음 장 handoff 클릭 후 연구 지도 제목이 상단에 도착했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- PR #697과 main workflow `37796602199`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android·실사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-305`, `E-UI-CONTRACT-FULL-COPY-LABEL-20261009`, `E-CDP-FULL-COPY-LABEL-20261009`, `E-PR-FULL-COPY-LABEL-20261009`, `E-DEPLOY-FULL-COPY-LABEL-20261009`, `E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009`, `E-NAVI-STATE-FULL-COPY-LABEL-20261009`.
+
 ## 공유 카드 사용 장면 표시 및 사업자 선택 경험 공격 재점검 — main d6d64064 — 2026-10-08
 
 - 공격 초점은 사용 장면 라벨이 카드 원문·출처·추천 상태를 가리지 않는지, 320px·390px에서 줄바꿈·가로 overflow가 없는지, 대상 전환과 기존 전문가 영상 흐름이 유지되는지였다.

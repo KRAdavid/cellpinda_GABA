@@ -1,5 +1,25 @@
 # Completion Report
 
+## 전체 자료 복사 액션 라벨 명확화 공개 검증 — main 979df2fa — 2026-10-09
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 전체 자료 액션이 데스크톱 `전체 5개 복사`·모바일 `전체 복사`로 명확해졌고, 추천·개별·전체 복사와 대상별 자료 수가 유지됐다. 로컬·PR·Pages·라이브 검사가 통과했다.
+- AC-006: `PASS`. 표시 라벨과 반응형 표현만 보완했으며 연구 카피·수치·출처·제품 독립 정보 고지·제품 CTA 제한을 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px·320px에서 공유 보드와 `03 · 전문가 영상 → 04 · 연구 지도` handoff를 Chrome CDP fallback으로 검증했다. Browser plugin 부재·실제 기기·실제 사용자·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 최종 main SHA `979df2fae301cb9502820651b1a5c0bf224dba1e`와 공개 candidate가 일치하며 workflow `37796602199`가 성공했다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-305`, `E-LOCAL-BUILD-FULL-COPY-LABEL-20261009`, `E-UI-CONTRACT-FULL-COPY-LABEL-20261009`, `E-CDP-FULL-COPY-LABEL-20261009`, `E-PR-FULL-COPY-LABEL-20261009`, `E-DEPLOY-FULL-COPY-LABEL-20261009`, `E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009`, `E-NAVI-STATE-FULL-COPY-LABEL-20261009`.
+
+## 전체 자료 복사 액션 라벨 명확화 공개 검증 — main 979df2fa — 2026-10-09
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 전체 자료 액션이 데스크톱 `전체 5개 복사`·모바일 `전체 복사`로 명확해졌고, 추천·개별·전체 복사와 대상별 자료 수가 유지됐다. 로컬·PR·Pages·라이브 검사가 통과했다.
+- AC-006: `PASS`. 표시 라벨과 반응형 표현만 보완했으며 연구 카피·수치·출처·제품 독립 정보 고지·제품 CTA 제한을 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px·320px에서 공유 보드와 `03 · 전문가 영상 → 04 · 연구 지도` handoff를 Chrome CDP fallback으로 검증했다. Browser plugin 부재·실제 기기·실제 사용자·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 최종 main SHA `979df2fae301cb9502820651b1a5c0bf224dba1e`와 공개 candidate가 일치하며 workflow `37796602199`가 성공했다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-305`, `E-LOCAL-BUILD-FULL-COPY-LABEL-20261009`, `E-UI-CONTRACT-FULL-COPY-LABEL-20261009`, `E-CDP-FULL-COPY-LABEL-20261009`, `E-PR-FULL-COPY-LABEL-20261009`, `E-DEPLOY-FULL-COPY-LABEL-20261009`, `E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009`, `E-NAVI-STATE-FULL-COPY-LABEL-20261009`.
+
 ## 공유 카드 사용 장면 표시 및 사업자 선택 경험 공개 검증 — main d6d64064 — 2026-10-08
 
 - AC-001/AC-003/AC-004/AC-005: `PASS`. 사업자 공유 카드가 전달 상황을 함께 보여주고, 대상별 추천·전체 5개·개별 문장 복사·출처 연결을 유지한다. 로컬·PR·Pages·라이브 검사가 통과했다.

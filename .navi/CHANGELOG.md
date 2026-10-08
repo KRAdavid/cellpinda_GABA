@@ -1,5 +1,25 @@
 # Project Changelog
 
+## 2026-10-09 — 전체 자료 복사 액션 라벨 명확화
+
+- 공유 보드의 전체 자료 액션을 데스크톱에서는 `전체 5개 복사`, 좁은 모바일에서는 `전체 복사`로 표시해 버튼만 보고도 동작을 이해하도록 했다. `복사 완료` 상태와 접근성 이름은 유지했다.
+- 추천 공유·추천 묶음 복사·개별 문장 복사·전체 5개 복사의 실제 동작, 사업자 추천 5개·소비자 추천 3개, 카드 5개는 변경하지 않았다.
+- PR #697 보호 검사가 통과해 main merge SHA `979df2fae301cb9502820651b1a5c0bf224dba1e`가 됐다. main workflow `37796602199`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 최종 live validator는 HTTP 200·`candidateSha=979df2fae301cb9502820651b1a5c0bf224dba1e`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- Chrome CDP fallback 공개 390px·320px에서 가로폭 일치·runtime errors 0과 `03 · 전문가 영상 → 04 · 연구 지도` handoff를 확인했고, 390px 화면에서 공유 액션이 `추천 공유`·`추천 3개 복사`·`전체 복사`로 읽혔다. Browser plugin 부재와 실제 공유 시트·실기기·실사용자 검증은 외부 조건으로 남긴다.
+
+증적: `C-305`, `E-LOCAL-BUILD-FULL-COPY-LABEL-20261009`, `E-UI-CONTRACT-FULL-COPY-LABEL-20261009`, `E-CDP-FULL-COPY-LABEL-20261009`, `E-PR-FULL-COPY-LABEL-20261009`, `E-DEPLOY-FULL-COPY-LABEL-20261009`, `E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009`, `E-NAVI-STATE-FULL-COPY-LABEL-20261009`.
+
+## 2026-10-09 — 전체 자료 복사 액션 라벨 명확화
+
+- 공유 보드의 전체 자료 액션을 데스크톱에서는 `전체 5개 복사`, 좁은 모바일에서는 `전체 복사`로 표시해 버튼만 보고도 동작을 이해하도록 했다. `복사 완료` 상태와 접근성 이름은 유지했다.
+- 추천 공유·추천 묶음 복사·개별 문장 복사·전체 5개 복사의 실제 동작, 사업자 추천 5개·소비자 추천 3개, 카드 5개는 변경하지 않았다.
+- PR #697 보호 검사가 통과해 main merge SHA `979df2fae301cb9502820651b1a5c0bf224dba1e`가 됐다. main workflow `37796602199`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 최종 live validator는 HTTP 200·`candidateSha=979df2fae301cb9502820651b1a5c0bf224dba1e`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- Chrome CDP fallback 공개 390px·320px에서 가로폭 일치·runtime errors 0과 `03 · 전문가 영상 → 04 · 연구 지도` handoff를 확인했고, 390px 화면에서 공유 액션이 `추천 공유`·`추천 3개 복사`·`전체 복사`로 읽혔다. Browser plugin 부재와 실제 공유 시트·실기기·실사용자 검증은 외부 조건으로 남긴다.
+
+증적: `C-305`, `E-LOCAL-BUILD-FULL-COPY-LABEL-20261009`, `E-UI-CONTRACT-FULL-COPY-LABEL-20261009`, `E-CDP-FULL-COPY-LABEL-20261009`, `E-PR-FULL-COPY-LABEL-20261009`, `E-DEPLOY-FULL-COPY-LABEL-20261009`, `E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009`, `E-NAVI-STATE-FULL-COPY-LABEL-20261009`.
+
 ## 2026-10-08 — 공유 카드 사용 장면 표시 및 사업자 선택 경험 고도화
 
 - 공유 보드의 5개 카드에 `처음 설명을 시작할 때`, `GABA의 역할을 설명할 때`, `연구 범위를 보여줄 때`, `사람 대상 결과를 전할 때`, `발효·안전 자료를 덧붙일 때`를 추가했다. 사업자는 전달 상황을 보고 필요한 문장을 바로 고를 수 있다.

@@ -3395,6 +3395,20 @@
         "E-NAVI-STATE-SHARE-USE-CASES-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-305",
+      "statement": "공개 GABA 공유 보드의 전체 자료 복사 액션이 넓은 화면에서는 `전체 5개 복사`, 좁은 모바일에서는 `전체 복사`로 명확하게 표시되고, 대상별 추천·개별 복사·전문가 영상 선배치·공개 모바일 배포 검사를 유지했다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-FULL-COPY-LABEL-20261009",
+        "E-UI-CONTRACT-FULL-COPY-LABEL-20261009",
+        "E-CDP-FULL-COPY-LABEL-20261009",
+        "E-PR-FULL-COPY-LABEL-20261009",
+        "E-DEPLOY-FULL-COPY-LABEL-20261009",
+        "E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009",
+        "E-NAVI-STATE-FULL-COPY-LABEL-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -21921,6 +21935,83 @@
       "captured_at": "2026-10-08T23:43:32+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-SHARE-USE-CASES",
       "claim_refs": ["C-304"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-FULL-COPY-LABEL-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main 979df2fa 후보에서 UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·성능 예산이 통과했다. 전체 자산은 1,645,276바이트, 초기 JS 311,405바이트, 초기 CSS 95,703바이트였다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run validate:research-copy; pnpm run typecheck; pnpm test: 127 pass, 0 fail; pnpm run build: candidateSha=979df2fae301cb9502820651b1a5c0bf224dba1e; routes=11; files=73; initial js=311405; initial css=95703; total assets=1645276; largest=311405; all budgets passed",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/979df2fae301cb9502820651b1a5c0bf224dba1e",
+      "captured_at": "2026-10-08T15:03:50Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-FULL-COPY-LABEL",
+      "claim_refs": ["C-305"]
+    },
+    {
+      "id": "E-UI-CONTRACT-FULL-COPY-LABEL-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 전체 자료 복사 액션의 명시적 데스크톱 라벨과 모바일 compact 라벨을 고정했다.",
+      "locator": "scripts/validate-ui-contract.mjs; guide-share-copy-all-secondary; visible `전체 5개 복사`; guide-share-full-copy-label-compact; validate:ui-contract status=ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/blob/main/scripts/validate-ui-contract.mjs",
+      "captured_at": "2026-10-08T15:03:50Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261009-FULL-COPY-LABEL",
+      "claim_refs": ["C-305"]
+    },
+    {
+      "id": "E-CDP-FULL-COPY-LABEL-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 Chrome CDP fallback에서 390px·320px 공유 보드의 가로폭·상태·순서를 확인했다. 사업자 추천 5개·소비자 추천 3개·카드 5개·runtime errors 0이며, 390px 화면의 전체 자료 액션은 `전체 복사`로 표시됐다.",
+      "locator": "Chrome CDP fallback; https://kradavid.github.io/gaba_info/?view=guide&audience=31#final; viewport 390x844 and 320x844; scrollWidth=viewport; errors=[]; business recommended=5; consumer recommended=3; cards=5; screenshot gaba-live-full-copy-label-390.png; order expert-videos < academic; handoff academicTop=57; Browser plugin unavailable",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31#final",
+      "captured_at": "2026-10-08T15:03:50Z",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261009-FULL-COPY-LABEL",
+      "claim_refs": ["C-305"]
+    },
+    {
+      "id": "E-PR-FULL-COPY-LABEL-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전체 자료 복사 액션 라벨 보정 PR #697의 required release-verify·site-quality-verify 검사가 성공하고 main에 병합됐다.",
+      "locator": "PR #697 release-verify run 37796330196 pass; site-quality-verify run 37796330439 pass; merge SHA 979df2fae301cb9502820651b1a5c0bf224dba1e",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/697",
+      "captured_at": "2026-10-08T14:57:22Z",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-FULL-COPY-LABEL",
+      "claim_refs": ["C-305"]
+    },
+    {
+      "id": "E-DEPLOY-FULL-COPY-LABEL-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main candidate의 Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37796602199; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass; final merge SHA 979df2fae301cb9502820651b1a5c0bf224dba1e",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37796602199",
+      "captured_at": "2026-10-08T14:57:22Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-FULL-COPY-LABEL",
+      "claim_refs": ["C-305"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly·removed750·provenance matched를 유지했다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=979df2fae301cb9502820651b1a5c0bf224dba1e; generatedAt=2026-10-08T14:57:22.133Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-08T15:03:50Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-FULL-COPY-LABEL",
+      "claim_refs": ["C-305"]
+    },
+    {
+      "id": "E-NAVI-STATE-FULL-COPY-LABEL-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 전체 자료 복사 액션 라벨 보정의 결정·로컬·contract·CDP·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-015; H-396; PR #697; merge SHA 979df2fae301cb9502820651b1a5c0bf224dba1e; workflow 37796602199; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T00:03:50+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-FULL-COPY-LABEL",
+      "claim_refs": ["C-305"]
     }
   ]
 }

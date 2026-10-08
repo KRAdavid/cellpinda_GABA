@@ -1,5 +1,25 @@
 # Audit Report
 
+## 전체 자료 복사 액션 라벨 명확화 공개 검증 — main 979df2fa — 2026-10-09
+
+- AC-001/AC-003/AC-004: `PASS`. 전체 자료 버튼은 넓은 화면에서 `전체 5개 복사`, 좁은 모바일에서 `전체 복사`로 표시되며 추천 공유·추천 묶음 복사·개별 문장 복사와 전체 복사 상태를 유지한다.
+- AC-005 자동 게이트: `PASS`. UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·성능 예산과 PR #697 보호 검사가 통과했다. main workflow `37796602199`의 Pages 배포·라이브 smoke·release-status도 성공했다.
+- AC-006: `PASS`. 공유 액션의 표시 라벨만 명확히 했으며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계는 변경하지 않았다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px·320px에서 `scrollWidth`가 viewport와 같고 runtime errors 0이었다. 사업자 추천 5개·소비자 추천 3개·카드 5개와 `03 · 전문가 영상 → 04 · 연구 지도` handoff를 재검증했다. Browser plugin 부재·실제 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-305`, `E-LOCAL-BUILD-FULL-COPY-LABEL-20261009`, `E-UI-CONTRACT-FULL-COPY-LABEL-20261009`, `E-CDP-FULL-COPY-LABEL-20261009`, `E-PR-FULL-COPY-LABEL-20261009`, `E-DEPLOY-FULL-COPY-LABEL-20261009`, `E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009`, `E-NAVI-STATE-FULL-COPY-LABEL-20261009`.
+
+## 전체 자료 복사 액션 라벨 명확화 공개 검증 — main 979df2fa — 2026-10-09
+
+- AC-001/AC-003/AC-004: `PASS`. 전체 자료 버튼은 넓은 화면에서 `전체 5개 복사`, 좁은 모바일에서 `전체 복사`로 표시되며 추천 공유·추천 묶음 복사·개별 문장 복사와 전체 복사 상태를 유지한다.
+- AC-005 자동 게이트: `PASS`. UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·성능 예산과 PR #697 보호 검사가 통과했다. main workflow `37796602199`의 Pages 배포·라이브 smoke·release-status도 성공했다.
+- AC-006: `PASS`. 공유 액션의 표시 라벨만 명확히 했으며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계는 변경하지 않았다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px·320px에서 `scrollWidth`가 viewport와 같고 runtime errors 0이었다. 사업자 추천 5개·소비자 추천 3개·카드 5개와 `03 · 전문가 영상 → 04 · 연구 지도` handoff를 재검증했다. Browser plugin 부재·실제 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-305`, `E-LOCAL-BUILD-FULL-COPY-LABEL-20261009`, `E-UI-CONTRACT-FULL-COPY-LABEL-20261009`, `E-CDP-FULL-COPY-LABEL-20261009`, `E-PR-FULL-COPY-LABEL-20261009`, `E-DEPLOY-FULL-COPY-LABEL-20261009`, `E-LIVE-PUBLIC-FULL-COPY-LABEL-20261009`, `E-NAVI-STATE-FULL-COPY-LABEL-20261009`.
+
 ## 공유 카드 사용 장면 표시 및 사업자 선택 경험 공개 검증 — main d6d64064 — 2026-10-08
 
 - AC-001/AC-003/AC-004: `PASS`. 공개 공유 보드의 5개 카드에 상황별 사용 장면이 표시되고 사업자 추천 5개·소비자 추천 3개·전체 카드 5개·개별 복사·출처가 유지된다.
