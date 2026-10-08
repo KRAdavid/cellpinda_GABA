@@ -1840,7 +1840,9 @@ export default function PublicGabaGuide() {
   };
 
   const copyMessageKitLine = async (message: string, index: number) => {
-    const text = formatMessageKitText(message, index, true, getMessageKitShareUrl(activeMessageAudienceMask, selectedMessageMask));
+    // An individual line should reopen the exact card that was copied, even when
+    // the operator's current bundle contains additional materials.
+    const text = formatMessageKitText(message, index, true, getMessageKitShareUrl(activeMessageAudienceMask, 1 << index));
     const copied = await writeClipboardText(text);
     if (copied) {
       setCopiedMessageIndex(index);
