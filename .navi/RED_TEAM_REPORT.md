@@ -2745,6 +2745,14 @@
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
 
+## Red-team recheck — 수면과 회복 14단계 모바일 균형 — 5094bf25 — 2026-10-08
+
+- 공격 관점에서 280·390·1440px 회복 지도 행 배열과 단계 선택을 확인했다. 280px은 6+6+2, 390px은 7+7, 데스크톱은 14열로 유지되고 마지막 단계가 화면 안에서 선택되며 최종 카드 문구로 연결된다.
+- 실제 공개 URL에서 14개 단계·`aria-current=step`·`activeWithinViewport=true`·`pageScrollWidth=390`·`runtimeErrors=[]`를 재현했다. 신규 CRITICAL/MAJOR 화면 결함은 없다.
+- 이번 보정은 레이아웃·UI contract에 한정되어 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않는다. 다만 Chromium fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-290`, `E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008`, `E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008`.
+
 ## Red-team public surface recheck — 6d5c8a49 — 2026-10-08
 
 - 공격 관점에서 280·390·1440px의 13개 핵심 장 직접 진입을 재현했다. 제목은 sticky header와 읽기 진행 레일 아래에 정렬됐고, document 가로폭은 viewport와 같았으며 runtime error는 0건이었다.

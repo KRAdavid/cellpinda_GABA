@@ -3471,3 +3471,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-289`, `E-DEPLOY-PIPELINE-PUBLIC-SURFACE-FINAL-20261008`, `E-LIVE-PUBLIC-FINAL-SURFACE-20261008`, `E-NAVI-STATE-PUBLIC-SURFACE-FINAL-20261008`.
+
+## 수면과 회복 14단계 모바일 균형 보정 — 5094bf25 — 2026-10-08
+
+- AC-001 공개 배포: PASS. PR #662의 `release-verify`·`site-quality-verify`가 통과한 뒤 main merge SHA `5094bf254fbaa2023178043ed7afb5634af29887`의 workflow `37709888046`에서 `release-verify`·`worker-readiness`·`deploy-pages`·`smoke-live`·`release-status`가 성공했고 `deploy-worker`는 `STATIC_ONLY`로 skipped됐다.
+- AC-002/AC-004 모바일 읽기 흐름: PASS. 351–700px에서는 수면과 회복 14단계를 7+7 두 행으로 정리해 마지막 두 단계가 분리되지 않도록 했고, 350px 이하에서는 6+6+2 안전 레이아웃을 유지했다. 로컬 Playwright 280·390·1440px에서 각각 3·2·1행과 viewport 일치 가로폭을 확인했으며, 라이브 390px에서 14개 단계·마지막 단계 선택·`aria-current`·최종 카드 연결·runtime error 0을 재현했다.
+- AC-005 자동 게이트: PASS. 로컬 `pnpm run build`, `pnpm test` 127 pass / 0 fail, typecheck, UI contract, 정적 bundle, release manifest, 성능 예산과 보호 브랜치 검사가 통과했다. 총 자산은 `1,649,241 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 보정은 회복 지도 레이아웃과 검증 계약에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다. 라이브 validator는 HTTP 200·STATIC·bundle hash 73·claims 12·master records 6·share pages 6·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 유지했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chromium fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 해당 외부 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-290`, `E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008`, `E-PR-RECOVERY-MAP-BALANCE-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008`, `E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008`.

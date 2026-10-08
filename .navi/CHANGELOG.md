@@ -2429,3 +2429,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
 
 증적: `C-268`, `E-LIVE-PUBLIC-ARIA-FINAL-20261008`, `E-DEPLOY-PIPELINE-ARIA-FINAL-20261008`, `E-NAVI-STATE-ARIA-FINAL-20261008`.
+
+## 2026-10-08 — 수면과 회복 14단계 모바일 균형 보정 및 공개 배포
+
+- 351–700px 모바일에서 14단계 회복 흐름을 7+7로 정리하고, 350px 이하에서는 6+6+2 안전 레이아웃을 유지했다.
+- 로컬 build·UI contract·typecheck·127개 테스트·성능 예산, PR #662 보호 검사, main workflow `37709888046`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 skipped됐다.
+- 공개 validator candidate `5094bf254fbaa2023178043ed7afb5634af29887`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 390px에서 14개 단계·마지막 단계 선택·최종 카드 연결·runtime error 0을 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
+
+증적: `C-290`, `E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008`, `E-PR-RECOVERY-MAP-BALANCE-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008`, `E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008`.

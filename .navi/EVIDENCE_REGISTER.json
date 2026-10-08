@@ -3188,6 +3188,19 @@
         "E-NAVI-STATE-PUBLIC-SURFACE-FINAL-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-290",
+      "statement": "수면과 회복 14단계 흐름을 표준 모바일에서 7+7의 균형으로 배치하고 좁은 280px에서는 6+6+2 안전 레이아웃을 유지한 공개 candidate 5094bf254fbaa2023178043ed7afb5634af29887가 PR·Pages·라이브 검증을 통과했다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008",
+        "E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008",
+        "E-PR-RECOVERY-MAP-BALANCE-20261008",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008",
+        "E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -20595,6 +20608,72 @@
       "captured_at": "2026-10-08T09:38:55+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-PUBLIC-SURFACE-FINAL-SYNC",
       "claim_refs": ["C-289"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 production build와 자동 검증이 통과했고 수면과 회복 14단계는 280px에서 6+6+2, 390px에서 7+7, 1440px에서 14열로 계산되며 각 viewport의 document 가로폭을 유지했다.",
+      "locator": "pnpm run build; pnpm test -> 127 passed; pnpm run typecheck; pnpm run validate:ui-contract; performance total assets 1649241/1650000; local Playwright 280/390/1440px -> rows 3/2/1, pageWidth=viewport",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/662",
+      "captured_at": "2026-10-08T09:54:44+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-RECOVERY-MAP-BALANCE",
+      "claim_refs": ["C-001", "C-003", "C-290"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract에 표준 모바일 회복 지도 7열 균형 규칙을 등록했고 검증이 통과했다. 좁은 350px 이하 규칙은 기존 6열 안전 레이아웃 검증과 함께 유지된다.",
+      "locator": "pnpm run validate:ui-contract -> status=ok; v177 balanced recovery map assertion present",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/662",
+      "captured_at": "2026-10-08T09:54:44+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-RECOVERY-MAP-BALANCE",
+      "claim_refs": ["C-003", "C-290"]
+    },
+    {
+      "id": "E-PR-RECOVERY-MAP-BALANCE-20261008",
+      "kind": "REVIEW",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #662는 release-verify와 site-quality-verify 필수 검사를 통과한 뒤 main에 병합됐다.",
+      "locator": "PR #662; release-verify run 37709768686 pass; site-quality-verify run 37709768636 pass; merge SHA 5094bf254fbaa2023178043ed7afb5634af29887",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/662",
+      "captured_at": "2026-10-08T09:50:54+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261008-RECOVERY-MAP-BALANCE",
+      "claim_refs": ["C-001", "C-290"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main merge SHA 5094bf254fbaa2023178043ed7afb5634af29887의 정적 배포 workflow가 release-verify·worker-readiness·deploy-pages·smoke-live·release-status 성공으로 완료됐고 Worker는 STATIC_ONLY로 skipped됐다.",
+      "locator": "main workflow 37709888046: release-verify 113093069640 success; worker-readiness 113093453862 success; deploy-pages 113093481336 success; deploy-worker 113093482420 skipped by STATIC_ONLY; smoke-live 113093553805 success; release-status 113093609663 success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37709888046",
+      "captured_at": "2026-10-08T09:52:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RECOVERY-MAP-BALANCE",
+      "claim_refs": ["C-001", "C-005", "C-290"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL에서 14개 회복 단계가 모두 표시되고 390px에서 마지막 단계 선택·aria-current·최종 카드 연결·가로폭·runtime error를 재현했다.",
+      "locator": "https://kradavid.github.io/gaba_info/?view=guide; Chromium CDP 390px; indexCount=14; active=13; activeAriaCurrent=step; activeWithinViewport=true; pageScrollWidth=390; cardHasFinalCopy=true; runtimeErrors=[]; validate:live-public page=200 candidateSha=5094bf254fbaa2023178043ed7afb5634af29887 bundleHashes=73 claims=12 masterRecords=6 sharePages=6 teaser=HOLD provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#recovery-break",
+      "captured_at": "2026-10-08T09:52:09+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-RECOVERY-MAP-BALANCE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-290"]
+    },
+    {
+      "id": "E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록은 회복 지도 모바일 균형 보정의 로컬·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY 및 외부 검증 조건을 유지한다.",
+      "locator": "main 5094bf254fbaa2023178043ed7afb5634af29887; PR #662 merged; workflow 37709888046 success; live candidate matched; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T09:54:44+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RECOVERY-MAP-BALANCE",
+      "claim_refs": ["C-290"]
     }
   ]
 }
