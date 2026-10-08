@@ -405,6 +405,7 @@ requireMatch(publicGuide, /activeMessageAudienceMask & \(1 << index\)[\s\S]*?is-
 requireMatch(publicGuideStyles, /v176 audience-first share board[\s\S]*?\.guide-share-lines article\.is-rec\{order:-1;/, 'public GABA share board must place selected-audience recommendations before the full material set');
 requireMatch(publicGuide, /guide-share-intro-kicker[\s\S]*?필요한 자료만 골라 전달하세요[\s\S]*?guide-share-copy-actions[\s\S]*?추천 자료 복사[\s\S]*?전체 5개/, 'public GABA business share board must explain audience-specific recommendations and expose both bundle actions');
 requireMatch(publicGuide, /guide-share-copy-all-secondary[\s\S]*?전체 5개 복사/, 'public GABA business share board must make the all-material copy action explicit in its visible label');
+requireMatch(publicGuide, /guide-share-flow[\s\S]*?대상 선택[\s\S]*?추천 \{recommendedMessageCount\}개 확인[\s\S]*?공유 또는 복사/, 'public GABA business share board must expose the three-step operator flow before the material cards');
 requireMatch(publicGuide, /const shareMessageKit = async \(\)[\s\S]*?navigator\.share[\s\S]*?formatMessageKitBundle[\s\S]*?추천 자료를 공유했어요[\s\S]*?const copied = await copyMessageKit\(\)[\s\S]*?직접 공유를 지원하지 않아요/, 'public GABA share board must offer direct audience-bundle sharing with a clear copy fallback');
 requireMatch(publicGuide, /guide-share-share[\s\S]*?추천 공유/, 'public GABA share board must expose a direct recommended-material share action');
 requireMatch(publicGuide, /href="#final"[\s\S]*?자료 모음/, 'public GABA navigation must expose a direct route to the reusable business share materials');

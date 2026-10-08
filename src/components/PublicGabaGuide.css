@@ -785,6 +785,11 @@
 .guide-share-card-head>small{color:#8caab9;font-size:10px;line-height:1;white-space:nowrap}
 .guide-share-card-use{display:block;margin-top:9px;color:#c3dfe5;font-size:12px;font-weight:750;line-height:1.45;letter-spacing:-.03em}
 .guide-share-lines article.is-rec{background:linear-gradient(180deg,rgba(37,177,178,.14),rgba(255,255,255,.06));box-shadow:inset 0 2px 0 rgba(145,219,217,.55)}
+/* v177 share flow: make the operator's next action visible before the material cards. */
+.guide-share-flow{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:7px;max-width:790px;margin-top:14px}
+.guide-share-flow-step{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid rgba(145,219,217,.24);border-radius:11px;background:rgba(255,255,255,.045);color:#c9e3e7;font-size:12px;font-weight:800;letter-spacing:-.035em}
+.guide-share-flow-step strong{display:inline-flex;align-items:center;justify-content:center;flex:0 0 25px;width:25px;height:25px;border-radius:50%;background:rgba(145,219,217,.16);color:#a9e4e1;font-size:10px;font-weight:900;letter-spacing:.04em}
+.guide-share-flow-arrow{color:#8ed9d7;opacity:.8}
 @media(max-width:700px){
   .guide-share-intro-actions{display:grid!important;grid-template-columns:minmax(0,1fr);align-items:stretch;gap:12px}
   .guide-share-audience{grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px}
@@ -793,6 +798,9 @@
   .guide-share-copy-actions .guide-share-copy-all{padding-inline:11px}
   .guide-share-full-copy-label{display:none}
   .guide-share-full-copy-label-compact{display:inline}
+  .guide-share-flow{grid-template-columns:1fr;gap:4px;margin-top:12px}
+  .guide-share-flow-step{min-height:40px;padding:7px 11px}
+  .guide-share-flow-arrow{justify-self:center;transform:rotate(90deg)}
 }
 @media(max-width:350px){
   .guide-share-copy-actions{grid-template-columns:minmax(0,1fr) auto}
