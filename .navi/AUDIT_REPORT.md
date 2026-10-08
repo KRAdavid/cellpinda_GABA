@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 공유 링크 전달 문구 및 데스크톱 읽기 레이아웃 재감리 — main a32beecd — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 선택 자료의 전달 행동을 `링크 공유`로 명시하고, `링크 공유 또는 내용 복사` 3단계 흐름과 선택 범위 유지 안내를 함께 표시한다. 공유 보드 설명은 충분한 폭으로 읽고 대상·빠른 선택·전달 컨트롤을 아래에서 조작하도록 정리했다.
+- AC-004: `PASS`. 공개 Chrome CDP fallback 390px에서 `2개 링크 공유`·`선택 2개 복사`·`전체 복사`, 선택 자료·원문 출처 수·링크 범위 안내를 확인했다. `scrollWidth=390`, 버튼 overflow 없음, runtime errors 0이며 DOM 순서는 `expert-videos` → `academic`이다. 1440px에서 설명 폭 744px·컨트롤 폭 448.56px·버튼 overflow 없음·`scrollWidth=1425`를 확인했다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·정적 릴리스 빌드·릴리스 매니페스트·성능 예산(`totalAssets=1650637`)을 통과했고 PR #736과 main workflow `37861221916`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- AC-006 공개 정합성: `PASS`. 공개 validator는 HTTP 200·`candidateSha=a32beecdb372e715b971a5af939bdc4af9c34630`·`STATIC`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-321`, `E-LOCAL-BUILD-SHARE-LINK-HANDOFF-20261009`, `E-UI-CONTRACT-SHARE-LINK-HANDOFF-20261009`, `E-PR-SHARE-LINK-HANDOFF-20261009`, `E-DEPLOY-SHARE-LINK-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-LINK-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-LINK-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-LINK-HANDOFF-20261009`.
+
 ## 사업자 공유 보드 선택 범위 통합 및 데스크톱 가독성 보정 — main 880e0042 — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 선택 자료 해제 칩을 전달 범위 상태 패널 안에 통합하고, 선택 수·자료 제목·원문 출처 수·공유 범위 안내를 한 영역에서 확인한다. 넓은 화면 자료 카드는 3열로 표시해 제목·설명·출처의 끊김을 줄였다.

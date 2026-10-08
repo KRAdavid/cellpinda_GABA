@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 사업자 공유 링크 전달 문구 및 데스크톱 읽기 레이아웃 보정
+
+- 선택한 자료의 범위를 유지하는 행동을 `2개 링크 공유`처럼 명시하고, 전달 단계도 `링크 공유 또는 내용 복사`로 정리했다.
+- 공유 패널은 설명을 먼저 넓게 읽은 뒤 대상·빠른 선택·링크 공유·선택 복사·전체 복사를 조작하도록 배치했다. 모바일 390px 세로 흐름과 터치 영역은 유지했다.
+- 로컬 UI contract·typecheck·`pnpm test` 127 pass·정적 릴리스 빌드·매니페스트·성능 예산이 통과했다. PR #736과 main workflow `37861221916`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책으로 skipped됐다.
+- 공개 validator는 candidate SHA `a32beecdb372e715b971a5af939bdc4af9c34630`, HTTP 200·STATIC·bundle hashes 73개·가로폭 390·버튼 overflow 없음·runtime errors 0·전문가 영상 선행 순서를 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-321`, `E-LOCAL-BUILD-SHARE-LINK-HANDOFF-20261009`, `E-UI-CONTRACT-SHARE-LINK-HANDOFF-20261009`, `E-PR-SHARE-LINK-HANDOFF-20261009`, `E-DEPLOY-SHARE-LINK-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-LINK-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-LINK-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-LINK-HANDOFF-20261009`.
+
 ## 2026-10-09 — 사업자 공유 보드 선택 범위 통합 및 데스크톱 가독성 보정
 
 - 선택 자료 해제 칩을 전달 범위 상태 패널 안으로 통합해 `전달할 내용 · n개`·자료 제목·원문 출처 수·공유 범위를 한 영역에서 확인하게 했다.

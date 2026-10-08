@@ -3628,7 +3628,7 @@
     },
     {
       "id": "C-321",
-      "statement": "사업자 공유 보드의 전달 범위 상태 패널은 선택 자료 제목과 함께 포함된 원문 출처 수를 보여주고, 공유 링크에서도 같은 선택 범위가 유지된다는 점을 안내한다. 선택 자료 해제 칩을 같은 상태 패널에 통합하고 넓은 화면 자료 카드를 3열로 읽기 쉽게 정리했으며, 개별 선택·목적별 묶음·공유·복사·전문가 영상 03 → 연구 지도 04 순서와 제품 독립 경계는 유지된다.",
+      "statement": "사업자 공유 보드의 전달 범위 상태 패널은 선택 자료 제목과 함께 포함된 원문 출처 수를 보여주고, 공유 링크에서도 같은 선택 범위가 유지된다는 점을 안내한다. 선택 자료 해제 칩을 같은 상태 패널에 통합하고 넓은 화면 자료 카드를 3열로 읽기 쉽게 정리했으며, 링크 공유 버튼과 3단계 전달 흐름을 명시한다. 개별 선택·목적별 묶음·공유·복사·전문가 영상 03 → 연구 지도 04 순서와 제품 독립 경계는 유지된다.",
       "evidence_refs": [
         "E-LOCAL-BUILD-SHARE-SOURCE-STATUS-20261009",
         "E-UI-CONTRACT-SHARE-SOURCE-STATUS-20261009",
@@ -3647,7 +3647,14 @@
         "E-DEPLOY-SHARE-SCOPE-COMPACT-20261009",
         "E-CDP-LIVE-SHARE-SCOPE-COMPACT-20261009",
         "E-LIVE-PUBLIC-SHARE-SCOPE-COMPACT-20261009",
-        "E-NAVI-STATE-SHARE-SCOPE-COMPACT-20261009"
+        "E-NAVI-STATE-SHARE-SCOPE-COMPACT-20261009",
+        "E-LOCAL-BUILD-SHARE-LINK-HANDOFF-20261009",
+        "E-UI-CONTRACT-SHARE-LINK-HANDOFF-20261009",
+        "E-PR-SHARE-LINK-HANDOFF-20261009",
+        "E-DEPLOY-SHARE-LINK-HANDOFF-20261009",
+        "E-CDP-LIVE-SHARE-LINK-HANDOFF-20261009",
+        "E-LIVE-PUBLIC-SHARE-LINK-HANDOFF-20261009",
+        "E-NAVI-STATE-SHARE-LINK-HANDOFF-20261009"
       ],
       "status": "SUPPORTED"
     }
@@ -23640,6 +23647,83 @@
       "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
       "captured_at": "2026-10-09T08:34:00+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-SCOPE-COMPACT",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-LINK-HANDOFF-20261009",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자 공유 보드의 선택 범위를 링크 공유로 명시하고 설명 영역과 전달 컨트롤을 분리한 변경이 로컬 UI contract·typecheck·127개 테스트·정적 릴리스 빌드·매니페스트·성능 예산을 통과했다.",
+      "locator": "feature commit f7b51490; pnpm run validate:ui-contract pass; pnpm run typecheck pass; pnpm test 127 pass/0 fail; Vite release build pass; release manifest pass; validate-performance totalAssets=1650637, initialJs=311475, initialCss=95703, budget totalAssets=1651000",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/f7b51490",
+      "captured_at": "2026-10-09T08:47:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-SHARE-LINK-HANDOFF",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-LINK-HANDOFF-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract이 선택 범위 링크 공유 라벨, 링크 공유 또는 내용 복사 단계, 공유 범위 안내와 설명 우선 레이아웃을 회귀 검사하며 전체 검사가 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; selected-scope link handoff; guide-share-flow; v178 share board reading rhythm; pnpm run validate:ui-contract pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/blob/main/scripts/validate-ui-contract.mjs",
+      "captured_at": "2026-10-09T08:47:00+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261009-SHARE-LINK-HANDOFF",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-PR-SHARE-LINK-HANDOFF-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자 공유 링크 전달 흐름과 데스크톱 읽기 레이아웃 보정 PR #736의 required checks가 통과하고 main에 병합됐다.",
+      "locator": "PR #736; release-verify pass; site-quality-verify pass; merge SHA a32beecdb372e715b971a5af939bdc4af9c34630",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/736",
+      "captured_at": "2026-10-09T08:47:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-SHARE-LINK-HANDOFF",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-DEPLOY-SHARE-LINK-HANDOFF-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main workflow가 정적 Pages 배포·라이브 smoke·release-status까지 성공했으며 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37861221916; head SHA a32beecdb372e715b971a5af939bdc4af9c34630; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37861221916",
+      "captured_at": "2026-10-09T08:47:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-SHARE-LINK-HANDOFF",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-CDP-LIVE-SHARE-LINK-HANDOFF-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL을 Chrome CDP fallback으로 390px과 1440px에서 점검해 선택 범위 링크 공유 라벨, 3단계 전달 흐름, 설명 폭, 버튼 줄바꿈·가로폭 안전, runtime error 0과 전문가 영상 선행 순서를 확인했다.",
+      "locator": "Chrome CDP 9223 fallback; public URL https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24&qa=live-link-copy#final; 390x844: buttons=2개 링크 공유/선택 2개 복사/전체 복사, scrollWidth=390, errors=[]; 1440: introWidth=790, textWidth=744, copyWidth=448.56, buttonOverflow=false, scrollWidth=1425, expert-videos before academic",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24&qa=live-link-copy#final",
+      "captured_at": "2026-10-09T08:47:00+09:00",
+      "reviewer_id": "NAVI-CDP-LIVE-QA-GABA-20261009-SHARE-LINK-HANDOFF",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-LINK-HANDOFF-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main merge candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info/; base=https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=a32beecdb372e715b971a5af939bdc4af9c34630; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-09T08:47:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-SHARE-LINK-HANDOFF",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-NAVI-STATE-SHARE-LINK-HANDOFF-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 선택 범위 링크 공유 문구·설명 우선 레이아웃·로컬 QA·UI contract·PR·Pages 배포·라이브 CDP·validator 결과를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "DEC-033; H-416; PR #736 merge SHA a32beecdb372e715b971a5af939bdc4af9c34630; workflow 37861221916; live candidate matched; status USER_DECISION; completion gate NOT_READY; Browser plugin 부재에 따른 Chrome CDP fallback; Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T08:47:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-LINK-HANDOFF",
       "claim_refs": ["C-321"]
     }
   ]

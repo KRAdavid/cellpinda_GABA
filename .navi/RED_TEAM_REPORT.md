@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 선택 범위 링크 공유와 설명 우선 레이아웃 — a32beecd — 2026-10-09
+
+- 공격 초점은 `공유` 라벨이 실제 전달 URL 범위를 설명하지 못하거나, 데스크톱에서 설명·조작 컨트롤이 좁아져 사업자가 선택 범위를 오인하는지였다.
+- 공개 390px에서 `2개 링크 공유`·`링크 공유 또는 내용 복사`·선택 자료 2개·원문 출처 2개·범위 유지 문구·`scrollWidth=390`·버튼 overflow 없음·runtime errors 0을 확인했다. 1440px에서 설명 폭 744px과 3개 전달 버튼의 overflow 없음 및 `scrollWidth=1425`를 확인했다. `expert-videos`가 `academic`보다 앞선 DOM 순서도 유지된다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 이번 변경은 공유 행동의 명시성과 정보 배치에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않는다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토를 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-321`, `E-CDP-LIVE-SHARE-LINK-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-LINK-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-LINK-HANDOFF-20261009`.
+
 ## Red-team recheck — 공유 자료 상태 패널 통합 및 데스크톱 3열 가독성 — 880e0042 — 2026-10-09
 
 - 공격 초점은 선택 자료 해제 동작이 상태 패널과 분리되어 보이거나, 3열 변경이 선택 수·원문 출처 수·공유 범위 안내·모바일 가로폭에 영향을 주는지였다.
