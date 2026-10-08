@@ -1888,8 +1888,8 @@ export default function PublicGabaGuide() {
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈"><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a>
         <nav id="guide-primary-navigation" className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
           <a href="#opening-bridge" aria-current={isNavCurrent('opening-bridge') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('opening-bridge'); }}>수면과 회복</a>
-          <a href="#history" aria-current={isNavCurrent('history') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견</a>
           <a href="#basics" aria-current={isNavCurrent('basics') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('basics'); }}>GABA란</a>
+          <a href="#expert-videos" aria-current={isNavCurrent('expert-videos') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('expert-videos'); }}>전문가 영상</a>
           <a href="#academic" aria-current={isNavCurrent('academic') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('academic'); }}>연구 지도</a>
           <a href="#applications" aria-current={isNavCurrent('applications') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a>
           <a href="#fermented-safety" aria-current={isNavCurrent('fermented-safety') ? 'location' : undefined} onClick={(event) => { event.preventDefault(); scrollTo('fermented-safety'); }}>발효·안전</a>
