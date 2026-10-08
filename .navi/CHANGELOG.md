@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-10-08 — 연구 지도 범위 라벨 한 줄 가독성 보정 및 공개 재검증
+
+- 모바일 연구 지도에서 `사람 대상 연구`·`동물·세포 연구`가 어절 단위로 끊겨 읽히던 문제를 `사람 연구`·`동물·세포` 한 줄 표시로 정리했다. 상세 연구 범위는 접근성 이름에 보존해 시각적 단순화와 정보의 정확한 전달을 함께 유지했다.
+- UI contract·typecheck·production build·127개 테스트·Pages 배포·라이브 390px 렌더와 연구 지도 선택 흐름을 재검증했다. 라벨 높이는 15px, pageWidth/scrollWidth는 390/390, runtime error는 0이며 피부 주제 선택은 `research-skin` 카드로 연결된다.
+- 코드 공개 candidate는 `77d14844c112c3ab246b36f4afb6b621c6aae501`이며 PR #668과 main workflow `37736676442`가 성공했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-293`, `E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008`, `E-UI-CONTRACT-RESEARCH-MAP-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008`.
+
 ## 1440px 데스크톱 직접 진입 시각 감리 — a576f740 — 2026-10-08
 
 - 공개 1440px에서 첫 화면·연구 지도·연구 상세·전문가 영상·최종 공유 장을 해시로 직접 열어 sticky 헤더 아래 제목 위치와 장 진입 흐름을 확인했다. 대표 장 모두 제목이 헤더 아래에 안정적으로 배치되고 가로폭은 `1425/1425`, runtime error는 0이었다.

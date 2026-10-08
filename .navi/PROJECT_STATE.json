@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T14:55:44+09:00",
+  "updated_at": "2026-10-08T15:19:54+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2407,6 +2407,21 @@
       "impact": "좁은 화면에서 헤더 컨트롤 간 충돌과 접근 가능한 조작 영역 침범 가능성을 줄인다.",
       "required_action": "다음 헤더·반응형 breakpoint 변경 시 280·320·390·430px 기하학 감사와 라이브 smoke를 함께 재검증",
       "owner": "QA"
+    },
+    {
+      "id": "AUD-022",
+      "severity": "MINOR",
+      "status": "CLOSED",
+      "statement": "모바일 연구 지도에서 사람·동물·세포 범위 라벨이 좁은 화면에서 어절 단위로 끊겨 보이는 잔여 가독성 리스크를 확인했다. 표시 라벨은 한 줄의 `사람 연구`·`동물·세포`로 정리하고 상세 연구 범위는 접근성 이름에 보존했으며, 로컬·Pages·라이브 390px에서 라벨 높이 15px과 가로폭 일치를 확인했다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008",
+        "E-UI-CONTRACT-RESEARCH-MAP-LABELS-20261008",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008",
+        "E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008"
+      ],
+      "impact": "모바일에서 연구 범위를 빠르게 스캔하면서도 상세 연구 조건을 보조기술 이름으로 잃지 않는다.",
+      "required_action": "다음 연구 지도 라벨·모바일 breakpoint 변경 시 280·390·1440px 또는 최소 390px과 라이브 검증을 재실행",
+      "owner": "QA"
     }
     ],
     "independent_from_execution": true,
@@ -2859,6 +2874,21 @@
       ],
       "impact": "좁은 화면에서 컨트롤 충돌·가로 넘침 회귀를 조기에 차단한다.",
       "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
+      "owner": "Red Team"
+    },
+    {
+      "id": "RT-022",
+      "severity": "MINOR",
+      "status": "CLOSED",
+      "statement": "공격 관점에서 390px 연구 지도 범위 라벨의 줄바꿈·가로 넘침·접근성 이름 불일치와 주제 선택 회귀를 확인했다. 표시 라벨은 한 줄로 유지되고 상세 범위는 전체 aria-label에 남으며 `피부` 선택이 `research-skin` 카드로 연결되고 신규 CRITICAL/MAJOR 결함은 없다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008",
+        "E-DEPLOY-PIPELINE-RESEARCH-MAP-LABELS-20261008",
+        "E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008",
+        "E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008"
+      ],
+      "impact": "연구 범위 축약이 실제 연구 조건을 숨기거나 지도 선택 흐름을 끊는 회귀를 방지한다.",
+      "required_action": "다음 라벨·접근성 이름·연구 지도 상호작용 변경 시 390px 실제 렌더와 선택 흐름을 재검증; Safari/iOS/Android·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
       "owner": "Red Team"
     }
     ],
@@ -6762,6 +6792,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T14:55:44+09:00"
+    },
+    {
+      "id": "H-383",
+      "event": "NAVI 자동 공개 배포 점검에서 모바일 연구 지도 범위 라벨이 `사람 대상 연 / 구`·`동물·세포 연 / 구`처럼 끊겨 보이는 잔여 가독성 리스크를 확인하고, 표시 라벨을 한 줄의 `사람 연구`·`동물·세포`로 정리했다. 상세 연구 범위는 버튼 `aria-label`에 보존해 시각적 단순화와 정보 접근성을 함께 유지했다. 로컬 UI contract·typecheck·pnpm test 127 pass·production build·정적 bundle·성능 예산을 통과했고, 390px 로컬·공개 렌더에서 라벨 높이 15px·pageWidth=scrollWidth=390·runtimeErrors=[]를 확인했으며, 두 번째 연구 지도 선택은 `research-skin` 카드로 연결됐다. 코드 PR #668의 main merge SHA `77d14844c112c3ab246b36f4afb6b621c6aae501`과 workflow `37736676442`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다. 공개 validator는 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 제품 독립 연구 카피·수치·출처 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chrome Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-293과 여섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T15:19:54+09:00"
     }
   ]
 }

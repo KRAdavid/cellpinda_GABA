@@ -3507,3 +3507,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-292`, `E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008`, `E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008`, `E-PR-NARROW-HEADER-FLEX-20261008`, `E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008`, `E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008`, `E-NAVI-STATE-NARROW-HEADER-FLEX-20261008`.
+
+## 모바일 연구 지도 범위 라벨 보정 — 77d14844 — 2026-10-08
+
+- AC-003/AC-004 모바일 가독성: PASS. 390px에서 연구 지도 범위 라벨이 어절 단위로 끊겨 보이던 리스크를 확인하고 표시 라벨을 한 줄의 `사람 연구`·`동물·세포`로 정리했다. 상세 연구 범위는 버튼 `aria-label`에 그대로 보존했다.
+- 자동 게이트: PASS. 로컬 UI contract·typecheck·production build·정적 bundle·성능 예산과 `pnpm test` 127 pass / 0 fail이 통과했다. 390px 로컬·공개 렌더에서 라벨 높이 15px, `pageWidth=scrollWidth=390`, runtime error 0을 확인했고, 지도 선택은 `research-skin` 카드로 연결됐다.
+- AC-001 공개 정합성: PASS. PR #668의 main merge SHA `77d14844c112c3ab246b36f4afb6b621c6aae501`과 workflow `37736676442`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 `STATIC_ONLY`로 skipped됐다. 공개 validator는 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 표시 라벨·접근성 이름·UI contract에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-293`, `E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008`, `E-UI-CONTRACT-RESEARCH-MAP-LABELS-20261008`, `E-PR-RESEARCH-MAP-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008`, `E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008`.
