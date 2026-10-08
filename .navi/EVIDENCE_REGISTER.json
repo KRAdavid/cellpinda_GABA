@@ -3282,6 +3282,18 @@
         "E-NAVI-STATE-BUSINESS-AUDIENCE-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-297",
+      "statement": "전문가 영상이 연구 지도보다 먼저 배치된 공개 안내서가 기본 개념·전문가 설명·연구 범위의 순서로 정렬되고, 관련 검증·정적 배포·라이브 공개 검사를 통과했다.",
+      "evidence_refs": [
+        "E-LOCAL-EXPERT-RESEARCH-ORDER-20261008",
+        "E-UI-CONTRACT-EXPERT-RESEARCH-ORDER-20261008",
+        "E-DEPLOY-EXPERT-RESEARCH-ORDER-20261008",
+        "E-LIVE-PUBLIC-EXPERT-RESEARCH-ORDER-20261008",
+        "E-NAVI-STATE-EXPERT-RESEARCH-ORDER-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -21184,6 +21196,61 @@
       "captured_at": "2026-10-08T17:34:00+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-BUSINESS-AUDIENCE",
       "claim_refs": ["C-296"]
+    },
+    {
+      "id": "E-LOCAL-EXPERT-RESEARCH-ORDER-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 선배치 변경이 production build·정적 bundle·성능 예산·typecheck·research copy·UI contract·127개 테스트를 통과했다.",
+      "locator": "main dda21807683d5f1fbe8d11621d431f273185c6a6; pnpm run validate:research-copy; pnpm run validate:ui-contract; pnpm exec tsc -b --pretty false; pnpm run build; pnpm test 127 pass; Pages-style total 1639903 <= 1650000; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/dda21807683d5f1fbe8d11621d431f273185c6a6",
+      "captured_at": "2026-10-08T11:45:54Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-EXPERT-RESEARCH-ORDER",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-297"]
+    },
+    {
+      "id": "E-UI-CONTRACT-EXPERT-RESEARCH-ORDER-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract와 연구 카피 검증이 전문가 영상을 연구 지도보다 먼저 두고, 전문가 영상 다음 이동을 연구 지도로 연결하는 계약을 확인했다.",
+      "locator": "scripts/validate-research-copy.mjs; scripts/validate-ui-contract.mjs; guideSectionOrder expert-videos < academic; hero route expert-videos before academic; expert-video handoff scrollTo academic; validate:research-copy PASS; validate:ui-contract PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/blob/main/scripts/validate-ui-contract.mjs",
+      "captured_at": "2026-10-08T11:45:54Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-EXPERT-RESEARCH-ORDER",
+      "claim_refs": ["C-004", "C-297"]
+    },
+    {
+      "id": "E-DEPLOY-EXPERT-RESEARCH-ORDER-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 선배치가 반영된 main merge SHA의 정적 Pages 배포와 라이브 smoke가 성공했다.",
+      "locator": "main workflow 37772073401; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass; PR #679 merge SHA dda21807683d5f1fbe8d11621d431f273185c6a6",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37772073401",
+      "captured_at": "2026-10-08T11:45:54Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-EXPERT-RESEARCH-ORDER",
+      "claim_refs": ["C-001", "C-005", "C-297"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-EXPERT-RESEARCH-ORDER-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL에서 정적 페이지가 HTTP 200으로 응답하고 배포 candidate가 main merge SHA와 일치하며 공개 데이터·제품 독립 경계가 유지됐다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=dda21807683d5f1fbe8d11621d431f273185c6a6; generatedAt=2026-10-08T11:45:54.562Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-08T11:45:54Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-EXPERT-RESEARCH-ORDER",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-297"]
+    },
+    {
+      "id": "E-NAVI-STATE-EXPERT-RESEARCH-ORDER-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록은 전문가 영상 선배치의 사용자 결정, 코드·계약·배포·라이브 검증 결과와 잔여 외부 검증 조건을 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-007; H-388; PR #679; merge SHA dda21807683d5f1fbe8d11621d431f273185c6a6; workflow 37772073401; live candidate matched; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T20:48:21+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-EXPERT-RESEARCH-ORDER",
+      "claim_refs": ["C-297"]
     }
   ]
 }

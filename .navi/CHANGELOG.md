@@ -1,5 +1,16 @@
 # Project Changelog
 
+## 2026-10-08 — 전문가 영상 선배치 및 연구 흐름 공개 재검증
+
+- 소비자가 GABA의 기본 개념을 읽은 직후 전문가의 설명을 먼저 보고, 그 다음 연구 지도로 확장하도록 실제 DOM 순서를 `03 · 전문가 영상 → 04 · 연구 지도`로 정리했다.
+- 진행 레일, 상단 메뉴, 히어로의 읽기 경로, 회복 브리지의 다음 안내, 전문가 영상의 다음 장, 성장 연구의 출처 읽기 연결과 정적 no-script fallback을 같은 순서로 맞췄다.
+- 공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았고, 연구 지도를 전문가 영상 다음에 배치하는 UI 계약을 추가했다.
+- PR #679 merge SHA `dda21807683d5f1fbe8d11621d431f273185c6a6`의 main workflow `37772073401`에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 최종 live validator는 `https://kradavid.github.io/gaba_info`에서 HTTP 200·`candidateSha=dda21807683d5f1fbe8d11621d431f273185c6a6`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 로컬 UI contract·research copy·typecheck·127개 테스트·Pages 성능 예산도 통과했다.
+- NAVI는 실제 고령 사용자 독해성·Safari/iOS/Android 실기기·독립 과학·규제 감수 조건 때문에 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-297`, `E-LOCAL-EXPERT-RESEARCH-ORDER-20261008`, `E-UI-CONTRACT-EXPERT-RESEARCH-ORDER-20261008`, `E-DEPLOY-EXPERT-RESEARCH-ORDER-20261008`, `E-LIVE-PUBLIC-EXPERT-RESEARCH-ORDER-20261008`, `E-NAVI-STATE-EXPERT-RESEARCH-ORDER-20261008`.
+
 ## 2026-10-08 — 사업자 전달 대상 선택·추천 카드 고도화 및 공개 재검증
 
 - 공유 보드에 소비자·사업자·교육 대상 선택을 추가하고, 해당 대상에 적합한 카드만 시각적으로 강조했다. 5개 전체 자료와 개별·전체 복사는 그대로 유지했다.
