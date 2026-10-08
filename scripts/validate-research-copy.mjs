@@ -22,7 +22,7 @@ const gabaStory = consumerSources['GabaStory.tsx'];
 const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml, gameDomain].join('\n');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
 if (!appSource.includes("requestedView === 'guide'") || !appSource.includes('<PublicGabaGuide/>') || !appSource.includes("currentPath === '/' && !requestedView && !sharedRhythmId")) fail('the public GABA guide must render at the root and preserve shared result routes');
-if (!publicGuide.includes('messageKit') || !publicGuide.includes('사업자용 GABA 핵심 5문장 · 바로 복사하기') || !publicGuide.includes("id: 'skin'") || !publicGuide.includes("id: 'immune'")) fail('the public GABA guide must expose the shareable business message kit and expanded GABA topics');
+if (!publicGuide.includes('messageKit') || !publicGuide.includes('사업자용 GABA 공유 자료 · 바로 복사하기') || !publicGuide.includes('사람 연구 결과') || !publicGuide.includes("id: 'skin'") || !publicGuide.includes("id: 'immune'")) fail('the public GABA guide must expose the shareable business message kit and expanded GABA topics');
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
 if (research.length === 0) fail('at least one approved research claim is required');
 const publicResearchCopy = JSON.stringify(research);
