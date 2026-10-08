@@ -643,12 +643,13 @@
 .guide-outcome-chart-note-limit{color:#6f8795;font-size:12px;line-height:1.5}
 
 /* v14 share kit: make one-tap business reuse visible before the copy details. */
-.guide-share-intro{display:flex;align-items:center;justify-content:space-between;gap:22px;max-width:790px;margin-top:34px;padding:20px 22px;border:1px solid rgba(145,219,217,.28);border-radius:17px;background:linear-gradient(105deg,rgba(18,154,163,.2),rgba(255,255,255,.055));box-shadow:0 12px 28px rgba(3,20,39,.12)}
-.guide-share-intro>div{display:grid;gap:5px}
+/* v178 share board reading rhythm: keep the explanation wide and controls aligned beneath it. */
+.guide-share-intro{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;max-width:790px;margin-top:34px;padding:20px 22px;border:1px solid rgba(145,219,217,.28);border-radius:17px;background:linear-gradient(105deg,rgba(18,154,163,.2),rgba(255,255,255,.055));box-shadow:0 12px 28px rgba(3,20,39,.12)}
+.guide-share-intro>div{display:grid;gap:5px;min-width:0}
 .guide-share-intro span{color:#8ed9d7;font-size:11px;font-weight:900;letter-spacing:.1em}
 .guide-share-intro strong{color:#fff;font-size:17px;letter-spacing:-.045em}
 .guide-share-intro p{margin:0;color:#b8d1da;font-size:13px;line-height:1.65;letter-spacing:-.03em}
-.guide-share-intro-actions{display:flex!important;align-items:flex-end;gap:8px;flex:0 0 auto}
+.guide-share-intro-actions{display:grid!important;grid-template-columns:minmax(120px,.7fr) minmax(120px,.7fr) minmax(0,2.2fr);align-items:end;gap:8px}
 .guide-share-copy-all{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:34px;padding:0 11px;border:1px solid rgba(145,219,217,.5);border-radius:10px;background:rgba(255,255,255,.1);color:#e4fbf8;font-size:11px;font-weight:850;letter-spacing:-.04em;white-space:nowrap;transition:background .18s ease,border-color .18s ease,transform .18s ease}
 .guide-share-copy-all:hover,.guide-share-copy-all:focus-visible{border-color:#9be4df;background:rgba(255,255,255,.18);transform:translateY(-1px)}
 .guide-share-copy-all:focus-visible{outline:3px solid rgba(131,222,217,.3);outline-offset:3px}.guide-share-copy-all.is-copied{border-color:#7bc7a5;background:rgba(109,207,158,.16);color:#c5f4d9}.guide-share-copy-all-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
@@ -769,7 +770,7 @@
 .guide-share-audience{display:grid;gap:5px;min-width:110px;color:#b8d1da;font-size:11px;font-weight:800;letter-spacing:-.03em}
 .guide-share-audience select{width:100%;min-height:44px;padding:0 28px 0 11px;border:1px solid rgba(145,219,217,.42);border-radius:10px;background:#173d5b;color:#f1fbfb;font:inherit;font-size:13px;font-weight:850;outline:none}
 .guide-share-audience select:focus-visible{outline:3px solid rgba(131,222,217,.3);outline-offset:3px}
-.guide-share-copy-actions{display:flex;align-items:center;gap:7px}
+.guide-share-copy-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:7px}
 .guide-share-copy-actions .guide-share-copy-all{min-height:44px}
 .guide-share-copy-all-secondary{border-color:rgba(206,229,237,.28);background:transparent;color:#c4d9e2}
 .guide-share-full-copy-label-compact{display:none}
