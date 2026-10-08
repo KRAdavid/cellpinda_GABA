@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-09T04:40:00+09:00",
+  "updated_at": "2026-10-09T05:03:33+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6960,6 +6960,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-09T04:40:00+09:00"
+    },
+    {
+      "id": "H-407",
+      "event": "NAVI 자동 공개 배포 점검에서 사업자가 개별 문장을 복사해 전달할 때 현재 선택된 다른 자료 묶음이 링크에 남아 수신자가 복사한 문장과 다른 자료를 열 수 있는 맥락 손실을 확인하고, 개별 복사 링크를 `materials=1 << index`로 보정했다. 선택되지 않은 카드도 복사한 문장과 동일한 자료로 다시 열리며 목적별 묶음·전체 복사·출처·전문가 영상 03 → 연구 지도 04 순서와 제품 독립 경계는 유지했다. 로컬 UI contract·typecheck·pnpm test 127 pass·production build·정적 bundle·성능 예산을 통과했고 PR #720 required checks, main merge SHA 3dbd06d6a7edc8bd74f4f2c7a542a90cbb571fc9의 workflow 37836066377 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY로 skipped됐다. 공개 validator는 candidate SHA 3dbd06d6a7edc8bd74f4f2c7a542a90cbb571fc9·HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome CDP fallback 390px에서 materials=24 상태의 첫 카드 개별 복사 링크가 materials=1로 생성되고 선택 요약·전문가 영상 → 연구 지도 순서·가로폭·runtime errors 0을 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재에 따른 Chrome CDP fallback, 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-316과 관련 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-09T05:03:33+09:00"
     }
   ]
 }

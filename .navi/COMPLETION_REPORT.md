@@ -1,5 +1,13 @@
 # Completion Report
 
+## 개별 공유 자료 링크 범위 정합성 보정 및 공개 배포 — 2026-10-09
+
+- 구현·검토: 사업자 공유 보드의 개별 `문장 복사`가 현재 선택 묶음이 아니라 실제 복사한 카드 하나를 가리키도록 `materials` 범위를 보정했다. 선택되지 않은 카드도 복사한 문장과 동일한 자료로 다시 열리며, 묶음 공유·전체 복사·출처·전문가 영상 03 → 연구 지도 04 흐름은 유지된다.
+- 검증: PR #720 merge SHA `3dbd06d6a7edc8bd74f4f2c7a542a90cbb571fc9`, main workflow `37836066377`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 Chrome CDP fallback을 확인했다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 build·성능 예산·라이브 smoke가 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 모바일 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-316`, `E-LOCAL-BUILD-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-UI-CONTRACT-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-CDP-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-PR-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-DEPLOY-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-CDP-LIVE-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-LIVE-PUBLIC-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-NAVI-STATE-INDIVIDUAL-SHARE-SCOPE-20261009`.
+
 ## 사업자 공유 자료 선택 범위 표기 명확화 및 공개 배포 — 2026-10-09
 
 - 구현·검토: 공유 자료 카드 목록 상단을 `선택 2개 · 전체 5개`로 명확화해 사업자가 현재 전달 범위와 전체 자료 수를 즉시 구분하도록 했다. 전문가 영상 `03` → 연구 지도 `04` 흐름과 제품 독립 경계는 유지했다.
