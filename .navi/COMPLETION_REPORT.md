@@ -3253,3 +3253,14 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-319`, `E-LOCAL-BUILD-SHARE-HANDOFF-20261009`, `E-UI-CONTRACT-SHARE-HANDOFF-20261009`, `E-PR-SHARE-HANDOFF-20261009`, `E-DEPLOY-SHARE-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-HANDOFF-20261009`.
+
+## Completion gate recheck — NAVI 문서 병합 후 최종 공개 provenance — 2026-10-09
+
+- AC-001 공개 정합성: PASS. PR #727 merge SHA `dc368d620bc17fb7a50ba6917fed9461273685d4`의 workflow `37850356749`가 release-verify·worker-readiness·deploy-pages·smoke-live·release-status 성공을 기록했고, 공개 validator가 동일 candidate를 확인했다.
+- AC-004/AC-005: PASS. 문서-only 병합으로 기능 코드·모바일 상호작용·`03 · 전문가 영상 → 04 · 연구 지도` 순서·사업자 공유 상태는 변경되지 않았으며 공개 bundle hash 73개와 라이브 정합성을 확인했다.
+- AC-006 제품 독립 경계: PASS. `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`가 유지됐다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. 외부 브라우저·실기기·실사용자·독립 과학·규제 검증은 완료 게이트 밖의 조건으로 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-319`, `E-LIVE-PUBLIC-NAVI-FINAL-20261009`, `E-NAVI-STATE-NAVI-FINAL-20261009`.

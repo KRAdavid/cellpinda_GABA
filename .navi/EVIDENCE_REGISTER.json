@@ -3606,7 +3606,9 @@
         "E-DEPLOY-SHARE-HANDOFF-20261009",
         "E-CDP-LIVE-SHARE-HANDOFF-20261009",
         "E-LIVE-PUBLIC-SHARE-HANDOFF-20261009",
-        "E-NAVI-STATE-SHARE-HANDOFF-20261009"
+        "E-NAVI-STATE-SHARE-HANDOFF-20261009",
+        "E-LIVE-PUBLIC-NAVI-FINAL-20261009",
+        "E-NAVI-STATE-NAVI-FINAL-20261009"
       ],
       "status": "SUPPORTED"
     }
@@ -23302,6 +23304,28 @@
       "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
       "captured_at": "2026-10-09T06:50:00+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-HANDOFF",
+      "claim_refs": ["C-319"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NAVI-FINAL-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 문서 병합 후 최종 공개 URL이 최신 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info/; base=https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=dc368d620bc17fb7a50ba6917fed9461273685d4; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-09T07:00:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-FINAL-SYNC",
+      "claim_refs": ["C-319"]
+    },
+    {
+      "id": "E-NAVI-STATE-NAVI-FINAL-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 문서 병합 후 최종 공개 candidate·Pages 배포·라이브 validator 정합성을 기록하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "H-411; PR #727 merge SHA dc368d620bc17fb7a50ba6917fed9461273685d4; workflow 37850356749; live candidate matched; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T07:00:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-FINAL-SYNC",
       "claim_refs": ["C-319"]
     }
   ]

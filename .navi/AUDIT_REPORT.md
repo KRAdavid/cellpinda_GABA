@@ -3811,6 +3811,14 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-319`, `E-LOCAL-BUILD-SHARE-HANDOFF-20261009`, `E-UI-CONTRACT-SHARE-HANDOFF-20261009`, `E-PR-SHARE-HANDOFF-20261009`, `E-DEPLOY-SHARE-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-HANDOFF-20261009`.
 
+## 최종 공개 provenance 동기화 — 2026-10-09
+
+- NAVI 문서 병합 후 main merge SHA `dc368d620bc17fb7a50ba6917fed9461273685d4`와 공개 candidate가 일치했다.
+- 공개 validator는 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`provenance=matched`를 확인했다. 기능 코드·`03 · 전문가 영상 → 04 · 연구 지도` 순서·공유 보드 동작은 변경되지 않았다.
+- 신규 CRITICAL/MAJOR 결함은 확인되지 않았으며 `USER_DECISION / NOT_READY`와 외부 검증 조건을 유지한다.
+
+증적: `C-319`, `E-LIVE-PUBLIC-NAVI-FINAL-20261009`, `E-NAVI-STATE-NAVI-FINAL-20261009`.
+
 ## 모바일 연구 지도 범위 라벨 보정 — 77d14844 — 2026-10-08
 
 - AC-003/AC-004 모바일 가독성: PASS. 390px에서 연구 지도 범위 라벨이 어절 단위로 끊겨 보이던 리스크를 확인하고 표시 라벨을 한 줄의 `사람 연구`·`동물·세포`로 정리했다. 상세 연구 범위는 버튼 `aria-label`에 그대로 보존했다.

@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-09T06:50:00+09:00",
+  "updated_at": "2026-10-09T07:00:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2460,7 +2460,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-09T06:50:00+09:00"
+    "last_run_at": "2026-10-09T07:00:00+09:00"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2960,7 +2960,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-09T06:50:00+09:00"
+    "last_run_at": "2026-10-09T07:00:00+09:00"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -7054,6 +7054,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-09T06:50:00+09:00"
+    },
+    {
+      "id": "H-411",
+      "event": "NAVI 문서 병합 후 최종 공개 provenance를 재확인했다. PR #727의 main merge SHA dc368d620bc17fb7a50ba6917fed9461273685d4와 workflow 37850356749의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 STATIC_ONLY로 skipped됐다. 공개 validator는 HTTP 200·STATIC·candidate SHA dc368d620bc17fb7a50ba6917fed9461273685d4·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 기능 코드와 공개 읽기 순서 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`, 사업자 공유 선택 상태·출처·제품 독립 경계는 변경되지 않았다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-319의 최종 공개 증거를 보강한다.",
+      "from_status": "USER_DECISION",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-09T07:00:00+09:00"
     }
   ]
 }

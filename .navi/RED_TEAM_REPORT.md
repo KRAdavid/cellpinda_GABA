@@ -2966,6 +2966,14 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-319`, `E-UI-CONTRACT-SHARE-HANDOFF-20261009`, `E-DEPLOY-SHARE-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-HANDOFF-20261009`.
 
+## 최종 공개 provenance 공격 점검 — 2026-10-09
+
+- 문서-only 병합 뒤 공개 candidate가 main merge SHA와 다른 상태로 남는지 확인했으며 불일치는 재현되지 않았다.
+- HTTP 200·STATIC·bundle hash 73개·공개 데이터 경계·`provenance=matched`를 재현했다. 기능 코드·전문가 영상 선행 순서·공유 선택 상태는 변경되지 않았다.
+- 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chrome fallback의 외부 브라우저·실기기·실사용자·독립 과학·규제 검증 한계와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-319`, `E-LIVE-PUBLIC-NAVI-FINAL-20261009`, `E-NAVI-STATE-NAVI-FINAL-20261009`.
+
 ## Red-team recheck — 공유 내용 미리보기 — c4671fde — 2026-10-09
 
 - 공유 전에 실제 선택 문장·출처가 표시되는지, 기본 접힘 상태가 본문 흐름을 방해하지 않는지, 빠른 선택 변경 뒤 낡은 내용이 남지 않는지 확인했다.

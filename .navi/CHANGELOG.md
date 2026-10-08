@@ -2699,3 +2699,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재와 Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
 
 증적: `C-319`, `E-LOCAL-BUILD-SHARE-HANDOFF-20261009`, `E-UI-CONTRACT-SHARE-HANDOFF-20261009`, `E-PR-SHARE-HANDOFF-20261009`, `E-DEPLOY-SHARE-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-HANDOFF-20261009`.
+
+# 2026-10-09 — NAVI 문서 병합 후 최종 공개 provenance 동기화 — dc368d62
+
+- PR #727 문서 병합 후 main candidate와 GitHub Pages 공개 candidate의 정합성을 재확인했다.
+- 공개 validator는 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- 기능 코드·사업자 공유 상태·출처·제품 독립 경계·`03 · 전문가 영상 → 04 · 연구 지도` 순서는 변경되지 않았다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-319`, `E-LIVE-PUBLIC-NAVI-FINAL-20261009`, `E-NAVI-STATE-NAVI-FINAL-20261009`.
