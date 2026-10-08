@@ -659,7 +659,7 @@
 .guide-share-lines summary:after{content:'+';color:#9edcdb;font-size:20px;font-weight:400;line-height:1}
 .guide-share-lines[open] summary:after{content:'−'}
 .guide-share-lines summary>b{margin-left:auto;color:#c2e6e5;font-size:12px;font-weight:800}
-.guide-share-lines article.is-recommended{border-color:rgba(145,219,217,.6);background:rgba(18,154,163,.14)}
+.guide-share-lines article.is-rec{border-color:#91dbd9}
 @media(max-width:700px){
   /* v170 mobile share kit: let the headline read as one editorial block before the copy controls. */
   .guide-share-intro{display:grid;grid-template-columns:minmax(0,1fr);align-items:start;gap:14px;margin-top:28px;padding:18px}
