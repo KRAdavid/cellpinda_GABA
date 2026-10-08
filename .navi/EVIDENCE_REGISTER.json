@@ -3308,6 +3308,21 @@
         "E-NAVI-STATE-AUDIENCE-SHARE-CLARITY-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-299",
+      "statement": "공개 GABA 자료 모음이 사업자 우선 기본 대상과 대상별 동적 제목·접근성 안내·추천 복사를 제공하고, 공개 배포·라이브 모바일 상호작용 검사를 통과했다.",
+      "evidence_refs": [
+        "E-USER-BUSINESS-FIRST-SHARE-20261008",
+        "E-LOCAL-BUILD-BUSINESS-FIRST-SHARE-20261008",
+        "E-UI-CONTRACT-BUSINESS-FIRST-SHARE-20261008",
+        "E-CDP-BUSINESS-FIRST-SHARE-20261008",
+        "E-PR-BUSINESS-FIRST-SHARE-20261008",
+        "E-DEPLOY-BUSINESS-FIRST-SHARE-20261008",
+        "E-LIVE-PUBLIC-BUSINESS-FIRST-SHARE-20261008",
+        "E-NAVI-STATE-BUSINESS-FIRST-SHARE-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -21342,6 +21357,93 @@
       "captured_at": "2026-10-08T21:21:35+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-AUDIENCE-SHARE-CLARITY",
       "claim_refs": ["C-298"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-BUSINESS-FIRST-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자 기본 대상·대상별 동적 공유 보드 변경이 UI contract·research copy·typecheck·127개 테스트·Pages build·정적 bundle·성능 예산을 통과했다.",
+      "locator": "feature main 4c4e38915b6e24594bc461384442fffbd99c8f6f; pnpm run validate:research-copy; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 pass; pnpm run build; validate:performance initial JS 311405, initial CSS 95703, total 1643341 <= 1650000; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/4c4e38915b6e24594bc461384442fffbd99c8f6f",
+      "captured_at": "2026-10-08T12:34:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-BUSINESS-FIRST-SHARE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-299"]
+    },
+    {
+      "id": "E-UI-CONTRACT-BUSINESS-FIRST-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 사업자 기본값과 소비자·사업자·교육 대상별 동적 제목·접근성 안내·추천 복사 수를 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; useState(31); activeMessageAudienceLabel; selected audience options; aria-label and summary use activeMessageAudienceLabel; 추천 5개 복사; 전체 5개; validate:ui-contract status=ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/blob/main/scripts/validate-ui-contract.mjs",
+      "captured_at": "2026-10-08T12:34:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-BUSINESS-FIRST-SHARE",
+      "claim_refs": ["C-004", "C-299"]
+    },
+    {
+      "id": "E-CDP-BUSINESS-FIRST-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px에서 사업자 기본 추천 5개와 소비자 전환 추천 3개를 확인하고, 5개 카드·가로폭 정합성·runtime error 0을 유지했다.",
+      "locator": "Chrome CDP fallback against https://kradavid.github.io/gaba_info/?view=guide; viewport 390x844; initial {width:390,scrollWidth:390,audience:31,recommended:5,cards:5,errors:[]}; after audience=21 {intro:'소비자용 공유 자료',recommended:3}; screenshots inspected with view_image; Browser plugin unavailable",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#final",
+      "captured_at": "2026-10-08T12:40:00Z",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-BUSINESS-FIRST-SHARE",
+      "claim_refs": ["C-001", "C-004", "C-299"]
+    },
+    {
+      "id": "E-PR-BUSINESS-FIRST-SHARE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자 우선 공유 보드 변경 PR #684의 보호 검사가 성공하고 main에 병합됐다.",
+      "locator": "PR #684 release-verify run 37777942931 pass; site-quality-verify run 37777942947 pass; merge SHA 4c4e38915b6e24594bc461384442fffbd99c8f6f",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/684",
+      "captured_at": "2026-10-08T12:37:14Z",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261008-BUSINESS-FIRST-SHARE",
+      "claim_refs": ["C-001", "C-005", "C-299"]
+    },
+    {
+      "id": "E-DEPLOY-BUSINESS-FIRST-SHARE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main candidate의 Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37778173337; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass; final merge SHA 4c4e38915b6e24594bc461384442fffbd99c8f6f",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37778173337",
+      "captured_at": "2026-10-08T12:39:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-BUSINESS-FIRST-SHARE",
+      "claim_refs": ["C-001", "C-005", "C-299"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-BUSINESS-FIRST-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main candidate와 일치하고 공개 데이터 경계·공유 페이지·제품 독립 조건이 유지됐다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=4c4e38915b6e24594bc461384442fffbd99c8f6f; generatedAt=2026-10-08T12:38:31.398Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-08T12:40:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-BUSINESS-FIRST-SHARE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-299"]
+    },
+    {
+      "id": "E-NAVI-STATE-BUSINESS-FIRST-SHARE-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 사업자 우선 기본값·동적 대상 라벨·PR·배포·라이브 모바일 검증을 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-009; H-390; PR #684; merge SHA 4c4e38915b6e24594bc461384442fffbd99c8f6f; workflow 37778173337; live candidate matched; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T21:41:21+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-BUSINESS-FIRST-SHARE",
+      "claim_refs": ["C-299"]
+    },
+    {
+      "id": "E-USER-BUSINESS-FIRST-SHARE-20261008",
+      "kind": "DECISION",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사용자가 사업자가 공개 GABA 자료를 활용해 다른 사업자와 소비자에게 전달하는 목적을 우선 목표로 제시했다.",
+      "locator": "현재 목표: 사업자가 원하는 정보를 보기 편하게 하고 공유할 정보를 모아서 다른 사업자나 소비자에게 전달할 수 있게하는 아이디어 검토하고 반영해줘; 이전 사용자 지시: 가장 첫번째 목표는 사업자들이 이 자료를 활용하여 가바가 중요한 성분임을 알리는 것",
+      "captured_at": "2026-10-08T21:41:21+09:00",
+      "reviewer_id": "현재 사용자",
+      "claim_refs": ["C-299"]
     }
   ]
 }

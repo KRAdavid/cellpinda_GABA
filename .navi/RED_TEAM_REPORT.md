@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 사업자 우선 공유 보드·대상별 문구 동기화 공격 재점검 — main 4c4e3891 — 2026-10-08
+
+- 공격 초점은 첫 진입 대상이 사업자로 고정되는지, 소비자·교육 전환 뒤 제목·ARIA·추천 수가 서로 어긋나지 않는지, 전체 자료 접근이 사라지지 않는지, 모바일 가로 넘침·runtime error가 생기지 않는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 공개 390px에서 사업자 기본 `추천 5개 복사`, 소비자 전환 뒤 `소비자용 공유 자료`·`추천 3개 복사`, 5개 카드 유지, `scrollWidth=390`, runtime errors 0을 확인했다.
+- PR #684 보호 검사와 main workflow `37778173337`의 Pages 배포·라이브 smoke·release-status가 성공했다. Browser plugin 부재를 Chrome CDP fallback으로 보완했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 대신하지 못한다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-299`, `E-UI-CONTRACT-BUSINESS-FIRST-SHARE-20261008`, `E-CDP-BUSINESS-FIRST-SHARE-20261008`, `E-PR-BUSINESS-FIRST-SHARE-20261008`, `E-DEPLOY-BUSINESS-FIRST-SHARE-20261008`, `E-LIVE-PUBLIC-BUSINESS-FIRST-SHARE-20261008`, `E-NAVI-STATE-BUSINESS-FIRST-SHARE-20261008`.
+
 ## 대상별 공유 묶음·전체 자료 복사 공격 재점검 — main f69df003 — 2026-10-08
 
 - 공격 초점은 `자료 모음` 바로가기가 실제 마지막 자료 보드로 연결되는지, 대상 선택이 자료를 숨겨 버리지 않는지, 추천 묶음과 전체 묶음 복사가 서로 혼동되지 않는지, 개별 카드의 출처·제품 독립 경계가 유지되는지였다.

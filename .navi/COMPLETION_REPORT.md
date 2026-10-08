@@ -1,5 +1,15 @@
 # Completion Report
 
+## 사업자 우선 공유 보드·대상별 문구 동기화 공개 검증 — main 4c4e3891 — 2026-10-08
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 사업자 기본 추천 5개, 소비자 전환 추천 3개, 대상별 제목·ARIA·개별 문장 복사가 공개 안내서에서 동작한다. 로컬 계약·연구 카피·typecheck·127개 테스트·production build·정적 bundle·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.
+- AC-006: `PASS`. 이번 변경은 공유 보드의 우선 대상과 동적 라벨 정합성에 한정되며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계를 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px CDP에서 사업자 기본 5개→소비자 전환 3개, 카드 5개, scrollWidth 390, runtime errors 0을 확인했다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 최종 main SHA `4c4e38915b6e24594bc461384442fffbd99c8f6f`와 공개 candidate가 일치하며 workflow `37778173337`이 성공했다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-299`, `E-LOCAL-BUILD-BUSINESS-FIRST-SHARE-20261008`, `E-UI-CONTRACT-BUSINESS-FIRST-SHARE-20261008`, `E-CDP-BUSINESS-FIRST-SHARE-20261008`, `E-PR-BUSINESS-FIRST-SHARE-20261008`, `E-DEPLOY-BUSINESS-FIRST-SHARE-20261008`, `E-LIVE-PUBLIC-BUSINESS-FIRST-SHARE-20261008`, `E-NAVI-STATE-BUSINESS-FIRST-SHARE-20261008`.
+
 ## 대상별 공유 묶음·전체 자료 복사 공개 검증 — main f69df003 — 2026-10-08
 
 - AC-001/AC-003/AC-004/AC-005: `PASS`. 자료 모음 바로가기, 대상별 추천 카드, 추천 묶음 복사, 전체 5개 복사, 개별 문장 복사가 공개 안내서의 읽기 흐름과 함께 동작한다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.

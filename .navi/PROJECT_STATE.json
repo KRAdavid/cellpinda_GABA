@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T21:21:35+09:00",
+  "updated_at": "2026-10-08T21:41:21+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6841,6 +6841,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T21:21:35+09:00"
+    },
+    {
+      "id": "H-390",
+      "event": "NAVI 자동 공개 배포 점검에서 사업자 확산을 우선하기 위해 자료 모음의 기본 대상을 사업자로 변경하고, 소비자·교육 전환 시 공유 보드 제목·ARIA 안내·추천 복사 수를 동기화했다. 코드 PR #684 merge SHA 4c4e38915b6e24594bc461384442fffbd99c8f6f의 main workflow 37778173337에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 STATIC_ONLY로 skipped됐다. 로컬 UI contract·research copy·typecheck·pnpm test 127 pass·production build·정적 bundle·성능 예산을 통과했다. 공개 validator는 HTTP 200·STATIC·candidate SHA 일치·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. Chrome CDP fallback 공개 390px에서는 사업자 기본 audience=31·추천 5개·카드 5개·scrollWidth 390·runtime errors 0, 소비자 전환 audience=21·추천 3개·소비자용 제목을 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 제품 독립 연구 카피·수치·출처 경계는 변경하지 않았다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-299와 관련 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T21:41:21+09:00"
     }
   ]
 }

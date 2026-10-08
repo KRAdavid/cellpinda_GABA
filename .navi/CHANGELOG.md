@@ -1,5 +1,16 @@
 # Project Changelog
 
+## 2026-10-08 — 사업자 우선 공유 보드와 대상별 문구 동기화 공개 배포
+
+- 자료 모음의 기본 전달 대상을 사업자로 변경해 첫 진입에서 `사업자용 공유 자료 · 추천 5개 복사`가 보이도록 했다. 소비자·교육 대상은 선택 즉시 추천 수와 강조 카드가 바뀐다.
+- 공유 보드의 제목·ARIA 안내·상세 자료 요약을 선택 대상과 동기화해 `소비자용 공유 자료` 등 잘못된 고정 문구가 남지 않도록 했다.
+- UI contract와 연구 카피 검사가 동적 대상 라벨·사업자 기본값을 검증하도록 갱신됐다. 연구 결과·출처·제품 독립 경계는 변경하지 않았다.
+- PR #684 merge SHA `4c4e38915b6e24594bc461384442fffbd99c8f6f`의 main workflow `37778173337`에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 최종 live validator는 HTTP 200·`candidateSha=4c4e38915b6e24594bc461384442fffbd99c8f6f`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. Chrome CDP fallback 공개 390px에서 사업자 기본 추천 5개, 소비자 전환 추천 3개, 카드 5개, scrollWidth 390, runtime errors 0을 확인했다.
+- NAVI는 실제 고령 사용자 독해성·Safari/iOS/Android 실기기·독립 과학·규제 감수 조건 때문에 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-299`, `E-LOCAL-BUILD-BUSINESS-FIRST-SHARE-20261008`, `E-UI-CONTRACT-BUSINESS-FIRST-SHARE-20261008`, `E-CDP-BUSINESS-FIRST-SHARE-20261008`, `E-PR-BUSINESS-FIRST-SHARE-20261008`, `E-DEPLOY-BUSINESS-FIRST-SHARE-20261008`, `E-LIVE-PUBLIC-BUSINESS-FIRST-SHARE-20261008`, `E-NAVI-STATE-BUSINESS-FIRST-SHARE-20261008`.
+
 ## 2026-10-08 — 대상별 공유 묶음·전체 자료 복사 고도화 및 공개 재검증
 
 - 마지막 자료 모음에 `자료 모음` 바로가기를 연결하고, 소비자·사업자·교육 대상 선택에 따라 추천 자료를 먼저 표시했다. 추천 카드에는 `추천` 표지를 붙이고, 추천 묶음 복사·전체 5개 복사·개별 문장 복사를 분리했다.
