@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 사업자 공유 자료 원문 연결 및 공개 배포
+
+- 사람 연구·발효 안전 연구 카드 안의 `출처 · 논문명`을 직접 열 수 있게 연결하고, 추천 자료 복사·공유 payload에 원문 PubMed URL을 보존했다. 별도 중간 출처 보드를 늘리지 않아 결과와 근거가 같은 카드 안에서 이어진다.
+- 로컬 UI contract·typecheck·research copy·`pnpm test` 127 pass·production build를 통과했고, `/gaba_info/` 배포 경로 번들도 1,649,944바이트로 성능 예산을 통과했다. PR #705와 heartbeat PR #706을 보호 검사 후 병합했다.
+- main workflow `37813681399`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 Worker는 `STATIC_ONLY`로 skipped됐다. 공개 validator는 HTTP 200·`candidateSha=d75eab09660b65128360c23e2b91a7268c6bd611`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- 공개 Chrome CDP fallback 390px에서 사업자 추천 5개·소비자 추천 3개·카드 내 원문 링크 2개·두 PubMed URL이 포함된 공유 payload·가로폭 일치·runtime errors 0, `03 · 전문가 영상 → 04 · 연구 지도` 순서와 handoff 도착을 재현했다. Browser plugin 부재·실제 공유 시트·실기기·실사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: `C-309`, `E-LOCAL-BUILD-SHARE-SOURCES-20261009`, `E-UI-CONTRACT-SHARE-SOURCES-20261009`, `E-CDP-SHARE-SOURCES-20261009`, `E-PR-SHARE-SOURCES-20261009`, `E-TF-PULSE-REFRESH-SHARE-SOURCES-20261009`, `E-DEPLOY-SHARE-SOURCES-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCES-20261009`, `E-NAVI-STATE-SHARE-SOURCES-20261009`.
+
 ## 2026-10-09 — 연구 카드 직접 공유와 전문가 영상 선배치 고정
 
 - 연구 지도 5개 카드에 `결과·출처 공유` 액션을 추가했다. Web Share가 가능한 환경에서는 연구 제목·연구 대상과 방법·관찰된 결과·해석 범위·출처·공개 안내서 딥링크를 한 번에 전달하고, 미지원 또는 권한 실패 환경에서는 기존 `결과·출처 복사`로 자동 전환한다.

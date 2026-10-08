@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Red-team recheck — 사업자 공유 자료 원문 연결 및 배포 — d75eab09 — 2026-10-09
+
+- 공격 초점은 카드 안의 원문 링크가 연구 결과와 분리되어 사라지는지, 복사·공유 payload에서 출처 URL이 빠지는지, 좁은 화면에서 링크가 넘치거나 공유 흐름을 가리는지였다.
+- 공개 390px에서 사람 연구·발효 안전 연구 링크 2개가 각각 58px 터치 높이로 표시됐고, 사업자 5개·소비자 3개 추천 전환, `scrollWidth=390`, runtime errors 0을 확인했다. 두 PubMed URL은 mock Web Share payload에 포함됐다.
+- 실제 DOM 순서는 `03 · 전문가 영상 → 04 · 연구 지도 → 05 · 일상 속 GABA`이며 handoff 클릭 후 연구 지도 제목이 상단 기준선에 도착했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- PR #705·heartbeat PR #706과 main workflow `37813681399`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android·실사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-309`, `E-CDP-SHARE-SOURCES-20261009`, `E-TF-PULSE-REFRESH-SHARE-SOURCES-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCES-20261009`, `E-NAVI-STATE-SHARE-SOURCES-20261009`.
+
 ## Red-team recheck — 연구 카드 직접 공유와 전문가 영상 선배치 — a3d690e0 — 2026-10-09
 
 - 공격 초점은 연구 카드의 직접 공유가 연구 범위·관찰 결과·해석 한계를 생략하는지, 공유 버튼이 기존 출처 보존 복사를 대체하는지, 그리고 `03 · 전문가 영상 → 04 · 연구 지도` 순서가 모바일에서 회귀하는지였다.

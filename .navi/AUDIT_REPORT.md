@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 공유 자료 원문 연결 및 공개 배포 검증 — main d75eab09 — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 사람 연구·발효 안전 연구 카드의 출처 라벨을 직접 링크로 연결하고, 추천 자료 복사·공유 payload에 PubMed 원문 URL을 포함했다. 카드 안에서 결과와 출처가 이어져 별도 중간 이동 없이 확인할 수 있다.
+- AC-004: `PASS`. 공개 Chrome CDP fallback 390px에서 사업자 추천 5개·소비자 추천 3개·카드 원문 링크 2개(각 링크 58px)·`scrollWidth=390`·runtime errors 0을 확인했다. mock Web Share payload에는 PMID 22203366·29856155 URL이 포함됐다. 실제 DOM은 `03 · 전문가 영상 → 04 · 연구 지도`이고 handoff는 연구 지도 상단 기준선에 도착했다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·research copy·`pnpm test` 127 pass·production build·배포 경로 성능 예산과 PR #705/#706 보호 검사가 통과했다. main workflow `37813681399`의 Pages 배포·라이브 smoke·release-status도 성공했다.
+- AC-006 제품 독립 경계: `PASS`. 출처 연결·공유 payload·레이아웃만 보완했으며 공개 연구 카피·수치·제품 독립 안내·제품 750 제거·Smart Store 단일 경계·teaser `HOLD`를 유지한다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, 실제 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-309`, `E-LOCAL-BUILD-SHARE-SOURCES-20261009`, `E-UI-CONTRACT-SHARE-SOURCES-20261009`, `E-CDP-SHARE-SOURCES-20261009`, `E-PR-SHARE-SOURCES-20261009`, `E-TF-PULSE-REFRESH-SHARE-SOURCES-20261009`, `E-DEPLOY-SHARE-SOURCES-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCES-20261009`, `E-NAVI-STATE-SHARE-SOURCES-20261009`.
+
 ## 연구 카드 직접 공유와 전문가 영상 선배치 검증 — main a3d690e0 — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 연구 지도 카드마다 `결과·출처 공유`를 노출하고, 선택한 카드의 연구 제목·대상·관찰 결과·해석 범위·출처·공개 안내서 딥링크를 공유 payload에 포함했다. `navigator.share`가 없는 환경에서는 기존 결과·출처 복사 fallback을 유지한다.

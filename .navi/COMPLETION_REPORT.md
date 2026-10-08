@@ -1,5 +1,13 @@
 # Completion Report
 
+## 사업자 공유 자료 원문 연결 및 공개 배포 — 2026-10-09
+
+- 구현: 사람 연구·발효 안전 연구 카드의 출처 라벨을 직접 링크로 연결하고, 추천 자료 복사·공유 payload에 PubMed 원문 URL을 보존했다. 별도 중간 출처 보드 없이 결과와 출처를 같은 카드 안에서 읽게 했다.
+- 검증: PR #705 merge SHA `3ed6edc9e393f55961cc119279e4a213f8aef2d5`, heartbeat PR #706 merge SHA `d75eab09660b65128360c23e2b91a7268c6bd611`, main workflow `37813681399`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 Chrome CDP fallback을 확인했다. 로컬·배포 경로 성능 예산, UI contract·typecheck·research copy·127개 테스트·production build·Pages 배포·live smoke가 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-309`, `E-LOCAL-BUILD-SHARE-SOURCES-20261009`, `E-UI-CONTRACT-SHARE-SOURCES-20261009`, `E-CDP-SHARE-SOURCES-20261009`, `E-PR-SHARE-SOURCES-20261009`, `E-TF-PULSE-REFRESH-SHARE-SOURCES-20261009`, `E-DEPLOY-SHARE-SOURCES-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCES-20261009`, `E-NAVI-STATE-SHARE-SOURCES-20261009`.
+
 ## 연구 카드 직접 공유와 전문가 영상 선배치 — 2026-10-09
 
 - 구현: 연구 지도 카드 5개에 `결과·출처 공유`를 추가했다. 지원 환경에서는 Web Share로 연구 요약·출처·공개 안내서 딥링크를 전달하고, 미지원·권한 실패 환경에서는 기존 `결과·출처 복사`로 전환한다. 전문가 영상은 `03`, 연구 지도는 `04`로 고정하고 handoff도 유지한다.
