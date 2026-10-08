@@ -1,5 +1,13 @@
 # Completion Report
 
+## 선택 자료 범위 공유 링크 보존 및 공개 배포 — 2026-10-09
+
+- 구현·검토: 사업자가 선택한 자료 묶음을 `materials` 쿼리로 공유 링크에 보존했다. `출처까지`·2개 선택·`#final` 진입을 복원하고, 잘못된 범위는 대상별 추천 자료로 fallback하며 전체 복사는 5개 전체 범위를 사용한다.
+- 검증: PR #716 merge SHA `369dcafa9b9dfd0caf30125505a462cc940d4079`, main workflow `37831700338`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 Chrome CDP fallback을 확인했다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 bundle·release manifest·성능 예산·라이브 smoke가 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 모바일 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-314`, `E-LOCAL-BUILD-SHARE-LINK-SCOPE-20261009`, `E-UI-CONTRACT-SHARE-LINK-SCOPE-20261009`, `E-CDP-SHARE-LINK-SCOPE-20261009`, `E-PR-SHARE-LINK-SCOPE-20261009`, `E-DEPLOY-SHARE-LINK-SCOPE-20261009`, `E-CDP-LIVE-PUBLIC-SHARE-LINK-SCOPE-20261009`, `E-LIVE-PUBLIC-SHARE-LINK-SCOPE-20261009`, `E-NAVI-STATE-SHARE-LINK-SCOPE-20261009`.
+
 ## 사업자 공유 자료 목적별 빠른 선택 공개 배포 — 2026-10-09
 
 - 구현·검토: 마지막 공유 보드에 `추천 자료`와 `처음 소개`·`연구를 보여줄 때`·`출처까지` 빠른 선택을 추가했다. 선택 수가 공유·복사 버튼과 3단계 전달 레일에 즉시 반영되고, 카드별 수동 선택·5개 전체 자료·출처 링크는 유지된다.

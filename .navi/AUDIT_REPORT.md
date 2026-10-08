@@ -1,5 +1,17 @@
 # Audit Report
 
+## 선택 자료 범위 공유 링크 보존 및 공개 배포 — main 369dcafa — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 선택한 목적별 자료 범위를 `materials` 쿼리에 보존해, 공유받은 사람이 동일한 카드 선택 상태로 `#final` 자료 보드에 진입하도록 했다. `출처까지`는 2개 자료로 복원되고 전체 복사는 5개 전체 범위를 사용한다.
+- AC-004: `PASS`. 공개 Chrome CDP fallback 390px에서 `materials=24`가 `출처까지`·2개 선택·3단계 전달 흐름으로 복원됐고 `scrollWidth=viewport=390`, runtime errors 0을 확인했다. 전문가 영상 `03`이 연구 지도 `04`보다 앞선 순서도 유지됐다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·GitHub Pages 정적 build·release manifest·static bundle·성능 예산, PR #716 required checks와 main workflow `37831700338`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 로컬 성능 번들은 1,648,953 bytes였다.
+- AC-006 제품 독립 경계: `PASS`. 이번 변경은 공유 링크의 선택 범위 복원만 보완했으며 연구 카피·수치·출처 URL·제품 독립 안내·제품 750 제거·Smart Store 단일 경계·teaser `HOLD`를 변경하지 않았다. 잘못된 `materials` 값은 대상별 추천 자료로 fallback한다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin·Playwright 부재에 따른 Chrome CDP fallback, 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-314`, `E-LOCAL-BUILD-SHARE-LINK-SCOPE-20261009`, `E-UI-CONTRACT-SHARE-LINK-SCOPE-20261009`, `E-CDP-SHARE-LINK-SCOPE-20261009`, `E-PR-SHARE-LINK-SCOPE-20261009`, `E-DEPLOY-SHARE-LINK-SCOPE-20261009`, `E-CDP-LIVE-PUBLIC-SHARE-LINK-SCOPE-20261009`, `E-LIVE-PUBLIC-SHARE-LINK-SCOPE-20261009`, `E-NAVI-STATE-SHARE-LINK-SCOPE-20261009`.
+
 ## 사업자 공유 자료 목적별 빠른 선택 공개 배포 — main 377f7bab — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 사업자 공유 보드에 `추천 자료`와 `처음 소개`·`연구를 보여줄 때`·`출처까지` 빠른 선택을 추가해 선택 수·공유·복사 범위를 한 화면에서 바꾸도록 했다. 기존 5개 카드, 연구 출처, 제품 독립 경계는 유지했다.

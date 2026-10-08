@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 선택 자료 범위 공유 링크 보존 및 배포 — 369dcafa — 2026-10-09
+
+- 공격 초점은 공유 URL이 선택 자료 범위를 잃고 전체 자료나 대상별 추천으로 되돌아가는지, 잘못된 범위가 빈 보드를 만들거나 390px에서 공유 보드를 넘치게 하는지였다.
+- 공개 390px에서 `materials=24` 링크는 `출처까지`·2개 선택·`자료 2개 선택`으로 복원됐고, `materials=0`은 사업자 `추천 자료`·5개 선택으로 안전하게 fallback했다. `scrollWidth=390`, viewport=390, runtime errors=0이며 `03 · 전문가 영상 → 04 · 연구 지도` 순서도 유지됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. PR #716과 main workflow `37831700338`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-314`, `E-CDP-LIVE-PUBLIC-SHARE-LINK-SCOPE-20261009`, `E-DEPLOY-SHARE-LINK-SCOPE-20261009`, `E-LIVE-PUBLIC-SHARE-LINK-SCOPE-20261009`, `E-NAVI-STATE-SHARE-LINK-SCOPE-20261009`.
+
 ## Red-team recheck — 사업자 공유 자료 목적별 빠른 선택 및 배포 — 377f7bab — 2026-10-09
 
 - 공격 초점은 빠른 묶음 선택이 기본 사업자 추천 5개를 잘못 바꾸거나, 공유·복사 버튼의 선택 수와 카드 선택 상태를 분리시키거나, 390px에서 선택 UI가 넘치는지였다.
