@@ -2745,6 +2745,14 @@
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
 
+## Red-team recheck — 수면과 회복 단계 ARIA 순번 — ec7cb47f — 2026-10-08
+
+- 공격 관점에서 14개 회복 단계 버튼의 `aria-setsize`가 모두 14이고 `aria-posinset`가 1부터 14까지 연속인지 확인했다. 390px에서 active step의 `aria-current=step`, 가로폭 일치, runtime error 0을 재현했으며 신규 CRITICAL/MAJOR 결함은 없다.
+- 화면 배열·자동 전환·카드 선택과 제품 독립 연구 경계는 변경되지 않았다. 이번 보강은 보조기술 순번 의미에 한정된다.
+- Chromium fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-291`, `E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008`, `E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008`.
+
 ## Red-team recheck — 수면과 회복 14단계 모바일 균형 — 5094bf25 — 2026-10-08
 
 - 공격 관점에서 280·390·1440px 회복 지도 행 배열과 단계 선택을 확인했다. 280px은 6+6+2, 390px은 7+7, 데스크톱은 14열로 유지되고 마지막 단계가 화면 안에서 선택되며 최종 카드 문구로 연결된다.

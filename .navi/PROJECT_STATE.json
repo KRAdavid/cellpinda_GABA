@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T09:54:44+09:00",
+  "updated_at": "2026-10-08T10:12:29+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2375,6 +2375,23 @@
       "impact": "표준 모바일에서 14단계 흐름이 끊기지 않고, 좁은 화면에서도 터치 가능한 안전 레이아웃이 유지된다.",
       "required_action": "다음 회복 지도·모바일 breakpoint 변경 시 280·390·1440px 레이아웃과 라이브 validator를 함께 재검증",
       "owner": "QA"
+    },
+    {
+      "id": "AUD-020",
+      "severity": "OBSERVATION",
+      "status": "CLOSED",
+      "statement": "수면과 회복 14개 단계 버튼에 전체 단계 수와 현재 순번의 ARIA 의미를 추가했다. 화면 배열·자동 전환·선택 상태는 유지하면서 보조기술 사용자가 1/14부터 14/14까지 같은 흐름을 이해할 수 있도록 보강했고, 로컬·PR·Pages·라이브 검증을 통과했다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008",
+        "E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008",
+        "E-PR-RECOVERY-MAP-A11Y-20261008",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008",
+        "E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008"
+      ],
+      "impact": "시각적 순서와 보조기술의 단계 순서가 일치해 모바일 회복 흐름의 이해 가능성이 높아진다.",
+      "required_action": "다음 회복 지도 상호작용 변경 시 ARIA 순번·선택 상태·280·390·1440px 시각 레이아웃을 함께 재검증",
+      "owner": "QA"
     }
     ],
     "independent_from_execution": true,
@@ -2795,6 +2812,22 @@
         "E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008"
       ],
       "impact": "모바일 회복 흐름의 행 분리·마지막 단계 고립·가로 넘침 회귀를 조기에 차단한다.",
+      "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
+      "owner": "Red Team"
+    },
+    {
+      "id": "RT-020",
+      "severity": "OBSERVATION",
+      "status": "CLOSED",
+      "statement": "공격 관점에서 14개 회복 단계의 ARIA setsize·posinset가 1부터 14까지 연속인지, active step과 가로폭·runtime error가 깨지지 않는지 확인했으며 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008",
+        "E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008",
+        "E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008",
+        "E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008",
+        "E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008"
+      ],
+      "impact": "보조기술 순번 누락·중복·시각 상태와 의미 상태의 불일치 회귀를 조기에 차단한다.",
       "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
       "owner": "Red Team"
     }
@@ -6685,6 +6718,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T09:54:44+09:00"
+    },
+    {
+      "id": "H-381",
+      "event": "NAVI 자동 공개 배포 점검에서 수면과 회복 14개 단계 버튼의 보조기술 순번 정보가 비어 있던 잔여 접근성 리스크를 확인하고 `aria-setsize=14`와 `aria-posinset=1…14`를 추가했다. 기존 280·390·1440px 배열, 자동 전환, 선택 상태와 화면 카피는 유지했다. 로컬 pnpm run build·pnpm test 127 pass·typecheck·UI contract·정적 bundle·성능 예산, PR #664의 release-verify·site-quality-verify, main merge SHA ec7cb47f7a2a37e2404dbe5ad59026c6d0b57b63의 workflow 37711484247 release-verify·worker-readiness·deploy-pages·smoke-live·release-status success, deploy-worker STATIC_ONLY skipped를 확인했다. 공개 validator는 candidate SHA ec7cb47f7a2a37e2404dbe5ad59026c6d0b57b63·HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 390px에서 14개 단계 모두 setsize=14·posinset=1…14, active step aria-current=step, pageScrollWidth=390, runtimeErrors=[]를 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 제품 독립 연구 카피·수치·출처 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chromium fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-291과 여섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T10:12:29+09:00"
     }
   ]
 }
