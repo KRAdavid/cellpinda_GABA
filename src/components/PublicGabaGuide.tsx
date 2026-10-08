@@ -2178,8 +2178,8 @@ export default function PublicGabaGuide() {
               <button type="button" className="guide-quiet-button" onClick={() => window.print()}>인쇄 · PDF 저장 <ArrowRight size={17} aria-hidden="true" /></button>
             </div>
             <div className="guide-share-intro" aria-label="사업자용 GABA 공유 자료 안내">
-              <div><span>사업자용 자료</span><strong>자료를 전달하세요</strong><p>문장을 바로 복사하세요.</p></div>
-              <div className="guide-share-intro-actions"><select className="guide-share-copy-all" value={activeMessageAudienceMask} onChange={e => setActiveMessageAudienceMask(+e.target.value)}><option value={21}>소비자</option><option value={31}>사업자</option><option value={15}>교육</option></select><button type="button" className={`guide-share-copy-all${messageKitCopied ? ' is-copied' : ''}`} aria-label={messageKitCopied ? '전체 복사 완료' : '전체 복사'} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied ? '복사 완료' : '전체 복사'}</button></div>
+              <div><strong>자료를 전달하세요</strong></div>
+              <div className="guide-share-intro-actions"><select className="guide-share-copy-all" value={activeMessageAudienceMask} aria-label="자료 대상" onChange={e => setActiveMessageAudienceMask(+e.target.value)}><option value={21}>소비자</option><option value={31}>사업자</option><option value={15}>교육</option></select><button type="button" className={`guide-share-copy-all${messageKitCopied ? ' is-copied' : ''}`} aria-label={messageKitCopied ? '전체 복사 완료' : '전체 복사'} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied ? '복사 완료' : '전체 복사'}</button></div>
             </div>
             <details open className="guide-share-lines">
               <summary><span>사업자용 GABA 공유 자료 · 바로 복사하기</span><b>5개</b></summary>
