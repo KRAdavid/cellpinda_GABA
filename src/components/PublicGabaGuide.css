@@ -370,8 +370,8 @@
   .guide-outcome-comparison-metric{gap:3px}
   .guide-outcome-comparison-metric>strong{font-size:1.071em}
   .guide-outcome-comparison-metric>small{font-size:1em}
-  .guide-outcome-lanes{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-  .guide-outcome-lane{gap:7px;padding:10px 9px}
+  .guide-outcome-lanes{grid-template-columns:1fr;gap:7px}
+  .guide-outcome-lane{grid-template-columns:minmax(82px,.58fr) minmax(0,1.42fr);align-items:center;gap:10px;padding:10px 9px}
   .guide-outcome-lane-top{display:grid;gap:4px}
   .guide-outcome-lane-top>span{font-size:.75em}
   .guide-outcome-lane-top>strong{min-height:2.5em;font-size:.9em;line-height:1.35;text-align:left}
@@ -633,16 +633,10 @@
 }
 @media(prefers-reduced-motion:reduce){.guide-header-share,.guide-application-card,.guide-process-flow article,.guide-video-feature{box-shadow:none}.guide-video-feature-loading svg{animation:none}.guide-hero-story .guide-hero-scroll svg{animation:none}.guide-video-filter{transition:none}}
 
-/* v107 narrow phone chart header: keep comparison labels inside the 320px reading frame. */
-@media(max-width:430px){
-  .guide-outcome-comparison-head{display:grid;grid-template-columns:minmax(66px,.64fr) minmax(0,1fr) minmax(0,1fr);gap:6px;margin:-1px 0 10px;padding:8px 8px}
-  .guide-outcome-comparison-head>span:first-child{display:block;margin-right:0;white-space:normal;line-height:1.35;overflow-wrap:anywhere}
-  .guide-outcome-comparison-head>span:not(:first-child){min-width:0;flex:initial;white-space:normal;line-height:1.35;overflow-wrap:anywhere}
-}
-
 @media(max-width:350px){
   .guide-outcome-comparison-head{grid-template-columns:minmax(58px,.56fr) minmax(0,1fr) minmax(0,1fr);gap:5px;padding-inline:6px}
   .guide-outcome-comparison-head>span:not(:first-child){gap:4px}
+  .guide-outcome-lane{grid-template-columns:1fr}
 }
 
 /* v125 chart semantics: make the non-numeric comparison key legible for older readers. */
@@ -1963,15 +1957,6 @@
   .gaba-guide .guide-research-detail-inline .guide-research-result-lead{grid-column:1 / -1;width:100%}
 }
 
-/* v112 mobile comparison legend: separate the axis from the two conditions so labels stay natural and scannable. */
-@media(max-width:430px){
-  .guide-outcome-comparison-head{grid-template-columns:minmax(0,1fr);grid-template-areas:"axis" "reference" "result";align-items:start;gap:5px;padding:8px 10px}
-  .guide-outcome-comparison-head>span:first-child{grid-area:axis;justify-self:start;margin-right:0;white-space:nowrap}
-  .guide-outcome-comparison-head>span.is-reference{grid-area:reference;justify-self:start}
-  .guide-outcome-comparison-head>span.is-result{grid-area:result;justify-self:start}
-  .guide-outcome-comparison-head>span:not(:first-child){min-width:0;justify-content:flex-start;white-space:nowrap;word-break:keep-all;overflow-wrap:normal;line-height:1.35}
-}
-
 /* v113 large-text research context: enlarge the answer-first result, study profile, and source action together so older readers do not lose the evidence trail after the chart. */
 .gaba-guide.is-large-text .guide-research-result-lead>strong{font-size:17.6px;line-height:1.6}
 .gaba-guide.is-large-text .guide-research-profile strong{font-size:14px;line-height:1.55}
@@ -2211,3 +2196,6 @@
 
 .guide-research-map-item small{display:block;color:#7693a3;font-size:12px;line-height:1.25}
 .is-large-text .guide-research-map-item small{font-size:12px}
+
+/* v176 result-first chart: make the observed GABA result the first mobile scan. */
+@media(max-width:430px){.guide-outcome-comparison-head{display:grid;grid-template-columns:1fr;grid-template-areas:"axis" "result" "reference";align-items:start;gap:5px;padding:8px 10px}.guide-outcome-comparison-head>span:first-child{grid-area:axis;justify-self:start;margin-right:0;white-space:nowrap}.guide-outcome-comparison-head .is-result{grid-area:result;justify-self:start}.guide-outcome-comparison-head .is-reference{grid-area:reference;justify-self:start}.guide-outcome-comparison-head>span:not(:first-child){min-width:0;justify-content:flex-start;white-space:nowrap;word-break:keep-all;overflow-wrap:normal;line-height:1.35}}

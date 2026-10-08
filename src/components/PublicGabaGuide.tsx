@@ -843,9 +843,9 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
       </div>
       {showSummary ? <div className="guide-outcome-summary"><span><i aria-hidden="true" />핵심 결과</span><strong>{topic.chart.summary}</strong></div> : null}
       {comparisonChart ? (
-        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. ${comparisonChart.rows.map((row) => `${row.label}: ${comparisonChart.referenceLabel} ${row.reference}, ${comparisonChart.resultLabel} ${row.result}`).join('. ')}. ${comparisonChart.note}. 막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다.`}>
+        <div className="guide-outcome-comparison" role="img" aria-label={`${topic.chart.title}. ${comparisonChart.rows.map((row) => `${row.label}: ${comparisonChart.resultLabel} ${row.result}, ${comparisonChart.referenceLabel} ${row.reference}`).join('. ')}. ${comparisonChart.note}. 막대는 변화 방향과 상대적 차이를 보여주는 도식이며 실제 측정값은 아닙니다.`}>
           <div className="guide-outcome-comparison-guide" aria-hidden="true"><span className="guide-outcome-comparison-guide-mark"><ArrowLeftRight size={14} strokeWidth={2.4} /></span><span className="guide-outcome-comparison-guide-copy"><strong>두 조건을 나란히 비교</strong><small>막대는 두 조건의 변화폭을 비교해 보여줍니다</small></span></div>
-          <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">측정 항목</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span></div>
+          <div className="guide-outcome-comparison-head"><span className="guide-outcome-comparison-axis">측정 항목</span><span className="is-result"><i aria-hidden="true" />{comparisonChart.resultLabel}</span><span className="is-reference"><i aria-hidden="true" />{comparisonChart.referenceLabel}</span></div>
           <div className="guide-outcome-comparison-list">
             {comparisonChart.rows.map((row) => {
               const referenceSignal = row.visual === 'result-less' ? 'more' : 'less';
@@ -855,13 +855,13 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
                 <div className={`guide-outcome-comparison-row ${row.visual}`} key={row.label}>
                   <div className="guide-outcome-comparison-metric"><strong>{row.label}</strong><span className="guide-outcome-comparison-verdict"><i>GABA 그룹</i><b>{row.result}</b></span></div>
                   <div className="guide-outcome-lanes">
-                    <div className="guide-outcome-lane is-reference">
-                      <div className="guide-outcome-lane-top"><span>{comparisonChart.referenceLabel}</span><strong>{row.reference}</strong></div>
-                      <span className={`guide-outcome-lane-signal is-${referenceSignal} is-direction-${row.direction}`} aria-hidden="true"><span className="guide-outcome-lane-meter">{Array.from({ length: 5 }, (_, index) => <i key={index} />)}</span><DirectionIcon size={16} strokeWidth={2.2} /><em>{referenceSignal === 'more' ? '더 많이' : '덜'} {row.direction === 'up' ? '증가' : '감소'}</em></span>
-                    </div>
                     <div className="guide-outcome-lane is-result">
-                      <div className="guide-outcome-lane-top"><span>{comparisonChart.resultLabel}</span><strong>{row.result}</strong></div>
-                      <span className={`guide-outcome-lane-signal is-${resultSignal} is-direction-${row.direction}`} aria-hidden="true"><span className="guide-outcome-lane-meter">{Array.from({ length: 5 }, (_, index) => <i key={index} />)}</span><DirectionIcon size={16} strokeWidth={2.2} /><em>{resultSignal === 'more' ? '더 많이' : '덜'} {row.direction === 'up' ? '증가' : '감소'}</em></span>
+                      <div className="guide-outcome-lane-top"><span>{comparisonChart.resultLabel}</span></div>
+                      <span className={`guide-outcome-lane-signal is-${resultSignal} is-direction-${row.direction}`} aria-hidden="true"><span className="guide-outcome-lane-meter">{Array.from({ length: 5 }, (_, index) => <i key={index} />)}</span><DirectionIcon size={16} strokeWidth={2.2} /><em>{resultSignal === 'more' ? '더 많이 줄었습니다' : '덜 줄었습니다'}</em></span>
+                    </div>
+                    <div className="guide-outcome-lane is-reference">
+                      <div className="guide-outcome-lane-top"><span>{comparisonChart.referenceLabel}</span></div>
+                      <span className={`guide-outcome-lane-signal is-${referenceSignal} is-direction-${row.direction}`} aria-hidden="true"><span className="guide-outcome-lane-meter">{Array.from({ length: 5 }, (_, index) => <i key={index} />)}</span><DirectionIcon size={16} strokeWidth={2.2} /><em>{referenceSignal === 'more' ? '더 많이 줄었습니다' : '덜 줄었습니다'}</em></span>
                     </div>
                   </div>
                 </div>
