@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 공유 자료 선택 범위 표기 명확화 및 공개 배포 — main 65b4820f — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 공유 자료 보드의 카드 목록 상단을 `선택 2개 · 전체 5개`로 표시해 현재 전달 범위와 전체 자료 범위를 한 줄에서 구분한다. `materials=24` 링크의 `출처까지` 선택 상태와 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 읽기 순서는 유지됐다.
+- AC-004: `PASS`. 공개 Chrome CDP fallback 390px에서 `summary aria-label=사업자용 GABA 자료, 선택 2개, 전체 5개`, 선택 카드 2개, 3단계 전달 흐름, `scrollWidth=viewport=390`, runtime errors 0을 확인했다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·GitHub Pages 정적 build·성능 예산을 통과했고 PR #718 required checks와 main workflow `37833774516`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 경계: `PASS`. 이번 변경은 선택 범위의 표시 명확화에 한정되며 연구 카피·수치·출처·제품 독립 안내·Smart Store 단일 경계·teaser `HOLD`를 변경하지 않았다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin·Playwright 부재에 따른 Chrome CDP fallback, 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-315`, `E-LOCAL-BUILD-SHARE-SUMMARY-CLARITY-20261009`, `E-UI-CONTRACT-SHARE-SUMMARY-CLARITY-20261009`, `E-CDP-SHARE-SUMMARY-CLARITY-20261009`, `E-PR-SHARE-SUMMARY-CLARITY-20261009`, `E-DEPLOY-SHARE-SUMMARY-CLARITY-20261009`, `E-CDP-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009`, `E-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009`, `E-NAVI-STATE-SHARE-SUMMARY-CLARITY-20261009`.
+
 ## 선택 자료 범위 공유 링크 보존 및 공개 배포 — main 369dcafa — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 선택한 목적별 자료 범위를 `materials` 쿼리에 보존해, 공유받은 사람이 동일한 카드 선택 상태로 `#final` 자료 보드에 진입하도록 했다. `출처까지`는 2개 자료로 복원되고 전체 복사는 5개 전체 범위를 사용한다.

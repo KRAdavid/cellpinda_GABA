@@ -3537,6 +3537,21 @@
         "E-NAVI-STATE-SHARE-LINK-SCOPE-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-315",
+      "statement": "공유 자료 카드 목록 상단에 현재 선택 수와 전체 자료 수가 함께 표시되어, 사업자가 실제 전달 범위와 전체 자료를 구분할 수 있으며 목적별 선택·출처·제품 독립 경계를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-SUMMARY-CLARITY-20261009",
+        "E-UI-CONTRACT-SHARE-SUMMARY-CLARITY-20261009",
+        "E-CDP-SHARE-SUMMARY-CLARITY-20261009",
+        "E-PR-SHARE-SUMMARY-CLARITY-20261009",
+        "E-DEPLOY-SHARE-SUMMARY-CLARITY-20261009",
+        "E-CDP-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009",
+        "E-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009",
+        "E-NAVI-STATE-SHARE-SUMMARY-CLARITY-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -22836,6 +22851,91 @@
       "captured_at": "2026-10-09T04:28:43+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-LINK-SCOPE",
       "claim_refs": ["C-314"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-SUMMARY-CLARITY-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 자료 선택 범위 표기 보정이 UI contract·typecheck·127개 테스트·GitHub Pages 정적 빌드·성능 예산 검사를 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass); pnpm run build; validate-performance total assets 1649061, initial JS 311405, initial CSS 95703, status ok",
+      "captured_at": "2026-10-09T04:40:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-SHARE-SUMMARY-CLARITY",
+      "claim_refs": ["C-315"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-SUMMARY-CLARITY-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 공유 자료 요약에 선택 수와 전체 자료 수를 함께 표시하고, 접근성 이름에도 같은 범위를 노출하는 구조를 고정한다.",
+      "locator": "scripts/validate-ui-contract.mjs; summary text `선택 {selectedMessageCount}개 · 전체 {messageKit.length}개`; aria-label includes 선택·전체; status ok",
+      "captured_at": "2026-10-09T04:40:00+09:00",
+      "reviewer_id": "NAVI-CONTRACT-QA-GABA-20261009-SHARE-SUMMARY-CLARITY",
+      "claim_refs": ["C-315"]
+    },
+    {
+      "id": "E-CDP-SHARE-SUMMARY-CLARITY-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Chrome CDP fallback 로컬 390px에서 공유 자료 요약이 `선택 2개 · 전체 5개`로 표시되고 선택 수·3단계 흐름·가로폭·오류가 정합하다.",
+      "locator": "Chrome CDP 9223; local 390px; summary=`사업자용 GABA 자료 / 선택 2개 · 전체 5개`; summaryAria=`사업자용 GABA 자료, 선택 2개, 전체 5개`; quickLabel=출처까지; selected=2; flow=자료 2개 선택; width=390; viewport=390; errors=[]",
+      "captured_at": "2026-10-09T04:40:00+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261009-SHARE-SUMMARY-CLARITY",
+      "claim_refs": ["C-315"]
+    },
+    {
+      "id": "E-PR-SHARE-SUMMARY-CLARITY-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 자료 선택 범위 표기 보정 PR #718의 required checks가 성공하고 main에 병합됐다.",
+      "locator": "PR #718; head SHA e516d44235817276339135f55ed63e78f68fd117; release-verify pass; site-quality-verify pass; merge SHA 65b4820fa7fda2020880b581409e7037568c4c5f",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/718",
+      "captured_at": "2026-10-09T04:40:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-SHARE-SUMMARY-CLARITY",
+      "claim_refs": ["C-315"]
+    },
+    {
+      "id": "E-DEPLOY-SHARE-SUMMARY-CLARITY-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 main candidate가 GitHub Pages로 공개 배포되고 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37833774516; head SHA 65b4820fa7fda2020880b581409e7037568c4c5f; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37833774516",
+      "captured_at": "2026-10-09T04:40:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-SHARE-SUMMARY-CLARITY",
+      "claim_refs": ["C-315"]
+    },
+    {
+      "id": "E-CDP-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 Pages URL의 Chrome CDP fallback 390px에서 `선택 2개 · 전체 5개`와 동일한 접근성 이름이 표시되고, 전문가 영상이 연구 지도보다 앞서며 가로 넘침과 runtime errors가 없다.",
+      "locator": "Chrome CDP 9223; https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24#final; summary=`사업자용 GABA 자료 / 선택 2개 · 전체 5개`; summaryAria=`사업자용 GABA 자료, 선택 2개, 전체 5개`; selected=2; flow=자료 2개 선택; order=03 · 전문가 영상 -> 04 · 연구 지도; width=390; viewport=390; errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24#final",
+      "captured_at": "2026-10-09T04:40:00+09:00",
+      "reviewer_id": "NAVI-CDP-LIVE-QA-GABA-20261009-SHARE-SUMMARY-CLARITY",
+      "claim_refs": ["C-315"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 최신 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=65b4820fa7fda2020880b581409e7037568c4c5f; generatedAt=2026-10-08T19:42:07.115Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-09T04:40:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-SHARE-SUMMARY-CLARITY",
+      "claim_refs": ["C-315"]
+    },
+    {
+      "id": "E-NAVI-STATE-SHARE-SUMMARY-CLARITY-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 선택 범위 표기 명확화의 결정·로컬 QA·UI contract·Chrome CDP·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "DEC-025; H-406; PR #718 merge SHA 65b4820fa7fda2020880b581409e7037568c4c5f; workflow 37833774516; live candidate matched; status USER_DECISION; completion gate NOT_READY; Browser plugin/Playwright 부재에 따른 Chrome CDP fallback; 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T04:40:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-SUMMARY-CLARITY",
+      "claim_refs": ["C-315"]
     }
   ]
 }
