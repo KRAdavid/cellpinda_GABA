@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 추천 공유 내용 미리보기 — 73dce094 — 2026-10-09
+
+- 공격 관점에서 사업자 기본 상태와 소비자 전환 상태의 요약 주제, 추천 개수, 카드 순서를 비교했다. 사업자 5개·소비자 3개가 실제 대상 전환에 맞춰 바뀌며, 요약은 카드·출처·복사 기능을 가리지 않는다.
+- 공개 390·320·1440px에서 viewport와 page scroll width가 일치하고 runtime errors가 없었다. `aria-live`·`aria-atomic`·대상별 `aria-label`로 전환 상태를 보조기술에 전달한다.
+- 신규 CRITICAL/MAJOR 결함은 없다. Chrome CDP fallback은 실제 모바일 공유 시트, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토를 대신하지 않는다. NAVI `USER_DECISION`, 완료 게이트 `NOT_READY`, teaser `HOLD`를 유지한다.
+
+증적: `C-307`, `E-CDP-SHARE-PREVIEW-20261009`, `E-LIVE-PUBLIC-SHARE-PREVIEW-20261009`, `E-NAVI-STATE-SHARE-PREVIEW-20261009`.
+
 ## Red-team recheck — 공유 보드 전달 순서 레일 — c074bc02 — 2026-10-09
 
 - 공격 관점에서 사업자 기본 대상과 소비자 전환 상태를 비교해 전달 레일의 단계 수·순서·추천 개수 동기화를 확인했다. 390px·320px에서는 세로 레일과 화살표 2개, 1440px에서는 가로 레일과 화살표 2개가 카드 앞에 유지됐다.

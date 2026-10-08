@@ -3423,6 +3423,20 @@
         "E-NAVI-STATE-SHARE-FLOW-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-307",
+      "statement": "공개 GABA 공유 보드가 선택 대상별로 실제 먼저 전달할 추천 주제명을 카드 앞에 요약하고, 사업자 5개·소비자 3개 묶음을 대상 전환에 맞춰 동기화한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-PREVIEW-20261009",
+        "E-UI-CONTRACT-SHARE-PREVIEW-20261009",
+        "E-CDP-SHARE-PREVIEW-20261009",
+        "E-PR-SHARE-PREVIEW-20261009",
+        "E-DEPLOY-SHARE-PREVIEW-20261009",
+        "E-LIVE-PUBLIC-SHARE-PREVIEW-20261009",
+        "E-NAVI-STATE-SHARE-PREVIEW-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -22101,6 +22115,81 @@
       "captured_at": "2026-10-09T00:35:50+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-FLOW",
       "claim_refs": ["C-306"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-PREVIEW-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "추천 공유 내용 미리보기 변경이 로컬 UI contract·typecheck·research copy·127개 테스트·production build·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm run validate:research-copy; pnpm test (127 pass); pnpm run build; initial JS 311405; initial CSS 95703; total assets 1647859",
+      "captured_at": "2026-10-09T00:46:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-SHARE-PREVIEW",
+      "claim_refs": ["C-307"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-PREVIEW-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 보드가 선택 대상별 추천 주제 요약과 대상별 접근성 이름을 노출하도록 UI contract 검사가 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; guide-share-bundle-summary; 먼저 전달할 내용; recommendedMessageSummary; aria-live=polite; aria-atomic=true",
+      "captured_at": "2026-10-09T00:46:00+09:00",
+      "reviewer_id": "NAVI-CONTRACT-QA-GABA-20261009-SHARE-PREVIEW",
+      "claim_refs": ["C-307"]
+    },
+    {
+      "id": "E-CDP-SHARE-PREVIEW-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 Chrome CDP fallback에서 사업자·소비자 추천 주제 요약, 대상 전환, 가로폭, runtime error를 확인했다.",
+      "locator": "gaba-share-preview-audit.mjs; 390px/320px/1440px: business summary 5 topics, consumer summary 3 topics, scrollWidth=viewport, errors=[]; 390px order audit: expert-videos < academic < everyday < sleep < research; handoff reached academic",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31#final",
+      "captured_at": "2026-10-09T00:54:00+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261009-SHARE-PREVIEW",
+      "claim_refs": ["C-307"]
+    },
+    {
+      "id": "E-PR-SHARE-PREVIEW-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "추천 공유 내용 미리보기 PR #701의 required checks가 성공하고 main에 병합됐다.",
+      "locator": "PR #701; release-verify run 37804099734 pass; site-quality-verify run 37804099773 pass; merge SHA 73dce094ba5785e597569a069b6095221e1409cf",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/701",
+      "captured_at": "2026-10-09T00:49:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-SHARE-PREVIEW",
+      "claim_refs": ["C-307"]
+    },
+    {
+      "id": "E-DEPLOY-SHARE-PREVIEW-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main candidate의 Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37804335391; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass; final merge SHA 73dce094ba5785e597569a069b6095221e1409cf",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37804335391",
+      "captured_at": "2026-10-09T00:53:30+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-SHARE-PREVIEW",
+      "claim_refs": ["C-307"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-PREVIEW-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly·removed750·provenance matched를 유지했다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=73dce094ba5785e597569a069b6095221e1409cf; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-09T00:54:20+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-SHARE-PREVIEW",
+      "claim_refs": ["C-307"]
+    },
+    {
+      "id": "E-NAVI-STATE-SHARE-PREVIEW-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 추천 공유 내용 미리보기의 결정·로컬·contract·CDP·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-017; H-398; PR #701; merge SHA 73dce094ba5785e597569a069b6095221e1409cf; workflow 37804335391; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T00:56:12+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-PREVIEW",
+      "claim_refs": ["C-307"]
     }
   ]
 }

@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-10-09 — 추천 공유 내용 미리보기 공개
+
+- 공유 보드의 3단계 전달 레일 아래에 `먼저 전달할 내용` 요약을 추가해, 선택한 대상에 따라 실제 추천되는 주제명을 카드 목록보다 먼저 확인할 수 있게 했다.
+- 사업자에서는 `기본 소개 · 신경계 역할 · 연구의 확장 · 사람 연구 결과 · 발효·안전 연구` 5개가, 소비자 전환에서는 `기본 소개 · 연구의 확장 · 발효·안전 연구` 3개가 즉시 표시된다. 교육 대상도 같은 구조로 동기화된다.
+- 기존 추천 공유·추천 자료 복사·전체 5개 복사·개별 문장 복사·출처·제품 독립 안내는 변경하지 않았다. PR #701 보호 검사가 통과해 main merge SHA `73dce094ba5785e597569a069b6095221e1409cf`가 됐다.
+- main workflow `37804335391`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 HTTP 200·`candidateSha=73dce094ba5785e597569a069b6095221e1409cf`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- 공개 Chrome CDP fallback 390·320·1440px에서 사업자 5개·소비자 3개 요약, 가로폭 일치, runtime errors 0을 확인했고 `03 · 전문가 영상 → 04 · 연구 지도` 순서와 handoff 도착을 재현했다. Browser plugin 부재·실제 공유 시트·실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: `C-307`, `E-LOCAL-BUILD-SHARE-PREVIEW-20261009`, `E-UI-CONTRACT-SHARE-PREVIEW-20261009`, `E-CDP-SHARE-PREVIEW-20261009`, `E-PR-SHARE-PREVIEW-20261009`, `E-DEPLOY-SHARE-PREVIEW-20261009`, `E-LIVE-PUBLIC-SHARE-PREVIEW-20261009`, `E-NAVI-STATE-SHARE-PREVIEW-20261009`.
+
 ## 2026-10-09 — 공유 보드 전달 순서 레일 공개
 
 - 사업자가 공유 자료를 고른 뒤 무엇을 해야 하는지 바로 이해하도록 카드 앞에 `01 대상 선택 → 02 추천 5개 확인 → 03 공유 또는 복사` 전달 레일을 추가했다. 대상 전환 시 2단계의 추천 개수가 함께 바뀐다.
