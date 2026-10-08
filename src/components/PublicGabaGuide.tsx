@@ -1890,6 +1890,7 @@ export default function PublicGabaGuide() {
               <ol className="guide-hero-route-list" aria-hidden="true"><li>수면과 회복</li><li>GABA의 발견</li><li>GABA란</li><li>전문가 영상</li><li>연구 지도</li><li>활용 사례</li></ol>
               <span className="sr-only">3분 읽기: 수면과 회복, GABA의 발견, GABA란, 전문가 영상, 연구 지도, 활용 사례</span>
             </div>
+            <button className="guide-quiet-button guide-hero-actions" onClick={() => scrollTo('final')}>사업자 자료</button>
           </div>
           <NeuronNetwork />
           <button type="button" className="guide-hero-scroll" onClick={() => scrollTo('opening-bridge')} aria-label="수면과 회복부터 3분 읽기 시작"><ArrowDown size={16} aria-hidden="true" /> <span>3분 읽기 시작</span></button>

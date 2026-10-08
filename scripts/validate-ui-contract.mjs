@@ -644,6 +644,7 @@ requireMatch(publicGuide, /guide-video-card-thumb-placeholder[\s\S]*?<strong>\{v
 requireMatch(publicGuide, /guide-hero-scroll/, 'public guide hero must expose the continuous reading cue');
 requireMatch(publicGuideStyles, /v104 mobile reading cue[\s\S]*?guide-hero-story \.guide-hero-scroll\{[^}]*display:flex/, 'mobile public guide hero must show a visible reading cue before the first swipe');
 requireMatch(publicGuideStyles, /v106 mobile reading cue contrast[\s\S]*?guide-hero-story \.guide-hero-scroll\{[^}]*border:1px solid[^}]*background:rgba\(255,255,255,\.78\)/, 'mobile public guide reading cue must remain legible over the photographic hero surface');
+requireMatch(publicGuide, /guide-hero-actions[\s\S]*사업자 자료[\s\S]*scrollTo\('final'\)/, 'public guide hero must expose a clear business share-material entry without duplicating the final share board');
 requireMatch(publicGuideStyles, /v176 result-first chart[\s\S]*?guide-outcome-comparison-head\{[^}]*display:grid[^}]*grid-template-areas:"axis" "result" "reference"[\s\S]*?guide-outcome-comparison-head \.is-result\{grid-area:result[\s\S]*?guide-outcome-comparison-head \.is-reference\{grid-area:reference/, 'narrow-phone research comparison headers must lead with the observed GABA result inside the reading frame');
 for (const marker of [
   /저속노화,<br \/>\{' '\}\s*회복하는 밤에서 시작됩니다\.<\/span>\{' '\}\s*<em>그 회복의 신호를/,
