@@ -3625,6 +3625,20 @@
         "E-NAVI-STATE-SHARE-SUMMARY-CUE-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-321",
+      "statement": "사업자 공유 보드의 전달 범위 상태 패널은 선택 자료 제목과 함께 포함된 원문 출처 수를 보여주고, 공유 링크에서도 같은 선택 범위가 유지된다는 점을 안내한다. 개별 선택·목적별 묶음·공유·복사·전문가 영상 03 → 연구 지도 04 순서와 제품 독립 경계는 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-SOURCE-STATUS-20261009",
+        "E-UI-CONTRACT-SHARE-SOURCE-STATUS-20261009",
+        "E-PR-SHARE-SOURCE-STATUS-20261009",
+        "E-DEPLOY-SHARE-SOURCE-STATUS-20261009",
+        "E-CDP-LIVE-SHARE-SOURCE-STATUS-20261009",
+        "E-LIVE-PUBLIC-SHARE-SOURCE-STATUS-20261009",
+        "E-NAVI-STATE-SHARE-SOURCE-STATUS-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -23418,6 +23432,83 @@
       "captured_at": "2026-10-09T07:32:54+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-SUMMARY-CUE",
       "claim_refs": ["C-320"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-SOURCE-STATUS-20261009",
+      "kind": "BUILD",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자 공유 보드에 선택 자료 제목·원문 출처 수·공유 범위 보존 안내를 추가한 변경이 로컬 UI contract·typecheck·127개 테스트·production build와 성능 예산을 통과했다.",
+      "locator": "feature commit d0ac655d; pnpm run validate:ui-contract pass; pnpm run typecheck pass; pnpm test 127 pass/0 fail; pnpm run build pass; local performance total=1650469, initialJs=311405, initialCss=95703, budget totalAssets=1651000",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/d0ac655d",
+      "captured_at": "2026-10-09T07:56:11+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-SHARE-SOURCE-STATUS",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-SOURCE-STATUS-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract이 선택 자료의 원문 출처 수와 공유 범위 보존 문구를 요구하고 전체 UI contract 검사가 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; selectedMessageSourceCount; guide-share-selection-status; 원문 출처 포함; 공유 링크에도 같은 범위가 유지됩니다; pnpm run validate:ui-contract pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/blob/main/scripts/validate-ui-contract.mjs",
+      "captured_at": "2026-10-09T07:56:11+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261009-SHARE-SOURCE-STATUS",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-PR-SHARE-SOURCE-STATUS-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 자료 상태 패널 변경 PR #731의 required checks가 통과하고 main에 병합됐다.",
+      "locator": "PR #731; release-verify pass; site-quality-verify pass; merge SHA c051172932c00d244310dad1ad8496ee10431df2",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/731",
+      "captured_at": "2026-10-09T07:56:11+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-SHARE-SOURCE-STATUS",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-DEPLOY-SHARE-SOURCE-STATUS-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main workflow가 정적 Pages 배포와 라이브 smoke·release-status까지 성공했으며 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37856030861; head SHA c051172932c00d244310dad1ad8496ee10431df2; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37856030861",
+      "captured_at": "2026-10-09T07:56:11+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-SHARE-SOURCE-STATUS",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-CDP-LIVE-SHARE-SOURCE-STATUS-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin 부재로 Chrome CDP fallback을 사용해 390px 공유 보드를 점검했으며, 선택 자료 제목·원문 출처 수·공유 범위 안내가 표시되고 카드 선택 후 요약이 갱신됐다. 전문가 영상은 연구 지도보다 앞서며 가로 넘침과 runtime error가 없었다.",
+      "locator": "Chrome CDP 9223 fallback; public URL https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24#final; emulation 390x844; initial materials=24, selected=2, source status=원문 출처 2개 포함; click 신경계 역할 자료 선택 -> selected=3 and summary updated; expertBeforeAcademic=true; clientWidth=375; scrollWidth=375; runtime errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24#final",
+      "captured_at": "2026-10-09T07:56:11+09:00",
+      "reviewer_id": "NAVI-CDP-LIVE-QA-GABA-20261009-SHARE-SOURCE-STATUS",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-SOURCE-STATUS-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main merge candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info/; base=https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=c051172932c00d244310dad1ad8496ee10431df2; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-09T07:56:11+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-SHARE-SOURCE-STATUS",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-NAVI-STATE-SHARE-SOURCE-STATUS-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 공유 자료 상태 패널의 결정·로컬 QA·UI contract·PR·Pages 배포·라이브 CDP·validator 결과를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "DEC-031; H-413; PR #731 merge SHA c051172932c00d244310dad1ad8496ee10431df2; workflow 37856030861; live candidate matched; status USER_DECISION; completion gate NOT_READY; Browser plugin 부재에 따른 Chrome CDP fallback; Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T07:56:11+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-SOURCE-STATUS",
+      "claim_refs": ["C-321"]
     }
   ]
 }

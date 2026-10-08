@@ -3840,3 +3840,14 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-293`, `E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008`, `E-UI-CONTRACT-RESEARCH-MAP-LABELS-20261008`, `E-PR-RESEARCH-MAP-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008`, `E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008`.
+
+## 사업자 공유 전달 범위·출처 상태 패널 재감리 — c0511729 — 2026-10-09
+
+- 사업자 공유 보드의 전달 레일 아래에서 선택 자료 제목, 포함된 원문 출처 수, 공유 링크의 동일 범위 유지 안내를 한 번에 읽을 수 있다. 선택 2개에서 `신경계 역할` 카드를 추가하면 선택 3개와 전달 제목이 즉시 갱신된다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #731과 main workflow `37856030861`의 release-verify·Pages·라이브 smoke·release-status가 통과했다. 공개 validator는 candidate `c051172932c00d244310dad1ad8496ee10431df2`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 공개 390px Chrome CDP fallback에서 `원문 출처 2개 포함 · 공유 링크에도 같은 범위가 유지됩니다`, 선택 요약 갱신, `03 · 전문가 영상 → 04 · 연구 지도`, `clientWidth=375`, `scrollWidth=375`, runtime errors 0을 재현했다. 기존 공유·복사·개별 선택·출처 링크·제품 독립 경계는 유지된다.
+- 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 남기며 `USER_DECISION / NOT_READY`를 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-321`, `E-LOCAL-BUILD-SHARE-SOURCE-STATUS-20261009`, `E-UI-CONTRACT-SHARE-SOURCE-STATUS-20261009`, `E-PR-SHARE-SOURCE-STATUS-20261009`, `E-DEPLOY-SHARE-SOURCE-STATUS-20261009`, `E-CDP-LIVE-SHARE-SOURCE-STATUS-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCE-STATUS-20261009`, `E-NAVI-STATE-SHARE-SOURCE-STATUS-20261009`.

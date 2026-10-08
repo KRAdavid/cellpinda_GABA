@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-09T07:32:54+09:00",
+  "updated_at": "2026-10-08T22:58:06.659378Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2142,17 +2142,17 @@
       },
       {
         "id": "AUD-005",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "최신 main 공개본을 320·390·768·1440px에서 다시 점검했다. 320px은 academic·reading-note·expert-videos·final 직접 진입, 390·768·1440px은 top과 주요 장 직접 진입을 확인했으며, 확인 화면의 document 가로폭은 viewport와 일치했다. 히어로·연구 지도·출처 읽기 카드·전문가 영상·마지막 공유 화면의 잘림과 겹침은 재현되지 않았고 신규 CRITICAL/MAJOR 코드 결함도 없었다. UI contract·research copy·typecheck·127개 테스트·성능 예산과 공개 validator가 모두 통과했으며, 기능 코드·공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007",
-        "E-CDP-PUBLISHING-SURFACE-AUDIT-20261007",
-        "E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007",
-        "E-NAVI-STATE-PUBLISHING-AUDIT-20261007"
-      ],
-      "impact": "현재 공개 화면은 전문 퍼블리싱 기준의 대표 반응형·읽기 흐름에서 안정적으로 보인다.",
-      "required_action": "다음 코드·카피 변경 시 동일 4폭·핵심 해시 진입·공개 validator QA 재실행",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "최신 main 공개본을 320·390·768·1440px에서 다시 점검했다. 320px은 academic·reading-note·expert-videos·final 직접 진입, 390·768·1440px은 top과 주요 장 직접 진입을 확인했으며, 확인 화면의 document 가로폭은 viewport와 일치했다. 히어로·연구 지도·출처 읽기 카드·전문가 영상·마지막 공유 화면의 잘림과 겹침은 재현되지 않았고 신규 CRITICAL/MAJOR 코드 결함도 없었다. UI contract·research copy·typecheck·127개 테스트·성능 예산과 공개 validator가 모두 통과했으며, 기능 코드·공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007",
+          "E-CDP-PUBLISHING-SURFACE-AUDIT-20261007",
+          "E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007",
+          "E-NAVI-STATE-PUBLISHING-AUDIT-20261007"
+        ],
+        "impact": "현재 공개 화면은 전문 퍼블리싱 기준의 대표 반응형·읽기 흐름에서 안정적으로 보인다.",
+        "required_action": "다음 코드·카피 변경 시 동일 4폭·핵심 해시 진입·공개 validator QA 재실행",
         "owner": "QA"
       },
       {
@@ -2359,104 +2359,104 @@
         "required_action": "다음 NAVI 문서-only 공개 동기화 후에도 main candidate·Pages·live validator·표면 재감리를 최종 연결",
         "owner": "QA"
       },
-    {
-      "id": "AUD-019",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "수면과 회복 14단계 흐름의 모바일 배열을 표준 폭에서 7+7로 균형화하고, 280px에서는 6+6+2 안전 레이아웃을 유지했다. 로컬 빌드·UI contract·PR 보호검사·Pages 배포·라이브 smoke·release-status와 공개 390px 상호작용을 통과했으며 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008",
-        "E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008",
-        "E-PR-RECOVERY-MAP-BALANCE-20261008",
-        "E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008",
-        "E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008"
-      ],
-      "impact": "표준 모바일에서 14단계 흐름이 끊기지 않고, 좁은 화면에서도 터치 가능한 안전 레이아웃이 유지된다.",
-      "required_action": "다음 회복 지도·모바일 breakpoint 변경 시 280·390·1440px 레이아웃과 라이브 validator를 함께 재검증",
-      "owner": "QA"
-    },
-    {
-      "id": "AUD-020",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "수면과 회복 14개 단계 버튼에 전체 단계 수와 현재 순번의 ARIA 의미를 추가했다. 화면 배열·자동 전환·선택 상태는 유지하면서 보조기술 사용자가 1/14부터 14/14까지 같은 흐름을 이해할 수 있도록 보강했고, 로컬·PR·Pages·라이브 검증을 통과했다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008",
-        "E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008",
-        "E-PR-RECOVERY-MAP-A11Y-20261008",
-        "E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008",
-        "E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008"
-      ],
-      "impact": "시각적 순서와 보조기술의 단계 순서가 일치해 모바일 회복 흐름의 이해 가능성이 높아진다.",
-      "required_action": "다음 회복 지도 상호작용 변경 시 ARIA 순번·선택 상태·280·390·1440px 시각 레이아웃을 함께 재검증",
-      "owner": "QA"
-    },
-    {
-      "id": "AUD-021",
-      "severity": "MINOR",
-      "status": "CLOSED",
-      "statement": "좁은 모바일 헤더에서 로고 flex item이 확장되면 메뉴·글자 크기·공유 컨트롤과 기하학적으로 겹칠 수 있는 위험을 확인했고, flex:0 1 auto 보정 후 280·320·390·430px에서 겹침 없이 공개 렌더링됨을 확인했다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008",
-        "E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008",
-        "E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008",
-        "E-NAVI-STATE-NARROW-HEADER-FLEX-20261008"
-      ],
-      "impact": "좁은 화면에서 헤더 컨트롤 간 충돌과 접근 가능한 조작 영역 침범 가능성을 줄인다.",
-      "required_action": "다음 헤더·반응형 breakpoint 변경 시 280·320·390·430px 기하학 감사와 라이브 smoke를 함께 재검증",
-      "owner": "QA"
-    },
-    {
-      "id": "AUD-022",
-      "severity": "MINOR",
-      "status": "CLOSED",
-      "statement": "모바일 연구 지도에서 사람·동물·세포 범위 라벨이 좁은 화면에서 어절 단위로 끊겨 보이는 잔여 가독성 리스크를 확인했다. 표시 라벨은 한 줄의 `사람 연구`·`동물·세포`로 정리하고 상세 연구 범위는 접근성 이름에 보존했으며, 로컬·Pages·라이브 390px에서 라벨 높이 15px과 가로폭 일치를 확인했다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008",
-        "E-UI-CONTRACT-RESEARCH-MAP-LABELS-20261008",
-        "E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008",
-        "E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008"
-      ],
-      "impact": "모바일에서 연구 범위를 빠르게 스캔하면서도 상세 연구 조건을 보조기술 이름으로 잃지 않는다.",
-      "required_action": "다음 연구 지도 라벨·모바일 breakpoint 변경 시 280·390·1440px 또는 최소 390px과 라이브 검증을 재실행",
-      "owner": "QA"
-    },
-    {
-      "id": "AUD-023",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "전문가 영상이 본문뿐 아니라 모바일 메뉴에서도 연구 지도보다 먼저 발견되는지, 사업자 선택 자료 미리보기가 390px에서 즉시 해제되는지 확인했다. 실제 DOM·메뉴 현재 위치·자동 닫힘·가로폭·공개 candidate가 일치했고 신규 CRITICAL/MAJOR 결함은 없다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-NAV-EXPERT-20261009",
-        "E-UI-CONTRACT-NAV-EXPERT-20261009",
-        "E-DEPLOY-NAV-EXPERT-20261009",
-        "E-CDP-LIVE-NAV-EXPERT-20261009",
-        "E-LIVE-PUBLIC-NAV-EXPERT-20261009",
-        "E-NAVI-STATE-NAV-EXPERT-20261009"
-      ],
-      "impact": "방문자가 GABA 기본 개념 다음 전문가 설명을 거쳐 연구 지도로 확장하고, 사업자는 전달 전 자료 범위를 확인할 수 있다.",
-      "required_action": "다음 메뉴·읽기 순서·공유 보드 정보 우선순위 변경 시 390px 메뉴 이동·선택 해제·live validator를 함께 재검증",
-      "owner": "QA"
-    },
-    {
-      "id": "AUD-024",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "사업자가 공유 버튼을 누르기 전에 선택된 실제 전달 문장과 출처명을 접이식 미리보기로 확인할 수 있는지, 기본 접힘·빠른 선택 변경·390px 가로폭을 재현했다. 기존 전체 자료·개별 복사·출처 링크·제품 독립 경계는 유지되며 신규 CRITICAL/MAJOR 결함은 없다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009",
-        "E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009",
-        "E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009",
-        "E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009",
-        "E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009",
-        "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009"
-      ],
-      "impact": "사업자가 다른 사업자·소비자에게 전달할 문장과 근거 범위를 보내기 전에 확인할 수 있어 공유 오류와 해석 마찰을 줄인다.",
-      "required_action": "다음 공유 카드·문장·출처·자료 선택 구조 변경 시 390px 미리보기 열기·선택 변경·live validator·성능 예산을 함께 재검증",
-      "owner": "QA"
-    }
+      {
+        "id": "AUD-019",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "수면과 회복 14단계 흐름의 모바일 배열을 표준 폭에서 7+7로 균형화하고, 280px에서는 6+6+2 안전 레이아웃을 유지했다. 로컬 빌드·UI contract·PR 보호검사·Pages 배포·라이브 smoke·release-status와 공개 390px 상호작용을 통과했으며 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008",
+          "E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008",
+          "E-PR-RECOVERY-MAP-BALANCE-20261008",
+          "E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008",
+          "E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008"
+        ],
+        "impact": "표준 모바일에서 14단계 흐름이 끊기지 않고, 좁은 화면에서도 터치 가능한 안전 레이아웃이 유지된다.",
+        "required_action": "다음 회복 지도·모바일 breakpoint 변경 시 280·390·1440px 레이아웃과 라이브 validator를 함께 재검증",
+        "owner": "QA"
+      },
+      {
+        "id": "AUD-020",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "수면과 회복 14개 단계 버튼에 전체 단계 수와 현재 순번의 ARIA 의미를 추가했다. 화면 배열·자동 전환·선택 상태는 유지하면서 보조기술 사용자가 1/14부터 14/14까지 같은 흐름을 이해할 수 있도록 보강했고, 로컬·PR·Pages·라이브 검증을 통과했다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008",
+          "E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008",
+          "E-PR-RECOVERY-MAP-A11Y-20261008",
+          "E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008",
+          "E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008"
+        ],
+        "impact": "시각적 순서와 보조기술의 단계 순서가 일치해 모바일 회복 흐름의 이해 가능성이 높아진다.",
+        "required_action": "다음 회복 지도 상호작용 변경 시 ARIA 순번·선택 상태·280·390·1440px 시각 레이아웃을 함께 재검증",
+        "owner": "QA"
+      },
+      {
+        "id": "AUD-021",
+        "severity": "MINOR",
+        "status": "CLOSED",
+        "statement": "좁은 모바일 헤더에서 로고 flex item이 확장되면 메뉴·글자 크기·공유 컨트롤과 기하학적으로 겹칠 수 있는 위험을 확인했고, flex:0 1 auto 보정 후 280·320·390·430px에서 겹침 없이 공개 렌더링됨을 확인했다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008",
+          "E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008",
+          "E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008",
+          "E-NAVI-STATE-NARROW-HEADER-FLEX-20261008"
+        ],
+        "impact": "좁은 화면에서 헤더 컨트롤 간 충돌과 접근 가능한 조작 영역 침범 가능성을 줄인다.",
+        "required_action": "다음 헤더·반응형 breakpoint 변경 시 280·320·390·430px 기하학 감사와 라이브 smoke를 함께 재검증",
+        "owner": "QA"
+      },
+      {
+        "id": "AUD-022",
+        "severity": "MINOR",
+        "status": "CLOSED",
+        "statement": "모바일 연구 지도에서 사람·동물·세포 범위 라벨이 좁은 화면에서 어절 단위로 끊겨 보이는 잔여 가독성 리스크를 확인했다. 표시 라벨은 한 줄의 `사람 연구`·`동물·세포`로 정리하고 상세 연구 범위는 접근성 이름에 보존했으며, 로컬·Pages·라이브 390px에서 라벨 높이 15px과 가로폭 일치를 확인했다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008",
+          "E-UI-CONTRACT-RESEARCH-MAP-LABELS-20261008",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008",
+          "E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008"
+        ],
+        "impact": "모바일에서 연구 범위를 빠르게 스캔하면서도 상세 연구 조건을 보조기술 이름으로 잃지 않는다.",
+        "required_action": "다음 연구 지도 라벨·모바일 breakpoint 변경 시 280·390·1440px 또는 최소 390px과 라이브 검증을 재실행",
+        "owner": "QA"
+      },
+      {
+        "id": "AUD-023",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "전문가 영상이 본문뿐 아니라 모바일 메뉴에서도 연구 지도보다 먼저 발견되는지, 사업자 선택 자료 미리보기가 390px에서 즉시 해제되는지 확인했다. 실제 DOM·메뉴 현재 위치·자동 닫힘·가로폭·공개 candidate가 일치했고 신규 CRITICAL/MAJOR 결함은 없다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-NAV-EXPERT-20261009",
+          "E-UI-CONTRACT-NAV-EXPERT-20261009",
+          "E-DEPLOY-NAV-EXPERT-20261009",
+          "E-CDP-LIVE-NAV-EXPERT-20261009",
+          "E-LIVE-PUBLIC-NAV-EXPERT-20261009",
+          "E-NAVI-STATE-NAV-EXPERT-20261009"
+        ],
+        "impact": "방문자가 GABA 기본 개념 다음 전문가 설명을 거쳐 연구 지도로 확장하고, 사업자는 전달 전 자료 범위를 확인할 수 있다.",
+        "required_action": "다음 메뉴·읽기 순서·공유 보드 정보 우선순위 변경 시 390px 메뉴 이동·선택 해제·live validator를 함께 재검증",
+        "owner": "QA"
+      },
+      {
+        "id": "AUD-024",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "사업자가 공유 버튼을 누르기 전에 선택된 실제 전달 문장과 출처명을 접이식 미리보기로 확인할 수 있는지, 기본 접힘·빠른 선택 변경·390px 가로폭을 재현했다. 기존 전체 자료·개별 복사·출처 링크·제품 독립 경계는 유지되며 신규 CRITICAL/MAJOR 결함은 없다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009",
+          "E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009",
+          "E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009",
+          "E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009",
+          "E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009",
+          "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009"
+        ],
+        "impact": "사업자가 다른 사업자·소비자에게 전달할 문장과 근거 범위를 보내기 전에 확인할 수 있어 공유 오류와 해석 마찰을 줄인다.",
+        "required_action": "다음 공유 카드·문장·출처·자료 선택 구조 변경 시 390px 미리보기 열기·선택 변경·live validator·성능 예산을 함께 재검증",
+        "owner": "QA"
+      }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
@@ -2661,16 +2661,16 @@
       },
       {
         "id": "RT-005",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "공개 표면 재점검에서 좁은 모바일·태블릿·데스크톱의 핵심 장 직접 진입, 가로폭, 화면 카드 읽기 순서에 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Chrome headless/CDP fallback 중심 결과이므로 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건으로 유지한다.",
-      "evidence_refs": [
-        "E-CDP-PUBLISHING-SURFACE-AUDIT-20261007",
-        "E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007",
-        "E-NAVI-STATE-PUBLISHING-AUDIT-20261007"
-      ],
-      "impact": "이번 공개본에서 새 공격 가능한 화면 회귀는 관찰되지 않았다.",
-      "required_action": "외부 브라우저·실기기·실사용자·독립 과학·규제 검증은 계속 OPEN",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공개 표면 재점검에서 좁은 모바일·태블릿·데스크톱의 핵심 장 직접 진입, 가로폭, 화면 카드 읽기 순서에 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. 다만 Chrome headless/CDP fallback 중심 결과이므로 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건으로 유지한다.",
+        "evidence_refs": [
+          "E-CDP-PUBLISHING-SURFACE-AUDIT-20261007",
+          "E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007",
+          "E-NAVI-STATE-PUBLISHING-AUDIT-20261007"
+        ],
+        "impact": "이번 공개본에서 새 공격 가능한 화면 회귀는 관찰되지 않았다.",
+        "required_action": "외부 브라우저·실기기·실사용자·독립 과학·규제 검증은 계속 OPEN",
         "owner": "레드팀"
       },
       {
@@ -2863,100 +2863,100 @@
         "required_action": "Chrome fallback의 외부 브라우저·실기기·실사용자·독립 과학·규제 검증 한계는 계속 OPEN",
         "owner": "Red Team"
       },
-    {
-      "id": "RT-019",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "공격 관점에서 280·390·1440px 수면과 회복 14단계의 행 균형, 단계 선택, 마지막 카드 연결, 가로폭과 runtime error를 확인했으며 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008",
-        "E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008",
-        "E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008",
-        "E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008"
-      ],
-      "impact": "모바일 회복 흐름의 행 분리·마지막 단계 고립·가로 넘침 회귀를 조기에 차단한다.",
-      "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
-      "owner": "Red Team"
-    },
-    {
-      "id": "RT-020",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "공격 관점에서 14개 회복 단계의 ARIA setsize·posinset가 1부터 14까지 연속인지, active step과 가로폭·runtime error가 깨지지 않는지 확인했으며 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008",
-        "E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008",
-        "E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008",
-        "E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008",
-        "E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008"
-      ],
-      "impact": "보조기술 순번 누락·중복·시각 상태와 의미 상태의 불일치 회귀를 조기에 차단한다.",
-      "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
-      "owner": "Red Team"
-    },
-    {
-      "id": "RT-021",
-      "severity": "MINOR",
-      "status": "CLOSED",
-      "statement": "공격 관점에서 좁은 모바일 헤더의 로고·메뉴·글자 크기·공유 컨트롤 경계와 viewport 폭을 확인했으며 280·320·390·430px 모두 overlap=false이고 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008",
-        "E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008",
-        "E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008",
-        "E-NAVI-STATE-NARROW-HEADER-FLEX-20261008"
-      ],
-      "impact": "좁은 화면에서 컨트롤 충돌·가로 넘침 회귀를 조기에 차단한다.",
-      "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
-      "owner": "Red Team"
-    },
-    {
-      "id": "RT-022",
-      "severity": "MINOR",
-      "status": "CLOSED",
-      "statement": "공격 관점에서 390px 연구 지도 범위 라벨의 줄바꿈·가로 넘침·접근성 이름 불일치와 주제 선택 회귀를 확인했다. 표시 라벨은 한 줄로 유지되고 상세 범위는 전체 aria-label에 남으며 `피부` 선택이 `research-skin` 카드로 연결되고 신규 CRITICAL/MAJOR 결함은 없다.",
-      "evidence_refs": [
-        "E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008",
-        "E-DEPLOY-PIPELINE-RESEARCH-MAP-LABELS-20261008",
-        "E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008",
-        "E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008"
-      ],
-      "impact": "연구 범위 축약이 실제 연구 조건을 숨기거나 지도 선택 흐름을 끊는 회귀를 방지한다.",
-      "required_action": "다음 라벨·접근성 이름·연구 지도 상호작용 변경 시 390px 실제 렌더와 선택 흐름을 재검증; Safari/iOS/Android·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
-      "owner": "Red Team"
-    },
-    {
-      "id": "RT-023",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "공격 관점에서 메뉴와 본문의 전문가 영상 선행 순서 불일치, 메뉴 선택 후 닫힘 실패, 390px 자료 미리보기 해제와 가로 넘침 회귀를 확인했다. 신규 CRITICAL/MAJOR 결함은 재현되지 않았다.",
-      "evidence_refs": [
-        "E-UI-CONTRACT-NAV-EXPERT-20261009",
-        "E-DEPLOY-NAV-EXPERT-20261009",
-        "E-CDP-LIVE-NAV-EXPERT-20261009",
-        "E-LIVE-PUBLIC-NAV-EXPERT-20261009",
-        "E-NAVI-STATE-NAV-EXPERT-20261009"
-      ],
-      "impact": "모바일 메뉴 탐색과 사업자 전달 범위 확인이 서로 다른 순서나 상태를 보여주는 회귀를 조기에 차단한다.",
-      "required_action": "Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
-      "owner": "Red Team"
-    },
-    {
-      "id": "RT-024",
-      "severity": "OBSERVATION",
-      "status": "CLOSED",
-      "statement": "공격 관점에서 공유 전에 실제 선택 문장·출처가 누락되거나 선택 묶음 변경 뒤 낡은 내용이 남는지, 미리보기가 기본 접힘·390px 가로폭을 유지하는지 확인했다. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
-      "evidence_refs": [
-        "E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009",
-        "E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009",
-        "E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009",
-        "E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009",
-        "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009"
-      ],
-      "impact": "공유 전에 선택 범위와 실제 전달 payload가 어긋나거나 오래된 선택 내용이 남는 회귀를 점검한다.",
-      "required_action": "Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 해당 외부 조건은 계속 OPEN",
-      "owner": "Red Team"
-    }
+      {
+        "id": "RT-019",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 280·390·1440px 수면과 회복 14단계의 행 균형, 단계 선택, 마지막 카드 연결, 가로폭과 runtime error를 확인했으며 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008",
+          "E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008",
+          "E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008",
+          "E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008"
+        ],
+        "impact": "모바일 회복 흐름의 행 분리·마지막 단계 고립·가로 넘침 회귀를 조기에 차단한다.",
+        "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "Red Team"
+      },
+      {
+        "id": "RT-020",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 14개 회복 단계의 ARIA setsize·posinset가 1부터 14까지 연속인지, active step과 가로폭·runtime error가 깨지지 않는지 확인했으며 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008",
+          "E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008",
+          "E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008",
+          "E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008",
+          "E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008"
+        ],
+        "impact": "보조기술 순번 누락·중복·시각 상태와 의미 상태의 불일치 회귀를 조기에 차단한다.",
+        "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "Red Team"
+      },
+      {
+        "id": "RT-021",
+        "severity": "MINOR",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 좁은 모바일 헤더의 로고·메뉴·글자 크기·공유 컨트롤 경계와 viewport 폭을 확인했으며 280·320·390·430px 모두 overlap=false이고 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008",
+          "E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008",
+          "E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008",
+          "E-NAVI-STATE-NARROW-HEADER-FLEX-20261008"
+        ],
+        "impact": "좁은 화면에서 컨트롤 충돌·가로 넘침 회귀를 조기에 차단한다.",
+        "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "Red Team"
+      },
+      {
+        "id": "RT-022",
+        "severity": "MINOR",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 390px 연구 지도 범위 라벨의 줄바꿈·가로 넘침·접근성 이름 불일치와 주제 선택 회귀를 확인했다. 표시 라벨은 한 줄로 유지되고 상세 범위는 전체 aria-label에 남으며 `피부` 선택이 `research-skin` 카드로 연결되고 신규 CRITICAL/MAJOR 결함은 없다.",
+        "evidence_refs": [
+          "E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008",
+          "E-DEPLOY-PIPELINE-RESEARCH-MAP-LABELS-20261008",
+          "E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008",
+          "E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008"
+        ],
+        "impact": "연구 범위 축약이 실제 연구 조건을 숨기거나 지도 선택 흐름을 끊는 회귀를 방지한다.",
+        "required_action": "다음 라벨·접근성 이름·연구 지도 상호작용 변경 시 390px 실제 렌더와 선택 흐름을 재검증; Safari/iOS/Android·실제 고령 사용자·독립 과학·규제 검증은 계속 OPEN",
+        "owner": "Red Team"
+      },
+      {
+        "id": "RT-023",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 메뉴와 본문의 전문가 영상 선행 순서 불일치, 메뉴 선택 후 닫힘 실패, 390px 자료 미리보기 해제와 가로 넘침 회귀를 확인했다. 신규 CRITICAL/MAJOR 결함은 재현되지 않았다.",
+        "evidence_refs": [
+          "E-UI-CONTRACT-NAV-EXPERT-20261009",
+          "E-DEPLOY-NAV-EXPERT-20261009",
+          "E-CDP-LIVE-NAV-EXPERT-20261009",
+          "E-LIVE-PUBLIC-NAV-EXPERT-20261009",
+          "E-NAVI-STATE-NAV-EXPERT-20261009"
+        ],
+        "impact": "모바일 메뉴 탐색과 사업자 전달 범위 확인이 서로 다른 순서나 상태를 보여주는 회귀를 조기에 차단한다.",
+        "required_action": "Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
+        "owner": "Red Team"
+      },
+      {
+        "id": "RT-024",
+        "severity": "OBSERVATION",
+        "status": "CLOSED",
+        "statement": "공격 관점에서 공유 전에 실제 선택 문장·출처가 누락되거나 선택 묶음 변경 뒤 낡은 내용이 남는지, 미리보기가 기본 접힘·390px 가로폭을 유지하는지 확인했다. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
+        "evidence_refs": [
+          "E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009",
+          "E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009",
+          "E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009",
+          "E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009",
+          "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009"
+        ],
+        "impact": "공유 전에 선택 범위와 실제 전달 payload가 어긋나거나 오래된 선택 내용이 남는 회귀를 점검한다.",
+        "required_action": "Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 해당 외부 조건은 계속 OPEN",
+        "owner": "Red Team"
+      }
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
@@ -7068,6 +7068,13 @@
       "from_status": "USER_DECISION",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-09T07:32:54+09:00"
+    },
+    {
+      "id": "H-413",
+      "event": "NAVI 자동 공개 배포 점검에서 사업자가 전달 직전에 선택 자료 제목만 다시 카드 목록과 대조해야 하던 잔여 마찰을 확인하고, 전달 레일 아래에 선택 자료·포함된 원문 출처 수·공유 링크의 같은 범위 유지 여부를 한 상태 패널로 표시했다. 개별 선택·목적별 묶음·공유·복사·제품 독립 경계와 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서는 유지했다. 로컬 UI contract·typecheck·pnpm test 127 pass·production build·성능 예산을 통과했고 PR #731과 main workflow 37856030861의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY로 skipped됐다. 공개 validator는 HTTP 200·STATIC·candidate SHA c051172932c00d244310dad1ad8496ee10431df2·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome CDP fallback 390px에서 `원문 출처 2개 포함`·공유 범위 안내·선택 2개에서 3개로의 요약 갱신·전문가 영상 → 연구 지도 순서·가로폭·runtime errors 0을 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-321과 관련 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-09T07:56:11+09:00"
     }
   ]
 }
