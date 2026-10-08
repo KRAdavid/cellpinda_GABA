@@ -685,6 +685,7 @@ const messageKit = [
 const messageKitLabels = ['기본 소개', '신경계 역할', '연구의 확장', '사람 연구 결과', '발효·안전 연구'];
 const messageKitUseCases = ['처음 설명을 시작할 때', 'GABA의 역할을 설명할 때', '연구 범위를 보여줄 때', '사람 대상 결과를 전할 때', '발효·안전 자료를 덧붙일 때'];
 const messageKitSources: (string | null)[] = [null, null, null, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
+const messageKitSourceUrls: (string | null)[] = [null, null, null, researchTopics[0].source.url, fermentedSafetySteps[2].source.url];
 const messageKitAudienceLabels: Record<number, string> = { 21: '소비자용', 31: '사업자용', 15: '교육용' };
 const validMessageAudienceMasks = new Set([21, 31, 15]);
 
@@ -709,7 +710,7 @@ const getMessageKitShareUrl = (audienceMask: number) => {
   return url.toString();
 };
 
-const formatMessageKitText = (message: string, index: number, withGuide = false, guideUrl?: string) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}` : ''}${withGuide ? `\n\n공개 안내서: ${guideUrl ?? getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
+const formatMessageKitText = (message: string, index: number, withGuide = false, guideUrl?: string) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}${messageKitSourceUrls[index] ? `\n${messageKitSourceUrls[index]}` : ''}` : ''}${withGuide ? `\n\n공개 안내서: ${guideUrl ?? getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
 
 const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${indices.map(index => `${String(index + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask)}` : ''}`;
 
@@ -2271,7 +2272,7 @@ export default function PublicGabaGuide() {
               <div className="guide-share-bundle-summary" aria-live="polite" aria-atomic="true" aria-label={`${activeMessageAudienceLabel} 추천 자료: ${recommendedMessageSummary}`}><span>먼저 전달할 내용</span><strong>{recommendedMessageSummary}</strong></div>
             <details open className="guide-share-lines">
               <summary><span>{activeMessageAudienceLabel} GABA 자료</span><b>5개 전체</b></summary>
-              <div>{messageKit.map((message, index) => { const isMessageCopied = copiedMessageIndex === index; const isRecommended = Boolean(activeMessageAudienceMask & (1 << index)); return <article key={message} className={isRecommended ? 'is-rec' : undefined} aria-label={`${messageKitLabels[index]} · ${messageKitUseCases[index]}${isRecommended ? ' · 추천 자료' : ''}`}><div className="guide-share-card-head"><span>{messageKitLabels[index]}</span>{isRecommended ? <b>추천</b> : <small>전체 자료</small>}</div><small className="guide-share-card-use">{messageKitUseCases[index]}</small><p>{message}{messageKitSources[index] ? <><br /><small>출처 · {messageKitSources[index]}</small></> : null}</p><button type="button" className={`guide-share-line-copy${isMessageCopied ? ' is-copied' : ''}`} aria-label={`${messageKitLabels[index]} ${isMessageCopied ? '복사 완료' : '복사'}`} onClick={() => void copyMessageKitLine(message, index)}><span className="guide-share-line-copy-icon" aria-hidden="true">{isMessageCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isMessageCopied ? '복사 완료' : '문장 복사'}</button></article>; })}</div>
+              <div>{messageKit.map((message, index) => { const isMessageCopied = copiedMessageIndex === index; const isRecommended = Boolean(activeMessageAudienceMask & (1 << index)); const sourceUrl = messageKitSourceUrls[index]; return <article key={message} className={isRecommended ? 'is-rec' : undefined} aria-label={`${messageKitLabels[index]} · ${messageKitUseCases[index]}${isRecommended ? ' · 추천 자료' : ''}`}><div className="guide-share-card-head"><span>{messageKitLabels[index]}</span>{isRecommended ? <b>추천</b> : <small>전체 자료</small>}</div><small className="guide-share-card-use">{messageKitUseCases[index]}</small><p>{message}{messageKitSources[index] && sourceUrl ? <><br /><a className="guide-share-card-source" href={sourceUrl} target="_blank" rel="noopener noreferrer">출처 · {messageKitSources[index]} <ExternalLink size={11} aria-hidden="true" /></a></> : null}</p><button type="button" className={`guide-share-line-copy${isMessageCopied ? ' is-copied' : ''}`} aria-label={`${messageKitLabels[index]} ${isMessageCopied ? '복사 완료' : '복사'}`} onClick={() => void copyMessageKitLine(message, index)}><span className="guide-share-line-copy-icon" aria-hidden="true">{isMessageCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isMessageCopied ? '복사 완료' : '문장 복사'}</button></article>; })}</div>
             </details>
           </div>
         </section>
