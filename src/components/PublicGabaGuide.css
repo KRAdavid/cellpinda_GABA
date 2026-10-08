@@ -1975,6 +1975,11 @@
   .gaba-guide.is-large-text .guide-research-source-action{font-size:12px}
 }
 
+.gaba-guide.is-large-text :is(.guide-study-source,.guide-application-sources a,.guide-fermented-step>a,.guide-video-feature-actions>a,.guide-research-scale-grid a,.guide-research-scale-feature a){font-size:13px;line-height:1.65}
+.gaba-guide.is-large-text .guide-reading-note-source-kicker{font-size:12px}
+.gaba-guide.is-large-text .guide-reading-note-source :is(small,.guide-reading-note-source-action){font-size:13px;line-height:1.6}
+.gaba-guide.is-large-text :is(.guide-video-feature-share,.guide-share-line-copy){font-size:13px!important}
+
 /* v118 hero reading start cue: keep the first reading action visible over photography without adding visual weight. */
 .guide-hero-story .guide-hero-scroll{min-height:40px;padding:7px 14px;border:1px solid rgba(113,170,178,.38);border-radius:999px;background:rgba(255,255,255,.82);box-shadow:0 7px 18px rgba(28,83,99,.08);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font:inherit;cursor:pointer;color:#3e6873;transition:color .2s ease,border-color .2s ease,background-color .2s ease,box-shadow .2s ease,transform .2s ease}
 .guide-hero-story .guide-hero-scroll:hover{border-color:rgba(18,154,163,.58);background:rgba(255,255,255,.94);box-shadow:0 9px 22px rgba(28,83,99,.12);color:var(--guide-teal-dark);transform:translateX(-50%) translateY(-1px)}
