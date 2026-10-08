@@ -2964,6 +2964,16 @@
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
 
+## Red-team recheck — 사업자 공유 전달 범위·출처 상태 패널 — c0511729 — 2026-10-09
+
+- 공격 관점에서 선택 자료가 바뀐 뒤 상태 패널의 제목·출처 수·공유 범위 안내가 낡은 값으로 남는지 확인했다. `materials=24`에서 선택 2개로 시작한 뒤 `신경계 역할` 자료를 선택하면 선택 3개와 제목 요약이 갱신됐다.
+- 공유 보드가 실제 전달 대상과 전체 자료를 혼동하지 않도록 기존 `선택 3개 · 전체 5개`, 접이식 문장 미리보기, 원문 출처 링크, 개별·묶음 공유·복사를 함께 확인했다. 공개 390px에서 가로폭 일치와 runtime error 0을 재현했으며 신규 CRITICAL/MAJOR 결함은 없다.
+- 상태 패널은 출처가 있는 선택 자료의 개수만 표시하므로 출처 개수를 전체 연구 근거의 완전성으로 오인하지 않도록 기존 원문 링크와 연구 범위 경계를 유지했다. Chrome CDP fallback은 실제 모바일 공유 시트, Safari/iOS/Android 실기기, 실제 사용자 독해성, 독립 과학·규제 감수를 대신하지 않으므로 외부 조건은 계속 OPEN이다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-321`, `E-UI-CONTRACT-SHARE-SOURCE-STATUS-20261009`, `E-CDP-LIVE-SHARE-SOURCE-STATUS-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCE-STATUS-20261009`, `E-NAVI-STATE-SHARE-SOURCE-STATUS-20261009`.
+
 ## 사업자 공유 선택 상태 보정 공격 점검 — 2026-10-09
 
 - 공격 관점에서 추천 묶음에서 개별 카드를 선택한 뒤 상태 라벨이 `직접 선택`으로 바뀌는지, 빈 직접 선택 항목이 기존 선택을 지우지 않는지 확인했다.

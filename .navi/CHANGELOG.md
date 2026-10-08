@@ -2716,3 +2716,13 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 기능 코드·사업자 공유 상태·출처·제품 독립 경계·`03 · 전문가 영상 → 04 · 연구 지도` 순서는 변경되지 않았다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
 
 증적: `C-319`, `E-LIVE-PUBLIC-NAVI-FINAL-20261009`, `E-NAVI-STATE-NAVI-FINAL-20261009`.
+
+## 2026-10-09 — 사업자 공유 전달 범위·원문 출처 상태 패널 및 공개 배포
+
+- 사업자 공유 보드의 전달 레일 아래에 선택 자료 제목, 선택 자료에 포함된 원문 출처 수, 공유 링크에서 같은 선택 범위가 유지된다는 안내를 하나의 상태 패널로 추가했다.
+- 카드 선택·목적별 빠른 선택·선택 자료 공유·복사·개별 문장 복사와 `03 · 전문가 영상 → 04 · 연구 지도` 순서는 변경하지 않았다.
+- 로컬 `pnpm run validate:ui-contract`, `pnpm run typecheck`, `pnpm test` 127 pass, `pnpm run build`와 성능 예산이 통과했다. PR #731과 main workflow `37856030861`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 Worker는 `STATIC_ONLY` 정책으로 skipped됐다.
+- 공개 validator는 candidate SHA `c051172932c00d244310dad1ad8496ee10431df2`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. Chrome CDP fallback 390px에서 출처 수·공유 범위 문구와 선택 2개→3개 갱신, 가로폭 일치, runtime error 0을 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 남는다.
+
+증적: `C-321`, `E-LOCAL-BUILD-SHARE-SOURCE-STATUS-20261009`, `E-UI-CONTRACT-SHARE-SOURCE-STATUS-20261009`, `E-PR-SHARE-SOURCE-STATUS-20261009`, `E-DEPLOY-SHARE-SOURCE-STATUS-20261009`, `E-CDP-LIVE-SHARE-SOURCE-STATUS-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCE-STATUS-20261009`, `E-NAVI-STATE-SHARE-SOURCE-STATUS-20261009`.
