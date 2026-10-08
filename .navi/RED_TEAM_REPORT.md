@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 공유 카드 사용 장면 표시 및 사업자 선택 경험 공격 재점검 — main d6d64064 — 2026-10-08
+
+- 공격 초점은 사용 장면 라벨이 카드 원문·출처·추천 상태를 가리지 않는지, 320px·390px에서 줄바꿈·가로 overflow가 없는지, 대상 전환과 기존 전문가 영상 흐름이 유지되는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 사업자 추천 5개·소비자 추천 3개·카드 5개, 사용 장면 라벨, `scrollWidth=clientWidth`, runtime errors 0을 확인했다.
+- 실제 DOM 순서는 `03 · 전문가 영상 → 04 · 연구 지도`이며, 전문가 영상의 다음 장 handoff 뒤 연구 지도 제목과 진행 레일이 정상 도착했다.
+- PR #695와 main workflow `37794039208`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. Browser plugin 부재·실제 공유 시트·실기기·실사용자 독해성·독립 과학·규제 감수는 자동화 검증으로 대체하지 않는다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-302`, `C-304`, `E-UI-CONTRACT-SHARE-USE-CASES-20261008`, `E-CDP-SHARE-USE-CASES-20261008`, `E-PR-SHARE-USE-CASES-20261008`, `E-DEPLOY-SHARE-USE-CASES-20261008`, `E-LIVE-PUBLIC-SHARE-USE-CASES-20261008`, `E-NAVI-STATE-SHARE-USE-CASES-20261008`.
+
 ## 모바일 공유 보드 제목 압축 및 전문가 영상 순서 공격 재점검 — main 2f49bf4c — 2026-10-08
 
 - 공격 초점은 짧아진 상세 제목이 사업자·소비자 대상 맥락을 잃지 않는지, 추천 수·전체 자료·개별 복사가 사라지지 않는지, 390px 가로폭과 전문가 영상→연구 지도 연결이 유지되는지였다.

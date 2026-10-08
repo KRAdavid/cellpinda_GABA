@@ -1,5 +1,15 @@
 # Audit Report
 
+## 공유 카드 사용 장면 표시 및 사업자 선택 경험 공개 검증 — main d6d64064 — 2026-10-08
+
+- AC-001/AC-003/AC-004: `PASS`. 공개 공유 보드의 5개 카드에 상황별 사용 장면이 표시되고 사업자 추천 5개·소비자 추천 3개·전체 카드 5개·개별 복사·출처가 유지된다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·research copy·production build·정적 bundle·성능 예산과 PR #695 보호 검사가 통과했다. 최종 main workflow `37794039208`의 Pages 배포·라이브 smoke·release-status도 성공했다.
+- AC-006: `PASS`. 카드 선택 안내만 보완했으며 공유 원문·연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계는 변경하지 않았다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px·320px CDP에서 사용 장면 라벨·대상 전환·추천 수·가로폭·runtime errors 0을 확인했고, `03 · 전문가 영상 → 04 · 연구 지도` handoff도 재검증했다. Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-302`, `C-304`, `E-LOCAL-BUILD-SHARE-USE-CASES-20261008`, `E-UI-CONTRACT-SHARE-USE-CASES-20261008`, `E-CDP-SHARE-USE-CASES-20261008`, `E-PR-SHARE-USE-CASES-20261008`, `E-DEPLOY-SHARE-USE-CASES-20261008`, `E-LIVE-PUBLIC-SHARE-USE-CASES-20261008`, `E-NAVI-STATE-SHARE-USE-CASES-20261008`.
+
 ## 모바일 공유 보드 제목 압축 및 전문가 영상 순서 최종 검증 — main 2f49bf4c — 2026-10-08
 
 - AC-001/AC-003/AC-004: `PASS`. 공개 390px에서 사업자 상세 요약은 `사업자용 GABA 자료`, 소비자 전환 뒤에는 `소비자용 GABA 자료`로 표시되며 사업자 추천 5개·소비자 추천 3개·전체 카드 5개·복사 액션을 유지한다.
