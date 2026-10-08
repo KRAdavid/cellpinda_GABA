@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 사업자 공유 자료 제목 요약 및 공개 배포
+
+- 공유 보드의 3단계 전달 레일 아래에 현재 선택된 자료 제목을 `전달할 내용`으로 표시해, 사업자가 카드 목록을 다시 읽지 않고도 실제 전달 범위를 확인하게 했다. 대상·목적별 선택, 개별·전체 복사, 공유 링크, 출처와 제품 독립 경계는 유지했다.
+- 로컬 UI contract·typecheck·`pnpm test` 127 pass·production build를 통과했고, GitHub Pages 정적 번들의 Pages 환경 전체 크기 1,650,132바이트가 1,651,000바이트 크로스런타임 예산 안에서 검증됐다. PR #729 merge SHA `34bd8c9aa90ccb3f40d25e11bdb8402cb5814216`와 main workflow `37853758427`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.
+- 공개 validator는 HTTP 200·`candidateSha=34bd8c9aa90ccb3f40d25e11bdb8402cb5814216`·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. Chrome CDP fallback 390px에서 선택 자료 요약 갱신·전문가 영상 선행·가로폭 일치·runtime errors 0을 확인했다.
+- Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-320`, `E-LOCAL-BUILD-SHARE-SUMMARY-CUE-20261009`, `E-UI-CONTRACT-SHARE-SUMMARY-CUE-20261009`, `E-PR-SHARE-SUMMARY-CUE-20261009`, `E-DEPLOY-SHARE-SUMMARY-CUE-20261009`, `E-CDP-LIVE-SHARE-SUMMARY-CUE-20261009`, `E-LIVE-PUBLIC-SHARE-SUMMARY-CUE-20261009`, `E-NAVI-STATE-SHARE-SUMMARY-CUE-20261009`.
+
 ## 2026-10-09 — 전문가 영상 메뉴 선행 노출 및 선택 자료 미리보기 공개 배포
 
 - 본문에 이미 적용된 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서를 모바일 메뉴에서도 발견할 수 있도록 `전문가 영상` 바로가기를 `연구 지도`보다 앞에 노출했다. 메뉴 선택 후 자동 닫힘·현재 위치 표시·가로폭 안전을 유지했다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 사업자 공유 자료 제목 요약 — 34bd8c9a — 2026-10-09
+
+- 공격 초점은 사업자가 선택 수는 보지만 실제 어떤 자료가 전달되는지 다시 카드와 대조해야 하는지, 선택 변경 시 요약이 오래된 상태로 남는지, 390px에서 요약이 가로폭을 넘는지였다.
+- Chrome CDP fallback 390px에서 `전달할 내용 · 연구의 확장 · 사람 연구 결과`가 초기 상태에 표시되고, 카드 직접 선택과 목적별 묶음 변경에 따라 즉시 갱신됐다. 전문가 영상이 연구 지도보다 앞섰고 가로폭은 viewport와 일치하며 runtime error는 없었다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 자동 검증은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토를 대체하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-320`, `E-CDP-LIVE-SHARE-SUMMARY-CUE-20261009`, `E-LIVE-PUBLIC-SHARE-SUMMARY-CUE-20261009`, `E-NAVI-STATE-SHARE-SUMMARY-CUE-20261009`.
+
 ## Red-team recheck — 전문가 영상 메뉴 선행 및 선택 자료 미리보기 — f56e4a84 — 2026-10-09
 
 - 공격 초점은 본문과 상단 메뉴의 순서가 어긋나 전문가 영상을 찾기 어렵거나, 사업자가 실제 전달 범위를 다시 해석해야 하는지였다.

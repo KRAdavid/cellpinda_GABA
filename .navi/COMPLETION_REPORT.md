@@ -1,5 +1,16 @@
 # Completion Report
 
+## Completion gate recheck — 사업자 공유 자료 제목 요약 — 2026-10-09
+
+- AC-001 공개 배포: PASS. PR #729 merge SHA `34bd8c9aa90ccb3f40d25e11bdb8402cb5814216`의 main workflow `37853758427`에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다. 공개 validator는 HTTP 200·STATIC·최신 candidate 일치를 확인했다.
+- AC-004/AC-005 모바일·자동 게이트: PASS. 공유 보드의 `전달할 내용`이 선택 자료 제목을 즉시 보여주고, 직접 선택·목적별 선택에 따라 갱신된다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 빌드·성능 예산과 Chrome CDP fallback 390px의 가로폭 일치·runtime errors 0을 확인했다.
+- AC-006 제품 독립 경계: PASS. 공유 payload·출처·제품 독립 과학 안내 흐름은 유지되며 공개 validator의 `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 유지했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Chrome fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-320`, `E-LOCAL-BUILD-SHARE-SUMMARY-CUE-20261009`, `E-UI-CONTRACT-SHARE-SUMMARY-CUE-20261009`, `E-PR-SHARE-SUMMARY-CUE-20261009`, `E-DEPLOY-SHARE-SUMMARY-CUE-20261009`, `E-CDP-LIVE-SHARE-SUMMARY-CUE-20261009`, `E-LIVE-PUBLIC-SHARE-SUMMARY-CUE-20261009`, `E-NAVI-STATE-SHARE-SUMMARY-CUE-20261009`.
+
 ## 전문가 영상 메뉴 노출 및 선택 자료 미리보기 공개 배포 — 2026-10-09
 
 - 구현·검토: 본문 순서는 기존의 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`로 유지하고, 모바일 메뉴에도 전문가 영상 바로가기를 연구 지도보다 앞에 추가했다. 사업자 공유 보드에는 전달 전 선택 자료 칩 미리보기를 두어 현재 자료를 한눈에 확인하고 개별 해제할 수 있게 했다.

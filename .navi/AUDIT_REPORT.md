@@ -1,5 +1,15 @@
 # Audit Report
 
+## 사업자 공유 자료 제목 요약 공개 배포 — main 34bd8c9a — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 공유 보드의 전달 레일 아래에 현재 선택된 자료 제목을 `전달할 내용`으로 노출하고, 대상·목적별 선택에 따라 요약이 갱신된다. 본문과 메뉴의 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서와 출처 연결은 유지된다.
+- AC-004: `PASS`. Chrome CDP fallback 390px에서 초기·직접 선택·목적별 선택 상태의 자료 제목 요약이 갱신되고 `scrollWidth=clientWidth=375`, runtime errors `[]`를 확인했다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·Pages 정적 build·성능 예산·PR #729 required checks·main workflow `37853758427`·라이브 smoke가 통과했다.
+- AC-006 제품 독립 경계: `PASS`. 이번 변경은 전달 범위의 가시성에 한정되며 공개 연구 카피·출처·제품 독립 안내·`teaser HOLD`·`smartStoreOnly=true`를 변경하지 않았다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin 부재, 실제 모바일 공유 시트, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: `C-320`, `E-LOCAL-BUILD-SHARE-SUMMARY-CUE-20261009`, `E-UI-CONTRACT-SHARE-SUMMARY-CUE-20261009`, `E-PR-SHARE-SUMMARY-CUE-20261009`, `E-DEPLOY-SHARE-SUMMARY-CUE-20261009`, `E-CDP-LIVE-SHARE-SUMMARY-CUE-20261009`, `E-LIVE-PUBLIC-SHARE-SUMMARY-CUE-20261009`, `E-NAVI-STATE-SHARE-SUMMARY-CUE-20261009`.
+
 ## 전문가 영상 메뉴 노출 및 선택 자료 미리보기 공개 배포 — main f56e4a84 — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 본문은 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서를 유지하고, 상단 메뉴에도 `전문가 영상`을 `연구 지도`보다 앞에 노출해 방문자가 같은 읽기 흐름으로 이동할 수 있게 했다. 사업자 공유 보드는 `전달할 자료 · 2개`와 선택 카드 칩을 먼저 보여주며 한 번의 해제로 `선택 1개`로 갱신된다.
