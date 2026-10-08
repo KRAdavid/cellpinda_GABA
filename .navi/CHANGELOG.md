@@ -1,5 +1,16 @@
 # Project Changelog
 
+## 2026-10-09 — 전문가 영상 선행 흐름 검토 및 선택형 공유 자료 공개 배포
+
+- 사용자 요청을 검토한 결과, 현재 공개 읽기 흐름은 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`로 이미 구성되어 있었다. 이 순서를 공개 소스·진행 레일·다음 장 안내에 유지하고, UI contract에 회귀 검사를 추가했다.
+- 사업자 공유 보드는 대상별 추천 5개를 기본 선택으로 시작하며, 카드별 선택·해제 후 선택한 자료만 공유·복사한다. 대상 전환 시 소비자 추천 3개로 초기화되며 원문 출처 URL과 제품 독립 안내는 유지된다.
+- 로컬 UI contract·typecheck·`pnpm test` 127 pass를 통과했고 `/gaba_info/` base-path 정적 번들은 전체 1,649,653바이트, 초기 JS 311,475바이트, 초기 CSS 95,703바이트로 성능 예산을 통과했다.
+- PR #712 required checks가 통과해 merge SHA `fa0e26e29834e750435dd78a714053f980326b4c`가 됐다. main workflow `37825871130`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.
+- 공개 validator는 HTTP 200·`candidateSha=fa0e26e29834e750435dd78a714053f980326b4c`·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 공개 Playwright fallback 390·1440px에서 `03 · 전문가 영상 → 04 · 연구 지도` 순서·가로폭 일치·선택형 공유 상태·runtime errors 0을 확인했다.
+- Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-312`, `E-LOCAL-BUILD-CUSTOM-SHARE-20261009`, `E-UI-CONTRACT-CUSTOM-SHARE-20261009`, `E-PLAYWRIGHT-CUSTOM-SHARE-20261009`, `E-PR-CUSTOM-SHARE-20261009`, `E-DEPLOY-CUSTOM-SHARE-20261009`, `E-LIVE-PUBLIC-CUSTOM-SHARE-20261009`, `E-NAVI-STATE-CUSTOM-SHARE-20261009`.
+
 ## 2026-10-09 — 히어로 사업자 자료 진입 및 공개 배포
 
 - 첫 화면에 긴 설명을 추가하지 않고 짧은 `사업자 자료` 버튼을 배치해, 사업자가 기존 `#final` 공유 보드로 바로 이동하도록 했다. 3분 읽기 흐름·전문가 영상 `03` → 연구 지도 `04` 순서·추천 공유·전체·개별 복사·출처·제품 독립 안내는 유지했다.

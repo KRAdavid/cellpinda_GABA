@@ -3494,6 +3494,20 @@
         "E-NAVI-STATE-SOURCE-CONTRAST-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-312",
+      "statement": "공개 GABA 안내서는 `03 · 전문가 영상`을 `04 · 연구 지도`보다 앞에 배치해 전문가 설명에서 연구 범위로 자연스럽게 확장하며, 사업자 공유 자료는 카드별 선택·해제에 따라 선택한 자료만 공유·복사하고 대상 변경 시 추천 묶음으로 초기화한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-CUSTOM-SHARE-20261009",
+        "E-UI-CONTRACT-CUSTOM-SHARE-20261009",
+        "E-PLAYWRIGHT-CUSTOM-SHARE-20261009",
+        "E-PR-CUSTOM-SHARE-20261009",
+        "E-DEPLOY-CUSTOM-SHARE-20261009",
+        "E-LIVE-PUBLIC-CUSTOM-SHARE-20261009",
+        "E-NAVI-STATE-CUSTOM-SHARE-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -22558,6 +22572,81 @@
       "captured_at": "2026-10-09T03:14:37+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SOURCE-CONTRAST",
       "claim_refs": ["C-311"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-CUSTOM-SHARE-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "전문가 영상 선행 순서 계약과 사업자 공유 자료 선택형 보드가 UI contract·typecheck·127개 테스트·GitHub Pages base-path 정적 번들·release manifest·static bundle·성능 예산 검사를 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass); /gaba_info/ total assets 1649653; initial JS 311475; initial CSS 95703; static routes 11; files 73; performance status ok",
+      "captured_at": "2026-10-09T03:43:03+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-CUSTOM-SHARE",
+      "claim_refs": ["C-312"]
+    },
+    {
+      "id": "E-UI-CONTRACT-CUSTOM-SHARE-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 `id=expert-videos`와 `03 · 전문가 영상`을 `id=academic`과 `04 · 연구 지도`보다 앞에 두는 순서를 고정하고, 카드별 선택 상태·선택 개수·제품 독립 공유 경계를 검사한다.",
+      "locator": "scripts/validate-ui-contract.mjs; expert-videos before academic; 03 · 전문가 영상 before 04 · 연구 지도; selectedMessageMask; selectedMessageCount; smartStoreOnly=true; status ok",
+      "captured_at": "2026-10-09T03:43:03+09:00",
+      "reviewer_id": "NAVI-CONTRACT-QA-GABA-20261009-CUSTOM-SHARE",
+      "claim_refs": ["C-312"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-CUSTOM-SHARE-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin 부재에 따른 Playwright fallback 390·1440px에서 전문가 영상이 연구 지도보다 먼저 표시되고, 5개 선택→1개 해제 후 4개 공유, 대상 변경 후 3개 추천 초기화, 가로 넘침·page/console errors 0을 확인했다.",
+      "locator": "local/live Playwright; 390px order expert-videos top 8374.27 < academic top 11412.27; 1440px expert top 6247.97 < academic top 7747.97; initial selected 5; after deselect 4; share label 4개 공유; audience 21 reset 3; scrollWidth=viewport; errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31&qa=expert-research-order-20261009",
+      "captured_at": "2026-10-09T03:43:03+09:00",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261009-CUSTOM-SHARE",
+      "claim_refs": ["C-312"]
+    },
+    {
+      "id": "E-PR-CUSTOM-SHARE-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "선택형 공유 자료 보드와 전문가 영상 선행 순서 계약 PR #712의 required checks가 성공하고 main에 병합됐다.",
+      "locator": "PR #712; release-verify run 37825649124 pass; site-quality-verify run 37825649016 pass; merge SHA fa0e26e29834e750435dd78a714053f980326b4c",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/712",
+      "captured_at": "2026-10-09T03:43:03+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-CUSTOM-SHARE",
+      "claim_refs": ["C-312"]
+    },
+    {
+      "id": "E-DEPLOY-CUSTOM-SHARE-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 main candidate가 Pages로 공개 배포되고 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37825871130; head SHA fa0e26e29834e750435dd78a714053f980326b4c; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37825871130",
+      "captured_at": "2026-10-09T03:43:03+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-CUSTOM-SHARE",
+      "claim_refs": ["C-312"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-CUSTOM-SHARE-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 최신 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=fa0e26e29834e750435dd78a714053f980326b4c; generatedAt=2026-10-08T18:39:56.718Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-09T03:43:03+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-CUSTOM-SHARE",
+      "claim_refs": ["C-312"]
+    },
+    {
+      "id": "E-NAVI-STATE-CUSTOM-SHARE-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 전문가 영상 선행 읽기 순서와 선택형 공유 보드의 결정·로컬 QA·UI contract·Playwright·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-022; H-403; PR #712 merge SHA fa0e26e29834e750435dd78a714053f980326b4c; workflow 37825871130; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 기기·실사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T03:43:03+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-CUSTOM-SHARE",
+      "claim_refs": ["C-312"]
     }
   ]
 }

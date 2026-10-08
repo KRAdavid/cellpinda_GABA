@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 전문가 영상 선행 흐름 및 선택형 공유 자료 — fa0e26e2 — 2026-10-09
+
+- 공격 초점은 전문가 영상이 실제 DOM·모바일 진행 레일·다음 장 안내에서 연구 지도보다 뒤로 밀리는지, 선택 해제한 자료가 공유 payload에 남는지, 대상 변경 후 선택 상태가 꼬이는지였다.
+- 공개 390·1440px에서 `03 · 전문가 영상`의 top이 `04 · 연구 지도`보다 앞섰고, 390px과 1440px 모두 viewport와 page scroll width가 일치했으며 runtime errors는 0건이었다. 5개 선택에서 1개 해제 후 `4개 공유`, 소비자 대상 전환 후 3개 선택이 확인됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. PR #712와 main workflow `37825871130`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. Playwright fallback은 실제 모바일 공유 시트·Safari/iOS/Android·실제 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-312`, `E-PLAYWRIGHT-CUSTOM-SHARE-20261009`, `E-DEPLOY-CUSTOM-SHARE-20261009`, `E-LIVE-PUBLIC-CUSTOM-SHARE-20261009`, `E-NAVI-STATE-CUSTOM-SHARE-20261009`.
+
 ## Red-team recheck — 사업자 공유 카드 출처 링크 대비 및 배포 — e4d0aa50 — 2026-10-09
 
 - 공격 초점은 출처 링크 대비 보정이 연구 결과·원문 링크·공유 흐름을 가리거나, 모바일에서 카드 폭을 늘리는지였다.

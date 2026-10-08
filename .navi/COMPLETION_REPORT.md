@@ -1,5 +1,13 @@
 # Completion Report
 
+## 전문가 영상 선행 흐름 검토 및 선택형 공유 자료 공개 배포 — 2026-10-09
+
+- 구현·검토: 현재 공개 소스와 라이브 화면은 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서다. 해당 순서를 UI contract로 고정하고, 사업자 공유 자료는 선택한 카드만 공유·복사하도록 검증했다.
+- 검증: PR #712 merge SHA `fa0e26e29834e750435dd78a714053f980326b4c`, main workflow `37825871130`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 Playwright fallback을 확인했다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 bundle·release manifest·성능 예산·라이브 smoke가 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 모바일 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-312`, `E-LOCAL-BUILD-CUSTOM-SHARE-20261009`, `E-UI-CONTRACT-CUSTOM-SHARE-20261009`, `E-PLAYWRIGHT-CUSTOM-SHARE-20261009`, `E-PR-CUSTOM-SHARE-20261009`, `E-DEPLOY-CUSTOM-SHARE-20261009`, `E-LIVE-PUBLIC-CUSTOM-SHARE-20261009`, `E-NAVI-STATE-CUSTOM-SHARE-20261009`.
+
 ## 사업자 공유 카드 출처 링크 대비 보정 및 공개 배포 — 2026-10-09
 
 - 구현: 공유 카드의 `출처 · 논문명` 링크 대비를 높여 모바일에서 연구 결과와 원문 출처를 바로 구분하게 했다. 카드 구조·공유 payload·전문가 영상 `03` → 연구 지도 `04`·제품 독립 경계는 유지했다.

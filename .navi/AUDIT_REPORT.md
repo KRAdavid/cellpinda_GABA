@@ -1,5 +1,17 @@
 # Audit Report
 
+## 전문가 영상 선행 흐름 검토 및 선택형 공유 자료 공개 배포 — main fa0e26e2 — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 사용자 요청을 검토한 결과 공개 소스와 실제 화면 모두 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서이며, 전문가 영상의 다음 장 안내도 연구 지도를 가리킨다. 사업자 공유 자료는 선택한 카드만 공유·복사한다.
+- AC-004: `PASS`. 공개 Playwright fallback 390·1440px에서 전문가 영상 top이 연구 지도보다 앞서고, 가로폭은 viewport와 일치했으며 초기 5개 선택·1개 해제 후 4개 공유·대상 변경 후 3개 선택을 확인했다. page/console errors는 0건이다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·GitHub Pages base-path 정적 번들·release manifest·static bundle·성능 예산과 PR #712 보호 검사가 통과했다. main workflow `37825871130`의 Pages 배포·라이브 smoke·release-status도 성공했다.
+- AC-006 제품 독립 경계: `PASS`. 이번 회차는 읽기 순서 계약과 공유 자료 선택 상태만 보완했으며 연구 카피·수치·출처 URL·제품 독립 안내·제품 750 제거·Smart Store 단일 경계·teaser `HOLD`를 변경하지 않았다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-312`, `E-LOCAL-BUILD-CUSTOM-SHARE-20261009`, `E-UI-CONTRACT-CUSTOM-SHARE-20261009`, `E-PLAYWRIGHT-CUSTOM-SHARE-20261009`, `E-PR-CUSTOM-SHARE-20261009`, `E-DEPLOY-CUSTOM-SHARE-20261009`, `E-LIVE-PUBLIC-CUSTOM-SHARE-20261009`, `E-NAVI-STATE-CUSTOM-SHARE-20261009`.
+
 ## 사업자 공유 카드 출처 링크 대비 보정 및 공개 배포 검증 — main e4d0aa50 — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 사업자 공유 카드의 `출처 · 논문명` 링크를 더 밝게 표시해 연구 결과와 원문 진입점을 빠르게 구분하게 했다. 카드 구조·연구 요약·출처 URL·공유 payload는 유지했다.
