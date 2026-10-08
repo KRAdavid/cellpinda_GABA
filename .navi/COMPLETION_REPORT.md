@@ -1,5 +1,15 @@
 # Completion Report
 
+## 대상별 추천 자료 선배치 공유 보드 공개 검증 — main 679219cd — 2026-10-08
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 대상별 추천 카드가 공유 보드의 앞쪽에 보이고, 사업자 5개·소비자 3개 추천·전체 5개·개별 문장 복사·출처 연결이 유지된다. 로컬 계약·연구 카피·typecheck·127개 테스트·production build·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.
+- AC-006: `PASS`. 이번 변경은 카드의 시각적 순서에 한정되며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계를 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px CDP에서 추천 카드 실제 위치·대상 전환·가로폭·runtime errors 0을 확인했다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 최종 main SHA `679219cde81481ca55511be59744a2136d5f1cfb`와 공개 candidate가 일치하며 workflow `37781251710`이 성공했다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-300`, `E-LOCAL-BUILD-AUDIENCE-FIRST-20261008`, `E-UI-CONTRACT-AUDIENCE-FIRST-20261008`, `E-CDP-AUDIENCE-FIRST-20261008`, `E-PR-AUDIENCE-FIRST-20261008`, `E-DEPLOY-AUDIENCE-FIRST-20261008`, `E-LIVE-PUBLIC-AUDIENCE-FIRST-20261008`, `E-NAVI-STATE-AUDIENCE-FIRST-20261008`.
+
 ## 사업자 우선 공유 보드·대상별 문구 동기화 공개 검증 — main 4c4e3891 — 2026-10-08
 
 - AC-001/AC-003/AC-004/AC-005: `PASS`. 사업자 기본 추천 5개, 소비자 전환 추천 3개, 대상별 제목·ARIA·개별 문장 복사가 공개 안내서에서 동작한다. 로컬 계약·연구 카피·typecheck·127개 테스트·production build·정적 bundle·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.

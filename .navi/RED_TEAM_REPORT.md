@@ -1,5 +1,13 @@
 # Red Team Report
 
+## 대상별 추천 자료 선배치 공유 보드 공격 재점검 — main 679219cd — 2026-10-08
+
+- 공격 초점은 추천 자료가 실제로 전체 목록보다 먼저 보이는지, 소비자·교육 전환에서 전체 자료가 사라지지 않는지, 복사·출처·제품 독립 경계와 모바일 가로폭이 유지되는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 공개 390px에서 사업자 5개 추천, 소비자 3개 추천, 카드 5개·`scrollWidth=390`·runtime errors 0을 확인했고 소비자 카드 위치는 추천 3개가 비추천 2개보다 앞섰다.
+- PR #686과 main workflow `37781251710`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. CSS 시각 순서와 DOM 카드 의미는 유지했으며 Browser plugin 부재, 실기기·실사용자·독립 과학·규제 감수는 대체하지 못한다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-300`, `E-UI-CONTRACT-AUDIENCE-FIRST-20261008`, `E-CDP-AUDIENCE-FIRST-20261008`, `E-PR-AUDIENCE-FIRST-20261008`, `E-DEPLOY-AUDIENCE-FIRST-20261008`, `E-LIVE-PUBLIC-AUDIENCE-FIRST-20261008`, `E-NAVI-STATE-AUDIENCE-FIRST-20261008`.
+
 ## 사업자 우선 공유 보드·대상별 문구 동기화 공격 재점검 — main 4c4e3891 — 2026-10-08
 
 - 공격 초점은 첫 진입 대상이 사업자로 고정되는지, 소비자·교육 전환 뒤 제목·ARIA·추천 수가 서로 어긋나지 않는지, 전체 자료 접근이 사라지지 않는지, 모바일 가로 넘침·runtime error가 생기지 않는지였다.

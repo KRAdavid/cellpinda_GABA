@@ -1,5 +1,16 @@
 # Audit Report
 
+## 대상별 추천 자료 선배치 공유 보드 공개 검증 — main 679219cd — 2026-10-08
+
+- AC-003/AC-004: PASS. 대상 선택 후 추천 자료가 공유 보드의 앞쪽에 시각적으로 표시되고, 전체 5개 자료·개별 복사·출처 연결은 유지된다. 사업자 기본은 5개, 소비자 전환은 3개 추천이다.
+- AC-005 자동 게이트: PASS. UI contract·research copy·typecheck·`pnpm test` 127 pass·Pages production build·정적 bundle·성능 예산이 통과했다. initial JS `311,405`, initial CSS `95,703`, 총 자산 `1,643,350 / 1,650,000 bytes`다.
+- AC-001 공개 배포: PASS. PR #686 보호 검사와 main workflow `37781251710`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- AC-006 제품 독립 경계: PASS. 공유 보드의 카드 표시 순서만 보완했으며 연구 카피·수치·출처·제품 CTA·제품 독립 정보 고지 문구는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 공개 390px CDP에서 소비자 전환 뒤 추천 카드의 computed order `-1`과 실제 위치를 확인했고, 카드 5개·`scrollWidth=390`·runtime errors 0이었다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-300`, `E-LOCAL-BUILD-AUDIENCE-FIRST-20261008`, `E-UI-CONTRACT-AUDIENCE-FIRST-20261008`, `E-CDP-AUDIENCE-FIRST-20261008`, `E-PR-AUDIENCE-FIRST-20261008`, `E-DEPLOY-AUDIENCE-FIRST-20261008`, `E-LIVE-PUBLIC-AUDIENCE-FIRST-20261008`, `E-NAVI-STATE-AUDIENCE-FIRST-20261008`.
+
 ## 사업자 우선 공유 보드·대상별 문구 동기화 공개 검증 — main 4c4e3891 — 2026-10-08
 
 - AC-003/AC-004: PASS_WITH_CONDITIONS. 자료 모음은 사업자를 기본 대상으로 열고 5개 추천 자료를 바로 제공한다. 소비자 전환 시 제목·ARIA 안내·추천 복사 수가 3개로 함께 바뀌며 전체 5개와 개별 복사는 유지된다.

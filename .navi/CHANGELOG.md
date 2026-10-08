@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-08 — 대상별 추천 자료 선배치 공유 보드 공개 배포
+
+- 소비자·교육 대상으로 전환했을 때 추천 자료가 전체 자료 사이에 섞이지 않고 공유 보드의 앞쪽에 시각적으로 먼저 보이도록 보정했다. 사업자 기본 대상에서는 기존처럼 5개 모두 추천으로 유지된다.
+- 전체 5개 자료·개별 문장 복사·출처 연결·대상별 추천 묶음은 유지했으며, 연구 카피·수치·제품 독립 경계는 변경하지 않았다.
+- UI contract·research copy·typecheck·`pnpm test` 127 pass·production build·성능 예산·PR #686 보호 검사를 통과했다. 공개 390px에서 소비자 추천 카드의 실제 위치가 `기본 소개 → 연구의 확장 → 발효·안전 연구` 순으로 앞서고, 카드 5개·scrollWidth 390·runtime errors 0을 확인했다.
+- PR #686 merge SHA `679219cde81481ca55511be59744a2136d5f1cfb`의 main workflow `37781251710`에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다. live validator는 candidate SHA 일치와 공개 데이터 경계를 확인했다.
+
+증적: `C-300`, `E-LOCAL-BUILD-AUDIENCE-FIRST-20261008`, `E-UI-CONTRACT-AUDIENCE-FIRST-20261008`, `E-CDP-AUDIENCE-FIRST-20261008`, `E-PR-AUDIENCE-FIRST-20261008`, `E-DEPLOY-AUDIENCE-FIRST-20261008`, `E-LIVE-PUBLIC-AUDIENCE-FIRST-20261008`, `E-NAVI-STATE-AUDIENCE-FIRST-20261008`.
+
 ## 2026-10-08 — 사업자 우선 공유 보드와 대상별 문구 동기화 공개 배포
 
 - 자료 모음의 기본 전달 대상을 사업자로 변경해 첫 진입에서 `사업자용 공유 자료 · 추천 5개 복사`가 보이도록 했다. 소비자·교육 대상은 선택 즉시 추천 수와 강조 카드가 바뀐다.
