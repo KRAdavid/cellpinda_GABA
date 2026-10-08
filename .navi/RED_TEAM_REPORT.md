@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 공유 자료 상태 패널 통합 및 데스크톱 3열 가독성 — 880e0042 — 2026-10-09
+
+- 공격 초점은 선택 자료 해제 동작이 상태 패널과 분리되어 보이거나, 3열 변경이 선택 수·원문 출처 수·공유 범위 안내·모바일 가로폭에 영향을 주는지였다.
+- 공개 390px에서 `materials=24`의 `전달할 내용 · 2개`와 두 선택 칩을 확인한 뒤 칩을 눌러 `전달할 내용 · 1개`·`원문 출처 1개 포함`으로 갱신했다. 공개 URL의 `scrollWidth=390`, runtime errors 0, `expert-videos`가 `academic`보다 앞선 DOM 순서를 확인했다. 1440px에서는 자료 카드가 3열로 표시되어 제목이 카드 폭 안에서 읽혔다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 이번 변경은 공유 보드 정보 배치와 번들 예산 보정에 한정되며 연구 카피·수치·출처·제품 독립 경계를 변경하지 않는다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토를 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-321`, `E-CDP-LIVE-SHARE-SCOPE-COMPACT-20261009`, `E-LIVE-PUBLIC-SHARE-SCOPE-COMPACT-20261009`, `E-NAVI-STATE-SHARE-SCOPE-COMPACT-20261009`.
+
 ## Red-team recheck — NAVI 최종 공개 provenance 동기화 — bfed845f — 2026-10-09
 
 - 공격 초점은 NAVI 문서 병합 뒤 공개 Pages가 문서에 기록된 이전 후보를 계속 가리키거나, 정적 공개 번들과 제품 독립·공유 범위 경계가 어긋나는지였다.

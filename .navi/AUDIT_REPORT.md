@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 공유 보드 선택 범위 통합 및 데스크톱 가독성 보정 — main 880e0042 — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 선택 자료 해제 칩을 전달 범위 상태 패널 안에 통합하고, 선택 수·자료 제목·원문 출처 수·공유 범위 안내를 한 영역에서 확인한다. 넓은 화면 자료 카드는 3열로 표시해 제목·설명·출처의 끊김을 줄였다.
+- AC-004: `PASS`. 공개 Chrome CDP fallback 390px에서 `materials=24`의 선택 2개 상태를 열고 선택 칩을 눌러 선택 1개·원문 출처 1개로 갱신했다. `scrollWidth=390`, runtime errors 0이며 DOM 순서는 `expert-videos` → `academic`이다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·정적 릴리스 빌드·성능 예산(`totalAssets=1650872`)을 통과했고 PR #734와 main workflow `37859301853`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- AC-006 공개 정합성: `PASS`. 공개 validator는 HTTP 200·`candidateSha=880e0042d5f5457a12ab294d2edee0d8cd97a6d8`·`STATIC`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-321`, `E-LOCAL-BUILD-SHARE-SCOPE-COMPACT-20261009`, `E-UI-CONTRACT-SHARE-SCOPE-COMPACT-20261009`, `E-PR-SHARE-SCOPE-COMPACT-20261009`, `E-DEPLOY-SHARE-SCOPE-COMPACT-20261009`, `E-CDP-LIVE-SHARE-SCOPE-COMPACT-20261009`, `E-LIVE-PUBLIC-SHARE-SCOPE-COMPACT-20261009`, `E-NAVI-STATE-SHARE-SCOPE-COMPACT-20261009`.
+
 ## NAVI 최종 공개 provenance 동기화 — main bfed845f — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 기능 변경 없이 NAVI 문서 PR #732를 main에 병합한 뒤 공개 후보 커밋과 실제 Pages 번들의 provenance를 다시 확인했다. 공개 읽기 흐름 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`, 사업자 공유 자료의 선택 제목·원문 출처 수·공유 범위 안내와 제품 독립 경계는 유지된다.
