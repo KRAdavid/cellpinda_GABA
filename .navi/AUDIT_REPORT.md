@@ -1,5 +1,17 @@
 # Audit Report
 
+## 연구 카드 직접 공유와 전문가 영상 선배치 검증 — main a3d690e0 — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 연구 지도 카드마다 `결과·출처 공유`를 노출하고, 선택한 카드의 연구 제목·대상·관찰 결과·해석 범위·출처·공개 안내서 딥링크를 공유 payload에 포함했다. `navigator.share`가 없는 환경에서는 기존 결과·출처 복사 fallback을 유지한다.
+- AC-004: `PASS`. 공개 Chrome CDP fallback 390px·1440px에서 연구 공유 버튼 5개·기존 복사 버튼 5개, `scrollWidth=viewport`, runtime errors 0을 확인했다. 390px mock Web Share에서 `GABA 인지 연구` 제목과 출처·공개 안내서 URL이 전달됐다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·research copy·`pnpm test` 127 pass·production build·성능 예산과 PR #703 보호 검사가 통과했다. main workflow `37807078900`의 Pages 배포·라이브 smoke·release-status도 성공했다.
+- AC-006 제품 독립 경계: `PASS`. 연구 카드의 공유 동작과 UI 순서만 보완했으며 연구 카피·수치·출처·제품 독립 안내를 변경하지 않았다. 공개 validator의 제품 750 제거·Smart Store 단일 경계·teaser `HOLD`도 유지된다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, 실제 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-308`, `E-LOCAL-BUILD-RESEARCH-SHARE-20261009`, `E-UI-CONTRACT-RESEARCH-SHARE-20261009`, `E-CDP-RESEARCH-SHARE-20261009`, `E-PR-RESEARCH-SHARE-20261009`, `E-DEPLOY-RESEARCH-SHARE-20261009`, `E-LIVE-PUBLIC-RESEARCH-SHARE-20261009`, `E-NAVI-STATE-RESEARCH-SHARE-20261009`.
+
 ## 추천 공유 내용 미리보기 공개 검증 — main 73dce094 — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 공유 전달 레일 아래에 선택 대상별 추천 주제 요약을 추가했다. 사업자 기본 상태는 5개 주제, 소비자 전환은 3개 주제로 갱신된다.

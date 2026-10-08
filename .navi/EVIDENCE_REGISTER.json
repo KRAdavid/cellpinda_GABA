@@ -3437,6 +3437,20 @@
         "E-NAVI-STATE-SHARE-PREVIEW-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-308",
+      "statement": "공개 GABA 연구 지도 각 카드가 연구 결과·출처 직접 공유와 기존 출처 보존 복사 fallback을 제공하고, 전문가 영상 `03`이 연구 지도 `04`보다 앞선 읽기 순서와 handoff를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-RESEARCH-SHARE-20261009",
+        "E-UI-CONTRACT-RESEARCH-SHARE-20261009",
+        "E-CDP-RESEARCH-SHARE-20261009",
+        "E-PR-RESEARCH-SHARE-20261009",
+        "E-DEPLOY-RESEARCH-SHARE-20261009",
+        "E-LIVE-PUBLIC-RESEARCH-SHARE-20261009",
+        "E-NAVI-STATE-RESEARCH-SHARE-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -22190,6 +22204,81 @@
       "captured_at": "2026-10-09T00:56:12+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-PREVIEW",
       "claim_refs": ["C-307"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RESEARCH-SHARE-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 직접 공유와 전문가 영상 선배치 고정 변경이 로컬 UI contract·typecheck·research copy·127개 테스트·production build·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm run validate:research-copy; pnpm test (127 pass); pnpm run build; initial JS 311405; initial CSS 95703; total assets 1649057",
+      "captured_at": "2026-10-09T01:08:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-RESEARCH-SHARE",
+      "claim_refs": ["C-308"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RESEARCH-SHARE-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드에 직접 공유·복사 액션이 함께 존재하고, 전문가 영상 `03`이 연구 지도 `04`보다 앞선 읽기 순서를 유지하도록 UI contract가 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; shareResearchMessage; guide-research-share; 결과·출처 공유; expert-videos before academic; 03 · 전문가 영상 before 04 · 연구 지도",
+      "captured_at": "2026-10-09T01:08:00+09:00",
+      "reviewer_id": "NAVI-CONTRACT-QA-GABA-20261009-RESEARCH-SHARE",
+      "claim_refs": ["C-308"]
+    },
+    {
+      "id": "E-CDP-RESEARCH-SHARE-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 Chrome CDP fallback에서 전문가 영상·연구 지도 순서와 handoff, 연구 카드 직접 공유 payload 및 가로폭을 확인했다.",
+      "locator": "gaba-order-audit.mjs; 390px: expert-videos < academic < everyday < sleep < research; handoff academicTop=57; gaba-research-share-local-audit.mjs; 390px/1440px: shareCount=5, copyCount=5, scrollWidth=viewport, errors=[]; mock Web Share title/text/source/deep link present",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#research-cognition",
+      "captured_at": "2026-10-09T01:12:00+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261009-RESEARCH-SHARE",
+      "claim_refs": ["C-308"]
+    },
+    {
+      "id": "E-PR-RESEARCH-SHARE-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "연구 카드 직접 공유와 읽기 순서 고정 PR #703의 required checks가 성공하고 main에 병합됐다.",
+      "locator": "PR #703; release-verify run 37806864318 pass; site-quality-verify run 37806864243 pass; merge SHA a3d690e022636b7b892f5f10d5c703b4aa756aff",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/703",
+      "captured_at": "2026-10-09T01:14:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-RESEARCH-SHARE",
+      "claim_refs": ["C-308"]
+    },
+    {
+      "id": "E-DEPLOY-RESEARCH-SHARE-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main candidate의 Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37807078900; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass; final merge SHA a3d690e022636b7b892f5f10d5c703b4aa756aff",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37807078900",
+      "captured_at": "2026-10-09T01:18:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-RESEARCH-SHARE",
+      "claim_refs": ["C-308"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RESEARCH-SHARE-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly·removed750·provenance matched를 유지했다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=a3d690e022636b7b892f5f10d5c703b4aa756aff; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-09T01:18:14+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-RESEARCH-SHARE",
+      "claim_refs": ["C-308"]
+    },
+    {
+      "id": "E-NAVI-STATE-RESEARCH-SHARE-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 연구 카드 직접 공유·읽기 순서 고정의 결정·로컬·contract·CDP·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-018; H-399; PR #703; merge SHA a3d690e022636b7b892f5f10d5c703b4aa756aff; workflow 37807078900; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T01:18:14+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-RESEARCH-SHARE",
+      "claim_refs": ["C-308"]
     }
   ]
 }

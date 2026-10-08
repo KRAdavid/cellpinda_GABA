@@ -1,5 +1,14 @@
 # Red Team Report
 
+## Red-team recheck — 연구 카드 직접 공유와 전문가 영상 선배치 — a3d690e0 — 2026-10-09
+
+- 공격 초점은 연구 카드의 직접 공유가 연구 범위·관찰 결과·해석 한계를 생략하는지, 공유 버튼이 기존 출처 보존 복사를 대체하는지, 그리고 `03 · 전문가 영상 → 04 · 연구 지도` 순서가 모바일에서 회귀하는지였다.
+- 공개 390px·1440px에서 연구 카드 5개와 `결과·출처 공유`·`결과·출처 복사` 액션이 모두 유지됐다. mock Web Share payload에는 연구 대상·관찰 결과·연구 범위·출처·공개 안내서 링크가 포함됐고, direct share 완료 toast와 runtime errors 0을 확인했다.
+- 실제 DOM 순서는 `03 · 전문가 영상 → 04 · 연구 지도 → 05 · 일상 속 GABA`이며, 전문가 영상 handoff 클릭 후 연구 지도 제목이 sticky reading rail 아래가 아닌 상단 기준선에 도착했다. 신규 CRITICAL/MAJOR 결함은 없다.
+- PR #703과 main workflow `37807078900`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android·실사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-308`, `E-CDP-RESEARCH-SHARE-20261009`, `E-LIVE-PUBLIC-RESEARCH-SHARE-20261009`, `E-NAVI-STATE-RESEARCH-SHARE-20261009`.
+
 ## Red-team recheck — 추천 공유 내용 미리보기 — 73dce094 — 2026-10-09
 
 - 공격 관점에서 사업자 기본 상태와 소비자 전환 상태의 요약 주제, 추천 개수, 카드 순서를 비교했다. 사업자 5개·소비자 3개가 실제 대상 전환에 맞춰 바뀌며, 요약은 카드·출처·복사 기능을 가리지 않는다.

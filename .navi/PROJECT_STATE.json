@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-09T00:56:12+09:00",
+  "updated_at": "2026-10-09T01:18:14+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6904,6 +6904,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-09T00:56:12+09:00"
+    },
+    {
+      "id": "H-399",
+      "event": "NAVI 자동 공개 배포 점검에서 연구 지도 카드별로 연구 결과와 출처를 바로 전달하기 어려운 잔여 공유 마찰을 확인하고, `결과·출처 공유`를 추가했다. Web Share 지원 환경에서는 연구 제목·연구 대상과 방법·관찰된 결과·해석 범위·출처·공개 안내서 딥링크를 함께 전달하고, 미지원·권한 실패 환경에서는 기존 `결과·출처 복사`로 fallback한다. 전문가 영상은 `03 · 전문가 영상`, 연구 지도는 `04 · 연구 지도`로 고정했으며 UI contract와 공개 CDP에서 실제 DOM 순서·handoff 도착을 재검증했다. 로컬 UI contract·typecheck·research copy·pnpm test 127 pass·production build·정적 bundle·성능 예산을 통과했고 PR #703 required checks와 main merge SHA a3d690e022636b7b892f5f10d5c703b4aa756aff의 workflow 37807078900 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY로 skipped됐다. 공개 validator는 candidate SHA a3d690e022636b7b892f5f10d5c703b4aa756aff·HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome CDP fallback 390px·1440px에서 연구 카드 5개 공유 버튼·기존 복사 버튼·가로폭·runtime errors 0, mock Web Share payload와 전문가 영상→연구 지도 handoff를 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-308과 관련 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-09T01:18:14+09:00"
     }
   ]
 }

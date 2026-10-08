@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 연구 카드 직접 공유와 전문가 영상 선배치 고정
+
+- 연구 지도 5개 카드에 `결과·출처 공유` 액션을 추가했다. Web Share가 가능한 환경에서는 연구 제목·연구 대상과 방법·관찰된 결과·해석 범위·출처·공개 안내서 딥링크를 한 번에 전달하고, 미지원 또는 권한 실패 환경에서는 기존 `결과·출처 복사`로 자동 전환한다.
+- 전문가 영상은 `03 · 전문가 영상`, 연구 지도는 `04 · 연구 지도`로 유지하고, 전문가 영상의 `다음 장 → 연구 지도` 이동도 같은 순서를 가리킨다. 이 순서를 UI contract와 공개 CDP audit으로 고정했다.
+- 로컬 UI contract·typecheck·research copy·`pnpm test` 127 pass·production build·성능 예산을 통과했다. PR #703 required checks와 main merge SHA `a3d690e022636b7b892f5f10d5c703b4aa756aff`의 workflow `37807078900` release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 Worker는 `STATIC_ONLY`로 skipped됐다.
+- 공개 validator는 HTTP 200·`candidateSha=a3d690e022636b7b892f5f10d5c703b4aa756aff`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 공개 Chrome CDP fallback 390px에서 전문가 영상→연구 지도 순서·handoff 도착·가로폭 일치·runtime errors 0과 연구 카드 직접 공유 payload를 재현했다. Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: `C-308`, `E-LOCAL-BUILD-RESEARCH-SHARE-20261009`, `E-UI-CONTRACT-RESEARCH-SHARE-20261009`, `E-CDP-RESEARCH-SHARE-20261009`, `E-PR-RESEARCH-SHARE-20261009`, `E-DEPLOY-RESEARCH-SHARE-20261009`, `E-LIVE-PUBLIC-RESEARCH-SHARE-20261009`, `E-NAVI-STATE-RESEARCH-SHARE-20261009`.
+
 ## 2026-10-09 — 추천 공유 내용 미리보기 공개
 
 - 공유 보드의 3단계 전달 레일 아래에 `먼저 전달할 내용` 요약을 추가해, 선택한 대상에 따라 실제 추천되는 주제명을 카드 목록보다 먼저 확인할 수 있게 했다.

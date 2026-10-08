@@ -1,5 +1,13 @@
 # Completion Report
 
+## 연구 카드 직접 공유와 전문가 영상 선배치 — 2026-10-09
+
+- 구현: 연구 지도 카드 5개에 `결과·출처 공유`를 추가했다. 지원 환경에서는 Web Share로 연구 요약·출처·공개 안내서 딥링크를 전달하고, 미지원·권한 실패 환경에서는 기존 `결과·출처 복사`로 전환한다. 전문가 영상은 `03`, 연구 지도는 `04`로 고정하고 handoff도 유지한다.
+- 검증: PR #703, main merge SHA `a3d690e022636b7b892f5f10d5c703b4aa756aff`, workflow `37807078900`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 Chrome CDP fallback을 확인했다. 로컬 UI contract·typecheck·research copy·127개 테스트·production build·성능 예산도 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-308`, `E-LOCAL-BUILD-RESEARCH-SHARE-20261009`, `E-UI-CONTRACT-RESEARCH-SHARE-20261009`, `E-CDP-RESEARCH-SHARE-20261009`, `E-PR-RESEARCH-SHARE-20261009`, `E-DEPLOY-RESEARCH-SHARE-20261009`, `E-LIVE-PUBLIC-RESEARCH-SHARE-20261009`, `E-NAVI-STATE-RESEARCH-SHARE-20261009`.
+
 ## 추천 공유 내용 미리보기 — 2026-10-09
 
 - 구현: 공유 전달 레일 아래에 선택 대상별 추천 주제 요약을 추가해 사업자가 실제 전달 범위를 버튼 실행 전에 확인하도록 했다.
