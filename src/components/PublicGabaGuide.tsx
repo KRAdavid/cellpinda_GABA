@@ -678,12 +678,12 @@ const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
   'GABA는 신경세포의 활동 균형을 조절하는 핵심 신호입니다.',
-  'GABA는 수면·긴장·집중·감각·운동과 연결되고, 연구는 피부·근육·성장·면역으로 확장됩니다.',
-  '사람 63명 비교 연구에서, 머리를 많이 쓴 뒤 GABA 그룹의 뇌파와 활력 점수는 비교 그룹보다 덜 떨어졌습니다.',
-  '발효 GABA는 발효 원리와 품질 관리, 사람 대상 섭취 연구가 함께 쌓인 식품 연구 소재입니다.',
+  historyMilestones[2].body,
+  researchTopics[0].finding,
+  fermentedSafetySteps[2].body,
 ];
 const messageKitLabels = ['기본 소개', '신경계 역할', '연구의 확장', '사람 연구 결과', '발효·안전 연구'];
-const messageKitSources: (string | null)[] = [null, null, null, 'Yoto et al. 2012 · PMID 22203366', 'Byun et al. 2018 · PMID 29856155'];
+const messageKitSources: (string | null)[] = [null, null, null, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
 
 const getGuideShareUrl = (hash = 'top') => {
   const url = new URL(window.location.href);
@@ -691,6 +691,8 @@ const getGuideShareUrl = (hash = 'top') => {
   url.hash = hash;
   return url.toString();
 };
+
+const formatMessageKitText = (message: string, index: number, withGuide = false) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}` : ''}${withGuide ? `\n\n공개 안내서: ${getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
 
 const replaceGuideHistory = (hash: string, videoId?: string) => {
   const url = new URL(window.location.href);
@@ -1731,7 +1733,7 @@ export default function PublicGabaGuide() {
   };
 
   const copyMessageKit = async () => {
-    const text = `${messageKit.map((message, index) => `${String(index + 1).padStart(2, '0')}. ${message}${messageKitSources[index] ? `\n출처: ${messageKitSources[index]}` : ''}`).join('\n\n')}\n\n공개 안내서: ${getGuideShareUrl('top')}`;
+    const text = `${messageKit.map((message, index) => `${String(index + 1).padStart(2, '0')}. ${formatMessageKitText(message, index)}`).join('\n\n')}\n\n공개 안내서: ${getGuideShareUrl('top')}`;
     const copied = await writeClipboardText(text);
     if (copied) {
       setMessageKitCopied(true);
@@ -1745,7 +1747,7 @@ export default function PublicGabaGuide() {
   };
 
   const copyMessageKitLine = async (message: string, index: number) => {
-    const text = `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}` : ''}\n\n공개 안내서: ${getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}`;
+    const text = formatMessageKitText(message, index, true);
     const copied = await writeClipboardText(text);
     if (copied) {
       setCopiedMessageIndex(index);
