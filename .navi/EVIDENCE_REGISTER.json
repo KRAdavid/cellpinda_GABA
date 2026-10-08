@@ -3466,6 +3466,20 @@
         "E-NAVI-STATE-SHARE-SOURCES-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-310",
+      "statement": "공개 GABA 안내서 히어로에 짧은 `사업자 자료` 진입을 추가해 사업자가 공유 보드로 바로 이동할 수 있고, 3분 읽기 흐름·모바일 가독성·정적 공개 배포 검사를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-HERO-BUSINESS-20261009",
+        "E-UI-CONTRACT-HERO-BUSINESS-20261009",
+        "E-PLAYWRIGHT-HERO-BUSINESS-20261009",
+        "E-PR-HERO-BUSINESS-20261009",
+        "E-DEPLOY-HERO-BUSINESS-20261009",
+        "E-LIVE-PUBLIC-HERO-BUSINESS-20261009",
+        "E-NAVI-STATE-HERO-BUSINESS-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -22380,6 +22394,81 @@
       "captured_at": "2026-10-09T02:11:21+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-SOURCES",
       "claim_refs": ["C-309"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-HERO-BUSINESS-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "히어로 사업자 자료 진입 변경이 UI contract·typecheck·127개 테스트·배포 경로 정적 번들·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass); /gaba_info/ total assets 1649678; initial JS 311475; initial CSS 95703; static routes 11; files 73",
+      "captured_at": "2026-10-09T02:45:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-HERO-BUSINESS",
+      "claim_refs": ["C-310"]
+    },
+    {
+      "id": "E-UI-CONTRACT-HERO-BUSINESS-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 히어로에 `사업자 자료` 버튼과 `#final` 공유 보드 연결 계약이 존재하고, 기존 제품 독립·공유·접근성 계약 검사가 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; guide-hero-actions; 사업자 자료; scrollTo('final'); smartStoreOnly=true",
+      "captured_at": "2026-10-09T02:45:00+09:00",
+      "reviewer_id": "NAVI-CONTRACT-QA-GABA-20261009-HERO-BUSINESS",
+      "claim_refs": ["C-310"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-HERO-BUSINESS-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL의 Playwright fallback에서 320·390·1440px 히어로 CTA가 보이고, 클릭 시 `#final`과 공유 보드에 도착했으며 가로 넘침·페이지 오류·콘솔 오류가 없었다.",
+      "locator": "gaba-hero-business-cue-audit-20261009.mjs; live 320/390/1440px; cueText=사업자 자료; scrollWidth=viewport; hash=#final; shareBoard=true; pageErrors=[]; consoleErrors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=business-cue-live-20261009",
+      "captured_at": "2026-10-09T02:50:00+09:00",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261009-HERO-BUSINESS",
+      "claim_refs": ["C-310"]
+    },
+    {
+      "id": "E-PR-HERO-BUSINESS-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "히어로 사업자 자료 진입 PR #708의 required checks가 성공하고 main에 병합됐다.",
+      "locator": "PR #708; release-verify run 37819219780 pass; site-quality-verify run 37819219591 pass; merge SHA 0a352b73b254b29519f876267f04fd9d5749d9b6",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/708",
+      "captured_at": "2026-10-09T02:47:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-HERO-BUSINESS",
+      "claim_refs": ["C-310"]
+    },
+    {
+      "id": "E-DEPLOY-HERO-BUSINESS-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 main candidate가 Pages로 배포되고 live smoke·release-status까지 성공했으며 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37819443804; head SHA 0a352b73b254b29519f876267f04fd9d5749d9b6; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37819443804",
+      "captured_at": "2026-10-09T02:50:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-HERO-BUSINESS",
+      "claim_refs": ["C-310"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-HERO-BUSINESS-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 최신 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품·출처 경계를 유지했다.",
+      "locator": "pnpm run validate:live-public; page=200; runtimeMode=STATIC; candidateSha=0a352b73b254b29519f876267f04fd9d5749d9b6; generatedAt=2026-10-08T17:50:00.000Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview HOLD/publicUrl=false; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-09T02:50:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-HERO-BUSINESS",
+      "claim_refs": ["C-310"]
+    },
+    {
+      "id": "E-NAVI-STATE-HERO-BUSINESS-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 히어로 사업자 자료 진입의 결정·로컬 QA·UI contract·Playwright·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-020; H-401; PR #708 merge SHA 0a352b73b254b29519f876267f04fd9d5749d9b6; workflow 37819443804; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 기기·실사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T02:53:09+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-HERO-BUSINESS",
+      "claim_refs": ["C-310"]
     }
   ]
 }

@@ -1,5 +1,13 @@
 # Completion Report
 
+## 히어로 사업자 자료 진입 및 공개 배포 — 2026-10-09
+
+- 구현: 첫 화면에 짧은 `사업자 자료` CTA를 추가하고 기존 `#final` 공유 보드로 연결했다. 3분 읽기 본문, 전문가 영상 `03` → 연구 지도 `04`, 대상별 추천·전체·개별 복사·출처·제품 독립 경계는 유지했다.
+- 검증: PR #708 merge SHA `0a352b73b254b29519f876267f04fd9d5749d9b6`, main workflow `37819443804`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 공개 Playwright fallback을 확인했다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 번들·성능 예산·라이브 smoke가 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-310`, `E-LOCAL-BUILD-HERO-BUSINESS-20261009`, `E-UI-CONTRACT-HERO-BUSINESS-20261009`, `E-PLAYWRIGHT-HERO-BUSINESS-20261009`, `E-PR-HERO-BUSINESS-20261009`, `E-DEPLOY-HERO-BUSINESS-20261009`, `E-LIVE-PUBLIC-HERO-BUSINESS-20261009`, `E-NAVI-STATE-HERO-BUSINESS-20261009`.
+
 ## 사업자 공유 자료 원문 연결 및 공개 배포 — 2026-10-09
 
 - 구현: 사람 연구·발효 안전 연구 카드의 출처 라벨을 직접 링크로 연결하고, 추천 자료 복사·공유 payload에 PubMed 원문 URL을 보존했다. 별도 중간 출처 보드 없이 결과와 출처를 같은 카드 안에서 읽게 했다.

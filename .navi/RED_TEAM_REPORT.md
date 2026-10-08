@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 히어로 사업자 자료 진입 및 배포 — 0a352b73 — 2026-10-09
+
+- 공격 초점은 히어로 CTA가 3분 읽기 흐름을 끊거나 사업자 자료를 제품 구매 CTA처럼 보이게 하는지, 모바일에서 버튼이 넘치거나 `#final` 도착이 불안정한지였다.
+- 공개 320·390·1440px에서 `사업자 자료` CTA가 보이고 viewport와 page scroll width가 일치했으며, 클릭 시 `#final`과 공유 보드가 존재하고 page/console errors 0이었다. 기존 사업자 추천 5개·소비자 추천 3개·전체 5개·개별 복사·원문 출처·전문가 영상 `03` → 연구 지도 `04` 순서는 유지됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 다만 Playwright fallback은 실제 모바일 공유 시트, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검토를 대신하지 않는다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-310`, `E-PLAYWRIGHT-HERO-BUSINESS-20261009`, `E-LIVE-PUBLIC-HERO-BUSINESS-20261009`, `E-NAVI-STATE-HERO-BUSINESS-20261009`.
+
 ## Red-team recheck — 사업자 공유 자료 원문 연결 및 배포 — d75eab09 — 2026-10-09
 
 - 공격 초점은 카드 안의 원문 링크가 연구 결과와 분리되어 사라지는지, 복사·공유 payload에서 출처 URL이 빠지는지, 좁은 화면에서 링크가 넘치거나 공유 흐름을 가리는지였다.

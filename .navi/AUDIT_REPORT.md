@@ -1,5 +1,17 @@
 # Audit Report
 
+## 히어로 사업자 자료 진입 및 공개 배포 검증 — main 0a352b73 — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 첫 화면의 `사업자 자료` 버튼이 기존 `#final` 공유 보드로 연결되며, 사업자 추천 자료·출처·복사·공유 동작을 그대로 사용한다. 별도 중간 페이지를 추가하지 않았다.
+- AC-004: `PASS`. 공개 Playwright fallback 320·390·1440px에서 CTA가 보이고 viewport와 `scrollWidth`가 일치했으며, 클릭 후 `#final`·공유 보드 도착과 page/console errors 0을 확인했다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·GitHub Pages base-path 정적 번들·성능 예산과 PR #708 보호 검사가 통과했다. main workflow `37819443804`의 Pages 배포·라이브 smoke·release-status도 성공했다.
+- AC-006 제품 독립 경계: `PASS`. 이번 변경은 자료 발견성과 이동 경로만 보완했으며 연구 카피·수치·출처·제품 독립 안내·제품 750 제거·Smart Store 단일 경계·teaser `HOLD`를 변경하지 않았다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다. Browser plugin 부재에 따른 Playwright fallback, 실제 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-310`, `E-LOCAL-BUILD-HERO-BUSINESS-20261009`, `E-UI-CONTRACT-HERO-BUSINESS-20261009`, `E-PLAYWRIGHT-HERO-BUSINESS-20261009`, `E-PR-HERO-BUSINESS-20261009`, `E-DEPLOY-HERO-BUSINESS-20261009`, `E-LIVE-PUBLIC-HERO-BUSINESS-20261009`, `E-NAVI-STATE-HERO-BUSINESS-20261009`.
+
 ## 사업자 공유 자료 원문 연결 및 공개 배포 검증 — main d75eab09 — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 사람 연구·발효 안전 연구 카드의 출처 라벨을 직접 링크로 연결하고, 추천 자료 복사·공유 payload에 PubMed 원문 URL을 포함했다. 카드 안에서 결과와 출처가 이어져 별도 중간 이동 없이 확인할 수 있다.

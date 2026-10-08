@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-10-09 — 히어로 사업자 자료 진입 및 공개 배포
+
+- 첫 화면에 긴 설명을 추가하지 않고 짧은 `사업자 자료` 버튼을 배치해, 사업자가 기존 `#final` 공유 보드로 바로 이동하도록 했다. 3분 읽기 흐름·전문가 영상 `03` → 연구 지도 `04` 순서·추천 공유·전체·개별 복사·출처·제품 독립 안내는 유지했다.
+- 로컬 UI contract·typecheck·`pnpm test` 127 pass를 통과했고 `/gaba_info/` base-path 정적 번들은 전체 1,649,678바이트, 초기 JS 311,475바이트, 초기 CSS 95,703바이트로 성능 예산을 통과했다.
+- PR #708 required checks가 통과해 merge SHA `0a352b73b254b29519f876267f04fd9d5749d9b6`가 됐다. main workflow `37819443804`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.
+- 공개 validator는 HTTP 200·`candidateSha=0a352b73b254b29519f876267f04fd9d5749d9b6`·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 공개 Playwright fallback 320·390·1440px에서 CTA 노출·가로폭 일치·`#final` 도착·runtime errors 0을 확인했다.
+- Browser plugin 부재·실제 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남기며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-310`, `E-LOCAL-BUILD-HERO-BUSINESS-20261009`, `E-UI-CONTRACT-HERO-BUSINESS-20261009`, `E-PLAYWRIGHT-HERO-BUSINESS-20261009`, `E-PR-HERO-BUSINESS-20261009`, `E-DEPLOY-HERO-BUSINESS-20261009`, `E-LIVE-PUBLIC-HERO-BUSINESS-20261009`, `E-NAVI-STATE-HERO-BUSINESS-20261009`.
+
 ## 2026-10-09 — 사업자 공유 자료 원문 연결 및 공개 배포
 
 - 사람 연구·발효 안전 연구 카드 안의 `출처 · 논문명`을 직접 열 수 있게 연결하고, 추천 자료 복사·공유 payload에 원문 PubMed URL을 보존했다. 별도 중간 출처 보드를 늘리지 않아 결과와 근거가 같은 카드 안에서 이어진다.
