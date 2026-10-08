@@ -53,7 +53,8 @@ for (const route of expectedRoutes) {
   assert.match(html, /<h1(?:\s[^>]*)?>[\s\S]*?<\/h1>/i, `${route} route must expose a visible page heading`);
   const expectedCanonical = `${manifest.publicSiteUrl}${route === '/' ? '/' : route}`;
   assert.equal(canonicalOf(html), expectedCanonical, `${route} route canonical is out of sync`);
-  assert.match(html, /<meta[^>]+property="og:image:type"[^>]+content="image\/png"/i, `${route} route must declare the social image type`);
+  const expectedSocialImageType = ['/', '/guide/', '/research/'].includes(route) ? 'image/jpeg' : 'image/png';
+  assert.match(html, new RegExp(`<meta[^>]+property="og:image:type"[^>]+content="${expectedSocialImageType}"`, 'i'), `${route} route must declare the social image type`);
   assert.match(html, /<meta[^>]+property="og:image:alt"[^>]+content="[^"]+"/i, `${route} route must describe the Open Graph image`);
   assert.match(html, /<meta[^>]+name="twitter:image:alt"[^>]+content="[^"]+"/i, `${route} route must describe the Twitter image`);
   assert.ok(!/<meta[^>]+http-equiv="refresh"/i.test(html), `${route} route must preserve its static fallback without an immediate meta refresh`);
@@ -80,7 +81,7 @@ if (outputDirectory.endsWith('dist-pages')) {
   }
 }
 const researchHtml = await readFile(resolve(outputDirectory, 'research/index.html'), 'utf8');
-assert.ok(researchHtml.includes('사람을 대상으로 한 GABA 연구를 쉽게 보기'), 'research route must identify its educational purpose');
+assert.ok(researchHtml.includes('사람 연구의 결과를 한눈에 읽습니다'), 'research route must identify its educational purpose');
 const productHtml = await readFile(resolve(outputDirectory, 'products/index.html'), 'utf8');
 assert.ok(productHtml.includes('셀핀다 가바 1500 · 30포 구성 보기'), 'product route must identify the approved product');
 assert.ok(productHtml.includes('4701017202#REVIEW_DIALOG'), 'product route must preserve the direct SmartStore review destination');

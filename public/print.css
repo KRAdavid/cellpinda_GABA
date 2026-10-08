@@ -1,0 +1,32 @@
+@page{size:A4;margin:14mm 13mm 16mm}
+@media print{
+  .gaba-guide{min-height:0;overflow:visible;background:#fff;color:#132f56;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* Screen-only deferred rendering must not leave blank reserved bands in a paper/PDF handout. */
+  .gaba-guide :is(.guide-applications,.guide-fermented-safety,.guide-growth-story,.guide-expert-videos,.guide-reading-note,.guide-final){content-visibility:visible!important;contain-intrinsic-size:none!important}
+  .gaba-guide :is(.guide-header,.guide-reading-progress,.guide-skip,.guide-share-toast,.guide-menu-backdrop,.guide-menu-toggle,.guide-reading-size-toggle,.guide-header-share,.guide-hero-scroll,.guide-neuron-visual,.guide-recovery-controls,.guide-video-board,.guide-video-feature,.guide-expert-thread,.guide-research-handoff,.guide-final-actions,.guide-share-intro-actions,.guide-research-copy){display:none!important}
+  .gaba-guide .guide-hero{display:block;min-height:0;padding:22mm 13mm 13mm;background:#fff}
+  .gaba-guide .guide-hero-copy{max-width:150mm;padding:0}
+  .gaba-guide .guide-hero h1{font-size:35pt;line-height:1.1}
+  .gaba-guide :is(.guide-hero-body,.guide-editorial-note){max-width:125mm}
+  .gaba-guide :is(.guide-section,.guide-balance-band,.guide-sources){padding:15mm 0;break-inside:auto}
+  .gaba-guide :is(.guide-section-heading,.guide-history-heading,.guide-research-inline-heading,h2,h3){break-after:avoid}
+  .gaba-guide :is(.guide-definition-card,.guide-everyday-card,.guide-sleep-steps article,.guide-research-detail,.guide-application-card,.guide-fermented-step,.guide-growth-step,.guide-reading-note-panel,.guide-recovery-card,.guide-editorial-band,.guide-research-scale,.guide-sources,.guide-final,.guide-video-feature){break-inside:avoid}
+  .gaba-guide :is(.guide-editorial-band,.guide-recovery-card,.guide-research-scale,.guide-reading-note-panel){box-shadow:none}
+  .gaba-guide .guide-video-feature-media{min-height:55mm;background:#eef8fa}
+  .gaba-guide .guide-video-feature-media iframe{display:none}
+  .gaba-guide .guide-video-feature-poster{display:block;min-height:55mm;border:0;cursor:default}
+  .gaba-guide .guide-video-feature-poster-play{display:none}
+  .gaba-guide :is(.guide-reading-note-source a,.guide-study-source a,.guide-research-source a,.guide-application-sources a,.guide-fermented-step>a)::after{content:" · " attr(href);color:#6d8497;font-size:9pt;font-weight:500;overflow-wrap:anywhere}
+  .gaba-guide .guide-final{padding-bottom:18mm}
+  .gaba-guide .guide-footer{break-before:avoid}
+  /* Business readers need the reusable five-line kit in the printed handout too. */
+  .gaba-guide .guide-share-lines{display:block!important;width:100%!important;height:auto!important;max-width:150mm;margin-top:8mm;overflow:visible!important;border-top:1px solid #b9d0da;color:#132f56}
+  .gaba-guide .guide-share-lines summary{display:flex!important;align-items:center;justify-content:space-between;padding:4mm 0;color:#0e7f89;font-size:12pt;font-weight:800;list-style:none}
+  .gaba-guide .guide-share-lines summary::-webkit-details-marker{display:none}
+  .gaba-guide .guide-share-lines summary:after{display:none}
+  .gaba-guide .guide-share-lines>div{display:grid!important;width:100%!important;height:auto!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:3mm}
+  .gaba-guide .guide-share-lines article{display:flex;min-height:0;padding:4mm;border:1px solid #d1e3ea;border-radius:3mm;background:#f7fbfc;break-inside:avoid}
+  .gaba-guide .guide-share-lines article>span{color:#0e7f89;font-size:9pt;font-weight:800}
+  .gaba-guide .guide-share-lines article p{margin:3mm 0 0;color:#35556e;font-size:10pt;line-height:1.55}
+  .gaba-guide .guide-share-lines article button{display:none!important}
+}

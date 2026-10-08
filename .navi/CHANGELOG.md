@@ -1,17 +1,1882 @@
 # Project Changelog
 
+## 2026-10-08 — 사업자 전달 대상 선택·추천 카드 고도화 및 공개 재검증
+
+- 공유 보드에 소비자·사업자·교육 대상 선택을 추가하고, 해당 대상에 적합한 카드만 시각적으로 강조했다. 5개 전체 자료와 개별·전체 복사는 그대로 유지했다.
+- PR #675 required checks가 통과했고, TF heartbeat가 489분으로 만료된 첫 main 실행은 배포하지 않고 중단했다. heartbeat 갱신 PR #676 병합 후 main merge SHA `417db68ed27c631f1fad3d7c36193b1f27574c52`의 workflow `37749598234`에서 Pages 배포·라이브 smoke·release-status가 성공했다.
+- 라이브 validator는 HTTP 200·candidate 일치·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. Chrome CDP 390px에서는 추천 카드 3개→5개, 카드 5개 유지, 가로폭 390/390을 확인했다.
+- 이후 문서-only PR #677을 병합해 NAVI 기록을 main에 동기화했고, 최종 main `1b6fdc422c678f015fe10df648e59b166e7a682f`의 workflow `37750454485`와 live validator candidate가 다시 일치했다.
+- NAVI는 실기기·고령 사용자 독해성·독립 과학·규제 감수 조건 때문에 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-296`, `E-LOCAL-BUILD-BUSINESS-AUDIENCE-20261008`, `E-UI-CONTRACT-BUSINESS-AUDIENCE-20261008`, `E-CDP-BUSINESS-AUDIENCE-20261008`, `E-PR-BUSINESS-AUDIENCE-20261008`, `E-TF-PULSE-BUSINESS-AUDIENCE-20261008`, `E-DEPLOY-PIPELINE-BUSINESS-AUDIENCE-20261008`, `E-LIVE-PUBLIC-BUSINESS-AUDIENCE-20261008`, `E-NAVI-STATE-BUSINESS-AUDIENCE-20261008`.
+
+## 2026-10-08 — 사업자용 공유 자료 보드 고도화 및 공개 배포
+
+- 마지막 공유 장을 즉시 펼쳐지는 5개 카드 보드로 바꿔 기본 소개·신경계 역할·연구의 확장·사람 연구 결과·발효·안전 연구를 사업자가 선택해 전달할 수 있게 했다.
+- 연구 카드에는 Yoto/Byun PMID 출처를 표시하고 개별·전체 복사에 출처와 공개 안내서 deep link를 넣었다. 제품 CTA는 추가하지 않았다.
+- PR #673 및 merge SHA `4804d623964cca76d4ceb45134a63fbc6d664edf`, workflow `37744034563`, 라이브 validator가 성공했다. 로컬 총 자산은 `1,649,437 / 1,650,000 bytes`, 테스트는 127개 통과했다.
+- NAVI는 외부 실기기·독해성·독립 과학·규제 감수 조건 때문에 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-295`, `E-LOCAL-BUILD-BUSINESS-SHARE-20261008`, `E-UI-CONTRACT-BUSINESS-SHARE-20261008`, `E-CDP-BUSINESS-SHARE-20261008`, `E-PR-BUSINESS-SHARE-20261008`, `E-DEPLOY-PIPELINE-BUSINESS-SHARE-20261008`, `E-LIVE-PUBLIC-BUSINESS-SHARE-20261008`, `E-NAVI-STATE-BUSINESS-SHARE-20261008`.
+
+## 2026-10-08 — 연구 지도 범위 라벨 한 줄 가독성 보정 및 공개 재검증
+
+- 모바일 연구 지도에서 `사람 대상 연구`·`동물·세포 연구`가 어절 단위로 끊겨 읽히던 문제를 `사람 연구`·`동물·세포` 한 줄 표시로 정리했다. 상세 연구 범위는 접근성 이름에 보존해 시각적 단순화와 정보의 정확한 전달을 함께 유지했다.
+- UI contract·typecheck·production build·127개 테스트·Pages 배포·라이브 390px 렌더와 연구 지도 선택 흐름을 재검증했다. 라벨 높이는 15px, pageWidth/scrollWidth는 390/390, runtime error는 0이며 피부 주제 선택은 `research-skin` 카드로 연결된다.
+- 코드 공개 candidate는 `77d14844c112c3ab246b36f4afb6b621c6aae501`이며 PR #668과 main workflow `37736676442`가 성공했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-293`, `E-LOCAL-BUILD-RESEARCH-MAP-LABELS-20261008`, `E-UI-CONTRACT-RESEARCH-MAP-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-LABELS-20261008`.
+
+## 1440px 데스크톱 직접 진입 시각 감리 — a576f740 — 2026-10-08
+
+- 공개 1440px에서 첫 화면·연구 지도·연구 상세·전문가 영상·최종 공유 장을 해시로 직접 열어 sticky 헤더 아래 제목 위치와 장 진입 흐름을 확인했다. 대표 장 모두 제목이 헤더 아래에 안정적으로 배치되고 가로폭은 `1425/1425`, runtime error는 0이었다.
+- 다섯 가지 시각 포인트(히어로 이미지와 타이포그래피, 연구 지도, 결과 도표, 전문가 영상 보드, 마지막 공유 화면)를 비교 감리했다. 색상·컨테이너·간격·아이콘 계열이 하나의 디자인 시스템으로 유지되고, 모바일 보정이 데스크톱 레이아웃을 훼손하지 않았다.
+- 재현 가능한 CRITICAL/MAJOR 시각 결함이 없어 기능 코드·연구 카피·수치·출처를 변경하지 않고 NAVI 감리 증적만 추가했다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-281`, `E-CDP-DESKTOP-VISUAL-AUDIT-20261008`, `E-LIVE-PUBLIC-DESKTOP-AUDIT-20261008`, `E-NAVI-STATE-DESKTOP-AUDIT-20261008`.
+
+## 병합 후 최종 공개 SHA 정합성 확인 — 4cc90945 — 2026-10-08
+
+- NAVI 감사 문서 PR #639 병합 후 main workflow `37689497347`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 모두 성공했다. deploy-worker는 정적 공개 모드에 따라 건너뛰었다.
+- 병합 후 `pnpm run validate:live-public https://kradavid.github.io/gaba_info`를 다시 실행해 공개 candidate SHA `4cc90945bdb84fe97d9f64bd10d797ab09d5b65c`와 main merge SHA가 일치함을 확인했다. HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`다.
+- 이번 회차의 공개 기능·연구 카피·수치·출처 변경은 없으며, 최종 공개본의 NAVI 감사 정합성만 갱신했다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-280`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-FINAL-20261008`, `E-LIVE-PUBLIC-REAUDIT-FINAL-20261008`, `E-NAVI-STATE-PUBLIC-REAUDIT-FINAL-20261008`.
+
+## 최신 main 공개본 통합 재감리 및 NAVI 자동 업데이트 — 6b402228 — 2026-10-08
+
+- 최신 main 공개본을 390px에서 14개 장(`#top`부터 `#final`)으로 직접 열어 제목 위치, 장 간 흐름, 가로폭, 런타임 오류를 재감리했다. 모든 장에서 `pageWidth/scrollWidth=390/390`, `errors=[]`를 확인했고, 모바일 헤더의 메뉴·읽기 크기·공유 조작과 연구 지도·전문가 영상·마지막 공유 화면이 한 흐름으로 유지됐다.
+- 로컬 UI contract·typecheck·127개 테스트·governance·ops-docs·live validator·Vite production build가 성공했다. 최종 정적 자산은 `1,649,396 bytes / 1,650,000 bytes`, initial JS `311,405 bytes`, initial CSS `95,703 bytes`다.
+- 공개 validator는 candidate SHA `6b402228d4ebb7d1d6555958fa46c2c04f934168`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 이번 회차에 재현 가능한 CRITICAL/MAJOR 결함은 없어 기능 코드·연구 카피·수치·출처를 변경하지 않고 NAVI 증적만 갱신했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 외부 검증 조건이다.
+
+증적: `C-279`, `E-LOCAL-BUILD-PUBLIC-REAUDIT-20261008`, `E-CDP-PUBLIC-14-CHAPTER-REAUDIT-20261008`, `E-LIVE-PUBLIC-REAUDIT-20261008`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261008`.
+
+## 모바일 읽기 크기 버튼 가독성 보정 및 공개 배포 — e963b2b1 — 2026-10-08
+
+- 모바일 헤더의 `가+ 크게`·`가− 기본` 표시가 기호처럼 읽힐 수 있는 잔여 가독성 리스크를 확인하고, 표시 마크를 `가`로 단순화해 `가 크게`·`가 기본`으로 읽히도록 보정했다. ARIA 라벨·44px 터치 영역·대형 글자 상태·제품 독립 공개 경계는 유지했다.
+- 로컬 UI contract·typecheck·Vite production build·정적 bundle·성능 예산이 통과했고 최종 로컬 총 자산은 1,649,396바이트였다. PR #637의 release-verify·site-quality-verify와 main workflow `37687487406`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY에 따라 건너뛰었다.
+- 공개 validator는 candidate SHA `e963b2b13295bf2567a70e586e640b4206de4e5f`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. Chrome CDP fallback 280·320·351·390·430·768px에서 가로폭과 읽기 크기 토글 상태 변경을 재현했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-278`, `E-LOCAL-BUILD-MOBILE-READING-CUE-20261008`, `E-UI-CONTRACT-MOBILE-READING-CUE-20261008`, `E-CDP-MOBILE-READING-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-READING-CUE-20261008`, `E-NAVI-STATE-MOBILE-READING-CUE-20261008`.
+
+## 초소형 모바일 연구 도표 줄바꿈 및 공개 재검증 — d9e223bf — 2026-10-08
+
+- 280px 이하 연구 결과 도표에서 비교 안내 문구와 긴 조건명이 카드 폭을 넘어갈 수 있던 잔여 가독성 문제를 확인하고, 안내 문구 자연 줄바꿈·조건명 단어 단위 줄바꿈·좁은 숫자 지표 크기 보정을 적용했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·Vite production build·정적 bundle·성능 예산이 성공했고 최종 로컬 총 자산은 1,649,411바이트였다. PR #634·#635 보호검사와 main workflow `37684187205`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY에 따라 건너뛰었다.
+- 공개 validator는 candidate SHA `d9e223bf343879d35a1a9c32aa76dec39ebdc546`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. Chrome CDP fallback 280·1440px에서 페이지 가로폭과 연구·수면 도표의 내부 가로폭 정합성, 390px 대표 흐름을 재확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-277`, `E-LOCAL-BUILD-NARROW-CHART-WRAP-20261008`, `E-UI-CONTRACT-NARROW-CHART-WRAP-20261008`, `E-CDP-NARROW-CHART-WRAP-20261008`, `E-DEPLOY-PIPELINE-NARROW-CHART-WRAP-20261008`, `E-LIVE-PUBLIC-NARROW-CHART-WRAP-20261008`, `E-NAVI-STATE-NARROW-CHART-WRAP-20261008`.
+
+## 연구 규모 기준일 노출 및 공개 배포 — 01fab451 — 2026-10-08
+
+- 연구 규모의 큰 수치 가까이에 `기준일 2026.09.28`을 추가해 문헌 숫자의 시점을 한눈에 확인하도록 고도화했다. 하버드·옥스퍼드 PubMed 비교와 GABA-A SCIE 분석의 수치·출처·범위는 유지했다.
+- UI contract·typecheck·127개 테스트·Vite build·정적 bundle·성능 예산, PR #632 보호검사, main workflow `37680629352`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 공개 validator는 HTTP 200·candidate SHA `01fab45151b7631ccf88f342629ccd5387ee4b24`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다.
+- 공개 390px Chrome CDP에서 기준일 표시와 가로폭 정합성, runtime error 0건을 확인했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-276`, `E-LOCAL-BUILD-RESEARCH-SCALE-DATE-20261008`, `E-UI-CONTRACT-RESEARCH-SCALE-DATE-20261008`, `E-CDP-RESEARCH-SCALE-DATE-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-DATE-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCALE-DATE-20261008`, `E-NAVI-STATE-RESEARCH-SCALE-DATE-20261008`.
+
+## 전문가 영상 공개 장 반응형·직접 진입 재감리 — a6cead44 — 2026-10-08
+
+- 전문가 영상 장을 280·320·390·1440px에서 시각 검수하고, 재생 전 포스터·선택 게시판·주제 필터·9개 카드·출처 읽기 handoff를 확인했다. 모든 대표 폭에서 가로폭 정합성과 runtime error 0건을 확인했다.
+- 라이브 validator는 HTTP 200·candidate SHA `a6cead44c38964204c480f9e626b64bdeb6cc9c5`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 이번 회차에는 기능 코드·연구 카피·수치·출처를 변경하지 않고 NAVI 기록만 최신화했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-275`, `E-LOCAL-BUILD-EXPERT-VIDEO-PUBLISHING-20261008`, `E-CDP-EXPERT-VIDEO-PUBLISHING-20261008`, `E-LIVE-PUBLIC-EXPERT-VIDEO-PUBLISHING-20261008`, `E-NAVI-STATE-EXPERT-VIDEO-PUBLISHING-20261008`.
+
+## 연구 지도 범위 라벨·공개 배포 — 49f289cf — 2026-10-08
+
+- 연구 지도 다섯 주제 아래에 `사람 대상 연구` 또는 `동물·세포 연구`를 표시해 범위를 선택 전부터 읽도록 고도화했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·Vite build·성능 예산과 PR #629 보호검사가 성공했다. main workflow `37675112086`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status도 성공했다.
+- 공개 validator는 HTTP 200·current candidate SHA `49f289cf98a6d51a8fadae7a0e7867a46eeae52c`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 390px CDP에서 범위 라벨·연구 지도 선택·상세 카드 포커스·가로폭 정합성을 재현했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-274`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-UI-CONTRACT-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-CDP-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-LABELS-20261008`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-LABELS-20261008`.
+
+## 연구 범위 범례 명료화 및 NAVI 기록 동기화 — b0687e81 — 2026-10-08
+
+- 연구 지도 범례를 `사람 대상 연구`와 `동물·세포 연구`로 명확히 나누고, 카드 상단에서 대상·방법·측정 항목을 먼저 확인하도록 안내했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·Vite build·성능 예산, UI PR #626 보호검사와 main workflow `37670864607`가 성공했다. NAVI 기록 PR #627도 보호검사를 통과해 `b0687e81`로 병합됐고 main workflow `37671979488`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·current candidate SHA `b0687e81e4558fb33294106992bc5dcf12c51ccb`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 390px CDP에서 문구·ARIA 라벨·pageWidth/scrollWidth 390/390·errors=[]를 확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Chrome CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-273`, `E-LOCAL-BUILD-RESEARCH-SCOPE-LEGEND-20261008`, `E-UI-CONTRACT-RESEARCH-SCOPE-LEGEND-20261008`, `E-CDP-RESEARCH-SCOPE-LEGEND-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-SCOPE-LEGEND-20261008`, `E-LIVE-PUBLIC-RESEARCH-SCOPE-LEGEND-20261008`, `E-NAVI-STATE-RESEARCH-SCOPE-LEGEND-20261008`.
+
+## 발효 활용 연구 출처 DOI 정규화 및 공개 배포 — 2857bf9 — 2026-10-08
+
+- 발효 활용 사례의 지역형 RSC 경로를 표준 DOI로 교체해 원문 출처의 재현성을 높였다. 연구 카피·수치·라벨·제품 독립 경계는 변경하지 않았다.
+- 로컬 typecheck·Vite build·127개 테스트, PR #624 보호검사, main workflow `37668072311`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·candidate SHA `2857bf93c3663b0a07401d2602c97bfdbd24ee98`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 390·1440px에서 DOI href와 연구 지도 선택 흐름을 재현했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-272`, `E-LOCAL-BUILD-SOURCE-DOI-20261008`, `E-PLAYWRIGHT-SOURCE-DOI-20261008`, `E-DEPLOY-PIPELINE-SOURCE-DOI-20261008`, `E-LIVE-PUBLIC-SOURCE-DOI-20261008`, `E-NAVI-STATE-SOURCE-DOI-20261008`.
+
+## 공개본 전체 흐름·직접 진입·반응형 재감리 — a2909f0 — 2026-10-08
+
+- 기능 코드와 공개 연구 카피를 변경하지 않고 280·320·390·768·1440px, 여섯 핵심 장 해시 직접 진입, 전문가 영상 공유·자동 재생 경로를 재검증했다.
+- document 폭=viewport, 깨진 이미지·중복 id·이름 없는 조작부·runtime error 0건을 확인했다. 공개 validator는 HTTP 200·candidate SHA `a2909f073dc1d41a433a0ed4c761bba4227c39d8`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없고 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-271`, `E-LOCAL-BUILD-PUBLIC-DEEP-AUDIT-20261008`, `E-PLAYWRIGHT-PUBLIC-DEEP-AUDIT-20261008`, `E-LIVE-PUBLIC-DEEP-AUDIT-20261008`, `E-NAVI-STATE-PUBLIC-DEEP-AUDIT-20261008`.
+
+## 모바일 전문가 영상 제목 줄바꿈 보완 및 공개 배포 재검증 — 9e447b5 — 2026-10-08
+
+- 320px 이하 전문가 영상 카드의 한국어 제목이 글자 중간에서 끊기지 않도록 단어 단위 줄바꿈을 적용했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 총 자산 `1,649,451 bytes`, `pnpm test` 127개, PR #621 보호 검사와 main workflow `37663407212`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·candidate SHA `9e447b5cddbad5d419c6dd301ebebcc8ac9f9e33`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 320·390px Chromium fallback에서 제목 줄바꿈, 영상 선택 후 autoplay iframe, 가로폭 초과 0건, runtime error 0건을 확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-270`, `E-LOCAL-BUILD-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-PLAYWRIGHT-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-DEPLOY-PIPELINE-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-LIVE-PUBLIC-MOBILE-VIDEO-TITLE-WRAP-20261008`, `E-NAVI-STATE-MOBILE-VIDEO-TITLE-WRAP-20261008`.
+
+## 모바일 연구 결과 도표 타이포그래피 보완 및 공개 배포 재검증 — dbdd396 — 2026-10-08
+
+- 모바일 연구 결과 도표의 비교 조건·GABA 그룹·관찰 결과를 더 빠르게 읽도록 공통 차트 타이포그래피를 보완했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 총 자산 `1,649,406 bytes`, 127개 테스트, PR #619 보호 검사와 main workflow `37661235646`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 HTTP 200·candidate SHA `dbdd396c9dfc2ac67c9d76f03b5e4e29fb381574`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다. 공개 320·390px Playwright fallback에서 차트 라벨 약 14px, 가로폭 초과 0건, runtime error 0건을 확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-269`, `E-LOCAL-BUILD-MOBILE-CHART-TYPE-20261008`, `E-PLAYWRIGHT-MOBILE-CHART-TYPE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-CHART-TYPE-20261008`, `E-LIVE-PUBLIC-MOBILE-CHART-TYPE-20261008`, `E-NAVI-STATE-MOBILE-CHART-TYPE-20261008`.
+
+## 모바일 성장 연구 장 진입 여백 — 공개 배포 확인 — main bcb82a2 — 2026-10-08
+
+- PR #613의 보호 검사와 main workflow `37650139724`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 실행하지 않았다.
+- 공개 validator는 HTTP 200·candidate SHA `bcb82a2fd53171aa7dbb6aba3aa1e74a3dea1045`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 공개 390px Chrome CDP fallback에서 성장 연구 handoff와 `#growth` 직접 진입의 제목 위치, 가로폭 초과 0건, runtime error 0건을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-GROWTH-ENTRY-20261008`, `E-CDP-MOBILE-GROWTH-ENTRY-20261008`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-ENTRY-20261008`, `E-LIVE-PUBLIC-MOBILE-GROWTH-ENTRY-20261008`, `E-NAVI-STATE-MOBILE-GROWTH-ENTRY-20261008`.
+
+## 모바일 전문가 영상→출처 읽기 연결 리듬 — 공개 배포 확인 — main 2de2735 — 2026-10-07
+
+- PR #598의 모든 보호 검사가 통과하고 main workflow `37618834702`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 실행하지 않았다.
+- 공개 validator는 HTTP 200·candidate SHA `2de2735fec56c36839216ce580c7298f87cf09c5`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다.
+- 공개 390px CDP에서 출처 읽기 제목·연구 질문·원문 출처 패널이 읽기 레일 아래에 이어지고, 메뉴·연구 지도·공유 fallback과 가로폭 0건을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-HANDOFF-20261007`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-PUBLIC-20261007`.
+
+## 모바일 전문가 영상→출처 읽기 연결 리듬 보정 — working tree — 2026-10-07
+
+- 전문가 영상 장을 읽은 뒤 `11 · 출처 읽기`로 넘어갈 때 모바일 상단 여백이 과도해 다음 내용이 끊겨 보이는 잔여 퍼블리싱 리스크를 확인했다.
+- 700px 이하에서 출처 읽기 장의 상단·하단 여백을 `72px·64px`로 조정해 제목, 연구를 읽는 네 가지 질문, 원문 출처 패널이 한 흐름으로 이어지도록 했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산과 Chrome CDP fallback 390px 직접 진입·메뉴·연구 지도·공유 상호작용을 재검증했다. 공개 main 배포는 이 working-tree 보정의 후속 게이트다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-HANDOFF-20261007`, `E-CDP-MOBILE-CHAPTER-HANDOFF-20261007`, `E-NAVI-STATE-MOBILE-CHAPTER-HANDOFF-20261007`.
+
+## 공개 연구 라우트 고도화 — 공개 배포 확인 — final manifest 25d8ff3 — 2026-10-07
+
+- 연구 페이지를 메인 안내서와 같은 프리미엄 네이비·틸 톤으로 맞추고, `사람 연구의 결과를 한눈에 읽습니다`를 중심으로 결과·연구 조건·출처가 바로 이어지는 흐름을 만들었다.
+- `먼저 확인해 주세요`와 어색한 비교 표현을 자연스러운 한국어로 보정하고, 정적 메타데이터·모바일 가로폭·연구 카드·출처 안내를 함께 검증했다. 공개 390px 화면에서 오류와 가로 넘침이 없었다.
+- PR #560·#561·#562의 코드 고도화와 PR #563의 NAVI 문서 동기화가 성공했다. 최종 main workflow `37569095235`와 공개 candidate SHA `25d8ff3a29b47ef9dc76a73a4e26ae27e6b6163d`, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`를 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-ROUTE-20261007`, `E-UI-CONTRACT-RESEARCH-ROUTE-20261007`, `E-PLAYWRIGHT-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-ROUTE-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-20261007`, `E-DEPLOY-PIPELINE-NAVI-RESEARCH-FINAL-20261007`, `E-LIVE-PUBLIC-RESEARCH-ROUTE-FINAL-20261007`.
+
+## 전문가 영상 재생 상태 표기 — 공개 배포 확인 — main 2e6ab07 — 2026-10-07
+
+- 전문가 영상 카드의 상태 문구를 실제 재생 상태와 동기화했다. 선택 전 `선택 후 재생`, 선택 직후 `불러오는 중`, 재생 완료 후 `재생 중`으로 바뀐다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산과 390px 공개 Playwright 검증을 통과했다. PR #558과 main workflow `37565907302`의 Pages 배포·라이브 smoke도 성공했다.
+- 영상 출처·연구 카피·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-STATE-20261007`, `E-UI-CONTRACT-EXPERT-VIDEO-STATE-20261007`, `E-PLAYWRIGHT-EXPERT-VIDEO-STATE-20261007`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-STATE-20261007`, `E-LIVE-PUBLIC-EXPERT-VIDEO-STATE-20261007`.
+
+## 연구 지도 선택 연결 문구 — working tree — 2026-10-07
+
+- 연구 지도 아래 초기 안내에 `주제를 고르면 해당 카드로 이어집니다`를 추가해, 대표 결과와 상세 연구 카드의 연결을 한 번에 읽도록 했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. UI contract·typecheck·127개 테스트·production build·성능 예산과 320·390·768·1440px Playwright Chromium fallback을 통과했다.
+- 공개 main 배포 후 라이브 재검증은 후속 게이트다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261007`, `E-UI-CONTRACT-RESEARCH-MAP-CUE-20261007`, `E-PLAYWRIGHT-RESEARCH-MAP-CUE-20261007`.
+
+## 좁은 화면 글자 조절 라벨 — 공개 배포 확인 — main d035807 — 2026-10-07
+
+- PR #555와 main workflow `37563485033`의 release-verify·worker-readiness·Pages publish·라이브 smoke·release-status가 성공했다. deploy-worker는 `STATIC_ONLY`로 skip되었다.
+- 공개 validator는 HTTP 200·candidate `d035807ad96cf9368279eb3d42a12b728f6d2881`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`·제품 독립 경계를 확인했다. 모바일 헤더의 `가+ 크게`가 공개본에 반영됐다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Worker 운영 비밀값과 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 남아 있다.
+
+증적: `E-DEPLOY-PIPELINE-HEADER-READING-LABEL-20261007`, `E-LIVE-PUBLIC-HEADER-READING-LABEL-20261007`.
+
+## 좁은 화면 글자 조절 라벨 고도화 — working tree — 2026-10-07
+
+- 320px 이하 모바일 헤더의 축약 표기를 `가+ 글자`에서 `가+ 크게`로 바꿔, 나이 있는 사용자가 버튼 의미를 즉시 읽도록 했다. 큰 글자 상태의 `가− 기본`, 접근 가능한 전체 라벨, 저장 동작은 유지했다.
+- UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산·320·390·768·1440px Playwright Chromium fallback을 통과했다. 메뉴 포커스와 선택 전문가 영상 `autoplay=1`도 재확인했다.
+- 공개 main 배포 후 라이브 재검증은 후속 게이트다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-HEADER-READING-LABEL-20261007`, `E-UI-CONTRACT-HEADER-READING-LABEL-20261007`, `E-PLAYWRIGHT-HEADER-READING-LABEL-20261007`.
+
+## NAVI 재점검 문서 최종 공개 배포 확인 — main 6ffbeb0 — 2026-10-07
+
+- PR #553을 병합하고 main workflow `37561870841`의 release-verify·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 최종 candidate `6ffbeb0295fa36ead390ff3fafa480df2a670d7d`와 bundle hash 73개를 확인했다.
+- 공개 데이터 12 claims·6 master records·6 share pages·제품 독립 경계·teaser `HOLD`가 유지됐다. 사이트 코드와 연구 카피는 변경하지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. Worker 운영 비밀값과 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 남아 있다.
+
+증적: `E-DEPLOY-PIPELINE-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-FINAL-20261007`.
+
+## NAVI 자동 공개본 재점검 — main 1334348 — 2026-10-07
+
+- 최신 main 공개본을 로컬 품질 게이트·Pages-style 정적 bundle·라이브 validator·공개 Playwright Chromium fallback으로 재점검했다. 390px·1440px에서 히어로·연구·전문가 영상·공유 장과 연구 주제 선택 흐름을 확인했고, 새 CRITICAL/MAJOR 결함은 없었다.
+- Pages-style 총 자산은 1,647,283 bytes, route 11개, bundle file 73개다. 공개 candidate SHA는 `13343484e0850ac5b38c81add64a2625aa8b17a2`로 최신 main과 일치한다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. teaser `HOLD`, Worker 운영 비밀값, 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 남아 있다.
+
+증적: `E-LOCAL-BUILD-NAVI-PUBLIC-RECHECK-20261007`, `E-PLAYWRIGHT-PUBLIC-NAVI-RECHECK-20261007`, `E-LIVE-PUBLIC-NAVI-RECHECK-20261007`.
+
+## 06·연구 대상 연결 라인·공개 배포 완료 — main af936c7 — 2026-10-07
+
+- PR #551을 병합하고 main workflow `37560044899`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `af936c72c3b6140488b27d6a390809201ec99d25`, bundle hash 73개, 제품 독립 경계를 확인했다.
+- 라이브 연구 지도 아래에 대표 결과와 대상·연구 범위가 함께 표시되고, 피부 주제 선택 시 범위 라벨과 활성 카드가 갱신된다. 390px·1440px Playwright fallback에서 가로 넘침·page error·console error가 없었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. teaser `HOLD`, 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 유지한다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-SCOPE-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-SCOPE-20261008`.
+
+## 06·연구 대상 연결 라인 고도화 — working tree — 2026-10-07
+
+- 연구 지도 아래 결과 요약에 기존 연구 카드의 대상·연구 범위 라인을 추가해 `대표 결과 → 관찰 결과 → 대상·연구 범위` 순서를 한눈에 읽도록 했다. 새 연구 주장·수치·출처·제품 광고는 추가하지 않았다.
+- UI contract·typecheck·127개 테스트·Pages-style production build·정적 bundle·release manifest·성능 예산과 Playwright Chromium fallback 390px·1440px 상호작용 감리를 통과했다. Pages-style 총 자산은 1,647,487 bytes로 1,650,000 bytes 예산 안이다. 실제 화면에서 사용하지 않는 구형 모바일 레이아웃 재정의도 정리했다.
+- 공개 main 배포와 라이브 재검증은 후속 게이트이며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. teaser `HOLD`, 실기기·고령 사용자·독립 과학·규제 감수 외부 검증은 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-SCOPE-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-SCOPE-20261008`, `E-PLAYWRIGHT-RESEARCH-CUE-SCOPE-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-SCOPE-20261008`.
+
+## 06·연구 결과 전환 문구 계층·공개 배포 완료 — main e997683 — 2026-10-07
+
+- PR #549를 병합하고 main workflow `37557233295`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `e99768344c18286b8edf8d46e4c6a08f9a6b3f42`, bundle hash 73개, 제품 독립 경계를 확인했다.
+- 라이브 CSS에 두 줄 결과 계층, JS에 연구 읽기 레일과 대표 결과 표식이 반영됐고 390px·1440px Playwright fallback 시각 점검에서 가로 넘침·page error·console error가 없었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 실기기·실제 고령 사용자·독립 과학·규제 감수와 teaser `HOLD`는 외부/운영 게이트로 남는다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-HIERARCHY-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-HIERARCHY-20261008`.
+
+## 06·연구 결과 전환 문구 계층 고도화 — working tree — 2026-10-07
+
+- 연구 지도 아래 전환 밴드의 `대표 결과부터 읽기`와 실제 관찰 결과를 두 줄로 분리해 모바일·데스크톱에서 결과를 더 빠르게 읽도록 했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- UI contract·typecheck·127개 테스트·production build·정적 번들·release manifest·성능 예산을 통과했고, Playwright Chromium fallback 390px·1440px에서 가로 넘침·page error·console error가 없었다. Pages-style 총 자산은 1,649,473 bytes로 예산 안이다.
+- 공개 main 배포와 라이브 재검증은 후속 게이트이며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-HIERARCHY-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-HIERARCHY-20261008`, `E-PLAYWRIGHT-RESEARCH-CUE-HIERARCHY-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-HIERARCHY-20261008`.
+
+## 06·연구의 확장 결과 전환 밴드·공개 배포 완료 — main 8538063 — 2026-10-07
+
+- PR #546을 병합하고 main workflow `37555128673`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `8538063bd2cfd6b15eb8cf67f2c6944e87e4891b`, bundle hash 73개, 제품 독립 경계를 확인했다.
+- 공개 CSS에서 연구 결과 전환 밴드가 반영되고 공개 JS에서 `대표 결과부터 읽기`와 연구 읽기 레일이 유지됨을 재확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 신규 브라우저 시각 QA·실기기·고령 사용자·독립 과학·규제 감수는 외부 검증 항목으로 남는다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-CUE-BAND-20261008`, `E-LIVE-PUBLIC-RESEARCH-CUE-BAND-20261008`.
+
+## 06·연구의 확장 결과 전환 밴드 고도화 — working tree — 2026-10-07
+
+- 연구 지도와 대표 결과 사이의 기존 전환 영역을 얇은 구분선에서 연한 배경·테두리·강조 색을 가진 증거 전환 밴드로 보정해 모바일과 데스크톱에서 다음 연구 카드로 이어지는 흐름을 더 쉽게 구분하도록 했다.
+- UI contract·typecheck·127개 테스트·production build·정적 번들·release manifest·성능 예산을 통과했다. Pages-style 총 자산은 1,649,433 bytes로 1,650,000 bytes 예산 안이다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 공개 main 배포·라이브 URL·신규 브라우저 시각 캡처는 후속 게이트이며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CUE-BAND-20261008`, `E-UI-CONTRACT-RESEARCH-CUE-BAND-20261008`, `E-STATIC-BUNDLE-RESEARCH-CUE-BAND-20261008`.
+
+## 06·연구의 확장 대표 결과 선행 노출·공개 배포 완료 — main 5238808 — 2026-10-07
+
+- PR #544를 병합하고 main workflow `37553497930`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status를 통과시켰다. 공개 validator는 candidate `523880887ece2a91916d66db57c8265de702cd0a`, bundle hash 73개, 제품 독립 경계를 확인했다.
+- 공개 번들에서 `대표 결과부터 읽기`와 연구 읽기 레일을 확인했다. 지도 아래 대표 결과가 별도 이동 없이 연구 카드 흐름으로 이어진다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 신규 브라우저 시각 QA·실기기·고령 사용자·독립 과학·규제 감수는 외부 검증 항목이다.
+
+증적: `E-DEPLOY-PIPELINE-RESEARCH-PREVIEW-20261008`, `E-LIVE-PUBLIC-RESEARCH-PREVIEW-20261008`.
+
+## 06·연구의 확장 대표 결과 선행 노출 — working tree — 2026-10-07
+
+- 연구 지도 아래의 기존 전환 영역에 선택 전에는 인지 대표 결과, 선택 후에는 선택한 결과의 요약을 먼저 노출하고 별도 링크 없이 상세 카드로 이어지게 했다. 모바일에서 지도와 연구 결과가 한 흐름으로 읽힌다.
+- 첫 원격 후보가 정적 자산 예산을 481 bytes 초과해 별도 CTA를 제거하고 Pages-style production build를 다시 통과시켰다. 초기 JS 311,269 bytes·CSS 95,703 bytes·총 자산 1,649,610 bytes다.
+- 공개 main 배포와 라이브 URL 재검증 전 기록이며, 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-PREVIEW-20261008`, `E-UI-CONTRACT-RESEARCH-PREVIEW-20261008`, `E-STATIC-BUNDLE-RESEARCH-PREVIEW-20261008`.
+
+## 공유 API 회복 보정·공개 배포 완료 — main 93fa62f — 2026-10-07
+
+- 첫 PR 후보 `45cb2ce`에서 Pages 성능 예산이 `1,650,086 > 1,650,000`으로 86 bytes 초과해 배포가 중단됐다. 공유 회복 동작은 유지하면서 불필요한 외부 예외 래퍼를 줄여 `47f1cf8`로 재검증했고, PR·main release-verify가 통과했다.
+- PR #541 병합 후 main workflow `37549529638`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `93fa62f`·73개 bundle hash·제품 독립 경계를 확인했다.
+- 공개 번들에서 사용자 취소용 `AbortError` 분기와 회복 가능한 실패의 링크 복사 fallback을 확인했다. 실제 Web Share를 제공하는 Safari·Android·임베디드 환경의 실기기 동작은 외부 검증 항목으로 남긴다.
+
+증적: `E-LOCAL-PAGES-SHARE-RECOVERY-20261007`, `E-DEPLOY-PIPELINE-SHARE-RECOVERY-20261007`, `E-LIVE-PUBLIC-SHARE-RECOVERY-20261007`.
+
+## 공유 API 실패 회복·공개 안내서 품질 보강 — working tree — 2026-10-07
+
+- 공개 안내서의 공유 API가 사용자 취소와 브라우저 정책·권한·payload 실패를 구분하도록 보완했다. 사용자가 취소한 경우에는 취소 상태를 유지하고, 회복 가능한 실패에서는 동일한 링크 복사 fallback을 시도한다.
+- `pnpm run validate:ui-contract`, `pnpm run typecheck`, 127개 테스트, production build, 정적 번들·성능 예산을 통과했다. 초기 JS 311,199 bytes·CSS 95,703 bytes·총 자산 1,649,565 bytes로 예산 안이다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 보호된 main 공개 배포와 실제 모바일 공유 API 환경 검증은 후속 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-SHARE-RECOVERY-20261007`, `E-UI-CONTRACT-SHARE-RECOVERY-20261007`.
+
+## 공개 surface 자동 재점검·NAVI 동기화 — main 1083e3f — 2026-10-07
+
+- 320·390·768·1440px 공개 화면과 전문가 영상 해시 진입을 재감리하고 가로폭·중복 ID·빈 조작 요소·runtime/console errors 0을 확인했다. 모바일 메뉴의 열림·ESC 닫힘·포커스 복귀도 확인했다.
+- 영상 썸네일 빈 alt 9개는 버튼 접근성 이름이 제목·채널·상태를 제공하는 장식 이미지로 분류했으며 공개 코드는 불필요하게 변경하지 않았다.
+- UI contract·typecheck·127개 테스트·production build·라이브 validator가 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-SURFACE-AUDIT-20261007`, `E-ACCESSIBILITY-PUBLIC-SURFACE-AUDIT-20261007`, `E-DEEPLINK-PUBLIC-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-SURFACE-AUDIT-20261007`.
+
+## 인쇄·PDF 공유 퍼블리싱 공개 배포 완료 — main ab096d1 — 2026-10-07
+
+- PR #527을 main에 병합하고 GitHub Pages 공개 배포를 완료했다. release-verify·worker-readiness·Pages·라이브 smoke·release-status가 모두 성공했고 공개 validator가 73개 bundle hash와 제품 독립 경계를 확인했다.
+- 공개 390·1440px print media에서 화면 전용 헤더·진행바·영상 보드·복구 조작부가 숨겨지고 본문 섹션이 유지된다. 사업자용 인쇄·PDF 공유 경로를 실제 공개 URL에서 검증했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실기기·고령 사용자·독립 과학·규제 감수는 외부 검증 항목이다.
+
+증적: `E-LOCAL-BUILD-PRINT-PUBLISHING-20261007`, `E-UI-CONTRACT-PRINT-PUBLISHING-20261007`, `E-CDP-PRINT-PUBLISHING-20261007`, `E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007`, `E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007`.
+
+## 인쇄·PDF 공유 퍼블리싱 레이어 — 2026-10-07 — working tree
+
+- 사업자가 공개 안내서를 출력·PDF로 보관·공유할 때도 읽기 흐름이 유지되도록 A4 인쇄 미디어, 화면 전용 요소 숨김, 주요 표면 분할 방지, 연구 출처 URL 노출을 추가했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Chrome print media 390·1440px 검증을 통과했다. PR·main 배포와 공개 URL 재검증 전 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-PRINT-PUBLISHING-20261007`, `E-UI-CONTRACT-PRINT-PUBLISHING-20261007`, `E-CDP-PRINT-PUBLISHING-20261007`, `E-DEPLOY-PIPELINE-PRINT-PUBLISHING-20261007`, `E-LIVE-PUBLIC-PRINT-PUBLISHING-20261007`.
+
+## 큰 글자 읽기 모드·모바일 공개 재점검 — main 829c5fb — 2026-10-07
+
+- 320·390·768px 큰 글자 모드에서 회복 14단계·연구 지도·전문가 영상·공유 화면을 다시 점검했다. 본문 가로폭은 viewport와 일치했고 보이는 한국어 문장 잘림과 런타임 오류는 없었다.
+- 장식용 overflow와 `sr-only` 내부 폭 차이를 실제 본문 overflow와 구분해 기록했다. 가시적 결함이 없어 공개 UI 코드는 유지했다.
+- UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-LARGE-TEXT-AUDIT-20261007`, `E-UI-CONTRACT-LARGE-TEXT-AUDIT-20261007`, `E-CDP-LARGE-TEXT-AUDIT-20261007`, `E-LIVE-PUBLIC-LARGE-TEXT-AUDIT-20261007`.
+
+## 전문가 영상 필터 카운트 가독성 보정·공개 배포 — b028897 — 2026-10-07
+
+- 전문가 영상 필터의 숫자 카운트를 `9편`·`4편`처럼 단위와 함께 표시해 모바일·데스크톱에서 주제별 자료량을 즉시 읽도록 고도화했다. 접근성 이름·선택 영상 즉시 재생·연구 내용은 유지했다.
+- UI contract·typecheck·127개 테스트·production build·성능 예산, PR #524, main workflow `37526178585`, Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 390·1440px 검증을 통과했다. 초기 JS 311,199 bytes, CSS 95,703 bytes, 총 자산 1,649,381 bytes다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FILTER-COUNT-20261007`, `E-UI-CONTRACT-VIDEO-FILTER-COUNT-20261007`, `E-CDP-VIDEO-FILTER-COUNT-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FILTER-COUNT-20261007`, `E-LIVE-PUBLIC-VIDEO-FILTER-COUNT-20261007`.
+
+## 모바일 회복 브리지 진입 리듬 보정·공개 배포 — 9731c29 — 2026-10-07
+
+- 모바일 회복 브리지의 중복 상단 여백을 제거하고 공통 58px 진입 규칙으로 통합해 `GABA를 모르면 노화는 가속됩니다.` 제목이 다른 장과 같은 리듬으로 시작하도록 고도화했다. 14단계 흐름·회복 일러스트·연구 내용은 유지했다.
+- UI contract와 Pages 동등 번들·성능 예산, PR #522, main workflow `37523587127`, Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 390·1440px 검증을 통과했다. Pages 동등 총 자산은 1,649,961 bytes다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-UI-CONTRACT-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-CDP-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-RECOVERY-BRIDGE-RHYTHM-20261007`, `E-LIVE-PUBLIC-RECOVERY-BRIDGE-RHYTHM-20261007`.
+
+## 초협폭 연구 결과 도표 가독성 보정·공개 배포 — ad52246 — 2026-10-07
+
+- 280px 이하 초소형 모바일에서 연구 결과 비교 조건 카드를 세로로 쌓고 결과 문구를 카드 폭 전체에 표시해 `더 많이 줄었습니다`·`덜 줄었습니다`와 방향 신호를 순서대로 읽도록 보정했다. 320px은 동일한 읽기 구조를 사용하고 390px·태블릿·데스크톱 구성은 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #520 최종 checks, main workflow `37519850528`, Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 280·320·390px 검증을 통과했다. 원격 성능 예산의 환경별 72-byte 초과는 CSS 중복을 제거해 최종 통과시켰다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-ULTRA-NARROW-CHART-20261007`, `E-UI-CONTRACT-ULTRA-NARROW-CHART-20261007`, `E-CDP-ULTRA-NARROW-CHART-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-CHART-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-CHART-20261007`.
+
+## 섹션 직접 진입 앵커 가독성 보정·공개 배포 — 075b919 — 2026-10-06
+
+- 메뉴·공유 링크로 연구 지도에 직접 진입할 때 고정 헤더와 읽기 진행바가 제목을 가리지 않도록 데스크톱·태블릿 126px, 모바일 116px의 반응형 앵커 여백을 추가했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #518, main workflow `37517088317`, Pages·라이브 smoke·release-status, 공개 Chrome CDP fallback 390·768·1440px 검증을 통과했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-ANCHOR-READABILITY-20261007`, `E-UI-CONTRACT-ANCHOR-READABILITY-20261007`, `E-CDP-ANCHOR-READABILITY-20261007`, `E-DEPLOY-PIPELINE-ANCHOR-READABILITY-20261007`, `E-LIVE-PUBLIC-ANCHOR-READABILITY-20261007`.
+
+## 모바일 연구 비교 도표 겹침 보정·공개 배포 — 443e85b — 2026-10-06
+
+- 351–430px 모바일 연구 결과 도표에서 비교 조건과 GABA 조건을 나란히 유지하면서 각 조건 카드 내부를 `결과 문구 → 변화 방향` 순서로 세로 정렬해 겹침을 제거했다. 데스크톱·태블릿 비교 구조와 연구 내용은 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #516, main workflow `37514564656`, Pages·라이브 smoke·release-status·공개 Chrome CDP fallback 390·768·1440px 검증을 통과했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-CHART-LANE-20261007`, `E-UI-CONTRACT-MOBILE-CHART-LANE-20261007`, `E-CDP-MOBILE-CHART-LANE-20261007`, `E-DEPLOY-PIPELINE-MOBILE-CHART-LANE-20261007`, `E-LIVE-PUBLIC-MOBILE-CHART-LANE-20261007`.
+
+## 수면·회복 도입 리듬 인포그래픽·공개 배포 — f785d7d — 2026-10-06
+
+- 첫 도입부에 `낮 · 활동 → 밤 · 수면 → 다음 날 · 회복` 3단계 인포그래픽을 추가해 텍스트와 카드 사이의 하루 흐름을 한눈에 읽도록 고도화했다. 280px·390px·1440px에서 연결선, 아이콘, 카드 흐름과 줄바꿈을 확인했다.
+- 기존 수면 카피·매슈 워커 참고·연구 출처·제품 독립 공개 경계는 변경하지 않았다. 수면 편집 이미지를 16,334 bytes로 재압축해 총 정적 자산을 1,649,422 bytes로 유지했다.
+- PR #480, main workflow `37464418012`, Pages·라이브 smoke·release-status·공개 validator candidate `f785d7d`와 Chrome CDP fallback 390·1440px 검증을 통과했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-OPENING-RHYTHM-VISUAL-20261006`, `E-UI-CONTRACT-OPENING-RHYTHM-VISUAL-20261006`, `E-CDP-OPENING-RHYTHM-VISUAL-20261006`, `E-DEPLOY-PIPELINE-OPENING-RHYTHM-VISUAL-20261006`, `E-LIVE-PUBLIC-OPENING-RHYTHM-VISUAL-20261006`.
+
+## 모바일 연구 비교 도표 컴팩트 스캔·공개 배포 — e2ef8f0 — 2026-10-06
+
+- 연구 결과 도표의 모바일 반복을 줄이고, `측정 항목 → 비교 조건 → GABA 결과`를 한 단위로 읽도록 351–700px 컴팩트 레인을 적용했다. GABA 결과는 별도 요약 띠로 먼저 보이며, 데스크톱 학술형 도표는 유지된다.
+- 응용 사례 이미지를 재압축해 총 공개 자산 1,648,578 bytes로 성능 예산 안에 유지했다.
+- PR #482, main workflow `37467358386`, Pages·라이브 smoke·release-status와 공개 validator candidate `e2ef8f0`·HTTP 200·Chrome CDP fallback 390·1440px 검증이 성공했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-SCAN-20261006`, `E-UI-CONTRACT-RESEARCH-COMPARISON-SCAN-20261006`, `E-CDP-RESEARCH-COMPARISON-SCAN-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-SCAN-20261006`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-SCAN-20261006`.
+
+## 연구 지도 전용 편집 비주얼·공개 배포 — 813fd3a — 2026-10-06
+
+- 연구 지도 섹션에 첫 화면과 구분되는 잔잔한 물의 흐름 기반 전용 자연 편집 비주얼을 적용해 `하나의 신호 → 넓은 학술 연구 지도` 전환을 한 화면에서 이해하도록 고도화했다. 모바일 350×210px, 데스크톱 1180×270px에서 텍스트 대비와 이미지 크롭을 확인했다.
+- 연구 카피·수치·출처·5개 학술 카드·제품 독립 공개 경계는 변경하지 않았다. 새 이미지는 1200×514px·38,896 bytes이며 기존 편집 이미지도 화면 최대 크기에 맞게 압축해 정적 자산 총량을 1,647,201 bytes로 유지했다.
+- PR #478, main workflow `37462523495`, Pages·라이브 smoke·release-status·공개 validator candidate `813fd3a`와 Chrome CDP fallback 390·1440px 검증을 통과했다. 새 CRITICAL/MAJOR 코드 결함은 확인되지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-UI-CONTRACT-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-CDP-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-EDITORIAL-VISUAL-20261006`, `E-LIVE-PUBLIC-ACADEMIC-EDITORIAL-VISUAL-20261006`.
+
+## 전문가 영상 카드 순서 표식·공개 배포 — a84d6f0 — 2026-10-06
+
+- 전문가 영상 갤러리 9개 카드에 `01 / 09`–`09 / 09` 순서 표식을 추가해 모바일·데스크톱에서 현재 영상과 전체 영상 수를 바로 읽도록 했다. 주제 필터에서도 전체 컬렉션 순서를 유지하며 카드 선택 즉시 재생, 영상 제목·출처·제품 독립 공개 경계는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산·PR #476·main Pages·라이브 smoke·release-status·공개 validator·Chrome CDP fallback 390·1440px 검증을 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-UI-CONTRACT-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-CDP-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CARD-SEQUENCE-20261006`.
+
+## 일상 속 GABA 카드 순서 표식·공개 배포 — df90375 — 2026-10-06
+
+- 일상 속 GABA 5개 카드에 `01 / 05`–`05 / 05` 순서 표식을 적용해 모바일·데스크톱에서 일상 흐름을 빠르게 읽도록 했다. 카드 문구·과학 정보·출처·제품 독립 공개 경계는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산·PR #473·main Pages·라이브 smoke·release-status·공개 validator·Chrome CDP fallback 390·1440px 검증을 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-EVERYDAY-CARD-SEQUENCE-20261006`, `E-UI-CONTRACT-EVERYDAY-CARD-SEQUENCE-20261006`, `E-CDP-EVERYDAY-CARD-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-EVERYDAY-CARD-SEQUENCE-20261006`, `E-LIVE-PUBLIC-EVERYDAY-CARD-SEQUENCE-20261006`.
+
+## 연구 지도 영역 순서 표식·공개 배포 — a66d8e5 — 2026-10-06
+
+- 연구 지도 5개 학술 영역 카드에 `01 / 05`–`05 / 05` 순서 표식을 추가해 모바일·데스크톱에서 연구 확장 흐름을 빠르게 읽도록 했다. 학술 내용·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산·PR #471·main Pages·라이브 smoke·release-status·공개 validator·Chrome CDP fallback 390·1440px 검증을 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-ACADEMIC-MAP-SEQUENCE-20261006`, `E-UI-CONTRACT-ACADEMIC-MAP-SEQUENCE-20261006`, `E-CDP-ACADEMIC-MAP-SEQUENCE-20261006`, `E-DEPLOY-PIPELINE-ACADEMIC-MAP-SEQUENCE-20261006`, `E-LIVE-PUBLIC-ACADEMIC-MAP-SEQUENCE-20261006`.
+
+## 연구 결과 카드 순번 표식·공개 배포 — 9ee09d8 — 2026-10-06
+
+- 긴 연구 흐름에서 카드 자체만 읽어도 위치를 알 수 있도록 연구 카드에 `01 / 05`, `02 / 05` 순번 표식을 추가했다. 연구 문구·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산·PR #469·main Pages·라이브 smoke·release-status·공개 validator·Chrome CDP fallback 390px 직접 링크를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CARD-MARKER-20261006`, `E-UI-CONTRACT-RESEARCH-CARD-MARKER-20261006`, `E-CDP-RESEARCH-CARD-MARKER-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-MARKER-20261006`, `E-LIVE-PUBLIC-RESEARCH-CARD-MARKER-20261006`.
+
+## 수면 비교 도표 문구·공개 배포 — 9e7b9321 — 2026-10-06
+
+- 수면 비교 도표 제목을 질문형 문장으로, 보조 라벨을 `두 조건 비교`로 정리해 비교 기준을 먼저 읽게 했다. 연구 수치·해석·출처는 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright Chromium fallback·Pages·라이브 smoke·release-status·live validator를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-SLEEP-COPY-20261006`, `E-UI-CONTRACT-SLEEP-COPY-20261006`, `E-PLAYWRIGHT-SLEEP-COPY-20261006`, `E-DEPLOY-PIPELINE-SLEEP-COPY-20261006`, `E-LIVE-PUBLIC-SLEEP-COPY-20261006`.
+
+## 연구 결과 도표 축 의미·공개 배포 — e0bfacdf — 2026-10-06
+
+- 비교 도표의 첫 열을 `측정 항목`으로 바꾸어 측정 대상과 두 조건을 바로 구분하게 하고, 좌우 비교 아이콘으로 정보 시각 체계를 통일했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright Chromium fallback·Pages·라이브 smoke·release-status·live validator를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-CHART-AXIS-20261006`, `E-UI-CONTRACT-CHART-AXIS-20261006`, `E-PLAYWRIGHT-CHART-AXIS-20261006`, `E-DEPLOY-PIPELINE-CHART-AXIS-20261006`, `E-LIVE-PUBLIC-CHART-AXIS-20261006`.
+
+## 연구 결과 도표 의미 보정·공개 배포 — a3ccd609 — 2026-10-06
+
+- 비교 도표의 막대 설명을 변화 방향·상대적 차이 중심으로 바꾸고, 실제 측정값이 아닌 이해용 도식이라는 문구를 추가했다.
+- 도표 의미 회귀를 UI 계약에 고정하고, 280·390·768·1440px 로컬 및 390·1440px 공개 Chromium fallback에서 문구·가로폭·오류 상태를 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-CHART-SEMANTICS-20261006`, `E-UI-CONTRACT-CHART-SEMANTICS-20261006`, `E-PLAYWRIGHT-CHART-SEMANTICS-20261006`, `E-DEPLOY-PIPELINE-CHART-SEMANTICS-20261006`, `E-LIVE-PUBLIC-CHART-SEMANTICS-20261006`.
+
+## 모바일 히어로 문장 리듬 보정·공개 배포 — 68e2c8b — 2026-10-06
+
+- `GABA에서 읽습니다`의 모바일 강제 줄바꿈을 제거해 280·320px에서는 자연스러운 두 줄, 390px에서는 한 줄로 읽히도록 보정했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright Chromium fallback·Pages·라이브 smoke·release-status·live validator를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-HERO-LINE-20261006`, `E-UI-CONTRACT-HERO-LINE-20261006`, `E-PLAYWRIGHT-HERO-LINE-20261006`, `E-DEPLOY-PIPELINE-HERO-LINE-20261006`, `E-LIVE-PUBLIC-HERO-LINE-20261006`.
+
+## 최종 라이브 SHA 정합성 재확인·NAVI 동기화 — 449fb2d — 2026-10-06
+
+- NAVI 문서 동기화 이후 Pages가 최종 main SHA `449fb2d`를 제공하는지 다시 확인했다.
+- 공개 validator·배포 workflow·전문가 영상 선택 재생을 320·390·768·1440px에서 재검증했고, 제품 독립 공개 데이터 경계와 teaser `HOLD`를 유지했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 외부 실기기·고령 사용자·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-DEPLOY-PIPELINE-FINAL-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-FINAL-RECHECK-20261006`, `E-LIVE-PUBLIC-FINAL-RECHECK-20261006`.
+
+## 공개 배포 품질 자동 재점검·NAVI 동기화 — 2515212 — 2026-10-06
+
+- 최신 main 공개본에서 목표·계획·외부 게이트·공개 데이터·거버넌스·운영 문서·UI 계약·typecheck·127개 테스트·production build를 자동 재실행했다.
+- 320·390·768·1440px 전문가 영상 선택 재생에서 autoplay iframe·feature 포커스·가로폭·page/console errors 0을 재확인했고, live validator는 HTTP 200·STATIC·제품 독립 공개 경계를 통과했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-BUILD-PUBLIC-RECHECK-20261006`, `E-NAVI-GATES-PUBLIC-RECHECK-20261006`, `E-PLAYWRIGHT-VIDEO-RECHECK-20261006`, `E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261006`, `E-LIVE-PUBLIC-PUBLIC-RECHECK-20261006`.
+
+## 공개 surface·초소형 모바일 재감리·NAVI 동기화 — e2f9920 — 2026-10-06
+
+- 280px·390px·1440px 공개 surface를 다시 점검해 연구 지도·연구 카드·도표·전문가 영상·이야기 공유 흐름과 가로폭·접근성 기본 계약을 확인했다.
+- 새 CRITICAL/MAJOR 결함은 없어 코드는 불필요하게 변경하지 않고, 감리·레드팀·완료 보고서와 증적 레지스터를 최신 공개본 기준으로 동기화했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 게이트로 남긴다.
+
+증적: `E-LOCAL-SURFACE-AUDIT-20261006`, `E-ACCESSIBILITY-PUBLIC-AUDIT-20261006`, `E-PLAYWRIGHT-NARROW-AUDIT-20261006`, `E-PLAYWRIGHT-SURFACE-AUDIT-20261006`, `E-LIVE-PUBLIC-RECHECK-20261006`.
+
+## 연구 지도 선택 상태 안내·공개 배포 — 0e5c611 — 2026-10-06
+
+- 연구 지도 선택 후 현재 주제와 연구 카드의 관계를 한 줄 안내로 갱신한다.
+- 선택 안내를 `role=status`·`aria-live=polite`·`aria-atomic=true`로 연결해 보조기기에도 상태 변화를 전달한다.
+- PR #417, main workflow `37404491845`, 공개 validator HTTP 200·STATIC·candidate `0e5c611ae1b4c8ab0737c9e3bf5b51c4b08145b7`.
+- 상태: `USER_DECISION`; 완료 게이트: `NOT_READY`.
+
+## 연구 근거 텍스트 cross-width 통일·공개 배포 — 009839b — 2026-10-06
+
+- 연구 규모 도표의 검색 범위·출처 링크·설명문·feature metadata를 데스크톱·태블릿·모바일에서 12px 기준으로 통일해 큰 수치와 근거가 한 흐름으로 읽히도록 고도화했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 및 공개 390·1440px 검증을 통과했고 PR #415가 main `009839b`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-PLAYWRIGHT-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-EVIDENCE-RHYTHM-20261006`.
+
+## 모바일 연구 근거 텍스트 가독성 보정·공개 배포 — b716f5d — 2026-10-06
+
+- 연구 규모 도표의 검색 범위·출처 링크·하단 설명을 모바일 12px 기준으로 올려 큰 수치와 근거가 한 화면에서 함께 읽히도록 보정했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 검증을 통과했고 PR #413이 main `b716f5d`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-UI-CONTRACT-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-PLAYWRIGHT-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-EVIDENCE-FLOOR-20261006`, `E-LIVE-PUBLIC-RESEARCH-EVIDENCE-FLOOR-20261006`.
+
+## 연구 원문·이야기 공유 전환 그리드 정렬 — 9f0ec68 — 2026-10-06
+
+- 데스크톱에서 연구 원문 마지막 전환의 목적지 라벨과 화살표가 왼쪽 열 폭을 넘어갈 수 있던 문제를 보완해 전체 editorial grid 안에서 정렬했다.
+- 모바일 390px의 2행 흐름은 유지했으며, UI 계약·typecheck·127개 테스트·production build·Playwright 390·1440px 공개 상호작용 검증을 통과했다. PR #411이 main `9f0ec68`로 병합되었고 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-READING-GRID-20261006`, `E-UI-CONTRACT-READING-GRID-20261006`, `E-PLAYWRIGHT-READING-GRID-20261006`, `E-DEPLOY-PIPELINE-READING-GRID-20261006`, `E-LIVE-PUBLIC-READING-GRID-20261006`.
+
+## 연구 원문에서 이야기 공유로 이어지는 내부 전환 — 84fd53b — 2026-10-06
+
+- 연구 원문을 읽은 뒤 외부 링크 없이 `연구를 읽는 기준에서 공유 가능한 이야기로` 전환하는 카드를 추가해 공개 안내서의 마지막 편집 흐름을 완성했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 390·1440px 공개 상호작용 검증을 통과했고 PR #409가 main `84fd53b`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-READING-HANDOFF-20261006`, `E-UI-CONTRACT-READING-HANDOFF-20261006`, `E-PLAYWRIGHT-READING-HANDOFF-20261006`, `E-DEPLOY-PIPELINE-READING-HANDOFF-20261006`, `E-LIVE-PUBLIC-READING-HANDOFF-20261006`.
+
+## 수면·회복에서 GABA 발견으로 이어지는 내부 전환 — 658eb99 — 2026-10-06
+
+- 수면·회복 도입부에 `회복의 균형에서 GABA의 발견으로` 전환 카드를 추가해 외부 링크 없이 다음 장으로 자연스럽게 이어지도록 했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 390·1440px 공개 상호작용 검증을 통과했고 PR #407이 main `658eb99`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-OPENING-HANDOFF-20261006`, `E-UI-CONTRACT-OPENING-HANDOFF-20261006`, `E-PLAYWRIGHT-OPENING-HANDOFF-20261006`, `E-DEPLOY-PIPELINE-OPENING-HANDOFF-20261006`, `E-LIVE-PUBLIC-OPENING-HANDOFF-20261006`.
+
+## 회복 상태 접근성 전달·공개 배포 — 0880c55 — 2026-10-06
+
+- 수면·회복 카드의 `자동 진행 · 3초마다`·`일시정지`·`사용자 진행` 상태가 화면뿐 아니라 화면낭독기에도 자연스럽게 전달되도록 `aria-live="polite"`·`aria-atomic="true"`를 추가했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 공개 상호작용 검증을 통과했고 PR #405가 main `0880c55`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-STATUS-A11Y-20261006`, `E-UI-CONTRACT-RECOVERY-STATUS-A11Y-20261006`, `E-PLAYWRIGHT-RECOVERY-STATUS-A11Y-20261006`, `E-DEPLOY-PIPELINE-RECOVERY-STATUS-A11Y-20261006`, `E-LIVE-PUBLIC-RECOVERY-STATUS-A11Y-20261006`.
+
+## 수면·회복 자동 진행 상태 가독성·공개 배포 — befeea5 — 2026-10-07
+
+- 수면·회복 카드의 현재 동작을 `자동 진행 · 3초마다`·`일시정지`·`사용자 진행`으로 짧고 명확하게 표시하고, 상태 문구의 시각적 우선순위를 높였다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 공개 상호작용 검증을 통과했고 PR #403이 main `befeea5`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-UI-CONTRACT-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-PLAYWRIGHT-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-LABEL-20261007`, `E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-LABEL-20261007`.
+
+## 전문가 영상 feature 상태 동기화·공개 배포 — 28ff210 — 2026-10-07
+
+- 전문가 영상 feature 메타를 카드 상태와 연결해 `선택하면 바로 재생`·`준비 중`·`재생 중`을 실제 iframe lifecycle에 맞춰 표시했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 390px·1440px 공개 상호작용 검증을 통과했고 PR #401이 main `28ff210`으로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status·site-quality도 성공했다.
+- NAVI 감사·레드팀·완료 보고서와 증적 레지스터를 동기화했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-FEATURE-STATE-20261007`, `E-UI-CONTRACT-VIDEO-FEATURE-STATE-20261007`, `E-PLAYWRIGHT-VIDEO-FEATURE-STATE-20261007`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-STATE-20261007`, `E-LIVE-PUBLIC-VIDEO-FEATURE-STATE-20261007`.
+
+## 전문가 영상 선택 상태 정합성·공개 배포 — a5e3f72 — 2026-10-06
+
+- 전문가 영상 카드의 초기 `재생 중` 과대표시를 제거하고 `선택됨`·`준비 중`·`재생 중`의 세 상태를 실제 iframe lifecycle과 맞췄다.
+- 각 카드의 접근성 이름도 같은 상태를 전달하며, 선택 즉시 재생 흐름과 390·1440px 반응형 레이아웃은 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·Playwright 390·1440px 공개 상호작용 검증을 통과했고 PR #399가 main `a5e3f72`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+
+증적: E-LOCAL-BUILD-VIDEO-STATE-20261006, E-UI-CONTRACT-VIDEO-STATE-20261006, E-PLAYWRIGHT-VIDEO-STATE-20261006, E-DEPLOY-PIPELINE-VIDEO-STATE-20261006, E-LIVE-PUBLIC-VIDEO-STATE-20261006.
+
+## 연구 구간 내부 진행 표시·공개 배포 — cea481f — 2026-10-06
+
+- 연구 지도 상단에 전체 장 진행과 연구 내부 순서를 함께 표시해, 긴 연구 카드 구간에서도 현재 위치를 바로 읽을 수 있게 했다. 세 번째 주제 선택 시 `06 / 12 · 연구 03 / 05`로 갱신된다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 320·390·1440px 상호작용 검증을 통과했고 PR #397이 main `cea481f`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+- 공개본에서 초기·선택 후 진행값, live status, 활성 연구, 가로폭 안정성과 runtime errors 0을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SUBPROGRESS-20261006, E-UI-CONTRACT-RESEARCH-SUBPROGRESS-20261006, E-PLAYWRIGHT-RESEARCH-SUBPROGRESS-20261006, E-DEPLOY-PIPELINE-RESEARCH-SUBPROGRESS-20261006, E-LIVE-PUBLIC-RESEARCH-SUBPROGRESS-20261006.
+
+## 전문가 영상 fallback poster 고도화·공개 배포 — d228a3d — 2026-10-06
+
+- 원격 썸네일이 unavailable해도 전문가 영상 poster 안에서 제목·주제·회차가 보이도록 보강하고, 카드별 이미지 crop을 달리했다. 갤러리의 editorial 톤과 선택 즉시 재생·공유 흐름은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 390px·1440px 검증을 통과했고 PR #394가 main `d228a3d`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+- 공개 390px·1440px에서 두 번째 영상 선택 후 포스터·feature title·iframe title·aria-pressed=true·가로폭 안정성을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FALLBACK-POSTER-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FALLBACK-POSTER-20261006.
+
+## 모바일 전문가 영상 필터 접근성·overscroll 고도화 — 7fff775 — 2026-10-06
+
+- 모바일 전문가 영상 필터 rail에 보조공학용 region과 좌우 이동 안내를 추가하고, 수평 overscroll 전파를 제한했다. 44px 터치 영역·시작/끝/복귀 cue·마지막 주제 선택과 공개 과학 카피·제품 독립 경계는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 320px 상호작용 검증을 통과했고 PR #392가 main `7fff775`로 병합되었다. 공개 validator·Pages·라이브 smoke·release-status도 성공했다.
+- 공개 320px에서 region/aria-label·contain·cue 상태·`수면·기분` 선택·scrollWidth 320·runtime errors 0을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-A11Y-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-A11Y-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-A11Y-20261006, E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-A11Y-20261006.
+
+## 모바일 전문가 영상 필터 cue 상태·공개 라이브 검증 — 16f3fec — 2026-10-06
+
+- v125 상태 보강과 NAVI 감사기록이 main `16f3fec`으로 공개 배포되었다. 공개 validator candidate가 main과 일치하고 71개 bundle hash·12개 공개 claim·6개 master record·6개 share page·제품 독립 경계를 확인했다.
+- 공개 320px에서 시작 cue 표시·끝 cue 숨김·시작점 복원·마지막 `수면·기분` 선택·scrollWidth 320·runtime errors 0을 Playwright Chromium fallback으로 재현했다. deploy-pages와 smoke-live가 성공했다.
+- release-status는 기록 시점 runner queue 대기지만 공개 라이브 검증은 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
+## 모바일 전문가 영상 필터 cue 끝 상태 보정·main 병합 — cdbc6f3 — 2026-10-06
+
+- 320px 전문가 영상 필터 rail의 이어짐 표시를 실제 스크롤 상태와 연결했다. 시작점에서는 다음 주제를 안내하고 끝점에서는 숨기며, 다시 시작점으로 돌아오면 복원한다. 가로 스크롤, 44px 터치 영역, 선택 즉시 재생 흐름과 공개 과학 카피·제품 독립 경계는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 시작/끝/복귀 상호작용 검증을 통과했고 PR #389가 main `cdbc6f3`으로 병합되었다.
+- main workflow `37373171340`은 release-verify 성공 후 worker-readiness runner queue에서 대기 중이며 공개 validator는 이전 candidate `ffd7c2e`다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-STATE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-STATE-20261006.
+
+## 모바일 전문가 영상 필터 이어짐 표시·main 병합 — c61c535 — 2026-10-06
+
+- 320px에서 첫 3개 주제만 보이던 전문가 영상 필터 rail에 오른쪽 gradient·ChevronRight 시각 단서를 추가했다. 가로 스크롤, 44px 터치 영역, 선택 즉시 재생 흐름과 공개 과학 카피·제품 독립 경계는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·Playwright 320px 상호작용 검증을 통과했고 PR #387이 main `c61c535`로 병합되었다.
+- 최신 main 배포 run `37371457391`은 기록 시점 pending, 공개 validator는 이전 candidate `ffd7c2e`다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-CUE-20261006, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-CUE-20261006, E-PLAYWRIGHT-MOBILE-VIDEO-FILTER-CUE-20261006, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-CUE-20261006.
+
+## 초소형 모바일 헤더 터치 충돌 보정·PR 검증 완료 — 27445e9 — 2026-10-06
+
+- 280·300·320·350px에서 겹치던 메뉴 버튼과 읽기 크기 버튼을 8px 간격으로 분리했다. 390px 이상 레이아웃과 글자 크기 토글 의미는 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산과 Playwright 280·300·320·350·390·1440px 검증, PR #385의 release-verify·site-quality-verify가 성공했다.
+- PR #385는 main `27445e9`로 병합되었지만 main 공개 배포 run은 후처리 queue로 취소되어 공개 URL의 새 candidate 반영은 아직 대기 중이다. 현재 공개본은 이전 candidate `ffd7c2e`다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-ULTRA-NARROW-HEADER-20261006, E-UI-CONTRACT-ULTRA-NARROW-HEADER-20261006, E-PLAYWRIGHT-ULTRA-NARROW-HEADER-20261006, E-DEPLOY-PIPELINE-ULTRA-NARROW-HEADER-20261006.
+
+## 초소형 모바일 읽기 크기 조절 라벨 보강·공개 배포 — ffd7c2e — 2026-10-06
+
+- 320px 이하 헤더에서 `가+ 글자`·`가− 기본`을 사용해 읽기 크기 기능을 한눈에 이해하도록 보강했다. 390px 이상은 기존 전체 라벨을 유지했다.
+- PR #383과 main workflow `37363196125`의 코드 검증·Pages 배포·라이브 smoke가 성공했고, 공개 validator에서 candidate `ffd7c2e1f99fd2806e87274ab9200f948d0fc5fe`, 71개 bundle hash, HTTP 200, STATIC, 공개 데이터 정합성을 확인했다. release-status는 기록 시점 queue 대기였다.
+- 연구 카피·과학 주장·제품 CTA는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-READING-CONTROL-COMPACT-20261006, E-UI-CONTRACT-READING-CONTROL-COMPACT-20261006, E-PLAYWRIGHT-READING-CONTROL-COMPACT-20261006, E-DEPLOY-PIPELINE-READING-CONTROL-COMPACT-20261006, E-LIVE-PUBLIC-READING-CONTROL-COMPACT-20261006.
+
+## 최종 공개 manifest·NAVI 증적 동기화 — f54bae6 — 2026-10-06
+
+- NAVI 증적 PR #381 병합 후 최종 공개 candidate가 `f54bae600ce55ab6a2439bbd337eb26fc1949a1d`로 갱신된 것을 확인했다.
+- 공개 validator와 Chrome CDP fallback을 다시 실행해 연구 지도 10px cue, 카드 연결, 가로 폭, runtime errors 0을 재확인했다. 공개 기능·연구 카피·제품 독립 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006.
+
+## 연구 지도 모바일 읽기 하한 보정·공개 배포 완료 — fb874662 — 2026-10-06
+
+- 연구 지도 중심의 `5개 연구 영역` 보조 문구를 모바일·데스크톱 10px·900 weight·청록 강조로 통일해 작은 화면에서도 규모 안내를 빠르게 읽도록 보정했다.
+- PR #380과 main workflow `37355788429`의 release-verify·Pages 배포·라이브 smoke·release status가 성공했고, 공개 validator는 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- 공개 Chrome CDP 390·1440px에서 10px 계산 스타일·가로 폭·인지 연구 영역 선택 후 카드 포커스·스크롤·runtime errors 0을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-UI-CONTRACT-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-CDP-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-DEPLOY-PIPELINE-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-MOBILE-CUE-FLOOR-20261006.
+
+## 연구 지도 중심 보조 문구 고도화·공개 배포 완료 — 8a6260f — 2026-10-06
+
+- 연구 지도 중심의 `5개 연구 영역` 보조 문구를 모바일 9px·데스크톱 10px·900 weight·청록 강조로 보강해 나이가 있는 방문자도 지도 규모를 빠르게 읽도록 정리했다.
+- PR #378과 main workflow `37352455204`의 release-verify·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- 공개 Chrome CDP 390·1440px에서 계산 스타일·가로 폭·인지 연구 영역 선택 후 카드 포커스·스크롤·runtime errors 0을 재현했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-UI-CONTRACT-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-CDP-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-DEPLOY-PIPELINE-RESEARCH-MAP-SCALE-LEGIBILITY-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-LEGIBILITY-20261006.
+
+## NAVI 공개 재점검·전문가 영상 흐름 확인 — 8724f4c — 2026-10-06
+
+- 공개 390·1440px에서 전문가 영상 9개 카드와 주제 필터를 확인하고, 카드 선택 시 선택 영상·자동 재생 iframe·포커스가 함께 갱신되는지 재현했다.
+- PR #376 main 병합 후 Pages 배포·라이브 smoke·release status와 배포 후 공개 validator·Chrome CDP 재점검을 모두 통과했다. 새 CRITICAL/MAJOR 결함은 없다.
+
+증적: E-DEPLOY-PIPELINE-EXPERT-VIDEO-INTERACTION-20261006, E-LIVE-PUBLIC-EXPERT-VIDEO-POSTDEPLOY-20261006.
+
+## 연구 지도 고도화·공개 배포 완료 — b73e086 — 2026-10-06
+
+- `06 · 연구의 확장` 중심 원에 `5개 연구 영역`을 표시해 지도 규모를 한눈에 이해하도록 보강했다.
+- hero 읽기 경로의 잘못된 `<p><ol>` 중첩을 유효한 흐름 콘텐츠로 바꿔 hydration 콘솔 오류를 제거했다.
+- PR #374와 main workflow `37347460556`의 release-verify·Pages 배포·라이브 smoke·release status가 성공했다. 공개 390·1440px에서 지도·읽는 순서·가로 폭·콘솔 오류 0을 확인했다.
+
+증적: E-DEPLOY-PIPELINE-RESEARCH-MAP-SCALE-20261006, E-LIVE-PUBLIC-RESEARCH-MAP-SCALE-20261006.
+
+## 공개 배포·라이브 검증 완료 — f1cd671 — 2026-10-06
+
+- 첫 화면의 `3분 읽기 시작` 컨트롤을 사진 위에서도 읽히는 최소 40px 터치 영역으로 보강하고, 키보드 초점·호버·축소 모션 대응을 유지했다.
+- PR #371의 코드 배포와 PR #372의 NAVI 증적 정리가 main workflow `37344810577`까지 성공했다. 공개 validator는 최신 candidate `f1cd67136368c26fb7d2a12af25a010a3cff735b`에서 HTTP 200·STATIC·71개 bundle hash를 확인했다.
+- 공개 Chrome CDP 390·1440px에서 버튼 표시, `#opening-bridge` 이동, 읽기 진행 레일 동기화, scrollWidth 390·1425를 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-DEPLOY-PIPELINE-HERO-CUE-CONTRAST-20261006, E-LIVE-PUBLIC-HERO-CUE-CONTRAST-20261006.
+
+## 공개 배포·라이브 검증 완료 — 589055e — 2026-10-06
+
+- PR #369에서 글자 크기 조절 문구 보정이 검증·병합되었고 main workflow `37341643727`의 Pages 배포·라이브 smoke·release status가 성공했다.
+- 공개 validator는 HTTP 200·STATIC·71개 bundle hash를 확인했다. 공개 Chrome CDP 390·1440px에서 `글자 크게`·`기본 크기`, aria 상태, 가로 폭 안정성을 확인했다.
+- NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Browser 플러그인 부재, 실기기·실제 사용자 독해성·독립 과학/규제 감수는 외부 조건으로 남긴다.
+
+증적: E-DEPLOY-PIPELINE-READING-SIZE-LABEL-20261006, E-LIVE-PUBLIC-READING-SIZE-LABEL-20261006.
+
+## 모바일 읽기 크기 조절 문구 고도화 — 1daf71b — 2026-10-06
+
+- 모바일 헤더의 `큰 글씨`·`기본 글씨`를 `글자 크게`·`기본 크기`로 바꿔, 버튼을 누르면 일어나는 행동이 즉시 읽히도록 정리했다.
+- 접근성 라벨과 상태 안내 문구도 같은 표현으로 맞췄고, 기존 `가+`·`가−` 시각 신호와 44px 터치 영역은 유지했다.
+- 로컬 Chrome CDP 390·1440px에서 토글 상태·aria-pressed·가로 폭을 확인했다. 공개 배포는 PR 검증 후 진행한다.
+
+증적: E-LOCAL-BUILD-READING-SIZE-LABEL-20261006, E-UI-CONTRACT-READING-SIZE-LABEL-20261006, E-CDP-READING-SIZE-LABEL-20261006, E-DEPLOY-PIPELINE-READING-SIZE-LABEL-20261006.
+
+## 첫 화면 3분 읽기 시작 흐름 고도화 — d593491 — 2026-10-05
+
+- 첫 화면의 수동 `아래로 읽기` 안내를 실제 `3분 읽기 시작` 버튼으로 바꾸고, 클릭하면 `수면과 회복` 도입부로 바로 이어지도록 보강했다. 고정 읽기 진행 레일도 도착 장과 동기화된다.
+- 로컬·공개 Chrome CDP fallback 390·1440px에서 버튼 표시·포커스·클릭·해시 이동·진행 레일 동기화와 가로 넘침·runtime 오류 없음을 확인했다.
+- PR #367과 main workflow `37338231096`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-HERO-READING-START-20261006, E-UI-CONTRACT-HERO-READING-START-20261006, E-DEPLOY-PIPELINE-HERO-READING-START-20261006, E-LIVE-PUBLIC-HERO-READING-START-20261006.
+
+## 최종 공개 배포·NAVI 증거 고정 — 012e531 — 2026-10-05
+
+- 저장소 개인정보 보호 보정까지 포함한 최종 main commit을 다시 배포하고 전체 release workflow 성공을 확보했다. release-verify·Pages·라이브 smoke·release status가 성공했으며 Worker는 STATIC_ONLY로 건너뛰었다.
+- 최종 공개 candidate `012e5318cb45c5af734e5d83b0b79e654f0f6665`는 HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 유지한다. 공개 320·390·1440px 연구 도표 범례와 390·1440px 전체 흐름을 재검증했고 오류·가로 넘침은 없었다.
+- NAVI 최종 라이브 증거를 추가했으며 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-FINAL-20261006, E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-FINAL-20261006.
+
+## 연구 결과 도표 읽는 법 범례 고도화 및 공개 재검증 — 859bb59 — 2026-10-05
+
+- 비교형 연구 도표 하단의 긴 반복 설명을 `읽는 법` 시각 범례로 바꿔 변화 방향·두 조건의 상대 비교·그림 크기와 실제 효과 크기의 차이를 빠르게 읽도록 했다. 차트 전체 설명은 접근성 레이블로 보존했다.
+- PR #362와 main workflow `37333111161`의 release-verify·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다. 공개 candidate `859bb59f901eb038f6152f5b89749616a3532aac`는 HTTP 200·STATIC·71개 bundle hash·제품 독립 경계를 유지한다.
+- 공개 320·390·1440px에서 범례의 줄바꿈·폭·가로 넘침·runtime 오류를 재검증했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-RESEARCH-CHART-LEGEND-20261006, E-UI-CONTRACT-RESEARCH-CHART-LEGEND-20261006, E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGEND-20261006, E-LIVE-PUBLIC-RESEARCH-CHART-LEGEND-20261006.
+
+## 최종 공개 증적 재검증 및 NAVI 상태 동기화 — 791450b — 2026-10-05
+
+- NAVI 감사·레드팀·증거 문서를 main에 병합하고 최종 공개 배포를 완료했다. workflow `37328933408`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator와 320·390·1440px 연구 도표 QA에서 HTTP 200·STATIC, 두 조건 나란히 비교, GABA 결과 강조, 가로 폭, runtime 오류 없음을 재확인했다.
+- 최종 공개 증적을 NAVI에 추가했으며 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 실기기·브라우저 전체 조합·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-DEPLOY-PIPELINE-NAVI-SYNC-20261006, E-LIVE-PUBLIC-NAVI-SYNC-20261006.
+
+## 모바일 연구 결과 비교 도표 고도화 및 공개 재검증 — 0acdb90 — 2026-10-05
+
+- 좁은 화면에서 비교 조건과 GABA 섭취 조건을 세로로 읽어야 했던 연구 결과 도표를 같은 행의 두 칸 비교 구조로 바꿨다. GABA 결과 칸의 색상 강조, 방향 문구, 측정 지표는 유지해 연구 결과를 빠르게 비교할 수 있다.
+- PR #359 release-verify와 main workflow `37327605045`의 공개 배포가 성공했다. 최신 공개 candidate는 HTTP 200·STATIC·제품 독립 경계를 유지한다.
+- 공개 320·390·1440px에서 두 조건 나란히 표시, 가로 폭, 도표 높이, GABA 결과 강조, runtime 오류 없음을 재검증했다. NAVI 증적·감리·레드팀을 동기화했으며 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-COMPARISON-20261006, E-UI-CONTRACT-MOBILE-RESEARCH-COMPARISON-20261006, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-COMPARISON-20261006, E-LIVE-PUBLIC-MOBILE-RESEARCH-COMPARISON-20261006.
+
+## 전체 공개 흐름 재검증 및 NAVI 증적 동기화 — 7c7e772 — 2026-10-05
+
+- 도입부터 수면·회복, GABA란, 연구 지도, 활용, 발효·안전, 전문가 영상, 출처 읽기, 마지막 공유까지 390px·1440px 공개 화면을 다시 확인했다. 가로 넘침·runtime 오류·고정 읽기 레일과 제목의 충돌은 없었고, 기존 모바일 영상 레일 개선도 유지됐다.
+- 새 UI 결함은 발견되지 않아 화면 코드는 변경하지 않고 전체 흐름 검증 결과를 C-143 및 로컬 build·라이브 공개 증적으로 등록했다. 공개본은 HTTP 200·STATIC·제품 독립 경계를 유지한다.
+- NAVI 감사·레드팀을 동기화했으며 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다. 실기기·브라우저 전체 조합·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남긴다.
+
+증적: E-LOCAL-BUILD-FULL-FLOW-20261005, E-LIVE-PUBLIC-FULL-FLOW-20261005.
+
+## 모바일 전문가 영상 주제 레일 정리 — a37adcb — 2026-10-05
+
+- 320·350·390px에서 여러 줄로 쌓이던 전문가 영상 주제 필터를 한 줄 수평 레일로 정리해, 첫 영상과 선택 상태가 더 빨리 보이도록 했다. 모든 주제는 가로 탐색으로 접근할 수 있고 44px 터치 높이·영상 선택 즉시 재생·원문 링크·공유 흐름은 유지했다.
+- PR #356 checks와 heartbeat PR #357 병합 후 main workflow `37322259867`의 Pages 배포·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 최신 공개 candidate `a37adcb370ec1f04e3fe2d61073b773defe6647f`는 HTTP 200, STATIC, 12 claims, 6 research records, 1 product, 6 share pages, teaser HOLD를 제공한다. 공개 320·350·390px에서 주제 레일·영상 선택·iframe·가로 폭을 재검증했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-FILTER-RAIL-20261005, E-UI-CONTRACT-MOBILE-VIDEO-FILTER-RAIL-20261005, E-DEPLOY-PIPELINE-MOBILE-VIDEO-FILTER-RAIL-20261005, E-LIVE-PUBLIC-MOBILE-VIDEO-FILTER-RAIL-20261005.
+
+## 첫 화면 읽기 경로 시각 언어 통일 — 88f9382 — 2026-10-05
+
+- 첫 화면의 `3분 읽기`를 의미 있는 순서 목록과 CSS chevron으로 정리하고, 연구 규모의 `1950 → 지금` 텍스트 연결을 시각 시간축으로 보정했다. 모바일·데스크톱에서 같은 읽기 순서를 유지하면서 첫 화면의 인지 부담을 줄였다.
+- PR #355 checks와 main workflow `37319119945`의 Pages 배포·라이브 smoke·release status가 성공했고, 공개 390·1440px에서 경로 항목·발견 장 직접 진입·오류·가로 폭을 재검증했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-HERO-READING-ROUTE-20261005, E-UI-CONTRACT-HERO-READING-ROUTE-20261005, E-DEPLOY-PIPELINE-HERO-READING-ROUTE-20261005, E-LIVE-PUBLIC-HERO-READING-ROUTE-20261005.
+
+## 연구 읽기 레일 연결부 정리 — 96333a6 — 2026-10-05
+
+- 연구 읽기 레일의 텍스트 화살표를 데스크톱 CSS chevron으로 바꾸고 모바일에서는 연결 장식을 숨겨 카드와 문장을 먼저 읽게 했다. 기존 연구 handoff, 연구 내용, 출처, 제품 독립 공개 경계는 변경하지 않았다.
+- PR #354 checks와 main workflow `37316142968`의 Pages 배포·라이브 smoke·release status가 성공했고, 공개 390·1440px에서 연구 레일과 장 사이 handoff 이동·오류·가로 폭을 재검증했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-RAIL-20261005, E-UI-CONTRACT-RESEARCH-RAIL-20261005, E-DEPLOY-PIPELINE-RESEARCH-RAIL-20261005, E-LIVE-PUBLIC-RESEARCH-RAIL-20261005.
+
+## 회복·출처 읽기 연결부 아이콘 통일 — d98abdd — 2026-10-05
+
+- 회복 장의 `GABA란 → 수면과 회복 → GABA를 읽는 시작점`과 출처 읽기 장의 `연구 카드 → 원문 출처` 연결부를 shared SVG ArrowRight로 통일했다. 모바일·데스크톱에서 읽기 방향과 기존 handoff 이동은 그대로 유지했다.
+- PR #352 checks와 main workflow `37314128121`의 Pages 배포·라이브 smoke·release status가 성공했고, 라이브 validator는 HTTP 200·STATIC·공개 데이터 정합성을 확인했다. 공개 390·1440px handoff 이동과 오류·가로 폭을 재검증했다.
+- 연구 수치·출처·카피·제품 독립 경계는 변경하지 않았으며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-FLOW-ARROWS-20261005, E-UI-CONTRACT-FLOW-ARROWS-20261005, E-DEPLOY-PIPELINE-FLOW-ARROWS-20261005, E-LIVE-PUBLIC-FLOW-ARROWS-20261005.
+
+## 전문가 영상 → 출처 읽기 연결부 아이콘 통일 — 62ad947 — 2026-10-05
+
+- 전문가 영상 다음 읽기 연결부의 텍스트 화살표를 기존 화면 체계와 같은 SVG ArrowRight 아이콘으로 통일했다. 모바일·데스크톱에서 다음 읽기 방향과 터치 가능한 연결부는 그대로 유지했다.
+- PR #350 checks와 main workflow `37311934178`의 Pages 배포·라이브 smoke·release status가 성공했고, 라이브 validator는 HTTP 200·STATIC·공개 데이터 정합성을 확인했다. 공개 390·1440px handoff 이동과 오류·가로 폭을 재검증했다.
+- 연구 수치·출처·카피·제품 독립 경계는 변경하지 않았으며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-EDITORIAL-ARROW-20261005, E-UI-CONTRACT-EDITORIAL-ARROW-20261005, E-DEPLOY-PIPELINE-EDITORIAL-ARROW-20261005, E-LIVE-PUBLIC-EDITORIAL-ARROW-20261005.
+
+## 공개 연구·공유 핵심 흐름 재감리 — 2eb17a7 — 2026-10-05
+
+- 공개 390px에서 연구 지도 5개 주제와 연구 출처 5개를 확인하고, 피부 주제 선택 → 피부 연구 결과 → 다음 연구(근육) 순서가 읽기 레일 아래에 이어지는 흐름을 재검증했다.
+- `#final` 직접 링크가 `이야기 공유 · 12 / 12`와 제목 맥락을 복원하고, 실제 마우스 이벤트로 사업자용 5문장 전체 복사 버튼이 `복사 완료`와 성공 안내로 바뀌는 것을 확인했다.
+- 전문가 영상 9개 게시판에서 두 번째 카드 선택 시 선택 상태·브라우저 제목·YouTube autoplay iframe·포커스가 함께 갱신됐다. 새 CRITICAL/MAJOR 결함은 발견되지 않았으며 연구 수치·출처·카피·제품 독립 경계는 변경하지 않았다.
+
+증적: E-LIVE-PUBLIC-RESEARCH-FLOW-20261005, E-LIVE-PUBLIC-DIRECT-FINAL-CONTEXT-20261005, E-LIVE-PUBLIC-TRUSTED-SHARE-COPY-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-FLOW-20261005.
+
+## 좁은 모바일 헤더·키보드 흐름 감리 — 8605724 — 2026-10-05
+
+- 공개 280·300·320·360·390px에서 로고·메뉴·글씨 크기·공유 컨트롤의 겹침과 터치 영역을 감리했다. 모든 폭에서 겹침 없음, 44px 이상 터치 영역, 가로 넘침 없음으로 확인했다.
+- 390px 모바일 메뉴는 열림 시 첫 링크로 포커스가 이동하고 Tab 순환이 메뉴 안에 머물며, Escape로 닫힌 뒤 메뉴 토글로 포커스가 복귀했다. 새 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 공개 연구 수치·출처·카피·제품 독립 경계는 변경하지 않았고 NAVI 증거 `C-128`과 라이브 QA 증거를 추가했다.
+
+증적: E-LIVE-PUBLIC-NARROW-HEADER-KEYBOARD-20261005, E-LIVE-PUBLIC-MOBILE-MENU-KEYBOARD-20261005.
+
+## 발견 제목 반응형 공백 감리·보강 — 2c1bca9 — 2026-10-05
+
+- 태블릿·데스크톱에서 모바일 줄바꿈 전용 요소가 숨겨질 때 `처음에는 이름도없었습니다`로 붙어 보이는 실제 한국어 퍼블리싱 결함을 확인했다. 공백을 줄바꿈 요소 밖으로 이동하고 UI 계약에 발견 제목 전용 회귀 조건을 추가했다.
+- PR #331 checks와 main workflow `37290461697`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다. 최신 공개 candidate `2c1bca9eacd16149debff1a580155996b335987e`는 HTTP 200, STATIC, 12 claims, 6 research records, 1 product, 6 share pages, teaser HOLD를 제공한다.
+- 캐시를 비활성화한 Chrome CDP 공개 390·768·1440px에서 발견 제목의 자연스러운 textContent, scrollWidth 390·753·1425, 접근성 기본 점검과 runtimeErrors 0을 확인했다. 연구 수치·출처·공개 카피 의미·제품 독립 경계는 변경하지 않았다.
+
+증적: E-LOCAL-BUILD-HISTORY-HEADING-SPACING-20261005, E-UI-CONTRACT-HISTORY-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-HISTORY-HEADING-SPACING-20261005, E-LIVE-PUBLIC-HISTORY-HEADING-SPACING-20261005.
+
+## 공개 한국어 제목 공백 감리·보강 — 9c1a5cf — 2026-10-05
+
+- 자동 한글 감리에서 줄바꿈 경계의 공백이 사라져 `저속노화,회복하는`, `시작됩니다그`, `넘어여러`처럼 읽힐 수 있는 실제 제목 결함을 확인했다. PR #328에서 장 제목을, PR #329에서 첫 화면 H1과 정적 no-script 제목을 보정하고 UI 계약에 제목 공백 회귀 조건을 추가했다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산이 통과했다. PR #328 main workflow `37287592876`과 PR #329 main workflow `37288363450`의 Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 최종 공개 candidate `9c1a5cf0200a46f8505ce471f0c67f46c27a1724`는 HTTP 200, STATIC, 12 claims, 6 research records, 1 product, 6 share pages, teaser HOLD를 제공한다. 캐시를 비활성화한 Chrome CDP 공개 320·390·768·1024·1440px에서 H1·14개 H2의 textContent 공백, 각 폭의 scrollWidth 일치, runtimeErrors 0을 확인했다.
+- 연구 수치·출처·공개 카피의 의미·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-KOREAN-HEADING-SPACING-20261005, E-UI-CONTRACT-KOREAN-HEADING-SPACING-20261005, E-DEPLOY-PIPELINE-KOREAN-HEADING-SPACING-20261005, E-LIVE-PUBLIC-KOREAN-HEADING-SPACING-20261005.
+
+## 모바일 연구 비교 범례 흐름 보강 — a18561f — 2026-10-05
+
+- 390px 공개 렌더에서 조건명이 음절 단위로 깨지는 문제를 확인하고, 430px 이하 연구 도표 범례를 `변화 방향 → 비교 조건 → GABA 조건`의 세로 순서로 재배치했다. 조건명은 한 줄로 유지해 아래 결과 막대와 자연스럽게 연결된다.
+- UI 계약 v112·typecheck·127개 테스트·production build·성능 예산과 모바일·데스크톱 CDP 렌더 QA를 통과했다. PR #326과 main workflow `37284733229`의 Pages·라이브 smoke·release status가 성공했고 Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `a18561f8b00a6f808e8ee858c9e833089537f3e4`는 HTTP 200, STATIC, 12 claims, 6 research records, 1 product, teaser HOLD를 제공한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-COMPARISON-LEGEND-20261005, E-UI-CONTRACT-MOBILE-COMPARISON-LEGEND-20261005, E-DEPLOY-PIPELINE-MOBILE-COMPARISON-LEGEND-20261005, E-LIVE-PUBLIC-MOBILE-COMPARISON-LEGEND-20261005.
+
+## 읽기 진행 레일 전환 가독성 보강 — 726fe8a — 2026-10-05
+
+- 상단 읽기 진행 레일의 opacity 전환을 제거하고 transform만 전환해 히어로 사진이 위치 안내 문구에 비치는 순간을 없앴다. 기존의 읽기 진행·고정 헤더·reduced-motion 동작은 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #324의 main 배포 workflow `37282401884`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 로컬 280·300·320·360·390px 헤더 및 큰 글씨 모드, 공개 390·768·1024·1440px 장 직접 진입, 390px 전문가 영상 선택·즉시 재생을 재검증했다. 공개 candidate `726fe8a85f5729c780d5da21dee36f4fa86d6412`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-READING-RAIL-OPAQUE-20261005, E-UI-CONTRACT-READING-RAIL-OPAQUE-20261005, E-DEPLOY-PIPELINE-READING-RAIL-OPAQUE-20261005, E-LIVE-PUBLIC-READING-RAIL-OPAQUE-20261005.
+
+## 장문 안내서 지연 렌더링 스크롤 안정화 — 2ca5a8a — 2026-10-05
+
+- `content-visibility:auto` 하위 장에 v110 반응형 `contain-intrinsic-size`를 적용해 실제 카드·영상·공유 영역이 처음 렌더링될 때 다음 콘텐츠가 밀리던 현상을 줄였다. 모바일·태블릿·데스크톱 예약값을 분리했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #322의 main 배포 workflow `37280003369`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 로컬 390·768·1024·1440px 레이아웃 감사에서 방문 전·후 위치 차이는 모바일 1–5px, 768px 1px, 1024px·1440px 0px였고, 공개 URL 직접 진입과 가로 폭 안정성도 확인했다. 공개 candidate `2ca5a8a264321c7d9fa16e0fe2cb63a5aed4694f`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-DEFERRED-CHAPTER-STABILITY-20261005, E-UI-CONTRACT-DEFERRED-CHAPTER-STABILITY-20261005, E-DEPLOY-PIPELINE-DEFERRED-CHAPTER-STABILITY-20261005, E-LIVE-PUBLIC-DEFERRED-CHAPTER-STABILITY-20261005.
+
+## 데스크톱 hero 읽기 안내 대비 보강 — 2226541 — 2026-10-05
+
+- 701px 이상 사진 위에 놓인 `아래로 읽기` 안내를 반투명 흰색 pill·테두리·그림자·blur로 분리해 데스크톱 첫 화면의 다음 읽기 방향을 빠르게 인식할 수 있게 했다. 모바일 안내와 기존 콘텐츠·연구 데이터는 유지했다.
+- PR #320의 필수 검사와 main 배포 workflow `37277241941`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `22265413532d4264cb9640070a677aebbe66dbf7`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다. Chrome CDP fallback 공개 1440px에서 데스크톱 안내 스타일과 `scrollWidth=1425`, 390px에서 모바일 안내와 `scrollWidth=390`을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-DESKTOP-READING-CUE-20261005, E-UI-CONTRACT-DESKTOP-READING-CUE-20261005, E-DEPLOY-PIPELINE-DESKTOP-READING-CUE-20261005, E-LIVE-PUBLIC-DESKTOP-READING-CUE-20261005.
+
+## 모바일 헤더 컨트롤 간격 보정 — 2c7433b — 2026-10-05
+
+- 381–430px에서 메뉴 아이콘과 이름이 표시된 읽기 크기 버튼이 겹치던 문제를 v108 간격 규칙으로 보정했다. 320–350px 아이콘형 헤더와 390px의 `가− 기본 글씨` 표시는 유지했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #318의 main 배포 workflow `37275123302`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `2c7433b144ef1930e7b7a21c744dd468d751e431`은 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다. 캐시 비활성화 Chrome CDP fallback 공개 320·350·381·390·430px에서 세 헤더 컨트롤의 겹침 0건과 가로 폭 일치를 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-NARROW-HEADER-SPACING-20261005, E-UI-CONTRACT-NARROW-HEADER-SPACING-20261005, E-DEPLOY-PIPELINE-NARROW-HEADER-SPACING-20261005, E-LIVE-PUBLIC-NARROW-HEADER-SPACING-20261005.
+
+## 좁은 모바일 연구 도표 레이블 보정 — 030f43a — 2026-10-05
+
+- 320px 폭에서 연구 비교 도표의 비교 조건·GABA 조건 레이블이 화면 밖으로 밀려나던 문제를 확인하고, 430px 이하에서 도표 헤더를 grid로 전환해 자연스럽게 줄바꿈되도록 보정했다.
+- UI 계약·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #316의 main 배포 workflow `37273248778`에서 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `030f43a6b481a22311803c3e9d4d39c196cab23e`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다. 캐시 비활성화 Chrome CDP fallback 공개 320·350·390·768px에서 overflowCount 0을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-NARROW-CHART-HEADER-20261005, E-UI-CONTRACT-NARROW-CHART-HEADER-20261005, E-DEPLOY-PIPELINE-NARROW-CHART-HEADER-20261005, E-LIVE-PUBLIC-NARROW-CHART-HEADER-20261005.
+
+## 모바일 hero 읽기 안내 대비 보강 — 80bd0f2 — 2026-10-05
+
+- 사진 위에 놓인 `아래로 읽기` 안내를 반투명 흰색 pill·테두리·그림자로 분리해 첫 화면의 다음 읽기 방향을 빠르게 인식할 수 있게 했다.
+- PR #313의 필수 검사 통과 후 TF heartbeat 신선도 게이트가 자동 PR 생성 제한으로 대기했으나, PR #314를 보호된 메인에 반영해 최종 Pages 배포·라이브 smoke·release status를 성공시켰다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 candidate `80bd0f223dcf75e10b63ac13d7115135e845a8cb`는 HTTP 200, STATIC, 12 claims, 6 research records, teaser HOLD를 제공한다. Chrome CDP fallback 공개 390×844에서 안내 대비와 큰 글씨 토글 후 가로 넘침 없음을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 브라우저 전체 조합, 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-CONTRAST-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-CONTRAST-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-CONTRAST-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-CONTRAST-20261005.
+
+## 모바일 메뉴 장면 이동 안정화 — 21a34c7 — 2026-10-05
+
+- 공개 390px 실제 흐름에서 메뉴를 연 뒤 `발견`을 선택해도 body 스크롤 잠금과 smooth scroll 경합으로 화면이 이동하지 않던 결함을 확인했다. 메뉴 선택 시에는 즉시 이동하도록 보정해 메뉴 닫힘과 장면 정렬을 한 번의 동작으로 맞췄다.
+- UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산을 통과했고, PR #311 checks와 main workflow `37269235739`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 `validate:live-public`은 candidate `21a34c7964a72c5fbb48eedba972a10da419f22c`, HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records, 6 share pages를 확인했다. Chrome CDP fallback 공개 390px에서 메뉴 열기→발견 선택 후 `scrollY=1660`, 제목 top `132.1px`, 가로 넘침 `0`을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-MENU-NAVIGATION-20261005, E-UI-CONTRACT-MOBILE-MENU-NAVIGATION-20261005, E-DEPLOY-PIPELINE-MOBILE-MENU-NAVIGATION-20261005, E-LIVE-PUBLIC-MOBILE-MENU-NAVIGATION-20261005.
+
+## 모바일 연구 결과 카드 레이아웃 보정 — fb3d19c — 2026-10-05
+
+- 실제 공개 390px 렌더에서 `인지 연구 결과` 제목이 좁은 열로 세로 찌그러지고 `결과 한 줄`이 제목 옆에서 겹치던 결함을 확인했다. 모바일 연구 카드 헤더를 grid로 재배치하고 결과 요약을 제목 아래 전체 폭에 배치했다.
+- 연구 구성·비교 도표·연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. PR #309 checks와 main workflow `37267840225`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `fb3d19c64e54f238d32d859c5d63a39898889250`은 HTTP 200, STATIC, 71 bundle hashes, 12 claims, 6 master records를 제공한다. Chrome CDP fallback으로 공개 390px에서 제목·결과 요약 비겹침과 가로 넘침 없음, 1440px 정렬을 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-UI-CONTRACT-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-CARD-LAYOUT-20261005, E-LIVE-PUBLIC-MOBILE-RESEARCH-CARD-LAYOUT-20261005.
+
+## 발효·안전·성장·전문가 영상 장면 전환 고도화 — 85ec17f — 2026-10-05
+
+- 발효·안전 섹션 뒤에 `식품 연구에서 몸의 신호로 → 성장 연구`, 성장 연구 뒤에 `연구를 설명하는 목소리로 → 전문가 영상` handoff를 추가해 모바일 긴 읽기 흐름을 명시했다.
+- 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다. PR #307 checks와 main workflow `37266107250`의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 candidate `85ec17fc17b7816096e98b1b995b1b1d5f72953b`는 HTTP 200, 71 bundle hashes, 제품 독립 안내 문구와 두 handoff 문구를 확인했다. Chrome CDP fallback으로 공개 URL의 390px·1440px 가로 넘침 없음과 두 handoff 요소를 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-EDITORIAL-HANDOFFS-20261005, E-UI-CONTRACT-EDITORIAL-HANDOFFS-20261005, E-DEPLOY-PIPELINE-EDITORIAL-HANDOFFS-20261005, E-LIVE-PUBLIC-EDITORIAL-HANDOFFS-20261005.
+
+## 연구 규모 비교 기준·모바일 오독 방지 고도화 — 31fcd55 — 2026-10-05
+
+- 연구 규모 카드의 큰 수치보다 먼저 `같은 검색 기준 · 하버드 · 옥스퍼드 · PubMed`와 `별도 연구 분석 · GABA-A 수용체 · SCIE`를 시각적 범위 레일로 표시했다. 모바일에서는 두 범위를 세로로 쌓아 숫자 비교 전에 연구 범위를 읽도록 보강했다.
+- 연구 수치·연구 원문·공개 카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build·정적 번들·성능 예산, PR #305 checks, main workflow 37264643742의 release-verify·worker-readiness·Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 라이브 공개본은 candidate `31fcd55abdab529653c8d19539b3e88ef651a33a`, HTTP 200, 71 bundle hashes, 12 claims, 6 master records, 6 share pages, teaser HOLD, internal operations snapshots 제외, Smart Store only, 750 제거, provenance matched를 확인했다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SCALE-SCOPE-20261005, E-UI-CONTRACT-RESEARCH-SCALE-SCOPE-20261005, E-DEPLOY-PIPELINE-RESEARCH-SCALE-SCOPE-20261005, E-LIVE-PUBLIC-RESEARCH-SCALE-SCOPE-20261005.
+
+## 모바일 첫 화면 읽기 방향·회복 브리지 문장 고도화 — 5ebcfaa — 2026-10-05
+
+- 모바일 hero 하단에 긴 공개 안내서가 아래로 이어진다는 '아래로 읽기' 큐를 표시하고, 화살표 모션은 사용자의 reduced-motion 설정에서 자동으로 멈춘다.
+- 회복 브리지의 작은 제목을 '수면과 회복의 연결'로 정리해 큰 제목과 본문 사이의 흐름을 자연스럽게 맞췄다. 연구 수치·출처·공개 카피·제품 독립 공개 경계는 변경하지 않았다.
+- UI 계약·typecheck·127개 테스트·production build/performance, PR #303 checks, main workflow 37263567643, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-READING-CUE-20261005, E-UI-CONTRACT-MOBILE-READING-CUE-20261005, E-DEPLOY-PIPELINE-MOBILE-READING-CUE-20261005, E-LIVE-PUBLIC-MOBILE-READING-CUE-20261005.
+
+## 공개 안내서 콘텐츠 경계·시작 성능 고도화 — 72f3cd9 — 2026-10-05
+
+- 공개 GABA 안내서·개인 계정·로컬 운영 경로가 제품·주문용 공용 콘텐츠를 불필요하게 먼저 요청하지 않도록 분리하고, 연구·제품·공유·챌린지 경로의 기존 콘텐츠 로딩은 유지했다.
+- 공개 연구 수치·출처·카피·제품 독립 공개 경계는 변경하지 않았다. UI 계약·typecheck·127개 테스트·production build/performance, PR #301 checks, main workflow 37262103043, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-UI-CONTRACT-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-DEPLOY-PIPELINE-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005, E-LIVE-PUBLIC-PUBLIC-GUIDE-CONTENT-BOUNDARY-20261005.
+
+## 모바일 연구 지도 맥락·가독성 고도화 — 594352e — 2026-10-05
+
+- 연구 지도를 명명된 선택 그룹으로 노출하고 주제 버튼에 선택 상태를 추가했다. 모바일 중심 현재 주제 문구는 11px, 큰 글씨 모드에서는 12px로 표시한다.
+- 연구 수치·출처·공개 카피·제품 독립 공개 경계는 유지했다. UI 계약 v103·typecheck·127개 테스트·production build/performance, PR #299 checks, main workflow 37260971979, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261005.
+
+## 연구·영상 선택 대상 연결 고도화 — 4b30428 — 2026-10-05
+
+- 연구 확장 지도 버튼이 `research-flow` 명명 영역으로 이동·초점을 연결하고, 전문가 영상 카드가 대표 영상 영역을 `aria-controls`로 명시하도록 보강했다. 선택·포커스 상태도 시각적으로 구분했다.
+- 연구 수치·출처·공개 카피·제품 독립 공개 경계는 유지했다. UI 계약 v102·typecheck·127개 테스트·production build/performance, PR #297 checks, main workflow 37259915121, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-RESEARCH-VIDEO-DESTINATION-20261005, E-UI-CONTRACT-RESEARCH-VIDEO-DESTINATION-20261005, E-DEPLOY-PIPELINE-RESEARCH-VIDEO-DESTINATION-20261005, E-LIVE-PUBLIC-RESEARCH-VIDEO-DESTINATION-20261005.
+
+## 전문가 영상 게시판 한국어 가독성 고도화 — a796f3d — 2026-10-05
+
+- 전문가 영상 게시판 헤더의 한국어 자간을 자연스럽게 조정하고, 주제 필터가 영상 목록을 제어한다는 관계를 `aria-controls`로 명시했다.
+- 빈 로컬 주문 입력 매니페스트의 목표 ID·배열 계약을 복구해 NAVI 로컬 감사가 오류가 아닌 WAITING 게이트로 분류되도록 했다. 주문 데이터·개인정보·공개 export는 추가하지 않았다.
+- 즉시 재생·영상 공유·연구 출처·제품 독립 공개 경계는 유지했다. UI 계약·typecheck·127개 테스트·production build/performance, PR #295 checks, main workflow 37258419309, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-KOREAN-VIDEO-BOARD-TYPE-20261005, E-UI-CONTRACT-KOREAN-VIDEO-BOARD-TYPE-20261005, E-DEPLOY-PIPELINE-KOREAN-VIDEO-BOARD-TYPE-20261005, E-LIVE-PUBLIC-KOREAN-VIDEO-BOARD-TYPE-20261005.
+
+## 전문가 영상 필터 맥락 고도화 — 02ad4cc — 2026-10-05
+
+- 전문가 영상 갤러리에서 현재 주제 pill·표시 영상 수·선택 영상 상태를 함께 보여주고, 보조기기용 live 안내와 완전한 필터·영상 카드 접근 이름을 추가했다.
+- 즉시 재생·영상 공유·제품 독립 공개 경계는 유지했다. UI 계약·typecheck·127개 테스트·production build/performance, PR #293 checks, main workflow 37257033514, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-VIDEO-FILTER-CONTEXT-20261005, E-UI-CONTRACT-VIDEO-FILTER-CONTEXT-20261005, E-DEPLOY-PIPELINE-VIDEO-FILTER-CONTEXT-20261005, E-LIVE-PUBLIC-VIDEO-FILTER-CONTEXT-20261005.
+
+## 선택 연구 공유 맥락 고도화 — efb3f20 — 2026-10-05
+
+- 연구 카드나 출처 읽기 장면에서 공유하면 선택한 연구의 제목·관찰 결과·`research-{id}` 딥링크가 유지되도록 보강했다. 전문가 영상과 다른 장의 공유 목적지는 그대로 유지한다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #291 checks, main workflow 37255772910, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261005.
+
+## 연구 선택과 출처 읽기 연결 고도화 — 4143e45 — 2026-10-05
+
+- 연구 카드에서 주제를 선택하면 출처 읽기 패널도 선택된 연구의 출처·대상·측정 항목·연구 설계로 이어지도록 보강했다. 직접 출처 읽기 진입은 인지 연구를 기본 예시로 유지한다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #289 checks, main workflow 37254552858, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-CONTEXTUAL-SOURCE-20261005, E-UI-CONTRACT-CONTEXTUAL-SOURCE-20261005, E-DEPLOY-PIPELINE-CONTEXTUAL-SOURCE-20261005, E-LIVE-PUBLIC-CONTEXTUAL-SOURCE-20261005.
+
+## 모바일 출처 읽기 레일 고도화 — 7c409a1 — 2026-10-05
+
+- 모바일 출처 읽기 패널의 네 가지 질문을 번호가 연결된 세로 레일로 정리하고 원문 출처 카드의 불필요한 우측 여백을 줄여 연구 읽기 순서와 출처 전환을 빠르게 파악하도록 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #287 checks, main workflow 37253350843, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI 공식 `validate_project_state.py`와 `assess_risk_controls.py`도 통과했으며, 상태 전이는 `RED_TEAM → USER_DECISION`, 완료 게이트는 `NOT_READY`로 정합화했다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-SOURCE-RAIL-20261005, E-UI-CONTRACT-MOBILE-SOURCE-RAIL-20261005, E-DEPLOY-PIPELINE-MOBILE-SOURCE-RAIL-20261005, E-LIVE-PUBLIC-MOBILE-SOURCE-RAIL-20261005.
+
+## 모바일 장면 전환 리듬 고도화 — 3904b39 — 2026-10-05
+
+- 430px 이하에서 연구·국내외 활용 handoff를 현재 맥락 → 구분선 → 다음 장면으로, 전문가 영상 handoff를 다음 기준 → 원문 출처 순서로 정렬해 링크 이동 없이 자연스러운 읽기 흐름을 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #285 checks, main workflow 37252460081, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-HANDOFF-20261005, E-UI-CONTRACT-MOBILE-HANDOFF-20261005, E-DEPLOY-PIPELINE-MOBILE-HANDOFF-20261005, E-LIVE-PUBLIC-MOBILE-HANDOFF-20261005.
+
+## 좁은 모바일 연구 비교 흐름 고도화 — b343def — 2026-10-05
+
+- 430px 이하 휴대폰에서 연구 결과 비교 조건과 GABA 결과를 한 줄씩 세로로 읽도록 정리하고, GABA 결과 레인에 좌측 teal 표식을 추가해 핵심 차이를 빠르게 파악하도록 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #283 checks, main workflow 37251345872, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-NARROW-COMPARISON-20261005, E-UI-CONTRACT-NARROW-COMPARISON-20261005, E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261005, E-LIVE-PUBLIC-NARROW-COMPARISON-20261005.
+
+## 모바일 장면 맥락 가독성 고도화 — de91cbb — 2026-10-05
+
+- 모바일 장 제목 아래의 짧은 맥락 문구를 14px·26ch·행간 1.65로 정리하고 좌측 포인트 라인을 추가해 장면의 의미와 다음 내용의 연결을 빠르게 읽도록 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #281 checks, main workflow 37250175467, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-CONTEXT-FLOOR-20261005, E-UI-CONTRACT-MOBILE-CONTEXT-FLOOR-20261005, E-DEPLOY-PIPELINE-MOBILE-CONTEXT-FLOOR-20261005, E-LIVE-PUBLIC-MOBILE-CONTEXT-FLOOR-20261005.
+
+## 모바일 장면 맥락 문구 고도화 — b98df10 — 2026-10-05
+
+- 700px 이하 화면에서 각 섹션 제목 아래의 짧은 보조 맥락 문구를 복원해 제목·장면·다음 내용의 연결을 보강했다.
+- 28ch·13px·행간 1.7 규칙과 v93 UI 계약을 추가했다. 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다.
+- UI 계약·typecheck·127 tests·production build/performance, PR #279 checks, main workflow 37248925292, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저·대표 실기기·고령 사용자 독해성·독립 감수는 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MOBILE-CHAPTER-CONTEXT-20261005, E-UI-CONTRACT-MOBILE-CHAPTER-CONTEXT-20261005, E-DEPLOY-PIPELINE-MOBILE-CHAPTER-CONTEXT-20261005, E-LIVE-PUBLIC-MOBILE-CHAPTER-CONTEXT-20261005.
+
+## 읽기 진행 문맥 접근성 고도화 — 13450f2 — 2026-10-05
+
+- 화면용 읽기 진행 메타와 보조기기용 현재 장·연구 문맥을 분리하고, 별도 `role=status` 라이브 안내를 추가했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #277 checks, main workflow 37248181705, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 스크린리더 조합·대표 실기기·고령 사용자 독해성 검증은 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-READING-LIVE-CONTEXT-20261005, E-UI-CONTRACT-READING-LIVE-CONTEXT-20261005, E-DEPLOY-PIPELINE-READING-LIVE-CONTEXT-20261005, E-LIVE-PUBLIC-READING-LIVE-CONTEXT-20261005.
+
+## 한글 타이포그래피 리듬 고도화 — 0d4981d — 2026-10-05
+
+- 주요 한글 디스플레이 제목에 지원 브라우저의 `text-wrap:balance`, 주요 본문 설명에 `text-wrap:pretty`를 적용해 모바일 편집 리듬을 보강했다.
+- 연구 카드·공개 과학 카피·출처·제품 독립 경계는 변경하지 않았다. UI 계약·typecheck·127 tests·production build/performance, PR #275 checks, main workflow 37247369428, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저/대표 실기기와 고령 사용자 독해성 검증은 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-TYPOGRAPHY-WRAP-20261005, E-UI-CONTRACT-TYPOGRAPHY-WRAP-20261005, E-DEPLOY-PIPELINE-TYPOGRAPHY-WRAP-20261005, E-LIVE-PUBLIC-TYPOGRAPHY-WRAP-20261005.
+
+## 모바일 하단 콘텐츠 점진 렌더링 고도화 — 98c59eb — 2026-10-05
+
+- 국내외 활용·발효·성장·전문가 영상·출처·공유 섹션에 `content-visibility:auto`와 예약 높이를 적용해 장문의 공개 안내서가 하단 콘텐츠를 필요한 시점에 렌더링하도록 보완했다.
+- 연구 카드의 IntersectionObserver 기반 활성 주제 연결과 제품 독립 공개 경계는 유지했다. UI 계약·typecheck·127 tests·production build/performance, PR #273 checks, main workflow 37246552896, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저 성능 trace와 대표 실기기 검증은 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-PROGRESSIVE-PUBLISHING-20261005, E-UI-CONTRACT-PROGRESSIVE-PUBLISHING-20261005, E-DEPLOY-PIPELINE-PROGRESSIVE-PUBLISHING-20261005, E-LIVE-PUBLIC-PROGRESSIVE-PUBLISHING-20261005.
+
+## 외부 미디어 연결 품질 고도화 — 7eef131 — 2026-10-05
+
+- 공개 GABA 안내서 진입 HTML에 YouTube 썸네일 preconnect와 영상·썸네일 DNS prefetch를 추가해 전문가 영상 선택 흐름의 연결 준비를 보완했다.
+- 기존 lazy loading과 제품 독립 공개 경계는 유지했다. UI 계약·typecheck·127 tests·production build/performance, PR #271 checks, main workflow 37245784203, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다. 실제 브라우저 네트워크 waterfall과 대표 실기기 검증은 외부 조건으로 남긴다.
+
+증적: E-LOCAL-BUILD-MEDIA-HINTS-20261005, E-UI-CONTRACT-MEDIA-HINTS-20261005, E-DEPLOY-PIPELINE-MEDIA-HINTS-20261005, E-LIVE-PUBLIC-MEDIA-HINTS-20261005.
+
+## 연구 카드 활성 주제 선택 안정화 — ee77f28 — 2026-10-05
+
+- 연구 카드별 최신 IntersectionObserver 상태를 누적해 현재 가장 많이 보이는 연구 카드를 활성 주제로 선택하고, 동일 주제의 중복 발행을 건너뛰도록 보완했다.
+- v88 UI 계약, typecheck, 127 tests, production build/performance, PR #269 checks, main workflow 37245122445, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-OBSERVER-STATE-20261005, E-UI-CONTRACT-OBSERVER-STATE-20261005, E-DEPLOY-PIPELINE-OBSERVER-STATE-20261005, E-LIVE-PUBLIC-OBSERVER-STATE-20261005.
+
+## 연구 스크롤 이벤트 프레임 배칭 — 7395768 — 2026-10-05
+
+- 연구 카드 IntersectionObserver 이벤트를 requestAnimationFrame 단위로 합치고, 최신 주제만 React startTransition으로 반영해 모바일 스크롤 중 상태 갱신 경쟁을 줄였다.
+- v87 UI 계약, typecheck, 127 tests, production build/performance, PR #267 checks, main workflow 37244243638, Pages·라이브 smoke·release status와 공개 validator를 통과했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-RAF-20261005, E-UI-CONTRACT-RAF-20261005, E-DEPLOY-PIPELINE-RAF-20261005, E-LIVE-PUBLIC-RAF-20261005.
+
+## 연구 지도에 현재 읽는 주제 연결 — 5519791 — 2026-10-05
+
+- 연구 지도 중앙에 GABA를 유지하면서 현재 읽는 연구 주제를 함께 표시해 선택된 지도 항목과 상세 연구 카드의 관계를 한눈에 이해하도록 고도화했다.
+- v84 UI 계약, typecheck, 127개 테스트, production build와 성능 예산이 통과했고 PR #261 및 main 배포 37241358621의 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator는 candidate `551979122680c2bccfcbfbdf2b420abfb7194564`에 대해 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·smartStoreOnly·removed750·provenance matched를 확인했고, live guide bundle의 현재 주제 라벨도 확인했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser/Playwright와 Safari/iOS/Android 실기기가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MAP-CURRENT-20261005, E-UI-CONTRACT-MAP-CURRENT-20261005, E-DEPLOY-PIPELINE-MAP-CURRENT-20261005, E-LIVE-PUBLIC-MAP-CURRENT-20261005.
+
+## 연구 결과를 먼저 읽는 카드 흐름 — efc6246 — 2026-10-05
+
+- 연구 카드 제목 바로 아래에 `결과 한 줄`을 배치해 모바일 방문자가 관찰된 결과를 먼저 이해하도록 고도화했다. 기존 도표 내부의 핵심 결과 요약은 중복 표시하지 않고 연구 구성·시각 도표·상세 조건·원문 출처로 이어지게 했다.
+- v83 UI 계약, typecheck, 127개 테스트, production build와 성능 예산이 통과했고 PR #259 및 main 배포 37240376184의 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY로 건너뛰었다.
+- live validator는 candidate `efc624679105d2665b94a887e4866429451c4478`에 대해 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·smartStoreOnly·removed750·provenance matched를 확인했고, live guide bundle의 `결과 한 줄`도 확인했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. Browser/Playwright와 Safari/iOS/Android 실기기가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESULT-FIRST-20261005, E-UI-CONTRACT-RESULT-FIRST-20261005, E-DEPLOY-PIPELINE-RESULT-FIRST-20261005, E-LIVE-PUBLIC-RESULT-FIRST-20261005.
+
+## 시스템 모션 선호 대응 — e48acaa — 2026-10-05
+
+- `prefers-reduced-motion: reduce` 사용자가 공개 GABA 안내서를 읽을 때 카드·읽기 진행·영상 로딩의 애니메이션과 smooth scrolling을 전역으로 끌 수 있도록 PR #257에서 v82 UI 계약과 CSS를 추가했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build와 성능 예산이 통과했고, PR #257 및 main 배포 37239457353의 Pages·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY 조건으로 건너뛰었다.
+- live validator는 candidate `e48acaa917d2063273757c12f715316ab585ecdb`에 대해 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·smartStoreOnly·removed750·provenance matched를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-REDUCED-MOTION-20261005, E-UI-CONTRACT-REDUCED-MOTION-20261005, E-DEPLOY-PIPELINE-REDUCED-MOTION-20261005, E-LIVE-PUBLIC-REDUCED-MOTION-20261005.
+
+## 보호된 공개 배포 게이트 복구 — 7a111d8 — 2026-10-05
+
+- NAVI 자동 점검에서 TF pulse heartbeat 만료로 보호된 main 배포가 중단된 원인을 확인했다. 공개 콘텐츠와 연구 데이터에는 손대지 않고 heartbeat 시각만 PR #255에서 갱신했으며, freshness `ageMinutes=0 / maxAgeMinutes=480`, `stateChanged=false`, `safeExecution=MET`를 확인했다.
+- PR #255 checks, main 배포 37238318730의 Pages publish·라이브 smoke·release status가 성공했다. Worker는 STATIC_ONLY 조건으로 건너뛰었다.
+- live validator는 최신 candidate `7a111d831fecfa42e74c0947ca4f40238c912e37`에 대해 HTTP 200·STATIC·71개 번들 해시·12개 공개 claim·6개 master record·6개 share page·teaser HOLD·내부 운영 스냅샷 제외·smartStoreOnly·removed750·provenance matched를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없어 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-TF-PULSE-HEARTBEAT-20261005, E-DEPLOY-PIPELINE-TF-PULSE-HEARTBEAT-20261005, E-LIVE-PUBLIC-TF-PULSE-HEARTBEAT-20261005, E-RELEASE-STATUS-TF-PULSE-HEARTBEAT-20261005.
+
+## 실제 장 제목 포커스 보정 — c9b3eda — 2026-10-05
+
+- 시각적 스크롤 정렬용 `.guide-section-heading` 래퍼가 실제 읽기 포커스 대상으로 사용되어 본문 장 제목으로 포커스가 이어지지 않을 수 있는 잔여 접근성 리스크를 확인하고 PR #254에서 `getGuideFocusTarget`을 분리했다. 직접 진입·hash 변경·메뉴 이동은 `aria-labelledby`가 가리키는 실제 제목으로 포커스하고, 시각 정렬은 기존 래퍼를 유지했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #254와 main 배포 37237686704, Pages, 라이브 smoke, release status와 live validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-HEADING-FOCUS-20261005, E-UI-CONTRACT-GUIDE-HEADING-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-HEADING-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-HEADING-FOCUS-20261005.
+
+## 일반 장 제목 포커스 보정 — d545013 — 2026-10-05
+
+- 일반 장 메뉴와 직접 장 딥링크가 화면만 이동하고 읽기 시작점에 포커스를 넘기지 않던 잔여 접근성 리스크를 확인하고 PR #253에서 히어로·본문·회복·최종 장 제목에 프로그램 포커스 지점을 추가했다. 메뉴 이동·hash 변경·직접 진입을 공통 제목 포커스 handoff로 연결했으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #253 checks, main 배포 37236810722, Pages, 라이브 smoke, release status와 live validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-CHAPTER-FOCUS-20261005, E-UI-CONTRACT-GUIDE-CHAPTER-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-CHAPTER-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-CHAPTER-FOCUS-20261005.
+
+## 연구 직접 딥링크 포커스 보정 — 13cb639 — 2026-10-05
+
+- 연구 카드를 공유 URL로 직접 열거나 URL hash를 바꿀 때 선택 카드 제목으로 포커스를 이어가도록 보완했다. 공유 링크로 들어온 키보드·보조기기 사용자가 선택 연구의 제목·대상·결과를 바로 읽을 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #252와 main 배포 37235537953, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-UI-CONTRACT-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-RESEARCH-DEEPLINK-FOCUS-20261005.
+
+## 연구 카드 포커스 흐름 보정 — 544ce7d — 2026-10-05
+
+- 연구 지도에서 주제를 고르거나 다음 연구로 이동하면 선택한 연구 카드로 포커스를 이어가도록 보완하고, 연구 카드 제목을 접근성 이름으로 연결했다. 키보드·보조기기 사용자가 대상·결과·해석을 바로 읽을 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #251과 main 배포 37234697205, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-RESEARCH-FOCUS-20261005, E-UI-CONTRACT-GUIDE-RESEARCH-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-RESEARCH-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-RESEARCH-FOCUS-20261005.
+
+## 본문으로 이동 포커스 보정 — b393393d — 2026-10-05
+
+- `본문으로 이동` 건너뛰기 링크의 `main#guide-main` 대상에 `tabIndex=-1`을 추가해, 키보드·보조기기 사용자가 본문 시작점으로 포커스를 이어갈 수 있도록 보완했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #250과 main 배포 37233770435, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-SKIP-FOCUS-20261005, E-UI-CONTRACT-GUIDE-SKIP-FOCUS-20261005, E-DEPLOY-PIPELINE-GUIDE-SKIP-FOCUS-20261005, E-LIVE-PUBLIC-GUIDE-SKIP-FOCUS-20261005.
+
+## guide 경로 맥락 보존 — bd2adafd — 2026-10-05
+
+- 장 이동 시 `view=guide`를 유지하고 이전 전문가 영상 query를 정리하며, 전문가 영상 선택 시 선택 ID를 보존하도록 guide 주소 갱신을 공통 처리했다. 새로고침·공유가 현재 읽는 장과 같은 맥락을 가리키도록 보완했으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #249와 main 배포 37232929565, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 브라우저·실기기 URL 상태·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-GUIDE-ROUTE-CONTEXT-20261005, E-UI-CONTRACT-GUIDE-ROUTE-CONTEXT-20261005, E-DEPLOY-PIPELINE-GUIDE-ROUTE-CONTEXT-20261005, E-LIVE-PUBLIC-GUIDE-ROUTE-CONTEXT-20261005.
+
+## 읽기 진행 번호와 본문 번호 정렬 — 7e9adf5 — 2026-10-05
+
+- 번호 없는 수면·회복 도입부를 진행 집계에서 분리해 `도입부`로 표시하고, 본문 진행은 화면 번호와 맞춰 `01 / 12`부터 시작하도록 보완했다. 긴 페이지에서 진행 수와 장 제목이 어긋나지 않으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #248과 main 배포 37232067717, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 진행 레일 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-READING-PROGRESS-NUMBERING-20261005, E-UI-CONTRACT-READING-PROGRESS-NUMBERING-20261005, E-DEPLOY-PIPELINE-READING-PROGRESS-NUMBERING-20261005, E-LIVE-PUBLIC-READING-PROGRESS-NUMBERING-20261005.
+
+## 읽기 진행의 회복 맥락 구분 — 40c540b — 2026-10-05
+
+- 첫 도입부의 ‘수면과 회복’과 중간 자동 전환 설명 카드가 같은 이름으로 표시되던 흐름을 보완해, 중간 장을 ‘회복의 고리’로 구분했다. 긴 페이지에서 현재 읽는 위치를 더 빠르게 파악할 수 있으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #247와 main 배포 37231321693, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 읽기 레일 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RECOVERY-CONTEXT-20261005, E-UI-CONTRACT-RECOVERY-CONTEXT-20261005, E-DEPLOY-PIPELINE-RECOVERY-CONTEXT-20261005, E-LIVE-PUBLIC-RECOVERY-CONTEXT-20261005.
+
+## 수면·회복 도입부 내비게이션 정렬 — 85b1179 — 2026-10-05
+
+- 첫 화면 뒤의 수면·회복 설명 브리지에 안정적인 `#opening-bridge` 앵커를 추가하고, 헤더의 ‘수면과 회복’ 메뉴와 읽기 진행을 첫 설명 장으로 정렬했다. 도입부에서 뒤쪽 반복 카드로 건너뛰지 않고 자연스럽게 다음 장으로 이어지도록 보완했으며 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #246와 main 배포 37230507157, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 딥링크 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-OPENING-BRIDGE-NAV-20261005, E-UI-CONTRACT-OPENING-BRIDGE-NAV-20261005, E-DEPLOY-PIPELINE-OPENING-BRIDGE-NAV-20261005, E-LIVE-PUBLIC-OPENING-BRIDGE-NAV-20261005.
+
+## 좁은 모바일 헤더 안전영역 보정 — b3fcffb — 2026-10-05
+
+- 430px 이하 휴대폰에서 메뉴·글자 크기·공유 버튼의 절대 위치를 오른쪽 안전영역 안으로 보정하고, 공유 완료 토스트의 좌우 안전영역도 명시했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #245와 main 배포 37229660026, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 헤더 정렬·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-HEADER-SAFE-AREA-20261005, E-UI-CONTRACT-MOBILE-HEADER-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-MOBILE-HEADER-SAFE-AREA-20261005, E-LIVE-PUBLIC-MOBILE-HEADER-SAFE-AREA-20261005.
+
+## 공유 피드백 토스트 하단 안전영역 보정 — 06d737f — 2026-10-05
+
+- 모바일 공유·복사 완료 토스트가 iPhone 하단 홈 인디케이터와 겹치지 않도록 700px 이하에서 오른쪽·하단·좌우 안전영역을 반영했다. 연구 수치·출처 데이터와 제품 독립 공개 경계는 변경하지 않았다.
+- PR #244와 main 배포 37228652043, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 토스트 정렬·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-SHARE-TOAST-SAFE-AREA-20261005, E-UI-CONTRACT-SHARE-TOAST-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-SHARE-TOAST-SAFE-AREA-20261005, E-LIVE-PUBLIC-SHARE-TOAST-SAFE-AREA-20261005.
+
+## 연구 카드 직접 이동 안전영역 보정 — 83715cc — 2026-10-05
+
+- 연구 확장 지도에서 선택한 개별 연구 카드가 고정 읽기 레일 아래에 도착하도록 900px 이하 태블릿·모바일과 700px 이하 휴대폰의 스크롤 기준에 안전영역을 반영했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #243과 main 배포 37227713682, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 연구 카드 정렬·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-ANCHOR-SAFE-AREA-20261005, E-UI-CONTRACT-RESEARCH-ANCHOR-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-RESEARCH-ANCHOR-SAFE-AREA-20261005, E-LIVE-PUBLIC-RESEARCH-ANCHOR-SAFE-AREA-20261005.
+
+## 태블릿 폭 안전영역·키보드 진입 보정 — 80436662 — 2026-10-05
+
+- 701–900px 모바일·태블릿 폭까지 viewport 안전영역 처리를 확장하고, 건너뛰기 링크·고정 헤더·읽기 진행 표시·메뉴의 상하·좌우 여백과 장 이동 기준을 맞췄다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #242와 main 배포 37226718498, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 태블릿 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-SAFE-AREA-TABLET-20261005, E-UI-CONTRACT-MOBILE-SAFE-AREA-TABLET-20261005, E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-TABLET-20261005, E-LIVE-PUBLIC-MOBILE-SAFE-AREA-TABLET-20261005.
+
+## 모바일 안전영역·읽기 레일 보정 — 74fc0300 — 2026-10-05
+
+- 공개 GABA 안내서 진입 메타에 viewport-fit=cover를 추가하고, iPhone 안전영역에 맞춰 고정 헤더·읽기 진행 표시·모바일 메뉴·장 이동 위치를 보정했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #241과 main 배포 37225805478, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright와 Safari/iOS/Android 실기기가 없는 환경이므로 실제 안전영역 렌더·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-MOBILE-SAFE-AREA-20261005, E-UI-CONTRACT-MOBILE-SAFE-AREA-20261005, E-DEPLOY-PIPELINE-MOBILE-SAFE-AREA-20261005, E-LIVE-PUBLIC-MOBILE-SAFE-AREA-20261005.
+
+## 전문가 영상 갤러리 위치 메타 정보 — 9131138a — 2026-10-05
+
+- 전문가 영상 선택 카드에 주제·재생 상태·전체 순서를 `01 / 09` 형식으로 표시하고 모바일 표시를 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #240과 main 배포 37224932902, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-INDEX-20261005, E-UI-CONTRACT-EXPERT-VIDEO-INDEX-20261005, E-DEPLOY-PIPELINE-EXPERT-VIDEO-INDEX-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-INDEX-20261005.
+
+## 전문가 영상 다음 읽기 흐름 정렬 — 84897891 — 2026-10-05
+
+- 전문가 영상 아래의 다음 읽기 안내를 실제 문서 순서인 `다음 장 · 연구를 읽는 기준 → 원문 출처`로 정렬하고 모바일 읽기 계층을 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #239와 main 배포 37224127512, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-HANDOFF-20261005, E-UI-CONTRACT-EXPERT-VIDEO-HANDOFF-20261005, E-DEPLOY-PIPELINE-EXPERT-VIDEO-HANDOFF-20261005, E-LIVE-PUBLIC-EXPERT-VIDEO-HANDOFF-20261005.
+
+## 연구 지도에서 카드로 이어지는 읽기 흐름 — 0e7836e — 2026-10-05
+
+- 연구 지도 아래에 주제 선택 안내를 추가하고 지도 버튼과 안내 문장을 연결했다. 모바일에서는 문장이 자연스럽게 줄바꿈된다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #238과 main 배포 37223345781, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-CUE-20261005, E-UI-CONTRACT-RESEARCH-MAP-CUE-20261005, E-DEPLOY-PIPELINE-RESEARCH-MAP-CUE-20261005, E-LIVE-PUBLIC-RESEARCH-MAP-CUE-20261005.
+
+## 연구 범위 맥락 표식 고도화 — 13004052 — 2026-10-05
+
+- 연구 카드 상단에 `연구 범위` 표식을 추가하고 모바일에서 범위·연구 대상·세부 영역을 안정적인 단일 열로 배치했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #237과 main 배포 37222305395, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SCOPE-CONTEXT-20261005, E-UI-CONTRACT-RESEARCH-SCOPE-CONTEXT-20261005, E-DEPLOY-PIPELINE-RESEARCH-SCOPE-CONTEXT-20261005, E-LIVE-PUBLIC-RESEARCH-SCOPE-CONTEXT-20261005.
+
+## 연구 범위 라벨 가독성 고도화 — af43e264 — 2026-10-05
+
+- 연구 카드 상단의 대상·방법·측정 연구 범위 라벨을 결과보다 먼저 읽히도록 모바일·데스크톱 크기, 간격, 줄바꿈을 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #236과 main 배포 37221235472, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-SCOPE-READABILITY-20261005, E-UI-CONTRACT-RESEARCH-SCOPE-READABILITY-20261005, E-DEPLOY-PIPELINE-RESEARCH-SCOPE-READABILITY-20261005, E-LIVE-PUBLIC-RESEARCH-SCOPE-READABILITY-20261005.
+
+## 연구 카드 읽기 계층 고도화 — c5a60fe — 2026-10-05
+
+- 연구 카드의 대상·방법·측정 정보와 차트 핵심 결과 라벨을 데스크톱·모바일에서 빠르게 읽히도록 보강했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #235와 main 배포 37220018831, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: E-LOCAL-BUILD-RESEARCH-PROFILE-READABILITY-20261005, E-UI-CONTRACT-RESEARCH-PROFILE-READABILITY-20261005, E-DEPLOY-PIPELINE-RESEARCH-PROFILE-READABILITY-20261005, E-LIVE-PUBLIC-RESEARCH-PROFILE-READABILITY-20261005.
+
+## 연구 결과 요약 가독성 고도화 — 1226c06 — 2026-10-05
+
+- 연구 비교 도표의 `GABA 결과` 요약을 모바일·데스크톱에서 첫 번째 읽기 단위로 확대하고 청록 기준선·옅은 배경으로 비교 레인과 분리했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #234와 main 배포 `37219113458`, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-VERDICT-READABILITY-20261005`, `E-UI-CONTRACT-RESEARCH-VERDICT-READABILITY-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-VERDICT-READABILITY-20261005`, `E-LIVE-PUBLIC-RESEARCH-VERDICT-READABILITY-20261005`.
+
+## 연구 결과 도표 GABA 결과 선표시 — 4036d0d — 2026-10-05
+
+- 연구 비교 도표의 각 행에 `GABA 결과` 요약을 먼저 배치해, 독자가 결과 방향을 먼저 읽고 두 조건의 막대를 근거로 확인하도록 고도화했다. 연구 수치·출처 데이터는 변경하지 않았다.
+- PR #233과 main 배포 `37217858013`, 라이브 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기·고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-OUTCOME-VERDICT-20261005`, `E-UI-CONTRACT-RESEARCH-OUTCOME-VERDICT-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-OUTCOME-VERDICT-20261005`, `E-LIVE-PUBLIC-RESEARCH-OUTCOME-VERDICT-20261005`.
+
+## 모바일 연구 확장 지도 터치·가독성 고도화 — 647df28 — 2026-10-05
+
+- 모바일 연구 확장 지도의 주제 버튼을 표준 화면 80px·82px, 아이콘 40px로 넓히고 350px 이하에는 76px·78px·38px 규칙을 적용했다. v59 UI 계약 회귀 검사를 추가했다.
+- PR #232와 코드 배포 `37216763700`을 통과했고, NAVI 기록 동기화 시점 main candidate `647df28`의 라이브 공개 validator도 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기 터치와 고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-TOUCH-20261005`, `E-UI-CONTRACT-RESEARCH-MAP-TOUCH-20261005`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-TOUCH-20261005`, `E-LIVE-PUBLIC-RESEARCH-MAP-TOUCH-20261005`.
+
+## 모바일 회복 지도 정보 구조 고도화 — 3510d2c — 2026-10-05
+
+- 수면·회복 14단계 모바일 지도를 6열로 재배치하고 단계 버튼에 최소 44px 터치 영역을 명시했다. 13·14단계는 중앙 정렬해 경로의 끝맺음을 보완했다.
+- PR #231, main 배포 `37215720425`, 라이브 공개 validator를 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser/Playwright가 없는 환경이므로 실제 브라우저·실기기 터치와 고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 `USER_DECISION / NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-TOUCH-20261005`, `E-UI-CONTRACT-RECOVERY-MAP-TOUCH-20261005`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-TOUCH-20261005`, `E-LIVE-PUBLIC-RECOVERY-MAP-TOUCH-20261005`.
+
+## 공유·연구 복사 버튼 모바일 터치 영역 고도화 — ca65f61 — 2026-10-05
+
+- 사업자용 문장 복사·전체 복사·연구 결과 복사 동작을 44px 이상 터치 영역으로 명시하고 v52 UI 계약 회귀 검사를 추가했다.
+- PR #230, main 배포 `37214622993`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 터치와 고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-SHARE-CONTROLS-20261005`, `E-UI-CONTRACT-SHARE-CONTROLS-20261005`, `E-DEPLOY-PIPELINE-SHARE-CONTROLS-20261005`, `E-LIVE-PUBLIC-SHARE-CONTROLS-20261005`.
+
+## 첫 화면 히어로 문구 최소화 — 2e31d60 — 2026-10-05
+
+- 첫 화면 중복 프리타이틀을 제거하고 메인 헤드라인 시작 위치를 보정했다.
+- PR #229, main 배포 `37213839261`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 시각 검증과 고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-MINIMAL-HERO-20261005`, `E-UI-CONTRACT-MINIMAL-HERO-20261005`, `E-DEPLOY-PIPELINE-MINIMAL-HERO-20261005`, `E-LIVE-PUBLIC-MINIMAL-HERO-20261005`.
+
+## 전문가 영상 모바일 터치 영역 고도화 — 0b5a2a1 — 2026-10-05
+
+- 전문가 영상 선택 공유 버튼과 주제 필터를 44px 이상 터치 영역으로 통일하고 UI 계약 회귀 검사를 추가했다.
+- PR #228, main 배포 `37212827380`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·71개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 터치와 고령 사용자 독해성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-VIDEO-CONTROLS-20261005`, `E-UI-CONTRACT-VIDEO-CONTROLS-20261005`, `E-DEPLOY-PIPELINE-VIDEO-CONTROLS-20261005`, `E-LIVE-PUBLIC-VIDEO-CONTROLS-20261005`.
+
+## 큰 글씨 읽기 모드 가독성 강화 — 5f4f6c7 — 2026-10-04
+
+- 큰 글씨 모드를 본문·연구 도표 기준 desktop 12%, mobile 10% 확대 수준으로 보강하고, 모바일 방향 문구 줄바꿈을 추가했다.
+- PR #226, main 배포 `37210637085`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·70개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 가독성은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-LARGE-TEXT-20261004`, `E-UI-CONTRACT-LARGE-TEXT-20261004`, `E-DEPLOY-PIPELINE-LARGE-TEXT-20261004`, `E-LIVE-PUBLIC-LARGE-TEXT-20261004`.
+
+## 좁은 모바일 헤더 충돌 방지 — 5215ab5 — 2026-10-04
+
+- 381–430px 화면에서 로고와 고정 메뉴·큰 글씨·공유 컨트롤이 겹치지 않도록 헤더 폭을 보정했다.
+- PR #225, main 배포 `37210073919`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·70개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 레이아웃 검증은 외부 항목으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-NARROW-HEADER-20261004`, `E-UI-CONTRACT-NARROW-HEADER-20261004`, `E-DEPLOY-PIPELINE-NARROW-HEADER-20261004`, `E-LIVE-PUBLIC-NARROW-HEADER-20261004`.
+
+## 연구 카드 원문 보기 링크 가독성 고도화 — 6248808 — 2026-10-04
+
+- 연구 카드 출처를 `출처명`과 `원문 보기`로 분리하고 링크 전체에 44px 터치 영역·키보드 포커스 표시를 적용했다.
+- PR #224, main 배포 `37209426168`, 라이브 공개 validator를 모두 통과했다. 공개 검증은 HTTP 200·STATIC·70개 번들·제품 독립 경계를 확인했다.
+- Browser 플러그인·Playwright가 없는 환경이라 실제 브라우저/실기기 동작은 외부 검증으로 유지한다. NAVI는 USER_DECISION / NOT_READY다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-ACTION-20261004`, `E-UI-CONTRACT-RESEARCH-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-ACTION-20261004`.
+
+## 사업자용 전체 공유 복사 상태 및 공개 재검증: 2026-10-04 / candidate 94bcd16
+
+사업자용 GABA 핵심 5문장 전체 복사 버튼을 누르면 해당 버튼이 `복사 완료`로 바뀌고 2.4초 뒤 원래 상태로 돌아가도록 고도화했다. PR #223 checks, main workflow `37208889644`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드와 모바일 브라우저 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-FULL-SHARE-COPY-ACK-20261004`, `E-UI-CONTRACT-FULL-SHARE-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-FULL-SHARE-COPY-ACK-20261004`, `E-LIVE-PUBLIC-FULL-SHARE-COPY-ACK-20261004`.
+
+## 사업자용 공유 문장 개별 복사 상태 및 공개 재검증: 2026-10-04 / candidate 5aa9f05
+
+사업자용 GABA 핵심 5문장 카드에서 개별 문장을 복사하면 해당 카드만 `복사 완료`로 바뀌고 2.4초 뒤 원래 상태로 돌아오도록 고도화했다. PR #222 필수 checks, main workflow `37208090180`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드와 모바일 브라우저 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-SHARE-LINE-COPY-ACK-20261004`, `E-UI-CONTRACT-SHARE-LINE-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-SHARE-LINE-COPY-ACK-20261004`, `E-LIVE-PUBLIC-SHARE-LINE-COPY-ACK-20261004`.
+
+## 연구 카드 복사 완료 상태 및 TF freshness 복구: 2026-10-04 / candidate bb5e260
+
+연구 카드의 결과·출처 복사 성공을 카드별 ‘복사 완료’ 상태로 표시하도록 고도화했다. PR #220 checks와 로컬 검증을 통과했으며, 첫 배포 후보에서 확인된 487분 heartbeat freshness 문제는 공식 TF pulse run `37207031442`와 보호 PR #221로 갱신했다. main workflow `37207209603`와 live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했다. 실제 클립보드·모바일 공유 UI 검증은 외부 항목으로 남겼고 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COPY-ACK-20261004`, `E-UI-CONTRACT-RESEARCH-COPY-ACK-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COPY-ACK-20261004`, `E-LIVE-PUBLIC-RESEARCH-COPY-ACK-20261004`, `E-TF-PULSE-REFRESH-20261004`.
+
+## 연구 결과 공유 문맥 보강 및 공개 재검증: 2026-10-04 / candidate 348f9b6
+
+연구 카드의 결과 복사를 연구 대상·방법, 관찰 결과, 연구 범위, 원문 출처와 해당 연구 딥링크를 포함하는 공유 블록으로 고도화했다. 사업자용 GABA 5문장 전체 복사에는 공개 안내서 링크를 추가했다. PR #219, main workflow `37206009673`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며 실제 클립보드와 모바일 공유 UI 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-SHARE-CONTEXT-20261004`, `E-UI-CONTRACT-RESEARCH-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-RESEARCH-SHARE-CONTEXT-20261004`.
+
+## 전문가 영상 공유 링크 주제 필터 복원 및 공개 재검증: 2026-10-04 / candidate 597bf37
+
+유효한 `?video=` 공유 링크가 선택 영상의 초기 재생 상태와 주제 필터까지 복원하도록 보강했다. PR #218, main workflow `37204949680`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며, 브라우저 런타임 영상 재생과 필터 전환 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-CONTEXT-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-CONTEXT-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-CONTEXT-20261004`.
+
+## 전문가 영상 공유 링크 직접 재생 및 배포 재검증: 2026-10-04 / candidate 2305b5b
+
+유효한 `?video=` 공유 링크가 선택 영상의 초기 재생 상태까지 복원하도록 보강했다. PR #217, main workflow `37203920793`, live validator HTTP 200·STATIC·공개 데이터 정합성·제품 독립 경계를 확인했으며, 브라우저 런타임 영상 재생 검증은 외부 항목으로 남겼다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-DEEPLINK-20261004`, `E-UI-CONTRACT-EXPERT-VIDEO-DEEPLINK-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-DEEPLINK-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-DEEPLINK-20261004`.
+
+## 공유·직접 진입 해시 재정렬과 뷰포트 변경 보강: 2026-10-04 / candidate cf893f8
+
+lazy 콘텐츠가 정착된 뒤 공유·직접 진입 제목을 고정 헤더·읽기 레일 아래로 재정렬하고, 320px→390px 같은 페이지 폭 변경에서도 기준선을 재계산하도록 보강했다. 사용자 입력 후 자동 재정렬을 취소해 읽기 흐름을 보호했으며, PR #216·main workflow `37202619125`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 320px·390px 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-DEEP-LINK-REALIGN-20261004`, `E-CDP-DEEP-LINK-REALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-REALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-REALIGN-20261004`.
+
+## 초소형 모바일 회복 경로 마지막 행 중앙 정렬 및 공개 재검증: 2026-10-04 / candidate a13e82f
+
+320px 이하에서 수면·회복 14단계 지도의 마지막 13·14단계를 3·4열에 중앙 배치해 6·6·2 경로의 시각적 끝맺음을 보완했다. 기존 행 수와 터치 폭, 390px 흐름은 유지했으며, PR #213·main workflow `37200663786`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 기준 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-RECOVERY-END-20261004`, `E-CDP-NARROW-RECOVERY-END-20261004`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-END-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-END-20261004`.
+
+## 초소형 모바일 회복 경로 터치·가독성 보강 및 공개 재검증: 2026-10-04 / candidate 5bf2921
+
+320px 이하에서 수면·회복 14단계 지도가 지나치게 압축되지 않도록 6·6·2의 3행으로 재배치하고 단계 버튼·아이콘을 키웠다. 390px의 7·7 흐름은 유지했으며, PR #212·main workflow `37199796734`·live validator HTTP 200·STATIC·공개 데이터 정합성·Chrome DevTools fallback 320px·390px 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261004`, `E-CDP-NARROW-RECOVERY-MAP-20261004`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261004`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261004`.
+
+## 태블릿 읽기 진행 레일 기준선 정렬 및 공개 재검증: 2026-10-04 / candidate fc07f6f
+
+701px·900px 태블릿에서 헤더 높이 70px과 읽기 진행 레일의 top을 맞춰 헤더 아래 기준선 오차를 제거했다. 공개 768px·390px Chrome DevTools fallback에서 진행 레일 정렬·가로폭·오류 기준을 확인했고, PR #211·main workflow `37198360203`·live validator HTTP 200·STATIC 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-TABLET-PROGRESS-ALIGN-20261004, E-CDP-TABLET-PROGRESS-ALIGN-20261004, E-DEPLOY-PIPELINE-TABLET-PROGRESS-ALIGN-20261004, E-LIVE-PUBLIC-TABLET-PROGRESS-ALIGN-20261004.
+
+## 태블릿 히어로 공개 안내 패널 보강 및 공개 재검증: 2026-10-04 / candidate c0b08ee
+
+701px·900px 태블릿에서 제품 독립 과학 안내 고지문과 읽기 레일이 자연 이미지 위에서 흐려지지 않도록 폭 340px 반투명 editorial panel과 blur를 적용했다. 768px·820px Chrome DevTools fallback에서 가로 넘침과 오류가 없었고, PR #210·main workflow `37197239653`·live validator HTTP 200·STATIC 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-TABLET-HERO-DISCLOSURE-20261004, E-CDP-TABLET-HERO-DISCLOSURE-20261004, E-DEPLOY-PIPELINE-TABLET-HERO-DISCLOSURE-20261004, E-LIVE-PUBLIC-TABLET-HERO-DISCLOSURE-20261004.
+
+## 모바일 큰 글씨 제어 라벨 보강 및 공개 재검증: 2026-10-04 / candidate 37147625
+
+381px·430px 모바일 헤더에서 `가+ 큰 글씨` 기능명이 실제로 보이도록 읽기 크기 제어를 보강하고, 320px 이하에서는 컴팩트 44px 터치 타깃을 유지했다. 큰 글씨 전환 시 `가− 기본 글씨` 상태와 가로폭을 확인했으며, PR #209·main workflow `37196206238`·live validator HTTP 200·STATIC·Chrome DevTools fallback 390px·320px 공개 검증을 통과했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-MOBILE-TYPE-CONTROL-20261004, E-CDP-MOBILE-TYPE-CONTROL-20261004, E-DEPLOY-PIPELINE-MOBILE-TYPE-CONTROL-20261004, E-LIVE-PUBLIC-MOBILE-TYPE-CONTROL-20261004.
+
+## 전문가 영상 갤러리 공개 화면 재점검 및 NAVI 동기화: 2026-10-04 / candidate 73b32d2
+
+전문가 영상 섹션의 9개 영상, 주제 필터, 선택 즉시 재생 영역을 390px·1440px에서 다시 점검했다. 모바일에서는 2열 카드가 안정적으로 유지되고 데스크톱에서는 선택 영상과 갤러리가 함께 보였으며, 최신 정적 공개본 live validator와 NAVI project-state validation을 통과했다. 로컬 목표 감사의 제품·주문·Worker 게이트는 공개 사이트와 분리된 WAITING/VERIFYING 상태로 유지한다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: E-LOCAL-BUILD-VIDEO-GALLERY-QA-20261004, E-CDP-VIDEO-GALLERY-QA-20261004, E-LIVE-PUBLIC-VIDEO-GALLERY-QA-20261004.
+
+## 좁은 모바일 연구 결과 카드 가독성 보강 공개 배포: 2026-10-04 / candidate 53a7c41
+
+320px에서 연구 결과 라벨이 임의의 글자 단위로 끊기지 않도록 기본 폭을 보정하고, 350px 이하에서는 `지표명 → 결과값 → 방향 그래픽`의 세 줄 구조로 재배치했다. 390px 흐름은 유지했으며, PR #207·#208, main workflow `37194121269`, Chrome DevTools fallback 320px·390px, live validator HTTP 200·STATIC을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: E-LOCAL-BUILD-NARROW-SIGNAL-LABEL-20261004, E-CDP-NARROW-SIGNAL-LABEL-20261004, E-DEPLOY-PIPELINE-NARROW-SIGNAL-LABEL-20261004, E-LIVE-PUBLIC-NARROW-SIGNAL-LABEL-20261004.
+
+## 성장·면역 연구 방향 그래픽 공개 배포: 2026-10-04 / candidate 074822b
+
+성장호르몬·면역 연구 카드의 결과 방향을 상승·하강 그래픽과 자연어 결과로 함께 표시해 모바일과 데스크톱에서 빠르게 읽도록 보강했다. 그래픽이 실제 효과 크기나 수치를 뜻하지 않는다는 안내를 유지했으며, PR #206·main workflow `37192302993`·Chrome DevTools fallback 390px·1440px·live validator HTTP 200·STATIC을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: E-LOCAL-BUILD-DIRECTION-GRAPHIC-20261004, E-CDP-DIRECTION-GRAPHIC-20261004, E-DEPLOY-PIPELINE-DIRECTION-GRAPHIC-20261004, E-LIVE-PUBLIC-DIRECTION-GRAPHIC-20261004.
+
+## 비교 연구 결과 미터 보강 공개 배포: 2026-10-04 / candidate 1cc9440
+
+연구 결과 카드의 작은 선 중심 표현을 5단계 질적 미터로 보강하고 `더 많이·덜 증가/감소` 문구를 함께 표시했다. 실제 효과 크기나 수치를 뜻하지 않는다는 안내는 유지했으며, PR #205·main workflow `37190962129`·Chrome DevTools fallback 390px·1440px·live validator HTTP 200·STATIC을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-QUALITATIVE-METER-20261004, E-CDP-QUALITATIVE-METER-20261004, E-DEPLOY-PIPELINE-QUALITATIVE-METER-20261004, E-LIVE-PUBLIC-QUALITATIVE-METER-20261004.
+
+## 연구 확장 지도 시작점·딥링크 방향 보강 공개 배포: 2026-10-04 / candidate c747f67
+
+`06 · 연구의 확장`에 진입하면 첫 연구 영역인 `인지`가 기본 활성화되고, 특정 연구 딥링크를 열면 지도·상세 카드·읽기 진행명이 같은 주제를 가리키도록 보완했다. 연구 지도에서 상세 결과로 이어지는 방향이 분명해졌으며 모바일·데스크톱 레이아웃과 제품 독립 흐름은 유지했다. PR #204, main workflow `37189726191`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-MAP-ENTRY-20261004, E-PLAYWRIGHT-RESEARCH-MAP-ENTRY-20261004, E-DEPLOY-PIPELINE-RESEARCH-MAP-ENTRY-20261004, E-LIVE-PUBLIC-RESEARCH-MAP-ENTRY-20261004.
+
+## 수면·회복 14단계 현재 위치 표시 공개 배포: 2026-10-04 / candidate 0641f60
+
+수면과 회복 카드 지도 위에 현재 단계명과 진행 번호를 추가해 아이콘 지도와 자동 전환 카드의 연결을 강화했다. 단계 클릭 시 지도 표식·카드·진행 번호가 함께 바뀌며 기존 3초 자동 전환·모바일 우선 레이아웃·제품 독립 흐름은 유지했다. PR #203, main workflow `37188742301`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RECOVERY-MAP-STAGE-CUE-20261004, E-PLAYWRIGHT-RECOVERY-MAP-STAGE-CUE-20261004, E-DEPLOY-PIPELINE-RECOVERY-MAP-STAGE-CUE-20261004, E-LIVE-PUBLIC-RECOVERY-MAP-STAGE-CUE-20261004.
+
+## 사업자용 5문장 전체 복사 공개 배포: 2026-10-04 / candidate 58bbc70
+
+마지막 이야기 공유 장의 사업자용 활용 자료에 `전체 복사` 버튼을 추가해 GABA 핵심 5문장을 한 번에 가져갈 수 있도록 보완했다. 기존 문장별 복사와 제품 독립 문구를 유지했으며 PR #202, main workflow `37187761596`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공유 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-BUSINESS-COPY-ALL-20261004, E-PLAYWRIGHT-BUSINESS-COPY-ALL-20261004, E-DEPLOY-PIPELINE-BUSINESS-COPY-ALL-20261004, E-LIVE-PUBLIC-BUSINESS-COPY-ALL-20261004.
+
+## 활용에서 발효와 안전으로 이어지는 편집 전환 공개 배포: 2026-10-04 / candidate 8d493d3
+
+국내외 활용 카드 뒤에 `다음 장 · 활용은 만들어지는 과정에서 이어집니다 → 발효와 안전` 전환을 추가해 연구 → 활용 → 만들어지는 과정의 방향을 한 번에 읽도록 보완했다. PR #201과 main workflow `37186666660`, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공개 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-APPLICATION-FERMENTATION-HANDOFF-20261004, E-PLAYWRIGHT-APPLICATION-FERMENTATION-HANDOFF-20261004, E-DEPLOY-PIPELINE-APPLICATION-FERMENTATION-HANDOFF-20261004, E-LIVE-PUBLIC-APPLICATION-FERMENTATION-HANDOFF-20261004.
+
+## 사업자용 GABA 공유 패키지 공개 배포: 2026-10-04 / candidate 02f8fac
+
+마지막 이야기 공유 장에 사업자용 활용 자료 안내를 먼저 노출하고, 기존 검증 표제를 유지한 5문장 공유 패키지를 펼치기·복사할 수 있도록 고도화했다. 모바일·데스크톱에서 제품 독립 정보 흐름과 Apple 톤앤매너를 유지했으며 PR #200, main workflow 37185751209, live validator HTTP 200·STATIC, Playwright Chromium fallback 390px·1440px 공유 흐름을 확인했다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-BUSINESS-SHARE-KIT-20261004, E-PLAYWRIGHT-BUSINESS-SHARE-KIT-20261004, E-DEPLOY-PIPELINE-BUSINESS-SHARE-KIT-20261004, E-LIVE-PUBLIC-BUSINESS-SHARE-KIT-20261004.
+
+## 모바일 전문가 영상 정보 계층 고도화 공개 배포: 2026-10-04 / candidate 0feb5743
+
+700px 이하에서 선택 전문가 영상의 제목·채널·공유 동작을 세로형 영상 프레임보다 먼저 읽도록 보완했다. PR #197과 main workflow 37182224154, live validator HTTP 200·STATIC, Playwright Chromium fallback 320·350·390·1440px 선택 흐름을 확인했다. 9:16 비율·가로폭·오류 기준을 통과했으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-VIDEO-CONTEXT-20261004, E-PLAYWRIGHT-MOBILE-VIDEO-CONTEXT-20261004, E-DEPLOY-PIPELINE-MOBILE-VIDEO-CONTEXT-20261004, E-LIVE-PUBLIC-MOBILE-VIDEO-CONTEXT-20261004.
+
+## 공개 사이트 전 구간 시각 감리 및 NAVI 동기화: 2026-10-04 / candidate 66ec3c6
+
+GitHub Pages 공개본의 첫 화면·수면과 회복·연구 지도·전문가 영상·이야기 공유 장을 390px·1440px에서 직접 진입해 10개 캡처를 확인했다. 화면 폭·page error·console error 기준을 통과했고, 모바일 회복 카드·연구 지도·전문가 영상 gallery와 데스크톱 연구 지도·feature panel의 이미지 비율과 정보 계층이 안정적으로 유지됐다. 로컬 검증과 live validator도 재확인했으며 NAVI는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LIVE-PUBLIC-VISUAL-PUBLISHING-20261004.
+
+## 전문가 영상 공유·모바일 진행 문맥 고도화 공개 배포: 2026-10-04 / candidate 34c5b08
+
+전문가 영상 선택 직후 공유해도 선택 영상 제목·본문·`?video=...#expert-videos` 딥링크가 유지되도록 보완하고, 모바일 부드러운 스크롤 중 읽기 진행 라벨이 `전문가 영상`과 일치하도록 고정했다. PR #194·#196, heartbeat refresh PR #195, main workflow 37181007734, Pages·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성·Playwright 390/1440px 인터랙션 17/17을 확인했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-EXPERT-VIDEO-SHARE-20261004, E-PLAYWRIGHT-EXPERT-VIDEO-SHARE-20261004, E-DEPLOY-PIPELINE-EXPERT-VIDEO-SHARE-20261004, E-LIVE-PUBLIC-EXPERT-VIDEO-SHARE-20261004.
+
+## 최종 NAVI 문서 동기화 공개 재검증: 2026-10-04 / candidate cc312de
+
+NAVI 문서 동기화 후 최종 공개 candidate에서 live validator와 Playwright Chromium fallback 55개 조합을 재실행했다. 320·350·390·768·1440px × 11개 주요 장에서 가로 넘침·페이지 오류·콘솔 오류가 0건이었고, 직전 UI 보정 candidate 91808af와 동일한 공개 화면이 유지됐다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LIVE-PUBLIC-NARROW-PHONE-20261004.
+
+## 초소형 모바일 연구 카드 폭 보정 및 공개본 전수 감리: 2026-10-04 / candidate 91808af
+
+320px에서 수면 연구 도표가 내부 그리드의 고정 최소 폭으로 잘리던 문제를 확인하고, 카드의 두 번째 열을 축소 가능한 구조로 보정했다. PR #193, main workflow 37179404463, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. Playwright Chromium fallback의 320·350·390·768·1440px × 11개 주요 장 직접 진입 55개 조합에서 가로 넘침·페이지 오류·콘솔 오류가 0건이었고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-NARROW-PHONE-20261004, E-PLAYWRIGHT-NARROW-PHONE-20261004, E-DEPLOY-PIPELINE-NARROW-PHONE-20261004, E-LIVE-PUBLIC-NARROW-PHONE-20261004.
+
+## 모바일 터치 중 수면·회복 카드 읽기 흐름 공개 배포: 2026-10-04 / candidate e6802d3
+
+모바일에서 수면·회복 카드를 누르거나 스와이프하는 동안 자동 전환이 계속될 수 있던 흐름을 보완했다. 터치 시작부터 종료까지 현재 단계를 유지하고, 손가락을 떼면 3초 자동 전환을 재개하며, 좌우 스와이프는 다음 단계로 이동한 뒤 수동 정지 상태를 유지한다. PR #192, main workflow 37178489672, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RECOVERY-TOUCH-20261004, E-PLAYWRIGHT-RECOVERY-TOUCH-20261004, E-DEPLOY-PIPELINE-RECOVERY-TOUCH-20261004, E-LIVE-PUBLIC-RECOVERY-TOUCH-20261004.
+
+## 수면·회복 자동 카드 읽기 흐름 공개 배포: 2026-10-04 / candidate cbf05f6
+
+수면·회복 14단계 카드가 포인터나 키보드 포커스를 한 번만 받아도 영구 정지하던 흐름을 보완했다. 읽기 중 상호작용 일시정지와 사용자가 직접 누른 일시정지를 분리해, 상호작용이 끝나면 3초 자동 전환을 재개하고 수동 정지는 유지한다. reduced-motion 환경에서는 자동 전환을 끄고 상태 문구를 표시한다. PR #191, main workflow 37177762069, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RECOVERY-AUTOPLAY-20261004, E-PLAYWRIGHT-RECOVERY-AUTOPLAY-20261004, E-DEPLOY-PIPELINE-RECOVERY-AUTOPLAY-20261004, E-LIVE-PUBLIC-RECOVERY-AUTOPLAY-20261004.
+
+## 모바일 연구 결과 도표 보조문구 가독성 공개 배포: 2026-10-04 / candidate 43e5942
+
+연구 결과 도표의 모바일 증가·감소 방향 표기와 시각 요소 설명문을 키워 320px·390px에서도 핵심 비교가 먼저 읽히도록 보완했다. 연구 수치·출처·제품 독립 경계는 변경하지 않았다. PR #190, main workflow 37176650203, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했고, NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-CHART-LEGIBILITY-20261004, E-PLAYWRIGHT-RESEARCH-CHART-LEGIBILITY-20261004, E-DEPLOY-PIPELINE-RESEARCH-CHART-LEGIBILITY-20261004, E-LIVE-PUBLIC-RESEARCH-CHART-LEGIBILITY-20261004.
+
+## 반응형 헤더 경계 보완 공개 배포: 2026-10-04 / candidate 25c55f9
+
+861px에서 전체 내비게이션이 너무 일찍 열리며 오른쪽 공유 버튼이 잘리던 문제를 확인하고, compact 헤더·메뉴 배경의 상한을 900px로 연장했다. PR #189, main workflow 37175326245, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-TABLET-BREAKPOINT-20261004, E-PLAYWRIGHT-TABLET-BREAKPOINT-20261004, E-DEPLOY-PIPELINE-TABLET-BREAKPOINT-20261004, E-LIVE-PUBLIC-TABLET-BREAKPOINT-20261004.
+
+## 태블릿 헤더 큰 글씨 조절 표식 공개 배포: 2026-10-04 / candidate 45a01bf
+
+701–860px 태블릿 헤더에서 빈 버튼처럼 보이던 큰 글씨 조절 버튼에 `가+` 표식을 복원했다. PR #188, main workflow 37174574201, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-TABLET-READING-CONTROL-20261004, E-PLAYWRIGHT-TABLET-READING-CONTROL-20261004, E-DEPLOY-PIPELINE-TABLET-READING-CONTROL-20261004, E-LIVE-PUBLIC-TABLET-READING-CONTROL-20261004.
+
+## 모바일 연구 기준 범례 가독성 공개 배포: 2026-10-04 / candidate 746fd126
+
+모바일 연구 기준 범례를 한 줄 압축에서 세로 흐름으로 정리하고, 연구 기준 제목·범례·설명 글자 크기를 13px·13px·12px로 조정했다. 연구 확장 제목의 줄바꿈 뒤 공백도 보존해 화면과 접근성 텍스트의 문장 흐름을 맞췄다. PR #187, main workflow 37173572877, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-MOBILE-RESEARCH-LEGEND-20261004, E-PLAYWRIGHT-MOBILE-RESEARCH-LEGEND-20261004, E-DEPLOY-PIPELINE-MOBILE-RESEARCH-LEGEND-20261004, E-LIVE-PUBLIC-MOBILE-RESEARCH-LEGEND-20261004.
+
+## 모바일 연구 읽기 순서 가독성 공개 배포: 2026-10-04 / candidate 76b3adc
+
+모바일 연구 지도 아래 한 줄로 압축되어 있던 읽는 순서를 지도·대상·결과·해석 4단계 시각 순서표로 정리했다. 모바일 본문은 13px, 번호 원형은 30px로 조정해 연구 카드를 어떤 순서로 읽는지 즉시 파악하도록 했으며, 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다. PR #186, main workflow 37172733343, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY로 유지한다.
+
+증적: E-LOCAL-BUILD-RESEARCH-READ-ORDER-20261004, E-PLAYWRIGHT-RESEARCH-READ-ORDER-20261004, E-DEPLOY-PIPELINE-RESEARCH-READ-ORDER-20261004, E-LIVE-PUBLIC-RESEARCH-READ-ORDER-20261004.
+
+## 전문가 영상 fallback 포스터 공개 배포: 2026-10-04 / candidate `c97d2ac`
+
+원격 YouTube 썸네일이 응답하지 않을 때도 수면·자율신경·연구·GABA란 주제를 기존 자연 이미지 톤의 fallback 포스터로 구분하도록 보완했다. 실제 썸네일은 우선 사용하며, 필터·선택·즉시 재생·출처·공유 흐름은 유지했다. 영상 재생에 필요하지 않은 iframe `web-share` 권한 토큰을 제거해 콘솔 경고를 정리했다. PR #185, main workflow `37171708026`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했고, NAVI 문서 동기화 당시 candidate `88c6efd`에서도 라이브 검증을 통과했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-POSTERS-20261004`, `E-PLAYWRIGHT-EXPERT-VIDEO-POSTERS-20261004`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-20261004`, `E-LIVE-PUBLIC-EXPERT-VIDEO-POSTERS-FINAL-20261004`.
+
+## 연구 결과 비교 도표 방향성 공개 배포: 2026-10-04 / candidate `86891bc`
+
+연구 결과 카드의 비교 조건과 GABA 조건이 문구를 다시 읽지 않아도 구분되도록 상대 방향 막대 길이를 보완했다. 실제 효과 크기로 오인하지 않도록 방향 비교 주석은 유지했으며 연구 수치·출처·제품 독립 경계는 변경하지 않았다. PR #184, main workflow `37170799368`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-PLAYWRIGHT-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-COMPARISON-DIRECTION-20261004`, `E-LIVE-PUBLIC-RESEARCH-COMPARISON-DIRECTION-20261004`.
+
+## 모바일 전문가 영상 썸네일 갤러리 공개 배포: 2026-10-04 / candidate `a77c91c`
+
+전문가 영상 게시판을 390px 모바일에서 썸네일 중심 2열 갤러리로 정리하고, 350px 이하에서는 1열로 복귀하도록 보완했다. 제목·채널명·선택 상태의 밀도를 조정해 긴 목록보다 시각적으로 빠르게 탐색하도록 했으며, 영상 선택·즉시 재생·출처·공유 흐름은 유지했다. PR #183, main workflow `37169365913`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-VIDEO-GALLERY-20261004`, `E-PLAYWRIGHT-MOBILE-VIDEO-GALLERY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-VIDEO-GALLERY-20261004`, `E-LIVE-PUBLIC-MOBILE-VIDEO-GALLERY-20261004`.
+
+## 마지막 이야기 공유 장 시각 균형 공개 배포: 2026-10-04 / candidate `ec2a1bd`
+
+마지막 장 오른쪽의 과도한 빈 공간을 저채도 동심원 신호와 GABA 워터마크로 보완했다. 모바일에서는 그래픽을 낮은 대비로 배치해 핵심 문구를 우선하고, 데스크톱에서는 시작 장면의 자연·과학 톤을 마지막 장까지 연결한다. PR #182, main workflow `37168287853`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-FINAL-SIGNAL-20261004`, `E-PLAYWRIGHT-FINAL-SIGNAL-20261004`, `E-DEPLOY-PIPELINE-FINAL-SIGNAL-20261004`, `E-LIVE-PUBLIC-FINAL-SIGNAL-20261004`.
+
+## 모바일 회복 카드 탐색 affordance 공개 배포: 2026-10-04 / candidate `8e22d51`
+
+수면·회복 보충 구간의 14단계 읽기 경로를 모바일에서 더 쉽게 찾도록 아이콘·번호 크기와 hover·focus-visible 상태를 보완했다. PR #181, main workflow `37167336445`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 390px Chrome fallback에서 14단계·가로 폭·마지막 카드 선택·자동 일시정지를 확인했으며, 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RECOVERY-MAP-AFFORDANCE-20261004`, `E-PLAYWRIGHT-RECOVERY-MAP-AFFORDANCE-20261004`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-AFFORDANCE-20261004`, `E-LIVE-PUBLIC-RECOVERY-MAP-AFFORDANCE-20261004`.
+
+## 전문가 영상 로딩 포스터 연속성 공개 배포: 2026-10-04 / candidate `44337e5`
+
+전문가 영상 선택 직후 어두운 빈 iframe처럼 보이던 순간을 보완했다. 같은 Shorts 썸네일을 9:16 프레임에 유지하고 로딩 상태만 겹쳐 보여, 실제 영상이 준비될 때까지 화면의 시각적 연속성을 지킨다. PR #179, main workflow `37166334839`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-LOADING-POSTER-20261004`, `E-PLAYWRIGHT-VIDEO-LOADING-POSTER-20261004`, `E-DEPLOY-PIPELINE-VIDEO-LOADING-POSTER-20261004`, `E-LIVE-PUBLIC-VIDEO-LOADING-POSTER-20261004`.
+
+## 모바일 보조 문구·전문가 영상 영역 고도화 공개 배포: 2026-10-04 / candidate `a2a2d3f`
+
+320px 모바일 첫 화면의 보조 문구를 12px로 조정해 읽기성을 높이고, 전문가 세로 영상 선택 영역을 250x444px로 확장해 9:16 비율을 유지했다. PR #178, main workflow `37165443025`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 320px·390px Chrome fallback에서 가로 넘침·브라우저 오류 없이 문구와 영상 프레임을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-LABEL-MEDIA-20261004`, `E-PLAYWRIGHT-MOBILE-LABEL-MEDIA-20261004`, `E-DEPLOY-PIPELINE-MOBILE-LABEL-MEDIA-20261004`, `E-LIVE-PUBLIC-MOBILE-LABEL-MEDIA-20261004`.
+
+## 수면과 회복 연결 문구 명료화 공개 배포: 2026-10-04 / candidate `eded7a9`
+
+상단 진행 레일의 모호한 `이어 읽기 / 12`를 소비자가 바로 이해할 수 있는 `다음 장으로 이어져요`로 정리했다. PR #177, main workflow `37164504662`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 문구·aria-label·제목·가로 폭·브라우저 오류를 확인했고 320px·1440px 대표 감사도 통과했다. 한 차례 YouTube iframe의 Chrome Permissions Policy 경고가 관찰됐으나 즉시 재실행에서 재현되지 않아 외부 iframe 잔여 검증으로 기록했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-INTERLUDE-COPY-20261004`, `E-PLAYWRIGHT-INTERLUDE-COPY-20261004`, `E-DEPLOY-PIPELINE-INTERLUDE-COPY-20261004`, `E-LIVE-PUBLIC-INTERLUDE-COPY-20261004`.
+
+## 같은 페이지 해시 맥락 동기화 공개 배포: 2026-10-04 / candidate `a8689a3`
+
+같은 공개 안내서 안에서 해시가 바뀔 때 연구 선택과 이전 장 제목·진행 레일이 어긋날 수 있던 상태 경합을 보완했다. 공통 해시→장 변환기와 현재 해시가 아닌 초기 정렬 타이머 중단을 적용했다. PR #176, main workflow `37163479968`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 recovery-break→research-skin→expert-videos 이동, 제목·진행 레일·가로 폭·브라우저 오류 없음을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-HASH-CONTEXT-20261004`, `E-PLAYWRIGHT-HASH-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-HASH-CONTEXT-20261004`, `E-LIVE-PUBLIC-HASH-CONTEXT-20261004`.
+
+## 현재 장 이동 읽기 레일 동기화 공개 배포: 2026-10-04 / candidate `a396ca8`
+
+모바일 메뉴 이동 직후 읽기 진행 레일과 브라우저 제목이 이전 장으로 되돌아가던 상태 경합을 보완했다. smooth scroll 동안 목적지 장을 유지하고, 사용자의 직접 스크롤과 연구→전문가 영상 연속 이동에서는 잠금을 해제한다. PR #174, main workflow `37162395001`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 연구 지도 즉시 동기화, 연구 카드·전문가 영상·마지막 공유, 가로 폭·브라우저 오류 없음을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-CHAPTER-RAIL-SYNC-20261004`, `E-PLAYWRIGHT-CHAPTER-RAIL-SYNC-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-RAIL-SYNC-20261004`, `E-LIVE-PUBLIC-CHAPTER-RAIL-SYNC-20261004`.
+
+## 현재 읽는 위치 공유 맥락 공개 배포: 2026-10-04 / candidate `b03b7df`
+
+자연 스크롤로 마지막 장까지 읽은 뒤에도 공유 버튼이 이전 장의 해시를 사용하던 흐름을 보완했다. 현재 장·연구 카드·선택 전문가 영상에 맞춰 공유 URL을 재구성하며, `#research-muscle`, `?video=RLAU1VWGsaI#expert-videos`, `#final` 주소를 각각 확인했다. PR #173, main workflow `37161370503`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 메뉴·큰 글씨·연구 선택·영상 iframe·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-SHARE-CONTEXT-20261004`, `E-PLAYWRIGHT-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-SHARE-CONTEXT-20261004`.
+
+## 마지막 이야기 공유 라벨 일관성 공개 배포: 2026-10-04 / candidate `26077a2`
+
+본문의 `12 · 이야기 공유`와 상단 진행 레일·브라우저 제목의 `공유하기`를 `이야기 공유`로 통일했다. PR #172, main workflow `37160262285`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 제목·진행 레일·본문 번호·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-FINAL-LABEL-20261004`, `E-PLAYWRIGHT-FINAL-LABEL-20261004`, `E-DEPLOY-PIPELINE-FINAL-LABEL-20261004`, `E-LIVE-PUBLIC-FINAL-LABEL-20261004`.
+
+## 수면과 회복 진행 문구 명료화 공개 배포: 2026-10-04 / candidate `14528e9`
+
+`잠깐, 수면과 회복` 구간의 모호한 `보충 / 12` 진행 표시를 `이어 읽기 / 12`로 바꾸고, 보조기기 안내 문장도 같은 뜻으로 정렬했다. PR #171, main workflow `37159578042`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 최종 공개 390px Chrome fallback에서 문구·aria-label·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-INTERLUDE-PROGRESS-20261004`, `E-PLAYWRIGHT-INTERLUDE-PROGRESS-20261004`, `E-DEPLOY-PIPELINE-INTERLUDE-PROGRESS-20261004`, `E-LIVE-PUBLIC-INTERLUDE-PROGRESS-20261004`.
+
+## 연구 지도 딥링크 상태 복원 공개 배포: 2026-10-04 / candidate `4d9bfde`
+
+`#research-skin` 등 연구 카드 공유 링크가 초기 진입에서 선택 연구 지도·상세 카드·읽기 진행·브라우저 제목을 함께 복원하도록 보완했다. 브라우저 해시 변경 시에도 연구 주제 상태를 동기화한다. PR #170, main workflow `37158456376`, NAVI 문서 동기화 workflow `37158735199`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·최종 candidate `cb494e2`·공개 데이터 정합성이 성공했다. 최종 공개본을 대상으로 Playwright Chrome fallback 390/1440px에서 피부 딥링크 진입 후 근육 해시 변경을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-PLAYWRIGHT-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-DEEPLINK-CONTEXT-20261004`, `E-LIVE-PUBLIC-RESEARCH-DEEPLINK-CONTEXT-20261004`.
+
+## 선택 영상 카드 직접 공유 고도화 공개 배포: 2026-10-04 / candidate `e709f2c`
+
+전문가 영상 선택 카드 안에 `이 영상 공유` 행동을 추가했다. 현재 영상의 제목·video 쿼리·`#expert-videos` 위치를 그대로 공유하도록 기존 chapter-aware payload를 연결하고, 모바일에서도 읽기 쉬운 dark-panel 버튼과 focus-visible 상태를 적용했다. PR #169, main workflow `37157666983`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 공개 320/390/1440px에서 공유 버튼·toast·payload·포스터·진행 표시·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-DIRECT-VIDEO-SHARE-20261004`, `E-PLAYWRIGHT-DIRECT-VIDEO-SHARE-20261004`, `E-DEPLOY-PIPELINE-DIRECT-VIDEO-SHARE-20261004`, `E-LIVE-PUBLIC-DIRECT-VIDEO-SHARE-20261004`.
+
+## 전문가 영상 공유·재진입 맥락 고도화 공개 배포: 2026-10-04 / candidate `68efaca`
+
+선택한 전문가 영상의 식별자를 `?video=...#expert-videos`에 보존하고, 공유 URL 재진입 시 같은 영상과 장 위치를 복원하도록 고도화했다. 브라우저 제목과 공유 문구도 현재 장·선택 영상에 맞춰 갱신하고 recovery heading의 접근성 문장을 보정했다. PR #167 merge `a1de959`, heartbeat PR #168 merge `68efaca`, main workflow `37156517433`, live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px에서 클릭·새로고침 복원·포스터/iframe 지연·가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-SHARE-CONTEXT-20261004`, `E-PLAYWRIGHT-VIDEO-SHARE-CONTEXT-20261004`, `E-DEPLOY-PIPELINE-VIDEO-SHARE-CONTEXT-20261004`, `E-LIVE-PUBLIC-VIDEO-SHARE-CONTEXT-20261004`.
+
+## 모바일 퍼블리싱 성능·타이포그래피 고도화 공개 배포: 2026-10-04 / candidate `d71ab6c`
+
+첫 화면에 보이지 않는 전문가 영상 썸네일을 지연 로딩으로 전환해 초기 모바일 진입 요청을 줄이고, 한국어 장문 제목에 균형 잡힌 줄바꿈을 적용했다. PR #166, main workflow `37154976973`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px 직접 링크, 초기 영상 요청 0건, 연구 지도 근육 카드 이동, 가로 폭·브라우저 오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-PERFORMANCE-20261004`, `E-PLAYWRIGHT-MOBILE-PERFORMANCE-20261004`, `E-DEPLOY-PIPELINE-MOBILE-PERFORMANCE-20261004`, `E-LIVE-PUBLIC-MOBILE-PERFORMANCE-20261004`.
+
+## 직접 공유 링크 정렬 안정화 공개 배포: 2026-10-04 / candidate `818cc2f`
+
+`#expert-videos` 같은 장으로 직접 진입할 때 이미지·폰트·레이아웃이 늦게 안정화되어 제목이 어긋날 수 있는 흐름을 PR #165에서 보완했다. 초기 정렬과 다중 안정화 시점, `window.load`·`document.fonts`·`ResizeObserver` 재정렬을 적용했다. main workflow `37153757926`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬·공개 320/390/1440px Chrome fallback에서 제목·진행 레일·영상 영역·가로 폭·오류를 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-DEEP-LINK-ALIGN-20261004`, `E-PLAYWRIGHT-DEEP-LINK-ALIGN-20261004`, `E-DEPLOY-PIPELINE-DEEP-LINK-ALIGN-20261004`, `E-LIVE-PUBLIC-DEEP-LINK-ALIGN-20261004`.
+
+## 전문가 영상 선택 포커스 복귀 공개 배포: 2026-10-04 / candidate `c33b427`
+
+전문가 영상 카드를 클릭하거나 Enter로 선택한 뒤 새 영상 영역을 바로 읽을 수 있도록 `#expert-video-feature`에 포커스를 복귀시키고 동적 제목 연결·`aria-live`·focus-visible 윤곽선을 보강했다. PR #164, main workflow `37152307391`, Pages 배포·라이브 smoke·release status와 live validator HTTP 200·STATIC·공개 데이터 정합성이 성공했다. 로컬 390px Chrome fallback에서 영상 iframe 전환·선택 카드 1개·가로 넘침 없음·오류 없음을 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-FEATURE-FOCUS-20261004`, `E-PLAYWRIGHT-VIDEO-FEATURE-FOCUS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FEATURE-FOCUS-20261004`, `E-LIVE-PUBLIC-VIDEO-FEATURE-FOCUS-20261004`.
+
+## 공개 배포 자동 재감리·NAVI 동기화: 2026-10-04 / candidate `4d94150`
+
+최신 공개본을 실제 독자 흐름으로 자동 재현했다. 390px 메뉴·포커스·연구 지도·수면 영상 필터·iframe 즉시 재생·3초 회복 카드, 320/390/412/768/1440px 직접 해시 진입을 확인했고 새 CRITICAL/MAJOR 결함은 없었다. NAVI 문서 동기화 후 main workflow `37151251781`의 Pages 배포·라이브 smoke·release status까지 성공했으며 라이브 validator도 HTTP 200·STATIC·candidate `4d94150`·정적 공개 경계 정합성을 유지했다. Browser 플러그인 부재로 Chrome fallback을 사용했으며 외부 브라우저·실사용자·독립 과학·규제 감수는 남아 있다. 공개 UI 코드 변경은 필요하지 않아 불필요한 재작업은 하지 않고 NAVI 증거·감사·레드팀 기록만 갱신했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다.
+
+증적: `E-PLAYWRIGHT-PUBLIC-INTERACTION-AUDIT-20261004`, `E-PLAYWRIGHT-PUBLIC-HASH-CROSSWIDTH-20261004`, `E-DEPLOY-PIPELINE-PUBLIC-RECHECK-20261004`, `E-LIVE-PUBLIC-CURRENT-RECHECK-20261004`.
+
+## 모바일 메뉴 닫힘 포커스 복귀 공개 배포: 2026-10-04 / candidate `510e9ad`
+
+모바일 메뉴 항목 이동과 배경 클릭으로 메뉴가 닫힐 때 키보드·스크린리더 포커스가 문서 배경에 남지 않도록 토글 버튼으로 복귀시켰다. PR #163, main workflow `37149705144`, Pages·라이브 smoke·release status와 공개 live validator, 390px Chrome fallback 상호작용 검증이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS-20261004`, `E-PLAYWRIGHT-MOBILE-MENU-FOCUS-20261004`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS-20261004`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS-20261004`.
+
+## 직접 해시 진입 정렬 고도화 공개 배포: 2026-10-04 / candidate `70d66b5`
+
+직접 링크로 연구·수면·전문가 영상 장에 들어올 때 제목이 고정 읽기 레일에 늦게 맞춰지던 문제를 PR #162에서 `useLayoutEffect` 초기 정렬과 180/420/780ms 안정화 재정렬로 보완했다. main workflow `37148328986`, Pages·라이브 smoke·release status, 공개 390px 해시 진입 검증과 live validator가 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-DIRECT-HASH-NAV-20261004`, `E-PLAYWRIGHT-DIRECT-HASH-NAV-20261004`, `E-DEPLOY-PIPELINE-DIRECT-HASH-NAV-20261004`, `E-LIVE-PUBLIC-DIRECT-HASH-NAV-20261004`.
+
+## 모바일 읽기 라벨·읽기 크기 조절 고도화 공개 배포: 2026-10-04 / candidate `37737d2`
+
+모바일 읽기 흐름의 진행 상태·장 표시·연구 출처·결과 방향 라벨을 12px 기준으로 보정하고, 읽기 크기 조절 버튼에 `가+`/`가−` 표기를 추가했다. PR #161, main workflow `37147186088`, Pages·라이브 smoke·release status와 공개 validator, 320/390/1440px Chrome fallback 검증이 성공했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-MOBILE-READING-CLARITY-20261004`, `E-PLAYWRIGHT-MOBILE-READING-CLARITY-20261004`, `E-DEPLOY-PIPELINE-MOBILE-READING-CLARITY-20261004`, `E-LIVE-PUBLIC-MOBILE-READING-CLARITY-20261004`.
+
+## 전문가 영상 저해상도 썸네일 방어 공개 배포: 2026-10-04 / candidate `52ff08b`
+
+YouTube 썸네일이 오류 대신 저해상도 성공 응답을 반환해도 decoded width를 검사하고, 기본·대체 이미지 모두 기준 미달이면 `GABA VIDEO` 표지를 노출하도록 PR #160에서 보완했다. 로컬·공개 Playwright, main workflow `37145916564`, Pages·라이브 smoke·release status·공개 validator를 재검증했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-RESOLUTION-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-RESOLUTION-20261004`.
+
+## 전문가 영상 썸네일 이중 실패 fallback 보완 공개 배포: 2026-10-04 / candidate `342f43f`
+
+기본·대체 썸네일 URL이 모두 실패하는 경우에도 이미지 요소가 `GABA VIDEO` 표지를 가리지 않도록 실패 상태를 보완했다. PR #158 checks, main workflow `37144428732`, Pages·라이브 smoke·release status와 공개 validator, 320/390/1440px 정상 썸네일 로딩 및 390px 강제 이중 실패 fallback을 재검증했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAIL-FALLBACK-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAIL-FALLBACK-20261004`.
+
+## 전문가 영상 썸네일 로딩 품질 공개 배포: 2026-10-04 / candidate `8093615`
+
+전문가 영상 게시판의 첫 4개 썸네일을 eager 로드하고, 지연 로드 중에는 `GABA VIDEO` 표지를 보여줘 빈 썸네일 영역이 완성도 저하로 보이지 않도록 보완했다. PR #155 checks, main workflow `37142835851`, Pages·라이브 smoke·release status, 공개 validator와 320/390/1440px Chrome fallback을 재검증했다. `수면` 필터 4개 카드와 `잠이 안 올 때 GABA 이야기` 선택 후 iframe 전환도 확인했다. 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-THUMBNAILS-20261004`, `E-PLAYWRIGHT-VIDEO-THUMBNAILS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-THUMBNAILS-20261004`, `E-LIVE-PUBLIC-VIDEO-THUMBNAILS-20261004`.
+
+## 모바일 기본 카드 장식 겹침 보정 공개 배포: 2026-10-04 / candidate `4e558ee`
+
+320px 화면에서 GABA 기본 설명 카드의 달 아이콘이 본문 마지막 줄과 겹치던 가독성 결함을 확인하고 모바일 카드에 장식 전용 하단 여백을 확보했다. 로컬 typecheck·UI contract·127 tests·build, PR #153 checks, main workflow `37141668244`, Pages·라이브 smoke·release status, 공개 validator와 320/390px Chrome fallback을 재검증했다. 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-DEFINITION-MOTIF-20261004`, `E-PLAYWRIGHT-DEFINITION-MOTIF-20261004`, `E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004`, `E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004`.
+
+## 모바일 연구 결과 카드 가독성 고도화 공개 배포: 2026-10-04 / candidate `7a6db416`
+
+320px·390px에서 연구 결과 카드가 가용 폭을 모두 사용하도록 보정해 도표 라벨의 불필요한 줄바꿈과 세로 밀도를 줄였다. 연구 문구·데이터·해석·제품 독립 경계는 변경하지 않았다. PR #151의 release-verify·site-quality-verify, main workflow `37140273727`의 정적 Pages 배포·라이브 smoke·release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback 320/390/1440px에서 카드 폭 280/350/1180px, 도표 폭 244/314/687px, 가로 넘침 없음·브라우저 오류 없음을 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-RESEARCH-CARD-WIDTH-20261004`, `E-PLAYWRIGHT-RESEARCH-CARD-WIDTH-20261004`, `E-DEPLOY-PIPELINE-RESEARCH-CARD-WIDTH-20261004`, `E-LIVE-PUBLIC-RESEARCH-CARD-WIDTH-20261004`.
+
+## 장 진입 표시와 고정 읽기 바 겹침 보정 공개 배포: 2026-10-04 / candidate `b9f21d0ceba52e0d3ea4745d65232e3661ffd7ea`
+
+장 링크로 이동할 때 제목만 맞추던 기준을 장 헤더 전체로 바꿔 `06 · 연구의 확장` 같은 작은 장 표시가 고정 읽기 진행 바 뒤에 숨지 않도록 보완했다. PR #149의 필수 검사, main workflow `37139270708`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback 320/390/1440px에서 `#research` 직접 진입 시 장 표시·제목·진행 바 간격, 가로 넘침 없음, 브라우저 오류 없음을 확인했다. 공개 과학 카피·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-CHAPTER-ENTRY-20261004`, `E-PLAYWRIGHT-CHAPTER-ENTRY-20261004`, `E-DEPLOY-PIPELINE-CHAPTER-ENTRY-20261004`, `E-LIVE-PUBLIC-CHAPTER-ENTRY-20261004`.
+
+## 모바일 전문가 영상 주제 전체 노출 공개 배포: 2026-10-04 / candidate `71960f083e21577641074358b74a0ca447cdd216`
+
+모바일 전문가 영상 주제 필터를 가로 스크롤에서 전체 주제 즉시 노출형 줄바꿈으로 바꿔 320px·390px에서도 7개 주제를 한눈에 확인할 수 있도록 보강했다. PR #147의 필수 검사, main workflow `37138030444`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback에서 320/390/1440px 가로 넘침 없음, `수용체` 필터 선택과 iframe 전환을 확인했다. 기존 과학 카피·제품 독립 경계는 변경하지 않았으며 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-VIDEO-FILTERS-20261004`, `E-PLAYWRIGHT-VIDEO-FILTERS-20261004`, `E-DEPLOY-PIPELINE-VIDEO-FILTERS-20261004`, `E-LIVE-PUBLIC-VIDEO-FILTERS-20261004`.
+
+## 출처 원문 행동 명시화 공개 배포: 2026-10-04 / candidate `32b37a11a327a351b79a3822029d35d19d58bae6`
+
+출처 읽기 브리지의 실제 연구 카드에 아이콘만 두지 않고 `원문 보기` 행동을 명시해 모바일과 큰 글씨 읽기에서 다음 행동을 바로 이해하도록 보강했다. PR #145의 필수 검사, main workflow `37136765623`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했다. 공개 Playwright Chrome fallback 320/390/1440px에서 네 단계·원문 표시·가로 넘침 없음·메뉴/연구 지도/전문가 영상 선택 재생을 확인했고, `원문 보기` 클릭은 PubMed 새 탭으로 이동했다. 기존 과학 카피·제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-SOURCE-ACTION-20261004`, `E-PLAYWRIGHT-SOURCE-ACTION-20261004`, `E-DEPLOY-PIPELINE-SOURCE-ACTION-20261004`, `E-LIVE-PUBLIC-SOURCE-ACTION-20261004`.
+
+## 출처 읽기 브리지 고도화 공개 배포: 2026-10-04 / candidate `a8cc869b2c1537b2568b2f0e99c31adc3eae9353`
+
+`출처 읽기`의 빈 연결 구간을 `누구를 살폈나요? → 어떻게 비교했나요? → 무엇이 달라졌나요? → 어디까지 알 수 있나요?`의 네 질문과 Yoto et al. 2012 PubMed 원문 예시로 보강했다. PR #143의 필수 검사, main workflow `37135553445`, Pages 배포, 라이브 smoke, release status와 공개 validator가 성공했으며 공개 Playwright Chrome fallback 320/390/1440px에서 네 단계·원문 링크·가로 넘침 없음·핵심 메뉴/영상 상호작용을 확인했다. 과학 카피·제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-SOURCE-BRIDGE-20261004`, `E-PLAYWRIGHT-SOURCE-BRIDGE-20261004`, `E-DEPLOY-PIPELINE-SOURCE-BRIDGE-20261004`, `E-LIVE-PUBLIC-SOURCE-BRIDGE-20261004`.
+
+## NAVI 문서 병합 후 최신 공개 SHA 동기화: 2026-10-04 / candidate `621251166c2902a7ea2a8fae44b5230f97242ff9`
+
+NAVI 증거·감사·레드팀 문서 PR #141 병합 후 main workflow `37134462216`의 release-verify·worker-readiness·GitHub Pages 배포·라이브 smoke·release status가 성공했다. 라이브 validator는 문서 병합 후 공개 candidate `6212511…`, HTTP 200, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 재확인했다. 공개 UI·과학 카피·제품 정보는 변경하지 않았고 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LIVE-PUBLIC-NAVI-SYNC-20261004`.
+
+## 모바일 차트 가독성·긴 장 이동 충돌 보완 공개 재검증: 2026-10-04 / candidate `b778f23b65a67cf919171d212a9305927a34d0ff`
+
+모바일 연구 결과 도표의 비교 조건·연구 메타데이터에 가독성 바닥값을 적용하고, 초기 `#top` 정렬 타이머가 사용자의 긴 장 이동을 되돌리던 충돌을 수동 이동 시 취소하도록 보완했다. PR #140의 필수 검사와 main workflow `37133909361`의 release-verify·worker-readiness·GitHub Pages 배포·라이브 smoke·release status가 성공했으며 Worker는 정적 전용 모드로 건너뛰었다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 320/390/1440px에서 차트 폭·가로 넘침·연구 지도 장 이동·전문가 영상 선택 재생·브라우저 오류 없음을 재확인했다. 공개 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`로 유지한다. 증적: `E-LOCAL-BUILD-CHART-NAV-20261004`, `E-PLAYWRIGHT-MOBILE-CHART-NAV-20261004`, `E-DEPLOY-PIPELINE-CHART-NAV-20261004`, `E-LIVE-PUBLIC-CHART-NAV-20261004`.
+
+## 출처 읽기 장의 시각·시맨틱 계층 보강: 2026-10-04 / candidate `4379325e8773cbbea9ee1a9aee86ed02ac282bab`
+
+`출처 읽기` 장에 `연구를 이해하는 마지막 단계` h2와 `연구 카드 → 원문 출처` 흐름을 추가하고 `aria-labelledby`를 연결했다. PR #138의 release-verify·site-quality-verify, main workflow `37131613828`의 release-verify·worker-readiness·정적 Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, 정적 모드, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390/1440px에서 출처 읽기 제목 정렬과 13개 장 직접 링크, 모바일 메뉴·전문가 영상 필터·선택 즉시 재생·가로 넘침·브라우저 오류 없음을 확인했다. 기존 공개 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 사용자 결정 대기(`USER_DECISION`)로 유지한다. 증적: `E-LOCAL-BUILD-READING-NOTE-20261004`, `E-PLAYWRIGHT-READING-NOTE-20261004`, `E-DEPLOY-PIPELINE-READING-NOTE-20261004`, `E-LIVE-PUBLIC-READING-NOTE-20261004`.
+
+## 모바일 장 딥링크를 실제 제목에 정렬: 2026-10-03 / candidate `a189d9432cc7003def5a791b381c6b15a55aab09`
+
+상단 메뉴와 장 직접 링크가 섹션의 넓은 상단 여백에 멈추지 않고 실제 장 제목을 sticky 읽기 레일 아래에 보여주도록 보정했다. PR #136의 release-verify·site-quality-verify, main workflow `37130208546`의 release-verify·worker-readiness·정적 Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, 정적 모드, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390/1440px에서 `#basics`, `#recovery-break`, `#research`, `#expert-videos`, `#final` 제목 정렬과 `02 / 12`, `보충 / 12`, `06 / 12`, `10 / 12`, `12 / 12` 진행표를 확인했고 모바일 메뉴 이동·영상 필터·선택 즉시 재생·가로 넘침·브라우저 오류가 없었다. 기존 공개 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 사용자 결정 대기(`USER_DECISION`)로 유지한다. 증적: `E-LOCAL-BUILD-CHAPTER-DEEPLINK-20261003`, `E-PLAYWRIGHT-CHAPTER-DEEPLINK-20261003`, `E-DEPLOY-PIPELINE-CHAPTER-DEEPLINK-20261003`, `E-LIVE-PUBLIC-CHAPTER-DEEPLINK-20261003`.
+
+## NAVI 기록 병합 후 공개본 동기화: 2026-10-03 / candidate `1d74ed2ae7ed4cc8b090c0f8f8e98dfb0bff3a81`
+
+PR #134로 앞선 읽기 진행표·직접 링크 고도화의 NAVI 증거대장을 main에 병합했다. 문서 병합 후 main workflow `37128765447`의 release-verify·worker-readiness·정적 Pages 배포·라이브 smoke·release status가 성공했고, 공개 validator는 candidate SHA `1d74ed2…`, HTTP 200, 정적 모드, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 이번 기록은 문서·운영 증거 동기화이며 공개 화면의 과학 카피나 제품 광고는 변경하지 않았다. 증적: `E-DEPLOY-PIPELINE-NAVI-DOCS-20261003`, `E-LIVE-PUBLIC-NAVI-DOCS-20261003`.
+
+## 읽기 진행표·직접 링크 정합성 고도화 공개 재검증: 2026-10-03 / candidate `33e8b6a57202c21826ec2ebf3ffcd8b55ee01466`
+
+읽기 진행표에서 실제 본문 12개 장과 수면·회복 보충 구간을 분리했다. 보충 구간은 `보충 / 12`, 마지막 공유 장은 `12 / 12`로 표시해 숫자와 본문 흐름을 일치시켰다. `#recovery-break`·`#final` 직접 링크는 이미지 레이아웃이 안정된 뒤 고정 읽기 레일 아래에 제목이 도착하도록 재정렬했다. PR #133의 release-verify·site-quality-verify, main workflow `37128146175`의 정적 Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390/1440px에서 진행표·직접 링크·전문가 영상 필터·영상 즉시 재생·가로폭·오류를 재확인했다. 공개 GABA 과학 카피와 제품 정보는 변경하지 않았다. NAVI 상태는 사용자 결정 대기(`USER_DECISION`)로 유지한다. 증적: `E-LOCAL-BUILD-READING-PROGRESS-20261003`, `E-PLAYWRIGHT-READING-PROGRESS-20261003`, `E-DEPLOY-PIPELINE-READING-PROGRESS-20261003`, `E-LIVE-PUBLIC-READING-PROGRESS-20261003`.
+
+## 모바일 전문가 영상 탐색 단서 고도화 공개 재검증: 2026-10-03 / candidate `5f7f1cdb0db9315ed39535ffb290160a98afedb9`
+
+전문가 영상 주제 필터가 모바일에서 더 이어진다는 사실을 원형 화살표 단서로 명확히 표시하고, 가로 터치 스크롤 스냅과 오버스크롤 경계를 보완했다. PR #130의 release-verify·site-quality-verify와 main workflow `37126713484`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 12개 공개 claim, 6개 master record, 제품 독립 경계를 확인했다. 공개 Playwright Chrome fallback 390px에서는 단서가 시작 시 보이고 끝에서 사라졌으며, 영상 카드 선택 시 iframe 재생과 선택 상태가 갱신됐다. 1440px에서는 필터가 한 화면에 들어왔다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 배포 전 stale TF heartbeat gate는 예약 pulse 재실행과 보호된 heartbeat PR #131 병합으로 갱신한 뒤 재배포했다. 증적: `E-LOCAL-BUILD-VIDEO-RAIL-CUE-20261003`, `E-PLAYWRIGHT-VIDEO-RAIL-CUE-20261003`, `E-DEPLOY-PIPELINE-VIDEO-RAIL-CUE-20261003`, `E-LIVE-PUBLIC-VIDEO-RAIL-CUE-20261003`, `E-NAVI-TF-FRESHNESS-20261003`.
+
+## 수면·회복 앵커와 고정 읽기 레일 충돌 보완 공개 재검증: 2026-10-03 / candidate `27e9f6f643f939e1a99bb9fe540493e76afa0860`
+
+`#recovery-break`로 바로 진입하거나 메뉴에서 수면·회복으로 이동할 때 고정 읽기 레일이 장 제목을 가리지 않도록 `.guide-recovery-break`의 상단 여백 계약을 추가했다. PR #128 필수 검사와 main workflow `37124665367`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. 공개 validator는 HTTP 200, candidate SHA 일치, 70개 번들 해시, 공개 데이터 경계를 확인했고, 공개 Playwright Chrome 320/390/1440px에서 가로 넘침·런타임 오류가 없었으며 390/1440px 앵커 제목이 읽기 레일 아래에 도착했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-ANCHOR-20261003`, `E-PLAYWRIGHT-RECOVERY-ANCHOR-20261003`, `E-DEPLOY-PIPELINE-RECOVERY-ANCHOR-20261003`, `E-LIVE-PUBLIC-RECOVERY-ANCHOR-20261003`.
+
+## 좁은 모바일 수면 연구 레이아웃 고도화 공개 재검증: 2026-10-03 / candidate `81d9dbba61ec9080a58be8c5b0824843b0a13ed9`
+
+320px에서 수면 연구 카드가 콘텐츠 최소폭 때문에 우측으로 밀리던 문제를 `min-width: 0`과 `minmax(0, 1fr)`로 보완했다. 320/390/1440px 로컬·공개 Playwright Chrome에서 수면 그리드와 문서 가로폭을 확인했고, 390px 메뉴 이동·GABA란 앵커·큰 글씨 전환·연구 지도 선택도 재검증했다. PR #126 필수 검사와 main workflow `37123264421`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했으며, 라이브 validator는 HTTP 200·정적 번들·공개 데이터 경계를 확인했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-NARROW-SLEEP-20261003`, `E-PLAYWRIGHT-NARROW-SLEEP-20261003`, `E-DEPLOY-PIPELINE-NARROW-SLEEP-20261003`, `E-LIVE-PUBLIC-NARROW-SLEEP-20261003`.
+
+## 히어로 제목 리듬·강조 색상 고도화 공개 재검증: 2026-10-03 / candidate `f2092694c7f3fb6e7ea940de828f1577769a6bf3`
+
+데스크톱에서 모바일 전용 줄바꿈 요소가 안쪽 문장까지 블록으로 만들던 선택자를 제목 직계 요소로 제한하고, `GABA에서 읽습니다`를 넓은 화면에서는 한 문장 단위로 묶었다. 모바일 줄바꿈·teal 강조, 320/390/1440px 헤더와 다음 장 진입은 유지했다. PR #124의 필수 검사, main workflow `37121944648`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, 라이브 validator가 성공했다. 로컬 Playwright 2개 상호작용 테스트와 공개 320/390/1440px 캡처를 확인했으며 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-HERO-RHYTHM-20261003`, `E-PLAYWRIGHT-HERO-RHYTHM-20261003`, `E-DEPLOY-PIPELINE-HERO-RHYTHM-20261003`, `E-LIVE-PUBLIC-HERO-RHYTHM-20261003`.
+
+## 모바일 히어로·좁은 화면 헤더 고도화 공개 재검증: 2026-10-03 / candidate `badde8b982e1cee73b3a75d3513e65fcc38508c9`
+
+모바일 히어로의 데스크톱 시각 트랙 잔류로 제목 일부가 잘리던 문제를 단일 열로 보정하고, 430px 이하 헤더에서 메뉴·큰 글씨·공유 컨트롤을 고정 44px 아이콘 버튼으로 배치했다. PR #121의 `release-verify`·`site-quality-verify`, main workflow `37120130983`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. 로컬과 공개 URL에서 실제 Playwright Chrome viewport 320/390/1440px를 캡처해 히어로 문장·제품 독립 안내·3분 읽기 레일·다음 장 진입과 데스크톱 2열 이미지를 확인했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-HERO-20261003`, `E-PLAYWRIGHT-MOBILE-HERO-20261003`, `E-DEPLOY-PIPELINE-MOBILE-HERO-20261003`, `E-LIVE-PUBLIC-MOBILE-HERO-20261003`.
+
+## 연구 규모 인포그래픽 고도화 공개 재검증: 2026-10-03 / candidate `b8e6236d6dc749ea23191e45dd58d0ab9c542a0a`
+
+같은 PubMed 검색 기준의 Harvard·Oxford 문헌은 기관 비교로 묶고, 별도 WoS Core Collection SCIE 분석은 독립된 강조 블록으로 분리해 연구 범위를 한눈에 구분하도록 고도화했다. PR #119 checks, main workflow `37118207429`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 390px 연구 지도 피부 선택의 읽기 레일·상세 카드 동기화도 유지했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-SCALE-20261003`, `E-CDP-RESEARCH-SCALE-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-SCALE-20261003`, `E-LIVE-PUBLIC-RESEARCH-SCALE-20261003`.
+
+## 연구 읽기 방향성 고도화 공개 재검증: 2026-10-03 / candidate `77a30323d2e5097a0f2be092c013615b1ee2ddd6`
+
+긴 연구 카드 구간에서 sticky 읽기 레일이 현재 활성 연구 결과 제목을 함께 표시하도록 보완했다. 연구 지도에서 피부를 선택하면 `피부 연구 결과`와 `research-skin` 카드가 동기화되고, 좁은 화면에서는 제목이 한 줄 말줄임으로 보호된다. PR #117 checks, main workflow `37116937264`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-RAIL-ORIENTATION-20261003`, `E-CDP-RESEARCH-RAIL-ORIENTATION-20261003`, `E-DEPLOY-PIPELINE-RESEARCH-RAIL-ORIENTATION-20261003`, `E-LIVE-PUBLIC-RESEARCH-RAIL-ORIENTATION-20261003`.
+
+## 모바일 연구 비교 도표 고도화 공개 재검증: 2026-10-03 / candidate `4058bf61ed25d8fc95b3023f1187cdd78436cdb4`
+
+연구 결과 도표에서 비교 조건과 GABA 조건을 390px 모바일에서는 좌우로 나란히 배치하고, 320px에서는 한 열로 전환했다. 보조기기용 차트 라벨에도 각 지표의 조건별 관찰 문장을 포함했다. PR #115 checks, main workflow `37115590977`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-COMPARISON-20261003`, `E-CDP-MOBILE-COMPARISON-20261003`, `E-DEPLOY-PIPELINE-MOBILE-COMPARISON-20261003`, `E-LIVE-PUBLIC-MOBILE-COMPARISON-20261003`.
+
+## 전문가 영상 갤러리 고도화 공개 재검증: 2026-10-03 / candidate `10a61920df8bbcbe1b6f288a1d61425f48687800`
+
+전문가 영상 썸네일을 고해상도 우선·대체 이미지 경로로 보완하고, 모바일에서 다음 주제가 더 있음을 보여주는 필터 continuation cue를 추가했다. `연구 읽기` 선택 시 카드와 영상이 즉시 동기화되고, 필터 끝에서는 단서가 사라진다. PR #113 checks, main workflow `37114410997`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status, live validator, 390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-EXPERT-VIDEO-BROWSING-20261003`, `E-CDP-EXPERT-VIDEO-BROWSING-20261003`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-BROWSING-20261003`, `E-LIVE-PUBLIC-EXPERT-VIDEO-BROWSING-20261003`.
+
+## 최종 공개 재검증: 2026-10-03 / main `16fc5d4`
+
+NAVI 문서 PR #111 병합 후 main workflow `37113016531`과 공개 URL을 재검증했다. release-verify·worker-readiness·Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 정적 전용 모드로 건너뛰었다. 최종 live validator는 HTTP 200, 70개 번들 해시, 12개 공개 claim, 6개 master record, 6개 share page, `teaser HOLD`, 내부 운영 스냅샷 제외, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. 증적: `E-LIVE-PUBLIC-NAVI-MERGE-20261003`.
+
+## 최신 공개 재검증: 2026-10-03 / candidate `cbd2f8ea1d5b341dbe5804b5f16f756e157c553b`
+
+연구 지도에서 주제를 선택하면 도착한 상세 카드도 즉시 활성화되도록 보완했다. 카드 테두리·그림자·왼쪽 포인트가 지도 선택과 동기화되어 `지도 → 대상 → 결과` 흐름을 한눈에 따라갈 수 있다. PR #110의 검증, main workflow `37112425820`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했고 Worker는 `STATIC_ONLY` 조건으로 건너뛰었다. live validator는 HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. Chrome CDP fallback에서 390px 연구 지도 클릭 후 선택 지도·상세 카드가 함께 활성화되고 카드 top `113.09px`, 읽기 레일 bottom `105px`, document width `390px`, 오류 오버레이·런타임 오류 0건을 확인했으며 1440px document width는 `1425px`였다. 새 과학 주장·제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-MAP-ORIENTATION`, `E-CDP-RESEARCH-MAP-ORIENTATION`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-ORIENTATION`, `E-LIVE-PUBLIC-RESEARCH-MAP-ORIENTATION`.
+
+## 최신 공개 재검증: 2026-10-03 / candidate `c6291f6bd2c62e77529da767b1d2a985f4acaab5`
+
+모바일 CSS가 전역으로 숨기던 작은 장 제목을 다시 표시해 `수면과 회복`, `연구 규모`, `출처 읽기`, `이야기 공유`의 읽기 위치 단서를 복원했다. PR #108의 `release-verify`·`site-quality-verify`, main workflow `37111226511`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. live validator는 HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. Chrome CDP fallback에서 390px 제목 위치와 레일 하단 간격, 320px 가로 폭, 1440px 데스크톱 레이아웃을 재확인했다. 새 과학 주장·제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-CHAPTER-LABELS`, `E-CDP-MOBILE-CHAPTER-LABELS`, `E-DEPLOY-PIPELINE-MOBILE-CHAPTER-LABELS`, `E-LIVE-PUBLIC-MOBILE-CHAPTER-LABELS`.
+
+## 최신 공개 재검증: 2026-10-03 / candidate `2ae71ef1e1aa7c5ff71ca429197ad70c22dce3c1`
+
+모바일 장 진입점에서 고정 읽기 진행 레일이 장 번호와 제목 첫 줄을 덮던 문제를 PR #106에서 보완했다. 모바일 story section·수면/회복 break·final에 110px 상단 여백을 적용하고 UI contract guard를 추가했다. PR #106의 `release-verify`·`site-quality-verify`, main workflow `37109900221`의 release-verify·worker-readiness·Pages 배포·라이브 smoke·release status가 성공했다. live validator는 HTTP 200, 70 bundle hashes, 12 claims, 6 master records, 1 product, 6 share pages, teaser `HOLD`, `smartStoreOnly`, `removed750`, `provenance matched`를 확인했다. Chrome CDP fallback에서 390px exact entry의 number top `110.19px`, heading top `124.19px`, rail bottom `105px`, document width `390px`, 1440px document width `1425px`를 확인했다. 새 과학 주장·제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RAIL-TITLE-CLEAR`, `E-CDP-RAIL-TITLE-CLEAR`, `E-DEPLOY-PIPELINE-RAIL-TITLE-CLEAR`, `E-LIVE-PUBLIC-RAIL-TITLE-CLEAR`.
+
+## 최신 공개 재검증: 2026-10-03 / candidate `bf235edeeea780dd42d0261a5760f100cff2ba9d`
+
+기본 공개 GABA 안내서 경로만 선행 import해 첫 상호작용을 앞당기고, 대기 중에도 동일한 헤더·히어로 리듬을 유지하는 branded loading shell을 추가했다. PR #104 checks `37108351783`·`37108351789`, main workflow `37108431389`, Pages 배포·라이브 smoke·release status, live validator, 390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-GUIDE-LOADING-SHELL`, `E-CDP-GUIDE-LOADING-SHELL`, `E-DEPLOY-PIPELINE-GUIDE-LOADING-SHELL`, `E-LIVE-PUBLIC-GUIDE-LOADING-SHELL`.
+
+최신 공개 재검증: 2026-10-03 / candidate `b9160e40fbca673134ca1563651a00d8dfdd615a`
+
+모바일 메뉴의 키보드 포커스가 배경으로 빠지지 않도록 Tab·Shift+Tab 순환을 추가하고, 현재 읽는 장을 `aria-current=location`으로 정리했다. PR #102 checks, main workflow `37106966171`, Pages 배포·라이브 smoke·release status, live validator, 390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-FOCUS-TRAP`, `E-CDP-MOBILE-FOCUS-TRAP`, `E-DEPLOY-PIPELINE-MOBILE-FOCUS-TRAP`, `E-LIVE-PUBLIC-MOBILE-FOCUS-TRAP`.
+
+최신 공개 재검증: 2026-10-03 / candidate `9c2913db11440b10734345bc5bcba1d31161cc71`
+
+읽기 진행 레일의 장 순서를 실제 페이지 흐름과 일치시키고 수면·회복 프롤로그를 03/13으로 정합화했다. 공유 해시 링크와 모바일 전문가 영상 선택 이동이 sticky header·reading rail 아래에 도착하도록 보정했다. PR #100 checks, main workflow `37105696713`, Pages 배포·라이브 smoke·release status, live validator, 390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-READING-RAIL-DEEPLINK`, `E-CDP-READING-RAIL-DEEPLINK`, `E-DEPLOY-PIPELINE-READING-RAIL-DEEPLINK`, `E-LIVE-PUBLIC-READING-RAIL-DEEPLINK`.
+
+최신 공개 재검증: 2026-10-03 / candidate `3d788e39ef4d1dfa9d6d20845380ddcf7bfcc255`
+
+모바일·태블릿 메뉴가 열릴 때 배경 콘텐츠를 어둡고 부드럽게 분리하고, body 스크롤을 잠그며, 배경 버튼으로 닫을 수 있도록 보완했다. 닫으면 원래 스크롤 상태로 복원된다. PR #98의 release-verify·site-quality-verify, main workflow `37104179510`, Pages 배포·라이브 smoke·release status, live validator, 390px·1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-MOBILE-MENU-FOCUS`, `E-CDP-MOBILE-MENU-FOCUS`, `E-DEPLOY-PIPELINE-MOBILE-MENU-FOCUS`, `E-LIVE-PUBLIC-MOBILE-MENU-FOCUS`.
+
+최신 공개 재검증: 2026-10-03 / candidate `cf2f123a74013956399306c591f2de261d1bf049`
+
+연구 결과 비교 도표의 장식형 신호를 증가·감소 방향 화살표와 `증가`·`감소` 라벨로 바꿔, 연구 문장을 시각적으로 더 빠르게 읽도록 했다. 320px 모바일에서는 `비교 조건`과 `GABA 섭취`가 글자 중간에서 끊기지 않도록 조건명을 고정했다. PR #96의 release-verify·site-quality-verify, main workflow `37103072296`, Pages 배포·라이브 smoke·release status, live validator, 320/390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-OUTCOME-DIRECTION`, `E-CDP-RESEARCH-OUTCOME-DIRECTION`, `E-DEPLOY-PIPELINE-RESEARCH-OUTCOME-DIRECTION`, `E-LIVE-PUBLIC-RESEARCH-OUTCOME-DIRECTION`.
+
+최신 공개 재검증: 2026-10-03 / candidate `b1afe879a3266dd802e4f3d470a49d5985616b70`
+
+전문가 영상 게시판에 주제 필터와 영상 수를 추가해 앞으로 영상이 늘어나도 수면·GABA란·연구 읽기·자율신경 등 관심 주제만 빠르게 탐색할 수 있도록 했다. 선택한 주제는 영상 목록·선택 상태·즉시 재생과 동기화되고 모바일에서는 활성 필터를 중앙에 정렬한다. PR #94의 release-verify·site-quality-verify, main workflow `37101931045`, Pages 배포·라이브 smoke·release status, live validator, 320/390/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-EXPERT-VIDEO-FILTER`, `E-CDP-EXPERT-VIDEO-FILTER`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-FILTER`, `E-LIVE-PUBLIC-EXPERT-VIDEO-FILTER`.
+
+최신 공개 재검증: 2026-10-03 / candidate `bed5bf3245d489e74a79b33249bcdf9fba00668d`
+
+연구 결과 비교 도표의 동일 길이 장식을 1·2단계 상대 방향 신호로 보완하고, 조건명을 `비교 조건`·`GABA 섭취`로 중립화했다. 설명에는 신호 개수가 실제 효과 크기나 수치를 뜻하지 않는다는 점을 명시했다. PR #92의 release-verify·site-quality-verify, main workflow `37100751730`, Pages 배포·라이브 smoke·release status, live validator, 390/320/1440px Chrome CDP fallback을 통과했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-QUALITATIVE-DIRECTION`, `E-CDP-QUALITATIVE-DIRECTION`, `E-DEPLOY-PIPELINE-QUALITATIVE-DIRECTION`, `E-LIVE-PUBLIC-QUALITATIVE-DIRECTION`.
+
+최신 공개 재검증: 2026-10-03 / candidate `0257636233ae758a4bc6e90dac7c77e6fd42bc67`
+
+연구 결과 비교 도표에서 보고되지 않은 효과 크기를 암시하던 임의 막대 길이를 제거하고, 비교 조건은 점선 리본·GABA 조건은 실선 리본으로 같은 길이에 표시했다. PR #89의 타입체크·UI contract·research copy·127개 테스트·production build와 Pages 성능 예산, main 배포 workflow `37099561557`, 라이브 validator, 390/1440px Chrome CDP fallback을 통과했다. stale TF heartbeat로 한 차례 중단된 배포는 PR #90에서 heartbeat를 갱신해 복구했다. 새 과학 주장이나 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-QUALITATIVE-COMPARISON`, `E-CDP-QUALITATIVE-COMPARISON`, `E-DEPLOY-PIPELINE-QUALITATIVE-COMPARISON`, `E-LIVE-PUBLIC-QUALITATIVE-COMPARISON`, `E-NAVI-TF-HEARTBEAT-REFRESH`.
+
+최신 공개 재검증: 2026-10-03 / candidate `698f1fbf93b960df38955fdb85ee223260df4cc7`
+
+모바일 수면·회복 카드 진행 맵을 가로 스크롤에서 7×2 전체 단계 표시로 바꿔 14개 카드의 흐름을 한눈에 읽도록 보완했다. PR #87 검사와 main 배포, 라이브 validator·320/390/1440px Chrome CDP fallback에서 전체 단계·마지막 카드 선택·가로 폭·runtime errors `[]`를 확인했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-MAP-MOBILE`, `E-CDP-RECOVERY-MAP-MOBILE`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-MOBILE`, `E-LIVE-PUBLIC-RECOVERY-MAP-MOBILE`.
+
+최신 공개 재검증: 2026-10-03 / candidate `3b75baecbc84623a759131393ef1e47f3aa2ba07`
+
+공개 `/research/` 경로에서 제품 CTA·제품 브랜드 노출·`view=products`·SmartStore 연결을 제거하고 연구 결과·연구 조건·출처 중심의 읽기 흐름으로 정리했다. PR #85 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback에서 HTTP 200·가로 폭 390px·runtime errors `[]`·제품 문구 부재를 확인했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-PRODUCT-FREE`, `E-CDP-RESEARCH-PRODUCT-FREE`, `E-DEPLOY-PIPELINE-RESEARCH-PRODUCT-FREE`, `E-LIVE-PUBLIC-RESEARCH-PRODUCT-FREE`.
+
+최신 공개 재검증: 2026-10-03 / candidate `a0ee159235477ee24c2855251b2d17b21c0b317e`
+
+모바일 연구 카드에서 `출처`와 원문 링크가 붙어 읽히던 문제를 `출처 ·` 라벨과 링크의 줄 분리로 보완했다. PR #83 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback에서 출처 계층·가로 폭 390px·runtime errors `[]`를 확인했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-SOURCE-LABEL`, `E-CDP-RESEARCH-SOURCE-LABEL`, `E-DEPLOY-PIPELINE-RESEARCH-SOURCE-LABEL`, `E-LIVE-PUBLIC-RESEARCH-SOURCE-LABEL`.
+
+최신 공개 재검증: 2026-10-03 / candidate `10aedcab10448e5341123234b6ce9979b068bc58`
+
+이미 재생 중인 전문가 영상 카드를 다시 선택할 때 iframe 로딩 상태가 재점화될 수 있던 예외를 보완했다. PR #81 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback에서 동일 영상 연속 선택 후에도 자동재생·`재생 중`·로딩 완료·가로 폭 390px을 확인했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-VIDEO-RESELECT`, `E-CDP-VIDEO-RESELECT`, `E-DEPLOY-PIPELINE-VIDEO-RESELECT`, `E-LIVE-PUBLIC-VIDEO-RESELECT`.
+
+이전 공개 재검증: 2026-10-03 / candidate `4604805e746be4d28b34fb200196ce8d5905c85f`
+
+전문가 영상 게시판에서 현재 선택된 카드에 `재생 중` 상태를 추가해 플레이어와 목록의 연결을 명확히 했다. PR #79 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-VIDEO-SELECTION-STATE`, `E-CDP-VIDEO-SELECTION-STATE`, `E-DEPLOY-PIPELINE-VIDEO-SELECTION-STATE`, `E-LIVE-PUBLIC-VIDEO-SELECTION-STATE`.
+
+최신 공개 재검증: 2026-10-03 / candidate `95c3830984d09ee8baca62ebafacd3a0c8c3d715`
+
+전문가 영상 카드를 선택한 직후 검은 빈 iframe처럼 보이던 구간을 로딩 오버레이와 `영상을 불러오는 중` 상태로 보완하고, iframe 로드 완료 후 오버레이가 사라지도록 했다. `prefers-reduced-motion`에서는 스피너를 정지한다. PR #77 검사와 main 배포, 라이브 validator·390px Chrome CDP fallback 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-VIDEO-LOADING`, `E-CDP-VIDEO-LOADING`, `E-DEPLOY-PIPELINE-VIDEO-LOADING`, `E-LIVE-PUBLIC-VIDEO-LOADING`.
+
+최신 공개 재검증: 2026-10-03 / candidate `79eea1f08423f7d9f52021770310691b9f6e4db2`
+
+701–860px 태블릿에서 전체 메뉴를 아이콘 메뉴로 전환해 헤더 컨트롤이 화면 밖으로 밀리던 결함을 보완했다. PR #75 검사와 main 배포, 라이브 validator·768/820/390/1440px Chrome CDP fallback 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-TABLET-HEADER`, `E-CDP-TABLET-HEADER`, `E-DEPLOY-PIPELINE-TABLET-HEADER`, `E-LIVE-PUBLIC-TABLET-HEADER`.
+
+최신 공개 재검증: 2026-10-03 / candidate `e5f1eab190cd29fb4c18ffe2e469f18edb92ba1f`
+
+전역 메뉴 첫 항목에 `수면과 회복`을 연결하고, 읽기 진행 안내를 하나의 보조기기 상태로 정리했으며 모바일 메뉴가 sticky 진행 바에 가려지지 않도록 레이어를 보정했다. PR #73 검사와 main 배포, 라이브 validator·390/1440px Chrome CDP fallback·실제 메뉴 선택 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-NAV`, `E-CDP-RECOVERY-NAV`, `E-DEPLOY-PIPELINE-RECOVERY-NAV`, `E-LIVE-PUBLIC-RECOVERY-NAV`.
+
+이전 공개 재검증: 2026-10-03 / candidate `288a883d5e0537a1be6bdd2660d90edcc5e82df0`
+
+수면과 회복 인터스티셜을 읽기 진행 표시의 독립 맥락으로 연결해 모바일·데스크톱에서 `수면과 회복 02 / 12` 다음 `연구 지도 03 / 12`로 자연스럽게 이어지도록 보완했다. PR #70 검사와 main 문서 동기화 배포 #71, 라이브 validator·390/1440px Chrome CDP fallback·연구 지도 `인지` 활성 동작 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RECOVERY-PROGRESS`, `E-CDP-RECOVERY-PROGRESS`, `E-DEPLOY-PIPELINE-RECOVERY-PROGRESS`, `E-LIVE-PUBLIC-RECOVERY-PROGRESS`.
+
+최신 공개 재검증: 2026-10-03 / candidate `48f48764fd4fa06bb785a2b12cc5c639104e2dd2`
+
+연구 상세 카드를 읽는 동안 연구 지도에서 현재 주제를 활성화하고 지도 선택 상태를 `aria-current`와 함께 유지했다. PR #68 검사, main 배포·라이브 validator·390/1440px Chrome CDP fallback·지도 클릭 후 `인지` 활성 동작 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-MAP-ACTIVE`, `E-CDP-RESEARCH-MAP-ACTIVE`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-ACTIVE`, `E-LIVE-PUBLIC-RESEARCH-MAP-ACTIVE`.
+
+최신 공개 재검증: 2026-10-03 / candidate `d3ff9e3f27833f3719b76f0cc377468a23bcc421`
+
+연구 지도 5개 주제를 키보드·터치로 선택할 수 있게 하고 각 상세 연구 카드로 연결했다. PR #66 검사, main 배포·라이브 validator·390/1440px Chrome CDP·지도 선택 동작 검증을 통과했다. 새 과학 주장과 제품 광고는 추가하지 않았다. 증적: `E-LOCAL-BUILD-RESEARCH-MAP-NAV`, `E-CDP-RESEARCH-MAP-NAV`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-NAV`, `E-LIVE-PUBLIC-RESEARCH-MAP-NAV`.
+
+최신 공개 재검증: 2026-10-03 / candidate `e514a375f0d8fdfeefbba2043b0a18268224b5d2`
+
+연구 지도 아래의 기존 읽기 순서를 01–04 시각 레일로 정리했다. 모바일에서는 번호 노드와 연결선으로 `지도 → 대상 → 결과 → 해석`을 분리하고, 데스크톱에서는 기존 여백과 지도 구조를 유지했다. PR #64 검사, main 배포·라이브 validator·390/1440px Chrome CDP 검증을 통과했다. 증적: `E-LOCAL-BUILD-RESEARCH-RAIL`, `E-CDP-RESEARCH-RAIL`, `E-DEPLOY-PIPELINE-RESEARCH-RAIL`, `E-LIVE-PUBLIC-RESEARCH-RAIL`.
+
+최신 공개 재검증: 2026-10-03 / candidate `0147e3c15a7e0acd700ff4f75e9fcddc03b39b05`
+
+모바일 히어로의 편집 안내와 `3분 읽기` 레일에 읽기용 반투명 표면을 적용했다. PR #62 검사, main 배포·라이브 validator·320/390/1440px Chrome CDP 검증을 통과했으며 카피·출처·제품 독립 경계는 유지했다. 증적: `E-LOCAL-BUILD-HERO-SURFACE`, `E-CDP-HERO-SURFACE`, `E-DEPLOY-PIPELINE-HERO-SURFACE`, `E-LIVE-PUBLIC-HERO-SURFACE`.
+
 | Date | State / Change | Reason | Evidence or Decision | Owner |
 |---|---|---|---|---|
-| 2026-10-08 | 상단 주 메뉴에 `공유 키트` 바로가기를 추가 | 사업자가 공개 안내서의 긴 흐름을 다시 탐색하지 않고 설명 문장·출처·복사 기능으로 바로 이동하도록 개선 | DEC-014, E-LOCAL-BUILD-SHARE-KIT-NAV | NAVI / QA |
-| 2026-10-08 | 사업자용 공유 키트 설명을 목적 중심의 짧은 문장으로 정리 | 문장을 읽는 순간 공유 키트의 구성과 활용 목적을 이해하도록 개선 | DEC-015, E-LOCAL-BUILD-SHARE-KIT-COPY | NAVI / QA |
-| 2026-10-08 | 인지·수면 공유 카드의 복사·공유 결과에 PubMed 원문 라인을 추가 | 사업자가 연구 요약과 원문 출처를 함께 전달하도록 개선 | DEC-016, E-LOCAL-BUILD-SHARE-KIT-PAPER-SOURCE | NAVI / QA |
-| 2026-10-08 | 공유 URL에 사업자·소비자 대상 상태를 보존 | 소비자용 묶음을 받은 사람도 동일한 소비자용 설명 화면에서 시작하도록 개선 | DEC-017, E-LOCAL-BUILD-SHARE-AUDIENCE-URL | NAVI / QA |
-| 2026-10-08 | 모바일 상단 `공유 키트` 앵커의 메뉴 닫힘을 보완 | 공유 키트 도착 시 모바일 메뉴가 닫혀 자료를 바로 읽고 복사하도록 보완 | DEC-018, E-LOCAL-BUILD-SHARE-NAV-MOBILE | NAVI / QA |
-| 2026-10-08 | 사업자용 공유 키트 설명을 짧게 정리 | 중복되는 위치 표현을 줄여 첫 시선의 목적 이해와 번들 성능을 함께 유지 | DEC-019, E-LOCAL-BUILD-SHARE-NAV-MOBILE | NAVI / QA |
-| 2026-10-08 | 카드별 복사 완료 피드백을 구체화 | 사업자가 카드와 출처가 함께 복사됐는지 즉시 확인하도록 보완 | DEC-020, E-LOCAL-BUILD-SHARE-NAV-MOBILE | NAVI / QA |
-| 2026-10-08 | 공유 키트 카드 열 수를 읽기 중심으로 재배치 | 데스크톱 3열·태블릿 2열·모바일 1열로 카드 폭을 넓혀 사업자와 큰 글씨 사용자의 가독성을 보완 | DEC-021, E-LOCAL-BUILD-SHARE-READABILITY | NAVI / QA |
-| 2026-10-08 | 개별 카드 공유를 해당 주제 본문으로 연결 | 카드 하나를 전달받은 사람도 대상별 안내서 상태를 유지한 채 관련 공개 섹션에서 바로 읽도록 보완 | DEC-022, E-LOCAL-BUILD-SHARE-DEEP-LINK | NAVI / QA |
-| 2026-10-08 | 모든 페이지 공유 진입점의 대상 URL을 통일 | 상단·마지막 공유에서도 사업자·소비자 선택 상태가 유지되도록 보완 | DEC-023, E-LOCAL-BUILD-SHARE-AUDIENCE-ALL | NAVI / QA |
+| 2026-10-03 | 스크롤 중 읽기 진행 바를 불투명 레이어로 보정하고 `078d231`로 공개 배포 | 연구 결과 도표 위로 아래 콘텐츠가 비치는 현상을 제거해 모바일·데스크톱에서 읽기 안내와 연구 문장을 분리. PR #60 검사, main 배포·라이브 validator·320/390/1440px Chrome CDP 검증 통과 | E-LOCAL-BUILD-RAIL-LEGIBILITY, E-CDP-RAIL-LEGIBILITY, E-DEPLOY-PIPELINE-RAIL-LEGIBILITY, E-LIVE-PUBLIC-RAIL-LEGIBILITY | NAVI / QA |
+| 2026-10-03 | 연구 카드 앞에 `연구를 읽는 기준` 시각 키와 모바일 컨트롤 보조 설명을 추가하고 `89978ea`로 공개 배포 | 사람 대상 연구와 확장 연구 라벨을 먼저 설명해 결과 해석 부담을 낮춤. PR #58 검사, main 배포·라이브 validator·320/390/1440px Chrome CDP 검증 통과 | E-LOCAL-BUILD-RESEARCH-KEY, E-CDP-RESEARCH-KEY, E-DEPLOY-PIPELINE-RESEARCH-KEY, E-LIVE-PUBLIC-RESEARCH-KEY | NAVI / QA |
+| 2026-10-03 | 연구 결과 카드에 `핵심 결과 복사`와 브라우저 복사 대체 경로를 추가하고 `19a38ab`로 공개 배포 | 사업자가 관찰된 연구 결과 문장을 바로 재사용할 수 있게 보완. PR #55·#56 검사, main 배포·라이브 validator·390/1440px Chrome CDP 검증 통과 | E-LOCAL-BUILD-RESEARCH-SHARING, E-CDP-RESEARCH-SHARING, E-DEPLOY-PIPELINE-RESEARCH-SHARING, E-LIVE-PUBLIC-RESEARCH-SHARING | NAVI / QA |
+| 2026-10-03 | 연구 카드에 대상·방법·측정 프로필을 추가하고 `3f4a3e5`로 공개 배포 | 결과 그래프를 보기 전 연구 대상·방법·측정 항목을 한눈에 파악하도록 보완. PR #53 검사, main 배포·라이브 validator·390/1440px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-RESEARCH-PROFILE, E-CDP-RESEARCH-PROFILE, E-DEPLOY-PIPELINE-RESEARCH-PROFILE, E-LIVE-PUBLIC-RESEARCH-PROFILE | NAVI / QA |
+| 2026-10-03 | 320–430px 좁은 모바일의 히어로·헤더를 보완하고 `d0f1741`로 공개 배포 | 헤드라인 클리핑과 공유 버튼 잘림을 제거하고 44px 터치 영역을 확보. PR #51 검사, main 배포·라이브 validator·390/360/320px CDP QA 통과 | E-LOCAL-BUILD-MOBILE-HARDENING, E-CDP-MOBILE-HARDENING, E-DEPLOY-PIPELINE-MOBILE-HARDENING, E-LIVE-PUBLIC-MOBILE-HARDENING | NAVI / QA |
+| 2026-10-03 | NAVI 문서 동기화 이후 최종 공개 후보 `6f48bae`를 재검증 | main 배포·라이브 공개본·제품 독립 데이터 경계·공유 경로의 최신 SHA 정합성을 확인. release-verify, Pages publish, smoke-live, release status와 live validator 성공 | E-LIVE-PUBLIC-NAVI-FINAL, GitHub Actions 37074307727 | NAVI / QA |
+| 2026-10-03 | NAVI 감사·레드팀·완료 문서를 main에 반영하고 최종 candidate `49daf99`를 재검증 | 공개 코드 변경 이후 governance 증적과 실제 라이브 SHA의 정합성을 맞춤. main 배포·라이브 validator를 다시 통과 | E-LIVE-PUBLIC-NAVI-RELEASE, GitHub Actions 37073665476 | NAVI / QA |
+| 2026-10-03 | 읽기 진행 표시의 접근성·가독성을 보완하고 사용하지 않는 구형 챌린지 이미지 4종을 제거한 뒤 `7a64726`으로 공개 배포 | 긴 모바일 안내서에서 현재 장을 더 빠르게 파악하고 Pages 번들 성능 여유를 확보. PR #47 필수 검사, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-READING-PROGRESS, E-CDP-READING-PROGRESS, E-DEPLOY-PIPELINE-READING-PROGRESS, E-LIVE-PUBLIC-READING-PROGRESS | NAVI / QA |
+| 2026-10-03 | 고정 헤더·읽기 진행 표시와 섹션 앵커가 겹치지 않도록 보완하고 `2c8bd84`로 공개 배포 | 메뉴·앵커 이동 뒤 섹션 제목이 가려지지 않게 해 모바일·데스크톱의 자연스러운 독해 흐름을 회복. PR #45 필수 검사, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-ANCHOR-OFFSET, E-CDP-ANCHOR-OFFSET, E-DEPLOY-PIPELINE-ANCHOR-OFFSET, E-LIVE-PUBLIC-ANCHOR-OFFSET | NAVI / QA |
+| 2026-10-03 | 연구 지도 아래에 `읽는 순서 → 01 지도 → 02 대상 → 03 결과 → 04 해석` 시각 레일을 추가하고 `5af1f11`로 공개 배포 | 별도 이동 링크 없이 연구 지도를 본 뒤 대상·결과·해석 카드로 자연스럽게 이어지도록 보완. PR #43 필수 검사, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-RESEARCH-READING-RAIL, E-CDP-RESEARCH-READING-RAIL, E-DEPLOY-PIPELINE-RESEARCH-READING-RAIL, E-LIVE-PUBLIC-RESEARCH-READING-RAIL | NAVI / QA |
 | 2026-10-03 | 연구 지도에서 상세 카드로 이어지는 `지도 → 대상 → 결과 → 해석` 읽기 순서를 추가하고 기능 변경 `79432de`·최종 공개본 `ca20d1e`로 반영 | 별도 이동 링크 없이 연구 지도 다음에 대상·결과·해석 카드를 바로 보여줘 연구 흐름을 자연스럽게 연결. PR #38 품질 검사, heartbeat PR #39, NAVI 문서 PR #40, main 배포·라이브 validator·1440/390px Chrome CDP 검증을 통과 | E-LOCAL-BUILD-RESEARCH-READING-SEQUENCE, E-CDP-RESEARCH-READING-SEQUENCE, E-DEPLOY-PIPELINE-RESEARCH-READING-SEQUENCE, E-LIVE-PUBLIC-RESEARCH-READING-SEQUENCE | NAVI / QA |
 | 2026-10-03 | 연구 확장 지도에 의미 기반 아이콘을 적용하고 `713627f`로 공개 배포 | 인지·피부·근육·성장호르몬·면역을 동일한 구조 안에서 빠르게 구분하도록 선형 아이콘을 추가. PR #37 필수 검사, main 배포, 라이브 validator, 1440/390px Chrome CDP 시각 검증을 통과 | E-LOCAL-BUILD-RESEARCH-MAP-ICONS, E-CDP-RESEARCH-MAP-ICONS, E-DEPLOY-PIPELINE-RESEARCH-MAP-ICONS, E-LIVE-PUBLIC-RESEARCH-MAP-ICONS | NAVI / QA |
 | 2026-10-03 | 연구 결과 도표의 큰 글씨 모드를 차트 전체 글자 체계로 정리하고 `34807cb`로 공개 배포 | 비교 조건·측정값·막대 설명·신호·주석이 큰 글씨 선택과 함께 일관되게 확대되도록 보완하고, 320/360/390px 모바일 QA·라이브 validator·Pages 배포를 재확인 | E-LOCAL-BUILD-LARGE-TEXT-CHART-TYPE, E-CDP-LARGE-TEXT-CHART-TYPE, E-DEPLOY-PIPELINE-LARGE-TEXT-CHART-TYPE, E-LIVE-PUBLIC-LARGE-TEXT-CHART-TYPE | NAVI / QA |
@@ -42,22 +1907,6 @@
 | 2026-10-02 | 모바일 섹션 장 제목을 다시 표시해 긴 페이지의 읽기 위치를 즉시 인지하도록 보완 | 작은 장표와 큰 제목의 위계 복원 | d7bf1cb, E-RELEASE-D7 | NAVI / QA |
 | 2026-10-02 | 연구 비교 도표에 `변화 방향` 축과 짧은 막대 설명을 추가하고 Pages 성능 예산을 통과하도록 정리해 재배포 | 모바일에서 비교 결과를 한눈에 읽고 공개 번들 예산을 안정적으로 지키도록 보완 | c13be36, E-RELEASE-C13 | NAVI / QA |
 | 2026-10-02 | 읽기 진행 표시를 실제 본문 장 번호와 맞추고, Pages 성능 초과를 압축 보정한 뒤 재배포 | 긴 모바일 안내서에서 현재 위치를 `07 / 12`처럼 즉시 이해하고 공개 배포 게이트를 통과시키도록 보완 | 1f56cb6, E-LOCAL-BUILD-PROGRESS, E-CDP-NAVIGATION-PROGRESS, E-DEPLOY-PIPELINE-PROGRESS, E-LIVE-PUBLIC-PROGRESS | NAVI / QA |
-| 2026-10-08 | `11 · 공유 키트`를 사업자·소비자 대상별 카드 5개, 연구 앵커, 개별·전체 복사, 공유 동작으로 고도화 | 사업자 설명 자료 활용성과 소비자 공유 흐름을 같은 페이지에서 강화 | E-LOCAL-BUILD-SHARE-KIT-V2, E-CDP-SHARE-KIT-V2 | NAVI / QA |
-| 2026-10-08 | `10 · 전문가 영상`을 `03 · 전문가 영상`으로 앞당기고 연구 지도 이후 장 번호와 도입 읽기 순서를 재정렬 | 기본 개념 → 전문가 설명 → 연구 지도의 인지 흐름을 구현하고 진행 표시 정합성을 유지 | E-LOCAL-BUILD-EXPERT-FIRST, E-CHROME-EXPERT-FIRST | NAVI / QA |
-| 2026-10-08 | 모바일 헤더를 컴팩트 고정형 컨트롤로 보완 | 700px 이하에서 메뉴·읽기 크기·공유 버튼을 각각 44px 조작 영역으로 유지해 핵심 탐색과 사업자 공유를 보존 | E-LOCAL-BUILD-MOBILE-HEADER | NAVI / QA |
-| 2026-10-08 | 공유 키트 카드의 출처 연결 문구를 카드별 라벨로 개선 | 사업자가 `GABA란`, `일상 속 GABA`, `연구 지도`, `발효·안전` 중 어떤 정보로 이어지는지 카드에서 바로 확인하도록 보완 | E-LOCAL-BUILD-SOURCE-LABEL | NAVI / QA |
-| 2026-10-08 | 공유 키트의 개별 카드 복사를 출처 포함 자료 카드 복사로 개선 | 문장 하나만 전달해도 카드 출처 라벨과 공개 페이지 주소가 함께 복사되도록 기존 전체 공유 번들 로직을 재사용 | E-LOCAL-BUILD-CARD-SOURCE-COPY | NAVI / QA |
-| 2026-10-08 | 메인·가이드 링크 미리보기의 공개 과학 정체성을 통일 | 정적 description·Open Graph·Twitter·구조화 데이터에 제품과 무관한 공개 과학 안내서 설명을 반영 | E-LOCAL-BUILD-SHARE-METADATA | NAVI / QA |
-| 2026-10-08 | 공유 묶음의 도착 링크를 공유 키트 직행으로 개선 | 전체 묶음·개별 카드 복사의 공개 안내서 URL을 `/guide/`로 연결하고 해당 경로가 `#reading-note` 공유 키트로 이어지도록 보완 | E-LOCAL-BUILD-SHARE-LANDING | NAVI / QA |
-| 2026-10-08 | 공유 대상 전환의 접근성 의미를 정리 | 사업자·소비자 전환을 tablist가 아닌 선택 그룹으로 표현하고 `aria-pressed`로 선택 상태를 전달 | E-LOCAL-BUILD-SHARE-A11Y | NAVI / QA |
-| 2026-10-08 | 사업자용 공유 5문장에 대표 사람 연구를 연결 | 인지·수면의 공개 연구 결과를 요약 카드에 포함하고 연구 상세 카드와 원문으로 바로 이어지도록 보완 | E-LOCAL-BUILD-BUSINESS-RESEARCH-CARDS | NAVI / QA |
-| 2026-10-08 | 사업자용 연구 카드에 원문 출처를 직접 표시 | 인지·수면 카드가 카드 안에서 논문명·연도·PMID를 보여 주고 해당 원문 URL로 연결되도록 보완 | E-LOCAL-BUILD-SHARE-PAPER-SOURCE | NAVI / QA |
-| 2026-10-08 | 공유 대상 선택 상태를 주소에도 반영 | 사업자·소비자 버튼을 선택하면 `/guide/?audience=...`로 갱신되어 주소창 복사만으로 같은 공유 대상 화면을 전달하도록 보완 | E-LOCAL-BUILD-SHARE-AUDIENCE-ADDRESS | NAVI / QA |
-| 2026-10-08 | 390px 모바일 히어로를 단일 흐름으로 보정 | 숨은 보조 grid 열 때문에 첫 제목이 오른쪽에서 잘리던 문제를 모바일 `display:block`으로 제거하고, 전체 production build·성능 예산을 재검증 | E-LOCAL-BUILD-MOBILE-HERO-FLOW | NAVI / QA |
-| 2026-10-08 | 공유 키트 390px·1440px 후속 렌더 감리 | 사업자용 5개 카드의 원문 출처, 복사 버튼, 390px 카드 폭과 1440px 3열 구조를 Chrome CDP로 재확인 | E-CDP-SHARE-KIT-FOLLOWUP | NAVI / QA |
-| 2026-10-08 | 공유 키트에 선택형 묶음 공유를 추가 | 카드별 체크박스로 필요한 문장만 모아 복사·공유하고, 원문 링크·모바일 1열·데스크톱 3열·성능 예산을 유지 | E-LOCAL-BUILD-SHARE-SELECTION | NAVI / QA |
-| 2026-10-08 | 공유 키트 카드 선택을 React 상태와 선택 수 표시로 안정화 | DOM 직접 조회 대신 화면·복사·공유가 같은 선택 상태를 사용하고 대상 전환 시 5개 카드 선택을 복원 | E-LOCAL-BUILD-SHARE-SELECTION-STATE | NAVI / QA |
-| 2026-10-08 | NAVI 변경 이력의 구형 메타데이터를 보존형으로 현재 검증기와 정합화 | 기존 요청·결정·승인 기록은 유지하고 구조 검증에 필요한 분류·영향·산출물·승인 주체 필드를 보완해 `validate_project_state.py` 통과 | E-NAVI-STATE-SCHEMA-MIGRATION | NAVI / QA |
 
 Record lifecycle transitions, approved changes, rework, and meaningful evidence updates. Do not use this file to erase history.
 # 2026-10-02 · Public deployment verification follow-up
@@ -67,3 +1916,578 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - Main deployment run `36984877866` passed release verification, GitHub Pages deployment, live smoke test, and release status.
 - Live validation confirmed candidate `bb4504fa902abbdb52b99f2998da6f2cd20ef1b0`, 6 research records, 6 share pages, and no public internal-operation snapshots.
 - NAVI remains `USER_DECISION` / `INTERNAL_QA_READY_WITH_CONDITIONS`; open external-validation items remain open.
+# Change Log
+
+## v46 · 연구 스크롤 상태 비차단 처리 — 3007891 — 2026-10-05
+
+- 연구 카드 IntersectionObserver의 현재 주제 표시 갱신을 React startTransition으로 분리해 모바일 스크롤 입력을 우선 처리했다.
+- 로컬 UI contract·typecheck·127 tests·production build/performance, PR #265 checks, main workflow 37243296161, Pages·라이브 smoke·release status와 공개 validator를 통과했다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-TRANSITION-20261005, E-UI-CONTRACT-TRANSITION-20261005, E-DEPLOY-PIPELINE-TRANSITION-20261005, E-LIVE-PUBLIC-TRANSITION-20261005.
+
+## v45 · 모바일 연구 스크롤 렌더링 최적화 — 8e1e335 — 2026-10-05
+
+- 현재 연구 주제 추적 중 정적인 연구 glyph·연구 구성·결과 도표를 React memo로 보호해 모바일 스크롤의 불필요한 재렌더링을 줄였다.
+- 로컬 UI contract·typecheck·127 tests·production build/performance, PR #263 checks, main workflow 37242328341, Pages·라이브 smoke·release status와 공개 validator를 통과했다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 USER_DECISION, 완료 게이트는 NOT_READY를 유지한다.
+
+증적: E-LOCAL-BUILD-MEMO-20261005, E-UI-CONTRACT-MEMO-20261005, E-DEPLOY-PIPELINE-MEMO-20261005, E-LIVE-PUBLIC-MEMO-20261005.
+
+## v44 · GABA 공개 안내서 공유 카드 분리 — 0e93fb3 — 2026-10-05
+
+- 공개 root·guide·research 공유 미리보기를 제품·하루리듬 카드와 분리하고, 제품과 무관한 1200×630 JPEG `gaba-guide-social-card.jpg`를 적용했다.
+- 로컬 UI contract·typecheck·127 tests·production build/performance, PR #227 checks, main workflow `37211921700`, Pages·라이브 smoke·release status와 공개 validator를 통과했다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SOCIAL-PREVIEW-20261005`, `E-UI-CONTRACT-SOCIAL-PREVIEW-20261005`, `E-DEPLOY-PIPELINE-SOCIAL-PREVIEW-20261005`, `E-LIVE-PUBLIC-SOCIAL-PREVIEW-20261005`.
+
+## v43 · 모바일 기본 카드 장식 겹침 보정 — 4e558ee — 2026-10-04
+
+- 320px 화면에서 GABA 기본 설명 카드의 달 아이콘이 본문 마지막 줄과 겹치던 가독성 결함을 확인하고, 모바일 카드에 장식 전용 하단 여백을 확보했다.
+- 로컬 typecheck·UI contract·127 tests·build, PR #153 checks, main workflow `37141668244`, Pages·라이브 smoke·release status, 공개 validator와 320/390px Chrome fallback을 재검증했다.
+- 공개 연구 카피·데이터·출처·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-DEFINITION-MOTIF-20261004`, `E-PLAYWRIGHT-DEFINITION-MOTIF-20261004`, `E-DEPLOY-PIPELINE-DEFINITION-MOTIF-20261004`, `E-LIVE-PUBLIC-DEFINITION-MOTIF-20261004`.
+## 연구 결과 비교 도표 읽기 안내·공개 배포 — 3339309 — 2026-10-06
+
+- 연구 결과 도표 상단에 `두 조건을 나란히 비교`와 `막대가 짧을수록 변화가 작습니다`를 추가해 소비자가 비교 기준과 시각 요소를 먼저 이해하도록 보강했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build, Playwright Chromium fallback 320·390·1440px, PR #419, main workflow `37407044715`, Pages·라이브 smoke·release-status와 live validator를 통과했다.
+- 연구 수치·출처·제품 독립 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-CHART-CUE-20261006`, `E-UI-CONTRACT-RESEARCH-CHART-CUE-20261006`, `E-PLAYWRIGHT-RESEARCH-CHART-CUE-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-CUE-20261006`, `E-LIVE-PUBLIC-RESEARCH-CHART-CUE-20261006`.
+
+## GABA 기본 원리 3단계 인포그래픽·공개 배포 — 8da328d — 2026-10-06
+
+- GABA 기본 설명 다음에 `글루탐산 → GABA 생성 → 신경 활동 조절` 3단계 인포그래픽을 추가해 소비자가 생성과 작용의 관계를 시각적으로 이해하도록 고도화했다.
+- 모바일 1열·태블릿/데스크톱 3열 반응형, NCBI 출처 링크, 320·390·768·1440px·공개 URL 감리를 완료했다. 제품 독립 공개 정보 경계와 연구 카피는 유지했다.
+- PR #422, main workflow `37410404149`, Pages·라이브 smoke·release-status와 공개 validator가 모두 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-GABA-PROCESS-20261006`, `E-UI-CONTRACT-GABA-PROCESS-20261006`, `E-PLAYWRIGHT-GABA-PROCESS-20261006`, `E-DEPLOY-PIPELINE-GABA-PROCESS-20261006`, `E-LIVE-PUBLIC-GABA-PROCESS-20261006`.
+
+## 연구 결과 도표 결과 라벨 자연어 보정·공개 배포 — 8a6eeb6 — 2026-10-06
+
+- 비교 도표의 `GABA 결과` 라벨을 `GABA를 섭취한 그룹의 변화`로 바꿔 측정 항목·비교 조건·관찰된 결과가 한 문장 흐름으로 읽히게 보정했다.
+- 연구 수치·결과·해석·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 390·1440px 렌더링 검증을 통과했다.
+- PR #434와 main workflow `37418115559`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-CHART-VERDICT-20261006`, `E-UI-CONTRACT-CHART-VERDICT-20261006`, `E-PLAYWRIGHT-CHART-VERDICT-20261006`, `E-DEPLOY-PIPELINE-CHART-VERDICT-20261006`, `E-LIVE-PUBLIC-CHART-VERDICT-20261006`.
+
+## 초소형 모바일 연구 도표 라벨 줄바꿈 보정·공개 배포 — 83dc4e5a — 2026-10-06
+
+- 280px에서 `GABA를 섭취한 그룹의 변화` 라벨이 잘리지 않도록 350px 이하에서 두 줄로 흐르게 보정했다. 320·390·1440px의 기존 비교 구조는 유지했다.
+- 연구 수치·결과·해석·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 280·320·390·1440px 렌더링 검증을 통과했다.
+- PR #436과 main workflow `37419534993`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-CHART-NARROW-20261008`, `E-UI-CONTRACT-CHART-NARROW-20261008`, `E-PLAYWRIGHT-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-CHART-NARROW-20261008`.
+
+## 초소형 모바일 수면 연구 도표 전체 폭 보정·공개 배포 — e80cd52b — 2026-10-06
+
+- 280px에서 번호가 붙은 본문 열에 갇혀 일부가 잘릴 수 있던 수면 연구 도표를 연구 카드 전체 폭으로 펼치고, 비교 안내 제목을 줄바꿈하도록 보정했다.
+- 연구 수치·결과·해석·출처·제품 독립 공개 경계는 변경하지 않았다. 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 공개 280·320·390·1440px 렌더링 검증을 통과했다.
+- PR #438과 main workflow `37420961105`, Pages·라이브 smoke·release-status 및 공개 validator가 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SLEEP-CHART-NARROW-20261008`, `E-UI-CONTRACT-SLEEP-CHART-NARROW-20261008`, `E-PLAYWRIGHT-SLEEP-CHART-NARROW-20261008`, `E-DEPLOY-PIPELINE-SLEEP-CHART-NARROW-20261008`, `E-LIVE-PUBLIC-SLEEP-CHART-NARROW-20261008`.
+
+## 초소형 모바일 읽기 조절 가독성 보정·공개 배포 — 06013ba — 2026-10-06
+
+- 280·320px 헤더의 `글자` 라벨을 11px, 크기 표식을 14px로 키워 고령 사용자도 읽기 조절 기능을 바로 알아볼 수 있게 했다. 컨트롤 폭과 390·1440px 구성은 유지했다.
+- PR #440 코드 보정과 heartbeat 전용 PR #441을 보호된 main 절차로 병합했으며, 최종 main workflow `37423305842`의 fresh TF pulse·Pages·라이브 smoke·release-status와 공개 validator가 성공했다.
+- 제품 독립 과학 정보 경계·연구 수치·출처·공개 데이터는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-COMPACT-READING-20261008`, `E-UI-CONTRACT-COMPACT-READING-20261008`, `E-PLAYWRIGHT-COMPACT-READING-20261008`, `E-DEPLOY-PIPELINE-COMPACT-READING-20261008`, `E-LIVE-PUBLIC-COMPACT-READING-20261008`.
+
+## 태블릿 읽기 조절 기능 명칭 보강·공개 배포 — bd8717b — 2026-10-06
+
+- 701–900px 태블릿 헤더에서 `가+` 아이콘 옆에 `글자` 라벨을 표시해 고령 사용자도 읽기 크기 조절 기능을 바로 이해하도록 보강했다. 44px 터치 영역·72px 컨트롤 폭과 1024px 이상 데스크톱 헤더 전환은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #443, main workflow `37424970431`, Pages·라이브 smoke·release-status와 공개 validator·Chrome fallback 701·768·820·900·1024px 감리를 완료했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-READING-20261008`, `E-UI-CONTRACT-TABLET-READING-20261008`, `E-PLAYWRIGHT-TABLET-READING-20261008`, `E-DEPLOY-PIPELINE-TABLET-READING-20261008`, `E-LIVE-PUBLIC-TABLET-READING-20261008`.
+
+## 모바일 히어로·헤더 레일 반응형 보정·공개 배포 — 550b4eb — 2026-10-06
+
+- 390px에서 잘리던 `GABA에서 읽습니다` 강조 문구를 폭 안에서 자연스럽게 표시하고, 헤더의 읽기 크기 명칭과 공유 버튼 충돌을 제거했다. 768px 태블릿 압축 레일과 1024px 데스크톱 라벨은 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #445, main workflow `37426950620`, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 390·768·1024px 감리를 완료했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-RAIL-20261006`, `E-UI-CONTRACT-MOBILE-HERO-RAIL-20261006`, `E-CDP-MOBILE-HERO-RAIL-20261006`, `E-DEPLOY-PIPELINE-MOBILE-HERO-RAIL-20261006`, `E-LIVE-PUBLIC-MOBILE-HERO-RAIL-20261006`.
+
+## 초소형 모바일 진행 레일 한 줄 보정·공개 배포 — 9b6df19 — 2026-10-06
+
+- 280–350px에서 고정 진행 레일의 `지금 읽는 중` 문구가 두 줄로 깨지지 않도록 시각 문구를 `읽는 중`으로 압축했다. 접근성 live announcement와 390px 이상 표기는 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산, PR #447, main workflow `37429369421`, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 280px 감리를 완료했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-READING-RAIL-20261006`, `E-UI-CONTRACT-NARROW-READING-RAIL-20261006`, `E-CDP-NARROW-READING-RAIL-20261006`, `E-DEPLOY-PIPELINE-NARROW-READING-RAIL-20261006`, `E-LIVE-PUBLIC-NARROW-READING-RAIL-20261006`.
+
+## 전문가 영상 주제 레일 공유 링크 맥락 보정·공개 배포 — 32612fe — 2026-10-06
+
+- 390px 모바일에서 공유 링크로 특정 전문가 영상 주제가 열릴 때 선택된 주제 칩이 화면 밖에 남지 않도록 가로 레일 안으로 자동 정렬했다.
+- PR #449, main workflow `37431243216`, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 390px 검증이 성공했다.
+- 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-TOPIC-RAIL-20261006`, `E-UI-CONTRACT-EXPERT-TOPIC-RAIL-20261006`, `E-CDP-EXPERT-TOPIC-RAIL-20261006`, `E-DEPLOY-PIPELINE-EXPERT-TOPIC-RAIL-20261006`, `E-LIVE-PUBLIC-EXPERT-TOPIC-RAIL-20261006`.
+
+## 연구 지도 시각 리듬 보정·공개 배포 — 39cb1c9 — 2026-10-06
+
+- GABA 연구 지도에 저대비 동심원과 중심 신호를 추가해 다섯 연구 영역의 관계를 모바일·데스크톱에서 더 빠르게 읽도록 정리했다.
+- PR #451, main workflow 37433290064, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 280·390·1440px 검증을 완료했다.
+- 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-RHYTHM-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-RHYTHM-20261006`, `E-CDP-RESEARCH-MAP-RHYTHM-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-RHYTHM-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-RHYTHM-20261006`.
+
+## 연구 지도 첫 주제 연결·공개 배포 — 65eed515 — 2026-10-06
+
+- 연구 지도 첫 진입에서 `인지`를 기본 선택해 지도에서 첫 연구 카드로 바로 이어지는 흐름을 만들었다. 공유된 연구 카드 해시는 계속 우선한다.
+- PR #453, main workflow 37435517535, Pages·라이브 smoke·release-status와 공개 validator·Chrome CDP fallback 390px 검증을 완료했다.
+- 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-FIRST-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-FIRST-20261006`, `E-CDP-RESEARCH-MAP-FIRST-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-FIRST-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-FIRST-20261006`.
+
+## NAVI 이력 개인정보 감사 재현성 보정·공개 배포 — 4c370795 — 2026-10-06
+
+- 대규모 reachable Git history에서 `git cat-file --batch` stdout pipe가 `ENOBUFS`로 중단되던 자동검증 결함을 보정했다. payload는 저장소 밖 임시 파일로 처리하고 감사 종료 후 삭제하며, 기존처럼 매칭된 경로 수만 경고한다.
+- PR #455, main workflow `37437900625`, Pages·라이브 smoke·release-status와 공개 validator candidate `4c370795`가 성공했다. 연구 수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증으로 남아 있다.
+
+증적: `E-LOCAL-HISTORY-AUDIT-STREAM-20261006`, `E-DEPLOY-PIPELINE-HISTORY-AUDIT-STREAM-20261006`, `E-LIVE-PUBLIC-HISTORY-AUDIT-STREAM-20261006`.
+
+## 초소형 모바일 연구 읽기 레일 가독성 보정·공개 배포 — 86c869ed — 2026-10-06
+
+- 350px 이하에서 진행 레일의 긴 연구 라벨을 현재 주제명으로 압축해 280px에서도 `읽는 중 인지`와 진행 수치를 한눈에 읽도록 보정했다. 접근성 aria-label과 live announcement에는 전체 연구 라벨을 유지했다.
+- 로컬 UI 계약·typecheck·127개 테스트·production build·성능 예산과 PR #457, main workflow `37439945690`, Pages·라이브 smoke·release-status 및 공개 validator·Chrome CDP fallback 280·390·768·1440px 감리를 완료했다.
+- 연구 수치·결과·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-RESEARCH-LABEL-20261006`, `E-UI-CONTRACT-NARROW-RESEARCH-LABEL-20261006`, `E-CDP-NARROW-RESEARCH-LABEL-20261006`, `E-DEPLOY-PIPELINE-NARROW-RESEARCH-LABEL-20261006`, `E-LIVE-PUBLIC-NARROW-RESEARCH-LABEL-20261006`.
+
+## 모바일 연구 비교 도표 결과 라벨 간결화·공개 배포 — 449d65a — 2026-10-06
+
+- 반복되던 `GABA를 섭취한 그룹의 변화` 라벨을 `GABA 그룹`으로 줄여 `뇌파 변화`·`활력 점수`와 `비교 조건`을 한눈에 대조하도록 고도화했다. `덜 줄었습니다`, `더 많이 줄었습니다`, 읽는 법, 연구 수치·출처·접근성 설명은 유지했다.
+- PR #459, main workflow `37442415197`, Pages·라이브 smoke·release-status와 공개 validator candidate `449d65a`가 성공했다. Chrome CDP fallback 390x844 deep link에서 가로 넘침·page/console errors 0과 실제 공개 화면을 확인했다.
+- 상단 카피·연구 내용·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-COMPARISON-VERDICT-20261006`, `E-UI-CONTRACT-COMPARISON-VERDICT-20261006`, `E-CDP-COMPARISON-VERDICT-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-VERDICT-20261006`, `E-LIVE-PUBLIC-COMPARISON-VERDICT-20261006`.
+
+## 비교 도표 GABA 조건명 일관화·공개 배포 — 81c91d2 — 2026-10-06
+
+- 인지·수면 비교 도표의 결과 요약과 조건 레인을 모두 `GABA 그룹`으로 통일해 모바일 독자가 같은 대상을 같은 이름으로 비교하도록 다듬었다.
+- PR #461, main workflow `37444743950`, Pages·라이브 smoke·release-status와 공개 validator candidate `81c91d2`가 성공했다. Chrome CDP fallback 390x844 deep link에서 두 비교 레인·결과 요약·가로폭·page/console errors 0을 확인했다.
+- 연구 내용·수치·출처·접근성 설명·상단 카피·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-UI-CONTRACT-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-CDP-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-DEPLOY-PIPELINE-COMPARISON-LABEL-CONSISTENCY-20261006`, `E-LIVE-PUBLIC-COMPARISON-LABEL-CONSISTENCY-20261006`.
+
+## 국내외 활용 카드 흐름 표식·공개 배포 — de96345 — 2026-10-06
+
+- 국내·일본·세계 활용 카드 상단에 `01 / 03`, `02 / 03`, `03 / 03` 순서 표식을 추가해 한 흐름으로 읽히도록 고도화했다.
+- PR #463, main workflow `37447228688`, Pages·라이브 smoke·release-status와 공개 validator candidate `de96345`가 성공했다. Chrome CDP fallback 390x844·1440x900에서 순서 표식·가로폭·다음 장 이동·page/console errors 0을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-APPLICATION-FLOW-INDEX-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-INDEX-20261006`, `E-CDP-APPLICATION-FLOW-INDEX-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-INDEX-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-INDEX-20261006`.
+
+## 국내외 활용 카드 순서 표식 대비·공개 배포 — 8201ad4 — 2026-10-06
+
+- 국내·일본·세계 활용 카드의 `01 / 03`, `02 / 03`, `03 / 03` 표식을 11px·800 weight·강화된 대비로 보정해 모바일과 데스크톱에서 흐름을 더 빠르게 읽도록 고도화했다.
+- PR #465, main workflow `37449714953`, Pages·라이브 smoke·release-status와 공개 validator candidate `8201ad4`가 성공했다. Chrome CDP fallback 390x844·1440x900에서 표식·가로폭·page/console errors 0을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-UI-CONTRACT-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-CDP-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-DEPLOY-PIPELINE-APPLICATION-FLOW-MARKER-CONTRAST-20261006`, `E-LIVE-PUBLIC-APPLICATION-FLOW-MARKER-CONTRAST-20261006`.
+
+## 중간 폭 모바일 읽기 조절 라벨·공개 배포 — fc61732 — 2026-10-06
+
+- 351–380px에서 읽기 크기 조절 기능을 `가+ 글자`로 명시하고 메뉴·공유 버튼과의 간격을 재배치했다.
+- PR #467, main merge `fc61732`, 재시작 workflow `37453296672`, Pages·라이브 smoke·release-status와 공개 validator candidate `fc61732`가 성공했다.
+- 360px 공개 Chrome CDP fallback에서 큰 글씨 전환과 가로폭·페이지 오류 0을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MID-NARROW-TYPE-CONTROL-20261006`, `E-UI-CONTRACT-MID-NARROW-TYPE-CONTROL-20261006`, `E-CDP-MID-NARROW-TYPE-CONTROL-20261006`, `E-DEPLOY-PIPELINE-MID-NARROW-TYPE-CONTROL-20261006`, `E-LIVE-PUBLIC-MID-NARROW-TYPE-CONTROL-20261006`.
+
+## 전문가 영상 중간 모바일 프레임 고도화·공개 배포 — 7d81419 — 2026-10-06
+
+- 351–700px에서 세로형 영상 플레이어와 선택 영상 제목·출처·공유 동작을 좌우 한 단위로 배치해 모바일에서 영상과 맥락을 함께 읽도록 보정했다.
+- 350px 이하의 세로 흐름과 1440px 데스크톱 갤러리는 유지했으며, 선택 영상 자동재생·URL 상태·영상 데이터·제품 독립 공개 경계는 변경하지 않았다.
+- PR #484, main workflow `37471094112`, 공개 validator candidate `7d81419`, 공개 Chrome CDP 390·350·1440px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-UI-CONTRACT-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-CDP-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-DEPLOY-PIPELINE-EXPERT-VIDEO-MID-MOBILE-20261006`, `E-LIVE-PUBLIC-EXPERT-VIDEO-MID-MOBILE-20261006`.
+
+## 연구 지도 맥락 정렬·공개 배포 — 7fe6a4d — 2026-10-06
+
+- 연구 지도에 직접 진입했을 때 첫 연구 카드가 자동 선택된 것처럼 보이던 레일을 중립 상태로 정렬했다.
+- 지도 노드 선택·연구 카드 진입·공유 카드 해시에서만 선택 연구 맥락이 표시되도록 해, `다섯 연구 영역`과 `인지 연구 결과`의 읽기 상태를 구분했다.
+- PR #486, main workflow `37474843826`, 공개 validator candidate `7fe6a4d`, 공개 Chrome CDP 390px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-CONTEXT-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-CONTEXT-20261006`, `E-CDP-RESEARCH-MAP-CONTEXT-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-CONTEXT-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-CONTEXT-20261006`.
+
+## 연구 지도 첫 렌더 중립화·공개 배포 — d450e98 — 2026-10-06
+
+- 연구 지도 chapter-level 진입 시 첫 렌더부터 선택 연구를 만들지 않도록 초기 topic fallback을 제거했다.
+- 공유 카드 hash와 지도 노드 선택에서는 기존 연구 카드 맥락·URL·읽기 레일·선택 상태를 그대로 복원한다.
+- PR #488, main workflow `37476812066`, 공개 validator candidate `d450e98`, 공개 Chrome CDP 390px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-UI-CONTRACT-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-CDP-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`, `E-LIVE-PUBLIC-RESEARCH-MAP-INITIAL-NEUTRAL-20261006`.
+
+## 중간 폭 모바일 공유 라벨·공개 배포 — a6c8c6e — 2026-10-06
+
+- 351–430px 모바일 헤더에서 공유 기능을 `공유하기`로 읽을 수 있게 표시하고 메뉴·글자 크기·공유 버튼 간격을 분리했다.
+- 350px 이하에서는 기존 아이콘 레일을 유지해 초소형 화면의 가로폭과 터치 구조를 보존했다.
+- release manifest를 compact JSON으로 생성해 공개 정적 자산 예산 여유를 확보했으며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- PR #494, main workflow `37482350132`, 공개 validator candidate `a6c8c6e`, Chrome CDP 390·380·351·350px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-UI-CONTRACT-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-CDP-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-DEPLOY-PIPELINE-MEDIUM-PHONE-SHARE-LABEL-20261006`, `E-LIVE-PUBLIC-MEDIUM-PHONE-SHARE-LABEL-20261006`.
+
+## 모바일 첫 화면 hero 줄바꿈 기회·공개 배포 — 2026-10-07 — fb603a48
+
+- `GABA에서<wbr /> 읽습니다`를 적용해 좁은 화면에서도 의미 단위 줄바꿈 기회를 제공하고, 실제 공개 390·350px에서 문장 전체가 가로폭 안에 표시되는 것을 확인했다.
+- 1440px 제목 흐름, 모바일 공유 라벨, 연구 카피·수치·출처·제품 독립 공개 경계는 유지했다.
+- 로컬 성능 예산 `1,649,468 bytes <= 1,650,000`, PR #498, main workflow `37487864715`, 공개 validator candidate `fb603a48`, Chrome CDP 390·350·1440px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MOBILE-HERO-LINE-BREAK-20261007`, `E-UI-CONTRACT-MOBILE-HERO-LINE-BREAK-20261007`, `E-CDP-MOBILE-HERO-LINE-BREAK-20261007`, `E-DEPLOY-PIPELINE-MOBILE-HERO-LINE-BREAK-20261007`, `E-LIVE-PUBLIC-MOBILE-HERO-LINE-BREAK-20261007`.
+
+## 전문가 영상 상태 레일·공개 배포 — d17014d6 — 2026-10-07
+
+- 전문가 영상 카드의 상태 문구를 `선택 후 재생`·`준비 중`·`재생 중`으로 정돈하고 상태 클래스를 유지해 모바일 메타 레일의 한 줄 가독성을 보강했다.
+- 카드 선택 시 제목·상태·`aria-pressed`·포커스가 함께 갱신되는 흐름을 공개 390px에서 확인했다.
+- PR #500/#501과 main workflow `37491933306`이 성공했고 공개 validator가 candidate `d17014d6`·HTTP 200·provenance `matched`를 확인했다. 최종 정적 자산 총량은 `1,648,499 bytes`다.
+- 영상·연구 출처와 제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-STATE-RAIL-20261007`, `E-UI-CONTRACT-VIDEO-STATE-RAIL-20261007`, `E-CDP-VIDEO-STATE-RAIL-20261007`, `E-DEPLOY-PIPELINE-VIDEO-STATE-RAIL-20261007`, `E-LIVE-PUBLIC-VIDEO-STATE-RAIL-20261007`.
+
+## 전문가 영상 필터 순번 정합성·공개 배포 — f2241eb — 2026-10-07
+
+- 주제 필터에서 포스터 내부 순번을 전체 9개 영상 기준으로 통일해 `연구 읽기` 영상이 `05`·`05 / 09`로 일관되게 보이도록 했다.
+- UI 계약에 전체 컬렉션 순번 회귀 검사를 추가했다. 기존 포스터 크롭 변화·영상 출처·제품 독립 공개 경계는 유지했다.
+- PR #503, main workflow `37495381996`, 공개 validator candidate `f2241eb`, Chrome CDP 390px 검증이 성공했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-VIDEO-ORDER-20261007`, `E-UI-CONTRACT-VIDEO-ORDER-20261007`, `E-CDP-VIDEO-ORDER-20261007`, `E-DEPLOY-PIPELINE-VIDEO-ORDER-20261007`, `E-LIVE-PUBLIC-VIDEO-ORDER-20261007`.
+
+## 좁은 모바일 깊은 이동 안정화·공개 배포 — 0869337 — 2026-10-07
+
+- 380px 이하에서 지연 렌더링 장의 실제 높이를 확정해 연구·전문가 영상·마지막 장으로 이동할 때 레이아웃 점프를 제거했다.
+- UI 계약에 좁은 화면 회귀 조건을 추가하고 320px·380px 로컬, 320px 공개 URL의 깊은 이동·전문가 영상 handoff를 확인했다.
+- PR #505, main workflow `37498997965`, 공개 Pages 배포와 라이브 smoke가 성공했다. 정적 자산 총량은 `1,648,563 bytes`다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-NARROW-DEEP-LINK-20261007`, `E-UI-CONTRACT-NARROW-DEEP-LINK-20261007`, `E-CDP-NARROW-DEEP-LINK-20261007`, `E-DEPLOY-PIPELINE-NARROW-DEEP-LINK-20261007`, `E-LIVE-PUBLIC-NARROW-DEEP-LINK-20261007`.
+
+## 중간 폭 모바일 공유 라벨·공개 배포 — 7997fd5 — 2026-10-07
+
+- 351–430px에서 공유 버튼을 아이콘+`공유하기`로 보이게 하고 safe-area 간격을 재조정했다.
+- 350px 이하 아이콘 레일과 390px 실제 공유 토스트·가로폭 정합을 유지했다.
+- PR #507, main workflow `37501337335`, 공개 cache-busted 390·351·350px 검증이 성공했다. 정적 자산 총량은 `1,648,675 bytes`다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-MEDIUM-SHARE-LABEL-20261007`, `E-UI-CONTRACT-MEDIUM-SHARE-LABEL-20261007`, `E-CDP-MEDIUM-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-MEDIUM-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-MEDIUM-SHARE-LABEL-20261007`.
+
+## 공유 피드백의 다음 장 가림 방지·공개 배포 — 7669136 — 2026-10-07
+
+- 공유 직후에는 확인 토스트를 보여주고, 독자가 32px 이상 스크롤하면 즉시 닫아 다음 장의 제목·본문을 가리지 않게 했다.
+- 390px·1440px 실제 공개 화면과 연구·전문가 영상·마지막 장 이동을 재검증했다. PR #510과 main workflow `37504028167`이 성공했다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-SHARE-DISMISS-20261007`, `E-UI-CONTRACT-SHARE-DISMISS-20261007`, `E-CDP-SHARE-DISMISS-20261007`, `E-DEPLOY-PIPELINE-SHARE-DISMISS-20261007`, `E-LIVE-PUBLIC-SHARE-DISMISS-20261007`.
+
+## 태블릿 성장 연구 흐름·공개 배포 — 20a4713 — 2026-10-07
+
+- 701–1100px 3열 성장 연구 흐름에서 행간 연결을 보강하고 3번째 카드의 행 끝 연결은 숨겼다.
+- 성장 연구 6단계를 `list/listitem`으로 노출하고 701–1199px 직접 해시 이동 전 실제 섹션 높이를 확보했다.
+- PR #512, main workflow `37508721569`, 공개 390·768·1440px Chrome CDP fallback 검증을 완료했다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-GROWTH-FLOW-20261007`, `E-UI-CONTRACT-TABLET-GROWTH-FLOW-20261007`, `E-CDP-TABLET-GROWTH-FLOW-20261007`, `E-DEPLOY-PIPELINE-TABLET-GROWTH-FLOW-20261007`, `E-LIVE-PUBLIC-TABLET-GROWTH-FLOW-20261007`.
+
+## 태블릿 공유 라벨·공개 배포 — 0f7adb6 — 2026-10-07
+
+- 701–900px 태블릿 헤더에서 아이콘 전용 공유 버튼을 아이콘+`공유하기` 라벨로 보이게 해, 고령 사용자와 사업자가 공유 기능을 바로 발견할 수 있도록 했다.
+- 44px 터치 높이, 78px 태블릿 레일, 390px 모바일·1440px 데스크톱 레이아웃을 유지했다. UI 계약에 v158 회귀 검사를 추가했다.
+- PR #514 required checks, main workflow `37511444066`, 공개 Pages 배포와 라이브 smoke, 공개 Chrome CDP 390·701·768·900·1440px 검증이 성공했다. 최종 local Pages 자산 총량은 `1,649,679 bytes`다. 첫 원격 15-byte 예산 초과는 중복 선언 제거 후 재검증에서 해소했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-SHARE-LABEL-20261007`, `E-UI-CONTRACT-TABLET-SHARE-LABEL-20261007`, `E-CDP-TABLET-SHARE-LABEL-20261007`, `E-DEPLOY-PIPELINE-TABLET-SHARE-LABEL-20261007`, `E-LIVE-PUBLIC-TABLET-SHARE-LABEL-20261007`.
+
+## 태블릿 국내외 활용 카드 리듬·공개 배포 — 988c020 — 2026-10-07
+
+- 701–1100px 국내외 활용 카드를 1열로 정렬해 마지막 카드 오른쪽의 빈 공간을 제거했다.
+- 390·768·1440px 시각 점검, PR #530, main workflow `37536776591`, 공개 validator candidate `988c020`이 성공했다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-APPLICATION-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-APPLICATION-RHYTHM-20261007`, `E-CDP-TABLET-APPLICATION-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-APPLICATION-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-APPLICATION-RHYTHM-20261007`.
+
+## 태블릿 전문가 영상 보드 리듬·공개 배포 — 55aa1b4 — 2026-10-07
+
+- 701–1100px 전문가 영상 카드를 1열로 정렬해 마지막 카드 오른쪽의 빈 공간을 제거했다.
+- 390px 모바일 2열 썸네일과 1440px 데스크톱 갤러리는 유지했다. PR #532, main workflow `37539036705`, 공개 validator candidate `55aa1b4`, 390·768·1440px 시각 점검이 성공했다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-VIDEO-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-VIDEO-RHYTHM-20261007`, `E-CDP-TABLET-VIDEO-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-VIDEO-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-VIDEO-RHYTHM-20261007`.
+
+## 태블릿 학술 연구 지도 리듬·공개 배포 — 8926b4e — 2026-10-07
+
+- 701–1100px 학술 연구 영역 5개 카드를 1열로 정렬해 3+2 배치의 오른쪽 빈 공간을 제거했다.
+- 390px 모바일 1열과 1440px 데스크톱 5열은 유지했다. PR #534, main workflow `37541239081`, 공개 validator candidate `8926b4e`, 390·768·1440px 시각 점검이 성공했다.
+- 연구 카피·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `E-LOCAL-BUILD-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-UI-CONTRACT-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-CDP-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-DEPLOY-PIPELINE-TABLET-ACADEMIC-MAP-RHYTHM-20261007`, `E-LIVE-PUBLIC-TABLET-ACADEMIC-MAP-RHYTHM-20261007`.
+
+## 2026-10-07 — 좁은 모바일 전문가 영상 히어로·공개 배포 재검증
+
+- 320px에서 포스터와 설명이 한 화면에 함께 읽히도록 350px 이하 전문가 영상 feature를 2열 컴팩트 카드로 보정했다.
+- PR #536의 성능 예산 초과를 CSS 중복·불필요 선언 정리로 해소하고, PR #537에서 NAVI TF heartbeat freshness를 갱신했다.
+- main workflow `37545095666`과 공개 validator candidate `4d128fa`가 성공했으며, 공개 320·390·768·1440px Playwright 점검에서 오류와 가로폭 초과가 없었다.
+- 공개 연구 카피·출처·제품 독립 경계는 변경하지 않았다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`를 유지한다.
+
+증적: `C-226`, `E-LOCAL-BUILD-NARROW-EXPERT-HERO-20261008`, `E-UI-CONTRACT-NARROW-EXPERT-HERO-20261008`, `E-CDP-NARROW-EXPERT-HERO-20261008`, `E-DEPLOY-PIPELINE-NARROW-EXPERT-HERO-20261008`, `E-LIVE-PUBLIC-NARROW-EXPERT-HERO-20261008`.
+## 2026-10-07 — 인쇄·PDF 지연 렌더링 보정
+
+- `public/print.css`에서 지연 렌더링 섹션을 인쇄 시 실제 문서로 펼쳐 사업자용 PDF의 빈 여백을 제거했다.
+- 화면 전용 헤더·진행바·영상 게시판·공유 조작부는 숨기고, 연구 출처 URL 14개는 인쇄물에 유지한다.
+- 로컬 인쇄 미디어 렌더와 전체 build를 통과했다. 공개 Pages 재배포·라이브 인쇄 검증은 다음 배포 게이트에서 수행한다.
+
+증적: `C-227`, `E-LOCAL-BUILD-PRINT-FLOW-20261008`, `E-UI-CONTRACT-PRINT-FLOW-20261008`, `E-CDP-PRINT-FLOW-20261008`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+## 2026-10-07 — 인쇄·PDF 공개 배포 재검증
+
+- 공개 Pages candidate `aa4ea2f`에 인쇄 지연 렌더링 보정이 반영됐다.
+- `print.css` HTTP 200, 화면 전용 chrome 0개, 지연 섹션 6개, 출처 URL 14개, 문서 폭 1440px을 확인했다.
+- C-227을 `SUPPORTED`, 배포·라이브 증거를 `INDEPENDENTLY_CONFIRMED`로 갱신했다.
+
+증적: `C-227`, `E-DEPLOY-PIPELINE-PRINT-FLOW-20261008`, `E-LIVE-PUBLIC-PRINT-FLOW-20261008`.
+
+## 연구 결과 도표 읽기 레일 고정·공개 배포 — 23739cb — 2026-10-07
+
+- 긴 연구 상세 카드를 읽는 동안 데스크톱 결과 도표가 상단에 남아 비교 맥락이 끊길 수 있는 잔여 퍼블리싱 리스크를 확인했다.
+- 1101px 이상에서는 결과 도표를 sticky 읽기 레일로 고정하고, 900px 이하 모바일·태블릿에서는 기존 정적 카드 흐름을 유지했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 로컬 Pages-style 성능 예산은 `1,649,669 bytes <= 1,650,000`이며 PR #565와 main workflow `37570786455`의 release-verify·worker-readiness·Pages·라이브 smoke·release-status가 성공했다. 공개 validator는 candidate `23739cb0158a9fff1b93ff4979cd76419e6b0eb8`, HTTP 200, STATIC, bundle hash 73개, teaser `HOLD`, provenance `matched`를 확인했다.
+- 공개 390·1440px Playwright Chromium fallback에서 가로폭·오류·피부 연구 카드 선택을 확인했다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `C-240`, `E-LOCAL-BUILD-RESEARCH-CHART-STICKY-20261007`, `E-PLAYWRIGHT-RESEARCH-CHART-STICKY-20261007`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-STICKY-20261007`, `E-LIVE-PUBLIC-RESEARCH-CHART-STICKY-20261007`.
+
+## 2026-10-07 — 공개 배포 다중 화면 자동 재감리 — 2de8c650
+
+- 최신 main 공개본을 NAVI 기준으로 다시 점검했다. 로컬 typecheck·UI contract·research copy·127개 테스트·production build·정적 bundle·release manifest·성능 예산이 통과했고 Pages-style 총 자산은 `1,649,465 bytes <= 1,650,000`이다.
+- 공개 320·390·768·1440px에서 HTTP 200·히어로·헤더·가로폭 정합·page/console error 0을 확인했다. 390px에서는 메뉴 열림, 글자 크기 토글, 피부 연구 카드 포커스, 두 번째 전문가 영상 선택 후 `재생 중` 상태를 실제로 재현했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. 새 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
+
+증적: `C-241`, `E-LOCAL-BUILD-NAVI-PUBLIC-AUDIT-20261007`, `E-PLAYWRIGHT-NAVI-PUBLIC-AUDIT-20261007`, `E-DEPLOY-PIPELINE-NAVI-PUBLIC-AUDIT-20261007`, `E-LIVE-PUBLIC-NAVI-PUBLIC-AUDIT-20261007`, `E-NAVI-STATE-PUBLIC-AUDIT-20261007`.
+
+## 2026-10-07 — 사업자용 핵심 5문장 인쇄·PDF 공유 보정 — f3917100
+
+- 인쇄·PDF에서 접힌 `details` 내부가 누락되어 제목만 남을 수 있는 잔여 리스크를 확인했다.
+- `public/print.css`에서 사업자용 GABA 핵심 5문장과 카드 본문을 인쇄 시 표시하고 복사 버튼은 숨겼다. 화면의 접기·문장 복사 동작과 연구 카피·수치·출처·제품 독립 경계는 유지했다.
+- PR #568과 main workflow `37574734151`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했고, 공개 validator가 candidate `f391710024d67181271a21098d41d2b0639aa295`를 확인했다. 공개 320·390·768·1440px에서도 가로폭과 오류가 없었으며 390px 인쇄 모드에서 5개 카드가 렌더링됐다.
+- NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
+
+증적: `C-242`, `E-LOCAL-BUILD-PRINT-SHARE-KIT-20261007`, `E-PLAYWRIGHT-PRINT-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-PRINT-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-PRINT-SHARE-KIT-20261007`, `E-NAVI-STATE-PRINT-SHARE-KIT-20261007`.
+
+## 2026-10-07 — 공개 배포 경계 상태 자동 재감리 — 42be0181
+
+- 최신 공개본을 직접 해시·공유·복사·반응형 경계 관점에서 다시 점검했다. `#research`는 연구 지도로, 연구 주제 해시는 해당 상세 카드로, 전문가 영상 해시는 선택 영상으로 진입했으며 읽기 진행 레일 아래에서 제목과 카드가 가려지지 않았다.
+- 320·390·768px에서 가로 넘침과 page/console error가 없었고, 공유 알림·사업자용 5문장 복사·큰 글자 모드의 실제 상태 변경을 재현했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 새 CRITICAL/MAJOR 결함은 발견되지 않아 기능 코드는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`, teaser는 `HOLD`를 유지한다.
+
+증적: `C-243`, `E-LOCAL-EDGE-STATE-AUDIT-20261007`, `E-PLAYWRIGHT-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-20261007`.
+
+## 2026-10-07 — 공개 배포 정합성 최종 확인 — abc51324
+
+- 직접 진입·공유 상태 재감리 기록을 PR #570으로 보호된 `main`에 병합했다. `release-verify`, `worker-readiness`, `deploy-pages`, `smoke-live`, `release-status`가 모두 성공했다.
+- 공개 validator는 merge SHA `abc51324c26f596667100c3017c0c4b7ca49a4c1`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION`, 완료 게이트는 `NOT_READY`를 유지한다.
+
+증적: `C-244`, `E-DEPLOY-PIPELINE-EDGE-STATE-AUDIT-20261007`, `E-LIVE-PUBLIC-EDGE-STATE-AUDIT-FINAL-20261007`, `E-NAVI-STATE-EDGE-STATE-AUDIT-FINAL-20261007`.
+
+## 2026-10-07 — 사업자용 공유 카드 모바일 가독성 보정 — ddda08f
+
+- 390px에서 제목이 복사 조작부에 눌려 어색하게 줄바꿈되는 잔여 리스크를 확인하고, 제목·설명 전체 폭과 다음 행 조작부 구조로 보정했다. 350px 이하에서는 제목 크기만 한 단계 줄였다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산을 통과했고, PR #580과 main workflow `37589452401`의 Pages 배포·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 merge SHA `ddda08f146b0f2a6ba2acb83c571ead84f71f40a`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `provenance=matched`를 확인했다. 공개 320·390px Chrome headless/CDP fallback에서 직접 `#final`과 공유 카드 읽기 순서를 재현했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`와 외부 검증 조건을 유지한다.
+
+증적: `C-248`, `E-LOCAL-BUILD-MOBILE-SHARE-KIT-20261007`, `E-CDP-MOBILE-SHARE-KIT-20261007`, `E-DEPLOY-PIPELINE-MOBILE-SHARE-KIT-20261007`, `E-LIVE-PUBLIC-MOBILE-SHARE-KIT-20261007`, `E-NAVI-STATE-MOBILE-SHARE-KIT-20261007`.
+
+## 2026-10-07 — 출처 읽기 연결부 한국어 줄바꿈 보정 — 341beb5
+
+- 390px에서 연결 제목의 조사 `로`가 단독 줄로 남는 잔여 리스크를 확인하고 430px 이하에 `word-break: keep-all`을 적용했다. 320px·390px 모두 단어 단위로 자연스럽게 읽힌다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산을 통과했고, PR #582와 main workflow `37592004973`의 Pages 배포·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 merge SHA `341beb544580f2da9a18a5eeb2b2f97d1ddf8653`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `provenance=matched`를 확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`와 외부 검증 조건을 유지한다.
+
+증적: `C-249`, `E-LOCAL-BUILD-KOREAN-HANDOFF-20261007`, `E-CDP-KOREAN-HANDOFF-20261007`, `E-DEPLOY-PIPELINE-KOREAN-HANDOFF-20261007`, `E-LIVE-PUBLIC-KOREAN-HANDOFF-20261007`, `E-NAVI-STATE-KOREAN-HANDOFF-20261007`.
+
+## 2026-10-07 — 공개 반응형 다중 폭 자동 재감리 — 5fa5cf5
+
+- 공개 360·390·430·768·1440px에서 `#top`·`#research`·`#reading-note`·`#final`을 직접 진입시켜 document 폭과 핵심 화면을 점검했다. 주요 화면의 잘림·겹침은 없었다.
+- 모바일 전문가 영상 필터는 페이지 넘침이 아닌 의도된 내부 가로 스크롤 레일로 확인했다. 새 기능 코드나 연구 카피는 변경하지 않았다.
+- 최종 공개 validator와 NAVI 상태를 재확인했다. `USER_DECISION / NOT_READY`, teaser `HOLD`, 외부 브라우저·실기기·실사용자·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-250`, `E-CDP-RESPONSIVE-AUDIT-20261007`, `E-LIVE-PUBLIC-RESPONSIVE-AUDIT-20261007`, `E-DEPLOY-PIPELINE-RESPONSIVE-AUDIT-20261007`, `E-NAVI-STATE-RESPONSIVE-AUDIT-20261007`.
+
+## 2026-10-07 — 좁은 모바일 공유 컨트롤 라벨 보정 — c249e113
+
+- 280·320px에서 아이콘만 보이던 헤더 공유 기능에 `공유` 라벨을 추가해 기능 발견성을 높였다. 351·390px의 `공유하기`, 접근성 이름, 공유 fallback 동작은 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #585 보호 검사와 main Pages 배포·라이브 smoke·release-status가 성공했다. 공개 280·320·351·390px에서 라벨·가로폭·실제 공유 fallback 토스트를 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, 외부 검증 조건을 유지한다.
+
+증적: `C-251`, `E-LOCAL-BUILD-COMPACT-SHARE-20261007`, `E-CDP-COMPACT-SHARE-20261007`, `E-DEPLOY-PIPELINE-COMPACT-SHARE-20261007`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261007`, `E-NAVI-STATE-COMPACT-SHARE-20261007`.
+
+## 2026-10-07 — 초소형 전문가 영상 메타데이터 보정 — 9e9e0d3
+
+- NAVI 공개 배포 감리에서 280px 전문가 영상 카드의 순번이 주제·재생 상태와 한 줄에 고정되어 카드 밖으로 넘어갈 수 있는 잔여 리스크를 확인했다. 350px 이하에서 메타 정보가 자연스럽게 줄바꿈되도록 보정하고 순번의 자동 여백을 해제했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산, PR #587 보호 검사와 main Pages 배포·라이브 smoke·release-status가 성공했다. 공개 280·320·360·390·430·1440px에서 영상 선택→iframe·재생 상태→수면 필터 4개 카드 표시를 확인했다.
+- 공개 validator는 merge SHA `9e9e0d35a0db4255c5151d09411706ec482d8717`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `provenance=matched`를 확인했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재에 따른 fallback, YouTube 외부 프레임·실기기·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-252`, `E-LOCAL-BUILD-ULTRA-NARROW-VIDEO-META-20261007`, `E-CDP-ULTRA-NARROW-VIDEO-META-20261007`, `E-DEPLOY-PIPELINE-ULTRA-NARROW-VIDEO-META-20261007`, `E-LIVE-PUBLIC-ULTRA-NARROW-VIDEO-META-20261007`, `E-NAVI-STATE-ULTRA-NARROW-VIDEO-META-20261007`.
+
+## 2026-10-07 — 전문가 영상 지연 fallback 보정 — 560d9afe
+
+- 외부 YouTube iframe이 늦게 준비될 때 무한 로딩에 머물던 잔여 리스크를 확인하고, 6초 후 `재생 지연` 상태에서 YouTube 원본 보기와 다시 시도 조작을 제공하도록 보정했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산, PR #589 보호 검사와 main workflow `37604557572`의 Pages 배포·라이브 smoke·release-status가 성공했다. 로컬 total assets는 `1,649,388 bytes`다.
+- 공개 validator는 merge SHA `560d9afe6e0acbd257e9fb058a87078c06d76ac6`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `provenance=matched`를 확인했다. 공개 280px CDP fallback에서 지연 상태·원본 보기·재시도·준비 상태 복귀·가로폭 0·console error 0을 확인했다.
+- 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재와 외부 브라우저·실기기·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-253`, `E-LOCAL-BUILD-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-CDP-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-DEPLOY-PIPELINE-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-LIVE-PUBLIC-VIDEO-TIMEOUT-FALLBACK-20261007`, `E-NAVI-STATE-VIDEO-TIMEOUT-FALLBACK-20261007`.
+
+## 2026-10-07 — 공개 표면·반응형 고도화 재감리 — f320f5d
+
+- 320·390·768·1440px에서 주요 장 직접 진입을 다시 점검하고, document 가로폭 일치·히어로·연구 지도·출처 읽기·전문가 영상·공유 화면의 잘림·겹침 없음으로 확인했다.
+- UI contract·research copy·typecheck·127개 테스트·성능 예산과 최신 공개 validator가 통과했다. 총 자산은 `1,649,388 bytes`이며 기능 코드·공개 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- 신규 CRITICAL/MAJOR 결함은 없고, 이번 회차는 코드 수정 없이 공개본 유지로 기록했다. NAVI `USER_DECISION / NOT_READY`, teaser `HOLD`, 실기기·실사용자·독립 과학·규제 외부 검증 조건을 유지한다.
+
+증적: `C-254`, `E-LOCAL-BUILD-PUBLISHING-AUDIT-20261007`, `E-CDP-PUBLISHING-SURFACE-AUDIT-20261007`, `E-LIVE-PUBLIC-PUBLISHING-REAUDIT-20261007`, `E-NAVI-STATE-PUBLISHING-AUDIT-20261007`.
+
+## 2026-10-07 — 모바일 브라우저 호환성 퍼블리싱 보완 — 5fedb836
+
+- `text-size-adjust`·`-webkit-text-size-adjust`로 모바일 브라우저의 텍스트 자동 확대 차이를 줄이고, 헤더 `-webkit-backdrop-filter` fallback을 추가했다. 이미 후속 supports 블록에서 적용되는 헤딩 균형 선택자는 중복만 정리했다.
+- 로컬·Pages-style 성능과 PR #592 보호 검사, main workflow `37608893903`, 공개 live validator가 통과했다. Pages-style 총 자산은 `1,649,635 bytes / 1,650,000 bytes`다.
+- 연구 카피·수치·출처·제품 독립 공개 경계·teaser `HOLD`는 변경하지 않았다. NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 외부 조건으로 남긴다.
+
+증적: `C-255`, `E-LOCAL-BUILD-CROSS-BROWSER-SURFACE-20261007`, `E-DEPLOY-PIPELINE-CROSS-BROWSER-SURFACE-20261007`, `E-LIVE-PUBLIC-CROSS-BROWSER-SURFACE-20261007`, `E-NAVI-STATE-CROSS-BROWSER-SURFACE-20261007`.
+
+## 2026-10-07 — 공개 핵심 화면·상호작용 자동 재감리 — b7f0bbb
+
+- 320·390·768·1440px 핵심 장 직접 진입과 390px 실제 메뉴·연구 지도·공유 흐름을 재점검했다. 히어로·수면과 회복·발견·인지 연구 카드·출처 읽기·마지막 공유 화면에 잘림·겹침이 없었고 document 가로폭은 viewport와 일치했다.
+- UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 검사가 통과했으며 총 자산은 `1,649,431 bytes / 1,650,000 bytes`다. 기능 코드·공개 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- 공개 validator는 문서-only PR #594 병합 SHA `f6a934d10ac08720be717e07bd86ea02513b24b9` 기준 HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 코드 기준선은 `b7f0bbb`다.
+- 신규 CRITICAL/MAJOR 결함은 없으며, NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재에 따른 Chrome headless/CDP fallback, 외부 브라우저·실기기·실제 고령 사용자 독해성·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-256`, `E-LOCAL-BUILD-PUBLISHING-RECHECK-20261007`, `E-CDP-INTERACTION-PUBLISHING-RECHECK-20261007`, `E-LIVE-PUBLIC-PUBLISHING-RECHECK-20261007`, `E-NAVI-STATE-PUBLISHING-RECHECK-20261007`.
+
+## 2026-10-07 — 320px 연구 결과 비교 도표 보정 — d39a4f0
+
+- 320px 이하에서도 비교 조건과 GABA 그룹을 같은 시야에 유지하도록 결과 도표를 재배치했다. GABA 결과 강조·변화 방향 막대·상대 비교 범례의 정보 순서는 유지했다.
+- UI contract·research copy·typecheck·127개 테스트·production build·정적 bundle·성능 예산을 통과했고 로컬 총 자산은 `1,648,820 bytes`다. PR #596과 main workflow `37615469457`의 공개 배포·라이브 smoke·release-status가 성공했다.
+- 공개 validator는 merge SHA `d39a4f0ee187cad5b12ab1f2da9470f0f9552d27`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 연구 카피·수치·출처·제품 독립 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Chrome headless/CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증 조건을 외부 검증으로 남긴다.
+
+증적: `C-257`, `E-LOCAL-BUILD-NARROW-COMPARISON-20261007`, `E-CDP-NARROW-COMPARISON-20261007`, `E-DEPLOY-PIPELINE-NARROW-COMPARISON-20261007`, `E-LIVE-PUBLIC-NARROW-COMPARISON-20261007`, `E-NAVI-STATE-NARROW-COMPARISON-20261007`.
+
+## 2026-10-07 — 모바일 성장 연구 흐름 인포그래픽 — 3cef5f36
+
+- 성장 연구 6단계를 모바일에서 번호 노드·세로 연결선·단계 화살표가 있는 하나의 시각적 경로로 재구성하고 마지막 `어린이 연구`를 도착점으로 강조했다. 데스크톱 가로 흐름과 연구 카피·수치·출처·제품 독립 경계는 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·release manifest·성능 예산을 통과했다. 첫 Pages 후보는 전체 자산 `1,650,213 bytes`로 한도를 213바이트 초과했으나, 비필수 장식 효과를 줄인 최종 후보는 로컬 `1,649,449 bytes`였고 PR #600과 main workflow `37622082343`이 성공했다.
+- 공개 validator는 merge SHA `3cef5f36df8051d20ba1c73f24c50f4cd8d01d4c`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 Chrome CDP fallback 390px에서 성장 연구 흐름·메뉴·연구 지도·공유 fallback·가로폭 0건·console error 0을 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수 조건을 유지한다.
+
+증적: `C-259`, `E-LOCAL-BUILD-MOBILE-GROWTH-PATH-20261007`, `E-CDP-MOBILE-GROWTH-PATH-20261007`, `E-DEPLOY-PIPELINE-MOBILE-GROWTH-PATH-20261007`, `E-LIVE-PUBLIC-MOBILE-GROWTH-PATH-20261007`, `E-NAVI-STATE-MOBILE-GROWTH-PATH-20261007`.
+
+## 2026-10-07 — 좁은 모바일 회복 흐름 헤더 정렬 — c24de966
+
+- 280px 이하에서 회복 흐름의 제목·현재 카드·전체 단계 수가 한 줄로 읽히도록 grid 스캔 레일을 추가했다. 390px 큰 글씨 모드와 데스크톱 레이아웃은 유지했다.
+- 실제 적용되지 않던 중복 회복 지도 CSS를 정리해 Pages 총 자산을 성능 한도 안으로 낮췄다. 첫 후보 `1,650,296 bytes` 실패 후 최종 로컬 `1,649,327 bytes`로 통과했다.
+- PR #602, main workflow `37625896969`, 공개 validator merge SHA `c24de9661cb9fb457ffcc12d3d26bf1671c3936f`, Chrome CDP 280·390px 감리를 기록했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION / NOT_READY`, teaser `HOLD`, Browser plugin 부재에 따른 CDP fallback, 실기기·실사용자·독립 과학·규제 검증 조건을 유지한다.
+
+증적: `C-260`, `E-LOCAL-BUILD-NARROW-RECOVERY-MAP-20261007`, `E-CDP-NARROW-RECOVERY-MAP-20261007`, `E-DEPLOY-PIPELINE-NARROW-RECOVERY-MAP-20261007`, `E-LIVE-PUBLIC-NARROW-RECOVERY-MAP-20261007`, `E-NAVI-STATE-NARROW-RECOVERY-MAP-20261007`.
+
+## 2026-10-07 — 인쇄·PDF 첫 히어로 여백 보정 — eb0dcf3
+
+- 공개 인쇄/PDF에서 첫 히어로 제목이 종이 왼쪽 끝에 붙던 문제를 확인하고 `public/print.css`에 A4 좌우 여백을 적용했다. 화면 레이아웃과 공개 연구 내용은 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산, PR #604와 main workflow `37628653269`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. 로컬 총 자산은 `1,649,327 bytes / 1,650,000 bytes`다.
+- 공개 validator는 merge SHA `eb0dcf3f20ffba47b5df55feadce5ff7a8664a3f`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 인쇄 미디어는 14개 장·14개 출처 링크·화면 전용 조작부 숨김·문서 폭 `1425/1425`를 확인했다.
+- NAVI는 `USER_DECISION / NOT_READY`, Browser plugin 부재에 따른 Chrome CDP fallback, 실기기·실사용자·독립 과학·규제 검토 조건을 유지한다.
+
+증적: `C-261`, `E-LOCAL-BUILD-PRINT-HERO-MARGIN-20261007`, `E-CDP-PRINT-HERO-MARGIN-20261007`, `E-DEPLOY-PIPELINE-PRINT-HERO-MARGIN-20261007`, `E-LIVE-PUBLIC-PRINT-HERO-MARGIN-20261007`, `E-NAVI-STATE-PRINT-HERO-MARGIN-20261007`.
+
+## 2026-10-07 — 최종 공유 장 인쇄·PDF action 공개 보완 — 6bb3663
+
+- 사업자가 공개 안내서를 바로 공유하거나 PDF로 보관할 수 있도록 최종 공유 장에 `GABA 이야기 공유하기`와 `인쇄 · PDF 저장`을 추가했다. 모바일은 세로 스택, 데스크톱은 2열, 인쇄 미디어는 화면 전용 action 숨김으로 정리했다.
+- 로컬 typecheck·UI contract·127개 테스트·build·정적 bundle·성능 예산, PR #606 보호 검사, main workflow `37634042762`, 공개 validator·390px interaction·1440px print audit가 모두 통과했다. 최종 로컬 총 자산은 `1,649,439 bytes / 1,650,000 bytes`다.
+- 초기 PR 후보의 Pages 성능 초과는 중복 아이콘·라벨 markup을 줄여 재검증에서 해소했다. 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지하며 Browser plugin 부재에 따른 CDP fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토·teaser `HOLD`를 외부 조건으로 남긴다.
+
+증적: `C-262`, `E-LOCAL-BUILD-PRINT-ACTION-20261007`, `E-CDP-PRINT-ACTION-20261007`, `E-DEPLOY-PIPELINE-PRINT-ACTION-20261007`, `E-LIVE-PUBLIC-PRINT-ACTION-20261007`, `E-NAVI-STATE-PRINT-ACTION-20261007`.
+
+## 2026-10-07 — 공개 배포 접근성·영상·초소형 모바일 재감리 — ec29f7cf
+
+- 280·320·390·768·1440px 반응형과 280·390px 큰 글자 모드를 재확인했다. document 가로폭은 viewport와 일치했고 접근성 누락·runtime error·전문가 영상 카드 넘침은 재현되지 않았다.
+- 공개 390px에서 영상 포스터 선택 후 iframe 재생과 두 번째 카드 선택 상태를 확인했다. 라이브 validator는 HTTP 200·candidate SHA `ec29f7cf3910d1b379f6cb8c37f18e4c1981331c`·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser `HOLD`를 확인했다.
+- 재현 가능한 UI 결함이 없어 기능 코드·연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않고 NAVI 증적만 갱신했다. 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-263`, `E-CDP-PUBLIC-A11Y-LARGE-TEXT-20261007`, `E-CDP-PUBLIC-EXPERT-VIDEO-20261007`, `E-LIVE-PUBLIC-RECHECK-20261007`, `E-NAVI-STATE-PUBLIC-REAUDIT-20261007`.
+
+## 2026-10-07 — NAVI 문서-only 병합 후 최종 공개 정합성 — 1a54a7d7
+
+- PR #608을 main에 병합하고 workflow `37639573788`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status 성공을 확인했다.
+- 최종 공개 validator는 SHA `1a54a7d7f812175d313463725e20eb6e9b50cca0`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개를 확인했다.
+- 공개 390px 전문가 영상 선택·재생·다음 카드 선택과 runtime error 0을 재현했다. 기능 코드와 연구 콘텐츠는 변경하지 않았으며 상태는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-264`, `E-DEPLOY-PIPELINE-PUBLIC-REAUDIT-20261007`, `E-LIVE-PUBLIC-FINAL-REAUDIT-20261007`, `E-NAVI-STATE-FINAL-REAUDIT-20261007`.
+
+## 2026-10-08 — 모바일 전문가 영상 필터 cue 보완 및 공개 배포 재검증 — f947daf2
+
+- 280·390px에서 전문가 영상 주제 필터의 수평 continuation cue를 원형 안내로 보완했다. 기존 필터 레일·선택·YouTube 재생 흐름과 제품 독립 공개 경계는 유지했다.
+- 첫 후보의 Pages 성능 예산 초과를 줄인 뒤 PR #610을 병합했고, stale TF pulse를 공식 pulse와 heartbeat PR #611로 갱신한 후 main workflow `37645030445`의 release-verify·Pages·라이브 smoke·release-status를 성공시켰다.
+- 공개 validator candidate SHA `74549db11dc9ce37c794b1524739afbe68d75f96`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-265`, `E-LOCAL-BUILD-MOBILE-FILTER-CUE-20261008`, `E-CDP-MOBILE-FILTER-CUE-20261008`, `E-DEPLOY-PIPELINE-MOBILE-FILTER-CUE-20261008`, `E-LIVE-PUBLIC-MOBILE-FILTER-CUE-20261008`, `E-NAVI-STATE-MOBILE-FILTER-CUE-20261008`.
+
+## 2026-10-08 — 대형 글자 모드 전문가 영상 주제 필터 보완 및 공개 배포 재검증 — 9533748e
+
+- 320·390px 대형 글자 모드에서 전문가 영상 주제 7개를 각각 4·3행으로 모두 보이게 하고, 768px에서는 2행으로 정리했다. 일반 모드의 수평 레일과 continuation cue는 유지했다.
+- 로컬 `pnpm run build` 총 자산은 `1,649,405 bytes`로 성능 예산을 통과했고 `pnpm test` 127개가 성공했다. PR #615 최종 보호 검사와 main workflow `37653847202`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- 공개 validator는 merge SHA `9533748ea1af24173e3867acd6e2ca9da413965c`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 Playwright fallback 320·390·768px에서도 가로폭 초과와 runtime error가 없었다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-267`, `E-LOCAL-BUILD-LARGE-TEXT-VIDEO-20261008`, `E-PLAYWRIGHT-LARGE-TEXT-VIDEO-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-VIDEO-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-VIDEO-20261008`, `E-NAVI-STATE-LARGE-TEXT-VIDEO-20261008`.
+
+## 2026-10-08 — 대형 글자 전문가 영상 필터 ARIA 정합성 보완 및 공개 재검증 — de11782
+
+- 큰 글자 모드의 전문가 영상 필터가 실제로는 모든 7개 주제를 여러 행에 표시하는데도 보조기술 안내가 수평 이동을 암시하던 불일치를 보정했다. 일반 모드는 기존 수평 레일 안내를 유지했다.
+- PR #617의 코드 보정과 PR #616의 NAVI 문서 병합 이후 main workflow `37656611634`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다.
+- 공개 validator는 candidate SHA `de117829713614249c7e7ee09381df4461dd13e4`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 Playwright fallback 320·390px에서 일반/큰 글자 ARIA 문구, 4·3행 배치, pageScrollWidth=viewport, large cue hidden, runtimeErrors=[]를 재현했다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-268`, `E-LIVE-PUBLIC-ARIA-FINAL-20261008`, `E-DEPLOY-PIPELINE-ARIA-FINAL-20261008`, `E-NAVI-STATE-ARIA-FINAL-20261008`.
+
+## 2026-10-08 — 수면과 회복 14단계 모바일 균형 보정 및 공개 배포
+
+- 351–700px 모바일에서 14단계 회복 흐름을 7+7로 정리하고, 350px 이하에서는 6+6+2 안전 레이아웃을 유지했다.
+- 로컬 build·UI contract·typecheck·127개 테스트·성능 예산, PR #662 보호 검사, main workflow `37709888046`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 skipped됐다.
+- 공개 validator candidate `5094bf254fbaa2023178043ed7afb5634af29887`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 390px에서 14개 단계·마지막 단계 선택·최종 카드 연결·runtime error 0을 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
+
+증적: `C-290`, `E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008`, `E-PR-RECOVERY-MAP-BALANCE-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008`, `E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008`.
+
+## 2026-10-08 — 수면과 회복 단계 ARIA 순번 보강 및 공개 재검증
+
+- 14개 회복 단계 버튼에 `aria-setsize=14`와 `aria-posinset=1…14`를 추가했다. 기존 280·390·1440px 레이아웃, 자동 전환, 선택 상태는 유지했다.
+- 로컬 build·UI contract·typecheck·127개 테스트·성능 예산, PR #664 보호 검사, main workflow `37711484247`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 skipped됐다.
+- 공개 validator candidate `ec7cb47f7a2a37e2404dbe5ad59026c6d0b57b63`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 390px에서 14개 단계의 ARIA 순번·active 상태·가로폭·runtime error 0을 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
+
+증적: `C-291`, `E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008`, `E-PR-RECOVERY-MAP-A11Y-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008`, `E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008`.
+
+## 2026-10-08 — 좁은 모바일 헤더 flex 겹침 보정 및 공개 재검증
+
+- 381–430px에서 로고 flex item이 절대 위치 메뉴·글자 크기·공유 컨트롤 영역으로 확장되지 않도록 `flex:0 1 auto`를 추가했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산, PR #666 보호 검사, main workflow `37734617884`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 skipped됐다.
+- 공개 validator candidate `3d75b4e45637db316c07ae94b5f1a26d0a5c4301`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 280·320·390·430px에서 헤더 컨트롤 겹침 없음과 가로폭 일치를 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
+
+증적: `C-292`, `E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008`, `E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008`, `E-PR-NARROW-HEADER-FLEX-20261008`, `E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008`, `E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008`, `E-NAVI-STATE-NARROW-HEADER-FLEX-20261008`.
+## 2026-10-08 — 공개 evidence action 모바일 가독성 보정 및 배포 — 7ac81847
+
+- 연구 출처·원문·공유·읽기 노트 액션을 모바일 기본 13px로 정리해 사업자와 소비자가 연구 근거를 바로 읽을 수 있도록 했다. 연구 카피·수치·출처의 의미와 제품 독립 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산, PR #670 보호 검사와 main workflow `37739962907`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책으로 skipped됐다.
+- 공개 validator는 candidate SHA `7ac8184786b59725f8d789d8fe3a137c456ee8b6`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 390px 일반·큰 글자 모드의 evidence action은 모두 13px, page width는 390/390, runtime error는 0건이었다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 외부 조건으로 남긴다.
+
+증적: `C-294`, `E-LOCAL-BUILD-LARGE-TEXT-EVIDENCE-20261008`, `E-UI-CONTRACT-LARGE-TEXT-EVIDENCE-20261008`, `E-PR-LARGE-TEXT-EVIDENCE-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-EVIDENCE-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-EVIDENCE-20261008`, `E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008`.

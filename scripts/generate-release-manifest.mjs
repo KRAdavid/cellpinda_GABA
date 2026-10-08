@@ -57,7 +57,7 @@ const checks = {
   researchIndex: research.length === 6 && research.every(record => typeof record.evidenceHash === 'string' && /^[a-f0-9]{64}$/.test(record.evidenceHash)),
   teaserBoundary: teaserMatchesReviewedSource && ((teaser.status === 'HOLD' && teaser.url === null) || (teaser.status === 'PREVIEW' && /^https:\/\//.test(teaser.url || ''))),
   challengeCopy: textBundle.includes('뇌컨디션 확인 챌린지') && textBundle.includes('5분 쉬고 다시 해보기') && textBundle.includes('싱잉볼 소리'),
-  productBoundary: textBundle.includes('셀핀다 완제품 연구와는 다른 자료입니다.') && textBundle.includes('연구에서 먹은 양과 조건은 셀핀다 제품 표시와 다를 수 있어요.'),
+  productBoundary: textBundle.includes('셀핀다 완제품으로 시험한 결과가 아니며') && textBundle.includes('제품 정보는 제품 카드에서 따로 확인할 수 있어요.'),
 };
 for (const [key, value] of Object.entries(checks)) if (!value) throw new Error(`release manifest check failed: ${key}`);
 
@@ -73,5 +73,7 @@ const manifest = {
   checks,
   fileHashes,
 };
-await writeFile(resolve(outputDirectory, 'release-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
+// The manifest is a machine-verified public integrity artifact, not a human-facing page.
+// Keep its schema readable after parsing while avoiding indentation overhead in the static bundle.
+await writeFile(resolve(outputDirectory, 'release-manifest.json'), `${JSON.stringify(manifest)}\n`, 'utf8');
 console.log(JSON.stringify({directory: outputDirectory, candidateSha, runtimeMode, routes: routePaths.length, files: Object.keys(fileHashes).length, checks, status: 'ok'}));
