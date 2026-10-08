@@ -1750,7 +1750,8 @@ export default function PublicGabaGuide() {
         messageKitCopiedTimer.current = null;
       }, 2400);
     }
-    announceShareStatus(copied ? `${recommendedIndices.length}개 추천 자료를 복사했어요.` : '자료를 선택해 활용해 보세요.');
+    announceShareStatus(copied ? `${recommendedIndices.length}개 추천 자료를 복사했어요.` : '추천 자료 복사를 완료하지 못했어요. 아래 문장 복사를 이용해 보세요.');
+    return copied;
   };
 
   const shareMessageKit = async () => {
@@ -1773,7 +1774,8 @@ export default function PublicGabaGuide() {
         }
       }
     }
-    await copyMessageKit();
+    const copied = await copyMessageKit();
+    if (!copied) announceShareStatus('이 환경에서는 직접 공유를 지원하지 않아요. 추천 자료 복사 버튼을 이용해 보세요.');
   };
 
   const copyAllMessageKit = async () => {
