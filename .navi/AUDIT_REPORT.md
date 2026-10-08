@@ -1,5 +1,16 @@
 # Audit Report
 
+## 사업자용 공유 자료 보드 고도화 및 공개 배포 — main 4804d623 — 2026-10-08
+
+- AC-001 공개 배포: PASS. PR #673 보호 검사가 통과했고 main workflow `37744034563`의 `release-verify`·`worker-readiness`·`deploy-pages`·`smoke-live`·`release-status`가 모두 성공했다. `deploy-worker`는 `STATIC_ONLY` 정책으로 skipped됐다.
+- AC-003/AC-004 공유 자료 사용성: PASS_WITH_CONDITIONS. 마지막 장이 5개 라벨형 자료 카드로 즉시 열리고, 사람 연구·발효 연구 카드에는 출처가 표시되며 개별·전체 복사에 출처와 공개 안내서 deep link가 포함된다. 로컬 Chrome fallback의 상단 화면과 마지막 DOM에서 레이아웃·카드·컨트롤을 확인했다.
+- AC-005 자동 게이트: PASS. `pnpm test` 127 pass, UI contract·research copy·typecheck·build·성능 예산이 통과했다. 총 자산은 `1,649,437 / 1,650,000 bytes`, initial JS `311,405`, initial CSS `95,703`이다.
+- AC-006 제품 독립 경계: PASS. 제품 CTA를 추가하지 않았고 공개 안내서의 편집 경계를 유지했다. 공개 번들과 라이브 validator에서 공유 보드·출처·제품 독립 메타데이터를 확인했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재로 Chrome fallback을 사용했으므로 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수와 teaser `HOLD`는 외부/open 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-295`, `E-LOCAL-BUILD-BUSINESS-SHARE-20261008`, `E-UI-CONTRACT-BUSINESS-SHARE-20261008`, `E-CDP-BUSINESS-SHARE-20261008`, `E-PR-BUSINESS-SHARE-20261008`, `E-DEPLOY-PIPELINE-BUSINESS-SHARE-20261008`, `E-LIVE-PUBLIC-BUSINESS-SHARE-20261008`, `E-NAVI-STATE-BUSINESS-SHARE-20261008`.
+
 ## 공개 evidence action 모바일 가독성 보정 및 배포 — main 7ac81847 — 2026-10-08
 
 - AC-001 공개 배포: PASS. PR #670의 `release-verify`·`site-quality-verify`가 통과한 뒤 main merge SHA `7ac8184786b59725f8d789d8fe3a137c456ee8b6`의 workflow `37739962907`에서 `release-verify`·`worker-readiness`·`deploy-pages`·`smoke-live`·`release-status`가 성공했고 `deploy-worker`는 `STATIC_ONLY`로 skipped됐다.

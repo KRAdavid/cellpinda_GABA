@@ -1,5 +1,12 @@
 # Red Team Report
 
+## 사업자용 공유 자료 보드 공격 재점검 — main 4804d623 — 2026-10-08
+
+- 공격 초점은 마지막 공유 보드가 숨겨져 있는지, 출처가 빠졌는지, 제품 CTA가 새로 유입됐는지, 복사 동작이 확인되는지, 정적 공개 번들과 라이브 candidate가 어긋나는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 5개 카드가 즉시 열리고 사람 연구·발효 연구 카드에 Yoto/Byun 출처가 보이며, 개별·전체 복사에는 공개 안내서 링크가 포함되고 제품 독립 편집 문구가 유지된다.
+- CI·배포·라이브 validator가 모두 통과했고 라이브 JS asset parity에서 공유 보드 라벨과 출처 라벨을 확인했다. 단, 정적 live 검증은 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수를 대신하지 않는다. teaser `HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+- 증적: `C-295`, `E-LOCAL-BUILD-BUSINESS-SHARE-20261008`, `E-UI-CONTRACT-BUSINESS-SHARE-20261008`, `E-CDP-BUSINESS-SHARE-20261008`, `E-PR-BUSINESS-SHARE-20261008`, `E-DEPLOY-PIPELINE-BUSINESS-SHARE-20261008`, `E-LIVE-PUBLIC-BUSINESS-SHARE-20261008`, `E-NAVI-STATE-BUSINESS-SHARE-20261008`.
+
 ## Red-team evidence action 모바일 가독성 재점검 — main 7ac81847 — 2026-10-08
 
 - 공격 관점에서 390px 일반·큰 글자 모드의 연구 출처·원문·공유·읽기 노트 액션이 작아져 증거 흐름이 끊기는지 확인했다. 여섯 evidence selector가 모두 13px로 계산되고 페이지 가로폭은 viewport와 같으며 runtime error는 0건이었다.
