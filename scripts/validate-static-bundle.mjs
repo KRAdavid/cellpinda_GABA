@@ -70,7 +70,7 @@ assert.ok(!/<link[^>]+rel="canonical"|<meta[^>]+property="og:(?:url|title|image)
 
 const rootHtml = await readFile(resolve(outputDirectory, 'index.html'), 'utf8');
 assert.ok(rootHtml.includes('1950년, 뇌 속에서 한 신호가 발견됐습니다') && rootHtml.includes('그 이름은 GABA였습니다'), 'root fallback must identify the discovery-led consumer GABA story');
-assert.ok(rootHtml.includes('읽는 순서') && rootHtml.includes('발견의 순간') && rootHtml.includes('연구 지도') && rootHtml.includes('국내외 활용 사례') && rootHtml.includes('논문 출처'), 'root fallback must expose the discovery-led reading order');
+assert.ok(rootHtml.includes('읽는 순서') && rootHtml.includes('발견의 순간') && rootHtml.includes('GABA란 → 전문가 영상 → 연구 지도') && rootHtml.includes('국내외 활용 사례') && rootHtml.includes('논문 출처'), 'root fallback must expose the discovery-led reading order with expert videos before the research map');
 if (outputDirectory.endsWith('dist-pages')) {
   const publicPath = new URL(manifest.publicSiteUrl).pathname.replace(/\/$/, '');
   const assetPrefix = publicPath ? `${publicPath}/` : '/';
