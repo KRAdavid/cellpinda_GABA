@@ -716,6 +716,12 @@ const evidenceLabels: Record<EvidenceTone, { text: string; className: string }> 
   mixed: { text: '연구 흐름', className: 'is-mixed' },
 };
 
+const researchMapScopeLabel = (tone: EvidenceTone) => {
+  if (tone === 'human') return '사람 연구';
+  if (tone === 'early') return '동물·세포';
+  return evidenceLabels[tone].text;
+};
+
 function TopicIcon({ type }: { type: EverydayTopic['icon'] }) {
   if (type === 'moon') return <Moon aria-hidden="true" />;
   if (type === 'sparkles') return <Sparkles aria-hidden="true" />;
@@ -2001,7 +2007,7 @@ export default function PublicGabaGuide() {
             <div className="guide-research-map" role="group" aria-label="GABA에서 다섯 연구 영역으로 확장되는 구조">
               <svg className="guide-research-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M50 43V22M57 50H78M56 56L77 77M44 56L23 77M43 50H22" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth=".65" strokeDasharray="1 2" /></svg>
               <div className="guide-research-orbit-core" aria-label={activeResearchTopic ? `현재 읽는 연구: ${activeResearchTopic.title}, 다섯 연구 영역` : 'GABA 연구 지도의 중심, 다섯 연구 영역'}><strong>GABA</strong><span>{activeResearchTopic ? `현재 · ${activeResearchTopic.title}` : '연구의 중심'}</span><small>5개 연구 영역</small></div>
-              {researchTopics.map((topic) => <button type="button" className={`guide-research-map-item${activeResearchTopicId === topic.id ? ' is-active' : ''}`} key={topic.id} onClick={() => selectResearchTopic(topic.id)} aria-pressed={activeResearchTopicId === topic.id} aria-describedby="research-map-guide" aria-controls="research-flow"><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><span><strong>{topic.title}</strong><small>{evidenceLabels[topic.tone].text}</small></span></button>)}
+              {researchTopics.map((topic) => <button type="button" className={`guide-research-map-item${activeResearchTopicId === topic.id ? ' is-active' : ''}`} key={topic.id} onClick={() => selectResearchTopic(topic.id)} aria-label={`${topic.title} · ${topic.label}`} aria-pressed={activeResearchTopicId === topic.id} aria-describedby="research-map-guide" aria-controls="research-flow"><span className="guide-research-map-dot" aria-hidden="true"><ResearchMapIcon id={topic.id} /></span><span><strong>{topic.title}</strong><small>{researchMapScopeLabel(topic.tone)}</small></span></button>)}
             </div>
             <div className="guide-research-map-cue" id="research-map-guide" role="status" aria-live="polite" aria-atomic="true"><ArrowDown size={15} aria-hidden="true" /><p><strong>{activeResearchTopic ? `현재 선택 · ${activeResearchTopic.title}` : '대표 결과부터 읽기'}</strong><span>{activeResearchTopic ? '아래 연구 카드에서 대상·결과·해석을 읽을 수 있습니다.' : `${researchPreviewTopic.title} · ${researchPreviewTopic.chart.summary}`}</span><small>{researchPreviewTopic.label}{activeResearchTopic ? '' : ' · 주제를 고르면 해당 카드로 이어집니다.'}</small></p></div>
             <div className="guide-rail guide-research-read-order"><b>읽는 순서</b><ol><li><b>01</b><span>지도</span></li><li><b>02</b><span>대상</span></li><li><b>03</b><span>결과</span></li><li><b>04</b><span>해석</span></li></ol></div>
