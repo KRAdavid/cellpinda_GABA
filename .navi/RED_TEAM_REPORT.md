@@ -2754,6 +2754,14 @@
 
 증적: `C-286`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-CDP-LIVE-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-12PX-20261008`.
 
+## Red-team recheck — 연구 결과 비교 도표 결과 우선 — a2a7ff6a — 2026-10-08
+
+- 공격 관점에서 280·390·1440px 연구 결과 도표의 조건 순서·GABA 관찰 결과·변화 방향·범례를 직접 재현했다. 모든 폭에서 `측정 항목 → GABA 그룹 → 비교 조건` 순서가 유지되고 `chartOverflow=[]`, `laneOverflow=false`, `errors=[]`였다.
+- 280px에서는 각 비교 레인이 세로로 읽히고 390·1440px에서는 조건 카드가 폭 안에서 비교된다. 실제 공개 URL의 HTTP·정적 bundle·공개 데이터 경계도 main merge SHA와 일치한다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 이번 변경은 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않는다. Chrome Playwright fallback은 Safari/iOS/Android 실기기나 실제 고령 사용자 검증을 대신하지 않으며 teaser `HOLD`, 독립 과학·규제 검토 조건과 `USER_DECISION / NOT_READY` 상태를 유지한다.
+
+증적: `C-287`, `E-CDP-LIVE-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-LIVE-PUBLIC-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-NAVI-STATE-RESEARCH-CHART-RESULT-FIRST-20261008`.
+
 ## Red-team final public provenance sync — d45dfba9 — 2026-10-08
 
 - PR #653 병합 후 Pages 배포·라이브 smoke·release-status와 최신 공개 candidate 일치를 확인했다. 신규 CRITICAL/MAJOR 결함은 없다.

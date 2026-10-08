@@ -3438,3 +3438,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-286`, `E-LOCAL-BUILD-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-PR-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-CDP-LIVE-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-LIVE-PUBLIC-RESEARCH-MAP-SCOPE-12PX-20261008`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-12PX-20261008`.
+
+## 연구 결과 비교 도표 결과 우선 보정 — a2a7ff6a — 2026-10-08
+
+- AC-001 공개 URL·라이브 정합성: PASS. PR #658 merge SHA `a2a7ff6a88da7959d66cb73560a1a7a869fe5fe1` 이후 main workflow `37707042225`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped였다. 공개 validator는 candidate `a2a7ff6a88da7959d66cb73560a1a7a869fe5fe1`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-003/AC-004 연구 결과 이해·모바일 가독성: PASS. 비교 도표의 범례와 각 레인을 `GABA 그룹 → 비교 조건` 순서로 정리하고, 280px에서는 내부 레인을 한 열로 내려 가로 넘침을 제거했으며 390px·1440px에서는 화면 폭에 맞춰 비교가 유지된다. 공개 Chrome Playwright fallback에서 280·390·1440px 모두 `chartOverflow=[]`, `laneOverflow=false`, `errors=[]`, pageWidth/scrollWidth 일치를 확인했다.
+- AC-005 자동 게이트: PASS. 로컬 `pnpm run build`, UI contract, typecheck, 정적 bundle, release manifest, 성능 예산과 `pnpm test` 127 pass / 0 fail이 통과했다. 로컬 총 자산은 `1,649,020 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 연구 수치·카피·출처·제품 독립 공개 경계는 변경하지 않았고, 도표는 실제 측정값이 아닌 변화 방향과 조건 간 상대 비교라는 기존 안내를 유지한다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Chrome Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-287`, `E-LOCAL-BUILD-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-PR-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-DEPLOY-PIPELINE-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-CDP-LIVE-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-LIVE-PUBLIC-RESEARCH-CHART-RESULT-FIRST-20261008`, `E-NAVI-STATE-RESEARCH-CHART-RESULT-FIRST-20261008`.

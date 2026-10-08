@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T08:51:26+09:00",
+  "updated_at": "2026-10-08T09:22:27+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6562,6 +6562,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T08:51:26+09:00"
+    },
+    {
+      "id": "H-377",
+      "event": "NAVI 자동 공개 배포 점검에서 연구 결과 비교 도표의 GABA 그룹 관찰 결과를 먼저 읽도록 범례·비교 레인을 재배치하고 280px 초소형 화면의 내부 넘침까지 보완했다. 로컬 production build·UI contract·research copy·governance·ops docs·typecheck·정적 bundle·release manifest·성능 예산과 127개 테스트가 성공했고 총 자산은 1,649,020바이트였다. PR #658의 release-verify·site-quality-verify가 성공하고 main merge SHA a2a7ff6a88da7959d66cb73560a1a7a869fe5fe1이 생성됐다. main workflow 37707042225의 release-verify 113083764262·worker-readiness 113084195491·deploy-pages 113084223157·smoke-live 113084296646·release-status 113084364737가 성공했고 deploy-worker 113084224194는 STATIC_ONLY로 skipped됐다. 공개 validator는 candidate SHA a2a7ff6a88da7959d66cb73560a1a7a869fe5fe1·HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 실제 공개 Chrome Playwright fallback 280·390·1440px에서 범례가 측정 항목·GABA 그룹·비교 조건 순서이고 chartOverflow=[]·laneOverflow=false·errors=[]였다. 신규 CRITICAL/MAJOR 결함은 없으며 제품 독립 연구 카피·수치·출처 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chrome Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지한다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-287과 여섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T09:22:27+09:00"
     }
   ]
 }
