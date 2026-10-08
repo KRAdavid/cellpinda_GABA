@@ -2438,3 +2438,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
 
 증적: `C-290`, `E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008`, `E-PR-RECOVERY-MAP-BALANCE-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008`, `E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008`.
+
+## 2026-10-08 — 수면과 회복 단계 ARIA 순번 보강 및 공개 재검증
+
+- 14개 회복 단계 버튼에 `aria-setsize=14`와 `aria-posinset=1…14`를 추가했다. 기존 280·390·1440px 레이아웃, 자동 전환, 선택 상태는 유지했다.
+- 로컬 build·UI contract·typecheck·127개 테스트·성능 예산, PR #664 보호 검사, main workflow `37711484247`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 skipped됐다.
+- 공개 validator candidate `ec7cb47f7a2a37e2404dbe5ad59026c6d0b57b63`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 390px에서 14개 단계의 ARIA 순번·active 상태·가로폭·runtime error 0을 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
+
+증적: `C-291`, `E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008`, `E-PR-RECOVERY-MAP-A11Y-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008`, `E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008`.

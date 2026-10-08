@@ -3483,3 +3483,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-290`, `E-LOCAL-BUILD-RECOVERY-MAP-BALANCE-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-BALANCE-20261008`, `E-PR-RECOVERY-MAP-BALANCE-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-BALANCE-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-BALANCE-20261008`, `E-NAVI-STATE-RECOVERY-MAP-BALANCE-20261008`.
+
+## 수면과 회복 단계 ARIA 순번 보강 — ec7cb47f — 2026-10-08
+
+- AC-001 공개 배포: PASS. PR #664의 `release-verify`·`site-quality-verify`가 통과한 뒤 main merge SHA `ec7cb47f7a2a37e2404dbe5ad59026c6d0b57b63`의 workflow `37711484247`에서 `release-verify`·`worker-readiness`·`deploy-pages`·`smoke-live`·`release-status`가 성공했고 `deploy-worker`는 `STATIC_ONLY`로 skipped됐다.
+- AC-002/AC-004 접근성·모바일 읽기 흐름: PASS. 14개 단계 버튼에 `aria-setsize=14`와 `aria-posinset=1…14`를 추가했으며, 280·390·1440px의 기존 3·2·1행 시각 배열과 자동 전환·선택 상태를 유지했다. 공개 390px에서 `aria-current=step`, `pageScrollWidth=390`, runtime error 0을 재현했다.
+- AC-005 자동 게이트: PASS. 로컬 `pnpm run build`, `pnpm test` 127 pass / 0 fail, typecheck, UI contract, 정적 bundle, release manifest, 성능 예산과 보호 브랜치 검사가 통과했다. 총 자산은 `1,649,285 bytes / 1,650,000 bytes`다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 회복 지도 버튼의 접근성 의미와 UI contract에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계를 변경하지 않았다. 라이브 validator는 HTTP 200·STATIC·bundle hash 73·claims 12·master records 6·share pages 6·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 유지했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chromium fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 해당 외부 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-291`, `E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008`, `E-PR-RECOVERY-MAP-A11Y-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008`, `E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008`.
