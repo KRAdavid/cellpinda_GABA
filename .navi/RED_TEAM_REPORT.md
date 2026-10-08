@@ -1,5 +1,23 @@
 # Red Team Report
 
+## 추천 자료 직접 공유 공격 재점검 — main 3ebb5c3f — 2026-10-08
+
+- 공격 초점은 `추천 공유`가 선택 대상의 자료만 전달하는지, Web Share 미지원·권한 실패 시 사용자에게 다음 행동을 안내하는지, 전체 5개·개별 복사·출처·제품 독립 경계가 유지되는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 공개 390px에서 사업자 추천 5개·소비자 전환 추천 3개·카드 5개·scrollWidth 390·runtime errors 0을 확인했고, mock Web Share는 제목 `GABA 공개 자료 · 사업자용`, 5개 추천 묶음, 공개 안내서 URL을 전달했다.
+- 실제 자동화 브라우저에서 Web Share와 클립보드 권한이 제한될 때는 명확한 fallback 안내가 표시됐다. 이는 실제 iOS/Android 공유 시트·Safari·실사용자 독해성 검증을 대신하지 않는다.
+- PR #688·#689 보호 검사와 main workflow `37785257715`의 Pages 배포·라이브 smoke·release-status가 성공했다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-301`, `E-UI-CONTRACT-RECOMMENDED-SHARE-20261008`, `E-CDP-RECOMMENDED-SHARE-20261008`, `E-PR-RECOMMENDED-SHARE-20261008`, `E-DEPLOY-RECOMMENDED-SHARE-20261008`, `E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008`, `E-NAVI-STATE-RECOMMENDED-SHARE-20261008`.
+
+## 추천 자료 직접 공유 공격 재점검 — main 3ebb5c3f — 2026-10-08
+
+- 공격 초점은 `추천 공유`가 선택 대상의 자료만 전달하는지, Web Share 미지원·권한 실패 시 사용자에게 다음 행동을 안내하는지, 전체 5개·개별 복사·출처·제품 독립 경계가 유지되는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 공개 390px에서 사업자 추천 5개·소비자 전환 추천 3개·카드 5개·scrollWidth 390·runtime errors 0을 확인했고, mock Web Share는 제목 `GABA 공개 자료 · 사업자용`, 5개 추천 묶음, 공개 안내서 URL을 전달했다.
+- 실제 자동화 브라우저에서 Web Share와 클립보드 권한이 제한될 때는 명확한 fallback 안내가 표시됐다. 이는 실제 iOS/Android 공유 시트·Safari·실사용자 독해성 검증을 대신하지 않는다.
+- PR #688·#689 보호 검사와 main workflow `37785257715`의 Pages 배포·라이브 smoke·release-status가 성공했다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-301`, `E-UI-CONTRACT-RECOMMENDED-SHARE-20261008`, `E-CDP-RECOMMENDED-SHARE-20261008`, `E-PR-RECOMMENDED-SHARE-20261008`, `E-DEPLOY-RECOMMENDED-SHARE-20261008`, `E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008`, `E-NAVI-STATE-RECOMMENDED-SHARE-20261008`.
+
 ## 대상별 추천 자료 선배치 공유 보드 공격 재점검 — main 679219cd — 2026-10-08
 
 - 공격 초점은 추천 자료가 실제로 전체 목록보다 먼저 보이는지, 소비자·교육 전환에서 전체 자료가 사라지지 않는지, 복사·출처·제품 독립 경계와 모바일 가로폭이 유지되는지였다.

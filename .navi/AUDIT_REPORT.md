@@ -1,5 +1,27 @@
 # Audit Report
 
+## 추천 자료 한 번에 공유 및 fallback 안내 공개 검증 — main 3ebb5c3f — 2026-10-08
+
+- AC-003/AC-004: PASS_WITH_CONDITIONS. 선택 대상의 추천 묶음을 `추천 공유`로 직접 전달하고, 전체 5개·개별 문장 복사·출처 연결은 유지된다. 사업자 기본은 5개, 소비자 전환은 3개 추천이다.
+- AC-005 자동 게이트: PASS. UI contract·research copy·typecheck·`pnpm test` 127 pass·Pages production build·정적 bundle·성능 예산이 통과했다. main release-verify가 최종 fallback 코드까지 다시 빌드했다.
+- AC-001 공개 배포: PASS. PR #688·#689 보호 검사가 통과했고 main workflow `37785257715`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- AC-006 제품 독립 경계: PASS. 공유 방식·fallback 안내만 보완했으며 연구 카피·수치·출처·제품 CTA·제품 독립 정보 고지 문구는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 공개 390px에서 추천 공유 버튼·대상 전환·가로폭·runtime errors 0을 확인했고 mock Web Share에서 사업자용 5개 자료와 공개 URL이 전달됐다. Browser plugin 부재·실제 Web Share가 없는 자동화 환경·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-301`, `E-LOCAL-BUILD-RECOMMENDED-SHARE-20261008`, `E-UI-CONTRACT-RECOMMENDED-SHARE-20261008`, `E-CDP-RECOMMENDED-SHARE-20261008`, `E-PR-RECOMMENDED-SHARE-20261008`, `E-DEPLOY-RECOMMENDED-SHARE-20261008`, `E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008`, `E-NAVI-STATE-RECOMMENDED-SHARE-20261008`.
+
+## 추천 자료 한 번에 공유 및 fallback 안내 공개 검증 — main 3ebb5c3f — 2026-10-08
+
+- AC-003/AC-004: PASS_WITH_CONDITIONS. 선택 대상의 추천 묶음을 `추천 공유`로 직접 전달하고, 전체 5개·개별 문장 복사·출처 연결은 유지된다. 사업자 기본은 5개, 소비자 전환은 3개 추천이다.
+- AC-005 자동 게이트: PASS. UI contract·research copy·typecheck·`pnpm test` 127 pass·Pages production build·정적 bundle·성능 예산이 통과했다. main release-verify가 최종 fallback 코드까지 다시 빌드했다.
+- AC-001 공개 배포: PASS. PR #688·#689 보호 검사가 통과했고 main workflow `37785257715`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- AC-006 제품 독립 경계: PASS. 공유 방식·fallback 안내만 보완했으며 연구 카피·수치·출처·제품 CTA·제품 독립 정보 고지 문구는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 공개 390px에서 추천 공유 버튼·대상 전환·가로폭·runtime errors 0을 확인했고 mock Web Share에서 사업자용 5개 자료와 공개 URL이 전달됐다. Browser plugin 부재·실제 Web Share가 없는 자동화 환경·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-301`, `E-LOCAL-BUILD-RECOMMENDED-SHARE-20261008`, `E-UI-CONTRACT-RECOMMENDED-SHARE-20261008`, `E-CDP-RECOMMENDED-SHARE-20261008`, `E-PR-RECOMMENDED-SHARE-20261008`, `E-DEPLOY-RECOMMENDED-SHARE-20261008`, `E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008`, `E-NAVI-STATE-RECOMMENDED-SHARE-20261008`.
+
 ## 대상별 추천 자료 선배치 공유 보드 공개 검증 — main 679219cd — 2026-10-08
 
 - AC-003/AC-004: PASS. 대상 선택 후 추천 자료가 공유 보드의 앞쪽에 시각적으로 표시되고, 전체 5개 자료·개별 복사·출처 연결은 유지된다. 사업자 기본은 5개, 소비자 전환은 3개 추천이다.

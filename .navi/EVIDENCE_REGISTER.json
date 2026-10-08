@@ -3337,6 +3337,21 @@
         "E-NAVI-STATE-AUDIENCE-FIRST-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-301",
+      "statement": "공개 GABA 자료 모음이 선택 대상의 추천 자료를 한 번에 공유할 수 있게 하고, Web Share 미지원·권한 실패 환경에서 추천 묶음 복사와 다음 행동 안내로 fallback하며 공개 배포 검사를 통과했다.",
+      "evidence_refs": [
+        "E-USER-RECOMMENDED-SHARE-20261008",
+        "E-LOCAL-BUILD-RECOMMENDED-SHARE-20261008",
+        "E-UI-CONTRACT-RECOMMENDED-SHARE-20261008",
+        "E-CDP-RECOMMENDED-SHARE-20261008",
+        "E-PR-RECOMMENDED-SHARE-20261008",
+        "E-DEPLOY-RECOMMENDED-SHARE-20261008",
+        "E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008",
+        "E-NAVI-STATE-RECOMMENDED-SHARE-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -21535,6 +21550,93 @@
       "captured_at": "2026-10-08T22:08:06+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-AUDIENCE-FIRST",
       "claim_refs": ["C-300"]
+    },
+    {
+      "id": "E-USER-RECOMMENDED-SHARE-20261008",
+      "kind": "DECISION",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사용자가 사업자가 원하는 GABA 정보를 보기 편하게 모아 다른 사업자나 소비자에게 전달할 수 있도록 공개 사이트를 계속 고도화하라고 요청했다.",
+      "locator": "현재 활성 목표: 전문 퍼블리싱 기법 이용해서 고도화 계속 진행해줘; 사업자가 원하는 정보를 보기 편하게 하고 공유할 정보를 모아서 다른 사업자나 소비자에게 전달할 수 있게하는 아이디어 검토하고 반영해줘",
+      "captured_at": "2026-10-08T22:20:00+09:00",
+      "reviewer_id": "현재 사용자",
+      "claim_refs": ["C-301"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-RECOMMENDED-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "추천 자료 직접 공유 기능과 fallback UI contract가 연구 카피·typecheck·127개 테스트·Pages production build·정적 bundle·성능 예산을 통과했고, fallback 문구 보정 후 typecheck와 UI contract도 재통과했다.",
+      "locator": "feature commit 04ea0dc45c67e7f250b58251b93a1a2613e368e6; fallback commit 5e4c859a; pnpm run validate:ui-contract; pnpm run validate:research-copy; pnpm run typecheck; pnpm test 127 pass; pnpm run build; initial JS 311405, initial CSS 95703, total assets 1644177 <= 1650000; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/5e4c859a",
+      "captured_at": "2026-10-08T13:25:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-RECOMMENDED-SHARE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-301"]
+    },
+    {
+      "id": "E-UI-CONTRACT-RECOMMENDED-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 navigator.share 직접 공유, copy fallback, 명확한 실패 안내, 390px용 간결한 추천 공유 라벨을 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; shareMessageKit; navigator.share; formatMessageKitBundle; 추천 공유; 직접 공유를 지원하지 않아요; validate:ui-contract status=ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/blob/main/scripts/validate-ui-contract.mjs",
+      "captured_at": "2026-10-08T13:29:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-RECOMMENDED-SHARE",
+      "claim_refs": ["C-004", "C-301"]
+    },
+    {
+      "id": "E-CDP-RECOMMENDED-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px에서 사업자 기본 추천 5개와 소비자 전환 추천 3개, 카드 5개, scrollWidth 390, runtime errors 0, 추천 공유 버튼을 확인했다. mock Web Share는 사업자용 5개 추천 묶음과 공개 안내서 URL을 전달했고 Web Share 미지원 fallback은 명확한 안내를 표시했다.",
+      "locator": "Chrome CDP fallback against https://kradavid.github.io/gaba_info/?view=guide#final; viewport 390x844; business audience=31 recommended=5 cards=5; consumer audience=21 recommended=3; button=추천 공유; errors=[]; mock sharedTitle=GABA 공개 자료 · 사업자용; sharedUrl=https://kradavid.github.io/gaba_info/?view=guide#top; fallback toast=이 환경에서는 직접 공유를 지원하지 않아요. 추천 자료 복사 버튼을 이용해 보세요.; Browser plugin unavailable",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#final",
+      "captured_at": "2026-10-08T13:34:00Z",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-RECOMMENDED-SHARE",
+      "claim_refs": ["C-001", "C-004", "C-301"]
+    },
+    {
+      "id": "E-PR-RECOMMENDED-SHARE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "추천 자료 직접 공유 기능 PR #688과 fallback 안내 보정 PR #689의 required release-verify·site-quality-verify 검사가 성공하고 main에 병합됐다.",
+      "locator": "PR #688 checks pass and merge SHA 37c32b08f8b1a0f0371ad6ef43acf9728288397a; PR #689 checks pass and merge SHA 3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/689",
+      "captured_at": "2026-10-08T13:33:18Z",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261008-RECOMMENDED-SHARE",
+      "claim_refs": ["C-001", "C-005", "C-301"]
+    },
+    {
+      "id": "E-DEPLOY-RECOMMENDED-SHARE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main candidate의 Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37785257715; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass; final merge SHA 3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37785257715",
+      "captured_at": "2026-10-08T13:34:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-RECOMMENDED-SHARE",
+      "claim_refs": ["C-001", "C-005", "C-301"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly·removed750·provenance matched를 유지했다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557; generatedAt=2026-10-08T13:34:35.961Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-08T13:34:35Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-RECOMMENDED-SHARE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-301"]
+    },
+    {
+      "id": "E-NAVI-STATE-RECOMMENDED-SHARE-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 대상별 추천 자료의 직접 공유·fallback·PR·배포·라이브 모바일 검증을 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-011; H-392; PR #688/#689; merge SHA 3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557; workflow 37785257715; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 기기·실제 사용자·독립 과학·규제 감수는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T22:35:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RECOMMENDED-SHARE",
+      "claim_refs": ["C-301"]
     }
   ]
 }

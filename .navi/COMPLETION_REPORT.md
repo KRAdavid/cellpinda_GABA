@@ -1,5 +1,25 @@
 # Completion Report
 
+## 추천 자료 한 번에 공유 공개 검증 — main 3ebb5c3f — 2026-10-08
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 사업자·소비자·교육 대상별 추천 묶음에 직접 공유·추천 묶음 복사·전체 5개 복사·개별 문장 복사가 함께 동작하고, 390px 모바일 가로폭과 출처 연결이 유지된다. 로컬 계약·typecheck·127개 테스트·production build·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.
+- AC-006: `PASS`. 공유 전달 방식과 실패 안내만 추가했으며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계를 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px에서 사업자 5개 추천→소비자 3개 추천 전환, `추천 공유` 표시, 카드 5개, scrollWidth 390, runtime errors 0을 확인했다. mock Web Share로 사업자용 5개 자료와 공개 URL을 전달했고 fallback 실패 안내도 확인했다. Browser plugin 부재·실제 기기·실제 사용자·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 최종 main SHA `3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557`와 공개 candidate가 일치하며 workflow `37785257715`가 성공했다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-301`, `E-USER-RECOMMENDED-SHARE-20261008`, `E-LOCAL-BUILD-RECOMMENDED-SHARE-20261008`, `E-UI-CONTRACT-RECOMMENDED-SHARE-20261008`, `E-CDP-RECOMMENDED-SHARE-20261008`, `E-PR-RECOMMENDED-SHARE-20261008`, `E-DEPLOY-RECOMMENDED-SHARE-20261008`, `E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008`, `E-NAVI-STATE-RECOMMENDED-SHARE-20261008`.
+
+## 추천 자료 한 번에 공유 공개 검증 — main 3ebb5c3f — 2026-10-08
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 사업자·소비자·교육 대상별 추천 묶음에 직접 공유·추천 묶음 복사·전체 5개 복사·개별 문장 복사가 함께 동작하고, 390px 모바일 가로폭과 출처 연결이 유지된다. 로컬 계약·typecheck·127개 테스트·production build·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.
+- AC-006: `PASS`. 공유 전달 방식과 실패 안내만 추가했으며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계를 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px에서 사업자 5개 추천→소비자 3개 추천 전환, `추천 공유` 표시, 카드 5개, scrollWidth 390, runtime errors 0을 확인했다. mock Web Share로 사업자용 5개 자료와 공개 URL을 전달했고 fallback 실패 안내도 확인했다. Browser plugin 부재·실제 기기·실제 사용자·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 최종 main SHA `3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557`와 공개 candidate가 일치하며 workflow `37785257715`가 성공했다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-301`, `E-USER-RECOMMENDED-SHARE-20261008`, `E-LOCAL-BUILD-RECOMMENDED-SHARE-20261008`, `E-UI-CONTRACT-RECOMMENDED-SHARE-20261008`, `E-CDP-RECOMMENDED-SHARE-20261008`, `E-PR-RECOMMENDED-SHARE-20261008`, `E-DEPLOY-RECOMMENDED-SHARE-20261008`, `E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008`, `E-NAVI-STATE-RECOMMENDED-SHARE-20261008`.
+
 ## 대상별 추천 자료 선배치 공유 보드 공개 검증 — main 679219cd — 2026-10-08
 
 - AC-001/AC-003/AC-004/AC-005: `PASS`. 대상별 추천 카드가 공유 보드의 앞쪽에 보이고, 사업자 5개·소비자 3개 추천·전체 5개·개별 문장 복사·출처 연결이 유지된다. 로컬 계약·연구 카피·typecheck·127개 테스트·production build·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.

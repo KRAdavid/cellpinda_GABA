@@ -1,5 +1,25 @@
 # Project Changelog
 
+## 2026-10-08 — 추천 자료 한 번에 공유 및 fallback 안내 공개 배포
+
+- 사업자·소비자·교육 대상별 추천 자료 묶음에 `추천 공유` 액션을 추가해 지원 환경에서는 모바일 공유 창으로 제목·추천 자료·공개 안내서 URL을 한 번에 전달하도록 했다.
+- Web Share를 지원하지 않거나 클립보드 권한이 없는 환경에서는 추천 자료 복사 흐름으로 fallback하고, 실패 시 `추천 자료 복사` 버튼을 안내한다. 전체 5개·개별 문장 복사와 출처 연결은 유지했다.
+- 390px 공개 화면에서 `추천 공유` 버튼의 글자 잘림을 보정했다. 사업자 5개 추천·소비자 전환 3개 추천·카드 5개·scrollWidth 390·runtime errors 0을 확인했고, mock Web Share 경로는 사업자용 5개 묶음과 `https://kradavid.github.io/gaba_info/?view=guide#top`을 전달했다.
+- PR #688의 직접 공유 기능과 PR #689의 fallback 보정이 보호 검사를 통과해 main `3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557`로 병합됐다. main workflow `37785257715`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 최종 live validator는 HTTP 200·`candidateSha=3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-301`, `E-USER-RECOMMENDED-SHARE-20261008`, `E-LOCAL-BUILD-RECOMMENDED-SHARE-20261008`, `E-UI-CONTRACT-RECOMMENDED-SHARE-20261008`, `E-CDP-RECOMMENDED-SHARE-20261008`, `E-PR-RECOMMENDED-SHARE-20261008`, `E-DEPLOY-RECOMMENDED-SHARE-20261008`, `E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008`, `E-NAVI-STATE-RECOMMENDED-SHARE-20261008`.
+
+## 2026-10-08 — 추천 자료 한 번에 공유 및 fallback 안내 공개 배포
+
+- 사업자·소비자·교육 대상별 추천 자료 묶음에 `추천 공유` 액션을 추가해 지원 환경에서는 모바일 공유 창으로 제목·추천 자료·공개 안내서 URL을 한 번에 전달하도록 했다.
+- Web Share를 지원하지 않거나 클립보드 권한이 없는 환경에서는 추천 자료 복사 흐름으로 fallback하고, 실패 시 `추천 자료 복사` 버튼을 안내한다. 전체 5개·개별 문장 복사와 출처 연결은 유지했다.
+- 390px 공개 화면에서 `추천 공유` 버튼의 글자 잘림을 보정했다. 사업자 5개 추천·소비자 전환 3개 추천·카드 5개·scrollWidth 390·runtime errors 0을 확인했고, mock Web Share 경로는 사업자용 5개 묶음과 `https://kradavid.github.io/gaba_info/?view=guide#top`을 전달했다.
+- PR #688의 직접 공유 기능과 PR #689의 fallback 보정이 보호 검사를 통과해 main `3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557`로 병합됐다. main workflow `37785257715`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 최종 live validator는 HTTP 200·`candidateSha=3ebb5c3f1b27e9d37772e18ae4ab61b04e83d557`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-301`, `E-USER-RECOMMENDED-SHARE-20261008`, `E-LOCAL-BUILD-RECOMMENDED-SHARE-20261008`, `E-UI-CONTRACT-RECOMMENDED-SHARE-20261008`, `E-CDP-RECOMMENDED-SHARE-20261008`, `E-PR-RECOMMENDED-SHARE-20261008`, `E-DEPLOY-RECOMMENDED-SHARE-20261008`, `E-LIVE-PUBLIC-RECOMMENDED-SHARE-20261008`, `E-NAVI-STATE-RECOMMENDED-SHARE-20261008`.
+
 ## 2026-10-08 — 대상별 추천 자료 선배치 공유 보드 공개 배포
 
 - 소비자·교육 대상으로 전환했을 때 추천 자료가 전체 자료 사이에 섞이지 않고 공유 보드의 앞쪽에 시각적으로 먼저 보이도록 보정했다. 사업자 기본 대상에서는 기존처럼 5개 모두 추천으로 유지된다.
