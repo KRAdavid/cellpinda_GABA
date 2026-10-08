@@ -1,5 +1,17 @@
 # Audit Report
 
+## 공유 보드 전달 순서 레일 공개 검증 — main c074bc02 — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 공유 자료 카드 앞에 `대상 선택 → 추천 개수 확인 → 공유 또는 복사` 3단계 레일을 추가했으며, 데스크톱은 가로·모바일은 세로로 표시된다. 대상 선택에 따라 사업자 추천 5개와 소비자 추천 3개가 동기화된다.
+- AC-004: `PASS`. 공개 Chrome CDP fallback에서 390·320·1440px 모두 `scrollWidth=viewport width`, runtime errors 0, 레일 3개와 방향 화살표 2개를 확인했다. 공유 보드의 기존 추천·전체·개별 복사와 출처 연결은 유지된다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·research copy·`pnpm test` 127 pass·production build·성능 예산과 PR #699 보호 검사가 통과했다. main workflow `37800744121`의 Pages 배포·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 경계: `PASS`. 이번 변경은 자료 전달 순서와 접근성 의미를 보강한 UI 변경이며 연구 카피·수치·출처·제품 독립 안내를 변경하지 않았다. 공개 validator의 제품 750 제거·Smart Store 단일 경계·teaser `HOLD`도 유지된다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, 실제 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-306`, `E-LOCAL-BUILD-SHARE-FLOW-20261009`, `E-UI-CONTRACT-SHARE-FLOW-20261009`, `E-CDP-SHARE-FLOW-20261009`, `E-PR-SHARE-FLOW-20261009`, `E-DEPLOY-SHARE-FLOW-20261009`, `E-LIVE-PUBLIC-SHARE-FLOW-20261009`, `E-NAVI-STATE-SHARE-FLOW-20261009`.
+
 ## 전체 자료 복사 액션 라벨 명확화 공개 검증 — main 979df2fa — 2026-10-09
 
 - AC-001/AC-003/AC-004: `PASS`. 전체 자료 버튼은 넓은 화면에서 `전체 5개 복사`, 좁은 모바일에서 `전체 복사`로 표시되며 추천 공유·추천 묶음 복사·개별 문장 복사와 전체 복사 상태를 유지한다.

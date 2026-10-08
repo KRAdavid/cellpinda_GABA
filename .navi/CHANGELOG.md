@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-10-09 — 공유 보드 전달 순서 레일 공개
+
+- 사업자가 공유 자료를 고른 뒤 무엇을 해야 하는지 바로 이해하도록 카드 앞에 `01 대상 선택 → 02 추천 5개 확인 → 03 공유 또는 복사` 전달 레일을 추가했다. 대상 전환 시 2단계의 추천 개수가 함께 바뀐다.
+- 넓은 화면에서는 3단계를 가로로, 모바일에서는 세로와 방향 화살표로 표시해 `추천 공유`·추천 묶음 복사·전체 복사·개별 문장 복사로 자연스럽게 이어지게 했다. 기존 카드 5개·출처·제품 독립 안내는 변경하지 않았다.
+- PR #699가 required checks를 통과해 main merge SHA `c074bc02921f82a44dfd6b9c5705864b047c6da5`가 됐다. main workflow `37800744121`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 Worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.
+- 공개 validator는 HTTP 200·`candidateSha=c074bc02921f82a44dfd6b9c5705864b047c6da5`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- 공개 Chrome CDP fallback에서 390·320·1440px 가로폭과 runtime errors 0을 확인했고, 사업자 추천 5개·소비자 전환 추천 3개, 3단계·화살표 2개, `03 · 전문가 영상 → 04 · 연구 지도` 순서와 handoff 도착을 재현했다. Browser plugin 부재·실제 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+증적: `C-306`, `E-LOCAL-BUILD-SHARE-FLOW-20261009`, `E-UI-CONTRACT-SHARE-FLOW-20261009`, `E-CDP-SHARE-FLOW-20261009`, `E-PR-SHARE-FLOW-20261009`, `E-DEPLOY-SHARE-FLOW-20261009`, `E-LIVE-PUBLIC-SHARE-FLOW-20261009`, `E-NAVI-STATE-SHARE-FLOW-20261009`.
+
 ## 2026-10-09 — 전체 자료 복사 액션 라벨 명확화
 
 - 공유 보드의 전체 자료 액션을 데스크톱에서는 `전체 5개 복사`, 좁은 모바일에서는 `전체 복사`로 표시해 버튼만 보고도 동작을 이해하도록 했다. `복사 완료` 상태와 접근성 이름은 유지했다.
