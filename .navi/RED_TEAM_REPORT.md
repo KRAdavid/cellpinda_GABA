@@ -2753,6 +2753,14 @@
 
 증적: `C-291`, `E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008`, `E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008`.
 
+## Red-team recheck — 좁은 모바일 헤더 flex 겹침 — 3d75b4e4 — 2026-10-08
+
+- 공격 관점에서 공개 280·320·390·430px 헤더의 로고, 메뉴, 글자 크기, 공유 컨트롤 사각형을 비교했다. 모든 폭에서 컨트롤은 로고와 겹치지 않았고 `pageWidth=viewport`, 신규 runtime error는 없었다.
+- 390px 공개 화면을 캡처해 브랜드 로고·메뉴·글자 크기·공유 버튼이 한 줄에 안정적으로 유지되는 것을 확인했다. 연구 결과·출처·제품 독립 공개 경계는 변경되지 않았다.
+- 신규 CRITICAL/MAJOR 결함은 없다. Chromium fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-292`, `E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008`, `E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008`, `E-NAVI-STATE-NARROW-HEADER-FLEX-20261008`.
+
 ## Red-team recheck — 수면과 회복 14단계 모바일 균형 — 5094bf25 — 2026-10-08
 
 - 공격 관점에서 280·390·1440px 회복 지도 행 배열과 단계 선택을 확인했다. 280px은 6+6+2, 390px은 7+7, 데스크톱은 14열로 유지되고 마지막 단계가 화면 안에서 선택되며 최종 카드 문구로 연결된다.

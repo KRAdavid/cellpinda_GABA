@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T10:12:29+09:00",
+  "updated_at": "2026-10-08T14:55:44+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2392,6 +2392,21 @@
       "impact": "시각적 순서와 보조기술의 단계 순서가 일치해 모바일 회복 흐름의 이해 가능성이 높아진다.",
       "required_action": "다음 회복 지도 상호작용 변경 시 ARIA 순번·선택 상태·280·390·1440px 시각 레이아웃을 함께 재검증",
       "owner": "QA"
+    },
+    {
+      "id": "AUD-021",
+      "severity": "MINOR",
+      "status": "CLOSED",
+      "statement": "좁은 모바일 헤더에서 로고 flex item이 확장되면 메뉴·글자 크기·공유 컨트롤과 기하학적으로 겹칠 수 있는 위험을 확인했고, flex:0 1 auto 보정 후 280·320·390·430px에서 겹침 없이 공개 렌더링됨을 확인했다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008",
+        "E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008",
+        "E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008",
+        "E-NAVI-STATE-NARROW-HEADER-FLEX-20261008"
+      ],
+      "impact": "좁은 화면에서 헤더 컨트롤 간 충돌과 접근 가능한 조작 영역 침범 가능성을 줄인다.",
+      "required_action": "다음 헤더·반응형 breakpoint 변경 시 280·320·390·430px 기하학 감사와 라이브 smoke를 함께 재검증",
+      "owner": "QA"
     }
     ],
     "independent_from_execution": true,
@@ -2828,6 +2843,21 @@
         "E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008"
       ],
       "impact": "보조기술 순번 누락·중복·시각 상태와 의미 상태의 불일치 회귀를 조기에 차단한다.",
+      "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
+      "owner": "Red Team"
+    },
+    {
+      "id": "RT-021",
+      "severity": "MINOR",
+      "status": "CLOSED",
+      "statement": "공격 관점에서 좁은 모바일 헤더의 로고·메뉴·글자 크기·공유 컨트롤 경계와 viewport 폭을 확인했으며 280·320·390·430px 모두 overlap=false이고 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008",
+        "E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008",
+        "E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008",
+        "E-NAVI-STATE-NARROW-HEADER-FLEX-20261008"
+      ],
+      "impact": "좁은 화면에서 컨트롤 충돌·가로 넘침 회귀를 조기에 차단한다.",
       "required_action": "Chrome fallback 범위 밖의 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 계속 OPEN",
       "owner": "Red Team"
     }
@@ -6725,6 +6755,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T10:12:29+09:00"
+    },
+    {
+      "id": "H-382",
+      "event": "NAVI 자동 공개 배포 점검에서 381–430px 모바일 헤더의 로고 flex item이 절대 위치 컨트롤 영역까지 확장될 수 있는 잔여 겹침 리스크를 확인하고 `flex:0 1 auto`를 추가했다. 280·320·390·430px에서 로고와 메뉴·글자 크기·공유 컨트롤의 기하상 겹침이 모두 false이고 pageWidth가 viewport와 일치하는 것을 확인했다. 로컬 UI contract·typecheck·pnpm test 127 pass·production build·정적 bundle·성능 예산, PR #666 보호 검사, main merge SHA 3d75b4e45637db316c07ae94b5f1a26d0a5c4301의 workflow 37734617884 release-verify·worker-readiness·deploy-pages·smoke-live·release-status success, deploy-worker STATIC_ONLY skipped를 확인했다. 공개 validator는 candidate SHA 3d75b4e45637db316c07ae94b5f1a26d0a5c4301·HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 제품 독립 연구 카피·수치·출처 경계는 변경하지 않았다. Browser plugin 부재에 따른 Chromium Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-292와 여섯 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T14:55:44+09:00"
     }
   ]
 }
