@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 사업자 공유 보드 선택 범위 통합 및 데스크톱 가독성 보정
+
+- 선택 자료 해제 칩을 전달 범위 상태 패널 안으로 통합해 `전달할 내용 · n개`·자료 제목·원문 출처 수·공유 범위를 한 영역에서 확인하게 했다.
+- 데스크톱 자료 카드는 5열에서 3열로 조정해 `사람 연구 결과` 같은 제목이 끊기지 않게 했고, 모바일은 1열 흐름을 유지했다. `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서와 제품 독립 안내는 변경하지 않았다.
+- 로컬 UI contract·typecheck·`pnpm test` 127 pass·정적 릴리스 빌드·성능 예산, PR #734와 main workflow `37859301853`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- 공개 validator와 Chrome CDP fallback 390px에서 candidate SHA `880e0042d5f5457a12ab294d2edee0d8cd97a6d8`, HTTP 200·STATIC·bundle hashes 73개·가로폭 390·runtime errors 0·전문가 영상 선행 순서를 확인했다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-321`, `E-LOCAL-BUILD-SHARE-SCOPE-COMPACT-20261009`, `E-UI-CONTRACT-SHARE-SCOPE-COMPACT-20261009`, `E-PR-SHARE-SCOPE-COMPACT-20261009`, `E-DEPLOY-SHARE-SCOPE-COMPACT-20261009`, `E-CDP-LIVE-SHARE-SCOPE-COMPACT-20261009`, `E-LIVE-PUBLIC-SHARE-SCOPE-COMPACT-20261009`, `E-NAVI-STATE-SHARE-SCOPE-COMPACT-20261009`.
+
 ## 2026-10-09 — NAVI 최종 공개 provenance 동기화
 
 - NAVI 문서 PR #732 병합 후 main workflow `37856947343`의 정적 Pages 배포·라이브 smoke·release-status 성공을 기록했다. Worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.

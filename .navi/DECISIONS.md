@@ -38,3 +38,5 @@
 | DEC-011 | 2026-10-08 | 추천 자료 공유는 지원 환경에서 한 번에 Web Share로 전달하고, 미지원·권한 실패 환경에서는 추천 묶음 복사와 다음 행동 안내로 안전하게 fallback한다. | 복사만 유지 / 직접 공유만 제공 / 직접 공유와 복사 fallback 병행 | E-USER-RECOMMENDED-SHARE-20261008 | 현재 사용자·NAVI | 사업자가 대상별 GABA 자료를 다른 사업자·소비자에게 바로 전달할 수 있고, 데스크톱·권한 제한 환경에서도 흐름이 끊기지 않음 | 실제 공유 채널·브라우저 지원 범위 또는 자료 묶음이 바뀔 때 |
 
 Record user decisions, approval gates, material assumptions accepted as risk, and decisions to defer work.
+
+| DEC-032 | 2026-10-09 | 사업자 공유 보드의 선택 자료 해제 칩을 전달 범위 상태 패널 안에 통합하고, 넓은 화면 자료 카드를 3열로 배치해 제목·설명·출처가 한눈에 읽히게 한다. 모바일은 기존 1열 흐름을 유지한다. | 별도 선택 자료 영역 유지 / 상태 패널 안에서 선택 자료를 표시·해제 / 데스크톱 5열 유지 / 데스크톱 3열로 조정 | E-LOCAL-BUILD-SHARE-SCOPE-COMPACT-20261009, E-UI-CONTRACT-SHARE-SCOPE-COMPACT-20261009, E-CDP-LIVE-SHARE-SCOPE-COMPACT-20261009, E-LIVE-PUBLIC-SHARE-SCOPE-COMPACT-20261009 | 현재 사용자·NAVI | 사업자가 현재 전달 범위·원문 출처 수·카드 내용을 같은 시야에서 확인하고, `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 흐름과 선택형 공유를 유지함 | 실제 사용자 공유 흐름·자료 수·화면 폭 또는 연구 지도 순서가 바뀔 때 |
