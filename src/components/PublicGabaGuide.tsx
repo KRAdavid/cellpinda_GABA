@@ -689,11 +689,20 @@ const messageKitSourceUrls: (string | null)[] = [null, null, null, researchTopic
 const messageKitAudienceLabels: Record<number, string> = { 21: '소비자용', 31: '사업자용', 15: '교육용' };
 const messageKitPacks = [['처음 소개', 3], ['연구를 보여줄 때', 12], ['출처까지', 24]] as const;
 const validMessageAudienceMasks = new Set([21, 31, 15]);
+const messageKitMaskLimit = (1 << messageKit.length) - 1;
+
+const isValidMessageSelectionMask = (mask: number) => Number.isInteger(mask) && mask > 0 && mask <= messageKitMaskLimit;
 
 const getInitialMessageAudienceMask = () => {
   if (typeof window === 'undefined') return 31;
   const requestedMask = Number(new URLSearchParams(window.location.search).get('audience'));
   return validMessageAudienceMasks.has(requestedMask) ? requestedMask : 31;
+};
+
+const getInitialMessageSelectionMask = () => {
+  if (typeof window === 'undefined') return messageKitMaskLimit;
+  const requestedMask = Number(new URLSearchParams(window.location.search).get('materials'));
+  return isValidMessageSelectionMask(requestedMask) ? requestedMask : getInitialMessageAudienceMask();
 };
 
 const getGuideShareUrl = (hash = 'top') => {
@@ -703,17 +712,18 @@ const getGuideShareUrl = (hash = 'top') => {
   return url.toString();
 };
 
-const getMessageKitShareUrl = (audienceMask: number) => {
+const getMessageKitShareUrl = (audienceMask: number, selectionMask = messageKitMaskLimit) => {
   const url = new URL(window.location.href);
   url.search = '?view=guide';
   url.searchParams.set('audience', String(audienceMask));
+  url.searchParams.set('materials', String(selectionMask));
   url.hash = 'final';
   return url.toString();
 };
 
 const formatMessageKitText = (message: string, index: number, withGuide = false, guideUrl?: string) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}${messageKitSourceUrls[index] ? `\n${messageKitSourceUrls[index]}` : ''}` : ''}${withGuide ? `\n\n공개 안내서: ${guideUrl ?? getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
 
-const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${indices.map(index => `${String(index + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask)}` : ''}`;
+const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31, selectionMask = audienceMask) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${indices.map(index => `${String(index + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask, selectionMask)}` : ''}`;
 
 const replaceGuideHistory = (hash: string, videoId?: string) => {
   const url = new URL(window.location.href);
@@ -951,7 +961,7 @@ export default function PublicGabaGuide() {
   const [messageKitCopied, setMessageKitCopied] = useState<'selected' | 'all' | false>(false);
   // Business is the primary distribution audience; consumer and education remain one-select away.
   const [activeMessageAudienceMask, setActiveMessageAudienceMask] = useState(getInitialMessageAudienceMask);
-  const [selectedMessageMask, setSelectedMessageMask] = useState(getInitialMessageAudienceMask);
+  const [selectedMessageMask, setSelectedMessageMask] = useState(getInitialMessageSelectionMask);
   const [activeVideoId, setActiveVideoId] = useState(getInitialExpertVideoId);
   const [activeVideoTopic, setActiveVideoTopic] = useState(getInitialExpertVideoTopic);
   const [videoFilterRailAtEnd, setVideoFilterRailAtEnd] = useState(false);
@@ -1777,7 +1787,7 @@ export default function PublicGabaGuide() {
   const copyMessageKit = async () => {
     const selectedIndices = selectedMessageIndices;
     const audienceLabel = messageKitAudienceLabels[activeMessageAudienceMask] ?? '공개 자료';
-    const text = formatMessageKitBundle(selectedIndices, audienceLabel, true, activeMessageAudienceMask);
+    const text = formatMessageKitBundle(selectedIndices, audienceLabel, true, activeMessageAudienceMask, selectedMessageMask);
     const copied = await writeClipboardText(text);
     if (copied) {
       setMessageKitCopied('selected');
@@ -1794,7 +1804,7 @@ export default function PublicGabaGuide() {
   const shareMessageKit = async () => {
     const selectedIndices = selectedMessageIndices;
     const audienceLabel = messageKitAudienceLabels[activeMessageAudienceMask] ?? '공개 자료';
-    const shareUrl = getMessageKitShareUrl(activeMessageAudienceMask);
+    const shareUrl = getMessageKitShareUrl(activeMessageAudienceMask, selectedMessageMask);
     if (navigator.share) {
       try {
         await navigator.share({
@@ -1816,7 +1826,7 @@ export default function PublicGabaGuide() {
   };
 
   const copyAllMessageKit = async () => {
-    const text = formatMessageKitBundle(messageKit.map((_, index) => index), '전체 5개', true, activeMessageAudienceMask);
+    const text = formatMessageKitBundle(messageKit.map((_, index) => index), '전체 5개', true, activeMessageAudienceMask, messageKitMaskLimit);
     const copied = await writeClipboardText(text);
     if (copied) {
       setMessageKitCopied('all');
@@ -1830,7 +1840,7 @@ export default function PublicGabaGuide() {
   };
 
   const copyMessageKitLine = async (message: string, index: number) => {
-    const text = formatMessageKitText(message, index, true, getMessageKitShareUrl(activeMessageAudienceMask));
+    const text = formatMessageKitText(message, index, true, getMessageKitShareUrl(activeMessageAudienceMask, selectedMessageMask));
     const copied = await writeClipboardText(text);
     if (copied) {
       setCopiedMessageIndex(index);
