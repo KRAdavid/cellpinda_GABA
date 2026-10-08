@@ -2651,3 +2651,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 외부 조건으로 남긴다.
 
 증적: `C-294`, `E-LOCAL-BUILD-LARGE-TEXT-EVIDENCE-20261008`, `E-UI-CONTRACT-LARGE-TEXT-EVIDENCE-20261008`, `E-PR-LARGE-TEXT-EVIDENCE-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-EVIDENCE-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-EVIDENCE-20261008`, `E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008`.
+# 2026-10-09 — 사업자 공유 카드 출처 링크 대비 보정 및 공개 배포
+
+- 모바일 공유 카드의 `출처 · 논문명` 링크 대비를 높여 연구 결과와 원문 출처를 빠르게 구분할 수 있도록 했다. 카드 구조·공유 payload·전문가 영상 `03` → 연구 지도 `04` 흐름·제품 독립 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·GitHub Pages base-path 정적 번들·release manifest·static bundle·성능 예산이 통과했다. PR #710 required checks와 main workflow `37822163007`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 공개 validator는 candidate SHA `e4d0aa507c55b7a04d0f0a31163cbe4c251c1335`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 Playwright fallback 390·1440px에서 출처 링크가 표시되고 색상 `rgb(183, 233, 229)`, viewport와 `scrollWidth` 일치, page/console errors 0을 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-311`, `E-LOCAL-BUILD-SOURCE-CONTRAST-20261009`, `E-UI-CONTRACT-SOURCE-CONTRAST-20261009`, `E-PLAYWRIGHT-SOURCE-CONTRAST-20261009`, `E-PR-SOURCE-CONTRAST-20261009`, `E-DEPLOY-SOURCE-CONTRAST-20261009`, `E-LIVE-PUBLIC-SOURCE-CONTRAST-20261009`, `E-NAVI-STATE-SOURCE-CONTRAST-20261009`.

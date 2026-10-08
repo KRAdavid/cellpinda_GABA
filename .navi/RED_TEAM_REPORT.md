@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 사업자 공유 카드 출처 링크 대비 및 배포 — e4d0aa50 — 2026-10-09
+
+- 공격 초점은 출처 링크 대비 보정이 연구 결과·원문 링크·공유 흐름을 가리거나, 모바일에서 카드 폭을 늘리는지였다.
+- 공개 390·1440px에서 사람 연구·발효 안전 연구 카드의 출처 링크가 `rgb(183, 233, 229)`로 표시되고 `scrollWidth=viewport`, page/console errors 0을 확인했다. 추천·전체·개별 복사와 출처 URL, 전문가 영상 `03` → 연구 지도 `04` 순서는 유지됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. PR #710과 main workflow `37822163007`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했으며, Playwright fallback은 실제 모바일 공유 시트·Safari/iOS/Android·실제 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-311`, `E-PLAYWRIGHT-SOURCE-CONTRAST-20261009`, `E-LIVE-PUBLIC-SOURCE-CONTRAST-20261009`, `E-NAVI-STATE-SOURCE-CONTRAST-20261009`.
+
 ## Red-team recheck — 히어로 사업자 자료 진입 및 배포 — 0a352b73 — 2026-10-09
 
 - 공격 초점은 히어로 CTA가 3분 읽기 흐름을 끊거나 사업자 자료를 제품 구매 CTA처럼 보이게 하는지, 모바일에서 버튼이 넘치거나 `#final` 도착이 불안정한지였다.

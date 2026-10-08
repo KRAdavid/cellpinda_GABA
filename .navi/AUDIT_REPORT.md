@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 공유 카드 출처 링크 대비 보정 및 공개 배포 검증 — main e4d0aa50 — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 사업자 공유 카드의 `출처 · 논문명` 링크를 더 밝게 표시해 연구 결과와 원문 진입점을 빠르게 구분하게 했다. 카드 구조·연구 요약·출처 URL·공유 payload는 유지했다.
+- AC-004: `PASS`. 공개 Playwright fallback 390·1440px에서 출처 링크가 표시되고 색상 `rgb(183, 233, 229)`, viewport와 `scrollWidth`가 일치했으며 page/console errors 0을 확인했다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·GitHub Pages base-path 정적 bundle·release manifest·성능 예산과 PR #710 보호 검사가 통과했다. main workflow `37822163007`의 Pages 배포·라이브 smoke·release-status도 성공했다.
+- AC-006 제품 독립 경계: `PASS`. 이번 변경은 출처 링크의 시각적 대비만 보완했으며 연구 카피·수치·출처 URL·제품 독립 안내·제품 750 제거·Smart Store 단일 경계·teaser `HOLD`를 변경하지 않았다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 화면 결함은 확인되지 않았다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-311`, `E-LOCAL-BUILD-SOURCE-CONTRAST-20261009`, `E-UI-CONTRACT-SOURCE-CONTRAST-20261009`, `E-PLAYWRIGHT-SOURCE-CONTRAST-20261009`, `E-PR-SOURCE-CONTRAST-20261009`, `E-DEPLOY-SOURCE-CONTRAST-20261009`, `E-LIVE-PUBLIC-SOURCE-CONTRAST-20261009`, `E-NAVI-STATE-SOURCE-CONTRAST-20261009`.
+
 ## 히어로 사업자 자료 진입 및 공개 배포 검증 — main 0a352b73 — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 첫 화면의 `사업자 자료` 버튼이 기존 `#final` 공유 보드로 연결되며, 사업자 추천 자료·출처·복사·공유 동작을 그대로 사용한다. 별도 중간 페이지를 추가하지 않았다.
