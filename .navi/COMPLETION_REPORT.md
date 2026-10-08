@@ -1,5 +1,13 @@
 # Completion Report
 
+## 사업자 공유 자료 목적별 빠른 선택 공개 배포 — 2026-10-09
+
+- 구현·검토: 마지막 공유 보드에 `추천 자료`와 `처음 소개`·`연구를 보여줄 때`·`출처까지` 빠른 선택을 추가했다. 선택 수가 공유·복사 버튼과 3단계 전달 레일에 즉시 반영되고, 카드별 수동 선택·5개 전체 자료·출처 링크는 유지된다.
+- 검증: PR #714 merge SHA `377f7babfef77a827ff7e715116071730a13e6fc`, main workflow `37829310326`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 공개 Playwright fallback을 확인했다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 bundle·성능 예산·라이브 smoke가 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 모바일 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-313`, `E-LOCAL-BUILD-QUICK-PACK-20261009`, `E-UI-CONTRACT-QUICK-PACK-20261009`, `E-PLAYWRIGHT-QUICK-PACK-20261009`, `E-PR-QUICK-PACK-20261009`, `E-DEPLOY-QUICK-PACK-20261009`, `E-LIVE-PUBLIC-QUICK-PACK-20261009`, `E-NAVI-STATE-QUICK-PACK-20261009`.
+
 ## 전문가 영상 선행 흐름 검토 및 선택형 공유 자료 공개 배포 — 2026-10-09
 
 - 구현·검토: 현재 공개 소스와 라이브 화면은 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서다. 해당 순서를 UI contract로 고정하고, 사업자 공유 자료는 선택한 카드만 공유·복사하도록 검증했다.

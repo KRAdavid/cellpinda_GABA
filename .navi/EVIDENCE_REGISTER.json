@@ -3508,6 +3508,20 @@
         "E-NAVI-STATE-CUSTOM-SHARE-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-313",
+      "statement": "사업자 공유 보드에 `추천 자료`와 `처음 소개`·`연구를 보여줄 때`·`출처까지` 목적별 빠른 선택을 추가해, 선택 수와 공유·복사 범위를 한 화면에서 즉시 바꿀 수 있으며 기존 5개 카드·출처·제품 독립 경계를 유지한다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-QUICK-PACK-20261009",
+        "E-UI-CONTRACT-QUICK-PACK-20261009",
+        "E-PLAYWRIGHT-QUICK-PACK-20261009",
+        "E-PR-QUICK-PACK-20261009",
+        "E-DEPLOY-QUICK-PACK-20261009",
+        "E-LIVE-PUBLIC-QUICK-PACK-20261009",
+        "E-NAVI-STATE-QUICK-PACK-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -22647,6 +22661,81 @@
       "captured_at": "2026-10-09T03:43:03+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-CUSTOM-SHARE",
       "claim_refs": ["C-312"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-QUICK-PACK-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자 공유 보드의 목적별 빠른 선택 구현이 UI contract·typecheck·127개 테스트·GitHub Pages base-path 번들·성능 예산 검사를 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass); pnpm exec vite build --base /gaba_info/ --outDir dist-budget-check-8; pnpm run validate:performance -- dist-budget-check-8; total assets 1648896; initial JS 311475; initial CSS 95703; performance status ok",
+      "captured_at": "2026-10-09T04:09:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-QUICK-PACK",
+      "claim_refs": ["C-313"]
+    },
+    {
+      "id": "E-UI-CONTRACT-QUICK-PACK-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 사업자 공유 보드의 추천 자료와 `처음 소개`·`연구를 보여줄 때`·`출처까지` 목적별 빠른 선택, 선택 수 갱신, 기존 개별·전체 공유 경계를 고정한다.",
+      "locator": "scripts/validate-ui-contract.mjs; messageKitPacks; 빠른 선택; setSelectedMessageMask; selectedMessageCount; status ok",
+      "captured_at": "2026-10-09T04:09:00+09:00",
+      "reviewer_id": "NAVI-CONTRACT-QA-GABA-20261009-QUICK-PACK",
+      "claim_refs": ["C-313"]
+    },
+    {
+      "id": "E-PLAYWRIGHT-QUICK-PACK-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "Browser plugin 부재에 따른 Playwright fallback 공개 390·1440px에서 사업자 기본 `추천 자료`·5개 선택과 목적별 `연구를 보여줄 때`·2개 선택을 재현했으며 가로폭·page/console errors는 안정적이었다.",
+      "locator": "public Playwright fallback; 390px and 1440px; before quick=추천 자료; after quick=연구를 보여줄 때; flow=자료 2개 선택; scrollWidth=viewport; errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31#final",
+      "captured_at": "2026-10-09T04:09:00+09:00",
+      "reviewer_id": "NAVI-PLAYWRIGHT-QA-GABA-20261009-QUICK-PACK",
+      "claim_refs": ["C-313"]
+    },
+    {
+      "id": "E-PR-QUICK-PACK-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "목적별 빠른 선택 보드 PR #714의 최종 required checks가 성공하고 main에 병합됐다.",
+      "locator": "PR #714; head SHA 221fa487d70205c8aa610c10a269f15efb472596; release-verify run 37829075479 pass; site-quality-verify run 37829075513 pass; merge SHA 377f7babfef77a827ff7e715116071730a13e6fc",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/714",
+      "captured_at": "2026-10-09T04:09:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-QUICK-PACK",
+      "claim_refs": ["C-313"]
+    },
+    {
+      "id": "E-DEPLOY-QUICK-PACK-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main candidate가 Pages로 공개 배포되고 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37829310326; head SHA 377f7babfef77a827ff7e715116071730a13e6fc; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37829310326",
+      "captured_at": "2026-10-09T04:09:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-QUICK-PACK",
+      "claim_refs": ["C-313"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-QUICK-PACK-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 최신 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=377f7babfef77a827ff7e715116071730a13e6fc; generatedAt=2026-10-08T19:06:39.592Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-09T04:09:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-QUICK-PACK",
+      "claim_refs": ["C-313"]
+    },
+    {
+      "id": "E-NAVI-STATE-QUICK-PACK-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 목적별 빠른 선택 보드의 결정·로컬 QA·UI contract·Playwright·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-023; H-404; PR #714 merge SHA 377f7babfef77a827ff7e715116071730a13e6fc; workflow 37829310326; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 기기·실사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T04:09:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-QUICK-PACK",
+      "claim_refs": ["C-313"]
     }
   ]
 }

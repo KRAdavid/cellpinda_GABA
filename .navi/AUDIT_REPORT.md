@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 공유 자료 목적별 빠른 선택 공개 배포 — main 377f7bab — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 사업자 공유 보드에 `추천 자료`와 `처음 소개`·`연구를 보여줄 때`·`출처까지` 빠른 선택을 추가해 선택 수·공유·복사 범위를 한 화면에서 바꾸도록 했다. 기존 5개 카드, 연구 출처, 제품 독립 경계는 유지했다.
+- AC-004: `PASS`. 공개 Playwright fallback 390·1440px에서 사업자 기본 `추천 자료`·5개 선택과 `연구를 보여줄 때`·2개 선택을 확인했고, viewport와 `scrollWidth`가 일치하며 page/console errors는 0건이었다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·GitHub Pages base-path 번들·정적 bundle·성능 예산, PR #714 최종 checks와 main workflow `37829310326`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. 로컬 성능 번들은 1,648,896 bytes였다.
+- AC-006 제품 독립 경계: `PASS`. 이번 변경은 자료 선택 경험만 보완했으며 연구 카피·수치·출처 URL·제품 독립 안내·제품 750 제거·Smart Store 단일 경계·teaser `HOLD`를 변경하지 않았다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-313`, `E-LOCAL-BUILD-QUICK-PACK-20261009`, `E-UI-CONTRACT-QUICK-PACK-20261009`, `E-PLAYWRIGHT-QUICK-PACK-20261009`, `E-PR-QUICK-PACK-20261009`, `E-DEPLOY-QUICK-PACK-20261009`, `E-LIVE-PUBLIC-QUICK-PACK-20261009`, `E-NAVI-STATE-QUICK-PACK-20261009`.
+
 ## 전문가 영상 선행 흐름 검토 및 선택형 공유 자료 공개 배포 — main fa0e26e2 — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 사용자 요청을 검토한 결과 공개 소스와 실제 화면 모두 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서이며, 전문가 영상의 다음 장 안내도 연구 지도를 가리킨다. 사업자 공유 자료는 선택한 카드만 공유·복사한다.
