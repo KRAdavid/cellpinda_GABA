@@ -2464,3 +2464,11 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
 
 증적: `C-292`, `E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008`, `E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008`, `E-PR-NARROW-HEADER-FLEX-20261008`, `E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008`, `E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008`, `E-NAVI-STATE-NARROW-HEADER-FLEX-20261008`.
+## 2026-10-08 — 공개 evidence action 모바일 가독성 보정 및 배포 — 7ac81847
+
+- 연구 출처·원문·공유·읽기 노트 액션을 모바일 기본 13px로 정리해 사업자와 소비자가 연구 근거를 바로 읽을 수 있도록 했다. 연구 카피·수치·출처의 의미와 제품 독립 경계는 변경하지 않았다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산, PR #670 보호 검사와 main workflow `37739962907`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책으로 skipped됐다.
+- 공개 validator는 candidate SHA `7ac8184786b59725f8d789d8fe3a137c456ee8b6`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 390px 일반·큰 글자 모드의 evidence action은 모두 13px, page width는 390/390, runtime error는 0건이었다.
+- NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 외부 조건으로 남긴다.
+
+증적: `C-294`, `E-LOCAL-BUILD-LARGE-TEXT-EVIDENCE-20261008`, `E-UI-CONTRACT-LARGE-TEXT-EVIDENCE-20261008`, `E-PR-LARGE-TEXT-EVIDENCE-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-EVIDENCE-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-EVIDENCE-20261008`, `E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008`.

@@ -3240,6 +3240,19 @@
         "E-NAVI-STATE-RESEARCH-MAP-LABELS-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-294",
+      "statement": "공개 안내서의 연구 출처·원문·공유 액션을 모바일 기본 13px로 정리한 candidate 7ac8184786b59725f8d789d8fe3a137c456ee8b이 PR·Pages·라이브 가독성 검증을 통과했다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-LARGE-TEXT-EVIDENCE-20261008",
+        "E-UI-CONTRACT-LARGE-TEXT-EVIDENCE-20261008",
+        "E-PR-LARGE-TEXT-EVIDENCE-20261008",
+        "E-DEPLOY-PIPELINE-LARGE-TEXT-EVIDENCE-20261008",
+        "E-LIVE-PUBLIC-LARGE-TEXT-EVIDENCE-20261008",
+        "E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -20911,6 +20924,72 @@
       "captured_at": "2026-10-08T15:19:54+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RESEARCH-MAP-LABELS",
       "claim_refs": ["C-293"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-LARGE-TEXT-EVIDENCE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "출처·원문·공유 액션의 모바일 기본 가독성 보정이 로컬 UI contract·production build·정적 bundle·성능 예산·typecheck·127개 테스트를 통과했다.",
+      "locator": "local commit c31e6fbe; pnpm run validate:ui-contract -> status=ok; pnpm run build -> validate-performance initial JS 311405, initial CSS 95703, total assets 1649442/1650000; pnpm run typecheck; pnpm test -> 127 passed; evidence selectors computed at 390px=13px",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/670",
+      "captured_at": "2026-10-08T15:55:16+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-LARGE-TEXT-EVIDENCE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-294"]
+    },
+    {
+      "id": "E-UI-CONTRACT-LARGE-TEXT-EVIDENCE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 연구 출처와 읽기 흐름의 evidence action을 13px 가독성 기준으로 검사하고 통과했다.",
+      "locator": "scripts/validate-ui-contract.mjs; .guide-study-source, .guide-application-sources a, .guide-video-feature-actions>a, .guide-reading-note-source-action font-size=13px; validate:ui-contract status=ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/670",
+      "captured_at": "2026-10-08T15:55:16+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-LARGE-TEXT-EVIDENCE",
+      "claim_refs": ["C-004", "C-294"]
+    },
+    {
+      "id": "E-PR-LARGE-TEXT-EVIDENCE-20261008",
+      "kind": "REVIEW",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #670은 release-verify와 site-quality-verify 필수 검사를 통과한 뒤 main에 병합됐다.",
+      "locator": "PR #670; release-verify run 37739795185 pass; site-quality-verify run 37739795200 pass; merge SHA 7ac8184786b59725f8d789d8fe3a137c456ee8b6",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/670",
+      "captured_at": "2026-10-08T15:51:32+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261008-LARGE-TEXT-EVIDENCE",
+      "claim_refs": ["C-001", "C-005", "C-294"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-LARGE-TEXT-EVIDENCE-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main merge SHA 7ac8184786b59725f8d789d8fe3a137c456ee8b6의 정적 Pages 배포 workflow가 release-verify·worker-readiness·deploy-pages·smoke-live·release-status 성공으로 완료됐고 Worker는 STATIC_ONLY로 skipped됐다.",
+      "locator": "main workflow 37739962907: release-verify 113188150939 success; worker-readiness 113188567488 success; deploy-pages 113188598468 success; deploy-worker 113188599627 skipped by STATIC_ONLY; smoke-live 113188660962 success; release-status 113188732586 success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37739962907",
+      "captured_at": "2026-10-08T15:52:47+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-LARGE-TEXT-EVIDENCE",
+      "claim_refs": ["C-001", "C-005", "C-294"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-LARGE-TEXT-EVIDENCE-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL에서 연구 출처·원문·공유 액션이 390px 일반·큰 글자 모드 모두 13px로 표시되고 가로 넘침과 runtime error가 없음을 재현했다.",
+      "locator": "https://kradavid.github.io/gaba_info/?view=guide; validate-live-public page=200 candidateSha=7ac8184786b59725f8d789d8fe3a137c456ee8b6 bundleHashes=73 claims=12 masterRecords=6 sharePages=6 teaser=HOLD smartStoreOnly=true removed750=true provenance=matched; Chromium Playwright fallback 390px normal/large: application=13px, fermented=13px, videoOriginal=13px, researchScale=13px, shareCopy=13px, readingSource=13px, pageWidth=scrollWidth=390, errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-08T15:52:47+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-LARGE-TEXT-EVIDENCE",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-294"]
+    },
+    {
+      "id": "E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록은 evidence action 가독성 보정의 로컬·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY 및 외부 검증 조건을 유지한다.",
+      "locator": "main 7ac8184786b59725f8d789d8fe3a137c456ee8b6; PR #670 merged; workflow 37739962907 success; live candidate matched; status USER_DECISION; completion gate NOT_READY; Browser plugin unavailable so Playwright fallback; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T15:55:16+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-LARGE-TEXT-EVIDENCE",
+      "claim_refs": ["C-294"]
     }
   ]
 }

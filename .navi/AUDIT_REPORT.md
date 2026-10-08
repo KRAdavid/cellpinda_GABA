@@ -1,5 +1,17 @@
 # Audit Report
 
+## 공개 evidence action 모바일 가독성 보정 및 배포 — main 7ac81847 — 2026-10-08
+
+- AC-001 공개 배포: PASS. PR #670의 `release-verify`·`site-quality-verify`가 통과한 뒤 main merge SHA `7ac8184786b59725f8d789d8fe3a137c456ee8b6`의 workflow `37739962907`에서 `release-verify`·`worker-readiness`·`deploy-pages`·`smoke-live`·`release-status`가 성공했고 `deploy-worker`는 `STATIC_ONLY`로 skipped됐다.
+- AC-003/AC-004 모바일·큰 글자 가독성: PASS. 연구 출처·원문·공유·읽기 노트 액션을 기본 13px로 정리했다. 실제 공개 390px 일반·큰 글자 모드에서 application·fermented·video original·research scale·share copy·reading source가 모두 13px로 계산되고 `pageWidth/scrollWidth=390/390`, `errors=[]`였다.
+- AC-005 자동 게이트: PASS. 로컬 UI contract·typecheck·`pnpm test` 127 pass·production build·정적 bundle·성능 예산을 통과했다. 로컬 총 자산은 `1,649,442 bytes / 1,650,000 bytes`이며 공개 validator는 HTTP 200·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 출처·원문·공유 액션의 읽기 크기와 UI contract에 한정되며 연구 카피·수치·출처 연결·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Browser plugin 부재에 따른 Playwright fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으며 해당 외부 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-294`, `E-LOCAL-BUILD-LARGE-TEXT-EVIDENCE-20261008`, `E-UI-CONTRACT-LARGE-TEXT-EVIDENCE-20261008`, `E-PR-LARGE-TEXT-EVIDENCE-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-EVIDENCE-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-EVIDENCE-20261008`, `E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008`.
+
 ## NAVI 문서 기록 최종 동기화 — main 96218e16 — 2026-10-08
 
 - 문서-only PR #644 병합 후 main merge SHA `96218e1667181ec2d064146e9b1e10e628d02267`와 GitHub Pages 공개 candidate가 일치했다. main workflow `37693604219`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 STATIC_ONLY 정책으로 skipped다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team evidence action 모바일 가독성 재점검 — main 7ac81847 — 2026-10-08
+
+- 공격 관점에서 390px 일반·큰 글자 모드의 연구 출처·원문·공유·읽기 노트 액션이 작아져 증거 흐름이 끊기는지 확인했다. 여섯 evidence selector가 모두 13px로 계산되고 페이지 가로폭은 viewport와 같으며 runtime error는 0건이었다.
+- PR #670 보호 검사·Pages 배포·라이브 validator·smoke·release-status가 main candidate `7ac8184786b59725f8d789d8fe3a137c456ee8b6`와 일치한다. 신규 CRITICAL/MAJOR 결함은 없다.
+- 기본 가독성 개선은 출처와 원문을 더 쉽게 읽게 하지만 Chrome Playwright fallback은 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 검증을 대신하지 않는다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-294`, `E-UI-CONTRACT-LARGE-TEXT-EVIDENCE-20261008`, `E-PR-LARGE-TEXT-EVIDENCE-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-EVIDENCE-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-EVIDENCE-20261008`, `E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008`.
+
 ## NAVI 문서 기록 최종 동기화 공격 재점검 — main 96218e16 — 2026-10-08
 
 - 문서-only 병합이 기능 번들·공개 연구 데이터·제품 독립 경계를 바꾸거나 이전 연구 지도 증적과 다른 candidate를 게시하는지 확인했다. merge SHA와 live candidate가 일치했고 공개 validator·Pages smoke·release-status가 모두 성공했다.
