@@ -1,5 +1,17 @@
 # Audit Report
 
+## 개별 공유 자료 링크 범위 정합성 보정 및 공개 배포 — main 3dbd06d6 — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 사업자 공유 보드에서 개별 `문장 복사`를 실행하면 복사한 카드 하나의 `materials` 범위로 공개 안내서 링크를 생성한다. 현재 선택 묶음이 다른 상태에서도 복사된 문장과 링크의 자료 범위가 일치한다.
+- AC-004: `PASS`. 공개 Chrome CDP fallback 390px에서 첫 카드 개별 복사 링크가 `materials=1`로 생성되고, `선택 2개 · 전체 5개`, 3단계 전달 흐름, 전문가 영상 → 연구 지도 DOM 순서, `width=viewport=390`, runtime errors 0을 확인했다.
+- AC-005 자동 게이트: `PASS`. UI contract·typecheck·`pnpm test` 127 pass·GitHub Pages 정적 build·성능 예산을 통과했고 PR #720 required checks와 main workflow `37836066377`의 release-verify·Pages·라이브 smoke·release-status가 성공했다.
+- AC-006 제품 독립 경계: `PASS`. 이번 변경은 개별 공유 링크의 자료 범위 정합성에 한정되며 연구 카피·수치·출처·제품 독립 안내·Smart Store 단일 경계·teaser `HOLD`를 변경하지 않았다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin·Playwright 부재에 따른 Chrome CDP fallback, 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-316`, `E-LOCAL-BUILD-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-UI-CONTRACT-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-CDP-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-PR-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-DEPLOY-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-CDP-LIVE-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-LIVE-PUBLIC-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-NAVI-STATE-INDIVIDUAL-SHARE-SCOPE-20261009`.
+
 ## 사업자 공유 자료 선택 범위 표기 명확화 및 공개 배포 — main 65b4820f — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 공유 자료 보드의 카드 목록 상단을 `선택 2개 · 전체 5개`로 표시해 현재 전달 범위와 전체 자료 범위를 한 줄에서 구분한다. `materials=24` 링크의 `출처까지` 선택 상태와 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 읽기 순서는 유지됐다.

@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 개별 공유 카드와 안내서 링크 범위 — 3dbd06d6 — 2026-10-09
+
+- 공격 초점은 개별 카드 복사 시 현재 선택된 다른 카드 묶음이 링크에 남아, 수신자가 복사된 문장과 다른 자료를 보게 되는 맥락 손실이었다.
+- 공개 390px에서 선택 묶음이 `materials=24`인 상태로 첫 카드의 `문장 복사`를 실행해도 생성 링크는 `materials=1`이었다. 선택 요약·가로폭·전문가 영상 → 연구 지도 순서·runtime errors 0도 유지됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 검토는 자동 QA로 대체하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-316`, `E-CDP-LIVE-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-LIVE-PUBLIC-INDIVIDUAL-SHARE-SCOPE-20261009`, `E-NAVI-STATE-INDIVIDUAL-SHARE-SCOPE-20261009`.
+
 ## Red-team recheck — 사업자 공유 자료 선택 범위 표기 및 배포 — 65b4820f — 2026-10-09
 
 - 공격 초점은 `5개 전체`라는 고정 문구가 현재 공유되는 선택 범위를 가려, 사업자가 실제 전달 자료 수를 잘못 이해하는지였다.
