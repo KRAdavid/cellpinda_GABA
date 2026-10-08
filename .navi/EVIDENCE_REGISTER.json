@@ -3294,6 +3294,20 @@
         "E-NAVI-STATE-EXPERT-RESEARCH-ORDER-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-298",
+      "statement": "공개 GABA 안내서가 자료 모음 바로가기와 대상별 추천 묶음·전체 묶음·개별 문장 복사를 제공하고, 공개 검증·배포·라이브 상호작용 검사를 통과했다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-AUDIENCE-SHARE-CLARITY-20261008",
+        "E-UI-CONTRACT-AUDIENCE-SHARE-CLARITY-20261008",
+        "E-CDP-AUDIENCE-SHARE-CLARITY-20261008",
+        "E-PR-AUDIENCE-SHARE-CLARITY-20261008",
+        "E-DEPLOY-AUDIENCE-SHARE-CLARITY-20261008",
+        "E-LIVE-PUBLIC-AUDIENCE-SHARE-CLARITY-20261008",
+        "E-NAVI-STATE-AUDIENCE-SHARE-CLARITY-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -21251,6 +21265,83 @@
       "captured_at": "2026-10-08T20:48:21+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-EXPERT-RESEARCH-ORDER",
       "claim_refs": ["C-297"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-AUDIENCE-SHARE-CLARITY-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "대상별 추천 묶음·전체 묶음 복사 변경이 Pages build·정적 bundle·성능 예산·UI contract·typecheck·127개 테스트를 통과했다.",
+      "locator": "feature main 79af85ddf2c3e2528561103600fe69b3acfbfa77; pnpm run build; pnpm run validate:ui-contract; pnpm run typecheck; pnpm test 127 pass; validate:performance initial JS 311405, initial CSS 95703, total 1643337 <= 1650000; git diff --check PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/79af85ddf2c3e2528561103600fe69b3acfbfa77",
+      "captured_at": "2026-10-08T12:09:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-AUDIENCE-SHARE-CLARITY",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-298"]
+    },
+    {
+      "id": "E-UI-CONTRACT-AUDIENCE-SHARE-CLARITY-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract 검사가 자료 모음 바로가기·대상 선택·추천 묶음 복사·전체 5개 복사·추천 표지·출처 연결을 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; href=#final 자료 모음; guide-share-intro-kicker; activeMessageAudienceMask; recommendedIndices; copyAllMessageKit; guide-share-copy-actions; 추천 자료 복사; 전체 5개; 추천; validate:ui-contract status=ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/blob/main/scripts/validate-ui-contract.mjs",
+      "captured_at": "2026-10-08T12:09:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-AUDIENCE-SHARE-CLARITY",
+      "claim_refs": ["C-004", "C-298"]
+    },
+    {
+      "id": "E-CDP-AUDIENCE-SHARE-CLARITY-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px에서 소비자 추천 3개가 사업자 대상 선택 후 5개로 바뀌고, 5개 카드·가로폭 정합성·runtime error 0을 유지했다.",
+      "locator": "Chrome CDP fallback against https://kradavid.github.io/gaba_info/?view=guide; viewport 390x844; initial {width:390,scrollWidth:390,audience:21,recommended:3,cards:5,errors:[]}; after audience=31 {recommended:5,cards:5}; screenshot inspected with view_image; Browser plugin unavailable",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide#final",
+      "captured_at": "2026-10-08T12:18:00Z",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-AUDIENCE-SHARE-CLARITY",
+      "claim_refs": ["C-001", "C-004", "C-298"]
+    },
+    {
+      "id": "E-PR-AUDIENCE-SHARE-CLARITY-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "대상별 공유 자료 변경 PR #681과 정적 fallback marker 복구 PR #682의 보호 검사가 성공하고 두 변경이 main에 병합됐다.",
+      "locator": "PR #681 release-verify run 37774680137 pass; site-quality-verify run 37774680329 pass; merge SHA 79af85ddf2c3e2528561103600fe69b3acfbfa77; PR #682 release-verify run 37775414847 pass; site-quality-verify run 37775415247 pass; merge SHA f69df0037406da04f047f5703ef360d9618c197e",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/681",
+      "captured_at": "2026-10-08T12:15:18Z",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261008-AUDIENCE-SHARE-CLARITY",
+      "claim_refs": ["C-001", "C-005", "C-298"]
+    },
+    {
+      "id": "E-DEPLOY-AUDIENCE-SHARE-CLARITY-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 main candidate의 Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37775580048; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass; final merge SHA f69df0037406da04f047f5703ef360d9618c197e",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37775580048",
+      "captured_at": "2026-10-08T12:17:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-AUDIENCE-SHARE-CLARITY",
+      "claim_refs": ["C-001", "C-005", "C-298"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-AUDIENCE-SHARE-CLARITY-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main candidate와 일치하고 공개 데이터 경계·공유 페이지·제품 독립 조건이 유지됐다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=f69df0037406da04f047f5703ef360d9618c197e; generatedAt=2026-10-08T12:16:37.488Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-08T12:18:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-AUDIENCE-SHARE-CLARITY",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-298"]
+    },
+    {
+      "id": "E-NAVI-STATE-AUDIENCE-SHARE-CLARITY-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 대상별 추천 묶음·전체 복사·fallback smoke fix·PR·배포·라이브 검증을 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-008; H-389; PR #681 and #682; merge SHA f69df0037406da04f047f5703ef360d9618c197e; failed workflow 37774885434 diagnosed and fixed; final workflow 37775580048; live candidate matched; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T21:21:35+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-AUDIENCE-SHARE-CLARITY",
+      "claim_refs": ["C-298"]
     }
   ]
 }

@@ -1,5 +1,16 @@
 # Project Changelog
 
+## 2026-10-08 — 대상별 공유 묶음·전체 자료 복사 고도화 및 공개 재검증
+
+- 마지막 자료 모음에 `자료 모음` 바로가기를 연결하고, 소비자·사업자·교육 대상 선택에 따라 추천 자료를 먼저 표시했다. 추천 카드에는 `추천` 표지를 붙이고, 추천 묶음 복사·전체 5개 복사·개별 문장 복사를 분리했다.
+- 추천 자료와 전체 자료 모두 출처·공개 안내서 연결을 유지했으며, 제품 CTA·연구 카피·연구 수치·제품 독립 정보 경계는 변경하지 않았다.
+- PR #681의 기능 변경이 보호 검사를 통과해 main merge SHA `79af85ddf2c3e2528561103600fe69b3acfbfa77`가 됐고, 정적 fallback marker 누락으로 첫 main workflow `37774885434`의 smoke-live가 실패한 뒤 PR #682에서 해당 no-script 문구를 복원했다.
+- PR #682 merge SHA `f69df0037406da04f047f5703ef360d9618c197e`의 main workflow `37775580048`에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 최종 live validator는 `https://kradavid.github.io/gaba_info`에서 HTTP 200·`candidateSha=f69df0037406da04f047f5703ef360d9618c197e`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. Chrome CDP fallback 390px에서는 소비자 추천 3개가 사업자 선택 후 5개로 바뀌고 카드 5개·scrollWidth 390·runtime errors 0을 확인했다.
+- NAVI는 실제 고령 사용자 독해성·Safari/iOS/Android 실기기·독립 과학·규제 감수 조건 때문에 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-298`, `E-LOCAL-BUILD-AUDIENCE-SHARE-CLARITY-20261008`, `E-UI-CONTRACT-AUDIENCE-SHARE-CLARITY-20261008`, `E-CDP-AUDIENCE-SHARE-CLARITY-20261008`, `E-PR-AUDIENCE-SHARE-CLARITY-20261008`, `E-DEPLOY-AUDIENCE-SHARE-CLARITY-20261008`, `E-LIVE-PUBLIC-AUDIENCE-SHARE-CLARITY-20261008`, `E-NAVI-STATE-AUDIENCE-SHARE-CLARITY-20261008`.
+
 ## 2026-10-08 — 전문가 영상 선배치 및 연구 흐름 공개 재검증
 
 - 소비자가 GABA의 기본 개념을 읽은 직후 전문가의 설명을 먼저 보고, 그 다음 연구 지도로 확장하도록 실제 DOM 순서를 `03 · 전문가 영상 → 04 · 연구 지도`로 정리했다.

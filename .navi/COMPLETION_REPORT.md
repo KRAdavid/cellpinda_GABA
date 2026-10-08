@@ -1,5 +1,15 @@
 # Completion Report
 
+## 대상별 공유 묶음·전체 자료 복사 공개 검증 — main f69df003 — 2026-10-08
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 자료 모음 바로가기, 대상별 추천 카드, 추천 묶음 복사, 전체 5개 복사, 개별 문장 복사가 공개 안내서의 읽기 흐름과 함께 동작한다. 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.
+- AC-006: `PASS`. 이번 변경은 공유 대상 선택과 자료 복사 UX에 한정되며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계를 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. Chrome CDP fallback 390px에서 소비자 추천 3개→사업자 추천 5개, 카드 5개, scrollWidth 390, runtime errors 0을 확인했다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 첫 main smoke-live 실패는 정적 no-script fallback marker 계약 불일치였고 PR #682에서 복원했다. 최종 main SHA `f69df0037406da04f047f5703ef360d9618c197e`와 workflow `37775580048`이 공개 candidate와 일치한다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-298`, `E-LOCAL-BUILD-AUDIENCE-SHARE-CLARITY-20261008`, `E-UI-CONTRACT-AUDIENCE-SHARE-CLARITY-20261008`, `E-CDP-AUDIENCE-SHARE-CLARITY-20261008`, `E-PR-AUDIENCE-SHARE-CLARITY-20261008`, `E-DEPLOY-AUDIENCE-SHARE-CLARITY-20261008`, `E-LIVE-PUBLIC-AUDIENCE-SHARE-CLARITY-20261008`, `E-NAVI-STATE-AUDIENCE-SHARE-CLARITY-20261008`.
+
 ## Current Public Deployment Recheck — research scale search date — main 01fab451 — 2026-10-08
 
 - AC-001/AC-003/AC-004/AC-005: `PASS`. 연구 규모 큰 수치 옆에 기준일을 노출했고, UI contract·typecheck·127개 테스트·정적 bundle·성능 예산·PR #632 보호검사·main Pages 배포·라이브 smoke·release-status·공개 validator가 통과했다. 공개 390px CDP에서 기준일 텍스트와 가로폭 정합성을 확인했다.

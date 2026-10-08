@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 대상별 공유 묶음·전체 자료 복사 공격 재점검 — main f69df003 — 2026-10-08
+
+- 공격 초점은 `자료 모음` 바로가기가 실제 마지막 자료 보드로 연결되는지, 대상 선택이 자료를 숨겨 버리지 않는지, 추천 묶음과 전체 묶음 복사가 서로 혼동되지 않는지, 개별 카드의 출처·제품 독립 경계가 유지되는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. Chrome CDP fallback 390px에서 소비자 추천 3개, 사업자 전환 후 추천 5개, 카드 5개와 `scrollWidth=390`, runtime errors 0을 확인했다.
+- 첫 main smoke-live 실패는 기능 번들이 아니라 정적 no-script fallback marker가 바뀐 계약 불일치 때문이었고, PR #682에서 기존 marker를 복원한 뒤 최종 workflow `37775580048`의 smoke-live가 성공했다.
+- PR #681·#682 보호 검사·Pages 배포·라이브 validator가 최종 main candidate `f69df0037406da04f047f5703ef360d9618c197e`와 일치한다. Browser plugin 부재를 Chrome CDP fallback으로 보완했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 대신하지 못한다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-298`, `E-UI-CONTRACT-AUDIENCE-SHARE-CLARITY-20261008`, `E-CDP-AUDIENCE-SHARE-CLARITY-20261008`, `E-PR-AUDIENCE-SHARE-CLARITY-20261008`, `E-DEPLOY-AUDIENCE-SHARE-CLARITY-20261008`, `E-LIVE-PUBLIC-AUDIENCE-SHARE-CLARITY-20261008`, `E-NAVI-STATE-AUDIENCE-SHARE-CLARITY-20261008`.
+
 ## 사업자 전달 대상 선택·추천 카드 공격 재점검 — main 417db68e — 2026-10-08
 
 - 공격 초점은 대상 선택이 일부 카드를 숨기거나, 추천 강조가 전체 자료 접근을 막거나, 390px에서 가로 넘침·접근성 이름·제품 CTA 유입을 만드는지였다.

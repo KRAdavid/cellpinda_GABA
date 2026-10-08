@@ -1,5 +1,16 @@
 # Audit Report
 
+## 대상별 공유 묶음·전체 자료 복사 고도화 및 공개 재검증 — main f69df003 — 2026-10-08
+
+- AC-003/AC-004: PASS_WITH_CONDITIONS. 자료 모음 바로가기와 소비자·사업자·교육 대상 선택을 제공하고, 대상별 추천 카드·추천 묶음 복사·5개 전체 복사·개별 문장 복사를 함께 유지한다. 출처·제품 독립 정보 경계는 그대로다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·`pnpm test` 127 pass·Pages 경로 production build·정적 bundle·성능 예산이 통과했다. initial JS `311,405`, initial CSS `95,703`, 총 자산 `1,643,337 / 1,650,000 bytes`다.
+- AC-001 공개 배포: PASS. PR #681 기능 검사가 통과했고, no-script fallback marker 누락으로 main workflow `37774885434`의 smoke-live가 실패한 뒤 PR #682에서 marker를 복원했다. 최종 main workflow `37775580048`은 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- AC-006 제품 독립 경계: PASS. 대상별 추천과 복사 UX만 추가했으며 제품 CTA·연구 카피·수치·출처·공개 과학 정보 고지 문구는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. live validator는 HTTP 200·candidate SHA 일치·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. Chrome CDP fallback 390px에서 추천 3→5, 카드 5개, `scrollWidth=390`, runtime errors 0을 확인했다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-298`, `E-LOCAL-BUILD-AUDIENCE-SHARE-CLARITY-20261008`, `E-UI-CONTRACT-AUDIENCE-SHARE-CLARITY-20261008`, `E-CDP-AUDIENCE-SHARE-CLARITY-20261008`, `E-PR-AUDIENCE-SHARE-CLARITY-20261008`, `E-DEPLOY-AUDIENCE-SHARE-CLARITY-20261008`, `E-LIVE-PUBLIC-AUDIENCE-SHARE-CLARITY-20261008`, `E-NAVI-STATE-AUDIENCE-SHARE-CLARITY-20261008`.
+
 ## 사업자 전달 대상 선택·추천 카드 고도화 및 공개 재검증 — main 417db68e — 2026-10-08
 
 - AC-003/AC-004: PASS_WITH_CONDITIONS. 공유 보드에 소비자·사업자·교육 대상 선택을 추가했고, 선택 대상의 추천 카드만 강조하면서 5개 전체 카드·개별 복사·전체 복사를 계속 노출한다. 사람 연구·발효 연구 카드의 출처와 제품 독립 흐름은 유지한다.
