@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — NAVI 최종 공개 provenance 동기화 — bfed845f — 2026-10-09
+
+- 공격 초점은 NAVI 문서 병합 뒤 공개 Pages가 문서에 기록된 이전 후보를 계속 가리키거나, 정적 공개 번들과 제품 독립·공유 범위 경계가 어긋나는지였다.
+- 공개 validator에서 `candidateSha=bfed845f50d18f429f0476a60275cc059310e33c`, `provenance=matched`, HTTP 200, `STATIC`, bundle hashes 73개, claims 12개, master records 6개, share pages 6개를 확인했다. `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`도 유지됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토는 자동 QA로 대체하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-321`, `E-LIVE-PUBLIC-NAVI-SOURCE-STATUS-FINAL-20261009`, `E-NAVI-STATE-NAVI-SOURCE-STATUS-FINAL-20261009`.
+
 ## Red-team recheck — 사업자 공유 자료 제목 요약 — 34bd8c9a — 2026-10-09
 
 - 공격 초점은 사업자가 선택 수는 보지만 실제 어떤 자료가 전달되는지 다시 카드와 대조해야 하는지, 선택 변경 시 요약이 오래된 상태로 남는지, 390px에서 요약이 가로폭을 넘는지였다.

@@ -1,5 +1,16 @@
 # Audit Report
 
+## NAVI 최종 공개 provenance 동기화 — main bfed845f — 2026-10-09
+
+- AC-001/AC-003: `PASS`. 기능 변경 없이 NAVI 문서 PR #732를 main에 병합한 뒤 공개 후보 커밋과 실제 Pages 번들의 provenance를 다시 확인했다. 공개 읽기 흐름 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`, 사업자 공유 자료의 선택 제목·원문 출처 수·공유 범위 안내와 제품 독립 경계는 유지된다.
+- AC-005 자동 게이트: `PASS`. main workflow `37856947343`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.
+- AC-006 공개 정합성: `PASS`. `pnpm run validate:live-public`가 HTTP 200·`STATIC`·`candidateSha=bfed845f50d18f429f0476a60275cc059310e33c`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- AC-007 감사·레드팀: `PASS_WITH_CONDITIONS`. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin 부재, 실제 모바일 공유 시트, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-321`, `E-PR-NAVI-SOURCE-STATUS-FINAL-20261009`, `E-DEPLOY-NAVI-SOURCE-STATUS-FINAL-20261009`, `E-LIVE-PUBLIC-NAVI-SOURCE-STATUS-FINAL-20261009`, `E-NAVI-STATE-NAVI-SOURCE-STATUS-FINAL-20261009`.
+
 ## 사업자 공유 자료 제목 요약 공개 배포 — main 34bd8c9a — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 공유 보드의 전달 레일 아래에 현재 선택된 자료 제목을 `전달할 내용`으로 노출하고, 대상·목적별 선택에 따라 요약이 갱신된다. 본문과 메뉴의 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서와 출처 연결은 유지된다.

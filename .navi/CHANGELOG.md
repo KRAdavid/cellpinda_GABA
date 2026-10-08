@@ -1,5 +1,13 @@
 # Project Changelog
 
+## 2026-10-09 — NAVI 최종 공개 provenance 동기화
+
+- NAVI 문서 PR #732 병합 후 main workflow `37856947343`의 정적 Pages 배포·라이브 smoke·release-status 성공을 기록했다. Worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.
+- 공개 validator는 HTTP 200·`candidateSha=bfed845f50d18f429f0476a60275cc059310e33c`·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- 기능 코드, `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 읽기 흐름, 선택 자료·원문 출처 수·공유 범위 상태와 제품 독립 경계는 변경하지 않았다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+증적: `C-321`, `E-PR-NAVI-SOURCE-STATUS-FINAL-20261009`, `E-DEPLOY-NAVI-SOURCE-STATUS-FINAL-20261009`, `E-LIVE-PUBLIC-NAVI-SOURCE-STATUS-FINAL-20261009`, `E-NAVI-STATE-NAVI-SOURCE-STATUS-FINAL-20261009`.
+
 ## 2026-10-09 — 사업자 공유 자료 제목 요약 및 공개 배포
 
 - 공유 보드의 3단계 전달 레일 아래에 현재 선택된 자료 제목을 `전달할 내용`으로 표시해, 사업자가 카드 목록을 다시 읽지 않고도 실제 전달 범위를 확인하게 했다. 대상·목적별 선택, 개별·전체 복사, 공유 링크, 출처와 제품 독립 경계는 유지했다.
