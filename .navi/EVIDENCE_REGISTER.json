@@ -3595,6 +3595,20 @@
         "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-319",
+      "statement": "사업자 공유 보드에서 추천 묶음과 다른 카드를 직접 고르면 빠른 선택 상태가 `직접 선택`으로 표시되고, 빈 직접 선택 항목을 눌러도 기존 선택 묶음이 지워지지 않는다. 공개 읽기 흐름의 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서와 선택형 공유·출처·제품 독립 경계는 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-HANDOFF-20261009",
+        "E-UI-CONTRACT-SHARE-HANDOFF-20261009",
+        "E-PR-SHARE-HANDOFF-20261009",
+        "E-DEPLOY-SHARE-HANDOFF-20261009",
+        "E-CDP-LIVE-SHARE-HANDOFF-20261009",
+        "E-LIVE-PUBLIC-SHARE-HANDOFF-20261009",
+        "E-NAVI-STATE-SHARE-HANDOFF-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -23214,6 +23228,81 @@
       "captured_at": "2026-10-09T06:10:00+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-CONTENT-PREVIEW",
       "claim_refs": ["C-318"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-HANDOFF-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자 공유 보드의 직접 선택 표시와 빈 선택 항목 무시 보정이 UI contract·typecheck·127개 테스트·GitHub Pages base-path 정적 빌드·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); pnpm run build; validate-performance total assets 1649475, status ok; git diff --check",
+      "captured_at": "2026-10-09T06:50:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-SHARE-HANDOFF",
+      "claim_refs": ["C-319"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-HANDOFF-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 전문가 영상 선행 순서와 공유 보드의 사용자 지정 선택 표시·빈 선택 항목 무시·선택 상태 보존을 고정한다.",
+      "locator": "scripts/validate-ui-contract.mjs; details.guide-share-lines; 03 · 전문가 영상; 04 · 연구 지도; 직접 선택; selectedMessageMask; status ok",
+      "captured_at": "2026-10-09T06:50:00+09:00",
+      "reviewer_id": "NAVI-CONTRACT-QA-GABA-20261009-SHARE-HANDOFF",
+      "claim_refs": ["C-319"]
+    },
+    {
+      "id": "E-PR-SHARE-HANDOFF-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사업자 공유 선택 상태 보정 PR #726의 required checks가 성공하고 main에 병합됐다.",
+      "locator": "PR #726; final required checks pass; squash merge SHA 6185f9b4934097f33644061b663fa653fd90841a; feature source commit af216f3c631580f95af7d16c996768a3d86f3d95",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/726",
+      "captured_at": "2026-10-09T06:50:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-SHARE-HANDOFF",
+      "claim_refs": ["C-319"]
+    },
+    {
+      "id": "E-DEPLOY-SHARE-HANDOFF-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 main candidate가 GitHub Pages로 공개 배포되고 release·Pages·smoke·status 검사가 성공했으며 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37849172918; head SHA 6185f9b4934097f33644061b663fa653fd90841a; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37849172918",
+      "captured_at": "2026-10-09T06:50:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-SHARE-HANDOFF",
+      "claim_refs": ["C-319"]
+    },
+    {
+      "id": "E-CDP-LIVE-SHARE-HANDOFF-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 Pages URL의 Chrome CDP fallback 390px에서 전문가 영상이 연구 지도보다 앞서고, 직접 선택 표시와 빈 선택 항목 무시·선택 상태 보존을 재현했다.",
+      "locator": "Chrome CDP 9223; public URL https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24#final; emulation 390x844; expertBeforeAcademic=true; initial materials=24, selected=2; manual materials=26, option=직접 선택, selected=3; preset materials=12, option=연구를 보여줄 때, selected=2; empty direct option ignored and state remained materials=12; clientWidth=390; scrollWidth=390; runtime errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24#final",
+      "captured_at": "2026-10-09T06:50:00+09:00",
+      "reviewer_id": "NAVI-CDP-LIVE-QA-GABA-20261009-SHARE-HANDOFF",
+      "claim_refs": ["C-319"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-HANDOFF-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 최신 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info/; base=https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=6185f9b4934097f33644061b663fa653fd90841a; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-09T06:50:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-SHARE-HANDOFF",
+      "claim_refs": ["C-319"]
+    },
+    {
+      "id": "E-NAVI-STATE-SHARE-HANDOFF-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 사업자 공유 선택 상태 보정의 결정·로컬 QA·UI contract·PR·배포·라이브 Chrome CDP·validator 결과를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "DEC-029; H-410; PR #726 merge SHA 6185f9b4934097f33644061b663fa653fd90841a; workflow 37849172918; live candidate matched; status USER_DECISION; completion gate NOT_READY; Browser plugin/Playwright 부재에 따른 Chrome CDP fallback; Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T06:50:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-HANDOFF",
+      "claim_refs": ["C-319"]
     }
   ]
 }

@@ -2956,6 +2956,16 @@
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
 
+## 사업자 공유 선택 상태 보정 공격 점검 — 2026-10-09
+
+- 공격 관점에서 추천 묶음에서 개별 카드를 선택한 뒤 상태 라벨이 `직접 선택`으로 바뀌는지, 빈 직접 선택 항목이 기존 선택을 지우지 않는지 확인했다.
+- 390px에서 `03 · 전문가 영상 → 04 · 연구 지도`, 선택 자료 수 변화, document 가로폭 일치와 runtime error 0을 재현했으며 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN이다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-319`, `E-UI-CONTRACT-SHARE-HANDOFF-20261009`, `E-DEPLOY-SHARE-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-HANDOFF-20261009`.
+
 ## Red-team recheck — 공유 내용 미리보기 — c4671fde — 2026-10-09
 
 - 공유 전에 실제 선택 문장·출처가 표시되는지, 기본 접힘 상태가 본문 흐름을 방해하지 않는지, 빠른 선택 변경 뒤 낡은 내용이 남지 않는지 확인했다.

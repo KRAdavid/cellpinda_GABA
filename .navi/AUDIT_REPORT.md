@@ -3801,6 +3801,16 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-318`, `E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009`, `E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009`, `E-PR-SHARE-CONTENT-PREVIEW-20261009`, `E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009`, `E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009`, `E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009`, `E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009`.
 
+## 사업자 공유 선택 상태 보정 재감리 — 2026-10-09
+
+- `03 · 전문가 영상 → 04 · 연구 지도` 순서는 본문·메뉴·공개 URL에서 유지됐다.
+- 직접 카드 선택 후 빠른 선택은 `직접 선택`으로 표시됐고, 빈 선택 항목을 눌러도 기존 선택 자료가 보존됐다. 390px에서 document 가로폭은 viewport와 같고 runtime error는 재현되지 않았다.
+- 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 해당 조건은 계속 OPEN이다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-319`, `E-LOCAL-BUILD-SHARE-HANDOFF-20261009`, `E-UI-CONTRACT-SHARE-HANDOFF-20261009`, `E-PR-SHARE-HANDOFF-20261009`, `E-DEPLOY-SHARE-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-HANDOFF-20261009`.
+
 ## 모바일 연구 지도 범위 라벨 보정 — 77d14844 — 2026-10-08
 
 - AC-003/AC-004 모바일 가독성: PASS. 390px에서 연구 지도 범위 라벨이 어절 단위로 끊겨 보이던 리스크를 확인하고 표시 라벨을 한 줄의 `사람 연구`·`동물·세포`로 정리했다. 상세 연구 범위는 버튼 `aria-label`에 그대로 보존했다.

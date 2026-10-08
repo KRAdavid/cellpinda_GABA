@@ -2689,3 +2689,13 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
 
 증적: `C-311`, `E-LOCAL-BUILD-SOURCE-CONTRAST-20261009`, `E-UI-CONTRACT-SOURCE-CONTRAST-20261009`, `E-PLAYWRIGHT-SOURCE-CONTRAST-20261009`, `E-PR-SOURCE-CONTRAST-20261009`, `E-DEPLOY-SOURCE-CONTRAST-20261009`, `E-LIVE-PUBLIC-SOURCE-CONTRAST-20261009`, `E-NAVI-STATE-SOURCE-CONTRAST-20261009`.
+
+# 2026-10-09 — 사업자 공유 선택 상태 보정 및 공개 재검증 — 6185f9b4
+
+- 추천 묶음과 다른 카드를 직접 고르면 빠른 선택 상태를 `직접 선택`으로 표시하고, 빈 선택 항목은 무시해 기존 선택 자료가 지워지지 않도록 보정했다.
+- 공개 읽기 순서는 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`로 유지했다. 공유 자료의 출처·선택형 전달·제품 독립 경계도 유지했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산, PR #726 보호 검사와 main workflow `37849172918`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책으로 skipped됐다.
+- 공개 validator는 candidate SHA `6185f9b4934097f33644061b663fa653fd90841a`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 Chrome CDP fallback 390px에서 직접 선택·빈 선택 무시·전문가 영상 선행·가로폭 일치·runtime error 0을 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재와 Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건이다.
+
+증적: `C-319`, `E-LOCAL-BUILD-SHARE-HANDOFF-20261009`, `E-UI-CONTRACT-SHARE-HANDOFF-20261009`, `E-PR-SHARE-HANDOFF-20261009`, `E-DEPLOY-SHARE-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-HANDOFF-20261009`.

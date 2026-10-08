@@ -3242,3 +3242,14 @@ Final Status: `NOT_READY`; 사용자 승인 전 자동 완료 처리하지 않�
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-318`, `E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009`, `E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009`, `E-PR-SHARE-CONTENT-PREVIEW-20261009`, `E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009`, `E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009`, `E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009`, `E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009`.
+
+## Completion gate recheck — 사업자 공유 선택 상태 보정 — 2026-10-09
+
+- AC-001 공개 배포: PASS. PR #726 병합 후 main workflow `37849172918`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다. 공개 validator는 main merge SHA `6185f9b4934097f33644061b663fa653fd90841a`와 candidate 정합성을 확인했다.
+- AC-004/AC-005 모바일·자동 게이트: PASS. 직접 카드 선택 시 `직접 선택`이 표시되고 빈 선택 항목은 기존 상태를 지키며, 390px의 `03 · 전문가 영상 → 04 · 연구 지도`, 가로폭 일치, runtime error 0을 확인했다. 로컬 UI contract·typecheck·127개 테스트·정적 빌드·성능 예산도 통과했다.
+- AC-006 제품 독립 경계: PASS. 공유 payload·출처·제품 독립 과학 안내 흐름은 유지되며 공개 validator의 `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 유지했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Chrome fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-319`, `E-LOCAL-BUILD-SHARE-HANDOFF-20261009`, `E-UI-CONTRACT-SHARE-HANDOFF-20261009`, `E-PR-SHARE-HANDOFF-20261009`, `E-DEPLOY-SHARE-HANDOFF-20261009`, `E-CDP-LIVE-SHARE-HANDOFF-20261009`, `E-LIVE-PUBLIC-SHARE-HANDOFF-20261009`, `E-NAVI-STATE-SHARE-HANDOFF-20261009`.
