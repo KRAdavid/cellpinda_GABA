@@ -767,6 +767,31 @@
   line-height:1.65;
 }
 
+/* v174 business share clarity: make the audience choice, recommended bundle and full bundle distinct at a glance. */
+.guide-share-intro-kicker{color:#8ed9d7;font-size:11px;font-weight:900;letter-spacing:.1em;line-height:1.4}
+.guide-share-audience{display:grid;gap:5px;min-width:110px;color:#b8d1da;font-size:11px;font-weight:800;letter-spacing:-.03em}
+.guide-share-audience select{width:100%;min-height:44px;padding:0 28px 0 11px;border:1px solid rgba(145,219,217,.42);border-radius:10px;background:#173d5b;color:#f1fbfb;font:inherit;font-size:13px;font-weight:850;outline:none}
+.guide-share-audience select:focus-visible{outline:3px solid rgba(131,222,217,.3);outline-offset:3px}
+.guide-share-copy-actions{display:flex;align-items:center;gap:7px}
+.guide-share-copy-actions .guide-share-copy-all{min-height:44px}
+.guide-share-copy-all-secondary{border-color:rgba(206,229,237,.28);background:transparent;color:#c4d9e2}
+.guide-share-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:19px}
+.guide-share-card-head>span{color:#90d6d6;font-size:11px;font-weight:850;line-height:1.35}
+.guide-share-card-head>b{padding:4px 7px;border:1px solid rgba(145,219,217,.42);border-radius:999px;color:#b9f0ec;font-size:10px;font-weight:900;line-height:1;white-space:nowrap}
+.guide-share-card-head>small{color:#8caab9;font-size:10px;line-height:1;white-space:nowrap}
+.guide-share-lines article.is-rec{background:linear-gradient(180deg,rgba(37,177,178,.14),rgba(255,255,255,.06));box-shadow:inset 0 2px 0 rgba(145,219,217,.55)}
+@media(max-width:700px){
+  .guide-share-intro-actions{display:grid!important;grid-template-columns:minmax(0,1fr);align-items:stretch;gap:12px}
+  .guide-share-audience{grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px}
+  .guide-share-audience select{min-width:0}
+  .guide-share-copy-actions{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}
+  .guide-share-copy-actions .guide-share-copy-all{padding-inline:11px}
+}
+@media(max-width:350px){
+  .guide-share-copy-actions{grid-template-columns:minmax(0,1fr)}
+  .guide-share-copy-all-secondary{min-height:40px}
+}
+
 /* v14 research scale scope rail: clarify the comparison boundary before the headline numbers. */
 .guide-research-scale-reading{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:18px}
 .guide-research-scale-reading span{display:grid;grid-template-columns:8px minmax(0,auto) minmax(0,1fr);align-items:center;gap:8px;min-width:0;padding:10px 12px;border:1px solid rgba(224,247,248,.16);border-radius:12px;background:rgba(224,247,248,.08)}
