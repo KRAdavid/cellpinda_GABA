@@ -786,6 +786,10 @@
 .guide-share-flow-step{display:flex;align-items:center;gap:9px;min-height:44px;padding:9px 12px;border:1px solid rgba(145,219,217,.24);border-radius:11px;background:rgba(255,255,255,.045);color:#c9e3e7;font-size:12px;font-weight:800;letter-spacing:-.035em}
 .guide-share-flow-step strong{display:inline-flex;align-items:center;justify-content:center;flex:0 0 25px;width:25px;height:25px;border-radius:50%;background:rgba(145,219,217,.16);color:#a9e4e1;font-size:10px;font-weight:900;letter-spacing:.04em}
 .guide-share-flow-arrow{color:#8ed9d7;opacity:.8}
+.guide-share-selection-status{display:grid;gap:5px;max-width:790px;margin-top:10px;padding:12px 14px;border:1px solid rgba(145,219,217,.2);border-radius:12px;background:rgba(255,255,255,.045)}
+.guide-share-selection-status>span{color:#8ed9d7;font-size:11px;font-weight:900;letter-spacing:.08em}
+.guide-share-selection-status>strong{color:#f0fbfb;font-size:13px;font-weight:850;line-height:1.55;letter-spacing:-.035em}
+.guide-share-selection-status>small{color:#a9c5d0;font-size:11px;line-height:1.5;letter-spacing:-.025em}
 .guide-share-card-source{color:#b7e9e5;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:700px){
   .guide-share-intro-actions{display:grid!important;grid-template-columns:minmax(0,1fr);align-items:stretch;gap:12px}
@@ -798,6 +802,7 @@
   .guide-share-flow{grid-template-columns:1fr;gap:4px;margin-top:12px}
   .guide-share-flow-step{min-height:40px;padding:7px 11px}
   .guide-share-flow-arrow{justify-self:center;transform:rotate(90deg)}
+  .guide-share-selection-status{padding:11px 13px}
 }
 @media(max-width:350px){
   .guide-share-copy-actions{grid-template-columns:minmax(0,1fr) auto}
