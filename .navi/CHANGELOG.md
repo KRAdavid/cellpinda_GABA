@@ -2447,3 +2447,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
 
 증적: `C-291`, `E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008`, `E-PR-RECOVERY-MAP-A11Y-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008`, `E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008`.
+
+## 2026-10-08 — 좁은 모바일 헤더 flex 겹침 보정 및 공개 재검증
+
+- 381–430px에서 로고 flex item이 절대 위치 메뉴·글자 크기·공유 컨트롤 영역으로 확장되지 않도록 `flex:0 1 auto`를 추가했다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·정적 bundle·성능 예산, PR #666 보호 검사, main workflow `37734617884`의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책에 따라 skipped됐다.
+- 공개 validator candidate `3d75b4e45637db316c07ae94b5f1a26d0a5c4301`, HTTP 200, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다. 공개 280·320·390·430px에서 헤더 컨트롤 겹침 없음과 가로폭 일치를 재현했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Chromium fallback 범위 밖의 실기기·실사용자·독립 과학·규제 검증은 외부 조건으로 남는다.
+
+증적: `C-292`, `E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008`, `E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008`, `E-PR-NARROW-HEADER-FLEX-20261008`, `E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008`, `E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008`, `E-NAVI-STATE-NARROW-HEADER-FLEX-20261008`.

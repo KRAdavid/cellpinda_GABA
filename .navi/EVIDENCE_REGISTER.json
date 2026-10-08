@@ -3214,6 +3214,19 @@
         "E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-292",
+      "statement": "381–430px 모바일 공개 헤더에서 로고 flex item 확장을 제한한 candidate 3d75b4e45637db316c07ae94b5f1a26d0a5c4301이 PR·Pages·라이브 geometry 검증을 통과했다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008",
+        "E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008",
+        "E-PR-NARROW-HEADER-FLEX-20261008",
+        "E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008",
+        "E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008",
+        "E-NAVI-STATE-NARROW-HEADER-FLEX-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -20753,6 +20766,72 @@
       "captured_at": "2026-10-08T10:12:29+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RECOVERY-MAP-A11Y",
       "claim_refs": ["C-291"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "로컬 production build·typecheck·UI contract·127개 테스트·정적 bundle·성능 예산이 통과했고 280·320·390·430px에서 헤더 컨트롤 겹침이 없고 pageWidth가 viewport와 일치했다.",
+      "locator": "pnpm run build; pnpm run typecheck; pnpm test -> 127 passed; pnpm run validate:ui-contract -> status=ok; validate-performance total assets 1649299/1650000; local Playwright 280/320/390/430px -> overlap=false and pageWidth=viewport",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/666",
+      "captured_at": "2026-10-08T14:55:44+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-NARROW-HEADER-FLEX",
+      "claim_refs": ["C-001", "C-003", "C-292"]
+    },
+    {
+      "id": "E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract에 381–430px 헤더 로고 flex item의 성장 제한을 등록했고 통과했다.",
+      "locator": "pnpm run validate:ui-contract -> status=ok; v56 narrow-phone header clearance asserts flex:0 1 auto and max-width calc(100% - 184px)",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/666",
+      "captured_at": "2026-10-08T14:55:44+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-NARROW-HEADER-FLEX",
+      "claim_refs": ["C-003", "C-292"]
+    },
+    {
+      "id": "E-PR-NARROW-HEADER-FLEX-20261008",
+      "kind": "REVIEW",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "PR #666은 release-verify와 site-quality-verify 필수 검사를 통과한 뒤 main에 병합됐다.",
+      "locator": "PR #666; release-verify run 37734486880 pass; site-quality-verify run 37734486917 pass; merge SHA 3d75b4e45637db316c07ae94b5f1a26d0a5c4301",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/666",
+      "captured_at": "2026-10-08T14:52:53+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261008-NARROW-HEADER-FLEX",
+      "claim_refs": ["C-001", "C-292"]
+    },
+    {
+      "id": "E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main merge SHA 3d75b4e45637db316c07ae94b5f1a26d0a5c4301의 정적 배포 workflow가 release-verify·worker-readiness·deploy-pages·smoke-live·release-status 성공으로 완료됐고 Worker는 STATIC_ONLY로 skipped됐다.",
+      "locator": "main workflow 37734617884: release-verify 113171231064 success; worker-readiness 113171602051 success; deploy-pages 113171620390 success; deploy-worker 113171621295 skipped by STATIC_ONLY; smoke-live 113171681069 success; release-status 113171742197 success",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37734617884",
+      "captured_at": "2026-10-08T14:54:08+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-NARROW-HEADER-FLEX",
+      "claim_refs": ["C-001", "C-005", "C-292"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 URL에서 280·320·390·430px 헤더 로고와 메뉴·글자 크기·공유 컨트롤의 겹침이 없고 페이지 가로폭이 각 viewport와 일치하는 것을 재현했다.",
+      "locator": "https://kradavid.github.io/gaba_info/?view=guide; Chromium Playwright; widths=280/320/390/430; overlap=false for every width; pageWidth=viewport; validate:live-public page=200 candidateSha=3d75b4e45637db316c07ae94b5f1a26d0a5c4301 bundleHashes=73 claims=12 masterRecords=6 sharePages=6 teaser=HOLD provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide",
+      "captured_at": "2026-10-08T14:54:08+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-NARROW-HEADER-FLEX",
+      "claim_refs": ["C-001", "C-003", "C-004", "C-292"]
+    },
+    {
+      "id": "E-NAVI-STATE-NARROW-HEADER-FLEX-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록은 좁은 모바일 헤더 보정의 로컬·PR·배포·라이브 결과를 연결하고 USER_DECISION/NOT_READY 및 외부 검증 조건을 유지한다.",
+      "locator": "main 3d75b4e45637db316c07ae94b5f1a26d0a5c4301; PR #666 merged; workflow 37734617884 success; live candidate matched; status USER_DECISION; completion gate NOT_READY; Safari/iOS/Android 실기기·실제 고령 사용자·독립 과학·규제 검토는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T14:55:44+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-NARROW-HEADER-FLEX",
+      "claim_refs": ["C-292"]
     }
   ]
 }

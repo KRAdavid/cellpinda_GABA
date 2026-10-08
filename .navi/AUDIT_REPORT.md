@@ -3495,3 +3495,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-291`, `E-LOCAL-BUILD-RECOVERY-MAP-A11Y-20261008`, `E-UI-CONTRACT-RECOVERY-MAP-A11Y-20261008`, `E-PR-RECOVERY-MAP-A11Y-20261008`, `E-DEPLOY-PIPELINE-RECOVERY-MAP-A11Y-20261008`, `E-LIVE-PUBLIC-RECOVERY-MAP-A11Y-20261008`, `E-NAVI-STATE-RECOVERY-MAP-A11Y-20261008`.
+
+## 좁은 모바일 헤더 flex 겹침 보정 — 3d75b4e4 — 2026-10-08
+
+- AC-001 공개 배포: PASS. PR #666 병합 후 main merge SHA `3d75b4e45637db316c07ae94b5f1a26d0a5c4301`의 workflow `37734617884`에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- AC-003/AC-004 모바일 품질: PASS. 381–430px 헤더의 로고 flex item에 `flex:0 1 auto`를 적용해 절대 위치 컨트롤 rail로의 확장을 차단했다. 로컬·공개 Chromium Playwright 280·320·390·430px에서 로고와 메뉴·글자 크기·공유 컨트롤 `overlap=false`, pageWidth/scrollWidth가 viewport와 일치했다.
+- AC-005 자동 게이트: PASS. 로컬 `pnpm run build`, `pnpm run typecheck`, `pnpm test` 127 pass, UI contract, 정적 bundle, release manifest와 성능 예산이 통과했다. 공개 validator는 candidate `3d75b4e45637db316c07ae94b5f1a26d0a5c4301`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- AC-006 제품 독립 경계: PASS. 이번 변경은 좁은 모바일 헤더 레이아웃과 UI contract에 한정되며 연구 카피·수치·출처·제품 독립 공개 경계는 변경하지 않았다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Chromium fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 해당 조건은 계속 외부 검증으로 유지한다. NAVI 상태는 `USER_DECISION`, 완료 게이트는 `NOT_READY`다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-292`, `E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008`, `E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008`, `E-PR-NARROW-HEADER-FLEX-20261008`, `E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008`, `E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008`, `E-NAVI-STATE-NARROW-HEADER-FLEX-20261008`.
