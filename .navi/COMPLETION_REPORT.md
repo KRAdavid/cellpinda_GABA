@@ -1,5 +1,15 @@
 # Completion Report
 
+## 모바일 공유 보드 제목 압축 및 전문가 영상 순서 공개 검증 — main 2f49bf4c — 2026-10-08
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 공유 보드가 390px에서 선택 대상에 맞는 짧은 제목과 추천 자료 수를 표시하고, 전체 5개 카드·개별 문장 복사·출처 연결을 유지한다. PR #693 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.
+- AC-006: `PASS`. 모바일 제목과 공유 정보 흐름만 보완했으며 연구 카피·수치·출처·제품 독립 정보 고지·제품 CTA 제한을 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. 공개 390px에서 사업자/소비자 전환, 가로폭, runtime errors, 전문가 영상→연구 지도 handoff를 Chrome CDP fallback으로 검증했다. Browser plugin 부재·실제 기기·실제 사용자·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 최종 main SHA `2f49bf4cb6b7572f66b92d8eb9a7089f877fa930`와 공개 candidate가 일치하며 workflow `37791097227`가 성공했다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-303`, `E-LOCAL-BUILD-COMPACT-SHARE-20261008`, `E-UI-CONTRACT-COMPACT-SHARE-20261008`, `E-CDP-COMPACT-SHARE-20261008`, `E-PR-COMPACT-SHARE-20261008`, `E-DEPLOY-COMPACT-SHARE-20261008`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261008`, `E-NAVI-STATE-COMPACT-SHARE-20261008`.
+
 ## 대상별 공유 링크 맥락 보존 공개 검증 — main 065a7d49 — 2026-10-08
 
 - AC-001/AC-003/AC-004/AC-005: `PASS`. 대상별 공유 URL이 선택 대상과 `#final` 목적지를 보존하고, 공개 390px에서 전문가 영상→연구 지도 순서·다음 장 이동·가로폭·runtime errors 0을 확인했다. PR #691 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.

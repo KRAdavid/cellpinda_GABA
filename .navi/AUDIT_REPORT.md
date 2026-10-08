@@ -1,5 +1,15 @@
 # Audit Report
 
+## 모바일 공유 보드 제목 압축 및 전문가 영상 순서 최종 검증 — main 2f49bf4c — 2026-10-08
+
+- AC-001/AC-003/AC-004: `PASS`. 공개 390px에서 사업자 상세 요약은 `사업자용 GABA 자료`, 소비자 전환 뒤에는 `소비자용 GABA 자료`로 표시되며 사업자 추천 5개·소비자 추천 3개·전체 카드 5개·복사 액션을 유지한다.
+- AC-005 자동 게이트: `PASS`. PR #693 보호 검사와 main workflow `37791097227`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. 라이브 validator는 candidate SHA 일치와 정적 공개 데이터 경계를 확인했다.
+- AC-006: `PASS`. 제목 길이와 모바일 공유 보드 읽기 흐름만 보완했으며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계는 변경하지 않았다.
+- AC-007: `PASS_WITH_CONDITIONS`. Chrome CDP fallback 공개 390px에서 `scrollWidth=390`·runtime errors 0과 `03 · 전문가 영상 → 04 · 연구 지도`·handoff 도착을 확인했다. Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-302`, `C-303`, `E-LOCAL-BUILD-COMPACT-SHARE-20261008`, `E-UI-CONTRACT-COMPACT-SHARE-20261008`, `E-CDP-COMPACT-SHARE-20261008`, `E-PR-COMPACT-SHARE-20261008`, `E-DEPLOY-COMPACT-SHARE-20261008`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261008`, `E-NAVI-STATE-COMPACT-SHARE-20261008`.
+
 ## 대상별 공유 링크 맥락 보존 및 전문가 영상 순서 공개 검증 — main 065a7d49 — 2026-10-08
 
 - AC-001/AC-003/AC-004: `PASS`. 공개 390px에서 `03 · 전문가 영상`이 `04 · 연구 지도`보다 앞에 있고, 전문가 영상의 “다음 장 · 연구 지도”를 누르면 연구 지도 제목으로 이동한다. 페이지 가로폭은 390px이며 runtime errors는 없다.

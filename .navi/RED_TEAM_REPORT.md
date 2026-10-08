@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 모바일 공유 보드 제목 압축 및 전문가 영상 순서 공격 재점검 — main 2f49bf4c — 2026-10-08
+
+- 공격 초점은 짧아진 상세 제목이 사업자·소비자 대상 맥락을 잃지 않는지, 추천 수·전체 자료·개별 복사가 사라지지 않는지, 390px 가로폭과 전문가 영상→연구 지도 연결이 유지되는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 공개 390px에서 사업자 `사업자용 GABA 자료`·추천 5개, 소비자 `소비자용 GABA 자료`·추천 3개, 카드 5개·`scrollWidth=390`·runtime errors 0을 확인했다.
+- 공개 순서는 `03 · 전문가 영상 → 04 · 연구 지도`로 측정됐고 전문가 영상의 다음 장 handoff 뒤 진행 레일과 연구 지도 제목이 정상 도착했다.
+- PR #693과 main workflow `37791097227`의 보호 검사·Pages 배포·라이브 smoke·release-status가 성공했다. Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 자동화 검증으로 대체하지 않는다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-302`, `C-303`, `E-UI-CONTRACT-COMPACT-SHARE-20261008`, `E-CDP-COMPACT-SHARE-20261008`, `E-PR-COMPACT-SHARE-20261008`, `E-DEPLOY-COMPACT-SHARE-20261008`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261008`, `E-NAVI-STATE-COMPACT-SHARE-20261008`.
+
 ## 대상별 공유 링크·전문가 영상 선배치 공격 재점검 — main 065a7d49 — 2026-10-08
 
 - 공격 초점은 공유 URL이 선택한 대상과 목적지를 잃지 않는지, 390px에서 전문가 영상이 연구 지도보다 먼저 보이는지, 다음 장 이동·가로폭·공개 정보 경계가 유지되는지였다.

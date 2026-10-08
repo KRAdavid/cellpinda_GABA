@@ -1,5 +1,15 @@
 # Project Changelog
 
+## 2026-10-08 — 모바일 공유 보드 제목 압축 및 전문가 영상 순서 최종 재검증
+
+- 공유 보드의 긴 상세 제목을 `사업자용 GABA 자료`·`소비자용 GABA 자료`로 정리해 390px에서 대상과 자료 목적을 한 번에 읽도록 했다. 전달 대상 선택, 추천 수, 전체 5개, 개별 복사와 출처 연결은 유지했다.
+- PR #693의 `release-verify`·`site-quality-verify`가 통과해 main merge SHA `2f49bf4cb6b7572f66b92d8eb9a7089f877fa930`이 됐다. main workflow `37791097227`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다.
+- 최종 live validator는 HTTP 200·`candidateSha=2f49bf4cb6b7572f66b92d8eb9a7089f877fa930`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다.
+- Chrome CDP fallback 공개 390px에서 사업자 제목 `사업자용 GABA 자료`·추천 5개, 소비자 제목 `소비자용 GABA 자료`·추천 3개, 카드 5개·`scrollWidth=390`·runtime errors 0을 확인했다. 같은 검사에서 `03 · 전문가 영상 → 04 · 연구 지도`와 다음 장 handoff도 재확인했다.
+- NAVI는 실제 iOS/Android 공유 시트·Safari/실기기·고령 사용자 독해성·독립 과학·규제 감수 조건 때문에 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-303`, `E-LOCAL-BUILD-COMPACT-SHARE-20261008`, `E-UI-CONTRACT-COMPACT-SHARE-20261008`, `E-CDP-COMPACT-SHARE-20261008`, `E-PR-COMPACT-SHARE-20261008`, `E-DEPLOY-COMPACT-SHARE-20261008`, `E-LIVE-PUBLIC-COMPACT-SHARE-20261008`, `E-NAVI-STATE-COMPACT-SHARE-20261008`.
+
 ## 2026-10-08 — 대상별 공유 링크 맥락 보존 및 공개 흐름 재검증
 
 - 대상별 추천 자료를 직접 공유하거나 복사할 때 `audience=21/31/15`와 `#final` 목적지를 유지하도록 보완했다. 수신자는 소비자·사업자·교육용 선택과 추천 자료 수를 잃지 않고 공유 자료 모음으로 바로 진입한다.
