@@ -1,5 +1,15 @@
 # Audit Report
 
+## 대상별 공유 링크 맥락 보존 및 전문가 영상 순서 공개 검증 — main 065a7d49 — 2026-10-08
+
+- AC-001/AC-003/AC-004: `PASS`. 공개 390px에서 `03 · 전문가 영상`이 `04 · 연구 지도`보다 앞에 있고, 전문가 영상의 “다음 장 · 연구 지도”를 누르면 연구 지도 제목으로 이동한다. 페이지 가로폭은 390px이며 runtime errors는 없다.
+- AC-005 자동 게이트: `PASS`. PR #691 보호 검사·main release-verify·Pages 배포·라이브 smoke·release-status가 성공했다. 정적 번들·연구 카피·타입·테스트·성능 게이트는 release workflow에서 재검증됐다.
+- AC-006: `PASS`. 공유 URL에 대상 선택과 `#final`을 추가했지만 연구 카피·수치·출처·제품 독립 경계와 제품 CTA 제한은 변경하지 않았다. 소비자 딥링크는 `audience=21`, 추천 3개, 소비자용 제목으로 복원됐다.
+- AC-007: `PASS_WITH_CONDITIONS`. mock Web Share에서 소비자용 제목과 `https://kradavid.github.io/gaba_info/?view=guide&audience=21#final`을 확인했다. Browser plugin 부재·실제 iOS/Android 공유 시트·Safari/실기기·고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+- `Final Status: NOT_READY`; NAVI `USER_DECISION`.
+
+증적: `C-302`, `E-LOCAL-BUILD-AUDIENCE-DEEPLINK-20261008`, `E-UI-CONTRACT-AUDIENCE-DEEPLINK-20261008`, `E-CDP-AUDIENCE-DEEPLINK-20261008`, `E-PR-AUDIENCE-DEEPLINK-20261008`, `E-DEPLOY-AUDIENCE-DEEPLINK-20261008`, `E-LIVE-PUBLIC-AUDIENCE-DEEPLINK-20261008`, `E-NAVI-STATE-AUDIENCE-DEEPLINK-20261008`.
+
 ## 추천 자료 한 번에 공유 및 fallback 안내 공개 검증 — main 3ebb5c3f — 2026-10-08
 
 - AC-003/AC-004: PASS_WITH_CONDITIONS. 선택 대상의 추천 묶음을 `추천 공유`로 직접 전달하고, 전체 5개·개별 문장 복사·출처 연결은 유지된다. 사업자 기본은 5개, 소비자 전환은 3개 추천이다.

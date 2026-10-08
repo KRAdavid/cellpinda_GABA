@@ -1,5 +1,15 @@
 # Completion Report
 
+## 대상별 공유 링크 맥락 보존 공개 검증 — main 065a7d49 — 2026-10-08
+
+- AC-001/AC-003/AC-004/AC-005: `PASS`. 대상별 공유 URL이 선택 대상과 `#final` 목적지를 보존하고, 공개 390px에서 전문가 영상→연구 지도 순서·다음 장 이동·가로폭·runtime errors 0을 확인했다. PR #691 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.
+- AC-006: `PASS`. 공유 링크·순서 UX만 보완했으며 연구 카피·수치·출처·제품 독립 정보 고지와 제품 CTA 경계를 유지한다.
+- AC-007: `PASS_WITH_CONDITIONS`. Chrome CDP fallback과 mock Web Share로 소비자용 `audience=21`·추천 3개·`#final` 공유 URL을 검증했다. Browser plugin 부재·실제 기기·실제 사용자·독립 과학·규제 감수·teaser `HOLD`는 완료로 표시하지 않는다.
+- 최종 main SHA `065a7d499accf5efafdb2d926b370df1f6bb37a1`와 공개 candidate가 일치하며 workflow `37788148936`가 성공했다.
+- Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-302`, `E-USER-AUDIENCE-DEEPLINK-20261008`, `E-LOCAL-BUILD-AUDIENCE-DEEPLINK-20261008`, `E-UI-CONTRACT-AUDIENCE-DEEPLINK-20261008`, `E-CDP-AUDIENCE-DEEPLINK-20261008`, `E-PR-AUDIENCE-DEEPLINK-20261008`, `E-DEPLOY-AUDIENCE-DEEPLINK-20261008`, `E-LIVE-PUBLIC-AUDIENCE-DEEPLINK-20261008`, `E-NAVI-STATE-AUDIENCE-DEEPLINK-20261008`.
+
 ## 추천 자료 한 번에 공유 공개 검증 — main 3ebb5c3f — 2026-10-08
 
 - AC-001/AC-003/AC-004/AC-005: `PASS`. 사업자·소비자·교육 대상별 추천 묶음에 직접 공유·추천 묶음 복사·전체 5개 복사·개별 문장 복사가 함께 동작하고, 390px 모바일 가로폭과 출처 연결이 유지된다. 로컬 계약·typecheck·127개 테스트·production build·성능 예산·PR 보호 검사·Pages 배포·라이브 smoke·release-status가 통과했다.

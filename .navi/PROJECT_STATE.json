@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-08T22:35:00+09:00",
+  "updated_at": "2026-10-08T23:00:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -6862,6 +6862,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-08T22:35:00+09:00"
+    },
+    {
+      "id": "H-393",
+      "event": "NAVI 자동 공개 배포 점검에서 대상별 공유 링크가 선택한 audience와 자료 모음 목적지를 잃어버리던 잔여 공유 맥락 리스크를 확인하고, 유효 대상 21·31·15를 URL에 보존하며 #final 공유 보드로 바로 진입하도록 보완했다. 동시에 공개 390px에서 전문가 영상이 연구 지도보다 앞선 실제 DOM 순서와 전문가 영상 다음 장 handoff를 재검증했다. 로컬 UI contract·typecheck·127개 테스트·research copy·production build·성능 예산을 통과했고 PR #691 required checks, main merge SHA 065a7d499accf5efafdb2d926b370df1f6bb37a1의 workflow 37788148936 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY로 skipped됐다. 공개 validator는 candidate SHA 065a7d499accf5efafdb2d926b370df1f6bb37a1·HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. Chrome CDP fallback 390px에서 소비자 딥링크 audience=21·추천 3개·카드 5개·#final·runtime errors 0, 전문가 영상→연구 지도 순서와 handoff 도착을 확인했다. 신규 CRITICAL/MAJOR 결함은 없으며 제품 독립 연구 카피·수치·출처 경계는 변경하지 않았다. Browser plugin 부재·실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-302와 관련 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-08T23:00:00+09:00"
     }
   ]
 }

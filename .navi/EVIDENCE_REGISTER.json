@@ -3352,6 +3352,21 @@
         "E-NAVI-STATE-RECOMMENDED-SHARE-20261008"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-302",
+      "statement": "대상별 GABA 공유 링크가 선택한 대상과 공유 보드 목적지를 보존하고, 전문가 영상이 연구 지도보다 앞선 공개 모바일 흐름과 함께 라이브 배포 검사를 통과했다.",
+      "evidence_refs": [
+        "E-USER-AUDIENCE-DEEPLINK-20261008",
+        "E-LOCAL-BUILD-AUDIENCE-DEEPLINK-20261008",
+        "E-UI-CONTRACT-AUDIENCE-DEEPLINK-20261008",
+        "E-CDP-AUDIENCE-DEEPLINK-20261008",
+        "E-PR-AUDIENCE-DEEPLINK-20261008",
+        "E-DEPLOY-AUDIENCE-DEEPLINK-20261008",
+        "E-LIVE-PUBLIC-AUDIENCE-DEEPLINK-20261008",
+        "E-NAVI-STATE-AUDIENCE-DEEPLINK-20261008"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -21637,6 +21652,93 @@
       "captured_at": "2026-10-08T22:35:00+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-RECOMMENDED-SHARE",
       "claim_refs": ["C-301"]
+    },
+    {
+      "id": "E-USER-AUDIENCE-DEEPLINK-20261008",
+      "kind": "DECISION",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "사용자는 전문가 영상과 연구 지도 흐름을 유지하면서 대상별 공유 자료가 받는 사람에게 같은 대상 맥락으로 바로 열리도록 공개 배포 고도화를 계속 진행하라고 요청했다.",
+      "locator": "현재 사용자 요청: 10 · 전문가 영상을 03 · 연구 지도 이전으로 배치하여 이해도를 높이고 싶은데 검토해줘; 활성 목표: 공개 배포 퍼블리싱 완성도 고도화",
+      "captured_at": "2026-10-08T22:59:47+09:00",
+      "reviewer_id": "현재 사용자",
+      "claim_refs": ["C-302"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-AUDIENCE-DEEPLINK-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "대상별 공유 딥링크 구현이 UI contract·typecheck·127개 테스트·research copy·production build를 통과하고, 유효 대상 21·31·15와 #final 목적지를 보존한다.",
+      "locator": "feature commit d4e172ca; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test 127 pass; pnpm run validate:research-copy PASS; pnpm run build PASS; getInitialMessageAudienceMask; getMessageKitShareUrl",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/d4e172ca0d30f866eb24b15164a2ac2f5a78703d",
+      "captured_at": "2026-10-08T13:45:00Z",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261008-AUDIENCE-DEEPLINK",
+      "claim_refs": ["C-302"]
+    },
+    {
+      "id": "E-UI-CONTRACT-AUDIENCE-DEEPLINK-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 대상별 공유 링크에서 audience 파라미터 복원·기본값 31·#final 목적지·개별 및 전체 공유 URL 보존을 확인했다.",
+      "locator": "scripts/validate-ui-contract.mjs; validMessageAudienceMasks; getInitialMessageAudienceMask; getMessageKitShareUrl; target-aware copyMessageKit and copyMessageKitLine; validate:ui-contract status=ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/blob/main/scripts/validate-ui-contract.mjs",
+      "captured_at": "2026-10-08T13:45:00Z",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261008-AUDIENCE-DEEPLINK",
+      "claim_refs": ["C-302"]
+    },
+    {
+      "id": "E-CDP-AUDIENCE-DEEPLINK-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px Chrome CDP fallback에서 전문가 영상이 연구 지도보다 앞에 렌더되고 다음 장 이동이 동작했으며, 소비자 딥링크는 audience=21·추천 3개·카드 5개·#final·runtime errors 0을 복원했다.",
+      "locator": "Chrome CDP fallback; https://kradavid.github.io/gaba_info/?view=guide#expert-videos; order expert-videos < academic; handoff academicTop=57; width=390; scrollWidth=390; errors=[]; https://kradavid.github.io/gaba_info/?view=guide&audience=21#final; initial audience=21 recommended=3 cards=5",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=21#final",
+      "captured_at": "2026-10-08T22:56:00+09:00",
+      "reviewer_id": "NAVI-CDP-QA-GABA-20261008-AUDIENCE-DEEPLINK",
+      "claim_refs": ["C-302"]
+    },
+    {
+      "id": "E-PR-AUDIENCE-DEEPLINK-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "대상별 공유 딥링크 변경 PR #691의 required release-verify·site-quality-verify 검사가 성공하고 main에 병합됐다.",
+      "locator": "PR #691 release-verify run 37787858999 pass; site-quality-verify run 37787858732 pass; merge SHA 065a7d499accf5efafdb2d926b370df1f6bb37a1",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/691",
+      "captured_at": "2026-10-08T13:54:19Z",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261008-AUDIENCE-DEEPLINK",
+      "claim_refs": ["C-302"]
+    },
+    {
+      "id": "E-DEPLOY-AUDIENCE-DEEPLINK-20261008",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main candidate의 Pages 배포·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37788148936; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass; final merge SHA 065a7d499accf5efafdb2d926b370df1f6bb37a1",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37788148936",
+      "captured_at": "2026-10-08T13:59:00Z",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261008-AUDIENCE-DEEPLINK",
+      "claim_refs": ["C-302"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-AUDIENCE-DEEPLINK-20261008",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·공개 데이터 경계를 유지했다.",
+      "locator": "pnpm run validate:live-public; base https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=065a7d499accf5efafdb2d926b370df1f6bb37a1; generatedAt=2026-10-08T13:56:05.654Z; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info",
+      "captured_at": "2026-10-08T13:59:00Z",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261008-AUDIENCE-DEEPLINK",
+      "claim_refs": ["C-302"]
+    },
+    {
+      "id": "E-NAVI-STATE-AUDIENCE-DEEPLINK-20261008",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 대상별 공유 딥링크·전문가 영상 선배치·PR·배포·라이브 모바일 검증을 연결하고 USER_DECISION/NOT_READY를 유지한다.",
+      "locator": "DEC-012; H-393; PR #691; merge SHA 065a7d499accf5efafdb2d926b370df1f6bb37a1; workflow 37788148936; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 기기·실제 사용자·독립 과학·규제 감수는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-08T23:00:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261008-AUDIENCE-DEEPLINK",
+      "claim_refs": ["C-302"]
     }
   ]
 }

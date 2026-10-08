@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-08 — 대상별 공유 링크 맥락 보존 및 공개 흐름 재검증
+
+- 대상별 추천 자료를 직접 공유하거나 복사할 때 `audience=21/31/15`와 `#final` 목적지를 유지하도록 보완했다. 수신자는 소비자·사업자·교육용 선택과 추천 자료 수를 잃지 않고 공유 자료 모음으로 바로 진입한다.
+- 공개 390px에서 `03 · 전문가 영상 → 04 · 연구 지도` 실제 DOM 순서, 전문가 영상의 다음 장 이동, 가로폭 390px·runtime errors 0을 재확인했다.
+- PR #691 보호 검사 `release-verify`·`site-quality-verify`가 성공했고 main merge SHA `065a7d499accf5efafdb2d926b370df1f6bb37a1`, workflow `37788148936`의 Pages 배포·라이브 smoke·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책으로 실행하지 않았다.
+- 최종 live validator는 HTTP 200·candidate SHA 일치·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-302`, `E-LOCAL-BUILD-AUDIENCE-DEEPLINK-20261008`, `E-UI-CONTRACT-AUDIENCE-DEEPLINK-20261008`, `E-CDP-AUDIENCE-DEEPLINK-20261008`, `E-PR-AUDIENCE-DEEPLINK-20261008`, `E-DEPLOY-AUDIENCE-DEEPLINK-20261008`, `E-LIVE-PUBLIC-AUDIENCE-DEEPLINK-20261008`, `E-NAVI-STATE-AUDIENCE-DEEPLINK-20261008`.
+
 ## 2026-10-08 — 추천 자료 한 번에 공유 및 fallback 안내 공개 배포
 
 - 사업자·소비자·교육 대상별 추천 자료 묶음에 `추천 공유` 액션을 추가해 지원 환경에서는 모바일 공유 창으로 제목·추천 자료·공개 안내서 URL을 한 번에 전달하도록 했다.

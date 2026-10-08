@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 대상별 공유 링크·전문가 영상 선배치 공격 재점검 — main 065a7d49 — 2026-10-08
+
+- 공격 초점은 공유 URL이 선택한 대상과 목적지를 잃지 않는지, 390px에서 전문가 영상이 연구 지도보다 먼저 보이는지, 다음 장 이동·가로폭·공개 정보 경계가 유지되는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 소비자 딥링크에서 `audience=21`, 추천 3개, 카드 5개, `#final` 목적지와 소비자용 공유 제목이 복원됐고, mock Web Share도 같은 URL을 전달했다.
+- 공개 순서는 `03 · 전문가 영상 → 04 · 연구 지도`로 측정됐으며 handoff 클릭 뒤 진행 레일이 `연구 지도`로 바뀌고 연구 지도 제목이 상단에 도착했다. 390px `scrollWidth=390`, runtime errors 0이었다.
+- 실제 모바일 공유 시트·Safari/iOS/Android·실사용자 독해성·독립 과학·규제 감수는 자동화 검증으로 대체하지 않는다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-302`, `E-UI-CONTRACT-AUDIENCE-DEEPLINK-20261008`, `E-CDP-AUDIENCE-DEEPLINK-20261008`, `E-PR-AUDIENCE-DEEPLINK-20261008`, `E-DEPLOY-AUDIENCE-DEEPLINK-20261008`, `E-LIVE-PUBLIC-AUDIENCE-DEEPLINK-20261008`, `E-NAVI-STATE-AUDIENCE-DEEPLINK-20261008`.
+
 ## 추천 자료 직접 공유 공격 재점검 — main 3ebb5c3f — 2026-10-08
 
 - 공격 초점은 `추천 공유`가 선택 대상의 자료만 전달하는지, Web Share 미지원·권한 실패 시 사용자에게 다음 행동을 안내하는지, 전체 5개·개별 복사·출처·제품 독립 경계가 유지되는지였다.
