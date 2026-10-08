@@ -22,7 +22,7 @@ const gabaStory = consumerSources['GabaStory.tsx'];
 const consumerUi = [Object.values(consumerSources).join('\n'), appSource, indexHtml, gameDomain].join('\n');
 const fail = message => { throw new Error(`Research consumer copy invalid: ${message}`); };
 if (!appSource.includes("requestedView === 'guide'") || !appSource.includes('<PublicGabaGuide/>') || !appSource.includes("currentPath === '/' && !requestedView && !sharedRhythmId")) fail('the public GABA guide must render at the root and preserve shared result routes');
-if (!publicGuide.includes('messageKit') || !publicGuide.includes('사업자용 GABA 공유 자료 · 바로 복사하기') || !publicGuide.includes('사람 연구 결과') || !publicGuide.includes("id: 'skin'") || !publicGuide.includes("id: 'immune'")) fail('the public GABA guide must expose the shareable business message kit and expanded GABA topics');
+if (!publicGuide.includes('messageKit') || !publicGuide.includes('activeMessageAudienceLabel') || !publicGuide.includes('사람 연구 결과') || !publicGuide.includes("id: 'skin'") || !publicGuide.includes("id: 'immune'")) fail('the public GABA guide must expose the shareable audience-aware message kit and expanded GABA topics');
 const guideSectionOrder = [...publicGuide.matchAll(/<section[^>]+id="([^"]+)"/g)].map(match => match[1]);
 if (guideSectionOrder.indexOf('expert-videos') < 0 || guideSectionOrder.indexOf('academic') < 0 || guideSectionOrder.indexOf('expert-videos') > guideSectionOrder.indexOf('academic')) fail('the public GABA guide must place expert videos before the research map');
 const research = ledger.claims.filter(claim => claim.status === 'approved' && claim.id.startsWith('research-'));
