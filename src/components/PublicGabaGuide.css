@@ -1440,7 +1440,7 @@
 
 /* v56 narrow-phone header clearance: reserve the full control rail beside the logo. */
 @media(min-width:381px) and (max-width:430px){
-  .guide-header .guide-logo{max-width:calc(100% - 184px)}
+  .guide-header .guide-logo{flex:0 1 auto;max-width:calc(100% - 184px)}
 }
 
 /* v49 mobile media focus: give the selected vertical expert video enough room to read without distorting its 9:16 frame. */
