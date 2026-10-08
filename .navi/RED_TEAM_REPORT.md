@@ -1,5 +1,14 @@
 # Red Team Report
 
+## 사업자 전달 대상 선택·추천 카드 공격 재점검 — main 417db68e — 2026-10-08
+
+- 공격 초점은 대상 선택이 일부 카드를 숨기거나, 추천 강조가 전체 자료 접근을 막거나, 390px에서 가로 넘침·접근성 이름·제품 CTA 유입을 만드는지였다.
+- 신규 CRITICAL/MAJOR 결함은 재현되지 않았다. 기본 소비자 대상에서 3개 카드, 사업자 대상으로 전환한 뒤 5개 카드가 강조되고도 5개 전체 카드와 복사 액션이 유지됐다. 선택 컨트롤은 `자료 대상` 접근성 이름을 가지며 모바일 `scrollWidth=390`으로 확인됐다.
+- PR #675 required checks와 heartbeat 갱신 PR #676 이후 main workflow `37749598234`의 Pages 배포·라이브 smoke·release-status가 성공했다. 라이브 candidate는 main `417db68e…`와 일치한다.
+- Chrome CDP fallback은 Browser plugin 부재를 보완했지만 Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수를 대신하지 않는다. `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-296`, `E-UI-CONTRACT-BUSINESS-AUDIENCE-20261008`, `E-CDP-BUSINESS-AUDIENCE-20261008`, `E-DEPLOY-PIPELINE-BUSINESS-AUDIENCE-20261008`, `E-LIVE-PUBLIC-BUSINESS-AUDIENCE-20261008`, `E-NAVI-STATE-BUSINESS-AUDIENCE-20261008`.
+
 ## 사업자용 공유 자료 보드 공격 재점검 — main 4804d623 — 2026-10-08
 
 - 공격 초점은 마지막 공유 보드가 숨겨져 있는지, 출처가 빠졌는지, 제품 CTA가 새로 유입됐는지, 복사 동작이 확인되는지, 정적 공개 번들과 라이브 candidate가 어긋나는지였다.

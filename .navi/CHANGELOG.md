@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-08 — 사업자 전달 대상 선택·추천 카드 고도화 및 공개 재검증
+
+- 공유 보드에 소비자·사업자·교육 대상 선택을 추가하고, 해당 대상에 적합한 카드만 시각적으로 강조했다. 5개 전체 자료와 개별·전체 복사는 그대로 유지했다.
+- PR #675 required checks가 통과했고, TF heartbeat가 489분으로 만료된 첫 main 실행은 배포하지 않고 중단했다. heartbeat 갱신 PR #676 병합 후 main merge SHA `417db68ed27c631f1fad3d7c36193b1f27574c52`의 workflow `37749598234`에서 Pages 배포·라이브 smoke·release-status가 성공했다.
+- 라이브 validator는 HTTP 200·candidate 일치·bundle hash 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. Chrome CDP 390px에서는 추천 카드 3개→5개, 카드 5개 유지, 가로폭 390/390을 확인했다.
+- NAVI는 실기기·고령 사용자 독해성·독립 과학·규제 감수 조건 때문에 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-296`, `E-LOCAL-BUILD-BUSINESS-AUDIENCE-20261008`, `E-UI-CONTRACT-BUSINESS-AUDIENCE-20261008`, `E-CDP-BUSINESS-AUDIENCE-20261008`, `E-PR-BUSINESS-AUDIENCE-20261008`, `E-TF-PULSE-BUSINESS-AUDIENCE-20261008`, `E-DEPLOY-PIPELINE-BUSINESS-AUDIENCE-20261008`, `E-LIVE-PUBLIC-BUSINESS-AUDIENCE-20261008`, `E-NAVI-STATE-BUSINESS-AUDIENCE-20261008`.
+
 ## 2026-10-08 — 사업자용 공유 자료 보드 고도화 및 공개 배포
 
 - 마지막 공유 장을 즉시 펼쳐지는 5개 카드 보드로 바꿔 기본 소개·신경계 역할·연구의 확장·사람 연구 결과·발효·안전 연구를 사업자가 선택해 전달할 수 있게 했다.
