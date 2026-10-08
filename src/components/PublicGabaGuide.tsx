@@ -678,10 +678,12 @@ const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
   'GABA는 신경세포의 활동 균형을 조절하는 핵심 신호입니다.',
-  'GABA는 수면·긴장·집중·감각·운동과 연결됩니다.',
-  'GABA 연구는 피부·인지·근육·성장·면역으로 확장되고 있습니다.',
-  '발효 GABA는 발효 원리와 품질 관리, 사람 대상 섭취 연구가 함께 쌓인 식품 연구 소재입니다.',
+  historyMilestones[2].body,
+  researchTopics[0].finding,
+  fermentedSafetySteps[2].body,
 ];
+const messageKitLabels = ['기본 소개', '신경계 역할', '연구의 확장', '사람 연구 결과', '발효·안전 연구'];
+const messageKitSources: (string | null)[] = [null, null, null, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
 
 const getGuideShareUrl = (hash = 'top') => {
   const url = new URL(window.location.href);
@@ -689,6 +691,8 @@ const getGuideShareUrl = (hash = 'top') => {
   url.hash = hash;
   return url.toString();
 };
+
+const formatMessageKitText = (message: string, index: number, withGuide = false) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}` : ''}${withGuide ? `\n\n공개 안내서: ${getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
 
 const replaceGuideHistory = (hash: string, videoId?: string) => {
   const url = new URL(window.location.href);
@@ -1729,7 +1733,7 @@ export default function PublicGabaGuide() {
   };
 
   const copyMessageKit = async () => {
-    const text = `${messageKit.map((message, index) => `${String(index + 1).padStart(2, '0')}. ${message}`).join('\n\n')}\n\n공개 안내서: ${getGuideShareUrl('top')}`;
+    const text = `${messageKit.map((message, index) => `${String(index + 1).padStart(2, '0')}. ${formatMessageKitText(message, index)}`).join('\n\n')}\n\n공개 안내서: ${getGuideShareUrl('top')}`;
     const copied = await writeClipboardText(text);
     if (copied) {
       setMessageKitCopied(true);
@@ -1739,11 +1743,12 @@ export default function PublicGabaGuide() {
         messageKitCopiedTimer.current = null;
       }, 2400);
     }
-    announceShareStatus(copied ? '5문장을 한 번에 복사했어요. 자유롭게 활용해 보세요.' : '문장을 선택해 활용해 보세요.');
+    announceShareStatus(copied ? '5개 자료를 복사했어요.' : '자료를 선택해 활용해 보세요.');
   };
 
   const copyMessageKitLine = async (message: string, index: number) => {
-    const copied = await writeClipboardText(message);
+    const text = formatMessageKitText(message, index, true);
+    const copied = await writeClipboardText(text);
     if (copied) {
       setCopiedMessageIndex(index);
       if (copiedMessageTimer.current !== null) window.clearTimeout(copiedMessageTimer.current);
@@ -1752,7 +1757,7 @@ export default function PublicGabaGuide() {
         copiedMessageTimer.current = null;
       }, 2400);
     }
-    announceShareStatus(copied ? `${String(index + 1).padStart(2, '0')}번 문장을 복사했어요.` : '문장을 선택해 활용해 보세요.');
+    announceShareStatus(copied ? `${messageKitLabels[index]} 자료를 복사했어요.` : '자료를 선택해 활용해 보세요.');
   };
 
   const toggleReadingSize = () => {
@@ -2161,7 +2166,7 @@ export default function PublicGabaGuide() {
           </div>
         </section>
 
-        <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading" tabIndex={-1}>1950년의 작은 발견은<br />{' '}오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button><button type="button" className="guide-quiet-button" onClick={() => window.print()}>인쇄 · PDF 저장 <ArrowRight size={17} aria-hidden="true" /></button></div><div className="guide-share-intro" aria-label="사업자용 GABA 공유 문장 안내"><div><span>사업자용 활용 자료</span><strong>핵심 문장을 고르고, 그대로 공유하세요</strong><p>GABA의 기본 역할과 연구 흐름을 짧게 정리한 5문장입니다. 전체 복사에는 공개 안내서 링크도 함께 붙습니다.</p></div><div className="guide-share-intro-actions"><b>5문장</b><button type="button" className={`guide-share-copy-all${messageKitCopied ? ' is-copied' : ''}`} aria-label={messageKitCopied ? '5문장 전체 복사 완료' : '5문장 전체 복사'} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied ? '복사 완료' : '전체 복사'}</button></div></div><details className="guide-share-lines"><summary><span>사업자용 GABA 핵심 5문장 · 바로 복사하기</span><b>5개</b></summary><div>{messageKit.map((message, index) => { const isMessageCopied = copiedMessageIndex === index; return <article key={message}><span>0{index + 1}</span><p>{message}</p><button type="button" className={`guide-share-line-copy${isMessageCopied ? ' is-copied' : ''}`} aria-label={`${String(index + 1).padStart(2, '0')}번 문장 ${isMessageCopied ? '복사 완료' : '복사'}`} onClick={() => void copyMessageKitLine(message, index)}><span className="guide-share-line-copy-icon" aria-hidden="true">{isMessageCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isMessageCopied ? '복사 완료' : '문장 복사'}</button></article>; })}</div></details></div></section>
+        <section className="guide-final" id="final" aria-labelledby="final-heading"><div className="guide-container"><p className="guide-section-number">12 · 이야기 공유</p><h2 id="final-heading" tabIndex={-1}>1950년의 작은 발견은<br />{' '}오늘의 연구 지도가 되었습니다</h2><p className="guide-final-copy">GABA는 뇌 속에서 시작해 수면, 집중, 감각, 움직임, 피부, 근육, 성장호르몬과 면역을 거쳐 발효 식품과 안전성 연구로 이어졌습니다. 필요한 주제를 골라 읽고 자유롭게 공유해 보세요.</p><p className="guide-editorial-note">{editorialNotice}</p><div className="guide-final-actions"><button type="button" className="guide-primary-button" onClick={sharePage}><Share2 size={17} aria-hidden="true" /> GABA 이야기 공유하기 <ArrowRight size={17} aria-hidden="true" /></button><button type="button" className="guide-quiet-button" onClick={() => window.print()}>인쇄 · PDF 저장 <ArrowRight size={17} aria-hidden="true" /></button></div><div className="guide-share-intro" aria-label="사업자용 GABA 공유 자료 안내"><div><span>사업자용 자료</span><strong>필요한 자료를 골라 전달하세요</strong><p>소개·사람 연구·발효 연구를 한 화면에서 확인하고 문장별로 복사하세요.</p></div><div className="guide-share-intro-actions"><b>5개 자료</b><button type="button" className={`guide-share-copy-all${messageKitCopied ? ' is-copied' : ''}`} aria-label={messageKitCopied ? '전체 복사 완료' : '전체 복사'} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied ? '복사 완료' : '전체 복사'}</button></div></div><details open className="guide-share-lines"><summary><span>사업자용 GABA 공유 자료 · 바로 복사하기</span><b>5개</b></summary><div>{messageKit.map((message, index) => { const isMessageCopied = copiedMessageIndex === index; return <article key={message}><span>{messageKitLabels[index]}</span><p>{message}{messageKitSources[index] ? <><br /><small>출처 · {messageKitSources[index]}</small></> : null}</p><button type="button" className={`guide-share-line-copy${isMessageCopied ? ' is-copied' : ''}`} aria-label={`${messageKitLabels[index]} ${isMessageCopied ? '복사 완료' : '복사'}`} onClick={() => void copyMessageKitLine(message, index)}><span className="guide-share-line-copy-icon" aria-hidden="true">{isMessageCopied ? <Check size={13} /> : <Clipboard size={13} />}</span>{isMessageCopied ? '복사 완료' : '문장 복사'}</button></article>; })}</div></details></div></section>
       </main>
 
       <footer className="guide-footer"><div className="guide-container guide-footer-grid"><a className="guide-logo" href="#top" onClick={() => scrollTo('top')}><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a><p>GABA를 쉽게 이해하고<br />자유롭게 공유하는 공개 안내서입니다.</p><div><a href="#history" onClick={(event) => { event.preventDefault(); scrollTo('history'); }}>발견의 역사</a><a href="#applications" onClick={(event) => { event.preventDefault(); scrollTo('applications'); }}>활용 사례</a><a href="#top" onClick={(event) => { event.preventDefault(); scrollTo('top'); }}>맨 위로 <ArrowDown className="guide-footer-back-icon" size={13} strokeWidth={2.2} aria-hidden="true" /></a></div></div><div className="guide-container guide-footer-bottom"><span>© 2026 GABA Guide</span><span>1950년, 뇌 속에서 발견된 신호</span></div></footer>
