@@ -778,6 +778,7 @@
 .guide-share-copy-actions{display:flex;align-items:center;gap:7px}
 .guide-share-copy-actions .guide-share-copy-all{min-height:44px}
 .guide-share-copy-all-secondary{border-color:rgba(206,229,237,.28);background:transparent;color:#c4d9e2}
+.guide-share-full-copy-label-compact{display:none}
 .guide-share-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:19px}
 .guide-share-card-head>span{color:#90d6d6;font-size:11px;font-weight:850;line-height:1.35}
 .guide-share-card-head>b{padding:4px 7px;border:1px solid rgba(145,219,217,.42);border-radius:999px;color:#b9f0ec;font-size:10px;font-weight:900;line-height:1;white-space:nowrap}
@@ -790,6 +791,8 @@
   .guide-share-audience select{min-width:0}
   .guide-share-copy-actions{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:7px}
   .guide-share-copy-actions .guide-share-copy-all{padding-inline:11px}
+  .guide-share-full-copy-label{display:none}
+  .guide-share-full-copy-label-compact{display:inline}
 }
 @media(max-width:350px){
   .guide-share-copy-actions{grid-template-columns:minmax(0,1fr) auto}
