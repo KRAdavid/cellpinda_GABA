@@ -3231,3 +3231,14 @@ Final Status: `NOT_READY`; 사용자 승인 전 자동 완료 처리하지 않�
 - 자동화·대표 Chrome 검증 기준은 통과했지만 완료 게이트는 `NOT_READY`를 유지한다. Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 외부 검증 조건이다.
 
 증적: `C-268`, `E-LIVE-PUBLIC-ARIA-FINAL-20261008`, `E-DEPLOY-PIPELINE-ARIA-FINAL-20261008`, `E-NAVI-STATE-ARIA-FINAL-20261008`.
+
+## Completion gate recheck — 사업자 공유 내용 미리보기 — 2026-10-09
+
+- AC-001 공개 배포: PASS. PR #724 병합 후 main merge SHA `c4671fde2dde17ce0d0f6defa263965a977e95f5`의 workflow `37844326162`에서 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 `STATIC_ONLY`로 skipped됐다. 공개 validator는 HTTP 200·STATIC·최신 candidate 일치를 확인했다.
+- AC-004/AC-005 모바일·자동 게이트: PASS. `공유 내용 미리보기`는 기본 접힘으로 시작하고 선택된 실제 문장·출처명을 표시하며 빠른 선택 변경에 따라 갱신된다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 빌드·성능 예산과 공개 390px CDP fallback의 `scrollWidth=390`을 확인했다.
+- AC-006 제품 독립 경계: PASS. 공유 payload·기존 출처 링크·제품 독립 과학 안내 흐름은 유지되며 공개 validator의 `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 유지했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 없다. Chrome fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 조건과 `USER_DECISION / NOT_READY`를 유지한다.
+
+Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-318`, `E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009`, `E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009`, `E-PR-SHARE-CONTENT-PREVIEW-20261009`, `E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009`, `E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009`, `E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009`, `E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009`.

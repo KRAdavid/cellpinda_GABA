@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-09T05:44:05+09:00",
+  "updated_at": "2026-10-09T06:10:00+09:00",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2439,6 +2439,23 @@
       "impact": "방문자가 GABA 기본 개념 다음 전문가 설명을 거쳐 연구 지도로 확장하고, 사업자는 전달 전 자료 범위를 확인할 수 있다.",
       "required_action": "다음 메뉴·읽기 순서·공유 보드 정보 우선순위 변경 시 390px 메뉴 이동·선택 해제·live validator를 함께 재검증",
       "owner": "QA"
+    },
+    {
+      "id": "AUD-024",
+      "severity": "OBSERVATION",
+      "status": "CLOSED",
+      "statement": "사업자가 공유 버튼을 누르기 전에 선택된 실제 전달 문장과 출처명을 접이식 미리보기로 확인할 수 있는지, 기본 접힘·빠른 선택 변경·390px 가로폭을 재현했다. 기존 전체 자료·개별 복사·출처 링크·제품 독립 경계는 유지되며 신규 CRITICAL/MAJOR 결함은 없다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009",
+        "E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009",
+        "E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009",
+        "E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009",
+        "E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009",
+        "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009"
+      ],
+      "impact": "사업자가 다른 사업자·소비자에게 전달할 문장과 근거 범위를 보내기 전에 확인할 수 있어 공유 오류와 해석 마찰을 줄인다.",
+      "required_action": "다음 공유 카드·문장·출처·자료 선택 구조 변경 시 390px 미리보기 열기·선택 변경·live validator·성능 예산을 함께 재검증",
+      "owner": "QA"
     }
     ],
     "independent_from_execution": true,
@@ -2922,6 +2939,22 @@
       ],
       "impact": "모바일 메뉴 탐색과 사업자 전달 범위 확인이 서로 다른 순서나 상태를 보여주는 회귀를 조기에 차단한다.",
       "required_action": "Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증을 대신하지 않으므로 해당 조건은 계속 OPEN",
+      "owner": "Red Team"
+    },
+    {
+      "id": "RT-024",
+      "severity": "OBSERVATION",
+      "status": "CLOSED",
+      "statement": "공격 관점에서 공유 전에 실제 선택 문장·출처가 누락되거나 선택 묶음 변경 뒤 낡은 내용이 남는지, 미리보기가 기본 접힘·390px 가로폭을 유지하는지 확인했다. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.",
+      "evidence_refs": [
+        "E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009",
+        "E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009",
+        "E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009",
+        "E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009",
+        "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009"
+      ],
+      "impact": "공유 전에 선택 범위와 실제 전달 payload가 어긋나거나 오래된 선택 내용이 남는 회귀를 점검한다.",
+      "required_action": "Chrome CDP fallback은 Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 해당 외부 조건은 계속 OPEN",
       "owner": "Red Team"
     }
     ],
@@ -7007,6 +7040,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-09T05:44:05+09:00"
+    },
+    {
+      "id": "H-409",
+      "event": "NAVI 자동 공개 배포 점검에서 사업자가 공유 버튼을 누르기 전에 실제로 전달될 문장과 출처를 다시 확인해야 하던 잔여 공유 마찰을 확인하고, 공유 보드에 접이식 `공유 내용 미리보기`를 추가했다. 기본 상태는 접힘으로 유지해 본문 흐름을 방해하지 않으며, 선택된 자료의 실제 문장·출처명이 표시되고 목적별 빠른 선택을 바꾸면 미리보기 내용도 함께 갱신된다. 기존 전체 자료·개별 복사·출처 링크·제품 독립 경계는 유지했다. 로컬 UI contract·typecheck·pnpm test 127 pass·GitHub Pages base-path 정적 번들·성능 예산을 통과했고 PR #724 required checks와 main merge SHA c4671fde2dde17ce0d0f6defa263965a977e95f5의 workflow 37844326162 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY로 skipped됐다. 공개 validator는 HTTP 200·STATIC·candidate SHA c4671fde2dde17ce0d0f6defa263965a977e95f5·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome CDP fallback 390px에서 미리보기 기본 접힘·선택 문장과 `Yoto et al. 2012 · PMID 22203366`, `Byun et al. 2018 · PMID 29856155` 출처명 표시·빠른 선택 변경·scrollWidth 390을 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-318과 관련 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-09T06:10:00+09:00"
     }
   ]
 }

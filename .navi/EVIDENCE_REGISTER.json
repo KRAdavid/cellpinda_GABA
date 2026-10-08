@@ -3581,6 +3581,20 @@
         "E-NAVI-STATE-NAV-EXPERT-20261009"
       ],
       "status": "SUPPORTED"
+    },
+    {
+      "id": "C-318",
+      "statement": "사업자 공유 보드는 공유·복사 전에 선택된 실제 전달 문장과 관련 출처명을 접이식 미리보기로 보여주며, 기본 상태는 접힘이고 목적별 빠른 선택 변경에 따라 현재 선택 자료로 갱신된다. 기존 출처 링크·공유 payload·제품 독립 경계는 유지된다.",
+      "evidence_refs": [
+        "E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009",
+        "E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009",
+        "E-PR-SHARE-CONTENT-PREVIEW-20261009",
+        "E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009",
+        "E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009",
+        "E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009",
+        "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009"
+      ],
+      "status": "SUPPORTED"
     }
   ],
   "evidence": [
@@ -23125,6 +23139,81 @@
       "captured_at": "2026-10-09T05:44:05+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-NAV-EXPERT",
       "claim_refs": ["C-317"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "선택 자료의 실제 문장·출처명 미리보기가 UI contract·typecheck·127개 테스트·GitHub Pages base-path 정적 빌드·성능 예산을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test (127 pass, 0 fail); Vite build --base /gaba_info/; validate-performance total assets 1649634, status ok; git diff --check",
+      "captured_at": "2026-10-09T06:10:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-SHARE-CONTENT-PREVIEW",
+      "claim_refs": ["C-318"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 공유 내용 미리보기에서 선택된 실제 문장과 출처명을 선택 상태와 함께 렌더링하도록 고정한다.",
+      "locator": "scripts/validate-ui-contract.mjs; details.guide-share-lines; 공유 내용 미리보기; selectedMessageIndices.map; messageKit[index]; messageKitSources[index]; status ok",
+      "captured_at": "2026-10-09T06:10:00+09:00",
+      "reviewer_id": "NAVI-CONTRACT-QA-GABA-20261009-SHARE-CONTENT-PREVIEW",
+      "claim_refs": ["C-318"]
+    },
+    {
+      "id": "E-PR-SHARE-CONTENT-PREVIEW-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "선택 자료 미리보기 PR #724의 required checks가 성공하고 main에 병합됐다.",
+      "locator": "PR #724; release-verify 37844069927 pass; site-quality-verify 37844069941 pass; squash merge SHA c4671fde2dde17ce0d0f6defa263965a977e95f5",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/724",
+      "captured_at": "2026-10-09T06:10:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-SHARE-CONTENT-PREVIEW",
+      "claim_refs": ["C-318"]
+    },
+    {
+      "id": "E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009",
+      "kind": "DEPLOYMENT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 main candidate가 GitHub Pages로 공개 배포되고 필요한 release·Pages·smoke·status 검사가 성공했으며 Worker는 STATIC_ONLY 정책으로 실행하지 않았다.",
+      "locator": "main workflow 37844326162; head SHA c4671fde2dde17ce0d0f6defa263965a977e95f5; release-verify pass; worker-readiness pass; deploy-pages pass; deploy-worker skipped STATIC_ONLY; smoke-live pass; release-status pass",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37844326162",
+      "captured_at": "2026-10-09T06:10:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-SHARE-CONTENT-PREVIEW",
+      "claim_refs": ["C-318"]
+    },
+    {
+      "id": "E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 Pages URL의 Chrome CDP fallback 390px에서 공유 내용 미리보기의 기본 접힘·실제 선택 문장·출처명 표시·빠른 선택 갱신과 가로폭 일치를 재현했다.",
+      "locator": "Chrome CDP 9223; public URL https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24#final; emulation 390x844; details count=2; preview default closed after reload; preview open showed selected result and source names Yoto et al. 2012 · PMID 22203366 / Byun et al. 2018 · PMID 29856155; quick selection mask 12 updated preview; clientWidth=390; scrollWidth=390; runtime errors=[]",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=24#final",
+      "captured_at": "2026-10-09T06:10:00+09:00",
+      "reviewer_id": "NAVI-CDP-LIVE-QA-GABA-20261009-SHARE-CONTENT-PREVIEW",
+      "claim_refs": ["C-318"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최종 공개 URL이 최신 main candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·claims 12개·master records 6개·share pages 6개·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; base=https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=c4671fde2dde17ce0d0f6defa263965a977e95f5; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-09T06:10:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-SHARE-CONTENT-PREVIEW",
+      "claim_refs": ["C-318"]
+    },
+    {
+      "id": "E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 선택 자료 미리보기의 결정·로컬 QA·UI contract·PR·배포·라이브 Chrome CDP·validator 결과를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "DEC-028; H-409; PR #724 merge SHA c4671fde2dde17ce0d0f6defa263965a977e95f5; workflow 37844326162; live candidate matched; status USER_DECISION; completion gate NOT_READY; Browser plugin/Playwright 부재에 따른 Chrome CDP fallback; 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T06:10:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-CONTENT-PREVIEW",
+      "claim_refs": ["C-318"]
     }
   ]
 }

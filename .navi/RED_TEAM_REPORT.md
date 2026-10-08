@@ -2956,6 +2956,14 @@
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
 
+## Red-team recheck — 공유 내용 미리보기 — c4671fde — 2026-10-09
+
+- 공유 전에 실제 선택 문장·출처가 표시되는지, 기본 접힘 상태가 본문 흐름을 방해하지 않는지, 빠른 선택 변경 뒤 낡은 내용이 남지 않는지 확인했다.
+- 공개 390px CDP fallback에서 선택 2개 미리보기의 실제 연구 결과 문장과 두 출처명이 노출되고, 선택 묶음 변경 뒤 내용이 갱신되며 `scrollWidth=390`을 유지했다. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다.
+- 이번 검증은 Chrome CDP fallback 범위다. 실제 모바일 공유 시트, Safari/iOS/Android 실기기, 실제 고령 사용자 독해성, 독립 과학·규제 감수는 대체하지 않으므로 외부 조건으로 계속 OPEN한다.
+
+증적: `C-318`, `E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009`, `E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009`, `E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009`, `E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009`, `E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009`.
+
 ## Red-team recheck — 수면과 회복 단계 ARIA 순번 — ec7cb47f — 2026-10-08
 
 - 공격 관점에서 14개 회복 단계 버튼의 `aria-setsize`가 모두 14이고 `aria-posinset`가 1부터 14까지 연속인지 확인했다. 390px에서 active step의 `aria-current=step`, 가로폭 일치, runtime error 0을 재현했으며 신규 CRITICAL/MAJOR 결함은 없다.

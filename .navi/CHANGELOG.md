@@ -2672,6 +2672,15 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재에 따른 Playwright fallback, Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검증은 외부 조건으로 남긴다.
 
 증적: `C-294`, `E-LOCAL-BUILD-LARGE-TEXT-EVIDENCE-20261008`, `E-UI-CONTRACT-LARGE-TEXT-EVIDENCE-20261008`, `E-PR-LARGE-TEXT-EVIDENCE-20261008`, `E-DEPLOY-PIPELINE-LARGE-TEXT-EVIDENCE-20261008`, `E-LIVE-PUBLIC-LARGE-TEXT-EVIDENCE-20261008`, `E-NAVI-STATE-LARGE-TEXT-EVIDENCE-20261008`.
+
+# 2026-10-09 — 공유 내용 미리보기 추가 및 공개 재검증
+
+- 사업자가 공유 버튼을 누르기 전에 선택된 실제 전달 문장과 출처명을 확인할 수 있도록 접이식 `공유 내용 미리보기`를 추가했다. 기본 접힘, 목적별 빠른 선택 갱신, 기존 출처 링크·개별 복사·제품 독립 경계를 유지했다.
+- PR #724가 병합됐고 main workflow `37844326162`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. Worker는 `STATIC_ONLY` 정책으로 skipped됐다.
+- 공개 validator는 candidate SHA `c4671fde2dde17ce0d0f6defa263965a977e95f5`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, teaser `HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 공개 Chrome CDP fallback 390px에서 미리보기 기본 접힘·실제 문장·출처명·선택 변경·가로폭 일치를 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-318`, `E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009`, `E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009`, `E-PR-SHARE-CONTENT-PREVIEW-20261009`, `E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009`, `E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009`, `E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009`, `E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009`.
 # 2026-10-09 — 사업자 공유 카드 출처 링크 대비 보정 및 공개 배포
 
 - 모바일 공유 카드의 `출처 · 논문명` 링크 대비를 높여 연구 결과와 원문 출처를 빠르게 구분할 수 있도록 했다. 카드 구조·공유 payload·전문가 영상 `03` → 연구 지도 `04` 흐름·제품 독립 경계는 변경하지 않았다.

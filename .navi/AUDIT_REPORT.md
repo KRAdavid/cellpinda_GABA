@@ -3792,6 +3792,15 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-292`, `E-LOCAL-BUILD-NARROW-HEADER-FLEX-20261008`, `E-UI-CONTRACT-NARROW-HEADER-FLEX-20261008`, `E-PR-NARROW-HEADER-FLEX-20261008`, `E-DEPLOY-PIPELINE-NARROW-HEADER-FLEX-20261008`, `E-LIVE-PUBLIC-NARROW-HEADER-FLEX-20261008`, `E-NAVI-STATE-NARROW-HEADER-FLEX-20261008`.
 
+## Audit recheck — 공유 내용 미리보기 — c4671fde — 2026-10-09
+
+- 사업자가 공유 전에 실제 선택 문장과 출처명을 확인할 수 있도록 `공유 내용 미리보기`를 접이식 블록으로 추가했다. 기본 상태는 접힘이며 목적별 빠른 선택 변경 시 현재 선택 자료로 갱신된다.
+- 로컬 UI contract·typecheck·127개 테스트·GitHub Pages base-path 정적 빌드·성능 예산이 통과했다. PR #724와 main workflow `37844326162`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 Worker는 `STATIC_ONLY`로 skipped됐다.
+- 공개 Chrome CDP fallback 390px에서 미리보기 기본 접힘·실제 문장·`Yoto et al. 2012 · PMID 22203366`, `Byun et al. 2018 · PMID 29856155` 출처명·선택 변경·가로폭 390을 확인했다. 공개 validator도 최신 candidate와 정합성을 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 기존 전체 자료·개별 복사·출처 링크·제품 독립 경계는 유지한다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 남기며 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-318`, `E-LOCAL-BUILD-SHARE-CONTENT-PREVIEW-20261009`, `E-UI-CONTRACT-SHARE-CONTENT-PREVIEW-20261009`, `E-PR-SHARE-CONTENT-PREVIEW-20261009`, `E-DEPLOY-SHARE-CONTENT-PREVIEW-20261009`, `E-CDP-LIVE-SHARE-CONTENT-PREVIEW-20261009`, `E-LIVE-PUBLIC-SHARE-CONTENT-PREVIEW-20261009`, `E-NAVI-STATE-SHARE-CONTENT-PREVIEW-20261009`.
+
 ## 모바일 연구 지도 범위 라벨 보정 — 77d14844 — 2026-10-08
 
 - AC-003/AC-004 모바일 가독성: PASS. 390px에서 연구 지도 범위 라벨이 어절 단위로 끊겨 보이던 리스크를 확인하고 표시 라벨을 한 줄의 `사람 연구`·`동물·세포`로 정리했다. 상세 연구 범위는 버튼 `aria-label`에 그대로 보존했다.
