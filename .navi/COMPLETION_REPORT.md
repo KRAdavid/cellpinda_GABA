@@ -1,5 +1,13 @@
 # Completion Report
 
+## 사업자 공유 자료 선택 범위 표기 명확화 및 공개 배포 — 2026-10-09
+
+- 구현·검토: 공유 자료 카드 목록 상단을 `선택 2개 · 전체 5개`로 명확화해 사업자가 현재 전달 범위와 전체 자료 수를 즉시 구분하도록 했다. 전문가 영상 `03` → 연구 지도 `04` 흐름과 제품 독립 경계는 유지했다.
+- 검증: PR #718 merge SHA `65b4820fa7fda2020880b581409e7037568c4c5f`, main workflow `37833774516`, 공개 URL `https://kradavid.github.io/gaba_info/`의 live validator와 Chrome CDP fallback을 확인했다. 로컬 UI contract·typecheck·127개 테스트·Pages 정적 build·성능 예산·라이브 smoke가 통과했다.
+- 게이트: 자동 검증과 공개 배포는 통과했지만 실제 모바일 공유 시트·실기기·실제 사용자·독립 과학·규제 감수는 외부 확인이 필요하므로 `Final Status: NOT_READY`, NAVI `USER_DECISION`을 유지한다.
+
+증적: `C-315`, `E-LOCAL-BUILD-SHARE-SUMMARY-CLARITY-20261009`, `E-UI-CONTRACT-SHARE-SUMMARY-CLARITY-20261009`, `E-CDP-SHARE-SUMMARY-CLARITY-20261009`, `E-PR-SHARE-SUMMARY-CLARITY-20261009`, `E-DEPLOY-SHARE-SUMMARY-CLARITY-20261009`, `E-CDP-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009`, `E-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009`, `E-NAVI-STATE-SHARE-SUMMARY-CLARITY-20261009`.
+
 ## 선택 자료 범위 공유 링크 보존 및 공개 배포 — 2026-10-09
 
 - 구현·검토: 사업자가 선택한 자료 묶음을 `materials` 쿼리로 공유 링크에 보존했다. `출처까지`·2개 선택·`#final` 진입을 복원하고, 잘못된 범위는 대상별 추천 자료로 fallback하며 전체 복사는 5개 전체 범위를 사용한다.

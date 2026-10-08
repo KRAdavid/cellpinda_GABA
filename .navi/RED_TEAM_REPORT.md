@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 사업자 공유 자료 선택 범위 표기 및 배포 — 65b4820f — 2026-10-09
+
+- 공격 초점은 `5개 전체`라는 고정 문구가 현재 공유되는 선택 범위를 가려, 사업자가 실제 전달 자료 수를 잘못 이해하는지였다.
+- 공개 390px에서 `선택 2개 · 전체 5개`와 동일한 접근성 이름이 표시되고, `출처까지` 빠른 선택·2개 선택·3단계 전달 흐름·전문가 영상 `03` → 연구 지도 `04` 순서·가로폭 일치·runtime errors 0을 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 검토는 자동 QA로 대체하지 않으므로 `teaser HOLD`와 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-315`, `E-CDP-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009`, `E-LIVE-PUBLIC-SHARE-SUMMARY-CLARITY-20261009`, `E-NAVI-STATE-SHARE-SUMMARY-CLARITY-20261009`.
+
 ## Red-team recheck — 선택 자료 범위 공유 링크 보존 및 배포 — 369dcafa — 2026-10-09
 
 - 공격 초점은 공유 URL이 선택 자료 범위를 잃고 전체 자료나 대상별 추천으로 되돌아가는지, 잘못된 범위가 빈 보드를 만들거나 390px에서 공유 보드를 넘치게 하는지였다.
