@@ -693,6 +693,9 @@
 .guide-share-lines summary:after{content:'+';color:#9edcdb;font-size:20px;font-weight:400;line-height:1}
 .guide-share-lines[open] summary:after{content:'−'}
 .guide-share-lines summary>b{margin-left:auto;color:#c2e6e5;font-size:12px;font-weight:800}
+.guide-share-context-links{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:12px 0 2px;padding:9px 10px;border:1px solid rgba(145,219,217,.2);border-radius:11px;background:rgba(255,255,255,.035)}
+.guide-share-context-links>span{color:#8ed9d7;font-size:11px;font-weight:900;letter-spacing:.08em}
+.guide-share-context-links a{display:inline-flex;align-items:center;gap:3px;color:#d7f5f2;font-size:11px;font-weight:800}
 /* v176 audience-first share board: recommended cards lead visually while the five-card set stays available. */
 .guide-share-lines article.is-rec{order:-1;border-color:#91dbd9}
 @media(max-width:700px){
@@ -703,6 +706,7 @@
   .guide-share-intro-actions{width:100%;align-items:center;justify-content:space-between;flex-direction:row;gap:9px;padding-top:12px;border-top:1px solid rgba(145,219,217,.2)}
   .guide-share-copy-all{min-height:36px;padding-inline:10px}
   .guide-share-lines{margin-top:14px}
+  .guide-share-context-links a{font-size:10px}
 }
 /* v11 research scale: make the discovery line land with visible academic weight. */
 .guide-research-scale{position:relative;margin-top:48px;padding:35px 38px 31px;border-radius:25px;background:linear-gradient(135deg,#132f56 0%,#173f60 57%,#0b777d 100%);color:#fff;overflow:hidden;isolation:isolate;box-shadow:0 22px 42px rgba(19,47,86,.16)}
