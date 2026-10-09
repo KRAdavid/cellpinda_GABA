@@ -3652,9 +3652,16 @@
         "E-UI-CONTRACT-SHARE-LINK-HANDOFF-20261009",
         "E-PR-SHARE-LINK-HANDOFF-20261009",
         "E-DEPLOY-SHARE-LINK-HANDOFF-20261009",
-        "E-CDP-LIVE-SHARE-LINK-HANDOFF-20261009",
-        "E-LIVE-PUBLIC-SHARE-LINK-HANDOFF-20261009",
-        "E-NAVI-STATE-SHARE-LINK-HANDOFF-20261009"
+    "E-CDP-LIVE-SHARE-LINK-HANDOFF-20261009",
+    "E-LIVE-PUBLIC-SHARE-LINK-HANDOFF-20261009",
+    "E-NAVI-STATE-SHARE-LINK-HANDOFF-20261009",
+    "E-LOCAL-BUILD-SHARE-READ-ORDER-20261009",
+    "E-UI-CONTRACT-SHARE-READ-ORDER-20261009",
+    "E-PR-SHARE-READ-ORDER-20261009",
+    "E-DEPLOY-SHARE-READ-ORDER-20261009",
+    "E-CDP-LIVE-SHARE-READ-ORDER-20261009",
+    "E-LIVE-PUBLIC-SHARE-READ-ORDER-20261009",
+    "E-NAVI-STATE-SHARE-READ-ORDER-20261009"
       ],
       "status": "SUPPORTED"
     }
@@ -23724,6 +23731,83 @@
       "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
       "captured_at": "2026-10-09T08:47:00+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-LINK-HANDOFF",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-READ-ORDER-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "선택 자료 칩에 선택 순서 번호를 표시하고 상태 제목을 `전달할 내용 · n개 · 읽는 순서`로 보강한 공개 안내서가 기존 선택·공유 범위를 유지하면서 로컬 품질 게이트를 통과했다.",
+      "locator": "commit a973baed83834acb6611d13cb02ee7aebf7ca6dd; pnpm run validate:ui-contract PASS; pnpm run typecheck PASS; pnpm test PASS (127/127); pnpm run validate:research-copy PASS; pnpm run sync:data; pnpm run validate:public PASS (claims=12, masterRecords=6, products=1, reviews=1, teaser=HOLD, smartStoreOnly=true, removed750=true, provenance=matched); production Pages build total assets=1650667 <= 1651000 budget",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commit/a973baed83834acb6611d13cb02ee7aebf7ca6dd",
+      "captured_at": "2026-10-09T09:18:05+09:00",
+      "reviewer_id": "NAVI-LOCAL-QA-GABA-20261009-SHARE-READ-ORDER",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-READ-ORDER-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract와 TypeScript·연구 카피 검증이 전문가 영상 다음 연구 지도 순서, 선택 자료 읽는 순서 표기, 기존 자료 선택·공유 접근성 계약을 통과시켰다.",
+      "locator": "scripts/validate-ui-contract.mjs; scripts/validate-research-copy.mjs; pnpm run validate:ui-contract -> status ok; pnpm run validate:research-copy -> status ok; pnpm run typecheck -> exit 0; pnpm test -> tests 127, pass 127, fail 0",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/tree/main/scripts",
+      "captured_at": "2026-10-09T09:18:05+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261009-SHARE-READ-ORDER",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-PR-SHARE-READ-ORDER-20261009",
+      "kind": "DELIVERY",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "선택 자료 읽는 순서 표기 변경 PR이 보호 검사를 통과하고 main에 병합됐다.",
+      "locator": "PR #738 merged; merge SHA 2d59b314331a9fae1475c9bab48cf8414a5c42b5; feature commit a973baed83834acb6611d13cb02ee7aebf7ca6dd",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/738",
+      "captured_at": "2026-10-09T09:11:55+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-SHARE-READ-ORDER",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-DEPLOY-SHARE-READ-ORDER-20261009",
+      "kind": "DELIVERY",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main의 최신 공개 배포 workflow가 읽는 순서 표기 변경을 정적 Pages에 배포하고 라이브 smoke·release-status를 통과시켰다.",
+      "locator": "workflow 37863532576; release-verify PASS; worker-readiness PASS; deploy-pages PASS; deploy-worker skipped by STATIC_ONLY; smoke-live PASS; release-status PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37863532576",
+      "captured_at": "2026-10-09T09:11:55+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-SHARE-READ-ORDER",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-CDP-LIVE-SHARE-READ-ORDER-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px·1440px에서 전문가 영상이 연구 지도보다 앞에 표시되고 다음 장 연결·가로폭·런타임 오류가 정상이다.",
+      "locator": "Chrome CDP fallback; public target https://kradavid.github.io/gaba_info/?view=guide&qa=order-review#expert-videos; 390px: viewport=390, scrollWidth=390, expert-videos=03 · 전문가 영상, academic=04 · 연구 지도, handoff label=전문가 영상 다음 읽기 흐름, errors=[]; 1440px: viewport=1440, scrollWidth=1425, same section order, errors=[]; Browser plugin unavailable",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&qa=order-review#expert-videos",
+      "captured_at": "2026-10-09T09:17:00+09:00",
+      "reviewer_id": "NAVI-CDP-LIVE-QA-GABA-20261009-SHARE-READ-ORDER",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-READ-ORDER-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개 URL이 main merge candidate와 일치하고 HTTP 200·STATIC·bundle hash 73개·제품 독립 경계와 teaser HOLD를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; base=https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=2d59b314331a9fae1475c9bab48cf8414a5c42b5; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-09T09:13:15+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-SHARE-READ-ORDER",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-NAVI-STATE-SHARE-READ-ORDER-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 선택 자료 읽는 순서 표기·전문가 영상 03 → 연구 지도 04 공개 흐름·로컬 QA·PR·Pages 배포·라이브 CDP·validator 결과를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "DEC-034; H-417; PR #738 merge SHA 2d59b314331a9fae1475c9bab48cf8414a5c42b5; workflow 37863532576; live candidate matched; status USER_DECISION; completion gate NOT_READY; Browser plugin 부재에 따른 Chrome CDP fallback; Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T09:18:05+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-READ-ORDER",
       "claim_refs": ["C-321"]
     }
   ]

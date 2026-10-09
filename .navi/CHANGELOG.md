@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 사업자 공유 자료 읽는 순서 표시 및 공개 배포
+
+- 공유 보드 상태 제목을 '전달할 내용 · n개 · 읽는 순서'로 보강하고, 선택된 자료 칩에 1·2·3 순서를 표시해 사업자가 실제 전달 순서를 다시 해석하지 않도록 했다.
+- 기존 카드 선택·해제·원문 출처·링크 공유·내용 복사와 GABA란 → 03 · 전문가 영상 → 04 · 연구 지도 공개 흐름은 유지했다. 별도 순서 블록을 만들지 않아 모바일 읽기 흐름과 성능 예산을 보존했다.
+- 로컬 UI contract·typecheck·pnpm test 127 pass·research copy·public export·정적 릴리스 빌드·성능 예산이 통과했다. PR #738과 main workflow 37863532576의 release-verify·Pages·라이브 smoke·release-status가 성공했다. Worker는 STATIC_ONLY 정책으로 skipped됐다.
+- 공개 validator는 candidate SHA 2d59b314331a9fae1475c9bab48cf8414a5c42b5, HTTP 200·STATIC·bundle hashes 73개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance=matched를 확인했다. 공개 Chrome CDP fallback 390px·1440px에서 전문가 영상 03 → 연구 지도 04, 다음 장 handoff, 가로폭 일치·runtime errors 0을 확인했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.
+
+증적: C-321, E-LOCAL-BUILD-SHARE-READ-ORDER-20261009, E-UI-CONTRACT-SHARE-READ-ORDER-20261009, E-PR-SHARE-READ-ORDER-20261009, E-DEPLOY-SHARE-READ-ORDER-20261009, E-CDP-LIVE-SHARE-READ-ORDER-20261009, E-LIVE-PUBLIC-SHARE-READ-ORDER-20261009, E-NAVI-STATE-SHARE-READ-ORDER-20261009.
+
 ## 2026-10-09 — 사업자 공유 링크 전달 문구 및 데스크톱 읽기 레이아웃 보정
 
 - 선택한 자료의 범위를 유지하는 행동을 `2개 링크 공유`처럼 명시하고, 전달 단계도 `링크 공유 또는 내용 복사`로 정리했다.

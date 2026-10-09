@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 사업자 공유 자료 읽는 순서와 전문가 영상 선행 — 2d59b314 — 2026-10-09
+
+- 공격 초점은 선택 칩 번호가 실제 선택 순서와 일치하는지, 선택 해제 뒤 번호·개수가 오래된 상태로 남는지, 전문가 영상 선행 흐름이 연구 지도와 끊기지 않는지였다.
+- 최신 공개본의 390px·1440px에서 03 · 전문가 영상 → 04 · 연구 지도, 다음 장 handoff, scrollWidth=390/1425, runtime errors 0을 확인했다. 선택 순서 표기는 기존 선택·공유 범위와 같은 상태에서 렌더되며 별도 큰 순서 블록을 추가하지 않는다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 자동 검증은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토를 대체하지 않으므로 teaser HOLD와 USER_DECISION / NOT_READY를 유지한다.
+
+증적: C-321, E-CDP-LIVE-SHARE-READ-ORDER-20261009, E-LIVE-PUBLIC-SHARE-READ-ORDER-20261009, E-NAVI-STATE-SHARE-READ-ORDER-20261009.
+
 ## Red-team recheck — 선택 범위 링크 공유와 설명 우선 레이아웃 — a32beecd — 2026-10-09
 
 - 공격 초점은 `공유` 라벨이 실제 전달 URL 범위를 설명하지 못하거나, 데스크톱에서 설명·조작 컨트롤이 좁아져 사업자가 선택 범위를 오인하는지였다.

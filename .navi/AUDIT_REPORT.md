@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 공유 자료 읽는 순서 표시 및 공개 배포 재감리 — main 2d59b314 — 2026-10-09
+
+- AC-001/AC-003: PASS. 공유 보드 상태 제목이 '전달할 내용 · n개 · 읽는 순서'로 표시되고 선택 칩이 선택된 순서대로 번호를 갖는다. 사업자는 카드 위치와 무관하게 받는 사람이 읽을 순서를 한눈에 파악할 수 있으며, 선택 자료·원문 출처 수·링크 공유·내용 복사는 유지된다.
+- AC-004: PASS. 공개 Chrome CDP fallback 390px에서 03 · 전문가 영상이 04 · 연구 지도보다 앞서고 전문가 영상의 다음 장 handoff가 연구 지도로 연결됐다. scrollWidth=390, runtime errors []; 1440px에서는 scrollWidth=1425, 동일 순서·오류 0을 확인했다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·research copy·public export·pnpm test 127 pass·정적 릴리스 빌드·성능 예산이 통과했고 PR #738과 main workflow 37863532576의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 STATIC_ONLY로 skipped됐다.
+- AC-006 공개 정합성: PASS. 공개 validator는 HTTP 200·candidateSha=2d59b314331a9fae1475c9bab48cf8414a5c42b5·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance=matched를 확인했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Browser plugin 부재에 따른 Chrome CDP fallback, 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 외부 조건으로 남긴다.
+
+Final Status: NOT_READY; NAVI 상태는 USER_DECISION이다.
+
+증적: C-321, E-LOCAL-BUILD-SHARE-READ-ORDER-20261009, E-UI-CONTRACT-SHARE-READ-ORDER-20261009, E-PR-SHARE-READ-ORDER-20261009, E-DEPLOY-SHARE-READ-ORDER-20261009, E-CDP-LIVE-SHARE-READ-ORDER-20261009, E-LIVE-PUBLIC-SHARE-READ-ORDER-20261009, E-NAVI-STATE-SHARE-READ-ORDER-20261009.
+
 ## 사업자 공유 링크 전달 문구 및 데스크톱 읽기 레이아웃 재감리 — main a32beecd — 2026-10-09
 
 - AC-001/AC-003: `PASS`. 선택 자료의 전달 행동을 `링크 공유`로 명시하고, `링크 공유 또는 내용 복사` 3단계 흐름과 선택 범위 유지 안내를 함께 표시한다. 공유 보드 설명은 충분한 폭으로 읽고 대상·빠른 선택·전달 컨트롤을 아래에서 조작하도록 정리했다.
