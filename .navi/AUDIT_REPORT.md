@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 공유 목적 레일 및 공개 배포 재감리 — main 96018eee — 2026-10-09
+
+- AC-001/AC-003: PASS. 공유 보드에 `추천 자료`·`처음 소개`·`연구를 보여줄 때`·`출처까지` 목적 레일을 노출해 사업자가 전달 목적을 먼저 고를 수 있게 했다. 선택 대상·개별 카드 조정·선택 자료 제목·원문 출처 수·공유 범위·내용 복사는 유지되고, 선택 묶음 복사 번호는 매번 01부터 시작한다.
+- AC-004: PASS. 공개 Chrome CDP fallback 390px에서 목적 레일 4개·`출처까지 2개` 활성 상태·`2개 링크 공유`·`선택 2개 복사`·`전체 복사`·scrollWidth=390·runtime errors 0을 확인했다. 1440px에서는 scrollWidth=1425, 컨트롤 2열 정렬, 3개 버튼 각 186.05px·내부 overflow 없음과 `expert-videos` → `academic` DOM 순서를 확인했다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·research copy·public export·pnpm test 127 pass·정적 릴리스 build·release manifest·static bundle·성능 예산(`totalAssets=1651954`, budget `1652500`)이 통과했고 PR #740과 main workflow 37866630907의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 STATIC_ONLY로 skipped됐다.
+- AC-006 공개 정합성: PASS. 공개 validator는 HTTP 200·candidateSha=96018eee0fbd76d10a5c0a1523001c0d9186a61b·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance=matched를 확인했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 검증 조건과 USER_DECISION/NOT_READY를 유지한다.
+
+Final Status: NOT_READY; NAVI 상태는 USER_DECISION이다.
+
+증적: C-321, E-LOCAL-BUILD-SHARE-PURPOSE-20261009, E-UI-CONTRACT-SHARE-PURPOSE-20261009, E-PR-SHARE-PURPOSE-20261009, E-DEPLOY-SHARE-PURPOSE-20261009, E-CDP-LIVE-SHARE-PURPOSE-20261009, E-LIVE-PUBLIC-SHARE-PURPOSE-20261009, E-NAVI-STATE-SHARE-PURPOSE-20261009.
+
 ## 사업자 공유 자료 읽는 순서 표시 및 공개 배포 재감리 — main 2d59b314 — 2026-10-09
 
 - AC-001/AC-003: PASS. 공유 보드 상태 제목이 '전달할 내용 · n개 · 읽는 순서'로 표시되고 선택 칩이 선택된 순서대로 번호를 갖는다. 사업자는 카드 위치와 무관하게 받는 사람이 읽을 순서를 한눈에 파악할 수 있으며, 선택 자료·원문 출처 수·링크 공유·내용 복사는 유지된다.

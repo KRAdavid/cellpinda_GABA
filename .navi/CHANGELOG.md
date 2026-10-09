@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 사업자 공유 목적 레일 및 공개 배포
+
+- 숨은 `빠른 선택`을 목적별 시각 레일로 바꿔 `추천 자료`·`처음 소개`·`연구를 보여줄 때`·`출처까지`를 한 화면에서 비교하게 했다. 필요하면 아래 카드에서 개별 선택으로 조정할 수 있다.
+- 선택 묶음 복사 번호를 매번 `01`부터 시작하고, 대상·선택 자료·원문 출처·`materials` 공유 범위·제품 독립 안내는 유지했다. 공개 읽기 번호는 이해 흐름을 위해 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`로 유지했다.
+- 로컬 UI contract·typecheck·research copy·public export·`pnpm test` 127 pass·전체 `pnpm run build`·정적 번들·성능 예산(`totalAssets=1651954 / 1652500`)이 통과했다. PR #740 merge SHA `96018eee0fbd76d10a5c0a1523001c0d9186a61b`와 main workflow `37866630907`의 release-verify·Pages·라이브 smoke·release-status가 성공했고 Worker는 STATIC_ONLY 정책으로 skipped됐다.
+- 공개 validator는 HTTP 200·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance=matched를 확인했다. 공개 Chrome CDP fallback 390px·1440px에서 목적 레일·버튼 정렬·전문가 영상 선행·runtime errors 0을 확인했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.
+
+증적: C-321, E-LOCAL-BUILD-SHARE-PURPOSE-20261009, E-UI-CONTRACT-SHARE-PURPOSE-20261009, E-PR-SHARE-PURPOSE-20261009, E-DEPLOY-SHARE-PURPOSE-20261009, E-CDP-LIVE-SHARE-PURPOSE-20261009, E-LIVE-PUBLIC-SHARE-PURPOSE-20261009, E-NAVI-STATE-SHARE-PURPOSE-20261009.
+
 ## 2026-10-09 — 사업자 공유 자료 읽는 순서 표시 및 공개 배포
 
 - 공유 보드 상태 제목을 '전달할 내용 · n개 · 읽는 순서'로 보강하고, 선택된 자료 칩에 1·2·3 순서를 표시해 사업자가 실제 전달 순서를 다시 해석하지 않도록 했다.
