@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 대상별 전달 문구와 번들 맥락 — 89475ba3 — 2026-10-09
+
+- 공격 초점은 대상 선택 뒤 전달 문구가 오래된 상태로 남거나, 링크·복사 payload에 화면과 다른 대상 맥락이 들어가거나, 새 카드가 모바일 공유 보드를 밀어 가로 넘침을 만드는지였다.
+- 공개 390px에서 사업자 문구 `GABA의 기본 역할과 공개 연구 흐름을 사업 설명에 활용하기 쉽게 정리한 자료입니다.`와 `문구 복사`를 확인했고, 교육 대상으로 바꾸자 교육용 문구와 추천 4개 묶음이 함께 갱신됐다. `scrollWidth=390`, runtime errors=0이며 목적 레일 4개와 선택 범위 상태가 유지됐다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 전달 문구는 제품 효능을 주장하지 않으며 기존 원문 출처·materials 링크·전문가 영상 03 → 연구 지도 04 순서와 제품 독립 경계를 변경하지 않는다. 자동 QA는 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토를 대체하지 않으므로 teaser HOLD와 USER_DECISION / NOT_READY를 유지한다.
+
+증적: C-321, E-CDP-LIVE-SHARE-DELIVERY-INTRO-20261009, E-LIVE-PUBLIC-SHARE-DELIVERY-INTRO-20261009, E-NAVI-STATE-SHARE-DELIVERY-INTRO-20261009.
+
 ## Red-team recheck — 목적별 공유 레일과 선택 묶음 번호 — 96018eee — 2026-10-09
 
 - 공격 초점은 목적별 선택이 실제 선택 범위·대상·공유 링크에 반영되는지, 선택 묶음 복사 번호가 카드의 전역 위치인 04·05로 시작해 수신자의 읽기 순서를 혼동시키는지, 390px에서 컨트롤이 넘치는지였다.

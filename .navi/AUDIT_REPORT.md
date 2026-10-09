@@ -1,5 +1,17 @@
 # Audit Report
 
+## 대상별 전달 문구 미리보기 및 공개 배포 재감리 — main 89475ba3 — 2026-10-09
+
+- AC-001/AC-003: PASS. 공유 보드에 소비자·사업자·교육 대상별 `전달 문구`를 먼저 보여주고, 문구 단독 복사와 선택 자료 번들 안의 동일 문구를 제공한다. 문구는 공개 GABA 과학자료의 성격만 설명하며 제품 효능·새로운 임상 표현은 추가하지 않았다.
+- AC-004: PASS. 공개 Chrome CDP fallback 390px에서 사업자 대상 문구와 `문구 복사` 버튼, 목적별 4개 묶음, 선택 5개 상태를 확인했고 `scrollWidth=390`, runtime errors=0이었다. 대상 전환 시 교육용 문구와 추천 4개 묶음으로 함께 갱신됐다. 데스크톱 1440px에서도 `scrollWidth=1425`와 목적 버튼 4열을 유지했다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·`pnpm test` 127 pass·정적 릴리스 build·static bundle·성능 예산(`totalAssets=1655948`, budget `1657000`)이 통과했고 PR #744와 main workflow `37869811306`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 STATIC_ONLY로 skipped됐다.
+- AC-006 공개 정합성: PASS. 공개 validator는 HTTP 200·candidateSha=`89475ba31ae1b5eae46f8f8865cf891923a8e4fa`·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance=matched를 확인했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 검증 조건과 USER_DECISION/NOT_READY를 유지한다.
+
+Final Status: NOT_READY; NAVI 상태는 USER_DECISION이다.
+
+증적: C-321, E-LOCAL-BUILD-SHARE-DELIVERY-INTRO-20261009, E-UI-CONTRACT-SHARE-DELIVERY-INTRO-20261009, E-PR-SHARE-DELIVERY-INTRO-20261009, E-DEPLOY-SHARE-DELIVERY-INTRO-20261009, E-CDP-LIVE-SHARE-DELIVERY-INTRO-20261009, E-LIVE-PUBLIC-SHARE-DELIVERY-INTRO-20261009, E-NAVI-STATE-SHARE-DELIVERY-INTRO-20261009.
+
 ## 사업자 공유 목적 레일 및 공개 배포 재감리 — main 96018eee — 2026-10-09
 
 - AC-001/AC-003: PASS. 공유 보드에 `추천 자료`·`처음 소개`·`연구를 보여줄 때`·`출처까지` 목적 레일을 노출해 사업자가 전달 목적을 먼저 고를 수 있게 했다. 선택 대상·개별 카드 조정·선택 자료 제목·원문 출처 수·공유 범위·내용 복사는 유지되고, 선택 묶음 복사 번호는 매번 01부터 시작한다.

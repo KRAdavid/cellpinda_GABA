@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 대상별 전달 문구 미리보기 및 공개 배포
+
+- 사업자·소비자·교육 대상에 따라 공유 보드 상단에 바로 사용할 수 있는 `전달 문구`를 표시하고, 문구만 복사하는 버튼을 추가했다. 선택 자료 번들·링크 공유·전체 복사에도 같은 대상별 문구를 포함해 수신자가 링크의 맥락을 먼저 이해하게 했다.
+- 새 문구는 제품 효능을 추가 주장하지 않고, 공개 GABA 과학자료의 성격과 활용 목적만 설명한다. 기존 목적별 묶음·개별 선택·원문 출처·`materials` 범위·`GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 흐름은 유지했다.
+- 로컬 `pnpm test` 127 pass·`pnpm run build`·UI contract·typecheck·정적 번들·성능 예산(`totalAssets=1655948 / 1657000`)이 통과했다. PR #744 merge SHA `89475ba31ae1b5eae46f8f8865cf891923a8e4fa`와 main workflow `37869811306`의 release-verify·worker-readiness·Pages·smoke-live·release-status가 성공했고 Worker는 STATIC_ONLY로 skipped됐다.
+- 공개 validator는 HTTP 200·STATIC·candidate SHA `89475ba31ae1b5eae46f8f8865cf891923a8e4fa`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 공개 390px에서 사업자 전달 문구·4개 목적 버튼·가로폭 390을 확인했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.
+
+증적: C-321, E-LOCAL-BUILD-SHARE-DELIVERY-INTRO-20261009, E-UI-CONTRACT-SHARE-DELIVERY-INTRO-20261009, E-PR-SHARE-DELIVERY-INTRO-20261009, E-DEPLOY-SHARE-DELIVERY-INTRO-20261009, E-CDP-LIVE-SHARE-DELIVERY-INTRO-20261009, E-LIVE-PUBLIC-SHARE-DELIVERY-INTRO-20261009, E-NAVI-STATE-SHARE-DELIVERY-INTRO-20261009.
+
 ## 2026-10-09 — 사업자 공유 목적 레일 및 공개 배포
 
 - 숨은 `빠른 선택`을 목적별 시각 레일로 바꿔 `추천 자료`·`처음 소개`·`연구를 보여줄 때`·`출처까지`를 한 화면에서 비교하게 했다. 필요하면 아래 카드에서 개별 선택으로 조정할 수 있다.

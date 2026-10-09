@@ -4,7 +4,7 @@
   "project_name": "셀핀다가바 GABA 공개 안내서",
   "status": "USER_DECISION",
   "previous_status": "RED_TEAM",
-  "updated_at": "2026-10-09T00:53:03.264019Z",
+  "updated_at": "2026-10-09T01:33:33.891303Z",
   "goal_lock": {
     "status": "LOCKED",
     "project_name": "셀핀다가바 GABA 공개 안내서 공개 배포 품질 고도화",
@@ -2460,7 +2460,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-AUDITOR-GABA-20261002",
-    "last_run_at": "2026-10-09T09:51:19+09:00"
+    "last_run_at": "2026-10-09T10:30:00+09:00"
   },
   "red_team": {
     "status": "PASS_WITH_CONDITIONS",
@@ -2960,7 +2960,7 @@
     ],
     "independent_from_execution": true,
     "reviewer_id": "NAVI-REDTEAM-GABA-20261002",
-    "last_run_at": "2026-10-09T09:51:19+09:00"
+    "last_run_at": "2026-10-09T10:30:00+09:00"
   },
   "risk_controls": {
     "schema_version": "0.1.0",
@@ -7110,6 +7110,13 @@
       "from_status": "RED_TEAM",
       "to_status": "USER_DECISION",
       "recorded_at": "2026-10-09T09:51:19+09:00"
+    },
+    {
+      "id": "H-419",
+      "event": "NAVI 자동 공개 배포 점검에서 사업자가 링크만 보내면 수신자가 자료의 성격과 전달 목적을 다시 해석해야 하던 잔여 마찰을 확인했다. 공유 보드에 소비자·사업자·교육 대상별 전달 문구 미리보기와 문구 단독 복사를 추가하고, 선택 자료 번들에도 같은 문구를 포함했다. 문구는 제품 효능을 추가 주장하지 않으며 대상 선택·목적별 묶음·원문 출처·materials 범위·공개 읽기 순서 'GABA란 → 03 · 전문가 영상 → 04 · 연구 지도'와 제품 독립 경계는 유지했다. 로컬 UI contract·typecheck·pnpm test 127 pass·전체 pnpm build·정적 번들·성능 예산(totalAssets=1655948, budget=1657000)을 통과했고 PR #744 merge SHA 89475ba31ae1b5eae46f8f8865cf891923a8e4fa의 main workflow 37869811306 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 deploy-worker는 STATIC_ONLY로 skipped됐다. 공개 validator는 HTTP 200·STATIC·candidate SHA 89475ba31ae1b5eae46f8f8865cf891923a8e4fa·bundle hash 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance matched를 확인했다. 공개 Chrome CDP fallback 390px에서 사업자 전달 문구·문구 복사·대상 전환에 따른 교육용 문구·목적 레일·scrollWidth 390·runtime errors 0을 재현했다. 신규 CRITICAL/MAJOR 결함은 없으며 Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 유지하고 NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다. C-321과 관련 증거를 등록한다.",
+      "from_status": "RED_TEAM",
+      "to_status": "USER_DECISION",
+      "recorded_at": "2026-10-09T10:30:00+09:00"
     }
   ]
 }

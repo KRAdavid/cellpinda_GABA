@@ -3668,7 +3668,14 @@
     "E-DEPLOY-SHARE-PURPOSE-20261009",
     "E-CDP-LIVE-SHARE-PURPOSE-20261009",
     "E-LIVE-PUBLIC-SHARE-PURPOSE-20261009",
-    "E-NAVI-STATE-SHARE-PURPOSE-20261009"
+    "E-NAVI-STATE-SHARE-PURPOSE-20261009",
+    "E-LOCAL-BUILD-SHARE-DELIVERY-INTRO-20261009",
+    "E-UI-CONTRACT-SHARE-DELIVERY-INTRO-20261009",
+    "E-PR-SHARE-DELIVERY-INTRO-20261009",
+    "E-DEPLOY-SHARE-DELIVERY-INTRO-20261009",
+    "E-CDP-LIVE-SHARE-DELIVERY-INTRO-20261009",
+    "E-LIVE-PUBLIC-SHARE-DELIVERY-INTRO-20261009",
+    "E-NAVI-STATE-SHARE-DELIVERY-INTRO-20261009"
       ],
       "status": "SUPPORTED"
     }
@@ -23892,6 +23899,83 @@
       "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
       "captured_at": "2026-10-09T09:51:19+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-PURPOSE",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-SHARE-DELIVERY-INTRO-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "대상별 전달 문구 미리보기·복사와 공유 번들 문맥 보강 변경이 로컬 검증을 통과했다.",
+      "locator": "pnpm test; tests 127, pass 127, fail 0; pnpm run build; UI contract ok; typecheck exit 0; static bundle 11 routes; totalAssets=1655948 <= 1657000; git diff --check exit 0",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/tree/main/src/components",
+      "captured_at": "2026-10-09T10:30:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-GABA-20261009-SHARE-DELIVERY-INTRO",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-UI-CONTRACT-SHARE-DELIVERY-INTRO-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 소비자·사업자·교육 대상별 product-neutral 전달 문구, 문구 복사, 번들 문맥 포함과 기존 공유·출처·읽기 순서를 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs; pnpm run validate:ui-contract -> status ok; messageKitAudienceIntros; formatMessageKitIntro; copyMessageKitIntro; guide-share-message contract",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/tree/main/scripts",
+      "captured_at": "2026-10-09T10:30:00+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261009-SHARE-DELIVERY-INTRO",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-PR-SHARE-DELIVERY-INTRO-20261009",
+      "kind": "DELIVERY",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "대상별 전달 문구 보강 PR이 보호 검사를 통과하고 main에 병합됐다.",
+      "locator": "PR #744 merged; merge SHA 89475ba31ae1b5eae46f8f8865cf891923a8e4fa; release-verify PASS; site-quality-verify PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/744",
+      "captured_at": "2026-10-09T10:30:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-SHARE-DELIVERY-INTRO",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-DEPLOY-SHARE-DELIVERY-INTRO-20261009",
+      "kind": "DELIVERY",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main workflow가 대상별 전달 문구 변경을 정적 Pages에 배포하고 라이브 smoke·release-status까지 성공했다.",
+      "locator": "workflow 37869811306; release-verify PASS; worker-readiness PASS; deploy-pages PASS; deploy-worker skipped by STATIC_ONLY; smoke-live PASS; release-status PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37869811306",
+      "captured_at": "2026-10-09T10:30:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-SHARE-DELIVERY-INTRO",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-CDP-LIVE-SHARE-DELIVERY-INTRO-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공개 390px에서 대상별 전달 문구와 목적별 공유 묶음이 함께 갱신되고 모바일 가로폭을 유지했다.",
+      "locator": "Chrome CDP 9223 fallback; public target https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=31&v=89475ba31ae1b5eae46f8f8865cf891923a8e4fa#final; 390px: scrollWidth=390, 사업자 전달 문구·문구 복사·목적 버튼 4개·선택 5개; audience=15 전환 시 교육용 문구·추천 4개; errors=[]; Browser plugin unavailable",
+      "source_uri": "https://kradavid.github.io/gaba_info/?view=guide&audience=31&materials=31#final",
+      "captured_at": "2026-10-09T10:30:00+09:00",
+      "reviewer_id": "NAVI-CDP-LIVE-QA-GABA-20261009-SHARE-DELIVERY-INTRO",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-SHARE-DELIVERY-INTRO-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개 URL이 main merge candidate와 일치하고 HTTP 200·STATIC·공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=89475ba31ae1b5eae46f8f8865cf891923a8e4fa; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-09T10:30:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-SHARE-DELIVERY-INTRO",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-NAVI-STATE-SHARE-DELIVERY-INTRO-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 대상별 전달 문구·문구 복사·번들 문맥·로컬 QA·PR·Pages 배포·라이브 CDP·validator 결과를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "DEC-036; H-419; PR #744 merge SHA 89475ba31ae1b5eae46f8f8865cf891923a8e4fa; workflow 37869811306; live candidate matched; status USER_DECISION; completion gate NOT_READY; Browser plugin 부재에 따른 Chrome CDP fallback; Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T10:30:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-SHARE-DELIVERY-INTRO",
       "claim_refs": ["C-321"]
     }
   ]
