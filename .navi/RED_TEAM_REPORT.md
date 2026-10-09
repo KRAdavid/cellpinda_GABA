@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 목적별 공유 레일과 선택 묶음 번호 — 96018eee — 2026-10-09
+
+- 공격 초점은 목적별 선택이 실제 선택 범위·대상·공유 링크에 반영되는지, 선택 묶음 복사 번호가 카드의 전역 위치인 04·05로 시작해 수신자의 읽기 순서를 혼동시키는지, 390px에서 컨트롤이 넘치는지였다.
+- 공개 390px에서 4개 목적 버튼과 활성 `출처까지 2개`, 선택 범위 유지 문구, `2개 링크 공유`·`선택 2개 복사`·`전체 복사`, scrollWidth=390, runtime errors=0을 확인했다. 1440px에서 3개 전달 버튼의 내부 overflow 없음·scrollWidth=1425와 `expert-videos` → `academic` 순서를 확인했다. 선택 묶음 복사 payload는 `01.`·`02.`로 재시작하고 PubMed 출처·materials=24 링크를 유지했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 목적 레일은 기존 개별 선택·대상 추천·원문 출처·제품 독립 경계를 바꾸지 않는다. 자동 QA는 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토를 대체하지 않으므로 teaser HOLD와 USER_DECISION / NOT_READY를 유지한다.
+
+증적: C-321, E-CDP-LIVE-SHARE-PURPOSE-20261009, E-LIVE-PUBLIC-SHARE-PURPOSE-20261009, E-NAVI-STATE-SHARE-PURPOSE-20261009.
+
 ## Red-team recheck — 사업자 공유 자료 읽는 순서와 전문가 영상 선행 — 2d59b314 — 2026-10-09
 
 - 공격 초점은 선택 칩 번호가 실제 선택 순서와 일치하는지, 선택 해제 뒤 번호·개수가 오래된 상태로 남는지, 전문가 영상 선행 흐름이 연구 지도와 끊기지 않는지였다.
