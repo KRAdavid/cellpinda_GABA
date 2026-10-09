@@ -2301,8 +2301,8 @@ export default function PublicGabaGuide() {
             </div>
               <div className="guide-share-flow" role="list" aria-label="자료 전달 순서"><div className="guide-share-flow-step" role="listitem"><strong>01</strong><span>대상 선택</span></div><ArrowRight className="guide-share-flow-arrow" size={15} aria-hidden="true" /><div className="guide-share-flow-step" role="listitem"><strong>02</strong><span>자료 {selectedMessageCount}개 선택</span></div><ArrowRight className="guide-share-flow-arrow" size={15} aria-hidden="true" /><div className="guide-share-flow-step" role="listitem"><strong>03</strong><span>링크 공유 또는 내용 복사</span></div></div>
             <div className="guide-share-selection-status" aria-live="polite" aria-label="선택 자료">
-              <span>전달할 내용 · {selectedMessageCount}개</span>
-              <div className="guide-share-selected-chips">{selectedMessageIndices.map(index => <button key={index} className="guide-share-copy-all guide-share-selected-chip" type="button" onClick={() => toggleMessageSelection(index)} aria-label={`${messageKitLabels[index]} 선택 해제`}>{messageKitLabels[index]}<X size={13} aria-hidden="true" /></button>)}</div>
+              <span>전달할 내용 · {selectedMessageCount}개 · 읽는 순서</span>
+              <div className="guide-share-selected-chips">{selectedMessageIndices.map((index, sequenceIndex) => <button key={index} className="guide-share-copy-all guide-share-selected-chip" type="button" onClick={() => toggleMessageSelection(index)} aria-label={`${messageKitLabels[index]} 선택 해제`}>{sequenceIndex + 1}. {messageKitLabels[index]}<X size={13} aria-hidden="true" /></button>)}</div>
               <small>{selectedMessageSourceCount > 0 ? `원문 출처 ${selectedMessageSourceCount}개 포함` : '기초 설명 중심 자료'} · 선택한 범위가 공유 링크에도 유지됩니다</small>
             </div>
             <details className="guide-share-lines">
