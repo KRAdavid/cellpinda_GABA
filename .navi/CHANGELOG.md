@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 전문가 영상에서 연구 지도로 이어지는 문구 보정 및 공개 배포
+
+- 전문가 영상 섹션 아래의 `연구 지도 → 수면 연구` 표기가 다음 장과 이후 장을 한 번에 건너뛰어 보이던 혼선을 확인하고, `전문가의 설명에서 → 연구 지도`로 보정했다. 공개 읽기 순서 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`와 `academic`으로 이동하는 실제 동작은 유지했다.
+- 새 과학 주장·제품 광고·공유 자료 payload는 추가하지 않았다. 모바일에서는 기존 44px 터치 영역과 폭을 유지하고, UI contract가 새 접근성 이름과 handoff 문구를 보호한다.
+- 로컬 `pnpm test` 127 pass·`pnpm run validate:ui-contract`·typecheck·전체 `pnpm run build`·정적 번들·성능 예산(`totalAssets=1659573 / 1660500`)이 통과했다. PR #748 merge SHA `2a74019d76b7adc508259727e18fb9226c84431b`와 main workflow `37873897523`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 STATIC_ONLY로 skipped됐다.
+- 공개 validator는 HTTP 200·STATIC·candidate SHA `2a74019d76b7adc508259727e18fb9226c84431b`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 공개 Chrome CDP fallback 390px에서 새 handoff 접근성 이름·`다음 장 / 전문가의 설명에서 / 연구 지도`·`scrollWidth=390`을 확인했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.
+
+증적: C-321, E-LOCAL-BUILD-EXPERT-HANDOFF-20261009, E-UI-CONTRACT-EXPERT-HANDOFF-20261009, E-PR-EXPERT-HANDOFF-20261009, E-DEPLOY-EXPERT-HANDOFF-20261009, E-CDP-LIVE-EXPERT-HANDOFF-20261009, E-LIVE-PUBLIC-EXPERT-HANDOFF-20261009, E-NAVI-STATE-EXPERT-HANDOFF-20261009.
+
 ## 2026-10-09 — 대상별 전달 문구 미리보기 및 공개 배포
 
 - 사업자·소비자·교육 대상에 따라 공유 보드 상단에 바로 사용할 수 있는 `전달 문구`를 표시하고, 문구만 복사하는 버튼을 추가했다. 선택 자료 번들·링크 공유·전체 복사에도 같은 대상별 문구를 포함해 수신자가 링크의 맥락을 먼저 이해하게 했다.

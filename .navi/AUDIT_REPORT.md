@@ -1,5 +1,17 @@
 # Audit Report
 
+## 전문가 영상에서 연구 지도로 이어지는 문구 보정 재감리 — main 2a74019d — 2026-10-09
+
+- AC-001/AC-003: PASS. 전문가 영상 다음 handoff가 실제 다음 장인 연구 지도를 명시하는 `전문가의 설명에서 → 연구 지도`로 정리됐다. `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서와 제품 독립 공개 경계는 유지됐다.
+- AC-004: PASS. 로컬·공개 Chrome CDP fallback 390px에서 handoff의 접근성 이름·문구·`academic` 이동 대상·`scrollWidth=390`을 확인했고 runtime errors는 없었다. 390px 스크린샷에서도 전문가 영상의 제목·포스터·선택 재생·공유 버튼이 잘리지 않았다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·`pnpm test` 127 pass·정적 릴리스 build·static bundle·성능 예산(`totalAssets=1659573`, budget `1660500`)이 통과했고 PR #748과 main workflow `37873897523`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 STATIC_ONLY로 skipped됐다.
+- AC-006 공개 정합성: PASS. 공개 validator는 HTTP 200·candidateSha=`2a74019d76b7adc508259727e18fb9226c84431b`·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance=matched를 확인했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 검증 조건과 USER_DECISION/NOT_READY를 유지한다.
+
+Final Status: NOT_READY; NAVI 상태는 USER_DECISION이다.
+
+증적: C-321, E-LOCAL-BUILD-EXPERT-HANDOFF-20261009, E-UI-CONTRACT-EXPERT-HANDOFF-20261009, E-PR-EXPERT-HANDOFF-20261009, E-DEPLOY-EXPERT-HANDOFF-20261009, E-CDP-LIVE-EXPERT-HANDOFF-20261009, E-LIVE-PUBLIC-EXPERT-HANDOFF-20261009, E-NAVI-STATE-EXPERT-HANDOFF-20261009.
+
 ## 대상별 전달 문구 미리보기 및 공개 배포 재감리 — main 89475ba3 — 2026-10-09
 
 - AC-001/AC-003: PASS. 공유 보드에 소비자·사업자·교육 대상별 `전달 문구`를 먼저 보여주고, 문구 단독 복사와 선택 자료 번들 안의 동일 문구를 제공한다. 문구는 공개 GABA 과학자료의 성격만 설명하며 제품 효능·새로운 임상 표현은 추가하지 않았다.

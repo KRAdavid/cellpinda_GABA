@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 전문가 영상에서 연구 지도로 이어지는 handoff — 2a74019d — 2026-10-09
+
+- 공격 초점은 다음 장 표기가 실제 DOM 순서와 일치하는지, 이후 수면 연구가 바로 다음 장처럼 오해되는지, 390px에서 새 문구가 잘리는지였다.
+- `03 · 전문가 영상` 다음 버튼을 `다음 장 / 전문가의 설명에서 / 연구 지도`로 바꾸고 `academic` 이동을 유지했다. 로컬·공개 390px에서 `scrollWidth=390`, 새 aria-label, 제목·포스터·공유 버튼의 시각적 안정성을 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 자동 검증은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 검토를 대체하지 않으므로 teaser HOLD와 USER_DECISION / NOT_READY를 유지한다.
+
+증적: C-321, E-CDP-LIVE-EXPERT-HANDOFF-20261009, E-LIVE-PUBLIC-EXPERT-HANDOFF-20261009, E-NAVI-STATE-EXPERT-HANDOFF-20261009.
+
 ## Red-team recheck — 대상별 전달 문구와 번들 맥락 — 89475ba3 — 2026-10-09
 
 - 공격 초점은 대상 선택 뒤 전달 문구가 오래된 상태로 남거나, 링크·복사 payload에 화면과 다른 대상 맥락이 들어가거나, 새 카드가 모바일 공유 보드를 밀어 가로 넘침을 만드는지였다.
