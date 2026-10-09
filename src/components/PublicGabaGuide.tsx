@@ -690,6 +690,7 @@ const messageKitLabels = ['기본 소개', '신경계 역할', '연구의 확장
 const messageKitUseCases = ['처음 설명을 시작할 때', 'GABA의 역할을 설명할 때', '연구 범위를 보여줄 때', '사람 대상 결과를 전할 때', '발효·안전 자료를 덧붙일 때'];
 const messageKitSources: (string | null)[] = [gabaBasicsSource.label, gabaBasicsSource.label, historyMilestones[2].source.label, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
 const messageKitSourceUrls: (string | null)[] = [gabaBasicsSource.url, gabaBasicsSource.url, historyMilestones[2].source.url, researchTopics[0].source.url, fermentedSafetySteps[2].source.url];
+const messageKitGuideHashes = ['basics', 'basics', 'history', 'research-cognition', 'fermented-safety'] as const;
 const messageKitAudienceLabels: Record<number, string> = { 21: '소비자용', 31: '사업자용', 15: '교육용' };
 const messageKitAudienceIntros: Record<number, string> = {
   21: 'GABA가 무엇인지, 일상과 공개 연구에서 어떤 주제로 다뤄지는지 쉽게 정리한 자료입니다.',
@@ -725,20 +726,20 @@ const getGuideShareUrl = (hash = 'top') => {
   return url.toString();
 };
 
-const getMessageKitShareUrl = (audienceMask: number, selectionMask = messageKitMaskLimit) => {
+const getMessageKitShareUrl = (audienceMask: number, selectionMask = messageKitMaskLimit, hash = 'final') => {
   const url = new URL(window.location.href);
   url.search = '?view=guide';
   url.searchParams.set('audience', String(audienceMask));
   url.searchParams.set('materials', String(selectionMask));
-  url.hash = 'final';
+  url.hash = hash;
   return url.toString();
 };
 
-const formatMessageKitText = (message: string, index: number, withGuide = false, guideUrl?: string) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}${messageKitSourceUrls[index] ? `\n${messageKitSourceUrls[index]}` : ''}` : ''}${withGuide ? `\n\n공개 안내서: ${guideUrl ?? getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
+const formatMessageKitText = (message: string, index: number, withGuide = false, guideUrl?: string) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}${messageKitSourceUrls[index] ? `\n${messageKitSourceUrls[index]}` : ''}` : ''}${withGuide ? `\n\n공개 안내서: ${guideUrl ?? getGuideShareUrl(messageKitGuideHashes[index])}` : ''}`;
 
 const formatMessageKitIntro = (audienceMask: number) => messageKitAudienceIntros[audienceMask] ?? 'GABA에 관한 공개 과학자료를 읽기 쉬운 순서로 정리한 자료입니다.';
 
-const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31, selectionMask = audienceMask) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${formatMessageKitIntro(audienceMask)}\n\n${indices.map((index, sequenceIndex) => `${String(sequenceIndex + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask, selectionMask)}` : ''}`;
+const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31, selectionMask = audienceMask) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${formatMessageKitIntro(audienceMask)}\n\n${indices.map((index, sequenceIndex) => `${String(sequenceIndex + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index, withGuide, withGuide ? getMessageKitShareUrl(audienceMask, 1 << index, messageKitGuideHashes[index]) : undefined)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask, selectionMask)}` : ''}`;
 
 const replaceGuideHistory = (hash: string, videoId?: string) => {
   const url = new URL(window.location.href);
@@ -1892,7 +1893,7 @@ export default function PublicGabaGuide() {
   const copyMessageKitLine = async (message: string, index: number) => {
     // An individual line should reopen the exact card that was copied, even when
     // the operator's current bundle contains additional materials.
-    const text = formatMessageKitText(message, index, true, getMessageKitShareUrl(activeMessageAudienceMask, 1 << index));
+    const text = formatMessageKitText(message, index, true, getMessageKitShareUrl(activeMessageAudienceMask, 1 << index, messageKitGuideHashes[index]));
     const copied = await writeClipboardText(text);
     if (copied) {
       setShareFallback(null);
