@@ -687,6 +687,11 @@ const messageKitUseCases = ['처음 설명을 시작할 때', 'GABA의 역할을
 const messageKitSources: (string | null)[] = [null, null, null, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
 const messageKitSourceUrls: (string | null)[] = [null, null, null, researchTopics[0].source.url, fermentedSafetySteps[2].source.url];
 const messageKitAudienceLabels: Record<number, string> = { 21: '소비자용', 31: '사업자용', 15: '교육용' };
+const messageKitAudienceIntros: Record<number, string> = {
+  21: 'GABA가 무엇인지, 일상과 공개 연구에서 어떤 주제로 다뤄지는지 쉽게 정리한 자료입니다.',
+  31: 'GABA의 기본 역할과 공개 연구 흐름을 사업 설명에 활용하기 쉽게 정리한 자료입니다.',
+  15: 'GABA의 기본 역할과 연구 사례를 수업·교육 설명에 활용하기 쉽게 정리한 자료입니다.',
+};
 const messageKitPacks = [
   ['처음 소개', 3, 'GABA의 정체와 역할부터'],
   ['연구를 보여줄 때', 12, '연구 범위와 관찰 결과 중심'],
@@ -727,7 +732,9 @@ const getMessageKitShareUrl = (audienceMask: number, selectionMask = messageKitM
 
 const formatMessageKitText = (message: string, index: number, withGuide = false, guideUrl?: string) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}${messageKitSourceUrls[index] ? `\n${messageKitSourceUrls[index]}` : ''}` : ''}${withGuide ? `\n\n공개 안내서: ${guideUrl ?? getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
 
-const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31, selectionMask = audienceMask) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${indices.map((index, sequenceIndex) => `${String(sequenceIndex + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask, selectionMask)}` : ''}`;
+const formatMessageKitIntro = (audienceMask: number) => messageKitAudienceIntros[audienceMask] ?? 'GABA에 관한 공개 과학자료를 읽기 쉬운 순서로 정리한 자료입니다.';
+
+const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31, selectionMask = audienceMask) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${formatMessageKitIntro(audienceMask)}\n\n${indices.map((index, sequenceIndex) => `${String(sequenceIndex + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask, selectionMask)}` : ''}`;
 
 const replaceGuideHistory = (hash: string, videoId?: string) => {
   const url = new URL(window.location.href);
@@ -962,7 +969,7 @@ export default function PublicGabaGuide() {
   const [shareStatus, setShareStatus] = useState('');
   const [copiedResearchTopicId, setCopiedResearchTopicId] = useState<string | null>(null);
   const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
-  const [messageKitCopied, setMessageKitCopied] = useState<'selected' | 'all' | false>(false);
+  const [messageKitCopied, setMessageKitCopied] = useState<'selected' | 'all' | 'intro' | false>(false);
   // Business is the primary distribution audience; consumer and education remain one-select away.
   const [activeMessageAudienceMask, setActiveMessageAudienceMask] = useState(getInitialMessageAudienceMask);
   const [selectedMessageMask, setSelectedMessageMask] = useState(getInitialMessageSelectionMask);
@@ -1807,6 +1814,20 @@ export default function PublicGabaGuide() {
     return copied;
   };
 
+  const copyMessageKitIntro = async () => {
+    const copied = await writeClipboardText(formatMessageKitIntro(activeMessageAudienceMask));
+    if (copied) {
+      setMessageKitCopied('intro');
+      if (messageKitCopiedTimer.current !== null) window.clearTimeout(messageKitCopiedTimer.current);
+      messageKitCopiedTimer.current = window.setTimeout(() => {
+        setMessageKitCopied(false);
+        messageKitCopiedTimer.current = null;
+      }, 2400);
+    }
+    announceShareStatus(copied ? '전달 문구를 복사했어요.' : '전달 문구를 복사하지 못했어요. 문구를 직접 선택해 활용해 보세요.');
+    return copied;
+  };
+
   const shareMessageKit = async () => {
     const selectedIndices = selectedMessageIndices;
     const audienceLabel = messageKitAudienceLabels[activeMessageAudienceMask] ?? '공개 자료';
@@ -2307,6 +2328,11 @@ export default function PublicGabaGuide() {
             </div>
             <div className="guide-share-intro" aria-label={`${activeMessageAudienceLabel} GABA 공유 자료 안내`}>
               <div><span className="guide-share-intro-kicker">{activeMessageAudienceLabel} 공유 자료</span><strong>필요한 자료만 골라 전달하세요</strong><p>추천 묶음에서 시작해 필요한 카드만 남길 수 있습니다. 선택한 범위는 링크로 공유하거나 한 번에 복사할 수 있습니다.</p></div>
+              <div className="guide-share-message" aria-label="전달 문구 미리보기">
+                <span className="guide-share-message-label">전달 문구</span>
+                <p>{formatMessageKitIntro(activeMessageAudienceMask)}</p>
+                <button type="button" className={`guide-share-copy-all guide-share-intro-copy${messageKitCopied === 'intro' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'intro' ? '전달 문구 복사 완료' : '전달 문구 복사'} onClick={() => void copyMessageKitIntro()}>{messageKitCopied === 'intro' ? <><Check size={13} aria-hidden="true" />복사 완료</> : <><Clipboard size={13} aria-hidden="true" />문구 복사</>}</button>
+              </div>
               <div className="guide-share-pack" aria-label="공유 목적 선택">
                 <div className="guide-share-pack-head"><span>공유 목적</span><strong>읽는 목적에 맞는 묶음 · {selectedMessageCount}개</strong><small>먼저 묶음을 고르고, 필요하면 카드를 조정하세요.</small></div>
                 <div className="guide-share-pack-options" role="group" aria-label="자료 묶음 선택">{messageKitPackOptions.map(([label, mask, description]) => { const count = messageKit.filter((_, index) => Boolean(mask & (1 << index))).length; const isActive = selectedMessageMask === mask; return <button key={label} type="button" className={'guide-share-flow-step guide-share-pack-option' + (isActive ? ' is-active' : '')} aria-pressed={isActive} aria-label={`${label}, ${description}, ${count}개 자료 선택`} onClick={() => selectMessagePack(mask)}><span className="guide-share-pack-option-copy"><strong>{label}</strong><small>{description}</small></span><b>{count}개</b></button>; })}</div>
