@@ -675,6 +675,10 @@ const getInitialResearchTopicId = () => {
 };
 
 const growthSteps = ['GABA 연구', '수면과 신경 신호', '성장호르몬 반응', '몸 구성과 성장 지표', '성장기 동물 연구', '어린이 연구'];
+const gabaBasicsSource = {
+  label: 'NCBI Bookshelf · GABA 생리학 개요',
+  url: 'https://www.ncbi.nlm.nih.gov/books/NBK11084/',
+};
 const messageKit = [
   'GABA는 우리 몸에서 만들어지는 신경전달물질입니다.',
   'GABA는 신경세포의 활동 균형을 조절하는 핵심 신호입니다.',
@@ -684,8 +688,8 @@ const messageKit = [
 ];
 const messageKitLabels = ['기본 소개', '신경계 역할', '연구의 확장', '사람 연구 결과', '발효·안전 연구'];
 const messageKitUseCases = ['처음 설명을 시작할 때', 'GABA의 역할을 설명할 때', '연구 범위를 보여줄 때', '사람 대상 결과를 전할 때', '발효·안전 자료를 덧붙일 때'];
-const messageKitSources: (string | null)[] = [null, null, null, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
-const messageKitSourceUrls: (string | null)[] = [null, null, null, researchTopics[0].source.url, fermentedSafetySteps[2].source.url];
+const messageKitSources: (string | null)[] = [gabaBasicsSource.label, gabaBasicsSource.label, historyMilestones[2].source.label, researchTopics[0].source.label, fermentedSafetySteps[2].source.label];
+const messageKitSourceUrls: (string | null)[] = [gabaBasicsSource.url, gabaBasicsSource.url, historyMilestones[2].source.url, researchTopics[0].source.url, fermentedSafetySteps[2].source.url];
 const messageKitAudienceLabels: Record<number, string> = { 21: '소비자용', 31: '사업자용', 15: '교육용' };
 const messageKitAudienceIntros: Record<number, string> = {
   21: 'GABA가 무엇인지, 일상과 공개 연구에서 어떤 주제로 다뤄지는지 쉽게 정리한 자료입니다.',
@@ -2069,7 +2073,7 @@ export default function PublicGabaGuide() {
             <div className="guide-gaba-process-source">
               <span>핵심 흐름</span>
               <strong>글루탐산 → GABA 생성 → 신경 활동 조절</strong>
-              <a href="https://www.ncbi.nlm.nih.gov/books/NBK11084/" target="_blank" rel="noopener noreferrer">출처 · NCBI Bookshelf <ExternalLink size={13} aria-hidden="true" /></a>
+              <a href={gabaBasicsSource.url} target="_blank" rel="noopener noreferrer">출처 · {gabaBasicsSource.label} <ExternalLink size={13} aria-hidden="true" /></a>
             </div>
           </div>
         </section>
