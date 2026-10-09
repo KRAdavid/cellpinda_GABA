@@ -11,10 +11,16 @@
 .guide-share-pack-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:6px 10px}
 .guide-share-pack-head>small{grid-column:1 / -1;color:#b8d1da;font-size:12px;line-height:1.55;letter-spacing:-.025em}
 .guide-share-pack-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;min-width:0}
-.guide-share-pack .guide-share-pack-option{justify-content:space-between;min-width:0;min-height:54px;padding:10px 11px;text-align:left}
+.guide-share-pack .guide-share-pack-option{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:8px;justify-content:initial;min-width:0;min-height:66px;padding:10px 11px;text-align:left}
+.guide-share-pack-option-copy{display:grid;gap:3px;min-width:0}
+.guide-share-pack-option-copy strong{color:inherit;font-size:12px;font-weight:900;letter-spacing:-.045em;line-height:1.3;word-break:keep-all;overflow-wrap:anywhere}
+.guide-share-pack-option-copy small{color:#b8d1da;font-size:11px;font-weight:700;letter-spacing:-.035em;line-height:1.35;white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
+.guide-share-pack-option.is-active .guide-share-pack-option-copy small{color:#d7f5f2}
+.guide-share-pack-option>b{align-self:start;color:#9fddda;font-size:11px;font-weight:900;letter-spacing:-.04em;line-height:1.3;white-space:nowrap}
+.guide-share-pack-option.is-active>b{color:#fff}
 .guide-share-pack-option.is-active{border-color:#9be4df;background:#168e95;color:#fff}
-@media(max-width:700px){.guide-share-pack{margin-top:14px;padding-top:14px}.guide-share-pack-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.guide-share-pack .guide-share-pack-option{min-height:50px;padding:9px 10px}}
-@media(max-width:380px){.guide-share-pack-option{padding-inline:8px;font-size:11px}.guide-share-pack-option b{font-size:10px}}
+@media(max-width:700px){.guide-share-pack{margin-top:14px;padding-top:14px}.guide-share-pack-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.guide-share-pack .guide-share-pack-option{min-height:70px;padding:9px 10px}.guide-share-pack-option-copy strong{font-size:13px}.guide-share-pack-option-copy small{font-size:12px;line-height:1.4}}
+@media(max-width:380px){.guide-share-pack-option{padding-inline:8px}.guide-share-pack-option-copy strong{font-size:11px}.guide-share-pack-option-copy small{font-size:10px}.guide-share-pack-option>b{font-size:10px}}
 .guide-research-source{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:15px;border-top:1px solid #d6e8ec;color:#7890a1;font-size:13px}
 .guide-research-source-label{color:#7890a1;font-weight:800;white-space:nowrap}
 .guide-research-source a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;min-height:44px;padding:7px 10px 7px 12px;border:1px solid #cfe6e7;border-radius:10px;background:#f4fbfb;color:var(--guide-teal-dark);font-weight:800;text-decoration:none}
@@ -815,6 +821,12 @@
   .guide-share-share{grid-column:1 / -1}
   .guide-share-copy-all-secondary{min-height:40px}
 }
+
+/* v181 share-purpose type isolation: do not let the numbered handoff marker style
+   turn the purpose title into a 25px status dot. */
+.guide-share-pack .guide-share-pack-option .guide-share-pack-option-copy strong{display:block;flex:initial;width:auto;height:auto;border-radius:0;background:transparent;color:inherit;font-size:12px;font-weight:900;letter-spacing:-.045em;line-height:1.3}
+@media(max-width:700px){.guide-share-pack .guide-share-pack-option .guide-share-pack-option-copy strong{font-size:13px}}
+@media(max-width:380px){.guide-share-pack .guide-share-pack-option .guide-share-pack-option-copy strong{font-size:11px}}
 
 /* v14 research scale scope rail: clarify the comparison boundary before the headline numbers. */
 .guide-research-scale-reading{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:18px}
