@@ -1,5 +1,13 @@
 # Red Team Report
 
+## Red-team recheck — 사업자 자료 진입 상태 — c2aaa583 — 2026-10-09
+
+- 공격 초점은 소비자·교육 상태에서 히어로의 `사업자 자료`를 눌렀을 때 이전 audience/materials가 남는지, 사업자 공유 보드로 실제 이동하는지, 390px에서 새 접근성 이름과 선택 상태가 넘치지 않는지였다.
+- 버튼은 사업자 대상(`31`)과 전체 5개 자료 묶음을 초기화한 뒤 `final` 공유 보드로 이동한다. 로컬 Chrome CDP fallback 390px에서 `사업자용 공유 자료`, 선택 5개, `scrollWidth=390`을 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없다. 대상별 문구·목적별 묶음·원문 출처·materials 링크·제품 독립 경계와 전문가 영상 03 → 연구 지도 04 순서는 변경되지 않는다. 자동 QA는 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 검토를 대체하지 않으므로 teaser HOLD와 USER_DECISION / NOT_READY를 유지한다.
+
+증적: C-321, E-CDP-LIVE-BUSINESS-ENTRY-20261009, E-LIVE-PUBLIC-BUSINESS-ENTRY-20261009, E-NAVI-STATE-BUSINESS-ENTRY-20261009.
+
 ## Red-team recheck — 전문가 영상에서 연구 지도로 이어지는 handoff — 2a74019d — 2026-10-09
 
 - 공격 초점은 다음 장 표기가 실제 DOM 순서와 일치하는지, 이후 수면 연구가 바로 다음 장처럼 오해되는지, 390px에서 새 문구가 잘리는지였다.

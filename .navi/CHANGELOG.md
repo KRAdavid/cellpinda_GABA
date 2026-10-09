@@ -1,5 +1,14 @@
 # Project Changelog
 
+## 2026-10-09 — 사업자 자료 진입 상태 정렬 및 공개 배포
+
+- 히어로의 `사업자 자료` 진입이 소비자·교육 링크에서 넘어온 상태를 그대로 이어받을 수 있던 잔여 혼선을 확인하고, 클릭 시 사업자 대상(`audience=31`)과 전체 5개 자료 묶음을 명시적으로 선택한 뒤 공유 보드로 이동하도록 보정했다.
+- `사업자 자료` 버튼에 `사업자용 자료 모음으로 이동` 접근성 이름을 추가했다. 사업자 공유 보드의 목적별 묶음·개별 선택·원문 출처·링크 범위·제품 독립 경계와 공개 읽기 순서 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`는 변경하지 않았다.
+- 로컬 UI contract·typecheck·`pnpm test` 127 pass·전체 `pnpm run build`·정적 번들·성능 예산(`totalAssets=1659670 / 1660500`)이 통과했다. PR #750 merge SHA `c2aaa583dcae35d1b7b5a9f121b48cb72d176135`와 main workflow `37875399202`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했고 deploy-worker는 STATIC_ONLY로 skipped됐다.
+- 공개 validator는 HTTP 200·STATIC·candidate SHA `c2aaa583dcae35d1b7b5a9f121b48cb72d176135`·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·`teaser HOLD`·`smartStoreOnly=true`·`removed750=true`·`provenance=matched`를 확인했다. 로컬 Chrome CDP fallback 390px에서 소비자 상태에서 버튼을 누른 뒤 사업자용 공유 자료·5개 선택·`scrollWidth=390`을 확인했다. NAVI 상태는 USER_DECISION, 완료 게이트는 NOT_READY다.
+
+증적: C-321, E-LOCAL-BUILD-BUSINESS-ENTRY-20261009, E-UI-CONTRACT-BUSINESS-ENTRY-20261009, E-PR-BUSINESS-ENTRY-20261009, E-DEPLOY-BUSINESS-ENTRY-20261009, E-CDP-LIVE-BUSINESS-ENTRY-20261009, E-LIVE-PUBLIC-BUSINESS-ENTRY-20261009, E-NAVI-STATE-BUSINESS-ENTRY-20261009.
+
 ## 2026-10-09 — 전문가 영상에서 연구 지도로 이어지는 문구 보정 및 공개 배포
 
 - 전문가 영상 섹션 아래의 `연구 지도 → 수면 연구` 표기가 다음 장과 이후 장을 한 번에 건너뛰어 보이던 혼선을 확인하고, `전문가의 설명에서 → 연구 지도`로 보정했다. 공개 읽기 순서 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`와 `academic`으로 이동하는 실제 동작은 유지했다.

@@ -1,5 +1,17 @@
 # Audit Report
 
+## 사업자 자료 진입 상태 정렬 재감리 — main c2aaa583 — 2026-10-09
+
+- AC-001/AC-003: PASS. 히어로의 `사업자 자료` 진입이 사업자 대상과 전체 5개 자료 묶음을 명시적으로 선택하고, 기존 공유 보드에서 목적별 묶음·선택 자료·원문 출처·링크 범위를 이어간다. 연구 내용·제품 광고·새로운 효능 주장은 추가되지 않았다.
+- AC-004: PASS. 로컬 Chrome CDP fallback 390px에서 소비자 상태(`audience=21`)로 시작한 뒤 히어로 버튼을 눌러 `#final`로 이동하고 `audience=31`, `사업자용 공유 자료`, 선택 5개가 표시되는 것을 확인했다. `width=390`, `scrollWidth=390`이며 버튼 접근성 이름은 `사업자용 자료 모음으로 이동`이다.
+- AC-005 자동 게이트: PASS. UI contract·typecheck·`pnpm test` 127 pass·정적 릴리스 build·static bundle·성능 예산(`totalAssets=1659670`, budget `1660500`)이 통과했고 PR #750과 main workflow `37875399202`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했다. deploy-worker는 STATIC_ONLY로 skipped됐다.
+- AC-006 공개 정합성: PASS. 공개 validator는 HTTP 200·candidateSha=`c2aaa583dcae35d1b7b5a9f121b48cb72d176135`·STATIC·bundle hashes 73개·claims 12개·master records 6개·share pages 6개·teaser HOLD·smartStoreOnly=true·removed750=true·provenance=matched를 확인했다.
+- AC-007 감사·레드팀: PASS_WITH_CONDITIONS. 신규 CRITICAL/MAJOR 결함은 확인되지 않았다. Chrome CDP fallback은 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수를 대신하지 않으므로 외부 검증 조건과 USER_DECISION/NOT_READY를 유지한다.
+
+Final Status: NOT_READY; NAVI 상태는 USER_DECISION이다.
+
+증적: C-321, E-LOCAL-BUILD-BUSINESS-ENTRY-20261009, E-UI-CONTRACT-BUSINESS-ENTRY-20261009, E-PR-BUSINESS-ENTRY-20261009, E-DEPLOY-BUSINESS-ENTRY-20261009, E-CDP-LIVE-BUSINESS-ENTRY-20261009, E-LIVE-PUBLIC-BUSINESS-ENTRY-20261009, E-NAVI-STATE-BUSINESS-ENTRY-20261009.
+
 ## 전문가 영상에서 연구 지도로 이어지는 문구 보정 재감리 — main 2a74019d — 2026-10-09
 
 - AC-001/AC-003: PASS. 전문가 영상 다음 handoff가 실제 다음 장인 연구 지도를 명시하는 `전문가의 설명에서 → 연구 지도`로 정리됐다. `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서와 제품 독립 공개 경계는 유지됐다.
