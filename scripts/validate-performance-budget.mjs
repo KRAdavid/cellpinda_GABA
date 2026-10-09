@@ -8,8 +8,8 @@ const rootHtmlPath = resolve(outputDirectory, 'index.html');
 const budgets = {
   initialJs: 380_000,
   initialCss: 110_000,
-  // Keep a small cross-runtime headroom for the same Vite bundle on Windows and GitHub Linux.
-  totalAssets: 1_651_000,
+  // Keep a small cross-runtime headroom after adding the business-share purpose rail.
+  totalAssets: 1_652_500,
   largestAsset: 380_000,
 };
 

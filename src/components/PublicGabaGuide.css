@@ -5,6 +5,16 @@
 .guide-share-toast.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
 @media(max-width:700px){.guide-share-toast{right:20px;bottom:calc(16px + env(safe-area-inset-bottom));left:20px;max-width:none;text-align:center}}
 @media(prefers-reduced-motion:reduce){.guide-share-toast{transition:none}}
+
+/* v180 business share purpose rail: make the intended handoff visible before the controls */
+.guide-share-pack{display:grid;gap:12px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(145,219,217,.2)}
+.guide-share-pack-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:6px 10px}
+.guide-share-pack-head>small{grid-column:1 / -1;color:#b8d1da;font-size:12px;line-height:1.55;letter-spacing:-.025em}
+.guide-share-pack-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;min-width:0}
+.guide-share-pack .guide-share-pack-option{justify-content:space-between;min-width:0;min-height:54px;padding:10px 11px;text-align:left}
+.guide-share-pack-option.is-active{border-color:#9be4df;background:#168e95;color:#fff}
+@media(max-width:700px){.guide-share-pack{margin-top:14px;padding-top:14px}.guide-share-pack-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.guide-share-pack .guide-share-pack-option{min-height:50px;padding:9px 10px}}
+@media(max-width:380px){.guide-share-pack-option{padding-inline:8px;font-size:11px}.guide-share-pack-option b{font-size:10px}}
 .guide-research-source{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;padding-top:15px;border-top:1px solid #d6e8ec;color:#7890a1;font-size:13px}
 .guide-research-source-label{color:#7890a1;font-weight:800;white-space:nowrap}
 .guide-research-source a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;min-height:44px;padding:7px 10px 7px 12px;border:1px solid #cfe6e7;border-radius:10px;background:#f4fbfb;color:var(--guide-teal-dark);font-weight:800;text-decoration:none}
@@ -649,7 +659,7 @@
 .guide-share-intro span{color:#8ed9d7;font-size:11px;font-weight:900;letter-spacing:.1em}
 .guide-share-intro strong{color:#fff;font-size:17px;letter-spacing:-.045em}
 .guide-share-intro p{margin:0;color:#b8d1da;font-size:13px;line-height:1.65;letter-spacing:-.03em}
-.guide-share-intro-actions{display:grid!important;grid-template-columns:minmax(120px,.7fr) minmax(120px,.7fr) minmax(0,2.2fr);align-items:end;gap:8px}
+  .guide-share-intro-actions{display:grid!important;grid-template-columns:minmax(150px,.7fr) minmax(0,2.4fr);align-items:end;gap:8px}
 .guide-share-copy-all{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:34px;padding:0 11px;border:1px solid rgba(145,219,217,.5);border-radius:10px;background:rgba(255,255,255,.1);color:#e4fbf8;font-size:11px;font-weight:850;letter-spacing:-.04em;white-space:nowrap;transition:background .18s ease,border-color .18s ease,transform .18s ease}
 .guide-share-copy-all:hover,.guide-share-copy-all:focus-visible{border-color:#9be4df;background:rgba(255,255,255,.18);transform:translateY(-1px)}
 .guide-share-copy-all:focus-visible{outline:3px solid rgba(131,222,217,.3);outline-offset:3px}.guide-share-copy-all.is-copied{border-color:#7bc7a5;background:rgba(109,207,158,.16);color:#c5f4d9}.guide-share-copy-all-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
