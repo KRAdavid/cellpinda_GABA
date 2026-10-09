@@ -8,8 +8,9 @@ const rootHtmlPath = resolve(outputDirectory, 'index.html');
 const budgets = {
   initialJs: 380_000,
   initialCss: 110_000,
-  // Keep a small cross-runtime headroom after adding the audience-specific delivery intro.
-  totalAssets: 1_657_000,
+  // Keep a small cross-runtime headroom after adding audience-specific delivery
+  // provenance and the clipboard-blocked manual-copy fallback.
+  totalAssets: 1_660_500,
   largestAsset: 380_000,
 };
 

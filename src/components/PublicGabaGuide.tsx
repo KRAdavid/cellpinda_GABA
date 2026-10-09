@@ -971,6 +971,7 @@ const ResearchOutcomeChart = memo(function ResearchOutcomeChart({ topic, showSum
 export default function PublicGabaGuide() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState('');
+  const [shareFallback, setShareFallback] = useState<{ label: string; text: string } | null>(null);
   const [copiedResearchTopicId, setCopiedResearchTopicId] = useState<string | null>(null);
   const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
   const [messageKitCopied, setMessageKitCopied] = useState<'selected' | 'all' | 'intro' | false>(false);
@@ -1647,6 +1648,13 @@ export default function PublicGabaGuide() {
     }, 4200);
   };
 
+  const selectShareFallbackText = () => {
+    const textarea = document.getElementById('guide-share-fallback-text') as HTMLTextAreaElement | null;
+    textarea?.focus();
+    textarea?.select();
+    announceShareStatus('텍스트를 선택했어요. 길게 눌러 복사해 주세요.');
+  };
+
   const handleRecoveryKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === 'ArrowLeft') {
       event.preventDefault();
@@ -1719,6 +1727,7 @@ export default function PublicGabaGuide() {
     if (navigator.share) {
       try {
         await navigator.share(shareData);
+        setShareFallback(null);
         announceShareStatus('공유 창을 열었어요.');
         return;
       } catch (error) {
@@ -1731,6 +1740,8 @@ export default function PublicGabaGuide() {
       }
     }
     const copied = await writeClipboardText(shareHref);
+    if (copied) setShareFallback(null);
+    else setShareFallback({ label: '공개 안내서 링크', text: shareHref });
     announceShareStatus(copied ? '링크를 복사했어요. 자유롭게 공유해 보세요.' : '공유 창을 열지 못했어요. 주소창의 링크를 복사해 공유해 보세요.');
   };
 
@@ -1766,6 +1777,8 @@ export default function PublicGabaGuide() {
 
   const copyMessage = async (message: string) => {
     const copied = await writeClipboardText(message);
+    if (copied) setShareFallback(null);
+    else setShareFallback({ label: '공유 문장', text: message });
     announceShareStatus(copied ? '문장을 복사했어요. 자유롭게 활용해 보세요.' : '문장을 선택해 활용해 보세요.');
   };
 
@@ -1773,13 +1786,14 @@ export default function PublicGabaGuide() {
     const text = formatResearchShareText(topic, getGuideShareUrl(`research-${topic.id}`));
     const copied = await writeClipboardText(text);
     if (copied) {
+      setShareFallback(null);
       setCopiedResearchTopicId(topic.id);
       if (copiedResearchTimer.current !== null) window.clearTimeout(copiedResearchTimer.current);
       copiedResearchTimer.current = window.setTimeout(() => {
         setCopiedResearchTopicId(null);
         copiedResearchTimer.current = null;
       }, 2400);
-    }
+    } else setShareFallback({ label: `${topic.title} 연구 결과와 출처`, text });
     announceShareStatus(copied ? '연구 결과와 출처를 함께 복사했어요.' : '연구 결과를 선택해 활용해 보세요.');
     return copied;
   };
@@ -1807,27 +1821,30 @@ export default function PublicGabaGuide() {
     const text = formatMessageKitBundle(selectedIndices, audienceLabel, true, activeMessageAudienceMask, selectedMessageMask);
     const copied = await writeClipboardText(text);
     if (copied) {
+      setShareFallback(null);
       setMessageKitCopied('selected');
       if (messageKitCopiedTimer.current !== null) window.clearTimeout(messageKitCopiedTimer.current);
       messageKitCopiedTimer.current = window.setTimeout(() => {
         setMessageKitCopied(false);
         messageKitCopiedTimer.current = null;
       }, 2400);
-    }
+    } else setShareFallback({ label: `${audienceLabel} 선택 자료`, text });
     announceShareStatus(copied ? `${selectedIndices.length}개 선택 자료를 복사했어요.` : '선택 자료 복사를 완료하지 못했어요. 아래 문장 복사를 이용해 보세요.');
     return copied;
   };
 
   const copyMessageKitIntro = async () => {
-    const copied = await writeClipboardText(formatMessageKitIntro(activeMessageAudienceMask));
+    const text = formatMessageKitIntro(activeMessageAudienceMask);
+    const copied = await writeClipboardText(text);
     if (copied) {
+      setShareFallback(null);
       setMessageKitCopied('intro');
       if (messageKitCopiedTimer.current !== null) window.clearTimeout(messageKitCopiedTimer.current);
       messageKitCopiedTimer.current = window.setTimeout(() => {
         setMessageKitCopied(false);
         messageKitCopiedTimer.current = null;
       }, 2400);
-    }
+    } else setShareFallback({ label: '전달 문구', text });
     announceShareStatus(copied ? '전달 문구를 복사했어요.' : '전달 문구를 복사하지 못했어요. 문구를 직접 선택해 활용해 보세요.');
     return copied;
   };
@@ -1843,6 +1860,7 @@ export default function PublicGabaGuide() {
           text: formatMessageKitBundle(selectedIndices, audienceLabel, false),
           url: shareUrl,
         });
+        setShareFallback(null);
         announceShareStatus(`${selectedIndices.length}개 선택 자료 링크를 공유했어요.`);
         return;
       } catch (error) {
@@ -1860,13 +1878,14 @@ export default function PublicGabaGuide() {
     const text = formatMessageKitBundle(messageKit.map((_, index) => index), '전체 5개', true, activeMessageAudienceMask, messageKitMaskLimit);
     const copied = await writeClipboardText(text);
     if (copied) {
+      setShareFallback(null);
       setMessageKitCopied('all');
       if (messageKitCopiedTimer.current !== null) window.clearTimeout(messageKitCopiedTimer.current);
       messageKitCopiedTimer.current = window.setTimeout(() => {
         setMessageKitCopied(false);
         messageKitCopiedTimer.current = null;
       }, 2400);
-    }
+    } else setShareFallback({ label: `${activeMessageAudienceLabel} 전체 자료`, text });
     announceShareStatus(copied ? '5개 전체 자료를 복사했어요.' : '자료를 선택해 활용해 보세요.');
   };
 
@@ -1876,13 +1895,14 @@ export default function PublicGabaGuide() {
     const text = formatMessageKitText(message, index, true, getMessageKitShareUrl(activeMessageAudienceMask, 1 << index));
     const copied = await writeClipboardText(text);
     if (copied) {
+      setShareFallback(null);
       setCopiedMessageIndex(index);
       if (copiedMessageTimer.current !== null) window.clearTimeout(copiedMessageTimer.current);
       copiedMessageTimer.current = window.setTimeout(() => {
         setCopiedMessageIndex(null);
         copiedMessageTimer.current = null;
       }, 2400);
-    }
+    } else setShareFallback({ label: `${messageKitLabels[index]} 자료`, text });
     announceShareStatus(copied ? `${messageKitLabels[index]} 자료를 복사했어요.` : '자료를 선택해 활용해 보세요.');
   };
 
@@ -1921,6 +1941,12 @@ export default function PublicGabaGuide() {
     <div className={`gaba-guide${largeText ? ' is-large-text' : ''}`}>
       <a className="guide-skip" href="#guide-main">본문으로 이동</a>
       <div className={`guide-share-toast${shareStatus ? ' is-visible' : ''}`} role="status" aria-live="polite" aria-atomic="true">{shareStatus}</div>
+      {shareFallback ? <aside className="guide-share-fallback" role="alert" aria-label={`${shareFallback.label} 수동 복사 안내`}>
+        <div className="guide-share-fallback-head"><div><span>자동 복사가 차단된 환경</span><strong>{shareFallback.label}</strong></div><button type="button" aria-label="수동 복사 안내 닫기" onClick={() => setShareFallback(null)}><X size={16} aria-hidden="true" /></button></div>
+        <p>아래 텍스트를 누르면 전체가 선택됩니다. 휴대폰에서는 길게 눌러 복사하세요.</p>
+        <textarea id="guide-share-fallback-text" readOnly value={shareFallback.text} aria-label={`${shareFallback.label} 복사 텍스트`} onFocus={(event) => event.currentTarget.select()} onClick={(event) => event.currentTarget.select()} />
+        <button type="button" className="guide-share-fallback-select" onClick={selectShareFallbackText}>텍스트 전체 선택</button>
+      </aside> : null}
       <header className="guide-header" ref={headerRef}>
         <a className="guide-logo" href="#top" onClick={() => scrollTo('top')} aria-label="GABA Guide 홈"><span>뇌와 우리</span><small>GABA를 쉽게 읽는 공개 안내서</small></a>
         <nav id="guide-primary-navigation" className={menuOpen ? 'is-open' : ''} aria-label="주 메뉴">
