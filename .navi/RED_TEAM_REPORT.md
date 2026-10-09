@@ -3028,6 +3028,14 @@
 
 증적: `C-285`, `E-NAVI-STATE-RESEARCH-MAP-SCOPE-BASELINE-20261008`.
 
+## Red-team recheck — 공유 자료별 본문 맥락 연결 — 5d08e6a4 — 2026-10-09
+
+- 공격 관점에서 선택 자료 복사와 전체 묶음 복사의 URL 구성을 재검토했다. 개별 자료는 대상·단일 `materials`·정확한 본문 해시를 함께 사용하고, 선택 묶음은 선택 범위를 유지하는 최종 공유 보드 링크를 추가한다.
+- 공개 데이터·연구 카피·수치·출처·제품 독립 경계와 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도` 순서는 변경되지 않았다. 로컬 계약·127개 테스트·정적 빌드·Pages 배포·라이브 validator가 모두 통과했고 신규 CRITICAL/MAJOR 결함은 없다.
+- 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 고령 사용자 독해성·독립 과학·규제 감수는 이 자동 점검으로 대체되지 않는다. `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-321`, `E-LOCAL-BUILD-MATERIAL-CONTEXT-20261009`, `E-UI-CONTRACT-MATERIAL-CONTEXT-20261009`, `E-PR-MATERIAL-CONTEXT-20261009`, `E-DEPLOY-MATERIAL-CONTEXT-20261009`, `E-LIVE-PUBLIC-MATERIAL-CONTEXT-20261009`, `E-NAVI-STATE-MATERIAL-CONTEXT-20261009`.
+
 ## Red-team recheck — 사업자 공유 전달 범위·출처 상태 패널 — c0511729 — 2026-10-09
 
 - 공격 관점에서 선택 자료가 바뀐 뒤 상태 패널의 제목·출처 수·공유 범위 안내가 낡은 값으로 남는지 확인했다. `materials=24`에서 선택 2개로 시작한 뒤 `신경계 역할` 자료를 선택하면 선택 3개와 제목 요약이 갱신됐다.

@@ -3689,7 +3689,13 @@
     "E-DEPLOY-BUSINESS-ENTRY-20261009",
     "E-CDP-LIVE-BUSINESS-ENTRY-20261009",
     "E-LIVE-PUBLIC-BUSINESS-ENTRY-20261009",
-    "E-NAVI-STATE-BUSINESS-ENTRY-20261009"
+    "E-NAVI-STATE-BUSINESS-ENTRY-20261009",
+    "E-LOCAL-BUILD-MATERIAL-CONTEXT-20261009",
+    "E-UI-CONTRACT-MATERIAL-CONTEXT-20261009",
+    "E-PR-MATERIAL-CONTEXT-20261009",
+    "E-DEPLOY-MATERIAL-CONTEXT-20261009",
+    "E-LIVE-PUBLIC-MATERIAL-CONTEXT-20261009",
+    "E-NAVI-STATE-MATERIAL-CONTEXT-20261009"
       ],
       "status": "SUPPORTED"
     }
@@ -24144,6 +24150,72 @@
       "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
       "captured_at": "2026-10-09T11:38:00+09:00",
       "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-BUSINESS-ENTRY",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LOCAL-BUILD-MATERIAL-CONTEXT-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "공유 자료별 정확한 본문 해시와 단일 materials 범위 연결이 로컬 검증을 통과했다.",
+      "locator": "pnpm run validate:ui-contract; pnpm run typecheck; pnpm test; tests 127, pass 127, fail 0; pnpm run build -> status ok; totalAssets=1659754 <= 1660500; static bundle 11 routes",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/tree/main/src/components",
+      "captured_at": "2026-10-09T11:56:00+09:00",
+      "reviewer_id": "NAVI-LOCAL-BUILD-QA-GABA-20261009-MATERIAL-CONTEXT",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-UI-CONTRACT-MATERIAL-CONTEXT-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "UI contract가 자료별 본문 위치 해시와 선택 묶음의 자료별 deep link를 유지하는 구현을 확인한다.",
+      "locator": "scripts/validate-ui-contract.mjs; messageKitGuideHashes=[basics, basics, history, research-cognition, fermented-safety]; getMessageKitShareUrl preserves audience/materials/hash; validate:ui-contract -> status ok",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/tree/main/scripts",
+      "captured_at": "2026-10-09T11:56:00+09:00",
+      "reviewer_id": "NAVI-UI-CONTRACT-QA-GABA-20261009-MATERIAL-CONTEXT",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-PR-MATERIAL-CONTEXT-20261009",
+      "kind": "DELIVERY",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "자료별 본문 맥락 연결 PR이 보호 검사를 통과하고 main에 병합됐다.",
+      "locator": "PR #752 merged; merge SHA 5d08e6a41c4c5a16a8f6472872d1efc0d74fd2c3; release-verify PASS; site-quality-verify PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/pull/752",
+      "captured_at": "2026-10-09T11:56:00+09:00",
+      "reviewer_id": "NAVI-PR-QA-GABA-20261009-MATERIAL-CONTEXT",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-DEPLOY-MATERIAL-CONTEXT-20261009",
+      "kind": "DELIVERY",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "main workflow가 자료별 본문 맥락 연결 변경을 정적 Pages에 배포하고 라이브 smoke·release-status까지 성공했다.",
+      "locator": "workflow 37876814739; release-verify PASS; worker-readiness PASS; deploy-pages PASS; deploy-worker skipped by STATIC_ONLY; smoke-live PASS; release-status PASS",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/actions/runs/37876814739",
+      "captured_at": "2026-10-09T11:56:00+09:00",
+      "reviewer_id": "NAVI-DEPLOY-QA-GABA-20261009-MATERIAL-CONTEXT",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-LIVE-PUBLIC-MATERIAL-CONTEXT-20261009",
+      "kind": "TEST",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "최신 공개 URL이 자료별 본문 맥락 연결 main candidate와 일치하고 HTTP 200·STATIC·공개 데이터·제품 독립 경계를 유지한다.",
+      "locator": "pnpm run validate:live-public https://kradavid.github.io/gaba_info; page=200; runtimeMode=STATIC; candidateSha=5d08e6a41c4c5a16a8f6472872d1efc0d74fd2c3; bundleHashes=73; claims=12; masterRecords=6; products=1; sharePages=6; teaserPreview status=HOLD/publicUrl=false; internalOpsSnapshots=excluded; smartStoreOnly=true; removed750=true; provenance=matched",
+      "source_uri": "https://kradavid.github.io/gaba_info/",
+      "captured_at": "2026-10-09T11:56:00+09:00",
+      "reviewer_id": "NAVI-LIVE-PUBLIC-QA-GABA-20261009-MATERIAL-CONTEXT",
+      "claim_refs": ["C-321"]
+    },
+    {
+      "id": "E-NAVI-STATE-MATERIAL-CONTEXT-20261009",
+      "kind": "AUDIT",
+      "status": "INDEPENDENTLY_CONFIRMED",
+      "statement": "NAVI 기록이 자료별 본문 맥락 연결의 로컬 QA·PR·Pages 배포·라이브 validator 결과를 연결하고 USER_DECISION/NOT_READY와 외부 검증 조건을 유지한다.",
+      "locator": "DEC-039; H-422; PR #752 merge SHA 5d08e6a41c4c5a16a8f6472872d1efc0d74fd2c3; workflow 37876814739; live candidate matched; status USER_DECISION; completion gate NOT_READY; 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자·독립 과학·규제 감수는 외부 검증 조건으로 유지",
+      "source_uri": "https://github.com/KRAdavid/gaba_info/commits/main",
+      "captured_at": "2026-10-09T11:56:00+09:00",
+      "reviewer_id": "NAVI-AUDIT-QA-GABA-20261009-MATERIAL-CONTEXT",
       "claim_refs": ["C-321"]
     }
   ]

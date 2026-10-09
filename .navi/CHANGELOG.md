@@ -2797,3 +2797,12 @@ Record lifecycle transitions, approved changes, rework, and meaningful evidence 
 - 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다. Browser plugin 부재·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 남는다.
 
 증적: `C-321`, `E-LOCAL-BUILD-SHARE-SOURCE-STATUS-20261009`, `E-UI-CONTRACT-SHARE-SOURCE-STATUS-20261009`, `E-PR-SHARE-SOURCE-STATUS-20261009`, `E-DEPLOY-SHARE-SOURCE-STATUS-20261009`, `E-CDP-LIVE-SHARE-SOURCE-STATUS-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCE-STATUS-20261009`, `E-NAVI-STATE-SHARE-SOURCE-STATUS-20261009`.
+
+## 2026-10-09 — 공유 자료별 본문 맥락 연결 및 공개 배포
+
+- 공유 자료를 복사할 때 각 문장과 묶음 항목에 해당하는 `GABA란`·발견·인지 연구·발효·안전 본문 위치를 함께 연결하고, 개별 자료에는 단일 `materials` 범위를 보존했다. 선택 묶음의 전체 공유 보드 링크와 대상 선택·원문 출처·제품 독립 경계는 유지했다.
+- 로컬 `pnpm run validate:ui-contract`, `pnpm run typecheck`, `pnpm test` 127 pass, `pnpm run build`와 성능 예산(totalAssets=1659754 <= 1660500)이 통과했다. PR #752와 main workflow `37876814739`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 성공했으며 Worker는 `STATIC_ONLY` 정책으로 skipped됐다.
+- 공개 validator는 candidate SHA `5d08e6a41c4c5a16a8f6472872d1efc0d74fd2c3`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 공개 읽기 순서 `GABA란 → 03 · 전문가 영상 → 04 · 연구 지도`와 제품 독립 과학 안내 경계는 변경하지 않았다. 신규 CRITICAL/MAJOR 결함은 없으며 NAVI는 `USER_DECISION / NOT_READY`를 유지한다.
+
+증적: `C-321`, `E-LOCAL-BUILD-MATERIAL-CONTEXT-20261009`, `E-UI-CONTRACT-MATERIAL-CONTEXT-20261009`, `E-PR-MATERIAL-CONTEXT-20261009`, `E-DEPLOY-MATERIAL-CONTEXT-20261009`, `E-LIVE-PUBLIC-MATERIAL-CONTEXT-20261009`, `E-NAVI-STATE-MATERIAL-CONTEXT-20261009`.

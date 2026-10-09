@@ -3946,3 +3946,12 @@ Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 Final Status: `NOT_READY`; NAVI 상태는 `USER_DECISION`이다.
 
 증적: `C-321`, `E-LOCAL-BUILD-SHARE-SOURCE-STATUS-20261009`, `E-UI-CONTRACT-SHARE-SOURCE-STATUS-20261009`, `E-PR-SHARE-SOURCE-STATUS-20261009`, `E-DEPLOY-SHARE-SOURCE-STATUS-20261009`, `E-CDP-LIVE-SHARE-SOURCE-STATUS-20261009`, `E-LIVE-PUBLIC-SHARE-SOURCE-STATUS-20261009`, `E-NAVI-STATE-SHARE-SOURCE-STATUS-20261009`.
+
+## 공유 자료별 본문 맥락 연결 재감리 — 5d08e6a4 — 2026-10-09
+
+- 사업자가 복사한 문장·선택 묶음이 최종 공유 보드로만 이어지던 잔여 마찰을 보정했다. 자료별 공개 안내서 해시와 단일 `materials` 범위를 공유 문구에 보존하고, 선택 묶음의 전체 보드 링크는 기존 대상·선택 범위를 유지한다.
+- 로컬 UI contract·typecheck·127개 테스트·production build·성능 예산(totalAssets=1659754 <= 1660500), PR #752 보호 검사와 main workflow `37876814739`의 release-verify·worker-readiness·deploy-pages·smoke-live·release-status가 통과했다. Worker는 `STATIC_ONLY`로 skipped됐다.
+- 공개 validator는 candidate `5d08e6a41c4c5a16a8f6472872d1efc0d74fd2c3`, HTTP 200, STATIC, bundle hash 73개, claims 12개, master records 6개, share pages 6개, `teaser HOLD`, `smartStoreOnly=true`, `removed750=true`, `provenance=matched`를 확인했다.
+- 신규 CRITICAL/MAJOR 결함은 없으며 실제 모바일 공유 시트·Safari/iOS/Android 실기기·실제 사용자 독해성·독립 과학·규제 감수는 외부 검증 조건으로 남긴다. Final Status는 `NOT_READY`, NAVI 상태는 `USER_DECISION`이다.
+
+증적: `C-321`, `E-LOCAL-BUILD-MATERIAL-CONTEXT-20261009`, `E-UI-CONTRACT-MATERIAL-CONTEXT-20261009`, `E-PR-MATERIAL-CONTEXT-20261009`, `E-DEPLOY-MATERIAL-CONTEXT-20261009`, `E-LIVE-PUBLIC-MATERIAL-CONTEXT-20261009`, `E-NAVI-STATE-MATERIAL-CONTEXT-20261009`.
