@@ -723,7 +723,7 @@ const getMessageKitShareUrl = (audienceMask: number, selectionMask = messageKitM
 
 const formatMessageKitText = (message: string, index: number, withGuide = false, guideUrl?: string) => `${message}${messageKitSources[index] ? `\n\n출처: ${messageKitSources[index]}${messageKitSourceUrls[index] ? `\n${messageKitSourceUrls[index]}` : ''}` : ''}${withGuide ? `\n\n공개 안내서: ${guideUrl ?? getGuideShareUrl(index === 3 ? 'research-cognition' : 'top')}` : ''}`;
 
-const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31, selectionMask = audienceMask) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${indices.map(index => `${String(index + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask, selectionMask)}` : ''}`;
+const formatMessageKitBundle = (indices: number[], audienceLabel: string, withGuide = true, audienceMask = 31, selectionMask = audienceMask) => `[GABA 공개 자료 · ${audienceLabel}]\n\n${indices.map((index, sequenceIndex) => `${String(sequenceIndex + 1).padStart(2, '0')}. ${formatMessageKitText(messageKit[index], index)}`).join('\n\n')}${withGuide ? `\n\n공개 안내서: ${getMessageKitShareUrl(audienceMask, selectionMask)}` : ''}`;
 
 const replaceGuideHistory = (hash: string, videoId?: string) => {
   const url = new URL(window.location.href);
@@ -1861,6 +1861,7 @@ export default function PublicGabaGuide() {
   const selectedMessageCount = selectedMessageIndices.length;
   const selectedMessageSourceCount = selectedMessageIndices.filter(index => Boolean(messageKitSources[index] && messageKitSourceUrls[index])).length;
   const activeMessageAudienceLabel = messageKitAudienceLabels[activeMessageAudienceMask] ?? '공개 자료';
+  const messageKitPackOptions = [['추천 자료', activeMessageAudienceMask] as const, ...messageKitPacks];
   const changeMessageAudience = (nextMask: number) => {
     setActiveMessageAudienceMask(nextMask);
     setSelectedMessageMask(nextMask);
@@ -1873,6 +1874,11 @@ export default function PublicGabaGuide() {
       return;
     }
     setSelectedMessageMask(nextMask);
+    setMessageKitCopied(false);
+  };
+
+  const selectMessagePack = (mask: number) => {
+    setSelectedMessageMask(mask);
     setMessageKitCopied(false);
   };
 
@@ -2297,7 +2303,11 @@ export default function PublicGabaGuide() {
             </div>
             <div className="guide-share-intro" aria-label={`${activeMessageAudienceLabel} GABA 공유 자료 안내`}>
               <div><span className="guide-share-intro-kicker">{activeMessageAudienceLabel} 공유 자료</span><strong>필요한 자료만 골라 전달하세요</strong><p>추천 묶음에서 시작해 필요한 카드만 남길 수 있습니다. 선택한 범위는 링크로 공유하거나 한 번에 복사할 수 있습니다.</p></div>
-              <div className="guide-share-intro-actions"><label className="guide-share-audience"><span>전달 대상</span><select value={activeMessageAudienceMask} onChange={e => changeMessageAudience(+e.target.value)}><option value={21}>소비자</option><option value={31}>사업자</option><option value={15}>교육</option></select></label><label className="guide-share-audience"><span>빠른 선택</span><select value={selectedMessageMask} onChange={e => { const nextMask = +e.target.value; if (nextMask) { setSelectedMessageMask(nextMask); setMessageKitCopied(false); } }}><option value={messageKitPacks.find(pack => pack[1] === selectedMessageMask) || selectedMessageMask === activeMessageAudienceMask ? '' : selectedMessageMask}>직접 선택</option><option value={activeMessageAudienceMask}>추천 자료</option>{messageKitPacks.map(pack => <option key={pack[1]} value={pack[1]}>{pack[0]}</option>)}</select></label><div className="guide-share-copy-actions"><button type="button" className="guide-share-copy-all guide-share-share" aria-label={`선택한 ${selectedMessageCount}개 자료 링크 공유`} onClick={() => void shareMessageKit()}><Share2 size={14} aria-hidden="true" />{selectedMessageCount}개 링크 공유</button><button type="button" className={`guide-share-copy-all${messageKitCopied === 'selected' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'selected' ? '선택 자료 복사 완료' : `선택한 ${selectedMessageCount}개 자료 복사`} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied === 'selected' ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied === 'selected' ? '복사 완료' : `선택 ${selectedMessageCount}개 복사`}</button><button type="button" className={`guide-share-copy-all guide-share-copy-all-secondary${messageKitCopied === 'all' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'all' ? '전체 자료 복사 완료' : '전체 5개 자료 복사'} onClick={() => void copyAllMessageKit()}>{messageKitCopied === 'all' ? '복사 완료' : <><span className="guide-share-full-copy-label">전체 5개 복사</span><span className="guide-share-full-copy-label-compact">전체 복사</span></>}</button></div></div>
+              <div className="guide-share-pack" aria-label="공유 목적 선택">
+                <div className="guide-share-pack-head"><span>공유 목적</span><strong>읽는 목적에 맞는 묶음 · {selectedMessageCount}개</strong><small>먼저 묶음을 고르고, 필요하면 카드를 조정하세요.</small></div>
+                <div className="guide-share-pack-options" role="group" aria-label="자료 묶음 선택">{messageKitPackOptions.map(([label, mask]) => { const count = messageKit.filter((_, index) => Boolean(mask & (1 << index))).length; const isActive = selectedMessageMask === mask; return <button key={label} type="button" className={'guide-share-flow-step guide-share-pack-option' + (isActive ? ' is-active' : '')} aria-pressed={isActive} aria-label={label + ' ' + count + '개 자료 선택'} onClick={() => selectMessagePack(mask)}><span>{label}</span><b>{count}개</b></button>; })}</div>
+              </div>
+              <div className="guide-share-intro-actions"><label className="guide-share-audience"><span>전달 대상</span><select value={activeMessageAudienceMask} onChange={e => changeMessageAudience(+e.target.value)}><option value={21}>소비자</option><option value={31}>사업자</option><option value={15}>교육</option></select></label><div className="guide-share-copy-actions"><button type="button" className="guide-share-copy-all guide-share-share" aria-label={`선택한 ${selectedMessageCount}개 자료 링크 공유`} onClick={() => void shareMessageKit()}><Share2 size={14} aria-hidden="true" />{selectedMessageCount}개 링크 공유</button><button type="button" className={`guide-share-copy-all${messageKitCopied === 'selected' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'selected' ? '선택 자료 복사 완료' : `선택한 ${selectedMessageCount}개 자료 복사`} onClick={() => void copyMessageKit()}><span className="guide-share-copy-all-icon" aria-hidden="true">{messageKitCopied === 'selected' ? <Check size={14} /> : <Clipboard size={14} />}</span>{messageKitCopied === 'selected' ? '복사 완료' : `선택 ${selectedMessageCount}개 복사`}</button><button type="button" className={`guide-share-copy-all guide-share-copy-all-secondary${messageKitCopied === 'all' ? ' is-copied' : ''}`} aria-label={messageKitCopied === 'all' ? '전체 자료 복사 완료' : '전체 5개 자료 복사'} onClick={() => void copyAllMessageKit()}>{messageKitCopied === 'all' ? '복사 완료' : <><span className="guide-share-full-copy-label">전체 5개 복사</span><span className="guide-share-full-copy-label-compact">전체 복사</span></>}</button></div></div>
             </div>
               <div className="guide-share-flow" role="list" aria-label="자료 전달 순서"><div className="guide-share-flow-step" role="listitem"><strong>01</strong><span>대상 선택</span></div><ArrowRight className="guide-share-flow-arrow" size={15} aria-hidden="true" /><div className="guide-share-flow-step" role="listitem"><strong>02</strong><span>자료 {selectedMessageCount}개 선택</span></div><ArrowRight className="guide-share-flow-arrow" size={15} aria-hidden="true" /><div className="guide-share-flow-step" role="listitem"><strong>03</strong><span>링크 공유 또는 내용 복사</span></div></div>
             <div className="guide-share-selection-status" aria-live="polite" aria-label="선택 자료">
